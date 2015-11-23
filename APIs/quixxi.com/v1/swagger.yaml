@@ -1,142 +1,6 @@
-definitions:
-  ErrorReportModel:
-    properties:
-      APP_VERSION_CODE:
-        type: string
-      APP_VERSION_NAME:
-        type: string
-      AVAILABLE_MEM_SIZE:
-        type: string
-      AppKey:
-        type: string
-      BRAND:
-        type: string
-      Build:
-        type: string
-      CustomData:
-        type: string
-      DEVICE_ID:
-        type: string
-      DISPLAY:
-        type: string
-      ERROR_LINE:
-        type: string
-      ERROR_MSG:
-        type: string
-      EVENTSLOG:
-        type: string
-      FILE_PATH:
-        type: string
-      LOGCAT:
-        type: string
-      OSVERSION:
-        type: string
-      PACKAGE_NAME:
-        type: string
-      PHONE_MODEL:
-        type: string
-      PRODUCT:
-        type: string
-      SHARED_PREFERENCES:
-        type: string
-      STACK_TRACE:
-        type: string
-      SystemSettings:
-        type: string
-      Systemsecure:
-        type: string
-      THREAD_DETAILS:
-        type: string
-      TOTAL_MEM_SIZE:
-        type: string
-      USER_APP_START_DATE:
-        type: string
-      USER_CRASH_DATE:
-        type: string
-      report_id:
-        type: string
-    required:
-      - AppKey
-    type: object
-  EventsModel:
-    properties:
-      AppKey:
-        type: string
-      AppVersion:
-        type: string
-      Details:
-        type: string
-      DeviceId:
-        type: string
-      EDate:
-        format: date-time
-        type: string
-      Event:
-        type: string
-    required:
-      - AppKey
-      - DeviceId
-    type: object
-  Object:
-    properties: {}
-    type: object
-  PreferencesModel:
-    properties:
-      AppKey:
-        type: string
-      DeviceID:
-        type: string
-      Email:
-        type: string
-      Preferences:
-        $ref: '#/definitions/Object'
-    required:
-      - AppKey
-      - DeviceID
-    type: object
-  UserModel:
-    properties:
-      AppKey:
-        type: string
-      AppRevision:
-        format: int32
-        type: integer
-      AppVersion:
-        type: string
-      Brand:
-        type: string
-      Country:
-        type: string
-      DeviceID:
-        type: string
-      Email:
-        type: string
-      InstallDate:
-        format: date-time
-        type: string
-      MessageId:
-        type: string
-      Model:
-        type: string
-      OSVersion:
-        type: string
-      Preferences:
-        $ref: '#/definitions/Object'
-      Store:
-        type: string
-      frameworkId:
-        format: int32
-        type: integer
-      installerPackage:
-        type: string
-      isLicensed:
-        type: boolean
-      platform:
-        type: string
-    required:
-      - AppKey
-      - DeviceID
-    type: object
+swagger: '2.0'
+schemes:
+  - http
 host: ingress.quixxi.com
 info:
   description: 'With the Quixxi Analytics API you will be able to have a high level picture of the progress of your application, interact with your users and much more.'
@@ -301,6 +165,142 @@ paths:
             $ref: '#/definitions/Object'
       tags:
         - device
-schemes:
-  - http
-swagger: '2.0'
+definitions:
+  ErrorReportModel:
+    properties:
+      APP_VERSION_CODE:
+        type: string
+      APP_VERSION_NAME:
+        type: string
+      AVAILABLE_MEM_SIZE:
+        type: string
+      AppKey:
+        type: string
+      BRAND:
+        type: string
+      Build:
+        type: string
+      CustomData:
+        type: string
+      DEVICE_ID:
+        type: string
+      DISPLAY:
+        type: string
+      ERROR_LINE:
+        type: string
+      ERROR_MSG:
+        type: string
+      EVENTSLOG:
+        type: string
+      FILE_PATH:
+        type: string
+      LOGCAT:
+        type: string
+      OSVERSION:
+        type: string
+      PACKAGE_NAME:
+        type: string
+      PHONE_MODEL:
+        type: string
+      PRODUCT:
+        type: string
+      SHARED_PREFERENCES:
+        type: string
+      STACK_TRACE:
+        type: string
+      SystemSettings:
+        type: string
+      Systemsecure:
+        type: string
+      THREAD_DETAILS:
+        type: string
+      TOTAL_MEM_SIZE:
+        type: string
+      USER_APP_START_DATE:
+        type: string
+      USER_CRASH_DATE:
+        type: string
+      report_id:
+        type: string
+    required:
+      - AppKey
+    type: object
+  EventsModel:
+    properties:
+      AppKey:
+        type: string
+      AppVersion:
+        type: string
+      Details:
+        type: string
+      DeviceId:
+        type: string
+      EDate:
+        format: date-time
+        type: string
+      Event:
+        type: string
+    required:
+      - AppKey
+      - DeviceId
+    type: object
+  Object:
+    properties: {}
+    type: object
+  PreferencesModel:
+    properties:
+      AppKey:
+        type: string
+      DeviceID:
+        type: string
+      Email:
+        type: string
+      Preferences:
+        $ref: '#/definitions/Object'
+    required:
+      - AppKey
+      - DeviceID
+    type: object
+  UserModel:
+    properties:
+      AppKey:
+        type: string
+      AppRevision:
+        format: int32
+        type: integer
+      AppVersion:
+        type: string
+      Brand:
+        type: string
+      Country:
+        type: string
+      DeviceID:
+        type: string
+      Email:
+        type: string
+      InstallDate:
+        format: date-time
+        type: string
+      MessageId:
+        type: string
+      Model:
+        type: string
+      OSVersion:
+        type: string
+      Preferences:
+        $ref: '#/definitions/Object'
+      Store:
+        type: string
+      frameworkId:
+        format: int32
+        type: integer
+      installerPackage:
+        type: string
+      isLicensed:
+        type: boolean
+      platform:
+        type: string
+    required:
+      - AppKey
+      - DeviceID
+    type: object

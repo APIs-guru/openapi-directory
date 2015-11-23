@@ -1,4 +1,340 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.googleapis.com
 basePath: /manager/v1beta2/projects
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: 'The Deployment Manager API allows users to declaratively configure, deploy and run complex solutions on the Google Cloud Platform.'
+  title: Deployment Manager API
+  version: v1beta2
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/manager/v1beta2/rest'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: manager
+externalDocs:
+  url: 'https://developers.google.com/deployment-manager/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/appengine.admin': View and manage your applications deployed on Google App Engine
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/compute': View and manage your Google Compute Engine resources
+      'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
+      'https://www.googleapis.com/auth/ndev.cloudman': View and manage your Google Cloud Platform management resources and deployment status information
+      'https://www.googleapis.com/auth/ndev.cloudman.readonly': View your Google Cloud Platform management resources and deployment status information
+    type: oauth2
+parameters:
+  alt:
+    default: json
+    description: Data format for the response.
+    enum:
+      - json
+    in: query
+    name: alt
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    in: query
+    name: quotaUser
+    type: string
+  userIp:
+    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    in: query
+    name: userIp
+    type: string
+paths:
+  '/{projectId}/regions/{region}/deployments':
+    get:
+      description: ''
+      operationId: manager.deployments.list
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          type: string
+        - in: path
+          name: region
+          required: true
+          type: string
+        - default: 50
+          description: 'Maximum count of results to be returned. Acceptable values are 0 to 100, inclusive. (Default: 50)'
+          in: query
+          maximum: 100
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DeploymentsListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+      tags:
+        - deployments
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: ''
+      operationId: manager.deployments.insert
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          type: string
+        - in: path
+          name: region
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Deployment'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Deployment'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/appengine.admin'
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/compute'
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+      tags:
+        - deployments
+  '/{projectId}/regions/{region}/deployments/{deploymentName}':
+    delete:
+      description: ''
+      operationId: manager.deployments.delete
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          type: string
+        - in: path
+          name: region
+          required: true
+          type: string
+        - in: path
+          name: deploymentName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+      tags:
+        - deployments
+    get:
+      description: ''
+      operationId: manager.deployments.get
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          type: string
+        - in: path
+          name: region
+          required: true
+          type: string
+        - in: path
+          name: deploymentName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Deployment'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+      tags:
+        - deployments
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{projectId}/templates':
+    get:
+      description: ''
+      operationId: manager.templates.list
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          type: string
+        - default: 50
+          description: 'Maximum count of results to be returned. Acceptable values are 0 to 100, inclusive. (Default: 50)'
+          in: query
+          maximum: 100
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TemplatesListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+      tags:
+        - templates
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: ''
+      operationId: manager.templates.insert
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Template'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Template'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+      tags:
+        - templates
+  '/{projectId}/templates/{templateName}':
+    delete:
+      description: ''
+      operationId: manager.templates.delete
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          type: string
+        - in: path
+          name: templateName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+      tags:
+        - templates
+    get:
+      description: ''
+      operationId: manager.templates.get
+      parameters:
+        - in: path
+          name: projectId
+          required: true
+          type: string
+        - in: path
+          name: templateName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Template'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - 'https://www.googleapis.com/auth/ndev.cloudman'
+            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
+      tags:
+        - templates
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
 definitions:
   AccessConfig:
     description: A Compute Engine network accessConfig. Identical to the accessConfig on corresponding Compute Engine resource.
@@ -535,339 +871,3 @@ definitions:
           $ref: '#/definitions/Template'
         type: array
     type: object
-externalDocs:
-  url: 'https://developers.google.com/deployment-manager/'
-host: www.googleapis.com
-info:
-  contact:
-    name: Google
-    url: 'https://google.com'
-  description: 'The Deployment Manager API allows users to declaratively configure, deploy and run complex solutions on the Google Cloud Platform.'
-  title: Deployment Manager API
-  version: v1beta2
-  x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
-  x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
-  x-origin:
-    format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/manager/v1beta2/rest'
-    version: v1
-  x-preferred: true
-  x-providerName: googleapis.com
-  x-serviceName: manager
-parameters:
-  alt:
-    default: json
-    description: Data format for the response.
-    enum:
-      - json
-    in: query
-    name: alt
-    type: string
-  fields:
-    description: Selector specifying which fields to include in a partial response.
-    in: query
-    name: fields
-    type: string
-  key:
-    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
-    in: query
-    name: key
-    type: string
-  oauth_token:
-    description: OAuth 2.0 token for the current user.
-    in: query
-    name: oauth_token
-    type: string
-  prettyPrint:
-    default: true
-    description: Returns response with indentations and line breaks.
-    in: query
-    name: prettyPrint
-    type: boolean
-  quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
-    in: query
-    name: quotaUser
-    type: string
-  userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
-    in: query
-    name: userIp
-    type: string
-paths:
-  '/{projectId}/regions/{region}/deployments':
-    get:
-      description: ''
-      operationId: manager.deployments.list
-      parameters:
-        - in: path
-          name: projectId
-          required: true
-          type: string
-        - in: path
-          name: region
-          required: true
-          type: string
-        - default: 50
-          description: 'Maximum count of results to be returned. Acceptable values are 0 to 100, inclusive. (Default: 50)'
-          in: query
-          maximum: 100
-          minimum: 0
-          name: maxResults
-          type: integer
-        - description: Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/DeploymentsListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-            - 'https://www.googleapis.com/auth/ndev.cloudman'
-            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
-      tags:
-        - deployments
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: ''
-      operationId: manager.deployments.insert
-      parameters:
-        - in: path
-          name: projectId
-          required: true
-          type: string
-        - in: path
-          name: region
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Deployment'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Deployment'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/appengine.admin'
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/compute'
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-            - 'https://www.googleapis.com/auth/ndev.cloudman'
-      tags:
-        - deployments
-  '/{projectId}/regions/{region}/deployments/{deploymentName}':
-    delete:
-      description: ''
-      operationId: manager.deployments.delete
-      parameters:
-        - in: path
-          name: projectId
-          required: true
-          type: string
-        - in: path
-          name: region
-          required: true
-          type: string
-        - in: path
-          name: deploymentName
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/ndev.cloudman'
-      tags:
-        - deployments
-    get:
-      description: ''
-      operationId: manager.deployments.get
-      parameters:
-        - in: path
-          name: projectId
-          required: true
-          type: string
-        - in: path
-          name: region
-          required: true
-          type: string
-        - in: path
-          name: deploymentName
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Deployment'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-            - 'https://www.googleapis.com/auth/ndev.cloudman'
-            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
-      tags:
-        - deployments
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/{projectId}/templates':
-    get:
-      description: ''
-      operationId: manager.templates.list
-      parameters:
-        - in: path
-          name: projectId
-          required: true
-          type: string
-        - default: 50
-          description: 'Maximum count of results to be returned. Acceptable values are 0 to 100, inclusive. (Default: 50)'
-          in: query
-          maximum: 100
-          minimum: 0
-          name: maxResults
-          type: integer
-        - description: Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/TemplatesListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-            - 'https://www.googleapis.com/auth/ndev.cloudman'
-            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
-      tags:
-        - templates
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: ''
-      operationId: manager.templates.insert
-      parameters:
-        - in: path
-          name: projectId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Template'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Template'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/ndev.cloudman'
-      tags:
-        - templates
-  '/{projectId}/templates/{templateName}':
-    delete:
-      description: ''
-      operationId: manager.templates.delete
-      parameters:
-        - in: path
-          name: projectId
-          required: true
-          type: string
-        - in: path
-          name: templateName
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/ndev.cloudman'
-      tags:
-        - templates
-    get:
-      description: ''
-      operationId: manager.templates.get
-      parameters:
-        - in: path
-          name: projectId
-          required: true
-          type: string
-        - in: path
-          name: templateName
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Template'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-            - 'https://www.googleapis.com/auth/ndev.cloudman'
-            - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
-      tags:
-        - templates
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/appengine.admin': View and manage your applications deployed on Google App Engine
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/compute': View and manage your Google Compute Engine resources
-      'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
-      'https://www.googleapis.com/auth/ndev.cloudman': View and manage your Google Cloud Platform management resources and deployment status information
-      'https://www.googleapis.com/auth/ndev.cloudman.readonly': View your Google Cloud Platform management resources and deployment status information
-    type: oauth2
-swagger: '2.0'

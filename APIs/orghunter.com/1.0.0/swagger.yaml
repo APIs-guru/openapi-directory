@@ -1,5 +1,8 @@
-basePath: /
+swagger: '2.0'
+schemes:
+  - http
 host: data.orghunter.com
+basePath: /
 info:
   description: Get the latest IRS data and most up to date charity information for your website or application
   title: OrgHunter
@@ -11,6 +14,19 @@ info:
     url: 'https://orghunter.3scale.net/swagger/spec.json'
     version: '1.2'
   x-providerName: orghunter.com
+tags:
+  - description: Charity NTEE Classification/Categories API Test
+    name: categories
+  - description: Charity Search Summary API Test
+    name: summary
+  - description: Charity Basic API Test
+    name: details
+  - description: Charity Financial API Test
+    name: CharityFinancial
+  - description: Charity GeoLocation API Test
+    name: GeoLocation
+  - description: Charity Premium API Test
+    name: CharityPremium
 paths:
   /v1/categories:
     post:
@@ -169,19 +185,3 @@ paths:
       summary: 'Get summary data!'
       tags:
         - summary
-schemes:
-  - http
-swagger: '2.0'
-tags:
-  - description: Charity NTEE Classification/Categories API Test
-    name: categories
-  - description: Charity Search Summary API Test
-    name: summary
-  - description: Charity Basic API Test
-    name: details
-  - description: Charity Financial API Test
-    name: CharityFinancial
-  - description: Charity GeoLocation API Test
-    name: GeoLocation
-  - description: Charity Premium API Test
-    name: CharityPremium

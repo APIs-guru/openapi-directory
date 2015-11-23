@@ -1,4 +1,277 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.patientview.org
 basePath: /
+info:
+  description: The recommended REST API endpoints to be used when integrating with PatientView
+  termsOfService: 'https://www.patientview.org/#/terms'
+  title: PatientView REST API
+  version: '1.0'
+  x-logo:
+    url: 'https://www.patientview.org/images/pv-logo.png'
+  x-origin:
+    format: swagger
+    url: 'https://www.patientview.org/api/api-docs'
+    version: '1.2'
+  x-providerName: patientview.org
+tags:
+  - description: Auth Controller
+    name: auth
+  - description: Observation Controller
+    name: observations
+  - description: Observation Heading Controller
+    name: availableobservationheadings
+  - description: Patient Controller
+    name: basic
+paths:
+  /auth/login:
+    post:
+      consumes:
+        - application/json
+      deprecated: false
+      description: 'Authenticate using username and password, returns token, which must be added to X-Auth-Token in header of all future requests'
+      operationId: logIn
+      parameters:
+        - description: credentials
+          in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Credentials'
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: Description was not specified
+          schema:
+            type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Log In
+      tags:
+        - auth
+  '/auth/logout/{token}':
+    delete:
+      consumes:
+        - application/json
+      deprecated: false
+      description: Log Out
+      operationId: logOut
+      parameters:
+        - description: token
+          in: path
+          name: token
+          required: true
+          type: string
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: Description was not specified
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      summary: Log Out
+      tags:
+        - auth
+  '/auth/{token}/basicuserinformation':
+    get:
+      consumes:
+        - application/json
+      deprecated: false
+      description: 'Once logged in and have a token, get basic user information including group role membership'
+      operationId: getBasicUserInformation
+      parameters:
+        - description: token
+          in: path
+          name: token
+          required: true
+          type: string
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get Basic User Information
+      tags:
+        - auth
+  '/patient/{userId}/basic':
+    get:
+      consumes:
+        - application/json
+      deprecated: false
+      description: 'Given a User ID, get basic patient information for a user from clinical data stored in FHIR'
+      operationId: getBasicPatientDetails
+      parameters:
+        - description: userId
+          format: int64
+          in: path
+          name: userId
+          required: true
+          type: integer
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Patient'
+            type: array
+            uniqueItems: false
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get Basic Patient Information
+      tags:
+        - basic
+  '/user/{userId}/availableobservationheadings':
+    get:
+      consumes:
+        - application/json
+      deprecated: false
+      description: Given a User ID retrieve a list of available observation types for that user (where they have observation data).
+      operationId: getAvailableObservationHeadings
+      parameters:
+        - description: userId
+          format: int64
+          in: path
+          name: userId
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ObservationHeading'
+            type: array
+            uniqueItems: false
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get Available Observations Types For a User
+      tags:
+        - availableobservationheadings
+  '/user/{userId}/observations':
+    get:
+      consumes:
+        - application/json
+      deprecated: false
+      description: 'Given a User ID and search parameters, retrieve a page of observations.'
+      operationId: getObservationsByCodes
+      parameters:
+        - description: userId
+          format: int64
+          in: path
+          name: userId
+          required: true
+          type: integer
+        - description: code
+          in: query
+          items:
+            type: string
+          name: code
+          required: true
+          type: array
+          uniqueItems: false
+        - description: limit
+          format: int64
+          in: query
+          name: limit
+          required: true
+          type: integer
+        - description: offset
+          format: int64
+          in: query
+          name: offset
+          required: true
+          type: integer
+        - description: orderDirection
+          in: query
+          name: orderDirection
+          required: true
+          type: string
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/FhirObservationPage'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get Observations of Multiple Types For a User
+      tags:
+        - observations
+  '/user/{userId}/observations/{code}':
+    get:
+      consumes:
+        - application/json
+      deprecated: false
+      description: 'Given a User ID and observation code, retrieve all observations.'
+      operationId: getObservationsByCode
+      parameters:
+        - description: userId
+          format: int64
+          in: path
+          name: userId
+          required: true
+          type: integer
+        - description: code
+          in: path
+          name: code
+          required: true
+          type: string
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/FhirObservation'
+            type: array
+            uniqueItems: false
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get Observations of a Certain Type For a User
+      tags:
+        - observations
 definitions:
   BaseGroup:
     properties:
@@ -636,276 +909,3 @@ definitions:
         type: boolean
       optOutHidden:
         type: boolean
-host: www.patientview.org
-info:
-  description: The recommended REST API endpoints to be used when integrating with PatientView
-  termsOfService: 'https://www.patientview.org/#/terms'
-  title: PatientView REST API
-  version: '1.0'
-  x-logo:
-    url: 'https://www.patientview.org/images/pv-logo.png'
-  x-origin:
-    format: swagger
-    url: 'https://www.patientview.org/api/api-docs'
-    version: '1.2'
-  x-providerName: patientview.org
-paths:
-  /auth/login:
-    post:
-      consumes:
-        - application/json
-      deprecated: false
-      description: 'Authenticate using username and password, returns token, which must be added to X-Auth-Token in header of all future requests'
-      operationId: logIn
-      parameters:
-        - description: credentials
-          in: body
-          name: body
-          required: false
-          schema:
-            $ref: '#/definitions/Credentials'
-      produces:
-        - '*/*'
-      responses:
-        '200':
-          description: Description was not specified
-          schema:
-            type: string
-        '201':
-          description: Created
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-      summary: Log In
-      tags:
-        - auth
-  '/auth/logout/{token}':
-    delete:
-      consumes:
-        - application/json
-      deprecated: false
-      description: Log Out
-      operationId: logOut
-      parameters:
-        - description: token
-          in: path
-          name: token
-          required: true
-          type: string
-      produces:
-        - '*/*'
-      responses:
-        '200':
-          description: Description was not specified
-        '204':
-          description: No Content
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-      summary: Log Out
-      tags:
-        - auth
-  '/auth/{token}/basicuserinformation':
-    get:
-      consumes:
-        - application/json
-      deprecated: false
-      description: 'Once logged in and have a token, get basic user information including group role membership'
-      operationId: getBasicUserInformation
-      parameters:
-        - description: token
-          in: path
-          name: token
-          required: true
-          type: string
-      produces:
-        - '*/*'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/User'
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-      summary: Get Basic User Information
-      tags:
-        - auth
-  '/patient/{userId}/basic':
-    get:
-      consumes:
-        - application/json
-      deprecated: false
-      description: 'Given a User ID, get basic patient information for a user from clinical data stored in FHIR'
-      operationId: getBasicPatientDetails
-      parameters:
-        - description: userId
-          format: int64
-          in: path
-          name: userId
-          required: true
-          type: integer
-      produces:
-        - '*/*'
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/Patient'
-            type: array
-            uniqueItems: false
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-      summary: Get Basic Patient Information
-      tags:
-        - basic
-  '/user/{userId}/availableobservationheadings':
-    get:
-      consumes:
-        - application/json
-      deprecated: false
-      description: Given a User ID retrieve a list of available observation types for that user (where they have observation data).
-      operationId: getAvailableObservationHeadings
-      parameters:
-        - description: userId
-          format: int64
-          in: path
-          name: userId
-          required: true
-          type: integer
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/ObservationHeading'
-            type: array
-            uniqueItems: false
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-      summary: Get Available Observations Types For a User
-      tags:
-        - availableobservationheadings
-  '/user/{userId}/observations':
-    get:
-      consumes:
-        - application/json
-      deprecated: false
-      description: 'Given a User ID and search parameters, retrieve a page of observations.'
-      operationId: getObservationsByCodes
-      parameters:
-        - description: userId
-          format: int64
-          in: path
-          name: userId
-          required: true
-          type: integer
-        - description: code
-          in: query
-          items:
-            type: string
-          name: code
-          required: true
-          type: array
-          uniqueItems: false
-        - description: limit
-          format: int64
-          in: query
-          name: limit
-          required: true
-          type: integer
-        - description: offset
-          format: int64
-          in: query
-          name: offset
-          required: true
-          type: integer
-        - description: orderDirection
-          in: query
-          name: orderDirection
-          required: true
-          type: string
-      produces:
-        - '*/*'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/FhirObservationPage'
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-      summary: Get Observations of Multiple Types For a User
-      tags:
-        - observations
-  '/user/{userId}/observations/{code}':
-    get:
-      consumes:
-        - application/json
-      deprecated: false
-      description: 'Given a User ID and observation code, retrieve all observations.'
-      operationId: getObservationsByCode
-      parameters:
-        - description: userId
-          format: int64
-          in: path
-          name: userId
-          required: true
-          type: integer
-        - description: code
-          in: path
-          name: code
-          required: true
-          type: string
-      produces:
-        - '*/*'
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/FhirObservation'
-            type: array
-            uniqueItems: false
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-      summary: Get Observations of a Certain Type For a User
-      tags:
-        - observations
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - description: Auth Controller
-    name: auth
-  - description: Observation Controller
-    name: observations
-  - description: Observation Heading Controller
-    name: availableobservationheadings
-  - description: Patient Controller
-    name: basic

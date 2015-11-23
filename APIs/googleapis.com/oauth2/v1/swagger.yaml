@@ -1,130 +1,8 @@
-basePath: /
-definitions:
-  Jwk:
-    properties:
-      keys:
-        items:
-          properties:
-            alg:
-              default: RS256
-              type: string
-            e:
-              type: string
-            kid:
-              type: string
-            kty:
-              default: RSA
-              type: string
-            'n':
-              type: string
-            use:
-              default: sig
-              type: string
-          type: object
-        type: array
-    type: object
-  Raw:
-    properties:
-      keyvalues:
-        items:
-          properties:
-            algorithm:
-              default: RSA
-              type: string
-            exponent:
-              type: string
-            keyid:
-              type: string
-            modulus:
-              type: string
-          type: object
-        type: array
-    type: object
-  Tokeninfo:
-    properties:
-      access_type:
-        description: The access type granted with this token. It can be offline or online.
-        type: string
-      audience:
-        description: Who is the intended audience for this token. In general the same as issued_to.
-        type: string
-      email:
-        description: The email address of the user. Present only if the email scope is present in the request.
-        type: string
-      email_verified:
-        description: Boolean flag which is true if the email address is verified. Present only if the email scope is present in the request.
-        type: boolean
-      expires_in:
-        description: 'The expiry time of the token, as number of seconds left until expiry.'
-        format: int32
-        type: integer
-      issued_at:
-        description: 'The issue time of the token, as number of seconds.'
-        format: int32
-        type: integer
-      issued_to:
-        description: To whom was the token issued to. In general the same as audience.
-        type: string
-      issuer:
-        description: Who issued the token.
-        type: string
-      nonce:
-        description: Nonce of the id token.
-        type: string
-      scope:
-        description: The space separated list of scopes granted to this token.
-        type: string
-      user_id:
-        description: The obfuscated user id.
-        type: string
-      verified_email:
-        description: Boolean flag which is true if the email address is verified. Present only if the email scope is present in the request.
-        type: boolean
-    type: object
-  Userinfoplus:
-    properties:
-      email:
-        description: "The user's email address."
-        type: string
-      family_name:
-        description: "The user's last name."
-        type: string
-      gender:
-        description: "The user's gender."
-        type: string
-      given_name:
-        description: "The user's first name."
-        type: string
-      hd:
-        description: The hosted domain e.g. example.com if the user is Google apps user.
-        type: string
-      id:
-        description: The obfuscated ID of the user.
-        type: string
-      link:
-        description: URL of the profile page.
-        type: string
-      locale:
-        description: "The user's preferred locale."
-        type: string
-      name:
-        description: "The user's full name."
-        type: string
-      picture:
-        description: "URL of the user's picture image."
-        type: string
-      verified_email:
-        default: true
-        description: "Boolean flag which is true if the email address is verified. Always verified because we only return the user's primary email address."
-        type: boolean
-    type: object
-  X509:
-    additionalProperties:
-      type: string
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/accounts/docs/OAuth2'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /
 info:
   contact:
     name: Google
@@ -143,6 +21,19 @@ info:
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: oauth2
+externalDocs:
+  url: 'https://developers.google.com/accounts/docs/OAuth2'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/plus.login': Know your basic profile info and list of people in your circles.
+      'https://www.googleapis.com/auth/plus.me': Know who you are on Google
+      'https://www.googleapis.com/auth/userinfo.email': View your email address
+      'https://www.googleapis.com/auth/userinfo.profile': View your basic profile info
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -358,17 +249,126 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/plus.login': Know your basic profile info and list of people in your circles.
-      'https://www.googleapis.com/auth/plus.me': Know who you are on Google
-      'https://www.googleapis.com/auth/userinfo.email': View your email address
-      'https://www.googleapis.com/auth/userinfo.profile': View your basic profile info
-    type: oauth2
-swagger: '2.0'
+definitions:
+  Jwk:
+    properties:
+      keys:
+        items:
+          properties:
+            alg:
+              default: RS256
+              type: string
+            e:
+              type: string
+            kid:
+              type: string
+            kty:
+              default: RSA
+              type: string
+            'n':
+              type: string
+            use:
+              default: sig
+              type: string
+          type: object
+        type: array
+    type: object
+  Raw:
+    properties:
+      keyvalues:
+        items:
+          properties:
+            algorithm:
+              default: RSA
+              type: string
+            exponent:
+              type: string
+            keyid:
+              type: string
+            modulus:
+              type: string
+          type: object
+        type: array
+    type: object
+  Tokeninfo:
+    properties:
+      access_type:
+        description: The access type granted with this token. It can be offline or online.
+        type: string
+      audience:
+        description: Who is the intended audience for this token. In general the same as issued_to.
+        type: string
+      email:
+        description: The email address of the user. Present only if the email scope is present in the request.
+        type: string
+      email_verified:
+        description: Boolean flag which is true if the email address is verified. Present only if the email scope is present in the request.
+        type: boolean
+      expires_in:
+        description: 'The expiry time of the token, as number of seconds left until expiry.'
+        format: int32
+        type: integer
+      issued_at:
+        description: 'The issue time of the token, as number of seconds.'
+        format: int32
+        type: integer
+      issued_to:
+        description: To whom was the token issued to. In general the same as audience.
+        type: string
+      issuer:
+        description: Who issued the token.
+        type: string
+      nonce:
+        description: Nonce of the id token.
+        type: string
+      scope:
+        description: The space separated list of scopes granted to this token.
+        type: string
+      user_id:
+        description: The obfuscated user id.
+        type: string
+      verified_email:
+        description: Boolean flag which is true if the email address is verified. Present only if the email scope is present in the request.
+        type: boolean
+    type: object
+  Userinfoplus:
+    properties:
+      email:
+        description: "The user's email address."
+        type: string
+      family_name:
+        description: "The user's last name."
+        type: string
+      gender:
+        description: "The user's gender."
+        type: string
+      given_name:
+        description: "The user's first name."
+        type: string
+      hd:
+        description: The hosted domain e.g. example.com if the user is Google apps user.
+        type: string
+      id:
+        description: The obfuscated ID of the user.
+        type: string
+      link:
+        description: URL of the profile page.
+        type: string
+      locale:
+        description: "The user's preferred locale."
+        type: string
+      name:
+        description: "The user's full name."
+        type: string
+      picture:
+        description: "URL of the user's picture image."
+        type: string
+      verified_email:
+        default: true
+        description: "Boolean flag which is true if the email address is verified. Always verified because we only return the user's primary email address."
+        type: boolean
+    type: object
+  X509:
+    additionalProperties:
+      type: string
+    type: object

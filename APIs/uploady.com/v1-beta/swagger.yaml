@@ -1,239 +1,8 @@
-basePath: /v1/api
-definitions:
-  Children:
-    properties:
-      files:
-        items:
-          $ref: '#/definitions/File'
-        type: array
-        uniqueItems: true
-      folders:
-        items:
-          $ref: '#/definitions/Folder'
-        type: array
-        uniqueItems: true
-  Event:
-    description: Event information
-    properties:
-      file:
-        $ref: '#/definitions/File'
-      file_id:
-        type: string
-      folder:
-        $ref: '#/definitions/Folder'
-      folder_id:
-        type: string
-      id:
-        type: string
-      root_id:
-        type: string
-      time:
-        type: integer
-      type:
-        type: string
-      user:
-        type: string
-    required:
-      - id
-      - user
-      - root_id
-      - time
-  Events:
-    properties:
-      events:
-        items:
-          $ref: '#/definitions/Event'
-        type: array
-        uniqueItems: true
-    required:
-      - events
-  File:
-    description: File information
-    properties:
-      extension:
-        type: string
-      id:
-        type: string
-      mime_type:
-        type: string
-      name:
-        type: string
-      parent_folder:
-        type: string
-      sha1:
-        type: string
-      share_enabled:
-        type: boolean
-      share_link:
-        type: string
-      share_link_enabled:
-        type: boolean
-      share_password:
-        type: string
-      share_url:
-        type: string
-      size:
-        format: int64
-        type: integer
-      time:
-        type: integer
-    required:
-      - id
-      - name
-      - time
-      - mime_type
-      - extension
-      - size
-      - sha1
-      - parent_folder
-  FileLink:
-    description: Get file download url
-    properties:
-      direct_link:
-        type: string
-      id:
-        type: string
-    required:
-      - id
-      - direct_link
-  FileShare:
-    properties:
-      emails:
-        items:
-          $ref: '#/definitions/FileShareEmail'
-        type: array
-        uniqueItems: true
-    required:
-      - emails
-  FileShareEmail:
-    properties:
-      email:
-        type: string
-      id:
-        type: string
-    required:
-      - id
-      - email
-  Files:
-    properties:
-      files:
-        items:
-          $ref: '#/definitions/File'
-        type: array
-        uniqueItems: true
-    required:
-      - files
-  FilesLinks:
-    properties:
-      links:
-        items:
-          $ref: '#/definitions/FileLink'
-        type: array
-        uniqueItems: true
-    required:
-      - links
-  Folder:
-    description: Folder information
-    properties:
-      has_folders:
-        type: boolean
-      id:
-        type: string
-      name:
-        type: string
-      parent_folder:
-        type: string
-      time:
-        type: integer
-      type:
-        type: string
-    required:
-      - id
-      - name
-      - time
-      - has_folders
-  Folders:
-    properties:
-      folders:
-        items:
-          $ref: '#/definitions/Folder'
-        type: array
-        uniqueItems: true
-    required:
-      - folders
-  Storage:
-    properties:
-      storage:
-        items:
-          $ref: '#/definitions/StorageData'
-        type: array
-    required:
-      - storage
-  StorageData:
-    properties:
-      storage_limit:
-        type: integer
-      used_storage_size:
-        type: integer
-    required:
-      - used_storage_size
-      - storage_limit
-  Success:
-    properties:
-      success:
-        type: boolean
-    required:
-      - success
-  User:
-    description: User information.
-    properties:
-      display_name:
-        type: string
-      email:
-        type: string
-      family_name:
-        type: string
-      given_name:
-        type: string
-      group:
-        type: string
-      links:
-        items:
-          $ref: '#/definitions/UserLinks'
-        type: array
-        uniqueItems: true
-      new_user:
-        type: boolean
-      verified:
-        type: boolean
-    required:
-      - email
-      - given_name
-      - family_name
-      - display_name
-      - group
-      - verified
-      - new_user
-      - links
-  UserLinks:
-    properties:
-      root_folder:
-        type: string
-      trash_folder:
-        type: string
-    required:
-      - root_folder
-      - trash_folder
-  Users:
-    properties:
-      users:
-        items:
-          $ref: '#/definitions/User'
-        type: array
-        uniqueItems: true
-    required:
-      - users
+swagger: '2.0'
+schemes:
+  - https
 host: content.uploady.com
+basePath: /v1/api
 info:
   description: The Uploady API allows you to connect to the Uploady free online storage platform.
   title: Uploady
@@ -245,6 +14,17 @@ info:
     url: 'https://www.uploady.com/v1/docs/api'
     version: '1.2'
   x-providerName: uploady.com
+tags:
+  - description: Manage user
+    name: users
+  - description: Manage folders
+    name: folders
+  - description: Manage files
+    name: files
+  - description: Upload files
+    name: upload
+  - description: Synchronize files
+    name: events
 paths:
   /events:
     get:
@@ -672,17 +452,237 @@ paths:
       summary: Get user storage information.
       tags:
         - users
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - description: Manage user
-    name: users
-  - description: Manage folders
-    name: folders
-  - description: Manage files
-    name: files
-  - description: Upload files
-    name: upload
-  - description: Synchronize files
-    name: events
+definitions:
+  Children:
+    properties:
+      files:
+        items:
+          $ref: '#/definitions/File'
+        type: array
+        uniqueItems: true
+      folders:
+        items:
+          $ref: '#/definitions/Folder'
+        type: array
+        uniqueItems: true
+  Event:
+    description: Event information
+    properties:
+      file:
+        $ref: '#/definitions/File'
+      file_id:
+        type: string
+      folder:
+        $ref: '#/definitions/Folder'
+      folder_id:
+        type: string
+      id:
+        type: string
+      root_id:
+        type: string
+      time:
+        type: integer
+      type:
+        type: string
+      user:
+        type: string
+    required:
+      - id
+      - user
+      - root_id
+      - time
+  Events:
+    properties:
+      events:
+        items:
+          $ref: '#/definitions/Event'
+        type: array
+        uniqueItems: true
+    required:
+      - events
+  File:
+    description: File information
+    properties:
+      extension:
+        type: string
+      id:
+        type: string
+      mime_type:
+        type: string
+      name:
+        type: string
+      parent_folder:
+        type: string
+      sha1:
+        type: string
+      share_enabled:
+        type: boolean
+      share_link:
+        type: string
+      share_link_enabled:
+        type: boolean
+      share_password:
+        type: string
+      share_url:
+        type: string
+      size:
+        format: int64
+        type: integer
+      time:
+        type: integer
+    required:
+      - id
+      - name
+      - time
+      - mime_type
+      - extension
+      - size
+      - sha1
+      - parent_folder
+  FileLink:
+    description: Get file download url
+    properties:
+      direct_link:
+        type: string
+      id:
+        type: string
+    required:
+      - id
+      - direct_link
+  FileShare:
+    properties:
+      emails:
+        items:
+          $ref: '#/definitions/FileShareEmail'
+        type: array
+        uniqueItems: true
+    required:
+      - emails
+  FileShareEmail:
+    properties:
+      email:
+        type: string
+      id:
+        type: string
+    required:
+      - id
+      - email
+  Files:
+    properties:
+      files:
+        items:
+          $ref: '#/definitions/File'
+        type: array
+        uniqueItems: true
+    required:
+      - files
+  FilesLinks:
+    properties:
+      links:
+        items:
+          $ref: '#/definitions/FileLink'
+        type: array
+        uniqueItems: true
+    required:
+      - links
+  Folder:
+    description: Folder information
+    properties:
+      has_folders:
+        type: boolean
+      id:
+        type: string
+      name:
+        type: string
+      parent_folder:
+        type: string
+      time:
+        type: integer
+      type:
+        type: string
+    required:
+      - id
+      - name
+      - time
+      - has_folders
+  Folders:
+    properties:
+      folders:
+        items:
+          $ref: '#/definitions/Folder'
+        type: array
+        uniqueItems: true
+    required:
+      - folders
+  Storage:
+    properties:
+      storage:
+        items:
+          $ref: '#/definitions/StorageData'
+        type: array
+    required:
+      - storage
+  StorageData:
+    properties:
+      storage_limit:
+        type: integer
+      used_storage_size:
+        type: integer
+    required:
+      - used_storage_size
+      - storage_limit
+  Success:
+    properties:
+      success:
+        type: boolean
+    required:
+      - success
+  User:
+    description: User information.
+    properties:
+      display_name:
+        type: string
+      email:
+        type: string
+      family_name:
+        type: string
+      given_name:
+        type: string
+      group:
+        type: string
+      links:
+        items:
+          $ref: '#/definitions/UserLinks'
+        type: array
+        uniqueItems: true
+      new_user:
+        type: boolean
+      verified:
+        type: boolean
+    required:
+      - email
+      - given_name
+      - family_name
+      - display_name
+      - group
+      - verified
+      - new_user
+      - links
+  UserLinks:
+    properties:
+      root_folder:
+        type: string
+      trash_folder:
+        type: string
+    required:
+      - root_folder
+      - trash_folder
+  Users:
+    properties:
+      users:
+        items:
+          $ref: '#/definitions/User'
+        type: array
+        uniqueItems: true
+    required:
+      - users

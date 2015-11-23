@@ -1,129 +1,8 @@
-basePath: /admin/datatransfer/v1
-definitions:
-  Application:
-    description: The JSON template for an Application resource.
-    properties:
-      etag:
-        description: Etag of the resource.
-        type: string
-      id:
-        description: "The application's ID."
-        format: int64
-        type: string
-      kind:
-        default: 'admin#datatransfer#ApplicationResource'
-        description: Identifies the resource as a DataTransfer Application Resource.
-        type: string
-      name:
-        description: "The application's name."
-        type: string
-      transferParams:
-        description: The list of all possible transfer parameters for this application. These parameters can be used to select the data of the user in this application to be transfered.
-        items:
-          $ref: '#/definitions/ApplicationTransferParam'
-        type: array
-    type: object
-  ApplicationDataTransfer:
-    description: Template to map fields of ApplicationDataTransfer resource.
-    properties:
-      applicationId:
-        description: "The application's ID."
-        format: int64
-        type: string
-      applicationTransferParams:
-        description: The transfer parameters for the application. These parameters are used to select the data which will get transfered in context of this application.
-        items:
-          $ref: '#/definitions/ApplicationTransferParam'
-        type: array
-      applicationTransferStatus:
-        description: Current status of transfer for this application. (Read-only)
-        type: string
-    type: object
-  ApplicationTransferParam:
-    description: Template for application transfer parameters.
-    properties:
-      key:
-        description: "The type of the transfer parameter. eg: 'PRIVACY_LEVEL'"
-        type: string
-      value:
-        description: "The value of the coressponding transfer parameter. eg: 'PRIVATE' or 'SHARED'"
-        items:
-          type: string
-        type: array
-    type: object
-  ApplicationsListResponse:
-    description: Template for a collection of Applications.
-    properties:
-      applications:
-        description: List of applications that support data transfer and are also installed for the customer.
-        items:
-          $ref: '#/definitions/Application'
-        type: array
-      etag:
-        description: ETag of the resource.
-        type: string
-      kind:
-        default: 'admin#datatransfer#applicationsList'
-        description: Identifies the resource as a collection of Applications.
-        type: string
-      nextPageToken:
-        description: Continuation token which will be used to specify next page in list API.
-        type: string
-    type: object
-  DataTransfer:
-    description: The JSON template for a DataTransfer resource.
-    properties:
-      applicationDataTransfers:
-        description: List of per application data transfer resources. It contains data transfer details of the applications associated with this transfer resource. Note that this list is also used to specify the applications for which data transfer has to be done at the time of the transfer resource creation.
-        items:
-          $ref: '#/definitions/ApplicationDataTransfer'
-        type: array
-      etag:
-        description: ETag of the resource.
-        type: string
-      id:
-        description: "The transfer's ID (Read-only)."
-        type: string
-      kind:
-        default: 'admin#datatransfer#DataTransfer'
-        description: Identifies the resource as a DataTransfer request.
-        type: string
-      newOwnerUserId:
-        description: ID of the user to whom the data is being transfered.
-        type: string
-      oldOwnerUserId:
-        description: ID of the user whose data is being transfered.
-        type: string
-      overallTransferStatusCode:
-        description: Overall transfer status (Read-only).
-        type: string
-      requestTime:
-        description: The time at which the data transfer was requested (Read-only).
-        format: date-time
-        type: string
-    type: object
-  DataTransfersListResponse:
-    description: Template for a collection of DataTransfer resources.
-    properties:
-      dataTransfers:
-        description: List of data transfer requests.
-        items:
-          $ref: '#/definitions/DataTransfer'
-        type: array
-      etag:
-        description: ETag of the resource.
-        type: string
-      kind:
-        default: 'admin#datatransfer#dataTransfersList'
-        description: Identifies the resource as a collection of data transfer requests.
-        type: string
-      nextPageToken:
-        description: Continuation token which will be used to specify next page in list API.
-        type: string
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/admin-sdk/data-transfer/'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /admin/datatransfer/v1
 info:
   contact:
     name: Google
@@ -142,6 +21,17 @@ info:
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: admin
+externalDocs:
+  url: 'https://developers.google.com/admin-sdk/data-transfer/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/admin.datatransfer': View and manage data transfers between users in your organization
+      'https://www.googleapis.com/auth/admin.datatransfer.readonly': View data transfers between users in your organization
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -347,15 +237,125 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/admin.datatransfer': View and manage data transfers between users in your organization
-      'https://www.googleapis.com/auth/admin.datatransfer.readonly': View data transfers between users in your organization
-    type: oauth2
-swagger: '2.0'
+definitions:
+  Application:
+    description: The JSON template for an Application resource.
+    properties:
+      etag:
+        description: Etag of the resource.
+        type: string
+      id:
+        description: "The application's ID."
+        format: int64
+        type: string
+      kind:
+        default: 'admin#datatransfer#ApplicationResource'
+        description: Identifies the resource as a DataTransfer Application Resource.
+        type: string
+      name:
+        description: "The application's name."
+        type: string
+      transferParams:
+        description: The list of all possible transfer parameters for this application. These parameters can be used to select the data of the user in this application to be transfered.
+        items:
+          $ref: '#/definitions/ApplicationTransferParam'
+        type: array
+    type: object
+  ApplicationDataTransfer:
+    description: Template to map fields of ApplicationDataTransfer resource.
+    properties:
+      applicationId:
+        description: "The application's ID."
+        format: int64
+        type: string
+      applicationTransferParams:
+        description: The transfer parameters for the application. These parameters are used to select the data which will get transfered in context of this application.
+        items:
+          $ref: '#/definitions/ApplicationTransferParam'
+        type: array
+      applicationTransferStatus:
+        description: Current status of transfer for this application. (Read-only)
+        type: string
+    type: object
+  ApplicationTransferParam:
+    description: Template for application transfer parameters.
+    properties:
+      key:
+        description: "The type of the transfer parameter. eg: 'PRIVACY_LEVEL'"
+        type: string
+      value:
+        description: "The value of the coressponding transfer parameter. eg: 'PRIVATE' or 'SHARED'"
+        items:
+          type: string
+        type: array
+    type: object
+  ApplicationsListResponse:
+    description: Template for a collection of Applications.
+    properties:
+      applications:
+        description: List of applications that support data transfer and are also installed for the customer.
+        items:
+          $ref: '#/definitions/Application'
+        type: array
+      etag:
+        description: ETag of the resource.
+        type: string
+      kind:
+        default: 'admin#datatransfer#applicationsList'
+        description: Identifies the resource as a collection of Applications.
+        type: string
+      nextPageToken:
+        description: Continuation token which will be used to specify next page in list API.
+        type: string
+    type: object
+  DataTransfer:
+    description: The JSON template for a DataTransfer resource.
+    properties:
+      applicationDataTransfers:
+        description: List of per application data transfer resources. It contains data transfer details of the applications associated with this transfer resource. Note that this list is also used to specify the applications for which data transfer has to be done at the time of the transfer resource creation.
+        items:
+          $ref: '#/definitions/ApplicationDataTransfer'
+        type: array
+      etag:
+        description: ETag of the resource.
+        type: string
+      id:
+        description: "The transfer's ID (Read-only)."
+        type: string
+      kind:
+        default: 'admin#datatransfer#DataTransfer'
+        description: Identifies the resource as a DataTransfer request.
+        type: string
+      newOwnerUserId:
+        description: ID of the user to whom the data is being transfered.
+        type: string
+      oldOwnerUserId:
+        description: ID of the user whose data is being transfered.
+        type: string
+      overallTransferStatusCode:
+        description: Overall transfer status (Read-only).
+        type: string
+      requestTime:
+        description: The time at which the data transfer was requested (Read-only).
+        format: date-time
+        type: string
+    type: object
+  DataTransfersListResponse:
+    description: Template for a collection of DataTransfer resources.
+    properties:
+      dataTransfers:
+        description: List of data transfer requests.
+        items:
+          $ref: '#/definitions/DataTransfer'
+        type: array
+      etag:
+        description: ETag of the resource.
+        type: string
+      kind:
+        default: 'admin#datatransfer#dataTransfersList'
+        description: Identifies the resource as a collection of data transfer requests.
+        type: string
+      nextPageToken:
+        description: Continuation token which will be used to specify next page in list API.
+        type: string
+    type: object

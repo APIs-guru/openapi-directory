@@ -1,7 +1,9 @@
-basePath: /api.thenounproject.com
-externalDocs:
-  url: 'https://thenounproject.com/developers/'
+swagger: '2.0'
+schemes:
+  - http
 host: api.thenounproject.com
+basePath: /api.thenounproject.com
+x-hasEquivalentPaths: true
 info:
   description: Icons for Everything
   title: The Noun Project
@@ -13,6 +15,21 @@ info:
     url: 'http://api.thenounproject.com/config/api-doc'
     version: '1.2'
   x-providerName: thenounproject.com
+externalDocs:
+  url: 'https://thenounproject.com/developers/'
+tags:
+  - description: Operations on collection endpoints
+    name: collection
+  - description: Operations on collections endpoints
+    name: collections
+  - description: Operations on icon endpoints
+    name: icon
+  - description: Operations on icons endpoints
+    name: icons
+  - description: Operations on oauth endpoints
+    name: oauth
+  - description: Operations on user endpoints
+    name: user
 paths:
   '/collection/{id}':
     get:
@@ -356,20 +373,3 @@ paths:
       summary: Get user uploads with user
       tags:
         - user
-schemes:
-  - http
-swagger: '2.0'
-tags:
-  - description: Operations on collection endpoints
-    name: collection
-  - description: Operations on collections endpoints
-    name: collections
-  - description: Operations on icon endpoints
-    name: icon
-  - description: Operations on icons endpoints
-    name: icons
-  - description: Operations on oauth endpoints
-    name: oauth
-  - description: Operations on user endpoints
-    name: user
-x-hasEquivalentPaths: true

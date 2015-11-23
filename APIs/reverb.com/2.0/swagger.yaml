@@ -1,10 +1,8 @@
-basePath: /api
-consumes:
-  - application/json
-definitions: {}
-externalDocs:
-  url: 'https://dev.reverb.com/'
+swagger: '2.0'
+schemes:
+  - https
 host: reverb.com
+basePath: /api
 info:
   contact:
     email: integrations@reverb.com
@@ -24,6 +22,21 @@ info:
     url: 'https://reverb.com/swagger/swagger.json'
     version: '2.0'
   x-providerName: reverb.com
+externalDocs:
+  url: 'https://dev.reverb.com/'
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  oauth2:
+    authorizationUrl: 'https://reverb.com/oauth/authorize'
+    flow: accessCode
+    scopes:
+      update_listings: ''
+      write: ''
+    tokenUrl: 'https://reverb.com/oauth/token'
+    type: oauth2
 paths:
   /accounts:
     post:
@@ -2583,17 +2596,4 @@ paths:
       summary: Get details of a webhook registration
       tags:
         - webhooks
-produces:
-  - application/json
-schemes:
-  - https
-securityDefinitions:
-  oauth2:
-    authorizationUrl: 'https://reverb.com/oauth/authorize'
-    flow: accessCode
-    scopes:
-      update_listings: ''
-      write: ''
-    tokenUrl: 'https://reverb.com/oauth/token'
-    type: oauth2
-swagger: '2.0'
+definitions: {}

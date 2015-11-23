@@ -1,42 +1,8 @@
-basePath: /email/v2/users
-definitions:
-  MailItem:
-    description: JSON template for MailItem object in Email Migration API.
-    properties:
-      isDeleted:
-        description: Boolean indicating if the mail is deleted (used in Vault)
-        type: boolean
-      isDraft:
-        description: Boolean indicating if the mail is draft
-        type: boolean
-      isInbox:
-        description: Boolean indicating if the mail is in inbox
-        type: boolean
-      isSent:
-        description: "Boolean indicating if the mail is in 'sent mails'"
-        type: boolean
-      isStarred:
-        description: Boolean indicating if the mail is starred
-        type: boolean
-      isTrash:
-        description: Boolean indicating if the mail is in trash
-        type: boolean
-      isUnread:
-        description: Boolean indicating if the mail is unread
-        type: boolean
-      kind:
-        default: mailItem
-        description: Kind of resource this is.
-        type: string
-      labels:
-        description: List of labels (strings)
-        items:
-          type: string
-        type: array
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/admin-sdk/email-migration/v2/'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /email/v2/users
 info:
   contact:
     name: Google
@@ -55,6 +21,16 @@ info:
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: admin
+externalDocs:
+  url: 'https://developers.google.com/admin-sdk/email-migration/v2/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/email.migration': Manage email messages of users on your domain
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -128,14 +104,38 @@ paths:
             - 'https://www.googleapis.com/auth/email.migration'
       tags:
         - mail
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/email.migration': Manage email messages of users on your domain
-    type: oauth2
-swagger: '2.0'
+definitions:
+  MailItem:
+    description: JSON template for MailItem object in Email Migration API.
+    properties:
+      isDeleted:
+        description: Boolean indicating if the mail is deleted (used in Vault)
+        type: boolean
+      isDraft:
+        description: Boolean indicating if the mail is draft
+        type: boolean
+      isInbox:
+        description: Boolean indicating if the mail is in inbox
+        type: boolean
+      isSent:
+        description: "Boolean indicating if the mail is in 'sent mails'"
+        type: boolean
+      isStarred:
+        description: Boolean indicating if the mail is starred
+        type: boolean
+      isTrash:
+        description: Boolean indicating if the mail is in trash
+        type: boolean
+      isUnread:
+        description: Boolean indicating if the mail is unread
+        type: boolean
+      kind:
+        default: mailItem
+        description: Kind of resource this is.
+        type: string
+      labels:
+        description: List of labels (strings)
+        items:
+          type: string
+        type: array
+    type: object

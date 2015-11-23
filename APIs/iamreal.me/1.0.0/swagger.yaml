@@ -1,85 +1,8 @@
-basePath: /api/v2
-definitions:
-  RegisterUserRequest:
-    properties:
-      appId:
-        description: Application identifier. This never changes
-        type: string
-      appSecret:
-        description: Application Secret. This should never be shared and should be done from server only
-        type: string
-      callbackUrl:
-        description: "The URL address I Am Real will call once the end user's score is calculated"
-        type: string
-      clientProof:
-        description: A string that will be sent back with the analysis to prove that the response is sent from I Am Real servers
-        type: string
-      token:
-        description: Social network access token of the end user
-        type: string
-    required:
-      - token
-      - appId
-      - appSecret
-  SmsValidationResponse:
-    properties:
-      validated:
-        description: 'True if codes are identical, false if not'
-        type: boolean
-    required:
-      - validated
-  UserValidationResponse:
-    properties:
-      score:
-        description: User Score (0-100)
-        type: string
-      significance:
-        description: User Significance (0-100)
-        type: string
-      userId:
-        description: User Id given by provider (e.g. Facebook Id)
-        type: string
-    required:
-      - userId
-      - score
-      - significance
-  VideoValidationRequest:
-    properties:
-      appId:
-        description: Application identifier. This never changes
-        type: string
-      appSecret:
-        description: Application Secret. This should never be shared and should be done from server only
-        type: string
-      callbackUrl:
-        description: The URL address I Am Real will call with Video Validation result
-        type: string
-      clientProof:
-        description: A string that will be sent back with the validation to prove that the response is sent from I Am Real servers
-        type: string
-      photoUrl:
-        description: Url of photo to compare with live video. Link should be to an image that the user cannot modify
-        type: string
-      userId:
-        description: User Identifier (e.g. Facebook User Id or email address
-        type: string
-    required:
-      - appId
-      - appSecret
-      - userId
-      - photoUrl
-  VideoValidationResponse:
-    properties:
-      guid:
-        description: Global unique identifier (guid) to launch widget with
-        type: string
-      statusCode:
-        description: status code (201 - Created)
-        type: string
-    required:
-      - statusCode
-      - guid
+swagger: '2.0'
+schemes:
+  - http
 host: api.iamreal.me
+basePath: /api/v2
 info:
   description: "Use I Am Real's patented technology to perform social, video, and SMS validation on your users."
   title: I Am Real
@@ -91,6 +14,13 @@ info:
     url: 'https://developers.iamreal.me/swagger/spec.json'
     version: '1.2'
   x-providerName: iamreal.me
+tags:
+  - description: "Validate a user's Social Network profile"
+    name: social
+  - description: Validate users by comparing live video of user with profile picture
+    name: video
+  - description: Validate users phone number via SMS
+    name: sms
 paths:
   '/sms/check/{userId}/':
     get:
@@ -268,13 +198,83 @@ paths:
       summary: 'Setup video validation for specific user, and get global unique identifier (guid) to launch widget with'
       tags:
         - video
-schemes:
-  - http
-swagger: '2.0'
-tags:
-  - description: "Validate a user's Social Network profile"
-    name: social
-  - description: Validate users by comparing live video of user with profile picture
-    name: video
-  - description: Validate users phone number via SMS
-    name: sms
+definitions:
+  RegisterUserRequest:
+    properties:
+      appId:
+        description: Application identifier. This never changes
+        type: string
+      appSecret:
+        description: Application Secret. This should never be shared and should be done from server only
+        type: string
+      callbackUrl:
+        description: "The URL address I Am Real will call once the end user's score is calculated"
+        type: string
+      clientProof:
+        description: A string that will be sent back with the analysis to prove that the response is sent from I Am Real servers
+        type: string
+      token:
+        description: Social network access token of the end user
+        type: string
+    required:
+      - token
+      - appId
+      - appSecret
+  SmsValidationResponse:
+    properties:
+      validated:
+        description: 'True if codes are identical, false if not'
+        type: boolean
+    required:
+      - validated
+  UserValidationResponse:
+    properties:
+      score:
+        description: User Score (0-100)
+        type: string
+      significance:
+        description: User Significance (0-100)
+        type: string
+      userId:
+        description: User Id given by provider (e.g. Facebook Id)
+        type: string
+    required:
+      - userId
+      - score
+      - significance
+  VideoValidationRequest:
+    properties:
+      appId:
+        description: Application identifier. This never changes
+        type: string
+      appSecret:
+        description: Application Secret. This should never be shared and should be done from server only
+        type: string
+      callbackUrl:
+        description: The URL address I Am Real will call with Video Validation result
+        type: string
+      clientProof:
+        description: A string that will be sent back with the validation to prove that the response is sent from I Am Real servers
+        type: string
+      photoUrl:
+        description: Url of photo to compare with live video. Link should be to an image that the user cannot modify
+        type: string
+      userId:
+        description: User Identifier (e.g. Facebook User Id or email address
+        type: string
+    required:
+      - appId
+      - appSecret
+      - userId
+      - photoUrl
+  VideoValidationResponse:
+    properties:
+      guid:
+        description: Global unique identifier (guid) to launch widget with
+        type: string
+      statusCode:
+        description: status code (201 - Created)
+        type: string
+    required:
+      - statusCode
+      - guid

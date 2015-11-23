@@ -1,44 +1,8 @@
-basePath: /rest
-definitions:
-  SVSTradingAccountDTO:
-    properties:
-      country:
-        type: string
-      email:
-        type: string
-      forename:
-        type: string
-      lastName:
-        type: string
-      password:
-        type: string
-      phoneNumber:
-        type: string
-      title:
-        type: string
-  TradingAccount:
-    properties:
-      brokerServer:
-        type: string
-      magickUsername:
-        type: string
-      password:
-        type: string
-      username:
-        type: string
-  UserDTO:
-    properties:
-      email:
-        type: string
-      firstName:
-        type: string
-      lastName:
-        type: string
-      password:
-        type: string
-      username:
-        type: string
+swagger: '2.0'
+schemes:
+  - http
 host: devui.magick.nu
+basePath: /rest
 info:
   description: |-
     Authentication is required to access all methods of the API. Enter username and password.
@@ -53,6 +17,10 @@ info:
     url: 'http://devui.magick.nu/api/api-docs'
     version: '1.2'
   x-providerName: magick.nu
+tags:
+  - name: tradingAccounts
+  - name: svstradingAccounts
+  - name: users
 paths:
   /svstradingAccounts:
     post:
@@ -139,10 +107,42 @@ paths:
       summary: Check if username is available
       tags:
         - users
-schemes:
-  - http
-swagger: '2.0'
-tags:
-  - name: tradingAccounts
-  - name: svstradingAccounts
-  - name: users
+definitions:
+  SVSTradingAccountDTO:
+    properties:
+      country:
+        type: string
+      email:
+        type: string
+      forename:
+        type: string
+      lastName:
+        type: string
+      password:
+        type: string
+      phoneNumber:
+        type: string
+      title:
+        type: string
+  TradingAccount:
+    properties:
+      brokerServer:
+        type: string
+      magickUsername:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+  UserDTO:
+    properties:
+      email:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      password:
+        type: string
+      username:
+        type: string

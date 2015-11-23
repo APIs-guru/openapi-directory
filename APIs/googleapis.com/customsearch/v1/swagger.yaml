@@ -1,261 +1,8 @@
-basePath: /customsearch
-definitions:
-  Context:
-    properties:
-      facets:
-        items:
-          items:
-            properties:
-              anchor:
-                type: string
-              label:
-                type: string
-              label_with_op:
-                type: string
-            type: object
-          type: array
-        type: array
-      title:
-        type: string
-    type: object
-  Promotion:
-    properties:
-      bodyLines:
-        items:
-          properties:
-            htmlTitle:
-              type: string
-            link:
-              type: string
-            title:
-              type: string
-            url:
-              type: string
-          type: object
-        type: array
-      displayLink:
-        type: string
-      htmlTitle:
-        type: string
-      image:
-        properties:
-          height:
-            format: int32
-            type: integer
-          source:
-            type: string
-          width:
-            format: int32
-            type: integer
-        type: object
-      link:
-        type: string
-      title:
-        type: string
-    type: object
-  Query:
-    properties:
-      count:
-        format: int32
-        type: integer
-      cr:
-        type: string
-      cref:
-        type: string
-      cx:
-        type: string
-      dateRestrict:
-        type: string
-      disableCnTwTranslation:
-        type: string
-      exactTerms:
-        type: string
-      excludeTerms:
-        type: string
-      fileType:
-        type: string
-      filter:
-        type: string
-      gl:
-        type: string
-      googleHost:
-        type: string
-      highRange:
-        type: string
-      hl:
-        type: string
-      hq:
-        type: string
-      imgColorType:
-        type: string
-      imgDominantColor:
-        type: string
-      imgSize:
-        type: string
-      imgType:
-        type: string
-      inputEncoding:
-        type: string
-      language:
-        type: string
-      linkSite:
-        type: string
-      lowRange:
-        type: string
-      orTerms:
-        type: string
-      outputEncoding:
-        type: string
-      relatedSite:
-        type: string
-      rights:
-        type: string
-      safe:
-        type: string
-      searchTerms:
-        type: string
-      searchType:
-        type: string
-      siteSearch:
-        type: string
-      siteSearchFilter:
-        type: string
-      sort:
-        type: string
-      startIndex:
-        format: int32
-        type: integer
-      startPage:
-        format: int32
-        type: integer
-      title:
-        type: string
-      totalResults:
-        format: int64
-        type: string
-    type: object
-  Result:
-    properties:
-      cacheId:
-        type: string
-      displayLink:
-        type: string
-      fileFormat:
-        type: string
-      formattedUrl:
-        type: string
-      htmlFormattedUrl:
-        type: string
-      htmlSnippet:
-        type: string
-      htmlTitle:
-        type: string
-      image:
-        properties:
-          byteSize:
-            format: int32
-            type: integer
-          contextLink:
-            type: string
-          height:
-            format: int32
-            type: integer
-          thumbnailHeight:
-            format: int32
-            type: integer
-          thumbnailLink:
-            type: string
-          thumbnailWidth:
-            format: int32
-            type: integer
-          width:
-            format: int32
-            type: integer
-        type: object
-      kind:
-        default: 'customsearch#result'
-        type: string
-      labels:
-        items:
-          properties:
-            displayName:
-              type: string
-            label_with_op:
-              type: string
-            name:
-              type: string
-          type: object
-        type: array
-      link:
-        type: string
-      mime:
-        type: string
-      pagemap:
-        additionalProperties:
-          items:
-            additionalProperties: {}
-            type: object
-          type: array
-        type: object
-      snippet:
-        type: string
-      title:
-        type: string
-    type: object
-  Search:
-    properties:
-      context:
-        $ref: '#/definitions/Context'
-      items:
-        items:
-          $ref: '#/definitions/Result'
-        type: array
-      kind:
-        default: 'customsearch#search'
-        type: string
-      promotions:
-        items:
-          $ref: '#/definitions/Promotion'
-        type: array
-      queries:
-        additionalProperties:
-          items:
-            $ref: '#/definitions/Query'
-          type: array
-        type: object
-      searchInformation:
-        properties:
-          formattedSearchTime:
-            type: string
-          formattedTotalResults:
-            type: string
-          searchTime:
-            format: double
-            type: number
-          totalResults:
-            format: int64
-            type: string
-        type: object
-      spelling:
-        properties:
-          correctedQuery:
-            type: string
-          htmlCorrectedQuery:
-            type: string
-        type: object
-      url:
-        properties:
-          template:
-            default: 'https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&cref={cref?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json'
-            type: string
-          type:
-            default: application/json
-            type: string
-        type: object
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/custom-search/v1/using_rest'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /customsearch
 info:
   contact:
     name: Google
@@ -274,6 +21,8 @@ info:
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: customsearch
+externalDocs:
+  url: 'https://developers.google.com/custom-search/v1/using_rest'
 parameters:
   alt:
     default: json
@@ -544,6 +293,257 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-schemes:
-  - https
-swagger: '2.0'
+definitions:
+  Context:
+    properties:
+      facets:
+        items:
+          items:
+            properties:
+              anchor:
+                type: string
+              label:
+                type: string
+              label_with_op:
+                type: string
+            type: object
+          type: array
+        type: array
+      title:
+        type: string
+    type: object
+  Promotion:
+    properties:
+      bodyLines:
+        items:
+          properties:
+            htmlTitle:
+              type: string
+            link:
+              type: string
+            title:
+              type: string
+            url:
+              type: string
+          type: object
+        type: array
+      displayLink:
+        type: string
+      htmlTitle:
+        type: string
+      image:
+        properties:
+          height:
+            format: int32
+            type: integer
+          source:
+            type: string
+          width:
+            format: int32
+            type: integer
+        type: object
+      link:
+        type: string
+      title:
+        type: string
+    type: object
+  Query:
+    properties:
+      count:
+        format: int32
+        type: integer
+      cr:
+        type: string
+      cref:
+        type: string
+      cx:
+        type: string
+      dateRestrict:
+        type: string
+      disableCnTwTranslation:
+        type: string
+      exactTerms:
+        type: string
+      excludeTerms:
+        type: string
+      fileType:
+        type: string
+      filter:
+        type: string
+      gl:
+        type: string
+      googleHost:
+        type: string
+      highRange:
+        type: string
+      hl:
+        type: string
+      hq:
+        type: string
+      imgColorType:
+        type: string
+      imgDominantColor:
+        type: string
+      imgSize:
+        type: string
+      imgType:
+        type: string
+      inputEncoding:
+        type: string
+      language:
+        type: string
+      linkSite:
+        type: string
+      lowRange:
+        type: string
+      orTerms:
+        type: string
+      outputEncoding:
+        type: string
+      relatedSite:
+        type: string
+      rights:
+        type: string
+      safe:
+        type: string
+      searchTerms:
+        type: string
+      searchType:
+        type: string
+      siteSearch:
+        type: string
+      siteSearchFilter:
+        type: string
+      sort:
+        type: string
+      startIndex:
+        format: int32
+        type: integer
+      startPage:
+        format: int32
+        type: integer
+      title:
+        type: string
+      totalResults:
+        format: int64
+        type: string
+    type: object
+  Result:
+    properties:
+      cacheId:
+        type: string
+      displayLink:
+        type: string
+      fileFormat:
+        type: string
+      formattedUrl:
+        type: string
+      htmlFormattedUrl:
+        type: string
+      htmlSnippet:
+        type: string
+      htmlTitle:
+        type: string
+      image:
+        properties:
+          byteSize:
+            format: int32
+            type: integer
+          contextLink:
+            type: string
+          height:
+            format: int32
+            type: integer
+          thumbnailHeight:
+            format: int32
+            type: integer
+          thumbnailLink:
+            type: string
+          thumbnailWidth:
+            format: int32
+            type: integer
+          width:
+            format: int32
+            type: integer
+        type: object
+      kind:
+        default: 'customsearch#result'
+        type: string
+      labels:
+        items:
+          properties:
+            displayName:
+              type: string
+            label_with_op:
+              type: string
+            name:
+              type: string
+          type: object
+        type: array
+      link:
+        type: string
+      mime:
+        type: string
+      pagemap:
+        additionalProperties:
+          items:
+            additionalProperties: {}
+            type: object
+          type: array
+        type: object
+      snippet:
+        type: string
+      title:
+        type: string
+    type: object
+  Search:
+    properties:
+      context:
+        $ref: '#/definitions/Context'
+      items:
+        items:
+          $ref: '#/definitions/Result'
+        type: array
+      kind:
+        default: 'customsearch#search'
+        type: string
+      promotions:
+        items:
+          $ref: '#/definitions/Promotion'
+        type: array
+      queries:
+        additionalProperties:
+          items:
+            $ref: '#/definitions/Query'
+          type: array
+        type: object
+      searchInformation:
+        properties:
+          formattedSearchTime:
+            type: string
+          formattedTotalResults:
+            type: string
+          searchTime:
+            format: double
+            type: number
+          totalResults:
+            format: int64
+            type: string
+        type: object
+      spelling:
+        properties:
+          correctedQuery:
+            type: string
+          htmlCorrectedQuery:
+            type: string
+        type: object
+      url:
+        properties:
+          template:
+            default: 'https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&cref={cref?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json'
+            type: string
+          type:
+            default: application/json
+            type: string
+        type: object
+    type: object

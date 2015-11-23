@@ -1,5 +1,8 @@
-basePath: /
+swagger: '2.0'
+schemes:
+  - http
 host: moonmoonmoonmoon.com
+basePath: /
 info:
   description: 'Turn nothing into something – make a drawing, make a mark.'
   title: 'Moon by Ai Weiwei & Olafur Eliasson'
@@ -12,6 +15,9 @@ info:
     url: 'http://moonmoonmoonmoon.com/api/api-docs.json'
     version: '1.2'
   x-providerName: moonmoonmoonmoon.com
+tags:
+  - description: Moon data
+    name: marks
 paths:
   /api/hashtags:
     get:
@@ -105,9 +111,3 @@ paths:
       summary: Fetches marks
       tags:
         - marks
-schemes:
-  - http
-swagger: '2.0'
-tags:
-  - description: Moon data
-    name: marks

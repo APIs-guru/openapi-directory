@@ -1,19 +1,8 @@
-basePath: /groups/v1/groups
-definitions:
-  Groups:
-    description: JSON response template for groups migration API.
-    properties:
-      kind:
-        default: 'groupsmigration#groups'
-        description: The kind of insert resource this is.
-        type: string
-      responseCode:
-        description: The status of the insert request.
-        type: string
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/google-apps/groups-migration/'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /groups/v1/groups
 info:
   contact:
     name: Google
@@ -32,6 +21,16 @@ info:
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: groupsmigration
+externalDocs:
+  url: 'https://developers.google.com/google-apps/groups-migration/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/apps.groups.migration': Manage messages in groups on your domain
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -103,14 +102,15 @@ paths:
             - 'https://www.googleapis.com/auth/apps.groups.migration'
       tags:
         - archive
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/apps.groups.migration': Manage messages in groups on your domain
-    type: oauth2
-swagger: '2.0'
+definitions:
+  Groups:
+    description: JSON response template for groups migration API.
+    properties:
+      kind:
+        default: 'groupsmigration#groups'
+        description: The kind of insert resource this is.
+        type: string
+      responseCode:
+        description: The status of the insert request.
+        type: string
+    type: object

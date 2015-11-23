@@ -1,121 +1,8 @@
-basePath: /drive/v1
-definitions:
-  File:
-    description: The metadata for a file.
-    properties:
-      createdDate:
-        description: Create time for this file (formatted RFC 3339 timestamp).
-        format: date-time
-        type: string
-      description:
-        description: A short description of the file
-        type: string
-      downloadUrl:
-        type: string
-      etag:
-        description: ETag of the file.
-        type: string
-      fileExtension:
-        description: 'The file extension used when downloading this file. This field is read only. To set the extension, include it on title when creating the file. This will only be populated on files with content stored in Drive.'
-        type: string
-      fileSize:
-        description: The size of the file in bytes. This will only be populated on files with content stored in Drive.
-        format: int64
-        type: string
-      id:
-        description: The id of the file.
-        type: string
-      indexableText:
-        description: Indexable text attributes for the file (can only be written)
-        properties:
-          text:
-            description: The text to be indexed for this file
-            type: string
-        type: object
-      kind:
-        default: 'drive#file'
-        description: 'The type of file. This is always drive#file'
-        type: string
-      labels:
-        description: Labels for the file.
-        properties:
-          hidden:
-            description: Whether this file is hidden from the user
-            type: boolean
-          starred:
-            description: Whether this file is starred by the user.
-            type: boolean
-          trashed:
-            description: Whether this file has been trashed.
-            type: boolean
-        type: object
-      lastViewedDate:
-        description: Last time this file was viewed by the user (formatted RFC 3339 timestamp).
-        format: date-time
-        type: string
-      md5Checksum:
-        description: An MD5 checksum for the content of this file. This will only be populated on files with content stored in Drive.
-        type: string
-      mimeType:
-        description: The mimetype of the file
-        type: string
-      modifiedByMeDate:
-        description: Last time this file was modified by the user (formatted RFC 3339 timestamp).
-        format: date-time
-        type: string
-      modifiedDate:
-        description: Last time this file was modified by anyone (formatted RFC 3339 timestamp).
-        format: date-time
-        type: string
-      parentsCollection:
-        description: |-
-          Collection of parent folders which contain this file.
-          On insert, setting this field will put the file in all of the provided folders. If no folders are provided, the file will be placed in the default root folder. On update, this field is ignored.
-        items:
-          properties:
-            id:
-              description: The id of this parent
-              type: string
-            parentLink:
-              description: A link to get the metadata for this parent
-              type: string
-          type: object
-        type: array
-      selfLink:
-        description: A link back to this file.
-        type: string
-      title:
-        description: The title of this file.
-        type: string
-      userPermission:
-        $ref: '#/definitions/Permission'
-        description: The permissions for the authenticated user on this file.
-    type: object
-  Permission:
-    description: A single permission for a file.
-    properties:
-      additionalRoles:
-        description: Any additional roles that this permission describes.
-        items:
-          type: string
-        type: array
-      etag:
-        description: An etag for this permission.
-        type: string
-      kind:
-        default: 'drive#permission'
-        description: 'The kind of this permission. This is always drive#permission'
-        type: string
-      role:
-        description: 'The role that this permission describes. (For example: reader, writer, owner)'
-        type: string
-      type:
-        description: 'The type of permission (For example: user, group etc).'
-        type: string
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/drive/'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /drive/v1
 info:
   contact:
     name: Google
@@ -134,6 +21,16 @@ info:
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: drive
+externalDocs:
+  url: 'https://developers.google.com/drive/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/drive.file': View and manage Google Drive files and folders that you have opened or created with this app
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -322,14 +219,117 @@ paths:
             - 'https://www.googleapis.com/auth/drive.file'
       tags:
         - files
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/drive.file': View and manage Google Drive files and folders that you have opened or created with this app
-    type: oauth2
-swagger: '2.0'
+definitions:
+  File:
+    description: The metadata for a file.
+    properties:
+      createdDate:
+        description: Create time for this file (formatted RFC 3339 timestamp).
+        format: date-time
+        type: string
+      description:
+        description: A short description of the file
+        type: string
+      downloadUrl:
+        type: string
+      etag:
+        description: ETag of the file.
+        type: string
+      fileExtension:
+        description: 'The file extension used when downloading this file. This field is read only. To set the extension, include it on title when creating the file. This will only be populated on files with content stored in Drive.'
+        type: string
+      fileSize:
+        description: The size of the file in bytes. This will only be populated on files with content stored in Drive.
+        format: int64
+        type: string
+      id:
+        description: The id of the file.
+        type: string
+      indexableText:
+        description: Indexable text attributes for the file (can only be written)
+        properties:
+          text:
+            description: The text to be indexed for this file
+            type: string
+        type: object
+      kind:
+        default: 'drive#file'
+        description: 'The type of file. This is always drive#file'
+        type: string
+      labels:
+        description: Labels for the file.
+        properties:
+          hidden:
+            description: Whether this file is hidden from the user
+            type: boolean
+          starred:
+            description: Whether this file is starred by the user.
+            type: boolean
+          trashed:
+            description: Whether this file has been trashed.
+            type: boolean
+        type: object
+      lastViewedDate:
+        description: Last time this file was viewed by the user (formatted RFC 3339 timestamp).
+        format: date-time
+        type: string
+      md5Checksum:
+        description: An MD5 checksum for the content of this file. This will only be populated on files with content stored in Drive.
+        type: string
+      mimeType:
+        description: The mimetype of the file
+        type: string
+      modifiedByMeDate:
+        description: Last time this file was modified by the user (formatted RFC 3339 timestamp).
+        format: date-time
+        type: string
+      modifiedDate:
+        description: Last time this file was modified by anyone (formatted RFC 3339 timestamp).
+        format: date-time
+        type: string
+      parentsCollection:
+        description: |-
+          Collection of parent folders which contain this file.
+          On insert, setting this field will put the file in all of the provided folders. If no folders are provided, the file will be placed in the default root folder. On update, this field is ignored.
+        items:
+          properties:
+            id:
+              description: The id of this parent
+              type: string
+            parentLink:
+              description: A link to get the metadata for this parent
+              type: string
+          type: object
+        type: array
+      selfLink:
+        description: A link back to this file.
+        type: string
+      title:
+        description: The title of this file.
+        type: string
+      userPermission:
+        $ref: '#/definitions/Permission'
+        description: The permissions for the authenticated user on this file.
+    type: object
+  Permission:
+    description: A single permission for a file.
+    properties:
+      additionalRoles:
+        description: Any additional roles that this permission describes.
+        items:
+          type: string
+        type: array
+      etag:
+        description: An etag for this permission.
+        type: string
+      kind:
+        default: 'drive#permission'
+        description: 'The kind of this permission. This is always drive#permission'
+        type: string
+      role:
+        description: 'The role that this permission describes. (For example: reader, writer, owner)'
+        type: string
+      type:
+        description: 'The type of permission (For example: user, group etc).'
+        type: string
+    type: object

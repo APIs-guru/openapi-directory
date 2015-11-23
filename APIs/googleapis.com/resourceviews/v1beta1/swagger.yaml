@@ -1,156 +1,8 @@
-basePath: /resourceviews/v1beta1/projects
-definitions:
-  Label:
-    description: The Label to be applied to the resource views.
-    properties:
-      key:
-        description: Key of the label.
-        type: string
-      value:
-        description: Value of the label.
-        type: string
-    type: object
-  RegionViewsAddResourcesRequest:
-    description: The request to add resources to the resource view.
-    properties:
-      resources:
-        description: The list of resources to be added.
-        items:
-          type: string
-        type: array
-    type: object
-  RegionViewsInsertResponse:
-    description: The response to a resource view insert request.
-    properties:
-      resource:
-        $ref: '#/definitions/ResourceView'
-        description: The resource view object inserted.
-    type: object
-  RegionViewsListResourcesResponse:
-    description: The response to the list resource request.
-    properties:
-      members:
-        description: The resources in the view.
-        items:
-          type: string
-        type: array
-      nextPageToken:
-        description: A token used for pagination.
-        type: string
-    type: object
-  RegionViewsListResponse:
-    description: The response to the list resource view request.
-    properties:
-      nextPageToken:
-        description: A token used for pagination.
-        type: string
-      resourceViews:
-        description: The list of resource views that meet the criteria.
-        items:
-          $ref: '#/definitions/ResourceView'
-        type: array
-    type: object
-  RegionViewsRemoveResourcesRequest:
-    description: The request to remove resources from the resource view.
-    properties:
-      resources:
-        description: The list of resources to be removed.
-        items:
-          type: string
-        type: array
-    type: object
-  ResourceView:
-    description: The resource view object.
-    properties:
-      creationTime:
-        description: The creation time of the resource view.
-        type: string
-      description:
-        description: The detailed description of the resource view.
-        type: string
-      id:
-        description: '[Output Only] The ID of the resource view.'
-        type: string
-      kind:
-        default: 'resourceviews#resourceView'
-        description: Type of the resource.
-        type: string
-      labels:
-        description: The labels for events.
-        items:
-          $ref: '#/definitions/Label'
-        type: array
-      lastModified:
-        description: The last modified time of the view. Not supported yet.
-        type: string
-      members:
-        description: A list of all resources in the resource view.
-        items:
-          type: string
-        type: array
-      name:
-        description: The name of the resource view.
-        type: string
-      numMembers:
-        description: The total number of resources in the resource view.
-        format: uint32
-        type: integer
-      selfLink:
-        description: '[Output Only] A self-link to the resource view.'
-        type: string
-    type: object
-  ZoneViewsAddResourcesRequest:
-    description: The request to add resources to the resource view.
-    properties:
-      resources:
-        description: The list of resources to be added.
-        items:
-          type: string
-        type: array
-    type: object
-  ZoneViewsInsertResponse:
-    description: The response to an insert request.
-    properties:
-      resource:
-        $ref: '#/definitions/ResourceView'
-        description: The resource view object that has been inserted.
-    type: object
-  ZoneViewsListResourcesResponse:
-    description: The response to a list resource request.
-    properties:
-      members:
-        description: The full URL of resources in the view.
-        items:
-          type: string
-        type: array
-      nextPageToken:
-        description: A token used for pagination.
-        type: string
-    type: object
-  ZoneViewsListResponse:
-    description: The response to a list request.
-    properties:
-      nextPageToken:
-        description: A token used for pagination.
-        type: string
-      resourceViews:
-        description: The result that contains all resource views that meet the criteria.
-        items:
-          $ref: '#/definitions/ResourceView'
-        type: array
-    type: object
-  ZoneViewsRemoveResourcesRequest:
-    description: The request to remove resources from the resource view.
-    properties:
-      resources:
-        description: The list of resources to be removed.
-        items:
-          type: string
-        type: array
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/compute/'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /resourceviews/v1beta1/projects
 info:
   contact:
     name: Google
@@ -169,6 +21,21 @@ info:
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: resourceviews
+externalDocs:
+  url: 'https://developers.google.com/compute/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/compute': View and manage your Google Compute Engine resources
+      'https://www.googleapis.com/auth/compute.readonly': View your Google Compute Engine resources
+      'https://www.googleapis.com/auth/ndev.cloudman': View and manage your Google Cloud Platform management resources and deployment status information
+      'https://www.googleapis.com/auth/ndev.cloudman.readonly': View your Google Cloud Platform management resources and deployment status information
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -788,19 +655,152 @@ paths:
             - 'https://www.googleapis.com/auth/ndev.cloudman.readonly'
       tags:
         - zoneViews
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/compute': View and manage your Google Compute Engine resources
-      'https://www.googleapis.com/auth/compute.readonly': View your Google Compute Engine resources
-      'https://www.googleapis.com/auth/ndev.cloudman': View and manage your Google Cloud Platform management resources and deployment status information
-      'https://www.googleapis.com/auth/ndev.cloudman.readonly': View your Google Cloud Platform management resources and deployment status information
-    type: oauth2
-swagger: '2.0'
+definitions:
+  Label:
+    description: The Label to be applied to the resource views.
+    properties:
+      key:
+        description: Key of the label.
+        type: string
+      value:
+        description: Value of the label.
+        type: string
+    type: object
+  RegionViewsAddResourcesRequest:
+    description: The request to add resources to the resource view.
+    properties:
+      resources:
+        description: The list of resources to be added.
+        items:
+          type: string
+        type: array
+    type: object
+  RegionViewsInsertResponse:
+    description: The response to a resource view insert request.
+    properties:
+      resource:
+        $ref: '#/definitions/ResourceView'
+        description: The resource view object inserted.
+    type: object
+  RegionViewsListResourcesResponse:
+    description: The response to the list resource request.
+    properties:
+      members:
+        description: The resources in the view.
+        items:
+          type: string
+        type: array
+      nextPageToken:
+        description: A token used for pagination.
+        type: string
+    type: object
+  RegionViewsListResponse:
+    description: The response to the list resource view request.
+    properties:
+      nextPageToken:
+        description: A token used for pagination.
+        type: string
+      resourceViews:
+        description: The list of resource views that meet the criteria.
+        items:
+          $ref: '#/definitions/ResourceView'
+        type: array
+    type: object
+  RegionViewsRemoveResourcesRequest:
+    description: The request to remove resources from the resource view.
+    properties:
+      resources:
+        description: The list of resources to be removed.
+        items:
+          type: string
+        type: array
+    type: object
+  ResourceView:
+    description: The resource view object.
+    properties:
+      creationTime:
+        description: The creation time of the resource view.
+        type: string
+      description:
+        description: The detailed description of the resource view.
+        type: string
+      id:
+        description: '[Output Only] The ID of the resource view.'
+        type: string
+      kind:
+        default: 'resourceviews#resourceView'
+        description: Type of the resource.
+        type: string
+      labels:
+        description: The labels for events.
+        items:
+          $ref: '#/definitions/Label'
+        type: array
+      lastModified:
+        description: The last modified time of the view. Not supported yet.
+        type: string
+      members:
+        description: A list of all resources in the resource view.
+        items:
+          type: string
+        type: array
+      name:
+        description: The name of the resource view.
+        type: string
+      numMembers:
+        description: The total number of resources in the resource view.
+        format: uint32
+        type: integer
+      selfLink:
+        description: '[Output Only] A self-link to the resource view.'
+        type: string
+    type: object
+  ZoneViewsAddResourcesRequest:
+    description: The request to add resources to the resource view.
+    properties:
+      resources:
+        description: The list of resources to be added.
+        items:
+          type: string
+        type: array
+    type: object
+  ZoneViewsInsertResponse:
+    description: The response to an insert request.
+    properties:
+      resource:
+        $ref: '#/definitions/ResourceView'
+        description: The resource view object that has been inserted.
+    type: object
+  ZoneViewsListResourcesResponse:
+    description: The response to a list resource request.
+    properties:
+      members:
+        description: The full URL of resources in the view.
+        items:
+          type: string
+        type: array
+      nextPageToken:
+        description: A token used for pagination.
+        type: string
+    type: object
+  ZoneViewsListResponse:
+    description: The response to a list request.
+    properties:
+      nextPageToken:
+        description: A token used for pagination.
+        type: string
+      resourceViews:
+        description: The result that contains all resource views that meet the criteria.
+        items:
+          $ref: '#/definitions/ResourceView'
+        type: array
+    type: object
+  ZoneViewsRemoveResourcesRequest:
+    description: The request to remove resources from the resource view.
+    properties:
+      resources:
+        description: The list of resources to be removed.
+        items:
+          type: string
+        type: array
+    type: object

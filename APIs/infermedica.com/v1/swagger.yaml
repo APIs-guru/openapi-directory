@@ -1,4 +1,220 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.infermedica.com
 basePath: /
+info:
+  description: Empower your healthcare services with intelligent diagnostic insights of Infermedica API.
+  title: Infermedica API
+  version: v1
+  x-logo:
+    backgroundColor: '#1576D1'
+    url: 'https://developer.infermedica.com/images/sprites/infermedica-logo.png'
+  x-origin:
+    format: swagger
+    url: 'https://api.infermedica.com/swagger.json'
+    version: '2.0'
+  x-providerName: infermedica.com
+tags:
+  - name: risk_factors
+  - name: info
+  - name: diagnosis
+  - name: observations
+  - name: conditions
+  - name: lookup
+paths:
+  /v1/conditions:
+    get:
+      description: Returns a list of all available conditions.
+      operationId: getAllConditions
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            items:
+              $ref: '#/definitions/Condition'
+            type: array
+      summary: List all conditions
+      tags:
+        - conditions
+  '/v1/conditions/{id}':
+    get:
+      description: Returns details of a single condition specified by id parameter.
+      operationId: getCondition
+      parameters:
+        - description: condition id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Condition'
+        '400':
+          description: Invalid id specified
+        '404':
+          description: Condition not found
+      summary: Get condition by id
+      tags:
+        - conditions
+  /v1/diagnosis:
+    post:
+      consumes:
+        - application/json
+      description: Computes possible diagnoses and relevant observations based on provided patient information.
+      operationId: computeDiagnosis
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/DiagnosisRequest'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/DiagnosisResponse'
+      summary: Query diagnostic engine
+      tags:
+        - diagnosis
+  /v1/info:
+    get:
+      description: Returns information about data used by diagnostic engine.
+      operationId: getDatabaseInfo
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/DatabaseInfo'
+      summary: Get database information
+      tags:
+        - info
+  /v1/lookup:
+    get:
+      description: Returns details of a single observation if matched by the given phrase.
+      operationId: getMatchingObservation
+      parameters:
+        - description: phrase to match
+          in: query
+          name: phrase
+          required: true
+          type: string
+        - description: sex filter
+          enum:
+            - female
+            - male
+          in: query
+          name: sex
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Observation'
+        '400':
+          description: Phrase missing or invalid sex specified
+        '404':
+          description: No observation matches given phrase
+      summary: Find observation matching given phrase
+      tags:
+        - lookup
+  /v1/observations:
+    get:
+      description: Returns a list of all available observations.
+      operationId: getAllObservations
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            items:
+              $ref: '#/definitions/Observation'
+            type: array
+      summary: List all observations
+      tags:
+        - observations
+  '/v1/observations/{id}':
+    get:
+      description: Returns details of a single observation specified by id parameter.
+      operationId: getObservation
+      parameters:
+        - description: observation id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Observation'
+        '400':
+          description: Invalid id specified
+        '404':
+          description: Observation not found
+      summary: Get observation by id
+      tags:
+        - observations
+  /v1/risk_factors:
+    get:
+      description: Returns a list of all available risk factors.
+      operationId: getAllRiskFactors
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            items:
+              $ref: '#/definitions/RiskFactor'
+            type: array
+      summary: List all risk factors
+      tags:
+        - risk_factors
+  '/v1/risk_factors/{id}':
+    get:
+      description: Returns details of a single risk factor specified by id parameter.
+      operationId: getRiskFactor
+      parameters:
+        - description: risk factor id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/RiskFactor'
+        '400':
+          description: Invalid id specified
+        '404':
+          description: Risk factor not found
+      summary: Get risk factor by id
+      tags:
+        - risk_factors
 definitions:
   Choice:
     properties:
@@ -238,219 +454,3 @@ definitions:
       - id
       - name
     type: object
-host: api.infermedica.com
-info:
-  description: Empower your healthcare services with intelligent diagnostic insights of Infermedica API.
-  title: Infermedica API
-  version: v1
-  x-logo:
-    backgroundColor: '#1576D1'
-    url: 'https://developer.infermedica.com/images/sprites/infermedica-logo.png'
-  x-origin:
-    format: swagger
-    url: 'https://api.infermedica.com/swagger.json'
-    version: '2.0'
-  x-providerName: infermedica.com
-paths:
-  /v1/conditions:
-    get:
-      description: Returns a list of all available conditions.
-      operationId: getAllConditions
-      parameters: []
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: successful operation
-          schema:
-            items:
-              $ref: '#/definitions/Condition'
-            type: array
-      summary: List all conditions
-      tags:
-        - conditions
-  '/v1/conditions/{id}':
-    get:
-      description: Returns details of a single condition specified by id parameter.
-      operationId: getCondition
-      parameters:
-        - description: condition id
-          in: path
-          name: id
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: successful operation
-          schema:
-            $ref: '#/definitions/Condition'
-        '400':
-          description: Invalid id specified
-        '404':
-          description: Condition not found
-      summary: Get condition by id
-      tags:
-        - conditions
-  /v1/diagnosis:
-    post:
-      consumes:
-        - application/json
-      description: Computes possible diagnoses and relevant observations based on provided patient information.
-      operationId: computeDiagnosis
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/DiagnosisRequest'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: successful operation
-          schema:
-            $ref: '#/definitions/DiagnosisResponse'
-      summary: Query diagnostic engine
-      tags:
-        - diagnosis
-  /v1/info:
-    get:
-      description: Returns information about data used by diagnostic engine.
-      operationId: getDatabaseInfo
-      parameters: []
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: successful operation
-          schema:
-            $ref: '#/definitions/DatabaseInfo'
-      summary: Get database information
-      tags:
-        - info
-  /v1/lookup:
-    get:
-      description: Returns details of a single observation if matched by the given phrase.
-      operationId: getMatchingObservation
-      parameters:
-        - description: phrase to match
-          in: query
-          name: phrase
-          required: true
-          type: string
-        - description: sex filter
-          enum:
-            - female
-            - male
-          in: query
-          name: sex
-          required: false
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: successful operation
-          schema:
-            $ref: '#/definitions/Observation'
-        '400':
-          description: Phrase missing or invalid sex specified
-        '404':
-          description: No observation matches given phrase
-      summary: Find observation matching given phrase
-      tags:
-        - lookup
-  /v1/observations:
-    get:
-      description: Returns a list of all available observations.
-      operationId: getAllObservations
-      parameters: []
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: successful operation
-          schema:
-            items:
-              $ref: '#/definitions/Observation'
-            type: array
-      summary: List all observations
-      tags:
-        - observations
-  '/v1/observations/{id}':
-    get:
-      description: Returns details of a single observation specified by id parameter.
-      operationId: getObservation
-      parameters:
-        - description: observation id
-          in: path
-          name: id
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: successful operation
-          schema:
-            $ref: '#/definitions/Observation'
-        '400':
-          description: Invalid id specified
-        '404':
-          description: Observation not found
-      summary: Get observation by id
-      tags:
-        - observations
-  /v1/risk_factors:
-    get:
-      description: Returns a list of all available risk factors.
-      operationId: getAllRiskFactors
-      parameters: []
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: successful operation
-          schema:
-            items:
-              $ref: '#/definitions/RiskFactor'
-            type: array
-      summary: List all risk factors
-      tags:
-        - risk_factors
-  '/v1/risk_factors/{id}':
-    get:
-      description: Returns details of a single risk factor specified by id parameter.
-      operationId: getRiskFactor
-      parameters:
-        - description: risk factor id
-          in: path
-          name: id
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: successful operation
-          schema:
-            $ref: '#/definitions/RiskFactor'
-        '400':
-          description: Invalid id specified
-        '404':
-          description: Risk factor not found
-      summary: Get risk factor by id
-      tags:
-        - risk_factors
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - name: risk_factors
-  - name: info
-  - name: diagnosis
-  - name: observations
-  - name: conditions
-  - name: lookup

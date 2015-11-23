@@ -1,388 +1,8 @@
-basePath: /clouduseraccounts/vm_beta/projects
-definitions:
-  AuthorizedKeysView:
-    description: A list of authorized public keys for a user account.
-    properties:
-      keys:
-        description: '[Output Only] The list of authorized public keys in SSH format.'
-        items:
-          type: string
-        type: array
-      sudoer:
-        description: '[Output Only] Whether the user has the ability to elevate on the instance that requested the authorized keys.'
-        type: boolean
-    type: object
-  Group:
-    description: A Group resource.
-    properties:
-      creationTimestamp:
-        description: '[Output Only] Creation timestamp in RFC3339 text format.'
-        type: string
-      description:
-        description: An optional textual description of the resource; provided by the client when the resource is created.
-        type: string
-      id:
-        description: '[Output Only] Unique identifier for the resource; defined by the server.'
-        format: uint64
-        type: string
-      kind:
-        default: 'clouduseraccounts#group'
-        description: '[Output Only] Type of the resource. Always clouduseraccounts#group for groups.'
-        type: string
-      members:
-        description: '[Output Only] A list of URLs to User resources who belong to the group. Users may only be members of groups in the same project.'
-        items:
-          type: string
-        type: array
-      name:
-        description: Name of the resource; provided by the client when the resource is created.
-        pattern: '[a-z][-a-z0-9_]{0,31}'
-        type: string
-      selfLink:
-        description: '[Output Only] Server defined URL for the resource.'
-        type: string
-    type: object
-  GroupList:
-    properties:
-      id:
-        description: '[Output Only] Unique identifier for the resource; defined by the server.'
-        type: string
-      items:
-        description: '[Output Only] A list of Group resources.'
-        items:
-          $ref: '#/definitions/Group'
-        type: array
-      kind:
-        default: 'clouduseraccounts#groupList'
-        description: '[Output Only] Type of resource. Always clouduseraccounts#groupList for lists of groups.'
-        type: string
-      nextPageToken:
-        description: '[Output Only] A token used to continue a truncated list request.'
-        type: string
-      selfLink:
-        description: '[Output Only] Server defined URL for this resource.'
-        type: string
-    type: object
-  GroupsAddMemberRequest:
-    properties:
-      users:
-        description: Fully-qualified URLs of the User resources to add.
-        items:
-          type: string
-        type: array
-    type: object
-  GroupsRemoveMemberRequest:
-    properties:
-      users:
-        description: Fully-qualified URLs of the User resources to remove.
-        items:
-          type: string
-        type: array
-    type: object
-  LinuxAccountViews:
-    description: A list of all Linux accounts for this project. This API is only used by Compute Engine virtual machines to get information about user accounts for a project or instance. Linux resources are read-only views into users and groups managed by the Compute Engine Accounts API.
-    properties:
-      groupViews:
-        description: '[Output Only] A list of all groups within a project.'
-        items:
-          $ref: '#/definitions/LinuxGroupView'
-        type: array
-      kind:
-        default: 'clouduseraccounts#linuxAccountViews'
-        description: '[Output Only] Type of the resource. Always clouduseraccounts#linuxAccountViews for Linux resources.'
-        type: string
-      userViews:
-        description: '[Output Only] A list of all users within a project.'
-        items:
-          $ref: '#/definitions/LinuxUserView'
-        type: array
-    type: object
-  LinuxGetAuthorizedKeysViewResponse:
-    properties:
-      resource:
-        $ref: '#/definitions/AuthorizedKeysView'
-        description: '[Output Only] A list of authorized public keys for a user.'
-    type: object
-  LinuxGetLinuxAccountViewsResponse:
-    properties:
-      resource:
-        $ref: '#/definitions/LinuxAccountViews'
-        description: '[Output Only] A list of authorized user accounts and groups.'
-    type: object
-  LinuxGroupView:
-    description: A detailed view of a Linux group.
-    properties:
-      gid:
-        description: '[Output Only] The Group ID.'
-        format: uint32
-        type: integer
-      groupName:
-        description: '[Output Only] Group name.'
-        type: string
-      members:
-        description: '[Output Only] List of user accounts that belong to the group.'
-        items:
-          type: string
-        type: array
-    type: object
-  LinuxUserView:
-    description: A detailed view of a Linux user account.
-    properties:
-      gecos:
-        description: '[Output Only] The GECOS (user information) entry for this account.'
-        type: string
-      gid:
-        description: "[Output Only] User's default group ID."
-        format: uint32
-        type: integer
-      homeDirectory:
-        description: '[Output Only] The path to the home directory for this account.'
-        type: string
-      shell:
-        description: '[Output Only] The path to the login shell for this account.'
-        type: string
-      uid:
-        description: '[Output Only] User ID.'
-        format: uint32
-        type: integer
-      username:
-        description: '[Output Only] The username of the account.'
-        type: string
-    type: object
-  Operation:
-    description: 'An Operation resource, used to manage asynchronous API requests.'
-    properties:
-      clientOperationId:
-        description: '[Output Only] An optional identifier specified by the client when the mutation was initiated. Must be unique for all Operation resources in the project.'
-        type: string
-      creationTimestamp:
-        description: '[Output Only] Creation timestamp in RFC3339 text format.'
-        type: string
-      endTime:
-        description: '[Output Only] The time that this operation was completed. This is in RFC3339 text format.'
-        type: string
-      error:
-        description: '[Output Only] If errors are generated during processing of the operation, this field will be populated.'
-        properties:
-          errors:
-            description: '[Output Only] The array of errors encountered while processing this operation.'
-            items:
-              properties:
-                code:
-                  description: '[Output Only] The error type identifier for this error.'
-                  type: string
-                location:
-                  description: '[Output Only] Indicates the field in the request which caused the error. This property is optional.'
-                  type: string
-                message:
-                  description: '[Output Only] An optional, human-readable error message.'
-                  type: string
-              type: object
-            type: array
-        type: object
-      httpErrorMessage:
-        description: '[Output Only] If the operation fails, this field contains the HTTP error message that was returned, such as NOT FOUND.'
-        type: string
-      httpErrorStatusCode:
-        description: '[Output Only] If the operation fails, this field contains the HTTP error message that was returned, such as 404.'
-        format: int32
-        type: integer
-      id:
-        description: '[Output Only] Unique identifier for the resource; defined by the server.'
-        format: uint64
-        type: string
-      insertTime:
-        description: '[Output Only] The time that this operation was requested. This is in RFC3339 text format.'
-        type: string
-      kind:
-        default: 'clouduseraccounts#operation'
-        description: '[Output Only] Type of the resource. Always compute#operation for Operation resources.'
-        type: string
-      name:
-        description: '[Output Only] Name of the resource.'
-        type: string
-      operationType:
-        description: '[Output Only] Type of the operation, such as insert, compute.instanceGroups.update, or compute.instanceGroups.delete.'
-        type: string
-      progress:
-        description: '[Output Only] An optional progress indicator that ranges from 0 to 100. There is no requirement that this be linear or support any granularity of operations. This should not be used to guess at when the operation will be complete. This number should monotonically increase as the operation progresses.'
-        format: int32
-        type: integer
-      region:
-        description: '[Output Only] URL of the region where the operation resides. Only applicable for regional resources.'
-        type: string
-      selfLink:
-        description: '[Output Only] Server-defined URL for the resource.'
-        type: string
-      startTime:
-        description: '[Output Only] The time that this operation was started by the server. This is in RFC3339 text format.'
-        type: string
-      status:
-        description: '[Output Only] Status of the operation. Can be one of the following: PENDING, RUNNING, or DONE.'
-        enum:
-          - DONE
-          - PENDING
-          - RUNNING
-        type: string
-      statusMessage:
-        description: '[Output Only] An optional textual description of the current status of the operation.'
-        type: string
-      targetId:
-        description: '[Output Only] Unique target ID which identifies a particular incarnation of the target.'
-        format: uint64
-        type: string
-      targetLink:
-        description: '[Output Only] URL of the resource the operation is mutating.'
-        type: string
-      user:
-        description: '[Output Only] User who requested the operation, for example: user@example.com.'
-        type: string
-      warnings:
-        description: '[Output Only] If warning messages are generated during processing of the operation, this field will be populated.'
-        items:
-          properties:
-            code:
-              description: '[Output Only] The warning type identifier for this warning.'
-              enum:
-                - DEPRECATED_RESOURCE_USED
-                - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
-                - INJECTED_KERNELS_DEPRECATED
-                - NEXT_HOP_ADDRESS_NOT_ASSIGNED
-                - NEXT_HOP_CANNOT_IP_FORWARD
-                - NEXT_HOP_INSTANCE_NOT_FOUND
-                - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
-                - NEXT_HOP_NOT_RUNNING
-                - NOT_CRITICAL_ERROR
-                - NO_RESULTS_ON_PAGE
-                - REQUIRED_TOS_AGREEMENT
-                - RESOURCE_NOT_DELETED
-                - SINGLE_INSTANCE_PROPERTY_TEMPLATE
-                - UNREACHABLE
-              type: string
-            data:
-              description: '[Output Only] Metadata for this warning in key: value format.'
-              items:
-                properties:
-                  key:
-                    description: '[Output Only] A key for the warning data.'
-                    type: string
-                  value:
-                    description: '[Output Only] A warning data value corresponding to the key.'
-                    type: string
-                type: object
-              type: array
-            message:
-              description: '[Output Only] Optional human-readable details for this warning.'
-              type: string
-          type: object
-        type: array
-      zone:
-        description: '[Output Only] URL of the zone where the operation resides.'
-        type: string
-    type: object
-  OperationList:
-    description: Contains a list of Operation resources.
-    properties:
-      id:
-        description: '[Output Only] Unique identifier for the resource; defined by the server.'
-        type: string
-      items:
-        description: '[Output Only] The Operation resources.'
-        items:
-          $ref: '#/definitions/Operation'
-        type: array
-      kind:
-        default: 'clouduseraccounts#operationList'
-        description: '[Output Only] Type of resource. Always compute#operations for Operations resource.'
-        type: string
-      nextPageToken:
-        description: '[Output Only] A token used to continue a truncate.'
-        type: string
-      selfLink:
-        description: '[Output Only] Server-defined URL for this resource.'
-        type: string
-    type: object
-  PublicKey:
-    description: A public key for authenticating to guests.
-    properties:
-      creationTimestamp:
-        description: '[Output Only] Creation timestamp in RFC3339 text format.'
-        type: string
-      description:
-        description: An optional textual description of the resource; provided by the client when the resource is created.
-        type: string
-      expirationTimestamp:
-        description: 'Optional expiration timestamp. If provided, the timestamp must be in RFC3339 text format. If not provided, the public key never expires.'
-        type: string
-      fingerprint:
-        description: '[Output Only] The fingerprint of the key is defined by RFC4716 to be the MD5 digest of the public key.'
-        type: string
-      key:
-        description: 'Public key text in SSH format, defined by RFC4253 section 6.6.'
-        type: string
-    type: object
-  User:
-    description: A User resource.
-    properties:
-      creationTimestamp:
-        description: '[Output Only] Creation timestamp in RFC3339 text format.'
-        type: string
-      description:
-        description: An optional textual description of the resource; provided by the client when the resource is created.
-        type: string
-      groups:
-        description: '[Output Only] A list of URLs to Group resources who contain the user. Users are only members of groups in the same project.'
-        items:
-          type: string
-        type: array
-      id:
-        description: '[Output Only] Unique identifier for the resource; defined by the server.'
-        format: uint64
-        type: string
-      kind:
-        default: 'clouduseraccounts#user'
-        description: '[Output Only] Type of the resource. Always clouduseraccounts#user for users.'
-        type: string
-      name:
-        description: Name of the resource; provided by the client when the resource is created.
-        pattern: '[a-z][-a-z0-9_]{0,31}'
-        type: string
-      owner:
-        description: "Email address of account's owner. This account will be validated to make sure it exists. The email can belong to any domain, but it must be tied to a Google account."
-        type: string
-      publicKeys:
-        description: '[Output Only] Public keys that this user may use to login.'
-        items:
-          $ref: '#/definitions/PublicKey'
-        type: array
-      selfLink:
-        description: '[Output Only] Server defined URL for the resource.'
-        type: string
-    type: object
-  UserList:
-    properties:
-      id:
-        description: '[Output Only] Unique identifier for the resource; defined by the server.'
-        type: string
-      items:
-        description: '[Output Only] A list of User resources.'
-        items:
-          $ref: '#/definitions/User'
-        type: array
-      kind:
-        default: 'clouduseraccounts#userList'
-        description: '[Output Only] Type of resource. Always clouduseraccounts#userList for lists of users.'
-        type: string
-      nextPageToken:
-        description: '[Output Only] A token used to continue a truncated list request.'
-        type: string
-      selfLink:
-        description: '[Output Only] Server defined URL for this resource.'
-        type: string
-    type: object
-externalDocs:
-  url: 'https://cloud.google.com/compute/docs/access/user-accounts/api/latest/'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /clouduseraccounts/vm_beta/projects
 info:
   contact:
     name: Google
@@ -401,6 +21,19 @@ info:
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: clouduseraccounts
+externalDocs:
+  url: 'https://cloud.google.com/compute/docs/access/user-accounts/api/latest/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud.useraccounts': Manage your Google Cloud User Accounts
+      'https://www.googleapis.com/auth/cloud.useraccounts.readonly': View your Google Cloud User Accounts
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -1140,17 +773,384 @@ paths:
             - 'https://www.googleapis.com/auth/cloud.useraccounts.readonly'
       tags:
         - linux
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/cloud.useraccounts': Manage your Google Cloud User Accounts
-      'https://www.googleapis.com/auth/cloud.useraccounts.readonly': View your Google Cloud User Accounts
-    type: oauth2
-swagger: '2.0'
+definitions:
+  AuthorizedKeysView:
+    description: A list of authorized public keys for a user account.
+    properties:
+      keys:
+        description: '[Output Only] The list of authorized public keys in SSH format.'
+        items:
+          type: string
+        type: array
+      sudoer:
+        description: '[Output Only] Whether the user has the ability to elevate on the instance that requested the authorized keys.'
+        type: boolean
+    type: object
+  Group:
+    description: A Group resource.
+    properties:
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      description:
+        description: An optional textual description of the resource; provided by the client when the resource is created.
+        type: string
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        format: uint64
+        type: string
+      kind:
+        default: 'clouduseraccounts#group'
+        description: '[Output Only] Type of the resource. Always clouduseraccounts#group for groups.'
+        type: string
+      members:
+        description: '[Output Only] A list of URLs to User resources who belong to the group. Users may only be members of groups in the same project.'
+        items:
+          type: string
+        type: array
+      name:
+        description: Name of the resource; provided by the client when the resource is created.
+        pattern: '[a-z][-a-z0-9_]{0,31}'
+        type: string
+      selfLink:
+        description: '[Output Only] Server defined URL for the resource.'
+        type: string
+    type: object
+  GroupList:
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        description: '[Output Only] A list of Group resources.'
+        items:
+          $ref: '#/definitions/Group'
+        type: array
+      kind:
+        default: 'clouduseraccounts#groupList'
+        description: '[Output Only] Type of resource. Always clouduseraccounts#groupList for lists of groups.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] A token used to continue a truncated list request.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server defined URL for this resource.'
+        type: string
+    type: object
+  GroupsAddMemberRequest:
+    properties:
+      users:
+        description: Fully-qualified URLs of the User resources to add.
+        items:
+          type: string
+        type: array
+    type: object
+  GroupsRemoveMemberRequest:
+    properties:
+      users:
+        description: Fully-qualified URLs of the User resources to remove.
+        items:
+          type: string
+        type: array
+    type: object
+  LinuxAccountViews:
+    description: A list of all Linux accounts for this project. This API is only used by Compute Engine virtual machines to get information about user accounts for a project or instance. Linux resources are read-only views into users and groups managed by the Compute Engine Accounts API.
+    properties:
+      groupViews:
+        description: '[Output Only] A list of all groups within a project.'
+        items:
+          $ref: '#/definitions/LinuxGroupView'
+        type: array
+      kind:
+        default: 'clouduseraccounts#linuxAccountViews'
+        description: '[Output Only] Type of the resource. Always clouduseraccounts#linuxAccountViews for Linux resources.'
+        type: string
+      userViews:
+        description: '[Output Only] A list of all users within a project.'
+        items:
+          $ref: '#/definitions/LinuxUserView'
+        type: array
+    type: object
+  LinuxGetAuthorizedKeysViewResponse:
+    properties:
+      resource:
+        $ref: '#/definitions/AuthorizedKeysView'
+        description: '[Output Only] A list of authorized public keys for a user.'
+    type: object
+  LinuxGetLinuxAccountViewsResponse:
+    properties:
+      resource:
+        $ref: '#/definitions/LinuxAccountViews'
+        description: '[Output Only] A list of authorized user accounts and groups.'
+    type: object
+  LinuxGroupView:
+    description: A detailed view of a Linux group.
+    properties:
+      gid:
+        description: '[Output Only] The Group ID.'
+        format: uint32
+        type: integer
+      groupName:
+        description: '[Output Only] Group name.'
+        type: string
+      members:
+        description: '[Output Only] List of user accounts that belong to the group.'
+        items:
+          type: string
+        type: array
+    type: object
+  LinuxUserView:
+    description: A detailed view of a Linux user account.
+    properties:
+      gecos:
+        description: '[Output Only] The GECOS (user information) entry for this account.'
+        type: string
+      gid:
+        description: "[Output Only] User's default group ID."
+        format: uint32
+        type: integer
+      homeDirectory:
+        description: '[Output Only] The path to the home directory for this account.'
+        type: string
+      shell:
+        description: '[Output Only] The path to the login shell for this account.'
+        type: string
+      uid:
+        description: '[Output Only] User ID.'
+        format: uint32
+        type: integer
+      username:
+        description: '[Output Only] The username of the account.'
+        type: string
+    type: object
+  Operation:
+    description: 'An Operation resource, used to manage asynchronous API requests.'
+    properties:
+      clientOperationId:
+        description: '[Output Only] An optional identifier specified by the client when the mutation was initiated. Must be unique for all Operation resources in the project.'
+        type: string
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      endTime:
+        description: '[Output Only] The time that this operation was completed. This is in RFC3339 text format.'
+        type: string
+      error:
+        description: '[Output Only] If errors are generated during processing of the operation, this field will be populated.'
+        properties:
+          errors:
+            description: '[Output Only] The array of errors encountered while processing this operation.'
+            items:
+              properties:
+                code:
+                  description: '[Output Only] The error type identifier for this error.'
+                  type: string
+                location:
+                  description: '[Output Only] Indicates the field in the request which caused the error. This property is optional.'
+                  type: string
+                message:
+                  description: '[Output Only] An optional, human-readable error message.'
+                  type: string
+              type: object
+            type: array
+        type: object
+      httpErrorMessage:
+        description: '[Output Only] If the operation fails, this field contains the HTTP error message that was returned, such as NOT FOUND.'
+        type: string
+      httpErrorStatusCode:
+        description: '[Output Only] If the operation fails, this field contains the HTTP error message that was returned, such as 404.'
+        format: int32
+        type: integer
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        format: uint64
+        type: string
+      insertTime:
+        description: '[Output Only] The time that this operation was requested. This is in RFC3339 text format.'
+        type: string
+      kind:
+        default: 'clouduseraccounts#operation'
+        description: '[Output Only] Type of the resource. Always compute#operation for Operation resources.'
+        type: string
+      name:
+        description: '[Output Only] Name of the resource.'
+        type: string
+      operationType:
+        description: '[Output Only] Type of the operation, such as insert, compute.instanceGroups.update, or compute.instanceGroups.delete.'
+        type: string
+      progress:
+        description: '[Output Only] An optional progress indicator that ranges from 0 to 100. There is no requirement that this be linear or support any granularity of operations. This should not be used to guess at when the operation will be complete. This number should monotonically increase as the operation progresses.'
+        format: int32
+        type: integer
+      region:
+        description: '[Output Only] URL of the region where the operation resides. Only applicable for regional resources.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      startTime:
+        description: '[Output Only] The time that this operation was started by the server. This is in RFC3339 text format.'
+        type: string
+      status:
+        description: '[Output Only] Status of the operation. Can be one of the following: PENDING, RUNNING, or DONE.'
+        enum:
+          - DONE
+          - PENDING
+          - RUNNING
+        type: string
+      statusMessage:
+        description: '[Output Only] An optional textual description of the current status of the operation.'
+        type: string
+      targetId:
+        description: '[Output Only] Unique target ID which identifies a particular incarnation of the target.'
+        format: uint64
+        type: string
+      targetLink:
+        description: '[Output Only] URL of the resource the operation is mutating.'
+        type: string
+      user:
+        description: '[Output Only] User who requested the operation, for example: user@example.com.'
+        type: string
+      warnings:
+        description: '[Output Only] If warning messages are generated during processing of the operation, this field will be populated.'
+        items:
+          properties:
+            code:
+              description: '[Output Only] The warning type identifier for this warning.'
+              enum:
+                - DEPRECATED_RESOURCE_USED
+                - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+                - INJECTED_KERNELS_DEPRECATED
+                - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+                - NEXT_HOP_CANNOT_IP_FORWARD
+                - NEXT_HOP_INSTANCE_NOT_FOUND
+                - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+                - NEXT_HOP_NOT_RUNNING
+                - NOT_CRITICAL_ERROR
+                - NO_RESULTS_ON_PAGE
+                - REQUIRED_TOS_AGREEMENT
+                - RESOURCE_NOT_DELETED
+                - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+                - UNREACHABLE
+              type: string
+            data:
+              description: '[Output Only] Metadata for this warning in key: value format.'
+              items:
+                properties:
+                  key:
+                    description: '[Output Only] A key for the warning data.'
+                    type: string
+                  value:
+                    description: '[Output Only] A warning data value corresponding to the key.'
+                    type: string
+                type: object
+              type: array
+            message:
+              description: '[Output Only] Optional human-readable details for this warning.'
+              type: string
+          type: object
+        type: array
+      zone:
+        description: '[Output Only] URL of the zone where the operation resides.'
+        type: string
+    type: object
+  OperationList:
+    description: Contains a list of Operation resources.
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        description: '[Output Only] The Operation resources.'
+        items:
+          $ref: '#/definitions/Operation'
+        type: array
+      kind:
+        default: 'clouduseraccounts#operationList'
+        description: '[Output Only] Type of resource. Always compute#operations for Operations resource.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] A token used to continue a truncate.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+    type: object
+  PublicKey:
+    description: A public key for authenticating to guests.
+    properties:
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      description:
+        description: An optional textual description of the resource; provided by the client when the resource is created.
+        type: string
+      expirationTimestamp:
+        description: 'Optional expiration timestamp. If provided, the timestamp must be in RFC3339 text format. If not provided, the public key never expires.'
+        type: string
+      fingerprint:
+        description: '[Output Only] The fingerprint of the key is defined by RFC4716 to be the MD5 digest of the public key.'
+        type: string
+      key:
+        description: 'Public key text in SSH format, defined by RFC4253 section 6.6.'
+        type: string
+    type: object
+  User:
+    description: A User resource.
+    properties:
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      description:
+        description: An optional textual description of the resource; provided by the client when the resource is created.
+        type: string
+      groups:
+        description: '[Output Only] A list of URLs to Group resources who contain the user. Users are only members of groups in the same project.'
+        items:
+          type: string
+        type: array
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        format: uint64
+        type: string
+      kind:
+        default: 'clouduseraccounts#user'
+        description: '[Output Only] Type of the resource. Always clouduseraccounts#user for users.'
+        type: string
+      name:
+        description: Name of the resource; provided by the client when the resource is created.
+        pattern: '[a-z][-a-z0-9_]{0,31}'
+        type: string
+      owner:
+        description: "Email address of account's owner. This account will be validated to make sure it exists. The email can belong to any domain, but it must be tied to a Google account."
+        type: string
+      publicKeys:
+        description: '[Output Only] Public keys that this user may use to login.'
+        items:
+          $ref: '#/definitions/PublicKey'
+        type: array
+      selfLink:
+        description: '[Output Only] Server defined URL for the resource.'
+        type: string
+    type: object
+  UserList:
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        description: '[Output Only] A list of User resources.'
+        items:
+          $ref: '#/definitions/User'
+        type: array
+      kind:
+        default: 'clouduseraccounts#userList'
+        description: '[Output Only] Type of resource. Always clouduseraccounts#userList for lists of users.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] A token used to continue a truncated list request.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server defined URL for this resource.'
+        type: string
+    type: object

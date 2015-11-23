@@ -1,379 +1,8 @@
-basePath: /gmail/v1/users
-definitions:
-  Draft:
-    description: "A draft email in the user's mailbox."
-    properties:
-      id:
-        description: The immutable ID of the draft.
-        type: string
-      message:
-        $ref: '#/definitions/Message'
-        description: The message content of the draft.
-    type: object
-  History:
-    description: "A record of a change to the user's mailbox. Each history change may affect multiple messages in multiple ways."
-    properties:
-      id:
-        description: The mailbox sequence ID.
-        format: uint64
-        type: string
-      labelsAdded:
-        description: Labels added to messages in this history record.
-        items:
-          $ref: '#/definitions/HistoryLabelAdded'
-        type: array
-      labelsRemoved:
-        description: Labels removed from messages in this history record.
-        items:
-          $ref: '#/definitions/HistoryLabelRemoved'
-        type: array
-      messages:
-        description: 'List of messages changed in this history record. The fields for specific change types, such as messagesAdded may duplicate messages in this field. We recommend using the specific change-type fields instead of this.'
-        items:
-          $ref: '#/definitions/Message'
-        type: array
-      messagesAdded:
-        description: Messages added to the mailbox in this history record.
-        items:
-          $ref: '#/definitions/HistoryMessageAdded'
-        type: array
-      messagesDeleted:
-        description: Messages deleted (not Trashed) from the mailbox in this history record.
-        items:
-          $ref: '#/definitions/HistoryMessageDeleted'
-        type: array
-    type: object
-  HistoryLabelAdded:
-    properties:
-      labelIds:
-        description: Label IDs added to the message.
-        items:
-          type: string
-        type: array
-      message:
-        $ref: '#/definitions/Message'
-    type: object
-  HistoryLabelRemoved:
-    properties:
-      labelIds:
-        description: Label IDs removed from the message.
-        items:
-          type: string
-        type: array
-      message:
-        $ref: '#/definitions/Message'
-    type: object
-  HistoryMessageAdded:
-    properties:
-      message:
-        $ref: '#/definitions/Message'
-    type: object
-  HistoryMessageDeleted:
-    properties:
-      message:
-        $ref: '#/definitions/Message'
-    type: object
-  Label:
-    description: "Labels are used to categorize messages and threads within the user's mailbox."
-    properties:
-      id:
-        description: The immutable ID of the label.
-        type: string
-      labelListVisibility:
-        description: The visibility of the label in the label list in the Gmail web interface.
-        enum:
-          - labelHide
-          - labelShow
-          - labelShowIfUnread
-        type: string
-      messageListVisibility:
-        description: The visibility of the label in the message list in the Gmail web interface.
-        enum:
-          - hide
-          - show
-        type: string
-      messagesTotal:
-        description: The total number of messages with the label.
-        format: int32
-        type: integer
-      messagesUnread:
-        description: The number of unread messages with the label.
-        format: int32
-        type: integer
-      name:
-        description: The display name of the label.
-        type: string
-      threadsTotal:
-        description: The total number of threads with the label.
-        format: int32
-        type: integer
-      threadsUnread:
-        description: The number of unread threads with the label.
-        format: int32
-        type: integer
-      type:
-        description: 'The owner type for the label. User labels are created by the user and can be modified and deleted by the user and can be applied to any message or thread. System labels are internally created and cannot be added, modified, or deleted. System labels may be able to be applied to or removed from messages and threads under some circumstances but this is not guaranteed. For example, users can apply and remove the INBOX and UNREAD labels from messages and threads, but cannot apply or remove the DRAFTS or SENT labels from messages or threads.'
-        enum:
-          - system
-          - user
-        type: string
-    type: object
-  ListDraftsResponse:
-    properties:
-      drafts:
-        description: List of drafts.
-        items:
-          $ref: '#/definitions/Draft'
-        type: array
-      nextPageToken:
-        description: Token to retrieve the next page of results in the list.
-        type: string
-      resultSizeEstimate:
-        description: Estimated total number of results.
-        format: uint32
-        type: integer
-    type: object
-  ListHistoryResponse:
-    properties:
-      history:
-        description: List of history records. Any messages contained in the response will typically only have id and threadId fields populated.
-        items:
-          $ref: '#/definitions/History'
-        type: array
-      historyId:
-        description: "The ID of the mailbox's current history record."
-        format: uint64
-        type: string
-      nextPageToken:
-        description: Page token to retrieve the next page of results in the list.
-        type: string
-    type: object
-  ListLabelsResponse:
-    properties:
-      labels:
-        description: List of labels.
-        items:
-          $ref: '#/definitions/Label'
-        type: array
-    type: object
-  ListMessagesResponse:
-    properties:
-      messages:
-        description: List of messages.
-        items:
-          $ref: '#/definitions/Message'
-        type: array
-      nextPageToken:
-        description: Token to retrieve the next page of results in the list.
-        type: string
-      resultSizeEstimate:
-        description: Estimated total number of results.
-        format: uint32
-        type: integer
-    type: object
-  ListThreadsResponse:
-    properties:
-      nextPageToken:
-        description: Page token to retrieve the next page of results in the list.
-        type: string
-      resultSizeEstimate:
-        description: Estimated total number of results.
-        format: uint32
-        type: integer
-      threads:
-        description: List of threads.
-        items:
-          $ref: '#/definitions/Thread'
-        type: array
-    type: object
-  Message:
-    description: An email message.
-    properties:
-      historyId:
-        description: The ID of the last history record that modified this message.
-        format: uint64
-        type: string
-      id:
-        description: The immutable ID of the message.
-        type: string
-      internalDate:
-        description: 'The internal message creation timestamp (epoch ms), which determines ordering in the inbox. For normal SMTP-received email, this represents the time the message was originally accepted by Google, which is more reliable than the Date header. However, for API-migrated mail, it can be configured by client to be based on the Date header.'
-        format: int64
-        type: string
-      labelIds:
-        description: List of IDs of labels applied to this message.
-        items:
-          type: string
-        type: array
-      payload:
-        $ref: '#/definitions/MessagePart'
-        description: The parsed email structure in the message parts.
-      raw:
-        description: The entire email message in an RFC 2822 formatted and base64url encoded string. Returned in messages.get and drafts.get responses when the format=RAW parameter is supplied.
-        format: byte
-        type: string
-      sizeEstimate:
-        description: Estimated size in bytes of the message.
-        format: int32
-        type: integer
-      snippet:
-        description: A short part of the message text.
-        type: string
-      threadId:
-        description: "The ID of the thread the message belongs to. To add a message or draft to a thread, the following criteria must be met: \n- The requested threadId must be specified on the Message or Draft.Message you supply with your request. \n- The References and In-Reply-To headers must be set in compliance with the RFC 2822 standard. \n- The Subject headers must match."
-        type: string
-    type: object
-  MessagePart:
-    description: A single MIME message part.
-    properties:
-      body:
-        $ref: '#/definitions/MessagePartBody'
-        description: 'The message part body for this part, which may be empty for container MIME message parts.'
-      filename:
-        description: The filename of the attachment. Only present if this message part represents an attachment.
-        type: string
-      headers:
-        description: 'List of headers on this message part. For the top-level message part, representing the entire message payload, it will contain the standard RFC 2822 email headers such as To, From, and Subject.'
-        items:
-          $ref: '#/definitions/MessagePartHeader'
-        type: array
-      mimeType:
-        description: The MIME type of the message part.
-        type: string
-      partId:
-        description: The immutable ID of the message part.
-        type: string
-      parts:
-        description: 'The child MIME message parts of this part. This only applies to container MIME message parts, for example multipart/*. For non- container MIME message part types, such as text/plain, this field is empty. For more information, see RFC 1521.'
-        items:
-          $ref: '#/definitions/MessagePart'
-        type: array
-    type: object
-  MessagePartBody:
-    description: The body of a single MIME message part.
-    properties:
-      attachmentId:
-        description: 'When present, contains the ID of an external attachment that can be retrieved in a separate messages.attachments.get request. When not present, the entire content of the message part body is contained in the data field.'
-        type: string
-      data:
-        description: The body data of a MIME message part. May be empty for MIME container types that have no message body or when the body data is sent as a separate attachment. An attachment ID is present if the body data is contained in a separate attachment.
-        format: byte
-        type: string
-      size:
-        description: Total number of bytes in the body of the message part.
-        format: int32
-        type: integer
-    type: object
-  MessagePartHeader:
-    properties:
-      name:
-        description: 'The name of the header before the : separator. For example, To.'
-        type: string
-      value:
-        description: 'The value of the header after the : separator. For example, someuser@example.com.'
-        type: string
-    type: object
-  ModifyMessageRequest:
-    properties:
-      addLabelIds:
-        description: A list of IDs of labels to add to this message.
-        items:
-          type: string
-        type: array
-      removeLabelIds:
-        description: A list IDs of labels to remove from this message.
-        items:
-          type: string
-        type: array
-    type: object
-  ModifyThreadRequest:
-    properties:
-      addLabelIds:
-        description: A list of IDs of labels to add to this thread.
-        items:
-          type: string
-        type: array
-      removeLabelIds:
-        description: A list of IDs of labels to remove from this thread.
-        items:
-          type: string
-        type: array
-    type: object
-  Profile:
-    description: Profile for a Gmail user.
-    properties:
-      emailAddress:
-        description: "The user's email address."
-        type: string
-      historyId:
-        description: "The ID of the mailbox's current history record."
-        format: uint64
-        type: string
-      messagesTotal:
-        description: The total number of messages in the mailbox.
-        format: int32
-        type: integer
-      threadsTotal:
-        description: The total number of threads in the mailbox.
-        format: int32
-        type: integer
-    type: object
-  Thread:
-    description: A collection of messages representing a conversation.
-    properties:
-      historyId:
-        description: The ID of the last history record that modified this thread.
-        format: uint64
-        type: string
-      id:
-        description: The unique ID of the thread.
-        type: string
-      messages:
-        description: The list of messages in the thread.
-        items:
-          $ref: '#/definitions/Message'
-        type: array
-      snippet:
-        description: A short part of the message text.
-        type: string
-    type: object
-  WatchRequest:
-    description: "Set up or update a new push notification watch on this user's mailbox."
-    properties:
-      labelFilterAction:
-        description: Filtering behavior of labelIds list specified.
-        enum:
-          - exclude
-          - include
-        type: string
-      labelIds:
-        description: 'List of label_ids to restrict notifications about. By default, if unspecified, all changes are pushed out. If specified then dictates which labels are required for a push notification to be generated.'
-        items:
-          type: string
-        type: array
-      topicName:
-        description: |-
-          A fully qualified Google Cloud Pub/Sub API topic name to publish the events to. This topic name **must** already exist in Cloud Pub/Sub and you **must** have already granted gmail "publish" permission on it. For example, "projects/my-project-identifier/topics/my-topic-name" (using the new Cloud Pub/Sub "v1beta2" topic naming format).
-
-
-          Note that the "my-project-identifier" portion must exactly match your Google developer project id (the one executing this watch request).
-        type: string
-    type: object
-  WatchResponse:
-    description: Push notification watch response.
-    properties:
-      expiration:
-        description: When Gmail will stop sending notifications for mailbox updates (epoch millis). Call watch again before this time to renew the watch.
-        format: int64
-        type: string
-      historyId:
-        description: "The ID of the mailbox's current history record."
-        format: uint64
-        type: string
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/gmail/api/'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /gmail/v1/users
 info:
   contact:
     name: Google
@@ -392,6 +21,22 @@ info:
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: gmail
+externalDocs:
+  url: 'https://developers.google.com/gmail/api/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://mail.google.com/': View and manage your mail
+      'https://www.googleapis.com/auth/gmail.compose': Manage drafts and send emails
+      'https://www.googleapis.com/auth/gmail.insert': Insert mail into your mailbox
+      'https://www.googleapis.com/auth/gmail.labels': Manage mailbox labels
+      'https://www.googleapis.com/auth/gmail.modify': View and modify but not delete your email
+      'https://www.googleapis.com/auth/gmail.readonly': View your emails messages and settings
+      'https://www.googleapis.com/auth/gmail.send': Send email on your behalf
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -1631,20 +1276,375 @@ paths:
             - 'https://www.googleapis.com/auth/gmail.readonly'
       tags:
         - users
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://mail.google.com/': View and manage your mail
-      'https://www.googleapis.com/auth/gmail.compose': Manage drafts and send emails
-      'https://www.googleapis.com/auth/gmail.insert': Insert mail into your mailbox
-      'https://www.googleapis.com/auth/gmail.labels': Manage mailbox labels
-      'https://www.googleapis.com/auth/gmail.modify': View and modify but not delete your email
-      'https://www.googleapis.com/auth/gmail.readonly': View your emails messages and settings
-      'https://www.googleapis.com/auth/gmail.send': Send email on your behalf
-    type: oauth2
-swagger: '2.0'
+definitions:
+  Draft:
+    description: "A draft email in the user's mailbox."
+    properties:
+      id:
+        description: The immutable ID of the draft.
+        type: string
+      message:
+        $ref: '#/definitions/Message'
+        description: The message content of the draft.
+    type: object
+  History:
+    description: "A record of a change to the user's mailbox. Each history change may affect multiple messages in multiple ways."
+    properties:
+      id:
+        description: The mailbox sequence ID.
+        format: uint64
+        type: string
+      labelsAdded:
+        description: Labels added to messages in this history record.
+        items:
+          $ref: '#/definitions/HistoryLabelAdded'
+        type: array
+      labelsRemoved:
+        description: Labels removed from messages in this history record.
+        items:
+          $ref: '#/definitions/HistoryLabelRemoved'
+        type: array
+      messages:
+        description: 'List of messages changed in this history record. The fields for specific change types, such as messagesAdded may duplicate messages in this field. We recommend using the specific change-type fields instead of this.'
+        items:
+          $ref: '#/definitions/Message'
+        type: array
+      messagesAdded:
+        description: Messages added to the mailbox in this history record.
+        items:
+          $ref: '#/definitions/HistoryMessageAdded'
+        type: array
+      messagesDeleted:
+        description: Messages deleted (not Trashed) from the mailbox in this history record.
+        items:
+          $ref: '#/definitions/HistoryMessageDeleted'
+        type: array
+    type: object
+  HistoryLabelAdded:
+    properties:
+      labelIds:
+        description: Label IDs added to the message.
+        items:
+          type: string
+        type: array
+      message:
+        $ref: '#/definitions/Message'
+    type: object
+  HistoryLabelRemoved:
+    properties:
+      labelIds:
+        description: Label IDs removed from the message.
+        items:
+          type: string
+        type: array
+      message:
+        $ref: '#/definitions/Message'
+    type: object
+  HistoryMessageAdded:
+    properties:
+      message:
+        $ref: '#/definitions/Message'
+    type: object
+  HistoryMessageDeleted:
+    properties:
+      message:
+        $ref: '#/definitions/Message'
+    type: object
+  Label:
+    description: "Labels are used to categorize messages and threads within the user's mailbox."
+    properties:
+      id:
+        description: The immutable ID of the label.
+        type: string
+      labelListVisibility:
+        description: The visibility of the label in the label list in the Gmail web interface.
+        enum:
+          - labelHide
+          - labelShow
+          - labelShowIfUnread
+        type: string
+      messageListVisibility:
+        description: The visibility of the label in the message list in the Gmail web interface.
+        enum:
+          - hide
+          - show
+        type: string
+      messagesTotal:
+        description: The total number of messages with the label.
+        format: int32
+        type: integer
+      messagesUnread:
+        description: The number of unread messages with the label.
+        format: int32
+        type: integer
+      name:
+        description: The display name of the label.
+        type: string
+      threadsTotal:
+        description: The total number of threads with the label.
+        format: int32
+        type: integer
+      threadsUnread:
+        description: The number of unread threads with the label.
+        format: int32
+        type: integer
+      type:
+        description: 'The owner type for the label. User labels are created by the user and can be modified and deleted by the user and can be applied to any message or thread. System labels are internally created and cannot be added, modified, or deleted. System labels may be able to be applied to or removed from messages and threads under some circumstances but this is not guaranteed. For example, users can apply and remove the INBOX and UNREAD labels from messages and threads, but cannot apply or remove the DRAFTS or SENT labels from messages or threads.'
+        enum:
+          - system
+          - user
+        type: string
+    type: object
+  ListDraftsResponse:
+    properties:
+      drafts:
+        description: List of drafts.
+        items:
+          $ref: '#/definitions/Draft'
+        type: array
+      nextPageToken:
+        description: Token to retrieve the next page of results in the list.
+        type: string
+      resultSizeEstimate:
+        description: Estimated total number of results.
+        format: uint32
+        type: integer
+    type: object
+  ListHistoryResponse:
+    properties:
+      history:
+        description: List of history records. Any messages contained in the response will typically only have id and threadId fields populated.
+        items:
+          $ref: '#/definitions/History'
+        type: array
+      historyId:
+        description: "The ID of the mailbox's current history record."
+        format: uint64
+        type: string
+      nextPageToken:
+        description: Page token to retrieve the next page of results in the list.
+        type: string
+    type: object
+  ListLabelsResponse:
+    properties:
+      labels:
+        description: List of labels.
+        items:
+          $ref: '#/definitions/Label'
+        type: array
+    type: object
+  ListMessagesResponse:
+    properties:
+      messages:
+        description: List of messages.
+        items:
+          $ref: '#/definitions/Message'
+        type: array
+      nextPageToken:
+        description: Token to retrieve the next page of results in the list.
+        type: string
+      resultSizeEstimate:
+        description: Estimated total number of results.
+        format: uint32
+        type: integer
+    type: object
+  ListThreadsResponse:
+    properties:
+      nextPageToken:
+        description: Page token to retrieve the next page of results in the list.
+        type: string
+      resultSizeEstimate:
+        description: Estimated total number of results.
+        format: uint32
+        type: integer
+      threads:
+        description: List of threads.
+        items:
+          $ref: '#/definitions/Thread'
+        type: array
+    type: object
+  Message:
+    description: An email message.
+    properties:
+      historyId:
+        description: The ID of the last history record that modified this message.
+        format: uint64
+        type: string
+      id:
+        description: The immutable ID of the message.
+        type: string
+      internalDate:
+        description: 'The internal message creation timestamp (epoch ms), which determines ordering in the inbox. For normal SMTP-received email, this represents the time the message was originally accepted by Google, which is more reliable than the Date header. However, for API-migrated mail, it can be configured by client to be based on the Date header.'
+        format: int64
+        type: string
+      labelIds:
+        description: List of IDs of labels applied to this message.
+        items:
+          type: string
+        type: array
+      payload:
+        $ref: '#/definitions/MessagePart'
+        description: The parsed email structure in the message parts.
+      raw:
+        description: The entire email message in an RFC 2822 formatted and base64url encoded string. Returned in messages.get and drafts.get responses when the format=RAW parameter is supplied.
+        format: byte
+        type: string
+      sizeEstimate:
+        description: Estimated size in bytes of the message.
+        format: int32
+        type: integer
+      snippet:
+        description: A short part of the message text.
+        type: string
+      threadId:
+        description: "The ID of the thread the message belongs to. To add a message or draft to a thread, the following criteria must be met: \n- The requested threadId must be specified on the Message or Draft.Message you supply with your request. \n- The References and In-Reply-To headers must be set in compliance with the RFC 2822 standard. \n- The Subject headers must match."
+        type: string
+    type: object
+  MessagePart:
+    description: A single MIME message part.
+    properties:
+      body:
+        $ref: '#/definitions/MessagePartBody'
+        description: 'The message part body for this part, which may be empty for container MIME message parts.'
+      filename:
+        description: The filename of the attachment. Only present if this message part represents an attachment.
+        type: string
+      headers:
+        description: 'List of headers on this message part. For the top-level message part, representing the entire message payload, it will contain the standard RFC 2822 email headers such as To, From, and Subject.'
+        items:
+          $ref: '#/definitions/MessagePartHeader'
+        type: array
+      mimeType:
+        description: The MIME type of the message part.
+        type: string
+      partId:
+        description: The immutable ID of the message part.
+        type: string
+      parts:
+        description: 'The child MIME message parts of this part. This only applies to container MIME message parts, for example multipart/*. For non- container MIME message part types, such as text/plain, this field is empty. For more information, see RFC 1521.'
+        items:
+          $ref: '#/definitions/MessagePart'
+        type: array
+    type: object
+  MessagePartBody:
+    description: The body of a single MIME message part.
+    properties:
+      attachmentId:
+        description: 'When present, contains the ID of an external attachment that can be retrieved in a separate messages.attachments.get request. When not present, the entire content of the message part body is contained in the data field.'
+        type: string
+      data:
+        description: The body data of a MIME message part. May be empty for MIME container types that have no message body or when the body data is sent as a separate attachment. An attachment ID is present if the body data is contained in a separate attachment.
+        format: byte
+        type: string
+      size:
+        description: Total number of bytes in the body of the message part.
+        format: int32
+        type: integer
+    type: object
+  MessagePartHeader:
+    properties:
+      name:
+        description: 'The name of the header before the : separator. For example, To.'
+        type: string
+      value:
+        description: 'The value of the header after the : separator. For example, someuser@example.com.'
+        type: string
+    type: object
+  ModifyMessageRequest:
+    properties:
+      addLabelIds:
+        description: A list of IDs of labels to add to this message.
+        items:
+          type: string
+        type: array
+      removeLabelIds:
+        description: A list IDs of labels to remove from this message.
+        items:
+          type: string
+        type: array
+    type: object
+  ModifyThreadRequest:
+    properties:
+      addLabelIds:
+        description: A list of IDs of labels to add to this thread.
+        items:
+          type: string
+        type: array
+      removeLabelIds:
+        description: A list of IDs of labels to remove from this thread.
+        items:
+          type: string
+        type: array
+    type: object
+  Profile:
+    description: Profile for a Gmail user.
+    properties:
+      emailAddress:
+        description: "The user's email address."
+        type: string
+      historyId:
+        description: "The ID of the mailbox's current history record."
+        format: uint64
+        type: string
+      messagesTotal:
+        description: The total number of messages in the mailbox.
+        format: int32
+        type: integer
+      threadsTotal:
+        description: The total number of threads in the mailbox.
+        format: int32
+        type: integer
+    type: object
+  Thread:
+    description: A collection of messages representing a conversation.
+    properties:
+      historyId:
+        description: The ID of the last history record that modified this thread.
+        format: uint64
+        type: string
+      id:
+        description: The unique ID of the thread.
+        type: string
+      messages:
+        description: The list of messages in the thread.
+        items:
+          $ref: '#/definitions/Message'
+        type: array
+      snippet:
+        description: A short part of the message text.
+        type: string
+    type: object
+  WatchRequest:
+    description: "Set up or update a new push notification watch on this user's mailbox."
+    properties:
+      labelFilterAction:
+        description: Filtering behavior of labelIds list specified.
+        enum:
+          - exclude
+          - include
+        type: string
+      labelIds:
+        description: 'List of label_ids to restrict notifications about. By default, if unspecified, all changes are pushed out. If specified then dictates which labels are required for a push notification to be generated.'
+        items:
+          type: string
+        type: array
+      topicName:
+        description: |-
+          A fully qualified Google Cloud Pub/Sub API topic name to publish the events to. This topic name **must** already exist in Cloud Pub/Sub and you **must** have already granted gmail "publish" permission on it. For example, "projects/my-project-identifier/topics/my-topic-name" (using the new Cloud Pub/Sub "v1beta2" topic naming format).
+
+
+          Note that the "my-project-identifier" portion must exactly match your Google developer project id (the one executing this watch request).
+        type: string
+    type: object
+  WatchResponse:
+    description: Push notification watch response.
+    properties:
+      expiration:
+        description: When Gmail will stop sending notifications for mailbox updates (epoch millis). Call watch again before this time to renew the watch.
+        format: int64
+        type: string
+      historyId:
+        description: "The ID of the mailbox's current history record."
+        format: uint64
+        type: string
+    type: object

@@ -1,4 +1,850 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.googleapis.com
 basePath: /bigquery/v2
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: 'A data platform for customers to create, manage, share and query data.'
+  title: BigQuery API
+  version: v2
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://cloud.google.com/_static/images/new-gcp-logo.png'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/bigquery/v2/rest'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: bigquery
+externalDocs:
+  url: 'https://cloud.google.com/bigquery/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/bigquery': View and manage your data in Google BigQuery
+      'https://www.googleapis.com/auth/bigquery.insertdata': Insert data into Google BigQuery
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
+      'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
+      'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
+    type: oauth2
+parameters:
+  alt:
+    default: json
+    description: Data format for the response.
+    enum:
+      - csv
+      - json
+    in: query
+    name: alt
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    in: query
+    name: quotaUser
+    type: string
+  userIp:
+    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    in: query
+    name: userIp
+    type: string
+paths:
+  '/project/{projectId}/jobs/{jobId}/cancel':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Requests that a job be cancelled. This call will return immediately, and the client will need to poll for the job status to see if the cancel completed successfully. Cancelled jobs may still incur costs.'
+      operationId: bigquery.jobs.cancel
+      parameters:
+        - description: Project ID of the job to cancel
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Job ID of the job to cancel
+          in: path
+          name: jobId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/JobCancelResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - jobs
+  /projects:
+    get:
+      description: Lists all projects to which you have been granted any project role.
+      operationId: bigquery.projects.list
+      parameters:
+        - description: Maximum number of results to return
+          in: query
+          name: maxResults
+          type: integer
+        - description: 'Page token, returned by a previous call, to request the next page of results'
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ProjectList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/projects/{projectId}/datasets':
+    get:
+      description: Lists all datasets in the specified project to which you have been granted the READER dataset role.
+      operationId: bigquery.datasets.list
+      parameters:
+        - description: Project ID of the datasets to be listed
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: 'Whether to list all datasets, including hidden ones'
+          in: query
+          name: all
+          type: boolean
+        - description: The maximum number of results to return
+          in: query
+          name: maxResults
+          type: integer
+        - description: 'Page token, returned by a previous call, to request the next page of results'
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DatasetList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+      tags:
+        - datasets
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a new empty dataset.
+      operationId: bigquery.datasets.insert
+      parameters:
+        - description: Project ID of the new dataset
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Dataset'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Dataset'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - datasets
+  '/projects/{projectId}/datasets/{datasetId}':
+    delete:
+      description: 'Deletes the dataset specified by the datasetId value. Before you can delete a dataset, you must delete all its tables, either manually or by specifying deleteContents. Immediately after deletion, you can create another dataset with the same name.'
+      operationId: bigquery.datasets.delete
+      parameters:
+        - description: Project ID of the dataset being deleted
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Dataset ID of dataset being deleted
+          in: path
+          name: datasetId
+          required: true
+          type: string
+        - description: 'If True, delete all the tables in the dataset. If False and the dataset contains tables, the request will fail. Default is False'
+          in: query
+          name: deleteContents
+          type: boolean
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - datasets
+    get:
+      description: Returns the dataset specified by datasetID.
+      operationId: bigquery.datasets.get
+      parameters:
+        - description: Project ID of the requested dataset
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Dataset ID of the requested dataset
+          in: path
+          name: datasetId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Dataset'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+      tags:
+        - datasets
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: 'Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource. This method supports patch semantics.'
+      operationId: bigquery.datasets.patch
+      parameters:
+        - description: Project ID of the dataset being updated
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Dataset ID of the dataset being updated
+          in: path
+          name: datasetId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Dataset'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Dataset'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - datasets
+    put:
+      description: 'Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource.'
+      operationId: bigquery.datasets.update
+      parameters:
+        - description: Project ID of the dataset being updated
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Dataset ID of the dataset being updated
+          in: path
+          name: datasetId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Dataset'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Dataset'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - datasets
+  '/projects/{projectId}/datasets/{datasetId}/tables':
+    get:
+      description: Lists all tables in the specified dataset. Requires the READER dataset role.
+      operationId: bigquery.tables.list
+      parameters:
+        - description: Project ID of the tables to list
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Dataset ID of the tables to list
+          in: path
+          name: datasetId
+          required: true
+          type: string
+        - description: Maximum number of results to return
+          in: query
+          name: maxResults
+          type: integer
+        - description: 'Page token, returned by a previous call, to request the next page of results'
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TableList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+      tags:
+        - tables
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Creates a new, empty table in the dataset.'
+      operationId: bigquery.tables.insert
+      parameters:
+        - description: Project ID of the new table
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Dataset ID of the new table
+          in: path
+          name: datasetId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Table'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Table'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - tables
+  '/projects/{projectId}/datasets/{datasetId}/tables/{tableId}':
+    delete:
+      description: 'Deletes the table specified by tableId from the dataset. If the table contains data, all the data will be deleted.'
+      operationId: bigquery.tables.delete
+      parameters:
+        - description: Project ID of the table to delete
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Dataset ID of the table to delete
+          in: path
+          name: datasetId
+          required: true
+          type: string
+        - description: Table ID of the table to delete
+          in: path
+          name: tableId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - tables
+    get:
+      description: 'Gets the specified table resource by table ID. This method does not return the data in the table, it only returns the table resource, which describes the structure of this table.'
+      operationId: bigquery.tables.get
+      parameters:
+        - description: Project ID of the requested table
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Dataset ID of the requested table
+          in: path
+          name: datasetId
+          required: true
+          type: string
+        - description: Table ID of the requested table
+          in: path
+          name: tableId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Table'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+      tags:
+        - tables
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: 'Updates information in an existing table. The update method replaces the entire table resource, whereas the patch method only replaces fields that are provided in the submitted table resource. This method supports patch semantics.'
+      operationId: bigquery.tables.patch
+      parameters:
+        - description: Project ID of the table to update
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Dataset ID of the table to update
+          in: path
+          name: datasetId
+          required: true
+          type: string
+        - description: Table ID of the table to update
+          in: path
+          name: tableId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Table'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Table'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - tables
+    put:
+      description: 'Updates information in an existing table. The update method replaces the entire table resource, whereas the patch method only replaces fields that are provided in the submitted table resource.'
+      operationId: bigquery.tables.update
+      parameters:
+        - description: Project ID of the table to update
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Dataset ID of the table to update
+          in: path
+          name: datasetId
+          required: true
+          type: string
+        - description: Table ID of the table to update
+          in: path
+          name: tableId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Table'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Table'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - tables
+  '/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/data':
+    get:
+      description: Retrieves table data from a specified set of rows. Requires the READER dataset role.
+      operationId: bigquery.tabledata.list
+      parameters:
+        - description: Project ID of the table to read
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Dataset ID of the table to read
+          in: path
+          name: datasetId
+          required: true
+          type: string
+        - description: Table ID of the table to read
+          in: path
+          name: tableId
+          required: true
+          type: string
+        - description: Maximum number of results to return
+          in: query
+          name: maxResults
+          type: integer
+        - description: 'Page token, returned by a previous call, identifying the result set'
+          in: query
+          name: pageToken
+          type: string
+        - description: Zero-based index of the starting row to read
+          in: query
+          name: startIndex
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TableDataList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+      tags:
+        - tabledata
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/insertAll':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Streams data into BigQuery one record at a time without needing to run a load job. Requires the WRITER dataset role.
+      operationId: bigquery.tabledata.insertAll
+      parameters:
+        - description: Project ID of the destination table.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Dataset ID of the destination table.
+          in: path
+          name: datasetId
+          required: true
+          type: string
+        - description: Table ID of the destination table.
+          in: path
+          name: tableId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TableDataInsertAllRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TableDataInsertAllResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+            - 'https://www.googleapis.com/auth/bigquery.insertdata'
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - tabledata
+  '/projects/{projectId}/jobs':
+    get:
+      description: 'Lists all jobs that you started in the specified project. Job information is available for a six month period after creation. The job list is sorted in reverse chronological order, by job creation time. Requires the Can View project role, or the Is Owner project role if you set the allUsers property.'
+      operationId: bigquery.jobs.list
+      parameters:
+        - description: Project ID of the jobs to list
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Whether to display jobs owned by all users in the project. Default false
+          in: query
+          name: allUsers
+          type: boolean
+        - description: Maximum number of results to return
+          in: query
+          name: maxResults
+          type: integer
+        - description: 'Page token, returned by a previous call, to request the next page of results'
+          in: query
+          name: pageToken
+          type: string
+        - description: Restrict information returned to a set of selected fields
+          enum:
+            - full
+            - minimal
+          in: query
+          name: projection
+          type: string
+        - collectionFormat: multi
+          description: Filter for job state
+          in: query
+          items:
+            enum:
+              - done
+              - pending
+              - running
+            type: string
+          name: stateFilter
+          type: array
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/JobList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+      tags:
+        - jobs
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      consumes:
+        - application/octet-stream
+      description: Starts a new asynchronous job. Requires the Can View project role.
+      operationId: bigquery.jobs.insert
+      parameters:
+        - description: Project ID of the project that will be billed for the job
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Job'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Job'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+      tags:
+        - jobs
+  '/projects/{projectId}/jobs/{jobId}':
+    get:
+      description: "Returns information about a specific job. Job information is available for a six month period after creation. Requires that you're the person who ran the job, or have the Is Owner project role."
+      operationId: bigquery.jobs.get
+      parameters:
+        - description: Project ID of the requested job
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Job ID of the requested job
+          in: path
+          name: jobId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Job'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+      tags:
+        - jobs
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/projects/{projectId}/queries':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Runs a BigQuery SQL query synchronously and returns query results if the query completes within a specified timeout.
+      operationId: bigquery.jobs.query
+      parameters:
+        - description: Project ID of the project billed for the query
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/QueryResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+      tags:
+        - jobs
+  '/projects/{projectId}/queries/{jobId}':
+    get:
+      description: Retrieves the results of a query job.
+      operationId: bigquery.jobs.getQueryResults
+      parameters:
+        - description: Project ID of the query job
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Job ID of the query job
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - description: Maximum number of results to read
+          in: query
+          name: maxResults
+          type: integer
+        - description: 'Page token, returned by a previous call, to request the next page of results'
+          in: query
+          name: pageToken
+          type: string
+        - description: Zero-based index of the starting row
+          in: query
+          name: startIndex
+          type: string
+        - description: "How long to wait for the query to complete, in milliseconds, before returning. Default is 10 seconds. If the timeout passes before the job completes, the 'jobComplete' field in the response will be false"
+          in: query
+          name: timeoutMs
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetQueryResultsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/bigquery'
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+      tags:
+        - jobs
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
 definitions:
   CsvOptions:
     properties:
@@ -1046,849 +1892,3 @@ definitions:
           $ref: '#/definitions/UserDefinedFunctionResource'
         type: array
     type: object
-externalDocs:
-  url: 'https://cloud.google.com/bigquery/'
-host: www.googleapis.com
-info:
-  contact:
-    name: Google
-    url: 'https://google.com'
-  description: 'A data platform for customers to create, manage, share and query data.'
-  title: BigQuery API
-  version: v2
-  x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
-  x-logo:
-    url: 'https://cloud.google.com/_static/images/new-gcp-logo.png'
-  x-origin:
-    format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/bigquery/v2/rest'
-    version: v1
-  x-preferred: true
-  x-providerName: googleapis.com
-  x-serviceName: bigquery
-parameters:
-  alt:
-    default: json
-    description: Data format for the response.
-    enum:
-      - csv
-      - json
-    in: query
-    name: alt
-    type: string
-  fields:
-    description: Selector specifying which fields to include in a partial response.
-    in: query
-    name: fields
-    type: string
-  key:
-    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
-    in: query
-    name: key
-    type: string
-  oauth_token:
-    description: OAuth 2.0 token for the current user.
-    in: query
-    name: oauth_token
-    type: string
-  prettyPrint:
-    default: true
-    description: Returns response with indentations and line breaks.
-    in: query
-    name: prettyPrint
-    type: boolean
-  quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
-    in: query
-    name: quotaUser
-    type: string
-  userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
-    in: query
-    name: userIp
-    type: string
-paths:
-  '/project/{projectId}/jobs/{jobId}/cancel':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: 'Requests that a job be cancelled. This call will return immediately, and the client will need to poll for the job status to see if the cancel completed successfully. Cancelled jobs may still incur costs.'
-      operationId: bigquery.jobs.cancel
-      parameters:
-        - description: Project ID of the job to cancel
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: Job ID of the job to cancel
-          in: path
-          name: jobId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/JobCancelResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - jobs
-  /projects:
-    get:
-      description: Lists all projects to which you have been granted any project role.
-      operationId: bigquery.projects.list
-      parameters:
-        - description: Maximum number of results to return
-          in: query
-          name: maxResults
-          type: integer
-        - description: 'Page token, returned by a previous call, to request the next page of results'
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ProjectList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-      tags:
-        - projects
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/projects/{projectId}/datasets':
-    get:
-      description: Lists all datasets in the specified project to which you have been granted the READER dataset role.
-      operationId: bigquery.datasets.list
-      parameters:
-        - description: Project ID of the datasets to be listed
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: 'Whether to list all datasets, including hidden ones'
-          in: query
-          name: all
-          type: boolean
-        - description: The maximum number of results to return
-          in: query
-          name: maxResults
-          type: integer
-        - description: 'Page token, returned by a previous call, to request the next page of results'
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/DatasetList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-      tags:
-        - datasets
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Creates a new empty dataset.
-      operationId: bigquery.datasets.insert
-      parameters:
-        - description: Project ID of the new dataset
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Dataset'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Dataset'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - datasets
-  '/projects/{projectId}/datasets/{datasetId}':
-    delete:
-      description: 'Deletes the dataset specified by the datasetId value. Before you can delete a dataset, you must delete all its tables, either manually or by specifying deleteContents. Immediately after deletion, you can create another dataset with the same name.'
-      operationId: bigquery.datasets.delete
-      parameters:
-        - description: Project ID of the dataset being deleted
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: Dataset ID of dataset being deleted
-          in: path
-          name: datasetId
-          required: true
-          type: string
-        - description: 'If True, delete all the tables in the dataset. If False and the dataset contains tables, the request will fail. Default is False'
-          in: query
-          name: deleteContents
-          type: boolean
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - datasets
-    get:
-      description: Returns the dataset specified by datasetID.
-      operationId: bigquery.datasets.get
-      parameters:
-        - description: Project ID of the requested dataset
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: Dataset ID of the requested dataset
-          in: path
-          name: datasetId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Dataset'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-      tags:
-        - datasets
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    patch:
-      description: 'Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource. This method supports patch semantics.'
-      operationId: bigquery.datasets.patch
-      parameters:
-        - description: Project ID of the dataset being updated
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: Dataset ID of the dataset being updated
-          in: path
-          name: datasetId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Dataset'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Dataset'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - datasets
-    put:
-      description: 'Updates information in an existing dataset. The update method replaces the entire dataset resource, whereas the patch method only replaces fields that are provided in the submitted dataset resource.'
-      operationId: bigquery.datasets.update
-      parameters:
-        - description: Project ID of the dataset being updated
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: Dataset ID of the dataset being updated
-          in: path
-          name: datasetId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Dataset'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Dataset'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - datasets
-  '/projects/{projectId}/datasets/{datasetId}/tables':
-    get:
-      description: Lists all tables in the specified dataset. Requires the READER dataset role.
-      operationId: bigquery.tables.list
-      parameters:
-        - description: Project ID of the tables to list
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: Dataset ID of the tables to list
-          in: path
-          name: datasetId
-          required: true
-          type: string
-        - description: Maximum number of results to return
-          in: query
-          name: maxResults
-          type: integer
-        - description: 'Page token, returned by a previous call, to request the next page of results'
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/TableList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-      tags:
-        - tables
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: 'Creates a new, empty table in the dataset.'
-      operationId: bigquery.tables.insert
-      parameters:
-        - description: Project ID of the new table
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: Dataset ID of the new table
-          in: path
-          name: datasetId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Table'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Table'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - tables
-  '/projects/{projectId}/datasets/{datasetId}/tables/{tableId}':
-    delete:
-      description: 'Deletes the table specified by tableId from the dataset. If the table contains data, all the data will be deleted.'
-      operationId: bigquery.tables.delete
-      parameters:
-        - description: Project ID of the table to delete
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: Dataset ID of the table to delete
-          in: path
-          name: datasetId
-          required: true
-          type: string
-        - description: Table ID of the table to delete
-          in: path
-          name: tableId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - tables
-    get:
-      description: 'Gets the specified table resource by table ID. This method does not return the data in the table, it only returns the table resource, which describes the structure of this table.'
-      operationId: bigquery.tables.get
-      parameters:
-        - description: Project ID of the requested table
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: Dataset ID of the requested table
-          in: path
-          name: datasetId
-          required: true
-          type: string
-        - description: Table ID of the requested table
-          in: path
-          name: tableId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Table'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-      tags:
-        - tables
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    patch:
-      description: 'Updates information in an existing table. The update method replaces the entire table resource, whereas the patch method only replaces fields that are provided in the submitted table resource. This method supports patch semantics.'
-      operationId: bigquery.tables.patch
-      parameters:
-        - description: Project ID of the table to update
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: Dataset ID of the table to update
-          in: path
-          name: datasetId
-          required: true
-          type: string
-        - description: Table ID of the table to update
-          in: path
-          name: tableId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Table'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Table'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - tables
-    put:
-      description: 'Updates information in an existing table. The update method replaces the entire table resource, whereas the patch method only replaces fields that are provided in the submitted table resource.'
-      operationId: bigquery.tables.update
-      parameters:
-        - description: Project ID of the table to update
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: Dataset ID of the table to update
-          in: path
-          name: datasetId
-          required: true
-          type: string
-        - description: Table ID of the table to update
-          in: path
-          name: tableId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Table'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Table'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - tables
-  '/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/data':
-    get:
-      description: Retrieves table data from a specified set of rows. Requires the READER dataset role.
-      operationId: bigquery.tabledata.list
-      parameters:
-        - description: Project ID of the table to read
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: Dataset ID of the table to read
-          in: path
-          name: datasetId
-          required: true
-          type: string
-        - description: Table ID of the table to read
-          in: path
-          name: tableId
-          required: true
-          type: string
-        - description: Maximum number of results to return
-          in: query
-          name: maxResults
-          type: integer
-        - description: 'Page token, returned by a previous call, identifying the result set'
-          in: query
-          name: pageToken
-          type: string
-        - description: Zero-based index of the starting row to read
-          in: query
-          name: startIndex
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/TableDataList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-      tags:
-        - tabledata
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/insertAll':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Streams data into BigQuery one record at a time without needing to run a load job. Requires the WRITER dataset role.
-      operationId: bigquery.tabledata.insertAll
-      parameters:
-        - description: Project ID of the destination table.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: Dataset ID of the destination table.
-          in: path
-          name: datasetId
-          required: true
-          type: string
-        - description: Table ID of the destination table.
-          in: path
-          name: tableId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TableDataInsertAllRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/TableDataInsertAllResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
-            - 'https://www.googleapis.com/auth/bigquery.insertdata'
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - tabledata
-  '/projects/{projectId}/jobs':
-    get:
-      description: 'Lists all jobs that you started in the specified project. Job information is available for a six month period after creation. The job list is sorted in reverse chronological order, by job creation time. Requires the Can View project role, or the Is Owner project role if you set the allUsers property.'
-      operationId: bigquery.jobs.list
-      parameters:
-        - description: Project ID of the jobs to list
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: Whether to display jobs owned by all users in the project. Default false
-          in: query
-          name: allUsers
-          type: boolean
-        - description: Maximum number of results to return
-          in: query
-          name: maxResults
-          type: integer
-        - description: 'Page token, returned by a previous call, to request the next page of results'
-          in: query
-          name: pageToken
-          type: string
-        - description: Restrict information returned to a set of selected fields
-          enum:
-            - full
-            - minimal
-          in: query
-          name: projection
-          type: string
-        - collectionFormat: multi
-          description: Filter for job state
-          in: query
-          items:
-            enum:
-              - done
-              - pending
-              - running
-            type: string
-          name: stateFilter
-          type: array
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/JobList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-      tags:
-        - jobs
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      consumes:
-        - application/octet-stream
-      description: Starts a new asynchronous job. Requires the Can View project role.
-      operationId: bigquery.jobs.insert
-      parameters:
-        - description: Project ID of the project that will be billed for the job
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Job'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Job'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-      tags:
-        - jobs
-  '/projects/{projectId}/jobs/{jobId}':
-    get:
-      description: "Returns information about a specific job. Job information is available for a six month period after creation. Requires that you're the person who ran the job, or have the Is Owner project role."
-      operationId: bigquery.jobs.get
-      parameters:
-        - description: Project ID of the requested job
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: Job ID of the requested job
-          in: path
-          name: jobId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Job'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-      tags:
-        - jobs
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/projects/{projectId}/queries':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Runs a BigQuery SQL query synchronously and returns query results if the query completes within a specified timeout.
-      operationId: bigquery.jobs.query
-      parameters:
-        - description: Project ID of the project billed for the query
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/QueryRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/QueryResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-      tags:
-        - jobs
-  '/projects/{projectId}/queries/{jobId}':
-    get:
-      description: Retrieves the results of a query job.
-      operationId: bigquery.jobs.getQueryResults
-      parameters:
-        - description: Project ID of the query job
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: Job ID of the query job
-          in: path
-          name: jobId
-          required: true
-          type: string
-        - description: Maximum number of results to read
-          in: query
-          name: maxResults
-          type: integer
-        - description: 'Page token, returned by a previous call, to request the next page of results'
-          in: query
-          name: pageToken
-          type: string
-        - description: Zero-based index of the starting row
-          in: query
-          name: startIndex
-          type: string
-        - description: "How long to wait for the query to complete, in milliseconds, before returning. Default is 10 seconds. If the timeout passes before the job completes, the 'jobComplete' field in the response will be false"
-          in: query
-          name: timeoutMs
-          type: integer
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/GetQueryResultsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/bigquery'
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-      tags:
-        - jobs
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/bigquery': View and manage your data in Google BigQuery
-      'https://www.googleapis.com/auth/bigquery.insertdata': Insert data into Google BigQuery
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
-      'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
-      'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
-    type: oauth2
-swagger: '2.0'

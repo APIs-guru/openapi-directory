@@ -1,27 +1,8 @@
-basePath: /androidpublisher/v1/applications
-definitions:
-  SubscriptionPurchase:
-    description: "A SubscriptionPurchase resource indicates the status of a user's subscription purchase."
-    properties:
-      autoRenewing:
-        description: Whether the subscription will automatically be renewed when it reaches its current expiry time.
-        type: boolean
-      initiationTimestampMsec:
-        description: 'Time at which the subscription was granted, in milliseconds since Epoch.'
-        format: int64
-        type: string
-      kind:
-        default: 'androidpublisher#subscriptionPurchase'
-        description: This kind represents a subscriptionPurchase object in the androidpublisher service.
-        type: string
-      validUntilTimestampMsec:
-        description: 'Time at which the subscription will expire, in milliseconds since Epoch.'
-        format: int64
-        type: string
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/android-publisher'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /androidpublisher/v1/applications
 info:
   contact:
     name: Google
@@ -40,6 +21,16 @@ info:
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: androidpublisher
+externalDocs:
+  url: 'https://developers.google.com/android-publisher'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/androidpublisher': View and manage your Google Play Developer account
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -155,14 +146,23 @@ paths:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - purchases
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/androidpublisher': View and manage your Google Play Developer account
-    type: oauth2
-swagger: '2.0'
+definitions:
+  SubscriptionPurchase:
+    description: "A SubscriptionPurchase resource indicates the status of a user's subscription purchase."
+    properties:
+      autoRenewing:
+        description: Whether the subscription will automatically be renewed when it reaches its current expiry time.
+        type: boolean
+      initiationTimestampMsec:
+        description: 'Time at which the subscription was granted, in milliseconds since Epoch.'
+        format: int64
+        type: string
+      kind:
+        default: 'androidpublisher#subscriptionPurchase'
+        description: This kind represents a subscriptionPurchase object in the androidpublisher service.
+        type: string
+      validUntilTimestampMsec:
+        description: 'Time at which the subscription will expire, in milliseconds since Epoch.'
+        format: int64
+        type: string
+    type: object

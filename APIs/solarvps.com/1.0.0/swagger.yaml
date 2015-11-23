@@ -1,7 +1,8 @@
-basePath: /
-definitions:
-  '0': {}
+swagger: '2.0'
+schemes:
+  - http
 host: api.ss.solarvps.com
+basePath: /
 info:
   contact:
     email: support@solarvps.com
@@ -15,6 +16,21 @@ info:
     url: 'http://api.ss.solarvps.com/api-docs'
     version: '1.2'
   x-providerName: solarvps.com
+tags:
+  - description: Operations about pods
+    name: pods
+  - description: Operations about SolarRay Monitoring
+    name: solarray
+  - description: Operations about API Keys
+    name: key
+  - description: Operations about DNS Domains
+    name: domains
+  - description: Operations about DNS Records
+    name: dns
+  - description: Operations about DNS Records
+    name: contacts
+  - description: Operations about Support / Billing / Sales Tickets
+    name: tickets
 paths:
   /contacts:
     get:
@@ -409,21 +425,5 @@ paths:
       summary: Post a reply to a ticket
       tags:
         - tickets
-schemes:
-  - http
-swagger: '2.0'
-tags:
-  - description: Operations about pods
-    name: pods
-  - description: Operations about SolarRay Monitoring
-    name: solarray
-  - description: Operations about API Keys
-    name: key
-  - description: Operations about DNS Domains
-    name: domains
-  - description: Operations about DNS Records
-    name: dns
-  - description: Operations about DNS Records
-    name: contacts
-  - description: Operations about Support / Billing / Sales Tickets
-    name: tickets
+definitions:
+  '0': {}

@@ -1,74 +1,8 @@
-basePath: /v1
-consumes:
-  - application/json
-definitions:
-  Topups:
-    properties:
-      amount:
-        default: 500
-        description: "The amount, in cents, of the product you are purchasing. '500' = $5.00"
-        type: integer
-      carrier_code:
-        default: Claro
-        description: "Name of the mobile carrier. 'Claro'"
-        type: string
-      client_transaction_id:
-        default: ''
-        description: "UNIQUE 15 char ID you use to track topups. 'trans0123456789'"
-        type: string
-      country_code:
-        default: GT
-        description: "2-digit code of the country in ISO 3166 format. 'GT'"
-        type: string
-      mobile_number:
-        default: '50231234567'
-        description: "Mobile number to topup. VALIDATE prior to submission. '50231234567'"
-        type: string
-      plan:
-        default: Sandbox
-        description: "The Application plan being used. Case-sensitive. 'Sandbox' or 'Production'"
-        type: string
-      product_code:
-        default: ''
-        description: "Optional code to distinguish one particular product from another. '76560'"
-        type: string
-      terminal_id:
-        default: Kiosk 5
-        description: "ID for the Terminal used to perform the topup. 'Kiosk 5'"
-        type: string
-  TopupsReports:
-    properties:
-      client_transaction_id:
-        default: trans0123456789
-        description: "The UNIQUE 15 char ID used to track topups. 'trans0123456789'"
-        type: string
-      date_from:
-        default: '2016-01-28'
-        description: "The beginning date of the search IN YYYY-MM-DD format (America/New_York timezone). Not used in query by to_service_number. '2016-01-28'"
-        type: string
-      date_to:
-        default: '2016-01-28'
-        description: "The ending date of the search IN YYYY-MM-DD format (America/New_York timezone). Not used in query by to_service_number. '2016-01-28'"
-        type: string
-      to_service_number:
-        default: 0123456789
-        description: "Enter the to_service_number returned in the response to track the current transaction status. '0123456789'"
-        type: string
-      type_of_report:
-        default: client_transaction_id or to_service_number
-        description: The type of query you would like to search by.
-        type: string
-  TopupsReversal:
-    properties:
-      client_transaction_id:
-        default: trans0123456789
-        description: "UNIQUE 15 char ID you use to track topups. 'trans0123456789'"
-        type: string
-      to_service_number:
-        default: 0123456789
-        description: "UNIQUE IDT transaction number found in the response of a successful topup request. '0123456789'"
-        type: string
+swagger: '2.0'
+schemes:
+  - https
 host: api.idtbeyond.com
+basePath: /v1
 info:
   description: 'Our active docs provide the ability to test out your account and to see the responses to your queries. The services are RESTful, and are accessed using standard HTTP methods over a secure HTTPS channel. Requests and responses are currently sent in JSON format, and have a base URL of /v1.'
   termsOfService: 'https://app.idtbeyond.com/terms/'
@@ -82,6 +16,10 @@ info:
     url: 'https://app.idtbeyond.com/swagger/spec-920bcdf75d.json'
     version: '2.0'
   x-providerName: idtbeyond.com
+consumes:
+  - application/json
+produces:
+  - application/json
 paths:
   /iatu/balance:
     get:
@@ -567,8 +505,70 @@ paths:
       summary: Status check
       tags:
         - utilities
-produces:
-  - application/json
-schemes:
-  - https
-swagger: '2.0'
+definitions:
+  Topups:
+    properties:
+      amount:
+        default: 500
+        description: "The amount, in cents, of the product you are purchasing. '500' = $5.00"
+        type: integer
+      carrier_code:
+        default: Claro
+        description: "Name of the mobile carrier. 'Claro'"
+        type: string
+      client_transaction_id:
+        default: ''
+        description: "UNIQUE 15 char ID you use to track topups. 'trans0123456789'"
+        type: string
+      country_code:
+        default: GT
+        description: "2-digit code of the country in ISO 3166 format. 'GT'"
+        type: string
+      mobile_number:
+        default: '50231234567'
+        description: "Mobile number to topup. VALIDATE prior to submission. '50231234567'"
+        type: string
+      plan:
+        default: Sandbox
+        description: "The Application plan being used. Case-sensitive. 'Sandbox' or 'Production'"
+        type: string
+      product_code:
+        default: ''
+        description: "Optional code to distinguish one particular product from another. '76560'"
+        type: string
+      terminal_id:
+        default: Kiosk 5
+        description: "ID for the Terminal used to perform the topup. 'Kiosk 5'"
+        type: string
+  TopupsReports:
+    properties:
+      client_transaction_id:
+        default: trans0123456789
+        description: "The UNIQUE 15 char ID used to track topups. 'trans0123456789'"
+        type: string
+      date_from:
+        default: '2016-01-28'
+        description: "The beginning date of the search IN YYYY-MM-DD format (America/New_York timezone). Not used in query by to_service_number. '2016-01-28'"
+        type: string
+      date_to:
+        default: '2016-01-28'
+        description: "The ending date of the search IN YYYY-MM-DD format (America/New_York timezone). Not used in query by to_service_number. '2016-01-28'"
+        type: string
+      to_service_number:
+        default: 0123456789
+        description: "Enter the to_service_number returned in the response to track the current transaction status. '0123456789'"
+        type: string
+      type_of_report:
+        default: client_transaction_id or to_service_number
+        description: The type of query you would like to search by.
+        type: string
+  TopupsReversal:
+    properties:
+      client_transaction_id:
+        default: trans0123456789
+        description: "UNIQUE 15 char ID you use to track topups. 'trans0123456789'"
+        type: string
+      to_service_number:
+        default: 0123456789
+        description: "UNIQUE IDT transaction number found in the response of a successful topup request. '0123456789'"
+        type: string

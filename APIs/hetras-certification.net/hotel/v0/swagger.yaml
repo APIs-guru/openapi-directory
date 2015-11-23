@@ -1,386 +1,8 @@
-basePath: /
-definitions:
-  EmbeddedReservation:
-    description: Represents basic information about a reservation
-    properties:
-      _links:
-        additionalProperties:
-          $ref: '#/definitions/LinkObject'
-        description: Collection of links to the full representation of the reservation and other related resources
-        type: object
-      arrival_date:
-        description: Reservation arrival date
-        format: date-time
-        type: string
-      confirmation_id:
-        description: Confirmation Identifier for the reservation
-        type: string
-      departure_date:
-        description: Reservation departure date
-        format: date-time
-        type: string
-      reservation_number:
-        description: Number of the reservation
-        format: int32
-        type: integer
-      reservation_status:
-        description: Current reservation status
-        enum:
-          - Tentative
-          - Waitlisted
-          - OnRequest
-          - NonGuaranteed
-          - Guaranteed
-          - InHouse
-          - CheckedOut
-          - NoShow
-          - Denied
-          - Cancelled
-          - Released
-          - Walked
-          - Expired
-          - WalkIn
-          - Registered
-        type: string
-    required:
-      - confirmation_id
-      - reservation_number
-      - reservation_status
-      - arrival_date
-      - departure_date
-    type: object
-  EmbeddedRoomType:
-    description: "Represents a short version of room type. To get the full version\r\n            please follow the self link from the links collection."
-    properties:
-      _links:
-        additionalProperties:
-          $ref: '#/definitions/LinkObject'
-        description: Collection of links to related resources.
-        type: object
-      code:
-        description: Code of the room type.
-        type: string
-      description:
-        description: Description of the room type.
-        type: string
-      name:
-        description: Name of the room type.
-        type: string
-    type: object
-  EmbeddedRoomWithStatus:
-    properties:
-      _links:
-        additionalProperties:
-          $ref: '#/definitions/LinkObject'
-        description: Collection of links to related resources.
-        type: object
-      description:
-        description: Description of the room.
-        type: string
-      name:
-        description: Name of the room.
-        type: string
-      number:
-        description: Number of the room.
-        type: string
-      room_type:
-        $ref: '#/definitions/EmbeddedRoomType'
-        description: "Room type of the room.\r\n            \r\n            Contains only the basic properties of the room type."
-      status:
-        $ref: '#/definitions/RoomStatus'
-        description: Contains information about room status.
-    type: object
-  Hotel:
-    properties:
-      city:
-        type: string
-      code:
-        type: string
-      country:
-        type: string
-      desc:
-        type: string
-      email:
-        type: string
-      fax:
-        type: string
-      hotel_id:
-        format: int32
-        type: integer
-      latitude:
-        format: double
-        type: number
-      longitude:
-        format: double
-        type: number
-      name:
-        type: string
-      phone:
-        type: string
-      postal_code:
-        type: string
-      state:
-        type: string
-      street:
-        type: string
-      url:
-        type: string
-    type: object
-  LinkObject:
-    description: A Link Object represents a hyperlink from the containing resource to a URI.
-    properties:
-      deprecation:
-        description: "<para>The \"deprecation\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its presence indicates that the link is to be deprecated (i.e.\r\n            removed) at a future date.  Its value is a URL that SHOULD provide\r\n            further information about the deprecation.\r\n            A client SHOULD provide some notification (for example, by logging a\r\n            warning message) whenever it traverses over a link that has this\r\n            property.  The notification SHOULD include the deprecation property's\r\n            value so that a client maintainer can easily find information about\r\n            the deprecation.</para>"
-        type: string
-      href:
-        description: "<para>The \"href\" property is REQUIRED.</para>\r\n<para>\_</para>\r\n<para>Its value is either a URI [RFC3986] or a URI Template [RFC6570].\r\n            If the value is a URI Template then the Link Object SHOULD have a\r\n            \"templated\" attribute whose value is true.</para>"
-        type: string
-      hreflang:
-        description: "<para>The \"hreflang\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its value is a string and is intended for indicating the language of\r\n            the target resource (as defined by [RFC5988]).</para>"
-        type: string
-      name:
-        description: "<para>The \"name\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its value MAY be used as a secondary key for selecting Link Objects\r\n            which share the same relation type.</para>"
-        type: string
-      profile:
-        description: "<para>The \"profile\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its value is a string which is a URI that hints about the profile.</para>"
-        type: string
-      templated:
-        description: "<para>The \"templated\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its value is boolean and SHOULD be true when the Link Object's \"href\"\r\n            property is a URI Template.\r\n            Its value SHOULD be considered false if it is undefined or any other\r\n            value than true.</para>"
-        type: boolean
-      title:
-        description: "<para>The \"title\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its value is a string and is intended for labelling the link with a\r\n            human-readable identifier (as defined by [RFC5988]).</para>"
-        type: string
-      type:
-        description: "<para>The \"type\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its value is a string used as a hint to indicate the media type\r\n            expected when dereferencing the target resource.</para>"
-        type: string
-    required:
-      - href
-    type: object
-  Room:
-    description: Represents a room for a property.
-    properties:
-      amenities:
-        description: Provides a collection of amenities for the room.
-        items:
-          $ref: '#/definitions/SimpleAttribute'
-        type: array
-      beddings:
-        description: Provides information about available beds in the room.
-        items:
-          $ref: '#/definitions/RoomBedding'
-        type: array
-      description:
-        description: Description of the room.
-        type: string
-      expected_occupancy:
-        description: The usual amount of persons for the room.
-        format: int32
-        type: integer
-      extra_bed_allowed:
-        description: Extra bed allowed in the room.
-        type: boolean
-      floor:
-        description: Floor of the room.
-        format: int32
-        type: integer
-      locations:
-        description: Provides a collection of locations for the room.
-        items:
-          $ref: '#/definitions/SimpleAttribute'
-        type: array
-      max_persons:
-        description: Maximum number of allowed persons in the room.
-        format: int32
-        type: integer
-      min_persons:
-        description: Minimum number of allowed persons in the room.
-        format: int32
-        type: integer
-      name:
-        description: Name of the room.
-        type: string
-      number:
-        description: Number of the room.
-        type: string
-      reservations:
-        description: Current reservation(s) for the room
-        items:
-          $ref: '#/definitions/EmbeddedReservation'
-        type: array
-      room_type:
-        $ref: '#/definitions/EmbeddedRoomType'
-        description: "Room type of the room.\r\n            \r\n            Contains only the basic properties of the room type."
-      status:
-        $ref: '#/definitions/RoomStatus'
-        description: Contains information about room status.
-      views:
-        description: Provides a collection of views for the room.
-        items:
-          $ref: '#/definitions/SimpleAttribute'
-        type: array
-    required:
-      - number
-      - room_type
-      - status
-      - min_persons
-      - max_persons
-      - expected_occupancy
-      - floor
-    type: object
-  RoomBedding:
-    description: Represent information about room bedding
-    properties:
-      count:
-        description: Amount of available beds of the specified bedding type
-        format: int32
-        type: integer
-      type:
-        description: The type of bed for the room type
-        enum:
-          - NotDefined
-          - Double
-          - Futon
-          - King
-          - MurphyBed
-          - Queen
-          - SofaBed
-          - TatamiMats
-          - Twin
-          - Single
-        type: string
-    type: object
-  RoomListResponse:
-    properties:
-      _count:
-        format: int32
-        type: integer
-      _links:
-        additionalProperties:
-          $ref: '#/definitions/LinkObject'
-        type: object
-      rooms:
-        items:
-          $ref: '#/definitions/EmbeddedRoomWithStatus'
-        type: array
-    required:
-      - rooms
-    type: object
-  RoomMaintenance:
-    properties:
-      from:
-        type: string
-      reason:
-        type: string
-      to:
-        type: string
-      value:
-        enum:
-          - NotSet
-          - None
-          - OutOfInventory
-          - OutOfOrder
-          - OutOfService
-        type: string
-    type: object
-  RoomStatus:
-    description: Represents current room status data.
-    properties:
-      condition:
-        description: Room Condition status.
-        enum:
-          - CleanNotInspected
-          - Clean
-          - Dirty
-        type: string
-      frontdesk_occupancy:
-        description: FrontDesk occupancy status.
-        enum:
-          - Occupied
-          - Vacant
-        type: string
-      housekeeping_occupancy:
-        description: Housekeeping occupancy status.
-        enum:
-          - Occupied
-          - Vacant
-        type: string
-      maintenance:
-        $ref: '#/definitions/RoomMaintenance'
-        description: Provides information about current room maintenance status.
-    type: object
-  RoomType:
-    description: Represent a room type for a property
-    properties:
-      amenities:
-        description: Provides a collection of amenities for the room type
-        items:
-          $ref: '#/definitions/SimpleAttribute'
-        type: array
-      bedding_type:
-        description: The type of bed for the room type
-        enum:
-          - NotDefined
-          - Double
-          - Futon
-          - King
-          - MurphyBed
-          - Queen
-          - SofaBed
-          - TatamiMats
-          - Twin
-          - Single
-        type: string
-      code:
-        description: Code of the room type
-        type: string
-      description:
-        description: Provides a description of the room type
-        type: string
-      expected_occupancy:
-        description: The usual amount of persons for the room type
-        format: int32
-        type: integer
-      facilities:
-        description: Provides a collection of facilities for the room type
-        items:
-          $ref: '#/definitions/SimpleAttribute'
-        type: array
-      max_persons:
-        description: The maximum amount of persons for the room type
-        format: int32
-        type: integer
-      min_persons:
-        description: The minimum amount of persons for the room type
-        format: int32
-        type: integer
-      name:
-        description: Name of the room type
-        type: string
-      views:
-        description: Provides a collection of views for the room type
-        items:
-          $ref: '#/definitions/SimpleAttribute'
-        type: array
-    type: object
-  SimpleAttribute:
-    description: Represents a simple attribute
-    properties:
-      code:
-        description: The code of the attribute
-        type: string
-      name:
-        description: The name of the attribute
-        type: string
-    type: object
-  TotalCountResponse:
-    properties:
-      _count:
-        format: int32
-        type: integer
-    required:
-      - _count
-    type: object
+swagger: '2.0'
+schemes:
+  - https
 host: api.hetras-certification.net
+basePath: /
 info:
   title: hetras hotel API v0
   version: v0
@@ -836,6 +458,384 @@ paths:
       summary: Get a specific room with all the details for the specified hotel id.
       tags:
         - Room
-schemes:
-  - https
-swagger: '2.0'
+definitions:
+  EmbeddedReservation:
+    description: Represents basic information about a reservation
+    properties:
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to the full representation of the reservation and other related resources
+        type: object
+      arrival_date:
+        description: Reservation arrival date
+        format: date-time
+        type: string
+      confirmation_id:
+        description: Confirmation Identifier for the reservation
+        type: string
+      departure_date:
+        description: Reservation departure date
+        format: date-time
+        type: string
+      reservation_number:
+        description: Number of the reservation
+        format: int32
+        type: integer
+      reservation_status:
+        description: Current reservation status
+        enum:
+          - Tentative
+          - Waitlisted
+          - OnRequest
+          - NonGuaranteed
+          - Guaranteed
+          - InHouse
+          - CheckedOut
+          - NoShow
+          - Denied
+          - Cancelled
+          - Released
+          - Walked
+          - Expired
+          - WalkIn
+          - Registered
+        type: string
+    required:
+      - confirmation_id
+      - reservation_number
+      - reservation_status
+      - arrival_date
+      - departure_date
+    type: object
+  EmbeddedRoomType:
+    description: "Represents a short version of room type. To get the full version\r\n            please follow the self link from the links collection."
+    properties:
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources.
+        type: object
+      code:
+        description: Code of the room type.
+        type: string
+      description:
+        description: Description of the room type.
+        type: string
+      name:
+        description: Name of the room type.
+        type: string
+    type: object
+  EmbeddedRoomWithStatus:
+    properties:
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources.
+        type: object
+      description:
+        description: Description of the room.
+        type: string
+      name:
+        description: Name of the room.
+        type: string
+      number:
+        description: Number of the room.
+        type: string
+      room_type:
+        $ref: '#/definitions/EmbeddedRoomType'
+        description: "Room type of the room.\r\n            \r\n            Contains only the basic properties of the room type."
+      status:
+        $ref: '#/definitions/RoomStatus'
+        description: Contains information about room status.
+    type: object
+  Hotel:
+    properties:
+      city:
+        type: string
+      code:
+        type: string
+      country:
+        type: string
+      desc:
+        type: string
+      email:
+        type: string
+      fax:
+        type: string
+      hotel_id:
+        format: int32
+        type: integer
+      latitude:
+        format: double
+        type: number
+      longitude:
+        format: double
+        type: number
+      name:
+        type: string
+      phone:
+        type: string
+      postal_code:
+        type: string
+      state:
+        type: string
+      street:
+        type: string
+      url:
+        type: string
+    type: object
+  LinkObject:
+    description: A Link Object represents a hyperlink from the containing resource to a URI.
+    properties:
+      deprecation:
+        description: "<para>The \"deprecation\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its presence indicates that the link is to be deprecated (i.e.\r\n            removed) at a future date.  Its value is a URL that SHOULD provide\r\n            further information about the deprecation.\r\n            A client SHOULD provide some notification (for example, by logging a\r\n            warning message) whenever it traverses over a link that has this\r\n            property.  The notification SHOULD include the deprecation property's\r\n            value so that a client maintainer can easily find information about\r\n            the deprecation.</para>"
+        type: string
+      href:
+        description: "<para>The \"href\" property is REQUIRED.</para>\r\n<para>\_</para>\r\n<para>Its value is either a URI [RFC3986] or a URI Template [RFC6570].\r\n            If the value is a URI Template then the Link Object SHOULD have a\r\n            \"templated\" attribute whose value is true.</para>"
+        type: string
+      hreflang:
+        description: "<para>The \"hreflang\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its value is a string and is intended for indicating the language of\r\n            the target resource (as defined by [RFC5988]).</para>"
+        type: string
+      name:
+        description: "<para>The \"name\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its value MAY be used as a secondary key for selecting Link Objects\r\n            which share the same relation type.</para>"
+        type: string
+      profile:
+        description: "<para>The \"profile\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its value is a string which is a URI that hints about the profile.</para>"
+        type: string
+      templated:
+        description: "<para>The \"templated\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its value is boolean and SHOULD be true when the Link Object's \"href\"\r\n            property is a URI Template.\r\n            Its value SHOULD be considered false if it is undefined or any other\r\n            value than true.</para>"
+        type: boolean
+      title:
+        description: "<para>The \"title\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its value is a string and is intended for labelling the link with a\r\n            human-readable identifier (as defined by [RFC5988]).</para>"
+        type: string
+      type:
+        description: "<para>The \"type\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its value is a string used as a hint to indicate the media type\r\n            expected when dereferencing the target resource.</para>"
+        type: string
+    required:
+      - href
+    type: object
+  Room:
+    description: Represents a room for a property.
+    properties:
+      amenities:
+        description: Provides a collection of amenities for the room.
+        items:
+          $ref: '#/definitions/SimpleAttribute'
+        type: array
+      beddings:
+        description: Provides information about available beds in the room.
+        items:
+          $ref: '#/definitions/RoomBedding'
+        type: array
+      description:
+        description: Description of the room.
+        type: string
+      expected_occupancy:
+        description: The usual amount of persons for the room.
+        format: int32
+        type: integer
+      extra_bed_allowed:
+        description: Extra bed allowed in the room.
+        type: boolean
+      floor:
+        description: Floor of the room.
+        format: int32
+        type: integer
+      locations:
+        description: Provides a collection of locations for the room.
+        items:
+          $ref: '#/definitions/SimpleAttribute'
+        type: array
+      max_persons:
+        description: Maximum number of allowed persons in the room.
+        format: int32
+        type: integer
+      min_persons:
+        description: Minimum number of allowed persons in the room.
+        format: int32
+        type: integer
+      name:
+        description: Name of the room.
+        type: string
+      number:
+        description: Number of the room.
+        type: string
+      reservations:
+        description: Current reservation(s) for the room
+        items:
+          $ref: '#/definitions/EmbeddedReservation'
+        type: array
+      room_type:
+        $ref: '#/definitions/EmbeddedRoomType'
+        description: "Room type of the room.\r\n            \r\n            Contains only the basic properties of the room type."
+      status:
+        $ref: '#/definitions/RoomStatus'
+        description: Contains information about room status.
+      views:
+        description: Provides a collection of views for the room.
+        items:
+          $ref: '#/definitions/SimpleAttribute'
+        type: array
+    required:
+      - number
+      - room_type
+      - status
+      - min_persons
+      - max_persons
+      - expected_occupancy
+      - floor
+    type: object
+  RoomBedding:
+    description: Represent information about room bedding
+    properties:
+      count:
+        description: Amount of available beds of the specified bedding type
+        format: int32
+        type: integer
+      type:
+        description: The type of bed for the room type
+        enum:
+          - NotDefined
+          - Double
+          - Futon
+          - King
+          - MurphyBed
+          - Queen
+          - SofaBed
+          - TatamiMats
+          - Twin
+          - Single
+        type: string
+    type: object
+  RoomListResponse:
+    properties:
+      _count:
+        format: int32
+        type: integer
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        type: object
+      rooms:
+        items:
+          $ref: '#/definitions/EmbeddedRoomWithStatus'
+        type: array
+    required:
+      - rooms
+    type: object
+  RoomMaintenance:
+    properties:
+      from:
+        type: string
+      reason:
+        type: string
+      to:
+        type: string
+      value:
+        enum:
+          - NotSet
+          - None
+          - OutOfInventory
+          - OutOfOrder
+          - OutOfService
+        type: string
+    type: object
+  RoomStatus:
+    description: Represents current room status data.
+    properties:
+      condition:
+        description: Room Condition status.
+        enum:
+          - CleanNotInspected
+          - Clean
+          - Dirty
+        type: string
+      frontdesk_occupancy:
+        description: FrontDesk occupancy status.
+        enum:
+          - Occupied
+          - Vacant
+        type: string
+      housekeeping_occupancy:
+        description: Housekeeping occupancy status.
+        enum:
+          - Occupied
+          - Vacant
+        type: string
+      maintenance:
+        $ref: '#/definitions/RoomMaintenance'
+        description: Provides information about current room maintenance status.
+    type: object
+  RoomType:
+    description: Represent a room type for a property
+    properties:
+      amenities:
+        description: Provides a collection of amenities for the room type
+        items:
+          $ref: '#/definitions/SimpleAttribute'
+        type: array
+      bedding_type:
+        description: The type of bed for the room type
+        enum:
+          - NotDefined
+          - Double
+          - Futon
+          - King
+          - MurphyBed
+          - Queen
+          - SofaBed
+          - TatamiMats
+          - Twin
+          - Single
+        type: string
+      code:
+        description: Code of the room type
+        type: string
+      description:
+        description: Provides a description of the room type
+        type: string
+      expected_occupancy:
+        description: The usual amount of persons for the room type
+        format: int32
+        type: integer
+      facilities:
+        description: Provides a collection of facilities for the room type
+        items:
+          $ref: '#/definitions/SimpleAttribute'
+        type: array
+      max_persons:
+        description: The maximum amount of persons for the room type
+        format: int32
+        type: integer
+      min_persons:
+        description: The minimum amount of persons for the room type
+        format: int32
+        type: integer
+      name:
+        description: Name of the room type
+        type: string
+      views:
+        description: Provides a collection of views for the room type
+        items:
+          $ref: '#/definitions/SimpleAttribute'
+        type: array
+    type: object
+  SimpleAttribute:
+    description: Represents a simple attribute
+    properties:
+      code:
+        description: The code of the attribute
+        type: string
+      name:
+        description: The name of the attribute
+        type: string
+    type: object
+  TotalCountResponse:
+    properties:
+      _count:
+        format: int32
+        type: integer
+    required:
+      - _count
+    type: object

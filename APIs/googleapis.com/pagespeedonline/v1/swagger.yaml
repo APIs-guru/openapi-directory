@@ -1,4 +1,122 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.googleapis.com
 basePath: /pagespeedonline/v1
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: Lets you analyze the performance of a web page and get tailored suggestions to make that page faster.
+  title: PageSpeed Insights API
+  version: v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/pagespeedonline/v1/rest'
+    version: v1
+  x-preferred: false
+  x-providerName: googleapis.com
+  x-serviceName: pagespeedonline
+externalDocs:
+  url: 'https://developers.google.com/speed/docs/insights/v1/getting_started'
+parameters:
+  alt:
+    default: json
+    description: Data format for the response.
+    enum:
+      - json
+    in: query
+    name: alt
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    in: query
+    name: quotaUser
+    type: string
+  userIp:
+    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    in: query
+    name: userIp
+    type: string
+paths:
+  /runPagespeed:
+    get:
+      description: 'Runs PageSpeed analysis on the page at the specified URL, and returns a PageSpeed score, a list of suggestions to make that page faster, and other information.'
+      operationId: pagespeedonline.pagespeedapi.runpagespeed
+      parameters:
+        - description: The URL to fetch and analyze
+          in: query
+          name: url
+          required: true
+          type: string
+        - default: false
+          description: Indicates if third party resources should be filtered out before PageSpeed analysis.
+          in: query
+          name: filter_third_party_resources
+          type: boolean
+        - description: The locale used to localize formatted results
+          in: query
+          name: locale
+          type: string
+        - collectionFormat: multi
+          description: 'A PageSpeed rule to run; if none are given, all rules are run'
+          in: query
+          items:
+            type: string
+          name: rule
+          type: array
+        - default: false
+          description: Indicates if binary data containing a screenshot should be included
+          in: query
+          name: screenshot
+          type: boolean
+        - description: The analysis strategy to use
+          enum:
+            - desktop
+            - mobile
+          in: query
+          name: strategy
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Result'
+      tags:
+        - pagespeedapi
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
 definitions:
   Result:
     properties:
@@ -205,121 +323,3 @@ definitions:
             type: integer
         type: object
     type: object
-externalDocs:
-  url: 'https://developers.google.com/speed/docs/insights/v1/getting_started'
-host: www.googleapis.com
-info:
-  contact:
-    name: Google
-    url: 'https://google.com'
-  description: Lets you analyze the performance of a web page and get tailored suggestions to make that page faster.
-  title: PageSpeed Insights API
-  version: v1
-  x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
-  x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
-  x-origin:
-    format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/pagespeedonline/v1/rest'
-    version: v1
-  x-preferred: false
-  x-providerName: googleapis.com
-  x-serviceName: pagespeedonline
-parameters:
-  alt:
-    default: json
-    description: Data format for the response.
-    enum:
-      - json
-    in: query
-    name: alt
-    type: string
-  fields:
-    description: Selector specifying which fields to include in a partial response.
-    in: query
-    name: fields
-    type: string
-  key:
-    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
-    in: query
-    name: key
-    type: string
-  oauth_token:
-    description: OAuth 2.0 token for the current user.
-    in: query
-    name: oauth_token
-    type: string
-  prettyPrint:
-    default: true
-    description: Returns response with indentations and line breaks.
-    in: query
-    name: prettyPrint
-    type: boolean
-  quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
-    in: query
-    name: quotaUser
-    type: string
-  userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
-    in: query
-    name: userIp
-    type: string
-paths:
-  /runPagespeed:
-    get:
-      description: 'Runs PageSpeed analysis on the page at the specified URL, and returns a PageSpeed score, a list of suggestions to make that page faster, and other information.'
-      operationId: pagespeedonline.pagespeedapi.runpagespeed
-      parameters:
-        - description: The URL to fetch and analyze
-          in: query
-          name: url
-          required: true
-          type: string
-        - default: false
-          description: Indicates if third party resources should be filtered out before PageSpeed analysis.
-          in: query
-          name: filter_third_party_resources
-          type: boolean
-        - description: The locale used to localize formatted results
-          in: query
-          name: locale
-          type: string
-        - collectionFormat: multi
-          description: 'A PageSpeed rule to run; if none are given, all rules are run'
-          in: query
-          items:
-            type: string
-          name: rule
-          type: array
-        - default: false
-          description: Indicates if binary data containing a screenshot should be included
-          in: query
-          name: screenshot
-          type: boolean
-        - description: The analysis strategy to use
-          enum:
-            - desktop
-            - mobile
-          in: query
-          name: strategy
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Result'
-      tags:
-        - pagespeedapi
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-schemes:
-  - https
-swagger: '2.0'

@@ -1,66 +1,8 @@
-basePath: /language/translate
-definitions:
-  DetectionsListResponse:
-    properties:
-      detections:
-        description: A detections contains detection results of several text
-        items:
-          $ref: '#/definitions/DetectionsResource'
-        type: array
-    type: object
-  DetectionsResource:
-    description: An array of languages which we detect for the given text The most likely language list first.
-    items:
-      properties:
-        confidence:
-          description: The confidence of the detection resul of this language.
-          format: float
-          type: number
-        isReliable:
-          description: A boolean to indicate is the language detection result reliable.
-          type: boolean
-        language:
-          description: The language we detect
-          type: string
-      type: object
-    type: array
-  LanguagesListResponse:
-    properties:
-      languages:
-        description: 'List of source/target languages supported by the translation API. If target parameter is unspecified, the list is sorted by the ASCII code point order of the language code. If target parameter is specified, the list is sorted by the collation order of the language name in the target language.'
-        items:
-          $ref: '#/definitions/LanguagesResource'
-        type: array
-    type: object
-  LanguagesResource:
-    properties:
-      language:
-        description: The language code.
-        type: string
-      name:
-        description: The localized name of the language if target parameter is given.
-        type: string
-    type: object
-  TranslationsListResponse:
-    properties:
-      translations:
-        description: Translations contains list of translation results of given text
-        items:
-          $ref: '#/definitions/TranslationsResource'
-        type: array
-    type: object
-  TranslationsResource:
-    properties:
-      detectedSourceLanguage:
-        description: Detected source language if source parameter is unspecified.
-        type: string
-      translatedText:
-        description: The translation.
-        type: string
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/translate/v2/using_rest'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /language/translate
 info:
   contact:
     name: Google
@@ -79,6 +21,8 @@ info:
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: translate
+externalDocs:
+  url: 'https://developers.google.com/translate/v2/using_rest'
 parameters:
   alt:
     default: json
@@ -223,6 +167,62 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-schemes:
-  - https
-swagger: '2.0'
+definitions:
+  DetectionsListResponse:
+    properties:
+      detections:
+        description: A detections contains detection results of several text
+        items:
+          $ref: '#/definitions/DetectionsResource'
+        type: array
+    type: object
+  DetectionsResource:
+    description: An array of languages which we detect for the given text The most likely language list first.
+    items:
+      properties:
+        confidence:
+          description: The confidence of the detection resul of this language.
+          format: float
+          type: number
+        isReliable:
+          description: A boolean to indicate is the language detection result reliable.
+          type: boolean
+        language:
+          description: The language we detect
+          type: string
+      type: object
+    type: array
+  LanguagesListResponse:
+    properties:
+      languages:
+        description: 'List of source/target languages supported by the translation API. If target parameter is unspecified, the list is sorted by the ASCII code point order of the language code. If target parameter is specified, the list is sorted by the collation order of the language name in the target language.'
+        items:
+          $ref: '#/definitions/LanguagesResource'
+        type: array
+    type: object
+  LanguagesResource:
+    properties:
+      language:
+        description: The language code.
+        type: string
+      name:
+        description: The localized name of the language if target parameter is given.
+        type: string
+    type: object
+  TranslationsListResponse:
+    properties:
+      translations:
+        description: Translations contains list of translation results of given text
+        items:
+          $ref: '#/definitions/TranslationsResource'
+        type: array
+    type: object
+  TranslationsResource:
+    properties:
+      detectedSourceLanguage:
+        description: Detected source language if source parameter is unspecified.
+        type: string
+      translatedText:
+        description: The translation.
+        type: string
+    type: object

@@ -1,4 +1,304 @@
+swagger: '2.0'
+schemes:
+  - https
+host: vatapi.com
 basePath: /v1
+info:
+  description: A developer friendly API to help your business achieve VAT compliance
+  title: VAT API
+  version: '1'
+  x-logo:
+    url: 'https://vatapi.com/images/logo-invoice.jpg'
+  x-origin:
+    format: swagger
+    url: 'https://vatapi.com/api-docs.json'
+    version: '1.2'
+  x-providerName: vatapi.com
+tags:
+  - name: api
+paths:
+  /country-code-check:
+    get:
+      operationId: country_code_check
+      parameters:
+        - description: Enter your API key
+          in: header
+          name: Apikey
+          required: true
+          type: string
+        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
+          in: header
+          name: Response-Type
+          type: string
+        - description: The 2 digit country code
+          in: query
+          name: code
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Country_Code_Check'
+      summary: Retrieve a countries VAT rates by its 2 digit country code
+      tags:
+        - api
+  /currency-conversion:
+    get:
+      operationId: currency_conversion
+      parameters:
+        - description: Enter your API key
+          in: header
+          name: Apikey
+          required: true
+          type: string
+        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
+          in: header
+          name: Response-Type
+          type: string
+        - description: The currency code you are converting from
+          in: query
+          name: currency_from
+          required: true
+          type: string
+        - description: The currency code you are converting to
+          in: query
+          name: currency_to
+          required: true
+          type: string
+        - description: 'Optional, an amount you are wanting to convert. Leave blank to just get the current rate'
+          in: query
+          name: amount
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Currency_Conversion'
+      summary: Convert a currency
+      tags:
+        - api
+  /invoice:
+    post:
+      operationId: create_invoice
+      parameters:
+        - description: Enter your API key
+          in: header
+          name: Apikey
+          required: true
+          type: string
+        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
+          in: header
+          name: Response-Type
+          type: string
+        - description: Enter invoice data as JSON
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Invoice_Data'
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Create_Invoice'
+      summary: Create a VAT invoice
+      tags:
+        - api
+  '/invoice/{id}':
+    delete:
+      operationId: invoice_delete
+      parameters:
+        - description: Enter your API key
+          in: header
+          name: Apikey
+          required: true
+          type: string
+        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
+          in: header
+          name: Response-Type
+          type: string
+        - description: Enter an invoice id
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: No response was specified
+      summary: Delete an invoice
+      tags:
+        - api
+    get:
+      operationId: get_invoice
+      parameters:
+        - description: Enter your API key
+          in: header
+          name: Apikey
+          required: true
+          type: string
+        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
+          in: header
+          name: Response-Type
+          type: string
+        - description: Enter the invoice id
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Retrieve_Invoice'
+      summary: Retrieve an invoice
+      tags:
+        - api
+    put:
+      operationId: invoice_update
+      parameters:
+        - description: Enter your API key
+          in: header
+          name: Apikey
+          required: true
+          type: string
+        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
+          in: header
+          name: Response-Type
+          type: string
+        - description: Enter an invoice id
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Enter invoice data as JSON
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Update_Invoice_Array'
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Update_Invoice'
+      summary: Update an existing invoice
+      tags:
+        - api
+  /ip-check:
+    get:
+      operationId: ip_check
+      parameters:
+        - description: Enter your API key
+          in: header
+          name: Apikey
+          required: true
+          type: string
+        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
+          in: header
+          name: Response-Type
+          type: string
+        - description: The IP address to search against
+          in: query
+          name: address
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/IP_Check'
+      summary: Retrieve a countries VAT rates from an IP address
+      tags:
+        - api
+  /vat-number-check:
+    get:
+      description: "<p>We highly recommend if you are able, to check a VAT number on your end first to save wasted API lookups. It maybe that your customer has simply entered the wrong format. <a href='http://www.braemoor.co.uk/software/vat.shtml' target='_blank'>Heres a client side way to check the format using Javascript</a></p>"
+      operationId: vat_number_validate
+      parameters:
+        - description: Enter your API key
+          in: header
+          name: Apikey
+          required: true
+          type: string
+        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
+          in: header
+          name: Response-Type
+          type: string
+        - description: The VAT number to validate
+          in: query
+          name: vatid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Validate a VAT number
+      tags:
+        - api
+  /vat-price:
+    get:
+      operationId: convert_price
+      parameters:
+        - description: Enter your API key
+          in: header
+          name: Apikey
+          required: true
+          type: string
+        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
+          in: header
+          name: Response-Type
+          type: string
+        - description: The 2 digit country code
+          in: query
+          name: code
+          required: true
+          type: string
+        - description: 'The VAT rate to get the price for. Default: standard'
+          in: query
+          name: country_rate
+          required: false
+          type: string
+        - description: The price you want converting
+          in: query
+          name: price
+          required: true
+          type: integer
+        - description: "Optional, if the price is including VAT set the type to 'incl'. Otherwise the default is assumed as excluding VAT already, 'excl'"
+          in: query
+          name: type
+          required: false
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Convert_Price'
+      summary: Convert a price to or from VAT price.
+      tags:
+        - api
+  /vat-rates:
+    get:
+      operationId: vat_rates
+      parameters:
+        - description: Enter your API key
+          in: header
+          name: Apikey
+          required: true
+          type: string
+        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
+          in: header
+          name: Response-Type
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Vat_Rates'
+      summary: Retrieve all current EU VAT rates
+      tags:
+        - api
 definitions:
   Convert_Price:
     properties:
@@ -556,303 +856,3 @@ definitions:
     required:
       - applies_to
       - value
-host: vatapi.com
-info:
-  description: A developer friendly API to help your business achieve VAT compliance
-  title: VAT API
-  version: '1'
-  x-logo:
-    url: 'https://vatapi.com/images/logo-invoice.jpg'
-  x-origin:
-    format: swagger
-    url: 'https://vatapi.com/api-docs.json'
-    version: '1.2'
-  x-providerName: vatapi.com
-paths:
-  /country-code-check:
-    get:
-      operationId: country_code_check
-      parameters:
-        - description: Enter your API key
-          in: header
-          name: Apikey
-          required: true
-          type: string
-        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
-          in: header
-          name: Response-Type
-          type: string
-        - description: The 2 digit country code
-          in: query
-          name: code
-          required: true
-          type: string
-      responses:
-        '200':
-          description: No response was specified
-          schema:
-            $ref: '#/definitions/Country_Code_Check'
-      summary: Retrieve a countries VAT rates by its 2 digit country code
-      tags:
-        - api
-  /currency-conversion:
-    get:
-      operationId: currency_conversion
-      parameters:
-        - description: Enter your API key
-          in: header
-          name: Apikey
-          required: true
-          type: string
-        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
-          in: header
-          name: Response-Type
-          type: string
-        - description: The currency code you are converting from
-          in: query
-          name: currency_from
-          required: true
-          type: string
-        - description: The currency code you are converting to
-          in: query
-          name: currency_to
-          required: true
-          type: string
-        - description: 'Optional, an amount you are wanting to convert. Leave blank to just get the current rate'
-          in: query
-          name: amount
-          required: false
-          type: integer
-      responses:
-        '200':
-          description: No response was specified
-          schema:
-            $ref: '#/definitions/Currency_Conversion'
-      summary: Convert a currency
-      tags:
-        - api
-  /invoice:
-    post:
-      operationId: create_invoice
-      parameters:
-        - description: Enter your API key
-          in: header
-          name: Apikey
-          required: true
-          type: string
-        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
-          in: header
-          name: Response-Type
-          type: string
-        - description: Enter invoice data as JSON
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/Invoice_Data'
-      responses:
-        '200':
-          description: No response was specified
-          schema:
-            $ref: '#/definitions/Create_Invoice'
-      summary: Create a VAT invoice
-      tags:
-        - api
-  '/invoice/{id}':
-    delete:
-      operationId: invoice_delete
-      parameters:
-        - description: Enter your API key
-          in: header
-          name: Apikey
-          required: true
-          type: string
-        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
-          in: header
-          name: Response-Type
-          type: string
-        - description: Enter an invoice id
-          in: path
-          name: id
-          required: true
-          type: integer
-      responses:
-        '200':
-          description: No response was specified
-      summary: Delete an invoice
-      tags:
-        - api
-    get:
-      operationId: get_invoice
-      parameters:
-        - description: Enter your API key
-          in: header
-          name: Apikey
-          required: true
-          type: string
-        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
-          in: header
-          name: Response-Type
-          type: string
-        - description: Enter the invoice id
-          in: path
-          name: id
-          required: true
-          type: integer
-      responses:
-        '200':
-          description: No response was specified
-          schema:
-            $ref: '#/definitions/Retrieve_Invoice'
-      summary: Retrieve an invoice
-      tags:
-        - api
-    put:
-      operationId: invoice_update
-      parameters:
-        - description: Enter your API key
-          in: header
-          name: Apikey
-          required: true
-          type: string
-        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
-          in: header
-          name: Response-Type
-          type: string
-        - description: Enter an invoice id
-          in: path
-          name: id
-          required: true
-          type: integer
-        - description: Enter invoice data as JSON
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/Update_Invoice_Array'
-      responses:
-        '200':
-          description: No response was specified
-          schema:
-            $ref: '#/definitions/Update_Invoice'
-      summary: Update an existing invoice
-      tags:
-        - api
-  /ip-check:
-    get:
-      operationId: ip_check
-      parameters:
-        - description: Enter your API key
-          in: header
-          name: Apikey
-          required: true
-          type: string
-        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
-          in: header
-          name: Response-Type
-          type: string
-        - description: The IP address to search against
-          in: query
-          name: address
-          required: true
-          type: string
-      responses:
-        '200':
-          description: No response was specified
-          schema:
-            $ref: '#/definitions/IP_Check'
-      summary: Retrieve a countries VAT rates from an IP address
-      tags:
-        - api
-  /vat-number-check:
-    get:
-      description: "<p>We highly recommend if you are able, to check a VAT number on your end first to save wasted API lookups. It maybe that your customer has simply entered the wrong format. <a href='http://www.braemoor.co.uk/software/vat.shtml' target='_blank'>Heres a client side way to check the format using Javascript</a></p>"
-      operationId: vat_number_validate
-      parameters:
-        - description: Enter your API key
-          in: header
-          name: Apikey
-          required: true
-          type: string
-        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
-          in: header
-          name: Response-Type
-          type: string
-        - description: The VAT number to validate
-          in: query
-          name: vatid
-          required: true
-          type: string
-      responses:
-        '200':
-          description: No response was specified
-      summary: Validate a VAT number
-      tags:
-        - api
-  /vat-price:
-    get:
-      operationId: convert_price
-      parameters:
-        - description: Enter your API key
-          in: header
-          name: Apikey
-          required: true
-          type: string
-        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
-          in: header
-          name: Response-Type
-          type: string
-        - description: The 2 digit country code
-          in: query
-          name: code
-          required: true
-          type: string
-        - description: 'The VAT rate to get the price for. Default: standard'
-          in: query
-          name: country_rate
-          required: false
-          type: string
-        - description: The price you want converting
-          in: query
-          name: price
-          required: true
-          type: integer
-        - description: "Optional, if the price is including VAT set the type to 'incl'. Otherwise the default is assumed as excluding VAT already, 'excl'"
-          in: query
-          name: type
-          required: false
-          type: string
-      responses:
-        '200':
-          description: No response was specified
-          schema:
-            $ref: '#/definitions/Convert_Price'
-      summary: Convert a price to or from VAT price.
-      tags:
-        - api
-  /vat-rates:
-    get:
-      operationId: vat_rates
-      parameters:
-        - description: Enter your API key
-          in: header
-          name: Apikey
-          required: true
-          type: string
-        - description: The default response type is application/json if you would like to receive an XML response then set this to XML
-          in: header
-          name: Response-Type
-          type: string
-      responses:
-        '200':
-          description: No response was specified
-          schema:
-            $ref: '#/definitions/Vat_Rates'
-      summary: Retrieve all current EU VAT rates
-      tags:
-        - api
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - name: api

@@ -1,4 +1,943 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.googleapis.com
 basePath: /plusDomains/v1
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: The Google+ API enables developers to build on top of the Google+ platform.
+  title: Google+ Domains API
+  version: v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://developers.google.com/+/images/branding/g+128.png'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/plusDomains/v1/rest'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: plusDomains
+externalDocs:
+  url: 'https://developers.google.com/+/domains/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/plus.circles.read': View your circles and the people and pages in them
+      'https://www.googleapis.com/auth/plus.circles.write': Manage your circles and add people and pages. People and pages you add to your circles will be notified. Others may see this information publicly. People you add to circles can use Hangouts with you.
+      'https://www.googleapis.com/auth/plus.login': Know your basic profile info and list of people in your circles.
+      'https://www.googleapis.com/auth/plus.me': Know who you are on Google
+      'https://www.googleapis.com/auth/plus.media.upload': Send your photos and videos to Google+
+      'https://www.googleapis.com/auth/plus.profiles.read': View your own Google+ profile and profiles visible to you
+      'https://www.googleapis.com/auth/plus.stream.read': 'View your Google+ posts, comments, and stream'
+      'https://www.googleapis.com/auth/plus.stream.write': 'Manage your Google+ posts, comments, and stream'
+      'https://www.googleapis.com/auth/userinfo.email': View your email address
+      'https://www.googleapis.com/auth/userinfo.profile': View your basic profile info
+    type: oauth2
+parameters:
+  alt:
+    default: json
+    description: Data format for the response.
+    enum:
+      - json
+    in: query
+    name: alt
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    in: query
+    name: quotaUser
+    type: string
+  userIp:
+    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    in: query
+    name: userIp
+    type: string
+paths:
+  '/activities/{activityId}':
+    get:
+      description: Get an activity.
+      operationId: plusDomains.activities.get
+      parameters:
+        - description: The ID of the activity to get.
+          in: path
+          name: activityId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Activity'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+            - 'https://www.googleapis.com/auth/plus.me'
+            - 'https://www.googleapis.com/auth/plus.stream.read'
+      tags:
+        - activities
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/activities/{activityId}/comments':
+    get:
+      description: List all of the comments for an activity.
+      operationId: plusDomains.comments.list
+      parameters:
+        - description: The ID of the activity to get comments for.
+          in: path
+          name: activityId
+          required: true
+          type: string
+        - default: 20
+          description: 'The maximum number of comments to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
+          in: query
+          maximum: 500
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
+          in: query
+          name: pageToken
+          type: string
+        - default: ascending
+          description: The order in which to sort the list of comments.
+          enum:
+            - ascending
+            - descending
+          in: query
+          name: sortOrder
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CommentFeed'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+            - 'https://www.googleapis.com/auth/plus.stream.read'
+      tags:
+        - comments
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Create a new comment in reply to an activity.
+      operationId: plusDomains.comments.insert
+      parameters:
+        - description: The ID of the activity to reply to.
+          in: path
+          name: activityId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Comment'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Comment'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+            - 'https://www.googleapis.com/auth/plus.stream.write'
+      tags:
+        - comments
+  '/activities/{activityId}/people/{collection}':
+    get:
+      description: List all of the people in the specified collection for a particular activity.
+      operationId: plusDomains.people.listByActivity
+      parameters:
+        - description: The ID of the activity to get the list of people for.
+          in: path
+          name: activityId
+          required: true
+          type: string
+        - description: The collection of people to list.
+          enum:
+            - plusoners
+            - resharers
+            - sharedto
+          in: path
+          name: collection
+          required: true
+          type: string
+        - default: 20
+          description: 'The maximum number of people to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
+          in: query
+          maximum: 100
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PeopleFeed'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+            - 'https://www.googleapis.com/auth/plus.stream.read'
+      tags:
+        - people
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/circles/{circleId}':
+    delete:
+      description: Delete a circle.
+      operationId: plusDomains.circles.remove
+      parameters:
+        - description: The ID of the circle to delete.
+          in: path
+          name: circleId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.circles.write'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - circles
+    get:
+      description: Get a circle.
+      operationId: plusDomains.circles.get
+      parameters:
+        - description: The ID of the circle to get.
+          in: path
+          name: circleId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Circle'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.circles.read'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - circles
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: "Update a circle's description. This method supports patch semantics."
+      operationId: plusDomains.circles.patch
+      parameters:
+        - description: The ID of the circle to update.
+          in: path
+          name: circleId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Circle'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Circle'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.circles.write'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - circles
+    put:
+      description: "Update a circle's description."
+      operationId: plusDomains.circles.update
+      parameters:
+        - description: The ID of the circle to update.
+          in: path
+          name: circleId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Circle'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Circle'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.circles.write'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - circles
+  '/circles/{circleId}/people':
+    delete:
+      description: Remove a person from a circle.
+      operationId: plusDomains.circles.removePeople
+      parameters:
+        - description: The ID of the circle to remove the person from.
+          in: path
+          name: circleId
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: 'Email of the people to add to the circle. Optional, can be repeated.'
+          in: query
+          items:
+            type: string
+          name: email
+          type: array
+        - collectionFormat: multi
+          description: 'IDs of the people to remove from the circle. Optional, can be repeated.'
+          in: query
+          items:
+            type: string
+          name: userId
+          type: array
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.circles.write'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - circles
+    get:
+      description: List all of the people who are members of a circle.
+      operationId: plusDomains.people.listByCircle
+      parameters:
+        - description: The ID of the circle to get the members of.
+          in: path
+          name: circleId
+          required: true
+          type: string
+        - default: 20
+          description: 'The maximum number of people to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
+          in: query
+          maximum: 100
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PeopleFeed'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.circles.read'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - people
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    put:
+      description: 'Add a person to a circle. Google+ limits certain circle operations, including the number of circle adds. Learn More.'
+      operationId: plusDomains.circles.addPeople
+      parameters:
+        - description: The ID of the circle to add the person to.
+          in: path
+          name: circleId
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: 'Email of the people to add to the circle. Optional, can be repeated.'
+          in: query
+          items:
+            type: string
+          name: email
+          type: array
+        - collectionFormat: multi
+          description: 'IDs of the people to add to the circle. Optional, can be repeated.'
+          in: query
+          items:
+            type: string
+          name: userId
+          type: array
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Circle'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.circles.write'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - circles
+  '/comments/{commentId}':
+    get:
+      description: Get a comment.
+      operationId: plusDomains.comments.get
+      parameters:
+        - description: The ID of the comment to get.
+          in: path
+          name: commentId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Comment'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+            - 'https://www.googleapis.com/auth/plus.stream.read'
+      tags:
+        - comments
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/people/{userId}':
+    get:
+      description: "Get a person's profile."
+      operationId: plusDomains.people.get
+      parameters:
+        - description: 'The ID of the person to get the profile for. The special value "me" can be used to indicate the authenticated user.'
+          in: path
+          name: userId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Person'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+            - 'https://www.googleapis.com/auth/plus.me'
+            - 'https://www.googleapis.com/auth/plus.profiles.read'
+            - 'https://www.googleapis.com/auth/userinfo.email'
+            - 'https://www.googleapis.com/auth/userinfo.profile'
+      tags:
+        - people
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/people/{userId}/activities':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Create a new activity for the authenticated user.
+      operationId: plusDomains.activities.insert
+      parameters:
+        - description: 'The ID of the user to create the activity on behalf of. Its value should be "me", to indicate the authenticated user.'
+          in: path
+          name: userId
+          required: true
+          type: string
+        - description: 'If "true", extract the potential media attachments for a URL. The response will include all possible attachments for a URL, including video, photos, and articles based on the content of the page.'
+          in: query
+          name: preview
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Activity'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Activity'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+            - 'https://www.googleapis.com/auth/plus.me'
+            - 'https://www.googleapis.com/auth/plus.stream.write'
+      tags:
+        - activities
+  '/people/{userId}/activities/{collection}':
+    get:
+      description: List all of the activities in the specified collection for a particular user.
+      operationId: plusDomains.activities.list
+      parameters:
+        - description: 'The ID of the user to get activities for. The special value "me" can be used to indicate the authenticated user.'
+          in: path
+          name: userId
+          required: true
+          type: string
+        - description: The collection of activities to list.
+          enum:
+            - user
+          in: path
+          name: collection
+          required: true
+          type: string
+        - default: 20
+          description: 'The maximum number of activities to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
+          in: query
+          maximum: 100
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ActivityFeed'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+            - 'https://www.googleapis.com/auth/plus.me'
+            - 'https://www.googleapis.com/auth/plus.stream.read'
+      tags:
+        - activities
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/people/{userId}/audiences':
+    get:
+      description: List all of the audiences to which a user can share.
+      operationId: plusDomains.audiences.list
+      parameters:
+        - description: 'The ID of the user to get audiences for. The special value "me" can be used to indicate the authenticated user.'
+          in: path
+          name: userId
+          required: true
+          type: string
+        - default: 20
+          description: 'The maximum number of circles to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
+          in: query
+          maximum: 100
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AudiencesFeed'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.circles.read'
+            - 'https://www.googleapis.com/auth/plus.login'
+            - 'https://www.googleapis.com/auth/plus.me'
+      tags:
+        - audiences
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/people/{userId}/circles':
+    get:
+      description: List all of the circles for a user.
+      operationId: plusDomains.circles.list
+      parameters:
+        - description: 'The ID of the user to get circles for. The special value "me" can be used to indicate the authenticated user.'
+          in: path
+          name: userId
+          required: true
+          type: string
+        - default: 20
+          description: 'The maximum number of circles to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
+          in: query
+          maximum: 100
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CircleFeed'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.circles.read'
+            - 'https://www.googleapis.com/auth/plus.login'
+            - 'https://www.googleapis.com/auth/plus.me'
+      tags:
+        - circles
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Create a new circle for the authenticated user.
+      operationId: plusDomains.circles.insert
+      parameters:
+        - description: 'The ID of the user to create the circle on behalf of. The value "me" can be used to indicate the authenticated user.'
+          in: path
+          name: userId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Circle'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Circle'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.circles.write'
+            - 'https://www.googleapis.com/auth/plus.login'
+            - 'https://www.googleapis.com/auth/plus.me'
+      tags:
+        - circles
+  '/people/{userId}/media/{collection}':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      consumes:
+        - image/bmp
+        - image/cgm
+        - image/fits
+        - image/g3fax
+        - image/gif
+        - image/ief
+        - image/jp2
+        - image/jpeg
+        - image/jpm
+        - image/jpx
+        - image/ktx
+        - image/naplps
+        - image/pjpeg
+        - image/png
+        - image/prs.btif
+        - image/prs.pti
+        - image/pwg-raster
+        - image/sgi
+        - image/svg+xml
+        - image/t38
+        - image/tiff
+        - image/tiff-fx
+        - image/vnd.adobe.photoshop
+        - image/vnd.airzip.accelerator.azv
+        - image/vnd.cns.inf2
+        - image/vnd.dece.graphic
+        - image/vnd.djvu
+        - image/vnd.dvb.subtitle
+        - image/vnd.dwg
+        - image/vnd.dxf
+        - image/vnd.fastbidsheet
+        - image/vnd.fpx
+        - image/vnd.fst
+        - image/vnd.fujixerox.edmics-mmr
+        - image/vnd.fujixerox.edmics-rlc
+        - image/vnd.globalgraphics.pgb
+        - image/vnd.microsoft.icon
+        - image/vnd.mix
+        - image/vnd.ms-modi
+        - image/vnd.ms-photo
+        - image/vnd.net-fpx
+        - image/vnd.radiance
+        - image/vnd.sealed.png
+        - image/vnd.sealedmedia.softseal.gif
+        - image/vnd.sealedmedia.softseal.jpg
+        - image/vnd.svf
+        - image/vnd.tencent.tap
+        - image/vnd.valve.source.texture
+        - image/vnd.wap.wbmp
+        - image/vnd.xiff
+        - image/webp
+        - image/x-3ds
+        - image/x-cmu-raster
+        - image/x-cmx
+        - image/x-freehand
+        - image/x-icon
+        - image/x-mrsid-image
+        - image/x-pcx
+        - image/x-pict
+        - image/x-portable-anymap
+        - image/x-portable-bitmap
+        - image/x-portable-graymap
+        - image/x-portable-pixmap
+        - image/x-rgb
+        - image/x-tga
+        - image/x-xbitmap
+        - image/x-xcf
+        - image/x-xpixmap
+        - image/x-xwindowdump
+        - video/1d-interleaved-parityfec
+        - video/3gpp
+        - video/3gpp-tt
+        - video/3gpp2
+        - video/bmpeg
+        - video/bt656
+        - video/celb
+        - video/dv
+        - video/h261
+        - video/h263
+        - video/h263-1998
+        - video/h263-2000
+        - video/h264
+        - video/h264-rcdo
+        - video/h264-svc
+        - video/jpeg
+        - video/jpeg2000
+        - video/jpm
+        - video/mj2
+        - video/mp1s
+        - video/mp2p
+        - video/mp2t
+        - video/mp4
+        - video/mp4v-es
+        - video/mpeg
+        - video/mpeg4-generic
+        - video/mpv
+        - video/nv
+        - video/ogg
+        - video/parityfec
+        - video/pointer
+        - video/quicktime
+        - video/raw
+        - video/rtp-enc-aescm128
+        - video/rtx
+        - video/smpte292m
+        - video/ulpfec
+        - video/vc1
+        - video/vnd.cctv
+        - video/vnd.dece.hd
+        - video/vnd.dece.mobile
+        - video/vnd.dece.mp4
+        - video/vnd.dece.pd
+        - video/vnd.dece.sd
+        - video/vnd.dece.video
+        - video/vnd.directv.mpeg
+        - video/vnd.directv.mpeg-tts
+        - video/vnd.dlna.mpeg-tts
+        - video/vnd.dvb.file
+        - video/vnd.fvt
+        - video/vnd.hns.video
+        - video/vnd.iptvforum.1dparityfec-1010
+        - video/vnd.iptvforum.1dparityfec-2005
+        - video/vnd.iptvforum.2dparityfec-1010
+        - video/vnd.iptvforum.2dparityfec-2005
+        - video/vnd.iptvforum.ttsavc
+        - video/vnd.iptvforum.ttsmpeg2
+        - video/vnd.motorola.video
+        - video/vnd.motorola.videop
+        - video/vnd.mpegurl
+        - video/vnd.ms-playready.media.pyv
+        - video/vnd.nokia.interleaved-multimedia
+        - video/vnd.nokia.videovoip
+        - video/vnd.objectvideo
+        - video/vnd.sealed.mpeg1
+        - video/vnd.sealed.mpeg4
+        - video/vnd.sealed.swf
+        - video/vnd.sealedmedia.softseal.mov
+        - video/vnd.uvvu.mp4
+        - video/vnd.vivo
+        - video/webm
+        - video/x-f4v
+        - video/x-fli
+        - video/x-flv
+        - video/x-m4v
+        - video/x-matroska
+        - video/x-mng
+        - video/x-ms-asf
+        - video/x-ms-vob
+        - video/x-ms-wm
+        - video/x-ms-wmv
+        - video/x-ms-wmx
+        - video/x-ms-wvx
+        - video/x-msvideo
+        - video/x-sgi-movie
+        - video/x-smv
+      description: Add a new media item to an album. The current upload size limitations are 36MB for a photo and 1GB for a video. Uploads do not count against quota if photos are less than 2048 pixels on their longest side or videos are less than 15 minutes in length.
+      operationId: plusDomains.media.insert
+      parameters:
+        - description: The ID of the user to create the activity on behalf of.
+          in: path
+          name: userId
+          required: true
+          type: string
+        - enum:
+            - cloud
+          in: path
+          name: collection
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Media'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Media'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.login'
+            - 'https://www.googleapis.com/auth/plus.me'
+            - 'https://www.googleapis.com/auth/plus.media.upload'
+      tags:
+        - media
+  '/people/{userId}/people/{collection}':
+    get:
+      description: List all of the people in the specified collection.
+      operationId: plusDomains.people.list
+      parameters:
+        - description: 'Get the collection of people for the person identified. Use "me" to indicate the authenticated user.'
+          in: path
+          name: userId
+          required: true
+          type: string
+        - description: The collection of people to list.
+          enum:
+            - circled
+          in: path
+          name: collection
+          required: true
+          type: string
+        - default: 100
+          description: 'The maximum number of people to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
+          in: query
+          maximum: 100
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: The order to return people in.
+          enum:
+            - alphabetical
+            - best
+          in: query
+          name: orderBy
+          type: string
+        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PeopleFeed'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/plus.circles.read'
+            - 'https://www.googleapis.com/auth/plus.login'
+            - 'https://www.googleapis.com/auth/plus.me'
+      tags:
+        - people
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
 definitions:
   Acl:
     properties:
@@ -998,942 +1937,3 @@ definitions:
         format: int32
         type: integer
     type: object
-externalDocs:
-  url: 'https://developers.google.com/+/domains/'
-host: www.googleapis.com
-info:
-  contact:
-    name: Google
-    url: 'https://google.com'
-  description: The Google+ API enables developers to build on top of the Google+ platform.
-  title: Google+ Domains API
-  version: v1
-  x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
-  x-logo:
-    url: 'https://developers.google.com/+/images/branding/g+128.png'
-  x-origin:
-    format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/plusDomains/v1/rest'
-    version: v1
-  x-preferred: true
-  x-providerName: googleapis.com
-  x-serviceName: plusDomains
-parameters:
-  alt:
-    default: json
-    description: Data format for the response.
-    enum:
-      - json
-    in: query
-    name: alt
-    type: string
-  fields:
-    description: Selector specifying which fields to include in a partial response.
-    in: query
-    name: fields
-    type: string
-  key:
-    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
-    in: query
-    name: key
-    type: string
-  oauth_token:
-    description: OAuth 2.0 token for the current user.
-    in: query
-    name: oauth_token
-    type: string
-  prettyPrint:
-    default: true
-    description: Returns response with indentations and line breaks.
-    in: query
-    name: prettyPrint
-    type: boolean
-  quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
-    in: query
-    name: quotaUser
-    type: string
-  userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
-    in: query
-    name: userIp
-    type: string
-paths:
-  '/activities/{activityId}':
-    get:
-      description: Get an activity.
-      operationId: plusDomains.activities.get
-      parameters:
-        - description: The ID of the activity to get.
-          in: path
-          name: activityId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Activity'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-            - 'https://www.googleapis.com/auth/plus.me'
-            - 'https://www.googleapis.com/auth/plus.stream.read'
-      tags:
-        - activities
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/activities/{activityId}/comments':
-    get:
-      description: List all of the comments for an activity.
-      operationId: plusDomains.comments.list
-      parameters:
-        - description: The ID of the activity to get comments for.
-          in: path
-          name: activityId
-          required: true
-          type: string
-        - default: 20
-          description: 'The maximum number of comments to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
-          in: query
-          maximum: 500
-          minimum: 0
-          name: maxResults
-          type: integer
-        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
-          in: query
-          name: pageToken
-          type: string
-        - default: ascending
-          description: The order in which to sort the list of comments.
-          enum:
-            - ascending
-            - descending
-          in: query
-          name: sortOrder
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/CommentFeed'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-            - 'https://www.googleapis.com/auth/plus.stream.read'
-      tags:
-        - comments
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Create a new comment in reply to an activity.
-      operationId: plusDomains.comments.insert
-      parameters:
-        - description: The ID of the activity to reply to.
-          in: path
-          name: activityId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Comment'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Comment'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-            - 'https://www.googleapis.com/auth/plus.stream.write'
-      tags:
-        - comments
-  '/activities/{activityId}/people/{collection}':
-    get:
-      description: List all of the people in the specified collection for a particular activity.
-      operationId: plusDomains.people.listByActivity
-      parameters:
-        - description: The ID of the activity to get the list of people for.
-          in: path
-          name: activityId
-          required: true
-          type: string
-        - description: The collection of people to list.
-          enum:
-            - plusoners
-            - resharers
-            - sharedto
-          in: path
-          name: collection
-          required: true
-          type: string
-        - default: 20
-          description: 'The maximum number of people to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
-          in: query
-          maximum: 100
-          minimum: 1
-          name: maxResults
-          type: integer
-        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/PeopleFeed'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-            - 'https://www.googleapis.com/auth/plus.stream.read'
-      tags:
-        - people
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/circles/{circleId}':
-    delete:
-      description: Delete a circle.
-      operationId: plusDomains.circles.remove
-      parameters:
-        - description: The ID of the circle to delete.
-          in: path
-          name: circleId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.circles.write'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - circles
-    get:
-      description: Get a circle.
-      operationId: plusDomains.circles.get
-      parameters:
-        - description: The ID of the circle to get.
-          in: path
-          name: circleId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Circle'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.circles.read'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - circles
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    patch:
-      description: "Update a circle's description. This method supports patch semantics."
-      operationId: plusDomains.circles.patch
-      parameters:
-        - description: The ID of the circle to update.
-          in: path
-          name: circleId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Circle'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Circle'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.circles.write'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - circles
-    put:
-      description: "Update a circle's description."
-      operationId: plusDomains.circles.update
-      parameters:
-        - description: The ID of the circle to update.
-          in: path
-          name: circleId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Circle'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Circle'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.circles.write'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - circles
-  '/circles/{circleId}/people':
-    delete:
-      description: Remove a person from a circle.
-      operationId: plusDomains.circles.removePeople
-      parameters:
-        - description: The ID of the circle to remove the person from.
-          in: path
-          name: circleId
-          required: true
-          type: string
-        - collectionFormat: multi
-          description: 'Email of the people to add to the circle. Optional, can be repeated.'
-          in: query
-          items:
-            type: string
-          name: email
-          type: array
-        - collectionFormat: multi
-          description: 'IDs of the people to remove from the circle. Optional, can be repeated.'
-          in: query
-          items:
-            type: string
-          name: userId
-          type: array
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.circles.write'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - circles
-    get:
-      description: List all of the people who are members of a circle.
-      operationId: plusDomains.people.listByCircle
-      parameters:
-        - description: The ID of the circle to get the members of.
-          in: path
-          name: circleId
-          required: true
-          type: string
-        - default: 20
-          description: 'The maximum number of people to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
-          in: query
-          maximum: 100
-          minimum: 1
-          name: maxResults
-          type: integer
-        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/PeopleFeed'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.circles.read'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - people
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    put:
-      description: 'Add a person to a circle. Google+ limits certain circle operations, including the number of circle adds. Learn More.'
-      operationId: plusDomains.circles.addPeople
-      parameters:
-        - description: The ID of the circle to add the person to.
-          in: path
-          name: circleId
-          required: true
-          type: string
-        - collectionFormat: multi
-          description: 'Email of the people to add to the circle. Optional, can be repeated.'
-          in: query
-          items:
-            type: string
-          name: email
-          type: array
-        - collectionFormat: multi
-          description: 'IDs of the people to add to the circle. Optional, can be repeated.'
-          in: query
-          items:
-            type: string
-          name: userId
-          type: array
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Circle'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.circles.write'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - circles
-  '/comments/{commentId}':
-    get:
-      description: Get a comment.
-      operationId: plusDomains.comments.get
-      parameters:
-        - description: The ID of the comment to get.
-          in: path
-          name: commentId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Comment'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-            - 'https://www.googleapis.com/auth/plus.stream.read'
-      tags:
-        - comments
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/people/{userId}':
-    get:
-      description: "Get a person's profile."
-      operationId: plusDomains.people.get
-      parameters:
-        - description: 'The ID of the person to get the profile for. The special value "me" can be used to indicate the authenticated user.'
-          in: path
-          name: userId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Person'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-            - 'https://www.googleapis.com/auth/plus.me'
-            - 'https://www.googleapis.com/auth/plus.profiles.read'
-            - 'https://www.googleapis.com/auth/userinfo.email'
-            - 'https://www.googleapis.com/auth/userinfo.profile'
-      tags:
-        - people
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/people/{userId}/activities':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Create a new activity for the authenticated user.
-      operationId: plusDomains.activities.insert
-      parameters:
-        - description: 'The ID of the user to create the activity on behalf of. Its value should be "me", to indicate the authenticated user.'
-          in: path
-          name: userId
-          required: true
-          type: string
-        - description: 'If "true", extract the potential media attachments for a URL. The response will include all possible attachments for a URL, including video, photos, and articles based on the content of the page.'
-          in: query
-          name: preview
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Activity'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Activity'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-            - 'https://www.googleapis.com/auth/plus.me'
-            - 'https://www.googleapis.com/auth/plus.stream.write'
-      tags:
-        - activities
-  '/people/{userId}/activities/{collection}':
-    get:
-      description: List all of the activities in the specified collection for a particular user.
-      operationId: plusDomains.activities.list
-      parameters:
-        - description: 'The ID of the user to get activities for. The special value "me" can be used to indicate the authenticated user.'
-          in: path
-          name: userId
-          required: true
-          type: string
-        - description: The collection of activities to list.
-          enum:
-            - user
-          in: path
-          name: collection
-          required: true
-          type: string
-        - default: 20
-          description: 'The maximum number of activities to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
-          in: query
-          maximum: 100
-          minimum: 1
-          name: maxResults
-          type: integer
-        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ActivityFeed'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-            - 'https://www.googleapis.com/auth/plus.me'
-            - 'https://www.googleapis.com/auth/plus.stream.read'
-      tags:
-        - activities
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/people/{userId}/audiences':
-    get:
-      description: List all of the audiences to which a user can share.
-      operationId: plusDomains.audiences.list
-      parameters:
-        - description: 'The ID of the user to get audiences for. The special value "me" can be used to indicate the authenticated user.'
-          in: path
-          name: userId
-          required: true
-          type: string
-        - default: 20
-          description: 'The maximum number of circles to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
-          in: query
-          maximum: 100
-          minimum: 1
-          name: maxResults
-          type: integer
-        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AudiencesFeed'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.circles.read'
-            - 'https://www.googleapis.com/auth/plus.login'
-            - 'https://www.googleapis.com/auth/plus.me'
-      tags:
-        - audiences
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/people/{userId}/circles':
-    get:
-      description: List all of the circles for a user.
-      operationId: plusDomains.circles.list
-      parameters:
-        - description: 'The ID of the user to get circles for. The special value "me" can be used to indicate the authenticated user.'
-          in: path
-          name: userId
-          required: true
-          type: string
-        - default: 20
-          description: 'The maximum number of circles to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
-          in: query
-          maximum: 100
-          minimum: 1
-          name: maxResults
-          type: integer
-        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/CircleFeed'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.circles.read'
-            - 'https://www.googleapis.com/auth/plus.login'
-            - 'https://www.googleapis.com/auth/plus.me'
-      tags:
-        - circles
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Create a new circle for the authenticated user.
-      operationId: plusDomains.circles.insert
-      parameters:
-        - description: 'The ID of the user to create the circle on behalf of. The value "me" can be used to indicate the authenticated user.'
-          in: path
-          name: userId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Circle'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Circle'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.circles.write'
-            - 'https://www.googleapis.com/auth/plus.login'
-            - 'https://www.googleapis.com/auth/plus.me'
-      tags:
-        - circles
-  '/people/{userId}/media/{collection}':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      consumes:
-        - image/bmp
-        - image/cgm
-        - image/fits
-        - image/g3fax
-        - image/gif
-        - image/ief
-        - image/jp2
-        - image/jpeg
-        - image/jpm
-        - image/jpx
-        - image/ktx
-        - image/naplps
-        - image/pjpeg
-        - image/png
-        - image/prs.btif
-        - image/prs.pti
-        - image/pwg-raster
-        - image/sgi
-        - image/svg+xml
-        - image/t38
-        - image/tiff
-        - image/tiff-fx
-        - image/vnd.adobe.photoshop
-        - image/vnd.airzip.accelerator.azv
-        - image/vnd.cns.inf2
-        - image/vnd.dece.graphic
-        - image/vnd.djvu
-        - image/vnd.dvb.subtitle
-        - image/vnd.dwg
-        - image/vnd.dxf
-        - image/vnd.fastbidsheet
-        - image/vnd.fpx
-        - image/vnd.fst
-        - image/vnd.fujixerox.edmics-mmr
-        - image/vnd.fujixerox.edmics-rlc
-        - image/vnd.globalgraphics.pgb
-        - image/vnd.microsoft.icon
-        - image/vnd.mix
-        - image/vnd.ms-modi
-        - image/vnd.ms-photo
-        - image/vnd.net-fpx
-        - image/vnd.radiance
-        - image/vnd.sealed.png
-        - image/vnd.sealedmedia.softseal.gif
-        - image/vnd.sealedmedia.softseal.jpg
-        - image/vnd.svf
-        - image/vnd.tencent.tap
-        - image/vnd.valve.source.texture
-        - image/vnd.wap.wbmp
-        - image/vnd.xiff
-        - image/webp
-        - image/x-3ds
-        - image/x-cmu-raster
-        - image/x-cmx
-        - image/x-freehand
-        - image/x-icon
-        - image/x-mrsid-image
-        - image/x-pcx
-        - image/x-pict
-        - image/x-portable-anymap
-        - image/x-portable-bitmap
-        - image/x-portable-graymap
-        - image/x-portable-pixmap
-        - image/x-rgb
-        - image/x-tga
-        - image/x-xbitmap
-        - image/x-xcf
-        - image/x-xpixmap
-        - image/x-xwindowdump
-        - video/1d-interleaved-parityfec
-        - video/3gpp
-        - video/3gpp-tt
-        - video/3gpp2
-        - video/bmpeg
-        - video/bt656
-        - video/celb
-        - video/dv
-        - video/h261
-        - video/h263
-        - video/h263-1998
-        - video/h263-2000
-        - video/h264
-        - video/h264-rcdo
-        - video/h264-svc
-        - video/jpeg
-        - video/jpeg2000
-        - video/jpm
-        - video/mj2
-        - video/mp1s
-        - video/mp2p
-        - video/mp2t
-        - video/mp4
-        - video/mp4v-es
-        - video/mpeg
-        - video/mpeg4-generic
-        - video/mpv
-        - video/nv
-        - video/ogg
-        - video/parityfec
-        - video/pointer
-        - video/quicktime
-        - video/raw
-        - video/rtp-enc-aescm128
-        - video/rtx
-        - video/smpte292m
-        - video/ulpfec
-        - video/vc1
-        - video/vnd.cctv
-        - video/vnd.dece.hd
-        - video/vnd.dece.mobile
-        - video/vnd.dece.mp4
-        - video/vnd.dece.pd
-        - video/vnd.dece.sd
-        - video/vnd.dece.video
-        - video/vnd.directv.mpeg
-        - video/vnd.directv.mpeg-tts
-        - video/vnd.dlna.mpeg-tts
-        - video/vnd.dvb.file
-        - video/vnd.fvt
-        - video/vnd.hns.video
-        - video/vnd.iptvforum.1dparityfec-1010
-        - video/vnd.iptvforum.1dparityfec-2005
-        - video/vnd.iptvforum.2dparityfec-1010
-        - video/vnd.iptvforum.2dparityfec-2005
-        - video/vnd.iptvforum.ttsavc
-        - video/vnd.iptvforum.ttsmpeg2
-        - video/vnd.motorola.video
-        - video/vnd.motorola.videop
-        - video/vnd.mpegurl
-        - video/vnd.ms-playready.media.pyv
-        - video/vnd.nokia.interleaved-multimedia
-        - video/vnd.nokia.videovoip
-        - video/vnd.objectvideo
-        - video/vnd.sealed.mpeg1
-        - video/vnd.sealed.mpeg4
-        - video/vnd.sealed.swf
-        - video/vnd.sealedmedia.softseal.mov
-        - video/vnd.uvvu.mp4
-        - video/vnd.vivo
-        - video/webm
-        - video/x-f4v
-        - video/x-fli
-        - video/x-flv
-        - video/x-m4v
-        - video/x-matroska
-        - video/x-mng
-        - video/x-ms-asf
-        - video/x-ms-vob
-        - video/x-ms-wm
-        - video/x-ms-wmv
-        - video/x-ms-wmx
-        - video/x-ms-wvx
-        - video/x-msvideo
-        - video/x-sgi-movie
-        - video/x-smv
-      description: Add a new media item to an album. The current upload size limitations are 36MB for a photo and 1GB for a video. Uploads do not count against quota if photos are less than 2048 pixels on their longest side or videos are less than 15 minutes in length.
-      operationId: plusDomains.media.insert
-      parameters:
-        - description: The ID of the user to create the activity on behalf of.
-          in: path
-          name: userId
-          required: true
-          type: string
-        - enum:
-            - cloud
-          in: path
-          name: collection
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Media'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Media'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-            - 'https://www.googleapis.com/auth/plus.me'
-            - 'https://www.googleapis.com/auth/plus.media.upload'
-      tags:
-        - media
-  '/people/{userId}/people/{collection}':
-    get:
-      description: List all of the people in the specified collection.
-      operationId: plusDomains.people.list
-      parameters:
-        - description: 'Get the collection of people for the person identified. Use "me" to indicate the authenticated user.'
-          in: path
-          name: userId
-          required: true
-          type: string
-        - description: The collection of people to list.
-          enum:
-            - circled
-          in: path
-          name: collection
-          required: true
-          type: string
-        - default: 100
-          description: 'The maximum number of people to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.'
-          in: query
-          maximum: 100
-          minimum: 1
-          name: maxResults
-          type: integer
-        - description: The order to return people in.
-          enum:
-            - alphabetical
-            - best
-          in: query
-          name: orderBy
-          type: string
-        - description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.'
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/PeopleFeed'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.circles.read'
-            - 'https://www.googleapis.com/auth/plus.login'
-            - 'https://www.googleapis.com/auth/plus.me'
-      tags:
-        - people
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/plus.circles.read': View your circles and the people and pages in them
-      'https://www.googleapis.com/auth/plus.circles.write': Manage your circles and add people and pages. People and pages you add to your circles will be notified. Others may see this information publicly. People you add to circles can use Hangouts with you.
-      'https://www.googleapis.com/auth/plus.login': Know your basic profile info and list of people in your circles.
-      'https://www.googleapis.com/auth/plus.me': Know who you are on Google
-      'https://www.googleapis.com/auth/plus.media.upload': Send your photos and videos to Google+
-      'https://www.googleapis.com/auth/plus.profiles.read': View your own Google+ profile and profiles visible to you
-      'https://www.googleapis.com/auth/plus.stream.read': 'View your Google+ posts, comments, and stream'
-      'https://www.googleapis.com/auth/plus.stream.write': 'Manage your Google+ posts, comments, and stream'
-      'https://www.googleapis.com/auth/userinfo.email': View your email address
-      'https://www.googleapis.com/auth/userinfo.profile': View your basic profile info
-    type: oauth2
-swagger: '2.0'

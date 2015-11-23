@@ -1,369 +1,8 @@
-basePath: /dfareporting/v1
-definitions:
-  DimensionFilter:
-    description: Represents a dimension filter.
-    properties:
-      dimensionName:
-        description: The name of the dimension to filter.
-        type: string
-      kind:
-        default: 'dfareporting#dimensionFilter'
-        description: 'Kind of resource this is, in this case dfareporting#dimensionFilter.'
-        type: string
-      value:
-        description: The value of the dimension to filter for.
-        type: string
-    type: object
-  DimensionValue:
-    description: Represents a DimensionValue resource.
-    properties:
-      dimensionName:
-        description: Name of the dimension.
-        type: string
-      etag:
-        description: ETag of this response for caching purposes.
-        type: string
-      id:
-        description: The ID associated with the value if available.
-        type: string
-      kind:
-        default: 'dfareporting#dimensionValue'
-        description: 'Kind of resource this is, in this case dfareporting#dimensionValue.'
-        type: string
-      value:
-        description: The value of the dimension.
-        type: string
-    type: object
-  DimensionValueList:
-    description: Represents the list of DimensionValue resources.
-    properties:
-      etag:
-        description: ETag of this response for caching purposes.
-        type: string
-      items:
-        description: The dimension values returned in this response.
-        items:
-          $ref: '#/definitions/DimensionValue'
-        type: array
-      kind:
-        default: 'dfareporting#dimensionValueList'
-        description: 'Kind of list this is, in this case dfareporting#dimensionValueList.'
-        type: string
-      nextPageToken:
-        description: "Continuation token used to page through dimension values. To retrieve the next page of results, set the next request's \"pageToken\" to the value of this field. The page token is only valid for a limited amount of time and should not be persisted."
-        type: string
-    type: object
-  DimensionValueRequest:
-    description: Represents a DimensionValuesRequest.
-    properties:
-      dimensionName:
-        description: The name of the dimension values should be requested for.
-        type: string
-      endDate:
-        description: 'The end date of the date range for which to retrieve dimension values. A string of the format: "yyyy-MM-dd".'
-        format: date
-        type: string
-      filters:
-        description: List of filters to filter values by. The filters are ANDed.
-        items:
-          $ref: '#/definitions/DimensionFilter'
-        type: array
-      kind:
-        default: 'dfareporting#dimensionValueRequest'
-        description: 'Kind of request this is, in this case dfareporting#dimensionValueRequest.'
-        type: string
-      startDate:
-        description: 'The start date of the date range for which to retrieve dimension values. A string of the format: "yyyy-MM-dd".'
-        format: date
-        type: string
-    type: object
-  File:
-    description: 'Represents a File resource. A File contains the meta-data for a report run. It shows the status of the run and holds the urls to the generated report data if the run is finished and the status is "REPORT_AVAILABLE".'
-    properties:
-      dateRange:
-        description: The date range for which the file has report data.
-        properties:
-          endDate:
-            description: 'The end date of the date range, inclusive. A string of the format: "yyyy-MM-dd".'
-            format: date
-            type: string
-          startDate:
-            description: 'The start date of the date range, inclusive. A string of the format: "yyyy-MM-dd".'
-            format: date
-            type: string
-        type: object
-      etag:
-        description: ETag of this response for caching purposes.
-        type: string
-      fileName:
-        description: The file name of the file.
-        type: string
-      id:
-        description: The unique ID of this report file.
-        format: int64
-        type: string
-      kind:
-        default: 'dfareporting#file'
-        description: 'Kind of resource this is, in this case dfareporting#file.'
-        type: string
-      lastModifiedTime:
-        description: The timestamp in milliseconds since epoch when this file was last modified.
-        format: int64
-        type: string
-      reportId:
-        description: The ID of the report this file was generated from.
-        format: int64
-        type: string
-      status:
-        description: "The status of the report file, one of:  \n- \"PROCESSING\" \n- \"REPORT_AVAILABLE\" \n- \"FAILED\" \n- \"CANCELLED\""
-        type: string
-      urls:
-        description: The urls where the completed report file can be downloaded.
-        properties:
-          csv:
-            description: Urls for generated CSV data.
-            properties:
-              apiUrl:
-                description: The url for downloading the report data through the API.
-                type: string
-              browserUrl:
-                description: The url for downloading the report data through a browser.
-                type: string
-            type: object
-        type: object
-    type: object
-  FileList:
-    description: Represents the list of File resources.
-    properties:
-      etag:
-        description: ETag of this response for caching purposes.
-        type: string
-      items:
-        description: The files returned in this response.
-        items:
-          $ref: '#/definitions/File'
-        type: array
-      kind:
-        default: 'dfareporting#fileList'
-        description: 'Kind of list this is, in this case dfareporting#fileList.'
-        type: string
-      nextPageToken:
-        description: "Continuation token used to page through files. To retrieve the next page of results, set the next request's \"pageToken\" to the value of this field. The page token is only valid for a limited amount of time and should not be persisted."
-        type: string
-    type: object
-  Report:
-    description: Represents a Report resource.
-    properties:
-      accountId:
-        description: The account id this report belongs to.
-        format: int64
-        type: string
-      criteria:
-        description: The report criteria.
-        properties:
-          activities:
-            description: Activity group.
-            properties:
-              filters:
-                description: 'List of activity filters. The dimension values need to be all either of type "dfa:activity" or "dfa:activityGroup".'
-                items:
-                  $ref: '#/definitions/DimensionValue'
-                type: array
-              metricNames:
-                description: List of names of floodlight activity metrics.
-                items:
-                  type: string
-                type: array
-            type: object
-          customRichMediaEvents:
-            description: Custom Rich Media Events group.
-            properties:
-              filteredEventIds:
-                description: 'List of custom rich media event IDs. Dimension values must be all of type dfa:richMediaEventTypeIdAndName.'
-                items:
-                  $ref: '#/definitions/DimensionValue'
-                type: array
-            type: object
-          dateRange:
-            description: The date range this report should be run for.
-            properties:
-              endDate:
-                description: 'The end date of the date range, inclusive. A string of the format: "yyyy-MM-dd".'
-                format: date
-                type: string
-              relativeDateRange:
-                description: "The date range relative to the date of when the report is run, one of:  \n- \"TODAY\" \n- \"YESTERDAY\" \n- \"WEEK_TO_DATE\" \n- \"MONTH_TO_DATE\" \n- \"QUARTER_TO_DATE\" \n- \"YEAR_TO_DATE\" \n- \"PREVIOUS_WEEK\" \n- \"PREVIOUS_MONTH\" \n- \"PREVIOUS_QUARTER\" \n- \"PREVIOUS_YEAR\" \n- \"LAST_7_DAYS\" \n- \"LAST_30_DAYS\" \n- \"LAST_90_DAYS\" \n- \"LAST_365_DAYS\" \n- \"LAST_24_MONTHS\""
-                type: string
-              startDate:
-                description: 'The start date of the date range, inclusive. A string of the format: "yyyy-MM-dd".'
-                format: date
-                type: string
-            type: object
-          dimensionFilters:
-            description: |-
-              The list of filters dimensions are filtered on.
-              Filters for different dimensions are ANDed, filters for the same dimension are grouped together and ORed.
-            items:
-              $ref: '#/definitions/DimensionValue'
-            type: array
-          dimensions:
-            description: The list of dimensions the report should include.
-            items:
-              $ref: '#/definitions/SortedDimension'
-            type: array
-          metricNames:
-            description: The list of names of metrics the report should include.
-            items:
-              type: string
-            type: array
-        type: object
-      etag:
-        description: ETag of this response for caching purposes.
-        type: string
-      fileName:
-        description: The file name used when generating report files for this report.
-        type: string
-      id:
-        description: The unique ID identifying this report resource.
-        format: int64
-        type: string
-      kind:
-        default: 'dfareporting#report'
-        description: 'Kind of resource this is, in this case dfareporting#report.'
-        type: string
-      lastModifiedTime:
-        description: The timestamp (in milliseconds since epoch) of when this report was last modified.
-        format: uint64
-        type: string
-      name:
-        description: The name of the report.
-        type: string
-      ownerProfileId:
-        description: The user profile id of the owner of this report.
-        format: int64
-        type: string
-      schedule:
-        description: "The report's schedule. Can only be set if the report's 'dateRange' is a relative date range and the relative date range is not \"TODAY\"."
-        properties:
-          active:
-            description: Whether the schedule is active or not. Must be set to either true or false.
-            type: boolean
-          every:
-            description: 'Defines every how many days, weeks or months the report should be run. Needs to be set when "repeats" is either "DAILY", "WEEKLY" or "MONTHLY".'
-            format: int32
-            type: integer
-          expirationDate:
-            description: The expiration date when the scheduled report stops running.
-            format: date
-            type: string
-          repeats:
-            description: "The interval the report is repeated for, one of:  \n- \"DAILY\", also requires field \"every\" to be set. \n- \"WEEKLY\", also requires fields \"every\" and \"repeatsOnWeekDays\" to be set. \n- \"TWICE_A_MONTH\" \n- \"MONTHLY\", also requires fields \"every\" and \"runsOnDayOfMonth\" to be set. \n- \"QUARTERLY\" \n- \"YEARLY\""
-            type: string
-          repeatsOnWeekDays:
-            description: 'List of week days "WEEKLY" scheduled reports should run on.'
-            items:
-              type: string
-            type: array
-          runsOnDayOfMonth:
-            description: "Enum to define for \"MONTHLY\" scheduled reports whether reports should be repeated on the same day of the month as \"startDate\" or the same day of the week of the month. Possible values are:  \n- DAY_OF_MONTH \n- WEEK_OF_MONTH  \nExample: If 'startDate' is Monday, April 2nd 2012 (2012-04-02), \"DAY_OF_MONTH\" would run subsequent reports on the 2nd of every Month, and \"WEEK_OF_MONTH\" would run subsequent reports on the first Monday of the month."
-            type: string
-          startDate:
-            description: Start date of date range for which scheduled reports should be run.
-            format: date
-            type: string
-        type: object
-      subAccountId:
-        description: The subbaccount id this report belongs to if applicable.
-        format: int64
-        type: string
-      type:
-        description: 'The type of the report, currently only "STANDARD" is supported.'
-        type: string
-    type: object
-  ReportList:
-    description: Represents the list of reports.
-    properties:
-      etag:
-        description: ETag of this response for caching purposes.
-        type: string
-      items:
-        description: The reports returned in this response.
-        items:
-          $ref: '#/definitions/Report'
-        type: array
-      kind:
-        default: 'dfareporting#reportList'
-        description: 'Kind of list this is, in this case dfareporting#reportList.'
-        type: string
-      nextPageToken:
-        description: "Continuation token used to page through reports. To retrieve the next page of results, set the next request's \"pageToken\" to the value of this field. The page token is only valid for a limited amount of time and should not be persisted."
-        type: string
-    type: object
-  SortedDimension:
-    description: Represents a sorted dimension.
-    properties:
-      kind:
-        default: 'dfareporting#sortedDimension'
-        description: 'Kind of resource this is, in this case dfareporting#sortedDimension.'
-        type: string
-      name:
-        description: The name of the dimension.
-        type: string
-      sortOrder:
-        description: "An optional sort order for the dimension column, one of:  \n- \"ASCENDING\" \n- \"DESCENDING\""
-        type: string
-    type: object
-  UserProfile:
-    description: Represents a UserProfile resource.
-    properties:
-      accountId:
-        description: The account ID this profile belongs to.
-        format: int64
-        type: string
-      accountName:
-        description: The account name this profile belongs to.
-        type: string
-      etag:
-        description: ETag of this response for caching purposes.
-        type: string
-      kind:
-        default: 'dfareporting#userProfile'
-        description: 'Kind of resource this is, in this case dfareporting#userProfile.'
-        type: string
-      profileId:
-        description: The unique ID of the user profile.
-        format: int64
-        type: string
-      subAccountId:
-        description: The sub account ID this profile belongs to if applicable.
-        format: int64
-        type: string
-      subAccountName:
-        description: The sub account name this profile belongs to if applicable.
-        type: string
-      userName:
-        description: The user name.
-        type: string
-    type: object
-  UserProfileList:
-    description: Represents the list of user profiles.
-    properties:
-      etag:
-        description: ETag of this response for caching purposes.
-        type: string
-      items:
-        description: The user profiles returned in this response.
-        items:
-          $ref: '#/definitions/UserProfile'
-        type: array
-      kind:
-        default: 'dfareporting#userProfileList'
-        description: 'Kind of list this is, in this case dfareporting#userProfileList.'
-        type: string
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/doubleclick-advertisers/reporting/'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /dfareporting/v1
 info:
   contact:
     name: Google
@@ -382,6 +21,16 @@ info:
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: dfareporting
+externalDocs:
+  url: 'https://developers.google.com/doubleclick-advertisers/reporting/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/dfareporting': View and manage DoubleClick for Advertisers reports
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -892,14 +541,365 @@ paths:
             - 'https://www.googleapis.com/auth/dfareporting'
       tags:
         - reports
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/dfareporting': View and manage DoubleClick for Advertisers reports
-    type: oauth2
-swagger: '2.0'
+definitions:
+  DimensionFilter:
+    description: Represents a dimension filter.
+    properties:
+      dimensionName:
+        description: The name of the dimension to filter.
+        type: string
+      kind:
+        default: 'dfareporting#dimensionFilter'
+        description: 'Kind of resource this is, in this case dfareporting#dimensionFilter.'
+        type: string
+      value:
+        description: The value of the dimension to filter for.
+        type: string
+    type: object
+  DimensionValue:
+    description: Represents a DimensionValue resource.
+    properties:
+      dimensionName:
+        description: Name of the dimension.
+        type: string
+      etag:
+        description: ETag of this response for caching purposes.
+        type: string
+      id:
+        description: The ID associated with the value if available.
+        type: string
+      kind:
+        default: 'dfareporting#dimensionValue'
+        description: 'Kind of resource this is, in this case dfareporting#dimensionValue.'
+        type: string
+      value:
+        description: The value of the dimension.
+        type: string
+    type: object
+  DimensionValueList:
+    description: Represents the list of DimensionValue resources.
+    properties:
+      etag:
+        description: ETag of this response for caching purposes.
+        type: string
+      items:
+        description: The dimension values returned in this response.
+        items:
+          $ref: '#/definitions/DimensionValue'
+        type: array
+      kind:
+        default: 'dfareporting#dimensionValueList'
+        description: 'Kind of list this is, in this case dfareporting#dimensionValueList.'
+        type: string
+      nextPageToken:
+        description: "Continuation token used to page through dimension values. To retrieve the next page of results, set the next request's \"pageToken\" to the value of this field. The page token is only valid for a limited amount of time and should not be persisted."
+        type: string
+    type: object
+  DimensionValueRequest:
+    description: Represents a DimensionValuesRequest.
+    properties:
+      dimensionName:
+        description: The name of the dimension values should be requested for.
+        type: string
+      endDate:
+        description: 'The end date of the date range for which to retrieve dimension values. A string of the format: "yyyy-MM-dd".'
+        format: date
+        type: string
+      filters:
+        description: List of filters to filter values by. The filters are ANDed.
+        items:
+          $ref: '#/definitions/DimensionFilter'
+        type: array
+      kind:
+        default: 'dfareporting#dimensionValueRequest'
+        description: 'Kind of request this is, in this case dfareporting#dimensionValueRequest.'
+        type: string
+      startDate:
+        description: 'The start date of the date range for which to retrieve dimension values. A string of the format: "yyyy-MM-dd".'
+        format: date
+        type: string
+    type: object
+  File:
+    description: 'Represents a File resource. A File contains the meta-data for a report run. It shows the status of the run and holds the urls to the generated report data if the run is finished and the status is "REPORT_AVAILABLE".'
+    properties:
+      dateRange:
+        description: The date range for which the file has report data.
+        properties:
+          endDate:
+            description: 'The end date of the date range, inclusive. A string of the format: "yyyy-MM-dd".'
+            format: date
+            type: string
+          startDate:
+            description: 'The start date of the date range, inclusive. A string of the format: "yyyy-MM-dd".'
+            format: date
+            type: string
+        type: object
+      etag:
+        description: ETag of this response for caching purposes.
+        type: string
+      fileName:
+        description: The file name of the file.
+        type: string
+      id:
+        description: The unique ID of this report file.
+        format: int64
+        type: string
+      kind:
+        default: 'dfareporting#file'
+        description: 'Kind of resource this is, in this case dfareporting#file.'
+        type: string
+      lastModifiedTime:
+        description: The timestamp in milliseconds since epoch when this file was last modified.
+        format: int64
+        type: string
+      reportId:
+        description: The ID of the report this file was generated from.
+        format: int64
+        type: string
+      status:
+        description: "The status of the report file, one of:  \n- \"PROCESSING\" \n- \"REPORT_AVAILABLE\" \n- \"FAILED\" \n- \"CANCELLED\""
+        type: string
+      urls:
+        description: The urls where the completed report file can be downloaded.
+        properties:
+          csv:
+            description: Urls for generated CSV data.
+            properties:
+              apiUrl:
+                description: The url for downloading the report data through the API.
+                type: string
+              browserUrl:
+                description: The url for downloading the report data through a browser.
+                type: string
+            type: object
+        type: object
+    type: object
+  FileList:
+    description: Represents the list of File resources.
+    properties:
+      etag:
+        description: ETag of this response for caching purposes.
+        type: string
+      items:
+        description: The files returned in this response.
+        items:
+          $ref: '#/definitions/File'
+        type: array
+      kind:
+        default: 'dfareporting#fileList'
+        description: 'Kind of list this is, in this case dfareporting#fileList.'
+        type: string
+      nextPageToken:
+        description: "Continuation token used to page through files. To retrieve the next page of results, set the next request's \"pageToken\" to the value of this field. The page token is only valid for a limited amount of time and should not be persisted."
+        type: string
+    type: object
+  Report:
+    description: Represents a Report resource.
+    properties:
+      accountId:
+        description: The account id this report belongs to.
+        format: int64
+        type: string
+      criteria:
+        description: The report criteria.
+        properties:
+          activities:
+            description: Activity group.
+            properties:
+              filters:
+                description: 'List of activity filters. The dimension values need to be all either of type "dfa:activity" or "dfa:activityGroup".'
+                items:
+                  $ref: '#/definitions/DimensionValue'
+                type: array
+              metricNames:
+                description: List of names of floodlight activity metrics.
+                items:
+                  type: string
+                type: array
+            type: object
+          customRichMediaEvents:
+            description: Custom Rich Media Events group.
+            properties:
+              filteredEventIds:
+                description: 'List of custom rich media event IDs. Dimension values must be all of type dfa:richMediaEventTypeIdAndName.'
+                items:
+                  $ref: '#/definitions/DimensionValue'
+                type: array
+            type: object
+          dateRange:
+            description: The date range this report should be run for.
+            properties:
+              endDate:
+                description: 'The end date of the date range, inclusive. A string of the format: "yyyy-MM-dd".'
+                format: date
+                type: string
+              relativeDateRange:
+                description: "The date range relative to the date of when the report is run, one of:  \n- \"TODAY\" \n- \"YESTERDAY\" \n- \"WEEK_TO_DATE\" \n- \"MONTH_TO_DATE\" \n- \"QUARTER_TO_DATE\" \n- \"YEAR_TO_DATE\" \n- \"PREVIOUS_WEEK\" \n- \"PREVIOUS_MONTH\" \n- \"PREVIOUS_QUARTER\" \n- \"PREVIOUS_YEAR\" \n- \"LAST_7_DAYS\" \n- \"LAST_30_DAYS\" \n- \"LAST_90_DAYS\" \n- \"LAST_365_DAYS\" \n- \"LAST_24_MONTHS\""
+                type: string
+              startDate:
+                description: 'The start date of the date range, inclusive. A string of the format: "yyyy-MM-dd".'
+                format: date
+                type: string
+            type: object
+          dimensionFilters:
+            description: |-
+              The list of filters dimensions are filtered on.
+              Filters for different dimensions are ANDed, filters for the same dimension are grouped together and ORed.
+            items:
+              $ref: '#/definitions/DimensionValue'
+            type: array
+          dimensions:
+            description: The list of dimensions the report should include.
+            items:
+              $ref: '#/definitions/SortedDimension'
+            type: array
+          metricNames:
+            description: The list of names of metrics the report should include.
+            items:
+              type: string
+            type: array
+        type: object
+      etag:
+        description: ETag of this response for caching purposes.
+        type: string
+      fileName:
+        description: The file name used when generating report files for this report.
+        type: string
+      id:
+        description: The unique ID identifying this report resource.
+        format: int64
+        type: string
+      kind:
+        default: 'dfareporting#report'
+        description: 'Kind of resource this is, in this case dfareporting#report.'
+        type: string
+      lastModifiedTime:
+        description: The timestamp (in milliseconds since epoch) of when this report was last modified.
+        format: uint64
+        type: string
+      name:
+        description: The name of the report.
+        type: string
+      ownerProfileId:
+        description: The user profile id of the owner of this report.
+        format: int64
+        type: string
+      schedule:
+        description: "The report's schedule. Can only be set if the report's 'dateRange' is a relative date range and the relative date range is not \"TODAY\"."
+        properties:
+          active:
+            description: Whether the schedule is active or not. Must be set to either true or false.
+            type: boolean
+          every:
+            description: 'Defines every how many days, weeks or months the report should be run. Needs to be set when "repeats" is either "DAILY", "WEEKLY" or "MONTHLY".'
+            format: int32
+            type: integer
+          expirationDate:
+            description: The expiration date when the scheduled report stops running.
+            format: date
+            type: string
+          repeats:
+            description: "The interval the report is repeated for, one of:  \n- \"DAILY\", also requires field \"every\" to be set. \n- \"WEEKLY\", also requires fields \"every\" and \"repeatsOnWeekDays\" to be set. \n- \"TWICE_A_MONTH\" \n- \"MONTHLY\", also requires fields \"every\" and \"runsOnDayOfMonth\" to be set. \n- \"QUARTERLY\" \n- \"YEARLY\""
+            type: string
+          repeatsOnWeekDays:
+            description: 'List of week days "WEEKLY" scheduled reports should run on.'
+            items:
+              type: string
+            type: array
+          runsOnDayOfMonth:
+            description: "Enum to define for \"MONTHLY\" scheduled reports whether reports should be repeated on the same day of the month as \"startDate\" or the same day of the week of the month. Possible values are:  \n- DAY_OF_MONTH \n- WEEK_OF_MONTH  \nExample: If 'startDate' is Monday, April 2nd 2012 (2012-04-02), \"DAY_OF_MONTH\" would run subsequent reports on the 2nd of every Month, and \"WEEK_OF_MONTH\" would run subsequent reports on the first Monday of the month."
+            type: string
+          startDate:
+            description: Start date of date range for which scheduled reports should be run.
+            format: date
+            type: string
+        type: object
+      subAccountId:
+        description: The subbaccount id this report belongs to if applicable.
+        format: int64
+        type: string
+      type:
+        description: 'The type of the report, currently only "STANDARD" is supported.'
+        type: string
+    type: object
+  ReportList:
+    description: Represents the list of reports.
+    properties:
+      etag:
+        description: ETag of this response for caching purposes.
+        type: string
+      items:
+        description: The reports returned in this response.
+        items:
+          $ref: '#/definitions/Report'
+        type: array
+      kind:
+        default: 'dfareporting#reportList'
+        description: 'Kind of list this is, in this case dfareporting#reportList.'
+        type: string
+      nextPageToken:
+        description: "Continuation token used to page through reports. To retrieve the next page of results, set the next request's \"pageToken\" to the value of this field. The page token is only valid for a limited amount of time and should not be persisted."
+        type: string
+    type: object
+  SortedDimension:
+    description: Represents a sorted dimension.
+    properties:
+      kind:
+        default: 'dfareporting#sortedDimension'
+        description: 'Kind of resource this is, in this case dfareporting#sortedDimension.'
+        type: string
+      name:
+        description: The name of the dimension.
+        type: string
+      sortOrder:
+        description: "An optional sort order for the dimension column, one of:  \n- \"ASCENDING\" \n- \"DESCENDING\""
+        type: string
+    type: object
+  UserProfile:
+    description: Represents a UserProfile resource.
+    properties:
+      accountId:
+        description: The account ID this profile belongs to.
+        format: int64
+        type: string
+      accountName:
+        description: The account name this profile belongs to.
+        type: string
+      etag:
+        description: ETag of this response for caching purposes.
+        type: string
+      kind:
+        default: 'dfareporting#userProfile'
+        description: 'Kind of resource this is, in this case dfareporting#userProfile.'
+        type: string
+      profileId:
+        description: The unique ID of the user profile.
+        format: int64
+        type: string
+      subAccountId:
+        description: The sub account ID this profile belongs to if applicable.
+        format: int64
+        type: string
+      subAccountName:
+        description: The sub account name this profile belongs to if applicable.
+        type: string
+      userName:
+        description: The user name.
+        type: string
+    type: object
+  UserProfileList:
+    description: Represents the list of user profiles.
+    properties:
+      etag:
+        description: ETag of this response for caching purposes.
+        type: string
+      items:
+        description: The user profiles returned in this response.
+        items:
+          $ref: '#/definitions/UserProfile'
+        type: array
+      kind:
+        default: 'dfareporting#userProfileList'
+        description: 'Kind of list this is, in this case dfareporting#userProfileList.'
+        type: string
+    type: object

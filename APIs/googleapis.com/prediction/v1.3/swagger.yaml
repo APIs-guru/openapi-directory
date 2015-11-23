@@ -1,131 +1,8 @@
-basePath: /prediction/v1.3
-definitions:
-  Input:
-    properties:
-      input:
-        description: Input to the model for a prediction
-        properties:
-          csvInstance:
-            description: 'A list of input features, these can be strings or doubles.'
-            items: {}
-            type: array
-        type: object
-    type: object
-  Output:
-    properties:
-      id:
-        description: The unique name for the predictive model.
-        type: string
-      kind:
-        default: 'prediction#output'
-        description: What kind of resource this is.
-        type: string
-      outputLabel:
-        description: 'The most likely class [Categorical models only].'
-        type: string
-      outputMulti:
-        description: 'A list of classes with their estimated probabilities [Categorical models only].'
-        items:
-          properties:
-            label:
-              description: The class label.
-              type: string
-            score:
-              description: The probability of the class.
-              format: double
-              type: number
-          type: object
-        type: array
-      outputValue:
-        description: 'The estimated regression value [Regression models only].'
-        format: double
-        type: number
-      selfLink:
-        description: A URL to re-request this resource.
-        type: string
-    type: object
-  Training:
-    properties:
-      id:
-        description: The unique name for the predictive model.
-        type: string
-      kind:
-        default: 'prediction#training'
-        description: What kind of resource this is.
-        type: string
-      modelInfo:
-        description: Model metadata.
-        properties:
-          classWeightedAccuracy:
-            description: 'Estimated accuracy of model taking utility weights into account [Categorical models only].'
-            format: double
-            type: number
-          classificationAccuracy:
-            description: 'A number between 0.0 and 1.0, where 1.0 is 100% accurate. This is an estimate, based on the amount and quality of the training data, of the estimated prediction accuracy. You can use this is a guide to decide whether the results are accurate enough for your needs. This estimate will be more reliable if your real input data is similar to your training data [Categorical models only].'
-            format: double
-            type: number
-          confusionMatrix:
-            additionalProperties:
-              additionalProperties:
-                description: 'The pair {predicted_label, count}.'
-                format: double
-                type: number
-              description: The true class label.
-              type: object
-            description: 'An output confusion matrix. This shows an estimate for how this model will do in predictions. This is first indexed by the true class label. For each true class label, this provides a pair {predicted_label, count}, where count is the estimated number of times the model will predict the predicted label given the true label. Will not output if more then 100 classes [Categorical models only].'
-            type: object
-          confusionMatrixRowTotals:
-            additionalProperties:
-              description: The true class associated with how many instances it had
-              format: double
-              type: number
-            description: A list of the confusion matrix row totals
-            type: object
-          meanSquaredError:
-            description: 'An estimated mean squared error. The can be used to measure the quality of the predicted model [Regression models only].'
-            format: double
-            type: number
-          modelType:
-            description: Type of predictive model (CLASSIFICATION or REGRESSION)
-            type: string
-          numberClasses:
-            description: 'Number of classes in the trained model [Categorical models only].'
-            format: int64
-            type: string
-          numberInstances:
-            description: Number of valid data instances used in the trained model.
-            format: int64
-            type: string
-        type: object
-      selfLink:
-        description: A URL to re-request this resource.
-        type: string
-      trainingStatus:
-        description: 'The current status of the training job. This can be one of following: RUNNING; DONE; ERROR; ERROR: TRAINING JOB NOT FOUND'
-        type: string
-      utility:
-        description: 'A class weighting function, which allows the importance weights for classes to be specified [Categorical models only].'
-        items:
-          additionalProperties:
-            format: double
-            type: number
-          description: Class label (string).
-          type: object
-        type: array
-    type: object
-  Update:
-    properties:
-      classLabel:
-        description: The true class label of this instance
-        type: string
-      csvInstance:
-        description: The input features for this instance
-        items: {}
-        type: array
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/prediction/docs/developer-guide'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /prediction/v1.3
 info:
   contact:
     name: Google
@@ -144,6 +21,19 @@ info:
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: prediction
+externalDocs:
+  url: 'https://developers.google.com/prediction/docs/developer-guide'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
+      'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
+      'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
+      'https://www.googleapis.com/auth/prediction': Manage your data in the Google Prediction API
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -347,17 +237,127 @@ paths:
             - 'https://www.googleapis.com/auth/prediction'
       tags:
         - training
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
-      'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
-      'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
-      'https://www.googleapis.com/auth/prediction': Manage your data in the Google Prediction API
-    type: oauth2
-swagger: '2.0'
+definitions:
+  Input:
+    properties:
+      input:
+        description: Input to the model for a prediction
+        properties:
+          csvInstance:
+            description: 'A list of input features, these can be strings or doubles.'
+            items: {}
+            type: array
+        type: object
+    type: object
+  Output:
+    properties:
+      id:
+        description: The unique name for the predictive model.
+        type: string
+      kind:
+        default: 'prediction#output'
+        description: What kind of resource this is.
+        type: string
+      outputLabel:
+        description: 'The most likely class [Categorical models only].'
+        type: string
+      outputMulti:
+        description: 'A list of classes with their estimated probabilities [Categorical models only].'
+        items:
+          properties:
+            label:
+              description: The class label.
+              type: string
+            score:
+              description: The probability of the class.
+              format: double
+              type: number
+          type: object
+        type: array
+      outputValue:
+        description: 'The estimated regression value [Regression models only].'
+        format: double
+        type: number
+      selfLink:
+        description: A URL to re-request this resource.
+        type: string
+    type: object
+  Training:
+    properties:
+      id:
+        description: The unique name for the predictive model.
+        type: string
+      kind:
+        default: 'prediction#training'
+        description: What kind of resource this is.
+        type: string
+      modelInfo:
+        description: Model metadata.
+        properties:
+          classWeightedAccuracy:
+            description: 'Estimated accuracy of model taking utility weights into account [Categorical models only].'
+            format: double
+            type: number
+          classificationAccuracy:
+            description: 'A number between 0.0 and 1.0, where 1.0 is 100% accurate. This is an estimate, based on the amount and quality of the training data, of the estimated prediction accuracy. You can use this is a guide to decide whether the results are accurate enough for your needs. This estimate will be more reliable if your real input data is similar to your training data [Categorical models only].'
+            format: double
+            type: number
+          confusionMatrix:
+            additionalProperties:
+              additionalProperties:
+                description: 'The pair {predicted_label, count}.'
+                format: double
+                type: number
+              description: The true class label.
+              type: object
+            description: 'An output confusion matrix. This shows an estimate for how this model will do in predictions. This is first indexed by the true class label. For each true class label, this provides a pair {predicted_label, count}, where count is the estimated number of times the model will predict the predicted label given the true label. Will not output if more then 100 classes [Categorical models only].'
+            type: object
+          confusionMatrixRowTotals:
+            additionalProperties:
+              description: The true class associated with how many instances it had
+              format: double
+              type: number
+            description: A list of the confusion matrix row totals
+            type: object
+          meanSquaredError:
+            description: 'An estimated mean squared error. The can be used to measure the quality of the predicted model [Regression models only].'
+            format: double
+            type: number
+          modelType:
+            description: Type of predictive model (CLASSIFICATION or REGRESSION)
+            type: string
+          numberClasses:
+            description: 'Number of classes in the trained model [Categorical models only].'
+            format: int64
+            type: string
+          numberInstances:
+            description: Number of valid data instances used in the trained model.
+            format: int64
+            type: string
+        type: object
+      selfLink:
+        description: A URL to re-request this resource.
+        type: string
+      trainingStatus:
+        description: 'The current status of the training job. This can be one of following: RUNNING; DONE; ERROR; ERROR: TRAINING JOB NOT FOUND'
+        type: string
+      utility:
+        description: 'A class weighting function, which allows the importance weights for classes to be specified [Categorical models only].'
+        items:
+          additionalProperties:
+            format: double
+            type: number
+          description: Class label (string).
+          type: object
+        type: array
+    type: object
+  Update:
+    properties:
+      classLabel:
+        description: The true class label of this instance
+        type: string
+      csvInstance:
+        description: The input features for this instance
+        items: {}
+        type: array
+    type: object

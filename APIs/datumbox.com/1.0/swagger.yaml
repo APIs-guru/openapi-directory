@@ -1,5 +1,8 @@
-basePath: /
+swagger: '2.0'
+schemes:
+  - http
 host: api.datumbox.com
+basePath: /
 info:
   description: 'Datumbox offers a Machine Learning platform composed of 14 classifiers and Natural Language processing functions. Functions include sentiment analysis, topic classification, readability assessment, language detection, and much more.'
   title: DatumBox
@@ -11,6 +14,13 @@ info:
     url: 'http://www.datumbox.com/api-sandbox/api-docs'
     version: '1.2'
   x-providerName: datumbox.com
+tags:
+  - description: Document Classification Functions
+    name: Document-Classification
+  - description: Information Retrieval Functions
+    name: Information-Retrieval
+  - description: Metrics
+    name: Metrics
 paths:
   /1.0/AdultContentDetection.json:
     post:
@@ -360,13 +370,3 @@ paths:
       summary: Identifies the Sentiment of Twitter Messages
       tags:
         - Document-Classification
-schemes:
-  - http
-swagger: '2.0'
-tags:
-  - description: Document Classification Functions
-    name: Document-Classification
-  - description: Information Retrieval Functions
-    name: Information-Retrieval
-  - description: Metrics
-    name: Metrics

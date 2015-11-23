@@ -1,444 +1,8 @@
-basePath: /
-definitions:
-  Account:
-    properties:
-      billing:
-        properties:
-          city:
-            type: string
-          country:
-            type: string
-          name:
-            type: string
-          state:
-            type: string
-          street:
-            type: string
-          zip:
-            type: string
-        type: object
-      created_at:
-        type: integer
-      id:
-        type: integer
-      links:
-        properties:
-          projects:
-            properties:
-              href:
-                type: string
-            type: object
-          self:
-            properties:
-              href:
-                type: string
-            type: object
-        type: object
-      name:
-        type: string
-      stats:
-        properties:
-          started_projects:
-            type: integer
-          total_projects:
-            type: integer
-        type: object
-  Activity:
-    properties:
-      activity_at:
-        format: date
-        type: string
-      id:
-        type: integer
-      links:
-        $ref: '#/definitions/ActivityLinks'
-      source_text:
-        description: Source text
-        type: string
-      target_text:
-        description: 'Target text of the activity, which is actually the translation of the source text.'
-        type: string
-      translator:
-        description: Unique identifier of the translator/proofreader of this activity.
-        type: integer
-      type:
-        description: "Currently there are two available activity types; 'translated', 'proofread'."
-        enum:
-          - translated
-          - proofread
-        type: string
-    type: object
-  ActivityLinks:
-    allOf:
-      - $ref: '#/definitions/LinksMeta'
-    properties:
-      comments:
-        properties:
-          href:
-            type: string
-        type: object
-      project:
-        properties:
-          href:
-            type: string
-        type: object
-    type: object
-  ActivityList:
-    properties:
-      activities:
-        items:
-          $ref: '#/definitions/Activity'
-        type: array
-      meta:
-        $ref: '#/definitions/PagingMeta'
-    type: object
-  Comment:
-    properties:
-      comment:
-        description: Comment text.
-        type: string
-      commented_at:
-        format: date
-        type: string
-      id:
-        type: integer
-      links:
-        $ref: '#/definitions/CommentLinks'
-    type: object
-  CommentLinks:
-    allOf:
-      - $ref: '#/definitions/LinksMeta'
-    properties:
-      activity:
-        description: Link to the activity to which this comment was submitted.
-        properties:
-          href:
-            type: string
-        type: object
-      project:
-        properties:
-          href:
-            type: string
-        type: object
-    type: object
-  CommentList:
-    properties:
-      activities:
-        items:
-          $ref: '#/definitions/Comment'
-        type: array
-      meta:
-        $ref: '#/definitions/PagingMeta'
-    type: object
-  Document:
-    properties:
-      id:
-        type: integer
-      links:
-        $ref: '#/definitions/DocumentLinks'
-      name:
-        type: string
-      uploaded_at:
-        format: date
-        type: string
-      word_count:
-        type: integer
-    type: object
-  DocumentLinks:
-    allOf:
-      - $ref: '#/definitions/LinksMeta'
-    properties:
-      download:
-        properties:
-          href:
-            type: string
-        type: object
-      project:
-        properties:
-          href:
-            type: string
-        type: object
-    type: object
-  DocumentList:
-    properties:
-      documents:
-        items:
-          $ref: '#/definitions/Document'
-        type: array
-      meta:
-        $ref: '#/definitions/PagingMeta'
-    type: object
-  Error:
-    properties:
-      code:
-        type: string
-      help:
-        type: string
-      http_code:
-        format: int32
-        type: integer
-      message:
-        type: string
-    type: object
-  Formats:
-    properties:
-      documents:
-        properties:
-          extensions:
-            items:
-              type: string
-            type: array
-          mimes:
-            items:
-              type: string
-            type: array
-        type: object
-      glossaries:
-        properties:
-          extensions:
-            items:
-              type: string
-            type: array
-        type: object
-      styleguides:
-        properties:
-          extensions:
-            items:
-              type: string
-            type: array
-        type: object
-    type: object
-  Glossary:
-    properties:
-      id:
-        type: integer
-      links:
-        $ref: '#/definitions/DocumentLinks'
-      name:
-        type: string
-      uploaded_at:
-        format: date
-        type: string
-    type: object
-  GlossaryList:
-    properties:
-      glossaries:
-        items:
-          $ref: '#/definitions/Glossary'
-        type: array
-      meta:
-        $ref: '#/definitions/PagingMeta'
-    type: object
-  Language:
-    properties:
-      code:
-        type: string
-      name:
-        type: string
-    type: object
-  LanguageProgress:
-    properties:
-      languageCode:
-        $ref: '#/definitions/ProgressSub'
-    type: object
-  LinksMeta:
-    properties:
-      self:
-        properties:
-          href:
-            type: string
-        type: object
-    type: object
-  Package:
-    properties:
-      key:
-        description: This is the unique package tracking key. You can use this key to track the current progress of the translation packaging with /package/check call.
-        type: string
-      status:
-        description: "The status of translation packaging. Possible values are 'started', 'packaging', 'completed'. When completed, you can make a /download call to download the last translation package."
-        enum:
-          - started
-          - packaging
-          - completed
-        type: string
-    type: object
-  PackageStatus:
-    properties:
-      status:
-        description: "The status of translation packaging. Possible values are 'started', 'packaging', 'completed'. When completed, you can make a /download call to download the last translation package."
-        enum:
-          - started
-          - packaging
-          - completed
-        type: string
-    type: object
-  PagingLinksMeta:
-    allOf:
-      - $ref: '#/definitions/LinksMeta'
-    properties:
-      next:
-        type: string
-      previous:
-        type: string
-    type: object
-  PagingMeta:
-    properties:
-      paging:
-        properties:
-          links:
-            $ref: '#/definitions/PagingLinksMeta'
-          page:
-            default: 1
-            type: integer
-          per_page:
-            default: 10
-            type: integer
-          total_count:
-            type: integer
-        type: object
-    type: object
-  Progress:
-    allOf:
-      - $ref: '#/definitions/ProgressSub'
-    properties:
-      languages:
-        $ref: '#/definitions/LanguageProgress'
-      links:
-        $ref: '#/definitions/ProgressLink'
-    type: object
-  ProgressLink:
-    allOf:
-      - $ref: '#/definitions/LinksMeta'
-    properties:
-      project:
-        properties:
-          href:
-            type: string
-        type: object
-    type: object
-  ProgressSub:
-    properties:
-      proofreading:
-        type: integer
-      total:
-        type: integer
-      translation:
-        type: integer
-    type: object
-  Project:
-    properties:
-      callback_url:
-        description: Callback URL to notify when project status changed.
-        type: string
-      created_at:
-        format: date
-        type: string
-      custom:
-        description: Custom data provided while creating a new project.
-        type: object
-      delivery_at:
-        format: date
-        type: string
-      errors:
-        description: 'A list of errors. Visible when creating a project and uploading your documents at the same time, in case of multiple errors.'
-        items:
-          $ref: '#/definitions/Error'
-        type: array
-      id:
-        type: integer
-      links:
-        $ref: '#/definitions/ProjectLinks'
-      price:
-        properties:
-          amount:
-            format: float
-            type: number
-          currency:
-            default: usd
-            type: string
-        type: object
-      source_language:
-        type: string
-      status:
-        enum:
-          - pending
-          - started
-          - completed
-        type: string
-      target_languages:
-        items:
-          type: string
-        type: array
-      valid_until:
-        description: Available only if status is `pending`
-        format: date
-        type: string
-      word_count:
-        type: integer
-    type: object
-  ProjectLinks:
-    allOf:
-      - $ref: '#/definitions/LinksMeta'
-    properties:
-      documents:
-        properties:
-          href:
-            type: string
-        type: object
-      glossaries:
-        properties:
-          href:
-            type: string
-        type: object
-      styleguides:
-        properties:
-          href:
-            type: string
-        type: object
-    type: object
-  ProjectList:
-    properties:
-      meta:
-        $ref: '#/definitions/PagingMeta'
-      projects:
-        items:
-          $ref: '#/definitions/Project'
-        type: array
-    type: object
-  StyleGuide:
-    properties:
-      id:
-        type: integer
-      links:
-        $ref: '#/definitions/DocumentLinks'
-      name:
-        type: string
-      uploaded_at:
-        format: date
-        type: string
-    type: object
-  StyleGuideList:
-    properties:
-      meta:
-        $ref: '#/definitions/PagingMeta'
-      styleguides:
-        items:
-          $ref: '#/definitions/StyleGuide'
-        type: array
-    type: object
-  Token:
-    properties:
-      access_token:
-        type: string
-      expires_in:
-        type: integer
-      scope:
-        type: string
-      token_type:
-        type: string
-externalDocs:
-  url: 'https://www.motaword.com/developer'
+swagger: '2.0'
+schemes:
+  - https
 host: api.motaword.com
+basePath: /
 info:
   description: Use MotaWord API to post and track your translation projects.
   title: MotaWord API
@@ -452,6 +16,16 @@ info:
     url: 'https://api.motaword.com/swagger'
     version: '2.0'
   x-providerName: motaword.com
+externalDocs:
+  url: 'https://www.motaword.com/developer'
+produces:
+  - application/json
+securityDefinitions:
+  client_credentials:
+    description: 'OAuth2 authentication, Client Credentials flow.'
+    flow: password
+    tokenUrl: /token
+    type: oauth2
 paths:
   /:
     get:
@@ -1764,14 +1338,440 @@ paths:
       summary: Retrieve an access token to interact with the API.
       tags:
         - Auth
-produces:
-  - application/json
-schemes:
-  - https
-securityDefinitions:
-  client_credentials:
-    description: 'OAuth2 authentication, Client Credentials flow.'
-    flow: password
-    tokenUrl: /token
-    type: oauth2
-swagger: '2.0'
+definitions:
+  Account:
+    properties:
+      billing:
+        properties:
+          city:
+            type: string
+          country:
+            type: string
+          name:
+            type: string
+          state:
+            type: string
+          street:
+            type: string
+          zip:
+            type: string
+        type: object
+      created_at:
+        type: integer
+      id:
+        type: integer
+      links:
+        properties:
+          projects:
+            properties:
+              href:
+                type: string
+            type: object
+          self:
+            properties:
+              href:
+                type: string
+            type: object
+        type: object
+      name:
+        type: string
+      stats:
+        properties:
+          started_projects:
+            type: integer
+          total_projects:
+            type: integer
+        type: object
+  Activity:
+    properties:
+      activity_at:
+        format: date
+        type: string
+      id:
+        type: integer
+      links:
+        $ref: '#/definitions/ActivityLinks'
+      source_text:
+        description: Source text
+        type: string
+      target_text:
+        description: 'Target text of the activity, which is actually the translation of the source text.'
+        type: string
+      translator:
+        description: Unique identifier of the translator/proofreader of this activity.
+        type: integer
+      type:
+        description: "Currently there are two available activity types; 'translated', 'proofread'."
+        enum:
+          - translated
+          - proofread
+        type: string
+    type: object
+  ActivityLinks:
+    allOf:
+      - $ref: '#/definitions/LinksMeta'
+    properties:
+      comments:
+        properties:
+          href:
+            type: string
+        type: object
+      project:
+        properties:
+          href:
+            type: string
+        type: object
+    type: object
+  ActivityList:
+    properties:
+      activities:
+        items:
+          $ref: '#/definitions/Activity'
+        type: array
+      meta:
+        $ref: '#/definitions/PagingMeta'
+    type: object
+  Comment:
+    properties:
+      comment:
+        description: Comment text.
+        type: string
+      commented_at:
+        format: date
+        type: string
+      id:
+        type: integer
+      links:
+        $ref: '#/definitions/CommentLinks'
+    type: object
+  CommentLinks:
+    allOf:
+      - $ref: '#/definitions/LinksMeta'
+    properties:
+      activity:
+        description: Link to the activity to which this comment was submitted.
+        properties:
+          href:
+            type: string
+        type: object
+      project:
+        properties:
+          href:
+            type: string
+        type: object
+    type: object
+  CommentList:
+    properties:
+      activities:
+        items:
+          $ref: '#/definitions/Comment'
+        type: array
+      meta:
+        $ref: '#/definitions/PagingMeta'
+    type: object
+  Document:
+    properties:
+      id:
+        type: integer
+      links:
+        $ref: '#/definitions/DocumentLinks'
+      name:
+        type: string
+      uploaded_at:
+        format: date
+        type: string
+      word_count:
+        type: integer
+    type: object
+  DocumentLinks:
+    allOf:
+      - $ref: '#/definitions/LinksMeta'
+    properties:
+      download:
+        properties:
+          href:
+            type: string
+        type: object
+      project:
+        properties:
+          href:
+            type: string
+        type: object
+    type: object
+  DocumentList:
+    properties:
+      documents:
+        items:
+          $ref: '#/definitions/Document'
+        type: array
+      meta:
+        $ref: '#/definitions/PagingMeta'
+    type: object
+  Error:
+    properties:
+      code:
+        type: string
+      help:
+        type: string
+      http_code:
+        format: int32
+        type: integer
+      message:
+        type: string
+    type: object
+  Formats:
+    properties:
+      documents:
+        properties:
+          extensions:
+            items:
+              type: string
+            type: array
+          mimes:
+            items:
+              type: string
+            type: array
+        type: object
+      glossaries:
+        properties:
+          extensions:
+            items:
+              type: string
+            type: array
+        type: object
+      styleguides:
+        properties:
+          extensions:
+            items:
+              type: string
+            type: array
+        type: object
+    type: object
+  Glossary:
+    properties:
+      id:
+        type: integer
+      links:
+        $ref: '#/definitions/DocumentLinks'
+      name:
+        type: string
+      uploaded_at:
+        format: date
+        type: string
+    type: object
+  GlossaryList:
+    properties:
+      glossaries:
+        items:
+          $ref: '#/definitions/Glossary'
+        type: array
+      meta:
+        $ref: '#/definitions/PagingMeta'
+    type: object
+  Language:
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+    type: object
+  LanguageProgress:
+    properties:
+      languageCode:
+        $ref: '#/definitions/ProgressSub'
+    type: object
+  LinksMeta:
+    properties:
+      self:
+        properties:
+          href:
+            type: string
+        type: object
+    type: object
+  Package:
+    properties:
+      key:
+        description: This is the unique package tracking key. You can use this key to track the current progress of the translation packaging with /package/check call.
+        type: string
+      status:
+        description: "The status of translation packaging. Possible values are 'started', 'packaging', 'completed'. When completed, you can make a /download call to download the last translation package."
+        enum:
+          - started
+          - packaging
+          - completed
+        type: string
+    type: object
+  PackageStatus:
+    properties:
+      status:
+        description: "The status of translation packaging. Possible values are 'started', 'packaging', 'completed'. When completed, you can make a /download call to download the last translation package."
+        enum:
+          - started
+          - packaging
+          - completed
+        type: string
+    type: object
+  PagingLinksMeta:
+    allOf:
+      - $ref: '#/definitions/LinksMeta'
+    properties:
+      next:
+        type: string
+      previous:
+        type: string
+    type: object
+  PagingMeta:
+    properties:
+      paging:
+        properties:
+          links:
+            $ref: '#/definitions/PagingLinksMeta'
+          page:
+            default: 1
+            type: integer
+          per_page:
+            default: 10
+            type: integer
+          total_count:
+            type: integer
+        type: object
+    type: object
+  Progress:
+    allOf:
+      - $ref: '#/definitions/ProgressSub'
+    properties:
+      languages:
+        $ref: '#/definitions/LanguageProgress'
+      links:
+        $ref: '#/definitions/ProgressLink'
+    type: object
+  ProgressLink:
+    allOf:
+      - $ref: '#/definitions/LinksMeta'
+    properties:
+      project:
+        properties:
+          href:
+            type: string
+        type: object
+    type: object
+  ProgressSub:
+    properties:
+      proofreading:
+        type: integer
+      total:
+        type: integer
+      translation:
+        type: integer
+    type: object
+  Project:
+    properties:
+      callback_url:
+        description: Callback URL to notify when project status changed.
+        type: string
+      created_at:
+        format: date
+        type: string
+      custom:
+        description: Custom data provided while creating a new project.
+        type: object
+      delivery_at:
+        format: date
+        type: string
+      errors:
+        description: 'A list of errors. Visible when creating a project and uploading your documents at the same time, in case of multiple errors.'
+        items:
+          $ref: '#/definitions/Error'
+        type: array
+      id:
+        type: integer
+      links:
+        $ref: '#/definitions/ProjectLinks'
+      price:
+        properties:
+          amount:
+            format: float
+            type: number
+          currency:
+            default: usd
+            type: string
+        type: object
+      source_language:
+        type: string
+      status:
+        enum:
+          - pending
+          - started
+          - completed
+        type: string
+      target_languages:
+        items:
+          type: string
+        type: array
+      valid_until:
+        description: Available only if status is `pending`
+        format: date
+        type: string
+      word_count:
+        type: integer
+    type: object
+  ProjectLinks:
+    allOf:
+      - $ref: '#/definitions/LinksMeta'
+    properties:
+      documents:
+        properties:
+          href:
+            type: string
+        type: object
+      glossaries:
+        properties:
+          href:
+            type: string
+        type: object
+      styleguides:
+        properties:
+          href:
+            type: string
+        type: object
+    type: object
+  ProjectList:
+    properties:
+      meta:
+        $ref: '#/definitions/PagingMeta'
+      projects:
+        items:
+          $ref: '#/definitions/Project'
+        type: array
+    type: object
+  StyleGuide:
+    properties:
+      id:
+        type: integer
+      links:
+        $ref: '#/definitions/DocumentLinks'
+      name:
+        type: string
+      uploaded_at:
+        format: date
+        type: string
+    type: object
+  StyleGuideList:
+    properties:
+      meta:
+        $ref: '#/definitions/PagingMeta'
+      styleguides:
+        items:
+          $ref: '#/definitions/StyleGuide'
+        type: array
+    type: object
+  Token:
+    properties:
+      access_token:
+        type: string
+      expires_in:
+        type: integer
+      scope:
+        type: string
+      token_type:
+        type: string

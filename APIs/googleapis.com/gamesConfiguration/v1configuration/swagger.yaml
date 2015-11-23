@@ -1,230 +1,8 @@
-basePath: /games/v1configuration
-definitions:
-  AchievementConfiguration:
-    description: This is a JSON template for an achievement configuration resource.
-    properties:
-      achievementType:
-        description: "The type of the achievement.\nPossible values are:  \n- \"STANDARD\" - Achievement is either locked or unlocked. \n- \"INCREMENTAL\" - Achievement is incremental."
-        type: string
-      draft:
-        $ref: '#/definitions/AchievementConfigurationDetail'
-        description: The draft data of the achievement.
-      id:
-        description: The ID of the achievement.
-        type: string
-      initialState:
-        description: "The initial state of the achievement.\nPossible values are:  \n- \"HIDDEN\" - Achievement is hidden. \n- \"REVEALED\" - Achievement is revealed. \n- \"UNLOCKED\" - Achievement is unlocked."
-        type: string
-      kind:
-        default: 'gamesConfiguration#achievementConfiguration'
-        description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#achievementConfiguration.'
-        type: string
-      published:
-        $ref: '#/definitions/AchievementConfigurationDetail'
-        description: The read-only published data of the achievement.
-      stepsToUnlock:
-        description: Steps to unlock. Only applicable to incremental achievements.
-        format: int32
-        type: integer
-      token:
-        description: The token for this resource.
-        type: string
-    type: object
-  AchievementConfigurationDetail:
-    description: This is a JSON template for an achievement configuration detail.
-    properties:
-      description:
-        $ref: '#/definitions/LocalizedStringBundle'
-        description: Localized strings for the achievement description.
-      iconUrl:
-        description: The icon url of this achievement. Writes to this field are ignored.
-        type: string
-      kind:
-        default: 'gamesConfiguration#achievementConfigurationDetail'
-        description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#achievementConfigurationDetail.'
-        type: string
-      name:
-        $ref: '#/definitions/LocalizedStringBundle'
-        description: Localized strings for the achievement name.
-      pointValue:
-        description: Point value for the achievement.
-        format: int32
-        type: integer
-      sortRank:
-        description: The sort rank of this achievement. Writes to this field are ignored.
-        format: int32
-        type: integer
-    type: object
-  AchievementConfigurationListResponse:
-    description: This is a JSON template for a ListConfigurations response.
-    properties:
-      items:
-        description: The achievement configurations.
-        items:
-          $ref: '#/definitions/AchievementConfiguration'
-        type: array
-      kind:
-        default: 'gamesConfiguration#achievementConfigurationListResponse'
-        description: 'Uniquely identifies the type of this resource. Value is always the fixed string games#achievementConfigurationListResponse.'
-        type: string
-      nextPageToken:
-        description: The pagination token for the next page of results.
-        type: string
-    type: object
-  GamesNumberAffixConfiguration:
-    description: This is a JSON template for a number affix resource.
-    properties:
-      few:
-        $ref: '#/definitions/LocalizedStringBundle'
-        description: 'When the language requires special treatment of "small" numbers (as with 2, 3, and 4 in Czech; or numbers ending 2, 3, or 4 but not 12, 13, or 14 in Polish).'
-      many:
-        $ref: '#/definitions/LocalizedStringBundle'
-        description: 'When the language requires special treatment of "large" numbers (as with numbers ending 11-99 in Maltese).'
-      one:
-        $ref: '#/definitions/LocalizedStringBundle'
-        description: 'When the language requires special treatment of numbers like one (as with the number 1 in English and most other languages; in Russian, any number ending in 1 but not ending in 11 is in this class).'
-      other:
-        $ref: '#/definitions/LocalizedStringBundle'
-        description: 'When the language does not require special treatment of the given quantity (as with all numbers in Chinese, or 42 in English).'
-      two:
-        $ref: '#/definitions/LocalizedStringBundle'
-        description: 'When the language requires special treatment of numbers like two (as with 2 in Welsh, or 102 in Slovenian).'
-      zero:
-        $ref: '#/definitions/LocalizedStringBundle'
-        description: When the language requires special treatment of the number 0 (as in Arabic).
-    type: object
-  GamesNumberFormatConfiguration:
-    description: This is a JSON template for a number format resource.
-    properties:
-      currencyCode:
-        description: The curreny code string. Only used for CURRENCY format type.
-        type: string
-      numDecimalPlaces:
-        description: The number of decimal places for number. Only used for NUMERIC format type.
-        format: int32
-        type: integer
-      numberFormatType:
-        description: "The formatting for the number.\nPossible values are:  \n- \"NUMERIC\" - Numbers are formatted to have no digits or a fixed number of digits after the decimal point according to locale. An optional custom unit can be added.\n- \"TIME_DURATION\" - Numbers are formatted to hours, minutes and seconds.\n- \"CURRENCY\" - Numbers are formatted to currency according to locale."
-        type: string
-      suffix:
-        $ref: '#/definitions/GamesNumberAffixConfiguration'
-        description: An optional suffix for the NUMERIC format type. These strings follow the same  plural rules as all Android string resources.
-    type: object
-  ImageConfiguration:
-    description: This is a JSON template for an image configuration resource.
-    properties:
-      imageType:
-        description: The image type for the image.
-        type: string
-      kind:
-        default: 'gamesConfiguration#imageConfiguration'
-        description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#imageConfiguration.'
-        type: string
-      resourceId:
-        description: The resource ID of resource which the image belongs to.
-        type: string
-      url:
-        description: The url for this image.
-        type: string
-    type: object
-  LeaderboardConfiguration:
-    description: This is a JSON template for an leaderboard configuration resource.
-    properties:
-      draft:
-        $ref: '#/definitions/LeaderboardConfigurationDetail'
-        description: The draft data of the leaderboard.
-      id:
-        description: The ID of the leaderboard.
-        type: string
-      kind:
-        default: 'gamesConfiguration#leaderboardConfiguration'
-        description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#leaderboardConfiguration.'
-        type: string
-      published:
-        $ref: '#/definitions/LeaderboardConfigurationDetail'
-        description: The read-only published data of the leaderboard.
-      scoreMax:
-        description: Maximum score that can be posted to this leaderboard.
-        format: int64
-        type: string
-      scoreMin:
-        description: Minimum score that can be posted to this leaderboard.
-        format: int64
-        type: string
-      scoreOrder:
-        description: "The type of the leaderboard.\nPossible values are:  \n- \"LARGER_IS_BETTER\" - Larger scores posted are ranked higher. \n- \"SMALLER_IS_BETTER\" - Smaller scores posted are ranked higher."
-        type: string
-      token:
-        description: The token for this resource.
-        type: string
-    type: object
-  LeaderboardConfigurationDetail:
-    description: This is a JSON template for a leaderboard configuration detail.
-    properties:
-      iconUrl:
-        description: The icon url of this leaderboard. Writes to this field are ignored.
-        type: string
-      kind:
-        default: 'gamesConfiguration#leaderboardConfigurationDetail'
-        description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#leaderboardConfigurationDetail.'
-        type: string
-      name:
-        $ref: '#/definitions/LocalizedStringBundle'
-        description: Localized strings for the leaderboard name.
-      scoreFormat:
-        $ref: '#/definitions/GamesNumberFormatConfiguration'
-        description: The score formatting for the leaderboard.
-      sortRank:
-        description: The sort rank of this leaderboard. Writes to this field are ignored.
-        format: int32
-        type: integer
-    type: object
-  LeaderboardConfigurationListResponse:
-    description: This is a JSON template for a ListConfigurations response.
-    properties:
-      items:
-        description: The leaderboard configurations.
-        items:
-          $ref: '#/definitions/LeaderboardConfiguration'
-        type: array
-      kind:
-        default: 'gamesConfiguration#leaderboardConfigurationListResponse'
-        description: 'Uniquely identifies the type of this resource. Value is always the fixed string games#leaderboardConfigurationListResponse.'
-        type: string
-      nextPageToken:
-        description: The pagination token for the next page of results.
-        type: string
-    type: object
-  LocalizedString:
-    description: This is a JSON template for a localized string resource.
-    properties:
-      kind:
-        default: 'gamesConfiguration#localizedString'
-        description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#localizedString.'
-        type: string
-      locale:
-        description: The locale string.
-        type: string
-      value:
-        description: The string value.
-        type: string
-    type: object
-  LocalizedStringBundle:
-    description: This is a JSON template for a localized string bundle resource.
-    properties:
-      kind:
-        default: 'gamesConfiguration#localizedStringBundle'
-        description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#localizedStringBundle.'
-        type: string
-      translations:
-        description: The locale strings.
-        items:
-          $ref: '#/definitions/LocalizedString'
-        type: array
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/games/services'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /games/v1configuration
 info:
   contact:
     name: Google
@@ -243,6 +21,16 @@ info:
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: gamesConfiguration
+externalDocs:
+  url: 'https://developers.google.com/games/services'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/androidpublisher': View and manage your Google Play Developer account
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -694,14 +482,226 @@ paths:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - leaderboardConfigurations
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/androidpublisher': View and manage your Google Play Developer account
-    type: oauth2
-swagger: '2.0'
+definitions:
+  AchievementConfiguration:
+    description: This is a JSON template for an achievement configuration resource.
+    properties:
+      achievementType:
+        description: "The type of the achievement.\nPossible values are:  \n- \"STANDARD\" - Achievement is either locked or unlocked. \n- \"INCREMENTAL\" - Achievement is incremental."
+        type: string
+      draft:
+        $ref: '#/definitions/AchievementConfigurationDetail'
+        description: The draft data of the achievement.
+      id:
+        description: The ID of the achievement.
+        type: string
+      initialState:
+        description: "The initial state of the achievement.\nPossible values are:  \n- \"HIDDEN\" - Achievement is hidden. \n- \"REVEALED\" - Achievement is revealed. \n- \"UNLOCKED\" - Achievement is unlocked."
+        type: string
+      kind:
+        default: 'gamesConfiguration#achievementConfiguration'
+        description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#achievementConfiguration.'
+        type: string
+      published:
+        $ref: '#/definitions/AchievementConfigurationDetail'
+        description: The read-only published data of the achievement.
+      stepsToUnlock:
+        description: Steps to unlock. Only applicable to incremental achievements.
+        format: int32
+        type: integer
+      token:
+        description: The token for this resource.
+        type: string
+    type: object
+  AchievementConfigurationDetail:
+    description: This is a JSON template for an achievement configuration detail.
+    properties:
+      description:
+        $ref: '#/definitions/LocalizedStringBundle'
+        description: Localized strings for the achievement description.
+      iconUrl:
+        description: The icon url of this achievement. Writes to this field are ignored.
+        type: string
+      kind:
+        default: 'gamesConfiguration#achievementConfigurationDetail'
+        description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#achievementConfigurationDetail.'
+        type: string
+      name:
+        $ref: '#/definitions/LocalizedStringBundle'
+        description: Localized strings for the achievement name.
+      pointValue:
+        description: Point value for the achievement.
+        format: int32
+        type: integer
+      sortRank:
+        description: The sort rank of this achievement. Writes to this field are ignored.
+        format: int32
+        type: integer
+    type: object
+  AchievementConfigurationListResponse:
+    description: This is a JSON template for a ListConfigurations response.
+    properties:
+      items:
+        description: The achievement configurations.
+        items:
+          $ref: '#/definitions/AchievementConfiguration'
+        type: array
+      kind:
+        default: 'gamesConfiguration#achievementConfigurationListResponse'
+        description: 'Uniquely identifies the type of this resource. Value is always the fixed string games#achievementConfigurationListResponse.'
+        type: string
+      nextPageToken:
+        description: The pagination token for the next page of results.
+        type: string
+    type: object
+  GamesNumberAffixConfiguration:
+    description: This is a JSON template for a number affix resource.
+    properties:
+      few:
+        $ref: '#/definitions/LocalizedStringBundle'
+        description: 'When the language requires special treatment of "small" numbers (as with 2, 3, and 4 in Czech; or numbers ending 2, 3, or 4 but not 12, 13, or 14 in Polish).'
+      many:
+        $ref: '#/definitions/LocalizedStringBundle'
+        description: 'When the language requires special treatment of "large" numbers (as with numbers ending 11-99 in Maltese).'
+      one:
+        $ref: '#/definitions/LocalizedStringBundle'
+        description: 'When the language requires special treatment of numbers like one (as with the number 1 in English and most other languages; in Russian, any number ending in 1 but not ending in 11 is in this class).'
+      other:
+        $ref: '#/definitions/LocalizedStringBundle'
+        description: 'When the language does not require special treatment of the given quantity (as with all numbers in Chinese, or 42 in English).'
+      two:
+        $ref: '#/definitions/LocalizedStringBundle'
+        description: 'When the language requires special treatment of numbers like two (as with 2 in Welsh, or 102 in Slovenian).'
+      zero:
+        $ref: '#/definitions/LocalizedStringBundle'
+        description: When the language requires special treatment of the number 0 (as in Arabic).
+    type: object
+  GamesNumberFormatConfiguration:
+    description: This is a JSON template for a number format resource.
+    properties:
+      currencyCode:
+        description: The curreny code string. Only used for CURRENCY format type.
+        type: string
+      numDecimalPlaces:
+        description: The number of decimal places for number. Only used for NUMERIC format type.
+        format: int32
+        type: integer
+      numberFormatType:
+        description: "The formatting for the number.\nPossible values are:  \n- \"NUMERIC\" - Numbers are formatted to have no digits or a fixed number of digits after the decimal point according to locale. An optional custom unit can be added.\n- \"TIME_DURATION\" - Numbers are formatted to hours, minutes and seconds.\n- \"CURRENCY\" - Numbers are formatted to currency according to locale."
+        type: string
+      suffix:
+        $ref: '#/definitions/GamesNumberAffixConfiguration'
+        description: An optional suffix for the NUMERIC format type. These strings follow the same  plural rules as all Android string resources.
+    type: object
+  ImageConfiguration:
+    description: This is a JSON template for an image configuration resource.
+    properties:
+      imageType:
+        description: The image type for the image.
+        type: string
+      kind:
+        default: 'gamesConfiguration#imageConfiguration'
+        description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#imageConfiguration.'
+        type: string
+      resourceId:
+        description: The resource ID of resource which the image belongs to.
+        type: string
+      url:
+        description: The url for this image.
+        type: string
+    type: object
+  LeaderboardConfiguration:
+    description: This is a JSON template for an leaderboard configuration resource.
+    properties:
+      draft:
+        $ref: '#/definitions/LeaderboardConfigurationDetail'
+        description: The draft data of the leaderboard.
+      id:
+        description: The ID of the leaderboard.
+        type: string
+      kind:
+        default: 'gamesConfiguration#leaderboardConfiguration'
+        description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#leaderboardConfiguration.'
+        type: string
+      published:
+        $ref: '#/definitions/LeaderboardConfigurationDetail'
+        description: The read-only published data of the leaderboard.
+      scoreMax:
+        description: Maximum score that can be posted to this leaderboard.
+        format: int64
+        type: string
+      scoreMin:
+        description: Minimum score that can be posted to this leaderboard.
+        format: int64
+        type: string
+      scoreOrder:
+        description: "The type of the leaderboard.\nPossible values are:  \n- \"LARGER_IS_BETTER\" - Larger scores posted are ranked higher. \n- \"SMALLER_IS_BETTER\" - Smaller scores posted are ranked higher."
+        type: string
+      token:
+        description: The token for this resource.
+        type: string
+    type: object
+  LeaderboardConfigurationDetail:
+    description: This is a JSON template for a leaderboard configuration detail.
+    properties:
+      iconUrl:
+        description: The icon url of this leaderboard. Writes to this field are ignored.
+        type: string
+      kind:
+        default: 'gamesConfiguration#leaderboardConfigurationDetail'
+        description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#leaderboardConfigurationDetail.'
+        type: string
+      name:
+        $ref: '#/definitions/LocalizedStringBundle'
+        description: Localized strings for the leaderboard name.
+      scoreFormat:
+        $ref: '#/definitions/GamesNumberFormatConfiguration'
+        description: The score formatting for the leaderboard.
+      sortRank:
+        description: The sort rank of this leaderboard. Writes to this field are ignored.
+        format: int32
+        type: integer
+    type: object
+  LeaderboardConfigurationListResponse:
+    description: This is a JSON template for a ListConfigurations response.
+    properties:
+      items:
+        description: The leaderboard configurations.
+        items:
+          $ref: '#/definitions/LeaderboardConfiguration'
+        type: array
+      kind:
+        default: 'gamesConfiguration#leaderboardConfigurationListResponse'
+        description: 'Uniquely identifies the type of this resource. Value is always the fixed string games#leaderboardConfigurationListResponse.'
+        type: string
+      nextPageToken:
+        description: The pagination token for the next page of results.
+        type: string
+    type: object
+  LocalizedString:
+    description: This is a JSON template for a localized string resource.
+    properties:
+      kind:
+        default: 'gamesConfiguration#localizedString'
+        description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#localizedString.'
+        type: string
+      locale:
+        description: The locale string.
+        type: string
+      value:
+        description: The string value.
+        type: string
+    type: object
+  LocalizedStringBundle:
+    description: This is a JSON template for a localized string bundle resource.
+    properties:
+      kind:
+        default: 'gamesConfiguration#localizedStringBundle'
+        description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesConfiguration#localizedStringBundle.'
+        type: string
+      translations:
+        description: The locale strings.
+        items:
+          $ref: '#/definitions/LocalizedString'
+        type: array
+    type: object

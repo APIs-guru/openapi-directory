@@ -1,4 +1,242 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.googleapis.com
 basePath: /doubleclickbidmanager/v1
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: API for viewing and managing your reports in DoubleClick Bid Manager.
+  title: DoubleClick Bid Manager API
+  version: v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.doubleclickbygoogle.com/static/core/img/doubleclick-google-logo-wide.svg'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/doubleclickbidmanager/v1/rest'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: doubleclickbidmanager
+externalDocs:
+  url: 'https://developers.google.com/bid-manager/'
+parameters:
+  alt:
+    default: json
+    description: Data format for the response.
+    enum:
+      - json
+    in: query
+    name: alt
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    in: query
+    name: quotaUser
+    type: string
+  userIp:
+    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    in: query
+    name: userIp
+    type: string
+paths:
+  /lineitems/downloadlineitems:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Retrieves line items in CSV format.
+      operationId: doubleclickbidmanager.lineitems.downloadlineitems
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DownloadLineItemsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DownloadLineItemsResponse'
+      tags:
+        - lineitems
+  /lineitems/uploadlineitems:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Uploads line items in CSV format.
+      operationId: doubleclickbidmanager.lineitems.uploadlineitems
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UploadLineItemsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/UploadLineItemsResponse'
+      tags:
+        - lineitems
+  /queries:
+    get:
+      description: Retrieves stored queries.
+      operationId: doubleclickbidmanager.queries.listqueries
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListQueriesResponse'
+      tags:
+        - queries
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/queries/{queryId}/reports':
+    get:
+      description: Retrieves stored reports.
+      operationId: doubleclickbidmanager.reports.listreports
+      parameters:
+        - description: Query ID with which the reports are associated.
+          in: path
+          name: queryId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListReportsResponse'
+      tags:
+        - reports
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /query:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a query.
+      operationId: doubleclickbidmanager.queries.createquery
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Query'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Query'
+      tags:
+        - queries
+  '/query/{queryId}':
+    delete:
+      description: Deletes a stored query as well as the associated stored reports.
+      operationId: doubleclickbidmanager.queries.deletequery
+      parameters:
+        - description: Query ID to delete.
+          in: path
+          name: queryId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      tags:
+        - queries
+    get:
+      description: Retrieves a stored query.
+      operationId: doubleclickbidmanager.queries.getquery
+      parameters:
+        - description: Query ID to retrieve.
+          in: path
+          name: queryId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Query'
+      tags:
+        - queries
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Runs a stored query to generate a report.
+      operationId: doubleclickbidmanager.queries.runquery
+      parameters:
+        - description: Query ID to run.
+          in: path
+          name: queryId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RunQueryRequest'
+      responses:
+        '200':
+          description: Successful response
+      tags:
+        - queries
 definitions:
   DownloadLineItemsRequest:
     description: Request to fetch stored line items.
@@ -878,241 +1116,3 @@ definitions:
           $ref: '#/definitions/RowStatus'
         type: array
     type: object
-externalDocs:
-  url: 'https://developers.google.com/bid-manager/'
-host: www.googleapis.com
-info:
-  contact:
-    name: Google
-    url: 'https://google.com'
-  description: API for viewing and managing your reports in DoubleClick Bid Manager.
-  title: DoubleClick Bid Manager API
-  version: v1
-  x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
-  x-logo:
-    url: 'https://www.doubleclickbygoogle.com/static/core/img/doubleclick-google-logo-wide.svg'
-  x-origin:
-    format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/doubleclickbidmanager/v1/rest'
-    version: v1
-  x-preferred: true
-  x-providerName: googleapis.com
-  x-serviceName: doubleclickbidmanager
-parameters:
-  alt:
-    default: json
-    description: Data format for the response.
-    enum:
-      - json
-    in: query
-    name: alt
-    type: string
-  fields:
-    description: Selector specifying which fields to include in a partial response.
-    in: query
-    name: fields
-    type: string
-  key:
-    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
-    in: query
-    name: key
-    type: string
-  oauth_token:
-    description: OAuth 2.0 token for the current user.
-    in: query
-    name: oauth_token
-    type: string
-  prettyPrint:
-    default: true
-    description: Returns response with indentations and line breaks.
-    in: query
-    name: prettyPrint
-    type: boolean
-  quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
-    in: query
-    name: quotaUser
-    type: string
-  userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
-    in: query
-    name: userIp
-    type: string
-paths:
-  /lineitems/downloadlineitems:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Retrieves line items in CSV format.
-      operationId: doubleclickbidmanager.lineitems.downloadlineitems
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DownloadLineItemsRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/DownloadLineItemsResponse'
-      tags:
-        - lineitems
-  /lineitems/uploadlineitems:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Uploads line items in CSV format.
-      operationId: doubleclickbidmanager.lineitems.uploadlineitems
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/UploadLineItemsRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/UploadLineItemsResponse'
-      tags:
-        - lineitems
-  /queries:
-    get:
-      description: Retrieves stored queries.
-      operationId: doubleclickbidmanager.queries.listqueries
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListQueriesResponse'
-      tags:
-        - queries
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/queries/{queryId}/reports':
-    get:
-      description: Retrieves stored reports.
-      operationId: doubleclickbidmanager.reports.listreports
-      parameters:
-        - description: Query ID with which the reports are associated.
-          in: path
-          name: queryId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListReportsResponse'
-      tags:
-        - reports
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  /query:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Creates a query.
-      operationId: doubleclickbidmanager.queries.createquery
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Query'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Query'
-      tags:
-        - queries
-  '/query/{queryId}':
-    delete:
-      description: Deletes a stored query as well as the associated stored reports.
-      operationId: doubleclickbidmanager.queries.deletequery
-      parameters:
-        - description: Query ID to delete.
-          in: path
-          name: queryId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-      tags:
-        - queries
-    get:
-      description: Retrieves a stored query.
-      operationId: doubleclickbidmanager.queries.getquery
-      parameters:
-        - description: Query ID to retrieve.
-          in: path
-          name: queryId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Query'
-      tags:
-        - queries
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Runs a stored query to generate a report.
-      operationId: doubleclickbidmanager.queries.runquery
-      parameters:
-        - description: Query ID to run.
-          in: path
-          name: queryId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RunQueryRequest'
-      responses:
-        '200':
-          description: Successful response
-      tags:
-        - queries
-schemes:
-  - https
-swagger: '2.0'

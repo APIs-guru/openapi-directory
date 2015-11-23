@@ -1,475 +1,8 @@
-basePath: /
-definitions:
-  Bundle:
-    $ref: '#/definitions/object'
-    properties:
-      _class:
-        description: Bundle
-        type: string
-      _embedded:
-        $ref: '#/definitions/object'
-        description: 'Embedded objects, keyed by link relation'
-      _links:
-        $ref: '#/definitions/object'
-        description: 'HAL hyper links, keyed by relation (self, clarify:metadata, clarify:tracks)'
-      created:
-        description: 'Date the bundle was created, ex. "2014-02-25T14:23:45Z"'
-        type: string
-      external_id:
-        description: A string that can refer to an item in an external system. Up to 64 characters.
-        type: string
-      id:
-        description: id of the bundle
-        type: string
-      name:
-        description: Name of the bundle. Up to 128 characters.
-        type: string
-      notify_url:
-        description: URL for notifications on this bundle
-        type: string
-      updated:
-        description: 'Date the bundle was updated, ex. "2014-02-25T14:23:45Z"'
-        type: string
-      version:
-        description: Object version
-        type: integer
-    required:
-      - id
-      - version
-      - created
-      - updated
-      - _class
-      - _links
-  Collection:
-    $ref: '#/definitions/object'
-    properties:
-      _class:
-        description: Collection
-        type: string
-      _embedded:
-        $ref: '#/definitions/object'
-        description: 'Embedded objects, keyed by link relation'
-      _links:
-        $ref: '#/definitions/object'
-        description: 'HAL hyper links, keyed by relation (items, first, last, next, prev)'
-      limit:
-        description: Maximum number of items requested
-        type: integer
-      total:
-        description: Total number of items available
-        type: integer
-    required:
-      - total
-      - limit
-      - _class
-      - _links
-  Insight:
-    $ref: '#/definitions/object'
-    properties:
-      _class:
-        description: Class name of Insight
-        type: string
-      _links:
-        $ref: '#/definitions/object'
-        description: 'HAL hyper links, keyed by relation (self, parent, clarify:bundle)'
-      bundle_id:
-        description: id of the bundle
-        type: string
-      created:
-        description: 'Date the insight was created, ex. "2014-02-25T14:23:45Z"'
-        type: string
-      data:
-        $ref: '#/definitions/object'
-        description: Bundle insight data values (only present for some insights)
-      id:
-        description: id of the insight
-        type: string
-      name:
-        description: Name of the insight
-        type: string
-      status:
-        description: 'Status of insight: ready, queued, processing, error'
-        type: string
-      track_data:
-        description: 'Array of objects containing insight data values per track, with array indexes matching the tracks array'
-        items: {}
-        type: array
-      updated:
-        description: 'Date the insight was updated, ex. "2014-02-25T14:23:45Z"'
-        type: string
-    required:
-      - id
-      - bundle_id
-      - name
-      - status
-      - created
-      - updated
-      - _class
-      - _links
-  Insights:
-    $ref: '#/definitions/object'
-    properties:
-      _class:
-        description: Insights
-        type: string
-      _links:
-        $ref: '#/definitions/object'
-        description: 'HAL hyper links, keyed by relation (self, parent, [insight:*])'
-      bundle_id:
-        description: id of the bundle
-        type: string
-      created:
-        description: 'Date the insights was created, ex. "2014-02-25T14:23:45Z"'
-        type: string
-      updated:
-        description: 'Date the insights was updated, ex. "2014-02-25T14:23:45Z"'
-        type: string
-    required:
-      - bundle_id
-      - created
-      - updated
-      - _class
-      - _links
-  ItemResult:
-    $ref: '#/definitions/object'
-    properties:
-      score:
-        description: Relevance of the item according to the search criteria. A value between 0 and 1
-        type: number
-      term_results:
-        description: Results of each search term for the item. Indexes match the search_terms array
-        items:
-          $ref: '#/definitions/TermResult'
-        type: array
-    required:
-      - score
-      - term_results
-  MatchHit:
-    $ref: '#/definitions/object'
-    properties:
-      end:
-        description: 'For "text" matches, the index of the character in the string immediately after the matched term (exclusive.) For "audio" matches, the end time in seconds where the word was spoken'
-        type: number
-      start:
-        description: 'For "text" matches, the index of the character in the string. For "array" matches, the index of the value in the array. For "audio" matches, the start time in seconds where the word was spoken'
-        type: number
-    required:
-      - start
-  Metadata:
-    $ref: '#/definitions/object'
-    properties:
-      _class:
-        description: Metadata
-        type: string
-      _links:
-        $ref: '#/definitions/object'
-        description: 'HAL hyper links, keyed by relation (self, parent)'
-      bundle_id:
-        description: id of the bundle
-        type: string
-      created:
-        description: 'Date the metadata was created, ex. "2014-02-25T14:23:45Z"'
-        type: string
-      data:
-        $ref: '#/definitions/object'
-        description: User-defined JSON metadata for the bundle
-      updated:
-        description: 'Date the metadata was updated, ex. "2014-02-25T14:23:45Z"'
-        type: string
-      version:
-        description: Object version
-        type: integer
-    required:
-      - bundle_id
-      - version
-      - created
-      - updated
-      - data
-      - _class
-      - _links
-  Ref:
-    $ref: '#/definitions/object'
-    properties:
-      _class:
-        description: Ref
-        type: string
-      _links:
-        $ref: '#/definitions/object'
-        description: 'HAL hyper links, keyed by relation (self, parent)'
-    required:
-      - _class
-      - _links
-  Ref (of Bundle):
-    $ref: '#/definitions/object'
-    properties:
-      _class:
-        description: Ref
-        type: string
-      _links:
-        $ref: '#/definitions/object'
-        description: 'HAL hyper links, keyed by relation (self, clarify:metadata, clarify:tracks)'
-      id:
-        description: id of the bundle
-        type: string
-    required:
-      - id
-      - _class
-      - _links
-  SearchCollection:
-    $ref: '#/definitions/object'
-    properties:
-      _class:
-        description: SearchCollection
-        type: string
-      _embedded:
-        $ref: '#/definitions/object'
-        description: 'Embedded objects, keyed by link relation'
-      _links:
-        $ref: '#/definitions/object'
-        description: 'HAL hyper links, keyed by relation (items, first, next, prev)'
-      item_results:
-        description: Search results per item. Indexes match the items array.
-        items:
-          $ref: '#/definitions/ItemResult'
-        type: array
-      limit:
-        description: Maximum number of items requested
-        type: integer
-      search_terms:
-        description: Terms in the search
-        items:
-          $ref: '#/definitions/SearchTerm'
-        type: array
-      total:
-        description: Total number of items available
-        type: integer
-    required:
-      - total
-      - limit
-      - search_terms
-      - item_results
-      - _class
-      - _links
-  SearchTerm:
-    $ref: '#/definitions/object'
-    properties:
-      term:
-        description: A term from the query
-        type: string
-    required:
-      - term
-  TermMatch:
-    $ref: '#/definitions/object'
-    properties:
-      field:
-        description: 'For "text" or "array" match types, specifies the metadata field that contains the match'
-        type: string
-      hits:
-        description: Array listing exactly where the search term was found in a metadata field or audio
-        items:
-          $ref: '#/definitions/MatchHit'
-        type: array
-      type:
-        description: 'Type of match: "text", "array", or "audio"'
-        type: string
-    required:
-      - type
-      - hits
-  TermResult:
-    $ref: '#/definitions/object'
-    properties:
-      matches:
-        description: Array of locations where the search term was found in the bundle
-        items:
-          $ref: '#/definitions/TermMatch'
-        type: array
-      score:
-        description: Score for the search term in the item. A value between 0 and 1
-        type: number
-    required:
-      - score
-      - matches
-  Track:
-    $ref: '#/definitions/object'
-    properties:
-      _class:
-        description: Track
-        type: string
-      _links:
-        $ref: '#/definitions/object'
-        description: 'HAL hyper links, keyed by relation (self, parent, bundle)'
-      audio_channel:
-        description: 'The audio channel used for the track ( "" | left | right). Empty string means all channels of audio in the media file are used for the track'
-        enum:
-          - left
-          - right
-        type: string
-      audio_language:
-        description: Language of the audio in the track. An RFC5646 language code or empty string. (Ex. en-US)
-        type: string
-      created:
-        description: 'Date the track was created, ex. "2014-02-25T14:23:45Z"'
-        type: string
-      duration:
-        description: Number of seconds of media. Automatically determined
-        type: number
-      fetch_response_code:
-        description: HTTP response code returned from requesting the media_url
-        type: integer
-      fetch_response_message:
-        description: 'If media request fails, a message describing the failure'
-        type: string
-      id:
-        description: Id of the track
-        type: string
-      label:
-        description: Label for the track. Up to 128 characters.
-        type: string
-      media_code:
-        description: Status code returned from verifying the media
-        type: integer
-      media_message:
-        description: 'If media is invalid, a message describing the problem'
-        type: string
-      media_size:
-        description: Number of bytes in the media. Automatically determined
-        type: integer
-      media_url:
-        type: string
-      mime_type:
-        description: Mime type. This is automatically determined from the media
-        type: string
-      status:
-        description: 'Status of track: ready, queued, processing, error'
-        type: string
-      track:
-        description: Track index in the Tracks array
-        type: integer
-      updated:
-        description: 'Date the track was updated, ex. "2014-02-25T14:23:45Z"'
-        type: string
-    required:
-      - id
-      - track
-      - media_url
-      - audio_channel
-      - audio_language
-      - created
-      - updated
-      - status
-      - media_size
-      - duration
-      - fetch_response_code
-      - media_code
-      - _class
-      - _links
-  Track (array item):
-    $ref: '#/definitions/object'
-    properties:
-      audio_channel:
-        description: 'The audio channel used for the track ( "" | left | right). Empty string means all channels of audio in the media file are used for the track'
-        enum:
-          - left
-          - right
-        type: string
-      audio_language:
-        description: Language of the audio in the track. An RFC5646 language code or empty string. (Ex. en-US)
-        type: string
-      created:
-        description: 'Date the track was created, ex. "2014-02-25T14:23:45Z"'
-        type: string
-      duration:
-        description: Number of seconds of media. Automatically determined
-        type: number
-      fetch_response_code:
-        description: HTTP response code returned from requesting the media_url
-        type: integer
-      fetch_response_message:
-        description: 'If media request fails, a message describing the failure'
-        type: string
-      id:
-        description: Id of the track
-        type: string
-      label:
-        description: Label for the track. Up to 128 characters.
-        type: string
-      media_code:
-        description: Status code returned from verifying the media
-        type: integer
-      media_message:
-        description: 'If media is invalid, a message describing the problem'
-        type: string
-      media_size:
-        description: Number of bytes in the media. Automatically determined
-        type: integer
-      media_url:
-        type: string
-      mime_type:
-        description: Mime type. This is automatically determined from the media
-        type: string
-      status:
-        description: 'Status of track: ready, queued, processing, error'
-        type: string
-      track:
-        description: Track index in the Tracks array
-        type: integer
-      updated:
-        description: 'Date the track was updated, ex. "2014-02-25T14:23:45Z"'
-        type: string
-    required:
-      - id
-      - track
-      - media_url
-      - audio_channel
-      - audio_language
-      - created
-      - updated
-      - status
-      - media_size
-      - duration
-      - fetch_response_code
-      - media_code
-  Tracks:
-    $ref: '#/definitions/object'
-    properties:
-      _class:
-        description: Tracks
-        type: string
-      _links:
-        $ref: '#/definitions/object'
-        description: 'HAL hyper links, keyed by relation (self, parent)'
-      bundle_id:
-        description: id of the bundle
-        type: string
-      created:
-        description: 'Date the tracks was created, ex. "2014-02-25T14:23:45Z"'
-        type: string
-      status:
-        description: 'Summary status of tracks: ready, queued, processing, error'
-        type: string
-      tracks:
-        description: Array of tracks
-        items:
-          $ref: '#/definitions/Track (array item)'
-        type: array
-      updated:
-        description: 'Date the tracks was updated, ex. "2014-02-25T14:23:45Z"'
-        type: string
-      version:
-        description: Object version
-        type: integer
-    required:
-      - bundle_id
-      - version
-      - status
-      - created
-      - updated
-      - tracks
-      - _class
-      - _links
-  object:
-    $ref: '#/definitions/object'
+swagger: '2.0'
+schemes:
+  - https
 host: api.clarify.io
+basePath: /
 info:
   description: 'The API to Search and Understand Audio & Video Data.'
   title: Clarify
@@ -482,6 +15,9 @@ info:
     url: 'https://api.clarify.io/api-docs'
     version: '1.2'
   x-providerName: clarify.io
+tags:
+  - name: bundles
+  - name: search
 paths:
   /v1/bundles:
     get:
@@ -1268,9 +804,473 @@ paths:
       summary: Search bundles
       tags:
         - search
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - name: bundles
-  - name: search
+definitions:
+  Bundle:
+    $ref: '#/definitions/object'
+    properties:
+      _class:
+        description: Bundle
+        type: string
+      _embedded:
+        $ref: '#/definitions/object'
+        description: 'Embedded objects, keyed by link relation'
+      _links:
+        $ref: '#/definitions/object'
+        description: 'HAL hyper links, keyed by relation (self, clarify:metadata, clarify:tracks)'
+      created:
+        description: 'Date the bundle was created, ex. "2014-02-25T14:23:45Z"'
+        type: string
+      external_id:
+        description: A string that can refer to an item in an external system. Up to 64 characters.
+        type: string
+      id:
+        description: id of the bundle
+        type: string
+      name:
+        description: Name of the bundle. Up to 128 characters.
+        type: string
+      notify_url:
+        description: URL for notifications on this bundle
+        type: string
+      updated:
+        description: 'Date the bundle was updated, ex. "2014-02-25T14:23:45Z"'
+        type: string
+      version:
+        description: Object version
+        type: integer
+    required:
+      - id
+      - version
+      - created
+      - updated
+      - _class
+      - _links
+  Collection:
+    $ref: '#/definitions/object'
+    properties:
+      _class:
+        description: Collection
+        type: string
+      _embedded:
+        $ref: '#/definitions/object'
+        description: 'Embedded objects, keyed by link relation'
+      _links:
+        $ref: '#/definitions/object'
+        description: 'HAL hyper links, keyed by relation (items, first, last, next, prev)'
+      limit:
+        description: Maximum number of items requested
+        type: integer
+      total:
+        description: Total number of items available
+        type: integer
+    required:
+      - total
+      - limit
+      - _class
+      - _links
+  Insight:
+    $ref: '#/definitions/object'
+    properties:
+      _class:
+        description: Class name of Insight
+        type: string
+      _links:
+        $ref: '#/definitions/object'
+        description: 'HAL hyper links, keyed by relation (self, parent, clarify:bundle)'
+      bundle_id:
+        description: id of the bundle
+        type: string
+      created:
+        description: 'Date the insight was created, ex. "2014-02-25T14:23:45Z"'
+        type: string
+      data:
+        $ref: '#/definitions/object'
+        description: Bundle insight data values (only present for some insights)
+      id:
+        description: id of the insight
+        type: string
+      name:
+        description: Name of the insight
+        type: string
+      status:
+        description: 'Status of insight: ready, queued, processing, error'
+        type: string
+      track_data:
+        description: 'Array of objects containing insight data values per track, with array indexes matching the tracks array'
+        items: {}
+        type: array
+      updated:
+        description: 'Date the insight was updated, ex. "2014-02-25T14:23:45Z"'
+        type: string
+    required:
+      - id
+      - bundle_id
+      - name
+      - status
+      - created
+      - updated
+      - _class
+      - _links
+  Insights:
+    $ref: '#/definitions/object'
+    properties:
+      _class:
+        description: Insights
+        type: string
+      _links:
+        $ref: '#/definitions/object'
+        description: 'HAL hyper links, keyed by relation (self, parent, [insight:*])'
+      bundle_id:
+        description: id of the bundle
+        type: string
+      created:
+        description: 'Date the insights was created, ex. "2014-02-25T14:23:45Z"'
+        type: string
+      updated:
+        description: 'Date the insights was updated, ex. "2014-02-25T14:23:45Z"'
+        type: string
+    required:
+      - bundle_id
+      - created
+      - updated
+      - _class
+      - _links
+  ItemResult:
+    $ref: '#/definitions/object'
+    properties:
+      score:
+        description: Relevance of the item according to the search criteria. A value between 0 and 1
+        type: number
+      term_results:
+        description: Results of each search term for the item. Indexes match the search_terms array
+        items:
+          $ref: '#/definitions/TermResult'
+        type: array
+    required:
+      - score
+      - term_results
+  MatchHit:
+    $ref: '#/definitions/object'
+    properties:
+      end:
+        description: 'For "text" matches, the index of the character in the string immediately after the matched term (exclusive.) For "audio" matches, the end time in seconds where the word was spoken'
+        type: number
+      start:
+        description: 'For "text" matches, the index of the character in the string. For "array" matches, the index of the value in the array. For "audio" matches, the start time in seconds where the word was spoken'
+        type: number
+    required:
+      - start
+  Metadata:
+    $ref: '#/definitions/object'
+    properties:
+      _class:
+        description: Metadata
+        type: string
+      _links:
+        $ref: '#/definitions/object'
+        description: 'HAL hyper links, keyed by relation (self, parent)'
+      bundle_id:
+        description: id of the bundle
+        type: string
+      created:
+        description: 'Date the metadata was created, ex. "2014-02-25T14:23:45Z"'
+        type: string
+      data:
+        $ref: '#/definitions/object'
+        description: User-defined JSON metadata for the bundle
+      updated:
+        description: 'Date the metadata was updated, ex. "2014-02-25T14:23:45Z"'
+        type: string
+      version:
+        description: Object version
+        type: integer
+    required:
+      - bundle_id
+      - version
+      - created
+      - updated
+      - data
+      - _class
+      - _links
+  Ref:
+    $ref: '#/definitions/object'
+    properties:
+      _class:
+        description: Ref
+        type: string
+      _links:
+        $ref: '#/definitions/object'
+        description: 'HAL hyper links, keyed by relation (self, parent)'
+    required:
+      - _class
+      - _links
+  Ref (of Bundle):
+    $ref: '#/definitions/object'
+    properties:
+      _class:
+        description: Ref
+        type: string
+      _links:
+        $ref: '#/definitions/object'
+        description: 'HAL hyper links, keyed by relation (self, clarify:metadata, clarify:tracks)'
+      id:
+        description: id of the bundle
+        type: string
+    required:
+      - id
+      - _class
+      - _links
+  SearchCollection:
+    $ref: '#/definitions/object'
+    properties:
+      _class:
+        description: SearchCollection
+        type: string
+      _embedded:
+        $ref: '#/definitions/object'
+        description: 'Embedded objects, keyed by link relation'
+      _links:
+        $ref: '#/definitions/object'
+        description: 'HAL hyper links, keyed by relation (items, first, next, prev)'
+      item_results:
+        description: Search results per item. Indexes match the items array.
+        items:
+          $ref: '#/definitions/ItemResult'
+        type: array
+      limit:
+        description: Maximum number of items requested
+        type: integer
+      search_terms:
+        description: Terms in the search
+        items:
+          $ref: '#/definitions/SearchTerm'
+        type: array
+      total:
+        description: Total number of items available
+        type: integer
+    required:
+      - total
+      - limit
+      - search_terms
+      - item_results
+      - _class
+      - _links
+  SearchTerm:
+    $ref: '#/definitions/object'
+    properties:
+      term:
+        description: A term from the query
+        type: string
+    required:
+      - term
+  TermMatch:
+    $ref: '#/definitions/object'
+    properties:
+      field:
+        description: 'For "text" or "array" match types, specifies the metadata field that contains the match'
+        type: string
+      hits:
+        description: Array listing exactly where the search term was found in a metadata field or audio
+        items:
+          $ref: '#/definitions/MatchHit'
+        type: array
+      type:
+        description: 'Type of match: "text", "array", or "audio"'
+        type: string
+    required:
+      - type
+      - hits
+  TermResult:
+    $ref: '#/definitions/object'
+    properties:
+      matches:
+        description: Array of locations where the search term was found in the bundle
+        items:
+          $ref: '#/definitions/TermMatch'
+        type: array
+      score:
+        description: Score for the search term in the item. A value between 0 and 1
+        type: number
+    required:
+      - score
+      - matches
+  Track:
+    $ref: '#/definitions/object'
+    properties:
+      _class:
+        description: Track
+        type: string
+      _links:
+        $ref: '#/definitions/object'
+        description: 'HAL hyper links, keyed by relation (self, parent, bundle)'
+      audio_channel:
+        description: 'The audio channel used for the track ( "" | left | right). Empty string means all channels of audio in the media file are used for the track'
+        enum:
+          - left
+          - right
+        type: string
+      audio_language:
+        description: Language of the audio in the track. An RFC5646 language code or empty string. (Ex. en-US)
+        type: string
+      created:
+        description: 'Date the track was created, ex. "2014-02-25T14:23:45Z"'
+        type: string
+      duration:
+        description: Number of seconds of media. Automatically determined
+        type: number
+      fetch_response_code:
+        description: HTTP response code returned from requesting the media_url
+        type: integer
+      fetch_response_message:
+        description: 'If media request fails, a message describing the failure'
+        type: string
+      id:
+        description: Id of the track
+        type: string
+      label:
+        description: Label for the track. Up to 128 characters.
+        type: string
+      media_code:
+        description: Status code returned from verifying the media
+        type: integer
+      media_message:
+        description: 'If media is invalid, a message describing the problem'
+        type: string
+      media_size:
+        description: Number of bytes in the media. Automatically determined
+        type: integer
+      media_url:
+        type: string
+      mime_type:
+        description: Mime type. This is automatically determined from the media
+        type: string
+      status:
+        description: 'Status of track: ready, queued, processing, error'
+        type: string
+      track:
+        description: Track index in the Tracks array
+        type: integer
+      updated:
+        description: 'Date the track was updated, ex. "2014-02-25T14:23:45Z"'
+        type: string
+    required:
+      - id
+      - track
+      - media_url
+      - audio_channel
+      - audio_language
+      - created
+      - updated
+      - status
+      - media_size
+      - duration
+      - fetch_response_code
+      - media_code
+      - _class
+      - _links
+  Track (array item):
+    $ref: '#/definitions/object'
+    properties:
+      audio_channel:
+        description: 'The audio channel used for the track ( "" | left | right). Empty string means all channels of audio in the media file are used for the track'
+        enum:
+          - left
+          - right
+        type: string
+      audio_language:
+        description: Language of the audio in the track. An RFC5646 language code or empty string. (Ex. en-US)
+        type: string
+      created:
+        description: 'Date the track was created, ex. "2014-02-25T14:23:45Z"'
+        type: string
+      duration:
+        description: Number of seconds of media. Automatically determined
+        type: number
+      fetch_response_code:
+        description: HTTP response code returned from requesting the media_url
+        type: integer
+      fetch_response_message:
+        description: 'If media request fails, a message describing the failure'
+        type: string
+      id:
+        description: Id of the track
+        type: string
+      label:
+        description: Label for the track. Up to 128 characters.
+        type: string
+      media_code:
+        description: Status code returned from verifying the media
+        type: integer
+      media_message:
+        description: 'If media is invalid, a message describing the problem'
+        type: string
+      media_size:
+        description: Number of bytes in the media. Automatically determined
+        type: integer
+      media_url:
+        type: string
+      mime_type:
+        description: Mime type. This is automatically determined from the media
+        type: string
+      status:
+        description: 'Status of track: ready, queued, processing, error'
+        type: string
+      track:
+        description: Track index in the Tracks array
+        type: integer
+      updated:
+        description: 'Date the track was updated, ex. "2014-02-25T14:23:45Z"'
+        type: string
+    required:
+      - id
+      - track
+      - media_url
+      - audio_channel
+      - audio_language
+      - created
+      - updated
+      - status
+      - media_size
+      - duration
+      - fetch_response_code
+      - media_code
+  Tracks:
+    $ref: '#/definitions/object'
+    properties:
+      _class:
+        description: Tracks
+        type: string
+      _links:
+        $ref: '#/definitions/object'
+        description: 'HAL hyper links, keyed by relation (self, parent)'
+      bundle_id:
+        description: id of the bundle
+        type: string
+      created:
+        description: 'Date the tracks was created, ex. "2014-02-25T14:23:45Z"'
+        type: string
+      status:
+        description: 'Summary status of tracks: ready, queued, processing, error'
+        type: string
+      tracks:
+        description: Array of tracks
+        items:
+          $ref: '#/definitions/Track (array item)'
+        type: array
+      updated:
+        description: 'Date the tracks was updated, ex. "2014-02-25T14:23:45Z"'
+        type: string
+      version:
+        description: Object version
+        type: integer
+    required:
+      - bundle_id
+      - version
+      - status
+      - created
+      - updated
+      - tracks
+      - _class
+      - _links
+  object:
+    $ref: '#/definitions/object'

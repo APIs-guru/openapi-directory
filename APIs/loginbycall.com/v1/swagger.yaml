@@ -1,37 +1,8 @@
-basePath: /api
-definitions:
-  CallLog:
-    properties:
-      end_code:
-        description: Call result status in terms of adhearsion
-        type: integer
-      end_time:
-        description: Call end time
-        format: date-time
-        type: string
-      operator_duration:
-        description: Duration of operator call in seconds ( from the moment the operator answers the call and till hangup
-        type: integer
-      operator_result:
-        description: Operator call ( first leg ) result
-        type: string
-      start_time:
-        description: Call start time
-        format: date-time
-        type: string
-      target_duration:
-        description: Duration of talk with target number
-        type: integer
-      target_number:
-        description: Phone number of call recipient
-        type: string
-      target_result:
-        description: Target number call ( second leg ) result
-        type: string
-      token:
-        description: Call token
-        type: string
+swagger: '2.0'
+schemes:
+  - http
 host: api.loginbycall.com
+basePath: /api
 info:
   description: 'The LoginByCall API allows authentification on WordPress using your cell phone. The service is free of charge!'
   title: LoginByCall
@@ -43,6 +14,9 @@ info:
     url: 'http://api.loginbycall.com/api/swagger_doc.json'
     version: '1.2'
   x-providerName: loginbycall.com
+tags:
+  - name: calls
+  - name: call
 paths:
   '/v1/call/{token}.json':
     delete:
@@ -109,9 +83,35 @@ paths:
           description: No response was specified
       tags:
         - calls
-schemes:
-  - http
-swagger: '2.0'
-tags:
-  - name: calls
-  - name: call
+definitions:
+  CallLog:
+    properties:
+      end_code:
+        description: Call result status in terms of adhearsion
+        type: integer
+      end_time:
+        description: Call end time
+        format: date-time
+        type: string
+      operator_duration:
+        description: Duration of operator call in seconds ( from the moment the operator answers the call and till hangup
+        type: integer
+      operator_result:
+        description: Operator call ( first leg ) result
+        type: string
+      start_time:
+        description: Call start time
+        format: date-time
+        type: string
+      target_duration:
+        description: Duration of talk with target number
+        type: integer
+      target_number:
+        description: Phone number of call recipient
+        type: string
+      target_result:
+        description: Target number call ( second leg ) result
+        type: string
+      token:
+        description: Call token
+        type: string

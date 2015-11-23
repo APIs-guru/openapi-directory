@@ -1,5 +1,8 @@
-basePath: /api
+swagger: '2.0'
+schemes:
+  - http
 host: likefolio.com
+basePath: /api
 info:
   description: Create a session to start to use it
   title: Likefolio Api Endpoints
@@ -11,6 +14,13 @@ info:
     url: 'http://likefolio.com/api/v0/swagger_doc.json'
     version: '1.2'
   x-providerName: likefolio.com
+tags:
+  - name: companies
+  - name: brands
+  - name: tags
+  - name: users
+  - name: sessions
+  - name: swagger_doc
 paths:
   /v0/brands/mentionQty.json:
     get:
@@ -761,13 +771,3 @@ paths:
       summary: Returns the trending companies for a user
       tags:
         - users
-schemes:
-  - http
-swagger: '2.0'
-tags:
-  - name: companies
-  - name: brands
-  - name: tags
-  - name: users
-  - name: sessions
-  - name: swagger_doc

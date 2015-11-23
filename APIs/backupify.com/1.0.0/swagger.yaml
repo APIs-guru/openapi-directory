@@ -1,241 +1,8 @@
-basePath: /
-definitions:
-  backup:
-    properties:
-      backup_instance_id:
-        type: integer
-      ended_at:
-        format: date-time
-        type: string
-      failures:
-        items: {}
-        type: array
-      id:
-        type: integer
-      started_at:
-        format: date-time
-        type: string
-      status:
-        enum:
-          - queued
-          - in_progress
-          - successful
-          - failed
-          - canceled
-        type: string
-    required:
-      - id
-      - backup_instance_id
-      - status
-      - started_at
-      - ended_at
-  backup_definition:
-    properties:
-      description:
-        type: string
-      id:
-        type: integer
-      name:
-        type: string
-      published:
-        type: boolean
-      vendor_id:
-        type: integer
-    required:
-      - id
-      - name
-      - description
-      - vendor_id
-      - published
-  backup_definition_variable:
-    properties:
-      default_value:
-        description: A default value that can be used when no instance specific value is provided
-        type: string
-      description:
-        description: Description offering additional information or detail about the variable
-        type: string
-      key:
-        description: Symbolic name or identifier of the variable
-        type: string
-      name:
-        description: Human friendly name of the variable
-        type: string
-      optional:
-        type: boolean
-    required:
-      - key
-      - name
-  backup_instance:
-    properties:
-      backup_definition_id:
-        description: Unique identifier of the backup_definition the backup_instance derives from
-        type: integer
-      backup_frequency:
-        description: Frequency with which scheduled backups are performed
-        enum:
-          - 'off'
-          - daily
-          - weekly
-        type: string
-      customer_id:
-        description: Unique identifier of the customer the backup_instance belongs to
-        type: integer
-      id:
-        description: Unique identifier of the backup_instance
-        type: integer
-      last_backup_state:
-        description: Final state of the last completed backup or current state of an in progress backup
-        enum:
-          - queued
-          - in progress
-          - successful
-          - failed
-          - canceled
-      last_successful_backup:
-        description: Date and time of the last successful backup in ISO 8601 format
-        format: date-time
-        type: string
-      next_scheduled_backup:
-        description: Date and time of the next scheduled backup in ISO 8601 format
-        format: date-time
-        type: string
-    required:
-      - id
-      - backup_definition_id
-      - customer_id
-  backup_instance_endpoint:
-    properties:
-      description:
-        description: Information and detail about the endpoint
-        type: string
-      name:
-        description: Symbolic name or identifier of the endpoint as defined by the backup_definition
-        type: string
-    required:
-      - name
-  backup_instance_variable:
-    properties:
-      is_default_value:
-        type: boolean
-      key:
-        description: Symbolic name or identifier of the variable
-        type: string
-      value:
-        description: Information to be stored for later retrieval
-        type: string
-    required:
-      - key
-      - value
-  blob:
-    description: A Binary Large OBject
-  customer:
-    properties:
-      id:
-        description: The ID of the customer. Should be saved by the vendor to allow fast access to backup information to users of their system
-        type: integer
-      name:
-        description: Vendor provided ID uniquely identifying customer
-        type: string
-    required:
-      - id
-      - name
-  endpoint_record:
-    properties:
-      blob_url:
-        description: URL to download the blob associated with the given endpoint record
-      field_data:
-        description: "JSON object (possibly nested) matching the structure of the endpoint's source"
-    required:
-      - field_data
-  export:
-    properties:
-      backup_instance_id:
-        type: integer
-      content_types:
-        type: string
-      ended_at:
-        format: date-time
-        type: string
-      export_formats:
-        type: string
-      exported_data_url:
-        type: string
-      exported_data_url_expiration:
-        format: date-time
-        type: string
-      failures:
-        items: {}
-        type: array
-      id:
-        type: integer
-      records_failed:
-        type: integer
-      records_processed:
-        type: integer
-      started_at:
-        format: date-time
-        type: string
-      status:
-        enum:
-          - queued
-          - in_progress
-          - successful
-          - failed
-          - canceled
-        type: string
-    required:
-      - id
-      - backup_instance_id
-      - status
-      - started_at
-      - ended_at
-  export_reauth:
-    properties:
-      exported_data_url:
-        type: string
-      exported_data_url_expiration:
-        format: date-time
-        type: string
-  token:
-    properties:
-      access_token:
-        description: The Access Token string for the requested grant type
-        type: string
-      expires_in:
-        type: integer
-      token_type:
-        enum:
-          - bearer_token
-        type: string
-    required:
-      - access_token
-      - token_type
-      - expires_in
-  vendor_user:
-    properties:
-      client_id:
-        description: The client_id stored for the current vendor
-        type: string
-      client_secret:
-        description: The client_secret stored for the current vendor
-        type: string
-      email:
-        description: The email stored for the current vendor
-        type: string
-      name:
-        description: The name stored for the current vendor
-        type: string
-      vendor_id:
-        description: The ID of the vendor.
-        type: integer
-    required:
-      - vendor_id
-      - name
-      - email
-      - client_id
-      - client_secret
+swagger: '2.0'
+schemes:
+  - https
 host: api.backupify.com
+basePath: /
 info:
   description: 'The Backupify API allows you to integrate the leading SaaS backup solution into your software, making it easy to give your customers the data protection they need. '
   title: Backupify
@@ -247,6 +14,33 @@ info:
     url: 'https://api.backupify.com/docs/json/api.json'
     version: '1.2'
   x-providerName: backupify.com
+tags:
+  - description: 'Backup index, retrieval, and creation'
+    name: backups
+  - description: BackupDefinition index and retrieval
+    name: backup_definitions
+  - description: 'BackupDefinition Variable index, creation, retrieval, and modification'
+    name: backup_definition_variables
+  - description: 'BackupInstance creation, retrieval, backup, and export'
+    name: backup_instances
+  - description: BackupInstance Endpoints index and retrieval
+    name: backup_instance_endpoints
+  - description: 'BackupInstance Variable index, creation, retrieval, and modification'
+    name: backup_instance_variables
+  - description: 'Customer index, creation, retrieval, and modification'
+    name: customers
+  - description: EndpointRecord index and retrieval
+    name: endpoint_records
+  - description: 'Export index, retrieval, and creation'
+    name: exports
+  - description: OAuth2 Access Token retrieval
+    name: tokens
+  - description: Simple utilities for testing various API functions
+    name: utilities
+  - description: Vendor retrieival
+    name: vendors
+  - description: Log viewer
+    name: logs
 paths:
   /oauth/token:
     post:
@@ -1536,33 +1330,239 @@ paths:
       summary: Provides information about the currently authenticated vendor user
       tags:
         - vendors
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - description: 'Backup index, retrieval, and creation'
-    name: backups
-  - description: BackupDefinition index and retrieval
-    name: backup_definitions
-  - description: 'BackupDefinition Variable index, creation, retrieval, and modification'
-    name: backup_definition_variables
-  - description: 'BackupInstance creation, retrieval, backup, and export'
-    name: backup_instances
-  - description: BackupInstance Endpoints index and retrieval
-    name: backup_instance_endpoints
-  - description: 'BackupInstance Variable index, creation, retrieval, and modification'
-    name: backup_instance_variables
-  - description: 'Customer index, creation, retrieval, and modification'
-    name: customers
-  - description: EndpointRecord index and retrieval
-    name: endpoint_records
-  - description: 'Export index, retrieval, and creation'
-    name: exports
-  - description: OAuth2 Access Token retrieval
-    name: tokens
-  - description: Simple utilities for testing various API functions
-    name: utilities
-  - description: Vendor retrieival
-    name: vendors
-  - description: Log viewer
-    name: logs
+definitions:
+  backup:
+    properties:
+      backup_instance_id:
+        type: integer
+      ended_at:
+        format: date-time
+        type: string
+      failures:
+        items: {}
+        type: array
+      id:
+        type: integer
+      started_at:
+        format: date-time
+        type: string
+      status:
+        enum:
+          - queued
+          - in_progress
+          - successful
+          - failed
+          - canceled
+        type: string
+    required:
+      - id
+      - backup_instance_id
+      - status
+      - started_at
+      - ended_at
+  backup_definition:
+    properties:
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      published:
+        type: boolean
+      vendor_id:
+        type: integer
+    required:
+      - id
+      - name
+      - description
+      - vendor_id
+      - published
+  backup_definition_variable:
+    properties:
+      default_value:
+        description: A default value that can be used when no instance specific value is provided
+        type: string
+      description:
+        description: Description offering additional information or detail about the variable
+        type: string
+      key:
+        description: Symbolic name or identifier of the variable
+        type: string
+      name:
+        description: Human friendly name of the variable
+        type: string
+      optional:
+        type: boolean
+    required:
+      - key
+      - name
+  backup_instance:
+    properties:
+      backup_definition_id:
+        description: Unique identifier of the backup_definition the backup_instance derives from
+        type: integer
+      backup_frequency:
+        description: Frequency with which scheduled backups are performed
+        enum:
+          - 'off'
+          - daily
+          - weekly
+        type: string
+      customer_id:
+        description: Unique identifier of the customer the backup_instance belongs to
+        type: integer
+      id:
+        description: Unique identifier of the backup_instance
+        type: integer
+      last_backup_state:
+        description: Final state of the last completed backup or current state of an in progress backup
+        enum:
+          - queued
+          - in progress
+          - successful
+          - failed
+          - canceled
+      last_successful_backup:
+        description: Date and time of the last successful backup in ISO 8601 format
+        format: date-time
+        type: string
+      next_scheduled_backup:
+        description: Date and time of the next scheduled backup in ISO 8601 format
+        format: date-time
+        type: string
+    required:
+      - id
+      - backup_definition_id
+      - customer_id
+  backup_instance_endpoint:
+    properties:
+      description:
+        description: Information and detail about the endpoint
+        type: string
+      name:
+        description: Symbolic name or identifier of the endpoint as defined by the backup_definition
+        type: string
+    required:
+      - name
+  backup_instance_variable:
+    properties:
+      is_default_value:
+        type: boolean
+      key:
+        description: Symbolic name or identifier of the variable
+        type: string
+      value:
+        description: Information to be stored for later retrieval
+        type: string
+    required:
+      - key
+      - value
+  blob:
+    description: A Binary Large OBject
+  customer:
+    properties:
+      id:
+        description: The ID of the customer. Should be saved by the vendor to allow fast access to backup information to users of their system
+        type: integer
+      name:
+        description: Vendor provided ID uniquely identifying customer
+        type: string
+    required:
+      - id
+      - name
+  endpoint_record:
+    properties:
+      blob_url:
+        description: URL to download the blob associated with the given endpoint record
+      field_data:
+        description: "JSON object (possibly nested) matching the structure of the endpoint's source"
+    required:
+      - field_data
+  export:
+    properties:
+      backup_instance_id:
+        type: integer
+      content_types:
+        type: string
+      ended_at:
+        format: date-time
+        type: string
+      export_formats:
+        type: string
+      exported_data_url:
+        type: string
+      exported_data_url_expiration:
+        format: date-time
+        type: string
+      failures:
+        items: {}
+        type: array
+      id:
+        type: integer
+      records_failed:
+        type: integer
+      records_processed:
+        type: integer
+      started_at:
+        format: date-time
+        type: string
+      status:
+        enum:
+          - queued
+          - in_progress
+          - successful
+          - failed
+          - canceled
+        type: string
+    required:
+      - id
+      - backup_instance_id
+      - status
+      - started_at
+      - ended_at
+  export_reauth:
+    properties:
+      exported_data_url:
+        type: string
+      exported_data_url_expiration:
+        format: date-time
+        type: string
+  token:
+    properties:
+      access_token:
+        description: The Access Token string for the requested grant type
+        type: string
+      expires_in:
+        type: integer
+      token_type:
+        enum:
+          - bearer_token
+        type: string
+    required:
+      - access_token
+      - token_type
+      - expires_in
+  vendor_user:
+    properties:
+      client_id:
+        description: The client_id stored for the current vendor
+        type: string
+      client_secret:
+        description: The client_secret stored for the current vendor
+        type: string
+      email:
+        description: The email stored for the current vendor
+        type: string
+      name:
+        description: The name stored for the current vendor
+        type: string
+      vendor_id:
+        description: The ID of the vendor.
+        type: integer
+    required:
+      - vendor_id
+      - name
+      - email
+      - client_id
+      - client_secret

@@ -1,5 +1,8 @@
-basePath: /api/dataset/2
+swagger: '2.0'
+schemes:
+  - http
 host: nsidc.org
+basePath: /api/dataset/2
 info:
   contact:
     email: support@aoncadis.org
@@ -13,6 +16,9 @@ info:
     url: 'http://documentation-index-vm.apps.nsidc.org/api-docs'
     version: '1.2'
   x-providerName: nsidc.org
+tags:
+  - description: Dataset search
+    name: SwaggerDocs
 paths:
   /Facets:
     get:
@@ -222,9 +228,3 @@ paths:
       summary: Suggest search terms based on a partial query
       tags:
         - SwaggerDocs
-schemes:
-  - http
-swagger: '2.0'
-tags:
-  - description: Dataset search
-    name: SwaggerDocs

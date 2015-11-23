@@ -1,4 +1,792 @@
+swagger: '2.0'
+schemes:
+  - https
+host: staging.vestorly.com
 basePath: /api/v2
+info:
+  contact:
+    name: Vestorly Team
+  description: Vestorly Developers API
+  license:
+    name: MIT
+  termsOfService: 'http://www.vestorly.com/terms/'
+  title: Vestorly API
+  version: 1.0.0
+  x-logo:
+    backgroundColor: '#252832'
+    url: 'http://d1sva73gxwx496.cloudfront.net/images/homepage/logo-white-92827ba4.png'
+  x-origin:
+    format: swagger
+    url: 'http://developers.vestorly.com/v2/swagger.json'
+    version: '2.0'
+  x-providerName: vestorly.com
+externalDocs:
+  description: Find more info here
+  url: 'https://developers.vestorly.com'
+tags:
+  - description: Vestorly API docs
+    name: api docs
+paths:
+  '/advisors/{id}':
+    get:
+      description: Returns a single advisor given their ID
+      operationId: findAdvisorByID
+      parameters:
+        - description: Vestorly Auth Token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+        - description: Advisor Id to fetch
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Advisor response
+          schema:
+            $ref: '#/definitions/Advisor'
+      tags:
+        - advisors
+  /articles:
+    get:
+      description: Returns all articles
+      operationId: findArticles
+      parameters:
+        - description: Vestorly Auth Token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+        - description: Limit on the number of articles to return
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - description: Search query parameter
+          in: query
+          name: text_query
+          required: false
+          type: string
+        - description: Direction of sort (used with sort_by parameter)
+          in: query
+          name: sort_direction
+          required: false
+          type: string
+        - description: Field on model to sort by
+          in: query
+          name: sort_by
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Response
+          schema:
+            $ref: '#/definitions/Articles'
+      tags:
+        - articles
+  '/articles/{id}':
+    get:
+      description: Returns a single article
+      operationId: findArticleByID
+      parameters:
+        - description: Vestorly Auth Token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+        - description: Article Id to fetch
+          format: string
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Article response
+          schema:
+            $ref: '#/definitions/Articleresponse'
+      tags:
+        - articles
+  /events:
+    get:
+      description: Returns all events
+      operationId: findEvents
+      parameters:
+        - description: Vestorly Auth Token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Event response
+          schema:
+            $ref: '#/definitions/Events'
+      tags:
+        - events
+    post:
+      description: Creates a new event in the system
+      operationId: createEvent
+      parameters:
+        - description: Vestorly Auth Token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+        - description: Event
+          in: body
+          name: event
+          required: true
+          schema:
+            $ref: '#/definitions/EventInput'
+      responses:
+        '200':
+          description: Event response
+          schema:
+            $ref: '#/definitions/Eventcreateresponse'
+      tags:
+        - events
+  '/events/{id}':
+    get:
+      description: Returns a single event if the user has access
+      operationId: findEventByID
+      parameters:
+        - description: Mongo ID of event to fetch
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Vestorly Auth Token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Event response
+          schema:
+            $ref: '#/definitions/Eventresponse'
+      tags:
+        - events
+  /groups:
+    get:
+      description: Returns all groups
+      operationId: findGroups
+      parameters:
+        - description: Vestorly Auth Token
+          format: string
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Group response
+          schema:
+            $ref: '#/definitions/Groups'
+      tags:
+        - groups
+    post:
+      description: Creates a new Group
+      operationId: createGroup
+      parameters:
+        - description: Vestorly Auth Token
+          format: string
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+        - description: Group to add
+          in: body
+          name: group
+          required: true
+          schema:
+            $ref: '#/definitions/GroupInput'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: group response
+          schema:
+            $ref: '#/definitions/Groupresponse'
+      tags:
+        - groups
+  '/groups/{id}':
+    delete:
+      description: Deletes a Group
+      operationId: deleteGroup
+      parameters:
+        - description: Vestorly Auth Token
+          format: string
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+        - description: id of group to delete
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: group response
+          schema:
+            $ref: '#/definitions/Groupresponse'
+      tags:
+        - groups
+    get:
+      description: Returns a single group if user has access
+      operationId: findGroupByID
+      parameters:
+        - description: Vestorly Auth Token
+          format: string
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+        - description: Mongo ID of group to fetch
+          format: string
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Group response
+          schema:
+            $ref: '#/definitions/Groupresponse'
+      tags:
+        - groups
+    put:
+      description: Updates a Group
+      operationId: updateGroupById
+      parameters:
+        - description: Vestorly Auth Token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+        - description: id of group to update
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Group to update
+          in: body
+          name: group
+          required: true
+          schema:
+            $ref: '#/definitions/GroupInput'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: group response
+          schema:
+            $ref: '#/definitions/Groupresponse'
+      tags:
+        - groups
+  /member_events:
+    get:
+      description: Returns all MemberEvents
+      operationId: findMemberEvents
+      parameters:
+        - description: Vestorly Auth Token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+      responses:
+        '200':
+          description: member event response
+          schema:
+            $ref: '#/definitions/MemberEvents'
+      tags:
+        - member_events
+  /member_reports:
+    get:
+      description: Returns all member reports
+      operationId: findMemberReports
+      parameters:
+        - description: Vestorly Auth Token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+      responses:
+        '200':
+          description: member reports response
+          schema:
+            $ref: '#/definitions/MemberReports'
+      tags:
+        - member_reports
+  /members:
+    get:
+      description: Returns all members
+      operationId: findMembers
+      parameters:
+        - description: Vestorly Auth Token
+          format: string
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Member response
+          schema:
+            $ref: '#/definitions/Members'
+      tags:
+        - members
+    post:
+      description: Create a new member in the Vestorly Platform
+      operationId: createMember
+      parameters:
+        - description: Vestorly Auth Token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+        - description: Member you want to create
+          in: body
+          name: member
+          required: true
+          schema:
+            $ref: '#/definitions/Member'
+      responses:
+        '200':
+          description: member response
+          schema:
+            $ref: '#/definitions/Memberresponse'
+      tags:
+        - members
+  '/members/{id}':
+    get:
+      description: Returns a single member
+      operationId: findMemberByID
+      parameters:
+        - description: Mongo ID of member to fetch
+          format: string
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Vestorly Auth Token
+          format: string
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Member response
+          schema:
+            $ref: '#/definitions/Memberresponse'
+      tags:
+        - members
+    put:
+      description: Updates a single member
+      operationId: updateMemberByID
+      parameters:
+        - description: Mongo ID of member to fetch
+          format: string
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Vestorly Auth Token
+          format: string
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+        - description: Member you want to update
+          in: body
+          name: member
+          required: true
+          schema:
+            $ref: '#/definitions/Member'
+      responses:
+        '200':
+          description: Member response
+          schema:
+            $ref: '#/definitions/Memberresponse'
+      tags:
+        - members
+  /newsletter_settings:
+    get:
+      description: Returns all newsletter settings
+      operationId: findNewsletterSettings
+      parameters:
+        - description: Vestorly Auth Token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+      responses:
+        '200':
+          description: newsletter settings response
+          schema:
+            $ref: '#/definitions/NewsletterSettings'
+      tags:
+        - newsletter_settings
+  '/newsletter_settings/{id}':
+    get:
+      description: Returns a single newsletter settings if the user has access
+      operationId: findNewsletterSettingsByID
+      parameters:
+        - description: Mongo ID of newsletter settings to fetch
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Vestorly Auth Token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+      responses:
+        '200':
+          description: newsletting setting response
+          schema:
+            $ref: '#/definitions/Newslettersettingresponse'
+      tags:
+        - newsletter_settings
+    put:
+      description: Update a single newsletter setting by ID
+      operationId: updateNewsletterSettingsByID
+      parameters:
+        - description: Mongo ID of newsletter settings to update
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Vestorly Auth Token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+        - description: newsletter settings
+          in: body
+          name: newsletter_setting
+          required: true
+          schema:
+            $ref: '#/definitions/NewsletterSettingsInput'
+      responses:
+        '200':
+          description: newsletter settings response
+          schema:
+            $ref: '#/definitions/Newslettersettingresponse'
+      tags:
+        - newsletter_settings
+  /newsletters:
+    get:
+      description: Returns all newsletters
+      operationId: findNewsletters
+      parameters:
+        - description: Vestorly Auth Token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Newsletter response
+          schema:
+            $ref: '#/definitions/Newsletters'
+      tags:
+        - newsletters
+  '/newsletters/{id}':
+    get:
+      description: Get a newsletter by ID
+      operationId: getNewsletterByID
+      parameters:
+        - description: Vestorly Auth Token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+        - description: Mongo ID of event to get
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Newsletter response
+          schema:
+            $ref: '#/definitions/Newsletterresponse'
+      tags:
+        - newsletters
+    put:
+      description: Updates a newsletter
+      operationId: updateNewsletterByID
+      parameters:
+        - description: Vestorly Auth Token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+        - description: Mongo ID of event to update
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Newsletter
+          in: body
+          name: newsletter
+          required: true
+          schema:
+            $ref: '#/definitions/NewsletterInput'
+      responses:
+        '200':
+          description: Newsletter response
+          schema:
+            $ref: '#/definitions/Newsletterresponse'
+      tags:
+        - newsletters
+  /posts:
+    get:
+      description: Query all posts
+      operationId: findPosts
+      parameters:
+        - description: Vestorly Auth Token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+        - description: Filter post by parameters
+          in: query
+          name: text_query
+          required: false
+          type: string
+        - description: Filter by External URL
+          in: query
+          name: external_url
+          required: false
+          type: string
+        - description: Filter by is_published boolean
+          in: query
+          name: is_published
+          required: false
+          type: string
+      responses:
+        '200':
+          description: posts response
+          schema:
+            $ref: '#/definitions/Posts'
+      tags:
+        - posts
+    post:
+      description: Create a new post in the Vestorly Platform
+      operationId: createPost
+      parameters:
+        - description: Vestorly Auth Token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+        - description: Post you want to create
+          in: body
+          name: post
+          required: true
+          schema:
+            $ref: '#/definitions/PostInput'
+      responses:
+        '200':
+          description: posts response
+          schema:
+            $ref: '#/definitions/Postresponse'
+      tags:
+        - posts
+  '/posts/{id}':
+    get:
+      description: Query all posts
+      operationId: getPostByID
+      parameters:
+        - description: Vestorly Auth Token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+        - description: ID of post to fetch
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: post response
+          schema:
+            $ref: '#/definitions/Postresponse'
+      tags:
+        - posts
+    put:
+      description: Update A Post
+      operationId: updatePostByID
+      parameters:
+        - description: Vestorly Auth Token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+        - description: id of post to update
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Post you want to update
+          in: body
+          name: post
+          required: true
+          schema:
+            $ref: '#/definitions/Post'
+      responses:
+        '200':
+          description: post response
+          schema:
+            $ref: '#/definitions/Postresponse'
+      tags:
+        - posts
+  /sessions:
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Login To Vestorly Platform
+      operationId: login
+      parameters:
+        - description: Username in the vestorly platform
+          in: query
+          name: username
+          required: true
+          type: string
+        - description: Password in Vestorly Platform
+          in: query
+          name: password
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Response
+          schema:
+            $ref: '#/definitions/Session'
+      tags:
+        - sessions
+  '/sessions/{id}':
+    delete:
+      description: Logout of the vestorly platform
+      operationId: logout
+      parameters:
+        - description: Authenication token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+        - description: ID of pet to session
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: You have successfully logged out of the vestorly platform
+          schema:
+            $ref: '#/definitions/SessionLogoutResponse'
+      tags:
+        - sessions
+  /sources:
+    get:
+      description: Returns all sources
+      operationId: findSources
+      parameters:
+        - description: Vestorly Auth Token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+      responses:
+        '200':
+          description: source response
+          schema:
+            $ref: '#/definitions/Sources'
+      tags:
+        - sources
+    post:
+      description: Create source
+      operationId: createSource
+      parameters:
+        - description: Vestorly Auth Token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+        - description: Source
+          in: body
+          name: source
+          required: true
+          schema:
+            $ref: '#/definitions/SourceInput'
+      responses:
+        '200':
+          description: source response
+          schema:
+            $ref: '#/definitions/Sourceresponse'
+      tags:
+        - sources
+  '/sources/{id}':
+    get:
+      description: Get Source By ID
+      operationId: getSourceByID
+      parameters:
+        - description: Vestorly Auth Token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+        - description: ID of source to fetch
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: source response
+          schema:
+            $ref: '#/definitions/Sourceresponse'
+      tags:
+        - sources
+    put:
+      description: Update Source By ID
+      operationId: updateSourceByID
+      parameters:
+        - description: Vestorly Auth Token
+          in: query
+          name: vestorly_auth
+          required: true
+          type: string
+        - description: ID of source to fetch
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Source
+          in: body
+          name: source
+          required: true
+          schema:
+            $ref: '#/definitions/SourceInput'
+      responses:
+        '200':
+          description: source response
+          schema:
+            $ref: '#/definitions/Sourceresponse'
+      tags:
+        - sources
 definitions:
   Advisor:
     properties:
@@ -1035,791 +1823,3 @@ definitions:
         type: string
     required:
       - _id
-externalDocs:
-  description: Find more info here
-  url: 'https://developers.vestorly.com'
-host: staging.vestorly.com
-info:
-  contact:
-    name: Vestorly Team
-  description: Vestorly Developers API
-  license:
-    name: MIT
-  termsOfService: 'http://www.vestorly.com/terms/'
-  title: Vestorly API
-  version: 1.0.0
-  x-logo:
-    backgroundColor: '#252832'
-    url: 'http://d1sva73gxwx496.cloudfront.net/images/homepage/logo-white-92827ba4.png'
-  x-origin:
-    format: swagger
-    url: 'http://developers.vestorly.com/v2/swagger.json'
-    version: '2.0'
-  x-providerName: vestorly.com
-paths:
-  '/advisors/{id}':
-    get:
-      description: Returns a single advisor given their ID
-      operationId: findAdvisorByID
-      parameters:
-        - description: Vestorly Auth Token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-        - description: Advisor Id to fetch
-          in: path
-          name: id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Advisor response
-          schema:
-            $ref: '#/definitions/Advisor'
-      tags:
-        - advisors
-  /articles:
-    get:
-      description: Returns all articles
-      operationId: findArticles
-      parameters:
-        - description: Vestorly Auth Token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-        - description: Limit on the number of articles to return
-          format: int32
-          in: query
-          name: limit
-          required: false
-          type: integer
-        - description: Search query parameter
-          in: query
-          name: text_query
-          required: false
-          type: string
-        - description: Direction of sort (used with sort_by parameter)
-          in: query
-          name: sort_direction
-          required: false
-          type: string
-        - description: Field on model to sort by
-          in: query
-          name: sort_by
-          required: false
-          type: string
-      responses:
-        '200':
-          description: Response
-          schema:
-            $ref: '#/definitions/Articles'
-      tags:
-        - articles
-  '/articles/{id}':
-    get:
-      description: Returns a single article
-      operationId: findArticleByID
-      parameters:
-        - description: Vestorly Auth Token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-        - description: Article Id to fetch
-          format: string
-          in: path
-          name: id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Article response
-          schema:
-            $ref: '#/definitions/Articleresponse'
-      tags:
-        - articles
-  /events:
-    get:
-      description: Returns all events
-      operationId: findEvents
-      parameters:
-        - description: Vestorly Auth Token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Event response
-          schema:
-            $ref: '#/definitions/Events'
-      tags:
-        - events
-    post:
-      description: Creates a new event in the system
-      operationId: createEvent
-      parameters:
-        - description: Vestorly Auth Token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-        - description: Event
-          in: body
-          name: event
-          required: true
-          schema:
-            $ref: '#/definitions/EventInput'
-      responses:
-        '200':
-          description: Event response
-          schema:
-            $ref: '#/definitions/Eventcreateresponse'
-      tags:
-        - events
-  '/events/{id}':
-    get:
-      description: Returns a single event if the user has access
-      operationId: findEventByID
-      parameters:
-        - description: Mongo ID of event to fetch
-          in: path
-          name: id
-          required: true
-          type: string
-        - description: Vestorly Auth Token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Event response
-          schema:
-            $ref: '#/definitions/Eventresponse'
-      tags:
-        - events
-  /groups:
-    get:
-      description: Returns all groups
-      operationId: findGroups
-      parameters:
-        - description: Vestorly Auth Token
-          format: string
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Group response
-          schema:
-            $ref: '#/definitions/Groups'
-      tags:
-        - groups
-    post:
-      description: Creates a new Group
-      operationId: createGroup
-      parameters:
-        - description: Vestorly Auth Token
-          format: string
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-        - description: Group to add
-          in: body
-          name: group
-          required: true
-          schema:
-            $ref: '#/definitions/GroupInput'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: group response
-          schema:
-            $ref: '#/definitions/Groupresponse'
-      tags:
-        - groups
-  '/groups/{id}':
-    delete:
-      description: Deletes a Group
-      operationId: deleteGroup
-      parameters:
-        - description: Vestorly Auth Token
-          format: string
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-        - description: id of group to delete
-          in: path
-          name: id
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: group response
-          schema:
-            $ref: '#/definitions/Groupresponse'
-      tags:
-        - groups
-    get:
-      description: Returns a single group if user has access
-      operationId: findGroupByID
-      parameters:
-        - description: Vestorly Auth Token
-          format: string
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-        - description: Mongo ID of group to fetch
-          format: string
-          in: path
-          name: id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Group response
-          schema:
-            $ref: '#/definitions/Groupresponse'
-      tags:
-        - groups
-    put:
-      description: Updates a Group
-      operationId: updateGroupById
-      parameters:
-        - description: Vestorly Auth Token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-        - description: id of group to update
-          in: path
-          name: id
-          required: true
-          type: string
-        - description: Group to update
-          in: body
-          name: group
-          required: true
-          schema:
-            $ref: '#/definitions/GroupInput'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: group response
-          schema:
-            $ref: '#/definitions/Groupresponse'
-      tags:
-        - groups
-  /member_events:
-    get:
-      description: Returns all MemberEvents
-      operationId: findMemberEvents
-      parameters:
-        - description: Vestorly Auth Token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-      responses:
-        '200':
-          description: member event response
-          schema:
-            $ref: '#/definitions/MemberEvents'
-      tags:
-        - member_events
-  /member_reports:
-    get:
-      description: Returns all member reports
-      operationId: findMemberReports
-      parameters:
-        - description: Vestorly Auth Token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-      responses:
-        '200':
-          description: member reports response
-          schema:
-            $ref: '#/definitions/MemberReports'
-      tags:
-        - member_reports
-  /members:
-    get:
-      description: Returns all members
-      operationId: findMembers
-      parameters:
-        - description: Vestorly Auth Token
-          format: string
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Member response
-          schema:
-            $ref: '#/definitions/Members'
-      tags:
-        - members
-    post:
-      description: Create a new member in the Vestorly Platform
-      operationId: createMember
-      parameters:
-        - description: Vestorly Auth Token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-        - description: Member you want to create
-          in: body
-          name: member
-          required: true
-          schema:
-            $ref: '#/definitions/Member'
-      responses:
-        '200':
-          description: member response
-          schema:
-            $ref: '#/definitions/Memberresponse'
-      tags:
-        - members
-  '/members/{id}':
-    get:
-      description: Returns a single member
-      operationId: findMemberByID
-      parameters:
-        - description: Mongo ID of member to fetch
-          format: string
-          in: path
-          name: id
-          required: true
-          type: string
-        - description: Vestorly Auth Token
-          format: string
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Member response
-          schema:
-            $ref: '#/definitions/Memberresponse'
-      tags:
-        - members
-    put:
-      description: Updates a single member
-      operationId: updateMemberByID
-      parameters:
-        - description: Mongo ID of member to fetch
-          format: string
-          in: path
-          name: id
-          required: true
-          type: string
-        - description: Vestorly Auth Token
-          format: string
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-        - description: Member you want to update
-          in: body
-          name: member
-          required: true
-          schema:
-            $ref: '#/definitions/Member'
-      responses:
-        '200':
-          description: Member response
-          schema:
-            $ref: '#/definitions/Memberresponse'
-      tags:
-        - members
-  /newsletter_settings:
-    get:
-      description: Returns all newsletter settings
-      operationId: findNewsletterSettings
-      parameters:
-        - description: Vestorly Auth Token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-      responses:
-        '200':
-          description: newsletter settings response
-          schema:
-            $ref: '#/definitions/NewsletterSettings'
-      tags:
-        - newsletter_settings
-  '/newsletter_settings/{id}':
-    get:
-      description: Returns a single newsletter settings if the user has access
-      operationId: findNewsletterSettingsByID
-      parameters:
-        - description: Mongo ID of newsletter settings to fetch
-          in: path
-          name: id
-          required: true
-          type: string
-        - description: Vestorly Auth Token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-      responses:
-        '200':
-          description: newsletting setting response
-          schema:
-            $ref: '#/definitions/Newslettersettingresponse'
-      tags:
-        - newsletter_settings
-    put:
-      description: Update a single newsletter setting by ID
-      operationId: updateNewsletterSettingsByID
-      parameters:
-        - description: Mongo ID of newsletter settings to update
-          in: path
-          name: id
-          required: true
-          type: string
-        - description: Vestorly Auth Token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-        - description: newsletter settings
-          in: body
-          name: newsletter_setting
-          required: true
-          schema:
-            $ref: '#/definitions/NewsletterSettingsInput'
-      responses:
-        '200':
-          description: newsletter settings response
-          schema:
-            $ref: '#/definitions/Newslettersettingresponse'
-      tags:
-        - newsletter_settings
-  /newsletters:
-    get:
-      description: Returns all newsletters
-      operationId: findNewsletters
-      parameters:
-        - description: Vestorly Auth Token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Newsletter response
-          schema:
-            $ref: '#/definitions/Newsletters'
-      tags:
-        - newsletters
-  '/newsletters/{id}':
-    get:
-      description: Get a newsletter by ID
-      operationId: getNewsletterByID
-      parameters:
-        - description: Vestorly Auth Token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-        - description: Mongo ID of event to get
-          in: path
-          name: id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Newsletter response
-          schema:
-            $ref: '#/definitions/Newsletterresponse'
-      tags:
-        - newsletters
-    put:
-      description: Updates a newsletter
-      operationId: updateNewsletterByID
-      parameters:
-        - description: Vestorly Auth Token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-        - description: Mongo ID of event to update
-          in: path
-          name: id
-          required: true
-          type: string
-        - description: Newsletter
-          in: body
-          name: newsletter
-          required: true
-          schema:
-            $ref: '#/definitions/NewsletterInput'
-      responses:
-        '200':
-          description: Newsletter response
-          schema:
-            $ref: '#/definitions/Newsletterresponse'
-      tags:
-        - newsletters
-  /posts:
-    get:
-      description: Query all posts
-      operationId: findPosts
-      parameters:
-        - description: Vestorly Auth Token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-        - description: Filter post by parameters
-          in: query
-          name: text_query
-          required: false
-          type: string
-        - description: Filter by External URL
-          in: query
-          name: external_url
-          required: false
-          type: string
-        - description: Filter by is_published boolean
-          in: query
-          name: is_published
-          required: false
-          type: string
-      responses:
-        '200':
-          description: posts response
-          schema:
-            $ref: '#/definitions/Posts'
-      tags:
-        - posts
-    post:
-      description: Create a new post in the Vestorly Platform
-      operationId: createPost
-      parameters:
-        - description: Vestorly Auth Token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-        - description: Post you want to create
-          in: body
-          name: post
-          required: true
-          schema:
-            $ref: '#/definitions/PostInput'
-      responses:
-        '200':
-          description: posts response
-          schema:
-            $ref: '#/definitions/Postresponse'
-      tags:
-        - posts
-  '/posts/{id}':
-    get:
-      description: Query all posts
-      operationId: getPostByID
-      parameters:
-        - description: Vestorly Auth Token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-        - description: ID of post to fetch
-          in: path
-          name: id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: post response
-          schema:
-            $ref: '#/definitions/Postresponse'
-      tags:
-        - posts
-    put:
-      description: Update A Post
-      operationId: updatePostByID
-      parameters:
-        - description: Vestorly Auth Token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-        - description: id of post to update
-          in: path
-          name: id
-          required: true
-          type: string
-        - description: Post you want to update
-          in: body
-          name: post
-          required: true
-          schema:
-            $ref: '#/definitions/Post'
-      responses:
-        '200':
-          description: post response
-          schema:
-            $ref: '#/definitions/Postresponse'
-      tags:
-        - posts
-  /sessions:
-    post:
-      consumes:
-        - application/x-www-form-urlencoded
-      description: Login To Vestorly Platform
-      operationId: login
-      parameters:
-        - description: Username in the vestorly platform
-          in: query
-          name: username
-          required: true
-          type: string
-        - description: Password in Vestorly Platform
-          in: query
-          name: password
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Response
-          schema:
-            $ref: '#/definitions/Session'
-      tags:
-        - sessions
-  '/sessions/{id}':
-    delete:
-      description: Logout of the vestorly platform
-      operationId: logout
-      parameters:
-        - description: Authenication token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-        - description: ID of pet to session
-          in: path
-          name: id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: You have successfully logged out of the vestorly platform
-          schema:
-            $ref: '#/definitions/SessionLogoutResponse'
-      tags:
-        - sessions
-  /sources:
-    get:
-      description: Returns all sources
-      operationId: findSources
-      parameters:
-        - description: Vestorly Auth Token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-      responses:
-        '200':
-          description: source response
-          schema:
-            $ref: '#/definitions/Sources'
-      tags:
-        - sources
-    post:
-      description: Create source
-      operationId: createSource
-      parameters:
-        - description: Vestorly Auth Token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-        - description: Source
-          in: body
-          name: source
-          required: true
-          schema:
-            $ref: '#/definitions/SourceInput'
-      responses:
-        '200':
-          description: source response
-          schema:
-            $ref: '#/definitions/Sourceresponse'
-      tags:
-        - sources
-  '/sources/{id}':
-    get:
-      description: Get Source By ID
-      operationId: getSourceByID
-      parameters:
-        - description: Vestorly Auth Token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-        - description: ID of source to fetch
-          in: path
-          name: id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: source response
-          schema:
-            $ref: '#/definitions/Sourceresponse'
-      tags:
-        - sources
-    put:
-      description: Update Source By ID
-      operationId: updateSourceByID
-      parameters:
-        - description: Vestorly Auth Token
-          in: query
-          name: vestorly_auth
-          required: true
-          type: string
-        - description: ID of source to fetch
-          in: path
-          name: id
-          required: true
-          type: string
-        - description: Source
-          in: body
-          name: source
-          required: true
-          schema:
-            $ref: '#/definitions/SourceInput'
-      responses:
-        '200':
-          description: source response
-          schema:
-            $ref: '#/definitions/Sourceresponse'
-      tags:
-        - sources
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - description: Vestorly API docs
-    name: api docs

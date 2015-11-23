@@ -1,299 +1,8 @@
-basePath: /cloudmonitoring/v2beta2/projects
-definitions:
-  DeleteMetricDescriptorResponse:
-    description: The response of cloudmonitoring.metricDescriptors.delete.
-    properties:
-      kind:
-        default: 'cloudmonitoring#deleteMetricDescriptorResponse'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "cloudmonitoring#deleteMetricDescriptorResponse".'
-        type: string
-    type: object
-  ListMetricDescriptorsRequest:
-    description: The request of cloudmonitoring.metricDescriptors.list.
-    properties:
-      kind:
-        default: 'cloudmonitoring#listMetricDescriptorsRequest'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "cloudmonitoring#listMetricDescriptorsRequest".'
-        type: string
-    type: object
-  ListMetricDescriptorsResponse:
-    description: The response of cloudmonitoring.metricDescriptors.list.
-    properties:
-      kind:
-        default: 'cloudmonitoring#listMetricDescriptorsResponse'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "cloudmonitoring#listMetricDescriptorsResponse".'
-        type: string
-      metrics:
-        description: The returned metric descriptors.
-        items:
-          $ref: '#/definitions/MetricDescriptor'
-        type: array
-      nextPageToken:
-        description: 'Pagination token. If present, indicates that additional results are available for retrieval. To access the results past the pagination limit, pass this value to the pageToken query parameter.'
-        type: string
-    type: object
-  ListTimeseriesDescriptorsRequest:
-    description: The request of cloudmonitoring.timeseriesDescriptors.list
-    properties:
-      kind:
-        default: 'cloudmonitoring#listTimeseriesDescriptorsRequest'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "cloudmonitoring#listTimeseriesDescriptorsRequest".'
-        type: string
-    type: object
-  ListTimeseriesDescriptorsResponse:
-    description: The response of cloudmonitoring.timeseriesDescriptors.list
-    properties:
-      kind:
-        default: 'cloudmonitoring#listTimeseriesDescriptorsResponse'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "cloudmonitoring#listTimeseriesDescriptorsResponse".'
-        type: string
-      nextPageToken:
-        description: 'Pagination token. If present, indicates that additional results are available for retrieval. To access the results past the pagination limit, set this value to the pageToken query parameter.'
-        type: string
-      oldest:
-        description: 'The oldest timestamp of the interval of this query, as an RFC 3339 string.'
-        format: date-time
-        type: string
-      timeseries:
-        description: The returned time series descriptors.
-        items:
-          $ref: '#/definitions/TimeseriesDescriptor'
-        type: array
-      youngest:
-        description: 'The youngest timestamp of the interval of this query, as an RFC 3339 string.'
-        format: date-time
-        type: string
-    type: object
-  ListTimeseriesRequest:
-    description: The request of cloudmonitoring.timeseries.list
-    properties:
-      kind:
-        default: 'cloudmonitoring#listTimeseriesRequest'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "cloudmonitoring#listTimeseriesRequest".'
-        type: string
-    type: object
-  ListTimeseriesResponse:
-    description: The response of cloudmonitoring.timeseries.list
-    properties:
-      kind:
-        default: 'cloudmonitoring#listTimeseriesResponse'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "cloudmonitoring#listTimeseriesResponse".'
-        type: string
-      nextPageToken:
-        description: 'Pagination token. If present, indicates that additional results are available for retrieval. To access the results past the pagination limit, set the pageToken query parameter to this value. All of the points of a time series will be returned before returning any point of the subsequent time series.'
-        type: string
-      oldest:
-        description: The oldest timestamp of the interval of this query as an RFC 3339 string.
-        format: date-time
-        type: string
-      timeseries:
-        description: The returned time series.
-        items:
-          $ref: '#/definitions/Timeseries'
-        type: array
-      youngest:
-        description: The youngest timestamp of the interval of this query as an RFC 3339 string.
-        format: date-time
-        type: string
-    type: object
-  MetricDescriptor:
-    description: 'A metricDescriptor defines the name, label keys, and data type of a particular metric.'
-    properties:
-      description:
-        description: Description of this metric.
-        type: string
-      labels:
-        description: Labels defined for this metric.
-        items:
-          $ref: '#/definitions/MetricDescriptorLabelDescriptor'
-        type: array
-      name:
-        description: The name of this metric.
-        type: string
-      project:
-        description: The project ID to which the metric belongs.
-        type: string
-      typeDescriptor:
-        $ref: '#/definitions/MetricDescriptorTypeDescriptor'
-        description: Type description for this metric.
-    type: object
-  MetricDescriptorLabelDescriptor:
-    description: 'A label in a metric is a description of this metric, including the key of this description (what the description is), and the value for this description.'
-    properties:
-      description:
-        description: Label description.
-        type: string
-      key:
-        description: Label key.
-        type: string
-    type: object
-  MetricDescriptorTypeDescriptor:
-    description: A type in a metric contains information about how the metric is collected and what its data points look like.
-    properties:
-      metricType:
-        description: The method of collecting data for the metric. See Metric types.
-        type: string
-      valueType:
-        description: "The data type of of individual points in the metric's time series. See Metric value types."
-        type: string
-    type: object
-  Point:
-    description: 'Point is a single point in a time series. It consists of a start time, an end time, and a value.'
-    properties:
-      boolValue:
-        description: 'The value of this data point. Either "true" or "false".'
-        type: boolean
-      distributionValue:
-        $ref: '#/definitions/PointDistribution'
-        description: The value of this data point as a distribution. A distribution value can contain a list of buckets and/or an underflowBucket and an overflowBucket. The values of these points can be used to create a histogram.
-      doubleValue:
-        description: The value of this data point as a double-precision floating-point number.
-        format: double
-        type: number
-      end:
-        description: "The interval [start, end] is the time period to which the point's value applies. For gauge metrics, whose values are instantaneous measurements, this interval should be empty (start should equal end). For cumulative metrics (of which deltas and rates are special cases), the interval should be non-empty. Both start and end are RFC 3339 strings."
-        format: date-time
-        type: string
-      int64Value:
-        description: The value of this data point as a 64-bit integer.
-        format: int64
-        type: string
-      start:
-        description: "The interval [start, end] is the time period to which the point's value applies. For gauge metrics, whose values are instantaneous measurements, this interval should be empty (start should equal end). For cumulative metrics (of which deltas and rates are special cases), the interval should be non-empty. Both start and end are RFC 3339 strings."
-        format: date-time
-        type: string
-      stringValue:
-        description: The value of this data point in string format.
-        type: string
-    type: object
-  PointDistribution:
-    description: 'Distribution data point value type. When writing distribution points, try to be consistent with the boundaries of your buckets. If you must modify the bucket boundaries, then do so by merging, partitioning, or appending rather than skewing them.'
-    properties:
-      buckets:
-        description: The finite buckets.
-        items:
-          $ref: '#/definitions/PointDistributionBucket'
-        type: array
-      overflowBucket:
-        $ref: '#/definitions/PointDistributionOverflowBucket'
-        description: The overflow bucket.
-      underflowBucket:
-        $ref: '#/definitions/PointDistributionUnderflowBucket'
-        description: The underflow bucket.
-    type: object
-  PointDistributionBucket:
-    description: "The histogram's bucket. Buckets that form the histogram of a distribution value. If the upper bound of a bucket, say U1, does not equal the lower bound of the next bucket, say L2, this means that there is no event in [U1, L2)."
-    properties:
-      count:
-        description: The number of events whose values are in the interval defined by this bucket.
-        format: int64
-        type: string
-      lowerBound:
-        description: The lower bound of the value interval of this bucket (inclusive).
-        format: double
-        type: number
-      upperBound:
-        description: The upper bound of the value interval of this bucket (exclusive).
-        format: double
-        type: number
-    type: object
-  PointDistributionOverflowBucket:
-    description: The overflow bucket is a special bucket that does not have the upperBound field; it includes all of the events that are no less than its lower bound.
-    properties:
-      count:
-        description: The number of events whose values are in the interval defined by this bucket.
-        format: int64
-        type: string
-      lowerBound:
-        description: The lower bound of the value interval of this bucket (inclusive).
-        format: double
-        type: number
-    type: object
-  PointDistributionUnderflowBucket:
-    description: The underflow bucket is a special bucket that does not have the lowerBound field; it includes all of the events that are less than its upper bound.
-    properties:
-      count:
-        description: The number of events whose values are in the interval defined by this bucket.
-        format: int64
-        type: string
-      upperBound:
-        description: The upper bound of the value interval of this bucket (exclusive).
-        format: double
-        type: number
-    type: object
-  Timeseries:
-    description: The monitoring data is organized as metrics and stored as data points that are recorded over time. Each data point represents information like the CPU utilization of your virtual machine. A historical record of these data points is called a time series.
-    properties:
-      points:
-        description: 'The data points of this time series. The points are listed in order of their end timestamp, from younger to older.'
-        items:
-          $ref: '#/definitions/Point'
-        type: array
-      timeseriesDesc:
-        $ref: '#/definitions/TimeseriesDescriptor'
-        description: The descriptor of this time series.
-    type: object
-  TimeseriesDescriptor:
-    description: TimeseriesDescriptor identifies a single time series.
-    properties:
-      labels:
-        additionalProperties:
-          description: "The label's name."
-          type: string
-        description: "The label's name."
-        type: object
-      metric:
-        description: The name of the metric.
-        type: string
-      project:
-        description: The Developers Console project number to which this time series belongs.
-        type: string
-    type: object
-  TimeseriesDescriptorLabel:
-    properties:
-      key:
-        description: "The label's name."
-        type: string
-      value:
-        description: "The label's value."
-        type: string
-    type: object
-  TimeseriesPoint:
-    description: 'When writing time series, TimeseriesPoint should be used instead of Timeseries, to enforce single point for each time series in the timeseries.write request.'
-    properties:
-      point:
-        $ref: '#/definitions/Point'
-        description: The data point in this time series snapshot.
-      timeseriesDesc:
-        $ref: '#/definitions/TimeseriesDescriptor'
-        description: The descriptor of this time series.
-    type: object
-  WriteTimeseriesRequest:
-    description: The request of cloudmonitoring.timeseries.write
-    properties:
-      commonLabels:
-        additionalProperties:
-          description: "The label's name."
-          type: string
-        description: "The label's name."
-        type: object
-      timeseries:
-        description: Provide time series specific labels and the data points for each time series. The labels in timeseries and the common_labels should form a complete list of labels that required by the metric.
-        items:
-          $ref: '#/definitions/TimeseriesPoint'
-        type: array
-    type: object
-  WriteTimeseriesResponse:
-    description: The response of cloudmonitoring.timeseries.write
-    properties:
-      kind:
-        default: 'cloudmonitoring#writeTimeseriesResponse'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "cloudmonitoring#writeTimeseriesResponse".'
-        type: string
-    type: object
-externalDocs:
-  url: 'https://cloud.google.com/monitoring/v2beta2/'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /cloudmonitoring/v2beta2/projects
 info:
   contact:
     name: Google
@@ -312,6 +21,17 @@ info:
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: cloudmonitoring
+externalDocs:
+  url: 'https://cloud.google.com/monitoring/v2beta2/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/monitoring': View and write monitoring data for all of your Google and third-party Cloud and API projects
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -656,15 +376,295 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/monitoring': View and write monitoring data for all of your Google and third-party Cloud and API projects
-    type: oauth2
-swagger: '2.0'
+definitions:
+  DeleteMetricDescriptorResponse:
+    description: The response of cloudmonitoring.metricDescriptors.delete.
+    properties:
+      kind:
+        default: 'cloudmonitoring#deleteMetricDescriptorResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "cloudmonitoring#deleteMetricDescriptorResponse".'
+        type: string
+    type: object
+  ListMetricDescriptorsRequest:
+    description: The request of cloudmonitoring.metricDescriptors.list.
+    properties:
+      kind:
+        default: 'cloudmonitoring#listMetricDescriptorsRequest'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "cloudmonitoring#listMetricDescriptorsRequest".'
+        type: string
+    type: object
+  ListMetricDescriptorsResponse:
+    description: The response of cloudmonitoring.metricDescriptors.list.
+    properties:
+      kind:
+        default: 'cloudmonitoring#listMetricDescriptorsResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "cloudmonitoring#listMetricDescriptorsResponse".'
+        type: string
+      metrics:
+        description: The returned metric descriptors.
+        items:
+          $ref: '#/definitions/MetricDescriptor'
+        type: array
+      nextPageToken:
+        description: 'Pagination token. If present, indicates that additional results are available for retrieval. To access the results past the pagination limit, pass this value to the pageToken query parameter.'
+        type: string
+    type: object
+  ListTimeseriesDescriptorsRequest:
+    description: The request of cloudmonitoring.timeseriesDescriptors.list
+    properties:
+      kind:
+        default: 'cloudmonitoring#listTimeseriesDescriptorsRequest'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "cloudmonitoring#listTimeseriesDescriptorsRequest".'
+        type: string
+    type: object
+  ListTimeseriesDescriptorsResponse:
+    description: The response of cloudmonitoring.timeseriesDescriptors.list
+    properties:
+      kind:
+        default: 'cloudmonitoring#listTimeseriesDescriptorsResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "cloudmonitoring#listTimeseriesDescriptorsResponse".'
+        type: string
+      nextPageToken:
+        description: 'Pagination token. If present, indicates that additional results are available for retrieval. To access the results past the pagination limit, set this value to the pageToken query parameter.'
+        type: string
+      oldest:
+        description: 'The oldest timestamp of the interval of this query, as an RFC 3339 string.'
+        format: date-time
+        type: string
+      timeseries:
+        description: The returned time series descriptors.
+        items:
+          $ref: '#/definitions/TimeseriesDescriptor'
+        type: array
+      youngest:
+        description: 'The youngest timestamp of the interval of this query, as an RFC 3339 string.'
+        format: date-time
+        type: string
+    type: object
+  ListTimeseriesRequest:
+    description: The request of cloudmonitoring.timeseries.list
+    properties:
+      kind:
+        default: 'cloudmonitoring#listTimeseriesRequest'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "cloudmonitoring#listTimeseriesRequest".'
+        type: string
+    type: object
+  ListTimeseriesResponse:
+    description: The response of cloudmonitoring.timeseries.list
+    properties:
+      kind:
+        default: 'cloudmonitoring#listTimeseriesResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "cloudmonitoring#listTimeseriesResponse".'
+        type: string
+      nextPageToken:
+        description: 'Pagination token. If present, indicates that additional results are available for retrieval. To access the results past the pagination limit, set the pageToken query parameter to this value. All of the points of a time series will be returned before returning any point of the subsequent time series.'
+        type: string
+      oldest:
+        description: The oldest timestamp of the interval of this query as an RFC 3339 string.
+        format: date-time
+        type: string
+      timeseries:
+        description: The returned time series.
+        items:
+          $ref: '#/definitions/Timeseries'
+        type: array
+      youngest:
+        description: The youngest timestamp of the interval of this query as an RFC 3339 string.
+        format: date-time
+        type: string
+    type: object
+  MetricDescriptor:
+    description: 'A metricDescriptor defines the name, label keys, and data type of a particular metric.'
+    properties:
+      description:
+        description: Description of this metric.
+        type: string
+      labels:
+        description: Labels defined for this metric.
+        items:
+          $ref: '#/definitions/MetricDescriptorLabelDescriptor'
+        type: array
+      name:
+        description: The name of this metric.
+        type: string
+      project:
+        description: The project ID to which the metric belongs.
+        type: string
+      typeDescriptor:
+        $ref: '#/definitions/MetricDescriptorTypeDescriptor'
+        description: Type description for this metric.
+    type: object
+  MetricDescriptorLabelDescriptor:
+    description: 'A label in a metric is a description of this metric, including the key of this description (what the description is), and the value for this description.'
+    properties:
+      description:
+        description: Label description.
+        type: string
+      key:
+        description: Label key.
+        type: string
+    type: object
+  MetricDescriptorTypeDescriptor:
+    description: A type in a metric contains information about how the metric is collected and what its data points look like.
+    properties:
+      metricType:
+        description: The method of collecting data for the metric. See Metric types.
+        type: string
+      valueType:
+        description: "The data type of of individual points in the metric's time series. See Metric value types."
+        type: string
+    type: object
+  Point:
+    description: 'Point is a single point in a time series. It consists of a start time, an end time, and a value.'
+    properties:
+      boolValue:
+        description: 'The value of this data point. Either "true" or "false".'
+        type: boolean
+      distributionValue:
+        $ref: '#/definitions/PointDistribution'
+        description: The value of this data point as a distribution. A distribution value can contain a list of buckets and/or an underflowBucket and an overflowBucket. The values of these points can be used to create a histogram.
+      doubleValue:
+        description: The value of this data point as a double-precision floating-point number.
+        format: double
+        type: number
+      end:
+        description: "The interval [start, end] is the time period to which the point's value applies. For gauge metrics, whose values are instantaneous measurements, this interval should be empty (start should equal end). For cumulative metrics (of which deltas and rates are special cases), the interval should be non-empty. Both start and end are RFC 3339 strings."
+        format: date-time
+        type: string
+      int64Value:
+        description: The value of this data point as a 64-bit integer.
+        format: int64
+        type: string
+      start:
+        description: "The interval [start, end] is the time period to which the point's value applies. For gauge metrics, whose values are instantaneous measurements, this interval should be empty (start should equal end). For cumulative metrics (of which deltas and rates are special cases), the interval should be non-empty. Both start and end are RFC 3339 strings."
+        format: date-time
+        type: string
+      stringValue:
+        description: The value of this data point in string format.
+        type: string
+    type: object
+  PointDistribution:
+    description: 'Distribution data point value type. When writing distribution points, try to be consistent with the boundaries of your buckets. If you must modify the bucket boundaries, then do so by merging, partitioning, or appending rather than skewing them.'
+    properties:
+      buckets:
+        description: The finite buckets.
+        items:
+          $ref: '#/definitions/PointDistributionBucket'
+        type: array
+      overflowBucket:
+        $ref: '#/definitions/PointDistributionOverflowBucket'
+        description: The overflow bucket.
+      underflowBucket:
+        $ref: '#/definitions/PointDistributionUnderflowBucket'
+        description: The underflow bucket.
+    type: object
+  PointDistributionBucket:
+    description: "The histogram's bucket. Buckets that form the histogram of a distribution value. If the upper bound of a bucket, say U1, does not equal the lower bound of the next bucket, say L2, this means that there is no event in [U1, L2)."
+    properties:
+      count:
+        description: The number of events whose values are in the interval defined by this bucket.
+        format: int64
+        type: string
+      lowerBound:
+        description: The lower bound of the value interval of this bucket (inclusive).
+        format: double
+        type: number
+      upperBound:
+        description: The upper bound of the value interval of this bucket (exclusive).
+        format: double
+        type: number
+    type: object
+  PointDistributionOverflowBucket:
+    description: The overflow bucket is a special bucket that does not have the upperBound field; it includes all of the events that are no less than its lower bound.
+    properties:
+      count:
+        description: The number of events whose values are in the interval defined by this bucket.
+        format: int64
+        type: string
+      lowerBound:
+        description: The lower bound of the value interval of this bucket (inclusive).
+        format: double
+        type: number
+    type: object
+  PointDistributionUnderflowBucket:
+    description: The underflow bucket is a special bucket that does not have the lowerBound field; it includes all of the events that are less than its upper bound.
+    properties:
+      count:
+        description: The number of events whose values are in the interval defined by this bucket.
+        format: int64
+        type: string
+      upperBound:
+        description: The upper bound of the value interval of this bucket (exclusive).
+        format: double
+        type: number
+    type: object
+  Timeseries:
+    description: The monitoring data is organized as metrics and stored as data points that are recorded over time. Each data point represents information like the CPU utilization of your virtual machine. A historical record of these data points is called a time series.
+    properties:
+      points:
+        description: 'The data points of this time series. The points are listed in order of their end timestamp, from younger to older.'
+        items:
+          $ref: '#/definitions/Point'
+        type: array
+      timeseriesDesc:
+        $ref: '#/definitions/TimeseriesDescriptor'
+        description: The descriptor of this time series.
+    type: object
+  TimeseriesDescriptor:
+    description: TimeseriesDescriptor identifies a single time series.
+    properties:
+      labels:
+        additionalProperties:
+          description: "The label's name."
+          type: string
+        description: "The label's name."
+        type: object
+      metric:
+        description: The name of the metric.
+        type: string
+      project:
+        description: The Developers Console project number to which this time series belongs.
+        type: string
+    type: object
+  TimeseriesDescriptorLabel:
+    properties:
+      key:
+        description: "The label's name."
+        type: string
+      value:
+        description: "The label's value."
+        type: string
+    type: object
+  TimeseriesPoint:
+    description: 'When writing time series, TimeseriesPoint should be used instead of Timeseries, to enforce single point for each time series in the timeseries.write request.'
+    properties:
+      point:
+        $ref: '#/definitions/Point'
+        description: The data point in this time series snapshot.
+      timeseriesDesc:
+        $ref: '#/definitions/TimeseriesDescriptor'
+        description: The descriptor of this time series.
+    type: object
+  WriteTimeseriesRequest:
+    description: The request of cloudmonitoring.timeseries.write
+    properties:
+      commonLabels:
+        additionalProperties:
+          description: "The label's name."
+          type: string
+        description: "The label's name."
+        type: object
+      timeseries:
+        description: Provide time series specific labels and the data points for each time series. The labels in timeseries and the common_labels should form a complete list of labels that required by the metric.
+        items:
+          $ref: '#/definitions/TimeseriesPoint'
+        type: array
+    type: object
+  WriteTimeseriesResponse:
+    description: The response of cloudmonitoring.timeseries.write
+    properties:
+      kind:
+        default: 'cloudmonitoring#writeTimeseriesResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "cloudmonitoring#writeTimeseriesResponse".'
+        type: string
+    type: object

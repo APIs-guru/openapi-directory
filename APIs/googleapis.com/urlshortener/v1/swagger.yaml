@@ -1,112 +1,8 @@
-basePath: /urlshortener/v1
-definitions:
-  AnalyticsSnapshot:
-    properties:
-      browsers:
-        description: 'Top browsers, e.g. "Chrome"; sorted by (descending) click counts. Only present if this data is available.'
-        items:
-          $ref: '#/definitions/StringCount'
-        type: array
-      countries:
-        description: 'Top countries (expressed as country codes), e.g. "US" or "DE"; sorted by (descending) click counts. Only present if this data is available.'
-        items:
-          $ref: '#/definitions/StringCount'
-        type: array
-      longUrlClicks:
-        description: Number of clicks on all goo.gl short URLs pointing to this long URL.
-        format: int64
-        type: string
-      platforms:
-        description: 'Top platforms or OSes, e.g. "Windows"; sorted by (descending) click counts. Only present if this data is available.'
-        items:
-          $ref: '#/definitions/StringCount'
-        type: array
-      referrers:
-        description: 'Top referring hosts, e.g. "www.google.com"; sorted by (descending) click counts. Only present if this data is available.'
-        items:
-          $ref: '#/definitions/StringCount'
-        type: array
-      shortUrlClicks:
-        description: Number of clicks on this short URL.
-        format: int64
-        type: string
-    type: object
-  AnalyticsSummary:
-    properties:
-      allTime:
-        $ref: '#/definitions/AnalyticsSnapshot'
-        description: Click analytics over all time.
-      day:
-        $ref: '#/definitions/AnalyticsSnapshot'
-        description: Click analytics over the last day.
-      month:
-        $ref: '#/definitions/AnalyticsSnapshot'
-        description: Click analytics over the last month.
-      twoHours:
-        $ref: '#/definitions/AnalyticsSnapshot'
-        description: Click analytics over the last two hours.
-      week:
-        $ref: '#/definitions/AnalyticsSnapshot'
-        description: Click analytics over the last week.
-    type: object
-  StringCount:
-    properties:
-      count:
-        description: 'Number of clicks for this top entry, e.g. for this particular country or browser.'
-        format: int64
-        type: string
-      id:
-        description: 'Label assigned to this top entry, e.g. "US" or "Chrome".'
-        type: string
-    type: object
-  Url:
-    properties:
-      analytics:
-        $ref: '#/definitions/AnalyticsSummary'
-        description: A summary of the click analytics for the short and long URL. Might not be present if not requested or currently unavailable.
-      created:
-        description: "Time the short URL was created; ISO 8601 representation using the yyyy-MM-dd'T'HH:mm:ss.SSSZZ format, e.g. \"2010-10-14T19:01:24.944+00:00\"."
-        type: string
-      id:
-        description: 'Short URL, e.g. "http://goo.gl/l6MS".'
-        type: string
-      kind:
-        default: 'urlshortener#url'
-        description: 'The fixed string "urlshortener#url".'
-        type: string
-      longUrl:
-        description: 'Long URL, e.g. "http://www.google.com/". Might not be present if the status is "REMOVED".'
-        type: string
-      status:
-        description: 'Status of the target URL. Possible values: "OK", "MALWARE", "PHISHING", or "REMOVED". A URL might be marked "REMOVED" if it was flagged as spam, for example.'
-        type: string
-    type: object
-  UrlHistory:
-    properties:
-      items:
-        description: A list of URL resources.
-        items:
-          $ref: '#/definitions/Url'
-        type: array
-      itemsPerPage:
-        description: 'Number of items returned with each full "page" of results. Note that the last page could have fewer items than the "itemsPerPage" value.'
-        format: int32
-        type: integer
-      kind:
-        default: 'urlshortener#urlHistory'
-        description: 'The fixed string "urlshortener#urlHistory".'
-        type: string
-      nextPageToken:
-        description: A token to provide to get the next page of results.
-        type: string
-      totalItems:
-        description: Total number of short URLs associated with this user (may be approximate).
-        format: int32
-        type: integer
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/url-shortener/v1/getting_started'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /urlshortener/v1
 info:
   contact:
     name: Google
@@ -125,6 +21,16 @@ info:
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: urlshortener
+externalDocs:
+  url: 'https://developers.google.com/url-shortener/v1/getting_started'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/urlshortener': Manage your goo.gl short URLs
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -254,14 +160,108 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/urlshortener': Manage your goo.gl short URLs
-    type: oauth2
-swagger: '2.0'
+definitions:
+  AnalyticsSnapshot:
+    properties:
+      browsers:
+        description: 'Top browsers, e.g. "Chrome"; sorted by (descending) click counts. Only present if this data is available.'
+        items:
+          $ref: '#/definitions/StringCount'
+        type: array
+      countries:
+        description: 'Top countries (expressed as country codes), e.g. "US" or "DE"; sorted by (descending) click counts. Only present if this data is available.'
+        items:
+          $ref: '#/definitions/StringCount'
+        type: array
+      longUrlClicks:
+        description: Number of clicks on all goo.gl short URLs pointing to this long URL.
+        format: int64
+        type: string
+      platforms:
+        description: 'Top platforms or OSes, e.g. "Windows"; sorted by (descending) click counts. Only present if this data is available.'
+        items:
+          $ref: '#/definitions/StringCount'
+        type: array
+      referrers:
+        description: 'Top referring hosts, e.g. "www.google.com"; sorted by (descending) click counts. Only present if this data is available.'
+        items:
+          $ref: '#/definitions/StringCount'
+        type: array
+      shortUrlClicks:
+        description: Number of clicks on this short URL.
+        format: int64
+        type: string
+    type: object
+  AnalyticsSummary:
+    properties:
+      allTime:
+        $ref: '#/definitions/AnalyticsSnapshot'
+        description: Click analytics over all time.
+      day:
+        $ref: '#/definitions/AnalyticsSnapshot'
+        description: Click analytics over the last day.
+      month:
+        $ref: '#/definitions/AnalyticsSnapshot'
+        description: Click analytics over the last month.
+      twoHours:
+        $ref: '#/definitions/AnalyticsSnapshot'
+        description: Click analytics over the last two hours.
+      week:
+        $ref: '#/definitions/AnalyticsSnapshot'
+        description: Click analytics over the last week.
+    type: object
+  StringCount:
+    properties:
+      count:
+        description: 'Number of clicks for this top entry, e.g. for this particular country or browser.'
+        format: int64
+        type: string
+      id:
+        description: 'Label assigned to this top entry, e.g. "US" or "Chrome".'
+        type: string
+    type: object
+  Url:
+    properties:
+      analytics:
+        $ref: '#/definitions/AnalyticsSummary'
+        description: A summary of the click analytics for the short and long URL. Might not be present if not requested or currently unavailable.
+      created:
+        description: "Time the short URL was created; ISO 8601 representation using the yyyy-MM-dd'T'HH:mm:ss.SSSZZ format, e.g. \"2010-10-14T19:01:24.944+00:00\"."
+        type: string
+      id:
+        description: 'Short URL, e.g. "http://goo.gl/l6MS".'
+        type: string
+      kind:
+        default: 'urlshortener#url'
+        description: 'The fixed string "urlshortener#url".'
+        type: string
+      longUrl:
+        description: 'Long URL, e.g. "http://www.google.com/". Might not be present if the status is "REMOVED".'
+        type: string
+      status:
+        description: 'Status of the target URL. Possible values: "OK", "MALWARE", "PHISHING", or "REMOVED". A URL might be marked "REMOVED" if it was flagged as spam, for example.'
+        type: string
+    type: object
+  UrlHistory:
+    properties:
+      items:
+        description: A list of URL resources.
+        items:
+          $ref: '#/definitions/Url'
+        type: array
+      itemsPerPage:
+        description: 'Number of items returned with each full "page" of results. Note that the last page could have fewer items than the "itemsPerPage" value.'
+        format: int32
+        type: integer
+      kind:
+        default: 'urlshortener#urlHistory'
+        description: 'The fixed string "urlshortener#urlHistory".'
+        type: string
+      nextPageToken:
+        description: A token to provide to get the next page of results.
+        type: string
+      totalItems:
+        description: Total number of short URLs associated with this user (may be approximate).
+        format: int32
+        type: integer
+    type: object

@@ -1,134 +1,6 @@
-definitions:
-  authResponse:
-    properties:
-      success:
-        type: boolean
-      token:
-        type: string
-  modelError:
-    properties:
-      errors:
-        items:
-          type: string
-        type: array
-      success:
-        type: boolean
-  reportsDailyItem:
-    properties:
-      clicks:
-        type: string
-      cpc:
-        type: string
-      ctr:
-        type: string
-      date:
-        type: string
-      earnings:
-        type: string
-      impressions:
-        type: string
-      net_ecpm:
-        type: string
-      rpm:
-        type: string
-  reportsDailyResponse:
-    properties:
-      items:
-        items:
-          $ref: '#/definitions/reportsDailyItem'
-          type: object
-        type: array
-      success:
-        type: boolean
-      total_count:
-        type: integer
-      totals:
-        $ref: '#/definitions/totals'
-        type: object
-  reportsWebsiteItem:
-    properties:
-      clicks:
-        type: string
-      cpc:
-        type: string
-      ctr:
-        type: string
-      date:
-        type: string
-      earnings:
-        type: string
-      impressions:
-        type: string
-      net_ecpm:
-        type: string
-      rpm:
-        type: string
-  reportsWebsiteResponse:
-    properties:
-      items:
-        items:
-          $ref: '#/definitions/reportsWebsiteItem'
-          type: object
-        type: array
-      success:
-        type: boolean
-      total_count:
-        type: integer
-      totals:
-        $ref: '#/definitions/totals'
-        type: object
-  reportsWidgetItem:
-    properties:
-      campaign:
-        description: widget name
-        type: string
-      campaign_id:
-        description: widget id
-        type: string
-      clicks:
-        type: string
-      cpc:
-        type: string
-      ctr:
-        type: string
-      earnings:
-        type: string
-      impressions:
-        type: string
-      net_ecpm:
-        type: string
-      rpm:
-        type: string
-  reportsWidgetResponse:
-    properties:
-      items:
-        items:
-          $ref: '#/definitions/reportsWidgetItem'
-          type: object
-        type: array
-      success:
-        type: boolean
-      total_count:
-        type: integer
-      totals:
-        $ref: '#/definitions/totals'
-        type: object
-  totals:
-    properties:
-      total_clicks:
-        type: string
-      total_cpc:
-        type: string
-      total_ctr:
-        type: string
-      total_earnings:
-        type: string
-      total_impressions:
-        type: string
-      total_net_ecpm:
-        type: string
-      total_rpm:
-        type: string
+swagger: '2.0'
+schemes:
+  - https
 host: api.nativeads.com
 info:
   description: |
@@ -142,6 +14,8 @@ info:
     url: 'https://api.nativeads.com/docs/publisher/swagger.json'
     version: '2.0'
   x-providerName: nativeads.com
+produces:
+  - application/json
 paths:
   /auth/default/login:
     post:
@@ -314,8 +188,134 @@ paths:
             $ref: '#/definitions/modelError'
       tags:
         - reports
-produces:
-  - application/json
-schemes:
-  - https
-swagger: '2.0'
+definitions:
+  authResponse:
+    properties:
+      success:
+        type: boolean
+      token:
+        type: string
+  modelError:
+    properties:
+      errors:
+        items:
+          type: string
+        type: array
+      success:
+        type: boolean
+  reportsDailyItem:
+    properties:
+      clicks:
+        type: string
+      cpc:
+        type: string
+      ctr:
+        type: string
+      date:
+        type: string
+      earnings:
+        type: string
+      impressions:
+        type: string
+      net_ecpm:
+        type: string
+      rpm:
+        type: string
+  reportsDailyResponse:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/reportsDailyItem'
+          type: object
+        type: array
+      success:
+        type: boolean
+      total_count:
+        type: integer
+      totals:
+        $ref: '#/definitions/totals'
+        type: object
+  reportsWebsiteItem:
+    properties:
+      clicks:
+        type: string
+      cpc:
+        type: string
+      ctr:
+        type: string
+      date:
+        type: string
+      earnings:
+        type: string
+      impressions:
+        type: string
+      net_ecpm:
+        type: string
+      rpm:
+        type: string
+  reportsWebsiteResponse:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/reportsWebsiteItem'
+          type: object
+        type: array
+      success:
+        type: boolean
+      total_count:
+        type: integer
+      totals:
+        $ref: '#/definitions/totals'
+        type: object
+  reportsWidgetItem:
+    properties:
+      campaign:
+        description: widget name
+        type: string
+      campaign_id:
+        description: widget id
+        type: string
+      clicks:
+        type: string
+      cpc:
+        type: string
+      ctr:
+        type: string
+      earnings:
+        type: string
+      impressions:
+        type: string
+      net_ecpm:
+        type: string
+      rpm:
+        type: string
+  reportsWidgetResponse:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/reportsWidgetItem'
+          type: object
+        type: array
+      success:
+        type: boolean
+      total_count:
+        type: integer
+      totals:
+        $ref: '#/definitions/totals'
+        type: object
+  totals:
+    properties:
+      total_clicks:
+        type: string
+      total_cpc:
+        type: string
+      total_ctr:
+        type: string
+      total_earnings:
+        type: string
+      total_impressions:
+        type: string
+      total_net_ecpm:
+        type: string
+      total_rpm:
+        type: string

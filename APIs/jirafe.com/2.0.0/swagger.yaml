@@ -1,4 +1,257 @@
+swagger: '2.0'
+schemes:
+  - https
+host: event.jirafe.com
 basePath: /v2
+info:
+  contact:
+    email: support@jirafe.com
+  description: API endpoins for sending Jirafe events
+  termsOfService: 'https://jirafe.com/policies/terms/'
+  title: Jirafe Events API
+  version: 2.0.0
+  x-logo:
+    backgroundColor: '#407C7C'
+    url: 'https://jirafe.com/assets/img/logo_white.svg'
+  x-origin:
+    format: swagger
+    url: 'https://event.jirafe.com/api-docs'
+    version: '1.2'
+  x-providerName: jirafe.com
+externalDocs:
+  url: 'https://docs.jirafe.com/api/'
+securityDefinitions:
+  oauth2_accessCode:
+    authorizationUrl: 'https://account.jirafe.com/oauth2/auth_token'
+    flow: accessCode
+    scopes:
+      write: Send events
+    tokenUrl: 'https://account.jirafe.com/oauth2/code'
+    type: oauth2
+  oauth2_implicit:
+    authorizationUrl: 'https://account.jirafe.com/oauth2/authorize'
+    flow: implicit
+    scopes:
+      write: Send events
+    type: oauth2
+tags:
+  - description: Batch events
+    name: batch
+  - description: Cart events
+    name: cart
+  - description: Category events
+    name: category
+  - description: Customer events
+    name: customer
+  - description: Product events
+    name: product
+  - description: Order events
+    name: order
+paths:
+  '/{siteId}/batch':
+    post:
+      operationId: postBatch
+      parameters:
+        - description: ID site to send the event
+          in: path
+          name: siteId
+          required: true
+          type: string
+        - description: batch json of events
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Batch'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+        '400':
+          description: validation
+        '403':
+          description: authorization
+        '503':
+          description: unknown
+      security:
+        - oauth2_implicit:
+            - write
+        - oauth2_accessCode:
+            - write
+      summary: Send a batch for the given site
+      tags:
+        - batch
+  '/{siteId}/cart':
+    post:
+      operationId: postCart
+      parameters:
+        - description: ID site to send the event
+          in: path
+          name: siteId
+          required: true
+          type: string
+        - description: cart json for the event
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Cart'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+        '400':
+          description: validation
+        '403':
+          description: authorization
+        '503':
+          description: unknown
+      security:
+        - oauth2_implicit:
+            - write
+        - oauth2_accessCode:
+            - write
+      summary: Send a cart for the given site
+      tags:
+        - cart
+  '/{siteId}/category':
+    post:
+      operationId: postCategory
+      parameters:
+        - description: ID site to send the event
+          in: path
+          name: siteId
+          required: true
+          type: string
+        - description: category json for the event
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Category'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+        '400':
+          description: validation
+        '403':
+          description: authorization
+        '503':
+          description: unknown
+      security:
+        - oauth2_implicit:
+            - write
+        - oauth2_accessCode:
+            - write
+      summary: Send a category for the given site
+      tags:
+        - category
+  '/{siteId}/customer':
+    post:
+      operationId: postCustomer
+      parameters:
+        - description: ID site to send the event
+          in: path
+          name: siteId
+          required: true
+          type: string
+        - description: customer json for the event
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Customer'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+        '400':
+          description: validation
+        '403':
+          description: authorization
+        '503':
+          description: unknown
+      security:
+        - oauth2_implicit:
+            - write
+        - oauth2_accessCode:
+            - write
+      summary: Send a customer for the given site
+      tags:
+        - customer
+  '/{siteId}/order':
+    post:
+      operationId: postOrderCancelled
+      parameters:
+        - description: ID site to send the event
+          in: path
+          name: siteId
+          required: true
+          type: string
+        - description: order json for the event
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/OrderCancelled'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+        '400':
+          description: validation
+        '403':
+          description: authorization
+        '503':
+          description: unknown
+      security:
+        - oauth2_implicit:
+            - write
+        - oauth2_accessCode:
+            - write
+      summary: Send a order for the given site
+      tags:
+        - order
+  '/{siteId}/product':
+    post:
+      operationId: postProduct
+      parameters:
+        - description: ID site to send the event
+          in: path
+          name: siteId
+          required: true
+          type: string
+        - description: product json for the event
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Product'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+        '400':
+          description: validation
+        '403':
+          description: authorization
+        '503':
+          description: unknown
+      security:
+        - oauth2_implicit:
+            - write
+        - oauth2_accessCode:
+            - write
+      summary: Send a product for the given site
+      tags:
+        - product
 definitions:
   Address: {}
   Attribute:
@@ -431,256 +684,3 @@ definitions:
       - pageview_id
       - last_pageview_id
     type: object
-externalDocs:
-  url: 'https://docs.jirafe.com/api/'
-host: event.jirafe.com
-info:
-  contact:
-    email: support@jirafe.com
-  description: API endpoins for sending Jirafe events
-  termsOfService: 'https://jirafe.com/policies/terms/'
-  title: Jirafe Events API
-  version: 2.0.0
-  x-logo:
-    backgroundColor: '#407C7C'
-    url: 'https://jirafe.com/assets/img/logo_white.svg'
-  x-origin:
-    format: swagger
-    url: 'https://event.jirafe.com/api-docs'
-    version: '1.2'
-  x-providerName: jirafe.com
-paths:
-  '/{siteId}/batch':
-    post:
-      operationId: postBatch
-      parameters:
-        - description: ID site to send the event
-          in: path
-          name: siteId
-          required: true
-          type: string
-        - description: batch json of events
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/Batch'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: No response was specified
-        '400':
-          description: validation
-        '403':
-          description: authorization
-        '503':
-          description: unknown
-      security:
-        - oauth2_implicit:
-            - write
-        - oauth2_accessCode:
-            - write
-      summary: Send a batch for the given site
-      tags:
-        - batch
-  '/{siteId}/cart':
-    post:
-      operationId: postCart
-      parameters:
-        - description: ID site to send the event
-          in: path
-          name: siteId
-          required: true
-          type: string
-        - description: cart json for the event
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/Cart'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: No response was specified
-        '400':
-          description: validation
-        '403':
-          description: authorization
-        '503':
-          description: unknown
-      security:
-        - oauth2_implicit:
-            - write
-        - oauth2_accessCode:
-            - write
-      summary: Send a cart for the given site
-      tags:
-        - cart
-  '/{siteId}/category':
-    post:
-      operationId: postCategory
-      parameters:
-        - description: ID site to send the event
-          in: path
-          name: siteId
-          required: true
-          type: string
-        - description: category json for the event
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/Category'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: No response was specified
-        '400':
-          description: validation
-        '403':
-          description: authorization
-        '503':
-          description: unknown
-      security:
-        - oauth2_implicit:
-            - write
-        - oauth2_accessCode:
-            - write
-      summary: Send a category for the given site
-      tags:
-        - category
-  '/{siteId}/customer':
-    post:
-      operationId: postCustomer
-      parameters:
-        - description: ID site to send the event
-          in: path
-          name: siteId
-          required: true
-          type: string
-        - description: customer json for the event
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/Customer'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: No response was specified
-        '400':
-          description: validation
-        '403':
-          description: authorization
-        '503':
-          description: unknown
-      security:
-        - oauth2_implicit:
-            - write
-        - oauth2_accessCode:
-            - write
-      summary: Send a customer for the given site
-      tags:
-        - customer
-  '/{siteId}/order':
-    post:
-      operationId: postOrderCancelled
-      parameters:
-        - description: ID site to send the event
-          in: path
-          name: siteId
-          required: true
-          type: string
-        - description: order json for the event
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/OrderCancelled'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: No response was specified
-        '400':
-          description: validation
-        '403':
-          description: authorization
-        '503':
-          description: unknown
-      security:
-        - oauth2_implicit:
-            - write
-        - oauth2_accessCode:
-            - write
-      summary: Send a order for the given site
-      tags:
-        - order
-  '/{siteId}/product':
-    post:
-      operationId: postProduct
-      parameters:
-        - description: ID site to send the event
-          in: path
-          name: siteId
-          required: true
-          type: string
-        - description: product json for the event
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/Product'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: No response was specified
-        '400':
-          description: validation
-        '403':
-          description: authorization
-        '503':
-          description: unknown
-      security:
-        - oauth2_implicit:
-            - write
-        - oauth2_accessCode:
-            - write
-      summary: Send a product for the given site
-      tags:
-        - product
-schemes:
-  - https
-securityDefinitions:
-  oauth2_accessCode:
-    authorizationUrl: 'https://account.jirafe.com/oauth2/auth_token'
-    flow: accessCode
-    scopes:
-      write: Send events
-    tokenUrl: 'https://account.jirafe.com/oauth2/code'
-    type: oauth2
-  oauth2_implicit:
-    authorizationUrl: 'https://account.jirafe.com/oauth2/authorize'
-    flow: implicit
-    scopes:
-      write: Send events
-    type: oauth2
-swagger: '2.0'
-tags:
-  - description: Batch events
-    name: batch
-  - description: Cart events
-    name: cart
-  - description: Category events
-    name: category
-  - description: Customer events
-    name: customer
-  - description: Product events
-    name: product
-  - description: Order events
-    name: order

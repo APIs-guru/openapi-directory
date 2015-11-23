@@ -1,4 +1,366 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.googleapis.com
 basePath: /identitytoolkit/v3/relyingparty
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: Help the third party sites to implement federated login.
+  title: Google Identity Toolkit API
+  version: v3
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/identitytoolkit/v3/rest'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: identitytoolkit
+externalDocs:
+  url: 'https://developers.google.com/identity-toolkit/v3/'
+parameters:
+  alt:
+    default: json
+    description: Data format for the response.
+    enum:
+      - json
+    in: query
+    name: alt
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    in: query
+    name: quotaUser
+    type: string
+  userIp:
+    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    in: query
+    name: userIp
+    type: string
+paths:
+  /createAuthUri:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates the URI used by the IdP to authenticate the user.
+      operationId: identitytoolkit.relyingparty.createAuthUri
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartyCreateAuthUriRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CreateAuthUriResponse'
+      tags:
+        - relyingparty
+  /deleteAccount:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Delete user account.
+      operationId: identitytoolkit.relyingparty.deleteAccount
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartyDeleteAccountRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DeleteAccountResponse'
+      tags:
+        - relyingparty
+  /downloadAccount:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Batch download user accounts.
+      operationId: identitytoolkit.relyingparty.downloadAccount
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartyDownloadAccountRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DownloadAccountResponse'
+      tags:
+        - relyingparty
+  /getAccountInfo:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns the account info.
+      operationId: identitytoolkit.relyingparty.getAccountInfo
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartyGetAccountInfoRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetAccountInfoResponse'
+      tags:
+        - relyingparty
+  /getOobConfirmationCode:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Get a code for user action confirmation.
+      operationId: identitytoolkit.relyingparty.getOobConfirmationCode
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Relyingparty'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetOobConfirmationCodeResponse'
+      tags:
+        - relyingparty
+  /getProjectConfig:
+    get:
+      description: Get project configuration.
+      operationId: identitytoolkit.relyingparty.getProjectConfig
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartyGetProjectConfigResponse'
+      tags:
+        - relyingparty
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /getRecaptchaParam:
+    get:
+      description: Get recaptcha secure param.
+      operationId: identitytoolkit.relyingparty.getRecaptchaParam
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetRecaptchaParamResponse'
+      tags:
+        - relyingparty
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /publicKeys:
+    get:
+      description: Get token signing public key.
+      operationId: identitytoolkit.relyingparty.getPublicKeys
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartyGetPublicKeysResponse'
+      tags:
+        - relyingparty
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /resetPassword:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Reset password for a user.
+      operationId: identitytoolkit.relyingparty.resetPassword
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartyResetPasswordRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ResetPasswordResponse'
+      tags:
+        - relyingparty
+  /setAccountInfo:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Set account info for a user.
+      operationId: identitytoolkit.relyingparty.setAccountInfo
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartySetAccountInfoRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SetAccountInfoResponse'
+      tags:
+        - relyingparty
+  /uploadAccount:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Batch upload existing user accounts.
+      operationId: identitytoolkit.relyingparty.uploadAccount
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartyUploadAccountRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/UploadAccountResponse'
+      tags:
+        - relyingparty
+  /verifyAssertion:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Verifies the assertion returned by the IdP.
+      operationId: identitytoolkit.relyingparty.verifyAssertion
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartyVerifyAssertionRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/VerifyAssertionResponse'
+      tags:
+        - relyingparty
+  /verifyPassword:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Verifies the user entered password.
+      operationId: identitytoolkit.relyingparty.verifyPassword
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartyVerifyPasswordRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/VerifyPasswordResponse'
+      tags:
+        - relyingparty
 definitions:
   CreateAuthUriResponse:
     description: Response of creating the IDP authentication URL.
@@ -621,365 +983,3 @@ definitions:
         description: Whether the email is registered.
         type: boolean
     type: object
-externalDocs:
-  url: 'https://developers.google.com/identity-toolkit/v3/'
-host: www.googleapis.com
-info:
-  contact:
-    name: Google
-    url: 'https://google.com'
-  description: Help the third party sites to implement federated login.
-  title: Google Identity Toolkit API
-  version: v3
-  x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
-  x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
-  x-origin:
-    format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/identitytoolkit/v3/rest'
-    version: v1
-  x-preferred: true
-  x-providerName: googleapis.com
-  x-serviceName: identitytoolkit
-parameters:
-  alt:
-    default: json
-    description: Data format for the response.
-    enum:
-      - json
-    in: query
-    name: alt
-    type: string
-  fields:
-    description: Selector specifying which fields to include in a partial response.
-    in: query
-    name: fields
-    type: string
-  key:
-    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
-    in: query
-    name: key
-    type: string
-  oauth_token:
-    description: OAuth 2.0 token for the current user.
-    in: query
-    name: oauth_token
-    type: string
-  prettyPrint:
-    default: true
-    description: Returns response with indentations and line breaks.
-    in: query
-    name: prettyPrint
-    type: boolean
-  quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
-    in: query
-    name: quotaUser
-    type: string
-  userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
-    in: query
-    name: userIp
-    type: string
-paths:
-  /createAuthUri:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Creates the URI used by the IdP to authenticate the user.
-      operationId: identitytoolkit.relyingparty.createAuthUri
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/IdentitytoolkitRelyingpartyCreateAuthUriRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/CreateAuthUriResponse'
-      tags:
-        - relyingparty
-  /deleteAccount:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Delete user account.
-      operationId: identitytoolkit.relyingparty.deleteAccount
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/IdentitytoolkitRelyingpartyDeleteAccountRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/DeleteAccountResponse'
-      tags:
-        - relyingparty
-  /downloadAccount:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Batch download user accounts.
-      operationId: identitytoolkit.relyingparty.downloadAccount
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/IdentitytoolkitRelyingpartyDownloadAccountRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/DownloadAccountResponse'
-      tags:
-        - relyingparty
-  /getAccountInfo:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Returns the account info.
-      operationId: identitytoolkit.relyingparty.getAccountInfo
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/IdentitytoolkitRelyingpartyGetAccountInfoRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/GetAccountInfoResponse'
-      tags:
-        - relyingparty
-  /getOobConfirmationCode:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Get a code for user action confirmation.
-      operationId: identitytoolkit.relyingparty.getOobConfirmationCode
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Relyingparty'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/GetOobConfirmationCodeResponse'
-      tags:
-        - relyingparty
-  /getProjectConfig:
-    get:
-      description: Get project configuration.
-      operationId: identitytoolkit.relyingparty.getProjectConfig
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/IdentitytoolkitRelyingpartyGetProjectConfigResponse'
-      tags:
-        - relyingparty
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  /getRecaptchaParam:
-    get:
-      description: Get recaptcha secure param.
-      operationId: identitytoolkit.relyingparty.getRecaptchaParam
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/GetRecaptchaParamResponse'
-      tags:
-        - relyingparty
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  /publicKeys:
-    get:
-      description: Get token signing public key.
-      operationId: identitytoolkit.relyingparty.getPublicKeys
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/IdentitytoolkitRelyingpartyGetPublicKeysResponse'
-      tags:
-        - relyingparty
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  /resetPassword:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Reset password for a user.
-      operationId: identitytoolkit.relyingparty.resetPassword
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/IdentitytoolkitRelyingpartyResetPasswordRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ResetPasswordResponse'
-      tags:
-        - relyingparty
-  /setAccountInfo:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Set account info for a user.
-      operationId: identitytoolkit.relyingparty.setAccountInfo
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/IdentitytoolkitRelyingpartySetAccountInfoRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/SetAccountInfoResponse'
-      tags:
-        - relyingparty
-  /uploadAccount:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Batch upload existing user accounts.
-      operationId: identitytoolkit.relyingparty.uploadAccount
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/IdentitytoolkitRelyingpartyUploadAccountRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/UploadAccountResponse'
-      tags:
-        - relyingparty
-  /verifyAssertion:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Verifies the assertion returned by the IdP.
-      operationId: identitytoolkit.relyingparty.verifyAssertion
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/IdentitytoolkitRelyingpartyVerifyAssertionRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/VerifyAssertionResponse'
-      tags:
-        - relyingparty
-  /verifyPassword:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Verifies the user entered password.
-      operationId: identitytoolkit.relyingparty.verifyPassword
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/IdentitytoolkitRelyingpartyVerifyPasswordRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/VerifyPasswordResponse'
-      tags:
-        - relyingparty
-schemes:
-  - https
-swagger: '2.0'

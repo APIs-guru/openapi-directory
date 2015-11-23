@@ -1,7 +1,8 @@
-basePath: /v1/
-externalDocs:
-  url: 'http://instagr.am/developer/'
+swagger: '2.0'
+schemes:
+  - https
 host: api.instagram.com
+basePath: /v1/
 info:
   description: 'Fast, beautiful and fun way to share your life with friends through a series of pictures.'
   title: Instagram
@@ -12,6 +13,16 @@ info:
     format: apigee
     url: 'https://apigee.com/embed/console/instagram'
   x-providerName: instagram.com
+externalDocs:
+  url: 'http://instagr.am/developer/'
+securityDefinitions:
+  oauth2:
+    authorizationUrl: 'https://api.instagram.com/oauth/authorize/'
+    flow: implicit
+    scopes:
+      likes: ''
+      relationships: ''
+    type: oauth2
 paths:
   /locations/search:
     get:
@@ -552,14 +563,3 @@ paths:
       responses:
         '200':
           description: Successful Response
-schemes:
-  - https
-securityDefinitions:
-  oauth2:
-    authorizationUrl: 'https://api.instagram.com/oauth/authorize/'
-    flow: implicit
-    scopes:
-      likes: ''
-      relationships: ''
-    type: oauth2
-swagger: '2.0'

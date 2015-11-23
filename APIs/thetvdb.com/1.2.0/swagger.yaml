@@ -1,425 +1,9 @@
-basePath: /
-consumes:
-  - application/json
-definitions:
-  Auth:
-    properties:
-      apikey:
-        type: string
-      username:
-        type: string
-      userpass:
-        type: string
-  BasicEpisode:
-    properties:
-      absoluteNumber:
-        type: integer
-      airedEpisodeNumber:
-        type: integer
-      airedSeason:
-        type: integer
-      dvdEpisodeNumber:
-        type: integer
-      dvdSeason:
-        type: integer
-      episodeName:
-        type: string
-      id:
-        type: integer
-      overview:
-        type: string
-    type: object
-  Conflict:
-    properties:
-      Error:
-        default: Conflict
-        type: string
-  Episode:
-    properties:
-      absoluteNumber:
-        type: integer
-      airedEpisodeNumber:
-        type: integer
-      airedSeason:
-        type: integer
-      airsAfterSeason:
-        type: integer
-      airsBeforeEpisode:
-        type: integer
-      airsBeforeSeason:
-        type: integer
-      director:
-        type: string
-      dvdChapter:
-        type: number
-      dvdDiscid:
-        type: string
-      dvdEpisodeNumber:
-        type: number
-      dvdSeason:
-        type: integer
-      episodeName:
-        type: string
-      filename:
-        type: string
-      firstAired:
-        type: string
-      guestStars:
-        type: string
-      id:
-        type: integer
-      imdbId:
-        type: string
-      lastUpdated:
-        type: integer
-      lastUpdatedBy:
-        type: string
-      overview:
-        type: string
-      productionCode:
-        type: string
-      seriesId:
-        type: string
-      showUrl:
-        type: string
-      siteRating:
-        type: number
-      thumbAdded:
-        type: string
-      thumbAuthor:
-        type: string
-      thumbHeight:
-        type: string
-      thumbWidth:
-        type: string
-      writers:
-        items:
-          type: string
-        type: array
-    type: object
-  EpisodeData:
-    properties:
-      data:
-        $ref: '#/definitions/Episode'
-    type: object
-  EpisodeDataQueryParams:
-    properties:
-      data:
-        items:
-          type: string
-        type: array
-    type: object
-  FilterKeys:
-    properties:
-      data:
-        items:
-          type: string
-        type: array
-  Language:
-    properties:
-      abbreviation:
-        type: string
-      englishName:
-        type: string
-      id:
-        type: integer
-      name:
-        type: string
-    type: object
-  LanguageData:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/Language'
-        type: array
-    type: object
-  Links:
-    properties:
-      first:
-        type: integer
-      last:
-        type: integer
-      next:
-        type: integer
-      previous:
-        type: integer
-    type: object
-  NotAuthorized:
-    properties:
-      Error:
-        default: Not Authorized
-        type: string
-  NotFound:
-    properties:
-      Error:
-        default: Not Found
-        type: string
-  Series:
-    properties:
-      added:
-        type: string
-      airsDayOfWeek:
-        type: string
-      airsTime:
-        type: string
-      aliases:
-        items:
-          type: string
-        type: array
-      banner:
-        type: string
-      firstAired:
-        type: string
-      genre:
-        items:
-          type: string
-        type: array
-      id:
-        type: integer
-      imdbId:
-        type: string
-      lastUpdated:
-        type: integer
-      network:
-        type: string
-      networkId:
-        type: string
-      overview:
-        type: string
-      rating:
-        type: string
-      runtime:
-        type: string
-      seriesId:
-        type: integer
-      seriesName:
-        type: string
-      siteRating:
-        type: number
-      status:
-        type: string
-      zap2itId:
-        type: string
-    type: object
-  SeriesActors:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/SeriesActorsData'
-        type: array
-  SeriesActorsData:
-    properties:
-      id:
-        type: integer
-      image:
-        type: string
-      imageAdded:
-        type: string
-      imageAuthor:
-        type: integer
-      lastUpdated:
-        type: string
-      name:
-        type: string
-      role:
-        type: string
-      seriesId:
-        type: integer
-      sortOrder:
-        type: integer
-    type: object
-  SeriesEpisodes:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/BasicEpisode'
-        type: array
-      links:
-        $ref: '#/definitions/Links'
-  SeriesEpisodesQuery:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/BasicEpisode'
-        type: array
-      links:
-        $ref: '#/definitions/Links'
-  SeriesEpisodesQueryParams:
-    properties:
-      data:
-        items:
-          type: string
-        type: array
-  SeriesEpisodesSummary:
-    properties:
-      airedEpisodes:
-        description: Number of all aired episodes for this series
-        type: string
-      airedSeasons:
-        items:
-          type: string
-        type: array
-      dvdEpisodes:
-        description: Number of all dvd episodes for this series
-        type: string
-      dvdSeasons:
-        items:
-          type: string
-        type: array
-    type: object
-  SeriesImageQueryResult:
-    properties:
-      fileName:
-        type: string
-      id:
-        type: integer
-      keyType:
-        type: string
-      languageId:
-        type: integer
-      ratingsInfo:
-        description: Average rating for the given record.
-        type: integer
-      resolution:
-        type: string
-      subKey:
-        type: string
-      thumbnail:
-        type: string
-    type: object
-  SeriesImageQueryResults:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/SeriesImageQueryResult'
-        type: array
-  SeriesImagesCount:
-    properties:
-      fanart:
-        type: integer
-      poster:
-        type: integer
-      season:
-        type: integer
-      seasonwide:
-        type: integer
-      series:
-        type: integer
-    type: object
-  SeriesImagesCounts:
-    properties:
-      data:
-        $ref: '#/definitions/SeriesImagesCount'
-  SeriesImagesQueryParam:
-    properties:
-      keyType:
-        type: string
-      languageId:
-        type: string
-      resolution:
-        items:
-          type: string
-        type: array
-      subKey:
-        items:
-          type: string
-        type: array
-  SeriesImagesQueryParams:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/SeriesImagesQueryParam'
-        type: array
-  Token:
-    properties:
-      token:
-        type: string
-  Update:
-    properties:
-      id:
-        type: integer
-      lastUpdated:
-        type: integer
-    type: object
-  UpdateData:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/Update'
-        type: array
-    type: object
-  UpdateDataQueryParams:
-    properties:
-      data:
-        items:
-          type: string
-        type: array
-    type: object
-  User:
-    properties:
-      favoritesDisplaymode:
-        type: string
-      language:
-        type: string
-      userName:
-        type: string
-    type: object
-  UserData:
-    properties:
-      data:
-        $ref: '#/definitions/User'
-    type: object
-  UserFavorites:
-    properties:
-      favorites:
-        items:
-          type: string
-        type: array
-    type: object
-  UserFavoritesData:
-    properties:
-      data:
-        $ref: '#/definitions/UserFavorites'
-    type: object
-  UserRatings:
-    properties:
-      rating:
-        type: integer
-      ratingItemId:
-        type: integer
-      ratingType:
-        type: string
-    type: object
-  UserRatingsData:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/UserRatings'
-        type: array
-      links:
-        $ref: '#/definitions/Links'
-    type: object
-  UserRatingsDataNoLinks:
-    properties:
-      data:
-        items:
-          $ref: '#/definitions/UserRatings'
-        type: array
-    type: object
-  UserRatingsDataNoLinksEmptyArray:
-    properties:
-      data:
-        items: {}
-        type: array
-    type: object
-  UserRatingsQueryParams:
-    properties:
-      data:
-        items:
-          type: string
-        type: array
-    type: object
+swagger: '2.0'
+schemes:
+  - https
+  - http
 host: api-dev.thetvdb.com
+basePath: /
 info:
   description: |-
     This is an early draft and targets v1 functionality with a few minor additions. The API is accessible via https://api.thetvdb.com and provides the following REST endpoints in JSON format.
@@ -463,6 +47,10 @@ info:
     url: 'https://api-dev.thetvdb.com/swagger.json'
     version: '2.0'
   x-providerName: thetvdb.com
+consumes:
+  - application/json
+produces:
+  - application/json
 parameters:
   Accept-Language:
     description: 'Records are returned with the Episode name and Overview in the desired language, if it exists. If there is no translation for the given language, then the record is still returned but with empty values for the translated fields.'
@@ -593,6 +181,21 @@ parameters:
     in: query
     name: zap2itId
     type: string
+tags:
+  - description: Obtaining and refreshing your JWT token
+    name: Authentication
+  - description: Information about a specific episode
+    name: Episodes
+  - description: Information about a specific series
+    name: Series
+  - description: Search for a particular series
+    name: Search
+  - description: Series that have been recently updated.
+    name: Updates
+  - description: Routes for handling user data.
+    name: Users
+  - description: Available languages and information
+    name: Languages
 paths:
   '/episodes/{id}':
     get:
@@ -1207,24 +810,421 @@ paths:
             $ref: '#/definitions/NotFound'
       tags:
         - Users
-produces:
-  - application/json
-schemes:
-  - https
-  - http
-swagger: '2.0'
-tags:
-  - description: Obtaining and refreshing your JWT token
-    name: Authentication
-  - description: Information about a specific episode
-    name: Episodes
-  - description: Information about a specific series
-    name: Series
-  - description: Search for a particular series
-    name: Search
-  - description: Series that have been recently updated.
-    name: Updates
-  - description: Routes for handling user data.
-    name: Users
-  - description: Available languages and information
-    name: Languages
+definitions:
+  Auth:
+    properties:
+      apikey:
+        type: string
+      username:
+        type: string
+      userpass:
+        type: string
+  BasicEpisode:
+    properties:
+      absoluteNumber:
+        type: integer
+      airedEpisodeNumber:
+        type: integer
+      airedSeason:
+        type: integer
+      dvdEpisodeNumber:
+        type: integer
+      dvdSeason:
+        type: integer
+      episodeName:
+        type: string
+      id:
+        type: integer
+      overview:
+        type: string
+    type: object
+  Conflict:
+    properties:
+      Error:
+        default: Conflict
+        type: string
+  Episode:
+    properties:
+      absoluteNumber:
+        type: integer
+      airedEpisodeNumber:
+        type: integer
+      airedSeason:
+        type: integer
+      airsAfterSeason:
+        type: integer
+      airsBeforeEpisode:
+        type: integer
+      airsBeforeSeason:
+        type: integer
+      director:
+        type: string
+      dvdChapter:
+        type: number
+      dvdDiscid:
+        type: string
+      dvdEpisodeNumber:
+        type: number
+      dvdSeason:
+        type: integer
+      episodeName:
+        type: string
+      filename:
+        type: string
+      firstAired:
+        type: string
+      guestStars:
+        type: string
+      id:
+        type: integer
+      imdbId:
+        type: string
+      lastUpdated:
+        type: integer
+      lastUpdatedBy:
+        type: string
+      overview:
+        type: string
+      productionCode:
+        type: string
+      seriesId:
+        type: string
+      showUrl:
+        type: string
+      siteRating:
+        type: number
+      thumbAdded:
+        type: string
+      thumbAuthor:
+        type: string
+      thumbHeight:
+        type: string
+      thumbWidth:
+        type: string
+      writers:
+        items:
+          type: string
+        type: array
+    type: object
+  EpisodeData:
+    properties:
+      data:
+        $ref: '#/definitions/Episode'
+    type: object
+  EpisodeDataQueryParams:
+    properties:
+      data:
+        items:
+          type: string
+        type: array
+    type: object
+  FilterKeys:
+    properties:
+      data:
+        items:
+          type: string
+        type: array
+  Language:
+    properties:
+      abbreviation:
+        type: string
+      englishName:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  LanguageData:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/Language'
+        type: array
+    type: object
+  Links:
+    properties:
+      first:
+        type: integer
+      last:
+        type: integer
+      next:
+        type: integer
+      previous:
+        type: integer
+    type: object
+  NotAuthorized:
+    properties:
+      Error:
+        default: Not Authorized
+        type: string
+  NotFound:
+    properties:
+      Error:
+        default: Not Found
+        type: string
+  Series:
+    properties:
+      added:
+        type: string
+      airsDayOfWeek:
+        type: string
+      airsTime:
+        type: string
+      aliases:
+        items:
+          type: string
+        type: array
+      banner:
+        type: string
+      firstAired:
+        type: string
+      genre:
+        items:
+          type: string
+        type: array
+      id:
+        type: integer
+      imdbId:
+        type: string
+      lastUpdated:
+        type: integer
+      network:
+        type: string
+      networkId:
+        type: string
+      overview:
+        type: string
+      rating:
+        type: string
+      runtime:
+        type: string
+      seriesId:
+        type: integer
+      seriesName:
+        type: string
+      siteRating:
+        type: number
+      status:
+        type: string
+      zap2itId:
+        type: string
+    type: object
+  SeriesActors:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/SeriesActorsData'
+        type: array
+  SeriesActorsData:
+    properties:
+      id:
+        type: integer
+      image:
+        type: string
+      imageAdded:
+        type: string
+      imageAuthor:
+        type: integer
+      lastUpdated:
+        type: string
+      name:
+        type: string
+      role:
+        type: string
+      seriesId:
+        type: integer
+      sortOrder:
+        type: integer
+    type: object
+  SeriesEpisodes:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/BasicEpisode'
+        type: array
+      links:
+        $ref: '#/definitions/Links'
+  SeriesEpisodesQuery:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/BasicEpisode'
+        type: array
+      links:
+        $ref: '#/definitions/Links'
+  SeriesEpisodesQueryParams:
+    properties:
+      data:
+        items:
+          type: string
+        type: array
+  SeriesEpisodesSummary:
+    properties:
+      airedEpisodes:
+        description: Number of all aired episodes for this series
+        type: string
+      airedSeasons:
+        items:
+          type: string
+        type: array
+      dvdEpisodes:
+        description: Number of all dvd episodes for this series
+        type: string
+      dvdSeasons:
+        items:
+          type: string
+        type: array
+    type: object
+  SeriesImageQueryResult:
+    properties:
+      fileName:
+        type: string
+      id:
+        type: integer
+      keyType:
+        type: string
+      languageId:
+        type: integer
+      ratingsInfo:
+        description: Average rating for the given record.
+        type: integer
+      resolution:
+        type: string
+      subKey:
+        type: string
+      thumbnail:
+        type: string
+    type: object
+  SeriesImageQueryResults:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/SeriesImageQueryResult'
+        type: array
+  SeriesImagesCount:
+    properties:
+      fanart:
+        type: integer
+      poster:
+        type: integer
+      season:
+        type: integer
+      seasonwide:
+        type: integer
+      series:
+        type: integer
+    type: object
+  SeriesImagesCounts:
+    properties:
+      data:
+        $ref: '#/definitions/SeriesImagesCount'
+  SeriesImagesQueryParam:
+    properties:
+      keyType:
+        type: string
+      languageId:
+        type: string
+      resolution:
+        items:
+          type: string
+        type: array
+      subKey:
+        items:
+          type: string
+        type: array
+  SeriesImagesQueryParams:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/SeriesImagesQueryParam'
+        type: array
+  Token:
+    properties:
+      token:
+        type: string
+  Update:
+    properties:
+      id:
+        type: integer
+      lastUpdated:
+        type: integer
+    type: object
+  UpdateData:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/Update'
+        type: array
+    type: object
+  UpdateDataQueryParams:
+    properties:
+      data:
+        items:
+          type: string
+        type: array
+    type: object
+  User:
+    properties:
+      favoritesDisplaymode:
+        type: string
+      language:
+        type: string
+      userName:
+        type: string
+    type: object
+  UserData:
+    properties:
+      data:
+        $ref: '#/definitions/User'
+    type: object
+  UserFavorites:
+    properties:
+      favorites:
+        items:
+          type: string
+        type: array
+    type: object
+  UserFavoritesData:
+    properties:
+      data:
+        $ref: '#/definitions/UserFavorites'
+    type: object
+  UserRatings:
+    properties:
+      rating:
+        type: integer
+      ratingItemId:
+        type: integer
+      ratingType:
+        type: string
+    type: object
+  UserRatingsData:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/UserRatings'
+        type: array
+      links:
+        $ref: '#/definitions/Links'
+    type: object
+  UserRatingsDataNoLinks:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/UserRatings'
+        type: array
+    type: object
+  UserRatingsDataNoLinksEmptyArray:
+    properties:
+      data:
+        items: {}
+        type: array
+    type: object
+  UserRatingsQueryParams:
+    properties:
+      data:
+        items:
+          type: string
+        type: array
+    type: object

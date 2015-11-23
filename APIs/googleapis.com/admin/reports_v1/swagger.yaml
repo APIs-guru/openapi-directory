@@ -1,273 +1,8 @@
-basePath: /admin/reports/v1
-definitions:
-  Activities:
-    description: JSON template for a collection of activites.
-    properties:
-      etag:
-        description: ETag of the resource.
-        type: string
-      items:
-        description: Each record in read response.
-        items:
-          $ref: '#/definitions/Activity'
-        type: array
-      kind:
-        default: 'admin#reports#activities'
-        description: Kind of list response this is.
-        type: string
-      nextPageToken:
-        description: Token for retrieving the next page
-        type: string
-    type: object
-  Activity:
-    description: JSON template for the activity resource.
-    properties:
-      actor:
-        description: User doing the action.
-        properties:
-          callerType:
-            description: User or OAuth 2LO request.
-            type: string
-          email:
-            description: Email address of the user.
-            type: string
-          key:
-            description: 'For OAuth 2LO API requests, consumer_key of the requestor.'
-            type: string
-          profileId:
-            description: Obfuscated user id of the user.
-            type: string
-        type: object
-      etag:
-        description: ETag of the entry.
-        type: string
-      events:
-        description: Activity events.
-        items:
-          properties:
-            name:
-              description: Name of event.
-              type: string
-            parameters:
-              description: Parameter value pairs for various applications.
-              items:
-                properties:
-                  boolValue:
-                    description: Boolean value of the parameter.
-                    type: boolean
-                  intValue:
-                    description: Integral value of the parameter.
-                    format: int64
-                    type: string
-                  multiIntValue:
-                    description: Multi-int value of the parameter.
-                    items:
-                      format: int64
-                      type: string
-                    type: array
-                  multiValue:
-                    description: Multi-string value of the parameter.
-                    items:
-                      type: string
-                    type: array
-                  name:
-                    description: The name of the parameter.
-                    type: string
-                  value:
-                    description: String value of the parameter.
-                    type: string
-                type: object
-              type: array
-            type:
-              description: Type of event.
-              type: string
-          type: object
-        type: array
-      id:
-        description: Unique identifier for each activity record.
-        properties:
-          applicationName:
-            description: Application name to which the event belongs.
-            type: string
-          customerId:
-            description: Obfuscated customer ID of the source customer.
-            type: string
-          time:
-            description: Time of occurrence of the activity.
-            format: date-time
-            type: string
-          uniqueQualifier:
-            description: Unique qualifier if multiple events have the same time.
-            format: int64
-            type: string
-        type: object
-      ipAddress:
-        description: IP Address of the user doing the action.
-        type: string
-      kind:
-        default: 'admin#reports#activity'
-        description: Kind of resource this is.
-        type: string
-      ownerDomain:
-        description: Domain of source customer.
-        type: string
-    type: object
-  Channel:
-    description: An notification channel used to watch for resource changes.
-    properties:
-      address:
-        description: The address where notifications are delivered for this channel.
-        type: string
-      expiration:
-        description: 'Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.'
-        format: int64
-        type: string
-      id:
-        description: A UUID or similar unique string that identifies this channel.
-        type: string
-      kind:
-        default: 'api#channel'
-        description: 'Identifies this as a notification channel used to watch for changes to a resource. Value: the fixed string "api#channel".'
-        type: string
-      params:
-        additionalProperties:
-          description: Declares a new parameter by name.
-          type: string
-        description: Additional parameters controlling delivery channel behavior. Optional.
-        type: object
-      payload:
-        description: A Boolean value to indicate whether payload is wanted. Optional.
-        type: boolean
-      resourceId:
-        description: An opaque ID that identifies the resource being watched on this channel. Stable across different API versions.
-        type: string
-      resourceUri:
-        description: A version-specific identifier for the watched resource.
-        type: string
-      token:
-        description: An arbitrary string delivered to the target address with each notification delivered over this channel. Optional.
-        type: string
-      type:
-        description: The type of delivery mechanism used for this channel.
-        type: string
-    type: object
-  UsageReport:
-    description: JSON template for a usage report.
-    properties:
-      date:
-        description: The date to which the record belongs.
-        readOnly: true
-        type: string
-      entity:
-        description: Information about the type of the item.
-        properties:
-          customerId:
-            description: Obfuscated customer id for the record.
-            readOnly: true
-            type: string
-          profileId:
-            description: Obfuscated user id for the record.
-            readOnly: true
-            type: string
-          type:
-            description: 'The type of item, can be a customer or user.'
-            readOnly: true
-            type: string
-          userEmail:
-            description: "user's email."
-            readOnly: true
-            type: string
-        readOnly: true
-        type: object
-      etag:
-        description: ETag of the resource.
-        type: string
-      kind:
-        default: 'admin#reports#usageReport'
-        description: The kind of object.
-        type: string
-      parameters:
-        description: Parameter value pairs for various applications.
-        items:
-          properties:
-            boolValue:
-              description: Boolean value of the parameter.
-              readOnly: true
-              type: boolean
-            datetimeValue:
-              description: RFC 3339 formatted value of the parameter.
-              format: date-time
-              readOnly: true
-              type: string
-            intValue:
-              description: Integral value of the parameter.
-              format: int64
-              readOnly: true
-              type: string
-            msgValue:
-              description: Nested message value of the parameter.
-              items:
-                additionalProperties: {}
-                type: object
-              readOnly: true
-              type: array
-            name:
-              description: The name of the parameter.
-              type: string
-            stringValue:
-              description: String value of the parameter.
-              readOnly: true
-              type: string
-          type: object
-        readOnly: true
-        type: array
-    type: object
-  UsageReports:
-    description: JSON template for a collection of usage reports.
-    properties:
-      etag:
-        description: ETag of the resource.
-        type: string
-      kind:
-        default: 'admin#reports#usageReports'
-        description: The kind of object.
-        type: string
-      nextPageToken:
-        description: Token for retrieving the next page
-        type: string
-      usageReports:
-        description: Various application parameter records.
-        items:
-          $ref: '#/definitions/UsageReport'
-        type: array
-      warnings:
-        description: Warnings if any.
-        items:
-          properties:
-            code:
-              description: Machine readable code / warning type.
-              type: string
-            data:
-              description: Key-Value pairs to give detailed information on the warning.
-              items:
-                properties:
-                  key:
-                    description: Key associated with a key-value pair to give detailed information on the warning.
-                    type: string
-                  value:
-                    description: Value associated with a key-value pair to give detailed information on the warning.
-                    type: string
-                type: object
-              type: array
-            message:
-              description: Human readable message for the warning.
-              type: string
-          type: object
-        type: array
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/admin-sdk/reports/'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /admin/reports/v1
 info:
   contact:
     name: Google
@@ -286,6 +21,17 @@ info:
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: admin
+externalDocs:
+  url: 'https://developers.google.com/admin-sdk/reports/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/admin.reports.audit.readonly': View audit reports of Google Apps for your domain
+      'https://www.googleapis.com/auth/admin.reports.usage.readonly': View usage reports of Google Apps for your domain
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -584,15 +330,269 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/admin.reports.audit.readonly': View audit reports of Google Apps for your domain
-      'https://www.googleapis.com/auth/admin.reports.usage.readonly': View usage reports of Google Apps for your domain
-    type: oauth2
-swagger: '2.0'
+definitions:
+  Activities:
+    description: JSON template for a collection of activites.
+    properties:
+      etag:
+        description: ETag of the resource.
+        type: string
+      items:
+        description: Each record in read response.
+        items:
+          $ref: '#/definitions/Activity'
+        type: array
+      kind:
+        default: 'admin#reports#activities'
+        description: Kind of list response this is.
+        type: string
+      nextPageToken:
+        description: Token for retrieving the next page
+        type: string
+    type: object
+  Activity:
+    description: JSON template for the activity resource.
+    properties:
+      actor:
+        description: User doing the action.
+        properties:
+          callerType:
+            description: User or OAuth 2LO request.
+            type: string
+          email:
+            description: Email address of the user.
+            type: string
+          key:
+            description: 'For OAuth 2LO API requests, consumer_key of the requestor.'
+            type: string
+          profileId:
+            description: Obfuscated user id of the user.
+            type: string
+        type: object
+      etag:
+        description: ETag of the entry.
+        type: string
+      events:
+        description: Activity events.
+        items:
+          properties:
+            name:
+              description: Name of event.
+              type: string
+            parameters:
+              description: Parameter value pairs for various applications.
+              items:
+                properties:
+                  boolValue:
+                    description: Boolean value of the parameter.
+                    type: boolean
+                  intValue:
+                    description: Integral value of the parameter.
+                    format: int64
+                    type: string
+                  multiIntValue:
+                    description: Multi-int value of the parameter.
+                    items:
+                      format: int64
+                      type: string
+                    type: array
+                  multiValue:
+                    description: Multi-string value of the parameter.
+                    items:
+                      type: string
+                    type: array
+                  name:
+                    description: The name of the parameter.
+                    type: string
+                  value:
+                    description: String value of the parameter.
+                    type: string
+                type: object
+              type: array
+            type:
+              description: Type of event.
+              type: string
+          type: object
+        type: array
+      id:
+        description: Unique identifier for each activity record.
+        properties:
+          applicationName:
+            description: Application name to which the event belongs.
+            type: string
+          customerId:
+            description: Obfuscated customer ID of the source customer.
+            type: string
+          time:
+            description: Time of occurrence of the activity.
+            format: date-time
+            type: string
+          uniqueQualifier:
+            description: Unique qualifier if multiple events have the same time.
+            format: int64
+            type: string
+        type: object
+      ipAddress:
+        description: IP Address of the user doing the action.
+        type: string
+      kind:
+        default: 'admin#reports#activity'
+        description: Kind of resource this is.
+        type: string
+      ownerDomain:
+        description: Domain of source customer.
+        type: string
+    type: object
+  Channel:
+    description: An notification channel used to watch for resource changes.
+    properties:
+      address:
+        description: The address where notifications are delivered for this channel.
+        type: string
+      expiration:
+        description: 'Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.'
+        format: int64
+        type: string
+      id:
+        description: A UUID or similar unique string that identifies this channel.
+        type: string
+      kind:
+        default: 'api#channel'
+        description: 'Identifies this as a notification channel used to watch for changes to a resource. Value: the fixed string "api#channel".'
+        type: string
+      params:
+        additionalProperties:
+          description: Declares a new parameter by name.
+          type: string
+        description: Additional parameters controlling delivery channel behavior. Optional.
+        type: object
+      payload:
+        description: A Boolean value to indicate whether payload is wanted. Optional.
+        type: boolean
+      resourceId:
+        description: An opaque ID that identifies the resource being watched on this channel. Stable across different API versions.
+        type: string
+      resourceUri:
+        description: A version-specific identifier for the watched resource.
+        type: string
+      token:
+        description: An arbitrary string delivered to the target address with each notification delivered over this channel. Optional.
+        type: string
+      type:
+        description: The type of delivery mechanism used for this channel.
+        type: string
+    type: object
+  UsageReport:
+    description: JSON template for a usage report.
+    properties:
+      date:
+        description: The date to which the record belongs.
+        readOnly: true
+        type: string
+      entity:
+        description: Information about the type of the item.
+        properties:
+          customerId:
+            description: Obfuscated customer id for the record.
+            readOnly: true
+            type: string
+          profileId:
+            description: Obfuscated user id for the record.
+            readOnly: true
+            type: string
+          type:
+            description: 'The type of item, can be a customer or user.'
+            readOnly: true
+            type: string
+          userEmail:
+            description: "user's email."
+            readOnly: true
+            type: string
+        readOnly: true
+        type: object
+      etag:
+        description: ETag of the resource.
+        type: string
+      kind:
+        default: 'admin#reports#usageReport'
+        description: The kind of object.
+        type: string
+      parameters:
+        description: Parameter value pairs for various applications.
+        items:
+          properties:
+            boolValue:
+              description: Boolean value of the parameter.
+              readOnly: true
+              type: boolean
+            datetimeValue:
+              description: RFC 3339 formatted value of the parameter.
+              format: date-time
+              readOnly: true
+              type: string
+            intValue:
+              description: Integral value of the parameter.
+              format: int64
+              readOnly: true
+              type: string
+            msgValue:
+              description: Nested message value of the parameter.
+              items:
+                additionalProperties: {}
+                type: object
+              readOnly: true
+              type: array
+            name:
+              description: The name of the parameter.
+              type: string
+            stringValue:
+              description: String value of the parameter.
+              readOnly: true
+              type: string
+          type: object
+        readOnly: true
+        type: array
+    type: object
+  UsageReports:
+    description: JSON template for a collection of usage reports.
+    properties:
+      etag:
+        description: ETag of the resource.
+        type: string
+      kind:
+        default: 'admin#reports#usageReports'
+        description: The kind of object.
+        type: string
+      nextPageToken:
+        description: Token for retrieving the next page
+        type: string
+      usageReports:
+        description: Various application parameter records.
+        items:
+          $ref: '#/definitions/UsageReport'
+        type: array
+      warnings:
+        description: Warnings if any.
+        items:
+          properties:
+            code:
+              description: Machine readable code / warning type.
+              type: string
+            data:
+              description: Key-Value pairs to give detailed information on the warning.
+              items:
+                properties:
+                  key:
+                    description: Key associated with a key-value pair to give detailed information on the warning.
+                    type: string
+                  value:
+                    description: Value associated with a key-value pair to give detailed information on the warning.
+                    type: string
+                type: object
+              type: array
+            message:
+              description: Human readable message for the warning.
+              type: string
+          type: object
+        type: array
+    type: object

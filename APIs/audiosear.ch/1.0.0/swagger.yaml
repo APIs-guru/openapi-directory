@@ -1,6 +1,416 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.audiosear.ch
 basePath: /api
+info:
+  contact:
+    email: info@audiosear.ch
+    name: Audiosear.ch
+  description: "The Audiosear.ch API requires OAuth, which you can manage at <a href='/oauth/applications'>OAuth Applications</a>.<br/>API SDK clients available in <a href='https://github.com/popuparchive/audiosearch-client-python' target='_blank'>Python</a>, <a href='https://github.com/popuparchive/audiosearch-client-ruby' target='_blank'>Ruby</a>, <a href='https://github.com/popuparchive/audiosearch-client-php' target='_blank'>PHP</a>, and <a href='https://github.com/popuparchive/audiosearch-client-node' target='_blank'>Node</a>.<br/>Read the <a href='https://github.com/popuparchive/audiosearch-cookbook/wiki'>API Cookbook</a> for easy copy-and-paste recipes."
+  termsOfService: 'https://www.auidosear.ch/terms_of_use'
+  title: Audiosear.ch API
+  version: 1.0.0
+  x-origin:
+    format: swagger
+    url: 'https://www.audiosear.ch/developer/api-docs/v1/api-docs.json'
+    version: '2.0'
+  x-providerName: audiosear.ch
 consumes:
   - application/json
+produces:
+  - application/json
+tags:
+  - description: Podcast series
+    name: shows
+  - description: Podcast episodes
+    name: episodes
+  - description: Search podcast episodes
+    name: episode search
+  - description: Search podcast series
+    name: show search
+  - description: Search people who contributed to a podcast
+    name: people search
+  - description: People who contributed to a podcast
+    name: people
+paths:
+  '/episodes/{id}':
+    get:
+      description: Gets a single episode record by ID
+      parameters:
+        - description: ID of episode to fetch
+          format: integer
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Returns an individual episode
+          schema:
+            $ref: '#/definitions/episode'
+      tags:
+        - episodes
+  '/episodes/{id}/related':
+    get:
+      description: Returns episodes related to a given episode
+      parameters:
+        - description: ID of episode for which to get related episodes
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: 'Number of episodes to be returned. Must be paired with <b>from</b>.'
+          format: int64
+          in: query
+          name: size
+          required: false
+          type: integer
+        - description: 'Offset of result from which to start (zero-based). Must be paired with <b>size</b>.'
+          format: int64
+          in: query
+          name: from
+          required: false
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: An array of episodes
+          schema:
+            $ref: '#/definitions/related_result'
+      tags:
+        - episodes
+  '/episodes/{id}/snippet/{time_in_secs}':
+    get:
+      description: Returns a specific moment from an episode with two lines of context.
+      parameters:
+        - description: ID of episode for which to get related episodes
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Timestamp of moment in audio in seconds.
+          format: int64
+          in: path
+          name: time_in_secs
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: An array of episodes
+          schema:
+            $ref: '#/definitions/snippet'
+      tags:
+        - episodes
+  '/people/{id}':
+    get:
+      description: This endpoint will return the metadata for a single person.
+      parameters:
+        - description: ID of person to fetch
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: person id response
+          schema:
+            $ref: '#/definitions/person'
+      tags:
+        - people
+  '/search/episodes/{query}':
+    get:
+      description: Returns search results
+      parameters:
+        - description: Thing you would like to search for
+          in: path
+          name: query
+          required: true
+          type: string
+        - description: 'Limit a search by any field value. This example uses <b>network</b> but any field name could be used. E.g. <b>filters[physical_location]=popuparchive</b> or <b>filters[network]=NPR</b> or <b>filters[categories.name]=Talk%20Show</b>. Use <b>filters[with_transcript]</b> to filter out episodes with no transcript.'
+          in: query
+          name: 'filters[network]'
+          required: false
+          type: string
+        - description: 'Sort results by any field value. The default is by the relevancy score (<b>_score</b>). Must be paired with <b>sort_order</b>.'
+          in: query
+          name: sort_by
+          required: false
+          type: string
+        - description: 'Sort direction. Must be either <b>asc</b> or <b>desc</b>. Must be paired with <b>sort_by</b>.'
+          in: query
+          name: sort_order
+          required: false
+          type: string
+        - description: 'Shortcut for specifying sort_by and sort_order in a single value. E.g. <b>date_created desc</b>.'
+          in: query
+          name: s
+          required: false
+          type: string
+        - description: 'The number of results in a single page. Default is <b>10</b>. If present, must be paired with <b>from</b>.'
+          in: query
+          name: size
+          required: false
+          type: string
+        - description: 'Offset when doing manual pagination. Must be paired with <b>size</b>.'
+          in: query
+          name: from
+          required: false
+          type: string
+        - description: 'The page number of results. Default is <b>1</b>.'
+          in: query
+          name: page
+          required: false
+          type: string
+        - description: Set to positive integer to include an array of N related episodes for each search result
+          in: query
+          name: related
+          required: false
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Returns search results
+          schema:
+            $ref: '#/definitions/results'
+      tags:
+        - episodes
+        - episode search
+  '/search/people/{query}':
+    get:
+      description: This endpoint returns search results for People
+      parameters:
+        - description: Thing you would like to search for
+          in: path
+          name: query
+          required: true
+          type: string
+        - description: 'Limit a search by any field value. This example uses <b>shows.id</b> but any field name could be used. E.g. <b>filters[shows.id]=123</b> or <b>filters[episode.id]=456</b>.'
+          in: query
+          name: 'filters[shows.id]'
+          required: false
+          type: string
+        - description: 'Sort results by any field value. The default is by the relevancy score (<b>_score</b>). Must be paired with <b>sort_order</b>.'
+          in: query
+          name: sort_by
+          required: false
+          type: string
+        - description: 'Sort direction. Must be either <b>asc</b> or <b>desc</b>. Must be paired with <b>sort_by</b>.'
+          in: query
+          name: sort_order
+          required: false
+          type: string
+        - description: 'Shortcut for specifying sort_by and sort_order in a single value. E.g. <b>name desc</b>.'
+          in: query
+          name: s
+          required: false
+          type: string
+        - description: 'The number of results in a single page. Default is <b>10</b>. If present, must be paired with <b>from</b>.'
+          in: query
+          name: size
+          required: false
+          type: string
+        - description: 'Offset when doing manual pagination. Must be paired with <b>size</b>.'
+          in: query
+          name: from
+          required: false
+          type: string
+        - description: 'The page number of results. Default is <b>1</b>.'
+          in: query
+          name: page
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Returns search results
+          schema:
+            $ref: '#/definitions/person_search_results'
+      tags:
+        - people
+        - people search
+  '/search/shows/{query}':
+    get:
+      description: This endpoint returns search results for Shows
+      parameters:
+        - description: Thing you would like to search for
+          in: path
+          name: query
+          required: true
+          type: string
+        - description: 'Limit a search by any field value. This example uses <b>network</b> but any field name could be used. E.g. <b>filters[network]=NPR</b> or <b>filters[categories.name]=Talk%20Show</b>.'
+          in: query
+          name: 'filters[network]'
+          required: false
+          type: string
+        - description: 'Sort results by any field value. The default is by the relevancy score (<b>_score</b>). Must be paired with <b>sort_order</b>.'
+          in: query
+          name: sort_by
+          required: false
+          type: string
+        - description: 'Sort direction. Must be either <b>asc</b> or <b>desc</b>. Must be paired with <b>sort_by</b>.'
+          in: query
+          name: sort_order
+          required: false
+          type: string
+        - description: 'Shortcut for specifying sort_by and sort_order in a single value. E.g. <b>date_created desc</b>.'
+          in: query
+          name: s
+          required: false
+          type: string
+        - description: 'The number of results in a single page. Default is <b>10</b>. If present, must be paired with <b>from</b>.'
+          in: query
+          name: size
+          required: false
+          type: string
+        - description: 'Offset when doing manual pagination. Must be paired with <b>size</b>.'
+          in: query
+          name: from
+          required: false
+          type: string
+        - description: 'The page number of results. Default is <b>1</b>.'
+          in: query
+          name: page
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Returns search results
+          schema:
+            $ref: '#/definitions/show_results'
+      tags:
+        - shows
+        - show search
+  '/shows/{id}':
+    get:
+      description: This endpoint will return the medatdata for a single show.
+      parameters:
+        - description: ID of show to fetch
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: show id response
+          schema:
+            $ref: '#/definitions/shows'
+      tags:
+        - shows
+  '/shows/{id}/related':
+    get:
+      description: Returns shows related to the supplied show.
+      parameters:
+        - description: ID of show to fetch
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: related show response
+          schema:
+            $ref: '#/definitions/show_search_result'
+      tags:
+        - shows
+  '/tastemakers/episodes/source/{tastemaker_id}/{n}':
+    get:
+      description: Returns search results based on what podcast tastemakers are talking about filtered by tastemaker source.
+      parameters:
+        - description: Recommendation source
+          format: int64
+          in: path
+          name: tastemaker_id
+          required: true
+          type: integer
+        - default: 10
+          description: Number of results to fetch
+          format: int64
+          in: path
+          name: 'n'
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: tastemakers episodes response
+          schema:
+            $ref: '#/definitions/episode_tastemaker'
+      tags:
+        - episodes
+  '/tastemakers/episodes/{n}':
+    get:
+      description: Returns search results based on what podcast tastemakers are talking about.
+      parameters:
+        - default: 10
+          description: Number of results to fetch
+          format: int64
+          in: path
+          name: 'n'
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: tastemakers episodes response
+          schema:
+            $ref: '#/definitions/episode_tastemaker'
+      tags:
+        - episodes
+  '/tastemakers/shows/{n}':
+    get:
+      description: This endpoint returns search results based on what tastemakers are talking about.
+      parameters:
+        - default: 10
+          description: Number of results to fetch
+          format: int64
+          in: path
+          name: 'n'
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: tastemakers shows response
+          schema:
+            $ref: '#/definitions/shows'
+      tags:
+        - shows
+  /trending:
+    get:
+      description: Returns episodes related to trending terms from Twitter
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A list of episodes
+          schema:
+            $ref: '#/definitions/trending'
+      tags:
+        - episodes
 definitions:
   all_shows:
     properties:
@@ -824,413 +1234,3 @@ definitions:
       ui:
         description: Audiosear.ch URL
         type: string
-host: www.audiosear.ch
-info:
-  contact:
-    email: info@audiosear.ch
-    name: Audiosear.ch
-  description: "The Audiosear.ch API requires OAuth, which you can manage at <a href='/oauth/applications'>OAuth Applications</a>.<br/>API SDK clients available in <a href='https://github.com/popuparchive/audiosearch-client-python' target='_blank'>Python</a>, <a href='https://github.com/popuparchive/audiosearch-client-ruby' target='_blank'>Ruby</a>, <a href='https://github.com/popuparchive/audiosearch-client-php' target='_blank'>PHP</a>, and <a href='https://github.com/popuparchive/audiosearch-client-node' target='_blank'>Node</a>.<br/>Read the <a href='https://github.com/popuparchive/audiosearch-cookbook/wiki'>API Cookbook</a> for easy copy-and-paste recipes."
-  termsOfService: 'https://www.auidosear.ch/terms_of_use'
-  title: Audiosear.ch API
-  version: 1.0.0
-  x-origin:
-    format: swagger
-    url: 'https://www.audiosear.ch/developer/api-docs/v1/api-docs.json'
-    version: '2.0'
-  x-providerName: audiosear.ch
-paths:
-  '/episodes/{id}':
-    get:
-      description: Gets a single episode record by ID
-      parameters:
-        - description: ID of episode to fetch
-          format: integer
-          in: path
-          name: id
-          required: true
-          type: integer
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Returns an individual episode
-          schema:
-            $ref: '#/definitions/episode'
-      tags:
-        - episodes
-  '/episodes/{id}/related':
-    get:
-      description: Returns episodes related to a given episode
-      parameters:
-        - description: ID of episode for which to get related episodes
-          format: int64
-          in: path
-          name: id
-          required: true
-          type: integer
-        - description: 'Number of episodes to be returned. Must be paired with <b>from</b>.'
-          format: int64
-          in: query
-          name: size
-          required: false
-          type: integer
-        - description: 'Offset of result from which to start (zero-based). Must be paired with <b>size</b>.'
-          format: int64
-          in: query
-          name: from
-          required: false
-          type: integer
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: An array of episodes
-          schema:
-            $ref: '#/definitions/related_result'
-      tags:
-        - episodes
-  '/episodes/{id}/snippet/{time_in_secs}':
-    get:
-      description: Returns a specific moment from an episode with two lines of context.
-      parameters:
-        - description: ID of episode for which to get related episodes
-          format: int64
-          in: path
-          name: id
-          required: true
-          type: integer
-        - description: Timestamp of moment in audio in seconds.
-          format: int64
-          in: path
-          name: time_in_secs
-          required: true
-          type: integer
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: An array of episodes
-          schema:
-            $ref: '#/definitions/snippet'
-      tags:
-        - episodes
-  '/people/{id}':
-    get:
-      description: This endpoint will return the metadata for a single person.
-      parameters:
-        - description: ID of person to fetch
-          format: int64
-          in: path
-          name: id
-          required: true
-          type: integer
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: person id response
-          schema:
-            $ref: '#/definitions/person'
-      tags:
-        - people
-  '/search/episodes/{query}':
-    get:
-      description: Returns search results
-      parameters:
-        - description: Thing you would like to search for
-          in: path
-          name: query
-          required: true
-          type: string
-        - description: 'Limit a search by any field value. This example uses <b>network</b> but any field name could be used. E.g. <b>filters[physical_location]=popuparchive</b> or <b>filters[network]=NPR</b> or <b>filters[categories.name]=Talk%20Show</b>. Use <b>filters[with_transcript]</b> to filter out episodes with no transcript.'
-          in: query
-          name: 'filters[network]'
-          required: false
-          type: string
-        - description: 'Sort results by any field value. The default is by the relevancy score (<b>_score</b>). Must be paired with <b>sort_order</b>.'
-          in: query
-          name: sort_by
-          required: false
-          type: string
-        - description: 'Sort direction. Must be either <b>asc</b> or <b>desc</b>. Must be paired with <b>sort_by</b>.'
-          in: query
-          name: sort_order
-          required: false
-          type: string
-        - description: 'Shortcut for specifying sort_by and sort_order in a single value. E.g. <b>date_created desc</b>.'
-          in: query
-          name: s
-          required: false
-          type: string
-        - description: 'The number of results in a single page. Default is <b>10</b>. If present, must be paired with <b>from</b>.'
-          in: query
-          name: size
-          required: false
-          type: string
-        - description: 'Offset when doing manual pagination. Must be paired with <b>size</b>.'
-          in: query
-          name: from
-          required: false
-          type: string
-        - description: 'The page number of results. Default is <b>1</b>.'
-          in: query
-          name: page
-          required: false
-          type: string
-        - description: Set to positive integer to include an array of N related episodes for each search result
-          in: query
-          name: related
-          required: false
-          type: integer
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Returns search results
-          schema:
-            $ref: '#/definitions/results'
-      tags:
-        - episodes
-        - episode search
-  '/search/people/{query}':
-    get:
-      description: This endpoint returns search results for People
-      parameters:
-        - description: Thing you would like to search for
-          in: path
-          name: query
-          required: true
-          type: string
-        - description: 'Limit a search by any field value. This example uses <b>shows.id</b> but any field name could be used. E.g. <b>filters[shows.id]=123</b> or <b>filters[episode.id]=456</b>.'
-          in: query
-          name: 'filters[shows.id]'
-          required: false
-          type: string
-        - description: 'Sort results by any field value. The default is by the relevancy score (<b>_score</b>). Must be paired with <b>sort_order</b>.'
-          in: query
-          name: sort_by
-          required: false
-          type: string
-        - description: 'Sort direction. Must be either <b>asc</b> or <b>desc</b>. Must be paired with <b>sort_by</b>.'
-          in: query
-          name: sort_order
-          required: false
-          type: string
-        - description: 'Shortcut for specifying sort_by and sort_order in a single value. E.g. <b>name desc</b>.'
-          in: query
-          name: s
-          required: false
-          type: string
-        - description: 'The number of results in a single page. Default is <b>10</b>. If present, must be paired with <b>from</b>.'
-          in: query
-          name: size
-          required: false
-          type: string
-        - description: 'Offset when doing manual pagination. Must be paired with <b>size</b>.'
-          in: query
-          name: from
-          required: false
-          type: string
-        - description: 'The page number of results. Default is <b>1</b>.'
-          in: query
-          name: page
-          required: false
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Returns search results
-          schema:
-            $ref: '#/definitions/person_search_results'
-      tags:
-        - people
-        - people search
-  '/search/shows/{query}':
-    get:
-      description: This endpoint returns search results for Shows
-      parameters:
-        - description: Thing you would like to search for
-          in: path
-          name: query
-          required: true
-          type: string
-        - description: 'Limit a search by any field value. This example uses <b>network</b> but any field name could be used. E.g. <b>filters[network]=NPR</b> or <b>filters[categories.name]=Talk%20Show</b>.'
-          in: query
-          name: 'filters[network]'
-          required: false
-          type: string
-        - description: 'Sort results by any field value. The default is by the relevancy score (<b>_score</b>). Must be paired with <b>sort_order</b>.'
-          in: query
-          name: sort_by
-          required: false
-          type: string
-        - description: 'Sort direction. Must be either <b>asc</b> or <b>desc</b>. Must be paired with <b>sort_by</b>.'
-          in: query
-          name: sort_order
-          required: false
-          type: string
-        - description: 'Shortcut for specifying sort_by and sort_order in a single value. E.g. <b>date_created desc</b>.'
-          in: query
-          name: s
-          required: false
-          type: string
-        - description: 'The number of results in a single page. Default is <b>10</b>. If present, must be paired with <b>from</b>.'
-          in: query
-          name: size
-          required: false
-          type: string
-        - description: 'Offset when doing manual pagination. Must be paired with <b>size</b>.'
-          in: query
-          name: from
-          required: false
-          type: string
-        - description: 'The page number of results. Default is <b>1</b>.'
-          in: query
-          name: page
-          required: false
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Returns search results
-          schema:
-            $ref: '#/definitions/show_results'
-      tags:
-        - shows
-        - show search
-  '/shows/{id}':
-    get:
-      description: This endpoint will return the medatdata for a single show.
-      parameters:
-        - description: ID of show to fetch
-          format: int64
-          in: path
-          name: id
-          required: true
-          type: integer
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: show id response
-          schema:
-            $ref: '#/definitions/shows'
-      tags:
-        - shows
-  '/shows/{id}/related':
-    get:
-      description: Returns shows related to the supplied show.
-      parameters:
-        - description: ID of show to fetch
-          format: int64
-          in: path
-          name: id
-          required: true
-          type: integer
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: related show response
-          schema:
-            $ref: '#/definitions/show_search_result'
-      tags:
-        - shows
-  '/tastemakers/episodes/source/{tastemaker_id}/{n}':
-    get:
-      description: Returns search results based on what podcast tastemakers are talking about filtered by tastemaker source.
-      parameters:
-        - description: Recommendation source
-          format: int64
-          in: path
-          name: tastemaker_id
-          required: true
-          type: integer
-        - default: 10
-          description: Number of results to fetch
-          format: int64
-          in: path
-          name: 'n'
-          required: true
-          type: integer
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: tastemakers episodes response
-          schema:
-            $ref: '#/definitions/episode_tastemaker'
-      tags:
-        - episodes
-  '/tastemakers/episodes/{n}':
-    get:
-      description: Returns search results based on what podcast tastemakers are talking about.
-      parameters:
-        - default: 10
-          description: Number of results to fetch
-          format: int64
-          in: path
-          name: 'n'
-          required: true
-          type: integer
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: tastemakers episodes response
-          schema:
-            $ref: '#/definitions/episode_tastemaker'
-      tags:
-        - episodes
-  '/tastemakers/shows/{n}':
-    get:
-      description: This endpoint returns search results based on what tastemakers are talking about.
-      parameters:
-        - default: 10
-          description: Number of results to fetch
-          format: int64
-          in: path
-          name: 'n'
-          required: true
-          type: integer
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: tastemakers shows response
-          schema:
-            $ref: '#/definitions/shows'
-      tags:
-        - shows
-  /trending:
-    get:
-      description: Returns episodes related to trending terms from Twitter
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: A list of episodes
-          schema:
-            $ref: '#/definitions/trending'
-      tags:
-        - episodes
-produces:
-  - application/json
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - description: Podcast series
-    name: shows
-  - description: Podcast episodes
-    name: episodes
-  - description: Search podcast episodes
-    name: episode search
-  - description: Search podcast series
-    name: show search
-  - description: Search people who contributed to a podcast
-    name: people search
-  - description: People who contributed to a podcast
-    name: people

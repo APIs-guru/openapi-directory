@@ -1,184 +1,8 @@
-basePath: /
-definitions:
-  Article:
-    properties:
-      id:
-        description: Id of the item
-        type: number
-    required:
-      - id
-  ArticleDownload:
-    properties:
-      articleId:
-        type: number
-    required:
-      - articleId
-  ArticleReport:
-    properties:
-      date:
-        description: 'Date when the event was happen (Use the format "yyyy-MM-ddTHH:mm:ss.SSSZ"'
-        type: string
-      maxUsageDuration:
-        description: Maximal onblock duration in seconds (for usage-Event)
-        type: number
-      offline:
-        default: false
-        description: Information if the Track was listend offline (for usage-event) (Default false)
-        type: boolean
-      realm:
-        default: app
-        description: Realm/Client of the event (Default app)
-        enum:
-          - app
-          - web
-        type: string
-      source:
-        description: 'Key of the playlist, where this event occurs - Special: MyTracks for personal Playlist'
-        type: string
-      trigger:
-        default: playlist
-        description: 'Did the user trigger the play of this item (Play, Skip) (for usage-Event) (Default playlist)'
-        enum:
-          - user
-          - playlist
-        type: string
-      type:
-        description: 'Type of the status event (downloaded, removed, listened)'
-        enum:
-          - downloaded
-          - removed
-          - listened
-        type: string
-      usageDuration:
-        description: Total duration in seconds (for usage-Event)
-        type: number
-    required:
-      - type
-      - date
-  ArticleStreaming:
-    properties:
-      articleId:
-        type: number
-      preview:
-        type: boolean
-    required:
-      - articleId
-  Articles:
-    properties:
-      ids:
-        description: Ids of the items
-        items:
-          type: number
-        type: array
-    required:
-      - ids
-  Binary:
-    properties:
-      encryption:
-        description: used encryption for this song
-        type: string
-      preview:
-        type: boolean
-      ticket:
-        type: string
-      url:
-        type: string
-  Config:
-    properties:
-      client_template_key:
-        description: Corresponding Client Template Key
-        type: string
-      config_key:
-        type: string
-      lifecycleAPI:
-        description: Endpoint for the Lifecycle Service
-        type: string
-      pages:
-        items: {}
-        type: array
-  CreatedEntityResponse:
-    properties:
-      id:
-        type: string
-  DownloadResponse:
-    properties:
-      articleId:
-        type: number
-    required:
-      - articleId
-  PersonalPlaylistIds:
-    properties:
-      items:
-        items:
-          $ref: '#/definitions/Article'
-        type: array
-  PlaylistModel:
-    properties:
-      coverUrl:
-        type: string
-      entities:
-        items:
-          $ref: '#/definitions/playlistEntity'
-        type: array
-      playlistDescription:
-        type: string
-      playlistKey:
-        type: string
-      playlistName:
-        type: string
-    required:
-      - playlistKey
-      - playlistName
-  StreamingLink:
-    properties:
-      preview:
-        type: boolean
-      ticket:
-        type: string
-      url:
-        type: string
-  StreamingResponse:
-    properties:
-      articleId:
-        type: number
-      preview:
-        type: boolean
-    required:
-      - articleId
-  'null':
-    properties:
-      content: {}
-      key:
-        type: string
-      pageType:
-        type: string
-      titles: {}
-    required:
-      - key
-      - pageType
-  playlist:
-    properties:
-      coverUrl:
-        type: string
-      entities:
-        items:
-          $ref: '#/definitions/playlistEntity'
-        type: array
-      playlistDescription:
-        type: string
-      playlistKey:
-        type: string
-      playlistName:
-        type: string
-    required:
-      - playlistKey
-      - playlistName
-  playlistEntity:
-    properties:
-      song: {}
-      type:
-        type: string
+swagger: '2.0'
+schemes:
+  - https
 host: queen.mondiamedia.com
+basePath: /
 info:
   contact:
     email: Research.and.Development.Music@mondiamedia.com
@@ -192,6 +16,11 @@ info:
     url: 'https://queen.mondiamedia.com/swagger'
     version: '1.2'
   x-providerName: mondiamedia.com
+tags:
+  - description: MMPlaylist Application
+    name: mmplaylist
+  - description: MMPlaylist Application - Next Generation
+    name: api
 paths:
   /api/v3/mmplaylist/article/download:
     post:
@@ -790,11 +619,182 @@ paths:
           description: No response was specified
       tags:
         - mmplaylist
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - description: MMPlaylist Application
-    name: mmplaylist
-  - description: MMPlaylist Application - Next Generation
-    name: api
+definitions:
+  Article:
+    properties:
+      id:
+        description: Id of the item
+        type: number
+    required:
+      - id
+  ArticleDownload:
+    properties:
+      articleId:
+        type: number
+    required:
+      - articleId
+  ArticleReport:
+    properties:
+      date:
+        description: 'Date when the event was happen (Use the format "yyyy-MM-ddTHH:mm:ss.SSSZ"'
+        type: string
+      maxUsageDuration:
+        description: Maximal onblock duration in seconds (for usage-Event)
+        type: number
+      offline:
+        default: false
+        description: Information if the Track was listend offline (for usage-event) (Default false)
+        type: boolean
+      realm:
+        default: app
+        description: Realm/Client of the event (Default app)
+        enum:
+          - app
+          - web
+        type: string
+      source:
+        description: 'Key of the playlist, where this event occurs - Special: MyTracks for personal Playlist'
+        type: string
+      trigger:
+        default: playlist
+        description: 'Did the user trigger the play of this item (Play, Skip) (for usage-Event) (Default playlist)'
+        enum:
+          - user
+          - playlist
+        type: string
+      type:
+        description: 'Type of the status event (downloaded, removed, listened)'
+        enum:
+          - downloaded
+          - removed
+          - listened
+        type: string
+      usageDuration:
+        description: Total duration in seconds (for usage-Event)
+        type: number
+    required:
+      - type
+      - date
+  ArticleStreaming:
+    properties:
+      articleId:
+        type: number
+      preview:
+        type: boolean
+    required:
+      - articleId
+  Articles:
+    properties:
+      ids:
+        description: Ids of the items
+        items:
+          type: number
+        type: array
+    required:
+      - ids
+  Binary:
+    properties:
+      encryption:
+        description: used encryption for this song
+        type: string
+      preview:
+        type: boolean
+      ticket:
+        type: string
+      url:
+        type: string
+  Config:
+    properties:
+      client_template_key:
+        description: Corresponding Client Template Key
+        type: string
+      config_key:
+        type: string
+      lifecycleAPI:
+        description: Endpoint for the Lifecycle Service
+        type: string
+      pages:
+        items: {}
+        type: array
+  CreatedEntityResponse:
+    properties:
+      id:
+        type: string
+  DownloadResponse:
+    properties:
+      articleId:
+        type: number
+    required:
+      - articleId
+  PersonalPlaylistIds:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/Article'
+        type: array
+  PlaylistModel:
+    properties:
+      coverUrl:
+        type: string
+      entities:
+        items:
+          $ref: '#/definitions/playlistEntity'
+        type: array
+      playlistDescription:
+        type: string
+      playlistKey:
+        type: string
+      playlistName:
+        type: string
+    required:
+      - playlistKey
+      - playlistName
+  StreamingLink:
+    properties:
+      preview:
+        type: boolean
+      ticket:
+        type: string
+      url:
+        type: string
+  StreamingResponse:
+    properties:
+      articleId:
+        type: number
+      preview:
+        type: boolean
+    required:
+      - articleId
+  'null':
+    properties:
+      content: {}
+      key:
+        type: string
+      pageType:
+        type: string
+      titles: {}
+    required:
+      - key
+      - pageType
+  playlist:
+    properties:
+      coverUrl:
+        type: string
+      entities:
+        items:
+          $ref: '#/definitions/playlistEntity'
+        type: array
+      playlistDescription:
+        type: string
+      playlistKey:
+        type: string
+      playlistName:
+        type: string
+    required:
+      - playlistKey
+      - playlistName
+  playlistEntity:
+    properties:
+      song: {}
+      type:
+        type: string

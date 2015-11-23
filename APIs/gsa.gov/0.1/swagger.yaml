@@ -1,5 +1,8 @@
-basePath: /
+swagger: '2.0'
+schemes:
+  - https
 host: discovery.gsa.gov
+basePath: /
 info:
   contact:
     email: discovery-18f@gsa.gov
@@ -19,6 +22,12 @@ info:
     url: 'https://discovery.gsa.gov/docs/api-docs/'
     version: '1.2'
   x-providerName: gsa.gov
+tags:
+  - name: contracts
+  - name: metadata
+  - name: naics
+  - name: vendor
+  - name: vendors
 paths:
   /api/contracts/:
     get:
@@ -140,12 +149,3 @@ paths:
       summary: This endpoint returns a list of vendors filtered by a NAICS code
       tags:
         - vendors
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - name: contracts
-  - name: metadata
-  - name: naics
-  - name: vendor
-  - name: vendors

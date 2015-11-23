@@ -1,5 +1,8 @@
-basePath: /
+swagger: '2.0'
+schemes:
+  - http
 host: api.citysdk.waag.org
+basePath: /
 info:
   description: 'An API for the distribution and annotation of open data, for small cities and big metropolitan areas.'
   title: CitySDK Linked Data
@@ -11,6 +14,17 @@ info:
     url: 'http://api.citysdk.waag.org/swagger'
     version: '1.2'
   x-providerName: waag.org
+tags:
+  - description: Operations about layers
+    name: layers
+  - description: Operations about objects
+    name: objects
+  - description: Operations about owners
+    name: owners
+  - description: Operations about sessions
+    name: session
+  - description: Operations about ngsi10s
+    name: ngsi10
 paths:
   /layers:
     get:
@@ -789,17 +803,3 @@ paths:
       summary: Return a session key
       tags:
         - session
-schemes:
-  - http
-swagger: '2.0'
-tags:
-  - description: Operations about layers
-    name: layers
-  - description: Operations about objects
-    name: objects
-  - description: Operations about owners
-    name: owners
-  - description: Operations about sessions
-    name: session
-  - description: Operations about ngsi10s
-    name: ngsi10

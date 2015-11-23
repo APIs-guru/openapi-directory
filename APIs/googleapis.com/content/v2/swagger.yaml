@@ -1,4 +1,1941 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.googleapis.com
 basePath: /content/v2
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: 'Manage product items, inventory, and Merchant Center accounts for Google Shopping.'
+  title: Content API for Shopping
+  version: v2
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://cloud.google.com/_static/images/new-gcp-logo.png'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/content/v2/rest'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: content
+externalDocs:
+  url: 'https://developers.google.com/shopping-content'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/content': Manage your product listings and accounts for Google Shopping
+    type: oauth2
+parameters:
+  alt:
+    default: json
+    description: Data format for the response.
+    enum:
+      - json
+    in: query
+    name: alt
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    in: query
+    name: quotaUser
+    type: string
+  userIp:
+    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    in: query
+    name: userIp
+    type: string
+paths:
+  /accounts/authinfo:
+    get:
+      description: Returns information about the authenticated user.
+      operationId: content.accounts.authinfo
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AccountsAuthInfoResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /accounts/batch:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Retrieves, inserts, updates, and deletes multiple Merchant Center (sub-)accounts in a single request.'
+      operationId: content.accounts.custombatch
+      parameters:
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AccountsCustomBatchRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AccountsCustomBatchResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - accounts
+  /accountshipping/batch:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Retrieves and updates the shipping settings of multiple accounts in a single request.
+      operationId: content.accountshipping.custombatch
+      parameters:
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AccountshippingCustomBatchRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AccountshippingCustomBatchResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - accountshipping
+  /accountstatuses/batch:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      operationId: content.accountstatuses.custombatch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AccountstatusesCustomBatchRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AccountstatusesCustomBatchResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - accountstatuses
+  /accounttax/batch:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Retrieves and updates tax settings of multiple accounts in a single request.
+      operationId: content.accounttax.custombatch
+      parameters:
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AccounttaxCustomBatchRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AccounttaxCustomBatchResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - accounttax
+  /datafeeds/batch:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      operationId: content.datafeeds.custombatch
+      parameters:
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DatafeedsCustomBatchRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DatafeedsCustomBatchResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - datafeeds
+  /datafeedstatuses/batch:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      operationId: content.datafeedstatuses.custombatch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DatafeedstatusesCustomBatchRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DatafeedstatusesCustomBatchResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - datafeedstatuses
+  /inventory/batch:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Updates price and availability for multiple products or stores in a single request. This operation does not update the expiration date of the products.
+      operationId: content.inventory.custombatch
+      parameters:
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InventoryCustomBatchRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/InventoryCustomBatchResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - inventory
+  /orders/batch:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Retrieves or modifies multiple orders in a single request.
+      operationId: content.orders.custombatch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersCustomBatchRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersCustomBatchResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  /products/batch:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Retrieves, inserts, and deletes multiple products in a single request.'
+      operationId: content.products.custombatch
+      parameters:
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ProductsCustomBatchRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ProductsCustomBatchResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - products
+  /productstatuses/batch:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Gets the statuses of multiple products in a single request.
+      operationId: content.productstatuses.custombatch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ProductstatusesCustomBatchRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ProductstatusesCustomBatchResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - productstatuses
+  '/{merchantId}/accounts':
+    get:
+      description: Lists the sub-accounts in your Merchant Center account.
+      operationId: content.accounts.list
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: 'The maximum number of accounts to return in the response, used for paging.'
+          in: query
+          name: maxResults
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AccountsListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a Merchant Center sub-account.
+      operationId: content.accounts.insert
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Account'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Account'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - accounts
+  '/{merchantId}/accounts/{accountId}':
+    delete:
+      description: Deletes a Merchant Center sub-account.
+      operationId: content.accounts.delete
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the account.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - accounts
+    get:
+      description: Retrieves a Merchant Center account.
+      operationId: content.accounts.get
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the account.
+          in: path
+          name: accountId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Account'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates a Merchant Center account. This method supports patch semantics.
+      operationId: content.accounts.patch
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the account.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Account'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Account'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - accounts
+    put:
+      description: Updates a Merchant Center account.
+      operationId: content.accounts.update
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the account.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Account'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Account'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - accounts
+  '/{merchantId}/accountshipping':
+    get:
+      description: Lists the shipping settings of the sub-accounts in your Merchant Center account.
+      operationId: content.accountshipping.list
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: 'The maximum number of shipping settings to return in the response, used for paging.'
+          in: query
+          name: maxResults
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AccountshippingListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - accountshipping
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{merchantId}/accountshipping/{accountId}':
+    get:
+      description: Retrieves the shipping settings of the account.
+      operationId: content.accountshipping.get
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the account for which to get/update account shipping settings.
+          in: path
+          name: accountId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AccountShipping'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - accountshipping
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates the shipping settings of the account. This method supports patch semantics.
+      operationId: content.accountshipping.patch
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the account for which to get/update account shipping settings.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AccountShipping'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AccountShipping'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - accountshipping
+    put:
+      description: Updates the shipping settings of the account.
+      operationId: content.accountshipping.update
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the account for which to get/update account shipping settings.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AccountShipping'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AccountShipping'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - accountshipping
+  '/{merchantId}/accountstatuses':
+    get:
+      description: Lists the statuses of the sub-accounts in your Merchant Center account.
+      operationId: content.accountstatuses.list
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: 'The maximum number of account statuses to return in the response, used for paging.'
+          in: query
+          name: maxResults
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AccountstatusesListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - accountstatuses
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{merchantId}/accountstatuses/{accountId}':
+    get:
+      description: Retrieves the status of a Merchant Center account.
+      operationId: content.accountstatuses.get
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the account.
+          in: path
+          name: accountId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AccountStatus'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - accountstatuses
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{merchantId}/accounttax':
+    get:
+      description: Lists the tax settings of the sub-accounts in your Merchant Center account.
+      operationId: content.accounttax.list
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: 'The maximum number of tax settings to return in the response, used for paging.'
+          in: query
+          name: maxResults
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AccounttaxListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - accounttax
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{merchantId}/accounttax/{accountId}':
+    get:
+      description: Retrieves the tax settings of the account.
+      operationId: content.accounttax.get
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the account for which to get/update account tax settings.
+          in: path
+          name: accountId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AccountTax'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - accounttax
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates the tax settings of the account. This method supports patch semantics.
+      operationId: content.accounttax.patch
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the account for which to get/update account tax settings.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AccountTax'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AccountTax'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - accounttax
+    put:
+      description: Updates the tax settings of the account.
+      operationId: content.accounttax.update
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the account for which to get/update account tax settings.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AccountTax'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AccountTax'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - accounttax
+  '/{merchantId}/datafeeds':
+    get:
+      description: Lists the datafeeds in your Merchant Center account.
+      operationId: content.datafeeds.list
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: 'The maximum number of products to return in the response, used for paging.'
+          in: query
+          name: maxResults
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DatafeedsListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - datafeeds
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Registers a datafeed with your Merchant Center account.
+      operationId: content.datafeeds.insert
+      parameters:
+        - in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Datafeed'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Datafeed'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - datafeeds
+  '/{merchantId}/datafeeds/{datafeedId}':
+    delete:
+      description: Deletes a datafeed from your Merchant Center account.
+      operationId: content.datafeeds.delete
+      parameters:
+        - in: path
+          name: merchantId
+          required: true
+          type: string
+        - in: path
+          name: datafeedId
+          required: true
+          type: string
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - datafeeds
+    get:
+      description: Retrieves a datafeed from your Merchant Center account.
+      operationId: content.datafeeds.get
+      parameters:
+        - in: path
+          name: merchantId
+          required: true
+          type: string
+        - in: path
+          name: datafeedId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Datafeed'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - datafeeds
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates a datafeed of your Merchant Center account. This method supports patch semantics.
+      operationId: content.datafeeds.patch
+      parameters:
+        - in: path
+          name: merchantId
+          required: true
+          type: string
+        - in: path
+          name: datafeedId
+          required: true
+          type: string
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Datafeed'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Datafeed'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - datafeeds
+    put:
+      description: Updates a datafeed of your Merchant Center account.
+      operationId: content.datafeeds.update
+      parameters:
+        - in: path
+          name: merchantId
+          required: true
+          type: string
+        - in: path
+          name: datafeedId
+          required: true
+          type: string
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Datafeed'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Datafeed'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - datafeeds
+  '/{merchantId}/datafeedstatuses':
+    get:
+      description: Lists the statuses of the datafeeds in your Merchant Center account.
+      operationId: content.datafeedstatuses.list
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: 'The maximum number of products to return in the response, used for paging.'
+          in: query
+          name: maxResults
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DatafeedstatusesListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - datafeedstatuses
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{merchantId}/datafeedstatuses/{datafeedId}':
+    get:
+      description: Retrieves the status of a datafeed from your Merchant Center account.
+      operationId: content.datafeedstatuses.get
+      parameters:
+        - in: path
+          name: merchantId
+          required: true
+          type: string
+        - in: path
+          name: datafeedId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DatafeedStatus'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - datafeedstatuses
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{merchantId}/inventory/{storeCode}/products/{productId}':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Updates price and availability of a product in your Merchant Center account. This operation does not update the expiration date of the product.
+      operationId: content.inventory.set
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The code of the store for which to update price and availability. Use online to update price and availability of an online product.
+          in: path
+          name: storeCode
+          required: true
+          type: string
+        - description: The ID of the product for which to update price and availability.
+          in: path
+          name: productId
+          required: true
+          type: string
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InventorySetRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/InventorySetResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - inventory
+  '/{merchantId}/orders':
+    get:
+      description: Lists the orders in your Merchant Center account.
+      operationId: content.orders.list
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: |-
+            Obtains orders that match the acknowledgement status. When set to true, obtains orders that have been acknowledged. When false, obtains orders that have not been acknowledged.
+            We recommend using this filter set to false, in conjunction with the acknowledge call, such that only un-acknowledged orders are returned.
+          in: query
+          name: acknowledged
+          type: boolean
+        - description: |-
+            The maximum number of orders to return in the response, used for paging. The default value is 25 orders per page, and the maximum allowed value is 250 orders per page.
+            Known issue: All List calls will return all Orders without limit regardless of the value of this field.
+          in: query
+          name: maxResults
+          type: integer
+        - description: "The ordering of the returned list. The only supported value are placedDate desc and placedDate asc for now, which returns orders sorted by placement date. \"placedDate desc\" stands for listing orders by placement date, from oldest to most recent. \"placedDate asc\" stands for listing orders by placement date, from most recent to oldest. In future releases we'll support other sorting criteria."
+          enum:
+            - placedDate asc
+            - placedDate desc
+          in: query
+          name: orderBy
+          type: string
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+        - description: 'Obtains orders placed before this date (exclusively), in ISO 8601 format.'
+          in: query
+          name: placedDateEnd
+          type: string
+        - description: 'Obtains orders placed after this date (inclusively), in ISO 8601 format.'
+          in: query
+          name: placedDateStart
+          type: string
+        - collectionFormat: multi
+          description: 'Obtains orders that match any of the specified statuses. Multiple values can be specified with comma separation. Additionally, please note that active is a shortcut for pendingShipment and partiallyShipped, and completed is a shortcut for shipped , partiallyDelivered, delivered, partiallyReturned, returned, and canceled.'
+          in: query
+          items:
+            enum:
+              - active
+              - canceled
+              - completed
+              - delivered
+              - inProgress
+              - partiallyDelivered
+              - partiallyReturned
+              - partiallyShipped
+              - pendingShipment
+              - returned
+              - shipped
+            type: string
+          name: statuses
+          type: array
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{merchantId}/orders/{orderId}':
+    get:
+      description: Retrieves an order from your Merchant Center account.
+      operationId: content.orders.get
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the order.
+          in: path
+          name: orderId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Order'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{merchantId}/orders/{orderId}/acknowledge':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Marks an order as acknowledged.
+      operationId: content.orders.acknowledge
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the order.
+          in: path
+          name: orderId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersAcknowledgeRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersAcknowledgeResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  '/{merchantId}/orders/{orderId}/cancel':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Cancels all line items in an order.
+      operationId: content.orders.cancel
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the order to cancel.
+          in: path
+          name: orderId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersCancelRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersCancelResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  '/{merchantId}/orders/{orderId}/cancelLineItem':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Cancels a line item.
+      operationId: content.orders.cancellineitem
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the order.
+          in: path
+          name: orderId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersCancelLineItemRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersCancelLineItemResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  '/{merchantId}/orders/{orderId}/refund':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Refund a portion of the order, up to the full amount paid.'
+      operationId: content.orders.refund
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the order to refund.
+          in: path
+          name: orderId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersRefundRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersRefundResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  '/{merchantId}/orders/{orderId}/returnLineItem':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns a line item.
+      operationId: content.orders.returnlineitem
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the order.
+          in: path
+          name: orderId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersReturnLineItemRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersReturnLineItemResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  '/{merchantId}/orders/{orderId}/shipLineItems':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Marks line item(s) as shipped.
+      operationId: content.orders.shiplineitems
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the order.
+          in: path
+          name: orderId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersShipLineItemsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersShipLineItemsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  '/{merchantId}/orders/{orderId}/updateMerchantOrderId':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Updates the merchant order ID for a given order.
+      operationId: content.orders.updatemerchantorderid
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the order.
+          in: path
+          name: orderId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersUpdateMerchantOrderIdRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersUpdateMerchantOrderIdResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  '/{merchantId}/orders/{orderId}/updateShipment':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: "Updates a shipment's status, carrier, and/or tracking ID."
+      operationId: content.orders.updateshipment
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the order.
+          in: path
+          name: orderId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersUpdateShipmentRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersUpdateShipmentResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  '/{merchantId}/ordersbymerchantid/{merchantOrderId}':
+    get:
+      description: Retrieves an order using merchant order id.
+      operationId: content.orders.getbymerchantorderid
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The merchant order id to be looked for.
+          in: path
+          name: merchantOrderId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersGetByMerchantOrderIdResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{merchantId}/products':
+    get:
+      description: Lists the products in your Merchant Center account.
+      operationId: content.products.list
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: Flag to include the invalid inserted items in the result of the list request. By default the invalid items are not shown (the default value is false).
+          in: query
+          name: includeInvalidInsertedItems
+          type: boolean
+        - description: 'The maximum number of products to return in the response, used for paging.'
+          in: query
+          name: maxResults
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ProductsListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - products
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Uploads a product to your Merchant Center account.
+      operationId: content.products.insert
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Product'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Product'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - products
+  '/{merchantId}/products/{productId}':
+    delete:
+      description: Deletes a product from your Merchant Center account.
+      operationId: content.products.delete
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the product.
+          in: path
+          name: productId
+          required: true
+          type: string
+        - description: Flag to run the request in dry-run mode.
+          in: query
+          name: dryRun
+          type: boolean
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - products
+    get:
+      description: Retrieves a product from your Merchant Center account.
+      operationId: content.products.get
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the product.
+          in: path
+          name: productId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Product'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - products
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{merchantId}/productstatuses':
+    get:
+      description: Lists the statuses of the products in your Merchant Center account.
+      operationId: content.productstatuses.list
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: Flag to include the invalid inserted items in the result of the list request. By default the invalid items are not shown (the default value is false).
+          in: query
+          name: includeInvalidInsertedItems
+          type: boolean
+        - description: 'The maximum number of product statuses to return in the response, used for paging.'
+          in: query
+          name: maxResults
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ProductstatusesListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - productstatuses
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{merchantId}/productstatuses/{productId}':
+    get:
+      description: Gets the status of a product from your Merchant Center account.
+      operationId: content.productstatuses.get
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the product.
+          in: path
+          name: productId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ProductStatus'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - productstatuses
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{merchantId}/testorders':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sandbox only. Creates a test order.
+      operationId: content.orders.createtestorder
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/OrdersCreateTestOrderRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersCreateTestOrderResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  '/{merchantId}/testorders/{orderId}/advance':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Sandbox only. Moves a test order from state "inProgress" to state "pendingShipment".'
+      operationId: content.orders.advancetestorder
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The ID of the test order to modify.
+          in: path
+          name: orderId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersAdvanceTestOrderResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+  '/{merchantId}/testordertemplates/{templateName}':
+    get:
+      description: Sandbox only. Retrieves an order template that can be used to quickly create a new order in sandbox.
+      operationId: content.orders.gettestordertemplate
+      parameters:
+        - description: The ID of the managing account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The name of the template to retrieve.
+          enum:
+            - template1
+            - template2
+          in: path
+          name: templateName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersGetTestOrderTemplateResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - orders
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
 definitions:
   Account:
     description: Account data.
@@ -2680,1940 +4617,3 @@ definitions:
         description: The weight represented as a number.
         type: string
     type: object
-externalDocs:
-  url: 'https://developers.google.com/shopping-content'
-host: www.googleapis.com
-info:
-  contact:
-    name: Google
-    url: 'https://google.com'
-  description: 'Manage product items, inventory, and Merchant Center accounts for Google Shopping.'
-  title: Content API for Shopping
-  version: v2
-  x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
-  x-logo:
-    url: 'https://cloud.google.com/_static/images/new-gcp-logo.png'
-  x-origin:
-    format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/content/v2/rest'
-    version: v1
-  x-preferred: true
-  x-providerName: googleapis.com
-  x-serviceName: content
-parameters:
-  alt:
-    default: json
-    description: Data format for the response.
-    enum:
-      - json
-    in: query
-    name: alt
-    type: string
-  fields:
-    description: Selector specifying which fields to include in a partial response.
-    in: query
-    name: fields
-    type: string
-  key:
-    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
-    in: query
-    name: key
-    type: string
-  oauth_token:
-    description: OAuth 2.0 token for the current user.
-    in: query
-    name: oauth_token
-    type: string
-  prettyPrint:
-    default: true
-    description: Returns response with indentations and line breaks.
-    in: query
-    name: prettyPrint
-    type: boolean
-  quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
-    in: query
-    name: quotaUser
-    type: string
-  userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
-    in: query
-    name: userIp
-    type: string
-paths:
-  /accounts/authinfo:
-    get:
-      description: Returns information about the authenticated user.
-      operationId: content.accounts.authinfo
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AccountsAuthInfoResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - accounts
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  /accounts/batch:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: 'Retrieves, inserts, updates, and deletes multiple Merchant Center (sub-)accounts in a single request.'
-      operationId: content.accounts.custombatch
-      parameters:
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AccountsCustomBatchRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AccountsCustomBatchResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - accounts
-  /accountshipping/batch:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Retrieves and updates the shipping settings of multiple accounts in a single request.
-      operationId: content.accountshipping.custombatch
-      parameters:
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AccountshippingCustomBatchRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AccountshippingCustomBatchResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - accountshipping
-  /accountstatuses/batch:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      operationId: content.accountstatuses.custombatch
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AccountstatusesCustomBatchRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AccountstatusesCustomBatchResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - accountstatuses
-  /accounttax/batch:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Retrieves and updates tax settings of multiple accounts in a single request.
-      operationId: content.accounttax.custombatch
-      parameters:
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AccounttaxCustomBatchRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AccounttaxCustomBatchResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - accounttax
-  /datafeeds/batch:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      operationId: content.datafeeds.custombatch
-      parameters:
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DatafeedsCustomBatchRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/DatafeedsCustomBatchResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - datafeeds
-  /datafeedstatuses/batch:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      operationId: content.datafeedstatuses.custombatch
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DatafeedstatusesCustomBatchRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/DatafeedstatusesCustomBatchResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - datafeedstatuses
-  /inventory/batch:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Updates price and availability for multiple products or stores in a single request. This operation does not update the expiration date of the products.
-      operationId: content.inventory.custombatch
-      parameters:
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/InventoryCustomBatchRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/InventoryCustomBatchResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - inventory
-  /orders/batch:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Retrieves or modifies multiple orders in a single request.
-      operationId: content.orders.custombatch
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersCustomBatchRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/OrdersCustomBatchResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - orders
-  /products/batch:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: 'Retrieves, inserts, and deletes multiple products in a single request.'
-      operationId: content.products.custombatch
-      parameters:
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ProductsCustomBatchRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ProductsCustomBatchResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - products
-  /productstatuses/batch:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Gets the statuses of multiple products in a single request.
-      operationId: content.productstatuses.custombatch
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ProductstatusesCustomBatchRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ProductstatusesCustomBatchResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - productstatuses
-  '/{merchantId}/accounts':
-    get:
-      description: Lists the sub-accounts in your Merchant Center account.
-      operationId: content.accounts.list
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: 'The maximum number of accounts to return in the response, used for paging.'
-          in: query
-          name: maxResults
-          type: integer
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AccountsListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - accounts
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Creates a Merchant Center sub-account.
-      operationId: content.accounts.insert
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Account'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Account'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - accounts
-  '/{merchantId}/accounts/{accountId}':
-    delete:
-      description: Deletes a Merchant Center sub-account.
-      operationId: content.accounts.delete
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the account.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - accounts
-    get:
-      description: Retrieves a Merchant Center account.
-      operationId: content.accounts.get
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the account.
-          in: path
-          name: accountId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Account'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - accounts
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    patch:
-      description: Updates a Merchant Center account. This method supports patch semantics.
-      operationId: content.accounts.patch
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the account.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Account'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Account'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - accounts
-    put:
-      description: Updates a Merchant Center account.
-      operationId: content.accounts.update
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the account.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Account'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Account'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - accounts
-  '/{merchantId}/accountshipping':
-    get:
-      description: Lists the shipping settings of the sub-accounts in your Merchant Center account.
-      operationId: content.accountshipping.list
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: 'The maximum number of shipping settings to return in the response, used for paging.'
-          in: query
-          name: maxResults
-          type: integer
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AccountshippingListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - accountshipping
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/{merchantId}/accountshipping/{accountId}':
-    get:
-      description: Retrieves the shipping settings of the account.
-      operationId: content.accountshipping.get
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the account for which to get/update account shipping settings.
-          in: path
-          name: accountId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AccountShipping'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - accountshipping
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    patch:
-      description: Updates the shipping settings of the account. This method supports patch semantics.
-      operationId: content.accountshipping.patch
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the account for which to get/update account shipping settings.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AccountShipping'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AccountShipping'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - accountshipping
-    put:
-      description: Updates the shipping settings of the account.
-      operationId: content.accountshipping.update
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the account for which to get/update account shipping settings.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AccountShipping'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AccountShipping'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - accountshipping
-  '/{merchantId}/accountstatuses':
-    get:
-      description: Lists the statuses of the sub-accounts in your Merchant Center account.
-      operationId: content.accountstatuses.list
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: 'The maximum number of account statuses to return in the response, used for paging.'
-          in: query
-          name: maxResults
-          type: integer
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AccountstatusesListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - accountstatuses
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/{merchantId}/accountstatuses/{accountId}':
-    get:
-      description: Retrieves the status of a Merchant Center account.
-      operationId: content.accountstatuses.get
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the account.
-          in: path
-          name: accountId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AccountStatus'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - accountstatuses
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/{merchantId}/accounttax':
-    get:
-      description: Lists the tax settings of the sub-accounts in your Merchant Center account.
-      operationId: content.accounttax.list
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: 'The maximum number of tax settings to return in the response, used for paging.'
-          in: query
-          name: maxResults
-          type: integer
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AccounttaxListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - accounttax
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/{merchantId}/accounttax/{accountId}':
-    get:
-      description: Retrieves the tax settings of the account.
-      operationId: content.accounttax.get
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the account for which to get/update account tax settings.
-          in: path
-          name: accountId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AccountTax'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - accounttax
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    patch:
-      description: Updates the tax settings of the account. This method supports patch semantics.
-      operationId: content.accounttax.patch
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the account for which to get/update account tax settings.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AccountTax'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AccountTax'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - accounttax
-    put:
-      description: Updates the tax settings of the account.
-      operationId: content.accounttax.update
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the account for which to get/update account tax settings.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AccountTax'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AccountTax'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - accounttax
-  '/{merchantId}/datafeeds':
-    get:
-      description: Lists the datafeeds in your Merchant Center account.
-      operationId: content.datafeeds.list
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: 'The maximum number of products to return in the response, used for paging.'
-          in: query
-          name: maxResults
-          type: integer
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/DatafeedsListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - datafeeds
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Registers a datafeed with your Merchant Center account.
-      operationId: content.datafeeds.insert
-      parameters:
-        - in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Datafeed'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Datafeed'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - datafeeds
-  '/{merchantId}/datafeeds/{datafeedId}':
-    delete:
-      description: Deletes a datafeed from your Merchant Center account.
-      operationId: content.datafeeds.delete
-      parameters:
-        - in: path
-          name: merchantId
-          required: true
-          type: string
-        - in: path
-          name: datafeedId
-          required: true
-          type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - datafeeds
-    get:
-      description: Retrieves a datafeed from your Merchant Center account.
-      operationId: content.datafeeds.get
-      parameters:
-        - in: path
-          name: merchantId
-          required: true
-          type: string
-        - in: path
-          name: datafeedId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Datafeed'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - datafeeds
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    patch:
-      description: Updates a datafeed of your Merchant Center account. This method supports patch semantics.
-      operationId: content.datafeeds.patch
-      parameters:
-        - in: path
-          name: merchantId
-          required: true
-          type: string
-        - in: path
-          name: datafeedId
-          required: true
-          type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Datafeed'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Datafeed'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - datafeeds
-    put:
-      description: Updates a datafeed of your Merchant Center account.
-      operationId: content.datafeeds.update
-      parameters:
-        - in: path
-          name: merchantId
-          required: true
-          type: string
-        - in: path
-          name: datafeedId
-          required: true
-          type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Datafeed'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Datafeed'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - datafeeds
-  '/{merchantId}/datafeedstatuses':
-    get:
-      description: Lists the statuses of the datafeeds in your Merchant Center account.
-      operationId: content.datafeedstatuses.list
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: 'The maximum number of products to return in the response, used for paging.'
-          in: query
-          name: maxResults
-          type: integer
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/DatafeedstatusesListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - datafeedstatuses
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/{merchantId}/datafeedstatuses/{datafeedId}':
-    get:
-      description: Retrieves the status of a datafeed from your Merchant Center account.
-      operationId: content.datafeedstatuses.get
-      parameters:
-        - in: path
-          name: merchantId
-          required: true
-          type: string
-        - in: path
-          name: datafeedId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/DatafeedStatus'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - datafeedstatuses
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/{merchantId}/inventory/{storeCode}/products/{productId}':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Updates price and availability of a product in your Merchant Center account. This operation does not update the expiration date of the product.
-      operationId: content.inventory.set
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The code of the store for which to update price and availability. Use online to update price and availability of an online product.
-          in: path
-          name: storeCode
-          required: true
-          type: string
-        - description: The ID of the product for which to update price and availability.
-          in: path
-          name: productId
-          required: true
-          type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/InventorySetRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/InventorySetResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - inventory
-  '/{merchantId}/orders':
-    get:
-      description: Lists the orders in your Merchant Center account.
-      operationId: content.orders.list
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: |-
-            Obtains orders that match the acknowledgement status. When set to true, obtains orders that have been acknowledged. When false, obtains orders that have not been acknowledged.
-            We recommend using this filter set to false, in conjunction with the acknowledge call, such that only un-acknowledged orders are returned.
-          in: query
-          name: acknowledged
-          type: boolean
-        - description: |-
-            The maximum number of orders to return in the response, used for paging. The default value is 25 orders per page, and the maximum allowed value is 250 orders per page.
-            Known issue: All List calls will return all Orders without limit regardless of the value of this field.
-          in: query
-          name: maxResults
-          type: integer
-        - description: "The ordering of the returned list. The only supported value are placedDate desc and placedDate asc for now, which returns orders sorted by placement date. \"placedDate desc\" stands for listing orders by placement date, from oldest to most recent. \"placedDate asc\" stands for listing orders by placement date, from most recent to oldest. In future releases we'll support other sorting criteria."
-          enum:
-            - placedDate asc
-            - placedDate desc
-          in: query
-          name: orderBy
-          type: string
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-        - description: 'Obtains orders placed before this date (exclusively), in ISO 8601 format.'
-          in: query
-          name: placedDateEnd
-          type: string
-        - description: 'Obtains orders placed after this date (inclusively), in ISO 8601 format.'
-          in: query
-          name: placedDateStart
-          type: string
-        - collectionFormat: multi
-          description: 'Obtains orders that match any of the specified statuses. Multiple values can be specified with comma separation. Additionally, please note that active is a shortcut for pendingShipment and partiallyShipped, and completed is a shortcut for shipped , partiallyDelivered, delivered, partiallyReturned, returned, and canceled.'
-          in: query
-          items:
-            enum:
-              - active
-              - canceled
-              - completed
-              - delivered
-              - inProgress
-              - partiallyDelivered
-              - partiallyReturned
-              - partiallyShipped
-              - pendingShipment
-              - returned
-              - shipped
-            type: string
-          name: statuses
-          type: array
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/OrdersListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - orders
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/{merchantId}/orders/{orderId}':
-    get:
-      description: Retrieves an order from your Merchant Center account.
-      operationId: content.orders.get
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the order.
-          in: path
-          name: orderId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Order'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - orders
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/{merchantId}/orders/{orderId}/acknowledge':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Marks an order as acknowledged.
-      operationId: content.orders.acknowledge
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the order.
-          in: path
-          name: orderId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersAcknowledgeRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/OrdersAcknowledgeResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - orders
-  '/{merchantId}/orders/{orderId}/cancel':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Cancels all line items in an order.
-      operationId: content.orders.cancel
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the order to cancel.
-          in: path
-          name: orderId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersCancelRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/OrdersCancelResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - orders
-  '/{merchantId}/orders/{orderId}/cancelLineItem':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Cancels a line item.
-      operationId: content.orders.cancellineitem
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the order.
-          in: path
-          name: orderId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersCancelLineItemRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/OrdersCancelLineItemResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - orders
-  '/{merchantId}/orders/{orderId}/refund':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: 'Refund a portion of the order, up to the full amount paid.'
-      operationId: content.orders.refund
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the order to refund.
-          in: path
-          name: orderId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersRefundRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/OrdersRefundResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - orders
-  '/{merchantId}/orders/{orderId}/returnLineItem':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Returns a line item.
-      operationId: content.orders.returnlineitem
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the order.
-          in: path
-          name: orderId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersReturnLineItemRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/OrdersReturnLineItemResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - orders
-  '/{merchantId}/orders/{orderId}/shipLineItems':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Marks line item(s) as shipped.
-      operationId: content.orders.shiplineitems
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the order.
-          in: path
-          name: orderId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersShipLineItemsRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/OrdersShipLineItemsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - orders
-  '/{merchantId}/orders/{orderId}/updateMerchantOrderId':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Updates the merchant order ID for a given order.
-      operationId: content.orders.updatemerchantorderid
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the order.
-          in: path
-          name: orderId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersUpdateMerchantOrderIdRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/OrdersUpdateMerchantOrderIdResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - orders
-  '/{merchantId}/orders/{orderId}/updateShipment':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: "Updates a shipment's status, carrier, and/or tracking ID."
-      operationId: content.orders.updateshipment
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the order.
-          in: path
-          name: orderId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersUpdateShipmentRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/OrdersUpdateShipmentResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - orders
-  '/{merchantId}/ordersbymerchantid/{merchantOrderId}':
-    get:
-      description: Retrieves an order using merchant order id.
-      operationId: content.orders.getbymerchantorderid
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The merchant order id to be looked for.
-          in: path
-          name: merchantOrderId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/OrdersGetByMerchantOrderIdResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - orders
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/{merchantId}/products':
-    get:
-      description: Lists the products in your Merchant Center account.
-      operationId: content.products.list
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: Flag to include the invalid inserted items in the result of the list request. By default the invalid items are not shown (the default value is false).
-          in: query
-          name: includeInvalidInsertedItems
-          type: boolean
-        - description: 'The maximum number of products to return in the response, used for paging.'
-          in: query
-          name: maxResults
-          type: integer
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ProductsListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - products
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Uploads a product to your Merchant Center account.
-      operationId: content.products.insert
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Product'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Product'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - products
-  '/{merchantId}/products/{productId}':
-    delete:
-      description: Deletes a product from your Merchant Center account.
-      operationId: content.products.delete
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the product.
-          in: path
-          name: productId
-          required: true
-          type: string
-        - description: Flag to run the request in dry-run mode.
-          in: query
-          name: dryRun
-          type: boolean
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - products
-    get:
-      description: Retrieves a product from your Merchant Center account.
-      operationId: content.products.get
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the product.
-          in: path
-          name: productId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Product'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - products
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/{merchantId}/productstatuses':
-    get:
-      description: Lists the statuses of the products in your Merchant Center account.
-      operationId: content.productstatuses.list
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: Flag to include the invalid inserted items in the result of the list request. By default the invalid items are not shown (the default value is false).
-          in: query
-          name: includeInvalidInsertedItems
-          type: boolean
-        - description: 'The maximum number of product statuses to return in the response, used for paging.'
-          in: query
-          name: maxResults
-          type: integer
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ProductstatusesListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - productstatuses
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/{merchantId}/productstatuses/{productId}':
-    get:
-      description: Gets the status of a product from your Merchant Center account.
-      operationId: content.productstatuses.get
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the product.
-          in: path
-          name: productId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ProductStatus'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - productstatuses
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/{merchantId}/testorders':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Sandbox only. Creates a test order.
-      operationId: content.orders.createtestorder
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrdersCreateTestOrderRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/OrdersCreateTestOrderResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - orders
-  '/{merchantId}/testorders/{orderId}/advance':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: 'Sandbox only. Moves a test order from state "inProgress" to state "pendingShipment".'
-      operationId: content.orders.advancetestorder
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the test order to modify.
-          in: path
-          name: orderId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/OrdersAdvanceTestOrderResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - orders
-  '/{merchantId}/testordertemplates/{templateName}':
-    get:
-      description: Sandbox only. Retrieves an order template that can be used to quickly create a new order in sandbox.
-      operationId: content.orders.gettestordertemplate
-      parameters:
-        - description: The ID of the managing account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The name of the template to retrieve.
-          enum:
-            - template1
-            - template2
-          in: path
-          name: templateName
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/OrdersGetTestOrderTemplateResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - orders
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/content': Manage your product listings and accounts for Google Shopping
-    type: oauth2
-swagger: '2.0'

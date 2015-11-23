@@ -1,16 +1,8 @@
-basePath: /
-definitions:
-  RandomArray:
-    properties:
-      rand:
-        items:
-          format: int8
-          type: integer
-        type: array
-  RandomByte:
-    format: int8
-    type: integer
+swagger: '2.0'
+schemes:
+  - http
 host: testmr.eriomem.net
+basePath: /
 info:
   contact:
     name: info@massiverand.com
@@ -161,6 +153,14 @@ paths:
       summary: Generate a large random prime number.
       tags:
         - Million Prime Database
-schemes:
-  - http
-swagger: '2.0'
+definitions:
+  RandomArray:
+    properties:
+      rand:
+        items:
+          format: int8
+          type: integer
+        type: array
+  RandomByte:
+    format: int8
+    type: integer

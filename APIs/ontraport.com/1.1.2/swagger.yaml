@@ -1,462 +1,8 @@
-basePath: /1
-definitions:
-  Address:
-    properties:
-      address:
-        type: string
-      address2:
-        default: ''
-        type: string
-      city:
-        type: string
-      country:
-        type: string
-      state:
-        type: string
-      zip:
-        type: string
-    required:
-      - address
-      - city
-      - state
-      - zip
-      - country
-  Criteria:
-    properties:
-      condition:
-        description: "Apply this condition to the collection query. This is essentially like a SQL WHERE clause, e.g. firstname='Ben'"
-        type: string
-      date_range:
-        description: 'Start and End dates to search, in seconds since Jan 1, 1970, as a comma-separated list. Start (index 0 in the array) is inclusive, End (index 1) is exclusive. Either or both can be empty.'
-        items:
-          format: int32
-          type: integer
-        type: array
-      externs:
-        description: External fields to include in results
-        type: string
-      group_ids:
-        description: Array of Group ID for Object type as comma-delimited list
-        items:
-          format: int32
-          type: integer
-        type: array
-      ids:
-        items:
-          format: int32
-          type: integer
-        type: array
-      listFields:
-        description: Return only these fields in the response
-        items:
-          type: string
-        type: array
-      objectID:
-        description: ''
-        format: int32
-        type: integer
-      performAll:
-        default: false
-        type: boolean
-      range:
-        description: Number of results to return (maximum=50)
-        format: int32
-        maximum: 50
-        type: integer
-      search:
-        description: Search objects for this string
-        type: string
-      searchNotes:
-        description: Boolean flag to additionally search Object Notes for the Search term given in Search parameter
-        type: string
-      sort:
-        description: Field used to sort results
-        type: string
-      sortDir:
-        description: Sort direction
-        enum:
-          - asc
-          - desc
-        type: string
-      start:
-        description: Return results starting at this offset
-        format: int32
-        type: integer
-    required:
-      - objectID
-  Notification:
-    properties:
-      data:
-        type: string
-      id:
-        format: int32
-        type: integer
-      notification_type:
-        enum:
-          - notification
-        type: string
-      type:
-        enum:
-          - plaintext
-        type: string
-    required:
-      - id
-      - notification_type
-      - data
-      - type
-    type: object
-  Offer:
-    properties:
-      ccExpirationDate:
-        default: ''
-        description: Credit card expiration date
-        type: string
-      delay:
-        description: Days to delay start of offer
-        format: int32
-        type: integer
-      grandTotal:
-        description: Total amount of sale
-        type: number
-      hasShipping:
-        default: false
-        description: Are there shipping charges?
-        type: boolean
-      hasTaxes:
-        default: false
-        description: Are there applicable taxes?
-        type: boolean
-      offer_id:
-        description: This must be a valid Offer ID
-        format: int32
-        type: integer
-      order_id:
-        description: This must be a valid Order ID
-        format: int32
-        type: integer
-      products:
-        items:
-          $ref: '#/definitions/Product'
-        type: array
-      shipping:
-        description: Shipping amount
-        type: number
-      shipping_charge_reoccurring_orders:
-        default: false
-        description: Add shipping charge to reoccurring orders?
-        type: boolean
-      subTotal:
-        description: Subtotal
-        type: number
-      taxes:
-        items:
-          $ref: '#/definitions/Tax'
-        type: array
-    required:
-      - offer_id
-      - order_id
-      - products
-  Order:
-    properties:
-      affiliate_id:
-        description: Affiliate ID
-        format: int32
-        type: integer
-      billing_address:
-        $ref: '#/definitions/Address'
-      chargeNow:
-        enum:
-          - chargeNow
-        type: string
-      contact_id:
-        format: int32
-        type: integer
-      gateway_id:
-        description: Gateway ID
-        format: int32
-        type: integer
-      invoice_template:
-        description: Invoice template ID
-        format: int32
-        type: integer
-      objectID:
-        format: int32
-        type: integer
-      offer:
-        $ref: '#/definitions/Offer'
-      payer:
-        $ref: '#/definitions/Payer'
-    required:
-      - objectID
-      - contact_id
-  Payer:
-    properties:
-      ccnumber:
-        default: ''
-        type: string
-      code:
-        default: ''
-        description: CVV code
-        type: string
-      expire_month:
-        description: Expiration month (1-12)
-        type: integer
-      expire_year:
-        description: 'Expiration year (four-digit year, e.g. 2018)'
-        type: integer
-    required:
-      - ccnumber
-      - code
-  Price:
-    properties:
-      id:
-        type: integer
-      payment_count:
-        format: int32
-        type: integer
-      price:
-        type: number
-      unit:
-        enum:
-          - day
-          - week
-          - month
-          - quarter
-          - year
-        type: string
-    required:
-      - price
-      - payment_count
-      - unit
-      - id
-  Product:
-    properties:
-      delay_start:
-        description: Days to delay start
-        format: int32
-        type: integer
-      download_limit:
-        description: Limit number of downloads after purchase
-        format: int32
-        type: integer
-      download_time_limit:
-        description: Limit length of time product can be downloaded
-        format: int32
-        type: integer
-      id:
-        description: This must be an existing Product ID
-        format: int32
-        type: integer
-      level1:
-        description: Partner Level 1 Commission Percentage
-        type: number
-      level2:
-        description: Partner Level 2 Commission Percentage
-        type: number
-      offer_to_affiliates:
-        default: false
-        description: Is this offered to affiliates?
-        type: boolean
-      owner:
-        description: Product owner (Staff ID)
-        format: int32
-        type: integer
-      price:
-        items:
-          $ref: '#/definitions/Price'
-        type: array
-      product_type:
-        enum:
-          - digital
-          - physical
-        type: string
-      quantity:
-        description: How many of this product are being purchased?
-        format: int32
-        type: integer
-      setup_fee:
-        description: One-time setup fee
-        type: number
-      setup_fee_date:
-        description: 'Date to charge setup fee (when setup_fee_when is "on_date")'
-        type: string
-      setup_fee_when:
-        description: When should setup fee be applied?
-        enum:
-          - immediately
-          - after_trial
-          - on_date
-        type: string
-      shipping:
-        default: false
-        description: Does this product have an associated shipping cost?
-        type: boolean
-      sku:
-        description: Product SKU
-        type: string
-      subscription_count:
-        format: int32
-        type: integer
-      subscription_fee:
-        type: number
-      subscription_unit:
-        enum:
-          - day
-          - week
-          - month
-          - quarter
-          - year
-        type: string
-      tax:
-        default: false
-        description: Is this product taxable?
-        type: boolean
-      taxable:
-        description: Is this item taxable?
-        type: boolean
-      total:
-        description: What is the total amount of this sale?
-        type: number
-      trial_period_count:
-        description: Length of trial period (also set trial_period_units)
-        format: int32
-        type: integer
-      trial_period_unit:
-        description: Units describing length of trial period
-        enum:
-          - day
-          - week
-          - month
-          - quarter
-          - year
-        type: string
-      trial_price:
-        description: Price during trial period
-        type: number
-      type:
-        enum:
-          - single
-          - subscription
-          - one_time
-          - payment_plan
-        type: string
-    required:
-      - quantity
-      - total
-      - price
-  Response:
-    properties:
-      account_id:
-        format: int32
-        type: integer
-      code:
-        type: integer
-      data:
-        type: object
-      notifications:
-        $ref: '#/definitions/Notification'
-        type: array
-      updates:
-        $ref: '#/definitions/Update'
-        type: array
-    required:
-      - code
-      - data
-      - updates
-      - notifications
-      - account_id
-    type: object
-  Shipping:
-    properties:
-      id:
-        description: ID of the Shipping Method to apply. This must be an existing Shipping Method.
-        format: int32
-        type: integer
-    required:
-      - id
-  TaskCompleteParams:
-    properties:
-      criteria:
-        $ref: '#/definitions/Criteria'
-      data:
-        $ref: '#/definitions/TaskData'
-    required:
-      - criteria
-      - data
-  TaskData:
-    properties:
-      followup:
-        $ref: '#/definitions/TaskFollowup'
-      outcome:
-        description: 'Task outcome name. This must start with ":=" For example, <strong>":=signed"</strong>'
-        type: string
-      task_form_data:
-        description: "These fields can be used to update associated Object data when completing a task. For example, set <strong>task_form_title</strong> to \"New title\" to change the Contact's title."
-        type: string
-  TaskFollowup:
-    properties:
-      due_date:
-        description: 'Due date of new Task, given as number of days from current date'
-        format: int32
-        type: integer
-      message_id:
-        description: 'Message ID of new Task to be created for further followup. This Task must currently exist. New tasks can be created using the <a href="http://api.ontraport.com/doc/#!/objects/createObject">Objects Create endpoint</a> with objectID=1'
-        format: int32
-        type: integer
-      task_owner:
-        description: New Task assignee
-        format: int32
-        type: integer
-    required:
-      - message_id
-      - due_date
-      - task_owner
-  Tax:
-    properties:
-      id:
-        description: ID of the Tax to apply. This must be an existing Tax type.
-        format: int32
-        type: integer
-    required:
-      - id
-  Transaction:
-    properties:
-      billing_address:
-        $ref: '#/definitions/Address'
-      chargeNow:
-        description: Charge transaction now or or just log a transaction
-        enum:
-          - chargeNow
-          - chargeLog
-        type: string
-      contact_id:
-        description: Create new transaction for this Object instance (Contact ID)
-        type: integer
-      gateway_id:
-        description: Gateway ID to use for this transaction
-        type: integer
-      invoice_template:
-        description: Invoice ID to use for this transaction
-        example: 1
-        type: integer
-      offer:
-        $ref: '#/definitions/Offer'
-      payer:
-        $ref: '#/definitions/Payer'
-      trans_date:
-        description: Timestamp (in milliseconds since midnight 1/1/1970) of the transaction
-        type: integer
-    required:
-      - contact_id
-      - chargeNow
-      - invoice_template
-      - gateway_id
-      - offer
-  Update:
-    type: object
-externalDocs:
-  url: 'https://ontraport.com/ontraport-api'
+swagger: '2.0'
+schemes:
+  - https
 host: api.ontraport.com
+basePath: /1
 info:
   contact:
     email: support@ontraport.com
@@ -473,6 +19,8 @@ info:
     url: 'https://api.ontraport.com/1/api-docs/swagger.json'
     version: '2.0'
   x-providerName: ontraport.com
+externalDocs:
+  url: 'https://ontraport.com/ontraport-api'
 parameters:
   addListParamFormData:
     description: Array of Tag IDs as comma-delimited list
@@ -736,6 +284,25 @@ parameters:
     in: formData
     name: start
     type: integer
+responses:
+  default:
+    description: Standard response object
+    schema:
+      items:
+        $ref: '#/definitions/Response'
+tags:
+  - description: 'Create, Update, and Fetch Contacts or other Objects'
+    name: objects
+  - description: Fetch form content
+    name: forms
+  - description: 'Fetch E-mail, SMS, or other Message content'
+    name: messages
+  - description: Cancel and Complete Tasks
+    name: tasks
+  - description: Everything to do with payment Transactions
+    name: transactions
+  - description: Methods specifically belonging to Landing Pages
+    name: landingPage
 paths:
   /form:
     get:
@@ -1397,25 +964,458 @@ paths:
       summary: Write-off a transaction
       tags:
         - transactions
-responses:
-  default:
-    description: Standard response object
-    schema:
-      items:
-        $ref: '#/definitions/Response'
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - description: 'Create, Update, and Fetch Contacts or other Objects'
-    name: objects
-  - description: Fetch form content
-    name: forms
-  - description: 'Fetch E-mail, SMS, or other Message content'
-    name: messages
-  - description: Cancel and Complete Tasks
-    name: tasks
-  - description: Everything to do with payment Transactions
-    name: transactions
-  - description: Methods specifically belonging to Landing Pages
-    name: landingPage
+definitions:
+  Address:
+    properties:
+      address:
+        type: string
+      address2:
+        default: ''
+        type: string
+      city:
+        type: string
+      country:
+        type: string
+      state:
+        type: string
+      zip:
+        type: string
+    required:
+      - address
+      - city
+      - state
+      - zip
+      - country
+  Criteria:
+    properties:
+      condition:
+        description: "Apply this condition to the collection query. This is essentially like a SQL WHERE clause, e.g. firstname='Ben'"
+        type: string
+      date_range:
+        description: 'Start and End dates to search, in seconds since Jan 1, 1970, as a comma-separated list. Start (index 0 in the array) is inclusive, End (index 1) is exclusive. Either or both can be empty.'
+        items:
+          format: int32
+          type: integer
+        type: array
+      externs:
+        description: External fields to include in results
+        type: string
+      group_ids:
+        description: Array of Group ID for Object type as comma-delimited list
+        items:
+          format: int32
+          type: integer
+        type: array
+      ids:
+        items:
+          format: int32
+          type: integer
+        type: array
+      listFields:
+        description: Return only these fields in the response
+        items:
+          type: string
+        type: array
+      objectID:
+        description: ''
+        format: int32
+        type: integer
+      performAll:
+        default: false
+        type: boolean
+      range:
+        description: Number of results to return (maximum=50)
+        format: int32
+        maximum: 50
+        type: integer
+      search:
+        description: Search objects for this string
+        type: string
+      searchNotes:
+        description: Boolean flag to additionally search Object Notes for the Search term given in Search parameter
+        type: string
+      sort:
+        description: Field used to sort results
+        type: string
+      sortDir:
+        description: Sort direction
+        enum:
+          - asc
+          - desc
+        type: string
+      start:
+        description: Return results starting at this offset
+        format: int32
+        type: integer
+    required:
+      - objectID
+  Notification:
+    properties:
+      data:
+        type: string
+      id:
+        format: int32
+        type: integer
+      notification_type:
+        enum:
+          - notification
+        type: string
+      type:
+        enum:
+          - plaintext
+        type: string
+    required:
+      - id
+      - notification_type
+      - data
+      - type
+    type: object
+  Offer:
+    properties:
+      ccExpirationDate:
+        default: ''
+        description: Credit card expiration date
+        type: string
+      delay:
+        description: Days to delay start of offer
+        format: int32
+        type: integer
+      grandTotal:
+        description: Total amount of sale
+        type: number
+      hasShipping:
+        default: false
+        description: Are there shipping charges?
+        type: boolean
+      hasTaxes:
+        default: false
+        description: Are there applicable taxes?
+        type: boolean
+      offer_id:
+        description: This must be a valid Offer ID
+        format: int32
+        type: integer
+      order_id:
+        description: This must be a valid Order ID
+        format: int32
+        type: integer
+      products:
+        items:
+          $ref: '#/definitions/Product'
+        type: array
+      shipping:
+        description: Shipping amount
+        type: number
+      shipping_charge_reoccurring_orders:
+        default: false
+        description: Add shipping charge to reoccurring orders?
+        type: boolean
+      subTotal:
+        description: Subtotal
+        type: number
+      taxes:
+        items:
+          $ref: '#/definitions/Tax'
+        type: array
+    required:
+      - offer_id
+      - order_id
+      - products
+  Order:
+    properties:
+      affiliate_id:
+        description: Affiliate ID
+        format: int32
+        type: integer
+      billing_address:
+        $ref: '#/definitions/Address'
+      chargeNow:
+        enum:
+          - chargeNow
+        type: string
+      contact_id:
+        format: int32
+        type: integer
+      gateway_id:
+        description: Gateway ID
+        format: int32
+        type: integer
+      invoice_template:
+        description: Invoice template ID
+        format: int32
+        type: integer
+      objectID:
+        format: int32
+        type: integer
+      offer:
+        $ref: '#/definitions/Offer'
+      payer:
+        $ref: '#/definitions/Payer'
+    required:
+      - objectID
+      - contact_id
+  Payer:
+    properties:
+      ccnumber:
+        default: ''
+        type: string
+      code:
+        default: ''
+        description: CVV code
+        type: string
+      expire_month:
+        description: Expiration month (1-12)
+        type: integer
+      expire_year:
+        description: 'Expiration year (four-digit year, e.g. 2018)'
+        type: integer
+    required:
+      - ccnumber
+      - code
+  Price:
+    properties:
+      id:
+        type: integer
+      payment_count:
+        format: int32
+        type: integer
+      price:
+        type: number
+      unit:
+        enum:
+          - day
+          - week
+          - month
+          - quarter
+          - year
+        type: string
+    required:
+      - price
+      - payment_count
+      - unit
+      - id
+  Product:
+    properties:
+      delay_start:
+        description: Days to delay start
+        format: int32
+        type: integer
+      download_limit:
+        description: Limit number of downloads after purchase
+        format: int32
+        type: integer
+      download_time_limit:
+        description: Limit length of time product can be downloaded
+        format: int32
+        type: integer
+      id:
+        description: This must be an existing Product ID
+        format: int32
+        type: integer
+      level1:
+        description: Partner Level 1 Commission Percentage
+        type: number
+      level2:
+        description: Partner Level 2 Commission Percentage
+        type: number
+      offer_to_affiliates:
+        default: false
+        description: Is this offered to affiliates?
+        type: boolean
+      owner:
+        description: Product owner (Staff ID)
+        format: int32
+        type: integer
+      price:
+        items:
+          $ref: '#/definitions/Price'
+        type: array
+      product_type:
+        enum:
+          - digital
+          - physical
+        type: string
+      quantity:
+        description: How many of this product are being purchased?
+        format: int32
+        type: integer
+      setup_fee:
+        description: One-time setup fee
+        type: number
+      setup_fee_date:
+        description: 'Date to charge setup fee (when setup_fee_when is "on_date")'
+        type: string
+      setup_fee_when:
+        description: When should setup fee be applied?
+        enum:
+          - immediately
+          - after_trial
+          - on_date
+        type: string
+      shipping:
+        default: false
+        description: Does this product have an associated shipping cost?
+        type: boolean
+      sku:
+        description: Product SKU
+        type: string
+      subscription_count:
+        format: int32
+        type: integer
+      subscription_fee:
+        type: number
+      subscription_unit:
+        enum:
+          - day
+          - week
+          - month
+          - quarter
+          - year
+        type: string
+      tax:
+        default: false
+        description: Is this product taxable?
+        type: boolean
+      taxable:
+        description: Is this item taxable?
+        type: boolean
+      total:
+        description: What is the total amount of this sale?
+        type: number
+      trial_period_count:
+        description: Length of trial period (also set trial_period_units)
+        format: int32
+        type: integer
+      trial_period_unit:
+        description: Units describing length of trial period
+        enum:
+          - day
+          - week
+          - month
+          - quarter
+          - year
+        type: string
+      trial_price:
+        description: Price during trial period
+        type: number
+      type:
+        enum:
+          - single
+          - subscription
+          - one_time
+          - payment_plan
+        type: string
+    required:
+      - quantity
+      - total
+      - price
+  Response:
+    properties:
+      account_id:
+        format: int32
+        type: integer
+      code:
+        type: integer
+      data:
+        type: object
+      notifications:
+        $ref: '#/definitions/Notification'
+        type: array
+      updates:
+        $ref: '#/definitions/Update'
+        type: array
+    required:
+      - code
+      - data
+      - updates
+      - notifications
+      - account_id
+    type: object
+  Shipping:
+    properties:
+      id:
+        description: ID of the Shipping Method to apply. This must be an existing Shipping Method.
+        format: int32
+        type: integer
+    required:
+      - id
+  TaskCompleteParams:
+    properties:
+      criteria:
+        $ref: '#/definitions/Criteria'
+      data:
+        $ref: '#/definitions/TaskData'
+    required:
+      - criteria
+      - data
+  TaskData:
+    properties:
+      followup:
+        $ref: '#/definitions/TaskFollowup'
+      outcome:
+        description: 'Task outcome name. This must start with ":=" For example, <strong>":=signed"</strong>'
+        type: string
+      task_form_data:
+        description: "These fields can be used to update associated Object data when completing a task. For example, set <strong>task_form_title</strong> to \"New title\" to change the Contact's title."
+        type: string
+  TaskFollowup:
+    properties:
+      due_date:
+        description: 'Due date of new Task, given as number of days from current date'
+        format: int32
+        type: integer
+      message_id:
+        description: 'Message ID of new Task to be created for further followup. This Task must currently exist. New tasks can be created using the <a href="http://api.ontraport.com/doc/#!/objects/createObject">Objects Create endpoint</a> with objectID=1'
+        format: int32
+        type: integer
+      task_owner:
+        description: New Task assignee
+        format: int32
+        type: integer
+    required:
+      - message_id
+      - due_date
+      - task_owner
+  Tax:
+    properties:
+      id:
+        description: ID of the Tax to apply. This must be an existing Tax type.
+        format: int32
+        type: integer
+    required:
+      - id
+  Transaction:
+    properties:
+      billing_address:
+        $ref: '#/definitions/Address'
+      chargeNow:
+        description: Charge transaction now or or just log a transaction
+        enum:
+          - chargeNow
+          - chargeLog
+        type: string
+      contact_id:
+        description: Create new transaction for this Object instance (Contact ID)
+        type: integer
+      gateway_id:
+        description: Gateway ID to use for this transaction
+        type: integer
+      invoice_template:
+        description: Invoice ID to use for this transaction
+        example: 1
+        type: integer
+      offer:
+        $ref: '#/definitions/Offer'
+      payer:
+        $ref: '#/definitions/Payer'
+      trans_date:
+        description: Timestamp (in milliseconds since midnight 1/1/1970) of the transaction
+        type: integer
+    required:
+      - contact_id
+      - chargeNow
+      - invoice_template
+      - gateway_id
+      - offer
+  Update:
+    type: object

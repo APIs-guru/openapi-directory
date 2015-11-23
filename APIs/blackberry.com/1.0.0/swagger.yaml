@@ -1,1104 +1,8 @@
-basePath: /api/1
-definitions:
-  App:
-    properties:
-      created_on:
-        description: |
-          The timestamp of when the device was created. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
-        format: int64
-        type: integer
-      description:
-        description: 'The description of the application, such as "My Awesome App does awesome things".'
-        type: string
-      id:
-        description: The UUID of the application.
-        type: string
-      name:
-        description: 'The name of the application, such as "My Awesome App".'
-        type: string
-      org_id:
-        description: The universally unique identifier (UUID) of the organization that the application belongs to.
-        type: string
-      tags:
-        description: An array containing the UUIDs of the tags created by the user.
-        items:
-          $ref: '#/definitions/AppTag'
-        type: array
-    required:
-      - org_id
-      - name
-      - description
-      - id
-      - created_on
-  AppCapability:
-    properties:
-      association:
-        description: 'The association to use. This call be an empty string or "user".'
-        type: string
-      cap_name:
-        description: The capability name.
-        type: string
-      expires_on:
-        description: 'Whether the granted capability expires. If there is no expiry date, the value is "null".'
-        type: string
-      granted_name:
-        description: 'The name of the entity that&#39;s being granted the capability.'
-        type: string
-      granted_org_id:
-        description: The UUID of the organization that the granted entity belongs to.
-        type: string
-      granted_org_name:
-        description: 'The organization name of the application that&#39;s granted the capability.'
-        type: string
-      granted_to:
-        description: 'The UUID of the entity that&#39;s granted the capability.'
-        type: string
-      granted_type:
-        description: 'The type of entity that&#39;s that is granted the new capability. The values can be "app", "device", "org", "tag", or "user".'
-        type: string
-      target_id:
-        description: The universally unique identifier (UUID) of what the capability grants permissions to.
-        type: string
-      target_name:
-        description: The name of the entity granting the capability.
-        type: string
-      target_type:
-        description: 'The entity type that the capability is granted on, called a target.'
-        type: string
-    required:
-      - target_id
-      - target_type
-      - cap_name
-      - granted_to
-      - granted_type
-  AppCreate:
-    properties:
-      description:
-        description: |
-          A description of the application.
-        type: string
-      name:
-        description: 'The name of the application, such as "My Awesome App".'
-        type: string
-      org_id:
-        description: The universally unique identifier (UUID) of the organization (UUID) that the application belongs to.
-        type: string
-    required:
-      - name
-  AppKeys:
-    properties:
-      api_key:
-        description: |
-          A key, referred to as API KEY, that uniquely identifies the application during the authentication process. The authentication process is used to verify the authenticity of the application to the system.
-        type: string
-      api_secret:
-        description: |
-          A string, referred to as API SECRET that&#39;s used with the 'api_key' during the authentication process. Ensure that you don&#39;t share this secret and keep it secure.
-        type: string
-    required:
-      - api_key
-      - api_secret
-  AppTag:
-    properties:
-      tag_id:
-        description: The universally unique identifier (UUID) of the tag.
-        type: string
-  AppUpdate:
-    properties:
-      description:
-        description: 'The description of the application, such as "My Awesome App does awesome things".'
-        type: string
-      name:
-        description: 'The name of the application, such as "My Awesome App".'
-        type: string
-  Cap:
-    properties:
-      display_name:
-        description: The display name of the capability.
-        type: string
-      name:
-        description: The internal name of the capability.
-        type: string
-      supported_targets:
-        description: The supported targets of this capability.
-        items:
-          type: string
-        type: array
-  Data:
-    properties:
-      category:
-        description: |
-          The data type. You can specify "component", "log", "state", and "alarm". The default is "state".
-        enum:
-          - component
-          - log
-          - state
-          - alarm
-        type: string
-      device_id:
-        description: The universally unique identifier (UUID) of the device this data applies to.
-        type: string
-      id:
-        description: The name of the data.
-        type: string
-      recorded_on:
-        description: |
-          The timestamp of when the data was created. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
-        format: int64
-        type: integer
-      standard:
-        description: Reserved for future use.
-        type: string
-      values:
-        description: |
-          The key-value pairs of the recorded data. Nested data can be stored (keys with arrays or objects for example), however flat data can only be indexed.
-        type: object
-    required:
-      - device_id
-      - recorded_on
-      - id
-      - values
-  DataCreateBulk:
-    properties:
-      category:
-        description: |
-          The data type. You can specify "component", "log", "state", and "alarm". The default is "state".
-        enum:
-          - component
-          - log
-          - state
-          - alarm
-        type: string
-      data:
-        items:
-          $ref: '#/definitions/DataCreateData'
-        type: array
-      standard:
-        description: Reserved for future use.
-        type: string
-    required:
-      - data
-  DataCreateData:
-    properties:
-      id:
-        description: The name of the data.
-        type: string
-      recorded_on:
-        description: |
-          The timestamp of when the data was created. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
-        format: int64
-        type: integer
-      values:
-        description: |
-          The key-value pairs of the recorded data. Nested data can be stored (keys with arrays or objects for example).
-        type: object
-    required:
-      - id
-      - recorded_on
-      - values
-  DataFilter:
-    description: The filter to use for the data in the notification.
-    properties:
-      category:
-        description: |
-          The data type that this policy applies to. You can specify "component", "log", "state", and "alarm". The default is "state".
-        enum:
-          - component
-          - log
-          - state
-          - alarm
-        type: string
-      data_id:
-        description: |
-          The data identifier to monitor for changes on the specified 'device_id'. The identifier you choose is meaningful to your application.
-        type: string
-      device_id:
-        description: |
-          The universally unique identifier (UUID) of the device to monitor for changes.
-        type: string
-      standard:
-        description: |
-          Reserved for future use.
-        type: string
-    required:
-      - device_id
-  DataRetention:
-    properties:
-      app_id:
-        description: The UUID of the application that the policy applies to.
-        type: string
-      category:
-        description: |
-          The data type that this policy applies to.
-        enum:
-          - component
-          - log
-          - state
-          - alarm
-        type: string
-      id:
-        description: The UUID of the data retention policy.
-        type: string
-      name:
-        description: The name of the data.
-        type: string
-      retention:
-        description: |
-          The number of days to store the data. The string "forever" can be used to specify to store the data indefinitely; "last_only" means to store only the most recent piece of data.
-        type: string
-      standard:
-        description: 'Reserved for future use. The returned value is "null".'
-        type: string
-    required:
-      - id
-      - app_id
-      - category
-      - name
-      - retention
-  DataRetentionCreate:
-    properties:
-      category:
-        description: |
-          The data type that this policy applies to.
-        enum:
-          - component
-          - log
-          - state
-          - alarm
-        type: string
-      name:
-        description: The name of the data.
-        type: string
-      retention:
-        description: |
-          The number of days to store the data. The string "forever" can be used to specify to store the data indefinitely; "last_only" means to store only the most recent piece of data.
-        type: string
-      standard:
-        description: Reserved for future use.
-        type: string
-    required:
-      - category
-      - name
-      - retention
-  DataRetentionUpdate:
-    properties:
-      category:
-        description: |
-          The data type that this policy applies to. You can specify "component", "log", "state", and "alarm". The default is "state".
-        enum:
-          - component
-          - log
-          - state
-          - alarm
-        type: string
-      name:
-        description: The name of the data.
-        type: string
-      retention:
-        description: |
-          The number of days to store the data. The string "forever" can be used to specify to store the data indefinitely; "last_only" means to store only the most recent piece of data.
-        type: string
-      standard:
-        description: Reserved for future use.
-        type: string
-  Device:
-    properties:
-      app_id:
-        description: 'The application&#39;s UUID that this device belongs to.'
-        type: string
-      certificate:
-        description: The client certificate for authenticating this device. This value is returned only when a device is created with a certificate signing request.
-        type: string
-      created_on:
-        description: |
-          The timestamp of when the device was created. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
-        format: int64
-        type: integer
-      description:
-        description: A description (4-200 characters in length) of the device.
-        type: string
-      id:
-        description: The universally unique identifier (UUID) of the device.
-        type: string
-      identifier:
-        description: |
-          This string is a human-readable identifier (1-200 characters in length) for the device. For example a VIN number, MAC address, etc. This identifier differs from the universally unique identifier (UUID).
-        type: string
-      issuer:
-        description: The certificate issuer for this devices certificates used for authentication.
-        type: string
-      name:
-        description: The name (1-200 characters in length) of the device.
-        type: string
-      org_id:
-        description: The organization the device belongs to.
-        type: string
-      private_key:
-        description: (Deprecated) The RSA private key for the device. This value is passed in the response only when a device is created.
-        type: string
-      pub_key:
-        description: (Deprecated) The RSA public key of the device. This value is passed in the response only when a device is created.
-        type: string
-      tags:
-        description: An array containing the UUIDs of the tags created by the user.
-        items:
-          $ref: '#/definitions/DeviceTag'
-        type: array
-      user_id:
-        description: The UUID of the user associated with the device.
-        type: string
-      version_hash:
-        description: 'A hash of the version information. This value is available for "component" category.'
-        type: string
-  DeviceCSR:
-    properties:
-      csr:
-        description: The PEM-encoded Certificate Signing Request (CSR).
-        type: string
-    required:
-      - csr
-  DeviceCapability:
-    properties:
-      association:
-        description: 'The association to use. This call be an empty string or "user".'
-        type: string
-      cap_name:
-        description: The capability name.
-        type: string
-      expires_on:
-        description: 'Whether the granted capability expires. If there is no expiry date, the value is "null".'
-        type: string
-      granted_name:
-        description: 'The name of the entity that&#39;s being granted the capability.'
-        type: string
-      granted_org_id:
-        description: The UUID of the organization that the granted entity belongs to.
-        type: string
-      granted_org_name:
-        description: 'The organization name of the application that&#39;s granted the capability.'
-        type: string
-      granted_to:
-        description: 'The UUID of the entity that&#39;s granted the capability.'
-        type: string
-      granted_type:
-        description: 'The type of entity that&#39;s that is granted the new capability. The values can be "app", "device", "org", "tag", or "user".'
-        type: string
-      target_id:
-        description: The universally unique identifier (UUID) of what the capability grants permissions to.
-        type: string
-      target_name:
-        description: The name of the entity granting the capability.
-        type: string
-      target_type:
-        description: 'The entity type that the capability is granted on, called a target.'
-        type: string
-    required:
-      - target_id
-      - target_type
-      - cap_name
-      - granted_to
-      - granted_type
-  DeviceCreate:
-    properties:
-      app_id:
-        description: 'The application&#39;s UUID that this device belongs to.'
-        type: string
-      csr:
-        description: 'The certificate signing request to use to create a client certificate, which can be used to authenticate access to this device.'
-        type: string
-      description:
-        description: The description of the device.
-        type: string
-      identifier:
-        description: |
-          This string is a human-readable identifier for the device. For example a VIN number, MAC address, etc. This identifier differs from the UUID.
-        type: string
-      name:
-        description: The name of the device.
-        type: string
-      pub_key:
-        description: (Deprecated) The RSA public key of the device.
-        type: string
-      user_id:
-        description: The universally unique identifier( UUID) of the user associated with the device.
-        type: string
-    required:
-      - name
-      - app_id
-  DeviceTag:
-    properties:
-      tag_id:
-        description: The universally unique identifier (UUID) of the tag.
-        type: string
-  DeviceUpdate:
-    properties:
-      description:
-        description: The description of the device.
-        type: string
-      identifier:
-        description: |
-          This string is a human-readable identifier for the device. For example a VIN number, MAC address, etc. This identifier differs from the UUID.
-        type: string
-      name:
-        description: The name of the device.
-        type: string
-      pub_key:
-        description: (Deprecated) The RSA public key for the device.
-        type: string
-      user_id:
-        description: The UUID of the user that this device is associated with.
-        type: string
-  ElasticDSL: {}
-  ElasticResult:
-    properties:
-      hits:
-        $ref: '#/definitions/HitSummary'
-      timed_out:
-        description: |
-          A value of "True" if the query timed out; otherwise "False".
-        type: boolean
-      took:
-        description: |
-          The number of milliseconds that the request took to complete.
-        type: integer
-    required:
-      - took
-      - timed_out
-      - hits
-  FileCapability:
-    properties:
-      association:
-        description: 'The association to use. This call be an empty string or "user".'
-        type: string
-      cap_name:
-        description: The capability name.
-        type: string
-      expires_on:
-        description: 'Whether the granted capability expires. If there is no expiry date, the value is "null".'
-        type: string
-      granted_name:
-        description: 'The name of the entity that&#39;s being granted the capability.'
-        type: string
-      granted_org_id:
-        description: The UUID of the organization that the granted entity belongs to.
-        type: string
-      granted_org_name:
-        description: 'The organization name of the application that&#39;s granted the capability.'
-        type: string
-      granted_to:
-        description: 'The UUID of the entity that&#39;s granted the capability.'
-        type: string
-      granted_type:
-        description: 'The type of entity that&#39;s that is granted the new capability. The values can be "app", "device", "org", "tag", or "user".'
-        type: string
-      target_id:
-        description: The universally unique identifier (UUID) of what the capability grants permissions to.
-        type: string
-      target_name:
-        description: The name of the entity granting the capability.
-        type: string
-      target_type:
-        description: 'The entity type that the capability is granted on, called a target.'
-        type: string
-    required:
-      - target_id
-      - target_type
-      - cap_name
-      - granted_to
-      - granted_type
-  FileFilter:
-    description: A filter for file notifications.
-    properties:
-      device_id:
-        description: |
-          The universally unique identifier (UUID) of the device to monitor for changes.
-        type: string
-  FileInfo:
-    properties:
-      created_on:
-        description: |
-          A timestamp of when the file was created on the system. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
-        format: int64
-        type: integer
-      description:
-        description: A description for the file.
-        type: string
-      download_url:
-        description: |
-          The HTTP URL to download the file. This property is only available if the file completely uploads.
-        type: string
-      filename:
-        description: |
-          The filename for the file. Paths can be encoded in the filename with slash ("/") characters to separate them.
-        type: string
-      id:
-        description: The universally unique identifier for the file.
-        type: string
-      metadata:
-        description: |
-          The JSON object containing metadata information about the file.
-        type: object
-      owner_id:
-        description: |
-          The UUID of the device that the file belongs to.
-        type: string
-      owner_type:
-        description: |
-          The type of entity the file belongs to. The only value that&#39;s valid is "device".
-        type: string
-      size:
-        description: The size of the file in bytes.
-        type: integer
-      uploaded_on:
-        description: |
-          A timestamp of when the file finished uploading. Returns null if the file doesn&#39;t completely upload. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
-        format: int64
-        type: integer
-    required:
-      - id
-      - filename
-      - owner_id
-      - owner_type
-      - size
-      - created_on
-  FileUpdate:
-    properties:
-      description:
-        description: A description for the file.
-        type: string
-      metadata:
-        description: A metadata for the file.
-        type: object
-  FilesInfo:
-    properties:
-      created_on:
-        description: |
-          A timestamp of when the file was created on the system. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
-        format: int64
-        type: integer
-      description:
-        description: A description for the file.
-        type: string
-      filename:
-        description: |
-          The filename for the file. Paths can be encoded in the filename with slash ("/") characters to separate them.
-        type: string
-      id:
-        description: The universally unique identifier (UUID) for the file.
-        type: string
-      metadata:
-        description: |
-          The JSON object containing metadata information about the file.
-        type: object
-      owner_id:
-        description: |
-          The UUID of the device the file belongs to.
-        type: string
-      owner_type:
-        description: |
-          The type of entity the file belongs to. The only value that&#39;s valid is "device".
-        type: string
-      size:
-        description: The size of the file in bytes.
-        type: integer
-      uploaded_on:
-        description: |
-          A timestamp of when the file finished uploading. Returns null if the file doesn&#39;t completely upload. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
-        format: int64
-        type: integer
-    required:
-      - id
-      - filename
-      - owner_id
-      - owner_type
-      - size
-      - created_on
-  Firehose:
-    properties:
-      description:
-        description: |
-          The description of the firehose, such as "This firehose reports all events and data changes from devices of Application Type A".
-        type: string
-      id:
-        description: The UUID of the firehose.
-        type: string
-      name:
-        description: 'The name of the firehose, such as "Firehose for Application Type A".'
-        type: string
-      org_id:
-        description: The universally unique identifier (UUID) of the organization that the firehose belongs to.
-        type: string
-    required:
-      - org_id
-      - name
-      - description
-      - id
-  FirehoseAck:
-    properties:
-      token:
-        description: A base64-encoded token used acknowledge a piece of event data that was received.
-        type: string
-    required:
-      - token
-  FirehoseCapability:
-    properties:
-      cap_name:
-        description: The capability name.
-        type: string
-      granted_to:
-        description: The UUID of the entity that is granted the capability.
-        type: string
-      target_id:
-        description: The universally unique identifier (UUID) of what the capability grants permissions to.
-        type: string
-    required:
-      - target_id
-      - cap_name
-      - granted_to
-  FirehoseCreate:
-    properties:
-      description:
-        description: |
-          The description of the firehose, such as "This firehose reports all events and data changes from devices of Application Type A".
-        type: string
-      name:
-        description: 'The name of the firehose, such as "Firehose for Application Type A".'
-        type: string
-      org_id:
-        description: The organization ID (UUID) of the organization on which you wish to create a firehose.
-        type: string
-    required:
-      - name
-  FirehoseUpdate:
-    properties:
-      description:
-        description: |
-          The description of the firehose, such as "This firehose reports all events and data changes from devices of Application Type A".
-        type: string
-      name:
-        description: 'The name of the firehose, such as "Firehose for Application Type A".'
-        type: string
-  HitSummary:
-    description: |
-      Summary of information about the search results.
-    properties:
-      hits:
-        description: |
-          An array of documents that match the specified query.
-        items:
-          type: object
-        type: array
-      total:
-        description: |
-          The total number of search results (specified by 'hits') that are found.
-        type: integer
-  Message:
-    properties:
-      created_on:
-        description: |
-          The timestamp when the message is received by the server. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
-        format: int64
-        type: integer
-      data:
-        description: |
-          The data of the message in JSON format. The object is application-defined and created by the sending device.
-        type: object
-      msg_id:
-        description: |
-          This identifier is the UUID of the message.
-        type: string
-      sender_id:
-        description: The universally unique identifier (UUID) of the sending device.
-        type: string
-      sent_on:
-        description: |
-          The timestamp when the message is sent by the device. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch. There can be situations when messages are sent long before the server receives them, such as when using a proxy.
-        format: int64
-        type: integer
-      target_id:
-        description: The UUID of the receiving or target device.
-        type: string
-      type:
-        description: |
-          The type of message is application-defined. For example, the message type could be message.create.wipe (to wipe the device), message.create.unlock (to unlock a door), or message.create.ping (to ping a device).
-        type: string
-      watermark_id:
-        description: |
-          This identifier represents where in the message queue this message lies. When you acknowledge the message with this identifier, the system removes the message and any older messages from the queue. You must acknowledge the 'watermark_id' to move forward in the message queue.
-        type: string
-    required:
-      - target_id
-      - msg_id
-      - watermark_id
-  MessageAcknowledge:
-    properties:
-      watermark_id:
-        description: |
-          Each message contains an identifier. You can use that identifier to acknowledge all messages up to and including that message.
-        type: string
-  MessageCreate:
-    properties:
-      data:
-        description: |
-          The data of the message in JSON format. The object is application-defined and created by the sending device.
-        type: object
-      sent_on:
-        description: |
-          The timestamp when the message was sent by the device. This timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch. There can be situations when messages are sent long before the server receives them, such as when using a proxy.
-        format: int64
-        type: integer
-      target_id:
-        description: The UUID of the receiving or target device.
-        type: string
-      type:
-        description: |
-          The type of message is application-defined. For example, the message type could be message.create.wipe (to wipe the device), message.create.unlock (to unlock a door), or message.create.ping (to ping a device).
-        type: string
-    required:
-      - type
-      - target_id
-      - data
-  MessageFilter:
-    description: A filter for the message.
-    properties:
-      type:
-        description: |
-          The message type to filter. The message type you specify is what you receive a notification for. If you filter for a message called message.create.ping, your would get a notification each time your device is sent a message of that type.
-        type: string
-  Notification:
-    properties:
-      action:
-        description: |
-          The action for the notification. A value of "new" specifies that there&#39;s a new notification or a new file was created. A value of "delete" specifies that a file was deleted.
-        enum:
-          - new
-          - delete
-        type: string
-      data:
-        description: |
-          A JSON-formatted object that contains the notification information.
-        type: object
-      type:
-        description: |
-          The type of notification.
-        enum:
-          - message
-          - data
-        type: string
-    required:
-      - type
-      - action
-  NotificationFilter:
-    description: The filter to use for the notification.
-    properties:
-      data_filters:
-        items:
-          $ref: '#/definitions/DataFilter'
-        type: array
-      file_filters:
-        items:
-          $ref: '#/definitions/FileFilter'
-        type: array
-      message_filters:
-        items:
-          $ref: '#/definitions/MessageFilter'
-        type: array
-  Org:
-    properties:
-      id:
-        description: The universally unique identifier (UUID) of the organization.
-        type: string
-      name:
-        description: The name of the organization.
-        type: string
-      tags:
-        description: An array containing the UUIDs of the tags created by the user.
-        items:
-          $ref: '#/definitions/OrgTag'
-        type: array
-    required:
-      - name
-  OrgCapability:
-    properties:
-      cap_name:
-        description: The name of the capability.
-        type: string
-      granted_to:
-        description: The UUID of the entity that had been granted the capability.
-        type: string
-      target_id:
-        description: The universally unique identifier (UUID) of the target organization.
-        type: string
-    required:
-      - target_id
-      - cap_name
-      - granted_to
-  OrgTag:
-    properties:
-      tag_id:
-        description: The universally unique identifier (UUID) of the tag.
-        type: string
-  Subscription:
-    properties:
-      event_filter:
-        description: |
-          This field narrows the stream to only data with this "matching" string.  Only applicable when the event_type is "data".
-        type: string
-      event_type:
-        description: |
-          This field determines which events are streamed.  Valid values are "data", "file", and "lifecycle". The life cycle events include create, delete, updates events for the scope type.
-        type: string
-      firehose_id:
-        description: The UUID of the firehose.
-        type: string
-      id:
-        description: The UUID of the subscription.
-        type: string
-      scope_id:
-        description: The UUID of the entity the subscription is scoped to.
-        type: string
-      scope_name:
-        description: The scope name.
-        type: string
-      scope_type:
-        description: 'The scope type.  Valid values are "app" and "device".'
-        type: string
-    required:
-      - id
-      - firehose_id
-      - scope_id
-      - scope_type
-      - event_type
-  SubscriptionCreate:
-    properties:
-      event_filter:
-        description: |
-          This field narrows the stream to only data with this "matching" string.  Only applicable when the event_type is "data".
-        type: string
-      event_type:
-        description: |
-          This field determines which events are streamed.  Valid values are "data", "file", "lifecycle", and "*". The life cycle events include create, delete, updates events for the scope type.
-        type: string
-      scope_id:
-        description: The UUID of the entity the subscription is scoped to.
-        type: string
-      scope_type:
-        description: 'The scope type.  Valid values are "app" and "device".'
-        type: string
-    required:
-      - scope_id
-      - scope_type
-      - event_type
-  Tag:
-    properties:
-      color:
-        description: |
-          A color for the tag. The color is specified as hex triplet and starts with a hash character. For more information about values you can use, see http://en.wikipedia.org/wiki/Web_colors.
-        type: string
-      description:
-        description: |
-          A description about the tag that users and administrators can see.
-        type: string
-      exposing:
-        description: |
-          An immutable value specified at creation time of the tag.  When "True", the tag can be designated as the target of granted capabilities, which is known as an exposing tag. When "False", the tag can&#39;t be the target of a capability, which is known as a non-exposing tag. If no value is specified, the default value is "True".
-        type: boolean
-      id:
-        description: The universally unique identifier (UUID) of the tag.
-        type: string
-      name:
-        description: |
-          The name of the tag. This name doesn&#39;t need to be unique. Often, this name appears on the application screens to end users. For example, when you create your organization, a tag with the name of Admin is created. The user that created the organization is assigned the Admin tag.
-        type: string
-      owner_id:
-        description: |
-          The owner of the tag.  The owner is identified by the UUID of the organization or user.
-        type: string
-      owner_type:
-        description: |
-          Tags can be owned and managed by a user or by an organization. Typically, organizations create the first set of rules across their applications and can delegate some of the permission management down to the end users (e.g., users can share their location if they want to). In cases where users manage the permissions, the owner would be the user, otherwise the owner is the organization ("org").
-        enum:
-          - org
-          - user
-        type: string
-    required:
-      - name
-      - description
-      - owner_type
-      - owner_id
-      - id
-      - exposing
-  TagCapability:
-    properties:
-      association:
-        description: |
-          The capability association type. The association type can be "same_user", which indicates to grant the capability to devices that belong to the same user.
-        type: string
-      cap_name:
-        description: |
-          The name of the capability.
-        type: string
-      granted_name:
-        description: "The name of the entity that you have granted the capability to. The entity is specified in the 'granted_to' parameter."
-        type: string
-      granted_org_id:
-        description: "The UUID of the organization which the entity belongs to. The entity is specified in the 'granted_to' parameter."
-        type: string
-      granted_org_name:
-        description: "The name of the organization which the entity belongs to. The entity is specified in the 'granted_to' parameter."
-        type: string
-      granted_to:
-        description: |
-          The UUID of the entity to grant the capability to.
-        type: string
-      granted_type:
-        description: The type of entity the capability is granted to.
-        type: string
-      target_id:
-        description: |
-          The universally unique identifier (UUID) of the entity granting the capability to perform an action on it.
-        type: string
-      target_name:
-        description: The name of the tag that you are granting the capability on.
-        type: string
-      target_type:
-        description: |
-          The type of entity that&#39;s being granted the capability. This value should be "tag" (tags).
-        type: string
-    required:
-      - target_id
-      - cap_name
-      - granted_to
-      - granted_type
-      - target_type
-  TagCreate:
-    properties:
-      color:
-        description: |
-          A color for the tag. The color is specified as hex triplet and starts with a hash character. If no value is specified, the default value is "#000000" (black). For more information about the values you can use, see http://en.wikipedia.org/wiki/Web_colors.
-        type: string
-      description:
-        description: |
-          A description about the tag that users and administrators can see. The description must be 4-200 characters in length.
-        type: string
-      exposing:
-        description: |
-          An immutable value specified at creation time of the tag. When "True", the tag can be designated as the target of granted capabilities, which is known as an exposing tag. When "False", the tag can&#39;t be the target of a capability, which is known as a non-exposing tag. The advantage of using a non-exposing tag is that no additional capabilities are required. If no value is specified, the default value is "True".
-        type: boolean
-      name:
-        description: |
-          The name of the tag. This name doesn&#39;t need to be unique. Often, this name appears on the application screens to end users. For example, when you create your organization, a tag with the name of Admin is created. The user that created the organization is assigned the Admin tag.
-        type: string
-      owner_id:
-        description: |
-          The owner of the tag.  The owner is identified by the UUID of the organization or user. If this value isn&#39;t provided, it is determined by the caller&#39;s organization or user in the 'owner_type' property.
-        type: string
-      owner_type:
-        description: |
-          Tags can be owned and managed by a user or by an organization. Typically, organizations create the first set of rules across their applications and can delegate some of the permission management down to the end users (e.g., users can share their location if they want to). In cases where users manage the permissions, the owner would be the user ("user"); otherwise, the owner is the organization ("org").
-        enum:
-          - org
-          - user
-        type: string
-    required:
-      - owner_type
-      - name
-      - description
-  TagEntity:
-    properties:
-      tag_id:
-        description: |
-          The universally unique identifier (UUID) of tag.
-        type: string
-      tagged_id:
-        description: |
-          The universally unique identifier (UUID) of the entity that is tagged with this tag.
-        type: string
-      type:
-        description: |
-          The type of entity.
-        type: string
-    required:
-      - tag_id
-      - tagged_id
-      - type
-  TagUpdate:
-    properties:
-      color:
-        description: |
-          A color for the tag. The color is specified as hex triplet and starts with a hash character. For more information about values you can use, see http://en.wikipedia.org/wiki/Web_colors.
-        type: string
-      description:
-        description: |
-          A description about the tag that users and administrators can see.
-        type: string
-      name:
-        description: |
-          The name of the tag. This name doesn&#39;t need to be unique. Often, this name appears on the application screens to end users. For example, when you create your organization, a tag with the name of Admin is created. The user that created the organization is assigned the Admin tag.
-        type: string
-  User:
-    properties:
-      created_on:
-        description: |
-          The timestamp of when the user was created. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
-        format: int64
-        type: integer
-      email:
-        description: The email address of the user. This email addressed is used to sign in to the system.
-        type: string
-      id:
-        description: The universally unique identifier (UUID) for the user.
-        type: string
-      orgs:
-        description: An array containing the UUIDs of the organizations the user belongs to.
-        items:
-          type: string
-        type: array
-      tags:
-        description: An array containing the UUIDs of the tags created by the user.
-        items:
-          $ref: '#/definitions/UserTag'
-        type: array
-    required:
-      - id
-      - email
-      - created_on
-  UserCapability:
-    properties:
-      cap_name:
-        description: The capability name.
-        type: string
-      granted_to:
-        description: The universally unique identifier (UUID) of the entity that has been granted a capability.
-        type: string
-      target_id:
-        description: The name of the user capability.
-        type: string
-    required:
-      - target_id
-      - cap_name
-      - granted_to
-  UserProfile:
-    properties:
-      first_name:
-        description: A first name of the user.
-        type: string
-      last_name:
-        description: The surname of the user.
-        type: string
-      user_id:
-        description: The universally unique identifier (UUID) for the user.
-        type: string
-    required:
-      - user_id
-      - first_name
-      - last_name
-  UserTag:
-    properties:
-      tag_id:
-        description: The universally unique identifier (UUID) of the tag.
-        type: string
+swagger: '2.0'
+schemes:
+  - https
 host: iot.blackberry.com
+basePath: /api/1
 info:
   title: BlackBerry IoT Platform REST API
   version: 1.0.0
@@ -1107,6 +11,18 @@ info:
     url: 'https://iot.blackberry.com/api/1/api-docs'
     version: '1.2'
   x-providerName: blackberry.com
+tags:
+  - name: apps
+  - name: caps
+  - name: devices
+  - name: firehoses
+  - name: messages
+  - name: files
+  - name: notifications
+  - name: orgs
+  - name: search
+  - name: tags
+  - name: users
 paths:
   /apps:
     get:
@@ -3382,18 +2298,1102 @@ paths:
       summary: Add a tag to a user
       tags:
         - users
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - name: apps
-  - name: caps
-  - name: devices
-  - name: firehoses
-  - name: messages
-  - name: files
-  - name: notifications
-  - name: orgs
-  - name: search
-  - name: tags
-  - name: users
+definitions:
+  App:
+    properties:
+      created_on:
+        description: |
+          The timestamp of when the device was created. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
+        format: int64
+        type: integer
+      description:
+        description: 'The description of the application, such as "My Awesome App does awesome things".'
+        type: string
+      id:
+        description: The UUID of the application.
+        type: string
+      name:
+        description: 'The name of the application, such as "My Awesome App".'
+        type: string
+      org_id:
+        description: The universally unique identifier (UUID) of the organization that the application belongs to.
+        type: string
+      tags:
+        description: An array containing the UUIDs of the tags created by the user.
+        items:
+          $ref: '#/definitions/AppTag'
+        type: array
+    required:
+      - org_id
+      - name
+      - description
+      - id
+      - created_on
+  AppCapability:
+    properties:
+      association:
+        description: 'The association to use. This call be an empty string or "user".'
+        type: string
+      cap_name:
+        description: The capability name.
+        type: string
+      expires_on:
+        description: 'Whether the granted capability expires. If there is no expiry date, the value is "null".'
+        type: string
+      granted_name:
+        description: 'The name of the entity that&#39;s being granted the capability.'
+        type: string
+      granted_org_id:
+        description: The UUID of the organization that the granted entity belongs to.
+        type: string
+      granted_org_name:
+        description: 'The organization name of the application that&#39;s granted the capability.'
+        type: string
+      granted_to:
+        description: 'The UUID of the entity that&#39;s granted the capability.'
+        type: string
+      granted_type:
+        description: 'The type of entity that&#39;s that is granted the new capability. The values can be "app", "device", "org", "tag", or "user".'
+        type: string
+      target_id:
+        description: The universally unique identifier (UUID) of what the capability grants permissions to.
+        type: string
+      target_name:
+        description: The name of the entity granting the capability.
+        type: string
+      target_type:
+        description: 'The entity type that the capability is granted on, called a target.'
+        type: string
+    required:
+      - target_id
+      - target_type
+      - cap_name
+      - granted_to
+      - granted_type
+  AppCreate:
+    properties:
+      description:
+        description: |
+          A description of the application.
+        type: string
+      name:
+        description: 'The name of the application, such as "My Awesome App".'
+        type: string
+      org_id:
+        description: The universally unique identifier (UUID) of the organization (UUID) that the application belongs to.
+        type: string
+    required:
+      - name
+  AppKeys:
+    properties:
+      api_key:
+        description: |
+          A key, referred to as API KEY, that uniquely identifies the application during the authentication process. The authentication process is used to verify the authenticity of the application to the system.
+        type: string
+      api_secret:
+        description: |
+          A string, referred to as API SECRET that&#39;s used with the 'api_key' during the authentication process. Ensure that you don&#39;t share this secret and keep it secure.
+        type: string
+    required:
+      - api_key
+      - api_secret
+  AppTag:
+    properties:
+      tag_id:
+        description: The universally unique identifier (UUID) of the tag.
+        type: string
+  AppUpdate:
+    properties:
+      description:
+        description: 'The description of the application, such as "My Awesome App does awesome things".'
+        type: string
+      name:
+        description: 'The name of the application, such as "My Awesome App".'
+        type: string
+  Cap:
+    properties:
+      display_name:
+        description: The display name of the capability.
+        type: string
+      name:
+        description: The internal name of the capability.
+        type: string
+      supported_targets:
+        description: The supported targets of this capability.
+        items:
+          type: string
+        type: array
+  Data:
+    properties:
+      category:
+        description: |
+          The data type. You can specify "component", "log", "state", and "alarm". The default is "state".
+        enum:
+          - component
+          - log
+          - state
+          - alarm
+        type: string
+      device_id:
+        description: The universally unique identifier (UUID) of the device this data applies to.
+        type: string
+      id:
+        description: The name of the data.
+        type: string
+      recorded_on:
+        description: |
+          The timestamp of when the data was created. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
+        format: int64
+        type: integer
+      standard:
+        description: Reserved for future use.
+        type: string
+      values:
+        description: |
+          The key-value pairs of the recorded data. Nested data can be stored (keys with arrays or objects for example), however flat data can only be indexed.
+        type: object
+    required:
+      - device_id
+      - recorded_on
+      - id
+      - values
+  DataCreateBulk:
+    properties:
+      category:
+        description: |
+          The data type. You can specify "component", "log", "state", and "alarm". The default is "state".
+        enum:
+          - component
+          - log
+          - state
+          - alarm
+        type: string
+      data:
+        items:
+          $ref: '#/definitions/DataCreateData'
+        type: array
+      standard:
+        description: Reserved for future use.
+        type: string
+    required:
+      - data
+  DataCreateData:
+    properties:
+      id:
+        description: The name of the data.
+        type: string
+      recorded_on:
+        description: |
+          The timestamp of when the data was created. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
+        format: int64
+        type: integer
+      values:
+        description: |
+          The key-value pairs of the recorded data. Nested data can be stored (keys with arrays or objects for example).
+        type: object
+    required:
+      - id
+      - recorded_on
+      - values
+  DataFilter:
+    description: The filter to use for the data in the notification.
+    properties:
+      category:
+        description: |
+          The data type that this policy applies to. You can specify "component", "log", "state", and "alarm". The default is "state".
+        enum:
+          - component
+          - log
+          - state
+          - alarm
+        type: string
+      data_id:
+        description: |
+          The data identifier to monitor for changes on the specified 'device_id'. The identifier you choose is meaningful to your application.
+        type: string
+      device_id:
+        description: |
+          The universally unique identifier (UUID) of the device to monitor for changes.
+        type: string
+      standard:
+        description: |
+          Reserved for future use.
+        type: string
+    required:
+      - device_id
+  DataRetention:
+    properties:
+      app_id:
+        description: The UUID of the application that the policy applies to.
+        type: string
+      category:
+        description: |
+          The data type that this policy applies to.
+        enum:
+          - component
+          - log
+          - state
+          - alarm
+        type: string
+      id:
+        description: The UUID of the data retention policy.
+        type: string
+      name:
+        description: The name of the data.
+        type: string
+      retention:
+        description: |
+          The number of days to store the data. The string "forever" can be used to specify to store the data indefinitely; "last_only" means to store only the most recent piece of data.
+        type: string
+      standard:
+        description: 'Reserved for future use. The returned value is "null".'
+        type: string
+    required:
+      - id
+      - app_id
+      - category
+      - name
+      - retention
+  DataRetentionCreate:
+    properties:
+      category:
+        description: |
+          The data type that this policy applies to.
+        enum:
+          - component
+          - log
+          - state
+          - alarm
+        type: string
+      name:
+        description: The name of the data.
+        type: string
+      retention:
+        description: |
+          The number of days to store the data. The string "forever" can be used to specify to store the data indefinitely; "last_only" means to store only the most recent piece of data.
+        type: string
+      standard:
+        description: Reserved for future use.
+        type: string
+    required:
+      - category
+      - name
+      - retention
+  DataRetentionUpdate:
+    properties:
+      category:
+        description: |
+          The data type that this policy applies to. You can specify "component", "log", "state", and "alarm". The default is "state".
+        enum:
+          - component
+          - log
+          - state
+          - alarm
+        type: string
+      name:
+        description: The name of the data.
+        type: string
+      retention:
+        description: |
+          The number of days to store the data. The string "forever" can be used to specify to store the data indefinitely; "last_only" means to store only the most recent piece of data.
+        type: string
+      standard:
+        description: Reserved for future use.
+        type: string
+  Device:
+    properties:
+      app_id:
+        description: 'The application&#39;s UUID that this device belongs to.'
+        type: string
+      certificate:
+        description: The client certificate for authenticating this device. This value is returned only when a device is created with a certificate signing request.
+        type: string
+      created_on:
+        description: |
+          The timestamp of when the device was created. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
+        format: int64
+        type: integer
+      description:
+        description: A description (4-200 characters in length) of the device.
+        type: string
+      id:
+        description: The universally unique identifier (UUID) of the device.
+        type: string
+      identifier:
+        description: |
+          This string is a human-readable identifier (1-200 characters in length) for the device. For example a VIN number, MAC address, etc. This identifier differs from the universally unique identifier (UUID).
+        type: string
+      issuer:
+        description: The certificate issuer for this devices certificates used for authentication.
+        type: string
+      name:
+        description: The name (1-200 characters in length) of the device.
+        type: string
+      org_id:
+        description: The organization the device belongs to.
+        type: string
+      private_key:
+        description: (Deprecated) The RSA private key for the device. This value is passed in the response only when a device is created.
+        type: string
+      pub_key:
+        description: (Deprecated) The RSA public key of the device. This value is passed in the response only when a device is created.
+        type: string
+      tags:
+        description: An array containing the UUIDs of the tags created by the user.
+        items:
+          $ref: '#/definitions/DeviceTag'
+        type: array
+      user_id:
+        description: The UUID of the user associated with the device.
+        type: string
+      version_hash:
+        description: 'A hash of the version information. This value is available for "component" category.'
+        type: string
+  DeviceCSR:
+    properties:
+      csr:
+        description: The PEM-encoded Certificate Signing Request (CSR).
+        type: string
+    required:
+      - csr
+  DeviceCapability:
+    properties:
+      association:
+        description: 'The association to use. This call be an empty string or "user".'
+        type: string
+      cap_name:
+        description: The capability name.
+        type: string
+      expires_on:
+        description: 'Whether the granted capability expires. If there is no expiry date, the value is "null".'
+        type: string
+      granted_name:
+        description: 'The name of the entity that&#39;s being granted the capability.'
+        type: string
+      granted_org_id:
+        description: The UUID of the organization that the granted entity belongs to.
+        type: string
+      granted_org_name:
+        description: 'The organization name of the application that&#39;s granted the capability.'
+        type: string
+      granted_to:
+        description: 'The UUID of the entity that&#39;s granted the capability.'
+        type: string
+      granted_type:
+        description: 'The type of entity that&#39;s that is granted the new capability. The values can be "app", "device", "org", "tag", or "user".'
+        type: string
+      target_id:
+        description: The universally unique identifier (UUID) of what the capability grants permissions to.
+        type: string
+      target_name:
+        description: The name of the entity granting the capability.
+        type: string
+      target_type:
+        description: 'The entity type that the capability is granted on, called a target.'
+        type: string
+    required:
+      - target_id
+      - target_type
+      - cap_name
+      - granted_to
+      - granted_type
+  DeviceCreate:
+    properties:
+      app_id:
+        description: 'The application&#39;s UUID that this device belongs to.'
+        type: string
+      csr:
+        description: 'The certificate signing request to use to create a client certificate, which can be used to authenticate access to this device.'
+        type: string
+      description:
+        description: The description of the device.
+        type: string
+      identifier:
+        description: |
+          This string is a human-readable identifier for the device. For example a VIN number, MAC address, etc. This identifier differs from the UUID.
+        type: string
+      name:
+        description: The name of the device.
+        type: string
+      pub_key:
+        description: (Deprecated) The RSA public key of the device.
+        type: string
+      user_id:
+        description: The universally unique identifier( UUID) of the user associated with the device.
+        type: string
+    required:
+      - name
+      - app_id
+  DeviceTag:
+    properties:
+      tag_id:
+        description: The universally unique identifier (UUID) of the tag.
+        type: string
+  DeviceUpdate:
+    properties:
+      description:
+        description: The description of the device.
+        type: string
+      identifier:
+        description: |
+          This string is a human-readable identifier for the device. For example a VIN number, MAC address, etc. This identifier differs from the UUID.
+        type: string
+      name:
+        description: The name of the device.
+        type: string
+      pub_key:
+        description: (Deprecated) The RSA public key for the device.
+        type: string
+      user_id:
+        description: The UUID of the user that this device is associated with.
+        type: string
+  ElasticDSL: {}
+  ElasticResult:
+    properties:
+      hits:
+        $ref: '#/definitions/HitSummary'
+      timed_out:
+        description: |
+          A value of "True" if the query timed out; otherwise "False".
+        type: boolean
+      took:
+        description: |
+          The number of milliseconds that the request took to complete.
+        type: integer
+    required:
+      - took
+      - timed_out
+      - hits
+  FileCapability:
+    properties:
+      association:
+        description: 'The association to use. This call be an empty string or "user".'
+        type: string
+      cap_name:
+        description: The capability name.
+        type: string
+      expires_on:
+        description: 'Whether the granted capability expires. If there is no expiry date, the value is "null".'
+        type: string
+      granted_name:
+        description: 'The name of the entity that&#39;s being granted the capability.'
+        type: string
+      granted_org_id:
+        description: The UUID of the organization that the granted entity belongs to.
+        type: string
+      granted_org_name:
+        description: 'The organization name of the application that&#39;s granted the capability.'
+        type: string
+      granted_to:
+        description: 'The UUID of the entity that&#39;s granted the capability.'
+        type: string
+      granted_type:
+        description: 'The type of entity that&#39;s that is granted the new capability. The values can be "app", "device", "org", "tag", or "user".'
+        type: string
+      target_id:
+        description: The universally unique identifier (UUID) of what the capability grants permissions to.
+        type: string
+      target_name:
+        description: The name of the entity granting the capability.
+        type: string
+      target_type:
+        description: 'The entity type that the capability is granted on, called a target.'
+        type: string
+    required:
+      - target_id
+      - target_type
+      - cap_name
+      - granted_to
+      - granted_type
+  FileFilter:
+    description: A filter for file notifications.
+    properties:
+      device_id:
+        description: |
+          The universally unique identifier (UUID) of the device to monitor for changes.
+        type: string
+  FileInfo:
+    properties:
+      created_on:
+        description: |
+          A timestamp of when the file was created on the system. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
+        format: int64
+        type: integer
+      description:
+        description: A description for the file.
+        type: string
+      download_url:
+        description: |
+          The HTTP URL to download the file. This property is only available if the file completely uploads.
+        type: string
+      filename:
+        description: |
+          The filename for the file. Paths can be encoded in the filename with slash ("/") characters to separate them.
+        type: string
+      id:
+        description: The universally unique identifier for the file.
+        type: string
+      metadata:
+        description: |
+          The JSON object containing metadata information about the file.
+        type: object
+      owner_id:
+        description: |
+          The UUID of the device that the file belongs to.
+        type: string
+      owner_type:
+        description: |
+          The type of entity the file belongs to. The only value that&#39;s valid is "device".
+        type: string
+      size:
+        description: The size of the file in bytes.
+        type: integer
+      uploaded_on:
+        description: |
+          A timestamp of when the file finished uploading. Returns null if the file doesn&#39;t completely upload. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
+        format: int64
+        type: integer
+    required:
+      - id
+      - filename
+      - owner_id
+      - owner_type
+      - size
+      - created_on
+  FileUpdate:
+    properties:
+      description:
+        description: A description for the file.
+        type: string
+      metadata:
+        description: A metadata for the file.
+        type: object
+  FilesInfo:
+    properties:
+      created_on:
+        description: |
+          A timestamp of when the file was created on the system. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
+        format: int64
+        type: integer
+      description:
+        description: A description for the file.
+        type: string
+      filename:
+        description: |
+          The filename for the file. Paths can be encoded in the filename with slash ("/") characters to separate them.
+        type: string
+      id:
+        description: The universally unique identifier (UUID) for the file.
+        type: string
+      metadata:
+        description: |
+          The JSON object containing metadata information about the file.
+        type: object
+      owner_id:
+        description: |
+          The UUID of the device the file belongs to.
+        type: string
+      owner_type:
+        description: |
+          The type of entity the file belongs to. The only value that&#39;s valid is "device".
+        type: string
+      size:
+        description: The size of the file in bytes.
+        type: integer
+      uploaded_on:
+        description: |
+          A timestamp of when the file finished uploading. Returns null if the file doesn&#39;t completely upload. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
+        format: int64
+        type: integer
+    required:
+      - id
+      - filename
+      - owner_id
+      - owner_type
+      - size
+      - created_on
+  Firehose:
+    properties:
+      description:
+        description: |
+          The description of the firehose, such as "This firehose reports all events and data changes from devices of Application Type A".
+        type: string
+      id:
+        description: The UUID of the firehose.
+        type: string
+      name:
+        description: 'The name of the firehose, such as "Firehose for Application Type A".'
+        type: string
+      org_id:
+        description: The universally unique identifier (UUID) of the organization that the firehose belongs to.
+        type: string
+    required:
+      - org_id
+      - name
+      - description
+      - id
+  FirehoseAck:
+    properties:
+      token:
+        description: A base64-encoded token used acknowledge a piece of event data that was received.
+        type: string
+    required:
+      - token
+  FirehoseCapability:
+    properties:
+      cap_name:
+        description: The capability name.
+        type: string
+      granted_to:
+        description: The UUID of the entity that is granted the capability.
+        type: string
+      target_id:
+        description: The universally unique identifier (UUID) of what the capability grants permissions to.
+        type: string
+    required:
+      - target_id
+      - cap_name
+      - granted_to
+  FirehoseCreate:
+    properties:
+      description:
+        description: |
+          The description of the firehose, such as "This firehose reports all events and data changes from devices of Application Type A".
+        type: string
+      name:
+        description: 'The name of the firehose, such as "Firehose for Application Type A".'
+        type: string
+      org_id:
+        description: The organization ID (UUID) of the organization on which you wish to create a firehose.
+        type: string
+    required:
+      - name
+  FirehoseUpdate:
+    properties:
+      description:
+        description: |
+          The description of the firehose, such as "This firehose reports all events and data changes from devices of Application Type A".
+        type: string
+      name:
+        description: 'The name of the firehose, such as "Firehose for Application Type A".'
+        type: string
+  HitSummary:
+    description: |
+      Summary of information about the search results.
+    properties:
+      hits:
+        description: |
+          An array of documents that match the specified query.
+        items:
+          type: object
+        type: array
+      total:
+        description: |
+          The total number of search results (specified by 'hits') that are found.
+        type: integer
+  Message:
+    properties:
+      created_on:
+        description: |
+          The timestamp when the message is received by the server. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
+        format: int64
+        type: integer
+      data:
+        description: |
+          The data of the message in JSON format. The object is application-defined and created by the sending device.
+        type: object
+      msg_id:
+        description: |
+          This identifier is the UUID of the message.
+        type: string
+      sender_id:
+        description: The universally unique identifier (UUID) of the sending device.
+        type: string
+      sent_on:
+        description: |
+          The timestamp when the message is sent by the device. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch. There can be situations when messages are sent long before the server receives them, such as when using a proxy.
+        format: int64
+        type: integer
+      target_id:
+        description: The UUID of the receiving or target device.
+        type: string
+      type:
+        description: |
+          The type of message is application-defined. For example, the message type could be message.create.wipe (to wipe the device), message.create.unlock (to unlock a door), or message.create.ping (to ping a device).
+        type: string
+      watermark_id:
+        description: |
+          This identifier represents where in the message queue this message lies. When you acknowledge the message with this identifier, the system removes the message and any older messages from the queue. You must acknowledge the 'watermark_id' to move forward in the message queue.
+        type: string
+    required:
+      - target_id
+      - msg_id
+      - watermark_id
+  MessageAcknowledge:
+    properties:
+      watermark_id:
+        description: |
+          Each message contains an identifier. You can use that identifier to acknowledge all messages up to and including that message.
+        type: string
+  MessageCreate:
+    properties:
+      data:
+        description: |
+          The data of the message in JSON format. The object is application-defined and created by the sending device.
+        type: object
+      sent_on:
+        description: |
+          The timestamp when the message was sent by the device. This timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch. There can be situations when messages are sent long before the server receives them, such as when using a proxy.
+        format: int64
+        type: integer
+      target_id:
+        description: The UUID of the receiving or target device.
+        type: string
+      type:
+        description: |
+          The type of message is application-defined. For example, the message type could be message.create.wipe (to wipe the device), message.create.unlock (to unlock a door), or message.create.ping (to ping a device).
+        type: string
+    required:
+      - type
+      - target_id
+      - data
+  MessageFilter:
+    description: A filter for the message.
+    properties:
+      type:
+        description: |
+          The message type to filter. The message type you specify is what you receive a notification for. If you filter for a message called message.create.ping, your would get a notification each time your device is sent a message of that type.
+        type: string
+  Notification:
+    properties:
+      action:
+        description: |
+          The action for the notification. A value of "new" specifies that there&#39;s a new notification or a new file was created. A value of "delete" specifies that a file was deleted.
+        enum:
+          - new
+          - delete
+        type: string
+      data:
+        description: |
+          A JSON-formatted object that contains the notification information.
+        type: object
+      type:
+        description: |
+          The type of notification.
+        enum:
+          - message
+          - data
+        type: string
+    required:
+      - type
+      - action
+  NotificationFilter:
+    description: The filter to use for the notification.
+    properties:
+      data_filters:
+        items:
+          $ref: '#/definitions/DataFilter'
+        type: array
+      file_filters:
+        items:
+          $ref: '#/definitions/FileFilter'
+        type: array
+      message_filters:
+        items:
+          $ref: '#/definitions/MessageFilter'
+        type: array
+  Org:
+    properties:
+      id:
+        description: The universally unique identifier (UUID) of the organization.
+        type: string
+      name:
+        description: The name of the organization.
+        type: string
+      tags:
+        description: An array containing the UUIDs of the tags created by the user.
+        items:
+          $ref: '#/definitions/OrgTag'
+        type: array
+    required:
+      - name
+  OrgCapability:
+    properties:
+      cap_name:
+        description: The name of the capability.
+        type: string
+      granted_to:
+        description: The UUID of the entity that had been granted the capability.
+        type: string
+      target_id:
+        description: The universally unique identifier (UUID) of the target organization.
+        type: string
+    required:
+      - target_id
+      - cap_name
+      - granted_to
+  OrgTag:
+    properties:
+      tag_id:
+        description: The universally unique identifier (UUID) of the tag.
+        type: string
+  Subscription:
+    properties:
+      event_filter:
+        description: |
+          This field narrows the stream to only data with this "matching" string.  Only applicable when the event_type is "data".
+        type: string
+      event_type:
+        description: |
+          This field determines which events are streamed.  Valid values are "data", "file", and "lifecycle". The life cycle events include create, delete, updates events for the scope type.
+        type: string
+      firehose_id:
+        description: The UUID of the firehose.
+        type: string
+      id:
+        description: The UUID of the subscription.
+        type: string
+      scope_id:
+        description: The UUID of the entity the subscription is scoped to.
+        type: string
+      scope_name:
+        description: The scope name.
+        type: string
+      scope_type:
+        description: 'The scope type.  Valid values are "app" and "device".'
+        type: string
+    required:
+      - id
+      - firehose_id
+      - scope_id
+      - scope_type
+      - event_type
+  SubscriptionCreate:
+    properties:
+      event_filter:
+        description: |
+          This field narrows the stream to only data with this "matching" string.  Only applicable when the event_type is "data".
+        type: string
+      event_type:
+        description: |
+          This field determines which events are streamed.  Valid values are "data", "file", "lifecycle", and "*". The life cycle events include create, delete, updates events for the scope type.
+        type: string
+      scope_id:
+        description: The UUID of the entity the subscription is scoped to.
+        type: string
+      scope_type:
+        description: 'The scope type.  Valid values are "app" and "device".'
+        type: string
+    required:
+      - scope_id
+      - scope_type
+      - event_type
+  Tag:
+    properties:
+      color:
+        description: |
+          A color for the tag. The color is specified as hex triplet and starts with a hash character. For more information about values you can use, see http://en.wikipedia.org/wiki/Web_colors.
+        type: string
+      description:
+        description: |
+          A description about the tag that users and administrators can see.
+        type: string
+      exposing:
+        description: |
+          An immutable value specified at creation time of the tag.  When "True", the tag can be designated as the target of granted capabilities, which is known as an exposing tag. When "False", the tag can&#39;t be the target of a capability, which is known as a non-exposing tag. If no value is specified, the default value is "True".
+        type: boolean
+      id:
+        description: The universally unique identifier (UUID) of the tag.
+        type: string
+      name:
+        description: |
+          The name of the tag. This name doesn&#39;t need to be unique. Often, this name appears on the application screens to end users. For example, when you create your organization, a tag with the name of Admin is created. The user that created the organization is assigned the Admin tag.
+        type: string
+      owner_id:
+        description: |
+          The owner of the tag.  The owner is identified by the UUID of the organization or user.
+        type: string
+      owner_type:
+        description: |
+          Tags can be owned and managed by a user or by an organization. Typically, organizations create the first set of rules across their applications and can delegate some of the permission management down to the end users (e.g., users can share their location if they want to). In cases where users manage the permissions, the owner would be the user, otherwise the owner is the organization ("org").
+        enum:
+          - org
+          - user
+        type: string
+    required:
+      - name
+      - description
+      - owner_type
+      - owner_id
+      - id
+      - exposing
+  TagCapability:
+    properties:
+      association:
+        description: |
+          The capability association type. The association type can be "same_user", which indicates to grant the capability to devices that belong to the same user.
+        type: string
+      cap_name:
+        description: |
+          The name of the capability.
+        type: string
+      granted_name:
+        description: "The name of the entity that you have granted the capability to. The entity is specified in the 'granted_to' parameter."
+        type: string
+      granted_org_id:
+        description: "The UUID of the organization which the entity belongs to. The entity is specified in the 'granted_to' parameter."
+        type: string
+      granted_org_name:
+        description: "The name of the organization which the entity belongs to. The entity is specified in the 'granted_to' parameter."
+        type: string
+      granted_to:
+        description: |
+          The UUID of the entity to grant the capability to.
+        type: string
+      granted_type:
+        description: The type of entity the capability is granted to.
+        type: string
+      target_id:
+        description: |
+          The universally unique identifier (UUID) of the entity granting the capability to perform an action on it.
+        type: string
+      target_name:
+        description: The name of the tag that you are granting the capability on.
+        type: string
+      target_type:
+        description: |
+          The type of entity that&#39;s being granted the capability. This value should be "tag" (tags).
+        type: string
+    required:
+      - target_id
+      - cap_name
+      - granted_to
+      - granted_type
+      - target_type
+  TagCreate:
+    properties:
+      color:
+        description: |
+          A color for the tag. The color is specified as hex triplet and starts with a hash character. If no value is specified, the default value is "#000000" (black). For more information about the values you can use, see http://en.wikipedia.org/wiki/Web_colors.
+        type: string
+      description:
+        description: |
+          A description about the tag that users and administrators can see. The description must be 4-200 characters in length.
+        type: string
+      exposing:
+        description: |
+          An immutable value specified at creation time of the tag. When "True", the tag can be designated as the target of granted capabilities, which is known as an exposing tag. When "False", the tag can&#39;t be the target of a capability, which is known as a non-exposing tag. The advantage of using a non-exposing tag is that no additional capabilities are required. If no value is specified, the default value is "True".
+        type: boolean
+      name:
+        description: |
+          The name of the tag. This name doesn&#39;t need to be unique. Often, this name appears on the application screens to end users. For example, when you create your organization, a tag with the name of Admin is created. The user that created the organization is assigned the Admin tag.
+        type: string
+      owner_id:
+        description: |
+          The owner of the tag.  The owner is identified by the UUID of the organization or user. If this value isn&#39;t provided, it is determined by the caller&#39;s organization or user in the 'owner_type' property.
+        type: string
+      owner_type:
+        description: |
+          Tags can be owned and managed by a user or by an organization. Typically, organizations create the first set of rules across their applications and can delegate some of the permission management down to the end users (e.g., users can share their location if they want to). In cases where users manage the permissions, the owner would be the user ("user"); otherwise, the owner is the organization ("org").
+        enum:
+          - org
+          - user
+        type: string
+    required:
+      - owner_type
+      - name
+      - description
+  TagEntity:
+    properties:
+      tag_id:
+        description: |
+          The universally unique identifier (UUID) of tag.
+        type: string
+      tagged_id:
+        description: |
+          The universally unique identifier (UUID) of the entity that is tagged with this tag.
+        type: string
+      type:
+        description: |
+          The type of entity.
+        type: string
+    required:
+      - tag_id
+      - tagged_id
+      - type
+  TagUpdate:
+    properties:
+      color:
+        description: |
+          A color for the tag. The color is specified as hex triplet and starts with a hash character. For more information about values you can use, see http://en.wikipedia.org/wiki/Web_colors.
+        type: string
+      description:
+        description: |
+          A description about the tag that users and administrators can see.
+        type: string
+      name:
+        description: |
+          The name of the tag. This name doesn&#39;t need to be unique. Often, this name appears on the application screens to end users. For example, when you create your organization, a tag with the name of Admin is created. The user that created the organization is assigned the Admin tag.
+        type: string
+  User:
+    properties:
+      created_on:
+        description: |
+          The timestamp of when the user was created. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
+        format: int64
+        type: integer
+      email:
+        description: The email address of the user. This email addressed is used to sign in to the system.
+        type: string
+      id:
+        description: The universally unique identifier (UUID) for the user.
+        type: string
+      orgs:
+        description: An array containing the UUIDs of the organizations the user belongs to.
+        items:
+          type: string
+        type: array
+      tags:
+        description: An array containing the UUIDs of the tags created by the user.
+        items:
+          $ref: '#/definitions/UserTag'
+        type: array
+    required:
+      - id
+      - email
+      - created_on
+  UserCapability:
+    properties:
+      cap_name:
+        description: The capability name.
+        type: string
+      granted_to:
+        description: The universally unique identifier (UUID) of the entity that has been granted a capability.
+        type: string
+      target_id:
+        description: The name of the user capability.
+        type: string
+    required:
+      - target_id
+      - cap_name
+      - granted_to
+  UserProfile:
+    properties:
+      first_name:
+        description: A first name of the user.
+        type: string
+      last_name:
+        description: The surname of the user.
+        type: string
+      user_id:
+        description: The universally unique identifier (UUID) for the user.
+        type: string
+    required:
+      - user_id
+      - first_name
+      - last_name
+  UserTag:
+    properties:
+      tag_id:
+        description: The universally unique identifier (UUID) of the tag.
+        type: string

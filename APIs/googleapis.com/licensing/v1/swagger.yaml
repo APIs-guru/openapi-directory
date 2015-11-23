@@ -1,57 +1,8 @@
-basePath: /apps/licensing/v1/product
-definitions:
-  LicenseAssignment:
-    description: Template for LiscenseAssignment Resource
-    properties:
-      etags:
-        description: ETag of the resource.
-        type: string
-      kind:
-        default: 'licensing#licenseAssignment'
-        description: Identifies the resource as a LicenseAssignment.
-        type: string
-      productId:
-        description: Name of the product.
-        type: string
-      selfLink:
-        description: Link to this page.
-        type: string
-      skuId:
-        description: Name of the sku of the product.
-        type: string
-      userId:
-        description: Email id of the user.
-        type: string
-    type: object
-  LicenseAssignmentInsert:
-    description: Template for LicenseAssignment Insert request
-    properties:
-      userId:
-        description: Email id of the user
-        type: string
-    type: object
-  LicenseAssignmentList:
-    description: LicesnseAssignment List for a given product/sku for a customer.
-    properties:
-      etag:
-        description: ETag of the resource.
-        type: string
-      items:
-        description: The LicenseAssignments in this page of results.
-        items:
-          $ref: '#/definitions/LicenseAssignment'
-        type: array
-      kind:
-        default: 'licensing#licenseAssignmentList'
-        description: Identifies the resource as a collection of LicenseAssignments.
-        type: string
-      nextPageToken:
-        description: 'The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
-        type: string
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/google-apps/licensing/'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /apps/licensing/v1/product
 info:
   contact:
     name: Google
@@ -70,6 +21,16 @@ info:
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: licensing
+externalDocs:
+  url: 'https://developers.google.com/google-apps/licensing/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/apps.licensing': View and manage Google Apps licenses for your domain
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -374,14 +335,53 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/apps.licensing': View and manage Google Apps licenses for your domain
-    type: oauth2
-swagger: '2.0'
+definitions:
+  LicenseAssignment:
+    description: Template for LiscenseAssignment Resource
+    properties:
+      etags:
+        description: ETag of the resource.
+        type: string
+      kind:
+        default: 'licensing#licenseAssignment'
+        description: Identifies the resource as a LicenseAssignment.
+        type: string
+      productId:
+        description: Name of the product.
+        type: string
+      selfLink:
+        description: Link to this page.
+        type: string
+      skuId:
+        description: Name of the sku of the product.
+        type: string
+      userId:
+        description: Email id of the user.
+        type: string
+    type: object
+  LicenseAssignmentInsert:
+    description: Template for LicenseAssignment Insert request
+    properties:
+      userId:
+        description: Email id of the user
+        type: string
+    type: object
+  LicenseAssignmentList:
+    description: LicesnseAssignment List for a given product/sku for a customer.
+    properties:
+      etag:
+        description: ETag of the resource.
+        type: string
+      items:
+        description: The LicenseAssignments in this page of results.
+        items:
+          $ref: '#/definitions/LicenseAssignment'
+        type: array
+      kind:
+        default: 'licensing#licenseAssignmentList'
+        description: Identifies the resource as a collection of LicenseAssignments.
+        type: string
+      nextPageToken:
+        description: 'The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
+        type: string
+    type: object

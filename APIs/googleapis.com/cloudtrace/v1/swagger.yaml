@@ -1,80 +1,8 @@
-basePath: /
-definitions:
-  Empty:
-    description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`.'
-    type: object
-  ListTracesResponse:
-    description: The response message for the ListTraces method.
-    properties:
-      nextPageToken:
-        description: 'If defined, indicates that there are more topics that match the request, and this value should be passed to the next ListTopicsRequest to continue.'
-        type: string
-      traces:
-        description: The list of trace records returned.
-        items:
-          $ref: '#/definitions/Trace'
-        type: array
-    type: object
-  Trace:
-    description: A Trace is a collection of spans describing the execution timings of a single operation.
-    properties:
-      projectId:
-        description: The Project ID of the Google Cloud project.
-        type: string
-      spans:
-        description: The collection of span records within this trace. Spans that appear in calls to PatchTraces may be incomplete or partial.
-        items:
-          $ref: '#/definitions/TraceSpan'
-        type: array
-      traceId:
-        description: 'A 128-bit numeric value, formatted as a 32-byte hex string, that represents a trace. Each trace should have an identifier that is globally unique.'
-        type: string
-    type: object
-  TraceSpan:
-    description: A span is the data recorded with a single span.
-    properties:
-      endTime:
-        description: The end time of the span in nanoseconds from the UNIX epoch.
-        type: string
-      kind:
-        description: 'SpanKind distinguishes spans generated in a particular context. For example, two spans with the same name, one with the kind RPC_CLIENT, and the other with RPC_SERVER can indicate the queueing latency associated with the span.'
-        enum:
-          - SPAN_KIND_UNSPECIFIED
-          - RPC_SERVER
-          - RPC_CLIENT
-        type: string
-      labels:
-        additionalProperties:
-          type: string
-        description: Annotations via labels.
-        type: object
-      name:
-        description: 'The name of the trace. This is sanitized and displayed on the UI. This may be a method name or some other per-callsite name. For the same binary and the same call point, it is a good practice to choose a consistent name in order to correlate cross-trace spans.'
-        type: string
-      parentSpanId:
-        description: Identifies the parent of the current span. May be missing. Serialized bytes representation of SpanId.
-        format: uint64
-        type: string
-      spanId:
-        description: Identifier of the span within the trace. Each span should have an identifier that is unique per trace.
-        format: uint64
-        type: string
-      startTime:
-        description: The start time of the span in nanoseconds from the UNIX epoch.
-        type: string
-    type: object
-  Traces:
-    description: A list of traces for the PatchTraces method.
-    properties:
-      traces:
-        description: A list of traces.
-        items:
-          $ref: '#/definitions/Trace'
-        type: array
-    type: object
-externalDocs:
-  url: 'https://cloud.google.com/tools/cloud-trace'
+swagger: '2.0'
+schemes:
+  - https
 host: cloudtrace.googleapis.com
+basePath: /
 info:
   contact:
     name: Google
@@ -93,6 +21,16 @@ info:
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: cloudtrace
+externalDocs:
+  url: 'https://cloud.google.com/tools/cloud-trace'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
 parameters:
   $.xgafv:
     description: V1 error format.
@@ -338,14 +276,76 @@ paths:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-    type: oauth2
-swagger: '2.0'
+definitions:
+  Empty:
+    description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`.'
+    type: object
+  ListTracesResponse:
+    description: The response message for the ListTraces method.
+    properties:
+      nextPageToken:
+        description: 'If defined, indicates that there are more topics that match the request, and this value should be passed to the next ListTopicsRequest to continue.'
+        type: string
+      traces:
+        description: The list of trace records returned.
+        items:
+          $ref: '#/definitions/Trace'
+        type: array
+    type: object
+  Trace:
+    description: A Trace is a collection of spans describing the execution timings of a single operation.
+    properties:
+      projectId:
+        description: The Project ID of the Google Cloud project.
+        type: string
+      spans:
+        description: The collection of span records within this trace. Spans that appear in calls to PatchTraces may be incomplete or partial.
+        items:
+          $ref: '#/definitions/TraceSpan'
+        type: array
+      traceId:
+        description: 'A 128-bit numeric value, formatted as a 32-byte hex string, that represents a trace. Each trace should have an identifier that is globally unique.'
+        type: string
+    type: object
+  TraceSpan:
+    description: A span is the data recorded with a single span.
+    properties:
+      endTime:
+        description: The end time of the span in nanoseconds from the UNIX epoch.
+        type: string
+      kind:
+        description: 'SpanKind distinguishes spans generated in a particular context. For example, two spans with the same name, one with the kind RPC_CLIENT, and the other with RPC_SERVER can indicate the queueing latency associated with the span.'
+        enum:
+          - SPAN_KIND_UNSPECIFIED
+          - RPC_SERVER
+          - RPC_CLIENT
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: Annotations via labels.
+        type: object
+      name:
+        description: 'The name of the trace. This is sanitized and displayed on the UI. This may be a method name or some other per-callsite name. For the same binary and the same call point, it is a good practice to choose a consistent name in order to correlate cross-trace spans.'
+        type: string
+      parentSpanId:
+        description: Identifies the parent of the current span. May be missing. Serialized bytes representation of SpanId.
+        format: uint64
+        type: string
+      spanId:
+        description: Identifier of the span within the trace. Each span should have an identifier that is unique per trace.
+        format: uint64
+        type: string
+      startTime:
+        description: The start time of the span in nanoseconds from the UNIX epoch.
+        type: string
+    type: object
+  Traces:
+    description: A list of traces for the PatchTraces method.
+    properties:
+      traces:
+        description: A list of traces.
+        items:
+          $ref: '#/definitions/Trace'
+        type: array
+    type: object

@@ -1,116 +1,8 @@
-basePath: /taskqueue/v1beta2/projects
-definitions:
-  Task:
-    properties:
-      enqueueTimestamp:
-        description: Time (in seconds since the epoch) at which the task was enqueued.
-        format: int64
-        type: string
-      id:
-        description: Name of the task.
-        type: string
-      kind:
-        default: 'taskqueues#task'
-        description: 'The kind of object returned, in this case set to task.'
-        type: string
-      leaseTimestamp:
-        description: Time (in seconds since the epoch) at which the task lease will expire. This value is 0 if the task isnt currently leased out to a worker.
-        format: int64
-        type: string
-      payloadBase64:
-        description: A bag of bytes which is the task payload. The payload on the JSON side is always Base64 encoded.
-        type: string
-      queueName:
-        description: Name of the queue that the task is in.
-        type: string
-      retry_count:
-        description: The number of leases applied to this task.
-        format: int32
-        type: integer
-      tag:
-        description: 'Tag for the task, could be used later to lease tasks grouped by a specific tag.'
-        type: string
-    type: object
-  TaskQueue:
-    properties:
-      acl:
-        description: ACLs that are applicable to this TaskQueue object.
-        properties:
-          adminEmails:
-            description: 'Email addresses of users who are "admins" of the TaskQueue. This means they can control the queue, eg set ACLs for the queue.'
-            items:
-              type: string
-            type: array
-          consumerEmails:
-            description: 'Email addresses of users who can "consume" tasks from the TaskQueue. This means they can Dequeue and Delete tasks from the queue.'
-            items:
-              type: string
-            type: array
-          producerEmails:
-            description: 'Email addresses of users who can "produce" tasks into the TaskQueue. This means they can Insert tasks into the queue.'
-            items:
-              type: string
-            type: array
-        type: object
-      id:
-        description: Name of the taskqueue.
-        type: string
-      kind:
-        default: 'taskqueues#taskqueue'
-        description: 'The kind of REST object returned, in this case taskqueue.'
-        type: string
-      maxLeases:
-        description: The number of times we should lease out tasks before giving up on them. If unset we lease them out forever until a worker deletes the task.
-        format: int32
-        type: integer
-      stats:
-        description: Statistics for the TaskQueue object in question.
-        properties:
-          leasedLastHour:
-            description: Number of tasks leased in the last hour.
-            format: int64
-            type: string
-          leasedLastMinute:
-            description: Number of tasks leased in the last minute.
-            format: int64
-            type: string
-          oldestTask:
-            description: The timestamp (in seconds since the epoch) of the oldest unfinished task.
-            format: int64
-            type: string
-          totalTasks:
-            description: Number of tasks in the queue.
-            format: int32
-            type: integer
-        type: object
-    type: object
-  Tasks:
-    properties:
-      items:
-        description: The actual list of tasks returned as a result of the lease operation.
-        items:
-          $ref: '#/definitions/Task'
-        type: array
-      kind:
-        default: 'taskqueue#tasks'
-        description: 'The kind of object returned, a list of tasks.'
-        type: string
-    type: object
-  Tasks2:
-    properties:
-      items:
-        description: The actual list of tasks currently active in the TaskQueue.
-        items:
-          $ref: '#/definitions/Task'
-        type: array
-      kind:
-        default: 'taskqueues#tasks'
-        description: 'The kind of object returned, a list of tasks.'
-        type: string
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/appengine/docs/python/taskqueue/rest'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /taskqueue/v1beta2/projects
 info:
   contact:
     name: Google
@@ -129,6 +21,17 @@ info:
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: taskqueue
+externalDocs:
+  url: 'https://developers.google.com/appengine/docs/python/taskqueue/rest'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/taskqueue': Manage your Tasks and Taskqueues
+      'https://www.googleapis.com/auth/taskqueue.consumer': Consume Tasks from your Taskqueues
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -464,15 +367,112 @@ paths:
             - 'https://www.googleapis.com/auth/taskqueue.consumer'
       tags:
         - tasks
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/taskqueue': Manage your Tasks and Taskqueues
-      'https://www.googleapis.com/auth/taskqueue.consumer': Consume Tasks from your Taskqueues
-    type: oauth2
-swagger: '2.0'
+definitions:
+  Task:
+    properties:
+      enqueueTimestamp:
+        description: Time (in seconds since the epoch) at which the task was enqueued.
+        format: int64
+        type: string
+      id:
+        description: Name of the task.
+        type: string
+      kind:
+        default: 'taskqueues#task'
+        description: 'The kind of object returned, in this case set to task.'
+        type: string
+      leaseTimestamp:
+        description: Time (in seconds since the epoch) at which the task lease will expire. This value is 0 if the task isnt currently leased out to a worker.
+        format: int64
+        type: string
+      payloadBase64:
+        description: A bag of bytes which is the task payload. The payload on the JSON side is always Base64 encoded.
+        type: string
+      queueName:
+        description: Name of the queue that the task is in.
+        type: string
+      retry_count:
+        description: The number of leases applied to this task.
+        format: int32
+        type: integer
+      tag:
+        description: 'Tag for the task, could be used later to lease tasks grouped by a specific tag.'
+        type: string
+    type: object
+  TaskQueue:
+    properties:
+      acl:
+        description: ACLs that are applicable to this TaskQueue object.
+        properties:
+          adminEmails:
+            description: 'Email addresses of users who are "admins" of the TaskQueue. This means they can control the queue, eg set ACLs for the queue.'
+            items:
+              type: string
+            type: array
+          consumerEmails:
+            description: 'Email addresses of users who can "consume" tasks from the TaskQueue. This means they can Dequeue and Delete tasks from the queue.'
+            items:
+              type: string
+            type: array
+          producerEmails:
+            description: 'Email addresses of users who can "produce" tasks into the TaskQueue. This means they can Insert tasks into the queue.'
+            items:
+              type: string
+            type: array
+        type: object
+      id:
+        description: Name of the taskqueue.
+        type: string
+      kind:
+        default: 'taskqueues#taskqueue'
+        description: 'The kind of REST object returned, in this case taskqueue.'
+        type: string
+      maxLeases:
+        description: The number of times we should lease out tasks before giving up on them. If unset we lease them out forever until a worker deletes the task.
+        format: int32
+        type: integer
+      stats:
+        description: Statistics for the TaskQueue object in question.
+        properties:
+          leasedLastHour:
+            description: Number of tasks leased in the last hour.
+            format: int64
+            type: string
+          leasedLastMinute:
+            description: Number of tasks leased in the last minute.
+            format: int64
+            type: string
+          oldestTask:
+            description: The timestamp (in seconds since the epoch) of the oldest unfinished task.
+            format: int64
+            type: string
+          totalTasks:
+            description: Number of tasks in the queue.
+            format: int32
+            type: integer
+        type: object
+    type: object
+  Tasks:
+    properties:
+      items:
+        description: The actual list of tasks returned as a result of the lease operation.
+        items:
+          $ref: '#/definitions/Task'
+        type: array
+      kind:
+        default: 'taskqueue#tasks'
+        description: 'The kind of object returned, a list of tasks.'
+        type: string
+    type: object
+  Tasks2:
+    properties:
+      items:
+        description: The actual list of tasks currently active in the TaskQueue.
+        items:
+          $ref: '#/definitions/Task'
+        type: array
+      kind:
+        default: 'taskqueues#tasks'
+        description: 'The kind of object returned, a list of tasks.'
+        type: string
+    type: object

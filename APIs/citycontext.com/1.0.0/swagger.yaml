@@ -1,48 +1,8 @@
-basePath: /beta
-definitions:
-  Location:
-    description: 'Latitude, Longitude and other info related to the given point'
-    properties:
-      lat:
-        format: float
-        maximum: 85
-        minimum: -85
-        type: number
-      lon:
-        format: float
-        maximum: 180
-        minimum: -180
-        type: number
-      withinLondonCCZ:
-        description: "Boolean flag indicating whether this point is located within London's Congestion Charge zone"
-        type: boolean
-    required:
-      - lat
-      - lon
-    type: object
-  PointInfo:
-    description: Contextual information around a given point
-    properties:
-      location:
-        $ref: '#/definitions/Location'
-      lsoa:
-        description: Statistics for lower layer super output areas (LSOA)
-        type: object
-      parks:
-        description: 'Parks within 1km of the point of interest, sorted by descending area'
-        items:
-          type: object
-        type: array
-      schools:
-        description: 'Schools within 1km of the point of interest, sorted by ascending distance from the POI'
-        items:
-          type: object
-        type: array
-    required:
-      - location
-      - parks
-      - schools
+swagger: '2.0'
+schemes:
+  - http
 host: api.citycontext.com
+basePath: /beta
 info:
   description: 'City Context provides a straightforward API to access UK Open Data: crime statistics, schools, demographics and more.'
   title: City Context
@@ -52,6 +12,9 @@ info:
     url: 'https://www.citycontext.com/swagger/spec.json'
     version: '1.2'
   x-providerName: citycontext.com
+tags:
+  - description: Core City Context API
+    name: citycontext
 paths:
   '/@{lat},{lon}':
     get:
@@ -110,9 +73,46 @@ paths:
       summary: Query by postcode
       tags:
         - citycontext
-schemes:
-  - http
-swagger: '2.0'
-tags:
-  - description: Core City Context API
-    name: citycontext
+definitions:
+  Location:
+    description: 'Latitude, Longitude and other info related to the given point'
+    properties:
+      lat:
+        format: float
+        maximum: 85
+        minimum: -85
+        type: number
+      lon:
+        format: float
+        maximum: 180
+        minimum: -180
+        type: number
+      withinLondonCCZ:
+        description: "Boolean flag indicating whether this point is located within London's Congestion Charge zone"
+        type: boolean
+    required:
+      - lat
+      - lon
+    type: object
+  PointInfo:
+    description: Contextual information around a given point
+    properties:
+      location:
+        $ref: '#/definitions/Location'
+      lsoa:
+        description: Statistics for lower layer super output areas (LSOA)
+        type: object
+      parks:
+        description: 'Parks within 1km of the point of interest, sorted by descending area'
+        items:
+          type: object
+        type: array
+      schools:
+        description: 'Schools within 1km of the point of interest, sorted by ascending distance from the POI'
+        items:
+          type: object
+        type: array
+    required:
+      - location
+      - parks
+      - schools

@@ -1,4 +1,470 @@
+swagger: '2.0'
+schemes:
+  - https
+host: dataflow.googleapis.com
 basePath: /
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: Google Dataflow API.
+  title: Google Dataflow API
+  version: v1b3
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/dataflow/v1b3/rest'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: dataflow
+externalDocs:
+  url: 'https://cloud.google.com/dataflow'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/userinfo.email': View your email address
+    type: oauth2
+parameters:
+  $.xgafv:
+    description: V1 error format.
+    in: query
+    name: $.xgafv
+    type: string
+  access_token:
+    description: OAuth access token.
+    in: query
+    name: access_token
+    type: string
+  alt:
+    default: json
+    description: Data format for response.
+    in: query
+    name: alt
+    type: string
+  bearer_token:
+    description: OAuth bearer token.
+    in: query
+    name: bearer_token
+    type: string
+  callback:
+    description: JSONP
+    in: query
+    name: callback
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  pp:
+    default: true
+    description: Pretty-print response.
+    in: query
+    name: pp
+    type: boolean
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+    in: query
+    name: quotaUser
+    type: string
+  uploadType:
+    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+    in: query
+    name: uploadType
+    type: string
+  upload_protocol:
+    description: 'Upload protocol for media (e.g. "raw", "multipart").'
+    in: query
+    name: upload_protocol
+    type: string
+paths:
+  '/v1b3/projects/{projectId}/jobs':
+    get:
+      description: List the jobs of a project
+      operationId: dataflow.projects.jobs.list
+      parameters:
+        - description: The project which owns the jobs.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Level of information requested in response. Default is SUMMARY.
+          enum:
+            - JOB_VIEW_UNKNOWN
+            - JOB_VIEW_SUMMARY
+            - JOB_VIEW_ALL
+          in: query
+          name: view
+          type: string
+        - description: 'If there are many jobs, limit response to at most this many. The actual number of jobs returned will be the lesser of max_responses and an unspecified server-defined limit.'
+          in: query
+          name: pageSize
+          type: integer
+        - description: "Set this to the 'next_page_token' field of a previous response to request additional results in a long list."
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListJobsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: Creates a dataflow job.
+      operationId: dataflow.projects.jobs.create
+      parameters:
+        - description: The project which owns the job.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Level of information requested in response.
+          enum:
+            - JOB_VIEW_UNKNOWN
+            - JOB_VIEW_SUMMARY
+            - JOB_VIEW_ALL
+          in: query
+          name: view
+          type: string
+        - description: DEPRECATED. This field is now on the Job message.
+          in: query
+          name: replaceJobId
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Job'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Job'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+  '/v1b3/projects/{projectId}/jobs/{jobId}':
+    get:
+      description: Gets the state of the specified dataflow job.
+      operationId: dataflow.projects.jobs.get
+      parameters:
+        - description: The project which owns the job.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Identifies a single job.
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - description: Level of information requested in response.
+          enum:
+            - JOB_VIEW_UNKNOWN
+            - JOB_VIEW_SUMMARY
+            - JOB_VIEW_ALL
+          in: query
+          name: view
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Job'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    put:
+      description: Updates the state of an existing dataflow job.
+      operationId: dataflow.projects.jobs.update
+      parameters:
+        - description: The project which owns the job.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Identifies a single job.
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Job'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Job'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+  '/v1b3/projects/{projectId}/jobs/{jobId}/messages':
+    get:
+      description: Request the job status.
+      operationId: dataflow.projects.jobs.messages.list
+      parameters:
+        - description: A project id.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: The job to get messages about.
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - description: 'Filter to only get messages with importance >= level'
+          enum:
+            - JOB_MESSAGE_IMPORTANCE_UNKNOWN
+            - JOB_MESSAGE_DEBUG
+            - JOB_MESSAGE_DETAILED
+            - JOB_MESSAGE_BASIC
+            - JOB_MESSAGE_WARNING
+            - JOB_MESSAGE_ERROR
+          in: query
+          name: minimumImportance
+          type: string
+        - description: 'If specified, determines the maximum number of messages to return. If unspecified, the service may choose an appropriate default, or may return an arbitrarily large number of results.'
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'If supplied, this should be the value of next_page_token returned by an earlier call. This will cause the next page of results to be returned.'
+          in: query
+          name: pageToken
+          type: string
+        - description: 'If specified, return only messages with timestamps >= start_time. The default is the job creation time (i.e. beginning of messages).'
+          in: query
+          name: startTime
+          type: string
+        - description: Return only messages with timestamps < end_time. The default is now (i.e. return up to the latest messages available).
+          in: query
+          name: endTime
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListJobMessagesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+  '/v1b3/projects/{projectId}/jobs/{jobId}/metrics':
+    get:
+      description: Request the job status.
+      operationId: dataflow.projects.jobs.getMetrics
+      parameters:
+        - description: A project id.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: The job to get messages for.
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - description: Return only metric data that has changed since this time. Default is to return all information about all metrics for the job.
+          in: query
+          name: startTime
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/JobMetrics'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+  '/v1b3/projects/{projectId}/jobs/{jobId}/workItems:lease':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: Leases a dataflow WorkItem to run.
+      operationId: dataflow.projects.jobs.workItems.lease
+      parameters:
+        - description: Identifies the project this worker belongs to.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Identifies the workflow job this worker belongs to.
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LeaseWorkItemRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LeaseWorkItemResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+  '/v1b3/projects/{projectId}/jobs/{jobId}/workItems:reportStatus':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: Reports the status of dataflow WorkItems leased by a worker.
+      operationId: dataflow.projects.jobs.workItems.reportStatus
+      parameters:
+        - description: "The project which owns the WorkItem's job."
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: The job which the WorkItem is part of.
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ReportWorkItemStatusRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ReportWorkItemStatusResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
 definitions:
   ApproximateProgress:
     description: A progress measurement of a WorkItem by a worker.
@@ -1326,469 +1792,3 @@ definitions:
         $ref: '#/definitions/Sink'
         description: The sink to write to.
     type: object
-externalDocs:
-  url: 'https://cloud.google.com/dataflow'
-host: dataflow.googleapis.com
-info:
-  contact:
-    name: Google
-    url: 'https://google.com'
-  description: Google Dataflow API.
-  title: Google Dataflow API
-  version: v1b3
-  x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
-  x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
-  x-origin:
-    format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/dataflow/v1b3/rest'
-    version: v1
-  x-preferred: true
-  x-providerName: googleapis.com
-  x-serviceName: dataflow
-parameters:
-  $.xgafv:
-    description: V1 error format.
-    in: query
-    name: $.xgafv
-    type: string
-  access_token:
-    description: OAuth access token.
-    in: query
-    name: access_token
-    type: string
-  alt:
-    default: json
-    description: Data format for response.
-    in: query
-    name: alt
-    type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
-  callback:
-    description: JSONP
-    in: query
-    name: callback
-    type: string
-  fields:
-    description: Selector specifying which fields to include in a partial response.
-    in: query
-    name: fields
-    type: string
-  key:
-    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
-    in: query
-    name: key
-    type: string
-  oauth_token:
-    description: OAuth 2.0 token for the current user.
-    in: query
-    name: oauth_token
-    type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
-  prettyPrint:
-    default: true
-    description: Returns response with indentations and line breaks.
-    in: query
-    name: prettyPrint
-    type: boolean
-  quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
-    in: query
-    name: quotaUser
-    type: string
-  uploadType:
-    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
-    in: query
-    name: uploadType
-    type: string
-  upload_protocol:
-    description: 'Upload protocol for media (e.g. "raw", "multipart").'
-    in: query
-    name: upload_protocol
-    type: string
-paths:
-  '/v1b3/projects/{projectId}/jobs':
-    get:
-      description: List the jobs of a project
-      operationId: dataflow.projects.jobs.list
-      parameters:
-        - description: The project which owns the jobs.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: Level of information requested in response. Default is SUMMARY.
-          enum:
-            - JOB_VIEW_UNKNOWN
-            - JOB_VIEW_SUMMARY
-            - JOB_VIEW_ALL
-          in: query
-          name: view
-          type: string
-        - description: 'If there are many jobs, limit response to at most this many. The actual number of jobs returned will be the lesser of max_responses and an unspecified server-defined limit.'
-          in: query
-          name: pageSize
-          type: integer
-        - description: "Set this to the 'next_page_token' field of a previous response to request additional results in a long list."
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListJobsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/userinfo.email'
-      tags:
-        - projects
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-    post:
-      description: Creates a dataflow job.
-      operationId: dataflow.projects.jobs.create
-      parameters:
-        - description: The project which owns the job.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: Level of information requested in response.
-          enum:
-            - JOB_VIEW_UNKNOWN
-            - JOB_VIEW_SUMMARY
-            - JOB_VIEW_ALL
-          in: query
-          name: view
-          type: string
-        - description: DEPRECATED. This field is now on the Job message.
-          in: query
-          name: replaceJobId
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Job'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Job'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/userinfo.email'
-      tags:
-        - projects
-  '/v1b3/projects/{projectId}/jobs/{jobId}':
-    get:
-      description: Gets the state of the specified dataflow job.
-      operationId: dataflow.projects.jobs.get
-      parameters:
-        - description: The project which owns the job.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: Identifies a single job.
-          in: path
-          name: jobId
-          required: true
-          type: string
-        - description: Level of information requested in response.
-          enum:
-            - JOB_VIEW_UNKNOWN
-            - JOB_VIEW_SUMMARY
-            - JOB_VIEW_ALL
-          in: query
-          name: view
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Job'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/userinfo.email'
-      tags:
-        - projects
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-    put:
-      description: Updates the state of an existing dataflow job.
-      operationId: dataflow.projects.jobs.update
-      parameters:
-        - description: The project which owns the job.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: Identifies a single job.
-          in: path
-          name: jobId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Job'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Job'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/userinfo.email'
-      tags:
-        - projects
-  '/v1b3/projects/{projectId}/jobs/{jobId}/messages':
-    get:
-      description: Request the job status.
-      operationId: dataflow.projects.jobs.messages.list
-      parameters:
-        - description: A project id.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: The job to get messages about.
-          in: path
-          name: jobId
-          required: true
-          type: string
-        - description: 'Filter to only get messages with importance >= level'
-          enum:
-            - JOB_MESSAGE_IMPORTANCE_UNKNOWN
-            - JOB_MESSAGE_DEBUG
-            - JOB_MESSAGE_DETAILED
-            - JOB_MESSAGE_BASIC
-            - JOB_MESSAGE_WARNING
-            - JOB_MESSAGE_ERROR
-          in: query
-          name: minimumImportance
-          type: string
-        - description: 'If specified, determines the maximum number of messages to return. If unspecified, the service may choose an appropriate default, or may return an arbitrarily large number of results.'
-          in: query
-          name: pageSize
-          type: integer
-        - description: 'If supplied, this should be the value of next_page_token returned by an earlier call. This will cause the next page of results to be returned.'
-          in: query
-          name: pageToken
-          type: string
-        - description: 'If specified, return only messages with timestamps >= start_time. The default is the job creation time (i.e. beginning of messages).'
-          in: query
-          name: startTime
-          type: string
-        - description: Return only messages with timestamps < end_time. The default is now (i.e. return up to the latest messages available).
-          in: query
-          name: endTime
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListJobMessagesResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/userinfo.email'
-      tags:
-        - projects
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-  '/v1b3/projects/{projectId}/jobs/{jobId}/metrics':
-    get:
-      description: Request the job status.
-      operationId: dataflow.projects.jobs.getMetrics
-      parameters:
-        - description: A project id.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: The job to get messages for.
-          in: path
-          name: jobId
-          required: true
-          type: string
-        - description: Return only metric data that has changed since this time. Default is to return all information about all metrics for the job.
-          in: query
-          name: startTime
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/JobMetrics'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/userinfo.email'
-      tags:
-        - projects
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-  '/v1b3/projects/{projectId}/jobs/{jobId}/workItems:lease':
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-    post:
-      description: Leases a dataflow WorkItem to run.
-      operationId: dataflow.projects.jobs.workItems.lease
-      parameters:
-        - description: Identifies the project this worker belongs to.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: Identifies the workflow job this worker belongs to.
-          in: path
-          name: jobId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LeaseWorkItemRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/LeaseWorkItemResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/userinfo.email'
-      tags:
-        - projects
-  '/v1b3/projects/{projectId}/jobs/{jobId}/workItems:reportStatus':
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-    post:
-      description: Reports the status of dataflow WorkItems leased by a worker.
-      operationId: dataflow.projects.jobs.workItems.reportStatus
-      parameters:
-        - description: "The project which owns the WorkItem's job."
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: The job which the WorkItem is part of.
-          in: path
-          name: jobId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ReportWorkItemStatusRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ReportWorkItemStatusResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/userinfo.email'
-      tags:
-        - projects
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/userinfo.email': View your email address
-    type: oauth2
-swagger: '2.0'

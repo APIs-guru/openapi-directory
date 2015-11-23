@@ -1,69 +1,8 @@
-basePath: /appstate/v1
-definitions:
-  GetResponse:
-    description: This is a JSON template for an app state resource.
-    properties:
-      currentStateVersion:
-        description: The current app state version.
-        type: string
-      data:
-        description: The requested data.
-        type: string
-      kind:
-        default: 'appstate#getResponse'
-        description: 'Uniquely identifies the type of this resource. Value is always the fixed string appstate#getResponse.'
-        type: string
-      stateKey:
-        description: The key for the data.
-        format: int32
-        type: integer
-    type: object
-  ListResponse:
-    description: This is a JSON template to convert a list-response for app state.
-    properties:
-      items:
-        description: The app state data.
-        items:
-          $ref: '#/definitions/GetResponse'
-        type: array
-      kind:
-        default: 'appstate#listResponse'
-        description: 'Uniquely identifies the type of this resource. Value is always the fixed string appstate#listResponse.'
-        type: string
-      maximumKeyCount:
-        description: The maximum number of keys allowed for this user.
-        format: int32
-        type: integer
-    type: object
-  UpdateRequest:
-    description: This is a JSON template for a requests which update app state
-    properties:
-      data:
-        description: The new app state data that your application is trying to update with.
-        type: string
-      kind:
-        default: 'appstate#updateRequest'
-        description: 'Uniquely identifies the type of this resource. Value is always the fixed string appstate#updateRequest.'
-        type: string
-    type: object
-  WriteResult:
-    description: This is a JSON template for an app state write result.
-    properties:
-      currentStateVersion:
-        description: The version of the data for this key on the server.
-        type: string
-      kind:
-        default: 'appstate#writeResult'
-        description: 'Uniquely identifies the type of this resource. Value is always the fixed string appstate#writeResult.'
-        type: string
-      stateKey:
-        description: The written key.
-        format: int32
-        type: integer
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/games/services/web/api/states'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /appstate/v1
 info:
   contact:
     name: Google
@@ -82,6 +21,16 @@ info:
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: appstate
+externalDocs:
+  url: 'https://developers.google.com/games/services/web/api/states'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/appstate': View and manage your data for this application
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -263,14 +212,65 @@ paths:
             - 'https://www.googleapis.com/auth/appstate'
       tags:
         - states
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/appstate': View and manage your data for this application
-    type: oauth2
-swagger: '2.0'
+definitions:
+  GetResponse:
+    description: This is a JSON template for an app state resource.
+    properties:
+      currentStateVersion:
+        description: The current app state version.
+        type: string
+      data:
+        description: The requested data.
+        type: string
+      kind:
+        default: 'appstate#getResponse'
+        description: 'Uniquely identifies the type of this resource. Value is always the fixed string appstate#getResponse.'
+        type: string
+      stateKey:
+        description: The key for the data.
+        format: int32
+        type: integer
+    type: object
+  ListResponse:
+    description: This is a JSON template to convert a list-response for app state.
+    properties:
+      items:
+        description: The app state data.
+        items:
+          $ref: '#/definitions/GetResponse'
+        type: array
+      kind:
+        default: 'appstate#listResponse'
+        description: 'Uniquely identifies the type of this resource. Value is always the fixed string appstate#listResponse.'
+        type: string
+      maximumKeyCount:
+        description: The maximum number of keys allowed for this user.
+        format: int32
+        type: integer
+    type: object
+  UpdateRequest:
+    description: This is a JSON template for a requests which update app state
+    properties:
+      data:
+        description: The new app state data that your application is trying to update with.
+        type: string
+      kind:
+        default: 'appstate#updateRequest'
+        description: 'Uniquely identifies the type of this resource. Value is always the fixed string appstate#updateRequest.'
+        type: string
+    type: object
+  WriteResult:
+    description: This is a JSON template for an app state write result.
+    properties:
+      currentStateVersion:
+        description: The version of the data for this key on the server.
+        type: string
+      kind:
+        default: 'appstate#writeResult'
+        description: 'Uniquely identifies the type of this resource. Value is always the fixed string appstate#writeResult.'
+        type: string
+      stateKey:
+        description: The written key.
+        format: int32
+        type: integer
+    type: object

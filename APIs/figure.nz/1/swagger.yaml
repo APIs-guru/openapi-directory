@@ -1,8 +1,8 @@
-basePath: /
-externalDocs:
-  description: Where the main API documentation is made available.
-  url: 'https://figure.nz/api/'
+swagger: '2.0'
+schemes:
+  - https
 host: api.figure.nz
+basePath: /
 info:
   contact:
     email: api@figure.nz
@@ -18,6 +18,19 @@ info:
     url: 'https://api.figure.nz/v1/swagger.json'
     version: '2.0'
   x-providerName: figure.nz
+externalDocs:
+  description: Where the main API documentation is made available.
+  url: 'https://figure.nz/api/'
+securityDefinitions: {}
+tags:
+  - description: Get information about the organisations that provide the data.
+    name: sources
+  - description: Retrieve information and metadata on the documents containing the data that is put into tables.
+    name: source-documents
+  - description: 'Retrieve information about, and download, tables of data.'
+    name: tables
+  - description: 'Retrieve information about, and download, charts made from published tables.'
+    name: charts
 paths:
   /chart/list:
     get:
@@ -269,16 +282,3 @@ paths:
       summary: Downloads a table in JSON format
       tags:
         - tables
-schemes:
-  - https
-securityDefinitions: {}
-swagger: '2.0'
-tags:
-  - description: Get information about the organisations that provide the data.
-    name: sources
-  - description: Retrieve information and metadata on the documents containing the data that is put into tables.
-    name: source-documents
-  - description: 'Retrieve information about, and download, tables of data.'
-    name: tables
-  - description: 'Retrieve information about, and download, charts made from published tables.'
-    name: charts

@@ -1,5 +1,8 @@
-basePath: /api/building-case-studies
+swagger: '2.0'
+schemes:
+  - https
 host: developer.nrel.gov
+basePath: /api/building-case-studies
 info:
   description: 'The Buildings Database is a shared resource for the building industry. The Database, developed by the U.S. Department of Energy and the National Renewable Energy Laboratory (NREL), is a unique central repository of in-depth information and data on high-performance, green building projects across the United States and abroad.  '
   title: High Performance Building Database
@@ -13,6 +16,9 @@ info:
     version: '1.2'
   x-providerName: nrel.gov
   x-serviceName: building-case-studies
+tags:
+  - description: API endpoints related to buildings.
+    name: project
 paths:
   '/project.{output_format}':
     get:
@@ -104,9 +110,3 @@ paths:
       summary: Project Details
       tags:
         - project
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - description: API endpoints related to buildings.
-    name: project

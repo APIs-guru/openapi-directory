@@ -1,5 +1,8 @@
-basePath: /api
+swagger: '2.0'
+schemes:
+  - https
 host: bikewise.org
+basePath: /api
 info:
   contact:
     email: support@bikeindex.org
@@ -12,6 +15,11 @@ info:
     url: 'https://bikewise.org/api/v2/swagger_doc'
     version: '1.2'
   x-providerName: bikewise.org
+tags:
+  - description: Incidents matching parameters
+    name: incidents
+  - description: GeoJSON response for matching incidents
+    name: locations
 paths:
   /v2/incidents:
     get:
@@ -303,11 +311,3 @@ paths:
       summary: Unpaginated geojson response with simplestyled markers
       tags:
         - locations
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - description: Incidents matching parameters
-    name: incidents
-  - description: GeoJSON response for matching incidents
-    name: locations

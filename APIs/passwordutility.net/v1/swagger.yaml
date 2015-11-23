@@ -1,7 +1,6 @@
-definitions:
-  Object:
-    properties: {}
-    type: object
+swagger: '2.0'
+schemes:
+  - http
 host: 'passwordutility.net:80'
 info:
   description: Validate and generate passwords using open source tools
@@ -70,6 +69,7 @@ paths:
             $ref: '#/definitions/Object'
       tags:
         - Password
-schemes:
-  - http
-swagger: '2.0'
+definitions:
+  Object:
+    properties: {}
+    type: object

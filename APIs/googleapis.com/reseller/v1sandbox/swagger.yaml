@@ -1,224 +1,8 @@
-basePath: /apps/reseller/v1sandbox
-definitions:
-  Address:
-    description: JSON template for address of a customer.
-    properties:
-      addressLine1:
-        description: Address line 1 of the address.
-        type: string
-      addressLine2:
-        description: Address line 2 of the address.
-        type: string
-      addressLine3:
-        description: Address line 3 of the address.
-        type: string
-      contactName:
-        description: Name of the contact person.
-        type: string
-      countryCode:
-        description: ISO 3166 country code.
-        type: string
-      kind:
-        default: 'customers#address'
-        description: Identifies the resource as a customer address.
-        type: string
-      locality:
-        description: 'Name of the locality. This is in accordance with - http://portablecontacts.net/draft-spec.html#address_element.'
-        type: string
-      organizationName:
-        description: Name of the organization.
-        type: string
-      postalCode:
-        description: 'The postal code. This is in accordance with - http://portablecontacts.net/draft-spec.html#address_element.'
-        type: string
-      region:
-        description: 'Name of the region. This is in accordance with - http://portablecontacts.net/draft-spec.html#address_element.'
-        type: string
-    type: object
-  ChangePlanRequest:
-    description: JSON template for the ChangePlan rpc request.
-    properties:
-      kind:
-        default: 'subscriptions#changePlanRequest'
-        description: Identifies the resource as a subscription change plan request.
-        type: string
-      planName:
-        description: Name of the plan to change to.
-        type: string
-      purchaseOrderId:
-        description: Purchase order id for your order tracking purposes.
-        type: string
-      seats:
-        $ref: '#/definitions/Seats'
-        description: Number/Limit of seats in the new plan.
-    type: object
-  Customer:
-    description: JSON template for a customer.
-    properties:
-      alternateEmail:
-        description: The alternate email of the customer.
-        type: string
-      customerDomain:
-        description: The domain name of the customer.
-        type: string
-      customerDomainVerified:
-        description: "Whether the customer's primary domain has been verified."
-        type: boolean
-      customerId:
-        description: The id of the customer.
-        type: string
-      kind:
-        default: 'reseller#customer'
-        description: Identifies the resource as a customer.
-        type: string
-      phoneNumber:
-        description: The phone number of the customer.
-        type: string
-      postalAddress:
-        $ref: '#/definitions/Address'
-        description: The postal address of the customer.
-      resourceUiUrl:
-        description: Ui url for customer resource.
-        type: string
-    type: object
-  RenewalSettings:
-    description: JSON template for a subscription renewal settings.
-    properties:
-      kind:
-        default: 'subscriptions#renewalSettings'
-        description: Identifies the resource as a subscription renewal setting.
-        type: string
-      renewalType:
-        description: Subscription renewal type.
-        type: string
-    type: object
-  Seats:
-    description: JSON template for subscription seats.
-    properties:
-      kind:
-        default: 'subscriptions#seats'
-        description: Identifies the resource as a subscription change plan request.
-        type: string
-      licensedNumberOfSeats:
-        description: Read-only field containing the current number of licensed seats for FLEXIBLE Google-Apps subscriptions and secondary subscriptions such as Google-Vault and Drive-storage.
-        format: int32
-        type: integer
-      maximumNumberOfSeats:
-        description: Maximum number of seats that can be purchased. This needs to be provided only for a non-commitment plan. For a commitment plan it is decided by the contract.
-        format: int32
-        type: integer
-      numberOfSeats:
-        description: Number of seats to purchase. This is applicable only for a commitment plan.
-        format: int32
-        type: integer
-    type: object
-  Subscription:
-    description: JSON template for a subscription.
-    properties:
-      billingMethod:
-        description: Billing method of this subscription.
-        type: string
-      creationTime:
-        description: Creation time of this subscription in milliseconds since Unix epoch.
-        format: int64
-        type: string
-      customerId:
-        description: The id of the customer to whom the subscription belongs.
-        type: string
-      kind:
-        default: 'reseller#subscription'
-        description: Identifies the resource as a Subscription.
-        type: string
-      plan:
-        description: Plan details of the subscription
-        properties:
-          commitmentInterval:
-            description: Interval of the commitment if it is a commitment plan.
-            properties:
-              endTime:
-                description: End time of the commitment interval in milliseconds since Unix epoch.
-                format: int64
-                type: string
-              startTime:
-                description: Start time of the commitment interval in milliseconds since Unix epoch.
-                format: int64
-                type: string
-            type: object
-          isCommitmentPlan:
-            description: Whether the plan is a commitment plan or not.
-            type: boolean
-          planName:
-            description: "The plan name of this subscription's plan."
-            type: string
-        type: object
-      purchaseOrderId:
-        description: Purchase order id for your order tracking purposes.
-        type: string
-      renewalSettings:
-        $ref: '#/definitions/RenewalSettings'
-        description: Renewal settings of the subscription.
-      resourceUiUrl:
-        description: Ui url for subscription resource.
-        type: string
-      seats:
-        $ref: '#/definitions/Seats'
-        description: Number/Limit of seats in the new plan.
-      skuId:
-        description: Name of the sku for which this subscription is purchased.
-        type: string
-      status:
-        description: Status of the subscription.
-        type: string
-      subscriptionId:
-        description: The id of the subscription.
-        type: string
-      suspensionReasons:
-        description: "field listing all current reasons the subscription is suspended. It is possible for a subscription to have multiple suspension reasons. A subscription's status is SUSPENDED until all pending suspensions are removed. Possible options include:  \n- PENDING_TOS_ACCEPTANCE — The customer has not logged in and accepted the Google Apps Resold Terms of Services.  \n- RENEWAL_WITH_TYPE_CANCEL — The customer's commitment ended and their service was cancelled at the end of their term.  \n- RESELLER_INITIATED — A manual suspension invoked by a Reseller.  \n- TRIAL_ENDED — The customer's trial expired without a plan selected.  \n- OTHER — The customer is suspended for an internal Google reason (e.g. abuse or otherwise)."
-        items:
-          type: string
-        type: array
-      transferInfo:
-        description: Transfer related information for the subscription.
-        properties:
-          minimumTransferableSeats:
-            format: int32
-            type: integer
-          transferabilityExpirationTime:
-            description: Time when transfer token or intent to transfer will expire.
-            format: int64
-            type: string
-        type: object
-      trialSettings:
-        description: Trial Settings of the subscription.
-        properties:
-          isInTrial:
-            description: Whether the subscription is in trial.
-            type: boolean
-          trialEndTime:
-            description: End time of the trial in milliseconds since Unix epoch.
-            format: int64
-            type: string
-        type: object
-    type: object
-  Subscriptions:
-    description: JSON template for a subscription list.
-    properties:
-      kind:
-        default: 'reseller#subscriptions'
-        description: Identifies the resource as a collection of subscriptions.
-        type: string
-      nextPageToken:
-        description: 'The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
-        type: string
-      subscriptions:
-        description: The subscriptions in this page of results.
-        items:
-          $ref: '#/definitions/Subscription'
-        type: array
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/google-apps/reseller/'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /apps/reseller/v1sandbox
 info:
   contact:
     name: Google
@@ -237,6 +21,17 @@ info:
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: reseller
+externalDocs:
+  url: 'https://developers.google.com/google-apps/reseller/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/apps.order': Manage users on your domain
+      'https://www.googleapis.com/auth/apps.order.readonly': Manage users on your domain
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -742,15 +537,220 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/apps.order': Manage users on your domain
-      'https://www.googleapis.com/auth/apps.order.readonly': Manage users on your domain
-    type: oauth2
-swagger: '2.0'
+definitions:
+  Address:
+    description: JSON template for address of a customer.
+    properties:
+      addressLine1:
+        description: Address line 1 of the address.
+        type: string
+      addressLine2:
+        description: Address line 2 of the address.
+        type: string
+      addressLine3:
+        description: Address line 3 of the address.
+        type: string
+      contactName:
+        description: Name of the contact person.
+        type: string
+      countryCode:
+        description: ISO 3166 country code.
+        type: string
+      kind:
+        default: 'customers#address'
+        description: Identifies the resource as a customer address.
+        type: string
+      locality:
+        description: 'Name of the locality. This is in accordance with - http://portablecontacts.net/draft-spec.html#address_element.'
+        type: string
+      organizationName:
+        description: Name of the organization.
+        type: string
+      postalCode:
+        description: 'The postal code. This is in accordance with - http://portablecontacts.net/draft-spec.html#address_element.'
+        type: string
+      region:
+        description: 'Name of the region. This is in accordance with - http://portablecontacts.net/draft-spec.html#address_element.'
+        type: string
+    type: object
+  ChangePlanRequest:
+    description: JSON template for the ChangePlan rpc request.
+    properties:
+      kind:
+        default: 'subscriptions#changePlanRequest'
+        description: Identifies the resource as a subscription change plan request.
+        type: string
+      planName:
+        description: Name of the plan to change to.
+        type: string
+      purchaseOrderId:
+        description: Purchase order id for your order tracking purposes.
+        type: string
+      seats:
+        $ref: '#/definitions/Seats'
+        description: Number/Limit of seats in the new plan.
+    type: object
+  Customer:
+    description: JSON template for a customer.
+    properties:
+      alternateEmail:
+        description: The alternate email of the customer.
+        type: string
+      customerDomain:
+        description: The domain name of the customer.
+        type: string
+      customerDomainVerified:
+        description: "Whether the customer's primary domain has been verified."
+        type: boolean
+      customerId:
+        description: The id of the customer.
+        type: string
+      kind:
+        default: 'reseller#customer'
+        description: Identifies the resource as a customer.
+        type: string
+      phoneNumber:
+        description: The phone number of the customer.
+        type: string
+      postalAddress:
+        $ref: '#/definitions/Address'
+        description: The postal address of the customer.
+      resourceUiUrl:
+        description: Ui url for customer resource.
+        type: string
+    type: object
+  RenewalSettings:
+    description: JSON template for a subscription renewal settings.
+    properties:
+      kind:
+        default: 'subscriptions#renewalSettings'
+        description: Identifies the resource as a subscription renewal setting.
+        type: string
+      renewalType:
+        description: Subscription renewal type.
+        type: string
+    type: object
+  Seats:
+    description: JSON template for subscription seats.
+    properties:
+      kind:
+        default: 'subscriptions#seats'
+        description: Identifies the resource as a subscription change plan request.
+        type: string
+      licensedNumberOfSeats:
+        description: Read-only field containing the current number of licensed seats for FLEXIBLE Google-Apps subscriptions and secondary subscriptions such as Google-Vault and Drive-storage.
+        format: int32
+        type: integer
+      maximumNumberOfSeats:
+        description: Maximum number of seats that can be purchased. This needs to be provided only for a non-commitment plan. For a commitment plan it is decided by the contract.
+        format: int32
+        type: integer
+      numberOfSeats:
+        description: Number of seats to purchase. This is applicable only for a commitment plan.
+        format: int32
+        type: integer
+    type: object
+  Subscription:
+    description: JSON template for a subscription.
+    properties:
+      billingMethod:
+        description: Billing method of this subscription.
+        type: string
+      creationTime:
+        description: Creation time of this subscription in milliseconds since Unix epoch.
+        format: int64
+        type: string
+      customerId:
+        description: The id of the customer to whom the subscription belongs.
+        type: string
+      kind:
+        default: 'reseller#subscription'
+        description: Identifies the resource as a Subscription.
+        type: string
+      plan:
+        description: Plan details of the subscription
+        properties:
+          commitmentInterval:
+            description: Interval of the commitment if it is a commitment plan.
+            properties:
+              endTime:
+                description: End time of the commitment interval in milliseconds since Unix epoch.
+                format: int64
+                type: string
+              startTime:
+                description: Start time of the commitment interval in milliseconds since Unix epoch.
+                format: int64
+                type: string
+            type: object
+          isCommitmentPlan:
+            description: Whether the plan is a commitment plan or not.
+            type: boolean
+          planName:
+            description: "The plan name of this subscription's plan."
+            type: string
+        type: object
+      purchaseOrderId:
+        description: Purchase order id for your order tracking purposes.
+        type: string
+      renewalSettings:
+        $ref: '#/definitions/RenewalSettings'
+        description: Renewal settings of the subscription.
+      resourceUiUrl:
+        description: Ui url for subscription resource.
+        type: string
+      seats:
+        $ref: '#/definitions/Seats'
+        description: Number/Limit of seats in the new plan.
+      skuId:
+        description: Name of the sku for which this subscription is purchased.
+        type: string
+      status:
+        description: Status of the subscription.
+        type: string
+      subscriptionId:
+        description: The id of the subscription.
+        type: string
+      suspensionReasons:
+        description: "field listing all current reasons the subscription is suspended. It is possible for a subscription to have multiple suspension reasons. A subscription's status is SUSPENDED until all pending suspensions are removed. Possible options include:  \n- PENDING_TOS_ACCEPTANCE — The customer has not logged in and accepted the Google Apps Resold Terms of Services.  \n- RENEWAL_WITH_TYPE_CANCEL — The customer's commitment ended and their service was cancelled at the end of their term.  \n- RESELLER_INITIATED — A manual suspension invoked by a Reseller.  \n- TRIAL_ENDED — The customer's trial expired without a plan selected.  \n- OTHER — The customer is suspended for an internal Google reason (e.g. abuse or otherwise)."
+        items:
+          type: string
+        type: array
+      transferInfo:
+        description: Transfer related information for the subscription.
+        properties:
+          minimumTransferableSeats:
+            format: int32
+            type: integer
+          transferabilityExpirationTime:
+            description: Time when transfer token or intent to transfer will expire.
+            format: int64
+            type: string
+        type: object
+      trialSettings:
+        description: Trial Settings of the subscription.
+        properties:
+          isInTrial:
+            description: Whether the subscription is in trial.
+            type: boolean
+          trialEndTime:
+            description: End time of the trial in milliseconds since Unix epoch.
+            format: int64
+            type: string
+        type: object
+    type: object
+  Subscriptions:
+    description: JSON template for a subscription list.
+    properties:
+      kind:
+        default: 'reseller#subscriptions'
+        description: Identifies the resource as a collection of subscriptions.
+        type: string
+      nextPageToken:
+        description: 'The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
+        type: string
+      subscriptions:
+        description: The subscriptions in this page of results.
+        items:
+          $ref: '#/definitions/Subscription'
+        type: array
+    type: object

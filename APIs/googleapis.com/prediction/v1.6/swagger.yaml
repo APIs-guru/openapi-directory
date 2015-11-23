@@ -1,4 +1,342 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.googleapis.com
 basePath: /prediction/v1.6/projects
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: Lets you access a cloud hosted machine learning service that makes it easy to build smart apps
+  title: Prediction API
+  version: v1.6
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/icons/feature/predictionapi-64.png'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/prediction/v1.6/rest'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: prediction
+externalDocs:
+  url: 'https://developers.google.com/prediction/docs/developer-guide'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
+      'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
+      'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
+      'https://www.googleapis.com/auth/prediction': Manage your data in the Google Prediction API
+    type: oauth2
+parameters:
+  alt:
+    default: json
+    description: Data format for the response.
+    enum:
+      - json
+    in: query
+    name: alt
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    in: query
+    name: quotaUser
+    type: string
+  userIp:
+    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    in: query
+    name: userIp
+    type: string
+paths:
+  '/{project}/hostedmodels/{hostedModelName}/predict':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Submit input and request an output against a hosted model.
+      operationId: prediction.hostedmodels.predict
+      parameters:
+        - description: The project associated with the model.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of a hosted model.
+          in: path
+          name: hostedModelName
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Input'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Output'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/prediction'
+      tags:
+        - hostedmodels
+  '/{project}/trainedmodels':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Train a Prediction API model.
+      operationId: prediction.trainedmodels.insert
+      parameters:
+        - description: The project associated with the model.
+          in: path
+          name: project
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Insert'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Insert2'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/devstorage.full_control'
+            - 'https://www.googleapis.com/auth/devstorage.read_only'
+            - 'https://www.googleapis.com/auth/devstorage.read_write'
+            - 'https://www.googleapis.com/auth/prediction'
+      tags:
+        - trainedmodels
+  '/{project}/trainedmodels/list':
+    get:
+      description: List available models.
+      operationId: prediction.trainedmodels.list
+      parameters:
+        - description: The project associated with the model.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Maximum number of results to return.
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: Pagination token.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/List'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/prediction'
+      tags:
+        - trainedmodels
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/trainedmodels/{id}':
+    delete:
+      description: Delete a trained model.
+      operationId: prediction.trainedmodels.delete
+      parameters:
+        - description: The project associated with the model.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The unique name for the predictive model.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/prediction'
+      tags:
+        - trainedmodels
+    get:
+      description: Check training status of your model.
+      operationId: prediction.trainedmodels.get
+      parameters:
+        - description: The project associated with the model.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The unique name for the predictive model.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Insert2'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/prediction'
+      tags:
+        - trainedmodels
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    put:
+      description: Add new data to a trained model.
+      operationId: prediction.trainedmodels.update
+      parameters:
+        - description: The project associated with the model.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The unique name for the predictive model.
+          in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Update'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Insert2'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/prediction'
+      tags:
+        - trainedmodels
+  '/{project}/trainedmodels/{id}/analyze':
+    get:
+      description: Get analysis of the model and the data the model was trained on.
+      operationId: prediction.trainedmodels.analyze
+      parameters:
+        - description: The project associated with the model.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The unique name for the predictive model.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Analyze'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/prediction'
+      tags:
+        - trainedmodels
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/trainedmodels/{id}/predict':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Submit model id and request a prediction.
+      operationId: prediction.trainedmodels.predict
+      parameters:
+        - description: The project associated with the model.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The unique name for the predictive model.
+          in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Input'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Output'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/prediction'
+      tags:
+        - trainedmodels
 definitions:
   Analyze:
     properties:
@@ -304,341 +642,3 @@ definitions:
         description: The generic output value - could be regression or class label.
         type: string
     type: object
-externalDocs:
-  url: 'https://developers.google.com/prediction/docs/developer-guide'
-host: www.googleapis.com
-info:
-  contact:
-    name: Google
-    url: 'https://google.com'
-  description: Lets you access a cloud hosted machine learning service that makes it easy to build smart apps
-  title: Prediction API
-  version: v1.6
-  x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
-  x-logo:
-    url: 'https://www.google.com/images/icons/feature/predictionapi-64.png'
-  x-origin:
-    format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/prediction/v1.6/rest'
-    version: v1
-  x-preferred: true
-  x-providerName: googleapis.com
-  x-serviceName: prediction
-parameters:
-  alt:
-    default: json
-    description: Data format for the response.
-    enum:
-      - json
-    in: query
-    name: alt
-    type: string
-  fields:
-    description: Selector specifying which fields to include in a partial response.
-    in: query
-    name: fields
-    type: string
-  key:
-    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
-    in: query
-    name: key
-    type: string
-  oauth_token:
-    description: OAuth 2.0 token for the current user.
-    in: query
-    name: oauth_token
-    type: string
-  prettyPrint:
-    default: true
-    description: Returns response with indentations and line breaks.
-    in: query
-    name: prettyPrint
-    type: boolean
-  quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
-    in: query
-    name: quotaUser
-    type: string
-  userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
-    in: query
-    name: userIp
-    type: string
-paths:
-  '/{project}/hostedmodels/{hostedModelName}/predict':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Submit input and request an output against a hosted model.
-      operationId: prediction.hostedmodels.predict
-      parameters:
-        - description: The project associated with the model.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: The name of a hosted model.
-          in: path
-          name: hostedModelName
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Input'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Output'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/prediction'
-      tags:
-        - hostedmodels
-  '/{project}/trainedmodels':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Train a Prediction API model.
-      operationId: prediction.trainedmodels.insert
-      parameters:
-        - description: The project associated with the model.
-          in: path
-          name: project
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Insert'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Insert2'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-            - 'https://www.googleapis.com/auth/prediction'
-      tags:
-        - trainedmodels
-  '/{project}/trainedmodels/list':
-    get:
-      description: List available models.
-      operationId: prediction.trainedmodels.list
-      parameters:
-        - description: The project associated with the model.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: Maximum number of results to return.
-          in: query
-          minimum: 0
-          name: maxResults
-          type: integer
-        - description: Pagination token.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/List'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/prediction'
-      tags:
-        - trainedmodels
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/{project}/trainedmodels/{id}':
-    delete:
-      description: Delete a trained model.
-      operationId: prediction.trainedmodels.delete
-      parameters:
-        - description: The project associated with the model.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: The unique name for the predictive model.
-          in: path
-          name: id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/prediction'
-      tags:
-        - trainedmodels
-    get:
-      description: Check training status of your model.
-      operationId: prediction.trainedmodels.get
-      parameters:
-        - description: The project associated with the model.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: The unique name for the predictive model.
-          in: path
-          name: id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Insert2'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/prediction'
-      tags:
-        - trainedmodels
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    put:
-      description: Add new data to a trained model.
-      operationId: prediction.trainedmodels.update
-      parameters:
-        - description: The project associated with the model.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: The unique name for the predictive model.
-          in: path
-          name: id
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Update'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Insert2'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/prediction'
-      tags:
-        - trainedmodels
-  '/{project}/trainedmodels/{id}/analyze':
-    get:
-      description: Get analysis of the model and the data the model was trained on.
-      operationId: prediction.trainedmodels.analyze
-      parameters:
-        - description: The project associated with the model.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: The unique name for the predictive model.
-          in: path
-          name: id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Analyze'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/prediction'
-      tags:
-        - trainedmodels
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/{project}/trainedmodels/{id}/predict':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Submit model id and request a prediction.
-      operationId: prediction.trainedmodels.predict
-      parameters:
-        - description: The project associated with the model.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: The unique name for the predictive model.
-          in: path
-          name: id
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Input'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Output'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/prediction'
-      tags:
-        - trainedmodels
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
-      'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
-      'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
-      'https://www.googleapis.com/auth/prediction': Manage your data in the Google Prediction API
-    type: oauth2
-swagger: '2.0'

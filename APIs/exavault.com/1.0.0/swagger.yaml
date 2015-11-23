@@ -1,908 +1,8 @@
-basePath: /
-definitions:
-  Account:
-    properties:
-      appliedTrial:
-        type: string
-      bandwidthQuotaLimit:
-        format: int64
-        type: integer
-      bandwidthQuotaUsed:
-        format: int64
-        type: integer
-      branding:
-        type: boolean
-      clientId:
-        format: int32
-        type: integer
-      complexPasswords:
-        type: boolean
-      created:
-        type: string
-      customDomain:
-        type: boolean
-      diskQuotaLimit:
-        format: int64
-        type: integer
-      diskQuotaUsed:
-        format: int64
-        type: integer
-      externalDomains:
-        type: string
-      freeTrial:
-        type: boolean
-      id:
-        format: int32
-        type: integer
-      masterAccount:
-        $ref: '#/definitions/User'
-      maxUsers:
-        format: int32
-        type: integer
-      modified:
-        type: string
-      planCode:
-        type: string
-      quotaNoticeEnabled:
-        format: int32
-        type: integer
-      quotaNoticeThreshold:
-        format: int32
-        type: integer
-      redirect:
-        type: string
-      secureOnly:
-        type: boolean
-      showReferralLinks:
-        type: boolean
-      status:
-        format: int32
-        type: integer
-      userCount:
-        format: int32
-        type: integer
-      username:
-        type: string
-    required:
-      - id
-      - username
-      - maxUsers
-      - userCount
-      - masterAccount
-      - status
-      - branding
-      - customDomain
-      - planCode
-      - diskQuotaLimit
-      - bandwidthQuotaLimit
-      - diskQuotaUsed
-      - bandwidthQuotaUsed
-      - quotaNoticeEnabled
-      - quotaNoticeThreshold
-      - redirect
-      - secureOnly
-      - complexPasswords
-      - showReferralLinks
-      - externalDomains
-      - freeTrial
-      - appliedTrial
-      - clientId
-      - created
-      - modified
-  AccountResponse:
-    properties:
-      error:
-        $ref: '#/definitions/Error'
-      results:
-        $ref: '#/definitions/Account'
-      success:
-        format: int32
-        type: integer
-    required:
-      - success
-      - error
-      - results
-  Auth:
-    properties:
-      accessToken:
-        type: string
-      clientIp:
-        type: string
-      mode:
-        format: int32
-        type: integer
-      username:
-        type: string
-    required:
-      - username
-      - accessToken
-      - mode
-      - clientIp
-  AuthResponse:
-    properties:
-      error:
-        $ref: '#/definitions/Error'
-      results:
-        $ref: '#/definitions/Auth'
-      success:
-        format: int32
-        type: integer
-    required:
-      - success
-      - error
-      - results
-  AvailableUser:
-    properties:
-      available:
-        type: boolean
-    required:
-      - available
-  AvailableUserResponse:
-    properties:
-      error:
-        $ref: '#/definitions/Error'
-      results:
-        $ref: '#/definitions/AvailableUser'
-      success:
-        format: int32
-        type: integer
-    required:
-      - success
-      - error
-      - results
-  DeletedResource:
-    properties:
-      file:
-        type: string
-      size:
-        format: int64
-        type: integer
-      success:
-        format: int32
-        type: integer
-    required:
-      - file
-      - size
-      - success
-  DeletedResourcesResponse:
-    properties:
-      error:
-        $ref: '#/definitions/Error'
-      results:
-        items:
-          $ref: '#/definitions/DeletedResource'
-        type: array
-      success:
-        format: int32
-        type: integer
-    required:
-      - success
-      - error
-      - results
-  Error:
-    properties:
-      code:
-        format: int32
-        type: integer
-      message:
-        type: string
-    required:
-      - message
-      - code
-  ExistingResource:
-    properties:
-      exists:
-        type: boolean
-      resource:
-        $ref: '#/definitions/ResourceProperty'
-    required:
-      - exists
-      - resource
-  ExistingResourcesResponse:
-    properties:
-      error:
-        $ref: '#/definitions/Error'
-      results:
-        items:
-          $ref: '#/definitions/ExistingResource'
-        type: array
-      success:
-        format: int32
-        type: integer
-    required:
-      - success
-      - error
-      - results
-  LogEntry:
-    properties:
-      bytesTransferred:
-        format: int64
-        type: integer
-      created:
-        type: string
-      duration:
-        type: string
-      fileName:
-        type: string
-      fileSource:
-        type: string
-      id:
-        format: int32
-        type: integer
-      ipAddress:
-        type: string
-      operation:
-        type: string
-      protocol:
-        type: string
-      sessionId:
-        type: string
-      status:
-        type: string
-      username:
-        type: string
-    required:
-      - fileName
-      - fileSource
-      - operation
-      - duration
-      - bytesTransferred
-      - id
-      - created
-      - username
-      - sessionId
-      - ipAddress
-      - protocol
-      - status
-  LogResponse:
-    properties:
-      error:
-        $ref: '#/definitions/Error'
-      results:
-        items:
-          $ref: '#/definitions/LogEntry'
-        type: array
-      success:
-        format: int32
-        type: integer
-    required:
-      - success
-      - error
-      - results
-  Message:
-    properties:
-      body:
-        type: string
-      created:
-        type: string
-      id:
-        format: int32
-        type: integer
-      modified:
-        type: string
-      shareId:
-        type: string
-      subject:
-        type: string
-      userId:
-        format: int32
-        type: integer
-    required:
-      - id
-      - userId
-      - shareId
-      - subject
-      - body
-      - created
-      - modified
-  ModifiedResource:
-    properties:
-      destination:
-        type: string
-      file:
-        type: string
-      size:
-        format: int64
-        type: integer
-      success:
-        format: int32
-        type: integer
-    required:
-      - file
-      - destination
-      - size
-      - success
-  ModifiedResourcesResponse:
-    properties:
-      error:
-        $ref: '#/definitions/Error'
-      results:
-        items:
-          $ref: '#/definitions/ModifiedResource'
-        type: array
-      success:
-        format: int32
-        type: integer
-    required:
-      - success
-      - error
-      - results
-  Notification:
-    properties:
-      action:
-        type: string
-      created:
-        type: string
-      id:
-        format: int32
-        type: integer
-      modified:
-        type: string
-      name:
-        type: string
-      path:
-        type: string
-      readableDescription:
-        type: string
-      readableDescriptionWithoutPath:
-        type: string
-      recipientEmails:
-        items:
-          type: string
-        type: array
-      recipients:
-        items:
-          $ref: '#/definitions/Recipient'
-        type: array
-      sendEmail:
-        type: string
-      shareId:
-        type: string
-      type:
-        type: string
-      userId:
-        type: string
-      usernames:
-        items:
-          type: string
-        type: array
-    required:
-      - id
-      - userId
-      - type
-      - path
-      - name
-      - action
-      - usernames
-      - recipients
-      - recipientEmails
-      - sendEmail
-      - readableDescription
-      - readableDescriptionWithoutPath
-      - shareId
-      - created
-      - modified
-  NotificationActivityResponse:
-    properties:
-      error:
-        $ref: '#/definitions/Error'
-      results:
-        items:
-          $ref: '#/definitions/NotificationMessage'
-        type: array
-      success:
-        format: int32
-        type: integer
-    required:
-      - success
-      - error
-      - results
-  NotificationMessage:
-    properties:
-      action:
-        type: string
-      created:
-        type: string
-      id:
-        format: int32
-        type: integer
-      message:
-        type: string
-      notificationSetting:
-        $ref: '#/definitions/Notification'
-      path:
-        type: string
-      read:
-        type: boolean
-      sent:
-        type: boolean
-      username:
-        type: string
-    required:
-      - id
-      - notificationSetting
-      - message
-      - path
-      - action
-      - username
-      - sent
-      - read
-      - created
-  NotificationResponse:
-    properties:
-      error:
-        $ref: '#/definitions/Error'
-      results:
-        $ref: '#/definitions/Notification'
-      success:
-        format: int32
-        type: integer
-    required:
-      - success
-      - error
-      - results
-  NotificationsResponse:
-    properties:
-      error:
-        $ref: '#/definitions/Error'
-      results:
-        items:
-          $ref: '#/definitions/Notification'
-        type: array
-      success:
-        format: int32
-        type: integer
-    required:
-      - success
-      - error
-      - results
-  PreviewFile:
-    properties:
-      image:
-        type: string
-      imageId:
-        type: string
-      size:
-        format: int64
-        type: integer
-    required:
-      - image
-      - size
-      - imageId
-  PreviewFileResponse:
-    properties:
-      error:
-        $ref: '#/definitions/Error'
-      results:
-        $ref: '#/definitions/PreviewFile'
-      success:
-        format: int32
-        type: integer
-    required:
-      - success
-      - error
-      - results
-  Recipient:
-    properties:
-      created:
-        type: string
-      email:
-        type: string
-      hash:
-        type: string
-      id:
-        format: int32
-        type: integer
-      received:
-        type: boolean
-      sent:
-        type: boolean
-      shareId:
-        type: string
-      type:
-        type: string
-    required:
-      - id
-      - shareId
-      - type
-      - hash
-      - email
-      - sent
-      - received
-      - created
-  Resource:
-    properties:
-      inheritedNotifications:
-        type: string
-      inheritedShares:
-        type: string
-      resources:
-        items:
-          $ref: '#/definitions/ResourceProperty'
-        type: array
-      totalFiles:
-        format: int32
-        type: integer
-    required:
-      - totalFiles
-      - resources
-      - inheritedShares
-      - inheritedNotifications
-  ResourcePropertiesResponse:
-    properties:
-      error:
-        $ref: '#/definitions/Error'
-      results:
-        items:
-          $ref: '#/definitions/ResourceProperty'
-        type: array
-      success:
-        format: int32
-        type: integer
-    required:
-      - success
-      - error
-      - results
-  ResourceProperty:
-    properties:
-      createdBy:
-        type: string
-      file:
-        type: string
-      fileCount:
-        format: int32
-        type: integer
-      name:
-        type: string
-      notificationSettings:
-        type: string
-      parent:
-        type: string
-      path:
-        type: string
-      previewable:
-        type: boolean
-      shares:
-        items:
-          $ref: '#/definitions/Share'
-        type: array
-      size:
-        format: int64
-        type: integer
-      type:
-        type: string
-      uploadDate:
-        type: string
-    required:
-      - fileCount
-      - file
-      - name
-      - createdBy
-      - uploadDate
-      - parent
-      - path
-      - shares
-      - notificationSettings
-      - size
-      - previewable
-  ResourceResponse:
-    properties:
-      error:
-        $ref: '#/definitions/Error'
-      results:
-        $ref: '#/definitions/Resource'
-      success:
-        format: int32
-        type: integer
-    required:
-      - success
-      - error
-      - results
-  Response:
-    properties:
-      error:
-        $ref: '#/definitions/Error'
-      results:
-        items:
-          type: string
-        type: array
-      success:
-        format: int32
-        type: integer
-    required:
-      - success
-      - error
-      - results
-  Share:
-    properties:
-      accessDescription:
-        type: string
-      accessMode:
-        type: string
-      created:
-        type: string
-      embed:
-        type: boolean
-      expiration:
-        type: string
-      expired:
-        type: string
-      fileDropCreateFolders:
-        type: boolean
-      hasNotification:
-        type: boolean
-      hasPassword:
-        type: boolean
-      hash:
-        type: string
-      id:
-        format: int32
-        type: integer
-      inherited:
-        type: boolean
-      isPublic:
-        type: boolean
-      messages:
-        items:
-          $ref: '#/definitions/Message'
-        type: array
-      modified:
-        type: string
-      name:
-        type: string
-      notification:
-        type: string
-      owner:
-        format: int32
-        type: integer
-      ownerHash:
-        type: string
-      ownerUsername:
-        type: string
-      paths:
-        items:
-          type: string
-        type: array
-      recipients:
-        items:
-          $ref: '#/definitions/Recipient'
-        type: array
-      recipientsWithOwner:
-        items:
-          $ref: '#/definitions/Recipient'
-        type: array
-      requireEmail:
-        type: boolean
-      resent:
-        type: boolean
-      status:
-        format: int32
-        type: integer
-      trackingStatus:
-        type: string
-      type:
-        type: string
-    required:
-      - id
-      - name
-      - hasPassword
-      - isPublic
-      - accessMode
-      - accessDescription
-      - embed
-      - hash
-      - ownerHash
-      - expiration
-      - trackingStatus
-      - expired
-      - resent
-      - owner
-      - ownerUsername
-      - type
-      - requireEmail
-      - fileDropCreateFolders
-      - paths
-      - recipients
-      - recipientsWithOwner
-      - messages
-      - inherited
-      - status
-      - hasNotification
-      - notification
-      - created
-      - modified
-  ShareActivityResponse:
-    properties:
-      error:
-        $ref: '#/definitions/Error'
-      results:
-        items:
-          $ref: '#/definitions/ShareLogEntry'
-        type: array
-      success:
-        format: int32
-        type: integer
-    required:
-      - success
-      - error
-      - results
-  ShareLogEntry:
-    properties:
-      action:
-        type: string
-      actionObjectId:
-        type: string
-      created:
-        type: string
-      detail:
-        type: string
-      id:
-        format: int32
-        type: integer
-      shareId:
-        type: string
-      username:
-        type: string
-    required:
-      - id
-      - shareId
-      - username
-      - action
-      - actionObjectId
-      - detail
-      - created
-  ShareResponse:
-    properties:
-      error:
-        $ref: '#/definitions/Error'
-      results:
-        $ref: '#/definitions/Share'
-      success:
-        format: int32
-        type: integer
-    required:
-      - success
-      - error
-      - results
-  SharesResponse:
-    properties:
-      error:
-        $ref: '#/definitions/Error'
-      results:
-        items:
-          $ref: '#/definitions/Share'
-        type: array
-      success:
-        format: int32
-        type: integer
-    required:
-      - success
-      - error
-      - results
-  Url:
-    properties:
-      offset:
-        format: int32
-        type: integer
-      url:
-        type: string
-    required:
-      - url
-  UrlResponse:
-    properties:
-      error:
-        $ref: '#/definitions/Error'
-      results:
-        $ref: '#/definitions/Url'
-      success:
-        format: int32
-        type: integer
-    required:
-      - success
-      - error
-      - results
-  User:
-    properties:
-      accessTimestamp:
-        type: string
-      changePassword:
-        type: boolean
-      created:
-        type: string
-      delete:
-        type: boolean
-      download:
-        type: boolean
-      email:
-        type: string
-      expiration:
-        type: string
-      gid:
-        format: int32
-        type: integer
-      homeDir:
-        type: string
-      id:
-        format: int32
-        type: integer
-      list:
-        type: boolean
-      modified:
-        type: string
-      modify:
-        type: boolean
-      nickname:
-        type: string
-      notification:
-        type: boolean
-      owningAccountId:
-        format: int32
-        type: integer
-      role:
-        type: string
-      share:
-        type: boolean
-      status:
-        format: int32
-        type: integer
-      timeZone:
-        type: string
-      upload:
-        type: boolean
-      username:
-        type: string
-    required:
-      - gid
-      - status
-      - created
-      - modified
-      - accessTimestamp
-      - id
-      - owningAccountId
-      - username
-      - nickname
-      - email
-      - expiration
-      - homeDir
-      - download
-      - upload
-      - modify
-      - delete
-      - list
-      - changePassword
-      - share
-      - notification
-      - role
-      - timeZone
-  UserResponse:
-    properties:
-      error:
-        $ref: '#/definitions/Error'
-      results:
-        $ref: '#/definitions/User'
-      success:
-        format: int32
-        type: integer
-    required:
-      - success
-      - error
-      - results
-  UsersResponse:
-    properties:
-      error:
-        $ref: '#/definitions/Error'
-      results:
-        items:
-          $ref: '#/definitions/User'
-        type: array
-      success:
-        format: int32
-        type: integer
-    required:
-      - success
-      - error
-      - results
+swagger: '2.0'
+schemes:
+  - https
 host: api.exavault.com
+basePath: /
 info:
   description: "ExaVault's API allows you to incorporate ExaVault's suite of file transfer and user management tools into your own application."
   title: ExaVault
@@ -915,6 +15,9 @@ info:
     url: 'https://www.exavault.com/api/docs'
     version: '1.2'
   x-providerName: exavault.com
+tags:
+  - description: 'operations for files, notifications, sharing and users'
+    name: v1
 paths:
   /v1/authenticateUser:
     get:
@@ -2173,9 +1276,906 @@ paths:
       summary: Returns true if requested username has not already been taken in the system
       tags:
         - v1
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - description: 'operations for files, notifications, sharing and users'
-    name: v1
+definitions:
+  Account:
+    properties:
+      appliedTrial:
+        type: string
+      bandwidthQuotaLimit:
+        format: int64
+        type: integer
+      bandwidthQuotaUsed:
+        format: int64
+        type: integer
+      branding:
+        type: boolean
+      clientId:
+        format: int32
+        type: integer
+      complexPasswords:
+        type: boolean
+      created:
+        type: string
+      customDomain:
+        type: boolean
+      diskQuotaLimit:
+        format: int64
+        type: integer
+      diskQuotaUsed:
+        format: int64
+        type: integer
+      externalDomains:
+        type: string
+      freeTrial:
+        type: boolean
+      id:
+        format: int32
+        type: integer
+      masterAccount:
+        $ref: '#/definitions/User'
+      maxUsers:
+        format: int32
+        type: integer
+      modified:
+        type: string
+      planCode:
+        type: string
+      quotaNoticeEnabled:
+        format: int32
+        type: integer
+      quotaNoticeThreshold:
+        format: int32
+        type: integer
+      redirect:
+        type: string
+      secureOnly:
+        type: boolean
+      showReferralLinks:
+        type: boolean
+      status:
+        format: int32
+        type: integer
+      userCount:
+        format: int32
+        type: integer
+      username:
+        type: string
+    required:
+      - id
+      - username
+      - maxUsers
+      - userCount
+      - masterAccount
+      - status
+      - branding
+      - customDomain
+      - planCode
+      - diskQuotaLimit
+      - bandwidthQuotaLimit
+      - diskQuotaUsed
+      - bandwidthQuotaUsed
+      - quotaNoticeEnabled
+      - quotaNoticeThreshold
+      - redirect
+      - secureOnly
+      - complexPasswords
+      - showReferralLinks
+      - externalDomains
+      - freeTrial
+      - appliedTrial
+      - clientId
+      - created
+      - modified
+  AccountResponse:
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+      results:
+        $ref: '#/definitions/Account'
+      success:
+        format: int32
+        type: integer
+    required:
+      - success
+      - error
+      - results
+  Auth:
+    properties:
+      accessToken:
+        type: string
+      clientIp:
+        type: string
+      mode:
+        format: int32
+        type: integer
+      username:
+        type: string
+    required:
+      - username
+      - accessToken
+      - mode
+      - clientIp
+  AuthResponse:
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+      results:
+        $ref: '#/definitions/Auth'
+      success:
+        format: int32
+        type: integer
+    required:
+      - success
+      - error
+      - results
+  AvailableUser:
+    properties:
+      available:
+        type: boolean
+    required:
+      - available
+  AvailableUserResponse:
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+      results:
+        $ref: '#/definitions/AvailableUser'
+      success:
+        format: int32
+        type: integer
+    required:
+      - success
+      - error
+      - results
+  DeletedResource:
+    properties:
+      file:
+        type: string
+      size:
+        format: int64
+        type: integer
+      success:
+        format: int32
+        type: integer
+    required:
+      - file
+      - size
+      - success
+  DeletedResourcesResponse:
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+      results:
+        items:
+          $ref: '#/definitions/DeletedResource'
+        type: array
+      success:
+        format: int32
+        type: integer
+    required:
+      - success
+      - error
+      - results
+  Error:
+    properties:
+      code:
+        format: int32
+        type: integer
+      message:
+        type: string
+    required:
+      - message
+      - code
+  ExistingResource:
+    properties:
+      exists:
+        type: boolean
+      resource:
+        $ref: '#/definitions/ResourceProperty'
+    required:
+      - exists
+      - resource
+  ExistingResourcesResponse:
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+      results:
+        items:
+          $ref: '#/definitions/ExistingResource'
+        type: array
+      success:
+        format: int32
+        type: integer
+    required:
+      - success
+      - error
+      - results
+  LogEntry:
+    properties:
+      bytesTransferred:
+        format: int64
+        type: integer
+      created:
+        type: string
+      duration:
+        type: string
+      fileName:
+        type: string
+      fileSource:
+        type: string
+      id:
+        format: int32
+        type: integer
+      ipAddress:
+        type: string
+      operation:
+        type: string
+      protocol:
+        type: string
+      sessionId:
+        type: string
+      status:
+        type: string
+      username:
+        type: string
+    required:
+      - fileName
+      - fileSource
+      - operation
+      - duration
+      - bytesTransferred
+      - id
+      - created
+      - username
+      - sessionId
+      - ipAddress
+      - protocol
+      - status
+  LogResponse:
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+      results:
+        items:
+          $ref: '#/definitions/LogEntry'
+        type: array
+      success:
+        format: int32
+        type: integer
+    required:
+      - success
+      - error
+      - results
+  Message:
+    properties:
+      body:
+        type: string
+      created:
+        type: string
+      id:
+        format: int32
+        type: integer
+      modified:
+        type: string
+      shareId:
+        type: string
+      subject:
+        type: string
+      userId:
+        format: int32
+        type: integer
+    required:
+      - id
+      - userId
+      - shareId
+      - subject
+      - body
+      - created
+      - modified
+  ModifiedResource:
+    properties:
+      destination:
+        type: string
+      file:
+        type: string
+      size:
+        format: int64
+        type: integer
+      success:
+        format: int32
+        type: integer
+    required:
+      - file
+      - destination
+      - size
+      - success
+  ModifiedResourcesResponse:
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+      results:
+        items:
+          $ref: '#/definitions/ModifiedResource'
+        type: array
+      success:
+        format: int32
+        type: integer
+    required:
+      - success
+      - error
+      - results
+  Notification:
+    properties:
+      action:
+        type: string
+      created:
+        type: string
+      id:
+        format: int32
+        type: integer
+      modified:
+        type: string
+      name:
+        type: string
+      path:
+        type: string
+      readableDescription:
+        type: string
+      readableDescriptionWithoutPath:
+        type: string
+      recipientEmails:
+        items:
+          type: string
+        type: array
+      recipients:
+        items:
+          $ref: '#/definitions/Recipient'
+        type: array
+      sendEmail:
+        type: string
+      shareId:
+        type: string
+      type:
+        type: string
+      userId:
+        type: string
+      usernames:
+        items:
+          type: string
+        type: array
+    required:
+      - id
+      - userId
+      - type
+      - path
+      - name
+      - action
+      - usernames
+      - recipients
+      - recipientEmails
+      - sendEmail
+      - readableDescription
+      - readableDescriptionWithoutPath
+      - shareId
+      - created
+      - modified
+  NotificationActivityResponse:
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+      results:
+        items:
+          $ref: '#/definitions/NotificationMessage'
+        type: array
+      success:
+        format: int32
+        type: integer
+    required:
+      - success
+      - error
+      - results
+  NotificationMessage:
+    properties:
+      action:
+        type: string
+      created:
+        type: string
+      id:
+        format: int32
+        type: integer
+      message:
+        type: string
+      notificationSetting:
+        $ref: '#/definitions/Notification'
+      path:
+        type: string
+      read:
+        type: boolean
+      sent:
+        type: boolean
+      username:
+        type: string
+    required:
+      - id
+      - notificationSetting
+      - message
+      - path
+      - action
+      - username
+      - sent
+      - read
+      - created
+  NotificationResponse:
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+      results:
+        $ref: '#/definitions/Notification'
+      success:
+        format: int32
+        type: integer
+    required:
+      - success
+      - error
+      - results
+  NotificationsResponse:
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+      results:
+        items:
+          $ref: '#/definitions/Notification'
+        type: array
+      success:
+        format: int32
+        type: integer
+    required:
+      - success
+      - error
+      - results
+  PreviewFile:
+    properties:
+      image:
+        type: string
+      imageId:
+        type: string
+      size:
+        format: int64
+        type: integer
+    required:
+      - image
+      - size
+      - imageId
+  PreviewFileResponse:
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+      results:
+        $ref: '#/definitions/PreviewFile'
+      success:
+        format: int32
+        type: integer
+    required:
+      - success
+      - error
+      - results
+  Recipient:
+    properties:
+      created:
+        type: string
+      email:
+        type: string
+      hash:
+        type: string
+      id:
+        format: int32
+        type: integer
+      received:
+        type: boolean
+      sent:
+        type: boolean
+      shareId:
+        type: string
+      type:
+        type: string
+    required:
+      - id
+      - shareId
+      - type
+      - hash
+      - email
+      - sent
+      - received
+      - created
+  Resource:
+    properties:
+      inheritedNotifications:
+        type: string
+      inheritedShares:
+        type: string
+      resources:
+        items:
+          $ref: '#/definitions/ResourceProperty'
+        type: array
+      totalFiles:
+        format: int32
+        type: integer
+    required:
+      - totalFiles
+      - resources
+      - inheritedShares
+      - inheritedNotifications
+  ResourcePropertiesResponse:
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+      results:
+        items:
+          $ref: '#/definitions/ResourceProperty'
+        type: array
+      success:
+        format: int32
+        type: integer
+    required:
+      - success
+      - error
+      - results
+  ResourceProperty:
+    properties:
+      createdBy:
+        type: string
+      file:
+        type: string
+      fileCount:
+        format: int32
+        type: integer
+      name:
+        type: string
+      notificationSettings:
+        type: string
+      parent:
+        type: string
+      path:
+        type: string
+      previewable:
+        type: boolean
+      shares:
+        items:
+          $ref: '#/definitions/Share'
+        type: array
+      size:
+        format: int64
+        type: integer
+      type:
+        type: string
+      uploadDate:
+        type: string
+    required:
+      - fileCount
+      - file
+      - name
+      - createdBy
+      - uploadDate
+      - parent
+      - path
+      - shares
+      - notificationSettings
+      - size
+      - previewable
+  ResourceResponse:
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+      results:
+        $ref: '#/definitions/Resource'
+      success:
+        format: int32
+        type: integer
+    required:
+      - success
+      - error
+      - results
+  Response:
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+      results:
+        items:
+          type: string
+        type: array
+      success:
+        format: int32
+        type: integer
+    required:
+      - success
+      - error
+      - results
+  Share:
+    properties:
+      accessDescription:
+        type: string
+      accessMode:
+        type: string
+      created:
+        type: string
+      embed:
+        type: boolean
+      expiration:
+        type: string
+      expired:
+        type: string
+      fileDropCreateFolders:
+        type: boolean
+      hasNotification:
+        type: boolean
+      hasPassword:
+        type: boolean
+      hash:
+        type: string
+      id:
+        format: int32
+        type: integer
+      inherited:
+        type: boolean
+      isPublic:
+        type: boolean
+      messages:
+        items:
+          $ref: '#/definitions/Message'
+        type: array
+      modified:
+        type: string
+      name:
+        type: string
+      notification:
+        type: string
+      owner:
+        format: int32
+        type: integer
+      ownerHash:
+        type: string
+      ownerUsername:
+        type: string
+      paths:
+        items:
+          type: string
+        type: array
+      recipients:
+        items:
+          $ref: '#/definitions/Recipient'
+        type: array
+      recipientsWithOwner:
+        items:
+          $ref: '#/definitions/Recipient'
+        type: array
+      requireEmail:
+        type: boolean
+      resent:
+        type: boolean
+      status:
+        format: int32
+        type: integer
+      trackingStatus:
+        type: string
+      type:
+        type: string
+    required:
+      - id
+      - name
+      - hasPassword
+      - isPublic
+      - accessMode
+      - accessDescription
+      - embed
+      - hash
+      - ownerHash
+      - expiration
+      - trackingStatus
+      - expired
+      - resent
+      - owner
+      - ownerUsername
+      - type
+      - requireEmail
+      - fileDropCreateFolders
+      - paths
+      - recipients
+      - recipientsWithOwner
+      - messages
+      - inherited
+      - status
+      - hasNotification
+      - notification
+      - created
+      - modified
+  ShareActivityResponse:
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+      results:
+        items:
+          $ref: '#/definitions/ShareLogEntry'
+        type: array
+      success:
+        format: int32
+        type: integer
+    required:
+      - success
+      - error
+      - results
+  ShareLogEntry:
+    properties:
+      action:
+        type: string
+      actionObjectId:
+        type: string
+      created:
+        type: string
+      detail:
+        type: string
+      id:
+        format: int32
+        type: integer
+      shareId:
+        type: string
+      username:
+        type: string
+    required:
+      - id
+      - shareId
+      - username
+      - action
+      - actionObjectId
+      - detail
+      - created
+  ShareResponse:
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+      results:
+        $ref: '#/definitions/Share'
+      success:
+        format: int32
+        type: integer
+    required:
+      - success
+      - error
+      - results
+  SharesResponse:
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+      results:
+        items:
+          $ref: '#/definitions/Share'
+        type: array
+      success:
+        format: int32
+        type: integer
+    required:
+      - success
+      - error
+      - results
+  Url:
+    properties:
+      offset:
+        format: int32
+        type: integer
+      url:
+        type: string
+    required:
+      - url
+  UrlResponse:
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+      results:
+        $ref: '#/definitions/Url'
+      success:
+        format: int32
+        type: integer
+    required:
+      - success
+      - error
+      - results
+  User:
+    properties:
+      accessTimestamp:
+        type: string
+      changePassword:
+        type: boolean
+      created:
+        type: string
+      delete:
+        type: boolean
+      download:
+        type: boolean
+      email:
+        type: string
+      expiration:
+        type: string
+      gid:
+        format: int32
+        type: integer
+      homeDir:
+        type: string
+      id:
+        format: int32
+        type: integer
+      list:
+        type: boolean
+      modified:
+        type: string
+      modify:
+        type: boolean
+      nickname:
+        type: string
+      notification:
+        type: boolean
+      owningAccountId:
+        format: int32
+        type: integer
+      role:
+        type: string
+      share:
+        type: boolean
+      status:
+        format: int32
+        type: integer
+      timeZone:
+        type: string
+      upload:
+        type: boolean
+      username:
+        type: string
+    required:
+      - gid
+      - status
+      - created
+      - modified
+      - accessTimestamp
+      - id
+      - owningAccountId
+      - username
+      - nickname
+      - email
+      - expiration
+      - homeDir
+      - download
+      - upload
+      - modify
+      - delete
+      - list
+      - changePassword
+      - share
+      - notification
+      - role
+      - timeZone
+  UserResponse:
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+      results:
+        $ref: '#/definitions/User'
+      success:
+        format: int32
+        type: integer
+    required:
+      - success
+      - error
+      - results
+  UsersResponse:
+    properties:
+      error:
+        $ref: '#/definitions/Error'
+      results:
+        items:
+          $ref: '#/definitions/User'
+        type: array
+      success:
+        format: int32
+        type: integer
+    required:
+      - success
+      - error
+      - results

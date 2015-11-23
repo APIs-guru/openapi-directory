@@ -1,310 +1,8 @@
-basePath: /api/v1
-definitions:
-  Audit:
-    properties:
-      id:
-        description: Unique identifier for the audit
-        format: int64
-        type: integer
-    required:
-      - id
-  Audits:
-    items:
-      $ref: '#/definitions/Audit'
-    type: array
-  Extension:
-    properties:
-      date:
-        description: Date of release
-        type: string
-      ext_name:
-        description: Extension name
-        type: string
-      idx_site:
-        description: Unique identifier for the site
-        format: int64
-        type: integer
-      newVersion:
-        description: New version
-        type: string
-      type:
-        description: Datetime of the log
-        format: date-format
-        type: string
-      url:
-        description: Author URL
-        type: string
-      vUpdate:
-        description: Update is available
-        type: integer
-      version:
-        description: Extension version
-        type: string
-    required:
-      - idx_site
-      - type
-  Feedback:
-    properties:
-      id:
-        description: Unique identifier for the feedback
-        format: int64
-        type: integer
-    required:
-      - id
-  Log:
-    properties:
-      Site name:
-        description: Name of the site / readyonly
-        type: string
-      id_log:
-        description: Unique identifier for the log
-        format: int64
-        type: integer
-      idx_site:
-        description: Unique identifier for the site
-        format: int64
-        type: integer
-      log_date:
-        description: Datetime of the log
-        format: date-format
-        type: string
-      log_entry:
-        description: Log information
-        type: string
-      log_level:
-        description: Level of log
-        format: int64
-        type: integer
-      log_type:
-        description: Type of log
-        type: string
-      userid:
-        description: Unique identifier for the user
-        format: int64
-        type: integer
-    required:
-      - id_log
-      - idx_site
-      - log_date
-      - log_entry
-      - log_level
-      - userid
-  Monitor: {}
-  PostLog:
-    properties:
-      log_date:
-        description: Datetime of the log
-        format: date-format
-        type: string
-      log_entry:
-        description: Log information
-        type: string
-      log_level:
-        description: Level of log
-        format: int64
-        type: integer
-    required:
-      - log_entry
-      - log_level
-  PostSite:
-    properties:
-      access_url:
-        description: URL of the site
-        type: string
-      admin_url:
-        description: Adminsitration URL
-        type: string
-      akeebaProfile:
-        description: Akeeba Profile
-        format: date-format
-        type: string
-      backupSchedule:
-        description: Backup Schedule
-        type: string
-      dateBackup:
-        description: Date backup
-        format: date-format
-        type: string
-      name:
-        description: Friendly name for the site
-        type: string
-      notes:
-        description: Personnal note for the site
-        type: string
-      published:
-        description: Published status of site
-        type: boolean
-      secret_word:
-        description: Watchful secret word
-        type: string
-      tags:
-        description: 'JSON encoded array of tags for the site (e.g. [{<q>name</q>:<q>mytag</q>},{<q>name</q>:<q>anothertag</q>}])'
-        format: json
-        type: string
-      word_akeeba:
-        description: Akeeba backup word
-        type: string
-      word_check:
-        description: Word checked for uptime
-        type: string
-    required:
-      - access_url
-  Reports: {}
-  Site:
-    properties:
-      access_url:
-        description: URL of the site
-        type: string
-      admin_url:
-        description: Adminsitration URL
-        type: string
-      akeebaProfile:
-        description: Akeeba Profile
-        format: date-format
-        type: string
-      backupSchedule:
-        description: Backup Schedule
-        type: string
-      canBackup:
-        description: Site can be backuped
-        type: boolean
-      canUpdate:
-        description: Site can use remote installer
-        type: boolean
-      dateBackup:
-        description: Date backup
-        format: date-format
-        type: string
-      date_last_check:
-        description: Watchful Last check
-        format: date-format
-        type: string
-      error:
-        description: Error status of site
-        type: boolean
-      ip:
-        description: server IP
-        type: string
-      jUpdate:
-        description: '?'
-        type: boolean
-      j_version:
-        description: Joomla site version
-        type: string
-      monitorid:
-        description: Id of the associated UptimeRobot monitor
-        type: boolean
-      name:
-        description: Friendly name for the site
-        type: string
-      nbUpdates:
-        description: Number of updates
-        format: date-format
-        type: string
-      new_j_version:
-        description: Joomla site version
-        type: string
-      notes:
-        description: Personnal note for the site
-        type: string
-      published:
-        description: Published status of site
-        type: boolean
-      secret_word:
-        description: Watchful secret word
-        type: string
-      siteid:
-        description: Unique identifier for the site
-        format: int64
-        type: integer
-      tags:
-        description: List of tags for this site
-        items: {}
-        type: array
-      up:
-        description: Site status
-        type: boolean
-      word_akeeba:
-        description: Akeeba backup word
-        type: string
-      word_check:
-        description: Word checked for uptime
-        type: string
-    required:
-      - siteid
-  SsoUsers:
-    properties:
-      email:
-        description: Email of the SSO User
-        type: string
-      groupid:
-        description: Security Joomla group ID
-        format: int64
-        type: integer
-      id:
-        description: Unique identifier for the SSO User
-        format: int64
-        type: integer
-      lastLoginDate:
-        description: Last login date on remote site
-        format: date-time
-        type: string
-      lastLoginSite:
-        description: Site Id of the last remote login
-        format: int64
-        type: integer
-      name:
-        description: Account display name
-        type: string
-      password:
-        description: Password of the SSO User
-        type: string
-      userid:
-        description: Watchful user account
-        format: int64
-        type: integer
-      username:
-        description: Username of the SSO User
-        type: string
-    required:
-      - email
-      - groupid
-      - id
-      - name
-      - password
-      - userid
-      - username
-  Tag:
-    properties:
-      id:
-        description: Unique identifier for the tag
-        format: int64
-        type: integer
-      name:
-        description: Friendly name for the tag
-        type: string
-      nbSites:
-        description: Number of sites use this tag (required field id)
-        type: integer
-      type:
-        default: default
-        description: Bootstrap color of the tag
-        enum:
-          - default
-          - success
-          - warning
-          - important
-          - info
-          - inverse
-        type: string
-    required:
-      - id
-      - name
-  Uptime: {}
-  Version: {}
-externalDocs:
-  url: 'https://watchful.li/faqs/tools/watchful-rest-api.html'
+swagger: '2.0'
+schemes:
+  - https
 host: watchful.li
+basePath: /api/v1
 info:
   title: watchful.li
   version: 1.0.0
@@ -316,6 +14,29 @@ info:
     url: 'https://watchful.li/api/v1/api-docs/'
     version: '1.2'
   x-providerName: watchful.li
+externalDocs:
+  url: 'https://watchful.li/faqs/tools/watchful-rest-api.html'
+tags:
+  - description: Operations about audits
+    name: audits
+  - description: Operations about extensions
+    name: extensions
+  - description: Operations about feedbacks
+    name: feedbacks
+  - description: Operations about logs
+    name: logs
+  - description: Operations about packages
+    name: packages
+  - description: Create reports in PDF
+    name: reports
+  - description: Operations about sites
+    name: sites
+  - description: Operations about SsoUser
+    name: ssousers
+  - description: Operations about tags
+    name: tags
+  - description: Operations about versions
+    name: versions
 paths:
   /audits:
     get:
@@ -2419,27 +2140,306 @@ paths:
       summary: Find a version by ID
       tags:
         - versions
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - description: Operations about audits
-    name: audits
-  - description: Operations about extensions
-    name: extensions
-  - description: Operations about feedbacks
-    name: feedbacks
-  - description: Operations about logs
-    name: logs
-  - description: Operations about packages
-    name: packages
-  - description: Create reports in PDF
-    name: reports
-  - description: Operations about sites
-    name: sites
-  - description: Operations about SsoUser
-    name: ssousers
-  - description: Operations about tags
-    name: tags
-  - description: Operations about versions
-    name: versions
+definitions:
+  Audit:
+    properties:
+      id:
+        description: Unique identifier for the audit
+        format: int64
+        type: integer
+    required:
+      - id
+  Audits:
+    items:
+      $ref: '#/definitions/Audit'
+    type: array
+  Extension:
+    properties:
+      date:
+        description: Date of release
+        type: string
+      ext_name:
+        description: Extension name
+        type: string
+      idx_site:
+        description: Unique identifier for the site
+        format: int64
+        type: integer
+      newVersion:
+        description: New version
+        type: string
+      type:
+        description: Datetime of the log
+        format: date-format
+        type: string
+      url:
+        description: Author URL
+        type: string
+      vUpdate:
+        description: Update is available
+        type: integer
+      version:
+        description: Extension version
+        type: string
+    required:
+      - idx_site
+      - type
+  Feedback:
+    properties:
+      id:
+        description: Unique identifier for the feedback
+        format: int64
+        type: integer
+    required:
+      - id
+  Log:
+    properties:
+      Site name:
+        description: Name of the site / readyonly
+        type: string
+      id_log:
+        description: Unique identifier for the log
+        format: int64
+        type: integer
+      idx_site:
+        description: Unique identifier for the site
+        format: int64
+        type: integer
+      log_date:
+        description: Datetime of the log
+        format: date-format
+        type: string
+      log_entry:
+        description: Log information
+        type: string
+      log_level:
+        description: Level of log
+        format: int64
+        type: integer
+      log_type:
+        description: Type of log
+        type: string
+      userid:
+        description: Unique identifier for the user
+        format: int64
+        type: integer
+    required:
+      - id_log
+      - idx_site
+      - log_date
+      - log_entry
+      - log_level
+      - userid
+  Monitor: {}
+  PostLog:
+    properties:
+      log_date:
+        description: Datetime of the log
+        format: date-format
+        type: string
+      log_entry:
+        description: Log information
+        type: string
+      log_level:
+        description: Level of log
+        format: int64
+        type: integer
+    required:
+      - log_entry
+      - log_level
+  PostSite:
+    properties:
+      access_url:
+        description: URL of the site
+        type: string
+      admin_url:
+        description: Adminsitration URL
+        type: string
+      akeebaProfile:
+        description: Akeeba Profile
+        format: date-format
+        type: string
+      backupSchedule:
+        description: Backup Schedule
+        type: string
+      dateBackup:
+        description: Date backup
+        format: date-format
+        type: string
+      name:
+        description: Friendly name for the site
+        type: string
+      notes:
+        description: Personnal note for the site
+        type: string
+      published:
+        description: Published status of site
+        type: boolean
+      secret_word:
+        description: Watchful secret word
+        type: string
+      tags:
+        description: 'JSON encoded array of tags for the site (e.g. [{<q>name</q>:<q>mytag</q>},{<q>name</q>:<q>anothertag</q>}])'
+        format: json
+        type: string
+      word_akeeba:
+        description: Akeeba backup word
+        type: string
+      word_check:
+        description: Word checked for uptime
+        type: string
+    required:
+      - access_url
+  Reports: {}
+  Site:
+    properties:
+      access_url:
+        description: URL of the site
+        type: string
+      admin_url:
+        description: Adminsitration URL
+        type: string
+      akeebaProfile:
+        description: Akeeba Profile
+        format: date-format
+        type: string
+      backupSchedule:
+        description: Backup Schedule
+        type: string
+      canBackup:
+        description: Site can be backuped
+        type: boolean
+      canUpdate:
+        description: Site can use remote installer
+        type: boolean
+      dateBackup:
+        description: Date backup
+        format: date-format
+        type: string
+      date_last_check:
+        description: Watchful Last check
+        format: date-format
+        type: string
+      error:
+        description: Error status of site
+        type: boolean
+      ip:
+        description: server IP
+        type: string
+      jUpdate:
+        description: '?'
+        type: boolean
+      j_version:
+        description: Joomla site version
+        type: string
+      monitorid:
+        description: Id of the associated UptimeRobot monitor
+        type: boolean
+      name:
+        description: Friendly name for the site
+        type: string
+      nbUpdates:
+        description: Number of updates
+        format: date-format
+        type: string
+      new_j_version:
+        description: Joomla site version
+        type: string
+      notes:
+        description: Personnal note for the site
+        type: string
+      published:
+        description: Published status of site
+        type: boolean
+      secret_word:
+        description: Watchful secret word
+        type: string
+      siteid:
+        description: Unique identifier for the site
+        format: int64
+        type: integer
+      tags:
+        description: List of tags for this site
+        items: {}
+        type: array
+      up:
+        description: Site status
+        type: boolean
+      word_akeeba:
+        description: Akeeba backup word
+        type: string
+      word_check:
+        description: Word checked for uptime
+        type: string
+    required:
+      - siteid
+  SsoUsers:
+    properties:
+      email:
+        description: Email of the SSO User
+        type: string
+      groupid:
+        description: Security Joomla group ID
+        format: int64
+        type: integer
+      id:
+        description: Unique identifier for the SSO User
+        format: int64
+        type: integer
+      lastLoginDate:
+        description: Last login date on remote site
+        format: date-time
+        type: string
+      lastLoginSite:
+        description: Site Id of the last remote login
+        format: int64
+        type: integer
+      name:
+        description: Account display name
+        type: string
+      password:
+        description: Password of the SSO User
+        type: string
+      userid:
+        description: Watchful user account
+        format: int64
+        type: integer
+      username:
+        description: Username of the SSO User
+        type: string
+    required:
+      - email
+      - groupid
+      - id
+      - name
+      - password
+      - userid
+      - username
+  Tag:
+    properties:
+      id:
+        description: Unique identifier for the tag
+        format: int64
+        type: integer
+      name:
+        description: Friendly name for the tag
+        type: string
+      nbSites:
+        description: Number of sites use this tag (required field id)
+        type: integer
+      type:
+        default: default
+        description: Bootstrap color of the tag
+        enum:
+          - default
+          - success
+          - warning
+          - important
+          - info
+          - inverse
+        type: string
+    required:
+      - id
+      - name
+  Uptime: {}
+  Version: {}

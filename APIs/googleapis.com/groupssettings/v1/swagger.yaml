@@ -1,98 +1,8 @@
-basePath: /groups/v1/groups
-definitions:
-  Groups:
-    description: JSON template for Group resource
-    properties:
-      allowExternalMembers:
-        description: Are external members allowed to join the group.
-        type: string
-      allowGoogleCommunication:
-        description: Is google allowed to contact admins.
-        type: string
-      allowWebPosting:
-        description: If posting from web is allowed.
-        type: string
-      archiveOnly:
-        description: If the group is archive only
-        type: string
-      customReplyTo:
-        description: Default email to which reply to any message should go.
-        type: string
-      defaultMessageDenyNotificationText:
-        description: Default message deny notification message
-        type: string
-      description:
-        description: Description of the group
-        type: string
-      email:
-        description: Email id of the group
-        type: string
-      includeInGlobalAddressList:
-        description: If this groups should be included in global address list or not.
-        type: string
-      isArchived:
-        description: If the contents of the group are archived.
-        type: string
-      kind:
-        default: 'groupsSettings#groups'
-        description: The type of the resource.
-        type: string
-      maxMessageBytes:
-        description: Maximum message size allowed.
-        format: int32
-        type: integer
-      membersCanPostAsTheGroup:
-        description: Can members post using the group email address.
-        type: string
-      messageDisplayFont:
-        description: 'Default message display font. Possible values are: DEFAULT_FONT FIXED_WIDTH_FONT'
-        type: string
-      messageModerationLevel:
-        description: 'Moderation level for messages. Possible values are: MODERATE_ALL_MESSAGES MODERATE_NON_MEMBERS MODERATE_NEW_MEMBERS MODERATE_NONE'
-        type: string
-      name:
-        description: Name of the Group
-        type: string
-      primaryLanguage:
-        description: Primary language for the group.
-        type: string
-      replyTo:
-        description: 'Whome should the default reply to a message go to. Possible values are: REPLY_TO_CUSTOM REPLY_TO_SENDER REPLY_TO_LIST REPLY_TO_OWNER REPLY_TO_IGNORE REPLY_TO_MANAGERS'
-        type: string
-      sendMessageDenyNotification:
-        description: Should the member be notified if his message is denied by owner.
-        type: string
-      showInGroupDirectory:
-        description: Is the group listed in groups directory
-        type: string
-      spamModerationLevel:
-        description: 'Moderation level for messages detected as spam. Possible values are: ALLOW MODERATE SILENTLY_MODERATE REJECT'
-        type: string
-      whoCanContactOwner:
-        description: 'Permission to contact owner of the group via web UI. Possbile values are: ANYONE_CAN_CONTACT ALL_IN_DOMAIN_CAN_CONTACT ALL_MEMBERS_CAN_CONTACT ALL_MANAGERS_CAN_CONTACT'
-        type: string
-      whoCanInvite:
-        description: 'Permissions to invite members. Possbile values are: ALL_MEMBERS_CAN_INVITE ALL_MANAGERS_CAN_INVITE'
-        type: string
-      whoCanJoin:
-        description: 'Permissions to join the group. Possible values are: ANYONE_CAN_JOIN ALL_IN_DOMAIN_CAN_JOIN INVITED_CAN_JOIN CAN_REQUEST_TO_JOIN'
-        type: string
-      whoCanLeaveGroup:
-        description: 'Permission to leave the group. Possible values are: ALL_MANAGERS_CAN_LEAVE ALL_MEMBERS_CAN_LEAVE'
-        type: string
-      whoCanPostMessage:
-        description: 'Permissions to post messages to the group. Possible values are: NONE_CAN_POST ALL_MANAGERS_CAN_POST ALL_MEMBERS_CAN_POST ALL_IN_DOMAIN_CAN_POST ANYONE_CAN_POST'
-        type: string
-      whoCanViewGroup:
-        description: 'Permissions to view group. Possbile values are: ANYONE_CAN_VIEW ALL_IN_DOMAIN_CAN_VIEW ALL_MEMBERS_CAN_VIEW ALL_MANAGERS_CAN_VIEW'
-        type: string
-      whoCanViewMembership:
-        description: 'Permissions to view membership. Possbile values are: ALL_IN_DOMAIN_CAN_VIEW ALL_MEMBERS_CAN_VIEW ALL_MANAGERS_CAN_VIEW'
-        type: string
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/google-apps/groups-settings/get_started'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /groups/v1/groups
 info:
   contact:
     name: Google
@@ -111,6 +21,16 @@ info:
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: groupssettings
+externalDocs:
+  url: 'https://developers.google.com/google-apps/groups-settings/get_started'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/apps.groups.settings': View and manage the settings of a Google Apps Group
+    type: oauth2
 parameters:
   alt:
     default: atom
@@ -227,14 +147,94 @@ paths:
             - 'https://www.googleapis.com/auth/apps.groups.settings'
       tags:
         - groups
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/apps.groups.settings': View and manage the settings of a Google Apps Group
-    type: oauth2
-swagger: '2.0'
+definitions:
+  Groups:
+    description: JSON template for Group resource
+    properties:
+      allowExternalMembers:
+        description: Are external members allowed to join the group.
+        type: string
+      allowGoogleCommunication:
+        description: Is google allowed to contact admins.
+        type: string
+      allowWebPosting:
+        description: If posting from web is allowed.
+        type: string
+      archiveOnly:
+        description: If the group is archive only
+        type: string
+      customReplyTo:
+        description: Default email to which reply to any message should go.
+        type: string
+      defaultMessageDenyNotificationText:
+        description: Default message deny notification message
+        type: string
+      description:
+        description: Description of the group
+        type: string
+      email:
+        description: Email id of the group
+        type: string
+      includeInGlobalAddressList:
+        description: If this groups should be included in global address list or not.
+        type: string
+      isArchived:
+        description: If the contents of the group are archived.
+        type: string
+      kind:
+        default: 'groupsSettings#groups'
+        description: The type of the resource.
+        type: string
+      maxMessageBytes:
+        description: Maximum message size allowed.
+        format: int32
+        type: integer
+      membersCanPostAsTheGroup:
+        description: Can members post using the group email address.
+        type: string
+      messageDisplayFont:
+        description: 'Default message display font. Possible values are: DEFAULT_FONT FIXED_WIDTH_FONT'
+        type: string
+      messageModerationLevel:
+        description: 'Moderation level for messages. Possible values are: MODERATE_ALL_MESSAGES MODERATE_NON_MEMBERS MODERATE_NEW_MEMBERS MODERATE_NONE'
+        type: string
+      name:
+        description: Name of the Group
+        type: string
+      primaryLanguage:
+        description: Primary language for the group.
+        type: string
+      replyTo:
+        description: 'Whome should the default reply to a message go to. Possible values are: REPLY_TO_CUSTOM REPLY_TO_SENDER REPLY_TO_LIST REPLY_TO_OWNER REPLY_TO_IGNORE REPLY_TO_MANAGERS'
+        type: string
+      sendMessageDenyNotification:
+        description: Should the member be notified if his message is denied by owner.
+        type: string
+      showInGroupDirectory:
+        description: Is the group listed in groups directory
+        type: string
+      spamModerationLevel:
+        description: 'Moderation level for messages detected as spam. Possible values are: ALLOW MODERATE SILENTLY_MODERATE REJECT'
+        type: string
+      whoCanContactOwner:
+        description: 'Permission to contact owner of the group via web UI. Possbile values are: ANYONE_CAN_CONTACT ALL_IN_DOMAIN_CAN_CONTACT ALL_MEMBERS_CAN_CONTACT ALL_MANAGERS_CAN_CONTACT'
+        type: string
+      whoCanInvite:
+        description: 'Permissions to invite members. Possbile values are: ALL_MEMBERS_CAN_INVITE ALL_MANAGERS_CAN_INVITE'
+        type: string
+      whoCanJoin:
+        description: 'Permissions to join the group. Possible values are: ANYONE_CAN_JOIN ALL_IN_DOMAIN_CAN_JOIN INVITED_CAN_JOIN CAN_REQUEST_TO_JOIN'
+        type: string
+      whoCanLeaveGroup:
+        description: 'Permission to leave the group. Possible values are: ALL_MANAGERS_CAN_LEAVE ALL_MEMBERS_CAN_LEAVE'
+        type: string
+      whoCanPostMessage:
+        description: 'Permissions to post messages to the group. Possible values are: NONE_CAN_POST ALL_MANAGERS_CAN_POST ALL_MEMBERS_CAN_POST ALL_IN_DOMAIN_CAN_POST ANYONE_CAN_POST'
+        type: string
+      whoCanViewGroup:
+        description: 'Permissions to view group. Possbile values are: ANYONE_CAN_VIEW ALL_IN_DOMAIN_CAN_VIEW ALL_MEMBERS_CAN_VIEW ALL_MANAGERS_CAN_VIEW'
+        type: string
+      whoCanViewMembership:
+        description: 'Permissions to view membership. Possbile values are: ALL_IN_DOMAIN_CAN_VIEW ALL_MEMBERS_CAN_VIEW ALL_MANAGERS_CAN_VIEW'
+        type: string
+    type: object

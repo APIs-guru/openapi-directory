@@ -1,5 +1,8 @@
-basePath: /
+swagger: '2.0'
+schemes:
+  - http
 host: hashtag.peel-ci.com
+basePath: /
 info:
   description: 'The machine learning service APIs utilize hashtags from Twitter to find related, trending shows, related Twitter hashtags in real time and to generate direct tune-in URLs.'
   title: Peel Tune-in API
@@ -11,6 +14,13 @@ info:
     url: 'https://s3-us-west-2.amazonaws.com/tuneinapi.peel-ci.com/resources.json'
     version: '1.2'
   x-providerName: peel-ci.com
+tags:
+  - description: Operations about hashtags
+    name: hashtag
+  - description: Operations about statuses
+    name: status
+  - description: Operations about health of Tune-in service
+    name: health
 paths:
   /hashtag/related:
     get:
@@ -114,13 +124,3 @@ paths:
       summary: Gets the last 100 statuses for this show.
       tags:
         - status
-schemes:
-  - http
-swagger: '2.0'
-tags:
-  - description: Operations about hashtags
-    name: hashtag
-  - description: Operations about statuses
-    name: status
-  - description: Operations about health of Tune-in service
-    name: health

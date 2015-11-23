@@ -1,158 +1,8 @@
-basePath: /
-definitions:
-  Binding:
-    description: Associates `members` with a `role`.
-    properties:
-      members:
-        description: 'Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following formats: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@gmail.com` or `joe@example.com`. * `serviceAccount:{emailid}`: An email address that represents a service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `domain:{domain}`: A Google Apps domain name that represents all the users of that domain. For example, `google.com` or `example.com`.'
-        items:
-          type: string
-        type: array
-      role:
-        description: 'Role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`, or `roles/owner`. Required'
-        type: string
-    type: object
-  Empty:
-    description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`.'
-    type: object
-  GetIamPolicyRequest:
-    description: Request message for `GetIamPolicy` method.
-    type: object
-  ListOrganizationsResponse:
-    description: The response returned from the ListOrganizations method.
-    properties:
-      nextPageToken:
-        description: 'A pagination token to be used to retrieve the next page of results. If the result is too large to fit within the page size specified in the request, this field will be set with a token that can be used to fetch the next page of results. If this field is empty, it indicates that this response contains the last page of results.'
-        type: string
-      organizations:
-        description: 'The list of Organizations that matched the list query, possibly paginated.'
-        items:
-          $ref: '#/definitions/Organization'
-        type: array
-    type: object
-  ListProjectsResponse:
-    description: A page of the response received from the ListProjects method. A paginated response where more pages are available has `next_page_token` set. This token can be used in a subsequent request to retrieve the next request page.
-    properties:
-      nextPageToken:
-        description: 'Pagination token. If the result set is too large to fit in a single response, this token is returned. It encodes the position of the current result cursor. Feeding this value into a new list request with the `page_token` parameter gives the next page of the results. When `next_page_token` is not filled in, there is no next page and the list returned is the last page in the result set. Pagination tokens have a limited lifetime.'
-        type: string
-      projects:
-        description: The list of projects that matched the list filter. This list can be paginated.
-        items:
-          $ref: '#/definitions/Project'
-        type: array
-    type: object
-  Organization:
-    description: "The root node in the resource hierarchy to which a particular entity's (e.g., company) resources belong."
-    properties:
-      creationTime:
-        description: Timestamp when the Organization was created. Assigned by the server. @OutputOnly
-        type: string
-      displayName:
-        description: A friendly string to be used to refer to the Organization in the UI. This field is required.
-        type: string
-      organizationId:
-        description: An immutable id for the Organization that is assigned on creation. This should be omitted when creating a new Organization. This field is read-only.
-        type: string
-      owner:
-        $ref: '#/definitions/OrganizationOwner'
-        description: 'The owner of this Organization. The owner should be specified upon creation. Once set, it cannot be changed. This field is required.'
-    type: object
-  OrganizationOwner:
-    description: 'The entity that owns an Organization. The lifetime of the Organization and all of its descendants are bound to the OrganizationOwner. If the OrganizationOwner is deleted, the Organization and all its descendants will be deleted.'
-    properties:
-      directoryCustomerId:
-        description: The Google for Work customer id used in the Directory API.
-        type: string
-    type: object
-  Policy:
-    description: "Defines an Identity and Access Management (IAM) policy. It is used to specify access control policies for Cloud Platform resources. A `Policy` consists of a list of `bindings`. A `Binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM. **Example** { \"bindings\": [ { \"role\": \"roles/owner\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-other-app@appspot.gserviceaccount.com\"] }, { \"role\": \"roles/viewer\", \"members\": [\"user:sean@example.com\"] } ] } For a description of IAM and its features, see the [IAM developer's guide](https://cloud.google.com/iam)."
-    properties:
-      bindings:
-        description: Associates a list of `members` to a `role`. Multiple `bindings` must not be specified for the same `role`. `bindings` with no members will result in an error.
-        items:
-          $ref: '#/definitions/Binding'
-        type: array
-      etag:
-        description: 'The etag is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the etag in the read-modify-write cycle to perform policy updates in order to avoid race conditions. If no etag is provided in the call to SetIamPolicy, then the existing policy is overwritten blindly.'
-        format: byte
-        type: string
-      version:
-        description: Version of the `Policy`. The default version is 0. 0 = resourcemanager_projects only support legacy roles. 1 = supports non-legacy roles 2 = supports AuditConfig
-        format: int32
-        type: integer
-    type: object
-  Project:
-    description: 'A Project is a high-level Google Cloud Platform entity. It is a container for ACLs, APIs, AppEngine Apps, VMs, and other Google Cloud Platform resources.'
-    properties:
-      createTime:
-        description: Creation time. Read-only.
-        type: string
-      labels:
-        additionalProperties:
-          type: string
-        description: "The labels associated with this project. Label keys must be between 1 and 63 characters long and must conform to the following regular expression: \\[a-z\\](\\[-a-z0-9\\]*\\[a-z0-9\\])?. Label values must be between 0 and 63 characters long and must conform to the regular expression (\\[a-z\\](\\[-a-z0-9\\]*\\[a-z0-9\\])?)?. No more than 256 labels can be associated with a given resource. Clients should store labels in a representation such as JSON that does not depend on specific characters being disallowed. Example: \"environment\" : \"dev\" Read-write."
-        type: object
-      lifecycleState:
-        description: The project lifecycle state. Read-only.
-        enum:
-          - LIFECYCLE_STATE_UNSPECIFIED
-          - ACTIVE
-          - DELETE_REQUESTED
-          - DELETE_IN_PROGRESS
-        type: string
-      name:
-        description: 'The user-assigned name of the project. It must be 4 to 30 characters. Allowed characters are: lowercase and uppercase letters, numbers, hyphen, single-quote, double-quote, space, and exclamation point. Example: My Project Read-write.'
-        type: string
-      parent:
-        $ref: '#/definitions/ResourceId'
-        description: 'An optional reference to a parent Resource. The only supported parent type is "organization". Once set, the parent cannot be modified. Read-write.'
-      projectId:
-        description: 'The unique, user-assigned ID of the project. It must be 6 to 30 lowercase letters, digits, or hyphens. It must start with a letter. Trailing hyphens are prohibited. Example: tokyo-rain-123 Read-only after creation.'
-        type: string
-      projectNumber:
-        description: 'The number uniquely identifying the project. Example: 415104041262 Read-only.'
-        format: int64
-        type: string
-    type: object
-  ResourceId:
-    description: "A container to reference an id for any resource type. A 'resource' in Google Cloud Platform is a generic term for something you (a developer) may want to interact with through one of our API's. Some examples are an AppEngine app, a Compute Engine instance, Cloud SQL database, ..."
-    properties:
-      id:
-        description: "Required field for the type-specific id. This should correspond to the id used in the type-specific API's."
-        type: string
-      type:
-        description: 'Required field representing the resource type this id is for. At present, the only valid type is "organization".'
-        type: string
-    type: object
-  SetIamPolicyRequest:
-    description: Request message for `SetIamPolicy` method.
-    properties:
-      policy:
-        $ref: '#/definitions/Policy'
-        description: 'REQUIRED: The complete policy to be applied to the `resource`. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.'
-    type: object
-  TestIamPermissionsRequest:
-    description: Request message for `TestIamPermissions` method.
-    properties:
-      permissions:
-        description: "The set of permissions to check for the `resource`. Permissions with wildcards (such as '*' or 'storage.*') are not allowed."
-        items:
-          type: string
-        type: array
-    type: object
-  TestIamPermissionsResponse:
-    description: Response message for `TestIamPermissions` method.
-    properties:
-      permissions:
-        description: A subset of `TestPermissionsRequest.permissions` that the caller is allowed.
-        items:
-          type: string
-        type: array
-    type: object
-externalDocs:
-  url: 'https://cloud.google.com/resource-manager'
+swagger: '2.0'
+schemes:
+  - https
 host: cloudresourcemanager.googleapis.com
+basePath: /
 info:
   contact:
     name: Google
@@ -171,6 +21,17 @@ info:
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: cloudresourcemanager
+externalDocs:
+  url: 'https://cloud.google.com/resource-manager'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+    type: oauth2
 parameters:
   $.xgafv:
     description: V1 error format.
@@ -744,15 +605,154 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - projects
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
-    type: oauth2
-swagger: '2.0'
+definitions:
+  Binding:
+    description: Associates `members` with a `role`.
+    properties:
+      members:
+        description: 'Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following formats: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@gmail.com` or `joe@example.com`. * `serviceAccount:{emailid}`: An email address that represents a service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `domain:{domain}`: A Google Apps domain name that represents all the users of that domain. For example, `google.com` or `example.com`.'
+        items:
+          type: string
+        type: array
+      role:
+        description: 'Role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`, or `roles/owner`. Required'
+        type: string
+    type: object
+  Empty:
+    description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`.'
+    type: object
+  GetIamPolicyRequest:
+    description: Request message for `GetIamPolicy` method.
+    type: object
+  ListOrganizationsResponse:
+    description: The response returned from the ListOrganizations method.
+    properties:
+      nextPageToken:
+        description: 'A pagination token to be used to retrieve the next page of results. If the result is too large to fit within the page size specified in the request, this field will be set with a token that can be used to fetch the next page of results. If this field is empty, it indicates that this response contains the last page of results.'
+        type: string
+      organizations:
+        description: 'The list of Organizations that matched the list query, possibly paginated.'
+        items:
+          $ref: '#/definitions/Organization'
+        type: array
+    type: object
+  ListProjectsResponse:
+    description: A page of the response received from the ListProjects method. A paginated response where more pages are available has `next_page_token` set. This token can be used in a subsequent request to retrieve the next request page.
+    properties:
+      nextPageToken:
+        description: 'Pagination token. If the result set is too large to fit in a single response, this token is returned. It encodes the position of the current result cursor. Feeding this value into a new list request with the `page_token` parameter gives the next page of the results. When `next_page_token` is not filled in, there is no next page and the list returned is the last page in the result set. Pagination tokens have a limited lifetime.'
+        type: string
+      projects:
+        description: The list of projects that matched the list filter. This list can be paginated.
+        items:
+          $ref: '#/definitions/Project'
+        type: array
+    type: object
+  Organization:
+    description: "The root node in the resource hierarchy to which a particular entity's (e.g., company) resources belong."
+    properties:
+      creationTime:
+        description: Timestamp when the Organization was created. Assigned by the server. @OutputOnly
+        type: string
+      displayName:
+        description: A friendly string to be used to refer to the Organization in the UI. This field is required.
+        type: string
+      organizationId:
+        description: An immutable id for the Organization that is assigned on creation. This should be omitted when creating a new Organization. This field is read-only.
+        type: string
+      owner:
+        $ref: '#/definitions/OrganizationOwner'
+        description: 'The owner of this Organization. The owner should be specified upon creation. Once set, it cannot be changed. This field is required.'
+    type: object
+  OrganizationOwner:
+    description: 'The entity that owns an Organization. The lifetime of the Organization and all of its descendants are bound to the OrganizationOwner. If the OrganizationOwner is deleted, the Organization and all its descendants will be deleted.'
+    properties:
+      directoryCustomerId:
+        description: The Google for Work customer id used in the Directory API.
+        type: string
+    type: object
+  Policy:
+    description: "Defines an Identity and Access Management (IAM) policy. It is used to specify access control policies for Cloud Platform resources. A `Policy` consists of a list of `bindings`. A `Binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM. **Example** { \"bindings\": [ { \"role\": \"roles/owner\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-other-app@appspot.gserviceaccount.com\"] }, { \"role\": \"roles/viewer\", \"members\": [\"user:sean@example.com\"] } ] } For a description of IAM and its features, see the [IAM developer's guide](https://cloud.google.com/iam)."
+    properties:
+      bindings:
+        description: Associates a list of `members` to a `role`. Multiple `bindings` must not be specified for the same `role`. `bindings` with no members will result in an error.
+        items:
+          $ref: '#/definitions/Binding'
+        type: array
+      etag:
+        description: 'The etag is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the etag in the read-modify-write cycle to perform policy updates in order to avoid race conditions. If no etag is provided in the call to SetIamPolicy, then the existing policy is overwritten blindly.'
+        format: byte
+        type: string
+      version:
+        description: Version of the `Policy`. The default version is 0. 0 = resourcemanager_projects only support legacy roles. 1 = supports non-legacy roles 2 = supports AuditConfig
+        format: int32
+        type: integer
+    type: object
+  Project:
+    description: 'A Project is a high-level Google Cloud Platform entity. It is a container for ACLs, APIs, AppEngine Apps, VMs, and other Google Cloud Platform resources.'
+    properties:
+      createTime:
+        description: Creation time. Read-only.
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: "The labels associated with this project. Label keys must be between 1 and 63 characters long and must conform to the following regular expression: \\[a-z\\](\\[-a-z0-9\\]*\\[a-z0-9\\])?. Label values must be between 0 and 63 characters long and must conform to the regular expression (\\[a-z\\](\\[-a-z0-9\\]*\\[a-z0-9\\])?)?. No more than 256 labels can be associated with a given resource. Clients should store labels in a representation such as JSON that does not depend on specific characters being disallowed. Example: \"environment\" : \"dev\" Read-write."
+        type: object
+      lifecycleState:
+        description: The project lifecycle state. Read-only.
+        enum:
+          - LIFECYCLE_STATE_UNSPECIFIED
+          - ACTIVE
+          - DELETE_REQUESTED
+          - DELETE_IN_PROGRESS
+        type: string
+      name:
+        description: 'The user-assigned name of the project. It must be 4 to 30 characters. Allowed characters are: lowercase and uppercase letters, numbers, hyphen, single-quote, double-quote, space, and exclamation point. Example: My Project Read-write.'
+        type: string
+      parent:
+        $ref: '#/definitions/ResourceId'
+        description: 'An optional reference to a parent Resource. The only supported parent type is "organization". Once set, the parent cannot be modified. Read-write.'
+      projectId:
+        description: 'The unique, user-assigned ID of the project. It must be 6 to 30 lowercase letters, digits, or hyphens. It must start with a letter. Trailing hyphens are prohibited. Example: tokyo-rain-123 Read-only after creation.'
+        type: string
+      projectNumber:
+        description: 'The number uniquely identifying the project. Example: 415104041262 Read-only.'
+        format: int64
+        type: string
+    type: object
+  ResourceId:
+    description: "A container to reference an id for any resource type. A 'resource' in Google Cloud Platform is a generic term for something you (a developer) may want to interact with through one of our API's. Some examples are an AppEngine app, a Compute Engine instance, Cloud SQL database, ..."
+    properties:
+      id:
+        description: "Required field for the type-specific id. This should correspond to the id used in the type-specific API's."
+        type: string
+      type:
+        description: 'Required field representing the resource type this id is for. At present, the only valid type is "organization".'
+        type: string
+    type: object
+  SetIamPolicyRequest:
+    description: Request message for `SetIamPolicy` method.
+    properties:
+      policy:
+        $ref: '#/definitions/Policy'
+        description: 'REQUIRED: The complete policy to be applied to the `resource`. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.'
+    type: object
+  TestIamPermissionsRequest:
+    description: Request message for `TestIamPermissions` method.
+    properties:
+      permissions:
+        description: "The set of permissions to check for the `resource`. Permissions with wildcards (such as '*' or 'storage.*') are not allowed."
+        items:
+          type: string
+        type: array
+    type: object
+  TestIamPermissionsResponse:
+    description: Response message for `TestIamPermissions` method.
+    properties:
+      permissions:
+        description: A subset of `TestPermissionsRequest.permissions` that the caller is allowed.
+        items:
+          type: string
+        type: array
+    type: object

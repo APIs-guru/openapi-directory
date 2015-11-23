@@ -1,743 +1,8 @@
-basePath: /sql/v1beta3
-definitions:
-  BackupConfiguration:
-    description: Database instance backup configuration.
-    properties:
-      binaryLogEnabled:
-        description: 'Whether binary log is enabled. If backup configuration is disabled, binary log must be disabled as well.'
-        type: boolean
-      enabled:
-        description: Whether this configuration is enabled.
-        type: boolean
-      id:
-        description: Identifier for this configuration. This gets generated automatically when a backup configuration is created.
-        type: string
-      kind:
-        default: 'sql#backupConfiguration'
-        description: 'This is always sql#backupConfiguration.'
-        type: string
-      startTime:
-        description: 'Start time for the daily backup configuration in UTC timezone in the 24 hour format - HH:MM.'
-        type: string
-    type: object
-  BackupRun:
-    description: A database instance backup run resource.
-    properties:
-      backupConfiguration:
-        description: Backup Configuration identifier.
-        type: string
-      dueTime:
-        description: 'The due time of this run in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.'
-        format: date-time
-        type: string
-      endTime:
-        description: 'The time the backup operation completed in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.'
-        format: date-time
-        type: string
-      enqueuedTime:
-        description: 'The time the run was enqueued in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.'
-        format: date-time
-        type: string
-      error:
-        $ref: '#/definitions/OperationError'
-        description: Information about why the backup operation failed. This is only present if the run has the FAILED status.
-      instance:
-        description: Name of the database instance.
-        type: string
-      kind:
-        default: 'sql#backupRun'
-        description: 'This is always sql#backupRun.'
-        type: string
-      startTime:
-        description: 'The time the backup operation actually started in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.'
-        format: date-time
-        type: string
-      status:
-        description: The status of this run.
-        type: string
-    type: object
-  BackupRunsListResponse:
-    description: Backup run list results.
-    properties:
-      items:
-        description: A list of backup runs in reverse chronological order of the enqueued time.
-        items:
-          $ref: '#/definitions/BackupRun'
-        type: array
-      kind:
-        default: 'sql#backupRunsList'
-        description: 'This is always sql#backupRunsList.'
-        type: string
-      nextPageToken:
-        description: 'The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
-        type: string
-    type: object
-  BinLogCoordinates:
-    description: Binary log coordinates.
-    properties:
-      binLogFileName:
-        description: Name of the binary log file for a Cloud SQL instance.
-        type: string
-      binLogPosition:
-        description: Position (offset) within the binary log file.
-        format: int64
-        type: string
-      kind:
-        default: 'sql#binLogCoordinates'
-        description: 'This is always sql#binLogCoordinates.'
-        type: string
-    type: object
-  CloneContext:
-    description: Database instance clone context.
-    properties:
-      binLogCoordinates:
-        $ref: '#/definitions/BinLogCoordinates'
-        description: 'Binary log coordinates, if specified, indentify the position up to which the source instance should be cloned. If not specified, the source instance is cloned up to the most recent binary log coordinates.'
-      destinationInstanceName:
-        description: Name of the Cloud SQL instance to be created as a clone.
-        type: string
-      kind:
-        default: 'sql#cloneContext'
-        description: 'This is always sql#cloneContext.'
-        type: string
-      sourceInstanceName:
-        description: Name of the Cloud SQL instance to be cloned.
-        type: string
-    type: object
-  DatabaseFlags:
-    description: MySQL flags for Cloud SQL instances.
-    properties:
-      name:
-        description: 'The name of the flag. These flags are passed at instance startup, so include both MySQL server options and MySQL system variables. Flags should be specified with underscores, not hyphens. For more information, see Configuring MySQL Flags in the Google Cloud SQL documentation, as well as the official MySQL documentation for server options and system variables.'
-        type: string
-      value:
-        description: "The value of the flag. Booleans should be set to on for true and off for false. This field must be omitted if the flag doesn't take a value."
-        type: string
-    type: object
-  DatabaseInstance:
-    description: A Cloud SQL instance resource.
-    properties:
-      currentDiskSize:
-        description: The current disk usage of the instance in bytes.
-        format: int64
-        type: string
-      databaseVersion:
-        description: The database engine type and version. Can be MYSQL_5_5 or MYSQL_5_6. Defaults to MYSQL_5_5. The databaseVersion cannot be changed after instance creation.
-        type: string
-      etag:
-        description: HTTP 1.1 Entity tag for the resource.
-        type: string
-      instance:
-        description: Name of the Cloud SQL instance. This does not include the project ID.
-        type: string
-      instanceType:
-        description: |-
-          The instance type. This can be one of the following.
-          CLOUD_SQL_INSTANCE: Regular Cloud SQL instance.
-          READ_REPLICA_INSTANCE: Cloud SQL instance acting as a read-replica.
-        type: string
-      ipAddresses:
-        description: The assigned IP addresses for the instance.
-        items:
-          $ref: '#/definitions/IpMapping'
-        type: array
-      ipv6Address:
-        description: The IPv6 address assigned to the instance.
-        type: string
-      kind:
-        default: 'sql#instance'
-        description: 'This is always sql#instance.'
-        type: string
-      masterInstanceName:
-        description: The name of the instance which will act as master in the replication setup.
-        type: string
-      maxDiskSize:
-        description: The maximum disk size of the instance in bytes.
-        format: int64
-        type: string
-      project:
-        description: The project ID of the project containing the Cloud SQL instance. The Google apps domain is prefixed if applicable.
-        type: string
-      region:
-        description: 'The geographical region. Can be us-central, asia-east1 or europe-west1. Defaults to us-central. The region can not be changed after instance creation.'
-        type: string
-      replicaNames:
-        description: The replicas of the instance.
-        items:
-          type: string
-        type: array
-      serverCaCert:
-        $ref: '#/definitions/SslCert'
-        description: SSL configuration.
-      serviceAccountEmailAddress:
-        description: The service account email address assigned to the instance.
-        type: string
-      settings:
-        $ref: '#/definitions/Settings'
-        description: The user settings.
-      state:
-        description: |-
-          The current serving state of the Cloud SQL instance. This can be one of the following.
-          RUNNABLE: The instance is running, or is ready to run when accessed.
-          SUSPENDED: The instance is not available, for example due to problems with billing.
-          PENDING_CREATE: The instance is being created.
-          MAINTENANCE: The instance is down for maintenance.
-          UNKNOWN_STATE: The state of the instance is unknown.
-        type: string
-    type: object
-  ExportContext:
-    description: Database instance export context.
-    properties:
-      database:
-        description: 'Databases (for example, guestbook) from which the export is made. If unspecified, all databases are exported.'
-        items:
-          type: string
-        type: array
-      kind:
-        default: 'sql#exportContext'
-        description: 'This is always sql#exportContext.'
-        type: string
-      table:
-        description: 'Tables to export, or that were exported, from the specified database. If you specify tables, specify one and only one database.'
-        items:
-          type: string
-        type: array
-      uri:
-        description: 'The path to the file in Google Cloud Storage where the export will be stored, or where it was already stored. The URI is in the form gs://bucketName/fileName. If the file already exists, the operation fails. If the filename ends with .gz, the contents are compressed.'
-        type: string
-    type: object
-  Flag:
-    description: A Google Cloud SQL service flag resource.
-    properties:
-      allowedStringValues:
-        description: 'For STRING flags, a list of strings that the value can be set to.'
-        items:
-          type: string
-        type: array
-      appliesTo:
-        description: 'The database version this flag applies to. Currently this can only be [MYSQL_5_5].'
-        items:
-          type: string
-        type: array
-      kind:
-        default: 'sql#flag'
-        description: 'This is always sql#flag.'
-        type: string
-      maxValue:
-        description: 'For INTEGER flags, the maximum allowed value.'
-        format: int64
-        type: string
-      minValue:
-        description: 'For INTEGER flags, the minimum allowed value.'
-        format: int64
-        type: string
-      name:
-        description: 'This is the name of the flag. Flag names always use underscores, not hyphens, e.g. max_allowed_packet'
-        type: string
-      type:
-        description: 'The type of the flag. Flags are typed to being BOOLEAN, STRING, INTEGER or NONE. NONE is used for flags which do not take a value, such as skip_grant_tables.'
-        type: string
-    type: object
-  FlagsListResponse:
-    description: Flags list response.
-    properties:
-      items:
-        description: List of flags.
-        items:
-          $ref: '#/definitions/Flag'
-        type: array
-      kind:
-        default: 'sql#flagsList'
-        description: 'This is always sql#flagsList.'
-        type: string
-    type: object
-  ImportContext:
-    description: Database instance import context.
-    properties:
-      database:
-        description: 'The database (for example, guestbook) to which the import is made. If not set, it is assumed that the database is specified in the file to be imported.'
-        type: string
-      kind:
-        default: 'sql#importContext'
-        description: 'This is always sql#importContext.'
-        type: string
-      uri:
-        description: 'A path to the MySQL dump file in Google Cloud Storage from which the import is made. The URI is in the form gs://bucketName/fileName. Compressed gzip files (.gz) are also supported.'
-        items:
-          type: string
-        type: array
-    type: object
-  InstanceOperation:
-    description: 'An Operations resource contains information about database instance operations such as create, delete, and restart. Operations resources are created in response to operations that were initiated; you never create them directly.'
-    properties:
-      endTime:
-        description: 'The time this operation finished in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.'
-        format: date-time
-        type: string
-      enqueuedTime:
-        description: 'The time this operation was enqueued in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.'
-        format: date-time
-        type: string
-      error:
-        description: The error(s) encountered by this operation. Only set if the operation results in an error.
-        items:
-          $ref: '#/definitions/OperationError'
-        type: array
-      exportContext:
-        $ref: '#/definitions/ExportContext'
-        description: 'The context for export operation, if applicable.'
-      importContext:
-        $ref: '#/definitions/ImportContext'
-        description: 'The context for import operation, if applicable.'
-      instance:
-        description: Name of the database instance.
-        type: string
-      kind:
-        default: 'sql#instanceOperation'
-        description: 'This is always sql#instanceOperation.'
-        type: string
-      operation:
-        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
-        type: string
-      operationType:
-        description: 'The type of the operation. Valid values are CREATE, DELETE, UPDATE, RESTART, IMPORT, EXPORT, BACKUP_VOLUME, RESTORE_VOLUME.'
-        type: string
-      startTime:
-        description: 'The time this operation actually started in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.'
-        format: date-time
-        type: string
-      state:
-        description: 'The state of an operation. Valid values are PENDING, RUNNING, DONE, UNKNOWN.'
-        type: string
-      userEmailAddress:
-        description: The email address of the user who initiated this operation.
-        type: string
-    type: object
-  InstanceSetRootPasswordRequest:
-    description: Database instance set root password request.
-    properties:
-      setRootPasswordContext:
-        $ref: '#/definitions/SetRootPasswordContext'
-        description: Set Root Password Context.
-    type: object
-  InstancesCloneRequest:
-    description: Database instance clone request.
-    properties:
-      cloneContext:
-        $ref: '#/definitions/CloneContext'
-        description: Contains details about the clone operation.
-    type: object
-  InstancesCloneResponse:
-    description: Database instance clone response.
-    properties:
-      kind:
-        default: 'sql#instancesClone'
-        description: 'This is always sql#instancesClone.'
-        type: string
-      operation:
-        description: 'An unique identifier for the operation associated with the cloned instance. You can use this identifier to retrieve the Operations resource, which has information about the operation.'
-        type: string
-    type: object
-  InstancesDeleteResponse:
-    description: Database instance delete response.
-    properties:
-      kind:
-        default: 'sql#instancesDelete'
-        description: 'This is always sql#instancesDelete.'
-        type: string
-      operation:
-        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
-        type: string
-    type: object
-  InstancesExportRequest:
-    description: Database instance export request.
-    properties:
-      exportContext:
-        $ref: '#/definitions/ExportContext'
-        description: Contains details about the export operation.
-    type: object
-  InstancesExportResponse:
-    description: Database instance export response.
-    properties:
-      kind:
-        default: 'sql#instancesExport'
-        description: 'This is always sql#instancesExport.'
-        type: string
-      operation:
-        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
-        type: string
-    type: object
-  InstancesImportRequest:
-    description: Database instance import request.
-    properties:
-      importContext:
-        $ref: '#/definitions/ImportContext'
-        description: Contains details about the import operation.
-    type: object
-  InstancesImportResponse:
-    description: Database instance import response.
-    properties:
-      kind:
-        default: 'sql#instancesImport'
-        description: 'This is always sql#instancesImport.'
-        type: string
-      operation:
-        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
-        type: string
-    type: object
-  InstancesInsertResponse:
-    description: Database instance insert response.
-    properties:
-      kind:
-        default: 'sql#instancesInsert'
-        description: 'This is always sql#instancesInsert.'
-        type: string
-      operation:
-        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
-        type: string
-    type: object
-  InstancesListResponse:
-    description: Database instances list response.
-    properties:
-      items:
-        description: List of database instance resources.
-        items:
-          $ref: '#/definitions/DatabaseInstance'
-        type: array
-      kind:
-        default: 'sql#instancesList'
-        description: 'This is always sql#instancesList.'
-        type: string
-      nextPageToken:
-        description: 'The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
-        type: string
-    type: object
-  InstancesPromoteReplicaResponse:
-    description: Database promote read replica response.
-    properties:
-      kind:
-        default: 'sql#instancesPromoteReplica'
-        description: 'This is always sql#instancesPromoteReplica.'
-        type: string
-      operation:
-        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
-        type: string
-    type: object
-  InstancesResetSslConfigResponse:
-    description: Database instance resetSslConfig response.
-    properties:
-      kind:
-        default: 'sql#instancesResetSslConfig'
-        description: 'This is always sql#instancesResetSslConfig.'
-        type: string
-      operation:
-        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation. All ssl client certificates will be deleted and a new server certificate will be created. Does not take effect until the next instance restart.
-        type: string
-    type: object
-  InstancesRestartResponse:
-    description: Database instance restart response.
-    properties:
-      kind:
-        default: 'sql#instancesRestart'
-        description: 'This is always sql#instancesRestart.'
-        type: string
-      operation:
-        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
-        type: string
-    type: object
-  InstancesRestoreBackupResponse:
-    description: Database instance restore backup response.
-    properties:
-      kind:
-        default: 'sql#instancesRestoreBackup'
-        description: 'This is always sql#instancesRestoreBackup.'
-        type: string
-      operation:
-        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
-        type: string
-    type: object
-  InstancesSetRootPasswordResponse:
-    description: Database instance set root password response.
-    properties:
-      kind:
-        default: 'sql#instancesSetRootPassword'
-        description: 'This is always sql#instancesSetRootPassword.'
-        type: string
-      operation:
-        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
-        type: string
-    type: object
-  InstancesUpdateResponse:
-    description: Database instance update response.
-    properties:
-      kind:
-        default: 'sql#instancesUpdate'
-        description: 'This is always sql#instancesUpdate.'
-        type: string
-      operation:
-        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve information about the operation.
-        type: string
-    type: object
-  IpConfiguration:
-    description: IP Management configuration.
-    properties:
-      authorizedNetworks:
-        description: "The list of external networks that are allowed to connect to the instance using the IP. In CIDR notation, also known as 'slash' notation (e.g. 192.168.100.0/24)."
-        items:
-          type: string
-        type: array
-      enabled:
-        description: Whether the instance should be assigned an IP address or not.
-        type: boolean
-      kind:
-        default: 'sql#ipConfiguration'
-        description: 'This is always sql#ipConfiguration.'
-        type: string
-      requireSsl:
-        description: "Whether the mysqld should default to 'REQUIRE X509' for users connecting over IP."
-        type: boolean
-    type: object
-  IpMapping:
-    description: Database instance IP Mapping.
-    properties:
-      ipAddress:
-        description: The IP address assigned.
-        type: string
-      timeToRetire:
-        description: 'The due time for this IP to be retired in RFC 3339 format, for example 2012-11-15T16:19:00.094Z. This field is only available when the IP is scheduled to be retired.'
-        format: date-time
-        type: string
-    type: object
-  LocationPreference:
-    description: 'Preferred location. This specifies where a Cloud SQL instance should preferably be located, either in a specific Compute Engine zone, or co-located with an App Engine application. Note that if the preferred location is not available, the instance will be located as close as possible within the region. Only one location may be specified.'
-    properties:
-      followGaeApplication:
-        description: 'The App Engine application to follow, it must be in the same region as the Cloud SQL instance.'
-        type: string
-      kind:
-        default: 'sql#locationPreference'
-        description: 'This is always sql#locationPreference.'
-        type: string
-      zone:
-        description: 'The preferred Compute Engine zone (e.g. us-centra1-a, us-central1-b, etc.).'
-        type: string
-    type: object
-  OperationError:
-    description: Database instance operation error.
-    properties:
-      code:
-        description: Identifies the specific error that occurred.
-        type: string
-      kind:
-        default: 'sql#operationError'
-        description: 'This is always sql#operationError.'
-        type: string
-    type: object
-  OperationsListResponse:
-    description: Database instance list operations response.
-    properties:
-      items:
-        description: List of operation resources.
-        items:
-          $ref: '#/definitions/InstanceOperation'
-        type: array
-      kind:
-        default: 'sql#operationsList'
-        description: 'This is always sql#operationsList.'
-        type: string
-      nextPageToken:
-        description: 'The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
-        type: string
-    type: object
-  SetRootPasswordContext:
-    description: Database instance set root password context.
-    properties:
-      kind:
-        default: 'sql#setRootUserContext'
-        description: 'This is always sql#setRootUserContext.'
-        type: string
-      password:
-        description: The password for the root user.
-        type: string
-    type: object
-  Settings:
-    description: Database instance settings.
-    properties:
-      activationPolicy:
-        description: |-
-          The activation policy for this instance. This specifies when the instance should be activated and is applicable only when the instance state is RUNNABLE. This can be one of the following.
-          ALWAYS: The instance should always be active.
-          NEVER: The instance should never be activated.
-          ON_DEMAND: The instance is activated upon receiving requests.
-        type: string
-      authorizedGaeApplications:
-        description: The App Engine app IDs that can access this instance.
-        items:
-          type: string
-        type: array
-      backupConfiguration:
-        description: The daily backup configuration for the instance.
-        items:
-          $ref: '#/definitions/BackupConfiguration'
-        type: array
-      databaseFlags:
-        description: The database flags passed to the instance at startup.
-        items:
-          $ref: '#/definitions/DatabaseFlags'
-        type: array
-      databaseReplicationEnabled:
-        description: Configuration specific to read replica instance. Indicates whether replication is enabled or not.
-        type: boolean
-      ipConfiguration:
-        $ref: '#/definitions/IpConfiguration'
-        description: The settings for IP Management. This allows to enable or disable the instance IP and manage which external networks can connect to the instance.
-      kind:
-        default: 'sql#settings'
-        description: 'This is always sql#settings.'
-        type: string
-      locationPreference:
-        $ref: '#/definitions/LocationPreference'
-        description: The location preference settings. This allows the instance to be located as near as possible to either an App Engine app or GCE zone for better performance.
-      pricingPlan:
-        description: The pricing plan for this instance. This can be either PER_USE or PACKAGE.
-        type: string
-      replicationType:
-        description: The type of replication this instance uses. This can be either ASYNCHRONOUS or SYNCHRONOUS.
-        type: string
-      settingsVersion:
-        description: 'The version of instance settings. This is a required field for update method to make sure concurrent updates are handled properly. During update, use the most recent settingsVersion value for this instance and do not try to update this value.'
-        format: int64
-        type: string
-      tier:
-        description: 'The tier of service for this instance, for example D1, D2. For more information, see pricing.'
-        type: string
-    type: object
-  SslCert:
-    description: SslCerts Resource
-    properties:
-      cert:
-        description: PEM representation.
-        type: string
-      certSerialNumber:
-        description: 'Serial number, as extracted from the certificate.'
-        type: string
-      commonName:
-        description: 'User supplied name. Constrained to [a-zA-Z.-_ ]+.'
-        type: string
-      createTime:
-        description: Time when the certificate was created.
-        format: date-time
-        type: string
-      expirationTime:
-        description: Time when the certificate expires.
-        format: date-time
-        type: string
-      instance:
-        description: Name of the database instance.
-        type: string
-      kind:
-        default: 'sql#sslCert'
-        description: 'This is always sql#sslCert.'
-        type: string
-      sha1Fingerprint:
-        description: Sha1 Fingerprint.
-        type: string
-    type: object
-  SslCertDetail:
-    description: SslCertDetail.
-    properties:
-      certInfo:
-        $ref: '#/definitions/SslCert'
-        description: The public information about the cert.
-      certPrivateKey:
-        description: 'The private key for the client cert, in pem format. Keep private in order to protect your security.'
-        type: string
-    type: object
-  SslCertsDeleteResponse:
-    description: SslCert delete response.
-    properties:
-      kind:
-        default: 'sql#sslCertsDelete'
-        description: 'This is always sql#sslCertsDelete.'
-        type: string
-      operation:
-        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
-        type: string
-    type: object
-  SslCertsInsertRequest:
-    description: SslCerts insert request.
-    properties:
-      commonName:
-        description: User supplied name. Must be a distinct name from the other certificates for this instance. New certificates will not be usable until the instance is restarted.
-        type: string
-    type: object
-  SslCertsInsertResponse:
-    description: SslCert insert response.
-    properties:
-      clientCert:
-        $ref: '#/definitions/SslCertDetail'
-        description: The new client certificate and private key. The new certificate will not work until the instance is restarted.
-      kind:
-        default: 'sql#sslCertsInsert'
-        description: 'This is always sql#sslCertsInsert.'
-        type: string
-      serverCaCert:
-        $ref: '#/definitions/SslCert'
-        description: "The server Certificate Authority's certificate. If this is missing you can force a new one to be generated by calling resetSslConfig method on instances resource.."
-    type: object
-  SslCertsListResponse:
-    description: SslCerts list response.
-    properties:
-      items:
-        description: List of client certificates for the instance.
-        items:
-          $ref: '#/definitions/SslCert'
-        type: array
-      kind:
-        default: 'sql#sslCertsList'
-        description: 'This is always sql#sslCertsList.'
-        type: string
-    type: object
-  Tier:
-    description: A Google Cloud SQL service tier resource.
-    properties:
-      DiskQuota:
-        description: The maximum disk size of this tier in bytes.
-        format: int64
-        type: string
-      RAM:
-        description: The maximum RAM usage of this tier in bytes.
-        format: int64
-        type: string
-      kind:
-        default: 'sql#tier'
-        description: 'This is always sql#tier.'
-        type: string
-      region:
-        description: 'The applicable regions for this tier. Can be us-east1, europe-west1, or asia-east1.'
-        items:
-          type: string
-        type: array
-      tier:
-        description: 'An identifier for the service tier, for example D1, D2 etc. For related information, see Pricing.'
-        type: string
-    type: object
-  TiersListResponse:
-    description: Tiers list response.
-    properties:
-      items:
-        description: List of tiers.
-        items:
-          $ref: '#/definitions/Tier'
-        type: array
-      kind:
-        default: 'sql#tiersList'
-        description: 'This is always sql#tiersList.'
-        type: string
-    type: object
-externalDocs:
-  url: 'https://cloud.google.com/sql/docs/reference/latest'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /sql/v1beta3
 info:
   contact:
     name: Google
@@ -756,6 +21,17 @@ info:
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: sqladmin
+externalDocs:
+  url: 'https://cloud.google.com/sql/docs/reference/latest'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/sqlservice.admin': Manage your Google SQL Service instances
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -1622,15 +898,739 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/sqlservice.admin': Manage your Google SQL Service instances
-    type: oauth2
-swagger: '2.0'
+definitions:
+  BackupConfiguration:
+    description: Database instance backup configuration.
+    properties:
+      binaryLogEnabled:
+        description: 'Whether binary log is enabled. If backup configuration is disabled, binary log must be disabled as well.'
+        type: boolean
+      enabled:
+        description: Whether this configuration is enabled.
+        type: boolean
+      id:
+        description: Identifier for this configuration. This gets generated automatically when a backup configuration is created.
+        type: string
+      kind:
+        default: 'sql#backupConfiguration'
+        description: 'This is always sql#backupConfiguration.'
+        type: string
+      startTime:
+        description: 'Start time for the daily backup configuration in UTC timezone in the 24 hour format - HH:MM.'
+        type: string
+    type: object
+  BackupRun:
+    description: A database instance backup run resource.
+    properties:
+      backupConfiguration:
+        description: Backup Configuration identifier.
+        type: string
+      dueTime:
+        description: 'The due time of this run in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.'
+        format: date-time
+        type: string
+      endTime:
+        description: 'The time the backup operation completed in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.'
+        format: date-time
+        type: string
+      enqueuedTime:
+        description: 'The time the run was enqueued in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.'
+        format: date-time
+        type: string
+      error:
+        $ref: '#/definitions/OperationError'
+        description: Information about why the backup operation failed. This is only present if the run has the FAILED status.
+      instance:
+        description: Name of the database instance.
+        type: string
+      kind:
+        default: 'sql#backupRun'
+        description: 'This is always sql#backupRun.'
+        type: string
+      startTime:
+        description: 'The time the backup operation actually started in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.'
+        format: date-time
+        type: string
+      status:
+        description: The status of this run.
+        type: string
+    type: object
+  BackupRunsListResponse:
+    description: Backup run list results.
+    properties:
+      items:
+        description: A list of backup runs in reverse chronological order of the enqueued time.
+        items:
+          $ref: '#/definitions/BackupRun'
+        type: array
+      kind:
+        default: 'sql#backupRunsList'
+        description: 'This is always sql#backupRunsList.'
+        type: string
+      nextPageToken:
+        description: 'The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
+        type: string
+    type: object
+  BinLogCoordinates:
+    description: Binary log coordinates.
+    properties:
+      binLogFileName:
+        description: Name of the binary log file for a Cloud SQL instance.
+        type: string
+      binLogPosition:
+        description: Position (offset) within the binary log file.
+        format: int64
+        type: string
+      kind:
+        default: 'sql#binLogCoordinates'
+        description: 'This is always sql#binLogCoordinates.'
+        type: string
+    type: object
+  CloneContext:
+    description: Database instance clone context.
+    properties:
+      binLogCoordinates:
+        $ref: '#/definitions/BinLogCoordinates'
+        description: 'Binary log coordinates, if specified, indentify the position up to which the source instance should be cloned. If not specified, the source instance is cloned up to the most recent binary log coordinates.'
+      destinationInstanceName:
+        description: Name of the Cloud SQL instance to be created as a clone.
+        type: string
+      kind:
+        default: 'sql#cloneContext'
+        description: 'This is always sql#cloneContext.'
+        type: string
+      sourceInstanceName:
+        description: Name of the Cloud SQL instance to be cloned.
+        type: string
+    type: object
+  DatabaseFlags:
+    description: MySQL flags for Cloud SQL instances.
+    properties:
+      name:
+        description: 'The name of the flag. These flags are passed at instance startup, so include both MySQL server options and MySQL system variables. Flags should be specified with underscores, not hyphens. For more information, see Configuring MySQL Flags in the Google Cloud SQL documentation, as well as the official MySQL documentation for server options and system variables.'
+        type: string
+      value:
+        description: "The value of the flag. Booleans should be set to on for true and off for false. This field must be omitted if the flag doesn't take a value."
+        type: string
+    type: object
+  DatabaseInstance:
+    description: A Cloud SQL instance resource.
+    properties:
+      currentDiskSize:
+        description: The current disk usage of the instance in bytes.
+        format: int64
+        type: string
+      databaseVersion:
+        description: The database engine type and version. Can be MYSQL_5_5 or MYSQL_5_6. Defaults to MYSQL_5_5. The databaseVersion cannot be changed after instance creation.
+        type: string
+      etag:
+        description: HTTP 1.1 Entity tag for the resource.
+        type: string
+      instance:
+        description: Name of the Cloud SQL instance. This does not include the project ID.
+        type: string
+      instanceType:
+        description: |-
+          The instance type. This can be one of the following.
+          CLOUD_SQL_INSTANCE: Regular Cloud SQL instance.
+          READ_REPLICA_INSTANCE: Cloud SQL instance acting as a read-replica.
+        type: string
+      ipAddresses:
+        description: The assigned IP addresses for the instance.
+        items:
+          $ref: '#/definitions/IpMapping'
+        type: array
+      ipv6Address:
+        description: The IPv6 address assigned to the instance.
+        type: string
+      kind:
+        default: 'sql#instance'
+        description: 'This is always sql#instance.'
+        type: string
+      masterInstanceName:
+        description: The name of the instance which will act as master in the replication setup.
+        type: string
+      maxDiskSize:
+        description: The maximum disk size of the instance in bytes.
+        format: int64
+        type: string
+      project:
+        description: The project ID of the project containing the Cloud SQL instance. The Google apps domain is prefixed if applicable.
+        type: string
+      region:
+        description: 'The geographical region. Can be us-central, asia-east1 or europe-west1. Defaults to us-central. The region can not be changed after instance creation.'
+        type: string
+      replicaNames:
+        description: The replicas of the instance.
+        items:
+          type: string
+        type: array
+      serverCaCert:
+        $ref: '#/definitions/SslCert'
+        description: SSL configuration.
+      serviceAccountEmailAddress:
+        description: The service account email address assigned to the instance.
+        type: string
+      settings:
+        $ref: '#/definitions/Settings'
+        description: The user settings.
+      state:
+        description: |-
+          The current serving state of the Cloud SQL instance. This can be one of the following.
+          RUNNABLE: The instance is running, or is ready to run when accessed.
+          SUSPENDED: The instance is not available, for example due to problems with billing.
+          PENDING_CREATE: The instance is being created.
+          MAINTENANCE: The instance is down for maintenance.
+          UNKNOWN_STATE: The state of the instance is unknown.
+        type: string
+    type: object
+  ExportContext:
+    description: Database instance export context.
+    properties:
+      database:
+        description: 'Databases (for example, guestbook) from which the export is made. If unspecified, all databases are exported.'
+        items:
+          type: string
+        type: array
+      kind:
+        default: 'sql#exportContext'
+        description: 'This is always sql#exportContext.'
+        type: string
+      table:
+        description: 'Tables to export, or that were exported, from the specified database. If you specify tables, specify one and only one database.'
+        items:
+          type: string
+        type: array
+      uri:
+        description: 'The path to the file in Google Cloud Storage where the export will be stored, or where it was already stored. The URI is in the form gs://bucketName/fileName. If the file already exists, the operation fails. If the filename ends with .gz, the contents are compressed.'
+        type: string
+    type: object
+  Flag:
+    description: A Google Cloud SQL service flag resource.
+    properties:
+      allowedStringValues:
+        description: 'For STRING flags, a list of strings that the value can be set to.'
+        items:
+          type: string
+        type: array
+      appliesTo:
+        description: 'The database version this flag applies to. Currently this can only be [MYSQL_5_5].'
+        items:
+          type: string
+        type: array
+      kind:
+        default: 'sql#flag'
+        description: 'This is always sql#flag.'
+        type: string
+      maxValue:
+        description: 'For INTEGER flags, the maximum allowed value.'
+        format: int64
+        type: string
+      minValue:
+        description: 'For INTEGER flags, the minimum allowed value.'
+        format: int64
+        type: string
+      name:
+        description: 'This is the name of the flag. Flag names always use underscores, not hyphens, e.g. max_allowed_packet'
+        type: string
+      type:
+        description: 'The type of the flag. Flags are typed to being BOOLEAN, STRING, INTEGER or NONE. NONE is used for flags which do not take a value, such as skip_grant_tables.'
+        type: string
+    type: object
+  FlagsListResponse:
+    description: Flags list response.
+    properties:
+      items:
+        description: List of flags.
+        items:
+          $ref: '#/definitions/Flag'
+        type: array
+      kind:
+        default: 'sql#flagsList'
+        description: 'This is always sql#flagsList.'
+        type: string
+    type: object
+  ImportContext:
+    description: Database instance import context.
+    properties:
+      database:
+        description: 'The database (for example, guestbook) to which the import is made. If not set, it is assumed that the database is specified in the file to be imported.'
+        type: string
+      kind:
+        default: 'sql#importContext'
+        description: 'This is always sql#importContext.'
+        type: string
+      uri:
+        description: 'A path to the MySQL dump file in Google Cloud Storage from which the import is made. The URI is in the form gs://bucketName/fileName. Compressed gzip files (.gz) are also supported.'
+        items:
+          type: string
+        type: array
+    type: object
+  InstanceOperation:
+    description: 'An Operations resource contains information about database instance operations such as create, delete, and restart. Operations resources are created in response to operations that were initiated; you never create them directly.'
+    properties:
+      endTime:
+        description: 'The time this operation finished in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.'
+        format: date-time
+        type: string
+      enqueuedTime:
+        description: 'The time this operation was enqueued in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.'
+        format: date-time
+        type: string
+      error:
+        description: The error(s) encountered by this operation. Only set if the operation results in an error.
+        items:
+          $ref: '#/definitions/OperationError'
+        type: array
+      exportContext:
+        $ref: '#/definitions/ExportContext'
+        description: 'The context for export operation, if applicable.'
+      importContext:
+        $ref: '#/definitions/ImportContext'
+        description: 'The context for import operation, if applicable.'
+      instance:
+        description: Name of the database instance.
+        type: string
+      kind:
+        default: 'sql#instanceOperation'
+        description: 'This is always sql#instanceOperation.'
+        type: string
+      operation:
+        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
+        type: string
+      operationType:
+        description: 'The type of the operation. Valid values are CREATE, DELETE, UPDATE, RESTART, IMPORT, EXPORT, BACKUP_VOLUME, RESTORE_VOLUME.'
+        type: string
+      startTime:
+        description: 'The time this operation actually started in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.'
+        format: date-time
+        type: string
+      state:
+        description: 'The state of an operation. Valid values are PENDING, RUNNING, DONE, UNKNOWN.'
+        type: string
+      userEmailAddress:
+        description: The email address of the user who initiated this operation.
+        type: string
+    type: object
+  InstanceSetRootPasswordRequest:
+    description: Database instance set root password request.
+    properties:
+      setRootPasswordContext:
+        $ref: '#/definitions/SetRootPasswordContext'
+        description: Set Root Password Context.
+    type: object
+  InstancesCloneRequest:
+    description: Database instance clone request.
+    properties:
+      cloneContext:
+        $ref: '#/definitions/CloneContext'
+        description: Contains details about the clone operation.
+    type: object
+  InstancesCloneResponse:
+    description: Database instance clone response.
+    properties:
+      kind:
+        default: 'sql#instancesClone'
+        description: 'This is always sql#instancesClone.'
+        type: string
+      operation:
+        description: 'An unique identifier for the operation associated with the cloned instance. You can use this identifier to retrieve the Operations resource, which has information about the operation.'
+        type: string
+    type: object
+  InstancesDeleteResponse:
+    description: Database instance delete response.
+    properties:
+      kind:
+        default: 'sql#instancesDelete'
+        description: 'This is always sql#instancesDelete.'
+        type: string
+      operation:
+        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
+        type: string
+    type: object
+  InstancesExportRequest:
+    description: Database instance export request.
+    properties:
+      exportContext:
+        $ref: '#/definitions/ExportContext'
+        description: Contains details about the export operation.
+    type: object
+  InstancesExportResponse:
+    description: Database instance export response.
+    properties:
+      kind:
+        default: 'sql#instancesExport'
+        description: 'This is always sql#instancesExport.'
+        type: string
+      operation:
+        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
+        type: string
+    type: object
+  InstancesImportRequest:
+    description: Database instance import request.
+    properties:
+      importContext:
+        $ref: '#/definitions/ImportContext'
+        description: Contains details about the import operation.
+    type: object
+  InstancesImportResponse:
+    description: Database instance import response.
+    properties:
+      kind:
+        default: 'sql#instancesImport'
+        description: 'This is always sql#instancesImport.'
+        type: string
+      operation:
+        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
+        type: string
+    type: object
+  InstancesInsertResponse:
+    description: Database instance insert response.
+    properties:
+      kind:
+        default: 'sql#instancesInsert'
+        description: 'This is always sql#instancesInsert.'
+        type: string
+      operation:
+        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
+        type: string
+    type: object
+  InstancesListResponse:
+    description: Database instances list response.
+    properties:
+      items:
+        description: List of database instance resources.
+        items:
+          $ref: '#/definitions/DatabaseInstance'
+        type: array
+      kind:
+        default: 'sql#instancesList'
+        description: 'This is always sql#instancesList.'
+        type: string
+      nextPageToken:
+        description: 'The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
+        type: string
+    type: object
+  InstancesPromoteReplicaResponse:
+    description: Database promote read replica response.
+    properties:
+      kind:
+        default: 'sql#instancesPromoteReplica'
+        description: 'This is always sql#instancesPromoteReplica.'
+        type: string
+      operation:
+        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
+        type: string
+    type: object
+  InstancesResetSslConfigResponse:
+    description: Database instance resetSslConfig response.
+    properties:
+      kind:
+        default: 'sql#instancesResetSslConfig'
+        description: 'This is always sql#instancesResetSslConfig.'
+        type: string
+      operation:
+        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation. All ssl client certificates will be deleted and a new server certificate will be created. Does not take effect until the next instance restart.
+        type: string
+    type: object
+  InstancesRestartResponse:
+    description: Database instance restart response.
+    properties:
+      kind:
+        default: 'sql#instancesRestart'
+        description: 'This is always sql#instancesRestart.'
+        type: string
+      operation:
+        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
+        type: string
+    type: object
+  InstancesRestoreBackupResponse:
+    description: Database instance restore backup response.
+    properties:
+      kind:
+        default: 'sql#instancesRestoreBackup'
+        description: 'This is always sql#instancesRestoreBackup.'
+        type: string
+      operation:
+        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
+        type: string
+    type: object
+  InstancesSetRootPasswordResponse:
+    description: Database instance set root password response.
+    properties:
+      kind:
+        default: 'sql#instancesSetRootPassword'
+        description: 'This is always sql#instancesSetRootPassword.'
+        type: string
+      operation:
+        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
+        type: string
+    type: object
+  InstancesUpdateResponse:
+    description: Database instance update response.
+    properties:
+      kind:
+        default: 'sql#instancesUpdate'
+        description: 'This is always sql#instancesUpdate.'
+        type: string
+      operation:
+        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve information about the operation.
+        type: string
+    type: object
+  IpConfiguration:
+    description: IP Management configuration.
+    properties:
+      authorizedNetworks:
+        description: "The list of external networks that are allowed to connect to the instance using the IP. In CIDR notation, also known as 'slash' notation (e.g. 192.168.100.0/24)."
+        items:
+          type: string
+        type: array
+      enabled:
+        description: Whether the instance should be assigned an IP address or not.
+        type: boolean
+      kind:
+        default: 'sql#ipConfiguration'
+        description: 'This is always sql#ipConfiguration.'
+        type: string
+      requireSsl:
+        description: "Whether the mysqld should default to 'REQUIRE X509' for users connecting over IP."
+        type: boolean
+    type: object
+  IpMapping:
+    description: Database instance IP Mapping.
+    properties:
+      ipAddress:
+        description: The IP address assigned.
+        type: string
+      timeToRetire:
+        description: 'The due time for this IP to be retired in RFC 3339 format, for example 2012-11-15T16:19:00.094Z. This field is only available when the IP is scheduled to be retired.'
+        format: date-time
+        type: string
+    type: object
+  LocationPreference:
+    description: 'Preferred location. This specifies where a Cloud SQL instance should preferably be located, either in a specific Compute Engine zone, or co-located with an App Engine application. Note that if the preferred location is not available, the instance will be located as close as possible within the region. Only one location may be specified.'
+    properties:
+      followGaeApplication:
+        description: 'The App Engine application to follow, it must be in the same region as the Cloud SQL instance.'
+        type: string
+      kind:
+        default: 'sql#locationPreference'
+        description: 'This is always sql#locationPreference.'
+        type: string
+      zone:
+        description: 'The preferred Compute Engine zone (e.g. us-centra1-a, us-central1-b, etc.).'
+        type: string
+    type: object
+  OperationError:
+    description: Database instance operation error.
+    properties:
+      code:
+        description: Identifies the specific error that occurred.
+        type: string
+      kind:
+        default: 'sql#operationError'
+        description: 'This is always sql#operationError.'
+        type: string
+    type: object
+  OperationsListResponse:
+    description: Database instance list operations response.
+    properties:
+      items:
+        description: List of operation resources.
+        items:
+          $ref: '#/definitions/InstanceOperation'
+        type: array
+      kind:
+        default: 'sql#operationsList'
+        description: 'This is always sql#operationsList.'
+        type: string
+      nextPageToken:
+        description: 'The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
+        type: string
+    type: object
+  SetRootPasswordContext:
+    description: Database instance set root password context.
+    properties:
+      kind:
+        default: 'sql#setRootUserContext'
+        description: 'This is always sql#setRootUserContext.'
+        type: string
+      password:
+        description: The password for the root user.
+        type: string
+    type: object
+  Settings:
+    description: Database instance settings.
+    properties:
+      activationPolicy:
+        description: |-
+          The activation policy for this instance. This specifies when the instance should be activated and is applicable only when the instance state is RUNNABLE. This can be one of the following.
+          ALWAYS: The instance should always be active.
+          NEVER: The instance should never be activated.
+          ON_DEMAND: The instance is activated upon receiving requests.
+        type: string
+      authorizedGaeApplications:
+        description: The App Engine app IDs that can access this instance.
+        items:
+          type: string
+        type: array
+      backupConfiguration:
+        description: The daily backup configuration for the instance.
+        items:
+          $ref: '#/definitions/BackupConfiguration'
+        type: array
+      databaseFlags:
+        description: The database flags passed to the instance at startup.
+        items:
+          $ref: '#/definitions/DatabaseFlags'
+        type: array
+      databaseReplicationEnabled:
+        description: Configuration specific to read replica instance. Indicates whether replication is enabled or not.
+        type: boolean
+      ipConfiguration:
+        $ref: '#/definitions/IpConfiguration'
+        description: The settings for IP Management. This allows to enable or disable the instance IP and manage which external networks can connect to the instance.
+      kind:
+        default: 'sql#settings'
+        description: 'This is always sql#settings.'
+        type: string
+      locationPreference:
+        $ref: '#/definitions/LocationPreference'
+        description: The location preference settings. This allows the instance to be located as near as possible to either an App Engine app or GCE zone for better performance.
+      pricingPlan:
+        description: The pricing plan for this instance. This can be either PER_USE or PACKAGE.
+        type: string
+      replicationType:
+        description: The type of replication this instance uses. This can be either ASYNCHRONOUS or SYNCHRONOUS.
+        type: string
+      settingsVersion:
+        description: 'The version of instance settings. This is a required field for update method to make sure concurrent updates are handled properly. During update, use the most recent settingsVersion value for this instance and do not try to update this value.'
+        format: int64
+        type: string
+      tier:
+        description: 'The tier of service for this instance, for example D1, D2. For more information, see pricing.'
+        type: string
+    type: object
+  SslCert:
+    description: SslCerts Resource
+    properties:
+      cert:
+        description: PEM representation.
+        type: string
+      certSerialNumber:
+        description: 'Serial number, as extracted from the certificate.'
+        type: string
+      commonName:
+        description: 'User supplied name. Constrained to [a-zA-Z.-_ ]+.'
+        type: string
+      createTime:
+        description: Time when the certificate was created.
+        format: date-time
+        type: string
+      expirationTime:
+        description: Time when the certificate expires.
+        format: date-time
+        type: string
+      instance:
+        description: Name of the database instance.
+        type: string
+      kind:
+        default: 'sql#sslCert'
+        description: 'This is always sql#sslCert.'
+        type: string
+      sha1Fingerprint:
+        description: Sha1 Fingerprint.
+        type: string
+    type: object
+  SslCertDetail:
+    description: SslCertDetail.
+    properties:
+      certInfo:
+        $ref: '#/definitions/SslCert'
+        description: The public information about the cert.
+      certPrivateKey:
+        description: 'The private key for the client cert, in pem format. Keep private in order to protect your security.'
+        type: string
+    type: object
+  SslCertsDeleteResponse:
+    description: SslCert delete response.
+    properties:
+      kind:
+        default: 'sql#sslCertsDelete'
+        description: 'This is always sql#sslCertsDelete.'
+        type: string
+      operation:
+        description: An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.
+        type: string
+    type: object
+  SslCertsInsertRequest:
+    description: SslCerts insert request.
+    properties:
+      commonName:
+        description: User supplied name. Must be a distinct name from the other certificates for this instance. New certificates will not be usable until the instance is restarted.
+        type: string
+    type: object
+  SslCertsInsertResponse:
+    description: SslCert insert response.
+    properties:
+      clientCert:
+        $ref: '#/definitions/SslCertDetail'
+        description: The new client certificate and private key. The new certificate will not work until the instance is restarted.
+      kind:
+        default: 'sql#sslCertsInsert'
+        description: 'This is always sql#sslCertsInsert.'
+        type: string
+      serverCaCert:
+        $ref: '#/definitions/SslCert'
+        description: "The server Certificate Authority's certificate. If this is missing you can force a new one to be generated by calling resetSslConfig method on instances resource.."
+    type: object
+  SslCertsListResponse:
+    description: SslCerts list response.
+    properties:
+      items:
+        description: List of client certificates for the instance.
+        items:
+          $ref: '#/definitions/SslCert'
+        type: array
+      kind:
+        default: 'sql#sslCertsList'
+        description: 'This is always sql#sslCertsList.'
+        type: string
+    type: object
+  Tier:
+    description: A Google Cloud SQL service tier resource.
+    properties:
+      DiskQuota:
+        description: The maximum disk size of this tier in bytes.
+        format: int64
+        type: string
+      RAM:
+        description: The maximum RAM usage of this tier in bytes.
+        format: int64
+        type: string
+      kind:
+        default: 'sql#tier'
+        description: 'This is always sql#tier.'
+        type: string
+      region:
+        description: 'The applicable regions for this tier. Can be us-east1, europe-west1, or asia-east1.'
+        items:
+          type: string
+        type: array
+      tier:
+        description: 'An identifier for the service tier, for example D1, D2 etc. For related information, see Pricing.'
+        type: string
+    type: object
+  TiersListResponse:
+    description: Tiers list response.
+    properties:
+      items:
+        description: List of tiers.
+        items:
+          $ref: '#/definitions/Tier'
+        type: array
+      kind:
+        default: 'sql#tiersList'
+        description: 'This is always sql#tiersList.'
+        type: string
+    type: object

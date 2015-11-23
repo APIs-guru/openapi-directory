@@ -1,876 +1,8 @@
-basePath: /v1
-consumes:
-  - application/json
-definitions:
-  album:
-    properties:
-      album_type:
-        description: "The type of the album: one of 'album', 'single', or 'compilation'."
-        type: string
-      artists:
-        description: The artists of the album. Each artist object includes a link in href to more detailed information about the artist.
-        items:
-          $ref: '#/definitions/artist'
-        type: array
-      available_markets:
-        description: 'The markets in which the album is available: ISO 3166-1 alpha-2 country codes. Note that an album is considered available in a market when at least 1 of its tracks is available in that market.'
-        items:
-          type: string
-        type: array
-      copyrights:
-        description: The copyright statements of the album.
-        items:
-          properties:
-            text:
-              description: The copyright text for this album.
-              type: string
-            type:
-              description: 'The type of copyright: C = the copyright, P = the sound recording (performance) copyright.'
-              type: string
-          type: object
-        type: array
-      external_ids:
-        additionalProperties:
-          description: "The identifier type, for example: 'isrc' - International Standard Recording Code, 'ean' - International Article Number, 'upc' - Universal Product Code"
-          type: string
-        description: Known external IDs for this album.
-        type: object
-      external_urls:
-        additionalProperties:
-          description: "The type of the URL, for example: 'spotify' - The Spotify URL for the object."
-          type: string
-        description: Known external URLs for this album.
-        type: object
-      genres:
-        description: "A list of the genres used to classify the album. For example: 'Prog Rock', 'Post-Grunge'. (If not yet classified, the array is empty.)"
-        items:
-          type: string
-        type: array
-      href:
-        description: A link to the Web API endpoint providing full details of the album.
-        type: string
-      id:
-        description: The Spotify ID for the album.
-        type: string
-      images:
-        description: 'The cover art for the album in various sizes, widest first.'
-        items:
-          $ref: '#/definitions/image'
-        type: array
-      name:
-        description: The name of the album.
-        type: string
-      popularity:
-        description: "The popularity of the album. The value will be between 0 and 100, with 100 being the most popular. The popularity is calculated from the popularity of the album's individual tracks."
-        type: integer
-      release_date:
-        description: "The date the album was first released, for example '1981-12-15'. Depending on the precision, it might be shown as '1981' or '1981-12'."
-        type: string
-      release_date_precision:
-        description: "The precision with which release_date value is known: 'year', 'month', or 'day'."
-        type: string
-      tracks:
-        $ref: '#/definitions/track-simple-page'
-      type:
-        description: "The object type: 'album'."
-        type: string
-      uri:
-        description: The Spotify URI for the album.
-        type: string
-    type: object
-  album-simple:
-    properties:
-      album_type:
-        description: "The type of the album: one of 'album', 'single', or 'compilation'."
-        type: string
-      available_markets:
-        description: 'The markets in which the album is available: ISO 3166-1 alpha-2 country codes. Note that an album is considered available in a market when at least 1 of its tracks is available in that market.'
-        items:
-          type: string
-        type: array
-      external_urls:
-        additionalProperties:
-          description: "The type of the URL, for example: 'spotify' - The Spotify URL for the object."
-          type: string
-        description: Known external URLs for this album.
-        type: object
-      href:
-        description: A link to the Web API endpoint providing full details of the album.
-        type: string
-      id:
-        description: The Spotify ID for the album.
-        type: string
-      images:
-        description: 'The cover art for the album in various sizes, widest first.'
-        items:
-          $ref: '#/definitions/image'
-        type: array
-      name:
-        description: The name of the album.
-        type: string
-      type:
-        description: "The object type: 'album'."
-        type: string
-      uri:
-        description: The Spotify URI for the album.
-        type: string
-    type: object
-  album-simple-page:
-    properties:
-      href:
-        description: A link to the Web API endpoint returning the full result of the request.
-        type: string
-      items:
-        description: The requested data.
-        items:
-          $ref: '#/definitions/album-simple'
-        type: array
-      limit:
-        description: The maximum number of items in the response (as set in the query or by default).
-        type: integer
-      next:
-        description: URL to the next page of items. (null if none)
-        type: string
-      offset:
-        description: The offset of the items returned (as set in the query or by default).
-        type: integer
-      previous:
-        description: URL to the previous page of items. (null if none)
-        type: string
-      total:
-        description: The total number of items available to return.
-        type: integer
-    type: object
-  album-track-page:
-    properties:
-      href:
-        description: A link to the Web API endpoint returning the full result of the request.
-        type: string
-      items:
-        description: The requested data.
-        items:
-          $ref: '#/definitions/track-simple'
-        type: array
-      limit:
-        description: The maximum number of items in the response (as set in the query or by default).
-        type: integer
-      next:
-        description: URL to the next page of items. (null if none)
-        type: string
-      offset:
-        description: The offset of the items returned (as set in the query or by default).
-        type: integer
-      previous:
-        description: URL to the previous page of items. (null if none)
-        type: string
-      total:
-        description: The total number of items available to return.
-        type: integer
-    type: object
-  artist:
-    properties:
-      external_urls:
-        additionalProperties:
-          type: string
-        description: Known external URLs for this artist.
-        type: object
-      followers:
-        $ref: '#/definitions/followers'
-      genres:
-        description: "A list of the genres the artist is associated with. For example: 'Prog Rock', 'Post-Grunge'. (If not yet classified, the array is empty.)"
-        items:
-          type: string
-        type: array
-      href:
-        description: A link to the Web API endpoint providing full details of the artist.
-        type: string
-      id:
-        description: The Spotify ID for the artist.
-        type: string
-      images:
-        description: 'Images of the artist in various sizes, widest first.'
-        items:
-          $ref: '#/definitions/image'
-        type: array
-      name:
-        description: The name of the artist.
-        type: string
-      popularity:
-        description: "The popularity of the artist. The value will be between 0 and 100, with 100 being the most popular. The artist's popularity is calculated from the popularity of all the artist's tracks."
-        type: integer
-      type:
-        description: "The object type: 'artist'"
-        type: string
-      uri:
-        description: The Spotify URI for the artist.
-        type: string
-    type: object
-  artist-simple:
-    properties:
-      external_urls:
-        additionalProperties:
-          type: string
-        description: Known external URLs for this artist.
-        type: object
-      href:
-        description: A link to the Web API endpoint providing full details of the artist.
-        type: string
-      id:
-        description: The Spotify ID for the artist.
-        type: string
-      name:
-        description: The name of the artist.
-        type: string
-      type:
-        description: "The object type: 'artist'"
-        type: string
-      uri:
-        description: The Spotify URI for the artist.
-        type: string
-    type: object
-  category:
-    properties:
-      href:
-        description: A link to the Web API endpoint returning full details of the category.
-        type: string
-      icons:
-        items:
-          $ref: '#/definitions/image'
-        type: array
-      id:
-        description: The Spotify category ID of the category.
-        type: string
-      name:
-        description: The name of the category.
-        type: string
-    type: object
-  category-page:
-    properties:
-      href:
-        description: A link to the Web API endpoint returning the full result of the request.
-        type: string
-      items:
-        description: The requested data.
-        items:
-          $ref: '#/definitions/category'
-        type: array
-      limit:
-        description: The maximum number of items in the response (as set in the query or by default).
-        type: integer
-      next:
-        description: URL to the next page of items. (null if none)
-        type: string
-      offset:
-        description: The offset of the items returned (as set in the query or by default).
-        type: integer
-      previous:
-        description: URL to the previous page of items. (null if none)
-        type: string
-      total:
-        description: The total number of items available to return.
-        type: integer
-    type: object
-  current-user-profile:
-    properties:
-      birthdate:
-        description: "The user's date-of-birth. This field is only available when the current user has granted access to the user-read-birthdate scope."
-        type: string
-      country:
-        description: "The country of the user, as set in the user's account profile. An ISO 3166-1 alpha-2 country code. This field is only available when the current user has granted access to the user-read-private scope."
-        type: string
-      displayName:
-        description: "The name displayed on the user's profile."
-        type: string
-      email:
-        description: "The user's email address, as entered by the user when creating their account. This email address is unverified; there is no proof that it actually belongs to the user. This field is only available when the current user has granted access to the user-read-email scope."
-        type: string
-      external_urls:
-        additionalProperties:
-          type: string
-        description: Known external URLs for this user.
-        type: object
-      followers:
-        $ref: '#/definitions/followers'
-      href:
-        description: A link to the Web API endpoint for this user.
-        type: string
-      id:
-        description: The Spotify ID for this user.
-        type: string
-      product:
-        description: "The user's Spotify subscription level: 'premium', 'free', etc. (The subscription level 'open' can be considered the same as 'free'.) This field is only available when the current user has granted access to the user-read-private scope."
-        type: string
-      type:
-        description: "The object type: 'user'"
-        type: string
-      uri:
-        description: The Spotify URI for the user.
-        type: string
-    type: object
-  featured-playlists:
-    properties:
-      message:
-        description: A sentence describing the context for the featured playlists.
-        type: string
-      playlists:
-        $ref: '#/definitions/playlist-simple-page'
-    type: object
-  followers:
-    description: Information about the followers of the artist.
-    properties:
-      href:
-        description: A link to the Web API endpoint providing full details of the followers; null if not available.
-        type: string
-      total:
-        description: The total number of followers.
-        type: integer
-    type: object
-  image:
-    properties:
-      height:
-        description: 'The image height in pixels. If unknown: null or not returned.'
-        type: integer
-      url:
-        description: The source URL of the image.
-        type: string
-      width:
-        description: 'The image width in pixels. If unknown: null or not returned.'
-        type: integer
-    type: object
-  playlist:
-    properties:
-      collaborative:
-        description: True if the owner allows other users to modify the playlist.
-        type: boolean
-      description:
-        description: 'The playlist description. Only returned for modified, verified playlists, otherwise null.'
-        type: string
-      external_urls:
-        additionalProperties:
-          description: "The type of the URL, for example: 'spotify' - The Spotify URL for the object."
-          type: string
-        description: Known external URLs for this album.
-        type: object
-      followers:
-        description: Information about the followers of the playlist.
-        properties:
-          href:
-            description: A link to the Web API endpoint providing full details of the followers; null if not available.
-            type: string
-          total:
-            description: The total number of followers.
-            type: integer
-        type: object
-      href:
-        description: A link to the Web API endpoint providing full details of the playlist.
-        type: string
-      id:
-        description: The Spotify ID of the playlist.
-        type: string
-      images:
-        description: 'The cover art for the album in various sizes, widest first.'
-        items:
-          $ref: '#/definitions/image'
-        type: array
-      name:
-        description: The name of the playlist.
-        type: string
-      owner:
-        $ref: '#/definitions/user-profile'
-      public:
-        description: "The playlist's public/private status: true the playlist is public, false the playlist is private, null the playlist status is not relevant. For more about public/private status, see Working with Playlists."
-        type: boolean
-      snapshot_id:
-        description: The version identifier for the current playlist. Can be supplied in other requests to target a specific playlist version
-        type: string
-      tracks:
-        $ref: '#/definitions/playlist-track-page'
-      type:
-        description: "The object type: 'playlist'."
-        type: string
-      uri:
-        description: Spotify URI of the playlist.
-        type: string
-    type: object
-  playlist-simple:
-    properties:
-      collaborative:
-        description: True if the owner allows other users to modify the playlist.
-        type: boolean
-      external_urls:
-        additionalProperties:
-          description: "The type of the URL, for example: 'spotify' - The Spotify URL for the object."
-          type: string
-        description: Known external URLs for this album.
-        type: object
-      href:
-        description: A link to the Web API endpoint providing full details of the playlist.
-        type: string
-      id:
-        description: The Spotify ID of the playlist.
-        type: string
-      images:
-        description: 'The cover art for the album in various sizes, widest first.'
-        items:
-          $ref: '#/definitions/image'
-        type: array
-      name:
-        description: The name of the playlist.
-        type: string
-      owner:
-        $ref: '#/definitions/user-profile'
-      public:
-        description: "The playlist's public/private status: true the playlist is public, false the playlist is private, null the playlist status is not relevant. For more about public/private status, see Working with Playlists."
-        type: boolean
-      snapshot_id:
-        description: The version identifier for the current playlist. Can be supplied in other requests to target a specific playlist version
-        type: string
-      tracks:
-        properties:
-          href:
-            description: A link to the Web API endpoint returning the full result of the request.
-            type: string
-          total:
-            description: The total number of tracks available to return.
-            type: integer
-        type: object
-      type:
-        description: "The object type: 'playlist'."
-        type: string
-      uri:
-        description: Spotify URI of the playlist.
-        type: string
-    type: object
-  playlist-simple-page:
-    properties:
-      href:
-        description: A link to the Web API endpoint returning the full result of the request.
-        type: string
-      items:
-        description: The requested data.
-        items:
-          $ref: '#/definitions/playlist-simple'
-        type: array
-      limit:
-        description: The maximum number of items in the response (as set in the query or by default).
-        type: integer
-      next:
-        description: URL to the next page of items. (null if none)
-        type: string
-      offset:
-        description: The offset of the items returned (as set in the query or by default).
-        type: integer
-      previous:
-        description: URL to the previous page of items. (null if none)
-        type: string
-      total:
-        description: The total number of items available to return.
-        type: integer
-    type: object
-  playlist-snapshot:
-    properties:
-      snapshot_id:
-        description: The version identifier for the modified playlist. Can be supplied in other requests to target a specific playlist version.
-        type: string
-    type: object
-  playlist-track:
-    properties:
-      added_at:
-        description: The date and time the track was added in ISO 8601 format. Note that some very old playlists may return null in this field.
-        type: string
-      added_by:
-        $ref: '#/definitions/user-profile'
-      is_local:
-        description: 'Whether this track is a [local file](https://developer.spotify.com/web-api/local-files-spotify-playlists/) or not.'
-        type: boolean
-      track:
-        $ref: '#/definitions/track'
-    type: object
-  playlist-track-page:
-    properties:
-      href:
-        description: A link to the Web API endpoint returning the full result of the request.
-        type: string
-      items:
-        description: The requested data.
-        items:
-          $ref: '#/definitions/playlist-track'
-        type: array
-      limit:
-        description: The maximum number of items in the response (as set in the query or by default).
-        type: integer
-      next:
-        description: URL to the next page of items. (null if none)
-        type: string
-      offset:
-        description: The offset of the items returned (as set in the query or by default).
-        type: integer
-      previous:
-        description: URL to the previous page of items. (null if none)
-        type: string
-      total:
-        description: The total number of items available to return.
-        type: integer
-    type: object
-  saved-track:
-    properties:
-      added_at:
-        description: The date and time the track was added in ISO 8601 format. Note that some very old playlists may return null in this field.
-        type: string
-      track:
-        $ref: '#/definitions/track'
-    type: object
-  saved-track-page:
-    properties:
-      href:
-        description: A link to the Web API endpoint returning the full result of the request.
-        type: string
-      items:
-        description: The requested data.
-        items:
-          $ref: '#/definitions/saved-track'
-        type: array
-      limit:
-        description: The maximum number of items in the response (as set in the query or by default).
-        type: integer
-      next:
-        description: URL to the next page of items. (null if none)
-        type: string
-      offset:
-        description: The offset of the items returned (as set in the query or by default).
-        type: integer
-      previous:
-        description: URL to the previous page of items. (null if none)
-        type: string
-      total:
-        description: The total number of items available to return.
-        type: integer
-    type: object
-  search:
-    properties:
-      albums:
-        description: "Present if the type of search includes 'album'."
-        properties:
-          href:
-            description: A link to the Web API endpoint returning the full result of the request.
-            type: string
-          items:
-            description: The requested data.
-            items:
-              $ref: '#/definitions/album-simple'
-            type: array
-          limit:
-            description: The maximum number of items in the response (as set in the query or by default).
-            type: integer
-          next:
-            description: URL to the next page of items. (null if none)
-            type: string
-          offset:
-            description: The offset of the items returned (as set in the query or by default).
-            type: integer
-          previous:
-            description: URL to the previous page of items. (null if none)
-            type: string
-          total:
-            description: The total number of items available to return.
-            type: integer
-        type: object
-      artists:
-        description: "Present if the type of search includes 'artist'."
-        properties:
-          href:
-            description: A link to the Web API endpoint returning the full result of the request.
-            type: string
-          items:
-            description: The requested data.
-            items:
-              $ref: '#/definitions/artist'
-            type: array
-          limit:
-            description: The maximum number of items in the response (as set in the query or by default).
-            type: integer
-          next:
-            description: URL to the next page of items. (null if none)
-            type: string
-          offset:
-            description: The offset of the items returned (as set in the query or by default).
-            type: integer
-          previous:
-            description: URL to the previous page of items. (null if none)
-            type: string
-          total:
-            description: The total number of items available to return.
-            type: integer
-        type: object
-      tracks:
-        description: "Present if the type of search includes 'track'."
-        properties:
-          href:
-            description: A link to the Web API endpoint returning the full result of the request.
-            type: string
-          items:
-            description: The requested data.
-            items:
-              $ref: '#/definitions/track'
-            type: array
-          limit:
-            description: The maximum number of items in the response (as set in the query or by default).
-            type: integer
-          next:
-            description: URL to the next page of items. (null if none)
-            type: string
-          offset:
-            description: The offset of the items returned (as set in the query or by default).
-            type: integer
-          previous:
-            description: URL to the previous page of items. (null if none)
-            type: string
-          total:
-            description: The total number of items available to return.
-            type: integer
-        type: object
-    type: object
-  track:
-    properties:
-      album:
-        $ref: '#/definitions/album-simple'
-      artists:
-        description: The artists who performed the track. Each artist object includes a link in href to more detailed information about the artist.
-        items:
-          $ref: '#/definitions/artist-simple'
-        type: array
-      available_markets:
-        description: 'A list of the countries in which the track can be played, identified by their ISO 3166-1 alpha-2 code. '
-        items:
-          type: string
-        type: array
-      disc_number:
-        description: The disc number (usually 1 unless the album consists of more than one disc).
-        type: integer
-      duration_ms:
-        description: The track length in milliseconds.
-        type: integer
-      explicit:
-        description: Whether or not the track has explicit lyrics (true = yes it does; false = no it does not OR unknown).
-        type: boolean
-      external_ids:
-        additionalProperties:
-          description: "The identifier type, for example: 'isrc' - International Standard Recording Code, 'ean' - International Article Number, 'upc' - Universal Product Code"
-          type: string
-        description: Known external IDs for the track.
-        type: object
-      external_urls:
-        additionalProperties:
-          description: "The type of the URL, for example: 'spotify' - The Spotify URL for the object."
-          type: string
-        description: Known external URLs for this track.
-        type: object
-      href:
-        description: A link to the Web API endpoint providing full details of the track.
-        type: string
-      id:
-        description: The Spotify ID for the track.
-        type: string
-      is_playable:
-        description: 'Part of the response when Track Relinking is applied. If true, the track is playable in the given market. Otherwise false.'
-        type: boolean
-      linked_from:
-        description: 'Part of the response when Track Relinking is applied, and the requested track has been replaced with different track. The track in the linked_from object contains information about the originally requested track.'
-        properties:
-          external_urls:
-            additionalProperties:
-              description: "The type of the URL, for example: 'spotify' - The Spotify URL for the object."
-              type: string
-            description: Known external URLs for this track.
-            type: object
-          href:
-            description: A link to the Web API endpoint providing full details of the track.
-            type: string
-          id:
-            description: The Spotify ID for the track.
-            type: string
-          type:
-            description: "The object type: 'track'."
-            type: string
-          uri:
-            description: The Spotify URI for the track.
-            type: string
-        type: object
-      name:
-        description: The name of the track.
-        type: string
-      preview_url:
-        description: A URL to a 30 second preview (MP3 format) of the track.
-        type: string
-      track_number:
-        description: 'The number of the track. If an album has several discs, the track number is the number on the specified disc.'
-        type: integer
-      type:
-        description: "The object type: 'track'."
-        type: string
-      uri:
-        description: The Spotify URI for the track.
-        type: string
-    type: object
-  track-simple:
-    properties:
-      artists:
-        description: The artists who performed the track. Each artist object includes a link in href to more detailed information about the artist.
-        items:
-          $ref: '#/definitions/artist-simple'
-        type: array
-      available_markets:
-        description: 'A list of the countries in which the track can be played, identified by their ISO 3166-1 alpha-2 code. '
-        items:
-          type: string
-        type: array
-      disc_number:
-        description: The disc number (usually 1 unless the album consists of more than one disc).
-        type: integer
-      duration_ms:
-        description: The track length in milliseconds.
-        type: integer
-      explicit:
-        description: Whether or not the track has explicit lyrics (true = yes it does; false = no it does not OR unknown).
-        type: boolean
-      external_urls:
-        additionalProperties:
-          description: "The type of the URL, for example: 'spotify' - The Spotify URL for the object."
-          type: string
-        description: Known external URLs for this track.
-        type: object
-      href:
-        description: A link to the Web API endpoint providing full details of the track.
-        type: string
-      id:
-        description: The Spotify ID for the track.
-        type: string
-      is_playable:
-        description: 'Part of the response when Track Relinking is applied. If true, the track is playable in the given market. Otherwise false.'
-        type: boolean
-      linked_from:
-        description: 'Part of the response when Track Relinking is applied, and the requested track has been replaced with different track. The track in the linked_from object contains information about the originally requested track.'
-        properties:
-          external_urls:
-            additionalProperties:
-              description: "The type of the URL, for example: 'spotify' - The Spotify URL for the object."
-              type: string
-            description: Known external URLs for this track.
-            type: object
-          href:
-            description: A link to the Web API endpoint providing full details of the track.
-            type: string
-          id:
-            description: The Spotify ID for the track.
-            type: string
-          type:
-            description: "The object type: 'track'."
-            type: string
-          uri:
-            description: The Spotify URI for the track.
-            type: string
-        type: object
-      name:
-        description: The name of the track.
-        type: string
-      preview_url:
-        description: A URL to a 30 second preview (MP3 format) of the track.
-        type: string
-      track_number:
-        description: 'The number of the track. If an album has several discs, the track number is the number on the specified disc.'
-        type: integer
-      type:
-        description: "The object type: 'track'."
-        type: string
-      uri:
-        description: The Spotify URI for the track.
-        type: string
-    type: object
-  track-simple-page:
-    properties:
-      href:
-        description: A link to the Web API endpoint returning the full result of the request.
-        type: string
-      items:
-        description: The requested data.
-        items:
-          $ref: '#/definitions/track-simple'
-        type: array
-      limit:
-        description: The maximum number of items in the response (as set in the query or by default).
-        type: integer
-      next:
-        description: URL to the next page of items. (null if none)
-        type: string
-      offset:
-        description: The offset of the items returned (as set in the query or by default).
-        type: integer
-      previous:
-        description: URL to the previous page of items. (null if none)
-        type: string
-      total:
-        description: The total number of items available to return.
-        type: integer
-    type: object
-  user-followed:
-    properties:
-      artists:
-        description: "Present if the type of followe items is 'artist'."
-        properties:
-          cursor:
-            description: The cursors used to find the next set of items.
-            properties:
-              after:
-                description: The cursor to use as key to find the next page of items.
-                type: string
-            type: object
-          href:
-            description: A link to the Web API endpoint returning the full result of the request.
-            type: string
-          items:
-            description: The requested data.
-            items:
-              $ref: '#/definitions/artist'
-            type: array
-          limit:
-            description: The maximum number of items in the response (as set in the query or by default).
-            type: integer
-          next:
-            description: URL to the next page of items. (null if none)
-            type: string
-          total:
-            description: The total number of items available to return.
-            type: integer
-        type: object
-    type: object
-  user-profile:
-    properties:
-      displayName:
-        description: "The name displayed on the user's profile."
-        type: string
-      external_urls:
-        additionalProperties:
-          type: string
-        description: Known external URLs for this user.
-        type: object
-      followers:
-        $ref: '#/definitions/followers'
-      href:
-        description: A link to the Web API endpoint for this user.
-        type: string
-      id:
-        description: The Spotify ID for this user.
-        type: string
-      type:
-        description: "The object type: 'user'"
-        type: string
-      uri:
-        description: The Spotify URI for the user.
-        type: string
-    type: object
-externalDocs:
-  url: 'https://developer.spotify.com/'
+swagger: '2.0'
+schemes:
+  - https
 host: api.spotify.com
+basePath: /v1
 info:
   title: Spotify Web API
   version: v1
@@ -879,6 +11,50 @@ info:
     url: 'https://raw.githubusercontent.com/spotify/web-api/master/specifications/raml/api.raml'
     version: '0.8'
   x-providerName: spotify.com
+externalDocs:
+  url: 'https://developer.spotify.com/'
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  oauth_2_0_accessCode:
+    authorizationUrl: 'https://accounts.spotify.com/authorize'
+    description: |
+      Spotify supports OAuth 2.0 for authenticating all API requests.
+    flow: accessCode
+    scopes:
+      playlist-modify-private: ''
+      playlist-modify-public: ''
+      playlist-read-collaborative: ''
+      playlist-read-private: ''
+      user-follow-modify: ''
+      user-follow-read: ''
+      user-library-modify: ''
+      user-library-read: ''
+      user-read-birthdate: ''
+      user-read-email: ''
+      user-read-private: ''
+    tokenUrl: 'https://accounts.spotify.com/api/token'
+    type: oauth2
+  oauth_2_0_implicit:
+    authorizationUrl: 'https://accounts.spotify.com/authorize'
+    description: |
+      Spotify supports OAuth 2.0 for authenticating all API requests.
+    flow: implicit
+    scopes:
+      playlist-modify-private: ''
+      playlist-modify-public: ''
+      playlist-read-collaborative: ''
+      playlist-read-private: ''
+      user-follow-modify: ''
+      user-follow-read: ''
+      user-library-modify: ''
+      user-library-read: ''
+      user-read-birthdate: ''
+      user-read-email: ''
+      user-read-private: ''
+    type: oauth2
 paths:
   /albums:
     get:
@@ -1955,46 +1131,870 @@ paths:
         '429':
           description: |
             API rate limit exceeded. See http://developer.spotify.com/web-api/user-guide/#rate-limiting for details.
-produces:
-  - application/json
-schemes:
-  - https
-securityDefinitions:
-  oauth_2_0_accessCode:
-    authorizationUrl: 'https://accounts.spotify.com/authorize'
-    description: |
-      Spotify supports OAuth 2.0 for authenticating all API requests.
-    flow: accessCode
-    scopes:
-      playlist-modify-private: ''
-      playlist-modify-public: ''
-      playlist-read-collaborative: ''
-      playlist-read-private: ''
-      user-follow-modify: ''
-      user-follow-read: ''
-      user-library-modify: ''
-      user-library-read: ''
-      user-read-birthdate: ''
-      user-read-email: ''
-      user-read-private: ''
-    tokenUrl: 'https://accounts.spotify.com/api/token'
-    type: oauth2
-  oauth_2_0_implicit:
-    authorizationUrl: 'https://accounts.spotify.com/authorize'
-    description: |
-      Spotify supports OAuth 2.0 for authenticating all API requests.
-    flow: implicit
-    scopes:
-      playlist-modify-private: ''
-      playlist-modify-public: ''
-      playlist-read-collaborative: ''
-      playlist-read-private: ''
-      user-follow-modify: ''
-      user-follow-read: ''
-      user-library-modify: ''
-      user-library-read: ''
-      user-read-birthdate: ''
-      user-read-email: ''
-      user-read-private: ''
-    type: oauth2
-swagger: '2.0'
+definitions:
+  album:
+    properties:
+      album_type:
+        description: "The type of the album: one of 'album', 'single', or 'compilation'."
+        type: string
+      artists:
+        description: The artists of the album. Each artist object includes a link in href to more detailed information about the artist.
+        items:
+          $ref: '#/definitions/artist'
+        type: array
+      available_markets:
+        description: 'The markets in which the album is available: ISO 3166-1 alpha-2 country codes. Note that an album is considered available in a market when at least 1 of its tracks is available in that market.'
+        items:
+          type: string
+        type: array
+      copyrights:
+        description: The copyright statements of the album.
+        items:
+          properties:
+            text:
+              description: The copyright text for this album.
+              type: string
+            type:
+              description: 'The type of copyright: C = the copyright, P = the sound recording (performance) copyright.'
+              type: string
+          type: object
+        type: array
+      external_ids:
+        additionalProperties:
+          description: "The identifier type, for example: 'isrc' - International Standard Recording Code, 'ean' - International Article Number, 'upc' - Universal Product Code"
+          type: string
+        description: Known external IDs for this album.
+        type: object
+      external_urls:
+        additionalProperties:
+          description: "The type of the URL, for example: 'spotify' - The Spotify URL for the object."
+          type: string
+        description: Known external URLs for this album.
+        type: object
+      genres:
+        description: "A list of the genres used to classify the album. For example: 'Prog Rock', 'Post-Grunge'. (If not yet classified, the array is empty.)"
+        items:
+          type: string
+        type: array
+      href:
+        description: A link to the Web API endpoint providing full details of the album.
+        type: string
+      id:
+        description: The Spotify ID for the album.
+        type: string
+      images:
+        description: 'The cover art for the album in various sizes, widest first.'
+        items:
+          $ref: '#/definitions/image'
+        type: array
+      name:
+        description: The name of the album.
+        type: string
+      popularity:
+        description: "The popularity of the album. The value will be between 0 and 100, with 100 being the most popular. The popularity is calculated from the popularity of the album's individual tracks."
+        type: integer
+      release_date:
+        description: "The date the album was first released, for example '1981-12-15'. Depending on the precision, it might be shown as '1981' or '1981-12'."
+        type: string
+      release_date_precision:
+        description: "The precision with which release_date value is known: 'year', 'month', or 'day'."
+        type: string
+      tracks:
+        $ref: '#/definitions/track-simple-page'
+      type:
+        description: "The object type: 'album'."
+        type: string
+      uri:
+        description: The Spotify URI for the album.
+        type: string
+    type: object
+  album-simple:
+    properties:
+      album_type:
+        description: "The type of the album: one of 'album', 'single', or 'compilation'."
+        type: string
+      available_markets:
+        description: 'The markets in which the album is available: ISO 3166-1 alpha-2 country codes. Note that an album is considered available in a market when at least 1 of its tracks is available in that market.'
+        items:
+          type: string
+        type: array
+      external_urls:
+        additionalProperties:
+          description: "The type of the URL, for example: 'spotify' - The Spotify URL for the object."
+          type: string
+        description: Known external URLs for this album.
+        type: object
+      href:
+        description: A link to the Web API endpoint providing full details of the album.
+        type: string
+      id:
+        description: The Spotify ID for the album.
+        type: string
+      images:
+        description: 'The cover art for the album in various sizes, widest first.'
+        items:
+          $ref: '#/definitions/image'
+        type: array
+      name:
+        description: The name of the album.
+        type: string
+      type:
+        description: "The object type: 'album'."
+        type: string
+      uri:
+        description: The Spotify URI for the album.
+        type: string
+    type: object
+  album-simple-page:
+    properties:
+      href:
+        description: A link to the Web API endpoint returning the full result of the request.
+        type: string
+      items:
+        description: The requested data.
+        items:
+          $ref: '#/definitions/album-simple'
+        type: array
+      limit:
+        description: The maximum number of items in the response (as set in the query or by default).
+        type: integer
+      next:
+        description: URL to the next page of items. (null if none)
+        type: string
+      offset:
+        description: The offset of the items returned (as set in the query or by default).
+        type: integer
+      previous:
+        description: URL to the previous page of items. (null if none)
+        type: string
+      total:
+        description: The total number of items available to return.
+        type: integer
+    type: object
+  album-track-page:
+    properties:
+      href:
+        description: A link to the Web API endpoint returning the full result of the request.
+        type: string
+      items:
+        description: The requested data.
+        items:
+          $ref: '#/definitions/track-simple'
+        type: array
+      limit:
+        description: The maximum number of items in the response (as set in the query or by default).
+        type: integer
+      next:
+        description: URL to the next page of items. (null if none)
+        type: string
+      offset:
+        description: The offset of the items returned (as set in the query or by default).
+        type: integer
+      previous:
+        description: URL to the previous page of items. (null if none)
+        type: string
+      total:
+        description: The total number of items available to return.
+        type: integer
+    type: object
+  artist:
+    properties:
+      external_urls:
+        additionalProperties:
+          type: string
+        description: Known external URLs for this artist.
+        type: object
+      followers:
+        $ref: '#/definitions/followers'
+      genres:
+        description: "A list of the genres the artist is associated with. For example: 'Prog Rock', 'Post-Grunge'. (If not yet classified, the array is empty.)"
+        items:
+          type: string
+        type: array
+      href:
+        description: A link to the Web API endpoint providing full details of the artist.
+        type: string
+      id:
+        description: The Spotify ID for the artist.
+        type: string
+      images:
+        description: 'Images of the artist in various sizes, widest first.'
+        items:
+          $ref: '#/definitions/image'
+        type: array
+      name:
+        description: The name of the artist.
+        type: string
+      popularity:
+        description: "The popularity of the artist. The value will be between 0 and 100, with 100 being the most popular. The artist's popularity is calculated from the popularity of all the artist's tracks."
+        type: integer
+      type:
+        description: "The object type: 'artist'"
+        type: string
+      uri:
+        description: The Spotify URI for the artist.
+        type: string
+    type: object
+  artist-simple:
+    properties:
+      external_urls:
+        additionalProperties:
+          type: string
+        description: Known external URLs for this artist.
+        type: object
+      href:
+        description: A link to the Web API endpoint providing full details of the artist.
+        type: string
+      id:
+        description: The Spotify ID for the artist.
+        type: string
+      name:
+        description: The name of the artist.
+        type: string
+      type:
+        description: "The object type: 'artist'"
+        type: string
+      uri:
+        description: The Spotify URI for the artist.
+        type: string
+    type: object
+  category:
+    properties:
+      href:
+        description: A link to the Web API endpoint returning full details of the category.
+        type: string
+      icons:
+        items:
+          $ref: '#/definitions/image'
+        type: array
+      id:
+        description: The Spotify category ID of the category.
+        type: string
+      name:
+        description: The name of the category.
+        type: string
+    type: object
+  category-page:
+    properties:
+      href:
+        description: A link to the Web API endpoint returning the full result of the request.
+        type: string
+      items:
+        description: The requested data.
+        items:
+          $ref: '#/definitions/category'
+        type: array
+      limit:
+        description: The maximum number of items in the response (as set in the query or by default).
+        type: integer
+      next:
+        description: URL to the next page of items. (null if none)
+        type: string
+      offset:
+        description: The offset of the items returned (as set in the query or by default).
+        type: integer
+      previous:
+        description: URL to the previous page of items. (null if none)
+        type: string
+      total:
+        description: The total number of items available to return.
+        type: integer
+    type: object
+  current-user-profile:
+    properties:
+      birthdate:
+        description: "The user's date-of-birth. This field is only available when the current user has granted access to the user-read-birthdate scope."
+        type: string
+      country:
+        description: "The country of the user, as set in the user's account profile. An ISO 3166-1 alpha-2 country code. This field is only available when the current user has granted access to the user-read-private scope."
+        type: string
+      displayName:
+        description: "The name displayed on the user's profile."
+        type: string
+      email:
+        description: "The user's email address, as entered by the user when creating their account. This email address is unverified; there is no proof that it actually belongs to the user. This field is only available when the current user has granted access to the user-read-email scope."
+        type: string
+      external_urls:
+        additionalProperties:
+          type: string
+        description: Known external URLs for this user.
+        type: object
+      followers:
+        $ref: '#/definitions/followers'
+      href:
+        description: A link to the Web API endpoint for this user.
+        type: string
+      id:
+        description: The Spotify ID for this user.
+        type: string
+      product:
+        description: "The user's Spotify subscription level: 'premium', 'free', etc. (The subscription level 'open' can be considered the same as 'free'.) This field is only available when the current user has granted access to the user-read-private scope."
+        type: string
+      type:
+        description: "The object type: 'user'"
+        type: string
+      uri:
+        description: The Spotify URI for the user.
+        type: string
+    type: object
+  featured-playlists:
+    properties:
+      message:
+        description: A sentence describing the context for the featured playlists.
+        type: string
+      playlists:
+        $ref: '#/definitions/playlist-simple-page'
+    type: object
+  followers:
+    description: Information about the followers of the artist.
+    properties:
+      href:
+        description: A link to the Web API endpoint providing full details of the followers; null if not available.
+        type: string
+      total:
+        description: The total number of followers.
+        type: integer
+    type: object
+  image:
+    properties:
+      height:
+        description: 'The image height in pixels. If unknown: null or not returned.'
+        type: integer
+      url:
+        description: The source URL of the image.
+        type: string
+      width:
+        description: 'The image width in pixels. If unknown: null or not returned.'
+        type: integer
+    type: object
+  playlist:
+    properties:
+      collaborative:
+        description: True if the owner allows other users to modify the playlist.
+        type: boolean
+      description:
+        description: 'The playlist description. Only returned for modified, verified playlists, otherwise null.'
+        type: string
+      external_urls:
+        additionalProperties:
+          description: "The type of the URL, for example: 'spotify' - The Spotify URL for the object."
+          type: string
+        description: Known external URLs for this album.
+        type: object
+      followers:
+        description: Information about the followers of the playlist.
+        properties:
+          href:
+            description: A link to the Web API endpoint providing full details of the followers; null if not available.
+            type: string
+          total:
+            description: The total number of followers.
+            type: integer
+        type: object
+      href:
+        description: A link to the Web API endpoint providing full details of the playlist.
+        type: string
+      id:
+        description: The Spotify ID of the playlist.
+        type: string
+      images:
+        description: 'The cover art for the album in various sizes, widest first.'
+        items:
+          $ref: '#/definitions/image'
+        type: array
+      name:
+        description: The name of the playlist.
+        type: string
+      owner:
+        $ref: '#/definitions/user-profile'
+      public:
+        description: "The playlist's public/private status: true the playlist is public, false the playlist is private, null the playlist status is not relevant. For more about public/private status, see Working with Playlists."
+        type: boolean
+      snapshot_id:
+        description: The version identifier for the current playlist. Can be supplied in other requests to target a specific playlist version
+        type: string
+      tracks:
+        $ref: '#/definitions/playlist-track-page'
+      type:
+        description: "The object type: 'playlist'."
+        type: string
+      uri:
+        description: Spotify URI of the playlist.
+        type: string
+    type: object
+  playlist-simple:
+    properties:
+      collaborative:
+        description: True if the owner allows other users to modify the playlist.
+        type: boolean
+      external_urls:
+        additionalProperties:
+          description: "The type of the URL, for example: 'spotify' - The Spotify URL for the object."
+          type: string
+        description: Known external URLs for this album.
+        type: object
+      href:
+        description: A link to the Web API endpoint providing full details of the playlist.
+        type: string
+      id:
+        description: The Spotify ID of the playlist.
+        type: string
+      images:
+        description: 'The cover art for the album in various sizes, widest first.'
+        items:
+          $ref: '#/definitions/image'
+        type: array
+      name:
+        description: The name of the playlist.
+        type: string
+      owner:
+        $ref: '#/definitions/user-profile'
+      public:
+        description: "The playlist's public/private status: true the playlist is public, false the playlist is private, null the playlist status is not relevant. For more about public/private status, see Working with Playlists."
+        type: boolean
+      snapshot_id:
+        description: The version identifier for the current playlist. Can be supplied in other requests to target a specific playlist version
+        type: string
+      tracks:
+        properties:
+          href:
+            description: A link to the Web API endpoint returning the full result of the request.
+            type: string
+          total:
+            description: The total number of tracks available to return.
+            type: integer
+        type: object
+      type:
+        description: "The object type: 'playlist'."
+        type: string
+      uri:
+        description: Spotify URI of the playlist.
+        type: string
+    type: object
+  playlist-simple-page:
+    properties:
+      href:
+        description: A link to the Web API endpoint returning the full result of the request.
+        type: string
+      items:
+        description: The requested data.
+        items:
+          $ref: '#/definitions/playlist-simple'
+        type: array
+      limit:
+        description: The maximum number of items in the response (as set in the query or by default).
+        type: integer
+      next:
+        description: URL to the next page of items. (null if none)
+        type: string
+      offset:
+        description: The offset of the items returned (as set in the query or by default).
+        type: integer
+      previous:
+        description: URL to the previous page of items. (null if none)
+        type: string
+      total:
+        description: The total number of items available to return.
+        type: integer
+    type: object
+  playlist-snapshot:
+    properties:
+      snapshot_id:
+        description: The version identifier for the modified playlist. Can be supplied in other requests to target a specific playlist version.
+        type: string
+    type: object
+  playlist-track:
+    properties:
+      added_at:
+        description: The date and time the track was added in ISO 8601 format. Note that some very old playlists may return null in this field.
+        type: string
+      added_by:
+        $ref: '#/definitions/user-profile'
+      is_local:
+        description: 'Whether this track is a [local file](https://developer.spotify.com/web-api/local-files-spotify-playlists/) or not.'
+        type: boolean
+      track:
+        $ref: '#/definitions/track'
+    type: object
+  playlist-track-page:
+    properties:
+      href:
+        description: A link to the Web API endpoint returning the full result of the request.
+        type: string
+      items:
+        description: The requested data.
+        items:
+          $ref: '#/definitions/playlist-track'
+        type: array
+      limit:
+        description: The maximum number of items in the response (as set in the query or by default).
+        type: integer
+      next:
+        description: URL to the next page of items. (null if none)
+        type: string
+      offset:
+        description: The offset of the items returned (as set in the query or by default).
+        type: integer
+      previous:
+        description: URL to the previous page of items. (null if none)
+        type: string
+      total:
+        description: The total number of items available to return.
+        type: integer
+    type: object
+  saved-track:
+    properties:
+      added_at:
+        description: The date and time the track was added in ISO 8601 format. Note that some very old playlists may return null in this field.
+        type: string
+      track:
+        $ref: '#/definitions/track'
+    type: object
+  saved-track-page:
+    properties:
+      href:
+        description: A link to the Web API endpoint returning the full result of the request.
+        type: string
+      items:
+        description: The requested data.
+        items:
+          $ref: '#/definitions/saved-track'
+        type: array
+      limit:
+        description: The maximum number of items in the response (as set in the query or by default).
+        type: integer
+      next:
+        description: URL to the next page of items. (null if none)
+        type: string
+      offset:
+        description: The offset of the items returned (as set in the query or by default).
+        type: integer
+      previous:
+        description: URL to the previous page of items. (null if none)
+        type: string
+      total:
+        description: The total number of items available to return.
+        type: integer
+    type: object
+  search:
+    properties:
+      albums:
+        description: "Present if the type of search includes 'album'."
+        properties:
+          href:
+            description: A link to the Web API endpoint returning the full result of the request.
+            type: string
+          items:
+            description: The requested data.
+            items:
+              $ref: '#/definitions/album-simple'
+            type: array
+          limit:
+            description: The maximum number of items in the response (as set in the query or by default).
+            type: integer
+          next:
+            description: URL to the next page of items. (null if none)
+            type: string
+          offset:
+            description: The offset of the items returned (as set in the query or by default).
+            type: integer
+          previous:
+            description: URL to the previous page of items. (null if none)
+            type: string
+          total:
+            description: The total number of items available to return.
+            type: integer
+        type: object
+      artists:
+        description: "Present if the type of search includes 'artist'."
+        properties:
+          href:
+            description: A link to the Web API endpoint returning the full result of the request.
+            type: string
+          items:
+            description: The requested data.
+            items:
+              $ref: '#/definitions/artist'
+            type: array
+          limit:
+            description: The maximum number of items in the response (as set in the query or by default).
+            type: integer
+          next:
+            description: URL to the next page of items. (null if none)
+            type: string
+          offset:
+            description: The offset of the items returned (as set in the query or by default).
+            type: integer
+          previous:
+            description: URL to the previous page of items. (null if none)
+            type: string
+          total:
+            description: The total number of items available to return.
+            type: integer
+        type: object
+      tracks:
+        description: "Present if the type of search includes 'track'."
+        properties:
+          href:
+            description: A link to the Web API endpoint returning the full result of the request.
+            type: string
+          items:
+            description: The requested data.
+            items:
+              $ref: '#/definitions/track'
+            type: array
+          limit:
+            description: The maximum number of items in the response (as set in the query or by default).
+            type: integer
+          next:
+            description: URL to the next page of items. (null if none)
+            type: string
+          offset:
+            description: The offset of the items returned (as set in the query or by default).
+            type: integer
+          previous:
+            description: URL to the previous page of items. (null if none)
+            type: string
+          total:
+            description: The total number of items available to return.
+            type: integer
+        type: object
+    type: object
+  track:
+    properties:
+      album:
+        $ref: '#/definitions/album-simple'
+      artists:
+        description: The artists who performed the track. Each artist object includes a link in href to more detailed information about the artist.
+        items:
+          $ref: '#/definitions/artist-simple'
+        type: array
+      available_markets:
+        description: 'A list of the countries in which the track can be played, identified by their ISO 3166-1 alpha-2 code. '
+        items:
+          type: string
+        type: array
+      disc_number:
+        description: The disc number (usually 1 unless the album consists of more than one disc).
+        type: integer
+      duration_ms:
+        description: The track length in milliseconds.
+        type: integer
+      explicit:
+        description: Whether or not the track has explicit lyrics (true = yes it does; false = no it does not OR unknown).
+        type: boolean
+      external_ids:
+        additionalProperties:
+          description: "The identifier type, for example: 'isrc' - International Standard Recording Code, 'ean' - International Article Number, 'upc' - Universal Product Code"
+          type: string
+        description: Known external IDs for the track.
+        type: object
+      external_urls:
+        additionalProperties:
+          description: "The type of the URL, for example: 'spotify' - The Spotify URL for the object."
+          type: string
+        description: Known external URLs for this track.
+        type: object
+      href:
+        description: A link to the Web API endpoint providing full details of the track.
+        type: string
+      id:
+        description: The Spotify ID for the track.
+        type: string
+      is_playable:
+        description: 'Part of the response when Track Relinking is applied. If true, the track is playable in the given market. Otherwise false.'
+        type: boolean
+      linked_from:
+        description: 'Part of the response when Track Relinking is applied, and the requested track has been replaced with different track. The track in the linked_from object contains information about the originally requested track.'
+        properties:
+          external_urls:
+            additionalProperties:
+              description: "The type of the URL, for example: 'spotify' - The Spotify URL for the object."
+              type: string
+            description: Known external URLs for this track.
+            type: object
+          href:
+            description: A link to the Web API endpoint providing full details of the track.
+            type: string
+          id:
+            description: The Spotify ID for the track.
+            type: string
+          type:
+            description: "The object type: 'track'."
+            type: string
+          uri:
+            description: The Spotify URI for the track.
+            type: string
+        type: object
+      name:
+        description: The name of the track.
+        type: string
+      preview_url:
+        description: A URL to a 30 second preview (MP3 format) of the track.
+        type: string
+      track_number:
+        description: 'The number of the track. If an album has several discs, the track number is the number on the specified disc.'
+        type: integer
+      type:
+        description: "The object type: 'track'."
+        type: string
+      uri:
+        description: The Spotify URI for the track.
+        type: string
+    type: object
+  track-simple:
+    properties:
+      artists:
+        description: The artists who performed the track. Each artist object includes a link in href to more detailed information about the artist.
+        items:
+          $ref: '#/definitions/artist-simple'
+        type: array
+      available_markets:
+        description: 'A list of the countries in which the track can be played, identified by their ISO 3166-1 alpha-2 code. '
+        items:
+          type: string
+        type: array
+      disc_number:
+        description: The disc number (usually 1 unless the album consists of more than one disc).
+        type: integer
+      duration_ms:
+        description: The track length in milliseconds.
+        type: integer
+      explicit:
+        description: Whether or not the track has explicit lyrics (true = yes it does; false = no it does not OR unknown).
+        type: boolean
+      external_urls:
+        additionalProperties:
+          description: "The type of the URL, for example: 'spotify' - The Spotify URL for the object."
+          type: string
+        description: Known external URLs for this track.
+        type: object
+      href:
+        description: A link to the Web API endpoint providing full details of the track.
+        type: string
+      id:
+        description: The Spotify ID for the track.
+        type: string
+      is_playable:
+        description: 'Part of the response when Track Relinking is applied. If true, the track is playable in the given market. Otherwise false.'
+        type: boolean
+      linked_from:
+        description: 'Part of the response when Track Relinking is applied, and the requested track has been replaced with different track. The track in the linked_from object contains information about the originally requested track.'
+        properties:
+          external_urls:
+            additionalProperties:
+              description: "The type of the URL, for example: 'spotify' - The Spotify URL for the object."
+              type: string
+            description: Known external URLs for this track.
+            type: object
+          href:
+            description: A link to the Web API endpoint providing full details of the track.
+            type: string
+          id:
+            description: The Spotify ID for the track.
+            type: string
+          type:
+            description: "The object type: 'track'."
+            type: string
+          uri:
+            description: The Spotify URI for the track.
+            type: string
+        type: object
+      name:
+        description: The name of the track.
+        type: string
+      preview_url:
+        description: A URL to a 30 second preview (MP3 format) of the track.
+        type: string
+      track_number:
+        description: 'The number of the track. If an album has several discs, the track number is the number on the specified disc.'
+        type: integer
+      type:
+        description: "The object type: 'track'."
+        type: string
+      uri:
+        description: The Spotify URI for the track.
+        type: string
+    type: object
+  track-simple-page:
+    properties:
+      href:
+        description: A link to the Web API endpoint returning the full result of the request.
+        type: string
+      items:
+        description: The requested data.
+        items:
+          $ref: '#/definitions/track-simple'
+        type: array
+      limit:
+        description: The maximum number of items in the response (as set in the query or by default).
+        type: integer
+      next:
+        description: URL to the next page of items. (null if none)
+        type: string
+      offset:
+        description: The offset of the items returned (as set in the query or by default).
+        type: integer
+      previous:
+        description: URL to the previous page of items. (null if none)
+        type: string
+      total:
+        description: The total number of items available to return.
+        type: integer
+    type: object
+  user-followed:
+    properties:
+      artists:
+        description: "Present if the type of followe items is 'artist'."
+        properties:
+          cursor:
+            description: The cursors used to find the next set of items.
+            properties:
+              after:
+                description: The cursor to use as key to find the next page of items.
+                type: string
+            type: object
+          href:
+            description: A link to the Web API endpoint returning the full result of the request.
+            type: string
+          items:
+            description: The requested data.
+            items:
+              $ref: '#/definitions/artist'
+            type: array
+          limit:
+            description: The maximum number of items in the response (as set in the query or by default).
+            type: integer
+          next:
+            description: URL to the next page of items. (null if none)
+            type: string
+          total:
+            description: The total number of items available to return.
+            type: integer
+        type: object
+    type: object
+  user-profile:
+    properties:
+      displayName:
+        description: "The name displayed on the user's profile."
+        type: string
+      external_urls:
+        additionalProperties:
+          type: string
+        description: Known external URLs for this user.
+        type: object
+      followers:
+        $ref: '#/definitions/followers'
+      href:
+        description: A link to the Web API endpoint for this user.
+        type: string
+      id:
+        description: The Spotify ID for this user.
+        type: string
+      type:
+        description: "The object type: 'user'"
+        type: string
+      uri:
+        description: The Spotify URI for the user.
+        type: string
+    type: object

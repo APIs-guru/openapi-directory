@@ -1,4 +1,495 @@
+swagger: '2.0'
+schemes:
+  - https
+host: partners.googleapis.com
 basePath: /
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: 'Lets advertisers search certified companies and create contact leads with them, and also audits the usage of clients.'
+  title: Google Partners API
+  version: v2
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/partners/v2/rest'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: partners
+externalDocs:
+  url: 'https://developers.google.com/partners/'
+parameters:
+  $.xgafv:
+    description: V1 error format.
+    in: query
+    name: $.xgafv
+    type: string
+  access_token:
+    description: OAuth access token.
+    in: query
+    name: access_token
+    type: string
+  alt:
+    default: json
+    description: Data format for response.
+    in: query
+    name: alt
+    type: string
+  bearer_token:
+    description: OAuth bearer token.
+    in: query
+    name: bearer_token
+    type: string
+  callback:
+    description: JSONP
+    in: query
+    name: callback
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  pp:
+    default: true
+    description: Pretty-print response.
+    in: query
+    name: pp
+    type: boolean
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+    in: query
+    name: quotaUser
+    type: string
+  uploadType:
+    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+    in: query
+    name: uploadType
+    type: string
+  upload_protocol:
+    description: 'Upload protocol for media (e.g. "raw", "multipart").'
+    in: query
+    name: upload_protocol
+    type: string
+paths:
+  '/v2/clientMessages:log':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: 'Logs a generic message from the client, such as `Failed to render component`, `Profile page is running slow`, `More than 500 users have accessed this result.`, etc.'
+      operationId: partners.clientMessages.log
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LogMessageRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LogMessageResponse'
+      tags:
+        - clientMessages
+  /v2/companies:
+    get:
+      description: Lists companies.
+      operationId: partners.companies.list
+      parameters:
+        - description: "IP address to use instead of the user's geo-located IP address."
+          in: query
+          name: requestMetadata.userOverrides.ipAddress
+          type: string
+        - description: "Logged-in user ID to impersonate instead of the user's ID."
+          in: query
+          name: requestMetadata.userOverrides.userId
+          type: string
+        - description: Locale to use for the current request.
+          in: query
+          name: requestMetadata.locale
+          type: string
+        - description: Google Partners session ID.
+          in: query
+          name: requestMetadata.partnersSessionId
+          type: string
+        - collectionFormat: multi
+          description: Experiment IDs the current request belongs to.
+          in: query
+          items:
+            type: string
+          name: requestMetadata.experimentIds
+          type: array
+        - description: Identifier to indicate where the traffic comes from. An identifier has multiple letters created by a team which redirected the traffic to us.
+          in: query
+          name: requestMetadata.trafficSource.trafficSourceId
+          type: string
+        - description: Second level identifier to indicate where the traffic comes from. An identifier has multiple letters created by a team which redirected the traffic to us.
+          in: query
+          name: requestMetadata.trafficSource.trafficSubId
+          type: string
+        - description: 'Requested page size. Server may return fewer companies than requested. If unspecified, server picks an appropriate default.'
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'A token identifying a page of results that the server returns. Typically, this is the value of `ListCompaniesResponse.next_page_token` returned from the previous call to ListCompanies.'
+          in: query
+          name: pageToken
+          type: string
+        - description: Company name to search for.
+          in: query
+          name: companyName
+          type: string
+        - description: The view of the `Company` resource to be returned. This must not be `COMPANY_VIEW_UNSPECIFIED`.
+          enum:
+            - COMPANY_VIEW_UNSPECIFIED
+            - CV_GOOGLE_PARTNER_SEARCH
+          in: query
+          name: view
+          type: string
+        - description: The 3-letter currency code defined in ISO 4217.
+          in: query
+          name: minMonthlyBudget.currencyCode
+          type: string
+        - description: 'The whole units of the amount. For example if `currencyCode` is `"USD"`, then 1 unit is one US dollar.'
+          in: query
+          name: minMonthlyBudget.units
+          type: string
+        - description: 'Number of nano (10^-9) units of the amount. The value must be between -999,999,999 and +999,999,999 inclusive. If `units` is positive, `nanos` must be positive or zero. If `units` is zero, `nanos` can be positive, zero, or negative. If `units` is negative, `nanos` must be negative or zero. For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.'
+          in: query
+          name: minMonthlyBudget.nanos
+          type: integer
+        - description: The 3-letter currency code defined in ISO 4217.
+          in: query
+          name: maxMonthlyBudget.currencyCode
+          type: string
+        - description: 'The whole units of the amount. For example if `currencyCode` is `"USD"`, then 1 unit is one US dollar.'
+          in: query
+          name: maxMonthlyBudget.units
+          type: string
+        - description: 'Number of nano (10^-9) units of the amount. The value must be between -999,999,999 and +999,999,999 inclusive. If `units` is positive, `nanos` must be positive or zero. If `units` is zero, `nanos` can be positive, zero, or negative. If `units` is negative, `nanos` must be negative or zero. For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.'
+          in: query
+          name: maxMonthlyBudget.nanos
+          type: integer
+        - collectionFormat: multi
+          description: List of industries the company can help with.
+          in: query
+          items:
+            enum:
+              - INDUSTRY_UNSPECIFIED
+              - I_AUTOMOTIVE
+              - I_BUSINESS_TO_BUSINESS
+              - I_CONSUMER_PACKAGED_GOODS
+              - I_EDUCATION
+              - I_FINANCE
+              - I_HEALTHCARE
+              - I_MEDIA_AND_ENTERTAINMENT
+              - I_RETAIL
+              - I_TECHNOLOGY
+              - I_TRAVEL
+            type: string
+          name: industries
+          type: array
+        - collectionFormat: multi
+          description: List of services the company can help with.
+          in: query
+          items:
+            enum:
+              - SERVICE_UNSPECIFIED
+              - S_ADVANCED_ADWORDS_SUPPORT
+              - S_ADVERTISING_ON_GOOGLE
+              - S_AN_ENHANCED_WEBSITE
+              - S_AN_ONLINE_MARKETING_PLAN
+              - S_MOBILE_AND_VIDEO_ADS
+            type: string
+          name: services
+          type: array
+        - collectionFormat: multi
+          description: 'List of language codes that company can support. Only primary language subtags are accepted as defined by BCP 47 (IETF BCP 47, "Tags for Identifying Languages").'
+          in: query
+          items:
+            type: string
+          name: languageCodes
+          type: array
+        - description: 'The address to use when searching for companies. If not given, the geo-located address of the request is used.'
+          in: query
+          name: address
+          type: string
+        - description: 'How to order addresses within the returned companies. Currently, only `address` and `address desc` is supported which will sorted by closest to farthest in distance from given address and farthest to closest distance from given address respectively.'
+          in: query
+          name: orderBy
+          type: string
+        - collectionFormat: multi
+          description: List of reasons for using Google Partner Search to get companies.
+          in: query
+          items:
+            enum:
+              - GPS_MOTIVATION_UNSPECIFIED
+              - GPSM_HELP_WITH_ADVERTISING
+              - GPSM_HELP_WITH_WEBSITE
+              - GPSM_NO_WEBSITE
+            type: string
+          name: gpsMotivations
+          type: array
+        - description: Website URL that will help to find a better matched company. .
+          in: query
+          name: websiteUrl
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListCompaniesResponse'
+      tags:
+        - companies
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+  '/v2/companies/{companyId}':
+    get:
+      description: Gets a company.
+      operationId: partners.companies.get
+      parameters:
+        - description: The ID of the company to retrieve.
+          in: path
+          name: companyId
+          required: true
+          type: string
+        - description: "IP address to use instead of the user's geo-located IP address."
+          in: query
+          name: requestMetadata.userOverrides.ipAddress
+          type: string
+        - description: "Logged-in user ID to impersonate instead of the user's ID."
+          in: query
+          name: requestMetadata.userOverrides.userId
+          type: string
+        - description: Locale to use for the current request.
+          in: query
+          name: requestMetadata.locale
+          type: string
+        - description: Google Partners session ID.
+          in: query
+          name: requestMetadata.partnersSessionId
+          type: string
+        - collectionFormat: multi
+          description: Experiment IDs the current request belongs to.
+          in: query
+          items:
+            type: string
+          name: requestMetadata.experimentIds
+          type: array
+        - description: Identifier to indicate where the traffic comes from. An identifier has multiple letters created by a team which redirected the traffic to us.
+          in: query
+          name: requestMetadata.trafficSource.trafficSourceId
+          type: string
+        - description: Second level identifier to indicate where the traffic comes from. An identifier has multiple letters created by a team which redirected the traffic to us.
+          in: query
+          name: requestMetadata.trafficSource.trafficSubId
+          type: string
+        - description: The view of `Company` resource to be returned. This must not be `COMPANY_VIEW_UNSPECIFIED`.
+          enum:
+            - COMPANY_VIEW_UNSPECIFIED
+            - CV_GOOGLE_PARTNER_SEARCH
+          in: query
+          name: view
+          type: string
+        - description: 'How to order addresses within the returned company. Currently, only `address` and `address desc` is supported which will sorted by closest to farthest in distance from given address and farthest to closest distance from given address respectively.'
+          in: query
+          name: orderBy
+          type: string
+        - description: "If the company's budget is in a different currency code than this one, then the converted budget is converted to this currency code."
+          in: query
+          name: currencyCode
+          type: string
+        - description: "The address to use for sorting the company's addresses by proximity. If not given, the geo-located address of the request is used. Used when order_by is set."
+          in: query
+          name: address
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetCompanyResponse'
+      tags:
+        - companies
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+  '/v2/companies/{companyId}/leads':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: Creates an advertiser lead for the given company ID.
+      operationId: partners.companies.leads.create
+      parameters:
+        - description: The ID of the company to contact.
+          in: path
+          name: companyId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateLeadRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CreateLeadResponse'
+      tags:
+        - companies
+  '/v2/userEvents:log':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: Logs a user event.
+      operationId: partners.userEvents.log
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LogUserEventRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LogUserEventResponse'
+      tags:
+        - userEvents
+  /v2/userStates:
+    get:
+      description: Lists states for current user.
+      operationId: partners.userStates.list
+      parameters:
+        - description: "IP address to use instead of the user's geo-located IP address."
+          in: query
+          name: requestMetadata.userOverrides.ipAddress
+          type: string
+        - description: "Logged-in user ID to impersonate instead of the user's ID."
+          in: query
+          name: requestMetadata.userOverrides.userId
+          type: string
+        - description: Locale to use for the current request.
+          in: query
+          name: requestMetadata.locale
+          type: string
+        - description: Google Partners session ID.
+          in: query
+          name: requestMetadata.partnersSessionId
+          type: string
+        - collectionFormat: multi
+          description: Experiment IDs the current request belongs to.
+          in: query
+          items:
+            type: string
+          name: requestMetadata.experimentIds
+          type: array
+        - description: Identifier to indicate where the traffic comes from. An identifier has multiple letters created by a team which redirected the traffic to us.
+          in: query
+          name: requestMetadata.trafficSource.trafficSourceId
+          type: string
+        - description: Second level identifier to indicate where the traffic comes from. An identifier has multiple letters created by a team which redirected the traffic to us.
+          in: query
+          name: requestMetadata.trafficSource.trafficSubId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListUserStatesResponse'
+      tags:
+        - userStates
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
 definitions:
   CertificationExamStatus:
     description: Status for a Google Partners certification exam.
@@ -678,494 +1169,3 @@ definitions:
         description: "Logged-in user ID to impersonate instead of the user's ID."
         type: string
     type: object
-externalDocs:
-  url: 'https://developers.google.com/partners/'
-host: partners.googleapis.com
-info:
-  contact:
-    name: Google
-    url: 'https://google.com'
-  description: 'Lets advertisers search certified companies and create contact leads with them, and also audits the usage of clients.'
-  title: Google Partners API
-  version: v2
-  x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
-  x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
-  x-origin:
-    format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/partners/v2/rest'
-    version: v1
-  x-preferred: true
-  x-providerName: googleapis.com
-  x-serviceName: partners
-parameters:
-  $.xgafv:
-    description: V1 error format.
-    in: query
-    name: $.xgafv
-    type: string
-  access_token:
-    description: OAuth access token.
-    in: query
-    name: access_token
-    type: string
-  alt:
-    default: json
-    description: Data format for response.
-    in: query
-    name: alt
-    type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
-  callback:
-    description: JSONP
-    in: query
-    name: callback
-    type: string
-  fields:
-    description: Selector specifying which fields to include in a partial response.
-    in: query
-    name: fields
-    type: string
-  key:
-    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
-    in: query
-    name: key
-    type: string
-  oauth_token:
-    description: OAuth 2.0 token for the current user.
-    in: query
-    name: oauth_token
-    type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
-  prettyPrint:
-    default: true
-    description: Returns response with indentations and line breaks.
-    in: query
-    name: prettyPrint
-    type: boolean
-  quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
-    in: query
-    name: quotaUser
-    type: string
-  uploadType:
-    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
-    in: query
-    name: uploadType
-    type: string
-  upload_protocol:
-    description: 'Upload protocol for media (e.g. "raw", "multipart").'
-    in: query
-    name: upload_protocol
-    type: string
-paths:
-  '/v2/clientMessages:log':
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-    post:
-      description: 'Logs a generic message from the client, such as `Failed to render component`, `Profile page is running slow`, `More than 500 users have accessed this result.`, etc.'
-      operationId: partners.clientMessages.log
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LogMessageRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/LogMessageResponse'
-      tags:
-        - clientMessages
-  /v2/companies:
-    get:
-      description: Lists companies.
-      operationId: partners.companies.list
-      parameters:
-        - description: "IP address to use instead of the user's geo-located IP address."
-          in: query
-          name: requestMetadata.userOverrides.ipAddress
-          type: string
-        - description: "Logged-in user ID to impersonate instead of the user's ID."
-          in: query
-          name: requestMetadata.userOverrides.userId
-          type: string
-        - description: Locale to use for the current request.
-          in: query
-          name: requestMetadata.locale
-          type: string
-        - description: Google Partners session ID.
-          in: query
-          name: requestMetadata.partnersSessionId
-          type: string
-        - collectionFormat: multi
-          description: Experiment IDs the current request belongs to.
-          in: query
-          items:
-            type: string
-          name: requestMetadata.experimentIds
-          type: array
-        - description: Identifier to indicate where the traffic comes from. An identifier has multiple letters created by a team which redirected the traffic to us.
-          in: query
-          name: requestMetadata.trafficSource.trafficSourceId
-          type: string
-        - description: Second level identifier to indicate where the traffic comes from. An identifier has multiple letters created by a team which redirected the traffic to us.
-          in: query
-          name: requestMetadata.trafficSource.trafficSubId
-          type: string
-        - description: 'Requested page size. Server may return fewer companies than requested. If unspecified, server picks an appropriate default.'
-          in: query
-          name: pageSize
-          type: integer
-        - description: 'A token identifying a page of results that the server returns. Typically, this is the value of `ListCompaniesResponse.next_page_token` returned from the previous call to ListCompanies.'
-          in: query
-          name: pageToken
-          type: string
-        - description: Company name to search for.
-          in: query
-          name: companyName
-          type: string
-        - description: The view of the `Company` resource to be returned. This must not be `COMPANY_VIEW_UNSPECIFIED`.
-          enum:
-            - COMPANY_VIEW_UNSPECIFIED
-            - CV_GOOGLE_PARTNER_SEARCH
-          in: query
-          name: view
-          type: string
-        - description: The 3-letter currency code defined in ISO 4217.
-          in: query
-          name: minMonthlyBudget.currencyCode
-          type: string
-        - description: 'The whole units of the amount. For example if `currencyCode` is `"USD"`, then 1 unit is one US dollar.'
-          in: query
-          name: minMonthlyBudget.units
-          type: string
-        - description: 'Number of nano (10^-9) units of the amount. The value must be between -999,999,999 and +999,999,999 inclusive. If `units` is positive, `nanos` must be positive or zero. If `units` is zero, `nanos` can be positive, zero, or negative. If `units` is negative, `nanos` must be negative or zero. For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.'
-          in: query
-          name: minMonthlyBudget.nanos
-          type: integer
-        - description: The 3-letter currency code defined in ISO 4217.
-          in: query
-          name: maxMonthlyBudget.currencyCode
-          type: string
-        - description: 'The whole units of the amount. For example if `currencyCode` is `"USD"`, then 1 unit is one US dollar.'
-          in: query
-          name: maxMonthlyBudget.units
-          type: string
-        - description: 'Number of nano (10^-9) units of the amount. The value must be between -999,999,999 and +999,999,999 inclusive. If `units` is positive, `nanos` must be positive or zero. If `units` is zero, `nanos` can be positive, zero, or negative. If `units` is negative, `nanos` must be negative or zero. For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.'
-          in: query
-          name: maxMonthlyBudget.nanos
-          type: integer
-        - collectionFormat: multi
-          description: List of industries the company can help with.
-          in: query
-          items:
-            enum:
-              - INDUSTRY_UNSPECIFIED
-              - I_AUTOMOTIVE
-              - I_BUSINESS_TO_BUSINESS
-              - I_CONSUMER_PACKAGED_GOODS
-              - I_EDUCATION
-              - I_FINANCE
-              - I_HEALTHCARE
-              - I_MEDIA_AND_ENTERTAINMENT
-              - I_RETAIL
-              - I_TECHNOLOGY
-              - I_TRAVEL
-            type: string
-          name: industries
-          type: array
-        - collectionFormat: multi
-          description: List of services the company can help with.
-          in: query
-          items:
-            enum:
-              - SERVICE_UNSPECIFIED
-              - S_ADVANCED_ADWORDS_SUPPORT
-              - S_ADVERTISING_ON_GOOGLE
-              - S_AN_ENHANCED_WEBSITE
-              - S_AN_ONLINE_MARKETING_PLAN
-              - S_MOBILE_AND_VIDEO_ADS
-            type: string
-          name: services
-          type: array
-        - collectionFormat: multi
-          description: 'List of language codes that company can support. Only primary language subtags are accepted as defined by BCP 47 (IETF BCP 47, "Tags for Identifying Languages").'
-          in: query
-          items:
-            type: string
-          name: languageCodes
-          type: array
-        - description: 'The address to use when searching for companies. If not given, the geo-located address of the request is used.'
-          in: query
-          name: address
-          type: string
-        - description: 'How to order addresses within the returned companies. Currently, only `address` and `address desc` is supported which will sorted by closest to farthest in distance from given address and farthest to closest distance from given address respectively.'
-          in: query
-          name: orderBy
-          type: string
-        - collectionFormat: multi
-          description: List of reasons for using Google Partner Search to get companies.
-          in: query
-          items:
-            enum:
-              - GPS_MOTIVATION_UNSPECIFIED
-              - GPSM_HELP_WITH_ADVERTISING
-              - GPSM_HELP_WITH_WEBSITE
-              - GPSM_NO_WEBSITE
-            type: string
-          name: gpsMotivations
-          type: array
-        - description: Website URL that will help to find a better matched company. .
-          in: query
-          name: websiteUrl
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListCompaniesResponse'
-      tags:
-        - companies
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-  '/v2/companies/{companyId}':
-    get:
-      description: Gets a company.
-      operationId: partners.companies.get
-      parameters:
-        - description: The ID of the company to retrieve.
-          in: path
-          name: companyId
-          required: true
-          type: string
-        - description: "IP address to use instead of the user's geo-located IP address."
-          in: query
-          name: requestMetadata.userOverrides.ipAddress
-          type: string
-        - description: "Logged-in user ID to impersonate instead of the user's ID."
-          in: query
-          name: requestMetadata.userOverrides.userId
-          type: string
-        - description: Locale to use for the current request.
-          in: query
-          name: requestMetadata.locale
-          type: string
-        - description: Google Partners session ID.
-          in: query
-          name: requestMetadata.partnersSessionId
-          type: string
-        - collectionFormat: multi
-          description: Experiment IDs the current request belongs to.
-          in: query
-          items:
-            type: string
-          name: requestMetadata.experimentIds
-          type: array
-        - description: Identifier to indicate where the traffic comes from. An identifier has multiple letters created by a team which redirected the traffic to us.
-          in: query
-          name: requestMetadata.trafficSource.trafficSourceId
-          type: string
-        - description: Second level identifier to indicate where the traffic comes from. An identifier has multiple letters created by a team which redirected the traffic to us.
-          in: query
-          name: requestMetadata.trafficSource.trafficSubId
-          type: string
-        - description: The view of `Company` resource to be returned. This must not be `COMPANY_VIEW_UNSPECIFIED`.
-          enum:
-            - COMPANY_VIEW_UNSPECIFIED
-            - CV_GOOGLE_PARTNER_SEARCH
-          in: query
-          name: view
-          type: string
-        - description: 'How to order addresses within the returned company. Currently, only `address` and `address desc` is supported which will sorted by closest to farthest in distance from given address and farthest to closest distance from given address respectively.'
-          in: query
-          name: orderBy
-          type: string
-        - description: "If the company's budget is in a different currency code than this one, then the converted budget is converted to this currency code."
-          in: query
-          name: currencyCode
-          type: string
-        - description: "The address to use for sorting the company's addresses by proximity. If not given, the geo-located address of the request is used. Used when order_by is set."
-          in: query
-          name: address
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/GetCompanyResponse'
-      tags:
-        - companies
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-  '/v2/companies/{companyId}/leads':
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-    post:
-      description: Creates an advertiser lead for the given company ID.
-      operationId: partners.companies.leads.create
-      parameters:
-        - description: The ID of the company to contact.
-          in: path
-          name: companyId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreateLeadRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/CreateLeadResponse'
-      tags:
-        - companies
-  '/v2/userEvents:log':
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-    post:
-      description: Logs a user event.
-      operationId: partners.userEvents.log
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LogUserEventRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/LogUserEventResponse'
-      tags:
-        - userEvents
-  /v2/userStates:
-    get:
-      description: Lists states for current user.
-      operationId: partners.userStates.list
-      parameters:
-        - description: "IP address to use instead of the user's geo-located IP address."
-          in: query
-          name: requestMetadata.userOverrides.ipAddress
-          type: string
-        - description: "Logged-in user ID to impersonate instead of the user's ID."
-          in: query
-          name: requestMetadata.userOverrides.userId
-          type: string
-        - description: Locale to use for the current request.
-          in: query
-          name: requestMetadata.locale
-          type: string
-        - description: Google Partners session ID.
-          in: query
-          name: requestMetadata.partnersSessionId
-          type: string
-        - collectionFormat: multi
-          description: Experiment IDs the current request belongs to.
-          in: query
-          items:
-            type: string
-          name: requestMetadata.experimentIds
-          type: array
-        - description: Identifier to indicate where the traffic comes from. An identifier has multiple letters created by a team which redirected the traffic to us.
-          in: query
-          name: requestMetadata.trafficSource.trafficSourceId
-          type: string
-        - description: Second level identifier to indicate where the traffic comes from. An identifier has multiple letters created by a team which redirected the traffic to us.
-          in: query
-          name: requestMetadata.trafficSource.trafficSubId
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListUserStatesResponse'
-      tags:
-        - userStates
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-schemes:
-  - https
-swagger: '2.0'

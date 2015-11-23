@@ -1,131 +1,8 @@
-basePath: /tasks/v1
-definitions:
-  Task:
-    properties:
-      completed:
-        description: Completion date of the task (as a RFC 3339 timestamp). This field is omitted if the task has not been completed.
-        format: date-time
-        type: string
-      deleted:
-        description: Flag indicating whether the task has been deleted. The default if False.
-        type: boolean
-      due:
-        description: Due date of the task (as a RFC 3339 timestamp). Optional.
-        format: date-time
-        type: string
-      etag:
-        description: ETag of the resource.
-        type: string
-      hidden:
-        description: Flag indicating whether the task is hidden. This is the case if the task had been marked completed when the task list was last cleared. The default is False. This field is read-only.
-        type: boolean
-      id:
-        description: Task identifier.
-        type: string
-      kind:
-        default: 'tasks#task'
-        description: 'Type of the resource. This is always "tasks#task".'
-        type: string
-      links:
-        description: Collection of links. This collection is read-only.
-        items:
-          properties:
-            description:
-              description: 'The description. In HTML speak: Everything between <a> and </a>.'
-              type: string
-            link:
-              description: The URL.
-              type: string
-            type:
-              description: 'Type of the link, e.g. "email".'
-              type: string
-          type: object
-        type: array
-      notes:
-        description: Notes describing the task. Optional.
-        type: string
-      parent:
-        description: 'Parent task identifier. This field is omitted if it is a top-level task. This field is read-only. Use the "move" method to move the task under a different parent or to the top level.'
-        type: string
-      position:
-        description: "String indicating the position of the task among its sibling tasks under the same parent task or at the top level. If this string is greater than another task's corresponding position string according to lexicographical ordering, the task is positioned after the other task under the same parent task (or at the top level). This field is read-only. Use the \"move\" method to move the task to another position."
-        type: string
-      selfLink:
-        description: 'URL pointing to this task. Used to retrieve, update, or delete this task.'
-        type: string
-      status:
-        description: 'Status of the task. This is either "needsAction" or "completed".'
-        type: string
-      title:
-        description: Title of the task.
-        type: string
-      updated:
-        description: Last modification time of the task (as a RFC 3339 timestamp).
-        format: date-time
-        type: string
-    type: object
-  TaskList:
-    properties:
-      etag:
-        description: ETag of the resource.
-        type: string
-      id:
-        description: Task list identifier.
-        type: string
-      kind:
-        default: 'tasks#taskList'
-        description: 'Type of the resource. This is always "tasks#taskList".'
-        type: string
-      selfLink:
-        description: 'URL pointing to this task list. Used to retrieve, update, or delete this task list.'
-        type: string
-      title:
-        description: Title of the task list.
-        type: string
-      updated:
-        description: Last modification time of the task list (as a RFC 3339 timestamp).
-        format: date-time
-        type: string
-    type: object
-  TaskLists:
-    properties:
-      etag:
-        description: ETag of the resource.
-        type: string
-      items:
-        description: Collection of task lists.
-        items:
-          $ref: '#/definitions/TaskList'
-        type: array
-      kind:
-        default: 'tasks#taskLists'
-        description: 'Type of the resource. This is always "tasks#taskLists".'
-        type: string
-      nextPageToken:
-        description: Token that can be used to request the next page of this result.
-        type: string
-    type: object
-  Tasks:
-    properties:
-      etag:
-        description: ETag of the resource.
-        type: string
-      items:
-        description: Collection of tasks.
-        items:
-          $ref: '#/definitions/Task'
-        type: array
-      kind:
-        default: 'tasks#tasks'
-        description: 'Type of the resource. This is always "tasks#tasks".'
-        type: string
-      nextPageToken:
-        description: Token used to access the next page of this result.
-        type: string
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/google-apps/tasks/firstapp'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /tasks/v1
 info:
   contact:
     name: Google
@@ -144,6 +21,17 @@ info:
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: tasks
+externalDocs:
+  url: 'https://developers.google.com/google-apps/tasks/firstapp'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/tasks': Manage your tasks
+      'https://www.googleapis.com/auth/tasks.readonly': View your tasks
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -606,15 +494,127 @@ paths:
             - 'https://www.googleapis.com/auth/tasks'
       tags:
         - tasklists
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/tasks': Manage your tasks
-      'https://www.googleapis.com/auth/tasks.readonly': View your tasks
-    type: oauth2
-swagger: '2.0'
+definitions:
+  Task:
+    properties:
+      completed:
+        description: Completion date of the task (as a RFC 3339 timestamp). This field is omitted if the task has not been completed.
+        format: date-time
+        type: string
+      deleted:
+        description: Flag indicating whether the task has been deleted. The default if False.
+        type: boolean
+      due:
+        description: Due date of the task (as a RFC 3339 timestamp). Optional.
+        format: date-time
+        type: string
+      etag:
+        description: ETag of the resource.
+        type: string
+      hidden:
+        description: Flag indicating whether the task is hidden. This is the case if the task had been marked completed when the task list was last cleared. The default is False. This field is read-only.
+        type: boolean
+      id:
+        description: Task identifier.
+        type: string
+      kind:
+        default: 'tasks#task'
+        description: 'Type of the resource. This is always "tasks#task".'
+        type: string
+      links:
+        description: Collection of links. This collection is read-only.
+        items:
+          properties:
+            description:
+              description: 'The description. In HTML speak: Everything between <a> and </a>.'
+              type: string
+            link:
+              description: The URL.
+              type: string
+            type:
+              description: 'Type of the link, e.g. "email".'
+              type: string
+          type: object
+        type: array
+      notes:
+        description: Notes describing the task. Optional.
+        type: string
+      parent:
+        description: 'Parent task identifier. This field is omitted if it is a top-level task. This field is read-only. Use the "move" method to move the task under a different parent or to the top level.'
+        type: string
+      position:
+        description: "String indicating the position of the task among its sibling tasks under the same parent task or at the top level. If this string is greater than another task's corresponding position string according to lexicographical ordering, the task is positioned after the other task under the same parent task (or at the top level). This field is read-only. Use the \"move\" method to move the task to another position."
+        type: string
+      selfLink:
+        description: 'URL pointing to this task. Used to retrieve, update, or delete this task.'
+        type: string
+      status:
+        description: 'Status of the task. This is either "needsAction" or "completed".'
+        type: string
+      title:
+        description: Title of the task.
+        type: string
+      updated:
+        description: Last modification time of the task (as a RFC 3339 timestamp).
+        format: date-time
+        type: string
+    type: object
+  TaskList:
+    properties:
+      etag:
+        description: ETag of the resource.
+        type: string
+      id:
+        description: Task list identifier.
+        type: string
+      kind:
+        default: 'tasks#taskList'
+        description: 'Type of the resource. This is always "tasks#taskList".'
+        type: string
+      selfLink:
+        description: 'URL pointing to this task list. Used to retrieve, update, or delete this task list.'
+        type: string
+      title:
+        description: Title of the task list.
+        type: string
+      updated:
+        description: Last modification time of the task list (as a RFC 3339 timestamp).
+        format: date-time
+        type: string
+    type: object
+  TaskLists:
+    properties:
+      etag:
+        description: ETag of the resource.
+        type: string
+      items:
+        description: Collection of task lists.
+        items:
+          $ref: '#/definitions/TaskList'
+        type: array
+      kind:
+        default: 'tasks#taskLists'
+        description: 'Type of the resource. This is always "tasks#taskLists".'
+        type: string
+      nextPageToken:
+        description: Token that can be used to request the next page of this result.
+        type: string
+    type: object
+  Tasks:
+    properties:
+      etag:
+        description: ETag of the resource.
+        type: string
+      items:
+        description: Collection of tasks.
+        items:
+          $ref: '#/definitions/Task'
+        type: array
+      kind:
+        default: 'tasks#tasks'
+        description: 'Type of the resource. This is always "tasks#tasks".'
+        type: string
+      nextPageToken:
+        description: Token used to access the next page of this result.
+        type: string
+    type: object

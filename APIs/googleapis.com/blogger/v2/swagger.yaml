@@ -1,4 +1,390 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.googleapis.com
 basePath: /blogger/v2
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: API for access to the data within Blogger.
+  title: Blogger API
+  version: v2
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.gstatic.com/images/icons/material/product/2x/blogger_64dp.png'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/blogger/v2/rest'
+    version: v1
+  x-preferred: false
+  x-providerName: googleapis.com
+  x-serviceName: blogger
+externalDocs:
+  url: 'https://developers.google.com/blogger/docs/2.0/json/getting_started'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/blogger': Manage your Blogger account
+    type: oauth2
+parameters:
+  alt:
+    default: json
+    description: Data format for the response.
+    enum:
+      - json
+    in: query
+    name: alt
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    in: query
+    name: quotaUser
+    type: string
+  userIp:
+    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    in: query
+    name: userIp
+    type: string
+paths:
+  '/blogs/{blogId}':
+    get:
+      description: Gets one blog by id.
+      operationId: blogger.blogs.get
+      parameters:
+        - description: The ID of the blog to get.
+          in: path
+          name: blogId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Blog'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/blogger'
+      tags:
+        - blogs
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/blogs/{blogId}/pages':
+    get:
+      description: 'Retrieves pages for a blog, possibly filtered.'
+      operationId: blogger.pages.list
+      parameters:
+        - description: ID of the blog to fetch pages from.
+          in: path
+          name: blogId
+          required: true
+          type: string
+        - description: Whether to retrieve the Page bodies.
+          in: query
+          name: fetchBodies
+          type: boolean
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PageList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/blogger'
+      tags:
+        - pages
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/blogs/{blogId}/pages/{pageId}':
+    get:
+      description: Gets one blog page by id.
+      operationId: blogger.pages.get
+      parameters:
+        - description: ID of the blog containing the page.
+          in: path
+          name: blogId
+          required: true
+          type: string
+        - description: The ID of the page to get.
+          in: path
+          name: pageId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Page'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/blogger'
+      tags:
+        - pages
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/blogs/{blogId}/posts':
+    get:
+      description: 'Retrieves a list of posts, possibly filtered.'
+      operationId: blogger.posts.list
+      parameters:
+        - description: ID of the blog to fetch posts from.
+          in: path
+          name: blogId
+          required: true
+          type: string
+        - description: Whether the body content of posts is included.
+          in: query
+          name: fetchBodies
+          type: boolean
+        - description: Maximum number of posts to fetch.
+          in: query
+          name: maxResults
+          type: integer
+        - description: Continuation token if the request is paged.
+          in: query
+          name: pageToken
+          type: string
+        - description: 'Earliest post date to fetch, a date-time with RFC 3339 formatting.'
+          in: query
+          name: startDate
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PostList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/blogger'
+      tags:
+        - posts
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/blogs/{blogId}/posts/{postId}':
+    get:
+      description: Get a post by id.
+      operationId: blogger.posts.get
+      parameters:
+        - description: ID of the blog to fetch the post from.
+          in: path
+          name: blogId
+          required: true
+          type: string
+        - description: The ID of the post
+          in: path
+          name: postId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Post'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/blogger'
+      tags:
+        - posts
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/blogs/{blogId}/posts/{postId}/comments':
+    get:
+      description: 'Retrieves the comments for a blog, possibly filtered.'
+      operationId: blogger.comments.list
+      parameters:
+        - description: ID of the blog to fetch comments from.
+          in: path
+          name: blogId
+          required: true
+          type: string
+        - description: ID of the post to fetch posts from.
+          in: path
+          name: postId
+          required: true
+          type: string
+        - description: Whether the body content of the comments is included.
+          in: query
+          name: fetchBodies
+          type: boolean
+        - description: Maximum number of comments to include in the result.
+          in: query
+          name: maxResults
+          type: integer
+        - description: Continuation token if request is paged.
+          in: query
+          name: pageToken
+          type: string
+        - description: 'Earliest date of comment to fetch, a date-time with RFC 3339 formatting.'
+          in: query
+          name: startDate
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CommentList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/blogger'
+      tags:
+        - comments
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/blogs/{blogId}/posts/{postId}/comments/{commentId}':
+    get:
+      description: Gets one comment by id.
+      operationId: blogger.comments.get
+      parameters:
+        - description: ID of the blog to containing the comment.
+          in: path
+          name: blogId
+          required: true
+          type: string
+        - description: ID of the post to fetch posts from.
+          in: path
+          name: postId
+          required: true
+          type: string
+        - description: The ID of the comment to get.
+          in: path
+          name: commentId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Comment'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/blogger'
+      tags:
+        - comments
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/users/{userId}':
+    get:
+      description: Gets one user by id.
+      operationId: blogger.users.get
+      parameters:
+        - description: The ID of the user to get.
+          in: path
+          name: userId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/User'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/blogger'
+      tags:
+        - users
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/users/{userId}/blogs':
+    get:
+      description: 'Retrieves a list of blogs, possibly filtered.'
+      operationId: blogger.users.blogs.list
+      parameters:
+        - description: "ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier."
+          in: path
+          name: userId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BlogList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/blogger'
+      tags:
+        - users
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
 definitions:
   Blog:
     properties:
@@ -375,389 +761,3 @@ definitions:
         description: "The user's profile page."
         type: string
     type: object
-externalDocs:
-  url: 'https://developers.google.com/blogger/docs/2.0/json/getting_started'
-host: www.googleapis.com
-info:
-  contact:
-    name: Google
-    url: 'https://google.com'
-  description: API for access to the data within Blogger.
-  title: Blogger API
-  version: v2
-  x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
-  x-logo:
-    url: 'https://www.gstatic.com/images/icons/material/product/2x/blogger_64dp.png'
-  x-origin:
-    format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/blogger/v2/rest'
-    version: v1
-  x-preferred: false
-  x-providerName: googleapis.com
-  x-serviceName: blogger
-parameters:
-  alt:
-    default: json
-    description: Data format for the response.
-    enum:
-      - json
-    in: query
-    name: alt
-    type: string
-  fields:
-    description: Selector specifying which fields to include in a partial response.
-    in: query
-    name: fields
-    type: string
-  key:
-    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
-    in: query
-    name: key
-    type: string
-  oauth_token:
-    description: OAuth 2.0 token for the current user.
-    in: query
-    name: oauth_token
-    type: string
-  prettyPrint:
-    default: true
-    description: Returns response with indentations and line breaks.
-    in: query
-    name: prettyPrint
-    type: boolean
-  quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
-    in: query
-    name: quotaUser
-    type: string
-  userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
-    in: query
-    name: userIp
-    type: string
-paths:
-  '/blogs/{blogId}':
-    get:
-      description: Gets one blog by id.
-      operationId: blogger.blogs.get
-      parameters:
-        - description: The ID of the blog to get.
-          in: path
-          name: blogId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Blog'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger'
-      tags:
-        - blogs
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/blogs/{blogId}/pages':
-    get:
-      description: 'Retrieves pages for a blog, possibly filtered.'
-      operationId: blogger.pages.list
-      parameters:
-        - description: ID of the blog to fetch pages from.
-          in: path
-          name: blogId
-          required: true
-          type: string
-        - description: Whether to retrieve the Page bodies.
-          in: query
-          name: fetchBodies
-          type: boolean
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/PageList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger'
-      tags:
-        - pages
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/blogs/{blogId}/pages/{pageId}':
-    get:
-      description: Gets one blog page by id.
-      operationId: blogger.pages.get
-      parameters:
-        - description: ID of the blog containing the page.
-          in: path
-          name: blogId
-          required: true
-          type: string
-        - description: The ID of the page to get.
-          in: path
-          name: pageId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Page'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger'
-      tags:
-        - pages
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/blogs/{blogId}/posts':
-    get:
-      description: 'Retrieves a list of posts, possibly filtered.'
-      operationId: blogger.posts.list
-      parameters:
-        - description: ID of the blog to fetch posts from.
-          in: path
-          name: blogId
-          required: true
-          type: string
-        - description: Whether the body content of posts is included.
-          in: query
-          name: fetchBodies
-          type: boolean
-        - description: Maximum number of posts to fetch.
-          in: query
-          name: maxResults
-          type: integer
-        - description: Continuation token if the request is paged.
-          in: query
-          name: pageToken
-          type: string
-        - description: 'Earliest post date to fetch, a date-time with RFC 3339 formatting.'
-          in: query
-          name: startDate
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/PostList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger'
-      tags:
-        - posts
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/blogs/{blogId}/posts/{postId}':
-    get:
-      description: Get a post by id.
-      operationId: blogger.posts.get
-      parameters:
-        - description: ID of the blog to fetch the post from.
-          in: path
-          name: blogId
-          required: true
-          type: string
-        - description: The ID of the post
-          in: path
-          name: postId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Post'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger'
-      tags:
-        - posts
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/blogs/{blogId}/posts/{postId}/comments':
-    get:
-      description: 'Retrieves the comments for a blog, possibly filtered.'
-      operationId: blogger.comments.list
-      parameters:
-        - description: ID of the blog to fetch comments from.
-          in: path
-          name: blogId
-          required: true
-          type: string
-        - description: ID of the post to fetch posts from.
-          in: path
-          name: postId
-          required: true
-          type: string
-        - description: Whether the body content of the comments is included.
-          in: query
-          name: fetchBodies
-          type: boolean
-        - description: Maximum number of comments to include in the result.
-          in: query
-          name: maxResults
-          type: integer
-        - description: Continuation token if request is paged.
-          in: query
-          name: pageToken
-          type: string
-        - description: 'Earliest date of comment to fetch, a date-time with RFC 3339 formatting.'
-          in: query
-          name: startDate
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/CommentList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger'
-      tags:
-        - comments
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/blogs/{blogId}/posts/{postId}/comments/{commentId}':
-    get:
-      description: Gets one comment by id.
-      operationId: blogger.comments.get
-      parameters:
-        - description: ID of the blog to containing the comment.
-          in: path
-          name: blogId
-          required: true
-          type: string
-        - description: ID of the post to fetch posts from.
-          in: path
-          name: postId
-          required: true
-          type: string
-        - description: The ID of the comment to get.
-          in: path
-          name: commentId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Comment'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger'
-      tags:
-        - comments
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/users/{userId}':
-    get:
-      description: Gets one user by id.
-      operationId: blogger.users.get
-      parameters:
-        - description: The ID of the user to get.
-          in: path
-          name: userId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/User'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger'
-      tags:
-        - users
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/users/{userId}/blogs':
-    get:
-      description: 'Retrieves a list of blogs, possibly filtered.'
-      operationId: blogger.users.blogs.list
-      parameters:
-        - description: "ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier."
-          in: path
-          name: userId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/BlogList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/blogger'
-      tags:
-        - users
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/blogger': Manage your Blogger account
-    type: oauth2
-swagger: '2.0'

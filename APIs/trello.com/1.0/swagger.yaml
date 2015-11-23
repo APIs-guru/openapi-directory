@@ -1,1339 +1,9 @@
-basePath: /1
-definitions:
-  actions:
-    properties:
-      text:
-        description: a string with a length from 1 to 16384
-        type: string
-    type: object
-    xml:
-      name: action
-  actions_comments:
-    properties:
-      text:
-        description: a string with a length from 1 to 16384
-        type: string
-    type: object
-    xml:
-      name: card
-  actions_text:
-    properties:
-      value:
-        description: a string with a length from 1 to 16384
-        type: string
-    type: object
-    xml:
-      name: action
-  boards:
-    properties:
-      closed:
-        description: ' true or false'
-        type: string
-      desc:
-        description: a string with a length from 0 to 16384
-        type: string
-      idBoardSource:
-        description: The id of the board to copy into the new board
-        type: string
-      idOrganization:
-        description: The id or name of the organization to add the board to.
-        type: string
-      keepFromSource:
-        description: Components of the source board to copy.
-        type: string
-      labelNames/blue:
-        description: a string with a length from 0 to 16384
-        type: string
-      labelNames/green:
-        description: a string with a length from 0 to 16384
-        type: string
-      labelNames/orange:
-        description: a string with a length from 0 to 16384
-        type: string
-      labelNames/purple:
-        description: a string with a length from 0 to 16384
-        type: string
-      labelNames/red:
-        description: a string with a length from 0 to 16384
-        type: string
-      labelNames/yellow:
-        description: a string with a length from 0 to 16384
-        type: string
-      name:
-        description: a string with a length from 1 to 16384
-        type: string
-      powerUps:
-        description: 'all or a comma-separated list of: calendar, cardAging, recap or voting'
-        type: string
-      prefs/background:
-        description: 'A standard background name, or the id of a custom background'
-        type: string
-      prefs/calendarFeedEnabled:
-        description: ' true or false'
-        type: string
-      prefs/cardAging:
-        description: 'One of: pirate or regular'
-        type: string
-      prefs/cardCovers:
-        description: ' true or false'
-        type: string
-      prefs/comments:
-        description: 'One of: disabled, members, observers, org or public'
-        type: string
-      prefs/invitations:
-        description: 'One of: admins or members'
-        type: string
-      prefs/permissionLevel:
-        description: 'One of: org, private or public'
-        type: string
-      prefs/selfJoin:
-        description: ' true or false'
-        type: string
-      prefs/voting:
-        description: 'One of: disabled, members, observers, org or public'
-        type: string
-      prefs_background:
-        description: a string with a length from 0 to 16384
-        type: string
-      prefs_cardAging:
-        description: 'One of: pirate or regular'
-        type: string
-      prefs_cardCovers:
-        description: ' true or false'
-        type: string
-      prefs_comments:
-        description: 'One of: disabled, members, observers, org or public'
-        type: string
-      prefs_invitations:
-        description: 'One of: admins or members'
-        type: string
-      prefs_permissionLevel:
-        description: 'One of: org, private or public'
-        type: string
-      prefs_selfJoin:
-        description: ' true or false'
-        type: string
-      prefs_voting:
-        description: 'One of: disabled, members, observers, org or public'
-        type: string
-      subscribed:
-        description: ' true or false'
-        type: string
-    type: object
-    xml:
-      name: board
-  boards_checklists:
-    properties:
-      name:
-        description: a string with a length from 1 to 16384
-        type: string
-    type: object
-    xml:
-      name: board
-  boards_closed:
-    properties:
-      value:
-        description: ' true or false'
-        type: string
-    type: object
-    xml:
-      name: board
-  boards_desc:
-    properties:
-      value:
-        description: a string with a length from 0 to 16384
-        type: string
-    type: object
-    xml:
-      name: board
-  boards_idOrganization:
-    properties:
-      value:
-        description: a string with a length from 0 to 16384
-        type: string
-    type: object
-    xml:
-      name: board
-  boards_labels:
-    properties:
-      color:
-        description: A valid label color or null
-        type: string
-      name:
-        description: a string with a length from 0 to 16384
-        type: string
-    type: object
-    xml:
-      name: board
-  boards_lists:
-    properties:
-      name:
-        description: a string with a length from 1 to 16384
-        type: string
-      pos:
-        description: 'A position. top , bottom , or a positive number.'
-        type: string
-    type: object
-    xml:
-      name: board
-  boards_members:
-    properties:
-      email:
-        description: An email address
-        type: string
-      fullName:
-        description: A string with a length of at least 1.  Cannot begin or end with a space.
-        type: string
-      type:
-        description: 'One of: admin, normal or observer'
-        type: string
-    type: object
-    xml:
-      name: board
-  boards_memberships:
-    properties:
-      member_fields:
-        description: 'all or a comma-separated list of: avatarHash, bio, bioData, confirmed, fullName, idPremOrgsAdmin, initials, memberType, products, status, url or username'
-        type: string
-      type:
-        description: 'One of: admin, normal or observer'
-        type: string
-    type: object
-    xml:
-      name: board
-  boards_name:
-    properties:
-      value:
-        description: a string with a length from 1 to 16384
-        type: string
-    type: object
-    xml:
-      name: board
-  boards_powerUps:
-    properties:
-      value:
-        description: 'One of: calendar, cardAging, recap or voting'
-        type: string
-    type: object
-    xml:
-      name: board
-  boards_subscribed:
-    properties:
-      value:
-        description: ' true or false'
-        type: string
-    type: object
-    xml:
-      name: board
-  cards:
-    properties:
-      closed:
-        description: ' true or false'
-        type: string
-      desc:
-        description: a string with a length from 0 to 16384
-        type: string
-      due:
-        description: 'A date, or null'
-        type: string
-      fileSource:
-        description: A file
-        type: string
-      idAttachmentCover:
-        description: 'Id of the image attachment of this card to use as its cover, or null for no cover'
-        type: string
-      idBoard:
-        description: id of the board the card should be moved to
-        type: string
-      idCardSource:
-        description: The id of the card to copy into a new card.
-        type: string
-      idLabels:
-        description: 'A comma-separated list of objectIds, 24-character hex strings'
-        type: string
-      idList:
-        description: id of the list that the card should be added to
-        type: string
-      idMembers:
-        description: 'A comma-separated list of objectIds, 24-character hex strings'
-        type: string
-      keepFromSource:
-        description: Properties of the card to copy over from the source.
-        type: string
-      labels:
-        description: 'all or a comma-separated list of: blue, green, orange, purple, red or yellow'
-        type: string
-      name:
-        description: 'The name of the new card.  It isn&#39;t required if the name is being copied from provided by a URL, file or card that is being copied.'
-        type: string
-      pos:
-        description: 'A position. top , bottom , or a positive number.'
-        type: string
-      subscribed:
-        description: ' true or false'
-        type: string
-      urlSource:
-        description: 'A URL starting with http:// or https:// or null'
-        type: string
-    type: object
-    xml:
-      name: card
-  cards_actions_comments:
-    properties:
-      text:
-        description: a string with a length from 1 to 16384
-        type: string
-    type: object
-    xml:
-      name: card
-  cards_attachments:
-    properties:
-      file:
-        description: A file
-        type: string
-      mimeType:
-        description: a string with a length from 0 to 256
-        type: string
-      name:
-        description: a string with a length from 0 to 256
-        type: string
-      url:
-        description: 'A URL starting with http:// or https:// or null'
-        type: string
-    type: object
-    xml:
-      name: card
-  cards_checklist_checkItem:
-    properties:
-      name:
-        description: a string with a length from 1 to 16384
-        type: string
-      pos:
-        description: 'A position. top , bottom , or a positive number.'
-        type: string
-    type: object
-    xml:
-      name: card
-  cards_checklist_checkItem_name:
-    properties:
-      value:
-        description: a string with a length from 1 to 16384
-        type: string
-    type: object
-    xml:
-      name: card
-  cards_checklist_checkItem_pos:
-    properties:
-      value:
-        description: 'A position. top , bottom , or a positive number.'
-        type: string
-    type: object
-    xml:
-      name: card
-  cards_checklist_checkItem_state:
-    properties:
-      value:
-        description: 'One of: complete, false, incomplete or true'
-        type: string
-    type: object
-    xml:
-      name: card
-  cards_checklist_idChecklistCurrent_checkItem:
-    properties:
-      idChecklist:
-        description: 'An id, or null'
-        type: string
-      name:
-        description: a string with a length from 1 to 16384
-        type: string
-      pos:
-        description: 'A position. top , bottom , or a positive number.'
-        type: string
-      state:
-        description: 'One of: complete, false, incomplete or true'
-        type: string
-    type: object
-    xml:
-      name: card
-  cards_checklists:
-    properties:
-      idChecklistSource:
-        description: The id of the source checklist to copy into a new checklist.
-        type: string
-      name:
-        description: a string with a length from 0 to 16384
-        type: string
-      value:
-        description: 'The id of the checklist to add to the card, or null to create a new one.'
-        type: string
-    type: object
-    xml:
-      name: card
-  cards_closed:
-    properties:
-      value:
-        description: ' true or false'
-        type: string
-    type: object
-    xml:
-      name: card
-  cards_desc:
-    properties:
-      value:
-        description: a string with a length from 0 to 16384
-        type: string
-    type: object
-    xml:
-      name: card
-  cards_due:
-    properties:
-      value:
-        description: 'A date, or null'
-        type: string
-    type: object
-    xml:
-      name: card
-  cards_idAttachmentCover:
-    properties:
-      value:
-        description: 'Id of the image attachment of this card to use as its cover, or null for no cover'
-        type: string
-    type: object
-    xml:
-      name: card
-  cards_idBoard:
-    properties:
-      idList:
-        description: id of the list that the card should be moved to on the new board
-        type: string
-      value:
-        description: id of the board the card should be moved to
-        type: string
-    type: object
-    xml:
-      name: card
-  cards_idLabels:
-    properties:
-      value:
-        description: The id of the label to add
-        type: string
-    type: object
-    xml:
-      name: card
-  cards_idList:
-    properties:
-      value:
-        description: id of the list the card should be moved to
-        type: string
-    type: object
-    xml:
-      name: card
-  cards_idMembers:
-    properties:
-      value:
-        description: The id of the member to add to the card
-        type: string
-    type: object
-    xml:
-      name: card
-  cards_labels:
-    properties:
-      color:
-        description: A valid label color or null
-        type: string
-      name:
-        description: a string with a length from 0 to 16384
-        type: string
-      value:
-        description: 'all or a comma-separated list of: blue, green, orange, purple, red or yellow'
-        type: string
-    type: object
-    xml:
-      name: card
-  cards_membersVoted:
-    properties:
-      value:
-        description: 'The id of the member to vote &#39;yes&#39; on the card'
-        type: string
-    type: object
-    xml:
-      name: card
-  cards_name:
-    properties:
-      value:
-        description: a string with a length from 1 to 16384
-        type: string
-    type: object
-    xml:
-      name: card
-  cards_pos:
-    properties:
-      value:
-        description: 'A position. top , bottom , or a positive number.'
-        type: string
-    type: object
-    xml:
-      name: card
-  cards_stickers:
-    properties:
-      image:
-        description: a string with a length from 0 to 16384
-        type: string
-      left:
-        description: undefined
-        type: string
-      rotate:
-        description: undefined
-        type: string
-      top:
-        description: undefined
-        type: string
-      zIndex:
-        description: 'Valid Z values for stickers, must be an integer'
-        type: string
-    type: object
-    xml:
-      name: card
-  cards_subscribed:
-    properties:
-      value:
-        description: ' true or false'
-        type: string
-    type: object
-    xml:
-      name: card
-  checklists:
-    properties:
-      idBoard:
-        description: id of the board that the checklist should be added to
-        type: string
-      idCard:
-        description: id of the card that the checklist should be added to
-        type: string
-      idChecklistSource:
-        description: The id of the source checklist to copy into a new checklist.
-        type: string
-      name:
-        description: a string with a length from 0 to 16384
-        type: string
-      pos:
-        description: 'A position. top , bottom , or a positive number.'
-        type: string
-    type: object
-    xml:
-      name: checklist
-  checklists_checkItems:
-    properties:
-      checked:
-        description: ' true or false'
-        type: string
-      name:
-        description: a string with a length from 1 to 16384
-        type: string
-      pos:
-        description: 'A position. top , bottom , or a positive number.'
-        type: string
-    type: object
-    xml:
-      name: checklist
-  checklists_idCard:
-    properties:
-      value:
-        description: The id of the card that the checklist is on
-        type: string
-    type: object
-    xml:
-      name: checklist
-  checklists_name:
-    properties:
-      value:
-        description: a string with a length from 1 to 16384
-        type: string
-    type: object
-    xml:
-      name: checklist
-  checklists_pos:
-    properties:
-      value:
-        description: 'A position. top , bottom , or a positive number.'
-        type: string
-    type: object
-    xml:
-      name: checklist
-  labelNames_blue:
-    properties:
-      value:
-        description: a string with a length from 0 to 16384
-        type: string
-    type: object
-    xml:
-      name: board
-  labelNames_green:
-    properties:
-      value:
-        description: a string with a length from 0 to 16384
-        type: string
-    type: object
-    xml:
-      name: board
-  labelNames_orange:
-    properties:
-      value:
-        description: a string with a length from 0 to 16384
-        type: string
-    type: object
-    xml:
-      name: board
-  labelNames_purple:
-    properties:
-      value:
-        description: a string with a length from 0 to 16384
-        type: string
-    type: object
-    xml:
-      name: board
-  labelNames_red:
-    properties:
-      value:
-        description: a string with a length from 0 to 16384
-        type: string
-    type: object
-    xml:
-      name: board
-  labelNames_yellow:
-    properties:
-      value:
-        description: a string with a length from 0 to 16384
-        type: string
-    type: object
-    xml:
-      name: board
-  labels:
-    properties:
-      color:
-        description: A valid label color or null
-        type: string
-      idBoard:
-        description: An id
-        type: string
-      name:
-        description: a string with a length from 0 to 16384
-        type: string
-    type: object
-    xml:
-      name: label
-  labels_color:
-    properties:
-      value:
-        description: A valid label color or null
-        type: string
-    type: object
-    xml:
-      name: label
-  labels_name:
-    properties:
-      value:
-        description: a string with a length from 0 to 16384
-        type: string
-    type: object
-    xml:
-      name: label
-  lists:
-    properties:
-      closed:
-        description: ' true or false'
-        type: string
-      idBoard:
-        description: id of the board that the list should be added to
-        type: string
-      idListSource:
-        description: The id of the list to copy into a new list.
-        type: string
-      name:
-        description: a string with a length from 1 to 16384
-        type: string
-      pos:
-        description: 'A position. top , bottom , or a positive number.'
-        type: string
-      subscribed:
-        description: ' true or false'
-        type: string
-    type: object
-    xml:
-      name: list
-  lists_cards:
-    properties:
-      desc:
-        description: a string with a length from 0 to 16384
-        type: string
-      due:
-        description: 'A date, or null'
-        type: string
-      idMembers:
-        description: 'A comma-separated list of objectIds, 24-character hex strings'
-        type: string
-      labels:
-        description: 'all or a comma-separated list of: blue, green, orange, purple, red or yellow'
-        type: string
-      name:
-        description: a string with a length from 1 to 16384
-        type: string
-    type: object
-    xml:
-      name: list
-  lists_closed:
-    properties:
-      value:
-        description: ' true or false'
-        type: string
-    type: object
-    xml:
-      name: list
-  lists_idBoard:
-    properties:
-      pos:
-        description: position of the list on the new board
-        type: string
-      value:
-        description: id of the board the list should be moved to
-        type: string
-    type: object
-    xml:
-      name: list
-  lists_moveAllCards:
-    properties:
-      idBoard:
-        description: id of the board that the cards should be moved to
-        type: string
-    type: object
-    xml:
-      name: list
-  lists_name:
-    properties:
-      value:
-        description: a string with a length from 1 to 16384
-        type: string
-    type: object
-    xml:
-      name: list
-  lists_pos:
-    properties:
-      value:
-        description: 'A position. top , bottom , or a positive number.'
-        type: string
-    type: object
-    xml:
-      name: list
-  lists_subscribed:
-    properties:
-      value:
-        description: ' true or false'
-        type: string
-    type: object
-    xml:
-      name: list
-  members:
-    properties:
-      avatarSource:
-        description: 'One of: gravatar, none or upload'
-        type: string
-      bio:
-        description: a string with a length from 0 to 16384
-        type: string
-      fullName:
-        description: A string with a length of at least 1.  Cannot begin or end with a space.
-        type: string
-      initials:
-        description: A string with a length from 1 to 4.  Cannot begin or end with a space
-        type: string
-      prefs/colorBlind:
-        description: ' true or false'
-        type: string
-      prefs/locale:
-        description: a string with a length from 0 to 255
-        type: string
-      prefs/minutesBetweenSummaries:
-        description: '-1 (disabled), 1 or 60'
-        type: string
-      username:
-        description: 'A string with a length of at least 3.  Only lowercase letters, underscores, and numbers are allowed.  Must be unique.'
-        type: string
-    type: object
-    xml:
-      name: member
-  members_avatar:
-    properties:
-      file:
-        description: A file
-        type: string
-    type: object
-    xml:
-      name: member
-  members_avatarSource:
-    properties:
-      value:
-        description: 'One of: gravatar, none or upload'
-        type: string
-    type: object
-    xml:
-      name: member
-  members_bio:
-    properties:
-      value:
-        description: a string with a length from 0 to 16384
-        type: string
-    type: object
-    xml:
-      name: member
-  members_boardBackgrounds:
-    properties:
-      brightness:
-        description: 'One of: dark, light or unknown'
-        type: string
-      file:
-        description: A file
-        type: string
-      tile:
-        description: ' true or false'
-        type: string
-    type: object
-    xml:
-      name: member
-  members_boardStars:
-    properties:
-      idBoard:
-        description: The id of the board to star
-        type: string
-      pos:
-        description: 'A position. top , bottom , or a positive number.'
-        type: string
-    type: object
-    xml:
-      name: member
-  members_boardStars_idBoard:
-    properties:
-      value:
-        description: An id
-        type: string
-    type: object
-    xml:
-      name: member
-  members_boardStars_pos:
-    properties:
-      value:
-        description: 'A position. top , bottom , or a positive number.'
-        type: string
-    type: object
-    xml:
-      name: member
-  members_customBoardBackgrounds:
-    properties:
-      brightness:
-        description: 'One of: dark, light or unknown'
-        type: string
-      file:
-        description: A file
-        type: string
-      tile:
-        description: ' true or false'
-        type: string
-    type: object
-    xml:
-      name: member
-  members_customEmoji:
-    properties:
-      file:
-        description: A file
-        type: string
-      name:
-        description: a string with a length from 2 to 64
-        type: string
-    type: object
-    xml:
-      name: member
-  members_customStickers:
-    properties:
-      file:
-        description: A file
-        type: string
-    type: object
-    xml:
-      name: member
-  members_fullName:
-    properties:
-      value:
-        description: A string with a length of at least 1.  Cannot begin or end with a space.
-        type: string
-    type: object
-    xml:
-      name: member
-  members_initials:
-    properties:
-      value:
-        description: A string with a length from 1 to 4.  Cannot begin or end with a space
-        type: string
-    type: object
-    xml:
-      name: member
-  members_oneTimeMessagesDismissed:
-    properties:
-      value:
-        description: Type of message dismissed
-        type: string
-    type: object
-    xml:
-      name: member
-  members_savedSearches:
-    properties:
-      name:
-        description: A non-empty string with at least one non-space character
-        type: string
-      pos:
-        description: 'A position. top , bottom , or a positive number.'
-        type: string
-      query:
-        description: a string with a length from 1 to 16384
-        type: string
-    type: object
-    xml:
-      name: member
-  members_savedSearches_name:
-    properties:
-      value:
-        description: A non-empty string with at least one non-space character
-        type: string
-    type: object
-    xml:
-      name: member
-  members_savedSearches_pos:
-    properties:
-      value:
-        description: 'A position. top , bottom , or a positive number.'
-        type: string
-    type: object
-    xml:
-      name: member
-  members_savedSearches_query:
-    properties:
-      value:
-        description: a string with a length from 1 to 16384
-        type: string
-    type: object
-    xml:
-      name: member
-  members_username:
-    properties:
-      value:
-        description: 'A string with a length of at least 3.  Only lowercase letters, underscores, and numbers are allowed.  Must be unique.'
-        type: string
-    type: object
-    xml:
-      name: member
-  myPrefs_emailPosition:
-    properties:
-      value:
-        description: 'One of: bottom or top'
-        type: string
-    type: object
-    xml:
-      name: board
-  myPrefs_idEmailList:
-    properties:
-      value:
-        description: An id
-        type: string
-    type: object
-    xml:
-      name: board
-  myPrefs_showListGuide:
-    properties:
-      value:
-        description: ' true or false'
-        type: string
-    type: object
-    xml:
-      name: board
-  myPrefs_showSidebar:
-    properties:
-      value:
-        description: ' true or false'
-        type: string
-    type: object
-    xml:
-      name: board
-  myPrefs_showSidebarActivity:
-    properties:
-      value:
-        description: ' true or false'
-        type: string
-    type: object
-    xml:
-      name: board
-  myPrefs_showSidebarBoardActions:
-    properties:
-      value:
-        description: ' true or false'
-        type: string
-    type: object
-    xml:
-      name: board
-  myPrefs_showSidebarMembers:
-    properties:
-      value:
-        description: ' true or false'
-        type: string
-    type: object
-    xml:
-      name: board
-  notifications:
-    properties:
-      unread:
-        description: ' true or false'
-        type: string
-    type: object
-    xml:
-      name: notification
-  notifications_unread:
-    properties:
-      value:
-        description: ' true or false'
-        type: string
-    type: object
-    xml:
-      name: notification
-  organizations:
-    properties:
-      desc:
-        description: a string with a length from 0 to 16384
-        type: string
-      displayName:
-        description: A string with a length of at least 1.  Cannot begin or end with a space.
-        type: string
-      name:
-        description: a string with a length from 0 to 16384
-        type: string
-      prefs/associatedDomain:
-        description: The google apps domain to link this org to.
-        type: string
-      prefs/boardVisibilityRestrict/org:
-        description: 'One of: admin, none or org'
-        type: string
-      prefs/boardVisibilityRestrict/private:
-        description: 'One of: admin, none or org'
-        type: string
-      prefs/boardVisibilityRestrict/public:
-        description: 'One of: admin, none or org'
-        type: string
-      prefs/externalMembersDisabled:
-        description: ' true or false'
-        type: string
-      prefs/googleAppsVersion:
-        description: a number from 1 to 2
-        type: string
-      prefs/orgInviteRestrict:
-        description: An email address with optional expansion tokens
-        type: string
-      prefs/permissionLevel:
-        description: 'One of: private or public'
-        type: string
-      website:
-        description: 'A URL starting with http:// or https:// or null'
-        type: string
-    type: object
-    xml:
-      name: organization
-  organizations_desc:
-    properties:
-      value:
-        description: a string with a length from 0 to 16384
-        type: string
-    type: object
-    xml:
-      name: organization
-  organizations_displayName:
-    properties:
-      value:
-        description: A string with a length of at least 1.  Cannot begin or end with a space.
-        type: string
-    type: object
-    xml:
-      name: organization
-  organizations_logo:
-    properties:
-      file:
-        description: A file
-        type: string
-    type: object
-    xml:
-      name: organization
-  organizations_members:
-    properties:
-      email:
-        description: An email address
-        type: string
-      fullName:
-        description: A string with a length of at least 1.  Cannot begin or end with a space.
-        type: string
-      type:
-        description: 'One of: admin, normal or observer'
-        type: string
-    type: object
-    xml:
-      name: organization
-  organizations_members_deactivated:
-    properties:
-      value:
-        description: ' true or false'
-        type: string
-    type: object
-    xml:
-      name: organization
-  organizations_memberships:
-    properties:
-      member_fields:
-        description: 'all or a comma-separated list of: avatarHash, bio, bioData, confirmed, fullName, idPremOrgsAdmin, initials, memberType, products, status, url or username'
-        type: string
-      type:
-        description: 'One of: admin, normal or observer'
-        type: string
-    type: object
-    xml:
-      name: organization
-  organizations_name:
-    properties:
-      value:
-        description: 'A string with a length of at least 3.  Only lowercase letters, underscores, and numbers are allowed.  Must be unique.'
-        type: string
-    type: object
-    xml:
-      name: organization
-  organizations_website:
-    properties:
-      value:
-        description: 'A URL starting with http:// or https:// or null'
-        type: string
-    type: object
-    xml:
-      name: organization
-  prefs_associatedDomain:
-    properties:
-      value:
-        description: The google apps domain to link this org to.
-        type: string
-    type: object
-    xml:
-      name: organization
-  prefs_background:
-    properties:
-      value:
-        description: 'A standard background name, or the id of a custom background'
-        type: string
-    type: object
-    xml:
-      name: board
-  prefs_boardVisibilityRestrict:
-    properties:
-      value:
-        description: 'One of: admin, none or org'
-        type: string
-    type: object
-    xml:
-      name: organization
-  prefs_calendarFeedEnabled:
-    properties:
-      value:
-        description: ' true or false'
-        type: string
-    type: object
-    xml:
-      name: board
-  prefs_cardAging:
-    properties:
-      value:
-        description: 'One of: pirate or regular'
-        type: string
-    type: object
-    xml:
-      name: board
-  prefs_cardCovers:
-    properties:
-      value:
-        description: ' true or false'
-        type: string
-    type: object
-    xml:
-      name: board
-  prefs_colorBlind:
-    properties:
-      value:
-        description: ' true or false'
-        type: string
-    type: object
-    xml:
-      name: member
-  prefs_comments:
-    properties:
-      value:
-        description: 'One of: disabled, members, observers, org or public'
-        type: string
-    type: object
-    xml:
-      name: board
-  prefs_externalMembersDisabled:
-    properties:
-      value:
-        description: ' true or false'
-        type: string
-    type: object
-    xml:
-      name: organization
-  prefs_googleAppsVersion:
-    properties:
-      value:
-        description: a number from 1 to 2
-        type: string
-    type: object
-    xml:
-      name: organization
-  prefs_invitations:
-    properties:
-      value:
-        description: 'One of: admins or members'
-        type: string
-    type: object
-    xml:
-      name: board
-  prefs_locale:
-    properties:
-      value:
-        description: a string with a length from 0 to 255
-        type: string
-    type: object
-    xml:
-      name: member
-  prefs_minutesBetweenSummaries:
-    properties:
-      value:
-        description: '-1 (disabled), 1 or 60'
-        type: string
-    type: object
-    xml:
-      name: member
-  prefs_orgInviteRestrict:
-    properties:
-      value:
-        description: An email address with optional expansion tokens
-        type: string
-    type: object
-    xml:
-      name: organization
-  prefs_permissionLevel:
-    properties:
-      value:
-        description: 'One of: private or public'
-        type: string
-    type: object
-    xml:
-      name: board
-  prefs_selfJoin:
-    properties:
-      value:
-        description: ' true or false'
-        type: string
-    type: object
-    xml:
-      name: board
-  prefs_voting:
-    properties:
-      value:
-        description: 'One of: disabled, members, observers, org or public'
-        type: string
-    type: object
-    xml:
-      name: board
-  sessions:
-    properties:
-      idBoard:
-        description: 'The id of the board you&#39;re viewing.  Boards with no viewers will not get updates about members&#39; statuses.'
-        type: string
-      status:
-        description: 'One of: active, disconnected or idle'
-        type: string
-    type: object
-    xml:
-      name: session
-  sessions_status:
-    properties:
-      value:
-        description: 'One of: active, disconnected or idle'
-        type: string
-    type: object
-    xml:
-      name: session
-  tokens_webhooks:
-    properties:
-      callbackURL:
-        description: A valid URL that is reachable with a HEAD request
-        type: string
-      description:
-        description: a string with a length from 0 to 16384
-        type: string
-      idModel:
-        description: id of the model to be monitored
-        type: string
-    type: object
-    xml:
-      name: token
-  webhooks:
-    properties:
-      active:
-        description: ' true or false'
-        type: string
-      callbackURL:
-        description: A valid URL that is reachable with a HEAD request
-        type: string
-      description:
-        description: a string with a length from 0 to 16384
-        type: string
-      idModel:
-        description: id of the model that should be hooked
-        type: string
-    type: object
-    xml:
-      name: webhook
-  webhooks_active:
-    properties:
-      value:
-        description: ' true or false'
-        type: string
-    type: object
-    xml:
-      name: webhook
-  webhooks_callbackURL:
-    properties:
-      value:
-        description: A valid URL that is reachable with a HEAD request
-        type: string
-    type: object
-    xml:
-      name: webhook
-  webhooks_description:
-    properties:
-      value:
-        description: a string with a length from 0 to 16384
-        type: string
-    type: object
-    xml:
-      name: webhook
-  webhooks_idModel:
-    properties:
-      value:
-        description: id of the model to be monitored
-        type: string
-    type: object
-    xml:
-      name: webhook
+swagger: '2.0'
+schemes:
+  - https
 host: trello.com
+basePath: /1
+x-hasEquivalentPaths: true
 info:
   contact:
     name: Trello
@@ -1360,6 +30,49 @@ info:
     version: '2.0'
   x-providerName: trello.com
   x-unofficialSpec: true
+securityDefinitions:
+  api_key:
+    in: header
+    name: api_key
+    type: apiKey
+  trello_auth:
+    authorizationUrl: "https:\\/\\/trello.com\\/1\\/appKey\\/generate"
+    flow: implicit
+    scopes:
+      'read:boards': read any of the boards in your account
+      'write:boards': modify any of the boards in your account
+    type: oauth2
+tags:
+  - description: 'https://trello.com/docs/api/action/index.html'
+    name: action
+  - description: 'https://trello.com/docs/api/batch/index.html'
+    name: batch
+  - description: 'https://trello.com/docs/api/board/index.html'
+    name: board
+  - description: 'https://trello.com/docs/api/card/index.html'
+    name: card
+  - description: 'https://trello.com/docs/api/checklist/index.html'
+    name: checklist
+  - description: 'https://trello.com/docs/api/label/index.html'
+    name: label
+  - description: 'https://trello.com/docs/api/list/index.html'
+    name: list
+  - description: 'https://trello.com/docs/api/member/index.html'
+    name: member
+  - description: 'https://trello.com/docs/api/notification/index.html'
+    name: notification
+  - description: 'https://trello.com/docs/api/organization/index.html'
+    name: organization
+  - description: 'https://trello.com/docs/api/search/index.html'
+    name: search
+  - description: 'https://trello.com/docs/api/session/index.html'
+    name: session
+  - description: 'https://trello.com/docs/api/token/index.html'
+    name: token
+  - description: 'https://trello.com/docs/api/type/index.html'
+    name: type
+  - description: 'https://trello.com/docs/api/webhook/index.html'
+    name: webhook
 paths:
   '/actions/{idAction}':
     delete:
@@ -16319,50 +15032,1337 @@ paths:
       summary: getWebhooksByIdWebhookByField()
       tags:
         - webhook
-schemes:
-  - https
-securityDefinitions:
-  api_key:
-    in: header
-    name: api_key
-    type: apiKey
-  trello_auth:
-    authorizationUrl: "https:\\/\\/trello.com\\/1\\/appKey\\/generate"
-    flow: implicit
-    scopes:
-      'read:boards': read any of the boards in your account
-      'write:boards': modify any of the boards in your account
-    type: oauth2
-swagger: '2.0'
-tags:
-  - description: 'https://trello.com/docs/api/action/index.html'
-    name: action
-  - description: 'https://trello.com/docs/api/batch/index.html'
-    name: batch
-  - description: 'https://trello.com/docs/api/board/index.html'
-    name: board
-  - description: 'https://trello.com/docs/api/card/index.html'
-    name: card
-  - description: 'https://trello.com/docs/api/checklist/index.html'
-    name: checklist
-  - description: 'https://trello.com/docs/api/label/index.html'
-    name: label
-  - description: 'https://trello.com/docs/api/list/index.html'
-    name: list
-  - description: 'https://trello.com/docs/api/member/index.html'
-    name: member
-  - description: 'https://trello.com/docs/api/notification/index.html'
-    name: notification
-  - description: 'https://trello.com/docs/api/organization/index.html'
-    name: organization
-  - description: 'https://trello.com/docs/api/search/index.html'
-    name: search
-  - description: 'https://trello.com/docs/api/session/index.html'
-    name: session
-  - description: 'https://trello.com/docs/api/token/index.html'
-    name: token
-  - description: 'https://trello.com/docs/api/type/index.html'
-    name: type
-  - description: 'https://trello.com/docs/api/webhook/index.html'
-    name: webhook
-x-hasEquivalentPaths: true
+definitions:
+  actions:
+    properties:
+      text:
+        description: a string with a length from 1 to 16384
+        type: string
+    type: object
+    xml:
+      name: action
+  actions_comments:
+    properties:
+      text:
+        description: a string with a length from 1 to 16384
+        type: string
+    type: object
+    xml:
+      name: card
+  actions_text:
+    properties:
+      value:
+        description: a string with a length from 1 to 16384
+        type: string
+    type: object
+    xml:
+      name: action
+  boards:
+    properties:
+      closed:
+        description: ' true or false'
+        type: string
+      desc:
+        description: a string with a length from 0 to 16384
+        type: string
+      idBoardSource:
+        description: The id of the board to copy into the new board
+        type: string
+      idOrganization:
+        description: The id or name of the organization to add the board to.
+        type: string
+      keepFromSource:
+        description: Components of the source board to copy.
+        type: string
+      labelNames/blue:
+        description: a string with a length from 0 to 16384
+        type: string
+      labelNames/green:
+        description: a string with a length from 0 to 16384
+        type: string
+      labelNames/orange:
+        description: a string with a length from 0 to 16384
+        type: string
+      labelNames/purple:
+        description: a string with a length from 0 to 16384
+        type: string
+      labelNames/red:
+        description: a string with a length from 0 to 16384
+        type: string
+      labelNames/yellow:
+        description: a string with a length from 0 to 16384
+        type: string
+      name:
+        description: a string with a length from 1 to 16384
+        type: string
+      powerUps:
+        description: 'all or a comma-separated list of: calendar, cardAging, recap or voting'
+        type: string
+      prefs/background:
+        description: 'A standard background name, or the id of a custom background'
+        type: string
+      prefs/calendarFeedEnabled:
+        description: ' true or false'
+        type: string
+      prefs/cardAging:
+        description: 'One of: pirate or regular'
+        type: string
+      prefs/cardCovers:
+        description: ' true or false'
+        type: string
+      prefs/comments:
+        description: 'One of: disabled, members, observers, org or public'
+        type: string
+      prefs/invitations:
+        description: 'One of: admins or members'
+        type: string
+      prefs/permissionLevel:
+        description: 'One of: org, private or public'
+        type: string
+      prefs/selfJoin:
+        description: ' true or false'
+        type: string
+      prefs/voting:
+        description: 'One of: disabled, members, observers, org or public'
+        type: string
+      prefs_background:
+        description: a string with a length from 0 to 16384
+        type: string
+      prefs_cardAging:
+        description: 'One of: pirate or regular'
+        type: string
+      prefs_cardCovers:
+        description: ' true or false'
+        type: string
+      prefs_comments:
+        description: 'One of: disabled, members, observers, org or public'
+        type: string
+      prefs_invitations:
+        description: 'One of: admins or members'
+        type: string
+      prefs_permissionLevel:
+        description: 'One of: org, private or public'
+        type: string
+      prefs_selfJoin:
+        description: ' true or false'
+        type: string
+      prefs_voting:
+        description: 'One of: disabled, members, observers, org or public'
+        type: string
+      subscribed:
+        description: ' true or false'
+        type: string
+    type: object
+    xml:
+      name: board
+  boards_checklists:
+    properties:
+      name:
+        description: a string with a length from 1 to 16384
+        type: string
+    type: object
+    xml:
+      name: board
+  boards_closed:
+    properties:
+      value:
+        description: ' true or false'
+        type: string
+    type: object
+    xml:
+      name: board
+  boards_desc:
+    properties:
+      value:
+        description: a string with a length from 0 to 16384
+        type: string
+    type: object
+    xml:
+      name: board
+  boards_idOrganization:
+    properties:
+      value:
+        description: a string with a length from 0 to 16384
+        type: string
+    type: object
+    xml:
+      name: board
+  boards_labels:
+    properties:
+      color:
+        description: A valid label color or null
+        type: string
+      name:
+        description: a string with a length from 0 to 16384
+        type: string
+    type: object
+    xml:
+      name: board
+  boards_lists:
+    properties:
+      name:
+        description: a string with a length from 1 to 16384
+        type: string
+      pos:
+        description: 'A position. top , bottom , or a positive number.'
+        type: string
+    type: object
+    xml:
+      name: board
+  boards_members:
+    properties:
+      email:
+        description: An email address
+        type: string
+      fullName:
+        description: A string with a length of at least 1.  Cannot begin or end with a space.
+        type: string
+      type:
+        description: 'One of: admin, normal or observer'
+        type: string
+    type: object
+    xml:
+      name: board
+  boards_memberships:
+    properties:
+      member_fields:
+        description: 'all or a comma-separated list of: avatarHash, bio, bioData, confirmed, fullName, idPremOrgsAdmin, initials, memberType, products, status, url or username'
+        type: string
+      type:
+        description: 'One of: admin, normal or observer'
+        type: string
+    type: object
+    xml:
+      name: board
+  boards_name:
+    properties:
+      value:
+        description: a string with a length from 1 to 16384
+        type: string
+    type: object
+    xml:
+      name: board
+  boards_powerUps:
+    properties:
+      value:
+        description: 'One of: calendar, cardAging, recap or voting'
+        type: string
+    type: object
+    xml:
+      name: board
+  boards_subscribed:
+    properties:
+      value:
+        description: ' true or false'
+        type: string
+    type: object
+    xml:
+      name: board
+  cards:
+    properties:
+      closed:
+        description: ' true or false'
+        type: string
+      desc:
+        description: a string with a length from 0 to 16384
+        type: string
+      due:
+        description: 'A date, or null'
+        type: string
+      fileSource:
+        description: A file
+        type: string
+      idAttachmentCover:
+        description: 'Id of the image attachment of this card to use as its cover, or null for no cover'
+        type: string
+      idBoard:
+        description: id of the board the card should be moved to
+        type: string
+      idCardSource:
+        description: The id of the card to copy into a new card.
+        type: string
+      idLabels:
+        description: 'A comma-separated list of objectIds, 24-character hex strings'
+        type: string
+      idList:
+        description: id of the list that the card should be added to
+        type: string
+      idMembers:
+        description: 'A comma-separated list of objectIds, 24-character hex strings'
+        type: string
+      keepFromSource:
+        description: Properties of the card to copy over from the source.
+        type: string
+      labels:
+        description: 'all or a comma-separated list of: blue, green, orange, purple, red or yellow'
+        type: string
+      name:
+        description: 'The name of the new card.  It isn&#39;t required if the name is being copied from provided by a URL, file or card that is being copied.'
+        type: string
+      pos:
+        description: 'A position. top , bottom , or a positive number.'
+        type: string
+      subscribed:
+        description: ' true or false'
+        type: string
+      urlSource:
+        description: 'A URL starting with http:// or https:// or null'
+        type: string
+    type: object
+    xml:
+      name: card
+  cards_actions_comments:
+    properties:
+      text:
+        description: a string with a length from 1 to 16384
+        type: string
+    type: object
+    xml:
+      name: card
+  cards_attachments:
+    properties:
+      file:
+        description: A file
+        type: string
+      mimeType:
+        description: a string with a length from 0 to 256
+        type: string
+      name:
+        description: a string with a length from 0 to 256
+        type: string
+      url:
+        description: 'A URL starting with http:// or https:// or null'
+        type: string
+    type: object
+    xml:
+      name: card
+  cards_checklist_checkItem:
+    properties:
+      name:
+        description: a string with a length from 1 to 16384
+        type: string
+      pos:
+        description: 'A position. top , bottom , or a positive number.'
+        type: string
+    type: object
+    xml:
+      name: card
+  cards_checklist_checkItem_name:
+    properties:
+      value:
+        description: a string with a length from 1 to 16384
+        type: string
+    type: object
+    xml:
+      name: card
+  cards_checklist_checkItem_pos:
+    properties:
+      value:
+        description: 'A position. top , bottom , or a positive number.'
+        type: string
+    type: object
+    xml:
+      name: card
+  cards_checklist_checkItem_state:
+    properties:
+      value:
+        description: 'One of: complete, false, incomplete or true'
+        type: string
+    type: object
+    xml:
+      name: card
+  cards_checklist_idChecklistCurrent_checkItem:
+    properties:
+      idChecklist:
+        description: 'An id, or null'
+        type: string
+      name:
+        description: a string with a length from 1 to 16384
+        type: string
+      pos:
+        description: 'A position. top , bottom , or a positive number.'
+        type: string
+      state:
+        description: 'One of: complete, false, incomplete or true'
+        type: string
+    type: object
+    xml:
+      name: card
+  cards_checklists:
+    properties:
+      idChecklistSource:
+        description: The id of the source checklist to copy into a new checklist.
+        type: string
+      name:
+        description: a string with a length from 0 to 16384
+        type: string
+      value:
+        description: 'The id of the checklist to add to the card, or null to create a new one.'
+        type: string
+    type: object
+    xml:
+      name: card
+  cards_closed:
+    properties:
+      value:
+        description: ' true or false'
+        type: string
+    type: object
+    xml:
+      name: card
+  cards_desc:
+    properties:
+      value:
+        description: a string with a length from 0 to 16384
+        type: string
+    type: object
+    xml:
+      name: card
+  cards_due:
+    properties:
+      value:
+        description: 'A date, or null'
+        type: string
+    type: object
+    xml:
+      name: card
+  cards_idAttachmentCover:
+    properties:
+      value:
+        description: 'Id of the image attachment of this card to use as its cover, or null for no cover'
+        type: string
+    type: object
+    xml:
+      name: card
+  cards_idBoard:
+    properties:
+      idList:
+        description: id of the list that the card should be moved to on the new board
+        type: string
+      value:
+        description: id of the board the card should be moved to
+        type: string
+    type: object
+    xml:
+      name: card
+  cards_idLabels:
+    properties:
+      value:
+        description: The id of the label to add
+        type: string
+    type: object
+    xml:
+      name: card
+  cards_idList:
+    properties:
+      value:
+        description: id of the list the card should be moved to
+        type: string
+    type: object
+    xml:
+      name: card
+  cards_idMembers:
+    properties:
+      value:
+        description: The id of the member to add to the card
+        type: string
+    type: object
+    xml:
+      name: card
+  cards_labels:
+    properties:
+      color:
+        description: A valid label color or null
+        type: string
+      name:
+        description: a string with a length from 0 to 16384
+        type: string
+      value:
+        description: 'all or a comma-separated list of: blue, green, orange, purple, red or yellow'
+        type: string
+    type: object
+    xml:
+      name: card
+  cards_membersVoted:
+    properties:
+      value:
+        description: 'The id of the member to vote &#39;yes&#39; on the card'
+        type: string
+    type: object
+    xml:
+      name: card
+  cards_name:
+    properties:
+      value:
+        description: a string with a length from 1 to 16384
+        type: string
+    type: object
+    xml:
+      name: card
+  cards_pos:
+    properties:
+      value:
+        description: 'A position. top , bottom , or a positive number.'
+        type: string
+    type: object
+    xml:
+      name: card
+  cards_stickers:
+    properties:
+      image:
+        description: a string with a length from 0 to 16384
+        type: string
+      left:
+        description: undefined
+        type: string
+      rotate:
+        description: undefined
+        type: string
+      top:
+        description: undefined
+        type: string
+      zIndex:
+        description: 'Valid Z values for stickers, must be an integer'
+        type: string
+    type: object
+    xml:
+      name: card
+  cards_subscribed:
+    properties:
+      value:
+        description: ' true or false'
+        type: string
+    type: object
+    xml:
+      name: card
+  checklists:
+    properties:
+      idBoard:
+        description: id of the board that the checklist should be added to
+        type: string
+      idCard:
+        description: id of the card that the checklist should be added to
+        type: string
+      idChecklistSource:
+        description: The id of the source checklist to copy into a new checklist.
+        type: string
+      name:
+        description: a string with a length from 0 to 16384
+        type: string
+      pos:
+        description: 'A position. top , bottom , or a positive number.'
+        type: string
+    type: object
+    xml:
+      name: checklist
+  checklists_checkItems:
+    properties:
+      checked:
+        description: ' true or false'
+        type: string
+      name:
+        description: a string with a length from 1 to 16384
+        type: string
+      pos:
+        description: 'A position. top , bottom , or a positive number.'
+        type: string
+    type: object
+    xml:
+      name: checklist
+  checklists_idCard:
+    properties:
+      value:
+        description: The id of the card that the checklist is on
+        type: string
+    type: object
+    xml:
+      name: checklist
+  checklists_name:
+    properties:
+      value:
+        description: a string with a length from 1 to 16384
+        type: string
+    type: object
+    xml:
+      name: checklist
+  checklists_pos:
+    properties:
+      value:
+        description: 'A position. top , bottom , or a positive number.'
+        type: string
+    type: object
+    xml:
+      name: checklist
+  labelNames_blue:
+    properties:
+      value:
+        description: a string with a length from 0 to 16384
+        type: string
+    type: object
+    xml:
+      name: board
+  labelNames_green:
+    properties:
+      value:
+        description: a string with a length from 0 to 16384
+        type: string
+    type: object
+    xml:
+      name: board
+  labelNames_orange:
+    properties:
+      value:
+        description: a string with a length from 0 to 16384
+        type: string
+    type: object
+    xml:
+      name: board
+  labelNames_purple:
+    properties:
+      value:
+        description: a string with a length from 0 to 16384
+        type: string
+    type: object
+    xml:
+      name: board
+  labelNames_red:
+    properties:
+      value:
+        description: a string with a length from 0 to 16384
+        type: string
+    type: object
+    xml:
+      name: board
+  labelNames_yellow:
+    properties:
+      value:
+        description: a string with a length from 0 to 16384
+        type: string
+    type: object
+    xml:
+      name: board
+  labels:
+    properties:
+      color:
+        description: A valid label color or null
+        type: string
+      idBoard:
+        description: An id
+        type: string
+      name:
+        description: a string with a length from 0 to 16384
+        type: string
+    type: object
+    xml:
+      name: label
+  labels_color:
+    properties:
+      value:
+        description: A valid label color or null
+        type: string
+    type: object
+    xml:
+      name: label
+  labels_name:
+    properties:
+      value:
+        description: a string with a length from 0 to 16384
+        type: string
+    type: object
+    xml:
+      name: label
+  lists:
+    properties:
+      closed:
+        description: ' true or false'
+        type: string
+      idBoard:
+        description: id of the board that the list should be added to
+        type: string
+      idListSource:
+        description: The id of the list to copy into a new list.
+        type: string
+      name:
+        description: a string with a length from 1 to 16384
+        type: string
+      pos:
+        description: 'A position. top , bottom , or a positive number.'
+        type: string
+      subscribed:
+        description: ' true or false'
+        type: string
+    type: object
+    xml:
+      name: list
+  lists_cards:
+    properties:
+      desc:
+        description: a string with a length from 0 to 16384
+        type: string
+      due:
+        description: 'A date, or null'
+        type: string
+      idMembers:
+        description: 'A comma-separated list of objectIds, 24-character hex strings'
+        type: string
+      labels:
+        description: 'all or a comma-separated list of: blue, green, orange, purple, red or yellow'
+        type: string
+      name:
+        description: a string with a length from 1 to 16384
+        type: string
+    type: object
+    xml:
+      name: list
+  lists_closed:
+    properties:
+      value:
+        description: ' true or false'
+        type: string
+    type: object
+    xml:
+      name: list
+  lists_idBoard:
+    properties:
+      pos:
+        description: position of the list on the new board
+        type: string
+      value:
+        description: id of the board the list should be moved to
+        type: string
+    type: object
+    xml:
+      name: list
+  lists_moveAllCards:
+    properties:
+      idBoard:
+        description: id of the board that the cards should be moved to
+        type: string
+    type: object
+    xml:
+      name: list
+  lists_name:
+    properties:
+      value:
+        description: a string with a length from 1 to 16384
+        type: string
+    type: object
+    xml:
+      name: list
+  lists_pos:
+    properties:
+      value:
+        description: 'A position. top , bottom , or a positive number.'
+        type: string
+    type: object
+    xml:
+      name: list
+  lists_subscribed:
+    properties:
+      value:
+        description: ' true or false'
+        type: string
+    type: object
+    xml:
+      name: list
+  members:
+    properties:
+      avatarSource:
+        description: 'One of: gravatar, none or upload'
+        type: string
+      bio:
+        description: a string with a length from 0 to 16384
+        type: string
+      fullName:
+        description: A string with a length of at least 1.  Cannot begin or end with a space.
+        type: string
+      initials:
+        description: A string with a length from 1 to 4.  Cannot begin or end with a space
+        type: string
+      prefs/colorBlind:
+        description: ' true or false'
+        type: string
+      prefs/locale:
+        description: a string with a length from 0 to 255
+        type: string
+      prefs/minutesBetweenSummaries:
+        description: '-1 (disabled), 1 or 60'
+        type: string
+      username:
+        description: 'A string with a length of at least 3.  Only lowercase letters, underscores, and numbers are allowed.  Must be unique.'
+        type: string
+    type: object
+    xml:
+      name: member
+  members_avatar:
+    properties:
+      file:
+        description: A file
+        type: string
+    type: object
+    xml:
+      name: member
+  members_avatarSource:
+    properties:
+      value:
+        description: 'One of: gravatar, none or upload'
+        type: string
+    type: object
+    xml:
+      name: member
+  members_bio:
+    properties:
+      value:
+        description: a string with a length from 0 to 16384
+        type: string
+    type: object
+    xml:
+      name: member
+  members_boardBackgrounds:
+    properties:
+      brightness:
+        description: 'One of: dark, light or unknown'
+        type: string
+      file:
+        description: A file
+        type: string
+      tile:
+        description: ' true or false'
+        type: string
+    type: object
+    xml:
+      name: member
+  members_boardStars:
+    properties:
+      idBoard:
+        description: The id of the board to star
+        type: string
+      pos:
+        description: 'A position. top , bottom , or a positive number.'
+        type: string
+    type: object
+    xml:
+      name: member
+  members_boardStars_idBoard:
+    properties:
+      value:
+        description: An id
+        type: string
+    type: object
+    xml:
+      name: member
+  members_boardStars_pos:
+    properties:
+      value:
+        description: 'A position. top , bottom , or a positive number.'
+        type: string
+    type: object
+    xml:
+      name: member
+  members_customBoardBackgrounds:
+    properties:
+      brightness:
+        description: 'One of: dark, light or unknown'
+        type: string
+      file:
+        description: A file
+        type: string
+      tile:
+        description: ' true or false'
+        type: string
+    type: object
+    xml:
+      name: member
+  members_customEmoji:
+    properties:
+      file:
+        description: A file
+        type: string
+      name:
+        description: a string with a length from 2 to 64
+        type: string
+    type: object
+    xml:
+      name: member
+  members_customStickers:
+    properties:
+      file:
+        description: A file
+        type: string
+    type: object
+    xml:
+      name: member
+  members_fullName:
+    properties:
+      value:
+        description: A string with a length of at least 1.  Cannot begin or end with a space.
+        type: string
+    type: object
+    xml:
+      name: member
+  members_initials:
+    properties:
+      value:
+        description: A string with a length from 1 to 4.  Cannot begin or end with a space
+        type: string
+    type: object
+    xml:
+      name: member
+  members_oneTimeMessagesDismissed:
+    properties:
+      value:
+        description: Type of message dismissed
+        type: string
+    type: object
+    xml:
+      name: member
+  members_savedSearches:
+    properties:
+      name:
+        description: A non-empty string with at least one non-space character
+        type: string
+      pos:
+        description: 'A position. top , bottom , or a positive number.'
+        type: string
+      query:
+        description: a string with a length from 1 to 16384
+        type: string
+    type: object
+    xml:
+      name: member
+  members_savedSearches_name:
+    properties:
+      value:
+        description: A non-empty string with at least one non-space character
+        type: string
+    type: object
+    xml:
+      name: member
+  members_savedSearches_pos:
+    properties:
+      value:
+        description: 'A position. top , bottom , or a positive number.'
+        type: string
+    type: object
+    xml:
+      name: member
+  members_savedSearches_query:
+    properties:
+      value:
+        description: a string with a length from 1 to 16384
+        type: string
+    type: object
+    xml:
+      name: member
+  members_username:
+    properties:
+      value:
+        description: 'A string with a length of at least 3.  Only lowercase letters, underscores, and numbers are allowed.  Must be unique.'
+        type: string
+    type: object
+    xml:
+      name: member
+  myPrefs_emailPosition:
+    properties:
+      value:
+        description: 'One of: bottom or top'
+        type: string
+    type: object
+    xml:
+      name: board
+  myPrefs_idEmailList:
+    properties:
+      value:
+        description: An id
+        type: string
+    type: object
+    xml:
+      name: board
+  myPrefs_showListGuide:
+    properties:
+      value:
+        description: ' true or false'
+        type: string
+    type: object
+    xml:
+      name: board
+  myPrefs_showSidebar:
+    properties:
+      value:
+        description: ' true or false'
+        type: string
+    type: object
+    xml:
+      name: board
+  myPrefs_showSidebarActivity:
+    properties:
+      value:
+        description: ' true or false'
+        type: string
+    type: object
+    xml:
+      name: board
+  myPrefs_showSidebarBoardActions:
+    properties:
+      value:
+        description: ' true or false'
+        type: string
+    type: object
+    xml:
+      name: board
+  myPrefs_showSidebarMembers:
+    properties:
+      value:
+        description: ' true or false'
+        type: string
+    type: object
+    xml:
+      name: board
+  notifications:
+    properties:
+      unread:
+        description: ' true or false'
+        type: string
+    type: object
+    xml:
+      name: notification
+  notifications_unread:
+    properties:
+      value:
+        description: ' true or false'
+        type: string
+    type: object
+    xml:
+      name: notification
+  organizations:
+    properties:
+      desc:
+        description: a string with a length from 0 to 16384
+        type: string
+      displayName:
+        description: A string with a length of at least 1.  Cannot begin or end with a space.
+        type: string
+      name:
+        description: a string with a length from 0 to 16384
+        type: string
+      prefs/associatedDomain:
+        description: The google apps domain to link this org to.
+        type: string
+      prefs/boardVisibilityRestrict/org:
+        description: 'One of: admin, none or org'
+        type: string
+      prefs/boardVisibilityRestrict/private:
+        description: 'One of: admin, none or org'
+        type: string
+      prefs/boardVisibilityRestrict/public:
+        description: 'One of: admin, none or org'
+        type: string
+      prefs/externalMembersDisabled:
+        description: ' true or false'
+        type: string
+      prefs/googleAppsVersion:
+        description: a number from 1 to 2
+        type: string
+      prefs/orgInviteRestrict:
+        description: An email address with optional expansion tokens
+        type: string
+      prefs/permissionLevel:
+        description: 'One of: private or public'
+        type: string
+      website:
+        description: 'A URL starting with http:// or https:// or null'
+        type: string
+    type: object
+    xml:
+      name: organization
+  organizations_desc:
+    properties:
+      value:
+        description: a string with a length from 0 to 16384
+        type: string
+    type: object
+    xml:
+      name: organization
+  organizations_displayName:
+    properties:
+      value:
+        description: A string with a length of at least 1.  Cannot begin or end with a space.
+        type: string
+    type: object
+    xml:
+      name: organization
+  organizations_logo:
+    properties:
+      file:
+        description: A file
+        type: string
+    type: object
+    xml:
+      name: organization
+  organizations_members:
+    properties:
+      email:
+        description: An email address
+        type: string
+      fullName:
+        description: A string with a length of at least 1.  Cannot begin or end with a space.
+        type: string
+      type:
+        description: 'One of: admin, normal or observer'
+        type: string
+    type: object
+    xml:
+      name: organization
+  organizations_members_deactivated:
+    properties:
+      value:
+        description: ' true or false'
+        type: string
+    type: object
+    xml:
+      name: organization
+  organizations_memberships:
+    properties:
+      member_fields:
+        description: 'all or a comma-separated list of: avatarHash, bio, bioData, confirmed, fullName, idPremOrgsAdmin, initials, memberType, products, status, url or username'
+        type: string
+      type:
+        description: 'One of: admin, normal or observer'
+        type: string
+    type: object
+    xml:
+      name: organization
+  organizations_name:
+    properties:
+      value:
+        description: 'A string with a length of at least 3.  Only lowercase letters, underscores, and numbers are allowed.  Must be unique.'
+        type: string
+    type: object
+    xml:
+      name: organization
+  organizations_website:
+    properties:
+      value:
+        description: 'A URL starting with http:// or https:// or null'
+        type: string
+    type: object
+    xml:
+      name: organization
+  prefs_associatedDomain:
+    properties:
+      value:
+        description: The google apps domain to link this org to.
+        type: string
+    type: object
+    xml:
+      name: organization
+  prefs_background:
+    properties:
+      value:
+        description: 'A standard background name, or the id of a custom background'
+        type: string
+    type: object
+    xml:
+      name: board
+  prefs_boardVisibilityRestrict:
+    properties:
+      value:
+        description: 'One of: admin, none or org'
+        type: string
+    type: object
+    xml:
+      name: organization
+  prefs_calendarFeedEnabled:
+    properties:
+      value:
+        description: ' true or false'
+        type: string
+    type: object
+    xml:
+      name: board
+  prefs_cardAging:
+    properties:
+      value:
+        description: 'One of: pirate or regular'
+        type: string
+    type: object
+    xml:
+      name: board
+  prefs_cardCovers:
+    properties:
+      value:
+        description: ' true or false'
+        type: string
+    type: object
+    xml:
+      name: board
+  prefs_colorBlind:
+    properties:
+      value:
+        description: ' true or false'
+        type: string
+    type: object
+    xml:
+      name: member
+  prefs_comments:
+    properties:
+      value:
+        description: 'One of: disabled, members, observers, org or public'
+        type: string
+    type: object
+    xml:
+      name: board
+  prefs_externalMembersDisabled:
+    properties:
+      value:
+        description: ' true or false'
+        type: string
+    type: object
+    xml:
+      name: organization
+  prefs_googleAppsVersion:
+    properties:
+      value:
+        description: a number from 1 to 2
+        type: string
+    type: object
+    xml:
+      name: organization
+  prefs_invitations:
+    properties:
+      value:
+        description: 'One of: admins or members'
+        type: string
+    type: object
+    xml:
+      name: board
+  prefs_locale:
+    properties:
+      value:
+        description: a string with a length from 0 to 255
+        type: string
+    type: object
+    xml:
+      name: member
+  prefs_minutesBetweenSummaries:
+    properties:
+      value:
+        description: '-1 (disabled), 1 or 60'
+        type: string
+    type: object
+    xml:
+      name: member
+  prefs_orgInviteRestrict:
+    properties:
+      value:
+        description: An email address with optional expansion tokens
+        type: string
+    type: object
+    xml:
+      name: organization
+  prefs_permissionLevel:
+    properties:
+      value:
+        description: 'One of: private or public'
+        type: string
+    type: object
+    xml:
+      name: board
+  prefs_selfJoin:
+    properties:
+      value:
+        description: ' true or false'
+        type: string
+    type: object
+    xml:
+      name: board
+  prefs_voting:
+    properties:
+      value:
+        description: 'One of: disabled, members, observers, org or public'
+        type: string
+    type: object
+    xml:
+      name: board
+  sessions:
+    properties:
+      idBoard:
+        description: 'The id of the board you&#39;re viewing.  Boards with no viewers will not get updates about members&#39; statuses.'
+        type: string
+      status:
+        description: 'One of: active, disconnected or idle'
+        type: string
+    type: object
+    xml:
+      name: session
+  sessions_status:
+    properties:
+      value:
+        description: 'One of: active, disconnected or idle'
+        type: string
+    type: object
+    xml:
+      name: session
+  tokens_webhooks:
+    properties:
+      callbackURL:
+        description: A valid URL that is reachable with a HEAD request
+        type: string
+      description:
+        description: a string with a length from 0 to 16384
+        type: string
+      idModel:
+        description: id of the model to be monitored
+        type: string
+    type: object
+    xml:
+      name: token
+  webhooks:
+    properties:
+      active:
+        description: ' true or false'
+        type: string
+      callbackURL:
+        description: A valid URL that is reachable with a HEAD request
+        type: string
+      description:
+        description: a string with a length from 0 to 16384
+        type: string
+      idModel:
+        description: id of the model that should be hooked
+        type: string
+    type: object
+    xml:
+      name: webhook
+  webhooks_active:
+    properties:
+      value:
+        description: ' true or false'
+        type: string
+    type: object
+    xml:
+      name: webhook
+  webhooks_callbackURL:
+    properties:
+      value:
+        description: A valid URL that is reachable with a HEAD request
+        type: string
+    type: object
+    xml:
+      name: webhook
+  webhooks_description:
+    properties:
+      value:
+        description: a string with a length from 0 to 16384
+        type: string
+    type: object
+    xml:
+      name: webhook
+  webhooks_idModel:
+    properties:
+      value:
+        description: id of the model to be monitored
+        type: string
+    type: object
+    xml:
+      name: webhook

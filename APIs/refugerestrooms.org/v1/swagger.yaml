@@ -1,5 +1,8 @@
-basePath: /api
+swagger: '2.0'
+schemes:
+  - http
 host: www.refugerestrooms.org
+basePath: /api
 info:
   description: 'REFUGE is a web application that seeks to provide safe restroom access for transgender, intersex, and gender nonconforming individuals.'
   title: Refuge Restrooms
@@ -12,6 +15,8 @@ info:
     url: 'http://www.refugerestrooms.org/api/swagger_doc.json'
     version: '1.2'
   x-providerName: refugerestrooms.org
+tags:
+  - name: restrooms
 paths:
   /v1/restrooms.json:
     get:
@@ -210,8 +215,3 @@ paths:
       summary: Perform full-text search of restroom records.
       tags:
         - restrooms
-schemes:
-  - http
-swagger: '2.0'
-tags:
-  - name: restrooms

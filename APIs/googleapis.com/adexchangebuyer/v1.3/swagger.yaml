@@ -1,4 +1,678 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.googleapis.com
 basePath: /adexchangebuyer/v1.3
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: 'Accesses your bidding-account information, submits creatives for validation, finds available direct deals, and retrieves performance reports.'
+  title: Ad Exchange Buyer API
+  version: v1.3
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.doubleclickbygoogle.com/static/core/img/doubleclick-google-logo-wide.svg'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/adexchangebuyer/v1.3/rest'
+    version: v1
+  x-preferred: false
+  x-providerName: googleapis.com
+  x-serviceName: adexchangebuyer
+externalDocs:
+  url: 'https://developers.google.com/ad-exchange/buyer-rest'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/adexchange.buyer': Manage your Ad Exchange buyer account configuration
+    type: oauth2
+parameters:
+  alt:
+    default: json
+    description: Data format for the response.
+    enum:
+      - json
+    in: query
+    name: alt
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    in: query
+    name: quotaUser
+    type: string
+  userIp:
+    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    in: query
+    name: userIp
+    type: string
+paths:
+  /accounts:
+    get:
+      description: "Retrieves the authenticated user's list of accounts."
+      operationId: adexchangebuyer.accounts.list
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AccountsList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/accounts/{id}':
+    get:
+      description: Gets one account by ID.
+      operationId: adexchangebuyer.accounts.get
+      parameters:
+        - description: The account id
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Account'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates an existing account. This method supports patch semantics.
+      operationId: adexchangebuyer.accounts.patch
+      parameters:
+        - description: The account id
+          in: path
+          name: id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Account'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Account'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    put:
+      description: Updates an existing account.
+      operationId: adexchangebuyer.accounts.update
+      parameters:
+        - description: The account id
+          in: path
+          name: id
+          required: true
+          type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Account'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Account'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+  /billinginfo:
+    get:
+      description: Retrieves a list of billing information for all accounts of the authenticated user.
+      operationId: adexchangebuyer.billingInfo.list
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BillingInfoList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - billingInfo
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/billinginfo/{accountId}':
+    get:
+      description: Returns the billing information for one account specified by account ID.
+      operationId: adexchangebuyer.billingInfo.get
+      parameters:
+        - description: The account id.
+          in: path
+          name: accountId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BillingInfo'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - billingInfo
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/billinginfo/{accountId}/{billingId}':
+    get:
+      description: Returns the budget information for the adgroup specified by the accountId and billingId.
+      operationId: adexchangebuyer.budget.get
+      parameters:
+        - description: The account id to get the budget information for.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: The billing id to get the budget information for.
+          in: path
+          name: billingId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Budget'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - budget
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: 'Updates the budget amount for the budget of the adgroup specified by the accountId and billingId, with the budget amount in the request. This method supports patch semantics.'
+      operationId: adexchangebuyer.budget.patch
+      parameters:
+        - description: The account id associated with the budget being updated.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: The billing id associated with the budget being updated.
+          in: path
+          name: billingId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Budget'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Budget'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - budget
+    put:
+      description: 'Updates the budget amount for the budget of the adgroup specified by the accountId and billingId, with the budget amount in the request.'
+      operationId: adexchangebuyer.budget.update
+      parameters:
+        - description: The account id associated with the budget being updated.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: The billing id associated with the budget being updated.
+          in: path
+          name: billingId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Budget'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Budget'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - budget
+  /creatives:
+    get:
+      description: "Retrieves a list of the authenticated user's active creatives. A creative will be available 30-40 minutes after submission."
+      operationId: adexchangebuyer.creatives.list
+      parameters:
+        - collectionFormat: multi
+          description: 'When specified, only creatives for the given account ids are returned.'
+          in: query
+          items:
+            type: integer
+          name: accountId
+          type: array
+        - collectionFormat: multi
+          description: 'When specified, only creatives for the given buyer creative ids are returned.'
+          in: query
+          items:
+            type: string
+          name: buyerCreativeId
+          type: array
+        - description: 'Maximum number of entries returned on one result page. If not set, the default is 100. Optional.'
+          in: query
+          maximum: 1000
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: 'A continuation token, used to page through ad clients. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response. Optional.'
+          in: query
+          name: pageToken
+          type: string
+        - description: 'When specified, only creatives having the given status are returned.'
+          enum:
+            - approved
+            - disapproved
+            - not_checked
+          in: query
+          name: statusFilter
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CreativesList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - creatives
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Submit a new creative.
+      operationId: adexchangebuyer.creatives.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Creative'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Creative'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - creatives
+  '/creatives/{accountId}/{buyerCreativeId}':
+    get:
+      description: Gets the status for a single creative. A creative will be available 30-40 minutes after submission.
+      operationId: adexchangebuyer.creatives.get
+      parameters:
+        - description: The id for the account that will serve this creative.
+          in: path
+          name: accountId
+          required: true
+          type: integer
+        - description: The buyer-specific id for this creative.
+          in: path
+          name: buyerCreativeId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Creative'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - creatives
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /directdeals:
+    get:
+      description: "Retrieves the authenticated user's list of direct deals."
+      operationId: adexchangebuyer.directDeals.list
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DirectDealsList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - directDeals
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/directdeals/{id}':
+    get:
+      description: Gets one direct deal by ID.
+      operationId: adexchangebuyer.directDeals.get
+      parameters:
+        - description: The direct deal id
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DirectDeal'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - directDeals
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /performancereport:
+    get:
+      description: "Retrieves the authenticated user's list of performance metrics."
+      operationId: adexchangebuyer.performanceReport.list
+      parameters:
+        - description: The account id to get the reports.
+          in: query
+          name: accountId
+          required: true
+          type: string
+        - description: The end time of the report in ISO 8601 timestamp format using UTC.
+          in: query
+          name: endDateTime
+          required: true
+          type: string
+        - description: The start time of the report in ISO 8601 timestamp format using UTC.
+          in: query
+          name: startDateTime
+          required: true
+          type: string
+        - description: 'Maximum number of entries returned on one result page. If not set, the default is 100. Optional.'
+          in: query
+          maximum: 1000
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: 'A continuation token, used to page through performance reports. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response. Optional.'
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PerformanceReportList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - performanceReport
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/pretargetingconfigs/{accountId}':
+    get:
+      description: "Retrieves a list of the authenticated user's pretargeting configurations."
+      operationId: adexchangebuyer.pretargetingConfig.list
+      parameters:
+        - description: The account id to get the pretargeting configs for.
+          in: path
+          name: accountId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PretargetingConfigList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - pretargetingConfig
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Inserts a new pretargeting configuration.
+      operationId: adexchangebuyer.pretargetingConfig.insert
+      parameters:
+        - description: The account id to insert the pretargeting config for.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PretargetingConfig'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PretargetingConfig'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - pretargetingConfig
+  '/pretargetingconfigs/{accountId}/{configId}':
+    delete:
+      description: Deletes an existing pretargeting config.
+      operationId: adexchangebuyer.pretargetingConfig.delete
+      parameters:
+        - description: The account id to delete the pretargeting config for.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: The specific id of the configuration to delete.
+          in: path
+          name: configId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - pretargetingConfig
+    get:
+      description: Gets a specific pretargeting configuration
+      operationId: adexchangebuyer.pretargetingConfig.get
+      parameters:
+        - description: The account id to get the pretargeting config for.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: The specific id of the configuration to retrieve.
+          in: path
+          name: configId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PretargetingConfig'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - pretargetingConfig
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates an existing pretargeting config. This method supports patch semantics.
+      operationId: adexchangebuyer.pretargetingConfig.patch
+      parameters:
+        - description: The account id to update the pretargeting config for.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: The specific id of the configuration to update.
+          in: path
+          name: configId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PretargetingConfig'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PretargetingConfig'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - pretargetingConfig
+    put:
+      description: Updates an existing pretargeting config.
+      operationId: adexchangebuyer.pretargetingConfig.update
+      parameters:
+        - description: The account id to update the pretargeting config for.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: The specific id of the configuration to update.
+          in: path
+          name: configId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PretargetingConfig'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PretargetingConfig'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - pretargetingConfig
 definitions:
   Account:
     description: Configuration data for an Ad Exchange buyer account.
@@ -670,677 +1344,3 @@ definitions:
         description: Resource type.
         type: string
     type: object
-externalDocs:
-  url: 'https://developers.google.com/ad-exchange/buyer-rest'
-host: www.googleapis.com
-info:
-  contact:
-    name: Google
-    url: 'https://google.com'
-  description: 'Accesses your bidding-account information, submits creatives for validation, finds available direct deals, and retrieves performance reports.'
-  title: Ad Exchange Buyer API
-  version: v1.3
-  x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
-  x-logo:
-    url: 'https://www.doubleclickbygoogle.com/static/core/img/doubleclick-google-logo-wide.svg'
-  x-origin:
-    format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/adexchangebuyer/v1.3/rest'
-    version: v1
-  x-preferred: false
-  x-providerName: googleapis.com
-  x-serviceName: adexchangebuyer
-parameters:
-  alt:
-    default: json
-    description: Data format for the response.
-    enum:
-      - json
-    in: query
-    name: alt
-    type: string
-  fields:
-    description: Selector specifying which fields to include in a partial response.
-    in: query
-    name: fields
-    type: string
-  key:
-    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
-    in: query
-    name: key
-    type: string
-  oauth_token:
-    description: OAuth 2.0 token for the current user.
-    in: query
-    name: oauth_token
-    type: string
-  prettyPrint:
-    default: true
-    description: Returns response with indentations and line breaks.
-    in: query
-    name: prettyPrint
-    type: boolean
-  quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
-    in: query
-    name: quotaUser
-    type: string
-  userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
-    in: query
-    name: userIp
-    type: string
-paths:
-  /accounts:
-    get:
-      description: "Retrieves the authenticated user's list of accounts."
-      operationId: adexchangebuyer.accounts.list
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AccountsList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - accounts
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/accounts/{id}':
-    get:
-      description: Gets one account by ID.
-      operationId: adexchangebuyer.accounts.get
-      parameters:
-        - description: The account id
-          in: path
-          name: id
-          required: true
-          type: integer
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Account'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - accounts
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    patch:
-      description: Updates an existing account. This method supports patch semantics.
-      operationId: adexchangebuyer.accounts.patch
-      parameters:
-        - description: The account id
-          in: path
-          name: id
-          required: true
-          type: integer
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Account'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Account'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - accounts
-    put:
-      description: Updates an existing account.
-      operationId: adexchangebuyer.accounts.update
-      parameters:
-        - description: The account id
-          in: path
-          name: id
-          required: true
-          type: integer
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Account'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Account'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - accounts
-  /billinginfo:
-    get:
-      description: Retrieves a list of billing information for all accounts of the authenticated user.
-      operationId: adexchangebuyer.billingInfo.list
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/BillingInfoList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - billingInfo
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/billinginfo/{accountId}':
-    get:
-      description: Returns the billing information for one account specified by account ID.
-      operationId: adexchangebuyer.billingInfo.get
-      parameters:
-        - description: The account id.
-          in: path
-          name: accountId
-          required: true
-          type: integer
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/BillingInfo'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - billingInfo
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/billinginfo/{accountId}/{billingId}':
-    get:
-      description: Returns the budget information for the adgroup specified by the accountId and billingId.
-      operationId: adexchangebuyer.budget.get
-      parameters:
-        - description: The account id to get the budget information for.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: The billing id to get the budget information for.
-          in: path
-          name: billingId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Budget'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - budget
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    patch:
-      description: 'Updates the budget amount for the budget of the adgroup specified by the accountId and billingId, with the budget amount in the request. This method supports patch semantics.'
-      operationId: adexchangebuyer.budget.patch
-      parameters:
-        - description: The account id associated with the budget being updated.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: The billing id associated with the budget being updated.
-          in: path
-          name: billingId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Budget'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Budget'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - budget
-    put:
-      description: 'Updates the budget amount for the budget of the adgroup specified by the accountId and billingId, with the budget amount in the request.'
-      operationId: adexchangebuyer.budget.update
-      parameters:
-        - description: The account id associated with the budget being updated.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: The billing id associated with the budget being updated.
-          in: path
-          name: billingId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Budget'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Budget'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - budget
-  /creatives:
-    get:
-      description: "Retrieves a list of the authenticated user's active creatives. A creative will be available 30-40 minutes after submission."
-      operationId: adexchangebuyer.creatives.list
-      parameters:
-        - collectionFormat: multi
-          description: 'When specified, only creatives for the given account ids are returned.'
-          in: query
-          items:
-            type: integer
-          name: accountId
-          type: array
-        - collectionFormat: multi
-          description: 'When specified, only creatives for the given buyer creative ids are returned.'
-          in: query
-          items:
-            type: string
-          name: buyerCreativeId
-          type: array
-        - description: 'Maximum number of entries returned on one result page. If not set, the default is 100. Optional.'
-          in: query
-          maximum: 1000
-          minimum: 1
-          name: maxResults
-          type: integer
-        - description: 'A continuation token, used to page through ad clients. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response. Optional.'
-          in: query
-          name: pageToken
-          type: string
-        - description: 'When specified, only creatives having the given status are returned.'
-          enum:
-            - approved
-            - disapproved
-            - not_checked
-          in: query
-          name: statusFilter
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/CreativesList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - creatives
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Submit a new creative.
-      operationId: adexchangebuyer.creatives.insert
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Creative'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Creative'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - creatives
-  '/creatives/{accountId}/{buyerCreativeId}':
-    get:
-      description: Gets the status for a single creative. A creative will be available 30-40 minutes after submission.
-      operationId: adexchangebuyer.creatives.get
-      parameters:
-        - description: The id for the account that will serve this creative.
-          in: path
-          name: accountId
-          required: true
-          type: integer
-        - description: The buyer-specific id for this creative.
-          in: path
-          name: buyerCreativeId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Creative'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - creatives
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  /directdeals:
-    get:
-      description: "Retrieves the authenticated user's list of direct deals."
-      operationId: adexchangebuyer.directDeals.list
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/DirectDealsList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - directDeals
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/directdeals/{id}':
-    get:
-      description: Gets one direct deal by ID.
-      operationId: adexchangebuyer.directDeals.get
-      parameters:
-        - description: The direct deal id
-          in: path
-          name: id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/DirectDeal'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - directDeals
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  /performancereport:
-    get:
-      description: "Retrieves the authenticated user's list of performance metrics."
-      operationId: adexchangebuyer.performanceReport.list
-      parameters:
-        - description: The account id to get the reports.
-          in: query
-          name: accountId
-          required: true
-          type: string
-        - description: The end time of the report in ISO 8601 timestamp format using UTC.
-          in: query
-          name: endDateTime
-          required: true
-          type: string
-        - description: The start time of the report in ISO 8601 timestamp format using UTC.
-          in: query
-          name: startDateTime
-          required: true
-          type: string
-        - description: 'Maximum number of entries returned on one result page. If not set, the default is 100. Optional.'
-          in: query
-          maximum: 1000
-          minimum: 1
-          name: maxResults
-          type: integer
-        - description: 'A continuation token, used to page through performance reports. To retrieve the next page, set this parameter to the value of "nextPageToken" from the previous response. Optional.'
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/PerformanceReportList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - performanceReport
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/pretargetingconfigs/{accountId}':
-    get:
-      description: "Retrieves a list of the authenticated user's pretargeting configurations."
-      operationId: adexchangebuyer.pretargetingConfig.list
-      parameters:
-        - description: The account id to get the pretargeting configs for.
-          in: path
-          name: accountId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/PretargetingConfigList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - pretargetingConfig
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Inserts a new pretargeting configuration.
-      operationId: adexchangebuyer.pretargetingConfig.insert
-      parameters:
-        - description: The account id to insert the pretargeting config for.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PretargetingConfig'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/PretargetingConfig'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - pretargetingConfig
-  '/pretargetingconfigs/{accountId}/{configId}':
-    delete:
-      description: Deletes an existing pretargeting config.
-      operationId: adexchangebuyer.pretargetingConfig.delete
-      parameters:
-        - description: The account id to delete the pretargeting config for.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: The specific id of the configuration to delete.
-          in: path
-          name: configId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - pretargetingConfig
-    get:
-      description: Gets a specific pretargeting configuration
-      operationId: adexchangebuyer.pretargetingConfig.get
-      parameters:
-        - description: The account id to get the pretargeting config for.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: The specific id of the configuration to retrieve.
-          in: path
-          name: configId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/PretargetingConfig'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - pretargetingConfig
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    patch:
-      description: Updates an existing pretargeting config. This method supports patch semantics.
-      operationId: adexchangebuyer.pretargetingConfig.patch
-      parameters:
-        - description: The account id to update the pretargeting config for.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: The specific id of the configuration to update.
-          in: path
-          name: configId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PretargetingConfig'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/PretargetingConfig'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - pretargetingConfig
-    put:
-      description: Updates an existing pretargeting config.
-      operationId: adexchangebuyer.pretargetingConfig.update
-      parameters:
-        - description: The account id to update the pretargeting config for.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: The specific id of the configuration to update.
-          in: path
-          name: configId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PretargetingConfig'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/PretargetingConfig'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - pretargetingConfig
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/adexchange.buyer': Manage your Ad Exchange buyer account configuration
-    type: oauth2
-swagger: '2.0'

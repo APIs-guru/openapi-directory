@@ -1,4 +1,277 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.googleapis.com
 basePath: /civicinfo/v2
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: An API for accessing civic information.
+  title: Google Civic Information API
+  version: v2
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/civicinfo/v2/rest'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: civicinfo
+externalDocs:
+  url: 'https://developers.google.com/civic-information'
+parameters:
+  alt:
+    default: json
+    description: Data format for the response.
+    enum:
+      - json
+    in: query
+    name: alt
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    in: query
+    name: quotaUser
+    type: string
+  userIp:
+    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    in: query
+    name: userIp
+    type: string
+paths:
+  /divisions:
+    get:
+      description: Searches for political divisions by their natural name or OCD ID.
+      operationId: civicinfo.divisions.search
+      parameters:
+        - description: 'The search query. Queries can cover any parts of a OCD ID or a human readable division name. All words given in the query are treated as required patterns. In addition to that, most query operators of the Apache Lucene library are supported. See http://lucene.apache.org/core/2_9_4/queryparsersyntax.html'
+          in: query
+          name: query
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DivisionSearchResponse'
+      tags:
+        - divisions
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /elections:
+    get:
+      description: List of available elections to query.
+      operationId: civicinfo.elections.electionQuery
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ElectionsQueryResponse'
+      tags:
+        - elections
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /representatives:
+    get:
+      description: Looks up political geography and representative information for a single address.
+      operationId: civicinfo.representatives.representativeInfoByAddress
+      parameters:
+        - description: The address to look up. May only be specified if the field ocdId is not given in the URL.
+          in: query
+          name: address
+          type: string
+        - default: true
+          description: 'Whether to return information about offices and officials. If false, only the top-level district information will be returned.'
+          in: query
+          name: includeOffices
+          type: boolean
+        - collectionFormat: multi
+          description: "A list of office levels to filter by. Only offices that serve at least one of these levels will be returned. Divisions that don't contain a matching office will not be returned."
+          in: query
+          items:
+            enum:
+              - administrativeArea1
+              - administrativeArea2
+              - country
+              - international
+              - locality
+              - regional
+              - special
+              - subLocality1
+              - subLocality2
+            type: string
+          name: levels
+          type: array
+        - collectionFormat: multi
+          description: "A list of office roles to filter by. Only offices fulfilling one of these roles will be returned. Divisions that don't contain a matching office will not be returned."
+          in: query
+          items:
+            enum:
+              - deputyHeadOfGovernment
+              - executiveCouncil
+              - governmentOfficer
+              - headOfGovernment
+              - headOfState
+              - highestCourtJudge
+              - judge
+              - legislatorLowerBody
+              - legislatorUpperBody
+              - schoolBoard
+              - specialPurposeOfficer
+            type: string
+          name: roles
+          type: array
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RepresentativeInfoResponse'
+      tags:
+        - representatives
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/representatives/{ocdId}':
+    get:
+      description: Looks up representative information for a single geographic division.
+      operationId: civicinfo.representatives.representativeInfoByDivision
+      parameters:
+        - description: The Open Civic Data division identifier of the division to look up.
+          in: path
+          name: ocdId
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: "A list of office levels to filter by. Only offices that serve at least one of these levels will be returned. Divisions that don't contain a matching office will not be returned."
+          in: query
+          items:
+            enum:
+              - administrativeArea1
+              - administrativeArea2
+              - country
+              - international
+              - locality
+              - regional
+              - special
+              - subLocality1
+              - subLocality2
+            type: string
+          name: levels
+          type: array
+        - description: "If true, information about all divisions contained in the division requested will be included as well. For example, if querying ocd-division/country:us/district:dc, this would also return all DC's wards and ANCs."
+          in: query
+          name: recursive
+          type: boolean
+        - collectionFormat: multi
+          description: "A list of office roles to filter by. Only offices fulfilling one of these roles will be returned. Divisions that don't contain a matching office will not be returned."
+          in: query
+          items:
+            enum:
+              - deputyHeadOfGovernment
+              - executiveCouncil
+              - governmentOfficer
+              - headOfGovernment
+              - headOfState
+              - highestCourtJudge
+              - judge
+              - legislatorLowerBody
+              - legislatorUpperBody
+              - schoolBoard
+              - specialPurposeOfficer
+            type: string
+          name: roles
+          type: array
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RepresentativeInfoData'
+      tags:
+        - representatives
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /voterinfo:
+    get:
+      description: "Looks up information relevant to a voter based on the voter's registered address."
+      operationId: civicinfo.elections.voterInfoQuery
+      parameters:
+        - description: The registered address of the voter to look up.
+          in: query
+          name: address
+          required: true
+          type: string
+        - default: '0'
+          description: 'The unique ID of the election to look up. A list of election IDs can be obtained at https://www.googleapis.com/civicinfo/{version}/elections'
+          in: query
+          name: electionId
+          type: string
+        - default: false
+          description: 'If set to true, only data from official state sources will be returned.'
+          in: query
+          name: officialOnly
+          type: boolean
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/VoterInfoResponse'
+      tags:
+        - elections
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
 definitions:
   AdministrationRegion:
     description: Describes information about a regional election administrative area.
@@ -544,276 +817,3 @@ definitions:
           $ref: '#/definitions/AdministrationRegion'
         type: array
     type: object
-externalDocs:
-  url: 'https://developers.google.com/civic-information'
-host: www.googleapis.com
-info:
-  contact:
-    name: Google
-    url: 'https://google.com'
-  description: An API for accessing civic information.
-  title: Google Civic Information API
-  version: v2
-  x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
-  x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
-  x-origin:
-    format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/civicinfo/v2/rest'
-    version: v1
-  x-preferred: true
-  x-providerName: googleapis.com
-  x-serviceName: civicinfo
-parameters:
-  alt:
-    default: json
-    description: Data format for the response.
-    enum:
-      - json
-    in: query
-    name: alt
-    type: string
-  fields:
-    description: Selector specifying which fields to include in a partial response.
-    in: query
-    name: fields
-    type: string
-  key:
-    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
-    in: query
-    name: key
-    type: string
-  oauth_token:
-    description: OAuth 2.0 token for the current user.
-    in: query
-    name: oauth_token
-    type: string
-  prettyPrint:
-    default: true
-    description: Returns response with indentations and line breaks.
-    in: query
-    name: prettyPrint
-    type: boolean
-  quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
-    in: query
-    name: quotaUser
-    type: string
-  userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
-    in: query
-    name: userIp
-    type: string
-paths:
-  /divisions:
-    get:
-      description: Searches for political divisions by their natural name or OCD ID.
-      operationId: civicinfo.divisions.search
-      parameters:
-        - description: 'The search query. Queries can cover any parts of a OCD ID or a human readable division name. All words given in the query are treated as required patterns. In addition to that, most query operators of the Apache Lucene library are supported. See http://lucene.apache.org/core/2_9_4/queryparsersyntax.html'
-          in: query
-          name: query
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/DivisionSearchResponse'
-      tags:
-        - divisions
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  /elections:
-    get:
-      description: List of available elections to query.
-      operationId: civicinfo.elections.electionQuery
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ElectionsQueryResponse'
-      tags:
-        - elections
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  /representatives:
-    get:
-      description: Looks up political geography and representative information for a single address.
-      operationId: civicinfo.representatives.representativeInfoByAddress
-      parameters:
-        - description: The address to look up. May only be specified if the field ocdId is not given in the URL.
-          in: query
-          name: address
-          type: string
-        - default: true
-          description: 'Whether to return information about offices and officials. If false, only the top-level district information will be returned.'
-          in: query
-          name: includeOffices
-          type: boolean
-        - collectionFormat: multi
-          description: "A list of office levels to filter by. Only offices that serve at least one of these levels will be returned. Divisions that don't contain a matching office will not be returned."
-          in: query
-          items:
-            enum:
-              - administrativeArea1
-              - administrativeArea2
-              - country
-              - international
-              - locality
-              - regional
-              - special
-              - subLocality1
-              - subLocality2
-            type: string
-          name: levels
-          type: array
-        - collectionFormat: multi
-          description: "A list of office roles to filter by. Only offices fulfilling one of these roles will be returned. Divisions that don't contain a matching office will not be returned."
-          in: query
-          items:
-            enum:
-              - deputyHeadOfGovernment
-              - executiveCouncil
-              - governmentOfficer
-              - headOfGovernment
-              - headOfState
-              - highestCourtJudge
-              - judge
-              - legislatorLowerBody
-              - legislatorUpperBody
-              - schoolBoard
-              - specialPurposeOfficer
-            type: string
-          name: roles
-          type: array
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/RepresentativeInfoResponse'
-      tags:
-        - representatives
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/representatives/{ocdId}':
-    get:
-      description: Looks up representative information for a single geographic division.
-      operationId: civicinfo.representatives.representativeInfoByDivision
-      parameters:
-        - description: The Open Civic Data division identifier of the division to look up.
-          in: path
-          name: ocdId
-          required: true
-          type: string
-        - collectionFormat: multi
-          description: "A list of office levels to filter by. Only offices that serve at least one of these levels will be returned. Divisions that don't contain a matching office will not be returned."
-          in: query
-          items:
-            enum:
-              - administrativeArea1
-              - administrativeArea2
-              - country
-              - international
-              - locality
-              - regional
-              - special
-              - subLocality1
-              - subLocality2
-            type: string
-          name: levels
-          type: array
-        - description: "If true, information about all divisions contained in the division requested will be included as well. For example, if querying ocd-division/country:us/district:dc, this would also return all DC's wards and ANCs."
-          in: query
-          name: recursive
-          type: boolean
-        - collectionFormat: multi
-          description: "A list of office roles to filter by. Only offices fulfilling one of these roles will be returned. Divisions that don't contain a matching office will not be returned."
-          in: query
-          items:
-            enum:
-              - deputyHeadOfGovernment
-              - executiveCouncil
-              - governmentOfficer
-              - headOfGovernment
-              - headOfState
-              - highestCourtJudge
-              - judge
-              - legislatorLowerBody
-              - legislatorUpperBody
-              - schoolBoard
-              - specialPurposeOfficer
-            type: string
-          name: roles
-          type: array
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/RepresentativeInfoData'
-      tags:
-        - representatives
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  /voterinfo:
-    get:
-      description: "Looks up information relevant to a voter based on the voter's registered address."
-      operationId: civicinfo.elections.voterInfoQuery
-      parameters:
-        - description: The registered address of the voter to look up.
-          in: query
-          name: address
-          required: true
-          type: string
-        - default: '0'
-          description: 'The unique ID of the election to look up. A list of election IDs can be obtained at https://www.googleapis.com/civicinfo/{version}/elections'
-          in: query
-          name: electionId
-          type: string
-        - default: false
-          description: 'If set to true, only data from official state sources will be returned.'
-          in: query
-          name: officialOnly
-          type: boolean
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/VoterInfoResponse'
-      tags:
-        - elections
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-schemes:
-  - https
-swagger: '2.0'

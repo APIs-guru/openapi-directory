@@ -1,72 +1,8 @@
-basePath: /freebase/v1
-definitions:
-  ReconcileCandidate:
-    properties:
-      confidence:
-        description: Percentage likelihood that this candidate is the unique matching entity. Value will be between 0.0 and 1.0
-        format: float
-        type: number
-      lang:
-        description: Language code that candidate and notable names are displayed in.
-        type: string
-      mid:
-        description: Freebase MID of candidate entity.
-        type: string
-      name:
-        description: Freebase name of matching entity in specified language.
-        type: string
-      notable:
-        description: Type or profession the candidate is notable for.
-        properties:
-          id:
-            description: MID of notable category.
-            type: string
-          name:
-            description: Name of notable category in specified language.
-            type: string
-        type: object
-    type: object
-  ReconcileGet:
-    properties:
-      candidate:
-        description: 'If filled, then the listed candidates are potential matches, and such should be evaluated by a more discerning algorithm or human. The matches are ordered by confidence.'
-        items:
-          $ref: '#/definitions/ReconcileCandidate'
-        type: array
-      costs:
-        description: Server costs for reconciling.
-        properties:
-          hits:
-            description: Total number of hits found.
-            format: int32
-            type: integer
-          ms:
-            description: Total milliseconds spent.
-            format: int32
-            type: integer
-        type: object
-      match:
-        $ref: '#/definitions/ReconcileCandidate'
-        description: 'If filled, this entity is guaranteed to match at requested confidence probability (default 99%).'
-      warning:
-        description: 'If filled, then there were recoverable problems that affected the request. For example, some of the properties were ignored because they either are not valid Freebase predicates or are not indexed for reconciliation. The candidates returned should be considered valid results, with the caveat that sections of the request were ignored as specified by the warning text.'
-        items:
-          properties:
-            location:
-              description: Location of warning in the request e.g. invalid predicate.
-              type: string
-            message:
-              description: Warning message to display to the user.
-              type: string
-            reason:
-              description: Code for identifying classes of warnings.
-              type: string
-          type: object
-        type: array
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/freebase/'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /freebase/v1
 info:
   contact:
     name: Google
@@ -85,6 +21,8 @@ info:
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: freebase
+externalDocs:
+  url: 'https://developers.google.com/freebase/'
 parameters:
   alt:
     default: json
@@ -341,6 +279,68 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-schemes:
-  - https
-swagger: '2.0'
+definitions:
+  ReconcileCandidate:
+    properties:
+      confidence:
+        description: Percentage likelihood that this candidate is the unique matching entity. Value will be between 0.0 and 1.0
+        format: float
+        type: number
+      lang:
+        description: Language code that candidate and notable names are displayed in.
+        type: string
+      mid:
+        description: Freebase MID of candidate entity.
+        type: string
+      name:
+        description: Freebase name of matching entity in specified language.
+        type: string
+      notable:
+        description: Type or profession the candidate is notable for.
+        properties:
+          id:
+            description: MID of notable category.
+            type: string
+          name:
+            description: Name of notable category in specified language.
+            type: string
+        type: object
+    type: object
+  ReconcileGet:
+    properties:
+      candidate:
+        description: 'If filled, then the listed candidates are potential matches, and such should be evaluated by a more discerning algorithm or human. The matches are ordered by confidence.'
+        items:
+          $ref: '#/definitions/ReconcileCandidate'
+        type: array
+      costs:
+        description: Server costs for reconciling.
+        properties:
+          hits:
+            description: Total number of hits found.
+            format: int32
+            type: integer
+          ms:
+            description: Total milliseconds spent.
+            format: int32
+            type: integer
+        type: object
+      match:
+        $ref: '#/definitions/ReconcileCandidate'
+        description: 'If filled, this entity is guaranteed to match at requested confidence probability (default 99%).'
+      warning:
+        description: 'If filled, then there were recoverable problems that affected the request. For example, some of the properties were ignored because they either are not valid Freebase predicates or are not indexed for reconciliation. The candidates returned should be considered valid results, with the caveat that sections of the request were ignored as specified by the warning text.'
+        items:
+          properties:
+            location:
+              description: Location of warning in the request e.g. invalid predicate.
+              type: string
+            message:
+              description: Warning message to display to the user.
+              type: string
+            reason:
+              description: Code for identifying classes of warnings.
+              type: string
+          type: object
+        type: array
+    type: object

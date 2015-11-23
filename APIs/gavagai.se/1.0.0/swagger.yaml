@@ -1,4 +1,230 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.gavagai.se
 basePath: /v3
+info:
+  description: Let us do the job and read your documents for you. We will bring you executive summaries and tonality scoring.
+  title: Gavagai
+  version: 1.0.0
+  x-logo:
+    url: 'https://developer.gavagai.se/images/gavagai-logo.png'
+  x-origin:
+    format: swagger
+    url: 'https://developer.gavagai.se/swagger/spec.json'
+    version: '1.2'
+  x-providerName: gavagai.se
+externalDocs:
+  url: 'https://developer.gavagai.se/docs'
+tags:
+  - description: Multi-language story extraction from large amounts of text into conveniently short and exact executive summaries. Available for multiple languages.
+    name: stories
+  - description: 'Multidimensional tonality analysis - we compute scores for Positivity, Negativity, Fear, Hate, Love, Skepticism, Violence, and Desire in all supported languages.'
+    name: tonality
+  - description: Multi-language topic extraction from large amounts of text into conveniently short and exact executive summaries. Available for multiple languages. Allows for ignoring and merging of terms.
+    name: topics
+  - description: 'Extract salient concepts from a collection of texts. Order by number of occurrences. '
+    name: keywords
+  - description: Lookup a word in Gavagai living lexicon.
+    name: lexicon
+paths:
+  /keywords:
+    post:
+      consumes:
+        - application/json
+      description: "<p>Given a set of texts, return the top 10 keywords.</p> <p>'Keywords' in this context means single words or short phrases of words (like 'ebola outbreak') that are significant in the collection. The top 10 keywords will be displayed. Some words that carry little significance are filtered out before compiling the result list. These include the most common words in the language of the texts.</p> <p>Language is specified for the whole submitted batch of texts. If you have texts in more than one language you should make separate calls for each language.</p> <p>Max upload size, per request: 5&nbsp;MB.</p>"
+      operationId: keywords
+      parameters:
+        - description: "Your api key required to use this api. Login to have it pre-filled or sign up if you don't have an account."
+          in: query
+          name: apiKey
+          required: true
+          type: string
+        - description: The JSON payload should contain an array of texts from which the keywords will be created. The model description contains the details of the required structure.
+          in: body
+          name: body
+          schema:
+            $ref: '#/definitions/keywordsRequest'
+            default:
+              language: en
+              texts:
+                - body: West Africa is suffering the worst Ebola outbreak in history.
+                  id: 'http://www.kmph-kfre.com/story/27541218/american-coming-to-us-to-be-evaluated-for-ebola'
+                - body: 'An American health-care worker in West Africa who may have been infected with #Ebola is being flown to Emory. West Africa is suffering the worst Ebola outbreak in history.'
+                  id: 'https://twitter.com/DoctorYasmin/status/540277718294605824'
+      produces:
+        - application/json;charset=utf-8
+      responses:
+        '200':
+          description: 'Successful response, returns json body.'
+          schema:
+            $ref: '#/definitions/keywordsResponse'
+        '400':
+          description: "Can't parse input JSON body."
+        '401':
+          description: The apiKey is wrong or missing.
+        '405':
+          description: Faulty request method. I.e. use POST for this method.
+      summary: "Extract 'keywords' from a set of texts."
+      tags:
+        - keywords
+  '/lexicon/{language}/{word}':
+    get:
+      consumes:
+        - application/json
+      operationId: lookup
+      parameters:
+        - description: "Your api key required to use this api. Login to have it pre-filled or sign up if you don't have an account."
+          in: query
+          name: apiKey
+          required: true
+          type: string
+        - description: 'The language of the text set, two letter language code (ISO 639-1)'
+          in: path
+          name: language
+          required: true
+          type: string
+        - description: The word to be looked up in the lexicon
+          in: path
+          name: word
+          required: true
+          type: string
+      produces:
+        - application/json;charset=utf-8
+      responses:
+        '200':
+          description: 'Successful response, returns json body.'
+          schema:
+            $ref: '#/definitions/LexiconResponse'
+        '401':
+          description: The apiKey is wrong or missing.
+      summary: Lookup a word in Gavagai living lexicon.
+      tags:
+        - lexicon
+  /stories:
+    post:
+      consumes:
+        - application/json
+      description: '<p>Given a set of texts, return summaries as a set of stories.</p><p>Language is specified for the whole submitted batch of texts. If you have texts in more than one language you should make separate calls for each language.</p> <p>Max upload size, per request: 5&nbsp;MB.</p>'
+      operationId: stories
+      parameters:
+        - description: "Your api key required to use this api. Login to have it pre-filled or sign up if you don't have an account."
+          in: query
+          name: apiKey
+          required: true
+          type: string
+        - description: The JSON payload should contain an array of texts from which the stories will be created. The model description contains the details of the required structure.
+          in: body
+          name: body
+          schema:
+            $ref: '#/definitions/StoriesRequest'
+            default:
+              language: en
+              texts:
+                - body: West Africa is suffering the worst Ebola outbreak in history.
+                  id: 'http://www.kmph-kfre.com/story/27541218/american-coming-to-us-to-be-evaluated-for-ebola'
+                  title: American coming to US to be evaluated for Ebola
+                - body: 'An American health-care worker in West Africa who may have been infected with #Ebola is being flown to Emory. West Africa is suffering the worst Ebola outbreak in history.'
+                  id: 'https://twitter.com/DoctorYasmin/status/540277718294605824'
+                  title: American coming to US to be evaluated for Ebola
+      produces:
+        - application/json;charset=utf-8
+      responses:
+        '200':
+          description: 'Successful response, returns json body.'
+          schema:
+            $ref: '#/definitions/StoriesResponse'
+        '400':
+          description: "Can't parse input JSON body."
+        '401':
+          description: The apiKey is wrong or missing.
+        '405':
+          description: Faulty request method. I.e. use POST for this method.
+      summary: Extract stories from a set of texts.
+      tags:
+        - stories
+  /tonality:
+    post:
+      consumes:
+        - application/json
+      description: '<p>Given a set of texts, return their tonality based on lexical analysis in multiple dimensions. The tonality is calculated on a text level, that is, the response will return the tonality of each text.</p><p>Language is specified for the whole submitted batch of texts. If you have texts in more than one language you should make separate calls for each language.</p> <p>Max upload size, per request: 1&nbsp;MB.</p>'
+      operationId: score
+      parameters:
+        - description: "Your api key required to use this api. Login to have it pre-filled or sign up if you don't have an account."
+          in: query
+          name: apiKey
+          required: true
+          type: string
+        - description: The JSON payload contains an array of texts on which to calculate the tonality. The model description contains the details of the required structure.
+          in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TonalityRequest'
+            default:
+              language: en
+              texts:
+                - body: 'West Africa is suffering the worst Ebola outbreak in history, with more than 17,100 illnesses and at least 6,000 deaths this year.'
+                  id: 'http://www.kmph-kfre.com/story/27541218/american-coming-to-us-to-be-evaluated-for-ebola'
+                - body: 'An American health-care worker in West Africa who may have been infected with #Ebola is being flown to Emory. West Africa is suffering the worst Ebola outbreak in history, with more than 17,100 illnesses and at least 6,000 deaths this year.'
+                  id: 'https://twitter.com/DoctorYasmin/status/540277718294605824'
+      produces:
+        - application/json; charset=utf-8
+      responses:
+        '200':
+          description: 'Successful response, returns json body.'
+          schema:
+            $ref: '#/definitions/TonalityResponse'
+        '400':
+          description: "Can't parse input JSON body."
+        '401':
+          description: The apiKey is wrong or missing
+        '405':
+          description: Faulty request method. I.e. use POST for this method.
+      summary: 'Given a set of texts, return their tonality.'
+      tags:
+        - tonality
+  /topics:
+    post:
+      consumes:
+        - application/json
+      description: '<p>Given a set of texts, return summaries as a set of topics.</p> <p>If you are only interested in texts matching specific keywords, you may provide a list of comma-separated <code>terms</code> that are used to match the relevant texts. Texts that do not contain at least one exact token match of at least one of your provided terms will not be taken into account.</p> <p>Language is specified for the whole submitted batch of texts. If you have texts in more than one language you should make separate calls for each language.</p> <p>Max upload size, per request: 5&nbsp;MB.</p>'
+      operationId: topics
+      parameters:
+        - description: "Your api key required to use this api. Login to have it pre-filled or sign up if you don't have an account."
+          in: query
+          name: apiKey
+          required: true
+          type: string
+        - description: The JSON payload should contain an array of texts from which the topics will be created. The model description contains the details of the required structure.
+          in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TopicsRequest'
+            default:
+              language: en
+              texts:
+                - body: West Africa is suffering the worst Ebola outbreak in history.
+                  id: 'http://www.kmph-kfre.com/topic/27541218/american-coming-to-us-to-be-evaluated-for-ebola'
+                  title: American coming to US to be evaluated for Ebola
+                - body: 'An American health-care worker in West Africa who may have been infected with #Ebola is being flown to Emory. West Africa is suffering the worst Ebola outbreak in history.'
+                  id: 'https://twitter.com/DoctorYasmin/status/540277718294605824'
+                  title: American coming to US to be evaluated for Ebola
+      produces:
+        - application/json;charset=utf-8
+      responses:
+        '200':
+          description: 'Successful response, returns json body.'
+          schema:
+            $ref: '#/definitions/TopicsResponse'
+        '400':
+          description: "Can't parse input JSON body."
+        '401':
+          description: The apiKey is wrong or missing.
+        '405':
+          description: Faulty request method. I.e. use POST for this method.
+      summary: Extract topics from a set of texts.
+      tags:
+        - topics
 definitions:
   AdditionalInformation:
     properties:
@@ -349,229 +575,3 @@ definitions:
     required:
       - numberOfKeywords
       - keywords
-externalDocs:
-  url: 'https://developer.gavagai.se/docs'
-host: api.gavagai.se
-info:
-  description: Let us do the job and read your documents for you. We will bring you executive summaries and tonality scoring.
-  title: Gavagai
-  version: 1.0.0
-  x-logo:
-    url: 'https://developer.gavagai.se/images/gavagai-logo.png'
-  x-origin:
-    format: swagger
-    url: 'https://developer.gavagai.se/swagger/spec.json'
-    version: '1.2'
-  x-providerName: gavagai.se
-paths:
-  /keywords:
-    post:
-      consumes:
-        - application/json
-      description: "<p>Given a set of texts, return the top 10 keywords.</p> <p>'Keywords' in this context means single words or short phrases of words (like 'ebola outbreak') that are significant in the collection. The top 10 keywords will be displayed. Some words that carry little significance are filtered out before compiling the result list. These include the most common words in the language of the texts.</p> <p>Language is specified for the whole submitted batch of texts. If you have texts in more than one language you should make separate calls for each language.</p> <p>Max upload size, per request: 5&nbsp;MB.</p>"
-      operationId: keywords
-      parameters:
-        - description: "Your api key required to use this api. Login to have it pre-filled or sign up if you don't have an account."
-          in: query
-          name: apiKey
-          required: true
-          type: string
-        - description: The JSON payload should contain an array of texts from which the keywords will be created. The model description contains the details of the required structure.
-          in: body
-          name: body
-          schema:
-            $ref: '#/definitions/keywordsRequest'
-            default:
-              language: en
-              texts:
-                - body: West Africa is suffering the worst Ebola outbreak in history.
-                  id: 'http://www.kmph-kfre.com/story/27541218/american-coming-to-us-to-be-evaluated-for-ebola'
-                - body: 'An American health-care worker in West Africa who may have been infected with #Ebola is being flown to Emory. West Africa is suffering the worst Ebola outbreak in history.'
-                  id: 'https://twitter.com/DoctorYasmin/status/540277718294605824'
-      produces:
-        - application/json;charset=utf-8
-      responses:
-        '200':
-          description: 'Successful response, returns json body.'
-          schema:
-            $ref: '#/definitions/keywordsResponse'
-        '400':
-          description: "Can't parse input JSON body."
-        '401':
-          description: The apiKey is wrong or missing.
-        '405':
-          description: Faulty request method. I.e. use POST for this method.
-      summary: "Extract 'keywords' from a set of texts."
-      tags:
-        - keywords
-  '/lexicon/{language}/{word}':
-    get:
-      consumes:
-        - application/json
-      operationId: lookup
-      parameters:
-        - description: "Your api key required to use this api. Login to have it pre-filled or sign up if you don't have an account."
-          in: query
-          name: apiKey
-          required: true
-          type: string
-        - description: 'The language of the text set, two letter language code (ISO 639-1)'
-          in: path
-          name: language
-          required: true
-          type: string
-        - description: The word to be looked up in the lexicon
-          in: path
-          name: word
-          required: true
-          type: string
-      produces:
-        - application/json;charset=utf-8
-      responses:
-        '200':
-          description: 'Successful response, returns json body.'
-          schema:
-            $ref: '#/definitions/LexiconResponse'
-        '401':
-          description: The apiKey is wrong or missing.
-      summary: Lookup a word in Gavagai living lexicon.
-      tags:
-        - lexicon
-  /stories:
-    post:
-      consumes:
-        - application/json
-      description: '<p>Given a set of texts, return summaries as a set of stories.</p><p>Language is specified for the whole submitted batch of texts. If you have texts in more than one language you should make separate calls for each language.</p> <p>Max upload size, per request: 5&nbsp;MB.</p>'
-      operationId: stories
-      parameters:
-        - description: "Your api key required to use this api. Login to have it pre-filled or sign up if you don't have an account."
-          in: query
-          name: apiKey
-          required: true
-          type: string
-        - description: The JSON payload should contain an array of texts from which the stories will be created. The model description contains the details of the required structure.
-          in: body
-          name: body
-          schema:
-            $ref: '#/definitions/StoriesRequest'
-            default:
-              language: en
-              texts:
-                - body: West Africa is suffering the worst Ebola outbreak in history.
-                  id: 'http://www.kmph-kfre.com/story/27541218/american-coming-to-us-to-be-evaluated-for-ebola'
-                  title: American coming to US to be evaluated for Ebola
-                - body: 'An American health-care worker in West Africa who may have been infected with #Ebola is being flown to Emory. West Africa is suffering the worst Ebola outbreak in history.'
-                  id: 'https://twitter.com/DoctorYasmin/status/540277718294605824'
-                  title: American coming to US to be evaluated for Ebola
-      produces:
-        - application/json;charset=utf-8
-      responses:
-        '200':
-          description: 'Successful response, returns json body.'
-          schema:
-            $ref: '#/definitions/StoriesResponse'
-        '400':
-          description: "Can't parse input JSON body."
-        '401':
-          description: The apiKey is wrong or missing.
-        '405':
-          description: Faulty request method. I.e. use POST for this method.
-      summary: Extract stories from a set of texts.
-      tags:
-        - stories
-  /tonality:
-    post:
-      consumes:
-        - application/json
-      description: '<p>Given a set of texts, return their tonality based on lexical analysis in multiple dimensions. The tonality is calculated on a text level, that is, the response will return the tonality of each text.</p><p>Language is specified for the whole submitted batch of texts. If you have texts in more than one language you should make separate calls for each language.</p> <p>Max upload size, per request: 1&nbsp;MB.</p>'
-      operationId: score
-      parameters:
-        - description: "Your api key required to use this api. Login to have it pre-filled or sign up if you don't have an account."
-          in: query
-          name: apiKey
-          required: true
-          type: string
-        - description: The JSON payload contains an array of texts on which to calculate the tonality. The model description contains the details of the required structure.
-          in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TonalityRequest'
-            default:
-              language: en
-              texts:
-                - body: 'West Africa is suffering the worst Ebola outbreak in history, with more than 17,100 illnesses and at least 6,000 deaths this year.'
-                  id: 'http://www.kmph-kfre.com/story/27541218/american-coming-to-us-to-be-evaluated-for-ebola'
-                - body: 'An American health-care worker in West Africa who may have been infected with #Ebola is being flown to Emory. West Africa is suffering the worst Ebola outbreak in history, with more than 17,100 illnesses and at least 6,000 deaths this year.'
-                  id: 'https://twitter.com/DoctorYasmin/status/540277718294605824'
-      produces:
-        - application/json; charset=utf-8
-      responses:
-        '200':
-          description: 'Successful response, returns json body.'
-          schema:
-            $ref: '#/definitions/TonalityResponse'
-        '400':
-          description: "Can't parse input JSON body."
-        '401':
-          description: The apiKey is wrong or missing
-        '405':
-          description: Faulty request method. I.e. use POST for this method.
-      summary: 'Given a set of texts, return their tonality.'
-      tags:
-        - tonality
-  /topics:
-    post:
-      consumes:
-        - application/json
-      description: '<p>Given a set of texts, return summaries as a set of topics.</p> <p>If you are only interested in texts matching specific keywords, you may provide a list of comma-separated <code>terms</code> that are used to match the relevant texts. Texts that do not contain at least one exact token match of at least one of your provided terms will not be taken into account.</p> <p>Language is specified for the whole submitted batch of texts. If you have texts in more than one language you should make separate calls for each language.</p> <p>Max upload size, per request: 5&nbsp;MB.</p>'
-      operationId: topics
-      parameters:
-        - description: "Your api key required to use this api. Login to have it pre-filled or sign up if you don't have an account."
-          in: query
-          name: apiKey
-          required: true
-          type: string
-        - description: The JSON payload should contain an array of texts from which the topics will be created. The model description contains the details of the required structure.
-          in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TopicsRequest'
-            default:
-              language: en
-              texts:
-                - body: West Africa is suffering the worst Ebola outbreak in history.
-                  id: 'http://www.kmph-kfre.com/topic/27541218/american-coming-to-us-to-be-evaluated-for-ebola'
-                  title: American coming to US to be evaluated for Ebola
-                - body: 'An American health-care worker in West Africa who may have been infected with #Ebola is being flown to Emory. West Africa is suffering the worst Ebola outbreak in history.'
-                  id: 'https://twitter.com/DoctorYasmin/status/540277718294605824'
-                  title: American coming to US to be evaluated for Ebola
-      produces:
-        - application/json;charset=utf-8
-      responses:
-        '200':
-          description: 'Successful response, returns json body.'
-          schema:
-            $ref: '#/definitions/TopicsResponse'
-        '400':
-          description: "Can't parse input JSON body."
-        '401':
-          description: The apiKey is wrong or missing.
-        '405':
-          description: Faulty request method. I.e. use POST for this method.
-      summary: Extract topics from a set of texts.
-      tags:
-        - topics
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - description: Multi-language story extraction from large amounts of text into conveniently short and exact executive summaries. Available for multiple languages.
-    name: stories
-  - description: 'Multidimensional tonality analysis - we compute scores for Positivity, Negativity, Fear, Hate, Love, Skepticism, Violence, and Desire in all supported languages.'
-    name: tonality
-  - description: Multi-language topic extraction from large amounts of text into conveniently short and exact executive summaries. Available for multiple languages. Allows for ignoring and merging of terms.
-    name: topics
-  - description: 'Extract salient concepts from a collection of texts. Order by number of occurrences. '
-    name: keywords
-  - description: Lookup a word in Gavagai living lexicon.
-    name: lexicon

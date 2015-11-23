@@ -1,198 +1,8 @@
-basePath: /
-definitions:
-  Address:
-    properties:
-      city:
-        type: string
-      country:
-        type: string
-      phone:
-        type: string
-      postal_code:
-        type: string
-      state:
-        type: string
-      street1:
-        type: string
-      street2:
-        type: string
-  Ceo:
-    properties:
-      first_name:
-        type: string
-      image_url:
-        type: string
-      last_name:
-        type: string
-  CompanyBasicSearchVO:
-    properties:
-      company_id:
-        format: int64
-        type: integer
-      hq_address:
-        $ref: '#/definitions/Address'
-      name:
-        type: string
-      profile_url:
-        type: string
-      short_name:
-        type: string
-      website:
-        type: string
-  CompanyBasicVO:
-    properties:
-      company_id:
-        format: int64
-        type: integer
-      logo_url:
-        type: string
-      name:
-        type: string
-      profile_url:
-        type: string
-      short_name:
-        type: string
-      website:
-        type: string
-    required:
-      - company_id
-      - name
-      - website
-      - logo_url
-      - profile_url
-  CompanyCompetitorVO:
-    properties:
-      competitor:
-        items:
-          $ref: '#/definitions/CompanyBasicVO'
-        type: array
-  CompanySearchResultVO:
-    properties:
-      company_id:
-        format: int64
-        type: integer
-      company_type:
-        enum:
-          - Private
-          - Public
-          - Product/Brand/Service
-          - NGO/NPO/NFP/Organization/Association
-          - Investment Company
-          - Government
-        type: string
-      description:
-        type: string
-      hq_address:
-        $ref: '#/definitions/Address'
-      logo_url:
-        type: string
-      name:
-        type: string
-      profile_url:
-        type: string
-      short_name:
-        type: string
-      stock:
-        $ref: '#/definitions/Stock'
-      website:
-        type: string
-    required:
-      - company_id
-      - name
-      - website
-      - logo_url
-      - profile_url
-  FeedsVO:
-    properties:
-      category:
-        type: string
-      company:
-        $ref: '#/definitions/CompanyBasicVO'
-      enclosure_image:
-        type: string
-      feed_date:
-        type: string
-      id:
-        type: string
-      owler_feed_url:
-        type: string
-      publisher_logo:
-        type: string
-      publisher_name:
-        type: string
-      source_url:
-        type: string
-      title:
-        type: string
-  Stock:
-    properties:
-      exchange:
-        type: string
-      ticker:
-        type: string
-  basic_results:
-    properties:
-      company:
-        items:
-          $ref: '#/definitions/CompanyBasicSearchVO'
-        type: array
-  company:
-    properties:
-      ceo:
-        $ref: '#/definitions/Ceo'
-      company_id:
-        format: int64
-        type: integer
-      company_type:
-        enum:
-          - Private
-          - Public
-          - Product/Brand/Service
-          - NGO/NPO/NFP/Organization/Association
-          - Investment Company
-          - Government
-        type: string
-      description:
-        type: string
-      employee_count:
-        type: string
-      founded_date:
-        type: string
-      hq_address:
-        $ref: '#/definitions/Address'
-      industries:
-        items:
-          type: string
-        type: array
-      logo_url:
-        type: string
-      name:
-        type: string
-      profile_url:
-        type: string
-      revenue:
-        type: string
-      short_name:
-        type: string
-      stock:
-        $ref: '#/definitions/Stock'
-      website:
-        type: string
-    required:
-      - company_id
-      - name
-      - website
-      - logo_url
-      - profile_url
-  results:
-    properties:
-      feeds:
-        items:
-          $ref: '#/definitions/FeedsVO'
-        type: array
-      pagination_id:
-        type: string
+swagger: '2.0'
+schemes:
+  - https
 host: api.owler.com
+basePath: /
 info:
   description: 'Search for information on companies using a website or company name and get access to Company Data, News, Blog Posts, Competitor Lists and much more.'
   title: Owler
@@ -204,6 +14,13 @@ info:
     url: 'https://developers.owler.com/swagger/spec.json'
     version: '1.2'
   x-providerName: owler.com
+tags:
+  - description: Provides Company information
+    name: company
+  - description: Provides Competitor information
+    name: competitor
+  - description: Provides Feed information
+    name: feed
 paths:
   /v1/company/basicsearch:
     get:
@@ -586,13 +403,196 @@ paths:
       summary: Get Feeds for given Company Ids
       tags:
         - feed
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - description: Provides Company information
-    name: company
-  - description: Provides Competitor information
-    name: competitor
-  - description: Provides Feed information
-    name: feed
+definitions:
+  Address:
+    properties:
+      city:
+        type: string
+      country:
+        type: string
+      phone:
+        type: string
+      postal_code:
+        type: string
+      state:
+        type: string
+      street1:
+        type: string
+      street2:
+        type: string
+  Ceo:
+    properties:
+      first_name:
+        type: string
+      image_url:
+        type: string
+      last_name:
+        type: string
+  CompanyBasicSearchVO:
+    properties:
+      company_id:
+        format: int64
+        type: integer
+      hq_address:
+        $ref: '#/definitions/Address'
+      name:
+        type: string
+      profile_url:
+        type: string
+      short_name:
+        type: string
+      website:
+        type: string
+  CompanyBasicVO:
+    properties:
+      company_id:
+        format: int64
+        type: integer
+      logo_url:
+        type: string
+      name:
+        type: string
+      profile_url:
+        type: string
+      short_name:
+        type: string
+      website:
+        type: string
+    required:
+      - company_id
+      - name
+      - website
+      - logo_url
+      - profile_url
+  CompanyCompetitorVO:
+    properties:
+      competitor:
+        items:
+          $ref: '#/definitions/CompanyBasicVO'
+        type: array
+  CompanySearchResultVO:
+    properties:
+      company_id:
+        format: int64
+        type: integer
+      company_type:
+        enum:
+          - Private
+          - Public
+          - Product/Brand/Service
+          - NGO/NPO/NFP/Organization/Association
+          - Investment Company
+          - Government
+        type: string
+      description:
+        type: string
+      hq_address:
+        $ref: '#/definitions/Address'
+      logo_url:
+        type: string
+      name:
+        type: string
+      profile_url:
+        type: string
+      short_name:
+        type: string
+      stock:
+        $ref: '#/definitions/Stock'
+      website:
+        type: string
+    required:
+      - company_id
+      - name
+      - website
+      - logo_url
+      - profile_url
+  FeedsVO:
+    properties:
+      category:
+        type: string
+      company:
+        $ref: '#/definitions/CompanyBasicVO'
+      enclosure_image:
+        type: string
+      feed_date:
+        type: string
+      id:
+        type: string
+      owler_feed_url:
+        type: string
+      publisher_logo:
+        type: string
+      publisher_name:
+        type: string
+      source_url:
+        type: string
+      title:
+        type: string
+  Stock:
+    properties:
+      exchange:
+        type: string
+      ticker:
+        type: string
+  basic_results:
+    properties:
+      company:
+        items:
+          $ref: '#/definitions/CompanyBasicSearchVO'
+        type: array
+  company:
+    properties:
+      ceo:
+        $ref: '#/definitions/Ceo'
+      company_id:
+        format: int64
+        type: integer
+      company_type:
+        enum:
+          - Private
+          - Public
+          - Product/Brand/Service
+          - NGO/NPO/NFP/Organization/Association
+          - Investment Company
+          - Government
+        type: string
+      description:
+        type: string
+      employee_count:
+        type: string
+      founded_date:
+        type: string
+      hq_address:
+        $ref: '#/definitions/Address'
+      industries:
+        items:
+          type: string
+        type: array
+      logo_url:
+        type: string
+      name:
+        type: string
+      profile_url:
+        type: string
+      revenue:
+        type: string
+      short_name:
+        type: string
+      stock:
+        $ref: '#/definitions/Stock'
+      website:
+        type: string
+    required:
+      - company_id
+      - name
+      - website
+      - logo_url
+      - profile_url
+  results:
+    properties:
+      feeds:
+        items:
+          $ref: '#/definitions/FeedsVO'
+        type: array
+      pagination_id:
+        type: string

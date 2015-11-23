@@ -1,214 +1,8 @@
-basePath: /
-definitions:
-  Course:
-    description: A Course in Classroom.
-    properties:
-      alternateLink:
-        description: Absolute link to this course in the Classroom web UI. Read-only.
-        type: string
-      courseState:
-        description: 'State of the course. If unspecified, the default state is `PROVISIONED`.'
-        enum:
-          - COURSE_STATE_UNSPECIFIED
-          - ACTIVE
-          - ARCHIVED
-          - PROVISIONED
-          - DECLINED
-        type: string
-      creationTime:
-        description: Creation time of the course. Specifying this field in a course update mask will result in an error. Read-only.
-        type: string
-      description:
-        description: "Optional description. For example, \"We'll be learning about the structure of living creatures from a combination of textbooks, guest lectures, and lab work. Expect to be excited!\" If set, this field must be a valid UTF-8 string and no longer than 30,000 characters."
-        type: string
-      descriptionHeading:
-        description: 'Optional heading for the description. For example, "Welcome to 10th Grade Biology." If set, this field must be a valid UTF-8 string and no longer than 3600 characters.'
-        type: string
-      enrollmentCode:
-        description: Enrollment code to use when joining this course. Specifying this field in a course update mask will result in an error. Read-only.
-        type: string
-      id:
-        description: 'Identifier for this course assigned by Classroom. When creating a course, you may optionally set this identifier to an alias string in the request to create a corresponding alias. The `id` is still assigned by Classroom and cannot be updated after the course is created. Specifying this field in a course update mask will result in an error.'
-        type: string
-      name:
-        description: 'Name of the course. For example, "10th Grade Biology". The name is required. It must be between 1 and 750 characters and a valid UTF-8 string.'
-        type: string
-      ownerId:
-        description: 'The identifier of the owner of a course. When specified as a parameter of a create course request, this field is required. The identifier can be one of the following: * the numeric identifier for the user * the email address of the user * the string literal `"me"`, indicating the requesting user This must be set in a create request. Specifying this field in a course update mask will result in an `INVALID_ARGUMENT` error.'
-        type: string
-      room:
-        description: 'Optional room location. For example, "301". If set, this field must be a valid UTF-8 string and no longer than 650 characters.'
-        type: string
-      section:
-        description: 'Section of the course. For example, "Period 2". If set, this field must be a valid UTF-8 string and no longer than 2800 characters.'
-        type: string
-      updateTime:
-        description: Time of the most recent update to this course. Specifying this field in a course update mask will result in an error. Read-only.
-        type: string
-    type: object
-  CourseAlias:
-    description: "Alternative identifier for a course. An alias uniquely identifies a course. It must be unique within one of the following scopes: * domain: A domain-scoped alias is visible to all users within the alias creator's domain and can be created only by a domain admin. A domain-scoped alias is often used when a course has an identifier external to Classroom. * project: A project-scoped alias is visible to any request from an application using the Developer Console project ID that created the alias and can be created by any project. A project-scoped alias is often used when an application has alternative identifiers. A random value can also be used to avoid duplicate courses in the event of transmission failures, as retrying a request will return `ALREADY_EXISTS` if a previous one has succeeded."
-    properties:
-      alias:
-        description: 'Alias string. The format of the string indicates the desired alias scoping. * `d:` indicates a domain-scoped alias. Example: `d:math_101` * `p:` indicates a project-scoped alias. Example: `p:abc123` This field has a maximum length of 256 characters.'
-        type: string
-    type: object
-  Empty:
-    description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`.'
-    type: object
-  GlobalPermission:
-    description: Global user permission description.
-    properties:
-      permission:
-        description: Permission value.
-        enum:
-          - PERMISSION_UNSPECIFIED
-          - CREATE_COURSE
-        type: string
-    type: object
-  Invitation:
-    description: An invitation to join a course.
-    properties:
-      courseId:
-        description: Identifier of the course to invite the user to.
-        type: string
-      id:
-        description: Identifier assigned by Classroom. Read-only.
-        type: string
-      role:
-        description: Role to invite the user to have. Must not be `COURSE_ROLE_UNSPECIFIED`.
-        enum:
-          - COURSE_ROLE_UNSPECIFIED
-          - STUDENT
-          - TEACHER
-        type: string
-      userId:
-        description: 'Identifier of the invited user. When specified as a parameter of a request, this identifier can be set to one of the following: * the numeric identifier for the user * the email address of the user * the string literal `"me"`, indicating the requesting user'
-        type: string
-    type: object
-  ListCourseAliasesResponse:
-    description: Response when listing course aliases.
-    properties:
-      aliases:
-        description: The course aliases.
-        items:
-          $ref: '#/definitions/CourseAlias'
-        type: array
-      nextPageToken:
-        description: 'Token identifying the next page of results to return. If empty, no further results are available.'
-        type: string
-    type: object
-  ListCoursesResponse:
-    description: Response when listing courses.
-    properties:
-      courses:
-        description: Courses that match the list request.
-        items:
-          $ref: '#/definitions/Course'
-        type: array
-      nextPageToken:
-        description: 'Token identifying the next page of results to return. If empty, no further results are available.'
-        type: string
-    type: object
-  ListInvitationsResponse:
-    description: Response when listing invitations.
-    properties:
-      invitations:
-        description: Invitations that match the list request.
-        items:
-          $ref: '#/definitions/Invitation'
-        type: array
-      nextPageToken:
-        description: 'Token identifying the next page of results to return. If empty, no further results are available.'
-        type: string
-    type: object
-  ListStudentsResponse:
-    description: Response when listing students.
-    properties:
-      nextPageToken:
-        description: 'Token identifying the next page of results to return. If empty, no further results are available.'
-        type: string
-      students:
-        description: Students who match the list request.
-        items:
-          $ref: '#/definitions/Student'
-        type: array
-    type: object
-  ListTeachersResponse:
-    description: Response when listing teachers.
-    properties:
-      nextPageToken:
-        description: 'Token identifying the next page of results to return. If empty, no further results are available.'
-        type: string
-      teachers:
-        description: Teachers who match the list request.
-        items:
-          $ref: '#/definitions/Teacher'
-        type: array
-    type: object
-  Name:
-    description: "Details of the user's name."
-    properties:
-      familyName:
-        description: "The user's last name. Read-only."
-        type: string
-      fullName:
-        description: "The user's full name formed by concatenating the first and last name values. Read-only."
-        type: string
-      givenName:
-        description: "The user's first name. Read-only."
-        type: string
-    type: object
-  Student:
-    description: Student in a course.
-    properties:
-      courseId:
-        description: Identifier of the course. Read-only.
-        type: string
-      profile:
-        $ref: '#/definitions/UserProfile'
-        description: Global user information for the student. Read-only.
-      userId:
-        description: 'Identifier of the user. When specified as a parameter of a request, this identifier can be one of the following: * the numeric identifier for the user * the email address of the user * the string literal `"me"`, indicating the requesting user'
-        type: string
-    type: object
-  Teacher:
-    description: Teacher of a course.
-    properties:
-      courseId:
-        description: Identifier of the course. Read-only.
-        type: string
-      profile:
-        $ref: '#/definitions/UserProfile'
-        description: Global user information for the teacher. Read-only.
-      userId:
-        description: 'Identifier of the user. When specified as a parameter of a request, this identifier can be one of the following: * the numeric identifier for the user * the email address of the user * the string literal `"me"`, indicating the requesting user'
-        type: string
-    type: object
-  UserProfile:
-    description: Global information for a user.
-    properties:
-      emailAddress:
-        description: Email address of the user. Read-only.
-        type: string
-      id:
-        description: Identifier of the user. Read-only.
-        type: string
-      name:
-        $ref: '#/definitions/Name'
-        description: Name of the user. Read-only.
-      permissions:
-        description: Global permissions of the user. Read-only.
-        items:
-          $ref: '#/definitions/GlobalPermission'
-        type: array
-      photoUrl:
-        description: "URL of user's profile photo. Read-only."
-        type: string
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/classroom/'
+swagger: '2.0'
+schemes:
+  - https
 host: classroom.googleapis.com
+basePath: /
 info:
   contact:
     name: Google
@@ -227,6 +21,21 @@ info:
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: classroom
+externalDocs:
+  url: 'https://developers.google.com/classroom/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/classroom.courses': Manage your Google Classroom classes
+      'https://www.googleapis.com/auth/classroom.courses.readonly': View your Google Classroom classes
+      'https://www.googleapis.com/auth/classroom.profile.emails': View the email addresses of people in your classes
+      'https://www.googleapis.com/auth/classroom.profile.photos': View the profile photos of people in your classes
+      'https://www.googleapis.com/auth/classroom.rosters': Manage your Google Classroom class rosters
+      'https://www.googleapis.com/auth/classroom.rosters.readonly': View your Google Classroom class rosters
+    type: oauth2
 parameters:
   $.xgafv:
     description: V1 error format.
@@ -1035,19 +844,210 @@ paths:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/classroom.courses': Manage your Google Classroom classes
-      'https://www.googleapis.com/auth/classroom.courses.readonly': View your Google Classroom classes
-      'https://www.googleapis.com/auth/classroom.profile.emails': View the email addresses of people in your classes
-      'https://www.googleapis.com/auth/classroom.profile.photos': View the profile photos of people in your classes
-      'https://www.googleapis.com/auth/classroom.rosters': Manage your Google Classroom class rosters
-      'https://www.googleapis.com/auth/classroom.rosters.readonly': View your Google Classroom class rosters
-    type: oauth2
-swagger: '2.0'
+definitions:
+  Course:
+    description: A Course in Classroom.
+    properties:
+      alternateLink:
+        description: Absolute link to this course in the Classroom web UI. Read-only.
+        type: string
+      courseState:
+        description: 'State of the course. If unspecified, the default state is `PROVISIONED`.'
+        enum:
+          - COURSE_STATE_UNSPECIFIED
+          - ACTIVE
+          - ARCHIVED
+          - PROVISIONED
+          - DECLINED
+        type: string
+      creationTime:
+        description: Creation time of the course. Specifying this field in a course update mask will result in an error. Read-only.
+        type: string
+      description:
+        description: "Optional description. For example, \"We'll be learning about the structure of living creatures from a combination of textbooks, guest lectures, and lab work. Expect to be excited!\" If set, this field must be a valid UTF-8 string and no longer than 30,000 characters."
+        type: string
+      descriptionHeading:
+        description: 'Optional heading for the description. For example, "Welcome to 10th Grade Biology." If set, this field must be a valid UTF-8 string and no longer than 3600 characters.'
+        type: string
+      enrollmentCode:
+        description: Enrollment code to use when joining this course. Specifying this field in a course update mask will result in an error. Read-only.
+        type: string
+      id:
+        description: 'Identifier for this course assigned by Classroom. When creating a course, you may optionally set this identifier to an alias string in the request to create a corresponding alias. The `id` is still assigned by Classroom and cannot be updated after the course is created. Specifying this field in a course update mask will result in an error.'
+        type: string
+      name:
+        description: 'Name of the course. For example, "10th Grade Biology". The name is required. It must be between 1 and 750 characters and a valid UTF-8 string.'
+        type: string
+      ownerId:
+        description: 'The identifier of the owner of a course. When specified as a parameter of a create course request, this field is required. The identifier can be one of the following: * the numeric identifier for the user * the email address of the user * the string literal `"me"`, indicating the requesting user This must be set in a create request. Specifying this field in a course update mask will result in an `INVALID_ARGUMENT` error.'
+        type: string
+      room:
+        description: 'Optional room location. For example, "301". If set, this field must be a valid UTF-8 string and no longer than 650 characters.'
+        type: string
+      section:
+        description: 'Section of the course. For example, "Period 2". If set, this field must be a valid UTF-8 string and no longer than 2800 characters.'
+        type: string
+      updateTime:
+        description: Time of the most recent update to this course. Specifying this field in a course update mask will result in an error. Read-only.
+        type: string
+    type: object
+  CourseAlias:
+    description: "Alternative identifier for a course. An alias uniquely identifies a course. It must be unique within one of the following scopes: * domain: A domain-scoped alias is visible to all users within the alias creator's domain and can be created only by a domain admin. A domain-scoped alias is often used when a course has an identifier external to Classroom. * project: A project-scoped alias is visible to any request from an application using the Developer Console project ID that created the alias and can be created by any project. A project-scoped alias is often used when an application has alternative identifiers. A random value can also be used to avoid duplicate courses in the event of transmission failures, as retrying a request will return `ALREADY_EXISTS` if a previous one has succeeded."
+    properties:
+      alias:
+        description: 'Alias string. The format of the string indicates the desired alias scoping. * `d:` indicates a domain-scoped alias. Example: `d:math_101` * `p:` indicates a project-scoped alias. Example: `p:abc123` This field has a maximum length of 256 characters.'
+        type: string
+    type: object
+  Empty:
+    description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`.'
+    type: object
+  GlobalPermission:
+    description: Global user permission description.
+    properties:
+      permission:
+        description: Permission value.
+        enum:
+          - PERMISSION_UNSPECIFIED
+          - CREATE_COURSE
+        type: string
+    type: object
+  Invitation:
+    description: An invitation to join a course.
+    properties:
+      courseId:
+        description: Identifier of the course to invite the user to.
+        type: string
+      id:
+        description: Identifier assigned by Classroom. Read-only.
+        type: string
+      role:
+        description: Role to invite the user to have. Must not be `COURSE_ROLE_UNSPECIFIED`.
+        enum:
+          - COURSE_ROLE_UNSPECIFIED
+          - STUDENT
+          - TEACHER
+        type: string
+      userId:
+        description: 'Identifier of the invited user. When specified as a parameter of a request, this identifier can be set to one of the following: * the numeric identifier for the user * the email address of the user * the string literal `"me"`, indicating the requesting user'
+        type: string
+    type: object
+  ListCourseAliasesResponse:
+    description: Response when listing course aliases.
+    properties:
+      aliases:
+        description: The course aliases.
+        items:
+          $ref: '#/definitions/CourseAlias'
+        type: array
+      nextPageToken:
+        description: 'Token identifying the next page of results to return. If empty, no further results are available.'
+        type: string
+    type: object
+  ListCoursesResponse:
+    description: Response when listing courses.
+    properties:
+      courses:
+        description: Courses that match the list request.
+        items:
+          $ref: '#/definitions/Course'
+        type: array
+      nextPageToken:
+        description: 'Token identifying the next page of results to return. If empty, no further results are available.'
+        type: string
+    type: object
+  ListInvitationsResponse:
+    description: Response when listing invitations.
+    properties:
+      invitations:
+        description: Invitations that match the list request.
+        items:
+          $ref: '#/definitions/Invitation'
+        type: array
+      nextPageToken:
+        description: 'Token identifying the next page of results to return. If empty, no further results are available.'
+        type: string
+    type: object
+  ListStudentsResponse:
+    description: Response when listing students.
+    properties:
+      nextPageToken:
+        description: 'Token identifying the next page of results to return. If empty, no further results are available.'
+        type: string
+      students:
+        description: Students who match the list request.
+        items:
+          $ref: '#/definitions/Student'
+        type: array
+    type: object
+  ListTeachersResponse:
+    description: Response when listing teachers.
+    properties:
+      nextPageToken:
+        description: 'Token identifying the next page of results to return. If empty, no further results are available.'
+        type: string
+      teachers:
+        description: Teachers who match the list request.
+        items:
+          $ref: '#/definitions/Teacher'
+        type: array
+    type: object
+  Name:
+    description: "Details of the user's name."
+    properties:
+      familyName:
+        description: "The user's last name. Read-only."
+        type: string
+      fullName:
+        description: "The user's full name formed by concatenating the first and last name values. Read-only."
+        type: string
+      givenName:
+        description: "The user's first name. Read-only."
+        type: string
+    type: object
+  Student:
+    description: Student in a course.
+    properties:
+      courseId:
+        description: Identifier of the course. Read-only.
+        type: string
+      profile:
+        $ref: '#/definitions/UserProfile'
+        description: Global user information for the student. Read-only.
+      userId:
+        description: 'Identifier of the user. When specified as a parameter of a request, this identifier can be one of the following: * the numeric identifier for the user * the email address of the user * the string literal `"me"`, indicating the requesting user'
+        type: string
+    type: object
+  Teacher:
+    description: Teacher of a course.
+    properties:
+      courseId:
+        description: Identifier of the course. Read-only.
+        type: string
+      profile:
+        $ref: '#/definitions/UserProfile'
+        description: Global user information for the teacher. Read-only.
+      userId:
+        description: 'Identifier of the user. When specified as a parameter of a request, this identifier can be one of the following: * the numeric identifier for the user * the email address of the user * the string literal `"me"`, indicating the requesting user'
+        type: string
+    type: object
+  UserProfile:
+    description: Global information for a user.
+    properties:
+      emailAddress:
+        description: Email address of the user. Read-only.
+        type: string
+      id:
+        description: Identifier of the user. Read-only.
+        type: string
+      name:
+        $ref: '#/definitions/Name'
+        description: Name of the user. Read-only.
+      permissions:
+        description: Global permissions of the user. Read-only.
+        items:
+          $ref: '#/definitions/GlobalPermission'
+        type: array
+      photoUrl:
+        description: "URL of user's profile photo. Read-only."
+        type: string
+    type: object

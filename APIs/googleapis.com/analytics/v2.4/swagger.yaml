@@ -1,7 +1,8 @@
-basePath: /analytics/v2.4
-externalDocs:
-  url: 'https://developers.google.com/analytics/'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /analytics/v2.4
 info:
   contact:
     name: Google
@@ -20,6 +21,17 @@ info:
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: analytics
+externalDocs:
+  url: 'https://developers.google.com/analytics/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/analytics': View and manage your Google Analytics data
+      'https://www.googleapis.com/auth/analytics.readonly': View your Google Analytics data
+    type: oauth2
 parameters:
   alt:
     default: atom
@@ -313,15 +325,3 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/analytics': View and manage your Google Analytics data
-      'https://www.googleapis.com/auth/analytics.readonly': View your Google Analytics data
-    type: oauth2
-swagger: '2.0'

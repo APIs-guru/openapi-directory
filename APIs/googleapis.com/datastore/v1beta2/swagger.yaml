@@ -1,4 +1,284 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.googleapis.com
 basePath: /datastore/v1beta2/datasets
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: API for accessing Google Cloud Datastore.
+  title: Google Cloud Datastore API
+  version: v1beta2
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://cloud.google.com/_static/images/new-gcp-logo.png'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/datastore/v1beta2/rest'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: datastore
+externalDocs:
+  url: 'https://developers.google.com/datastore/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/datastore': View and manage your Google Cloud Datastore data
+      'https://www.googleapis.com/auth/userinfo.email': View your email address
+    type: oauth2
+parameters:
+  alt:
+    default: proto
+    description: Data format for the response.
+    enum:
+      - json
+      - proto
+    in: query
+    name: alt
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    in: query
+    name: quotaUser
+    type: string
+  userIp:
+    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    in: query
+    name: userIp
+    type: string
+paths:
+  '/{datasetId}/allocateIds':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Allocate IDs for incomplete keys (useful for referencing an entity before it is inserted).
+      operationId: datastore.datasets.allocateIds
+      parameters:
+        - description: Identifies the dataset.
+          in: path
+          name: datasetId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AllocateIdsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AllocateIdsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/datastore'
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - datasets
+  '/{datasetId}/beginTransaction':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Begin a new transaction.
+      operationId: datastore.datasets.beginTransaction
+      parameters:
+        - description: Identifies the dataset.
+          in: path
+          name: datasetId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BeginTransactionRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BeginTransactionResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/datastore'
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - datasets
+  '/{datasetId}/commit':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Commit a transaction, optionally creating, deleting or modifying some entities.'
+      operationId: datastore.datasets.commit
+      parameters:
+        - description: Identifies the dataset.
+          in: path
+          name: datasetId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CommitRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CommitResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/datastore'
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - datasets
+  '/{datasetId}/lookup':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Look up some entities by key.
+      operationId: datastore.datasets.lookup
+      parameters:
+        - description: Identifies the dataset.
+          in: path
+          name: datasetId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LookupRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LookupResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/datastore'
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - datasets
+  '/{datasetId}/rollback':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Roll back a transaction.
+      operationId: datastore.datasets.rollback
+      parameters:
+        - description: Identifies the dataset.
+          in: path
+          name: datasetId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RollbackRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RollbackResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/datastore'
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - datasets
+  '/{datasetId}/runQuery':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Query for entities.
+      operationId: datastore.datasets.runQuery
+      parameters:
+        - description: Identifies the dataset.
+          in: path
+          name: datasetId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RunQueryRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RunQueryResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/datastore'
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - datasets
 definitions:
   AllocateIdsRequest:
     properties:
@@ -547,283 +827,3 @@ definitions:
         description: 'A UTF-8 encoded string value. When indexed is true, may have at most 500 characters.'
         type: string
     type: object
-externalDocs:
-  url: 'https://developers.google.com/datastore/'
-host: www.googleapis.com
-info:
-  contact:
-    name: Google
-    url: 'https://google.com'
-  description: API for accessing Google Cloud Datastore.
-  title: Google Cloud Datastore API
-  version: v1beta2
-  x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
-  x-logo:
-    url: 'https://cloud.google.com/_static/images/new-gcp-logo.png'
-  x-origin:
-    format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/datastore/v1beta2/rest'
-    version: v1
-  x-preferred: true
-  x-providerName: googleapis.com
-  x-serviceName: datastore
-parameters:
-  alt:
-    default: proto
-    description: Data format for the response.
-    enum:
-      - json
-      - proto
-    in: query
-    name: alt
-    type: string
-  fields:
-    description: Selector specifying which fields to include in a partial response.
-    in: query
-    name: fields
-    type: string
-  key:
-    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
-    in: query
-    name: key
-    type: string
-  oauth_token:
-    description: OAuth 2.0 token for the current user.
-    in: query
-    name: oauth_token
-    type: string
-  prettyPrint:
-    default: true
-    description: Returns response with indentations and line breaks.
-    in: query
-    name: prettyPrint
-    type: boolean
-  quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
-    in: query
-    name: quotaUser
-    type: string
-  userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
-    in: query
-    name: userIp
-    type: string
-paths:
-  '/{datasetId}/allocateIds':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Allocate IDs for incomplete keys (useful for referencing an entity before it is inserted).
-      operationId: datastore.datasets.allocateIds
-      parameters:
-        - description: Identifies the dataset.
-          in: path
-          name: datasetId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AllocateIdsRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AllocateIdsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/datastore'
-            - 'https://www.googleapis.com/auth/userinfo.email'
-      tags:
-        - datasets
-  '/{datasetId}/beginTransaction':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Begin a new transaction.
-      operationId: datastore.datasets.beginTransaction
-      parameters:
-        - description: Identifies the dataset.
-          in: path
-          name: datasetId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/BeginTransactionRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/BeginTransactionResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/datastore'
-            - 'https://www.googleapis.com/auth/userinfo.email'
-      tags:
-        - datasets
-  '/{datasetId}/commit':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: 'Commit a transaction, optionally creating, deleting or modifying some entities.'
-      operationId: datastore.datasets.commit
-      parameters:
-        - description: Identifies the dataset.
-          in: path
-          name: datasetId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CommitRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/CommitResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/datastore'
-            - 'https://www.googleapis.com/auth/userinfo.email'
-      tags:
-        - datasets
-  '/{datasetId}/lookup':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Look up some entities by key.
-      operationId: datastore.datasets.lookup
-      parameters:
-        - description: Identifies the dataset.
-          in: path
-          name: datasetId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LookupRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/LookupResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/datastore'
-            - 'https://www.googleapis.com/auth/userinfo.email'
-      tags:
-        - datasets
-  '/{datasetId}/rollback':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Roll back a transaction.
-      operationId: datastore.datasets.rollback
-      parameters:
-        - description: Identifies the dataset.
-          in: path
-          name: datasetId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RollbackRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/RollbackResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/datastore'
-            - 'https://www.googleapis.com/auth/userinfo.email'
-      tags:
-        - datasets
-  '/{datasetId}/runQuery':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Query for entities.
-      operationId: datastore.datasets.runQuery
-      parameters:
-        - description: Identifies the dataset.
-          in: path
-          name: datasetId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RunQueryRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/RunQueryResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/datastore'
-            - 'https://www.googleapis.com/auth/userinfo.email'
-      tags:
-        - datasets
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/datastore': View and manage your Google Cloud Datastore data
-      'https://www.googleapis.com/auth/userinfo.email': View your email address
-    type: oauth2
-swagger: '2.0'

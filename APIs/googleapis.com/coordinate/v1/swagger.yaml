@@ -1,329 +1,8 @@
-basePath: /coordinate/v1
-definitions:
-  CustomField:
-    description: Custom field.
-    properties:
-      customFieldId:
-        description: Custom field id.
-        format: int64
-        type: string
-      kind:
-        default: 'coordinate#customField'
-        description: Identifies this object as a custom field.
-        type: string
-      value:
-        description: Custom field value.
-        type: string
-    type: object
-  CustomFieldDef:
-    description: Custom field definition.
-    properties:
-      enabled:
-        description: Whether the field is enabled.
-        type: boolean
-      enumitems:
-        description: "List of enum items for this custom field. Populated only if the field type is enum. Enum fields appear as 'lists' in the Coordinate web and mobile UI."
-        items:
-          $ref: '#/definitions/EnumItemDef'
-        type: array
-      id:
-        description: Custom field id.
-        format: int64
-        type: string
-      kind:
-        default: 'coordinate#customFieldDef'
-        description: Identifies this object as a custom field definition.
-        type: string
-      name:
-        description: Custom field name.
-        type: string
-      requiredForCheckout:
-        description: Whether the field is required for checkout.
-        type: boolean
-      type:
-        description: Custom field type.
-        type: string
-    type: object
-  CustomFieldDefListResponse:
-    description: Collection of custom field definitions for a team.
-    properties:
-      items:
-        description: Collection of custom field definitions in a team.
-        items:
-          $ref: '#/definitions/CustomFieldDef'
-        type: array
-      kind:
-        default: 'coordinate#customFieldDefList'
-        description: Identifies this object as a collection of custom field definitions in a team.
-        type: string
-    type: object
-  CustomFields:
-    description: Collection of custom fields.
-    properties:
-      customField:
-        description: Collection of custom fields.
-        items:
-          $ref: '#/definitions/CustomField'
-        type: array
-      kind:
-        default: 'coordinate#customFields'
-        description: Identifies this object as a collection of custom fields.
-        type: string
-    type: object
-  EnumItemDef:
-    description: Enum Item definition.
-    properties:
-      active:
-        description: 'Whether the enum item is active. Jobs may contain inactive enum values; however, setting an enum to an inactive value when creating or updating a job will result in a 500 error.'
-        type: boolean
-      kind:
-        default: 'coordinate#enumItemDef'
-        description: Identifies this object as an enum item definition.
-        type: string
-      value:
-        description: Custom field value.
-        type: string
-    type: object
-  Job:
-    description: A job.
-    properties:
-      id:
-        description: Job id.
-        format: uint64
-        type: string
-      jobChange:
-        description: List of job changes since it was created. The first change corresponds to the state of the job when it was created.
-        items:
-          $ref: '#/definitions/JobChange'
-        type: array
-      kind:
-        default: 'coordinate#job'
-        description: Identifies this object as a job.
-        type: string
-      state:
-        $ref: '#/definitions/JobState'
-        description: Current job state.
-    type: object
-  JobChange:
-    description: Change to a job. For example assigning the job to a different worker.
-    properties:
-      kind:
-        default: 'coordinate#jobChange'
-        description: Identifies this object as a job change.
-        type: string
-      state:
-        $ref: '#/definitions/JobState'
-        description: Change applied to the job. Only the fields that were changed are set.
-      timestamp:
-        description: Time at which this change was applied.
-        format: uint64
-        type: string
-    type: object
-  JobListResponse:
-    description: Response from a List Jobs request.
-    properties:
-      items:
-        description: Jobs in the collection.
-        items:
-          $ref: '#/definitions/Job'
-        type: array
-      kind:
-        default: 'coordinate#jobList'
-        description: Identifies this object as a list of jobs.
-        type: string
-      nextPageToken:
-        description: A token to provide to get the next page of results.
-        type: string
-    type: object
-  JobState:
-    description: Current state of a job.
-    properties:
-      assignee:
-        description: 'Email address of the assignee, or the string "DELETED_USER" if the account is no longer available.'
-        type: string
-      customFields:
-        $ref: '#/definitions/CustomFields'
-        description: Custom fields.
-      customerName:
-        description: Customer name.
-        type: string
-      customerPhoneNumber:
-        description: Customer phone number.
-        type: string
-      kind:
-        default: 'coordinate#jobState'
-        description: Identifies this object as a job state.
-        type: string
-      location:
-        $ref: '#/definitions/Location'
-        description: Job location.
-      note:
-        description: Note added to the job.
-        items:
-          type: string
-        type: array
-      progress:
-        description: Job progress.
-        type: string
-      title:
-        description: Job title.
-        type: string
-    type: object
-  Location:
-    description: Location of a job.
-    properties:
-      addressLine:
-        description: Address.
-        items:
-          type: string
-        type: array
-      kind:
-        default: 'coordinate#location'
-        description: Identifies this object as a location.
-        type: string
-      lat:
-        description: Latitude.
-        format: double
-        type: number
-      lng:
-        description: Longitude.
-        format: double
-        type: number
-    type: object
-  LocationListResponse:
-    description: Response from a List Locations request.
-    properties:
-      items:
-        description: Locations in the collection.
-        items:
-          $ref: '#/definitions/LocationRecord'
-        type: array
-      kind:
-        default: 'coordinate#locationList'
-        description: Identifies this object as a list of locations.
-        type: string
-      nextPageToken:
-        description: A token to provide to get the next page of results.
-        type: string
-      tokenPagination:
-        $ref: '#/definitions/TokenPagination'
-        description: Pagination information for token pagination.
-    type: object
-  LocationRecord:
-    description: Recorded location of a worker.
-    properties:
-      collectionTime:
-        description: The collection time in milliseconds since the epoch.
-        format: int64
-        type: string
-      confidenceRadius:
-        description: 'The location accuracy in meters. This is the radius of a 95% confidence interval around the location measurement.'
-        format: double
-        type: number
-      kind:
-        default: 'coordinate#locationRecord'
-        description: Identifies this object as a location.
-        type: string
-      latitude:
-        description: Latitude.
-        format: double
-        type: number
-      longitude:
-        description: Longitude.
-        format: double
-        type: number
-    type: object
-  Schedule:
-    description: Job schedule.
-    properties:
-      allDay:
-        description: Whether the job is scheduled for the whole day. Time of day in start/end times is ignored if this is true.
-        type: boolean
-      duration:
-        description: Job duration in milliseconds.
-        format: uint64
-        type: string
-      endTime:
-        description: Scheduled end time in milliseconds since epoch.
-        format: uint64
-        type: string
-      kind:
-        default: 'coordinate#schedule'
-        description: Identifies this object as a job schedule.
-        type: string
-      startTime:
-        description: Scheduled start time in milliseconds since epoch.
-        format: uint64
-        type: string
-    type: object
-  Team:
-    description: A Coordinate team.
-    properties:
-      id:
-        description: 'Team id, as found in a coordinate team url e.g. https://coordinate.google.com/f/xyz where "xyz" is the team id.'
-        type: string
-      kind:
-        default: 'coordinate#team'
-        description: Identifies this object as a team.
-        type: string
-      name:
-        description: Team name
-        type: string
-    type: object
-  TeamListResponse:
-    description: Response from a List Teams request.
-    properties:
-      items:
-        description: Teams in the collection.
-        items:
-          $ref: '#/definitions/Team'
-        type: array
-      kind:
-        default: 'coordinate#teamList'
-        description: Identifies this object as a list of teams.
-        type: string
-    type: object
-  TokenPagination:
-    description: Pagination information.
-    properties:
-      kind:
-        default: 'coordinate#tokenPagination'
-        description: Identifies this object as pagination information.
-        type: string
-      nextPageToken:
-        description: A token to provide to get the next page of results.
-        type: string
-      previousPageToken:
-        description: A token to provide to get the previous page of results.
-        type: string
-    type: object
-  Worker:
-    description: A worker in a Coordinate team.
-    properties:
-      id:
-        description: 'Worker email address. If a worker has been deleted from your team, the email address will appear as DELETED_USER.'
-        type: string
-      kind:
-        default: 'coordinate#worker'
-        description: Identifies this object as a worker.
-        type: string
-    type: object
-  WorkerListResponse:
-    description: Response from a List Workers request.
-    properties:
-      items:
-        description: Workers in the collection.
-        items:
-          $ref: '#/definitions/Worker'
-        type: array
-      kind:
-        default: 'coordinate#workerList'
-        description: Identifies this object as a list of workers.
-        type: string
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/coordinate/'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /coordinate/v1
 info:
   contact:
     name: Google
@@ -342,6 +21,17 @@ info:
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: coordinate
+externalDocs:
+  url: 'https://developers.google.com/coordinate/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/coordinate': View and manage your Google Maps Coordinate jobs
+      'https://www.googleapis.com/auth/coordinate.readonly': View your Google Coordinate jobs
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -945,15 +635,325 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/coordinate': View and manage your Google Maps Coordinate jobs
-      'https://www.googleapis.com/auth/coordinate.readonly': View your Google Coordinate jobs
-    type: oauth2
-swagger: '2.0'
+definitions:
+  CustomField:
+    description: Custom field.
+    properties:
+      customFieldId:
+        description: Custom field id.
+        format: int64
+        type: string
+      kind:
+        default: 'coordinate#customField'
+        description: Identifies this object as a custom field.
+        type: string
+      value:
+        description: Custom field value.
+        type: string
+    type: object
+  CustomFieldDef:
+    description: Custom field definition.
+    properties:
+      enabled:
+        description: Whether the field is enabled.
+        type: boolean
+      enumitems:
+        description: "List of enum items for this custom field. Populated only if the field type is enum. Enum fields appear as 'lists' in the Coordinate web and mobile UI."
+        items:
+          $ref: '#/definitions/EnumItemDef'
+        type: array
+      id:
+        description: Custom field id.
+        format: int64
+        type: string
+      kind:
+        default: 'coordinate#customFieldDef'
+        description: Identifies this object as a custom field definition.
+        type: string
+      name:
+        description: Custom field name.
+        type: string
+      requiredForCheckout:
+        description: Whether the field is required for checkout.
+        type: boolean
+      type:
+        description: Custom field type.
+        type: string
+    type: object
+  CustomFieldDefListResponse:
+    description: Collection of custom field definitions for a team.
+    properties:
+      items:
+        description: Collection of custom field definitions in a team.
+        items:
+          $ref: '#/definitions/CustomFieldDef'
+        type: array
+      kind:
+        default: 'coordinate#customFieldDefList'
+        description: Identifies this object as a collection of custom field definitions in a team.
+        type: string
+    type: object
+  CustomFields:
+    description: Collection of custom fields.
+    properties:
+      customField:
+        description: Collection of custom fields.
+        items:
+          $ref: '#/definitions/CustomField'
+        type: array
+      kind:
+        default: 'coordinate#customFields'
+        description: Identifies this object as a collection of custom fields.
+        type: string
+    type: object
+  EnumItemDef:
+    description: Enum Item definition.
+    properties:
+      active:
+        description: 'Whether the enum item is active. Jobs may contain inactive enum values; however, setting an enum to an inactive value when creating or updating a job will result in a 500 error.'
+        type: boolean
+      kind:
+        default: 'coordinate#enumItemDef'
+        description: Identifies this object as an enum item definition.
+        type: string
+      value:
+        description: Custom field value.
+        type: string
+    type: object
+  Job:
+    description: A job.
+    properties:
+      id:
+        description: Job id.
+        format: uint64
+        type: string
+      jobChange:
+        description: List of job changes since it was created. The first change corresponds to the state of the job when it was created.
+        items:
+          $ref: '#/definitions/JobChange'
+        type: array
+      kind:
+        default: 'coordinate#job'
+        description: Identifies this object as a job.
+        type: string
+      state:
+        $ref: '#/definitions/JobState'
+        description: Current job state.
+    type: object
+  JobChange:
+    description: Change to a job. For example assigning the job to a different worker.
+    properties:
+      kind:
+        default: 'coordinate#jobChange'
+        description: Identifies this object as a job change.
+        type: string
+      state:
+        $ref: '#/definitions/JobState'
+        description: Change applied to the job. Only the fields that were changed are set.
+      timestamp:
+        description: Time at which this change was applied.
+        format: uint64
+        type: string
+    type: object
+  JobListResponse:
+    description: Response from a List Jobs request.
+    properties:
+      items:
+        description: Jobs in the collection.
+        items:
+          $ref: '#/definitions/Job'
+        type: array
+      kind:
+        default: 'coordinate#jobList'
+        description: Identifies this object as a list of jobs.
+        type: string
+      nextPageToken:
+        description: A token to provide to get the next page of results.
+        type: string
+    type: object
+  JobState:
+    description: Current state of a job.
+    properties:
+      assignee:
+        description: 'Email address of the assignee, or the string "DELETED_USER" if the account is no longer available.'
+        type: string
+      customFields:
+        $ref: '#/definitions/CustomFields'
+        description: Custom fields.
+      customerName:
+        description: Customer name.
+        type: string
+      customerPhoneNumber:
+        description: Customer phone number.
+        type: string
+      kind:
+        default: 'coordinate#jobState'
+        description: Identifies this object as a job state.
+        type: string
+      location:
+        $ref: '#/definitions/Location'
+        description: Job location.
+      note:
+        description: Note added to the job.
+        items:
+          type: string
+        type: array
+      progress:
+        description: Job progress.
+        type: string
+      title:
+        description: Job title.
+        type: string
+    type: object
+  Location:
+    description: Location of a job.
+    properties:
+      addressLine:
+        description: Address.
+        items:
+          type: string
+        type: array
+      kind:
+        default: 'coordinate#location'
+        description: Identifies this object as a location.
+        type: string
+      lat:
+        description: Latitude.
+        format: double
+        type: number
+      lng:
+        description: Longitude.
+        format: double
+        type: number
+    type: object
+  LocationListResponse:
+    description: Response from a List Locations request.
+    properties:
+      items:
+        description: Locations in the collection.
+        items:
+          $ref: '#/definitions/LocationRecord'
+        type: array
+      kind:
+        default: 'coordinate#locationList'
+        description: Identifies this object as a list of locations.
+        type: string
+      nextPageToken:
+        description: A token to provide to get the next page of results.
+        type: string
+      tokenPagination:
+        $ref: '#/definitions/TokenPagination'
+        description: Pagination information for token pagination.
+    type: object
+  LocationRecord:
+    description: Recorded location of a worker.
+    properties:
+      collectionTime:
+        description: The collection time in milliseconds since the epoch.
+        format: int64
+        type: string
+      confidenceRadius:
+        description: 'The location accuracy in meters. This is the radius of a 95% confidence interval around the location measurement.'
+        format: double
+        type: number
+      kind:
+        default: 'coordinate#locationRecord'
+        description: Identifies this object as a location.
+        type: string
+      latitude:
+        description: Latitude.
+        format: double
+        type: number
+      longitude:
+        description: Longitude.
+        format: double
+        type: number
+    type: object
+  Schedule:
+    description: Job schedule.
+    properties:
+      allDay:
+        description: Whether the job is scheduled for the whole day. Time of day in start/end times is ignored if this is true.
+        type: boolean
+      duration:
+        description: Job duration in milliseconds.
+        format: uint64
+        type: string
+      endTime:
+        description: Scheduled end time in milliseconds since epoch.
+        format: uint64
+        type: string
+      kind:
+        default: 'coordinate#schedule'
+        description: Identifies this object as a job schedule.
+        type: string
+      startTime:
+        description: Scheduled start time in milliseconds since epoch.
+        format: uint64
+        type: string
+    type: object
+  Team:
+    description: A Coordinate team.
+    properties:
+      id:
+        description: 'Team id, as found in a coordinate team url e.g. https://coordinate.google.com/f/xyz where "xyz" is the team id.'
+        type: string
+      kind:
+        default: 'coordinate#team'
+        description: Identifies this object as a team.
+        type: string
+      name:
+        description: Team name
+        type: string
+    type: object
+  TeamListResponse:
+    description: Response from a List Teams request.
+    properties:
+      items:
+        description: Teams in the collection.
+        items:
+          $ref: '#/definitions/Team'
+        type: array
+      kind:
+        default: 'coordinate#teamList'
+        description: Identifies this object as a list of teams.
+        type: string
+    type: object
+  TokenPagination:
+    description: Pagination information.
+    properties:
+      kind:
+        default: 'coordinate#tokenPagination'
+        description: Identifies this object as pagination information.
+        type: string
+      nextPageToken:
+        description: A token to provide to get the next page of results.
+        type: string
+      previousPageToken:
+        description: A token to provide to get the previous page of results.
+        type: string
+    type: object
+  Worker:
+    description: A worker in a Coordinate team.
+    properties:
+      id:
+        description: 'Worker email address. If a worker has been deleted from your team, the email address will appear as DELETED_USER.'
+        type: string
+      kind:
+        default: 'coordinate#worker'
+        description: Identifies this object as a worker.
+        type: string
+    type: object
+  WorkerListResponse:
+    description: Response from a List Workers request.
+    properties:
+      items:
+        description: Workers in the collection.
+        items:
+          $ref: '#/definitions/Worker'
+        type: array
+      kind:
+        default: 'coordinate#workerList'
+        description: Identifies this object as a list of workers.
+        type: string
+    type: object

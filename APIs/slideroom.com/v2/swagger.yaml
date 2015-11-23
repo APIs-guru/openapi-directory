@@ -1,31 +1,6 @@
-definitions:
-  ExportResultV2:
-    properties:
-      completed_files:
-        format: int32
-        type: integer
-      file_urls:
-        items:
-          type: string
-        type: array
-      status:
-        type: string
-      total_files:
-        format: int32
-        type: integer
-    type: object
-  RequestApplicationExportResultV2:
-    properties:
-      message:
-        type: string
-      submissions:
-        format: int32
-        type: integer
-      token:
-        format: int32
-        type: integer
-    type: object
-  WebhookResultV2: {}
+swagger: '2.0'
+schemes:
+  - https
 host: api.slideroom.com
 info:
   description: "SlideRoom provides a RESTful API for exporting data out of your organization's SlideRoom account."
@@ -652,6 +627,31 @@ paths:
       summary: Gets the status/result of a requested export.
       tags:
         - Export
-schemes:
-  - https
-swagger: '2.0'
+definitions:
+  ExportResultV2:
+    properties:
+      completed_files:
+        format: int32
+        type: integer
+      file_urls:
+        items:
+          type: string
+        type: array
+      status:
+        type: string
+      total_files:
+        format: int32
+        type: integer
+    type: object
+  RequestApplicationExportResultV2:
+    properties:
+      message:
+        type: string
+      submissions:
+        format: int32
+        type: integer
+      token:
+        format: int32
+        type: integer
+    type: object
+  WebhookResultV2: {}

@@ -1,4 +1,47 @@
+swagger: '2.0'
+schemes:
+  - https
+host: spectrocoin.com
 basePath: /api/merchant/1
+info:
+  contact:
+    email: info@spectrocoin.com
+  description: This is an API designend for merchants who are using SpectroCoin services and wishes to integrate them locally.
+  title: SpectroCoin Merchant API
+  version: 1.0.0
+  x-logo:
+    url: 'https://d1ryrugmrhsb54.cloudfront.net/assets/images/logo.svg'
+  x-origin:
+    format: swagger
+    url: 'https://spectrocoin.com/api-docs/merchant/1/'
+    version: '1.2'
+  x-providerName: spectrocoin.com
+tags:
+  - description: Create Merchant order to be paid by customer
+    name: createOrder
+paths:
+  /api/createOrder:
+    post:
+      consumes:
+        - application/x-www-form-urlencoded
+      operationId: createOrder
+      parameters:
+        - description: Request to create order
+          in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/OrderRequest'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Order'
+      summary: Create merchant order
+      tags:
+        - createOrder
 definitions:
   BigDecimal:
     properties:
@@ -99,46 +142,3 @@ definitions:
       - apiId
       - payCurrency
       - sign
-host: spectrocoin.com
-info:
-  contact:
-    email: info@spectrocoin.com
-  description: This is an API designend for merchants who are using SpectroCoin services and wishes to integrate them locally.
-  title: SpectroCoin Merchant API
-  version: 1.0.0
-  x-logo:
-    url: 'https://d1ryrugmrhsb54.cloudfront.net/assets/images/logo.svg'
-  x-origin:
-    format: swagger
-    url: 'https://spectrocoin.com/api-docs/merchant/1/'
-    version: '1.2'
-  x-providerName: spectrocoin.com
-paths:
-  /api/createOrder:
-    post:
-      consumes:
-        - application/x-www-form-urlencoded
-      operationId: createOrder
-      parameters:
-        - description: Request to create order
-          in: body
-          name: body
-          required: false
-          schema:
-            $ref: '#/definitions/OrderRequest'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: No response was specified
-          schema:
-            $ref: '#/definitions/Order'
-      summary: Create merchant order
-      tags:
-        - createOrder
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - description: Create Merchant order to be paid by customer
-    name: createOrder

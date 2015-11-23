@@ -1,24 +1,8 @@
-basePath: /seeit/v1
-definitions:
-  Session:
-    properties:
-      startUrl:
-        description: The URL that can be used to start the session in a suitable browser.
-        format: url
-        type: string
-      supportKey:
-        description: Human readable support key.
-        type: string
-      uuid:
-        description: 'Canonical form of the [UUID](http://en.wikipedia.org/wiki/Universally_unique_identifier) uniquely identifying this session.'
-        type: string
-    required:
-      - uuid
-      - supportKey
-      - startUrl
-externalDocs:
-  url: 'https://developer.citrixonline.com/'
+swagger: '2.0'
+schemes:
+  - https
 host: api.citrixonline.com
+basePath: /seeit/v1
 info:
   description: '<p>Allows you to integrate GoToAssist Seeit into your own solutions.</p>'
   title: GoToAssist Seeit API
@@ -32,6 +16,10 @@ info:
     version: '2.0'
   x-providerName: citrixonline.com
   x-serviceName: gotoassistseeit
+externalDocs:
+  url: 'https://developer.citrixonline.com/'
+produces:
+  - application/json
 paths:
   /sessions:
     post:
@@ -83,8 +71,20 @@ paths:
       summary: Get a GoToAssist Seeit session
       tags:
         - Sessions
-produces:
-  - application/json
-schemes:
-  - https
-swagger: '2.0'
+definitions:
+  Session:
+    properties:
+      startUrl:
+        description: The URL that can be used to start the session in a suitable browser.
+        format: url
+        type: string
+      supportKey:
+        description: Human readable support key.
+        type: string
+      uuid:
+        description: 'Canonical form of the [UUID](http://en.wikipedia.org/wiki/Universally_unique_identifier) uniquely identifying this session.'
+        type: string
+    required:
+      - uuid
+      - supportKey
+      - startUrl

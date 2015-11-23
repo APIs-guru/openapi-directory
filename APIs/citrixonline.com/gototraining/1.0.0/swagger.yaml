@@ -1,394 +1,8 @@
-basePath: /G2T/rest
-consumes:
-  - application/json
-definitions:
-  Attendance:
-    description: Describes the times the attendee joined and left a part of a training session.
-    properties:
-      joinTime:
-        description: The time the attendee joined a part of a training session
-        format: date-time
-        type: string
-      leaveTime:
-        description: The time the attendee left a part of a training session
-        format: date-time
-        type: string
-      timeInPartOfSession:
-        description: The time in minutes the attendee spent at a part of a training session
-        format: int32
-        type: integer
-    required:
-      - joinTime
-      - leaveTime
-      - timeInPartOfSession
-  Attendee:
-    description: Describes the attendee of a training session.
-    properties:
-      email:
-        description: "The attendee's email address"
-        type: string
-      givenName:
-        description: "The attendee's first name"
-        type: string
-      inSessionTimes:
-        description: List of the parts of the training session the attendee joined
-        items:
-          $ref: '#/definitions/Attendance'
-        type: array
-      surname:
-        description: "The attendee's surname"
-        type: string
-      timeInSession:
-        description: The total time in minutes spent at all the parts of the training session the attendee joined
-        format: int32
-        type: integer
-    required:
-      - givenName
-      - surname
-      - email
-      - timeInSession
-      - inSessionTimes
-  DateTimeRange:
-    description: 'A pair of DateTime values, the first of which serves as a start time and the second as an end time of an interval'
-    properties:
-      endDate:
-        description: The ending time of an interval
-        format: date-time
-        type: string
-      startDate:
-        description: The starting time of an interval
-        format: date-time
-        type: string
-    required:
-      - startDate
-      - endDate
-  HostUrl:
-    description: Host URL that can be used to start a training
-    properties:
-      hostURL:
-        description: The host URL that can be used to start a training
-        type: string
-    required:
-      - hostURL
-  ListOfRecordingsForTraining:
-    description: Contains a list of recordings for the training.
-    properties:
-      recordings:
-        description: The list of online recordings for the training
-        items:
-          $ref: '#/definitions/Recording'
-        type: array
-      trainingKey:
-        description: "The training's unique key"
-        format: int64
-        type: integer
-    required:
-      - trainingKey
-      - recordings
-  NotifiedParties:
-    description: Number of parties notified of a change to a training session times
-    properties:
-      notifiedRegistrants:
-        description: Number of registrants notified of changes to a training
-        format: int32
-        type: integer
-      notifiedTrainers:
-        description: Number of trainers notified of changes to a training
-        format: int32
-        type: integer
-    required:
-      - notifiedRegistrants
-      - notifiedTrainers
-  Organizer:
-    description: Describes a training organizer.
-    properties:
-      email:
-        description: The email address of the training (co-)organizer
-        type: string
-      givenName:
-        description: "The (co-)organizer's first name"
-        type: string
-      organizerKey:
-        description: The key of the training (co-)organizer
-        type: string
-      surname:
-        description: "The (co-)organizer's surname"
-        type: string
-    required:
-      - organizerKey
-      - email
-      - givenName
-      - surname
-  Recording:
-    description: Describes an online recording of a training
-    properties:
-      description:
-        description: The description of the recording
-        type: string
-      endDate:
-        description: The time the recording was ended
-        format: date-time
-        type: string
-      name:
-        description: The title of the recording
-        type: string
-      recordingId:
-        description: The unique id of the recording
-        format: int64
-        type: integer
-      registrationUrl:
-        description: The url where attendees can register to view the recording
-        type: string
-      startDate:
-        description: The time the recording was started
-        format: date-time
-        type: string
-    required:
-      - recordingId
-      - name
-      - startDate
-      - endDate
-  Registrant:
-    description: Describes a training registrant.
-    properties:
-      confirmationUrl:
-        description: The URL where the confirmation for the registration can be found
-        type: string
-      email:
-        description: "The registrant's email address"
-        type: string
-      givenName:
-        description: "The registrant's first name"
-        type: string
-      joinUrl:
-        description: The URL the registrant will use to join the training
-        type: string
-      registrantKey:
-        description: "The registrant's key"
-        type: string
-      registrationDate:
-        description: The date and time the registration took place
-        format: date-time
-        type: string
-      status:
-        description: "The registrant's status"
-        enum:
-          - WAITING
-          - APPROVED
-          - DENIED
-        type: string
-      surname:
-        description: "The registrant's surname"
-        type: string
-    required:
-      - email
-      - givenName
-      - surname
-      - status
-      - registrationDate
-      - joinUrl
-      - confirmationUrl
-      - registrantKey
-  RegistrantCreated:
-    description: Describes a newly created training registrant
-    properties:
-      confirmationUrl:
-        description: The URL where confirmation for the registration can be found
-        type: string
-      joinUrl:
-        description: The URL the registrant will use to join the training
-        type: string
-      registrantKey:
-        description: "The registrant's key"
-        type: string
-    required:
-      - joinUrl
-      - confirmationUrl
-      - registrantKey
-  RegistrantReqCreate:
-    description: Details required to make a new training registration.
-    properties:
-      email:
-        description: "The registrant's email address"
-        type: string
-      givenName:
-        description: "The registrant's first name"
-        type: string
-      surname:
-        description: "The registrant's surname"
-        type: string
-    required:
-      - email
-      - givenName
-      - surname
-  RegistrationSettings:
-    description: 'Training settings, namely availability of web registration and confirmation emails to the training registrants'
-    properties:
-      disableConfirmationEmail:
-        description: Indicates whether confirmation emails to the training registrants are disabled
-        type: boolean
-      disableWebRegistration:
-        description: Indicates whether the web registration for the training is disabled
-        type: boolean
-    required:
-      - disableConfirmationEmail
-      - disableWebRegistration
-  Session:
-    description: Describes a completed training session.
-    properties:
-      attendanceCount:
-        description: The number of attendees at the training session
-        format: int32
-        type: integer
-      duration:
-        description: The duration of the training session in minutes
-        format: int32
-        type: integer
-      organizers:
-        description: The organizers of the training session.
-        items:
-          $ref: '#/definitions/Organizer'
-        type: array
-      sessionEndTime:
-        description: The time the training session finished
-        format: date-time
-        type: string
-      sessionKey:
-        description: The key of the training session
-        type: string
-      sessionStartTime:
-        description: The time the training session started
-        format: date-time
-        type: string
-      trainingName:
-        description: The subject of the training
-        type: string
-    required:
-      - sessionKey
-      - trainingName
-      - sessionStartTime
-      - sessionEndTime
-      - attendanceCount
-      - duration
-      - organizers
-  Training:
-    description: Describes a scheduled training.
-    properties:
-      description:
-        description: "The training's description"
-        type: string
-      name:
-        description: "The training's subject"
-        type: string
-      organizers:
-        description: The list of (co-)organizers for the training
-        items:
-          $ref: '#/definitions/Organizer'
-        type: array
-      registrationSettings:
-        $ref: '#/definitions/RegistrationSettings'
-        description: 'Training settings, namely web registration and confirmation emails to the training registrants'
-      timeZone:
-        description: The time zone where the training takes place
-        type: string
-      times:
-        description: Array with startDate and endDate for the training sessions
-        items:
-          $ref: '#/definitions/DateTimeRange'
-        type: array
-      trainingId:
-        description: "The 9-digit training's ID"
-        type: string
-      trainingKey:
-        description: "The training's unique key"
-        type: string
-    required:
-      - trainingId
-      - name
-      - description
-      - timeZone
-      - times
-      - organizers
-      - registrationSettings
-      - trainingKey
-  TrainingNameDescription:
-    description: "Details required to update a training's name and description."
-    properties:
-      description:
-        description: "The training's description"
-        type: string
-      name:
-        description: "The training's name"
-        type: string
-    required:
-      - name
-  TrainingOrganizers:
-    description: Details required to update the list of organizers for a training.
-    properties:
-      notifyOrganizers:
-        description: "Specifies whether an email should be sent notifying of the change to the training's organizers."
-        type: boolean
-      organizers:
-        description: List of keys of the organizers for the training.
-        items:
-          format: int64
-          type: integer
-        type: array
-    required:
-      - organizers
-  TrainingReqCreate:
-    description: Describes the details used to create a new training.
-    properties:
-      description:
-        description: Description of the training
-        type: string
-      name:
-        description: Name of the training
-        type: string
-      organizers:
-        description: List of keys of the co-organizers for this training
-        items:
-          format: int64
-          type: integer
-        type: array
-      registrationSettings:
-        $ref: '#/definitions/RegistrationSettings'
-        description: 'Training settings, namely web registration and confirmation emails to the training registrants'
-      timeZone:
-        description: 'Time zone of the training. (Must be a valid time zone ID, see https://developer.citrixonline.com/citrix-rest-api-date-formats-and-time-zones)'
-        type: string
-      times:
-        description: Array with startDate and endDate for the training sessions
-        items:
-          $ref: '#/definitions/DateTimeRange'
-        type: array
-    required:
-      - name
-      - timeZone
-      - times
-  TrainingTimes:
-    description: Details required to update the session times of a training.
-    properties:
-      notifyRegistrants:
-        description: Notify registrants via email of change to training. Default is true
-        type: boolean
-      notifyTrainers:
-        description: Notify trainers via email of change to training. Default is true
-        type: boolean
-      timeZone:
-        description: 'Time zone of the training. Must be a valid time zone ID, see https://developer.citrixonline.com/citrix-rest-api-date-formats-and-time-zones'
-        type: string
-      times:
-        description: Start and end times for the training sessions
-        items:
-          $ref: '#/definitions/DateTimeRange'
-        type: array
-    required:
-      - timeZone
-      - times
-externalDocs:
-  url: 'https://developer.citrixonline.com/'
+swagger: '2.0'
+schemes:
+  - https
 host: api.citrixonline.com
+basePath: /G2T/rest
 info:
   contact:
     email: developer-support@citrixonline.com
@@ -407,6 +21,23 @@ info:
     version: '2.0'
   x-providerName: citrixonline.com
   x-serviceName: gototraining
+externalDocs:
+  url: 'https://developer.citrixonline.com/'
+consumes:
+  - application/json
+produces:
+  - application/json
+tags:
+  - description: Operations available for training organizers.
+    name: Organizers
+  - description: Operations available for trainings.
+    name: Trainings
+  - description: Operations available for registrants of a given training.
+    name: Registrations
+  - description: Operations available for training reports.
+    name: Reports
+  - description: Operations available for online recordings.
+    name: Recordings
 paths:
   '/accounts/{accountKey}/organizers':
     get:
@@ -1209,19 +840,388 @@ paths:
       summary: Start Training
       tags:
         - Trainings
-produces:
-  - application/json
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - description: Operations available for training organizers.
-    name: Organizers
-  - description: Operations available for trainings.
-    name: Trainings
-  - description: Operations available for registrants of a given training.
-    name: Registrations
-  - description: Operations available for training reports.
-    name: Reports
-  - description: Operations available for online recordings.
-    name: Recordings
+definitions:
+  Attendance:
+    description: Describes the times the attendee joined and left a part of a training session.
+    properties:
+      joinTime:
+        description: The time the attendee joined a part of a training session
+        format: date-time
+        type: string
+      leaveTime:
+        description: The time the attendee left a part of a training session
+        format: date-time
+        type: string
+      timeInPartOfSession:
+        description: The time in minutes the attendee spent at a part of a training session
+        format: int32
+        type: integer
+    required:
+      - joinTime
+      - leaveTime
+      - timeInPartOfSession
+  Attendee:
+    description: Describes the attendee of a training session.
+    properties:
+      email:
+        description: "The attendee's email address"
+        type: string
+      givenName:
+        description: "The attendee's first name"
+        type: string
+      inSessionTimes:
+        description: List of the parts of the training session the attendee joined
+        items:
+          $ref: '#/definitions/Attendance'
+        type: array
+      surname:
+        description: "The attendee's surname"
+        type: string
+      timeInSession:
+        description: The total time in minutes spent at all the parts of the training session the attendee joined
+        format: int32
+        type: integer
+    required:
+      - givenName
+      - surname
+      - email
+      - timeInSession
+      - inSessionTimes
+  DateTimeRange:
+    description: 'A pair of DateTime values, the first of which serves as a start time and the second as an end time of an interval'
+    properties:
+      endDate:
+        description: The ending time of an interval
+        format: date-time
+        type: string
+      startDate:
+        description: The starting time of an interval
+        format: date-time
+        type: string
+    required:
+      - startDate
+      - endDate
+  HostUrl:
+    description: Host URL that can be used to start a training
+    properties:
+      hostURL:
+        description: The host URL that can be used to start a training
+        type: string
+    required:
+      - hostURL
+  ListOfRecordingsForTraining:
+    description: Contains a list of recordings for the training.
+    properties:
+      recordings:
+        description: The list of online recordings for the training
+        items:
+          $ref: '#/definitions/Recording'
+        type: array
+      trainingKey:
+        description: "The training's unique key"
+        format: int64
+        type: integer
+    required:
+      - trainingKey
+      - recordings
+  NotifiedParties:
+    description: Number of parties notified of a change to a training session times
+    properties:
+      notifiedRegistrants:
+        description: Number of registrants notified of changes to a training
+        format: int32
+        type: integer
+      notifiedTrainers:
+        description: Number of trainers notified of changes to a training
+        format: int32
+        type: integer
+    required:
+      - notifiedRegistrants
+      - notifiedTrainers
+  Organizer:
+    description: Describes a training organizer.
+    properties:
+      email:
+        description: The email address of the training (co-)organizer
+        type: string
+      givenName:
+        description: "The (co-)organizer's first name"
+        type: string
+      organizerKey:
+        description: The key of the training (co-)organizer
+        type: string
+      surname:
+        description: "The (co-)organizer's surname"
+        type: string
+    required:
+      - organizerKey
+      - email
+      - givenName
+      - surname
+  Recording:
+    description: Describes an online recording of a training
+    properties:
+      description:
+        description: The description of the recording
+        type: string
+      endDate:
+        description: The time the recording was ended
+        format: date-time
+        type: string
+      name:
+        description: The title of the recording
+        type: string
+      recordingId:
+        description: The unique id of the recording
+        format: int64
+        type: integer
+      registrationUrl:
+        description: The url where attendees can register to view the recording
+        type: string
+      startDate:
+        description: The time the recording was started
+        format: date-time
+        type: string
+    required:
+      - recordingId
+      - name
+      - startDate
+      - endDate
+  Registrant:
+    description: Describes a training registrant.
+    properties:
+      confirmationUrl:
+        description: The URL where the confirmation for the registration can be found
+        type: string
+      email:
+        description: "The registrant's email address"
+        type: string
+      givenName:
+        description: "The registrant's first name"
+        type: string
+      joinUrl:
+        description: The URL the registrant will use to join the training
+        type: string
+      registrantKey:
+        description: "The registrant's key"
+        type: string
+      registrationDate:
+        description: The date and time the registration took place
+        format: date-time
+        type: string
+      status:
+        description: "The registrant's status"
+        enum:
+          - WAITING
+          - APPROVED
+          - DENIED
+        type: string
+      surname:
+        description: "The registrant's surname"
+        type: string
+    required:
+      - email
+      - givenName
+      - surname
+      - status
+      - registrationDate
+      - joinUrl
+      - confirmationUrl
+      - registrantKey
+  RegistrantCreated:
+    description: Describes a newly created training registrant
+    properties:
+      confirmationUrl:
+        description: The URL where confirmation for the registration can be found
+        type: string
+      joinUrl:
+        description: The URL the registrant will use to join the training
+        type: string
+      registrantKey:
+        description: "The registrant's key"
+        type: string
+    required:
+      - joinUrl
+      - confirmationUrl
+      - registrantKey
+  RegistrantReqCreate:
+    description: Details required to make a new training registration.
+    properties:
+      email:
+        description: "The registrant's email address"
+        type: string
+      givenName:
+        description: "The registrant's first name"
+        type: string
+      surname:
+        description: "The registrant's surname"
+        type: string
+    required:
+      - email
+      - givenName
+      - surname
+  RegistrationSettings:
+    description: 'Training settings, namely availability of web registration and confirmation emails to the training registrants'
+    properties:
+      disableConfirmationEmail:
+        description: Indicates whether confirmation emails to the training registrants are disabled
+        type: boolean
+      disableWebRegistration:
+        description: Indicates whether the web registration for the training is disabled
+        type: boolean
+    required:
+      - disableConfirmationEmail
+      - disableWebRegistration
+  Session:
+    description: Describes a completed training session.
+    properties:
+      attendanceCount:
+        description: The number of attendees at the training session
+        format: int32
+        type: integer
+      duration:
+        description: The duration of the training session in minutes
+        format: int32
+        type: integer
+      organizers:
+        description: The organizers of the training session.
+        items:
+          $ref: '#/definitions/Organizer'
+        type: array
+      sessionEndTime:
+        description: The time the training session finished
+        format: date-time
+        type: string
+      sessionKey:
+        description: The key of the training session
+        type: string
+      sessionStartTime:
+        description: The time the training session started
+        format: date-time
+        type: string
+      trainingName:
+        description: The subject of the training
+        type: string
+    required:
+      - sessionKey
+      - trainingName
+      - sessionStartTime
+      - sessionEndTime
+      - attendanceCount
+      - duration
+      - organizers
+  Training:
+    description: Describes a scheduled training.
+    properties:
+      description:
+        description: "The training's description"
+        type: string
+      name:
+        description: "The training's subject"
+        type: string
+      organizers:
+        description: The list of (co-)organizers for the training
+        items:
+          $ref: '#/definitions/Organizer'
+        type: array
+      registrationSettings:
+        $ref: '#/definitions/RegistrationSettings'
+        description: 'Training settings, namely web registration and confirmation emails to the training registrants'
+      timeZone:
+        description: The time zone where the training takes place
+        type: string
+      times:
+        description: Array with startDate and endDate for the training sessions
+        items:
+          $ref: '#/definitions/DateTimeRange'
+        type: array
+      trainingId:
+        description: "The 9-digit training's ID"
+        type: string
+      trainingKey:
+        description: "The training's unique key"
+        type: string
+    required:
+      - trainingId
+      - name
+      - description
+      - timeZone
+      - times
+      - organizers
+      - registrationSettings
+      - trainingKey
+  TrainingNameDescription:
+    description: "Details required to update a training's name and description."
+    properties:
+      description:
+        description: "The training's description"
+        type: string
+      name:
+        description: "The training's name"
+        type: string
+    required:
+      - name
+  TrainingOrganizers:
+    description: Details required to update the list of organizers for a training.
+    properties:
+      notifyOrganizers:
+        description: "Specifies whether an email should be sent notifying of the change to the training's organizers."
+        type: boolean
+      organizers:
+        description: List of keys of the organizers for the training.
+        items:
+          format: int64
+          type: integer
+        type: array
+    required:
+      - organizers
+  TrainingReqCreate:
+    description: Describes the details used to create a new training.
+    properties:
+      description:
+        description: Description of the training
+        type: string
+      name:
+        description: Name of the training
+        type: string
+      organizers:
+        description: List of keys of the co-organizers for this training
+        items:
+          format: int64
+          type: integer
+        type: array
+      registrationSettings:
+        $ref: '#/definitions/RegistrationSettings'
+        description: 'Training settings, namely web registration and confirmation emails to the training registrants'
+      timeZone:
+        description: 'Time zone of the training. (Must be a valid time zone ID, see https://developer.citrixonline.com/citrix-rest-api-date-formats-and-time-zones)'
+        type: string
+      times:
+        description: Array with startDate and endDate for the training sessions
+        items:
+          $ref: '#/definitions/DateTimeRange'
+        type: array
+    required:
+      - name
+      - timeZone
+      - times
+  TrainingTimes:
+    description: Details required to update the session times of a training.
+    properties:
+      notifyRegistrants:
+        description: Notify registrants via email of change to training. Default is true
+        type: boolean
+      notifyTrainers:
+        description: Notify trainers via email of change to training. Default is true
+        type: boolean
+      timeZone:
+        description: 'Time zone of the training. Must be a valid time zone ID, see https://developer.citrixonline.com/citrix-rest-api-date-formats-and-time-zones'
+        type: string
+      times:
+        description: Start and end times for the training sessions
+        items:
+          $ref: '#/definitions/DateTimeRange'
+        type: array
+    required:
+      - timeZone
+      - times

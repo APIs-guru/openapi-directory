@@ -1,251 +1,8 @@
-basePath: /
-definitions:
-  AnalysisResult:
-    properties:
-      expression:
-        $ref: '#/definitions/ExpressionSummary'
-      identifiersNotFound:
-        format: int32
-        type: integer
-      pathways:
-        items:
-          $ref: '#/definitions/PathwaySummary'
-        type: array
-      pathwaysFound:
-        format: int32
-        type: integer
-      resourceSummary:
-        items:
-          $ref: '#/definitions/ResourceSummary'
-        type: array
-      summary:
-        $ref: '#/definitions/AnalysisSummary'
-      warnings:
-        items:
-          type: string
-        type: array
-  AnalysisSummary:
-    properties:
-      fileName:
-        type: string
-      sampleName:
-        type: string
-      species:
-        format: int64
-        type: integer
-      text:
-        type: boolean
-      token:
-        type: string
-      type:
-        type: string
-  EntityStatistics:
-    properties:
-      exp:
-        items:
-          format: double
-          type: number
-        type: array
-      fdr:
-        format: double
-        type: number
-      found:
-        format: int32
-        type: integer
-      pValue:
-        format: double
-        type: number
-      ratio:
-        format: double
-        type: number
-      resource:
-        type: string
-      total:
-        format: int32
-        type: integer
-  ExpressionSummary:
-    properties:
-      columnNames:
-        items:
-          type: string
-        type: array
-      max:
-        format: double
-        type: number
-      min:
-        format: double
-        type: number
-  File:
-    properties:
-      absolute:
-        type: boolean
-      absoluteFile:
-        $ref: '#/definitions/File'
-      absolutePath:
-        type: string
-      canonicalFile:
-        $ref: '#/definitions/File'
-      canonicalPath:
-        type: string
-      directory:
-        type: boolean
-      file:
-        type: boolean
-      freeSpace:
-        format: int64
-        type: integer
-      hidden:
-        type: boolean
-      name:
-        type: string
-      parent:
-        type: string
-      parentFile:
-        $ref: '#/definitions/File'
-      path:
-        type: string
-      totalSpace:
-        format: int64
-        type: integer
-      usableSpace:
-        format: int64
-        type: integer
-  FileSystemResource:
-    properties:
-      description:
-        type: string
-      file:
-        $ref: '#/definitions/File'
-      filename:
-        type: string
-      inputStream:
-        $ref: '#/definitions/InputStream'
-      open:
-        type: boolean
-      outputStream:
-        $ref: '#/definitions/OutputStream'
-      path:
-        type: string
-      readable:
-        type: boolean
-      writable:
-        type: boolean
-  IdentifierMap:
-    properties:
-      ids:
-        items:
-          type: string
-        type: array
-        uniqueItems: true
-      resource:
-        type: string
-  IdentifierSummary:
-    properties:
-      exp:
-        items:
-          format: double
-          type: number
-        type: array
-      id:
-        type: string
-  InputStream: {}
-  OutputStream: {}
-  PathwayBase:
-    properties:
-      dbId:
-        format: int64
-        type: integer
-      entities:
-        $ref: '#/definitions/EntityStatistics'
-      stId:
-        type: string
-  PathwayIdentifier:
-    properties:
-      exp:
-        items:
-          format: double
-          type: number
-        type: array
-      identifier:
-        type: string
-      mapsTo:
-        items:
-          $ref: '#/definitions/IdentifierMap'
-        type: array
-        uniqueItems: true
-  PathwayIdentifiers:
-    properties:
-      expNames:
-        items:
-          type: string
-        type: array
-      found:
-        format: int32
-        type: integer
-      identifiers:
-        items:
-          $ref: '#/definitions/PathwayIdentifier'
-        type: array
-      resources:
-        items:
-          type: string
-        type: array
-        uniqueItems: true
-  PathwaySummary:
-    properties:
-      dbId:
-        format: int64
-        type: integer
-      entities:
-        $ref: '#/definitions/EntityStatistics'
-      llp:
-        type: boolean
-      name:
-        type: string
-      reactions:
-        $ref: '#/definitions/ReactionStatistics'
-      species:
-        $ref: '#/definitions/SpeciesSummary'
-      stId:
-        type: string
-  ReactionStatistics:
-    properties:
-      found:
-        format: int32
-        type: integer
-      ratio:
-        format: double
-        type: number
-      resource:
-        type: string
-      total:
-        format: int32
-        type: integer
-  ResourceSummary:
-    properties:
-      pathways:
-        format: int32
-        type: integer
-      resource:
-        type: string
-  SpeciesFilteredResult:
-    properties:
-      expressionSummary:
-        $ref: '#/definitions/ExpressionSummary'
-      pathways:
-        items:
-          $ref: '#/definitions/PathwayBase'
-        type: array
-      type:
-        type: string
-  SpeciesSummary:
-    properties:
-      dbId:
-        format: int64
-        type: integer
-      name:
-        type: string
+swagger: '2.0'
+schemes:
+  - http
 host: www.reactome.org
+basePath: /
 info:
   contact:
     email: help@reactome.org
@@ -264,6 +21,17 @@ info:
     url: 'http://www.reactome.org/AnalysisService/api-docs'
     version: '1.2'
   x-providerName: reactome.org
+tags:
+  - description: download
+    name: download
+  - description: identifier
+    name: identifier
+  - description: identifiers
+    name: identifiers
+  - description: species
+    name: species
+  - description: token
+    name: token
 paths:
   '/download/{token}/entities/found/{resource}/{filename}.csv':
     get:
@@ -1599,17 +1367,249 @@ paths:
       summary: Returns a summary of the contained identifiers for a pathway in the result for a given token
       tags:
         - token
-schemes:
-  - http
-swagger: '2.0'
-tags:
-  - description: download
-    name: download
-  - description: identifier
-    name: identifier
-  - description: identifiers
-    name: identifiers
-  - description: species
-    name: species
-  - description: token
-    name: token
+definitions:
+  AnalysisResult:
+    properties:
+      expression:
+        $ref: '#/definitions/ExpressionSummary'
+      identifiersNotFound:
+        format: int32
+        type: integer
+      pathways:
+        items:
+          $ref: '#/definitions/PathwaySummary'
+        type: array
+      pathwaysFound:
+        format: int32
+        type: integer
+      resourceSummary:
+        items:
+          $ref: '#/definitions/ResourceSummary'
+        type: array
+      summary:
+        $ref: '#/definitions/AnalysisSummary'
+      warnings:
+        items:
+          type: string
+        type: array
+  AnalysisSummary:
+    properties:
+      fileName:
+        type: string
+      sampleName:
+        type: string
+      species:
+        format: int64
+        type: integer
+      text:
+        type: boolean
+      token:
+        type: string
+      type:
+        type: string
+  EntityStatistics:
+    properties:
+      exp:
+        items:
+          format: double
+          type: number
+        type: array
+      fdr:
+        format: double
+        type: number
+      found:
+        format: int32
+        type: integer
+      pValue:
+        format: double
+        type: number
+      ratio:
+        format: double
+        type: number
+      resource:
+        type: string
+      total:
+        format: int32
+        type: integer
+  ExpressionSummary:
+    properties:
+      columnNames:
+        items:
+          type: string
+        type: array
+      max:
+        format: double
+        type: number
+      min:
+        format: double
+        type: number
+  File:
+    properties:
+      absolute:
+        type: boolean
+      absoluteFile:
+        $ref: '#/definitions/File'
+      absolutePath:
+        type: string
+      canonicalFile:
+        $ref: '#/definitions/File'
+      canonicalPath:
+        type: string
+      directory:
+        type: boolean
+      file:
+        type: boolean
+      freeSpace:
+        format: int64
+        type: integer
+      hidden:
+        type: boolean
+      name:
+        type: string
+      parent:
+        type: string
+      parentFile:
+        $ref: '#/definitions/File'
+      path:
+        type: string
+      totalSpace:
+        format: int64
+        type: integer
+      usableSpace:
+        format: int64
+        type: integer
+  FileSystemResource:
+    properties:
+      description:
+        type: string
+      file:
+        $ref: '#/definitions/File'
+      filename:
+        type: string
+      inputStream:
+        $ref: '#/definitions/InputStream'
+      open:
+        type: boolean
+      outputStream:
+        $ref: '#/definitions/OutputStream'
+      path:
+        type: string
+      readable:
+        type: boolean
+      writable:
+        type: boolean
+  IdentifierMap:
+    properties:
+      ids:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      resource:
+        type: string
+  IdentifierSummary:
+    properties:
+      exp:
+        items:
+          format: double
+          type: number
+        type: array
+      id:
+        type: string
+  InputStream: {}
+  OutputStream: {}
+  PathwayBase:
+    properties:
+      dbId:
+        format: int64
+        type: integer
+      entities:
+        $ref: '#/definitions/EntityStatistics'
+      stId:
+        type: string
+  PathwayIdentifier:
+    properties:
+      exp:
+        items:
+          format: double
+          type: number
+        type: array
+      identifier:
+        type: string
+      mapsTo:
+        items:
+          $ref: '#/definitions/IdentifierMap'
+        type: array
+        uniqueItems: true
+  PathwayIdentifiers:
+    properties:
+      expNames:
+        items:
+          type: string
+        type: array
+      found:
+        format: int32
+        type: integer
+      identifiers:
+        items:
+          $ref: '#/definitions/PathwayIdentifier'
+        type: array
+      resources:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+  PathwaySummary:
+    properties:
+      dbId:
+        format: int64
+        type: integer
+      entities:
+        $ref: '#/definitions/EntityStatistics'
+      llp:
+        type: boolean
+      name:
+        type: string
+      reactions:
+        $ref: '#/definitions/ReactionStatistics'
+      species:
+        $ref: '#/definitions/SpeciesSummary'
+      stId:
+        type: string
+  ReactionStatistics:
+    properties:
+      found:
+        format: int32
+        type: integer
+      ratio:
+        format: double
+        type: number
+      resource:
+        type: string
+      total:
+        format: int32
+        type: integer
+  ResourceSummary:
+    properties:
+      pathways:
+        format: int32
+        type: integer
+      resource:
+        type: string
+  SpeciesFilteredResult:
+    properties:
+      expressionSummary:
+        $ref: '#/definitions/ExpressionSummary'
+      pathways:
+        items:
+          $ref: '#/definitions/PathwayBase'
+        type: array
+      type:
+        type: string
+  SpeciesSummary:
+    properties:
+      dbId:
+        format: int64
+        type: integer
+      name:
+        type: string

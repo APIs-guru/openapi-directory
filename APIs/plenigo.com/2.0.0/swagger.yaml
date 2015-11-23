@@ -1,577 +1,8 @@
-basePath: /api/v2
-definitions:
-  AppAccessData:
-    properties:
-      customerAppId:
-        description: App id to check if user is allowed to access product
-        type: string
-      customerId:
-        description: Customer Id.
-        type: string
-      description:
-        description: "Customer's description for this app"
-        type: string
-      productId:
-        description: Id of the product represented by this app id
-        type: string
-  AppAccessList:
-    properties:
-      apps:
-        description: Array of app access data details
-        items:
-          $ref: '#/definitions/AppAccessData'
-        type: array
-  AppAccessRequest:
-    properties:
-      accessToken:
-        description: Access token requested before
-        type: string
-      testMode:
-        description: Flag indicating if test mode should be used
-        type: boolean
-  AppAccessToken:
-    properties:
-      customerId:
-        description: Customer Id.
-        type: string
-      token:
-        description: "Token needed to request the customer's app id"
-        type: string
-  AppAccessTokenRequest:
-    properties:
-      description:
-        description: Description for the user to identify app later
-        type: string
-      productId:
-        description: Product access should be granted to
-        type: string
-      testMode:
-        description: Flag indicating if test mode should be used
-        type: boolean
-  Category:
-    properties:
-      currency:
-        description: 'Currency as ISO 4217, e.g. EUR'
-        type: string
-      id:
-        description: Id of the category
-        type: string
-      price:
-        description: 'Price of the product in format ##.##'
-        format: double
-        type: number
-      taxes:
-        description: 'Tax in percent as number, e.g. 19.6'
-        type: number
-      title:
-        description: Title of the category
-        type: string
-      validityTime:
-        description: Validity time in days an article is accessible after the article is bought (0 is forever)
-        type: string
-  CategoryItem:
-    properties:
-      categoryId:
-        description: Category Id
-        type: string
-      title:
-        description: Category title
-        type: string
-  CategoryList:
-    properties:
-      elements:
-        description: Array of category items
-        items:
-          $ref: '#/definitions/CategoryItem'
-        type: array
-      lastId:
-        description: Id of last element in page
-        type: string
-      size:
-        description: Page size
-        format: int32
-        type: integer
-      totalElements:
-        description: Amount of total elements
-        format: int32
-        type: integer
-  CompanyUserItem:
-    properties:
-      additionalAddressInfo:
-        description: "the user's additional address info"
-        type: string
-      agreementState:
-        description: "the user's newsletter agreement state"
-        type: string
-      birthday:
-        description: "the user's birth date"
-        type: string
-      city:
-        description: "the user's city"
-        type: string
-      country:
-        description: "the user's country"
-        type: string
-      customerId:
-        description: The user id
-        type: string
-      email:
-        description: the email address
-        type: string
-      firstName:
-        description: "the user's first name"
-        type: string
-      gender:
-        description: "the user's gender"
-        type: string
-      language:
-        description: "the user's language"
-        type: string
-      mobileNumber:
-        description: "the user's mobile phone number"
-        type: string
-      name:
-        description: "the user's last name"
-        type: string
-      postCode:
-        description: "the user's postal code address"
-        type: string
-      state:
-        description: "the user's state address"
-        type: string
-      street:
-        description: "the user's street address"
-        type: string
-      userState:
-        description: "the user's account status"
-        type: string
-      username:
-        description: the user login
-        type: string
-  CompanyUserList:
-    properties:
-      elements:
-        description: Array of company user items
-        items:
-          $ref: '#/definitions/CompanyUserItem'
-        type: array
-      page:
-        description: Page number
-        format: int32
-        type: integer
-      size:
-        description: Page size
-        format: int32
-        type: integer
-  CreateMobileSecretRequest:
-    properties:
-      size:
-        description: Size of the company secret to generate
-        format: int32
-        type: integer
-  CustomerId:
-    properties:
-      customerId:
-        description: Id of the created customer.
-        type: string
-  CustomerProduct:
-    properties:
-      buyDate:
-        description: Date the product was bought
-        type: string
-      productId:
-        description: Id of the product
-        type: string
-      title:
-        description: Title of the product
-        type: string
-  CustomerProductsList:
-    properties:
-      singleProducts:
-        description: Array of customer products
-        items:
-          $ref: '#/definitions/CustomerProduct'
-        type: array
-      subscription:
-        description: Array of customer subscriptions
-        items:
-          $ref: '#/definitions/CustomerSubscription'
-        type: array
-  CustomerSubscription:
-    properties:
-      buyDate:
-        description: Date the subscription was bought
-        type: string
-      endDate:
-        description: Date the subscription will end
-        type: string
-      productId:
-        description: Id of the subscription
-        type: string
-      title:
-        description: Title of the subscription
-        type: string
-  EmailData:
-    properties:
-      email:
-        description: New email address of user
-        type: string
-  ExternalCustomerAccessControlRequest:
-    properties:
-      customerId:
-        description: Customer id to check access for
-        type: string
-      yourFirstIdentifier:
-        description: Your identifier for the customer
-        type: string
-      yourForthIdentifier:
-        description: Your identifier for the customer
-        type: string
-      yourSecondIdentifier:
-        description: Your identifier for the customer
-        type: string
-      yourThirdIdentifier:
-        description: Your identifier for the customer
-        type: string
-  ExternalLoginToken:
-    properties:
-      loginToken:
-        description: One time token used to create a valid user session
-        type: string
-  ExternalUserRegistration:
-    properties:
-      email:
-        description: Email address of the user to register
-        type: string
-      language:
-        description: Language of the user as two digit ISO code
-        type: string
-  FailedPaymentItem:
-    properties:
-      customerId:
-        description: Customer Id
-        type: string
-      date:
-        description: Failed Payment Date
-        type: string
-      productId:
-        description: Product Id
-        type: string
-      status:
-        description: Failed Payment Status
-        type: string
-      title:
-        description: Title
-        type: string
-  FailedPaymentList:
-    properties:
-      elements:
-        description: Array of failed payment items
-        items:
-          $ref: '#/definitions/FailedPaymentItem'
-        type: array
-      page:
-        description: Page number
-        format: int32
-        type: integer
-      size:
-        description: Page size
-        format: int32
-        type: integer
-  Image:
-    properties:
-      altText:
-        description: Alternative text for this image to be shown to the user if image is not available
-        type: string
-      description:
-        description: Image description text
-        type: string
-      url:
-        description: Url to get this image
-        type: string
-  MobileSecretData:
-    properties:
-      email:
-        description: Email address of the user
-        type: string
-      mobileAppSecret:
-        description: Mobile app secret for the user
-        type: string
-  MobileSecretVerificationResult:
-    properties:
-      customerId:
-        description: Id of the customer
-        type: string
-  OAuthError: {}
-  PaywallState:
-    properties:
-      enabled:
-        description: Indicates if the paywall is enabled or not
-        type: boolean
-  Product:
-    properties:
-      accountingPeriod:
-        description: Counting period selected for subscription in month
-        type: string
-      actionPeriodName:
-        description: Name of the action period if one is defined
-        type: string
-      actionPeriodPrice:
-        description: Price of the action period if one is defined
-        format: double
-        type: number
-      actionPeriodTerm:
-        description: Term in months of the action period if one is defined
-        type: string
-      autoRenewal:
-        description: Flag indicating if the subscription is auto renewed
-        type: boolean
-      cancellationPeriod:
-        description: Cancellation period for the subscription in days
-        type: string
-      categoryId:
-        description: Category Id product belongs to
-        type: string
-      choosePrice:
-        description: Flag indicating if the product price can be freely selected by the user
-        type: boolean
-      companyId:
-        description: Unique Id of the company can be retrieved from the company dashboard
-        type: string
-      currency:
-        description: 'Currency as ISO 4217, e.g. EUR'
-        type: string
-      customInfo:
-        description: Custom information
-        type: string
-      description:
-        description: Description of the product
-        type: string
-      id:
-        description: Id of the product
-        type: string
-      images:
-        description: Image information related to the product
-        items:
-          $ref: '#/definitions/Image'
-        type: array
-      maxParallelAppAccess:
-        description: Max parallel app access
-        format: int32
-        type: number
-      price:
-        description: 'Price of the product in format ##.##'
-        format: double
-        type: number
-      secret:
-        description: Company secret can be retrieved from the company administration area
-        type: string
-      shippingCosts:
-        description: Shipping costs of the product
-        format: double
-        type: number
-      subscription:
-        description: Flag indicating if product represents a subscription
-        type: boolean
-      taxes:
-        description: 'Tax in percent as a number, e.g. 19.6'
-        format: double
-        type: number
-      term:
-        description: Subscription term in month
-        type: string
-      title:
-        description: Title of the product
-        type: string
-      url:
-        description: Product url
-        type: string
-      validityTime:
-        description: Validity time in days a product is accessible after the product is bought (0 is forever)
-        format: int32
-        type: integer
-      videoPrequelTime:
-        description: Video prequel time if one is defined
-        format: int32
-        type: number
-  ProductItem:
-    properties:
-      description:
-        description: Product description
-        type: string
-      productId:
-        description: Product Id
-        type: string
-      title:
-        description: Product title
-        type: string
-  ProductList:
-    properties:
-      elements:
-        description: Array of product items
-        items:
-          $ref: '#/definitions/ProductItem'
-        type: array
-      lastId:
-        description: Id of last element in page
-        type: string
-      size:
-        description: Page size
-        format: int32
-        type: integer
-      totalElements:
-        description: Amount of total elements
-        format: int32
-        type: integer
-  SubscriptionItem:
-    properties:
-      currency:
-        description: Currency of the amounts
-        type: string
-      customerId:
-        description: Customer Id
-        type: string
-      paymentMethod:
-        description: The payment method
-        type: string
-      price:
-        description: Price of the subscription
-        format: double
-        type: number
-      productId:
-        description: Product Id
-        type: string
-      startDate:
-        description: The subscription start date
-        type: string
-      term:
-        description: The subscription term
-        format: int32
-        type: number
-      title:
-        description: Title
-        type: string
-  SubscriptionList:
-    properties:
-      elements:
-        description: Array of subscription items
-        items:
-          $ref: '#/definitions/SubscriptionItem'
-        type: array
-      page:
-        description: Page number
-        format: int32
-        type: integer
-      size:
-        description: Page size
-        format: int32
-        type: integer
-  TransactionItem:
-    properties:
-      currency:
-        description: Currency of the amounts
-        type: string
-      customerId:
-        description: Customer Id
-        type: string
-      paymentMethod:
-        description: The payment method
-        type: string
-      price:
-        description: Price of the transaction
-        format: double
-        type: number
-      productId:
-        description: Product Id
-        type: string
-      shippingCosts:
-        description: Amount of the shipping costs
-        format: double
-        type: number
-      shippingCostsTaxesAmount:
-        description: Amount of the shipping costs taxes amount
-        format: double
-        type: number
-      shippingCostsTaxesPercentage:
-        description: Amount of the shipping costs taxes percentage
-        format: double
-        type: number
-      status:
-        description: The transaction status
-        type: string
-      taxesAmount:
-        description: Amount of the tax
-        format: double
-        type: number
-      taxesCountry:
-        description: The country of the tax
-        type: string
-      taxesPercentage:
-        description: Tax percentage of the transaction
-        format: double
-        type: number
-      title:
-        description: Title
-        type: string
-      transactionDate:
-        description: The transaction date
-        type: string
-      transactionId:
-        description: Transaction Id
-        type: string
-  TransactionList:
-    properties:
-      elements:
-        description: Array of transaction items
-        items:
-          $ref: '#/definitions/TransactionItem'
-        type: array
-      page:
-        description: Page number
-        format: int32
-        type: integer
-      size:
-        description: Page size
-        format: int32
-        type: integer
-  User:
-    properties:
-      additionalAddressInfo:
-        description: Additional address information of the user
-        type: string
-      city:
-        description: City of the user
-        type: string
-      country:
-        description: 'Country of the user in ISO 3166 Alpha 3 format (http://en.wikipedia.org/wiki/ISO_3166-1_alpha-3#Officially_assigned_code_elements)'
-        type: string
-      email:
-        description: Email of the user
-        type: string
-      firstName:
-        description: First name of the user
-        type: string
-      gender:
-        description: Gender of the user
-        type: string
-      name:
-        description: Surname of the user
-        type: string
-      postCode:
-        description: Postcode of the user
-        type: string
-      street:
-        description: Street of the user
-        type: string
-      userId:
-        description: Id of the user
-        type: string
-      username:
-        description: Username/nickname of the user
-        type: string
-externalDocs:
-  url: 'https://developer.plenigo.com/'
+swagger: '2.0'
+schemes:
+  - https
 host: api.plenigo.com
+basePath: /api/v2
 info:
   description: This is the API Documentation for the public plenigo server interfaces
   title: Plenigo API Documentation
@@ -583,6 +14,8 @@ info:
     url: 'https://api.plenigo.com/swagger.json'
     version: '2.0'
   x-providerName: plenigo.com
+externalDocs:
+  url: 'https://developer.plenigo.com/'
 paths:
   '/access/app/token/{customerId}':
     post:
@@ -1644,6 +1077,573 @@ paths:
       summary: Get products a user has bought
       tags:
         - user
-schemes:
-  - https
-swagger: '2.0'
+definitions:
+  AppAccessData:
+    properties:
+      customerAppId:
+        description: App id to check if user is allowed to access product
+        type: string
+      customerId:
+        description: Customer Id.
+        type: string
+      description:
+        description: "Customer's description for this app"
+        type: string
+      productId:
+        description: Id of the product represented by this app id
+        type: string
+  AppAccessList:
+    properties:
+      apps:
+        description: Array of app access data details
+        items:
+          $ref: '#/definitions/AppAccessData'
+        type: array
+  AppAccessRequest:
+    properties:
+      accessToken:
+        description: Access token requested before
+        type: string
+      testMode:
+        description: Flag indicating if test mode should be used
+        type: boolean
+  AppAccessToken:
+    properties:
+      customerId:
+        description: Customer Id.
+        type: string
+      token:
+        description: "Token needed to request the customer's app id"
+        type: string
+  AppAccessTokenRequest:
+    properties:
+      description:
+        description: Description for the user to identify app later
+        type: string
+      productId:
+        description: Product access should be granted to
+        type: string
+      testMode:
+        description: Flag indicating if test mode should be used
+        type: boolean
+  Category:
+    properties:
+      currency:
+        description: 'Currency as ISO 4217, e.g. EUR'
+        type: string
+      id:
+        description: Id of the category
+        type: string
+      price:
+        description: 'Price of the product in format ##.##'
+        format: double
+        type: number
+      taxes:
+        description: 'Tax in percent as number, e.g. 19.6'
+        type: number
+      title:
+        description: Title of the category
+        type: string
+      validityTime:
+        description: Validity time in days an article is accessible after the article is bought (0 is forever)
+        type: string
+  CategoryItem:
+    properties:
+      categoryId:
+        description: Category Id
+        type: string
+      title:
+        description: Category title
+        type: string
+  CategoryList:
+    properties:
+      elements:
+        description: Array of category items
+        items:
+          $ref: '#/definitions/CategoryItem'
+        type: array
+      lastId:
+        description: Id of last element in page
+        type: string
+      size:
+        description: Page size
+        format: int32
+        type: integer
+      totalElements:
+        description: Amount of total elements
+        format: int32
+        type: integer
+  CompanyUserItem:
+    properties:
+      additionalAddressInfo:
+        description: "the user's additional address info"
+        type: string
+      agreementState:
+        description: "the user's newsletter agreement state"
+        type: string
+      birthday:
+        description: "the user's birth date"
+        type: string
+      city:
+        description: "the user's city"
+        type: string
+      country:
+        description: "the user's country"
+        type: string
+      customerId:
+        description: The user id
+        type: string
+      email:
+        description: the email address
+        type: string
+      firstName:
+        description: "the user's first name"
+        type: string
+      gender:
+        description: "the user's gender"
+        type: string
+      language:
+        description: "the user's language"
+        type: string
+      mobileNumber:
+        description: "the user's mobile phone number"
+        type: string
+      name:
+        description: "the user's last name"
+        type: string
+      postCode:
+        description: "the user's postal code address"
+        type: string
+      state:
+        description: "the user's state address"
+        type: string
+      street:
+        description: "the user's street address"
+        type: string
+      userState:
+        description: "the user's account status"
+        type: string
+      username:
+        description: the user login
+        type: string
+  CompanyUserList:
+    properties:
+      elements:
+        description: Array of company user items
+        items:
+          $ref: '#/definitions/CompanyUserItem'
+        type: array
+      page:
+        description: Page number
+        format: int32
+        type: integer
+      size:
+        description: Page size
+        format: int32
+        type: integer
+  CreateMobileSecretRequest:
+    properties:
+      size:
+        description: Size of the company secret to generate
+        format: int32
+        type: integer
+  CustomerId:
+    properties:
+      customerId:
+        description: Id of the created customer.
+        type: string
+  CustomerProduct:
+    properties:
+      buyDate:
+        description: Date the product was bought
+        type: string
+      productId:
+        description: Id of the product
+        type: string
+      title:
+        description: Title of the product
+        type: string
+  CustomerProductsList:
+    properties:
+      singleProducts:
+        description: Array of customer products
+        items:
+          $ref: '#/definitions/CustomerProduct'
+        type: array
+      subscription:
+        description: Array of customer subscriptions
+        items:
+          $ref: '#/definitions/CustomerSubscription'
+        type: array
+  CustomerSubscription:
+    properties:
+      buyDate:
+        description: Date the subscription was bought
+        type: string
+      endDate:
+        description: Date the subscription will end
+        type: string
+      productId:
+        description: Id of the subscription
+        type: string
+      title:
+        description: Title of the subscription
+        type: string
+  EmailData:
+    properties:
+      email:
+        description: New email address of user
+        type: string
+  ExternalCustomerAccessControlRequest:
+    properties:
+      customerId:
+        description: Customer id to check access for
+        type: string
+      yourFirstIdentifier:
+        description: Your identifier for the customer
+        type: string
+      yourForthIdentifier:
+        description: Your identifier for the customer
+        type: string
+      yourSecondIdentifier:
+        description: Your identifier for the customer
+        type: string
+      yourThirdIdentifier:
+        description: Your identifier for the customer
+        type: string
+  ExternalLoginToken:
+    properties:
+      loginToken:
+        description: One time token used to create a valid user session
+        type: string
+  ExternalUserRegistration:
+    properties:
+      email:
+        description: Email address of the user to register
+        type: string
+      language:
+        description: Language of the user as two digit ISO code
+        type: string
+  FailedPaymentItem:
+    properties:
+      customerId:
+        description: Customer Id
+        type: string
+      date:
+        description: Failed Payment Date
+        type: string
+      productId:
+        description: Product Id
+        type: string
+      status:
+        description: Failed Payment Status
+        type: string
+      title:
+        description: Title
+        type: string
+  FailedPaymentList:
+    properties:
+      elements:
+        description: Array of failed payment items
+        items:
+          $ref: '#/definitions/FailedPaymentItem'
+        type: array
+      page:
+        description: Page number
+        format: int32
+        type: integer
+      size:
+        description: Page size
+        format: int32
+        type: integer
+  Image:
+    properties:
+      altText:
+        description: Alternative text for this image to be shown to the user if image is not available
+        type: string
+      description:
+        description: Image description text
+        type: string
+      url:
+        description: Url to get this image
+        type: string
+  MobileSecretData:
+    properties:
+      email:
+        description: Email address of the user
+        type: string
+      mobileAppSecret:
+        description: Mobile app secret for the user
+        type: string
+  MobileSecretVerificationResult:
+    properties:
+      customerId:
+        description: Id of the customer
+        type: string
+  OAuthError: {}
+  PaywallState:
+    properties:
+      enabled:
+        description: Indicates if the paywall is enabled or not
+        type: boolean
+  Product:
+    properties:
+      accountingPeriod:
+        description: Counting period selected for subscription in month
+        type: string
+      actionPeriodName:
+        description: Name of the action period if one is defined
+        type: string
+      actionPeriodPrice:
+        description: Price of the action period if one is defined
+        format: double
+        type: number
+      actionPeriodTerm:
+        description: Term in months of the action period if one is defined
+        type: string
+      autoRenewal:
+        description: Flag indicating if the subscription is auto renewed
+        type: boolean
+      cancellationPeriod:
+        description: Cancellation period for the subscription in days
+        type: string
+      categoryId:
+        description: Category Id product belongs to
+        type: string
+      choosePrice:
+        description: Flag indicating if the product price can be freely selected by the user
+        type: boolean
+      companyId:
+        description: Unique Id of the company can be retrieved from the company dashboard
+        type: string
+      currency:
+        description: 'Currency as ISO 4217, e.g. EUR'
+        type: string
+      customInfo:
+        description: Custom information
+        type: string
+      description:
+        description: Description of the product
+        type: string
+      id:
+        description: Id of the product
+        type: string
+      images:
+        description: Image information related to the product
+        items:
+          $ref: '#/definitions/Image'
+        type: array
+      maxParallelAppAccess:
+        description: Max parallel app access
+        format: int32
+        type: number
+      price:
+        description: 'Price of the product in format ##.##'
+        format: double
+        type: number
+      secret:
+        description: Company secret can be retrieved from the company administration area
+        type: string
+      shippingCosts:
+        description: Shipping costs of the product
+        format: double
+        type: number
+      subscription:
+        description: Flag indicating if product represents a subscription
+        type: boolean
+      taxes:
+        description: 'Tax in percent as a number, e.g. 19.6'
+        format: double
+        type: number
+      term:
+        description: Subscription term in month
+        type: string
+      title:
+        description: Title of the product
+        type: string
+      url:
+        description: Product url
+        type: string
+      validityTime:
+        description: Validity time in days a product is accessible after the product is bought (0 is forever)
+        format: int32
+        type: integer
+      videoPrequelTime:
+        description: Video prequel time if one is defined
+        format: int32
+        type: number
+  ProductItem:
+    properties:
+      description:
+        description: Product description
+        type: string
+      productId:
+        description: Product Id
+        type: string
+      title:
+        description: Product title
+        type: string
+  ProductList:
+    properties:
+      elements:
+        description: Array of product items
+        items:
+          $ref: '#/definitions/ProductItem'
+        type: array
+      lastId:
+        description: Id of last element in page
+        type: string
+      size:
+        description: Page size
+        format: int32
+        type: integer
+      totalElements:
+        description: Amount of total elements
+        format: int32
+        type: integer
+  SubscriptionItem:
+    properties:
+      currency:
+        description: Currency of the amounts
+        type: string
+      customerId:
+        description: Customer Id
+        type: string
+      paymentMethod:
+        description: The payment method
+        type: string
+      price:
+        description: Price of the subscription
+        format: double
+        type: number
+      productId:
+        description: Product Id
+        type: string
+      startDate:
+        description: The subscription start date
+        type: string
+      term:
+        description: The subscription term
+        format: int32
+        type: number
+      title:
+        description: Title
+        type: string
+  SubscriptionList:
+    properties:
+      elements:
+        description: Array of subscription items
+        items:
+          $ref: '#/definitions/SubscriptionItem'
+        type: array
+      page:
+        description: Page number
+        format: int32
+        type: integer
+      size:
+        description: Page size
+        format: int32
+        type: integer
+  TransactionItem:
+    properties:
+      currency:
+        description: Currency of the amounts
+        type: string
+      customerId:
+        description: Customer Id
+        type: string
+      paymentMethod:
+        description: The payment method
+        type: string
+      price:
+        description: Price of the transaction
+        format: double
+        type: number
+      productId:
+        description: Product Id
+        type: string
+      shippingCosts:
+        description: Amount of the shipping costs
+        format: double
+        type: number
+      shippingCostsTaxesAmount:
+        description: Amount of the shipping costs taxes amount
+        format: double
+        type: number
+      shippingCostsTaxesPercentage:
+        description: Amount of the shipping costs taxes percentage
+        format: double
+        type: number
+      status:
+        description: The transaction status
+        type: string
+      taxesAmount:
+        description: Amount of the tax
+        format: double
+        type: number
+      taxesCountry:
+        description: The country of the tax
+        type: string
+      taxesPercentage:
+        description: Tax percentage of the transaction
+        format: double
+        type: number
+      title:
+        description: Title
+        type: string
+      transactionDate:
+        description: The transaction date
+        type: string
+      transactionId:
+        description: Transaction Id
+        type: string
+  TransactionList:
+    properties:
+      elements:
+        description: Array of transaction items
+        items:
+          $ref: '#/definitions/TransactionItem'
+        type: array
+      page:
+        description: Page number
+        format: int32
+        type: integer
+      size:
+        description: Page size
+        format: int32
+        type: integer
+  User:
+    properties:
+      additionalAddressInfo:
+        description: Additional address information of the user
+        type: string
+      city:
+        description: City of the user
+        type: string
+      country:
+        description: 'Country of the user in ISO 3166 Alpha 3 format (http://en.wikipedia.org/wiki/ISO_3166-1_alpha-3#Officially_assigned_code_elements)'
+        type: string
+      email:
+        description: Email of the user
+        type: string
+      firstName:
+        description: First name of the user
+        type: string
+      gender:
+        description: Gender of the user
+        type: string
+      name:
+        description: Surname of the user
+        type: string
+      postCode:
+        description: Postcode of the user
+        type: string
+      street:
+        description: Street of the user
+        type: string
+      userId:
+        description: Id of the user
+        type: string
+      username:
+        description: Username/nickname of the user
+        type: string

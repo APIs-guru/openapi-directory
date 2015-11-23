@@ -1,75 +1,8 @@
-basePath: /prediction/v1.2
-definitions:
-  Input:
-    properties:
-      input:
-        properties:
-          csvInstance:
-            items: {}
-            type: array
-        type: object
-    type: object
-  Output:
-    properties:
-      id:
-        type: string
-      kind:
-        default: 'prediction#output'
-        type: string
-      outputLabel:
-        type: string
-      outputMulti:
-        items:
-          properties:
-            label:
-              type: string
-            score:
-              format: double
-              type: number
-          type: object
-        type: array
-      outputValue:
-        format: double
-        type: number
-      selfLink:
-        type: string
-    type: object
-  Training:
-    properties:
-      id:
-        type: string
-      kind:
-        default: 'prediction#training'
-        type: string
-      modelInfo:
-        properties:
-          classificationAccuracy:
-            format: double
-            type: number
-          meanSquaredError:
-            format: double
-            type: number
-          modelType:
-            type: string
-        type: object
-      selfLink:
-        type: string
-      trainingStatus:
-        type: string
-    type: object
-  Update:
-    properties:
-      classLabel:
-        description: The true class label of this instance
-        type: string
-      csvInstance:
-        description: The input features for this instance
-        items: {}
-        type: array
-    type: object
-externalDocs:
-  url: 'https://developers.google.com/prediction/docs/developer-guide'
+swagger: '2.0'
+schemes:
+  - https
 host: www.googleapis.com
+basePath: /prediction/v1.2
 info:
   contact:
     name: Google
@@ -88,6 +21,19 @@ info:
   x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: prediction
+externalDocs:
+  url: 'https://developers.google.com/prediction/docs/developer-guide'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
+      'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
+      'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
+      'https://www.googleapis.com/auth/prediction': Manage your data in the Google Prediction API
+    type: oauth2
 parameters:
   alt:
     default: json
@@ -293,17 +239,71 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/prediction'
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
-      'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
-      'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
-      'https://www.googleapis.com/auth/prediction': Manage your data in the Google Prediction API
-    type: oauth2
-swagger: '2.0'
+definitions:
+  Input:
+    properties:
+      input:
+        properties:
+          csvInstance:
+            items: {}
+            type: array
+        type: object
+    type: object
+  Output:
+    properties:
+      id:
+        type: string
+      kind:
+        default: 'prediction#output'
+        type: string
+      outputLabel:
+        type: string
+      outputMulti:
+        items:
+          properties:
+            label:
+              type: string
+            score:
+              format: double
+              type: number
+          type: object
+        type: array
+      outputValue:
+        format: double
+        type: number
+      selfLink:
+        type: string
+    type: object
+  Training:
+    properties:
+      id:
+        type: string
+      kind:
+        default: 'prediction#training'
+        type: string
+      modelInfo:
+        properties:
+          classificationAccuracy:
+            format: double
+            type: number
+          meanSquaredError:
+            format: double
+            type: number
+          modelType:
+            type: string
+        type: object
+      selfLink:
+        type: string
+      trainingStatus:
+        type: string
+    type: object
+  Update:
+    properties:
+      classLabel:
+        description: The true class label of this instance
+        type: string
+      csvInstance:
+        description: The input features for this instance
+        items: {}
+        type: array
+    type: object

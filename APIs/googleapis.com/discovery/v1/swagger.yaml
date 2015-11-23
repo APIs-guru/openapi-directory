@@ -1,4 +1,128 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.googleapis.com
 basePath: /discovery/v1
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: 'Lets you discover information about other Google APIs, such as what APIs are available, the resource and method details for each API.'
+  title: APIs Discovery Service
+  version: v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/discovery/v1/rest'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: discovery
+externalDocs:
+  url: 'https://developers.google.com/discovery/'
+parameters:
+  alt:
+    default: json
+    description: Data format for the response.
+    enum:
+      - json
+    in: query
+    name: alt
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    in: query
+    name: quotaUser
+    type: string
+  userIp:
+    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    in: query
+    name: userIp
+    type: string
+paths:
+  /apis:
+    get:
+      description: Retrieve the list of APIs supported at this endpoint.
+      operationId: discovery.apis.list
+      parameters:
+        - description: Only include APIs with the given name.
+          in: query
+          name: name
+          type: string
+        - default: false
+          description: Return only the preferred version of an API.
+          in: query
+          name: preferred
+          type: boolean
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DirectoryList'
+      tags:
+        - apis
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/apis/{api}/{version}/rest':
+    get:
+      description: Retrieve the description of a particular version of an api.
+      operationId: discovery.apis.getRest
+      parameters:
+        - description: The name of the API.
+          in: path
+          name: api
+          required: true
+          type: string
+        - description: The version of the API.
+          in: path
+          name: version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RestDescription'
+      tags:
+        - apis
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
 definitions:
   DirectoryList:
     properties:
@@ -404,127 +528,3 @@ definitions:
         description: Sub-resources on this resource.
         type: object
     type: object
-externalDocs:
-  url: 'https://developers.google.com/discovery/'
-host: www.googleapis.com
-info:
-  contact:
-    name: Google
-    url: 'https://google.com'
-  description: 'Lets you discover information about other Google APIs, such as what APIs are available, the resource and method details for each API.'
-  title: APIs Discovery Service
-  version: v1
-  x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
-  x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
-  x-origin:
-    format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/discovery/v1/rest'
-    version: v1
-  x-preferred: true
-  x-providerName: googleapis.com
-  x-serviceName: discovery
-parameters:
-  alt:
-    default: json
-    description: Data format for the response.
-    enum:
-      - json
-    in: query
-    name: alt
-    type: string
-  fields:
-    description: Selector specifying which fields to include in a partial response.
-    in: query
-    name: fields
-    type: string
-  key:
-    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
-    in: query
-    name: key
-    type: string
-  oauth_token:
-    description: OAuth 2.0 token for the current user.
-    in: query
-    name: oauth_token
-    type: string
-  prettyPrint:
-    default: true
-    description: Returns response with indentations and line breaks.
-    in: query
-    name: prettyPrint
-    type: boolean
-  quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
-    in: query
-    name: quotaUser
-    type: string
-  userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
-    in: query
-    name: userIp
-    type: string
-paths:
-  /apis:
-    get:
-      description: Retrieve the list of APIs supported at this endpoint.
-      operationId: discovery.apis.list
-      parameters:
-        - description: Only include APIs with the given name.
-          in: query
-          name: name
-          type: string
-        - default: false
-          description: Return only the preferred version of an API.
-          in: query
-          name: preferred
-          type: boolean
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/DirectoryList'
-      tags:
-        - apis
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/apis/{api}/{version}/rest':
-    get:
-      description: Retrieve the description of a particular version of an api.
-      operationId: discovery.apis.getRest
-      parameters:
-        - description: The name of the API.
-          in: path
-          name: api
-          required: true
-          type: string
-        - description: The version of the API.
-          in: path
-          name: version
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/RestDescription'
-      tags:
-        - apis
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-schemes:
-  - https
-swagger: '2.0'

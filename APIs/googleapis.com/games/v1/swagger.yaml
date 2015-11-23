@@ -1,4 +1,2001 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.googleapis.com
 basePath: /games/v1
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: The API for Google Play Game Services.
+  title: Google Play Game Services API
+  version: v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.gstatic.com/images/icons/material/product/2x/play_games_64dp.png'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/games/v1/rest'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: games
+externalDocs:
+  url: 'https://developers.google.com/games/services/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/drive.appdata': View and manage its own configuration data in your Google Drive
+      'https://www.googleapis.com/auth/games': Share your Google+ profile information and view and manage your game activity
+      'https://www.googleapis.com/auth/plus.login': Know your basic profile info and list of people in your circles.
+    type: oauth2
+parameters:
+  alt:
+    default: json
+    description: Data format for the response.
+    enum:
+      - json
+    in: query
+    name: alt
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    in: query
+    name: quotaUser
+    type: string
+  userIp:
+    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    in: query
+    name: userIp
+    type: string
+paths:
+  /achievements:
+    get:
+      description: Lists all the achievement definitions for your application.
+      operationId: games.achievementDefinitions.list
+      parameters:
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - description: 'The maximum number of achievement resources to return in the response, used for paging. For any response, the actual number of achievement resources returned may be less than the specified maxResults.'
+          in: query
+          maximum: 200
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AchievementDefinitionsListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - achievementDefinitions
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /achievements/updateMultiple:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Updates multiple achievements for the currently authenticated player.
+      operationId: games.achievements.updateMultiple
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AchievementUpdateMultipleRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AchievementUpdateMultipleResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - achievements
+  '/achievements/{achievementId}/increment':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Increments the steps of the achievement with the given ID for the currently authenticated player.
+      operationId: games.achievements.increment
+      parameters:
+        - description: The ID of the achievement used by this method.
+          in: path
+          name: achievementId
+          required: true
+          type: string
+        - description: The number of steps to increment.
+          in: query
+          minimum: 1
+          name: stepsToIncrement
+          required: true
+          type: integer
+        - description: A randomly generated numeric ID for each request specified by the caller. This number is used at the server to ensure that the request is handled correctly across retries.
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AchievementIncrementResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - achievements
+  '/achievements/{achievementId}/reveal':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the state of the achievement with the given ID to REVEALED for the currently authenticated player.
+      operationId: games.achievements.reveal
+      parameters:
+        - description: The ID of the achievement used by this method.
+          in: path
+          name: achievementId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AchievementRevealResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - achievements
+  '/achievements/{achievementId}/setStepsAtLeast':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Sets the steps for the currently authenticated player towards unlocking an achievement. If the steps parameter is less than the current number of steps that the player already gained for the achievement, the achievement is not modified.'
+      operationId: games.achievements.setStepsAtLeast
+      parameters:
+        - description: The ID of the achievement used by this method.
+          in: path
+          name: achievementId
+          required: true
+          type: string
+        - description: The minimum value to set the steps to.
+          in: query
+          minimum: 1
+          name: steps
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AchievementSetStepsAtLeastResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - achievements
+  '/achievements/{achievementId}/unlock':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Unlocks this achievement for the currently authenticated player.
+      operationId: games.achievements.unlock
+      parameters:
+        - description: The ID of the achievement used by this method.
+          in: path
+          name: achievementId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AchievementUnlockResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - achievements
+  /applications/played:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Indicate that the the currently authenticated user is playing your application.
+      operationId: games.applications.played
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - applications
+  '/applications/{applicationId}':
+    get:
+      description: 'Retrieves the metadata of the application with the given ID. If the requested application is not available for the specified platformType, the returned response will not include any instance data.'
+      operationId: games.applications.get
+      parameters:
+        - description: The application ID from the Google Play developer console.
+          in: path
+          name: applicationId
+          required: true
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - description: Restrict application details returned to the specific platform.
+          enum:
+            - ANDROID
+            - IOS
+            - WEB_APP
+          in: query
+          name: platformType
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Application'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - applications
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /eventDefinitions:
+    get:
+      description: Returns a list of the event definitions in this application.
+      operationId: games.events.listDefinitions
+      parameters:
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - description: 'The maximum number of event definitions to return in the response, used for paging. For any response, the actual number of event definitions to return may be less than the specified maxResults.'
+          in: query
+          maximum: 100
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/EventDefinitionListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - events
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /events:
+    get:
+      description: Returns a list showing the current progress on events in this application for the currently authenticated user.
+      operationId: games.events.listByPlayer
+      parameters:
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - description: 'The maximum number of events to return in the response, used for paging. For any response, the actual number of events to return may be less than the specified maxResults.'
+          in: query
+          maximum: 100
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PlayerEventListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - events
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Records a batch of changes to the number of times events have occurred for the currently authenticated user of this application.
+      operationId: games.events.record
+      parameters:
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EventRecordRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/EventUpdateResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - events
+  /leaderboards:
+    get:
+      description: Lists all the leaderboard metadata for your application.
+      operationId: games.leaderboards.list
+      parameters:
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - description: 'The maximum number of leaderboards to return in the response. For any response, the actual number of leaderboards returned may be less than the specified maxResults.'
+          in: query
+          maximum: 200
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LeaderboardListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - leaderboards
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /leaderboards/scores:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Submits multiple scores to leaderboards.
+      operationId: games.scores.submitMultiple
+      parameters:
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PlayerScoreSubmissionList'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PlayerScoreListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - scores
+  '/leaderboards/{leaderboardId}':
+    get:
+      description: Retrieves the metadata of the leaderboard with the given ID.
+      operationId: games.leaderboards.get
+      parameters:
+        - description: The ID of the leaderboard.
+          in: path
+          name: leaderboardId
+          required: true
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Leaderboard'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - leaderboards
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/leaderboards/{leaderboardId}/scores':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Submits a score to the specified leaderboard.
+      operationId: games.scores.submit
+      parameters:
+        - description: The ID of the leaderboard.
+          in: path
+          name: leaderboardId
+          required: true
+          type: string
+        - description: "The score you're submitting. The submitted score is ignored if it is worse than a previously submitted score, where worse depends on the leaderboard sort order. The meaning of the score value depends on the leaderboard format type. For fixed-point, the score represents the raw value. For time, the score represents elapsed time in milliseconds. For currency, the score represents a value in micro units."
+          in: query
+          name: score
+          required: true
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - description: "Additional information about the score you're submitting. Values must contain no more than 64 URI-safe characters as defined by section 2.3 of RFC 3986."
+          in: query
+          name: scoreTag
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PlayerScoreResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - scores
+  '/leaderboards/{leaderboardId}/scores/{collection}':
+    get:
+      description: 'Lists the scores in a leaderboard, starting from the top.'
+      operationId: games.scores.list
+      parameters:
+        - description: The ID of the leaderboard.
+          in: path
+          name: leaderboardId
+          required: true
+          type: string
+        - description: "The collection of scores you're requesting."
+          enum:
+            - PUBLIC
+            - SOCIAL
+          in: path
+          name: collection
+          required: true
+          type: string
+        - description: "The time span for the scores and ranks you're requesting."
+          enum:
+            - ALL_TIME
+            - DAILY
+            - WEEKLY
+          in: query
+          name: timeSpan
+          required: true
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - description: 'The maximum number of leaderboard scores to return in the response. For any response, the actual number of leaderboard scores returned may be less than the specified maxResults.'
+          in: query
+          maximum: 30
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LeaderboardScores'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - scores
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/leaderboards/{leaderboardId}/window/{collection}':
+    get:
+      description: "Lists the scores in a leaderboard around (and including) a player's score."
+      operationId: games.scores.listWindow
+      parameters:
+        - description: The ID of the leaderboard.
+          in: path
+          name: leaderboardId
+          required: true
+          type: string
+        - description: "The collection of scores you're requesting."
+          enum:
+            - PUBLIC
+            - SOCIAL
+          in: path
+          name: collection
+          required: true
+          type: string
+        - description: "The time span for the scores and ranks you're requesting."
+          enum:
+            - ALL_TIME
+            - DAILY
+            - WEEKLY
+          in: query
+          name: timeSpan
+          required: true
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - description: 'The maximum number of leaderboard scores to return in the response. For any response, the actual number of leaderboard scores returned may be less than the specified maxResults.'
+          in: query
+          maximum: 30
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+        - description: "The preferred number of scores to return above the player's score. More scores may be returned if the player is at the bottom of the leaderboard; fewer may be returned if the player is at the top. Must be less than or equal to maxResults."
+          in: query
+          name: resultsAbove
+          type: integer
+        - description: True if the top scores should be returned when the player is not in the leaderboard. Defaults to true.
+          in: query
+          name: returnTopIfAbsent
+          type: boolean
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LeaderboardScores'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - scores
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /metagameConfig:
+    get:
+      description: Return the metagame configuration data for the calling application.
+      operationId: games.metagame.getMetagameConfig
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/MetagameConfig'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - metagame
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/players/me/players/{collection}':
+    get:
+      description: Get the collection of players for the currently authenticated user.
+      operationId: games.players.list
+      parameters:
+        - description: Collection of players being retrieved
+          enum:
+            - connected
+            - playedWith
+            - played_with
+          in: path
+          name: collection
+          required: true
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - description: 'The maximum number of player resources to return in the response, used for paging. For any response, the actual number of player resources returned may be less than the specified maxResults.'
+          in: query
+          maximum: 50
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PlayerListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - players
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/players/{playerId}':
+    get:
+      description: 'Retrieves the Player resource with the given ID. To retrieve the player for the currently authenticated user, set playerId to me.'
+      operationId: games.players.get
+      parameters:
+        - description: "A player ID. A value of me may be used in place of the authenticated player's ID."
+          in: path
+          name: playerId
+          required: true
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Player'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - players
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/players/{playerId}/achievements':
+    get:
+      description: "Lists the progress for all your application's achievements for the currently authenticated player."
+      operationId: games.achievements.list
+      parameters:
+        - description: "A player ID. A value of me may be used in place of the authenticated player's ID."
+          in: path
+          name: playerId
+          required: true
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - description: 'The maximum number of achievement resources to return in the response, used for paging. For any response, the actual number of achievement resources returned may be less than the specified maxResults.'
+          in: query
+          maximum: 200
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+        - description: "Tells the server to return only achievements with the specified state. If this parameter isn't specified, all achievements are returned."
+          enum:
+            - ALL
+            - HIDDEN
+            - REVEALED
+            - UNLOCKED
+          in: query
+          name: state
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PlayerAchievementListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - achievements
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/players/{playerId}/categories/{collection}':
+    get:
+      description: List play data aggregated per category for the player corresponding to playerId.
+      operationId: games.metagame.listCategoriesByPlayer
+      parameters:
+        - description: "A player ID. A value of me may be used in place of the authenticated player's ID."
+          in: path
+          name: playerId
+          required: true
+          type: string
+        - description: The collection of categories for which data will be returned.
+          enum:
+            - all
+          in: path
+          name: collection
+          required: true
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - description: 'The maximum number of category resources to return in the response, used for paging. For any response, the actual number of category resources returned may be less than the specified maxResults.'
+          in: query
+          maximum: 100
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CategoryListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - metagame
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/players/{playerId}/leaderboards/{leaderboardId}/scores/{timeSpan}':
+    get:
+      description: |-
+        Get high scores, and optionally ranks, in leaderboards for the currently authenticated player. For a specific time span, leaderboardId can be set to ALL to retrieve data for all leaderboards in a given time span.
+        NOTE: You cannot ask for 'ALL' leaderboards and 'ALL' timeSpans in the same request; only one parameter may be set to 'ALL'.
+      operationId: games.scores.get
+      parameters:
+        - description: "A player ID. A value of me may be used in place of the authenticated player's ID."
+          in: path
+          name: playerId
+          required: true
+          type: string
+        - description: "The ID of the leaderboard. Can be set to 'ALL' to retrieve data for all leaderboards for this application."
+          in: path
+          name: leaderboardId
+          required: true
+          type: string
+        - description: "The time span for the scores and ranks you're requesting."
+          enum:
+            - ALL
+            - ALL_TIME
+            - DAILY
+            - WEEKLY
+          in: path
+          name: timeSpan
+          required: true
+          type: string
+        - description: 'The types of ranks to return. If the parameter is omitted, no ranks will be returned.'
+          enum:
+            - ALL
+            - PUBLIC
+            - SOCIAL
+          in: query
+          name: includeRankType
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - description: 'The maximum number of leaderboard scores to return in the response. For any response, the actual number of leaderboard scores returned may be less than the specified maxResults.'
+          in: query
+          maximum: 30
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PlayerLeaderboardScoreListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - scores
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/players/{playerId}/quests':
+    get:
+      description: Get a list of quests for your application and the currently authenticated player.
+      operationId: games.quests.list
+      parameters:
+        - description: "A player ID. A value of me may be used in place of the authenticated player's ID."
+          in: path
+          name: playerId
+          required: true
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - description: 'The maximum number of quest resources to return in the response, used for paging. For any response, the actual number of quest resources returned may be less than the specified maxResults. Acceptable values are 1 to 50, inclusive. (Default: 50).'
+          in: query
+          maximum: 50
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/QuestListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - quests
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/players/{playerId}/snapshots':
+    get:
+      description: Retrieves a list of snapshots created by your application for the player corresponding to the player ID.
+      operationId: games.snapshots.list
+      parameters:
+        - description: "A player ID. A value of me may be used in place of the authenticated player's ID."
+          in: path
+          name: playerId
+          required: true
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - description: 'The maximum number of snapshot resources to return in the response, used for paging. For any response, the actual number of snapshot resources returned may be less than the specified maxResults.'
+          in: query
+          maximum: 25
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SnapshotListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.appdata'
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - snapshots
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /pushtokens:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    put:
+      description: Registers a push token for the current user and application.
+      operationId: games.pushtokens.update
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PushToken'
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - pushtokens
+  /pushtokens/remove:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Removes a push token for the current user and application. Removing a non-existent push token will report success.
+      operationId: games.pushtokens.remove
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PushTokenId'
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - pushtokens
+  '/quests/{questId}/accept':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Indicates that the currently authorized user will participate in the quest.
+      operationId: games.quests.accept
+      parameters:
+        - description: The ID of the quest.
+          in: path
+          name: questId
+          required: true
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Quest'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - quests
+  '/quests/{questId}/milestones/{milestoneId}/claim':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    put:
+      description: Report that a reward for the milestone corresponding to milestoneId for the quest corresponding to questId has been claimed by the currently authorized user.
+      operationId: games.questMilestones.claim
+      parameters:
+        - description: The ID of the quest.
+          in: path
+          name: questId
+          required: true
+          type: string
+        - description: The ID of the milestone.
+          in: path
+          name: milestoneId
+          required: true
+          type: string
+        - description: A numeric ID to ensure that the request is handled correctly across retries. Your client application must generate this ID randomly.
+          in: query
+          name: requestId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - questMilestones
+  /revisions/check:
+    get:
+      description: Checks whether the games client is out of date.
+      operationId: games.revisions.check
+      parameters:
+        - description: "The revision of the client SDK used by your application. Format:\n[PLATFORM_TYPE]:[VERSION_NUMBER]. Possible values of PLATFORM_TYPE are:\n \n- \"ANDROID\" - Client is running the Android SDK. \n- \"IOS\" - Client is running the iOS SDK. \n- \"WEB_APP\" - Client is running as a Web App."
+          in: query
+          name: clientRevision
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RevisionCheckResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - revisions
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /rooms:
+    get:
+      description: Returns invitations to join rooms.
+      operationId: games.rooms.list
+      parameters:
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - description: 'The maximum number of rooms to return in the response, used for paging. For any response, the actual number of rooms to return may be less than the specified maxResults.'
+          in: query
+          maximum: 500
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RoomList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - rooms
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /rooms/create:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Create a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
+      operationId: games.rooms.create
+      parameters:
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RoomCreateRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Room'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - rooms
+  '/rooms/{roomId}':
+    get:
+      description: Get the data for a room.
+      operationId: games.rooms.get
+      parameters:
+        - description: The ID of the room.
+          in: path
+          name: roomId
+          required: true
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Room'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - rooms
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/rooms/{roomId}/decline':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Decline an invitation to join a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
+      operationId: games.rooms.decline
+      parameters:
+        - description: The ID of the room.
+          in: path
+          name: roomId
+          required: true
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Room'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - rooms
+  '/rooms/{roomId}/dismiss':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Dismiss an invitation to join a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
+      operationId: games.rooms.dismiss
+      parameters:
+        - description: The ID of the room.
+          in: path
+          name: roomId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - rooms
+  '/rooms/{roomId}/join':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Join a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
+      operationId: games.rooms.join
+      parameters:
+        - description: The ID of the room.
+          in: path
+          name: roomId
+          required: true
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RoomJoinRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Room'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - rooms
+  '/rooms/{roomId}/leave':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Leave a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
+      operationId: games.rooms.leave
+      parameters:
+        - description: The ID of the room.
+          in: path
+          name: roomId
+          required: true
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RoomLeaveRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Room'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - rooms
+  '/rooms/{roomId}/reportstatus':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Updates sent by a client reporting the status of peers in a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
+      operationId: games.rooms.reportStatus
+      parameters:
+        - description: The ID of the room.
+          in: path
+          name: roomId
+          required: true
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RoomP2PStatuses'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RoomStatus'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - rooms
+  '/snapshots/{snapshotId}':
+    get:
+      description: Retrieves the metadata for a given snapshot ID.
+      operationId: games.snapshots.get
+      parameters:
+        - description: The ID of the snapshot.
+          in: path
+          name: snapshotId
+          required: true
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Snapshot'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.appdata'
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - snapshots
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /turnbasedmatches:
+    get:
+      description: Returns turn-based matches the player is or was involved in.
+      operationId: games.turnBasedMatches.list
+      parameters:
+        - description: True if match data should be returned in the response. Note that not all data will necessarily be returned if include_match_data is true; the server may decide to only return data for some of the matches to limit download size for the client. The remainder of the data for these matches will be retrievable on request.
+          in: query
+          name: includeMatchData
+          type: boolean
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - description: 'The maximum number of completed or canceled matches to return in the response. If not set, all matches returned could be completed or canceled.'
+          in: query
+          maximum: 500
+          minimum: 0
+          name: maxCompletedMatches
+          type: integer
+        - description: 'The maximum number of matches to return in the response, used for paging. For any response, the actual number of matches to return may be less than the specified maxResults.'
+          in: query
+          maximum: 500
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TurnBasedMatchList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - turnBasedMatches
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /turnbasedmatches/create:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Create a turn-based match.
+      operationId: games.turnBasedMatches.create
+      parameters:
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TurnBasedMatchCreateRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TurnBasedMatch'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - turnBasedMatches
+  /turnbasedmatches/sync:
+    get:
+      description: 'Returns turn-based matches the player is or was involved in that changed since the last sync call, with the least recent changes coming first. Matches that should be removed from the local cache will have a status of MATCH_DELETED.'
+      operationId: games.turnBasedMatches.sync
+      parameters:
+        - description: True if match data should be returned in the response. Note that not all data will necessarily be returned if include_match_data is true; the server may decide to only return data for some of the matches to limit download size for the client. The remainder of the data for these matches will be retrievable on request.
+          in: query
+          name: includeMatchData
+          type: boolean
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - description: 'The maximum number of completed or canceled matches to return in the response. If not set, all matches returned could be completed or canceled.'
+          in: query
+          maximum: 500
+          minimum: 0
+          name: maxCompletedMatches
+          type: integer
+        - description: 'The maximum number of matches to return in the response, used for paging. For any response, the actual number of matches to return may be less than the specified maxResults.'
+          in: query
+          maximum: 500
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: The token returned by the previous request.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TurnBasedMatchSync'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - turnBasedMatches
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/turnbasedmatches/{matchId}':
+    get:
+      description: Get the data for a turn-based match.
+      operationId: games.turnBasedMatches.get
+      parameters:
+        - description: The ID of the match.
+          in: path
+          name: matchId
+          required: true
+          type: string
+        - description: Get match data along with metadata.
+          in: query
+          name: includeMatchData
+          type: boolean
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TurnBasedMatch'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - turnBasedMatches
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/turnbasedmatches/{matchId}/cancel':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    put:
+      description: Cancel a turn-based match.
+      operationId: games.turnBasedMatches.cancel
+      parameters:
+        - description: The ID of the match.
+          in: path
+          name: matchId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - turnBasedMatches
+  '/turnbasedmatches/{matchId}/decline':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    put:
+      description: Decline an invitation to play a turn-based match.
+      operationId: games.turnBasedMatches.decline
+      parameters:
+        - description: The ID of the match.
+          in: path
+          name: matchId
+          required: true
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TurnBasedMatch'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - turnBasedMatches
+  '/turnbasedmatches/{matchId}/dismiss':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    put:
+      description: Dismiss a turn-based match from the match list. The match will no longer show up in the list and will not generate notifications.
+      operationId: games.turnBasedMatches.dismiss
+      parameters:
+        - description: The ID of the match.
+          in: path
+          name: matchId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - turnBasedMatches
+  '/turnbasedmatches/{matchId}/finish':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    put:
+      description: 'Finish a turn-based match. Each player should make this call once, after all results are in. Only the player whose turn it is may make the first call to Finish, and can pass in the final match state.'
+      operationId: games.turnBasedMatches.finish
+      parameters:
+        - description: The ID of the match.
+          in: path
+          name: matchId
+          required: true
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TurnBasedMatchResults'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TurnBasedMatch'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - turnBasedMatches
+  '/turnbasedmatches/{matchId}/join':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    put:
+      description: Join a turn-based match.
+      operationId: games.turnBasedMatches.join
+      parameters:
+        - description: The ID of the match.
+          in: path
+          name: matchId
+          required: true
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TurnBasedMatch'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - turnBasedMatches
+  '/turnbasedmatches/{matchId}/leave':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    put:
+      description: "Leave a turn-based match when it is not the current player's turn, without canceling the match."
+      operationId: games.turnBasedMatches.leave
+      parameters:
+        - description: The ID of the match.
+          in: path
+          name: matchId
+          required: true
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TurnBasedMatch'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - turnBasedMatches
+  '/turnbasedmatches/{matchId}/leaveTurn':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    put:
+      description: "Leave a turn-based match during the current player's turn, without canceling the match."
+      operationId: games.turnBasedMatches.leaveTurn
+      parameters:
+        - description: The ID of the match.
+          in: path
+          name: matchId
+          required: true
+          type: string
+        - description: The version of the match being updated.
+          in: query
+          name: matchVersion
+          required: true
+          type: integer
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - description: 'The ID of another participant who should take their turn next. If not set, the match will wait for other player(s) to join via automatching; this is only valid if automatch criteria is set on the match with remaining slots for automatched players.'
+          in: query
+          name: pendingParticipantId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TurnBasedMatch'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - turnBasedMatches
+  '/turnbasedmatches/{matchId}/rematch':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: "Create a rematch of a match that was previously completed, with the same participants. This can be called by only one player on a match still in their list; the player must have called Finish first. Returns the newly created match; it will be the caller's turn."
+      operationId: games.turnBasedMatches.rematch
+      parameters:
+        - description: The ID of the match.
+          in: path
+          name: matchId
+          required: true
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - description: A randomly generated numeric ID for each request specified by the caller. This number is used at the server to ensure that the request is handled correctly across retries.
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TurnBasedMatchRematch'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - turnBasedMatches
+  '/turnbasedmatches/{matchId}/turn':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    put:
+      description: Commit the results of a player turn.
+      operationId: games.turnBasedMatches.takeTurn
+      parameters:
+        - description: The ID of the match.
+          in: path
+          name: matchId
+          required: true
+          type: string
+        - description: The preferred language to use for strings returned by this method.
+          in: query
+          name: language
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TurnBasedMatchTurn'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TurnBasedMatch'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - turnBasedMatches
 definitions:
   AchievementDefinition:
     description: This is a JSON template for an achievement definition object.
@@ -2091,2000 +4088,3 @@ definitions:
           $ref: '#/definitions/ParticipantResult'
         type: array
     type: object
-externalDocs:
-  url: 'https://developers.google.com/games/services/'
-host: www.googleapis.com
-info:
-  contact:
-    name: Google
-    url: 'https://google.com'
-  description: The API for Google Play Game Services.
-  title: Google Play Game Services API
-  version: v1
-  x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
-  x-logo:
-    url: 'https://www.gstatic.com/images/icons/material/product/2x/play_games_64dp.png'
-  x-origin:
-    format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/games/v1/rest'
-    version: v1
-  x-preferred: true
-  x-providerName: googleapis.com
-  x-serviceName: games
-parameters:
-  alt:
-    default: json
-    description: Data format for the response.
-    enum:
-      - json
-    in: query
-    name: alt
-    type: string
-  fields:
-    description: Selector specifying which fields to include in a partial response.
-    in: query
-    name: fields
-    type: string
-  key:
-    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
-    in: query
-    name: key
-    type: string
-  oauth_token:
-    description: OAuth 2.0 token for the current user.
-    in: query
-    name: oauth_token
-    type: string
-  prettyPrint:
-    default: true
-    description: Returns response with indentations and line breaks.
-    in: query
-    name: prettyPrint
-    type: boolean
-  quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
-    in: query
-    name: quotaUser
-    type: string
-  userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
-    in: query
-    name: userIp
-    type: string
-paths:
-  /achievements:
-    get:
-      description: Lists all the achievement definitions for your application.
-      operationId: games.achievementDefinitions.list
-      parameters:
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - description: 'The maximum number of achievement resources to return in the response, used for paging. For any response, the actual number of achievement resources returned may be less than the specified maxResults.'
-          in: query
-          maximum: 200
-          minimum: 1
-          name: maxResults
-          type: integer
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AchievementDefinitionsListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - achievementDefinitions
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  /achievements/updateMultiple:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Updates multiple achievements for the currently authenticated player.
-      operationId: games.achievements.updateMultiple
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AchievementUpdateMultipleRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AchievementUpdateMultipleResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - achievements
-  '/achievements/{achievementId}/increment':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Increments the steps of the achievement with the given ID for the currently authenticated player.
-      operationId: games.achievements.increment
-      parameters:
-        - description: The ID of the achievement used by this method.
-          in: path
-          name: achievementId
-          required: true
-          type: string
-        - description: The number of steps to increment.
-          in: query
-          minimum: 1
-          name: stepsToIncrement
-          required: true
-          type: integer
-        - description: A randomly generated numeric ID for each request specified by the caller. This number is used at the server to ensure that the request is handled correctly across retries.
-          in: query
-          name: requestId
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AchievementIncrementResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - achievements
-  '/achievements/{achievementId}/reveal':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Sets the state of the achievement with the given ID to REVEALED for the currently authenticated player.
-      operationId: games.achievements.reveal
-      parameters:
-        - description: The ID of the achievement used by this method.
-          in: path
-          name: achievementId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AchievementRevealResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - achievements
-  '/achievements/{achievementId}/setStepsAtLeast':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: 'Sets the steps for the currently authenticated player towards unlocking an achievement. If the steps parameter is less than the current number of steps that the player already gained for the achievement, the achievement is not modified.'
-      operationId: games.achievements.setStepsAtLeast
-      parameters:
-        - description: The ID of the achievement used by this method.
-          in: path
-          name: achievementId
-          required: true
-          type: string
-        - description: The minimum value to set the steps to.
-          in: query
-          minimum: 1
-          name: steps
-          required: true
-          type: integer
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AchievementSetStepsAtLeastResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - achievements
-  '/achievements/{achievementId}/unlock':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Unlocks this achievement for the currently authenticated player.
-      operationId: games.achievements.unlock
-      parameters:
-        - description: The ID of the achievement used by this method.
-          in: path
-          name: achievementId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AchievementUnlockResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - achievements
-  /applications/played:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Indicate that the the currently authenticated user is playing your application.
-      operationId: games.applications.played
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - applications
-  '/applications/{applicationId}':
-    get:
-      description: 'Retrieves the metadata of the application with the given ID. If the requested application is not available for the specified platformType, the returned response will not include any instance data.'
-      operationId: games.applications.get
-      parameters:
-        - description: The application ID from the Google Play developer console.
-          in: path
-          name: applicationId
-          required: true
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - description: Restrict application details returned to the specific platform.
-          enum:
-            - ANDROID
-            - IOS
-            - WEB_APP
-          in: query
-          name: platformType
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Application'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - applications
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  /eventDefinitions:
-    get:
-      description: Returns a list of the event definitions in this application.
-      operationId: games.events.listDefinitions
-      parameters:
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - description: 'The maximum number of event definitions to return in the response, used for paging. For any response, the actual number of event definitions to return may be less than the specified maxResults.'
-          in: query
-          maximum: 100
-          minimum: 1
-          name: maxResults
-          type: integer
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/EventDefinitionListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - events
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  /events:
-    get:
-      description: Returns a list showing the current progress on events in this application for the currently authenticated user.
-      operationId: games.events.listByPlayer
-      parameters:
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - description: 'The maximum number of events to return in the response, used for paging. For any response, the actual number of events to return may be less than the specified maxResults.'
-          in: query
-          maximum: 100
-          minimum: 1
-          name: maxResults
-          type: integer
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/PlayerEventListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - events
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Records a batch of changes to the number of times events have occurred for the currently authenticated user of this application.
-      operationId: games.events.record
-      parameters:
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/EventRecordRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/EventUpdateResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - events
-  /leaderboards:
-    get:
-      description: Lists all the leaderboard metadata for your application.
-      operationId: games.leaderboards.list
-      parameters:
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - description: 'The maximum number of leaderboards to return in the response. For any response, the actual number of leaderboards returned may be less than the specified maxResults.'
-          in: query
-          maximum: 200
-          minimum: 1
-          name: maxResults
-          type: integer
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/LeaderboardListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - leaderboards
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  /leaderboards/scores:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Submits multiple scores to leaderboards.
-      operationId: games.scores.submitMultiple
-      parameters:
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PlayerScoreSubmissionList'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/PlayerScoreListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - scores
-  '/leaderboards/{leaderboardId}':
-    get:
-      description: Retrieves the metadata of the leaderboard with the given ID.
-      operationId: games.leaderboards.get
-      parameters:
-        - description: The ID of the leaderboard.
-          in: path
-          name: leaderboardId
-          required: true
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Leaderboard'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - leaderboards
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/leaderboards/{leaderboardId}/scores':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Submits a score to the specified leaderboard.
-      operationId: games.scores.submit
-      parameters:
-        - description: The ID of the leaderboard.
-          in: path
-          name: leaderboardId
-          required: true
-          type: string
-        - description: "The score you're submitting. The submitted score is ignored if it is worse than a previously submitted score, where worse depends on the leaderboard sort order. The meaning of the score value depends on the leaderboard format type. For fixed-point, the score represents the raw value. For time, the score represents elapsed time in milliseconds. For currency, the score represents a value in micro units."
-          in: query
-          name: score
-          required: true
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - description: "Additional information about the score you're submitting. Values must contain no more than 64 URI-safe characters as defined by section 2.3 of RFC 3986."
-          in: query
-          name: scoreTag
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/PlayerScoreResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - scores
-  '/leaderboards/{leaderboardId}/scores/{collection}':
-    get:
-      description: 'Lists the scores in a leaderboard, starting from the top.'
-      operationId: games.scores.list
-      parameters:
-        - description: The ID of the leaderboard.
-          in: path
-          name: leaderboardId
-          required: true
-          type: string
-        - description: "The collection of scores you're requesting."
-          enum:
-            - PUBLIC
-            - SOCIAL
-          in: path
-          name: collection
-          required: true
-          type: string
-        - description: "The time span for the scores and ranks you're requesting."
-          enum:
-            - ALL_TIME
-            - DAILY
-            - WEEKLY
-          in: query
-          name: timeSpan
-          required: true
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - description: 'The maximum number of leaderboard scores to return in the response. For any response, the actual number of leaderboard scores returned may be less than the specified maxResults.'
-          in: query
-          maximum: 30
-          minimum: 1
-          name: maxResults
-          type: integer
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/LeaderboardScores'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - scores
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/leaderboards/{leaderboardId}/window/{collection}':
-    get:
-      description: "Lists the scores in a leaderboard around (and including) a player's score."
-      operationId: games.scores.listWindow
-      parameters:
-        - description: The ID of the leaderboard.
-          in: path
-          name: leaderboardId
-          required: true
-          type: string
-        - description: "The collection of scores you're requesting."
-          enum:
-            - PUBLIC
-            - SOCIAL
-          in: path
-          name: collection
-          required: true
-          type: string
-        - description: "The time span for the scores and ranks you're requesting."
-          enum:
-            - ALL_TIME
-            - DAILY
-            - WEEKLY
-          in: query
-          name: timeSpan
-          required: true
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - description: 'The maximum number of leaderboard scores to return in the response. For any response, the actual number of leaderboard scores returned may be less than the specified maxResults.'
-          in: query
-          maximum: 30
-          minimum: 1
-          name: maxResults
-          type: integer
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-        - description: "The preferred number of scores to return above the player's score. More scores may be returned if the player is at the bottom of the leaderboard; fewer may be returned if the player is at the top. Must be less than or equal to maxResults."
-          in: query
-          name: resultsAbove
-          type: integer
-        - description: True if the top scores should be returned when the player is not in the leaderboard. Defaults to true.
-          in: query
-          name: returnTopIfAbsent
-          type: boolean
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/LeaderboardScores'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - scores
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  /metagameConfig:
-    get:
-      description: Return the metagame configuration data for the calling application.
-      operationId: games.metagame.getMetagameConfig
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/MetagameConfig'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - metagame
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/players/me/players/{collection}':
-    get:
-      description: Get the collection of players for the currently authenticated user.
-      operationId: games.players.list
-      parameters:
-        - description: Collection of players being retrieved
-          enum:
-            - connected
-            - playedWith
-            - played_with
-          in: path
-          name: collection
-          required: true
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - description: 'The maximum number of player resources to return in the response, used for paging. For any response, the actual number of player resources returned may be less than the specified maxResults.'
-          in: query
-          maximum: 50
-          minimum: 1
-          name: maxResults
-          type: integer
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/PlayerListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - players
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/players/{playerId}':
-    get:
-      description: 'Retrieves the Player resource with the given ID. To retrieve the player for the currently authenticated user, set playerId to me.'
-      operationId: games.players.get
-      parameters:
-        - description: "A player ID. A value of me may be used in place of the authenticated player's ID."
-          in: path
-          name: playerId
-          required: true
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Player'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - players
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/players/{playerId}/achievements':
-    get:
-      description: "Lists the progress for all your application's achievements for the currently authenticated player."
-      operationId: games.achievements.list
-      parameters:
-        - description: "A player ID. A value of me may be used in place of the authenticated player's ID."
-          in: path
-          name: playerId
-          required: true
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - description: 'The maximum number of achievement resources to return in the response, used for paging. For any response, the actual number of achievement resources returned may be less than the specified maxResults.'
-          in: query
-          maximum: 200
-          minimum: 1
-          name: maxResults
-          type: integer
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-        - description: "Tells the server to return only achievements with the specified state. If this parameter isn't specified, all achievements are returned."
-          enum:
-            - ALL
-            - HIDDEN
-            - REVEALED
-            - UNLOCKED
-          in: query
-          name: state
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/PlayerAchievementListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - achievements
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/players/{playerId}/categories/{collection}':
-    get:
-      description: List play data aggregated per category for the player corresponding to playerId.
-      operationId: games.metagame.listCategoriesByPlayer
-      parameters:
-        - description: "A player ID. A value of me may be used in place of the authenticated player's ID."
-          in: path
-          name: playerId
-          required: true
-          type: string
-        - description: The collection of categories for which data will be returned.
-          enum:
-            - all
-          in: path
-          name: collection
-          required: true
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - description: 'The maximum number of category resources to return in the response, used for paging. For any response, the actual number of category resources returned may be less than the specified maxResults.'
-          in: query
-          maximum: 100
-          minimum: 1
-          name: maxResults
-          type: integer
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/CategoryListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - metagame
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/players/{playerId}/leaderboards/{leaderboardId}/scores/{timeSpan}':
-    get:
-      description: |-
-        Get high scores, and optionally ranks, in leaderboards for the currently authenticated player. For a specific time span, leaderboardId can be set to ALL to retrieve data for all leaderboards in a given time span.
-        NOTE: You cannot ask for 'ALL' leaderboards and 'ALL' timeSpans in the same request; only one parameter may be set to 'ALL'.
-      operationId: games.scores.get
-      parameters:
-        - description: "A player ID. A value of me may be used in place of the authenticated player's ID."
-          in: path
-          name: playerId
-          required: true
-          type: string
-        - description: "The ID of the leaderboard. Can be set to 'ALL' to retrieve data for all leaderboards for this application."
-          in: path
-          name: leaderboardId
-          required: true
-          type: string
-        - description: "The time span for the scores and ranks you're requesting."
-          enum:
-            - ALL
-            - ALL_TIME
-            - DAILY
-            - WEEKLY
-          in: path
-          name: timeSpan
-          required: true
-          type: string
-        - description: 'The types of ranks to return. If the parameter is omitted, no ranks will be returned.'
-          enum:
-            - ALL
-            - PUBLIC
-            - SOCIAL
-          in: query
-          name: includeRankType
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - description: 'The maximum number of leaderboard scores to return in the response. For any response, the actual number of leaderboard scores returned may be less than the specified maxResults.'
-          in: query
-          maximum: 30
-          minimum: 1
-          name: maxResults
-          type: integer
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/PlayerLeaderboardScoreListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - scores
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/players/{playerId}/quests':
-    get:
-      description: Get a list of quests for your application and the currently authenticated player.
-      operationId: games.quests.list
-      parameters:
-        - description: "A player ID. A value of me may be used in place of the authenticated player's ID."
-          in: path
-          name: playerId
-          required: true
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - description: 'The maximum number of quest resources to return in the response, used for paging. For any response, the actual number of quest resources returned may be less than the specified maxResults. Acceptable values are 1 to 50, inclusive. (Default: 50).'
-          in: query
-          maximum: 50
-          minimum: 1
-          name: maxResults
-          type: integer
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/QuestListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - quests
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/players/{playerId}/snapshots':
-    get:
-      description: Retrieves a list of snapshots created by your application for the player corresponding to the player ID.
-      operationId: games.snapshots.list
-      parameters:
-        - description: "A player ID. A value of me may be used in place of the authenticated player's ID."
-          in: path
-          name: playerId
-          required: true
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - description: 'The maximum number of snapshot resources to return in the response, used for paging. For any response, the actual number of snapshot resources returned may be less than the specified maxResults.'
-          in: query
-          maximum: 25
-          minimum: 1
-          name: maxResults
-          type: integer
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/SnapshotListResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - snapshots
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  /pushtokens:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    put:
-      description: Registers a push token for the current user and application.
-      operationId: games.pushtokens.update
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PushToken'
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - pushtokens
-  /pushtokens/remove:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Removes a push token for the current user and application. Removing a non-existent push token will report success.
-      operationId: games.pushtokens.remove
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PushTokenId'
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - pushtokens
-  '/quests/{questId}/accept':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Indicates that the currently authorized user will participate in the quest.
-      operationId: games.quests.accept
-      parameters:
-        - description: The ID of the quest.
-          in: path
-          name: questId
-          required: true
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Quest'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - quests
-  '/quests/{questId}/milestones/{milestoneId}/claim':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    put:
-      description: Report that a reward for the milestone corresponding to milestoneId for the quest corresponding to questId has been claimed by the currently authorized user.
-      operationId: games.questMilestones.claim
-      parameters:
-        - description: The ID of the quest.
-          in: path
-          name: questId
-          required: true
-          type: string
-        - description: The ID of the milestone.
-          in: path
-          name: milestoneId
-          required: true
-          type: string
-        - description: A numeric ID to ensure that the request is handled correctly across retries. Your client application must generate this ID randomly.
-          in: query
-          name: requestId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - questMilestones
-  /revisions/check:
-    get:
-      description: Checks whether the games client is out of date.
-      operationId: games.revisions.check
-      parameters:
-        - description: "The revision of the client SDK used by your application. Format:\n[PLATFORM_TYPE]:[VERSION_NUMBER]. Possible values of PLATFORM_TYPE are:\n \n- \"ANDROID\" - Client is running the Android SDK. \n- \"IOS\" - Client is running the iOS SDK. \n- \"WEB_APP\" - Client is running as a Web App."
-          in: query
-          name: clientRevision
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/RevisionCheckResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - revisions
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  /rooms:
-    get:
-      description: Returns invitations to join rooms.
-      operationId: games.rooms.list
-      parameters:
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - description: 'The maximum number of rooms to return in the response, used for paging. For any response, the actual number of rooms to return may be less than the specified maxResults.'
-          in: query
-          maximum: 500
-          minimum: 1
-          name: maxResults
-          type: integer
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/RoomList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - rooms
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  /rooms/create:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Create a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
-      operationId: games.rooms.create
-      parameters:
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RoomCreateRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Room'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - rooms
-  '/rooms/{roomId}':
-    get:
-      description: Get the data for a room.
-      operationId: games.rooms.get
-      parameters:
-        - description: The ID of the room.
-          in: path
-          name: roomId
-          required: true
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Room'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - rooms
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/rooms/{roomId}/decline':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Decline an invitation to join a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
-      operationId: games.rooms.decline
-      parameters:
-        - description: The ID of the room.
-          in: path
-          name: roomId
-          required: true
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Room'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - rooms
-  '/rooms/{roomId}/dismiss':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Dismiss an invitation to join a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
-      operationId: games.rooms.dismiss
-      parameters:
-        - description: The ID of the room.
-          in: path
-          name: roomId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - rooms
-  '/rooms/{roomId}/join':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Join a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
-      operationId: games.rooms.join
-      parameters:
-        - description: The ID of the room.
-          in: path
-          name: roomId
-          required: true
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RoomJoinRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Room'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - rooms
-  '/rooms/{roomId}/leave':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Leave a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
-      operationId: games.rooms.leave
-      parameters:
-        - description: The ID of the room.
-          in: path
-          name: roomId
-          required: true
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RoomLeaveRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Room'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - rooms
-  '/rooms/{roomId}/reportstatus':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Updates sent by a client reporting the status of peers in a room. For internal use by the Games SDK only. Calling this method directly is unsupported.
-      operationId: games.rooms.reportStatus
-      parameters:
-        - description: The ID of the room.
-          in: path
-          name: roomId
-          required: true
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RoomP2PStatuses'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/RoomStatus'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - rooms
-  '/snapshots/{snapshotId}':
-    get:
-      description: Retrieves the metadata for a given snapshot ID.
-      operationId: games.snapshots.get
-      parameters:
-        - description: The ID of the snapshot.
-          in: path
-          name: snapshotId
-          required: true
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Snapshot'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/drive.appdata'
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - snapshots
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  /turnbasedmatches:
-    get:
-      description: Returns turn-based matches the player is or was involved in.
-      operationId: games.turnBasedMatches.list
-      parameters:
-        - description: True if match data should be returned in the response. Note that not all data will necessarily be returned if include_match_data is true; the server may decide to only return data for some of the matches to limit download size for the client. The remainder of the data for these matches will be retrievable on request.
-          in: query
-          name: includeMatchData
-          type: boolean
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - description: 'The maximum number of completed or canceled matches to return in the response. If not set, all matches returned could be completed or canceled.'
-          in: query
-          maximum: 500
-          minimum: 0
-          name: maxCompletedMatches
-          type: integer
-        - description: 'The maximum number of matches to return in the response, used for paging. For any response, the actual number of matches to return may be less than the specified maxResults.'
-          in: query
-          maximum: 500
-          minimum: 1
-          name: maxResults
-          type: integer
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/TurnBasedMatchList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - turnBasedMatches
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  /turnbasedmatches/create:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Create a turn-based match.
-      operationId: games.turnBasedMatches.create
-      parameters:
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TurnBasedMatchCreateRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/TurnBasedMatch'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - turnBasedMatches
-  /turnbasedmatches/sync:
-    get:
-      description: 'Returns turn-based matches the player is or was involved in that changed since the last sync call, with the least recent changes coming first. Matches that should be removed from the local cache will have a status of MATCH_DELETED.'
-      operationId: games.turnBasedMatches.sync
-      parameters:
-        - description: True if match data should be returned in the response. Note that not all data will necessarily be returned if include_match_data is true; the server may decide to only return data for some of the matches to limit download size for the client. The remainder of the data for these matches will be retrievable on request.
-          in: query
-          name: includeMatchData
-          type: boolean
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - description: 'The maximum number of completed or canceled matches to return in the response. If not set, all matches returned could be completed or canceled.'
-          in: query
-          maximum: 500
-          minimum: 0
-          name: maxCompletedMatches
-          type: integer
-        - description: 'The maximum number of matches to return in the response, used for paging. For any response, the actual number of matches to return may be less than the specified maxResults.'
-          in: query
-          maximum: 500
-          minimum: 1
-          name: maxResults
-          type: integer
-        - description: The token returned by the previous request.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/TurnBasedMatchSync'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - turnBasedMatches
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/turnbasedmatches/{matchId}':
-    get:
-      description: Get the data for a turn-based match.
-      operationId: games.turnBasedMatches.get
-      parameters:
-        - description: The ID of the match.
-          in: path
-          name: matchId
-          required: true
-          type: string
-        - description: Get match data along with metadata.
-          in: query
-          name: includeMatchData
-          type: boolean
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/TurnBasedMatch'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - turnBasedMatches
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/turnbasedmatches/{matchId}/cancel':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    put:
-      description: Cancel a turn-based match.
-      operationId: games.turnBasedMatches.cancel
-      parameters:
-        - description: The ID of the match.
-          in: path
-          name: matchId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - turnBasedMatches
-  '/turnbasedmatches/{matchId}/decline':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    put:
-      description: Decline an invitation to play a turn-based match.
-      operationId: games.turnBasedMatches.decline
-      parameters:
-        - description: The ID of the match.
-          in: path
-          name: matchId
-          required: true
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/TurnBasedMatch'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - turnBasedMatches
-  '/turnbasedmatches/{matchId}/dismiss':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    put:
-      description: Dismiss a turn-based match from the match list. The match will no longer show up in the list and will not generate notifications.
-      operationId: games.turnBasedMatches.dismiss
-      parameters:
-        - description: The ID of the match.
-          in: path
-          name: matchId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - turnBasedMatches
-  '/turnbasedmatches/{matchId}/finish':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    put:
-      description: 'Finish a turn-based match. Each player should make this call once, after all results are in. Only the player whose turn it is may make the first call to Finish, and can pass in the final match state.'
-      operationId: games.turnBasedMatches.finish
-      parameters:
-        - description: The ID of the match.
-          in: path
-          name: matchId
-          required: true
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TurnBasedMatchResults'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/TurnBasedMatch'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - turnBasedMatches
-  '/turnbasedmatches/{matchId}/join':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    put:
-      description: Join a turn-based match.
-      operationId: games.turnBasedMatches.join
-      parameters:
-        - description: The ID of the match.
-          in: path
-          name: matchId
-          required: true
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/TurnBasedMatch'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - turnBasedMatches
-  '/turnbasedmatches/{matchId}/leave':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    put:
-      description: "Leave a turn-based match when it is not the current player's turn, without canceling the match."
-      operationId: games.turnBasedMatches.leave
-      parameters:
-        - description: The ID of the match.
-          in: path
-          name: matchId
-          required: true
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/TurnBasedMatch'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - turnBasedMatches
-  '/turnbasedmatches/{matchId}/leaveTurn':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    put:
-      description: "Leave a turn-based match during the current player's turn, without canceling the match."
-      operationId: games.turnBasedMatches.leaveTurn
-      parameters:
-        - description: The ID of the match.
-          in: path
-          name: matchId
-          required: true
-          type: string
-        - description: The version of the match being updated.
-          in: query
-          name: matchVersion
-          required: true
-          type: integer
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - description: 'The ID of another participant who should take their turn next. If not set, the match will wait for other player(s) to join via automatching; this is only valid if automatch criteria is set on the match with remaining slots for automatched players.'
-          in: query
-          name: pendingParticipantId
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/TurnBasedMatch'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - turnBasedMatches
-  '/turnbasedmatches/{matchId}/rematch':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: "Create a rematch of a match that was previously completed, with the same participants. This can be called by only one player on a match still in their list; the player must have called Finish first. Returns the newly created match; it will be the caller's turn."
-      operationId: games.turnBasedMatches.rematch
-      parameters:
-        - description: The ID of the match.
-          in: path
-          name: matchId
-          required: true
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - description: A randomly generated numeric ID for each request specified by the caller. This number is used at the server to ensure that the request is handled correctly across retries.
-          in: query
-          name: requestId
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/TurnBasedMatchRematch'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - turnBasedMatches
-  '/turnbasedmatches/{matchId}/turn':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    put:
-      description: Commit the results of a player turn.
-      operationId: games.turnBasedMatches.takeTurn
-      parameters:
-        - description: The ID of the match.
-          in: path
-          name: matchId
-          required: true
-          type: string
-        - description: The preferred language to use for strings returned by this method.
-          in: query
-          name: language
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TurnBasedMatchTurn'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/TurnBasedMatch'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/games'
-            - 'https://www.googleapis.com/auth/plus.login'
-      tags:
-        - turnBasedMatches
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/drive.appdata': View and manage its own configuration data in your Google Drive
-      'https://www.googleapis.com/auth/games': Share your Google+ profile information and view and manage your game activity
-      'https://www.googleapis.com/auth/plus.login': Know your basic profile info and list of people in your circles.
-    type: oauth2
-swagger: '2.0'

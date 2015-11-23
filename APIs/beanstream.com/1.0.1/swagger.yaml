@@ -1,4 +1,653 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.beanstream.com
 basePath: /api/v1
+info:
+  description: 'https://www.beanstream.com/api/v1'
+  title: Beanstream Payments API
+  version: 1.0.1
+  x-logo:
+    url: 'http://46k5aj426sp830ztvffig15w.wpengine.netdna-cdn.com/wp-content/uploads/2015/08/Beanstream-logo.png'
+  x-origin:
+    format: swagger
+    url: 'http://support.beanstream.com/restapi/swagger.json'
+    version: '2.0'
+  x-providerName: beanstream.com
+produces:
+  - application/json
+paths:
+  /payments:
+    post:
+      description: 'Make a payment using credit card, cash, cheque, profile, or token. Each payment type has its own json definition passed in the body. For all payments you have the standard Billing, Shipping, Comments, etc. fields that are optional. Only the amount is required along with the payment data for card, cash, cheque, profile, and token. You must change the payment_method for each payment type. Credit Card - "card", Payment Profile - "payment_profile", Legato Token - "token", Cash - "cash", Cheque - "cheque", Interac - "interac"'
+      parameters:
+        - in: body
+          name: payment_request
+          schema:
+            $ref: '#/definitions/PaymentRequest'
+      responses:
+        '200':
+          description: Payment response containing the payment details as well as if the payment was approved or declined.
+          schema:
+            $ref: '#/definitions/PaymentResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '401':
+          description: Authentication Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '402':
+          description: Business Rule Violation or Decline
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '403':
+          description: Authorization Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '405':
+          description: Invalid Request Method
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+      summary: Make Payment
+      tags:
+        - Payments
+  '/payments/{transId}':
+    get:
+      description: Get a previous payment (transaction).
+      parameters:
+        - description: The transaction id.
+          format: integer
+          in: path
+          name: transId
+          required: true
+          type: number
+      responses:
+        '200':
+          description: A transaction object.
+          schema:
+            $ref: '#/definitions/Transaction'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '401':
+          description: Authentication Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '402':
+          description: Business Rule Violation or Decline
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '403':
+          description: Authorization Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '405':
+          description: Invalid Request Method
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+      summary: Get payment
+      tags:
+        - Payments
+  '/payments/{transId}/completions':
+    post:
+      description: Complete a pre-authorized payment. The amount of the transaction to complete must be less than or equal to the original pre-auth amount. Complete must be set to true.
+      parameters:
+        - description: The transaction id.
+          format: double
+          in: path
+          name: transId
+          required: true
+          type: number
+        - in: body
+          name: payment_request
+          schema:
+            $ref: '#/definitions/PaymentRequest'
+      responses:
+        '200':
+          description: Payment response containing the payment details as well as if the transaction was approved or declined.
+          schema:
+            $ref: '#/definitions/PaymentResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '401':
+          description: Authentication Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '402':
+          description: Business Rule Violation or Decline
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '403':
+          description: Authorization Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '405':
+          description: Invalid Request Method
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+      summary: Complete pre-auth
+      tags:
+        - Payments
+  '/payments/{transId}/returns':
+    post:
+      description: Return payment.
+      parameters:
+        - description: The transaction id.
+          format: double
+          in: path
+          name: transId
+          required: true
+          type: number
+        - in: body
+          name: return
+          required: true
+          schema:
+            $ref: '#/definitions/Return'
+      responses:
+        '200':
+          description: Payment response containing the payment details as well as if the transaction was approved or declined.
+          schema:
+            $ref: '#/definitions/PaymentResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '401':
+          description: Authentication Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '402':
+          description: Business Rule Violation or Decline
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '403':
+          description: Authorization Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '405':
+          description: Invalid Request Method
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+      summary: Return payment
+      tags:
+        - Payments
+  '/payments/{transId}/void':
+    post:
+      description: 'Void a transaction. You can void payments, returns, pre-auths, and completions. It will cancel that transaction.'
+      parameters:
+        - description: The transaction id to void.
+          format: double
+          in: path
+          name: transId
+          required: true
+          type: number
+        - in: body
+          name: void
+          required: true
+          schema:
+            $ref: '#/definitions/Void'
+      responses:
+        '200':
+          description: Payment response containing the payment details as well as if the transaction was approved or declined.
+          schema:
+            $ref: '#/definitions/PaymentResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '401':
+          description: Authentication Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '402':
+          description: Business Rule Violation or Decline
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '403':
+          description: Authorization Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '405':
+          description: Invalid Request Method
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+      summary: Void Transaction
+      tags:
+        - Payments
+  /profiles:
+    post:
+      description: Create a new Payment Profile using either a card or a Legato token. You must supply one of them.
+      parameters:
+        - in: body
+          name: createProfileBody
+          required: true
+          schema:
+            $ref: '#/definitions/CreateProfileBody'
+      responses:
+        '200':
+          description: The Profile.
+          schema:
+            $ref: '#/definitions/ProfileResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '401':
+          description: Authentication Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '402':
+          description: Business Rule Violation or Decline
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '403':
+          description: Authorization Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '405':
+          description: Invalid Request Method
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+      summary: Create Profile
+      tags:
+        - Profiles
+  '/profiles/{profileId}':
+    delete:
+      description: 'Delete a Payment Profile using the profile ID, also known as the Customer Code.'
+      parameters:
+        - description: The profile id. (aka CustomerCode)
+          in: path
+          name: profileId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The Profile.
+          schema:
+            $ref: '#/definitions/ProfileResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '401':
+          description: Authentication Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '402':
+          description: Business Rule Violation or Decline
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '403':
+          description: Authorization Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '405':
+          description: Invalid Request Method
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+      summary: Delete profile
+      tags:
+        - Profiles
+    get:
+      description: 'Get a Payment Profile using the profile ID, also known as the Customer Code.'
+      parameters:
+        - description: The profile id. (aka CustomerCode)
+          in: path
+          name: profileId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The Profile.
+          schema:
+            $ref: '#/definitions/PaymentProfile'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '401':
+          description: Authentication Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '402':
+          description: Business Rule Violation or Decline
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '403':
+          description: Authorization Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '405':
+          description: Invalid Request Method
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+      summary: Get profile
+      tags:
+        - Profiles
+    put:
+      description: Create a new Payment Profile using either a card or a Legato token. You must supply one of them.
+      parameters:
+        - description: The profile id. (aka CustomerCode)
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - in: body
+          name: updateProfileBody
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateProfileBody'
+      responses:
+        '200':
+          description: The Profile.
+          schema:
+            $ref: '#/definitions/ProfileResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '401':
+          description: Authentication Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '402':
+          description: Business Rule Violation or Decline
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '403':
+          description: Authorization Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '405':
+          description: Invalid Request Method
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+      summary: Update Profile
+      tags:
+        - Profiles
+  '/profiles/{profileId}/cards':
+    get:
+      description: Get all of the cards on the profile.
+      parameters:
+        - description: The profile id. (aka CustomerCode)
+          in: path
+          name: profileId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The Profile.
+          schema:
+            $ref: '#/definitions/ProfileGetCards'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '401':
+          description: Authentication Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '402':
+          description: Business Rule Violation or Decline
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '403':
+          description: Authorization Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '405':
+          description: Invalid Request Method
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+      summary: Get cards
+      tags:
+        - Profiles
+    post:
+      description: Add a card to the profile. Note that there is a default limit of 1 card per profile. You can change this in your Profiles settings in the back office.
+      parameters:
+        - description: The profile id. (aka CustomerCode)
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: The card that will be added to the profile.
+          in: body
+          name: card
+          required: true
+          schema:
+            $ref: '#/definitions/ProfileCard'
+      responses:
+        '200':
+          description: The Profile.
+          schema:
+            $ref: '#/definitions/ProfileResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '401':
+          description: Authentication Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '402':
+          description: Business Rule Violation or Decline
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '403':
+          description: Authorization Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '405':
+          description: Invalid Request Method
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+      summary: Add card
+      tags:
+        - Profiles
+  '/profiles/{profileId}/cards/{cardId}':
+    delete:
+      description: Delete a card on the profile.
+      parameters:
+        - description: The profile id. (aka CustomerCode)
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: The card id.
+          format: integer
+          in: path
+          name: cardId
+          required: true
+          type: number
+      responses:
+        '200':
+          description: The Profile.
+          schema:
+            $ref: '#/definitions/ProfileResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '401':
+          description: Authentication Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '402':
+          description: Business Rule Violation or Decline
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '403':
+          description: Authorization Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '405':
+          description: Invalid Request Method
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+      summary: Delete card
+      tags:
+        - Profiles
+    put:
+      description: Update the details of a card on the profile.
+      parameters:
+        - description: The profile id. (aka CustomerCode)
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: The card id.
+          format: integer
+          in: path
+          name: cardId
+          required: true
+          type: number
+        - description: The card that will be updated on the profile.
+          in: body
+          name: card
+          required: true
+          schema:
+            $ref: '#/definitions/ProfileCard'
+      responses:
+        '200':
+          description: The Profile.
+          schema:
+            $ref: '#/definitions/ProfileResponse'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '401':
+          description: Authentication Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '402':
+          description: Business Rule Violation or Decline
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '403':
+          description: Authorization Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '405':
+          description: Invalid Request Method
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+      summary: Update card
+      tags:
+        - Profiles
+  /reports:
+    post:
+      description: 'Query for transactions using a date range and optional search criteria. This method allows you to page your search results if you are expecting a lot of results to be returned. The page start value begins at 1. If no records are found the API will return a 404 error message. For details on the parameters and allowed values for Criteria please visit the documentation http://developer.beanstream.com/documentation/analyze-payments/search-specific-criteria/'
+      parameters:
+        - in: body
+          name: search_query
+          schema:
+            $ref: '#/definitions/SearchQuery'
+      responses:
+        '200':
+          description: A transaction object.
+          schema:
+            $ref: '#/definitions/SearchResult'
+        '400':
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '401':
+          description: Authentication Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '402':
+          description: Business Rule Violation or Decline
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '403':
+          description: Authorization Failure
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '405':
+          description: Invalid Request Method
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/BeanstreamException'
+      summary: Search Query
+      tags:
+        - Reporting
+  /scripts/tokenization/tokens:
+    post:
+      description: 'NOTE that the full URL for this API call is https://www.beanstream.com/scripts/tokenization/tokens. Turn a credit card into a token using this service. This helps lessen your PCI scope by not passing the credit card information to your server. Instead you turn the card number into a token in the client app, then send the token to the server. When you send the token to Beanstream to make a payment, Beanstream then looks up the card number from that token and makes the payment. Tokens can also be used to create payment profiles.'
+      parameters:
+        - in: body
+          name: token_request
+          schema:
+            $ref: '#/definitions/TokenRequest'
+      responses:
+        '200':
+          description: Token response object. One will always be returned even if the data or card was invalid. The validity of the card is not checked with this API call.
+          schema:
+            $ref: '#/definitions/TokenResponse'
+      summary: Tokenize credit card
+      tags:
+        - Tokenization
 definitions:
   Address:
     properties:
@@ -736,652 +1385,3 @@ definitions:
         type: number
     required:
       - amount
-host: www.beanstream.com
-info:
-  description: 'https://www.beanstream.com/api/v1'
-  title: Beanstream Payments API
-  version: 1.0.1
-  x-logo:
-    url: 'http://46k5aj426sp830ztvffig15w.wpengine.netdna-cdn.com/wp-content/uploads/2015/08/Beanstream-logo.png'
-  x-origin:
-    format: swagger
-    url: 'http://support.beanstream.com/restapi/swagger.json'
-    version: '2.0'
-  x-providerName: beanstream.com
-paths:
-  /payments:
-    post:
-      description: 'Make a payment using credit card, cash, cheque, profile, or token. Each payment type has its own json definition passed in the body. For all payments you have the standard Billing, Shipping, Comments, etc. fields that are optional. Only the amount is required along with the payment data for card, cash, cheque, profile, and token. You must change the payment_method for each payment type. Credit Card - "card", Payment Profile - "payment_profile", Legato Token - "token", Cash - "cash", Cheque - "cheque", Interac - "interac"'
-      parameters:
-        - in: body
-          name: payment_request
-          schema:
-            $ref: '#/definitions/PaymentRequest'
-      responses:
-        '200':
-          description: Payment response containing the payment details as well as if the payment was approved or declined.
-          schema:
-            $ref: '#/definitions/PaymentResponse'
-        '400':
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
-          description: Authentication Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
-          description: Business Rule Violation or Decline
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
-          description: Authorization Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
-          description: Invalid Request Method
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-      summary: Make Payment
-      tags:
-        - Payments
-  '/payments/{transId}':
-    get:
-      description: Get a previous payment (transaction).
-      parameters:
-        - description: The transaction id.
-          format: integer
-          in: path
-          name: transId
-          required: true
-          type: number
-      responses:
-        '200':
-          description: A transaction object.
-          schema:
-            $ref: '#/definitions/Transaction'
-        '400':
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
-          description: Authentication Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
-          description: Business Rule Violation or Decline
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
-          description: Authorization Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
-          description: Invalid Request Method
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-      summary: Get payment
-      tags:
-        - Payments
-  '/payments/{transId}/completions':
-    post:
-      description: Complete a pre-authorized payment. The amount of the transaction to complete must be less than or equal to the original pre-auth amount. Complete must be set to true.
-      parameters:
-        - description: The transaction id.
-          format: double
-          in: path
-          name: transId
-          required: true
-          type: number
-        - in: body
-          name: payment_request
-          schema:
-            $ref: '#/definitions/PaymentRequest'
-      responses:
-        '200':
-          description: Payment response containing the payment details as well as if the transaction was approved or declined.
-          schema:
-            $ref: '#/definitions/PaymentResponse'
-        '400':
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
-          description: Authentication Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
-          description: Business Rule Violation or Decline
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
-          description: Authorization Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
-          description: Invalid Request Method
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-      summary: Complete pre-auth
-      tags:
-        - Payments
-  '/payments/{transId}/returns':
-    post:
-      description: Return payment.
-      parameters:
-        - description: The transaction id.
-          format: double
-          in: path
-          name: transId
-          required: true
-          type: number
-        - in: body
-          name: return
-          required: true
-          schema:
-            $ref: '#/definitions/Return'
-      responses:
-        '200':
-          description: Payment response containing the payment details as well as if the transaction was approved or declined.
-          schema:
-            $ref: '#/definitions/PaymentResponse'
-        '400':
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
-          description: Authentication Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
-          description: Business Rule Violation or Decline
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
-          description: Authorization Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
-          description: Invalid Request Method
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-      summary: Return payment
-      tags:
-        - Payments
-  '/payments/{transId}/void':
-    post:
-      description: 'Void a transaction. You can void payments, returns, pre-auths, and completions. It will cancel that transaction.'
-      parameters:
-        - description: The transaction id to void.
-          format: double
-          in: path
-          name: transId
-          required: true
-          type: number
-        - in: body
-          name: void
-          required: true
-          schema:
-            $ref: '#/definitions/Void'
-      responses:
-        '200':
-          description: Payment response containing the payment details as well as if the transaction was approved or declined.
-          schema:
-            $ref: '#/definitions/PaymentResponse'
-        '400':
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
-          description: Authentication Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
-          description: Business Rule Violation or Decline
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
-          description: Authorization Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
-          description: Invalid Request Method
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-      summary: Void Transaction
-      tags:
-        - Payments
-  /profiles:
-    post:
-      description: Create a new Payment Profile using either a card or a Legato token. You must supply one of them.
-      parameters:
-        - in: body
-          name: createProfileBody
-          required: true
-          schema:
-            $ref: '#/definitions/CreateProfileBody'
-      responses:
-        '200':
-          description: The Profile.
-          schema:
-            $ref: '#/definitions/ProfileResponse'
-        '400':
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
-          description: Authentication Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
-          description: Business Rule Violation or Decline
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
-          description: Authorization Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
-          description: Invalid Request Method
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-      summary: Create Profile
-      tags:
-        - Profiles
-  '/profiles/{profileId}':
-    delete:
-      description: 'Delete a Payment Profile using the profile ID, also known as the Customer Code.'
-      parameters:
-        - description: The profile id. (aka CustomerCode)
-          in: path
-          name: profileId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: The Profile.
-          schema:
-            $ref: '#/definitions/ProfileResponse'
-        '400':
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
-          description: Authentication Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
-          description: Business Rule Violation or Decline
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
-          description: Authorization Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
-          description: Invalid Request Method
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-      summary: Delete profile
-      tags:
-        - Profiles
-    get:
-      description: 'Get a Payment Profile using the profile ID, also known as the Customer Code.'
-      parameters:
-        - description: The profile id. (aka CustomerCode)
-          in: path
-          name: profileId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: The Profile.
-          schema:
-            $ref: '#/definitions/PaymentProfile'
-        '400':
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
-          description: Authentication Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
-          description: Business Rule Violation or Decline
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
-          description: Authorization Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
-          description: Invalid Request Method
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-      summary: Get profile
-      tags:
-        - Profiles
-    put:
-      description: Create a new Payment Profile using either a card or a Legato token. You must supply one of them.
-      parameters:
-        - description: The profile id. (aka CustomerCode)
-          in: path
-          name: profileId
-          required: true
-          type: string
-        - in: body
-          name: updateProfileBody
-          required: true
-          schema:
-            $ref: '#/definitions/UpdateProfileBody'
-      responses:
-        '200':
-          description: The Profile.
-          schema:
-            $ref: '#/definitions/ProfileResponse'
-        '400':
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
-          description: Authentication Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
-          description: Business Rule Violation or Decline
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
-          description: Authorization Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
-          description: Invalid Request Method
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-      summary: Update Profile
-      tags:
-        - Profiles
-  '/profiles/{profileId}/cards':
-    get:
-      description: Get all of the cards on the profile.
-      parameters:
-        - description: The profile id. (aka CustomerCode)
-          in: path
-          name: profileId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: The Profile.
-          schema:
-            $ref: '#/definitions/ProfileGetCards'
-        '400':
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
-          description: Authentication Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
-          description: Business Rule Violation or Decline
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
-          description: Authorization Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
-          description: Invalid Request Method
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-      summary: Get cards
-      tags:
-        - Profiles
-    post:
-      description: Add a card to the profile. Note that there is a default limit of 1 card per profile. You can change this in your Profiles settings in the back office.
-      parameters:
-        - description: The profile id. (aka CustomerCode)
-          in: path
-          name: profileId
-          required: true
-          type: string
-        - description: The card that will be added to the profile.
-          in: body
-          name: card
-          required: true
-          schema:
-            $ref: '#/definitions/ProfileCard'
-      responses:
-        '200':
-          description: The Profile.
-          schema:
-            $ref: '#/definitions/ProfileResponse'
-        '400':
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
-          description: Authentication Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
-          description: Business Rule Violation or Decline
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
-          description: Authorization Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
-          description: Invalid Request Method
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-      summary: Add card
-      tags:
-        - Profiles
-  '/profiles/{profileId}/cards/{cardId}':
-    delete:
-      description: Delete a card on the profile.
-      parameters:
-        - description: The profile id. (aka CustomerCode)
-          in: path
-          name: profileId
-          required: true
-          type: string
-        - description: The card id.
-          format: integer
-          in: path
-          name: cardId
-          required: true
-          type: number
-      responses:
-        '200':
-          description: The Profile.
-          schema:
-            $ref: '#/definitions/ProfileResponse'
-        '400':
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
-          description: Authentication Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
-          description: Business Rule Violation or Decline
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
-          description: Authorization Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
-          description: Invalid Request Method
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-      summary: Delete card
-      tags:
-        - Profiles
-    put:
-      description: Update the details of a card on the profile.
-      parameters:
-        - description: The profile id. (aka CustomerCode)
-          in: path
-          name: profileId
-          required: true
-          type: string
-        - description: The card id.
-          format: integer
-          in: path
-          name: cardId
-          required: true
-          type: number
-        - description: The card that will be updated on the profile.
-          in: body
-          name: card
-          required: true
-          schema:
-            $ref: '#/definitions/ProfileCard'
-      responses:
-        '200':
-          description: The Profile.
-          schema:
-            $ref: '#/definitions/ProfileResponse'
-        '400':
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
-          description: Authentication Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
-          description: Business Rule Violation or Decline
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
-          description: Authorization Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
-          description: Invalid Request Method
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-      summary: Update card
-      tags:
-        - Profiles
-  /reports:
-    post:
-      description: 'Query for transactions using a date range and optional search criteria. This method allows you to page your search results if you are expecting a lot of results to be returned. The page start value begins at 1. If no records are found the API will return a 404 error message. For details on the parameters and allowed values for Criteria please visit the documentation http://developer.beanstream.com/documentation/analyze-payments/search-specific-criteria/'
-      parameters:
-        - in: body
-          name: search_query
-          schema:
-            $ref: '#/definitions/SearchQuery'
-      responses:
-        '200':
-          description: A transaction object.
-          schema:
-            $ref: '#/definitions/SearchResult'
-        '400':
-          description: Bad Request
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
-          description: Authentication Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
-          description: Business Rule Violation or Decline
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
-          description: Authorization Failure
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
-          description: Invalid Request Method
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
-          description: Internal Server Error
-          schema:
-            $ref: '#/definitions/BeanstreamException'
-      summary: Search Query
-      tags:
-        - Reporting
-  /scripts/tokenization/tokens:
-    post:
-      description: 'NOTE that the full URL for this API call is https://www.beanstream.com/scripts/tokenization/tokens. Turn a credit card into a token using this service. This helps lessen your PCI scope by not passing the credit card information to your server. Instead you turn the card number into a token in the client app, then send the token to the server. When you send the token to Beanstream to make a payment, Beanstream then looks up the card number from that token and makes the payment. Tokens can also be used to create payment profiles.'
-      parameters:
-        - in: body
-          name: token_request
-          schema:
-            $ref: '#/definitions/TokenRequest'
-      responses:
-        '200':
-          description: Token response object. One will always be returned even if the data or card was invalid. The validity of the card is not checked with this API call.
-          schema:
-            $ref: '#/definitions/TokenResponse'
-      summary: Tokenize credit card
-      tags:
-        - Tokenization
-produces:
-  - application/json
-schemes:
-  - https
-swagger: '2.0'

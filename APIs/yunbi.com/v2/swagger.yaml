@@ -1,5 +1,8 @@
-basePath: /api
+swagger: '2.0'
+schemes:
+  - https
 host: yunbi.com
+basePath: /api
 info:
   description: Professional Cloud Trading Platform for Digital Assets
   title: Yunbi
@@ -11,6 +14,21 @@ info:
     url: 'https://yunbi.com/api/v2/doc/swagger'
     version: '1.2'
   x-providerName: yunbi.com
+tags:
+  - name: markets
+  - name: tickers
+  - name: members
+  - name: deposits
+  - name: deposit
+  - name: deposit_address
+  - name: orders
+  - name: order
+  - name: order_book
+  - name: depth
+  - name: trades
+  - name: timestamp
+  - name: k
+  - name: k_with_pending_trades
 paths:
   /v2/deposit.json:
     get:
@@ -665,21 +683,3 @@ paths:
       summary: Get your executed trades. Trades are sorted in reverse creation order.
       tags:
         - trades
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - name: markets
-  - name: tickers
-  - name: members
-  - name: deposits
-  - name: deposit
-  - name: deposit_address
-  - name: orders
-  - name: order
-  - name: order_book
-  - name: depth
-  - name: trades
-  - name: timestamp
-  - name: k
-  - name: k_with_pending_trades

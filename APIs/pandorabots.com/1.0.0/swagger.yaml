@@ -1,5 +1,8 @@
-basePath: /
+swagger: '2.0'
+schemes:
+  - https
 host: aiaas.pandorabots.com
+basePath: /
 info:
   description: 'AIaaS provides API access to our bot hosting platform and SDKs, allowing developers to easily integrate conversational interfaces into applications.'
   title: Pandorabots AIaaS
@@ -9,6 +12,9 @@ info:
     url: 'https://developer.pandorabots.com/swagger/spec.json'
     version: '1.2'
   x-providerName: pandorabots.com
+tags:
+  - description: 'New API added "Anonymous Talk"'
+    name: pandorabots_api_swagger_1_3
 paths:
   '/atalk/{app_id}/{botname}':
     post:
@@ -477,9 +483,3 @@ paths:
       summary: Debug a bot conversation
       tags:
         - pandorabots_api_swagger_1_3
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - description: 'New API added "Anonymous Talk"'
-    name: pandorabots_api_swagger_1_3

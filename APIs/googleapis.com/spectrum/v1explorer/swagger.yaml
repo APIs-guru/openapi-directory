@@ -1,4 +1,214 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.googleapis.com
 basePath: /spectrum/v1explorer/paws
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: API for spectrum-management functions.
+  title: Google Spectrum Database API
+  version: v1explorer
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/spectrum/v1explorer/rest'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: spectrum
+externalDocs:
+  url: 'http://developers.google.com/spectrum'
+parameters:
+  alt:
+    default: json
+    description: Data format for the response.
+    enum:
+      - csv
+      - json
+    in: query
+    name: alt
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    in: query
+    name: quotaUser
+    type: string
+  userIp:
+    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    in: query
+    name: userIp
+    type: string
+paths:
+  /getSpectrum:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Requests information about the available spectrum for a device at a location. Requests from a fixed-mode device must include owner information so the device can be registered with the database.
+      operationId: spectrum.paws.getSpectrum
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PawsGetSpectrumRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PawsGetSpectrumResponse'
+      tags:
+        - paws
+  /getSpectrumBatch:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'The Google Spectrum Database does not support batch requests, so this method always yields an UNIMPLEMENTED error.'
+      operationId: spectrum.paws.getSpectrumBatch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PawsGetSpectrumBatchRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PawsGetSpectrumBatchResponse'
+      tags:
+        - paws
+  /init:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Initializes the connection between a white space device and the database.
+      operationId: spectrum.paws.init
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PawsInitRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PawsInitResponse'
+      tags:
+        - paws
+  /notifySpectrumUse:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Notifies the database that the device has selected certain frequency ranges for transmission. Only to be invoked when required by the regulator. The Google Spectrum Database does not operate in domains that require notification, so this always yields an UNIMPLEMENTED error.'
+      operationId: spectrum.paws.notifySpectrumUse
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PawsNotifySpectrumUseRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PawsNotifySpectrumUseResponse'
+      tags:
+        - paws
+  /register:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: The Google Spectrum Database implements registration in the getSpectrum method. As such this always returns an UNIMPLEMENTED error.
+      operationId: spectrum.paws.register
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PawsRegisterRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PawsRegisterResponse'
+      tags:
+        - paws
+  /verifyDevice:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Validates a device for white space use in accordance with regulatory rules. The Google Spectrum Database does not support master/slave configurations, so this always yields an UNIMPLEMENTED error.'
+      operationId: spectrum.paws.verifyDevice
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PawsVerifyDeviceRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PawsVerifyDeviceResponse'
+      tags:
+        - paws
 definitions:
   AntennaCharacteristics:
     description: 'Antenna characteristics provide additional information, such as the antenna height, antenna type, etc. Whether antenna characteristics must be provided in a request depends on the device type and regulatory domain.'
@@ -676,213 +886,3 @@ definitions:
         description: 'The text string associated with this item. For example, for an org field: ACME, inc. For an email field: smith@example.com.'
         type: string
     type: object
-externalDocs:
-  url: 'http://developers.google.com/spectrum'
-host: www.googleapis.com
-info:
-  contact:
-    name: Google
-    url: 'https://google.com'
-  description: API for spectrum-management functions.
-  title: Google Spectrum Database API
-  version: v1explorer
-  x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
-  x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
-  x-origin:
-    format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/spectrum/v1explorer/rest'
-    version: v1
-  x-preferred: true
-  x-providerName: googleapis.com
-  x-serviceName: spectrum
-parameters:
-  alt:
-    default: json
-    description: Data format for the response.
-    enum:
-      - csv
-      - json
-    in: query
-    name: alt
-    type: string
-  fields:
-    description: Selector specifying which fields to include in a partial response.
-    in: query
-    name: fields
-    type: string
-  key:
-    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
-    in: query
-    name: key
-    type: string
-  oauth_token:
-    description: OAuth 2.0 token for the current user.
-    in: query
-    name: oauth_token
-    type: string
-  prettyPrint:
-    default: true
-    description: Returns response with indentations and line breaks.
-    in: query
-    name: prettyPrint
-    type: boolean
-  quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
-    in: query
-    name: quotaUser
-    type: string
-  userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
-    in: query
-    name: userIp
-    type: string
-paths:
-  /getSpectrum:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Requests information about the available spectrum for a device at a location. Requests from a fixed-mode device must include owner information so the device can be registered with the database.
-      operationId: spectrum.paws.getSpectrum
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PawsGetSpectrumRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/PawsGetSpectrumResponse'
-      tags:
-        - paws
-  /getSpectrumBatch:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: 'The Google Spectrum Database does not support batch requests, so this method always yields an UNIMPLEMENTED error.'
-      operationId: spectrum.paws.getSpectrumBatch
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PawsGetSpectrumBatchRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/PawsGetSpectrumBatchResponse'
-      tags:
-        - paws
-  /init:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Initializes the connection between a white space device and the database.
-      operationId: spectrum.paws.init
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PawsInitRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/PawsInitResponse'
-      tags:
-        - paws
-  /notifySpectrumUse:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: 'Notifies the database that the device has selected certain frequency ranges for transmission. Only to be invoked when required by the regulator. The Google Spectrum Database does not operate in domains that require notification, so this always yields an UNIMPLEMENTED error.'
-      operationId: spectrum.paws.notifySpectrumUse
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PawsNotifySpectrumUseRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/PawsNotifySpectrumUseResponse'
-      tags:
-        - paws
-  /register:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: The Google Spectrum Database implements registration in the getSpectrum method. As such this always returns an UNIMPLEMENTED error.
-      operationId: spectrum.paws.register
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PawsRegisterRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/PawsRegisterResponse'
-      tags:
-        - paws
-  /verifyDevice:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: 'Validates a device for white space use in accordance with regulatory rules. The Google Spectrum Database does not support master/slave configurations, so this always yields an UNIMPLEMENTED error.'
-      operationId: spectrum.paws.verifyDevice
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/PawsVerifyDeviceRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/PawsVerifyDeviceResponse'
-      tags:
-        - paws
-schemes:
-  - https
-swagger: '2.0'

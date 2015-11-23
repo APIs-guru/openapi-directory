@@ -1,59 +1,7 @@
-definitions:
-  Action:
-    properties:
-      item:
-        example: item1234
-        type: string
-      type:
-        description: action type
-        type: integer
-      user:
-        example: user1234
-        type: string
-      value:
-        description: action value (e.g. a rating)
-        type: number
-    required:
-      - user
-      - item
-      - type
-  AttributesName:
-    properties:
-      attrName1:
-        example: attrValue1
-        type: string
-      attrName2:
-        example: attrValue2
-        type: string
-  Item:
-    properties:
-      attributesName:
-        $ref: '#/definitions/AttributesName'
-      id:
-        example: myid1234
-        type: string
-      type:
-        description: type of item
-        example: 1
-        type: integer
-    required:
-      - id
-  User:
-    properties:
-      active:
-        description: whether user is active
-        type: boolean
-      attributesName:
-        $ref: '#/definitions/AttributesName'
-      id:
-        example: myid1234
-        type: string
-      username:
-        description: name of user
-        example: Joe Bloggs
-        type: string
-    required:
-      - id
+swagger: '2.0'
+schemes:
+  - http
+  - https
 host: recsvm.rummblelabs.com
 info:
   description: Seldon is an Open Predictive Platform that currently allows item recommendations and general predictive models to be deployed based on structured historical data.
@@ -545,7 +493,59 @@ paths:
       tags:
         - oauth users
         - oauth recommendations
-schemes:
-  - http
-  - https
-swagger: '2.0'
+definitions:
+  Action:
+    properties:
+      item:
+        example: item1234
+        type: string
+      type:
+        description: action type
+        type: integer
+      user:
+        example: user1234
+        type: string
+      value:
+        description: action value (e.g. a rating)
+        type: number
+    required:
+      - user
+      - item
+      - type
+  AttributesName:
+    properties:
+      attrName1:
+        example: attrValue1
+        type: string
+      attrName2:
+        example: attrValue2
+        type: string
+  Item:
+    properties:
+      attributesName:
+        $ref: '#/definitions/AttributesName'
+      id:
+        example: myid1234
+        type: string
+      type:
+        description: type of item
+        example: 1
+        type: integer
+    required:
+      - id
+  User:
+    properties:
+      active:
+        description: whether user is active
+        type: boolean
+      attributesName:
+        $ref: '#/definitions/AttributesName'
+      id:
+        example: myid1234
+        type: string
+      username:
+        description: name of user
+        example: Joe Bloggs
+        type: string
+    required:
+      - id

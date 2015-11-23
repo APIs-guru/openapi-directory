@@ -1,4 +1,1107 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.taxamo.com
 basePath: /
+info:
+  description: 'Taxamo’s elegant suite of APIs and comprehensive reporting dashboard enables digital merchants to easily comply with EU regulatory requirements on tax calculation, evidence collection, tax return creation and data storage.'
+  title: Taxamo
+  version: '1'
+  x-logo:
+    url: 'https://www.taxamo.com/wp-content/uploads/LOGO-HEADER211.png'
+  x-origin:
+    format: swagger
+    url: 'https://api.taxamo.com/swagger'
+    version: '1.2'
+  x-providerName: taxamo.com
+securityDefinitions:
+  apiKey:
+    in: header
+    name: Token
+    type: apiKey
+tags:
+  - description: Refunds
+    name: refunds
+  - description: Payments
+    name: payments
+  - description: Invoices
+    name: invoice
+  - description: Transactions
+    name: transactions
+  - description: Tax
+    name: tax
+  - description: GeoIP
+    name: geoip
+  - description: Statistics
+    name: stats
+  - description: Settlement
+    name: settlement
+  - description: Verification
+    name: verification
+  - description: Dictionaries
+    name: dictionaries
+paths:
+  /api/v1/dictionaries/countries:
+    get:
+      consumes:
+        - application/json
+      operationId: getCountriesDict
+      parameters:
+        - description: Should only countries with tax supported be listed?
+          in: query
+          name: tax_supported
+          required: false
+          type: boolean
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/getCountriesDictOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Countries
+      tags:
+        - dictionaries
+  /api/v1/dictionaries/currencies:
+    get:
+      consumes:
+        - application/json
+      operationId: getCurrenciesDict
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/getCurrenciesDictOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Currencies
+      tags:
+        - dictionaries
+  /api/v1/dictionaries/product_types:
+    get:
+      consumes:
+        - application/json
+      operationId: getProductTypesDict
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/getProductTypesDictOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Product types
+      tags:
+        - dictionaries
+  /api/v1/geoip:
+    get:
+      consumes:
+        - application/json
+      operationId: locateMyIP
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/locateMyIPOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Locate IP
+      tags:
+        - geoip
+  '/api/v1/geoip/{ip}':
+    get:
+      consumes:
+        - application/json
+      operationId: locateGivenIP
+      parameters:
+        - description: IP address.
+          in: path
+          name: ip
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/locateGivenIPOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Locate provided IP
+      tags:
+        - geoip
+  /api/v1/settlement/refunds:
+    get:
+      consumes:
+        - application/json
+      operationId: getRefunds
+      parameters:
+        - description: "Output format. 'csv' value is accepted as well"
+          in: query
+          name: format
+          required: false
+          type: string
+        - description: 'MOSS country code, used to determine currency. If ommited, merchant default setting is used.'
+          in: query
+          name: moss_country_code
+          required: false
+          type: string
+        - description: 'Tax region key, defaults to EU for backwards compatibility.'
+          in: query
+          name: tax_region
+          required: false
+          type: string
+        - description: 'Take only refunds issued at or after the date. Format: yyyy-MM-dd'
+          in: query
+          name: date_from
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/getRefundsOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Fetch refunds
+      tags:
+        - settlement
+  '/api/v1/settlement/summary/{quarter}':
+    get:
+      consumes:
+        - application/json
+      operationId: getSettlementSummary
+      parameters:
+        - description: 'MOSS country code, used to determine currency. If ommited, merchant default setting is used.'
+          in: query
+          name: moss_country_code
+          required: false
+          type: string
+        - description: Tax region key
+          in: query
+          name: tax_region
+          required: false
+          type: string
+        - description: Period start month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.
+          in: query
+          name: start_month
+          required: false
+          type: string
+        - description: Period end month in yyyy-MM-dd format. Either quarter or start-month and end-month have to be provided.
+          in: query
+          name: end_month
+          required: false
+          type: string
+        - description: "Quarter in yyyy-MM format. If start-date and end-date are provided, quarter is ignored and should be set to 'range'."
+          in: path
+          name: quarter
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/getSettlementSummaryOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Fetch summary
+      tags:
+        - settlement
+  '/api/v1/settlement/{quarter}':
+    get:
+      consumes:
+        - application/json
+      operationId: getSettlement
+      parameters:
+        - description: "Output format. 'csv' value is accepted as well"
+          in: query
+          name: format
+          required: false
+          type: string
+        - description: 'MOSS country code, used to determine currency/region. If ommited, merchant default setting is used. Deprecated: please use tax-country-code.'
+          in: query
+          name: moss_country_code
+          required: false
+          type: string
+        - description: 'Tax entity country code, used to determine currency/region. '
+          in: query
+          name: tax_country_code
+          required: false
+          type: string
+        - description: "ISO 3-letter currency code, e.g. EUR or USD. If provided, all amounts will be coerced for this currency. Defaults to region's currency code."
+          in: query
+          name: currency_code
+          required: false
+          type: string
+        - description: "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used. Deprecated, please use tax-id."
+          in: query
+          name: moss_tax_id
+          required: false
+          type: string
+        - description: "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used. Deprecated, please use tax-id."
+          in: query
+          name: tax_id
+          required: false
+          type: string
+        - description: Period start month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.
+          in: query
+          name: start_month
+          required: false
+          type: string
+        - description: Period end month in yyyy-MM-dd format. Either quarter or start-month and end-month have to be provided.
+          in: query
+          name: end_month
+          required: false
+          type: string
+        - description: "Quarter in yyyy-MM format. If start-date and end-date are provided, quarter is ignored and should be set to 'range'."
+          in: path
+          name: quarter
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/getSettlementOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Fetch settlement
+      tags:
+        - settlement
+  /api/v1/stats/settlement/by_country:
+    get:
+      consumes:
+        - application/json
+      operationId: getSettlementStatsByCountry
+      parameters:
+        - description: Date from in yyyy-MM format.
+          in: query
+          name: date_from
+          required: true
+          type: string
+        - description: Date to in yyyy-MM format.
+          in: query
+          name: date_to
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/getSettlementStatsByCountryOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Settlement by country
+      tags:
+        - stats
+  /api/v1/stats/settlement/by_taxation_type:
+    get:
+      consumes:
+        - application/json
+      operationId: getSettlementStatsByTaxationType
+      parameters:
+        - description: Date from in yyyy-MM format.
+          in: query
+          name: date_from
+          required: true
+          type: string
+        - description: Date to in yyyy-MM format.
+          in: query
+          name: date_to
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/getSettlementStatsByTaxationTypeOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Settlement by tax type
+      tags:
+        - stats
+  /api/v1/stats/settlement/daily:
+    get:
+      consumes:
+        - application/json
+      operationId: getDailySettlementStats
+      parameters:
+        - description: 'Interval type - day, week, month.'
+          in: query
+          name: interval
+          required: true
+          type: string
+        - description: Date from in yyyy-MM format.
+          in: query
+          name: date_from
+          required: true
+          type: string
+        - description: Date to in yyyy-MM format.
+          in: query
+          name: date_to
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/getDailySettlementStatsOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Settlement stats over time
+      tags:
+        - stats
+  /api/v1/stats/transactions:
+    get:
+      consumes:
+        - application/json
+      operationId: getTransactionsStats
+      parameters:
+        - description: Date from in yyyy-MM format.
+          in: query
+          name: date_from
+          required: true
+          type: string
+        - description: Date to in yyyy-MM format.
+          in: query
+          name: date_to
+          required: true
+          type: string
+        - description: "Interval. Accepted values are 'day', 'week' and 'month'."
+          in: query
+          name: interval
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/getTransactionsStatsOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Transaction stats
+      tags:
+        - stats
+  /api/v1/stats/transactions/by_country:
+    get:
+      consumes:
+        - application/json
+      operationId: getTransactionsStatsByCountry
+      parameters:
+        - description: "Global currency code to use for conversion - in addition to country's currency if rate is available. Conversion is indicative and based on most-recent rate from ECB."
+          in: query
+          name: global_currency_code
+          required: false
+          type: string
+        - description: Date from in yyyy-MM format.
+          in: query
+          name: date_from
+          required: true
+          type: string
+        - description: Date to in yyyy-MM format.
+          in: query
+          name: date_to
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/getTransactionsStatsByCountryOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Settlement by country
+      tags:
+        - stats
+  /api/v1/tax/calculate:
+    get:
+      consumes:
+        - application/json
+      operationId: calculateSimpleTax
+      parameters:
+        - description: 'Product type, according to dictionary /dictionaries/product_types. '
+          in: query
+          name: product_type
+          required: false
+          type: string
+        - description: Invoice address/postal_code
+          in: query
+          name: invoice_address_city
+          required: false
+          type: string
+        - description: "Buyer's credit card prefix."
+          in: query
+          name: buyer_credit_card_prefix
+          required: false
+          type: string
+        - description: Currency code for transaction - e.g. EUR.
+          in: query
+          name: currency_code
+          required: true
+          type: string
+        - description: Invoice address/region
+          in: query
+          name: invoice_address_region
+          required: false
+          type: string
+        - description: Unit price.
+          in: query
+          name: unit_price
+          required: false
+          type: number
+        - description: Quantity Defaults to 1.
+          in: query
+          name: quantity
+          required: false
+          type: number
+        - description: " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly."
+          in: query
+          name: buyer_tax_number
+          required: false
+          type: string
+        - description: 'Two-letter ISO country code, e.g. FR. Use it to force country code for tax calculation.'
+          in: query
+          name: force_country_code
+          required: false
+          type: string
+        - description: "Order date in yyyy-MM-dd format, in merchant's timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used."
+          in: query
+          name: order_date
+          required: false
+          type: string
+        - description: Amount. Required if total amount is not provided.
+          in: query
+          name: amount
+          required: false
+          type: number
+        - description: Billing two letter ISO country code.
+          in: query
+          name: billing_country_code
+          required: false
+          type: string
+        - description: Invoice address/postal_code
+          in: query
+          name: invoice_address_postal_code
+          required: false
+          type: string
+        - description: Total amount. Required if amount is not provided.
+          in: query
+          name: total_amount
+          required: false
+          type: number
+        - description: 'If the transaction is in a country supported by Taxamo, but the tax is not calculated due to merchant settings or EU B2B transaction for example.'
+          in: query
+          name: tax_deducted
+          required: false
+          type: boolean
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/calculateSimpleTaxOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Simple tax
+      tags:
+        - tax
+    post:
+      consumes:
+        - application/json
+      operationId: calculateTax
+      parameters:
+        - description: Input
+          in: body
+          name: input
+          required: true
+          schema:
+            $ref: '#/definitions/calculateTaxIn'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/calculateTaxOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Calculate tax
+      tags:
+        - tax
+  /api/v1/tax/location/calculate:
+    get:
+      consumes:
+        - application/json
+      operationId: calculateTaxLocation
+      parameters:
+        - description: Billing two letter ISO country code.
+          in: query
+          name: billing_country_code
+          required: false
+          type: string
+        - description: "Buyer's credit card prefix."
+          in: query
+          name: buyer_credit_card_prefix
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/calculateTaxLocationOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Calculate location
+      tags:
+        - tax
+  '/api/v1/tax/vat_numbers/{tax_number}/validate':
+    get:
+      consumes:
+        - application/json
+      operationId: validateTaxNumber
+      parameters:
+        - description: Two-letter ISO country code.
+          in: query
+          name: country_code
+          required: false
+          type: string
+        - description: Tax number
+          in: path
+          name: tax_number
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/validateTaxNumberOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Validate VAT number
+      tags:
+        - tax
+  /api/v1/transactions:
+    get:
+      consumes:
+        - application/json
+      operationId: listTransactions
+      parameters:
+        - description: Filtering expression
+          in: query
+          name: filter_text
+          required: false
+          type: string
+        - description: Offset
+          in: query
+          name: offset
+          required: false
+          type: integer
+        - description: Taxamo provided transaction key or custom id
+          in: query
+          name: key_or_custom_id
+          required: false
+          type: string
+        - description: Three letter ISO currency code.
+          in: query
+          name: currency_code
+          required: false
+          type: string
+        - description: Order date to in yyyy-MM-dd format.
+          in: query
+          name: order_date_to
+          required: false
+          type: string
+        - description: 'If true, results are sorted in descending order.'
+          in: query
+          name: sort_reverse
+          required: false
+          type: boolean
+        - description: 'Limit (no more than 1000, defaults to 100).'
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - description: Transaction invoice number.
+          in: query
+          name: invoice_number
+          required: false
+          type: string
+        - description: Comma separated list of of transaction statuses.
+          in: query
+          name: statuses
+          required: false
+          type: string
+        - description: Order date from in yyyy-MM-dd format.
+          in: query
+          name: order_date_from
+          required: false
+          type: string
+        - description: Return only transactions with total amount greater than given number. Transactions with total amount equal to a given number (e.g. 0) are not returned.
+          in: query
+          name: total_amount_greater_than
+          required: false
+          type: string
+        - description: "Output format - supports 'csv' value for this operation."
+          in: query
+          name: format
+          required: false
+          type: string
+        - description: Return only transactions with total amount less than a given number. Transactions with total amount equal to a given number (e.g. 1) are not returned.
+          in: query
+          name: total_amount_less_than
+          required: false
+          type: string
+        - description: Two letter ISO tax country code.
+          in: query
+          name: tax_country_code
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/listTransactionsOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Browse transactions
+      tags:
+        - transactions
+    post:
+      consumes:
+        - application/json
+      operationId: createTransaction
+      parameters:
+        - description: Input
+          in: body
+          name: input
+          required: true
+          schema:
+            $ref: '#/definitions/createTransactionIn'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/createTransactionOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Store transaction
+      tags:
+        - transactions
+  '/api/v1/transactions/{key}':
+    delete:
+      consumes:
+        - application/json
+      operationId: cancelTransaction
+      parameters:
+        - description: Transaction key
+          in: path
+          name: key
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/cancelTransactionOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Delete transaction
+      tags:
+        - transactions
+    get:
+      consumes:
+        - application/json
+      operationId: getTransaction
+      parameters:
+        - description: Transaction key
+          in: path
+          name: key
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/getTransactionOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Retrieve transaction data.
+      tags:
+        - transactions
+    put:
+      consumes:
+        - application/json
+      operationId: updateTransaction
+      parameters:
+        - description: Transaction key.
+          in: path
+          name: key
+          required: true
+          type: string
+        - description: Input
+          in: body
+          name: input
+          required: true
+          schema:
+            $ref: '#/definitions/updateTransactionIn'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/updateTransactionOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Update transaction
+      tags:
+        - transactions
+  '/api/v1/transactions/{key}/confirm':
+    post:
+      consumes:
+        - application/json
+      operationId: confirmTransaction
+      parameters:
+        - description: Transaction key.
+          in: path
+          name: key
+          required: true
+          type: string
+        - description: Input
+          in: body
+          name: input
+          required: true
+          schema:
+            $ref: '#/definitions/confirmTransactionIn'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/confirmTransactionOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Confirm transaction
+      tags:
+        - transactions
+  '/api/v1/transactions/{key}/invoice/send_email':
+    post:
+      consumes:
+        - application/json
+      operationId: emailInvoice
+      parameters:
+        - description: Transaction key.
+          in: path
+          name: key
+          required: true
+          type: string
+        - description: Input
+          in: body
+          name: input
+          required: true
+          schema:
+            $ref: '#/definitions/emailInvoiceIn'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/emailInvoiceOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Email invoice
+      tags:
+        - invoice
+  '/api/v1/transactions/{key}/payments':
+    get:
+      consumes:
+        - application/json
+      operationId: listPayments
+      parameters:
+        - description: 'Max record count (no more than 100, defaults to 10).'
+          in: query
+          name: limit
+          required: false
+          type: string
+        - description: 'How many records need to be skipped, defaults to 0.'
+          in: query
+          name: offset
+          required: false
+          type: string
+        - description: Transaction key.
+          in: path
+          name: key
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/listPaymentsOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: List payments
+      tags:
+        - payments
+    post:
+      consumes:
+        - application/json
+      operationId: createPayment
+      parameters:
+        - description: Transaction key.
+          in: path
+          name: key
+          required: true
+          type: string
+        - description: Input
+          in: body
+          name: input
+          required: true
+          schema:
+            $ref: '#/definitions/createPaymentIn'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/createPaymentOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Register a payment
+      tags:
+        - payments
+  '/api/v1/transactions/{key}/payments/capture':
+    post:
+      consumes:
+        - application/json
+      operationId: capturePayment
+      parameters:
+        - description: Transaction key.
+          in: path
+          name: key
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/capturePaymentOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Capture payment
+      tags:
+        - payments
+  '/api/v1/transactions/{key}/refunds':
+    post:
+      consumes:
+        - application/json
+      operationId: createRefund
+      parameters:
+        - description: Transaction key.
+          in: path
+          name: key
+          required: true
+          type: string
+        - description: Input
+          in: body
+          name: input
+          required: true
+          schema:
+            $ref: '#/definitions/createRefundIn'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/createRefundOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Create a refund
+      tags:
+        - refunds
+  '/api/v1/transactions/{key}/unconfirm':
+    post:
+      consumes:
+        - application/json
+      operationId: unconfirmTransaction
+      parameters:
+        - description: Transaction key.
+          in: path
+          name: key
+          required: true
+          type: string
+        - description: Input
+          in: body
+          name: input
+          required: true
+          schema:
+            $ref: '#/definitions/unconfirmTransactionIn'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/unconfirmTransactionOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Un-confirm the transaction. Un-confirmed transaction can be edited or canceled like a newly created one.
+      tags:
+        - transactions
+  /api/v1/verification/sms:
+    post:
+      consumes:
+        - application/json
+      operationId: createSMSToken
+      parameters:
+        - description: Input
+          in: body
+          name: input
+          required: true
+          schema:
+            $ref: '#/definitions/createSMSTokenIn'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/createSMSTokenOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Create SMS token
+      tags:
+        - verification
+  '/api/v1/verification/sms/{token}':
+    get:
+      consumes:
+        - application/json
+      operationId: verifySMSToken
+      parameters:
+        - description: Provided token.
+          in: path
+          name: token
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/verifySMSTokenOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Verify SMS token
+      tags:
+        - verification
 definitions:
   C:
     properties:
@@ -1856,1106 +2959,3 @@ definitions:
         description: 'Verified country code, returned if operation was successful.'
         type: string
     type: object
-host: api.taxamo.com
-info:
-  description: 'Taxamo’s elegant suite of APIs and comprehensive reporting dashboard enables digital merchants to easily comply with EU regulatory requirements on tax calculation, evidence collection, tax return creation and data storage.'
-  title: Taxamo
-  version: '1'
-  x-logo:
-    url: 'https://www.taxamo.com/wp-content/uploads/LOGO-HEADER211.png'
-  x-origin:
-    format: swagger
-    url: 'https://api.taxamo.com/swagger'
-    version: '1.2'
-  x-providerName: taxamo.com
-paths:
-  /api/v1/dictionaries/countries:
-    get:
-      consumes:
-        - application/json
-      operationId: getCountriesDict
-      parameters:
-        - description: Should only countries with tax supported be listed?
-          in: query
-          name: tax_supported
-          required: false
-          type: boolean
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/getCountriesDictOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Countries
-      tags:
-        - dictionaries
-  /api/v1/dictionaries/currencies:
-    get:
-      consumes:
-        - application/json
-      operationId: getCurrenciesDict
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/getCurrenciesDictOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Currencies
-      tags:
-        - dictionaries
-  /api/v1/dictionaries/product_types:
-    get:
-      consumes:
-        - application/json
-      operationId: getProductTypesDict
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/getProductTypesDictOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Product types
-      tags:
-        - dictionaries
-  /api/v1/geoip:
-    get:
-      consumes:
-        - application/json
-      operationId: locateMyIP
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/locateMyIPOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Locate IP
-      tags:
-        - geoip
-  '/api/v1/geoip/{ip}':
-    get:
-      consumes:
-        - application/json
-      operationId: locateGivenIP
-      parameters:
-        - description: IP address.
-          in: path
-          name: ip
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/locateGivenIPOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Locate provided IP
-      tags:
-        - geoip
-  /api/v1/settlement/refunds:
-    get:
-      consumes:
-        - application/json
-      operationId: getRefunds
-      parameters:
-        - description: "Output format. 'csv' value is accepted as well"
-          in: query
-          name: format
-          required: false
-          type: string
-        - description: 'MOSS country code, used to determine currency. If ommited, merchant default setting is used.'
-          in: query
-          name: moss_country_code
-          required: false
-          type: string
-        - description: 'Tax region key, defaults to EU for backwards compatibility.'
-          in: query
-          name: tax_region
-          required: false
-          type: string
-        - description: 'Take only refunds issued at or after the date. Format: yyyy-MM-dd'
-          in: query
-          name: date_from
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/getRefundsOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Fetch refunds
-      tags:
-        - settlement
-  '/api/v1/settlement/summary/{quarter}':
-    get:
-      consumes:
-        - application/json
-      operationId: getSettlementSummary
-      parameters:
-        - description: 'MOSS country code, used to determine currency. If ommited, merchant default setting is used.'
-          in: query
-          name: moss_country_code
-          required: false
-          type: string
-        - description: Tax region key
-          in: query
-          name: tax_region
-          required: false
-          type: string
-        - description: Period start month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.
-          in: query
-          name: start_month
-          required: false
-          type: string
-        - description: Period end month in yyyy-MM-dd format. Either quarter or start-month and end-month have to be provided.
-          in: query
-          name: end_month
-          required: false
-          type: string
-        - description: "Quarter in yyyy-MM format. If start-date and end-date are provided, quarter is ignored and should be set to 'range'."
-          in: path
-          name: quarter
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/getSettlementSummaryOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Fetch summary
-      tags:
-        - settlement
-  '/api/v1/settlement/{quarter}':
-    get:
-      consumes:
-        - application/json
-      operationId: getSettlement
-      parameters:
-        - description: "Output format. 'csv' value is accepted as well"
-          in: query
-          name: format
-          required: false
-          type: string
-        - description: 'MOSS country code, used to determine currency/region. If ommited, merchant default setting is used. Deprecated: please use tax-country-code.'
-          in: query
-          name: moss_country_code
-          required: false
-          type: string
-        - description: 'Tax entity country code, used to determine currency/region. '
-          in: query
-          name: tax_country_code
-          required: false
-          type: string
-        - description: "ISO 3-letter currency code, e.g. EUR or USD. If provided, all amounts will be coerced for this currency. Defaults to region's currency code."
-          in: query
-          name: currency_code
-          required: false
-          type: string
-        - description: "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used. Deprecated, please use tax-id."
-          in: query
-          name: moss_tax_id
-          required: false
-          type: string
-        - description: "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used. Deprecated, please use tax-id."
-          in: query
-          name: tax_id
-          required: false
-          type: string
-        - description: Period start month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.
-          in: query
-          name: start_month
-          required: false
-          type: string
-        - description: Period end month in yyyy-MM-dd format. Either quarter or start-month and end-month have to be provided.
-          in: query
-          name: end_month
-          required: false
-          type: string
-        - description: "Quarter in yyyy-MM format. If start-date and end-date are provided, quarter is ignored and should be set to 'range'."
-          in: path
-          name: quarter
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/getSettlementOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Fetch settlement
-      tags:
-        - settlement
-  /api/v1/stats/settlement/by_country:
-    get:
-      consumes:
-        - application/json
-      operationId: getSettlementStatsByCountry
-      parameters:
-        - description: Date from in yyyy-MM format.
-          in: query
-          name: date_from
-          required: true
-          type: string
-        - description: Date to in yyyy-MM format.
-          in: query
-          name: date_to
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/getSettlementStatsByCountryOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Settlement by country
-      tags:
-        - stats
-  /api/v1/stats/settlement/by_taxation_type:
-    get:
-      consumes:
-        - application/json
-      operationId: getSettlementStatsByTaxationType
-      parameters:
-        - description: Date from in yyyy-MM format.
-          in: query
-          name: date_from
-          required: true
-          type: string
-        - description: Date to in yyyy-MM format.
-          in: query
-          name: date_to
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/getSettlementStatsByTaxationTypeOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Settlement by tax type
-      tags:
-        - stats
-  /api/v1/stats/settlement/daily:
-    get:
-      consumes:
-        - application/json
-      operationId: getDailySettlementStats
-      parameters:
-        - description: 'Interval type - day, week, month.'
-          in: query
-          name: interval
-          required: true
-          type: string
-        - description: Date from in yyyy-MM format.
-          in: query
-          name: date_from
-          required: true
-          type: string
-        - description: Date to in yyyy-MM format.
-          in: query
-          name: date_to
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/getDailySettlementStatsOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Settlement stats over time
-      tags:
-        - stats
-  /api/v1/stats/transactions:
-    get:
-      consumes:
-        - application/json
-      operationId: getTransactionsStats
-      parameters:
-        - description: Date from in yyyy-MM format.
-          in: query
-          name: date_from
-          required: true
-          type: string
-        - description: Date to in yyyy-MM format.
-          in: query
-          name: date_to
-          required: true
-          type: string
-        - description: "Interval. Accepted values are 'day', 'week' and 'month'."
-          in: query
-          name: interval
-          required: false
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/getTransactionsStatsOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Transaction stats
-      tags:
-        - stats
-  /api/v1/stats/transactions/by_country:
-    get:
-      consumes:
-        - application/json
-      operationId: getTransactionsStatsByCountry
-      parameters:
-        - description: "Global currency code to use for conversion - in addition to country's currency if rate is available. Conversion is indicative and based on most-recent rate from ECB."
-          in: query
-          name: global_currency_code
-          required: false
-          type: string
-        - description: Date from in yyyy-MM format.
-          in: query
-          name: date_from
-          required: true
-          type: string
-        - description: Date to in yyyy-MM format.
-          in: query
-          name: date_to
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/getTransactionsStatsByCountryOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Settlement by country
-      tags:
-        - stats
-  /api/v1/tax/calculate:
-    get:
-      consumes:
-        - application/json
-      operationId: calculateSimpleTax
-      parameters:
-        - description: 'Product type, according to dictionary /dictionaries/product_types. '
-          in: query
-          name: product_type
-          required: false
-          type: string
-        - description: Invoice address/postal_code
-          in: query
-          name: invoice_address_city
-          required: false
-          type: string
-        - description: "Buyer's credit card prefix."
-          in: query
-          name: buyer_credit_card_prefix
-          required: false
-          type: string
-        - description: Currency code for transaction - e.g. EUR.
-          in: query
-          name: currency_code
-          required: true
-          type: string
-        - description: Invoice address/region
-          in: query
-          name: invoice_address_region
-          required: false
-          type: string
-        - description: Unit price.
-          in: query
-          name: unit_price
-          required: false
-          type: number
-        - description: Quantity Defaults to 1.
-          in: query
-          name: quantity
-          required: false
-          type: number
-        - description: " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly."
-          in: query
-          name: buyer_tax_number
-          required: false
-          type: string
-        - description: 'Two-letter ISO country code, e.g. FR. Use it to force country code for tax calculation.'
-          in: query
-          name: force_country_code
-          required: false
-          type: string
-        - description: "Order date in yyyy-MM-dd format, in merchant's timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used."
-          in: query
-          name: order_date
-          required: false
-          type: string
-        - description: Amount. Required if total amount is not provided.
-          in: query
-          name: amount
-          required: false
-          type: number
-        - description: Billing two letter ISO country code.
-          in: query
-          name: billing_country_code
-          required: false
-          type: string
-        - description: Invoice address/postal_code
-          in: query
-          name: invoice_address_postal_code
-          required: false
-          type: string
-        - description: Total amount. Required if amount is not provided.
-          in: query
-          name: total_amount
-          required: false
-          type: number
-        - description: 'If the transaction is in a country supported by Taxamo, but the tax is not calculated due to merchant settings or EU B2B transaction for example.'
-          in: query
-          name: tax_deducted
-          required: false
-          type: boolean
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/calculateSimpleTaxOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Simple tax
-      tags:
-        - tax
-    post:
-      consumes:
-        - application/json
-      operationId: calculateTax
-      parameters:
-        - description: Input
-          in: body
-          name: input
-          required: true
-          schema:
-            $ref: '#/definitions/calculateTaxIn'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/calculateTaxOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Calculate tax
-      tags:
-        - tax
-  /api/v1/tax/location/calculate:
-    get:
-      consumes:
-        - application/json
-      operationId: calculateTaxLocation
-      parameters:
-        - description: Billing two letter ISO country code.
-          in: query
-          name: billing_country_code
-          required: false
-          type: string
-        - description: "Buyer's credit card prefix."
-          in: query
-          name: buyer_credit_card_prefix
-          required: false
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/calculateTaxLocationOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Calculate location
-      tags:
-        - tax
-  '/api/v1/tax/vat_numbers/{tax_number}/validate':
-    get:
-      consumes:
-        - application/json
-      operationId: validateTaxNumber
-      parameters:
-        - description: Two-letter ISO country code.
-          in: query
-          name: country_code
-          required: false
-          type: string
-        - description: Tax number
-          in: path
-          name: tax_number
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/validateTaxNumberOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Validate VAT number
-      tags:
-        - tax
-  /api/v1/transactions:
-    get:
-      consumes:
-        - application/json
-      operationId: listTransactions
-      parameters:
-        - description: Filtering expression
-          in: query
-          name: filter_text
-          required: false
-          type: string
-        - description: Offset
-          in: query
-          name: offset
-          required: false
-          type: integer
-        - description: Taxamo provided transaction key or custom id
-          in: query
-          name: key_or_custom_id
-          required: false
-          type: string
-        - description: Three letter ISO currency code.
-          in: query
-          name: currency_code
-          required: false
-          type: string
-        - description: Order date to in yyyy-MM-dd format.
-          in: query
-          name: order_date_to
-          required: false
-          type: string
-        - description: 'If true, results are sorted in descending order.'
-          in: query
-          name: sort_reverse
-          required: false
-          type: boolean
-        - description: 'Limit (no more than 1000, defaults to 100).'
-          in: query
-          name: limit
-          required: false
-          type: integer
-        - description: Transaction invoice number.
-          in: query
-          name: invoice_number
-          required: false
-          type: string
-        - description: Comma separated list of of transaction statuses.
-          in: query
-          name: statuses
-          required: false
-          type: string
-        - description: Order date from in yyyy-MM-dd format.
-          in: query
-          name: order_date_from
-          required: false
-          type: string
-        - description: Return only transactions with total amount greater than given number. Transactions with total amount equal to a given number (e.g. 0) are not returned.
-          in: query
-          name: total_amount_greater_than
-          required: false
-          type: string
-        - description: "Output format - supports 'csv' value for this operation."
-          in: query
-          name: format
-          required: false
-          type: string
-        - description: Return only transactions with total amount less than a given number. Transactions with total amount equal to a given number (e.g. 1) are not returned.
-          in: query
-          name: total_amount_less_than
-          required: false
-          type: string
-        - description: Two letter ISO tax country code.
-          in: query
-          name: tax_country_code
-          required: false
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/listTransactionsOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Browse transactions
-      tags:
-        - transactions
-    post:
-      consumes:
-        - application/json
-      operationId: createTransaction
-      parameters:
-        - description: Input
-          in: body
-          name: input
-          required: true
-          schema:
-            $ref: '#/definitions/createTransactionIn'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/createTransactionOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Store transaction
-      tags:
-        - transactions
-  '/api/v1/transactions/{key}':
-    delete:
-      consumes:
-        - application/json
-      operationId: cancelTransaction
-      parameters:
-        - description: Transaction key
-          in: path
-          name: key
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/cancelTransactionOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Delete transaction
-      tags:
-        - transactions
-    get:
-      consumes:
-        - application/json
-      operationId: getTransaction
-      parameters:
-        - description: Transaction key
-          in: path
-          name: key
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/getTransactionOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Retrieve transaction data.
-      tags:
-        - transactions
-    put:
-      consumes:
-        - application/json
-      operationId: updateTransaction
-      parameters:
-        - description: Transaction key.
-          in: path
-          name: key
-          required: true
-          type: string
-        - description: Input
-          in: body
-          name: input
-          required: true
-          schema:
-            $ref: '#/definitions/updateTransactionIn'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/updateTransactionOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Update transaction
-      tags:
-        - transactions
-  '/api/v1/transactions/{key}/confirm':
-    post:
-      consumes:
-        - application/json
-      operationId: confirmTransaction
-      parameters:
-        - description: Transaction key.
-          in: path
-          name: key
-          required: true
-          type: string
-        - description: Input
-          in: body
-          name: input
-          required: true
-          schema:
-            $ref: '#/definitions/confirmTransactionIn'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/confirmTransactionOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Confirm transaction
-      tags:
-        - transactions
-  '/api/v1/transactions/{key}/invoice/send_email':
-    post:
-      consumes:
-        - application/json
-      operationId: emailInvoice
-      parameters:
-        - description: Transaction key.
-          in: path
-          name: key
-          required: true
-          type: string
-        - description: Input
-          in: body
-          name: input
-          required: true
-          schema:
-            $ref: '#/definitions/emailInvoiceIn'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/emailInvoiceOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Email invoice
-      tags:
-        - invoice
-  '/api/v1/transactions/{key}/payments':
-    get:
-      consumes:
-        - application/json
-      operationId: listPayments
-      parameters:
-        - description: 'Max record count (no more than 100, defaults to 10).'
-          in: query
-          name: limit
-          required: false
-          type: string
-        - description: 'How many records need to be skipped, defaults to 0.'
-          in: query
-          name: offset
-          required: false
-          type: string
-        - description: Transaction key.
-          in: path
-          name: key
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/listPaymentsOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: List payments
-      tags:
-        - payments
-    post:
-      consumes:
-        - application/json
-      operationId: createPayment
-      parameters:
-        - description: Transaction key.
-          in: path
-          name: key
-          required: true
-          type: string
-        - description: Input
-          in: body
-          name: input
-          required: true
-          schema:
-            $ref: '#/definitions/createPaymentIn'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/createPaymentOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Register a payment
-      tags:
-        - payments
-  '/api/v1/transactions/{key}/payments/capture':
-    post:
-      consumes:
-        - application/json
-      operationId: capturePayment
-      parameters:
-        - description: Transaction key.
-          in: path
-          name: key
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/capturePaymentOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Capture payment
-      tags:
-        - payments
-  '/api/v1/transactions/{key}/refunds':
-    post:
-      consumes:
-        - application/json
-      operationId: createRefund
-      parameters:
-        - description: Transaction key.
-          in: path
-          name: key
-          required: true
-          type: string
-        - description: Input
-          in: body
-          name: input
-          required: true
-          schema:
-            $ref: '#/definitions/createRefundIn'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/createRefundOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Create a refund
-      tags:
-        - refunds
-  '/api/v1/transactions/{key}/unconfirm':
-    post:
-      consumes:
-        - application/json
-      operationId: unconfirmTransaction
-      parameters:
-        - description: Transaction key.
-          in: path
-          name: key
-          required: true
-          type: string
-        - description: Input
-          in: body
-          name: input
-          required: true
-          schema:
-            $ref: '#/definitions/unconfirmTransactionIn'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/unconfirmTransactionOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Un-confirm the transaction. Un-confirmed transaction can be edited or canceled like a newly created one.
-      tags:
-        - transactions
-  /api/v1/verification/sms:
-    post:
-      consumes:
-        - application/json
-      operationId: createSMSToken
-      parameters:
-        - description: Input
-          in: body
-          name: input
-          required: true
-          schema:
-            $ref: '#/definitions/createSMSTokenIn'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/createSMSTokenOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Create SMS token
-      tags:
-        - verification
-  '/api/v1/verification/sms/{token}':
-    get:
-      consumes:
-        - application/json
-      operationId: verifySMSToken
-      parameters:
-        - description: Provided token.
-          in: path
-          name: token
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/verifySMSTokenOut'
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      summary: Verify SMS token
-      tags:
-        - verification
-schemes:
-  - https
-securityDefinitions:
-  apiKey:
-    in: header
-    name: Token
-    type: apiKey
-swagger: '2.0'
-tags:
-  - description: Refunds
-    name: refunds
-  - description: Payments
-    name: payments
-  - description: Invoices
-    name: invoice
-  - description: Transactions
-    name: transactions
-  - description: Tax
-    name: tax
-  - description: GeoIP
-    name: geoip
-  - description: Statistics
-    name: stats
-  - description: Settlement
-    name: settlement
-  - description: Verification
-    name: verification
-  - description: Dictionaries
-    name: dictionaries

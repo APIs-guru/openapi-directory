@@ -1,4 +1,94 @@
+swagger: '2.0'
+schemes:
+  - https
+host: graphhopper.com
 basePath: /api/1/vrp
+info:
+  description: 'Our Route Optimization API solves the so called vehicle routing problem fast. It calculates an optimal tour for a set of vehicles, services and constraints'
+  title: Route Optimization API
+  version: '1.0'
+  x-logo:
+    url: 'https://graphhopper.com/img/header.png'
+  x-origin:
+    format: swagger
+    url: 'https://graphhopper.com/api/1/vrp/swagger.json'
+    version: '2.0'
+  x-providerName: graphhopper.com
+produces:
+  - application/json
+securityDefinitions:
+  api_key:
+    in: query
+    name: key
+    type: apiKey
+security:
+  - api_key: []
+paths:
+  /optimize:
+    post:
+      consumes:
+        - application/json
+      description: |
+        This endpoint solves large problems, i.e. traveling salesman or vehicle routing problems, and returns the solution.
+      operationId: postVrp
+      parameters:
+        - description: your API key
+          in: query
+          name: key
+          required: true
+          type: string
+        - description: Request object that contains the problem to be solved
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Request'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A jobId you can use to retrieve your solution from server - see solution endpoint.
+          schema:
+            $ref: '#/definitions/JobId'
+        '400':
+          description: Error occurred when reading client request. Request is invalid.
+        '500':
+          description: Error occurred on server side.
+      summary: Solves large routing problems
+      tags:
+        - vrp
+  '/solution/{jobId}':
+    get:
+      consumes:
+        - application/json
+      description: |
+        This endpoint returns the solution of a large problems. You can fetch it with the job_id, you have been sent.
+      operationId: getSolution
+      parameters:
+        - description: your API key
+          in: query
+          name: key
+          required: true
+          type: string
+        - description: Request solution with jobId
+          in: path
+          name: jobId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A response containing the solution
+          schema:
+            $ref: '#/definitions/Response'
+        '400':
+          description: Error occurred on client side such as invalid input.
+        '500':
+          description: Error occurred on server side.
+      summary: Return the solution associated to the jobId
+      tags:
+        - solution
 definitions:
   Activity:
     properties:
@@ -341,93 +431,3 @@ definitions:
         description: Unique identifier for the vehicle type
         type: string
     type: object
-host: graphhopper.com
-info:
-  description: 'Our Route Optimization API solves the so called vehicle routing problem fast. It calculates an optimal tour for a set of vehicles, services and constraints'
-  title: Route Optimization API
-  version: '1.0'
-  x-logo:
-    url: 'https://graphhopper.com/img/header.png'
-  x-origin:
-    format: swagger
-    url: 'https://graphhopper.com/api/1/vrp/swagger.json'
-    version: '2.0'
-  x-providerName: graphhopper.com
-paths:
-  /optimize:
-    post:
-      consumes:
-        - application/json
-      description: |
-        This endpoint solves large problems, i.e. traveling salesman or vehicle routing problems, and returns the solution.
-      operationId: postVrp
-      parameters:
-        - description: your API key
-          in: query
-          name: key
-          required: true
-          type: string
-        - description: Request object that contains the problem to be solved
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/Request'
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: A jobId you can use to retrieve your solution from server - see solution endpoint.
-          schema:
-            $ref: '#/definitions/JobId'
-        '400':
-          description: Error occurred when reading client request. Request is invalid.
-        '500':
-          description: Error occurred on server side.
-      summary: Solves large routing problems
-      tags:
-        - vrp
-  '/solution/{jobId}':
-    get:
-      consumes:
-        - application/json
-      description: |
-        This endpoint returns the solution of a large problems. You can fetch it with the job_id, you have been sent.
-      operationId: getSolution
-      parameters:
-        - description: your API key
-          in: query
-          name: key
-          required: true
-          type: string
-        - description: Request solution with jobId
-          in: path
-          name: jobId
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: A response containing the solution
-          schema:
-            $ref: '#/definitions/Response'
-        '400':
-          description: Error occurred on client side such as invalid input.
-        '500':
-          description: Error occurred on server side.
-      summary: Return the solution associated to the jobId
-      tags:
-        - solution
-produces:
-  - application/json
-schemes:
-  - https
-security:
-  - api_key: []
-securityDefinitions:
-  api_key:
-    in: query
-    name: key
-    type: apiKey
-swagger: '2.0'

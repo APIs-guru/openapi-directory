@@ -1,4 +1,1194 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.semantria.com
 basePath: /
+info:
+  description: 'Semantria applies Text and Sentiment Analysis to tweets, facebook posts, surveys, reviews or enterprise content.'
+  title: Semantria
+  version: '4.0'
+  x-logo:
+    url: 'https://semantria.com/marketing/img/ui/semantria-lexalytics_mainlogo.png'
+  x-origin:
+    format: swagger
+    url: 'https://semantria.com/developer/api-docs-prod'
+    version: '1.2'
+  x-providerName: semantria.com
+externalDocs:
+  url: 'https://semantria.com/support/developer/'
+tags:
+  - description: API status
+    name: Status
+  - description: Supported features
+    name: Features
+  - description: Subscription details
+    name: Subscription
+  - description: Usage statistics
+    name: Statistics
+  - description: Configurations
+    name: Configuration
+  - description: Blacklisted output
+    name: Blacklist
+  - description: User categories
+    name: Categories
+  - description: Queries
+    name: Queries
+  - description: User entities
+    name: Entities
+  - description: Sentiment-Bearing Phrases
+    name: Phrases
+  - description: Basic analysis
+    name: ProcessingDocuments
+  - description: Discovery analysis
+    name: ProcessingCollections
+paths:
+  '/blacklist.{content_type}':
+    delete:
+      description: This method removes certain blacklisted items by their values on Semantria side.
+      operationId: deleteBlacklistItems
+      parameters:
+        - description: Identifier of configuration blacklist items linked to.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - description: List of unique blacklisted items (strings).
+          in: body
+          name: Blacklisted items
+          required: true
+          schema:
+            $ref: '#/definitions/Request class'
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: No response was specified
+        '202':
+          description: Client request accepted and configurations updated.
+        '400':
+          description: Incoming request body is incorrect. Server responds with details.
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '403':
+          description: Forbidden. Server responds if client tries to remove primary configuration.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Remove items from blacklist
+      tags:
+        - Blacklist
+    get:
+      description: This method retrieves all backlisted items available on Semantria side.
+      operationId: getBlacklist
+      parameters:
+        - description: Identifier of configuration blacklist linked to.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Client request accepted and queued. Server responds with the blacklist.
+          schema:
+            items:
+              type: string
+            type: array
+        '202':
+          description: 'Client request accepted, no blacklist found. Server responds with empty body.'
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Retrieve blacklisted items
+      tags:
+        - Blacklist
+    post:
+      description: This method adds new unique items to the backlist on Semantria side.
+      operationId: updateBlacklist
+      parameters:
+        - description: Identifier of configuration blacklist linked to.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - description: List of parametrized JSON or XML objects.
+          in: body
+          name: Blacklisted items
+          required: true
+          schema:
+            $ref: '#/definitions/Request class'
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: No response was specified
+        '202':
+          description: Client request accepted and configurations updated.
+        '400':
+          description: Incoming request body is incorrect. Server responds with details.
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '406':
+          description: Number of allowed blacklisted items per configuration achieved.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Add items to blacklist
+      tags:
+        - Blacklist
+  '/categories.{content_type}':
+    delete:
+      description: This method removes certain user categories by their names on Semantria side.
+      operationId: deleteCategories
+      parameters:
+        - description: Identifier of configuration user categories linked to.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - description: List of user category names (strings).
+          in: body
+          name: Category names
+          required: true
+          schema:
+            $ref: '#/definitions/Request class'
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: No response was specified
+        '202':
+          description: Client request accepted and configurations updated.
+        '400':
+          description: Incoming request body is incorrect. Server responds with details.
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '403':
+          description: Forbidden. Server responds if client tries to remove primary configuration.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Remove user categories
+      tags:
+        - Categories
+    get:
+      description: This method retrieves list of user categories available on Semantria side.
+      operationId: getCategories
+      parameters:
+        - description: Identifier of configuration user categories linked to.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Client request accepted and queued. Server responds with the categories list.
+          schema:
+            items:
+              $ref: '#/definitions/Category'
+            type: array
+        '202':
+          description: 'Client request accepted, no categories found. Server responds with empty body.'
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Retrieve user categories
+      tags:
+        - Categories
+    post:
+      description: This method adds or updates user categories by unique names on Semantria side.
+      operationId: updateCategories
+      parameters:
+        - description: Identifier of configuration user categories linked to.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - description: List of parametrized JSON or XML objects.
+          in: body
+          name: Categories
+          required: true
+          schema:
+            $ref: '#/definitions/Request class'
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: No response was specified
+        '202':
+          description: Client request accepted and configurations updated.
+        '400':
+          description: Incoming request body is incorrect. Server responds with details.
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '406':
+          description: Number of allowed categories per configuration or samples per category achieved.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Add or update user categories
+      tags:
+        - Categories
+  '/collection.{content_type}':
+    post:
+      description: 'This method queues collection of documents onto the server for analysis. Queued collection of documents analyzes in common context as entire thing. If unique configuration ID provided, Semantria uses settings of that configuration during analysis, in opposite the primary configuration uses. Collection IDs are unique in scope of configuration. If the same ID appears twice, Semantria overrides existing collection with the new Data'
+      operationId: queueCollection
+      parameters:
+        - description: Identifier of configuration used for analysis.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - description: Parametrized JSON or XML object.
+          in: body
+          name: Collection
+          required: true
+          schema:
+            $ref: '#/definitions/Request class'
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Client request accepted and queued. Server responds with the sentiment-bearing phrases list.
+          schema:
+            $ref: '#/definitions/Collection'
+        '202':
+          description: Client request accepted and queued for processing.
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '406':
+          description: Documents limit per collection is achieved.
+        '413':
+          description: Characters limit for single document exceeded.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Queue collection for analysis
+      tags:
+        - ProcessingCollections
+  '/collection/processed.{content_type}':
+    get:
+      description: 'This method retrieves analysis results for processed collections from Semantria. FAILED collections will have FAILED status in response. Semantria responds with limited amount of results per API call. If configuration ID provided, Semantria responds with the collections, which were queued using the same configuration ID, in opposite Primary configuration uses.'
+      operationId: retrieveProcessedCollections
+      parameters:
+        - description: Identifier of configuration used for analysis.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Client request accepted and queued. Server responds with processed collections.
+          schema:
+            $ref: '#/definitions/CollectionAnalyticData'
+        '202':
+          description: 'Client request accepted, no processed collections found on the server.'
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Retrieve collections analysis
+      tags:
+        - ProcessingCollections
+  '/collection/{collection_id}.{content_type}':
+    delete:
+      description: This method cancels collection analysis by unique ID on Semantria side if it is waiting for analysis in queue.
+      operationId: cancelCollection
+      parameters:
+        - description: Identifier of configuration used for analysis.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - description: Collection ID
+          in: path
+          name: collection_id
+          required: true
+          type: string
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Client request accepted. Document canceled from processing on the server.
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '404':
+          description: No collections with provided ID found on server.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Cancel collection analysis
+      tags:
+        - ProcessingCollections
+    get:
+      description: This method retrieves analysis results for documents collection by its unique ID or the collection’s status in queue if it did not analyzed yet. Semantria guarantees delivering of all collections back to the client even if they FAILED on Semantria side due to some reason.
+      operationId: receiveCollectionAnalyticData
+      parameters:
+        - description: Identifier of configuration used for analysis.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - description: Collection ID
+          in: path
+          name: collection_id
+          required: true
+          type: string
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Client request accepted. Server responds with processed document or its status.
+          schema:
+            $ref: '#/definitions/CollectionAnalyticData'
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '404':
+          description: No collections with provided ID found on server.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Retrieve collection analysis or its status in queue
+      tags:
+        - ProcessingCollections
+  '/configurations.{content_type}':
+    delete:
+      description: This method removes certain configuration by unique ID on Semantria side.
+      operationId: deleteConfigurations
+      parameters:
+        - description: List of configuration identifiers (strings).
+          in: body
+          name: Configuration IDs
+          required: true
+          schema:
+            $ref: '#/definitions/Request class'
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: No response was specified
+        '202':
+          description: Client request accepted and configurations updated.
+        '400':
+          description: Incoming request body is incorrect. Server responds with details.
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '403':
+          description: Forbidden. Server responds if client tries to remove primary configuration.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Remove user configurations
+      tags:
+        - Configuration
+    get:
+      description: This method retrieves all user configurations available on Semantria side.
+      operationId: getConfigurations
+      parameters:
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Client request accepted. Server responds with status object.
+          schema:
+            items:
+              $ref: '#/definitions/Configuration'
+            type: array
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Retrieve user configurations
+      tags:
+        - Configuration
+    post:
+      description: 'This method creates or updates specific configurations on Semantria side. If unique ID of configuration provided, Semantria updates certain configuration is exists. If unique ID not passed, Semantria creates new configuration with provided settings.'
+      operationId: updateConfigurations
+      parameters:
+        - description: List of parametrized JSON or XML objects.
+          in: body
+          name: Configurations
+          required: true
+          schema:
+            $ref: '#/definitions/Request class'
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: No response was specified
+        '202':
+          description: Client request accepted and configurations updated.
+        '400':
+          description: Incoming request body is incorrect. Server responds with details.
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '406':
+          description: Number of allowed configurations for user subscription is reached.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Create or update user configurations
+      tags:
+        - Configuration
+  '/document.{content_type}':
+    post:
+      description: 'This method queues document onto the server for analysis. Queued document analyzes individually and will have its own set of results. If unique configuration ID provided, Semantria uses settings of that configuration during analysis, in opposite the primary configuration uses. Document IDs are unique in scope of configuration. If the same ID appears twice, Semantria overrides existing document with the new Data.'
+      operationId: queueDocument
+      parameters:
+        - description: Identifier of configuration used for analysis.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - description: Parametrized JSON or XML object.
+          in: body
+          name: Document
+          required: true
+          schema:
+            $ref: '#/definitions/Request class'
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Client request accepted and queued. Server responds with the sentiment-bearing phrases list.
+          schema:
+            $ref: '#/definitions/Document'
+        '202':
+          description: Client request accepted and queued for processing.
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '413':
+          description: Characters limit for the document exceeded.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Queue document for analysis
+      tags:
+        - ProcessingDocuments
+  '/document/batch.{content_type}':
+    post:
+      description: This method queues batch of documents for analysis. The rules are the same as for single document mode but here the documents ordered into the batch.
+      operationId: queueBatchOfDocuments
+      parameters:
+        - description: Identifier of configuration used for analysis.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - description: List of parametrized JSON or XML objects.
+          in: body
+          name: Batch of Documents
+          required: true
+          schema:
+            $ref: '#/definitions/Request class'
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Client request accepted and queued. Server responds with the sentiment-bearing phrases list.
+          schema:
+            $ref: '#/definitions/Document'
+        '202':
+          description: Client request accepted and queued for processing.
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '403':
+          description: Request is forbidden for selected processing mode.
+        '406':
+          description: Documents limit per batch is achieved.
+        '413':
+          description: Characters limit for the document exceeded.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Queue batch of documents for analysis
+      tags:
+        - ProcessingDocuments
+  '/document/processed.{content_type}':
+    get:
+      description: 'This method retrieves analysis results for processed documents from Semantria. FAILED documents will have FAILED status in response. Semantria responds with limited amount of results per API call. If configuration ID provided, Semantria responds with the document, which were queued using the same configuration ID, in opposite Primary.'
+      operationId: retrieveProcessedDocuments
+      parameters:
+        - description: Identifier of configuration used for analysis.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Client request accepted and queued. Server responds with processed documents.
+          schema:
+            $ref: '#/definitions/DocumentAnalyticData'
+        '202':
+          description: 'Client request accepted, no processed documents found on the server.'
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Retrieve documents analysis
+      tags:
+        - ProcessingDocuments
+  '/document/{document_id}.{content_type}':
+    delete:
+      description: This method cancels document analysis by unique ID on Semantria side if it is waiting for analysis in queue.
+      operationId: cancelDocument
+      parameters:
+        - description: Identifier of configuration used for analysis.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - description: Document ID
+          in: path
+          name: document_id
+          required: true
+          type: string
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Client request accepted. Document canceled from processing on the server.
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '404':
+          description: No documents with provided ID found on server.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Cancel document analysis
+      tags:
+        - ProcessingDocuments
+    get:
+      description: This method retrieves analysis results for the single document by its unique ID or the document’s status in queue if it did not analyzed yet. Semantria guarantees delivering of all documents back to the client even if they FAILED on Semantria side due to some reason.
+      operationId: receiveDocumentAnalyticData
+      parameters:
+        - description: Identifier of configuration used for analysis.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - description: Document ID
+          in: path
+          name: document_id
+          required: true
+          type: string
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Client request accepted. Server responds with processed document or its status.
+          schema:
+            $ref: '#/definitions/DocumentAnalyticData'
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '404':
+          description: No documents with provided ID found on server.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Retrieve document analysis or its status in queue
+      tags:
+        - ProcessingDocuments
+  '/entities.{content_type}':
+    delete:
+      description: This method removes certain user entities by their names on Semantria side.
+      operationId: deleteEntities
+      parameters:
+        - description: Semantria API key
+          in: query
+          name: API key
+          required: true
+          type: string
+        - description: Semantria API secret
+          in: query
+          name: API secret
+          required: true
+          type: string
+        - description: Identifier of configuration entities linked to.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - description: List of user entity names (strings)
+          in: body
+          name: User entity names
+          required: true
+          schema:
+            items:
+              type: string
+            type: array
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: No response was specified
+        '202':
+          description: Client request accepted and configurations updated.
+        '400':
+          description: Incoming request body is incorrect. Server responds with details.
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '403':
+          description: Forbidden. Server responds if client tries to remove primary configuration.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Remove user entities
+      tags:
+        - Entities
+    get:
+      description: This method retrieves list of user entities available on Semantria side.
+      operationId: getEntities
+      parameters:
+        - description: Identifier of configuration user entities linked to.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Client request accepted and queued. Server responds with the entities list.
+          schema:
+            items:
+              $ref: '#/definitions/Entity'
+            type: array
+        '202':
+          description: Client request accepted and no entities found. Server responds with empty body.
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Retrieve user entities
+      tags:
+        - Entities
+    post:
+      description: This method adds or updates user entities by unique names on Semantria side.
+      operationId: updateEntities
+      parameters:
+        - description: Identifier of configuration user entities linked to.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - description: List of parametrized JSON or XML objects.
+          in: body
+          name: User entities
+          required: true
+          schema:
+            $ref: '#/definitions/Request class'
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: No response was specified
+        '202':
+          description: Client request accepted and configurations updated.
+        '400':
+          description: Incoming request body is incorrect. Server responds with details.
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '406':
+          description: Number of allowed entities per configuration achieved.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Add or update user entities
+      tags:
+        - Entities
+  '/features.{content_type}':
+    get:
+      description: This method returns list of supported features per languages supported by Semantria API. Let the users know about API capabilities.
+      operationId: getFeatures
+      parameters:
+        - description: Filter features by specified language
+          in: query
+          name: language
+          required: false
+          type: string
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Client request accepted and queued. Server responds with subscription details.
+          schema:
+            items:
+              $ref: '#/definitions/Feature'
+            type: array
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Retrieve supported features
+      tags:
+        - Features
+  '/phrases.{content_type}':
+    delete:
+      description: This method removes certain sentiment-bearing phrases by their names on Semantria side.
+      operationId: deletePhrases
+      parameters:
+        - description: Identifier of configuration phrases linked to.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - description: List of sentiment-bearing phrases (strings).
+          in: body
+          name: Sentiment phrases
+          required: true
+          schema:
+            $ref: '#/definitions/Request class'
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: No response was specified
+        '202':
+          description: Client request accepted and configurations updated.
+        '400':
+          description: Incoming request body is incorrect. Server responds with details.
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '403':
+          description: Forbidden. Server responds if client tries to remove primary configuration.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Remove sentiment-bearing phrases
+      tags:
+        - Phrases
+    get:
+      description: This method retrieves list of sentiment-bearing phrases available on Semantria side.
+      operationId: getPhrases
+      parameters:
+        - description: Identifier of configuration phrases linked to.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Client request accepted and queued. Server responds with the sentiment-bearing phrases list.
+          schema:
+            items:
+              $ref: '#/definitions/Phrase'
+            type: array
+        '202':
+          description: Client request accepted and no sentiment-bearing phrases found. Server responds with empty body.
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Retrieve sentiment-bearing phrases
+      tags:
+        - Phrases
+    post:
+      description: This method adds or updates sentiment-bearing phrases by unique names on Semantria side.
+      operationId: updatePhrases
+      parameters:
+        - description: Identifier of configuration phrases linked to.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - description: List of parametrized JSON or XML objects.
+          in: body
+          name: Sentiment phrases
+          required: true
+          schema:
+            $ref: '#/definitions/Request class'
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: No response was specified
+        '202':
+          description: Client request accepted and configurations updated.
+        '400':
+          description: Incoming request body is incorrect. Server responds with details.
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '406':
+          description: Number of allowed sentiment-bearing phrases per configuration achieved.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Add or update sentiment-bearing phrases
+      tags:
+        - Phrases
+  '/queries.{content_type}':
+    delete:
+      description: This method removes certain queries by their names on Semantria side.
+      operationId: deleteQueries
+      parameters:
+        - description: Identifier of configuration queries linked to.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - description: List of query names (strings).
+          in: body
+          name: Query names
+          required: true
+          schema:
+            $ref: '#/definitions/Request class'
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: No response was specified
+        '202':
+          description: Client request accepted and configurations updated.
+        '400':
+          description: Incoming request body is incorrect. Server responds with details.
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '403':
+          description: Forbidden. Server responds if client tries to remove primary configuration.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Remove queries
+      tags:
+        - Queries
+    get:
+      description: This method retrieves list of queries available on Semantria side.
+      operationId: getQueries
+      parameters:
+        - description: Identifier of configuration queries linked to.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Client request accepted and queued. Server responds with the queries list.
+          schema:
+            items:
+              $ref: '#/definitions/Query'
+            type: array
+        '202':
+          description: Client request accepted and no queries found. Server responds with empty body.
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Retrieve queries
+      tags:
+        - Queries
+    post:
+      description: This method adds or updates queries by unique names on Semantria side.
+      operationId: updateQueries
+      parameters:
+        - description: Identifier of configuration queries linked to.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - description: List of parametrized JSON or XML objects.
+          in: body
+          name: Queries
+          required: true
+          schema:
+            $ref: '#/definitions/Request class'
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: No response was specified
+        '202':
+          description: Client request accepted and configurations updated.
+        '400':
+          description: Incoming request body is incorrect. Server responds with details.
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '406':
+          description: Number of allowed queries per configuration achieved.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Add or update queries
+      tags:
+        - Queries
+  '/statistics.{content_type}':
+    get:
+      description: 'This method retrieves overall and per configuration usage statistics for specific timeframe. Statistics ordered per available configurations. Available interval values are current <b>hour</b>, <b>day</b>, <b>week</b>, <b>month</b> and <b>year</b>.'
+      operationId: getStatistic
+      parameters:
+        - description: Configuration identifier for usage statistics retrieving.
+          in: query
+          name: config_id
+          required: false
+          type: string
+        - description: 'Hour, Day, Week, Month, Year values are supported.'
+          in: query
+          name: interval
+          required: false
+          type: string
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Client request accepted. Server responds with statistics details.
+          schema:
+            $ref: '#/definitions/Statistic'
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Retrieve usage statistics
+      tags:
+        - Statistics
+  '/status.{content_type}':
+    get:
+      description: 'This method retrieves API status information such as the app version, current API version, supported languages and encodings, the overall service status, etc.'
+      operationId: getStatus
+      parameters:
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Client request accepted. Server responds with status object.
+          schema:
+            $ref: '#/definitions/Status'
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Retrieve API status
+      tags:
+        - Status
+  '/subscription.{content_type}':
+    get:
+      description: "This method retrieves user's subscription details that consist of the list of allowed features, configured limits and options on Semantria side."
+      operationId: getSubscription
+      parameters:
+        - in: path
+          name: content_type
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Client request accepted and queued. Server responds with subscription details.
+          schema:
+            $ref: '#/definitions/Subscription'
+        '401':
+          description: Authentication failed.
+        '402':
+          description: Unauthorized. Limit of system calls is reached or subscription is expired.
+        '500':
+          description: Server side issue. Server may respond with the details in response body.
+      summary: Retrieve subscription details
+      tags:
+        - Subscription
 definitions:
   Attribute:
     properties:
@@ -1787,1193 +2977,3 @@ definitions:
       - stemmed
       - is_negated
       - sentiment_score
-externalDocs:
-  url: 'https://semantria.com/support/developer/'
-host: api.semantria.com
-info:
-  description: 'Semantria applies Text and Sentiment Analysis to tweets, facebook posts, surveys, reviews or enterprise content.'
-  title: Semantria
-  version: '4.0'
-  x-logo:
-    url: 'https://semantria.com/marketing/img/ui/semantria-lexalytics_mainlogo.png'
-  x-origin:
-    format: swagger
-    url: 'https://semantria.com/developer/api-docs-prod'
-    version: '1.2'
-  x-providerName: semantria.com
-paths:
-  '/blacklist.{content_type}':
-    delete:
-      description: This method removes certain blacklisted items by their values on Semantria side.
-      operationId: deleteBlacklistItems
-      parameters:
-        - description: Identifier of configuration blacklist items linked to.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: List of unique blacklisted items (strings).
-          in: body
-          name: Blacklisted items
-          required: true
-          schema:
-            $ref: '#/definitions/Request class'
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: No response was specified
-        '202':
-          description: Client request accepted and configurations updated.
-        '400':
-          description: Incoming request body is incorrect. Server responds with details.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '403':
-          description: Forbidden. Server responds if client tries to remove primary configuration.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Remove items from blacklist
-      tags:
-        - Blacklist
-    get:
-      description: This method retrieves all backlisted items available on Semantria side.
-      operationId: getBlacklist
-      parameters:
-        - description: Identifier of configuration blacklist linked to.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: Client request accepted and queued. Server responds with the blacklist.
-          schema:
-            items:
-              type: string
-            type: array
-        '202':
-          description: 'Client request accepted, no blacklist found. Server responds with empty body.'
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Retrieve blacklisted items
-      tags:
-        - Blacklist
-    post:
-      description: This method adds new unique items to the backlist on Semantria side.
-      operationId: updateBlacklist
-      parameters:
-        - description: Identifier of configuration blacklist linked to.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: List of parametrized JSON or XML objects.
-          in: body
-          name: Blacklisted items
-          required: true
-          schema:
-            $ref: '#/definitions/Request class'
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: No response was specified
-        '202':
-          description: Client request accepted and configurations updated.
-        '400':
-          description: Incoming request body is incorrect. Server responds with details.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '406':
-          description: Number of allowed blacklisted items per configuration achieved.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Add items to blacklist
-      tags:
-        - Blacklist
-  '/categories.{content_type}':
-    delete:
-      description: This method removes certain user categories by their names on Semantria side.
-      operationId: deleteCategories
-      parameters:
-        - description: Identifier of configuration user categories linked to.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: List of user category names (strings).
-          in: body
-          name: Category names
-          required: true
-          schema:
-            $ref: '#/definitions/Request class'
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: No response was specified
-        '202':
-          description: Client request accepted and configurations updated.
-        '400':
-          description: Incoming request body is incorrect. Server responds with details.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '403':
-          description: Forbidden. Server responds if client tries to remove primary configuration.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Remove user categories
-      tags:
-        - Categories
-    get:
-      description: This method retrieves list of user categories available on Semantria side.
-      operationId: getCategories
-      parameters:
-        - description: Identifier of configuration user categories linked to.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: Client request accepted and queued. Server responds with the categories list.
-          schema:
-            items:
-              $ref: '#/definitions/Category'
-            type: array
-        '202':
-          description: 'Client request accepted, no categories found. Server responds with empty body.'
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Retrieve user categories
-      tags:
-        - Categories
-    post:
-      description: This method adds or updates user categories by unique names on Semantria side.
-      operationId: updateCategories
-      parameters:
-        - description: Identifier of configuration user categories linked to.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: List of parametrized JSON or XML objects.
-          in: body
-          name: Categories
-          required: true
-          schema:
-            $ref: '#/definitions/Request class'
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: No response was specified
-        '202':
-          description: Client request accepted and configurations updated.
-        '400':
-          description: Incoming request body is incorrect. Server responds with details.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '406':
-          description: Number of allowed categories per configuration or samples per category achieved.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Add or update user categories
-      tags:
-        - Categories
-  '/collection.{content_type}':
-    post:
-      description: 'This method queues collection of documents onto the server for analysis. Queued collection of documents analyzes in common context as entire thing. If unique configuration ID provided, Semantria uses settings of that configuration during analysis, in opposite the primary configuration uses. Collection IDs are unique in scope of configuration. If the same ID appears twice, Semantria overrides existing collection with the new Data'
-      operationId: queueCollection
-      parameters:
-        - description: Identifier of configuration used for analysis.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: Parametrized JSON or XML object.
-          in: body
-          name: Collection
-          required: true
-          schema:
-            $ref: '#/definitions/Request class'
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: Client request accepted and queued. Server responds with the sentiment-bearing phrases list.
-          schema:
-            $ref: '#/definitions/Collection'
-        '202':
-          description: Client request accepted and queued for processing.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '406':
-          description: Documents limit per collection is achieved.
-        '413':
-          description: Characters limit for single document exceeded.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Queue collection for analysis
-      tags:
-        - ProcessingCollections
-  '/collection/processed.{content_type}':
-    get:
-      description: 'This method retrieves analysis results for processed collections from Semantria. FAILED collections will have FAILED status in response. Semantria responds with limited amount of results per API call. If configuration ID provided, Semantria responds with the collections, which were queued using the same configuration ID, in opposite Primary configuration uses.'
-      operationId: retrieveProcessedCollections
-      parameters:
-        - description: Identifier of configuration used for analysis.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: Client request accepted and queued. Server responds with processed collections.
-          schema:
-            $ref: '#/definitions/CollectionAnalyticData'
-        '202':
-          description: 'Client request accepted, no processed collections found on the server.'
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Retrieve collections analysis
-      tags:
-        - ProcessingCollections
-  '/collection/{collection_id}.{content_type}':
-    delete:
-      description: This method cancels collection analysis by unique ID on Semantria side if it is waiting for analysis in queue.
-      operationId: cancelCollection
-      parameters:
-        - description: Identifier of configuration used for analysis.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: Collection ID
-          in: path
-          name: collection_id
-          required: true
-          type: string
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: Client request accepted. Document canceled from processing on the server.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '404':
-          description: No collections with provided ID found on server.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Cancel collection analysis
-      tags:
-        - ProcessingCollections
-    get:
-      description: This method retrieves analysis results for documents collection by its unique ID or the collection’s status in queue if it did not analyzed yet. Semantria guarantees delivering of all collections back to the client even if they FAILED on Semantria side due to some reason.
-      operationId: receiveCollectionAnalyticData
-      parameters:
-        - description: Identifier of configuration used for analysis.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: Collection ID
-          in: path
-          name: collection_id
-          required: true
-          type: string
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: Client request accepted. Server responds with processed document or its status.
-          schema:
-            $ref: '#/definitions/CollectionAnalyticData'
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '404':
-          description: No collections with provided ID found on server.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Retrieve collection analysis or its status in queue
-      tags:
-        - ProcessingCollections
-  '/configurations.{content_type}':
-    delete:
-      description: This method removes certain configuration by unique ID on Semantria side.
-      operationId: deleteConfigurations
-      parameters:
-        - description: List of configuration identifiers (strings).
-          in: body
-          name: Configuration IDs
-          required: true
-          schema:
-            $ref: '#/definitions/Request class'
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: No response was specified
-        '202':
-          description: Client request accepted and configurations updated.
-        '400':
-          description: Incoming request body is incorrect. Server responds with details.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '403':
-          description: Forbidden. Server responds if client tries to remove primary configuration.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Remove user configurations
-      tags:
-        - Configuration
-    get:
-      description: This method retrieves all user configurations available on Semantria side.
-      operationId: getConfigurations
-      parameters:
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: Client request accepted. Server responds with status object.
-          schema:
-            items:
-              $ref: '#/definitions/Configuration'
-            type: array
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Retrieve user configurations
-      tags:
-        - Configuration
-    post:
-      description: 'This method creates or updates specific configurations on Semantria side. If unique ID of configuration provided, Semantria updates certain configuration is exists. If unique ID not passed, Semantria creates new configuration with provided settings.'
-      operationId: updateConfigurations
-      parameters:
-        - description: List of parametrized JSON or XML objects.
-          in: body
-          name: Configurations
-          required: true
-          schema:
-            $ref: '#/definitions/Request class'
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: No response was specified
-        '202':
-          description: Client request accepted and configurations updated.
-        '400':
-          description: Incoming request body is incorrect. Server responds with details.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '406':
-          description: Number of allowed configurations for user subscription is reached.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Create or update user configurations
-      tags:
-        - Configuration
-  '/document.{content_type}':
-    post:
-      description: 'This method queues document onto the server for analysis. Queued document analyzes individually and will have its own set of results. If unique configuration ID provided, Semantria uses settings of that configuration during analysis, in opposite the primary configuration uses. Document IDs are unique in scope of configuration. If the same ID appears twice, Semantria overrides existing document with the new Data.'
-      operationId: queueDocument
-      parameters:
-        - description: Identifier of configuration used for analysis.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: Parametrized JSON or XML object.
-          in: body
-          name: Document
-          required: true
-          schema:
-            $ref: '#/definitions/Request class'
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: Client request accepted and queued. Server responds with the sentiment-bearing phrases list.
-          schema:
-            $ref: '#/definitions/Document'
-        '202':
-          description: Client request accepted and queued for processing.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '413':
-          description: Characters limit for the document exceeded.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Queue document for analysis
-      tags:
-        - ProcessingDocuments
-  '/document/batch.{content_type}':
-    post:
-      description: This method queues batch of documents for analysis. The rules are the same as for single document mode but here the documents ordered into the batch.
-      operationId: queueBatchOfDocuments
-      parameters:
-        - description: Identifier of configuration used for analysis.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: List of parametrized JSON or XML objects.
-          in: body
-          name: Batch of Documents
-          required: true
-          schema:
-            $ref: '#/definitions/Request class'
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: Client request accepted and queued. Server responds with the sentiment-bearing phrases list.
-          schema:
-            $ref: '#/definitions/Document'
-        '202':
-          description: Client request accepted and queued for processing.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '403':
-          description: Request is forbidden for selected processing mode.
-        '406':
-          description: Documents limit per batch is achieved.
-        '413':
-          description: Characters limit for the document exceeded.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Queue batch of documents for analysis
-      tags:
-        - ProcessingDocuments
-  '/document/processed.{content_type}':
-    get:
-      description: 'This method retrieves analysis results for processed documents from Semantria. FAILED documents will have FAILED status in response. Semantria responds with limited amount of results per API call. If configuration ID provided, Semantria responds with the document, which were queued using the same configuration ID, in opposite Primary.'
-      operationId: retrieveProcessedDocuments
-      parameters:
-        - description: Identifier of configuration used for analysis.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: Client request accepted and queued. Server responds with processed documents.
-          schema:
-            $ref: '#/definitions/DocumentAnalyticData'
-        '202':
-          description: 'Client request accepted, no processed documents found on the server.'
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Retrieve documents analysis
-      tags:
-        - ProcessingDocuments
-  '/document/{document_id}.{content_type}':
-    delete:
-      description: This method cancels document analysis by unique ID on Semantria side if it is waiting for analysis in queue.
-      operationId: cancelDocument
-      parameters:
-        - description: Identifier of configuration used for analysis.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: Document ID
-          in: path
-          name: document_id
-          required: true
-          type: string
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: Client request accepted. Document canceled from processing on the server.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '404':
-          description: No documents with provided ID found on server.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Cancel document analysis
-      tags:
-        - ProcessingDocuments
-    get:
-      description: This method retrieves analysis results for the single document by its unique ID or the document’s status in queue if it did not analyzed yet. Semantria guarantees delivering of all documents back to the client even if they FAILED on Semantria side due to some reason.
-      operationId: receiveDocumentAnalyticData
-      parameters:
-        - description: Identifier of configuration used for analysis.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: Document ID
-          in: path
-          name: document_id
-          required: true
-          type: string
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: Client request accepted. Server responds with processed document or its status.
-          schema:
-            $ref: '#/definitions/DocumentAnalyticData'
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '404':
-          description: No documents with provided ID found on server.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Retrieve document analysis or its status in queue
-      tags:
-        - ProcessingDocuments
-  '/entities.{content_type}':
-    delete:
-      description: This method removes certain user entities by their names on Semantria side.
-      operationId: deleteEntities
-      parameters:
-        - description: Semantria API key
-          in: query
-          name: API key
-          required: true
-          type: string
-        - description: Semantria API secret
-          in: query
-          name: API secret
-          required: true
-          type: string
-        - description: Identifier of configuration entities linked to.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: List of user entity names (strings)
-          in: body
-          name: User entity names
-          required: true
-          schema:
-            items:
-              type: string
-            type: array
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: No response was specified
-        '202':
-          description: Client request accepted and configurations updated.
-        '400':
-          description: Incoming request body is incorrect. Server responds with details.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '403':
-          description: Forbidden. Server responds if client tries to remove primary configuration.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Remove user entities
-      tags:
-        - Entities
-    get:
-      description: This method retrieves list of user entities available on Semantria side.
-      operationId: getEntities
-      parameters:
-        - description: Identifier of configuration user entities linked to.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: Client request accepted and queued. Server responds with the entities list.
-          schema:
-            items:
-              $ref: '#/definitions/Entity'
-            type: array
-        '202':
-          description: Client request accepted and no entities found. Server responds with empty body.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Retrieve user entities
-      tags:
-        - Entities
-    post:
-      description: This method adds or updates user entities by unique names on Semantria side.
-      operationId: updateEntities
-      parameters:
-        - description: Identifier of configuration user entities linked to.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: List of parametrized JSON or XML objects.
-          in: body
-          name: User entities
-          required: true
-          schema:
-            $ref: '#/definitions/Request class'
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: No response was specified
-        '202':
-          description: Client request accepted and configurations updated.
-        '400':
-          description: Incoming request body is incorrect. Server responds with details.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '406':
-          description: Number of allowed entities per configuration achieved.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Add or update user entities
-      tags:
-        - Entities
-  '/features.{content_type}':
-    get:
-      description: This method returns list of supported features per languages supported by Semantria API. Let the users know about API capabilities.
-      operationId: getFeatures
-      parameters:
-        - description: Filter features by specified language
-          in: query
-          name: language
-          required: false
-          type: string
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: Client request accepted and queued. Server responds with subscription details.
-          schema:
-            items:
-              $ref: '#/definitions/Feature'
-            type: array
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Retrieve supported features
-      tags:
-        - Features
-  '/phrases.{content_type}':
-    delete:
-      description: This method removes certain sentiment-bearing phrases by their names on Semantria side.
-      operationId: deletePhrases
-      parameters:
-        - description: Identifier of configuration phrases linked to.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: List of sentiment-bearing phrases (strings).
-          in: body
-          name: Sentiment phrases
-          required: true
-          schema:
-            $ref: '#/definitions/Request class'
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: No response was specified
-        '202':
-          description: Client request accepted and configurations updated.
-        '400':
-          description: Incoming request body is incorrect. Server responds with details.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '403':
-          description: Forbidden. Server responds if client tries to remove primary configuration.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Remove sentiment-bearing phrases
-      tags:
-        - Phrases
-    get:
-      description: This method retrieves list of sentiment-bearing phrases available on Semantria side.
-      operationId: getPhrases
-      parameters:
-        - description: Identifier of configuration phrases linked to.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: Client request accepted and queued. Server responds with the sentiment-bearing phrases list.
-          schema:
-            items:
-              $ref: '#/definitions/Phrase'
-            type: array
-        '202':
-          description: Client request accepted and no sentiment-bearing phrases found. Server responds with empty body.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Retrieve sentiment-bearing phrases
-      tags:
-        - Phrases
-    post:
-      description: This method adds or updates sentiment-bearing phrases by unique names on Semantria side.
-      operationId: updatePhrases
-      parameters:
-        - description: Identifier of configuration phrases linked to.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: List of parametrized JSON or XML objects.
-          in: body
-          name: Sentiment phrases
-          required: true
-          schema:
-            $ref: '#/definitions/Request class'
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: No response was specified
-        '202':
-          description: Client request accepted and configurations updated.
-        '400':
-          description: Incoming request body is incorrect. Server responds with details.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '406':
-          description: Number of allowed sentiment-bearing phrases per configuration achieved.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Add or update sentiment-bearing phrases
-      tags:
-        - Phrases
-  '/queries.{content_type}':
-    delete:
-      description: This method removes certain queries by their names on Semantria side.
-      operationId: deleteQueries
-      parameters:
-        - description: Identifier of configuration queries linked to.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: List of query names (strings).
-          in: body
-          name: Query names
-          required: true
-          schema:
-            $ref: '#/definitions/Request class'
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: No response was specified
-        '202':
-          description: Client request accepted and configurations updated.
-        '400':
-          description: Incoming request body is incorrect. Server responds with details.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '403':
-          description: Forbidden. Server responds if client tries to remove primary configuration.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Remove queries
-      tags:
-        - Queries
-    get:
-      description: This method retrieves list of queries available on Semantria side.
-      operationId: getQueries
-      parameters:
-        - description: Identifier of configuration queries linked to.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: Client request accepted and queued. Server responds with the queries list.
-          schema:
-            items:
-              $ref: '#/definitions/Query'
-            type: array
-        '202':
-          description: Client request accepted and no queries found. Server responds with empty body.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Retrieve queries
-      tags:
-        - Queries
-    post:
-      description: This method adds or updates queries by unique names on Semantria side.
-      operationId: updateQueries
-      parameters:
-        - description: Identifier of configuration queries linked to.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: List of parametrized JSON or XML objects.
-          in: body
-          name: Queries
-          required: true
-          schema:
-            $ref: '#/definitions/Request class'
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: No response was specified
-        '202':
-          description: Client request accepted and configurations updated.
-        '400':
-          description: Incoming request body is incorrect. Server responds with details.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '406':
-          description: Number of allowed queries per configuration achieved.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Add or update queries
-      tags:
-        - Queries
-  '/statistics.{content_type}':
-    get:
-      description: 'This method retrieves overall and per configuration usage statistics for specific timeframe. Statistics ordered per available configurations. Available interval values are current <b>hour</b>, <b>day</b>, <b>week</b>, <b>month</b> and <b>year</b>.'
-      operationId: getStatistic
-      parameters:
-        - description: Configuration identifier for usage statistics retrieving.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: 'Hour, Day, Week, Month, Year values are supported.'
-          in: query
-          name: interval
-          required: false
-          type: string
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: Client request accepted. Server responds with statistics details.
-          schema:
-            $ref: '#/definitions/Statistic'
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Retrieve usage statistics
-      tags:
-        - Statistics
-  '/status.{content_type}':
-    get:
-      description: 'This method retrieves API status information such as the app version, current API version, supported languages and encodings, the overall service status, etc.'
-      operationId: getStatus
-      parameters:
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: Client request accepted. Server responds with status object.
-          schema:
-            $ref: '#/definitions/Status'
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Retrieve API status
-      tags:
-        - Status
-  '/subscription.{content_type}':
-    get:
-      description: "This method retrieves user's subscription details that consist of the list of allowed features, configured limits and options on Semantria side."
-      operationId: getSubscription
-      parameters:
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: Client request accepted and queued. Server responds with subscription details.
-          schema:
-            $ref: '#/definitions/Subscription'
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Retrieve subscription details
-      tags:
-        - Subscription
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - description: API status
-    name: Status
-  - description: Supported features
-    name: Features
-  - description: Subscription details
-    name: Subscription
-  - description: Usage statistics
-    name: Statistics
-  - description: Configurations
-    name: Configuration
-  - description: Blacklisted output
-    name: Blacklist
-  - description: User categories
-    name: Categories
-  - description: Queries
-    name: Queries
-  - description: User entities
-    name: Entities
-  - description: Sentiment-Bearing Phrases
-    name: Phrases
-  - description: Basic analysis
-    name: ProcessingDocuments
-  - description: Discovery analysis
-    name: ProcessingCollections

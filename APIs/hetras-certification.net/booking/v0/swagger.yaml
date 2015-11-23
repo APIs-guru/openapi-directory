@@ -1,4 +1,362 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.hetras-certification.net
 basePath: /
+info:
+  title: hetras booking API v0
+  version: v0
+  x-logo:
+    url: 'https://hetras.zendesk.com/hc/logo'
+  x-origin:
+    format: swagger
+    url: 'https://developer.hetras.com/swagger/spec/BookingAPIv0.json'
+    version: '2.0'
+  x-providerName: hetras-certification.net
+  x-serviceName: booking
+paths:
+  /api/booking/v0/addons:
+    get:
+      consumes: []
+      deprecated: false
+      description: "The booking addons endpoint gives the client all service addon\r\n             combinations for the given rate plan, room type, timeframe, for the given number of adults and\r\n             number of children per room"
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: Specifies the hotel id to process.
+          format: int32
+          in: query
+          name: hotelId
+          required: true
+          type: integer
+        - description: 'Date of arrival for the guest in the ISO-8601 format "YYYY-MM-DD".'
+          format: date-time
+          in: query
+          name: arrivalDate
+          required: true
+          type: string
+        - description: 'Date of departure for the guest in the ISO-8601 format "YYYY-MM-DD".'
+          format: date-time
+          in: query
+          name: departureDate
+          required: true
+          type: string
+        - description: Channel Code the rate plan needs to be configured for.
+          in: query
+          name: channelCode
+          required: true
+          type: string
+        - description: Number of adults per room.
+          format: byte
+          in: query
+          name: adults
+          required: true
+          type: string
+        - description: Number of rooms.
+          format: byte
+          in: query
+          name: rooms
+          required: true
+          type: string
+        - description: Only return offers with rates for the specified room type code.
+          in: query
+          name: roomType
+          required: true
+          type: string
+        - description: Only return offers for the specified room type code.
+          in: query
+          name: ratePlanCode
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: "An array of offers for each of the hotels listed in the hetras-hotels\r\n            header. Only hotels with availability for the specified criteria are in the\r\n            list. If the list is empty none of the specified hotels offer available rooms."
+          schema:
+            $ref: '#/definitions/Addons'
+        '400':
+          description: Some request parameters are invalid
+        '403':
+          description: You are not authorized to access this resource or the data for the specified hotels.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI.
+        '422':
+          description: Missing a mandatory parameter.
+        '500':
+          description: "We couldn't return the representation due to an internal server error."
+      summary: Get a list of addon offers for the requested hotel identifier.
+      tags:
+        - Addons
+  /api/booking/v0/bookings:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/x-www-form-urlencoded
+      deprecated: false
+      description: "Create a reservation based on the payload. If the client making the request is not subscribed to the hotel specified in the request\r\n            the API will return 403."
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: Specifies the reservation payload.
+          in: body
+          name: reservationRequest
+          required: true
+          schema:
+            $ref: '#/definitions/Reservation'
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '201':
+          description: Return the newly created reservation after successful creation.
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        '401':
+          description: You are not authorized to access this resource or the data for the specified hotels.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI.
+        '422':
+          description: The validation of the payload wasn´t successful.
+        '500':
+          description: "We couldn't return the representation due to an internal server error."
+      summary: Create a reservation.
+      tags:
+        - Reservation
+  '/api/booking/v0/bookings/{confirmationId}':
+    get:
+      consumes: []
+      deprecated: false
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: Specifies the booking confirmation id to process.
+          in: path
+          name: confirmationId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: The details of the reservation specified.
+          schema:
+            $ref: '#/definitions/ReservationsResponse'
+        '403':
+          description: You are not authorized to access this resource or the data for the specified hotels.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI.
+        '500':
+          description: "We couldn't return the representation due to an internal server error."
+      summary: Get reservations by confirmation id
+      tags:
+        - Reservation
+  '/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}':
+    get:
+      consumes: []
+      deprecated: false
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: Specifies the booking confirmation id to process.
+          in: path
+          name: confirmationId
+          required: true
+          type: string
+        - description: Specifies the reservation id to use for all further operations.
+          format: int32
+          in: path
+          name: reservationNumber
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: The details of the reservation specified.
+          schema:
+            $ref: '#/definitions/ReservationResponse'
+        '403':
+          description: You are not authorized to access this resource or the data for the specified hotels.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI.
+        '500':
+          description: "We couldn't return the representation due to an internal server error."
+      summary: Get a reservation
+      tags:
+        - Reservation
+  '/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}/cancel':
+    post:
+      consumes: []
+      deprecated: false
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: Specifies the booking confirmation id to process.
+          in: path
+          name: confirmationId
+          required: true
+          type: string
+        - description: Specifies the reservation id to use for all further operations.
+          format: int32
+          in: path
+          name: reservationNumber
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CancellationResponse'
+      summary: Cancels reservation
+      tags:
+        - Reservation
+  /api/booking/v0/rates:
+    get:
+      consumes: []
+      deprecated: false
+      description: "The booking availability endpoint gives the client all room and rate\r\n             combinations for the given timeframe, for the given number of adults and\r\n             number of children per room. The resultset can be further reduced by\r\n             specifying a channel, rate plan or room type."
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: Specifies the hotel id to process.
+          format: int32
+          in: query
+          name: hotelId
+          required: true
+          type: integer
+        - description: 'Date of arrival for the guest in the ISO-8601 format "YYYY-MM-DD".'
+          format: date-time
+          in: query
+          name: arrivalDate
+          required: true
+          type: string
+        - description: 'Date of departure for the guest in the ISO-8601 format "YYYY-MM-DD".'
+          format: date-time
+          in: query
+          name: departureDate
+          required: true
+          type: string
+        - description: Channel Code the rate plan needs to be configured for.
+          in: query
+          name: channelCode
+          required: true
+          type: string
+        - description: Number of adults per room.
+          format: byte
+          in: query
+          name: adults
+          required: true
+          type: string
+        - description: Number of rooms (default is 1).
+          format: byte
+          in: query
+          name: rooms
+          required: false
+          type: string
+        - description: Only return offers with rates for the specified room type code.
+          in: query
+          name: roomType
+          required: false
+          type: string
+        - description: Only return offers for the specified room type code.
+          in: query
+          name: ratePlanCode
+          required: false
+          type: string
+        - description: Only return offers for the specified group code.
+          in: query
+          name: groupCode
+          required: false
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: "An array of offers for each of the hotels listed in the hetras-hotels\r\n            header. Only hotels with availability for the specified criteria are in the\r\n            list. If the list is empty none of the specified hotels offer available rooms."
+          schema:
+            $ref: '#/definitions/Rates'
+        '400':
+          description: Some request parameters are invalid
+        '403':
+          description: You are not authorized to access this resource or the data for the specified hotels.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI.
+        '422':
+          description: Missing a mandatory parameter.
+        '500':
+          description: "We couldn't return the representation due to an internal server error."
+      summary: Get a list of offers for the requested hotel identifier.
+      tags:
+        - Rates
 definitions:
   AcceptedGuaranteeTypes:
     properties:
@@ -1088,361 +1446,3 @@ definitions:
         description: The token id you get from the payment service provider
         type: string
     type: object
-host: api.hetras-certification.net
-info:
-  title: hetras booking API v0
-  version: v0
-  x-logo:
-    url: 'https://hetras.zendesk.com/hc/logo'
-  x-origin:
-    format: swagger
-    url: 'https://developer.hetras.com/swagger/spec/BookingAPIv0.json'
-    version: '2.0'
-  x-providerName: hetras-certification.net
-  x-serviceName: booking
-paths:
-  /api/booking/v0/addons:
-    get:
-      consumes: []
-      deprecated: false
-      description: "The booking addons endpoint gives the client all service addon\r\n             combinations for the given rate plan, room type, timeframe, for the given number of adults and\r\n             number of children per room"
-      parameters:
-        - description: Application identifier
-          in: header
-          name: App-Id
-          required: true
-          type: string
-          x-data-threescale-name: app_ids
-        - description: Application key.
-          in: header
-          name: App-Key
-          required: true
-          type: string
-          x-data-threescale-name: app_keys
-        - description: Specifies the hotel id to process.
-          format: int32
-          in: query
-          name: hotelId
-          required: true
-          type: integer
-        - description: 'Date of arrival for the guest in the ISO-8601 format "YYYY-MM-DD".'
-          format: date-time
-          in: query
-          name: arrivalDate
-          required: true
-          type: string
-        - description: 'Date of departure for the guest in the ISO-8601 format "YYYY-MM-DD".'
-          format: date-time
-          in: query
-          name: departureDate
-          required: true
-          type: string
-        - description: Channel Code the rate plan needs to be configured for.
-          in: query
-          name: channelCode
-          required: true
-          type: string
-        - description: Number of adults per room.
-          format: byte
-          in: query
-          name: adults
-          required: true
-          type: string
-        - description: Number of rooms.
-          format: byte
-          in: query
-          name: rooms
-          required: true
-          type: string
-        - description: Only return offers with rates for the specified room type code.
-          in: query
-          name: roomType
-          required: true
-          type: string
-        - description: Only return offers for the specified room type code.
-          in: query
-          name: ratePlanCode
-          required: true
-          type: string
-      produces:
-        - application/json
-        - text/json
-      responses:
-        '200':
-          description: "An array of offers for each of the hotels listed in the hetras-hotels\r\n            header. Only hotels with availability for the specified criteria are in the\r\n            list. If the list is empty none of the specified hotels offer available rooms."
-          schema:
-            $ref: '#/definitions/Addons'
-        '400':
-          description: Some request parameters are invalid
-        '403':
-          description: You are not authorized to access this resource or the data for the specified hotels.
-        '404':
-          description: Not Found. The server has not found anything matching the Request-URI.
-        '422':
-          description: Missing a mandatory parameter.
-        '500':
-          description: "We couldn't return the representation due to an internal server error."
-      summary: Get a list of addon offers for the requested hotel identifier.
-      tags:
-        - Addons
-  /api/booking/v0/bookings:
-    post:
-      consumes:
-        - application/json
-        - text/json
-        - application/x-www-form-urlencoded
-      deprecated: false
-      description: "Create a reservation based on the payload. If the client making the request is not subscribed to the hotel specified in the request\r\n            the API will return 403."
-      parameters:
-        - description: Application identifier
-          in: header
-          name: App-Id
-          required: true
-          type: string
-          x-data-threescale-name: app_ids
-        - description: Application key.
-          in: header
-          name: App-Key
-          required: true
-          type: string
-          x-data-threescale-name: app_keys
-        - description: Specifies the reservation payload.
-          in: body
-          name: reservationRequest
-          required: true
-          schema:
-            $ref: '#/definitions/Reservation'
-      produces:
-        - application/json
-        - text/json
-      responses:
-        '201':
-          description: Return the newly created reservation after successful creation.
-          schema:
-            $ref: '#/definitions/BaseResponse'
-        '401':
-          description: You are not authorized to access this resource or the data for the specified hotels.
-        '404':
-          description: Not Found. The server has not found anything matching the Request-URI.
-        '422':
-          description: The validation of the payload wasn´t successful.
-        '500':
-          description: "We couldn't return the representation due to an internal server error."
-      summary: Create a reservation.
-      tags:
-        - Reservation
-  '/api/booking/v0/bookings/{confirmationId}':
-    get:
-      consumes: []
-      deprecated: false
-      parameters:
-        - description: Application identifier
-          in: header
-          name: App-Id
-          required: true
-          type: string
-          x-data-threescale-name: app_ids
-        - description: Application key.
-          in: header
-          name: App-Key
-          required: true
-          type: string
-          x-data-threescale-name: app_keys
-        - description: Specifies the booking confirmation id to process.
-          in: path
-          name: confirmationId
-          required: true
-          type: string
-      produces:
-        - application/json
-        - text/json
-      responses:
-        '200':
-          description: The details of the reservation specified.
-          schema:
-            $ref: '#/definitions/ReservationsResponse'
-        '403':
-          description: You are not authorized to access this resource or the data for the specified hotels.
-        '404':
-          description: Not Found. The server has not found anything matching the Request-URI.
-        '500':
-          description: "We couldn't return the representation due to an internal server error."
-      summary: Get reservations by confirmation id
-      tags:
-        - Reservation
-  '/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}':
-    get:
-      consumes: []
-      deprecated: false
-      parameters:
-        - description: Application identifier
-          in: header
-          name: App-Id
-          required: true
-          type: string
-          x-data-threescale-name: app_ids
-        - description: Application key.
-          in: header
-          name: App-Key
-          required: true
-          type: string
-          x-data-threescale-name: app_keys
-        - description: Specifies the booking confirmation id to process.
-          in: path
-          name: confirmationId
-          required: true
-          type: string
-        - description: Specifies the reservation id to use for all further operations.
-          format: int32
-          in: path
-          name: reservationNumber
-          required: true
-          type: integer
-      produces:
-        - application/json
-        - text/json
-      responses:
-        '200':
-          description: The details of the reservation specified.
-          schema:
-            $ref: '#/definitions/ReservationResponse'
-        '403':
-          description: You are not authorized to access this resource or the data for the specified hotels.
-        '404':
-          description: Not Found. The server has not found anything matching the Request-URI.
-        '500':
-          description: "We couldn't return the representation due to an internal server error."
-      summary: Get a reservation
-      tags:
-        - Reservation
-  '/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}/cancel':
-    post:
-      consumes: []
-      deprecated: false
-      parameters:
-        - description: Application identifier
-          in: header
-          name: App-Id
-          required: true
-          type: string
-          x-data-threescale-name: app_ids
-        - description: Application key.
-          in: header
-          name: App-Key
-          required: true
-          type: string
-          x-data-threescale-name: app_keys
-        - description: Specifies the booking confirmation id to process.
-          in: path
-          name: confirmationId
-          required: true
-          type: string
-        - description: Specifies the reservation id to use for all further operations.
-          format: int32
-          in: path
-          name: reservationNumber
-          required: true
-          type: integer
-      produces:
-        - application/json
-        - text/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/CancellationResponse'
-      summary: Cancels reservation
-      tags:
-        - Reservation
-  /api/booking/v0/rates:
-    get:
-      consumes: []
-      deprecated: false
-      description: "The booking availability endpoint gives the client all room and rate\r\n             combinations for the given timeframe, for the given number of adults and\r\n             number of children per room. The resultset can be further reduced by\r\n             specifying a channel, rate plan or room type."
-      parameters:
-        - description: Application identifier
-          in: header
-          name: App-Id
-          required: true
-          type: string
-          x-data-threescale-name: app_ids
-        - description: Application key.
-          in: header
-          name: App-Key
-          required: true
-          type: string
-          x-data-threescale-name: app_keys
-        - description: Specifies the hotel id to process.
-          format: int32
-          in: query
-          name: hotelId
-          required: true
-          type: integer
-        - description: 'Date of arrival for the guest in the ISO-8601 format "YYYY-MM-DD".'
-          format: date-time
-          in: query
-          name: arrivalDate
-          required: true
-          type: string
-        - description: 'Date of departure for the guest in the ISO-8601 format "YYYY-MM-DD".'
-          format: date-time
-          in: query
-          name: departureDate
-          required: true
-          type: string
-        - description: Channel Code the rate plan needs to be configured for.
-          in: query
-          name: channelCode
-          required: true
-          type: string
-        - description: Number of adults per room.
-          format: byte
-          in: query
-          name: adults
-          required: true
-          type: string
-        - description: Number of rooms (default is 1).
-          format: byte
-          in: query
-          name: rooms
-          required: false
-          type: string
-        - description: Only return offers with rates for the specified room type code.
-          in: query
-          name: roomType
-          required: false
-          type: string
-        - description: Only return offers for the specified room type code.
-          in: query
-          name: ratePlanCode
-          required: false
-          type: string
-        - description: Only return offers for the specified group code.
-          in: query
-          name: groupCode
-          required: false
-          type: string
-      produces:
-        - application/json
-        - text/json
-      responses:
-        '200':
-          description: "An array of offers for each of the hotels listed in the hetras-hotels\r\n            header. Only hotels with availability for the specified criteria are in the\r\n            list. If the list is empty none of the specified hotels offer available rooms."
-          schema:
-            $ref: '#/definitions/Rates'
-        '400':
-          description: Some request parameters are invalid
-        '403':
-          description: You are not authorized to access this resource or the data for the specified hotels.
-        '404':
-          description: Not Found. The server has not found anything matching the Request-URI.
-        '422':
-          description: Missing a mandatory parameter.
-        '500':
-          description: "We couldn't return the representation due to an internal server error."
-      summary: Get a list of offers for the requested hotel identifier.
-      tags:
-        - Rates
-schemes:
-  - https
-swagger: '2.0'

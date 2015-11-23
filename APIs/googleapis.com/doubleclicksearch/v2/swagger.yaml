@@ -1,4 +1,435 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.googleapis.com
 basePath: /doubleclicksearch/v2
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: 'Report and modify your advertising data in DoubleClick Search (for example, campaigns, ad groups, keywords, and conversions).'
+  title: DoubleClick Search API
+  version: v2
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.doubleclickbygoogle.com/static/core/img/doubleclick-google-logo-wide.svg'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/doubleclicksearch/v2/rest'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: doubleclicksearch
+externalDocs:
+  url: 'https://developers.google.com/doubleclick-search/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/doubleclicksearch': View and manage your advertising data in DoubleClick Search
+    type: oauth2
+parameters:
+  alt:
+    default: json
+    description: Data format for the response.
+    enum:
+      - json
+    in: query
+    name: alt
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    in: query
+    name: quotaUser
+    type: string
+  userIp:
+    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    in: query
+    name: userIp
+    type: string
+paths:
+  '/agency/{agencyId}/advertiser/{advertiserId}/engine/{engineAccountId}/conversion':
+    get:
+      description: Retrieves a list of conversions from a DoubleClick Search engine account.
+      operationId: doubleclicksearch.conversion.get
+      parameters:
+        - description: Numeric ID of the agency.
+          in: path
+          name: agencyId
+          required: true
+          type: string
+        - description: Numeric ID of the advertiser.
+          in: path
+          name: advertiserId
+          required: true
+          type: string
+        - description: Numeric ID of the engine account.
+          in: path
+          name: engineAccountId
+          required: true
+          type: string
+        - description: Last date (inclusive) on which to retrieve conversions. Format is yyyymmdd.
+          in: query
+          maximum: 99991231
+          minimum: 20091101
+          name: endDate
+          required: true
+          type: integer
+        - description: The number of conversions to return per call.
+          in: query
+          maximum: 1000
+          minimum: 1
+          name: rowCount
+          required: true
+          type: integer
+        - description: First date (inclusive) on which to retrieve conversions. Format is yyyymmdd.
+          in: query
+          maximum: 99991231
+          minimum: 20091101
+          name: startDate
+          required: true
+          type: integer
+        - description: The 0-based starting index for retrieving conversions results.
+          in: query
+          name: startRow
+          required: true
+          type: integer
+        - description: Numeric ID of the ad group.
+          in: query
+          name: adGroupId
+          type: string
+        - description: Numeric ID of the ad.
+          in: query
+          name: adId
+          type: string
+        - description: Numeric ID of the campaign.
+          in: query
+          name: campaignId
+          type: string
+        - description: Numeric ID of the criterion.
+          in: query
+          name: criterionId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ConversionList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/doubleclicksearch'
+      tags:
+        - conversion
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/agency/{agencyId}/advertiser/{advertiserId}/savedcolumns':
+    get:
+      description: Retrieve the list of saved columns for a specified advertiser.
+      operationId: doubleclicksearch.savedColumns.list
+      parameters:
+        - description: DS ID of the agency.
+          in: path
+          name: agencyId
+          required: true
+          type: string
+        - description: DS ID of the advertiser.
+          in: path
+          name: advertiserId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SavedColumnList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/doubleclicksearch'
+      tags:
+        - savedColumns
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /conversion:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates a batch of conversions in DoubleClick Search. This method supports patch semantics.
+      operationId: doubleclicksearch.conversion.patch
+      parameters:
+        - description: Numeric ID of the advertiser.
+          in: query
+          name: advertiserId
+          required: true
+          type: string
+        - description: Numeric ID of the agency.
+          in: query
+          name: agencyId
+          required: true
+          type: string
+        - description: Last date (inclusive) on which to retrieve conversions. Format is yyyymmdd.
+          in: query
+          maximum: 99991231
+          minimum: 20091101
+          name: endDate
+          required: true
+          type: integer
+        - description: Numeric ID of the engine account.
+          in: query
+          name: engineAccountId
+          required: true
+          type: string
+        - description: The number of conversions to return per call.
+          in: query
+          maximum: 1000
+          minimum: 1
+          name: rowCount
+          required: true
+          type: integer
+        - description: First date (inclusive) on which to retrieve conversions. Format is yyyymmdd.
+          in: query
+          maximum: 99991231
+          minimum: 20091101
+          name: startDate
+          required: true
+          type: integer
+        - description: The 0-based starting index for retrieving conversions results.
+          in: query
+          name: startRow
+          required: true
+          type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ConversionList'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ConversionList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/doubleclicksearch'
+      tags:
+        - conversion
+    post:
+      description: Inserts a batch of new conversions into DoubleClick Search.
+      operationId: doubleclicksearch.conversion.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ConversionList'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ConversionList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/doubleclicksearch'
+      tags:
+        - conversion
+    put:
+      description: Updates a batch of conversions in DoubleClick Search.
+      operationId: doubleclicksearch.conversion.update
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ConversionList'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ConversionList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/doubleclicksearch'
+      tags:
+        - conversion
+  /conversion/updateAvailability:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Updates the availabilities of a batch of floodlight activities in DoubleClick Search.
+      operationId: doubleclicksearch.conversion.updateAvailability
+      parameters:
+        - in: body
+          name: empty
+          schema:
+            $ref: '#/definitions/UpdateAvailabilityRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/UpdateAvailabilityResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/doubleclicksearch'
+      tags:
+        - conversion
+  /reports:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Inserts a report request into the reporting system.
+      operationId: doubleclicksearch.reports.request
+      parameters:
+        - in: body
+          name: reportRequest
+          schema:
+            $ref: '#/definitions/ReportRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Report'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/doubleclicksearch'
+      tags:
+        - reports
+  /reports/generate:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Generates and returns a report immediately.
+      operationId: doubleclicksearch.reports.generate
+      parameters:
+        - in: body
+          name: reportRequest
+          schema:
+            $ref: '#/definitions/ReportRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Report'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/doubleclicksearch'
+      tags:
+        - reports
+  '/reports/{reportId}':
+    get:
+      description: Polls for the status of a report request.
+      operationId: doubleclicksearch.reports.get
+      parameters:
+        - description: ID of the report request being polled.
+          in: path
+          name: reportId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Report'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/doubleclicksearch'
+      tags:
+        - reports
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/reports/{reportId}/files/{reportFragment}':
+    get:
+      description: Downloads a report file encoded in UTF-8.
+      operationId: doubleclicksearch.reports.getFile
+      parameters:
+        - description: ID of the report.
+          in: path
+          name: reportId
+          required: true
+          type: string
+        - description: The index of the report fragment to download.
+          in: path
+          minimum: 0
+          name: reportFragment
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/doubleclicksearch'
+      tags:
+        - reports
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
 definitions:
   Availability:
     description: A message containing availability data relevant to DoubleClick Search.
@@ -443,434 +874,3 @@ definitions:
           $ref: '#/definitions/Availability'
         type: array
     type: object
-externalDocs:
-  url: 'https://developers.google.com/doubleclick-search/'
-host: www.googleapis.com
-info:
-  contact:
-    name: Google
-    url: 'https://google.com'
-  description: 'Report and modify your advertising data in DoubleClick Search (for example, campaigns, ad groups, keywords, and conversions).'
-  title: DoubleClick Search API
-  version: v2
-  x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
-  x-logo:
-    url: 'https://www.doubleclickbygoogle.com/static/core/img/doubleclick-google-logo-wide.svg'
-  x-origin:
-    format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/doubleclicksearch/v2/rest'
-    version: v1
-  x-preferred: true
-  x-providerName: googleapis.com
-  x-serviceName: doubleclicksearch
-parameters:
-  alt:
-    default: json
-    description: Data format for the response.
-    enum:
-      - json
-    in: query
-    name: alt
-    type: string
-  fields:
-    description: Selector specifying which fields to include in a partial response.
-    in: query
-    name: fields
-    type: string
-  key:
-    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
-    in: query
-    name: key
-    type: string
-  oauth_token:
-    description: OAuth 2.0 token for the current user.
-    in: query
-    name: oauth_token
-    type: string
-  prettyPrint:
-    default: true
-    description: Returns response with indentations and line breaks.
-    in: query
-    name: prettyPrint
-    type: boolean
-  quotaUser:
-    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
-    in: query
-    name: quotaUser
-    type: string
-  userIp:
-    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
-    in: query
-    name: userIp
-    type: string
-paths:
-  '/agency/{agencyId}/advertiser/{advertiserId}/engine/{engineAccountId}/conversion':
-    get:
-      description: Retrieves a list of conversions from a DoubleClick Search engine account.
-      operationId: doubleclicksearch.conversion.get
-      parameters:
-        - description: Numeric ID of the agency.
-          in: path
-          name: agencyId
-          required: true
-          type: string
-        - description: Numeric ID of the advertiser.
-          in: path
-          name: advertiserId
-          required: true
-          type: string
-        - description: Numeric ID of the engine account.
-          in: path
-          name: engineAccountId
-          required: true
-          type: string
-        - description: Last date (inclusive) on which to retrieve conversions. Format is yyyymmdd.
-          in: query
-          maximum: 99991231
-          minimum: 20091101
-          name: endDate
-          required: true
-          type: integer
-        - description: The number of conversions to return per call.
-          in: query
-          maximum: 1000
-          minimum: 1
-          name: rowCount
-          required: true
-          type: integer
-        - description: First date (inclusive) on which to retrieve conversions. Format is yyyymmdd.
-          in: query
-          maximum: 99991231
-          minimum: 20091101
-          name: startDate
-          required: true
-          type: integer
-        - description: The 0-based starting index for retrieving conversions results.
-          in: query
-          name: startRow
-          required: true
-          type: integer
-        - description: Numeric ID of the ad group.
-          in: query
-          name: adGroupId
-          type: string
-        - description: Numeric ID of the ad.
-          in: query
-          name: adId
-          type: string
-        - description: Numeric ID of the campaign.
-          in: query
-          name: campaignId
-          type: string
-        - description: Numeric ID of the criterion.
-          in: query
-          name: criterionId
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ConversionList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclicksearch'
-      tags:
-        - conversion
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/agency/{agencyId}/advertiser/{advertiserId}/savedcolumns':
-    get:
-      description: Retrieve the list of saved columns for a specified advertiser.
-      operationId: doubleclicksearch.savedColumns.list
-      parameters:
-        - description: DS ID of the agency.
-          in: path
-          name: agencyId
-          required: true
-          type: string
-        - description: DS ID of the advertiser.
-          in: path
-          name: advertiserId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/SavedColumnList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclicksearch'
-      tags:
-        - savedColumns
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  /conversion:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    patch:
-      description: Updates a batch of conversions in DoubleClick Search. This method supports patch semantics.
-      operationId: doubleclicksearch.conversion.patch
-      parameters:
-        - description: Numeric ID of the advertiser.
-          in: query
-          name: advertiserId
-          required: true
-          type: string
-        - description: Numeric ID of the agency.
-          in: query
-          name: agencyId
-          required: true
-          type: string
-        - description: Last date (inclusive) on which to retrieve conversions. Format is yyyymmdd.
-          in: query
-          maximum: 99991231
-          minimum: 20091101
-          name: endDate
-          required: true
-          type: integer
-        - description: Numeric ID of the engine account.
-          in: query
-          name: engineAccountId
-          required: true
-          type: string
-        - description: The number of conversions to return per call.
-          in: query
-          maximum: 1000
-          minimum: 1
-          name: rowCount
-          required: true
-          type: integer
-        - description: First date (inclusive) on which to retrieve conversions. Format is yyyymmdd.
-          in: query
-          maximum: 99991231
-          minimum: 20091101
-          name: startDate
-          required: true
-          type: integer
-        - description: The 0-based starting index for retrieving conversions results.
-          in: query
-          name: startRow
-          required: true
-          type: integer
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ConversionList'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ConversionList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclicksearch'
-      tags:
-        - conversion
-    post:
-      description: Inserts a batch of new conversions into DoubleClick Search.
-      operationId: doubleclicksearch.conversion.insert
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ConversionList'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ConversionList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclicksearch'
-      tags:
-        - conversion
-    put:
-      description: Updates a batch of conversions in DoubleClick Search.
-      operationId: doubleclicksearch.conversion.update
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ConversionList'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ConversionList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclicksearch'
-      tags:
-        - conversion
-  /conversion/updateAvailability:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Updates the availabilities of a batch of floodlight activities in DoubleClick Search.
-      operationId: doubleclicksearch.conversion.updateAvailability
-      parameters:
-        - in: body
-          name: empty
-          schema:
-            $ref: '#/definitions/UpdateAvailabilityRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/UpdateAvailabilityResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclicksearch'
-      tags:
-        - conversion
-  /reports:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Inserts a report request into the reporting system.
-      operationId: doubleclicksearch.reports.request
-      parameters:
-        - in: body
-          name: reportRequest
-          schema:
-            $ref: '#/definitions/ReportRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Report'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclicksearch'
-      tags:
-        - reports
-  /reports/generate:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Generates and returns a report immediately.
-      operationId: doubleclicksearch.reports.generate
-      parameters:
-        - in: body
-          name: reportRequest
-          schema:
-            $ref: '#/definitions/ReportRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Report'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclicksearch'
-      tags:
-        - reports
-  '/reports/{reportId}':
-    get:
-      description: Polls for the status of a report request.
-      operationId: doubleclicksearch.reports.get
-      parameters:
-        - description: ID of the report request being polled.
-          in: path
-          name: reportId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Report'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclicksearch'
-      tags:
-        - reports
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/reports/{reportId}/files/{reportFragment}':
-    get:
-      description: Downloads a report file encoded in UTF-8.
-      operationId: doubleclicksearch.reports.getFile
-      parameters:
-        - description: ID of the report.
-          in: path
-          name: reportId
-          required: true
-          type: string
-        - description: The index of the report fragment to download.
-          in: path
-          minimum: 0
-          name: reportFragment
-          required: true
-          type: integer
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclicksearch'
-      tags:
-        - reports
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/doubleclicksearch': View and manage your advertising data in DoubleClick Search
-    type: oauth2
-swagger: '2.0'

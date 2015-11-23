@@ -1,5 +1,8 @@
-basePath: /
+swagger: '2.0'
+schemes:
+  - https
 host: dweet.io
+basePath: /
 info:
   description: Ridiculously simple messaging (and alerts) for the Internet of Things.
   title: dweet.io
@@ -9,6 +12,13 @@ info:
     url: 'https://dweet.io/play/definition'
     version: '1.2'
   x-providerName: dweet.io
+tags:
+  - description: create or read dweets.
+    name: dweets
+  - description: alerts for things.
+    name: alerts
+  - description: lock and unlock things.
+    name: locks
 paths:
   '/alert/{who}/when/{thing}/{condition}':
     get:
@@ -226,13 +236,3 @@ paths:
       summary: Unlock a thing.
       tags:
         - locks
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - description: create or read dweets.
-    name: dweets
-  - description: alerts for things.
-    name: alerts
-  - description: lock and unlock things.
-    name: locks

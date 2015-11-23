@@ -1,453 +1,8 @@
-basePath: /
-definitions:
-  Empty:
-    description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`.'
-    type: object
-  HttpRequest:
-    description: A common proto for logging HTTP requests.
-    properties:
-      cacheHit:
-        description: Whether or not an entity was served from cache (with or without validation).
-        type: boolean
-      referer:
-        description: 'Referer (a.k.a. referrer) URL of request, as defined in http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html.'
-        type: string
-      remoteIp:
-        description: IP address of the client who issues the HTTP request. Could be either IPv4 or IPv6.
-        type: string
-      requestMethod:
-        description: 'Request method, such as `GET`, `HEAD`, `PUT` or `POST`.'
-        type: string
-      requestSize:
-        description: 'Size of the HTTP request message in bytes, including request headers and the request body.'
-        format: int64
-        type: string
-      requestUrl:
-        description: 'Contains the scheme (http|https), the host name, the path and the query portion of the URL that was requested.'
-        type: string
-      responseSize:
-        description: 'Size of the HTTP response message in bytes sent back to the client, including response headers and response body.'
-        format: int64
-        type: string
-      status:
-        description: 'A response code indicates the status of response, e.g., 200.'
-        format: int32
-        type: integer
-      userAgent:
-        description: 'User agent sent by the client, e.g., "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; Q312461; .NET CLR 1.0.3705)".'
-        type: string
-      validatedWithOriginServer:
-        description: Whether or not the response was validated with the origin server before being served from cache. This field is only meaningful if cache_hit is True.
-        type: boolean
-    type: object
-  ListLogMetricsResponse:
-    description: Result returned from ListLogMetrics.
-    properties:
-      metrics:
-        description: The list of metrics that was requested.
-        items:
-          $ref: '#/definitions/LogMetric'
-        type: array
-      nextPageToken:
-        description: 'If there are more results, then `nextPageToken` is returned in the response. To get the next batch of entries, use the value of `nextPageToken` as `pageToken` in the next call of `ListLogMetrics`. If `nextPageToken` is empty, then there are no more results.'
-        type: string
-    type: object
-  ListLogServiceIndexesResponse:
-    description: Result returned from ListLogServiceIndexesRequest.
-    properties:
-      nextPageToken:
-        description: 'If there are more results, then `nextPageToken` is returned in the response. To get the next batch of indexes, use the value of `nextPageToken` as `pageToken` in the next call of `ListLogServiceIndexes`. If `nextPageToken` is empty, then there are no more results.'
-        type: string
-      serviceIndexPrefixes:
-        description: 'A list of log service index values. Each index value has the form `"/value1/value2/..."`, where `value1` is a value in the primary index, `value2` is a value in the secondary index, and so forth.'
-        items:
-          type: string
-        type: array
-    type: object
-  ListLogServiceSinksResponse:
-    description: Result returned from `ListLogServiceSinks`.
-    properties:
-      sinks:
-        description: 'The requested log service sinks. If a returned `LogSink` object has an empty `destination` field, the client can retrieve the complete `LogSink` object by calling `logServices.sinks.get`.'
-        items:
-          $ref: '#/definitions/LogSink'
-        type: array
-    type: object
-  ListLogServicesResponse:
-    description: Result returned from `ListLogServicesRequest`.
-    properties:
-      logServices:
-        description: A list of log services.
-        items:
-          $ref: '#/definitions/LogService'
-        type: array
-      nextPageToken:
-        description: 'If there are more results, then `nextPageToken` is returned in the response. To get the next batch of services, use the value of `nextPageToken` as `pageToken` in the next call of `ListLogServices`. If `nextPageToken` is empty, then there are no more results.'
-        type: string
-    type: object
-  ListLogSinksResponse:
-    description: Result returned from `ListLogSinks`.
-    properties:
-      sinks:
-        description: 'The requested log sinks. If a returned `LogSink` object has an empty `destination` field, the client can retrieve the complete `LogSink` object by calling `log.sinks.get`.'
-        items:
-          $ref: '#/definitions/LogSink'
-        type: array
-    type: object
-  ListLogsResponse:
-    description: Result returned from ListLogs.
-    properties:
-      logs:
-        description: A list of log descriptions matching the criteria.
-        items:
-          $ref: '#/definitions/Log'
-        type: array
-      nextPageToken:
-        description: 'If there are more results, then `nextPageToken` is returned in the response. To get the next batch of logs, use the value of `nextPageToken` as `pageToken` in the next call of `ListLogs`. If `nextPageToken` is empty, then there are no more results.'
-        type: string
-    type: object
-  ListSinksResponse:
-    description: Result returned from `ListSinks`.
-    properties:
-      sinks:
-        description: 'The requested sinks. If a returned `LogSink` object has an empty `destination` field, the client can retrieve the complete `LogSink` object by calling `projects.sinks.get`.'
-        items:
-          $ref: '#/definitions/LogSink'
-        type: array
-    type: object
-  Log:
-    description: '_Output only._ Describes a log, which is a named stream of log entries.'
-    properties:
-      displayName:
-        description: '_Optional._ The common name of the log. Example: `"request_log"`.'
-        type: string
-      name:
-        description: 'The resource name of the log. Example: `"/projects/my-gcp-project-id/logs/LOG_NAME"`, where `LOG_NAME` is the URL-encoded given name of the log. The log includes those log entries whose `LogEntry.log` field contains this given name. To avoid name collisions, it is a best practice to prefix the given log name with the service name, but this is not required. Examples of log given names: `"appengine.googleapis.com/request_log"`, `"apache-access"`.'
-        type: string
-      payloadType:
-        description: _Optional_. A URI representing the expected payload type for log entries.
-        type: string
-    type: object
-  LogEntry:
-    description: An individual entry in a log.
-    properties:
-      httpRequest:
-        $ref: '#/definitions/HttpRequest'
-        description: 'Information about the HTTP request associated with this log entry, if applicable.'
-      insertId:
-        description: 'A unique ID for the log entry. If you provide this field, the logging service considers other log entries in the same log with the same ID as duplicates which can be removed.'
-        type: string
-      log:
-        description: 'The log to which this entry belongs. When a log entry is ingested, the value of this field is set by the logging system.'
-        type: string
-      metadata:
-        $ref: '#/definitions/LogEntryMetadata'
-        description: Information about the log entry.
-      protoPayload:
-        additionalProperties:
-          description: Properties of the object. Contains field @ype with type URL.
-        description: 'The log entry payload, represented as a protocol buffer that is expressed as a JSON object. You can only pass `protoPayload` values that belong to a set of approved types.'
-        type: object
-      structPayload:
-        additionalProperties:
-          description: Properties of the object.
-        description: 'The log entry payload, represented as a structure that is expressed as a JSON object.'
-        type: object
-      textPayload:
-        description: 'The log entry payload, represented as a Unicode string (UTF-8).'
-        type: string
-    type: object
-  LogEntryMetadata:
-    description: 'Additional data that is associated with a log entry, set by the service creating the log entry.'
-    properties:
-      labels:
-        additionalProperties:
-          type: string
-        description: 'A set of (key, value) data that provides additional information about the log entry. If the log entry is from one of the Google Cloud Platform sources listed below, the indicated (key, value) information must be provided: Google App Engine, service_name `appengine.googleapis.com`: "appengine.googleapis.com/module_id",  "appengine.googleapis.com/version_id",  and one of: "appengine.googleapis.com/replica_index",  "appengine.googleapis.com/clone_id",  or else provide the following Compute Engine labels: Google Compute Engine, service_name `compute.googleapis.com`: "compute.googleapis.com/resource_type", "instance" "compute.googleapis.com/resource_id",'
-        type: object
-      projectId:
-        description: The project ID of the Google Cloud Platform service that created the log entry.
-        type: string
-      region:
-        description: 'The region name of the Google Cloud Platform service that created the log entry. For example, `"us-central1"`.'
-        type: string
-      serviceName:
-        description: 'The API name of the Google Cloud Platform service that created the log entry. For example, `"compute.googleapis.com"`.'
-        type: string
-      severity:
-        description: The severity of the log entry.
-        enum:
-          - DEFAULT
-          - DEBUG
-          - INFO
-          - NOTICE
-          - WARNING
-          - ERROR
-          - CRITICAL
-          - ALERT
-          - EMERGENCY
-        type: string
-      timestamp:
-        description: 'The time the event described by the log entry occurred. Timestamps must be later than January 1, 1970.'
-        type: string
-      userId:
-        description: 'The fully-qualified email address of the authenticated user that performed or requested the action represented by the log entry. If the log entry does not apply to an action taken by an authenticated user, then the field should be empty.'
-        type: string
-      zone:
-        description: 'The zone of the Google Cloud Platform service that created the log entry. For example, `"us-central1-a"`.'
-        type: string
-    type: object
-  LogError:
-    description: Describes a problem with a logging resource or operation.
-    properties:
-      resource:
-        description: 'A resource name associated with this error. For example, the name of a Cloud Storage bucket that has insufficient permissions to be a destination for log entries.'
-        type: string
-      status:
-        $ref: '#/definitions/Status'
-        description: 'The error description, including a classification code, an error message, and other details.'
-      timeNanos:
-        description: 'The time the error was observed, in nanoseconds since the Unix epoch.'
-        format: int64
-        type: string
-    type: object
-  LogLine:
-    description: Application log line emitted while processing a request.
-    properties:
-      logMessage:
-        description: App provided log message.
-        type: string
-      severity:
-        description: Severity of log.
-        enum:
-          - DEFAULT
-          - DEBUG
-          - INFO
-          - NOTICE
-          - WARNING
-          - ERROR
-          - CRITICAL
-          - ALERT
-          - EMERGENCY
-        type: string
-      sourceLocation:
-        $ref: '#/definitions/SourceLocation'
-        description: Line of code that generated this log message.
-      time:
-        description: Time when log entry was made. May be inaccurate.
-        type: string
-    type: object
-  LogMetric:
-    description: Describes a logs-based metric. The value of the metric is the number of log entries in your project that match a logs filter.
-    properties:
-      description:
-        description: A description of this metric.
-        type: string
-      filter:
-        description: 'An [advanced logs filter](/logging/docs/view/advanced_filters). Example: `"log:syslog AND metadata.severity>=ERROR"`.'
-        type: string
-      name:
-        description: "The client-assigned name for this metric, such as `\"severe_errors\"`. Metric names are limited to 1000 characters and can include only the following characters: `A-Z`, `a-z`, `0-9`, and the special characters `_-.,+!*',()%/\\`. The slash character (`/`) denotes a hierarchy of name pieces, and it cannot be the first character of the name."
-        type: string
-    type: object
-  LogService:
-    description: _Output only._ Describes a service that writes log entries.
-    properties:
-      indexKeys:
-        description: 'A list of the names of the keys used to index and label individual log entries from this service. The first two keys are used as the primary and secondary index, respectively. Additional keys may be used to label the entries. For example, App Engine indexes its entries by module and by version, so its `indexKeys` field is the following: [ "appengine.googleapis.com/module_id", "appengine.googleapis.com/version_id" ]'
-        items:
-          type: string
-        type: array
-      name:
-        description: "The service's name. Example: `\"appengine.googleapis.com\"`. Log names beginning with this string are reserved for this service. This value can appear in the `LogEntry.metadata.serviceName` field of log entries associated with this log service."
-        type: string
-    type: object
-  LogSink:
-    description: Describes where log entries are written outside of Cloud Logging.
-    properties:
-      destination:
-        description: 'The resource name of the destination. Cloud Logging writes designated log entries to this destination. For example, `"storage.googleapis.com/my-output-bucket"`.'
-        type: string
-      errors:
-        description: '_Output only._ If any errors occur when invoking a sink method, then this field contains descriptions of the errors.'
-        items:
-          $ref: '#/definitions/LogError'
-        type: array
-      filter:
-        description: 'An advanced logs filter. If present, only log entries matching the filter are written. Only project sinks use this field; log sinks and log service sinks must not include a filter.'
-        type: string
-      name:
-        description: 'The client-assigned name of this sink. For example, `"my-syslog-sink"`. The name must be unique among the sinks of a similar kind in the project.'
-        type: string
-    type: object
-  RequestLog:
-    description: Complete log information about a single request to an application.
-    properties:
-      appEngineRelease:
-        description: App Engine release version string.
-        type: string
-      appId:
-        description: Identifies the application that handled this request.
-        type: string
-      cost:
-        description: An indication of the relative cost of serving this request.
-        format: double
-        type: number
-      endTime:
-        description: Time at which request was known to end processing.
-        type: string
-      finished:
-        description: 'If true, represents a finished request. Otherwise, the request is active.'
-        type: boolean
-      host:
-        description: The Internet host and port number of the resource being requested.
-        type: string
-      httpVersion:
-        description: HTTP version of request.
-        type: string
-      instanceId:
-        description: An opaque identifier for the instance that handled the request.
-        type: string
-      instanceIndex:
-        description: 'If the instance that processed this request was individually addressable (i.e. belongs to a manually scaled module), this is the index of the instance.'
-        format: int32
-        type: integer
-      ip:
-        description: Origin IP address.
-        type: string
-      latency:
-        description: Latency of the request.
-        type: string
-      line:
-        description: 'List of log lines emitted by the application while serving this request, if requested.'
-        items:
-          $ref: '#/definitions/LogLine'
-        type: array
-      megaCycles:
-        description: Number of CPU megacycles used to process request.
-        format: int64
-        type: string
-      method:
-        description: 'Request method, such as `GET`, `HEAD`, `PUT`, `POST`, or `DELETE`.'
-        type: string
-      moduleId:
-        description: Identifies the module of the application that handled this request.
-        type: string
-      nickname:
-        description: "A string that identifies a logged-in user who made this request, or empty if the user is not logged in. Most likely, this is the part of the user's email before the '@' sign. The field value is the same for different requests from the same user, but different users may have a similar name. This information is also available to the application via Users API. This field will be populated starting with App Engine 1.9.21."
-        type: string
-      pendingTime:
-        description: 'Time this request spent in the pending request queue, if it was pending at all.'
-        type: string
-      referrer:
-        description: Referrer URL of request.
-        type: string
-      requestId:
-        description: 'Globally unique identifier for a request, based on request start time. Request IDs for requests which started later will compare greater as strings than those for requests which started earlier.'
-        type: string
-      resource:
-        description: "Contains the path and query portion of the URL that was requested. For example, if the URL was \"http://example.com/app?name=val\", the resource would be \"/app?name=val\". Any trailing fragment (separated by a '#' character) will not be included."
-        type: string
-      responseSize:
-        description: Size in bytes sent back to client by request.
-        format: int64
-        type: string
-      sourceReference:
-        description: Source code for the application that handled this request. There can be more than one source reference per deployed application if source code is distributed among multiple repositories.
-        items:
-          $ref: '#/definitions/SourceReference'
-        type: array
-      startTime:
-        description: Time at which request was known to have begun processing.
-        type: string
-      status:
-        description: Response status of request.
-        format: int32
-        type: integer
-      taskName:
-        description: Task name of the request (for an offline request).
-        type: string
-      taskQueueName:
-        description: Queue name of the request (for an offline request).
-        type: string
-      traceId:
-        description: Cloud Trace identifier of the trace for this request.
-        type: string
-      urlMapEntry:
-        description: File or class within URL mapping used for request. Useful for tracking down the source code which was responsible for managing request. Especially for multiply mapped handlers.
-        type: string
-      userAgent:
-        description: User agent used for making request.
-        type: string
-      versionId:
-        description: Version of the application that handled this request.
-        type: string
-      wasLoadingRequest:
-        description: Was this request a loading request for this instance?
-        type: boolean
-    type: object
-  SourceLocation:
-    description: Specifies a location in a source file.
-    properties:
-      file:
-        description: 'Source file name. May or may not be a fully qualified name, depending on the runtime environment.'
-        type: string
-      functionName:
-        description: 'Human-readable name of the function or method being invoked, with optional context such as the class or package name, for use in contexts such as the logs viewer where file:line number is less meaningful. This may vary by language, for example: in Java: qual.if.ied.Class.method in Go: dir/package.func in Python: function ...'
-        type: string
-      line:
-        description: Line within the source file.
-        format: int64
-        type: string
-    type: object
-  SourceReference:
-    description: A reference to a particular snapshot of the source tree used to build and deploy an application.
-    properties:
-      repository:
-        description: 'Optional. A URI string identifying the repository. Example: "https://github.com/GoogleCloudPlatform/kubernetes.git"'
-        type: string
-      revisionId:
-        description: 'The canonical (and persistent) identifier of the deployed revision. Example (git): "0035781c50ec7aa23385dc841529ce8a4b70db1b"'
-        type: string
-    type: object
-  Status:
-    description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). The error model is designed to be: - Simple to use and understand for most users - Flexible enough to meet unexpected needs # Overview The `Status` message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed. The error message should be a developer-facing English message that helps developers *understand* and *resolve* the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package `google.rpc` which can be used for common error conditions. # Language mapping The `Status` message is the logical representation of the error model, but it is not necessarily the actual wire format. When the `Status` message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C. # Other uses The error model and the `Status` message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments. Example uses of this error model include: - Partial errors. If a service needs to return partial errors to the client, it may embed the `Status` in the normal response to indicate the partial errors. - Workflow errors. A typical workflow has multiple steps. Each step may have a `Status` message for error reporting purpose. - Batch operations. If a client uses batch request and batch response, the `Status` message should be used directly inside batch response, one for each error sub-response. - Asynchronous operations. If an API call embeds asynchronous operation results in its response, the status of those operations should be represented directly using the `Status` message. - Logging. If some API errors are stored in logs, the message `Status` could be used directly after any stripping needed for security/privacy reasons.'
-    properties:
-      code:
-        description: 'The status code, which should be an enum value of google.rpc.Code.'
-        format: int32
-        type: integer
-      details:
-        description: A list of messages that carry the error details. There will be a common set of message types for APIs to use.
-        items:
-          additionalProperties:
-            description: Properties of the object. Contains field @ype with type URL.
-          type: object
-        type: array
-      message:
-        description: 'A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.'
-        type: string
-    type: object
-  WriteLogEntriesRequest:
-    description: The parameters to WriteLogEntries.
-    properties:
-      commonLabels:
-        additionalProperties:
-          type: string
-        description: "Metadata labels that apply to all log entries in this request, so that you don't have to repeat them in each log entry's `metadata.labels` field. If any of the log entries contains a (key, value) with the same key that is in `commonLabels`, then the entry's (key, value) overrides the one in `commonLabels`."
-        type: object
-      entries:
-        description: Log entries to insert.
-        items:
-          $ref: '#/definitions/LogEntry'
-        type: array
-    type: object
-  WriteLogEntriesResponse:
-    description: Result returned from WriteLogEntries. empty
-    type: object
-externalDocs:
-  url: 'https://cloud.google.com/logging/docs/'
+swagger: '2.0'
+schemes:
+  - https
 host: logging.googleapis.com
+basePath: /
 info:
   contact:
     name: Google
@@ -466,6 +21,20 @@ info:
   x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: logging
+externalDocs:
+  url: 'https://cloud.google.com/logging/docs/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/logging.admin': Administrate log data for your projects
+      'https://www.googleapis.com/auth/logging.read': View log data for your projects
+      'https://www.googleapis.com/auth/logging.write': Submit log data for your projects
+    type: oauth2
 parameters:
   $.xgafv:
     description: V1 error format.
@@ -1466,18 +1035,449 @@ paths:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
         - projects
-schemes:
-  - https
-securityDefinitions:
-  Oauth2:
-    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
-    description: Oauth 2.0 authentication
-    flow: implicit
-    scopes:
-      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/logging.admin': Administrate log data for your projects
-      'https://www.googleapis.com/auth/logging.read': View log data for your projects
-      'https://www.googleapis.com/auth/logging.write': Submit log data for your projects
-    type: oauth2
-swagger: '2.0'
+definitions:
+  Empty:
+    description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`.'
+    type: object
+  HttpRequest:
+    description: A common proto for logging HTTP requests.
+    properties:
+      cacheHit:
+        description: Whether or not an entity was served from cache (with or without validation).
+        type: boolean
+      referer:
+        description: 'Referer (a.k.a. referrer) URL of request, as defined in http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html.'
+        type: string
+      remoteIp:
+        description: IP address of the client who issues the HTTP request. Could be either IPv4 or IPv6.
+        type: string
+      requestMethod:
+        description: 'Request method, such as `GET`, `HEAD`, `PUT` or `POST`.'
+        type: string
+      requestSize:
+        description: 'Size of the HTTP request message in bytes, including request headers and the request body.'
+        format: int64
+        type: string
+      requestUrl:
+        description: 'Contains the scheme (http|https), the host name, the path and the query portion of the URL that was requested.'
+        type: string
+      responseSize:
+        description: 'Size of the HTTP response message in bytes sent back to the client, including response headers and response body.'
+        format: int64
+        type: string
+      status:
+        description: 'A response code indicates the status of response, e.g., 200.'
+        format: int32
+        type: integer
+      userAgent:
+        description: 'User agent sent by the client, e.g., "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; Q312461; .NET CLR 1.0.3705)".'
+        type: string
+      validatedWithOriginServer:
+        description: Whether or not the response was validated with the origin server before being served from cache. This field is only meaningful if cache_hit is True.
+        type: boolean
+    type: object
+  ListLogMetricsResponse:
+    description: Result returned from ListLogMetrics.
+    properties:
+      metrics:
+        description: The list of metrics that was requested.
+        items:
+          $ref: '#/definitions/LogMetric'
+        type: array
+      nextPageToken:
+        description: 'If there are more results, then `nextPageToken` is returned in the response. To get the next batch of entries, use the value of `nextPageToken` as `pageToken` in the next call of `ListLogMetrics`. If `nextPageToken` is empty, then there are no more results.'
+        type: string
+    type: object
+  ListLogServiceIndexesResponse:
+    description: Result returned from ListLogServiceIndexesRequest.
+    properties:
+      nextPageToken:
+        description: 'If there are more results, then `nextPageToken` is returned in the response. To get the next batch of indexes, use the value of `nextPageToken` as `pageToken` in the next call of `ListLogServiceIndexes`. If `nextPageToken` is empty, then there are no more results.'
+        type: string
+      serviceIndexPrefixes:
+        description: 'A list of log service index values. Each index value has the form `"/value1/value2/..."`, where `value1` is a value in the primary index, `value2` is a value in the secondary index, and so forth.'
+        items:
+          type: string
+        type: array
+    type: object
+  ListLogServiceSinksResponse:
+    description: Result returned from `ListLogServiceSinks`.
+    properties:
+      sinks:
+        description: 'The requested log service sinks. If a returned `LogSink` object has an empty `destination` field, the client can retrieve the complete `LogSink` object by calling `logServices.sinks.get`.'
+        items:
+          $ref: '#/definitions/LogSink'
+        type: array
+    type: object
+  ListLogServicesResponse:
+    description: Result returned from `ListLogServicesRequest`.
+    properties:
+      logServices:
+        description: A list of log services.
+        items:
+          $ref: '#/definitions/LogService'
+        type: array
+      nextPageToken:
+        description: 'If there are more results, then `nextPageToken` is returned in the response. To get the next batch of services, use the value of `nextPageToken` as `pageToken` in the next call of `ListLogServices`. If `nextPageToken` is empty, then there are no more results.'
+        type: string
+    type: object
+  ListLogSinksResponse:
+    description: Result returned from `ListLogSinks`.
+    properties:
+      sinks:
+        description: 'The requested log sinks. If a returned `LogSink` object has an empty `destination` field, the client can retrieve the complete `LogSink` object by calling `log.sinks.get`.'
+        items:
+          $ref: '#/definitions/LogSink'
+        type: array
+    type: object
+  ListLogsResponse:
+    description: Result returned from ListLogs.
+    properties:
+      logs:
+        description: A list of log descriptions matching the criteria.
+        items:
+          $ref: '#/definitions/Log'
+        type: array
+      nextPageToken:
+        description: 'If there are more results, then `nextPageToken` is returned in the response. To get the next batch of logs, use the value of `nextPageToken` as `pageToken` in the next call of `ListLogs`. If `nextPageToken` is empty, then there are no more results.'
+        type: string
+    type: object
+  ListSinksResponse:
+    description: Result returned from `ListSinks`.
+    properties:
+      sinks:
+        description: 'The requested sinks. If a returned `LogSink` object has an empty `destination` field, the client can retrieve the complete `LogSink` object by calling `projects.sinks.get`.'
+        items:
+          $ref: '#/definitions/LogSink'
+        type: array
+    type: object
+  Log:
+    description: '_Output only._ Describes a log, which is a named stream of log entries.'
+    properties:
+      displayName:
+        description: '_Optional._ The common name of the log. Example: `"request_log"`.'
+        type: string
+      name:
+        description: 'The resource name of the log. Example: `"/projects/my-gcp-project-id/logs/LOG_NAME"`, where `LOG_NAME` is the URL-encoded given name of the log. The log includes those log entries whose `LogEntry.log` field contains this given name. To avoid name collisions, it is a best practice to prefix the given log name with the service name, but this is not required. Examples of log given names: `"appengine.googleapis.com/request_log"`, `"apache-access"`.'
+        type: string
+      payloadType:
+        description: _Optional_. A URI representing the expected payload type for log entries.
+        type: string
+    type: object
+  LogEntry:
+    description: An individual entry in a log.
+    properties:
+      httpRequest:
+        $ref: '#/definitions/HttpRequest'
+        description: 'Information about the HTTP request associated with this log entry, if applicable.'
+      insertId:
+        description: 'A unique ID for the log entry. If you provide this field, the logging service considers other log entries in the same log with the same ID as duplicates which can be removed.'
+        type: string
+      log:
+        description: 'The log to which this entry belongs. When a log entry is ingested, the value of this field is set by the logging system.'
+        type: string
+      metadata:
+        $ref: '#/definitions/LogEntryMetadata'
+        description: Information about the log entry.
+      protoPayload:
+        additionalProperties:
+          description: Properties of the object. Contains field @ype with type URL.
+        description: 'The log entry payload, represented as a protocol buffer that is expressed as a JSON object. You can only pass `protoPayload` values that belong to a set of approved types.'
+        type: object
+      structPayload:
+        additionalProperties:
+          description: Properties of the object.
+        description: 'The log entry payload, represented as a structure that is expressed as a JSON object.'
+        type: object
+      textPayload:
+        description: 'The log entry payload, represented as a Unicode string (UTF-8).'
+        type: string
+    type: object
+  LogEntryMetadata:
+    description: 'Additional data that is associated with a log entry, set by the service creating the log entry.'
+    properties:
+      labels:
+        additionalProperties:
+          type: string
+        description: 'A set of (key, value) data that provides additional information about the log entry. If the log entry is from one of the Google Cloud Platform sources listed below, the indicated (key, value) information must be provided: Google App Engine, service_name `appengine.googleapis.com`: "appengine.googleapis.com/module_id",  "appengine.googleapis.com/version_id",  and one of: "appengine.googleapis.com/replica_index",  "appengine.googleapis.com/clone_id",  or else provide the following Compute Engine labels: Google Compute Engine, service_name `compute.googleapis.com`: "compute.googleapis.com/resource_type", "instance" "compute.googleapis.com/resource_id",'
+        type: object
+      projectId:
+        description: The project ID of the Google Cloud Platform service that created the log entry.
+        type: string
+      region:
+        description: 'The region name of the Google Cloud Platform service that created the log entry. For example, `"us-central1"`.'
+        type: string
+      serviceName:
+        description: 'The API name of the Google Cloud Platform service that created the log entry. For example, `"compute.googleapis.com"`.'
+        type: string
+      severity:
+        description: The severity of the log entry.
+        enum:
+          - DEFAULT
+          - DEBUG
+          - INFO
+          - NOTICE
+          - WARNING
+          - ERROR
+          - CRITICAL
+          - ALERT
+          - EMERGENCY
+        type: string
+      timestamp:
+        description: 'The time the event described by the log entry occurred. Timestamps must be later than January 1, 1970.'
+        type: string
+      userId:
+        description: 'The fully-qualified email address of the authenticated user that performed or requested the action represented by the log entry. If the log entry does not apply to an action taken by an authenticated user, then the field should be empty.'
+        type: string
+      zone:
+        description: 'The zone of the Google Cloud Platform service that created the log entry. For example, `"us-central1-a"`.'
+        type: string
+    type: object
+  LogError:
+    description: Describes a problem with a logging resource or operation.
+    properties:
+      resource:
+        description: 'A resource name associated with this error. For example, the name of a Cloud Storage bucket that has insufficient permissions to be a destination for log entries.'
+        type: string
+      status:
+        $ref: '#/definitions/Status'
+        description: 'The error description, including a classification code, an error message, and other details.'
+      timeNanos:
+        description: 'The time the error was observed, in nanoseconds since the Unix epoch.'
+        format: int64
+        type: string
+    type: object
+  LogLine:
+    description: Application log line emitted while processing a request.
+    properties:
+      logMessage:
+        description: App provided log message.
+        type: string
+      severity:
+        description: Severity of log.
+        enum:
+          - DEFAULT
+          - DEBUG
+          - INFO
+          - NOTICE
+          - WARNING
+          - ERROR
+          - CRITICAL
+          - ALERT
+          - EMERGENCY
+        type: string
+      sourceLocation:
+        $ref: '#/definitions/SourceLocation'
+        description: Line of code that generated this log message.
+      time:
+        description: Time when log entry was made. May be inaccurate.
+        type: string
+    type: object
+  LogMetric:
+    description: Describes a logs-based metric. The value of the metric is the number of log entries in your project that match a logs filter.
+    properties:
+      description:
+        description: A description of this metric.
+        type: string
+      filter:
+        description: 'An [advanced logs filter](/logging/docs/view/advanced_filters). Example: `"log:syslog AND metadata.severity>=ERROR"`.'
+        type: string
+      name:
+        description: "The client-assigned name for this metric, such as `\"severe_errors\"`. Metric names are limited to 1000 characters and can include only the following characters: `A-Z`, `a-z`, `0-9`, and the special characters `_-.,+!*',()%/\\`. The slash character (`/`) denotes a hierarchy of name pieces, and it cannot be the first character of the name."
+        type: string
+    type: object
+  LogService:
+    description: _Output only._ Describes a service that writes log entries.
+    properties:
+      indexKeys:
+        description: 'A list of the names of the keys used to index and label individual log entries from this service. The first two keys are used as the primary and secondary index, respectively. Additional keys may be used to label the entries. For example, App Engine indexes its entries by module and by version, so its `indexKeys` field is the following: [ "appengine.googleapis.com/module_id", "appengine.googleapis.com/version_id" ]'
+        items:
+          type: string
+        type: array
+      name:
+        description: "The service's name. Example: `\"appengine.googleapis.com\"`. Log names beginning with this string are reserved for this service. This value can appear in the `LogEntry.metadata.serviceName` field of log entries associated with this log service."
+        type: string
+    type: object
+  LogSink:
+    description: Describes where log entries are written outside of Cloud Logging.
+    properties:
+      destination:
+        description: 'The resource name of the destination. Cloud Logging writes designated log entries to this destination. For example, `"storage.googleapis.com/my-output-bucket"`.'
+        type: string
+      errors:
+        description: '_Output only._ If any errors occur when invoking a sink method, then this field contains descriptions of the errors.'
+        items:
+          $ref: '#/definitions/LogError'
+        type: array
+      filter:
+        description: 'An advanced logs filter. If present, only log entries matching the filter are written. Only project sinks use this field; log sinks and log service sinks must not include a filter.'
+        type: string
+      name:
+        description: 'The client-assigned name of this sink. For example, `"my-syslog-sink"`. The name must be unique among the sinks of a similar kind in the project.'
+        type: string
+    type: object
+  RequestLog:
+    description: Complete log information about a single request to an application.
+    properties:
+      appEngineRelease:
+        description: App Engine release version string.
+        type: string
+      appId:
+        description: Identifies the application that handled this request.
+        type: string
+      cost:
+        description: An indication of the relative cost of serving this request.
+        format: double
+        type: number
+      endTime:
+        description: Time at which request was known to end processing.
+        type: string
+      finished:
+        description: 'If true, represents a finished request. Otherwise, the request is active.'
+        type: boolean
+      host:
+        description: The Internet host and port number of the resource being requested.
+        type: string
+      httpVersion:
+        description: HTTP version of request.
+        type: string
+      instanceId:
+        description: An opaque identifier for the instance that handled the request.
+        type: string
+      instanceIndex:
+        description: 'If the instance that processed this request was individually addressable (i.e. belongs to a manually scaled module), this is the index of the instance.'
+        format: int32
+        type: integer
+      ip:
+        description: Origin IP address.
+        type: string
+      latency:
+        description: Latency of the request.
+        type: string
+      line:
+        description: 'List of log lines emitted by the application while serving this request, if requested.'
+        items:
+          $ref: '#/definitions/LogLine'
+        type: array
+      megaCycles:
+        description: Number of CPU megacycles used to process request.
+        format: int64
+        type: string
+      method:
+        description: 'Request method, such as `GET`, `HEAD`, `PUT`, `POST`, or `DELETE`.'
+        type: string
+      moduleId:
+        description: Identifies the module of the application that handled this request.
+        type: string
+      nickname:
+        description: "A string that identifies a logged-in user who made this request, or empty if the user is not logged in. Most likely, this is the part of the user's email before the '@' sign. The field value is the same for different requests from the same user, but different users may have a similar name. This information is also available to the application via Users API. This field will be populated starting with App Engine 1.9.21."
+        type: string
+      pendingTime:
+        description: 'Time this request spent in the pending request queue, if it was pending at all.'
+        type: string
+      referrer:
+        description: Referrer URL of request.
+        type: string
+      requestId:
+        description: 'Globally unique identifier for a request, based on request start time. Request IDs for requests which started later will compare greater as strings than those for requests which started earlier.'
+        type: string
+      resource:
+        description: "Contains the path and query portion of the URL that was requested. For example, if the URL was \"http://example.com/app?name=val\", the resource would be \"/app?name=val\". Any trailing fragment (separated by a '#' character) will not be included."
+        type: string
+      responseSize:
+        description: Size in bytes sent back to client by request.
+        format: int64
+        type: string
+      sourceReference:
+        description: Source code for the application that handled this request. There can be more than one source reference per deployed application if source code is distributed among multiple repositories.
+        items:
+          $ref: '#/definitions/SourceReference'
+        type: array
+      startTime:
+        description: Time at which request was known to have begun processing.
+        type: string
+      status:
+        description: Response status of request.
+        format: int32
+        type: integer
+      taskName:
+        description: Task name of the request (for an offline request).
+        type: string
+      taskQueueName:
+        description: Queue name of the request (for an offline request).
+        type: string
+      traceId:
+        description: Cloud Trace identifier of the trace for this request.
+        type: string
+      urlMapEntry:
+        description: File or class within URL mapping used for request. Useful for tracking down the source code which was responsible for managing request. Especially for multiply mapped handlers.
+        type: string
+      userAgent:
+        description: User agent used for making request.
+        type: string
+      versionId:
+        description: Version of the application that handled this request.
+        type: string
+      wasLoadingRequest:
+        description: Was this request a loading request for this instance?
+        type: boolean
+    type: object
+  SourceLocation:
+    description: Specifies a location in a source file.
+    properties:
+      file:
+        description: 'Source file name. May or may not be a fully qualified name, depending on the runtime environment.'
+        type: string
+      functionName:
+        description: 'Human-readable name of the function or method being invoked, with optional context such as the class or package name, for use in contexts such as the logs viewer where file:line number is less meaningful. This may vary by language, for example: in Java: qual.if.ied.Class.method in Go: dir/package.func in Python: function ...'
+        type: string
+      line:
+        description: Line within the source file.
+        format: int64
+        type: string
+    type: object
+  SourceReference:
+    description: A reference to a particular snapshot of the source tree used to build and deploy an application.
+    properties:
+      repository:
+        description: 'Optional. A URI string identifying the repository. Example: "https://github.com/GoogleCloudPlatform/kubernetes.git"'
+        type: string
+      revisionId:
+        description: 'The canonical (and persistent) identifier of the deployed revision. Example (git): "0035781c50ec7aa23385dc841529ce8a4b70db1b"'
+        type: string
+    type: object
+  Status:
+    description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). The error model is designed to be: - Simple to use and understand for most users - Flexible enough to meet unexpected needs # Overview The `Status` message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed. The error message should be a developer-facing English message that helps developers *understand* and *resolve* the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package `google.rpc` which can be used for common error conditions. # Language mapping The `Status` message is the logical representation of the error model, but it is not necessarily the actual wire format. When the `Status` message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C. # Other uses The error model and the `Status` message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments. Example uses of this error model include: - Partial errors. If a service needs to return partial errors to the client, it may embed the `Status` in the normal response to indicate the partial errors. - Workflow errors. A typical workflow has multiple steps. Each step may have a `Status` message for error reporting purpose. - Batch operations. If a client uses batch request and batch response, the `Status` message should be used directly inside batch response, one for each error sub-response. - Asynchronous operations. If an API call embeds asynchronous operation results in its response, the status of those operations should be represented directly using the `Status` message. - Logging. If some API errors are stored in logs, the message `Status` could be used directly after any stripping needed for security/privacy reasons.'
+    properties:
+      code:
+        description: 'The status code, which should be an enum value of google.rpc.Code.'
+        format: int32
+        type: integer
+      details:
+        description: A list of messages that carry the error details. There will be a common set of message types for APIs to use.
+        items:
+          additionalProperties:
+            description: Properties of the object. Contains field @ype with type URL.
+          type: object
+        type: array
+      message:
+        description: 'A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.'
+        type: string
+    type: object
+  WriteLogEntriesRequest:
+    description: The parameters to WriteLogEntries.
+    properties:
+      commonLabels:
+        additionalProperties:
+          type: string
+        description: "Metadata labels that apply to all log entries in this request, so that you don't have to repeat them in each log entry's `metadata.labels` field. If any of the log entries contains a (key, value) with the same key that is in `commonLabels`, then the entry's (key, value) overrides the one in `commonLabels`."
+        type: object
+      entries:
+        description: Log entries to insert.
+        items:
+          $ref: '#/definitions/LogEntry'
+        type: array
+    type: object
+  WriteLogEntriesResponse:
+    description: Result returned from WriteLogEntries. empty
+    type: object

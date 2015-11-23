@@ -1,4 +1,127 @@
+swagger: '2.0'
+schemes:
+  - http
+host: www.neowsapp.com
 basePath: /
+info:
+  description: "A web service for near earth objects. All the data is from the  <a href=\"http://neo.jpl.nasa.gov/\" target=\"_blank\">NASA JPL Asteroid team</a>. \n\n \n\nNeoWs is proud to power AsteroidTracker on <a href=\"https://itunes.apple.com/us/app/asteroid-tracker/id689684901?mt=8\" target=\"_blank\">iOS</a> and <a href=\"https://play.google.com/store/apps/details?id=com.vitruviussoftware.bunifish.asteroidtracker&feature\" target=\"_blank\">Android</a> as well as related apps. \n\n Get <a href=\"http://apps.getpebble.com/en_US/application/55bc4913d1690c372900000f\" target=\"_blank\">Asteroid Today on Pebble</a> \n\nFollow us on <a href=\"http://n.numerousapp.com/m/289c3ktc8fi0\" target=\"_blank\">Numerous</a> \n\nFollow us on <a href=\"https://twitter.com/AsteroidTracker\" target=\"_blank\">Twitter</a>"
+  license:
+    name: Licence Type
+    url: License URL
+  title: NeoWs - (Near Earth Object Web Service)
+  version: '1.0'
+  x-origin:
+    format: swagger
+    url: 'http://www.neowsapp.com/api-docs'
+    version: '1.2'
+  x-providerName: neowsapp.com
+tags:
+  - description: Operations with NearEarthObjects
+    name: feed
+  - description: Operations with NearEarthObjects
+    name: neo
+paths:
+  /rest/v1/feed:
+    get:
+      consumes:
+        - application/json
+      deprecated: false
+      description: 'Get a list of Near Earth Objects within a date range, The max range in one query is 7 days'
+      operationId: retrieveNearEarthObjectFeed
+      parameters:
+        - description: 'Start of date range search, format: yyyy-MM-dd - (ex: 2015-04-28)'
+          in: query
+          name: start_date
+          required: false
+          type: string
+        - description: 'End of date range search, format: yyyy-MM-dd - (ex: 2015-04-28). If left off search will extends 7 days from start_date'
+          in: query
+          name: end_date
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NearEarthObject'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Find Near Earth Objects by date
+      tags:
+        - feed
+  /rest/v1/neo/browse:
+    get:
+      consumes:
+        - application/json
+      deprecated: false
+      description: Retieve a paginated list of Near Earth Objects
+      operationId: browseNearEarthObjects
+      parameters:
+        - default: 0
+          description: page
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - default: 20
+          description: size
+          format: int32
+          in: query
+          name: size
+          required: false
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NearEarthObjectFeedDto'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Browse the Near Earth Objects service
+      tags:
+        - neo
+  '/rest/v1/neo/{asteroid_id}':
+    get:
+      consumes:
+        - application/json
+      deprecated: false
+      description: Retieve a Near Earth Objects with a given id
+      operationId: retrieveNearEarthObjectById
+      parameters:
+        - description: 'ID of Near Earth Object - (ex: 3729835)'
+          in: path
+          name: asteroid_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NearEarthObjectFeedDto'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Find Near Earth Objects by id
+      tags:
+        - neo
 definitions:
   CloseApproachData:
     properties:
@@ -123,126 +246,3 @@ definitions:
         type: string
       miles_per_hour:
         type: string
-host: www.neowsapp.com
-info:
-  description: "A web service for near earth objects. All the data is from the  <a href=\"http://neo.jpl.nasa.gov/\" target=\"_blank\">NASA JPL Asteroid team</a>. \n\n \n\nNeoWs is proud to power AsteroidTracker on <a href=\"https://itunes.apple.com/us/app/asteroid-tracker/id689684901?mt=8\" target=\"_blank\">iOS</a> and <a href=\"https://play.google.com/store/apps/details?id=com.vitruviussoftware.bunifish.asteroidtracker&feature\" target=\"_blank\">Android</a> as well as related apps. \n\n Get <a href=\"http://apps.getpebble.com/en_US/application/55bc4913d1690c372900000f\" target=\"_blank\">Asteroid Today on Pebble</a> \n\nFollow us on <a href=\"http://n.numerousapp.com/m/289c3ktc8fi0\" target=\"_blank\">Numerous</a> \n\nFollow us on <a href=\"https://twitter.com/AsteroidTracker\" target=\"_blank\">Twitter</a>"
-  license:
-    name: Licence Type
-    url: License URL
-  title: NeoWs - (Near Earth Object Web Service)
-  version: '1.0'
-  x-origin:
-    format: swagger
-    url: 'http://www.neowsapp.com/api-docs'
-    version: '1.2'
-  x-providerName: neowsapp.com
-paths:
-  /rest/v1/feed:
-    get:
-      consumes:
-        - application/json
-      deprecated: false
-      description: 'Get a list of Near Earth Objects within a date range, The max range in one query is 7 days'
-      operationId: retrieveNearEarthObjectFeed
-      parameters:
-        - description: 'Start of date range search, format: yyyy-MM-dd - (ex: 2015-04-28)'
-          in: query
-          name: start_date
-          required: false
-          type: string
-        - description: 'End of date range search, format: yyyy-MM-dd - (ex: 2015-04-28). If left off search will extends 7 days from start_date'
-          in: query
-          name: end_date
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/NearEarthObject'
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-      summary: Find Near Earth Objects by date
-      tags:
-        - feed
-  /rest/v1/neo/browse:
-    get:
-      consumes:
-        - application/json
-      deprecated: false
-      description: Retieve a paginated list of Near Earth Objects
-      operationId: browseNearEarthObjects
-      parameters:
-        - default: 0
-          description: page
-          format: int32
-          in: query
-          name: page
-          required: false
-          type: integer
-        - default: 20
-          description: size
-          format: int32
-          in: query
-          name: size
-          required: false
-          type: integer
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/NearEarthObjectFeedDto'
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-      summary: Browse the Near Earth Objects service
-      tags:
-        - neo
-  '/rest/v1/neo/{asteroid_id}':
-    get:
-      consumes:
-        - application/json
-      deprecated: false
-      description: Retieve a Near Earth Objects with a given id
-      operationId: retrieveNearEarthObjectById
-      parameters:
-        - description: 'ID of Near Earth Object - (ex: 3729835)'
-          in: path
-          name: asteroid_id
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/NearEarthObjectFeedDto'
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '404':
-          description: Not Found
-      summary: Find Near Earth Objects by id
-      tags:
-        - neo
-schemes:
-  - http
-swagger: '2.0'
-tags:
-  - description: Operations with NearEarthObjects
-    name: feed
-  - description: Operations with NearEarthObjects
-    name: neo

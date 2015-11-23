@@ -1,6 +1,850 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.citrixonline.com
 basePath: /G2M/rest
+info:
+  contact:
+    email: developer-support@citrixonline.com
+    name: Developer Support
+    url: 'https://developer.citrixonline.com'
+  description: "<br />The Citrix GoToMeeting API provides seamless integration of GoToMeeting provisioning and meeting management into your existing infrastructure or third party applications.<br /><br />For customers, the ability to add, suspend or delete an organizer in your GoToMeeting Corporate account from within your primary management systems simplifies and streamlines the entire process of account management. The ability to monitor meeting schedules, history and active meeting status allows managers to leverage GoToMeeting activities through your primary applications.<br /><br />For third parties, the ability to create, update or delete a meeting from within your application makes real-time collaboration possible for your customers. The ability to update meeting schedules, view history and scheduled meetings, and view attendees from past meetings allows you to enhance your users' experience and the value of your applications."
+  termsOfService: 'https://developer.citrixonline.com/terms-use'
+  title: GoToMeeting REST API
+  version: 1.0.0
+  x-logo:
+    backgroundColor: '#5F6166'
+    url: 'https://developer.citrixonline.com/sites/all/themes/citrix_responsive/logo.png'
+  x-origin:
+    format: swagger
+    url: 'https://developer.citrixonline.com/sites/default/files/citrix/citrix-apis/gotomeeting.json'
+    version: '2.0'
+  x-providerName: citrixonline.com
+  x-serviceName: gotomeeting
+externalDocs:
+  url: 'https://developer.citrixonline.com/'
 consumes:
   - application/json
+produces:
+  - application/json
+tags:
+  - description: Operations on organizers. Only available to users with the admin role.
+    name: Organizers
+  - description: Operations on meetings.
+    name: Meetings
+  - description: Operations on groups. Only available to users with the admin role.
+    name: Groups
+paths:
+  /groups:
+    get:
+      description: List all groups for an account. This API call is only available to users with the admin role.
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Group'
+            type: array
+        '403':
+          description: Forbidden
+      summary: Get groups
+      tags:
+        - Groups
+  '/groups/{groupKey}/attendees':
+    get:
+      description: Returns all attendees for all meetings within specified date range held by organizers within the specified group. This API call is only available to users with the admin role. This API call can be used only for groups with maximum 50 organizers.
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the group. Only groups with maximum 50 organizers are supported
+          format: int64
+          in: path
+          name: groupKey
+          required: true
+          type: integer
+        - description: 'Start of date range, in ISO8601 UTC format, e.g. 2015-07-01T22:00:00Z'
+          format: date-time
+          in: query
+          name: startDate
+          type: string
+        - description: 'End of date range, in ISO8601 UTC format, e.g. 2015-07-01T23:00:00Z'
+          format: date-time
+          in: query
+          name: endDate
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/AttendeeByGroup'
+            type: array
+        '400':
+          description: Bad Request
+      summary: Get attendees by group
+      tags:
+        - Groups
+  '/groups/{groupKey}/historicalMeetings':
+    get:
+      description: Get historical meetings for a specified group within a specified date range. This API call is only available to users with the admin role. This API call can be used only for groups with maximum 50 organizers.
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the group. Only groups with maximum 50 organizers are supported
+          format: int64
+          in: path
+          name: groupKey
+          required: true
+          type: integer
+        - description: 'Required start of date range, in ISO8601 UTC format, e.g. 2015-07-01T22:00:00Z'
+          format: date-time
+          in: query
+          name: startDate
+          required: true
+          type: string
+        - description: 'Required end of date range, in ISO8601 UTC format, e.g. 2015-07-01T23:00:00Z'
+          format: date-time
+          in: query
+          name: endDate
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/HistoricalMeetingByGroup'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      summary: Get historical meetings by group
+      tags:
+        - Groups
+  '/groups/{groupKey}/meetings':
+    get:
+      deprecated: true
+      description: 'DEPRECATED: Please use the new API calls "Get historical meetings by group" and "Get upcoming meetings by group". Get meetings for a specified group. Additional filters can be used to view only meetings within a specified date range. This API call is only available to users with the admin role.'
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the group
+          format: int64
+          in: path
+          name: groupKey
+          required: true
+          type: integer
+        - description: 'When "true" returns all past meetings within date range'
+          in: query
+          name: history
+          required: true
+          type: boolean
+        - description: 'If history=true, required start of date range, in ISO8601 UTC format, e.g. 2015-07-01T22:00:00Z'
+          format: date-time
+          in: query
+          name: startDate
+          required: true
+          type: string
+        - description: 'If history=true, required end of date range, in ISO8601 UTC format, e.g. 2015-07-01T23:00:00Z'
+          format: date-time
+          in: query
+          name: endDate
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/HistoryMeetingByGroup'
+            type: array
+        '400':
+          description: Bad Request
+      summary: 'DEPRECATED: Get historical meetings by group'
+      tags:
+        - Groups
+  '/groups/{groupKey}/organizers':
+    get:
+      description: Returns all the organizers within a specific group. This API call is only available to users with the admin role.
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the group
+          format: int64
+          in: path
+          name: groupKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/OrganizerByGroup'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+      summary: Get organizers by group
+      tags:
+        - Groups
+    post:
+      description: 'Creates a new organizer and sends an email to the email address defined in request. This API call is only available to users with the admin role. You may also pass "G2W" or "G2T" or "OPENVOICE" as productType variables, creating organizers for those products. A G2W or G2T organizer will also have access to G2M.'
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the group
+          format: int64
+          in: path
+          name: groupKey
+          required: true
+          type: integer
+        - description: The details of the organizer to be created
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/OrganizerReq'
+      responses:
+        '201':
+          description: Created
+          schema:
+            items:
+              $ref: '#/definitions/OrganizerShort'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Server Error
+        '409':
+          description: Conflict
+      summary: Create organizer in group
+      tags:
+        - Groups
+  '/groups/{groupKey}/upcomingMeetings':
+    get:
+      description: Get upcoming meetings for a specified group. This API call is only available to users with the admin role. This API call can be used only for groups with maximum 50 organizers.
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the group. Only groups with maximum 50 organizers are supported
+          format: int64
+          in: path
+          name: groupKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/UpcomingMeetingByGroup'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+      summary: Get upcoming meetings by group
+      tags:
+        - Groups
+  /historicalMeetings:
+    get:
+      description: Gets historical meetings for the current authenticated organizer. Requires date range for filtering results to only meetings within specified dates.
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: 'Required start of date range, in ISO8601 UTC format, e.g. 2015-07-01T22:00:00Z'
+          format: date-time
+          in: query
+          name: startDate
+          required: true
+          type: string
+        - description: 'Required end of date range, in ISO8601 UTC format, e.g. 2015-07-01T23:00:00Z'
+          format: date-time
+          in: query
+          name: endDate
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/HistoricalMeeting'
+            type: array
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Get historical meetings
+      tags:
+        - Meetings
+  /meetings:
+    get:
+      deprecated: true
+      description: 'DEPRECATED: Please use the new API calls "Get historical meetings" and "Get upcoming meetings".  Gets historical meetings for the current authenticated organizer. Requires date range for filtering results to only meetings within specified dates. History searches will contain the parameter "meetingInstanceKey" which is used in conjunction with the call "Get Attendees by Meeting" to get attendee information for a past meeting.'
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: 'When "true" returns all past meetings within date range'
+          enum:
+            - true
+          in: query
+          name: history
+          type: boolean
+        - description: 'If history=true, required start of date range, in ISO8601 UTC format, e.g. 2015-07-01T22:00:00Z'
+          format: date-time
+          in: query
+          name: startDate
+          type: string
+        - description: 'If history=true, required end of date range, in ISO8601 UTC format, e.g. 2015-07-01T23:00:00Z'
+          format: date-time
+          in: query
+          name: endDate
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/MeetingHistory'
+            type: array
+      summary: 'DEPRECATED: Get historical meetings'
+      tags:
+        - Meetings
+    post:
+      description: Create a new meeting based on the parameters specified.
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The meeting details
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/MeetingReqCreate'
+      responses:
+        '201':
+          description: Created
+          schema:
+            items:
+              $ref: '#/definitions/MeetingCreated'
+            type: array
+        '400':
+          description: Bad Request
+      summary: Create meeting
+      tags:
+        - Meetings
+  '/meetings/{meetingId}':
+    delete:
+      description: Deletes the meeting identified by the meetingId.
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - format: int64
+          in: path
+          name: meetingId
+          required: true
+          type: integer
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '404':
+          description: Not found
+      summary: Delete meeting
+      tags:
+        - Meetings
+    get:
+      description: Returns the meeting details for the specified meeting.
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - format: int64
+          in: path
+          name: meetingId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/MeetingById'
+            type: array
+        '404':
+          description: Not found
+      summary: Get meeting
+      tags:
+        - Meetings
+    put:
+      description: Updates an existing meeting specified by meetingId.
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - format: int64
+          in: path
+          name: meetingId
+          required: true
+          type: integer
+        - description: The meeting details
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/MeetingReqUpdate'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '404':
+          description: Not found
+      summary: Update meeting
+      tags:
+        - Meetings
+  '/meetings/{meetingId}/start':
+    get:
+      description: 'Returns a host URL that can be used to start a meeting. When this URL is opened in a web browser, the GoToMeeting client will be downloaded and launched and the meeting will start. The end user is not required to login to a client.'
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - format: int64
+          in: path
+          name: meetingId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/StartUrl'
+      summary: Start meeting
+      tags:
+        - Meetings
+  '/meetings/{meetingInstanceKey}/attendees':
+    get:
+      description: 'List all attendees for specified meeting instance key. The meeting instance key is only available for meetings that were successfully started and can be found for historical meetings using "Get Meetings", "Get Meetings by Organizer", and "Get Meetings by Group". For users with the admin role this call returns attendees for any meeting. For any other user the call will return attendees for meetings on which the user is a valid organizer.'
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the unique meeting instance
+          format: int64
+          in: path
+          name: meetingInstanceKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/AttendeeByMeeting'
+            type: array
+        '404':
+          description: Not found
+      summary: Get attendees by meeting
+      tags:
+        - Meetings
+  /organizers:
+    delete:
+      description: Deletes the individual organizer specified by the email address. This API call is only available to users with the admin role.
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The email address of the organizer
+          in: query
+          name: email
+          required: true
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+      summary: Delete organizer by email
+      tags:
+        - Organizers
+    get:
+      description: "Gets the individual organizer specified by the organizer's email address. If an email address is not specified all organizers are returned. This API call is only available to users with the admin role."
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The email address of the organizer
+          in: query
+          name: email
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Organizer'
+            type: array
+        '404':
+          description: Not found
+      summary: Get organizer by email / Get all organizers
+      tags:
+        - Organizers
+    post:
+      description: 'Creates a new organizer and sends an email to the email address defined in the request. This API call is only available to users with the admin role. You may also pass "G2W" or "G2T" or "OPENVOICE" as productType variables, creating organizers for those products. A G2W or G2T organizer will also have access to G2M.'
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The details of the organizer to be created
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/OrganizerReq'
+      responses:
+        '201':
+          description: Created
+          schema:
+            items:
+              $ref: '#/definitions/OrganizerShort'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Server Error
+        '409':
+          description: Conflict
+      summary: Create organizer
+      tags:
+        - Organizers
+  '/organizers/{organizerKey}':
+    delete:
+      description: Deletes the individual organizer specified by the organizer key. This API call is only available to users with the admin role.
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+      responses:
+        '204':
+          description: No Content
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Delete organizer
+      tags:
+        - Organizers
+    get:
+      description: Returns the individual organizer specified by the key. This API call is only available to users with the admin role. Non-admin users can only make this call for their own organizerKey.
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Organizer'
+            type: array
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Get organizer
+      tags:
+        - Organizers
+    put:
+      description: 'Updates the specified organizer status. Status can either by "active" or "suspended". Suspending an organizer disables their access to GoToMeeting. This API call is only available to users with the admin role.'
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: "The organizer's status"
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/OrganizerStatus'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Update organizer
+      tags:
+        - Organizers
+  '/organizers/{organizerKey}/attendees':
+    get:
+      description: Lists all attendees for all meetings within a specified date range for a specified organizer. This API call is only available to users with the admin role.
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: 'A required start of date range in ISO8601 UTC format, e.g. 2015-07-01T22:00:00Z'
+          format: date-time
+          in: query
+          name: startDate
+          required: true
+          type: string
+        - description: 'A required end of date range in ISO8601 UTC format, e.g. 2015-07-01T23:00:00Z'
+          format: date-time
+          in: query
+          name: endDate
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/AttendeeByOrganizer'
+            type: array
+        '400':
+          description: Bad Request
+        '404':
+          description: Not found
+      summary: Get attendees by organizer
+      tags:
+        - Organizers
+  '/organizers/{organizerKey}/historicalMeetings':
+    get:
+      description: Get historical meetings for a specified organizer within a specified date range. This API call is only available to users with the admin role.
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: 'Required start of date range, in ISO8601 UTC format, e.g. 2015-07-01T22:00:00Z'
+          format: date-time
+          in: query
+          name: startDate
+          required: true
+          type: string
+        - description: 'Required end of date range, in ISO8601 UTC format, e.g. 2015-07-01T23:00:00Z'
+          format: date-time
+          in: query
+          name: endDate
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/HistoricalMeeting'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Get historical meetings by organizer
+      tags:
+        - Organizers
+  '/organizers/{organizerKey}/meetings':
+    get:
+      deprecated: true
+      description: 'DEPRECATED: Please use the new API calls "Get historical meetings by organizer" and "Get upcoming meetings by organizer". Gets future (scheduled) or past (history) meetings for a specified organizer. Include "history=true" and the past start and end dates in the URL to retrieve past meetings. Enter "scheduled=true" (without dates) to get scheduled meetings.'
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: 'When "true" returns all future meetings. Date range not supported.'
+          in: query
+          name: scheduled
+          type: boolean
+        - description: 'When "true" returns all past meetings within date range'
+          in: query
+          name: history
+          type: boolean
+        - description: 'If history is "true", required start of date range, in ISO8601 UTC format, e.g. 2015-07-01T22:00:00Z'
+          format: date-time
+          in: query
+          name: startDate
+          type: string
+        - description: 'If history is "true", required end of date range, in ISO8601 UTC format, e.g. 2015-07-01T23:00:00Z'
+          format: date-time
+          in: query
+          name: endDate
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/MeetingByOrganizer'
+            type: array
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: 'DEPRECATED: Get meetings by organizer'
+      tags:
+        - Organizers
+  '/organizers/{organizerKey}/upcomingMeetings':
+    get:
+      description: Get upcoming meetings for a specified organizer. This API call is only available to users with the admin role.
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/UpcomingMeeting'
+            type: array
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Get upcoming meetings by organizer
+      tags:
+        - Organizers
+  /upcomingMeetings:
+    get:
+      description: Gets upcoming meetings for the current authenticated organizer.
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/UpcomingMeeting'
+            type: array
+        '403':
+          description: Forbidden
+      summary: Get upcoming meetings
+      tags:
+        - Meetings
 definitions:
   AttendeeByGroup:
     description: Describes an attendee of a meeting instance held by an organizer within a specified group.
@@ -1287,847 +2131,3 @@ definitions:
       - firstName
       - endTime
       - groupName
-externalDocs:
-  url: 'https://developer.citrixonline.com/'
-host: api.citrixonline.com
-info:
-  contact:
-    email: developer-support@citrixonline.com
-    name: Developer Support
-    url: 'https://developer.citrixonline.com'
-  description: "<br />The Citrix GoToMeeting API provides seamless integration of GoToMeeting provisioning and meeting management into your existing infrastructure or third party applications.<br /><br />For customers, the ability to add, suspend or delete an organizer in your GoToMeeting Corporate account from within your primary management systems simplifies and streamlines the entire process of account management. The ability to monitor meeting schedules, history and active meeting status allows managers to leverage GoToMeeting activities through your primary applications.<br /><br />For third parties, the ability to create, update or delete a meeting from within your application makes real-time collaboration possible for your customers. The ability to update meeting schedules, view history and scheduled meetings, and view attendees from past meetings allows you to enhance your users' experience and the value of your applications."
-  termsOfService: 'https://developer.citrixonline.com/terms-use'
-  title: GoToMeeting REST API
-  version: 1.0.0
-  x-logo:
-    backgroundColor: '#5F6166'
-    url: 'https://developer.citrixonline.com/sites/all/themes/citrix_responsive/logo.png'
-  x-origin:
-    format: swagger
-    url: 'https://developer.citrixonline.com/sites/default/files/citrix/citrix-apis/gotomeeting.json'
-    version: '2.0'
-  x-providerName: citrixonline.com
-  x-serviceName: gotomeeting
-paths:
-  /groups:
-    get:
-      description: List all groups for an account. This API call is only available to users with the admin role.
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/Group'
-            type: array
-        '403':
-          description: Forbidden
-      summary: Get groups
-      tags:
-        - Groups
-  '/groups/{groupKey}/attendees':
-    get:
-      description: Returns all attendees for all meetings within specified date range held by organizers within the specified group. This API call is only available to users with the admin role. This API call can be used only for groups with maximum 50 organizers.
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the group. Only groups with maximum 50 organizers are supported
-          format: int64
-          in: path
-          name: groupKey
-          required: true
-          type: integer
-        - description: 'Start of date range, in ISO8601 UTC format, e.g. 2015-07-01T22:00:00Z'
-          format: date-time
-          in: query
-          name: startDate
-          type: string
-        - description: 'End of date range, in ISO8601 UTC format, e.g. 2015-07-01T23:00:00Z'
-          format: date-time
-          in: query
-          name: endDate
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/AttendeeByGroup'
-            type: array
-        '400':
-          description: Bad Request
-      summary: Get attendees by group
-      tags:
-        - Groups
-  '/groups/{groupKey}/historicalMeetings':
-    get:
-      description: Get historical meetings for a specified group within a specified date range. This API call is only available to users with the admin role. This API call can be used only for groups with maximum 50 organizers.
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the group. Only groups with maximum 50 organizers are supported
-          format: int64
-          in: path
-          name: groupKey
-          required: true
-          type: integer
-        - description: 'Required start of date range, in ISO8601 UTC format, e.g. 2015-07-01T22:00:00Z'
-          format: date-time
-          in: query
-          name: startDate
-          required: true
-          type: string
-        - description: 'Required end of date range, in ISO8601 UTC format, e.g. 2015-07-01T23:00:00Z'
-          format: date-time
-          in: query
-          name: endDate
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/HistoricalMeetingByGroup'
-            type: array
-        '400':
-          description: Bad Request
-        '403':
-          description: Forbidden
-        '500':
-          description: Internal Server Error
-      summary: Get historical meetings by group
-      tags:
-        - Groups
-  '/groups/{groupKey}/meetings':
-    get:
-      deprecated: true
-      description: 'DEPRECATED: Please use the new API calls "Get historical meetings by group" and "Get upcoming meetings by group". Get meetings for a specified group. Additional filters can be used to view only meetings within a specified date range. This API call is only available to users with the admin role.'
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the group
-          format: int64
-          in: path
-          name: groupKey
-          required: true
-          type: integer
-        - description: 'When "true" returns all past meetings within date range'
-          in: query
-          name: history
-          required: true
-          type: boolean
-        - description: 'If history=true, required start of date range, in ISO8601 UTC format, e.g. 2015-07-01T22:00:00Z'
-          format: date-time
-          in: query
-          name: startDate
-          required: true
-          type: string
-        - description: 'If history=true, required end of date range, in ISO8601 UTC format, e.g. 2015-07-01T23:00:00Z'
-          format: date-time
-          in: query
-          name: endDate
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/HistoryMeetingByGroup'
-            type: array
-        '400':
-          description: Bad Request
-      summary: 'DEPRECATED: Get historical meetings by group'
-      tags:
-        - Groups
-  '/groups/{groupKey}/organizers':
-    get:
-      description: Returns all the organizers within a specific group. This API call is only available to users with the admin role.
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the group
-          format: int64
-          in: path
-          name: groupKey
-          required: true
-          type: integer
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/OrganizerByGroup'
-            type: array
-        '400':
-          description: Bad Request
-        '403':
-          description: Forbidden
-      summary: Get organizers by group
-      tags:
-        - Groups
-    post:
-      description: 'Creates a new organizer and sends an email to the email address defined in request. This API call is only available to users with the admin role. You may also pass "G2W" or "G2T" or "OPENVOICE" as productType variables, creating organizers for those products. A G2W or G2T organizer will also have access to G2M.'
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the group
-          format: int64
-          in: path
-          name: groupKey
-          required: true
-          type: integer
-        - description: The details of the organizer to be created
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/OrganizerReq'
-      responses:
-        '201':
-          description: Created
-          schema:
-            items:
-              $ref: '#/definitions/OrganizerShort'
-            type: array
-        '400':
-          description: Bad Request
-        '403':
-          description: Server Error
-        '409':
-          description: Conflict
-      summary: Create organizer in group
-      tags:
-        - Groups
-  '/groups/{groupKey}/upcomingMeetings':
-    get:
-      description: Get upcoming meetings for a specified group. This API call is only available to users with the admin role. This API call can be used only for groups with maximum 50 organizers.
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the group. Only groups with maximum 50 organizers are supported
-          format: int64
-          in: path
-          name: groupKey
-          required: true
-          type: integer
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/UpcomingMeetingByGroup'
-            type: array
-        '400':
-          description: Bad Request
-        '403':
-          description: Forbidden
-        '500':
-          description: Internal Server Error
-      summary: Get upcoming meetings by group
-      tags:
-        - Groups
-  /historicalMeetings:
-    get:
-      description: Gets historical meetings for the current authenticated organizer. Requires date range for filtering results to only meetings within specified dates.
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: 'Required start of date range, in ISO8601 UTC format, e.g. 2015-07-01T22:00:00Z'
-          format: date-time
-          in: query
-          name: startDate
-          required: true
-          type: string
-        - description: 'Required end of date range, in ISO8601 UTC format, e.g. 2015-07-01T23:00:00Z'
-          format: date-time
-          in: query
-          name: endDate
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/HistoricalMeeting'
-            type: array
-        '403':
-          description: Forbidden
-        '404':
-          description: Not found
-      summary: Get historical meetings
-      tags:
-        - Meetings
-  /meetings:
-    get:
-      deprecated: true
-      description: 'DEPRECATED: Please use the new API calls "Get historical meetings" and "Get upcoming meetings".  Gets historical meetings for the current authenticated organizer. Requires date range for filtering results to only meetings within specified dates. History searches will contain the parameter "meetingInstanceKey" which is used in conjunction with the call "Get Attendees by Meeting" to get attendee information for a past meeting.'
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: 'When "true" returns all past meetings within date range'
-          enum:
-            - true
-          in: query
-          name: history
-          type: boolean
-        - description: 'If history=true, required start of date range, in ISO8601 UTC format, e.g. 2015-07-01T22:00:00Z'
-          format: date-time
-          in: query
-          name: startDate
-          type: string
-        - description: 'If history=true, required end of date range, in ISO8601 UTC format, e.g. 2015-07-01T23:00:00Z'
-          format: date-time
-          in: query
-          name: endDate
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/MeetingHistory'
-            type: array
-      summary: 'DEPRECATED: Get historical meetings'
-      tags:
-        - Meetings
-    post:
-      description: Create a new meeting based on the parameters specified.
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The meeting details
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/MeetingReqCreate'
-      responses:
-        '201':
-          description: Created
-          schema:
-            items:
-              $ref: '#/definitions/MeetingCreated'
-            type: array
-        '400':
-          description: Bad Request
-      summary: Create meeting
-      tags:
-        - Meetings
-  '/meetings/{meetingId}':
-    delete:
-      description: Deletes the meeting identified by the meetingId.
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - format: int64
-          in: path
-          name: meetingId
-          required: true
-          type: integer
-      responses:
-        '204':
-          description: No Content
-        '400':
-          description: Bad Request
-        '404':
-          description: Not found
-      summary: Delete meeting
-      tags:
-        - Meetings
-    get:
-      description: Returns the meeting details for the specified meeting.
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - format: int64
-          in: path
-          name: meetingId
-          required: true
-          type: integer
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/MeetingById'
-            type: array
-        '404':
-          description: Not found
-      summary: Get meeting
-      tags:
-        - Meetings
-    put:
-      description: Updates an existing meeting specified by meetingId.
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - format: int64
-          in: path
-          name: meetingId
-          required: true
-          type: integer
-        - description: The meeting details
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/MeetingReqUpdate'
-      responses:
-        '204':
-          description: No Content
-        '400':
-          description: Bad Request
-        '404':
-          description: Not found
-      summary: Update meeting
-      tags:
-        - Meetings
-  '/meetings/{meetingId}/start':
-    get:
-      description: 'Returns a host URL that can be used to start a meeting. When this URL is opened in a web browser, the GoToMeeting client will be downloaded and launched and the meeting will start. The end user is not required to login to a client.'
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - format: int64
-          in: path
-          name: meetingId
-          required: true
-          type: integer
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/StartUrl'
-      summary: Start meeting
-      tags:
-        - Meetings
-  '/meetings/{meetingInstanceKey}/attendees':
-    get:
-      description: 'List all attendees for specified meeting instance key. The meeting instance key is only available for meetings that were successfully started and can be found for historical meetings using "Get Meetings", "Get Meetings by Organizer", and "Get Meetings by Group". For users with the admin role this call returns attendees for any meeting. For any other user the call will return attendees for meetings on which the user is a valid organizer.'
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the unique meeting instance
-          format: int64
-          in: path
-          name: meetingInstanceKey
-          required: true
-          type: integer
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/AttendeeByMeeting'
-            type: array
-        '404':
-          description: Not found
-      summary: Get attendees by meeting
-      tags:
-        - Meetings
-  /organizers:
-    delete:
-      description: Deletes the individual organizer specified by the email address. This API call is only available to users with the admin role.
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The email address of the organizer
-          in: query
-          name: email
-          required: true
-          type: string
-      responses:
-        '204':
-          description: No Content
-        '400':
-          description: Bad Request
-      summary: Delete organizer by email
-      tags:
-        - Organizers
-    get:
-      description: "Gets the individual organizer specified by the organizer's email address. If an email address is not specified all organizers are returned. This API call is only available to users with the admin role."
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The email address of the organizer
-          in: query
-          name: email
-          required: false
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/Organizer'
-            type: array
-        '404':
-          description: Not found
-      summary: Get organizer by email / Get all organizers
-      tags:
-        - Organizers
-    post:
-      description: 'Creates a new organizer and sends an email to the email address defined in the request. This API call is only available to users with the admin role. You may also pass "G2W" or "G2T" or "OPENVOICE" as productType variables, creating organizers for those products. A G2W or G2T organizer will also have access to G2M.'
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The details of the organizer to be created
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/OrganizerReq'
-      responses:
-        '201':
-          description: Created
-          schema:
-            items:
-              $ref: '#/definitions/OrganizerShort'
-            type: array
-        '400':
-          description: Bad Request
-        '403':
-          description: Server Error
-        '409':
-          description: Conflict
-      summary: Create organizer
-      tags:
-        - Organizers
-  '/organizers/{organizerKey}':
-    delete:
-      description: Deletes the individual organizer specified by the organizer key. This API call is only available to users with the admin role.
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-      responses:
-        '204':
-          description: No Content
-        '403':
-          description: Forbidden
-        '404':
-          description: Not found
-      summary: Delete organizer
-      tags:
-        - Organizers
-    get:
-      description: Returns the individual organizer specified by the key. This API call is only available to users with the admin role. Non-admin users can only make this call for their own organizerKey.
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/Organizer'
-            type: array
-        '403':
-          description: Forbidden
-        '404':
-          description: Not found
-      summary: Get organizer
-      tags:
-        - Organizers
-    put:
-      description: 'Updates the specified organizer status. Status can either by "active" or "suspended". Suspending an organizer disables their access to GoToMeeting. This API call is only available to users with the admin role.'
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: "The organizer's status"
-          in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/OrganizerStatus'
-      responses:
-        '204':
-          description: No Content
-        '400':
-          description: Bad Request
-        '403':
-          description: Forbidden
-        '404':
-          description: Not found
-      summary: Update organizer
-      tags:
-        - Organizers
-  '/organizers/{organizerKey}/attendees':
-    get:
-      description: Lists all attendees for all meetings within a specified date range for a specified organizer. This API call is only available to users with the admin role.
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: 'A required start of date range in ISO8601 UTC format, e.g. 2015-07-01T22:00:00Z'
-          format: date-time
-          in: query
-          name: startDate
-          required: true
-          type: string
-        - description: 'A required end of date range in ISO8601 UTC format, e.g. 2015-07-01T23:00:00Z'
-          format: date-time
-          in: query
-          name: endDate
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/AttendeeByOrganizer'
-            type: array
-        '400':
-          description: Bad Request
-        '404':
-          description: Not found
-      summary: Get attendees by organizer
-      tags:
-        - Organizers
-  '/organizers/{organizerKey}/historicalMeetings':
-    get:
-      description: Get historical meetings for a specified organizer within a specified date range. This API call is only available to users with the admin role.
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: 'Required start of date range, in ISO8601 UTC format, e.g. 2015-07-01T22:00:00Z'
-          format: date-time
-          in: query
-          name: startDate
-          required: true
-          type: string
-        - description: 'Required end of date range, in ISO8601 UTC format, e.g. 2015-07-01T23:00:00Z'
-          format: date-time
-          in: query
-          name: endDate
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/HistoricalMeeting'
-            type: array
-        '400':
-          description: Bad Request
-        '403':
-          description: Forbidden
-        '404':
-          description: Not found
-      summary: Get historical meetings by organizer
-      tags:
-        - Organizers
-  '/organizers/{organizerKey}/meetings':
-    get:
-      deprecated: true
-      description: 'DEPRECATED: Please use the new API calls "Get historical meetings by organizer" and "Get upcoming meetings by organizer". Gets future (scheduled) or past (history) meetings for a specified organizer. Include "history=true" and the past start and end dates in the URL to retrieve past meetings. Enter "scheduled=true" (without dates) to get scheduled meetings.'
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: 'When "true" returns all future meetings. Date range not supported.'
-          in: query
-          name: scheduled
-          type: boolean
-        - description: 'When "true" returns all past meetings within date range'
-          in: query
-          name: history
-          type: boolean
-        - description: 'If history is "true", required start of date range, in ISO8601 UTC format, e.g. 2015-07-01T22:00:00Z'
-          format: date-time
-          in: query
-          name: startDate
-          type: string
-        - description: 'If history is "true", required end of date range, in ISO8601 UTC format, e.g. 2015-07-01T23:00:00Z'
-          format: date-time
-          in: query
-          name: endDate
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/MeetingByOrganizer'
-            type: array
-        '403':
-          description: Forbidden
-        '404':
-          description: Not found
-      summary: 'DEPRECATED: Get meetings by organizer'
-      tags:
-        - Organizers
-  '/organizers/{organizerKey}/upcomingMeetings':
-    get:
-      description: Get upcoming meetings for a specified organizer. This API call is only available to users with the admin role.
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/UpcomingMeeting'
-            type: array
-        '403':
-          description: Forbidden
-        '404':
-          description: Not found
-      summary: Get upcoming meetings by organizer
-      tags:
-        - Organizers
-  /upcomingMeetings:
-    get:
-      description: Gets upcoming meetings for the current authenticated organizer.
-      parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/UpcomingMeeting'
-            type: array
-        '403':
-          description: Forbidden
-      summary: Get upcoming meetings
-      tags:
-        - Meetings
-produces:
-  - application/json
-schemes:
-  - https
-swagger: '2.0'
-tags:
-  - description: Operations on organizers. Only available to users with the admin role.
-    name: Organizers
-  - description: Operations on meetings.
-    name: Meetings
-  - description: Operations on groups. Only available to users with the admin role.
-    name: Groups
