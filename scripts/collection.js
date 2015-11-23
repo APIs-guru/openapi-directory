@@ -721,7 +721,8 @@ function Yaml2String(data) {
   //FIXME: remove
   data = JSON.parse(JSON.stringify(data));
 
-  return YAML.safeDump(data, {sortKeys: true, indent: 2});
+  data = sortJson(data);
+  return YAML.safeDump(data, {indent: 2, lineWidth: -1});
 }
 
 function logYaml(json) {
@@ -877,8 +878,16 @@ function getSwaggerPath(swagger, filename) {
   return getPathComponents(swagger).join('/') + '/' + filename;
 }
 
+function sortJson(json) {
+  return sortobject(json, function (a, b) {
+    if (a === b)
+      return 0;
+    return (a < b) ? -1 : 1;
+  });
+}
+
 function saveJson(path, json) {
-  json = sortobject(json);
+  json = sortJson(json);
   saveFile(path, JSON.stringify(json, null, 2) + '\n');
 }
 
