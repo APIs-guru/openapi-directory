@@ -24,6 +24,8 @@ set -o pipefail
 
   ../scripts/collection.js apisjson https://apis-guru.github.io/api-models/
 
+  ../scripts/collection.js html https://apis-guru.github.io/api-models/
+
   ../scripts/collection.js banner
 
   git add .

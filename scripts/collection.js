@@ -24,6 +24,7 @@ var MIME = new MimeLookup(require('mime-db'));
 var URI = require('urijs');
 var csvStringify = require('csv-stringify');
 var YAML = require('js-yaml');
+var jade = require('jade');
 
 var jsondiffpatch = require('jsondiffpatch').create({
   arrays: {
@@ -87,6 +88,12 @@ program
   .description('generate APIs.json file')
   .arguments('<SPEC_ROOT_URL>')
   .action(generateAPIsJSON);
+
+program
+  .command('html')
+  .description('generate html file with links to specs')
+  .arguments('<SPEC_ROOT_URL>')
+  .action(generateHTML);
 
 program
   .command('banner')
@@ -328,6 +335,18 @@ function generateAPIsJSON(specRootUrl) {
   });
 
   saveJson('apis.json', collection);
+}
+
+function generateHTML(specRootUrl) {
+  var specs = _.keys(getSpecs())
+  var locals = {
+    specs: specs,
+    specRootUrl: specRootUrl
+  };
+
+  var template = path.join(path.dirname(__filename), '../scripts/index.jade');
+  var html = jade.renderFile(template, locals);
+  saveFile('index.html', html);
 }
 
 function generateBanner() {
