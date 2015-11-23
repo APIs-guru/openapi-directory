@@ -12448,6 +12448,169 @@ paths:
       summary: "Search API for 'Vocabulary' entry type"
       tags:
         - project_vocabulary
+  /repository/search/type/propertydb:
+    get:
+      description: API to search for entries of type Property Database
+      operationId: search_propertydb
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Property ID
+          in: query
+          name: search.db_propertydb.property_id
+          required: false
+          type: string
+        - description: Owner
+          in: query
+          name: search.db_propertydb.owner
+          required: false
+          type: string
+        - description: Address
+          in: query
+          name: search.db_propertydb.address
+          required: false
+          type: string
+        - description: City
+          in: query
+          name: search.db_propertydb.city
+          required: false
+          type: string
+        - description: State
+          in: query
+          name: search.db_propertydb.state
+          required: false
+          type: string
+        - description: Property Value
+          in: query
+          name: search.db_propertydb.value
+          required: false
+          type: integer
+        - description: Building Sq Ft
+          in: query
+          name: search.db_propertydb.house_size
+          required: false
+          type: integer
+        - description: Lot Size Sq Ft
+          in: query
+          name: search.db_propertydb.lot_sqft
+          required: false
+          type: integer
+        - description: Lot Size Acres
+          format: double
+          in: query
+          name: search.db_propertydb.lot_acres
+          required: false
+          type: number
+        - description: $-sqft
+          format: double
+          in: query
+          name: search.db_propertydb.price_sqft
+          required: false
+          type: number
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: "Search API for 'Property Database' entry type"
+      tags:
+        - propertydb
   /repository/search/type/python_notebook:
     get:
       description: API to search for entries of type IPython Notebook file
@@ -24218,6 +24381,8 @@ tags:
     name: lidar_glas
   - description: "Search API for 'SOCRATA Series' entry type"
     name: type_socrata_series
+  - description: "Search API for 'Property Database' entry type"
+    name: propertydb
   - description: "Search API for 'Exercise' entry type"
     name: exercise
   - description: "Search API for 'Locations' entry type"
