@@ -51,6 +51,12 @@ program
   .action(urlsCollection);
 
 program
+  .command('refresh')
+  .description('run refresh')
+  .arguments('[DIR]')
+  .action(refreshCollection);
+
+program
   .command('update')
   .description('run update')
   .arguments('[DIR]')
@@ -113,6 +119,13 @@ program.parse(process.argv);
 function urlsCollection() {
   _.each(getSpecs(), function (swagger) {
     console.log(getOriginUrl(swagger));
+  });
+}
+
+function refreshCollection(dir) {
+  _.each(getSpecs(dir), function (swagger, filename) {
+    assert(getSwaggerPath(swagger) === filename);
+    saveSwagger(swagger);
   });
 }
 
