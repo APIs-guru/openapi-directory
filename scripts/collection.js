@@ -892,11 +892,46 @@ function getSwaggerPath(swagger, filename) {
 }
 
 function sortJson(json) {
-  return sortobject(json, function (a, b) {
+  var json = sortobject(json, function (a, b) {
     if (a === b)
       return 0;
     return (a < b) ? -1 : 1;
   });
+
+  //detect Swagger format.
+  if (_.get(json, 'swagger') !== '2.0')
+    return json;
+
+  var fieldOrder = [
+    'swagger',
+    'schemes',
+    'host',
+    'basePath',
+    'x-hasEquivalentPaths',
+    'info',
+    'externalDocs',
+    'consumes',
+    'produces',
+    'securityDefinitions',
+    'security',
+    'parameters',
+    'responses',
+    'tags',
+    'paths',
+    'definitions'
+  ];
+
+  var sorted = {};
+  _.each(fieldOrder, function (name) {
+    if (_.isUndefined(json[name]))
+      return;
+
+    sorted[name] = json[name];
+    delete json[name];
+  });
+  _.assign(sorted, json);
+
+  return sorted;
 }
 
 function saveJson(path, json) {
