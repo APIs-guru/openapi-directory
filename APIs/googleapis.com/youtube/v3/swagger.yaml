@@ -2006,16 +2006,11 @@ definitions:
         description: The backup ingestion URL that you should use to stream video to YouTube. You have the option of simultaneously streaming the content that you are sending to the ingestionAddress to this URL.
         type: string
       ingestionAddress:
-        description: >-
-          The primary ingestion URL that you should use to stream video to
-          YouTube. You must stream video to this URL.
+        description: |-
+          The primary ingestion URL that you should use to stream video to YouTube. You must stream video to this URL.
 
 
-
-          Depending on which application or tool you use to encode your video
-          stream, you may need to enter the stream URL and stream name separately
-          or you may need to concatenate them in the following format:
-
+          Depending on which application or tool you use to encode your video stream, you may need to enter the stream URL and stream name separately or you may need to concatenate them in the following format:
 
 
           STREAM_URL/STREAM_NAME
@@ -2137,21 +2132,15 @@ definitions:
         description: This setting indicates whether YouTube should enable content encryption for the broadcast.
         type: boolean
       enableDvr:
-        description: >-
-          This setting determines whether viewers can access DVR controls while
-          watching the video. DVR controls enable the viewer to control the video
-          playback experience by pausing, rewinding, or fast forwarding content.
-          The default value for this property is true.
+        description: |-
+          This setting determines whether viewers can access DVR controls while watching the video. DVR controls enable the viewer to control the video playback experience by pausing, rewinding, or fast forwarding content. The default value for this property is true.
 
 
 
 
 
 
-
-          Important: You must set the value to true and also set the
-          enableArchive property's value to true if you want to make playback
-          available immediately after the broadcast ends.
+          Important: You must set the value to true and also set the enableArchive property's value to true if you want to make playback available immediately after the broadcast ends.
         type: boolean
       enableEmbed:
         description: 'This setting indicates whether the broadcast video can be played in an embedded player. If you choose to archive the video (using the enableArchive property), this setting will also apply to the archived video.'
@@ -2163,21 +2152,15 @@ definitions:
         $ref: '#/definitions/MonitorStreamInfo'
         description: 'The monitorStream object contains information about the monitor stream, which the broadcaster can use to review the event content before the broadcast stream is shown publicly.'
       recordFromStart:
-        description: >-
-          Automatically start recording after the event goes live. The default
-          value for this property is true.
+        description: |-
+          Automatically start recording after the event goes live. The default value for this property is true.
 
 
 
 
 
 
-
-          Important: You must also set the enableDvr property's value to true if
-          you want the playback to be available immediately after the broadcast
-          ends. If you set this property's value to true but do not also set the
-          enableDvr property to true, there may be a delay of around one day
-          before the archived video will be available for playback.
+          Important: You must also set the enableDvr property's value to true if you want the playback to be available immediately after the broadcast ends. If you set this property's value to true but do not also set the enableDvr property to true, there may be a delay of around one day before the archived video will be available for playback.
         type: boolean
       startWithSlate:
         description: "This setting indicates whether the broadcast should automatically begin with an in-stream slate when you update the broadcast's status to live. After updating the status, you then need to send a liveCuepoints.insert request that sets the cuepoint's eventState to end to remove the in-stream slate and make your broadcast stream visible to viewers."
@@ -2539,23 +2522,14 @@ definitions:
         description: HTML code that embeds a player that plays the monitor stream.
         type: string
       enableMonitorStream:
-        description: >-
-          This value determines whether the monitor stream is enabled for the
-          broadcast. If the monitor stream is enabled, then YouTube will
-          broadcast the event content on a special stream intended only for the
-          broadcaster's consumption. The broadcaster can use the stream to review
-          the event content and also to identify the optimal times to insert
-          cuepoints.
+        description: |-
+          This value determines whether the monitor stream is enabled for the broadcast. If the monitor stream is enabled, then YouTube will broadcast the event content on a special stream intended only for the broadcaster's consumption. The broadcaster can use the stream to review the event content and also to identify the optimal times to insert cuepoints.
 
 
-
-          You need to set this value to true if you intend to have a broadcast
-          delay for your event.
+          You need to set this value to true if you intend to have a broadcast delay for your event.
 
 
-
-          Note: This property cannot be updated once the broadcast is in the
-          testing or live state.
+          Note: This property cannot be updated once the broadcast is in the testing or live state.
         type: boolean
     type: object
   PageInfo:
@@ -3167,20 +3141,11 @@ definitions:
         description: The player object contains information that you would use to play the video in an embedded player.
       processingDetails:
         $ref: '#/definitions/VideoProcessingDetails'
-        description: >-
-          The processingProgress object encapsulates information about YouTube's
-          progress in processing the uploaded video file. The properties in the
-          object identify the current processing status and an estimate of the
-          time remaining until YouTube finishes processing the video. This part
-          also indicates whether different types of data or content, such as file
-          details or thumbnail images, are available for the video.
+        description: |-
+          The processingProgress object encapsulates information about YouTube's progress in processing the uploaded video file. The properties in the object identify the current processing status and an estimate of the time remaining until YouTube finishes processing the video. This part also indicates whether different types of data or content, such as file details or thumbnail images, are available for the video.
 
 
-
-          The processingProgress object is designed to be polled so that the
-          video uploaded can track the progress that YouTube has made in
-          processing the uploaded video file. This data can only be retrieved by
-          the video owner.
+          The processingProgress object is designed to be polled so that the video uploaded can track the progress that YouTube has made in processing the uploaded video file. This data can only be retrieved by the video owner.
       projectDetails:
         $ref: '#/definitions/VideoProjectDetails'
         description: The projectDetails object contains information about the project specific video metadata.
@@ -3676,19 +3641,12 @@ definitions:
     description: Video processing progress and completion time estimate.
     properties:
       partsProcessed:
-        description: >-
-          The number of parts of the video that YouTube has already processed.
-          You can estimate the percentage of the video that YouTube has already
-          processed by calculating:
-
+        description: |-
+          The number of parts of the video that YouTube has already processed. You can estimate the percentage of the video that YouTube has already processed by calculating:
           100 * parts_processed / parts_total
 
 
-
-          Note that since the estimated number of parts could increase without
-          a corresponding increase in the number of parts that have already been
-          processed, it is possible that the calculated progress could
-          periodically decrease while YouTube processes a video.
+          Note that since the estimated number of parts could increase without a corresponding increase in the number of parts that have already been processed, it is possible that the calculated progress could periodically decrease while YouTube processes a video.
         format: uint64
         type: string
       partsTotal:
@@ -4023,18 +3981,11 @@ paths:
       description: "Returns a list of channel activity events that match the request criteria. For example, you can retrieve events associated with a particular channel, events associated with the user's subscriptions and Google+ friends, or the YouTube home page feed, which is customized for each user."
       operationId: youtube.activities.list
       parameters:
-        - description: >-
-            The part parameter specifies a comma-separated list of one or more
-            activity resource properties that the API response will include.
+        - description: |-
+            The part parameter specifies a comma-separated list of one or more activity resource properties that the API response will include.
 
 
-
-            If the parameter identifies a property that contains child
-            properties, the child properties will be included in the response.
-            For example, in an activity resource, the snippet property contains
-            other properties that identify the type of activity, a display title
-            for the activity, and so forth. If you set part=snippet, the API
-            response will also contain all of those nested properties.
+            If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in an activity resource, the snippet property contains other properties that identify the type of activity, a display title for the activity, and so forth. If you set part=snippet, the API response will also contain all of those nested properties.
           in: query
           name: part
           required: true
@@ -4095,17 +4046,11 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: >-
-        Posts a bulletin for a specific channel. (The user submitting the request
-        must be authorized to act on the channel's behalf.)
+      description: |-
+        Posts a bulletin for a specific channel. (The user submitting the request must be authorized to act on the channel's behalf.)
 
 
-
-        Note: Even though an activity resource can contain information about
-        actions like a user rating a video or marking a video as a favorite, you
-        need to use other API methods to generate those activity resources. For
-        example, you would use the API's videos.rate() method to rate a video and
-        the playlistItems.insert() method to mark a video as a favorite.
+        Note: Even though an activity resource can contain information about actions like a user rating a video or marking a video as a favorite, you need to use other API methods to generate those activity resources. For example, you would use the API's videos.rate() method to rate a video and the playlistItems.insert() method to mark a video as a favorite.
       operationId: youtube.activities.insert
       parameters:
         - description: The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
@@ -4142,22 +4087,11 @@ paths:
           in: query
           name: onBehalfOf
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The actual CMS account that the user
-            authenticates with must be linked to the specified YouTube content
-            owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -4192,22 +4126,11 @@ paths:
           in: query
           name: onBehalfOf
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The actual CMS account that the user
-            authenticates with must be linked to the specified YouTube content
-            owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -4246,38 +4169,19 @@ paths:
           in: query
           name: onBehalfOf
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The actual CMS account that the user
-            authenticates with must be linked to the specified YouTube content
-            owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - description: >-
-            The sync parameter indicates whether YouTube should automatically
-            synchronize the caption file with the audio track of the video. If
-            you set the value to true, YouTube will disregard any time codes that
-            are in the uploaded caption file and generate new time codes for the
-            captions.
+        - description: |-
+            The sync parameter indicates whether YouTube should automatically synchronize the caption file with the audio track of the video. If you set the value to true, YouTube will disregard any time codes that are in the uploaded caption file and generate new time codes for the captions.
 
 
-
-            You should set the sync parameter to true if you are uploading
-            a transcript, which has no time codes, or if you suspect the time
-            codes in your file are incorrect and want YouTube to try to fix
-            them.
+            You should set the sync parameter to true if you are uploading a transcript, which has no time codes, or if you suspect the time codes in your file are incorrect and want YouTube to try to fix them.
           in: query
           name: sync
           type: boolean
@@ -4312,35 +4216,19 @@ paths:
           in: query
           name: onBehalfOf
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The actual CMS account that the user
-            authenticates with must be linked to the specified YouTube content
-            owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - description: >-
-            Note: The API server only processes the parameter value if the
-            request contains an updated caption file.
+        - description: |-
+            Note: The API server only processes the parameter value if the request contains an updated caption file.
 
 
-
-            The sync parameter indicates whether YouTube should automatically
-            synchronize the caption file with the audio track of the video. If
-            you set the value to true, YouTube will automatically synchronize the
-            caption track with the audio track.
+            The sync parameter indicates whether YouTube should automatically synchronize the caption file with the audio track of the video. If you set the value to true, YouTube will automatically synchronize the caption track with the audio track.
           in: query
           name: sync
           type: boolean
@@ -4373,22 +4261,11 @@ paths:
           in: query
           name: onBehalfOf
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The actual CMS account that the user
-            authenticates with must be linked to the specified YouTube content
-            owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -4437,40 +4314,20 @@ paths:
         - application/octet-stream
         - image/jpeg
         - image/png
-      description: >-
-        Uploads a channel banner image to YouTube. This method represents the
-        first two steps in a three-step process to update the banner image for
-        a channel:
+      description: |-
+        Uploads a channel banner image to YouTube. This method represents the first two steps in a three-step process to update the banner image for a channel:
 
 
-
-        - Call the channelBanners.insert method to upload the binary image data
-        to YouTube. The image must have a 16:9 aspect ratio and be at least
-        2120x1192 pixels.
-
-        - Extract the url property's value from the response that the API returns
-        for step 1.
-
-        - Call the channels.update method to update the channel's branding
-        settings. Set the brandingSettings.image.bannerExternalUrl property's
-        value to the URL obtained in step 2.
+        - Call the channelBanners.insert method to upload the binary image data to YouTube. The image must have a 16:9 aspect ratio and be at least 2120x1192 pixels.
+        - Extract the url property's value from the response that the API returns for step 1.
+        - Call the channels.update method to update the channel's branding settings. Set the brandingSettings.image.bannerExternalUrl property's value to the URL obtained in step 2.
       operationId: youtube.channelBanners.insert
       parameters:
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -4500,21 +4357,11 @@ paths:
           name: id
           required: true
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -4532,20 +4379,11 @@ paths:
       description: Returns channelSection resources that match the API request criteria.
       operationId: youtube.channelSections.list
       parameters:
-        - description: >-
-            The part parameter specifies a comma-separated list of one or more
-            channelSection resource properties that the API response will
-            include. The part names that you can include in the parameter value
-            are id, snippet, and contentDetails.
+        - description: |-
+            The part parameter specifies a comma-separated list of one or more channelSection resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, and contentDetails.
 
 
-
-            If the parameter identifies a property that contains child
-            properties, the child properties will be included in the response.
-            For example, in a channelSection resource, the snippet property
-            contains other properties, such as a display title for the
-            channelSection. If you set part=snippet, the API response will also
-            contain all of those nested properties.
+            If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a channelSection resource, the snippet property contains other properties, such as a display title for the channelSection. If you set part=snippet, the API response will also contain all of those nested properties.
           in: query
           name: part
           required: true
@@ -4566,21 +4404,11 @@ paths:
           in: query
           name: mine
           type: boolean
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -4609,62 +4437,31 @@ paths:
       description: "Adds a channelSection for the authenticated user's channel."
       operationId: youtube.channelSections.insert
       parameters:
-        - description: >-
-            The part parameter serves two purposes in this operation. It
-            identifies the properties that the write operation will set as well
-            as the properties that the API response will include.
+        - description: |-
+            The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
 
 
-
-            The part names that you can include in the parameter value are
-            snippet and contentDetails.
+            The part names that you can include in the parameter value are snippet and contentDetails.
           in: query
           name: part
           required: true
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - description: >-
-            This parameter can only be used in a properly authorized request.
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwnerChannel parameter specifies the YouTube
-            channel ID of the channel to which a video is being added. This
-            parameter is required when a request specifies a value for the
-            onBehalfOfContentOwner parameter, and it can only be used in
-            conjunction with that parameter. In addition, the request must be
-            authorized using a CMS account that is linked to the content owner
-            that the onBehalfOfContentOwner parameter specifies. Finally, the
-            channel that the onBehalfOfContentOwnerChannel parameter value
-            specifies must be linked to the content owner that the
-            onBehalfOfContentOwner parameter specifies.
+            The onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.
 
 
-
-            This parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and perform actions on behalf of the channel
-            specified in the parameter value, without having to provide
-            authentication credentials for each separate channel.
+            This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
           in: query
           name: onBehalfOfContentOwnerChannel
           type: string
@@ -4688,34 +4485,20 @@ paths:
       description: Update a channelSection.
       operationId: youtube.channelSections.update
       parameters:
-        - description: >-
-            The part parameter serves two purposes in this operation. It
-            identifies the properties that the write operation will set as well
-            as the properties that the API response will include.
+        - description: |-
+            The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
 
 
-
-            The part names that you can include in the parameter value are
-            snippet and contentDetails.
+            The part names that you can include in the parameter value are snippet and contentDetails.
           in: query
           name: part
           required: true
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -4740,18 +4523,11 @@ paths:
       description: Returns a collection of zero or more channel resources that match the request criteria.
       operationId: youtube.channels.list
       parameters:
-        - description: >-
-            The part parameter specifies a comma-separated list of one or more
-            channel resource properties that the API response will include.
+        - description: |-
+            The part parameter specifies a comma-separated list of one or more channel resource properties that the API response will include.
 
 
-
-            If the parameter identifies a property that contains child
-            properties, the child properties will be included in the response.
-            For example, in a channel resource, the contentDetails property
-            contains other properties, such as the uploads properties. As such,
-            if you set part=contentDetails, the API response will also contain
-            all of those nested properties.
+            If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a channel resource, the contentDetails property contains other properties, such as the uploads properties. As such, if you set part=contentDetails, the API response will also contain all of those nested properties.
           in: query
           name: part
           required: true
@@ -4772,17 +4548,11 @@ paths:
           in: query
           name: id
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            Set this parameter's value to true to instruct the API to only return
-            channels managed by the content owner that the onBehalfOfContentOwner
-            parameter specifies. The user must be authenticated as a CMS account
-            linked to the specified content owner and onBehalfOfContentOwner must
-            be provided.
+            Set this parameter's value to true to instruct the API to only return channels managed by the content owner that the onBehalfOfContentOwner parameter specifies. The user must be authenticated as a CMS account linked to the specified content owner and onBehalfOfContentOwner must be provided.
           in: query
           name: managedByMe
           type: boolean
@@ -4801,21 +4571,11 @@ paths:
           in: query
           name: mySubscribers
           type: boolean
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -4849,22 +4609,14 @@ paths:
       description: "Updates a channel's metadata. Note that this method currently only supports updates to the channel resource's brandingSettings and invideoPromotion objects and their child properties."
       operationId: youtube.channels.update
       parameters:
-        - description: >-
-            The part parameter serves two purposes in this operation. It
-            identifies the properties that the write operation will set as well
-            as the properties that the API response will include.
+        - description: |-
+            The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
 
 
-
-            The API currently only allows the parameter value to be set to either
-            brandingSettings or invideoPromotion. (You cannot update both of
-            those parts with a single request.)
+            The API currently only allows the parameter value to be set to either brandingSettings or invideoPromotion. (You cannot update both of those parts with a single request.)
 
 
-
-            Note that this method overrides the existing values for all of the
-            mutable properties that are contained in any parts that the parameter
-            value specifies.
+            Note that this method overrides the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies.
           in: query
           name: part
           required: true
@@ -4912,28 +4664,22 @@ paths:
           name: id
           type: string
         - default: 20
-          description: >-
-            The maxResults parameter specifies the maximum number of items that
-            should be returned in the result set.
+          description: |-
+            The maxResults parameter specifies the maximum number of items that should be returned in the result set.
 
 
-
-            Note: This parameter is not supported for use in conjunction with the
-            id parameter.
+            Note: This parameter is not supported for use in conjunction with the id parameter.
           in: query
           maximum: 100
           minimum: 1
           name: maxResults
           type: integer
         - default: published
-          description: >-
-            Set this parameter to limit the returned comment threads to
-            a particular moderation state.
+          description: |-
+            Set this parameter to limit the returned comment threads to a particular moderation state.
 
 
-
-            Note: This parameter is not supported for use in conjunction with the
-            id parameter.
+            Note: This parameter is not supported for use in conjunction with the id parameter.
           enum:
             - heldForReview
             - likelySpam
@@ -4948,27 +4694,19 @@ paths:
           in: query
           name: order
           type: string
-        - description: >-
-            The pageToken parameter identifies a specific page in the result set
-            that should be returned. In an API response, the nextPageToken
-            property identifies the next page of the result that can be
-            retrieved.
+        - description: |-
+            The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identifies the next page of the result that can be retrieved.
 
 
-
-            Note: This parameter is not supported for use in conjunction with the
-            id parameter.
+            Note: This parameter is not supported for use in conjunction with the id parameter.
           in: query
           name: pageToken
           type: string
-        - description: >-
-            The searchTerms parameter instructs the API to limit the API response
-            to only contain comments that contain the specified search terms.
+        - description: |-
+            The searchTerms parameter instructs the API to limit the API response to only contain comments that contain the specified search terms.
 
 
-
-            Note: This parameter is not supported for use in conjunction with the
-            id parameter.
+            Note: This parameter is not supported for use in conjunction with the id parameter.
           in: query
           name: searchTerms
           type: string
@@ -5080,40 +4818,29 @@ paths:
           name: id
           type: string
         - default: 20
-          description: >-
-            The maxResults parameter specifies the maximum number of items that
-            should be returned in the result set.
+          description: |-
+            The maxResults parameter specifies the maximum number of items that should be returned in the result set.
 
 
-
-            Note: This parameter is not supported for use in conjunction with the
-            id parameter.
+            Note: This parameter is not supported for use in conjunction with the id parameter.
           in: query
           maximum: 100
           minimum: 1
           name: maxResults
           type: integer
-        - description: >-
-            The pageToken parameter identifies a specific page in the result set
-            that should be returned. In an API response, the nextPageToken
-            property identifies the next page of the result that can be
-            retrieved.
+        - description: |-
+            The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identifies the next page of the result that can be retrieved.
 
 
-
-            Note: This parameter is not supported for use in conjunction with the
-            id parameter.
+            Note: This parameter is not supported for use in conjunction with the id parameter.
           in: query
           name: pageToken
           type: string
-        - description: >-
-            The parentId parameter specifies the ID of the comment for which
-            replies should be retrieved.
+        - description: |-
+            The parentId parameter specifies the ID of the comment for which replies should be retrieved.
 
 
-
-            Note: YouTube currently supports replies only for top-level comments.
-            However, replies to replies may be supported in the future.
+            Note: YouTube currently supports replies only for top-level comments. However, replies to replies may be supported in the future.
           in: query
           name: parentId
           type: string
@@ -5243,15 +4970,11 @@ paths:
           required: true
           type: string
         - default: false
-          description: >-
-            The banAuthor parameter lets you indicate that you want to
-            automatically reject any additional comments written by the comment's
-            author. Set the parameter value to true to ban the author.
+          description: |-
+            The banAuthor parameter lets you indicate that you want to automatically reject any additional comments written by the comment's author. Set the parameter value to true to ban the author.
 
 
-
-            Note: This parameter is only valid if the moderationStatus parameter
-            is also set to rejected.
+            Note: This parameter is only valid if the moderationStatus parameter is also set to rejected.
           in: query
           name: banAuthor
           type: boolean
@@ -5389,49 +5112,22 @@ paths:
           name: id
           required: true
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - description: >-
-            This parameter can only be used in a properly authorized request.
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwnerChannel parameter specifies the YouTube
-            channel ID of the channel to which a video is being added. This
-            parameter is required when a request specifies a value for the
-            onBehalfOfContentOwner parameter, and it can only be used in
-            conjunction with that parameter. In addition, the request must be
-            authorized using a CMS account that is linked to the content owner
-            that the onBehalfOfContentOwner parameter specifies. Finally, the
-            channel that the onBehalfOfContentOwnerChannel parameter value
-            specifies must be linked to the content owner that the
-            onBehalfOfContentOwner parameter specifies.
+            The onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.
 
 
-
-            This parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and perform actions on behalf of the channel
-            specified in the parameter value, without having to provide
-            authentication credentials for each separate channel.
+            This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
           in: query
           name: onBehalfOfContentOwnerChannel
           type: string
@@ -5477,49 +5173,22 @@ paths:
           in: query
           name: mine
           type: boolean
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - description: >-
-            This parameter can only be used in a properly authorized request.
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwnerChannel parameter specifies the YouTube
-            channel ID of the channel to which a video is being added. This
-            parameter is required when a request specifies a value for the
-            onBehalfOfContentOwner parameter, and it can only be used in
-            conjunction with that parameter. In addition, the request must be
-            authorized using a CMS account that is linked to the content owner
-            that the onBehalfOfContentOwner parameter specifies. Finally, the
-            channel that the onBehalfOfContentOwnerChannel parameter value
-            specifies must be linked to the content owner that the
-            onBehalfOfContentOwner parameter specifies.
+            The onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.
 
 
-
-            This parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and perform actions on behalf of the channel
-            specified in the parameter value, without having to provide
-            authentication credentials for each separate channel.
+            This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
           in: query
           name: onBehalfOfContentOwnerChannel
           type: string
@@ -5551,62 +5220,31 @@ paths:
       description: Creates a broadcast.
       operationId: youtube.liveBroadcasts.insert
       parameters:
-        - description: >-
-            The part parameter serves two purposes in this operation. It
-            identifies the properties that the write operation will set as well
-            as the properties that the API response will include.
+        - description: |-
+            The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
 
 
-
-            The part properties that you can include in the parameter value are
-            id, snippet, contentDetails, and status.
+            The part properties that you can include in the parameter value are id, snippet, contentDetails, and status.
           in: query
           name: part
           required: true
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - description: >-
-            This parameter can only be used in a properly authorized request.
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwnerChannel parameter specifies the YouTube
-            channel ID of the channel to which a video is being added. This
-            parameter is required when a request specifies a value for the
-            onBehalfOfContentOwner parameter, and it can only be used in
-            conjunction with that parameter. In addition, the request must be
-            authorized using a CMS account that is linked to the content owner
-            that the onBehalfOfContentOwner parameter specifies. Finally, the
-            channel that the onBehalfOfContentOwnerChannel parameter value
-            specifies must be linked to the content owner that the
-            onBehalfOfContentOwner parameter specifies.
+            The onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.
 
 
-
-            This parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and perform actions on behalf of the channel
-            specified in the parameter value, without having to provide
-            authentication credentials for each separate channel.
+            This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
           in: query
           name: onBehalfOfContentOwnerChannel
           type: string
@@ -5629,75 +5267,34 @@ paths:
       description: "Updates a broadcast. For example, you could modify the broadcast settings defined in the liveBroadcast resource's contentDetails object."
       operationId: youtube.liveBroadcasts.update
       parameters:
-        - description: >-
-            The part parameter serves two purposes in this operation. It
-            identifies the properties that the write operation will set as well
-            as the properties that the API response will include.
+        - description: |-
+            The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
 
 
-
-            The part properties that you can include in the parameter value are
-            id, snippet, contentDetails, and status.
+            The part properties that you can include in the parameter value are id, snippet, contentDetails, and status.
 
 
-
-            Note that this method will override the existing values for all of
-            the mutable properties that are contained in any parts that the
-            parameter value specifies. For example, a broadcast's privacy status
-            is defined in the status part. As such, if your request is updating
-            a private or unlisted broadcast, and the request's part parameter
-            value includes the status part, the broadcast's privacy setting will
-            be updated to whatever value the request body specifies. If the
-            request body does not specify a value, the existing privacy setting
-            will be removed and the broadcast will revert to the default privacy
-            setting.
+            Note that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. For example, a broadcast's privacy status is defined in the status part. As such, if your request is updating a private or unlisted broadcast, and the request's part parameter value includes the status part, the broadcast's privacy setting will be updated to whatever value the request body specifies. If the request body does not specify a value, the existing privacy setting will be removed and the broadcast will revert to the default privacy setting.
           in: query
           name: part
           required: true
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - description: >-
-            This parameter can only be used in a properly authorized request.
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwnerChannel parameter specifies the YouTube
-            channel ID of the channel to which a video is being added. This
-            parameter is required when a request specifies a value for the
-            onBehalfOfContentOwner parameter, and it can only be used in
-            conjunction with that parameter. In addition, the request must be
-            authorized using a CMS account that is linked to the content owner
-            that the onBehalfOfContentOwner parameter specifies. Finally, the
-            channel that the onBehalfOfContentOwnerChannel parameter value
-            specifies must be linked to the content owner that the
-            onBehalfOfContentOwner parameter specifies.
+            The onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.
 
 
-
-            This parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and perform actions on behalf of the channel
-            specified in the parameter value, without having to provide
-            authentication credentials for each separate channel.
+            This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
           in: query
           name: onBehalfOfContentOwnerChannel
           type: string
@@ -5739,49 +5336,22 @@ paths:
           name: part
           required: true
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - description: >-
-            This parameter can only be used in a properly authorized request.
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwnerChannel parameter specifies the YouTube
-            channel ID of the channel to which a video is being added. This
-            parameter is required when a request specifies a value for the
-            onBehalfOfContentOwner parameter, and it can only be used in
-            conjunction with that parameter. In addition, the request must be
-            authorized using a CMS account that is linked to the content owner
-            that the onBehalfOfContentOwner parameter specifies. Finally, the
-            channel that the onBehalfOfContentOwnerChannel parameter value
-            specifies must be linked to the content owner that the
-            onBehalfOfContentOwner parameter specifies.
+            The onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.
 
 
-
-            This parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and perform actions on behalf of the channel
-            specified in the parameter value, without having to provide
-            authentication credentials for each separate channel.
+            This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
           in: query
           name: onBehalfOfContentOwnerChannel
           type: string
@@ -5827,71 +5397,33 @@ paths:
           in: query
           name: displaySlate
           type: boolean
-        - description: >-
-            The offsetTimeMs parameter specifies a positive time offset when the
-            specified slate change will occur. The value is measured in
-            milliseconds from the beginning of the broadcast's monitor stream,
-            which is the time that the testing phase for the broadcast began.
-            Even though it is specified in milliseconds, the value is actually an
-            approximation, and YouTube completes the requested action as closely
-            as possible to that time.
+        - description: |-
+            The offsetTimeMs parameter specifies a positive time offset when the specified slate change will occur. The value is measured in milliseconds from the beginning of the broadcast's monitor stream, which is the time that the testing phase for the broadcast began. Even though it is specified in milliseconds, the value is actually an approximation, and YouTube completes the requested action as closely as possible to that time.
 
 
-
-            If you do not specify a value for this parameter, then YouTube
-            performs the action as soon as possible. See the Getting started
-            guide for more details.
+            If you do not specify a value for this parameter, then YouTube performs the action as soon as possible. See the Getting started guide for more details.
 
 
-
-            Important: You should only specify a value for this parameter if your
-            broadcast stream is delayed.
+            Important: You should only specify a value for this parameter if your broadcast stream is delayed.
           in: query
           name: offsetTimeMs
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - description: >-
-            This parameter can only be used in a properly authorized request.
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwnerChannel parameter specifies the YouTube
-            channel ID of the channel to which a video is being added. This
-            parameter is required when a request specifies a value for the
-            onBehalfOfContentOwner parameter, and it can only be used in
-            conjunction with that parameter. In addition, the request must be
-            authorized using a CMS account that is linked to the content owner
-            that the onBehalfOfContentOwner parameter specifies. Finally, the
-            channel that the onBehalfOfContentOwnerChannel parameter value
-            specifies must be linked to the content owner that the
-            onBehalfOfContentOwner parameter specifies.
+            The onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.
 
 
-
-            This parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and perform actions on behalf of the channel
-            specified in the parameter value, without having to provide
-            authentication credentials for each separate channel.
+            This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
           in: query
           name: onBehalfOfContentOwnerChannel
           type: string
@@ -5942,49 +5474,22 @@ paths:
           name: part
           required: true
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - description: >-
-            This parameter can only be used in a properly authorized request.
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwnerChannel parameter specifies the YouTube
-            channel ID of the channel to which a video is being added. This
-            parameter is required when a request specifies a value for the
-            onBehalfOfContentOwner parameter, and it can only be used in
-            conjunction with that parameter. In addition, the request must be
-            authorized using a CMS account that is linked to the content owner
-            that the onBehalfOfContentOwner parameter specifies. Finally, the
-            channel that the onBehalfOfContentOwnerChannel parameter value
-            specifies must be linked to the content owner that the
-            onBehalfOfContentOwner parameter specifies.
+            The onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.
 
 
-
-            This parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and perform actions on behalf of the channel
-            specified in the parameter value, without having to provide
-            authentication credentials for each separate channel.
+            This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
           in: query
           name: onBehalfOfContentOwnerChannel
           type: string
@@ -6009,49 +5514,22 @@ paths:
           name: id
           required: true
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - description: >-
-            This parameter can only be used in a properly authorized request.
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwnerChannel parameter specifies the YouTube
-            channel ID of the channel to which a video is being added. This
-            parameter is required when a request specifies a value for the
-            onBehalfOfContentOwner parameter, and it can only be used in
-            conjunction with that parameter. In addition, the request must be
-            authorized using a CMS account that is linked to the content owner
-            that the onBehalfOfContentOwner parameter specifies. Finally, the
-            channel that the onBehalfOfContentOwnerChannel parameter value
-            specifies must be linked to the content owner that the
-            onBehalfOfContentOwner parameter specifies.
+            The onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.
 
 
-
-            This parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and perform actions on behalf of the channel
-            specified in the parameter value, without having to provide
-            authentication credentials for each separate channel.
+            This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
           in: query
           name: onBehalfOfContentOwnerChannel
           type: string
@@ -6088,49 +5566,22 @@ paths:
           in: query
           name: mine
           type: boolean
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - description: >-
-            This parameter can only be used in a properly authorized request.
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwnerChannel parameter specifies the YouTube
-            channel ID of the channel to which a video is being added. This
-            parameter is required when a request specifies a value for the
-            onBehalfOfContentOwner parameter, and it can only be used in
-            conjunction with that parameter. In addition, the request must be
-            authorized using a CMS account that is linked to the content owner
-            that the onBehalfOfContentOwner parameter specifies. Finally, the
-            channel that the onBehalfOfContentOwnerChannel parameter value
-            specifies must be linked to the content owner that the
-            onBehalfOfContentOwner parameter specifies.
+            The onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.
 
 
-
-            This parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and perform actions on behalf of the channel
-            specified in the parameter value, without having to provide
-            authentication credentials for each separate channel.
+            This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
           in: query
           name: onBehalfOfContentOwnerChannel
           type: string
@@ -6162,62 +5613,31 @@ paths:
       description: 'Creates a video stream. The stream enables you to send your video to YouTube, which can then broadcast the video to your audience.'
       operationId: youtube.liveStreams.insert
       parameters:
-        - description: >-
-            The part parameter serves two purposes in this operation. It
-            identifies the properties that the write operation will set as well
-            as the properties that the API response will include.
+        - description: |-
+            The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
 
 
-
-            The part properties that you can include in the parameter value are
-            id, snippet, cdn, and status.
+            The part properties that you can include in the parameter value are id, snippet, cdn, and status.
           in: query
           name: part
           required: true
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - description: >-
-            This parameter can only be used in a properly authorized request.
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwnerChannel parameter specifies the YouTube
-            channel ID of the channel to which a video is being added. This
-            parameter is required when a request specifies a value for the
-            onBehalfOfContentOwner parameter, and it can only be used in
-            conjunction with that parameter. In addition, the request must be
-            authorized using a CMS account that is linked to the content owner
-            that the onBehalfOfContentOwner parameter specifies. Finally, the
-            channel that the onBehalfOfContentOwnerChannel parameter value
-            specifies must be linked to the content owner that the
-            onBehalfOfContentOwner parameter specifies.
+            The onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.
 
 
-
-            This parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and perform actions on behalf of the channel
-            specified in the parameter value, without having to provide
-            authentication credentials for each separate channel.
+            This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
           in: query
           name: onBehalfOfContentOwnerChannel
           type: string
@@ -6240,70 +5660,34 @@ paths:
       description: 'Updates a video stream. If the properties that you want to change cannot be updated, then you need to create a new stream with the proper settings.'
       operationId: youtube.liveStreams.update
       parameters:
-        - description: >-
-            The part parameter serves two purposes in this operation. It
-            identifies the properties that the write operation will set as well
-            as the properties that the API response will include.
+        - description: |-
+            The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
 
 
-
-            The part properties that you can include in the parameter value are
-            id, snippet, cdn, and status.
+            The part properties that you can include in the parameter value are id, snippet, cdn, and status.
 
 
-
-            Note that this method will override the existing values for all of
-            the mutable properties that are contained in any parts that the
-            parameter value specifies. If the request body does not specify
-            a value for a mutable property, the existing value for that property
-            will be removed.
+            Note that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. If the request body does not specify a value for a mutable property, the existing value for that property will be removed.
           in: query
           name: part
           required: true
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - description: >-
-            This parameter can only be used in a properly authorized request.
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwnerChannel parameter specifies the YouTube
-            channel ID of the channel to which a video is being added. This
-            parameter is required when a request specifies a value for the
-            onBehalfOfContentOwner parameter, and it can only be used in
-            conjunction with that parameter. In addition, the request must be
-            authorized using a CMS account that is linked to the content owner
-            that the onBehalfOfContentOwner parameter specifies. Finally, the
-            channel that the onBehalfOfContentOwnerChannel parameter value
-            specifies must be linked to the content owner that the
-            onBehalfOfContentOwner parameter specifies.
+            The onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.
 
 
-
-            This parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and perform actions on behalf of the channel
-            specified in the parameter value, without having to provide
-            authentication credentials for each separate channel.
+            This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
           in: query
           name: onBehalfOfContentOwnerChannel
           type: string
@@ -6346,18 +5730,11 @@ paths:
       description: Returns a collection of playlist items that match the API request parameters. You can retrieve all of the playlist items in a specified playlist or retrieve one or more playlist items by their unique IDs.
       operationId: youtube.playlistItems.list
       parameters:
-        - description: >-
-            The part parameter specifies a comma-separated list of one or more
-            playlistItem resource properties that the API response will include.
+        - description: |-
+            The part parameter specifies a comma-separated list of one or more playlistItem resource properties that the API response will include.
 
 
-
-            If the parameter identifies a property that contains child
-            properties, the child properties will be included in the response.
-            For example, in a playlistItem resource, the snippet property
-            contains numerous fields, including the title, description, position,
-            and resourceId properties. As such, if you set part=snippet, the API
-            response will contain all of those properties.
+            If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a playlistItem resource, the snippet property contains numerous fields, including the title, description, position, and resourceId properties. As such, if you set part=snippet, the API response will contain all of those properties.
           in: query
           name: part
           required: true
@@ -6373,21 +5750,11 @@ paths:
           minimum: 0
           name: maxResults
           type: integer
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -6433,21 +5800,11 @@ paths:
           name: part
           required: true
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -6471,24 +5828,11 @@ paths:
       description: "Modifies a playlist item. For example, you could update the item's position in the playlist."
       operationId: youtube.playlistItems.update
       parameters:
-        - description: >-
-            The part parameter serves two purposes in this operation. It
-            identifies the properties that the write operation will set as well
-            as the properties that the API response will include.
+        - description: |-
+            The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
 
 
-
-            Note that this method will override the existing values for all of
-            the mutable properties that are contained in any parts that the
-            parameter value specifies. For example, a playlist item can specify
-            a start time and end time, which identify the times portion of the
-            video that should play when users watch the video in the playlist. If
-            your request is updating a playlist item that sets these values, and
-            the request's part parameter value includes the contentDetails part,
-            the playlist item's start and end times will be updated to whatever
-            value the request body specifies. If the request body does not
-            specify values, the existing start and end times will be removed and
-            replaced with the default settings.
+            Note that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. For example, a playlist item can specify a start time and end time, which identify the times portion of the video that should play when users watch the video in the playlist. If your request is updating a playlist item that sets these values, and the request's part parameter value includes the contentDetails part, the playlist item's start and end times will be updated to whatever value the request body specifies. If the request body does not specify values, the existing start and end times will be removed and replaced with the default settings.
           in: query
           name: part
           required: true
@@ -6519,21 +5863,11 @@ paths:
           name: id
           required: true
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -6551,18 +5885,11 @@ paths:
       description: 'Returns a collection of playlists that match the API request parameters. For example, you can retrieve all playlists that the authenticated user owns, or you can retrieve one or more playlists by their unique IDs.'
       operationId: youtube.playlists.list
       parameters:
-        - description: >-
-            The part parameter specifies a comma-separated list of one or more
-            playlist resource properties that the API response will include.
+        - description: |-
+            The part parameter specifies a comma-separated list of one or more playlist resource properties that the API response will include.
 
 
-
-            If the parameter identifies a property that contains child
-            properties, the child properties will be included in the response.
-            For example, in a playlist resource, the snippet property contains
-            properties like author, title, description, tags, and timeCreated. As
-            such, if you set part=snippet, the API response will contain all of
-            those properties.
+            If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a playlist resource, the snippet property contains properties like author, title, description, tags, and timeCreated. As such, if you set part=snippet, the API response will contain all of those properties.
           in: query
           name: part
           required: true
@@ -6590,49 +5917,22 @@ paths:
           in: query
           name: mine
           type: boolean
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - description: >-
-            This parameter can only be used in a properly authorized request.
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwnerChannel parameter specifies the YouTube
-            channel ID of the channel to which a video is being added. This
-            parameter is required when a request specifies a value for the
-            onBehalfOfContentOwner parameter, and it can only be used in
-            conjunction with that parameter. In addition, the request must be
-            authorized using a CMS account that is linked to the content owner
-            that the onBehalfOfContentOwner parameter specifies. Finally, the
-            channel that the onBehalfOfContentOwnerChannel parameter value
-            specifies must be linked to the content owner that the
-            onBehalfOfContentOwner parameter specifies.
+            The onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.
 
 
-
-            This parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and perform actions on behalf of the channel
-            specified in the parameter value, without having to provide
-            authentication credentials for each separate channel.
+            This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
           in: query
           name: onBehalfOfContentOwnerChannel
           type: string
@@ -6670,49 +5970,22 @@ paths:
           name: part
           required: true
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - description: >-
-            This parameter can only be used in a properly authorized request.
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwnerChannel parameter specifies the YouTube
-            channel ID of the channel to which a video is being added. This
-            parameter is required when a request specifies a value for the
-            onBehalfOfContentOwner parameter, and it can only be used in
-            conjunction with that parameter. In addition, the request must be
-            authorized using a CMS account that is linked to the content owner
-            that the onBehalfOfContentOwner parameter specifies. Finally, the
-            channel that the onBehalfOfContentOwnerChannel parameter value
-            specifies must be linked to the content owner that the
-            onBehalfOfContentOwner parameter specifies.
+            The onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.
 
 
-
-            This parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and perform actions on behalf of the channel
-            specified in the parameter value, without having to provide
-            authentication credentials for each separate channel.
+            This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
           in: query
           name: onBehalfOfContentOwnerChannel
           type: string
@@ -6736,38 +6009,20 @@ paths:
       description: "Modifies a playlist. For example, you could change a playlist's title, description, or privacy status."
       operationId: youtube.playlists.update
       parameters:
-        - description: >-
-            The part parameter serves two purposes in this operation. It
-            identifies the properties that the write operation will set as well
-            as the properties that the API response will include.
+        - description: |-
+            The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
 
 
-
-            Note that this method will override the existing values for mutable
-            properties that are contained in any parts that the request body
-            specifies. For example, a playlist's description is contained in the
-            snippet part, which must be included in the request body. If the
-            request does not specify a value for the snippet.description
-            property, the playlist's existing description will be deleted.
+            Note that this method will override the existing values for mutable properties that are contained in any parts that the request body specifies. For example, a playlist's description is contained in the snippet part, which must be included in the request body. If the request does not specify a value for the snippet.description property, the playlist's existing description will be deleted.
           in: query
           name: part
           required: true
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -6816,17 +6071,11 @@ paths:
           in: query
           name: eventType
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The forContentOwner parameter restricts the search to only retrieve
-            resources owned by the content owner specified by the
-            onBehalfOfContentOwner parameter. The user must be authenticated
-            using a CMS account linked to the specified content owner and
-            onBehalfOfContentOwner must be provided.
+            The forContentOwner parameter restricts the search to only retrieve resources owned by the content owner specified by the onBehalfOfContentOwner parameter. The user must be authenticated using a CMS account linked to the specified content owner and onBehalfOfContentOwner must be provided.
           in: query
           name: forContentOwner
           type: boolean
@@ -6838,45 +6087,25 @@ paths:
           in: query
           name: forMine
           type: boolean
-        - description: >-
-            The location parameter, in conjunction with the locationRadius
-            parameter, defines a circular geographic area and also restricts
-            a search to videos that specify, in their metadata, a geographic
-            location that falls within that area. The parameter value is a string
-            that specifies latitude/longitude coordinates e.g.
-            (37.42307,-122.08427).
+        - description: |-
+            The location parameter, in conjunction with the locationRadius parameter, defines a circular geographic area and also restricts a search to videos that specify, in their metadata, a geographic location that falls within that area. The parameter value is a string that specifies latitude/longitude coordinates e.g. (37.42307,-122.08427).
 
 
 
 
-
-            - The location parameter value identifies the point at the center of
-            the area.
-
-            - The locationRadius parameter specifies the maximum distance that
-            the location associated with a video can be from that point for the
-            video to still be included in the search results.The API returns an
-            error if your request specifies a value for the location parameter
-            but does not also specify a value for the locationRadius parameter.
+            - The location parameter value identifies the point at the center of the area.
+            - The locationRadius parameter specifies the maximum distance that the location associated with a video can be from that point for the video to still be included in the search results.The API returns an error if your request specifies a value for the location parameter but does not also specify a value for the locationRadius parameter.
           in: query
           name: location
           type: string
-        - description: >-
-            The locationRadius parameter, in conjunction with the location
-            parameter, defines a circular geographic area.
+        - description: |-
+            The locationRadius parameter, in conjunction with the location parameter, defines a circular geographic area.
 
 
-
-            The parameter value must be a floating point number followed by
-            a measurement unit. Valid measurement units are m, km, ft, and mi.
-            For example, valid parameter values include 1500m, 5km, 10000ft, and
-            0.75mi. The API does not support locationRadius parameter values
-            larger than 1000 kilometers.
+            The parameter value must be a floating point number followed by a measurement unit. Valid measurement units are m, km, ft, and mi. For example, valid parameter values include 1500m, 5km, 10000ft, and 0.75mi. The API does not support locationRadius parameter values larger than 1000 kilometers.
 
 
-
-            Note: See the definition of the location parameter for more
-            information.
+            Note: See the definition of the location parameter for more information.
           in: query
           name: locationRadius
           type: string
@@ -6887,21 +6116,11 @@ paths:
           minimum: 0
           name: maxResults
           type: integer
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -7077,18 +6296,11 @@ paths:
       description: Returns subscription resources that match the API request criteria.
       operationId: youtube.subscriptions.list
       parameters:
-        - description: >-
-            The part parameter specifies a comma-separated list of one or more
-            subscription resource properties that the API response will include.
+        - description: |-
+            The part parameter specifies a comma-separated list of one or more subscription resource properties that the API response will include.
 
 
-
-            If the parameter identifies a property that contains child
-            properties, the child properties will be included in the response.
-            For example, in a subscription resource, the snippet property
-            contains other properties, such as a display title for the
-            subscription. If you set part=snippet, the API response will also
-            contain all of those nested properties.
+            If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a subscription resource, the snippet property contains other properties, such as a display title for the subscription. If you set part=snippet, the API response will also contain all of those nested properties.
           in: query
           name: part
           required: true
@@ -7120,49 +6332,22 @@ paths:
           in: query
           name: mySubscribers
           type: boolean
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - description: >-
-            This parameter can only be used in a properly authorized request.
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwnerChannel parameter specifies the YouTube
-            channel ID of the channel to which a video is being added. This
-            parameter is required when a request specifies a value for the
-            onBehalfOfContentOwner parameter, and it can only be used in
-            conjunction with that parameter. In addition, the request must be
-            authorized using a CMS account that is linked to the content owner
-            that the onBehalfOfContentOwner parameter specifies. Finally, the
-            channel that the onBehalfOfContentOwnerChannel parameter value
-            specifies must be linked to the content owner that the
-            onBehalfOfContentOwner parameter specifies.
+            The onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.
 
 
-
-            This parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and perform actions on behalf of the channel
-            specified in the parameter value, without having to provide
-            authentication credentials for each separate channel.
+            This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
           in: query
           name: onBehalfOfContentOwnerChannel
           type: string
@@ -7247,22 +6432,11 @@ paths:
           name: videoId
           required: true
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The actual CMS account that the user
-            authenticates with must be linked to the specified YouTube content
-            owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -7368,22 +6542,11 @@ paths:
           name: id
           required: true
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The actual CMS account that the user
-            authenticates with must be linked to the specified YouTube content
-            owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -7401,18 +6564,11 @@ paths:
       description: Returns a list of videos that match the API request parameters.
       operationId: youtube.videos.list
       parameters:
-        - description: >-
-            The part parameter specifies a comma-separated list of one or more
-            video resource properties that the API response will include.
+        - description: |-
+            The part parameter specifies a comma-separated list of one or more video resource properties that the API response will include.
 
 
-
-            If the parameter identifies a property that contains child
-            properties, the child properties will be included in the response.
-            For example, in a video resource, the snippet property contains the
-            channelId, title, description, tags, and categoryId properties. As
-            such, if you set part=snippet, the API response will contain all of
-            those properties.
+            If the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a video resource, the snippet property contains the channelId, title, description, tags, and categoryId properties. As such, if you set part=snippet, the API response will contain all of those properties.
           in: query
           name: part
           required: true
@@ -7423,19 +6579,11 @@ paths:
           in: query
           name: chart
           type: string
-        - description: >-
-            The hl parameter instructs the API to retrieve localized resource
-            metadata for a specific application language that the YouTube website
-            supports. The parameter value must be a language code included in the
-            list returned by the i18nLanguages.list method.
+        - description: |-
+            The hl parameter instructs the API to retrieve localized resource metadata for a specific application language that the YouTube website supports. The parameter value must be a language code included in the list returned by the i18nLanguages.list method.
 
 
-
-            If localized resource details are available in that language, the
-            resource's snippet.localized object will contain the localized
-            values. However, if localized details are not available, the
-            snippet.localized object will contain resource details in the
-            resource's default language.
+            If localized resource details are available in that language, the resource's snippet.localized object will contain the localized values. However, if localized details are not available, the snippet.localized object will contain resource details in the resource's default language.
           in: query
           name: hl
           type: string
@@ -7448,15 +6596,11 @@ paths:
           name: locale
           type: string
         - default: 5
-          description: >-
-            The maxResults parameter specifies the maximum number of items that
-            should be returned in the result set.
+          description: |-
+            The maxResults parameter specifies the maximum number of items that should be returned in the result set.
 
 
-
-            Note: This parameter is supported for use in conjunction with the
-            myRating parameter, but it is not supported for use in conjunction
-            with the id parameter.
+            Note: This parameter is supported for use in conjunction with the myRating parameter, but it is not supported for use in conjunction with the id parameter.
           in: query
           maximum: 50
           minimum: 1
@@ -7469,35 +6613,19 @@ paths:
           in: query
           name: myRating
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - description: >-
-            The pageToken parameter identifies a specific page in the result set
-            that should be returned. In an API response, the nextPageToken and
-            prevPageToken properties identify other pages that could be
-            retrieved.
+        - description: |-
+            The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.
 
 
-
-            Note: This parameter is supported for use in conjunction with the
-            myRating parameter, but it is not supported for use in conjunction
-            with the id parameter.
+            Note: This parameter is supported for use in conjunction with the myRating parameter, but it is not supported for use in conjunction with the id parameter.
           in: query
           name: pageToken
           type: string
@@ -7623,19 +6751,11 @@ paths:
       description: "Uploads a video to YouTube and optionally sets the video's metadata."
       operationId: youtube.videos.insert
       parameters:
-        - description: >-
-            The part parameter serves two purposes in this operation. It
-            identifies the properties that the write operation will set as well
-            as the properties that the API response will include.
+        - description: |-
+            The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
 
 
-
-            Note that not all parts contain properties that can be set when
-            inserting or updating a video. For example, the statistics object
-            encapsulates statistics that YouTube calculates for a video and does
-            not contain values that you can set or modify. If the parameter value
-            specifies a part that does not contain mutable values, that part will
-            still be included in the API response.
+            Note that not all parts contain properties that can be set when inserting or updating a video. For example, the statistics object encapsulates statistics that YouTube calculates for a video and does not contain values that you can set or modify. If the parameter value specifies a part that does not contain mutable values, that part will still be included in the API response.
           in: query
           name: part
           required: true
@@ -7649,49 +6769,22 @@ paths:
           in: query
           name: notifySubscribers
           type: boolean
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
-        - description: >-
-            This parameter can only be used in a properly authorized request.
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwnerChannel parameter specifies the YouTube
-            channel ID of the channel to which a video is being added. This
-            parameter is required when a request specifies a value for the
-            onBehalfOfContentOwner parameter, and it can only be used in
-            conjunction with that parameter. In addition, the request must be
-            authorized using a CMS account that is linked to the content owner
-            that the onBehalfOfContentOwner parameter specifies. Finally, the
-            channel that the onBehalfOfContentOwnerChannel parameter value
-            specifies must be linked to the content owner that the
-            onBehalfOfContentOwner parameter specifies.
+            The onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.
 
 
-
-            This parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and perform actions on behalf of the channel
-            specified in the parameter value, without having to provide
-            authentication credentials for each separate channel.
+            This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.
           in: query
           name: onBehalfOfContentOwnerChannel
           type: string
@@ -7720,51 +6813,23 @@ paths:
       description: "Updates a video's metadata."
       operationId: youtube.videos.update
       parameters:
-        - description: >-
-            The part parameter serves two purposes in this operation. It
-            identifies the properties that the write operation will set as well
-            as the properties that the API response will include.
+        - description: |-
+            The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
 
 
-
-            Note that this method will override the existing values for all of
-            the mutable properties that are contained in any parts that the
-            parameter value specifies. For example, a video's privacy setting is
-            contained in the status part. As such, if your request is updating
-            a private video, and the request's part parameter value includes the
-            status part, the video's privacy setting will be updated to whatever
-            value the request body specifies. If the request body does not
-            specify a value, the existing privacy setting will be removed and the
-            video will revert to the default privacy setting.
+            Note that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. For example, a video's privacy setting is contained in the status part. As such, if your request is updating a private video, and the request's part parameter value includes the status part, the video's privacy setting will be updated to whatever value the request body specifies. If the request body does not specify a value, the existing privacy setting will be removed and the video will revert to the default privacy setting.
 
 
-
-            In addition, not all parts contain properties that can be set when
-            inserting or updating a video. For example, the statistics object
-            encapsulates statistics that YouTube calculates for a video and does
-            not contain values that you can set or modify. If the parameter value
-            specifies a part that does not contain mutable values, that part will
-            still be included in the API response.
+            In addition, not all parts contain properties that can be set when inserting or updating a video. For example, the statistics object encapsulates statistics that YouTube calculates for a video and does not contain values that you can set or modify. If the parameter value specifies a part that does not contain mutable values, that part will still be included in the API response.
           in: query
           name: part
           required: true
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The actual CMS account that the user
-            authenticates with must be linked to the specified YouTube content
-            owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -7794,21 +6859,11 @@ paths:
           name: id
           required: true
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -7882,21 +6937,11 @@ paths:
       description: Report abuse for a video.
       operationId: youtube.videos.reportAbuse
       parameters:
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -7936,21 +6981,11 @@ paths:
           name: channelId
           required: true
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -7987,21 +7022,11 @@ paths:
           name: channelId
           required: true
           type: string
-        - description: >-
-            Note: This parameter is intended exclusively for YouTube content
-            partners.
+        - description: |-
+            Note: This parameter is intended exclusively for YouTube content partners.
 
 
-
-            The onBehalfOfContentOwner parameter indicates that the request's
-            authorization credentials identify a YouTube CMS user who is acting
-            on behalf of the content owner specified in the parameter value. This
-            parameter is intended for YouTube content partners that own and
-            manage many different YouTube channels. It allows content owners to
-            authenticate once and get access to all their video and channel data,
-            without having to provide authentication credentials for each
-            individual channel. The CMS account that the user authenticates with
-            must be linked to the specified YouTube content owner.
+            The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.
           in: query
           name: onBehalfOfContentOwner
           type: string

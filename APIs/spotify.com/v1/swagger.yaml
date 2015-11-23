@@ -882,9 +882,8 @@ info:
 paths:
   /albums:
     get:
-      description: >
-        [Get Several
-        Albums](https://developer.spotify.com/web-api/get-several-albums/)
+      description: |
+        [Get Several Albums](https://developer.spotify.com/web-api/get-several-albums/)
       parameters:
         - description: A comma-separated list of IDs
           in: query
@@ -928,9 +927,8 @@ paths:
             $ref: '#/definitions/album'
   '/albums/{id}/tracks':
     get:
-      description: >
-        [Get an Album's
-        Tracks](https://developer.spotify.com/web-api/get-albums-tracks/)
+      description: |
+        [Get an Album's Tracks](https://developer.spotify.com/web-api/get-albums-tracks/)
       parameters:
         - description: The Spotify ID for the album
           in: path
@@ -963,9 +961,8 @@ paths:
             $ref: '#/definitions/track-simple-page'
   /artists:
     get:
-      description: >
-        [Get Several
-        Artists](https://developer.spotify.com/web-api/get-several-artists/)
+      description: |
+        [Get Several Artists](https://developer.spotify.com/web-api/get-several-artists/)
       parameters:
         - description: A comma-separated list of IDs
           in: query
@@ -999,9 +996,8 @@ paths:
             $ref: '#/definitions/artist'
   '/artists/{id}/albums':
     get:
-      description: >
-        [Get an Artist's
-        Albums](https://developer.spotify.com/web-api/get-artists-albums/)
+      description: |
+        [Get an Artist's Albums](https://developer.spotify.com/web-api/get-artists-albums/)
       parameters:
         - description: The Spotify ID for the artist
           in: path
@@ -1039,9 +1035,8 @@ paths:
             $ref: '#/definitions/album-simple-page'
   '/artists/{id}/related-artists':
     get:
-      description: >
-        [Get an Artist's Related
-        Artists](https://developer.spotify.com/web-api/get-related-artists/)
+      description: |
+        [Get an Artist's Related Artists](https://developer.spotify.com/web-api/get-related-artists/)
       parameters:
         - description: The Spotify ID for the artist
           in: path
@@ -1060,9 +1055,8 @@ paths:
             type: object
   '/artists/{id}/top-tracks':
     get:
-      description: >
-        [Get an Artist's Top
-        Tracks](https://developer.spotify.com/web-api/get-artists-top-tracks/)
+      description: |
+        [Get an Artist's Top Tracks](https://developer.spotify.com/web-api/get-artists-top-tracks/)
       parameters:
         - description: The Spotify ID for the artist
           in: path
@@ -1086,9 +1080,8 @@ paths:
             type: object
   /browse/categories:
     get:
-      description: >
-        [Get a List of Browse
-        Categories](https://developer.spotify.com/web-api/get-list-categories/)
+      description: |
+        [Get a List of Browse Categories](https://developer.spotify.com/web-api/get-list-categories/)
       parameters:
         - default: 20
           description: The maximum number of items to return
@@ -1109,10 +1102,8 @@ paths:
           name: country
           required: false
           type: string
-        - description: >
-            The desired language, consisting of an ISO 639 language code and an
-            ISO 3166-1 alpha-2 country code, joined by an underscore. For
-            example: es_MX, meaning "Spanish (Mexico)".
+        - description: |
+            The desired language, consisting of an ISO 639 language code and an ISO 3166-1 alpha-2 country code, joined by an underscore. For example: es_MX, meaning "Spanish (Mexico)".
           in: query
           name: locale
           required: false
@@ -1127,15 +1118,12 @@ paths:
           schema:
             $ref: '#/definitions/category-page'
         '429':
-          description: >
-            API rate limit exceeded. See
-            http://developer.spotify.com/web-api/user-guide/#rate-limiting for
-            details.
+          description: |
+            API rate limit exceeded. See http://developer.spotify.com/web-api/user-guide/#rate-limiting for details.
   '/browse/categories/{category_id}':
     get:
-      description: >
-        [Get a Single Browse
-        Category](https://developer.spotify.com/web-api/get-category/)
+      description: |
+        [Get a Single Browse Category](https://developer.spotify.com/web-api/get-category/)
       parameters:
         - description: The Spotify ID of the category you wish to fetch.
           in: path
@@ -1147,10 +1135,8 @@ paths:
           name: country
           required: false
           type: string
-        - description: >
-            The desired language, consisting of an ISO 639 language code and an
-            ISO 3166-1 alpha-2 country code, joined by an underscore. For
-            example: es_MX, meaning "Spanish (Mexico)".
+        - description: |
+            The desired language, consisting of an ISO 639 language code and an ISO 3166-1 alpha-2 country code, joined by an underscore. For example: es_MX, meaning "Spanish (Mexico)".
           in: query
           name: locale
           required: false
@@ -1165,15 +1151,12 @@ paths:
           schema:
             $ref: '#/definitions/category'
         '429':
-          description: >
-            API rate limit exceeded. See
-            http://developer.spotify.com/web-api/user-guide/#rate-limiting for
-            details.
+          description: |
+            API rate limit exceeded. See http://developer.spotify.com/web-api/user-guide/#rate-limiting for details.
   '/browse/categories/{category_id}/playlists':
     get:
-      description: >
-        [Get a Category's
-        playlists](https://developer.spotify.com/web-api/get-categorys-playlists/)
+      description: |
+        [Get a Category's playlists](https://developer.spotify.com/web-api/get-categorys-playlists/)
       parameters:
         - description: The Spotify ID of the category you wish to fetch.
           in: path
@@ -1212,15 +1195,12 @@ paths:
                 $ref: '#/definitions/playlist-simple-page'
             type: object
         '429':
-          description: >
-            API rate limit exceeded. See
-            http://developer.spotify.com/web-api/user-guide/#rate-limiting for
-            details.
+          description: |
+            API rate limit exceeded. See http://developer.spotify.com/web-api/user-guide/#rate-limiting for details.
   /browse/featured-playlists:
     get:
-      description: >
-        [Get a List of Featured
-        Playlists](https://developer.spotify.com/web-api/get-list-featured-playlists/)
+      description: |
+        [Get a List of Featured Playlists](https://developer.spotify.com/web-api/get-list-featured-playlists/)
       parameters:
         - default: 20
           description: The maximum number of items to return
@@ -1241,19 +1221,14 @@ paths:
           name: country
           required: false
           type: string
-        - description: >
-            The desired language, consisting of an ISO 639 language code and an
-            ISO 3166-1 alpha-2 country code, joined by an underscore. For
-            example: es_MX, meaning "Spanish (Mexico)".
+        - description: |
+            The desired language, consisting of an ISO 639 language code and an ISO 3166-1 alpha-2 country code, joined by an underscore. For example: es_MX, meaning "Spanish (Mexico)".
           in: query
           name: locale
           required: false
           type: string
-        - description: >
-            A timestamp in ISO 8601 format (yyyy-MM-dd'T'HH:mm:ss) with the
-            user's local time to get results tailored to a specific date and time
-            in the day. If not provided, it defaults to the current UTC time.
-            Example: "2014-10-23T09:00:00" for a user whose local time is 9AM.
+        - description: |
+            A timestamp in ISO 8601 format (yyyy-MM-dd'T'HH:mm:ss) with the user's local time to get results tailored to a specific date and time in the day. If not provided, it defaults to the current UTC time. Example: "2014-10-23T09:00:00" for a user whose local time is 9AM.
           in: query
           name: timestamp
           required: false
@@ -1268,15 +1243,12 @@ paths:
           schema:
             $ref: '#/definitions/featured-playlists'
         '429':
-          description: >
-            API rate limit exceeded. See
-            http://developer.spotify.com/web-api/user-guide/#rate-limiting for
-            details.
+          description: |
+            API rate limit exceeded. See http://developer.spotify.com/web-api/user-guide/#rate-limiting for details.
   /browse/new-releases:
     get:
-      description: >
-        [Get a List of New
-        Releases](https://developer.spotify.com/web-api/get-list-new-releases/)
+      description: |
+        [Get a List of New Releases](https://developer.spotify.com/web-api/get-list-new-releases/)
       parameters:
         - default: 20
           description: The maximum number of items to return
@@ -1307,15 +1279,12 @@ paths:
           schema:
             $ref: '#/definitions/album-simple-page'
         '429':
-          description: >
-            API rate limit exceeded. See
-            http://developer.spotify.com/web-api/user-guide/#rate-limiting for
-            details.
+          description: |
+            API rate limit exceeded. See http://developer.spotify.com/web-api/user-guide/#rate-limiting for details.
   /me:
     get:
-      description: >
-        [Get Current User's
-        Profile](https://developer.spotify.com/web-api/get-current-users-profile/)
+      description: |
+        [Get Current User's Profile](https://developer.spotify.com/web-api/get-current-users-profile/)
       responses:
         '200':
           description: OK
@@ -1323,9 +1292,8 @@ paths:
             $ref: '#/definitions/current-user-profile'
   /me/following:
     delete:
-      description: >
-        [Unfollow Artists or
-        Users](https://developer.spotify.com/web-api/unfollow-artists-users/)
+      description: |
+        [Unfollow Artists or Users](https://developer.spotify.com/web-api/unfollow-artists-users/)
       parameters:
         - description: The type to unfollow.
           enum:
@@ -1344,9 +1312,8 @@ paths:
         '204':
           description: No Content
     get:
-      description: >
-        [Get User's Followed
-        Artists](https://developer.spotify.com/web-api/get-followed-artists/)
+      description: |
+        [Get User's Followed Artists](https://developer.spotify.com/web-api/get-followed-artists/)
       parameters:
         - description: 'The ID type, currently only artist is supported.'
           enum:
@@ -1374,9 +1341,8 @@ paths:
           schema:
             $ref: '#/definitions/user-followed'
     put:
-      description: >
-        [Follow Artists or
-        Users](https://developer.spotify.com/web-api/follow-artists-users/)
+      description: |
+        [Follow Artists or Users](https://developer.spotify.com/web-api/follow-artists-users/)
       parameters:
         - description: The type to follow.
           enum:
@@ -1396,9 +1362,8 @@ paths:
           description: No Content
   /me/following/contains:
     get:
-      description: >
-        [Check if Current User Follows Artists or
-        Users](https://developer.spotify.com/web-api/check-current-user-follows/)
+      description: |
+        [Check if Current User Follows Artists or Users](https://developer.spotify.com/web-api/check-current-user-follows/)
       parameters:
         - description: The type to follow.
           enum:
@@ -1423,9 +1388,8 @@ paths:
             type: array
   /me/tracks:
     delete:
-      description: >
-        [Remove Tracks for Current
-        User](https://developer.spotify.com/web-api/remove-tracks-user/)
+      description: |
+        [Remove Tracks for Current User](https://developer.spotify.com/web-api/remove-tracks-user/)
       parameters:
         - description: A comma-separated list of IDs
           in: query
@@ -1442,14 +1406,11 @@ paths:
         '200':
           description: OK
         '429':
-          description: >
-            API rate limit exceeded. See
-            http://developer.spotify.com/web-api/user-guide/#rate-limiting for
-            details.
+          description: |
+            API rate limit exceeded. See http://developer.spotify.com/web-api/user-guide/#rate-limiting for details.
     get:
-      description: >
-        [Get Current User's Saved
-        Tracks](https://developer.spotify.com/web-api/get-users-saved-tracks/)
+      description: |
+        [Get Current User's Saved Tracks](https://developer.spotify.com/web-api/get-users-saved-tracks/)
       parameters:
         - default: 20
           description: The maximum number of items to return
@@ -1480,14 +1441,11 @@ paths:
           schema:
             $ref: '#/definitions/saved-track-page'
         '429':
-          description: >
-            API rate limit exceeded. See
-            http://developer.spotify.com/web-api/user-guide/#rate-limiting for
-            details.
+          description: |
+            API rate limit exceeded. See http://developer.spotify.com/web-api/user-guide/#rate-limiting for details.
     put:
-      description: >
-        [Save Tracks for Current
-        User](https://developer.spotify.com/web-api/save-tracks-user/)
+      description: |
+        [Save Tracks for Current User](https://developer.spotify.com/web-api/save-tracks-user/)
       parameters:
         - description: A comma-separated list of IDs
           in: query
@@ -1504,15 +1462,12 @@ paths:
         '200':
           description: OK
         '429':
-          description: >
-            API rate limit exceeded. See
-            http://developer.spotify.com/web-api/user-guide/#rate-limiting for
-            details.
+          description: |
+            API rate limit exceeded. See http://developer.spotify.com/web-api/user-guide/#rate-limiting for details.
   /me/tracks/contains:
     get:
-      description: >
-        [Check Current User's Saved
-        Tracks](https://developer.spotify.com/web-api/check-users-saved-tracks/)
+      description: |
+        [Check Current User's Saved Tracks](https://developer.spotify.com/web-api/check-users-saved-tracks/)
       parameters:
         - description: A comma-separated list of IDs
           in: query
@@ -1529,7 +1484,7 @@ paths:
             type: array
   /search:
     get:
-      description: >
+      description: |
         [Search for an Item](https://developer.spotify.com/web-api/search-item/)
       parameters:
         - default: 20
@@ -1567,9 +1522,8 @@ paths:
             $ref: '#/definitions/search'
   /tracks:
     get:
-      description: >
-        [Get Several
-        Tracks](https://developer.spotify.com/web-api/get-several-tracks/)
+      description: |
+        [Get Several Tracks](https://developer.spotify.com/web-api/get-several-tracks/)
       parameters:
         - description: A comma-separated list of IDs
           in: query
@@ -1612,9 +1566,8 @@ paths:
             $ref: '#/definitions/track'
   '/users/{user_id}':
     get:
-      description: >
-        [Get a User's
-        Profile](https://developer.spotify.com/web-api/get-users-profile/)
+      description: |
+        [Get a User's Profile](https://developer.spotify.com/web-api/get-users-profile/)
       parameters:
         - description: "The user's Spotify user ID."
           in: path
@@ -1628,9 +1581,8 @@ paths:
             $ref: '#/definitions/user-profile'
   '/users/{user_id}/playlists':
     get:
-      description: >
-        [Get a List of a User's
-        Playlists](https://developer.spotify.com/web-api/get-list-users-playlists/)
+      description: |
+        [Get a List of a User's Playlists](https://developer.spotify.com/web-api/get-list-users-playlists/)
       parameters:
         - description: "The user's Spotify user ID."
           in: path
@@ -1661,14 +1613,11 @@ paths:
           schema:
             $ref: '#/definitions/playlist-simple-page'
         '429':
-          description: >
-            API rate limit exceeded. See
-            http://developer.spotify.com/web-api/user-guide/#rate-limiting for
-            details.
+          description: |
+            API rate limit exceeded. See http://developer.spotify.com/web-api/user-guide/#rate-limiting for details.
     post:
-      description: >
-        [Create
-        a Playlist](https://developer.spotify.com/web-api/create-playlist/)
+      description: |
+        [Create a Playlist](https://developer.spotify.com/web-api/create-playlist/)
       parameters:
         - description: "The user's Spotify user ID."
           in: path
@@ -1697,10 +1646,8 @@ paths:
           schema:
             $ref: '#/definitions/playlist'
         '429':
-          description: >
-            API rate limit exceeded. See
-            http://developer.spotify.com/web-api/user-guide/#rate-limiting for
-            details.
+          description: |
+            API rate limit exceeded. See http://developer.spotify.com/web-api/user-guide/#rate-limiting for details.
   '/users/{user_id}/playlists/{playlist_id}':
     get:
       description: |
@@ -1735,14 +1682,11 @@ paths:
           schema:
             $ref: '#/definitions/playlist'
         '429':
-          description: >
-            API rate limit exceeded. See
-            http://developer.spotify.com/web-api/user-guide/#rate-limiting for
-            details.
+          description: |
+            API rate limit exceeded. See http://developer.spotify.com/web-api/user-guide/#rate-limiting for details.
     put:
-      description: >
-        [Change a Playlist's
-        Details](https://developer.spotify.com/web-api/change-playlist-details/)
+      description: |
+        [Change a Playlist's Details](https://developer.spotify.com/web-api/change-playlist-details/)
       parameters:
         - description: "The user's Spotify user ID."
           in: path
@@ -1774,15 +1718,12 @@ paths:
         '200':
           description: OK
         '429':
-          description: >
-            API rate limit exceeded. See
-            http://developer.spotify.com/web-api/user-guide/#rate-limiting for
-            details.
+          description: |
+            API rate limit exceeded. See http://developer.spotify.com/web-api/user-guide/#rate-limiting for details.
   '/users/{user_id}/playlists/{playlist_id}/followers':
     delete:
-      description: >
-        [Unfollow
-        a Playlist](https://developer.spotify.com/web-api/unfollow-playlist/)
+      description: |
+        [Unfollow a Playlist](https://developer.spotify.com/web-api/unfollow-playlist/)
       parameters:
         - description: "The user's Spotify user ID."
           in: path
@@ -1800,9 +1741,8 @@ paths:
         '200':
           description: OK
     put:
-      description: >
-        [Follow
-        a Playlist](https://developer.spotify.com/web-api/follow-playlist/)
+      description: |
+        [Follow a Playlist](https://developer.spotify.com/web-api/follow-playlist/)
       parameters:
         - description: "The user's Spotify user ID."
           in: path
@@ -1829,9 +1769,8 @@ paths:
           description: OK
   '/users/{user_id}/playlists/{playlist_id}/followers/contains':
     get:
-      description: >
-        [Check if Users Follow
-        a Playlist](https://developer.spotify.com/web-api/check-user-following-playlist/)
+      description: |
+        [Check if Users Follow a Playlist](https://developer.spotify.com/web-api/check-user-following-playlist/)
       parameters:
         - description: "The user's Spotify user ID."
           in: path
@@ -1858,9 +1797,8 @@ paths:
             type: array
   '/users/{user_id}/playlists/{playlist_id}/tracks':
     delete:
-      description: >
-        [Remove Tracks from
-        a Playlist](https://developer.spotify.com/web-api/remove-tracks-playlist/)
+      description: |
+        [Remove Tracks from a Playlist](https://developer.spotify.com/web-api/remove-tracks-playlist/)
       parameters:
         - description: "The user's Spotify user ID."
           in: path
@@ -1893,14 +1831,11 @@ paths:
           schema:
             $ref: '#/definitions/playlist-snapshot'
         '429':
-          description: >
-            API rate limit exceeded. See
-            http://developer.spotify.com/web-api/user-guide/#rate-limiting for
-            details.
+          description: |
+            API rate limit exceeded. See http://developer.spotify.com/web-api/user-guide/#rate-limiting for details.
     get:
-      description: >
-        [Get a Playlist's
-        Tracks](https://developer.spotify.com/web-api/get-playlists-tracks/)
+      description: |
+        [Get a Playlist's Tracks](https://developer.spotify.com/web-api/get-playlists-tracks/)
       parameters:
         - description: "The user's Spotify user ID."
           in: path
@@ -1945,14 +1880,11 @@ paths:
           schema:
             $ref: '#/definitions/playlist-track-page'
         '429':
-          description: >
-            API rate limit exceeded. See
-            http://developer.spotify.com/web-api/user-guide/#rate-limiting for
-            details.
+          description: |
+            API rate limit exceeded. See http://developer.spotify.com/web-api/user-guide/#rate-limiting for details.
     post:
-      description: >
-        [Add Tracks to
-        a Playlist](https://developer.spotify.com/web-api/add-tracks-to-playlist/)
+      description: |
+        [Add Tracks to a Playlist](https://developer.spotify.com/web-api/add-tracks-to-playlist/)
       parameters:
         - description: "The user's Spotify user ID."
           in: path
@@ -1984,14 +1916,11 @@ paths:
           schema:
             $ref: '#/definitions/playlist-snapshot'
         '429':
-          description: >
-            API rate limit exceeded. See
-            http://developer.spotify.com/web-api/user-guide/#rate-limiting for
-            details.
+          description: |
+            API rate limit exceeded. See http://developer.spotify.com/web-api/user-guide/#rate-limiting for details.
     put:
-      description: >
-        [Reorder or replace a Playlist's
-        Tracks](https://developer.spotify.com/web-api/reorder-playlists-tracks/)
+      description: |
+        [Reorder or replace a Playlist's Tracks](https://developer.spotify.com/web-api/reorder-playlists-tracks/)
       parameters:
         - description: "The user's Spotify user ID."
           in: path
@@ -2024,10 +1953,8 @@ paths:
           schema:
             $ref: '#/definitions/playlist-snapshot'
         '429':
-          description: >
-            API rate limit exceeded. See
-            http://developer.spotify.com/web-api/user-guide/#rate-limiting for
-            details.
+          description: |
+            API rate limit exceeded. See http://developer.spotify.com/web-api/user-guide/#rate-limiting for details.
 produces:
   - application/json
 schemes:

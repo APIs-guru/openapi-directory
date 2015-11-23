@@ -212,17 +212,13 @@ definitions:
         description: Origin Ip of the subscriber when he/she opted-in. Required if singleoptin is true.
         type: string
       lang:
-        description: >
-          ISO 639-1 language code of the subscriber. When lang is one the
-          supported system language, all communication
-
+        description: |
+          ISO 639-1 language code of the subscriber. When lang is one the supported system language, all communication
           will be in this language.
         type: string
       singleoptin:
-        description: >
-          If true, no email will be sent asking user subscription confirmation.
-          In that case, you must provide
-
+        description: |
+          If true, no email will be sent asking user subscription confirmation. In that case, you must provide
           the confirmation date (confirmed) and origin ip (ip) manually.
         type: boolean
     required:
@@ -426,30 +422,19 @@ paths:
         - contacts
   '/subscription/{listid}':
     post:
-      description: >
-        Subscribe an email address to a list. This api call has the same behavior
-        as
-
-        a regular subscribe form. However, single opt-in is allowed for system
-        integration
-
+      description: |
+        Subscribe an email address to a list. This api call has the same behavior as
+        a regular subscribe form. However, single opt-in is allowed for system integration
         purposes.
 
 
-
-        - If email address does not exist, a new contact will be added to the
-        list.
-
-        - If email address exists custom fields will be updated and status will
-        be put
+        - If email address does not exist, a new contact will be added to the list.
+        - If email address exists custom fields will be updated and status will be put
 
           to unconfirmed or active depending of singleoptin value.
 
-        - If current status if Active, this operation will only update the custom
-        fields.
-
-        - If singleoptin is true, no email confirmation will be sent. In that
-        case,
+        - If current status if Active, this operation will only update the custom fields.
+        - If singleoptin is true, no email confirmation will be sent. In that case,
 
           you must provide the subscribe's origin ip and confirmation date-time.
       parameters:

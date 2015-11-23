@@ -474,9 +474,8 @@ paths:
         - Static
   /formats:
     get:
-      description: >
-        Get a list of supported formats for documents, style guides and
-        extensions.
+      description: |
+        Get a list of supported formats for documents, style guides and extensions.
       operationId: getFormats
       responses:
         '200':
@@ -1739,10 +1738,8 @@ paths:
         - Style Guide
   /token:
     post:
-      description: >
-        MotaWord API is using OAuth2 procedures when authenticating or
-        authorizing your API call. Currently, we only allow Client Credential
-        type flow.
+      description: |
+        MotaWord API is using OAuth2 procedures when authenticating or authorizing your API call. Currently, we only allow Client Credential type flow.
       operationId: getAccessToken
       parameters:
         - description: "OAuth2 grant type. Currently only 'client_credentials' available."

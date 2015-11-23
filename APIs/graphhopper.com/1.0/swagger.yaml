@@ -358,9 +358,8 @@ paths:
     post:
       consumes:
         - application/json
-      description: >
-        This endpoint solves large problems, i.e. traveling salesman or vehicle
-        routing problems, and returns the solution.
+      description: |
+        This endpoint solves large problems, i.e. traveling salesman or vehicle routing problems, and returns the solution.
       operationId: postVrp
       parameters:
         - description: your API key
@@ -392,9 +391,8 @@ paths:
     get:
       consumes:
         - application/json
-      description: >
-        This endpoint returns the solution of a large problems. You can fetch it
-        with the job_id, you have been sent.
+      description: |
+        This endpoint returns the solution of a large problems. You can fetch it with the job_id, you have been sent.
       operationId: getSolution
       parameters:
         - description: your API key

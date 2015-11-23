@@ -87,21 +87,11 @@ definitions:
         type: string
     type: object
   Collection:
-    description: >-
-      A collection resource defines a named set of apps that is visible to a set
-      of users in the Google Play Store app running on those users' managed
-      devices. Those users can then install any of those apps if they wish (which
-      will trigger creation of install and entitlement resources). A user cannot
-      install an app on a managed device unless the app is listed in at least one
-      collection that is visible to that user.
+    description: |-
+      A collection resource defines a named set of apps that is visible to a set of users in the Google Play Store app running on those users' managed devices. Those users can then install any of those apps if they wish (which will trigger creation of install and entitlement resources). A user cannot install an app on a managed device unless the app is listed in at least one collection that is visible to that user.
 
 
-
-      Note that the API can be used to directly install an app regardless of
-      whether it is in any collection - so an enterprise has a choice of either
-      directly pushing apps to users, or allowing users to install apps if they
-      want. Which is appropriate will depend on the enterprise's policies and the
-      purpose of the apps concerned.
+      Note that the API can be used to directly install an app regardless of whether it is in any collection - so an enterprise has a choice of either directly pushing apps to users, or allowing users to install apps if they want. Which is appropriate will depend on the enterprise's policies and the purpose of the apps concerned.
     properties:
       collectionId:
         description: 'Arbitrary unique ID, allocated by the API on creation.'
@@ -119,13 +109,8 @@ definitions:
           type: string
         type: array
       visibility:
-        description: >-
-          Whether this collection is visible to all users, or only to the users
-          that have been granted access through the "Collectionviewers" API. With
-          the launch of the "setAvailableProductSet" API, this property should
-          always be set to "viewersOnly", as the "allUsers" option will bypass
-          the "availableProductSet" for all users within a domain.
-
+        description: |-
+          Whether this collection is visible to all users, or only to the users that have been granted access through the "Collectionviewers" API. With the launch of the "setAvailableProductSet" API, this property should always be set to "viewersOnly", as the "allUsers" option will bypass the "availableProductSet" for all users within a domain.
 
 
           The "allUsers" setting is deprecated, and will be removed.
@@ -158,14 +143,11 @@ definitions:
         type: string
     type: object
   Device:
-    description: >-
-      A device resource represents a mobile device managed by the MDM and
-      belonging to a specific enterprise user.
+    description: |-
+      A device resource represents a mobile device managed by the MDM and belonging to a specific enterprise user.
 
 
-
-      This collection cannot be modified via the API; it is automatically
-      populated as devices are set up to be managed.
+      This collection cannot be modified via the API; it is automatically populated as devices are set up to be managed.
     properties:
       androidId:
         description: 'The Google Play Services Android ID for the device encoded as a lowercase hex string, e.g. "123456789abcdef0".'
@@ -203,43 +185,20 @@ definitions:
         type: string
     type: object
   Enterprise:
-    description: >-
-      An enterprise resource represents a binding between an organisation and
-      their MDM.
+    description: |-
+      An enterprise resource represents a binding between an organisation and their MDM.
 
 
-
-      To create an enterprise, an admin of the enterprise must first go through
-      a Play for Work sign-up flow. At the end of this the admin will be
-      presented with a token (a short opaque alphanumeric string). They must then
-      present this to the MDM, who then supplies it to the enroll method. Until
-      this is done the MDM will not have any access to the enterprise.
+      To create an enterprise, an admin of the enterprise must first go through a Play for Work sign-up flow. At the end of this the admin will be presented with a token (a short opaque alphanumeric string). They must then present this to the MDM, who then supplies it to the enroll method. Until this is done the MDM will not have any access to the enterprise.
 
 
-
-      After calling enroll the MDM should call setAccount to specify the service
-      account that will be allowed to act on behalf of the enterprise, which will
-      be required for access to the enterprise's data through this API. Only one
-      call of setAccount is allowed for a given enterprise; the only way to
-      change the account later is to unenroll the enterprise and enroll it again
-      (obtaining a new token).
+      After calling enroll the MDM should call setAccount to specify the service account that will be allowed to act on behalf of the enterprise, which will be required for access to the enterprise's data through this API. Only one call of setAccount is allowed for a given enterprise; the only way to change the account later is to unenroll the enterprise and enroll it again (obtaining a new token).
 
 
-
-      The MDM can unenroll an enterprise in order to sever the binding between
-      them. Re-enrolling an enterprise is possible, but requires a new token to
-      be retrieved. Enterprises.unenroll requires the MDM's credentials (as
-      enroll does), not the enterprise's. Enterprises.unenroll can only be used
-      for enterprises that were previously enrolled with the enroll call. Any
-      enterprises that were enrolled using the (deprecated) Enterprises.insert
-      call must be unenrolled with Enterprises.delete and can then be re-enrolled
-      using the Enterprises.enroll call.
+      The MDM can unenroll an enterprise in order to sever the binding between them. Re-enrolling an enterprise is possible, but requires a new token to be retrieved. Enterprises.unenroll requires the MDM's credentials (as enroll does), not the enterprise's. Enterprises.unenroll can only be used for enterprises that were previously enrolled with the enroll call. Any enterprises that were enrolled using the (deprecated) Enterprises.insert call must be unenrolled with Enterprises.delete and can then be re-enrolled using the Enterprises.enroll call.
 
 
-
-      The ID for an enterprise is an opaque string. It is returned by insert and
-      enroll and can also be retrieved if the enterprise's primary domain is
-      known using the list method.
+      The ID for an enterprise is an opaque string. It is returned by insert and enroll and can also be retrieved if the enterprise's primary domain is known using the list method.
     properties:
       id:
         description: The unique ID for the enterprise.
@@ -289,44 +248,20 @@ definitions:
         type: string
     type: object
   Entitlement:
-    description: >-
-      The existence of an entitlement resource means that a user has the right to
-      use a particular app on any of their devices. This might be because the app
-      is free or because they have been allocated a license to the app from
-      a group license purchased by the enterprise.
+    description: |-
+      The existence of an entitlement resource means that a user has the right to use a particular app on any of their devices. This might be because the app is free or because they have been allocated a license to the app from a group license purchased by the enterprise.
 
 
-
-      It should always be true that a user has an app installed on one of their
-      devices only if they have an entitlement to it. So if an entitlement is
-      deleted, the app will be uninstalled from all devices. Similarly if the
-      user installs an app (and is permitted to do so), or the MDM triggers an
-      install of the app, an entitlement to that app is automatically created. If
-      this is impossible - e.g. the enterprise has not purchased sufficient
-      licenses - then installation fails.
+      It should always be true that a user has an app installed on one of their devices only if they have an entitlement to it. So if an entitlement is deleted, the app will be uninstalled from all devices. Similarly if the user installs an app (and is permitted to do so), or the MDM triggers an install of the app, an entitlement to that app is automatically created. If this is impossible - e.g. the enterprise has not purchased sufficient licenses - then installation fails.
 
 
-
-      Note that entitlements are always user specific, not device specific;
-      a user may have an entitlement even though they have not installed the app
-      anywhere. Once they have an entitlement they can install the app on
-      multiple devices.
+      Note that entitlements are always user specific, not device specific; a user may have an entitlement even though they have not installed the app anywhere. Once they have an entitlement they can install the app on multiple devices.
 
 
-
-      The API can be used to create an entitlement. If the app is a free app,
-      a group license for that app is created. If it's a paid app, creating the
-      entitlement consumes one license; it remains consumed until the entitlement
-      is removed. Optionally an installation of the app on all the user's managed
-      devices can be triggered at the time the entitlement is created. An
-      entitlement cannot be created for an app if the app requires permissions
-      that the enterprise has not yet accepted.
+      The API can be used to create an entitlement. If the app is a free app, a group license for that app is created. If it's a paid app, creating the entitlement consumes one license; it remains consumed until the entitlement is removed. Optionally an installation of the app on all the user's managed devices can be triggered at the time the entitlement is created. An entitlement cannot be created for an app if the app requires permissions that the enterprise has not yet accepted.
 
 
-
-      Entitlements for paid apps that are due to purchases by the user on
-      a non-managed profile will have "userPurchase" as entitlement reason; those
-      entitlements cannot be removed via the API.
+      Entitlements for paid apps that are due to purchases by the user on a non-managed profile will have "userPurchase" as entitlement reason; those entitlements cannot be removed via the API.
     properties:
       kind:
         default: 'androidenterprise#entitlement'
@@ -353,30 +288,14 @@ definitions:
         type: string
     type: object
   GroupLicense:
-    description: >-
-      A group license object indicates a product that an enterprise admin has
-      approved for use in the enterprise. The product may be free or paid. For
-      free products, a group license object is created in these cases: if the
-      enterprise admin approves a product in Google Play, if the product is added
-      to a collection, or if an entitlement for the product is created for a user
-      via the API. For paid products, a group license object is only created as
-      part of the first bulk purchase of that product in Google Play by the
-      enterprise admin.
+    description: |-
+      A group license object indicates a product that an enterprise admin has approved for use in the enterprise. The product may be free or paid. For free products, a group license object is created in these cases: if the enterprise admin approves a product in Google Play, if the product is added to a collection, or if an entitlement for the product is created for a user via the API. For paid products, a group license object is only created as part of the first bulk purchase of that product in Google Play by the enterprise admin.
 
 
-
-      The API can be used to query group licenses; the available information
-      includes the total number of licenses purchased (for paid products) and the
-      total number of licenses that have been provisioned, that is, the total
-      number of user entitlements in existence for the product.
+      The API can be used to query group licenses; the available information includes the total number of licenses purchased (for paid products) and the total number of licenses that have been provisioned, that is, the total number of user entitlements in existence for the product.
 
 
-
-      Group license objects are never deleted. If, for example, a free app is
-      added to a collection and then removed, the group license will remain,
-      allowing the enterprise admin to keep track of any remaining entitlements.
-      An enterprise admin may indicate they are no longer interested in the group
-      license by marking it as unapproved in Google Play.
+      Group license objects are never deleted. If, for example, a free app is added to a collection and then removed, the group license will remain, allowing the enterprise admin to keep track of any remaining entitlements. An enterprise admin may indicate they are no longer interested in the group license by marking it as unapproved in Google Play.
     properties:
       acquisitionKind:
         description: 'How this group license was acquired. "bulkPurchase" means that this group license object was created because the enterprise purchased licenses for this product; this is "free" otherwise (for free products).'
@@ -427,42 +346,23 @@ definitions:
         type: string
     type: object
   Install:
-    description: >-
-      The existence of an install resource indicates that an app is installed on
-      a particular device (or that an install is pending).
+    description: |-
+      The existence of an install resource indicates that an app is installed on a particular device (or that an install is pending).
 
 
-
-      The API can be used to create an install resource using the update method.
-      This triggers the actual install of the app on the device. If the user does
-      not already have an entitlement for the app then an attempt is made to
-      create one. If this fails (e.g. because the app is not free and there is no
-      available license) then the creation of the install fails.
+      The API can be used to create an install resource using the update method. This triggers the actual install of the app on the device. If the user does not already have an entitlement for the app then an attempt is made to create one. If this fails (e.g. because the app is not free and there is no available license) then the creation of the install fails.
 
 
-
-      The API can also be used to update an installed app. If the update method
-      is used on an existing install then the app will be updated to the latest
-      available version.
+      The API can also be used to update an installed app. If the update method is used on an existing install then the app will be updated to the latest available version.
 
 
-
-      Note that it is not possible to force the installation of a specific
-      version of an app; the version code is read-only.
+      Note that it is not possible to force the installation of a specific version of an app; the version code is read-only.
 
 
-
-      If a user installs an app themselves (as permitted by the enterprise), then
-      again an install resource and possibly an entitlement resource are
-      automatically created.
+      If a user installs an app themselves (as permitted by the enterprise), then again an install resource and possibly an entitlement resource are automatically created.
 
 
-
-      The API can also be used to delete an install resource, which triggers the
-      removal of the app from the device. Note that deleting an install does not
-      automatically remove the corresponding entitlement, even if there are no
-      remaining installs. The install resource will also be deleted if the user
-      uninstalls the app themselves.
+      The API can also be used to delete an install resource, which triggers the removal of the app from the device. Note that deleting an install does not automatically remove the corresponding entitlement, even if there are no remaining installs. The install resource will also be deleted if the user uninstalls the app themselves.
     properties:
       installState:
         description: 'Install state. The state "installPending" means that an install request has recently been made and download to the device is in progress. The state "installed" means that the app has been installed. This field is read-only.'
@@ -493,17 +393,11 @@ definitions:
         type: string
     type: object
   Permission:
-    description: >-
-      A permission represents some extra capability, to be granted to an Android
-      app, which requires explicit consent. An enterprise admin must consent to
-      these permissions on behalf of their users before an entitlement for the
-      app can be created.
+    description: |-
+      A permission represents some extra capability, to be granted to an Android app, which requires explicit consent. An enterprise admin must consent to these permissions on behalf of their users before an entitlement for the app can be created.
 
 
-
-      The permissions collection is read-only. The information provided for each
-      permission (localized name and description) is intended to be used in the
-      MDM user interface when obtaining consent from the enterprise.
+      The permissions collection is read-only. The information provided for each permission (localized name and description) is intended to be used in the MDM user interface when obtaining consent from the enterprise.
     properties:
       description:
         description: A longer description of the permissions giving more details of what it affects.
@@ -520,17 +414,11 @@ definitions:
         type: string
     type: object
   Product:
-    description: >-
-      A product represents an app in the Google Play Store that is available to
-      at least some users in the enterprise. (Some apps are restricted to
-      a single enterprise, and no information about them is made available
-      outside that enterprise.)
+    description: |-
+      A product represents an app in the Google Play Store that is available to at least some users in the enterprise. (Some apps are restricted to a single enterprise, and no information about them is made available outside that enterprise.)
 
 
-
-      The information provided for each product (localized name, icon, link to
-      the full Google Play details page) is intended to allow a basic
-      representation of the product within an MDM user interface.
+      The information provided for each product (localized name, icon, link to the full Google Play details page) is intended to allow a basic representation of the product within an MDM user interface.
     properties:
       appVersion:
         description: App versions currently available for this product. The returned list contains only public versions. Alpha and beta versions are not included.
@@ -567,15 +455,11 @@ definitions:
         type: string
     type: object
   ProductPermission:
-    description: >-
-      A product permissions resource represents the set of permissions required
-      by a specific app and whether or not they have been accepted by an
-      enterprise admin.
+    description: |-
+      A product permissions resource represents the set of permissions required by a specific app and whether or not they have been accepted by an enterprise admin.
 
 
-
-      The API can be used to read the set of permissions, and also to update the
-      set to indicate that permissions have been accepted.
+      The API can be used to read the set of permissions, and also to update the set to indicate that permissions have been accepted.
     properties:
       permissionId:
         description: An opaque string uniquely identifying the permission.
@@ -626,22 +510,14 @@ definitions:
         type: string
     type: object
   User:
-    description: >-
-      A user resource represents an individual user within the enterprise's
-      domain.
+    description: |-
+      A user resource represents an individual user within the enterprise's domain.
 
 
-
-      Note that each user is associated with a Google account based on the user's
-      corporate email address (which must be in one of the enterprise's domains).
-      As part of installing an MDM app to manage a device the Google account must
-      be provisioned to the device, and so the user resource must be created
-      before that. This can be done using the Google Admin SDK Directory API.
+      Note that each user is associated with a Google account based on the user's corporate email address (which must be in one of the enterprise's domains). As part of installing an MDM app to manage a device the Google account must be provisioned to the device, and so the user resource must be created before that. This can be done using the Google Admin SDK Directory API.
 
 
-
-      The ID for a user is an opaque string. It can be retrieved using the list
-      method queried by the user's primary email address.
+      The ID for a user is an opaque string. It can be retrieved using the list method queried by the user's primary email address.
     properties:
       id:
         description: The unique ID for the user.
@@ -1442,19 +1318,11 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: >-
-        Generates a URL that can be rendered in an iframe to display the
-        permissions (if any) of a product. An enterprise admin must view these
-        permissions and accept them on behalf of their organization in order to
-        approve that product.
+      description: |-
+        Generates a URL that can be rendered in an iframe to display the permissions (if any) of a product. An enterprise admin must view these permissions and accept them on behalf of their organization in order to approve that product.
 
 
-
-        Admins should accept the displayed permissions by interacting with
-        a separate UI element in the EMM console, which in turn should trigger
-        the use of this URL as the approvalUrlInfo.approvalUrl property in
-        a Products.approve call to approve the product. This URL can only be used
-        to display permissions for up to 1 day.
+        Admins should accept the displayed permissions by interacting with a separate UI element in the EMM console, which in turn should trigger the use of this URL as the approvalUrlInfo.approvalUrl property in a Products.approve call to approve the product. This URL can only be used to display permissions for up to 1 day.
       operationId: androidenterprise.products.generateApprovalUrl
       parameters:
         - description: The ID of the enterprise.

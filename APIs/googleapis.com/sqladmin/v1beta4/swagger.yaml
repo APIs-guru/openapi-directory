@@ -173,16 +173,11 @@ definitions:
         description: HTTP 1.1 Entity tag for the resource.
         type: string
       instanceType:
-        description: >-
+        description: |-
           The instance type. This can be one of the following.
-
-          CLOUD_SQL_INSTANCE: A Cloud SQL instance that is not replicating from
-          a master.
-
+          CLOUD_SQL_INSTANCE: A Cloud SQL instance that is not replicating from a master.
           ON_PREMISES_INSTANCE: An instance running on the customer's premises.
-
-          READ_REPLICA_INSTANCE: A Cloud SQL instance configured as
-          a read-replica.
+          READ_REPLICA_INSTANCE: A Cloud SQL instance configured as a read-replica.
         type: string
       ipAddresses:
         description: The assigned IP addresses for the instance.
@@ -236,21 +231,13 @@ definitions:
         $ref: '#/definitions/Settings'
         description: The user settings.
       state:
-        description: >-
-          The current serving state of the Cloud SQL instance. This can be one of
-          the following.
-
+        description: |-
+          The current serving state of the Cloud SQL instance. This can be one of the following.
           RUNNABLE: The instance is running, or is ready to run when accessed.
-
-          SUSPENDED: The instance is not available, for example due to problems
-          with billing.
-
+          SUSPENDED: The instance is not available, for example due to problems with billing.
           PENDING_CREATE: The instance is being created.
-
           MAINTENANCE: The instance is down for maintenance.
-
           FAILED: The instance creation failed.
-
           UNKNOWN_STATE: The state of the instance is unknown.
         type: string
     type: object
@@ -657,14 +644,9 @@ definitions:
     description: Read-replica configuration for connecting to the master.
     properties:
       failoverTarget:
-        description: >-
-          Specifies if the replica is the failover target. If the field is set to
-          true the replica will be designated as a failover replica. In case the
-          master instance fails, the replica instance will be promoted as the new
-          master instance.
-
-          Only one replica can be specified as failover target, and the replica
-          has to be in different zone with the master instance.
+        description: |-
+          Specifies if the replica is the failover target. If the field is set to true the replica will be designated as a failover replica. In case the master instance fails, the replica instance will be promoted as the new master instance.
+          Only one replica can be specified as failover target, and the replica has to be in different zone with the master instance.
         type: boolean
       kind:
         default: 'sql#replicaConfiguration'
@@ -693,15 +675,10 @@ definitions:
     description: Database instance settings.
     properties:
       activationPolicy:
-        description: >-
-          The activation policy for this instance. This specifies when the
-          instance should be activated and is applicable only when the instance
-          state is RUNNABLE. This can be one of the following.
-
+        description: |-
+          The activation policy for this instance. This specifies when the instance should be activated and is applicable only when the instance state is RUNNABLE. This can be one of the following.
           ALWAYS: The instance should always be active.
-
           NEVER: The instance should never be activated.
-
           ON_DEMAND: The instance is activated upon receiving requests.
         type: string
       authorizedGaeApplications:

@@ -161,18 +161,11 @@ definitions:
         description: Indicates that this is a boot disk. The virtual machine will use the first partition of the disk for its root filesystem.
         type: boolean
       deviceName:
-        description: >-
-          Specifies a unique device name of your choice that is reflected into
-          the /dev/disk/by-id/google-* tree of a Linux operating system running
-          within the instance. This name can be used to reference the device for
-          mounting, resizing, and so on, from within the instance.
+        description: |-
+          Specifies a unique device name of your choice that is reflected into the /dev/disk/by-id/google-* tree of a Linux operating system running within the instance. This name can be used to reference the device for mounting, resizing, and so on, from within the instance.
 
 
-
-          If not specified, the server chooses a default device name to apply to
-          this disk, in the form persistent-disks-x, where x is a number assigned
-          by Google Compute Engine. This field is only applicable for persistent
-          disks.
+          If not specified, the server chooses a default device name to apply to this disk, in the form persistent-disks-x, where x is a number assigned by Google Compute Engine. This field is only applicable for persistent disks.
         type: string
       index:
         description: 'Assigns a zero-based index to this disk, where 0 is reserved for the boot disk. For example, if you have many disks attached to an instance, each disk would have a unique index number. If not specified, the server will choose an appropriate value.'
@@ -180,15 +173,11 @@ definitions:
         type: integer
       initializeParams:
         $ref: '#/definitions/AttachedDiskInitializeParams'
-        description: >-
-          [Input Only] Specifies the parameters for a new disk that will be
-          created alongside the new instance. Use initialization parameters to
-          create boot disks or local SSDs attached to the new instance.
+        description: |-
+          [Input Only] Specifies the parameters for a new disk that will be created alongside the new instance. Use initialization parameters to create boot disks or local SSDs attached to the new instance.
 
 
-
-          This property is mutually exclusive with the source property; you can
-          only define one or the other, but not both.
+          This property is mutually exclusive with the source property; you can only define one or the other, but not both.
       interface:
         description: 'Specifies the disk interface to use for attaching this disk, either SCSI or NVME. The default is SCSI. For performance characteristics of SCSI over NVMe, see Local SSD performance.'
         enum:
@@ -221,15 +210,11 @@ definitions:
         type: string
     type: object
   AttachedDiskInitializeParams:
-    description: >-
-      [Input Only] Specifies the parameters for a new disk that will be created
-      alongside the new instance. Use initialization parameters to create boot
-      disks or local SSDs attached to the new instance.
+    description: |-
+      [Input Only] Specifies the parameters for a new disk that will be created alongside the new instance. Use initialization parameters to create boot disks or local SSDs attached to the new instance.
 
 
-
-      This property is mutually exclusive with the source property; you can only
-      define one or the other, but not both.
+      This property is mutually exclusive with the source property; you can only define one or the other, but not both.
     properties:
       diskName:
         description: 'Specifies the disk name. If not specified, the default is to use the name of the instance.'
@@ -445,17 +430,11 @@ definitions:
         description: An optional textual description of the resource. Provided by the client when the resource is created.
         type: string
       group:
-        description: >-
-          The fully-qualified URL of a zonal Instance Group resource. This
-          instance group defines the list of instances that serve traffic. Member
-          virtual machine instances from each instance group must live in the
-          same zone as the instance group itself. No two backends in a backend
-          service are allowed to use same Instance Group resource.
+        description: |-
+          The fully-qualified URL of a zonal Instance Group resource. This instance group defines the list of instances that serve traffic. Member virtual machine instances from each instance group must live in the same zone as the instance group itself. No two backends in a backend service are allowed to use same Instance Group resource.
 
 
-
-          Note that you must specify an Instance Group resource using the
-          fully-qualified URL, rather than a partial URL.
+          Note that you must specify an Instance Group resource using the fully-qualified URL, rather than a partial URL.
         type: string
       maxRate:
         description: 'The max RPS of the group. Can be used with either balancing mode, but required if RATE mode. For RATE mode, either maxRate or maxRatePerInstance must be set.'
@@ -620,17 +599,11 @@ definitions:
         description: '[Output Only] Server-defined fully-qualified URL for this resource.'
         type: string
       sizeGb:
-        description: >-
-          Size of the persistent disk, specified in GB. You can specify this
-          field when creating a persistent disk using the sourceImage or
-          sourceSnapshot parameter, or specify it alone to create an empty
-          persistent disk.
+        description: |-
+          Size of the persistent disk, specified in GB. You can specify this field when creating a persistent disk using the sourceImage or sourceSnapshot parameter, or specify it alone to create an empty persistent disk.
 
 
-
-          If you specify this field along with sourceImage or sourceSnapshot, the
-          value of sizeGb must not be less than the size of the sourceImage or
-          the size of the snapshot.
+          If you specify this field along with sourceImage or sourceSnapshot, the value of sizeGb must not be less than the size of the sourceImage or the size of the snapshot.
         format: int64
         type: string
       sourceImage:
@@ -901,16 +874,11 @@ definitions:
               description: 'The IP protocol that is allowed for this rule. The protocol type is required when creating a firewall. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, sctp), or the IP protocol number.'
               type: string
             ports:
-              description: >-
-                An optional list of ports which are allowed. This field is only
-                applicable for UDP or TCP protocol. Each entry must be either an
-                integer or a range. If not specified, connections through any
-                port are allowed
+              description: |-
+                An optional list of ports which are allowed. This field is only applicable for UDP or TCP protocol. Each entry must be either an integer or a range. If not specified, connections through any port are allowed
 
 
-
-                Example inputs include: ["22"], ["80","443"], and
-                ["12345-12349"].
+                Example inputs include: ["22"], ["80","443"], and ["12345-12349"].
               items:
                 type: string
               type: array
@@ -941,30 +909,20 @@ definitions:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
       sourceRanges:
-        description: >-
-          The IP address blocks that this rule applies to, expressed in CIDR
-          format. One or both of sourceRanges and sourceTags may be set.
+        description: |-
+          The IP address blocks that this rule applies to, expressed in CIDR format. One or both of sourceRanges and sourceTags may be set.
 
 
-
-          If both properties are set, an inbound connection is allowed if the
-          range matches the sourceRanges OR the tag of the source matches the
-          sourceTags property. The connection does not need to match both
-          properties.
+          If both properties are set, an inbound connection is allowed if the range matches the sourceRanges OR the tag of the source matches the sourceTags property. The connection does not need to match both properties.
         items:
           type: string
         type: array
       sourceTags:
-        description: >-
-          A list of instance tags which this rule applies to. One or both of
-          sourceRanges and sourceTags may be set.
+        description: |-
+          A list of instance tags which this rule applies to. One or both of sourceRanges and sourceTags may be set.
 
 
-
-          If both properties are set, an inbound connection is allowed if the
-          range matches the sourceRanges OR the tag of the source matches the
-          sourceTags property. The connection does not need to match both
-          properties.
+          If both properties are set, an inbound connection is allowed if the range matches the sourceRanges OR the tag of the source matches the sourceTags property. The connection does not need to match both properties.
         items:
           type: string
         type: array
@@ -1443,11 +1401,8 @@ definitions:
         description: '[Output Only] Type of the resource. Always compute#instance for instances.'
         type: string
       machineType:
-        description: >-
-          Full or partial URL of the machine type resource to use for this
-          instance. This is provided by the client when the instance is created.
-          For example, the following is a valid partial url:
-
+        description: |-
+          Full or partial URL of the machine type resource to use for this instance. This is provided by the client when the instance is created. For example, the following is a valid partial url:
 
 
           zones/zone/machineTypes/machine-type
@@ -2900,10 +2855,8 @@ definitions:
         description: 'The URL to a gateway that should handle matching packets. Currently, this is only the internet gateway:  projects/<project-id>/global/gateways/default-internet-gateway'
         type: string
       nextHopInstance:
-        description: >-
-          The fully-qualified URL to an instance that should handle matching
-          packets. For example:
-
+        description: |-
+          The fully-qualified URL to an instance that should handle matching packets. For example:
           https://www.googleapis.com/compute/v1/projects/project/zones/zone/instances/
         type: string
       nextHopIp:
@@ -3169,13 +3122,8 @@ definitions:
     description: A set of instance tags.
     properties:
       fingerprint:
-        description: >-
-          Specifies a fingerprint for this request, which is essentially a hash
-          of the metadata's contents and used for optimistic locking. The
-          fingerprint is initially generated by Compute Engine and changes after
-          every request to modify or update metadata. You must always provide an
-          up-to-date fingerprint hash in order to update or change metadata.
-
+        description: |-
+          Specifies a fingerprint for this request, which is essentially a hash of the metadata's contents and used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update metadata. You must always provide an up-to-date fingerprint hash in order to update or change metadata.
 
 
           To see the latest fingerprint, make get() request to the instance.
@@ -3429,25 +3377,14 @@ definitions:
     description: 'A TargetPool resource. This resource defines a pool of instances, associated HttpHealthCheck resources, and the fallback TargetPool.'
     properties:
       backupPool:
-        description: >-
-          This field is applicable only when the containing target pool is
-          serving a forwarding rule as the primary pool, and its failoverRatio
-          field is properly set to a value between [0, 1].
+        description: |-
+          This field is applicable only when the containing target pool is serving a forwarding rule as the primary pool, and its failoverRatio field is properly set to a value between [0, 1].
 
 
-
-          backupPool and failoverRatio together define the fallback behavior of
-          the primary target pool: if the ratio of the healthy instances in the
-          primary pool is at or below failoverRatio, traffic arriving at the
-          load-balanced IP will be directed to the backup pool.
+          backupPool and failoverRatio together define the fallback behavior of the primary target pool: if the ratio of the healthy instances in the primary pool is at or below failoverRatio, traffic arriving at the load-balanced IP will be directed to the backup pool.
 
 
-
-          In case where failoverRatio and backupPool are not set, or all the
-          instances in the backup pool are unhealthy, the traffic will be
-          directed back to the primary pool in the "force" mode, where traffic
-          will be spread to the healthy instances with the best effort, or to all
-          instances when no instance is healthy.
+          In case where failoverRatio and backupPool are not set, or all the instances in the backup pool are unhealthy, the traffic will be directed back to the primary pool in the "force" mode, where traffic will be spread to the healthy instances with the best effort, or to all instances when no instance is healthy.
         type: string
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -3456,26 +3393,14 @@ definitions:
         description: An optional textual description of the resource; provided by the client when the resource is created.
         type: string
       failoverRatio:
-        description: >-
-          This field is applicable only when the containing target pool is
-          serving a forwarding rule as the primary pool (i.e., not as a backup
-          pool to some other target pool). The value of the field must be in [0,
-          1].
+        description: |-
+          This field is applicable only when the containing target pool is serving a forwarding rule as the primary pool (i.e., not as a backup pool to some other target pool). The value of the field must be in [0, 1].
 
 
-
-          If set, backupPool must also be set. They together define the fallback
-          behavior of the primary target pool: if the ratio of the healthy
-          instances in the primary pool is at or below this number, traffic
-          arriving at the load-balanced IP will be directed to the backup pool.
+          If set, backupPool must also be set. They together define the fallback behavior of the primary target pool: if the ratio of the healthy instances in the primary pool is at or below this number, traffic arriving at the load-balanced IP will be directed to the backup pool.
 
 
-
-          In case where failoverRatio is not set or all the instances in the
-          backup pool are unhealthy, the traffic will be directed back to the
-          primary pool in the "force" mode, where traffic will be spread to the
-          healthy instances with the best effort, or to all instances when no
-          instance is healthy.
+          In case where failoverRatio is not set or all the instances in the backup pool are unhealthy, the traffic will be directed back to the primary pool in the "force" mode, where traffic will be spread to the healthy instances with the best effort, or to all instances when no instance is healthy.
         format: float
         type: number
       healthChecks:
@@ -3507,18 +3432,11 @@ definitions:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
       sessionAffinity:
-        description: >-
+        description: |-
           Sesssion affinity option, must be one of the following values:
-
-          NONE: Connections from the same client IP may go to any instance in the
-          pool.
-
-          CLIENT_IP: Connections from the same client IP will go to the same
-          instance in the pool while that instance remains healthy.
-
-          CLIENT_IP_PROTO: Connections from the same client IP with the same IP
-          protocol will go to the same instance in the pool while that instance
-          remains healthy.
+          NONE: Connections from the same client IP may go to any instance in the pool.
+          CLIENT_IP: Connections from the same client IP will go to the same instance in the pool while that instance remains healthy.
+          CLIENT_IP_PROTO: Connections from the same client IP with the same IP protocol will go to the same instance in the pool while that instance remains healthy.
         enum:
           - CLIENT_IP
           - CLIENT_IP_PROTO
@@ -4267,22 +4185,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -4330,22 +4237,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -4393,22 +4289,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -4456,22 +4341,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -4519,22 +4393,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -4582,22 +4445,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -4645,22 +4497,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -4708,22 +4549,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -4771,22 +4601,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -4834,22 +4653,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -4897,22 +4705,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -4960,22 +4757,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -5023,22 +4809,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -5086,22 +4861,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -5149,22 +4913,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -5296,22 +5049,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -5539,22 +5281,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -5744,22 +5475,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -5929,22 +5649,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -6134,22 +5843,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -6331,14 +6029,8 @@ paths:
         - httpsHealthChecks
   '/{project}/global/images':
     get:
-      description: >-
-        Retrieves the list of private images available to the specified project.
-        Private images are images you create that belong to your project. This
-        method does not get any images that belong to other projects, including
-        publicly-available images, like Debian 7. If you want to get a list of
-        publicly-available images, use this method to make a request to the
-        respective image project, such as debian-cloud or windows-cloud.
-
+      description: |-
+        Retrieves the list of private images available to the specified project. Private images are images you create that belong to your project. This method does not get any images that belong to other projects, including publicly-available images, like Debian 7. If you want to get a list of publicly-available images, use this method to make a request to the respective image project, such as debian-cloud or windows-cloud.
 
 
         See Accessing images for more information.
@@ -6349,22 +6041,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -6540,22 +6221,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -6722,22 +6392,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -6869,22 +6528,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -6990,22 +6638,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -7137,22 +6774,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -7192,13 +6818,8 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/global/snapshots/{snapshot}':
     delete:
-      description: >-
-        Deletes the specified Snapshot resource. Keep in mind that deleting
-        a single snapshot might not necessarily delete all the data on that
-        snapshot. If any data on the snapshot that is marked for deletion is
-        needed for subsequent snapshots, the data will be moved to the next
-        corresponding snapshot.
-
+      description: |-
+        Deletes the specified Snapshot resource. Keep in mind that deleting a single snapshot might not necessarily delete all the data on that snapshot. If any data on the snapshot that is marked for deletion is needed for subsequent snapshots, the data will be moved to the next corresponding snapshot.
 
 
         For more information, see Deleting snaphots.
@@ -7269,22 +6890,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -7416,22 +7026,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -7563,22 +7162,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -7710,22 +7298,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -8019,22 +7596,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -8122,22 +7688,11 @@ paths:
           name: region
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -8289,22 +7844,11 @@ paths:
           name: region
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -8499,22 +8043,11 @@ paths:
           name: region
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -8635,22 +8168,11 @@ paths:
           name: region
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -9060,22 +8582,11 @@ paths:
           name: region
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -9227,22 +8738,11 @@ paths:
           name: region
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -9572,22 +9072,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -9675,22 +9164,11 @@ paths:
           name: zone
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -9909,22 +9387,11 @@ paths:
           name: zone
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -10017,22 +9484,11 @@ paths:
           name: zone
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -10231,22 +9687,11 @@ paths:
           name: zone
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -10697,22 +10142,11 @@ paths:
           name: zone
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -10920,22 +10354,11 @@ paths:
           name: instanceGroup
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -11070,22 +10493,11 @@ paths:
           name: zone
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -11763,22 +11175,11 @@ paths:
           name: zone
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -11871,22 +11272,11 @@ paths:
           name: zone
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -12007,22 +11397,11 @@ paths:
           name: zone
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.

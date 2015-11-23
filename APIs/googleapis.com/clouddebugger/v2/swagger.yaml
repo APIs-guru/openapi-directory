@@ -335,38 +335,9 @@ definitions:
     description: The response of updating an active breakpoint. The message is defined to allow future extensions.
     type: object
   Variable:
-    description: >-
-      Represents a variable or an argument possibly of a compound object type. 1.
-      A simple variable such as, int x = 5 is represented as: { name: "x", value:
-      "5" } 2. A compound object such as, struct T { int m1; int m2; }; T x = {
-      3, 7 }; is represented as: { name: "x", members { name: "m1", value: "3" },
-      members { name: "m2", value: "7" } } 3. A pointer where the pointee was
-      captured such as, T x = { 3, 7 }; T* p = &x; is represented as: { name:
-      "p", value: "0x00500500", members { name: "m1", value: "3" }, members
-      { name: "m2", value: "7" } } 4. A pointer where the pointee was not
-      captured or is inaccessible such as, T* p = new T; is represented as:
-      { name: "p", value: "0x00400400", members { value: "" } } the value text
-      should decribe the reason for the missing value. such as , ,
-
-      . note that a null pointer should not have members. 5. An unnamed value
-      such as, int* p = new int(7); is represented as, { name: "p", value:
-      "0x00500500", members { value: "7" } } 6. An unnamed pointer where the
-      pointee was not captured such as, int* p = new int(7); int** pp = &p; is
-      represented as: { name: "pp", value: "0x00500500", members { value:
-      "0x00400400", members { value: "" } } } To optimize computation, memory and
-      network traffic, variables that repeat in the output multiple times can be
-      stored once in a shared variable table and be referenced using the
-      var_index field. The variables stored in the shared table are nameless and
-      are essentially a partition of the complete variable. To reconstruct the
-      complete variable merge the referencing variable with the referenced
-      variable. When using the shared variable table, variables can be
-      represented as: T x = { 3, 7 }; T* p = &x; T& r = x; are represented as,
-      { name: "x", var_index: 3 } { name: "p", value "0x00500500", var_index: 3 }
-      { name: "r", var_index: 3 } with shared variable table entry #3: { members
-      { name: "m1", value: "3" }, members { name: "m2", value: "7" } } Note that
-      the pointer address is stored with the referencing variable and not with
-      the referenced variable, to allow the referenced variable to be shared
-      between pointer and references.
+    description: |-
+      Represents a variable or an argument possibly of a compound object type. 1. A simple variable such as, int x = 5 is represented as: { name: "x", value: "5" } 2. A compound object such as, struct T { int m1; int m2; }; T x = { 3, 7 }; is represented as: { name: "x", members { name: "m1", value: "3" }, members { name: "m2", value: "7" } } 3. A pointer where the pointee was captured such as, T x = { 3, 7 }; T* p = &x; is represented as: { name: "p", value: "0x00500500", members { name: "m1", value: "3" }, members { name: "m2", value: "7" } } 4. A pointer where the pointee was not captured or is inaccessible such as, T* p = new T; is represented as: { name: "p", value: "0x00400400", members { value: "" } } the value text should decribe the reason for the missing value. such as , ,
+      . note that a null pointer should not have members. 5. An unnamed value such as, int* p = new int(7); is represented as, { name: "p", value: "0x00500500", members { value: "7" } } 6. An unnamed pointer where the pointee was not captured such as, int* p = new int(7); int** pp = &p; is represented as: { name: "pp", value: "0x00500500", members { value: "0x00400400", members { value: "" } } } To optimize computation, memory and network traffic, variables that repeat in the output multiple times can be stored once in a shared variable table and be referenced using the var_index field. The variables stored in the shared table are nameless and are essentially a partition of the complete variable. To reconstruct the complete variable merge the referencing variable with the referenced variable. When using the shared variable table, variables can be represented as: T x = { 3, 7 }; T* p = &x; T& r = x; are represented as, { name: "x", var_index: 3 } { name: "p", value "0x00500500", var_index: 3 } { name: "r", var_index: 3 } with shared variable table entry #3: { members { name: "m1", value: "3" }, members { name: "m2", value: "7" } } Note that the pointer address is stored with the referencing variable and not with the referenced variable, to allow the referenced variable to be shared between pointer and references.
     properties:
       members:
         description: The members contained or pointed to by the variable.

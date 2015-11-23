@@ -219,15 +219,10 @@ definitions:
             $ref: '#/definitions/DateRange'
             description: The date range this report should be run for.
           dimensionFilters:
-            description: >-
+            description: |-
               The list of filters on which dimensions are filtered.
-
-              Filters for different dimensions are ANDed, filters for the same
-              dimension are grouped together and ORed.
-
-              A valid active GRP report needs to have exactly one DimensionValue
-              for the United States in addition to any advertiser or campaign
-              dimension values.
+              Filters for different dimensions are ANDed, filters for the same dimension are grouped together and ORed.
+              A valid active GRP report needs to have exactly one DimensionValue for the United States in addition to any advertiser or campaign dimension values.
             items:
               $ref: '#/definitions/DimensionValue'
             type: array

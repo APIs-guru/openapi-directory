@@ -40,26 +40,14 @@ definitions:
   SearchAnalyticsQueryRequest:
     properties:
       aggregationType:
-        description: >-
-          [Optional; Default is "auto"] How data is aggregated. If aggregated by
-          property, all data for the same property is aggregated; if aggregated
-          by page, all data is aggregated by canonical URI. If you filter or
-          group by page, choose AUTO; otherwise you can aggregate either by
-          property or by page, depending on how you want your data calculated;
-          see  the help documentation to learn how data is calculated differently
-          by site versus by page.
+        description: |-
+          [Optional; Default is "auto"] How data is aggregated. If aggregated by property, all data for the same property is aggregated; if aggregated by page, all data is aggregated by canonical URI. If you filter or group by page, choose AUTO; otherwise you can aggregate either by property or by page, depending on how you want your data calculated; see  the help documentation to learn how data is calculated differently by site versus by page.
 
 
-
-          Note: If you group or filter by page, you cannot aggregate by
-          property.
+          Note: If you group or filter by page, you cannot aggregate by property.
 
 
-
-          If you specify any value other than AUTO, the aggregation type in the
-          result will match the requested type, or if you request an invalid
-          type, you will get an error. The API will never change your aggregation
-          type if the requested type is invalid.
+          If you specify any value other than AUTO, the aggregation type in the result will match the requested type, or if you request an invalid type, you will get an error. The API will never change your aggregation type if the requested type is invalid.
         type: string
       dimensionFilterGroups:
         description: "[Optional] Zero or more filters to apply to the dimension grouping values; for example, 'query contains \"buy\"' to see only data where the query string contains the substring \"buy\" (not case-sensitive). You can filter by a dimension without grouping by it."
@@ -416,17 +404,11 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: >-
-        Query your data with filters and parameters that you define. Returns zero
-        or more rows grouped by the row keys that you define. You must define
-        a date range of one or more days.
+      description: |-
+        Query your data with filters and parameters that you define. Returns zero or more rows grouped by the row keys that you define. You must define a date range of one or more days.
 
 
-
-        When date is one of the group by values, any days without data are
-        omitted from the result list. If you need to know which days have data,
-        issue a broad date range query grouped by date for any metric, and see
-        which day rows are returned.
+        When date is one of the group by values, any days without data are omitted from the result list. If you need to know which days have data, issue a broad date range query grouped by date for any metric, and see which day rows are returned.
       operationId: webmasters.searchanalytics.query
       parameters:
         - description: "The site's URL, including protocol. For example: http://www.example.com/"

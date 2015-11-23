@@ -16,40 +16,26 @@ definitions:
     description: Associates `members` with a `role`.
     properties:
       members:
-        description: >-
-          Specifies the identities requesting access for a Cloud Platform
-          resource. `members` can have the following formats:
+        description: |-
+          Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following formats:
 
 
-
-          * `allUsers`: A special identifier that represents anyone who is on the
-          internet; with or without a Google account.
+          * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account.
 
 
-
-          * `allAuthenticatedUsers`: A special identifier that represents anyone
-          who is authenticated with a Google account or a service account.
+          * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account.
 
 
-
-          * `user:{emailid}`: An email address that represents a specific Google
-          account. For example, `alice@gmail.com` or `joe@example.com`.
+          * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@gmail.com` or `joe@example.com`.
 
 
-
-          * `serviceAccount:{emailid}`: An email address that represents
-          a service account. For example,
-          `my-other-app@appspot.gserviceaccount.com`.
+          * `serviceAccount:{emailid}`: An email address that represents a service account. For example, `my-other-app@appspot.gserviceaccount.com`.
 
 
-
-          * `group:{emailid}`: An email address that represents a Google group.
-          For example, `admins@example.com`.
+          * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`.
 
 
-
-          * `domain:{domain}`: A Google Apps domain name that represents all the
-          users of that domain. For example, `google.com` or `example.com`.
+          * `domain:{domain}`: A Google Apps domain name that represents all the users of that domain. For example, `google.com` or `example.com`.
         items:
           type: string
         type: array
@@ -406,36 +392,24 @@ definitions:
         type: string
     type: object
   Policy:
-    description: >-
-      Defines an Identity and Access Management (IAM) policy. It is used to
-      specify access control policies for Cloud Platform resources.
+    description: |-
+      Defines an Identity and Access Management (IAM) policy. It is used to specify access control policies for Cloud Platform resources.
 
 
 
 
 
 
-
-      A `Policy` consists of a list of `bindings`. A `Binding` binds a list of
-      `members` to a `role`, where the members can be user accounts, Google
-      groups, Google domains, and service accounts. A `role` is a named list of
-      permissions defined by IAM.
-
+      A `Policy` consists of a list of `bindings`. A `Binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM.
 
 
       **Example**
 
 
-
-      { "bindings": [ { "role": "roles/owner", "members":
-      [ "user:mike@example.com", "group:admins@example.com", "domain:google.com",
-      "serviceAccount:my-other-app@appspot.gserviceaccount.com"] }, { "role":
-      "roles/viewer", "members": ["user:sean@example.com"] } ] }
+      { "bindings": [ { "role": "roles/owner", "members": [ "user:mike@example.com", "group:admins@example.com", "domain:google.com", "serviceAccount:my-other-app@appspot.gserviceaccount.com"] }, { "role": "roles/viewer", "members": ["user:sean@example.com"] } ] }
 
 
-
-      For a description of IAM and its features, see the [IAM developer's
-      guide](https://cloud.google.com/iam).
+      For a description of IAM and its features, see the [IAM developer's guide](https://cloud.google.com/iam).
     properties:
       bindings:
         description: Associates a list of `members` to a `role`. Multiple `bindings` must not be specified for the same `role`. `bindings` with no members will result in an error.
@@ -664,22 +638,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -693,22 +656,14 @@ paths:
           minimum: 0
           name: maxResults
           type: integer
-        - description: >-
-            Sorts list results by a certain order. By default, results are
-            returned in alphanumerical order based on the resource name.
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
 
 
-
-            You can also sort results in descending order based on the creation
-            timestamp using orderBy="creationTimestamp desc". This sorts results
-            based on the creationTimestamp field in reverse chronological order
-            (newest result first). Use this to sort resources like operations so
-            that the newest operation is returned first.
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
 
 
-
-            Currently, only sorting by name or creationTimestamp desc is
-            supported.
+            Currently, only sorting by name or creationTimestamp desc is supported.
           in: query
           name: orderBy
           type: string
@@ -1024,22 +979,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -1053,22 +997,14 @@ paths:
           minimum: 0
           name: maxResults
           type: integer
-        - description: >-
-            Sorts list results by a certain order. By default, results are
-            returned in alphanumerical order based on the resource name.
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
 
 
-
-            You can also sort results in descending order based on the creation
-            timestamp using orderBy="creationTimestamp desc". This sorts results
-            based on the creationTimestamp field in reverse chronological order
-            (newest result first). Use this to sort resources like operations so
-            that the newest operation is returned first.
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
 
 
-
-            Currently, only sorting by name or creationTimestamp desc is
-            supported.
+            Currently, only sorting by name or creationTimestamp desc is supported.
           in: query
           name: orderBy
           type: string
@@ -1166,22 +1102,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -1195,22 +1120,14 @@ paths:
           minimum: 0
           name: maxResults
           type: integer
-        - description: >-
-            Sorts list results by a certain order. By default, results are
-            returned in alphanumerical order based on the resource name.
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
 
 
-
-            You can also sort results in descending order based on the creation
-            timestamp using orderBy="creationTimestamp desc". This sorts results
-            based on the creationTimestamp field in reverse chronological order
-            (newest result first). Use this to sort resources like operations so
-            that the newest operation is returned first.
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
 
 
-
-            Currently, only sorting by name or creationTimestamp desc is
-            supported.
+            Currently, only sorting by name or creationTimestamp desc is supported.
           in: query
           name: orderBy
           type: string
@@ -1595,22 +1512,11 @@ paths:
           name: instance
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -1624,22 +1530,14 @@ paths:
           minimum: 0
           name: maxResults
           type: integer
-        - description: >-
-            Sorts list results by a certain order. By default, results are
-            returned in alphanumerical order based on the resource name.
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
 
 
-
-            You can also sort results in descending order based on the creation
-            timestamp using orderBy="creationTimestamp desc". This sorts results
-            based on the creationTimestamp field in reverse chronological order
-            (newest result first). Use this to sort resources like operations so
-            that the newest operation is returned first.
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
 
 
-
-            Currently, only sorting by name or creationTimestamp desc is
-            supported.
+            Currently, only sorting by name or creationTimestamp desc is supported.
           in: query
           name: orderBy
           type: string

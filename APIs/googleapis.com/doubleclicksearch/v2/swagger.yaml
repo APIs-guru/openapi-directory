@@ -235,15 +235,9 @@ definitions:
         description: Name of a DoubleClick Search column to include in the report.
         type: string
       customDimensionName:
-        description: >-
-          Segments a report by a custom dimension. The report must be scoped to
-          an advertiser or lower, and the custom dimension must already be set up
-          in DoubleClick Search. The custom dimension name, which appears in
-          DoubleClick Search, is case sensitive.
-
-          If used in a conversion report, returns the value of the specified
-          custom dimension for the given conversion, if set. This column does not
-          segment the conversion report.
+        description: |-
+          Segments a report by a custom dimension. The report must be scoped to an advertiser or lower, and the custom dimension must already be set up in DoubleClick Search. The custom dimension name, which appears in DoubleClick Search, is case sensitive.
+          If used in a conversion report, returns the value of the specified custom dimension for the given conversion, if set. This column does not segment the conversion report.
         type: string
       customMetricName:
         description: 'Name of a custom metric to include in the report. The report must be scoped to an advertiser or lower, and the custom metric must already be set up in DoubleClick Search. The custom metric name, which appears in DoubleClick Search, is case sensitive.'

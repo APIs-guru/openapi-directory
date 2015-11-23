@@ -39,10 +39,8 @@ paths:
         - charts
   '/chart/{chart_token}':
     get:
-      description: >-
-        Returns information about a particular chart, identified by
-        `{chart_token}`.
-
+      description: |-
+        Returns information about a particular chart, identified by `{chart_token}`.
 
 
         Chart tokens may be found by using the `/chart/list` API endpoint.
@@ -65,22 +63,14 @@ paths:
         - charts
   '/chart/{chart_token}/{chart_format}/{chart_size}':
     get:
-      description: >-
+      description: |-
         Renders a chart in the format and size chosen.
 
 
-
-        The two formats allowed are `png` or `svg`. The four sizes allowed are
-        `thumb`, `small`, `medium` or `large`.
+        The two formats allowed are `png` or `svg`. The four sizes allowed are `thumb`, `small`, `medium` or `large`.
 
 
-
-        Note that `thumb` renders of charts are "simplified", in that they do not
-        include axis labelling or a legend. The PNG thumbs render at a high
-        resolution, to allow their use on devices with a high DPI (e.g. retina
-        displays). Where possible, it is suggested that you use the SVG format,
-        as it provides much smaller file sizes, and crisp rendering even when
-        zoomed.
+        Note that `thumb` renders of charts are "simplified", in that they do not include axis labelling or a legend. The PNG thumbs render at a high resolution, to allow their use on devices with a high DPI (e.g. retina displays). Where possible, it is suggested that you use the SVG format, as it provides much smaller file sizes, and crisp rendering even when zoomed.
       parameters:
         - in: path
           name: chart_token
@@ -108,14 +98,11 @@ paths:
         - charts
   /source/list:
     get:
-      description: >-
-        **Sources** are places that have provided data to Figure.NZ. This
-        endpoint lists them.
+      description: |-
+        **Sources** are places that have provided data to Figure.NZ. This endpoint lists them.
 
 
-
-        By default, only the first 20 sources are returned. You can control which
-        sources are returned using the GET parameters `per_page` and `start`.
+        By default, only the first 20 sources are returned. You can control which sources are returned using the GET parameters `per_page` and `start`.
       produces:
         - application/json
       responses:
@@ -130,10 +117,8 @@ paths:
         - sources
   '/source/{source_token}':
     get:
-      description: >-
-        Returns information about a particular source, identified by
-        `{source_token}`.
-
+      description: |-
+        Returns information about a particular source, identified by `{source_token}`.
 
 
         Source tokens may be found by using the `/source/list` API endpoint.
@@ -197,14 +182,11 @@ paths:
         - tables
   /table/list:
     get:
-      description: >-
-        **Tables** are a set of related data that has been provided by a Source,
-        then standardised and stored with Figure.NZ.
+      description: |-
+        **Tables** are a set of related data that has been provided by a Source, then standardised and stored with Figure.NZ.
 
 
-
-        By default, only the first 20 tables are returned. You can control which
-        tables are returned using the GET parameters `per_page` and `start`.
+        By default, only the first 20 tables are returned. You can control which tables are returned using the GET parameters `per_page` and `start`.
       produces:
         - application/json
       responses:
@@ -219,10 +201,8 @@ paths:
         - tables
   '/table/{table_token}':
     get:
-      description: >-
-        Returns information about a particular table, identified by
-        `{table_token}`.
-
+      description: |-
+        Returns information about a particular table, identified by `{table_token}`.
 
 
         Table tokens may be found by using the `/table/list` API endpoint.

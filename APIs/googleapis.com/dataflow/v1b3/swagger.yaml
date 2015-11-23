@@ -111,21 +111,8 @@ definitions:
     description: Describes the data disk used by a workflow job.
     properties:
       diskType:
-        description: >-
-          Disk storage type, as defined by Google Compute Engine. This must be
-          a disk type appropriate to the project and zone in which the workers
-          will run. If unknown or unspecified, the service will attempt to choose
-          a reasonable default. For example, the standard persistent disk type is
-          a resource name typically ending in "pd-standard". If SSD persistent
-          disks are available, the resource name typically ends with "pd-ssd".
-          The actual valid values are defined the Google Compute Engine API, not
-          by the Dataflow API; consult the Google Compute Engine documentation
-          for more information about determining the set of available disk types
-          for a particular project and zone. Google Compute Engine Disk types are
-          local to a particular project in a particular zone, and so the resource
-          name will typically look something like this:
-          compute.googleapis.com/projects/
-
+        description: |-
+          Disk storage type, as defined by Google Compute Engine. This must be a disk type appropriate to the project and zone in which the workers will run. If unknown or unspecified, the service will attempt to choose a reasonable default. For example, the standard persistent disk type is a resource name typically ending in "pd-standard". If SSD persistent disks are available, the resource name typically ends with "pd-ssd". The actual valid values are defined the Google Compute Engine API, not by the Dataflow API; consult the Google Compute Engine documentation for more information about determining the set of available disk types for a particular project and zone. Google Compute Engine Disk types are local to a particular project in a particular zone, and so the resource name will typically look something like this: compute.googleapis.com/projects/
           /zones//diskTypes/pd-standard
         type: string
       mountPoint:
@@ -465,13 +452,8 @@ definitions:
       context:
         additionalProperties:
           type: string
-        description: >-
-          Zero or more labeled fields which identify the part of the job this
-          metric is associated with, such as the name of a step or collection.
-          For example, built-in counters associated with steps will have
-          context['step'] = . Counters associated with PCollections in the SDK
-          will have context['pcollection'] =
-
+        description: |-
+          Zero or more labeled fields which identify the part of the job this metric is associated with, such as the name of a step or collection. For example, built-in counters associated with steps will have context['step'] = . Counters associated with PCollections in the SDK will have context['pcollection'] =
           .
         type: object
       name:
@@ -638,10 +620,8 @@ definitions:
         description: 'If set, contains a pubsub label from which to extract record ids. If left empty, record deduplication will be strictly best effort.'
         type: string
       subscription:
-        description: >-
-          A pubsub subscription, in the form of
-          "pubsub.googleapis.com/subscriptions/
-
+        description: |-
+          A pubsub subscription, in the form of "pubsub.googleapis.com/subscriptions/
           /"
         type: string
       timestampLabel:

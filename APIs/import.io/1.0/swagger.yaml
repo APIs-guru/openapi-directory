@@ -1619,41 +1619,23 @@ paths:
         - Authentication methods
   /store/connector/_magic:
     get:
-      description: >+
-        This is the simplest way to convert a URL into data using the import.io
-        platform.
+      description: |+
+        This is the simplest way to convert a URL into data using the import.io platform.
 
 
-
-        This will magically generate up to 3 different `ConnectorVersion`
-        configurations, and return a `Page` object for each representing lists or
-        tables on the page at that URL.
+        This will magically generate up to 3 different `ConnectorVersion` configurations, and return a `Page` object for each representing lists or tables on the page at that URL.
 
 
-
-        If pagination is detected on the page, the `pagination` property will be
-        included, containing suggestions for the previous and next page URLs.
-        Clients can then make additional separate requests to extract data over
-        multiple pages. As these URLs are just suggestions, clients themselves
-        need to determine whether the last page has been reached, e.g. by
-        checking whether the `results` being returned is empty or is showing the
-        same contents as the previous page.
-
+        If pagination is detected on the page, the `pagination` property will be included, containing suggestions for the previous and next page URLs. Clients can then make additional separate requests to extract data over multiple pages. As these URLs are just suggestions, clients themselves need to determine whether the last page has been reached, e.g. by checking whether the `results` being returned is empty or is showing the same contents as the previous page.
 
 
         Javascript and infinite scroll support in beta.
 
 
-
-        You can select the region to process using a keyword contained within
-        it.
+        You can select the region to process using a keyword contained within it.
 
 
-
-        If you wish to repeatedly extract the same table from many URLs, you can
-        use the `connectorVersionGuid` returned in the table in the Magic
-        versioned method below, or the standard query methods (although these do
-        not support js/infinite scroll currently).
+        If you wish to repeatedly extract the same table from many URLs, you can use the `connectorVersionGuid` returned in the table in the Magic versioned method below, or the standard query methods (although these do not support js/infinite scroll currently).
 
 
       operationId: magic
@@ -1700,10 +1682,8 @@ paths:
         - Magic Methods
   '/store/connector/_magic/{connectorVersionGuid}':
     get:
-      description: >+
-        This will re-run a specific `ConnectorVersion` that generated a table via
-        the regular magic call.
-
+      description: |+
+        This will re-run a specific `ConnectorVersion` that generated a table via the regular magic call.
 
 
         Use this if you want to use the same table extraction for many URLs.
@@ -2137,10 +2117,8 @@ paths:
         - Connector Methods
   '/store/connector/{id}/_disown':
     post:
-      description: >-
-        Make myself no longer the owner of a connector, removing it from My
-        Data.
-
+      description: |-
+        Make myself no longer the owner of a connector, removing it from My Data.
 
 
         Connectors cannot be deleted.
@@ -2170,9 +2148,8 @@ paths:
         - Connector Methods
   '/store/connector/{id}/_login':
     post:
-      description: >+
-        This API logs into the target site for an authenticated API. Pass the
-        cookies back through a POST query to use the authenticated session.
+      description: |+
+        This API logs into the target site for an authenticated API. Pass the cookies back through a POST query to use the authenticated session.
 
 
       operationId: queryLogin
@@ -2204,18 +2181,14 @@ paths:
         - Query Methods
   '/store/connector/{id}/_query':
     get:
-      description: >+
+      description: |+
         This is the simplest way to make a query onto the import.io platform.
 
 
-
-        Specify your inputs as `input={name}:{value}` named query string
-        parameters, for example:
-
+        Specify your inputs as `input={name}:{value}` named query string parameters, for example:
 
 
         ```html
-
         /store/connector/d50aff7b-ad19-4f64-ab1a-1e8f9a1bb249/_query?
 
             input=webpage/url:http%3A%2F%2Fcdn.import.io%2Ftest%2Fpages%2Fbasic%2Findex.html
@@ -2223,10 +2196,7 @@ paths:
         ```
 
 
-
-        There can be default values for inputs, e.g. the URL you extracted data
-        from for `webpage/url`. You can see the defaults in the `Schema` of the
-        `ConnectorVersion`.
+        There can be default values for inputs, e.g. the URL you extracted data from for `webpage/url`. You can see the defaults in the `Schema` of the `ConnectorVersion`.
 
 
       operationId: queryGet
@@ -2279,14 +2249,11 @@ paths:
     post:
       consumes:
         - application/json; charset=utf-8
-      description: >-
-        You can pass up cookies to use for a query in the input object
-        optionally. This is shown in the example.
+      description: |-
+        You can pass up cookies to use for a query in the input object optionally. This is shown in the example.
 
 
-
-        This feature is required if you are using authenticated APIs and
-        maintaining a session between calls.
+        This feature is required if you are using authenticated APIs and maintaining a session between calls.
       operationId: queryPost
       parameters:
         - description: ID of the Connector you are querying.

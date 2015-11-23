@@ -248,15 +248,10 @@ info:
 paths:
   /events:
     get:
-      description: >-
+      description: |-
         There are two types of events: for folders and for files.<br/>
-
-        All events will contain latest resource information about folder or
-        file.
-
-        If `folder` or `file` key is set to `null`, this means what this object
-        was deleted.<br/>
-
+        All events will contain latest resource information about folder or file.
+        If `folder` or `file` key is set to `null`, this means what this object was deleted.<br/>
         To access this resource, scope `read.events` is required.
       parameters:
         - description: Get events for root folder
@@ -284,10 +279,8 @@ paths:
         - events
   /files:
     delete:
-      description: >-
-        File will be permanently deleted, recovery is not possible. You can
-        delete multiple files by joining id's with comma. <br/>
-
+      description: |-
+        File will be permanently deleted, recovery is not possible. You can delete multiple files by joining id's with comma. <br/>
         To access this resource, scope `delete.file` is required.
       parameters:
         - description: ID of file
@@ -573,9 +566,8 @@ paths:
         - folders
   /folders/path:
     get:
-      description: >-
-        Folders are returned in strict order. From root folder to folder
-        specified by id.<br/>
+      description: |-
+        Folders are returned in strict order. From root folder to folder specified by id.<br/>
 
          To access this resource, scope `read.folder` is required.
       parameters:

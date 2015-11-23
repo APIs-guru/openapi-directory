@@ -1267,26 +1267,15 @@ definitions:
           type: string
         type: array
       compatibility:
-        description: >-
-          Compatibilities associated with this creative. This is a read-only
-          field. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or
-          on mobile devices for regular or interstitial ads, respectively. APP
-          and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO
-          refers to rendering in in-stream video ads developed with the VAST
-          standard. Applicable to all creative types.
-
+        description: |-
+          Compatibilities associated with this creative. This is a read-only field. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard. Applicable to all creative types.
 
 
           Acceptable values are:
-
           - "APP"
-
           - "APP_INTERSTITIAL"
-
           - "IN_STREAM_VIDEO"
-
           - "WEB"
-
           - "WEB_INTERSTITIAL"
         items:
           enum:
@@ -1669,37 +1658,16 @@ definitions:
         format: float
         type: number
       role:
-        description: >-
-          Role of the asset in relation to creative. Applicable to all but the
-          following creative types: all REDIRECT and TRACKING_TEXT. This is
-          a required field.
-
-          PRIMARY applies to ENHANCED_BANNER, FLASH_INPAGE, HTML5_BANNER, IMAGE,
-          IMAGE_GALLERY, all RICH_MEDIA (which may contain multiple primary
-          assets), and all VPAID creatives.
-
-          BACKUP_IMAGE applies to ENHANCED_BANNER, FLASH_INPAGE, HTML5_BANNER,
-          all RICH_MEDIA, and all VPAID creatives.
-
+        description: |-
+          Role of the asset in relation to creative. Applicable to all but the following creative types: all REDIRECT and TRACKING_TEXT. This is a required field.
+          PRIMARY applies to ENHANCED_BANNER, FLASH_INPAGE, HTML5_BANNER, IMAGE, IMAGE_GALLERY, all RICH_MEDIA (which may contain multiple primary assets), and all VPAID creatives.
+          BACKUP_IMAGE applies to ENHANCED_BANNER, FLASH_INPAGE, HTML5_BANNER, all RICH_MEDIA, and all VPAID creatives.
           ADDITIONAL_IMAGE and ADDITIONAL_FLASH apply to FLASH_INPAGE creatives.
-
-          OTHER refers to assets from sources other than DCM, such as Studio
-          uploaded assets, applicable to all RICH_MEDIA and all VPAID creatives.
-
-          PARENT_VIDEO refers to videos uploaded by the user in DCM and is
-          applicable to INSTREAM_VIDEO and VPAID_LINEAR creatives.
-
-          TRANSCODED_VIDEO refers to videos transcoded by DCM from PARENT_VIDEO
-          assets and is applicable to INSTREAM_VIDEO and VPAID_LINEAR creatives.
-
-          ALTERNATE_VIDEO refers to the DCM representation of child asset videos
-          from Studio, and is applicable to VPAID_LINEAR creatives. These cannot
-          be added or removed within DCM.
-
-          For VPAID_LINEAR creatives, PARENT_VIDEO, TRANSCODED_VIDEO and
-          ALTERNATE_VIDEO assets that are marked active serve as backup in case
-          the VPAID creative cannot be served. Only PARENT_VIDEO assets can be
-          added or removed for an INSTREAM_VIDEO or VPAID_LINEAR creative.
+          OTHER refers to assets from sources other than DCM, such as Studio uploaded assets, applicable to all RICH_MEDIA and all VPAID creatives.
+          PARENT_VIDEO refers to videos uploaded by the user in DCM and is applicable to INSTREAM_VIDEO and VPAID_LINEAR creatives.
+          TRANSCODED_VIDEO refers to videos transcoded by DCM from PARENT_VIDEO assets and is applicable to INSTREAM_VIDEO and VPAID_LINEAR creatives.
+          ALTERNATE_VIDEO refers to the DCM representation of child asset videos from Studio, and is applicable to VPAID_LINEAR creatives. These cannot be added or removed within DCM.
+          For VPAID_LINEAR creatives, PARENT_VIDEO, TRANSCODED_VIDEO and ALTERNATE_VIDEO assets that are marked active serve as backup in case the VPAID creative cannot be served. Only PARENT_VIDEO assets can be added or removed for an INSTREAM_VIDEO or VPAID_LINEAR creative.
         enum:
           - ADDITIONAL_FLASH
           - ADDITIONAL_IMAGE
@@ -1857,54 +1825,31 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#creativeAssetMetadata".'
         type: string
       warnedValidationRules:
-        description: >-
-          Rules validated during code generation that generated a warning. This
-          is a read-only, auto-generated field.
-
+        description: |-
+          Rules validated during code generation that generated a warning. This is a read-only, auto-generated field.
 
 
           Possible values are:
-
           - "CLICK_TAG_NON_TOP_LEVEL"
-
           - "CLICK_TAG_MISSING"
-
           - "CLICK_TAG_MORE_THAN_ONE"
-
           - "CLICK_TAG_INVALID"
-
           - "ORPHANED_ASSET"
-
           - "PRIMARY_HTML_MISSING"
-
           - "EXTERNAL_FILE_REFERENCED"
-
           - "MRAID_REFERENCED"
-
           - "ADMOB_REFERENCED"
-
           - "FILE_TYPE_INVALID"
-
           - "ZIP_INVALID"
-
           - "LINKED_FILE_NOT_FOUND"
-
           - "MAX_FLASH_VERSION_11"
-
           - "NOT_SSL_COMPLIANT"
-
           - "FILE_DETAIL_EMPTY"
-
           - "ASSET_INVALID"
-
           - "GWD_PROPERTIES_INVALID"
-
           - "ENABLER_UNSUPPORTED_METHOD_DCM"
-
           - "ASSET_FORMAT_UNSUPPORTED_DCM"
-
           - "COMPONENT_UNSUPPORTED_DCM"
-
           - "HTML5_FEATURE_UNSUPPORTED' "
         items:
           enum:
@@ -3066,51 +3011,28 @@ definitions:
         description: 'Value of the cat= paramter in the floodlight tag, which the ad servers use to identify the activity. This is optional: if empty, a new tag string will be generated for you. This string must be 1 to 8 characters long, with valid characters being [a-z][A-Z][0-9][-][ _ ]. This tag string must also be unique among activities of the same activity group. This field is read-only after insertion.'
         type: string
       userDefinedVariableTypes:
-        description: >-
-          List of the user-defined variables used by this conversion tag. These
-          map to the "u[1-20]=" in the tags. Each of these can have a user
-          defined type.
-
+        description: |-
+          List of the user-defined variables used by this conversion tag. These map to the "u[1-20]=" in the tags. Each of these can have a user defined type.
           Acceptable values are:
-
           - "U1"
-
           - "U2"
-
           - "U3"
-
           - "U4"
-
           - "U5"
-
           - "U6"
-
           - "U7"
-
           - "U8"
-
           - "U9"
-
           - "U10"
-
           - "U11"
-
           - "U12"
-
           - "U13"
-
           - "U14"
-
           - "U15"
-
           - "U16"
-
           - "U17"
-
           - "U18"
-
           - "U19"
-
           - "U20"
         items:
           enum:
@@ -4250,36 +4172,21 @@ definitions:
         format: int64
         type: string
       tagFormats:
-        description: >-
-          Tag formats to generate for this placement. This field is required on
-          insertion.
-
+        description: |-
+          Tag formats to generate for this placement. This field is required on insertion.
           Acceptable values are:
-
           - "PLACEMENT_TAG_STANDARD"
-
           - "PLACEMENT_TAG_IFRAME_JAVASCRIPT"
-
           - "PLACEMENT_TAG_IFRAME_ILAYER"
-
           - "PLACEMENT_TAG_INTERNAL_REDIRECT"
-
           - "PLACEMENT_TAG_JAVASCRIPT"
-
           - "PLACEMENT_TAG_INTERSTITIAL_IFRAME_JAVASCRIPT"
-
           - "PLACEMENT_TAG_INTERSTITIAL_INTERNAL_REDIRECT"
-
           - "PLACEMENT_TAG_INTERSTITIAL_JAVASCRIPT"
-
           - "PLACEMENT_TAG_CLICK_COMMANDS"
-
           - "PLACEMENT_TAG_INSTREAM_VIDEO_PREFETCH"
-
           - "PLACEMENT_TAG_TRACKING"
-
           - "PLACEMENT_TAG_TRACKING_IFRAME"
-
           - "PLACEMENT_TAG_TRACKING_JAVASCRIPT"
         items:
           enum:
@@ -5332,15 +5239,9 @@ definitions:
               type: string
             type: array
           runsOnDayOfMonth:
-            description: >-
-              Enum to define for "MONTHLY" scheduled reports whether reports
-              should be repeated on the same day of the month as "startDate" or
-              the same day of the week of the month.
-
-              Example: If 'startDate' is Monday, April 2nd 2012 (2012-04-02),
-              "DAY_OF_MONTH" would run subsequent reports on the 2nd of every
-              Month, and "WEEK_OF_MONTH" would run subsequent reports on the
-              first Monday of the month.
+            description: |-
+              Enum to define for "MONTHLY" scheduled reports whether reports should be repeated on the same day of the month as "startDate" or the same day of the week of the month.
+              Example: If 'startDate' is Monday, April 2nd 2012 (2012-04-02), "DAY_OF_MONTH" would run subsequent reports on the 2nd of every Month, and "WEEK_OF_MONTH" would run subsequent reports on the first Monday of the month.
             enum:
               - DAY_OF_MONTH
               - WEEK_OF_MONTH

@@ -452,22 +452,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -481,22 +470,14 @@ paths:
           minimum: 0
           name: maxResults
           type: integer
-        - description: >-
-            Sorts list results by a certain order. By default, results are
-            returned in alphanumerical order based on the resource name.
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
 
 
-
-            You can also sort results in descending order based on the creation
-            timestamp using orderBy="creationTimestamp desc". This sorts results
-            based on the creationTimestamp field in reverse chronological order
-            (newest result first). Use this to sort resources like operations so
-            that the newest operation is returned first.
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
 
 
-
-            Currently, only sorting by name or creationTimestamp desc is
-            supported.
+            Currently, only sorting by name or creationTimestamp desc is supported.
           in: query
           name: orderBy
           type: string
@@ -696,22 +677,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -725,22 +695,14 @@ paths:
           minimum: 0
           name: maxResults
           type: integer
-        - description: >-
-            Sorts list results by a certain order. By default, results are
-            returned in alphanumerical order based on the resource name.
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
 
 
-
-            You can also sort results in descending order based on the creation
-            timestamp using orderBy="creationTimestamp desc". This sorts results
-            based on the creationTimestamp field in reverse chronological order
-            (newest result first). Use this to sort resources like operations so
-            that the newest operation is returned first.
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
 
 
-
-            Currently, only sorting by name or creationTimestamp desc is
-            supported.
+            Currently, only sorting by name or creationTimestamp desc is supported.
           in: query
           name: orderBy
           type: string
@@ -838,22 +800,11 @@ paths:
           name: project
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -867,22 +818,14 @@ paths:
           minimum: 0
           name: maxResults
           type: integer
-        - description: >-
-            Sorts list results by a certain order. By default, results are
-            returned in alphanumerical order based on the resource name.
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
 
 
-
-            You can also sort results in descending order based on the creation
-            timestamp using orderBy="creationTimestamp desc". This sorts results
-            based on the creationTimestamp field in reverse chronological order
-            (newest result first). Use this to sort resources like operations so
-            that the newest operation is returned first.
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
 
 
-
-            Currently, only sorting by name or creationTimestamp desc is
-            supported.
+            Currently, only sorting by name or creationTimestamp desc is supported.
           in: query
           name: orderBy
           type: string
@@ -1151,22 +1094,11 @@ paths:
           name: instance
           required: true
           type: string
-        - description: >-
-            Sets a filter expression for filtering listed resources, in the form
-            filter={expression}. Your {expression} must be in the format:
-            FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
 
-
-            The FIELD_NAME is the name of the field you want to compare. Only
-            atomic field types are supported (string, number, boolean). The
-            COMPARISON_STRING must be either eq (equals) or ne (not equals). The
-            LITERAL_STRING is the string value to filter to. The literal value
-            must be valid for the type of field (string, number, boolean). For
-            string fields, the literal value is interpreted as a regular
-            expression using RE2 syntax. The literal value must match the entire
-            field.
-
+            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
 
             For example, filter=name ne example-instance.
@@ -1180,22 +1112,14 @@ paths:
           minimum: 0
           name: maxResults
           type: integer
-        - description: >-
-            Sorts list results by a certain order. By default, results are
-            returned in alphanumerical order based on the resource name.
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
 
 
-
-            You can also sort results in descending order based on the creation
-            timestamp using orderBy="creationTimestamp desc". This sorts results
-            based on the creationTimestamp field in reverse chronological order
-            (newest result first). Use this to sort resources like operations so
-            that the newest operation is returned first.
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
 
 
-
-            Currently, only sorting by name or creationTimestamp desc is
-            supported.
+            Currently, only sorting by name or creationTimestamp desc is supported.
           in: query
           name: orderBy
           type: string

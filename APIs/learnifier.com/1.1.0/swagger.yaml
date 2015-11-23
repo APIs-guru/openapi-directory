@@ -802,9 +802,8 @@ paths:
         - Course Designs
   /extorgunit:
     get:
-      description: >
-        Returns information about the organization unit with the specified
-        external id.
+      description: |
+        Returns information about the organization unit with the specified external id.
       parameters:
         - description: The external id of the organization unit
           format: extid
@@ -898,10 +897,8 @@ paths:
         - Users
   /globalusergroups:
     get:
-      description: >
-        Returns a list of Global User Groups. Global User Groups are set up for
-        the realm, and will generate groups that can be used on the client
-        level.
+      description: |
+        Returns a list of Global User Groups. Global User Groups are set up for the realm, and will generate groups that can be used on the client level.
       parameters: []
       responses:
         '200':
@@ -919,9 +916,8 @@ paths:
         - Global User Groups
   '/globalusergroups/{groupid}/members':
     get:
-      description: >
-        Returns a list of all members in User Groups that are based on the Global
-        Group with this groupid.
+      description: |
+        Returns a list of all members in User Groups that are based on the Global Group with this groupid.
       parameters:
         - description: ID of group
           format: int64
@@ -945,12 +941,9 @@ paths:
         - Global User Groups
   /orgunits:
     get:
-      description: >
-        The orgunits endpoint returns information about the available
-        organization units (orgunits).
-
-        The response includes the display name, internal and external id and
-        client number.
+      description: |
+        The orgunits endpoint returns information about the available organization units (orgunits).
+        The response includes the display name, internal and external id and client number.
       responses:
         '200':
           description: A response with organization units
@@ -987,11 +980,9 @@ paths:
         - Organization Units
   '/orgunits/{orgid}':
     get:
-      description: >
+      description: |
         Returns information about the specified organization unit.
-
-        The response includes the display name, internal and external id and
-        client number.
+        The response includes the display name, internal and external id and client number.
       parameters:
         - description: Id of the organization unit
           in: path
@@ -1093,9 +1084,8 @@ paths:
         - Projects
   '/orgunits/{orgid}/projects/{projectid}':
     delete:
-      description: >
-        Deletes the project. The project can only be deleted if the project do
-        not contain any participants.
+      description: |
+        Deletes the project. The project can only be deleted if the project do not contain any participants.
       parameters:
         - description: Id of the organization unit
           in: path
@@ -1150,9 +1140,8 @@ paths:
       tags:
         - Projects
     patch:
-      description: >
-        Updates information about a project. Values are only updated if the
-        fields are specified in the input
+      description: |
+        Updates information about a project. Values are only updated if the fields are specified in the input
       parameters:
         - description: Id of the organization unit
           in: path
@@ -1216,11 +1205,8 @@ paths:
       tags:
         - Projects
     post:
-      description: >
-        Add a user to the project. Participant information is created for the
-        user. In the body object, only one of either email or userid must be
-        specified. The participant needs to be activated before it the user can
-        access it.
+      description: |
+        Add a user to the project. Participant information is created for the user. In the body object, only one of either email or userid must be specified. The participant needs to be activated before it the user can access it.
       parameters:
         - description: Id of the organization unit
           in: path
@@ -1332,11 +1318,8 @@ paths:
         - Projects
   '/orgunits/{orgid}/projects/{projectid}/participants/${participantId}/loginlink':
     post:
-      description: >
-        Returns a single sign on link for the participant. The link is only
-        usable once and should be used directly. The link expires after a few
-        minutes.
-
+      description: |
+        Returns a single sign on link for the participant. The link is only usable once and should be used directly. The link expires after a few minutes.
 
 
         This operation requires the *login link* permission.
@@ -1486,9 +1469,8 @@ paths:
         - User Groups
   '/orgunits/{orgid}/usergroups/{groupid}/members':
     get:
-      description: >
-        Returns a list of all members in User Groups that are based on the Global
-        Group with this groupid.
+      description: |
+        Returns a list of all members in User Groups that are based on the Global Group with this groupid.
       parameters:
         - description: ID of organization
           format: int64
@@ -1701,13 +1683,9 @@ paths:
         - Users
   '/users/{userid}/pic?key={APIKEY}':
     get:
-      description: >
-        Returns a thumbnail picture of the user. This can either be a selected
-        picture or an auto generated image. This method doesn't require a full
-        sign in. The api key is sufficient.
-
-        The image is square and is likely, but not necessary, to be in 128x128
-        PNG format. However the format will always be either PNG, JPEG or GIF.
+      description: |
+        Returns a thumbnail picture of the user. This can either be a selected picture or an auto generated image. This method doesn't require a full sign in. The api key is sufficient.
+        The image is square and is likely, but not necessary, to be in 128x128 PNG format. However the format will always be either PNG, JPEG or GIF.
       parameters:
         - description: The user id
           in: path
@@ -1732,9 +1710,8 @@ paths:
         - Users
   '/users/{userid}/projectParticipations':
     get:
-      description: >
-        Returns information about the projects the user is a participant in. Only
-        the projects that the current token have access to will be listed.
+      description: |
+        Returns information about the projects the user is a participant in. Only the projects that the current token have access to will be listed.
       parameters:
         - description: A user id
           format: uuid

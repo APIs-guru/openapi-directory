@@ -3,9 +3,8 @@ definitions:
   App:
     properties:
       created_on:
-        description: >
-          The timestamp of when the device was created. The timestamp is a 64-bit
-          integer that represents the number of milliseconds since UNIX epoch.
+        description: |
+          The timestamp of when the device was created. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
         format: int64
         type: integer
       description:
@@ -89,16 +88,12 @@ definitions:
   AppKeys:
     properties:
       api_key:
-        description: >
-          A key, referred to as API KEY, that uniquely identifies the application
-          during the authentication process. The authentication process is used
-          to verify the authenticity of the application to the system.
+        description: |
+          A key, referred to as API KEY, that uniquely identifies the application during the authentication process. The authentication process is used to verify the authenticity of the application to the system.
         type: string
       api_secret:
-        description: >
-          A string, referred to as API SECRET that&#39;s used with the 'api_key'
-          during the authentication process. Ensure that you don&#39;t share this
-          secret and keep it secure.
+        description: |
+          A string, referred to as API SECRET that&#39;s used with the 'api_key' during the authentication process. Ensure that you don&#39;t share this secret and keep it secure.
         type: string
     required:
       - api_key
@@ -132,9 +127,8 @@ definitions:
   Data:
     properties:
       category:
-        description: >
-          The data type. You can specify "component", "log", "state", and
-          "alarm". The default is "state".
+        description: |
+          The data type. You can specify "component", "log", "state", and "alarm". The default is "state".
         enum:
           - component
           - log
@@ -148,19 +142,16 @@ definitions:
         description: The name of the data.
         type: string
       recorded_on:
-        description: >
-          The timestamp of when the data was created. The timestamp is a 64-bit
-          integer that represents the number of milliseconds since UNIX epoch.
+        description: |
+          The timestamp of when the data was created. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
         format: int64
         type: integer
       standard:
         description: Reserved for future use.
         type: string
       values:
-        description: >
-          The key-value pairs of the recorded data. Nested data can be stored
-          (keys with arrays or objects for example), however flat data can only
-          be indexed.
+        description: |
+          The key-value pairs of the recorded data. Nested data can be stored (keys with arrays or objects for example), however flat data can only be indexed.
         type: object
     required:
       - device_id
@@ -170,9 +161,8 @@ definitions:
   DataCreateBulk:
     properties:
       category:
-        description: >
-          The data type. You can specify "component", "log", "state", and
-          "alarm". The default is "state".
+        description: |
+          The data type. You can specify "component", "log", "state", and "alarm". The default is "state".
         enum:
           - component
           - log
@@ -194,15 +184,13 @@ definitions:
         description: The name of the data.
         type: string
       recorded_on:
-        description: >
-          The timestamp of when the data was created. The timestamp is a 64-bit
-          integer that represents the number of milliseconds since UNIX epoch.
+        description: |
+          The timestamp of when the data was created. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
         format: int64
         type: integer
       values:
-        description: >
-          The key-value pairs of the recorded data. Nested data can be stored
-          (keys with arrays or objects for example).
+        description: |
+          The key-value pairs of the recorded data. Nested data can be stored (keys with arrays or objects for example).
         type: object
     required:
       - id
@@ -212,9 +200,8 @@ definitions:
     description: The filter to use for the data in the notification.
     properties:
       category:
-        description: >
-          The data type that this policy applies to. You can specify "component",
-          "log", "state", and "alarm". The default is "state".
+        description: |
+          The data type that this policy applies to. You can specify "component", "log", "state", and "alarm". The default is "state".
         enum:
           - component
           - log
@@ -222,15 +209,12 @@ definitions:
           - alarm
         type: string
       data_id:
-        description: >
-          The data identifier to monitor for changes on the specified
-          'device_id'. The identifier you choose is meaningful to your
-          application.
+        description: |
+          The data identifier to monitor for changes on the specified 'device_id'. The identifier you choose is meaningful to your application.
         type: string
       device_id:
-        description: >
-          The universally unique identifier (UUID) of the device to monitor for
-          changes.
+        description: |
+          The universally unique identifier (UUID) of the device to monitor for changes.
         type: string
       standard:
         description: |
@@ -259,10 +243,8 @@ definitions:
         description: The name of the data.
         type: string
       retention:
-        description: >
-          The number of days to store the data. The string "forever" can be used
-          to specify to store the data indefinitely; "last_only" means to store
-          only the most recent piece of data.
+        description: |
+          The number of days to store the data. The string "forever" can be used to specify to store the data indefinitely; "last_only" means to store only the most recent piece of data.
         type: string
       standard:
         description: 'Reserved for future use. The returned value is "null".'
@@ -288,10 +270,8 @@ definitions:
         description: The name of the data.
         type: string
       retention:
-        description: >
-          The number of days to store the data. The string "forever" can be used
-          to specify to store the data indefinitely; "last_only" means to store
-          only the most recent piece of data.
+        description: |
+          The number of days to store the data. The string "forever" can be used to specify to store the data indefinitely; "last_only" means to store only the most recent piece of data.
         type: string
       standard:
         description: Reserved for future use.
@@ -303,9 +283,8 @@ definitions:
   DataRetentionUpdate:
     properties:
       category:
-        description: >
-          The data type that this policy applies to. You can specify "component",
-          "log", "state", and "alarm". The default is "state".
+        description: |
+          The data type that this policy applies to. You can specify "component", "log", "state", and "alarm". The default is "state".
         enum:
           - component
           - log
@@ -316,10 +295,8 @@ definitions:
         description: The name of the data.
         type: string
       retention:
-        description: >
-          The number of days to store the data. The string "forever" can be used
-          to specify to store the data indefinitely; "last_only" means to store
-          only the most recent piece of data.
+        description: |
+          The number of days to store the data. The string "forever" can be used to specify to store the data indefinitely; "last_only" means to store only the most recent piece of data.
         type: string
       standard:
         description: Reserved for future use.
@@ -333,9 +310,8 @@ definitions:
         description: The client certificate for authenticating this device. This value is returned only when a device is created with a certificate signing request.
         type: string
       created_on:
-        description: >
-          The timestamp of when the device was created. The timestamp is a 64-bit
-          integer that represents the number of milliseconds since UNIX epoch.
+        description: |
+          The timestamp of when the device was created. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
         format: int64
         type: integer
       description:
@@ -345,10 +321,8 @@ definitions:
         description: The universally unique identifier (UUID) of the device.
         type: string
       identifier:
-        description: >
-          This string is a human-readable identifier (1-200 characters in length)
-          for the device. For example a VIN number, MAC address, etc. This
-          identifier differs from the universally unique identifier (UUID).
+        description: |
+          This string is a human-readable identifier (1-200 characters in length) for the device. For example a VIN number, MAC address, etc. This identifier differs from the universally unique identifier (UUID).
         type: string
       issuer:
         description: The certificate issuer for this devices certificates used for authentication.
@@ -436,9 +410,8 @@ definitions:
         description: The description of the device.
         type: string
       identifier:
-        description: >
-          This string is a human-readable identifier for the device. For example
-          a VIN number, MAC address, etc. This identifier differs from the UUID.
+        description: |
+          This string is a human-readable identifier for the device. For example a VIN number, MAC address, etc. This identifier differs from the UUID.
         type: string
       name:
         description: The name of the device.
@@ -463,9 +436,8 @@ definitions:
         description: The description of the device.
         type: string
       identifier:
-        description: >
-          This string is a human-readable identifier for the device. For example
-          a VIN number, MAC address, etc. This identifier differs from the UUID.
+        description: |
+          This string is a human-readable identifier for the device. For example a VIN number, MAC address, etc. This identifier differs from the UUID.
         type: string
       name:
         description: The name of the device.
@@ -538,31 +510,26 @@ definitions:
     description: A filter for file notifications.
     properties:
       device_id:
-        description: >
-          The universally unique identifier (UUID) of the device to monitor for
-          changes.
+        description: |
+          The universally unique identifier (UUID) of the device to monitor for changes.
         type: string
   FileInfo:
     properties:
       created_on:
-        description: >
-          A timestamp of when the file was created on the system. The timestamp
-          is a 64-bit integer that represents the number of milliseconds since
-          UNIX epoch.
+        description: |
+          A timestamp of when the file was created on the system. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
         format: int64
         type: integer
       description:
         description: A description for the file.
         type: string
       download_url:
-        description: >
-          The HTTP URL to download the file. This property is only available if
-          the file completely uploads.
+        description: |
+          The HTTP URL to download the file. This property is only available if the file completely uploads.
         type: string
       filename:
-        description: >
-          The filename for the file. Paths can be encoded in the filename with
-          slash ("/") characters to separate them.
+        description: |
+          The filename for the file. Paths can be encoded in the filename with slash ("/") characters to separate them.
         type: string
       id:
         description: The universally unique identifier for the file.
@@ -576,18 +543,15 @@ definitions:
           The UUID of the device that the file belongs to.
         type: string
       owner_type:
-        description: >
-          The type of entity the file belongs to. The only value that&#39;s valid
-          is "device".
+        description: |
+          The type of entity the file belongs to. The only value that&#39;s valid is "device".
         type: string
       size:
         description: The size of the file in bytes.
         type: integer
       uploaded_on:
-        description: >
-          A timestamp of when the file finished uploading. Returns null if the
-          file doesn&#39;t completely upload. The timestamp is a 64-bit integer
-          that represents the number of milliseconds since UNIX epoch.
+        description: |
+          A timestamp of when the file finished uploading. Returns null if the file doesn&#39;t completely upload. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
         format: int64
         type: integer
     required:
@@ -608,19 +572,16 @@ definitions:
   FilesInfo:
     properties:
       created_on:
-        description: >
-          A timestamp of when the file was created on the system. The timestamp
-          is a 64-bit integer that represents the number of milliseconds since
-          UNIX epoch.
+        description: |
+          A timestamp of when the file was created on the system. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
         format: int64
         type: integer
       description:
         description: A description for the file.
         type: string
       filename:
-        description: >
-          The filename for the file. Paths can be encoded in the filename with
-          slash ("/") characters to separate them.
+        description: |
+          The filename for the file. Paths can be encoded in the filename with slash ("/") characters to separate them.
         type: string
       id:
         description: The universally unique identifier (UUID) for the file.
@@ -634,18 +595,15 @@ definitions:
           The UUID of the device the file belongs to.
         type: string
       owner_type:
-        description: >
-          The type of entity the file belongs to. The only value that&#39;s valid
-          is "device".
+        description: |
+          The type of entity the file belongs to. The only value that&#39;s valid is "device".
         type: string
       size:
         description: The size of the file in bytes.
         type: integer
       uploaded_on:
-        description: >
-          A timestamp of when the file finished uploading. Returns null if the
-          file doesn&#39;t completely upload. The timestamp is a 64-bit integer
-          that represents the number of milliseconds since UNIX epoch.
+        description: |
+          A timestamp of when the file finished uploading. Returns null if the file doesn&#39;t completely upload. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
         format: int64
         type: integer
     required:
@@ -658,9 +616,8 @@ definitions:
   Firehose:
     properties:
       description:
-        description: >
-          The description of the firehose, such as "This firehose reports all
-          events and data changes from devices of Application Type A".
+        description: |
+          The description of the firehose, such as "This firehose reports all events and data changes from devices of Application Type A".
         type: string
       id:
         description: The UUID of the firehose.
@@ -701,9 +658,8 @@ definitions:
   FirehoseCreate:
     properties:
       description:
-        description: >
-          The description of the firehose, such as "This firehose reports all
-          events and data changes from devices of Application Type A".
+        description: |
+          The description of the firehose, such as "This firehose reports all events and data changes from devices of Application Type A".
         type: string
       name:
         description: 'The name of the firehose, such as "Firehose for Application Type A".'
@@ -716,9 +672,8 @@ definitions:
   FirehoseUpdate:
     properties:
       description:
-        description: >
-          The description of the firehose, such as "This firehose reports all
-          events and data changes from devices of Application Type A".
+        description: |
+          The description of the firehose, such as "This firehose reports all events and data changes from devices of Application Type A".
         type: string
       name:
         description: 'The name of the firehose, such as "Firehose for Application Type A".'
@@ -734,23 +689,19 @@ definitions:
           type: object
         type: array
       total:
-        description: >
-          The total number of search results (specified by 'hits') that are
-          found.
+        description: |
+          The total number of search results (specified by 'hits') that are found.
         type: integer
   Message:
     properties:
       created_on:
-        description: >
-          The timestamp when the message is received by the server. The timestamp
-          is a 64-bit integer that represents the number of milliseconds since
-          UNIX epoch.
+        description: |
+          The timestamp when the message is received by the server. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
         format: int64
         type: integer
       data:
-        description: >
-          The data of the message in JSON format. The object is
-          application-defined and created by the sending device.
+        description: |
+          The data of the message in JSON format. The object is application-defined and created by the sending device.
         type: object
       msg_id:
         description: |
@@ -760,29 +711,20 @@ definitions:
         description: The universally unique identifier (UUID) of the sending device.
         type: string
       sent_on:
-        description: >
-          The timestamp when the message is sent by the device. The timestamp is
-          a 64-bit integer that represents the number of milliseconds since UNIX
-          epoch. There can be situations when messages are sent long before the
-          server receives them, such as when using a proxy.
+        description: |
+          The timestamp when the message is sent by the device. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch. There can be situations when messages are sent long before the server receives them, such as when using a proxy.
         format: int64
         type: integer
       target_id:
         description: The UUID of the receiving or target device.
         type: string
       type:
-        description: >
-          The type of message is application-defined. For example, the message
-          type could be message.create.wipe (to wipe the device),
-          message.create.unlock (to unlock a door), or message.create.ping (to
-          ping a device).
+        description: |
+          The type of message is application-defined. For example, the message type could be message.create.wipe (to wipe the device), message.create.unlock (to unlock a door), or message.create.ping (to ping a device).
         type: string
       watermark_id:
-        description: >
-          This identifier represents where in the message queue this message
-          lies. When you acknowledge the message with this identifier, the system
-          removes the message and any older messages from the queue. You must
-          acknowledge the 'watermark_id' to move forward in the message queue.
+        description: |
+          This identifier represents where in the message queue this message lies. When you acknowledge the message with this identifier, the system removes the message and any older messages from the queue. You must acknowledge the 'watermark_id' to move forward in the message queue.
         type: string
     required:
       - target_id
@@ -791,34 +733,26 @@ definitions:
   MessageAcknowledge:
     properties:
       watermark_id:
-        description: >
-          Each message contains an identifier. You can use that identifier to
-          acknowledge all messages up to and including that message.
+        description: |
+          Each message contains an identifier. You can use that identifier to acknowledge all messages up to and including that message.
         type: string
   MessageCreate:
     properties:
       data:
-        description: >
-          The data of the message in JSON format. The object is
-          application-defined and created by the sending device.
+        description: |
+          The data of the message in JSON format. The object is application-defined and created by the sending device.
         type: object
       sent_on:
-        description: >
-          The timestamp when the message was sent by the device. This timestamp
-          is a 64-bit integer that represents the number of milliseconds since
-          UNIX epoch. There can be situations when messages are sent long before
-          the server receives them, such as when using a proxy.
+        description: |
+          The timestamp when the message was sent by the device. This timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch. There can be situations when messages are sent long before the server receives them, such as when using a proxy.
         format: int64
         type: integer
       target_id:
         description: The UUID of the receiving or target device.
         type: string
       type:
-        description: >
-          The type of message is application-defined. For example, the message
-          type could be message.create.wipe (to wipe the device),
-          message.create.unlock (to unlock a door), or message.create.ping (to
-          ping a device).
+        description: |
+          The type of message is application-defined. For example, the message type could be message.create.wipe (to wipe the device), message.create.unlock (to unlock a door), or message.create.ping (to ping a device).
         type: string
     required:
       - type
@@ -828,19 +762,14 @@ definitions:
     description: A filter for the message.
     properties:
       type:
-        description: >
-          The message type to filter. The message type you specify is what you
-          receive a notification for. If you filter for a message called
-          message.create.ping, your would get a notification each time your
-          device is sent a message of that type.
+        description: |
+          The message type to filter. The message type you specify is what you receive a notification for. If you filter for a message called message.create.ping, your would get a notification each time your device is sent a message of that type.
         type: string
   Notification:
     properties:
       action:
-        description: >
-          The action for the notification. A value of "new" specifies that
-          there&#39;s a new notification or a new file was created. A value of
-          "delete" specifies that a file was deleted.
+        description: |
+          The action for the notification. A value of "new" specifies that there&#39;s a new notification or a new file was created. A value of "delete" specifies that a file was deleted.
         enum:
           - new
           - delete
@@ -912,15 +841,12 @@ definitions:
   Subscription:
     properties:
       event_filter:
-        description: >
-          This field narrows the stream to only data with this "matching"
-          string.  Only applicable when the event_type is "data".
+        description: |
+          This field narrows the stream to only data with this "matching" string.  Only applicable when the event_type is "data".
         type: string
       event_type:
-        description: >
-          This field determines which events are streamed.  Valid values are
-          "data", "file", and "lifecycle". The life cycle events include create,
-          delete, updates events for the scope type.
+        description: |
+          This field determines which events are streamed.  Valid values are "data", "file", and "lifecycle". The life cycle events include create, delete, updates events for the scope type.
         type: string
       firehose_id:
         description: The UUID of the firehose.
@@ -946,15 +872,12 @@ definitions:
   SubscriptionCreate:
     properties:
       event_filter:
-        description: >
-          This field narrows the stream to only data with this "matching"
-          string.  Only applicable when the event_type is "data".
+        description: |
+          This field narrows the stream to only data with this "matching" string.  Only applicable when the event_type is "data".
         type: string
       event_type:
-        description: >
-          This field determines which events are streamed.  Valid values are
-          "data", "file", "lifecycle", and "*". The life cycle events include
-          create, delete, updates events for the scope type.
+        description: |
+          This field determines which events are streamed.  Valid values are "data", "file", "lifecycle", and "*". The life cycle events include create, delete, updates events for the scope type.
         type: string
       scope_id:
         description: The UUID of the entity the subscription is scoped to.
@@ -969,47 +892,31 @@ definitions:
   Tag:
     properties:
       color:
-        description: >
-          A color for the tag. The color is specified as hex triplet and starts
-          with a hash character. For more information about values you can use,
-          see http://en.wikipedia.org/wiki/Web_colors.
+        description: |
+          A color for the tag. The color is specified as hex triplet and starts with a hash character. For more information about values you can use, see http://en.wikipedia.org/wiki/Web_colors.
         type: string
       description:
         description: |
           A description about the tag that users and administrators can see.
         type: string
       exposing:
-        description: >
-          An immutable value specified at creation time of the tag.  When "True",
-          the tag can be designated as the target of granted capabilities, which
-          is known as an exposing tag. When "False", the tag can&#39;t be the
-          target of a capability, which is known as a non-exposing tag. If no
-          value is specified, the default value is "True".
+        description: |
+          An immutable value specified at creation time of the tag.  When "True", the tag can be designated as the target of granted capabilities, which is known as an exposing tag. When "False", the tag can&#39;t be the target of a capability, which is known as a non-exposing tag. If no value is specified, the default value is "True".
         type: boolean
       id:
         description: The universally unique identifier (UUID) of the tag.
         type: string
       name:
-        description: >
-          The name of the tag. This name doesn&#39;t need to be unique. Often,
-          this name appears on the application screens to end users. For example,
-          when you create your organization, a tag with the name of Admin is
-          created. The user that created the organization is assigned the Admin
-          tag.
+        description: |
+          The name of the tag. This name doesn&#39;t need to be unique. Often, this name appears on the application screens to end users. For example, when you create your organization, a tag with the name of Admin is created. The user that created the organization is assigned the Admin tag.
         type: string
       owner_id:
-        description: >
-          The owner of the tag.  The owner is identified by the UUID of the
-          organization or user.
+        description: |
+          The owner of the tag.  The owner is identified by the UUID of the organization or user.
         type: string
       owner_type:
-        description: >
-          Tags can be owned and managed by a user or by an organization.
-          Typically, organizations create the first set of rules across their
-          applications and can delegate some of the permission management down to
-          the end users (e.g., users can share their location if they want to).
-          In cases where users manage the permissions, the owner would be the
-          user, otherwise the owner is the organization ("org").
+        description: |
+          Tags can be owned and managed by a user or by an organization. Typically, organizations create the first set of rules across their applications and can delegate some of the permission management down to the end users (e.g., users can share their location if they want to). In cases where users manage the permissions, the owner would be the user, otherwise the owner is the organization ("org").
         enum:
           - org
           - user
@@ -1024,10 +931,8 @@ definitions:
   TagCapability:
     properties:
       association:
-        description: >
-          The capability association type. The association type can be
-          "same_user", which indicates to grant the capability to devices that
-          belong to the same user.
+        description: |
+          The capability association type. The association type can be "same_user", which indicates to grant the capability to devices that belong to the same user.
         type: string
       cap_name:
         description: |
@@ -1050,17 +955,15 @@ definitions:
         description: The type of entity the capability is granted to.
         type: string
       target_id:
-        description: >
-          The universally unique identifier (UUID) of the entity granting the
-          capability to perform an action on it.
+        description: |
+          The universally unique identifier (UUID) of the entity granting the capability to perform an action on it.
         type: string
       target_name:
         description: The name of the tag that you are granting the capability on.
         type: string
       target_type:
-        description: >
-          The type of entity that&#39;s being granted the capability. This value
-          should be "tag" (tags).
+        description: |
+          The type of entity that&#39;s being granted the capability. This value should be "tag" (tags).
         type: string
     required:
       - target_id
@@ -1071,50 +974,28 @@ definitions:
   TagCreate:
     properties:
       color:
-        description: >
-          A color for the tag. The color is specified as hex triplet and starts
-          with a hash character. If no value is specified, the default value is
-          "#000000" (black). For more information about the values you can use,
-          see http://en.wikipedia.org/wiki/Web_colors.
+        description: |
+          A color for the tag. The color is specified as hex triplet and starts with a hash character. If no value is specified, the default value is "#000000" (black). For more information about the values you can use, see http://en.wikipedia.org/wiki/Web_colors.
         type: string
       description:
-        description: >
-          A description about the tag that users and administrators can see. The
-          description must be 4-200 characters in length.
+        description: |
+          A description about the tag that users and administrators can see. The description must be 4-200 characters in length.
         type: string
       exposing:
-        description: >
-          An immutable value specified at creation time of the tag. When "True",
-          the tag can be designated as the target of granted capabilities, which
-          is known as an exposing tag. When "False", the tag can&#39;t be the
-          target of a capability, which is known as a non-exposing tag. The
-          advantage of using a non-exposing tag is that no additional
-          capabilities are required. If no value is specified, the default value
-          is "True".
+        description: |
+          An immutable value specified at creation time of the tag. When "True", the tag can be designated as the target of granted capabilities, which is known as an exposing tag. When "False", the tag can&#39;t be the target of a capability, which is known as a non-exposing tag. The advantage of using a non-exposing tag is that no additional capabilities are required. If no value is specified, the default value is "True".
         type: boolean
       name:
-        description: >
-          The name of the tag. This name doesn&#39;t need to be unique. Often,
-          this name appears on the application screens to end users. For example,
-          when you create your organization, a tag with the name of Admin is
-          created. The user that created the organization is assigned the Admin
-          tag.
+        description: |
+          The name of the tag. This name doesn&#39;t need to be unique. Often, this name appears on the application screens to end users. For example, when you create your organization, a tag with the name of Admin is created. The user that created the organization is assigned the Admin tag.
         type: string
       owner_id:
-        description: >
-          The owner of the tag.  The owner is identified by the UUID of the
-          organization or user. If this value isn&#39;t provided, it is
-          determined by the caller&#39;s organization or user in the 'owner_type'
-          property.
+        description: |
+          The owner of the tag.  The owner is identified by the UUID of the organization or user. If this value isn&#39;t provided, it is determined by the caller&#39;s organization or user in the 'owner_type' property.
         type: string
       owner_type:
-        description: >
-          Tags can be owned and managed by a user or by an organization.
-          Typically, organizations create the first set of rules across their
-          applications and can delegate some of the permission management down to
-          the end users (e.g., users can share their location if they want to).
-          In cases where users manage the permissions, the owner would be the
-          user ("user"); otherwise, the owner is the organization ("org").
+        description: |
+          Tags can be owned and managed by a user or by an organization. Typically, organizations create the first set of rules across their applications and can delegate some of the permission management down to the end users (e.g., users can share their location if they want to). In cases where users manage the permissions, the owner would be the user ("user"); otherwise, the owner is the organization ("org").
         enum:
           - org
           - user
@@ -1130,9 +1011,8 @@ definitions:
           The universally unique identifier (UUID) of tag.
         type: string
       tagged_id:
-        description: >
-          The universally unique identifier (UUID) of the entity that is tagged
-          with this tag.
+        description: |
+          The universally unique identifier (UUID) of the entity that is tagged with this tag.
         type: string
       type:
         description: |
@@ -1145,29 +1025,22 @@ definitions:
   TagUpdate:
     properties:
       color:
-        description: >
-          A color for the tag. The color is specified as hex triplet and starts
-          with a hash character. For more information about values you can use,
-          see http://en.wikipedia.org/wiki/Web_colors.
+        description: |
+          A color for the tag. The color is specified as hex triplet and starts with a hash character. For more information about values you can use, see http://en.wikipedia.org/wiki/Web_colors.
         type: string
       description:
         description: |
           A description about the tag that users and administrators can see.
         type: string
       name:
-        description: >
-          The name of the tag. This name doesn&#39;t need to be unique. Often,
-          this name appears on the application screens to end users. For example,
-          when you create your organization, a tag with the name of Admin is
-          created. The user that created the organization is assigned the Admin
-          tag.
+        description: |
+          The name of the tag. This name doesn&#39;t need to be unique. Often, this name appears on the application screens to end users. For example, when you create your organization, a tag with the name of Admin is created. The user that created the organization is assigned the Admin tag.
         type: string
   User:
     properties:
       created_on:
-        description: >
-          The timestamp of when the user was created. The timestamp is a 64-bit
-          integer that represents the number of milliseconds since UNIX epoch.
+        description: |
+          The timestamp of when the user was created. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
         format: int64
         type: integer
       email:
@@ -1237,13 +1110,8 @@ info:
 paths:
   /apps:
     get:
-      description: >
-        Retrieve a list of applications that belong to an organization ('org_id')
-        or that have a specific API KEY ('api_key'). The calling device requires
-        the app.read.by.org capability on the organization and app.read
-        capability on the applications being listed. Don&#39;t provide both
-        'org_id' and 'api_key' parameters, otherwise you get a 400 response (bad
-        request).
+      description: |
+        Retrieve a list of applications that belong to an organization ('org_id') or that have a specific API KEY ('api_key'). The calling device requires the app.read.by.org capability on the organization and app.read capability on the applications being listed. Don&#39;t provide both 'org_id' and 'api_key' parameters, otherwise you get a 400 response (bad request).
       parameters:
         - description: The universally unique identifier (UUID) of the organization to get applications from.
           in: query
@@ -1266,13 +1134,8 @@ paths:
     post:
       consumes:
         - application/json
-      description: >
-        Devices are instances of applications that are used to connect into the
-        system. In most cases, you would have a different application for each
-        type of device that connects to the system. When you use this API, you
-        can create an application. To be able to call this method, the calling
-        device requires the app.create capability on the specified organization
-        ('org_id').
+      description: |
+        Devices are instances of applications that are used to connect into the system. In most cases, you would have a different application for each type of device that connects to the system. When you use this API, you can create an application. To be able to call this method, the calling device requires the app.create capability on the specified organization ('org_id').
       parameters:
         - description: The JSON-formatted string containing information about the application to create.
           in: body
@@ -1290,12 +1153,8 @@ paths:
         - apps
   '/apps/{id}':
     delete:
-      description: >
-        Remove an application from the system. In addition to removing the
-        application, this call causes all the devices for the specified
-        application and the associated data for the devices to be removed from
-        the system. The calling device must have the app.delete capability on the
-        specified application to perform the action.
+      description: |
+        Remove an application from the system. In addition to removing the application, this call causes all the devices for the specified application and the associated data for the devices to be removed from the system. The calling device must have the app.delete capability on the specified application to perform the action.
       parameters:
         - description: The universally unique identifier (UUID) of the application to delete.
           in: path
@@ -1309,10 +1168,8 @@ paths:
       tags:
         - apps
     get:
-      description: >
-        Read a single application based on its universally unique identifier
-        (UUID). To be able to read an application, the calling device must have
-        the app.read capability for the specified application.
+      description: |
+        Read a single application based on its universally unique identifier (UUID). To be able to read an application, the calling device must have the app.read capability for the specified application.
       parameters:
         - description: The application UUID to read.
           in: path
@@ -1330,9 +1187,8 @@ paths:
     put:
       consumes:
         - application/json
-      description: >
-        Update the metadata for an application. The calling device requires the
-        app.update capability for the specified application.
+      description: |
+        Update the metadata for an application. The calling device requires the app.update capability for the specified application.
       parameters:
         - description: The universally unique identifier (UUID) of the application to update.
           in: path
@@ -1353,38 +1209,24 @@ paths:
         - apps
   '/apps/{id}/caps':
     get:
-      description: >
-        Retrieve the list of capabilities. You can retrieve either the
-        capabilities that this application has on other entities, or the
-        capabilities that other entities have been granted on this application.
-        Capabilities grant entities the permissions to perform certain actions on
-        the system. Devices inherit all the capabilities of an application. The
-        calling device must have the cap.read permission on the specified
-        application to perform this action.
+      description: |
+        Retrieve the list of capabilities. You can retrieve either the capabilities that this application has on other entities, or the capabilities that other entities have been granted on this application. Capabilities grant entities the permissions to perform certain actions on the system. Devices inherit all the capabilities of an application. The calling device must have the cap.read permission on the specified application to perform this action.
       parameters:
         - description: The universally unique identifier (UUID) of the application.
           in: path
           name: id
           required: true
           type: string
-        - description: >
-            The type of query to get a list for. You can specify "has" to get all
-            the capabilities that the specified application has on other entities
-            in the system. Otherwise, you can specify "grants", to get a list of
-            all the capabilities that other entities have on this application.
-            The default value of "grants" is used if no value is specified.
+        - description: |
+            The type of query to get a list for. You can specify "has" to get all the capabilities that the specified application has on other entities in the system. Otherwise, you can specify "grants", to get a list of all the capabilities that other entities have on this application. The default value of "grants" is used if no value is specified.
           enum:
             - has
             - grants
           in: query
           name: cap_type
           type: string
-        - description: >
-            Applications can inherit permissions from other entities, such as
-            tags and organizations. Tags can be applied to the application and
-            applications can belong to an organization. If you specify 'inherit'
-            as "True", all the capabilities that are inherited are also returned.
-            The default value of "False" is used if no value is specified.
+        - description: |
+            Applications can inherit permissions from other entities, such as tags and organizations. Tags can be applied to the application and applications can belong to an organization. If you specify 'inherit' as "True", all the capabilities that are inherited are also returned. The default value of "False" is used if no value is specified.
           in: query
           name: inherit
           type: boolean
@@ -1400,10 +1242,8 @@ paths:
         - apps
   '/apps/{id}/caps/{cap_name}/{granted_to}':
     delete:
-      description: >
-        Remove a capability from an entity (specified using 'granted_to') on the
-        specified application. The calling device must have the cap.delete
-        capability on the specified application to remove a capability.
+      description: |
+        Remove a capability from an entity (specified using 'granted_to') on the specified application. The calling device must have the cap.delete capability on the specified application to remove a capability.
       parameters:
         - description: The universally unique identifier (UUID) of the application to remove the capability from.
           in: path
@@ -1420,9 +1260,8 @@ paths:
           name: granted_to
           required: true
           type: string
-        - description: >
-            The capability association type. The association type can be
-            "same_user", which
+        - description: |
+            The capability association type. The association type can be "same_user", which
 
               indicates to grant the capability to devices that belong to the
             same user.
@@ -1438,15 +1277,8 @@ paths:
       tags:
         - apps
     put:
-      description: >
-        Grant a capability to an entity. The created capability allows actions to
-        be performed on the specified application. Use this method to give
-        permissions to other entities in the system to perform actions to the
-        specified application. The calling device must have the cap.create
-        capability on the specified application. You can use the "List all the
-        capabilities" from the Capabilities REST API
-        (https://iot.blackberry.com/restdoc/#!/caps/list) to determine the valid
-        strings that you can use.
+      description: |
+        Grant a capability to an entity. The created capability allows actions to be performed on the specified application. Use this method to give permissions to other entities in the system to perform actions to the specified application. The calling device must have the cap.create capability on the specified application. You can use the "List all the capabilities" from the Capabilities REST API (https://iot.blackberry.com/restdoc/#!/caps/list) to determine the valid strings that you can use.
       parameters:
         - description: The universally unique identifier (UUID) of the application.
           in: path
@@ -1463,10 +1295,8 @@ paths:
           name: granted_to
           required: true
           type: string
-        - description: >
-            The type of entity that is being granted the created capability. The
-            types can be "org" (organizations), "app" (applications), "device"
-            (devices), "user" (users), and "tag" (tags).
+        - description: |
+            The type of entity that is being granted the created capability. The types can be "org" (organizations), "app" (applications), "device" (devices), "user" (users), and "tag" (tags).
           enum:
             - app
             - device
@@ -1477,9 +1307,8 @@ paths:
           name: granted_type
           required: true
           type: string
-        - description: >
-            The capability association type. The association type can be
-            "same_user", which
+        - description: |
+            The capability association type. The association type can be "same_user", which
 
              indicates to grant the capability to devices that belong to the same
             user.
@@ -1488,11 +1317,8 @@ paths:
           in: query
           name: association
           type: string
-        - description: >
-            The timestamp that indicates when the capability expires. Timestamps
-            are 64-bit integers that represents the number of milliseconds since
-            UNIX epoch. This number cannot be greater than 8640000000000000 (Sat,
-            13 Sep 275760 00:00:00 GMT).
+        - description: |
+            The timestamp that indicates when the capability expires. Timestamps are 64-bit integers that represents the number of milliseconds since UNIX epoch. This number cannot be greater than 8640000000000000 (Sat, 13 Sep 275760 00:00:00 GMT).
           format: int64
           in: query
           name: expires_on
@@ -1508,11 +1334,8 @@ paths:
         - apps
   '/apps/{id}/data_retentions':
     get:
-      description: >
-        Return all the data retention policies for the specified application.
-        Data retention policies describe what data should be indexed and how long
-        that data should be retained in the system. The calling device must have
-        the data.retention.read capability for the specified application.
+      description: |
+        Return all the data retention policies for the specified application. Data retention policies describe what data should be indexed and how long that data should be retained in the system. The calling device must have the data.retention.read capability for the specified application.
       parameters:
         - description: The universally unique identifier (UUID) of the application.
           in: path
@@ -1532,11 +1355,8 @@ paths:
     post:
       consumes:
         - application/json
-      description: >
-        Create a data retention policy in the system. Data retention policies
-        describe what data should be indexed and how long that data should be
-        retained in the system. The calling device must have the
-        data.retention.create capability on the specified application.
+      description: |
+        Create a data retention policy in the system. Data retention policies describe what data should be indexed and how long that data should be retained in the system. The calling device must have the data.retention.create capability on the specified application.
       parameters:
         - description: The universally unique identifier (UUID) of the application.
           in: path
@@ -1559,11 +1379,8 @@ paths:
         - apps
   '/apps/{id}/data_retentions/{data_retention_id}':
     delete:
-      description: >
-        Delete a data retention policy from the system. Data retention policies
-        describe what data should be  indexed and how long that data should be
-        retained in the system. The calling device must have the
-        data.retention.delete capability for the specified application.
+      description: |
+        Delete a data retention policy from the system. Data retention policies describe what data should be  indexed and how long that data should be retained in the system. The calling device must have the data.retention.delete capability for the specified application.
       parameters:
         - description: The universally unique identifier (UUID) of the application.
           in: path
@@ -1582,11 +1399,8 @@ paths:
       tags:
         - apps
     get:
-      description: >
-        Read a single data retention policy. Data retention policies describe
-        what data should be indexed and how long that data should be retained in
-        the system. The calling device must have the data.retention.read
-        permission for the specified application.
+      description: |
+        Read a single data retention policy. Data retention policies describe what data should be indexed and how long that data should be retained in the system. The calling device must have the data.retention.read permission for the specified application.
       parameters:
         - description: The universally unique identifier (UUID) of the application.
           in: path
@@ -1609,11 +1423,8 @@ paths:
     put:
       consumes:
         - application/json
-      description: >
-        Update a data retention policy with new policy settings. Data retention
-        policies describe what data should be indexed and how long that data
-        should be retained in the system. The calling device must have the
-        data.retention.update permission for the specified application.
+      description: |
+        Update a data retention policy with new policy settings. Data retention policies describe what data should be indexed and how long that data should be retained in the system. The calling device must have the data.retention.update permission for the specified application.
       parameters:
         - description: The universally unique identifier (UUID) of the application.
           in: path
@@ -1639,10 +1450,8 @@ paths:
         - apps
   '/apps/{id}/keys':
     get:
-      description: >
-        Read a single application API KEY and API SECRET based on its universally
-        unique identifier (UUID). To read the key and secret, the calling device
-        must have the app.read.keys capability on the specified application.
+      description: |
+        Read a single application API KEY and API SECRET based on its universally unique identifier (UUID). To read the key and secret, the calling device must have the app.read.keys capability on the specified application.
       parameters:
         - description: The UUID of the application to read.
           in: path
@@ -1660,9 +1469,8 @@ paths:
     put:
       consumes:
         - application/json
-      description: >
-        Update the API KEY and API SECRET for an application. The calling device
-        must have the app.update.keys capability for the specified application.
+      description: |
+        Update the API KEY and API SECRET for an application. The calling device must have the app.update.keys capability for the specified application.
       parameters:
         - description: The universally unique identifier (UUID) of the application to update.
           in: path
@@ -1683,10 +1491,8 @@ paths:
         - apps
   '/apps/{id}/tags/{tag_id}':
     delete:
-      description: >
-        Remove a tag from an application. The calling device must have the
-        app.untag capability for the specified application and the tag.grant
-        capability for the specified tag.
+      description: |
+        Remove a tag from an application. The calling device must have the app.untag capability for the specified application and the tag.grant capability for the specified tag.
       parameters:
         - description: The universally unique identifier (UUID) of the application to remove the tag from.
           in: path
@@ -1705,12 +1511,8 @@ paths:
       tags:
         - apps
     put:
-      description: >
-        Add an existing tag to an application. Before making this call, the
-        specified tag must be created. After the tag is created, it can be
-        applied to an application. The calling device must have the app.tag
-        capability for the specified application and the tag.grant capability for
-        the specified tag.
+      description: |
+        Add an existing tag to an application. Before making this call, the specified tag must be created. After the tag is created, it can be applied to an application. The calling device must have the app.tag capability for the specified application and the tag.grant capability for the specified tag.
       parameters:
         - description: The universally unique identifier (UUID) of the application to apply the tag to.
           in: path
@@ -1730,31 +1532,12 @@ paths:
         - apps
   /caps:
     get:
-      description: >
-        Get the list of capabilities. This list contains the action name, the
-        display name, and the supported targets. This list contains only
-        system-defined capabilities and doesn&#39;t contain user-created
-        capabilities. Since user-defined capabilities are application-specific,
-        there is no available mechanism to discover user-defined capabilities.
-        However, if your user-defined capabilities are granted on an entity, you
-        can find the user-defined capabilities using the GET operation to
-        retrieve the list of capabilities on any entity. For example, if you have
-        an application that grants a user-defined permission, you can use the GET
-        operation (List the capabilities for an application) and the UUID of the
-        application to retrieve the list capabilities, which includes both
-        system-defined and user-defined capabilities. You can use 'target_type'
-        to determine which capabilities can be applied to a target. For example,
-        set the 'target_type' to "file" to get the capabilities that a file
-        entity can grant to other entities.
-
+      description: |
+        Get the list of capabilities. This list contains the action name, the display name, and the supported targets. This list contains only system-defined capabilities and doesn&#39;t contain user-created capabilities. Since user-defined capabilities are application-specific, there is no available mechanism to discover user-defined capabilities. However, if your user-defined capabilities are granted on an entity, you can find the user-defined capabilities using the GET operation to retrieve the list of capabilities on any entity. For example, if you have an application that grants a user-defined permission, you can use the GET operation (List the capabilities for an application) and the UUID of the application to retrieve the list capabilities, which includes both system-defined and user-defined capabilities. You can use 'target_type' to determine which capabilities can be applied to a target. For example, set the 'target_type' to "file" to get the capabilities that a file entity can grant to other entities.
         No special capabilities are required to perform this operation.
       parameters:
-        - description: >
-            The target entity that the capability supports. The valid values you
-            can enter include: "org" (organization), "app" (application),
-            "device" (devices), "user" (users), "tag" (tags), and "firehose"
-            (firehoses). You can also use "association" to determine the
-            capabilities that can be granted as an association.
+        - description: |
+            The target entity that the capability supports. The valid values you can enter include: "org" (organization), "app" (application), "device" (devices), "user" (users), "tag" (tags), and "firehose" (firehoses). You can also use "association" to determine the capabilities that can be granted as an association.
           in: query
           name: target_type
           type: string
@@ -1770,22 +1553,11 @@ paths:
         - caps
   /devices:
     get:
-      description: >
-        Return all the devices that are associated with the specified user.
-        Without any additional capabilities, a user can always retrieve the list
-        of devices that their UUID is associated with. For users to retrieve
-        a list of devices associated with another user, they must be granted the
-        device.read.by.user capability to perform this operation. For example, if
-        you grant another user entity the device.read.by.user capability, the
-        capability permits the other user to retrieve the list of devices that
-        are associated with your UUID.
+      description: |
+        Return all the devices that are associated with the specified user. Without any additional capabilities, a user can always retrieve the list of devices that their UUID is associated with. For users to retrieve a list of devices associated with another user, they must be granted the device.read.by.user capability to perform this operation. For example, if you grant another user entity the device.read.by.user capability, the capability permits the other user to retrieve the list of devices that are associated with your UUID.
       parameters:
-        - description: >
-            The universally unique identifier (UUID) of the user to query devices
-            for. If this parameter is not provided, for user-based authenticated
-            devices, the UUID of associated user from the device is used. For
-            device-based authenticated devices, if no UUID is specified, a 400
-            error is returned.
+        - description: |
+            The universally unique identifier (UUID) of the user to query devices for. If this parameter is not provided, for user-based authenticated devices, the UUID of associated user from the device is used. For device-based authenticated devices, if no UUID is specified, a 400 error is returned.
           in: query
           name: user_id
           type: string
@@ -1802,11 +1574,8 @@ paths:
     post:
       consumes:
         - application/json
-      description: >
-        Call this method to create a device.  If you have a manufacturing line,
-        you can automate the process of creating devices using this method. The
-        calling device must have the device.create capability for the application
-        that the new device is being created on.
+      description: |
+        Call this method to create a device.  If you have a manufacturing line, you can automate the process of creating devices using this method. The calling device must have the device.create capability for the application that the new device is being created on.
       parameters:
         - in: body
           name: body
@@ -1822,15 +1591,11 @@ paths:
         - devices
   '/devices/{id}':
     delete:
-      description: >
-        Delete a device from the system. This call also deletes all associated
-        data with the device (i.e., logs, states, etc). The calling device must
-        have device.delete to perform this operation.
+      description: |
+        Delete a device from the system. This call also deletes all associated data with the device (i.e., logs, states, etc). The calling device must have device.delete to perform this operation.
       parameters:
-        - description: >
-            The universally unique identifier (UUID) of the device to
-            delete.  The calling device must have the device.delete capability on
-            the specified device.
+        - description: |
+            The universally unique identifier (UUID) of the device to delete.  The calling device must have the device.delete capability on the specified device.
           in: path
           name: id
           required: true
@@ -1842,9 +1607,8 @@ paths:
       tags:
         - devices
     get:
-      description: >
-        Read a device to get its associated metadata. The calling device must
-        have the device.read capability on the target device.
+      description: |
+        Read a device to get its associated metadata. The calling device must have the device.read capability on the target device.
       parameters:
         - description: The universally unique identifier (UUID) of the device to read.
           in: path
@@ -1862,9 +1626,8 @@ paths:
     put:
       consumes:
         - application/json
-      description: >
-        Update the metadata for a device. The calling device must have the
-        device.update capability for the specified device.
+      description: |
+        Update the metadata for a device. The calling device must have the device.update capability for the specified device.
       parameters:
         - description: The universally unique identifier (UUID) of the device to update.
           in: path
@@ -1883,38 +1646,24 @@ paths:
         - devices
   '/devices/{id}/caps':
     get:
-      description: >
-        Retrieve the list of capabilities. You can retrieve either the
-        capabilities that this device has on other entities, or the capabilities
-        that other entities has been granted on this device. Capabilities grant
-        entities the permissions to perform certain actions on the system.
-        Devices inherit all the capabilities of an application. The calling
-        device must have the cap.read permission on the specified application to
-        perform this action.
+      description: |
+        Retrieve the list of capabilities. You can retrieve either the capabilities that this device has on other entities, or the capabilities that other entities has been granted on this device. Capabilities grant entities the permissions to perform certain actions on the system. Devices inherit all the capabilities of an application. The calling device must have the cap.read permission on the specified application to perform this action.
       parameters:
         - description: The universally unique identifier (UUID) of the device to retrieve capabilities from.
           in: path
           name: id
           required: true
           type: string
-        - description: >
-            The type of query to get a list for. You can specify "has" to get all
-            the capabilities that the specified application has on other entities
-            in the system. Otherwise, you can specify "grants", to get a list of
-            all the capabilities that other entities have on this application.
-            The default value of "grants" is used if no value is specified.
+        - description: |
+            The type of query to get a list for. You can specify "has" to get all the capabilities that the specified application has on other entities in the system. Otherwise, you can specify "grants", to get a list of all the capabilities that other entities have on this application. The default value of "grants" is used if no value is specified.
           enum:
             - has
             - grants
           in: query
           name: cap_type
           type: string
-        - description: >
-            Applications can inherit permissions from other entities, such as
-            tags and organizations. Tags can be applied to the application and
-            applications can belong to an organization. If you specify 'inherit'
-            as "True", all the capabilities that are inherited are also returned.
-            The default value of "False" is used if no value is specified.
+        - description: |
+            Applications can inherit permissions from other entities, such as tags and organizations. Tags can be applied to the application and applications can belong to an organization. If you specify 'inherit' as "True", all the capabilities that are inherited are also returned. The default value of "False" is used if no value is specified.
           in: query
           name: inherit
           type: boolean
@@ -1930,10 +1679,8 @@ paths:
         - devices
   '/devices/{id}/caps/{cap_name}/{granted_to}':
     delete:
-      description: >
-        Revoke a capability that an entity ('granted_to') has been granted to
-        perform on the specified device. The calling device requires the
-        cap.delete capability on the specified device.
+      description: |
+        Revoke a capability that an entity ('granted_to') has been granted to perform on the specified device. The calling device requires the cap.delete capability on the specified device.
       parameters:
         - description: "The universally unique identifier (UUID) that the 'granted_to' entity has permissions on."
           in: path
@@ -1950,9 +1697,8 @@ paths:
           name: granted_to
           required: true
           type: string
-        - description: >
-            The capability association type. The association type can be
-            "same_user", which
+        - description: |
+            The capability association type. The association type can be "same_user", which
 
              indicates to grant the capability to devices that belong to the same
             user.
@@ -1968,18 +1714,11 @@ paths:
       tags:
         - devices
     put:
-      description: >
-        Grant a capability to an entity. The created capability allows actions to
-        be performed on the specified device. Use this method to give permissions
-        to other entities in the system to perform actions to the specified
-        device. The calling device must have the cap.create capability on the
-        specified device.
+      description: |
+        Grant a capability to an entity. The created capability allows actions to be performed on the specified device. Use this method to give permissions to other entities in the system to perform actions to the specified device. The calling device must have the cap.create capability on the specified device.
       parameters:
-        - description: >
-            The universally unique identifier (UUID) of the device to grant
-            capabilities on.  Note that this device doesn&#39;t retrieve the
-            capability. Capabilities are granted using 'granted_to' to perform
-            actions on this UUID.
+        - description: |
+            The universally unique identifier (UUID) of the device to grant capabilities on.  Note that this device doesn&#39;t retrieve the capability. Capabilities are granted using 'granted_to' to perform actions on this UUID.
           in: path
           name: id
           required: true
@@ -1994,10 +1733,8 @@ paths:
           name: granted_to
           required: true
           type: string
-        - description: >
-            The type of entity that&#39;s being granted the capability. The types
-            can be "org" (organizations), "app" (applications), "device"
-            (devices), "user" (users), or "tag" (tags).
+        - description: |
+            The type of entity that&#39;s being granted the capability. The types can be "org" (organizations), "app" (applications), "device" (devices), "user" (users), or "tag" (tags).
           enum:
             - app
             - device
@@ -2008,9 +1745,8 @@ paths:
           name: granted_type
           required: true
           type: string
-        - description: >
-            The capability association type. The association type can be
-            "same_user", which
+        - description: |
+            The capability association type. The association type can be "same_user", which
 
              indicates to grant the capability to devices that belong to the same
             user.
@@ -2019,11 +1755,8 @@ paths:
           in: query
           name: association
           type: string
-        - description: >
-            The timestamp that indicates when the capability expires. Timestamps
-            are 64-bit integers that represents the number of milliseconds since
-            UNIX epoch. This number cannot be greater than 8640000000000000 (Sat,
-            13 Sep 275760 00:00:00 GMT).
+        - description: |
+            The timestamp that indicates when the capability expires. Timestamps are 64-bit integers that represents the number of milliseconds since UNIX epoch. This number cannot be greater than 8640000000000000 (Sat, 13 Sep 275760 00:00:00 GMT).
           format: int64
           in: query
           name: expires_on
@@ -2040,11 +1773,8 @@ paths:
   '/devices/{id}/certificates':
     get:
       parameters:
-        - description: >
-            The universally unique identifier (UUID) of the device to get the
-            list of certificates for. The device.read capability is required to
-            perform this operation. The caller must have the device.read
-            capability to perform this operation.
+        - description: |
+            The universally unique identifier (UUID) of the device to get the list of certificates for. The device.read capability is required to perform this operation. The caller must have the device.read capability to perform this operation.
           in: path
           name: id
           required: true
@@ -2060,14 +1790,11 @@ paths:
     post:
       consumes:
         - application/json
-      description: >
-        This method takes a Certificate Signing Request (CSR) and returns
-        a certificate, which can be used to authenticate as this device. The
-        caller must have the device.update capability to perform this operation.
+      description: |
+        This method takes a Certificate Signing Request (CSR) and returns a certificate, which can be used to authenticate as this device. The caller must have the device.update capability to perform this operation.
       parameters:
-        - description: >
-            The universally unique identifier (UUID) of the device to associate
-            this certificate with.
+        - description: |
+            The universally unique identifier (UUID) of the device to associate this certificate with.
           in: path
           name: id
           required: true
@@ -2087,15 +1814,11 @@ paths:
         - devices
   '/devices/{id}/certificates/{serial_number}':
     delete:
-      description: >
-        This method revokes a certificate (identified by its serial number)
-        that&#39;s associated with the device. After a certificate has been
-        revoked, it can&#39;t be used to authenticate the device. The
-        device.update capability is required to perform this operation.
+      description: |
+        This method revokes a certificate (identified by its serial number) that&#39;s associated with the device. After a certificate has been revoked, it can&#39;t be used to authenticate the device. The device.update capability is required to perform this operation.
       parameters:
-        - description: >
-            The universally unique identifier (UUID) of the device to revoke
-            a certificate from.
+        - description: |
+            The universally unique identifier (UUID) of the device to revoke a certificate from.
           in: path
           name: id
           required: true
@@ -2118,17 +1841,11 @@ paths:
     post:
       consumes:
         - application/json
-      description: >
-        Allow a device to store data on the system associated with it. The data
-        is provided in bulk format with 1-100 data points allowed. No
-        capabilities are required to create the data, but devices can create data
-        only for themselves.
+      description: |
+        Allow a device to store data on the system associated with it. The data is provided in bulk format with 1-100 data points allowed. No capabilities are required to create the data, but devices can create data only for themselves.
       parameters:
-        - description: >
-            The universally unique identifier (UUID) of the device to associate
-            this data with.  Currently, this can be only the same as the calling
-            device. An error is returned if the device ID doesn&#39;t match the
-            one assigned to the access token that&#39;s used.
+        - description: |
+            The universally unique identifier (UUID) of the device to associate this data with.  Currently, this can be only the same as the calling device. An error is returned if the device ID doesn&#39;t match the one assigned to the access token that&#39;s used.
           in: path
           name: id
           required: true
@@ -2145,10 +1862,8 @@ paths:
         - devices
   '/devices/{id}/data/{data_id}':
     delete:
-      description: >
-        Delete the named data object of a device. Calling devices can always
-        delete data on themselves.  To delete data on other devices, the calling
-        device must have the data.delete capability on the target device.
+      description: |
+        Delete the named data object of a device. Calling devices can always delete data on themselves.  To delete data on other devices, the calling device must have the data.delete capability on the target device.
       parameters:
         - description: The universally unique identifier (UUID) of the device to delete data from.
           in: path
@@ -2164,9 +1879,8 @@ paths:
           in: query
           name: standard
           type: string
-        - description: >
-            The type of object. You can specify "component", "log", "state", and
-            "alarm". The default is "state".
+        - description: |
+            The type of object. You can specify "component", "log", "state", and "alarm". The default is "state".
           enum:
             - component
             - log
@@ -2182,10 +1896,8 @@ paths:
       tags:
         - devices
     get:
-      description: >
-        Return the named data for a device. Devices can read their own data. To
-        read the data of other devices, the caller must have the data.read
-        capability on the target device.
+      description: |
+        Return the named data for a device. Devices can read their own data. To read the data of other devices, the caller must have the data.read capability on the target device.
       parameters:
         - description: The universally unique identifier (UUID) of the device to read from.
           in: path
@@ -2221,10 +1933,8 @@ paths:
         - devices
   '/devices/{id}/tags/{tag_id}':
     delete:
-      description: >
-        Remove a previously associated tag from a device. To be able to call this
-        method, the calling device must have the device.untag capability on the
-        specified device and the tag.grant capability on the specified tag.
+      description: |
+        Remove a previously associated tag from a device. To be able to call this method, the calling device must have the device.untag capability on the specified device and the tag.grant capability on the specified tag.
       parameters:
         - description: The universally unique identifier (UUID) of the device to tag
           in: path
@@ -2245,10 +1955,8 @@ paths:
     put:
       consumes:
         - application/json
-      description: >
-        Add an existing tag to the specified device. To use this method, the
-        calling device must have the device.tag capability on the specified
-        device and the tag.grant capability on the specified tag.
+      description: |
+        Add an existing tag to the specified device. To use this method, the calling device must have the device.tag capability on the specified device and the tag.grant capability on the specified tag.
       parameters:
         - description: The universally unique identifier (UUID) of the device to tag.
           in: path
@@ -2268,15 +1976,11 @@ paths:
         - devices
   /files:
     get:
-      description: >
-        Returns the filename, universally unique identifiers (UUIDs) of files,
-        and other information about the files associated with the device. The
-        calling device must have the file.read permission to perform this
-        operation.
+      description: |
+        Returns the filename, universally unique identifiers (UUIDs) of files, and other information about the files associated with the device. The calling device must have the file.read permission to perform this operation.
       parameters:
-        - description: >
-            The universally unique identifier (UUID) of the device to get files
-            listed under.
+        - description: |
+            The universally unique identifier (UUID) of the device to get files listed under.
           in: query
           name: device_id
           type: string
@@ -2294,17 +1998,11 @@ paths:
       consumes:
         - multipart/form-data
         - application/json
-      description: >
-        Create a file object in the system. You provide the file as part
-        multipart form data with this method. Files receive a universally unique
-        identifier (UUID) that identifies the file in the system. The calling
-        device must have the file.create capability to perform  this operation.
+      description: |
+        Create a file object in the system. You provide the file as part multipart form data with this method. Files receive a universally unique identifier (UUID) that identifies the file in the system. The calling device must have the file.create capability to perform  this operation.
       parameters:
-        - description: >
-            The universally unique identifier (UUID) of the device to create
-            a file for. If you don&#39;t provide a UUID, the file that&#39;s
-            created from this method is associated with the UUID  of the calling
-            device.
+        - description: |
+            The universally unique identifier (UUID) of the device to create a file for. If you don&#39;t provide a UUID, the file that&#39;s created from this method is associated with the UUID  of the calling device.
           in: formData
           name: device_id
           type: string
@@ -2312,17 +2010,13 @@ paths:
           in: formData
           name: description
           type: string
-        - description: >
-            Metadata can be set to JSON containing meta data information about
-            the file.
+        - description: |
+            Metadata can be set to JSON containing meta data information about the file.
           in: formData
           name: metadata
           type: string
-        - description: >
-            The size, in bytes, of the file. If this parameter isn&#39;t
-            provided, an attempt to calculate the size of the file is made. This
-            calculated size may not be accurate, which is why it&#39;s a good
-            practice for you to supply the exact size.
+        - description: |
+            The size, in bytes, of the file. If this parameter isn&#39;t provided, an attempt to calculate the size of the file is made. This calculated size may not be accurate, which is why it&#39;s a good practice for you to supply the exact size.
           in: formData
           name: size
           type: integer
@@ -2340,9 +2034,8 @@ paths:
         - files
   '/files/{id}':
     delete:
-      description: >
-        Delete a previously created file. The calling device must have the
-        file.delete capability on the specified file to perform this operation.
+      description: |
+        Delete a previously created file. The calling device must have the file.delete capability on the specified file to perform this operation.
       parameters:
         - description: The universally unique identifier (UUID) of the file.
           in: path
@@ -2356,13 +2049,8 @@ paths:
       tags:
         - files
     get:
-      description: >
-        Get information about a file using its universally unique identifier
-        (UUID). The UUID for the file that can be shared with others. Information
-        about the file includes the URL where to download the file, the filename,
-        description of the file, when the file was created and uploaded, the size
-        of the file, and any metadata to describe the file. The calling device
-        must have the file.read capability to perform this operation.
+      description: |
+        Get information about a file using its universally unique identifier (UUID). The UUID for the file that can be shared with others. Information about the file includes the URL where to download the file, the filename, description of the file, when the file was created and uploaded, the size of the file, and any metadata to describe the file. The calling device must have the file.read capability to perform this operation.
       parameters:
         - description: The universally unique identifier (UUID) of the file.
           in: path
@@ -2378,11 +2066,8 @@ paths:
       tags:
         - files
     put:
-      description: >
-        Update the metadata relating to a file. It isn&#39;t possible to change
-        the file content directly. To change the file content, delete the file
-        and recreate the file. The calling device must have the file.update
-        capability on the specified file to perform this operation.
+      description: |
+        Update the metadata relating to a file. It isn&#39;t possible to change the file content directly. To change the file content, delete the file and recreate the file. The calling device must have the file.update capability on the specified file to perform this operation.
       parameters:
         - description: The universally unique identifier (UUID) of the file.
           in: path
@@ -2402,10 +2087,8 @@ paths:
         - files
   '/files/{id}/caps':
     get:
-      description: >
-        Retrieve the list of capabilities that other entities have been granted
-        on this file. The calling device must have the cap.read capability on the
-        specified file to perform this operation.
+      description: |
+        Retrieve the list of capabilities that other entities have been granted on this file. The calling device must have the cap.read capability on the specified file to perform this operation.
       parameters:
         - description: The universally unique identifier (UUID) of the file.
           in: path
@@ -2424,11 +2107,8 @@ paths:
         - files
   '/files/{id}/caps/{cap_name}/{granted_to}':
     delete:
-      description: >
-        Remove a capability from an entity (granted_to) on the specified
-        universally unique identifier (UUID) of the file. To be able to remove
-        a capability, the calling device must have the cap.delete capability on
-        the specified UUID of the file.
+      description: |
+        Remove a capability from an entity (granted_to) on the specified universally unique identifier (UUID) of the file. To be able to remove a capability, the calling device must have the cap.delete capability on the specified UUID of the file.
       parameters:
         - description: The universally unique identifier (UUID) to remove the capability from.
           in: path
@@ -2445,10 +2125,8 @@ paths:
           name: granted_to
           required: true
           type: string
-        - description: >
-            The capability association type. The association type can be
-            "same_user", which indicates to grant the capability to devices that
-            belong to the same user.
+        - description: |
+            The capability association type. The association type can be "same_user", which indicates to grant the capability to devices that belong to the same user.
           enum:
             - same_user
           in: query
@@ -2461,14 +2139,8 @@ paths:
       tags:
         - files
     put:
-      description: >
-        Grant a capability to an entity. The created capability allows operations
-        to be performed on the specified file. Use this method to give
-        capabilities to other entities in the system to perform operations on the
-        specified file. The calling device must have the cap.create capability on
-        the specified file. You can use the "List all the capabilities" from the
-        Capabilities REST API (https://iot.blackberry.com/restdoc/#!/caps/list)
-        to determine the valid capabilities that you can use.
+      description: |
+        Grant a capability to an entity. The created capability allows operations to be performed on the specified file. Use this method to give capabilities to other entities in the system to perform operations on the specified file. The calling device must have the cap.create capability on the specified file. You can use the "List all the capabilities" from the Capabilities REST API (https://iot.blackberry.com/restdoc/#!/caps/list) to determine the valid capabilities that you can use.
       parameters:
         - description: The universally unique identifier (UUID) of the file.
           in: path
@@ -2485,10 +2157,8 @@ paths:
           name: granted_to
           required: true
           type: string
-        - description: >
-            The type of entity that&#39;s being granted. The types can be "org"
-            (organizations), "app" (applications), "device" (devices), "user"
-            (users), and "tag" (tags).
+        - description: |
+            The type of entity that&#39;s being granted. The types can be "org" (organizations), "app" (applications), "device" (devices), "user" (users), and "tag" (tags).
           enum:
             - app
             - device
@@ -2505,11 +2175,8 @@ paths:
           in: query
           name: association
           type: string
-        - description: >
-            The timestamp that indicates when the capability expires. Timestamps
-            are 64-bit integers that represents the number of milliseconds since
-            UNIX epoch. This number cannot be greater than 8640000000000000 (Sat,
-            13 Sep 275760 00:00:00 GMT).
+        - description: |
+            The timestamp that indicates when the capability expires. Timestamps are 64-bit integers that represents the number of milliseconds since UNIX epoch. This number cannot be greater than 8640000000000000 (Sat, 13 Sep 275760 00:00:00 GMT).
           format: int64
           in: query
           name: expires_on
@@ -2525,7 +2192,7 @@ paths:
         - files
   '/files/{id}/content':
     get:
-      description: >
+      description: |
         Return a 302, with the location of the content as the location header.
 
          For redirects, an error may occur if the client does not remove the
@@ -2550,9 +2217,8 @@ paths:
         - files
   /firehoses:
     get:
-      description: >
-        Read a list of firehoses belonging to an organization. The calling device
-        must have the firehose.list capability on the organization.
+      description: |
+        Read a list of firehoses belonging to an organization. The calling device must have the firehose.list capability on the organization.
       parameters:
         - description: The universally unique identifier (UUID) of the organization from which to get the list of firehoses.
           in: query
@@ -2571,9 +2237,8 @@ paths:
     post:
       consumes:
         - application/json
-      description: >
-        Creates a data pipe that stream events and data from devices. The calling
-        device must have the firehose.create capability on the organization.
+      description: |
+        Creates a data pipe that stream events and data from devices. The calling device must have the firehose.create capability on the organization.
       parameters:
         - in: body
           name: body
@@ -2590,11 +2255,8 @@ paths:
         - firehoses
   '/firehoses/{id}':
     delete:
-      description: >
-        Remove a firehose from the system. In addition to removing the firehose,
-        this call causes all the subscriptions for the specified firehose to be
-        removed from the system. The calling device must have the firehose.delete
-        capability on the organization.
+      description: |
+        Remove a firehose from the system. In addition to removing the firehose, this call causes all the subscriptions for the specified firehose to be removed from the system. The calling device must have the firehose.delete capability on the organization.
       parameters:
         - description: The universally unique identifier (UUID) of the firehose to delete.
           in: path
@@ -2608,10 +2270,8 @@ paths:
       tags:
         - firehoses
     get:
-      description: >
-        Read a single firehose based on its universally unique identifier (UUID).
-        The calling device must have the firehose.read capability on the
-        organization.
+      description: |
+        Read a single firehose based on its universally unique identifier (UUID). The calling device must have the firehose.read capability on the organization.
       parameters:
         - description: The firehose UUID to read
           in: path
@@ -2629,9 +2289,8 @@ paths:
     put:
       consumes:
         - application/json
-      description: >
-        Update the metadata for a firehose. The calling device must have the
-        firehose.update capability on the organization.
+      description: |
+        Update the metadata for a firehose. The calling device must have the firehose.update capability on the organization.
       parameters:
         - description: The universally unique identifier (UUID) of the firehose to update.
           in: path
@@ -2651,11 +2310,8 @@ paths:
         - firehoses
   '/firehoses/{id}/caps':
     get:
-      description: >
-        Retrieve the entities (organizations, applications, users, devices and
-        tags) that have been granted the firehose.attach capability. This
-        capability permits devices to attach and consume event data from the
-        firehose.
+      description: |
+        Retrieve the entities (organizations, applications, users, devices and tags) that have been granted the firehose.attach capability. This capability permits devices to attach and consume event data from the firehose.
       parameters:
         - description: The universally unique identifier (UUID) of the firehose.
           in: path
@@ -2674,10 +2330,8 @@ paths:
         - firehoses
   '/firehoses/{id}/caps/{cap_name}/{granted_to}':
     delete:
-      description: >
-        Remove a capability from an entity (specified using 'granted_to') on the
-        specified firehose. The calling device must have the cap.delete
-        capability on the specified firehose to remove a capability.
+      description: |
+        Remove a capability from an entity (specified using 'granted_to') on the specified firehose. The calling device must have the cap.delete capability on the specified firehose to remove a capability.
       parameters:
         - description: The universally unique identifier (UUID) of the firehose to remove the capability from.
           in: path
@@ -2701,12 +2355,8 @@ paths:
       tags:
         - firehoses
     put:
-      description: >
-        Grant a capability to an entity. The created capability allows actions to
-        be performed on the specified firehose. Use this method to give
-        permissions to other entities in the system to perform actions to the
-        specified firehose. The calling device must have the cap.create
-        capability on the specified firehose.
+      description: |
+        Grant a capability to an entity. The created capability allows actions to be performed on the specified firehose. Use this method to give permissions to other entities in the system to perform actions to the specified firehose. The calling device must have the cap.create capability on the specified firehose.
       parameters:
         - description: The universally unique identifier (UUID) of the firehose.
           in: path
@@ -2723,10 +2373,8 @@ paths:
           name: granted_to
           required: true
           type: string
-        - description: >
-            The type of entity that is being granted the capability. The types
-            can be "org" (organizations), "app" (applications), "device"
-            (devices), "user" (users), and "tag" (tags).
+        - description: |
+            The type of entity that is being granted the capability. The types can be "org" (organizations), "app" (applications), "device" (devices), "user" (users), and "tag" (tags).
           enum:
             - app
             - device
@@ -2737,11 +2385,8 @@ paths:
           name: granted_type
           required: true
           type: string
-        - description: >
-            The timestamp that indicates when the capability expires. Timestamps
-            are 64-bit integers that represents the number of milliseconds since
-            UNIX epoch. This number cannot be greater than 8640000000000000 (Sat,
-            13 Sep 275760 00:00:00 GMT).
+        - description: |
+            The timestamp that indicates when the capability expires. Timestamps are 64-bit integers that represents the number of milliseconds since UNIX epoch. This number cannot be greater than 8640000000000000 (Sat, 13 Sep 275760 00:00:00 GMT).
           format: int64
           in: query
           name: expires_on
@@ -2755,9 +2400,8 @@ paths:
         - firehoses
   '/firehoses/{id}/data':
     get:
-      description: >
-        Begins streaming from the specified firehose. The calling device must
-        have the firehose.attach capability.
+      description: |
+        Begins streaming from the specified firehose. The calling device must have the firehose.attach capability.
       parameters:
         - description: The universally unique identifier (UUID) of the firehose.
           in: path
@@ -2772,10 +2416,8 @@ paths:
         - firehoses
   '/firehoses/{id}/subscriptions':
     get:
-      description: >
-        Returns all the subscriptions for the specified firehose. The calling
-        device must have the firehose.subscription.list capability on the
-        organization.
+      description: |
+        Returns all the subscriptions for the specified firehose. The calling device must have the firehose.subscription.list capability on the organization.
       parameters:
         - description: The universally unique identifier (UUID) of the firehose.
           in: path
@@ -2795,10 +2437,8 @@ paths:
     post:
       consumes:
         - application/json
-      description: >
-        Creates a subscription for a firehose. Firehose subscriptions describe
-        what data is streamed to the recipient. The calling device must have the
-        firehose.subscription.create capability on the organization.
+      description: |
+        Creates a subscription for a firehose. Firehose subscriptions describe what data is streamed to the recipient. The calling device must have the firehose.subscription.create capability on the organization.
       parameters:
         - description: The universally unique identifier (UUID) of the firehose.
           in: path
@@ -2822,9 +2462,8 @@ paths:
     delete:
       consumes:
         - application/x-www-form-urlencoded
-      description: >
-        Deletes a subscription from firehose. The calling device must have the
-        firehose.subscription.delete capability for the organization.
+      description: |
+        Deletes a subscription from firehose. The calling device must have the firehose.subscription.delete capability for the organization.
       parameters:
         - description: The universally unique identifier (UUID) of the firehose.
           in: path
@@ -2843,9 +2482,8 @@ paths:
       tags:
         - firehoses
     get:
-      description: >
-        Reads a single firehose subscription. The calling device must have the
-        firehose.subscription.read capability on the organization.
+      description: |
+        Reads a single firehose subscription. The calling device must have the firehose.subscription.read capability on the organization.
       parameters:
         - description: The universally unique identifier (UUID) of the firehose
           in: path
@@ -2869,10 +2507,8 @@ paths:
     put:
       consumes:
         - application/json
-      description: >
-        Acknowledge the point of event data that is received on a firehose using
-        a token. The token specifies the starting point of where to start sending
-        event data if the device later reconnects.
+      description: |
+        Acknowledge the point of event data that is received on a firehose using a token. The token specifies the starting point of where to start sending event data if the device later reconnects.
       parameters:
         - description: The universally unique identifier (UUID) of the firehose.
           in: path
@@ -2892,14 +2528,11 @@ paths:
         - firehoses
   /messages:
     get:
-      description: >
-        Return the first 'limit' number of messages waiting to be delivered (not
-        acknowledged) to the authenticated device. No capabilities are required
-        for this action, devices can always retrieve their own messages.
+      description: |
+        Return the first 'limit' number of messages waiting to be delivered (not acknowledged) to the authenticated device. No capabilities are required for this action, devices can always retrieve their own messages.
       parameters:
-        - description: >
-            The maximum number of messages to return. You can specify a range of
-            1-25.
+        - description: |
+            The maximum number of messages to return. You can specify a range of 1-25.
           in: query
           name: limit
           type: integer
@@ -2916,13 +2549,8 @@ paths:
     post:
       consumes:
         - application/json
-      description: >
-        Send a message from the authenticated device to another device. The
-        authenticated device requires the message.create.<message_type>
-        capability (where message_type is application-specific) for the target
-        device. For example, to send the message.create.wipe message, the device
-        that sends the message must be granted the message.create.wipe capability
-        on the target device.
+      description: |
+        Send a message from the authenticated device to another device. The authenticated device requires the message.create.<message_type> capability (where message_type is application-specific) for the target device. For example, to send the message.create.wipe message, the device that sends the message must be granted the message.create.wipe capability on the target device.
       parameters:
         - description: The JSON-formatted string containing message information.
           in: body
@@ -2975,9 +2603,8 @@ paths:
         - notifications
   '/orgs/{id}':
     get:
-      description: >
-        Retrieve the information of an organization. The capability
-        organization.read is required to perform this action.
+      description: |
+        Retrieve the information of an organization. The capability organization.read is required to perform this action.
       parameters:
         - description: The universally unique identifier (UUID) of the organization to get information about.
           in: path
@@ -2994,34 +2621,24 @@ paths:
         - orgs
   '/orgs/{id}/caps':
     get:
-      description: >
-        Retrieve the list of capabilities. You can retrieve either the
-        capabilities that this organization has on other entities, or the
-        capabilities that other entities have been granted on this organization.
-        Capabilities grant entities the permissions to perform certain actions on
-        the system. The calling device must have the cap.read permission on the
-        specified organization to perform this action.
+      description: |
+        Retrieve the list of capabilities. You can retrieve either the capabilities that this organization has on other entities, or the capabilities that other entities have been granted on this organization. Capabilities grant entities the permissions to perform certain actions on the system. The calling device must have the cap.read permission on the specified organization to perform this action.
       parameters:
         - description: The universally unique identifier (UUID) of the target organization.
           in: path
           name: id
           required: true
           type: string
-        - description: >
-            The type of capability. You can use "has" to get the list
-            capabilities the user has; or use "grants" to retrieve the list of
-            capabilities that the user has granted to other entities.
+        - description: |
+            The type of capability. You can use "has" to get the list capabilities the user has; or use "grants" to retrieve the list of capabilities that the user has granted to other entities.
           enum:
             - has
             - grants
           in: query
           name: cap_type
           type: string
-        - description: >
-            Organizations can inherit permissions from other entities, such as
-            tags. Tags can be applied to the organization. If you specify
-            'inherit' as "true", all the capabilities are inherited through those
-            entities.
+        - description: |
+            Organizations can inherit permissions from other entities, such as tags. Tags can be applied to the organization. If you specify 'inherit' as "true", all the capabilities are inherited through those entities.
           in: query
           name: inherit
           required: false
@@ -3038,9 +2655,8 @@ paths:
         - orgs
   '/orgs/{id}/caps/{cap_name}/{granted_to}':
     delete:
-      description: >
-        Revoke a capability from an organization.  The cap.delete capability is
-        required to perform this action.
+      description: |
+        Revoke a capability from an organization.  The cap.delete capability is required to perform this action.
       parameters:
         - description: The universally unique identifier (UUID) of the organization.
           in: path
@@ -3057,9 +2673,8 @@ paths:
           name: granted_to
           required: true
           type: string
-        - description: >
-            The association type for the created capability. The association type
-            can be "same_user", which
+        - description: |
+            The association type for the created capability. The association type can be "same_user", which
 
              indicates to grant the capability to devices that belong to the same
             user.
@@ -3076,12 +2691,8 @@ paths:
       tags:
         - orgs
     put:
-      description: >
-        Grant a capability to an entity. The created capability allows actions to
-        be performed on the specified organization. Use this method to give
-        permissions to other entities in the system to perform actions to the
-        specified organization. The calling device must have the cap.create
-        capability on the specified organization.
+      description: |
+        Grant a capability to an entity. The created capability allows actions to be performed on the specified organization. Use this method to give permissions to other entities in the system to perform actions to the specified organization. The calling device must have the cap.create capability on the specified organization.
       parameters:
         - description: The universally unique identifier (UUID) of the organization.
           in: path
@@ -3098,10 +2709,8 @@ paths:
           name: granted_to
           required: true
           type: string
-        - description: >
-            The type of entity that&#39;s being granted the created capability.
-            The types can be "org" (organizations), "app" (applications),
-            "device" (devices), "user" (users), and "tag" (tags).
+        - description: |
+            The type of entity that&#39;s being granted the created capability. The types can be "org" (organizations), "app" (applications), "device" (devices), "user" (users), and "tag" (tags).
           enum:
             - org
             - app
@@ -3112,9 +2721,8 @@ paths:
           name: granted_type
           required: true
           type: string
-        - description: >
-            The association type for the created capability. The association type
-            can be "same_user", which
+        - description: |
+            The association type for the created capability. The association type can be "same_user", which
 
              indicates to grant the capability to devices that belong to the same
             user.
@@ -3124,11 +2732,8 @@ paths:
           name: association
           required: false
           type: string
-        - description: >
-            The timestamp that indicates when the capability expires. Timestamps
-            are 64-bit integers that represents the number of milliseconds since
-            UNIX epoch. This number cannot be greater than 8640000000000000 (Sat,
-            13 Sep 275760 00:00:00 GMT).
+        - description: |
+            The timestamp that indicates when the capability expires. Timestamps are 64-bit integers that represents the number of milliseconds since UNIX epoch. This number cannot be greater than 8640000000000000 (Sat, 13 Sep 275760 00:00:00 GMT).
           format: int64
           in: query
           name: expires_on
@@ -3142,9 +2747,8 @@ paths:
         - orgs
   '/orgs/{id}/invite/{email}':
     put:
-      description: >
-        Add a user to an organization using their email. The calling device must
-        have the user.add.org capability to perform this operation.
+      description: |
+        Add a user to an organization using their email. The calling device must have the user.add.org capability to perform this operation.
       parameters:
         - description: The universally unique identifier (UUID) of the organization.
           in: path
@@ -3164,10 +2768,8 @@ paths:
         - orgs
   '/orgs/{id}/tags/{tag_id}':
     delete:
-      description: >
-        Remove a tag from an organization.  To be able to call this method the
-        calling device must have the organization.tag capability on the
-        organization and the tag.grant capability on the tag.
+      description: |
+        Remove a tag from an organization.  To be able to call this method the calling device must have the organization.tag capability on the organization and the tag.grant capability on the tag.
       parameters:
         - description: The universally unique identifier (UUID) of the target organization.
           in: path
@@ -3186,12 +2788,8 @@ paths:
       tags:
         - orgs
     put:
-      description: >
-        Add a tag to an organization.  Tags can have permissions applied to them.
-        Using a tag on an organization allows you to grant permissions to that
-        organization. To be able to call this method, the calling device must
-        have the organization.tag capability on the target organization and the
-        tag.grant permission on the tag.
+      description: |
+        Add a tag to an organization.  Tags can have permissions applied to them. Using a tag on an organization allows you to grant permissions to that organization. To be able to call this method, the calling device must have the organization.tag capability on the target organization and the tag.grant permission on the tag.
       parameters:
         - description: The universally unique identifier (UUID) of the target organization.
           in: path
@@ -3211,9 +2809,8 @@ paths:
         - orgs
   '/orgs/{id}/users/{user_id}':
     delete:
-      description: >
-        Remove a user from an organization. The caller must have the
-        user.remove.org capability to perform this operation.
+      description: |
+        Remove a user from an organization. The caller must have the user.remove.org capability to perform this operation.
       parameters:
         - description: The universally unique identifier (UUID) of the organization to remove the user from.
           in: path
@@ -3232,13 +2829,8 @@ paths:
       tags:
         - orgs
     put:
-      description: >
-        Organizations can have many users inside them. Organizations are created
-        by one user who is automatically tagged as an administer for that new
-        organization. That administrator can add more users using this method.
-        Before a user can be added to an organization, the user must exist in the
-        system. The caller must have the user.add.org capability to perform this
-        operation.
+      description: |
+        Organizations can have many users inside them. Organizations are created by one user who is automatically tagged as an administer for that new organization. That administrator can add more users using this method. Before a user can be added to an organization, the user must exist in the system. The caller must have the user.add.org capability to perform this operation.
       parameters:
         - description: The universally unique identifier (UUID) of the organization.
           in: path
@@ -3260,20 +2852,8 @@ paths:
     post:
       consumes:
         - application/json
-      description: >
-        Return the Elasticsearch results of the provided query. The available
-        capabilities augment this query. For information about Elasticsearch
-        queries, see the Elasticsearch documentation at:
-        http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl.html.
-        To get results for your search, which  include devices, file metadata, or
-        search data, you must grant the proper capability. You can grant the the
-        search.device capability to allow information about devices to be
-        searched, the search.file capability to allow file metadata to be
-        searched, or the search.data capability to allow data that&#39;s saved on
-        the platform by devices to be searched. For data, you can specify
-        categories or specific data objects to limit what can be searched. For
-        example, you can grant the search.data.default.alarm capability to permit
-        only alarm categories to be searched.
+      description: |
+        Return the Elasticsearch results of the provided query. The available capabilities augment this query. For information about Elasticsearch queries, see the Elasticsearch documentation at: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl.html. To get results for your search, which  include devices, file metadata, or search data, you must grant the proper capability. You can grant the the search.device capability to allow information about devices to be searched, the search.file capability to allow file metadata to be searched, or the search.data capability to allow data that&#39;s saved on the platform by devices to be searched. For data, you can specify categories or specific data objects to limit what can be searched. For example, you can grant the search.data.default.alarm capability to permit only alarm categories to be searched.
       parameters:
         - description: |
             The indexed document type you want to search for.
@@ -3294,10 +2874,8 @@ paths:
           name: document
           required: true
           type: string
-        - description: >
-            The number of results to provide.  Sometimes it is useful to specify
-            zero, such as when you perform faceted searches and only the count of
-            the search is required.
+        - description: |
+            The number of results to provide.  Sometimes it is useful to specify zero, such as when you perform faceted searches and only the count of the search is required.
           in: query
           name: size
           type: integer
@@ -3306,28 +2884,18 @@ paths:
           in: query
           name: from
           type: integer
-        - description: >
-            The comma-separated list of application universally unique
-            identifiers (UUIDs). This list specifies the scope of the search.
-            Only data for the specified applications are searched. This parameter
-            helps to reduce the search time significantly. It&#39;s recommended
-            that you know the applications to search before you use this method.
+        - description: |
+            The comma-separated list of application universally unique identifiers (UUIDs). This list specifies the scope of the search. Only data for the specified applications are searched. This parameter helps to reduce the search time significantly. It&#39;s recommended that you know the applications to search before you use this method.
           in: query
           name: app_ids
           type: string
-        - description: >
-            A comma-separated list of organization universally unique identifiers
-            (UUIDs). This list specifies the scope of the search. Only data for
-            the specified organizations are searched. This parameter helps to
-            reduce the search time significantly. It&#39;s recommended that you
-            know the organizations to search before you use this method.
+        - description: |
+            A comma-separated list of organization universally unique identifiers (UUIDs). This list specifies the scope of the search. Only data for the specified organizations are searched. This parameter helps to reduce the search time significantly. It&#39;s recommended that you know the organizations to search before you use this method.
           in: query
           name: org_ids
           type: string
-        - description: >
-            The Elasticsearch DSL query to perform. For more information about
-            DSL queries, see:
-            http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl.html
+        - description: |
+            The Elasticsearch DSL query to perform. For more information about DSL queries, see: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl.html
           in: body
           name: body
           schema:
@@ -3342,9 +2910,8 @@ paths:
         - search
   /tags:
     get:
-      description: >
-        Return a list of all the tags and the information for each tag. To get
-        the list of tags, the caller must have the tag.read capability.
+      description: |
+        Return a list of all the tags and the information for each tag. To get the list of tags, the caller must have the tag.read capability.
       responses:
         '200':
           description: No response was specified
@@ -3358,20 +2925,8 @@ paths:
     post:
       consumes:
         - application/json
-      description: >
-        Create a named exposing or non-exposing tag. Non-exposing tags can be
-        granted capabilities to perform actions on other entities. When an entity
-        is tagged with a non-exposing tag, the capabilities are transposed to the
-        tagged entity. This transposition causes the tagged entity to be granted
-        the same capabilities that were granted to the tag. Exposing tags work
-        like non-exposing tags to grant capabilities on targets. In addition,
-        exposing tags can be targets that grant capabilities to other entities.
-        Therefore, any capabilities that were granted by an exposing tag, as well
-        as any capabilities granted to the tag are transposed to the tagged
-        entity. The effect of the transposition is that the tagged entity is
-        granted the same capabilities that were granted to the tag and the tagged
-        entity grants the same capabilities to other entities as the tag. To
-        create a tag, the caller must have the tag.create capability.
+      description: |
+        Create a named exposing or non-exposing tag. Non-exposing tags can be granted capabilities to perform actions on other entities. When an entity is tagged with a non-exposing tag, the capabilities are transposed to the tagged entity. This transposition causes the tagged entity to be granted the same capabilities that were granted to the tag. Exposing tags work like non-exposing tags to grant capabilities on targets. In addition, exposing tags can be targets that grant capabilities to other entities. Therefore, any capabilities that were granted by an exposing tag, as well as any capabilities granted to the tag are transposed to the tagged entity. The effect of the transposition is that the tagged entity is granted the same capabilities that were granted to the tag and the tagged entity grants the same capabilities to other entities as the tag. To create a tag, the caller must have the tag.create capability.
       parameters:
         - description: The JSON-formatted string containing information about the tag to create.
           in: body
@@ -3388,10 +2943,8 @@ paths:
         - tags
   '/tags/{id}':
     delete:
-      description: >
-        Delete a tag from the entity.  After the tag is deleted, the tag is
-        removed from all entities that were assigned the removed tag. To delete
-        a tag, the caller must have the tag.delete capability.
+      description: |
+        Delete a tag from the entity.  After the tag is deleted, the tag is removed from all entities that were assigned the removed tag. To delete a tag, the caller must have the tag.delete capability.
       parameters:
         - description: The universally unique identifier (UUID) of the tag to delete.
           in: path
@@ -3405,10 +2958,8 @@ paths:
       tags:
         - tags
     get:
-      description: >
-        Read a particular tag by its universally unique identifier (UUID).  This
-        method returns the information of a particular tag. To read a tag, the
-        caller must have the tag.read capability.
+      description: |
+        Read a particular tag by its universally unique identifier (UUID).  This method returns the information of a particular tag. To read a tag, the caller must have the tag.read capability.
       parameters:
         - description: The UUID of the tag to read.
           in: path
@@ -3426,9 +2977,8 @@ paths:
     put:
       consumes:
         - application/json
-      description: >
-        Update a tag with new values. To update a tag, the caller must have the
-        tag.update capability.
+      description: |
+        Update a tag with new values. To update a tag, the caller must have the tag.update capability.
       parameters:
         - description: The universally unique identifier (UUID) of the tag to update.
           in: path
@@ -3450,37 +3000,24 @@ paths:
         - tags
   '/tags/{id}/caps':
     get:
-      description: >
-        Retrieve the list of capabilities. You can retrieve either capabilities
-        that this tag has on other entities, or the capabilities that other
-        entities have been granted on this tag. Capabilities grant entities the
-        permissions to perform certain actions on the system. The calling device
-        must have the cap.read permission on the specified application to perform
-        this action.
+      description: |
+        Retrieve the list of capabilities. You can retrieve either capabilities that this tag has on other entities, or the capabilities that other entities have been granted on this tag. Capabilities grant entities the permissions to perform certain actions on the system. The calling device must have the cap.read permission on the specified application to perform this action.
       parameters:
         - description: The universally unique identifier (UUID) of the tag to list capabilities for.
           in: path
           name: id
           required: true
           type: string
-        - description: >
-            List the capabilities assigned to the tag. You can specify "has" to
-            get all the capabilities that the specified tag has on other entities
-            in the system. Otherwise, you can specify "grants", to get a list of
-            all the capabilities that other entities have on this tag. If this
-            parameter isn&#39;t provided, the value of "grants" is used.
+        - description: |
+            List the capabilities assigned to the tag. You can specify "has" to get all the capabilities that the specified tag has on other entities in the system. Otherwise, you can specify "grants", to get a list of all the capabilities that other entities have on this tag. If this parameter isn&#39;t provided, the value of "grants" is used.
           enum:
             - has
             - grants
           in: query
           name: cap_type
           type: string
-        - description: >
-            Whether to include the capabilities the specified tag inherits from
-            a user or organization. When this parameter is set to true, the
-            capabilities that are inherited and granted directly to the tag are
-            returned in the response, otherwise, only the capabilities granted to
-            the tag are returned.
+        - description: |
+            Whether to include the capabilities the specified tag inherits from a user or organization. When this parameter is set to true, the capabilities that are inherited and granted directly to the tag are returned in the response, otherwise, only the capabilities granted to the tag are returned.
           in: query
           name: inherit
           type: boolean
@@ -3496,10 +3033,8 @@ paths:
         - tags
   '/tags/{id}/caps/{cap_name}/{granted_to}':
     delete:
-      description: >
-        Remove a capability from a tag. Entities that have been assigned the
-        specified tag no longer have the specified capability. The calling device
-        must have the cap.delete capability to perform this operation.
+      description: |
+        Remove a capability from a tag. Entities that have been assigned the specified tag no longer have the specified capability. The calling device must have the cap.delete capability to perform this operation.
       parameters:
         - description: The universally unique identifier (UUID) of the tag from which to revoke a granted capability.
           in: path
@@ -3516,9 +3051,8 @@ paths:
           name: granted_to
           required: true
           type: string
-        - description: >
-            The capability association type. The association type can be
-            "same_user", which
+        - description: |
+            The capability association type. The association type can be "same_user", which
 
              indicates to grant the capability to devices that belong to the same
             user.
@@ -3534,14 +3068,8 @@ paths:
       tags:
         - tags
     put:
-      description: >
-        Grant a capability to another entity. The created capability allows
-        actions to be performed on entities that are tagged with this tag. Use
-        this method to give permissions to other entities in the system to
-        perform actions to other entities tagged with this tag. The calling
-        device must have the cap.create capability on the specified application
-        and the tag must be an exposing tag. If you  use this call on
-        a non-exposing tag, you get a 400 response code.
+      description: |
+        Grant a capability to another entity. The created capability allows actions to be performed on entities that are tagged with this tag. Use this method to give permissions to other entities in the system to perform actions to other entities tagged with this tag. The calling device must have the cap.create capability on the specified application and the tag must be an exposing tag. If you  use this call on a non-exposing tag, you get a 400 response code.
       parameters:
         - description: The universally unique identifier (UUID) of the tag to which to add the capability.
           in: path
@@ -3558,10 +3086,8 @@ paths:
           name: granted_to
           required: true
           type: string
-        - description: >
-            The type of entity that&#39;s being granted the capability. The types
-            can be "org" (organizations), "app" (applications), "device"
-            (devices), "user" (users), and "tag" (tags).
+        - description: |
+            The type of entity that&#39;s being granted the capability. The types can be "org" (organizations), "app" (applications), "device" (devices), "user" (users), and "tag" (tags).
           enum:
             - org
             - app
@@ -3572,9 +3098,8 @@ paths:
           name: granted_type
           required: true
           type: string
-        - description: >
-            The capability association type. The association type can be
-            "same_user", which
+        - description: |
+            The capability association type. The association type can be "same_user", which
 
              indicates to grant the capability to devices that belong to the same
             user.
@@ -3583,11 +3108,8 @@ paths:
           in: query
           name: association
           type: string
-        - description: >
-            The timestamp that indicates when the capability expires. Timestamps
-            are 64-bit integers that represents the number of milliseconds since
-            UNIX epoch. This number cannot be greater than 8640000000000000 (Sat,
-            13 Sep 275760 00:00:00 GMT).
+        - description: |
+            The timestamp that indicates when the capability expires. Timestamps are 64-bit integers that represents the number of milliseconds since UNIX epoch. This number cannot be greater than 8640000000000000 (Sat, 13 Sep 275760 00:00:00 GMT).
           format: int64
           in: query
           name: expires_on
@@ -3640,9 +3162,8 @@ paths:
         - users
   '/users/id/{email}':
     get:
-      description: >
-        Get the user id in the format of universally unique identifier (UUID) by
-        providing the user email address.
+      description: |
+        Get the user id in the format of universally unique identifier (UUID) by providing the user email address.
       parameters:
         - description: The email address of the user.
           in: path
@@ -3659,9 +3180,8 @@ paths:
         - users
   '/users/{id}':
     get:
-      description: >
-        Read a user using its universally unique identifier (UUID). The user.read
-        capability is required to perform this action.
+      description: |
+        Read a user using its universally unique identifier (UUID). The user.read capability is required to perform this action.
       parameters:
         - description: The UUID of the user.
           in: path
@@ -3678,36 +3198,24 @@ paths:
         - users
   '/users/{id}/caps':
     get:
-      description: >
-        Get the list of capabilities. You can retrieve either the capabilities
-        that this user has on other entities, or the capabilities that other
-        entities have been granted on this user. Devices that are associated with
-        the user (i.e., the user logged into the device), inherit the
-        capabilities when the device is granted the "inherit_user" (specified in
-        "scope" parameter of the https://iot.blackberry.com/auth/dialog/authorize
-        endpoint) during the authorization process. The cap.read capability is
-        required to perform this operation.
+      description: |
+        Get the list of capabilities. You can retrieve either the capabilities that this user has on other entities, or the capabilities that other entities have been granted on this user. Devices that are associated with the user (i.e., the user logged into the device), inherit the capabilities when the device is granted the "inherit_user" (specified in "scope" parameter of the https://iot.blackberry.com/auth/dialog/authorize endpoint) during the authorization process. The cap.read capability is required to perform this operation.
       parameters:
         - description: The universally unique identifier (UUID) of the user.
           in: path
           name: id
           required: true
           type: string
-        - description: >
-            The type of capability. You can use "has" to get the list
-            capabilities that the user has or use "grants" to retrieve the list
-            of capabilities that the user has granted to other entities.
+        - description: |
+            The type of capability. You can use "has" to get the list capabilities that the user has or use "grants" to retrieve the list of capabilities that the user has granted to other entities.
           enum:
             - has
             - grants
           in: query
           name: cap_type
           type: string
-        - description: >
-            Applications inherit permissions from other entities, such as tags
-            and organizations. Tags can be applied to the application and
-            applications belong to an organization. If you specify 'inherit' as
-            "true", all the capabilities are inherited through those entities.
+        - description: |
+            Applications inherit permissions from other entities, such as tags and organizations. Tags can be applied to the application and applications belong to an organization. If you specify 'inherit' as "true", all the capabilities are inherited through those entities.
           in: query
           name: inherit
           type: boolean
@@ -3723,9 +3231,8 @@ paths:
         - users
   '/users/{id}/caps/{cap_name}/{granted_to}':
     delete:
-      description: >
-        Revoke a capability from a user.  The cap.delete capability is required
-        to perform this action.
+      description: |
+        Revoke a capability from a user.  The cap.delete capability is required to perform this action.
       parameters:
         - description: The universally unique identifier (UUID) of the user.
           in: path
@@ -3742,9 +3249,8 @@ paths:
           name: granted_to
           required: true
           type: string
-        - description: >
-            The capability association type. The association type can be
-            "same_user", which
+        - description: |
+            The capability association type. The association type can be "same_user", which
 
              indicates to grant the capability to devices that belong to the same
             user.
@@ -3761,12 +3267,8 @@ paths:
       tags:
         - users
     put:
-      description: >
-        Grant a capability to an entity. The created capability allows actions to
-        be performed on the specified user. Use this method to give permissions
-        to other entities in the system to perform actions to the specified user.
-        The calling device must have the cap.create capability on the specified
-        user.
+      description: |
+        Grant a capability to an entity. The created capability allows actions to be performed on the specified user. Use this method to give permissions to other entities in the system to perform actions to the specified user. The calling device must have the cap.create capability on the specified user.
       parameters:
         - description: The universally unique identifier (UUID) of the user.
           in: path
@@ -3783,10 +3285,8 @@ paths:
           name: granted_to
           required: true
           type: string
-        - description: >
-            The type of entity that&#39;s being granted the capability. The types
-            can be "org" (organizations), "app" (applications), "device"
-            (devices), "user" (users), and "tag" (tags).
+        - description: |
+            The type of entity that&#39;s being granted the capability. The types can be "org" (organizations), "app" (applications), "device" (devices), "user" (users), and "tag" (tags).
           enum:
             - org
             - app
@@ -3797,9 +3297,8 @@ paths:
           name: granted_type
           required: true
           type: string
-        - description: >
-            The association type for the created capability. The association type
-            can be "same_user", which
+        - description: |
+            The association type for the created capability. The association type can be "same_user", which
 
              indicates to grant the capability to devices that belong to the same
             user.
@@ -3809,11 +3308,8 @@ paths:
           name: association
           required: false
           type: string
-        - description: >
-            The timestamp that indicates when the capability expires. Timestamps
-            are 64-bit integers that represents the number of milliseconds since
-            UNIX epoch. This number cannot be greater than 8640000000000000 (Sat,
-            13 Sep 275760 00:00:00 GMT).
+        - description: |
+            The timestamp that indicates when the capability expires. Timestamps are 64-bit integers that represents the number of milliseconds since UNIX epoch. This number cannot be greater than 8640000000000000 (Sat, 13 Sep 275760 00:00:00 GMT).
           format: int64
           in: query
           name: expires_on
@@ -3829,9 +3325,8 @@ paths:
         - users
   '/users/{id}/profile':
     get:
-      description: >
-        Read a user&#39;s profile information. The user.read.profile capability
-        is required to perform this action.
+      description: |
+        Read a user&#39;s profile information. The user.read.profile capability is required to perform this action.
       parameters:
         - description: The universally unique identifier (UUID) of the user.
           in: path
@@ -3848,10 +3343,8 @@ paths:
         - users
   '/users/{id}/tags/{tag_id}':
     delete:
-      description: >
-        Remove a tag from a user. The calling device must have the user.untag
-        capability for the specified user and the tag.grant capability for the
-        specified tag.
+      description: |
+        Remove a tag from a user. The calling device must have the user.untag capability for the specified user and the tag.grant capability for the specified tag.
       parameters:
         - description: The universally unique identifier (UUID) of the user.
           in: path
@@ -3870,10 +3363,8 @@ paths:
       tags:
         - users
     put:
-      description: >
-        Add a tag to a user. The calling device must have the user.tag capability
-        for the specified user and the tag.grant capability for the specified
-        tag.
+      description: |
+        Add a tag to a user. The calling device must have the user.tag capability for the specified user and the tag.grant capability for the specified tag.
       parameters:
         - description: The universally unique identifier (UUID) of the user.
           in: path

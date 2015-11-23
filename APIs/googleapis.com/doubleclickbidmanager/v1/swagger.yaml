@@ -635,16 +635,11 @@ definitions:
         format: int64
         type: string
       locale:
-        description: >-
-          Locale of the generated reports. Valid values are cs CZECH de GERMAN en
-          ENGLISH es SPANISH fr FRENCH it ITALIAN ja JAPANESE ko KOREAN pl POLISH
-          pt-BR BRAZILIAN_PORTUGUESE ru RUSSIAN tr TURKISH uk UKRAINIAN zh-CN
-          CHINA_CHINESE zh-TW TAIWAN_CHINESE
+        description: |-
+          Locale of the generated reports. Valid values are cs CZECH de GERMAN en ENGLISH es SPANISH fr FRENCH it ITALIAN ja JAPANESE ko KOREAN pl POLISH pt-BR BRAZILIAN_PORTUGUESE ru RUSSIAN tr TURKISH uk UKRAINIAN zh-CN CHINA_CHINESE zh-TW TAIWAN_CHINESE
 
 
-
-          An locale string not in the list above will generate reports in
-          English.
+          An locale string not in the list above will generate reports in English.
         type: string
       reportCount:
         description: Number of reports that have been generated for the query.

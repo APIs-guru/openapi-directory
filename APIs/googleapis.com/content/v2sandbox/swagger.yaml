@@ -99,16 +99,11 @@ definitions:
         description: 'CLDR country code (e.g. "US").'
         type: string
       fullAddress:
-        description: >-
-          Strings representing the lines of the printed label for mailing the
-          order, for example:
-
+        description: |-
+          Strings representing the lines of the printed label for mailing the order, for example:
           John Smith
-
           1600 Amphitheatre Parkway
-
           Mountain View, CA, 94043
-
           United States
         items:
           type: string
@@ -1083,24 +1078,15 @@ paths:
           name: merchantId
           required: true
           type: string
-        - description: >-
-            Obtains orders that match the acknowledgement status. When set to
-            true, obtains orders that have been acknowledged. When false, obtains
-            orders that have not been acknowledged.
-
-            We recommend using this filter set to false, in conjunction with the
-            acknowledge call, such that only un-acknowledged orders are
-            returned.
+        - description: |-
+            Obtains orders that match the acknowledgement status. When set to true, obtains orders that have been acknowledged. When false, obtains orders that have not been acknowledged.
+            We recommend using this filter set to false, in conjunction with the acknowledge call, such that only un-acknowledged orders are returned.
           in: query
           name: acknowledged
           type: boolean
-        - description: >-
-            The maximum number of orders to return in the response, used for
-            paging. The default value is 25 orders per page, and the maximum
-            allowed value is 250 orders per page.
-
-            Known issue: All List calls will return all Orders without limit
-            regardless of the value of this field.
+        - description: |-
+            The maximum number of orders to return in the response, used for paging. The default value is 25 orders per page, and the maximum allowed value is 250 orders per page.
+            Known issue: All List calls will return all Orders without limit regardless of the value of this field.
           in: query
           name: maxResults
           type: integer

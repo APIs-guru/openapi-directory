@@ -747,18 +747,11 @@ definitions:
         type: string
     type: object
   MarketplaceOffer:
-    description: >-
-      An offer is segment of inventory that a seller wishes to sell. It is
-      associated with certain terms and targeting information which helps buyer
-      know more about the inventory. Each field in an order can have one of the
-      following setting:
+    description: |-
+      An offer is segment of inventory that a seller wishes to sell. It is associated with certain terms and targeting information which helps buyer know more about the inventory. Each field in an order can have one of the following setting:
 
 
-
-      (readonly) - It is an error to try and set this field. (buyer-readonly)
-      - Only the seller can set this field. (seller-readonly) - Only the buyer
-      can set this field. (updatable) - The field is updatable at all times by
-      either buyer or the seller.
+      (readonly) - It is an error to try and set this field. (buyer-readonly) - Only the seller can set this field. (seller-readonly) - Only the buyer can set this field. (updatable) - The field is updatable at all times by either buyer or the seller.
     properties:
       creationTimeMs:
         description: Creation time in ms. since epoch (readonly)
@@ -824,17 +817,11 @@ definitions:
         type: string
     type: object
   MarketplaceOrder:
-    description: >-
-      Represents an order in the marketplace. An order is the unit of negotiation
-      between a seller and a buyer and contains deals which are served. Each
-      field in an order can have one of the following setting:
+    description: |-
+      Represents an order in the marketplace. An order is the unit of negotiation between a seller and a buyer and contains deals which are served. Each field in an order can have one of the following setting:
 
 
-
-      (readonly) - It is an error to try and set this field. (buyer-readonly)
-      - Only the seller can set this field. (seller-readonly) - Only the buyer
-      can set this field. (updatable) - The field is updatable at all times by
-      either buyer or the seller.
+      (readonly) - It is an error to try and set this field. (buyer-readonly) - Only the seller can set this field. (seller-readonly) - Only the buyer can set this field. (updatable) - The field is updatable at all times by either buyer or the seller.
     properties:
       billedBuyer:
         $ref: '#/definitions/Buyer'

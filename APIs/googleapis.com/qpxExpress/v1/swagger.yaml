@@ -382,16 +382,9 @@ definitions:
         type: string
     type: object
   SliceInfo:
-    description: >-
-      Information about a slice. A slice represents a traveller's intent, the
-      portion of a low-fare search corresponding to a traveler's request to get
-      between two points. One-way journeys are generally expressed using 1 slice,
-      round-trips using 2. For example, if a traveler specifies the following
-      trip in a user interface:
-
-      | Origin | Destination | Departure Date | | BOS | LAX | March 10, 2007 | |
-      LAX | SYD | March 17, 2007 | | SYD | BOS | March 22, 2007 |
-
+    description: |-
+      Information about a slice. A slice represents a traveller's intent, the portion of a low-fare search corresponding to a traveler's request to get between two points. One-way journeys are generally expressed using 1 slice, round-trips using 2. For example, if a traveler specifies the following trip in a user interface:
+      | Origin | Destination | Departure Date | | BOS | LAX | March 10, 2007 | | LAX | SYD | March 17, 2007 | | SYD | BOS | March 22, 2007 |
       then this is a three slice trip.
     properties:
       duration:

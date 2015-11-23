@@ -421,73 +421,41 @@ definitions:
     type: object
 host: api-dev.thetvdb.com
 info:
-  description: >-
-    This is an early draft and targets v1 functionality with a few minor
-    additions. The API is accessible via https://api.thetvdb.com and provides the
-    following REST endpoints in JSON format.
-
+  description: |-
+    This is an early draft and targets v1 functionality with a few minor additions. The API is accessible via https://api.thetvdb.com and provides the following REST endpoints in JSON format.
 
 
     How to use this API documentation
-
     ----------------
 
 
-
-    You may browse the API routes without authentication, but if you wish to send
-    requests to the API and see response data, then you must authenticate.
-
-    1. Obtain a JWT token by `POST`ing  to the `/login` route in the
-    `Authentication` section with your API key and credentials.
-
-    1. Paste the JWT token from the response into the "JWT Token" field at the
-    top of the page and click the 'Add Token' button.
+    You may browse the API routes without authentication, but if you wish to send requests to the API and see response data, then you must authenticate.
+    1. Obtain a JWT token by `POST`ing  to the `/login` route in the `Authentication` section with your API key and credentials.
+    1. Paste the JWT token from the response into the "JWT Token" field at the top of the page and click the 'Add Token' button.
 
 
-
-    You will now be able to use the remaining routes to send requests to the API
-    and get a response.
-
+    You will now be able to use the remaining routes to send requests to the API and get a response.
 
 
     Language Selection
-
     ----------------
 
 
-
-    Language selection is done via the `Accept-Language` header. At the moment,
-    you may only pass one language abbreviation in the header at a time. Valid
-    language abbreviations can be found at the `/languages` route..
-
+    Language selection is done via the `Accept-Language` header. At the moment, you may only pass one language abbreviation in the header at a time. Valid language abbreviations can be found at the `/languages` route..
 
 
     Authentication
-
     ----------------
 
 
-
-    Authentication to use the API is similar to the How-to section above. Users
-    must `POST` to the `/login` route with their API key and credentials in order
-    to obtain a JWT token. That token is then used in all subsequent requests by
-    providing it in the `Authorization` header. The header will look like:
-    `Authorization: Bearer <yourJWTtoken>`. Currently, the token expires after
-    1 hour. You can `GET` the `/refresh_token` route to extend that expiration
-    date.
-
+    Authentication to use the API is similar to the How-to section above. Users must `POST` to the `/login` route with their API key and credentials in order to obtain a JWT token. That token is then used in all subsequent requests by providing it in the `Authorization` header. The header will look like: `Authorization: Bearer <yourJWTtoken>`. Currently, the token expires after 1 hour. You can `GET` the `/refresh_token` route to extend that expiration date.
 
 
     Versioning
-
     ----------------
 
 
-
-    You may request a different version of the API by including an `Accept`
-    header in your request with the following format:
-    `Accept:application/vnd.thetvdb.v$VERSION`. This documentation automatically
-    uses the version seen at the top and bottom of the page.
+    You may request a different version of the API by including an `Accept` header in your request with the following format: `Accept:application/vnd.thetvdb.v$VERSION`. This documentation automatically uses the version seen at the top and bottom of the page.
   title: TheTVDB.com
   version: 1.2.0
   x-origin:
@@ -1015,15 +983,11 @@ paths:
         - Series
   /updated/query:
     get:
-      description: >-
-        Returns an array of series that have changed in a maximum of one week
-        blocks since the provided `fromTime`.
+      description: |-
+        Returns an array of series that have changed in a maximum of one week blocks since the provided `fromTime`.
 
 
-
-        The user may specify a `toTime` to grab results for less than a week. Any
-        timespan larger than a week will be reduced down to one week
-        automatically.
+        The user may specify a `toTime` to grab results for less than a week. Any timespan larger than a week will be reduced down to one week automatically.
       parameters:
         - $ref: '#/parameters/fromTime'
         - $ref: '#/parameters/toTime'
