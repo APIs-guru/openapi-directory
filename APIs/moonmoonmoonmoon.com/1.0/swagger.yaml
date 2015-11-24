@@ -41,25 +41,13 @@ paths:
     get:
       description: |-
         The main method for querying the marks database. You may use the following options:
-
                 <ol style='list-style-type: lower-roman;'>
-
-                <li>No parameters to retrieve all marks in descending
-        chronological order (use <b>before</b> for pagination)</li>
-
-                <li><b>popular</b> (and optionally <b>last_popular_id</b>) to
-        retrieve all popular marks</li>
-
+                <li>No parameters to retrieve all marks in descending chronological order (use <b>before</b> for pagination)</li>
+                <li><b>popular</b> (and optionally <b>last_popular_id</b>) to retrieve all popular marks</li>
                 <li><b>featured</b> to retrieve all featured marks</li>
-
                 <li><b>x & y</b> to retrieve mark at specific coordinate</li>
-
-                <li><b>user</b> to retrieve all marks created by the specified
-        user</li>
-
-                <li><b>collection</b> to retrieve all marks collected by the
-        specified user</li>
-
+                <li><b>user</b> to retrieve all marks created by the specified user</li>
+                <li><b>collection</b> to retrieve all marks collected by the specified user</li>
                 </ol>
       operationId: 'Marks#index'
       parameters:

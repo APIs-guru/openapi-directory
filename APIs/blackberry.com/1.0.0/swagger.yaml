@@ -178,9 +178,7 @@ paths:
           type: string
         - description: |
             The capability association type. The association type can be "same_user", which
-
-              indicates to grant the capability to devices that belong to the
-            same user.
+              indicates to grant the capability to devices that belong to the same user.
           enum:
             - same_user
           in: query
@@ -225,9 +223,7 @@ paths:
           type: string
         - description: |
             The capability association type. The association type can be "same_user", which
-
-             indicates to grant the capability to devices that belong to the same
-            user.
+             indicates to grant the capability to devices that belong to the same user.
           enum:
             - same_user
           in: query
@@ -615,9 +611,7 @@ paths:
           type: string
         - description: |
             The capability association type. The association type can be "same_user", which
-
-             indicates to grant the capability to devices that belong to the same
-            user.
+             indicates to grant the capability to devices that belong to the same user.
           enum:
             - same_user
           in: query
@@ -663,9 +657,7 @@ paths:
           type: string
         - description: |
             The capability association type. The association type can be "same_user", which
-
-             indicates to grant the capability to devices that belong to the same
-            user.
+             indicates to grant the capability to devices that belong to the same user.
           enum:
             - same_user
           in: query
@@ -1110,14 +1102,9 @@ paths:
     get:
       description: |
         Return a 302, with the location of the content as the location header.
-
          For redirects, an error may occur if the client does not remove the
-
          authorization header. When this error occurs, use the 'download_url'
-
-         value from the GET /files{id} route.  The calling device must have the
-        file.read
-
+         value from the GET /files{id} route.  The calling device must have the file.read
          capability on the specified file to perform this operation.
       parameters:
         - description: The universally unique identifier (UUID) of the file.
@@ -1591,9 +1578,7 @@ paths:
           type: string
         - description: |
             The association type for the created capability. The association type can be "same_user", which
-
-             indicates to grant the capability to devices that belong to the same
-            user.
+             indicates to grant the capability to devices that belong to the same user.
           enum:
             - same_user
           in: query
@@ -1639,9 +1624,7 @@ paths:
           type: string
         - description: |
             The association type for the created capability. The association type can be "same_user", which
-
-             indicates to grant the capability to devices that belong to the same
-            user.
+             indicates to grant the capability to devices that belong to the same user.
           enum:
             - same_user
           in: query
@@ -1969,9 +1952,7 @@ paths:
           type: string
         - description: |
             The capability association type. The association type can be "same_user", which
-
-             indicates to grant the capability to devices that belong to the same
-            user.
+             indicates to grant the capability to devices that belong to the same user.
           enum:
             - same_user
           in: query
@@ -2016,9 +1997,7 @@ paths:
           type: string
         - description: |
             The capability association type. The association type can be "same_user", which
-
-             indicates to grant the capability to devices that belong to the same
-            user.
+             indicates to grant the capability to devices that belong to the same user.
           enum:
             - same_user
           in: query
@@ -2167,9 +2146,7 @@ paths:
           type: string
         - description: |
             The capability association type. The association type can be "same_user", which
-
-             indicates to grant the capability to devices that belong to the same
-            user.
+             indicates to grant the capability to devices that belong to the same user.
           enum:
             - same_user
           in: query
@@ -2215,9 +2192,7 @@ paths:
           type: string
         - description: |
             The association type for the created capability. The association type can be "same_user", which
-
-             indicates to grant the capability to devices that belong to the same
-            user.
+             indicates to grant the capability to devices that belong to the same user.
           enum:
             - same_user
           in: query

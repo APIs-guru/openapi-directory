@@ -396,8 +396,6 @@ paths:
         Creates one or more new annotations atomically. All annotations must belong to the same annotation set. Caller must have WRITE permission for this annotation set. For optimal performance, batch positionally adjacent annotations together.
 
 
-
-
         If the request has a systemic issue, such as an attempt to write to an inaccessible annotation set, the entire RPC will fail accordingly. For lesser data issues, when possible an error will be isolated to the corresponding batch entry in the response; the remaining well formed annotations will be created normally.
       operationId: genomics.annotations.batchCreate
       parameters:
@@ -1120,7 +1118,6 @@ paths:
       description: |-
         Lists fixed width coverage buckets for a read group set, each of which correspond to a range of a reference sequence. Each bucket summarizes coverage information across its corresponding genomic range.
 
-
         Coverage is defined as the number of reads which are aligned to a given base in the reference sequence. Coverage buckets are available at several precomputed bucket widths, enabling retrieval of various coverage 'zoom levels'. The caller must have READ permissions for the target read group set.
       operationId: genomics.readgroupsets.coveragebuckets.list
       parameters:
@@ -1186,12 +1183,9 @@ paths:
       description: |-
         Gets a list of reads for one or more read group sets. Reads search operates over a genomic coordinate space of reference sequence & position defined over the reference sequences to which the requested read group sets are aligned.
 
-
         If a target positional range is specified, search returns all reads whose alignment to the reference genome overlap the range. A query which specifies only read group set IDs yields all reads in those read group sets, including unmapped reads.
 
-
         All reads returned (including reads on subsequent pages) are ordered by genomic coordinate (reference sequence & position). Reads with equivalent genomic coordinates are returned in a deterministic order.
-
 
         Implements GlobalAllianceApi.searchReads.
       operationId: genomics.reads.search
@@ -1725,7 +1719,6 @@ paths:
       description: |-
         Creates variant data by asynchronously importing the provided information.
 
-
         The variants for import will be merged with any existing data and each other according to the behavior of mergeVariants. In particular, this means for merged VCF variants that have conflicting INFO fields, some data will be arbitrarily discarded. As a special case, for single-sample VCF files, QUAL and FILTER fields will be moved to the call level; these are sometimes interpreted in a call-specific context. Imported VCF headers are appended to the metadata already in a variant set.
       operationId: genomics.variantsets.importVariants
       parameters:
@@ -1762,7 +1755,6 @@ paths:
     post:
       description: |-
         Merges the given variants with existing variants. Each variant will be merged with an existing variant that matches its reference sequence, start, end, reference bases, and alternative bases. If no such variant exists, a new one will be created.
-
 
         When variants are merged, the call information from the new variant is added to the existing variant, and other fields (such as key/value pairs) are discarded.
       operationId: genomics.variantsets.mergeVariants
@@ -3164,23 +3156,16 @@ definitions:
         description: |-
           The range of the coding sequence for this transcript, if any. To determine the exact ranges of coding sequence, intersect this range with those of the exons, if any. If there are any exons, the codingSequence must start and end within them.
 
-
           Note that in some cases, the reference genome will not exactly match the observed mRNA transcript e.g. due to variance in the source genome from reference. In these cases, exon.frame will not necessarily match the expected reference reading frame and coding exon reference bases cannot necessarily be concatenated to produce the original transcript mRNA.
       exons:
         description: |-
           The exons that compose this transcript. This field should be unset for genomes where transcript splicing does not occur, for example prokaryotes.
 
 
-
-
           Introns are regions of the transcript that are not included in the spliced RNA product. Though not explicitly modeled here, intron ranges can be deduced; all regions of this transcript that are not exons are introns.
 
 
-
-
           Exonic sequences do not necessarily code for a translational product (amino acids). Only the regions of exons bounded by the codingSequence correspond to coding DNA sequence.
-
-
 
 
           Exons are ordered by start position and may not overlap.
@@ -3212,7 +3197,6 @@ definitions:
         $ref: '#/definitions/Int32Value'
         description: |-
           The frame of this exon. Contains a value of 0, 1, or 2, which indicates the offset of the first coding base of the exon within the reading frame of the coding DNA sequence, if any. This field is dependent on the strandedness of this annotation (see Annotation.position.reverseStrand). For forward stranded annotations, this offset is relative to the exon.start. For reverse strand annotations, this offset is relative to the exon.end-1.
-
 
           Unset if this exon does not intersect the coding sequence. Upon creation of a transcript, the frame must be populated for all or none of the coding exons.
       start:

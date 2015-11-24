@@ -254,15 +254,11 @@ paths:
         a regular subscribe form. However, single opt-in is allowed for system integration
         purposes.
 
-
         - If email address does not exist, a new contact will be added to the list.
         - If email address exists custom fields will be updated and status will be put
-
           to unconfirmed or active depending of singleoptin value.
-
         - If current status if Active, this operation will only update the custom fields.
         - If singleoptin is true, no email confirmation will be sent. In that case,
-
           you must provide the subscribe's origin ip and confirmation date-time.
       parameters:
         - description: Unique 16 characters ID of the contact list

@@ -88,9 +88,7 @@ paths:
         - description: |-
             Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
-
             The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
-
 
             For example, filter=name ne example-instance.
           in: query
@@ -337,9 +335,7 @@ paths:
         - description: |-
             Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
-
             The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
-
 
             For example, filter=name ne example-instance.
           in: query
@@ -436,9 +432,7 @@ paths:
         - description: |-
             Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
-
             The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
-
 
             For example, filter=name ne example-instance.
           in: query
@@ -530,9 +524,7 @@ paths:
         - description: |-
             Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
-
             The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
-
 
             For example, filter=name ne example-instance.
           in: query
@@ -619,9 +611,7 @@ paths:
         - description: |-
             Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
 
-
             The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
-
 
             For example, filter=name ne example-instance.
           in: query
@@ -681,12 +671,9 @@ definitions:
         description: |-
           [Input Only] Specifies how Deployment Manager should apply this template. Possible options are PREVIEW, UPDATE, and CANCEL.
 
-
           PREVIEW creates a deployment and creates "shell" resources but does not actually instantiate these resources. This allows you to preview what your deployment looks like. You can use this intent to preview updates to deployments or preview new deployments. You must provide a target.config with a configuration for this intent. After previewing a deployment, you can deploy your resources by making a request with the UPDATE intent or you can CANCEL the preview altogether. Note that the deployment will still exist after you cancel the preview and you must separately delete this deployment if you want to remove it.
 
-
           UPDATE performs an update to the underlying resources in a deployment. If you provide a populated target.config field with this request, Deployment Manager uses that configuration to perform an update. If you had previewed this update beforehand, and do not supply a target.config or provide an empty target.config, Deployment Manager uses the last previewed configuration.
-
 
           CANCEL cancels an update that is in PREVIEW or UPDATE but does not undo any changes already made.
         type: string

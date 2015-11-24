@@ -153,155 +153,80 @@ paths:
     put:
       description: |-
         Update a bundle. To update the tracks, media, or metadata of a bundle, use the tracks and metadata endpoints.<br/><br/><b>name</b> can be any string you wish to associate with the bundle.<br/><br/><b>external_id</b> is an optional parameter that can be used to logically link a bundle to an item in an external system. The <b>external_id</b> can be whatever you use to identify items in your own database.<br/><br/><b>notify_url</b> is a webhook. It must be a publicly accessible url (http or https) on your server to which notifications for the bundle will be POSTed.<br/><br/>There are two types of notifications: Track Notifications and Bundle Notifications. Track Notifications are sent when the status of a track in the bundle changes to an end state, either <b>ready</b> or <b>error</b>. Handling Track Notifications will allow you to know if a media fetch or media format error has occurred. Bundle Notifications are sent when media processing has completed on a bundle and they will allow you to know the cost of the media processing. For both types of notifications, the POST body is a HAL JSON message containing the <b>bundle_id</b>, bundle <b>name</b> and <b>external_id</b> if they have been set, as well as other data and standard Clarify link relations.<br><br>Example Bundle Notification POST body sent to a <b>notify_url</b>:<br><pre class="code-snippet">{
-
             "bundle_id":"56b384d9749e4671960245a636701434",
-
             "updated":"2014-08-25T22:12:39.574Z",
-
             "bundle_processing_cost":0.1,
-
             "name":"Harvard Sentences 1",
-
             "external_id":"my_id_123",
-
             "_class":"BundleNotification",
-
             "_links":{
-
                 "curies":[{
-
                     "href":"/docs/rels/{rel}","name":"clarify","templated":true
-
                 }],
-
                 "clarify:bundle":{
-
                     "href":"/v1/bundles/56b384d9749e4671960245a636701434"
-
                 },
-
                 "clarify:tracks":{
-
                     "href":"/v1/bundles/56b384d9749e4671960245a636701434/tracks"
-
                 },
-
                 "clarify:metadata":{
-
                     "href":"/v1/bundles/56b384d9749e4671960245a636701434/metadata"
-
                 }
-
             }
-
         }
         </pre><p><br><br>Example Track Notification POST body sent to a <b>notify_url</b>:<br><pre class="code-snippet">{
-
             "bundle_id":"56b384d9749e4671960245a636701434",
-
             "track_id":"fef68854fe6e4e92aa1aa6ee2ab3cb99",
-
             "updated":"2014-08-25T22:12:39.574Z",
-
             "name":"Harvard Sentences 1",
-
             "external_id":"my_id_123",
-
             "_class":"TrackNotification",
-
             "_links":{
-
                 "curies":[{
-
                     "href":"/docs/rels/{rel}","name":"clarify","templated":true
-
                 }],
-
                 "clarify:track":{
-
                     "href":"/v1/bundles/56b384d9749e4671960245a636701434/tracks/fef68854fe6e4e92aa1aa6ee2ab3cb99"
-
                 },
-
                 "clarify:tracks":{
-
                     "href":"/v1/bundles/56b384d9749e4671960245a636701434/tracks"
-
                 },
-
                 "clarify:bundle":{
-
                     "href":"/v1/bundles/56b384d9749e4671960245a636701434"
-
                 }
-
             },
-
             "_embedded":{
-
                 "clarify:track":{
-
                     "id": "fef68854fe6e4e92aa1aa6ee2ab3cb99",
-
                     "track": 0,
-
                     "label": "",
-
-                    "media_url":
-        "http://media.clarify.io/audio/samples/harvard-sentences-1.wav",
-
+                    "media_url": "http://media.clarify.io/audio/samples/harvard-sentences-1.wav",
                     "audio_channel": "",
-
                     "audio_language": "",
-
                     "created": "2014-08-25T19:54:26.123Z",
-
                     "updated": "2014-08-25T19:54:26.552Z",
-
                     "status": "ready",
-
                     "mime_type": "audio/x-wav",
-
                     "media_size": 1030810,
-
                     "duration": 64.422875,
-
                     "fetch_response_code": -1,
-
                     "fetch_response_message": "",
-
                     "media_code": -1,
-
                     "media_message": "",
-
                     "_class":"Track",
-
                     "_links":{
-
                         "self":{
-
                             "href":"/v1/bundles/56b384d9749e4671960245a636701434/tracks/fef68854fe6e4e92aa1aa6ee2ab3cb99"
-
                         },
-
                         "parent":{
-
                             "href":"/v1/bundles/56b384d9749e4671960245a636701434/tracks"
-
                         },
-
                         "clarify:bundle":{
-
                             "href":"/v1/bundles/56b384d9749e4671960245a636701434"
-
                         }
-
                     }
-
                 }
-
             }
-
         }
         </pre><p><br/><br/>If <b>version</b> is specified, the bundle will only be updated if the current version matches this parameter value. If the version doesn't match, a 409 Conflict error will be returned. If version not specified, the bundle will always be updated.
       parameters:
@@ -374,74 +299,39 @@ paths:
     post:
       description: |-
         Request an insight to be run on a bundle. Note that most insights are set to automatically run on all bundles so you commonly won&apos;t need to call this endpoint except to request transcripts. To configure which insights are automatically run for an app, visit the <a href="https://developer.clarify.io" target="clarify">Clarify Developer Portal</a>.<br/><br/> Insights that are not configured to autorun can be requested to run on an individual bundle using this endpoint. The following insights can be requested:<br/><br/><b>transcript_r9</b> - High-accuracy transcript of the speech in the audio media.<br/><br/>Transcripts will produced on the mixed audio of all tracks in the bundle and are charged at $1 per minute (rounded up for partial minutes), based on the duration of the longest track. If the request has already been made, this method has no effect other than to return the existing insight.<br/><br/>Transcripts will typically take about 24 hours. When the transcript is ready, an InsightNotification webhook will be POSTed to the bundle <b>notify_url</b>.<br/><br/><b>spoken_keywords</b> - Spoken words of interest found in the audio media.<br/><br/>This insight is charged at $0 per minute. <b>Note:</b> Normally spoken_keywords is set to autorun so you do not need to run it explicitly.<br/><br/><br/>Example InsightNotification POST body sent to a <b>notify_url</b>:<br><pre class="code-snippet">{
-
           "bundle_id": "56b384d9749e4671960245a636701434",
-
           "name": "bundle name",
-
           "external_id": "external_123",
-
           "insight": "transcript_r9",
-
           "insight_id": "cba6d1fd1ca3426db41678887ac240b6",
-
           "updated": "2015-04-30T01:11:19.889Z",
-
           "_class": "InsightNotification",
-
           "_links": {
-
             "curies": [
-
               {
-
                 "href": "/docs/rels/{rel}",
-
                 "name": "clarify",
-
                 "templated": true
-
               },
-
               {
-
                 "href": "/docs/insights/{rel}",
-
                 "name": "insight",
-
                 "templated": true
-
               }
-
             ],
-
             "clarify:insights": {
-
               "href": "/v1/bundles/56b384d9749e4671960245a636701434/insights"
-
             },
-
             "clarify:bundle": {
-
               "href": "/v1/bundles/56b384d9749e4671960245a636701434"
-
             },
-
             "clarify:tracks": {
-
               "href": "/v1/bundles/56b384d9749e4671960245a636701434/tracks"
-
             },
-
             "insight:transcript_r9": {
-
-              "href":
-        "/v1/bundles/56b384d9749e4671960245a636701434/insights/cba6d1fd1ca3426db41678887ac240b6"
-
+              "href": "/v1/bundles/56b384d9749e4671960245a636701434/insights/cba6d1fd1ca3426db41678887ac240b6"
             }
-
           }
-
         }
         </pre><p>
       parameters:

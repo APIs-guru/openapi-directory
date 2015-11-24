@@ -55,7 +55,6 @@ paths:
       description: |-
         Returns information about a particular chart, identified by `{chart_token}`.
 
-
         Chart tokens may be found by using the `/chart/list` API endpoint.
       parameters:
         - in: path
@@ -79,9 +78,7 @@ paths:
       description: |-
         Renders a chart in the format and size chosen.
 
-
         The two formats allowed are `png` or `svg`. The four sizes allowed are `thumb`, `small`, `medium` or `large`.
-
 
         Note that `thumb` renders of charts are "simplified", in that they do not include axis labelling or a legend. The PNG thumbs render at a high resolution, to allow their use on devices with a high DPI (e.g. retina displays). Where possible, it is suggested that you use the SVG format, as it provides much smaller file sizes, and crisp rendering even when zoomed.
       parameters:
@@ -114,7 +111,6 @@ paths:
       description: |-
         **Sources** are places that have provided data to Figure.NZ. This endpoint lists them.
 
-
         By default, only the first 20 sources are returned. You can control which sources are returned using the GET parameters `per_page` and `start`.
       produces:
         - application/json
@@ -132,7 +128,6 @@ paths:
     get:
       description: |-
         Returns information about a particular source, identified by `{source_token}`.
-
 
         Source tokens may be found by using the `/source/list` API endpoint.
       parameters:
@@ -198,7 +193,6 @@ paths:
       description: |-
         **Tables** are a set of related data that has been provided by a Source, then standardised and stored with Figure.NZ.
 
-
         By default, only the first 20 tables are returned. You can control which tables are returned using the GET parameters `per_page` and `start`.
       produces:
         - application/json
@@ -216,7 +210,6 @@ paths:
     get:
       description: |-
         Returns information about a particular table, identified by `{table_token}`.
-
 
         Table tokens may be found by using the `/table/list` API endpoint.
       parameters:

@@ -427,10 +427,10 @@ paths:
           required: false
           type: array
         - description: |
+
             Request listings by a specific status. This parameter
             defaults to active and you can specify multiple statuses
             in a single query.
-
 
             Listing statuses depend on your MLS's availability. Below is
             a brief description of each status with possible synonyms which
@@ -439,23 +439,15 @@ paths:
             - ActiveUnderContract: An offer has been accepted but the listing is still on market. Synonyms: Accepting Backup Offers, Backup Offer, Active With Accepted. Synonyms: Offer, Backup, Contingent
             - Pending: An offer has been accepted and the listing is no longer on market. Synonyms: Offer Accepted, Under Contract
             - Hold: The listing has been withdrawn from the market, but a contract
-
-              still exists between the seller and the listing member. Synonyms:
-            Hold, Hold Do Not Show, Temp Off Market
+              still exists between the seller and the listing member. Synonyms: Hold, Hold Do Not Show, Temp Off Market
             - Withdrawn: The listing has been withdrawn from the market, but a contract
-
-              still exists between the seller and the listing member. Synonyms:
-            Hold, Hold Do Not Show, Temp Off Market
+              still exists between the seller and the listing member. Synonyms: Hold, Hold Do Not Show, Temp Off Market
             - Closed: The purchase agreement has been fulfilled or the lease
-
-              agreement has been executed. Synonyms: Sold, Leased, Rented, Closed
-            Sale
+              agreement has been executed. Synonyms: Sold, Leased, Rented, Closed Sale
             - Expired: The listing contract has expired
             - Delete: The listing contract was never valid or other reason for the contract to be nullified. Synonyms: Kill, Zap
             - Incomplete: The listing has not yet be completely entered and is not yet
-
               published in the MLS. Synonyms: Draft, Partially Complted
-
             - ComingSoon
           enum:
             - Active
@@ -812,23 +804,15 @@ definitions:
           - ActiveUnderContract: An offer has been accepted but the listing is still on market. Synonyms: Accepting Backup Offers, Backup Offer, Active With Accepted. Synonyms: Offer, Backup, Contingent
           - Pending: An offer has been accepted and the listing is no longer on market. Synonyms: Offer Accepted, Under Contract
           - Hold: The listing has been withdrawn from the market, but a contract
-
-            still exists between the seller and the listing member. Synonyms:
-          Hold, Hold Do Not Show, Temp Off Market
+            still exists between the seller and the listing member. Synonyms: Hold, Hold Do Not Show, Temp Off Market
           - Withdrawn: The listing has been withdrawn from the market, but a contract
-
-            still exists between the seller and the listing member. Synonyms:
-          Hold, Hold Do Not Show, Temp Off Market
+            still exists between the seller and the listing member. Synonyms: Hold, Hold Do Not Show, Temp Off Market
           - Closed: The purchase agreement has been fulfilled or the lease
-
-            agreement has been executed. Synonyms: Sold, Leased, Rented, Closed
-          Sale
+            agreement has been executed. Synonyms: Sold, Leased, Rented, Closed Sale
           - Expired: The listing contract has expired
           - Delete: The listing contract was never valid or other reason for the contract to be nullified. Synonyms: Kill, Zap
           - Incomplete: The listing has not yet be completely entered and is not yet
-
             published in the MLS. Synonyms: Draft, Partially Complted
-
           - ComingSoon
         enum:
           - Active
