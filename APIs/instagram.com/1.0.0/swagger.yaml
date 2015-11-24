@@ -2,564 +2,1283 @@ swagger: '2.0'
 schemes:
   - https
 host: api.instagram.com
-basePath: /v1/
+basePath: /v1
 info:
-  description: 'Fast, beautiful and fun way to share your life with friends through a series of pictures.'
-  title: Instagram
+  contact:
+    name: Instagram
+    url: 'https://instagram.com/developer'
+  description: |
+    Description of Instagram RESTful API.
+
+    Current limitations:
+      * Instagram service does not support [cross origin headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS)
+      for security reasons, therefore it is not possible to use Swagger UI and make API calls directly from browser.
+      * Modification API requests (`POST`, `DELETE`) require additional security [scopes](https://instagram.com/developer/authentication/#scope)
+      that are [not available](http://stackoverflow.com/questions/20580535/instagram-api-do-scopes-work-with-oauth2-implicit-authentication-flow/30834127#30834127)
+      for new clients.
+      * Consider the [Instagram limitations](https://instagram.com/developer/limits/) for API calls.
+
+    Last update: 2015-06-19
+  termsOfService: 'https://instagram.com/about/legal/terms/api/'
+  title: Instagram API
   version: 1.0.0
   x-logo:
     url: 'https://instagramstatic-a.akamaihd.net/bluebar/8a8f88c/images/press/brand-thumb-icon.jpg'
   x-origin:
-    format: apigee
-    url: 'https://apigee.com/embed/console/instagram'
+    format: swagger
+    url: 'https://raw.githubusercontent.com/darklynx/swagger-api-collection/master/api/yaml/instagram.yaml'
+    version: '2.0'
   x-providerName: instagram.com
-externalDocs:
-  url: 'http://instagr.am/developer/'
+  x-unofficialSpec: true
+produces:
+  - application/json
 securityDefinitions:
-  oauth2:
-    authorizationUrl: 'https://api.instagram.com/oauth/authorize/'
+  api_key:
+    in: query
+    name: access_token
+    type: apiKey
+  instagram_auth:
+    authorizationUrl: 'https://instagram.com/oauth/authorize/'
     flow: implicit
     scopes:
-      likes: ''
-      relationships: ''
+      basic: "to read data on a user's behalf, e.g. recent media, following lists (granted by default)"
+      comments: "to create or delete comments on a user's behalf"
+      likes: "to like and unlike media on a user's behalf"
+      relationships: "to follow and unfollow accounts on a user's behalf"
     type: oauth2
+tags:
+  - description: Get information about users
+    name: users
+  - description: Relationships to other users outgoing and incoming
+    name: relationships
+  - description: Get information about media
+    name: media
+  - description: Manage comments
+    name: comments
+  - description: Manage likes
+    name: likes
+  - description: Get information about tags
+    name: tags
+  - description: Get information about locations
+    name: locations
+  - description: Get geographies
+    name: geographies
 paths:
-  /locations/search:
+  '/geographies/{geo-id}/media/recent':
     get:
-      description: Search for a location by name and geographic coordinate.
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/locations/#get_locations_search'
+      description: |
+        Get recent media from a geography subscription that you created.
+
+        **Note:** You can only access Geographies that were explicitly created by your OAuth client. Check the
+        Geography Subscriptions section of the [real-time updates page](https://instagram.com/developer/realtime/).
+        When you create a subscription to some geography that you define, you will be returned a unique `geo-id` that
+        can be used in this query. To backfill photos from the location covered by this geography, use the
+        [media search endpoint](https://instagram.com/developer/endpoints/media/).
+
+        **Warrning:** Actual response of this end-point is [not documented](https://instagram.com/developer/endpoints/geographies/).
       parameters:
-        - description: 'Latitude of the center search coordinate. If used, lng is required.'
-          in: query
-          name: lat
-          required: false
+        - description: The geography ID.
+          in: path
+          name: geo-id
+          required: true
           type: string
-        - description: 'Longitude of the center search coordinate. If used, lat is required.'
+        - description: Max number of media to return.
+          format: int32
           in: query
-          name: lng
-          required: false
-          type: string
-        - description: 'Returns a location mapped off of a foursquare v1 api location id. If used, you are not required to use lat and lng. Note that this method is deprecated; you should use the new foursquare IDs with V2 of their API.'
-          in: query
-          name: foursquare_id
-          required: false
-          type: string
-        - description: 'Returns a location mapped off of a foursquare v2 api location id. If used, you are not required to use lat and lng.'
-          in: query
-          name: foursquare_v2_id
-          required: false
-          type: string
-        - default: 1000
-          description: 'Search distance, in meters. Default is 1km (distance=1000), max distance is 5km (5000)'
-          in: query
-          minimum: 1
-          name: distance
+          name: count
           required: false
           type: integer
-      responses:
-        '200':
-          description: Successful Response
-    parameters: []
-  '/locations/{location-id}':
-    get:
-      description: Get information about a location.
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/locations/#get_locations'
-      responses:
-        '200':
-          description: Successful Response
-    parameters:
-      - description: The ID of the location to reference.
-        in: path
-        name: location-id
-        required: true
-        type: string
-  '/locations/{location-id}/media/recent':
-    get:
-      description: Get a list of recent media objects from a given location.
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/locations/#get_locations_media_recent'
-      parameters:
-        - description: Return media after this max_id
-          in: query
-          name: max_id
-          required: false
-          type: string
-        - description: Return media before this min_id
+        - description: Return media before this `min_id`.
           in: query
           name: min_id
           required: false
           type: string
-        - description: Return media after this UNIX timestamp
-          in: query
-          maximum: 9223372036854776000
-          minimum: -9223372036854776000
-          name: min_timestamp
-          required: false
-          type: integer
-        - description: Return media before this UNIX timestamp
-          in: query
-          maximum: 9223372036854776000
-          minimum: -9223372036854776000
-          name: max_timestamp
-          required: false
-          type: integer
       responses:
         '200':
-          description: Successful Response
-    parameters:
-      - description: The ID of the location to reference.
-        in: path
-        name: location-id
-        required: true
-        type: string
-  /media/popular:
+          description: List of recent media entries from a geography subscription.
+          schema:
+            $ref: '#/definitions/LocationMediaResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+      summary: Get recent media from a custom geo-id.
+      tags:
+        - geographies
+  /locations/search:
     get:
-      description: Get a list of what media is most popular at the moment.
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/media/#get_media_popular'
-      responses:
-        '200':
-          description: Successful Response
-    parameters: []
-  /media/search:
-    get:
-      description: Get information about a media object.
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/media/#get_media_search'
+      description: Search for a location by geographic coordinate.
       parameters:
-        - description: 'Latitude of the center search coordinate. If used, lng is required.'
+        - description: 'Default is 1000m (distance=1000), max distance is 5000.'
+          format: int32
+          in: query
+          name: distance
+          required: false
+          type: integer
+        - description: 'Returns a location mapped off of a Facebook places id. If used, a Foursquare id and `lat`, `lng` are not required.'
+          in: query
+          name: facebook_places_id
+          required: false
+          type: string
+        - description: |
+            Returns a location mapped off of a foursquare v1 api location id. If used, you are not required to use
+            `lat` and `lng`. Note that this method is deprecated; you should use the new foursquare IDs with V2 of their API.
+          in: query
+          name: foursquare_id
+          required: false
+          type: string
+        - description: 'Latitude of the center search coordinate. If used, `lng` is required.'
+          format: double
           in: query
           name: lat
           required: false
           type: number
-        - description: 'Longitude of the center search coordinate. If used, lat is required.'
+        - description: 'Longitude of the center search coordinate. If used, `lat` is required.'
+          format: double
           in: query
           name: lng
           required: false
           type: number
-        - description: A unix timestamp. All media returned will be taken earlier than this timestamp.
+        - description: |
+            Returns a location mapped off of a foursquare v2 api location id. If used, you are not required to use
+            `lat` and `lng`.
           in: query
-          maximum: 9223372036854776000
-          minimum: -9223372036854776000
-          name: max_timestamp
+          name: foursquare_v2_id
           required: false
-          type: integer
-        - description: A unix timestamp. All media returned will be taken later than this timestamp.
+          type: string
+      responses:
+        '200':
+          description: List of found locations.
+          schema:
+            $ref: '#/definitions/LocationSearchResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+      summary: Search for a location by geographic coordinate.
+      tags:
+        - locations
+  '/locations/{location-id}':
+    get:
+      description: Get information about a location.
+      parameters:
+        - description: The location ID.
+          in: path
+          name: location-id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Location information response.
+          schema:
+            $ref: '#/definitions/LocationInfoResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+      summary: Get information about a location.
+      tags:
+        - locations
+  '/locations/{location-id}/media/recent':
+    get:
+      description: Get a list of recent media objects from a given location.
+      parameters:
+        - description: The location ID.
+          in: path
+          name: location-id
+          required: true
+          type: string
+        - description: Return media after this UNIX timestamp.
+          format: int64
           in: query
-          maximum: 9223372036854776000
-          minimum: -9223372036854776000
           name: min_timestamp
           required: false
           type: integer
-        - default: 1000
-          description: 'Search distance, in meters. Default is 1km (distance=1000), max distance is 5km (5000)'
+        - description: Return media before this UNIX timestamp.
+          format: int64
           in: query
-          minimum: 1
+          name: max_timestamp
+          required: false
+          type: integer
+        - description: Return media before this `min_id`.
+          in: query
+          name: min_id
+          required: false
+          type: string
+        - description: Return media after this `max_id`.
+          in: query
+          name: max_id
+          required: false
+          type: string
+      responses:
+        '200':
+          description: List of media entries from this location.
+          schema:
+            $ref: '#/definitions/LocationMediaResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+      summary: Get a list of recent media objects from a given location.
+      tags:
+        - locations
+  /media/popular:
+    get:
+      description: |
+        Get a list of what media is most popular at the moment. Can return mix of `image` and `video` types.
+      responses:
+        '200':
+          description: Found media resources (without likes information).
+          schema:
+            $ref: '#/definitions/MediaSearchResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+      summary: Get a list of currently popular media.
+      tags:
+        - media
+  /media/search:
+    get:
+      description: |
+        Search for media in a given area. The default time span is set to 5 days. The time span must not exceed 7 days.
+        Defaults time stamps cover the last 5 days. Can return mix of `image` and `video` types.
+      parameters:
+        - description: 'Latitude of the center search coordinate. If used, `lng` is required.'
+          format: double
+          in: query
+          name: lat
+          required: true
+          type: number
+        - description: 'Longitude of the center search coordinate. If used, `lat` is required.'
+          format: double
+          in: query
+          name: lng
+          required: true
+          type: number
+        - description: A unix timestamp. All media returned will be taken later than this timestamp.
+          format: int64
+          in: query
+          name: min_timestamp
+          required: false
+          type: integer
+        - description: A unix timestamp. All media returned will be taken earlier than this timestamp.
+          format: int64
+          in: query
+          name: max_timestamp
+          required: false
+          type: integer
+        - description: 'Default is 1km (distance=1000), max distance is 5km.'
+          format: int32
+          in: query
           name: distance
           required: false
           type: integer
       responses:
         '200':
-          description: Successful Response
-    parameters: []
-  '/media/{id}':
+          description: Found media resources (without likes information) in a given area.
+          schema:
+            $ref: '#/definitions/MediaSearchResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+      summary: Search for media in a given area.
+      tags:
+        - media
+  '/media/shortcode/{shortcode}':
     get:
-      description: Get information about a media object.
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/media/#get_media'
+      description: |
+        This endpoint returns the same response as `GET /media/{media-id}`.
+
+        A media object's shortcode can be found in its shortlink URL. An example shortlink is
+        `http://instagram.com/p/D/`, its corresponding shortcode is `D`.
+      parameters:
+        - description: The short code of the media resource.
+          in: path
+          name: shortcode
+          required: true
+          type: string
       responses:
         '200':
-          description: Successful Response
-    parameters:
-      - description: The ID of the media object to reference.
-        in: path
-        name: id
-        required: true
-        type: string
+          description: Media resource information.
+          schema:
+            $ref: '#/definitions/MediaResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+      summary: Get information about a media object.
+      tags:
+        - media
+  '/media/{media-id}':
+    get:
+      description: |
+        Get information about a media object. The returned type key will allow you to differentiate between image and
+        video media.
+
+        **Note:** if you authenticate with an OAuth Token, you will receive the user_has_liked key which quickly tells
+        you whether the current user has liked this media item.
+      parameters:
+        - description: The ID of the media resource.
+          in: path
+          name: media-id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Media resource information.
+          schema:
+            $ref: '#/definitions/MediaResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+      summary: Get information about a media object.
+      tags:
+        - media
   '/media/{media-id}/comments':
     get:
-      description: 'Get a full list of comments on a media. Required scope: comments'
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/comments/#get_media_comments'
+      description: Get a list of recent comments on a media object.
+      parameters:
+        - description: The ID of the media resource.
+          in: path
+          name: media-id
+          required: true
+          type: string
       responses:
         '200':
-          description: Successful Response
-    parameters:
-      - description: The ID of the media object to reference.
-        in: path
-        name: media-id
-        required: true
-        type: string
+          description: List of comments of the media resource.
+          schema:
+            $ref: '#/definitions/CommentsResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+      summary: Get a list of recent comments on a media object.
+      tags:
+        - comments
     post:
-      description: 'Create a comment on a media. Required scope: comments'
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/comments/#post_media_comments'
-      parameters: []
+      description: |
+        Create a comment on a media object with the following rules:
+
+          * The total length of the comment cannot exceed 300 characters.
+          * The comment cannot contain more than 4 hashtags.
+          * The comment cannot contain more than 1 URL.
+          * The comment cannot consist of all capital letters.
+      parameters:
+        - description: The ID of the media resource.
+          in: path
+          name: media-id
+          required: true
+          type: string
+        - description: Text to post as a comment on the media object as specified in `media-id`.
+          in: query
+          name: text
+          required: true
+          type: string
       responses:
         '200':
-          description: Successful Response
+          description: Result of posting a comment.
+          schema:
+            $ref: '#/definitions/StatusResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+            - comments
+      summary: Create a comment on a media object.
+      tags:
+        - comments
   '/media/{media-id}/comments/{comment-id}':
     delete:
-      description: "Remove a comment either on the authenticated user's media or authored by the authenticated user. Required scope: comments"
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/comments/#delete_media_comments'
+      description: |
+        Remove a comment either on the authenticated user's media object or authored by the authenticated user.
+      parameters:
+        - description: The ID of the media resource.
+          in: path
+          name: media-id
+          required: true
+          type: string
+        - description: The ID of the comment entry.
+          in: path
+          name: comment-id
+          required: true
+          type: string
       responses:
         '200':
-          description: Successful Response
-    parameters:
-      - description: The ID of the media object to reference.
-        in: path
-        name: media-id
-        required: true
-        type: string
-      - description: The ID of the comment to delete.
-        in: path
-        name: comment-id
-        required: true
-        type: string
+          description: Result of deleting a comment.
+          schema:
+            $ref: '#/definitions/StatusResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+            - comments
+      summary: Remove a comment.
+      tags:
+        - comments
   '/media/{media-id}/likes':
     delete:
-      description: 'Remove a like on this media by the currently authenticated user. Required scope: likes'
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/likes/#delete_media_likes'
+      description: Remove a like on this media by the currently authenticated user.
+      parameters:
+        - description: The ID of the media resource.
+          in: path
+          name: media-id
+          required: true
+          type: string
       responses:
         '200':
-          description: Successful Response
+          description: Result of removing a like.
+          schema:
+            $ref: '#/definitions/StatusResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+            - likes
+      summary: Remove a like on this media by the current user.
+      tags:
+        - likes
     get:
-      description: 'Get a list of users who have liked this media. Required scope: likes'
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/likes/#get_media_likes'
+      description: Get a list of users who have liked this media.
+      parameters:
+        - description: The ID of the media resource.
+          in: path
+          name: media-id
+          required: true
+          type: string
       responses:
         '200':
-          description: Successful Response
-    parameters:
-      - description: The ID of the media object to reference.
-        in: path
-        name: media-id
-        required: true
-        type: string
+          description: List of users who liked the media resource.
+          schema:
+            $ref: '#/definitions/UsersInfoResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+      summary: Get a list of users who have liked this media.
+      tags:
+        - likes
     post:
-      description: 'Set a like on this media by the currently authenticated user. Required scope: likes'
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/likes/#post_media_likes'
-      responses:
-        '200':
-          description: Successful Response
-  /subscriptions:
-    delete:
-      description: Deletes a subscription by object type or ID.
-      externalDocs:
-        url: 'http://instagr.am/developer/realtime'
+      description: Set a like on this media by the currently authenticated user.
       parameters:
-        - description: 'The ID of the subscription you want to delete. Either this or "object" is required.'
-          in: query
-          name: id
-          required: false
-          type: string
-        - description: 'The object type of the subscription you want to delete, or "all" to clear all subscriptions.'
-          enum:
-            - all
-            - user
-            - tag
-            - location
-            - geography
-          in: query
-          name: object
-          required: false
-          type: string
-        - description: Client ID of your application.
-          in: query
-          name: client_id
-          required: true
-          type: string
-        - description: Client secret of your application.
-          in: query
-          name: client_secret
+        - description: The ID of the media resource.
+          in: path
+          name: media-id
           required: true
           type: string
       responses:
         '200':
-          description: Successful Response
-    get:
-      description: Returns your current subscriptions.
-      externalDocs:
-        url: 'http://instagr.am/developer/realtime'
-      parameters:
-        - description: Client ID of your application.
-          in: query
-          name: client_id
-          required: true
-          type: string
-        - description: Client secret of your application.
-          in: query
-          name: client_secret
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful Response
-    parameters: []
-    post:
-      description: Creates a subscription to receive notifications when a new photos are posted in an arbitrary geographical location as defined by a center point and radius.
-      externalDocs:
-        url: 'http://instagr.am/developer/realtime'
-      parameters:
-        - in: query
-          name: verify_token
-          required: true
-          type: string
-        - description: Client ID of your application.
-          in: query
-          name: client_id
-          required: true
-          type: string
-        - description: Client secret of your application.
-          in: query
-          name: client_secret
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful Response
+          description: Result of setting a like.
+          schema:
+            $ref: '#/definitions/StatusResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+            - likes
+      summary: Set a like on this media by the current user.
+      tags:
+        - likes
   /tags/search:
     get:
       description: Search for tags by name.
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/tags/#get_tags_search'
       parameters:
-        - description: 'Valid tag name without a leading #. (eg. snow, nofilter)'
+        - description: "A valid tag name without a leading \\#. (eg. snowy, nofilter)"
           in: query
           name: q
           required: true
           type: string
       responses:
         '200':
-          description: Successful Response
-    parameters: []
+          description: List of found tags and their statistics.
+          schema:
+            $ref: '#/definitions/TagSearchResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+      summary: Search for tags by name.
+      tags:
+        - tags
   '/tags/{tag-name}':
     get:
       description: Get information about a tag object.
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/tags/#get_tags'
+      parameters:
+        - description: The tag name.
+          in: path
+          name: tag-name
+          required: true
+          type: string
       responses:
         '200':
-          description: Successful Response
-    parameters:
-      - description: The name of the tag to reference.
-        in: path
-        name: tag-name
-        required: true
-        type: string
+          description: Tag information response.
+          schema:
+            $ref: '#/definitions/TagInfoResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+      summary: Get information about a tag object.
+      tags:
+        - tags
   '/tags/{tag-name}/media/recent':
     get:
-      description: Get a list of recently tagged media.
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/tags/#get_tags_media_recent'
+      description: |
+        Get a list of recently tagged media. Use the `max_tag_id` and `min_tag_id` parameters in the pagination
+        response to paginate through these objects.
       parameters:
-        - description: Return media after this max_id
+        - description: The tag name.
+          in: path
+          name: tag-name
+          required: true
+          type: string
+        - description: Count of tagged media to return.
           in: query
-          name: max_id
+          name: count
+          required: false
+          type: integer
+        - description: Return media before this `min_tag_id`.
+          in: query
+          name: min_tag_id
           required: false
           type: string
-        - description: Return media before this min_id
+        - description: Return media after this `max_tag_id`.
           in: query
-          name: min_id
+          name: max_tag_id
           required: false
           type: string
       responses:
         '200':
-          description: Successful Response
-    parameters:
-      - description: The name of the tag to reference.
-        in: path
-        name: tag-name
-        required: true
-        type: string
+          description: List of media entries with this tag.
+          schema:
+            $ref: '#/definitions/TagMediaResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+      summary: Get a list of recently tagged media.
+      tags:
+        - tags
   /users/search:
     get:
       description: Search for a user by name.
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/users/#get_users_search'
       parameters:
         - description: A query string.
           in: query
           name: q
           required: true
           type: string
-        - description: Number of users to return
+        - description: Number of users to return.
           in: query
-          minimum: 1
           name: count
           required: false
           type: integer
       responses:
         '200':
-          description: Successful Response
-    parameters: []
+          description: List of found users.
+          schema:
+            $ref: '#/definitions/UsersInfoResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+      summary: Search for a user by name.
+      tags:
+        - users
   /users/self/feed:
     get:
       description: "See the authenticated user's feed."
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/users/#get_users_feed'
       parameters:
-        - description: Return media earlier than this max_id
+        - description: Count of media to return.
           in: query
-          name: max_id
+          name: count
           required: false
-          type: string
-        - description: Return media later than this min_id
+          type: integer
+        - description: Return media later than this `min_id`.
           in: query
           name: min_id
           required: false
           type: string
-        - description: Count of media to return
+        - description: Return media earlier than this `max_id`.
           in: query
-          minimum: 1
+          name: max_id
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Users feed entries.
+          schema:
+            $ref: '#/definitions/MediaResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+      summary: "See the authenticated user's feed."
+      tags:
+        - users
+  /users/self/media/liked:
+    get:
+      description: |
+        See the list of media liked by the authenticated user. Private media is returned as long as the authenticated
+        user has permission to view that media. Liked media lists are only available for the currently authenticated
+        user.
+      parameters:
+        - description: Count of media to return.
+          in: query
           name: count
           required: false
           type: integer
-      responses:
-        '200':
-          description: Successful Response
-    parameters: []
-  /users/self/media/liked:
-    get:
-      description: "See the authenticated user's list of media they've liked."
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/users/#get_users_liked_feed'
-      parameters:
-        - description: Return media liked before this id
+        - description: Return media liked before this id.
           in: query
           name: max_like_id
           required: false
           type: string
-        - description: Count of media to return
+      responses:
+        '200':
+          description: Users media entries.
+          schema:
+            $ref: '#/definitions/MediaResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+      summary: See the list of media liked by the authenticated user.
+      tags:
+        - users
+  /users/self/requested-by:
+    get:
+      description: "List the users who have requested this user's permission to follow."
+      responses:
+        '200':
+          description: "List of users who have requested this user's permission to follow."
+          schema:
+            $ref: '#/definitions/UsersInfoResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+      summary: "List the users who have requested this user's permission to follow."
+      tags:
+        - relationships
+  '/users/{user-id}':
+    get:
+      description: |
+        Get basic information about a user. To get information about the owner of the access token, you can use
+        **self** instead of the `user-id`.
+      parameters:
+        - description: 'The ID of a user to get information about, or **self** to retrieve information about authenticated user.'
+          in: path
+          name: user-id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: User basic information.
+          schema:
+            $ref: '#/definitions/UserResponse'
+        '404':
+          description: 'Not Found, user with such ID does not exist.'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+      summary: Get basic information about a user.
+      tags:
+        - users
+  '/users/{user-id}/followed-by':
+    get:
+      description: |
+        Get the list of users this user is followed by. To get users followed by the owner of the access token, you
+        can use **self** instead of the `user-id`.
+      parameters:
+        - description: 'The ID of a user, or **self** to retrieve information about authenticated user.'
+          in: path
+          name: user-id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of users this user is followed by.
+          schema:
+            $ref: '#/definitions/UsersPagingResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+      summary: Get the list of users this user is followed by.
+      tags:
+        - relationships
+  '/users/{user-id}/follows':
+    get:
+      description: |
+        Get the list of users this user follows. To get follows of the owner of the access token, you can use **self**
+        instead of the `user-id`.
+      parameters:
+        - description: 'The ID of a user, or **self** to retrieve information about authenticated user.'
+          in: path
+          name: user-id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of users this user follows.
+          schema:
+            $ref: '#/definitions/UsersPagingResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+      summary: Get the list of users this user follows.
+      tags:
+        - relationships
+  '/users/{user-id}/media/recent':
+    get:
+      description: |
+        Get the most recent media published by a user. To get the most recent media published by the owner of the
+        access token, you can use **self** instead of the `user-id`.
+      parameters:
+        - description: 'The ID of a user to get recent media of, or **self** to retrieve media of authenticated user.'
+          in: path
+          name: user-id
+          required: true
+          type: string
+        - description: Count of media to return.
           in: query
-          minimum: 1
           name: count
           required: false
           type: integer
-      responses:
-        '200':
-          description: Successful Response
-    parameters: []
-  /users/self/requested-by:
-    get:
-      description: "List the users who have requested this user's permission to follow. Required scope: relationships"
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/relationships/#get_incoming_requests'
-      responses:
-        '200':
-          description: Successful Response
-    parameters: []
-  '/users/{user-id}':
-    get:
-      description: Get basic information about a user.
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/users/#get_users'
-      responses:
-        '200':
-          description: Successful Response
-    parameters:
-      - description: 'The ID of the user whose information to retrieve, or "self" to reference the currently logged-in user.'
-        in: path
-        name: user-id
-        required: true
-        type: string
-  '/users/{user-id}/followed-by':
-    get:
-      description: 'Get the list of users this user is followed by. Required scope: relationships'
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/relationships/#get_users_followed_by'
-      responses:
-        '200':
-          description: Successful Response
-    parameters:
-      - description: The ID of the user to reference.
-        in: path
-        name: user-id
-        required: true
-        type: string
-  '/users/{user-id}/follows':
-    get:
-      description: 'Get the list of users this user follows. Required scope: relationships'
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/relationships/#get_users_follows'
-      responses:
-        '200':
-          description: Successful Response
-    parameters:
-      - description: The ID of the user to reference.
-        in: path
-        name: user-id
-        required: true
-        type: string
-  '/users/{user-id}/media/recent':
-    get:
-      description: Get the most recent media published by a user.
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/users/#get_users_media_recent'
-      parameters:
-        - description: Return media earlier than this max_id
+        - description: Return media before this UNIX timestamp.
+          format: int64
           in: query
-          name: max_id
+          name: max_timestamp
           required: false
-          type: string
-        - description: Return media later than this min_id
+          type: integer
+        - description: Return media after this UNIX timestamp.
+          format: int64
+          in: query
+          name: min_timestamp
+          required: false
+          type: integer
+        - description: Return media later than this `min_id`.
           in: query
           name: min_id
           required: false
           type: string
-        - description: Count of media to return
+        - description: Return media earlier than this `max_id`.
           in: query
-          minimum: 1
-          name: count
+          name: max_id
           required: false
-          type: integer
-        - description: Return media after this UNIX timestamp
-          in: query
-          maximum: 9223372036854776000
-          minimum: -9223372036854776000
-          name: min_timestamp
-          required: false
-          type: integer
-        - description: Return media before this UNIX timestamp
-          in: query
-          maximum: 9223372036854776000
-          minimum: -9223372036854776000
-          name: max_timestamp
-          required: false
-          type: integer
+          type: string
       responses:
         '200':
-          description: Successful Response
-    parameters:
-      - description: The ID of the user whose recent media to retrieve.
-        in: path
-        name: user-id
-        required: true
-        type: string
+          description: Users media entries.
+          schema:
+            $ref: '#/definitions/MediaResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+      summary: Get the most recent media published by a user.
+      tags:
+        - users
   '/users/{user-id}/relationship':
     get:
-      description: "Get information about the current user's relationship (follow/following/etc) to another user. Required scope: relationships"
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/relationships/#get_relationship'
+      description: Get information about a relationship to another user.
+      parameters:
+        - description: The ID of a user to get information about.
+          in: path
+          name: user-id
+          required: true
+          type: string
       responses:
         '200':
-          description: Successful Response
-    parameters:
-      - description: The ID of the user to reference.
-        in: path
-        name: user-id
-        required: true
-        type: string
+          description: Relationship information.
+          schema:
+            $ref: '#/definitions/RelationshipResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+      summary: Get information about a relationship to another user.
+      tags:
+        - relationships
     post:
-      description: 'Modify the relationship between the current user and the target user. Required scope: relationships'
-      externalDocs:
-        url: 'http://instagr.am/developer/endpoints/relationships/#post_relationship'
-      parameters: []
+      description: Modify the relationship between the current user and the target user.
+      parameters:
+        - description: The ID of the target user.
+          in: path
+          name: user-id
+          required: true
+          type: string
+        - description: Type of action to apply for relationship with the user.
+          enum:
+            - follow
+            - unfollow
+            - block
+            - unblock
+            - approve
+            - ignore
+          in: query
+          name: action
+          required: true
+          type: string
       responses:
         '200':
-          description: Successful Response
+          description: Relationship information.
+          schema:
+            $ref: '#/definitions/RelationshipPostResponse'
+      security:
+        - api_key: []
+        - instagram_auth:
+            - basic
+            - relationships
+      summary: Modify the relationship between the current user and the target user.
+      tags:
+        - relationships
+definitions:
+  CaptionData:
+    properties:
+      created_time:
+        description: Caption creation UNIX timestamp
+        type: string
+      from:
+        $ref: '#/definitions/UserShortInfo'
+        description: User who created this caption
+      id:
+        description: ID of this caption
+        type: string
+      text:
+        description: Caption text
+        type: string
+  CommentEntry:
+    properties:
+      created_time:
+        description: Comment creation UNIX timestamp
+        type: string
+      from:
+        $ref: '#/definitions/UserShortInfo'
+        description: User who posted this comment
+      id:
+        description: ID of this comment
+        type: string
+      text:
+        description: Text of the comment
+        type: string
+  CommentsCollection:
+    properties:
+      count:
+        description: 'Nember of comments available, data does not necessary contain all comments'
+        type: integer
+      data:
+        description: Collection of comment entries
+        items:
+          $ref: '#/definitions/CommentEntry'
+        type: array
+  CommentsResponse:
+    properties:
+      data:
+        description: Collection of comments
+        items:
+          $ref: '#/definitions/CommentEntry'
+        type: array
+      meta:
+        $ref: '#/definitions/MetaData'
+        description: Response meta-data
+  CursorPaginationInfo:
+    properties:
+      next_cursor:
+        description: The cursor ID of the next page
+        type: string
+      next_url:
+        description: URL to retrieve next page of entries
+        type: string
+  IdPaginationInfo:
+    properties:
+      next_max_id:
+        description: The max ID of the next page
+        type: string
+      next_url:
+        description: URL to retrieve next page of entries
+        type: string
+  ImageInfo:
+    properties:
+      height:
+        description: Image/video height in pixels
+        type: integer
+      url:
+        description: URL of the image/video resource
+        type: string
+      width:
+        description: Image/video width in pixels
+        type: integer
+  ImagesData:
+    properties:
+      low_resolution:
+        $ref: '#/definitions/ImageInfo'
+        description: Image in low resolution
+      standard_resolution:
+        $ref: '#/definitions/ImageInfo'
+        description: Image in standard resolution
+      thumbnail:
+        $ref: '#/definitions/ImageInfo'
+        description: Thumbnail of the image
+  LikesCollection:
+    properties:
+      count:
+        description: 'Nember of likes available, data does not necessary contain all comments'
+        type: integer
+      data:
+        description: Collection of users who liked
+        items:
+          $ref: '#/definitions/UserShortInfo'
+        type: array
+  LocationInfo:
+    properties:
+      id:
+        description: "ID of this location (in some responses it has a type of 'integer')"
+        type: string
+      latitude:
+        description: Location latitude
+        format: double
+        type: number
+      longitude:
+        description: Location longitude
+        format: double
+        type: number
+      name:
+        description: Location name
+        type: string
+  LocationInfoResponse:
+    properties:
+      data:
+        $ref: '#/definitions/LocationInfo'
+        description: Location brief information
+      meta:
+        $ref: '#/definitions/MetaData'
+        description: Response meta-data
+  LocationMediaResponse:
+    properties:
+      data:
+        description: List of media entries from this location
+        items:
+          $ref: '#/definitions/MediaEntry'
+        type: array
+      meta:
+        $ref: '#/definitions/MetaData'
+        description: Response meta-data
+      pagination:
+        $ref: '#/definitions/IdPaginationInfo'
+        description: Information for pagination
+  LocationSearchResponse:
+    properties:
+      data:
+        description: List of found locations
+        items:
+          $ref: '#/definitions/LocationInfo'
+        type: array
+      meta:
+        $ref: '#/definitions/MetaData'
+        description: Response meta-data
+  MediaEntry:
+    properties:
+      attribution:
+        description: '??? Unknown ???'
+        type: string
+      caption:
+        $ref: '#/definitions/CaptionData'
+        description: Describes caption of this media
+      comments:
+        $ref: '#/definitions/CommentsCollection'
+        description: Comments of this media entry
+      created_time:
+        description: Media creation UNIX timestamp
+        type: string
+      filter:
+        description: Filter of this media entry
+        type: string
+      id:
+        description: ID of a media entry
+        type: string
+      images:
+        $ref: '#/definitions/ImagesData'
+        description: Images data in different resolutions
+      likes:
+        $ref: '#/definitions/LikesCollection'
+        description: Likes of this media entry
+      link:
+        description: Fixed URL of this media entry
+        type: string
+      location:
+        $ref: '#/definitions/LocationInfo'
+        description: Location data for this media if available
+      tags:
+        description: List of tags assigned to this media
+        items:
+          type: string
+        type: array
+      type:
+        description: Type of this media entry
+        enum:
+          - image
+          - video
+        type: string
+      user:
+        $ref: '#/definitions/UserShortInfo'
+        description: User who posted this media
+      user_has_liked:
+        description: Indicates whether authenticated user has liked this media or not
+        type: boolean
+      users_in_photo:
+        description: Users located on this media entry
+        items:
+          $ref: '#/definitions/UserInPhoto'
+        type: array
+      videos:
+        $ref: '#/definitions/VideosData'
+        description: "Videos data in different resolutions, applied for 'video' type"
+  MediaResponse:
+    properties:
+      data:
+        $ref: '#/definitions/MediaEntry'
+        description: Media resource information
+      meta:
+        $ref: '#/definitions/MetaData'
+        description: Response meta-data
+  MediaSearchResponse:
+    properties:
+      data:
+        description: Found media entries; some end-points do not return likes informtaion
+        items:
+          $ref: '#/definitions/MediaEntry'
+        type: array
+      meta:
+        $ref: '#/definitions/MetaData'
+        description: Response meta-data
+  MetaData:
+    properties:
+      code:
+        description: HTTP result code
+        format: int32
+        type: integer
+  Position:
+    properties:
+      x:
+        description: X position (horizontal)
+        format: float
+        type: number
+      'y':
+        description: Y position (vertical)
+        format: float
+        type: number
+  RelationshipInfo:
+    properties:
+      incoming_status:
+        description: Status of incoming relationship
+        enum:
+          - none
+          - followed_by
+          - requested_by
+        type: string
+      outgoing_status:
+        description: Status of outgoing relationship
+        enum:
+          - none
+          - follows
+          - requested
+        type: string
+      target_user_is_private:
+        description: Indicates whether target user is private or not
+        type: boolean
+  RelationshipPostResponse:
+    properties:
+      data:
+        $ref: '#/definitions/RelationshipStatus'
+        description: Current relationship status
+      meta:
+        $ref: '#/definitions/MetaData'
+        description: Response meta-data
+  RelationshipResponse:
+    properties:
+      data:
+        $ref: '#/definitions/RelationshipInfo'
+        description: Relationship information
+      meta:
+        $ref: '#/definitions/MetaData'
+        description: Response meta-data
+  RelationshipStatus:
+    properties:
+      outgoing_status:
+        description: Status of outgoing relationship
+        enum:
+          - none
+          - follows
+          - requested
+        type: string
+  StatusResponse:
+    properties:
+      data:
+        description: "No data - 'null'"
+        type: string
+      meta:
+        $ref: '#/definitions/MetaData'
+        description: Response meta-data
+  TagInfo:
+    properties:
+      media_count:
+        description: Overall number of media entries taged with this name
+        format: int64
+        type: integer
+      name:
+        description: Tag name
+        type: string
+  TagInfoResponse:
+    properties:
+      data:
+        $ref: '#/definitions/TagInfo'
+        description: Tag brief information
+      meta:
+        $ref: '#/definitions/MetaData'
+        description: Response meta-data
+  TagMediaResponse:
+    properties:
+      data:
+        description: List of media entries with this tag
+        items:
+          $ref: '#/definitions/MediaEntry'
+        type: array
+      meta:
+        $ref: '#/definitions/MetaData'
+        description: Response meta-data
+      pagination:
+        $ref: '#/definitions/TagPaginationInfo'
+        description: Information for pagination
+  TagPaginationInfo:
+    properties:
+      deprecation_warning:
+        description: 'The deprication warrning, if information is available'
+        type: string
+      min_tag_id:
+        description: The min ID of a tag for the next page
+        type: string
+      next_max_id:
+        description: Depricated. Use min_tag_id instead
+        type: string
+      next_max_tag_id:
+        description: The max ID of a tag for the next page
+        type: string
+      next_min_id:
+        description: Depricated. Use max_tag_id instead
+        type: string
+      next_url:
+        description: URL to retrieve next page of entries
+        type: string
+  TagSearchResponse:
+    properties:
+      data:
+        description: List of found tags with brief statistics
+        items:
+          $ref: '#/definitions/TagInfo'
+        type: array
+      meta:
+        $ref: '#/definitions/MetaData'
+        description: Response meta-data
+  UserCounts:
+    properties:
+      followed_by:
+        description: Number of followers of this user
+        format: int32
+        type: integer
+      follows:
+        description: Number of users followed by this user
+        format: int32
+        type: integer
+      media:
+        description: Number of user media
+        format: int32
+        type: integer
+  UserInPhoto:
+    properties:
+      position:
+        $ref: '#/definitions/Position'
+        description: Position in photo
+      user:
+        $ref: '#/definitions/UserShortInfo'
+        description: User who is indicated on the photo
+  UserInfo:
+    properties:
+      bio:
+        description: User biography
+        type: string
+      counts:
+        $ref: '#/definitions/UserCounts'
+        description: User statistics (counters)
+      full_name:
+        description: User full name
+        type: string
+      id:
+        description: User ID
+        type: string
+      profile_picture:
+        description: URL to user profile picture
+        type: string
+      username:
+        description: 'User name, nickname'
+        type: string
+      website:
+        description: URL to user web-site
+        type: string
+  UserResponse:
+    properties:
+      data:
+        $ref: '#/definitions/UserInfo'
+        description: User basic information
+      meta:
+        $ref: '#/definitions/MetaData'
+        description: Response meta-data
+  UserShortInfo:
+    properties:
+      full_name:
+        description: User full name
+        type: string
+      id:
+        description: User ID
+        type: string
+      profile_picture:
+        description: URL to user profile picture
+        type: string
+      username:
+        description: 'User name, nickname'
+        type: string
+  UsersInfoResponse:
+    properties:
+      data:
+        description: User short information entries
+        items:
+          $ref: '#/definitions/UserShortInfo'
+        type: array
+      meta:
+        $ref: '#/definitions/MetaData'
+        description: Response meta-data
+  UsersPagingResponse:
+    properties:
+      data:
+        description: List of user short information entries
+        items:
+          $ref: '#/definitions/UserShortInfo'
+        type: array
+      meta:
+        $ref: '#/definitions/MetaData'
+        description: Response meta-data
+      pagination:
+        $ref: '#/definitions/CursorPaginationInfo'
+        description: Information for pagination
+  VideosData:
+    properties:
+      low_resolution:
+        $ref: '#/definitions/ImageInfo'
+        description: Video in low resolution
+      standard_resolution:
+        $ref: '#/definitions/ImageInfo'
+        description: Video in standard resolution
