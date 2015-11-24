@@ -298,10 +298,10 @@ paths:
           required: false
           type: integer
         - description: |
-            Used to specify the vendor (MLS) to search from. This is
-            only required if you have an account with multiple MLS's
-            connected to a single API. To get your vendor id's make an
-            OPTIONS request to https://api.simplyrets.com.
+            Used to specify the vendor (MLS) to search from. This
+            parameter is required on multi-MLS apps, and you can only
+            query one vendor at a time. To get your vendor id's make
+            an OPTIONS request to https://api.simplyrets.com.
           in: query
           name: vendor
           required: false
