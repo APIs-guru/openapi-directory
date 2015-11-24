@@ -53,5 +53,6 @@ Spec sources
 --------------------------
 Some specs are taken from Open Source projects:
  - [trello-swagger-generator](https://github.com/warehouseman/trello-swagger-generator/) - Swagger spec for Trello API
+ - [https://github.com/darklynx/swagger-api-collection](https://github.com/darklynx/swagger-api-collection) - Swagger spec for Instagram API
 
 [logo]: https://apis-guru.github.io/api-models/branding/logo_horizontal.svg "APIs.guru"
