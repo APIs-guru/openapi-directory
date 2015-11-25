@@ -119,7 +119,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
     post:
-      description: "Registers the debuggee with the controller. All agents should call this API with the same request content to get back the same stable 'debuggee_id'. Agents should call this API again whenever ListActiveBreakpoints or UpdateActiveBreakpoint return the error google.rpc.Code.NOT_FOUND. It allows the server to disable the agent or recover from any registration loss. If the debuggee is disabled server, the response will have is_disabled' set to true."
+      description: 'Registers the debuggee with the controller service. All agents attached to the same application should call this method with the same request content to get back the same stable `debuggee_id`. Agents should call this method again whenever `google.rpc.Code.NOT_FOUND` is returned from any controller method. This allows the controller service to disable the agent or recover from any data loss. If the debuggee is disabled by the server, the response will have `is_disabled` set to `true`.'
       operationId: clouddebugger.controller.debuggees.register
       parameters:
         - in: body
@@ -139,7 +139,7 @@ paths:
         - controller
   '/v2/controller/debuggees/{debuggeeId}/breakpoints':
     get:
-      description: "Returns the list of all active breakpoints for the specified debuggee. The breakpoint specification (location, condition, and expression fields) is semantically immutable, although the field values may change. For example, an agent may update the location line number to reflect the actual line the breakpoint was set to, but that doesn't change the breakpoint semantics. Thus, an agent does not need to check if a breakpoint has changed when it encounters the same breakpoint on a successive call. Moreover, an agent should remember breakpoints that are complete until the controller removes them from the active list to avoid setting those breakpoints again."
+      description: "Returns the list of all active breakpoints for the debuggee. The breakpoint specification (location, condition, and expression fields) is semantically immutable, although the field values may change. For example, an agent may update the location line number to reflect the actual line where the breakpoint was set, but this doesn't change the breakpoint semantics. This means that an agent does not need to check if a breakpoint has changed when it encounters the same breakpoint on a successive call. Moreover, an agent should remember the breakpoints that are completed until the controller removes them from the active list to avoid setting those breakpoints again."
       operationId: clouddebugger.controller.debuggees.breakpoints.list
       parameters:
         - description: Identifies the debuggee.
@@ -147,10 +147,14 @@ paths:
           name: debuggeeId
           required: true
           type: string
-        - description: 'A wait token that, if specified, blocks the method call until the list of active breakpoints has changed, or a server selected timeout has expired. The value should be set from the last returned response. The error code google.rpc.Code.ABORTED is returned on wait timeout (which does not require the agent to re-register with the server)'
+        - description: 'A wait token that, if specified, blocks the method call until the list of active breakpoints has changed, or a server selected timeout has expired. The value should be set from the last returned response.'
           in: query
           name: waitToken
           type: string
+        - description: 'If set to `true`, returns `google.rpc.Code.OK` status and sets the `wait_expired` response field to `true` when the server-selected timeout has expired (recommended). If set to `false`, returns `google.rpc.Code.ABORTED` status when the server-selected timeout has expired (deprecated).'
+          in: query
+          name: successOnTimeout
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -192,7 +196,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
     put:
-      description: "Updates the breakpoint state or mutable fields. The entire Breakpoint protobuf must be sent back to the controller. Updates to active breakpoint fields are only allowed if the new value does not change the breakpoint specification. Updates to the 'location', 'condition' and 'expression' fields should not alter the breakpoint semantics. They are restricted to changes such as canonicalizing a value or snapping the location to the correct line of code."
+      description: 'Updates the breakpoint state or mutable fields. The entire Breakpoint message must be sent back to the controller service. Updates to active breakpoint fields are only allowed if the new value does not change the breakpoint specification. Updates to the `location`, `condition` and `expression` fields should not alter the breakpoint semantics. These may only make changes such as canonicalizing a value or snapping the location to the correct line of code.'
       operationId: clouddebugger.controller.debuggees.breakpoints.update
       parameters:
         - description: Identifies the debuggee being debugged.
@@ -225,11 +229,11 @@ paths:
       description: Lists all the debuggees that the user can set breakpoints to.
       operationId: clouddebugger.debugger.debuggees.list
       parameters:
-        - description: Set to the project number of the Google Cloud Platform to list the debuggees that are part of that project.
+        - description: Project number of a Google Cloud project whose debuggees to list.
           in: query
           name: project
           type: string
-        - description: 'When set to true the result includes all debuggees, otherwise only debugees that are active.'
+        - description: 'When set to `true`, the result includes all debuggees. Otherwise, the result includes only debuggees that are active.'
           in: query
           name: includeInactive
           type: boolean
@@ -260,19 +264,19 @@ paths:
       - $ref: '#/parameters/$.xgafv'
   '/v2/debugger/debuggees/{debuggeeId}/breakpoints':
     get:
-      description: Lists all breakpoints of the debuggee that the user has access to.
+      description: Lists all breakpoints for the debuggee.
       operationId: clouddebugger.debugger.debuggees.breakpoints.list
       parameters:
-        - description: The debuggee id to list breakpoint from.
+        - description: ID of the debuggee whose breakpoints to list.
           in: path
           name: debuggeeId
           required: true
           type: string
-        - description: 'When set to true the response includes the list of breakpoints set by any user, otherwise only breakpoints set by the caller.'
+        - description: 'When set to `true`, the response includes the list of breakpoints set by any user. Otherwise, it includes only breakpoints set by the caller.'
           in: query
           name: includeAllUsers
           type: boolean
-        - description: 'When set to true the response includes active and inactive breakpoints, otherwise only active breakpoints are returned.'
+        - description: 'When set to `true`, the response includes active and inactive breakpoints. Otherwise, it includes only active breakpoints.'
           in: query
           name: includeInactive
           type: boolean
@@ -283,11 +287,11 @@ paths:
           in: query
           name: action.value
           type: string
-        - description: 'When set to true the response breakpoints will be stripped of the results fields: stack_frames, evaluated_expressions and variable_table.'
+        - description: 'When set to `true`, the response breakpoints are stripped of the results fields: `stack_frames`, `evaluated_expressions` and `variable_table`.'
           in: query
           name: stripResults
           type: boolean
-        - description: 'A wait token that, if specified, blocks the call until the breakpoints list has changed, or a server selected timeout has expired. The value should be set from the last response to ListBreakpoints. The error code ABORTED is returned on wait timeout, which should be called again with the same wait_token.'
+        - description: 'A wait token that, if specified, blocks the call until the breakpoints list has changed, or a server selected timeout has expired. The value should be set from the last response. The error code `google.rpc.Code.ABORTED` (RPC) is returned on wait timeout, which should be called again with the same `wait_token`.'
           in: query
           name: waitToken
           type: string
@@ -335,7 +339,7 @@ paths:
       description: Sets the breakpoint to the debuggee.
       operationId: clouddebugger.debugger.debuggees.breakpoints.set
       parameters:
-        - description: The debuggee id to set the breakpoint to.
+        - description: ID of the debuggee where the breakpoint is to be set.
           in: path
           name: debuggeeId
           required: true
@@ -360,12 +364,12 @@ paths:
       description: Deletes the breakpoint from the debuggee.
       operationId: clouddebugger.debugger.debuggees.breakpoints.delete
       parameters:
-        - description: The debuggee id to delete the breakpoint from.
+        - description: ID of the debuggee whose breakpoint to delete.
           in: path
           name: debuggeeId
           required: true
           type: string
-        - description: The breakpoint to delete.
+        - description: ID of the breakpoint to delete.
           in: path
           name: breakpointId
           required: true
@@ -385,12 +389,12 @@ paths:
       description: Gets breakpoint information.
       operationId: clouddebugger.debugger.debuggees.breakpoints.get
       parameters:
-        - description: The debuggee id to get the breakpoint from.
+        - description: ID of the debuggee whose breakpoint to get.
           in: path
           name: debuggeeId
           required: true
           type: string
-        - description: The breakpoint to get.
+        - description: ID of the breakpoint to get.
           in: path
           name: breakpointId
           required: true
@@ -421,33 +425,48 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
 definitions:
+  AliasContext:
+    description: An alias to a repo revision.
+    properties:
+      kind:
+        description: The alias kind.
+        enum:
+          - ANY
+          - FIXED
+          - MOVABLE
+          - OTHER
+        type: string
+      name:
+        description: The alias name.
+        type: string
+    type: object
   Breakpoint:
     description: 'Represents the breakpoint specification, status and results.'
     properties:
       action:
-        description: Defines what to do when the breakpoint hits.
+        description: Action that the agent should perform when the code at the breakpoint location is hit.
         enum:
           - CAPTURE
           - LOG
         type: string
       condition:
-        description: A condition to trigger the breakpoint. The condition is a compound boolean expression composed using expressions in a programming language at the source location.
+        description: Condition that triggers the breakpoint. The condition is a compound boolean expression composed using expressions in a programming language at the source location.
         type: string
       createTime:
-        description: The time this breakpoint was created by the server. The value is in seconds resolution.
+        description: Time this breakpoint was created by the server in seconds resolution.
         type: string
       evaluatedExpressions:
-        description: "The evaluated expressions' values at breakpoint time. The evaluated expressions appear in exactly the same order they are listed in the 'expressions' field. The 'name' field holds the original expression text, the 'value'/'members' field holds the result of the evaluated expression. If the expression can not be evaluated, an error text is placed in the value field."
+        description: 'Values of evaluated expressions at breakpoint time. The evaluated expressions appear in exactly the same order they are listed in the `expressions` field. The `name` field holds the original expression text, the `value` or `members` field holds the result of the evaluated expression. If the expression cannot be evaluated, the `status` inside the `Variable` will indicate an error and contain the error text.'
         items:
           $ref: '#/definitions/Variable'
         type: array
       expressions:
-        description: 'A list of read-only expressions to evaluate at the breakpoint location. The expressions are composed using expressions in the programming language at the source location. If the breakpoint action is "LOG", the evaluated expressions are included in log statements.'
+        description: 'List of read-only expressions to evaluate at the breakpoint location. The expressions are composed using expressions in the programming language at the source location. If the breakpoint action is `LOG`, the evaluated expressions are included in log statements.'
         items:
           type: string
         type: array
       finalTime:
-        description: The time this breakpoint was finalized as seen by the server. The value is in seconds resolution.
+        description: Time this breakpoint was finalized as seen by the server in seconds resolution.
         type: string
       id:
         description: 'Breakpoint identifier, unique in the scope of the debuggee.'
@@ -457,16 +476,16 @@ definitions:
         type: boolean
       location:
         $ref: '#/definitions/SourceLocation'
-        description: The breakpoint source location.
+        description: Breakpoint source location.
       logLevel:
-        description: 'Indicates the severity of the log. Only relevant when action is "LOG".'
+        description: Indicates the severity of the log. Only relevant when action is `LOG`.
         enum:
           - INFO
           - WARNING
           - ERROR
         type: string
       logMessageFormat:
-        description: 'Only relevant when action is "LOG". Defines the message to log when the breakpoint hits. The message may include parameter placeholders "$0", "$1", etc. These placeholders will be replaced with the evaluated value of the appropriate expression. Expressions not referenced in "log_message_format" will not be logged. Example: "Poisonous message received, id = $0, count = $1" with expressions = [ "message.id", "message.count" ].'
+        description: 'Only relevant when action is `LOG`. Defines the message to log when the breakpoint hits. The message may include parameter placeholders `$0`, `$1`, etc. These placeholders are replaced with the evaluated value of the appropriate expression. Expressions not referenced in `log_message_format` are not logged. Example: `Message received, id = $0, count = $1` with `expressions` = `[ message.id, message.count ]`.'
         type: string
       stackFrames:
         description: The stack at breakpoint time.
@@ -475,12 +494,12 @@ definitions:
         type: array
       status:
         $ref: '#/definitions/StatusMessage'
-        description: "Breakpoint status. The status includes an error flag and a human readable message. This field will usually stay unset. The message can be either informational or error. Nevertheless, clients should always display the text message back to the user. Error status of a breakpoint indicates complete failure. Example (non-final state): 'Still loading symbols...' Examples (final state): 'Failed to insert breakpoint' referring to breakpoint, 'Field f not found in class C' referring to condition, ..."
+        description: 'Breakpoint status. The status includes an error flag and a human readable message. This field is usually unset. The message can be either informational or an error message. Regardless, clients should always display the text message back to the user. Error status indicates complete failure of the breakpoint. Example (non-final state): `Still loading symbols...` Examples (final state): * `Invalid line number` referring to location * `Field f not found in class C` referring to condition'
       userEmail:
-        description: The e-mail of the user that created this breakpoint
+        description: E-mail address of the user that created this breakpoint
         type: string
       variableTable:
-        description: "The variable_table exists to aid with computation, memory and network traffic optimization. It enables storing a variable once and reference it from multiple variables, including variables stored in the variable_table itself. For example, the object 'this', which may appear at many levels of the stack, can have all of it's data stored once in this table. The stack frame variables then would hold only a reference to it. The variable var_index field is an index into this repeated field. The stored objects are nameless and get their name from the referencing variable. The effective variable is a merge of the referencing veariable and the referenced variable."
+        description: 'The `variable_table` exists to aid with computation, memory and network traffic optimization. It enables storing a variable once and reference it from multiple variables, including variables stored in the `variable_table` itself. For example, the same `this` object, which may appear at many levels of the stack, can have all of its data stored once in this table. The stack frame variables then would hold only a reference to it. The variable `var_table_index` field is an index into this repeated field. The stored objects are nameless and get their name from the referencing variable. The effective variable is a merge of the referencing veariable and the referenced variable.'
         items:
           $ref: '#/definitions/Variable'
         type: array
@@ -488,6 +507,9 @@ definitions:
   CloudRepoSourceContext:
     description: A CloudRepoSourceContext denotes a particular revision in a cloud repo (a repo hosted by the Google Cloud Platform).
     properties:
+      aliasContext:
+        $ref: '#/definitions/AliasContext'
+        description: 'An alias, which may be a branch or tag.'
       aliasName:
         description: 'The name of an alias (branch, tag, etc.).'
         type: string
@@ -519,22 +541,27 @@ definitions:
         description: The ID of the workspace.
     type: object
   Debuggee:
-    description: "Represents the application to debug. The application may include one or more replicated processes executing the same code. Each of these processes is attached with a debugger agent, carrying out the debugging commands. The agents attached to the same debuggee are identified by using exactly the same fields' values when registering."
+    description: 'Represents the application to debug. The application may include one or more replicated processes executing the same code. Each of these processes is attached with a debugger agent, carrying out the debugging commands. The agents attached to the same debuggee are identified by using exactly the same field values when registering.'
     properties:
       agentVersion:
-        description: 'Version ID of the agent release. The version ID is structured as following: "domain/type/vmajor.minor" (for example "google.com/gcp-java/v1.1").'
+        description: 'Version ID of the agent release. The version ID is structured as following: `domain/type/vmajor.minor` (for example `google.com/gcp-java/v1.1`).'
         type: string
       description:
-        description: 'A human readable description of the debuggee. Recommended to include human readable project name, environment name, and version information .'
+        description: 'Human readable description of the debuggee. Including a human-readable project name, environment name and version information is recommended.'
         type: string
+      extSourceContexts:
+        description: References to the locations and revisions of the source code used in the deployed application. Contexts describing a remote repo related to the source code have a `category` label of `remote_repo`. Source snapshot source contexts have a `category` of `snapshot`.
+        items:
+          $ref: '#/definitions/ExtendedSourceContext'
+        type: array
       id:
-        description: Debuggee unique identifer generated by the server.
+        description: Unique identifier for the debuggee generated by the controller service.
         type: string
       isDisabled:
-        description: 'If set to true, indicates that the agent should disable itself and detach from the debuggee.'
+        description: 'If set to `true`, indicates that the agent should disable itself and detach from the debuggee.'
         type: boolean
       isInactive:
-        description: If set to true indicates that the debuggee has not been seen by the Controller service in the last active time period (defined by the server).
+        description: 'If set to `true`, indicates that the debuggee is considered as inactive by the Controller service.'
         type: boolean
       labels:
         additionalProperties:
@@ -542,28 +569,40 @@ definitions:
         description: 'A set of custom debuggee properties, populated by the agent, to be displayed to the user.'
         type: object
       project:
-        description: The project the debuggee is associated with. Use the project number when registering a Google Cloud Platform project.
+        description: Project the debuggee is associated with. Use the project number when registering a Google Cloud Platform project.
         type: string
       sourceContexts:
-        description: Repository snapshots containing the source code of the project.
+        description: 'References to the locations and revisions of the source code used in the deployed application. NOTE: This field is deprecated. Consumers should use `ext_source_contexts` if it is not empty. Debug agents should populate both this field and `ext_source_contexts`.'
         items:
           $ref: '#/definitions/SourceContext'
         type: array
       status:
         $ref: '#/definitions/StatusMessage'
-        description: Human readable message to be displayed to the user about this debuggee. Absense of this field indicates no message. The message can be either informational or error.
+        description: Human readable message to be displayed to the user about this debuggee. Absence of this field indicates no status. The message can be either informational or an error status.
       uniquifier:
-        description: "The debuggee uniqifier within the project. Any string that id the application within the project can be used. Recomended to include environement and version or build id's."
+        description: Debuggee uniquifier within the project. Any string that identifies the application within the project can be used. Including environment and version or build IDs is recommended.
         type: string
     type: object
   Empty:
     description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`.'
     type: object
+  ExtendedSourceContext:
+    description: An ExtendedSourceContext is a SourceContext combined with additional details describing the context.
+    properties:
+      context:
+        $ref: '#/definitions/SourceContext'
+        description: Any source context.
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels with user defined metadata.
+        type: object
+    type: object
   FormatMessage:
     description: Represents a message with parameters.
     properties:
       format:
-        description: "Format template of the message. The \"format\" uses placeholders \"$0\", \"$1\", etc. to reference parameters. \"$$\" can be used to denote the '$' character. Examples: \"Failed to load '$0' which helps debug $1 the first time it is loaded. Again, $0 is very important.\" \"Please pay $$10 to use $0 instead of $1.\""
+        description: "Format template for the message. The `format` uses placeholders `$0`, `$1`, etc. to reference parameters. `$$` can be used to denote the `$` character. Examples: * `Failed to load '$0' which helps debug $1 the first time it is loaded. Again, $0 is very important.` * `Please pay $$10 to use $0 instead of $1.`"
         type: string
       parameters:
         description: Optional parameters to be embedded into the message.
@@ -574,6 +613,9 @@ definitions:
   GerritSourceContext:
     description: A SourceContext referring to a Gerrit project.
     properties:
+      aliasContext:
+        $ref: '#/definitions/AliasContext'
+        description: 'An alias, which may be a branch or tag.'
       aliasName:
         description: 'The name of an alias (branch, tag, etc.).'
         type: string
@@ -588,11 +630,11 @@ definitions:
         type: string
     type: object
   GetBreakpointResponse:
-    description: The response of getting breakpoint information.
+    description: Response for getting breakpoint information.
     properties:
       breakpoint:
         $ref: '#/definitions/Breakpoint'
-        description: "The complete breakpoint state. The fields 'id' and 'location' are guranteed to be set."
+        description: Complete breakpoint state. The fields `id` and `location` are guaranteed to be set.
     type: object
   GitSourceContext:
     description: A GitSourceContext denotes a particular revision in a third party Git repository (e.g. GitHub).
@@ -605,34 +647,37 @@ definitions:
         type: string
     type: object
   ListActiveBreakpointsResponse:
-    description: The response of listing active breakpoints.
+    description: Response for listing active breakpoints.
     properties:
       breakpoints:
-        description: "List of all active breakpoints. The fields 'id' and 'location' are guranteed to be set on each breakpoint."
+        description: List of all active breakpoints. The fields `id` and `location` are guaranteed to be set on each breakpoint.
         items:
           $ref: '#/definitions/Breakpoint'
         type: array
       nextWaitToken:
         description: A wait token that can be used in the next method call to block until the list of breakpoints changes.
         type: string
+      waitExpired:
+        description: The `wait_expired` field is set to true by the server when the request times out and the field `success_on_timeout` is set to true.
+        type: boolean
     type: object
   ListBreakpointsResponse:
-    description: The response of listing breakpoints.
+    description: Response for listing breakpoints.
     properties:
       breakpoints:
-        description: "List of all breakpoints with complete state. The fields 'id' and 'location' are guranteed to be set on each breakpoint."
+        description: List of all breakpoints with complete state. The fields `id` and `location` are guaranteed to be set on each breakpoint.
         items:
           $ref: '#/definitions/Breakpoint'
         type: array
       nextWaitToken:
-        description: A wait token that can be used in the next call to ListBreakpoints to block until the list of breakpoints has changes.
+        description: A wait token that can be used in the next call to `list` (REST) or `ListBreakpoints` (RPC) to block until the list of breakpoints has changes.
         type: string
     type: object
   ListDebuggeesResponse:
-    description: The response of listing debuggees.
+    description: Response for listing debuggees.
     properties:
       debuggees:
-        description: "The list of debuggees accessible to the calling user. Note that the description field is the only human readable field that should be displayed to the user. The fields 'debuggee.id' and 'description' are guranteed to be set on each debuggee."
+        description: List of debuggees accessible to the calling user. Note that the `description` field is the only human readable field that should be displayed to the user. The fields `debuggee.id` and `description` fields are guaranteed to be set on each debuggee.
         items:
           $ref: '#/definitions/Debuggee'
         type: array
@@ -648,18 +693,18 @@ definitions:
         type: string
     type: object
   RegisterDebuggeeRequest:
-    description: The request to register a debuggee.
+    description: Request to register a debuggee.
     properties:
       debuggee:
         $ref: '#/definitions/Debuggee'
-        description: "The debuggee information to register. The fields 'project', 'uniquifier', 'description' and 'agent_version' of the debuggee must be set."
+        description: 'Debuggee information to register. The fields `project`, `uniquifier`, `description` and `agent_version` of the debuggee must be set.'
     type: object
   RegisterDebuggeeResponse:
-    description: The response of registering a debuggee.
+    description: Response for registering a debuggee.
     properties:
       debuggee:
         $ref: '#/definitions/Debuggee'
-        description: "The debuggee resource. The field 'id' is guranteed to be set (in addition to the echoed fields)."
+        description: Debuggee resource. The field `id` is guranteed to be set (in addition to the echoed fields).
     type: object
   RepoId:
     description: A unique identifier for a cloud repo.
@@ -672,11 +717,11 @@ definitions:
         type: string
     type: object
   SetBreakpointResponse:
-    description: The response of setting a breakpoint.
+    description: Response for setting a breakpoint.
     properties:
       breakpoint:
         $ref: '#/definitions/Breakpoint'
-        description: "The breakpoint resource. The field 'id' is guranteed to be set (in addition to the echoed fileds)."
+        description: Breakpoint resource. The field `id` is guaranteed to be set (in addition to the echoed fileds).
     type: object
   SourceContext:
     description: A SourceContext is a reference to a tree of files. A SourceContext together with a path point to a unique revision of a single file or directory.
@@ -698,35 +743,35 @@ definitions:
     description: Represents a location in the source code.
     properties:
       line:
-        description: "The line inside the file (first line value is '1')."
+        description: Line inside the file. The first line in the file has the value `1`.
         format: int32
         type: integer
       path:
-        description: A path to the source file within the source context of the target binary.
+        description: Path to the source file within the source context of the target binary.
         type: string
     type: object
   StackFrame:
     description: Represents a stack frame context.
     properties:
       arguments:
-        description: The set of arguments passed to this function Note that this might not be populated for all stack frames.
+        description: Set of arguments passed to this function. Note that this might not be populated for all stack frames.
         items:
           $ref: '#/definitions/Variable'
         type: array
       function:
-        description: The unmangled function name at the call site.
+        description: Demangled function name at the call site.
         type: string
       locals:
-        description: The set of local variables at the stack frame location. Note that this might not be populated for all stack frames.
+        description: Set of local variables at the stack frame location. Note that this might not be populated for all stack frames.
         items:
           $ref: '#/definitions/Variable'
         type: array
       location:
         $ref: '#/definitions/SourceLocation'
-        description: The source location of the call site.
+        description: Source location of the call site.
     type: object
   StatusMessage:
-    description: 'Represents a contextual status message. The message can indicate an error or informational status, and refer to specific parts of the containing object. For example, the Breakpoint.status field can indicate an error referring to the BREAKPOINT_SOURCE_LOCATION with the message "Location not found".'
+    description: 'Represents a contextual status message. The message can indicate an error or informational status, and refer to specific parts of the containing object. For example, the `Breakpoint.status` field can indicate an error referring to the `BREAKPOINT_SOURCE_LOCATION` with the message `Location not found`.'
     properties:
       description:
         $ref: '#/definitions/FormatMessage'
@@ -746,36 +791,39 @@ definitions:
         type: string
     type: object
   UpdateActiveBreakpointRequest:
-    description: The request to update an active breakpoint.
+    description: Request to update an active breakpoint.
     properties:
       breakpoint:
         $ref: '#/definitions/Breakpoint'
-        description: "The updated breakpoint information. The field 'id' must be set."
+        description: "Updated breakpoint information. The field 'id' must be set."
     type: object
   UpdateActiveBreakpointResponse:
-    description: The response of updating an active breakpoint. The message is defined to allow future extensions.
+    description: Response for updating an active breakpoint. The message is defined to allow future extensions.
     type: object
   Variable:
     description: |-
-      Represents a variable or an argument possibly of a compound object type. 1. A simple variable such as, int x = 5 is represented as: { name: "x", value: "5" } 2. A compound object such as, struct T { int m1; int m2; }; T x = { 3, 7 }; is represented as: { name: "x", members { name: "m1", value: "3" }, members { name: "m2", value: "7" } } 3. A pointer where the pointee was captured such as, T x = { 3, 7 }; T* p = &x; is represented as: { name: "p", value: "0x00500500", members { name: "m1", value: "3" }, members { name: "m2", value: "7" } } 4. A pointer where the pointee was not captured or is inaccessible such as, T* p = new T; is represented as: { name: "p", value: "0x00400400", members { value: "" } } the value text should decribe the reason for the missing value. such as , ,
-      . note that a null pointer should not have members. 5. An unnamed value such as, int* p = new int(7); is represented as, { name: "p", value: "0x00500500", members { value: "7" } } 6. An unnamed pointer where the pointee was not captured such as, int* p = new int(7); int** pp = &p; is represented as: { name: "pp", value: "0x00500500", members { value: "0x00400400", members { value: "" } } } To optimize computation, memory and network traffic, variables that repeat in the output multiple times can be stored once in a shared variable table and be referenced using the var_index field. The variables stored in the shared table are nameless and are essentially a partition of the complete variable. To reconstruct the complete variable merge the referencing variable with the referenced variable. When using the shared variable table, variables can be represented as: T x = { 3, 7 }; T* p = &x; T& r = x; are represented as, { name: "x", var_index: 3 } { name: "p", value "0x00500500", var_index: 3 } { name: "r", var_index: 3 } with shared variable table entry #3: { members { name: "m1", value: "3" }, members { name: "m2", value: "7" } } Note that the pointer address is stored with the referencing variable and not with the referenced variable, to allow the referenced variable to be shared between pointer and references.
+      Represents a variable or an argument possibly of a compound object type. Note how the following variables are represented: 1) A simple variable: int x = 5 { name: "x", value: "5", type: "int" } // Captured variable 2) A compound object: struct T { int m1; int m2; }; T x = { 3, 7 }; { // Captured variable name: "x", type: "T", members { name: "m1", value: "3", type: "int" }, members { name: "m2", value: "7", type: "int" } } 3) A pointer where the pointee was captured: T x = { 3, 7 }; T* p = &x; { // Captured variable name: "p", type: "T*", value: "0x00500500", members { name: "m1", value: "3", type: "int" }, members { name: "m2", value: "7", type: "int" } } 4) A pointer where the pointee was not captured: T* p = new T; { // Captured variable name: "p", type: "T*", value: "0x00400400" status { is_error: true, description { format: "unavailable" } } } The status should describe the reason for the missing value, such as ``, ``, `
+      `. Note that a null pointer should not have members. 5) An unnamed value: int* p = new int(7); { // Captured variable name: "p", value: "0x00500500", type: "int*", members { value: "7", type: "int" } } 6) An unnamed pointer where the pointee was not captured: int* p = new int(7); int** pp = &p; { // Captured variable name: "pp", value: "0x00500500", type: "int**", members { value: "0x00400400", type: "int*" status { is_error: true, description: { format: "unavailable" } } } } } To optimize computation, memory and network traffic, variables that repeat in the output multiple times can be stored once in a shared variable table and be referenced using the `var_table_index` field. The variables stored in the shared table are nameless and are essentially a partition of the complete variable. To reconstruct the complete variable, merge the referencing variable with the referenced variable. When using the shared variable table, the following variables: T x = { 3, 7 }; T* p = &x; T& r = x; { name: "x", var_table_index: 3, type: "T" } // Captured variables { name: "p", value "0x00500500", type="T*", var_table_index: 3 } { name: "r", type="T&", var_table_index: 3 } { // Shared variable table entry #3: members { name: "m1", value: "3", type: "int" }, members { name: "m2", value: "7", type: "int" } } Note that the pointer address is stored with the referencing variable and not with the referenced variable. This allows the referenced variable to be shared between pointers and references. The type field is optional. The debugger agent may or may not support it.
     properties:
       members:
-        description: The members contained or pointed to by the variable.
+        description: Members contained or pointed to by the variable.
         items:
           $ref: '#/definitions/Variable'
         type: array
       name:
-        description: 'The name of the variable, if any.'
+        description: 'Name of the variable, if any.'
         type: string
       status:
         $ref: '#/definitions/StatusMessage'
-        description: 'Status associated with the variable. This field will usually stay unset. A status of a single variable only applies to that variable or expression. The rest of breakpoint data still remains valid. Variables might be reported in error state even when breakpoint is not in final state. The message may refer to variable name with "refers_to" set to "VARIABLE_NAME". Alternatively "refers_to" will be set to "VARIABLE_VALUE". In either case variable value and members will be unset. Example of error message applied to name: "Invalid expression syntax". Example of information message applied to value: "Not captured". Examples of error message applied to value: "Malformed string", "Field f not found in class C", "Null pointer dereference".'
+        description: 'Status associated with the variable. This field will usually stay unset. A status of a single variable only applies to that variable or expression. The rest of breakpoint data still remains valid. Variables might be reported in error state even when breakpoint is not in final state. The message may refer to variable name with `refers_to` set to `VARIABLE_NAME`. Alternatively `refers_to` will be set to `VARIABLE_VALUE`. In either case variable value and members will be unset. Example of error message applied to name: `Invalid expression syntax`. Example of information message applied to value: `Not captured`. Examples of error message applied to value: * `Malformed string`, * `Field f not found in class C` * `Null pointer dereference`'
+      type:
+        description: 'Variable type (e.g. `MyClass`). If the variable is split with `var_table_index`, `type` goes next to `value`. The interpretation of a type is agent specific. It is recommended to include the dynamic type rather than a static type of an object.'
+        type: string
       value:
-        description: The simple value of the variable.
+        description: Simple value of the variable.
         type: string
       varTableIndex:
-        description: This is a reference to a variable in the shared variable table. More than one variable can reference the same variable in the table. The var_index field is an index into variable_table in Breakpoint.
+        description: Reference to a variable in the shared variable table. More than one variable can reference the same variable in the table. The `var_table_index` field is an index into `variable_table` in Breakpoint.
         format: int32
         type: integer
     type: object

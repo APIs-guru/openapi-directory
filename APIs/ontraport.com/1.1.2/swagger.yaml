@@ -526,6 +526,38 @@ paths:
       summary: Get a list of existing object types
       tags:
         - objects
+  /objects/saveorupdate:
+    post:
+      description: 'Create an object with given data or merge if the unique field matches another in the database. Object type is a required parameters, but other parameters are optional and depend on the object type. We have provided optional parameters as examples for updating a contact object. When using this in your application, invalid parameters will be ignored.'
+      operationId: createormergeObject
+      parameters:
+        - $ref: '#/parameters/objectIdParamFormData'
+          required: true
+        - description: First name for object
+          in: formData
+          name: firstname
+          type: string
+        - description: Last name for object
+          in: formData
+          name: lastname
+          type: string
+        - description: Email address for object
+          in: formData
+          name: email
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful object query
+          schema:
+            $ref: '#/definitions/Response'
+            type: object
+        '400':
+          description: Invalid objectID
+      summary: Create or Merge an Object
+      tags:
+        - objects
   /objects/tag:
     delete:
       description: 'Remove a Tag from an Object. When adding and removing tags, either <b>ids</b> or <b>group_ids</b> must be given.'

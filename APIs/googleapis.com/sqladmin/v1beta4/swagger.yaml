@@ -1528,6 +1528,14 @@ definitions:
       etag:
         description: HTTP 1.1 Entity tag for the resource.
         type: string
+      failoverReplica:
+        description: The name and status of the failover replica. Only applies to Second Generation instances.
+        properties:
+          available:
+            type: boolean
+          name:
+            type: string
+        type: object
       instanceType:
         description: |-
           The instance type. This can be one of the following.
@@ -1691,6 +1699,9 @@ definitions:
       name:
         description: 'This is the name of the flag. Flag names always use underscores, not hyphens, e.g. max_allowed_packet'
         type: string
+      requiresRestart:
+        description: Indicates whether changing this flag will trigger a database restart. Only applicable to Second Generation instances.
+        type: boolean
       type:
         description: 'The type of the flag. Flags are typed to being BOOLEAN, STRING, INTEGER or NONE. NONE is used for flags which do not take a value, such as skip_grant_tables.'
         type: string
@@ -2051,6 +2062,9 @@ definitions:
       dataDiskSizeGb:
         description: 'The size of data disk, in GB. Only supported for 2nd Generation instances. The data disk size minimum is 10GB.'
         format: int64
+        type: string
+      dataDiskType:
+        description: The type of data disk. Only supported for 2nd Generation instances. The default type is SSD.
         type: string
       databaseFlags:
         description: The database flags passed to the instance at startup.
