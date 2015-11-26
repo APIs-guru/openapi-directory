@@ -28,6 +28,8 @@ set -o pipefail
 
   ../scripts/collection.js banner
 
+  cp ../scripts/apis_guru_swagger.yaml api/v1/swagger.yaml
+
   git add .
   git commit -m 'Deployed to Github Pages'
 

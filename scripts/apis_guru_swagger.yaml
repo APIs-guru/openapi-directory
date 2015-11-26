@@ -1,0 +1,80 @@
+swagger: "2.0"
+schemes:
+  - https
+  - http
+host: apis-guru.github.io
+basePath: /api-models/api/v1
+info:
+  version: "1.0"
+  title: "APIs.guru"
+  description: "Wikipedia for APIs"
+  contact:
+    name: "APIs.guru"
+    url: http://APIs.guru
+    email: "founders@apis.guru"
+  license:
+    name: "CC0 1.0"
+    url: "https://github.com/APIs-guru/api-models#licenses"
+  x-logo:
+    url: https://apis-guru.github.io/api-models/branding/logo_vertical.svg
+externalDocs:
+  url: https://github.com/APIs-guru/api-models/blob/master/API.md
+produces:
+  - application/json
+security: []
+paths:
+  /list.json:
+    get:
+     operationId: listAPIs
+     description: List all APIs in collection
+     responses:
+      200:
+        description: OK
+        schema:
+          $ref: "#/definitions/APIs"
+definitions:
+  APIs:
+    description: |
+      List of API details.
+      It consist of JSON object with API IDs(`<provider>[:<service>]`) as keys.
+    type: object
+    additionalProperties:
+      $ref: "#/definitions/API"
+  API:
+    description: Meta information about API
+    type: object
+    properties:
+      added:
+        description: Timestamp when this API was first added to collection
+        type: string
+        format: date-time
+      preferred:
+        description: Recomended version
+        type: string
+      versions:
+        description: List supported versions of API
+        type: object
+        additionalProperties:
+          $ref: "#/definitions/ApiVersion"
+  ApiVersion:
+    type: object
+    properties:
+      added:
+        description: Timestamp when this version was added
+        type: string
+        format: date-time
+      updated:
+        description: Timestamp when this version was updated
+        type: string
+        format: date-time
+      swaggerUrl:
+        description: URL of Swagger spec in JSON format
+        type: string
+        format: url
+      swagerYamlUrl:
+        description: URL of Swagger spec in YAML format
+        type: string
+        format: url
+      info:
+        description: Copy of `info` section from Swagger spec
+        type: object
