@@ -1,0 +1,69 @@
+swagger: '2.0'
+schemes:
+  - http
+host: xkcd.com
+basePath: /
+info:
+  description: 'Webcomic of romance, sarcasm, math, and language.'
+  title: XKCD
+  version: 1.0.0
+  x-logo:
+    url: 'http://imgs.xkcd.com/static/terrible_small_logo.png'
+  x-origin:
+    format: raml
+    url: 'https://raw.githubusercontent.com/raml-apis/XKCD/production/api.raml'
+    version: '0.8'
+  x-providerName: xkcd.com
+externalDocs:
+  url: 'https://xkcd.com/json.html'
+securityDefinitions: {}
+paths:
+  /info.0.json:
+    get:
+      description: |
+        Fetch current comic and metadata.
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/comic'
+  '/{comicId}/info.0.json':
+    get:
+      description: |
+        Fetch comics and metadata  by comic id.
+      parameters:
+        - in: path
+          name: comicId
+          required: true
+          type: number
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/comic'
+definitions:
+  comic:
+    properties:
+      alt:
+        type: string
+      day:
+        type: string
+      img:
+        type: string
+      link:
+        type: string
+      month:
+        type: string
+      news:
+        type: string
+      num:
+        type: number
+      safe_title:
+        type: string
+      title:
+        type: string
+      transcript:
+        type: string
+      year:
+        type: string
+    type: object
