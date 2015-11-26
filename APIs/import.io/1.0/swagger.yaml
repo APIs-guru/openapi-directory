@@ -1244,28 +1244,11 @@ definitions:
       url:
         type: string
     type: object
-  DataPackageSnapshotExcludedSource:
-    properties:
-      reason:
-        type: string
-      sourceId:
-        format: uuid
-        type: string
-    type: object
   DataPackageSnapshotResponse:
     properties:
-      excludedSources:
-        items:
-          $ref: '#/definitions/DataPackageSnapshotExcludedSource'
-        type: array
       guid:
         format: uuid
         type: string
-      includedSourceIds:
-        items:
-          format: uuid
-          type: string
-        type: array
       packageId:
         format: uuid
         type: string
