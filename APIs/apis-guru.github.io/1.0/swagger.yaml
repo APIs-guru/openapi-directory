@@ -1,0 +1,85 @@
+swagger: '2.0'
+schemes:
+  - https
+  - http
+host: apis-guru.github.io
+basePath: /api-models/api/v1
+info:
+  contact:
+    email: founders@apis.guru
+    name: APIs.guru
+    url: 'http://APIs.guru'
+  description: Wikipedia for APIs
+  license:
+    name: CC0 1.0
+    url: 'https://github.com/APIs-guru/api-models#licenses'
+  title: APIs.guru
+  version: '1.0'
+  x-logo:
+    url: 'https://apis-guru.github.io/api-models/branding/logo_vertical.svg'
+  x-origin:
+    format: swagger
+    url: 'http://apis-guru.github.io/api-models/api/v1/swagger.yaml'
+    version: '2.0'
+  x-providerName: apis-guru.github.io
+externalDocs:
+  url: 'https://github.com/APIs-guru/api-models/blob/master/API.md'
+produces:
+  - application/json
+security: []
+paths:
+  /list.json:
+    get:
+      description: List all APIs in collection
+      operationId: listAPIs
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/APIs'
+definitions:
+  API:
+    description: Meta information about API
+    properties:
+      added:
+        description: Timestamp when this API was first added to collection
+        format: date-time
+        type: string
+      preferred:
+        description: Recomended version
+        type: string
+      versions:
+        additionalProperties:
+          $ref: '#/definitions/ApiVersion'
+        description: List supported versions of API
+        type: object
+    type: object
+  APIs:
+    additionalProperties:
+      $ref: '#/definitions/API'
+    description: |
+      List of API details.
+      It consist of JSON object with API IDs(`<provider>[:<service>]`) as keys.
+    type: object
+  ApiVersion:
+    properties:
+      added:
+        description: Timestamp when this version was added
+        format: date-time
+        type: string
+      info:
+        description: Copy of `info` section from Swagger spec
+        type: object
+      swagerYamlUrl:
+        description: URL of Swagger spec in YAML format
+        format: url
+        type: string
+      swaggerUrl:
+        description: URL of Swagger spec in JSON format
+        format: url
+        type: string
+      updated:
+        description: Timestamp when this version was updated
+        format: date-time
+        type: string
+    type: object
