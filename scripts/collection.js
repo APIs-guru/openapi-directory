@@ -556,7 +556,12 @@ function writeSpec(source, type, exPatch, callback) {
       if (error)
         return callback(error, result);
 
-      patchSwagger(swagger, exPatch);
+      try {
+        patchSwagger(swagger, exPatch);
+      }
+      catch (e) {
+        callback(e, result);
+      }
       result.swagger = swagger;
 
       function done(errors, warnings) {
