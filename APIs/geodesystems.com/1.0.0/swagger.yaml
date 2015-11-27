@@ -13236,6 +13236,11 @@ paths:
           name: search.db_propertydb.price_sqft
           required: false
           type: number
+        - description: Location
+          in: query
+          name: search.db_propertydb.location
+          required: false
+          type: string
       produces:
         - application/json
         - application/xml
