@@ -46,7 +46,7 @@ definitions:
         format: date-time
         type: string
       preferred:
-        description: Recomended version
+        description: Recommended version
         type: string
       versions:
         additionalProperties:
@@ -70,12 +70,12 @@ definitions:
       info:
         description: Copy of `info` section from Swagger spec
         type: object
-      swagerYamlUrl:
-        description: URL of Swagger spec in YAML format
-        format: url
-        type: string
       swaggerUrl:
         description: URL of Swagger spec in JSON format
+        format: url
+        type: string
+      swaggerYamlUrl:
+        description: URL of Swagger spec in YAML format
         format: url
         type: string
       updated:
