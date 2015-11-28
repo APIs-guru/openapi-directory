@@ -13,12 +13,15 @@ info:
     Current limitations:
       * Instagram service does not support [cross origin headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS)
       for security reasons, therefore it is not possible to use Swagger UI and make API calls directly from browser.
-      * Modification API requests (`POST`, `DELETE`) require additional security [scopes](https://instagram.com/developer/authentication/#scope)
-      that are [not available](http://stackoverflow.com/questions/20580535/instagram-api-do-scopes-work-with-oauth2-implicit-authentication-flow/30834127#30834127)
-      for new clients.
-      * Consider the [Instagram limitations](https://instagram.com/developer/limits/) for API calls.
+      * Modification API requests (`POST`, `DELETE`) require additional security [scopes](https://instagram.com/developer/authorization/)
+      that are available for Apps [created on or after Nov 17, 2015](http://instagram.com/developer/review/) and
+      started in [Sandbox Mode](http://instagram.com/developer/sandbox/).
+      * Consider the [Instagram limitations](https://instagram.com/developer/limits/) for API calls that depends on App Mode.
 
-    Last update: 2015-06-19
+    **Warning:** For Apps [created on or after Nov 17, 2015](http://instagram.com/developer/changelog/) API responses
+    containing media objects no longer return the `data` field in `comments` and `likes` nodes.
+
+    Last update: 2015-11-28
   termsOfService: 'https://instagram.com/about/legal/terms/api/'
   title: Instagram
   version: 1.0.0
@@ -43,9 +46,11 @@ securityDefinitions:
     authorizationUrl: 'https://instagram.com/oauth/authorize/'
     flow: implicit
     scopes:
-      basic: "to read data on a user's behalf, e.g. recent media, following lists (granted by default)"
-      comments: "to create or delete comments on a user's behalf"
+      basic: "to read a user's profile info and media (granted by default)"
+      comments: "to post and delete comments on a user's behalf"
+      follower_list: to read the list of followers and followed-by users
       likes: "to like and unlike media on a user's behalf"
+      public_content: to read any public profile info and media on a user’s behalf
       relationships: "to follow and unfollow accounts on a user's behalf"
     type: oauth2
 tags:
@@ -68,6 +73,7 @@ tags:
 paths:
   '/geographies/{geo-id}/media/recent':
     get:
+      deprecated: true
       description: |
         Get recent media from a geography subscription that you created.
 
@@ -77,7 +83,7 @@ paths:
         can be used in this query. To backfill photos from the location covered by this geography, use the
         [media search endpoint](https://instagram.com/developer/endpoints/media/).
 
-        **Warrning:** Actual response of this end-point is [not documented](https://instagram.com/developer/endpoints/geographies/).
+        **Warning:** [Deprecated](http://instagram.com/developer/changelog/) for Apps created **on or after** Nov 17, 2015
       parameters:
         - description: The geography ID.
           in: path
@@ -156,7 +162,7 @@ paths:
       security:
         - api_key: []
         - instagram_auth:
-            - basic
+            - public_content
       summary: Search for a location by geographic coordinate.
       tags:
         - locations
@@ -177,7 +183,7 @@ paths:
       security:
         - api_key: []
         - instagram_auth:
-            - basic
+            - public_content
       summary: Get information about a location.
       tags:
         - locations
@@ -220,14 +226,17 @@ paths:
       security:
         - api_key: []
         - instagram_auth:
-            - basic
+            - public_content
       summary: Get a list of recent media objects from a given location.
       tags:
         - locations
   /media/popular:
     get:
+      deprecated: true
       description: |
         Get a list of what media is most popular at the moment. Can return mix of `image` and `video` types.
+
+        **Warning:** [Deprecated](http://instagram.com/developer/changelog/) for Apps created **on or after** Nov 17, 2015
       responses:
         '200':
           description: Found media resources (without likes information).
@@ -284,7 +293,7 @@ paths:
       security:
         - api_key: []
         - instagram_auth:
-            - basic
+            - public_content
       summary: Search for media in a given area.
       tags:
         - media
@@ -310,6 +319,7 @@ paths:
         - api_key: []
         - instagram_auth:
             - basic
+            - public_content
       summary: Get information about a media object.
       tags:
         - media
@@ -336,6 +346,7 @@ paths:
         - api_key: []
         - instagram_auth:
             - basic
+            - public_content
       summary: Get information about a media object.
       tags:
         - media
@@ -357,6 +368,7 @@ paths:
         - api_key: []
         - instagram_auth:
             - basic
+            - public_content
       summary: Get a list of recent comments on a media object.
       tags:
         - comments
@@ -387,7 +399,6 @@ paths:
       security:
         - api_key: []
         - instagram_auth:
-            - basic
             - comments
       summary: Create a comment on a media object.
       tags:
@@ -415,7 +426,6 @@ paths:
       security:
         - api_key: []
         - instagram_auth:
-            - basic
             - comments
       summary: Remove a comment.
       tags:
@@ -437,7 +447,6 @@ paths:
       security:
         - api_key: []
         - instagram_auth:
-            - basic
             - likes
       summary: Remove a like on this media by the current user.
       tags:
@@ -459,6 +468,7 @@ paths:
         - api_key: []
         - instagram_auth:
             - basic
+            - public_content
       summary: Get a list of users who have liked this media.
       tags:
         - likes
@@ -478,7 +488,6 @@ paths:
       security:
         - api_key: []
         - instagram_auth:
-            - basic
             - likes
       summary: Set a like on this media by the current user.
       tags:
@@ -500,7 +509,7 @@ paths:
       security:
         - api_key: []
         - instagram_auth:
-            - basic
+            - public_content
       summary: Search for tags by name.
       tags:
         - tags
@@ -521,7 +530,7 @@ paths:
       security:
         - api_key: []
         - instagram_auth:
-            - basic
+            - public_content
       summary: Get information about a tag object.
       tags:
         - tags
@@ -559,7 +568,7 @@ paths:
       security:
         - api_key: []
         - instagram_auth:
-            - basic
+            - public_content
       summary: Get a list of recently tagged media.
       tags:
         - tags
@@ -591,7 +600,11 @@ paths:
         - users
   /users/self/feed:
     get:
-      description: "See the authenticated user's feed."
+      deprecated: true
+      description: |
+        See the authenticated user's feed.
+
+        **Warning:** [Deprecated](http://instagram.com/developer/changelog/) for Apps created **on or after** Nov 17, 2015
       parameters:
         - description: Count of media to return.
           in: query
@@ -660,7 +673,7 @@ paths:
       security:
         - api_key: []
         - instagram_auth:
-            - basic
+            - follower_list
       summary: "List the users who have requested this user's permission to follow."
       tags:
         - relationships
@@ -669,6 +682,8 @@ paths:
       description: |
         Get basic information about a user. To get information about the owner of the access token, you can use
         **self** instead of the `user-id`.
+
+        Security scope `public_content` is required to read information about other users.
       parameters:
         - description: 'The ID of a user to get information about, or **self** to retrieve information about authenticated user.'
           in: path
@@ -686,6 +701,7 @@ paths:
         - api_key: []
         - instagram_auth:
             - basic
+            - public_content
       summary: Get basic information about a user.
       tags:
         - users
@@ -708,7 +724,7 @@ paths:
       security:
         - api_key: []
         - instagram_auth:
-            - basic
+            - follower_list
       summary: Get the list of users this user is followed by.
       tags:
         - relationships
@@ -731,7 +747,7 @@ paths:
       security:
         - api_key: []
         - instagram_auth:
-            - basic
+            - follower_list
       summary: Get the list of users this user follows.
       tags:
         - relationships
@@ -740,6 +756,8 @@ paths:
       description: |
         Get the most recent media published by a user. To get the most recent media published by the owner of the
         access token, you can use **self** instead of the `user-id`.
+
+        Security scope `public_content` is required to read information about other users.
       parameters:
         - description: 'The ID of a user to get recent media of, or **self** to retrieve media of authenticated user.'
           in: path
@@ -782,6 +800,7 @@ paths:
         - api_key: []
         - instagram_auth:
             - basic
+            - public_content
       summary: Get the most recent media published by a user.
       tags:
         - users
@@ -802,7 +821,7 @@ paths:
       security:
         - api_key: []
         - instagram_auth:
-            - basic
+            - follower_list
       summary: Get information about a relationship to another user.
       tags:
         - relationships
@@ -834,7 +853,6 @@ paths:
       security:
         - api_key: []
         - instagram_auth:
-            - basic
             - relationships
       summary: Modify the relationship between the current user and the target user.
       tags:
@@ -874,7 +892,7 @@ definitions:
         description: 'Nember of comments available, data does not necessary contain all comments'
         type: integer
       data:
-        description: Collection of comment entries
+        description: 'Collection of comment entries; **warning:** deprecated for Apps [created on or after Nov 17, 2015](http://instagram.com/developer/changelog/)'
         items:
           $ref: '#/definitions/CommentEntry'
         type: array
@@ -932,7 +950,7 @@ definitions:
         description: 'Nember of likes available, data does not necessary contain all comments'
         type: integer
       data:
-        description: Collection of users who liked
+        description: 'Collection of users who liked; **warning:** deprecated for Apps [created on or after Nov 17, 2015](http://instagram.com/developer/changelog/)'
         items:
           $ref: '#/definitions/UserShortInfo'
         type: array
@@ -1159,7 +1177,7 @@ definitions:
   TagPaginationInfo:
     properties:
       deprecation_warning:
-        description: 'The deprication warrning, if information is available'
+        description: 'The deprication warning, if information is available'
         type: string
       min_tag_id:
         description: The min ID of a tag for the next page
