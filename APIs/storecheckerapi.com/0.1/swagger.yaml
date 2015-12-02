@@ -1,5 +1,8 @@
-basePath: /
+swagger: '2.0'
+schemes:
+  - http
 host: www.storecheckerapi.com
+basePath: /
 info:
   description: We are an API that allows anyone to check if a site is an e-commerce store.
   title: StoreCheckerAPI
@@ -11,6 +14,9 @@ info:
     url: 'http://www.storecheckerapi.com/v1/swagger_doc.json'
     version: '1.2'
   x-providerName: storecheckerapi.com
+tags:
+  - name: ping
+  - name: is_ecommerce_store
 paths:
   /v1/is_ecommerce_store.json:
     get:
@@ -22,11 +28,8 @@ paths:
           name: website
           required: true
           type: string
-        - description: >
-            <p>Optional. The regex to test (instead of the standard ecommerce
-            identifiers. Useful for e-commerce stores in other languages than
-            English. Returns status = ‘success’ if completed successfully and
-            data = ‘<result>'.</result></p>
+        - description: |
+            <p>Optional. The regex to test (instead of the standard ecommerce identifiers. Useful for e-commerce stores in other languages than English. Returns status = ‘success’ if completed successfully and data = ‘<result>'.</result></p>
           in: query
           name: custom_identifiers
           required: false
@@ -52,9 +55,3 @@ paths:
       summary: Returns whether the system is up.
       tags:
         - ping
-schemes:
-  - http
-swagger: '2.0'
-tags:
-  - name: ping
-  - name: is_ecommerce_store

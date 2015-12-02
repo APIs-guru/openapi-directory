@@ -248,6 +248,11 @@ definitions:
     properties:
       address:
         $ref: '#/definitions/Address'
+      allowed_vehicles:
+        description: array of allowed vehicle ids
+        items:
+          type: string
+        type: array
       duration:
         description: 'duration of service, i.e. time in ms the corresponding activity takes'
         format: int64
@@ -284,6 +289,11 @@ definitions:
     type: object
   Shipment:
     properties:
+      allowed_vehicles:
+        description: array of allowed vehicle ids
+        items:
+          type: string
+        type: array
       delivery:
         $ref: '#/definitions/Stop'
       id:

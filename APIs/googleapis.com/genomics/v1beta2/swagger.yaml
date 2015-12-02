@@ -1542,6 +1542,10 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/VariantSet'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/genomics'
       tags:
         - variantsets
   /variantsets/search:

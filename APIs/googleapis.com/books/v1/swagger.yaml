@@ -1634,6 +1634,13 @@ paths:
           in: query
           name: source
           type: string
+        - collectionFormat: multi
+          description: List of target ids used for experiments or user segments
+          in: query
+          items:
+            type: string
+          name: targetIds
+          type: array
       responses:
         '200':
           description: Successful response
