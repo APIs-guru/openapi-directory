@@ -1,0 +1,230 @@
+definitions:
+  commits:
+    items:
+      properties:
+        commit:
+          committer:
+            - properties:
+                date:
+                  description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
+                  type: string
+                email:
+                  type: string
+                name:
+                  type: string
+              type: object
+            - 0
+            - 0
+          message:
+            - type: string
+            - 0
+            - 0
+          properties:
+            committer:
+              - properties:
+                  date:
+                    description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
+                    type: string
+                  email:
+                    type: string
+                  name:
+                    type: string
+                type: object
+            message:
+              - type: string
+            tree:
+              - properties:
+                  sha:
+                    type: string
+                  url:
+                    type: string
+                type: object
+            type:
+              - object
+              - 0
+              - 0
+          tree:
+            - properties:
+                sha:
+                  type: string
+                url:
+                  type: string
+              type: object
+            - 0
+            - 0
+          type:
+            - object
+  contributorsStats:
+    items:
+      author:
+        - avatar_url:
+            type: string
+          gravatar_id:
+            type: string
+          id:
+            type: integer
+          login:
+            type: string
+          url:
+            type: string
+        - 0
+        - 0
+      properties:
+        - author:
+            properties:
+              avatar_url:
+                type: string
+              gravatar_id:
+                type: string
+              id:
+                type: integer
+              login:
+                type: string
+              url:
+                type: string
+            type: object
+          total:
+            description: The Total number of commits authored by the contributor.
+            type: integer
+          weeks:
+            items:
+              properties:
+                a:
+                  description: Number of additions.
+                  type: integer
+                c:
+                  description: Number of commits.
+                  type: integer
+                d:
+                  description: Number of deletions.
+                  type: integer
+                w:
+                  description: Start of the week.
+                  type: string
+              type: object
+            type: array
+      total:
+        - description: The Total number of commits authored by the contributor.
+          type: integer
+        - 0
+        - 0
+      type:
+        - array
+        - object
+      weeks:
+        - - properties:
+              a:
+                description: Number of additions.
+                type: integer
+              c:
+                description: Number of commits.
+                type: integer
+              d:
+                description: Number of deletions.
+                type: integer
+              w:
+                description: Start of the week.
+                type: string
+            type: object
+        - 0
+        - 0
+  deleteFile:
+    properties:
+      commit:
+        properties:
+          committer:
+            date:
+              - type: string
+              - 0
+              - 0
+            email:
+              - type: string
+              - 0
+              - 0
+            name:
+              - type: string
+              - 0
+              - 0
+            properties:
+              - date:
+                  type: string
+                email:
+                  type: string
+                name:
+                  type: string
+  editTeam:
+    properties:
+      permission:
+        enum:
+          - - pull
+            - push
+            - admin
+        values:
+          - - pull
+            - push
+            - admin
+          - 0
+          - 0
+  languages:
+    additionalProperties:
+      - type: integer
+    patternProperties:
+      - '.*':
+          type: integer
+      - 0
+      - 0
+  refs:
+    items:
+      - properties:
+          object:
+            properties:
+              sha:
+                type: string
+              type:
+                type: string
+              url:
+                type: string
+            type: object
+          ref:
+            type: string
+          url:
+            type: string
+        type: object
+    references:
+      - - properties:
+            object:
+              properties:
+                sha:
+                  type: string
+                type:
+                  type: string
+                url:
+                  type: string
+              type: object
+            ref:
+              type: string
+            url:
+              type: string
+          type: object
+      - 0
+      - 0
+  trees:
+    properties:
+      tree:
+        items:
+          properties:
+            oneOf:
+              - items:
+                  sha:
+                    description: SHA1 checksum ID of the object in the tree.
+                    type: string
+                type: array
+              - 0
+              - 0
+  user-emails:
+    item:
+      - type: string
+      - 0
+      - 0
+    items:
+      - type: string
