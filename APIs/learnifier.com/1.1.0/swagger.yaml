@@ -1093,9 +1093,9 @@ definitions:
         type: boolean
       homeOrg:
         description: The primary organization for the user. Must match the id of an Organization Unit.
-        example: '1234'
+        example: 1234
         format: int64
-        type: number
+        type: integer
       lastName:
         description: The last name (surname) of the user
         example: Doe
@@ -1322,12 +1322,12 @@ definitions:
         type: boolean
       activitiesCompleted:
         description: The number of activities completed
-        example: '3'
+        example: 3
         format: int64
         type: number
       activitiesTotal:
         description: The total number of activities
-        example: '5'
+        example: 5
         format: int64
         type: number
       errorMessage:
@@ -1564,9 +1564,9 @@ definitions:
         type: boolean
       homeOrg:
         description: The primary organization for the user. Must match the id of an Organization Unit.
-        example: '1234'
+        example: 1234
         format: int64
-        type: number
+        type: integer
       id:
         description: The id of the user this participation belongs to
         example: 81590981-1e05-4fd5-aa15-15bc4b06cf7f
