@@ -1,0 +1,827 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.healthcare.gov
+basePath: /
+x-hasEquivalentPaths: true
+info:
+  title: Healthcare
+  version: 1.0.0
+  x-logo:
+    url: 'https://www.healthcare.gov/images/logo.png'
+  x-origin:
+    format: raml
+    url: 'https://raw.githubusercontent.com/raml-apis/HealthCare/production/api.raml'
+    version: '0.8'
+  x-providerName: healthcare.gov
+  x-unofficialSpec: true
+externalDocs:
+  url: 'https://www.healthcare.gov/developers/'
+securityDefinitions: {}
+paths:
+  '/api/articles{mediaTypeExtension}':
+    get:
+      description: Returns pages content.
+      parameters:
+        - description: Omiting the param causes html to be returned.
+          enum:
+            - .json
+          in: path
+          name: mediaTypeExtension
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/articlesList'
+        '404':
+          description: Resource not found.
+  '/api/blog{mediaTypeExtension}':
+    get:
+      description: Returns pages content.
+      parameters:
+        - description: Omiting the param causes html to be returned.
+          enum:
+            - .json
+          in: path
+          name: mediaTypeExtension
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/blogList'
+        '404':
+          description: Resource not found.
+  '/api/glossary{mediaTypeExtension}':
+    get:
+      description: Returns pages content.
+      parameters:
+        - description: Omiting the param causes html to be returned.
+          enum:
+            - .json
+          in: path
+          name: mediaTypeExtension
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/glossaryList'
+        '404':
+          description: Resource not found.
+  '/api/questions{mediaTypeExtension}':
+    get:
+      description: Returns pages content.
+      parameters:
+        - description: Omiting the param causes html to be returned.
+          enum:
+            - .json
+          in: path
+          name: mediaTypeExtension
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/questionsList'
+        '404':
+          description: Resource not found.
+  '/api/states{mediaTypeExtension}':
+    get:
+      description: Returns pages content.
+      parameters:
+        - description: Omiting the param causes html to be returned.
+          enum:
+            - .json
+          in: path
+          name: mediaTypeExtension
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/statesList'
+        '404':
+          description: Resource not found.
+  '/api/topics{mediaTypeExtension}':
+    get:
+      description: Returns pages content.
+      parameters:
+        - description: Omiting the param causes html to be returned.
+          enum:
+            - .json
+          in: path
+          name: mediaTypeExtension
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/topicsList'
+        '404':
+          description: Resource not found.
+  '/blog/{pageName}{mediaTypeExtension}':
+    get:
+      description: Returns pages content.
+      parameters:
+        - description: Omiting the param causes html to be returned.
+          enum:
+            - .json
+          in: path
+          name: mediaTypeExtension
+          required: true
+          type: string
+        - in: path
+          name: pageName
+          required: true
+          type: string
+      produces:
+        - application/html
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/blogPage'
+        '404':
+          description: Resource not found.
+  '/es/blog/{pageName}{mediaTypeExtension}':
+    get:
+      description: Returns pages content.
+      parameters:
+        - description: Omiting the param causes html to be returned.
+          enum:
+            - .json
+          in: path
+          name: mediaTypeExtension
+          required: true
+          type: string
+        - in: path
+          name: pageName
+          required: true
+          type: string
+      produces:
+        - application/html
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/blogPage'
+        '404':
+          description: Resource not found.
+  '/es/glossary/{pageName}{mediaTypeExtension}':
+    get:
+      description: Returns pages content.
+      parameters:
+        - description: Omiting the param causes html to be returned.
+          enum:
+            - .json
+          in: path
+          name: mediaTypeExtension
+          required: true
+          type: string
+        - in: path
+          name: pageName
+          required: true
+          type: string
+      produces:
+        - application/html
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/glossaryPage'
+        '404':
+          description: Resource not found.
+  '/es/question/{pageName}{mediaTypeExtension}':
+    get:
+      description: Returns pages content.
+      parameters:
+        - description: Omiting the param causes html to be returned.
+          enum:
+            - .json
+          in: path
+          name: mediaTypeExtension
+          required: true
+          type: string
+        - in: path
+          name: pageName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/questionPage'
+        '404':
+          description: Resource not found.
+  '/es/{pageName}{mediaTypeExtension}':
+    get:
+      description: Returns pages content.
+      parameters:
+        - description: Omiting the param causes html to be returned.
+          enum:
+            - .json
+          in: path
+          name: mediaTypeExtension
+          required: true
+          type: string
+        - in: path
+          name: pageName
+          required: true
+          type: string
+      produces:
+        - application/html
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/page'
+        '404':
+          description: Resource not found.
+  '/es/{stateName}{mediaTypeExtension}':
+    get:
+      description: Returns pages content.
+      parameters:
+        - description: Omiting the param causes html to be returned.
+          enum:
+            - .json
+          in: path
+          name: mediaTypeExtension
+          required: true
+          type: string
+        - in: path
+          name: stateName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/statePage'
+        '404':
+          description: Resource not found.
+  '/glossary/{pageName}{mediaTypeExtension}':
+    get:
+      description: Returns pages content.
+      parameters:
+        - description: Omiting the param causes html to be returned.
+          enum:
+            - .json
+          in: path
+          name: mediaTypeExtension
+          required: true
+          type: string
+        - in: path
+          name: pageName
+          required: true
+          type: string
+      produces:
+        - application/html
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/glossaryPage'
+        '404':
+          description: Resource not found.
+  '/question/{pageName}{mediaTypeExtension}':
+    get:
+      description: Returns pages content.
+      parameters:
+        - description: Omiting the param causes html to be returned.
+          enum:
+            - .json
+          in: path
+          name: mediaTypeExtension
+          required: true
+          type: string
+        - in: path
+          name: pageName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/questionPage'
+        '404':
+          description: Resource not found.
+  '/{pageName}{mediaTypeExtension}':
+    get:
+      description: Returns pages content.
+      parameters:
+        - description: Omiting the param causes html to be returned.
+          enum:
+            - .json
+          in: path
+          name: mediaTypeExtension
+          required: true
+          type: string
+        - in: path
+          name: pageName
+          required: true
+          type: string
+      produces:
+        - application/html
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/page'
+        '404':
+          description: Resource not found.
+  '/{stateName}{mediaTypeExtension}':
+    get:
+      description: Returns pages content.
+      parameters:
+        - description: Omiting the param causes html to be returned.
+          enum:
+            - .json
+          in: path
+          name: mediaTypeExtension
+          required: true
+          type: string
+        - in: path
+          name: stateName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/statePage'
+        '404':
+          description: Resource not found.
+definitions:
+  articlesList:
+    properties:
+      articles:
+        items:
+          properties:
+            bite:
+              type: string
+            categories:
+              items:
+                items:
+                  type: string
+                type: array
+              type: array
+            content:
+              type: string
+            date:
+              type: string
+            excerpt:
+              type: string
+            featured:
+              type: boolean
+            id:
+              type: string
+            lang:
+              type: string
+            layout:
+              type: string
+            meta-description:
+              type: string
+            meta-title:
+              type: string
+            path:
+              type: string
+            published:
+              type: boolean
+            related:
+              items:
+                items:
+                  type: string
+                type: array
+              type: array
+            seo-keywords:
+              type: string
+            sort:
+              type: number
+            tags:
+              items:
+                items: {}
+                type: array
+              type: array
+            title:
+              type: string
+            title-short:
+              type: string
+            topics:
+              items:
+                items:
+                  type: string
+                type: array
+              type: array
+            url:
+              type: string
+          type: object
+        type: array
+    type: object
+  blogList:
+    properties:
+      blog:
+        items:
+          items:
+            properties:
+              categories:
+                items:
+                  items:
+                    type: string
+                  type: array
+                type: array
+              content:
+                type: string
+              date:
+                type: string
+              lang:
+                type: string
+              layout:
+                type: string
+              meta-description:
+                type: string
+              meta-title:
+                type: string
+              published:
+                type: boolean
+              seo-keywords:
+                type: string
+              sort:
+                type: number
+              tags:
+                items:
+                  items: {}
+                  type: array
+                type: array
+              title:
+                type: string
+              topics:
+                items:
+                  items:
+                    type: string
+                  type: array
+                type: array
+              url:
+                type: string
+            type: object
+          type: array
+        type: array
+    type: object
+  blogPage:
+    properties:
+      categories:
+        items:
+          items:
+            type: string
+          type: array
+        type: array
+      content:
+        type: string
+      date:
+        type: string
+      excerpt:
+        type: string
+      id:
+        type: string
+      lang:
+        type: string
+      layout:
+        type: string
+      meta-description:
+        type: string
+      meta-title:
+        type: string
+      path:
+        type: string
+      published:
+        type: boolean
+      seo-keywords:
+        type: string
+      sort:
+        type: number
+      tags:
+        items:
+          items: {}
+          type: array
+        type: array
+      title:
+        type: string
+      topics:
+        items:
+          items:
+            type: string
+          type: array
+        type: array
+      url:
+        type: string
+    type: object
+  glossaryList:
+    properties:
+      glossary:
+        items:
+          properties:
+            categories:
+              items:
+                type: string
+              type: array
+            content:
+              type: string
+            date:
+              type: string
+            excerpt:
+              type: string
+            id:
+              type: string
+            lang:
+              type: string
+            layout:
+              type: string
+            path:
+              type: string
+            published:
+              type: boolean
+            sort:
+              type: number
+            tags:
+              items:
+                type: string
+              type: array
+            title:
+              type: string
+            url:
+              type: string
+          type: object
+        type: array
+    type: object
+  glossaryPage:
+    properties:
+      categories:
+        items:
+          type: string
+        type: array
+      content:
+        type: string
+      date:
+        type: string
+      excerpt:
+        type: string
+      id:
+        type: string
+      lang:
+        type: string
+      layout:
+        type: string
+      path:
+        type: string
+      published:
+        type: boolean
+      sort:
+        type: number
+      tags:
+        items:
+          type: string
+        type: array
+      title:
+        type: string
+      url:
+        type: string
+    type: object
+  page:
+    properties:
+      categories:
+        items:
+          items: {}
+          type: array
+        type: array
+      content:
+        type: string
+      date:
+        type: string
+      excerpt:
+        type: string
+      experience:
+        type: string
+      id:
+        type: string
+      lang:
+        type: string
+      layout:
+        type: string
+      path:
+        type: string
+      published:
+        type: boolean
+      sort:
+        type: number
+      tags:
+        items:
+          items: {}
+          type: array
+        type: array
+      title:
+        type: string
+      url:
+        type: string
+    type: object
+  questionPage:
+    properties:
+      categories:
+        items:
+          type: string
+        type: array
+      content:
+        type: string
+      date:
+        type: string
+      excerpt:
+        type: string
+      id:
+        type: string
+      lang:
+        type: string
+      path:
+        type: string
+      published:
+        type: boolean
+      sort:
+        type: number
+      tags:
+        items:
+          type: string
+        type: array
+      title:
+        type: string
+      url:
+        type: string
+    type: object
+  questionsList:
+    properties:
+      questions:
+        items:
+          properties:
+            categories:
+              items:
+                type: string
+              type: array
+            content:
+              type: string
+            date:
+              type: string
+            excerpt:
+              type: string
+            id:
+              type: string
+            lang:
+              type: string
+            path:
+              type: string
+            published:
+              type: boolean
+            sort:
+              type: number
+            tags:
+              items:
+                type: string
+              type: array
+            title:
+              type: string
+            url:
+              type: string
+          type: object
+        type: array
+    type: object
+  statePage:
+    properties:
+      categories:
+        items:
+          items: {}
+          type: array
+        type: array
+      content:
+        type: string
+      date:
+        type: string
+      excerpt:
+        type: string
+      id:
+        type: string
+      lang:
+        type: string
+      path:
+        type: string
+      sort:
+        type: number
+      stateurl:
+        type: string
+      tags:
+        items:
+          items:
+            type: string
+          type: array
+        type: array
+      title:
+        type: string
+      url:
+        type: string
+    type: object
+  statesList:
+    properties:
+      states:
+        items:
+          items:
+            properties:
+              categories:
+                items:
+                  items: {}
+                  type: array
+                type: array
+              content:
+                type: string
+              date:
+                type: string
+              excerpt:
+                type: string
+              id:
+                type: string
+              lang:
+                type: string
+              path:
+                type: string
+              sort:
+                type: number
+              stateurl:
+                type: string
+              tags:
+                items:
+                  items:
+                    type: string
+                  type: array
+                type: array
+              title:
+                type: string
+              url:
+                type: string
+            type: object
+          type: array
+        type: array
+    type: object
+  topicsList:
+    properties:
+      topics:
+        items:
+          properties:
+            articleorder:
+              items:
+                items:
+                  type: string
+                type: array
+              type: array
+            categories:
+              items:
+                items: {}
+                type: array
+              type: array
+            content:
+              type: string
+            date:
+              type: string
+            excerpt:
+              type: string
+            id:
+              type: string
+            lang:
+              type: string
+            layout:
+              type: string
+            meta-description:
+              type: string
+            meta-title:
+              type: string
+            order:
+              type: number
+            path:
+              type: string
+            published:
+              type: boolean
+            sort:
+              type: number
+            tags:
+              items:
+                items:
+                  type: string
+                type: array
+              type: array
+            title:
+              type: string
+            url:
+              type: string
+          type: object
+        type: array
+    type: object
