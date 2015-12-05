@@ -1,0 +1,1635 @@
+swagger: '2.0'
+schemes:
+  - https
+host: slack.com
+basePath: /api
+info:
+  description: A messaging app for teams
+  title: Slack
+  version: 1.0.0
+  x-logo:
+    url: 'http://static.tumblr.com/wvuzcz9/LlKncfhmp/slack_logo_240.png'
+  x-origin:
+    format: raml
+    url: 'https://raw.githubusercontent.com/raml-apis/Slack/production/slack.raml'
+    version: '0.8'
+  x-providerName: slack.com
+  x-unofficialSpec: true
+externalDocs:
+  url: 'https://api.slack.com/'
+securityDefinitions:
+  oauth_2_0:
+    authorizationUrl: 'https://slack.com/oauth/authorize'
+    description: ''
+    flow: accessCode
+    scopes:
+      identify: ''
+      post: ''
+      read: ''
+    tokenUrl: 'https://slack.com/api/oauth.access'
+    type: oauth2
+paths:
+  /channels.history:
+    get:
+      description: Fetches history of messages and events from a channel.
+      parameters:
+        - description: Channel to fetch history for.
+          in: query
+          name: channel
+          required: true
+          type: string
+        - default: now
+          description: Timestamp of the oldest recent seen message.
+          in: query
+          name: latest
+          type: string
+        - description: Timestamp of the latest previously seen message.
+          in: query
+          name: oldest
+          type: string
+        - default: 100
+          description: 'Number of messages to return, between 1 and 1000.'
+          in: query
+          name: count
+          type: number
+        - in: query
+          name: has_more
+          type: boolean
+        - in: query
+          name: is_limited
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/channelsHistory'
+  /channels.info:
+    get:
+      description: Gets information about a channel.
+      parameters:
+        - description: Channel to fetch history for.
+          in: query
+          name: channel
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/searchAll'
+  /channels.invite:
+    get:
+      description: Invites a user to a channel.
+      parameters:
+        - description: Channel to fetch history for.
+          in: query
+          name: channel
+          required: true
+          type: string
+        - description: User to invite to channel.
+          in: query
+          name: user
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/channelsInvite'
+  /channels.join:
+    get:
+      description: 'Joins a channel, creating it if needed.'
+      parameters:
+        - description: Name of channel to join
+          in: query
+          name: name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/channelsInvite'
+  /channels.leave:
+    get:
+      description: Leaves a channel.
+      parameters:
+        - description: Channel to fetch history for.
+          in: query
+          name: channel
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ok'
+  /channels.list:
+    get:
+      description: Lists all channels in a Slack team.
+      parameters:
+        - description: "Don't return archived channels."
+          in: query
+          name: exclude_archived
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/channels'
+  /channels.mark:
+    get:
+      description: Sets the read cursor in a channel.
+      parameters:
+        - description: Channel to fetch history for.
+          in: query
+          name: channel
+          required: true
+          type: string
+        - description: Timestamp of the most recently seen message.
+          in: query
+          name: ts
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ok'
+  /channels.setPurpose:
+    get:
+      description: Sets the purpose for a channel.
+      parameters:
+        - description: Channel to fetch history for.
+          in: query
+          name: channel
+          required: true
+          type: string
+        - description: The new purpose
+          in: query
+          name: purpose
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/purpose'
+  /channels.setTopic:
+    get:
+      description: Sets the topic for a channel.
+      parameters:
+        - description: Channel to fetch history for.
+          in: query
+          name: channel
+          required: true
+          type: string
+        - description: The new topic
+          in: query
+          name: topic
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/topic'
+  /chat.delete:
+    get:
+      description: Deletes a message.
+      parameters:
+        - description: Channel to fetch history for.
+          in: query
+          name: channel
+          required: true
+          type: string
+        - description: Timestamp of the most recently seen message.
+          in: query
+          name: ts
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/chatOk'
+  /chat.postMessage:
+    get:
+      description: Sends a message to a channel.
+      parameters:
+        - description: Channel to fetch history for.
+          in: query
+          name: channel
+          required: true
+          type: string
+        - description: Text of the message to send. See below for an explanation of formatting.
+          in: query
+          name: text
+          required: true
+          type: string
+        - description: Name of bot.
+          in: query
+          name: username
+          type: string
+        - description: Change how messages are treated. See below.
+          in: query
+          name: parse
+          type: string
+        - description: Find and link channel names and usernames.
+          in: query
+          name: link_names
+          type: string
+        - description: Pass 1 to enable unfurling of primarily text-based content.
+          in: query
+          name: unfurl_links
+          type: string
+        - description: URL to an image to use as the icon for this message
+          in: query
+          name: icon_url
+          type: string
+        - description: emoji to use as the icon for this message. Overrides icon_url.
+          in: query
+          name: icon_emoji
+          type: string
+        - description: Structured message attachments.
+          in: query
+          name: attachments
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/chatOk'
+  /chat.update:
+    get:
+      description: Updates a message.
+      parameters:
+        - description: Channel to fetch history for.
+          in: query
+          name: channel
+          required: true
+          type: string
+        - description: Text of the message to send. See below for an explanation of formatting.
+          in: query
+          name: text
+          required: true
+          type: string
+        - description: Timestamp of the most recently seen message.
+          in: query
+          name: ts
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/chatUpdate'
+  /emoji.list:
+    get:
+      description: Lists custom emoji for a team.
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/emojiList'
+  /files.info:
+    get:
+      description: Gets information about a team file.
+      parameters:
+        - description: File to fetch info for
+          in: query
+          name: file
+          required: true
+          type: string
+        - default: 100
+          description: Number of items to return per page.
+          in: query
+          name: count
+          type: number
+        - default: 1
+          description: Page number of results to return.
+          in: query
+          name: page
+          type: number
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/fileObj'
+  /files.list:
+    get:
+      description: Lists and filters team files.
+      parameters:
+        - description: File to fetch info for
+          in: query
+          name: file
+          required: true
+          type: string
+        - description: Filter files created by a single user.
+          in: query
+          name: user
+          type: string
+        - description: Filter files created after this timestamp (inclusive).
+          in: query
+          name: ts_from
+          type: string
+        - default: now
+          description: Filter files created before this timestamp (inclusive).
+          in: query
+          name: ts_to
+          type: string
+        - description: 'You can pass multiple values in the types argument, like types=posts,snippets.The default value is all, which does not filter the list.'
+          enum:
+            - pdfs
+            - zips
+            - posts
+            - images
+            - snippets
+            - gdocs
+            - all
+          in: query
+          name: types
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/files'
+  /files.upload:
+    get:
+      description: Uploads or creates a file.
+      parameters:
+        - description: File contents via multipart/form-data.
+          in: query
+          name: file
+          type: string
+        - description: File contents via a POST var.
+          in: query
+          name: content
+          type: string
+        - description: Slack-internal file type identifier.
+          in: query
+          name: filetype
+          type: string
+        - description: Filename of file.
+          in: query
+          name: filename
+          type: string
+        - description: Title of file.
+          in: query
+          name: title
+          type: string
+        - description: Initial comment to add to file.
+          in: query
+          name: initial_comment
+          type: string
+        - description: Comma separated list of channels to share the file into.
+          in: query
+          name: channels
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/fileObj'
+  /groups.history:
+    get:
+      description: Fetches history of messages and events from a private group.
+      parameters:
+        - description: Group to fetch history for.
+          in: query
+          name: channel
+          required: true
+          type: string
+        - default: now
+          description: Timestamp of the oldest recent seen message.
+          in: query
+          name: latest
+          type: string
+        - description: Timestamp of the latest previously seen message.
+          in: query
+          name: oldest
+          type: string
+        - default: 100
+          description: 'Number of messages to return, between 1 and 1000.'
+          in: query
+          name: count
+          type: number
+        - in: query
+          name: has_more
+          type: boolean
+        - in: query
+          name: is_limited
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/channelsHistory'
+  /groups.list:
+    get:
+      description: Lists private groups that the calling user has access to.
+      parameters:
+        - description: "Don't return archived channels."
+          in: query
+          name: exclude_archived
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/groups'
+  /groups.mark:
+    get:
+      description: Sets the read cursor in a private group.
+      parameters:
+        - description: Group to fetch history for.
+          in: query
+          name: channel
+          required: true
+          type: string
+        - description: Timestamp of the most recently seen message.
+          in: query
+          name: ts
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ok'
+  /groups.setPurpose:
+    get:
+      description: Sets the purpose for a private group.
+      parameters:
+        - description: Group to fetch history for.
+          in: query
+          name: channel
+          required: true
+          type: string
+        - description: The new purpose
+          in: query
+          name: purpose
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/purpose'
+  /groups.setTopic:
+    get:
+      description: Sets the topic for a private group.
+      parameters:
+        - description: Channel to fetch history for.
+          in: query
+          name: channel
+          required: true
+          type: string
+        - description: The new topic
+          in: query
+          name: topic
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/topic'
+  /im.history:
+    get:
+      description: Fetches history of messages and events from direct message channel.
+      parameters:
+        - description: Direct message channel to fetch history for.
+          in: query
+          name: channel
+          required: true
+          type: string
+        - default: now
+          description: Timestamp of the oldest recent seen message.
+          in: query
+          name: latest
+          type: string
+        - description: Timestamp of the latest previously seen message.
+          in: query
+          name: oldest
+          type: string
+        - default: 100
+          description: 'Number of messages to return, between 1 and 1000.'
+          in: query
+          name: count
+          type: number
+        - in: query
+          name: has_more
+          type: boolean
+        - in: query
+          name: is_limited
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/channelsHistory'
+  /im.list:
+    get:
+      description: Lists direct message channels for the calling user.
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ims'
+  /im.mark:
+    get:
+      description: Sets the read cursor in a direct message channel.
+      parameters:
+        - description: Channel to fetch history for.
+          in: query
+          name: channel
+          required: true
+          type: string
+        - description: Timestamp of the most recently seen message.
+          in: query
+          name: ts
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ok'
+  /search.all:
+    get:
+      description: Searches for messages and files matching a query.
+      parameters:
+        - description: 'Search query. May contains booleans, etc.'
+          in: query
+          name: query
+          required: true
+          type: string
+        - default: score
+          description: Return matches sorted by either score or timestamp.
+          enum:
+            - timestamp
+            - score
+          in: query
+          name: sort
+          type: string
+        - default: desc
+          description: Change sort direction to ascending (asc) or descending (desc).
+          enum:
+            - desc
+            - asc
+          in: query
+          name: sort_dir
+          type: string
+        - description: Pass a value of 1 to enable query highlight markers .
+          in: query
+          name: highlight
+          type: string
+        - default: 100
+          description: Number of items to return per page.
+          in: query
+          name: count
+          type: number
+        - default: 1
+          description: Page number of results to return.
+          in: query
+          name: page
+          type: number
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/searchAll'
+  /search.files:
+    get:
+      description: Searches for files matching a query.
+      parameters:
+        - description: 'Search query. May contains booleans, etc.'
+          in: query
+          name: query
+          required: true
+          type: string
+        - default: score
+          description: Return matches sorted by either score or timestamp.
+          enum:
+            - timestamp
+            - score
+          in: query
+          name: sort
+          type: string
+        - default: desc
+          description: Change sort direction to ascending (asc) or descending (desc).
+          enum:
+            - desc
+            - asc
+          in: query
+          name: sort_dir
+          type: string
+        - description: Pass a value of 1 to enable query highlight markers .
+          in: query
+          name: highlight
+          type: string
+        - default: 100
+          description: Number of items to return per page.
+          in: query
+          name: count
+          type: number
+        - default: 1
+          description: Page number of results to return.
+          in: query
+          name: page
+          type: number
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/searchFiles'
+  /search.messages:
+    get:
+      description: Searches for messages matching a query.
+      parameters:
+        - description: 'Search query. May contains booleans, etc.'
+          in: query
+          name: query
+          required: true
+          type: string
+        - default: score
+          description: Return matches sorted by either score or timestamp.
+          enum:
+            - timestamp
+            - score
+          in: query
+          name: sort
+          type: string
+        - default: desc
+          description: Change sort direction to ascending (asc) or descending (desc).
+          enum:
+            - desc
+            - asc
+          in: query
+          name: sort_dir
+          type: string
+        - description: Pass a value of 1 to enable query highlight markers .
+          in: query
+          name: highlight
+          type: string
+        - default: 100
+          description: Number of items to return per page.
+          in: query
+          name: count
+          type: number
+        - default: 1
+          description: Page number of results to return.
+          in: query
+          name: page
+          type: number
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/searchMessages'
+  /stars.list:
+    get:
+      description: Lists stars for a user.
+      parameters:
+        - description: Show stars by this user. Defaults to the authed user.
+          in: query
+          name: user
+          type: string
+        - default: 100
+          description: Number of items to return per page.
+          in: query
+          name: count
+          type: number
+        - default: 1
+          description: Page number of results to return.
+          in: query
+          name: page
+          type: number
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/starList'
+  /users.list:
+    get:
+      description: Lists all users in a Slack team.
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/usersList'
+definitions:
+  channalsInfo:
+    properties:
+      channel:
+        properties:
+          created:
+            type: number
+          creator:
+            type: string
+          id:
+            type: string
+          is_archived:
+            type: boolean
+          is_channel:
+            type: boolean
+          is_general:
+            type: boolean
+          is_member:
+            type: boolean
+          last_read:
+            type: string
+          latest:
+            properties:
+              attachments:
+                items:
+                  - properties:
+                      fallback:
+                        type: string
+                      from_url:
+                        type: string
+                      id:
+                        type: number
+                      image_bytes:
+                        type: number
+                      image_height:
+                        type: number
+                      image_url:
+                        type: string
+                      image_width:
+                        type: number
+                      service_name:
+                        type: string
+                      text:
+                        type: string
+                      title:
+                        type: string
+                      title_link:
+                        type: string
+                    type: object
+                type: array
+              text:
+                type: string
+              ts:
+                type: string
+              type:
+                type: string
+              user:
+                type: string
+            type: object
+          members:
+            items:
+              - type: string
+            type: array
+          name:
+            type: string
+          purpose:
+            properties:
+              creator:
+                type: string
+              last_set:
+                type: number
+              value:
+                type: string
+            type: object
+          topic:
+            properties:
+              creator:
+                type: string
+              last_set:
+                type: number
+              value:
+                type: string
+            type: object
+          unread_count:
+            type: number
+          unread_count_display:
+            type: number
+        type: object
+      ok:
+        type: boolean
+    type: object
+  channels:
+    properties:
+      channels:
+        items:
+          - properties:
+              created:
+                type: integer
+              creator:
+                type: string
+              id:
+                type: string
+              is_archived:
+                type: boolean
+              is_member:
+                type: boolean
+              members:
+                items:
+                  type: string
+                type: array
+              name:
+                type: string
+              num_members:
+                type: number
+              purpose:
+                properties:
+                  creator:
+                    type: string
+                  last_set:
+                    type: integer
+                  value:
+                    type: string
+                type: object
+              topic:
+                properties:
+                  creator:
+                    type: string
+                  last_set:
+                    type: integer
+                  value:
+                    type: string
+                type: object
+            type: object
+        type: array
+      ok:
+        type: boolean
+    type: object
+  channelsHistory:
+    properties:
+      has_more:
+        type: boolean
+      latest:
+        type: string
+      messages:
+        items:
+          - properties:
+              text:
+                type: string
+              ts:
+                type: string
+              type:
+                type: string
+              user:
+                type: string
+            type: object
+          - properties:
+              is_starred:
+                type: boolean
+              text:
+                type: string
+              ts:
+                type: string
+              type:
+                type: string
+              user:
+                type: string
+            type: object
+          - properties:
+              ts:
+                type: string
+              type:
+                type: string
+              wibblr:
+                type: boolean
+            type: object
+        type: array
+      ok:
+        type: boolean
+    type: object
+  channelsInvite:
+    properties:
+      channel:
+        properties:
+          created:
+            type: number
+          creator:
+            type: string
+          id:
+            type: string
+          is_archived:
+            type: boolean
+          is_channel:
+            type: boolean
+          is_general:
+            type: boolean
+          is_member:
+            type: boolean
+          last_read:
+            type: string
+          latest:
+            properties:
+              subtype:
+                type: string
+              text:
+                type: string
+              ts:
+                type: string
+              type:
+                type: string
+              user:
+                type: string
+            type: object
+          members:
+            items:
+              - type: string
+            type: array
+          name:
+            type: string
+          purpose:
+            properties:
+              creator:
+                type: string
+              last_set:
+                type: number
+              value:
+                type: string
+            type: object
+          topic:
+            properties:
+              creator:
+                type: string
+              last_set:
+                type: number
+              value:
+                type: string
+            type: object
+          unread_count:
+            type: number
+          unread_count_display:
+            type: number
+        type: object
+      ok:
+        type: boolean
+    type: object
+  chatOk:
+    properties:
+      channel:
+        type: string
+      ok:
+        type: boolean
+      ts:
+        type: string
+    type: object
+  chatUpdate:
+    properties:
+      channel:
+        type: string
+      ok:
+        type: boolean
+      text:
+        type: string
+      ts:
+        type: string
+    type: object
+  emojiList:
+    properties:
+      emoji:
+        properties:
+          bowtie:
+            type: string
+          shipit:
+            type: string
+          squirrel:
+            type: string
+        type: object
+      ok:
+        type: boolean
+    type: object
+  fileObj:
+    properties:
+      file:
+        type: object
+      ok:
+        type: boolean
+    type: object
+  files:
+    properties:
+      files:
+        items:
+          - properties:
+              comments_count:
+                type: number
+              created:
+                type: number
+              editable:
+                type: boolean
+              external_type:
+                type: string
+              filetype:
+                type: string
+              id:
+                type: string
+              ims:
+                items:
+                  - type: string
+                type: array
+              initial_comment:
+                properties:
+                  comment:
+                    type: string
+                  created:
+                    type: number
+                  id:
+                    type: string
+                  timestamp:
+                    type: number
+                  user:
+                    type: string
+                type: object
+              is_external:
+                type: boolean
+              is_public:
+                type: boolean
+              mimetype:
+                type: string
+              mode:
+                type: string
+              name:
+                type: string
+              permalink:
+                type: string
+              permalink_public:
+                type: string
+              pretty_type:
+                type: string
+              public_url_shared:
+                type: boolean
+              size:
+                type: number
+              timestamp:
+                type: number
+              title:
+                type: string
+              url:
+                type: string
+              url_download:
+                type: string
+              url_private:
+                type: string
+              url_private_download:
+                type: string
+              user:
+                type: string
+            type: object
+        type: array
+      ok:
+        type: boolean
+      paging:
+        properties:
+          count:
+            type: number
+          page:
+            type: number
+          pages:
+            type: number
+          total:
+            type: number
+        type: object
+    type: object
+  groups:
+    properties:
+      groups:
+        items:
+          - properties:
+              created:
+                type: number
+              creator:
+                type: string
+              id:
+                type: string
+              is_archived:
+                type: boolean
+              is_group:
+                type: boolean
+              members:
+                items:
+                  - type: string
+                type: array
+              name:
+                type: string
+              purpose:
+                properties:
+                  creator:
+                    type: string
+                  last_set:
+                    type: number
+                  value:
+                    type: string
+                type: object
+              topic:
+                properties:
+                  creator:
+                    type: string
+                  last_set:
+                    type: number
+                  value:
+                    type: string
+                type: object
+            type: object
+        type: array
+      ok:
+        type: boolean
+    type: object
+  ims:
+    properties:
+      ims:
+        items:
+          - properties:
+              created:
+                type: number
+              id:
+                type: string
+              is_user_deleted:
+                type: boolean
+              user:
+                type: string
+            type: object
+        type: array
+      ok:
+        type: boolean
+    type: object
+  ok:
+    properties:
+      ok:
+        type: boolean
+    type: object
+  purpose:
+    properties:
+      ok:
+        type: boolean
+      purpose:
+        type: string
+    type: object
+  searchAll:
+    properties:
+      channel:
+        properties:
+          created:
+            type: number
+          creator:
+            type: string
+          id:
+            type: string
+          is_archived:
+            type: boolean
+          is_channel:
+            type: boolean
+          is_general:
+            type: boolean
+          is_member:
+            type: boolean
+          last_read:
+            type: string
+          latest:
+            properties:
+              attachments:
+                items:
+                  - properties:
+                      fallback:
+                        type: string
+                      from_url:
+                        type: string
+                      id:
+                        type: number
+                      image_bytes:
+                        type: number
+                      image_height:
+                        type: number
+                      image_url:
+                        type: string
+                      image_width:
+                        type: number
+                      service_name:
+                        type: string
+                      text:
+                        type: string
+                      title:
+                        type: string
+                      title_link:
+                        type: string
+                    type: object
+                type: array
+              text:
+                type: string
+              ts:
+                type: string
+              type:
+                type: string
+              user:
+                type: string
+            type: object
+          members:
+            items:
+              - type: string
+            type: array
+          name:
+            type: string
+          purpose:
+            properties:
+              creator:
+                type: string
+              last_set:
+                type: number
+              value:
+                type: string
+            type: object
+          topic:
+            properties:
+              creator:
+                type: string
+              last_set:
+                type: number
+              value:
+                type: string
+            type: object
+          unread_count:
+            type: number
+          unread_count_display:
+            type: number
+        type: object
+      ok:
+        type: boolean
+    type: object
+  searchFiles:
+    properties:
+      files:
+        properties:
+          matches:
+            items:
+              - properties:
+                  comments_count:
+                    type: number
+                  created:
+                    type: number
+                  edit_link:
+                    type: string
+                  editable:
+                    type: boolean
+                  external_type:
+                    type: string
+                  filetype:
+                    type: string
+                  id:
+                    type: string
+                  ims:
+                    items:
+                      - type: string
+                    type: array
+                  initial_comment:
+                    properties:
+                      comment:
+                        type: string
+                      created:
+                        type: number
+                      id:
+                        type: string
+                      timestamp:
+                        type: number
+                      user:
+                        type: string
+                    type: object
+                  is_external:
+                    type: boolean
+                  is_public:
+                    type: boolean
+                  lines:
+                    type: number
+                  lines_more:
+                    type: number
+                  mimetype:
+                    type: string
+                  mode:
+                    type: string
+                  name:
+                    type: string
+                  permalink:
+                    type: string
+                  permalink_public:
+                    type: string
+                  pretty_type:
+                    type: string
+                  preview:
+                    type: string
+                  preview_highlight:
+                    type: string
+                  public_url_shared:
+                    type: boolean
+                  size:
+                    type: number
+                  timestamp:
+                    type: number
+                  title:
+                    type: string
+                  url:
+                    type: string
+                  url_download:
+                    type: string
+                  url_private:
+                    type: string
+                  url_private_download:
+                    type: string
+                  user:
+                    type: string
+                type: object
+            type: array
+          pagination:
+            properties:
+              first:
+                type: number
+              last:
+                type: number
+              page:
+                type: number
+              page_count:
+                type: number
+              per_page:
+                type: number
+              total_count:
+                type: number
+            type: object
+          paging:
+            properties:
+              count:
+                type: number
+              page:
+                type: number
+              pages:
+                type: number
+              total:
+                type: number
+            type: object
+          total:
+            type: number
+        type: object
+      ok:
+        type: boolean
+      query:
+        type: string
+    type: object
+  searchMessages:
+    properties:
+      messages:
+        properties:
+          matches:
+            items:
+              - properties:
+                  channel:
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                    type: object
+                  next:
+                    properties:
+                      text:
+                        type: string
+                      ts:
+                        type: string
+                      type:
+                        type: string
+                      user:
+                        type: string
+                      username:
+                        type: string
+                    type: object
+                  next_2:
+                    properties:
+                      text:
+                        type: string
+                      ts:
+                        type: string
+                      type:
+                        type: string
+                      user:
+                        type: string
+                      username:
+                        type: string
+                    type: object
+                  permalink:
+                    type: string
+                  previous:
+                    properties:
+                      text:
+                        type: string
+                      ts:
+                        type: string
+                      type:
+                        type: string
+                      user:
+                        type: string
+                      username:
+                        type: string
+                    type: object
+                  previous_2:
+                    properties:
+                      text:
+                        type: string
+                      ts:
+                        type: string
+                      type:
+                        type: string
+                      user:
+                        type: string
+                      username:
+                        type: string
+                    type: object
+                  text:
+                    type: string
+                  ts:
+                    type: string
+                  type:
+                    type: string
+                  user:
+                    type: string
+                  username:
+                    type: string
+                type: object
+              - properties:
+                  channel:
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                    type: object
+                  permalink:
+                    type: string
+                  previous:
+                    properties:
+                      text:
+                        type: string
+                      ts:
+                        type: string
+                      type:
+                        type: string
+                      user:
+                        type: string
+                      username:
+                        type: string
+                    type: object
+                  previous_2:
+                    properties:
+                      text:
+                        type: string
+                      ts:
+                        type: string
+                      type:
+                        type: string
+                      user:
+                        type: string
+                      username:
+                        type: string
+                    type: object
+                  text:
+                    type: string
+                  ts:
+                    type: string
+                  type:
+                    type: string
+                  user:
+                    type: string
+                  username:
+                    type: string
+                type: object
+            type: array
+          pagination:
+            properties:
+              first:
+                type: number
+              last:
+                type: number
+              page:
+                type: number
+              page_count:
+                type: number
+              per_page:
+                type: number
+              total_count:
+                type: number
+            type: object
+          paging:
+            properties:
+              count:
+                type: number
+              page:
+                type: number
+              pages:
+                type: number
+              total:
+                type: number
+            type: object
+          total:
+            type: number
+        type: object
+      ok:
+        type: boolean
+      query:
+        type: string
+    type: object
+  starList:
+    properties:
+      items:
+        items:
+          - properties:
+              channel:
+                type: string
+              message:
+                type: string
+              type:
+                type: string
+            type: object
+          - properties:
+              file:
+                type: string
+              type:
+                type: string
+            type: object
+          - properties:
+              comment:
+                type: string
+              file:
+                type: string
+              type:
+                type: string
+            type: object
+          - properties:
+              channel:
+                type: string
+              type:
+                type: string
+            type: object
+        type: array
+      ok:
+        type: boolean
+      paging:
+        properties:
+          count:
+            type: number
+          page:
+            type: number
+          pages:
+            type: number
+          total:
+            type: number
+        type: object
+    type: object
+  topic:
+    properties:
+      ok:
+        type: boolean
+      topic:
+        type: string
+    type: object
+  usersList:
+    properties:
+      members:
+        items:
+          - properties:
+              color:
+                type: string
+              deleted:
+                type: boolean
+              has_files:
+                type: boolean
+              id:
+                type: string
+              is_admin:
+                type: boolean
+              is_owner:
+                type: boolean
+              name:
+                type: string
+              profile:
+                properties:
+                  email:
+                    type: string
+                  first_name:
+                    type: string
+                  image_192:
+                    type: string
+                  image_24:
+                    type: string
+                  image_32:
+                    type: string
+                  image_48:
+                    type: string
+                  image_72:
+                    type: string
+                  last_name:
+                    type: string
+                  phone:
+                    type: string
+                  real_name:
+                    type: string
+                  skype:
+                    type: string
+                type: object
+            type: object
+        type: array
+      ok:
+        type: boolean
+    type: object
