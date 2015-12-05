@@ -50,7 +50,7 @@ paths:
           description: "We couldn't return the representation due to an internal server error."
       summary: Get a list with the details of all the hotels specified.
       tags:
-        - Hotel
+        - Hotels
   '/api/hotel/v0/hotels/{hotelId}':
     get:
       consumes: []
@@ -91,7 +91,7 @@ paths:
           description: "We couldn't return the representation due to an internal server error."
       summary: Get the details for the specified hotel id.
       tags:
-        - Hotel
+        - Hotels
   '/api/hotel/v0/hotels/{hotelId}/room_types':
     get:
       consumes: []
