@@ -1,0 +1,688 @@
+swagger: '2.0'
+schemes:
+  - https
+host: content.uploady.com
+basePath: /v1/api
+info:
+  description: The Uploady API allows you to connect to the Uploady free online storage platform.
+  title: Uploady
+  version: v1-beta
+  x-logo:
+    url: 'https://www.uploady.com/static/facebook-logo.png'
+  x-origin:
+    format: swagger
+    url: 'https://www.uploady.com/v1/docs/api'
+    version: '1.2'
+  x-providerName: uploady.com
+tags:
+  - description: Manage user
+    name: users
+  - description: Manage folders
+    name: folders
+  - description: Manage files
+    name: files
+  - description: Upload files
+    name: upload
+  - description: Synchronize files
+    name: events
+paths:
+  /events:
+    get:
+      description: |-
+        There are two types of events: for folders and for files.<br/>
+        All events will contain latest resource information about folder or file.
+        If `folder` or `file` key is set to `null`, this means what this object was deleted.<br/>
+        To access this resource, scope `read.events` is required.
+      parameters:
+        - description: Get events for root folder
+          in: query
+          name: root_id
+          required: true
+          type: string
+        - description: ID of last known event id
+          in: query
+          name: last_event_id
+          required: false
+          type: string
+        - description: 'Available values: links'
+          in: query
+          name: include
+          required: false
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Events'
+      summary: Get events
+      tags:
+        - events
+  /files:
+    delete:
+      description: |-
+        File will be permanently deleted, recovery is not possible. You can delete multiple files by joining id's with comma. <br/>
+        To access this resource, scope `delete.file` is required.
+      parameters:
+        - description: ID of file
+          in: formData
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Success'
+        '404':
+          description: No files were found
+      summary: Delete files
+      tags:
+        - files
+    get:
+      description: |-
+        You can get multiple files by joining id's with comma.<br/>
+         To access this resource, scope `read.file` is required.
+      parameters:
+        - description: ID of file that needs to be fetched
+          in: query
+          name: id
+          required: true
+          type: string
+        - description: 'Available values: links'
+          in: query
+          name: include
+          required: false
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Files'
+      summary: Find files
+      tags:
+        - files
+    put:
+      description: |-
+        You can update multiple files by joining id's with comma. <br/>
+        To access this resource, scope `update.file` is required.
+      parameters:
+        - description: ID of file
+          in: formData
+          name: id
+          required: true
+          type: string
+        - description: rename file
+          in: formData
+          name: name
+          required: false
+          type: string
+        - description: move file to folder
+          in: formData
+          name: folder_id
+          required: false
+          type: string
+        - description: 'if set to true, file will be copied.'
+          in: formData
+          name: copy
+          required: false
+          type: boolean
+        - description: 'if set to true, file will be shared.'
+          in: formData
+          name: share_link_enabled
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Files'
+        '403':
+          description: You do not have permission to access this folder
+      summary: Update files information
+      tags:
+        - files
+  /files/link:
+    post:
+      description: |-
+        You can get multiple links by joining id's with comma.<br/>
+         To access this resource, scope `read.file` is required.
+      parameters:
+        - description: file id
+          in: formData
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/FilesLinks'
+      summary: Get download link
+      tags:
+        - files
+  /files/share:
+    delete:
+      description: |-
+        Delete shared email.<br/>
+        To access this resource, scope `share.file` is required.
+      parameters:
+        - description: file id
+          in: formData
+          name: id
+          required: true
+          type: string
+        - description: shared link id
+          in: formData
+          name: link_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Success'
+        '403':
+          description: You do not have permission to access this file
+        '404':
+          description: File not found
+      summary: Delete shared email
+      tags:
+        - files
+    get:
+      description: |-
+        Get shared emails.<br/>
+         To access this resource, scope `share.file` is required.
+      parameters:
+        - description: file id
+          in: query
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/FileShare'
+      summary: Get shared emails
+      tags:
+        - files
+    post:
+      description: |-
+        Be sure that user is verified.<br/>
+         To access this resource, scope `share.file` is required.
+      parameters:
+        - description: file id
+          in: formData
+          name: id
+          required: true
+          type: string
+        - description: email address
+          in: formData
+          name: email
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/FileShare'
+      summary: Share file via email
+      tags:
+        - files
+  /folders:
+    delete:
+      description: |-
+        You can delete multiple folders by joining id's with comma.<br/>
+         To access this resource, scope `delete.folder` is required.
+      parameters:
+        - description: folder id
+          in: formData
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Folders'
+      summary: Delete folder
+      tags:
+        - folders
+    get:
+      description: |-
+        You can get multiple folders by joining id's with comma.<br/>
+         To access this resource, scope `read.folder` is required.
+      parameters:
+        - description: ID of folder that needs to be fetched
+          in: query
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Folders'
+      summary: Find folder
+      tags:
+        - folders
+    post:
+      description: |-
+        Create new folder.<br/>
+         To access this resource, scope `create.folder` is required.
+      parameters:
+        - description: folder name
+          in: formData
+          name: name
+          required: true
+          type: string
+        - description: 'parent folder id, if id is not specified, root folder will be used instead.'
+          in: formData
+          name: parent_id
+          required: false
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Folders'
+      summary: Create folder
+      tags:
+        - folders
+    put:
+      description: |-
+        You can update multiple folders by joining id's with comma. <br/>
+         To access this resource, scope `update.folder` is required.
+      parameters:
+        - description: ID of folder that needs to be updated
+          in: formData
+          name: id
+          required: true
+          type: string
+        - description: folder name
+          in: formData
+          name: name
+          required: false
+          type: string
+        - description: parent folder id
+          in: formData
+          name: parent_id
+          required: false
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Folders'
+      summary: Update folder
+      tags:
+        - folders
+  /folders/children:
+    get:
+      description: 'To access this resource, scope `read.folder` is required.'
+      parameters:
+        - description: ID of parent folder
+          in: query
+          name: id
+          required: true
+          type: string
+        - description: set this to get child files
+          in: query
+          name: get_files
+          required: false
+          type: boolean
+        - description: set this to get child folders
+          in: query
+          name: get_folders
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Children'
+      summary: Find child files and folders
+      tags:
+        - folders
+  /folders/path:
+    get:
+      description: |-
+        Folders are returned in strict order. From root folder to folder specified by id.<br/>
+
+         To access this resource, scope `read.folder` is required.
+      parameters:
+        - description: folder id
+          in: query
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Folders'
+      summary: Get full path to the folder
+      tags:
+        - folders
+  /upload:
+    post:
+      description: |-
+        Files are uploaded to https://content.uploady.com/v1/api/upload.<br/>
+                            To access this resource, scope `create.file` is required.
+      parameters:
+        - description: file to store
+          in: formData
+          name: file
+          required: true
+          type: file
+        - description: 'ID of parent folder, there file will be stored. If not passed, files will be stored in app root folder.'
+          in: formData
+          name: folder_id
+          type: string
+        - description: File name
+          in: formData
+          name: file_name
+          type: string
+        - description: ID of file that needs to be updated. Should be sent as form data.
+          in: formData
+          name: file_id
+          type: string
+        - description: 'if set to true, file will be shared.'
+          in: formData
+          name: share_link_enabled
+          type: boolean
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Files'
+      summary: Upload files
+      tags:
+        - upload
+  /users:
+    post:
+      description: |-
+        This api is only available for clients with static type.<br/>
+        Scope `register` is required.<br/>
+        Access token can be created with `client credentials` grant type.<br/>
+        This resource can not be accessed with cross origin request.
+      parameters:
+        - description: 'Available values: storage,folders'
+          in: query
+          name: include
+          required: false
+          type: string
+        - description: 'If set to true, temporary user will be created.'
+          in: formData
+          name: temporary
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Users'
+      summary: Static - Create new user
+      tags:
+        - users
+  /users/logout:
+    post:
+      description: "Logout user. User will be detached from access token. \n Implicit grant does not provide a refresh token, but provided access token will be destroyed."
+      parameters:
+        - description: Refresh token to be deleted
+          in: formData
+          name: refresh_token
+          required: false
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Success'
+      summary: Destroy access and refresh tokens
+      tags:
+        - users
+  /users/storage:
+    get:
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Storage'
+      summary: Get user storage information.
+      tags:
+        - users
+definitions:
+  Children:
+    properties:
+      files:
+        items:
+          $ref: '#/definitions/File'
+        type: array
+        uniqueItems: true
+      folders:
+        items:
+          $ref: '#/definitions/Folder'
+        type: array
+        uniqueItems: true
+  Event:
+    description: Event information
+    properties:
+      file:
+        $ref: '#/definitions/File'
+      file_id:
+        type: string
+      folder:
+        $ref: '#/definitions/Folder'
+      folder_id:
+        type: string
+      id:
+        type: string
+      root_id:
+        type: string
+      time:
+        type: integer
+      type:
+        type: string
+      user:
+        type: string
+    required:
+      - id
+      - user
+      - root_id
+      - time
+  Events:
+    properties:
+      events:
+        items:
+          $ref: '#/definitions/Event'
+        type: array
+        uniqueItems: true
+    required:
+      - events
+  File:
+    description: File information
+    properties:
+      extension:
+        type: string
+      id:
+        type: string
+      mime_type:
+        type: string
+      name:
+        type: string
+      parent_folder:
+        type: string
+      sha1:
+        type: string
+      share_enabled:
+        type: boolean
+      share_link:
+        type: string
+      share_link_enabled:
+        type: boolean
+      share_password:
+        type: string
+      share_url:
+        type: string
+      size:
+        format: int64
+        type: integer
+      time:
+        type: integer
+    required:
+      - id
+      - name
+      - time
+      - mime_type
+      - extension
+      - size
+      - sha1
+      - parent_folder
+  FileLink:
+    description: Get file download url
+    properties:
+      direct_link:
+        type: string
+      id:
+        type: string
+    required:
+      - id
+      - direct_link
+  FileShare:
+    properties:
+      emails:
+        items:
+          $ref: '#/definitions/FileShareEmail'
+        type: array
+        uniqueItems: true
+    required:
+      - emails
+  FileShareEmail:
+    properties:
+      email:
+        type: string
+      id:
+        type: string
+    required:
+      - id
+      - email
+  Files:
+    properties:
+      files:
+        items:
+          $ref: '#/definitions/File'
+        type: array
+        uniqueItems: true
+    required:
+      - files
+  FilesLinks:
+    properties:
+      links:
+        items:
+          $ref: '#/definitions/FileLink'
+        type: array
+        uniqueItems: true
+    required:
+      - links
+  Folder:
+    description: Folder information
+    properties:
+      has_folders:
+        type: boolean
+      id:
+        type: string
+      name:
+        type: string
+      parent_folder:
+        type: string
+      time:
+        type: integer
+      type:
+        type: string
+    required:
+      - id
+      - name
+      - time
+      - has_folders
+  Folders:
+    properties:
+      folders:
+        items:
+          $ref: '#/definitions/Folder'
+        type: array
+        uniqueItems: true
+    required:
+      - folders
+  Storage:
+    properties:
+      storage:
+        items:
+          $ref: '#/definitions/StorageData'
+        type: array
+    required:
+      - storage
+  StorageData:
+    properties:
+      storage_limit:
+        type: integer
+      used_storage_size:
+        type: integer
+    required:
+      - used_storage_size
+      - storage_limit
+  Success:
+    properties:
+      success:
+        type: boolean
+    required:
+      - success
+  User:
+    description: User information.
+    properties:
+      display_name:
+        type: string
+      email:
+        type: string
+      family_name:
+        type: string
+      given_name:
+        type: string
+      group:
+        type: string
+      links:
+        items:
+          $ref: '#/definitions/UserLinks'
+        type: array
+        uniqueItems: true
+      new_user:
+        type: boolean
+      verified:
+        type: boolean
+    required:
+      - email
+      - given_name
+      - family_name
+      - display_name
+      - group
+      - verified
+      - new_user
+      - links
+  UserLinks:
+    properties:
+      root_folder:
+        type: string
+      trash_folder:
+        type: string
+    required:
+      - root_folder
+      - trash_folder
+  Users:
+    properties:
+      users:
+        items:
+          $ref: '#/definitions/User'
+        type: array
+        uniqueItems: true
+    required:
+      - users

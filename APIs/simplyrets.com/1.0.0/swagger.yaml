@@ -146,7 +146,7 @@ paths:
       description: |
         Use this endpoint for accessing a single OpenHouse.
       parameters:
-        - default: 189018
+        - default: 24625637
           description: A unique OpenHouse identification key
           in: path
           name: openHouseKey
@@ -211,82 +211,6 @@ paths:
           name: q
           required: false
           type: string
-        - collectionFormat: multi
-          description: |
-            Request listings by a specific status. This parameter
-            defaults to active and you can specify multiple statuses
-            in a single query.
-
-            Listing statuses depend on your MLS's availability. Below is
-            a brief description of each status with possible synonyms which
-            may map to your MLS-specific statuses
-            - *Active*: Active Listing which is still on the market
-            - *ActiveUnderContract*: An offer has been accepted but the listing is still on market. Synonyms: Accepting Backup Offers, Backup Offer, Active With Accepted. Synonyms: Offer, Backup, Contingent
-            - *Pending*: An offer has been accepted and the listing is no longer on market. Synonyms: Offer Accepted, Under Contract
-            - *Hold*: The listing has been withdrawn from the market, but a contract
-              still exists between the seller and the listing member. Synonyms: Hold, Hold Do Not Show, Temp Off Market
-            - *Withdrawn*: The listing has been withdrawn from the market, but a contract
-              still exists between the seller and the listing member. Synonyms: Hold, Hold Do Not Show, Temp Off Market
-            - *Closed*: The purchase agreement has been fulfilled or the lease
-              agreement has been executed. Synonyms: Sold, Leased, Rented, Closed Sale
-            - *Expired*: The listing contract has expired
-            - *Delete*: The listing contract was never valid or other reason for the contract to be nullified. Synonyms: Kill, Zap
-            - *Incomplete*: The listing has not yet be completely entered and is not yet
-              published in the MLS. Synonyms: Draft, Partially Complted
-            - *ComingSoon*
-          enum:
-            - Active
-            - Pending
-            - Closed
-            - ActiveUnderContract
-            - Hold
-            - Withdrawn
-            - Expired
-            - Delete
-            - Incomplete
-            - ComingSoon
-          in: query
-          items:
-            type: string
-          name: status
-          required: false
-          type: array
-        - collectionFormat: multi
-          description: |
-            Request listings by a specific property type. This
-            defaults to Residential and Rental. You can specify
-            multiple property types in a single query.
-          enum:
-            - residential
-            - rental
-            - multifamily
-            - condominium
-            - commercial
-            - land
-          in: query
-          items:
-            type: string
-          name: type
-          required: false
-          type: array
-        - description: |
-            Filter the listings returned by an agent ID.  Note, the
-            Agent ID is provided by your MLS.
-          in: query
-          name: agent
-          required: false
-          type: string
-        - collectionFormat: multi
-          description: |
-            Filter the listings returned by brokerage with a Broker
-            ID. You can specific multiple broker parameters. Note, the
-            Broker ID is provided by your MLS.
-          in: query
-          items:
-            type: string
-          name: brokers
-          required: false
-          type: array
         - description: |
             Filter listings by a minimum price.
           in: query
@@ -299,6 +223,13 @@ paths:
           name: maxprice
           required: false
           type: integer
+        - description: |
+            Filter the listings returned by an agent ID.  Note, the
+            Agent ID is provided by your MLS.
+          in: query
+          name: agent
+          required: false
+          type: string
         - description: |
             Filter listings by a minimum area size in Sq Ft.
           in: query
@@ -359,10 +290,9 @@ paths:
           required: false
           type: integer
         - description: |
-            Used as a cursor for pagination. Increase the offset
-            parameter by the limit to go to the next "page" of
-            listings. Also take a look at the Link HTTP Header for
-            pre-built pagination.
+            Used as a cursor for pagination. Increase the offset parameter
+            by the limit to go to the next "page" of listings. Also take
+            a look at the Link HTTP Header for pre-built pagination.
           in: query
           name: offset
           required: false
@@ -376,6 +306,17 @@ paths:
           name: vendor
           required: false
           type: string
+        - collectionFormat: multi
+          description: |
+            Filter the listings returned by brokerage with a Broker ID.
+            You can specific multiple broker parameters. Note, the Broker
+            ID is provided by your MLS.
+          in: query
+          items:
+            type: string
+          name: brokers
+          required: false
+          type: array
         - collectionFormat: multi
           description: |
             Filter the listings returned by postal codes / zip
@@ -396,13 +337,16 @@ paths:
           name: features
           required: false
           type: array
-        - description: |
-            Query water/waterfront listings only. Specify 'true' to
-            filter waterfront listings.
+        - collectionFormat: multi
+          description: |
+            Filter the listings returned by specific amenities.  You
+            can specify multiple amenities.
           in: query
-          name: water
+          items:
+            type: string
+          name: amenities
           required: false
-          type: string
+          type: array
         - collectionFormat: multi
           description: |
             Filter the listings returned by specific neighborhoods and
@@ -482,6 +426,59 @@ paths:
           name: include
           required: false
           type: array
+        - description: |
+
+            Request listings by a specific status. This parameter
+            defaults to active and you can specify multiple statuses
+            in a single query.
+
+            Listing statuses depend on your MLS's availability. Below is
+            a brief description of each status with possible synonyms which
+            may map to your MLS-specific statuses
+            - Active: Active Listing which is still on the market
+            - ActiveUnderContract: An offer has been accepted but the listing is still on market. Synonyms: Accepting Backup Offers, Backup Offer, Active With Accepted. Synonyms: Offer, Backup, Contingent
+            - Pending: An offer has been accepted and the listing is no longer on market. Synonyms: Offer Accepted, Under Contract
+            - Hold: The listing has been withdrawn from the market, but a contract
+              still exists between the seller and the listing member. Synonyms: Hold, Hold Do Not Show, Temp Off Market
+            - Withdrawn: The listing has been withdrawn from the market, but a contract
+              still exists between the seller and the listing member. Synonyms: Hold, Hold Do Not Show, Temp Off Market
+            - Closed: The purchase agreement has been fulfilled or the lease
+              agreement has been executed. Synonyms: Sold, Leased, Rented, Closed Sale
+            - Expired: The listing contract has expired
+            - Delete: The listing contract was never valid or other reason for the contract to be nullified. Synonyms: Kill, Zap
+            - Incomplete: The listing has not yet be completely entered and is not yet
+              published in the MLS. Synonyms: Draft, Partially Complted
+            - ComingSoon
+          enum:
+            - Active
+            - Pending
+            - Closed
+            - ActiveUnderContract
+            - Hold
+            - Withdrawn
+            - Expired
+            - Delete
+            - Incomplete
+            - ComingSoon
+          in: query
+          name: status
+          required: false
+          type: string
+        - description: |
+            Request listings by a specific property type. This
+            defaults to Residential, and you can only specify one type
+            in a single query.
+          enum:
+            - Residential
+            - Rental
+            - Multifamily
+            - Condominium
+            - Commercial
+            - Land
+          in: query
+          name: type
+          required: false
+          type: string
         - description: |
             Sort the response by a specific field. Values starting
             with a minus (-) denote descending order, while the others

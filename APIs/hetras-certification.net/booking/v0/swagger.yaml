@@ -99,88 +99,6 @@ paths:
       summary: Get a list of addon offers for the requested hotel identifier.
       tags:
         - Addons
-  /api/booking/v0/blocks:
-    get:
-      consumes: []
-      deprecated: false
-      parameters:
-        - description: Application identifier
-          in: header
-          name: App-Id
-          required: true
-          type: string
-          x-data-threescale-name: app_ids
-        - description: Application key.
-          in: header
-          name: App-Key
-          required: true
-          type: string
-          x-data-threescale-name: app_keys
-        - description: Specifies the group code for which the list of blocks should be returned.
-          in: query
-          name: groupCode
-          required: false
-          type: string
-      produces:
-        - application/json
-        - text/json
-      responses:
-        '200':
-          description: Block details for the provided group code.
-          schema:
-            $ref: '#/definitions/BlocksResponse'
-        '400':
-          description: Some request parameters are invalid
-        '403':
-          description: You are not authorized to access this resource or the data for the specified hotels.
-        '404':
-          description: Not Found. The server has not found anything matching the Request-URI.
-        '500':
-          description: The process failed due to an internal server error.
-      summary: Gets the list of all blocks for the hotel chain.
-      tags:
-        - Blocks
-  '/api/booking/v0/blocks/{blockCode}':
-    get:
-      consumes: []
-      deprecated: false
-      parameters:
-        - description: Application identifier
-          in: header
-          name: App-Id
-          required: true
-          type: string
-          x-data-threescale-name: app_ids
-        - description: Application key.
-          in: header
-          name: App-Key
-          required: true
-          type: string
-          x-data-threescale-name: app_keys
-        - description: 'Specifies the block code in the format: {componentCode-blockCode}.'
-          in: path
-          name: blockCode
-          required: true
-          type: string
-      produces:
-        - application/json
-        - text/json
-      responses:
-        '200':
-          description: Block details for the provided code.
-          schema:
-            $ref: '#/definitions/BlockResponse'
-        '400':
-          description: Some request parameters are invalid
-        '403':
-          description: You are not authorized to access this resource or the data for the specified hotels.
-        '404':
-          description: Not Found. The server has not found anything matching the Request-URI.
-        '500':
-          description: The process failed due to an internal server error.
-      summary: Gets the details for a specific block.
-      tags:
-        - Blocks
   /api/booking/v0/bookings:
     post:
       consumes:
@@ -1215,9 +1133,6 @@ definitions:
       external_id:
         description: "The external id for this reservation. You can put here your own id used by you or the external system\r\n            you integrate hetras with"
         type: string
-      group_code:
-        description: The group code based on which the reservation will be created.
-        type: string
       guarantee:
         $ref: '#/definitions/Guarantee'
         description: The guarantee for this reservation
@@ -1253,6 +1168,10 @@ definitions:
         description: "The number of rooms this reservation is for. After a multi-room booking is done there will be \r\n            one reservation in hetras for all rooms. The hotel staff then will split this reservation into\r\n            one reservation per room to be able to check in the guests"
         format: int32
         type: integer
+      total_amount:
+        description: This attribute is obsolete and not used. It is deprecated and will be removed for version 1 of the booking API
+        format: double
+        type: number
     type: object
   ReservationResponse:
     properties:
