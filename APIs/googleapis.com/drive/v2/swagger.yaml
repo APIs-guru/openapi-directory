@@ -2802,7 +2802,7 @@ definitions:
         type: string
     type: object
   Comment:
-    description: A JSON representation of a comment on a file in Google Drive.
+    description: A comment on a file in Google Drive.
     properties:
       anchor:
         description: A region of the document represented as a JSON string. See anchor documentation for details on how to define and interpret anchor properties.
@@ -2863,7 +2863,7 @@ definitions:
         type: string
     type: object
   CommentList:
-    description: A JSON representation of a list of comments on a file in Google Drive.
+    description: A list of comments on a file in Google Drive.
     properties:
       items:
         description: List of comments.
@@ -2885,7 +2885,7 @@ definitions:
         type: string
     type: object
   CommentReply:
-    description: A JSON representation of a reply to a comment on a file in Google Drive.
+    description: A comment on a file in Google Drive.
     properties:
       author:
         $ref: '#/definitions/User'
@@ -2919,7 +2919,7 @@ definitions:
         type: string
     type: object
   CommentReplyList:
-    description: A JSON representation of a list of replies to a comment on a file in Google Drive.
+    description: A list of replies to a comment on a file in Google Drive.
     properties:
       items:
         description: List of reply.
@@ -3553,7 +3553,7 @@ definitions:
         type: string
     type: object
   User:
-    description: The JSON template for a user.
+    description: Information about a Drive user.
     properties:
       displayName:
         description: A plain text displayable name for this user.

@@ -1235,6 +1235,55 @@ paths:
       summary: Get Products
       tags:
         - Products
+  /v3/purchased-assets:
+    get:
+      consumes: []
+      parameters:
+        - description: Provide your API key.
+          in: header
+          name: Api-Key
+          required: true
+          type: string
+        - description: "Provide access token in the format of 'Bearer: {token}'."
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: 'If specified, retrieves previous purchases on or after this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).'
+          format: date-time
+          in: query
+          name: date_from
+          required: false
+          type: string
+        - description: 'If specified, retrieves previous purchases on or before this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).'
+          format: date-time
+          in: query
+          name: date_to
+          required: false
+          type: string
+        - description: Identifies page to return. Default is 1.
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: 'Specifies page size. Default is 75, maximum page_size is 100.'
+          format: int32
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/PreviousAssetPurchases'
+      summary: Get Previously Purchased Images and Video
+      tags:
+        - Purchases
   /v3/purchased-images:
     get:
       consumes: []
@@ -1281,7 +1330,7 @@ paths:
           description: No response was specified
           schema:
             $ref: '#/definitions/PreviousPurchases'
-      summary: Get Previous Purchases
+      summary: Get Previously Purchased Images
       tags:
         - Purchases
   /v3/search/events:
@@ -3995,10 +4044,44 @@ definitions:
         description: Specifies the associated project code saved with the downloaded of an image.
         type: string
     type: object
+  PreviousAssetPurchase:
+    properties:
+      asset_id:
+        description: Specifies the unique identifier for the asset.
+        type: string
+      asset_type:
+        description: 'Indicates the asset type classification. Possible values are: image, video.'
+        type: string
+      date_purchased:
+        description: 'Specifies the date the asset was downloaded, in ISO 8601 format (e.g., 1999-12-31T00:00:00-00:00).'
+        format: date-time
+        type: string
+      license_model:
+        description: 'Specifies the licensing model for the asset. Possible values are: royaltyfree, rightsmanaged, rightsready.'
+        type: string
+      order_id:
+        description: Specifies the purchase order id.
+        type: string
+      thumb_uri:
+        description: GET this URI to download the thumbnail.
+        type: string
+    type: object
+  PreviousAssetPurchases:
+    properties:
+      previous_purchases:
+        description: List of previously purchased assets.
+        items:
+          $ref: '#/definitions/PreviousAssetPurchase'
+        type: array
+      result_count:
+        description: Count of previously purchased assets returned.
+        format: int32
+        type: integer
+    type: object
   PreviousPurchase:
     properties:
       date_purchased:
-        description: 'Specifies the date the asset was purchased, in ISO 8601 format (e.g., 1999-12-31T00:00:00-00:00).'
+        description: 'Specifies the date the image was downloaded, in ISO 8601 format (e.g., 1999-12-31T00:00:00-00:00).'
         format: date-time
         type: string
       image_id:
@@ -4011,18 +4094,18 @@ definitions:
         description: Specifies the purchase order id.
         type: string
       thumb_uri:
-        description: Specifies the thumbnail download URI.
+        description: GET this URI to download the thumbnail.
         type: string
     type: object
   PreviousPurchases:
     properties:
       previous_purchases:
-        description: Lists the purchased records.
+        description: List of previously purchased images.
         items:
           $ref: '#/definitions/PreviousPurchase'
         type: array
       result_count:
-        description: Specifies the count of matching assets returned.
+        description: Count of previously purchased images returned.
         format: int32
         type: integer
     type: object
@@ -4154,7 +4237,7 @@ definitions:
         format: int32
         type: integer
       license_model:
-        description: 'Specifies the licensing model for the image or video. Possible values are: royaltyfree, rightsmanaged, rightsready.'
+        description: 'Specifies the licensing model for the asset. Possible values are: royaltyfree, rightsmanaged, rightsready.'
         type: string
       name:
         description: Specifies the name of the collection.
@@ -4336,7 +4419,7 @@ definitions:
         description: 'Specifies the license agreement applied to this download. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription, sandbox.'
         type: string
       thumb_uri:
-        description: Specifies the thumbnail download URI.
+        description: GET this URI to download the thumbnail.
         type: string
     type: object
   download_requirements:
@@ -4518,7 +4601,7 @@ definitions:
         description: Specifies the image title.
         type: string
       uri_oembed:
-        description: 'Specifies the URI that can be used to get oEmbed data for the image, if embeddable.'
+        description: 'GET this URI to retrieve oEmbed data for the image, if embeddable.'
         type: string
     type: object
   editorial_image_search_results:
@@ -4753,7 +4836,7 @@ definitions:
         description: Specifies the image title.
         type: string
       uri_oembed:
-        description: 'Specifies the URI that can be used to get oEmbed data for the image, if embeddable.'
+        description: 'GET this URI to retrieve oEmbed data for the image, if embeddable.'
         type: string
     type: object
   image_search_item:
@@ -4865,7 +4948,7 @@ definitions:
         description: Specifies the image title.
         type: string
       uri_oembed:
-        description: 'Specifies the URI that can be used to get oEmbed data for the image, if embeddable.'
+        description: 'GET this URI to retrieve oEmbed data for the image, if embeddable.'
         type: string
     type: object
   image_search_results:
@@ -4915,7 +4998,7 @@ definitions:
         description: "Specifies the link's relationship to the asset."
         type: string
       uri:
-        description: Specifies the resource URI.
+        description: GET this URI to retrieve image details regarding the related resource.
         type: string
     type: object
   location:
@@ -5000,7 +5083,7 @@ definitions:
         description: Specifies the asset domain name.
         type: string
       uri:
-        description: Specifies the resource URI.
+        description: GET this URI to retrieve appropriate referral destination data.
         type: string
     type: object
   report_usage_batch_request:

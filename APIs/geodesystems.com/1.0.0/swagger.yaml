@@ -77,18 +77,6 @@ tags:
     name: gristle_slicer
   - description: ' API for Gristle Determinator'
     name: gristle_determinator
-  - description: ' API for Extract text from PDF'
-    name: media_pdfbox_extracttext
-  - description: ' API for Extract images from PDF'
-    name: media_pdfbox_extractimages
-  - description: ' API for Make images from PDF'
-    name: media_pdfbox_pdftoimage
-  - description: ' API for Split PDF'
-    name: media_pdfbox_pdfsplit
-  - description: ' API for Text to PDF'
-    name: media_pdfbox_texttopdf
-  - description: ' API for Merge PDF Files'
-    name: media_pdfbox_merge
   - description: ' API for NCO Weighted Average'
     name: geo_nco_ncwa
   - description: ' API for CDO Info'
@@ -3086,9 +3074,14 @@ paths:
           name: search.db_boulder_county_voter_details.last_updated_date
           required: false
           type: string
-        - description: Street Name
+        - description: Residential Address
           in: query
-          name: search.db_boulder_county_voter_details.street_name
+          name: search.db_boulder_county_voter_details.residential_address
+          required: false
+          type: string
+        - description: Residential City
+          in: query
+          name: search.db_boulder_county_voter_details.residential_city
           required: false
           type: string
         - description: Mailing Zip Code
@@ -3126,31 +3119,6 @@ paths:
           name: search.db_boulder_county_voter_details.congressional
           required: false
           type: string
-        - description: Statewide
-          in: query
-          name: search.db_boulder_county_voter_details.statewide
-          required: false
-          type: string
-        - description: State Board Of Education - At Large
-          in: query
-          name: search.db_boulder_county_voter_details.state_board_of_education_at_large
-          required: false
-          type: string
-        - description: State Board Of Education
-          in: query
-          name: search.db_boulder_county_voter_details.state_board_of_education
-          required: false
-          type: string
-        - description: University Of Colorado Regents - At Large
-          in: query
-          name: search.db_boulder_county_voter_details.university_of_colorado_regents_at_large
-          required: false
-          type: string
-        - description: University Of Colorado Regents
-          in: query
-          name: search.db_boulder_county_voter_details.university_of_colorado_regents
-          required: false
-          type: string
         - description: State Senate
           in: query
           name: search.db_boulder_county_voter_details.state_senate
@@ -3159,26 +3127,6 @@ paths:
         - description: State House
           in: query
           name: search.db_boulder_county_voter_details.state_house
-          required: false
-          type: string
-        - description: Judicial
-          in: query
-          name: search.db_boulder_county_voter_details.judicial
-          required: false
-          type: string
-        - description: Regional Transportation District
-          in: query
-          name: search.db_boulder_county_voter_details.regional_transportation_district
-          required: false
-          type: string
-        - description: County Commissioner
-          in: query
-          name: search.db_boulder_county_voter_details.county_commissioner
-          required: false
-          type: string
-        - description: Countywide
-          in: query
-          name: search.db_boulder_county_voter_details.countywide
           required: false
           type: string
         - description: Municipality
@@ -3194,131 +3142,6 @@ paths:
         - description: School District
           in: query
           name: search.db_boulder_county_voter_details.school_district
-          required: false
-          type: string
-        - description: Conservation District
-          in: query
-          name: search.db_boulder_county_voter_details.conservation_district
-          required: false
-          type: string
-        - description: Downtown Development Authority
-          in: query
-          name: search.db_boulder_county_voter_details.downtown_development_authority
-          required: false
-          type: string
-        - description: 'Drainage & Flood Control'
-          in: query
-          name: search.db_boulder_county_voter_details.drainage_flood_control
-          required: false
-          type: string
-        - description: Fire Protection District
-          in: query
-          name: search.db_boulder_county_voter_details.fire_protection_district
-          required: false
-          type: string
-        - description: Fire Protection 2
-          in: query
-          name: search.db_boulder_county_voter_details.fire_protection_2
-          required: false
-          type: string
-        - description: General Improvement District
-          in: query
-          name: search.db_boulder_county_voter_details.general_improvement_district
-          required: false
-          type: string
-        - description: Library District
-          in: query
-          name: search.db_boulder_county_voter_details.library_district
-          required: false
-          type: string
-        - description: Metro District
-          in: query
-          name: search.db_boulder_county_voter_details.metro_district
-          required: false
-          type: string
-        - description: Misc General Improvement
-          in: query
-          name: search.db_boulder_county_voter_details.misc_general_improvement
-          required: false
-          type: string
-        - description: Misc Other
-          in: query
-          name: search.db_boulder_county_voter_details.misc_other
-          required: false
-          type: string
-        - description: Park And Recreation District
-          in: query
-          name: search.db_boulder_county_voter_details.park_and_recreation_district
-          required: false
-          type: string
-        - description: Proposed District
-          in: query
-          name: search.db_boulder_county_voter_details.proposed_district
-          required: false
-          type: string
-        - description: Proposed District 2
-          in: query
-          name: search.db_boulder_county_voter_details.proposed_district_2
-          required: false
-          type: string
-        - description: Public Improvement District
-          in: query
-          name: search.db_boulder_county_voter_details.public_improvement_district
-          required: false
-          type: string
-        - description: Public Improvement District 2
-          in: query
-          name: search.db_boulder_county_voter_details.public_improvement_district_2
-          required: false
-          type: string
-        - description: Sanitation District
-          in: query
-          name: search.db_boulder_county_voter_details.sanitation_district
-          required: false
-          type: string
-        - description: Scientific Cultural Facilities
-          in: query
-          name: search.db_boulder_county_voter_details.scientific_cultural_facilities
-          required: false
-          type: string
-        - description: Special Improvement District
-          in: query
-          name: search.db_boulder_county_voter_details.special_improvement_district
-          required: false
-          type: string
-        - description: Urban Renewal/reinvestment Authority
-          in: query
-          name: search.db_boulder_county_voter_details.urban_renewal_reinvestment_authority
-          required: false
-          type: string
-        - description: Water And Sanitation District
-          in: query
-          name: search.db_boulder_county_voter_details.water_and_sanitation_district
-          required: false
-          type: string
-        - description: Water Conservancy
-          in: query
-          name: search.db_boulder_county_voter_details.water_conservancy
-          required: false
-          type: string
-        - description: Water Conservancy 3
-          in: query
-          name: search.db_boulder_county_voter_details.water_conservancy_3
-          required: false
-          type: string
-        - description: Water District
-          in: query
-          name: search.db_boulder_county_voter_details.water_district
-          required: false
-          type: string
-        - description: Water District 2
-          in: query
-          name: search.db_boulder_county_voter_details.water_district_2
-          required: false
-          type: string
-        - description: Location
-          in: query
-          name: search.db_boulder_county_voter_details.location
           required: false
           type: string
       produces:
