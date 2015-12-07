@@ -3890,6 +3890,17 @@ paths:
           name: search.db_db_co_indicators.indicatorName
           required: false
           type: string
+        - description: Measure
+          format: double
+          in: query
+          name: search.db_db_co_indicators.measure
+          required: false
+          type: number
+        - description: Location
+          in: query
+          name: search.db_db_co_indicators.location
+          required: false
+          type: string
       produces:
         - application/json
         - application/xml
