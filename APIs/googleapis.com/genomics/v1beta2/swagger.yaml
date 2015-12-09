@@ -114,7 +114,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Searches for annotation sets that match the given criteria. Results are returned in a deterministic order. Caller must have READ permission for the queried datasets.
+      description: 'Searches for annotation sets that match the given criteria. Annotation sets are returned in an unspecified order. This order is consistent, such that two queries for the same content (regardless of page size) yield annotation sets in the same order across their respective streams of paginated responses. Caller must have READ permission for the queried datasets.'
       operationId: genomics.annotationSets.search
       parameters:
         - in: body
@@ -267,7 +267,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Searches for annotations that match the given criteria. Results are returned ordered by start position. Annotations that have matching start positions are ordered deterministically. Caller must have READ permission for the queried annotation sets.
+      description: 'Searches for annotations that match the given criteria. Results are ordered by genomic coordinate (by reference sequence, then position). Annotations with equivalent genomic coordinates are returned in an unspecified order. This order is consistent, such that two queries for the same content (regardless of page size) yield annotations in the same order across their respective streams of paginated responses. Caller must have READ permission for the queried annotation sets.'
       operationId: genomics.annotations.search
       parameters:
         - in: body
@@ -291,7 +291,7 @@ paths:
       description: Deletes an annotation. Caller must have WRITE permission for the associated annotation set.
       operationId: genomics.annotations.delete
       parameters:
-        - description: The ID of the annotation set to be deleted.
+        - description: The ID of the annotation to be deleted.
           in: path
           name: annotationId
           required: true
@@ -309,7 +309,7 @@ paths:
       description: Gets an annotation. Caller must have READ permission for the associated annotation set.
       operationId: genomics.annotations.get
       parameters:
-        - description: The ID of the annotation set to be retrieved.
+        - description: The ID of the annotation to be retrieved.
           in: path
           name: annotationId
           required: true
@@ -338,7 +338,7 @@ paths:
       description: Updates an annotation. The update must respect all mutability restrictions and other invariants described on the annotation resource. Caller must have WRITE permission for the associated dataset. This method supports patch semantics.
       operationId: genomics.annotations.patch
       parameters:
-        - description: The ID of the annotation set to be updated.
+        - description: The ID of the annotation to be updated.
           in: path
           name: annotationId
           required: true
@@ -362,7 +362,7 @@ paths:
       description: Updates an annotation. The update must respect all mutability restrictions and other invariants described on the annotation resource. Caller must have WRITE permission for the associated dataset.
       operationId: genomics.annotations.update
       parameters:
-        - description: The ID of the annotation set to be updated.
+        - description: The ID of the annotation to be updated.
           in: path
           name: annotationId
           required: true
@@ -866,64 +866,6 @@ paths:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - jobs
-  /readgroupsets/align:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Aligns read data from existing read group sets or files from Google Cloud Storage. See the  alignment and variant calling documentation for more details.
-      operationId: genomics.readgroupsets.align
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AlignReadGroupSetsRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AlignReadGroupSetsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-            - 'https://www.googleapis.com/auth/genomics'
-      tags:
-        - readgroupsets
-  /readgroupsets/call:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Calls variants on read data from existing read group sets or files from Google Cloud Storage. See the  alignment and variant calling documentation for more details.
-      operationId: genomics.readgroupsets.call
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CallReadGroupSetsRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/CallReadGroupSetsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-            - 'https://www.googleapis.com/auth/genomics'
-      tags:
-        - readgroupsets
   /readgroupsets/export:
     parameters:
       - $ref: '#/parameters/alt'
@@ -1185,7 +1127,7 @@ paths:
 
         If a target positional range is specified, search returns all reads whose alignment to the reference genome overlap the range. A query which specifies only read group set IDs yields all reads in those read group sets, including unmapped reads.
 
-        All reads returned (including reads on subsequent pages) are ordered by genomic coordinate (reference sequence & position). Reads with equivalent genomic coordinates are returned in a deterministic order.
+        All reads returned (including reads on subsequent pages) are ordered by genomic coordinate (by reference sequence, then position). Reads with equivalent genomic coordinates are returned in an unspecified order. This order is consistent, such that two queries for the same content (regardless of page size) yield reads in the same order across their respective streams of paginated responses.
 
         Implements GlobalAllianceApi.searchReads.
       operationId: genomics.reads.search
@@ -1782,42 +1724,14 @@ paths:
       tags:
         - variantsets
 definitions:
-  AlignReadGroupSetsRequest:
-    description: The read group set align request.
-    properties:
-      bamSourceUris:
-        description: 'The BAM source files for alignment. Exactly one of readGroupSetId, bamSourceUris, interleavedFastqSource or pairedFastqSource must be provided. The caller must have READ permissions for these files.'
-        items:
-          type: string
-        type: array
-      datasetId:
-        description: Required. The ID of the dataset the newly aligned read group sets will belong to. The caller must have WRITE permissions to this dataset.
-        type: string
-      interleavedFastqSource:
-        $ref: '#/definitions/InterleavedFastqSource'
-        description: 'The interleaved FASTQ source files for alignment, where both members of each pair of reads are found on consecutive records within the same FASTQ file. Exactly one of readGroupSetId, bamSourceUris, interleavedFastqSource or pairedFastqSource must be provided.'
-      pairedFastqSource:
-        $ref: '#/definitions/PairedFastqSource'
-        description: 'The paired end FASTQ source files for alignment, where each member of a pair of reads are found in separate files. Exactly one of readGroupSetId, bamSourceUris, interleavedFastqSource or pairedFastqSource must be provided.'
-      readGroupSetId:
-        description: 'The ID of the read group set which will be aligned. A new read group set will be generated to hold the aligned data, the originals will not be modified. The caller must have READ permissions for this read group set. Exactly one of readGroupSetId, bamSourceUris, interleavedFastqSource or pairedFastqSource must be provided.'
-        type: string
-    type: object
-  AlignReadGroupSetsResponse:
-    description: The read group set align response.
-    properties:
-      jobId:
-        description: A job ID that can be used to get status information.
-        type: string
-    type: object
   Annotation:
-    description: "An annotation describes a region of reference genome. The value of an annotation may be one of several canonical types, supplemented by arbitrary info tags. A variant annotation is represented by one or more of these canonical types. An annotation is not inherently associated with a specific sample or individual (though a client could choose to use annotations in this way). Example canonical annotation types are 'Gene' and 'Variant'."
+    description: 'An annotation describes a region of reference genome. The value of an annotation may be one of several canonical types, supplemented by arbitrary info tags. An annotation is not inherently associated with a specific sample or individual (though a client could choose to use annotations in this way). Example canonical annotation types are GENE and VARIANT.'
     properties:
       annotationSetId:
-        description: The ID of the containing annotation set.
+        description: The annotation set to which this annotation belongs.
         type: string
       id:
-        description: The generated unique ID for this annotation.
+        description: 'The server-generated annotation ID, unique across all annotations.'
         type: string
       info:
         additionalProperties:
@@ -1852,10 +1766,10 @@ definitions:
     description: "An annotation set is a logical grouping of annotations that share consistent type information and provenance. Examples of annotation sets include 'all genes from refseq', and 'all variant annotations from ClinVar'."
     properties:
       datasetId:
-        description: The ID of the containing dataset.
+        description: The dataset to which this annotation set belongs.
         type: string
       id:
-        description: The generated unique ID for this annotation set.
+        description: 'The server-generated annotation set ID, unique across all annotation sets.'
         type: string
       info:
         additionalProperties:
@@ -1950,28 +1864,6 @@ definitions:
         type: object
       phaseset:
         description: "If this field is present, this variant call's genotype ordering implies the phase of the bases and is consistent with any other variant calls in the same reference sequence which have the same phaseset value. When importing data from VCF, if the genotype data was phased but no phase set was specified this field will be set to *."
-        type: string
-    type: object
-  CallReadGroupSetsRequest:
-    description: The read group set call request.
-    properties:
-      datasetId:
-        description: Required. The ID of the dataset the called variants will belong to. The caller must have WRITE permissions to this dataset.
-        type: string
-      readGroupSetId:
-        description: The IDs of the read group sets which will be called. The caller must have READ permissions for these read group sets. One of readGroupSetId or sourceUris must be provided.
-        type: string
-      sourceUris:
-        description: A list of URIs pointing at BAM files in Google Cloud Storage which will be called. FASTQ files are not allowed. The caller must have READ permissions for these files. One of readGroupSetId or sourceUris must be provided.
-        items:
-          type: string
-        type: array
-    type: object
-  CallReadGroupSetsResponse:
-    description: The read group set call response.
-    properties:
-      jobId:
-        description: A job ID that can be used to get status information.
         type: string
     type: object
   CallSet:
@@ -2101,11 +1993,11 @@ definitions:
         description: Required. A Google Cloud Storage URI for the exported BAM file. The currently authenticated user must have write access to the new file. An error will be returned if the URI already contains data.
         type: string
       projectNumber:
-        description: Required. The Google Developers Console project number that owns this export.
+        description: Required. The Google Developers Console project number that owns this export. The caller must have WRITE access to this project.
         format: int64
         type: string
       readGroupSetIds:
-        description: Required. The IDs of the read group sets to export.
+        description: Required. The IDs of the read group sets to export. The caller must have READ access to these read group sets.
         items:
           type: string
         type: array
@@ -2154,31 +2046,12 @@ definitions:
         type: string
     type: object
   ExternalId:
-    description: ''
     properties:
       id:
         description: The id used by the source of this data.
         type: string
       sourceName:
         description: The name of the source of this data.
-        type: string
-    type: object
-  FastqMetadata:
-    properties:
-      libraryName:
-        description: Optionally specifies the library name for alignment from FASTQ.
-        type: string
-      platformName:
-        description: 'Optionally specifies the platform name for alignment from FASTQ. For example: CAPILLARY, LS454, ILLUMINA, SOLID, HELICOS, IONTORRENT, PACBIO.'
-        type: string
-      platformUnit:
-        description: 'Optionally specifies the platform unit for alignment from FASTQ. For example: flowcell-barcode.lane for Illumina or slide for SOLID.'
-        type: string
-      readGroupName:
-        description: Optionally specifies the read group name for alignment from FASTQ.
-        type: string
-      sampleName:
-        description: Optionally specifies the sample name for alignment from FASTQ.
         type: string
     type: object
   ImportReadGroupSetsRequest:
@@ -2244,18 +2117,6 @@ definitions:
         description: The int32 value.
         format: int32
         type: integer
-    type: object
-  InterleavedFastqSource:
-    description: Describes an interleaved FASTQ file source for alignment.
-    properties:
-      metadata:
-        $ref: '#/definitions/FastqMetadata'
-        description: Optionally specifies the metadata to be associated with the final aligned read group set.
-      sourceUris:
-        description: A list of URIs pointing at interleaved FASTQ files in Google Cloud Storage which will be aligned. The caller must have READ permissions for these files.
-        items:
-          type: string
-        type: array
     type: object
   Job:
     description: A Job represents an ongoing process that can be monitored for status information.
@@ -2442,23 +2303,6 @@ definitions:
       value:
         description: The value field for simple metadata
         type: string
-    type: object
-  PairedFastqSource:
-    description: Describes a paired-end FASTQ file source for alignment.
-    properties:
-      firstSourceUris:
-        description: 'A list of URIs pointing at paired end FASTQ files in Google Cloud Storage which will be aligned. The first of each paired file should be specified here, in an order that matches the second of each paired file specified in secondSourceUris. For example: firstSourceUris: [file1_1.fq, file2_1.fq], secondSourceUris: [file1_2.fq, file2_2.fq]. The caller must have READ permissions for these files.'
-        items:
-          type: string
-        type: array
-      metadata:
-        $ref: '#/definitions/FastqMetadata'
-        description: Optionally specifies the metadata to be associated with the final aligned read group set.
-      secondSourceUris:
-        description: 'A list of URIs pointing at paired end FASTQ files in Google Cloud Storage which will be aligned. The second of each paired file should be specified here, in an order that matches the first of each paired file specified in firstSourceUris. For example: firstSourceUris: [file1_1.fq, file2_1.fq], secondSourceUris: [file1_2.fq, file2_2.fq]. The caller must have READ permissions for these files.'
-        items:
-          type: string
-        type: array
     type: object
   Position:
     description: 'An abstraction for referring to a genomic position, in relation to some already known reference. For now, represents a genomic position as a reference name, a base number on that reference (0-based), and a determination of forward or reverse strand.'
@@ -2722,7 +2566,7 @@ definitions:
         description: 'The name of this reference, for example 22.'
         type: string
       ncbiTaxonId:
-        description: 'ID from http://www.ncbi.nlm.nih.gov/taxonomy (e.g. 9606->human) if not specified by the containing reference set.'
+        description: 'ID from http://www.ncbi.nlm.nih.gov/taxonomy. For example, 9606 for human.'
         format: int32
         type: integer
       sourceAccessions:
@@ -2731,7 +2575,7 @@ definitions:
           type: string
         type: array
       sourceURI:
-        description: 'The URI from which the sequence was obtained. Specifies a FASTA format file/string with one name, sequence pair.'
+        description: The URI from which the sequence was obtained. Typically specifies a FASTA format file.
         type: string
     type: object
   ReferenceBound:
@@ -2761,7 +2605,7 @@ definitions:
         description: 'Order-independent MD5 checksum which identifies this reference set. The checksum is computed by sorting all lower case hexidecimal string reference.md5checksum (for all reference in this set) in ascending lexicographic order, concatenating, and taking the MD5 of that value. The resulting value is represented in lower case hexadecimal format.'
         type: string
       ncbiTaxonId:
-        description: 'ID from http://www.ncbi.nlm.nih.gov/taxonomy (e.g. 9606->human) indicating the species which this assembly is intended to model. Note that contained references may specify a different ncbiTaxonId, as assemblies may contain reference sequences which do not belong to the modeled species, e.g. EBV in a human reference genome.'
+        description: 'ID from http://www.ncbi.nlm.nih.gov/taxonomy (for example, 9606 for human) indicating the species which this reference set is intended to model. Note that contained references may specify a different ncbiTaxonId, as assemblies may contain reference sequences which do not belong to the modeled species, for example EBV in a human reference genome.'
         format: int32
         type: integer
       referenceIds:
@@ -2984,7 +2828,7 @@ definitions:
           type: string
         type: array
       referenceName:
-        description: 'The reference sequence name, for example chr1, 1, or chrX. If set to *, only unmapped reads are returned.'
+        description: 'The reference sequence name, for example chr1, 1, or chrX. If set to *, only unmapped reads are returned. If unspecified, all reads (mapped and unmapped) returned.'
         type: string
       start:
         description: 'The start position of the range on the reference, 0-based inclusive. If specified, referenceName must also be specified.'
@@ -3332,7 +3176,6 @@ definitions:
         type: string
     type: object
   VariantAnnotationCondition:
-    description: ''
     properties:
       conceptId:
         description: 'The MedGen concept id associated with this gene. Search for these IDs at http://www.ncbi.nlm.nih.gov/medgen/'

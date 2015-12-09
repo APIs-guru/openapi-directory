@@ -334,6 +334,35 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/applications/{applicationId}/verify':
+    get:
+      description: 'Verifies the auth token provided with this request is for the application with the specified ID, and returns the ID of the player it was granted for.'
+      operationId: games.applications.verify
+      parameters:
+        - description: The application ID from the Google Play developer console.
+          in: path
+          name: applicationId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ApplicationVerifyResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/games'
+            - 'https://www.googleapis.com/auth/plus.login'
+      tags:
+        - applications
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   /eventDefinitions:
     get:
       description: Returns a list of the event definitions in this application.
@@ -2284,6 +2313,17 @@ definitions:
         type: string
       secondary:
         description: The secondary category.
+        type: string
+    type: object
+  ApplicationVerifyResponse:
+    description: This is a JSON template for a third party application verification response resource.
+    properties:
+      kind:
+        default: 'games#applicationVerifyResponse'
+        description: 'Uniquely identifies the type of this resource. Value is always the fixed string games#applicationVerifyResponse.'
+        type: string
+      player_id:
+        description: The ID of the player that was issued the auth token used in this request.
         type: string
     type: object
   Category:

@@ -118,7 +118,7 @@ paths:
       operationId: getSocibWeatherStation
       parameters:
         - default: lastdata
-          description: Period of time to get the data
+          description: "Period of time to get the data 'lastdata', 'lasthour','lastday'"
           in: path
           name: period
           required: true
@@ -135,13 +135,13 @@ paths:
       operationId: getWeatherDisplay
       parameters:
         - default: cnarenal
-          description: base URL for the the
+          description: "station name options now: 'cnarenal' | 'cmsap'"
           in: path
           name: stationName
           required: true
           type: string
-        - default: latest
-          description: Period of time to get the data
+        - default: latestdata
+          description: "Period of time to get the data posible values 'latestdata', 'latesthour','latestday','dailylog'"
           in: query
           name: period
           required: true

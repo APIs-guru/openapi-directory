@@ -407,6 +407,8 @@ definitions:
         type: string
   FhirCondition:
     properties:
+      asserter:
+        type: string
       category:
         type: string
       code:
@@ -832,6 +834,8 @@ definitions:
         type: integer
   User:
     properties:
+      canSwitchUser:
+        type: boolean
       changePassword:
         type: boolean
       contactNumber:

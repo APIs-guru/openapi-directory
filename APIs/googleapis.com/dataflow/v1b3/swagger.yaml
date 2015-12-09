@@ -102,6 +102,45 @@ parameters:
     name: upload_protocol
     type: string
 paths:
+  '/v1b3/projects/{projectId}/WorkerMessages':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: Send a worker_message to the service.
+      operationId: dataflow.projects.workerMessages
+      parameters:
+        - description: The project to send the WorkerMessages to.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SendWorkerMessagesRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SendWorkerMessagesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
   '/v1b3/projects/{projectId}/jobs':
     get:
       description: List the jobs of a project
@@ -467,18 +506,40 @@ paths:
         - projects
 definitions:
   ApproximateProgress:
-    description: A progress measurement of a WorkItem by a worker.
+    description: Obsolete in favor of ApproximateReportedProgress and ApproximateSplitRequest.
     properties:
       percentComplete:
-        description: 'Completion as percentage of the work, from 0.0 (beginning, nothing complete), to 1.0 (end of the work range, entire WorkItem complete).'
+        description: Obsolete.
         format: float
         type: number
       position:
         $ref: '#/definitions/Position'
-        description: A Position within the work to represent a progress.
+        description: Obsolete.
       remainingTime:
-        description: Completion as an estimated time remaining.
+        description: Obsolete.
         type: string
+    type: object
+  ApproximateReportedProgress:
+    description: A progress measurement of a WorkItem by a worker.
+    properties:
+      fractionConsumed:
+        description: 'Completion as fraction of the input consumed, from 0.0 (beginning, nothing consumed), to 1.0 (end of the input, entire input consumed).'
+        format: double
+        type: number
+      position:
+        $ref: '#/definitions/Position'
+        description: A Position within the work to represent a progress.
+    type: object
+  ApproximateSplitRequest:
+    description: A suggestion by the service to the worker to dynamically split the WorkItem.
+    properties:
+      fractionConsumed:
+        description: 'A fraction at which to split the work item, from 0.0 (beginning of the input) to 1.0 (end of the input).'
+        format: double
+        type: number
+      position:
+        $ref: '#/definitions/Position'
+        description: A Position at which to split the work item.
     type: object
   AutoscalingSettings:
     description: Settings for WorkerPool autoscaling.
@@ -1133,6 +1194,24 @@ definitions:
           $ref: '#/definitions/WorkItemServiceState'
         type: array
     type: object
+  SendWorkerMessagesRequest:
+    description: A request for sending worker messages to the service.
+    properties:
+      workerMessages:
+        description: The WorkerMessages to send.
+        items:
+          $ref: '#/definitions/WorkerMessage'
+        type: array
+    type: object
+  SendWorkerMessagesResponse:
+    description: The response to the worker messages.
+    properties:
+      workerMessageResponses:
+        description: The servers response to the worker messages.
+        items:
+          $ref: '#/definitions/WorkerMessageResponse'
+        type: array
+    type: object
   SeqMapTask:
     description: Describes a particular function to invoke.
     properties:
@@ -1636,9 +1715,12 @@ definitions:
       reportStatusInterval:
         description: New recommended reporting interval.
         type: string
+      splitRequest:
+        $ref: '#/definitions/ApproximateSplitRequest'
+        description: The progress point in the WorkItem where the Dataflow service suggests that the worker truncate the task.
       suggestedStopPoint:
         $ref: '#/definitions/ApproximateProgress'
-        description: The progress point in the WorkItem where the Dataflow service suggests that the worker truncate the task.
+        description: DEPRECATED in favor of split_request.
       suggestedStopPosition:
         $ref: '#/definitions/Position'
         description: 'Obsolete, always empty.'
@@ -1664,11 +1746,14 @@ definitions:
         type: array
       progress:
         $ref: '#/definitions/ApproximateProgress'
-        description: "The WorkItem's approximate progress."
+        description: DEPRECATED in favor of reported_progress.
       reportIndex:
         description: "The report index. When a WorkItem is leased, the lease will contain an initial report index. When a WorkItem's status is reported to the system, the report should be sent with that report index, and the response will contain the index the worker should use for the next report. Reports received with unexpected index values will be rejected by the service. In order to preserve idempotency, the worker should not alter the contents of a report, even if the worker must submit the same report multiple times before getting back a response. The worker should not submit a subsequent report until the response for the previous report had been received from the service."
         format: int64
         type: string
+      reportedProgress:
+        $ref: '#/definitions/ApproximateReportedProgress'
+        description: "The worker's progress through this WorkItem."
       requestedLeaseDuration:
         description: Amount of time the worker requests for its lease.
         type: string
@@ -1684,6 +1769,48 @@ definitions:
       workItemId:
         description: Identifies the WorkItem.
         type: string
+    type: object
+  WorkerHealthReport:
+    description: WorkerHealthReport contains information about the health of a worker. The VM should be identified by the labels attached to the WorkerMessage that this health ping belongs to.
+    properties:
+      reportInterval:
+        description: The interval at which the worker is sending health reports. The default value of 0 should be interpreted as the field is not being explicitly set by the worker.
+        type: string
+      vmIsHealthy:
+        description: Whether the VM is healthy.
+        type: boolean
+      vmStartupTime:
+        description: The time the VM was booted.
+        type: string
+    type: object
+  WorkerHealthReportResponse:
+    description: WorkerHealthReportResponse contains information returned to the worker in response to a health ping.
+    properties:
+      reportInterval:
+        description: A positive value indicates the worker should change its reporting interval to the specified value. The default value of zero means no change in report rate is requested by the server.
+        type: string
+    type: object
+  WorkerMessage:
+    description: WorkerMessage provides information to the backend about a worker.
+    properties:
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Labels are used to group WorkerMessages. For example, a worker_message about a particular container might have the labels: { "JOB_ID": "2015-04-22", "WORKER_ID": "wordcount-vm-2015…" "CONTAINER_TYPE": "worker", "CONTAINER_ID": "ac1234def"} Label tags typically correspond to Label enum values. However, for ease of development other strings can be used as tags. LABEL_UNSPECIFIED should not be used here.'
+        type: object
+      time:
+        description: The timestamp of the worker_message.
+        type: string
+      workerHealthReport:
+        $ref: '#/definitions/WorkerHealthReport'
+        description: The health of a worker.
+    type: object
+  WorkerMessageResponse:
+    description: A worker_message response allows the server to pass information to the sender.
+    properties:
+      workerHealthReportResponse:
+        $ref: '#/definitions/WorkerHealthReportResponse'
+        description: "The service's response to a worker's health report."
     type: object
   WorkerPool:
     description: 'Describes one particular pool of Dataflow workers to be instantiated by the Dataflow service in order to perform the computations required by a job. Note that a workflow job may use multiple pools, in order to match the various computational requirements of the various stages of the job.'
@@ -1757,7 +1884,7 @@ definitions:
           - TEARDOWN_NEVER
         type: string
       zone:
-        description: 'Zone to run the worker pools in (e.g. "us-central1-b"). If empty or unspecified, the service will attempt to choose a reasonable default.'
+        description: 'Zone to run the worker pools in (e.g. "us-central1-a"). If empty or unspecified, the service will attempt to choose a reasonable default.'
         type: string
     type: object
   WorkerSettings:

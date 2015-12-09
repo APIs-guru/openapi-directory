@@ -34,12 +34,16 @@ tags:
     name: geoip
   - description: Statistics
     name: stats
+  - description: Reporting
+    name: reports
   - description: Settlement
     name: settlement
   - description: Verification
     name: verification
   - description: Dictionaries
     name: dictionaries
+  - description: API for Zapier
+    name: zapier
 paths:
   /api/v1/dictionaries/countries:
     get:
@@ -148,6 +152,111 @@ paths:
       summary: Locate provided IP
       tags:
         - geoip
+  /api/v1/reports/domestic/summary:
+    get:
+      consumes:
+        - application/json
+      operationId: getDomesticSummaryReport
+      parameters:
+        - description: ISO 2-letter country code which will be used for determining which country is domestic.
+          in: query
+          name: country_code
+          required: true
+          type: string
+        - description: 'ISO 3-letter currency code, e.g. EUR or USD. Defaults to the one assigned to MOSS calculations for a given country code.'
+          in: query
+          name: currency_code
+          required: false
+          type: string
+        - description: Period start month in yyyy-MM format.
+          in: query
+          name: start_month
+          required: true
+          type: string
+        - description: Period end month in yyyy-MM-dd format.
+          in: query
+          name: end_month
+          required: true
+          type: string
+        - description: Which date should be used for FX.
+          in: query
+          name: fx_date_type
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/getDomesticSummaryReportOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Calculate domestic summary.
+      tags:
+        - reports
+  /api/v1/reports/eu/vies:
+    get:
+      consumes:
+        - application/json
+      operationId: getEuViesReport
+      parameters:
+        - description: "Output format. 'xml' and 'csv' values are accepted as well"
+          in: query
+          name: format
+          required: false
+          type: string
+        - description: Which transformation should be applied. Please note that transformation will be applied only for xml and csv formats.
+          in: query
+          name: transformation
+          required: false
+          type: string
+        - description: ISO 2-letter country code which will be used for determining which country is domestic.
+          in: query
+          name: eu_country_code
+          required: true
+          type: string
+        - description: 'ISO 3-letter currency code, e.g. EUR or USD. Defaults to the one assigned to MOSS calculations for a given country code.'
+          in: query
+          name: currency_code
+          required: false
+          type: string
+        - description: "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used."
+          in: query
+          name: tax_id
+          required: false
+          type: string
+        - description: Period start month in yyyy-MM format.
+          in: query
+          name: start_month
+          required: true
+          type: string
+        - description: Period end month in yyyy-MM-dd format.
+          in: query
+          name: end_month
+          required: true
+          type: string
+        - description: Which date should be used for FX.
+          in: query
+          name: fx_date_type
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/getEuViesReportOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Calculate EU VIES report.
+      tags:
+        - reports
   /api/v1/settlement/refunds:
     get:
       consumes:
@@ -1102,6 +1211,37 @@ paths:
       summary: Verify SMS token
       tags:
         - verification
+  /api/v1/zapier:
+    delete:
+      consumes:
+        - application/json
+      operationId: Api for zapierRemove
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      tags:
+        - zapier
+    post:
+      consumes:
+        - application/json
+      operationId: Api for zapierCreate
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      tags:
+        - zapier
 definitions:
   C:
     properties:
@@ -1715,6 +1855,118 @@ definitions:
         items:
           $ref: '#/definitions/settlement_daily_stats_schema'
         type: array
+    type: object
+  getDomesticSummaryReportIn:
+    properties:
+      country_code:
+        description: ISO 2-letter country code which will be used for determining which country is domestic.
+        type: string
+      currency_code:
+        description: 'ISO 3-letter currency code, e.g. EUR or USD. Defaults to the one assigned to MOSS calculations for a given country code.'
+        type: string
+      end_month:
+        description: Period end month in yyyy-MM-dd format.
+        type: string
+      fx_date_type:
+        description: Which date should be used for FX.
+        type: string
+      start_month:
+        description: Period start month in yyyy-MM format.
+        type: string
+    required:
+      - country_code
+      - start_month
+      - end_month
+    type: object
+  getDomesticSummaryReportOut:
+    properties:
+      currency_code:
+        description: Three-letter ISO currency code.
+        type: string
+      domestic_refunds_amount:
+        description: Domestic sales refunds amount.
+        type: number
+      domestic_refunds_tax_amount:
+        description: Domestic sales refunds tax amout.
+        type: number
+      domestic_sales_amount:
+        description: Domestic sales amount.
+        type: number
+      domestic_tax_amount:
+        description: Domestic sales tax amout.
+        type: number
+      end_date:
+        description: "Period end date in yyyy-MM-dd'T'hh:mm:ss'Z' format."
+        type: string
+      eu_tax_deducted_refunds:
+        description: EU deducted tax sales.
+        type: number
+      eu_tax_deducted_sales:
+        description: EU deducted tax sales.
+        type: number
+      global_refunds_amount:
+        description: Global sales refunds amount. This includes refunds from domestic country too.
+        type: number
+      global_refunds_tax_amount:
+        description: Global sales refunds amount. This includes refunds from domestic country too.
+        type: number
+      global_sales_amount:
+        description: Global sales amount. This includes sales from domestic country too.
+        type: number
+      global_sales_tax_amount:
+        description: Global sales amount. This includes sales from domestic country too.
+        type: number
+      start_date:
+        description: "Period start date in yyyy-MM-dd'T'hh:mm:ss'Z' format."
+        type: string
+    type: object
+  getEuViesReportIn:
+    properties:
+      currency_code:
+        description: 'ISO 3-letter currency code, e.g. EUR or USD. Defaults to the one assigned to MOSS calculations for a given country code.'
+        type: string
+      end_month:
+        description: Period end month in yyyy-MM-dd format.
+        type: string
+      eu_country_code:
+        description: ISO 2-letter country code which will be used for determining which country is domestic.
+        type: string
+      format:
+        description: "Output format. 'xml' and 'csv' values are accepted as well"
+        type: string
+      fx_date_type:
+        description: Which date should be used for FX.
+        type: string
+      start_month:
+        description: Period start month in yyyy-MM format.
+        type: string
+      tax_id:
+        description: "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used."
+        type: string
+      transformation:
+        description: Which transformation should be applied. Please note that transformation will be applied only for xml and csv formats.
+        type: string
+    required:
+      - eu_country_code
+      - start_month
+      - end_month
+    type: object
+  getEuViesReportOut:
+    properties:
+      currency_code:
+        description: Three-letter ISO currency code.
+        type: string
+      end_date:
+        description: "Period end date in yyyy-MM-dd'T'hh:mm:ss'Z' format."
+        type: string
+      report:
+        description: Settlement report.
+        items:
+          $ref: '#/definitions/report'
+        type: array
+      start_date:
+        description: "Period start date in yyyy-MM-dd'T'hh:mm:ss'Z' format."
+        type: string
     type: object
   getProductTypesDictOut:
     properties:
