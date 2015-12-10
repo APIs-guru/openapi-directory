@@ -326,7 +326,7 @@ paths:
             type: string
           name: buyerCreativeId
           type: array
-        - description: 'When specified, only creatives having the given direct deals status are returned.'
+        - description: 'When specified, only creatives having the given deals status are returned.'
           enum:
             - approved
             - conditionally_approved
@@ -423,6 +423,78 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/creatives/{accountId}/{buyerCreativeId}/addDeal/{dealId}':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Add a deal id association for the creative.
+      operationId: adexchangebuyer.creatives.addDeal
+      parameters:
+        - description: The id for the account that will serve this creative.
+          in: path
+          name: accountId
+          required: true
+          type: integer
+        - description: The buyer-specific id for this creative.
+          in: path
+          name: buyerCreativeId
+          required: true
+          type: string
+        - description: The id of the deal id to associate with this creative.
+          in: path
+          name: dealId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - creatives
+  '/creatives/{accountId}/{buyerCreativeId}/removeDeal/{dealId}':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Remove a deal id associated with the creative.
+      operationId: adexchangebuyer.creatives.removeDeal
+      parameters:
+        - description: The id for the account that will serve this creative.
+          in: path
+          name: accountId
+          required: true
+          type: integer
+        - description: The buyer-specific id for this creative.
+          in: path
+          name: buyerCreativeId
+          required: true
+          type: string
+        - description: The id of the deal id to disassociate with this creative.
+          in: path
+          name: dealId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - creatives
   /marketplaceOffers/search:
     get:
       description: Gets the requested negotiation.
@@ -1587,6 +1659,8 @@ definitions:
     type: object
   DeliveryControl:
     properties:
+      creativeBlockingLevel:
+        type: string
       deliveryRateType:
         type: string
       frequencyCaps:
@@ -1672,6 +1746,9 @@ definitions:
       creationTimeMs:
         description: The time (ms since epoch) of the deal creation. (readonly)
         format: int64
+        type: string
+      creativePreApprovalPolicy:
+        description: Specifies the creative pre-approval policy (buyer-readonly)
         type: string
       dealId:
         description: A unique deal=id for the deal (readonly).
@@ -1814,6 +1891,9 @@ definitions:
       hasCreatorSignedOff:
         description: 'If the creator has already signed off on the offer, then the buyer can finalize the deal by accepting the offer as is. When copying to an order, if any of the terms are changed, then auto_finalize is automatically set to false.'
         type: boolean
+      inventorySource:
+        description: 'What exchange will provide this inventory (readonly, except on create).'
+        type: string
       kind:
         default: 'adexchangebuyer#marketplaceOffer'
         description: 'Identifies what kind of resource this is. Value: the fixed string "adexchangebuyer#marketplaceOffer".'
@@ -1883,6 +1963,9 @@ definitions:
       hasSellerSignedOff:
         description: 'When an order is in an accepted state, indicates whether the buyer has signed off Once both sides have signed off on a deal, the order can be finalized by the seller. (buyer-readonly)'
         type: boolean
+      inventorySource:
+        description: 'What exchange will provide this inventory (readonly, except on create).'
+        type: string
       isRenegotiating:
         description: True if the order is being renegotiated (readonly).
         type: boolean
@@ -2180,6 +2263,23 @@ definitions:
         items:
           format: int64
           type: string
+        type: array
+      videoPlayerSizes:
+        description: Video requests satisfying any of these player size constraints will match.
+        items:
+          properties:
+            aspectRatio:
+              description: The type of aspect ratio. Leave this field blank to match all aspect ratios.
+              type: string
+            minHeight:
+              description: The minimum player height in pixels. Leave this field blank to match any player height.
+              format: int64
+              type: string
+            minWidth:
+              description: The minimum player width in pixels. Leave this field blank to match any player width.
+              format: int64
+              type: string
+          type: object
         type: array
     type: object
   PretargetingConfigList:
