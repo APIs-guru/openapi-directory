@@ -86,7 +86,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Creates a new annotation set. Caller must have WRITE permission for the associated dataset.
+      description: "Creates a new annotation set. Caller must have WRITE permission for the associated dataset.\n\nThe following fields must be provided when creating an annotation set:  \n- datasetId \n- referenceSetId  \nAll other fields may be optionally specified, unless documented as being server-generated (for example, the id field)."
       operationId: genomics.annotationSets.create
       parameters:
         - in: body
@@ -239,7 +239,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Creates a new annotation. Caller must have WRITE permission for the associated annotation set.
+      description: "Creates a new annotation. Caller must have WRITE permission for the associated annotation set.\n\n\nThe following fields must be provided when creating an annotation:  \n- annotationSetId \n- position.referenceName or  position.referenceId  Transcripts \nFor annotations of type TRANSCRIPT, the following fields of annotation.transcript must be provided:  \n- exons.start \n- exons.end  \nAll other fields may be optionally specified, unless documented as being server-generated (for example, the id field). The annotated range must be no longer than 100Mbp (mega base pairs). See the annotation resource for additional restrictions on each field."
       operationId: genomics.annotations.create
       parameters:
         - in: body
@@ -397,6 +397,9 @@ paths:
 
 
         If the request has a systemic issue, such as an attempt to write to an inaccessible annotation set, the entire RPC will fail accordingly. For lesser data issues, when possible an error will be isolated to the corresponding batch entry in the response; the remaining well formed annotations will be created normally.
+
+
+        For details on the requirements for each individual annotation resource, see annotations.create.
       operationId: genomics.annotations.batchCreate
       parameters:
         - in: body
@@ -575,7 +578,7 @@ paths:
       description: Lists datasets within a project.
       operationId: genomics.datasets.list
       parameters:
-        - description: 'The maximum number of results returned by this request. If unspecified, defaults to 50.'
+        - description: 'The maximum number of results to return in a single page. If unspecified, defaults to 50. The maximum value is 1024.'
           in: query
           name: pageSize
           type: integer
@@ -1230,7 +1233,7 @@ paths:
           in: query
           name: end
           type: string
-        - description: Specifies the maximum number of bases to return in a single page.
+        - description: 'The maximum number of bases to return in a single page. If unspecified, defaults to 200Kbp (kilo base pairs). The maximum value is 10Mbp (mega base pairs).'
           in: query
           name: pageSize
           type: integer
@@ -2212,7 +2215,10 @@ definitions:
           $ref: '#/definitions/CigarUnit'
         type: array
       mappingQuality:
-        description: The mapping quality of this alignment. Represents how likely the read maps to this position as opposed to other locations.
+        description: |-
+          The mapping quality of this alignment. Represents how likely the read maps to this position as opposed to other locations.
+
+          Specifically, this is -10 log10 Pr(mapping position is wrong), rounded to the nearest integer.
         format: int32
         type: integer
       position:
@@ -2380,22 +2386,22 @@ definitions:
       cigarMap = { "ALIGNMENT_MATCH": "M", "INSERT": "I", "DELETE": "D", "SKIP": "N", "CLIP_SOFT": "S", "CLIP_HARD": "H", "PAD": "P", "SEQUENCE_MATCH": "=", "SEQUENCE_MISMATCH": "X", } cigarStr = "" for c in read.alignment.cigar { cigarStr += c.operationLength + cigarMap[c.operation] } return cigarStr
     properties:
       alignedQuality:
-        description: 'The quality of the read sequence contained in this alignment record. alignedSequence and alignedQuality may be shorter than the full read sequence and quality. This will occur if the alignment is part of a chimeric alignment, or if the read was trimmed. When this occurs, the CIGAR for this read will begin/end with a hard clip operator that will indicate the length of the excised sequence.'
+        description: 'The quality of the read sequence contained in this alignment record. (equivalent to QUAL in SAM). alignedSequence and alignedQuality may be shorter than the full read sequence and quality. This will occur if the alignment is part of a chimeric alignment, or if the read was trimmed. When this occurs, the CIGAR for this read will begin/end with a hard clip operator that will indicate the length of the excised sequence.'
         items:
           format: int32
           type: integer
         type: array
       alignedSequence:
-        description: 'The bases of the read sequence contained in this alignment record, without CIGAR operations applied. alignedSequence and alignedQuality may be shorter than the full read sequence and quality. This will occur if the alignment is part of a chimeric alignment, or if the read was trimmed. When this occurs, the CIGAR for this read will begin/end with a hard clip operator that will indicate the length of the excised sequence.'
+        description: 'The bases of the read sequence contained in this alignment record, without CIGAR operations applied (equivalent to SEQ in SAM). alignedSequence and alignedQuality may be shorter than the full read sequence and quality. This will occur if the alignment is part of a chimeric alignment, or if the read was trimmed. When this occurs, the CIGAR for this read will begin/end with a hard clip operator that will indicate the length of the excised sequence.'
         type: string
       alignment:
         $ref: '#/definitions/LinearAlignment'
-        description: The linear alignment for this alignment record. This field will be unset if the read is unmapped.
+        description: The linear alignment for this alignment record. This field is null for unmapped reads.
       duplicateFragment:
-        description: The fragment is a PCR or optical duplicate (SAM flag 0x400)
+        description: The fragment is a PCR or optical duplicate (SAM flag 0x400).
         type: boolean
       failedVendorQualityChecks:
-        description: SAM flag 0x200
+        description: 'Whether this read did not pass filters, such as platform or vendor quality controls (SAM flag 0x200).'
         type: boolean
       fragmentLength:
         description: 'The observed length of the fragment, equivalent to TLEN in SAM.'
@@ -2423,13 +2429,13 @@ definitions:
         format: int32
         type: integer
       properPlacement:
-        description: The orientation and the distance between reads from the fragment are consistent with the sequencing protocol (SAM flag 0x2)
+        description: The orientation and the distance between reads from the fragment are consistent with the sequencing protocol (SAM flag 0x2).
         type: boolean
       readGroupId:
-        description: The ID of the read group this read belongs to. (Every read must belong to exactly one read group.)
+        description: "The ID of the read group this read belongs to. A read belongs to exactly one read group. This is a server-generated ID (not SAM's RG tag)."
         type: string
       readGroupSetId:
-        description: The ID of the read group set this read belongs to. (Every read must belong to exactly one read group set.)
+        description: The ID of the read group set this read belongs to. A read belongs to exactly one read group set.
         type: string
       readNumber:
         description: The read number in sequencing. 0-based and less than numberReads. This field replaces SAM flag 0x40 and 0x80.
@@ -2478,7 +2484,7 @@ definitions:
           $ref: '#/definitions/ReadGroupProgram'
         type: array
       referenceSetId:
-        description: The reference set the reads in this read group are aligned to. Required if there are any read alignments.
+        description: The reference set to which the reads in this read group are aligned.
         type: string
       sampleId:
         description: "The sample this read group's data was generated from. Note: This is not an actual ID within this repository, but rather an identifier for a sample which may be meaningful to some external system."
@@ -2508,7 +2514,7 @@ definitions:
         description: The user specified locally unique ID of the program. Used along with prevProgramId to define an ordering between programs.
         type: string
       name:
-        description: The name of the program.
+        description: "The display name of the program. This is typically the colloquial name of the tool used, for example 'bwa' or 'picard'."
         type: string
       prevProgramId:
         description: The ID of the program run before this one.
@@ -2582,7 +2588,7 @@ definitions:
     description: ReferenceBound records an upper bound for the starting coordinate of variants in a particular reference.
     properties:
       referenceName:
-        description: The reference the bound is associate with.
+        description: The name of the reference associated with this ReferenceBound.
         type: string
       upperBound:
         description: An upper bound (inclusive) on the starting coordinate of any variant in the reference sequence.
@@ -2633,7 +2639,7 @@ definitions:
         description: Only return annotations sets for which a substring of the name matches this string (case insensitive).
         type: string
       pageSize:
-        description: 'Specifies number of results to return in a single page. If unspecified, it will default to 128. The maximum value is 1024.'
+        description: 'The maximum number of results to return in a single page. If unspecified, defaults to 128. The maximum value is 1024.'
         format: int32
         type: integer
       pageToken:
@@ -2672,7 +2678,7 @@ definitions:
           type: string
         type: array
       pageSize:
-        description: 'Specifies number of results to return in a single page. If unspecified, it will default to 256. The maximum value is 2048.'
+        description: 'The maximum number of results to return in a single page. If unspecified, defaults to 256. The maximum value is 2048.'
         format: int32
         type: integer
       pageToken:
@@ -2700,7 +2706,7 @@ definitions:
         description: Only return call sets for which a substring of the name matches this string.
         type: string
       pageSize:
-        description: 'The maximum number of call sets to return. If unspecified, defaults to 1000.'
+        description: 'The maximum number of results to return in a single page. If unspecified, defaults to 1024.'
         format: int32
         type: integer
       pageToken:
@@ -2736,7 +2742,7 @@ definitions:
         format: int64
         type: string
       pageSize:
-        description: Specifies the number of results to return in a single page. Defaults to 128. The maximum value is 256.
+        description: 'The maximum number of results to return in a single page. If unspecified, defaults to 128. The maximum value is 256.'
         format: int32
         type: integer
       pageToken:
@@ -2784,7 +2790,7 @@ definitions:
         description: Only return read group sets for which a substring of the name matches this string.
         type: string
       pageSize:
-        description: 'Specifies number of results to return in a single page. If unspecified, it will default to 256. The maximum value is 1024.'
+        description: 'The maximum number of results to return in a single page. If unspecified, defaults to 256. The maximum value is 1024.'
         format: int32
         type: integer
       pageToken:
@@ -2811,7 +2817,7 @@ definitions:
         format: int64
         type: string
       pageSize:
-        description: 'Specifies number of results to return in a single page. If unspecified, it will default to 256. The maximum value is 2048.'
+        description: 'The maximum number of results to return in a single page. If unspecified, defaults to 256. The maximum value is 2048.'
         format: int32
         type: integer
       pageToken:
@@ -2864,7 +2870,7 @@ definitions:
           type: string
         type: array
       pageSize:
-        description: Specifies the maximum number of results to return in a single page.
+        description: 'The maximum number of results to return in a single page. If unspecified, defaults to 1024. The maximum value is 4096.'
         format: int32
         type: integer
       pageToken:
@@ -2896,7 +2902,7 @@ definitions:
           type: string
         type: array
       pageSize:
-        description: Specifies the maximum number of results to return in a single page.
+        description: 'The maximum number of results to return in a single page. If unspecified, defaults to 1024. The maximum value is 4096.'
         format: int32
         type: integer
       pageToken:
@@ -2926,7 +2932,7 @@ definitions:
           type: string
         type: array
       pageSize:
-        description: The maximum number of variant sets to return in a request.
+        description: 'The maximum number of results to return in a single page. If unspecified, defaults to 1024.'
         format: int32
         type: integer
       pageToken:
@@ -2958,11 +2964,11 @@ definitions:
         format: int64
         type: string
       maxCalls:
-        description: 'The maximum number of calls to return. However, at least one variant will always be returned, even if it has more calls than this limit. If unspecified, defaults to 5000.'
+        description: 'The maximum number of calls to return in a single page. Note that this limit may be exceeded; at least one variant is always returned per page, even if it has more calls than this limit. If unspecified, defaults to 5000. The maximum value is 10000.'
         format: int32
         type: integer
       pageSize:
-        description: 'The maximum number of variants to return. If unspecified, defaults to 5000.'
+        description: 'The maximum number of variants to return in a single page. If unspecified, defaults to 5000. The maximum value is 10000.'
         format: int32
         type: integer
       pageToken:

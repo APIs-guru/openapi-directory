@@ -65,7 +65,7 @@ paths:
         - pandorabots_api_swagger_1_3
   '/bot/{app_id}':
     get:
-      description: "Retrieve a list of your application's bots. Response returns JSON object with info for each bot.<p>Returns a 401 error code for invalid app_ID or user_key.</p><p><pre class='prettyprint'>curl -v  -X GET 'https://aiaas.pandorabots.com/bot/APP_ID?user_key=USER_KEY'</pre></p>"
+      description: "Retrieve a list of your application's bots. Response returns JSON object with info for each bot.<p>Returns a 401 error code for invalid app_ID or user_key, or if applicable, invalid referrer.</p><p><pre class='prettyprint'>curl -v  -X GET 'https://aiaas.pandorabots.com/bot/APP_ID?user_key=USER_KEY'</pre></p>"
       operationId: listBots
       parameters:
         - description: Your Application ID
@@ -87,7 +87,7 @@ paths:
         - pandorabots_api_swagger_1_3
   '/bot/{app_id}/{botname}':
     delete:
-      description: "Delete a bot on the Pandorabots server.<p>Deleting a bot that does not exist returns a 412 error. Invalid botname will return a 400 error. Invalid app_d or user_key will return a 401 error.</p><p><pre class='prettyprint'>curl -v  -X DELETE 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME?user_key=USER_KEY'</pre></p>"
+      description: "Delete a bot on the Pandorabots server.<p>Deleting a bot that does not exist returns a 412 error. Invalid botname will return a 400 error. Invalid app_id, user_key, or referrer filter will return a 401 error.</p><p><pre class='prettyprint'>curl -v  -X DELETE 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME?user_key=USER_KEY'</pre></p>"
       operationId: deleteBot
       parameters:
         - description: Your Application ID
@@ -113,7 +113,7 @@ paths:
       tags:
         - pandorabots_api_swagger_1_3
     get:
-      description: "Retrieve a list of a bot's files. Returns a JSON object with each bot file associated with bot specified.<p>Returns a 404 error code for bot not found. Returns a 401 error code for invalid app_ID or user_key.</p><p>The <code color=blue>return=zip</code> option may not behave as expected using Active Docs 1.2</p><p><pre class='prettyprint'>curl -v  -X GET 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME?user_key=USER_KEY'</pre></p>"
+      description: "Retrieve a list of a bot's files. Returns a JSON object with each bot file associated with bot specified.<p>Returns a 404 error code for bot not found. Returns a 401 error code for invalid app_ID, user_key, or referrer filter.</p><p>The <code color=blue>return=zip</code> option may not behave as expected using Active Docs 1.2</p><p><pre class='prettyprint'>curl -v  -X GET 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME?user_key=USER_KEY'</pre></p>"
       operationId: listBotFiles
       parameters:
         - description: Your Application ID
@@ -143,7 +143,7 @@ paths:
       tags:
         - pandorabots_api_swagger_1_3
     put:
-      description: "Create a new instance of a bot on the Pandorabots server.<p>If there is already a bot under the same app_id and botname, a 409 error is returned. Invalid botname will return a 400 error.</p><p>Creating more bots than your plan allows for or using an invalid app_id or user_key returns a 401 error.</p><p><pre class='prettyprint'>curl -v  -X PUT 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME?user_key=USER_KEY'</pre></p>"
+      description: "Create a new instance of a bot on the Pandorabots server.<p>If there is already a bot under the same app_id and botname, a 409 error is returned. Invalid botname will return a 400 error.</p><p>Creating more bots than your plan allows or using an invalid app_id or user_key (or if applicable referrer filter) returns a 401 error.</p><p><pre class='prettyprint'>curl -v  -X PUT 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME?user_key=USER_KEY'</pre></p>"
       operationId: createBot
       parameters:
         - description: Your Application ID

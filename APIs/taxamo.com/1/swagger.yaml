@@ -42,8 +42,6 @@ tags:
     name: verification
   - description: Dictionaries
     name: dictionaries
-  - description: API for Zapier
-    name: zapier
 paths:
   /api/v1/dictionaries/countries:
     get:
@@ -1211,37 +1209,6 @@ paths:
       summary: Verify SMS token
       tags:
         - verification
-  /api/v1/zapier:
-    delete:
-      consumes:
-        - application/json
-      operationId: Api for zapierRemove
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      tags:
-        - zapier
-    post:
-      consumes:
-        - application/json
-      operationId: Api for zapierCreate
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: 'Validation failed, see JSON body response for details.'
-        '401':
-          description: Incorrect token
-      tags:
-        - zapier
 definitions:
   C:
     properties:

@@ -1046,31 +1046,31 @@ definitions:
         description: Whether or not an entity was served from cache (with or without validation).
         type: boolean
       referer:
-        description: 'Referer (a.k.a. referrer) URL of request, as defined in http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html.'
+        description: 'The referer(sic) URL of the request, as defined in [HTTP/1.1 Header Field Definitions](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).'
         type: string
       remoteIp:
-        description: IP address of the client who issues the HTTP request. Could be either IPv4 or IPv6.
+        description: 'The IP address (IPv4 or IPv6) of the client that issued the HTTP request. Examples: `"192.168.1.1"`, `"FE80::0202:B3FF:FE1E:8329"`.'
         type: string
       requestMethod:
-        description: 'Request method, such as `GET`, `HEAD`, `PUT` or `POST`.'
+        description: 'The request method. Examples: `"GET"`, `"HEAD"`, `"PUT"`, `"POST"`.'
         type: string
       requestSize:
-        description: 'Size of the HTTP request message in bytes, including request headers and the request body.'
+        description: 'The size of the HTTP request message in bytes, including the request headers and the request body.'
         format: int64
         type: string
       requestUrl:
-        description: 'Contains the scheme (http|https), the host name, the path and the query portion of the URL that was requested.'
+        description: 'The scheme (http, https), the host name, the path and the query portion of the URL that was requested. Example: `"http://example.com/some/info?color=red"`.'
         type: string
       responseSize:
-        description: 'Size of the HTTP response message in bytes sent back to the client, including response headers and response body.'
+        description: 'The size of the HTTP response message sent back to the client, in bytes, including the response headers and the response body.'
         format: int64
         type: string
       status:
-        description: 'A response code indicates the status of response, e.g., 200.'
+        description: 'The response code indicating the status of response. Examples: 200, 404.'
         format: int32
         type: integer
       userAgent:
-        description: 'User agent sent by the client, e.g., "Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; Q312461; .NET CLR 1.0.3705)".'
+        description: 'The user agent sent by the client. Example: `"Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; Q312461; .NET CLR 1.0.3705)"`.'
         type: string
       validatedWithOriginServer:
         description: Whether or not the response was validated with the origin server before being served from cache. This field is only meaningful if cache_hit is True.
@@ -1345,7 +1345,7 @@ definitions:
         description: An opaque identifier for the instance that handled the request.
         type: string
       instanceIndex:
-        description: 'If the instance that processed this request was individually addressable (i.e. belongs to a manually scaled module), this is the index of the instance.'
+        description: 'If the instance that processed this request was individually addressable (i.e. belongs to a manually scaled module), this is the 0 based index of the instance, otherwise this value is -1.'
         format: int32
         type: integer
       ip:

@@ -1090,6 +1090,7 @@ paths:
             - detail_set
             - display_set
             - editorial_segments
+            - editorial_source_id
             - event_ids
             - graphical_style
             - id
@@ -1128,6 +1129,7 @@ paths:
               - detail_set
               - display_set
               - editorial_segments
+              - editorial_source_id
               - event_ids
               - graphical_style
               - id
@@ -1673,6 +1675,7 @@ paths:
             - detail_set
             - display_set
             - editorial_segments
+            - editorial_source_id
             - event_ids
             - graphical_style
             - id
@@ -1711,6 +1714,7 @@ paths:
               - detail_set
               - display_set
               - editorial_segments
+              - editorial_source_id
               - event_ids
               - graphical_style
               - id
@@ -2617,6 +2621,7 @@ paths:
             - detail_set
             - display_set
             - editorial_segments
+            - editorial_source_id
             - event_ids
             - graphical_style
             - id
@@ -2653,6 +2658,7 @@ paths:
               - detail_set
               - display_set
               - editorial_segments
+              - editorial_source_id
               - event_ids
               - graphical_style
               - id
@@ -4547,6 +4553,9 @@ definitions:
         items:
           type: string
         type: array
+      editorial_source_id:
+        description: Specifies the editorial source id of the image
+        type: string
       event_ids:
         description: Lists the events that are relevant for this image.
         items:
