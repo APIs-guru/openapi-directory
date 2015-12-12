@@ -484,8 +484,6 @@ function updateGoogle() {
       return ([
              //missing API description
              'cloudlatencytest:v2',
-             //asterisk in path
-             'admin:directory_v1',
              //plus in path
              'pubsub:v1',
              'pubsub:v1beta1',
@@ -497,6 +495,10 @@ function updateGoogle() {
              'cloudbilling:v1',
              'proximitybeacon:v1beta1',
              'youtubereporting:v1',
+             'dataproc:v1',
+             'dataproc:v1alpha1',
+             'dataproc:v1beta1',
+             'logging:v2beta1',
              //circular reference in MapFolder/MapItem
              'mapsengine:exp2',
              'mapsengine:v1',
