@@ -558,6 +558,8 @@ function writeSpec(source, type, exPatch, callback) {
       if (error)
         return callback(error, result);
 
+      expandPathTemplates(swagger);
+
       try {
         patchSwagger(swagger, exPatch);
       }
@@ -593,6 +595,68 @@ function writeSpec(source, type, exPatch, callback) {
 
       validateAndFix();
     });
+  });
+}
+
+//TODO: move into separate lib
+var SwaggerMethods = require('swagger-methods');
+function expandPathTemplates(swagger) {
+  var paths = swagger.paths;
+  _.each(_.keys(paths), function (path) {
+    function applyParameter(pathItem, name, callback) {
+      function applyParameterArray(paramArray, callback) {
+        var newParamArray = [];
+        _.any(paramArray, function (param, index) {
+          if (param.name !== name) {
+            newParamArray.push(param);
+            return;
+          }
+
+          assert(param.in === 'path');
+          var ret = callback(param);
+
+          if (!_.isUndefined(ret))
+            newParamArray.push(ret);
+        });
+
+        return newParamArray;
+
+      }
+
+      pathItem.parameters = applyParameterArray(pathItem.parameters, callback)
+      _(pathItem).pick(SwaggerMethods).each(function (value) {
+        value.parameters = applyParameterArray(value.parameters, callback);
+      }).value();
+    }
+
+    var pathItem = paths[path];
+    var originalPath = path;
+    var match;
+
+    var parameterNames = [];
+    while (match = /{\/([^}]*?)}/.exec(path)) {
+      var paramName = match[1];
+      path = path.replace(match[0], '/{' + paramName + '}');
+      applyParameter(pathItem, paramName, function(param) {
+        assert(_.isUndefined(param.required) || param.required === false);
+        param.required = true;
+        return param;
+      });
+      parameterNames.unshift(paramName);
+    }
+
+    var clonePath = path;
+    var clonePathItem = _.cloneDeep(pathItem);
+    _.each(parameterNames, function (paramName) {
+      clonePath = clonePath.replace('/{' + paramName + '}', '');
+      applyParameter(clonePathItem, paramName, function() {
+        return; //delete it
+      });
+      paths[clonePath] = _.cloneDeep(clonePathItem);
+    });
+
+    delete paths[originalPath];
+    paths[path] = pathItem;
   });
 }
 
