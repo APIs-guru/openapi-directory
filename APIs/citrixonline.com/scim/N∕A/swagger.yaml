@@ -38,7 +38,7 @@ paths:
       description: 'Queries the user schema. The user schema is defined in SCIM Core Schema (http://www.simplecloud.info/specs/draft-scim-core-schema-01.html#resource-schema).'
       operationId: getUserSchema
       parameters:
-        - description: Access token
+        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
           in: header
           name: Authorization
           required: true
@@ -62,7 +62,7 @@ paths:
       description: 'Queries service provider configurations. The service provider configurations are defined in SCIM Core Schema (http://www.simplecloud.info/specs/draft-scim-core-schema-01.html#anchor6). This call returns a description, a documentationURL, name, and specURL.'
       operationId: getServiceProviderConfigs
       parameters:
-        - description: Access token
+        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
           in: header
           name: Authorization
           required: true
@@ -86,7 +86,7 @@ paths:
       description: Queries multiple users identity in the organization domain. Filtering is available.
       operationId: getUsers
       parameters:
-        - description: Access token
+        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
           in: header
           name: Authorization
           required: true
@@ -117,7 +117,7 @@ paths:
       description: Creates a new organization user and adds them to the user domain. The user email domain must match an existing organization email domain.
       operationId: createUsers
       parameters:
-        - description: Access token
+        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
           in: header
           name: Authorization
           required: true
@@ -153,7 +153,7 @@ paths:
       description: Queries the identity of the current authenticated user.
       operationId: getMe
       parameters:
-        - description: Access token
+        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
           in: header
           name: Authorization
           required: true
@@ -180,7 +180,7 @@ paths:
       description: "Changes a limited set (or all if you choose) of the current authenticated user's data. The updated user email domain must be an existing organization email domain. "
       operationId: updateMe
       parameters:
-        - description: Access token
+        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
           in: header
           name: Authorization
           required: true
@@ -217,7 +217,7 @@ paths:
       description: "Changes the current authenticated user's displayName, locale, timezone, username and password. The request must include the full user definition (to modify one or more values without sending the full definition, see Update User). The replaced user email domain must be an existing organization email domain. "
       operationId: replaceMe
       parameters:
-        - description: Access token
+        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
           in: header
           name: Authorization
           required: true
@@ -255,7 +255,7 @@ paths:
       description: Deletes a user from the organization (but not from the account).
       operationId: deleteUser
       parameters:
-        - description: Access token
+        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
           in: header
           name: Authorization
           required: true
@@ -286,7 +286,7 @@ paths:
       description: Queries user identity in the organization domain.
       operationId: getUser
       parameters:
-        - description: Access token
+        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
           in: header
           name: Authorization
           required: true
@@ -319,7 +319,7 @@ paths:
       description: "Changes a limited set (or all if you choose) of the user's data. The updated user email domain must be an existing organization email domain."
       operationId: updateUser
       parameters:
-        - description: Access token
+        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
           in: header
           name: Authorization
           required: true
@@ -362,7 +362,7 @@ paths:
       description: "Changes an existing user's displayName, locale, timezone, username and password. The request must include the full user definition (to modify one or more values without sending the full definition, see Update User). The replaced user email domain must be an existing organization email domain."
       operationId: replaceUser
       parameters:
-        - description: Access token
+        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
           in: header
           name: Authorization
           required: true
@@ -625,7 +625,7 @@ definitions:
         $ref: '#/definitions/UserMetadata'
         description: User metadata
       name:
-        $ref: '#/definitions/UserName'
+        $ref: '#/definitions/UserFullName'
         description: "The user's full name"
       timezone:
         description: "The user's time zone"
@@ -665,6 +665,9 @@ definitions:
       locale:
         description: "The user's language settings"
         type: string
+      name:
+        $ref: '#/definitions/UserFullName'
+        description: "The user's full name"
       password:
         description: "The user's password"
         type: string
@@ -674,6 +677,18 @@ definitions:
       userName:
         description: "The user's username, usually their email address"
         type: string
+  UserFullName:
+    description: The full name of the user
+    properties:
+      familyName:
+        description: "The user's surname"
+        type: string
+      givenName:
+        description: "The user's first name"
+        type: string
+    required:
+      - familyName
+      - givenName
   UserMetadata:
     description: User metadata
     properties:
@@ -687,18 +702,6 @@ definitions:
     required:
       - created
       - location
-  UserName:
-    description: The full name of the user
-    properties:
-      familyName:
-        description: "The user's surname"
-        type: string
-      givenName:
-        description: "The user's first name"
-        type: string
-    required:
-      - familyName
-      - givenName
   XmlDataFormat:
     description: Specifies whether the XML data format is supported
     properties:
