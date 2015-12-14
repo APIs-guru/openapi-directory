@@ -507,6 +507,8 @@ tags:
     name: investigation_cellphonelog
   - description: "Search API for 'Old Phone Log' entry type"
     name: investigation_oldphonelog
+  - description: "Search API for 'Property Sales' entry type"
+    name: property_sales
   - description: "Search API for 'Registrations' entry type"
     name: registrations
   - description: "Search API for 'Boulder County Voter Details' entry type"
@@ -13669,6 +13671,178 @@ paths:
       summary: "Search API for 'Vocabulary' entry type"
       tags:
         - project_vocabulary
+  /repository/search/type/property_sales:
+    get:
+      description: API to search for entries of type Property Sales
+      operationId: search_property_sales
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Property Address
+          in: query
+          name: search.db_property_sales.property_address
+          required: false
+          type: string
+        - description: City
+          in: query
+          name: search.db_property_sales.city
+          required: false
+          type: string
+        - description: Zip Code
+          in: query
+          name: search.db_property_sales.zipcode
+          required: false
+          type: string
+        - description: Sale Price
+          format: double
+          in: query
+          name: search.db_property_sales.sale_price
+          required: false
+          type: number
+        - description: Sale Date
+          in: query
+          name: search.db_property_sales.sale_date
+          required: false
+          type: string
+        - description: Seller
+          in: query
+          name: search.db_property_sales.seller
+          required: false
+          type: string
+        - description: Buyer
+          in: query
+          name: search.db_property_sales.buyer
+          required: false
+          type: string
+        - description: Property Type
+          in: query
+          name: search.db_property_sales.type
+          required: false
+          type: string
+        - description: Building Description
+          in: query
+          name: search.db_property_sales.building_description
+          required: false
+          type: string
+        - description: Building Design
+          in: query
+          name: search.db_property_sales.building_design
+          required: false
+          type: string
+        - description: Subdivision
+          in: query
+          name: search.db_property_sales.subdivision
+          required: false
+          type: string
+        - description: Location
+          in: query
+          name: search.db_property_sales.location
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: "Search API for 'Property Sales' entry type"
+      tags:
+        - property_sales
   /repository/search/type/propertydb:
     get:
       description: API to search for entries of type Property Database
