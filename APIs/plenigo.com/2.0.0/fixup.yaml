@@ -1,6 +1,12 @@
 definitions:
   OAuthError:
     - {}
+  TransactionItem:
+    properties:
+      billingId:
+        type:
+          - int
+          - integer
 paths:
   '/access/app/token/{customerId}':
     post:

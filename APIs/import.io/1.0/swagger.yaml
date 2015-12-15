@@ -2042,13 +2042,13 @@ definitions:
   Run:
     description: Encapsulates an asynchronous run.
     properties:
-      apiGuid:
-        format: uuid
-        type: string
       completedAt:
         format: utc-millisec
         type: integer
       configurationGuid:
+        format: uuid
+        type: string
+      connectorGuid:
         format: uuid
         type: string
       error:
@@ -2102,7 +2102,7 @@ definitions:
         type: string
     required:
       - guid
-      - apiGuid
+      - connectorGuid
       - configurationGuid
     type: object
   RunSearch:

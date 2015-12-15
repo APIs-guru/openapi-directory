@@ -45,6 +45,8 @@ securityDefinitions:
       'https://www.googleapis.com/auth/admin.directory.notifications': View and manage notifications received on your domain
       'https://www.googleapis.com/auth/admin.directory.orgunit': View and manage organization units on your domain
       'https://www.googleapis.com/auth/admin.directory.orgunit.readonly': View organization units on your domain
+      'https://www.googleapis.com/auth/admin.directory.resource.calendar': View and manage the provisioning of calendar resources on your domain
+      'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly': View calendar resources on your domain
       'https://www.googleapis.com/auth/admin.directory.rolemanagement': Manage delegated admin roles for your domain
       'https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly': View delegated admin roles for your domain
       'https://www.googleapis.com/auth/admin.directory.user': View and manage the provisioning of users on your domain
@@ -1184,6 +1186,180 @@ paths:
             - 'https://www.googleapis.com/auth/admin.directory.notifications'
       tags:
         - notifications
+  '/customer/{customer}/resources/calendars':
+    get:
+      description: Retrieves a list of calendar resources for an account.
+      operationId: directory.resources.calendars.list
+      parameters:
+        - description: "The unique ID for the customer's Google account. As an account administrator, you can also use the my_customer alias to represent your account's customer ID."
+          in: path
+          name: customer
+          required: true
+          type: string
+        - description: Maximum number of results to return.
+          in: query
+          maximum: 500
+          minimum: 1
+          name: maxResults
+          type: integer
+        - description: Token to specify the next page in the list.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CalendarResources'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
+      tags:
+        - resources
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Inserts a calendar resource.
+      operationId: directory.resources.calendars.insert
+      parameters:
+        - description: "The unique ID for the customer's Google account. As an account administrator, you can also use the my_customer alias to represent your account's customer ID."
+          in: path
+          name: customer
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CalendarResource'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CalendarResource'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
+  '/customer/{customer}/resources/calendars/{calendarResourceId}':
+    delete:
+      description: Deletes a calendar resource.
+      operationId: directory.resources.calendars.delete
+      parameters:
+        - description: "The unique ID for the customer's Google account. As an account administrator, you can also use the my_customer alias to represent your account's customer ID."
+          in: path
+          name: customer
+          required: true
+          type: string
+        - description: The unique ID of the calendar resource to delete.
+          in: path
+          name: calendarResourceId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
+    get:
+      description: Retrieves a calendar resource.
+      operationId: directory.resources.calendars.get
+      parameters:
+        - description: "The unique ID for the customer's Google account. As an account administrator, you can also use the my_customer alias to represent your account's customer ID."
+          in: path
+          name: customer
+          required: true
+          type: string
+        - description: The unique ID of the calendar resource to retrieve.
+          in: path
+          name: calendarResourceId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CalendarResource'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar.readonly'
+      tags:
+        - resources
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates a calendar resource. This method supports patch semantics.
+      operationId: directory.resources.calendars.patch
+      parameters:
+        - description: "The unique ID for the customer's Google account. As an account administrator, you can also use the my_customer alias to represent your account's customer ID."
+          in: path
+          name: customer
+          required: true
+          type: string
+        - description: The unique ID of the calendar resource to update.
+          in: path
+          name: calendarResourceId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CalendarResource'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CalendarResource'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
+    put:
+      description: Updates a calendar resource.
+      operationId: directory.resources.calendars.update
+      parameters:
+        - description: "The unique ID for the customer's Google account. As an account administrator, you can also use the my_customer alias to represent your account's customer ID."
+          in: path
+          name: customer
+          required: true
+          type: string
+        - description: The unique ID of the calendar resource to update.
+          in: path
+          name: calendarResourceId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CalendarResource'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CalendarResource'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/admin.directory.resource.calendar'
+      tags:
+        - resources
   '/customer/{customer}/roleassignments':
     get:
       description: Retrieves a paginated list of all roleAssignments.
@@ -2951,6 +3127,51 @@ definitions:
       kind:
         default: 'admin#directory#aspList'
         description: 'The type of the API resource. This is always admin#directory#aspList.'
+        type: string
+    type: object
+  CalendarResource:
+    description: JSON template for Calendar Resource object in Directory API.
+    properties:
+      etags:
+        description: ETag of the resource.
+        type: string
+      kind:
+        default: 'admin#directory#resources#calendars#CalendarResource'
+        description: 'The type of the resource. For calendar resources, the value is admin#directory#resources#calendars#CalendarResource.'
+        type: string
+      resourceDescription:
+        description: The brief description of the calendar resource.
+        type: string
+      resourceEmail:
+        description: The read-only email ID for the calendar resource. Generated as part of creating a new calendar resource.
+        type: string
+      resourceId:
+        description: The unique ID for the calendar resource.
+        type: string
+      resourceName:
+        description: 'The name of the calendar resource. For example, Training Room 1A'
+        type: string
+      resourceType:
+        description: The type of the calendar resource. Used for grouping resources in the calendar user interface.
+        type: string
+    type: object
+  CalendarResources:
+    description: JSON template for Calendar Resource List Response object in Directory API.
+    properties:
+      etag:
+        description: ETag of the resource.
+        type: string
+      items:
+        description: The CalendarResources in this page of results.
+        items:
+          $ref: '#/definitions/CalendarResource'
+        type: array
+      kind:
+        default: 'admin#directory#resources#calendars#calendarResourcesList'
+        description: 'Identifies this as a collection of CalendarResources. This is always admin#directory#resources#calendars#calendarResourcesList.'
+        type: string
+      nextPageToken:
+        description: 'The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
         type: string
     type: object
   Channel:

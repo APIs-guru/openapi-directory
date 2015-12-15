@@ -218,25 +218,14 @@ paths:
           name: inlinecount
           required: false
           type: string
-        - collectionFormat: multi
-          description: "Return a list of rooms that only have the given room type.\r\n            Allows to pass a comma-separated list of room types."
+        - description: "Return a list of rooms that only have the given ocuppancy status.\r\n            Allows to pass a comma-separated list of occupancy statuses."
+          enum:
+            - Occupied
+            - Vacant
           in: query
-          items:
-            type: string
-          name: roomType
-          required: false
-          type: array
-        - collectionFormat: multi
-          description: "Return a list of rooms that only have the given ocuppancy status.\r\n            Allows to pass a comma-separated list of occupancy statuses."
-          in: query
-          items:
-            enum:
-              - Occupied
-              - Vacant
-            type: string
           name: occupancy
           required: false
-          type: array
+          type: string
         - collectionFormat: multi
           description: "Return a list of rooms that only have the given room condition status.\r\n            Allows to pass a comma-separated list of room condition statuses."
           in: query
@@ -246,7 +235,7 @@ paths:
               - Clean
               - Dirty
             type: string
-          name: condition
+          name: conditions
           required: false
           type: array
         - collectionFormat: multi
@@ -260,7 +249,15 @@ paths:
               - OutOfOrder
               - OutOfService
             type: string
-          name: maintenance
+          name: maintenances
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: "Return a list of rooms that only have the given room type.\r\n            Allows to pass a comma-separated list of room types."
+          in: query
+          items:
+            type: string
+          name: roomTypes
           required: false
           type: array
         - collectionFormat: multi
@@ -268,7 +265,7 @@ paths:
           in: query
           items:
             type: string
-          name: amenity
+          name: amenities
           required: false
           type: array
         - collectionFormat: multi
@@ -276,7 +273,7 @@ paths:
           in: query
           items:
             type: string
-          name: view
+          name: views
           required: false
           type: array
         - collectionFormat: multi
@@ -284,7 +281,7 @@ paths:
           in: query
           items:
             type: string
-          name: location
+          name: locations
           required: false
           type: array
       produces:
@@ -329,23 +326,20 @@ paths:
           name: hotelId
           required: true
           type: integer
+        - description: "Return a count of rooms that only have the given ocuppancy status.\r\n            Allows to pass a comma-separated list of occupancy statuses."
+          enum:
+            - Occupied
+            - Vacant
+          in: query
+          name: occupancy
+          required: false
+          type: string
         - collectionFormat: multi
           description: "Return a coun of rooms that only have the given room type.\r\n            Allows to pass a comma-separated list of room types."
           in: query
           items:
             type: string
-          name: roomType
-          required: false
-          type: array
-        - collectionFormat: multi
-          description: "Return a count of rooms that only have the given ocuppancy status.\r\n            Allows to pass a comma-separated list of occupancy statuses."
-          in: query
-          items:
-            enum:
-              - Occupied
-              - Vacant
-            type: string
-          name: occupancy
+          name: roomTypes
           required: false
           type: array
         - collectionFormat: multi
@@ -357,7 +351,7 @@ paths:
               - Clean
               - Dirty
             type: string
-          name: condition
+          name: conditions
           required: false
           type: array
         - collectionFormat: multi
@@ -371,7 +365,7 @@ paths:
               - OutOfOrder
               - OutOfService
             type: string
-          name: maintenance
+          name: maintenances
           required: false
           type: array
         - collectionFormat: multi
@@ -379,7 +373,7 @@ paths:
           in: query
           items:
             type: string
-          name: amenity
+          name: amenities
           required: false
           type: array
         - collectionFormat: multi
@@ -387,7 +381,7 @@ paths:
           in: query
           items:
             type: string
-          name: view
+          name: views
           required: false
           type: array
         - collectionFormat: multi
@@ -395,7 +389,7 @@ paths:
           in: query
           items:
             type: string
-          name: location
+          name: locations
           required: false
           type: array
       produces:

@@ -2610,7 +2610,7 @@ definitions:
         description: The two-letter ISO 639-1 language in which the attributes are defined in the data feed.
         type: string
       contentLanguage:
-        description: The two-letter ISO 639-1 language of the items in the feed.
+        description: The two-letter ISO 639-1 language of the items in the feed. Must be a valid language for targetCountry.
         type: string
       contentType:
         description: The type of data feed.
@@ -3482,6 +3482,9 @@ definitions:
     type: object
   OrdersCancelLineItemRequest:
     properties:
+      amount:
+        $ref: '#/definitions/Price'
+        description: 'Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order.'
       lineItemId:
         description: The ID of the line item to cancel.
         type: string
@@ -3610,6 +3613,9 @@ definitions:
     type: object
   OrdersCustomBatchRequestEntryCancelLineItem:
     properties:
+      amount:
+        $ref: '#/definitions/Price'
+        description: 'Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order.'
       lineItemId:
         description: The ID of the line item to cancel.
         type: string

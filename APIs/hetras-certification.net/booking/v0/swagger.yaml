@@ -59,12 +59,16 @@ paths:
         - description: Number of adults per room.
           format: byte
           in: query
+          maximum: 255
+          minimum: 1
           name: adults
           required: true
           type: string
         - description: Number of rooms.
           format: byte
           in: query
+          maximum: 255
+          minimum: 1
           name: rooms
           required: true
           type: string
@@ -77,6 +81,14 @@ paths:
           in: query
           name: ratePlanCode
           required: true
+          type: string
+        - description: Return additional information on request.
+          enum:
+            - None
+            - Breakdown
+          in: query
+          name: expand
+          required: false
           type: string
       produces:
         - application/json
@@ -394,12 +406,14 @@ paths:
         - description: Number of adults per room.
           format: byte
           in: query
+          minimum: 1
           name: adults
           required: true
           type: string
         - description: Number of rooms (default is 1).
           format: byte
           in: query
+          minimum: 1
           name: rooms
           required: false
           type: string
@@ -416,6 +430,14 @@ paths:
         - description: Only return offers for the specified group code.
           in: query
           name: groupCode
+          required: false
+          type: string
+        - description: Return additional information on request.
+          enum:
+            - None
+            - Breakdown
+          in: query
+          name: expand
           required: false
           type: string
       produces:
@@ -479,14 +501,14 @@ definitions:
     type: object
   AddonOffer:
     properties:
+      breakdown:
+        description: "In this collection you will get an entry with prize information for every day the addon service will be charged\r\n            on the reservation when the addon service will be booked."
+        items:
+          $ref: '#/definitions/AddonOfferBreakdown'
+        type: array
       code:
         description: The code of the addon service
         type: string
-      daily_rates:
-        description: "In this collection you will get an entry with prize information for every day the addon service will be charged\r\n            on the reservation when the addon service will be booked."
-        items:
-          $ref: '#/definitions/AddonOfferDailyRate'
-        type: array
       description:
         description: The description of the addon service
         type: string
@@ -496,18 +518,24 @@ definitions:
       name:
         description: The name of the addon service
         type: string
+      rate_mode:
+        description: Rate mode for a given addon service.
+        enum:
+          - PerRoom
+          - PerPerson
+        type: string
       total_stay:
         $ref: '#/definitions/AddonOfferRate'
         description: "This object gives you the prize information if this addon service is booked for the total stay defined in your\r\n            request by arrivalDate and departureDate"
     type: object
-  AddonOfferDailyRate:
+  AddonOfferBreakdown:
     properties:
+      business_day:
+        description: The date the addon service will be activated.
+        format: date-time
+        type: string
       currency:
         description: The currency the addon service will be charged in.
-        type: string
-      end_date:
-        description: The date the addon service will be active booked until
-        format: date-time
         type: string
       included_tax:
         description: "The amount of taxes already included in the gross rate of the addon service also calculated for all rooms and\r\n            all persons."
@@ -517,10 +545,6 @@ definitions:
         description: The gross rate of the addon service. It is the prize calculated for all rooms and all persons.
         format: double
         type: number
-      start_date:
-        description: The date the addon service will be active booked from
-        format: date-time
-        type: string
     type: object
   AddonOfferRate:
     properties:
@@ -739,29 +763,6 @@ definitions:
         description: "The id of a customer profile. The id is build out of the Supplier Code a dash and the profile id\r\n            shown in the hetras UI. An example id on the API for a profile with id 12345 on the level of supplier ABC \r\n            would be ABC-12345"
         type: string
     type: object
-  CreditCard:
-    properties:
-      card_holder_name:
-        description: name of the card holder
-        type: string
-      card_number:
-        description: Credit card number
-        type: string
-      card_type:
-        description: One of the allowed values for a credit card type. If omitted it will be set to Others
-        type: string
-      cvv_code:
-        description: credit card verification value
-        type: string
-      expiration_month:
-        description: month of expiration
-        format: int32
-        type: integer
-      expiration_year:
-        description: year of expiration
-        format: int32
-        type: integer
-    type: object
   DailyRate:
     properties:
       addon_services:
@@ -856,6 +857,57 @@ definitions:
         description: Name of the general policy
         type: string
     type: object
+  GetAddonsRequest:
+    properties:
+      adults:
+        description: Number of adults per room.
+        format: byte
+        maximum: 255
+        minimum: 1
+        type: string
+      arrivalDate:
+        description: 'Date of arrival for the guest in the ISO-8601 format "YYYY-MM-DD".'
+        format: date-time
+        type: string
+      channelCode:
+        description: Channel Code the rate plan needs to be configured for.
+        type: string
+      departureDate:
+        description: 'Date of departure for the guest in the ISO-8601 format "YYYY-MM-DD".'
+        format: date-time
+        type: string
+      expand:
+        description: Return additional information on request.
+        enum:
+          - None
+          - Breakdown
+        type: string
+      hotelId:
+        description: Specifies the hotel id to process.
+        format: int32
+        type: integer
+      ratePlanCode:
+        description: Only return offers for the specified room type code.
+        type: string
+      roomType:
+        description: Only return offers with rates for the specified room type code.
+        type: string
+      rooms:
+        description: Number of rooms.
+        format: byte
+        maximum: 255
+        minimum: 1
+        type: string
+    required:
+      - hotelId
+      - arrivalDate
+      - departureDate
+      - channelCode
+      - adults
+      - rooms
+      - roomType
+      - ratePlanCode
+    type: object
   GroupMaster:
     properties:
       code:
@@ -867,9 +919,6 @@ definitions:
     type: object
   Guarantee:
     properties:
-      credit_card:
-        $ref: '#/definitions/CreditCard'
-        description: The credit card to be used for capturing the reservations amount or to guarantee for the reservation
       guarantee_type:
         description: One of the accepted guarantee types from the offer you selected out of the rates response
         enum:
@@ -1058,6 +1107,11 @@ definitions:
         description: Number of currently available rooms for that specific offer
         format: int32
         type: integer
+      breakdown:
+        description: In this collection you will get an entry with prise information for every day.
+        items:
+          $ref: '#/definitions/RoomOfferDailyRate'
+        type: array
       cancellation_policies:
         description: List of cancellation policies defined for that rate
         items:
@@ -1178,6 +1232,55 @@ definitions:
           $ref: '#/definitions/Service'
         type: array
     type: object
+  RatesRequest:
+    properties:
+      adults:
+        description: Number of adults per room.
+        format: byte
+        minimum: 1
+        type: string
+      arrivalDate:
+        description: 'Date of arrival for the guest in the ISO-8601 format "YYYY-MM-DD".'
+        format: date-time
+        type: string
+      channelCode:
+        description: Channel Code the rate plan needs to be configured for.
+        type: string
+      departureDate:
+        description: 'Date of departure for the guest in the ISO-8601 format "YYYY-MM-DD".'
+        format: date-time
+        type: string
+      expand:
+        description: Return additional information on request.
+        enum:
+          - None
+          - Breakdown
+        type: string
+      groupCode:
+        description: Only return offers for the specified group code.
+        type: string
+      hotelId:
+        description: Specifies the hotel id to process.
+        format: int32
+        type: integer
+      ratePlanCode:
+        description: Only return offers for the specified room type code.
+        type: string
+      roomType:
+        description: Only return offers with rates for the specified room type code.
+        type: string
+      rooms:
+        description: Number of rooms (default is 1).
+        format: byte
+        minimum: 1
+        type: string
+    required:
+      - hotelId
+      - arrivalDate
+      - departureDate
+      - channelCode
+      - adults
+    type: object
   Reservation:
     properties:
       addons:
@@ -1205,9 +1308,6 @@ definitions:
       contact:
         $ref: '#/definitions/Contact'
         description: The contact that will be linked to this reservation
-      currency:
-        description: The currency all amounts of this reservation will be shown in
-        type: string
       departure_date:
         description: The departure date of the guests
         format: date-time
@@ -1447,6 +1547,25 @@ definitions:
       room_type:
         description: The room type all offers will be valid for
         type: string
+    type: object
+  RoomOfferDailyRate:
+    properties:
+      business_day:
+        description: The effective date of the room offer
+        format: date-time
+        type: string
+      excluded_tax:
+        description: "The amount of taxes that are not included in the gross rate of the room offer, and that will be charged separately.\r\n            It is also calculated for all rooms and all persons"
+        format: double
+        type: number
+      included_tax:
+        description: "The amount of taxes already included in the gross rate of the room offer also calculated for all rooms and\r\n            all persons"
+        format: double
+        type: number
+      rate:
+        description: The gross rate of the room offer. It is the prize calculated for all rooms and all persons
+        format: double
+        type: number
     type: object
   RoomTypeCount:
     properties:

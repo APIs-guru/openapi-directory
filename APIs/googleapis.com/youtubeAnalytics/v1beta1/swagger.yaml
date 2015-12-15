@@ -274,6 +274,10 @@ paths:
           in: query
           name: onBehalfOfContentOwner
           type: string
+        - description: 'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identifies the next page that can be retrieved.'
+          in: query
+          name: pageToken
+          type: string
       responses:
         '200':
           description: Successful response
@@ -408,6 +412,8 @@ paths:
             $ref: '#/definitions/ResultTable'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube'
+            - 'https://www.googleapis.com/auth/youtube.readonly'
             - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
             - 'https://www.googleapis.com/auth/yt-analytics.readonly'
       tags:
@@ -582,6 +588,8 @@ definitions:
         type: array
       kind:
         default: 'youtube#groupListResponse'
+        type: string
+      nextPageToken:
         type: string
     type: object
   ResultTable:

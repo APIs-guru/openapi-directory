@@ -1173,6 +1173,38 @@ definitions:
         description: Amount of total elements
         format: int32
         type: integer
+  CompanyUserBillingAddressItem:
+    properties:
+      additionalAddressInfo:
+        description: "the user's additional address info"
+        type: string
+      city:
+        description: "the user's city"
+        type: string
+      company:
+        description: the company name
+        type: string
+      country:
+        description: "the user's country"
+        type: string
+      firstName:
+        description: "the user's first name"
+        type: string
+      gender:
+        description: "the user's gender"
+        type: string
+      name:
+        description: "the user's last name"
+        type: string
+      postCode:
+        description: "the user's postal code address"
+        type: string
+      state:
+        description: "the user's state address"
+        type: string
+      street:
+        description: "the user's street address"
+        type: string
   CompanyUserItem:
     properties:
       additionalAddressInfo:
@@ -1181,6 +1213,9 @@ definitions:
       agreementState:
         description: "the user's newsletter agreement state"
         type: string
+      billingAddress:
+        $ref: '#/definitions/CompanyUserBillingAddressItem'
+        description: "the user's billing address"
       birthday:
         description: "the user's birth date"
         type: string
@@ -1188,7 +1223,7 @@ definitions:
         description: "the user's city"
         type: string
       country:
-        description: "the user's country"
+        description: "the user's country in ISO 3166-1 Alpha 2 format (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)"
         type: string
       customerId:
         description: The user id
@@ -1233,13 +1268,17 @@ definitions:
         items:
           $ref: '#/definitions/CompanyUserItem'
         type: array
-      page:
+      pageNumber:
         description: Page number
         format: int32
         type: integer
       size:
         description: Page size
         format: int32
+        type: integer
+      totalElements:
+        description: Total amount of elements available
+        format: int64
         type: integer
   CreateMobileSecretRequest:
     properties:
@@ -1348,13 +1387,17 @@ definitions:
         items:
           $ref: '#/definitions/FailedPaymentItem'
         type: array
-      page:
+      pageNumber:
         description: Page number
         format: int32
         type: integer
       size:
         description: Page size
         format: int32
+        type: integer
+      totalElements:
+        description: Total amount of elements available
+        format: int64
         type: integer
   Image:
     properties:
@@ -1536,7 +1579,7 @@ definitions:
         items:
           $ref: '#/definitions/SubscriptionItem'
         type: array
-      page:
+      pageNumber:
         description: Page number
         format: int32
         type: integer
@@ -1544,8 +1587,16 @@ definitions:
         description: Page size
         format: int32
         type: integer
+      totalElements:
+        description: Total amount of elements available
+        format: int64
+        type: integer
   TransactionItem:
     properties:
+      billingId:
+        description: Billing id
+        format: int64
+        type: integer
       currency:
         description: Currency of the amounts
         type: string
@@ -1582,7 +1633,7 @@ definitions:
         format: double
         type: number
       taxesCountry:
-        description: The country of the tax
+        description: 'The country of the tax in ISO 3166-1 Alpha 2 format (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)'
         type: string
       taxesPercentage:
         description: Tax percentage of the transaction
@@ -1604,13 +1655,17 @@ definitions:
         items:
           $ref: '#/definitions/TransactionItem'
         type: array
-      page:
+      pageNumber:
         description: Page number
         format: int32
         type: integer
       size:
         description: Page size
         format: int32
+        type: integer
+      totalElements:
+        description: Total amount of elements available
+        format: int64
         type: integer
   User:
     properties:
@@ -1621,7 +1676,7 @@ definitions:
         description: City of the user
         type: string
       country:
-        description: 'Country of the user in ISO 3166 Alpha 3 format (http://en.wikipedia.org/wiki/ISO_3166-1_alpha-3#Officially_assigned_code_elements)'
+        description: 'Country of the user in ISO 3166-1 Alpha 2 format (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)'
         type: string
       email:
         description: Email of the user
