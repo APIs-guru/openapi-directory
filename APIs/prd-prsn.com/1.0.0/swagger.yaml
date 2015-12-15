@@ -2,42 +2,45 @@ swagger: '2.0'
 schemes:
   - http
 host: epscass.prd-prsn.com
-basePath: /
 info:
   description: Access to the Pearson OpenClass API
-  title: OpenClass API
+  title: EPS APIs
   version: 1.0.0
   x-logo:
     url: 'https://www.pearson.com/content/dam/corporate/global/pearson-dot-com/images/section-images/media/logos/Pearson_Without_Strapline_Blue_RGB_LoRes.png'
   x-origin:
     format: swagger
     url: 'http://epscass.prd-prsn.com/api/resources'
-    version: '1.2'
+    version: '2.0'
   x-providerName: prd-prsn.com
 tags:
-  - description: institution
-    name: institution
-  - description: Version
-    name: version
-  - description: Health check
-    name: health
+  - name: Health check
+  - name: resources
+  - name: institution
+  - name: Version
 paths:
   /api/institution:
     get:
+      description: ''
       operationId: getInstitutions
+      parameters:
+        - in: header
+          name: correlation-id
+          required: false
+          type: string
       produces:
         - application/json;charset=UTF-8
       responses:
         '200':
-          description: No response was specified
+          description: successful operation
           schema:
-            items:
-              $ref: '#/definitions/InstitutionBean'
+            $ref: '#/definitions/SearchBeanInstitutionBean'
       summary: List institution
       tags:
         - institution
   '/api/institution/{uniqueId}':
     get:
+      description: ''
       operationId: getInstitution
       parameters:
         - description: The intitution unique id
@@ -46,56 +49,82 @@ paths:
           name: uniqueId
           required: true
           type: integer
+        - in: header
+          name: correlation-id
+          required: false
+          type: string
       produces:
         - application/json;charset=UTF-8
       responses:
         '200':
-          description: No response was specified
+          description: successful operation
           schema:
             $ref: '#/definitions/InstitutionBean'
       summary: Get an institution
       tags:
         - institution
-  /api/version/:
+  /api/version:
     get:
+      description: ''
       operationId: version
+      parameters:
+        - in: header
+          name: correlation-id
+          required: false
+          type: string
       produces:
         - application/json;charset=UTF-8
       responses:
-        '200':
-          description: No response was specified
+        default:
+          description: successful operation
       summary: Get the server version
       tags:
-        - version
-  /health/:
+        - Version
+  /health:
     get:
+      description: ''
       operationId: health
+      parameters:
+        - in: header
+          name: correlation-id
+          required: false
+          type: string
       produces:
-        - application/json
+        - application/json;charset=UTF-8
       responses:
-        '200':
-          description: No response was specified
+        default:
+          description: successful operation
       summary: Get health
       tags:
-        - health
+        - Health check
 definitions:
   DeliveryBean:
     properties:
+      responseHeaders:
+        additionalProperties:
+          type: string
+        type: object
       uri:
-        $ref: '#/definitions/URI'
+        format: uri
+        type: string
       uris:
         additionalProperties:
           items:
-            $ref: '#/definitions/URI'
+            format: uri
+            type: string
           type: array
+        type: object
+    type: object
   InstitutionBean:
     properties:
       config:
         additionalProperties:
           type: string
+        type: object
       delivery:
         $ref: '#/definitions/DeliveryBean'
       enabled:
+        default: false
         type: boolean
       filestoreId:
         type: string
@@ -115,40 +144,24 @@ definitions:
         type: integer
       url:
         type: string
-  URI:
+    type: object
+  SearchBeanInstitutionBean:
     properties:
-      absolute:
-        type: boolean
-      authority:
-        type: string
-      fragment:
-        type: string
-      host:
-        type: string
-      opaque:
-        type: boolean
-      path:
-        type: string
-      port:
+      available:
+        format: int64
+        type: integer
+      length:
         format: int32
         type: integer
-      query:
-        type: string
-      rawAuthority:
-        type: string
-      rawFragment:
-        type: string
-      rawPath:
-        type: string
-      rawQuery:
-        type: string
-      rawSchemeSpecificPart:
-        type: string
-      rawUserInfo:
-        type: string
-      scheme:
-        type: string
-      schemeSpecificPart:
-        type: string
-      userInfo:
-        type: string
+      results:
+        items:
+          $ref: '#/definitions/InstitutionBean'
+        type: array
+      start:
+        format: int64
+        type: integer
+      warnings:
+        items:
+          type: string
+        type: array
+    type: object
