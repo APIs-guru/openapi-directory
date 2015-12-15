@@ -558,14 +558,15 @@ function writeSpec(source, type, exPatch, callback) {
       if (error)
         return callback(error, result);
 
-      expandPathTemplates(swagger);
-
       try {
         patchSwagger(swagger, exPatch);
       }
       catch (e) {
         callback(e, result);
       }
+
+      expandPathTemplates(swagger);
+
       result.swagger = swagger;
 
       function done(errors, warnings) {
