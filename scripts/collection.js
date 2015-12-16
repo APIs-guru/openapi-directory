@@ -192,13 +192,20 @@ function getResource(url, options, callback) {
   options.method = 'GET';
   options.gzip = true;
   options.url = url;
-  new Request(options, function(err, response, data) {
+  async.retry({}, function (asyncCallback) {
+    new Request(options, function(err, response, data) {
+      if (err)
+        return asyncCallback(new Error('Can not GET "' + url +'": ' + err));
+      if (response.statusCode !== 200)
+        return asyncCallback(new Error('Can not GET "' + url +'": ' + response.statusMessage));
+      asyncCallback(null, {response: response, data: data});
+    });
+  }, function (err, result) {
     if (err)
-      return callback(new Error('Can not GET "' + url +'": ' + err));
-    if (response.statusCode !== 200)
-      return callback(new Error('Can not GET "' + url +'": ' + response.statusMessage));
+      return callback(err);
+
     console.log(url);
-    callback(null, response, data);
+    callback(null, result.response, result.data);
   });
 }
 
