@@ -478,7 +478,6 @@ function updateGoogle() {
     assert.equal(data.discoveryVersion, 'v1');
 
     var result = [];
-    //FIXME: data.preferred
     var googleSpecs = _(data.items).filter(function (api) {
       //blacklist
       return ([
