@@ -1,0 +1,185 @@
+swagger: '2.0'
+schemes:
+  - https
+host: cloudlatencytest-pa.googleapis.com
+basePath: /v2/statscollection
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: A Test API to report latency data.
+  title: Google Cloud Network Performance Monitoring
+  version: v2
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/cloudlatencytest/v2/rest'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: cloudlatencytest
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/monitoring.readonly': View monitoring data for all of your Google Cloud and API projects
+    type: oauth2
+parameters:
+  alt:
+    default: json
+    description: Data format for the response.
+    enum:
+      - json
+    in: query
+    name: alt
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    in: query
+    name: quotaUser
+    type: string
+  userIp:
+    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    in: query
+    name: userIp
+    type: string
+paths:
+  /updateaggregatedstats:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: RPC to update the new TCP stats.
+      operationId: cloudlatencytest.statscollection.updateaggregatedstats
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AggregatedStats'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AggregatedStatsReply'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.readonly'
+      tags:
+        - statscollection
+  /updatestats:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: RPC to update the new TCP stats.
+      operationId: cloudlatencytest.statscollection.updatestats
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Stats'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/StatsReply'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/monitoring.readonly'
+      tags:
+        - statscollection
+definitions:
+  AggregatedStats:
+    properties:
+      stats:
+        items:
+          $ref: '#/definitions/Stats'
+        type: array
+    type: object
+  AggregatedStatsReply:
+    properties:
+      testValue:
+        type: string
+    type: object
+  DoubleValue:
+    properties:
+      label:
+        type: string
+      value:
+        format: float
+        type: number
+    type: object
+  IntValue:
+    properties:
+      label:
+        type: string
+      value:
+        format: int64
+        type: string
+    type: object
+  Stats:
+    properties:
+      doubleValues:
+        items:
+          $ref: '#/definitions/DoubleValue'
+        type: array
+      intValues:
+        items:
+          $ref: '#/definitions/IntValue'
+        type: array
+      stringValues:
+        items:
+          $ref: '#/definitions/StringValue'
+        type: array
+      time:
+        format: double
+        type: number
+    type: object
+  StatsReply:
+    properties:
+      testValue:
+        type: string
+    type: object
+  StringValue:
+    properties:
+      label:
+        type: string
+      value:
+        type: string
+    type: object

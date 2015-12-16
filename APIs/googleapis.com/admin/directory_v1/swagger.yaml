@@ -554,6 +554,7 @@ paths:
           name: orgUnitPath
           required: true
           type: string
+          x-reservedExpansion: true
       responses:
         '200':
           description: Successful response
@@ -576,6 +577,7 @@ paths:
           name: orgUnitPath
           required: true
           type: string
+          x-reservedExpansion: true
       responses:
         '200':
           description: Successful response
@@ -609,6 +611,7 @@ paths:
           name: orgUnitPath
           required: true
           type: string
+          x-reservedExpansion: true
         - in: body
           name: body
           schema:
@@ -637,6 +640,7 @@ paths:
           name: orgUnitPath
           required: true
           type: string
+          x-reservedExpansion: true
         - in: body
           name: body
           schema:

@@ -1,0 +1,1007 @@
+swagger: '2.0'
+schemes:
+  - https
+host: logging.googleapis.com
+basePath: /
+x-hasEquivalentPaths: true
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: 'The Google Cloud Logging API lets you write log entries and manage your logs, log sinks and logs-based metrics.'
+  title: Google Cloud Logging
+  version: v2beta1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://cloud.google.com/_static/images/new-gcp-logo.png'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/logging/v2beta1/rest'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: logging
+externalDocs:
+  url: 'https://cloud.google.com/logging/docs/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/logging.admin': Administrate log data for your projects
+      'https://www.googleapis.com/auth/logging.read': View log data for your projects
+      'https://www.googleapis.com/auth/logging.write': Submit log data for your projects
+    type: oauth2
+parameters:
+  $.xgafv:
+    description: V1 error format.
+    in: query
+    name: $.xgafv
+    type: string
+  access_token:
+    description: OAuth access token.
+    in: query
+    name: access_token
+    type: string
+  alt:
+    default: json
+    description: Data format for response.
+    in: query
+    name: alt
+    type: string
+  bearer_token:
+    description: OAuth bearer token.
+    in: query
+    name: bearer_token
+    type: string
+  callback:
+    description: JSONP
+    in: query
+    name: callback
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  pp:
+    default: true
+    description: Pretty-print response.
+    in: query
+    name: pp
+    type: boolean
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+    in: query
+    name: quotaUser
+    type: string
+  uploadType:
+    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+    in: query
+    name: uploadType
+    type: string
+  upload_protocol:
+    description: 'Upload protocol for media (e.g. "raw", "multipart").'
+    in: query
+    name: upload_protocol
+    type: string
+paths:
+  '/v2beta1/entries:list':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: 'Lists log entries. Use this method to examine log entries from Cloud Logging. See [Exporting Logs](/logging/docs/export) for other ways to copy log entries out of Cloud Logging.'
+      operationId: logging.entries.list
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ListLogEntriesRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListLogEntriesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - 'https://www.googleapis.com/auth/logging.admin'
+            - 'https://www.googleapis.com/auth/logging.read'
+      tags:
+        - entries
+  '/v2beta1/entries:write':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: Writes log entries to Cloud Logging. All log entries in Cloud Logging are written by this method.
+      operationId: logging.entries.write
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/WriteLogEntriesRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/WriteLogEntriesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/logging.admin'
+            - 'https://www.googleapis.com/auth/logging.write'
+      tags:
+        - entries
+  /v2beta1/monitoredResourceDescriptors:
+    get:
+      description: Lists monitored resource descriptors that are used by Cloud Logging.
+      operationId: logging.monitoredResourceDescriptors.list
+      parameters:
+        - description: "Optional. The maximum number of results to return from this request. Fewer results might be returned. You must check for the 'nextPageToken` result to determine if additional results are available, which you can retrieve by passing the `nextPageToken` value in the `pageToken` parameter to the next request."
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'Optional. If the `pageToken` request parameter is supplied, then the next page of results in the set are retrieved. The `pageToken` parameter must be set with the value of the `nextPageToken` result parameter from the previous request.'
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListMonitoredResourceDescriptorsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - 'https://www.googleapis.com/auth/logging.admin'
+            - 'https://www.googleapis.com/auth/logging.read'
+      tags:
+        - monitoredResourceDescriptors
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+  '/v2beta1/{logName}':
+    delete:
+      description: Deletes a log and all its log entries. The log will reappear if it receives new entries.
+      operationId: logging.projects.logs.delete
+      parameters:
+        - description: 'Required. The resource name of the log to delete. Example: `"projects/my-project/logs/syslog"`.'
+          in: path
+          name: logName
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/logging.admin'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+  '/v2beta1/{metricName}':
+    delete:
+      description: Deletes a logs-based metric.
+      operationId: logging.projects.metrics.delete
+      parameters:
+        - description: 'The resource name of the metric to delete. Example: `"projects/my-project-id/metrics/my-metric-id"`.'
+          in: path
+          name: metricName
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/logging.admin'
+            - 'https://www.googleapis.com/auth/logging.write'
+      tags:
+        - projects
+    get:
+      description: Gets a logs-based metric.
+      operationId: logging.projects.metrics.get
+      parameters:
+        - description: 'The resource name of the desired metric. Example: `"projects/my-project-id/metrics/my-metric-id"`.'
+          in: path
+          name: metricName
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LogMetric'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - 'https://www.googleapis.com/auth/logging.admin'
+            - 'https://www.googleapis.com/auth/logging.read'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    put:
+      description: Creates or updates a logs-based metric.
+      operationId: logging.projects.metrics.update
+      parameters:
+        - description: 'The resource name of the metric to update. Example: `"projects/my-project-id/metrics/my-metric-id"`. The updated metric must be provided in the request and have the same identifier that is specified in `metricName`. If the metric does not exist, it is created.'
+          in: path
+          name: metricName
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LogMetric'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LogMetric'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/logging.admin'
+            - 'https://www.googleapis.com/auth/logging.write'
+      tags:
+        - projects
+  '/v2beta1/{projectName}/metrics':
+    get:
+      description: Lists logs-based metrics.
+      operationId: logging.projects.metrics.list
+      parameters:
+        - description: 'Required. The resource name for the project whose metrics are wanted. Example: `"projects/my-project-id"`.'
+          in: path
+          name: projectName
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: 'Optional. If the `pageToken` request parameter is supplied, then the next page of results in the set are retrieved. The `pageToken` parameter must be set with the value of the `nextPageToken` result parameter from the previous request. The value of `projectName` must be the same as in the previous request.'
+          in: query
+          name: pageToken
+          type: string
+        - description: "Optional. The maximum number of results to return from this request. Fewer results might be returned. You must check for the 'nextPageToken` result to determine if additional results are available, which you can retrieve by passing the `nextPageToken` value in the `pageToken` parameter to the next request."
+          in: query
+          name: pageSize
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListLogMetricsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - 'https://www.googleapis.com/auth/logging.admin'
+            - 'https://www.googleapis.com/auth/logging.read'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: Creates a logs-based metric.
+      operationId: logging.projects.metrics.create
+      parameters:
+        - description: 'The resource name of the project in which to create the metric. Example: `"projects/my-project-id"`. The new metric must be provided in the request.'
+          in: path
+          name: projectName
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LogMetric'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LogMetric'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/logging.admin'
+            - 'https://www.googleapis.com/auth/logging.write'
+      tags:
+        - projects
+  '/v2beta1/{projectName}/sinks':
+    get:
+      description: Lists sinks.
+      operationId: logging.projects.sinks.list
+      parameters:
+        - description: 'Required. The resource name of the project owning the sinks. Example: `"projects/my-logging-project"`, `"projects/01234567890"`.'
+          in: path
+          name: projectName
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: 'Optional. If the `pageToken` request parameter is supplied, then the next page of results in the set are retrieved. The `pageToken` parameter must be set with the value of the `nextPageToken` result parameter from the previous request. The value of `projectName` must be the same as in the previous request.'
+          in: query
+          name: pageToken
+          type: string
+        - description: "Optional. The maximum number of results to return from this request. Fewer results might be returned. You must check for the 'nextPageToken` result to determine if additional results are available, which you can retrieve by passing the `nextPageToken` value in the `pageToken` parameter to the next request."
+          in: query
+          name: pageSize
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListSinksResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - 'https://www.googleapis.com/auth/logging.admin'
+            - 'https://www.googleapis.com/auth/logging.read'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: Creates a sink.
+      operationId: logging.projects.sinks.create
+      parameters:
+        - description: 'The resource name of the project in which to create the sink. Example: `"projects/my-project-id"`. The new sink must be provided in the request.'
+          in: path
+          name: projectName
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LogSink'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LogSink'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/logging.admin'
+      tags:
+        - projects
+  '/v2beta1/{sinkName}':
+    delete:
+      description: Deletes a sink.
+      operationId: logging.projects.sinks.delete
+      parameters:
+        - description: 'The resource name of the sink to delete. Example: `"projects/my-project-id/sinks/my-sink-id"`.'
+          in: path
+          name: sinkName
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/logging.admin'
+      tags:
+        - projects
+    get:
+      description: Gets a sink.
+      operationId: logging.projects.sinks.get
+      parameters:
+        - description: 'The resource name of the sink to return. Example: `"projects/my-project-id/sinks/my-sink-id"`.'
+          in: path
+          name: sinkName
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LogSink'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - 'https://www.googleapis.com/auth/logging.admin'
+            - 'https://www.googleapis.com/auth/logging.read'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    put:
+      description: Creates or updates a sink.
+      operationId: logging.projects.sinks.update
+      parameters:
+        - description: 'The resource name of the sink to update. Example: `"projects/my-project-id/sinks/my-sink-id"`. The updated sink must be provided in the request and have the same name that is specified in `sinkName`. If the sink does not exist, it is created.'
+          in: path
+          name: sinkName
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LogSink'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LogSink'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/logging.admin'
+      tags:
+        - projects
+definitions:
+  Empty:
+    description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`.'
+    type: object
+  HttpRequest:
+    description: A common proto for logging HTTP requests.
+    properties:
+      cacheHit:
+        description: Whether or not an entity was served from cache (with or without validation).
+        type: boolean
+      referer:
+        description: 'The referer(sic) URL of the request, as defined in [HTTP/1.1 Header Field Definitions](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).'
+        type: string
+      remoteIp:
+        description: 'The IP address (IPv4 or IPv6) of the client that issued the HTTP request. Examples: `"192.168.1.1"`, `"FE80::0202:B3FF:FE1E:8329"`.'
+        type: string
+      requestMethod:
+        description: 'The request method. Examples: `"GET"`, `"HEAD"`, `"PUT"`, `"POST"`.'
+        type: string
+      requestSize:
+        description: 'The size of the HTTP request message in bytes, including the request headers and the request body.'
+        format: int64
+        type: string
+      requestUrl:
+        description: 'The scheme (http, https), the host name, the path and the query portion of the URL that was requested. Example: `"http://example.com/some/info?color=red"`.'
+        type: string
+      responseSize:
+        description: 'The size of the HTTP response message sent back to the client, in bytes, including the response headers and the response body.'
+        format: int64
+        type: string
+      status:
+        description: 'The response code indicating the status of response. Examples: 200, 404.'
+        format: int32
+        type: integer
+      userAgent:
+        description: 'The user agent sent by the client. Example: `"Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; Q312461; .NET CLR 1.0.3705)"`.'
+        type: string
+      validatedWithOriginServer:
+        description: Whether or not the response was validated with the origin server before being served from cache. This field is only meaningful if cache_hit is True.
+        type: boolean
+    type: object
+  LabelDescriptor:
+    description: A description of a label.
+    properties:
+      description:
+        description: A human-readable description for the label.
+        type: string
+      key:
+        description: The label key.
+        type: string
+      valueType:
+        description: The type of data that can be assigned to the label.
+        enum:
+          - STRING
+          - BOOL
+          - INT64
+        type: string
+    type: object
+  ListLogEntriesRequest:
+    description: The parameters to `ListLogEntries`.
+    properties:
+      filter:
+        description: 'Optional. An [advanced logs filter](/logging/docs/view/advanced_filters). The filter is compared against all log entries in the projects specified by `projectIds`. Only entries that match the filter are retrieved. An empty filter matches all log entries.'
+        type: string
+      orderBy:
+        description: 'Optional. How the results should be sorted. Presently, the only permitted values are `"timestamp"` (default) and `"timestamp desc"`. The first option returns entries in order of increasing values of `LogEntry.timestamp` (oldest first), and the second option returns entries in order of decreasing timestamps (newest first). Entries with equal timestamps are returned in order of `LogEntry.insertId`.'
+        type: string
+      pageSize:
+        description: "Optional. The maximum number of results to return from this request. Fewer results might be returned. You must check for the 'nextPageToken` result to determine if additional results are available, which you can retrieve by passing the `nextPageToken` value in the `pageToken` parameter to the next request."
+        format: int32
+        type: integer
+      pageToken:
+        description: 'Optional. If the `pageToken` request parameter is supplied, then the next page of results in the set are retrieved. The `pageToken` parameter must be set with the value of the `nextPageToken` result parameter from the previous request. The values of `projectIds`, `filter`, and `orderBy` must be the same as in the previous request.'
+        type: string
+      projectIds:
+        description: 'Required. One or more project IDs or project numbers from which to retrieve log entries. Examples of a project ID: `"my-project-1A"`, `"1234567890"`.'
+        items:
+          type: string
+        type: array
+    type: object
+  ListLogEntriesResponse:
+    description: Result returned from `ListLogEntries`.
+    properties:
+      entries:
+        description: A list of log entries.
+        items:
+          $ref: '#/definitions/LogEntry'
+        type: array
+      nextPageToken:
+        description: 'If there are more results than were returned, then `nextPageToken` is given a value in the response. To get the next batch of results, call this method again using the value of `nextPageToken` as `pageToken`.'
+        type: string
+    type: object
+  ListLogMetricsResponse:
+    description: Result returned from ListLogMetrics.
+    properties:
+      metrics:
+        description: A list of logs-based metrics.
+        items:
+          $ref: '#/definitions/LogMetric'
+        type: array
+      nextPageToken:
+        description: 'If there are more results than were returned, then `nextPageToken` is given a value in the response. To get the next batch of results, call this method again using the value of `nextPageToken` as `pageToken`.'
+        type: string
+    type: object
+  ListMonitoredResourceDescriptorsResponse:
+    description: Result returned from ListMonitoredResourceDescriptors.
+    properties:
+      nextPageToken:
+        description: 'If there are more results than were returned, then `nextPageToken` is returned in the response. To get the next batch of results, call this method again using the value of `nextPageToken` as `pageToken`.'
+        type: string
+      resourceDescriptors:
+        description: A list of resource descriptors.
+        items:
+          $ref: '#/definitions/MonitoredResourceDescriptor'
+        type: array
+    type: object
+  ListSinksResponse:
+    description: Result returned from `ListSinks`.
+    properties:
+      nextPageToken:
+        description: 'If there are more results than were returned, then `nextPageToken` is given a value in the response. To get the next batch of results, call this method again using the value of `nextPageToken` as `pageToken`.'
+        type: string
+      sinks:
+        description: A list of sinks.
+        items:
+          $ref: '#/definitions/LogSink'
+        type: array
+    type: object
+  LogEntry:
+    description: An individual entry in a log.
+    properties:
+      httpRequest:
+        $ref: '#/definitions/HttpRequest'
+        description: 'Optional. Information about the HTTP request associated with this log entry, if applicable.'
+      insertId:
+        description: 'Optional. A unique ID for the log entry. If you provide this field, the logging service considers other log entries in the same log with the same ID as duplicates which can be removed. If omitted, Cloud Logging will generate a unique ID for this log entry.'
+        type: string
+      jsonPayload:
+        additionalProperties:
+          description: Properties of the object.
+        description: 'The log entry payload, represented as a structure that is expressed as a JSON object.'
+        type: object
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Optional. A set of user-defined (key, value) data that provides additional information about the log entry.'
+        type: object
+      logName:
+        description: 'Required. The resource name of the log to which this log entry belongs. The format of the name is `projects/<project-id>/logs/<log-id%gt;`. Examples: `"projects/my-projectid/logs/syslog"`, `"projects/1234567890/logs/library.googleapis.com%2Fbook_log"`. The log ID part of resource name must be less than 512 characters long and can only include the following characters: upper and lower case alphanumeric characters: [A-Za-z0-9]; and punctuation characters: forward-slash, underscore, hyphen, and period. Forward-slash (`/`) characters in the log ID must be URL-encoded.'
+        type: string
+      operation:
+        $ref: '#/definitions/LogEntryOperation'
+        description: 'Optional. Information about an operation associated with the log entry, if applicable.'
+      protoPayload:
+        additionalProperties:
+          description: Properties of the object. Contains field @ype with type URL.
+        description: 'The log entry payload, represented as a protocol buffer. You can only use `protoPayload` values that belong to a set of approved types.'
+        type: object
+      resource:
+        $ref: '#/definitions/MonitoredResource'
+        description: 'Required. The monitored resource associated with this log entry. Example: a log entry that reports a database error would be associated with the monitored resource designating the particular database that reported the error.'
+      severity:
+        description: Optional. The severity of the log entry. The default value is `LogSeverity.DEFAULT`.
+        enum:
+          - DEFAULT
+          - DEBUG
+          - INFO
+          - NOTICE
+          - WARNING
+          - ERROR
+          - CRITICAL
+          - ALERT
+          - EMERGENCY
+        type: string
+      textPayload:
+        description: 'The log entry payload, represented as a Unicode string (UTF-8).'
+        type: string
+      timestamp:
+        description: 'Optional. The time the event described by the log entry occurred. If omitted, Cloud Logging will use the time the log entry is written.'
+        type: string
+    type: object
+  LogEntryOperation:
+    description: Additional information about a potentially long-running operation with which a log entry is associated.
+    properties:
+      first:
+        description: Optional. Set this to True if this is the first log entry in the operation.
+        type: boolean
+      id:
+        description: Required. An arbitrary operation identifier. Log entries with the same identifier are assumed to be part of the same operation.
+        type: string
+      last:
+        description: Optional. Set this to True if this is the last log entry in the operation.
+        type: boolean
+      producer:
+        description: 'Required. A arbitrary producer identifier. The combination of `id` and `producer` must be globally unique. Examples for `producer`: `"MyDivision.MyBigCompany.com"`, "github.com/MyProject/MyApplication"`.'
+        type: string
+    type: object
+  LogLine:
+    description: Application log line emitted while processing a request.
+    properties:
+      logMessage:
+        description: App provided log message.
+        type: string
+      severity:
+        description: Severity of log.
+        enum:
+          - DEFAULT
+          - DEBUG
+          - INFO
+          - NOTICE
+          - WARNING
+          - ERROR
+          - CRITICAL
+          - ALERT
+          - EMERGENCY
+        type: string
+      sourceLocation:
+        $ref: '#/definitions/SourceLocation'
+        description: Line of code that generated this log message.
+      time:
+        description: Time when log entry was made. May be inaccurate.
+        type: string
+    type: object
+  LogMetric:
+    description: Describes a logs-based metric. The value of the metric is the number of log entries that match a logs filter.
+    properties:
+      description:
+        description: 'A description of this metric, which is used in documentation.'
+        type: string
+      filter:
+        description: 'An [advanced logs filter](/logging/docs/view/advanced_filters). Example: `"logName:syslog AND severity>=ERROR"`.'
+        type: string
+      name:
+        description: "Required. The client-assigned metric identifier. Example: `\"severe_errors\"`. Metric identifiers are limited to 1000 characters and can include only the following characters: `A-Z`, `a-z`, `0-9`, and the special characters `_-.,+!*',()%/\\`. The forward-slash character (`/`) denotes a hierarchy of name pieces, and it cannot be the first character of the name."
+        type: string
+    type: object
+  LogSink:
+    description: Describes a sink used to export log entries outside Cloud Logging.
+    properties:
+      destination:
+        description: 'The export destination. See [Exporting Logs With Sinks](/logging/docs/api/tasks/exporting-logs). Examples: `"storage.googleapis.com/a-bucket"`, `"bigquery.googleapis.com/projects/a-project-id/datasets/a-dataset"`.'
+        type: string
+      filter:
+        description: 'An [advanced logs filter](/logging/docs/view/advanced_filters) that defines the log entries to be exported. The filter must be consistent with the log entry format designed by the `outputVersionFormat` parameter, regardless of the format of the log entry that was originally written to Cloud Logging. Example: `"logName:syslog AND severity>=ERROR"`.'
+        type: string
+      name:
+        description: 'Required. The client-assigned sink identifier. Example: `"my-severe-errors-to-pubsub"`. Sink identifiers are limited to 1000 characters and can include only the following characters: `A-Z`, `a-z`, `0-9`, and the special characters `_-.`.'
+        type: string
+      outputVersionFormat:
+        description: The log entry version used when exporting log entries from this sink. This version does not have to correspond to the version of the log entry when it was written to Cloud Logging.
+        enum:
+          - VERSION_FORMAT_UNSPECIFIED
+          - V2
+          - V1
+        type: string
+    type: object
+  MonitoredResource:
+    description: A specific monitored resource or a group of monitored resources.
+    properties:
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Values for some or all of the labels listed in the associated monitored resource descriptor. For example, specify a specific Cloud SQL database by supplying values for both the `"database_id"` and `"zone"` labels. Specify the set of all Cloud SQL databases in a particular location by supplying a value for only the `"zone"` label.'
+        type: object
+      type:
+        description: 'The type of monitored resource. This field must match the value of the `type` field in a MonitoredResourceDescriptor object. For example, `"cloudsql_database"` represents Cloud SQL databases.'
+        type: string
+    type: object
+  MonitoredResourceDescriptor:
+    description: A description of a type of monitored resource.
+    properties:
+      description:
+        description: 'A detailed description of the monitored resource type, which is used in documentation.'
+        type: string
+      displayName:
+        description: 'A concise name for the monitored resource type, which is displayed in user interfaces. For example, `"Cloud SQL Database"`.'
+        type: string
+      labels:
+        description: 'A set of labels that can be used to describe instances of this monitored resource type. For example, Cloud SQL databases can be labeled with their `"database_id"` and their `"zone"`.'
+        items:
+          $ref: '#/definitions/LabelDescriptor'
+        type: array
+      type:
+        description: 'The monitored resource type. For example, the type `"cloudsql_database"` represents databases in Google Cloud SQL.'
+        type: string
+    type: object
+  RequestLog:
+    description: Complete log information about a single request to an application.
+    properties:
+      appEngineRelease:
+        description: App Engine release version string.
+        type: string
+      appId:
+        description: Identifies the application that handled this request.
+        type: string
+      cost:
+        description: An indication of the relative cost of serving this request.
+        format: double
+        type: number
+      endTime:
+        description: Time at which request was known to end processing.
+        type: string
+      finished:
+        description: 'If true, represents a finished request. Otherwise, the request is active.'
+        type: boolean
+      host:
+        description: The Internet host and port number of the resource being requested.
+        type: string
+      httpVersion:
+        description: HTTP version of request.
+        type: string
+      instanceId:
+        description: An opaque identifier for the instance that handled the request.
+        type: string
+      instanceIndex:
+        description: 'If the instance that processed this request was individually addressable (i.e. belongs to a manually scaled module), this is the 0 based index of the instance, otherwise this value is -1.'
+        format: int32
+        type: integer
+      ip:
+        description: Origin IP address.
+        type: string
+      latency:
+        description: Latency of the request.
+        type: string
+      line:
+        description: 'List of log lines emitted by the application while serving this request, if requested.'
+        items:
+          $ref: '#/definitions/LogLine'
+        type: array
+      megaCycles:
+        description: Number of CPU megacycles used to process request.
+        format: int64
+        type: string
+      method:
+        description: 'Request method, such as `GET`, `HEAD`, `PUT`, `POST`, or `DELETE`.'
+        type: string
+      moduleId:
+        description: Identifies the module of the application that handled this request.
+        type: string
+      nickname:
+        description: "A string that identifies a logged-in user who made this request, or empty if the user is not logged in. Most likely, this is the part of the user's email before the '@' sign. The field value is the same for different requests from the same user, but different users may have a similar name. This information is also available to the application via Users API. This field will be populated starting with App Engine 1.9.21."
+        type: string
+      pendingTime:
+        description: 'Time this request spent in the pending request queue, if it was pending at all.'
+        type: string
+      referrer:
+        description: Referrer URL of request.
+        type: string
+      requestId:
+        description: 'Globally unique identifier for a request, based on request start time. Request IDs for requests which started later will compare greater as strings than those for requests which started earlier.'
+        type: string
+      resource:
+        description: "Contains the path and query portion of the URL that was requested. For example, if the URL was \"http://example.com/app?name=val\", the resource would be \"/app?name=val\". Any trailing fragment (separated by a '#' character) will not be included."
+        type: string
+      responseSize:
+        description: Size in bytes sent back to client by request.
+        format: int64
+        type: string
+      sourceReference:
+        description: Source code for the application that handled this request. There can be more than one source reference per deployed application if source code is distributed among multiple repositories.
+        items:
+          $ref: '#/definitions/SourceReference'
+        type: array
+      startTime:
+        description: Time at which request was known to have begun processing.
+        type: string
+      status:
+        description: Response status of request.
+        format: int32
+        type: integer
+      taskName:
+        description: Task name of the request (for an offline request).
+        type: string
+      taskQueueName:
+        description: Queue name of the request (for an offline request).
+        type: string
+      traceId:
+        description: Cloud Trace identifier of the trace for this request.
+        type: string
+      urlMapEntry:
+        description: File or class within URL mapping used for request. Useful for tracking down the source code which was responsible for managing request. Especially for multiply mapped handlers.
+        type: string
+      userAgent:
+        description: User agent used for making request.
+        type: string
+      versionId:
+        description: Version of the application that handled this request.
+        type: string
+      wasLoadingRequest:
+        description: Was this request a loading request for this instance?
+        type: boolean
+    type: object
+  SourceLocation:
+    description: Specifies a location in a source file.
+    properties:
+      file:
+        description: 'Source file name. May or may not be a fully qualified name, depending on the runtime environment.'
+        type: string
+      functionName:
+        description: 'Human-readable name of the function or method being invoked, with optional context such as the class or package name, for use in contexts such as the logs viewer where file:line number is less meaningful. This may vary by language, for example: in Java: qual.if.ied.Class.method in Go: dir/package.func in Python: function ...'
+        type: string
+      line:
+        description: Line within the source file.
+        format: int64
+        type: string
+    type: object
+  SourceReference:
+    description: A reference to a particular snapshot of the source tree used to build and deploy an application.
+    properties:
+      repository:
+        description: 'Optional. A URI string identifying the repository. Example: "https://github.com/GoogleCloudPlatform/kubernetes.git"'
+        type: string
+      revisionId:
+        description: 'The canonical (and persistent) identifier of the deployed revision. Example (git): "0035781c50ec7aa23385dc841529ce8a4b70db1b"'
+        type: string
+    type: object
+  WriteLogEntriesRequest:
+    description: The parameters to WriteLogEntries.
+    properties:
+      entries:
+        description: Required. The log entries to write. The log entries must have values for all required fields.
+        items:
+          $ref: '#/definitions/LogEntry'
+        type: array
+      labels:
+        additionalProperties:
+          type: string
+        description: "Optional. User-defined `key:value` items that are added to the `labels` field of each log entry in `entries`, except when a log entry specifies its own 'key:value' item with the same key. Example: `{ \"size\": \"large\", \"color\":\"red\" }`"
+        type: object
+      logName:
+        description: 'Optional. A default log resource name for those log entries in `entries` that do not specify their own `logName`. Example: `"projects/my-project/logs/syslog"`. See LogEntry.'
+        type: string
+      resource:
+        $ref: '#/definitions/MonitoredResource'
+        description: Optional. A default monitored resource for those log entries in `entries` that do not specify their own `resource`.
+    type: object
+  WriteLogEntriesResponse:
+    description: Result returned from WriteLogEntries. empty
+    type: object

@@ -1,0 +1,500 @@
+swagger: '2.0'
+schemes:
+  - https
+host: youtubereporting.googleapis.com
+basePath: /
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: 'An API to schedule reporting jobs and download the resulting bulk data reports about YouTube channels, videos etc. in the form of CSV files.'
+  title: YouTube Reporting
+  version: v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/youtubereporting/v1/rest'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: youtubereporting
+externalDocs:
+  url: 'https://developers.google.com/youtube/reporting/v1/reports/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/yt-analytics-monetary.readonly': View monetary and non-monetary YouTube Analytics reports for your YouTube content
+      'https://www.googleapis.com/auth/yt-analytics.readonly': View YouTube Analytics reports for your YouTube content
+    type: oauth2
+parameters:
+  $.xgafv:
+    description: V1 error format.
+    in: query
+    name: $.xgafv
+    type: string
+  access_token:
+    description: OAuth access token.
+    in: query
+    name: access_token
+    type: string
+  alt:
+    default: json
+    description: Data format for response.
+    in: query
+    name: alt
+    type: string
+  bearer_token:
+    description: OAuth bearer token.
+    in: query
+    name: bearer_token
+    type: string
+  callback:
+    description: JSONP
+    in: query
+    name: callback
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  pp:
+    default: true
+    description: Pretty-print response.
+    in: query
+    name: pp
+    type: boolean
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+    in: query
+    name: quotaUser
+    type: string
+  uploadType:
+    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+    in: query
+    name: uploadType
+    type: string
+  upload_protocol:
+    description: 'Upload protocol for media (e.g. "raw", "multipart").'
+    in: query
+    name: upload_protocol
+    type: string
+paths:
+  /v1/jobs:
+    get:
+      description: Lists jobs.
+      operationId: youtubereporting.jobs.list
+      parameters:
+        - description: "The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel)."
+          in: query
+          name: onBehalfOfContentOwner
+          type: string
+        - description: 'Requested page size. Server may return fewer jobs than requested. If unspecified, server will pick an appropriate default.'
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'A token identifying a page of results the server should return. Typically, this is the value of ListReportTypesResponse.next_page_token returned in response to the previous call to the `ListJobs` method.'
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListJobsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
+            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
+      tags:
+        - jobs
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: Creates a job and returns it.
+      operationId: youtubereporting.jobs.create
+      parameters:
+        - description: "The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel)."
+          in: query
+          name: onBehalfOfContentOwner
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Job'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Job'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
+            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
+      tags:
+        - jobs
+  '/v1/jobs/{jobId}':
+    delete:
+      description: Deletes a job.
+      operationId: youtubereporting.jobs.delete
+      parameters:
+        - description: The ID of the job to delete.
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - description: "The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel)."
+          in: query
+          name: onBehalfOfContentOwner
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
+            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
+      tags:
+        - jobs
+    get:
+      description: Gets a job.
+      operationId: youtubereporting.jobs.get
+      parameters:
+        - description: The ID of the job to retrieve.
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - description: "The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel)."
+          in: query
+          name: onBehalfOfContentOwner
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Job'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
+            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
+      tags:
+        - jobs
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+  '/v1/jobs/{jobId}/reports':
+    get:
+      description: Lists reports created by a specific job. Returns NOT_FOUND if the job does not exist.
+      operationId: youtubereporting.jobs.reports.list
+      parameters:
+        - description: The ID of the job.
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - description: "The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel)."
+          in: query
+          name: onBehalfOfContentOwner
+          type: string
+        - description: 'Requested page size. Server may return fewer report types than requested. If unspecified, server will pick an appropriate default.'
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'A token identifying a page of results the server should return. Typically, this is the value of ListReportsResponse.next_page_token returned in response to the previous call to the `ListReports` method.'
+          in: query
+          name: pageToken
+          type: string
+        - description: 'If set, only reports created after the specified date/time are returned.'
+          in: query
+          name: createdAfter
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListReportsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
+            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
+      tags:
+        - jobs
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+  '/v1/jobs/{jobId}/reports/{reportId}':
+    get:
+      description: Gets the metadata of a specific report.
+      operationId: youtubereporting.jobs.reports.get
+      parameters:
+        - description: The ID of the job.
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - description: The ID of the report to retrieve.
+          in: path
+          name: reportId
+          required: true
+          type: string
+        - description: "The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel)."
+          in: query
+          name: onBehalfOfContentOwner
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Report'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
+            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
+      tags:
+        - jobs
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+  '/v1/media/{resourceName}':
+    get:
+      description: 'Method for media download. Download is supported on the URI `/v1/media/{+name}?alt=media`.'
+      operationId: youtubereporting.media.download
+      parameters:
+        - description: 'Name of the media that is being downloaded. See [][ByteStream.ReadRequest.resource_name].'
+          in: path
+          name: resourceName
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Media'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
+            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
+      tags:
+        - media
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+  /v1/reportTypes:
+    get:
+      description: Lists report types.
+      operationId: youtubereporting.reportTypes.list
+      parameters:
+        - description: "The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel)."
+          in: query
+          name: onBehalfOfContentOwner
+          type: string
+        - description: 'Requested page size. Server may return fewer report types than requested. If unspecified, server will pick an appropriate default.'
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'A token identifying a page of results the server should return. Typically, this is the value of ListReportTypesResponse.next_page_token returned in response to the previous call to the `ListReportTypes` method.'
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListReportTypesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/yt-analytics-monetary.readonly'
+            - 'https://www.googleapis.com/auth/yt-analytics.readonly'
+      tags:
+        - reportTypes
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+definitions:
+  Empty:
+    description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`.'
+    type: object
+  Job:
+    description: A job creating reports of a specific type.
+    properties:
+      createTime:
+        description: The creation date/time of the job.
+        type: string
+      id:
+        description: The server-generated ID of the job (max. 40 characters).
+        type: string
+      name:
+        description: The name of the job (max. 100 characters). TODO(lanthaler) Clarify what this will actually be used for
+        type: string
+      reportTypeId:
+        description: The type of reports this job creates. Corresponds to the ID of a ReportType.
+        type: string
+    type: object
+  ListJobsResponse:
+    description: Response message for ReportingService.ListJobs.
+    properties:
+      jobs:
+        description: The list of jobs.
+        items:
+          $ref: '#/definitions/Job'
+        type: array
+      nextPageToken:
+        description: A token to retrieve next page of results. Pass this value in the ListJobsRequest.page_token field in the subsequent call to `ListJobs` method to retrieve the next page of results.
+        type: string
+    type: object
+  ListReportTypesResponse:
+    description: Response message for ReportingService.ListReportTypes.
+    properties:
+      nextPageToken:
+        description: A token to retrieve next page of results. Pass this value in the ListReportTypesRequest.page_token field in the subsequent call to `ListReportTypes` method to retrieve the next page of results.
+        type: string
+      reportTypes:
+        description: The list of report types.
+        items:
+          $ref: '#/definitions/ReportType'
+        type: array
+    type: object
+  ListReportsResponse:
+    description: Response message for ReportingService.ListReports.
+    properties:
+      nextPageToken:
+        description: A token to retrieve next page of results. Pass this value in the ListReportsRequest.page_token field in the subsequent call to `ListReports` method to retrieve the next page of results.
+        type: string
+      reports:
+        description: The list of report types.
+        items:
+          $ref: '#/definitions/Report'
+        type: array
+    type: object
+  Media:
+    description: Media resource.
+    properties:
+      resourceName:
+        description: Name of the media resource.
+        type: string
+    type: object
+  Report:
+    description: "A report's metadata including the URL from which the report itself can be downloaded."
+    properties:
+      createTime:
+        description: The date/time when this report was created.
+        type: string
+      downloadUrl:
+        description: The URL from which the report can be downloaded (max. 1000 characters).
+        type: string
+      endTime:
+        description: The end of the time period that the report instance covers. The value is exclusive.
+        type: string
+      id:
+        description: The server-generated ID of the report.
+        type: string
+      jobId:
+        description: The ID of the job that created this report.
+        type: string
+      startTime:
+        description: The start of the time period that the report instance covers. The value is inclusive.
+        type: string
+    type: object
+  ReportType:
+    description: A report type.
+    properties:
+      id:
+        description: The ID of the report type (max. 100 characters).
+        type: string
+      name:
+        description: The name of the report type (max. 100 characters).
+        type: string
+    type: object
