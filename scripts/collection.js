@@ -230,7 +230,7 @@ function generateList() {
         var preferred = spec.info['x-preferred'];
         assert(_.isBoolean(preferred));
         if (preferred) {
-          assert(!api.preferred);
+          assert(!api.preferred, 'Missing prefered in "' + id + '"');
           api.preferred = version;
         }
       });
