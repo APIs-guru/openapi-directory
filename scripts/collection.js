@@ -482,23 +482,6 @@ function updateGoogle() {
     var googleSpecs = _(data.items).filter(function (api) {
       //blacklist
       return ([
-             //missing API description
-             'cloudlatencytest:v2',
-             //plus in path
-             'pubsub:v1',
-             'pubsub:v1beta1',
-             'pubsub:v1beta1a',
-             'pubsub:v1beta2',
-             'genomics:v1',
-             'appengine:v1beta4',
-             'storagetransfer:v1',
-             'cloudbilling:v1',
-             'proximitybeacon:v1beta1',
-             'youtubereporting:v1',
-             'dataproc:v1',
-             'dataproc:v1alpha1',
-             'dataproc:v1beta1',
-             'logging:v2beta1',
              //circular reference in MapFolder/MapItem
              'mapsengine:exp2',
              'mapsengine:v1',
