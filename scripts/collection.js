@@ -482,6 +482,8 @@ function updateGoogle() {
     var googleSpecs = _(data.items).filter(function (api) {
       //blacklist
       return ([
+             //duplicate preferred
+             'genomics:v1beta2',
              //circular reference in MapFolder/MapItem
              'mapsengine:exp2',
              'mapsengine:v1',
