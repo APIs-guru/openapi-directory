@@ -2,7 +2,7 @@ swagger: '2.0'
 schemes:
   - https
 host: api.infermedica.com
-basePath: /
+basePath: /v1
 info:
   description: Empower your healthcare services with intelligent diagnostic insights of Infermedica API.
   title: Infermedica
@@ -12,18 +12,18 @@ info:
     url: 'https://developer.infermedica.com/images/sprites/infermedica-logo.png'
   x-origin:
     format: swagger
-    url: 'https://api.infermedica.com/swagger.json'
+    url: 'https://api.infermedica.com/v1/swagger.json'
     version: '2.0'
   x-providerName: infermedica.com
 tags:
   - name: risk_factors
-  - name: info
   - name: lookup
+  - name: info
+  - name: observations
   - name: conditions
   - name: diagnosis
-  - name: observations
 paths:
-  /v1/conditions:
+  /conditions:
     get:
       description: Returns a list of all available conditions.
       operationId: getAllConditions
@@ -40,7 +40,7 @@ paths:
       summary: List all conditions
       tags:
         - conditions
-  '/v1/conditions/{id}':
+  '/conditions/{id}':
     get:
       description: Returns details of a single condition specified by id parameter.
       operationId: getCondition
@@ -64,7 +64,7 @@ paths:
       summary: Get condition by id
       tags:
         - conditions
-  /v1/diagnosis:
+  /diagnosis:
     post:
       consumes:
         - application/json
@@ -86,7 +86,7 @@ paths:
       summary: Query diagnostic engine
       tags:
         - diagnosis
-  /v1/info:
+  /info:
     get:
       description: Returns information about data used by diagnostic engine.
       operationId: getDatabaseInfo
@@ -101,7 +101,7 @@ paths:
       summary: Get database information
       tags:
         - info
-  /v1/lookup:
+  /lookup:
     get:
       description: Returns details of a single observation if matched by the given phrase.
       operationId: getMatchingObservation
@@ -133,7 +133,7 @@ paths:
       summary: Find observation matching given phrase
       tags:
         - lookup
-  /v1/observations:
+  /observations:
     get:
       description: Returns a list of all available observations.
       operationId: getAllObservations
@@ -150,7 +150,7 @@ paths:
       summary: List all observations
       tags:
         - observations
-  '/v1/observations/{id}':
+  '/observations/{id}':
     get:
       description: Returns details of a single observation specified by id parameter.
       operationId: getObservation
@@ -174,7 +174,7 @@ paths:
       summary: Get observation by id
       tags:
         - observations
-  /v1/risk_factors:
+  /risk_factors:
     get:
       description: Returns a list of all available risk factors.
       operationId: getAllRiskFactors
@@ -191,7 +191,7 @@ paths:
       summary: List all risk factors
       tags:
         - risk_factors
-  '/v1/risk_factors/{id}':
+  '/risk_factors/{id}':
     get:
       description: Returns details of a single risk factor specified by id parameter.
       operationId: getRiskFactor
