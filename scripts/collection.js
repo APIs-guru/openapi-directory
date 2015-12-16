@@ -546,7 +546,8 @@ function mergePatch(swagger, addPatch) {
 }
 
 function writeSpec(source, type, exPatch, callback) {
-  converter.getSpec(source, type, function (err, spec) {
+  var getSpecTask = converter.getSpec.bind(this, source, type);
+  async.retry({}, getSpecTask, function (err, spec) {
     assert(!err, err);
 
     convertToSwagger(spec, function (error, swagger) {
