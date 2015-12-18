@@ -50,6 +50,7 @@ Existing integrations:
  - [https://sdks.io](https://sdks.io/Search/FindSDKs?Bridge=APIs.guru) - Explore Automatically Generated SDKs
  - [http://www.cenit.io](http://www.cenit.io/directory?spec=swagger) - Social Data and Business Integration platform
  - [commandcar](https://github.com/tikalk/commandcar#installing-from-api-models) - Curl on steroids
+ - [https://datafire.io](https://datafire.io) - allows you to process and transfer data between **APIs**, **databases**, and **more**
 
 Also used as test suite in following projects:
  - [swagger-parser](https://github.com/BigstickCarpet/swagger-parser) - Swagger 2.0 parser and validator for Node and browsers
