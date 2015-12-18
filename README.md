@@ -1,6 +1,10 @@
 ![logo]
 
-[![APIs in collection](https://apis-guru.github.io/api-models/apis_in_collection_banner.svg)](./APIs)[![Join the chat at https://gitter.im/APIs-guru/api-models](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/APIs-guru/api-models?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)<BR>
+[![APIs in collection][numApis-image]][numApis-link]
+[![Chat on gitter][gitter-image]][gitter-link]
+
+[![Share on Twitter][twitter-image]][twitter-link]
+
 Repository for API models in [Swagger](http://swagger.io/) [2.0](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md) format
 
 Our goal is to create a machine-readable Wikipedia for REST APIs, with the following principals:
@@ -57,3 +61,9 @@ Some specs are taken from Open Source projects:
  - [https://github.com/darklynx/swagger-api-collection](https://github.com/darklynx/swagger-api-collection) - Swagger spec for Instagram API
 
 [logo]: https://apis-guru.github.io/api-models/branding/logo_horizontal.svg "APIs.guru"
+[twitter-image]: https://img.shields.io/twitter/url/http/APIs.guru.svg?style=social
+[twitter-link]: https://twitter.com/intent/tweet?text=http%3A%2F%2FAPIs.guru%20-%20Wikipedia%20for%20%23Web%20%23APIs%20pic.twitter.com/UhlhbMw1NP
+[gitter-image]: https://img.shields.io/gitter/room/APIs-guru/api-models.svg
+[gitter-link]: https://gitter.im/APIs-guru/api-models
+[numApis-image]: https://apis-guru.github.io/api-models/apis_in_collection_banner.svg
+[numApis-link]: ./APIs
