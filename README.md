@@ -4,6 +4,7 @@
 [![Chat on gitter][gitter-image]][gitter-link]
 
 [![Share on Twitter][twitter-image]][twitter-link]
+[![Follow on Twitter][twitterFollow-image]][twitterFollow-link]
 
 Repository for API models in [Swagger](http://swagger.io/) [2.0](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md) format
 
@@ -62,7 +63,9 @@ Some specs are taken from Open Source projects:
 
 [logo]: https://apis-guru.github.io/api-models/branding/logo_horizontal.svg "APIs.guru"
 [twitter-image]: https://img.shields.io/twitter/url/http/APIs.guru.svg?style=social
-[twitter-link]: https://twitter.com/intent/tweet?text=http%3A%2F%2FAPIs.guru%20-%20Wikipedia%20for%20%23Web%20%23APIs%20pic.twitter.com/UhlhbMw1NP
+[twitter-link]: https://twitter.com/intent/retweet?tweet_id=677863628482043904
+[twitterFollow-image]: https://img.shields.io/twitter/follow/APIs_guru.svg?style=social
+[twitterFollow-link]: https://twitter.com/intent/follow?screen_name=APIs_guru
 [gitter-image]: https://img.shields.io/gitter/room/APIs-guru/api-models.svg
 [gitter-link]: https://gitter.im/APIs-guru/api-models
 [numApis-image]: https://apis-guru.github.io/api-models/apis_in_collection_banner.svg
