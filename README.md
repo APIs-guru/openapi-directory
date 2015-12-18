@@ -16,16 +16,20 @@ Our goal is to create a machine-readable Wikipedia for REST APIs, with the follo
 
 If you want to reference this project and you need an icon or even a banner, check our [branding guide](branding/README.md).
 
-[You can also support the project using BountySource](https://www.bountysource.com/teams/apis_guru)<br>
 Also, we provide services and consultancy around the Swagger spec and REST APIs in general.
 You can contact us at founders@apis.guru.
 
-Licenses
+Existing integrations
 --------------------------
+ - https://any-api.com - Documentation and Test Consoles for Public APIs
+ - [https://sdks.io](https://sdks.io/Search/FindSDKs?Bridge=APIs.guru) - Explore Automatically Generated SDKs
+ - [http://www.cenit.io](http://www.cenit.io/directory?spec=swagger) - Social Data and Business Integration platform
+ - [commandcar](https://github.com/tikalk/commandcar#installing-from-api-models) - Curl on steroids
+ - https://datafire.io - allows you to process and transfer data between APIs, databases, and more
 
-All code is released under the [MIT](http://opensource.org/licenses/MIT) licence.<br>
-All API specs contributed to project by authors is covered by the [CC01.0](https://creativecommons.org/publicdomain/zero/1.0/) license.<br>
-All API specs acquired from public sources under the [Fair use](http://en.wikipedia.org/wiki/Fair_use) principal.
+Also used as test suite in following projects:
+ - [swagger-parser](https://github.com/BigstickCarpet/swagger-parser) - Swagger 2.0 parser and validator for Node and browsers
+ - [SwaggerProvider](https://github.com/sergey-tihon/SwaggerProvider) - F# Type Provider for Swagger
 
 API spec acceptance criteria
 --------------------------
@@ -45,16 +49,11 @@ Instead, we strongly recomend you to use our [REST API](API.md).<BR>
 In case if you really need it, we also support [APIs.json](http://apisjson.org/) format:<BR>
 https://apis-guru.github.io/api-models/apis.json
 
-Existing integrations:
- - https://any-api.com - Documentation and Test Consoles for Public APIs
- - [https://sdks.io](https://sdks.io/Search/FindSDKs?Bridge=APIs.guru) - Explore Automatically Generated SDKs
- - [http://www.cenit.io](http://www.cenit.io/directory?spec=swagger) - Social Data and Business Integration platform
- - [commandcar](https://github.com/tikalk/commandcar#installing-from-api-models) - Curl on steroids
- - [https://datafire.io](https://datafire.io) - allows you to process and transfer data between APIs, databases, and more
-
-Also used as test suite in following projects:
- - [swagger-parser](https://github.com/BigstickCarpet/swagger-parser) - Swagger 2.0 parser and validator for Node and browsers
- - [SwaggerProvider](https://github.com/sergey-tihon/SwaggerProvider) - F# Type Provider for Swagger
+Licenses
+--------------------------
+All code is released under the [MIT](http://opensource.org/licenses/MIT) licence.<br>
+All API specs contributed to project by authors is covered by the [CC01.0](https://creativecommons.org/publicdomain/zero/1.0/) license.<br>
+All API specs acquired from public sources under the [Fair use](http://en.wikipedia.org/wiki/Fair_use) principal.
 
 Spec sources
 --------------------------
