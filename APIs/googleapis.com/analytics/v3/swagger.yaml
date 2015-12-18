@@ -2852,6 +2852,38 @@ paths:
       tags:
         - management
   '/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/unsampledReports/{unsampledReportId}':
+    delete:
+      description: Deletes an unsampled report.
+      operationId: analytics.management.unsampledReports.delete
+      parameters:
+        - description: Account ID to delete the unsampled report for.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: Web property ID to delete the unsampled reports for.
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
+        - description: View (Profile) ID to delete the unsampled report for.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: ID of the unsampled report to be deleted.
+          in: path
+          name: unsampledReportId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.edit'
+      tags:
+        - management
     get:
       description: Returns a single unsampled report.
       operationId: analytics.management.unsampledReports.get
@@ -4522,6 +4554,9 @@ definitions:
       accountId:
         description: Account ID to which this view (profile) belongs.
         type: string
+      botFilteringEnabled:
+        description: Indicates whether bot filtering is enabled for this view (profile).
+        type: boolean
       childLink:
         description: Child link for this view (profile). Points to the list of goals for this view (profile).
         properties:

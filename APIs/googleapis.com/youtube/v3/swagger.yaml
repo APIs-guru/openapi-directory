@@ -1054,6 +1054,54 @@ paths:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - comments
+  /fanFundingEvents:
+    get:
+      description: Lists fan funding events for a channel.
+      operationId: youtube.fanFundingEvents.list
+      parameters:
+        - description: The part parameter specifies the fanFundingEvent resource parts that the API response will include. Supported values are id and snippet.
+          in: query
+          name: part
+          required: true
+          type: string
+        - description: |-
+            The hl parameter instructs the API to retrieve localized resource metadata for a specific application language that the YouTube website supports. The parameter value must be a language code included in the list returned by the i18nLanguages.list method.
+
+            If localized resource details are available in that language, the resource's snippet.localized object will contain the localized values. However, if localized details are not available, the snippet.localized object will contain resource details in the resource's default language.
+          in: query
+          name: hl
+          type: string
+        - default: 5
+          description: The maxResults parameter specifies the maximum number of items that should be returned in the result set.
+          in: query
+          maximum: 50
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: 'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.'
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/FanFundingEventListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube'
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+      tags:
+        - fanFundingEvents
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   /guideCategories:
     get:
       description: Returns a list of categories that can be associated with YouTube channels.
@@ -1222,6 +1270,15 @@ paths:
             - upcoming
           in: query
           name: broadcastStatus
+          type: string
+        - default: event
+          description: The broadcastType parameter filters the API response to only include broadcasts with the specified type. This is only compatible with the mine filter for now.
+          enum:
+            - all
+            - event
+            - persistent
+          in: query
+          name: broadcastType
           type: string
         - description: "The id parameter specifies a comma-separated list of YouTube broadcast IDs that identify the broadcasts being retrieved. In a liveBroadcast resource, the id property specifies the broadcast's ID."
           in: query
@@ -1546,6 +1603,246 @@ paths:
             - 'https://www.googleapis.com/auth/youtube.force-ssl'
       tags:
         - liveBroadcasts
+  /liveChat/bans:
+    delete:
+      description: Removes a chat ban.
+      operationId: youtube.liveChatBans.delete
+      parameters:
+        - description: The id parameter identifies the chat ban to remove. The value uniquely identifies both the ban and the chat.
+          in: query
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube'
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+      tags:
+        - liveChatBans
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Adds a new ban to the chat.
+      operationId: youtube.liveChatBans.insert
+      parameters:
+        - description: The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response returns. Set the parameter value to snippet.
+          in: query
+          name: part
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LiveChatBan'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LiveChatBan'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube'
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+      tags:
+        - liveChatBans
+  /liveChat/messages:
+    delete:
+      description: Deletes a chat message.
+      operationId: youtube.liveChatMessages.delete
+      parameters:
+        - description: The id parameter specifies the YouTube chat message ID of the resource that is being deleted.
+          in: query
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube'
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+      tags:
+        - liveChatMessages
+    get:
+      description: Lists live chat messages for a specific chat.
+      operationId: youtube.liveChatMessages.list
+      parameters:
+        - description: The liveChatId parameter specifies the ID of the chat whose messages will be returned.
+          in: query
+          name: liveChatId
+          required: true
+          type: string
+        - description: The part parameter specifies the liveChatComment resource parts that the API response will include. Supported values are id and snippet.
+          in: query
+          name: part
+          required: true
+          type: string
+        - description: |-
+            The hl parameter instructs the API to retrieve localized resource metadata for a specific application language that the YouTube website supports. The parameter value must be a language code included in the list returned by the i18nLanguages.list method.
+
+            If localized resource details are available in that language, the resource's snippet.localized object will contain the localized values. However, if localized details are not available, the snippet.localized object will contain resource details in the resource's default language.
+          in: query
+          name: hl
+          type: string
+        - default: 200
+          description: The maxResults parameter specifies the maximum number of messages that should be returned in the result set.
+          in: query
+          maximum: 2000
+          minimum: 200
+          name: maxResults
+          type: integer
+        - description: 'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identify other pages that could be retrieved.'
+          in: query
+          name: pageToken
+          type: string
+        - description: 'The profileImageSize parameter specifies the size of the user profile pictures that should be returned in the result set. Default: 88.'
+          in: query
+          maximum: 720
+          minimum: 16
+          name: profileImageSize
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LiveChatMessageListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube'
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+      tags:
+        - liveChatMessages
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Adds a message to a live chat.
+      operationId: youtube.liveChatMessages.insert
+      parameters:
+        - description: The part parameter serves two purposes. It identifies the properties that the write operation will set as well as the properties that the API response will include. Set the parameter value to snippet.
+          in: query
+          name: part
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LiveChatMessage'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LiveChatMessage'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube'
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+      tags:
+        - liveChatMessages
+  /liveChat/moderators:
+    delete:
+      description: Removes a chat moderator.
+      operationId: youtube.liveChatModerators.delete
+      parameters:
+        - description: The id parameter identifies the chat moderator to remove. The value uniquely identifies both the moderator and the chat.
+          in: query
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube'
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+      tags:
+        - liveChatModerators
+    get:
+      description: Lists moderators for a live chat.
+      operationId: youtube.liveChatModerators.list
+      parameters:
+        - description: The liveChatId parameter specifies the YouTube live chat for which the API should return moderators.
+          in: query
+          name: liveChatId
+          required: true
+          type: string
+        - description: The part parameter specifies the liveChatModerator resource parts that the API response will include. Supported values are id and snippet.
+          in: query
+          name: part
+          required: true
+          type: string
+        - default: 5
+          description: The maxResults parameter specifies the maximum number of items that should be returned in the result set.
+          in: query
+          maximum: 50
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: 'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.'
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LiveChatModeratorListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube'
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+      tags:
+        - liveChatModerators
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Adds a new moderator for the chat.
+      operationId: youtube.liveChatModerators.insert
+      parameters:
+        - description: The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response returns. Set the parameter value to snippet.
+          in: query
+          name: part
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LiveChatModerator'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LiveChatModerator'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube'
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+      tags:
+        - liveChatModerators
   /liveStreams:
     delete:
       description: Deletes a video stream.
@@ -2271,6 +2568,55 @@ paths:
             - 'https://www.googleapis.com/auth/youtubepartner'
       tags:
         - search
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /sponsors:
+    get:
+      description: Lists sponsors for a channel.
+      operationId: youtube.sponsors.list
+      parameters:
+        - description: The part parameter specifies the sponsor resource parts that the API response will include. Supported values are id and snippet.
+          in: query
+          name: part
+          required: true
+          type: string
+        - default: newest
+          description: The filter parameter specifies which channel sponsors to return.
+          enum:
+            - all
+            - newest
+          in: query
+          name: filter
+          type: string
+        - default: 5
+          description: The maxResults parameter specifies the maximum number of items that should be returned in the result set.
+          in: query
+          maximum: 50
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: 'The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.'
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SponsorListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/youtube'
+            - 'https://www.googleapis.com/auth/youtube.force-ssl'
+            - 'https://www.googleapis.com/auth/youtube.readonly'
+      tags:
+        - sponsors
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -3630,6 +3976,21 @@ definitions:
         description: "The localized strings for channel's title."
         type: string
     type: object
+  ChannelProfileDetails:
+    properties:
+      channelId:
+        description: The YouTube channel ID.
+        type: string
+      channelUrl:
+        description: "The channel's URL."
+        type: string
+      displayName:
+        description: "The channel's display name."
+        type: string
+      profileImageUrl:
+        description: "The channels's avatar URL."
+        type: string
+    type: object
   ChannelSection:
     properties:
       contentDetails:
@@ -4785,6 +5146,77 @@ definitions:
           - ytAgeRestricted
         type: string
     type: object
+  FanFundingEvent:
+    description: A fanFundingEvent resource represents a fan funding event on a YouTube channel. Fan funding events occur when a user gives one-time monetary support to the channel owner.
+    properties:
+      etag:
+        description: Etag of this resource.
+        type: string
+      id:
+        description: The ID that YouTube assigns to uniquely identify the fan funding event.
+        type: string
+      kind:
+        default: 'youtube#fanFundingEvent'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#fanFundingEvent".'
+        type: string
+      snippet:
+        $ref: '#/definitions/FanFundingEventSnippet'
+        description: The snippet object contains basic details about the fan funding event.
+    type: object
+  FanFundingEventListResponse:
+    properties:
+      etag:
+        description: Etag of this resource.
+        type: string
+      eventId:
+        description: Serialized EventId of the request which produced this response.
+        type: string
+      items:
+        description: A list of fan funding events that match the request criteria.
+        items:
+          $ref: '#/definitions/FanFundingEvent'
+        type: array
+      kind:
+        default: 'youtube#fanFundingEventListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#fanFundingEventListResponse".'
+        type: string
+      nextPageToken:
+        description: The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
+        type: string
+      pageInfo:
+        $ref: '#/definitions/PageInfo'
+      tokenPagination:
+        $ref: '#/definitions/TokenPagination'
+      visitorId:
+        description: The visitorId identifies the visitor.
+        type: string
+    type: object
+  FanFundingEventSnippet:
+    properties:
+      amountMicros:
+        description: 'The amount of funding in micros of fund_currency. e.g., 1 is represented'
+        format: uint64
+        type: string
+      channelId:
+        description: Channel id where the funding event occurred.
+        type: string
+      commentText:
+        description: The text contents of the comment left by the user.
+        type: string
+      createdAt:
+        description: 'The date and time when the funding occurred. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.'
+        format: date-time
+        type: string
+      currency:
+        description: The currency in which the fund was made. ISO 4217.
+        type: string
+      displayString:
+        description: 'A rendered string that displays the fund amount and currency (e.g., "$1.00"). The string is rendered for the given language.'
+        type: string
+      supporterDetails:
+        $ref: '#/definitions/ChannelProfileDetails'
+        description: Details about the supporter. Only filled if the event was made public by the user.
+    type: object
   GeoPoint:
     description: 'Geographical coordinates of a point, in WGS84.'
     properties:
@@ -5149,8 +5581,14 @@ definitions:
       boundStreamId:
         description: This value uniquely identifies the live stream bound to the broadcast.
         type: string
+      closedCaptionsType:
+        enum:
+          - closedCaptionsDisabled
+          - closedCaptionsEmbedded
+          - closedCaptionsHttpPost
+        type: string
       enableClosedCaptions:
-        description: This setting indicates whether closed captioning is enabled for this broadcast. The ingestion URL of the closed captions is returned through the liveStreams API.
+        description: 'This setting indicates whether HTTP POST closed captioning is enabled for this broadcast. The ingestion URL of the closed captions is returned through the liveStreams API. This is mutually exclusive with using the closed_captions_type property, and is equivalent to setting closed_captions_type to CLOSED_CAPTIONS_HTTP_POST.'
         type: boolean
       enableContentEncryption:
         description: This setting indicates whether YouTube should enable content encryption for the broadcast.
@@ -5334,6 +5772,238 @@ definitions:
         type: string
       releaseDate:
         description: 'The date at which the topic was released. Filled for types: videoGame'
+        type: string
+    type: object
+  LiveChatBan:
+    description: A liveChatBan resource represents a ban for a YouTube live chat.
+    properties:
+      etag:
+        description: Etag of this resource.
+        type: string
+      id:
+        description: The ID that YouTube assigns to uniquely identify the ban.
+        type: string
+      kind:
+        default: 'youtube#liveChatBan'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#liveChatBan".'
+        type: string
+      snippet:
+        $ref: '#/definitions/LiveChatBanSnippet'
+        description: The snippet object contains basic details about the ban.
+    type: object
+  LiveChatBanSnippet:
+    properties:
+      banDurationSeconds:
+        description: 'The duration of a ban, only filled if the ban has type TEMPORARY.'
+        format: uint64
+        type: string
+      bannedUserDetails:
+        $ref: '#/definitions/ChannelProfileDetails'
+      liveChatId:
+        description: The chat this ban is pertinent to.
+        type: string
+      type:
+        description: The type of ban.
+        enum:
+          - permanent
+          - temporary
+        type: string
+    type: object
+  LiveChatFanFundingEventDetails:
+    properties:
+      amountDisplayString:
+        description: A rendered string that displays the fund amount and currency to the user.
+        type: string
+      amountMicros:
+        description: The amount of the fund.
+        format: uint64
+        type: string
+      currency:
+        description: The currency in which the fund was made.
+        type: string
+      userComment:
+        description: The comment added by the user to this fan funding event.
+        type: string
+    type: object
+  LiveChatMessage:
+    description: A liveChatMessage resource represents a chat message in a YouTube Live Chat.
+    properties:
+      authorDetails:
+        $ref: '#/definitions/LiveChatMessageAuthorDetails'
+        description: The authorDetails object contains basic details about the user that posted this message.
+      etag:
+        description: Etag of this resource.
+        type: string
+      id:
+        description: The ID that YouTube assigns to uniquely identify the message.
+        type: string
+      kind:
+        default: 'youtube#liveChatMessage'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#liveChatMessage".'
+        type: string
+      snippet:
+        $ref: '#/definitions/LiveChatMessageSnippet'
+        description: The snippet object contains basic details about the message.
+    type: object
+  LiveChatMessageAuthorDetails:
+    properties:
+      channelId:
+        description: The YouTube channel ID.
+        type: string
+      channelUrl:
+        description: "The channel's URL."
+        type: string
+      displayName:
+        description: "The channel's display name."
+        type: string
+      isChatModerator:
+        description: Whether the author is a moderator of the live chat.
+        type: boolean
+      isChatOwner:
+        description: Whether the author is the owner of the live chat.
+        type: boolean
+      isChatSponsor:
+        description: Whether the author is a sponsor of the live chat.
+        type: boolean
+      isVerified:
+        description: "Whether the author's identity has been verified by YouTube."
+        type: boolean
+      profileImageUrl:
+        description: "The channels's avatar URL."
+        type: string
+    type: object
+  LiveChatMessageListResponse:
+    properties:
+      etag:
+        description: Etag of this resource.
+        type: string
+      eventId:
+        description: Serialized EventId of the request which produced this response.
+        type: string
+      items:
+        description: A list of live chat messages.
+        items:
+          $ref: '#/definitions/LiveChatMessage'
+        type: array
+      kind:
+        default: 'youtube#liveChatMessageListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#liveChatMessageListResponse".'
+        type: string
+      nextPageToken:
+        description: The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
+        type: string
+      offlineAt:
+        description: 'The date and time when the underlying stream went offline. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.'
+        format: date-time
+        type: string
+      pageInfo:
+        $ref: '#/definitions/PageInfo'
+      pollingIntervalMillis:
+        description: The amount of time the client should wait before polling again.
+        format: uint32
+        type: integer
+      tokenPagination:
+        $ref: '#/definitions/TokenPagination'
+      visitorId:
+        description: The visitorId identifies the visitor.
+        type: string
+    type: object
+  LiveChatMessageSnippet:
+    properties:
+      authorChannelId:
+        description: 'The ID of the user that authored this message, this field is not always filled. textMessageEvent - the user that wrote the message fanFundingEvent - the user that funded the broadcast newSponsorEvent - the user that just became a sponsor'
+        type: string
+      displayMessage:
+        description: 'Contains a string that can be displayed to the user. If this field is not present the message is silent, at the moment only messages of type TOMBSTONE and CHAT_ENDED_EVENT are silent.'
+        type: string
+      fanFundingEventDetails:
+        $ref: '#/definitions/LiveChatFanFundingEventDetails'
+        description: "Details about the funding event, this is only set if the type is 'fanFundingEvent'."
+      hasDisplayContent:
+        description: Whether the message has display content that should be displayed to users.
+        type: boolean
+      liveChatId:
+        type: string
+      publishedAt:
+        description: 'The date and time when the message was orignally published. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.'
+        format: date-time
+        type: string
+      textMessageDetails:
+        $ref: '#/definitions/LiveChatTextMessageDetails'
+        description: "Details about the text message, this is only set if the type is 'textMessageEvent'."
+      type:
+        description: 'The type of message, this will always be present, it determines the contents of the message as well as which fields will be present.'
+        enum:
+          - chatEndedEvent
+          - fanFundingEvent
+          - newSponsorEvent
+          - sponsorOnlyModeEndedEvent
+          - sponsorOnlyModeStartedEvent
+          - textMessageEvent
+          - tombstone
+        type: string
+    type: object
+  LiveChatModerator:
+    description: 'A liveChatModerator resource represents a moderator for a YouTube live chat. A chat moderator has the ability to ban/unban users from a chat, remove message, etc.'
+    properties:
+      etag:
+        description: Etag of this resource.
+        type: string
+      id:
+        description: The ID that YouTube assigns to uniquely identify the moderator.
+        type: string
+      kind:
+        default: 'youtube#liveChatModerator'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#liveChatModerator".'
+        type: string
+      snippet:
+        $ref: '#/definitions/LiveChatModeratorSnippet'
+        description: The snippet object contains basic details about the moderator.
+    type: object
+  LiveChatModeratorListResponse:
+    properties:
+      etag:
+        description: Etag of this resource.
+        type: string
+      eventId:
+        description: Serialized EventId of the request which produced this response.
+        type: string
+      items:
+        description: A list of moderators that match the request criteria.
+        items:
+          $ref: '#/definitions/LiveChatModerator'
+        type: array
+      kind:
+        default: 'youtube#liveChatModeratorListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#liveChatModeratorListResponse".'
+        type: string
+      nextPageToken:
+        description: The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
+        type: string
+      pageInfo:
+        $ref: '#/definitions/PageInfo'
+      prevPageToken:
+        description: The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
+        type: string
+      tokenPagination:
+        $ref: '#/definitions/TokenPagination'
+      visitorId:
+        description: The visitorId identifies the visitor.
+        type: string
+    type: object
+  LiveChatModeratorSnippet:
+    properties:
+      liveChatId:
+        description: The ID of the live chat this moderator can act on.
+        type: string
+      moderatorDetails:
+        $ref: '#/definitions/ChannelProfileDetails'
+        description: Details about the moderator.
+    type: object
+  LiveChatTextMessageDetails:
+    properties:
+      messageText:
+        description: "The user's message."
         type: string
     type: object
   LiveStream:
@@ -5941,6 +6611,64 @@ definitions:
         description: 'A map of thumbnail images associated with the search result. For each object in the map, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail.'
       title:
         description: The title of the search result.
+        type: string
+    type: object
+  Sponsor:
+    description: A sponsor resource represents a sponsor for a YouTube channel. A sponsor provides recurring monetary support to a creator and receives special benefits.
+    properties:
+      etag:
+        description: Etag of this resource.
+        type: string
+      id:
+        description: The ID that YouTube assigns to uniquely identify the sponsor.
+        type: string
+      kind:
+        default: 'youtube#sponsor'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#sponsor".'
+        type: string
+      snippet:
+        $ref: '#/definitions/SponsorSnippet'
+        description: The snippet object contains basic details about the sponsor.
+    type: object
+  SponsorListResponse:
+    properties:
+      etag:
+        description: Etag of this resource.
+        type: string
+      eventId:
+        description: Serialized EventId of the request which produced this response.
+        type: string
+      items:
+        description: A list of sponsors that match the request criteria.
+        items:
+          $ref: '#/definitions/Sponsor'
+        type: array
+      kind:
+        default: 'youtube#sponsorListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#sponsorListResponse".'
+        type: string
+      nextPageToken:
+        description: The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set.
+        type: string
+      pageInfo:
+        $ref: '#/definitions/PageInfo'
+      tokenPagination:
+        $ref: '#/definitions/TokenPagination'
+      visitorId:
+        description: The visitorId identifies the visitor.
+        type: string
+    type: object
+  SponsorSnippet:
+    properties:
+      channelId:
+        description: The id of the channel being sponsored.
+        type: string
+      sponsorDetails:
+        $ref: '#/definitions/ChannelProfileDetails'
+        description: Details about the sponsor.
+      sponsorSince:
+        description: 'The date and time when the user became a sponsor. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.'
+        format: date-time
         type: string
     type: object
   Subscription:

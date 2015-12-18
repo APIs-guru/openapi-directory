@@ -890,6 +890,411 @@ paths:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - enterprises
+  '/enterprises/{enterpriseId}/storeLayout':
+    get:
+      description: Returns the store layout resource.
+      operationId: androidenterprise.enterprises.getStoreLayout
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/StoreLayout'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - enterprises
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    put:
+      description: Sets the store layout resource.
+      operationId: androidenterprise.enterprises.setStoreLayout
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/StoreLayout'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/StoreLayout'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - enterprises
+  '/enterprises/{enterpriseId}/storeLayout/pages':
+    get:
+      description: Retrieves the details of all pages in the store.
+      operationId: androidenterprise.storelayoutpages.list
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/StoreLayoutPagesListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - storelayoutpages
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Inserts a new store page.
+      operationId: androidenterprise.storelayoutpages.insert
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/StorePage'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/StorePage'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - storelayoutpages
+  '/enterprises/{enterpriseId}/storeLayout/pages/{pageId}':
+    delete:
+      description: Deletes a store page.
+      operationId: androidenterprise.storelayoutpages.delete
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the page.
+          in: path
+          name: pageId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - storelayoutpages
+    get:
+      description: Retrieves details of a store page.
+      operationId: androidenterprise.storelayoutpages.get
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the page.
+          in: path
+          name: pageId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/StorePage'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - storelayoutpages
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates the content of a store page. This method supports patch semantics.
+      operationId: androidenterprise.storelayoutpages.patch
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the page.
+          in: path
+          name: pageId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/StorePage'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/StorePage'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - storelayoutpages
+    put:
+      description: Updates the content of a store page.
+      operationId: androidenterprise.storelayoutpages.update
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the page.
+          in: path
+          name: pageId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/StorePage'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/StorePage'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - storelayoutpages
+  '/enterprises/{enterpriseId}/storeLayout/pages/{pageId}/clusters':
+    get:
+      description: Retrieves the details of all clusters on the specified page.
+      operationId: androidenterprise.storelayoutclusters.list
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the page.
+          in: path
+          name: pageId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/StoreLayoutClustersListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - storelayoutclusters
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Inserts a new cluster in a page.
+      operationId: androidenterprise.storelayoutclusters.insert
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the page.
+          in: path
+          name: pageId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/StoreCluster'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/StoreCluster'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - storelayoutclusters
+  '/enterprises/{enterpriseId}/storeLayout/pages/{pageId}/clusters/{clusterId}':
+    delete:
+      description: Deletes a cluster.
+      operationId: androidenterprise.storelayoutclusters.delete
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the page.
+          in: path
+          name: pageId
+          required: true
+          type: string
+        - description: The ID of the cluster.
+          in: path
+          name: clusterId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - storelayoutclusters
+    get:
+      description: Retrieves details of a cluster.
+      operationId: androidenterprise.storelayoutclusters.get
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the page.
+          in: path
+          name: pageId
+          required: true
+          type: string
+        - description: The ID of the cluster.
+          in: path
+          name: clusterId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/StoreCluster'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - storelayoutclusters
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates a cluster. This method supports patch semantics.
+      operationId: androidenterprise.storelayoutclusters.patch
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the page.
+          in: path
+          name: pageId
+          required: true
+          type: string
+        - description: The ID of the cluster.
+          in: path
+          name: clusterId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/StoreCluster'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/StoreCluster'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - storelayoutclusters
+    put:
+      description: Updates a cluster.
+      operationId: androidenterprise.storelayoutclusters.update
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the page.
+          in: path
+          name: pageId
+          required: true
+          type: string
+        - description: The ID of the cluster.
+          in: path
+          name: clusterId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/StoreCluster'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/StoreCluster'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - storelayoutclusters
   '/enterprises/{enterpriseId}/unenroll':
     parameters:
       - $ref: '#/parameters/alt'
@@ -918,7 +1323,7 @@ paths:
         - enterprises
   '/enterprises/{enterpriseId}/users':
     get:
-      description: Looks up a user by email address.
+      description: Looks up a user by email address. This only works for Google managed users.
       operationId: androidenterprise.users.list
       parameters:
         - description: The ID of the enterprise.
@@ -2008,6 +2413,16 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#installsListResponse".'
         type: string
     type: object
+  LocalizedText:
+    description: A localized string with its locale.
+    properties:
+      locale:
+        description: 'The BCP47 tag for a locale. (e.g. "en-US", "de").'
+        type: string
+      text:
+        description: The text localized in the associated locale.
+        type: string
+    type: object
   Permission:
     description: |-
       A permission represents some extra capability, to be granted to an Android app, which requires explicit consent. An enterprise admin must consent to these permissions on behalf of their users before an entitlement for the app can be created.
@@ -2122,6 +2537,99 @@ definitions:
         description: 'A URL that can be rendered in an iframe to display the permissions (if any) of a product. This URL can be used to approve the product only once and only within 24 hours of being generated, using the Products.approve call. If the product is currently unapproved and has no permissions, this URL will point to an empty page. If the product is currently approved, a URL will only be generated if that product has added permissions since it was last approved, and the URL will only display those new permissions that have not yet been accepted.'
         type: string
     type: object
+  StoreCluster:
+    description: 'Definition of a Google Play for Work store cluster, a list of products displayed as part of a store page.'
+    properties:
+      id:
+        description: Unique ID of this cluster. Assigned by the server. Immutable once assigned.
+        type: string
+      kind:
+        default: 'androidenterprise#storeCluster'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#storeCluster".'
+        type: string
+      name:
+        description: 'Ordered list of localized strings giving the name of this page. The text displayed is the one that best matches the user locale, or the first entry if there is no good match. There needs to be at least one entry.'
+        items:
+          $ref: '#/definitions/LocalizedText'
+        type: array
+      orderInPage:
+        description: |-
+          String (US-ASCII only) used to determine order of this cluster within the parent page's elements. Page elements are sorted in lexicographic order of this field. Duplicated values are allowed, but ordering between elements with duplicate order is undefined.
+
+          The value of this field is never visible to a user, it is used solely for the purpose of defining an ordering. Maximum length is 20 characters.
+        type: string
+      productId:
+        description: List of products in the order they are displayed in the cluster. There should not be duplicates within a cluster.
+        items:
+          type: string
+        type: array
+    type: object
+  StoreLayout:
+    description: 'General setting for the Google Play for Work store layout, currently only specifying the page to display the first time the store is opened.'
+    properties:
+      homepageId:
+        description: |-
+          The ID of the store page to be used as the homepage. The homepage will be used as the first page shown in the Google Play for Work store.
+
+          If there is no homepage set, an empty store is shown. The homepage can be unset (by not specifying it) to empty the store.
+
+          If there exists at least one page, this field must be set to the ID of a valid page.
+        type: string
+      kind:
+        default: 'androidenterprise#storeLayout'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#storeLayout".'
+        type: string
+    type: object
+  StoreLayoutClustersListResponse:
+    description: The store page resources for the enterprise.
+    properties:
+      cluster:
+        description: A store cluster of an enterprise.
+        items:
+          $ref: '#/definitions/StoreCluster'
+        type: array
+      kind:
+        default: 'androidenterprise#storeLayoutClustersListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#storeLayoutClustersListResponse".'
+        type: string
+    type: object
+  StoreLayoutPagesListResponse:
+    description: The store page resources for the enterprise.
+    properties:
+      kind:
+        default: 'androidenterprise#storeLayoutPagesListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#storeLayoutPagesListResponse".'
+        type: string
+      page:
+        description: A store page of an enterprise.
+        items:
+          $ref: '#/definitions/StorePage'
+        type: array
+    type: object
+  StorePage:
+    description: 'Definition of a Google Play for Work store page, made of a localized name and links to other pages. A page also contains clusters defined as a subcollection.'
+    properties:
+      id:
+        description: Unique ID of this page. Assigned by the server. Immutable once assigned.
+        type: string
+      kind:
+        default: 'androidenterprise#storePage'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#storePage".'
+        type: string
+      link:
+        description: |-
+          Ordered list of pages a user should be able to reach from this page. The pages must exist, must not be this page, and once a link is created the page linked to cannot be deleted until all links to it are removed. It is recommended that the basic pages are created first, before adding the links between pages.
+
+          No attempt is made to verify that all pages are reachable from the homepage.
+        items:
+          type: string
+        type: array
+      name:
+        description: 'Ordered list of localized strings giving the name of this page. The text displayed is the one that best matches the user locale, or the first entry if there is no good match. There needs to be at least one entry.'
+        items:
+          $ref: '#/definitions/LocalizedText'
+        type: array
+    type: object
   User:
     description: |-
       A user resource represents an individual user within the enterprise's domain.
@@ -2138,7 +2646,7 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#user".'
         type: string
       primaryEmail:
-        description: "The user's primary email, e.g. \"jsmith@example.com\"."
+        description: "The user's primary email, e.g. \"jsmith@example.com\". Will always be set for Google managed users and not set for EMM managed users."
         type: string
     type: object
   UserToken:

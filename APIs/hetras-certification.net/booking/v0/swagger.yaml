@@ -19,7 +19,7 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "The booking addons endpoint gives the client all service addon\r\n             combinations for the given rate plan, room type, timeframe, for the given number of adults and\r\n             number of children per room"
+      description: "With the addons request you can get a list of offers for addon services available for a specific rate, room type\r\n            and guest stay details.The channel code will define which rates will be returned based on the access control \r\n            configuration for related rates."
       parameters:
         - description: Application identifier
           in: header
@@ -33,19 +33,19 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-        - description: Specifies the hotel id to process.
+        - description: Specifies the hotel id to request offers for.
           format: int32
           in: query
           name: hotelId
           required: true
           type: integer
-        - description: 'Date of arrival for the guest in the ISO-8601 format "YYYY-MM-DD".'
+        - description: 'Date from when the addon service will be booked to the reservation in the ISO-8601 format "YYYY-MM-DD".'
           format: date-time
           in: query
           name: arrivalDate
           required: true
           type: string
-        - description: 'Date of departure for the guest in the ISO-8601 format "YYYY-MM-DD".'
+        - description: "Date until when the addon service will be booked to the reservation in the ISO-8601 format \"YYYY-MM-DD\".\r\n            This is usually the departure date of the reservation."
           format: date-time
           in: query
           name: departureDate
@@ -72,17 +72,17 @@ paths:
           name: rooms
           required: true
           type: string
-        - description: Only return offers with rates for the specified room type code.
+        - description: Only return offers for the specified room type code.
           in: query
           name: roomType
           required: true
           type: string
-        - description: Only return offers for the specified room type code.
+        - description: Only return offers for the specified rate plan code.
           in: query
           name: ratePlanCode
           required: true
           type: string
-        - description: Return additional information on request.
+        - description: Expand the rates breakdown if required.
           enum:
             - None
             - Breakdown
@@ -95,26 +95,27 @@ paths:
         - text/json
       responses:
         '200':
-          description: "An array of offers for each of the hotels listed in the hetras-hotels\r\n            header. Only hotels with availability for the specified criteria are in the\r\n            list. If the list is empty none of the specified hotels offer available rooms."
+          description: All addon offers for the requested stay details.
           schema:
             $ref: '#/definitions/Addons'
         '400':
-          description: Some request parameters are invalid
-        '403':
-          description: You are not authorized to access this resource or the data for the specified hotels.
+          description: Bad request. Request parameters syntactically erroneous.
+        '401':
+          description: You are not authorized to access this resource or you reached your API limit.
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
         '422':
-          description: Missing a mandatory parameter.
+          description: "The request failed to validate. Either a mandatory parameter was missing or no offers for \r\n            the requested stay details"
         '500':
-          description: "We couldn't return the representation due to an internal server error."
-      summary: Get a list of addon offers for the requested hotel identifier.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+      summary: Get a list of offers for addon services for the specified guest stay details.
       tags:
         - Addons
   /api/booking/v0/blocks:
     get:
       consumes: []
       deprecated: false
+      description: "With this endpoint you can request a list of blocks for the hotel chain. Currently we only support to optionally\r\n            filter by the group code linked to the block. Additional filters will be available soon."
       parameters:
         - description: Application identifier
           in: header
@@ -128,7 +129,7 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-        - description: Specifies the group code for which the list of blocks should be returned.
+        - description: Optionally filter the blocks by the specified group code.
           in: query
           name: groupCode
           required: false
@@ -138,24 +139,25 @@ paths:
         - text/json
       responses:
         '200':
-          description: Block details for the provided group code.
+          description: Returns a list of blocks matching the provided filter criteria.
           schema:
             $ref: '#/definitions/BlocksResponse'
         '400':
-          description: Some request parameters are invalid
-        '403':
-          description: You are not authorized to access this resource or the data for the specified hotels.
+          description: Bad request. Request parameters syntactically erroneous.
+        '401':
+          description: You are not authorized to access this resource or you reached your API limit.
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
         '500':
-          description: The process failed due to an internal server error.
-      summary: Gets the list of all blocks for the hotel chain.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+      summary: Gets a list of blocks.
       tags:
         - Blocks
   '/api/booking/v0/blocks/{blockCode}':
     get:
       consumes: []
       deprecated: false
+      description: Read all informationen about a block including the numbers of blocked rooms per room type and business day.
       parameters:
         - description: Application identifier
           in: header
@@ -169,7 +171,7 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-        - description: 'Specifies the block code in the format: {componentCode-blockCode}.'
+        - description: "Specifies the block code. The block code is composed of the hotel code, a dash and the block code \r\n            as shown in the hetras UI."
           in: path
           name: blockCode
           required: true
@@ -179,17 +181,17 @@ paths:
         - text/json
       responses:
         '200':
-          description: Block details for the provided code.
+          description: Returns you all details for the specific block.
           schema:
             $ref: '#/definitions/BlockResponse'
         '400':
-          description: Some request parameters are invalid
-        '403':
-          description: You are not authorized to access this resource or the data for the specified hotels.
+          description: Bad request. Request parameters syntactically erroneous.
+        '401':
+          description: You are not authorized to access this resource or you reached your API limit.
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
         '500':
-          description: The process failed due to an internal server error.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
       summary: Gets the details for a specific block.
       tags:
         - Blocks
@@ -200,7 +202,7 @@ paths:
         - text/json
         - application/x-www-form-urlencoded
       deprecated: false
-      description: "Create a reservation based on the payload. If the client making the request is not subscribed to the hotel specified in the request\r\n            the API will return 403."
+      description: "Create a new booking as defined in the requests payload. You can get more information about the payload if you check out the\r\n            documentation for the reservation request model.<br />\r\n            Please also have a look at the <a href=\"https://developer.hetras.com/docs/tutorials\" onfocus=\"this.blur()\">Tutorials</a>.<br />\r\n            For more details on how the API responds to errors please check our documentation on \r\n            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>."
       parameters:
         - description: Application identifier
           in: header
@@ -214,7 +216,7 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-        - description: Specifies the reservation payload.
+        - description: Specifies the details of the booking to be created.
           in: body
           name: reservationRequest
           required: true
@@ -225,24 +227,27 @@ paths:
         - text/json
       responses:
         '201':
-          description: Return the newly created reservation after successful creation.
+          description: "The creation of the booking was successful. You will get back the confirmation id and maybe warnings, if\r\n            e.g. the prepayment could not be captured."
           schema:
             $ref: '#/definitions/BaseResponse'
+        '400':
+          description: Bad request. Request parameters or request body erroneous.
         '401':
-          description: You are not authorized to access this resource or the data for the specified hotels.
+          description: You are not authorized to create new bookings or you reached your API limit.
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
         '422':
-          description: The validation of the payload wasn´t successful.
+          description: The request failed to validate.
         '500':
-          description: "We couldn't return the representation due to an internal server error."
-      summary: Create a reservation.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+      summary: Create a new booking
       tags:
         - Reservation
   '/api/booking/v0/bookings/{confirmationId}':
     get:
       consumes: []
       deprecated: false
+      description: "A booking groups all reservations done in one single request and can be identified by the confirmation id.\r\n            Guests usually use the confirmation id to check in at the kiosk, on the website or mobile device. In hetras\r\n            all reservations of one booking share the room type, rate plan and number of guests per room."
       parameters:
         - description: Application identifier
           in: header
@@ -256,7 +261,7 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-        - description: Specifies the booking confirmation id to process.
+        - description: The confirmation id for the booking to load.
           in: path
           name: confirmationId
           required: true
@@ -266,22 +271,25 @@ paths:
         - text/json
       responses:
         '200':
-          description: The details of the reservation specified.
+          description: Returns a list of all reservations for that booking.
           schema:
             $ref: '#/definitions/ReservationsResponse'
-        '403':
-          description: You are not authorized to access this resource or the data for the specified hotels.
+        '400':
+          description: Bad request. Request parameters syntactically erroneous.
+        '401':
+          description: You are not authorized to access this resource or you reached your API limit.
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
         '500':
-          description: "We couldn't return the representation due to an internal server error."
-      summary: Get reservations by confirmation id
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+      summary: Load all reservations for one booking by confirmation id
       tags:
         - Reservation
   '/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}':
     get:
       consumes: []
       deprecated: false
+      description: With this request you can load one specific reservation done with one booking request.
       parameters:
         - description: Application identifier
           in: header
@@ -295,12 +303,12 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-        - description: Specifies the booking confirmation id to process.
+        - description: The confirmation id for the booking the reservation was made.
           in: path
           name: confirmationId
           required: true
           type: string
-        - description: Specifies the reservation id to use for all further operations.
+        - description: Specifies the reservation number for the reservation to load.
           format: int32
           in: path
           name: reservationNumber
@@ -311,22 +319,25 @@ paths:
         - text/json
       responses:
         '200':
-          description: The details of the reservation specified.
+          description: Returns the details of the reservation specified.
           schema:
             $ref: '#/definitions/ReservationResponse'
-        '403':
-          description: You are not authorized to access this resource or the data for the specified hotels.
+        '400':
+          description: Bad request. Request parameters syntactically erroneous.
+        '401':
+          description: You are not authorized to access this resource or you reached your API limit.
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
         '500':
-          description: "We couldn't return the representation due to an internal server error."
-      summary: Get a reservation
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+      summary: Load a specific reservation from a booking
       tags:
         - Reservation
   '/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}/cancel':
     post:
       consumes: []
       deprecated: false
+      description: "This request will cancel one specific reservation. It will show up in the hetras UI in the Cancellation and NoShow\r\n            processing screen and it will be up to the hotel staff to either charge or waive the cancellation fee.<br />\r\n            For more details on how the API responds to errors please check our documentation on \r\n            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>."
       parameters:
         - description: Application identifier
           in: header
@@ -340,12 +351,12 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-        - description: Specifies the booking confirmation id to process.
+        - description: The confirmation id for the booking the reservation was made.
           in: path
           name: confirmationId
           required: true
           type: string
-        - description: Specifies the reservation id to use for all further operations.
+        - description: Specifies the reservation number for the reservation to cancel.
           format: int32
           in: path
           name: reservationNumber
@@ -356,17 +367,25 @@ paths:
         - text/json
       responses:
         '200':
-          description: OK
+          description: Returns the cancellation id and the cancellation fee that will be charged to the folio of the reservation.
           schema:
             $ref: '#/definitions/CancellationResponse'
-      summary: Cancels reservation
+        '400':
+          description: Bad request. Request parameters or request body erroneous.
+        '401':
+          description: You are not authorized to access this resource or you reached your API limit.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI.
+        '500':
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+      summary: Cancel one reservation
       tags:
         - Reservation
   /api/booking/v0/rates:
     get:
       consumes: []
       deprecated: false
-      description: "The booking availability endpoint gives the client all room and rate\r\n             combinations for the given timeframe, for the given number of adults and\r\n             number of children per room. The resultset can be further reduced by\r\n             specifying a channel, rate plan or room type."
+      description: "With the rates request you can get a list of different rate offers per room type. You will have to at least \r\n            specify the hotel, the arrival and departure date, number of adults per room and the channel code. The channel code\r\n            will define which rates will be returned based on the access control configuration for the rates."
       parameters:
         - description: Application identifier
           in: header
@@ -380,7 +399,7 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-        - description: Specifies the hotel id to process.
+        - description: Specifies the hotel id to request offers for.
           format: int32
           in: query
           name: hotelId
@@ -432,7 +451,7 @@ paths:
           name: groupCode
           required: false
           type: string
-        - description: Return additional information on request.
+        - description: Expand the rates breakdown if required.
           enum:
             - None
             - Breakdown
@@ -445,27 +464,27 @@ paths:
         - text/json
       responses:
         '200':
-          description: "An array of offers for each of the hotels listed in the hetras-hotels\r\n            header. Only hotels with availability for the specified criteria are in the\r\n            list. If the list is empty none of the specified hotels offer available rooms."
+          description: Different rates for the requested stay details grouped by room type.
           schema:
             $ref: '#/definitions/Rates'
         '400':
-          description: Some request parameters are invalid
-        '403':
-          description: You are not authorized to access this resource or the data for the specified hotels.
+          description: Bad request. Request parameters syntactically erroneous.
+        '401':
+          description: You are not authorized to access this resource or you reached your API limit.
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
         '422':
-          description: Missing a mandatory parameter.
+          description: "The request failed to validate. Either a mandatory parameter was missing or no offers for \r\n            the requested stay details"
         '500':
-          description: "We couldn't return the representation due to an internal server error."
-      summary: Get a list of offers for the requested hotel identifier.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+      summary: Get a list of room offers for the specified guest stay details.
       tags:
         - Rates
 definitions:
   AcceptedGuaranteeTypes:
     properties:
       accepted:
-        description: "In this list you find all the accepted guarantee types for this offer. They are sorted from in ascending\r\n            order."
+        description: "In this list you find all the accepted guarantee types for this offer. They are sorted in ascending\r\n            order."
         items:
           enum:
             - PM4Hold
@@ -483,7 +502,7 @@ definitions:
           type: string
         type: array
       minimum:
-        description: "Based on the rateplan a reservation does need to have a minimum guarantee. When you create a new booking you\r\n            can always use a higher guarantee type starting from the minimum."
+        description: "Based on the rateplan a reservation does need to have a minimum guarantee. When you create a new booking you\r\n            can always use a higher guarantee type starting from the minimum. If you do not specify a guarantee when creating\r\n            a new booking using this offer this guarantee type will be used by default. See \r\n            https://developer.hetras.com/docs/tutorials#payment for information about guarantee types and payment details"
         enum:
           - PM4Hold
           - PM6Hold
@@ -502,7 +521,7 @@ definitions:
   AddonOffer:
     properties:
       breakdown:
-        description: "In this collection you will get an entry with prize information for every day the addon service will be charged\r\n            on the reservation when the addon service will be booked."
+        description: "In this collection you will get an entry with prize information for every day the addon service will be charged\r\n            to the folio of the reservation if the addon service is booked."
         items:
           $ref: '#/definitions/AddonOfferBreakdown'
         type: array
@@ -519,7 +538,7 @@ definitions:
         description: The name of the addon service
         type: string
       rate_mode:
-        description: Rate mode for a given addon service.
+        description: "The prize for an addon service can be per person or per room. All the prizes in an offer are already calculated\r\n            for all rooms and number of persons per room. Based on this attribute you will be able to know how to calculate\r\n            the prize per person and room, per room or per person depending on your needs."
         enum:
           - PerRoom
           - PerPerson
@@ -531,7 +550,7 @@ definitions:
   AddonOfferBreakdown:
     properties:
       business_day:
-        description: The date the addon service will be activated.
+        description: The business day the prize for the addon service will be posted to the folio of the reservation
         format: date-time
         type: string
       currency:
@@ -613,36 +632,36 @@ definitions:
         description: Collection of links to related resources.
         type: object
       code:
-        description: Block code
+        description: "The code of a block. The code is composed of the hotel code a dash and the block code shown in the hetras UI. \r\n            An example block code on the API for a block with code TRAVEL1 defined for the hotel with code ABC \r\n            would be ABC-TRAVEL1"
         type: string
       count:
-        description: Total number of room night counts across all room types
+        description: Total number of room night blocked across all room types and days
         format: int32
         type: integer
       first_arrival:
-        description: (Earliest) Arrival date of the block
+        description: (Earliest) arrival date for reservations split from this block
         format: date-time
         type: string
       group:
         $ref: '#/definitions/GroupMaster'
-        description: "Block's group master details"
+        description: Group master template linked to this block
       hotel:
         $ref: '#/definitions/HotelSummary'
-        description: "Block's hotel details"
+        description: Hotel information for the hotel the rooms are blocked for
       last_departure:
-        description: (Latest) Departure date of the block
+        description: (Latest) departure date for reservations split from this block
         format: date-time
         type: string
       name:
-        description: Block name
+        description: The name of the block
         type: string
       rate_plans:
-        description: Block rate plan
+        description: The rateplans linked to this block
         items:
           $ref: '#/definitions/RatePlan'
         type: array
       status:
-        description: Block status
+        description: The current status of the block
         enum:
           - NotSet
           - Cancelled
@@ -653,41 +672,41 @@ definitions:
   BlockResponse:
     properties:
       code:
-        description: Block code
+        description: "The code of a block. The code is composed of the hotel code a dash and the block code shown in the hetras UI. \r\n            An example block code on the API for a block with code TRAVEL1 defined for the hotel with code ABC \r\n            would be ABC-TRAVEL1"
         type: string
       count:
-        description: Total number of room night counts across all room types
+        description: Total number of room night blocked across all room types and days
         format: int32
         type: integer
       first_arrival:
-        description: (Earliest) Arrival date of the block
+        description: (Earliest) arrival date for reservations split from this block
         format: date-time
         type: string
       group:
         $ref: '#/definitions/GroupMaster'
-        description: "Block's group master details"
+        description: Group master template linked to this block
       hotel:
         $ref: '#/definitions/HotelSummary'
-        description: "Block's hotel details"
+        description: Hotel information for the hotel the rooms are blocked for
       last_departure:
-        description: (Latest) Departure date of the block
+        description: (Latest) departure date for reservations split from this block
         format: date-time
         type: string
       name:
-        description: Block name
+        description: The name of the block
         type: string
       rate_plans:
-        description: Block rate plan
+        description: The rateplans linked to this block
         items:
           $ref: '#/definitions/RatePlan'
         type: array
       room_type_counts:
-        description: Block room types and their respective room-night counts.
+        description: Number of blocked rooms per room type and day.
         items:
           $ref: '#/definitions/RoomTypeCount'
         type: array
       status:
-        description: Block status
+        description: The current status of the block
         enum:
           - NotSet
           - Cancelled
@@ -703,16 +722,16 @@ definitions:
         description: Collection of links to related resources.
         type: object
       code:
-        description: Room type code
+        description: Code of the room type
         type: string
       name:
-        description: Room type name
+        description: Name of the room type
         type: string
     type: object
   BlocksResponse:
     properties:
       blocks:
-        description: List of blocks
+        description: List of all blocks matching the given filter criteria.
         items:
           $ref: '#/definitions/Block'
         type: array
@@ -748,7 +767,7 @@ definitions:
         format: double
         type: number
       cancellation_id:
-        description: The id of the successful cancellation
+        description: The id of the successful cancellation. With this id the hotel staff will be able to find the reservation
         type: string
     type: object
   Company:
@@ -775,7 +794,7 @@ definitions:
         format: date-time
         type: string
       excluded_tax:
-        description: The amount of extra taxes also calculated for all rooms and all persons.
+        description: The amount of extra taxes also calculated for all rooms and all persons per room.
         format: double
         type: number
       included_services:
@@ -784,11 +803,11 @@ definitions:
           type: string
         type: array
       included_tax:
-        description: "The amount of taxes already included in the gross rate also calculated for all rooms and\r\n            all persons."
+        description: "The amount of taxes already included in the gross rate also calculated for all rooms and\r\n            all persons per room."
         format: double
         type: number
       rate:
-        description: The gross rate. It is the prize calculated for all rooms and all persons.
+        description: The gross rate. It is the prize calculated for all rooms and all persons per room.
         format: double
         type: number
       room_type:
@@ -866,31 +885,31 @@ definitions:
         minimum: 1
         type: string
       arrivalDate:
-        description: 'Date of arrival for the guest in the ISO-8601 format "YYYY-MM-DD".'
+        description: 'Date from when the addon service will be booked to the reservation in the ISO-8601 format "YYYY-MM-DD".'
         format: date-time
         type: string
       channelCode:
         description: Channel Code the rate plan needs to be configured for.
         type: string
       departureDate:
-        description: 'Date of departure for the guest in the ISO-8601 format "YYYY-MM-DD".'
+        description: "Date until when the addon service will be booked to the reservation in the ISO-8601 format \"YYYY-MM-DD\".\r\n            This is usually the departure date of the reservation."
         format: date-time
         type: string
       expand:
-        description: Return additional information on request.
+        description: Expand the rates breakdown if required.
         enum:
           - None
           - Breakdown
         type: string
       hotelId:
-        description: Specifies the hotel id to process.
+        description: Specifies the hotel id to request offers for.
         format: int32
         type: integer
       ratePlanCode:
-        description: Only return offers for the specified room type code.
+        description: Only return offers for the specified rate plan code.
         type: string
       roomType:
-        description: Only return offers with rates for the specified room type code.
+        description: Only return offers for the specified room type code.
         type: string
       rooms:
         description: Number of rooms.
@@ -911,10 +930,10 @@ definitions:
   GroupMaster:
     properties:
       code:
-        description: Room type code
+        description: Code of the linked group master template
         type: string
       name:
-        description: Room type name
+        description: Name of the linked group master template
         type: string
     type: object
   Guarantee:
@@ -1108,7 +1127,7 @@ definitions:
         format: int32
         type: integer
       breakdown:
-        description: In this collection you will get an entry with prise information for every day.
+        description: In this collection you will get an entry with prize information for every day.
         items:
           $ref: '#/definitions/RoomOfferDailyRate'
         type: array
@@ -1165,7 +1184,7 @@ definitions:
           $ref: '#/definitions/ServiceRate'
         type: array
       excluded_tax:
-        description: The amount of extra taxes also calculated for all rooms and all persons.
+        description: The amount of extra taxes also calculated for all rooms and all persons per room.
         format: double
         type: number
       included_services:
@@ -1174,11 +1193,11 @@ definitions:
           type: string
         type: array
       included_tax:
-        description: "The amount of taxes already included in the gross rate also calculated for all rooms and\r\n            all persons."
+        description: "The amount of taxes already included in the gross rate also calculated for all rooms and\r\n            all persons per room."
         format: double
         type: number
       rate:
-        description: The gross rate. It is the prize calculated for all rooms and all persons.
+        description: The gross rate. It is the prize calculated for all rooms and all persons per room.
         format: double
         type: number
     type: object
@@ -1251,7 +1270,7 @@ definitions:
         format: date-time
         type: string
       expand:
-        description: Return additional information on request.
+        description: Expand the rates breakdown if required.
         enum:
           - None
           - Breakdown
@@ -1260,7 +1279,7 @@ definitions:
         description: Only return offers for the specified group code.
         type: string
       hotelId:
-        description: Specifies the hotel id to process.
+        description: Specifies the hotel id to request offers for.
         format: int32
         type: integer
       ratePlanCode:
@@ -1320,7 +1339,7 @@ definitions:
         type: string
       guarantee:
         $ref: '#/definitions/Guarantee'
-        description: The guarantee for this reservation
+        description: "The guarantee for this reservation. See https://developer.hetras.com/docs/tutorials#payment for information about\r\n            how to fill out the guarantee object"
       guests:
         description: A list of guests with some basic guest details
         items:
@@ -1529,11 +1548,11 @@ definitions:
   RoomNightCount:
     properties:
       count:
-        description: Number of rooms defined on the block
+        description: Number of rooms blocked
         format: int32
         type: integer
       date:
-        description: Date to which the count applies
+        description: Business day rooms are blocked for
         format: date-time
         type: string
     type: object
@@ -1551,32 +1570,32 @@ definitions:
   RoomOfferDailyRate:
     properties:
       business_day:
-        description: The effective date of the room offer
+        description: The business day the prize for the daily rate and all included services will be posted to the folio of the reservation
         format: date-time
         type: string
       excluded_tax:
-        description: "The amount of taxes that are not included in the gross rate of the room offer, and that will be charged separately.\r\n            It is also calculated for all rooms and all persons"
+        description: "The amount of taxes that are not included in the gross rate of the room offer and will be charged separately for\r\n            that business day. It is also calculated for all rooms and all persons per room"
         format: double
         type: number
       included_tax:
-        description: "The amount of taxes already included in the gross rate of the room offer also calculated for all rooms and\r\n            all persons"
+        description: "The amount of taxes already included in the gross rate of the room and all included services for this business day.\r\n            The prize is calculated for all rooms and all persons per room"
         format: double
         type: number
       rate:
-        description: The gross rate of the room offer. It is the prize calculated for all rooms and all persons
+        description: "The gross rate for this day for the room and all included services. The prize is calculated for all rooms and all \r\n            persons per room"
         format: double
         type: number
     type: object
   RoomTypeCount:
     properties:
       counts:
-        description: 'Room type counts {Hetras.PublicApi.Models.Booking.Blocks.RoomNightCount}'
+        description: Number of rooms blocked for this room type per day.
         items:
           $ref: '#/definitions/RoomNightCount'
         type: array
       room_type:
         $ref: '#/definitions/BlockRoomType'
-        description: Room type name
+        description: Room type for which rooms are blocked.
     type: object
   Service:
     properties:
