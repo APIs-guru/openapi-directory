@@ -1,0 +1,1796 @@
+swagger: '2.0'
+schemes:
+  - http
+host: nitro.api.bbci.co.uk
+basePath: /nitro/api
+info:
+  contact:
+    email: Jon.Billings@bbc.co.uk
+    name: Open Nitro Project
+    url: 'http://developer.bbc.co.uk/'
+  description: "BBC Nitro is the BBC's application programming interface (API) for BBC Programmes Metadata."
+  license:
+    name: Nitro Public License
+    url: 'https://developer.bbc.co.uk/nitropubliclicence/'
+  termsOfService: 'http://www.bbc.co.uk/terms/'
+  title: BBC Nitro
+  version: 1.0.0
+  x-origin:
+    format: swagger
+    url: 'https://raw.githubusercontent.com/Mermade/bbcparse/master/nitroApi/swagger.json'
+    version: '2.0'
+  x-providerName: bbci.co.uk
+consumes:
+  - application/json
+produces:
+  - application/json
+  - application/xml
+securityDefinitions:
+  api_key:
+    in: query
+    name: api_key
+    type: apiKey
+security:
+  - api_key: []
+tags:
+  - description: Nitro data feeds
+    name: feeds
+  - description: Nitro metadata
+    name: schema
+paths:
+  /:
+    get:
+      description: Get API definition
+      operationId: getAPI
+      parameters: []
+      responses:
+        '200':
+          description: Nitro response
+        default:
+          description: Unexpected error
+      summary: Get API definition
+      tags:
+        - schema
+  /availabilities:
+    get:
+      description: Discover details of on-demand availability for programmes and their versions
+      operationId: listAvailability
+      parameters:
+        - description: "Sorts:  \n---\nsort chronologically by scheduled start time/date, ascending  \n"
+          enum:
+            - scheduled_start
+          in: query
+          name: sort
+          required: false
+          type: string
+        - description: Sort direction
+          enum:
+            - ascending
+            - descending
+          in: query
+          name: sort_direction
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: filter for subset of availabilities
+          enum:
+            - available
+          in: query
+          items:
+            format: string
+          name: availability
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of availabilities that have PID as ancestor
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: descendants_of
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of availabilities with media set
+          in: query
+          items:
+            type: string
+          name: media_set
+          required: false
+          type: array
+        - default: 1
+          description: which page of results to return
+          in: query
+          minimum: 1
+          name: page
+          required: false
+          type: integer
+        - default: 10
+          description: number of results in each page
+          in: query
+          maximum: 300
+          name: page_size
+          required: false
+          type: integer
+        - collectionFormat: multi
+          description: filter for availabilities in given territory
+          enum:
+            - uk
+            - nonuk
+            - world
+          in: query
+          items:
+            format: string
+          name: territory
+          required: false
+          type: array
+      responses:
+        '200':
+          description: Nitro response
+        default:
+          description: Unexpected error
+      summary: Discover details of on-demand availability for programmes and their versions
+      tags:
+        - feeds
+  /broadcasts:
+    get:
+      description: Build schedules and find metadata for TV and radio broadcasts
+      operationId: listBroadcasts
+      parameters:
+        - description: "Sorts:  \n---\nsort chronologically by scheduled start time/date, ascending  \n"
+          enum:
+            - start_date
+          in: query
+          name: sort
+          required: false
+          type: string
+        - description: Sort direction
+          enum:
+            - ascending
+            - descending
+          in: query
+          name: sort_direction
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: "Mixins:  \n---\nreturn ancestor programme titles  \n"
+          enum:
+            - titles
+          in: query
+          items:
+            format: string
+          name: mixin
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of broadcasts that have given authority
+          in: query
+          items:
+            type: string
+          name: authority
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of broadcasts that are descendants of the given programme PID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: descendants_of
+          required: false
+          type: array
+        - description: filter for subset of broadcasts that end on or later than the specified datetime
+          format: date-time
+          in: query
+          name: end_from
+          required: false
+          type: string
+        - description: filter for subset of broadcasts that end on or earlier than the specified datetime
+          format: date-time
+          in: query
+          name: end_to
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: filter for subset of broadcasts that are classified in the given format ID
+          in: query
+          items:
+            type: string
+          name: format
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of broadcasts that are classified in the given genre ID
+          in: query
+          items:
+            type: string
+          name: genre
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of broadcasts that have given identifier
+          in: query
+          items:
+            type: string
+          name: id
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of broadcasts with the given item performed on it
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: item
+          required: false
+          type: array
+        - default: 1
+          description: which page of results to return
+          in: query
+          minimum: 1
+          name: page
+          required: false
+          type: integer
+        - default: 10
+          description: number of results in each page
+          in: query
+          maximum: 300
+          name: page_size
+          required: false
+          type: integer
+        - description: filter for subset of broadcasts that have given contributor
+          in: query
+          name: people
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: filter for subset of broadcasts having given PID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: pid
+          required: false
+          type: array
+        - description: filter for subset of broadcasts matching supplied keyword/phrase (boolean operators permitted)
+          in: query
+          name: q
+          required: false
+          type: string
+        - description: filter for subset of broadcasts that start on the specified day (BBC time)
+          format: date
+          in: query
+          name: schedule_day
+          required: false
+          type: string
+        - description: filter for subset of broadcasts that start on or after the specified day (BBC time)
+          format: date
+          in: query
+          name: schedule_day_from
+          required: false
+          type: string
+        - description: filter for subset of broadcasts that start on or before the specified day (BBC time)
+          format: date
+          in: query
+          name: schedule_day_to
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: filter for subset of broadcasts with given service master brand
+          in: query
+          items:
+            type: string
+          name: service_master_brand
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of broadcasts that are on the specified linear service
+          in: query
+          items:
+            type: string
+          name: sid
+          required: false
+          type: array
+        - description: filter for subset of broadcasts that start on or later than the specified datetime
+          format: date-time
+          in: query
+          name: start_from
+          required: false
+          type: string
+        - description: filter for subset of broadcasts that start on or earlier than the specified datetime
+          format: date-time
+          in: query
+          name: start_to
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: filter for subset of broadcasts with given PID as their parent version
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: version
+          required: false
+          type: array
+      responses:
+        '200':
+          description: Nitro response
+        default:
+          description: Unexpected error
+      summary: Build schedules and find metadata for TV and radio broadcasts
+      tags:
+        - feeds
+  /groups:
+    get:
+      description: 'Find metadata for curated groups: seasons, collections, galleries or franchises'
+      operationId: listGroups
+      parameters:
+        - description: "Sorts:  \n---\nsort alphabetically by PID  \n"
+          enum:
+            - pid
+          in: query
+          name: sort
+          required: false
+          type: string
+        - description: Sort direction
+          enum:
+            - descending
+          in: query
+          name: sort_direction
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: "Mixins:  \n---\nmixin to return the alternate images for a group  \n---\nmixin to return links to programme entities that group belongs to  \n---\nmixin to add image information for a group  \n---\nmixin to return related links for the group  \n"
+          enum:
+            - alternate_images
+            - group_for
+            - images
+            - related_links
+          in: query
+          items:
+            format: string
+          name: mixin
+          required: false
+          type: array
+        - description: filter for groups related to given programme or its descendants
+          in: query
+          minLength: 8
+          name: for_descendants_of
+          pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+          required: false
+          type: string
+        - description: filter for subset of groups directly related to a given programme
+          in: query
+          minLength: 8
+          name: for_programme
+          pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+          required: false
+          type: string
+        - description: filter for subset of groups which belong to the given group pid
+          in: query
+          minLength: 8
+          name: group
+          pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: filter for subset of groups that have the given group type
+          enum:
+            - collection
+            - franchise
+            - gallery
+            - season
+          in: query
+          items:
+            format: string
+          name: group_type
+          required: false
+          type: array
+        - description: filter for subset of groups which contain an entity with the given pid as a member
+          in: query
+          minLength: 8
+          name: member
+          pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+          required: false
+          type: string
+        - default: 1
+          description: which page of results to return
+          in: query
+          minimum: 1
+          name: page
+          required: false
+          type: integer
+        - default: 10
+          description: number of results in each page
+          in: query
+          maximum: 300
+          name: page_size
+          required: false
+          type: integer
+        - collectionFormat: multi
+          description: filter for groups by partner ID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: partner_id
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for groups by partner PID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: partner_pid
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: 'filter for subset of seasons, collections, galleries or franchises having given PID'
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: pid
+          required: false
+          type: array
+        - description: filter for subset of groups matching supplied keyword/phrase (boolean operators permitted)
+          in: query
+          name: q
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Nitro response
+        default:
+          description: Unexpected error
+      summary: 'Find metadata for curated groups: seasons, collections, galleries or franchises'
+      tags:
+        - feeds
+  /images:
+    get:
+      description: Find metadata for images
+      operationId: listImages
+      parameters:
+        - description: "Sorts:  \n---\nsort numerically by position, ascending only  \n---\nsort alphabetically by PID  \n"
+          enum:
+            - group_position
+            - pid
+          in: query
+          name: sort
+          required: false
+          type: string
+        - description: Sort direction
+          enum:
+            - ascending
+            - descending
+          in: query
+          name: sort_direction
+          required: false
+          type: string
+        - description: filter for images belonging to the given group (i.e. Gallery)
+          in: query
+          minLength: 8
+          name: group
+          pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: filter for images by type
+          enum:
+            - standard
+            - podcast
+            - store
+            - portrait
+            - letterbox
+          in: query
+          items:
+            format: string
+          name: image_type
+          required: false
+          type: array
+        - description: filter for alternate images by entity PID
+          in: query
+          minLength: 8
+          name: is_alternate_image_for
+          pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+          required: false
+          type: string
+        - description: filter for images by entity PID
+          in: query
+          minLength: 8
+          name: is_image_for
+          pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+          required: false
+          type: string
+        - default: 1
+          description: which page of results to return
+          in: query
+          minimum: 1
+          name: page
+          required: false
+          type: integer
+        - default: 10
+          description: number of results in each page
+          in: query
+          maximum: 300
+          name: page_size
+          required: false
+          type: integer
+        - collectionFormat: multi
+          description: filter for images by partner ID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: partner_id
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for images by partner PID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: partner_pid
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of images having given PID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: pid
+          required: false
+          type: array
+        - description: filter for subset of images matching supplied keyword/phrase (boolean operators permitted)
+          in: query
+          name: q
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Nitro response
+        default:
+          description: Unexpected error
+      summary: Find metadata for images
+      tags:
+        - feeds
+  /items:
+    get:
+      description: 'Look inside programmes to find segments: chapters, tracks and more'
+      operationId: listItems
+      parameters:
+        - description: "Sorts:  \n---\nsort by pid, descending  \n"
+          enum:
+            - pid
+          in: query
+          name: sort
+          required: false
+          type: string
+        - description: Sort direction
+          enum:
+            - descending
+          in: query
+          name: sort_direction
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: "Mixins:  \n---\nmixin to return information about contributors to items  \n---\nmixin to add image information for an item  \n---\nmixin to return programme segment events, works in conjunction with programme or segment_event filters  \n"
+          enum:
+            - contributions
+            - images
+            - play_event
+          in: query
+          items:
+            format: string
+          name: mixin
+          required: false
+          type: array
+        - description: filter for subset of items that have an ID issued by the given authority
+          in: query
+          name: authority
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: filter for subset of items having given ID
+          in: query
+          items:
+            type: string
+          name: id
+          required: false
+          type: array
+        - description: filter for subset of items that have given an ID of the given type
+          in: query
+          name: id_type
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: filter for specific type(s) of items
+          enum:
+            - chapter
+            - highlight
+            - music
+            - speech
+            - other
+          in: query
+          items:
+            format: string
+          name: item_type
+          required: false
+          type: array
+        - default: 1
+          description: which page of results to return
+          in: query
+          minimum: 1
+          name: page
+          required: false
+          type: integer
+        - default: 10
+          description: number of results in each page
+          in: query
+          maximum: 300
+          name: page_size
+          required: false
+          type: integer
+        - collectionFormat: multi
+          description: filter for items by partner ID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: partner_id
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for items by partner PID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: partner_pid
+          required: false
+          type: array
+        - description: filter for subset of items that have specified person involved
+          in: query
+          name: people
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: filter for subset of items matching one of the given PIDs
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: pid
+          required: false
+          type: array
+        - description: filter for subset of items that are part of the given programme
+          in: query
+          minLength: 8
+          name: programme
+          pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+          required: false
+          type: string
+        - description: filter for subset of items matching supplied keyword/phrase (boolean operators permitted)
+          in: query
+          name: q
+          required: false
+          type: string
+        - description: filter for item with the given segment_event
+          in: query
+          name: segment_event
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Nitro response
+        default:
+          description: Unexpected error
+      summary: 'Look inside programmes to find segments: chapters, tracks and more'
+      tags:
+        - feeds
+  /master_brands:
+    get:
+      description: List all Master Brands
+      operationId: listMasterbrands
+      parameters:
+        - description: "Sorts:  \n---\nsort by mid, ascending  \n"
+          enum:
+            - mid
+          in: query
+          name: sort
+          required: false
+          type: string
+        - description: Sort direction
+          enum:
+            - ascending
+          in: query
+          name: sort_direction
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: "Mixins:  \n---\nmixin to add image information for a masterbrand  \n"
+          enum:
+            - images
+          in: query
+          items:
+            format: string
+          name: mixin
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of masterbrands that have given identifier
+          in: query
+          items:
+            type: string
+          name: mid
+          required: false
+          type: array
+        - default: 1
+          description: which page of results to return
+          in: query
+          minimum: 1
+          name: page
+          required: false
+          type: integer
+        - default: 10
+          description: number of results in each page
+          in: query
+          maximum: 300
+          name: page_size
+          required: false
+          type: integer
+        - collectionFormat: multi
+          description: filter for masterbrands by partner ID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: partner_id
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for masterbrands by partner PID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: partner_pid
+          required: false
+          type: array
+        - description: filter for subset of masterbrands matching supplied keyword/phrase (boolean operators permitted)
+          in: query
+          name: q
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Nitro response
+        default:
+          description: Unexpected error
+      summary: List all Master Brands
+      tags:
+        - feeds
+  /people:
+    get:
+      description: 'Find the people behind and in programmes: cast, crew, guests and more'
+      operationId: listPeople
+      parameters:
+        - description: filter for subset of people that have an ID issued by the given authority
+          in: query
+          name: authority
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: filter for people who have an external identifier
+          enum:
+            - 'true'
+            - 'false'
+          in: query
+          items:
+            format: string
+          name: has_external_id
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of people having given ID
+          in: query
+          items:
+            type: string
+          name: id
+          required: false
+          type: array
+        - description: filter for subset of people that have given an ID of the given type
+          in: query
+          name: id_type
+          required: false
+          type: string
+        - default: 1
+          description: which page of results to return
+          in: query
+          minimum: 1
+          name: page
+          required: false
+          type: integer
+        - default: 10
+          description: number of results in each page
+          in: query
+          maximum: 300
+          name: page_size
+          required: false
+          type: integer
+        - collectionFormat: multi
+          description: filter for people by partner ID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: partner_id
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for people by partner PID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: partner_pid
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of people having given PID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: pid
+          required: false
+          type: array
+        - description: filter for subset of people that have contributed to the given programme pid
+          in: query
+          name: programme
+          required: false
+          type: string
+        - description: filter for subset of people matching supplied keyword/phrase (boolean operators permitted)
+          in: query
+          name: q
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Nitro response
+        default:
+          description: Unexpected error
+      summary: 'Find the people behind and in programmes: cast, crew, guests and more'
+      tags:
+        - feeds
+  /pips:
+    get:
+      description: Look inside pips entities
+      operationId: listPips
+      parameters:
+        - default: 1
+          description: which page of results to return
+          in: query
+          minimum: 1
+          name: page
+          required: false
+          type: integer
+        - default: 10
+          description: number of results in each page
+          in: query
+          maximum: 300
+          name: page_size
+          required: false
+          type: integer
+        - description: filter for subset of programmes matching supplied keyword/phrase (boolean operators permitted)
+          in: query
+          name: q
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Nitro response
+        default:
+          description: Unexpected error
+      summary: Look inside pips entities
+      tags:
+        - feeds
+  /programmes:
+    get:
+      description: 'Start here for programmes metadata: Brands, Series, Episodes and Clips'
+      operationId: listProgrammes
+      parameters:
+        - description: "Sorts:  \n---\nsort numerically by position in group, ascending  \n---\nsort alphabetically by PID, descending  \n---\nsort numerically by position, ascending  \n---\nsort by promotion rank, ascending  \n---\nsort chronologically by release date, descending  \n---\nsort by weighting of search term (use with q parameter)  \n---\nsort chronologically by scheduled start time/date, ascending  \n---\nsort alphabetically by title, ascending  \n---\nsort by title librarian style (ignoring leading 'The', 'A', etc), ascending  \n---\nsort by root pid and then preorder tree sort. Requires entities to have release date.  \n---\nsort numerically by number of views (most popular first - faster most_popular)  \n"
+          enum:
+            - group_position
+            - pid
+            - position
+            - promotion
+            - release_date
+            - relevance
+            - scheduled_start
+            - strict_title
+            - title
+            - tree
+            - views
+          in: query
+          name: sort
+          required: false
+          type: string
+        - description: Sort direction
+          enum:
+            - ascending
+            - descending
+          in: query
+          name: sort_direction
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: "Mixins:  \n---\nmixin to return the alternate images for a programme  \n---\nmixin to return ancestor programme titles  \n---\nmixin to return programme availability information  \n---\nmixin to return information about programmes that are currently available  \n---\nmixin to return information about contributors to a programme  \n---\nmixin to return original version duration in programme concept entities  \n---\nmixin to return list of genre groupings  \n---\nmixin to add image information for a programme  \n---\nmixin to add embeddable information for a programme  \n---\nmixin to return the programmes which appear before and after a programme (as determined by the sort applied in the request)  \n---\nmixin to return information about related links to a programme  \n---\nmixin to return information about programmes that are currently available  \n"
+          enum:
+            - alternate_images
+            - ancestor_titles
+            - availability
+            - available_versions
+            - contributions
+            - duration
+            - genre_groupings
+            - images
+            - is_embeddable
+            - previous_next
+            - related_links
+            - versions_availability
+          in: query
+          items:
+            format: string
+          name: mixin
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of programmes that are audio-described
+          enum:
+            - 'true'
+            - 'false'
+          in: query
+          items:
+            format: string
+          name: audio_described
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of programmes that have availability
+          enum:
+            - available
+            - pending
+          in: query
+          items:
+            format: string
+          name: availability
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: additional filter when availability=available
+          enum:
+            - episode
+            - clip
+          in: query
+          items:
+            format: string
+          name: availability_entity_type
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for a subset of programmes that are available for a given type
+          enum:
+            - ondemand
+          in: query
+          items:
+            format: string
+          name: availability_type
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of programmes that have PID as immediate parent
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: children_of
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of programmes that have PID as ancestor
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: descendants_of
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of programmes that have given duration
+          enum:
+            - short
+            - medium
+            - long
+          in: query
+          items:
+            format: string
+          name: duration
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of programmes that have given entity type
+          enum:
+            - brand
+            - series
+            - episode
+            - clip
+          in: query
+          items:
+            format: string
+          name: entity_type
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of programmes with format
+          in: query
+          items:
+            type: string
+          name: format
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of programmes with genre
+          in: query
+          items:
+            type: string
+          name: genre
+          required: false
+          type: array
+        - description: filter for subset of programmes which belong to the given group pid
+          in: query
+          minLength: 8
+          name: group
+          pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+          required: false
+          type: string
+        - description: "filter for subset of programmes with title beginning with initial letter librarian style (ignoring leading 'The', 'An' (Welsh), etc) 0-9 a-z"
+          in: query
+          maxLength: 1
+          name: initial_letter
+          required: false
+          type: string
+        - description: Programmes with (librarian) titles whose initial letter is equal/before given letter. Use with initial_letter_start for a range
+          in: query
+          maxLength: 1
+          name: initial_letter_end
+          required: false
+          type: string
+        - description: Programmes with (librarian) titles whose initial letter is equal/after given letter. Use with initial_letter_end for range.
+          in: query
+          maxLength: 1
+          name: initial_letter_start
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: filter for subset of programmes with title beginning with initial letter
+          in: query
+          items:
+            type: string
+          maxLength: 1
+          name: initial_letter_strict
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of programmes with linked to versions which have the given item pids
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: item
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of programmes with master_brand
+          in: query
+          items:
+            type: string
+          name: master_brand
+          required: false
+          type: array
+        - description: filter for subset of programmes with media set
+          in: query
+          name: media_set
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: filter for subset of programmes with media type
+          enum:
+            - audio
+            - audio_video
+          in: query
+          items:
+            format: string
+          name: media_type
+          required: false
+          type: array
+        - default: 1
+          description: which page of results to return
+          in: query
+          minimum: 1
+          name: page
+          required: false
+          type: integer
+        - default: 10
+          description: number of results in each page
+          in: query
+          maximum: 300
+          name: page_size
+          required: false
+          type: integer
+        - collectionFormat: multi
+          description: filter for programmes by partner ID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: partner_id
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for programmes by partner PID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: partner_pid
+          required: false
+          type: array
+        - description: filter for subset of programmes with contributions by given people PID
+          in: query
+          minLength: 8
+          name: people
+          pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: filter for subset of programmes having given PID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: pid
+          required: false
+          type: array
+        - description: filter for subset of programmes which are promoted for given service
+          in: query
+          name: promoted_for
+          required: false
+          type: string
+        - description: filter for subset of programmes matching supplied keyword/phrase (boolean operators permitted)
+          in: query
+          name: q
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: filter for subset of programmes that are signed
+          enum:
+            - exclusive
+            - inclusive
+            - exclude
+          in: query
+          items:
+            format: string
+          name: signed
+          required: false
+          type: array
+        - description: filter for subset of programmes with tag
+          in: query
+          name: tag_name
+          required: false
+          type: string
+        - description: filter for subset of programmes with a tag
+          in: query
+          name: tag_scheme
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: filter for subset of programmes that are TLEOs
+          enum:
+            - 'true'
+            - 'false'
+          in: query
+          items:
+            format: string
+          name: tleo
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of programmes with given PID as one of their versions
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: version
+          required: false
+          type: array
+      responses:
+        '200':
+          description: Nitro response
+        default:
+          description: Unexpected error
+      summary: 'Start here for programmes metadata: Brands, Series, Episodes and Clips'
+      tags:
+        - feeds
+  /promotions:
+    get:
+      description: Discover metadata for content promotions
+      operationId: listPromotions
+      parameters:
+        - collectionFormat: multi
+          description: "Mixins:  \n---\nmixin to return information about related links to a promotion  \n"
+          enum:
+            - related_links
+          in: query
+          items:
+            format: string
+          name: mixin
+          required: false
+          type: array
+        - description: filter for subset of promotions belonging to a given context
+          in: query
+          minLength: 8
+          name: context
+          pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+          required: false
+          type: string
+        - default: 1
+          description: which page of results to return
+          in: query
+          minimum: 1
+          name: page
+          required: false
+          type: integer
+        - default: 10
+          description: number of results in each page
+          in: query
+          maximum: 300
+          name: page_size
+          required: false
+          type: integer
+        - collectionFormat: multi
+          description: filter for promotions by partner ID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: partner_id
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for promotions by partner PID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: partner_pid
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of promotions having given PID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: pid
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of promotions having given promoted by
+          in: query
+          items:
+            type: string
+          name: promoted_by
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of promotions having given promoted for
+          in: query
+          items:
+            type: string
+          name: promoted_for
+          required: false
+          type: array
+        - description: filter for subset of promotions matching supplied keyword/phrase (boolean operators permitted)
+          in: query
+          name: q
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: filter for subset of promotions with status
+          enum:
+            - current
+          in: query
+          items:
+            format: string
+          name: status
+          required: false
+          type: array
+      responses:
+        '200':
+          description: Nitro response
+        default:
+          description: Unexpected error
+      summary: Discover metadata for content promotions
+      tags:
+        - feeds
+  /schedules:
+    get:
+      description: Build schedules and find metadata for TV and radio broadcasts and webcasts
+      operationId: listSchedules
+      parameters:
+        - description: "Sorts:  \n---\nsort chronologically by scheduled start time/date, ascending  \n"
+          enum:
+            - start_date
+          in: query
+          name: sort
+          required: false
+          type: string
+        - description: Sort direction
+          enum:
+            - ascending
+            - descending
+          in: query
+          name: sort_direction
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: "Mixins:  \n---\nreturn ancestor programme titles  \n---\nmixin to add image information for broadcasts and webcasts  \n"
+          enum:
+            - ancestor_titles
+            - images
+          in: query
+          items:
+            format: string
+          name: mixin
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of broadcasts and webcasts that have given authority
+          in: query
+          items:
+            type: string
+          name: authority
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of broadcasts and webcasts that are descendants of the given programme PID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: descendants_of
+          required: false
+          type: array
+        - description: filter for subset of broadcasts and webcasts that end on or later than the specified datetime
+          format: date-time
+          in: query
+          name: end_from
+          required: false
+          type: string
+        - description: filter for subset of broadcasts and webcasts that end on or earlier than the specified datetime
+          format: date-time
+          in: query
+          name: end_to
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: filter for subset of broadcasts and webcasts that are classified in the given format ID
+          in: query
+          items:
+            type: string
+          name: format
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of broadcasts and webcasts that are classified in the given genre ID
+          in: query
+          items:
+            type: string
+          name: genre
+          required: false
+          type: array
+        - description: filter for subset of broadcasts and webcasts that have programmes in the given group
+          in: query
+          minLength: 8
+          name: group
+          pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: filter for subset of broadcasts and webcasts that have given identifier
+          in: query
+          items:
+            type: string
+          name: id
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of broadcasts and webcasts that have given id type
+          in: query
+          items:
+            type: string
+          name: id_type
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of broadcasts and webcasts with the given item performed on it
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: item
+          required: false
+          type: array
+        - default: 1
+          description: which page of results to return
+          in: query
+          minimum: 1
+          name: page
+          required: false
+          type: integer
+        - default: 10
+          description: number of results in each page
+          in: query
+          maximum: 300
+          name: page_size
+          required: false
+          type: integer
+        - collectionFormat: multi
+          description: filter for broadcasts and webcasts by partner ID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: partner_id
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for broadcasts and webcasts by partner PID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: partner_pid
+          required: false
+          type: array
+        - description: filter for subset of broadcasts and webcasts that have given contributor
+          in: query
+          name: people
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: filter for subset of broadcasts and webcasts having given PID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: pid
+          required: false
+          type: array
+        - description: filter for subset of broadcasts and webcasts matching supplied keyword/phrase (boolean operators permitted)
+          in: query
+          name: q
+          required: false
+          type: string
+        - description: filter to show either only repeats or non-repeats
+          in: query
+          name: repeat
+          required: false
+          type: boolean
+        - description: filter for subset of broadcasts and webcasts that start on the specified day (BBC time)
+          format: date
+          in: query
+          name: schedule_day
+          required: false
+          type: string
+        - description: filter for subset of broadcasts and webcasts that start on or after the specified day (BBC time)
+          format: date
+          in: query
+          name: schedule_day_from
+          required: false
+          type: string
+        - description: filter for subset of broadcasts and webcasts that start on or before the specified day (BBC time)
+          format: date
+          in: query
+          name: schedule_day_to
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: filter for subset of broadcasts and webcasts with given service master brand
+          in: query
+          items:
+            type: string
+          name: service_master_brand
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of broadcasts and webcasts that are on the specified linear service
+          in: query
+          items:
+            type: string
+          name: sid
+          required: false
+          type: array
+        - description: filter for subset of broadcasts and webcasts that start on or later than the specified datetime
+          format: date-time
+          in: query
+          name: start_from
+          required: false
+          type: string
+        - description: filter for subset of broadcasts and webcasts that start on or earlier than the specified datetime
+          format: date-time
+          in: query
+          name: start_to
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: filter for subset of broadcasts and webcasts with given PID as their parent version
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: version
+          required: false
+          type: array
+      responses:
+        '200':
+          description: Nitro response
+        default:
+          description: Unexpected error
+      summary: Build schedules and find metadata for TV and radio broadcasts and webcasts
+      tags:
+        - feeds
+  /schema:
+    get:
+      description: Get schema definition
+      operationId: getXSD
+      parameters: []
+      responses:
+        '200':
+          description: Nitro response
+        default:
+          description: Unexpected error
+      summary: Get schema definition
+      tags:
+        - schema
+  /services:
+    get:
+      description: Information about the linear services used for broadcast transmissions
+      operationId: listServices
+      parameters:
+        - description: Return services that end on or later than the specified datetime
+          format: date-time
+          in: query
+          name: end_from
+          required: false
+          type: string
+        - description: filter for subset of broadcasts that end on or earlier than the specified datetime
+          format: date-time
+          in: query
+          name: end_to
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: filter for services by masterbrand MID
+          in: query
+          items:
+            type: string
+          name: mid
+          required: false
+          type: array
+        - default: 1
+          description: which page of results to return
+          in: query
+          minimum: 1
+          name: page
+          required: false
+          type: integer
+        - default: 10
+          description: number of results in each page
+          in: query
+          maximum: 300
+          name: page_size
+          required: false
+          type: integer
+        - collectionFormat: multi
+          description: filter for services by partner ID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: partner_id
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for services by partner PID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: partner_pid
+          required: false
+          type: array
+        - description: filter for subset of services matching supplied keyword/phrase (boolean operators permitted)
+          in: query
+          name: q
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: 'filter for specified type of linear services. one of: TV, Local Radio, National Radio, Regional Radio'
+          enum:
+            - TV
+            - Local Radio
+            - National Radio
+            - Regional Radio
+            - Interactive
+          in: query
+          items:
+            format: string
+          name: service_type
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for specified linear service
+          in: query
+          items:
+            type: string
+          name: sid
+          required: false
+          type: array
+        - description: Return services that start on or later than the specified datetime
+          format: date-time
+          in: query
+          name: start_from
+          required: false
+          type: string
+        - description: Return services that start earlier than the specified datetime
+          format: date-time
+          in: query
+          name: start_to
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Nitro response
+        default:
+          description: Unexpected error
+      summary: Information about the linear services used for broadcast transmissions
+      tags:
+        - feeds
+  /versions:
+    get:
+      description: 'Metadata on editorial programme versions: original, signed, audio-described, etc'
+      operationId: listVersions
+      parameters:
+        - collectionFormat: multi
+          description: filter for subset of versions that have availability
+          enum:
+            - available
+          in: query
+          items:
+            format: string
+          name: availability
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of versions having given programme PID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: descendants_of
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of versions with availability in the given media set
+          in: query
+          items:
+            type: string
+          name: media_set
+          required: false
+          type: array
+        - default: 1
+          description: which page of results to return
+          in: query
+          minimum: 1
+          name: page
+          required: false
+          type: integer
+        - default: 10
+          description: number of results in each page
+          in: query
+          maximum: 300
+          name: page_size
+          required: false
+          type: integer
+        - collectionFormat: multi
+          description: filter for versions by partner ID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: partner_id
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for versions by partner PID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: partner_pid
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: filter for subset of versions having given PID
+          in: query
+          items:
+            minLength: 8
+            pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+            type: string
+          name: pid
+          required: false
+          type: array
+      responses:
+        '200':
+          description: Nitro response
+        default:
+          description: Unexpected error
+      summary: 'Metadata on editorial programme versions: original, signed, audio-described, etc'
+      tags:
+        - feeds
