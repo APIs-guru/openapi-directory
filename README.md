@@ -58,8 +58,9 @@ All API specs acquired from public sources under the [Fair use](http://en.wikipe
 Spec sources
 --------------------------
 Some specs are taken from Open Source projects:
- - [trello-swagger-generator](https://github.com/warehouseman/trello-swagger-generator/) - Swagger spec for Trello API
- - [https://github.com/darklynx/swagger-api-collection](https://github.com/darklynx/swagger-api-collection) - Swagger spec for Instagram API
+ - [warehouseman/trello-swagger-generator](https://github.com/warehouseman/trello-swagger-generator/) - Swagger spec for Trello API
+ - [darklynx/swagger-api-collection](https://github.com/darklynx/swagger-api-collection) - Swagger spec for Instagram API
+ - [Mermade/bbcparse](https://github.com/Mermade/bbcparse) - Swagger spec for BBC Nitro API
 
 [logo]: https://apis-guru.github.io/api-models/branding/logo_horizontal.svg "APIs.guru"
 [twitter-image]: https://img.shields.io/twitter/url/http/APIs.guru.svg?style=social
