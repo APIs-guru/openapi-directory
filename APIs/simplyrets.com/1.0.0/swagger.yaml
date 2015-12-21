@@ -388,8 +388,24 @@ paths:
           type: array
         - collectionFormat: multi
           description: |
-            Filter the listings returned by specific features.  You
-            can specify multiple.
+            Filter the listings by specific interior features.  You
+            can filter by multiple. For example, to filter trial listings
+            by multiple features you can use,
+            Return listings that are within a set of latitude
+            longitude coordinates. For example,
+
+            ```
+            Wet Bar
+            High Ceiling
+            ```
+
+            e.g. `https://simplyrets.com/services?features=Wet%20Bar&features=High%20Ceiling`
+
+            The features provided by your MLS can be seen in your
+            OPTIONS request. To view all valid features, make a
+            request to the SimplyRETS api root
+
+            `curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/`
           in: query
           items:
             type: string

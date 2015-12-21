@@ -1,16 +1,24 @@
 definitions:
   Request class:
     - {}
-paths:
-  '/entities.{content_type}':
-    delete:
-      parameters:
-        '0':
-          in:
-            - path
-            - query
-        '1':
-          in:
-            - path
-            - query
-        _t: a
+  TaxonomyNode_InsertVersion:
+    properties:
+      nodes:
+        items:
+          $ref:
+            - '#/definitions/TaxonomyNode'
+            - '#/definitions/TaxonomyNode_InsertVersion'
+  TaxonomyNode_ResponseVersion:
+    properties:
+      nodes:
+        items:
+          $ref:
+            - '#/definitions/TaxonomyNode'
+            - '#/definitions/TaxonomyNode_ResponseVersion'
+  TaxonomyNode_UpdateVersion:
+    properties:
+      nodes:
+        items:
+          $ref:
+            - '#/definitions/TaxonomyNode'
+            - '#/definitions/TaxonomyNode_UpdateVersion'

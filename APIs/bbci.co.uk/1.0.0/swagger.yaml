@@ -15,11 +15,19 @@ info:
   termsOfService: 'http://www.bbc.co.uk/terms/'
   title: BBC Nitro
   version: 1.0.0
+  x-apiClientRegistration:
+    url: 'https://developer.bbc.co.uk/user/register'
+  x-logo:
+    url: 'https://developer.bbc.co.uk/sites/default/files/Nitro%20On%20White.png'
   x-origin:
     format: swagger
     url: 'https://raw.githubusercontent.com/Mermade/bbcparse/master/nitroApi/swagger.json'
     version: '2.0'
   x-providerName: bbci.co.uk
+  x-unofficialSpec: true
+externalDocs:
+  description: Nitro for developers
+  url: 'https://developer.bbc.co.uk/nitro'
 consumes:
   - application/json
 produces:
