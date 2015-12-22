@@ -1,0 +1,15 @@
+externalDocs:
+  url: 'http://developer.wordnik.com/'
+info:
+  title: Wordnik
+  description: |
+    Wordnik is the world's biggest online English dictionary, by number of words
+  x-logo:
+    url: 'https://wordnik.com/img/logo-wordnik-home.png'
+securityDefinitions:
+  api_key:
+    in: query
+    name: _apikey
+    type: apiKey
+security:
+  - api_key: []
