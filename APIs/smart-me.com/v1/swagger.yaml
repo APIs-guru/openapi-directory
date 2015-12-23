@@ -226,6 +226,7 @@ definitions:
           - MeterTypeAllMeters
           - MeterTypeTemperature
           - MeterTypeMBusGateway
+          - MeterTypeRS485Gateway
         type: string
       FamilyType:
         description: The Family Type of the device.
@@ -235,6 +236,7 @@ definitions:
           - MeterFamiliyTypeSmartMeMeter
           - MeterFamiliyTypeSmartMeMeterWithSwitch
           - MeterFamilyTypeMBusGatewayV1
+          - MeterFamilyTypeRS485GatewayV1
           - MeterFamilyTypeRestApiMeter
         type: string
       Id:
@@ -298,6 +300,7 @@ definitions:
           - MeterTypeAllMeters
           - MeterTypeTemperature
           - MeterTypeMBusGateway
+          - MeterTypeRS485Gateway
         type: string
       Id:
         description: The ID of the device

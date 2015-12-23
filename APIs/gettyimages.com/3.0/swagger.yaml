@@ -834,6 +834,7 @@ paths:
             - download_sizes
             - downloads
             - editorial_segments
+            - editorial_source
             - event_ids
             - graphical_style
             - id
@@ -880,6 +881,7 @@ paths:
               - download_sizes
               - downloads
               - editorial_segments
+              - editorial_source
               - event_ids
               - graphical_style
               - id
@@ -972,6 +974,7 @@ paths:
             - download_sizes
             - downloads
             - editorial_segments
+            - editorial_source
             - event_ids
             - graphical_style
             - id
@@ -1018,6 +1021,7 @@ paths:
               - download_sizes
               - downloads
               - editorial_segments
+              - editorial_source
               - event_ids
               - graphical_style
               - id
@@ -1611,18 +1615,6 @@ paths:
           name: compositions
           required: false
           type: array
-        - description: 'Return only events that start on or after this date. Use ISO 8601 format (e.g., 1999-12-31).'
-          format: date-time
-          in: query
-          name: date_from
-          required: false
-          type: string
-        - description: 'Return only events that start on or before this date. Use ISO 8601 format (e.g., 1999-12-31).'
-          format: date-time
-          in: query
-          name: date_to
-          required: false
-          type: string
         - description: Restrict search results to embeddable images. The default is false.
           in: query
           name: embed_content_only
@@ -2530,13 +2522,13 @@ paths:
           name: compositions
           required: false
           type: array
-        - description: 'Return only events that start on or after this date. Use ISO 8601 format (e.g., 1999-12-31).'
+        - description: 'Return only images that are created on or after this date. Use ISO 8601 format (e.g., 1999-12-31).'
           format: date-time
           in: query
           name: date_from
           required: false
           type: string
-        - description: 'Return only events that start on or before this date. Use ISO 8601 format (e.g., 1999-12-31).'
+        - description: 'Return only images that are created on or before this date. Use ISO 8601 format (e.g., 1999-12-31).'
           format: date-time
           in: query
           name: date_to
@@ -4035,6 +4027,9 @@ definitions:
         description: Specifies the editorial source id of the image
         format: int32
         type: integer
+      name:
+        description: Specifies the editorial source name of the image
+        type: string
     type: object
   'KeyValuePair[String,String]':
     properties:
@@ -4805,6 +4800,9 @@ definitions:
         items:
           type: string
         type: array
+      editorial_source:
+        $ref: '#/definitions/EditorialSource'
+        description: Specifies the editorial source of the image
       event_ids:
         description: Lists the events that are relevant for this image.
         items:

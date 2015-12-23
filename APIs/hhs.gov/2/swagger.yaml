@@ -65,7 +65,6 @@ paths:
       consumes:
         - ''
       description: "Returns the list of Resources matching the search query 'q'.<p>The search query 'q' is a Lucene query.<br>The syntax for a Lucene query can be found <a href=\"http://lucene.apache.org/core/2_9_4/queryparsersyntax.html\">here</a>."
-      operationId: getResources
       parameters:
         - description: The search query supplied by the user
           in: query
@@ -95,7 +94,6 @@ paths:
       consumes:
         - ''
       description: Returns the list of Campaigns.
-      operationId: getCampaigns
       parameters:
         - description: The maximum number of records to return
           format: int32
@@ -137,7 +135,6 @@ paths:
       consumes:
         - ''
       description: "Returns the Campaign identified by the 'id'."
-      operationId: getCampaignById
       parameters:
         - description: The id of the record to look up
           format: int64
@@ -168,7 +165,6 @@ paths:
       consumes:
         - ''
       description: "Returns the list of MediaItems for the Campaign identified by the 'id'."
-      operationId: getMediaByCampaignId
       parameters:
         - description: The id of the campaign to find media items for
           format: int64
@@ -211,12 +207,46 @@ paths:
       summary: Get MediaItems by Campaign ID
       tags:
         - campaigns
+  '/resources/campaigns/{id}/syndicate.json':
+    get:
+      consumes:
+        - ''
+      description: "Renders the list of MediaItems associated with the Campaign identified by the 'id'."
+      parameters:
+        - description: The id of the record to look up
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: 'Method used to render an html request. Accepts one: [mv, list, feed]'
+          in: query
+          name: displayMethod
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/MediaItems'
+        '400':
+          description: Bad Request
+          schema:
+            type: string
+        '500':
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get MediaItems for Campaign
+      tags:
+        - campaigns
   /resources/languages.json:
     get:
       consumes:
         - ''
       description: Returns the list Languages.
-      operationId: getLanguages
       parameters:
         - description: The maximum number of records to return
           format: int32
@@ -258,7 +288,6 @@ paths:
       consumes:
         - ''
       description: "Returns the Language identified by the 'id'."
-      operationId: getLanguageById
       parameters:
         - description: The id of the language to look up
           format: int64
@@ -289,7 +318,6 @@ paths:
       consumes:
         - ''
       description: Returns the list of MediaItems matching the specified query parameters.
-      operationId: getMedia
       parameters:
         - description: The maximum number of records to return
           format: int32
@@ -599,7 +627,6 @@ paths:
       consumes:
         - ''
       description: Get the list of featured content in the syndication system
-      operationId: getFeaturedMedia
       parameters:
         - description: '* Set of fields to sort the records by.'
           in: query
@@ -641,7 +668,6 @@ paths:
       consumes:
         - ''
       description: Returns the list of MediaItems with the highest ratings.
-      operationId: getMostPopularMedia
       parameters:
         - description: The maximum number of records to return
           format: int32
@@ -678,7 +704,6 @@ paths:
       consumes:
         - ''
       description: "Returns the list of MediaItems matching the search query 'q'.<p>The search query 'q' is a Lucene query.<br>The syntax for a Lucene query can be found <a href=\"http://lucene.apache.org/core/2_9_4/queryparsersyntax.html\">here</a>"
-      operationId: searchMedia
       parameters:
         - description: The search query supplied by the user
           in: query
@@ -720,7 +745,6 @@ paths:
       consumes:
         - ''
       description: "Returns the MediaItem identified by the 'id'."
-      operationId: getMediaById
       parameters:
         - description: The id of the record to look up
           format: int64
@@ -751,7 +775,6 @@ paths:
       consumes:
         - ''
       description: "Returns the raw content (html, image, etc...) for the MediaItem identified by the 'id'."
-      operationId: getMediaContentById
       parameters:
         - description: The id of the media to show content for.
           format: int64
@@ -790,7 +813,6 @@ paths:
       consumes:
         - ''
       description: "Returns the javascript or iframe embed code for the MediaItem identified by 'id'."
-      operationId: getMediaEmbedById
       parameters:
         - description: The id of the media to get embed code for.
           format: int64
@@ -865,7 +887,6 @@ paths:
       consumes:
         - ''
       description: "Returns the JPG preview, where applicable, for the MediaItem identified by the 'id'."
-      operationId: getMediaPreviewById
       parameters:
         - description: The id of the media to get a preview for.
           format: int64
@@ -896,7 +917,6 @@ paths:
       consumes:
         - ''
       description: "Get the Ratings (number of 'likes') for the MediaItem identified by the 'id'."
-      operationId: getMediaRatingsById
       parameters:
         - description: "The ID of the media item to 'like'."
           format: int64
@@ -927,7 +947,6 @@ paths:
       consumes:
         - ''
       description: "Returns the list of MediaItems related to the MediaItem identified by the 'id'."
-      operationId: getRelatedMediaById
       parameters:
         - description: The id of the media item to get related media for
           format: int64
@@ -975,7 +994,6 @@ paths:
       consumes:
         - ''
       description: "Returns the syndicated content for a given MediaItem in the specified 'format' (HTML or JSON)."
-      operationId: getMediaSyndicateById
       parameters:
         - description: The id of the media to show embed code for.
           format: int64
@@ -1071,7 +1089,6 @@ paths:
       consumes:
         - ''
       description: "Returns the JPG thumbnail, where applicable, for the MediaItem identified by the 'id'."
-      operationId: getMediaThumbnailById
       parameters:
         - description: The id of the media to get a thumbnail for.
           format: int64
@@ -1102,7 +1119,6 @@ paths:
       consumes:
         - ''
       description: "Returns the Youtube metadata, where applicable, for the MediaItem identified by the 'id'."
-      operationId: getMediaYoutubeMetaDataById
       parameters:
         - description: The id of the video to show meta data for.
           format: int64
@@ -1133,7 +1149,6 @@ paths:
       consumes:
         - ''
       description: Returns the list of available MediaTypes.
-      operationId: getMediaTypes
       produces:
         - application/json
       responses:
@@ -1153,7 +1168,6 @@ paths:
       consumes:
         - ''
       description: Returns the list of Sources.
-      operationId: getSources
       parameters:
         - description: The maximum number of records to return
           format: int32
@@ -1195,7 +1209,6 @@ paths:
       consumes:
         - ''
       description: "Returns the Source identified by the 'id'."
-      operationId: getSourceById
       parameters:
         - description: The id of the source to look up
           format: int64
@@ -1221,12 +1234,46 @@ paths:
       summary: Get Source by ID
       tags:
         - sources
+  '/resources/sources/{id}/syndicate.json':
+    get:
+      consumes:
+        - ''
+      description: "Renders the list of MediaItems associated with the Source identified by the 'id'."
+      parameters:
+        - description: The id of the record to look up
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: 'Method used to render an html request. Accepts one: [mv, list, feed]'
+          in: query
+          name: displayMethod
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/MediaItems'
+        '400':
+          description: Bad Request
+          schema:
+            type: string
+        '500':
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get MediaItems for Source
+      tags:
+        - sources
   /resources/tags.json:
     get:
       consumes:
         - ''
       description: "Returns the list of Tags matching the specified query parameters in the specified 'format'."
-      operationId: getTags
       parameters:
         - description: The name of the property to which sorting will be applied
           in: query
@@ -1295,7 +1342,6 @@ paths:
       consumes:
         - ''
       description: Returns the list of TagLanguages
-      operationId: getTagLanguages
       produces:
         - application/json
       responses:
@@ -1315,7 +1361,6 @@ paths:
       consumes:
         - ''
       description: Returns the list of TagTypes
-      operationId: getTagTypes
       produces:
         - application/json
       responses:
@@ -1335,7 +1380,6 @@ paths:
       consumes:
         - ''
       description: "Returns the Tag identified by the 'id' in the specified 'format'."
-      operationId: getTagById
       parameters:
         - description: The id of the record to look up
           format: int64
@@ -1366,7 +1410,6 @@ paths:
       consumes:
         - ''
       description: "Returns the list of MediaItems associated with the Tag identified by the 'id'."
-      operationId: getMediaByTagId
       parameters:
         - description: The id of the record to look up
           format: int64
@@ -1414,7 +1457,6 @@ paths:
       consumes:
         - ''
       description: "Returns the list of Tags related to the Tag identified by the 'id' in the specified format."
-      operationId: getRelatedTagsById
       parameters:
         - description: The id of the tag to look up
           format: int64
@@ -1462,7 +1504,6 @@ paths:
       consumes:
         - ''
       description: "Renders the list of MediaItems associated with the Tag identified by the 'id'."
-      operationId: syndicate
       parameters:
         - description: The id of the record to look up
           format: int64
@@ -1498,7 +1539,6 @@ paths:
       consumes:
         - ''
       description: "Get a specific user media list by 'id'."
-      operationId: getUserMediaList
       parameters:
         - description: The id of the record to look up
           format: int64
