@@ -396,7 +396,7 @@ function generateBanner() {
   _.each(getSpecs(), function (swagger) {
     numEndpoints += _.size(swagger.paths);
   });
-  saveShield('Endpoints in APIs', numEndpoints.toString(), 'red');
+  saveShield('Endpoints', numEndpoints.toString(), 'red');
 }
 
 function gitLogDate(options, filename) {
