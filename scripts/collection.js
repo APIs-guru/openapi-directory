@@ -369,13 +369,34 @@ function generateHTML(specRootUrl) {
   saveFile('index.html', html);
 }
 
-function generateBanner() {
-  var size = _.size(generateList());
-  var url = 'https://img.shields.io/badge/APIs_in_collection-' + size + '-orange.svg';
+function saveShield(subject, status, color) {
+  function escape(str) {
+    return str.replace(/_/g, '__').replace(/-/g, '--').replace(/ /g, '_');
+  }
+  function join(left, right) {
+    return left + '-' + right;
+  }
+
+  var text = join(escape(subject), escape(status));
+  var url =  'https://img.shields.io/badge/' + join(text, color) + '.svg';
+
   getResource(url, {encoding: null}, function(err, response, data) {
     assert(!err, err);
-    saveFile('apis_in_collection_banner.svg', data);
+
+    var filename = escape(subject).toLowerCase() + '_banner.svg';
+    saveFile(filename, data);
   });
+}
+
+function generateBanner() {
+  var numAPIs = _.size(generateList());
+  saveShield('APIs in collection' , numAPIs.toString(), 'orange');
+
+  var numEndpoints = 0;
+  _.each(getSpecs(), function (swagger) {
+    numEndpoints += _.size(swagger.paths);
+  });
+  saveShield('Endpoints in APIs', numEndpoints.toString(), 'red');
 }
 
 function gitLogDate(options, filename) {
