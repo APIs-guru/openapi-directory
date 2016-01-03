@@ -14,7 +14,10 @@ You should use only official logos:
 |![Logo]|![Horizontal logo]|![Vertical logo]|
 
 The correct way to write our name is **APIs.guru** with exact this combination of uppercase and lowercase letters.
-We recommended using the [Sansation](http://www.dafont.com/sansation.font) font, or usisng the logo with name included.
+We recommended using the [Sansation](http://www.dafont.com/sansation.font) font, or simply use logo with name included.
+
+If you want to write article or blog post, please use our banner image:
+![Banner]
 
 Please add **"How can I request/add/fix an API?"** section into customer documentation or FAQ.
 <BR>**TBD**: Create sample text.
@@ -22,3 +25,4 @@ Please add **"How can I request/add/fix an API?"** section into customer documen
 [Logo]: https://apis-guru.github.io/api-models/branding/logo.svg "Logo"
 [Vertical logo]: https://apis-guru.github.io/api-models/branding/logo_vertical.svg "Vertical logo"
 [Horizontal logo]: https://apis-guru.github.io/api-models/branding/logo_horizontal.svg "Horizontal logo"
+[Banner]: https://apis-guru.github.io/api-models/branding/banner.svg
