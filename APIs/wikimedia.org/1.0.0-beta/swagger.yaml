@@ -33,8 +33,9 @@ securityDefinitions:
     name: cookie
     type: apiKey
     x-internal-request-whitelist:
-      - "/http:\\/\\/[a-zA-Z0-9\\.]+\\/w\\/api\\.php/"
+      - "/https?:\\/\\/[a-zA-Z0-9\\.]+\\/w\\/api\\.php/"
       - 'http://parsoid-lb.eqiad.wikimedia.org'
+      - 'http://parsoid-beta.wmflabs.org'
 paths:
   '/media/math/check/{type}':
     post:
@@ -161,6 +162,10 @@ paths:
                 cache-control: '{{ cache-control }}'
               method: get
               uri: '/wikimedia.org/sys/key_value/mathoid.{$.request.params.format}/{$.request.params.hash}'
+            return:
+              body: '{{ check_storage.body }}'
+              headers: "{{ merge({ 'cache-control': options.cache-control }, check_storage.headers) }}"
+              status: 200
             return_if:
               status: 2xx
         - postdata:

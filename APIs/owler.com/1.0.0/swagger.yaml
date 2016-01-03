@@ -32,13 +32,14 @@ paths:
           name: q
           required: true
           type: string
-        - description: 'Fields to be searched - name, website, ticker. If not specfied, will be searched against all fields'
+        - description: 'Fields to be searched - name, website, ticker, permid. If not specfied, will be searched against all fields'
           in: query
           items:
             enum:
               - name
               - website
               - ticker
+              - permid
             type: string
           name: fields
           required: false
@@ -81,7 +82,7 @@ paths:
           description: Too Many Requests
         '500':
           description: Internal Server Error
-      summary: Basic Search Company by Ticker or Website or Name
+      summary: Basic Search Company by Ticker or Website or Name or PermID
       tags:
         - company
   '/v1/company/competitor/id/{companyId}':
@@ -239,6 +240,7 @@ paths:
               - name
               - website
               - ticker
+              - permid
             type: string
           name: fields
           required: false
@@ -281,7 +283,7 @@ paths:
           description: Too Many Requests
         '500':
           description: Internal Server Error
-      summary: Search Company by Ticker or Website or Name
+      summary: Search Company by Ticker or Website or Name or PermID
       tags:
         - company
   '/v1/company/url/{website}':
@@ -437,6 +439,8 @@ definitions:
         $ref: '#/definitions/Address'
       name:
         type: string
+      perm_id:
+        type: string
       profile_url:
         type: string
       short_name:
@@ -491,6 +495,8 @@ definitions:
       logo_url:
         type: string
       name:
+        type: string
+      perm_id:
         type: string
       profile_url:
         type: string
@@ -571,6 +577,8 @@ definitions:
       logo_url:
         type: string
       name:
+        type: string
+      perm_id:
         type: string
       profile_url:
         type: string
