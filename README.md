@@ -1,4 +1,4 @@
-![logo]
+![banner]
 
 [![APIs in collection][numApis-image]][apisDir-link]
 [![Endpoints][endpoints-image]][apisDir-link]
@@ -63,7 +63,7 @@ Some specs are taken from Open Source projects:
  - [darklynx/swagger-api-collection](https://github.com/darklynx/swagger-api-collection) - Swagger spec for Instagram API
  - [Mermade/bbcparse](https://github.com/Mermade/bbcparse) - Swagger spec for BBC Nitro API
 
-[logo]: https://apis-guru.github.io/api-models/branding/logo_horizontal.svg "APIs.guru"
+[banner]: https://apis-guru.github.io/api-models/branding/banner.svg "APIs.guru"
 [twitter-image]: https://img.shields.io/twitter/url/http/APIs.guru.svg?style=social
 [twitter-link]: https://twitter.com/intent/tweet?text=http%3A%2F%2FAPIs.guru%20-%20Wikipedia%20for%20%23Web%20%23APIs%20pic.twitter.com/UhlhbMw1NP
 [twitterFollow-image]: https://img.shields.io/twitter/follow/APIs_guru.svg?style=social
