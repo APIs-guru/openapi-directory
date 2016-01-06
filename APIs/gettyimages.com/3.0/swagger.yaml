@@ -177,9 +177,13 @@ paths:
         - text/json
       responses:
         '200':
-          description: No response was specified
+          description: Success - The assets were successfully registered.
           schema:
             type: string
+        '401':
+          description: AuthorizationTokenRequired - Authorization token was missing or not valid.
+        '500':
+          description: AssetRegistrationFailed - There was a failure when registering assets.
       summary: Register a list of customer assets.
       tags:
         - AssetRegistration
@@ -3730,13 +3734,13 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: "Specifies up to 1000 assets and usage count that you want to submit usages for. \r\n            Note that all asset Ids specified must be valid or the operation will fail causing no usages to be recorded."
+        - description: "Specifies up to 1000 sets of asset Id, usage count, and date of use to submit usages for. \r\n            Note that all asset Ids specified must be valid or the operation will fail causing no usages to be recorded. \r\n            The date format should be ISO 8601 (ex: 2015-05-15), time is not needed."
           in: body
           name: request
           required: true
           schema:
             $ref: '#/definitions/report_usage_batch_request'
-        - description: Specifies a unique Batch Id to identify the report.
+        - description: Specifies a unique batch transaction id to identify the report.
           in: path
           name: id
           required: true
@@ -3751,10 +3755,16 @@ paths:
         - text/json
       responses:
         '200':
-          description: No response was specified
+          description: Success - All usages reported were successfully recorded.
           schema:
             $ref: '#/definitions/report_usage_batch_response'
-      summary: Provides the api for reporting usage of assets in a batch format.
+        '400':
+          description: InvalidAssets - Invalid assets found in the request.
+        '401':
+          description: UnauthorizedToReportUsage - User was not authorized to report usages. Contact your Getty Images Account Manager to discuss options for submitting your usage data.
+        '409':
+          description: TransactionIdDuplicated - The id parameter supplied was already used in a previous usage report.
+      summary: Report usage of assets via a batch format.
       tags:
         - Usage
   /v3/videos:

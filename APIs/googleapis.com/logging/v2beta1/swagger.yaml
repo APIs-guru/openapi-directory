@@ -122,7 +122,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
     post:
-      description: 'Lists log entries. Use this method to examine log entries from Cloud Logging. See [Exporting Logs](/logging/docs/export) for other ways to copy log entries out of Cloud Logging.'
+      description: 'Lists log entries. Use this method to retrieve log entries from Cloud Logging. For ways to export log entries, see [Exporting Logs](/logging/docs/export).'
       operationId: logging.entries.list
       parameters:
         - in: body
@@ -182,7 +182,7 @@ paths:
       description: Lists monitored resource descriptors that are used by Cloud Logging.
       operationId: logging.monitoredResourceDescriptors.list
       parameters:
-        - description: "Optional. The maximum number of results to return from this request. Fewer results might be returned. You must check for the 'nextPageToken` result to determine if additional results are available, which you can retrieve by passing the `nextPageToken` value in the `pageToken` parameter to the next request."
+        - description: 'Optional. The maximum number of results to return from this request. Fewer results might be returned. You must check for the `nextPageToken` result to determine if additional results are available, which you can retrieve by passing the `nextPageToken` value in the `pageToken` parameter to the next request.'
           in: query
           name: pageSize
           type: integer
@@ -344,7 +344,7 @@ paths:
       description: Lists logs-based metrics.
       operationId: logging.projects.metrics.list
       parameters:
-        - description: 'Required. The resource name for the project whose metrics are wanted. Example: `"projects/my-project-id"`.'
+        - description: 'Required. The resource name of the project containing the metrics. Example: `"projects/my-project-id"`.'
           in: path
           name: projectName
           required: true
@@ -354,7 +354,7 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: "Optional. The maximum number of results to return from this request. Fewer results might be returned. You must check for the 'nextPageToken` result to determine if additional results are available, which you can retrieve by passing the `nextPageToken` value in the `pageToken` parameter to the next request."
+        - description: 'Optional. The maximum number of results to return from this request. Fewer results might be returned. You must check for the `nextPageToken` result to determine if additional results are available, which you can retrieve by passing the `nextPageToken` value in the `pageToken` parameter to the next request.'
           in: query
           name: pageSize
           type: integer
@@ -416,7 +416,7 @@ paths:
       description: Lists sinks.
       operationId: logging.projects.sinks.list
       parameters:
-        - description: 'Required. The resource name of the project owning the sinks. Example: `"projects/my-logging-project"`, `"projects/01234567890"`.'
+        - description: 'Required. The resource name of the project containing the sinks. Example: `"projects/my-logging-project"`, `"projects/01234567890"`.'
           in: path
           name: projectName
           required: true
@@ -426,7 +426,7 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: "Optional. The maximum number of results to return from this request. Fewer results might be returned. You must check for the 'nextPageToken` result to determine if additional results are available, which you can retrieve by passing the `nextPageToken` value in the `pageToken` parameter to the next request."
+        - description: 'Optional. The maximum number of results to return from this request. Fewer results might be returned. You must check for the `nextPageToken` result to determine if additional results are available, which you can retrieve by passing the `nextPageToken` value in the `pageToken` parameter to the next request.'
           in: query
           name: pageSize
           type: integer
@@ -577,7 +577,7 @@ definitions:
         description: Whether or not an entity was served from cache (with or without validation).
         type: boolean
       referer:
-        description: 'The referer(sic) URL of the request, as defined in [HTTP/1.1 Header Field Definitions](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).'
+        description: 'The referer URL of the request, as defined in [HTTP/1.1 Header Field Definitions](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).'
         type: string
       remoteIp:
         description: 'The IP address (IPv4 or IPv6) of the client that issued the HTTP request. Examples: `"192.168.1.1"`, `"FE80::0202:B3FF:FE1E:8329"`.'
@@ -604,7 +604,7 @@ definitions:
         description: 'The user agent sent by the client. Example: `"Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; Q312461; .NET CLR 1.0.3705)"`.'
         type: string
       validatedWithOriginServer:
-        description: Whether or not the response was validated with the origin server before being served from cache. This field is only meaningful if cache_hit is True.
+        description: Whether or not the response was validated with the origin server before being served from cache. This field is only meaningful if `cache_hit` is True.
         type: boolean
     type: object
   LabelDescriptor:
@@ -634,7 +634,7 @@ definitions:
         description: 'Optional. How the results should be sorted. Presently, the only permitted values are `"timestamp"` (default) and `"timestamp desc"`. The first option returns entries in order of increasing values of `LogEntry.timestamp` (oldest first), and the second option returns entries in order of decreasing timestamps (newest first). Entries with equal timestamps are returned in order of `LogEntry.insertId`.'
         type: string
       pageSize:
-        description: "Optional. The maximum number of results to return from this request. Fewer results might be returned. You must check for the 'nextPageToken` result to determine if additional results are available, which you can retrieve by passing the `nextPageToken` value in the `pageToken` parameter to the next request."
+        description: 'Optional. The maximum number of results to return from this request. Fewer results might be returned. You must check for the `nextPageToken` result to determine if additional results are available, which you can retrieve by passing the `nextPageToken` value in the `pageToken` parameter to the next request.'
         format: int32
         type: integer
       pageToken:
@@ -760,17 +760,17 @@ definitions:
         description: Optional. Set this to True if this is the last log entry in the operation.
         type: boolean
       producer:
-        description: 'Required. A arbitrary producer identifier. The combination of `id` and `producer` must be globally unique. Examples for `producer`: `"MyDivision.MyBigCompany.com"`, "github.com/MyProject/MyApplication"`.'
+        description: 'Required. An arbitrary producer identifier. The combination of `id` and `producer` must be globally unique. Examples for `producer`: `"MyDivision.MyBigCompany.com"`, "github.com/MyProject/MyApplication"`.'
         type: string
     type: object
   LogLine:
     description: Application log line emitted while processing a request.
     properties:
       logMessage:
-        description: App provided log message.
+        description: App-provided log message.
         type: string
       severity:
-        description: Severity of log.
+        description: Severity of this log entry.
         enum:
           - DEFAULT
           - DEBUG
@@ -784,9 +784,9 @@ definitions:
         type: string
       sourceLocation:
         $ref: '#/definitions/SourceLocation'
-        description: Line of code that generated this log message.
+        description: Where in the source code this log message was written.
       time:
-        description: Time when log entry was made. May be inaccurate.
+        description: Approximate time when this log entry was made.
         type: string
     type: object
   LogMetric:
@@ -853,35 +853,35 @@ definitions:
         type: string
     type: object
   RequestLog:
-    description: Complete log information about a single request to an application.
+    description: Complete log information about a single HTTP request to an App Engine application.
     properties:
       appEngineRelease:
-        description: App Engine release version string.
+        description: App Engine release version.
         type: string
       appId:
-        description: Identifies the application that handled this request.
+        description: Application that handled this request.
         type: string
       cost:
         description: An indication of the relative cost of serving this request.
         format: double
         type: number
       endTime:
-        description: Time at which request was known to end processing.
+        description: Time when the request finished.
         type: string
       finished:
-        description: 'If true, represents a finished request. Otherwise, the request is active.'
+        description: Whether this request is finished or active.
         type: boolean
       host:
-        description: The Internet host and port number of the resource being requested.
+        description: Internet host and port number of the resource being requested.
         type: string
       httpVersion:
-        description: HTTP version of request.
+        description: 'HTTP version of request. Example: `"HTTP/1.1"`.'
         type: string
       instanceId:
-        description: An opaque identifier for the instance that handled the request.
+        description: An identifier for the instance that handled the request.
         type: string
       instanceIndex:
-        description: 'If the instance that processed this request was individually addressable (i.e. belongs to a manually scaled module), this is the 0 based index of the instance, otherwise this value is -1.'
+        description: 'If the instance processing this request belongs to a manually scaled module, then this is the 0-based index of the instance. Otherwise, this value is -1.'
         format: int32
         type: integer
       ip:
@@ -891,7 +891,7 @@ definitions:
         description: Latency of the request.
         type: string
       line:
-        description: 'List of log lines emitted by the application while serving this request, if requested.'
+        description: A list of log lines emitted by the application while serving this request.
         items:
           $ref: '#/definitions/LogLine'
         type: array
@@ -900,25 +900,25 @@ definitions:
         format: int64
         type: string
       method:
-        description: 'Request method, such as `GET`, `HEAD`, `PUT`, `POST`, or `DELETE`.'
+        description: 'Request method. Example: `"GET"`, `"HEAD"`, `"PUT"`, `"POST"`, `"DELETE"`.'
         type: string
       moduleId:
-        description: Identifies the module of the application that handled this request.
+        description: Module of the application that handled this request.
         type: string
       nickname:
-        description: "A string that identifies a logged-in user who made this request, or empty if the user is not logged in. Most likely, this is the part of the user's email before the '@' sign. The field value is the same for different requests from the same user, but different users may have a similar name. This information is also available to the application via Users API. This field will be populated starting with App Engine 1.9.21."
+        description: "The logged-in user who made the request. Most likely, this is the part of the user's email before the `@` sign. The field value is the same for different requests from the same user, but different users can have similar names. This information is also available to the application via the App Engine Users API. This field will be populated starting with App Engine 1.9.21."
         type: string
       pendingTime:
-        description: 'Time this request spent in the pending request queue, if it was pending at all.'
+        description: Time this request spent in the pending request queue.
         type: string
       referrer:
         description: Referrer URL of request.
         type: string
       requestId:
-        description: 'Globally unique identifier for a request, based on request start time. Request IDs for requests which started later will compare greater as strings than those for requests which started earlier.'
+        description: 'Globally unique identifier for a request, which is based on the request start time. Request IDs for requests which started later will compare greater as strings than those for requests which started earlier.'
         type: string
       resource:
-        description: "Contains the path and query portion of the URL that was requested. For example, if the URL was \"http://example.com/app?name=val\", the resource would be \"/app?name=val\". Any trailing fragment (separated by a '#' character) will not be included."
+        description: 'Contains the path and query portion of the URL that was requested. For example, if the URL was "http://example.com/app?name=val", the resource would be "/app?name=val". The fragment identifier, which is identified by the `#` character, is not included.'
         type: string
       responseSize:
         description: Size in bytes sent back to client by request.
@@ -930,42 +930,42 @@ definitions:
           $ref: '#/definitions/SourceReference'
         type: array
       startTime:
-        description: Time at which request was known to have begun processing.
+        description: Time when the request started.
         type: string
       status:
-        description: Response status of request.
+        description: 'HTTP response status code. Example: 200, 404.'
         format: int32
         type: integer
       taskName:
-        description: Task name of the request (for an offline request).
+        description: 'Task name of the request, in the case of an offline request.'
         type: string
       taskQueueName:
-        description: Queue name of the request (for an offline request).
+        description: 'Queue name of the request, in the case of an offline request.'
         type: string
       traceId:
-        description: Cloud Trace identifier of the trace for this request.
+        description: Cloud Trace identifier for this request.
         type: string
       urlMapEntry:
-        description: File or class within URL mapping used for request. Useful for tracking down the source code which was responsible for managing request. Especially for multiply mapped handlers.
+        description: File or class that handled the request.
         type: string
       userAgent:
-        description: User agent used for making request.
+        description: User agent that made the request.
         type: string
       versionId:
         description: Version of the application that handled this request.
         type: string
       wasLoadingRequest:
-        description: Was this request a loading request for this instance?
+        description: Whether this was a loading request for the instance.
         type: boolean
     type: object
   SourceLocation:
-    description: Specifies a location in a source file.
+    description: Specifies a location in a source code file.
     properties:
       file:
-        description: 'Source file name. May or may not be a fully qualified name, depending on the runtime environment.'
+        description: 'Source file name. Depending on the runtime environment, this might be a simple name or a fully-qualified name.'
         type: string
       functionName:
-        description: 'Human-readable name of the function or method being invoked, with optional context such as the class or package name, for use in contexts such as the logs viewer where file:line number is less meaningful. This may vary by language, for example: in Java: qual.if.ied.Class.method in Go: dir/package.func in Python: function ...'
+        description: 'Human-readable name of the function or method being invoked, with optional context such as the class or package name. This information is used in contexts such as the logs viewer, where a file and line number are less meaningful. The format can vary by language. For example: `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function` (Python).'
         type: string
       line:
         description: Line within the source file.
@@ -979,7 +979,7 @@ definitions:
         description: 'Optional. A URI string identifying the repository. Example: "https://github.com/GoogleCloudPlatform/kubernetes.git"'
         type: string
       revisionId:
-        description: 'The canonical (and persistent) identifier of the deployed revision. Example (git): "0035781c50ec7aa23385dc841529ce8a4b70db1b"'
+        description: 'The canonical and persistent identifier of the deployed revision. Example (git): "0035781c50ec7aa23385dc841529ce8a4b70db1b"'
         type: string
     type: object
   WriteLogEntriesRequest:
@@ -993,7 +993,7 @@ definitions:
       labels:
         additionalProperties:
           type: string
-        description: "Optional. User-defined `key:value` items that are added to the `labels` field of each log entry in `entries`, except when a log entry specifies its own 'key:value' item with the same key. Example: `{ \"size\": \"large\", \"color\":\"red\" }`"
+        description: 'Optional. User-defined `key:value` items that are added to the `labels` field of each log entry in `entries`, except when a log entry specifies its own `key:value` item with the same key. Example: `{ "size": "large", "color":"red" }`'
         type: object
       logName:
         description: 'Optional. A default log resource name for those log entries in `entries` that do not specify their own `logName`. Example: `"projects/my-project/logs/syslog"`. See LogEntry.'
