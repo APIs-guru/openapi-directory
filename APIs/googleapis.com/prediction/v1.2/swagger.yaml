@@ -136,8 +136,11 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_only'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/prediction'
       tags:
         - training
