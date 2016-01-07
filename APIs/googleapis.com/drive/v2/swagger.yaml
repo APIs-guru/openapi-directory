@@ -1670,7 +1670,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Adds a property to a file.
+      description: 'Adds a property to a file, or updates it if it already exists.'
       operationId: drive.properties.insert
       parameters:
         - description: The ID of the file.
@@ -1770,7 +1770,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates a property. This method supports patch semantics.
+      description: "Updates a property, or adds it if it doesn't exist. This method supports patch semantics."
       operationId: drive.properties.patch
       parameters:
         - description: The ID of the file.
@@ -1806,7 +1806,7 @@ paths:
       tags:
         - properties
     put:
-      description: Updates a property.
+      description: "Updates a property, or adds it if it doesn't exist."
       operationId: drive.properties.update
       parameters:
         - description: The ID of the file.

@@ -602,7 +602,7 @@ definitions:
         description: '[Output Only] URL of the region where the operation resides.'
         type: string
       selfLink:
-        description: '[Output Only] Server defined URL for the resource.'
+        description: '[Output Only] The fully qualified URL for the resource.'
         type: string
       startTime:
         description: '[Output Only] The time that this operation was started by the server. This is in RFC 3339 format.'
@@ -662,13 +662,13 @@ definitions:
         type: array
       kind:
         default: 'replicapoolupdater#operationList'
-        description: '[Output Only] Type of resource. Always replicapoolupdater#operations for Operations resource.'
+        description: '[Output Only] Type of resource. Always replicapoolupdater#operationList for OperationList resources.'
         type: string
       nextPageToken:
         description: '[Output Only] A token used to continue a truncate.'
         type: string
       selfLink:
-        description: '[Output Only] Server-defined URL for this resource.'
+        description: '[Output Only] The fully qualified URL for the resource.'
         type: string
     type: object
   RollingUpdate:
