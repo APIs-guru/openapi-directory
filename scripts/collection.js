@@ -649,7 +649,6 @@ function expandPathTemplates(swagger) {
 
     while (match = /{\+([^}]*?)}/.exec(path)) {
       var paramName = match[1];
-      console.log('match ' + paramName);
       path = path.replace(match[0], '{' + paramName + '}');
       applyParameter(pathItem, paramName, function(param) {
         param['x-reservedExpansion'] = true;
