@@ -410,6 +410,8 @@ paths:
             $ref: '#/definitions/BucketAccessControls'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - bucketAccessControls
@@ -441,6 +443,8 @@ paths:
             $ref: '#/definitions/BucketAccessControl'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - bucketAccessControls
@@ -463,6 +467,8 @@ paths:
         '200':
           description: Successful response
       security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
@@ -487,6 +493,8 @@ paths:
           schema:
             $ref: '#/definitions/BucketAccessControl'
       security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
@@ -524,6 +532,8 @@ paths:
             $ref: '#/definitions/BucketAccessControl'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - bucketAccessControls
@@ -552,6 +562,8 @@ paths:
             $ref: '#/definitions/BucketAccessControl'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - bucketAccessControls
@@ -579,6 +591,8 @@ paths:
           schema:
             $ref: '#/definitions/ObjectAccessControls'
       security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
@@ -611,6 +625,8 @@ paths:
             $ref: '#/definitions/ObjectAccessControl'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - defaultObjectAccessControls
@@ -633,6 +649,8 @@ paths:
         '200':
           description: Successful response
       security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
@@ -657,6 +675,8 @@ paths:
           schema:
             $ref: '#/definitions/ObjectAccessControl'
       security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
@@ -694,6 +714,8 @@ paths:
             $ref: '#/definitions/ObjectAccessControl'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - defaultObjectAccessControls
@@ -721,6 +743,8 @@ paths:
           schema:
             $ref: '#/definitions/ObjectAccessControl'
       security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
@@ -1208,6 +1232,8 @@ paths:
             $ref: '#/definitions/ObjectAccessControls'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objectAccessControls
@@ -1248,6 +1274,8 @@ paths:
             $ref: '#/definitions/ObjectAccessControl'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objectAccessControls
@@ -1279,6 +1307,8 @@ paths:
         '200':
           description: Successful response
       security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
@@ -1312,6 +1342,8 @@ paths:
           schema:
             $ref: '#/definitions/ObjectAccessControl'
       security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
@@ -1358,6 +1390,8 @@ paths:
             $ref: '#/definitions/ObjectAccessControl'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:
         - objectAccessControls
@@ -1394,6 +1428,8 @@ paths:
           schema:
             $ref: '#/definitions/ObjectAccessControl'
       security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
       tags:

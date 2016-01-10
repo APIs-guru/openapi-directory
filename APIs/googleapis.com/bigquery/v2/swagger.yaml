@@ -92,12 +92,12 @@ paths:
       description: 'Requests that a job be cancelled. This call will return immediately, and the client will need to poll for the job status to see if the cancel completed successfully. Cancelled jobs may still incur costs.'
       operationId: bigquery.jobs.cancel
       parameters:
-        - description: Project ID of the job to cancel
+        - description: '[Required] Project ID of the job to cancel'
           in: path
           name: projectId
           required: true
           type: string
-        - description: Job ID of the job to cancel
+        - description: '[Required] Job ID of the job to cancel'
           in: path
           name: jobId
           required: true
@@ -759,12 +759,12 @@ paths:
       description: "Returns information about a specific job. Job information is available for a six month period after creation. Requires that you're the person who ran the job, or have the Is Owner project role."
       operationId: bigquery.jobs.get
       parameters:
-        - description: Project ID of the requested job
+        - description: '[Required] Project ID of the requested job'
           in: path
           name: projectId
           required: true
           type: string
-        - description: Job ID of the requested job
+        - description: '[Required] Job ID of the requested job'
           in: path
           name: jobId
           required: true
@@ -832,12 +832,12 @@ paths:
       description: Retrieves the results of a query job.
       operationId: bigquery.jobs.getQueryResults
       parameters:
-        - description: Project ID of the query job
+        - description: '[Required] Project ID of the query job'
           in: path
           name: projectId
           required: true
           type: string
-        - description: Job ID of the query job
+        - description: '[Required] Job ID of the query job'
           in: path
           name: jobId
           required: true
@@ -1213,9 +1213,6 @@ definitions:
       extract:
         $ref: '#/definitions/JobConfigurationExtract'
         description: '[Pick one] Configures an extract job.'
-      link:
-        $ref: '#/definitions/JobConfigurationLink'
-        description: '[Pick one] Configures a link job.'
       load:
         $ref: '#/definitions/JobConfigurationLoad'
         description: '[Pick one] Configures a load job.'
@@ -1250,23 +1247,6 @@ definitions:
         $ref: '#/definitions/TableReference'
         description: '[Required] A reference to the table being exported.'
     type: object
-  JobConfigurationLink:
-    properties:
-      createDisposition:
-        description: "[Optional] Specifies whether the job is allowed to create new tables. The following values are supported: CREATE_IF_NEEDED: If the table does not exist, BigQuery creates the table. CREATE_NEVER: The table must already exist. If it does not, a 'notFound' error is returned in the job result. The default value is CREATE_IF_NEEDED. Creation, truncation and append actions occur as one atomic update upon job completion."
-        type: string
-      destinationTable:
-        $ref: '#/definitions/TableReference'
-        description: '[Required] The destination table of the link job.'
-      sourceUri:
-        description: '[Required] URI of source table to link.'
-        items:
-          type: string
-        type: array
-      writeDisposition:
-        description: "[Optional] Specifies the action that occurs if the destination table already exists. The following values are supported: WRITE_TRUNCATE: If the table already exists, BigQuery overwrites the table data. WRITE_APPEND: If the table already exists, BigQuery appends the data to the table. WRITE_EMPTY: If the table already exists and contains data, a 'duplicate' error is returned in the job result. The default value is WRITE_EMPTY. Each action is atomic and only occurs if BigQuery is able to complete the job successfully. Creation, truncation and append actions occur as one atomic update upon job completion."
-        type: string
-    type: object
   JobConfigurationLoad:
     properties:
       allowJaggedRows:
@@ -1285,7 +1265,7 @@ definitions:
         description: '[Optional] The character encoding of the data. The supported values are UTF-8 or ISO-8859-1. The default value is UTF-8. BigQuery decodes the data after the raw, binary data has been split using the values of the quote and fieldDelimiter properties.'
         type: string
       fieldDelimiter:
-        description: "[Optional] The separator for fields in a CSV file. BigQuery converts the string to ISO-8859-1 encoding, and then uses the first byte of the encoded string to split the data in its raw, binary state. BigQuery also supports the escape sequence \"\\t\" to specify a tab separator. The default value is a comma (',')."
+        description: "[Optional] The separator for fields in a CSV file. The separator can be any ISO-8859-1 single-byte character. To use a character in the range 128-255, you must encode the character as UTF8. BigQuery converts the string to ISO-8859-1 encoding, and then uses the first byte of the encoded string to split the data in its raw, binary state. BigQuery also supports the escape sequence \"\\t\" to specify a tab separator. The default value is a comma (',')."
         type: string
       ignoreUnknownValues:
         description: "[Optional] Indicates if BigQuery should allow extra values that are not represented in the table schema. If true, the extra values are ignored. If false, records with extra columns are treated as bad records, and if there are too many bad records, an invalid error is returned in the job result. The default value is false. The sourceFormat property determines what BigQuery treats as an extra value: CSV: Trailing columns JSON: Named values that don't match any column names"
@@ -1306,7 +1286,7 @@ definitions:
         type: string
       schema:
         $ref: '#/definitions/TableSchema'
-        description: '[Optional] The schema for the destination table. The schema can be omitted if the destination table already exists or if the schema can be inferred from the loaded data.'
+        description: "[Optional] The schema for the destination table. The schema can be omitted if the destination table already exists, or if you're loading data from Google Cloud Datastore."
       schemaInline:
         description: '[Deprecated] The inline schema. For CSV schemas, specify as "Field1:Type1[,Field2:Type2]*". For example, "foo:STRING, bar:INTEGER, baz:FLOAT".'
         type: string
@@ -1347,6 +1327,11 @@ definitions:
         default: true
         description: '[Optional] Flattens all nested and repeated fields in the query results. The default value is true. allowLargeResults must be true if this is set to false.'
         type: boolean
+      maximumBillingTier:
+        default: 1
+        description: '[Optional] Limits the billing tier for this job. Queries that have resource usage beyond this tier will fail (without incurring a charge). If unspecified, this will be set to your project default.'
+        format: int32
+        type: integer
       preserveNulls:
         description: '[Deprecated] This property is deprecated.'
         type: boolean
@@ -1738,7 +1723,7 @@ definitions:
         $ref: '#/definitions/TableReference'
         description: '[Required] Reference describing the ID of this table.'
       type:
-        description: '[Output-only] Describes the table type. The following values are supported: TABLE: A normal BigQuery table. VIEW: A virtual table defined by a SQL query. The default value is TABLE.'
+        description: '[Output-only] Describes the table type. The following values are supported: TABLE: A normal BigQuery table. VIEW: A virtual table defined by a SQL query. EXTERNAL: A table that references data stored in an external storage system, such as Google Cloud Storage. The default value is TABLE.'
         type: string
       view:
         $ref: '#/definitions/ViewDefinition'
@@ -1773,7 +1758,7 @@ definitions:
         description: '[Optional] Insert all valid rows of a request, even if invalid rows exist. The default value is false, which causes the entire request to fail if any invalid rows exist.'
         type: boolean
       templateSuffix:
-        description: '[Experimental] If specified, treats the destination table as a base template, and inserts the rows into an instance table named "". BigQuery will manage creation of the instance table, using the schema of the base template table.'
+        description: '[Optional] If specified, treats the destination table as a base template, and inserts the rows into an instance table named "{destination}{templateSuffix}". BigQuery will manage creation of the instance table, using the schema of the base template table. See https://cloud.google.com/bigquery/streaming-data-into-bigquery#template-tables for considerations when working with templates tables.'
         type: string
     type: object
   TableDataInsertAllResponse:

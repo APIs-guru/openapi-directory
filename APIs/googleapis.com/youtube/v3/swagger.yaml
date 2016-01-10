@@ -7415,6 +7415,9 @@ definitions:
   VideoLiveStreamingDetails:
     description: Details about the live streaming metadata.
     properties:
+      activeLiveChatId:
+        description: The ID of the currently active live chat attached to this video. This field is filled only if the video is a currently live broadcast that has live chat. Once the broadcast transitions to complete this field will be removed and the live chat closed down. For persistent broadcasts that live chat id will no longer be tied to this video but rather to the new video being displayed at the persistent page.
+        type: string
       actualEndTime:
         description: 'The time that the broadcast actually ended. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format. This value will not be available until the broadcast is over.'
         format: date-time

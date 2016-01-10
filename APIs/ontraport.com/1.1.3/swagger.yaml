@@ -11,7 +11,7 @@ info:
   description: "<p>Enter App ID and API Key above. If you don't have an API Key, <a href=\"https://app.ontraport.com/#!/api_settings/listAll\">go here to get one</a>. Authentication parameters must be sent in the request header as <strong>Api-Appid</strong> and <strong>Api-Key</strong>."
   termsOfService: 'http://ontraport.com/terms/'
   title: ONTRAPORT
-  version: 1.1.2
+  version: 1.1.3
   x-logo:
     url: 'https://ontraport.com/assets/images/ONTRAPORT_logo_150px.png'
   x-origin:
@@ -1232,14 +1232,6 @@ definitions:
         description: Days to delay start
         format: int32
         type: integer
-      download_limit:
-        description: Limit number of downloads after purchase
-        format: int32
-        type: integer
-      download_time_limit:
-        description: Limit length of time product can be downloaded
-        format: int32
-        type: integer
       id:
         description: This must be an existing Product ID
         format: int32
@@ -1262,11 +1254,6 @@ definitions:
         items:
           $ref: '#/definitions/Price'
         type: array
-      product_type:
-        enum:
-          - digital
-          - physical
-        type: string
       quantity:
         description: How many of this product are being purchased?
         format: int32
@@ -1288,9 +1275,6 @@ definitions:
         default: false
         description: Does this product have an associated shipping cost?
         type: boolean
-      sku:
-        description: Product SKU
-        type: string
       subscription_count:
         format: int32
         type: integer
