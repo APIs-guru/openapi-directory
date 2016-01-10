@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - http
-host: nitro.api.bbci.co.uk
+host: programmes.api.bbc.com
 basePath: /nitro/api
 info:
   contact:
@@ -23,7 +23,7 @@ info:
     format: swagger
     url: 'https://raw.githubusercontent.com/Mermade/bbcparse/master/nitroApi/swagger.json'
     version: '2.0'
-  x-providerName: bbci.co.uk
+  x-providerName: bbc.com
   x-unofficialSpec: true
 externalDocs:
   description: Nitro for developers
@@ -56,6 +56,8 @@ paths:
           description: Nitro response
         default:
           description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
       summary: Get API definition
       tags:
         - schema
@@ -64,7 +66,9 @@ paths:
       description: Discover details of on-demand availability for programmes and their versions
       operationId: listAvailability
       parameters:
-        - description: "Sorts:  \n---\nsort chronologically by scheduled start time/date, ascending  \n"
+        - description: |
+            Sorts:
+            * sort chronologically by scheduled start time/date, ascending
           enum:
             - scheduled_start
           in: query
@@ -138,6 +142,8 @@ paths:
           description: Nitro response
         default:
           description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
       summary: Discover details of on-demand availability for programmes and their versions
       tags:
         - feeds
@@ -146,7 +152,9 @@ paths:
       description: Build schedules and find metadata for TV and radio broadcasts
       operationId: listBroadcasts
       parameters:
-        - description: "Sorts:  \n---\nsort chronologically by scheduled start time/date, ascending  \n"
+        - description: |
+            Sorts:
+            * sort chronologically by scheduled start time/date, ascending
           enum:
             - start_date
           in: query
@@ -162,7 +170,9 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: "Mixins:  \n---\nreturn ancestor programme titles  \n"
+          description: |
+            Mixins:
+            * return ancestor programme titles
           enum:
             - titles
           in: query
@@ -330,6 +340,8 @@ paths:
           description: Nitro response
         default:
           description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
       summary: Build schedules and find metadata for TV and radio broadcasts
       tags:
         - feeds
@@ -338,7 +350,9 @@ paths:
       description: 'Find metadata for curated groups: seasons, collections, galleries or franchises'
       operationId: listGroups
       parameters:
-        - description: "Sorts:  \n---\nsort alphabetically by PID  \n"
+        - description: |
+            Sorts:
+            * sort alphabetically by PID
           enum:
             - pid
           in: query
@@ -353,7 +367,12 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: "Mixins:  \n---\nmixin to return the alternate images for a group  \n---\nmixin to return links to programme entities that group belongs to  \n---\nmixin to add image information for a group  \n---\nmixin to return related links for the group  \n"
+          description: |
+            Mixins:
+            * mixin to return the alternate images for a group
+            * mixin to return links to programme entities that group belongs to
+            * mixin to add image information for a group
+            * mixin to return related links for the group
           enum:
             - alternate_images
             - group_for
@@ -460,6 +479,8 @@ paths:
           description: Nitro response
         default:
           description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
       summary: 'Find metadata for curated groups: seasons, collections, galleries or franchises'
       tags:
         - feeds
@@ -468,7 +489,10 @@ paths:
       description: Find metadata for images
       operationId: listImages
       parameters:
-        - description: "Sorts:  \n---\nsort numerically by position, ascending only  \n---\nsort alphabetically by PID  \n"
+        - description: |
+            Sorts:
+            * sort numerically by position, ascending only
+            * sort alphabetically by PID
           enum:
             - group_position
             - pid
@@ -573,6 +597,8 @@ paths:
           description: Nitro response
         default:
           description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
       summary: Find metadata for images
       tags:
         - feeds
@@ -581,7 +607,9 @@ paths:
       description: 'Look inside programmes to find segments: chapters, tracks and more'
       operationId: listItems
       parameters:
-        - description: "Sorts:  \n---\nsort by pid, descending  \n"
+        - description: |
+            Sorts:
+            * sort by pid, descending
           enum:
             - pid
           in: query
@@ -596,7 +624,11 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: "Mixins:  \n---\nmixin to return information about contributors to items  \n---\nmixin to add image information for an item  \n---\nmixin to return programme segment events, works in conjunction with programme or segment_event filters  \n"
+          description: |
+            Mixins:
+            * mixin to return information about contributors to items
+            * mixin to add image information for an item
+            * mixin to return programme segment events, works in conjunction with programme or segment_event filters
           enum:
             - contributions
             - images
@@ -710,6 +742,8 @@ paths:
           description: Nitro response
         default:
           description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
       summary: 'Look inside programmes to find segments: chapters, tracks and more'
       tags:
         - feeds
@@ -718,7 +752,9 @@ paths:
       description: List all Master Brands
       operationId: listMasterbrands
       parameters:
-        - description: "Sorts:  \n---\nsort by mid, ascending  \n"
+        - description: |
+            Sorts:
+            * sort by mid, ascending
           enum:
             - mid
           in: query
@@ -733,7 +769,9 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: "Mixins:  \n---\nmixin to add image information for a masterbrand  \n"
+          description: |
+            Mixins:
+            * mixin to add image information for a masterbrand
           enum:
             - images
           in: query
@@ -794,6 +832,8 @@ paths:
           description: Nitro response
         default:
           description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
       summary: List all Master Brands
       tags:
         - feeds
@@ -890,6 +930,8 @@ paths:
           description: Nitro response
         default:
           description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
       summary: 'Find the people behind and in programmes: cast, crew, guests and more'
       tags:
         - feeds
@@ -922,6 +964,8 @@ paths:
           description: Nitro response
         default:
           description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
       summary: Look inside pips entities
       tags:
         - feeds
@@ -930,7 +974,19 @@ paths:
       description: 'Start here for programmes metadata: Brands, Series, Episodes and Clips'
       operationId: listProgrammes
       parameters:
-        - description: "Sorts:  \n---\nsort numerically by position in group, ascending  \n---\nsort alphabetically by PID, descending  \n---\nsort numerically by position, ascending  \n---\nsort by promotion rank, ascending  \n---\nsort chronologically by release date, descending  \n---\nsort by weighting of search term (use with q parameter)  \n---\nsort chronologically by scheduled start time/date, ascending  \n---\nsort alphabetically by title, ascending  \n---\nsort by title librarian style (ignoring leading 'The', 'A', etc), ascending  \n---\nsort by root pid and then preorder tree sort. Requires entities to have release date.  \n---\nsort numerically by number of views (most popular first - faster most_popular)  \n"
+        - description: |
+            Sorts:
+            * sort numerically by position in group, ascending
+            * sort alphabetically by PID, descending
+            * sort numerically by position, ascending
+            * sort by promotion rank, ascending
+            * sort chronologically by release date, descending
+            * sort by weighting of search term (use with q parameter)
+            * sort chronologically by scheduled start time/date, ascending
+            * sort alphabetically by title, ascending
+            * sort by title librarian style (ignoring leading 'The', 'A', etc), ascending
+            * sort by root pid and then preorder tree sort. Requires entities to have release date.
+            * sort numerically by number of views (most popular first - faster most_popular)
           enum:
             - group_position
             - pid
@@ -956,7 +1012,19 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: "Mixins:  \n---\nmixin to return the alternate images for a programme  \n---\nmixin to return ancestor programme titles  \n---\nmixin to return programme availability information  \n---\nmixin to return information about programmes that are currently available  \n---\nmixin to return information about contributors to a programme  \n---\nmixin to return original version duration in programme concept entities  \n---\nmixin to return list of genre groupings  \n---\nmixin to add image information for a programme  \n---\nmixin to add embeddable information for a programme  \n---\nmixin to return the programmes which appear before and after a programme (as determined by the sort applied in the request)  \n---\nmixin to return information about related links to a programme  \n---\nmixin to return information about programmes that are currently available  \n"
+          description: |
+            Mixins:
+            * mixin to return the alternate images for a programme
+            * mixin to return ancestor programme titles
+            * mixin to return programme availability information
+            * mixin to return information about programmes that are currently available
+            * mixin to return information about contributors to a programme
+            * mixin to return original version duration in programme concept entities
+            * mixin to return list of genre groupings
+            * mixin to add image information for a programme
+            * mixin to add embeddable information for a programme
+            * mixin to return the programmes which appear before and after a programme (as determined by the sort applied in the request)
+            * mixin to return information about related links to a programme
           enum:
             - alternate_images
             - ancestor_titles
@@ -969,7 +1037,6 @@ paths:
             - is_embeddable
             - previous_next
             - related_links
-            - versions_availability
           in: query
           items:
             format: string
@@ -1090,18 +1157,21 @@ paths:
         - description: "filter for subset of programmes with title beginning with initial letter librarian style (ignoring leading 'The', 'An' (Welsh), etc) 0-9 a-z"
           in: query
           maxLength: 1
+          minLength: 1
           name: initial_letter
           required: false
           type: string
         - description: Programmes with (librarian) titles whose initial letter is equal/before given letter. Use with initial_letter_start for a range
           in: query
           maxLength: 1
+          minLength: 1
           name: initial_letter_end
           required: false
           type: string
         - description: Programmes with (librarian) titles whose initial letter is equal/after given letter. Use with initial_letter_end for range.
           in: query
           maxLength: 1
+          minLength: 1
           name: initial_letter_start
           required: false
           type: string
@@ -1109,8 +1179,9 @@ paths:
           description: filter for subset of programmes with title beginning with initial letter
           in: query
           items:
+            maxLength: 1
+            minLength: 1
             type: string
-          maxLength: 1
           name: initial_letter_strict
           required: false
           type: array
@@ -1257,6 +1328,8 @@ paths:
           description: Nitro response
         default:
           description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
       summary: 'Start here for programmes metadata: Brands, Series, Episodes and Clips'
       tags:
         - feeds
@@ -1266,7 +1339,9 @@ paths:
       operationId: listPromotions
       parameters:
         - collectionFormat: multi
-          description: "Mixins:  \n---\nmixin to return information about related links to a promotion  \n"
+          description: |
+            Mixins:
+            * mixin to return information about related links to a promotion
           enum:
             - related_links
           in: query
@@ -1362,6 +1437,8 @@ paths:
           description: Nitro response
         default:
           description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
       summary: Discover metadata for content promotions
       tags:
         - feeds
@@ -1370,7 +1447,9 @@ paths:
       description: Build schedules and find metadata for TV and radio broadcasts and webcasts
       operationId: listSchedules
       parameters:
-        - description: "Sorts:  \n---\nsort chronologically by scheduled start time/date, ascending  \n"
+        - description: |
+            Sorts:
+            * sort chronologically by scheduled start time/date, ascending
           enum:
             - start_date
           in: query
@@ -1386,7 +1465,10 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: "Mixins:  \n---\nreturn ancestor programme titles  \n---\nmixin to add image information for broadcasts and webcasts  \n"
+          description: |
+            Mixins:
+            * return ancestor programme titles
+            * mixin to add image information for broadcasts and webcasts
           enum:
             - ancestor_titles
             - images
@@ -1595,12 +1677,14 @@ paths:
           description: Nitro response
         default:
           description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
       summary: Build schedules and find metadata for TV and radio broadcasts and webcasts
       tags:
         - feeds
   /schema:
     get:
-      description: Get schema definition
+      description: Get Schema definition
       operationId: getXSD
       parameters: []
       responses:
@@ -1608,7 +1692,9 @@ paths:
           description: Nitro response
         default:
           description: Unexpected error
-      summary: Get schema definition
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      summary: Get Schema definition
       tags:
         - schema
   /services:
@@ -1714,6 +1800,8 @@ paths:
           description: Nitro response
         default:
           description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
       summary: Information about the linear services used for broadcast transmissions
       tags:
         - feeds
@@ -1799,6 +1887,22 @@ paths:
           description: Nitro response
         default:
           description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
       summary: 'Metadata on editorial programme versions: original, signed, audio-described, etc'
       tags:
         - feeds
+definitions:
+  ErrorModel:
+    properties:
+      fault:
+        properties:
+          detail:
+            properties:
+              errorcode:
+                type: string
+            type: object
+          faultString:
+            type: string
+        type: object
+    type: object
