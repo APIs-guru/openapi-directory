@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: netlicensing.labs64.com
+host: go.netlicensing.io
 basePath: /core/v2/rest
 info:
   description: "The Labs64 <a href='https://www.labs64.de/confluence/x/pwCo' target='_blank'>NetLicensing API</a> is a RESTful API and gives you access to NetLicensing’s core features.<br/><br/><strong>Authentication</strong><br/>You authenticate to the NetLicensing API by providing your account credentials or simply use our demo account - <code>demo:demo</code><br/><br/>Find out more about Labs64 NetLicensing at <a href='http://netlicensing.io' target='_blank'>netlicensing.io</a>"
@@ -14,7 +14,7 @@ info:
     format: swagger
     url: 'http://io.labs64.com/NetLicensing-API/v2.x/netlicensing.json'
     version: '2.0'
-  x-providerName: labs64.com
+  x-providerName: netlicensing.io
 securityDefinitions:
   api_key:
     in: header
