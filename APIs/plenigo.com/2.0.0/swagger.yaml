@@ -930,6 +930,12 @@ paths:
           name: transactionStatus
           required: false
           type: string
+        - default: false
+          description: Flag indicating if the transactions to search were in test mode
+          in: query
+          name: testMode
+          required: false
+          type: boolean
         - default: 10
           description: Size of the page - must be between 10 and 100
           format: int32
@@ -1204,6 +1210,9 @@ definitions:
         type: string
       street:
         description: "the user's street address"
+        type: string
+      vatNumber:
+        description: "the user's vat number"
         type: string
   CompanyUserItem:
     properties:
@@ -1594,8 +1603,8 @@ definitions:
   TransactionItem:
     properties:
       billingId:
-        description: Billing id
-        format: int64
+        description: The billing id of this transaction
+        format: double
         type: integer
       currency:
         description: Currency of the amounts

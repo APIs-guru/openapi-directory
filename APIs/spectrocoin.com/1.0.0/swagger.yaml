@@ -124,13 +124,16 @@ definitions:
         type: string
       payAmount:
         $ref: '#/definitions/BigDecimal'
-        description: Pay amount in pay currency that should be paid by merchant customer. If not provided receive amount will be used to calculate pay amount
+        description: Pay amount in pay currency of value which should be paid by merchant customer. If not provided receive amount will be used to calculate pay amount
       payCurrency:
-        description: 'Currency in which merchant customer will pay the order. Currently only "BTC"'
+        description: Currency of pay amount
         type: string
       receiveAmount:
         $ref: '#/definitions/BigDecimal'
-        description: Receive amount in receive currency (which is configured at API configuration) that merchant will be funded after merchant customers payment approval. If not provided pay amount will be used to calculate receive amount
+        description: Receive amount in receive currency of value that merchant will be funded after merchant customers payment approval. If not provided pay amount will be used to calculate receive amount
+      receiveCurrency:
+        description: Currency of receive amount
+        type: string
       sign:
         description: Signature required for signing create order request
         type: string
@@ -141,4 +144,5 @@ definitions:
       - merchantId
       - apiId
       - payCurrency
+      - receiveCurrency
       - sign

@@ -947,7 +947,11 @@ definitions:
         description: Number of bedrooms
         format: int64
         type: integer
-      constructionMaterials:
+      construction:
+        description: The materials that were used in the construction of the property.
+        type: string
+      cooling:
+        description: A description of the cooling or air conditioning features of the property.
         type: string
       exteriorFeatures:
         default: |
@@ -960,6 +964,9 @@ definitions:
         description: Number of fireplaces
         format: int64
         type: integer
+      flooring:
+        description: The type(s) of flooring found within the property.
+        type: string
       foundation:
         type: string
       garageSpaces:
@@ -1011,6 +1018,12 @@ definitions:
       style:
         default: 'Ranch, Traditional'
         description: Property style description or short string
+        type: string
+      subType:
+        description: |
+          The property's sub-type, i.e. SingleFamilyResidential,
+          Condo, etc. Or a list of Sub Types for Mobile, such as
+          Expando, Manufactured, Modular, etc.
         type: string
       subdivision:
         default: River Oaks

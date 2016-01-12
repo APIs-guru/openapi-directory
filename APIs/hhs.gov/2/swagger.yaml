@@ -604,6 +604,11 @@ paths:
           name: restrictToSet
           required: false
           type: string
+        - description: Find all media items containing the createdBy value.
+          in: query
+          name: createdBy
+          required: false
+          type: string
       produces:
         - application/json
       responses:
@@ -1602,69 +1607,6 @@ definitions:
       - meta
       - results
       - callback
-  Audio:
-    properties:
-      customPreviewUrl:
-        type: string
-      customThumbnailUrl:
-        type: string
-      dateContentAuthored:
-        format: date
-        type: string
-      dateContentPublished:
-        format: date
-        type: string
-      dateContentReviewed:
-        format: date
-        type: string
-      dateContentUpdated:
-        format: date
-        type: string
-      dateSyndicationCaptured:
-        format: date
-        type: string
-      dateSyndicationUpdated:
-        format: date
-        type: string
-      dateSyndicationVisible:
-        format: date
-        type: string
-      description:
-        type: string
-      duration:
-        format: int32
-        type: integer
-      extendedAttributes:
-        type: object
-      externalGuid:
-        type: string
-      hash:
-        type: string
-      id:
-        format: int64
-        type: integer
-      language:
-        $ref: '#/definitions/Language'
-      mediaType:
-        type: string
-      name:
-        type: string
-      source:
-        $ref: '#/definitions/Source'
-      sourceUrl:
-        type: string
-      targetUrl:
-        type: string
-    required:
-      - id
-      - name
-      - mediaType
-      - sourceUrl
-      - dateSyndicationCaptured
-      - dateSyndicationUpdated
-      - dateSyndicationVisible
-      - language
-      - source
   Campaign:
     properties:
       contactEmail:
@@ -1770,6 +1712,8 @@ definitions:
       - results
   Html:
     properties:
+      createdBy:
+        type: string
       customPreviewUrl:
         type: string
       customThumbnailUrl:
@@ -1828,9 +1772,12 @@ definitions:
       - dateSyndicationVisible
       - language
       - source
+      - createdBy
   Image:
     properties:
       altText:
+        type: string
+      createdBy:
         type: string
       customPreviewUrl:
         type: string
@@ -1898,6 +1845,7 @@ definitions:
       - dateSyndicationVisible
       - language
       - source
+      - createdBy
       - width
       - height
       - imageFormat
@@ -1906,6 +1854,8 @@ definitions:
     properties:
       altText:
         type: string
+      createdBy:
+        type: string
       customPreviewUrl:
         type: string
       customThumbnailUrl:
@@ -1972,6 +1922,7 @@ definitions:
       - dateSyndicationVisible
       - language
       - source
+      - createdBy
       - width
       - height
       - imageFormat
@@ -2015,6 +1966,8 @@ definitions:
       - likes
   MediaItem:
     properties:
+      createdBy:
+        type: string
       customPreviewUrl:
         type: string
       customThumbnailUrl:
@@ -2073,6 +2026,7 @@ definitions:
       - dateSyndicationVisible
       - language
       - source
+      - createdBy
   MediaItems:
     properties:
       callback:
@@ -2139,6 +2093,8 @@ definitions:
       - pagination
   PDF:
     properties:
+      createdBy:
+        type: string
       customPreviewUrl:
         type: string
       customThumbnailUrl:
@@ -2197,6 +2153,7 @@ definitions:
       - dateSyndicationVisible
       - language
       - source
+      - createdBy
   Pagination:
     properties:
       count:
@@ -2272,8 +2229,6 @@ definitions:
     properties:
       alternateImages:
         $ref: '#/definitions/ResourceList'
-      audios:
-        $ref: '#/definitions/ResourceList'
       campaigns:
         $ref: '#/definitions/ResourceList'
       collections:
@@ -2295,8 +2250,6 @@ definitions:
       tags:
         $ref: '#/definitions/ResourceList'
       videos:
-        $ref: '#/definitions/ResourceList'
-      widgets:
         $ref: '#/definitions/ResourceList'
   Resources:
     properties:
@@ -2472,6 +2425,8 @@ definitions:
       - results
   Video:
     properties:
+      createdBy:
+        type: string
       customPreviewUrl:
         type: string
       customThumbnailUrl:
@@ -2539,77 +2494,8 @@ definitions:
       - dateSyndicationVisible
       - language
       - source
+      - createdBy
       - duration
-  Widget:
-    properties:
-      code:
-        format: int32
-        type: integer
-      customPreviewUrl:
-        type: string
-      customThumbnailUrl:
-        type: string
-      dateContentAuthored:
-        format: date
-        type: string
-      dateContentPublished:
-        format: date
-        type: string
-      dateContentReviewed:
-        format: date
-        type: string
-      dateContentUpdated:
-        format: date
-        type: string
-      dateSyndicationCaptured:
-        format: date
-        type: string
-      dateSyndicationUpdated:
-        format: date
-        type: string
-      dateSyndicationVisible:
-        format: date
-        type: string
-      description:
-        type: string
-      extendedAttributes:
-        type: object
-      externalGuid:
-        type: string
-      hash:
-        type: string
-      height:
-        format: int32
-        type: integer
-      id:
-        format: int64
-        type: integer
-      language:
-        $ref: '#/definitions/Language'
-      mediaType:
-        type: string
-      name:
-        type: string
-      source:
-        $ref: '#/definitions/Source'
-      sourceUrl:
-        type: string
-      targetUrl:
-        type: string
-      width:
-        format: int32
-        type: integer
-    required:
-      - id
-      - name
-      - mediaType
-      - sourceUrl
-      - dateSyndicationCaptured
-      - dateSyndicationUpdated
-      - dateSyndicationVisible
-      - language
-      - source
-      - code
   YoutubeMetadata:
     properties:
       callback:

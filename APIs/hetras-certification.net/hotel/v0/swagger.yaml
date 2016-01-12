@@ -198,27 +198,7 @@ paths:
           name: hotelId
           required: true
           type: integer
-        - description: Amount of rooms to skip.
-          format: int32
-          in: query
-          name: skip
-          required: false
-          type: integer
-        - description: Amount of rooms to select.
-          format: int32
-          in: query
-          name: top
-          required: false
-          type: integer
-        - description: Return total amount of rooms for a given filter criteria.
-          enum:
-            - None
-            - AllPages
-          in: query
-          name: inlinecount
-          required: false
-          type: string
-        - description: "Return a list of rooms that only have the given ocuppancy status.\r\n            Allows to pass a comma-separated list of occupancy statuses."
+        - description: Return a list of rooms that only have the given ocuppancy status.
           enum:
             - Occupied
             - Vacant
@@ -226,8 +206,7 @@ paths:
           name: occupancy
           required: false
           type: string
-        - collectionFormat: multi
-          description: "Return a list of rooms that only have the given room condition status.\r\n            Allows to pass a comma-separated list of room condition statuses."
+        - description: Return a list of rooms that only have the given room condition status.
           in: query
           items:
             enum:
@@ -238,8 +217,7 @@ paths:
           name: conditions
           required: false
           type: array
-        - collectionFormat: multi
-          description: "Return a list of rooms that only have the given maintenance status.\r\n            Allows to pass a comma-separated list of room maintenance statuses."
+        - description: Return a list of rooms that only have the given maintenance status.
           in: query
           items:
             enum:
@@ -252,38 +230,54 @@ paths:
           name: maintenances
           required: false
           type: array
-        - collectionFormat: multi
-          description: "Return a list of rooms that only have the given room type.\r\n            Allows to pass a comma-separated list of room types."
+        - description: Return a count of rooms that only have the given room type. Allows to pass a comma-separated list of room types.
           in: query
           items:
             type: string
           name: roomTypes
           required: false
           type: array
-        - collectionFormat: multi
-          description: "Return a list of rooms that only have the given amenity.\r\n            Allows to pass a comma-separated list of amenities."
+        - description: Return count of rooms that only have the given amenity. Allows to pass a comma-separated list of amenities.
           in: query
           items:
             type: string
           name: amenities
           required: false
           type: array
-        - collectionFormat: multi
-          description: "Return a list of rooms that only have the given view.\r\n            Allows to pass a comma-separated list of views."
+        - description: Return a count of rooms that only have the given view. Allows to pass a comma-separated list of views.
           in: query
           items:
             type: string
           name: views
           required: false
           type: array
-        - collectionFormat: multi
-          description: "Return a list of rooms that only have the given location.\r\n            Allows to pass a comma-separated list of locations."
+        - description: Return a count of rooms that only have the given location. Allows to pass a comma-separated list of locations.
           in: query
           items:
             type: string
           name: locations
           required: false
           type: array
+        - description: Amount of items to skip.
+          format: int32
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Amount of items to select.
+          format: int32
+          in: query
+          name: top
+          required: false
+          type: integer
+        - description: Return total amount of items for a given filter criteria.
+          enum:
+            - None
+            - AllPages
+          in: query
+          name: inlinecount
+          required: false
+          type: string
       produces:
         - application/json
         - text/json
@@ -294,8 +288,6 @@ paths:
             $ref: '#/definitions/RoomListResponse'
         '204':
           description: There are no rooms found for the given combination of filtering and pagination criteria.
-          schema:
-            $ref: '#/definitions/RoomListResponse'
         '500':
           description: "We couldn't return the representation due to an internal server error."
         '503':
@@ -326,7 +318,7 @@ paths:
           name: hotelId
           required: true
           type: integer
-        - description: "Return a count of rooms that only have the given ocuppancy status.\r\n            Allows to pass a comma-separated list of occupancy statuses."
+        - description: Return a list of rooms that only have the given ocuppancy status.
           enum:
             - Occupied
             - Vacant
@@ -334,16 +326,7 @@ paths:
           name: occupancy
           required: false
           type: string
-        - collectionFormat: multi
-          description: "Return a coun of rooms that only have the given room type.\r\n            Allows to pass a comma-separated list of room types."
-          in: query
-          items:
-            type: string
-          name: roomTypes
-          required: false
-          type: array
-        - collectionFormat: multi
-          description: "Return a count of rooms that only have the given room condition status.\r\n            Allows to pass a comma-separated list of room condition statuses."
+        - description: Return a list of rooms that only have the given room condition status.
           in: query
           items:
             enum:
@@ -354,8 +337,7 @@ paths:
           name: conditions
           required: false
           type: array
-        - collectionFormat: multi
-          description: "Return a count of rooms that only have the given maintenance status.\r\n            Allows to pass a comma-separated list of room maintenance statuses."
+        - description: Return a list of rooms that only have the given maintenance status.
           in: query
           items:
             enum:
@@ -368,24 +350,28 @@ paths:
           name: maintenances
           required: false
           type: array
-        - collectionFormat: multi
-          description: "Return count of rooms that only have the given amenity.\r\n            Allows to pass a comma-separated list of amenities."
+        - description: Return a count of rooms that only have the given room type. Allows to pass a comma-separated list of room types.
+          in: query
+          items:
+            type: string
+          name: roomTypes
+          required: false
+          type: array
+        - description: Return count of rooms that only have the given amenity. Allows to pass a comma-separated list of amenities.
           in: query
           items:
             type: string
           name: amenities
           required: false
           type: array
-        - collectionFormat: multi
-          description: "Return a count of rooms that only have the given view.\r\n            Allows to pass a comma-separated list of views."
+        - description: Return a count of rooms that only have the given view. Allows to pass a comma-separated list of views.
           in: query
           items:
             type: string
           name: views
           required: false
           type: array
-        - collectionFormat: multi
-          description: "Return a count of rooms that only have the given location.\r\n            Allows to pass a comma-separated list of locations."
+        - description: Return a count of rooms that only have the given location. Allows to pass a comma-separated list of locations.
           in: query
           items:
             type: string
@@ -405,6 +391,117 @@ paths:
         '503':
           description: The server is currently unavailable. Please try later.
       summary: Get total rooms count that match the given filter criteria.
+      tags:
+        - Room
+  '/api/hotel/v0/hotels/{hotelId}/rooms/available':
+    get:
+      consumes: []
+      deprecated: false
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: Specifies the hotel id to process.
+          format: int32
+          in: path
+          name: hotelId
+          required: true
+          type: integer
+        - description: Specifies a starting date for a desired room availability range.
+          format: date-time
+          in: query
+          name: from
+          required: true
+          type: string
+        - description: Specifies a finishing date for a desired room availability range.
+          format: date-time
+          in: query
+          name: to
+          required: true
+          type: string
+        - description: Specifies number of adults. The default value is 1.
+          format: byte
+          in: query
+          name: adults
+          required: false
+          type: string
+        - description: "Specifies if the endpoint should return rooms that are out of service for a requested date range.\r\n            The default value is false."
+          in: query
+          name: includeOutOfService
+          required: false
+          type: boolean
+        - description: Return a count of rooms that only have the given room type. Allows to pass a comma-separated list of room types.
+          in: query
+          items:
+            type: string
+          name: roomTypes
+          required: false
+          type: array
+        - description: Return count of rooms that only have the given amenity. Allows to pass a comma-separated list of amenities.
+          in: query
+          items:
+            type: string
+          name: amenities
+          required: false
+          type: array
+        - description: Return a count of rooms that only have the given view. Allows to pass a comma-separated list of views.
+          in: query
+          items:
+            type: string
+          name: views
+          required: false
+          type: array
+        - description: Return a count of rooms that only have the given location. Allows to pass a comma-separated list of locations.
+          in: query
+          items:
+            type: string
+          name: locations
+          required: false
+          type: array
+        - description: Amount of items to skip.
+          format: int32
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Amount of items to select.
+          format: int32
+          in: query
+          name: top
+          required: false
+          type: integer
+        - description: Return total amount of items for a given filter criteria.
+          enum:
+            - None
+            - AllPages
+          in: query
+          name: inlinecount
+          required: false
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: The total room count for a given filter criteria.
+          schema:
+            $ref: '#/definitions/RoomListResponse'
+        '204':
+          description: There are no rooms found for the given combination of filtering criteria.
+        '500':
+          description: "We couldn't return the representation due to an internal server error."
+        '503':
+          description: The server is currently unavailable. Please try later.
+      summary: Request available rooms using a given criteria.
       tags:
         - Room
   '/api/hotel/v0/hotels/{hotelId}/rooms/{roomNumber}':
@@ -543,6 +640,96 @@ definitions:
         $ref: '#/definitions/RoomStatus'
         description: Contains information about room status.
     type: object
+  GetAvailableRoomsRequest:
+    properties:
+      adults:
+        description: Specifies number of adults. The default value is 1.
+        format: byte
+        type: string
+      amenities:
+        description: Return count of rooms that only have the given amenity. Allows to pass a comma-separated list of amenities.
+        items:
+          type: string
+        type: array
+      from:
+        description: Specifies a starting date for a desired room availability range.
+        format: date-time
+        type: string
+      includeOutOfService:
+        description: "Specifies if the endpoint should return rooms that are out of service for a requested date range.\r\n            The default value is false."
+        type: boolean
+      locations:
+        description: Return a count of rooms that only have the given location. Allows to pass a comma-separated list of locations.
+        items:
+          type: string
+        type: array
+      roomTypes:
+        description: Return a count of rooms that only have the given room type. Allows to pass a comma-separated list of room types.
+        items:
+          type: string
+        type: array
+      to:
+        description: Specifies a finishing date for a desired room availability range.
+        format: date-time
+        type: string
+      views:
+        description: Return a count of rooms that only have the given view. Allows to pass a comma-separated list of views.
+        items:
+          type: string
+        type: array
+    required:
+      - from
+      - to
+    type: object
+  GetRoomListRequest:
+    properties:
+      amenities:
+        description: Return count of rooms that only have the given amenity. Allows to pass a comma-separated list of amenities.
+        items:
+          type: string
+        type: array
+      conditions:
+        description: Return a list of rooms that only have the given room condition status.
+        items:
+          enum:
+            - CleanNotInspected
+            - Clean
+            - Dirty
+          type: string
+        type: array
+      locations:
+        description: Return a count of rooms that only have the given location. Allows to pass a comma-separated list of locations.
+        items:
+          type: string
+        type: array
+      maintenances:
+        description: Return a list of rooms that only have the given maintenance status.
+        items:
+          enum:
+            - NotSet
+            - None
+            - OutOfInventory
+            - OutOfOrder
+            - OutOfService
+          type: string
+        type: array
+      occupancy:
+        description: Return a list of rooms that only have the given ocuppancy status.
+        enum:
+          - Occupied
+          - Vacant
+        type: string
+      roomTypes:
+        description: Return a count of rooms that only have the given room type. Allows to pass a comma-separated list of room types.
+        items:
+          type: string
+        type: array
+      views:
+        description: Return a count of rooms that only have the given view. Allows to pass a comma-separated list of views.
+        items:
+          type: string
+        type: array
+    type: object
   Hotel:
     properties:
       city:
@@ -579,6 +766,27 @@ definitions:
       url:
         type: string
     type: object
+  JsonPatchOperationRequest:
+    description: Represents JSON Patch request
+    properties:
+      op:
+        enum:
+          - Add
+          - Remove
+          - Replace
+          - Move
+          - Copy
+          - Test
+        type: string
+      path:
+        type: string
+      value:
+        $ref: '#/definitions/Object'
+    required:
+      - op
+      - path
+      - value
+    type: object
   LinkObject:
     description: A Link Object represents a hyperlink from the containing resource to a URI.
     properties:
@@ -608,6 +816,26 @@ definitions:
         type: string
     required:
       - href
+    type: object
+  Object:
+    properties: {}
+    type: object
+  PagedDataRequest:
+    properties:
+      inlinecount:
+        description: Return total amount of items for a given filter criteria.
+        enum:
+          - None
+          - AllPages
+        type: string
+      skip:
+        description: Amount of items to skip.
+        format: int32
+        type: integer
+      top:
+        description: Amount of items to select.
+        format: int32
+        type: integer
     type: object
   Room:
     description: Represents a room for a property.
@@ -715,8 +943,6 @@ definitions:
         items:
           $ref: '#/definitions/EmbeddedRoomWithStatus'
         type: array
-    required:
-      - rooms
     type: object
   RoomMaintenance:
     properties:

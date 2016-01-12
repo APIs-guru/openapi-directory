@@ -3,6 +3,7 @@ schemes:
   - https
 host: reverb.com
 basePath: /api
+x-hasEquivalentPaths: true
 info:
   contact:
     email: integrations@reverb.com
@@ -74,6 +75,41 @@ paths:
       summary: Create an account.
       tags:
         - accounts
+  /articles:
+    get:
+      description: Find listings related to an article
+      parameters:
+        - description: Number of featured articles to exclude
+          in: query
+          name: exclude_featured
+          type: integer
+      responses:
+        default:
+          description: Unexpected error
+      summary: Find listings related to an article
+      tags:
+        - articles
+  /articles/featured:
+    get:
+      responses:
+        default:
+          description: Unexpected error
+      tags:
+        - articles
+  '/articles/{slug}':
+    get:
+      description: Display a single article
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Display a single article
+      tags:
+        - articles
   '/articles/{slug}/related-listings':
     get:
       description: Find listings related to an article
@@ -185,6 +221,79 @@ paths:
       summary: Autosuggest terms for searches
       tags:
         - autosuggest
+  /cart:
+    get:
+      description: Get all cart items
+      responses:
+        default:
+          description: Unexpected error
+      summary: Get all cart items
+      tags:
+        - cart
+  '/cart/move_to_watch_list/{cart_item_id}':
+    post:
+      description: Remove a cart item and add it to watch list
+      parameters:
+        - in: path
+          name: cart_item_id
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Remove a cart item and add it to watch list
+      tags:
+        - cart
+  '/cart/{cart_item_id}':
+    put:
+      description: Update cart item details
+      parameters:
+        - in: path
+          name: cart_item_id
+          required: true
+          type: string
+        - description: the content of the request
+          in: body
+          name: body
+          schema:
+            properties:
+              quantity:
+                description: Requested Quantity
+                type: integer
+            type: object
+      responses:
+        default:
+          description: Unexpected error
+      summary: Update cart item details
+      tags:
+        - cart
+  '/cart/{product_id}':
+    delete:
+      description: Remove a product from the cart
+      parameters:
+        - in: path
+          name: product_id
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Remove a product from the cart
+      tags:
+        - cart
+    post:
+      description: Add product to the cart
+      parameters:
+        - in: path
+          name: product_id
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Add product to the cart
+      tags:
+        - cart
   /categories:
     get:
       description: List of supported product categories
@@ -590,7 +699,7 @@ paths:
                   type: string
                 type: array
               condition:
-                description: 'Condition name (Brand New, Very Good, etc)'
+                description: 'Condition name (values: Non Functioning,Poor,Fair,Good,Very Good,Excellent,Mint,Mint (with inventory),Like New,Brand New)'
                 type: string
               description:
                 description: Product description. Please keep formatting to a minimum.
@@ -873,6 +982,20 @@ paths:
       summary: Start a conversation with a seller
       tags:
         - listings
+  '/listings/{listing_id}/sales':
+    get:
+      description: See all sales that include a listing.
+      parameters:
+        - in: path
+          name: listing_id
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: See all sales that include a listing.
+      tags:
+        - listings
   '/listings/{slug}':
     delete:
       description: Delete a draft listing. Cannot be used on non-drafts.
@@ -918,7 +1041,7 @@ paths:
                   type: string
                 type: array
               condition:
-                description: 'Condition name (Brand New, Very Good, etc)'
+                description: 'Condition name (values: Non Functioning,Poor,Fair,Good,Very Good,Excellent,Mint,Mint (with inventory),Like New,Brand New)'
                 type: string
               description:
                 description: Product description. Please keep formatting to a minimum.
@@ -2191,6 +2314,15 @@ paths:
       summary: "Add feedback about an order's seller"
       tags:
         - orders
+  /payment_methods:
+    get:
+      description: Get list of payment methods
+      responses:
+        default:
+          description: Unexpected error
+      summary: Get list of payment methods
+      tags:
+        - payment_methods
   /priceguide:
     get:
       description: Search the Price Guide
@@ -2227,6 +2359,10 @@ paths:
           name: id
           required: true
           type: string
+        - default: used
+          in: query
+          name: condition
+          type: string
       responses:
         default:
           description: Unexpected error
@@ -2255,6 +2391,70 @@ paths:
       summary: Get a summary of transactions for a given price guide
       tags:
         - priceguide
+  /sales/reverb:
+    get:
+      description: View upcoming and live Reverb official sales.
+      responses:
+        default:
+          description: Unexpected error
+      summary: View upcoming and live Reverb official sales.
+      tags:
+        - sales
+  /sales/seller:
+    get:
+      description: View your created sales.
+      responses:
+        default:
+          description: Unexpected error
+      summary: View your created sales.
+      tags:
+        - sales
+  '/sales/{sale_id}/listings':
+    delete:
+      description: Remove a listing from a sale
+      parameters:
+        - in: path
+          name: sale_id
+          required: true
+          type: string
+        - description: Listing IDs to be removed from the sale.
+          in: query
+          items:
+            type: string
+          name: listing_ids
+          type: array
+      responses:
+        default:
+          description: Unexpected error
+      summary: Remove a listing from a sale
+      tags:
+        - sales
+    post:
+      description: Add listings to a sale
+      parameters:
+        - in: path
+          name: sale_id
+          required: true
+          type: string
+        - description: the content of the request
+          in: body
+          name: body
+          schema:
+            properties:
+              listing_ids:
+                description: Listing IDs to be added to the sale.
+                items:
+                  type: string
+                type: array
+            required:
+              - listing_ids
+            type: object
+      responses:
+        default:
+          description: Unexpected error
+      summary: Add listings to a sale
+      tags:
+        - sales
   /shipping/providers:
     get:
       description: List of supported shipping providers
@@ -2555,7 +2755,7 @@ paths:
           schema:
             properties:
               topic:
-                description: 'Valid values: listings/update, orders/create'
+                description: 'Valid values: listings/update, orders/create, orders/update, payments/create, payments/update'
                 type: string
               url:
                 type: string

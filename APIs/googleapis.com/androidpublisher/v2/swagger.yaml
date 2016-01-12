@@ -2246,7 +2246,7 @@ definitions:
       status:
         type: string
       subscriptionPeriod:
-        description: 'Subscription period, specified in ISO 8601 format. Acceptable values are "P1W" (one week), "P1M" (one month) and "P1Y" (one year).'
+        description: 'Subscription period, specified in ISO 8601 format. Acceptable values are "P1W" (one week), "P1M" (one month), "P3M" (three months), "P6M" (six months), and "P1Y" (one year).'
         type: string
       trialPeriod:
         description: 'Trial period, specified in ISO 8601 format. Acceptable values are anything between "P7D" (seven days) and "P999D" (999 days). Seasonal subscriptions cannot have a trial period.'
@@ -2418,11 +2418,25 @@ definitions:
         format: int64
         type: string
     type: object
+  Prorate:
+    properties:
+      defaultPrice:
+        $ref: '#/definitions/Price'
+        description: "Default price cannot be zero and must be less than the full subscription price. Default price is always in the developer's Checkout merchant currency. Targeted countries have their prices set automatically based on the default_price."
+      start:
+        $ref: '#/definitions/MonthDay'
+        description: Defines the first day on which the price takes effect.
+    type: object
   Season:
     properties:
       end:
         $ref: '#/definitions/MonthDay'
         description: Inclusive end date of the recurrence period.
+      prorations:
+        description: Optionally present list of prorations for the season. Each proration is a one-off discounted entry into a subscription. Each proration contains the first date on which the discount is available and the new pricing information.
+        items:
+          $ref: '#/definitions/Prorate'
+        type: array
       start:
         $ref: '#/definitions/MonthDay'
         description: Inclusive start date of the recurrence period.
