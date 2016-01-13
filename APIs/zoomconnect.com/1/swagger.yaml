@@ -16,7 +16,7 @@ info:
   x-providerName: zoomconnect.com
 tags:
   - description: Core information related to your account
-    name: balance
+    name: account
   - description: Number context service
     name: lookup
   - description: Send and schedule messages
@@ -53,7 +53,38 @@ paths:
           description: Not Found
       summary: balance
       tags:
-        - balance
+        - account
+  /api/rest/v1/account/transfer:
+    post:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: 'Transfers credits between two users in the same team. The <i>account email address</i> fields as well as the <i>number of credits to transfer</i> are required. '
+      parameters:
+        - description: request
+          in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WebServiceTransferCreditsRequest'
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Description was not specified
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: transfer
+      tags:
+        - account
   /api/rest/v1/contacts/all:
     get:
       consumes:
@@ -1021,3 +1052,13 @@ definitions:
         items:
           $ref: '#/definitions/WebServiceTemplate'
         type: array
+  WebServiceTransferCreditsRequest:
+    description: WebServiceTransferCreditsRequest
+    properties:
+      numberOfCreditsToTransfer:
+        format: int32
+        type: integer
+      transferFromEmailAddress:
+        type: string
+      transferToEmailAddress:
+        type: string

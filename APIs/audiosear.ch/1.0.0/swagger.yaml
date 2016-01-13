@@ -142,6 +142,16 @@ paths:
           name: 'filters[network]'
           required: false
           type: string
+        - description: 'Another example filter, by show id.'
+          in: query
+          name: 'filters[show_id]'
+          required: false
+          type: string
+        - description: 'Another example filter, by show title.'
+          in: query
+          name: 'filters[show_title]'
+          required: false
+          type: string
         - description: 'Sort results by any field value. The default is by the relevancy score (<b>_score</b>). Must be paired with <b>sort_order</b>.'
           in: query
           name: sort_by

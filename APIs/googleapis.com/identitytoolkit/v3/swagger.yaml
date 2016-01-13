@@ -289,6 +289,30 @@ paths:
             $ref: '#/definitions/SetAccountInfoResponse'
       tags:
         - relyingparty
+  /signOutUser:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sign out user.
+      operationId: identitytoolkit.relyingparty.signOutUser
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartySignOutUserRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartySignOutUserResponse'
+      tags:
+        - relyingparty
   /uploadAccount:
     parameters:
       - $ref: '#/parameters/alt'
@@ -335,6 +359,30 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/VerifyAssertionResponse'
+      tags:
+        - relyingparty
+  /verifyCustomToken:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Verifies the developer asserted ID token.
+      operationId: identitytoolkit.relyingparty.verifyCustomToken
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartyVerifyCustomTokenRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/VerifyCustomTokenResponse'
       tags:
         - relyingparty
   /verifyPassword:
@@ -585,6 +633,9 @@ definitions:
       idToken:
         description: The GITKit token of the authenticated user.
         type: string
+      instanceId:
+        description: Instance id token of the app.
+        type: string
       localId:
         description: The local ID of the user.
         type: string
@@ -605,6 +656,23 @@ definitions:
       validSince:
         description: Timestamp in seconds for valid login token.
         format: int64
+        type: string
+    type: object
+  IdentitytoolkitRelyingpartySignOutUserRequest:
+    description: Request to sign out user.
+    properties:
+      instanceId:
+        description: Instance id token of the app.
+        type: string
+      localId:
+        description: The local ID of the user.
+        type: string
+    type: object
+  IdentitytoolkitRelyingpartySignOutUserResponse:
+    description: Response of signing out user.
+    properties:
+      localId:
+        description: The local ID of the user.
         type: string
     type: object
   IdentitytoolkitRelyingpartyUploadAccountRequest:
@@ -638,6 +706,9 @@ definitions:
   IdentitytoolkitRelyingpartyVerifyAssertionRequest:
     description: Request to verify the IDP assertion.
     properties:
+      instanceId:
+        description: Instance id token of the app.
+        type: string
       pendingIdToken:
         description: The GITKit token for the non-trusted IDP pending to be confirmed by the user.
         type: string
@@ -654,6 +725,16 @@ definitions:
         description: 'Session ID, which should match the one in previous createAuthUri request.'
         type: string
     type: object
+  IdentitytoolkitRelyingpartyVerifyCustomTokenRequest:
+    description: Request to verify a custom token
+    properties:
+      instanceId:
+        description: Instance id token of the app.
+        type: string
+      token:
+        description: The custom token to verify
+        type: string
+    type: object
   IdentitytoolkitRelyingpartyVerifyPasswordRequest:
     description: Request to verify the password.
     properties:
@@ -665,6 +746,9 @@ definitions:
         type: string
       email:
         description: The email of the user.
+        type: string
+      instanceId:
+        description: Instance id token of the app.
         type: string
       password:
         description: The password inputed by the user.
@@ -946,6 +1030,17 @@ definitions:
         items:
           type: string
         type: array
+    type: object
+  VerifyCustomTokenResponse:
+    description: Response from verifying a custom token
+    properties:
+      idToken:
+        description: The GITKit token for authenticated user.
+        type: string
+      kind:
+        default: 'identitytoolkit#VerifyCustomTokenResponse'
+        description: 'The fixed string "identitytoolkit#VerifyCustomTokenResponse".'
+        type: string
     type: object
   VerifyPasswordResponse:
     description: Request of verifying the password.
