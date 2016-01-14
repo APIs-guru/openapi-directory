@@ -2473,6 +2473,9 @@ definitions:
       productId:
         description: 'A string of the form app:<package name>. For example, app:com.google.android.gm represents the Gmail app.'
         type: string
+      productPricing:
+        description: 'Whether this product is free, free with in-app purchases, or paid.'
+        type: string
       requiresContainerApp:
         description: Whether this app can only be installed on devices using the Android for Work container app.
         type: boolean

@@ -76,6 +76,7 @@ paths:
             body:
               q: 'E=mc^{2}'
             params:
+              domain: wikimedia.org
               type: tex
           response:
             body:
@@ -290,6 +291,7 @@ paths:
       x-amples:
         - request:
             params:
+              domain: en.wikipedia.org
               title: Foobar
           response:
             body:
@@ -596,6 +598,7 @@ paths:
       x-amples:
         - request:
             params:
+              domain: en.wikipedia.org
               title: Foobar
           response:
             body: '/^<!DOCTYPE html>.*/'
@@ -1138,10 +1141,13 @@ paths:
       x-amples:
         - request:
             params:
+              domain: en.wikipedia.org
               title: Barack_Obama
           response:
             body:
+              dir: ltr
               extract: /.+/
+              lang: en
               thumbnail:
                 source: '/^https:/'
             headers:
@@ -1181,19 +1187,20 @@ paths:
                 exsentences: 5
                 piprop: thumbnail
                 pithumbsize: 320
-                prop: 'extracts|pageimages'
+                prop: 'info|extracts|pageimages'
                 redirects: true
                 titles: '{{rev_info.body.title}}'
               method: post
               uri: '/{domain}/sys/action/query'
             response:
               body:
+                dir: '{{extract.body.items[0].pagelanguagedir}}'
                 extract: '{{extract.body.items[0].extract}}'
+                lang: '{{extract.body.items[0].pagelanguagehtmlcode}}'
                 thumbnail: '{{httpsSource(extract.body.items[0].thumbnail)}}'
                 title: '{{extract.body.items[0].title}}'
               headers:
                 content-type: application/json
-                etag: '"{{rev_info.body.rev}}/{{rev_info.body.tid}}"'
         - store_and_return:
             request:
               body: '{{extract.body}}'
@@ -1205,7 +1212,7 @@ paths:
               headers:
                 cache-control: '{{options.response_cache-control}}'
                 content-type: '{{extract.headers.content-type}}'
-                etag: '{{extract.headers.etag}}'
+                etag: '{{store_and_return.headers.etag}}'
               status: 200
       x-setup-handler:
         - init:
@@ -1276,6 +1283,7 @@ paths:
       x-amples:
         - request:
             params:
+              domain: en.wikipedia.org
               title: Foobar
           response:
             body:
@@ -1952,6 +1960,7 @@ paths:
               body_only: true
               wikitext: == Heading ==
             params:
+              domain: en.wikipedia.org
               title: Foobar
           response:
             body: "/^<h2.*> Heading <\\/h2>$/"
@@ -2039,6 +2048,7 @@ paths:
               body_only: true
               wikitext: == Heading ==
             params:
+              domain: en.wikipedia.org
               title: Foobar
           response:
             body: "/^<h2.*> Heading <\\/h2>$/"
@@ -2131,6 +2141,7 @@ paths:
               body_only: true
               wikitext: == Heading ==
             params:
+              domain: en.wikipedia.org
               title: Foobar
           response:
             body: "/^<h2.*> Heading <\\/h2>$/"
@@ -2256,8 +2267,16 @@ definitions:
       - items
   summary:
     properties:
+      dir:
+        description: The page language direction code
+        example: ltr
+        type: string
       extract:
         description: First several sentences of an article in plain text
+        type: string
+      lang:
+        description: The page language code
+        example: en
         type: string
       thumbnail:
         properties:
@@ -2281,9 +2300,10 @@ definitions:
     required:
       - title
       - extract
+      - lang
+      - dir
     type: object
-x-default-params:
-  domain: en.wikipedia.org
+x-default-params: {}
 x-host-basePath: /api/rest_v1
 x-modules:
   /:

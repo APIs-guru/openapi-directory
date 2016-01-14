@@ -223,7 +223,7 @@ paths:
       description: Gets the access control policy for an Organization resource. May be empty if no such policy or resource exists.
       operationId: cloudresourcemanager.organizations.getIamPolicy
       parameters:
-        - description: 'REQUIRED: The resource for which policy is being requested. `resource` is usually specified as a path, such as, `projects/{project}/zones/{zone}/disks/{disk}`. The format for the path specified in this value is resource specific and is specified in the `getIamPolicy` documentation.'
+        - description: 'REQUIRED: The resource for which the policy is being requested. `resource` is usually specified as a path, such as `projects/*project*/zones/*zone*/disks/*disk*`. The format for the path specified in this value is resource specific and is specified in the `getIamPolicy` documentation.'
           in: path
           name: resource
           required: true
@@ -263,7 +263,7 @@ paths:
       description: Sets the access control policy on an Organization resource. Replaces any existing policy.
       operationId: cloudresourcemanager.organizations.setIamPolicy
       parameters:
-        - description: 'REQUIRED: The resource for which policy is being specified. `resource` is usually specified as a path, such as, `projects/{project}/zones/{zone}/disks/{disk}`. The format for the path specified in this value is resource specific and is specified in the `setIamPolicy` documentation.'
+        - description: 'REQUIRED: The resource for which the policy is being specified. `resource` is usually specified as a path, such as `projects/*project*/zones/*zone*/disks/*disk*`. The format for the path specified in this value is resource specific and is specified in the `setIamPolicy` documentation.'
           in: path
           name: resource
           required: true
@@ -301,7 +301,7 @@ paths:
       description: Returns permissions that a caller has on the specified Organization.
       operationId: cloudresourcemanager.organizations.testIamPermissions
       parameters:
-        - description: 'REQUIRED: The resource for which policy detail is being requested. `resource` is usually specified as a path, such as, `projects/{project}/zones/{zone}/disks/{disk}`. The format for the path specified in this value is resource specific and is specified in the `testIamPermissions` documentation. rpc.'
+        - description: 'REQUIRED: The resource for which the policy detail is being requested. `resource` is usually specified as a path, such as `projects/*project*/zones/*zone*/disks/*disk*`. The format for the path specified in this value is resource specific and is specified in the `testIamPermissions` documentation.'
           in: path
           name: resource
           required: true
@@ -514,7 +514,7 @@ paths:
       description: Returns the IAM access control policy for the specified Project. Permission is denied if the policy or the resource does not exist.
       operationId: cloudresourcemanager.projects.getIamPolicy
       parameters:
-        - description: 'REQUIRED: The resource for which policy is being requested. `resource` is usually specified as a path, such as, `projects/{project}/zones/{zone}/disks/{disk}`. The format for the path specified in this value is resource specific and is specified in the `getIamPolicy` documentation.'
+        - description: 'REQUIRED: The resource for which the policy is being requested. `resource` is usually specified as a path, such as `projects/*project*/zones/*zone*/disks/*disk*`. The format for the path specified in this value is resource specific and is specified in the `getIamPolicy` documentation.'
           in: path
           name: resource
           required: true
@@ -554,7 +554,7 @@ paths:
       description: 'Sets the IAM access control policy for the specified Project. Replaces any existing policy. The following constraints apply when using `setIamPolicy()`: + Project currently supports only `user:{emailid}` and `serviceAccount:{emailid}` members in a `Binding` of a `Policy`. + To be added as an `owner`, a user must be invited via Cloud Platform console and must accept the invitation. + Members cannot be added to more than one role in the same policy. + There must be at least one owner who has accepted the Terms of Service (ToS) agreement in the policy. Calling `setIamPolicy()` to to remove the last ToS-accepted owner from the policy will fail. + Calling this method requires enabling the App Engine Admin API. Note: Removing service accounts from policies or changing their roles can render services completely inoperable. It is important to understand how the service account is being used before removing or updating its roles.'
       operationId: cloudresourcemanager.projects.setIamPolicy
       parameters:
-        - description: 'REQUIRED: The resource for which policy is being specified. `resource` is usually specified as a path, such as, `projects/{project}/zones/{zone}/disks/{disk}`. The format for the path specified in this value is resource specific and is specified in the `setIamPolicy` documentation.'
+        - description: 'REQUIRED: The resource for which the policy is being specified. `resource` is usually specified as a path, such as `projects/*project*/zones/*zone*/disks/*disk*`. The format for the path specified in this value is resource specific and is specified in the `setIamPolicy` documentation.'
           in: path
           name: resource
           required: true
@@ -592,7 +592,7 @@ paths:
       description: Returns permissions that a caller has on the specified Project.
       operationId: cloudresourcemanager.projects.testIamPermissions
       parameters:
-        - description: 'REQUIRED: The resource for which policy detail is being requested. `resource` is usually specified as a path, such as, `projects/{project}/zones/{zone}/disks/{disk}`. The format for the path specified in this value is resource specific and is specified in the `testIamPermissions` documentation. rpc.'
+        - description: 'REQUIRED: The resource for which the policy detail is being requested. `resource` is usually specified as a path, such as `projects/*project*/zones/*zone*/disks/*disk*`. The format for the path specified in this value is resource specific and is specified in the `testIamPermissions` documentation.'
           in: path
           name: resource
           required: true
@@ -750,7 +750,7 @@ definitions:
     description: Request message for `TestIamPermissions` method.
     properties:
       permissions:
-        description: "The set of permissions to check for the `resource`. Permissions with wildcards (such as '*' or 'storage.*') are not allowed."
+        description: "The set of permissions to check for the `resource`. Permissions with wildcards (such as '*' or 'storage.*') are not allowed. For more information see IAM Overview."
         items:
           type: string
         type: array
