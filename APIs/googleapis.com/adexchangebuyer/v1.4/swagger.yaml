@@ -495,414 +495,6 @@ paths:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - creatives
-  /marketplaceOffers/search:
-    get:
-      description: Gets the requested negotiation.
-      operationId: adexchangebuyer.marketplaceoffers.search
-      parameters:
-        - description: The pql query used to query for offers.
-          in: query
-          name: pqlQuery
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/GetOffersResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - marketplaceoffers
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/marketplaceOffers/{offerId}':
-    get:
-      description: Gets the requested negotiation.
-      operationId: adexchangebuyer.marketplaceoffers.get
-      parameters:
-        - description: The offerId for the offer to get the head revision for.
-          in: path
-          name: offerId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/MarketplaceOffer'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - marketplaceoffers
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  /marketplaceOrders/insert:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Create the given list of orders
-      operationId: adexchangebuyer.marketplaceorders.insert
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CreateOrdersRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/CreateOrdersResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - marketplaceorders
-  /marketplaceOrders/search:
-    get:
-      description: Search for orders using pql query
-      operationId: adexchangebuyer.marketplaceorders.search
-      parameters:
-        - description: Query string to retrieve specific orders.
-          in: query
-          name: pqlQuery
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/GetOrdersResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - marketplaceorders
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/marketplaceOrders/{orderId}':
-    get:
-      description: Get an order given its id
-      operationId: adexchangebuyer.marketplaceorders.get
-      parameters:
-        - description: Id of the order to retrieve.
-          in: path
-          name: orderId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/MarketplaceOrder'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - marketplaceorders
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/marketplaceOrders/{orderId}/deals':
-    get:
-      description: List all the deals for a given order
-      operationId: adexchangebuyer.marketplacedeals.list
-      parameters:
-        - description: The orderId to get deals for.
-          in: path
-          name: orderId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/GetOrderDealsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - marketplacedeals
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/marketplaceOrders/{orderId}/deals/delete':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Delete the specified deals from the order
-      operationId: adexchangebuyer.marketplacedeals.delete
-      parameters:
-        - description: The orderId to delete deals from.
-          in: path
-          name: orderId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/DeleteOrderDealsRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/DeleteOrderDealsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - marketplacedeals
-  '/marketplaceOrders/{orderId}/deals/insert':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Add new deals for the specified order
-      operationId: adexchangebuyer.marketplacedeals.insert
-      parameters:
-        - description: OrderId for which deals need to be added.
-          in: path
-          name: orderId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AddOrderDealsRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AddOrderDealsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - marketplacedeals
-  '/marketplaceOrders/{orderId}/deals/update':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Replaces all the deals in the order with the passed in deals
-      operationId: adexchangebuyer.marketplacedeals.update
-      parameters:
-        - description: The orderId to edit deals on.
-          in: path
-          name: orderId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/EditAllOrderDealsRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/EditAllOrderDealsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - marketplacedeals
-  '/marketplaceOrders/{orderId}/notes':
-    get:
-      description: Get all the notes associated with an order
-      operationId: adexchangebuyer.marketplacenotes.list
-      parameters:
-        - description: The orderId to get notes for.
-          in: path
-          name: orderId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/GetOrderNotesResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - marketplacenotes
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/marketplaceOrders/{orderId}/notes/insert':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Add notes to the order
-      operationId: adexchangebuyer.marketplacenotes.insert
-      parameters:
-        - description: The orderId to add notes for.
-          in: path
-          name: orderId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AddOrderNotesRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AddOrderNotesResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - marketplacenotes
-  '/marketplaceOrders/{orderId}/{revisionNumber}/{updateAction}':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    patch:
-      description: Update the given order. This method supports patch semantics.
-      operationId: adexchangebuyer.marketplaceorders.patch
-      parameters:
-        - description: The order id to update.
-          in: path
-          name: orderId
-          required: true
-          type: string
-        - description: 'The last known revision number to update. If the head revision in the marketplace database has since changed, an error will be thrown. The caller should then fetch the lastest order at head revision and retry the update at that revision.'
-          in: path
-          name: revisionNumber
-          required: true
-          type: string
-        - description: The proposed action to take on the order.
-          enum:
-            - accept
-            - cancel
-            - propose
-            - unknownAction
-            - updateFinalized
-          in: path
-          name: updateAction
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/MarketplaceOrder'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/MarketplaceOrder'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - marketplaceorders
-    put:
-      description: Update the given order
-      operationId: adexchangebuyer.marketplaceorders.update
-      parameters:
-        - description: The order id to update.
-          in: path
-          name: orderId
-          required: true
-          type: string
-        - description: 'The last known revision number to update. If the head revision in the marketplace database has since changed, an error will be thrown. The caller should then fetch the lastest order at head revision and retry the update at that revision.'
-          in: path
-          name: revisionNumber
-          required: true
-          type: string
-        - description: The proposed action to take on the order.
-          enum:
-            - accept
-            - cancel
-            - propose
-            - unknownAction
-            - updateFinalized
-          in: path
-          name: updateAction
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/MarketplaceOrder'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/MarketplaceOrder'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/adexchange.buyer'
-      tags:
-        - marketplaceorders
   /performancereport:
     get:
       description: "Retrieves the authenticated user's list of performance metrics."
@@ -1113,6 +705,414 @@ paths:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - pretargetingConfig
+  /products/search:
+    get:
+      description: Gets the requested product.
+      operationId: adexchangebuyer.products.search
+      parameters:
+        - description: The pql query used to query for products.
+          in: query
+          name: pqlQuery
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetOffersResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - products
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/products/{productId}':
+    get:
+      description: Gets the requested product by id.
+      operationId: adexchangebuyer.products.get
+      parameters:
+        - description: The id for the product to get the head revision for.
+          in: path
+          name: productId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Product'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - products
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /proposals/insert:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Create the given list of proposals
+      operationId: adexchangebuyer.proposals.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateOrdersRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CreateOrdersResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - proposals
+  /proposals/search:
+    get:
+      description: Search for proposals using pql query
+      operationId: adexchangebuyer.proposals.search
+      parameters:
+        - description: Query string to retrieve specific proposals.
+          in: query
+          name: pqlQuery
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetOrdersResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - proposals
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/proposals/{proposalId}':
+    get:
+      description: Get a proposal given its id
+      operationId: adexchangebuyer.proposals.get
+      parameters:
+        - description: Id of the proposal to retrieve.
+          in: path
+          name: proposalId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Proposal'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - proposals
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/proposals/{proposalId}/deals':
+    get:
+      description: List all the deals for a given proposal
+      operationId: adexchangebuyer.marketplacedeals.list
+      parameters:
+        - description: The proposalId to get deals for.
+          in: path
+          name: proposalId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetOrderDealsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - marketplacedeals
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/proposals/{proposalId}/deals/delete':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Delete the specified deals from the proposal
+      operationId: adexchangebuyer.marketplacedeals.delete
+      parameters:
+        - description: The proposalId to delete deals from.
+          in: path
+          name: proposalId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DeleteOrderDealsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DeleteOrderDealsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - marketplacedeals
+  '/proposals/{proposalId}/deals/insert':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Add new deals for the specified proposal
+      operationId: adexchangebuyer.marketplacedeals.insert
+      parameters:
+        - description: proposalId for which deals need to be added.
+          in: path
+          name: proposalId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AddOrderDealsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AddOrderDealsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - marketplacedeals
+  '/proposals/{proposalId}/deals/update':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Replaces all the deals in the proposal with the passed in deals
+      operationId: adexchangebuyer.marketplacedeals.update
+      parameters:
+        - description: The proposalId to edit deals on.
+          in: path
+          name: proposalId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/EditAllOrderDealsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/EditAllOrderDealsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - marketplacedeals
+  '/proposals/{proposalId}/notes':
+    get:
+      description: Get all the notes associated with a proposal
+      operationId: adexchangebuyer.marketplacenotes.list
+      parameters:
+        - description: The proposalId to get notes for.
+          in: path
+          name: proposalId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetOrderNotesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - marketplacenotes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/proposals/{proposalId}/notes/insert':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Add notes to the proposal
+      operationId: adexchangebuyer.marketplacenotes.insert
+      parameters:
+        - description: The proposalId to add notes for.
+          in: path
+          name: proposalId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AddOrderNotesRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AddOrderNotesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - marketplacenotes
+  '/proposals/{proposalId}/{revisionNumber}/{updateAction}':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Update the given proposal. This method supports patch semantics.
+      operationId: adexchangebuyer.proposals.patch
+      parameters:
+        - description: The proposal id to update.
+          in: path
+          name: proposalId
+          required: true
+          type: string
+        - description: 'The last known revision number to update. If the head revision in the marketplace database has since changed, an error will be thrown. The caller should then fetch the latest proposal at head revision and retry the update at that revision.'
+          in: path
+          name: revisionNumber
+          required: true
+          type: string
+        - description: The proposed action to take on the proposal.
+          enum:
+            - accept
+            - cancel
+            - propose
+            - unknownAction
+            - updateFinalized
+          in: path
+          name: updateAction
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Proposal'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Proposal'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - proposals
+    put:
+      description: Update the given proposal
+      operationId: adexchangebuyer.proposals.update
+      parameters:
+        - description: The proposal id to update.
+          in: path
+          name: proposalId
+          required: true
+          type: string
+        - description: 'The last known revision number to update. If the head revision in the marketplace database has since changed, an error will be thrown. The caller should then fetch the latest proposal at head revision and retry the update at that revision.'
+          in: path
+          name: revisionNumber
+          required: true
+          type: string
+        - description: The proposed action to take on the proposal.
+          enum:
+            - accept
+            - cancel
+            - propose
+            - unknownAction
+            - updateFinalized
+          in: path
+          name: updateAction
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Proposal'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Proposal'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - proposals
 definitions:
   Account:
     description: Configuration data for an Ad Exchange buyer account.
@@ -1121,6 +1121,9 @@ definitions:
         description: Your bidder locations that have distinct URLs.
         items:
           properties:
+            bidProtocol:
+              description: "The protocol that the bidder endpoint is using. Allowed values:  \n- ADX \n- OPENRTB_2_2 \n- OPENRTB_2_3 \n- OPENRTB_PROTOBUF"
+              type: string
             maximumQps:
               description: The maximum queries per second the Ad Exchange will send.
               format: int32
@@ -1180,23 +1183,23 @@ definitions:
         items:
           $ref: '#/definitions/MarketplaceDeal'
         type: array
-      orderRevisionNumber:
-        description: The last known order revision number.
+      proposalRevisionNumber:
+        description: The last known proposal revision number.
         format: int64
         type: string
       updateAction:
-        description: Indicates an optional action to take on the order
+        description: Indicates an optional action to take on the proposal
         type: string
     type: object
   AddOrderDealsResponse:
     properties:
       deals:
-        description: List of deals added (in the same order as passed in the request)
+        description: List of deals added (in the same proposal as passed in the request)
         items:
           $ref: '#/definitions/MarketplaceDeal'
         type: array
-      orderRevisionNumber:
-        description: The updated revision number for the order.
+      proposalRevisionNumber:
+        description: The updated revision number for the proposal.
         format: int64
         type: string
     type: object
@@ -1291,20 +1294,20 @@ definitions:
     type: object
   CreateOrdersRequest:
     properties:
-      orders:
-        description: The list of orders to create.
+      proposals:
+        description: The list of proposals to create.
         items:
-          $ref: '#/definitions/MarketplaceOrder'
+          $ref: '#/definitions/Proposal'
         type: array
       webPropertyCode:
         type: string
     type: object
   CreateOrdersResponse:
     properties:
-      orders:
-        description: The list of orders successfully created.
+      proposals:
+        description: The list of proposals successfully created.
         items:
-          $ref: '#/definitions/MarketplaceOrder'
+          $ref: '#/definitions/Proposal'
         type: array
     type: object
   Creative:
@@ -1608,7 +1611,7 @@ definitions:
         format: int64
         type: string
       guaranteedLooks:
-        description: 'Count of guaranteed looks. Required for deal, optional for offer.'
+        description: 'Count of guaranteed looks. Required for deal, optional for product.'
         format: int64
         type: string
     type: object
@@ -1634,12 +1637,12 @@ definitions:
   DeleteOrderDealsRequest:
     properties:
       dealIds:
-        description: List of deals to delete for a given order
+        description: List of deals to delete for a given proposal
         items:
           type: string
         type: array
-      orderRevisionNumber:
-        description: The last known order revision number.
+      proposalRevisionNumber:
+        description: The last known proposal revision number.
         format: int64
         type: string
       updateAction:
@@ -1648,12 +1651,12 @@ definitions:
   DeleteOrderDealsResponse:
     properties:
       deals:
-        description: List of deals deleted (in the same order as passed in the request)
+        description: List of deals deleted (in the same proposal as passed in the request)
         items:
           $ref: '#/definitions/MarketplaceDeal'
         type: array
-      orderRevisionNumber:
-        description: The updated revision number for the order.
+      proposalRevisionNumber:
+        description: The updated revision number for the proposal.
         format: int64
         type: string
     type: object
@@ -1682,41 +1685,41 @@ definitions:
   EditAllOrderDealsRequest:
     properties:
       deals:
-        description: 'List of deals to edit. Service may perform 3 different operations based on comparison of deals in this list vs deals already persisted in database: 1. Add new deal to order If a deal in this list does not exist in the order, the service will create a new deal and add it to the order. Validation will follow AddOrderDealsRequest. 2. Update existing deal in the order If a deal in this list already exist in the order, the service will update that existing deal to this new deal in the request. Validation will follow UpdateOrderDealsRequest. 3. Delete deals from the order (just need the id) If a existing deal in the order is not present in this list, the service will delete that deal from the order. Validation will follow DeleteOrderDealsRequest.'
+        description: 'List of deals to edit. Service may perform 3 different operations based on comparison of deals in this list vs deals already persisted in database: 1. Add new deal to proposal If a deal in this list does not exist in the proposal, the service will create a new deal and add it to the proposal. Validation will follow AddOrderDealsRequest. 2. Update existing deal in the proposal If a deal in this list already exist in the proposal, the service will update that existing deal to this new deal in the request. Validation will follow UpdateOrderDealsRequest. 3. Delete deals from the proposal (just need the id) If a existing deal in the proposal is not present in this list, the service will delete that deal from the proposal. Validation will follow DeleteOrderDealsRequest.'
         items:
           $ref: '#/definitions/MarketplaceDeal'
         type: array
-      order:
-        $ref: '#/definitions/MarketplaceOrder'
-        description: 'If specified, also updates the order in the batch transaction. This is useful when the order and the deals need to be updated in one transaction.'
-      orderRevisionNumber:
-        description: The last known revision number for the order.
+      proposal:
+        $ref: '#/definitions/Proposal'
+        description: 'If specified, also updates the proposal in the batch transaction. This is useful when the proposal and the deals need to be updated in one transaction.'
+      proposalRevisionNumber:
+        description: The last known revision number for the proposal.
         format: int64
         type: string
       updateAction:
-        description: Indicates an optional action to take on the order
+        description: Indicates an optional action to take on the proposal
         type: string
     type: object
   EditAllOrderDealsResponse:
     properties:
       deals:
-        description: List of all deals in the order after edit.
+        description: List of all deals in the proposal after edit.
         items:
           $ref: '#/definitions/MarketplaceDeal'
         type: array
     type: object
   GetOffersResponse:
     properties:
-      offers:
-        description: The returned list of offers.
+      products:
+        description: The returned list of products.
         items:
-          $ref: '#/definitions/MarketplaceOffer'
+          $ref: '#/definitions/Product'
         type: array
     type: object
   GetOrderDealsResponse:
     properties:
       deals:
-        description: List of deals for the order
+        description: List of deals for the proposal
         items:
           $ref: '#/definitions/MarketplaceDeal'
         type: array
@@ -1731,14 +1734,14 @@ definitions:
     type: object
   GetOrdersResponse:
     properties:
-      orders:
-        description: The list of matching orders.
+      proposals:
+        description: The list of matching proposals.
         items:
-          $ref: '#/definitions/MarketplaceOrder'
+          $ref: '#/definitions/Proposal'
         type: array
     type: object
   MarketplaceDeal:
-    description: An order can contain multiple deals. A deal contains the terms and targeting information that is used for serving.
+    description: A proposal can contain multiple deals. A deal contains the terms and targeting information that is used for serving.
     properties:
       buyerPrivateData:
         $ref: '#/definitions/PrivateData'
@@ -1749,6 +1752,9 @@ definitions:
         type: string
       creativePreApprovalPolicy:
         description: Specifies the creative pre-approval policy (buyer-readonly)
+        type: string
+      creativeSafeFrameCompatibility:
+        description: Specifies whether the creative is safeFrame compatible (buyer-readonly)
         type: string
       dealId:
         description: A unique deal=id for the deal (readonly).
@@ -1781,14 +1787,14 @@ definitions:
       name:
         description: The name of the deal. (updatable)
         type: string
-      offerId:
-        description: 'The offer-id from which this deal was created. (readonly, except on create)'
+      productId:
+        description: 'The product-id from which this deal was created. (readonly, except on create)'
         type: string
-      offerRevisionNumber:
-        description: 'The revision number of the offer that the deal was created from (readonly, except on create)'
+      productRevisionNumber:
+        description: 'The revision number of the product that the deal was created from (readonly, except on create)'
         format: int64
         type: string
-      orderId:
+      proposalId:
         type: string
       sellerContacts:
         description: Optional Seller contact information for the deal (buyer-readonly)
@@ -1835,7 +1841,7 @@ definitions:
         type: string
     type: object
   MarketplaceNote:
-    description: An order is associated with a bunch of notes which may optionally be associated with a deal and/or revision number.
+    description: A proposal is associated with a bunch of notes which may optionally be associated with a deal and/or revision number.
     properties:
       creatorRole:
         description: The role of the person (buyer/seller) creating the note. (readonly)
@@ -1853,167 +1859,17 @@ definitions:
       noteId:
         description: The unique id for the note. (readonly)
         type: string
-      orderId:
-        description: The order_id that a note is attached to. (readonly)
+      proposalId:
+        description: The proposalId that a note is attached to. (readonly)
         type: string
-      orderRevisionNumber:
-        description: 'If the note is associated with an order revision number, then store that here. (readonly, except on create)'
+      proposalRevisionNumber:
+        description: 'If the note is associated with a proposal revision number, then store that here. (readonly, except on create)'
         format: int64
         type: string
       timestampMs:
         description: The timestamp (ms since epoch) that this note was created. (readonly)
         format: int64
         type: string
-    type: object
-  MarketplaceOffer:
-    description: |-
-      An offer is segment of inventory that a seller wishes to sell. It is associated with certain terms and targeting information which helps buyer know more about the inventory. Each field in an order can have one of the following setting:
-
-      (readonly) - It is an error to try and set this field. (buyer-readonly) - Only the seller can set this field. (seller-readonly) - Only the buyer can set this field. (updatable) - The field is updatable at all times by either buyer or the seller.
-    properties:
-      creationTimeMs:
-        description: Creation time in ms. since epoch (readonly)
-        format: int64
-        type: string
-      creatorContacts:
-        description: Optional contact information for the creator of this offer. (buyer-readonly)
-        items:
-          $ref: '#/definitions/ContactInformation'
-        type: array
-      flightEndTimeMs:
-        description: The proposed end time for the deal (ms since epoch) (buyer-readonly)
-        format: int64
-        type: string
-      flightStartTimeMs:
-        description: Inventory availability dates. (times are in ms since epoch) The granularity is generally in the order of seconds. (buyer-readonly)
-        format: int64
-        type: string
-      hasCreatorSignedOff:
-        description: 'If the creator has already signed off on the offer, then the buyer can finalize the deal by accepting the offer as is. When copying to an order, if any of the terms are changed, then auto_finalize is automatically set to false.'
-        type: boolean
-      inventorySource:
-        description: 'What exchange will provide this inventory (readonly, except on create).'
-        type: string
-      kind:
-        default: 'adexchangebuyer#marketplaceOffer'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "adexchangebuyer#marketplaceOffer".'
-        type: string
-      labels:
-        description: 'Optional List of labels for the offer (optional, buyer-readonly).'
-        items:
-          $ref: '#/definitions/MarketplaceLabel'
-        type: array
-      lastUpdateTimeMs:
-        description: Time of last update in ms. since epoch (readonly)
-        format: int64
-        type: string
-      name:
-        description: The name for this offer as set by the seller. (buyer-readonly)
-        type: string
-      offerId:
-        description: The unique id for the offer (readonly)
-        type: string
-      revisionNumber:
-        description: The revision number of the offer. (readonly)
-        format: int64
-        type: string
-      seller:
-        $ref: '#/definitions/Seller'
-        description: 'Information about the seller that created this offer (readonly, except on create)'
-      sharedTargetings:
-        description: Targeting that is shared between the buyer and the seller. Each targeting criteria has a specified key and for each key there is a list of inclusion value or exclusion values. (buyer-readonly)
-        items:
-          $ref: '#/definitions/SharedTargeting'
-        type: array
-      state:
-        description: The state of the offer. (buyer-readonly)
-        type: string
-      syndicationProduct:
-        description: 'The syndication product associated with the deal. (readonly, except on create)'
-        type: string
-      terms:
-        $ref: '#/definitions/DealTerms'
-        description: The negotiable terms of the deal (buyer-readonly)
-      webPropertyCode:
-        type: string
-    type: object
-  MarketplaceOrder:
-    description: |-
-      Represents an order in the marketplace. An order is the unit of negotiation between a seller and a buyer and contains deals which are served. Each field in an order can have one of the following setting:
-
-      (readonly) - It is an error to try and set this field. (buyer-readonly) - Only the seller can set this field. (seller-readonly) - Only the buyer can set this field. (updatable) - The field is updatable at all times by either buyer or the seller.
-    properties:
-      billedBuyer:
-        $ref: '#/definitions/Buyer'
-        description: Reference to the buyer that will get billed for this order. (readonly)
-      buyer:
-        $ref: '#/definitions/Buyer'
-        description: 'Reference to the buyer on the order. (readonly, except on create)'
-      buyerContacts:
-        description: Optional contact information fort the buyer. (seller-readonly)
-        items:
-          $ref: '#/definitions/ContactInformation'
-        type: array
-      buyerPrivateData:
-        $ref: '#/definitions/PrivateData'
-        description: Private data for buyer. (hidden from seller).
-      hasBuyerSignedOff:
-        description: 'When an order is in an accepted state, indicates whether the buyer has signed off Once both sides have signed off on a deal, the order can be finalized by the seller. (seller-readonly)'
-        type: boolean
-      hasSellerSignedOff:
-        description: 'When an order is in an accepted state, indicates whether the buyer has signed off Once both sides have signed off on a deal, the order can be finalized by the seller. (buyer-readonly)'
-        type: boolean
-      inventorySource:
-        description: 'What exchange will provide this inventory (readonly, except on create).'
-        type: string
-      isRenegotiating:
-        description: True if the order is being renegotiated (readonly).
-        type: boolean
-      isSetupComplete:
-        description: 'True, if the buyside inventory setup is complete for this order. (readonly)'
-        type: boolean
-      kind:
-        default: 'adexchangebuyer#marketplaceOrder'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "adexchangebuyer#marketplaceOrder".'
-        type: string
-      labels:
-        description: List of labels associated with the order. (readonly)
-        items:
-          $ref: '#/definitions/MarketplaceLabel'
-        type: array
-      lastUpdaterOrCommentorRole:
-        description: The role of the last user that either updated the order or left a comment. (readonly)
-        type: string
-      lastUpdaterRole:
-        type: string
-      name:
-        description: The name for the order (updatable)
-        type: string
-      orderId:
-        description: The unique id of the order. (readonly).
-        type: string
-      orderState:
-        description: The current state of the order. (readonly)
-        type: string
-      originatorRole:
-        description: Indicates whether the buyer/seller created the offer.(readonly)
-        type: string
-      revisionNumber:
-        description: The revision number for the order (readonly).
-        format: int64
-        type: string
-      revisionTimeMs:
-        description: The time (ms since epoch) when the order was last revised (readonly).
-        format: int64
-        type: string
-      seller:
-        $ref: '#/definitions/Seller'
-        description: 'Reference to the seller on the order. (readonly, except on create)'
-      sellerContacts:
-        description: Optional contact information for the seller (buyer-readonly).
-        items:
-          $ref: '#/definitions/ContactInformation'
-        type: array
     type: object
   PerformanceReport:
     description: The configuration data for an Ad Exchange performance report list.
@@ -2304,11 +2160,11 @@ definitions:
         description: The currency code for the price.
         type: string
       pricingType:
-        description: The pricing type for the deal/offer.
+        description: The pricing type for the deal/product.
         type: string
     type: object
   PricePerBuyer:
-    description: 'Used to specify pricing rules for buyers/advertisers. Each PricePerBuyer in an offer can become [0,1] deals. To check if there is a PricePerBuyer for a particular buyer or buyer/advertiser pair, we look for the most specific matching rule - we first look for a rule matching the buyer and advertiser, next a rule with the buyer but an empty advertiser list, and otherwise look for a matching rule where no buyer is set.'
+    description: 'Used to specify pricing rules for buyers/advertisers. Each PricePerBuyer in an product can become [0,1] deals. To check if there is a PricePerBuyer for a particular buyer or buyer/advertiser pair, we look for the most specific matching rule - we first look for a rule matching the buyer and advertiser, next a rule with the buyer but an empty advertiser list, and otherwise look for a matching rule where no buyer is set.'
     properties:
       buyer:
         $ref: '#/definitions/Buyer'
@@ -2325,10 +2181,160 @@ definitions:
         format: byte
         type: string
     type: object
+  Product:
+    description: |-
+      A product is segment of inventory that a seller wishes to sell. It is associated with certain terms and targeting information which helps buyer know more about the inventory. Each field in a product can have one of the following setting:
+
+      (readonly) - It is an error to try and set this field. (buyer-readonly) - Only the seller can set this field. (seller-readonly) - Only the buyer can set this field. (updatable) - The field is updatable at all times by either buyer or the seller.
+    properties:
+      creationTimeMs:
+        description: Creation time in ms. since epoch (readonly)
+        format: int64
+        type: string
+      creatorContacts:
+        description: Optional contact information for the creator of this product. (buyer-readonly)
+        items:
+          $ref: '#/definitions/ContactInformation'
+        type: array
+      flightEndTimeMs:
+        description: The proposed end time for the deal (ms since epoch) (buyer-readonly)
+        format: int64
+        type: string
+      flightStartTimeMs:
+        description: Inventory availability dates. (times are in ms since epoch) The granularity is generally in the order of seconds. (buyer-readonly)
+        format: int64
+        type: string
+      hasCreatorSignedOff:
+        description: 'If the creator has already signed off on the product, then the buyer can finalize the deal by accepting the product as is. When copying to a proposal, if any of the terms are changed, then auto_finalize is automatically set to false.'
+        type: boolean
+      inventorySource:
+        description: 'What exchange will provide this inventory (readonly, except on create).'
+        type: string
+      kind:
+        default: 'adexchangebuyer#product'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "adexchangebuyer#product".'
+        type: string
+      labels:
+        description: 'Optional List of labels for the product (optional, buyer-readonly).'
+        items:
+          $ref: '#/definitions/MarketplaceLabel'
+        type: array
+      lastUpdateTimeMs:
+        description: Time of last update in ms. since epoch (readonly)
+        format: int64
+        type: string
+      name:
+        description: The name for this product as set by the seller. (buyer-readonly)
+        type: string
+      productId:
+        description: The unique id for the product (readonly)
+        type: string
+      revisionNumber:
+        description: The revision number of the product. (readonly)
+        format: int64
+        type: string
+      seller:
+        $ref: '#/definitions/Seller'
+        description: 'Information about the seller that created this product (readonly, except on create)'
+      sharedTargetings:
+        description: Targeting that is shared between the buyer and the seller. Each targeting criteria has a specified key and for each key there is a list of inclusion value or exclusion values. (buyer-readonly)
+        items:
+          $ref: '#/definitions/SharedTargeting'
+        type: array
+      state:
+        description: The state of the product. (buyer-readonly)
+        type: string
+      syndicationProduct:
+        description: 'The syndication product associated with the deal. (readonly, except on create)'
+        type: string
+      terms:
+        $ref: '#/definitions/DealTerms'
+        description: The negotiable terms of the deal (buyer-readonly)
+      webPropertyCode:
+        type: string
+    type: object
+  Proposal:
+    description: |-
+      Represents a proposal in the marketplace. A proposal is the unit of negotiation between a seller and a buyer and contains deals which are served. Each field in a proposal can have one of the following setting:
+
+      (readonly) - It is an error to try and set this field. (buyer-readonly) - Only the seller can set this field. (seller-readonly) - Only the buyer can set this field. (updatable) - The field is updatable at all times by either buyer or the seller.
+    properties:
+      billedBuyer:
+        $ref: '#/definitions/Buyer'
+        description: Reference to the buyer that will get billed for this proposal. (readonly)
+      buyer:
+        $ref: '#/definitions/Buyer'
+        description: 'Reference to the buyer on the proposal. (readonly, except on create)'
+      buyerContacts:
+        description: Optional contact information fort the buyer. (seller-readonly)
+        items:
+          $ref: '#/definitions/ContactInformation'
+        type: array
+      buyerPrivateData:
+        $ref: '#/definitions/PrivateData'
+        description: Private data for buyer. (hidden from seller).
+      hasBuyerSignedOff:
+        description: 'When an proposal is in an accepted state, indicates whether the buyer has signed off Once both sides have signed off on a deal, the proposal can be finalized by the seller. (seller-readonly)'
+        type: boolean
+      hasSellerSignedOff:
+        description: 'When an proposal is in an accepted state, indicates whether the buyer has signed off Once both sides have signed off on a deal, the proposal can be finalized by the seller. (buyer-readonly)'
+        type: boolean
+      inventorySource:
+        description: 'What exchange will provide this inventory (readonly, except on create).'
+        type: string
+      isRenegotiating:
+        description: True if the proposal is being renegotiated (readonly).
+        type: boolean
+      isSetupComplete:
+        description: 'True, if the buyside inventory setup is complete for this proposal. (readonly)'
+        type: boolean
+      kind:
+        default: 'adexchangebuyer#proposal'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "adexchangebuyer#proposal".'
+        type: string
+      labels:
+        description: List of labels associated with the proposal. (readonly)
+        items:
+          $ref: '#/definitions/MarketplaceLabel'
+        type: array
+      lastUpdaterOrCommentorRole:
+        description: The role of the last user that either updated the proposal or left a comment. (readonly)
+        type: string
+      lastUpdaterRole:
+        type: string
+      name:
+        description: The name for the proposal (updatable)
+        type: string
+      originatorRole:
+        description: Indicates whether the buyer/seller created the proposal.(readonly)
+        type: string
+      proposalId:
+        description: The unique id of the proposal. (readonly).
+        type: string
+      proposalState:
+        description: The current state of the proposal. (readonly)
+        type: string
+      revisionNumber:
+        description: The revision number for the proposal (readonly).
+        format: int64
+        type: string
+      revisionTimeMs:
+        description: The time (ms since epoch) when the proposal was last revised (readonly).
+        format: int64
+        type: string
+      seller:
+        $ref: '#/definitions/Seller'
+        description: 'Reference to the seller on the proposal. (readonly, except on create)'
+      sellerContacts:
+        description: Optional contact information for the seller (buyer-readonly).
+        items:
+          $ref: '#/definitions/ContactInformation'
+        type: array
+    type: object
   Seller:
     properties:
       accountId:
-        description: The unique id for the seller. The seller fills in this field. The seller account id is then available to buyer in the offer.
+        description: The unique id for the seller. The seller fills in this field. The seller account id is then available to buyer in the product.
         type: string
       subAccountId:
         description: Optional sub-account id for the seller.

@@ -681,6 +681,9 @@ definitions:
         description: Your bidder locations that have distinct URLs.
         items:
           properties:
+            bidProtocol:
+              description: "The protocol that the bidder endpoint is using. Allowed values:  \n- ADX \n- OPENRTB_2_2 \n- OPENRTB_2_3 \n- OPENRTB_PROTOBUF"
+              type: string
             maximumQps:
               description: The maximum queries per second the Ad Exchange will send.
               format: int32

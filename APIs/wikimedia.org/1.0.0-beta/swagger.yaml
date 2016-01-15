@@ -1106,7 +1106,7 @@ paths:
         - get_from_backend:
             request:
               headers:
-                cache-control: '{cache-control}'
+                cache-control: no-cache
               uri: '/{domain}/sys/page_revisions/rev/{revision}'
             return: true
   '/page/summary/{title}':
@@ -1302,7 +1302,7 @@ paths:
         - get_from_backend:
             request:
               headers:
-                cache-control: '{cache-control}'
+                cache-control: no-cache
                 if-unmodified-since: '{if-unmodified-since}'
               uri: '/{domain}/sys/page_revisions/page/{title}'
             return: true
