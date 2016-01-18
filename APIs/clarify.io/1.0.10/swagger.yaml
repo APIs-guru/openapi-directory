@@ -6,7 +6,7 @@ basePath: /
 info:
   description: 'The API to Search and Understand Audio & Video Data.'
   title: Clarify
-  version: 1.0.9
+  version: 1.0.10
   x-logo:
     backgroundColor: '#65A8B5'
     url: 'http://clarify.io/wp-content/themes/clarify/images/clarify-logo.png'
@@ -340,11 +340,12 @@ paths:
           name: bundle_id
           required: true
           type: string
-        - description: 'name of the insight: transcript_r9, captions_r9, spoken_keywords'
+        - description: 'name of the insight: transcript_r9, captions_r9, spoken_keywords, spoken_topics'
           enum:
             - transcript_r9
             - captions_r9
             - spoken_keywords
+            - spoken_topics
           in: formData
           name: insight
           required: true

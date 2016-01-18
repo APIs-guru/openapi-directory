@@ -531,6 +531,9 @@ definitions:
   ApproximateReportedProgress:
     description: A progress measurement of a WorkItem by a worker.
     properties:
+      consumedParallelism:
+        $ref: '#/definitions/ReportedParallelism'
+        description: 'Total amount of parallelism in the portion of input of this work item that has already been consumed. In the first two examples above (see remaining_parallelism), the value should be 30 or 3 respectively. The sum of remaining_parallelism and consumed_parallelism should equal the total amount of parallelism in this work item. If specified, must be finite.'
       fractionConsumed:
         description: 'Completion as fraction of the input consumed, from 0.0 (beginning, nothing consumed), to 1.0 (end of the input, entire input consumed).'
         format: double
@@ -538,6 +541,9 @@ definitions:
       position:
         $ref: '#/definitions/Position'
         description: A Position within the work to represent a progress.
+      remainingParallelism:
+        $ref: '#/definitions/ReportedParallelism'
+        description: 'Total amount of parallelism in the input of this WorkItem that has not been consumed yet (i.e. can be delegated to a new WorkItem via dynamic splitting). "Amount of parallelism" refers to how many non-empty parts of the input can be read in parallel. This does not necessarily equal number of records. An input that can be read in parallel down to the individual records is called "perfectly splittable". An example of non-perfectly parallelizable input is a block-compressed file format where a block of records has to be read as a whole, but different blocks can be read in parallel. Examples: * If we have read 30 records out of 50 in a perfectly splittable 50-record input, this value should be 20. * If we are reading through block 3 in a block-compressed file consisting of 5 blocks, this value should be 2 (since blocks 4 and 5 can be processed in parallel by new work items via dynamic splitting). * If we are reading through the last block in a block-compressed file, or reading or processing the last record in a perfectly splittable input, this value should be 0, because the remainder of the work item cannot be further split.'
     type: object
   ApproximateSplitRequest:
     description: A suggestion by the service to the worker to dynamically split the WorkItem.
@@ -1207,6 +1213,17 @@ definitions:
         items:
           $ref: '#/definitions/WorkItemServiceState'
         type: array
+    type: object
+  ReportedParallelism:
+    description: "Represents the level of parallelism in a WorkItem's input, reported by the worker."
+    properties:
+      isInfinite:
+        description: 'Specifies whether the parallelism is infinite. If true, "value" is ignored. Infinite parallelism means the service will assume that the work item can always be split into more non-empty work items by dynamic splitting. This is a work-around for lack of support for infinity by the current JSON-based Java RPC stack.'
+        type: boolean
+      value:
+        description: Specifies the level of parallelism in case it is finite.
+        format: double
+        type: number
     type: object
   SendWorkerMessagesRequest:
     description: A request for sending worker messages to the service.
@@ -1924,7 +1941,7 @@ definitions:
           - TEARDOWN_NEVER
         type: string
       zone:
-        description: 'Zone to run the worker pools in (e.g. "us-central1-a"). If empty or unspecified, the service will attempt to choose a reasonable default.'
+        description: 'Zone to run the worker pools in. If empty or unspecified, the service will attempt to choose a reasonable default.'
         type: string
     type: object
   WorkerSettings:

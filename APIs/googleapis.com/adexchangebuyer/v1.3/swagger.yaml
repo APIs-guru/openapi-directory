@@ -682,7 +682,7 @@ definitions:
         items:
           properties:
             bidProtocol:
-              description: "The protocol that the bidder endpoint is using. Allowed values:  \n- ADX \n- OPENRTB_2_2 \n- OPENRTB_2_3 \n- OPENRTB_PROTOBUF"
+              description: "The protocol that the bidder endpoint is using. By default, OpenRTB protocols use JSON, except OPENRTB_PROTOBUF. OPENRTB_PROTOBUF uses protobuf encoding over the latest OpenRTB protocol version, which is 2.3 right now. Allowed values:  \n- ADX \n- OPENRTB_2_2 \n- OPENRTB_2_3 \n- OPENRTB_PROTOBUF"
               type: string
             maximumQps:
               description: The maximum queries per second the Ad Exchange will send.
