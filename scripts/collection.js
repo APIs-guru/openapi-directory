@@ -147,7 +147,7 @@ function updateCollection(dir) {
 
       var newFilename = getSwaggerPath(result.swagger);
       if (newFilename !== filename)
-        asyncCb(Error("Spec was moved to new location"));
+        asyncCb(Error("Spec was moved to new location: " + newFilename));
       asyncCb(null);
     });
   }, function (error) {
