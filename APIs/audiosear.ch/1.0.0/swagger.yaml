@@ -137,7 +137,7 @@ paths:
           name: query
           required: true
           type: string
-        - description: 'Limit a search by any field value. This example uses <b>network</b> but any field name could be used. E.g. <b>filters[physical_location]=popuparchive</b> or <b>filters[network]=NPR</b> or <b>filters[categories.name]=Talk%20Show</b>. Use <b>filters[with_transcript]</b> to filter out episodes with no transcript.'
+        - description: "Limit a search by any field value. This example uses <b>network</b> but any field name could be used. (Note: the filter uses a 'term' match, so it returns a result if the field contains the term. It is most reliably used with integer values, such as <b>filters[show_id]=15</b>) Examples: <b>filters[physical_location]=popuparchive</b> or <b>filters[network]=NPR</b> or <b>filters[categories.name]=Talk%20Show</b>."
           in: query
           name: 'filters[network]'
           required: false
@@ -147,9 +147,9 @@ paths:
           name: 'filters[show_id]'
           required: false
           type: string
-        - description: 'Another example filter, by show title.'
+        - description: Add this filter (no value required) to filter out episodes with no transcript.
           in: query
-          name: 'filters[show_title]'
+          name: 'fitlers[with_transcript]'
           required: false
           type: string
         - description: 'Sort results by any field value. The default is by the relevancy score (<b>_score</b>). Must be paired with <b>sort_order</b>.'
@@ -260,7 +260,7 @@ paths:
           name: query
           required: true
           type: string
-        - description: 'Limit a search by any field value. This example uses <b>network</b> but any field name could be used. E.g. <b>filters[network]=NPR</b> or <b>filters[categories.name]=Talk%20Show</b>.'
+        - description: "Limit a search by any field value. This example uses <b>network</b> but any field name could be used. (Note: the filter uses a 'term' match, so it returns a result if the field contains the term. It is most reliably used with integer values.) E.g. <b>filters[network]=NPR</b> or <b>filters[categories.name]=Talk%20Show</b>."
           in: query
           name: 'filters[network]'
           required: false

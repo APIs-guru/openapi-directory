@@ -2655,7 +2655,7 @@ definitions:
         description: 'The URL where the feed file can be fetched. Google Merchant Center will support automatic scheduled uploads using the HTTP, HTTPS, FTP, or SFTP protocols, so the value will need to be a valid link using one of those four protocols.'
         type: string
       hour:
-        description: The hour of the day the feed file should be fetched (0-24).
+        description: The hour of the day the feed file should be fetched (0-23).
         format: uint32
         type: integer
       password:

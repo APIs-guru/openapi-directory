@@ -1305,11 +1305,53 @@ definitions:
       buyDate:
         description: Date the product was bought
         type: string
+      cancellationTransactionId:
+        description: Id of the transaction that cancelled this transaction
+        type: string
+      currency:
+        description: Currency of the amounts
+        type: string
+      paymentMethod:
+        description: The payment method
+        type: string
+      price:
+        description: Price of the transaction
+        format: double
+        type: number
       productId:
         description: Id of the product
         type: string
+      shippingCosts:
+        description: Amount of the shipping costs
+        format: double
+        type: number
+      shippingCostsTaxesAmount:
+        description: Amount of the shipping costs taxes amount
+        format: double
+        type: number
+      shippingCostsTaxesPercentage:
+        description: Amount of the shipping costs taxes percentage
+        format: double
+        type: number
+      status:
+        description: The transaction status
+        type: string
+      taxesAmount:
+        description: Amount of the tax
+        format: double
+        type: number
+      taxesCountry:
+        description: 'The country of the tax in ISO 3166-1 Alpha 2 format (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)'
+        type: string
+      taxesPercentage:
+        description: Tax percentage of the transaction
+        format: double
+        type: number
       title:
         description: Title of the product
+        type: string
+      transactionId:
+        description: Transaction Id
         type: string
   CustomerProductsList:
     properties:
@@ -1325,17 +1367,48 @@ definitions:
         type: array
   CustomerSubscription:
     properties:
-      buyDate:
-        description: Date the subscription was bought
+      cancellationDate:
+        description: Date the subscription was cancelled
+        type: string
+      currency:
+        description: Currency of the amounts
         type: string
       endDate:
         description: Date the subscription will end
         type: string
-      productId:
-        description: Id of the subscription
+      paymentMethod:
+        description: The payment method
         type: string
+      price:
+        description: Price of the transaction
+        format: double
+        type: number
+      productId:
+        description: Product Id
+        type: string
+      productType:
+        description: Type of the product
+        type: string
+      shippingCosts:
+        description: Amount of the shipping costs
+        format: double
+        type: number
+      shippingCostsTaxesPercentage:
+        description: Amount of the shipping costs taxes percentage
+        format: double
+        type: number
+      startDate:
+        description: Date the subscription starts
+        type: string
+      taxesCountry:
+        description: 'The country of the tax in ISO 3166-1 Alpha 2 format (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)'
+        type: string
+      taxesPercentage:
+        description: Tax percentage of the transaction
+        format: double
+        type: number
       title:
-        description: Title of the subscription
+        description: Title
         type: string
   EmailData:
     properties:
@@ -1606,6 +1679,12 @@ definitions:
         description: The billing id of this transaction
         format: double
         type: integer
+      cancellationTransactionId:
+        description: Id of the transaction that cancelled this transaction
+        type: string
+      cancelledTransactionId:
+        description: Id of the transaction that is cancelled by transaction
+        type: string
       currency:
         description: Currency of the amounts
         type: string

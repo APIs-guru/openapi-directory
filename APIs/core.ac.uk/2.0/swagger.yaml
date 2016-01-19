@@ -930,33 +930,20 @@ definitions:
         items:
           type: string
         type: array
+      datePublished:
+        description: Date article published
+        type: string
       description:
         description: The abstract
         type: string
-      duplicates:
-        description: Duplicate article IDs
-        items:
-          type: integer
-        type: array
-      extractedUrls:
-        description: URLs which were extracted from the article fulltext
-        items:
-          type: string
-        type: array
       fulltext:
         description: Article full text
-        type: string
-      fulltextIdentifier:
-        description: Link to the PDF with the article fulltext
         type: string
       fulltextUrls:
         description: URLs of the fulltext version of this article
         items:
           type: string
         type: array
-      hasFullText:
-        description: Whether CORE can provide the fulltext of the article
-        type: boolean
       id:
         description: Article ID
         type: integer
@@ -965,20 +952,14 @@ definitions:
         items:
           type: string
         type: array
-      journalIdentifiers:
-        description: List of journal identifiers of journals this article belongs to
+      journals:
+        description: List of journals this article belongs to
         items:
-          type: string
+          $ref: '#/definitions/ArticleJournal'
         type: array
-      journalTitle:
-        description: Title of the journal this article belongs to
-        type: string
       language:
         $ref: '#/definitions/Language'
         description: Language of the article
-      originalIdentifier:
-        description: URL from which CORE harvested the fulltext. Not available in CORE API v2.0 beta
-        type: string
       publisher:
         description: Publisher of the article
         type: string
@@ -993,24 +974,16 @@ definitions:
       repositories:
         description: List of repositories this article belongs to
         items:
-          type: string
+          $ref: '#/definitions/Repository'
         type: array
-      repositoryIds:
-        description: List of repository IDs of repositories this article belongs to
-        items:
-          type: integer
-        type: array
+      repositoryDocument:
+        $ref: '#/definitions/RepositoryDocument'
+        description: Information of CORE harvesting
       similarities:
         description: Similar articles
         items:
           $ref: '#/definitions/Similar'
         type: array
-      size:
-        description: Size of the PDF in bytes
-        type: integer
-      snippet:
-        description: Search snippet
-        type: string
       subjects:
         description: Article subjects
         items:
@@ -1053,6 +1026,16 @@ definitions:
         type: string
     required:
       - status
+  ArticleJournal:
+    properties:
+      identifiers:
+        description: List of journal identifiers
+        items:
+          type: string
+        type: array
+      title:
+        description: Title of the journal
+        type: string
   ArticleResponse:
     properties:
       data:
@@ -1126,7 +1109,7 @@ definitions:
       doi:
         description: Digital Object Identifier
         type: string
-      rawString:
+      raw:
         description: Citation as raw string
         type: string
       title:
@@ -1228,6 +1211,7 @@ definitions:
       uri:
         description: Repository URI
         type: string
+  RepositoryDocument: {}
   RepositoryLocation:
     properties:
       country:

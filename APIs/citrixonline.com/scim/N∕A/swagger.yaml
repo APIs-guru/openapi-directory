@@ -30,9 +30,221 @@ produces:
 tags:
   - description: Operations on users belonging to an organization
     name: Users
+  - description: Operations on groups belonging to an organization
+    name: Groups
   - description: Operations on schemas
     name: Schemas
 paths:
+  /Groups:
+    get:
+      description: 'Queries multiple group identities in the organization domain. Filtering, sorting and pagination are available. This call requires the role ROLE_ORG_READ.'
+      operationId: getGroups
+      parameters:
+        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: ' Without a filter, all groups are returned. The filter parameter must be a properly formed SCIM filter using the operator "eq" (equals), "sw" (starts with), or "co" (contains). The filter works for the displayName attribute. Sorting and pagination are supported. For example, GET /Groups?filter=displayName%20eq%20%22Engineering%22&sortBy=displayName&sortOrder=ascending&count=50&startIndex=51'
+          in: query
+          name: filter
+          type: string
+      responses:
+        '200':
+          description: The request has succeeded
+          schema:
+            $ref: '#/definitions/GroupCollection'
+        '400':
+          description: Invalid filter syntax
+        '401':
+          description: Client is not sufficiently authorized
+        '403':
+          description: Invalid token passed
+        '502':
+          description: Authentication or account gateway error occurred
+        '504':
+          description: Authentication or account gateway timeout occurred
+      summary: Get Groups
+      tags:
+        - Groups
+    post:
+      description: Creates a new organization group and adds it to the user domain. Member groups and member users must be in the organization. This call requires the role ROLE_ORG_WRITE.
+      operationId: createGroup
+      parameters:
+        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The details of the group to create
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GroupDefinition'
+      responses:
+        '201':
+          description: The group has been created
+          schema:
+            $ref: '#/definitions/Group'
+        '400':
+          description: 'Possible reasons are:<br />The displayName field is not set<br />The displayName field is malformed<br />The displayName field exceeds 128 characters<br />The members array exceeds 100 elements<br />'
+        '401':
+          description: Client is not sufficiently authorized
+        '403':
+          description: Invalid token passed
+        '409':
+          description: The displayName is already in use within the organization
+        '502':
+          description: An authentication or account gateway error occurred
+        '504':
+          description: 'An authentication or account, or gateway timeout occurred.'
+      summary: Create Group
+      tags:
+        - Groups
+  '/Groups/{groupKey}':
+    delete:
+      description: Deletes a group from the organization (but not from the account). The group must be in the organization. This call requires the role ROLE_ORG_WRITE.
+      operationId: deleteGroup
+      parameters:
+        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the group to delete. The group must be in the organization domain
+          format: int64
+          in: path
+          name: groupKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: The request has succeeded
+        '401':
+          description: Client is not sufficiently authorized or group does not exist in organization
+        '403':
+          description: Invalid token passed
+        '502':
+          description: Authentication or account gateway error occurred
+        '504':
+          description: Authentication or account gateway timeout occurred
+      summary: Delete Group
+      tags:
+        - Groups
+    get:
+      description: Queries group details in the organization domain. This call requires the role ROLE_ORG_READ.
+      operationId: getGroup
+      parameters:
+        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the group to query. The group must be in the organization domain
+          format: int64
+          in: path
+          name: groupKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: The request has succeeded
+          schema:
+            $ref: '#/definitions/Group'
+        '401':
+          description: Client is not sufficiently authorized or group does not exist in organization
+        '403':
+          description: Invalid token passed
+        '502':
+          description: Authentication or account gateway error occurred
+        '504':
+          description: Authentication or account gateway timeout occurred
+      summary: Get Group
+      tags:
+        - Groups
+    patch:
+      description: Updates one or more values of an existing group without sending the full definition. Member groups and member users must be in the organization. This call requires the role ROLE_ORG_WRITE.
+      operationId: updateGroup
+      parameters:
+        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the group to query. The group must be in the organization domain
+          format: int64
+          in: path
+          name: groupKey
+          required: true
+          type: integer
+        - description: The group data to update. It is allowed to update one or more values of the group definition
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GroupDefinition'
+      responses:
+        '200':
+          description: The group has been updated
+          schema:
+            $ref: '#/definitions/Group'
+        '400':
+          description: 'Possible reasons are:<br />The displayName field is not set<br />The displayName field is malformed<br />The displayName field exceeds 128 characters<br />The members array exceeds 100 elements<br />'
+        '401':
+          description: Client is not sufficiently authorized or group does not exist in organization
+        '403':
+          description: Invalid token passed
+        '409':
+          description: The displayName is already in use within the organization
+        '502':
+          description: Authentication or account gateway error occurred
+        '504':
+          description: Authentication or account gateway timeout occurred
+      summary: Update Group
+      tags:
+        - Groups
+    put:
+      description: 'Updates an existing group. The request must include the full group definition. To modify one or more values without sending the full definition, see "Update Group". Member groups and member users must be in the organization. This call requires the role ROLE_ORG_WRITE.'
+      operationId: replaceGroup
+      parameters:
+        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the group to query. The group must be in the organization domain
+          format: int64
+          in: path
+          name: groupKey
+          required: true
+          type: integer
+        - description: The new group definition
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/GroupDefinition'
+      responses:
+        '200':
+          description: The group has been replaced.
+          schema:
+            $ref: '#/definitions/Group'
+        '400':
+          description: 'Possible reasons are:<br />The displayName field is not set<br />The displayName field is malformed<br />The displayName field exceeds 128 characters<br />The members array exceeds 100 elements<br />'
+        '401':
+          description: Client is not sufficiently authorized or group does not exist in organization
+        '403':
+          description: Invalid token passed
+        '409':
+          description: The displayName is already in use within the organization
+        '502':
+          description: Authentication or account gateway error occurred
+        '504':
+          description: Authentication or account gateway timeout occurred
+      summary: Replace Group
+      tags:
+        - Groups
   /Schemas/Users:
     get:
       description: 'Queries the user schema. The user schema is defined in SCIM Core Schema (http://www.simplecloud.info/specs/draft-scim-core-schema-01.html#resource-schema).'
@@ -83,7 +295,7 @@ paths:
         - Schemas
   /Users:
     get:
-      description: Queries multiple users identity in the organization domain. Filtering is available.
+      description: Queries multiple user identities in the organization domain. Filtering is available.
       operationId: getUsers
       parameters:
         - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
@@ -454,6 +666,83 @@ definitions:
         type: boolean
     required:
       - supported
+  Group:
+    description: Describes a group belonging to an organization
+    properties:
+      displayName:
+        description: "The group's display name"
+        type: string
+      id:
+        description: "The group's unique key"
+        type: string
+      members:
+        description: An array of members
+        items:
+          $ref: '#/definitions/Member'
+        type: array
+      meta:
+        $ref: '#/definitions/GroupMetadata'
+        description: Group metadata
+    required:
+      - meta
+      - id
+      - displayName
+  GroupCollection:
+    description: Class describing a collection of groups
+    properties:
+      resources:
+        description: An array of groups
+        items:
+          $ref: '#/definitions/Group'
+        type: array
+      totalResults:
+        description: The number of groups in the collection
+        format: int64
+        type: integer
+    required:
+      - resources
+      - totalResults
+  GroupDefinition:
+    description: Describes the group to create
+    properties:
+      displayName:
+        description: "The group's display name"
+        type: string
+      members:
+        description: An array of members
+        items:
+          $ref: '#/definitions/Member'
+        type: array
+    required:
+      - displayName
+  GroupMetadata:
+    description: Group metadata
+    properties:
+      created:
+        description: The date and time the group was created
+        format: date-time
+        type: string
+      location:
+        description: The URL where the group can be accessed
+        type: string
+    required:
+      - created
+      - location
+  Member:
+    description: A member of a group. This can be a group or an user
+    properties:
+      type:
+        description: The type of member
+        enum:
+          - group
+          - user
+        type: string
+      value:
+        description: Depending on the member type this is a groupKey or an userKey
+        type: string
+    required:
+      - type
+      - value
   Patch:
     description: Specifies PATCH configuration options
     properties:
