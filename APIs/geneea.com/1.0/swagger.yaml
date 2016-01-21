@@ -108,7 +108,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/AccountInfo'
+            $ref: '#/definitions/Information about a user account.'
         '401':
           description: Unauthorized
         '403':
@@ -534,28 +534,6 @@ paths:
       tags:
         - s1
 definitions:
-  AccountInfo:
-    description: Information about a user account
-    properties:
-      remainingQuotas:
-        description: Remaining quotas for the user account
-        items:
-          $ref: '#/definitions/Entry«string,long»'
-        type: array
-      type:
-        description: Type (plan) of the user account
-        enum:
-          - BASIC
-          - PREMIUM
-          - FREE
-          - SILVER
-          - GOLD
-          - PLATINUM
-          - ANONYMOUS
-        type: string
-    required:
-      - type
-      - remainingQuotas
   EntitiesResponse:
     description: Response for the named-entity recognition
     properties:
@@ -603,6 +581,24 @@ definitions:
       key:
         format: int64
         type: integer
+  Information about a user account.:
+    properties:
+      remainingQuotas:
+        description: Remaining quotas for the user account.
+        items:
+          $ref: '#/definitions/Entry«string,long»'
+        type: array
+      type:
+        description: Type (plan) of the user account.
+        enum:
+          - BASIC
+          - PREMIUM
+          - FREE
+          - SILVER
+          - GOLD
+          - PLATINUM
+          - ANONYMOUS
+        type: string
   Label:
     description: The topic label
     properties:
