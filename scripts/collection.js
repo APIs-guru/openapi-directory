@@ -867,6 +867,10 @@ function patchSwagger(swagger, exPatch) {
   if (_.isUndefined(swagger.info.version))
     swagger.info.version = '1.0.0';
 
+  //FIXME: remove workaround for citrix shim API
+  if (swagger.info.version === 'N/A')
+    swagger.info.version = 'NotApplicable';
+
   //Cleanup from common postfixes
   _.some([
       'API Documentation',
