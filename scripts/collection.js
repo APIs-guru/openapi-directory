@@ -991,10 +991,11 @@ function getPathComponents(swagger) {
     path.push(serviceName);
   path.push(swagger.info.version);
 
-  return _.map(path, function (str) {
-    //replace slash with Unicode slash
-    return str.replace('/', '∕');
+  _.each(path, function (str) {
+    assert(str.indexOf('/') === -1);
   });
+
+  return path;
 }
 
 function getSwaggerPath(swagger, filename) {
