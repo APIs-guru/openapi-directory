@@ -1235,15 +1235,6 @@ paths:
           name: fields
           required: false
           type: array
-        - description: 'Filter results based on the product status.  If not set, this filter defaults to Active.'
-          enum:
-            - all
-            - active
-            - inactive
-          in: query
-          name: product_status
-          required: false
-          type: string
       produces:
         - application/json
         - text/json

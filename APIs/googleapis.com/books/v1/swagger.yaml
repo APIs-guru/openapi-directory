@@ -349,6 +349,10 @@ paths:
             type: string
           name: features
           type: array
+        - description: Set to true to include non-comics series. Defaults to false.
+          in: query
+          name: includeNonComicsSeries
+          type: boolean
         - description: 'ISO-639-1, ISO-3166-1 codes for message localization, i.e. en_US.'
           in: query
           name: locale
@@ -979,6 +983,13 @@ paths:
           in: query
           name: source
           type: string
+        - collectionFormat: multi
+          description: List of target ids used for experiments or user segments
+          in: query
+          items:
+            type: string
+          name: targetIds
+          type: array
       responses:
         '200':
           description: Successful response
@@ -1093,6 +1104,13 @@ paths:
           in: query
           name: source
           type: string
+        - collectionFormat: multi
+          description: List of target ids used for experiments or user segments
+          in: query
+          items:
+            type: string
+          name: targetIds
+          type: array
       responses:
         '200':
           description: Successful response
@@ -1777,6 +1795,10 @@ paths:
           in: query
           name: country
           type: string
+        - description: Set to true to include non-comics series. Defaults to false.
+          in: query
+          name: includeNonComicsSeries
+          type: boolean
         - description: Brand results for partner ID.
           in: query
           name: partner
@@ -2975,6 +2997,9 @@ definitions:
     properties:
       body:
         type: string
+      dont_show_notification:
+        default: false
+        type: boolean
       iconUrl:
         type: string
       kind:
@@ -2982,6 +3007,8 @@ definitions:
         description: Resource type.
         type: string
       notification_type:
+        type: string
+      pcampaign_id:
         type: string
       show_notification_settings_action:
         type: boolean
@@ -3127,6 +3154,8 @@ definitions:
             imageUrl:
               type: string
             seriesId:
+              type: string
+            seriesType:
               type: string
             title:
               type: string
@@ -3362,6 +3391,10 @@ definitions:
       userInfo:
         description: User specific information related to this volume. (e.g. page this user last read or whether they purchased this book)
         properties:
+          acquiredTime:
+            description: 'Timestamp when this volume was acquired by the user. (RFC 3339 UTC date-time format) Acquiring includes purchase, user upload, receiving family sharing, etc.'
+            format: date-time
+            type: string
           acquisitionType:
             description: How this volume was acquired.
             format: int32
@@ -3385,6 +3418,15 @@ definitions:
             description: 'Whether this volume is purchased, sample, pd download etc.'
             format: int32
             type: integer
+          isFamilySharedFromUser:
+            description: Whether or not the user shared this volume with the family.
+            type: boolean
+          isFamilySharedToUser:
+            description: Whether or not the user received this volume through family sharing.
+            type: boolean
+          isFamilySharingAllowed:
+            description: 'Whether or not this volume can be shared with the family by the user. This includes sharing eligibility of both the volume and the user. If the value is true, the user can initiate a family sharing action.'
+            type: boolean
           isInMyBooks:
             description: 'Whether or not this volume is currently in "my books."'
             type: boolean

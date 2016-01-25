@@ -413,6 +413,11 @@ definitions:
   CreateAuthUriResponse:
     description: Response of creating the IDP authentication URL.
     properties:
+      allProviders:
+        description: all providers the user has once used to do federated login
+        items:
+          type: string
+        type: array
       authUri:
         description: The URI used by the IDP to authenticate the user.
         type: string
@@ -618,6 +623,10 @@ definitions:
       captchaResponse:
         description: Response to the captcha.
         type: string
+      delegatedProjectNumber:
+        description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
+        format: int64
+        type: string
       disableUser:
         description: Whether to disable the user.
         type: boolean
@@ -743,6 +752,10 @@ definitions:
         type: string
       captchaResponse:
         description: Response to the captcha.
+        type: string
+      delegatedProjectNumber:
+        description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
+        format: int64
         type: string
       email:
         description: The email of the user.

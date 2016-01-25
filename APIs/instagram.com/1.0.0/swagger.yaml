@@ -873,6 +873,7 @@ definitions:
       text:
         description: Caption text
         type: string
+    type: object
   CommentEntry:
     properties:
       created_time:
@@ -887,6 +888,7 @@ definitions:
       text:
         description: Text of the comment
         type: string
+    type: object
   CommentsCollection:
     properties:
       count:
@@ -897,6 +899,7 @@ definitions:
         items:
           $ref: '#/definitions/CommentEntry'
         type: array
+    type: object
   CommentsResponse:
     properties:
       data:
@@ -907,6 +910,7 @@ definitions:
       meta:
         $ref: '#/definitions/MetaData'
         description: Response meta-data
+    type: object
   CursorPaginationInfo:
     properties:
       next_cursor:
@@ -915,6 +919,7 @@ definitions:
       next_url:
         description: URL to retrieve next page of entries
         type: string
+    type: object
   IdPaginationInfo:
     properties:
       next_max_id:
@@ -923,6 +928,7 @@ definitions:
       next_url:
         description: URL to retrieve next page of entries
         type: string
+    type: object
   ImageInfo:
     properties:
       height:
@@ -934,6 +940,7 @@ definitions:
       width:
         description: Image/video width in pixels
         type: integer
+    type: object
   ImagesData:
     properties:
       low_resolution:
@@ -945,6 +952,7 @@ definitions:
       thumbnail:
         $ref: '#/definitions/ImageInfo'
         description: Thumbnail of the image
+    type: object
   LikesCollection:
     properties:
       count:
@@ -955,6 +963,7 @@ definitions:
         items:
           $ref: '#/definitions/UserShortInfo'
         type: array
+    type: object
   LocationInfo:
     properties:
       id:
@@ -971,6 +980,7 @@ definitions:
       name:
         description: Location name
         type: string
+    type: object
   LocationInfoResponse:
     properties:
       data:
@@ -979,6 +989,7 @@ definitions:
       meta:
         $ref: '#/definitions/MetaData'
         description: Response meta-data
+    type: object
   LocationMediaResponse:
     properties:
       data:
@@ -992,6 +1003,7 @@ definitions:
       pagination:
         $ref: '#/definitions/IdPaginationInfo'
         description: Information for pagination
+    type: object
   LocationSearchResponse:
     properties:
       data:
@@ -1002,6 +1014,7 @@ definitions:
       meta:
         $ref: '#/definitions/MetaData'
         description: Response meta-data
+    type: object
   MediaEntry:
     properties:
       attribution:
@@ -1059,6 +1072,7 @@ definitions:
       videos:
         $ref: '#/definitions/VideosData'
         description: "Videos data in different resolutions, applied for 'video' type"
+    type: object
   MediaResponse:
     properties:
       data:
@@ -1067,6 +1081,7 @@ definitions:
       meta:
         $ref: '#/definitions/MetaData'
         description: Response meta-data
+    type: object
   MediaSearchResponse:
     properties:
       data:
@@ -1077,12 +1092,14 @@ definitions:
       meta:
         $ref: '#/definitions/MetaData'
         description: Response meta-data
+    type: object
   MetaData:
     properties:
       code:
         description: HTTP result code
         format: int32
         type: integer
+    type: object
   Position:
     properties:
       x:
@@ -1093,6 +1110,7 @@ definitions:
         description: Y position (vertical)
         format: float
         type: number
+    type: object
   RelationshipInfo:
     properties:
       incoming_status:
@@ -1112,6 +1130,7 @@ definitions:
       target_user_is_private:
         description: Indicates whether target user is private or not
         type: boolean
+    type: object
   RelationshipPostResponse:
     properties:
       data:
@@ -1120,6 +1139,7 @@ definitions:
       meta:
         $ref: '#/definitions/MetaData'
         description: Response meta-data
+    type: object
   RelationshipResponse:
     properties:
       data:
@@ -1128,6 +1148,7 @@ definitions:
       meta:
         $ref: '#/definitions/MetaData'
         description: Response meta-data
+    type: object
   RelationshipStatus:
     properties:
       outgoing_status:
@@ -1137,6 +1158,7 @@ definitions:
           - follows
           - requested
         type: string
+    type: object
   StatusResponse:
     properties:
       data:
@@ -1145,6 +1167,7 @@ definitions:
       meta:
         $ref: '#/definitions/MetaData'
         description: Response meta-data
+    type: object
   TagInfo:
     properties:
       media_count:
@@ -1154,6 +1177,7 @@ definitions:
       name:
         description: Tag name
         type: string
+    type: object
   TagInfoResponse:
     properties:
       data:
@@ -1162,6 +1186,7 @@ definitions:
       meta:
         $ref: '#/definitions/MetaData'
         description: Response meta-data
+    type: object
   TagMediaResponse:
     properties:
       data:
@@ -1175,6 +1200,7 @@ definitions:
       pagination:
         $ref: '#/definitions/TagPaginationInfo'
         description: Information for pagination
+    type: object
   TagPaginationInfo:
     properties:
       deprecation_warning:
@@ -1195,6 +1221,7 @@ definitions:
       next_url:
         description: URL to retrieve next page of entries
         type: string
+    type: object
   TagSearchResponse:
     properties:
       data:
@@ -1205,6 +1232,7 @@ definitions:
       meta:
         $ref: '#/definitions/MetaData'
         description: Response meta-data
+    type: object
   UserCounts:
     properties:
       followed_by:
@@ -1219,6 +1247,7 @@ definitions:
         description: Number of user media
         format: int32
         type: integer
+    type: object
   UserInPhoto:
     properties:
       position:
@@ -1227,6 +1256,7 @@ definitions:
       user:
         $ref: '#/definitions/UserShortInfo'
         description: User who is indicated on the photo
+    type: object
   UserInfo:
     properties:
       bio:
@@ -1250,6 +1280,7 @@ definitions:
       website:
         description: URL to user web-site
         type: string
+    type: object
   UserResponse:
     properties:
       data:
@@ -1258,6 +1289,7 @@ definitions:
       meta:
         $ref: '#/definitions/MetaData'
         description: Response meta-data
+    type: object
   UserShortInfo:
     properties:
       full_name:
@@ -1272,6 +1304,7 @@ definitions:
       username:
         description: 'User name, nickname'
         type: string
+    type: object
   UsersInfoResponse:
     properties:
       data:
@@ -1282,6 +1315,7 @@ definitions:
       meta:
         $ref: '#/definitions/MetaData'
         description: Response meta-data
+    type: object
   UsersPagingResponse:
     properties:
       data:
@@ -1295,6 +1329,7 @@ definitions:
       pagination:
         $ref: '#/definitions/CursorPaginationInfo'
         description: Information for pagination
+    type: object
   VideosData:
     properties:
       low_resolution:
@@ -1303,3 +1338,4 @@ definitions:
       standard_resolution:
         $ref: '#/definitions/ImageInfo'
         description: Video in standard resolution
+    type: object

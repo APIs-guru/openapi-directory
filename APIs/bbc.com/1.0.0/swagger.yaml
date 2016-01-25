@@ -149,7 +149,7 @@ paths:
         - feeds
   /broadcasts:
     get:
-      description: Build schedules and find metadata for TV and radio broadcasts
+      description: 'Fetch metadata about linear Broadcasts and Services, allowing the generation of Television and Radio schedules and other datasets for broadcast items. Use /schedules instead of this feed as it is more efficient. Broadcasts will be deprecated in the future.'
       operationId: listBroadcasts
       parameters:
         - description: |
@@ -347,7 +347,7 @@ paths:
         - feeds
   /groups:
     get:
-      description: 'Find metadata for curated groups: seasons, collections, galleries or franchises'
+      description: 'Long-lived curated collections of programmes and more, including Collections, Seasons, Franchises and Galleries'
       operationId: listGroups
       parameters:
         - description: |
@@ -486,7 +486,7 @@ paths:
         - feeds
   /images:
     get:
-      description: Find metadata for images
+      description: 'Find metadata for images, particularly those in galleries'
       operationId: listImages
       parameters:
         - description: |
@@ -839,7 +839,7 @@ paths:
         - feeds
   /people:
     get:
-      description: 'Find the people behind and in programmes: cast, crew, guests and more'
+      description: 'The People feed allows you to search for the people and groups that contribute to programmes. This is the starting point for cast and crew credits, as well as finding contributors using external IDs (such as Wikipedia URLs)'
       operationId: listPeople
       parameters:
         - description: filter for subset of people that have an ID issued by the given authority
@@ -971,7 +971,7 @@ paths:
         - feeds
   /programmes:
     get:
-      description: 'Start here for programmes metadata: Brands, Series, Episodes and Clips'
+      description: 'Fetch metadata about Programmes (brands, series, episodes, clips). By applying different filter restrictions this feed can be used in many ways, for example to retrieve all series belonging to a brand, all the episodes and/or clips for a specific series, or any TLEO objects for a masterbrand. Other filters permit restricting to specific formats and/or genres, and you can request specific versions (for example Signed or Audio-Described). Parameters may be combined in any way suitable for your application.'
       operationId: listProgrammes
       parameters:
         - description: |
@@ -986,7 +986,7 @@ paths:
             * sort alphabetically by title, ascending
             * sort by title librarian style (ignoring leading 'The', 'A', etc), ascending
             * sort by root pid and then preorder tree sort. Requires entities to have release date.
-            * sort numerically by number of views (most popular first - faster most_popular)
+            * sort numerically by number of views (most popular first)
           enum:
             - group_position
             - pid
@@ -1253,6 +1253,18 @@ paths:
           name: partner_pid
           required: false
           type: array
+        - collectionFormat: multi
+          description: filter for a subset of programmes that are of the given payment_type
+          enum:
+            - free
+            - bbcstore
+            - uscansvod
+          in: query
+          items:
+            format: string
+          name: payment_type
+          required: false
+          type: array
         - description: filter for subset of programmes with contributions by given people PID
           in: query
           minLength: 8
@@ -1335,7 +1347,7 @@ paths:
         - feeds
   /promotions:
     get:
-      description: Discover metadata for content promotions
+      description: 'Details of short-term editorially curated "promotions", for instance those programmes featured on iPlayer today'
       operationId: listPromotions
       parameters:
         - collectionFormat: multi
@@ -1444,7 +1456,7 @@ paths:
         - feeds
   /schedules:
     get:
-      description: Build schedules and find metadata for TV and radio broadcasts and webcasts
+      description: 'Dates, Times, Schedules: when and where are programmes being shown?'
       operationId: listSchedules
       parameters:
         - description: |
@@ -1699,7 +1711,7 @@ paths:
         - schema
   /services:
     get:
-      description: Information about the linear services used for broadcast transmissions
+      description: 'The services feed exposes the linear broadcast "services" from PIPs. These are the actual services which broadcast programmes (eg bbc_one_oxford is the service for BBC One in Oxford).'
       operationId: listServices
       parameters:
         - description: Return services that end on or later than the specified datetime
@@ -1807,7 +1819,7 @@ paths:
         - feeds
   /versions:
     get:
-      description: 'Metadata on editorial programme versions: original, signed, audio-described, etc'
+      description: 'The versions feed exposes editorial "Versions" of programmes. These are concepts used to capture different presentations of an overall programme: for example, versions of a programme may include one with sign language, one with audio description, one edited for content and more. Versions are also important to understand for broadcasts: a linear broadcast or an ondemand is always of a specific version, not merely of a programme.'
       operationId: listVersions
       parameters:
         - collectionFormat: multi
