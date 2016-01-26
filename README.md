@@ -7,7 +7,7 @@
 [![Share on Twitter][twitter-image]][twitter-link]
 [![Follow on Twitter][twitterFollow-image]][twitterFollow-link]
 
-Repository for API models in [Swagger](http://swagger.io/) [2.0](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md) format
+Repository for API models in [OpenAPI(aka Swagger)](https://openapis.org) [2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) format
 
 Our goal is to create a machine-readable Wikipedia for REST APIs, with the following principals:
 - Open source, community driven project
@@ -41,7 +41,7 @@ API spec acceptance criteria
 Future additions
 --------------------------
 We are currently working on adding many new API specs, you can see the full list inside [this](https://docs.google.com/spreadsheets/d/14zxKcW_Pzu5aYI3Tnwe5ph2Ru2pkSP8yHWEQhx3t8pI/edit?usp=sharing) document.<BR>
-If you have an API spec in any format (Swagger, RAML, WADL, ...) for any public API, please feel free to open an [issue](https://github.com/APIs-guru/api-models/issues/new).
+If you have an API spec in any format (OpenAPI, Swagger, RAML, WADL, ...) for any public API, please feel free to open an [issue](https://github.com/APIs-guru/api-models/issues/new).
 
 Integration with 3rd-party services
 --------------------------
@@ -59,9 +59,9 @@ All API specs acquired from public sources under the [Fair use](http://en.wikipe
 Spec sources
 --------------------------
 Some specs are taken from Open Source projects:
- - [warehouseman/trello-swagger-generator](https://github.com/warehouseman/trello-swagger-generator/) - Swagger spec for Trello API
- - [darklynx/swagger-api-collection](https://github.com/darklynx/swagger-api-collection) - Swagger spec for Instagram API
- - [Mermade/bbcparse](https://github.com/Mermade/bbcparse) - Swagger spec for BBC Nitro API
+ - [warehouseman/trello-swagger-generator](https://github.com/warehouseman/trello-swagger-generator/) - OpenAPI(aka Swagger) spec for Trello API
+ - [darklynx/swagger-api-collection](https://github.com/darklynx/swagger-api-collection) - OpenAPI(aka Swagger) spec for Instagram API
+ - [Mermade/bbcparse](https://github.com/Mermade/bbcparse) - OpenAPI(aka Swagger) spec for BBC Nitro API
 
 [banner]: https://apis-guru.github.io/api-models/branding/banner.svg "APIs.guru"
 [twitter-image]: https://img.shields.io/twitter/url/http/APIs.guru.svg?style=social
