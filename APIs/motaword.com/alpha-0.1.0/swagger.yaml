@@ -63,6 +63,62 @@ paths:
       summary: Get a list of supported formats
       tags:
         - Static
+  /glossary:
+    get:
+      description: "Download your corporate account's global glossary. This endpoint is available only for corporate account customers."
+      operationId: downloadGlobalGlossary
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Glossary file streamed.
+          schema:
+            type: string
+        '404':
+          description: GlossaryNotFound
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - client_credentials: []
+      summary: Download the global glossary.
+      tags:
+        - Account
+        - Glossary
+    post:
+      description: "Update your corporate account's global glossary. This endpoint is available only for corporate account customers."
+      operationId: updateGlobalGlossary
+      parameters:
+        - description: |
+            Glossary file. Currently supported formats: .xlsx, .tbx
+          in: formData
+          name: glossary
+          required: true
+          type: file
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Success response
+          schema:
+            properties:
+              status:
+                default: success
+                type: string
+            type: object
+        '400':
+          description: FileTooLarge FileTooSmall NoFileUploaded
+          schema:
+            $ref: '#/definitions/Error'
+        '405':
+          description: UnsupportedGlossaryFormat
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - client_credentials: []
+      summary: Create or update the global glossary.
+      tags:
+        - Account
+        - Glossary
   /languages:
     get:
       description: Get a list of supported languages
@@ -270,9 +326,9 @@ paths:
       summary: Update project language pairs
       tags:
         - Project
-  '/projects/{id}/download/{language}':
+  '/projects/{id}/download':
     post:
-      description: "Download the latest translation package. If a language is provided, only the translation package of that language is returned. You must have given a /package call beforehand and wait until the packaging status is 'completed'."
+      description: "Download the latest translation package. You must have given a /package call beforehand and wait until the packaging status is 'completed'."
       operationId: download
       parameters:
         - description: Project ID
@@ -281,7 +337,38 @@ paths:
           name: id
           required: true
           type: integer
-        - description: 'Optional language code. If you need, you can download the translation of only a specific language.'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: 'Translation package streamed. The streamed file is always a ZIP file, except when the API client is configured for Drupal and Wordpress.'
+          schema:
+            type: string
+        '402':
+          description: ProjectNotLaunchedYet
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: TranslationPackageNotFound
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - client_credentials: []
+      summary: Download the latest translation package.
+      tags:
+        - Project
+  '/projects/{id}/download/{language}':
+    post:
+      description: "Download only the translation package of this language. You must have given a /package call beforehand and wait until the packaging status is 'completed'."
+      operationId: downloadLanguage
+      parameters:
+        - description: Project ID
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Language code. You can download the translation of only a specific language.
           in: path
           name: language
           required: true
@@ -359,6 +446,42 @@ paths:
       summary: Launch your translation project
       tags:
         - Project
+  '/projects/{id}/package':
+    post:
+      description: 'Package the translation project, make it ready to be downloaded.'
+      operationId: package
+      parameters:
+        - description: Project ID
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - default: 0
+          description: "If you want to package and download the translation synchronously, mark this parameter as '0'. It will package the translation and then return the packaged file in the response, identical to /download call after an asynchronous /package call."
+          in: query
+          name: async
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Packaged translation streamed.
+          schema:
+            type: string
+        '402':
+          description: ProjectNotLaunchedYet
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: TranslationPackageNotFound
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - client_credentials: []
+      summary: Package the translation of all languages to be downloaded.
+      tags:
+        - Project
   '/projects/{id}/package/check':
     get:
       description: "This request will tell you the current progress of the translation packaging. You will use the 'key' provided by the /package call."
@@ -397,7 +520,7 @@ paths:
   '/projects/{id}/package/{language}':
     post:
       description: 'Package the translation project, make it ready to be downloaded.'
-      operationId: package
+      operationId: packageLanguage
       parameters:
         - description: Project ID
           format: int64
@@ -405,7 +528,7 @@ paths:
           name: id
           required: true
           type: integer
-        - description: 'Optional language code. If you need, you can package the translation of only a specific language.'
+        - description: Language code. You can package the translation of only a specific language.
           in: path
           name: language
           required: true
@@ -436,7 +559,7 @@ paths:
             $ref: '#/definitions/Error'
       security:
         - client_credentials: []
-      summary: Package the project to be downloaded.
+      summary: Package the translation of a specific target language to be downloaded.
       tags:
         - Project
   '/projects/{id}/progress':
@@ -1309,6 +1432,62 @@ paths:
         - client_credentials: []
       summary: Download a style guide
       tags:
+        - Style Guide
+  /styleguide:
+    get:
+      description: "Download your corporate account's global style guide. This endpoint is available only for corporate account customers."
+      operationId: downloadGlobalStyleGuide
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Style guide file streamed.
+          schema:
+            type: string
+        '404':
+          description: StyleGuideNotFound
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - client_credentials: []
+      summary: Download the global style guide.
+      tags:
+        - Account
+        - Style Guide
+    post:
+      description: "Update your corporate account's global style guide. This endpoint is available only for corporate account customers."
+      operationId: updateGlobalStyleGuide
+      parameters:
+        - description: |
+            Style guide file. Currently supported formats: .pdf, .docx, .txt
+          in: formData
+          name: styleguide
+          required: true
+          type: file
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Success response
+          schema:
+            properties:
+              status:
+                default: success
+                type: string
+            type: object
+        '400':
+          description: FileTooLarge FileTooSmall NoFileUploaded MissingCorporateAccount
+          schema:
+            $ref: '#/definitions/Error'
+        '405':
+          description: UnsupportedStyleGuideFormat
+          schema:
+            $ref: '#/definitions/Error'
+      security:
+        - client_credentials: []
+      summary: Create or update the global style guide.
+      tags:
+        - Account
         - Style Guide
   /token:
     post:

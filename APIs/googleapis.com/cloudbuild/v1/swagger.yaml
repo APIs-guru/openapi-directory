@@ -532,9 +532,6 @@ definitions:
         items:
           $ref: '#/definitions/BuiltImage'
         type: array
-      revision:
-        description: Revision ID of the source that was built.
-        type: string
     type: object
   Source:
     description: |-
@@ -635,7 +632,7 @@ definitions:
         description: |-
           Google Cloud Storage object containing source.
 
-          This object must be a gzipped archive file (.tgz) containing source to
+          This object must be a gzipped archive file (.tar.gz) containing source to
           build.
         type: string
     type: object
