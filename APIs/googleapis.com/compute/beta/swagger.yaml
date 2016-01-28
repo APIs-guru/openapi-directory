@@ -5653,44 +5653,6 @@ paths:
             - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - projects
-  '/{project}/setUsageExportCloudStorageBucket':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: '[Deprecated] Use setUsageExportBucket instead.'
-      operationId: compute.projects.setUsageExportCloudStorageBucket
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/UsageExportLocation'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Operation'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.full_control'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_only'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
-      tags:
-        - projects
   '/{project}/targetHttpProxies/{targetHttpProxy}/setUrlMap':
     parameters:
       - $ref: '#/parameters/alt'
@@ -9186,7 +9148,7 @@ definitions:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
       timeoutSec:
-        description: How many seconds to wait for the backend before considering it a failed request. Default is 30 seconds.
+        description: 'How many seconds to wait for the backend before considering it a failed request. Default is 30 seconds. Valid range is [1, 86400].'
         format: int32
         type: integer
     type: object
@@ -12831,7 +12793,7 @@ definitions:
         description: '[Output Only] Type of resource. Always compute#vpnTunnel for VPN tunnels.'
         type: string
       localTrafficSelector:
-        description: 'IKE networks to use when establishing the VPN tunnel with peer VPN gateway. The value should be a CIDR formatted string, for example: 192.168.0.0/16. The ranges should be disjoint.'
+        description: 'Local traffic selector to use when establishing the VPN tunnel with peer VPN gateway. The value should be a CIDR formatted string, for example: 192.168.0.0/16. The ranges should be disjoint.'
         items:
           type: string
         type: array

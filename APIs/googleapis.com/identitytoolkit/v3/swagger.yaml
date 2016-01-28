@@ -543,6 +543,10 @@ definitions:
   IdentitytoolkitRelyingpartyDeleteAccountRequest:
     description: Request to delete account.
     properties:
+      delegatedProjectNumber:
+        description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
+        format: int64
+        type: string
       localId:
         description: The local ID of the user.
         type: string
@@ -550,6 +554,10 @@ definitions:
   IdentitytoolkitRelyingpartyDownloadAccountRequest:
     description: Request to download user account in batch.
     properties:
+      delegatedProjectNumber:
+        description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
+        format: int64
+        type: string
       maxResults:
         description: The max number of results to return in the response.
         format: uint32
@@ -687,6 +695,10 @@ definitions:
   IdentitytoolkitRelyingpartyUploadAccountRequest:
     description: Request to upload user account in batch.
     properties:
+      delegatedProjectNumber:
+        description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
+        format: int64
+        type: string
       hashAlgorithm:
         description: The password hash algorithm.
         type: string
@@ -715,6 +727,10 @@ definitions:
   IdentitytoolkitRelyingpartyVerifyAssertionRequest:
     description: Request to verify the IDP assertion.
     properties:
+      delegatedProjectNumber:
+        description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
+        format: int64
+        type: string
       instanceId:
         description: Instance id token of the app.
         type: string

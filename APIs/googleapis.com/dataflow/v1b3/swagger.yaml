@@ -773,6 +773,8 @@ definitions:
           - JOB_STATE_FAILED
           - JOB_STATE_CANCELLED
           - JOB_STATE_UPDATED
+          - JOB_STATE_DRAINING
+          - JOB_STATE_DRAINED
         type: string
       currentStateTime:
         description: The timestamp associated with the current state.
@@ -808,6 +810,8 @@ definitions:
           - JOB_STATE_FAILED
           - JOB_STATE_CANCELLED
           - JOB_STATE_UPDATED
+          - JOB_STATE_DRAINING
+          - JOB_STATE_DRAINED
         type: string
       steps:
         description: The top-level steps that constitute the entire job.

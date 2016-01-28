@@ -1645,7 +1645,7 @@ definitions:
         description: 'Identity code of this ad unit, not necessarily unique across ad clients.'
         type: string
       contentAdsSettings:
-        description: Settings specific to content ads (AFC) and highend mobile content ads (AFMC).
+        description: Settings specific to content ads (AFC) and highend mobile content ads (AFMC - deprecated).
         properties:
           backupOption:
             description: The backup option to be used in instances where no ad is available.
@@ -1671,7 +1671,7 @@ definitions:
         $ref: '#/definitions/AdStyle'
         description: Custom style information specific to this ad unit.
       feedAdsSettings:
-        description: Settings specific to feed ads (AFF).
+        description: Settings specific to feed ads (AFF) - deprecated.
         properties:
           adPosition:
             description: The position of the ads relative to the feed entries.
@@ -1696,7 +1696,7 @@ definitions:
         description: 'Kind of resource this is, in this case adsense#adUnit.'
         type: string
       mobileContentAdsSettings:
-        description: Settings specific to WAP mobile content ads (AFMC).
+        description: Settings specific to WAP mobile content ads (AFMC) - deprecated.
         properties:
           markupLanguage:
             description: The markup language to use for this ad unit.
@@ -1849,7 +1849,7 @@ definitions:
             description: The external description of the channel.
             type: string
           location:
-            description: 'The locations in which ads appear. (Only valid for content and mobile content ads). Acceptable values for content ads are: TOP_LEFT, TOP_CENTER, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT, MULTIPLE_LOCATIONS. Acceptable values for mobile content ads are: TOP, MIDDLE, BOTTOM, MULTIPLE_LOCATIONS.'
+            description: 'The locations in which ads appear. (Only valid for content and mobile content ads (deprecated)). Acceptable values for content ads are: TOP_LEFT, TOP_CENTER, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT, MULTIPLE_LOCATIONS. Acceptable values for mobile content ads (deprecated) are: TOP, MIDDLE, BOTTOM, MULTIPLE_LOCATIONS.'
             type: string
           siteLanguage:
             description: The language of the sites ads will be displayed on.

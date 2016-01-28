@@ -1136,7 +1136,7 @@ definitions:
         description: 'Identity code of this ad unit, not necessarily unique across ad clients.'
         type: string
       contentAdsSettings:
-        description: Settings specific to content ads (AFC) and highend mobile content ads (AFMC).
+        description: Settings specific to content ads (AFC) and highend mobile content ads (AFMC - deprecated).
         properties:
           backupOption:
             description: The backup option to be used in instances where no ad is available.
@@ -1169,7 +1169,7 @@ definitions:
         description: 'Kind of resource this is, in this case adsensehost#adUnit.'
         type: string
       mobileContentAdsSettings:
-        description: Settings specific to WAP mobile content ads (AFMC).
+        description: Settings specific to WAP mobile content ads (AFMC - deprecated).
         properties:
           markupLanguage:
             description: The markup language to use for this ad unit.
@@ -1228,7 +1228,7 @@ definitions:
         description: 'Kind of resource this is, in this case adsensehost#associationSession.'
         type: string
       productCodes:
-        description: 'The products to associate with the user. Options: AFC, AFF, AFS, AFMC'
+        description: 'The products to associate with the user. Options: AFC, AFG, AFV, AFS (deprecated), AFMC (deprecated)'
         items:
           type: string
         type: array
