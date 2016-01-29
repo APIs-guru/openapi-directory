@@ -1344,7 +1344,7 @@ definitions:
       tableDefinitions:
         additionalProperties:
           $ref: '#/definitions/ExternalDataConfiguration'
-        description: '[Experimental] If querying an external data source outside of BigQuery, describes the data format, location and other properties of the data source. By defining these properties, the data source can then be queried as if it were a standard BigQuery table.'
+        description: '[Optional] If querying an external data source outside of BigQuery, describes the data format, location and other properties of the data source. By defining these properties, the data source can then be queried as if it were a standard BigQuery table.'
         type: object
       useQueryCache:
         default: true
@@ -1684,7 +1684,7 @@ definitions:
         type: string
       externalDataConfiguration:
         $ref: '#/definitions/ExternalDataConfiguration'
-        description: '[Experimental] Describes the data format, location, and other properties of a table stored outside of BigQuery. By defining these properties, the data source can then be queried as if it were a standard BigQuery table.'
+        description: '[Optional] Describes the data format, location, and other properties of a table stored outside of BigQuery. By defining these properties, the data source can then be queried as if it were a standard BigQuery table.'
       friendlyName:
         description: '[Optional] A descriptive name for this table.'
         type: string

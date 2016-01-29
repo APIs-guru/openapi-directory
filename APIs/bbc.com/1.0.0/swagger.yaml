@@ -1885,6 +1885,18 @@ paths:
           required: false
           type: array
         - collectionFormat: multi
+          description: filter for a subset of versions that are of the given payment_type
+          enum:
+            - free
+            - bbcstore
+            - uscansvod
+          in: query
+          items:
+            format: string
+          name: payment_type
+          required: false
+          type: array
+        - collectionFormat: multi
           description: filter for subset of versions having given PID
           in: query
           items:

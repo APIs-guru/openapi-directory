@@ -942,6 +942,9 @@ definitions:
             description: 'The given name of this player. In some places, this is known as the first name.'
             type: string
         type: object
+      originalPlayerId:
+        description: 'The player ID that was used for this player the first time they signed into the game in question. This is only populated for calls to player.get for the requesting player, only if the player ID has subsequently changed, and only to clients that support remapping player IDs.'
+        type: string
       playerId:
         description: The ID of the player.
         type: string
