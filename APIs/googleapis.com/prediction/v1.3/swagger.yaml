@@ -74,6 +74,9 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: hostedmodels
+  - name: training
 paths:
   '/hostedmodels/{hostedModelName}/predict':
     parameters:

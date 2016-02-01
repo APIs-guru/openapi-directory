@@ -76,6 +76,9 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: regionViews
+  - name: zoneViews
 paths:
   '/{projectName}/regions/{region}/resourceViews':
     get:

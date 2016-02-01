@@ -71,6 +71,17 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: accounts
+  - name: accountshipping
+  - name: accountstatuses
+  - name: accounttax
+  - name: datafeeds
+  - name: datafeedstatuses
+  - name: inventory
+  - name: orders
+  - name: products
+  - name: productstatuses
 paths:
   /accounts/authinfo:
     get:

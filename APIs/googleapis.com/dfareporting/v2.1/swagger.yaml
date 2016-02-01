@@ -72,6 +72,62 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: accountActiveAdSummaries
+  - name: accountPermissionGroups
+  - name: accountPermissions
+  - name: accountUserProfiles
+  - name: accounts
+  - name: ads
+  - name: advertiserGroups
+  - name: advertisers
+  - name: browsers
+  - name: campaignCreativeAssociations
+  - name: campaigns
+  - name: changeLogs
+  - name: cities
+  - name: connectionTypes
+  - name: contentCategories
+  - name: countries
+  - name: creativeAssets
+  - name: creativeFieldValues
+  - name: creativeFields
+  - name: creativeGroups
+  - name: creatives
+  - name: dimensionValues
+  - name: directorySiteContacts
+  - name: directorySites
+  - name: eventTags
+  - name: files
+  - name: floodlightActivities
+  - name: floodlightActivityGroups
+  - name: floodlightConfigurations
+  - name: inventoryItems
+  - name: landingPages
+  - name: metros
+  - name: mobileCarriers
+  - name: operatingSystemVersions
+  - name: operatingSystems
+  - name: orderDocuments
+  - name: orders
+  - name: placementGroups
+  - name: placementStrategies
+  - name: placements
+  - name: platformTypes
+  - name: postalCodes
+  - name: projects
+  - name: regions
+  - name: remarketingListShares
+  - name: remarketingLists
+  - name: reports
+  - name: sites
+  - name: sizes
+  - name: subaccounts
+  - name: targetableRemarketingLists
+  - name: userProfiles
+  - name: userRolePermissionGroups
+  - name: userRolePermissions
+  - name: userRoles
 paths:
   '/reports/{reportId}/files/{fileId}':
     get:

@@ -78,6 +78,12 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: datasets
+  - name: jobs
+  - name: projects
+  - name: tabledata
+  - name: tables
 paths:
   '/project/{projectId}/jobs/{jobId}/cancel':
     parameters:

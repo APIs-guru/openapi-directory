@@ -93,6 +93,10 @@ parameters:
     in: query
     name: upload_protocol
     type: string
+tags:
+  - name: beacons
+  - name: namespaces
+  - name: beaconinfo
 paths:
   '/v1beta1/beaconinfo:getforobserved':
     parameters:

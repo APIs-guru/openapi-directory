@@ -71,6 +71,9 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: inapppurchases
+  - name: purchases
 paths:
   '/{packageName}/inapp/{productId}/purchases/{token}':
     get:

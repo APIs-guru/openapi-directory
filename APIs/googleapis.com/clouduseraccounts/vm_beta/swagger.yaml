@@ -74,6 +74,11 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: globalAccountsOperations
+  - name: groups
+  - name: linux
+  - name: users
 paths:
   '/{project}/global/groups':
     get:

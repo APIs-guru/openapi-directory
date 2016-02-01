@@ -74,6 +74,9 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: rollingUpdates
+  - name: zoneOperations
 paths:
   '/{project}/zones/{zone}/operations':
     get:

@@ -80,6 +80,13 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: activities
+  - name: audiences
+  - name: circles
+  - name: comments
+  - name: media
+  - name: people
 paths:
   '/activities/{activityId}':
     get:

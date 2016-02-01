@@ -71,6 +71,12 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: blogs
+  - name: comments
+  - name: pages
+  - name: posts
+  - name: users
 paths:
   '/blogs/{blogId}':
     get:

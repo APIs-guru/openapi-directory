@@ -74,6 +74,9 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: instanceGroupManagers
+  - name: zoneOperations
 paths:
   '/{project}/zones/{zone}/instanceGroupManagers':
     get:

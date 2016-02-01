@@ -74,6 +74,12 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: deployments
+  - name: manifests
+  - name: operations
+  - name: resources
+  - name: types
 paths:
   '/{project}/global/deployments':
     get:

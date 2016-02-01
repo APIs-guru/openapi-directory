@@ -72,6 +72,11 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: activities
+  - name: channels
+  - name: customerUsageReports
+  - name: userUsageReport
 paths:
   '/activity/users/{userKey}/applications/{applicationName}':
     get:

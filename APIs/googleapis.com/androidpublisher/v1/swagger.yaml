@@ -71,6 +71,8 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: purchases
 paths:
   '/{packageName}/subscriptions/{subscriptionId}/purchases/{token}':
     get:

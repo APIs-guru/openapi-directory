@@ -73,6 +73,16 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: accounts
+  - name: adclients
+  - name: adunits
+  - name: alerts
+  - name: customchannels
+  - name: metadata
+  - name: preferreddeals
+  - name: reports
+  - name: urlchannels
 paths:
   '/accounts/{accountId}':
     get:

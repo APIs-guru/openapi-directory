@@ -72,6 +72,9 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: taskqueues
+  - name: tasks
 paths:
   '/{project}/taskqueues/{taskqueue}':
     get:

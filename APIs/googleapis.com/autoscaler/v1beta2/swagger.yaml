@@ -72,6 +72,10 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: autoscalers
+  - name: zoneOperations
+  - name: zones
 paths:
   '/projects/{project}/zones/{zone}/autoscalers':
     get:

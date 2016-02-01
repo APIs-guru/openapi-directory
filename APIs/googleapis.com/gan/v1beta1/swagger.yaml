@@ -63,6 +63,13 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: advertisers
+  - name: ccOffers
+  - name: events
+  - name: links
+  - name: publishers
+  - name: reports
 paths:
   '/publishers/{publisher}/ccOffers':
     get:

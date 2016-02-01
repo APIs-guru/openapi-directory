@@ -72,6 +72,10 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: metricDescriptors
+  - name: timeseries
+  - name: timeseriesDescriptors
 paths:
   '/{project}/metricDescriptors':
     get:

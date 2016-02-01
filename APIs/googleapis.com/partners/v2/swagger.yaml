@@ -92,6 +92,11 @@ parameters:
     in: query
     name: upload_protocol
     type: string
+tags:
+  - name: userEvents
+  - name: clientMessages
+  - name: userStates
+  - name: companies
 paths:
   '/v2/clientMessages:log':
     parameters:

@@ -74,6 +74,11 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: changes
+  - name: managedZones
+  - name: projects
+  - name: resourceRecordSets
 paths:
   '/{project}':
     get:

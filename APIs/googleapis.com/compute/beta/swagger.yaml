@@ -76,6 +76,43 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: addresses
+  - name: autoscalers
+  - name: backendServices
+  - name: diskTypes
+  - name: disks
+  - name: firewalls
+  - name: forwardingRules
+  - name: globalAddresses
+  - name: globalForwardingRules
+  - name: globalOperations
+  - name: httpHealthChecks
+  - name: httpsHealthChecks
+  - name: images
+  - name: instanceGroupManagers
+  - name: instanceGroups
+  - name: instanceTemplates
+  - name: instances
+  - name: licenses
+  - name: machineTypes
+  - name: networks
+  - name: projects
+  - name: regionOperations
+  - name: regions
+  - name: routes
+  - name: snapshots
+  - name: sslCertificates
+  - name: subnetworks
+  - name: targetHttpProxies
+  - name: targetHttpsProxies
+  - name: targetInstances
+  - name: targetPools
+  - name: targetVpnGateways
+  - name: urlMaps
+  - name: vpnTunnels
+  - name: zoneOperations
+  - name: zones
 paths:
   '/{project}':
     get:

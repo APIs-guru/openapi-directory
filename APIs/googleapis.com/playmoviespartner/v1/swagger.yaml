@@ -100,6 +100,8 @@ parameters:
     in: query
     name: upload_protocol
     type: string
+tags:
+  - name: accounts
 paths:
   '/v1/accounts/{accountId}/avails':
     get:

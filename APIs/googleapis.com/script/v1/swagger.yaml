@@ -109,6 +109,8 @@ parameters:
     in: query
     name: upload_protocol
     type: string
+tags:
+  - name: scripts
 paths:
   '/v1/scripts/{scriptId}:run':
     parameters:

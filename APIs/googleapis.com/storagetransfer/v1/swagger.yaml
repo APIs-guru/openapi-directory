@@ -101,6 +101,11 @@ parameters:
     in: query
     name: upload_protocol
     type: string
+tags:
+  - name: googleServiceAccounts
+  - name: v1
+  - name: transferJobs
+  - name: transferOperations
 paths:
   '/v1/googleServiceAccounts/{projectId}':
     get:

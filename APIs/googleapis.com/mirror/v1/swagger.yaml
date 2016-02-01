@@ -72,6 +72,13 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: accounts
+  - name: contacts
+  - name: locations
+  - name: settings
+  - name: subscriptions
+  - name: timeline
 paths:
   '/accounts/{userToken}/{accountType}/{accountName}':
     parameters:

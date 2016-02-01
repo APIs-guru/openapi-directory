@@ -71,6 +71,10 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: conversion
+  - name: reports
+  - name: savedColumns
 paths:
   '/agency/{agencyId}/advertiser/{advertiserId}/engine/{engineAccountId}/conversion':
     get:

@@ -103,6 +103,9 @@ parameters:
     in: query
     name: upload_protocol
     type: string
+tags:
+  - name: projects
+  - name: operations
 paths:
   '/v1alpha1/projects/{projectId}/clusters':
     get:

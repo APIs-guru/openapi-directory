@@ -76,6 +76,9 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: pools
+  - name: replicas
 paths:
   '/{projectName}/zones/{zone}/pools':
     get:

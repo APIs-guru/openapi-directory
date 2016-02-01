@@ -76,6 +76,8 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: users
 paths:
   '/{userId}/dataSources':
     get:

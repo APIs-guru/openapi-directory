@@ -71,6 +71,10 @@ parameters:
     in: query
     name: userIp
     type: string
+tags:
+  - name: achievementConfigurations
+  - name: imageConfigurations
+  - name: leaderboardConfigurations
 paths:
   '/achievements/{achievementId}':
     delete:
