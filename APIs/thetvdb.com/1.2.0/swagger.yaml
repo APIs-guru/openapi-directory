@@ -5,33 +5,8 @@ schemes:
 host: api-dev.thetvdb.com
 basePath: /
 info:
-  description: |-
-    This is an early draft and targets v1 functionality with a few minor additions. The API is accessible via https://api.thetvdb.com and provides the following REST endpoints in JSON format.
-
-    How to use this API documentation
-    ----------------
-
-    You may browse the API routes without authentication, but if you wish to send requests to the API and see response data, then you must authenticate.
-    1. Obtain a JWT token by `POST`ing  to the `/login` route in the `Authentication` section with your API key and credentials.
-    1. Paste the JWT token from the response into the "JWT Token" field at the top of the page and click the 'Add Token' button.
-
-    You will now be able to use the remaining routes to send requests to the API and get a response.
-
-    Language Selection
-    ----------------
-
-    Language selection is done via the `Accept-Language` header. At the moment, you may only pass one language abbreviation in the header at a time. Valid language abbreviations can be found at the `/languages` route..
-
-    Authentication
-    ----------------
-
-    Authentication to use the API is similar to the How-to section above. Users must `POST` to the `/login` route with their API key and credentials in order to obtain a JWT token. That token is then used in all subsequent requests by providing it in the `Authorization` header. The header will look like: `Authorization: Bearer <yourJWTtoken>`. Currently, the token expires after 1 hour. You can `GET` the `/refresh_token` route to extend that expiration date.
-
-    Versioning
-    ----------------
-
-    You may request a different version of the API by including an `Accept` header in your request with the following format: `Accept:application/vnd.thetvdb.v$VERSION`. This documentation automatically uses the version seen at the top and bottom of the page.
-  title: TheTVDB.com
+  description: "This is an early draft and targets v1 functionality with a few minor additions. The API is accessible via https://api.thetvdb.com and provides the following REST endpoints in JSON format.\n\n\nHow to use this API documentation\n----------------\n\n\nYou may browse the API routes without authentication, but if you wish to send requests to the API and see response data, then you must authenticate.\n1. Obtain a JWT token by `POST`ing  to the `/login` route in the `Authentication` section with your API key and credentials.\n1. Paste the JWT token from the response into the \"JWT Token\" field at the top of the page and click the 'Add Token' button.\n\n\nYou will now be able to use the remaining routes to send requests to the API and get a response.\n\n\nLanguage Selection\n----------------\n\n\nLanguage selection is done via the `Accept-Language` header. At the moment, you may only pass one language abbreviation in the header at a time. Valid language abbreviations can be found at the `/languages` route..\n\n\nAuthentication\n----------------\n\n\nAuthentication to use the API is similar to the How-to section above. Users must `POST` to the `/login` route with their API key and credentials in the following format in order to obtain a JWT token. \n\n`{\"apikey\":\"APIKEY\",\"username\":\"USERNAME\",\"userpass\":\"USERPASS\"}`\n\nNote that the username and password are ONLY required for the `/user` routes\n\nThe token is then used in all subsequent requests by providing it in the `Authorization` header. The header will look like: `Authorization: Bearer <yourJWTtoken>`. Currently, the token expires after 1 hour. You can `GET` the `/refresh_token` route to extend that expiration date.\n\n\nVersioning\n----------------\n\n\nYou may request a different version of the API by including an `Accept` header in your request with the following format: `Accept:application/vnd.thetvdb.v$VERSION`. This documentation automatically uses the version seen at the top and bottom of the page."
+  title: TheTVDB API v2
   version: 1.2.0
   x-origin:
     format: swagger
@@ -42,6 +17,12 @@ consumes:
   - application/json
 produces:
   - application/json
+securityDefinitions:
+  jwtToken:
+    description: 'JWT token prefixed with "Bearer "'
+    in: header
+    name: Authorization
+    type: apiKey
 parameters:
   Accept-Language:
     description: 'Records are returned with the Episode name and Overview in the desired language, if it exists. If there is no translation for the given language, then the record is still returned but with empty values for the translated fields.'
@@ -207,6 +188,8 @@ paths:
           description: Returned if the given episode ID does not exist.
           schema:
             $ref: '#/definitions/NotFound'
+      security:
+        - jwtToken: []
       tags:
         - Episodes
   /languages:
@@ -221,6 +204,8 @@ paths:
           description: Returned if your JWT token is missing or expired
           schema:
             $ref: '#/definitions/NotAuthorized'
+      security:
+        - jwtToken: []
       tags:
         - Languages
   '/languages/{id}':
@@ -241,6 +226,8 @@ paths:
           description: Returned if the given language ID does not exist.
           schema:
             $ref: '#/definitions/NotFound'
+      security:
+        - jwtToken: []
       tags:
         - Languages
   /login:
@@ -276,6 +263,8 @@ paths:
           description: Returned if your JWT token is missing or expired
           schema:
             $ref: '#/definitions/NotAuthorized'
+      security:
+        - jwtToken: []
       tags:
         - Authentication
   /search/series:
@@ -299,6 +288,8 @@ paths:
           description: Returned if no records are found that match your query.
           schema:
             $ref: '#/definitions/NotFound'
+      security:
+        - jwtToken: []
       tags:
         - Search
   /search/series/params:
@@ -313,6 +304,8 @@ paths:
           description: Returned if your JWT token is missing or expired
           schema:
             $ref: '#/definitions/NotAuthorized'
+      security:
+        - jwtToken: []
       tags:
         - Search
   '/series/{id}':
@@ -334,6 +327,8 @@ paths:
           description: Returned if the given series ID does not exist
           schema:
             $ref: '#/definitions/NotFound'
+      security:
+        - jwtToken: []
       tags:
         - Series
     head:
@@ -352,6 +347,8 @@ paths:
           description: Returned if the given series ID does not exist
           schema:
             $ref: '#/definitions/NotFound'
+      security:
+        - jwtToken: []
       tags:
         - Series
   '/series/{id}/actors':
@@ -372,6 +369,8 @@ paths:
           description: Returned if the given series ID does not exist
           schema:
             $ref: '#/definitions/NotFound'
+      security:
+        - jwtToken: []
       tags:
         - Series
   '/series/{id}/episodes':
@@ -393,6 +392,8 @@ paths:
           description: Returned if the given series ID does not exist
           schema:
             $ref: '#/definitions/NotFound'
+      security:
+        - jwtToken: []
       tags:
         - Series
   '/series/{id}/episodes/query':
@@ -421,6 +422,8 @@ paths:
           description: Returned if the given series ID does not exist or the query returns no results.
           schema:
             $ref: '#/definitions/NotFound'
+      security:
+        - jwtToken: []
       tags:
         - Series
   '/series/{id}/episodes/query/params':
@@ -441,6 +444,8 @@ paths:
           description: Returned if the given series ID does not exist or the query returns no results.
           schema:
             $ref: '#/definitions/NotFound'
+      security:
+        - jwtToken: []
       tags:
         - Series
   '/series/{id}/episodes/summary':
@@ -464,6 +469,8 @@ paths:
           description: Returned if the given series ID does not exist
           schema:
             $ref: '#/definitions/NotFound'
+      security:
+        - jwtToken: []
       tags:
         - Series
   '/series/{id}/filter':
@@ -486,6 +493,8 @@ paths:
           description: Returned if the given series ID does not exist
           schema:
             $ref: '#/definitions/NotFound'
+      security:
+        - jwtToken: []
       tags:
         - Series
   '/series/{id}/filter/params':
@@ -507,6 +516,8 @@ paths:
           description: Returned if the given series ID does not exist
           schema:
             $ref: '#/definitions/NotFound'
+      security:
+        - jwtToken: []
       tags:
         - Series
   '/series/{id}/images':
@@ -528,6 +539,8 @@ paths:
           description: Returned if the given series ID does not exist
           schema:
             $ref: '#/definitions/NotFound'
+      security:
+        - jwtToken: []
       tags:
         - Series
   '/series/{id}/images/query':
@@ -552,6 +565,8 @@ paths:
           description: Returned if the given series ID does not exist or the query returns no results.
           schema:
             $ref: '#/definitions/NotFound'
+      security:
+        - jwtToken: []
       tags:
         - Series
   '/series/{id}/images/query/params':
@@ -573,12 +588,15 @@ paths:
           description: Returned if the given series ID does not exist or the query returns no results.
           schema:
             $ref: '#/definitions/NotFound'
+      security:
+        - jwtToken: []
       tags:
         - Series
   /updated/query:
     get:
       description: |-
         Returns an array of series that have changed in a maximum of one week blocks since the provided `fromTime`.
+
 
         The user may specify a `toTime` to grab results for less than a week. Any timespan larger than a week will be reduced down to one week automatically.
       parameters:
@@ -598,6 +616,8 @@ paths:
           description: Returned if no records exist for the given timespan
           schema:
             $ref: '#/definitions/NotFound'
+      security:
+        - jwtToken: []
       tags:
         - Updates
   /updated/query/params:
@@ -616,6 +636,8 @@ paths:
           description: Returned if no records exist for the given timespan
           schema:
             $ref: '#/definitions/NotFound'
+      security:
+        - jwtToken: []
       tags:
         - Updates
   /user:
@@ -634,6 +656,8 @@ paths:
           description: Returned if no information exists for the current user
           schema:
             $ref: '#/definitions/NotFound'
+      security:
+        - jwtToken: []
       tags:
         - Users
   /user/favorites:
@@ -652,6 +676,8 @@ paths:
           description: Returned if no information exists for the current user
           schema:
             $ref: '#/definitions/NotFound'
+      security:
+        - jwtToken: []
       tags:
         - Users
   '/user/favorites/{id}':
@@ -676,6 +702,8 @@ paths:
           description: Returned if requested record could not be deleted
           schema:
             $ref: '#/definitions/Conflict'
+      security:
+        - jwtToken: []
       tags:
         - Users
     put:
@@ -699,6 +727,8 @@ paths:
           description: Returned if requested record could not be updated
           schema:
             $ref: '#/definitions/Conflict'
+      security:
+        - jwtToken: []
       tags:
         - Users
   /user/ratings:
@@ -717,6 +747,8 @@ paths:
           description: Returned if no information exists for the current user
           schema:
             $ref: '#/definitions/NotFound'
+      security:
+        - jwtToken: []
       tags:
         - Users
   /user/ratings/query:
@@ -737,6 +769,8 @@ paths:
           description: Returned if no information exists for the current user
           schema:
             $ref: '#/definitions/NotFound'
+      security:
+        - jwtToken: []
       tags:
         - Users
   /user/ratings/query/params:
@@ -755,6 +789,8 @@ paths:
           description: Returned if no information exists for the current user
           schema:
             $ref: '#/definitions/NotFound'
+      security:
+        - jwtToken: []
       tags:
         - Users
   '/user/ratings/{itemType}/{itemId}':
@@ -776,6 +812,8 @@ paths:
           description: Returned if no rating is found that matches your given parameters
           schema:
             $ref: '#/definitions/NotFound'
+      security:
+        - jwtToken: []
       tags:
         - Users
   '/user/ratings/{itemType}/{itemId}/{itemRating}':
@@ -798,6 +836,8 @@ paths:
           description: Returned if no rating is found that matches your given parameters
           schema:
             $ref: '#/definitions/NotFound'
+      security:
+        - jwtToken: []
       tags:
         - Users
 definitions:
