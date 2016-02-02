@@ -106,7 +106,7 @@ paths:
         '200':
           description: List of recent media entries from a geography subscription.
           schema:
-            $ref: '#/definitions/LocationMediaResponse'
+            $ref: '#/definitions/MediaListResponse'
       security:
         - api_key: []
         - instagram_auth:
@@ -223,7 +223,7 @@ paths:
         '200':
           description: List of media entries from this location.
           schema:
-            $ref: '#/definitions/LocationMediaResponse'
+            $ref: '#/definitions/MediaListResponse'
       security:
         - api_key: []
         - instagram_auth:
@@ -315,7 +315,7 @@ paths:
         '200':
           description: Media resource information.
           schema:
-            $ref: '#/definitions/MediaResponse'
+            $ref: '#/definitions/MediaEntryResponse'
       security:
         - api_key: []
         - instagram_auth:
@@ -342,7 +342,7 @@ paths:
         '200':
           description: Media resource information.
           schema:
-            $ref: '#/definitions/MediaResponse'
+            $ref: '#/definitions/MediaEntryResponse'
       security:
         - api_key: []
         - instagram_auth:
@@ -565,7 +565,7 @@ paths:
         '200':
           description: List of media entries with this tag.
           schema:
-            $ref: '#/definitions/TagMediaResponse'
+            $ref: '#/definitions/TagMediaListResponse'
       security:
         - api_key: []
         - instagram_auth:
@@ -626,7 +626,7 @@ paths:
         '200':
           description: Users feed entries.
           schema:
-            $ref: '#/definitions/MediaResponse'
+            $ref: '#/definitions/MediaListResponse'
       security:
         - api_key: []
         - instagram_auth:
@@ -655,7 +655,7 @@ paths:
         '200':
           description: Users media entries.
           schema:
-            $ref: '#/definitions/MediaResponse'
+            $ref: '#/definitions/MediaListResponse'
       security:
         - api_key: []
         - instagram_auth:
@@ -796,7 +796,7 @@ paths:
         '200':
           description: Users media entries.
           schema:
-            $ref: '#/definitions/MediaResponse'
+            $ref: '#/definitions/MediaListResponse'
       security:
         - api_key: []
         - instagram_auth:
@@ -990,20 +990,6 @@ definitions:
         $ref: '#/definitions/MetaData'
         description: Response meta-data
     type: object
-  LocationMediaResponse:
-    properties:
-      data:
-        description: List of media entries from this location
-        items:
-          $ref: '#/definitions/MediaEntry'
-        type: array
-      meta:
-        $ref: '#/definitions/MetaData'
-        description: Response meta-data
-      pagination:
-        $ref: '#/definitions/IdPaginationInfo'
-        description: Information for pagination
-    type: object
   LocationSearchResponse:
     properties:
       data:
@@ -1073,7 +1059,7 @@ definitions:
         $ref: '#/definitions/VideosData'
         description: "Videos data in different resolutions, applied for 'video' type"
     type: object
-  MediaResponse:
+  MediaEntryResponse:
     properties:
       data:
         $ref: '#/definitions/MediaEntry'
@@ -1081,6 +1067,20 @@ definitions:
       meta:
         $ref: '#/definitions/MetaData'
         description: Response meta-data
+    type: object
+  MediaListResponse:
+    properties:
+      data:
+        description: List of media entries
+        items:
+          $ref: '#/definitions/MediaEntry'
+        type: array
+      meta:
+        $ref: '#/definitions/MetaData'
+        description: Response meta-data
+      pagination:
+        $ref: '#/definitions/IdPaginationInfo'
+        description: Information for pagination
     type: object
   MediaSearchResponse:
     properties:
@@ -1187,7 +1187,7 @@ definitions:
         $ref: '#/definitions/MetaData'
         description: Response meta-data
     type: object
-  TagMediaResponse:
+  TagMediaListResponse:
     properties:
       data:
         description: List of media entries with this tag
