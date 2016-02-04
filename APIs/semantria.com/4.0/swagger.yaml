@@ -37,8 +37,6 @@ tags:
     name: Entities
   - description: Sentiment-Bearing Phrases
     name: Phrases
-  - description: Taxonomy
-    name: Taxonomy
   - description: Basic analysis
     name: ProcessingDocuments
   - description: Discovery analysis
@@ -54,14 +52,12 @@ paths:
           name: config_id
           required: false
           type: string
-        - description: List of unique blacklisted item identifiers (string).
+        - description: List of unique blacklisted items (strings).
           in: body
-          name: Blacklisted item IDs
+          name: Blacklisted items
           required: true
           schema:
-            items:
-              type: string
-            type: array
+            $ref: '#/definitions/Request class'
         - in: path
           name: content_type
           required: true
@@ -73,7 +69,7 @@ paths:
         '200':
           description: No response was specified
         '202':
-          description: Client request accepted and queued.
+          description: Client request accepted and configurations updated.
         '400':
           description: Incoming request body is incorrect. Server responds with details.
         '401':
@@ -108,7 +104,7 @@ paths:
           description: Client request accepted and queued. Server responds with the blacklist.
           schema:
             items:
-              $ref: '#/definitions/BlacklistItem_ResponseVersion'
+              type: string
             type: array
         '202':
           description: 'Client request accepted, no blacklist found. Server responds with empty body.'
@@ -123,50 +119,6 @@ paths:
         - Blacklist
     post:
       description: This method adds new unique items to the backlist on Semantria side.
-      operationId: addBlacklist
-      parameters:
-        - description: Identifier of configuration blacklist linked to.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: List of parametrized JSON or XML objects.
-          in: body
-          name: Blacklisted items
-          required: true
-          schema:
-            $ref: '#/definitions/Request class'
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: No response was specified
-          schema:
-            items:
-              $ref: '#/definitions/BlacklistItem_ResponseVersion'
-            type: array
-        '202':
-          description: Client request accepted and queued.
-        '400':
-          description: Incoming request body is incorrect. Server responds with details.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '406':
-          description: Number of allowed blacklisted items per configuration achieved.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Add items to blacklist
-      tags:
-        - Blacklist
-    put:
-      description: This method updates existing items by unique IDs in the backlist on Semantria side.
       operationId: updateBlacklist
       parameters:
         - description: Identifier of configuration blacklist linked to.
@@ -190,12 +142,8 @@ paths:
       responses:
         '200':
           description: No response was specified
-          schema:
-            items:
-              $ref: '#/definitions/BlacklistItem_ResponseVersion'
-            type: array
         '202':
-          description: Client request accepted and queued.
+          description: Client request accepted and configurations updated.
         '400':
           description: Incoming request body is incorrect. Server responds with details.
         '401':
@@ -206,12 +154,12 @@ paths:
           description: Number of allowed blacklisted items per configuration achieved.
         '500':
           description: Server side issue. Server may respond with the details in response body.
-      summary: Update items in blacklist
+      summary: Add items to blacklist
       tags:
         - Blacklist
   '/categories.{content_type}':
     delete:
-      description: This method removes certain user categories by their IDs on Semantria side.
+      description: This method removes certain user categories by their names on Semantria side.
       operationId: deleteCategories
       parameters:
         - description: Identifier of configuration user categories linked to.
@@ -219,14 +167,12 @@ paths:
           name: config_id
           required: false
           type: string
-        - description: List of user category identifiers.
+        - description: List of user category names (strings).
           in: body
-          name: Category IDs
+          name: Category names
           required: true
           schema:
-            items:
-              type: string
-            type: array
+            $ref: '#/definitions/Request class'
         - in: path
           name: content_type
           required: true
@@ -238,7 +184,7 @@ paths:
         '200':
           description: No response was specified
         '202':
-          description: Client request accepted and queued.
+          description: Client request accepted and configurations updated.
         '400':
           description: Incoming request body is incorrect. Server responds with details.
         '401':
@@ -273,7 +219,7 @@ paths:
           description: Client request accepted and queued. Server responds with the categories list.
           schema:
             items:
-              $ref: '#/definitions/Category_ResponseVersion'
+              $ref: '#/definitions/Category'
             type: array
         '202':
           description: 'Client request accepted, no categories found. Server responds with empty body.'
@@ -287,51 +233,7 @@ paths:
       tags:
         - Categories
     post:
-      description: This method adds user categories on Semantria side.
-      operationId: addCategories
-      parameters:
-        - description: Identifier of configuration user categories linked to.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: List of parametrized JSON or XML objects.
-          in: body
-          name: Categories
-          required: true
-          schema:
-            $ref: '#/definitions/Request class'
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: No response was specified
-          schema:
-            items:
-              $ref: '#/definitions/Category_ResponseVersion'
-            type: array
-        '202':
-          description: Client request accepted and queued.
-        '400':
-          description: Incoming request body is incorrect. Server responds with details.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '406':
-          description: Number of allowed categories per configuration or samples per category achieved.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Add user categories
-      tags:
-        - Categories
-    put:
-      description: This method updates user categories by unique IDs on Semantria side.
+      description: This method adds or updates user categories by unique names on Semantria side.
       operationId: updateCategories
       parameters:
         - description: Identifier of configuration user categories linked to.
@@ -355,12 +257,8 @@ paths:
       responses:
         '200':
           description: No response was specified
-          schema:
-            items:
-              $ref: '#/definitions/Category_ResponseVersion'
-            type: array
         '202':
-          description: Client request accepted and queued.
+          description: Client request accepted and configurations updated.
         '400':
           description: Incoming request body is incorrect. Server responds with details.
         '401':
@@ -371,7 +269,7 @@ paths:
           description: Number of allowed categories per configuration or samples per category achieved.
         '500':
           description: Server side issue. Server may respond with the details in response body.
-      summary: Updates user categories
+      summary: Add or update user categories
       tags:
         - Categories
   '/collection.{content_type}':
@@ -528,14 +426,12 @@ paths:
       description: This method removes certain configuration by unique ID on Semantria side.
       operationId: deleteConfigurations
       parameters:
-        - description: List of configuration identifiers.
+        - description: List of configuration identifiers (strings).
           in: body
           name: Configuration IDs
           required: true
           schema:
-            items:
-              type: string
-            type: array
+            $ref: '#/definitions/Request class'
         - in: path
           name: content_type
           required: true
@@ -547,7 +443,7 @@ paths:
         '200':
           description: No response was specified
         '202':
-          description: Client request accepted and queued.
+          description: Client request accepted and configurations updated.
         '400':
           description: Incoming request body is incorrect. Server responds with details.
         '401':
@@ -577,7 +473,7 @@ paths:
           description: Client request accepted. Server responds with status object.
           schema:
             items:
-              $ref: '#/definitions/Configuration_ResponseVersion'
+              $ref: '#/definitions/Configuration'
             type: array
         '401':
           description: Authentication failed.
@@ -589,46 +485,7 @@ paths:
       tags:
         - Configuration
     post:
-      description: This method creates configurations on Semantria side.
-      operationId: addConfigurations
-      parameters:
-        - description: List of parametrized JSON or XML objects.
-          in: body
-          name: Configurations
-          required: true
-          schema:
-            $ref: '#/definitions/Request class'
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: No response was specified
-          schema:
-            items:
-              $ref: '#/definitions/Configuration_ResponseVersion'
-            type: array
-        '202':
-          description: Client request accepted and queued.
-        '400':
-          description: Incoming request body is incorrect. Server responds with details.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '406':
-          description: Number of allowed configurations for user subscription is reached.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Create user configurations
-      tags:
-        - Configuration
-    put:
-      description: This method updates specific configurations by unique IDs on Semantria side.
+      description: 'This method creates or updates specific configurations on Semantria side. If unique ID of configuration provided, Semantria updates certain configuration is exists. If unique ID not passed, Semantria creates new configuration with provided settings.'
       operationId: updateConfigurations
       parameters:
         - description: List of parametrized JSON or XML objects.
@@ -647,12 +504,8 @@ paths:
       responses:
         '200':
           description: No response was specified
-          schema:
-            items:
-              $ref: '#/definitions/Configuration_ResponseVersion'
-            type: array
         '202':
-          description: Client request accepted and queued.
+          description: Client request accepted and configurations updated.
         '400':
           description: Incoming request body is incorrect. Server responds with details.
         '401':
@@ -663,7 +516,7 @@ paths:
           description: Number of allowed configurations for user subscription is reached.
         '500':
           description: Server side issue. Server may respond with the details in response body.
-      summary: Update user configurations
+      summary: Create or update user configurations
       tags:
         - Configuration
   '/document.{content_type}':
@@ -868,9 +721,9 @@ paths:
           name: config_id
           required: false
           type: string
-        - description: List of user entity identifiers.
+        - description: List of user entity names (strings)
           in: body
-          name: User entity IDs
+          name: User entity names
           required: true
           schema:
             items:
@@ -887,7 +740,7 @@ paths:
         '200':
           description: No response was specified
         '202':
-          description: Client request accepted and queued.
+          description: Client request accepted and configurations updated.
         '400':
           description: Incoming request body is incorrect. Server responds with details.
         '401':
@@ -922,7 +775,7 @@ paths:
           description: Client request accepted and queued. Server responds with the entities list.
           schema:
             items:
-              $ref: '#/definitions/Entity_ResponseVersion'
+              $ref: '#/definitions/Entity'
             type: array
         '202':
           description: Client request accepted and no entities found. Server responds with empty body.
@@ -936,51 +789,7 @@ paths:
       tags:
         - Entities
     post:
-      description: This method adds user entities on Semantria side.
-      operationId: addEntities
-      parameters:
-        - description: Identifier of configuration user entities linked to.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: List of parametrized JSON or XML objects.
-          in: body
-          name: User entities
-          required: true
-          schema:
-            $ref: '#/definitions/Request class'
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: No response was specified
-          schema:
-            items:
-              $ref: '#/definitions/Entity_ResponseVersion'
-            type: array
-        '202':
-          description: Client request accepted and queued.
-        '400':
-          description: Incoming request body is incorrect. Server responds with details.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '406':
-          description: Number of allowed entities per configuration achieved.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Add user entities
-      tags:
-        - Entities
-    put:
-      description: This method updates user entities by unique IDs on Semantria side.
+      description: This method adds or updates user entities by unique names on Semantria side.
       operationId: updateEntities
       parameters:
         - description: Identifier of configuration user entities linked to.
@@ -1004,12 +813,8 @@ paths:
       responses:
         '200':
           description: No response was specified
-          schema:
-            items:
-              $ref: '#/definitions/Entity_ResponseVersion'
-            type: array
         '202':
-          description: Client request accepted and queued.
+          description: Client request accepted and configurations updated.
         '400':
           description: Incoming request body is incorrect. Server responds with details.
         '401':
@@ -1020,7 +825,7 @@ paths:
           description: Number of allowed entities per configuration achieved.
         '500':
           description: Server side issue. Server may respond with the details in response body.
-      summary: Update user entities
+      summary: Add or update user entities
       tags:
         - Entities
   '/features.{content_type}':
@@ -1066,14 +871,12 @@ paths:
           name: config_id
           required: false
           type: string
-        - description: List of sentiment-bearing phrase identifiers.
+        - description: List of sentiment-bearing phrases (strings).
           in: body
-          name: Sentiment phrase IDs
+          name: Sentiment phrases
           required: true
           schema:
-            items:
-              type: string
-            type: array
+            $ref: '#/definitions/Request class'
         - in: path
           name: content_type
           required: true
@@ -1085,7 +888,7 @@ paths:
         '200':
           description: No response was specified
         '202':
-          description: Client request accepted and queued.
+          description: Client request accepted and configurations updated.
         '400':
           description: Incoming request body is incorrect. Server responds with details.
         '401':
@@ -1120,7 +923,7 @@ paths:
           description: Client request accepted and queued. Server responds with the sentiment-bearing phrases list.
           schema:
             items:
-              $ref: '#/definitions/Phrase_ResponseVersion'
+              $ref: '#/definitions/Phrase'
             type: array
         '202':
           description: Client request accepted and no sentiment-bearing phrases found. Server responds with empty body.
@@ -1134,51 +937,7 @@ paths:
       tags:
         - Phrases
     post:
-      description: This method adds sentiment-bearing phrases on Semantria side.
-      operationId: addPhrases
-      parameters:
-        - description: Identifier of configuration phrases linked to.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: List of parametrized JSON or XML objects.
-          in: body
-          name: Sentiment phrases
-          required: true
-          schema:
-            $ref: '#/definitions/Request class'
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: No response was specified
-          schema:
-            items:
-              $ref: '#/definitions/Phrase_ResponseVersion'
-            type: array
-        '202':
-          description: Client request accepted and queued.
-        '400':
-          description: Incoming request body is incorrect. Server responds with details.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '406':
-          description: Number of allowed sentiment-bearing phrases per configuration achieved.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Add sentiment-bearing phrases
-      tags:
-        - Phrases
-    put:
-      description: This method updates sentiment-bearing phrases by unique IDs on Semantria side.
+      description: This method adds or updates sentiment-bearing phrases by unique names on Semantria side.
       operationId: updatePhrases
       parameters:
         - description: Identifier of configuration phrases linked to.
@@ -1202,12 +961,8 @@ paths:
       responses:
         '200':
           description: No response was specified
-          schema:
-            items:
-              $ref: '#/definitions/Phrase_ResponseVersion'
-            type: array
         '202':
-          description: Client request accepted and queued.
+          description: Client request accepted and configurations updated.
         '400':
           description: Incoming request body is incorrect. Server responds with details.
         '401':
@@ -1218,12 +973,12 @@ paths:
           description: Number of allowed sentiment-bearing phrases per configuration achieved.
         '500':
           description: Server side issue. Server may respond with the details in response body.
-      summary: Updates sentiment-bearing phrases
+      summary: Add or update sentiment-bearing phrases
       tags:
         - Phrases
   '/queries.{content_type}':
     delete:
-      description: This method removes certain queries by their IDs on Semantria side.
+      description: This method removes certain queries by their names on Semantria side.
       operationId: deleteQueries
       parameters:
         - description: Identifier of configuration queries linked to.
@@ -1231,14 +986,12 @@ paths:
           name: config_id
           required: false
           type: string
-        - description: List of query identifiers.
+        - description: List of query names (strings).
           in: body
-          name: Query IDs
+          name: Query names
           required: true
           schema:
-            items:
-              type: string
-            type: array
+            $ref: '#/definitions/Request class'
         - in: path
           name: content_type
           required: true
@@ -1250,7 +1003,7 @@ paths:
         '200':
           description: No response was specified
         '202':
-          description: Client request accepted and queued.
+          description: Client request accepted and configurations updated.
         '400':
           description: Incoming request body is incorrect. Server responds with details.
         '401':
@@ -1285,7 +1038,7 @@ paths:
           description: Client request accepted and queued. Server responds with the queries list.
           schema:
             items:
-              $ref: '#/definitions/Query_ResponseVersion'
+              $ref: '#/definitions/Query'
             type: array
         '202':
           description: Client request accepted and no queries found. Server responds with empty body.
@@ -1299,51 +1052,7 @@ paths:
       tags:
         - Queries
     post:
-      description: This method adds queries on Semantria side.
-      operationId: addQueries
-      parameters:
-        - description: Identifier of configuration queries linked to.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: List of parametrized JSON or XML objects.
-          in: body
-          name: Queries
-          required: true
-          schema:
-            $ref: '#/definitions/Request class'
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: No response was specified
-          schema:
-            items:
-              $ref: '#/definitions/Query_ResponseVersion'
-            type: array
-        '202':
-          description: Client request accepted and queued.
-        '400':
-          description: Incoming request body is incorrect. Server responds with details.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '406':
-          description: Number of allowed queries per configuration achieved.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Add or update queries
-      tags:
-        - Queries
-    put:
-      description: This method updates queries by unique IDs on Semantria side.
+      description: This method adds or updates queries by unique names on Semantria side.
       operationId: updateQueries
       parameters:
         - description: Identifier of configuration queries linked to.
@@ -1367,12 +1076,8 @@ paths:
       responses:
         '200':
           description: No response was specified
-          schema:
-            items:
-              $ref: '#/definitions/Query_ResponseVersion'
-            type: array
         '202':
-          description: Client request accepted and queued.
+          description: Client request accepted and configurations updated.
         '400':
           description: Incoming request body is incorrect. Server responds with details.
         '401':
@@ -1383,7 +1088,7 @@ paths:
           description: Number of allowed queries per configuration achieved.
         '500':
           description: Server side issue. Server may respond with the details in response body.
-      summary: Update queries
+      summary: Add or update queries
       tags:
         - Queries
   '/statistics.{content_type}':
@@ -1474,171 +1179,6 @@ paths:
       summary: Retrieve subscription details
       tags:
         - Subscription
-  '/taxonomy.{content_type}':
-    delete:
-      description: This method removes certain taxonomy nodes by their IDs on Semantria side.
-      operationId: deleteTaxonomy
-      parameters:
-        - description: Identifier of configuration queries linked to.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: List of taxonomy node identifiers.
-          in: body
-          name: Taxonomy node IDs
-          required: true
-          schema:
-            items:
-              type: string
-            type: array
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: No response was specified
-        '202':
-          description: Client request accepted and queued.
-        '400':
-          description: Incoming request body is incorrect. Server responds with details.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '403':
-          description: Forbidden. Server responds if client tries to remove primary configuration.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Remove taxonomy nodes
-      tags:
-        - Taxonomy
-    get:
-      description: This method retrieves list of taxonomy available on Semantria side.
-      operationId: getTaxonomy
-      parameters:
-        - description: Identifier of configuration taxonomy linked to.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: Client request accepted and queued. Server responds with the taxonomy list.
-          schema:
-            items:
-              $ref: '#/definitions/TaxonomyNode_ResponseVersion'
-            type: array
-        '202':
-          description: Client request accepted and no taxonomy found. Server responds with empty body.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Retrieve taxonomy
-      tags:
-        - Taxonomy
-    post:
-      description: This method adds taxonomy nodes on Semantria side.
-      operationId: addTaxonomy
-      parameters:
-        - description: Identifier of configuration queries linked to.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: List of parametrized JSON or XML objects.
-          in: body
-          name: Taxonomy
-          required: true
-          schema:
-            $ref: '#/definitions/Request class'
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: No response was specified
-          schema:
-            items:
-              $ref: '#/definitions/TaxonomyNode_ResponseVersion'
-            type: array
-        '202':
-          description: Client request accepted and queued.
-        '400':
-          description: Incoming request body is incorrect. Server responds with details.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '406':
-          description: Number of allowed queries per configuration achieved.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Add taxonomy nodes
-      tags:
-        - Taxonomy
-    put:
-      description: This method updates taxonomy nodes on Semantria side.
-      operationId: updateTaxonomy
-      parameters:
-        - description: Identifier of configuration queries linked to.
-          in: query
-          name: config_id
-          required: false
-          type: string
-        - description: List of parametrized JSON or XML objects.
-          in: body
-          name: Taxonomy
-          required: true
-          schema:
-            $ref: '#/definitions/Request class'
-        - in: path
-          name: content_type
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-      responses:
-        '200':
-          description: No response was specified
-          schema:
-            items:
-              $ref: '#/definitions/TaxonomyNode_ResponseVersion'
-            type: array
-        '202':
-          description: Client request accepted and queued.
-        '400':
-          description: Incoming request body is incorrect. Server responds with details.
-        '401':
-          description: Authentication failed.
-        '402':
-          description: Unauthorized. Limit of system calls is reached or subscription is expired.
-        '406':
-          description: Number of allowed queries per configuration achieved.
-        '500':
-          description: Server side issue. Server may respond with the details in response body.
-      summary: Update taxonomy nodes
-      tags:
-        - Taxonomy
 definitions:
   Attribute:
     properties:
@@ -1665,17 +1205,6 @@ definitions:
         items:
           $ref: '#/definitions/SubCategory'
         type: array
-      sentiment_polarity:
-        description: 'Verbal representation of sentiment score. Can be "negative", "positive" or "neutral"'
-        enum:
-          - negative
-          - positive
-          - neutral
-        type: string
-      sentiment_score:
-        description: The sentiment score associated with this category
-        format: double
-        type: number
       strength_score:
         description: Strength of the category matches with the document content
         format: double
@@ -1689,106 +1218,20 @@ definitions:
     required:
       - title
       - type
-      - sentiment_score
-      - sentiment_polarity
       - strength_score
       - categories
-  BlacklistItem_InsertVersion:
+  Category:
     properties:
       name:
-        description: Blacklist item name
-        type: string
-    required:
-      - name
-  BlacklistItem_ResponseVersion:
-    properties:
-      id:
-        description: Unique blacklist item identifier
-        type: string
-      modified:
-        description: "The timestamp of the latest update of the record. Creation date of update didn't occur"
-        type: string
-      name:
-        description: Blacklist item name
-        type: string
-    required:
-      - id
-      - name
-      - modified
-  BlacklistItem_UpdateVersion:
-    properties:
-      id:
-        description: Unique blacklist item identifier
-        type: string
-      name:
-        description: Blacklist item name
-        type: string
-    required:
-      - id
-      - name
-  Category_InsertVersion:
-    properties:
-      name:
-        description: Category name
         type: string
       samples:
-        description: Category samples
         items:
           type: string
         type: array
       weight:
-        description: Category weight
         format: float
         type: number
     required:
-      - name
-      - weight
-      - samples
-  Category_ResponseVersion:
-    properties:
-      id:
-        description: Unique category identifier
-        type: string
-      modified:
-        description: "The timestamp of the latest update of the record. Creation date of update didn't occur"
-        type: string
-      name:
-        description: Category name
-        type: string
-      samples:
-        description: Category samples
-        items:
-          type: string
-        type: array
-      weight:
-        description: Category weight
-        format: float
-        type: number
-    required:
-      - id
-      - name
-      - weight
-      - samples
-      - modified
-  Category_UpdateVersion:
-    properties:
-      id:
-        description: Unique category identifier
-        type: string
-      name:
-        description: Category name
-        type: string
-      samples:
-        description: Category samples
-        items:
-          type: string
-        type: array
-      weight:
-        description: Category weight
-        format: float
-        type: number
-    required:
-      - id
       - name
       - weight
       - samples
@@ -1844,11 +1287,6 @@ definitions:
       tag:
         description: Any text of up to 50 characters used like marker
         type: string
-      taxonomy:
-        description: Returns the taxonomy determined for the text
-        items:
-          $ref: '#/definitions/Topic'
-        type: array
       themes:
         description: Returns themes across the documents
         items:
@@ -1869,7 +1307,64 @@ definitions:
       - themes
       - entities
       - topics
-      - taxonomy
+  Configuration:
+    properties:
+      auto_response:
+        description: 'Defines whether or not the service should respond with processed results automatically. Default: false'
+        type: boolean
+      callback:
+        description: Defines a callback URL for automatic data responding
+        type: string
+      categories_threshold:
+        description: 'Defines low threshold for strength score of user categories to be reported in the output. Default: 0.45'
+        format: double
+        type: number
+      chars_threshold:
+        description: 'Defines the threshold for alphanumeric characters in the text in percent. Default: 80'
+        maximum: 100
+        minimum: 0
+        type: integer
+      collection:
+        $ref: '#/definitions/ConfigurationCollectionSection'
+        description: Includes options related to collection processing mode
+      config_id:
+        description: Unique configuration identifier
+        type: string
+      document:
+        $ref: '#/definitions/ConfigurationDocumentSection'
+        description: Includes options related to document processing mode
+      entities_threshold:
+        description: Defines low threshold for evidence score of named and user entities to be reported in the output.
+        type: integer
+      is_primary:
+        description: 'Identifies whether the current configuration is primary or not. Default: false'
+        type: boolean
+      language:
+        description: 'Defines target language that will be used for task processing. Default: English'
+        type: string
+      name:
+        description: Configuration name
+        type: string
+      one_sentence:
+        description: 'Leads the service to consider the entire document as single sentence. Default: false'
+        type: boolean
+      process_html:
+        description: 'Leads the service to clean HTML tags before processing. Default: false'
+        type: boolean
+    required:
+      - config_id
+      - name
+      - is_primary
+      - auto_response
+      - chars_threshold
+      - categories_threshold
+      - entities_threshold
+      - one_sentence
+      - process_html
+      - language
+      - callback
+      - document
+      - collection
   ConfigurationCollectionSection:
     properties:
       attribute_mentions_limit:
@@ -2075,188 +1570,6 @@ definitions:
       - pos_types
       - summary_limit
       - detect_language
-  Configuration_InsertVersion:
-    properties:
-      auto_response:
-        description: 'Defines whether or not the service should respond with processed results automatically. Default: false'
-        type: boolean
-      callback:
-        description: Defines a callback URL for automatic data responding
-        type: string
-      categories_threshold:
-        description: 'Defines low threshold for strength score of user categories to be reported in the output. Default: 0.45'
-        format: double
-        type: number
-      chars_threshold:
-        description: 'Defines the threshold for alphanumeric characters in the text in percent. Default: 80'
-        maximum: 100
-        minimum: 0
-        type: integer
-      collection:
-        $ref: '#/definitions/ConfigurationCollectionSection'
-        description: Includes options related to collection processing mode
-      document:
-        $ref: '#/definitions/ConfigurationDocumentSection'
-        description: Includes options related to document processing mode
-      entities_threshold:
-        description: Defines low threshold for evidence score of named and user entities to be reported in the output.
-        type: integer
-      is_primary:
-        description: 'Identifies whether the current configuration is primary or not. Default: false'
-        type: boolean
-      language:
-        description: 'Defines target language that will be used for task processing. Default: English'
-        type: string
-      name:
-        description: Configuration name
-        type: string
-      one_sentence:
-        description: 'Leads the service to consider the entire document as single sentence. Default: false'
-        type: boolean
-      process_html:
-        description: 'Leads the service to clean HTML tags before processing. Default: false'
-        type: boolean
-    required:
-      - name
-      - is_primary
-      - auto_response
-      - chars_threshold
-      - categories_threshold
-      - entities_threshold
-      - one_sentence
-      - process_html
-      - language
-      - callback
-      - document
-      - collection
-  Configuration_ResponseVersion:
-    properties:
-      auto_response:
-        description: 'Defines whether or not the service should respond with processed results automatically. Default: false'
-        type: boolean
-      callback:
-        description: Defines a callback URL for automatic data responding
-        type: string
-      categories_threshold:
-        description: 'Defines low threshold for strength score of user categories to be reported in the output. Default: 0.45'
-        format: double
-        type: number
-      chars_threshold:
-        description: 'Defines the threshold for alphanumeric characters in the text in percent. Default: 80'
-        maximum: 100
-        minimum: 0
-        type: integer
-      collection:
-        $ref: '#/definitions/ConfigurationCollectionSection'
-        description: Includes options related to collection processing mode
-      config_id:
-        description: Unique configuration identifier
-        type: string
-      document:
-        $ref: '#/definitions/ConfigurationDocumentSection'
-        description: Includes options related to document processing mode
-      entities_threshold:
-        description: 'Defines low threshold for evidence score of named and user entities to be reported in the output. Default: 55'
-        type: integer
-      from_template_config_id:
-        description: Unique identifier of configuration (template) the current configuration has been clonned from
-        type: string
-      is_primary:
-        description: 'Identifies whether the current configuration is primary or not. Default: false'
-        type: boolean
-      language:
-        description: 'Defines target language that will be used for task processing. Default: English'
-        type: string
-      modified:
-        description: "The timestamp of the latest update of the record. Creation date of update didn't occur"
-        type: string
-      name:
-        description: Configuration name
-        type: string
-      one_sentence:
-        description: 'Leads the service to consider the entire document as single sentence. Default: false'
-        type: boolean
-      process_html:
-        description: 'Leads the service to clean HTML tags before processing. Default: false'
-        type: boolean
-      version:
-        description: 'Version of the vertical pack, for versioning purposes'
-        type: string
-    required:
-      - config_id
-      - name
-      - from_template_config_id
-      - version
-      - is_primary
-      - auto_response
-      - chars_threshold
-      - categories_threshold
-      - entities_threshold
-      - one_sentence
-      - process_html
-      - language
-      - callback
-      - document
-      - collection
-      - modified
-  Configuration_UpdateVersion:
-    properties:
-      auto_response:
-        description: 'Defines whether or not the service should respond with processed results automatically. Default: false'
-        type: boolean
-      callback:
-        description: Defines a callback URL for automatic data responding
-        type: string
-      categories_threshold:
-        description: 'Defines low threshold for strength score of user categories to be reported in the output. Default: 0.45'
-        format: double
-        type: number
-      chars_threshold:
-        description: 'Defines the threshold for alphanumeric characters in the text in percent. Default: 80'
-        maximum: 100
-        minimum: 0
-        type: integer
-      collection:
-        $ref: '#/definitions/ConfigurationCollectionSection'
-        description: Includes options related to collection processing mode
-      config_id:
-        description: Unique configuration identifier
-        type: string
-      document:
-        $ref: '#/definitions/ConfigurationDocumentSection'
-        description: Includes options related to document processing mode
-      entities_threshold:
-        description: 'Defines low threshold for evidence score of named and user entities to be reported in the output. Default: 55'
-        type: integer
-      is_primary:
-        description: 'Identifies whether the current configuration is primary or not. Default: false'
-        type: boolean
-      language:
-        description: 'Defines target language that will be used for task processing. Default: English'
-        type: string
-      name:
-        description: Configuration name
-        type: string
-      one_sentence:
-        description: 'Leads the service to consider the entire document as single sentence. Default: false'
-        type: boolean
-      process_html:
-        description: 'Leads the service to clean HTML tags before processing. Default: false'
-        type: boolean
-    required:
-      - config_id
-      - name
-      - is_primary
-      - auto_response
-      - chars_threshold
-      - categories_threshold
-      - entities_threshold
-      - one_sentence
-      - process_html
-      - language
-      - callback
-      - document
-      - collection
   Details:
     properties:
       is_imperative:
@@ -2373,11 +1686,6 @@ definitions:
       summary:
         description: A summary of the document text
         type: string
-      taxonomy:
-        description: Returns the taxonomy determined for the text
-        items:
-          $ref: '#/definitions/Topic'
-        type: array
       themes:
         description: Returns themes of the document
         items:
@@ -2409,7 +1717,6 @@ definitions:
       - opinions
       - topics
       - intentions
-      - taxonomy
   Entity:
     properties:
       count:
@@ -2458,75 +1765,6 @@ definitions:
       - positive_count
       - neutral_count
       - mentions
-  Entity_InsertVersion:
-    properties:
-      label:
-        description: 'Descriptive label for the entity, e.g. Wikipedia URL'
-        type: string
-      name:
-        description: Entity name
-        type: string
-      normalized:
-        description: Normalized form of the entity. Will replace entity name in the output
-        type: string
-      type:
-        description: 'Type of the entity (Company, Person, any custom type)'
-        type: string
-    required:
-      - name
-      - type
-      - label
-      - normalized
-  Entity_ResponseVersion:
-    properties:
-      id:
-        description: Unique user entity identifier
-        type: string
-      label:
-        description: 'Descriptive label for the entity, e.g. Wikipedia URL'
-        type: string
-      modified:
-        description: "The timestamp of the latest update of the record. Creation date of update didn't occur"
-        type: string
-      name:
-        description: Entity name
-        type: string
-      normalized:
-        description: Normalized form of the entity. Will replace entity name in the output
-        type: string
-      type:
-        description: 'Type of the entity (Company, Person, any custom type)'
-        type: string
-    required:
-      - id
-      - name
-      - type
-      - label
-      - normalized
-      - modified
-  Entity_UpdateVersion:
-    properties:
-      id:
-        description: Unique user entity identifier
-        type: string
-      label:
-        description: 'Descriptive label for the entity, e.g. Wikipedia URL'
-        type: string
-      name:
-        description: Entity name
-        type: string
-      normalized:
-        description: Normalized form of the entity. Will replace entity name in the output
-        type: string
-      type:
-        description: 'Type of the entity (Company, Person, any custom type)'
-        type: string
-    required:
-      - id
-      - name
-      - type
-      - label
-      - normalized
   Facet:
     properties:
       attributes:
@@ -2583,15 +1821,9 @@ definitions:
       language:
         description: Represents language following options relevant to
         type: string
-      one_sentence_mode:
-        description: Considers entire text as one sentence and uses optimized chunker for short content like tweets.
-        type: boolean
       settings:
         $ref: '#/definitions/FeatureSettingsSection'
         description: Includes analysis adjustment options for certain language
-      templates:
-        $ref: '#/definitions/FeatureTemplateSection'
-        description: Includes all existing templates
     required:
       - id
       - language
@@ -2599,8 +1831,6 @@ definitions:
       - settings
       - detailed_mode
       - discovery_mode
-      - one_sentence_mode
-      - templates
   FeatureDetailedModeSection:
     properties:
       auto_categories:
@@ -2645,9 +1875,6 @@ definitions:
       summarization:
         description: Represents whether summarization supported for certain language or not
         type: boolean
-      taxonomy:
-        description: Represents whether taxonomy feature supported for certain language or not
-        type: boolean
       theme_mentions:
         description: Represents whether mentions of themes supported for certain language or not
         type: boolean
@@ -2679,7 +1906,6 @@ definitions:
       - auto_categories
       - user_categories
       - queries
-      - taxonomy
   FeatureDiscoveryModeSection:
     properties:
       entity_mentions:
@@ -2699,9 +1925,6 @@ definitions:
         type: boolean
       queries:
         description: Represents whether queries extraction supported for certain language or not
-        type: boolean
-      taxonomy:
-        description: Represents whether taxonomy feature supported for certain language or not
         type: boolean
       theme_mentions:
         description: Represents whether mentions of themes supported for certain language or not
@@ -2726,7 +1949,6 @@ definitions:
       - entity_mentions
       - user_categories
       - queries
-      - taxonomy
   FeatureSettingsSection:
     properties:
       blacklist:
@@ -2737,9 +1959,6 @@ definitions:
         type: boolean
       sentiment_phrases:
         description: Represents whether sentiment-bearing phrases adjustmment supported for certain language or not
-        type: boolean
-      taxonomy:
-        description: Represents whether taxonomy feature supported for certain language or not
         type: boolean
       user_categories:
         description: Represents whether user categories definition supported for certain language or not
@@ -2753,45 +1972,6 @@ definitions:
       - user_categories
       - queries
       - blacklist
-      - taxonomy
-  FeatureTemplateSection:
-    properties:
-      config_id:
-        description: Unique identifier of configuration associated with the vertical pack. Required for cloning
-        type: string
-      description:
-        description: 'Verbal description of template features, belonging to domain area, etc.'
-        type: string
-      id:
-        description: Unique document identifier. Can be up to 36 alphanumeric characters
-        type: string
-      is_free:
-        description: Shows whether Vertical pack is free or requires subscription
-        type: boolean
-      language:
-        description: The language supported by the vertical pack
-        type: string
-      name:
-        description: Name of the vertical pack
-        type: string
-      type:
-        description: 'The type of the vertical pack, can be either "vertical-pack" or "language-default"'
-        enum:
-          - language-default
-          - vertical-pack
-        type: string
-      version:
-        description: 'Version of the vertical pack, for versioning purposes.'
-        type: string
-    required:
-      - id
-      - config_id
-      - is_free
-      - language
-      - name
-      - description
-      - type
-      - version
   Intention:
     properties:
       evidence_phrase:
@@ -2947,7 +2127,7 @@ definitions:
         description: The text of the sentiment-bearing phrase
         type: string
       type:
-        description: 'Type of phrase; can be either "possible" or "detected" value'
+        description: The sentiment score associated with the word
         type: string
     required:
       - title
@@ -2958,97 +2138,13 @@ definitions:
       - negating_phrase
       - is_intensified
       - intensifying_phrase
-  Phrase_InsertVersion:
+  Query:
     properties:
       name:
-        description: Sentiment-bearing phrase name
-        type: string
-      weight:
-        description: Sentiment-bearing phrase weight
-        format: float
-        type: number
-    required:
-      - name
-      - weight
-  Phrase_ResponseVersion:
-    properties:
-      id:
-        description: Unique sentiment-bearing phrase identifier
-        type: string
-      modified:
-        description: "The timestamp of the latest update of the record. Creation date of update didn't occur"
-        type: string
-      name:
-        description: Sentiment-bearing phrase name
-        type: string
-      weight:
-        description: Sentiment-bearing phrase weight
-        format: float
-        type: number
-    required:
-      - id
-      - name
-      - weight
-      - modified
-  Phrase_UpdateVersion:
-    properties:
-      id:
-        description: Unique sentiment-bearing phrase identifier
-        type: string
-      name:
-        description: Sentiment-bearing phrase name
-        type: string
-      weight:
-        description: Sentiment-bearing phrase weight
-        format: float
-        type: number
-    required:
-      - id
-      - name
-      - weight
-  Query_InsertVersion:
-    properties:
-      name:
-        description: Query name
         type: string
       query:
-        description: Boolean query used for content categorization
         type: string
     required:
-      - name
-      - query
-  Query_ResponseVersion:
-    properties:
-      id:
-        description: Unique query identifier
-        type: string
-      modified:
-        description: "The timestamp of the latest update of the record. Creation date of update didn't occur"
-        type: string
-      name:
-        description: Query name
-        type: string
-      query:
-        description: Boolean query used for content categorization
-        type: string
-    required:
-      - id
-      - name
-      - query
-      - modified
-  Query_UpdateVersion:
-    properties:
-      id:
-        description: Unique query identifier
-        type: string
-      name:
-        description: Query name
-        type: string
-      query:
-        description: Boolean query used for content categorization
-        type: string
-    required:
-      - id
       - name
       - query
   Relation:
@@ -3172,7 +2268,7 @@ definitions:
       status:
         description: 'Semantria subscriber status. Can be active, expired, disabled, etc'
         type: string
-      used_apps:
+      used_app:
         description: A list of all the applications that have used the API on this account
         type: string
     required:
@@ -3195,7 +2291,7 @@ definitions:
       - colls_responded
       - colls_documents
       - latest_used_app
-      - used_apps
+      - used_app
       - configurations
   StatisticConfiguration:
     properties:
@@ -3268,7 +2364,7 @@ definitions:
         description: Total numbers of collections that have been queued
         minimum: 0
         type: integer
-      used_apps:
+      used_app:
         description: A list of all the applications that have used the API on this account
         type: string
     required:
@@ -3290,7 +2386,7 @@ definitions:
       - colls_failed
       - colls_responded
       - latest_used_app
-      - used_apps
+      - used_app
   Status:
     properties:
       api_version:
@@ -3326,7 +2422,7 @@ definitions:
       - supported_languages
   SubCategory:
     properties:
-      strength_score:
+      sentiment_score:
         description: Strength of the category matches with the document content
         format: double
         type: number
@@ -3339,7 +2435,7 @@ definitions:
     required:
       - title
       - type
-      - strength_score
+      - sentiment_score
   Subscription:
     properties:
       basic_settings:
@@ -3549,15 +2645,11 @@ definitions:
       supported_languages:
         description: Lists all languages which are allowed for current subscription
         type: string
-      templates:
-        $ref: '#/definitions/SubscriptionFeatureSectionTemplate'
-        description: Includes available templates
     required:
       - supported_languages
       - html_processing
       - document
       - collection
-      - templates
   SubscriptionFeatureSectionCollection:
     properties:
       concept_topics:
@@ -3664,126 +2756,6 @@ definitions:
       - pos_tagging
       - language_detection
       - auto_categories
-  SubscriptionFeatureSectionTemplate:
-    properties:
-      config_id:
-        description: Unique identifier of configuration associated with the vertical pack. Required for cloning
-        type: string
-      description:
-        description: 'Verbal description of template features, belonging to domain area, etc.'
-        type: string
-      id:
-        description: Unique document identifier. Can be up to 36 alphanumeric characters
-        type: string
-      is_free:
-        description: Shows whether Vertical pack is free or requires subscription
-        type: boolean
-      language:
-        description: The language supported by the vertical pack
-        type: string
-      name:
-        description: Name of the vertical pack
-        type: string
-      type:
-        description: 'The type of the vertical pack, can be either "vertical-pack" or "language-default"'
-        enum:
-          - language-default
-          - vertical-pack
-        type: string
-      version:
-        description: 'Version of the vertical pack, for versioning purposes.'
-        type: string
-    required:
-      - id
-      - config_id
-      - is_free
-      - language
-      - name
-      - description
-      - type
-      - version
-  TaxonomyNode_InsertVersion:
-    properties:
-      enforce_parent_matching:
-        description: Enforces parent nodes to match on a content if the current node matches
-        type: boolean
-      name:
-        description: Taxonomy name
-        type: string
-      nodes:
-        description: The list of sub-nodes associated with the current taxonomy node
-        items:
-          $ref: '#/definitions/TaxonomyNode_InsertVersion'
-        type: array
-      topics:
-        description: The list of the topics associated with the current taxonomy node
-        items:
-          $ref: '#/definitions/TaxonomyTopic'
-        type: array
-    required:
-      - name
-  TaxonomyNode_ResponseVersion:
-    properties:
-      enforce_parent_matching:
-        description: Enforces parent nodes to match on a content if the current node matches
-        type: boolean
-      id:
-        description: Unique taxonomy node identifier
-        type: string
-      modified:
-        description: "The timestamp of the latest update of the record. Creation date of update didn't occur"
-        type: string
-      name:
-        description: Taxonomy name
-        type: string
-      nodes:
-        description: The list of sub-nodes associated with the current taxonomy node
-        items:
-          $ref: '#/definitions/TaxonomyNode_ResponseVersion'
-        type: array
-      topics:
-        description: The list of the topics associated with the current taxonomy node
-        items:
-          $ref: '#/definitions/TaxonomyTopic'
-        type: array
-    required:
-      - id
-      - name
-      - modified
-  TaxonomyNode_UpdateVersion:
-    properties:
-      enforce_parent_matching:
-        description: Enforces parent nodes to match on a content if the current node matches
-        type: boolean
-      id:
-        description: Unique taxonomy node identifier
-        type: string
-      name:
-        description: Taxonomy name
-        type: string
-      nodes:
-        description: The list of sub-nodes associated with the current taxonomy node
-        items:
-          $ref: '#/definitions/TaxonomyNode_UpdateVersion'
-        type: array
-      topics:
-        description: The list of the topics associated with the current taxonomy node
-        items:
-          $ref: '#/definitions/TaxonomyTopic'
-        type: array
-    required:
-      - id
-      - name
-  TaxonomyTopic:
-    properties:
-      id:
-        description: Unique taxonomy topic identifier
-        type: string
-      type:
-        description: Type of the topic (category or query) associated with the certain taxonomy node
-        type: string
-    required:
-      - type
   Theme:
     properties:
       mentions:
@@ -3791,9 +2763,6 @@ definitions:
         items:
           $ref: '#/definitions/Mention'
         type: array
-      normalized:
-        description: The normalized form of the theme
-        type: string
       phrases_count:
         description: "Count of sentiment-bearing phrases was used in calculating theme's sentiment"
         minimum: 0
@@ -3809,9 +2778,6 @@ definitions:
         description: Sentiment score for theme’s sentences across the documents
         format: double
         type: number
-      stemmed:
-        description: The stemmed form of the theme
-        type: string
       themes_count:
         description: Count of themes across the documents that got rolled into this one
         minimum: 0
@@ -3821,8 +2787,6 @@ definitions:
         type: string
     required:
       - sentiment_polarity
-      - stemmed
-      - normalized
       - themes_count
       - phrases_count
       - sentiment_score
@@ -3834,9 +2798,6 @@ definitions:
         description: The number of documents within the collection that match the topic
         minimum: 0
         type: integer
-      id:
-        description: Unique topic identifier
-        type: string
       sentiment_polarity:
         description: 'Verbal representation of sentiment score. Can be "negative", "positive" or "neutral"'
         enum:
@@ -3851,6 +2812,11 @@ definitions:
       title:
         description: 'The topic title, which is its label in the text'
         type: string
+      topics:
+        description: List of sub topics if exists
+        items:
+          $ref: '#/definitions/Topic'
+        type: array
       type:
         description: 'Type of the topic; can be either "concept" or "query"'
         enum:
@@ -3858,12 +2824,12 @@ definitions:
           - query
         type: string
     required:
-      - id
       - title
       - type
       - hitcount
       - sentiment_score
       - sentiment_polarity
+      - topics
   Word:
     properties:
       is_negated:

@@ -1,24 +1,24 @@
 definitions:
   Request class:
     - {}
-  TaxonomyNode_InsertVersion:
-    properties:
-      nodes:
-        items:
-          $ref:
-            - '#/definitions/TaxonomyNode'
-            - '#/definitions/TaxonomyNode_InsertVersion'
-  TaxonomyNode_ResponseVersion:
-    properties:
-      nodes:
-        items:
-          $ref:
-            - '#/definitions/TaxonomyNode'
-            - '#/definitions/TaxonomyNode_ResponseVersion'
-  TaxonomyNode_UpdateVersion:
-    properties:
-      nodes:
-        items:
-          $ref:
-            - '#/definitions/TaxonomyNode'
-            - '#/definitions/TaxonomyNode_UpdateVersion'
+paths:
+  '/entities.{content_type}':
+    delete:
+      parameters:
+        '_0':
+          - description: Semantria API key
+            in: path
+            name: API key
+            required: true
+            type: string
+          - 0
+          - 0
+        '_1':
+          - description: Semantria API secret
+            in: path
+            name: API secret
+            required: true
+            type: string
+          - 0
+          - 0
+        _t: a
