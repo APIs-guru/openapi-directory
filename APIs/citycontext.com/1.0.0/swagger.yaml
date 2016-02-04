@@ -2,7 +2,7 @@ swagger: '2.0'
 schemes:
   - http
 host: api.citycontext.com
-basePath: /beta
+basePath: /v1
 info:
   description: 'City Context provides a straightforward API to access UK Open Data: crime statistics, schools, demographics and more.'
   title: City Context
@@ -38,6 +38,16 @@ paths:
           required: true
           type: string
           x-data-threescale-name: user_keys
+        - description: 'Search radius for schools, in metres, between 100 and 4000'
+          in: query
+          name: school_search_radius
+          required: false
+          type: integer
+        - description: 'Search radius for parks, in metres, between 100 and 2000'
+          in: query
+          name: park_search_radius
+          required: false
+          type: integer
       produces:
         - application/json
       responses:
@@ -63,6 +73,16 @@ paths:
           required: true
           type: string
           x-data-threescale-name: user_keys
+        - description: 'Search radius for schools, in metres, between 100 and 4000'
+          in: query
+          name: school_search_radius
+          required: false
+          type: integer
+        - description: 'Search radius for parks, in metres, between 100 and 2000'
+          in: query
+          name: park_search_radius
+          required: false
+          type: integer
       produces:
         - application/json
       responses:
@@ -71,6 +91,26 @@ paths:
           schema:
             $ref: '#/definitions/PointInfo'
       summary: Query by postcode
+      tags:
+        - citycontext
+  /usage:
+    get:
+      operationId: usage
+      parameters:
+        - description: City context user key
+          in: query
+          name: user_key
+          required: true
+          type: string
+          x-data-threescale-name: user_keys
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Usage'
+      summary: Get usage in current month
       tags:
         - citycontext
 definitions:
@@ -116,3 +156,16 @@ definitions:
       - location
       - parks
       - schools
+  Usage:
+    description: User plan monthly API quota and usage
+    properties:
+      allowance:
+        type: string
+      period:
+        type: string
+      usage:
+        type: string
+    required:
+      - allowance
+      - usage
+      - period
