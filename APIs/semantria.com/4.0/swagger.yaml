@@ -57,7 +57,7 @@ paths:
           name: Blacklisted items
           required: true
           schema:
-            $ref: '#/definitions/Request class'
+            $ref: '#/definitions/Request_class'
         - in: path
           name: content_type
           required: true
@@ -131,7 +131,7 @@ paths:
           name: Blacklisted items
           required: true
           schema:
-            $ref: '#/definitions/Request class'
+            $ref: '#/definitions/Request_class'
         - in: path
           name: content_type
           required: true
@@ -172,7 +172,7 @@ paths:
           name: Category names
           required: true
           schema:
-            $ref: '#/definitions/Request class'
+            $ref: '#/definitions/Request_class'
         - in: path
           name: content_type
           required: true
@@ -246,7 +246,7 @@ paths:
           name: Categories
           required: true
           schema:
-            $ref: '#/definitions/Request class'
+            $ref: '#/definitions/Request_class'
         - in: path
           name: content_type
           required: true
@@ -287,7 +287,7 @@ paths:
           name: Collection
           required: true
           schema:
-            $ref: '#/definitions/Request class'
+            $ref: '#/definitions/Request_class'
         - in: path
           name: content_type
           required: true
@@ -431,7 +431,7 @@ paths:
           name: Configuration IDs
           required: true
           schema:
-            $ref: '#/definitions/Request class'
+            $ref: '#/definitions/Request_class'
         - in: path
           name: content_type
           required: true
@@ -493,7 +493,7 @@ paths:
           name: Configurations
           required: true
           schema:
-            $ref: '#/definitions/Request class'
+            $ref: '#/definitions/Request_class'
         - in: path
           name: content_type
           required: true
@@ -534,7 +534,7 @@ paths:
           name: Document
           required: true
           schema:
-            $ref: '#/definitions/Request class'
+            $ref: '#/definitions/Request_class'
         - in: path
           name: content_type
           required: true
@@ -575,7 +575,7 @@ paths:
           name: Batch of Documents
           required: true
           schema:
-            $ref: '#/definitions/Request class'
+            $ref: '#/definitions/Request_class'
         - in: path
           name: content_type
           required: true
@@ -802,7 +802,7 @@ paths:
           name: User entities
           required: true
           schema:
-            $ref: '#/definitions/Request class'
+            $ref: '#/definitions/Request_class'
         - in: path
           name: content_type
           required: true
@@ -876,7 +876,7 @@ paths:
           name: Sentiment phrases
           required: true
           schema:
-            $ref: '#/definitions/Request class'
+            $ref: '#/definitions/Request_class'
         - in: path
           name: content_type
           required: true
@@ -950,7 +950,7 @@ paths:
           name: Sentiment phrases
           required: true
           schema:
-            $ref: '#/definitions/Request class'
+            $ref: '#/definitions/Request_class'
         - in: path
           name: content_type
           required: true
@@ -991,7 +991,7 @@ paths:
           name: Query names
           required: true
           schema:
-            $ref: '#/definitions/Request class'
+            $ref: '#/definitions/Request_class'
         - in: path
           name: content_type
           required: true
@@ -1065,7 +1065,7 @@ paths:
           name: Queries
           required: true
           schema:
-            $ref: '#/definitions/Request class'
+            $ref: '#/definitions/Request_class'
         - in: path
           name: content_type
           required: true
@@ -2187,7 +2187,7 @@ definitions:
     required:
       - title
       - entity_type
-  Request class: {}
+  Request_class: {}
   Statistic:
     properties:
       calls_data:

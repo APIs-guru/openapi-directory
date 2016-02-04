@@ -94,7 +94,7 @@ paths:
         '200':
           description: No response was specified
           schema:
-            $ref: '#/definitions/Ref (of Bundle)'
+            $ref: '#/definitions/Ref_(of_Bundle)'
         '201':
           description: Created
         '400':
@@ -261,7 +261,7 @@ paths:
         '200':
           description: No response was specified
           schema:
-            $ref: '#/definitions/Ref (of Bundle)'
+            $ref: '#/definitions/Ref_(of_Bundle)'
         '202':
           description: Accepted
         '400':
@@ -895,7 +895,7 @@ definitions:
     required:
       - _class
       - _links
-  Ref (of Bundle):
+  Ref_(of_Bundle):
     $ref: '#/definitions/object'
     properties:
       _class:
@@ -1059,7 +1059,7 @@ definitions:
       - media_code
       - _class
       - _links
-  Track (array item):
+  Track_(array_item):
     $ref: '#/definitions/object'
     properties:
       audio_channel:

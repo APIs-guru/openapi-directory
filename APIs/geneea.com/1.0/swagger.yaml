@@ -108,7 +108,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Information about a user account.'
+            $ref: '#/definitions/Information_about_a_user_account.'
         '401':
           description: Unauthorized
         '403':
@@ -160,7 +160,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Response for the text correction'
+            $ref: '#/definitions/Response_for_the_text_correction'
         '401':
           description: Unauthorized
         '403':
@@ -189,7 +189,7 @@ paths:
         '200':
           description: Description was not specified
           schema:
-            $ref: '#/definitions/Response for the text correction'
+            $ref: '#/definitions/Response_for_the_text_correction'
         '201':
           description: Created
         '401':
@@ -581,7 +581,7 @@ definitions:
       key:
         format: int64
         type: integer
-  Information about a user account.:
+  Information_about_a_user_account.:
     properties:
       remainingQuotas:
         description: Remaining quotas for the user account.
@@ -652,7 +652,7 @@ definitions:
       url:
         description: "URL of a document to be analysed, mutually exclusive with the 'text' parameter"
         type: string
-  Response for the text correction:
+  Response_for_the_text_correction:
     properties:
       corrected:
         type: boolean
