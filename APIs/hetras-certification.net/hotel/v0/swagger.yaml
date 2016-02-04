@@ -549,6 +549,66 @@ paths:
       summary: Get a specific room with all the details for the specified hotel id.
       tags:
         - Room
+    patch:
+      consumes:
+        - application/json
+        - text/json
+        - application/x-www-form-urlencoded
+      deprecated: false
+      description: "The hetras API is using <a href=\"https://tools.ietf.org/html/rfc6902\" onfocus=\"this.blur()\" target=\"_blank\">IETF JSON Patch RFC 6902</a>\r\n            to partially update an existing resource. Currently this call only allows to modify condition and housekeeping occupancy status of the room.\r\n            <br /><br />\r\n            A request example:<br /><pre>\r\n            [\r\n              {\r\n                \"op\": \"replace\", \"path\": \"/status/condition\", \"value\": \"CleanNotInspected\"\r\n              }, {\r\n                \"op\": \"replace\", \"path\": \"/status/housekeeping_occupancy\", \"value\": \"Vacant\"\r\n              }\r\n            ]\r\n            </pre><br />\r\n            For more details on how the API responds to errors please check our documentation on \r\n            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>.<br />"
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: Specifies the hotel id to process.
+          format: int32
+          in: path
+          name: hotelId
+          required: true
+          type: integer
+        - description: Specifies the room number to process.
+          in: path
+          name: roomNumber
+          required: true
+          type: string
+        - description: A set of JSON Patch operations
+          in: body
+          name: patchRequest
+          required: true
+          schema:
+            items:
+              $ref: '#/definitions/JsonPatchOperationRequest'
+            type: array
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: The update was successful. Reponse would contain a referer to the updated reservation.
+          schema:
+            $ref: '#/definitions/Object'
+        '400':
+          description: Bad request. Request parameters or request body erroneous.
+        '401':
+          description: You are not authorized to change reservations or you reached your API limit.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI.
+        '422':
+          description: The request failed to validated.
+        '500':
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+      summary: Partially updates a room
+      tags:
+        - Room
 definitions:
   EmbeddedReservation:
     description: Represents basic information about a reservation

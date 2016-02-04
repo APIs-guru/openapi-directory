@@ -831,6 +831,7 @@ paths:
             - copyright
             - country
             - credit_line
+            - date_camera_shot
             - date_created
             - date_submitted
             - detail_set
@@ -878,6 +879,7 @@ paths:
               - copyright
               - country
               - credit_line
+              - date_camera_shot
               - date_created
               - date_submitted
               - detail_set
@@ -971,6 +973,7 @@ paths:
             - copyright
             - country
             - credit_line
+            - date_camera_shot
             - date_created
             - date_submitted
             - detail_set
@@ -1018,6 +1021,7 @@ paths:
               - copyright
               - country
               - credit_line
+              - date_camera_shot
               - date_created
               - date_submitted
               - detail_set
@@ -1108,6 +1112,7 @@ paths:
             - color_type
             - comp
             - copyright
+            - date_camera_shot
             - date_created
             - detail_set
             - display_set
@@ -1147,6 +1152,7 @@ paths:
               - color_type
               - comp
               - copyright
+              - date_camera_shot
               - date_created
               - detail_set
               - display_set
@@ -1676,6 +1682,7 @@ paths:
             - color_type
             - comp
             - copyright
+            - date_camera_shot
             - date_created
             - detail_set
             - display_set
@@ -1715,6 +1722,7 @@ paths:
               - color_type
               - comp
               - copyright
+              - date_camera_shot
               - date_created
               - detail_set
               - display_set
@@ -2133,6 +2141,7 @@ paths:
             - color_type
             - comp
             - copyright
+            - date_camera_shot
             - date_created
             - detail_set
             - display_set
@@ -2167,6 +2176,7 @@ paths:
               - color_type
               - comp
               - copyright
+              - date_camera_shot
               - date_created
               - detail_set
               - display_set
@@ -2622,6 +2632,7 @@ paths:
             - color_type
             - comp
             - copyright
+            - date_camera_shot
             - date_created
             - detail_set
             - display_set
@@ -2659,6 +2670,7 @@ paths:
               - color_type
               - comp
               - copyright
+              - date_camera_shot
               - date_created
               - detail_set
               - display_set
@@ -3725,7 +3737,7 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: "Specifies up to 1000 sets of asset Id, usage count, and date of use to submit usages for. \r\n            Note that all asset Ids specified must be valid or the operation will fail causing no usages to be recorded. \r\n            The date format should be ISO 8601 (ex: 2015-05-15), time is not needed."
+        - description: "Specifies up to 1000 sets of asset Id, usage count, and date of use to submit usages for. \r\n            Note that all asset Ids specified must be valid or the operation will fail causing no usages to be recorded. \r\n            The date format should be ISO 8601 (ex: YYYY-MM-DD), time is not needed."
           in: body
           name: request
           required: true
@@ -4195,7 +4207,7 @@ definitions:
         format: int32
         type: integer
       usage_date:
-        description: Identifies the date the asset was used.
+        description: 'Identifies the date the asset was used, in ISO 8601 format (e.g., YYYY-MM-DD), time is not needed.'
         format: date-time
         type: string
     type: object
@@ -4340,6 +4352,10 @@ definitions:
         type: string
       copyright:
         description: Specifies the copyright of the image.
+        type: string
+      date_camera_shot:
+        description: 'Specifies the date the image was shot, in ISO 8601 format (e.g., 1999-12-31T00:00:00-00:00).'
+        format: date-time
         type: string
       date_created:
         description: 'Specifies the date the image was created, in ISO 8601 format (e.g., 1999-12-31T00:00:00-00:00).'
@@ -4560,6 +4576,10 @@ definitions:
       copyright:
         description: Specifies the copyright of the image.
         type: string
+      date_camera_shot:
+        description: 'Specifies the date the image was shot, in ISO 8601 format (e.g., 1999-12-31T00:00:00-00:00).'
+        format: date-time
+        type: string
       date_created:
         description: 'Specifies the date the image was created, in ISO 8601 format (e.g., 1999-12-31T00:00:00-00:00).'
         format: date-time
@@ -4778,6 +4798,10 @@ definitions:
       credit_line:
         description: Specifies the line of copy acknowledging the source or origin of the image.
         type: string
+      date_camera_shot:
+        description: 'Specifies the date the image was shot, in ISO 8601 format (e.g., 1999-12-31T00:00:00-00:00).'
+        format: date-time
+        type: string
       date_created:
         description: 'Specifies the date the image was created, in ISO 8601 format (e.g., 1999-12-31T00:00:00-00:00).'
         format: date-time
@@ -4909,6 +4933,10 @@ definitions:
         type: string
       copyright:
         description: Specifies the copyright of the image.
+        type: string
+      date_camera_shot:
+        description: 'Specifies the date the image was shot, in ISO 8601 format (e.g., 1999-12-31T00:00:00-00:00).'
+        format: date-time
         type: string
       date_created:
         description: 'Specifies the date the image was created, in ISO 8601 format (e.g., 1999-12-31T00:00:00-00:00).'

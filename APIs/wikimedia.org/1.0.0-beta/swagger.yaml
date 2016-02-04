@@ -40,7 +40,14 @@ paths:
   '/media/math/check/{type}':
     post:
       description: |
-        Checks the supplied TeX formula for correctness and returns the normalised formula representation as well as information about identifiers. Available types are tex and inline-tex. The response contains the `x-resource-location` header which can be used to retrieve the render of the checked formula in one of the supported rendering formats. Just append the value of the header to `/media/math/{format}/` and perform a GET request against that URL.
+        Checks the supplied TeX formula for correctness and returns the
+        normalised formula representation as well as information about
+        identifiers. Available types are tex and inline-tex. The response
+        contains the `x-resource-location` header which can be used to retrieve
+        the render of the checked formula in one of the supported rendering
+        formats. Just append the value of the header to `/media/math/{format}/`
+        and perform a GET request against that URL.
+
         Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#unstable).
       parameters:
         - description: The input type of the given formula; can be tex or inline-tex
@@ -121,7 +128,12 @@ paths:
   '/media/math/render/{format}/{hash}':
     get:
       description: |
-        Given a request hash, renders a TeX formula into its mathematic representation in the given format. When a request is issued to the `/media/math/check/{format}` POST endpoint, the response contains the `x-resource-location` header denoting the hash ID of the POST data. Once obtained, this endpoint has to be used to obtain the actual render.
+        Given a request hash, renders a TeX formula into its mathematic
+        representation in the given format. When a request is issued to the
+        `/media/math/check/{format}` POST endpoint, the response contains the
+        `x-resource-location` header denoting the hash ID of the POST data. Once
+        obtained, this endpoint has to be used to obtain the actual render.
+
         Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#unstable).
       parameters:
         - description: The output format; can be svg or mml
@@ -213,6 +225,7 @@ paths:
     get:
       description: |
         List page properties / page content sub-apis.
+
         Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Stable)
       produces:
         - application/json
@@ -231,7 +244,9 @@ paths:
   /page/data-parsoid/:
     get:
       description: |
-        List titles for which the data-parsoid property is available. This currently only lists pages which have revisions stored in RESTBase.
+        List titles for which the data-parsoid property is available. This
+        currently only lists pages which have revisions stored in RESTBase.
+
         Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
       parameters:
         - description: The next page token
@@ -264,6 +279,7 @@ paths:
     get:
       description: |
         Retrieve the latest data-parsoid (private Parsoid metadata)
+
         Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
       parameters:
         - description: the title of page content
@@ -317,7 +333,9 @@ paths:
   '/page/data-parsoid/{title}/':
     get:
       description: |
-        List data-parsoid revisions for a page. This currently only lists revisions stored in RESTBase.
+        List data-parsoid revisions for a page. This currently only lists
+        revisions stored in RESTBase.
+
         Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
       parameters:
         - description: The page title
@@ -364,6 +382,7 @@ paths:
     get:
       description: |
         Retrieve data-parsoid (internal Parsoid metadata) for a given page & revision
+
         Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
       parameters:
         - description: The page title
@@ -417,6 +436,7 @@ paths:
     get:
       description: |
         Retrieve data-parsoid (internal Parsoid metadata) for a given page & revision
+
         Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
       parameters:
         - description: The page title
@@ -474,7 +494,11 @@ paths:
   '/page/graph/png/{title}/{revision}/{graph_id}':
     get:
       description: |
-        Retrieve PNG graph images embedded in specific revisions of a page. See [the Graphoid documentation](https://www.mediawiki.org/wiki/Extension:Graph#Graphoid_service) for details.
+        Retrieve PNG graph images embedded in specific revisions of a
+        page. See [the Graphoid
+        documentation](https://www.mediawiki.org/wiki/Extension:Graph#Graphoid_service)
+        for details.
+
         Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
       parameters:
         - description: The page title
@@ -532,7 +556,9 @@ paths:
   /page/html/:
     get:
       description: |
-        List titles for which an HTML representation is available. Currently this only lists pages that have revisions stored in RESTBase.
+        List titles for which an HTML representation is available. Currently
+        this only lists pages that have revisions stored in RESTBase.
+
         Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
       parameters:
         - description: The next page token
@@ -564,10 +590,21 @@ paths:
   '/page/html/{title}':
     get:
       description: |
-        Retrieve the latest html for a page title available in storage.
-        If you know the revision as well, then please use the `{title}/{revision}` end point instead for better performance.
-        Supply the `Cache-Control: no-cache` header to force a fetch of the most recent version.
-        See [the MediaWiki DOM spec](https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec) for a description of the MediaWiki-specific semantic markup in this HTML.
+        Retrieve the latest html for a title.
+
+        The response provides an `ETag` header indicating the revision and
+        render timeuuid separated by a slash
+        (ex: `ETag: 701384379/154d7bca-c264-11e5-8c2f-1b51b33b59fc`). This ETag can be
+        passed to the HTML save end point (as `base_etag` POST parameter), and
+        can also be used to retrieve the exact corresponding data-parsoid
+        metadata, by requesting the specific `revision` and `tid` indicated by
+        the `ETag`.
+
+        See [the MediaWiki DOM
+        spec](https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec) for a
+        description of the MediaWiki-specific semantic markup in this HTML.
+        Note that additional metadata is available in the HTML head.
+
         Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
       parameters:
         - description: The page title.
@@ -584,7 +621,8 @@ paths:
       responses:
         '200':
           description: |
-            The html for the given page title. Conforms to https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec.
+            The html for the given page title. Conforms to
+            https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec.
         '404':
           description: Unknown page title
           schema:
@@ -625,9 +663,19 @@ paths:
         - multipart/form-data
       description: |
         Save a new revision of a page given in HTML format.
-        For new pages, or when editting the latest revision of a page, the `base_etag` parameter should be left empty. For editing old revisions, it should contain the ETag header of the revision the edit is derived from.
-        The latest page revision ETag header could be provided in the If-Match header to detect edit conflicts. If the new page is created, appropriate user cookies must be provided.
-        See [the MediaWiki DOM spec](https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec) for a description of the MediaWiki-specific semantic markup needed by this API end-point.
+
+        For new pages, or when editting the latest revision of a page,
+        the `base_etag` parameter should be left empty. For editing old revisions,
+        it should contain the `ETag` header of the revision the edit is derived from.
+
+        The latest page revision ETag header could be provided in the If-Match header
+        to detect edit conflicts. If the new page is created, appropriate user cookies
+        must be provided.
+
+        See [the MediaWiki DOM spec](https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec)
+        for a description of the MediaWiki-specific semantic markup needed by this API
+        end-point.
+
         Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
       parameters:
         - description: The page title.
@@ -645,7 +693,7 @@ paths:
           name: html
           required: true
           type: string
-        - description: The CRSF edit token provided by the MW API
+        - description: The CSRF edit token provided by the MW API
           in: formData
           name: csrf_token
           required: true
@@ -699,7 +747,9 @@ paths:
   '/page/html/{title}/':
     get:
       description: |
-        List HTML revisions for a title. This currently only lists revisions that are already stored in RESTBase.
+        List HTML revisions for a title. This currently only lists revisions
+        that are already stored in RESTBase.
+
         Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
       parameters:
         - description: The page title
@@ -741,9 +791,26 @@ paths:
   '/page/html/{title}/{revision}':
     get:
       description: |
-        Retrieve the html for a given revision (and optional timeuuid).
-        See [the MediaWiki DOM spec](https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec) for a description of the MediaWiki-specific semantic markup in this HTML.
-        This HTML can be edited using arbitrary HTML tools. The modified HTML can be converted back to wikitext using the [/transform/html/to/wikitext{/title}{/revision}](#!/Transforms/transform_html_to_wikitext__title___revision__post) entry point.
+        Retrieve the html for a given title, revision, and optionally timeuuid.
+
+        The response provides an `ETag` header indicating the revision and
+        render timeuuid separated by a slash
+        (ex: `ETag: 701384379/154d7bca-c264-11e5-8c2f-1b51b33b59fc`). This ETag can be
+        passed to the HTML save end point (as `base_etag` POST parameter), and
+        can also be used to retrieve the exact corresponding data-parsoid
+        metadata, by requesting the specific `revision` and `tid` indicated by
+        the `ETag`.
+
+        See [the MediaWiki DOM
+        spec](https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec) for a
+        description of the MediaWiki-specific semantic markup in this HTML.
+        Note that additional metadata is available in the HTML head.
+
+        This HTML can be edited using arbitrary HTML tools. The modified HTML
+        can be converted back to wikitext using the
+        [/transform/html/to/wikitext{/title}{/revision}](#!/Transforms/transform_html_to_wikitext__title___revision__post)
+        entry point.
+
         Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
       parameters:
         - description: The page title
@@ -765,7 +832,8 @@ paths:
       responses:
         '200':
           description: |
-            The html for the given page, revision and tid. Conforms to https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec.
+            The html for the given page, revision and tid. Conforms to
+            https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec.
         '400':
           description: Invalid revision or tid
           schema:
@@ -801,9 +869,26 @@ paths:
   '/page/html/{title}/{revision}/{tid}':
     get:
       description: |
-        Retrieve the html for a given revision (and optional timeuuid).
-        See [the MediaWiki DOM spec](https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec) for a description of the MediaWiki-specific semantic markup in this HTML.
-        This HTML can be edited using arbitrary HTML tools. The modified HTML can be converted back to wikitext using the [/transform/html/to/wikitext{/title}{/revision}](#!/Transforms/transform_html_to_wikitext__title___revision__post) entry point.
+        Retrieve the html for a given title, revision, and optionally timeuuid.
+
+        The response provides an `ETag` header indicating the revision and
+        render timeuuid separated by a slash
+        (ex: `ETag: 701384379/154d7bca-c264-11e5-8c2f-1b51b33b59fc`). This ETag can be
+        passed to the HTML save end point (as `base_etag` POST parameter), and
+        can also be used to retrieve the exact corresponding data-parsoid
+        metadata, by requesting the specific `revision` and `tid` indicated by
+        the `ETag`.
+
+        See [the MediaWiki DOM
+        spec](https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec) for a
+        description of the MediaWiki-specific semantic markup in this HTML.
+        Note that additional metadata is available in the HTML head.
+
+        This HTML can be edited using arbitrary HTML tools. The modified HTML
+        can be converted back to wikitext using the
+        [/transform/html/to/wikitext{/title}{/revision}](#!/Transforms/transform_html_to_wikitext__title___revision__post)
+        entry point.
+
         Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
       parameters:
         - description: The page title
@@ -830,7 +915,8 @@ paths:
       responses:
         '200':
           description: |
-            The html for the given page, revision and tid. Conforms to https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec.
+            The html for the given page, revision and tid. Conforms to
+            https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec.
         '400':
           description: Invalid revision or tid
           schema:
@@ -866,7 +952,9 @@ paths:
   '/page/mobile-sections-lead/{title}':
     get:
       description: |
-        Retrieve the lead section of the latest HTML for a page title optimised for viewing with native mobile applications.
+        Retrieve the lead section of the latest HTML for a page title optimised
+        for viewing with native mobile applications.
+
         Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental). Don't rely on this.
       parameters:
         - description: The page title
@@ -901,7 +989,10 @@ paths:
   '/page/mobile-sections-remaining/{title}':
     get:
       description: |
-        Retrieve the remainder of the latest HTML (without the lead section) for a page title optimised for viewing with native mobile applications, provided as a JSON object containing the sections.
+        Retrieve the remainder of the latest HTML (without the lead section) for
+        a page title optimised for viewing with native mobile applications,
+        provided as a JSON object containing the sections.
+
         Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental). Don't rely on this.
       parameters:
         - description: The page title
@@ -936,7 +1027,9 @@ paths:
   '/page/mobile-sections/{title}':
     get:
       description: |
-        Retrieve the latest HTML for a page title optimised for viewing with native mobile applications. Note that the output is split by sections.
+        Retrieve the latest HTML for a page title optimised for viewing with
+        native mobile applications. Note that the output is split by sections.
+
         Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental). Don't rely on this.
       parameters:
         - description: The page title
@@ -984,7 +1077,9 @@ paths:
   '/page/mobile-text/{title}':
     get:
       description: |
-        Retrieve the *lite* version of the latest HTML for a page title optimised for viewing with native mobile applications.
+        Retrieve the *lite* version of the latest HTML for a page title optimised for viewing with
+        native mobile applications.
+
         Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental). Don't rely on this.
       parameters:
         - description: The page title
@@ -1020,6 +1115,7 @@ paths:
     get:
       description: |
         List revisions. This currently only lists revisions stored in RESTBase.
+
         Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental). Don't rely on this.
       parameters:
         - description: The next page token
@@ -1052,6 +1148,7 @@ paths:
     get:
       description: |
         Get metadata about a specific revision.
+
         Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
       parameters:
         - description: The revision id
@@ -1112,8 +1209,12 @@ paths:
   '/page/summary/{title}':
     get:
       description: |
-        Returns the summary of the latest page content available in storage. Currently the summary includes the text for the first several sentences and the thumbnail URL.
+        Returns the summary of the latest page content available in storage.
+        Currently the summary includes the text for the first several sentences and
+        the thumbnail URL.
+
         Provide a `Cache-Control: no-cache` header to request the latest data.
+
         Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
       parameters:
         - description: The page title.
@@ -1224,6 +1325,7 @@ paths:
     get:
       description: |
         List all pages.
+
         Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental). Don't rely on this.
       parameters:
         - description: The next page token
@@ -1255,7 +1357,9 @@ paths:
   '/page/title/{title}':
     get:
       description: |
-        Returns the latest revision ID for the title present in storage. Supply the Cache-Control: no-cache header to obtain the latest available revision ID
+        Returns the latest revision ID for the title present in storage.
+        Supply the Cache-Control: no-cache header to obtain the latest available revision ID
+
         Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
       parameters:
         - description: The page title.
@@ -1309,7 +1413,11 @@ paths:
   '/page/title/{title}/':
     get:
       description: |
-        List revisions for a title. Currently this lists all revisions that ever used this title and are stored in RESTBase, but eventually it should probably return the linear history (across renames) of the page currently using this title.
+        List revisions for a title. Currently this lists all revisions that
+        ever used this title and are stored in RESTBase, but eventually it
+        should probably return the linear history (across renames) of the page
+        currently using this title.
+
         Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
       parameters:
         - description: The page title.
@@ -1349,8 +1457,16 @@ paths:
         - multipart/form-data
       description: |
         Save a new revision of a page.
-        For new pages, or when editting the latest revision of a page, the `base_etag` parameter should be left empty. For editing old revisions, it should contain the ETag header of the revision the edit is derived from.
-        The latest page revision ETag header could be provided in the If-Match header to detect edit conflicts. If the new page is created, appropriate user cookies must be provided.
+
+        For new pages, or when editting the latest revision of a page,
+        the `base_etag` parameter should be left empty.
+        For editing old revisions, it should contain the ETag header
+        of the revision the edit is derived from.
+
+        The latest page revision ETag header could be provided in the If-Match header
+        to detect edit conflicts. If the new page is created, appropriate user cookies
+        must be provided.
+
         Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
       parameters:
         - description: The page title.
@@ -1426,6 +1542,7 @@ paths:
         - multipart/form-data
       description: |
         Update / refresh / sanitize HTML
+
         Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
       parameters:
         - description: The HTML to transform
@@ -1433,11 +1550,7 @@ paths:
           name: html
           required: true
           type: string
-        - description: Deprecated. Use `body_only`.
-          in: formData
-          name: bodyOnly
-          required: false
-          type: boolean
+          x-textarea: true
         - description: Return only `body.innerHTML`
           in: formData
           name: body_only
@@ -1475,7 +1588,6 @@ paths:
         - get_from_backend:
             request:
               body:
-                bodyOnly: '{bodyOnly}'
                 body_only: '{body_only}'
                 html: '{html}'
               headers:
@@ -1489,6 +1601,7 @@ paths:
         - multipart/form-data
       description: |
         Update / refresh / sanitize HTML
+
         Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
       parameters:
         - description: The page title
@@ -1501,11 +1614,7 @@ paths:
           name: html
           required: true
           type: string
-        - description: Deprecated. Use `body_only`.
-          in: formData
-          name: bodyOnly
-          required: false
-          type: boolean
+          x-textarea: true
         - description: Return only `body.innerHTML`
           in: formData
           name: body_only
@@ -1543,7 +1652,6 @@ paths:
         - get_from_backend:
             request:
               body:
-                bodyOnly: '{bodyOnly}'
                 body_only: '{body_only}'
                 html: '{html}'
               headers:
@@ -1557,6 +1665,7 @@ paths:
         - multipart/form-data
       description: |
         Update / refresh / sanitize HTML
+
         Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
       parameters:
         - description: The page title
@@ -1574,11 +1683,7 @@ paths:
           name: html
           required: true
           type: string
-        - description: Deprecated. Use `body_only`.
-          in: formData
-          name: bodyOnly
-          required: false
-          type: boolean
+          x-textarea: true
         - description: Return only `body.innerHTML`
           in: formData
           name: body_only
@@ -1616,7 +1721,6 @@ paths:
         - get_from_backend:
             request:
               body:
-                bodyOnly: '{bodyOnly}'
                 body_only: '{body_only}'
                 html: '{html}'
               headers:
@@ -1630,6 +1734,7 @@ paths:
         - multipart/form-data
       description: |
         Transform HTML to wikitext
+
         Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
       parameters:
         - description: The HTML to transform
@@ -1637,6 +1742,7 @@ paths:
           name: html
           required: true
           type: string
+          x-textarea: true
         - description: Normalise the DOM to yield cleaner wikitext?
           in: formData
           name: scrub_wikitext
@@ -1693,6 +1799,7 @@ paths:
         - multipart/form-data
       description: |
         Transform HTML to wikitext
+
         Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
       parameters:
         - description: The page title
@@ -1705,6 +1812,7 @@ paths:
           name: html
           required: true
           type: string
+          x-textarea: true
         - description: Normalise the DOM to yield cleaner wikitext?
           in: formData
           name: scrub_wikitext
@@ -1761,6 +1869,7 @@ paths:
         - multipart/form-data
       description: |
         Transform HTML to wikitext
+
         Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
       parameters:
         - description: The page title
@@ -1778,6 +1887,7 @@ paths:
           name: html
           required: true
           type: string
+          x-textarea: true
         - description: Normalise the DOM to yield cleaner wikitext?
           in: formData
           name: scrub_wikitext
@@ -1834,6 +1944,7 @@ paths:
         - multipart/form-data
       description: |
         Transform sections representation to wikitext
+
         Stability: [unstable](https://www.mediawiki.org/wiki/API_versioning#Unstable)
       parameters:
         - description: The page title
@@ -1912,11 +2023,7 @@ paths:
           name: wikitext
           required: true
           type: string
-        - description: Deprecated. Use `body_only`
-          in: formData
-          name: bodyOnly
-          required: false
-          type: boolean
+          x-textarea: true
         - description: Return only `body.innerHTML`
           in: formData
           name: body_only
@@ -1973,7 +2080,6 @@ paths:
         - get_from_backend:
             request:
               body:
-                bodyOnly: '{bodyOnly}'
                 body_only: '{body_only}'
                 stash: '{stash}'
                 wikitext: '{wikitext}'
@@ -2000,11 +2106,7 @@ paths:
           name: wikitext
           required: true
           type: string
-        - description: Deprecated. Use `body_only`
-          in: formData
-          name: bodyOnly
-          required: false
-          type: boolean
+          x-textarea: true
         - description: Return only `body.innerHTML`
           in: formData
           name: body_only
@@ -2061,7 +2163,6 @@ paths:
         - get_from_backend:
             request:
               body:
-                bodyOnly: '{bodyOnly}'
                 body_only: '{body_only}'
                 stash: '{stash}'
                 wikitext: '{wikitext}'
@@ -2093,11 +2194,7 @@ paths:
           name: wikitext
           required: true
           type: string
-        - description: Deprecated. Use `body_only`
-          in: formData
-          name: bodyOnly
-          required: false
-          type: boolean
+          x-textarea: true
         - description: Return only `body.innerHTML`
           in: formData
           name: body_only
@@ -2154,7 +2251,6 @@ paths:
         - get_from_backend:
             request:
               body:
-                bodyOnly: '{bodyOnly}'
                 body_only: '{body_only}'
                 stash: '{stash}'
                 wikitext: '{wikitext}'

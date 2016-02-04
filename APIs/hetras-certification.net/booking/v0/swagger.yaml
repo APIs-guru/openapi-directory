@@ -333,6 +333,65 @@ paths:
       summary: Load a specific reservation from a booking
       tags:
         - Reservation
+  '/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}/assign_room':
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/x-www-form-urlencoded
+      deprecated: false
+      description: "By default this API call assigns a random room, which has the proper room type, is not already assigned\r\n            to another reservation or has any maintenance status set for the stay period of the underlying reservation. If the\r\n            arrival date for the underlying reservation is the current business day dirty rooms are excluded by default. For reservation\r\n            arriving on any latter day the room condition is not taken into account.<br />\r\n            By specifiying the room selection criteria in the request body you can influence which room will be assigned. See the request model\r\n            for further details.<br />\r\n            For more details on how the API responds to errors please check our documentation on \r\n            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>."
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: The confirmation id for the booking the reservation was made.
+          in: path
+          name: confirmationId
+          required: true
+          type: string
+        - description: Specifies the reservation number for the reservation the room should be assigned to.
+          format: int32
+          in: path
+          name: reservationNumber
+          required: true
+          type: integer
+        - description: Specifies the criteria for the room selection.
+          in: body
+          name: assigningCriteria
+          required: true
+          schema:
+            $ref: '#/definitions/AssignRoomCriteria'
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: The room assignment was successful. The Reponse would contain the room number assigned.
+          schema:
+            $ref: '#/definitions/AssignRoomResponse'
+        '400':
+          description: Bad request. Request parameters or request body erroneous.
+        '401':
+          description: You are not authorized to access this resource or you reached your API limit.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI.
+        '422':
+          description: The request failed to validate. The reason could be no available rooms or a mismatch of room types etc.
+        '500':
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+      summary: Assign a room to a reservation
+      tags:
+        - Reservation
   '/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}/cancel':
     post:
       consumes: []
@@ -615,6 +674,54 @@ definitions:
         description: The number of rooms the addon offers are requested for. The rates will then already reflects this.
         format: int32
         type: integer
+    type: object
+  AssignRoomCriteria:
+    description: Represents a set of criteria for assigning a room
+    properties:
+      amenities:
+        description: Ensure the assigned room will have all the amenities specified. You can provide a comma seperated list of amenity codes.
+        items:
+          type: string
+        type: array
+      condition:
+        description: "Here you can define to limit the list of assignable rooms based on their current condition. This is only applicable if the underlying reservation\r\n            is due to arrive on the current business day. If not set by default only clean rooms will be assigned."
+        enum:
+          - CleanNotInspected
+          - Clean
+          - Dirty
+          - Any
+        type: string
+      include_out_of_service:
+        description: "Sometimes you might want to assign rooms which are out of service (small repair needed) if no other rooms are available anymore. If you set\r\n            include_out_of_service to true even those rooms will be considered. The default is false."
+        type: boolean
+      locations:
+        description: Ensure the assigned room will have as much of the specified locations as possible. You can provide a comma seperated list of location codes.
+        items:
+          type: string
+        type: array
+      respect_guest_preferences:
+        description: "Defines if the preferences for locations, amenities and views of the primary guest should be taken into account. All defined preferences in the guest\r\n            profile override any of the criteria defined in the request body. The default is false."
+        type: boolean
+      room_number:
+        description: "If you define a specific room number this room will be assigned if not assigned to another reservation, has proper room type and is not OutOfOrder \r\n            or OutOfInventory for the stay duration of the underlying reservaton. If set all other filter criteria will be ignored."
+        type: string
+      views:
+        description: Ensure the assigned room will have as much of the specified views as possible. You can provide a comma seperated list of views codes.
+        items:
+          type: string
+        type: array
+    type: object
+  AssignRoomResponse:
+    description: Defines the response for room assignment operation
+    properties:
+      _warnings:
+        description: "Warnings that came up when your request was processed. Your request will still be processed successfull when\r\n            you see such warnings in your response"
+        items:
+          type: string
+        type: array
+      room_number:
+        description: The room number assigned
+        type: string
     type: object
   BaseResponse:
     properties:
@@ -1533,19 +1640,6 @@ definitions:
         items:
           $ref: '#/definitions/ReservationResponse'
         type: array
-    type: object
-  RoomAssignmentResponse:
-    description: Defines the response for room assignment operation
-    properties:
-      _warnings:
-        description: "Warnings that came up when your request was processed. Your request will still be processed successfull when\r\n            you see such warnings in your response"
-        items:
-          type: string
-        type: array
-      room_number:
-        description: The room number assigned
-        format: int32
-        type: integer
     type: object
   RoomNightCount:
     properties:

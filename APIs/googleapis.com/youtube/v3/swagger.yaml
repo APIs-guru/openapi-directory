@@ -1768,7 +1768,7 @@ paths:
           in: query
           name: hl
           type: string
-        - default: 200
+        - default: 500
           description: The maxResults parameter specifies the maximum number of messages that should be returned in the result set.
           in: query
           maximum: 2000
@@ -4075,11 +4075,6 @@ definitions:
           $ref: '#/definitions/ChannelConversionPing'
         type: array
     type: object
-  ChannelId:
-    properties:
-      value:
-        type: string
-    type: object
   ChannelListResponse:
     properties:
       etag:
@@ -4449,7 +4444,6 @@ definitions:
     description: 'Basic details about a comment, such as its author and text.'
     properties:
       authorChannelId:
-        $ref: '#/definitions/ChannelId'
         description: "The id of the author's YouTube channel, if any."
       authorChannelUrl:
         description: "Link to the author's YouTube channel, if any."
@@ -4904,6 +4898,7 @@ definitions:
       fpbRating:
         description: "The video's rating from South Africa's Film and Publication Board."
         enum:
+          - fpb10
           - fpb1012Pg
           - fpb13
           - fpb16
@@ -6717,6 +6712,8 @@ definitions:
         $ref: '#/definitions/PageInfo'
       prevPageToken:
         description: The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set.
+        type: string
+      regionCode:
         type: string
       tokenPagination:
         $ref: '#/definitions/TokenPagination'

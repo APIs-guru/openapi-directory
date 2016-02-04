@@ -810,6 +810,11 @@ definitions:
       insertTime:
         description: '[Output Only] Timestamp when the deployment was created, in RFC3339 text format .'
         type: string
+      labels:
+        description: 'Map of labels; provided by the client when the resource is created or updated. Specifically: Label keys must be between 1 and 63 characters long and must conform to the following regular expression: [a-z]([-a-z0-9]*[a-z0-9])? Label values must be between 0 and 63 characters long and must conform to the regular expression ([a-z]([-a-z0-9]*[a-z0-9])?)?'
+        items:
+          $ref: '#/definitions/DeploymentLabelEntry'
+        type: array
       manifest:
         description: '[Output Only] URL of the manifest representing the last manifest that was successfully deployed.'
         type: string
@@ -826,11 +831,30 @@ definitions:
         $ref: '#/definitions/DeploymentUpdate'
         description: '[Output Only] If Deployment Manager is currently updating or previewing an update to this deployment, the updated configuration appears here.'
     type: object
+  DeploymentLabelEntry:
+    properties:
+      key:
+        type: string
+      value:
+        type: string
+    type: object
   DeploymentUpdate:
     description: ''
     properties:
+      labels:
+        description: '[Output Only] Map of labels; provided by the client when the resource is created or updated. Specifically: Label keys must be between 1 and 63 characters long and must conform to the following regular expression: [a-z]([-a-z0-9]*[a-z0-9])? Label values must be between 0 and 63 characters long and must conform to the regular expression ([a-z]([-a-z0-9]*[a-z0-9])?)?'
+        items:
+          $ref: '#/definitions/DeploymentUpdateLabelEntry'
+        type: array
       manifest:
         description: '[Output Only] URL of the manifest representing the update configuration of this deployment.'
+        type: string
+    type: object
+  DeploymentUpdateLabelEntry:
+    properties:
+      key:
+        type: string
+      value:
         type: string
     type: object
   DeploymentsCancelPreviewRequest:
