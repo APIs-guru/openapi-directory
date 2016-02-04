@@ -597,7 +597,7 @@ function writeSpec(source, type, exPatch, callback) {
 
       function validateAndFix() {
         validateSwagger(swagger, function (errors, warnings) {
-          if (!errors)
+          if (!_.isArray(errors))
             return done(errors, warnings);
 
           if (fixSpec(swagger, errors))
