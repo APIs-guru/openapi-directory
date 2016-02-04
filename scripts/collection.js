@@ -579,6 +579,7 @@ function writeSpec(source, type, exPatch, callback) {
       }
 
       expandPathTemplates(swagger);
+      replaceSpacesInSchemaNames(swagger);
 
       result.swagger = swagger;
 
@@ -683,6 +684,19 @@ function expandPathTemplates(swagger) {
   });
 }
 
+function replaceSpacesInSchemaNames(swagger) {
+  if (_.isUndefined(swagger.definitions))
+      return;
+
+  swagger.definitions = _.mapKeys(swagger.definitions, function (value, key) {
+    return replaceSpaces(key);
+  });
+}
+
+function replaceSpaces(str) {
+  return str.replace(/ /g, '_');
+}
+
 function fixSpec(swagger, errors) {
   var fixed = false;
 
@@ -727,6 +741,9 @@ function fixSpec(swagger, errors) {
         }
         break;
       case 'UNRESOLVABLE_REFERENCE':
+        if (value.indexOf(' ') !== -1)
+          newValue = value = replaceSpaces(value);
+
         if (typeof swagger.definitions[value] !== 'undefined')
           newValue = '#/definitions/' + value;
         break;
