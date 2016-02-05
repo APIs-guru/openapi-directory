@@ -2,23 +2,23 @@ swagger: '2.0'
 schemes:
   - https
 host: www.googleapis.com
-basePath: /dfareporting/v2.3
+basePath: /dfareporting/v2.4
 info:
   contact:
     name: Google
     url: 'https://google.com'
   description: Manage your DoubleClick Campaign Manager ad campaigns and reports.
   title: DCM/DFA Reporting And Trafficking
-  version: v2.3
+  version: v2.4
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/dfareporting/v2.3/rest'
+    url: 'https://www.googleapis.com/discovery/v1/apis/dfareporting/v2.4/rest'
     version: v1
-  x-preferred: false
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: dfareporting
 externalDocs:
@@ -736,13 +736,13 @@ paths:
             type: string
           name: campaignIds
           type: array
-        - description: 'Select default ads with the specified compatibility. Applicable when type is AD_SERVING_DEFAULT_AD. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering an in-stream video ads developed with the VAST standard.'
+        - description: 'Select default ads with the specified compatibility. Applicable when type is AD_SERVING_DEFAULT_AD. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering an in-stream video ads developed with the VAST standard.'
           enum:
             - APP
             - APP_INTERSTITIAL
+            - DISPLAY
+            - DISPLAY_INTERSTITIAL
             - IN_STREAM_VIDEO
-            - WEB
-            - WEB_INTERSTITIAL
           in: query
           name: compatibility
           type: string
@@ -5116,15 +5116,15 @@ paths:
           name: campaignIds
           type: array
         - collectionFormat: multi
-          description: Select only placements that are associated with these compatibilities. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps.IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard.
+          description: Select only placements that are associated with these compatibilities. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps.IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard.
           in: query
           items:
             enum:
               - APP
               - APP_INTERSTITIAL
+              - DISPLAY
+              - DISPLAY_INTERSTITIAL
               - IN_STREAM_VIDEO
-              - WEB
-              - WEB_INTERSTITIAL
             type: string
           name: compatibilities
           type: array
@@ -5713,6 +5713,13 @@ paths:
             - DESCENDING
           in: query
           name: sortOrder
+          type: string
+        - description: Select only inventory items with this type.
+          enum:
+            - PLANNING_PLACEMENT_TYPE_CREDIT
+            - PLANNING_PLACEMENT_TYPE_REGULAR
+          in: query
+          name: type
           type: string
       responses:
         '200':
@@ -7913,13 +7920,13 @@ definitions:
         description: Comments for this ad.
         type: string
       compatibility:
-        description: 'Compatibility of this ad. Applicable when type is AD_SERVING_DEFAULT_AD. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering an in-stream video ads developed with the VAST standard.'
+        description: 'Compatibility of this ad. Applicable when type is AD_SERVING_DEFAULT_AD. DISPLAY and DISPLAY_INTERSTITIAL refer to either rendering on desktop or on mobile devices or in mobile apps for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are only used for existing default ads. New mobile placements must be assigned DISPLAY or  DISPLAY_INTERSTITIAL and default ads created for those placements will be limited to those compatibility types. IN_STREAM_VIDEO refers to rendering in-stream video ads developed with the VAST standard.'
         enum:
           - APP
           - APP_INTERSTITIAL
+          - DISPLAY
+          - DISPLAY_INTERSTITIAL
           - IN_STREAM_VIDEO
-          - WEB
-          - WEB_INTERSTITIAL
         type: string
       createInfo:
         $ref: '#/definitions/LastModifiedInfo'
@@ -8020,13 +8027,13 @@ definitions:
         description: Comment for this ad slot.
         type: string
       compatibility:
-        description: Ad slot compatibility. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard.
+        description: 'Ad slot compatibility. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop, mobile devices or in mobile apps for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard.'
         enum:
-          - PLANNING_RENDERING_ENVIRONMENT_TYPE_APP
-          - PLANNING_RENDERING_ENVIRONMENT_TYPE_APP_INTERSTITIAL
-          - PLANNING_RENDERING_ENVIRONMENT_TYPE_IN_STREAM_VIDEO
-          - PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB
-          - PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB_INTERSTITIAL
+          - APP
+          - APP_INTERSTITIAL
+          - DISPLAY
+          - DISPLAY_INTERSTITIAL
+          - IN_STREAM_VIDEO
         type: string
       height:
         description: Height of this ad slot.
@@ -8842,21 +8849,21 @@ definitions:
         type: array
       compatibility:
         description: |-
-          Compatibilities associated with this creative. This is a read-only field. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard. Applicable to all creative types.
+          Compatibilities associated with this creative. This is a read-only field. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop or on mobile devices or in mobile apps for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL  are for rendering in mobile apps. Only pre-existing creatives may have these compatibilities since new creatives will either be assigned DISPLAY or DISPLAY_INTERSTITIAL instead. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard. Applicable to all creative types.
 
           Acceptable values are:
           - "APP"
           - "APP_INTERSTITIAL"
           - "IN_STREAM_VIDEO"
-          - "WEB"
-          - "WEB_INTERSTITIAL"
+          - "DISPLAY"
+          - "DISPLAY_INTERSTITIAL"
         items:
           enum:
             - APP
             - APP_INTERSTITIAL
+            - DISPLAY
+            - DISPLAY_INTERSTITIAL
             - IN_STREAM_VIDEO
-            - WEB
-            - WEB_INTERSTITIAL
           type: string
         type: array
       convertFlashToHtml5:
@@ -11009,6 +11016,12 @@ definitions:
         description: Subaccount ID of this inventory item.
         format: int64
         type: string
+      type:
+        description: Type of inventory item.
+        enum:
+          - PLANNING_PLACEMENT_TYPE_CREDIT
+          - PLANNING_PLACEMENT_TYPE_REGULAR
+        type: string
     type: object
   InventoryItemsListResponse:
     description: Inventory item List Response
@@ -11643,13 +11656,13 @@ definitions:
         description: Comments for this placement.
         type: string
       compatibility:
-        description: 'Placement compatibility. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps.IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard. This field is required on insertion.'
+        description: 'Placement compatibility. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering on desktop, mobile devices or in mobile apps for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are no longer allowed for new placement insertions. Instead, use DISPLAY or DISPLAY_INTERSTITIAL. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard.This field is required on insertion.'
         enum:
           - APP
           - APP_INTERSTITIAL
+          - DISPLAY
+          - DISPLAY_INTERSTITIAL
           - IN_STREAM_VIDEO
-          - WEB
-          - WEB_INTERSTITIAL
         type: string
       contentCategoryId:
         description: ID of the content category assigned to this placement.
