@@ -1424,6 +1424,41 @@ paths:
             - 'https://www.googleapis.com/auth/drive.photos.readonly'
       tags:
         - files
+  '/files/{fileId}/export':
+    get:
+      description: Exports a Google Doc to the requested MIME type and returns the exported content.
+      operationId: drive.files.export
+      parameters:
+        - description: The ID of the file.
+          in: path
+          name: fileId
+          required: true
+          type: string
+        - description: The MIME type of the format requested for this export.
+          in: query
+          name: mimeType
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.file'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive.readonly'
+      tags:
+        - files
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/files/{fileId}/parents':
     get:
       description: "Lists a file's parents."

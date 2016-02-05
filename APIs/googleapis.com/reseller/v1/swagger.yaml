@@ -89,7 +89,7 @@ paths:
       description: Creates a customer resource if one does not already exist.
       operationId: reseller.customers.insert
       parameters:
-        - description: 'An auth token needed for inserting a customer for which domain already exists. Can be generated at https://www.google.com/a/cpanel//TransferToken. Optional.'
+        - description: 'An auth token needed for inserting a customer for which domain already exists. Can be generated at https://admin.google.com/TransferToken. Optional.'
           in: query
           name: customerAuthToken
           type: string

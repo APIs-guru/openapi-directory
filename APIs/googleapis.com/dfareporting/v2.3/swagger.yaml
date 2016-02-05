@@ -1986,6 +1986,7 @@ paths:
             - OBJECT_MEDIA_ORDER
             - OBJECT_PLACEMENT
             - OBJECT_PLACEMENT_STRATEGY
+            - OBJECT_PLAYSTORE_LINK
             - OBJECT_PROVIDED_LIST_CLIENT
             - OBJECT_RATE_CARD
             - OBJECT_REMARKETING_LIST
@@ -7609,7 +7610,7 @@ definitions:
         format: int64
         type: string
       currencyId:
-        description: "ID of currency associated with this account. This is a required field.\nAcceptable values are: \n- \"1\" for USD \n- \"2\" for GBP \n- \"3\" for ESP \n- \"4\" for SEK \n- \"5\" for CAD \n- \"6\" for JPY \n- \"7\" for DEM \n- \"8\" for AUD \n- \"9\" for FRF \n- \"10\" for ITL \n- \"11\" for DKK \n- \"12\" for NOK \n- \"13\" for FIM \n- \"14\" for ZAR \n- \"15\" for IEP \n- \"16\" for NLG \n- \"17\" for EUR \n- \"18\" for KRW \n- \"19\" for TWD \n- \"20\" for SGD \n- \"21\" for CNY \n- \"22\" for HKD \n- \"23\" for NZD \n- \"24\" for MYR \n- \"25\" for BRL \n- \"26\" for PTE \n- \"27\" for MXP \n- \"28\" for CLP \n- \"29\" for TRY \n- \"30\" for ARS \n- \"31\" for PEN \n- \"32\" for ILS \n- \"33\" for CHF \n- \"34\" for VEF \n- \"35\" for COP \n- \"36\" for GTQ \n- \"37\" for PLN \n- \"39\" for INR \n- \"40\" for THB"
+        description: "ID of currency associated with this account. This is a required field.\nAcceptable values are: \n- \"1\" for USD \n- \"2\" for GBP \n- \"3\" for ESP \n- \"4\" for SEK \n- \"5\" for CAD \n- \"6\" for JPY \n- \"7\" for DEM \n- \"8\" for AUD \n- \"9\" for FRF \n- \"10\" for ITL \n- \"11\" for DKK \n- \"12\" for NOK \n- \"13\" for FIM \n- \"14\" for ZAR \n- \"15\" for IEP \n- \"16\" for NLG \n- \"17\" for EUR \n- \"18\" for KRW \n- \"19\" for TWD \n- \"20\" for SGD \n- \"21\" for CNY \n- \"22\" for HKD \n- \"23\" for NZD \n- \"24\" for MYR \n- \"25\" for BRL \n- \"26\" for PTE \n- \"27\" for MXP \n- \"28\" for CLP \n- \"29\" for TRY \n- \"30\" for ARS \n- \"31\" for PEN \n- \"32\" for ILS \n- \"33\" for CHF \n- \"34\" for VEF \n- \"35\" for COP \n- \"36\" for GTQ \n- \"37\" for PLN \n- \"39\" for INR \n- \"40\" for THB \n- \"41\" for IDR \n- \"42\" for CZK \n- \"43\" for RON \n- \"44\" for HUF \n- \"45\" for RUB \n- \"46\" for AED \n- \"47\" for BGN \n- \"48\" for HRK"
         format: int64
         type: string
       defaultCreativeSizeId:
@@ -8722,6 +8723,7 @@ definitions:
         enum:
           - ARTWORK_TYPE_FLASH
           - ARTWORK_TYPE_HTML5
+          - ARTWORK_TYPE_IMAGE
           - ARTWORK_TYPE_MIXED
         type: string
       authoringSource:
@@ -9045,6 +9047,7 @@ definitions:
         enum:
           - ARTWORK_TYPE_FLASH
           - ARTWORK_TYPE_HTML5
+          - ARTWORK_TYPE_IMAGE
           - ARTWORK_TYPE_MIXED
         type: string
       assetIdentifier:
@@ -9528,6 +9531,7 @@ definitions:
         enum:
           - ARTWORK_TYPE_FLASH
           - ARTWORK_TYPE_HTML5
+          - ARTWORK_TYPE_IMAGE
           - ARTWORK_TYPE_MIXED
         type: string
       exitUrl:
@@ -9728,6 +9732,7 @@ definitions:
           - POST_CLICK
           - POST_CLICK_AND_IMPRESSION
           - POST_IMPRESSION
+          - VIDEO_COMPLETION
         type: string
     type: object
   CreativeRotation:
@@ -10071,7 +10076,7 @@ definitions:
         format: int64
         type: string
       currencyId:
-        description: "Currency ID of this directory site.\nPossible values are: \n- \"1\" for USD \n- \"2\" for GBP \n- \"3\" for ESP \n- \"4\" for SEK \n- \"5\" for CAD \n- \"6\" for JPY \n- \"7\" for DEM \n- \"8\" for AUD \n- \"9\" for FRF \n- \"10\" for ITL \n- \"11\" for DKK \n- \"12\" for NOK \n- \"13\" for FIM \n- \"14\" for ZAR \n- \"15\" for IEP \n- \"16\" for NLG \n- \"17\" for EUR \n- \"18\" for KRW \n- \"19\" for TWD \n- \"20\" for SGD \n- \"21\" for CNY \n- \"22\" for HKD \n- \"23\" for NZD \n- \"24\" for MYR \n- \"25\" for BRL \n- \"26\" for PTE \n- \"27\" for MXP \n- \"28\" for CLP \n- \"29\" for TRY \n- \"30\" for ARS \n- \"31\" for PEN \n- \"32\" for ILS \n- \"33\" for CHF \n- \"34\" for VEF \n- \"35\" for COP \n- \"36\" for GTQ \n- \"37\" for PLN \n- \"39\" for INR \n- \"40\" for THB"
+        description: "Currency ID of this directory site.\nPossible values are: \n- \"1\" for USD \n- \"2\" for GBP \n- \"3\" for ESP \n- \"4\" for SEK \n- \"5\" for CAD \n- \"6\" for JPY \n- \"7\" for DEM \n- \"8\" for AUD \n- \"9\" for FRF \n- \"10\" for ITL \n- \"11\" for DKK \n- \"12\" for NOK \n- \"13\" for FIM \n- \"14\" for ZAR \n- \"15\" for IEP \n- \"16\" for NLG \n- \"17\" for EUR \n- \"18\" for KRW \n- \"19\" for TWD \n- \"20\" for SGD \n- \"21\" for CNY \n- \"22\" for HKD \n- \"23\" for NZD \n- \"24\" for MYR \n- \"25\" for BRL \n- \"26\" for PTE \n- \"27\" for MXP \n- \"28\" for CLP \n- \"29\" for TRY \n- \"30\" for ARS \n- \"31\" for PEN \n- \"32\" for ILS \n- \"33\" for CHF \n- \"34\" for VEF \n- \"35\" for COP \n- \"36\" for GTQ \n- \"37\" for PLN \n- \"39\" for INR \n- \"40\" for THB \n- \"41\" for IDR \n- \"42\" for CZK \n- \"43\" for RON \n- \"44\" for HUF \n- \"45\" for RUB \n- \"46\" for AED \n- \"47\" for BGN \n- \"48\" for HRK"
         format: int64
         type: string
       description:
@@ -12439,11 +12444,17 @@ definitions:
       listSource:
         description: Product from which this remarketing list was originated.
         enum:
+          - REMARKETING_LIST_SOURCE_ADX
           - REMARKETING_LIST_SOURCE_DBM
           - REMARKETING_LIST_SOURCE_DFA
+          - REMARKETING_LIST_SOURCE_DFP
           - REMARKETING_LIST_SOURCE_DMP
           - REMARKETING_LIST_SOURCE_GA
+          - REMARKETING_LIST_SOURCE_GPLUS
           - REMARKETING_LIST_SOURCE_OTHER
+          - REMARKETING_LIST_SOURCE_PLAY_STORE
+          - REMARKETING_LIST_SOURCE_XFP
+          - REMARKETING_LIST_SOURCE_YOUTUBE
         type: string
       name:
         description: Name of the remarketing list. This is a required field. Must be no greater than 128 characters long.
@@ -13248,11 +13259,17 @@ definitions:
       listSource:
         description: Product from which this targetable remarketing list was originated.
         enum:
+          - REMARKETING_LIST_SOURCE_ADX
           - REMARKETING_LIST_SOURCE_DBM
           - REMARKETING_LIST_SOURCE_DFA
+          - REMARKETING_LIST_SOURCE_DFP
           - REMARKETING_LIST_SOURCE_DMP
           - REMARKETING_LIST_SOURCE_GA
+          - REMARKETING_LIST_SOURCE_GPLUS
           - REMARKETING_LIST_SOURCE_OTHER
+          - REMARKETING_LIST_SOURCE_PLAY_STORE
+          - REMARKETING_LIST_SOURCE_XFP
+          - REMARKETING_LIST_SOURCE_YOUTUBE
         type: string
       name:
         description: Name of the targetable remarketing list. Is no greater than 128 characters long.
@@ -13341,7 +13358,9 @@ definitions:
           - VIDEO_MIDPOINT
           - VIDEO_MUTE
           - VIDEO_PAUSE
+          - VIDEO_PROGRESS
           - VIDEO_REWIND
+          - VIDEO_SKIP
           - VIDEO_START
           - VIDEO_STOP
           - VIDEO_THIRD_QUARTILE

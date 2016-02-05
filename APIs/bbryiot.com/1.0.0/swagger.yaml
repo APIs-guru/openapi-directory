@@ -10,7 +10,7 @@ info:
     format: swagger
     url: 'https://bbryiot.com/api/1/api-docs'
     version: '1.2'
-  x-providerName: blackberry.com
+  x-providerName: bbryiot.com
 tags:
   - name: apps
   - name: caps
@@ -33,7 +33,7 @@ paths:
           in: query
           name: org_id
           type: string
-        - description: 'The application&#39;s API KEY for a single application query.'
+        - description: '(DEPRECATED) The application&#39;s API KEY for a single application query.'
           in: query
           name: api_key
           type: string
@@ -121,6 +121,47 @@ paths:
         '200':
           description: No response was specified
       summary: Update an application
+      tags:
+        - apps
+  '/apps/{id}/auth':
+    get:
+      description: |
+        Read the application authentication information based on its universally unique identifier (UUID). The authentication information include the API KEY, API SECRET, redirect URI and development mode. To read application authentication, the calling device must have the app.read capability on the specified application. The redirect URI is the allowed URI in the redirect_uri of the authentication url in production mode. The authentication process is used to verify the authenticity of the application to the system.
+      parameters:
+        - description: The UUID of the application to read.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/AppAuthRead'
+      summary: Read an application authentication information.
+      tags:
+        - apps
+    put:
+      consumes:
+        - application/json
+      description: |
+        Update the application authentication information. The calling device must have the app.update capability for the specified application.
+      parameters:
+        - description: The universally unique identifier (UUID) of the application to update.
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The authentication information to update.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/AppAuth'
+      responses:
+        '200':
+          description: No response was specified
+      summary: Update an application authentication information.
       tags:
         - apps
   '/apps/{id}/caps':
@@ -363,7 +404,7 @@ paths:
   '/apps/{id}/keys':
     get:
       description: |
-        Read a single application API KEY and API SECRET based on its universally unique identifier (UUID). To read the key and secret, the calling device must have the app.read.keys capability on the specified application.
+        (DEPRECATED) Read a single application API KEY and API SECRET based on its universally unique identifier (UUID). To read the key and secret, the calling device must have the app.read.keys capability on the specified application. This API is deprecated, use GET:/apps/{id}/auth instead.
       parameters:
         - description: The UUID of the application to read.
           in: path
@@ -375,14 +416,14 @@ paths:
           description: No response was specified
           schema:
             $ref: '#/definitions/AppKeys'
-      summary: Read an application API KEY and API SECRET
+      summary: (DEPRECATED) Read an application API KEY and API SECRET
       tags:
         - apps
     put:
       consumes:
         - application/json
       description: |
-        Update the API KEY and API SECRET for an application. The calling device must have the app.update.keys capability for the specified application.
+        (DEPRECATED) Update the API KEY and API SECRET for an application. The calling device must have the app.update.keys capability for the specified application.
       parameters:
         - description: The universally unique identifier (UUID) of the application to update.
           in: path
@@ -398,7 +439,7 @@ paths:
       responses:
         '200':
           description: No response was specified
-      summary: Update an application API KEY and API SECRET
+      summary: (DEPRECATED) Update an application API KEY and API SECRET
       tags:
         - apps
   '/apps/{id}/tags/{tag_id}':
@@ -1311,6 +1352,10 @@ paths:
           name: id
           required: true
           type: string
+        - description: Limit the number of record sent at any one time (default 10000)
+          in: query
+          name: limit
+          type: number
       responses:
         '200':
           description: No response was specified
@@ -2304,6 +2349,38 @@ definitions:
       - description
       - id
       - created_on
+  AppAuth:
+    properties:
+      dev_mode:
+        description: |
+          True indicates that this application is in development mode. In this mode the redirect_uri param of the authentication url can be any url and authentication will pass. False indicates that this application is in production mode. This mode is more secure. The authentication will pass only, if the redirect_uri param of the authentication url is exactly matches the value of "redirect".
+        type: boolean
+      redirect:
+        description: |
+          The redirect is the URI that is allowed as redirect_uri of the authentication url. The authentication process is used to verify the authenticity of the application to the system.
+        type: string
+  AppAuthRead:
+    properties:
+      api_key:
+        description: |
+          A key, referred to as API KEY, which uniquely identifies the application during the authentication process. The authentication process is used to verify the authenticity of the application to the system.
+        type: string
+      api_secret:
+        description: |
+          A string, referred to as API SECRET that&#39;s used with the 'api_key' during the authentication process. Ensure that you don&#39;t share this secret and keep it secure.
+        type: string
+      dev_mode:
+        description: |
+          True indicates that this application is in development mode. In this mode the redirect_uri param of the authentication url can be any url and authentication will pass. False indicates that this application is in production mode. This mode is more secure. The authentication will pass only, if the redirect_uri param of the authentication url is exactly matches the value of "redirect".
+        type: boolean
+      redirect:
+        description: |
+          The redirect is the URI that is allowed as redirect_uri of the authentication url. The authentication process is used to verify the authenticity of the application to the system.
+        type: string
+    required:
+      - api_key
+      - api_secret
+      - dev_mode
   AppCapability:
     properties:
       association:

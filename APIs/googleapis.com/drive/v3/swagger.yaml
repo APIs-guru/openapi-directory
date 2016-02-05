@@ -1032,7 +1032,7 @@ paths:
         - files
   '/files/{fileId}/export':
     get:
-      description: Exports a Google Doc to the requested MIME type.
+      description: Exports a Google Doc to the requested MIME type and returns the exported content.
       operationId: drive.files.export
       parameters:
         - description: The ID of the file.
