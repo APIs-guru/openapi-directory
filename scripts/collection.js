@@ -142,8 +142,10 @@ function updateCollection(dir) {
     console.error(url);
 
     writeSpec(url, type, exPatch, function (error, result) {
-      if (error)
-        return logError(error, result);
+      if (error) {
+        logError(error, result);
+        return asyncCb(error);
+      }
 
       var newFilename = getSwaggerPath(result.swagger);
       if (newFilename !== filename)
