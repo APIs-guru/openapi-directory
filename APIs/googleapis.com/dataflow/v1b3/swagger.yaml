@@ -1573,6 +1573,9 @@ definitions:
   StreamingSetupTask:
     description: A task which initializes part of a streaming Dataflow job.
     properties:
+      drain:
+        description: The user has requested drain.
+        type: boolean
       receiveWorkPort:
         description: The TCP port on which the worker should listen for messages from other streaming computation workers.
         format: int32

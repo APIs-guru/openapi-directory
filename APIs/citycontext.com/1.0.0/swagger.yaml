@@ -160,12 +160,22 @@ definitions:
     description: User plan monthly API quota and usage
     properties:
       allowance:
-        type: string
+        type: integer
       period:
         type: string
-      usage:
+      periodEnd:
+        format: date-time
         type: string
+      periodStart:
+        format: date-time
+        type: string
+      plan:
+        type: string
+      usage:
+        type: integer
     required:
-      - allowance
       - usage
       - period
+      - plan
+      - periodStart
+      - periodEnd
