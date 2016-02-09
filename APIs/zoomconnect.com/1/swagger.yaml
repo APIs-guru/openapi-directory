@@ -85,6 +85,137 @@ paths:
       summary: transfer
       tags:
         - account
+  /api/rest/v1/account/user:
+    get:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Find a user for a particular email address
+      parameters:
+        - description: search by email address
+          in: query
+          name: searchEmail
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WebServiceUsers'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: search
+      tags:
+        - account
+    put:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: 'Creates a new sub-account in your team. The following fields are required <i>firstname, lastname, email address, contact number</i> and <i>password.</i>'
+      parameters:
+        - description: request
+          in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WebServiceUser'
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Description was not specified
+          schema:
+            $ref: '#/definitions/WebServiceUser'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: create
+      tags:
+        - account
+  '/api/rest/v1/account/user/{userId}':
+    get:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Gets a user from a given user id
+      parameters:
+        - description: userId
+          format: int64
+          in: path
+          name: userId
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WebServiceUser'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: getUser
+      tags:
+        - account
+    post:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: 'Updates a sub-account in your team. The following fields can be updated <i>firstname, lastname, contact number</i> and <i>password.</i>'
+      parameters:
+        - description: userId
+          format: int64
+          in: path
+          name: userId
+          required: true
+          type: integer
+        - description: request
+          in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WebServiceUser'
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Description was not specified
+          schema:
+            $ref: '#/definitions/WebServiceUser'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: update
+      tags:
+        - account
   /api/rest/v1/contacts/all:
     get:
       consumes:
@@ -1062,3 +1193,28 @@ definitions:
         type: string
       transferToEmailAddress:
         type: string
+  WebServiceUser:
+    description: WebServiceUser
+    properties:
+      company:
+        type: string
+      contactNumber:
+        type: string
+      emailAddress:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      password:
+        type: string
+      userId:
+        format: int64
+        type: integer
+  WebServiceUsers:
+    description: WebServiceUsers
+    properties:
+      webServiceUserList:
+        items:
+          $ref: '#/definitions/WebServiceUser'
+        type: array
