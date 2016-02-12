@@ -161,7 +161,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -170,7 +170,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -217,7 +217,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -226,7 +226,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -260,7 +260,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/aggregated/diskTypes':
     get:
-      description: Retrieves an aggregated list of disk type resources.
+      description: Retrieves an aggregated list of disk types.
       operationId: compute.diskTypes.aggregatedList
       parameters:
         - description: Project ID for this request.
@@ -273,7 +273,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -282,7 +282,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -329,7 +329,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -338,7 +338,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -385,7 +385,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -394,7 +394,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -441,7 +441,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -450,7 +450,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -497,7 +497,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -506,7 +506,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -540,7 +540,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/aggregated/instances':
     get:
-      description: Retrieves aggregated list of instance resources.
+      description: Retrieves aggregated list of instances.
       operationId: compute.instances.aggregatedList
       parameters:
         - description: Project ID for this request.
@@ -553,7 +553,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -562,7 +562,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -596,7 +596,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/aggregated/machineTypes':
     get:
-      description: Retrieves an aggregated list of machine type resources.
+      description: Retrieves an aggregated list of machine types.
       operationId: compute.machineTypes.aggregatedList
       parameters:
         - description: Project ID for this request.
@@ -609,7 +609,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -618,7 +618,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -665,7 +665,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -674,7 +674,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -721,7 +721,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -730,7 +730,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -777,7 +777,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -786,7 +786,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -833,7 +833,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -842,7 +842,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -876,7 +876,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/aggregated/targetVpnGateways':
     get:
-      description: Retrieves an aggregated list of target VPN gateways .
+      description: Retrieves an aggregated list of target VPN gateways.
       operationId: compute.targetVpnGateways.aggregatedList
       parameters:
         - description: Project ID for this request.
@@ -889,7 +889,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -898,7 +898,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -945,7 +945,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -954,7 +954,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -988,7 +988,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/global/addresses':
     get:
-      description: Retrieves a list of global address resources.
+      description: Retrieves a list of global addresses.
       operationId: compute.globalAddresses.list
       parameters:
         - description: Project ID for this request.
@@ -1001,7 +1001,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -1010,7 +1010,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -1145,7 +1145,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -1154,7 +1154,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -1376,7 +1376,7 @@ paths:
         - backendServices
   '/{project}/global/firewalls':
     get:
-      description: Retrieves the list of firewall resources available to the specified project.
+      description: Retrieves the list of firewall rules available to the specified project.
       operationId: compute.firewalls.list
       parameters:
         - description: Project ID for this request.
@@ -1389,7 +1389,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -1398,7 +1398,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -1431,7 +1431,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Creates a firewall resource in the specified project using the data included in the request.
+      description: Creates a firewall rule in the specified project using the data included in the request.
       operationId: compute.firewalls.insert
       parameters:
         - description: Project ID for this request.
@@ -1457,7 +1457,7 @@ paths:
         - firewalls
   '/{project}/global/firewalls/{firewall}':
     delete:
-      description: Deletes the specified firewall resource.
+      description: Deletes the specified firewall.
       operationId: compute.firewalls.delete
       parameters:
         - description: Project ID for this request.
@@ -1465,7 +1465,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the firewall resource to delete.
+        - description: Name of the firewall rule to delete.
           in: path
           name: firewall
           required: true
@@ -1483,7 +1483,7 @@ paths:
       tags:
         - firewalls
     get:
-      description: Returns the specified firewall resource.
+      description: Returns the specified firewall.
       operationId: compute.firewalls.get
       parameters:
         - description: Project ID for this request.
@@ -1491,7 +1491,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the firewall resource to return.
+        - description: Name of the firewall rule to return.
           in: path
           name: firewall
           required: true
@@ -1519,7 +1519,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates the specified firewall resource with the data included in the request. This method supports patch semantics.
+      description: Updates the specified firewall rule with the data included in the request. This method supports patch semantics.
       operationId: compute.firewalls.patch
       parameters:
         - description: Project ID for this request.
@@ -1527,7 +1527,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the firewall resource to update.
+        - description: Name of the firewall rule to update.
           in: path
           name: firewall
           required: true
@@ -1549,7 +1549,7 @@ paths:
       tags:
         - firewalls
     put:
-      description: Updates the specified firewall resource with the data included in the request.
+      description: Updates the specified firewall rule with the data included in the request.
       operationId: compute.firewalls.update
       parameters:
         - description: Project ID for this request.
@@ -1557,7 +1557,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the firewall resource to update.
+        - description: Name of the firewall rule to update.
           in: path
           name: firewall
           required: true
@@ -1593,7 +1593,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -1602,7 +1602,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -1776,7 +1776,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -1785,7 +1785,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -1980,7 +1980,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -1989,7 +1989,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -2187,7 +2187,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -2196,7 +2196,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -2229,7 +2229,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Creates an image resource in the specified project using the data included in the request.
+      description: Creates an image in the specified project using the data included in the request.
       operationId: compute.images.insert
       parameters:
         - description: Project ID for this request.
@@ -2261,7 +2261,7 @@ paths:
         - images
   '/{project}/global/images/{image}':
     delete:
-      description: Deletes the specified image resource.
+      description: Deletes the specified image.
       operationId: compute.images.delete
       parameters:
         - description: Project ID for this request.
@@ -2287,7 +2287,7 @@ paths:
       tags:
         - images
     get:
-      description: Returns the specified image resource.
+      description: Returns the specified image.
       operationId: compute.images.get
       parameters:
         - description: Project ID for this request.
@@ -2379,7 +2379,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -2388,7 +2388,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -2447,7 +2447,7 @@ paths:
         - instanceTemplates
   '/{project}/global/instanceTemplates/{instanceTemplate}':
     delete:
-      description: Deletes the specified instance template.
+      description: 'Deletes the specified instance template. If you delete an instance template that is being referenced from another instance group, the instance group will not be able to create or recreate virtual machine instances. Deleting an instance template is permanent and cannot be undone.'
       operationId: compute.instanceTemplates.delete
       parameters:
         - description: Project ID for this request.
@@ -2518,7 +2518,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the license resource to return.
+        - description: Name of the License resource to return.
           in: path
           name: license
           required: true
@@ -2547,7 +2547,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/global/networks':
     get:
-      description: Retrieves the list of network resources available to the specified project.
+      description: Retrieves the list of networks available to the specified project.
       operationId: compute.networks.list
       parameters:
         - description: Project ID for this request.
@@ -2560,7 +2560,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -2569,7 +2569,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -2602,7 +2602,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Creates a network resource in the specified project using the data included in the request.
+      description: Creates a network in the specified project using the data included in the request.
       operationId: compute.networks.insert
       parameters:
         - description: Project ID for this request.
@@ -2628,7 +2628,7 @@ paths:
         - networks
   '/{project}/global/networks/{network}':
     delete:
-      description: Deletes the specified network resource.
+      description: Deletes the specified network.
       operationId: compute.networks.delete
       parameters:
         - description: Project ID for this request.
@@ -2636,7 +2636,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the network resource to delete.
+        - description: Name of the network to delete.
           in: path
           name: network
           required: true
@@ -2654,7 +2654,7 @@ paths:
       tags:
         - networks
     get:
-      description: Returns the specified network resource.
+      description: Returns the specified network.
       operationId: compute.networks.get
       parameters:
         - description: Project ID for this request.
@@ -2662,7 +2662,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the network resource to return.
+        - description: Name of the network to return.
           in: path
           name: network
           required: true
@@ -2704,7 +2704,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -2713,7 +2713,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -2821,7 +2821,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -2830,7 +2830,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -2965,7 +2965,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -2974,7 +2974,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -3087,7 +3087,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -3096,7 +3096,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -3231,7 +3231,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -3240,7 +3240,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -3375,7 +3375,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -3384,7 +3384,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -3519,7 +3519,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -3528,7 +3528,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -3830,7 +3830,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -3839,7 +3839,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -3910,7 +3910,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/regions/{region}/addresses':
     get:
-      description: Retrieves a list of address resources contained within the specified region.
+      description: Retrieves a list of addresses contained within the specified region.
       operationId: compute.addresses.list
       parameters:
         - description: Project ID for this request.
@@ -3928,7 +3928,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -3937,7 +3937,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -4092,7 +4092,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -4101,7 +4101,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -4290,7 +4290,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the region scoping this request.
+        - description: Name of the region for this request.
           in: path
           name: region
           required: true
@@ -4300,7 +4300,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -4309,7 +4309,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -4351,7 +4351,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the region scoping this request.
+        - description: Name of the region for this request.
           in: path
           name: region
           required: true
@@ -4380,7 +4380,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the region scoping this request.
+        - description: Name of the region for this request.
           in: path
           name: region
           required: true
@@ -4432,7 +4432,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -4441,7 +4441,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -4578,7 +4578,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/regions/{region}/targetPools':
     get:
-      description: Retrieves a list of TargetPool resources available to the specified project and region.
+      description: Retrieves a list of target pools available to the specified project and region.
       operationId: compute.targetPools.list
       parameters:
         - description: Project ID for this request.
@@ -4596,7 +4596,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -4605,7 +4605,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -4638,7 +4638,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Creates a TargetPool resource in the specified project and region using the data included in the request.
+      description: Creates a target pool in the specified project and region using the data included in the request.
       operationId: compute.targetPools.insert
       parameters:
         - description: Project ID for this request.
@@ -4669,7 +4669,7 @@ paths:
         - targetPools
   '/{project}/regions/{region}/targetPools/{targetPool}':
     delete:
-      description: Deletes the specified TargetPool resource.
+      description: Deletes the specified target pool.
       operationId: compute.targetPools.delete
       parameters:
         - description: Project ID for this request.
@@ -4700,7 +4700,7 @@ paths:
       tags:
         - targetPools
     get:
-      description: Returns the specified TargetPool resource.
+      description: Returns the specified target pool.
       operationId: compute.targetPools.get
       parameters:
         - description: Project ID for this request.
@@ -4750,10 +4750,11 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Adds health check URL to targetPool.
+      description: Adds health check URLs to a target pool.
       operationId: compute.targetPools.addHealthCheck
       parameters:
-        - in: path
+        - description: Project ID for this request.
+          in: path
           name: project
           required: true
           type: string
@@ -4762,7 +4763,7 @@ paths:
           name: region
           required: true
           type: string
-        - description: Name of the TargetPool resource to which health_check_url is to be added.
+        - description: Name of the target pool to add a health check to.
           in: path
           name: targetPool
           required: true
@@ -4793,10 +4794,11 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Adds instance URL to targetPool.
+      description: Adds an instance to a target pool.
       operationId: compute.targetPools.addInstance
       parameters:
-        - in: path
+        - description: Project ID for this request.
+          in: path
           name: project
           required: true
           type: string
@@ -4805,7 +4807,7 @@ paths:
           name: region
           required: true
           type: string
-        - description: Name of the TargetPool resource to which instance_url is to be added.
+        - description: Name of the TargetPool resource to add instances to.
           in: path
           name: targetPool
           required: true
@@ -4836,10 +4838,11 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Gets the most recent health check results for each IP for the given instance that is referenced by the given TargetPool.
+      description: Gets the most recent health check results for each IP for the instance that is referenced by the given target pool.
       operationId: compute.targetPools.getHealth
       parameters:
-        - in: path
+        - description: Project ID for this request.
+          in: path
           name: project
           required: true
           type: string
@@ -4881,19 +4884,20 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Removes health check URL from targetPool.
+      description: Removes health check URL from a target pool.
       operationId: compute.targetPools.removeHealthCheck
       parameters:
-        - in: path
+        - description: Project ID for this request.
+          in: path
           name: project
           required: true
           type: string
-        - description: Name of the region scoping this request.
+        - description: Name of the region for this request.
           in: path
           name: region
           required: true
           type: string
-        - description: Name of the TargetPool resource to which health_check_url is to be removed.
+        - description: Name of the target pool to remove health checks from.
           in: path
           name: targetPool
           required: true
@@ -4924,10 +4928,11 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Removes instance URL from targetPool.
+      description: Removes instance URL from a target pool.
       operationId: compute.targetPools.removeInstance
       parameters:
-        - in: path
+        - description: Project ID for this request.
+          in: path
           name: project
           required: true
           type: string
@@ -4936,7 +4941,7 @@ paths:
           name: region
           required: true
           type: string
-        - description: Name of the TargetPool resource to which instance_url is to be removed.
+        - description: Name of the TargetPool resource to remove instances from.
           in: path
           name: targetPool
           required: true
@@ -4967,7 +4972,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Changes backup pool configurations.
+      description: "Changes a backup target pool's configurations."
       operationId: compute.targetPools.setBackup
       parameters:
         - description: Project ID for this request.
@@ -4980,12 +4985,12 @@ paths:
           name: region
           required: true
           type: string
-        - description: Name of the TargetPool resource for which the backup is to be set.
+        - description: Name of the TargetPool resource to set a backup pool for.
           in: path
           name: targetPool
           required: true
           type: string
-        - description: New failoverRatio value for the containing target pool.
+        - description: New failoverRatio value for the target pool.
           in: query
           name: failoverRatio
           type: number
@@ -5007,7 +5012,7 @@ paths:
         - targetPools
   '/{project}/regions/{region}/targetVpnGateways':
     get:
-      description: Retrieves a list of TargetVpnGateway resources available to the specified project and region.
+      description: Retrieves a list of target VPN gateways available to the specified project and region.
       operationId: compute.targetVpnGateways.list
       parameters:
         - description: Project ID for this request.
@@ -5025,7 +5030,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -5034,7 +5039,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -5067,7 +5072,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Creates a TargetVpnGateway resource in the specified project and region using the data included in the request.
+      description: Creates a target VPN gateway in the specified project and region using the data included in the request.
       operationId: compute.targetVpnGateways.insert
       parameters:
         - description: Project ID for this request.
@@ -5098,7 +5103,7 @@ paths:
         - targetVpnGateways
   '/{project}/regions/{region}/targetVpnGateways/{targetVpnGateway}':
     delete:
-      description: Deletes the specified TargetVpnGateway resource.
+      description: Deletes the specified target VPN gateway.
       operationId: compute.targetVpnGateways.delete
       parameters:
         - description: Project ID for this request.
@@ -5111,7 +5116,7 @@ paths:
           name: region
           required: true
           type: string
-        - description: Name of the TargetVpnGateway resource to delete.
+        - description: Name of the target VPN gateway to delete.
           in: path
           name: targetVpnGateway
           required: true
@@ -5129,7 +5134,7 @@ paths:
       tags:
         - targetVpnGateways
     get:
-      description: Returns the specified TargetVpnGateway resource.
+      description: Returns the specified target VPN gateway.
       operationId: compute.targetVpnGateways.get
       parameters:
         - description: Project ID for this request.
@@ -5142,7 +5147,7 @@ paths:
           name: region
           required: true
           type: string
-        - description: Name of the TargetVpnGateway resource to return.
+        - description: Name of the target VPN gateway to return.
           in: path
           name: targetVpnGateway
           required: true
@@ -5189,7 +5194,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -5198,7 +5203,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -5425,7 +5430,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the TargetHttpProxy resource whose URL map is to be set.
+        - description: The name of the TargetHttpProxy resource to set a URL map for.
           in: path
           name: targetHttpProxy
           required: true
@@ -5464,7 +5469,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the TargetHttpsProxy resource whose SSLCertificate is to be set.
+        - description: Name of the TargetHttpsProxy resource to set an SSL certificate for.
           in: path
           name: targetHttpsProxy
           required: true
@@ -5539,7 +5544,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -5548,7 +5553,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -5637,7 +5642,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -5646,7 +5651,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -5852,7 +5857,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/zones/{zone}/diskTypes':
     get:
-      description: Retrieves a list of disk type resources available to the specified project.
+      description: Retrieves a list of disk types available to the specified project.
       operationId: compute.diskTypes.list
       parameters:
         - description: Project ID for this request.
@@ -5870,7 +5875,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -5879,7 +5884,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -5913,7 +5918,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/zones/{zone}/diskTypes/{diskType}':
     get:
-      description: Returns the specified disk type resource.
+      description: Returns the specified disk type.
       operationId: compute.diskTypes.get
       parameters:
         - description: Project ID for this request.
@@ -5926,7 +5931,7 @@ paths:
           name: zone
           required: true
           type: string
-        - description: Name of the disk type resource to return.
+        - description: Name of the disk type to return.
           in: path
           name: diskType
           required: true
@@ -5973,7 +5978,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -5982,7 +5987,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -6015,7 +6020,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Creates a persistent disk in the specified project using the data included in the request.
+      description: 'Creates a persistent disk in the specified project using the data in the request. You can create a disk with a sourceImage, a sourceSnapshot, or create an empty 200 GB data disk by omitting all properties. You can also create a disk that is larger than the default size by specifying the sizeGb property.'
       operationId: compute.disks.insert
       parameters:
         - description: Project ID for this request.
@@ -6185,7 +6190,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -6194,7 +6199,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -6656,7 +6661,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -6665,7 +6670,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -6810,7 +6815,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Adds a list of instances to the specified instance group. Read  Adding instances for more information.
+      description: Adds a list of instances to the specified instance group. All of the instances in the instance group must be in the same network/subnetwork. Read  Adding instances for more information.
       operationId: compute.instanceGroups.addInstances
       parameters:
         - description: Project ID for this request.
@@ -6877,7 +6882,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -6886,7 +6891,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -7004,7 +7009,7 @@ paths:
         - instanceGroups
   '/{project}/zones/{zone}/instances':
     get:
-      description: Retrieves the list of instance resources contained within the specified zone.
+      description: Retrieves the list of instances contained within the specified zone.
       operationId: compute.instances.list
       parameters:
         - description: Project ID for this request.
@@ -7022,7 +7027,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -7031,7 +7036,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -7126,7 +7131,7 @@ paths:
       tags:
         - instances
     get:
-      description: Returns the specified instance resource.
+      description: Returns the specified Instance resource.
       operationId: compute.instances.get
       parameters:
         - description: Project ID for this request.
@@ -7238,7 +7243,7 @@ paths:
           name: zone
           required: true
           type: string
-        - description: Instance name.
+        - description: The instance name for this request.
           in: path
           name: instance
           required: true
@@ -7751,7 +7756,7 @@ paths:
         - instances
   '/{project}/zones/{zone}/machineTypes':
     get:
-      description: Retrieves a list of machine type resources available to the specified project.
+      description: Retrieves a list of machine types available to the specified project.
       operationId: compute.machineTypes.list
       parameters:
         - description: Project ID for this request.
@@ -7769,7 +7774,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -7778,7 +7783,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -7812,7 +7817,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/zones/{zone}/machineTypes/{machineType}':
     get:
-      description: Returns the specified machine type resource.
+      description: Returns the specified machine type.
       operationId: compute.machineTypes.get
       parameters:
         - description: Project ID for this request.
@@ -7825,7 +7830,7 @@ paths:
           name: zone
           required: true
           type: string
-        - description: Name of the machine type resource to return.
+        - description: Name of the machine type to return.
           in: path
           name: machineType
           required: true
@@ -7862,7 +7867,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the zone scoping this request.
+        - description: Name of the zone for request.
           in: path
           name: zone
           required: true
@@ -7872,7 +7877,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -7881,7 +7886,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -7923,7 +7928,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the zone scoping this request.
+        - description: Name of the zone for this request.
           in: path
           name: zone
           required: true
@@ -7952,7 +7957,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the zone scoping this request.
+        - description: Name of the zone for this request.
           in: path
           name: zone
           required: true
@@ -8004,7 +8009,7 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
@@ -8013,7 +8018,7 @@ paths:
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -8234,13 +8239,13 @@ definitions:
         type: string
     type: object
   AddressList:
-    description: Contains a list of address resources.
+    description: Contains a list of addresses.
     properties:
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
         type: string
       items:
-        description: '[Output Only] A list of Address resources.'
+        description: '[Output Only] A list of addresses.'
         items:
           $ref: '#/definitions/Address'
         type: array
@@ -8328,7 +8333,7 @@ definitions:
 
           This property is mutually exclusive with the source property; you can only define one or the other, but not both.
       interface:
-        description: 'Specifies the disk interface to use for attaching this disk, either SCSI or NVME. The default is SCSI. For performance characteristics of SCSI over NVMe, see Local SSD performance.'
+        description: 'Specifies the disk interface to use for attaching this disk, which is either SCSI or NVME. The default is SCSI. Persistent disks must always use SCSI and the request will fail if you attempt to attach a persistent disk in any other format than SCSI. Local SSDs can use either NVME or SCSI. For performance characteristics of SCSI over NVMe, see Local SSD performance.'
         enum:
           - NVME
           - SCSI
@@ -8567,7 +8572,7 @@ definitions:
     description: Message containing information of one individual backend.
     properties:
       balancingMode:
-        description: Specifies the balancing mode for this backend. The default is UTILIZATION but available values are UTILIZATION and RATE.
+        description: 'Specifies the balancing mode for this backend. For global HTTP(S) load balancing, the default is UTILIZATION. Valid values are UTILIZATION and RATE.'
         enum:
           - RATE
           - UTILIZATION
@@ -8586,11 +8591,11 @@ definitions:
           Note that you must specify an Instance Group resource using the fully-qualified URL, rather than a partial URL.
         type: string
       maxRate:
-        description: 'The max requests per second (RPS) of the group. Can be used with either balancing mode, but required if RATE mode. For RATE mode, either maxRate or maxRatePerInstance must be set.'
+        description: 'The max requests per second (RPS) of the group. Can be used with either RATE or UTILIZATION balancing modes, but required if RATE mode. For RATE mode, either maxRate or maxRatePerInstance must be set.'
         format: int32
         type: integer
       maxRatePerInstance:
-        description: 'The max requests per second (RPS) that a single backed instance can handle. This is used to calculate the capacity of the group. Can be used in either balancing mode. For RATE mode, either maxRate or maxRatePerInstance must be set.'
+        description: 'The max requests per second (RPS) that a single backend instance can handle.This is used to calculate the capacity of the group. Can be used in either balancing mode. For RATE mode, either maxRate or maxRatePerInstance must be set.'
         format: float
         type: number
       maxUtilization:
@@ -8638,9 +8643,13 @@ definitions:
         format: int32
         type: integer
       portName:
-        description: Name of backend port. The same name should appear in the resource views referenced by this service. Required.
+        description: Name of backend port. The same name should appear in the instance groups referenced by this service. Required.
         type: string
       protocol:
+        description: |-
+          The protocol this BackendService uses to communicate with backends.
+
+          Possible values are HTTP, HTTPS, HTTP2, TCP and SSL.
         enum:
           - HTTP
           - HTTPS
@@ -8649,7 +8658,7 @@ definitions:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
       timeoutSec:
-        description: 'How many seconds to wait for the backend before considering it a failed request. Default is 30 seconds. Valid range is [1, 86400].'
+        description: How many seconds to wait for the backend before considering it a failed request. Default is 30 seconds.
         format: int32
         type: integer
     type: object
@@ -8733,7 +8742,7 @@ definitions:
         description: '[Output Only] Last detach timestamp in RFC3339 text format.'
         type: string
       licenses:
-        description: Any applicable publicly visible licenses.
+        description: '[Output Only] Any applicable publicly visible licenses.'
         items:
           type: string
         type: array
@@ -8755,10 +8764,10 @@ definitions:
         format: int64
         type: string
       sourceImage:
-        description: "The source image used to create this disk. If the source image is deleted from the system, this field will not be set, even if an image with the same name has been re-created.\n\nWhen creating a disk, you can provide a private (custom) image using the following input, and Compute Engine will use the corresponding image from your project. For example:\n\nglobal/images/my-private-image \n\nOr you can provide an image from a publicly-available project. For example, to use a Debian image from the debian-cloud project, make sure to include the project in the URL:\n\nprojects/debian-cloud/global/images/debian-7-wheezy-vYYYYMMDD \n\nwhere vYYYYMMDD is the image version. The fully-qualified URL will also work in both cases."
+        description: "The source image used to create this disk. If the source image is deleted from the system, this field will not be set, even if an image with the same name has been re-created.\n\nWhen creating a disk, you can provide a private (custom) image using the following input, and Compute Engine will use the corresponding image from your project. For example:\n\nglobal/images/my-private-image \n\nOr you can provide an image from a publicly-available project. For example, to use a Debian image from the debian-cloud project, make sure to include the project in the URL:\n\nprojects/debian-cloud/global/images/debian-7-wheezy-vYYYYMMDD \n\nwhere vYYYYMMDD is the image version. The fully-qualified URL will also work in both cases.\n\nYou can also specify the latest image for a private image family by replacing the image name suffix with family/family-name. For example:\n\nglobal/images/family/my-private-family \n\nOr you can specify an image family from a publicly-available project. For example, to use the latest Debian 7 from the debian-cloud project, make sure to include the project in the URL:\n\nprojects/debian-cloud/global/images/family/debian-7"
         type: string
       sourceImageId:
-        description: 'The ID value of the image used to create this disk. This value identifies the exact image that was used to create this persistent disk. For example, if you created the persistent disk from an image that was later deleted and recreated under the same name, the source image ID would identify the exact version of the image that was used.'
+        description: '[Output Only] The ID value of the image used to create this disk. This value identifies the exact image that was used to create this persistent disk. For example, if you created the persistent disk from an image that was later deleted and recreated under the same name, the source image ID would identify the exact version of the image that was used.'
         type: string
       sourceSnapshot:
         description: "The source snapshot used to create this disk. You can provide this as a partial or full URL to the resource. For example, the following are valid values:  \n- https://www.googleapis.com/compute/v1/projects/project/global/snapshots/snapshot \n- projects/project/global/snapshots/snapshot \n- global/snapshots/snapshot"
@@ -8775,10 +8784,10 @@ definitions:
           - RESTORING
         type: string
       type:
-        description: URL of the disk type resource describing which disk type to use to create the disk; provided by the client when the disk is created.
+        description: URL of the disk type resource describing which disk type to use to create the disk. Provide this when creating the disk.
         type: string
       users:
-        description: 'Links to the users of the disk (attached instances) in form: project/zones/zone/instances/instance'
+        description: '[Output Only] Links to the users of the disk (attached instances) in form: project/zones/zone/instances/instance'
         items:
           type: string
         type: array
@@ -8833,14 +8842,14 @@ definitions:
   DiskMoveRequest:
     properties:
       destinationZone:
-        description: "The URL of the destination zone to move the disk to. This can be a full or partial URL. For example, the following are all valid URLs to a zone:  \n- https://www.googleapis.com/compute/v1/projects/project/zones/zone \n- projects/project/zones/zone \n- zones/zone"
+        description: "The URL of the destination zone to move the disk. This can be a full or partial URL. For example, the following are all valid URLs to a zone:  \n- https://www.googleapis.com/compute/v1/projects/project/zones/zone \n- projects/project/zones/zone \n- zones/zone"
         type: string
       targetDisk:
         description: "The URL of the target disk to move. This can be a full or partial URL. For example, the following are all valid URLs to a disk:  \n- https://www.googleapis.com/compute/v1/projects/project/zones/zone/disks/disk \n- projects/project/zones/zone/disks/disk \n- zones/zone/disks/disk"
         type: string
     type: object
   DiskType:
-    description: A disk type resource.
+    description: A DiskType resource.
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -8900,7 +8909,7 @@ definitions:
         type: string
     type: object
   DiskTypeList:
-    description: Contains a list of disk type resources.
+    description: Contains a list of disk types.
     properties:
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
@@ -9016,14 +9025,14 @@ definitions:
         type: object
     type: object
   Firewall:
-    description: A Firewall resource.
+    description: Represents a Firewall resource.
     properties:
       allowed:
         description: The list of rules specified by this firewall. Each rule specifies a protocol and port-range tuple that describes a permitted connection.
         items:
           properties:
             IPProtocol:
-              description: 'The IP protocol that is allowed for this rule. The protocol type is required when creating a firewall. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, sctp), or the IP protocol number.'
+              description: 'The IP protocol that is allowed for this rule. The protocol type is required when creating a firewall rule. This value can either be one of the following well known protocol strings (tcp, udp, icmp, esp, ah, sctp), or the IP protocol number.'
               type: string
             ports:
               description: |-
@@ -9082,7 +9091,7 @@ definitions:
         type: array
     type: object
   FirewallList:
-    description: Contains a list of Firewall resources.
+    description: Contains a list of firewalls.
     properties:
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
@@ -9162,7 +9171,7 @@ definitions:
         type: object
       kind:
         default: 'compute#forwardingRuleAggregatedList'
-        description: Type of resource.
+        description: '[Output Only] Type of resource. Always compute#forwardingRuleAggregatedList for lists of forwarding rules.'
         type: string
       nextPageToken:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
@@ -9241,6 +9250,7 @@ definitions:
         type: object
     type: object
   HealthCheckReference:
+    description: "A full or valid partial URL to a health check. For example, the following are valid URLs:  \n- https://www.googleapis.com/compute/beta/projects/project-id/global/httpHealthChecks/health-check \n- projects/project-id/global/httpHealthChecks/health-check \n- global/httpHealthChecks/health-check"
     properties:
       healthCheck:
         type: string
@@ -9305,7 +9315,7 @@ definitions:
         type: string
       kind:
         default: 'compute#httpHealthCheck'
-        description: Type of the resource.
+        description: '[Output Only] Type of the resource. Always compute#httpHealthCheck for HTTP health checks.'
         type: string
       name:
         description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
@@ -9316,7 +9326,7 @@ definitions:
         format: int32
         type: integer
       requestPath:
-        description: 'The request path of the HTTP health check request. The default value is "/".'
+        description: The request path of the HTTP health check request. The default value is /.
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
@@ -9502,7 +9512,7 @@ definitions:
         type: string
     type: object
   ImageList:
-    description: Contains a list of Image resources.
+    description: Contains a list of images.
     properties:
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
@@ -9552,7 +9562,7 @@ definitions:
         description: '[Output Only] Type of the resource. Always compute#instance for instances.'
         type: string
       machineType:
-        description: "Full or partial URL of the machine type resource to use for this instance, in the format: zones/zone/machineTypes/ machine-type. This is provided by the client when the instance is created. For example, the following is a valid partial url to a predefined machine type:\n\nzones/us-central1-f/machineTypes/n1-standard-1 \n\nTo create a custom machine type, provide a URL to a machine type in the following format, where CPUS is 1 or an even number up to 32 (2, 4, 6, ... 24, etc), and MEMORY is the total memory for this instance. Memory must be a multiple of 256 MB and must be supplied in MB (e.g. 5 GB of memory is 5120 MB):\n\nzones/zone/machineTypes/custom-CPUS-MEMORY \n\nFor example: zones/us-central1-f/machineTypes/custom-4-5120 \n\nFor a full list of restrictions, read the Specifications for custom machine types."
+        description: "Full or partial URL of the machine type resource to use for this instance, in the format: zones/zone/machineTypes/machine-type. This is provided by the client when the instance is created. For example, the following is a valid partial url to a predefined machine type:\n\nzones/us-central1-f/machineTypes/n1-standard-1 \n\nTo create a custom machine type, provide a URL to a machine type in the following format, where CPUS is 1 or an even number up to 32 (2, 4, 6, ... 24, etc), and MEMORY is the total memory for this instance. Memory must be a multiple of 256 MB and must be supplied in MB (e.g. 5 GB of memory is 5120 MB):\n\nzones/zone/machineTypes/custom-CPUS-MEMORY \n\nFor example: zones/us-central1-f/machineTypes/custom-4-5120 \n\nFor a full list of restrictions, read the Specifications for custom machine types."
         type: string
       metadata:
         $ref: '#/definitions/Metadata'
@@ -9606,7 +9616,7 @@ definitions:
       items:
         additionalProperties:
           $ref: '#/definitions/InstancesScopedList'
-          description: Name of the scope containing this set of instances.
+          description: '[Output Only] Name of the scope containing this set of instances.'
         description: '[Output Only] A map of scoped instance lists.'
         type: object
       kind:
@@ -9650,7 +9660,7 @@ definitions:
           $ref: '#/definitions/NamedPort'
         type: array
       network:
-        description: '[Output Only] The URL of the network to which all instances in the instance group belong.'
+        description: The URL of the network to which all instances in the instance group belong.
         type: string
       selfLink:
         description: '[Output Only] The URL for this instance group. The server generates this URL.'
@@ -9660,7 +9670,7 @@ definitions:
         format: int32
         type: integer
       subnetwork:
-        description: '[Output Only] The URL of the subnetwork to which all instances in the instance group belong.'
+        description: The URL of the subnetwork to which all instances in the instance group belong.
         type: string
       zone:
         description: '[Output Only] The URL of the zone where the instance group is located.'
@@ -9711,10 +9721,6 @@ definitions:
         type: string
     type: object
   InstanceGroupManager:
-    description: |-
-      InstanceGroupManagers
-
-      Next available tag: 20
     properties:
       baseInstanceName:
         description: The base instance name to use for instances in this group. The value must be 1-58 characters long. Instances are named by appending a hyphen and a random four-character string to the base instance name. The base instance name must comply with RFC1035.
@@ -10050,13 +10056,13 @@ definitions:
         type: array
     type: object
   InstanceList:
-    description: Contains a list of instance resources.
+    description: Contains a list of instances.
     properties:
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
         type: string
       items:
-        description: '[Output Only] A list of Instance resources.'
+        description: '[Output Only] A list of instances.'
         items:
           $ref: '#/definitions/Instance'
         type: array
@@ -10074,7 +10080,7 @@ definitions:
   InstanceMoveRequest:
     properties:
       destinationZone:
-        description: "The URL of the destination zone to move the instance to. This can be a full or partial URL. For example, the following are all valid URLs to a zone:  \n- https://www.googleapis.com/compute/v1/projects/project/zones/zone \n- projects/project/zones/zone \n- zones/zone"
+        description: "The URL of the destination zone to move the instance. This can be a full or partial URL. For example, the following are all valid URLs to a zone:  \n- https://www.googleapis.com/compute/v1/projects/project/zones/zone \n- projects/project/zones/zone \n- zones/zone"
         type: string
       targetInstance:
         description: "The URL of the target instance to move. This can be a full or partial URL. For example, the following are all valid URLs to an instance:  \n- https://www.googleapis.com/compute/v1/projects/project/zones/zone/instances/instance \n- projects/project/zones/zone/instances/instance \n- zones/zone/instances/instance"
@@ -10351,7 +10357,7 @@ definitions:
         type: string
     type: object
   MachineTypeList:
-    description: Contains a list of Machine Type resources.
+    description: Contains a list of machine types.
     properties:
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
@@ -10514,7 +10520,7 @@ definitions:
         type: integer
     type: object
   Network:
-    description: A network resource.
+    description: Represents a Network resource. Read Networks and Firewalls for more information.
     properties:
       IPv4Range:
         description: 'The range of internal addresses that are legal on this network. This range is a CIDR specification, for example: 192.168.0.0/16. Provided by the client when the network is created.'
@@ -10579,7 +10585,7 @@ definitions:
         type: string
     type: object
   NetworkList:
-    description: Contains a list of Network resources.
+    description: Contains a list of networks.
     properties:
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
@@ -10604,7 +10610,7 @@ definitions:
     description: 'An Operation resource, used to manage asynchronous API requests.'
     properties:
       clientOperationId:
-        description: '[Output Only] A unique client ID generated by the server.'
+        description: '[Output Only] Reserved for future use.'
         type: string
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -10656,14 +10662,14 @@ definitions:
         description: '[Output Only] Name of the resource.'
         type: string
       operationType:
-        description: '[Output Only] The type of operation, which can be insert, update, or delete.'
+        description: '[Output Only] The type of operation, such as insert, update, or delete, and so on.'
         type: string
       progress:
         description: '[Output Only] An optional progress indicator that ranges from 0 to 100. There is no requirement that this be linear or support any granularity of operations. This should not be used to guess when the operation will be complete. This number should monotonically increase as the operation progresses.'
         format: int32
         type: integer
       region:
-        description: '[Output Only] URL of the region where the operation resides. Only available when performing regional operations.'
+        description: '[Output Only] The URL of the region where the operation resides. Only available when performing regional operations.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
@@ -10686,7 +10692,7 @@ definitions:
         format: uint64
         type: string
       targetLink:
-        description: '[Output Only] The URL of the resource that the operation is modifying.'
+        description: '[Output Only] The URL of the resource that the operation modifies.'
         type: string
       user:
         description: '[Output Only] User who requested the operation, for example: user@example.com.'
@@ -10733,7 +10739,7 @@ definitions:
           type: object
         type: array
       zone:
-        description: '[Output Only] URL of the zone where the operation resides. Only available when performing per-zone operations.'
+        description: '[Output Only] The URL of the zone where the operation resides. Only available when performing per-zone operations.'
         type: string
     type: object
   OperationAggregatedList:
@@ -10765,7 +10771,7 @@ definitions:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
         type: string
       items:
-        description: '[Output Only] The Operation resources.'
+        description: '[Output Only] A list of Operation resources.'
         items:
           $ref: '#/definitions/Operation'
         type: array
@@ -10858,7 +10864,7 @@ definitions:
         type: string
     type: object
   Project:
-    description: 'A Project resource. Projects can only be created in the Google Developers Console. Unless marked otherwise, values can only be modified in the console.'
+    description: 'A Project resource. Projects can only be created in the Google Cloud Platform Console. Unless marked otherwise, values can only be modified in the console.'
     properties:
       commonInstanceMetadata:
         $ref: '#/definitions/Metadata'
@@ -11013,7 +11019,12 @@ definitions:
         type: string
     type: object
   Route:
-    description: "The route resource. A Route is a rule that specifies how certain packets should be handled by the virtual network. Routes are associated with instances by tags and the set of Routes for a particular instance is called its routing table. For each packet leaving a instance, the system searches that instance's routing table for a single best matching Route. Routes match packets by destination IP address, preferring smaller or more specific ranges over larger ones. If there is a tie, the system selects the Route with the smallest priority value. If there is still a tie, it uses the layer three and four packet headers to select just one of the remaining matching Routes. The packet is then forwarded as specified by the nextHop field of the winning Route -- either to another instance destination, a instance gateway or a Google Compute Engien-operated gateway. Packets that do not match any Route in the sending instance's routing table are dropped."
+    description: |-
+      Represents a Routes resource. A route specifies how certain packets should be handled by the network. Routes are associated with instances by tags and the set of routes for a particular instance is called its routing table.
+
+      For each packet leaving a instance, the system searches that instance's routing table for a single best matching route. Routes match packets by destination IP address, preferring smaller or more specific ranges over larger ones. If there is a tie, the system selects the route with the smallest priority value. If there is still a tie, it uses the layer three and four packet headers to select just one of the remaining matching Routes. The packet is then forwarded as specified by the nextHop field of the winning route - either to another instance destination, a instance gateway or a Google Compute Engine-operated gateway.
+
+      Packets that do not match any route in the sending instance's routing table are dropped.
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -11139,7 +11150,7 @@ definitions:
         description: Specifies whether the instance should be automatically restarted if it is terminated by Compute Engine (not terminated by a user). You can only set the automatic restart option for standard instances. Preemptible instances cannot be automatically restarted.
         type: boolean
       onHostMaintenance:
-        description: 'Defines the maintenance behavior for this instance. For standard instances, the default behavior is MIGRATE. For preemptible instances, the default and only possible behavior is TERMINATE. For more information, see Setting maintenance behavior.'
+        description: 'Defines the maintenance behavior for this instance. For standard instances, the default behavior is MIGRATE. For preemptible instances, the default and only possible behavior is TERMINATE. For more information, see Setting Instance Scheduling Options.'
         enum:
           - MIGRATE
           - TERMINATE
@@ -11196,7 +11207,7 @@ definitions:
         description: '[Output Only] Type of the resource. Always compute#snapshot for Snapshot resources.'
         type: string
       licenses:
-        description: Public visible licenses.
+        description: '[Output Only] A list of public visible licenses that apply to this snapshot. This can be because the original image had licenses attached (such as a Windows image).'
         items:
           type: string
         type: array
@@ -11214,7 +11225,7 @@ definitions:
         description: '[Output Only] The ID value of the disk used to create this snapshot. This value may be used to determine whether the snapshot was taken from the current or a previous instance of a given disk name.'
         type: string
       status:
-        description: '[Output Only] The status of the snapshot.'
+        description: '[Output Only] The status of the snapshot. This can be CREATING, DELETING, FAILED, READY, or UPLOADING.'
         enum:
           - CREATING
           - DELETING
@@ -11227,7 +11238,7 @@ definitions:
         format: int64
         type: string
       storageBytesStatus:
-        description: '[Output Only] An indicator whether storageBytes is in a stable state or it is being adjusted as a result of shared storage reallocation.'
+        description: '[Output Only] An indicator whether storageBytes is in a stable state or it is being adjusted as a result of shared storage reallocation. This status can either be UPDATING, meaning the size of the snapshot is being updated, or UP_TO_DATE, meaning the size of the snapshot is up-to-date.'
         enum:
           - UPDATING
           - UP_TO_DATE
@@ -11493,7 +11504,7 @@ definitions:
         type: array
       kind:
         default: 'compute#targetHttpProxyList'
-        description: 'Type of resource. Always compute#targetHttpProxyList for lists of Target HTTP proxies.'
+        description: 'Type of resource. Always compute#targetHttpProxyList for lists of target HTTP proxies.'
         type: string
       nextPageToken:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
@@ -11505,7 +11516,7 @@ definitions:
   TargetHttpsProxiesSetSslCertificatesRequest:
     properties:
       sslCertificates:
-        description: New set of URLs to SslCertificate resources to associate with this TargetHttpProxy. Currently exactly one ssl certificate must be specified.
+        description: New set of URLs to SslCertificate resources to associate with this TargetHttpProxy. Currently exactly one SSL certificate must be specified.
         items:
           type: string
         type: array
@@ -11535,12 +11546,12 @@ definitions:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
       sslCertificates:
-        description: URLs to SslCertificate resources that are used to authenticate connections between users and the load balancer. Currently exactly one SSL certificate must be specified.
+        description: 'URLs to SslCertificate resources that are used to authenticate connections between users and the load balancer. Currently, exactly one SSL certificate must be specified.'
         items:
           type: string
         type: array
       urlMap:
-        description: URL to the UrlMap resource that defines the mapping from URL to the BackendService.
+        description: "A fully-qualified or valid partial URL to the UrlMap resource that defines the mapping from URL to the BackendService. For example, the following are all valid URLs for specifying a URL map:  \n- https://www.googleapis.compute/v1/projects/project/global/urlMaps/url-map \n- projects/project/global/urlMaps/url-map \n- global/urlMaps/url-map"
         type: string
     type: object
   TargetHttpsProxyList:
@@ -11579,7 +11590,7 @@ definitions:
         format: uint64
         type: string
       instance:
-        description: The URL to the instance that terminates the relevant traffic.
+        description: "A URL to the virtual machine instance that handles traffic for this target instance. When creating a target instance, you can provide the fully-qualified URL or a valid partial URL to the desired virtual machine. For example, the following are all valid URLs: \n- https://www.googleapis.com/compute/v1/projects/project/zones/zone/instances/instance \n- projects/project/zones/zone/instances/instance \n- zones/zone/instances/instance"
         type: string
       kind:
         default: 'compute#targetInstance'
@@ -11693,7 +11704,7 @@ definitions:
         type: object
     type: object
   TargetPool:
-    description: 'A TargetPool resource. This resource defines a pool of instances, associated HttpHealthCheck resources, and the fallback TargetPool.'
+    description: 'A TargetPool resource. This resource defines a pool of instances, associated HttpHealthCheck resources, and the fallback target pool.'
     properties:
       backupPool:
         description: |-
@@ -11728,7 +11739,7 @@ definitions:
         format: uint64
         type: string
       instances:
-        description: A list of resource URLs to the member virtual machines serving this pool. They must live in zones contained in the same region as this pool.
+        description: A list of resource URLs to the virtual machine instances serving this pool. They must live in zones contained in the same region as this pool.
         items:
           type: string
         type: array
@@ -11767,11 +11778,11 @@ definitions:
         additionalProperties:
           $ref: '#/definitions/TargetPoolsScopedList'
           description: Name of the scope containing this set of target pools.
-        description: A map of scoped target pool lists.
+        description: '[Output Only] A map of scoped target pool lists.'
         type: object
       kind:
         default: 'compute#targetPoolAggregatedList'
-        description: Type of resource.
+        description: '[Output Only] Type of resource. Always compute#targetPoolAggregatedList for aggregated lists of target pools.'
         type: string
       nextPageToken:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
@@ -11788,7 +11799,7 @@ definitions:
         type: array
       kind:
         default: 'compute#targetPoolInstanceHealth'
-        description: Type of resource.
+        description: '[Output Only] Type of resource. Always compute#targetPoolInstanceHealth when checking the health of an instance.'
         type: string
     type: object
   TargetPoolList:
@@ -11804,7 +11815,7 @@ definitions:
         type: array
       kind:
         default: 'compute#targetPoolList'
-        description: Type of resource.
+        description: '[Output Only] Type of resource. Always compute#targetPoolList for lists of target pools.'
         type: string
       nextPageToken:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
@@ -11816,7 +11827,7 @@ definitions:
   TargetPoolsAddHealthCheckRequest:
     properties:
       healthChecks:
-        description: Health check URLs to be added to targetPool.
+        description: A list of HttpHealthCheck resources to add to the target pool.
         items:
           $ref: '#/definitions/HealthCheckReference'
         type: array
@@ -11824,7 +11835,7 @@ definitions:
   TargetPoolsAddInstanceRequest:
     properties:
       instances:
-        description: URLs of the instances to be added to targetPool.
+        description: "A full or partial URL to an instance to add to this target pool. This can be a full or partial URL. For example, the following are valid URLs:  \n- https://www.googleapis.com/compute/v1/projects/project-id/zones/zone/instances/instance-name \n- projects/project-id/zones/zone/instances/instance-name \n- zones/zone/instances/instance-name"
         items:
           $ref: '#/definitions/InstanceReference'
         type: array
@@ -11832,7 +11843,7 @@ definitions:
   TargetPoolsRemoveHealthCheckRequest:
     properties:
       healthChecks:
-        description: Health check URLs to be removed from targetPool.
+        description: "Health check URL to be removed. This can be a full or valid partial URL. For example, the following are valid URLs:  \n- https://www.googleapis.com/compute/beta/projects/project/global/httpHealthChecks/health-check \n- projects/project/global/httpHealthChecks/health-check \n- global/httpHealthChecks/health-check"
         items:
           $ref: '#/definitions/HealthCheckReference'
         type: array
@@ -11840,7 +11851,7 @@ definitions:
   TargetPoolsRemoveInstanceRequest:
     properties:
       instances:
-        description: URLs of the instances to be removed from targetPool.
+        description: URLs of the instances to be removed from target pool.
         items:
           $ref: '#/definitions/InstanceReference'
         type: array
@@ -11898,6 +11909,7 @@ definitions:
         type: string
     type: object
   TargetVpnGateway:
+    description: Represents a Target VPN gateway resource.
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -11940,7 +11952,7 @@ definitions:
           - READY
         type: string
       tunnels:
-        description: '[Output Only] A list of URLs to VpnTunnel resources. VpnTunnels are created using compute.vpntunnels.insert and associated to a VPN gateway.'
+        description: '[Output Only] A list of URLs to VpnTunnel resources. VpnTunnels are created using compute.vpntunnels.insert method and associated to a VPN gateway.'
         items:
           type: string
         type: array
@@ -11953,7 +11965,7 @@ definitions:
       items:
         additionalProperties:
           $ref: '#/definitions/TargetVpnGatewaysScopedList'
-          description: '[Output Only] Name of the scope containing this set of target vpn gateways.'
+          description: '[Output Only] Name of the scope containing this set of target VPN gateways.'
         description: A map of scoped target vpn gateway lists.
         type: object
       kind:

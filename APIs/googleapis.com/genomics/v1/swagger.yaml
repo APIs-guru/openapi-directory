@@ -2295,7 +2295,7 @@ definitions:
     description: ReferenceBound records an upper bound for the starting coordinate of variants in a particular reference.
     properties:
       referenceName:
-        description: The name of the reference associated with this ReferenceBound.
+        description: The name of the reference associated with this reference bound.
         type: string
       upperBound:
         description: An upper bound (inclusive) on the starting coordinate of any variant in the reference sequence.
@@ -2592,7 +2592,7 @@ definitions:
         format: int64
         type: string
       maxCalls:
-        description: 'The maximum number of calls to return in a single page. Note that this limit may be exceeded; at least one variant is always returned per page, even if it has more calls than this limit. If unspecified, defaults to 5000. The maximum value is 10000.'
+        description: 'The maximum number of calls to return in a single page. Note that this limit may be exceeded in the event that a matching variant contains more calls than the requested maximum. If unspecified, defaults to 5000. The maximum value is 10000.'
         format: int32
         type: integer
       pageSize:

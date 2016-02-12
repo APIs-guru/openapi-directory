@@ -307,6 +307,210 @@ paths:
             - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
       tags:
         - accounts
+  '/accounts/{accountId}/containers/{containerId}/environments':
+    get:
+      description: Lists all GTM Environments of a GTM Container.
+      operationId: tagmanager.accounts.containers.environments.list
+      parameters:
+        - description: The GTM Account ID.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: The GTM Container ID.
+          in: path
+          name: containerId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListEnvironmentsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a GTM Environment.
+      operationId: tagmanager.accounts.containers.environments.create
+      parameters:
+        - description: The GTM Account ID.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: The GTM Container ID.
+          in: path
+          name: containerId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Environment'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Environment'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+      tags:
+        - accounts
+  '/accounts/{accountId}/containers/{containerId}/environments/{environmentId}':
+    delete:
+      description: Deletes a GTM Environment.
+      operationId: tagmanager.accounts.containers.environments.delete
+      parameters:
+        - description: The GTM Account ID.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: The GTM Container ID.
+          in: path
+          name: containerId
+          required: true
+          type: string
+        - description: The GTM Environment ID.
+          in: path
+          name: environmentId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+      tags:
+        - accounts
+    get:
+      description: Gets a GTM Environment.
+      operationId: tagmanager.accounts.containers.environments.get
+      parameters:
+        - description: The GTM Account ID.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: The GTM Container ID.
+          in: path
+          name: containerId
+          required: true
+          type: string
+        - description: The GTM Environment ID.
+          in: path
+          name: environmentId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Environment'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates a GTM Environment. This method supports patch semantics.
+      operationId: tagmanager.accounts.containers.environments.patch
+      parameters:
+        - description: The GTM Account ID.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: The GTM Container ID.
+          in: path
+          name: containerId
+          required: true
+          type: string
+        - description: The GTM Environment ID.
+          in: path
+          name: environmentId
+          required: true
+          type: string
+        - description: 'When provided, this fingerprint must match the fingerprint of the environment in storage.'
+          in: query
+          name: fingerprint
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Environment'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Environment'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+      tags:
+        - accounts
+    put:
+      description: Updates a GTM Environment.
+      operationId: tagmanager.accounts.containers.environments.update
+      parameters:
+        - description: The GTM Account ID.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: The GTM Container ID.
+          in: path
+          name: containerId
+          required: true
+          type: string
+        - description: The GTM Environment ID.
+          in: path
+          name: environmentId
+          required: true
+          type: string
+        - description: 'When provided, this fingerprint must match the fingerprint of the environment in storage.'
+          in: query
+          name: fingerprint
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Environment'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Environment'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+      tags:
+        - accounts
   '/accounts/{accountId}/containers/{containerId}/folders':
     get:
       description: Lists all GTM Folders of a Container.
@@ -563,9 +767,58 @@ paths:
             type: string
           name: variableId
           type: array
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Folder'
       responses:
         '200':
           description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+      tags:
+        - accounts
+  '/accounts/{accountId}/containers/{containerId}/reauthorize_environments/{environmentId}':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    put:
+      description: Re-generates the authorization code for a GTM Environment.
+      operationId: tagmanager.accounts.containers.reauthorize_environments.update
+      parameters:
+        - description: The GTM Account ID.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: The GTM Container ID.
+          in: path
+          name: containerId
+          required: true
+          type: string
+        - description: The GTM Environment ID.
+          in: path
+          name: environmentId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Environment'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Environment'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/tagmanager.publish'
       tags:
         - accounts
   '/accounts/{accountId}/containers/{containerId}/tags':
@@ -1592,6 +1845,7 @@ definitions:
             - containerVersion
             - debugMode
             - deviceName
+            - environmentName
             - errorLine
             - errorMessage
             - errorUrl
@@ -1783,6 +2037,52 @@ definitions:
         $ref: '#/definitions/ContainerVersion'
         description: The container version created.
     type: object
+  Environment:
+    description: 'Represents a Google Tag Manager Environment. Note that a user can create, delete and update environments of type USER, but can only update the enable_debug and url fields of environments of other types.'
+    properties:
+      accountId:
+        description: GTM Account ID.
+        type: string
+      authorizationCode:
+        description: The environment authorization code.
+        type: string
+      authorizationTimestampMs:
+        description: The last update time-stamp for the authorization code.
+        format: int64
+        type: string
+      containerId:
+        description: GTM Container ID.
+        type: string
+      containerVersionId:
+        description: ''
+        type: string
+      description:
+        description: The environment description. Can be set or changed only on USER type environments.
+        type: string
+      enableDebug:
+        description: Whether or not to enable debug by default on for the environment.
+        type: boolean
+      environmentId:
+        description: GTM Environment ID uniquely identifies the GTM Environment.
+        type: string
+      fingerprint:
+        description: The fingerprint of the GTM environment as computed at storage time. This value is recomputed whenever the environment is modified.
+        type: string
+      name:
+        description: The environment display name. Can be set or changed only on USER type environments.
+        type: string
+      type:
+        description: The type of this environment.
+        enum:
+          - draft
+          - latest
+          - live
+          - user
+        type: string
+      url:
+        description: Default preview page url for the environment.
+        type: string
+    type: object
   Folder:
     description: Represents a Google Tag Manager Folder.
     properties:
@@ -1860,6 +2160,15 @@ definitions:
         description: All Containers of a GTM Account.
         items:
           $ref: '#/definitions/Container'
+        type: array
+    type: object
+  ListEnvironmentsResponse:
+    description: List Environments Response.
+    properties:
+      environments:
+        description: All Environments of a GTM Container.
+        items:
+          $ref: '#/definitions/Environment'
         type: array
     type: object
   ListFoldersResponse:

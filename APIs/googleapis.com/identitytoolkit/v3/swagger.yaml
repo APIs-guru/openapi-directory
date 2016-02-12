@@ -664,6 +664,9 @@ definitions:
       password:
         description: The new password of the user.
         type: string
+      photoUrl:
+        description: The photo url of the user.
+        type: string
       provider:
         description: The associated IDPs of the user.
         items:
@@ -864,6 +867,9 @@ definitions:
       newEmail:
         description: The new email the user attempts to change to.
         type: string
+      photoUrl:
+        description: The photo url of the user.
+        type: string
       providerUserInfo:
         description: "The user's profiles at the associated IdPs."
         items:
@@ -936,6 +942,9 @@ definitions:
           properties:
             displayName:
               description: "The user's display name at the IDP."
+              type: string
+            email:
+              description: "User's email at IDP."
               type: string
             federatedId:
               description: "User's identifier at IDP."

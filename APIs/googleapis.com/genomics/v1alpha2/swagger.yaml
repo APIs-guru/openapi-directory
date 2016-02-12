@@ -101,7 +101,167 @@ parameters:
     type: string
 tags:
   - name: operations
+  - name: pipelines
 paths:
+  /v1alpha2/pipelines:
+    get:
+      description: Lists pipelines. Caller must have READ permission to the project.
+      operationId: genomics.pipelines.list
+      parameters:
+        - description: Required. The name of the project to search for pipelines. Caller must have READ access to this project.
+          in: query
+          name: projectId
+          type: string
+        - description: 'Optional. Pipelines with names that match this prefix should be returned. If unspecified, all pipelines in the project, up to page_size, will be returned.'
+          in: query
+          name: namePrefix
+          type: string
+        - description: 'Optional. Number of pipelines to return at once. Defaults to 256, and max is 2048.'
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'Optional. Token to use to indicate where to start getting results. If unspecified, returns the first page of results.'
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListPipelinesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/genomics'
+      tags:
+        - pipelines
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: Creates a pipeline that can be later run. Caller must have WRITE permission to the project.
+      operationId: genomics.pipelines.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Pipeline'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Pipeline'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/genomics'
+      tags:
+        - pipelines
+  '/v1alpha2/pipelines/{pipelineId}':
+    delete:
+      description: Deletes pipeline based on ID. Caller must have WRITE permission to the project.
+      operationId: genomics.pipelines.delete
+      parameters:
+        - description: Caller must have WRITE access to the project in which this pipeline is defined.
+          in: path
+          name: pipelineId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/genomics'
+      tags:
+        - pipelines
+    get:
+      description: Retrieves a pipeline based on ID. Caller must have READ permission to the project.
+      operationId: genomics.pipelines.get
+      parameters:
+        - description: Caller must have READ access to the project in which this pipeline is defined.
+          in: path
+          name: pipelineId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Pipeline'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/genomics'
+      tags:
+        - pipelines
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+  '/v1alpha2/pipelines:run':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: 'Runs a pipeline. If pipeline_id is specified in the request, then run a saved pipeline. If ephemeral_pipeline is specified, then run that pipeline once without saving a copy. The caller must have READ permission to the project where the pipeline is stored and WRITE permission to the project where the pipeline will be run, as VMs will be created and storage will be used.'
+      operationId: genomics.pipelines.run
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RunPipelineRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/genomics'
+      tags:
+        - pipelines
   '/v1alpha2/{name}':
     get:
       description: Lists operations that match the specified filter in the request.
@@ -196,6 +356,47 @@ definitions:
   CancelOperationRequest:
     description: The request message for Operations.CancelOperation.
     type: object
+  Disk:
+    description: A Google Compute Engine disk resource specification.
+    properties:
+      autoDelete:
+        description: 'Specifies whether or not to delete the disk when the pipeline completes. This field is applicable only for newly created disks. See https://cloud.google.com/compute/docs/reference/latest/instances#resource for more details. Optional. At create time means that an auto delete disk may be used. At run time, means it should be used. Cannot be true at run time if false at create time.'
+        type: boolean
+      mountPoint:
+        description: "Required at create time, but can't be specified at run time. Specifies the path in the docker container where files on this disk should be located. For example, if mount_point is /mnt/disk, and the parameter has local_path foo/file.txt, the docker container can access the data at /mnt/disk/foo/file.txt."
+        type: string
+      name:
+        description: 'Required. The name of the disk that can be used in the pipeline parameters. Must be 1 - 63 characters and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? The name "boot" is reserved for system use.'
+        type: string
+      readOnly:
+        description: 'Specifies how a sourced-base persistent disk will be mounted. See https://cloud.google.com/compute/docs/disks/persistent-disks#use_multi_instances for more details. Can only be set at create time.'
+        type: boolean
+      sizeGb:
+        description: The size of the disk. This field is not applicable for local SSD.
+        format: int64
+        type: string
+      source:
+        description: 'The full or partial URL of the persistent disk to attach. See https://cloud.google.com/compute/docs/reference/latest/instances#resource and https://cloud.google.com/compute/docs/disks/persistent-disks#snapshots for more details.'
+        type: string
+      type:
+        description: 'The type of the disk to create, if applicable.'
+        enum:
+          - TYPE_UNSPECIFIED
+          - PERSISTENT_HDD
+          - PERSISTENT_SSD
+          - LOCAL_SSD
+        type: string
+    type: object
+  DockerExecutor:
+    description: The Docker execuctor specification.
+    properties:
+      cmd:
+        description: Required. The command string to run.
+        type: string
+      imageName:
+        description: Required. Image name from either Docker Hub or Google Container Repository. Users that run pipelines must have READ access to the image.
+        type: string
+    type: object
   Empty:
     description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`.'
     type: object
@@ -228,6 +429,35 @@ definitions:
         items:
           $ref: '#/definitions/Operation'
         type: array
+    type: object
+  ListPipelinesResponse:
+    description: 'The response of ListPipelines. Contains at most page_size pipelines. If it contains page_size pipelines, and more pipelines exist, then next_page_token will be populated and should be used as the page_token argument to a subsequent ListPipelines request.'
+    properties:
+      nextPageToken:
+        description: The token to use to get the next page of results.
+        type: string
+      pipelines:
+        description: The matched pipelines.
+        items:
+          $ref: '#/definitions/Pipeline'
+        type: array
+    type: object
+  LocalCopy:
+    description: LocalCopy defines how a remote file should be copied to and from the VM.
+    properties:
+      disk:
+        description: 'Required. The name of the disk where this parameter is located. Can be the name of one of the disks specified in the Resources field, or "boot", which represents the Docker instance’s boot disk and has a mount point of “/”.'
+        type: string
+      path:
+        description: "Required. The path within the user's docker container where this input should be localized to and from, relative to the specified disk's mount point. For example: file.txt,"
+        type: string
+    type: object
+  LoggingOptions:
+    description: The logging options for the pipeline run.
+    properties:
+      gcsPath:
+        description: 'The location in Google Cloud Storage to which the pipeline logs will be copied. Can be specified as a fully qualified directory path, in which case logs will be output with a unique identifier as the filename in that directory, or as a fully specified path, which must end in ".log", in which case that path will be used, and the user must ensure that logs are not overwritten. Stdout and stderr logs from the run are also generated and output as "-stdout.log" and "-stderr.log".'
+        type: string
     type: object
   Operation:
     description: This resource represents a long-running operation that is the result of a network API call.
@@ -278,6 +508,131 @@ definitions:
           description: Properties of the object. Contains field @ype with type URL.
         description: 'The original request that started the operation. Note that this will be in current version of the API. If the operation was started with v1beta2 API and a GetOperation is performed on v1 API, a v1 request will be returned.'
         type: object
+    type: object
+  Pipeline:
+    description: The pipeline object.
+    properties:
+      description:
+        description: Optional. User-specified description.
+        type: string
+      docker:
+        $ref: '#/definitions/DockerExecutor'
+      inputParameters:
+        description: Input parameters of the pipeline.
+        items:
+          $ref: '#/definitions/PipelineParameter'
+        type: array
+      name:
+        description: Required. A user specified pipeline name that does not have to be unique. This name can be used for filtering Pipelines in ListPipelines.
+        type: string
+      outputParameters:
+        description: Output parameters of the pipeline.
+        items:
+          $ref: '#/definitions/PipelineParameter'
+        type: array
+      pipelineId:
+        description: 'Unique pipeline id that is generated by the service when CreatePipeline is called. Cannot be specified in the Pipeline used in the CreatePipelineRequest, and will be populated in the response to CreatePipeline and all subsequent Get and List calls. Indicates that the service has registered this pipeline.'
+        type: string
+      projectId:
+        description: Required. The project in which to create the pipeline. The caller must have WRITE access.
+        type: string
+      resources:
+        $ref: '#/definitions/PipelineResources'
+        description: 'Required. Specifies resource requirements for the pipeline run. Required fields: * minimumCpuCores. * minimumRamGb.'
+    type: object
+  PipelineParameter:
+    description: 'Parameters facilitate setting and delivering data into the pipeline’s execution environment. They are defined at create time, with optional defaults, and can be overridden at run time. If local_copy is unset, then the parameter specifies a string that is passed as-is into the pipeline, as the value of the environment variable with the given name. A default value can be optionally specified at create time. The default can be overridden at run time using the inputs map. If no default is given, a value must be supplied at runtime. If local_copy is defined, then the parameter specifies a data source or sink, both in GCS and on the Docker container where the pipeline computation is run. At run time, the GCS paths can be overridden if a default was provided at create time, or must be set otherwise. The pipeline runner should add a key/value pair to either the inputs or outputs map. The indicated data copies will be carried out before/after pipeline execution, just as if the corresponding arguments were provided to “gsutil cp”. For example: Given PiplineParameter foo, specified in the input_parameters list: ``` { name: "foo", local_copy: { path: "file.txt", disk: "pd1"} } ``` where Disk is defined as: ``` { name: "pd1", mount_point: "/mnt/disk/"} ``` We create a disk named pd1, mount it on the host VM, and map /mnt/pd1 to /mnt/disk in the docker container. At runtime, an entry for “foo” would be required in the inputs map, such as: ``` inputs["foo"] = "gs://my-bucket/bar.txt" ``` This would generate the following gsutil call: ``` gsutil cp gs://my-bucket/bar.txt /mnt/pd1/file.txt ``` /mnt/pd1/file.txt maps to /mnt/disk/file.txt in the Docker container. Note that we do not use cp -r, so for inputs, the GCS path (runtime value) must be a file or a glob, while the local path must be a file or a directory, respectively. For outputs, the direction of the copy is reversed: ``` gsutil cp /mnt/disk/file.txt gs://my-bucket/bar.txt ``` Again note that there is no -r, so the GCS path (runtime value) must be a file or a directory, while the local path can be a file or a glob, respectively. One restriction, due to docker limitations, is that for outputs that are found on the boot disk, the local path cannot be a glob and must be a file.'
+    properties:
+      defaultValue:
+        description: "The default value for this parameter. Can be overridden at runtime. If local_copy is present, then this must be a GCS path beginning with 'gs://'."
+        type: string
+      description:
+        description: Optional. Human-readable description.
+        type: string
+      localCopy:
+        $ref: '#/definitions/LocalCopy'
+      name:
+        description: Required. Name of the parameter - the pipeline runner uses this string as the key to the input and output maps in RunPipeline.
+        type: string
+    type: object
+  PipelineResources:
+    description: The system resources for the pipeline run.
+    properties:
+      disks:
+        description: Disks to attach.
+        items:
+          $ref: '#/definitions/Disk'
+        type: array
+      minimumCpuCores:
+        description: Required at create time; optional at run time. The minimum number of cores to use.
+        format: int64
+        type: string
+      minimumRamGb:
+        description: Required at create time; optional at run time. The minimum amount of RAM to use.
+        format: double
+        type: number
+      preemptible:
+        description: 'Optional. At create time means that preemptible machines may be used for the run. At run time, means they should be used. Cannot be true at run time if false at create time.'
+        type: boolean
+      zones:
+        description: 'List of Google Compute Engine availability zones to which resource creation will restricted. If empty, any zone may be chosen.'
+        items:
+          type: string
+        type: array
+    type: object
+  RunPipelineArgs:
+    description: The pipeline run arguments.
+    properties:
+      clientId:
+        description: Optional. For callers to use in filtering operations returned by this request.
+        type: string
+      inputs:
+        additionalProperties:
+          type: string
+        description: 'Pipeline input arguments; keys are defined in the pipeline documentation. All input parameters that do not have default values must be specified. If parameters with defaults are specified here, the defaults will be overridden.'
+        type: object
+      logging:
+        $ref: '#/definitions/LoggingOptions'
+        description: Required. Logging options. Used by the service to communicate results to the user.
+      outputs:
+        additionalProperties:
+          type: string
+        description: 'Pipeline output arguments; keys are defined in the pipeline documentation. All output parameters of without default values must be specified. If parameters with defaults are specified here, the defaults will be overridden.'
+        type: object
+      projectId:
+        description: Required. The project in which to run the pipeline. The caller must have WRITER access to all Google Cloud services and resources (e.g. Google Compute Engine) will be used.
+        type: string
+      resources:
+        $ref: '#/definitions/PipelineResources'
+        description: Specifies resource requirements/overrides for the pipeline run.
+      serviceAccount:
+        $ref: '#/definitions/ServiceAccount'
+        description: Required. The Google Cloud Service Account that will be used to access data and services.
+    type: object
+  RunPipelineRequest:
+    description: 'The request to run a pipeline. If pipeline_id is specified, it refers to a saved pipeline created with CreatePipeline and set as the pipeline_id of the returned Pipeline object. If ephemeral_pipeline is specified, that pipeline is run once with the given args and not saved. It is an error to specify both pipeline_id and pipeline. RunPipelineArgs must be specified.'
+    properties:
+      ephemeralPipeline:
+        $ref: '#/definitions/Pipeline'
+        description: A new pipeline object to run once and then delete.
+      pipelineArgs:
+        $ref: '#/definitions/RunPipelineArgs'
+        description: The arguments to use when running this pipeline.
+      pipelineId:
+        description: The already created pipeline to run.
+        type: string
+    type: object
+  ServiceAccount:
+    description: A Google Cloud Service Account.
+    properties:
+      email:
+        description: "Required. Email address of the service account. 'default' is a valid option and uses the compute service account associated with the project."
+        type: string
+      scopes:
+        description: 'Required. List of scopes to be made available for this service account. Should include genomics, compute and devstorage.full_control.'
+        items:
+          type: string
+        type: array
     type: object
   Status:
     description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). The error model is designed to be: - Simple to use and understand for most users - Flexible enough to meet unexpected needs # Overview The `Status` message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed. The error message should be a developer-facing English message that helps developers *understand* and *resolve* the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package `google.rpc` which can be used for common error conditions. # Language mapping The `Status` message is the logical representation of the error model, but it is not necessarily the actual wire format. When the `Status` message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C. # Other uses The error model and the `Status` message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments. Example uses of this error model include: - Partial errors. If a service needs to return partial errors to the client, it may embed the `Status` in the normal response to indicate the partial errors. - Workflow errors. A typical workflow has multiple steps. Each step may have a `Status` message for error reporting purpose. - Batch operations. If a client uses batch request and batch response, the `Status` message should be used directly inside batch response, one for each error sub-response. - Asynchronous operations. If an API call embeds asynchronous operation results in its response, the status of those operations should be represented directly using the `Status` message. - Logging. If some API errors are stored in logs, the message `Status` could be used directly after any stripping needed for security/privacy reasons.'

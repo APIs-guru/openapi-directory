@@ -619,6 +619,8 @@ paths:
         - description: The name of the template to retrieve.
           enum:
             - template1
+            - template1a
+            - template1b
             - template2
           in: path
           name: templateName
@@ -713,6 +715,11 @@ definitions:
       placedDate:
         description: 'The date when the order was placed, in ISO 8601 format.'
         type: string
+      promotions:
+        description: The details of the merchant provided promotions applied to the order. More details about the program are  here.
+        items:
+          $ref: '#/definitions/OrderPromotion'
+        type: array
       refunds:
         description: Refunds for the order.
         items:
@@ -989,6 +996,53 @@ definitions:
         type: string
       type:
         description: 'The type of instrument (VISA, Mastercard, etc).'
+        type: string
+    type: object
+  OrderPromotion:
+    properties:
+      benefits:
+        items:
+          $ref: '#/definitions/OrderPromotionBenefit'
+        type: array
+      effectiveDates:
+        description: |-
+          The date and time frame when the promotion is active and ready for validation review. Note that the promotion live time may be delayed for a few hours due to the validation review.
+          Start date and end date are separated by a forward slash (/). The start date is specified by the format (YYYY-MM-DD), followed by the letter ?T?, the time of the day when the sale starts (in Greenwich Mean Time, GMT), followed by an expression of the time zone for the sale. The end date is in the same format.
+        type: string
+      genericRedemptionCode:
+        description: Optional. The text code that corresponds to the promotion when applied on the retailer?s website.
+        type: string
+      id:
+        description: The unique ID of the promotion.
+        type: string
+      longTitle:
+        description: The full title of the promotion.
+        type: string
+      productApplicability:
+        description: Whether the promotion is applicable to all products or only specific products.
+        type: string
+      redemptionChannel:
+        description: Indicates that the promotion is valid online.
+        type: string
+    type: object
+  OrderPromotionBenefit:
+    properties:
+      discount:
+        $ref: '#/definitions/Price'
+        description: The discount in the order price when the promotion is applied.
+      offerIds:
+        description: The OfferId(s) that were purchased in this order and map to this specific benefit of the promotion.
+        items:
+          type: string
+        type: array
+      subType:
+        description: Further describes the benefit of the promotion. Note that we will expand on this enumeration as we support new promotion sub-types.
+        type: string
+      taxImpact:
+        $ref: '#/definitions/Price'
+        description: The impact on tax when the promotion is applied.
+      type:
+        description: 'Describes whether the promotion applies to products (e.g. 20% off) or to shipping (e.g. Free Shipping).'
         type: string
     type: object
   OrderRefund:
@@ -1523,6 +1577,11 @@ definitions:
       predefinedDeliveryAddress:
         description: Identifier of one of the predefined delivery addresses for the delivery.
         type: string
+      promotions:
+        description: The details of the merchant provided promotions applied to the order. More details about the program are  here.
+        items:
+          $ref: '#/definitions/OrderPromotion'
+        type: array
       shippingCost:
         $ref: '#/definitions/Price'
         description: The total cost of shipping for all items.
