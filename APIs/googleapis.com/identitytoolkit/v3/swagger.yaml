@@ -315,6 +315,30 @@ paths:
             $ref: '#/definitions/IdentitytoolkitRelyingpartySignOutUserResponse'
       tags:
         - relyingparty
+  /signupNewUser:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Signup new user.
+      operationId: identitytoolkit.relyingparty.signupNewUser
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartySignupNewUserRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SignupNewUserResponse'
+      tags:
+        - relyingparty
   /uploadAccount:
     parameters:
       - $ref: '#/parameters/alt'
@@ -697,6 +721,31 @@ definitions:
         description: The local ID of the user.
         type: string
     type: object
+  IdentitytoolkitRelyingpartySignupNewUserRequest:
+    description: 'Request to signup new user, create anonymous user or anonymous user reauth.'
+    properties:
+      captchaChallenge:
+        description: The captcha challenge.
+        type: string
+      captchaResponse:
+        description: Response to the captcha.
+        type: string
+      displayName:
+        description: The name of the user.
+        type: string
+      email:
+        description: The email of the user.
+        type: string
+      idToken:
+        description: The GITKit token of the authenticated user.
+        type: string
+      instanceId:
+        description: Instance id token of the app.
+        type: string
+      password:
+        description: The new password of the user.
+        type: string
+    type: object
   IdentitytoolkitRelyingpartyUploadAccountRequest:
     description: Request to upload user account in batch.
     properties:
@@ -735,6 +784,9 @@ definitions:
       delegatedProjectNumber:
         description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
         format: int64
+        type: string
+      idToken:
+        description: The GITKit token of the authenticated user.
         type: string
       instanceId:
         description: Instance id token of the app.
@@ -780,6 +832,9 @@ definitions:
         type: string
       email:
         description: The email of the user.
+        type: string
+      idToken:
+        description: The GITKit token of the authenticated user.
         type: string
       instanceId:
         description: Instance id token of the app.
@@ -885,6 +940,23 @@ definitions:
               type: string
           type: object
         type: array
+    type: object
+  SignupNewUserResponse:
+    description: 'Response of signing up new user, creating anonymous user or anonymous user reauth.'
+    properties:
+      displayName:
+        description: The name of the user.
+        type: string
+      email:
+        description: The email of the user.
+        type: string
+      idToken:
+        description: The Gitkit id token to login the newly sign up user.
+        type: string
+      kind:
+        default: 'identitytoolkit#SignupNewUserResponse'
+        description: 'The fixed string "identitytoolkit#SignupNewUserResponse".'
+        type: string
     type: object
   UploadAccountResponse:
     description: Respone of uploading accounts in batch.

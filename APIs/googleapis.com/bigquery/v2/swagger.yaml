@@ -1352,6 +1352,9 @@ definitions:
           $ref: '#/definitions/ExternalDataConfiguration'
         description: '[Optional] If querying an external data source outside of BigQuery, describes the data format, location and other properties of the data source. By defining these properties, the data source can then be queried as if it were a standard BigQuery table.'
         type: object
+      useLegacySql:
+        description: "[Experimental] Specifies whether to use BigQuery's legacy SQL dialect for this query. The default value is true. If set to false, the query will use BigQuery's updated SQL dialect with improved standards compliance. When using BigQuery's updated SQL, the values of allowLargeResults and flattenResults are ignored. Queries with useLegacySql set to false will be run as if allowLargeResults is true and flattenResults is false."
+        type: boolean
       useQueryCache:
         default: true
         description: '[Optional] Whether to look for the result in the query cache. The query cache is a best-effort cache that will be flushed whenever tables in the query are modified. Moreover, the query cache is only available when a query does not have a destination table specified. The default value is true.'
@@ -1483,6 +1486,11 @@ definitions:
         items:
           $ref: '#/definitions/ExplainQueryStage'
         type: array
+      referencedTables:
+        description: '[Output-only, Experimental] Referenced tables for the job. Queries that reference more than 50 tables will not have a complete list.'
+        items:
+          $ref: '#/definitions/TableReference'
+        type: array
       totalBytesBilled:
         description: '[Output-only] Total bytes billed for the job.'
         format: int64
@@ -1612,6 +1620,9 @@ definitions:
         description: "[Optional] How long to wait for the query to complete, in milliseconds, before the request times out and returns. Note that this is only a timeout for the request, not the query. If the query takes longer to run than the timeout value, the call returns without any results and with the 'jobComplete' flag set to false. You can call GetQueryResults() to wait for the query to complete and read the results. The default value is 10000 milliseconds (10 seconds)."
         format: uint32
         type: integer
+      useLegacySql:
+        description: "[Experimental] Specifies whether to use BigQuery's legacy SQL dialect for this query. The default value is true. If set to false, the query will use BigQuery's updated SQL dialect with improved standards compliance. When using BigQuery's updated SQL, the values of allowLargeResults and flattenResults are ignored. Queries with useLegacySql set to false will be run as if allowLargeResults is true and flattenResults is false."
+        type: boolean
       useQueryCache:
         default: true
         description: '[Optional] Whether to look for the result in the query cache. The query cache is a best-effort cache that will be flushed whenever tables in the query are modified. The default value is true.'

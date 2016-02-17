@@ -1949,6 +1949,9 @@ definitions:
           - TEARDOWN_ON_SUCCESS
           - TEARDOWN_NEVER
         type: string
+      workerHarnessContainerImage:
+        description: 'Docker container image that executes Dataflow worker harness, residing in Google Container Registry. Required.'
+        type: string
       zone:
         description: 'Zone to run the worker pools in. If empty or unspecified, the service will attempt to choose a reasonable default.'
         type: string

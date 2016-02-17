@@ -849,7 +849,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     put:
-      description: Updates the set of Android app permissions for this app that have been accepted by the enterprise.
+      description: |-
+        This method has been deprecated. To programmatically approve applications, you must use the iframe mechanism via the  generateApprovalUrl and  approve methods of the Products resource. For more information, see the  Play EMM API usage requirements.
+
+        The updatePermissions method (deprecated) updates the set of Android app permissions for this app that have been accepted by the enterprise.
       operationId: androidenterprise.products.updatePermissions
       parameters:
         - description: The ID of the enterprise.
