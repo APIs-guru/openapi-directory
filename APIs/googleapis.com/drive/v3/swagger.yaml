@@ -1673,6 +1673,9 @@ definitions:
           canEdit:
             description: "Whether the user can edit the file's content."
             type: boolean
+          canReadRevisions:
+            description: Whether the current user has read access to the Revisions resource of the file.
+            type: boolean
           canShare:
             description: "Whether the user can modify the file's permissions and sharing settings."
             type: boolean

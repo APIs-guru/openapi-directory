@@ -3205,6 +3205,9 @@ definitions:
       canComment:
         description: Whether the current user can comment on the file.
         type: boolean
+      canReadRevisions:
+        description: Whether the current user has read access to the Revisions resource of the file.
+        type: boolean
       copyable:
         description: Whether the file can be copied by the current user.
         type: boolean

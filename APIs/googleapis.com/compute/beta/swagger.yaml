@@ -100,6 +100,7 @@ tags:
   - name: projects
   - name: regionOperations
   - name: regions
+  - name: routers
   - name: routes
   - name: snapshots
   - name: sslCertificates
@@ -788,6 +789,71 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - globalOperations
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/aggregated/routers':
+    get:
+      description: Retrieves an aggregated list of Routers.
+      operationId: compute.routers.aggregatedList
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+
+            Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
+
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          in: query
+          maximum: 500
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RouterAggregatedList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - routers
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -4688,6 +4754,291 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - regionOperations
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/routers':
+    get:
+      description: Retrieves a list of Router resources available to the specified project.
+      operationId: compute.routers.list
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+
+            Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
+
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          in: query
+          maximum: 500
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RouterList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - routers
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a Router resource in the specified project and region using the data included in the request.
+      operationId: compute.routers.insert
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Router'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - routers
+  '/{project}/regions/{region}/routers/{router}':
+    delete:
+      description: Deletes the specified Router resource.
+      operationId: compute.routers.delete
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the Router resource to delete.
+          in: path
+          name: router
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - routers
+    get:
+      description: Returns the specified Router resource.
+      operationId: compute.routers.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the Router resource to return.
+          in: path
+          name: router
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Router'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - routers
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Update the entire content of the Router resource. This method supports patch semantics.
+      operationId: compute.routers.patch
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the Router resource to update.
+          in: path
+          name: router
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Router'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - routers
+    put:
+      description: Update the entire content of the Router resource.
+      operationId: compute.routers.update
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the Router resource to update.
+          in: path
+          name: router
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Router'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - routers
+  '/{project}/regions/{region}/routers/{router}/getRouterStatus':
+    get:
+      description: Retrieves runtime information of the specified Router.
+      operationId: compute.routers.getRouterStatus
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the Router resource to query.
+          in: path
+          name: router
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RouterStatusResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - routers
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -11797,6 +12148,246 @@ definitions:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
+  Router:
+    description: Router resource.
+    properties:
+      bgp:
+        $ref: '#/definitions/RouterBgp'
+      bgpPeers:
+        items:
+          $ref: '#/definitions/RouterBgpPeer'
+        type: array
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      description:
+        description: An optional description of this resource. Provide this property when you create the resource.
+        type: string
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        format: uint64
+        type: string
+      interfaces:
+        items:
+          $ref: '#/definitions/RouterInterface'
+        type: array
+      kind:
+        default: 'compute#router'
+        description: '[Output Only] Type of resource. Always compute#router for routers.'
+        type: string
+      name:
+        description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long and comply with RFC1035.
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      network:
+        description: URI of the network to which this router belongs.
+        type: string
+      region:
+        description: '[Output Only] URI of the region where the router resides.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+    type: object
+  RouterAggregatedList:
+    description: Contains a list of RoutersScopedList.
+    properties:
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        type: string
+      items:
+        additionalProperties:
+          $ref: '#/definitions/RoutersScopedList'
+          description: Name of the scope containing this set of Routers.
+        description: A map of scoped Router lists.
+        type: object
+      kind:
+        default: 'compute#routerAggregatedList'
+        description: Type of resource.
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+    type: object
+  RouterBgp:
+    properties:
+      asn:
+        description: 'Local BGP Autonomous System Number (ASN) Can be a constant public ASN value for google, or a customer-specified private ASN. In either case, the value will be fixed for this router resource. All VPN tunnels that link to this router will have the same local ASN.'
+        format: uint32
+        type: integer
+    type: object
+  RouterBgpPeer:
+    description: 'BGP information that needs to be configured into the routing stack to establish the BGP peering. It must specify peer ASN and either interface name, IP, or peer IP. Reference: https://tools.ietf.org/html/rfc4273'
+    properties:
+      advertisedRoutePriority:
+        description: 'The priority of routes advertised to this BGP peer. In the case where there is more than one matching route of maximum length, the routes with lowest priority value win.'
+        format: uint32
+        type: integer
+      interfaceName:
+        description: Name of the interface it is associated with.
+        type: string
+      ipAddress:
+        description: IP address of the interface inside Google cloud.
+        type: string
+      name:
+        description: Name of this BGP Peer. The name must be 1-63 characters long and comply with RFC1035.
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      peerAsn:
+        description: 'Peer BGP Autonomous System Number (ASN). For VPN use case, this value can be different for every tunnel.'
+        format: uint32
+        type: integer
+      peerIpAddress:
+        description: IP address of the BGP interface outside Google cloud.
+        type: string
+    type: object
+  RouterInterface:
+    description: Router interfaces. Each interface requires either one linked resource (e.g. linked_vpn_tunnel) or IP address + range (specified in ip_range).
+    properties:
+      ipRange:
+        description: 'IP address and range of the interface. The value should be a CIDR formatted string, for example: 169.254.0.1/30. NOTE: Do NOT trucate address, as it represents IP address of interface.'
+        type: string
+      linkedVpnTunnel:
+        description: URI of linked VPN tunnel. It must be in the same region as the router. Each interface can have at most one linked resource.
+        type: string
+      name:
+        description: Name of this interface entry. The name must be 1-63 characters long and comply with RFC1035.
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+    type: object
+  RouterList:
+    description: Contains a list of Router resources.
+    properties:
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        type: string
+      items:
+        description: A list of Router resources.
+        items:
+          $ref: '#/definitions/Router'
+        type: array
+      kind:
+        default: 'compute#routerList'
+        description: '[Output Only] Type of resource. Always compute#router for routers.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+    type: object
+  RouterStatus:
+    properties:
+      bestRoutes:
+        description: Best routes for this Router.
+        items:
+          $ref: '#/definitions/Route'
+        type: array
+      bgpPeerStatus:
+        items:
+          $ref: '#/definitions/RouterStatusBgpPeerStatus'
+        type: array
+      network:
+        description: URI of the network to which this router belongs.
+        type: string
+    type: object
+  RouterStatusBgpPeerStatus:
+    properties:
+      advertisedRoutes:
+        description: Routes that were advertised to the remote BgpPeer
+        items:
+          $ref: '#/definitions/Route'
+        type: array
+      ipAddress:
+        description: IP address of the local BGP interface.
+        type: string
+      linkedVpnTunnel:
+        description: URL of the VPN tunnel that this BgpPeer controls.
+        type: string
+      name:
+        description: Name of this BgpPeer which is unique within the Router resource.
+        type: string
+      numLearnedRoutes:
+        description: Number of routes learned from the remote BGP Peer.
+        format: uint32
+        type: integer
+      peerIpAddress:
+        description: IP address of the remote BGP interface.
+        type: string
+      state:
+        description: BGP state as specified in RFC-1771.
+        type: string
+      status:
+        description: 'Status of the BgpPeer: {UP, DOWN}'
+        enum:
+          - DOWN
+          - UNKNOWN
+          - UP
+        type: string
+      uptime:
+        description: 'Time this session has been up. Format: 1 second < uptime < 1 day = "23:59:59" 1 day <= uptime < 1 week = "6d:23h:59m" 1 week <= uptime = "123w:6d:23h"'
+        type: string
+    type: object
+  RouterStatusResponse:
+    properties:
+      kind:
+        default: 'compute#routerStatusResponse'
+        description: Type of resource.
+        type: string
+      result:
+        $ref: '#/definitions/RouterStatus'
+    type: object
+  RoutersScopedList:
+    properties:
+      routers:
+        description: List of Routers contained in this scope.
+        items:
+          $ref: '#/definitions/Router'
+        type: array
+      warning:
+        description: Informational warning which replaces the list of routers when the list is empty.
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - DEPRECATED_RESOURCE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - INJECTED_KERNELS_DEPRECATED
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_NOT_DELETED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource, and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
   Scheduling:
     description: Sets the scheduling options for an Instance.
     properties:
@@ -12895,6 +13486,9 @@ definitions:
         type: string
       region:
         description: '[Output Only] URL of the region where the VPN tunnel resides.'
+        type: string
+      router:
+        description: URL of Router resource to be used for dynamic routing.
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
