@@ -83,6 +83,12 @@ paths:
         - jwtSignature: {}
         - 0
         - 0
+  /company/users/select:
+    get:
+      authorizations:
+        - jwtSignature: {}
+        - 0
+        - 0
   /externalUser/register:
     post:
       authorizations:

@@ -19,6 +19,13 @@ definitions:
         type:
           - dateTime
           - string
+  audio_file:
+    properties:
+      url:
+        xml:
+          wrapped:
+            - 'true'
+            - true
   episode:
     properties:
       date_added:

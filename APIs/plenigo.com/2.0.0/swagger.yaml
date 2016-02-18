@@ -563,6 +563,41 @@ paths:
       summary: Query failed payments
       tags:
         - company
+  /company/users/select:
+    get:
+      description: Returns a list of users of the specified company
+      operationId: getCompanyUsersFromUserIds
+      parameters:
+        - description: Plenigo authentication token
+          enum:
+            - JWT
+          in: header
+          name: plenigoToken
+          required: true
+          type: string
+        - description: 'List of ids, a comma separated value list expected e.g. 1,2,3,5,10,11'
+          in: query
+          name: userIds
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Company Users queried
+          schema:
+            items:
+              $ref: '#/definitions/CompanyUserItem'
+            type: array
+        '400':
+          description: If the given parameters were incorrect
+        '401':
+          description: If the provided company secret and/or company Id is incorrect
+        '500':
+          description: Server error
+      summary: Query company users by user ids
+      tags:
+        - company
   /externalUser/register:
     post:
       consumes:
