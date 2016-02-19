@@ -30,9 +30,6 @@ securityDefinitions:
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/logging.admin': Administrate log data for your projects
-      'https://www.googleapis.com/auth/logging.read': View log data for your projects
-      'https://www.googleapis.com/auth/logging.write': Submit log data for your projects
     type: oauth2
 parameters:
   $.xgafv:
@@ -107,14 +104,19 @@ tags:
   - name: projects
   - name: operations
 paths:
-  '/v1alpha1/projects/{projectId}/clusters':
+  '/v1alpha1/projects/{projectId}/regions/{region}/clusters':
     get:
-      description: Request a list of all clusters in a project.
-      operationId: dataproc.projects.clusters.list
+      description: 'Request a list of all regions/{region}/clusters in a project.'
+      operationId: dataproc.projects.regions.clusters.list
       parameters:
         - description: '[Required] The ID of the Google Cloud Platform project that the cluster belongs to.'
           in: path
           name: projectId
+          required: true
+          type: string
+        - description: '[Required] The Dataproc region in which to handle the request.'
+          in: path
+          name: region
           required: true
           type: string
         - description: The standard List page size.
@@ -151,11 +153,16 @@ paths:
       - $ref: '#/parameters/$.xgafv'
     post:
       description: Request to create a cluster in a project.
-      operationId: dataproc.projects.clusters.create
+      operationId: dataproc.projects.regions.clusters.create
       parameters:
         - description: '[Required] The ID of the Google Cloud Platform project that the cluster belongs to.'
           in: path
           name: projectId
+          required: true
+          type: string
+        - description: '[Required] The Dataproc region in which to handle the request.'
+          in: path
+          name: region
           required: true
           type: string
         - in: body
@@ -172,14 +179,19 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
-  '/v1alpha1/projects/{projectId}/clusters/{clusterName}':
+  '/v1alpha1/projects/{projectId}/regions/{region}/clusters/{clusterName}':
     delete:
       description: Request to delete a cluster in a project.
-      operationId: dataproc.projects.clusters.delete
+      operationId: dataproc.projects.regions.clusters.delete
       parameters:
         - description: '[Required] The ID of the Google Cloud Platform project that the cluster belongs to.'
           in: path
           name: projectId
+          required: true
+          type: string
+        - description: '[Required] The Dataproc region in which to handle the request.'
+          in: path
+          name: region
           required: true
           type: string
         - description: '[Required] The cluster name.'
@@ -199,11 +211,16 @@ paths:
         - projects
     get:
       description: Request to get the resource representation for a cluster in a project.
-      operationId: dataproc.projects.clusters.get
+      operationId: dataproc.projects.regions.clusters.get
       parameters:
         - description: '[Required] The ID of the Google Cloud Platform project that the cluster belongs to.'
           in: path
           name: projectId
+          required: true
+          type: string
+        - description: '[Required] The Dataproc region in which to handle the request.'
+          in: path
+          name: region
           required: true
           type: string
         - description: '[Required] The cluster name.'
@@ -237,11 +254,16 @@ paths:
       - $ref: '#/parameters/$.xgafv'
     patch:
       description: Request to update a cluster in a project.
-      operationId: dataproc.projects.clusters.patch
+      operationId: dataproc.projects.regions.clusters.patch
       parameters:
         - description: '[Required] The ID of the Google Cloud Platform project the cluster belongs to.'
           in: path
           name: projectId
+          required: true
+          type: string
+        - description: '[Required] The Dataproc region in which to handle the request.'
+          in: path
+          name: region
           required: true
           type: string
         - description: '[Required] The cluster name.'
@@ -267,294 +289,19 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
-  '/v1alpha1/projects/{projectId}/clusters/{clusterUuid}/agents':
-    get:
-      description: List all agents Dataproc is aware of within a cluster.
-      operationId: dataproc.projects.clusters.agents.list
-      parameters:
-        - description: The project from which to list agents.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: The cluster from which to list agents.
-          in: path
-          name: clusterUuid
-          required: true
-          type: string
-        - description: Requested page size for listing.
-          in: query
-          name: pageSize
-          type: integer
-        - description: Page continuation token.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListAgentsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.admin'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.read'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.write'
-      tags:
-        - projects
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-  '/v1alpha1/projects/{projectId}/clusters/{clusterUuid}/agents/{agentId}':
-    delete:
-      description: "Delete an agent from Dataproc's view of a cluster. Deleting an agent is not required, but could be used in a shutdown sequence to indicate to Dataproc that the agent is to be considered dead and all agent-owned resources and tasks are free to be re-distributed."
-      operationId: dataproc.projects.clusters.agents.delete
-      parameters:
-        - description: "The agent's project."
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: "The agent's cluster."
-          in: path
-          name: clusterUuid
-          required: true
-          type: string
-        - description: The agent.
-          in: path
-          name: agentId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Empty'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.admin'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.read'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.write'
-      tags:
-        - projects
-    get:
-      description: Retrieve an agent.
-      operationId: dataproc.projects.clusters.agents.get
-      parameters:
-        - description: "The agent's project ID."
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: "The agent's cluster."
-          in: path
-          name: clusterUuid
-          required: true
-          type: string
-        - description: "The agent's ID."
-          in: path
-          name: agentId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Agent'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.admin'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.read'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.write'
-      tags:
-        - projects
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-    put:
-      description: "Update Dataproc's view of an agent. This is currently used to provide a is_healthy bit, but is expected to be extended to include daemon information and VM metrics for inclusion in cloud metrics."
-      operationId: dataproc.projects.clusters.agents.update
-      parameters:
-        - description: "The agent's project."
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: The cluster on which the agent is running.
-          in: path
-          name: clusterUuid
-          required: true
-          type: string
-        - description: '[Required] ID of agent sending the update.'
-          in: path
-          name: agentId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Agent'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Agent'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.admin'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.read'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.write'
-      tags:
-        - projects
-  '/v1alpha1/projects/{projectId}/clusters/{clusterUuid}/tasks/{taskId}:report':
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-    post:
-      description: Report status for a task and extend the lease provided for the task.
-      operationId: dataproc.projects.clusters.tasks.report
-      parameters:
-        - description: The project id of the agent.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: The cluster id of the agent.
-          in: path
-          name: clusterUuid
-          required: true
-          type: string
-        - description: The task that is being reported on.
-          in: path
-          name: taskId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ReportTaskStatusRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ReportTaskStatusResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.admin'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.read'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.write'
-      tags:
-        - projects
-  '/v1alpha1/projects/{projectId}/clusters/{clusterUuid}/tasks:lease':
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-    post:
-      description: "Obtain a lease on one or more tasks. Any given task may be in any state and each agent is expected to start any non-started tasks and to monitor any YarnApplications spawned by any already running tasks. It's expected that monitoring previously launched tasks will be more prevalent when drivers are run entirely within YARN containers. While there's a single lease expiration time, in the event of multiple tasks being leased to the agent in a single call, each task has a unique lease and status must be reported before the lease times out or the task can be considered orphaned. The service will determine how many tasks to lease to agents in a single call."
-      operationId: dataproc.projects.clusters.tasks.lease
-      parameters:
-        - description: The project id of the agent.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: The cluster id of the agent.
-          in: path
-          name: clusterUuid
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/LeaseTasksRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/LeaseTasksResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.admin'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.read'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.write'
-      tags:
-        - projects
-  '/v1alpha1/projects/{projectId}/jobs/{jobId}':
+  '/v1alpha1/projects/{projectId}/regions/{region}/jobs/{jobId}':
     delete:
       description: 'Deletes the job from the project. If the job is active, the delete fails, and the response returns `FAILED_PRECONDITION`.'
-      operationId: dataproc.projects.jobs.delete
+      operationId: dataproc.projects.regions.jobs.delete
       parameters:
         - description: '[Required] The ID of the Google Cloud Platform project that the job belongs to.'
           in: path
           name: projectId
+          required: true
+          type: string
+        - description: '[Required] The Dataproc region in which to handle the request.'
+          in: path
+          name: region
           required: true
           type: string
         - description: '[Required] The job ID.'
@@ -574,11 +321,16 @@ paths:
         - projects
     get:
       description: Gets the resource representation for a job in a project.
-      operationId: dataproc.projects.jobs.get
+      operationId: dataproc.projects.regions.jobs.get
       parameters:
         - description: '[Required] The ID of the Google Cloud Platform project that the job belongs to.'
           in: path
           name: projectId
+          required: true
+          type: string
+        - description: '[Required] The Dataproc region in which to handle the request.'
+          in: path
+          name: region
           required: true
           type: string
         - description: '[Required] The job ID.'
@@ -610,7 +362,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-  '/v1alpha1/projects/{projectId}/jobs/{jobId}:cancel':
+  '/v1alpha1/projects/{projectId}/regions/{region}/jobs/{jobId}:cancel':
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
@@ -626,12 +378,17 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
     post:
-      description: 'Starts a job cancellation request. To access the job resource after cancellation, call jobs:list or jobs:get.'
-      operationId: dataproc.projects.jobs.cancel
+      description: 'Starts a job cancellation request. To access the job resource after cancellation, call regions/{region}/jobs:list or regions/{region}/jobs:get.'
+      operationId: dataproc.projects.regions.jobs.cancel
       parameters:
         - description: '[Required] The ID of the Google Cloud Platform project that the job belongs to.'
           in: path
           name: projectId
+          required: true
+          type: string
+        - description: '[Required] The Dataproc region in which to handle the request.'
+          in: path
+          name: region
           required: true
           type: string
         - description: '[Required] The job ID.'
@@ -653,7 +410,7 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
-  '/v1alpha1/projects/{projectId}/jobs:submit':
+  '/v1alpha1/projects/{projectId}/regions/{region}/jobs:submit':
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
@@ -670,11 +427,16 @@ paths:
       - $ref: '#/parameters/$.xgafv'
     post:
       description: Submits a job to a cluster.
-      operationId: dataproc.projects.jobs.submit
+      operationId: dataproc.projects.regions.jobs.submit
       parameters:
         - description: '[Required] The ID of the Google Cloud Platform project that the job belongs to.'
           in: path
           name: projectId
+          required: true
+          type: string
+        - description: '[Required] The Dataproc region in which to handle the request.'
+          in: path
+          name: region
           required: true
           type: string
         - in: body
@@ -798,28 +560,6 @@ paths:
       tags:
         - operations
 definitions:
-  Agent:
-    description: A record for a single agent within Dataproc.
-    properties:
-      agentId:
-        description: '[Required] 64 characters matching the regular expression: [a-z0-9.-]{1,64} An agent chosen ID. This should typically be the hostname of the GCE virtual machine on which the agent is currently running.'
-        type: string
-      agentVersion:
-        description: 'The version of this agent in HTTP User-Agent Header value format (RFC 2616 section 14.43), e.g., "Dataproc-Agent/1.2".'
-        type: string
-      lastAgentUpdateTime:
-        description: '[Out] the last time this agent checked-in with Dataproc.'
-        type: string
-      status:
-        description: Agent status.
-        enum:
-          - STATUS_UNKNOWN
-          - INITIALIZING
-          - PERFORMING_CUSTOM_INITIALIZATION_ACTIONS
-          - RUNNING
-          - SETUP_FAILED
-        type: string
-    type: object
   CancelJobRequest:
     description: A request to cancel a job.
     type: object
@@ -901,6 +641,51 @@ definitions:
           type: string
         type: array
     type: object
+  ClusterOperationMetadata:
+    description: Metadata describing the operation.
+    properties:
+      clusterName:
+        description: Name of the cluster for the operation.
+        type: string
+      clusterUuid:
+        description: Cluster UUId for the operation.
+        type: string
+      description:
+        description: '[Output-only] Short description of operation.'
+        type: string
+      operationType:
+        description: '[Output-only] The operation type.'
+        type: string
+      status:
+        $ref: '#/definitions/ClusterOperationStatus'
+        description: '[Output-only] Current operation status.'
+      statusHistory:
+        description: '[Output-only] Previous operation status.'
+        items:
+          $ref: '#/definitions/ClusterOperationStatus'
+        type: array
+    type: object
+  ClusterOperationStatus:
+    description: The status of the operation.
+    properties:
+      details:
+        description: A message containing any operation metadata details.
+        type: string
+      innerState:
+        description: A message containing the detailed operation state.
+        type: string
+      state:
+        description: A message containing the operation state.
+        enum:
+          - UNKNOWN
+          - PENDING
+          - RUNNING
+          - DONE
+        type: string
+      stateStartTime:
+        description: The time this state was entered.
+        type: string
+    type: object
   ClusterStatus:
     description: The status of a cluster and its instances.
     properties:
@@ -928,6 +713,13 @@ definitions:
         description: '[Output-only] The Google Cloud Storage URI of the diagnostic output. This will be a plain text file with summary of collected diagnostics.'
         type: string
     type: object
+  DiagnoseClusterResults:
+    description: The location of diagnostic output.
+    properties:
+      outputUri:
+        description: '[Output-only] The Google Cloud Storage URI of the diagnostic output. This is a plain text file with a summary of collected diagnostics.'
+        type: string
+    type: object
   DiskConfiguration:
     description: Specifies the configuration of disk options for a group of VM instances.
     properties:
@@ -946,11 +738,24 @@ definitions:
   GceClusterConfiguration:
     description: 'Common configuration settings for resources of Google Compute Engine cluster instances, applicable to all instances in the cluster.'
     properties:
+      metadata:
+        additionalProperties:
+          type: string
+        description: The Google Compute Engine metadata entries to add to all instances.
+        type: object
       networkUri:
-        description: 'The Google Compute Engine network to be used for machine communications. Inbound SSH connections are necessary to complete cluster configuration. Example "compute.googleapis.com/projects/[project_id] /zones/us-east1-a/default".'
+        description: 'The Google Compute Engine network to be used for machine communications. Cannot be specified with subnetwork_uri. If neither network_uri nor subnetwork_uri is specified, the "default" network of the project is used, if it exists. Cannot be a "Custom Subnet Network" (see https://cloud.google.com/compute/docs/subnetworks for more information). Example: `compute.googleapis.com/projects/[project_id]/regions/global/default`.'
         type: string
       serviceAccountScopes:
         description: 'The service account scopes included in Google Compute Engine instances. Must include devstorage.full_control to enable the Google Cloud Storage connector. Example "auth.googleapis.com/compute" and "auth.googleapis.com/devstorage.full_control".'
+        items:
+          type: string
+        type: array
+      subnetworkUri:
+        description: 'The Google Compute Engine subnetwork to be used for machine communications. Cannot be specified with network_uri. Example: `compute.googleapis.com/projects/[project_id]/regions/us-east1/sub0`.'
+        type: string
+      tags:
+        description: The Google Compute Engine tags to add to all instances.
         items:
           type: string
         type: array
@@ -1184,46 +989,6 @@ definitions:
         description: '[Output-only] The time when this state was entered.'
         type: string
     type: object
-  LeaseTasksRequest:
-    description: A request to lease tasks for execution by an agent.
-    properties:
-      agentId:
-        description: "The agent's id."
-        type: string
-      currentAgentTime:
-        description: The current timestamp at the worker.
-        type: string
-      requestedLeaseDuration:
-        description: The requested initial lease period.
-        type: string
-    type: object
-  LeaseTasksResponse:
-    description: A Response for task leasing.
-    properties:
-      leaseExpirationTime:
-        description: The worker-local lease expiration time.
-        type: string
-      reportStatusInterval:
-        description: The interval at which status should be reported.
-        type: string
-      tasks:
-        description: A list of tasks that have been leased.
-        items:
-          $ref: '#/definitions/Task'
-        type: array
-    type: object
-  ListAgentsResponse:
-    description: Response to ListAgents
-    properties:
-      agents:
-        description: A list of agents.
-        items:
-          $ref: '#/definitions/Agent'
-        type: array
-      nextPageToken:
-        description: The token to send to ListAgents to acquire any following pages. Will be empty for last page.
-        type: string
-    type: object
   ListClustersResponse:
     description: The list of all clusters in a project.
     properties:
@@ -1352,6 +1117,9 @@ definitions:
       clusterUuid:
         description: Cluster UUId for the operation.
         type: string
+      description:
+        description: '[Output-only] Short description of operation.'
+        type: string
       details:
         description: A message containing any operation metadata details.
         type: string
@@ -1363,6 +1131,9 @@ definitions:
         type: string
       insertTime:
         description: The time that the operation was requested.
+        type: string
+      operationType:
+        description: '[Output-only] The operation type.'
         type: string
       startTime:
         description: The time that the operation was started by the server.
@@ -1485,35 +1256,17 @@ definitions:
           type: string
         type: array
     type: object
-  ReportTaskStatusRequest:
-    description: 'A request to report task status, which may result in the corresponding lease being extended.'
-    properties:
-      agentId:
-        description: The id of the agent reporting task status.
-        type: string
-      currentWorkerTime:
-        description: The current timestamp at the worker.
-        type: string
-      status:
-        $ref: '#/definitions/TaskStatus'
-        description: Status for a single task.
-    type: object
-  ReportTaskStatusResponse:
-    description: A response to a task status report.
-    properties:
-      leaseExpirationTime:
-        description: New task lease expiration timestamp in worker-local time.
-        type: string
-      reportStatusInterval:
-        description: The interval at which status should be reported.
-        type: string
-    type: object
   SoftwareConfiguration:
     description: Specifies the selection and configuration of software inside the cluster.
     properties:
       imageVersion:
         description: "[Optional] The version of software inside the cluster. It must match the regular expression [0-9]+\\.[0-9]+. If unspecified it will default to latest version."
         type: string
+      properties:
+        additionalProperties:
+          type: string
+        description: '[Optional] The properties to set on daemon configuration files. Property keys are specified in "prefix:property" format, such as "core:fs.defaultFS". The following are supported prefixes and their mappings: core - core-site.xml hdfs - hdfs-site.xml mapred - mapred-site.xml yarn - yarn-site.xml hive - hive-site.xml pig - pig.properties spark - spark-defaults.conf'
+        type: object
     type: object
   SparkJob:
     description: A Cloud Dataproc job for running Spark applications on YARN.
@@ -1605,267 +1358,6 @@ definitions:
       job:
         $ref: '#/definitions/Job'
         description: '[Required] The job resource.'
-    type: object
-  SystemTaskStatus:
-    description: Status of cluster configuration task.
-    properties:
-      state:
-        description: The outcome of reconfiguration.
-        enum:
-          - STATE_UNSPECIFIED
-          - PENDING
-          - RUNNING
-          - FINISHED
-          - FAILED
-        type: string
-    type: object
-  Task:
-    description: "A single Task for agent execution. A task in Cloud Dataproc is a unit of work originating with the Cloud Dataproc service and intended for execution on a Cloud Dataproc agent. The most straightforward example of a Task in Cloud Dataproc is one corresponding to an end-user originated Job. This task is then allocated to an available agent for execution. Other examples of Cloud Dataproc Tasks could include executing system-maintenance scripts, periodic agent upgrades, etc. Using the example of a Task corresponding to a Job, the flow through Cloud Dataproc will appear as: - The end-user submits a Job to Cloud Dataproc for execution. - The Cloud Dataproc service determines the best Cluster to execute the Job on and creates a Task for the job. - An agent polls Cloud Dataproc for outstanding Tasks via the LeaseTasks method and the Task created in step 2 is provided to the agent. - During execution of the Task, the agent updates the Task status via the ReportTaskStatus method. - Upon completion of a Task, the agent will finally ReportTaskStatus with a TaskStatus indicating the status of the driver application's exit status. - The Cloud Dataproc service updates the status of the user-submitted Job using the Task status reported by the agent."
-    properties:
-      configuration:
-        $ref: '#/definitions/TaskConfiguration'
-        description: Configuration for this task.
-      status:
-        $ref: '#/definitions/TaskStatus'
-        description: The status of a task.
-      taskId:
-        description: System defined task id.
-        type: string
-    type: object
-  TaskClusterConfiguration:
-    description: A system task corresponding to a request for Master node to update configuration based on provided values.
-    properties:
-      addMembers:
-        description: New nodes to register with cluster.
-        items:
-          type: string
-        type: array
-      removeMembers:
-        description: Existing nodes to decommission.
-        items:
-          type: string
-        type: array
-      type:
-        description: Type of configuration change.
-        enum:
-          - TYPE_UNSPECIFIED
-          - TYPE_CLUSTER_MEMBERSHIP_CHANGE
-        type: string
-    type: object
-  TaskConfiguration:
-    description: Configuration for a Dataproc Task.
-    properties:
-      clusterConfiguration:
-        $ref: '#/definitions/TaskClusterConfiguration'
-        description: Cluster reconfiguration task.
-      jobConfiguration:
-        $ref: '#/definitions/TaskJobConfiguration'
-        description: Configuration of a Job-based task.
-      maintenanceCommand:
-        $ref: '#/definitions/TaskMaintenanceCommand'
-        description: Execute cluster maintenance command.
-    type: object
-  TaskJobConfiguration:
-    description: A task corresponding to a single job execution request.
-    properties:
-      archiveUris:
-        description: 'Required archives for the driver program or distributed program. Used by Hadoop, Spark, and PySpark jobs.'
-        items:
-          type: string
-        type: array
-      args:
-        description: 'Arguments for the driver program. Used by Hadoop, Spark, and PySpark jobs.'
-        items:
-          type: string
-        type: array
-      continueOnFailure:
-        description: True to continue processing pig or hive queries if an earlier query fails.
-        type: boolean
-      driverControlFilesUri:
-        description: '[Output-only] If present, the location of miscellaneous control files which may be used as part of job setup and handling. If not present, control files may be placed in the same location as driver_output_uri.'
-        type: string
-      driverInputUri:
-        description: "[Output-only] A URI pointing to the location of the stdin of the job's driver program, only set if the job is interactive."
-        type: string
-      driverOutputUri:
-        description: Output URI for driver output.
-        type: string
-      fileUris:
-        description: 'Required files for the driver program or distributed program. Used by Hadoop, Spark, and PySpark jobs.'
-        items:
-          type: string
-        type: array
-      interactive:
-        description: "[Optional] If set to true, then the driver's stdin will be kept open and driver_input_uri will be set to provide a path at which additional input can be sent to the driver."
-        type: boolean
-      jarFileUris:
-        description: JAR files that are required by the job.
-        items:
-          type: string
-        type: array
-      loggingConfiguration:
-        $ref: '#/definitions/TaskLoggingConfiguration'
-        description: Logging configuration for the job.
-      mainClass:
-        description: A class name that is contained either in core Hadoop or Spark libraries or within a JAR specified within jar_file_uris.
-        type: string
-      mainJarFileUri:
-        description: A JAR containing the main driver and containing a METADATA entry for a main class contained within the jar.
-        type: string
-      mainPythonFileUri:
-        description: The main Python file for a PySpark application.
-        type: string
-      properties:
-        additionalProperties:
-          type: string
-        description: Properties for the submitted job.
-        type: object
-      pythonFileUris:
-        description: URIs of files required by the PySpark application
-        items:
-          type: string
-        type: array
-      queryFileUri:
-        description: A URI of a file containing queries
-        type: string
-      queryList:
-        $ref: '#/definitions/TaskQueryList'
-        description: A list of queries specified within the API.
-      scriptVariables:
-        additionalProperties:
-          type: string
-        description: Variables to be substituted in Pig and Hive scripts.
-        type: object
-      submittedBy:
-        description: "The user that the job should be attributed to in Hadoop as a posix-style username. If the user is not a member of the system's user-database, the task will be started as a system account."
-        type: string
-      type:
-        description: The type of the job.
-        enum:
-          - TYPE_UNSPECIFIED
-          - HADOOP
-          - SPARK
-          - PYSPARK
-          - HIVE
-          - PIG
-          - SPARK_SQL
-        type: string
-    type: object
-  TaskJobStatus:
-    description: Status of a single job-based task.
-    properties:
-      driverExitCode:
-        description: 'If the driver has exited, its exit code.'
-        format: int32
-        type: integer
-      driverState:
-        description: The state of the driver.
-        enum:
-          - DRIVER_STATE_UNSPECIFIED
-          - PENDING
-          - RUNNING
-          - KILL_PENDING
-          - KILLED
-          - FINISHED
-          - FAILED
-        type: string
-      yarnApplications:
-        description: A list of YARN applications that have been launched for this task.
-        items:
-          $ref: '#/definitions/TaskYarnApplication'
-        type: array
-    type: object
-  TaskLoggingConfiguration:
-    description: Logging configuration for the task.
-    properties:
-      logLevels:
-        additionalProperties:
-          enum:
-            - LEVEL_UNSPECIFIED
-            - ALL
-            - TRACE
-            - DEBUG
-            - INFO
-            - WARN
-            - ERROR
-            - FATAL
-            - 'OFF'
-          type: string
-        description: Map of logger name to log4j log level.
-        type: object
-    type: object
-  TaskMaintenanceCommand:
-    description: A system task corresponding to a request to run a maintenance command on targeted agent.
-    properties:
-      args:
-        description: Arguments to pass to the script.
-        items:
-          type: string
-        type: array
-      environment:
-        additionalProperties:
-          type: string
-        description: The environment variables.
-        type: object
-      gcsUri:
-        description: The executable is stored on GCS.
-        type: string
-      localPath:
-        description: The executable is a file on agent.
-        type: string
-      scriptOutputUri:
-        description: The GCS URI where executable output will be stored.
-        type: string
-    type: object
-  TaskQueryList:
-    description: A list of queries to execute as part of the task.
-    properties:
-      queries:
-        description: 'The queries to execute. The format of the queries is task-type dependent, but in each case each query should be executed within its own invocation of the interpreter for that task type.'
-        items:
-          type: string
-        type: array
-    type: object
-  TaskStatus:
-    description: Status for a single Task.
-    properties:
-      jobStatus:
-        $ref: '#/definitions/TaskJobStatus'
-        description: The status of the Job.
-      systemTaskStatus:
-        $ref: '#/definitions/SystemTaskStatus'
-        description: The status of the SystemTask.
-    type: object
-  TaskYarnApplication:
-    description: YARN applications that have been associated with a task.
-    properties:
-      id:
-        description: YARN application id.
-        format: int32
-        type: integer
-      name:
-        description: YARN application name.
-        type: string
-      progress:
-        description: The progress of the YARN application.
-        format: float
-        type: number
-      state:
-        description: The state of the YARN application.
-        enum:
-          - STATE_UNSPECIFIED
-          - NEW
-          - NEW_SAVING
-          - SUBMITTED
-          - ACCEPTED
-          - RUNNING
-          - FINISHED
-          - FAILED
-          - KILLED
-        type: string
-      trackingUrl:
-        description: The tracking URL for the YARN application. This URL may or may not be accessible from outside the cluster.
-        type: string
     type: object
   YarnApplication:
     description: A YARN application created by a job. Application information is a subset of org.apache.hadoop.yarn.proto.YarnProtos.ApplicationReportProto.
