@@ -513,6 +513,8 @@ function updateGoogle() {
       return ([
              //duplicate preferred
              'genomics:v1beta2',
+             //no paths
+             'iam:v1alpha1'
            ].indexOf(api.id) === -1);
     }).indexBy('discoveryRestUrl').mapValues('preferred').value();
 
