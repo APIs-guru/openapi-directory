@@ -513,9 +513,6 @@ function updateGoogle() {
       return ([
              //duplicate preferred
              'genomics:v1beta2',
-             //circular reference in MapFolder/MapItem
-             'mapsengine:exp2',
-             'mapsengine:v1',
            ].indexOf(api.id) === -1);
     }).indexBy('discoveryRestUrl').mapValues('preferred').value();
 
