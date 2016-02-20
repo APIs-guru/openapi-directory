@@ -743,9 +743,6 @@ definitions:
   CancelOperationRequest:
     description: The request message for Operations.CancelOperation.
     type: object
-  CloudAuditOptions:
-    description: Write a Cloud Audit log
-    type: object
   Cluster:
     description: 'Describes the identifying information, configuration, and status of a cluster of Google Compute Engine instances.'
     properties:
@@ -816,7 +813,7 @@ definitions:
         $ref: '#/definitions/ClusterOperationStatus'
         description: '[Output-only] Current operation status.'
       statusHistory:
-        description: '[Output-only] Previous operation status.'
+        description: '[Output-only] The previous operation status.'
         items:
           $ref: '#/definitions/ClusterOperationStatus'
         type: array
@@ -861,60 +858,6 @@ definitions:
       stateStartTime:
         description: Time when this state was entered.
         type: string
-    type: object
-  Condition:
-    description: A condition to be met.
-    properties:
-      iam:
-        description: Trusted attributes supplied by the IAM system.
-        enum:
-          - NO_ATTR
-          - AUTHORITY
-          - ATTRIBUTION
-        type: string
-      op:
-        description: An operator to apply the subject with.
-        enum:
-          - NO_OP
-          - EQUALS
-          - NOT_EQUALS
-          - IN
-          - NOT_IN
-          - DISCHARGED
-        type: string
-      svc:
-        description: Trusted attributes discharged by the service.
-        type: string
-      sys:
-        description: Trusted attributes supplied by any service that owns resources and uses the IAM system for access control.
-        enum:
-          - NO_ATTR
-          - REGION
-          - SERVICE
-          - NAME
-          - IP
-        type: string
-      value:
-        description: The object of the condition. Exactly one of these must be set.
-        type: string
-      values:
-        description: "The objects of the condition. This is mutually exclusive with 'value'."
-        items:
-          type: string
-        type: array
-    type: object
-  CounterOptions:
-    description: Options for counters
-    properties:
-      field:
-        description: The field value to attribute.
-        type: string
-      metric:
-        description: The metric to update.
-        type: string
-    type: object
-  DataAccessOptions:
-    description: Write a Data Access (Gin) log
     type: object
   DiagnoseClusterOutputLocation:
     description: The location where output from diagnostic command can be found.
@@ -1205,19 +1148,6 @@ definitions:
           $ref: '#/definitions/Operation'
         type: array
     type: object
-  LogConfig:
-    description: "Specifies what kind of log the caller must write Increment a streamz counter with the specified metric and field names. Metric names should start with a '/', generally be lowercase-only, and end in \"_count\". Field names should not contain an initial slash. The actual exported metric names will have \"/iam/policy\" prepended. Field names correspond to IAM request parameters and field values are their respective values. At present only \"iam_principal\", corresponding to IAMContext.principal, is supported. Examples: counter { metric: \"/debug_access_count\" field: \"iam_principal\" } ==> increment counter /iam/policy/backend_debug_access_count {iam_principal=[value of IAMContext.principal]} At this time we do not support: * multiple field names (though this may be supported in the future) * decrementing the counter * incrementing it by anything other than 1"
-    properties:
-      cloudAudit:
-        $ref: '#/definitions/CloudAuditOptions'
-        description: Cloud audit options.
-      counter:
-        $ref: '#/definitions/CounterOptions'
-        description: Counter options.
-      dataAccess:
-        $ref: '#/definitions/DataAccessOptions'
-        description: Data access options.
-    type: object
   LoggingConfiguration:
     description: The runtime logging configuration of the job.
     properties:
@@ -1272,7 +1202,7 @@ definitions:
         description: 'Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.'
         type: object
       name:
-        description: 'The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping above, the `name` should have the format of `operations/some/unique/name`.'
+        description: 'The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should have the format of `operations/some/unique/name`.'
         type: string
       response:
         additionalProperties:
@@ -1391,10 +1321,6 @@ definitions:
         description: '`etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy. If no `etag` is provided in the call to `setIamPolicy`, then the existing policy is overwritten blindly.'
         format: byte
         type: string
-      rules:
-        items:
-          $ref: '#/definitions/Rule'
-        type: array
       version:
         description: Version of the `Policy`. The default version is 0.
         format: int32
@@ -1445,48 +1371,6 @@ definitions:
     properties:
       queries:
         description: '[Required] The queries to execute. You do not need to terminate a query with a semicolon. Multiple queries can be specified in one string by separating each with a semicolon. Here is an example of an Cloud Dataproc API snippet that uses a QueryList to specify a HiveJob: "hiveJob": { "queryList": { "queries": [ "query1", "query2", "query3;query4", ] } }'
-        items:
-          type: string
-        type: array
-    type: object
-  Rule:
-    description: A rule to be applied in a Policy.
-    properties:
-      action:
-        description: Required
-        enum:
-          - NO_ACTION
-          - ALLOW
-          - ALLOW_WITH_LOG
-          - DENY
-          - DENY_WITH_LOG
-          - LOG
-        type: string
-      conditions:
-        description: Additional restrictions that must be met
-        items:
-          $ref: '#/definitions/Condition'
-        type: array
-      description:
-        description: Human-readable description of the rule.
-        type: string
-      in:
-        description: The rule matches if the PRINCIPAL/AUTHORITY_SELECTOR is in this set of entries.
-        items:
-          type: string
-        type: array
-      logConfig:
-        description: The config returned to callers of tech.iam.IAM.CheckPolicy for any entries that match the LOG action.
-        items:
-          $ref: '#/definitions/LogConfig'
-        type: array
-      notIn:
-        description: The rule matches if the PRINCIPAL/AUTHORITY_SELECTOR is not in this set of entries. The format for in and not_in entries is the same as for members in a Binding (see google/iam/v1/policy.proto).
-        items:
-          type: string
-        type: array
-      permissions:
-        description: "A permission is a string of form '..' (e.g., 'storage.buckets.list'). A value of '*' matches all permissions, and a verb part of '*' (e.g., 'storage.buckets.*') matches all verbs."
         items:
           type: string
         type: array

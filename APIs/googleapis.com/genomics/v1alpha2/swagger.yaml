@@ -170,6 +170,45 @@ paths:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - pipelines
+  '/v1alpha2/pipelines/controller_config/{operationId}':
+    get:
+      description: Gets controller configuration information. Should only be called by VMs created by the Pipelines Service and not by end users.
+      operationId: genomics.pipelines.controller_config.get
+      parameters:
+        - description: The operation to retrieve controller configuration for.
+          in: path
+          name: operationId
+          required: true
+          type: string
+        - in: query
+          name: validationToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ControllerConfig'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/genomics'
+      tags:
+        - pipelines
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
   '/v1alpha2/pipelines/{pipelineId}':
     delete:
       description: Deletes a pipeline based on ID. Caller must have WRITE permission to the project.
@@ -255,6 +294,41 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/genomics'
+      tags:
+        - pipelines
+  '/v1alpha2/pipelines:update_status':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    put:
+      description: Updates status of a given operation. Should only be called by VMs created by the Pipelines Service and not by end users.
+      operationId: genomics.pipelines.update_status
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UpdateStatusRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -355,6 +429,34 @@ paths:
 definitions:
   CancelOperationRequest:
     description: The request message for Operations.CancelOperation.
+    type: object
+  ControllerConfig:
+    description: Stores the information that the controller will fetch from the server in order to run. Should only be used by VMs created by the Pipelines Service and not by end users.
+    properties:
+      cmd:
+        type: string
+      disks:
+        additionalProperties:
+          type: string
+        type: object
+      gcsLogPath:
+        type: string
+      gcsSinks:
+        additionalProperties:
+          $ref: '#/definitions/RepeatedString'
+        type: object
+      gcsSources:
+        additionalProperties:
+          $ref: '#/definitions/RepeatedString'
+        type: object
+      image:
+        type: string
+      machineType:
+        type: string
+      vars:
+        additionalProperties:
+          type: string
+        type: object
     type: object
   Disk:
     description: A Google Compute Engine disk resource specification.
@@ -582,6 +684,13 @@ definitions:
           type: string
         type: array
     type: object
+  RepeatedString:
+    properties:
+      values:
+        items:
+          type: string
+        type: array
+    type: object
   RunPipelineArgs:
     description: The pipeline run arguments.
     properties:
@@ -652,5 +761,50 @@ definitions:
         type: array
       message:
         description: 'A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.'
+        type: string
+    type: object
+  TimestampEvent:
+    description: Stores the list of events and times they occured for major events in job execution.
+    properties:
+      description:
+        description: String indicating the type of event
+        type: string
+      timestamp:
+        description: The time this event occured.
+        type: string
+    type: object
+  UpdateStatusRequest:
+    description: Request to update operation status. Should only be used by VMs created by the Pipelines Service and not by end users.
+    properties:
+      errorCode:
+        enum:
+          - OK
+          - CANCELLED
+          - UNKNOWN
+          - INVALID_ARGUMENT
+          - DEADLINE_EXCEEDED
+          - NOT_FOUND
+          - ALREADY_EXISTS
+          - PERMISSION_DENIED
+          - UNAUTHENTICATED
+          - RESOURCE_EXHAUSTED
+          - FAILED_PRECONDITION
+          - ABORTED
+          - OUT_OF_RANGE
+          - UNIMPLEMENTED
+          - INTERNAL
+          - UNAVAILABLE
+          - DATA_LOSS
+        type: string
+      errorMessage:
+        type: string
+      operationId:
+        type: string
+      timestampEvents:
+        items:
+          $ref: '#/definitions/TimestampEvent'
+        type: array
+      validationToken:
+        format: uint64
         type: string
     type: object

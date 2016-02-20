@@ -660,7 +660,7 @@ definitions:
         $ref: '#/definitions/ClusterOperationStatus'
         description: '[Output-only] Current operation status.'
       statusHistory:
-        description: '[Output-only] Previous operation status.'
+        description: '[Output-only] The previous operation status.'
         items:
           $ref: '#/definitions/ClusterOperationStatus'
         type: array

@@ -112,7 +112,7 @@ paths:
       description: 'Method for media download. Download is supported on the URI `/v1/media/{+name}?alt=media`.'
       operationId: dataproc.media.download
       parameters:
-        - description: 'Name of the media that is being downloaded. See [][ByteStream.ReadRequest.resource_name].'
+        - description: Name of the media that is being downloaded. See ByteStream.ReadRequest.resource_name.
           in: path
           name: resourceName
           required: true
@@ -154,7 +154,7 @@ paths:
       description: 'Method for media upload. Upload is supported on the URI `/upload/v1/media/{+name}`.'
       operationId: dataproc.media.upload
       parameters:
-        - description: 'Name of the media that is being downloaded. See [][ByteStream.ReadRequest.resource_name].'
+        - description: Name of the media that is being downloaded. See ByteStream.ReadRequest.resource_name.
           in: path
           name: resourceName
           required: true
@@ -190,7 +190,7 @@ paths:
           name: projectId
           required: true
           type: string
-        - description: '[Required] The Dataproc region in which to handle the request.'
+        - description: '[Required] The Cloud Dataproc region in which to handle the request.'
           in: path
           name: region
           required: true
@@ -236,7 +236,7 @@ paths:
           name: projectId
           required: true
           type: string
-        - description: '[Required] The Dataproc region in which to handle the request.'
+        - description: '[Required] The Cloud Dataproc region in which to handle the request.'
           in: path
           name: region
           required: true
@@ -265,7 +265,7 @@ paths:
           name: projectId
           required: true
           type: string
-        - description: '[Required] The Dataproc region in which to handle the request.'
+        - description: '[Required] The Cloud Dataproc region in which to handle the request.'
           in: path
           name: region
           required: true
@@ -294,7 +294,7 @@ paths:
           name: projectId
           required: true
           type: string
-        - description: '[Required] The Dataproc region in which to handle the request.'
+        - description: '[Required] The Cloud Dataproc region in which to handle the request.'
           in: path
           name: region
           required: true
@@ -337,7 +337,7 @@ paths:
           name: projectId
           required: true
           type: string
-        - description: '[Required] The Dataproc region in which to handle the request.'
+        - description: '[Required] The Cloud Dataproc region in which to handle the request.'
           in: path
           name: region
           required: true
@@ -389,7 +389,7 @@ paths:
           name: projectId
           required: true
           type: string
-        - description: '[Required] The Dataproc region in which to handle the request.'
+        - description: '[Required] The Cloud Dataproc region in which to handle the request.'
           in: path
           name: region
           required: true
@@ -423,7 +423,7 @@ paths:
           name: projectId
           required: true
           type: string
-        - description: '[Required] The Dataproc region in which to handle the request.'
+        - description: '[Required] The Cloud Dataproc region in which to handle the request.'
           in: path
           name: region
           required: true
@@ -482,7 +482,7 @@ paths:
           name: projectId
           required: true
           type: string
-        - description: '[Required] The Dataproc region in which to handle the request.'
+        - description: '[Required] The Cloud Dataproc region in which to handle the request.'
           in: path
           name: region
           required: true
@@ -511,7 +511,7 @@ paths:
           name: projectId
           required: true
           type: string
-        - description: '[Required] The Dataproc region in which to handle the request.'
+        - description: '[Required] The Cloud Dataproc region in which to handle the request.'
           in: path
           name: region
           required: true
@@ -561,7 +561,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
     post:
-      description: 'Starts a job cancellation request. To access the job resource after cancellation, call [regions/{region}/jobs.list](/dataproc/reference/rest/v1/projects.regions/{region}/jobs/list) or [regions/{region}/jobs.get](/dataproc/reference/rest/v1/projects.regions/{region}/jobs/get).'
+      description: 'Starts a job cancellation request. To access the job resource after cancellation, call [regions/{region}/jobs.list](/dataproc/reference/rest/v1/projects.regions.jobs/list) or [regions/{region}/jobs.get](/dataproc/reference/rest/v1/projects.regions.jobs/get).'
       operationId: dataproc.projects.regions.jobs.cancel
       parameters:
         - description: '[Required] The ID of the Google Cloud Platform project that the job belongs to.'
@@ -569,7 +569,7 @@ paths:
           name: projectId
           required: true
           type: string
-        - description: '[Required] The Dataproc region in which to handle the request.'
+        - description: '[Required] The Cloud Dataproc region in which to handle the request.'
           in: path
           name: region
           required: true
@@ -617,7 +617,7 @@ paths:
           name: projectId
           required: true
           type: string
-        - description: '[Required] The Dataproc region in which to handle the request.'
+        - description: '[Required] The Cloud Dataproc region in which to handle the request.'
           in: path
           name: region
           required: true
@@ -746,7 +746,7 @@ definitions:
     description: 'Describes the identifying information, config, and status of a cluster of Google Compute Engine instances.'
     properties:
       clusterName:
-        description: '[Required] The cluster name. Cluster names within a project must be unique. Names from deleted clusters can be reused.'
+        description: '[Required] The cluster name. Cluster names within a project must be unique. Names of deleted clusters can be reused.'
         type: string
       clusterUuid:
         description: '[Output-only] A cluster UUID (Unique Universal Identifier). Cloud Dataproc generates this value when it creates the cluster.'
@@ -761,7 +761,7 @@ definitions:
         $ref: '#/definitions/ClusterStatus'
         description: '[Output-only] Cluster status.'
       statusHistory:
-        description: '[Output-only] Previous cluster statuses.'
+        description: '[Output-only] The previous cluster status.'
         items:
           $ref: '#/definitions/ClusterStatus'
         type: array
@@ -812,7 +812,7 @@ definitions:
         $ref: '#/definitions/ClusterOperationStatus'
         description: '[Output-only] Current operation status.'
       statusHistory:
-        description: '[Output-only] Previous operation status.'
+        description: '[Output-only] The previous operation status.'
         items:
           $ref: '#/definitions/ClusterOperationStatus'
         type: array
@@ -902,7 +902,7 @@ definitions:
         description: 'The Google Compute Engine network to be used for machine communications. Cannot be specified with subnetwork_uri. If neither network_uri nor subnetwork_uri is specified, the "default" network of the project is used, if it exists. Cannot be a "Custom Subnet Network" (see https://cloud.google.com/compute/docs/subnetworks for more information). Example: `https://www.googleapis.com/compute/v1/projects/[project_id]/regions/global/default`.'
         type: string
       serviceAccountScopes:
-        description: 'The URIs of service account scopes to be included in Google Compute Engine instances. The following base set of scopes is always included: - https://www.googleapis.com/auth/cloud.useraccounts.readonly - https://www.googleapis.com/auth/devstorage.read_write - https://www.googleapis.com/auth/logging.write If no scopes are specfied, the following defaults are also provided: - https://www.googleapis.com/auth/bigquery - https://www.googleapis.com/auth/bigtable.admin.table - https://www.googleapis.com/auth/bigtable.data - https://www.googleapis.com/auth/devstorage.full_control'
+        description: 'The URIs of service account scopes to be included in Google Compute Engine instances. The following base set of scopes is always included: * https://www.googleapis.com/auth/cloud.useraccounts.readonly * https://www.googleapis.com/auth/devstorage.read_write * https://www.googleapis.com/auth/logging.write If no scopes are specfied, the following defaults are also provided: * https://www.googleapis.com/auth/bigquery * https://www.googleapis.com/auth/bigtable.admin.table * https://www.googleapis.com/auth/bigtable.data * https://www.googleapis.com/auth/devstorage.full_control'
         items:
           type: string
         type: array
@@ -932,7 +932,7 @@ definitions:
           type: string
         type: array
       fileUris:
-        description: '[Optional] HCFS URIs of files to be copied to the working directory of Hadoop drivers and distributed tasks. Useful for naively parallel tasks.'
+        description: '[Optional] HCFS (Hadoop Compatible Filesystem) URIs of files to be copied to the working directory of Hadoop drivers and distributed tasks. Useful for naively parallel tasks.'
         items:
           type: string
         type: array
@@ -948,7 +948,7 @@ definitions:
         description: "The name of the driver's main class. The jar file containing the class must be in the default CLASSPATH or specified in `jar_file_uris`."
         type: string
       mainJarFileUri:
-        description: "The Hadoop Compatible Filesystem (HCFS) URI of the jar file containing the main class. Examples: 'gs://foo-bucket/analytics-binaries/extract-useful-metrics-mr.jar' 'hdfs:/tmp/test-samples/custom-wordcount.jar' 'file:///home/usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar'"
+        description: "The HCFS URI of the jar file containing the main class. Examples: 'gs://foo-bucket/analytics-binaries/extract-useful-metrics-mr.jar' 'hdfs:/tmp/test-samples/custom-wordcount.jar' 'file:///home/usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar'"
         type: string
       properties:
         additionalProperties:
@@ -994,7 +994,7 @@ definitions:
         description: '[Output-only] The Google Compute Engine image resource used for cluster instances. Inferred from `SoftwareConfig.image_version`.'
         type: string
       instanceNames:
-        description: 'The list of instance names. Dataproc derives the names from `cluster_name`, `num_instances`, and the instance group if not set by user (recommended practice is to let Dataproc derive the name).'
+        description: 'The list of instance names. Cloud Dataproc derives the names from `cluster_name`, `num_instances`, and the instance group if not set by user (recommended practice is to let Cloud Dataproc derive the name).'
         items:
           type: string
         type: array
@@ -1061,7 +1061,7 @@ definitions:
         description: '[Required] The name of the cluster where the job will be submitted.'
         type: string
       clusterUuid:
-        description: '[Output-only] A cluster UUID generated by the Dataproc service when the job is submitted.'
+        description: '[Output-only] A cluster UUID generated by the Cloud Dataproc service when the job is submitted.'
         type: string
     type: object
   JobReference:
@@ -1106,7 +1106,7 @@ definitions:
           $ref: '#/definitions/Cluster'
         type: array
       nextPageToken:
-        description: The standard List next-page token.
+        description: '[Optional] This token is included in the response if there are more results to fetch. To fetch additional results, provide this value as the `page_token` in a subsequent ListClustersRequest.'
         type: string
     type: object
   ListJobsResponse:
@@ -1194,7 +1194,7 @@ definitions:
         description: 'Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.'
         type: object
       name:
-        description: 'The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping above, the `name` should have the format of `operations/some/unique/name`.'
+        description: 'The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should have the format of `operations/some/unique/name`.'
         type: string
       response:
         additionalProperties:
@@ -1328,7 +1328,7 @@ definitions:
         $ref: '#/definitions/LoggingConfig'
         description: '[Optional] The runtime log config for job execution.'
       mainPythonFileUri:
-        description: '[Required] The Hadoop Compatible Filesystem (HCFS) URI of the main Python file to use as the driver. Must be a .py file.'
+        description: '[Required] The HCFS URI of the main Python file to use as the driver. Must be a .py file.'
         type: string
       properties:
         additionalProperties:
@@ -1359,7 +1359,7 @@ definitions:
       properties:
         additionalProperties:
           type: string
-        description: '[Optional] The properties to set on daemon config files. Property keys are specified in "prefix:property" format, such as "core:fs.defaultFS". The following are supported prefixes and their mappings: core - core-site.xml hdfs - hdfs-site.xml mapred - mapred-site.xml yarn - yarn-site.xml hive - hive-site.xml pig - pig.properties spark - spark-defaults.conf'
+        description: '[Optional] The properties to set on daemon config files. Property keys are specified in `prefix:property` format, such as `core:fs.defaultFS`. The following are supported prefixes and their mappings: * core: `core-site.xml` * hdfs: `hdfs-site.xml` * mapred: `mapred-site.xml` * yarn: `yarn-site.xml` * hive: `hive-site.xml` * pig: `pig.properties` * spark: `spark-defaults.conf`'
         type: object
     type: object
   SparkJob:
@@ -1392,7 +1392,7 @@ definitions:
         description: "The name of the driver's main class. The jar file that contains the class must be in the default CLASSPATH or specified in `jar_file_uris`."
         type: string
       mainJarFileUri:
-        description: The Hadoop Compatible Filesystem (HCFS) URI of the jar file that contains the main class.
+        description: The HCFS URI of the jar file that contains the main class.
         type: string
       properties:
         additionalProperties:
