@@ -1,0 +1,1762 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.botify.com
+basePath: /v1
+info:
+  description: Botify Saas API
+  title: Botify
+  version: 1.0.0
+  x-logo:
+    backgroundColor: '#1A1A1A'
+    url: 'https://static.botify.com/images/logos/botify-white.dc4215a12b9c.png'
+  x-origin:
+    format: swagger
+    url: 'https://api.botify.com/v1/swagger.json'
+    version: '2.0'
+  x-providerName: botify.com
+externalDocs:
+  url: 'https://developers.botify.com/'
+securityDefinitions:
+  DjangoRestToken:
+    in: header
+    name: Authorization
+    type: apiKey
+security:
+  - DjangoRestToken: []
+paths:
+  '/analyses/{username}/{project_slug}':
+    get:
+      description: List all active analyses for a project
+      operationId: getAnalyses
+      parameters:
+        - description: Page Number
+          in: query
+          name: page
+          type: integer
+        - description: Page Size
+          in: query
+          name: size
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            properties:
+              count:
+                description: ''
+                readOnly: true
+                type: integer
+              next:
+                description: ''
+                readOnly: true
+                type: string
+              page:
+                description: ''
+                readOnly: true
+                type: integer
+              previous:
+                description: ''
+                readOnly: true
+                type: string
+              results:
+                description: ''
+                items:
+                  $ref: '#/definitions/Analysis'
+                readOnly: true
+                type: array
+              size:
+                description: ''
+                readOnly: true
+                type: integer
+            type: object
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: List all active analyses for a project
+      tags:
+        - Analysis
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: path
+        name: project_slug
+        required: true
+        type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}':
+    get:
+      description: Gets an Analysis detail
+      operationId: getAnalysisSummary
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/AnalysisDetail'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Gets an Analysis detail
+      tags:
+        - Analysis
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: path
+        name: project_slug
+        required: true
+        type: string
+      - in: path
+        name: analysis_slug
+        required: true
+        type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/crawl_statistics':
+    get:
+      description: Return global statistics for an analysis
+      operationId: getCrawlStatistics
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Default'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Return global statistics for an analysis
+      tags:
+        - Analysis
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: path
+        name: project_slug
+        required: true
+        type: string
+      - in: path
+        name: analysis_slug
+        required: true
+        type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/crawl_statistics/time':
+    get:
+      description: 'Return statistics by 1mn, 5mn or 60mn for an analysis'
+      operationId: getCrawlStatisticsByFrequency
+      parameters:
+        - description: max number of elements to retrieve
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - description: frequency of sampling
+          in: query
+          name: frequency
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Default'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: 'Return statistics by 1mn, 5mn or 60mn for an analysis'
+      tags:
+        - Analysis
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: path
+        name: project_slug
+        required: true
+        type: string
+      - in: path
+        name: analysis_slug
+        required: true
+        type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/crawl_statistics/urls/{list_type}':
+    get:
+      description: Return a list of 1000 latest URLs crawled or with errors
+      operationId: getCrawlStatisticsUrls
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Default'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Return a list of 1000 latest URLs crawled or with errors
+      tags:
+        - Analysis
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: path
+        name: project_slug
+        required: true
+        type: string
+      - in: path
+        name: analysis_slug
+        required: true
+        type: string
+      - in: path
+        name: list_type
+        required: true
+        type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/features/ganalytics/orphan_urls/{medium}/{source}':
+    get:
+      description: Orphan URLs
+      operationId: getGanalyticsOrphanURLs
+      parameters:
+        - description: Page Number
+          in: query
+          name: page
+          type: integer
+        - description: Page Size
+          in: query
+          name: size
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            properties:
+              count:
+                description: ''
+                readOnly: true
+                type: integer
+              next:
+                description: ''
+                readOnly: true
+                type: string
+              page:
+                description: ''
+                readOnly: true
+                type: integer
+              previous:
+                description: ''
+                readOnly: true
+                type: string
+              results:
+                description: ''
+                items:
+                  $ref: '#/definitions/Default'
+                readOnly: true
+                type: array
+              size:
+                description: ''
+                readOnly: true
+                type: integer
+            type: object
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Orphan URLs
+      tags:
+        - Analysis
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: path
+        name: project_slug
+        required: true
+        type: string
+      - in: path
+        name: analysis_slug
+        required: true
+        type: string
+      - in: path
+        name: medium
+        required: true
+        type: string
+      - in: path
+        name: source
+        required: true
+        type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/features/links/percentiles':
+    get:
+      description: Links percentiles
+      operationId: getLinksPercentiles
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Default'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Links percentiles
+      tags:
+        - Analysis
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: path
+        name: project_slug
+        required: true
+        type: string
+      - in: path
+        name: analysis_slug
+        required: true
+        type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/features/pagerank/lost':
+    get:
+      description: Lost pagerank
+      operationId: getPageRankLost
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Default'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Lost pagerank
+      tags:
+        - Analysis
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: path
+        name: project_slug
+        required: true
+        type: string
+      - in: path
+        name: analysis_slug
+        required: true
+        type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/features/sitemaps/report':
+    get:
+      description: Sitemaps reports
+      operationId: getSitemapsReport
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Default'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Sitemaps reports
+      tags:
+        - Analysis
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: path
+        name: project_slug
+        required: true
+        type: string
+      - in: path
+        name: analysis_slug
+        required: true
+        type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/features/sitemaps/samples/out_of_config':
+    get:
+      description: 'Sitemaps samples: out of config'
+      operationId: getSitemapsSamplesOutOfConfig
+      parameters:
+        - description: Page Number
+          in: query
+          name: page
+          type: integer
+        - description: Page Size
+          in: query
+          name: size
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            properties:
+              count:
+                description: ''
+                readOnly: true
+                type: integer
+              next:
+                description: ''
+                readOnly: true
+                type: string
+              page:
+                description: ''
+                readOnly: true
+                type: integer
+              previous:
+                description: ''
+                readOnly: true
+                type: string
+              results:
+                description: ''
+                items:
+                  $ref: '#/definitions/Default'
+                readOnly: true
+                type: array
+              size:
+                description: ''
+                readOnly: true
+                type: integer
+            type: object
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: 'Sitemaps samples: out of config'
+      tags:
+        - Analysis
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: path
+        name: project_slug
+        required: true
+        type: string
+      - in: path
+        name: analysis_slug
+        required: true
+        type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/features/sitemaps/samples/sitemap_only':
+    get:
+      description: 'Sitemaps samples: only sitemaps'
+      operationId: getSitemapsSamplesSitemapsOnly
+      parameters:
+        - description: Page Number
+          in: query
+          name: page
+          type: integer
+        - description: Page Size
+          in: query
+          name: size
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            properties:
+              count:
+                description: ''
+                readOnly: true
+                type: integer
+              next:
+                description: ''
+                readOnly: true
+                type: string
+              page:
+                description: ''
+                readOnly: true
+                type: integer
+              previous:
+                description: ''
+                readOnly: true
+                type: string
+              results:
+                description: ''
+                items:
+                  $ref: '#/definitions/Default'
+                readOnly: true
+                type: array
+              size:
+                description: ''
+                readOnly: true
+                type: integer
+            type: object
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: 'Sitemaps samples: only sitemaps'
+      tags:
+        - Analysis
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: path
+        name: project_slug
+        required: true
+        type: string
+      - in: path
+        name: analysis_slug
+        required: true
+        type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/features/top_domains/domains':
+    get:
+      description: Top domains
+      operationId: getLinksTopDomains
+      parameters:
+        - description: Page Number
+          in: query
+          name: page
+          type: integer
+        - description: Page Size
+          in: query
+          name: size
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            properties:
+              count:
+                description: ''
+                readOnly: true
+                type: integer
+              next:
+                description: ''
+                readOnly: true
+                type: string
+              page:
+                description: ''
+                readOnly: true
+                type: integer
+              previous:
+                description: ''
+                readOnly: true
+                type: string
+              results:
+                description: ''
+                items:
+                  $ref: '#/definitions/Default'
+                readOnly: true
+                type: array
+              size:
+                description: ''
+                readOnly: true
+                type: integer
+            type: object
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Top domains
+      tags:
+        - Analysis
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: path
+        name: project_slug
+        required: true
+        type: string
+      - in: path
+        name: analysis_slug
+        required: true
+        type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/features/top_domains/subdomains':
+    get:
+      description: Top subddomains
+      operationId: getLinksTopSubdomains
+      parameters:
+        - description: Page Number
+          in: query
+          name: page
+          type: integer
+        - description: Page Size
+          in: query
+          name: size
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            properties:
+              count:
+                description: ''
+                readOnly: true
+                type: integer
+              next:
+                description: ''
+                readOnly: true
+                type: string
+              page:
+                description: ''
+                readOnly: true
+                type: integer
+              previous:
+                description: ''
+                readOnly: true
+                type: string
+              results:
+                description: ''
+                items:
+                  $ref: '#/definitions/Default'
+                readOnly: true
+                type: array
+              size:
+                description: ''
+                readOnly: true
+                type: integer
+            type: object
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Top subddomains
+      tags:
+        - Analysis
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: path
+        name: project_slug
+        required: true
+        type: string
+      - in: path
+        name: analysis_slug
+        required: true
+        type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/pdf':
+    get:
+      description: Get list of PDF Exports
+      operationId: getPDFExports
+      parameters:
+        - description: Page Number
+          in: query
+          name: page
+          type: integer
+        - description: Page Size
+          in: query
+          name: size
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            properties:
+              count:
+                description: ''
+                readOnly: true
+                type: integer
+              next:
+                description: ''
+                readOnly: true
+                type: string
+              page:
+                description: ''
+                readOnly: true
+                type: integer
+              previous:
+                description: ''
+                readOnly: true
+                type: string
+              results:
+                description: ''
+                items:
+                  $ref: '#/definitions/PdfExportStatus'
+                readOnly: true
+                type: array
+              size:
+                description: ''
+                readOnly: true
+                type: integer
+            type: object
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Get list of PDF Exports
+      tags:
+        - Analysis
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: path
+        name: project_slug
+        required: true
+        type: string
+      - in: path
+        name: analysis_slug
+        required: true
+        type: string
+    post:
+      description: Creates a new PDFExport object and starts a task that will generate the file. Returns the model id that manages the task
+      operationId: createPdfExport
+      parameters:
+        - in: body
+          name: UrlsFilter
+          schema:
+            $ref: '#/definitions/UrlsFilter'
+        - default: current
+          description: ''
+          in: query
+          name: area
+          required: false
+          type: string
+        - collectionFormat: csv
+          description: ''
+          in: query
+          items:
+            type: string
+          name: sections
+          required: false
+          type: array
+      produces:
+        - application/json
+      responses:
+        '201':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/PdfExportStatus'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Creates a new PDFExport object and starts a task that will generate the file
+      tags:
+        - Analysis
+  '/analyses/{username}/{project_slug}/{analysis_slug}/pdf/{pdf_export_id}':
+    get:
+      description: Checks the status of an UrlExport object- - returns json object with the status.
+      operationId: getPdfExportStatus
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/PdfExportStatus'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Checks the status of an UrlExport object-
+      tags:
+        - Analysis
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: path
+        name: project_slug
+        required: true
+        type: string
+      - in: path
+        name: analysis_slug
+        required: true
+        type: string
+      - in: path
+        name: pdf_export_id
+        required: true
+        type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/urls':
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: path
+        name: project_slug
+        required: true
+        type: string
+      - in: path
+        name: analysis_slug
+        required: true
+        type: string
+    post:
+      description: Executes a query and returns a paginated response
+      operationId: getUrls
+      parameters:
+        - in: body
+          name: UrlsQuery
+          schema:
+            $ref: '#/definitions/UrlsQuery'
+        - default: current
+          description: ''
+          in: query
+          name: area
+          required: false
+          type: string
+        - description: Page Number
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Page Size
+          format: int32
+          in: query
+          name: size
+          required: false
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '201':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/UrlsQuery'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Executes a query and returns a paginated response
+      tags:
+        - Analysis
+  '/analyses/{username}/{project_slug}/{analysis_slug}/urls/aggs':
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: path
+        name: project_slug
+        required: true
+        type: string
+      - in: path
+        name: analysis_slug
+        required: true
+        type: string
+    post:
+      description: Query aggregator. It accepts multiple queries
+      operationId: getUrlsAggs
+      parameters:
+        - in: body
+          name: UrlsAggsQueries
+          schema:
+            $ref: '#/definitions/UrlsAggsQueries'
+        - default: current
+          description: ''
+          in: query
+          name: area
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '201':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Default'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Query aggregator
+      tags:
+        - Analysis
+  '/analyses/{username}/{project_slug}/{analysis_slug}/urls/datamodel':
+    get:
+      description: Gets an Analysis datamodel
+      operationId: getUrlsDatamodel
+      parameters:
+        - default: current
+          description: ''
+          in: query
+          name: area
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Default'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Gets an Analysis datamodel
+      tags:
+        - Analysis
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: path
+        name: project_slug
+        required: true
+        type: string
+      - in: path
+        name: analysis_slug
+        required: true
+        type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/urls/export':
+    get:
+      description: Get list of Exported Urls
+      operationId: getUrlsExports
+      parameters:
+        - description: Page Number
+          in: query
+          name: page
+          type: integer
+        - description: Page Size
+          in: query
+          name: size
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            properties:
+              count:
+                description: ''
+                readOnly: true
+                type: integer
+              next:
+                description: ''
+                readOnly: true
+                type: string
+              page:
+                description: ''
+                readOnly: true
+                type: integer
+              previous:
+                description: ''
+                readOnly: true
+                type: string
+              results:
+                description: ''
+                items:
+                  $ref: '#/definitions/CsvExportStatus'
+                readOnly: true
+                type: array
+              size:
+                description: ''
+                readOnly: true
+                type: integer
+            type: object
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Get list of Exported Urls
+      tags:
+        - Analysis
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: path
+        name: project_slug
+        required: true
+        type: string
+      - in: path
+        name: analysis_slug
+        required: true
+        type: string
+    post:
+      description: Creates a new UrlExport object and starts a task that will export the results into a csv. Returns the model id that manages the task
+      operationId: createUrlsExport
+      parameters:
+        - in: body
+          name: UrlsQuery
+          schema:
+            $ref: '#/definitions/UrlsQuery'
+        - default: current
+          description: ''
+          in: query
+          name: area
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '201':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/CsvExportStatus'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Creates a new UrlExport object and starts a task that will export the results into a csv
+      tags:
+        - Analysis
+  '/analyses/{username}/{project_slug}/{analysis_slug}/urls/export/{url_export_id}':
+    get:
+      description: Checks the status of an CSVUrlExportJob object- - returns json object with the status.
+      operationId: getUrlsExportStatus
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/CsvExportStatus'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Checks the status of an CSVUrlExportJob object-
+      tags:
+        - Analysis
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: path
+        name: project_slug
+        required: true
+        type: string
+      - in: path
+        name: analysis_slug
+        required: true
+        type: string
+      - in: path
+        name: url_export_id
+        required: true
+        type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/urls/{url}':
+    get:
+      description: Gets the detail of an URL for an analysis
+      operationId: getUrlDetail
+      parameters:
+        - default: current
+          description: ''
+          in: query
+          name: area
+          required: false
+          type: string
+        - collectionFormat: csv
+          description: ''
+          in: query
+          items:
+            type: string
+          name: fields
+          required: false
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Default'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Gets the detail of an URL for an analysis
+      tags:
+        - Analysis
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: path
+        name: project_slug
+        required: true
+        type: string
+      - in: path
+        name: analysis_slug
+        required: true
+        type: string
+      - in: path
+        name: url
+        required: true
+        type: string
+  '/projects/{username}':
+    get:
+      description: List all active projects for the user
+      operationId: getProjects
+      parameters:
+        - description: Page Number
+          in: query
+          name: page
+          type: integer
+        - description: Page Size
+          in: query
+          name: size
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            properties:
+              count:
+                description: ''
+                readOnly: true
+                type: integer
+              next:
+                description: ''
+                readOnly: true
+                type: string
+              page:
+                description: ''
+                readOnly: true
+                type: integer
+              previous:
+                description: ''
+                readOnly: true
+                type: string
+              results:
+                description: ''
+                items:
+                  $ref: '#/definitions/Project'
+                readOnly: true
+                type: array
+              size:
+                description: ''
+                readOnly: true
+                type: integer
+            type: object
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: List all active projects for the user
+      tags:
+        - Project
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+  '/projects/{username}/{project_slug}/filters':
+    get:
+      description: "List all the project's saved queries"
+      operationId: getSavedFilters
+      parameters:
+        - description: Page Number
+          in: query
+          name: page
+          type: integer
+        - description: Page Size
+          in: query
+          name: size
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            properties:
+              count:
+                description: ''
+                readOnly: true
+                type: integer
+              next:
+                description: ''
+                readOnly: true
+                type: string
+              page:
+                description: ''
+                readOnly: true
+                type: integer
+              previous:
+                description: ''
+                readOnly: true
+                type: string
+              results:
+                description: ''
+                items:
+                  $ref: '#/definitions/ProjectSavedFilter'
+                readOnly: true
+                type: array
+              size:
+                description: ''
+                readOnly: true
+                type: integer
+            type: object
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: "List all the project's saved queries"
+      tags:
+        - Project
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: path
+        name: project_slug
+        required: true
+        type: string
+  '/projects/{username}/{project_slug}/filters/{identifier}':
+    get:
+      description: Retrieves a Saved Query
+      operationId: getSavedFilter
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/ProjectSavedFilter'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Retrieves a Saved Query
+      tags:
+        - Project
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: path
+        name: project_slug
+        required: true
+        type: string
+      - in: path
+        name: identifier
+        required: true
+        type: string
+definitions:
+  Analysis:
+    properties:
+      config:
+        description: ''
+        readOnly: true
+        type: string
+      date_created:
+        description: ''
+        format: date-time
+        readOnly: false
+        type: string
+      date_finished:
+        description: ''
+        format: date-time
+        readOnly: false
+        type: string
+      date_last_modified:
+        description: Date of last modified analysis
+        format: date-time
+        readOnly: false
+        type: string
+      date_launched:
+        description: ''
+        format: date-time
+        readOnly: false
+        type: string
+      features:
+        description: ''
+        readOnly: true
+        type: string
+      id:
+        description: ''
+        format: int64
+        readOnly: true
+        type: integer
+      name:
+        description: ''
+        readOnly: true
+        type: string
+      slug:
+        description: ''
+        readOnly: true
+        type: string
+      url:
+        description: ''
+        readOnly: true
+        type: string
+      urls_done:
+        description: ''
+        readOnly: true
+        type: string
+      urls_in_queue:
+        description: ''
+        readOnly: true
+        type: string
+      user:
+        $ref: '#/definitions/User'
+        description: ''
+        readOnly: false
+    required:
+      - user
+    type: object
+  AnalysisDetail:
+    properties:
+      config:
+        description: ''
+        readOnly: true
+        type: string
+      date_finished:
+        description: ''
+        format: date-time
+        readOnly: false
+        type: string
+      date_last_modified:
+        description: Date of last modified analysis
+        format: date-time
+        readOnly: false
+        type: string
+      date_launched:
+        description: ''
+        format: date-time
+        readOnly: false
+        type: string
+      failures:
+        description: ''
+        readOnly: true
+        type: string
+      features:
+        description: ''
+        readOnly: true
+        type: string
+      id:
+        description: ''
+        format: int64
+        readOnly: true
+        type: integer
+      name:
+        description: ''
+        readOnly: true
+        type: string
+      red_button_domain:
+        description: ''
+        readOnly: false
+        type: string
+      slug:
+        description: ''
+        readOnly: true
+        type: string
+      url:
+        description: ''
+        readOnly: true
+        type: string
+      urls_done:
+        description: ''
+        readOnly: true
+        type: string
+      urls_in_queue:
+        description: ''
+        readOnly: true
+        type: string
+      user:
+        $ref: '#/definitions/User'
+        description: ''
+        readOnly: false
+    required:
+      - user
+    type: object
+  CsvExportStatus:
+    properties:
+      area:
+        description: ''
+        format: int64
+        readOnly: false
+        type: integer
+      date_created:
+        description: ''
+        format: date-time
+        readOnly: true
+        type: string
+      job_id:
+        description: ''
+        readOnly: true
+        type: string
+      job_status:
+        description: ''
+        readOnly: true
+        type: string
+      job_url:
+        description: ''
+        readOnly: true
+        type: string
+      nb_results:
+        description: ''
+        format: int64
+        maximum: 2147483647
+        minimum: 0
+        readOnly: false
+        type: integer
+      query:
+        $ref: '#/definitions/UrlsQuery'
+        description: ''
+        readOnly: false
+      results:
+        description: ''
+        readOnly: true
+        type: object
+    required:
+      - query
+    type: object
+  Default:
+    properties: {}
+    type: object
+  DefaultPayload:
+    description: default payload for object for all HTTP codes that are not covered individually
+    properties:
+      error:
+        properties:
+          error_code:
+            description: Error Code
+            type: string
+          message:
+            description: Error Message
+            type: string
+        type: object
+    type: object
+  FieldValues:
+    properties:
+      count:
+        description: ''
+        format: int64
+        readOnly: false
+        type: integer
+      results:
+        description: ''
+        items:
+          $ref: '#/definitions/FieldValuesResult'
+        readOnly: false
+        type: array
+    required:
+      - count
+      - results
+    type: object
+  FieldValuesResult:
+    properties:
+      nb_urls:
+        description: ''
+        format: int64
+        readOnly: false
+        type: integer
+      value:
+        description: ''
+        readOnly: false
+        type: string
+    required:
+      - value
+      - nb_urls
+    type: object
+  PdfExportStatus:
+    properties:
+      area:
+        default: current
+        description: ''
+        readOnly: false
+        type: string
+      date_created:
+        description: ''
+        format: date-time
+        readOnly: true
+        type: string
+      filters:
+        description: ''
+        readOnly: false
+        type: object
+      job_id:
+        description: ''
+        readOnly: true
+        type: string
+      job_status:
+        description: ''
+        readOnly: true
+        type: string
+      job_url:
+        description: ''
+        readOnly: true
+        type: string
+      results:
+        description: ''
+        readOnly: true
+        type: string
+      sections:
+        description: ''
+        readOnly: false
+        type: string
+    type: object
+  Project:
+    properties:
+      active:
+        description: ''
+        readOnly: false
+        type: boolean
+      current_settings:
+        $ref: '#/definitions/ProjectSettingsSerializer'
+        description: ''
+        readOnly: false
+      date_created:
+        description: ''
+        readOnly: true
+        type: string
+      name:
+        description: ''
+        readOnly: false
+        type: string
+      slug:
+        description: ''
+        readOnly: false
+        type: string
+      user:
+        $ref: '#/definitions/User'
+        description: ''
+        readOnly: false
+    required:
+      - name
+      - slug
+      - user
+      - current_settings
+    type: object
+  ProjectSavedFilter:
+    properties:
+      filters:
+        description: ''
+        readOnly: false
+        type: object
+      identifier:
+        description: ''
+        readOnly: true
+        type: string
+      name:
+        description: ''
+        readOnly: false
+        type: string
+    required:
+      - name
+    type: object
+  ProjectSettingsSerializer:
+    properties:
+      allowed_domains:
+        description: ''
+        readOnly: false
+        type: object
+      blacklisted_domains:
+        description: ''
+        readOnly: false
+        type: object
+      compare_crawl:
+        description: ''
+        readOnly: false
+        type: boolean
+      crawl_gzip:
+        description: ''
+        readOnly: false
+        type: boolean
+      extra_headers:
+        description: ''
+        readOnly: false
+        type: string
+      google_analytics_account_email:
+        description: Keep email in case user delete his social auth connection
+        readOnly: false
+        type: string
+      google_analytics_nb_days:
+        description: ''
+        format: int64
+        maximum: 90
+        minimum: 1
+        readOnly: false
+        type: integer
+      google_analytics_site_id:
+        description: ''
+        format: int64
+        maximum: 2147483647
+        minimum: -2147483648
+        readOnly: false
+        type: integer
+      google_social_auth_id:
+        description: ''
+        format: int64
+        maximum: 2147483647
+        minimum: -2147483648
+        readOnly: false
+        type: integer
+      has_robots_txt:
+        description: ''
+        readOnly: true
+        type: string
+      header_settings:
+        description: ''
+        readOnly: false
+        type: object
+      max_depth:
+        description: ''
+        format: int64
+        maximum: 2147483647
+        minimum: 0
+        readOnly: false
+        type: integer
+      max_nb_pages:
+        description: ''
+        format: int64
+        maximum: 2147483647
+        minimum: 1
+        readOnly: false
+        type: integer
+      max_pages_per_sec:
+        description: ''
+        format: int64
+        maximum: 2147483647
+        minimum: 1
+        readOnly: false
+        type: integer
+      respect_nofollow:
+        description: ''
+        readOnly: false
+        type: boolean
+      sitemaps:
+        description: ''
+        readOnly: false
+        type: object
+      start_urls:
+        description: ''
+        readOnly: false
+        type: object
+      user_agent:
+        description: ''
+        readOnly: false
+        type: string
+    required:
+      - max_nb_pages
+    type: object
+  UrlsAggsQueries:
+    items:
+      $ref: '#/definitions/UrlsAggsQuery'
+    type: array
+  UrlsAggsQuery:
+    properties:
+      aggs:
+        description: ''
+        items:
+          type: object
+        readOnly: false
+        type: array
+      filters:
+        description: ''
+        readOnly: false
+        type: object
+    type: object
+  UrlsFilter:
+    properties:
+      filters:
+        description: ''
+        readOnly: false
+        type: object
+    type: object
+  UrlsQuery:
+    properties:
+      fields:
+        description: ''
+        items:
+          type: string
+        readOnly: false
+        type: array
+      filters:
+        description: ''
+        readOnly: false
+        type: object
+      sort:
+        description: ''
+        items:
+          type: object
+        readOnly: false
+        type: array
+    type: object
+  User:
+    properties:
+      company_name:
+        description: ''
+        readOnly: false
+        type: string
+      date_joined:
+        description: ''
+        format: date-time
+        readOnly: false
+        type: string
+      email:
+        description: ''
+        readOnly: false
+        type: string
+      first_name:
+        description: ''
+        readOnly: false
+        type: string
+      is_organization:
+        description: ''
+        readOnly: true
+        type: string
+      last_name:
+        description: ''
+        readOnly: false
+        type: string
+      login:
+        description: ''
+        readOnly: true
+        type: string
+      status:
+        description: ''
+        readOnly: false
+        type: string
+      url:
+        description: ''
+        readOnly: true
+        type: string
+    type: object
