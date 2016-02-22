@@ -338,8 +338,8 @@ function generateAPIsJSON(specRootUrl) {
       name: info.title,
       description: info.description,
       image: info['x-logo'] && info['x-logo'].url,
-      humanUrl: swagger.externalDocs && swagger.externalDocs.url,
-      baseUrl: swagger.schemes[0] + '://' + swagger.host + swagger.basePath,
+      humanURL: swagger.externalDocs && swagger.externalDocs.url,
+      baseURL: swagger.schemes[0] + '://' + swagger.host + swagger.basePath,
       version: info.version,
       properties: [{
         type: 'Swagger',
