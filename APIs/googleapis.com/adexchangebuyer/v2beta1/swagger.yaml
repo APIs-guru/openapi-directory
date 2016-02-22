@@ -1,0 +1,745 @@
+swagger: '2.0'
+schemes:
+  - https
+host: adexchangebuyer.googleapis.com
+basePath: /
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: The Ad Exchange Buyer API II lets you access the latest features for managing Ad Exchange accounts and Real-Time Bidding configurations.
+  title: Ad Exchange Buyer API II
+  version: v2beta1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.doubleclickbygoogle.com/static/core/img/doubleclick-google-logo-wide.svg'
+  x-origin:
+    format: google
+    url: 'https://adexchangebuyer.googleapis.com/$discovery/rest?version=v2beta1'
+    version: v1
+  x-preferred: false
+  x-providerName: googleapis.com
+  x-serviceName: adexchangebuyer
+externalDocs:
+  url: 'https://developers.google.com/ad-exchange/buyer-rest/guides/client-access/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/adexchange.buyer': Manage your Ad Exchange buyer account configuration
+    type: oauth2
+parameters:
+  $.xgafv:
+    description: V1 error format.
+    enum:
+      - '1'
+      - '2'
+    in: query
+    name: $.xgafv
+    type: string
+  access_token:
+    description: OAuth access token.
+    in: query
+    name: access_token
+    type: string
+  alt:
+    default: json
+    description: Data format for response.
+    enum:
+      - json
+      - media
+      - proto
+    in: query
+    name: alt
+    type: string
+  bearer_token:
+    description: OAuth bearer token.
+    in: query
+    name: bearer_token
+    type: string
+  callback:
+    description: JSONP
+    in: query
+    name: callback
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  pp:
+    default: true
+    description: Pretty-print response.
+    in: query
+    name: pp
+    type: boolean
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+    in: query
+    name: quotaUser
+    type: string
+  uploadType:
+    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+    in: query
+    name: uploadType
+    type: string
+  upload_protocol:
+    description: 'Upload protocol for media (e.g. "raw", "multipart").'
+    in: query
+    name: upload_protocol
+    type: string
+tags:
+  - name: accounts
+paths:
+  '/v2beta1/accounts/{accountId}/clients':
+    get:
+      description: Lists all the clients for the current sponsor buyer.
+      operationId: adexchangebuyer.accounts.clients.list
+      parameters:
+        - description: Unique numerical account ID of the sponsor buyer to list the clients for.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: |-
+            Requested page size. The server may return fewer clients than requested.
+            If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            A token identifying a page of results the server should return.
+            Typically, this is the value of
+            ListClientsResponse.nextPageToken
+            returned from the previous call to the
+            accounts.clients.list method.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListClientsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/bearer_token'
+    post:
+      description: Creates a new client buyer.
+      operationId: adexchangebuyer.accounts.clients.create
+      parameters:
+        - description: |-
+            Unique numerical account ID for the buyer of which the client buyer
+            is a customer; the sponsor buyer to create a client for. (required)
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Client'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Client'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+  '/v2beta1/accounts/{accountId}/clients/{clientAccountId}':
+    get:
+      description: Gets a client buyer with a given client account ID.
+      operationId: adexchangebuyer.accounts.clients.get
+      parameters:
+        - description: "Numerical account ID of the client's sponsor buyer. (required)"
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: Numerical account ID of the client buyer to retrieve. (required)
+          in: path
+          name: clientAccountId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Client'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/bearer_token'
+    put:
+      description: Updates an existing client buyer.
+      operationId: adexchangebuyer.accounts.clients.update
+      parameters:
+        - description: |-
+            Unique numerical account ID for the buyer of which the client buyer
+            is a customer; the sponsor buyer to update a client for. (required)
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: Unique numerical account ID of the client to update. (required)
+          in: path
+          name: clientAccountId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Client'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Client'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+  '/v2beta1/accounts/{accountId}/clients/{clientAccountId}/invitations':
+    get:
+      description: |-
+        Lists all the client users invitations for a client
+        with a given account ID.
+      operationId: adexchangebuyer.accounts.clients.invitations.list
+      parameters:
+        - description: "Numerical account ID of the client's sponsor buyer. (required)"
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: |-
+            Numerical account ID of the client buyer to list invitations for.
+            (required)
+            You must either specify a string representation of a
+            numerical account identifier or the `-` character
+            to list all the invitations for all the clients
+            of a given sponsor buyer.
+          in: path
+          name: clientAccountId
+          required: true
+          type: string
+        - description: |-
+            Requested page size. Server may return fewer clients than requested.
+            If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            A token identifying a page of results the server should return.
+            Typically, this is the value of
+            ListClientUserInvitationsResponse.nextPageToken
+            returned from the previous call to the
+            clients.invitations.list
+            method.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListClientUserInvitationsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/bearer_token'
+    post:
+      description: |-
+        Creates and sends out an email invitation to access
+        an Ad Exchange client buyer account.
+      operationId: adexchangebuyer.accounts.clients.invitations.create
+      parameters:
+        - description: "Numerical account ID of the client's sponsor buyer. (required)"
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: |-
+            Numerical account ID of the client buyer that the user
+            should be associated with. (required)
+          in: path
+          name: clientAccountId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ClientUserInvitation'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ClientUserInvitation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+  '/v2beta1/accounts/{accountId}/clients/{clientAccountId}/invitations/{invitationId}':
+    get:
+      description: Retrieves an existing client user invitation.
+      operationId: adexchangebuyer.accounts.clients.invitations.get
+      parameters:
+        - description: "Numerical account ID of the client's sponsor buyer. (required)"
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: |-
+            Numerical account ID of the client buyer that the user invitation
+            to be retrieved is associated with. (required)
+          in: path
+          name: clientAccountId
+          required: true
+          type: string
+        - description: Numerical identifier of the user invitation to retrieve. (required)
+          in: path
+          name: invitationId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ClientUserInvitation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/bearer_token'
+  '/v2beta1/accounts/{accountId}/clients/{clientAccountId}/users':
+    get:
+      description: |-
+        Lists all the known client users for a specified
+        sponsor buyer account ID.
+      operationId: adexchangebuyer.accounts.clients.users.list
+      parameters:
+        - description: |-
+            Numerical account ID of the sponsor buyer of the client to list users for.
+            (required)
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: |-
+            The account ID of the client buyer to list users for. (required)
+            You must specify either a string representation of a
+            numerical account identifier or the `-` character
+            to list all the client users for all the clients
+            of a given sponsor buyer.
+          in: path
+          name: clientAccountId
+          required: true
+          type: string
+        - description: |-
+            Requested page size. The server may return fewer clients than requested.
+            If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            A token identifying a page of results the server should return.
+            Typically, this is the value of
+            ListClientUsersResponse.nextPageToken
+            returned from the previous call to the
+            accounts.clients.users.list method.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListClientUsersResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/bearer_token'
+  '/v2beta1/accounts/{accountId}/clients/{clientAccountId}/users/{userId}':
+    get:
+      description: Retrieves an existing client user.
+      operationId: adexchangebuyer.accounts.clients.users.get
+      parameters:
+        - description: "Numerical account ID of the client's sponsor buyer. (required)"
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: |-
+            Numerical account ID of the client buyer
+            that the user to be retrieved is associated with. (required)
+          in: path
+          name: clientAccountId
+          required: true
+          type: string
+        - description: Numerical identifier of the user to retrieve. (required)
+          in: path
+          name: userId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ClientUser'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/bearer_token'
+    put:
+      description: |-
+        Updates an existing client user.
+        Only the user status can be changed on update.
+      operationId: adexchangebuyer.accounts.clients.users.update
+      parameters:
+        - description: "Numerical account ID of the client's sponsor buyer. (required)"
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: |-
+            Numerical account ID of the client buyer that the user to be retrieved
+            is associated with. (required)
+          in: path
+          name: clientAccountId
+          required: true
+          type: string
+        - description: Numerical identifier of the user to retrieve. (required)
+          in: path
+          name: userId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ClientUser'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ClientUser'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - accounts
+definitions:
+  Client:
+    description: |-
+      A client resource represents a client buyer&mdash;an agency,
+      a brand, or an advertiser customer of the sponsor buyer.
+      Users associated with the client buyer have restricted access to
+      the Ad Exchange Marketplace and certain other sections
+      of the Ad Exchange Buyer UI based on the role
+      granted to the client buyer.
+      All fields are required unless otherwise specified.
+    properties:
+      clientAccountId:
+        description: |-
+          The globally-unique numerical ID of the client.
+          The value of this field is ignored in create and update operations.
+        format: int64
+        type: string
+      clientName:
+        description: |-
+          Name used to represent this client to publishers.
+          You may have multiple clients that map to the same entity,
+          but for each client the combination of `clientName` and entity
+          must be unique.
+          You can specify this field as empty.
+        type: string
+      entityId:
+        description: |-
+          Numerical identifier of the client entity.
+          The entity can be an advertiser, a brand, or an agency.
+          This identifier is unique among all the entities with the same type.
+
+          A list of all known advertisers with their identifiers is available in the
+          [advertisers.txt](https://storage.googleapis.com/adx-rtb-dictionaries/advertisers.txt)
+          file.
+
+          A list of all known brands with their identifiers is available in the
+          [brands.txt](https://storage.googleapis.com/adx-rtb-dictionaries/brands.txt)
+          file.
+
+          A list of all known agencies with their identifiers is available in the
+          [agencies.txt](https://storage.googleapis.com/adx-rtb-dictionaries/agencies.txt)
+          file.
+        format: int64
+        type: string
+      entityName:
+        description: |-
+          The name of the entity. This field is automatically fetched based on
+          the type and ID.
+          The value of this field is ignored in create and update operations.
+        type: string
+      entityType:
+        description: 'The type of the client entity: `ADVERTISER`, `BRAND`, or `AGENCY`.'
+        enum:
+          - ENTITY_TYPE_UNSPECIFIED
+          - ADVERTISER
+          - BRAND
+          - AGENCY
+        type: string
+      role:
+        description: |-
+          The role which is assigned to the client buyer. Each role implies a set of
+          permissions granted to the client. Must be one of `CLIENT_DEAL_VIEWER`,
+          `CLIENT_DEAL_NEGOTIATOR`, or `CLIENT_DEAL_APPROVER`.
+        enum:
+          - CLIENT_ROLE_UNSPECIFIED
+          - CLIENT_DEAL_VIEWER
+          - CLIENT_DEAL_NEGOTIATOR
+          - CLIENT_DEAL_APPROVER
+        type: string
+      status:
+        description: The status of the client buyer.
+        enum:
+          - CLIENT_STATUS_UNSPECIFIED
+          - DISABLED
+          - ACTIVE
+        type: string
+      visibleToSeller:
+        description: Whether the client buyer will be visible to sellers.
+        type: boolean
+    type: object
+  ClientUser:
+    description: |-
+      A client user is created under a client buyer and has restricted access to
+      the Ad Exchange Marketplace and certain other sections
+      of the Ad Exchange Buyer UI based on the role
+      granted to the associated client buyer.
+
+      The only way a new client user can be created is via accepting an
+      email invitation
+      (see the
+      accounts.clients.invitations.create
+      method).
+
+      All fields are required unless otherwise specified.
+    properties:
+      clientAccountId:
+        description: |-
+          Numerical account ID of the client buyer
+          with which the user is associated; the
+          buyer must be a client of the current sponsor buyer.
+          The value of this field is ignored in an update operation.
+        format: int64
+        type: string
+      email:
+        description: |-
+          User's email address. The value of this field
+          is ignored in an update operation.
+        type: string
+      status:
+        description: The status of the client user.
+        enum:
+          - USER_STATUS_UNSPECIFIED
+          - PENDING
+          - ACTIVE
+          - DISABLED
+        type: string
+      userId:
+        description: |-
+          The unique numerical ID of the client user
+          that has accepted an invitation.
+          The value of this field is ignored in an update operation.
+        format: int64
+        type: string
+    type: object
+  ClientUserInvitation:
+    description: |-
+      An invitation for a new client user to get access to the AdExchange Buyer UI.
+
+      All fields are required unless otherwise specified.
+    properties:
+      clientAccountId:
+        description: |-
+          Numerical account ID of the client buyer
+          that the invited user is associated with.
+          The value of this field is ignored in insert and update operations.
+        format: int64
+        type: string
+      email:
+        description: |-
+          The email address to which the invitation is sent. Email
+          addresses should be unique among all client users under each sponsor
+          buyer.
+        type: string
+      invitationId:
+        description: |-
+          The unique numerical ID of the invitation that is sent to the user.
+          The value of this field is ignored in create operations.
+        format: int64
+        type: string
+    type: object
+  ListClientUserInvitationsResponse:
+    properties:
+      invitations:
+        description: The returned list of client users.
+        items:
+          $ref: '#/definitions/ClientUserInvitation'
+        type: array
+      nextPageToken:
+        description: |-
+          A token to retrieve the next page of results.
+          Pass this value in the
+          ListClientUserInvitationsRequest.pageToken
+          field in the subsequent call to the
+          clients.invitations.list
+          method to retrieve the next
+          page of results.
+        type: string
+    type: object
+  ListClientUsersResponse:
+    properties:
+      nextPageToken:
+        description: |-
+          A token to retrieve the next page of results.
+          Pass this value in the
+          ListClientUsersRequest.pageToken
+          field in the subsequent call to the
+          clients.invitations.list
+          method to retrieve the next
+          page of results.
+        type: string
+      users:
+        description: The returned list of client users.
+        items:
+          $ref: '#/definitions/ClientUser'
+        type: array
+    type: object
+  ListClientsResponse:
+    properties:
+      clients:
+        description: The returned list of clients.
+        items:
+          $ref: '#/definitions/Client'
+        type: array
+      nextPageToken:
+        description: |-
+          A token to retrieve the next page of results.
+          Pass this value in the
+          ListClientsRequest.pageToken
+          field in the subsequent call to the
+          accounts.clients.list method
+          to retrieve the next page of results.
+        type: string
+    type: object

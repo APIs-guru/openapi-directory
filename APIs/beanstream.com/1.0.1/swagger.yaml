@@ -1040,15 +1040,15 @@ definitions:
       - expiry_year
   ProfileFromToken:
     properties:
-      name:
-        description: alphanumeric(64)
+      code:
+        description: The token received from the client-side tokenization service. alphanumeric(64)
         type: string
-      token:
+      name:
         description: alphanumeric(64)
         type: string
     required:
       - name
-      - token
+      - code
   ProfileGetCards:
     properties:
       card:

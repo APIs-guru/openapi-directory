@@ -666,6 +666,9 @@ definitions:
         description: Creation time of this subscription in milliseconds since Unix epoch.
         format: int64
         type: string
+      customerDomain:
+        description: Primary domain name of the customer
+        type: string
       customerId:
         description: The id of the customer to whom the subscription belongs.
         type: string
