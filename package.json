@@ -5,6 +5,7 @@
     "commander": "^2.8.1",
     "csv-stringify": "0.0.8",
     "deep-sort-object": "^0.1.1",
+    "deploy-to-gh-pages": "^1.0.0",
     "editor": "^1.0.0",
     "glob": "^6.0.1",
     "jade": "^1.11.0",
@@ -29,6 +30,7 @@
     "url": "git://github.com/APIs-guru/api-models.git"
   },
   "scripts": {
-    "test": "scripts/collection.js validate"
+    "test": "scripts/collection.js validate",
+    "deploy": "scripts/deploy.sh && deploy-to-gh-pages deploy"
   }
 }
