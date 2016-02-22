@@ -7,6 +7,8 @@ env:
 deploy:
   skip_cleanup: true
   provider: script
-  script: ./scripts/deploy_gh_pages.sh
+  script:
+    - git fetch --unshallow
+    - npm run deploy
   on:
     branch: master
