@@ -325,7 +325,7 @@ function generateCSV(list) {
 
 function generateAPIsJSON(specRootUrl) {
   var apisJsonPath = __dirname + '/apis.json'
-  var collection = extend(readJSON(apisJsonPath), {
+  var collection = _.extend(readJSON(apisJsonPath), {
     added: '2015-10-15',
     modified: new Date().toISOString().substring(0, 10),
     url: specRootUrl + 'apis.json',
