@@ -7,8 +7,6 @@ env:
 deploy:
   skip_cleanup: true
   provider: script
-  script:
-    - git fetch --unshallow
-    - npm run deploy
+  script: 'git fetch --unshallow && npm run deploy'
   on:
     branch: master
