@@ -324,21 +324,13 @@ function generateCSV(list) {
 }
 
 function generateAPIsJSON(specRootUrl) {
-  var collection = {
-    name: 'APIs.guru',
-    description: 'Wikipedia for Web APIs',
-    image: 'https://apis-guru.github.io/api-models/branding/logo_horizontal.svg',
+  var apisJsonPath = __dirname + '/apis.json'
+  var collection = extend(readJSON(apisJsonPath), {
     added: '2015-10-15',
     modified: new Date().toISOString().substring(0, 10),
     url: specRootUrl + 'apis.json',
-    specificationVersion: '0.15',
-    apis: [],
-    maintainers: [{
-      FN: 'APIs.guru',
-      email: 'founders@APIs.guru',
-      photo: 'https://apis-guru.github.io/api-models/branding/logo_horizontal.svg'
-    }]
-  };
+    apis: []
+  });
 
   _.each(getSpecs(), function (swagger) {
     var info = swagger.info;
@@ -983,6 +975,14 @@ function readYaml(filename) {
 
   var data = fs.readFileSync(filename, 'utf-8');
   return YAML.safeLoad(data, {filename: filename});
+}
+
+function readJson(filename) {
+  if (!fs.existsSync(filename))
+    return;
+
+  var data = fs.readFileSync(filename, 'utf-8');
+  return JSON.parse(data);
 }
 
 function getOrigin(swagger) {
