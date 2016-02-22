@@ -1811,9 +1811,9 @@ definitions:
         description: 'Interval type - day, week, month.'
         type: string
     required:
-      - interval
       - date_from
       - date_to
+      - interval
     type: object
   getDailySettlementStatsOut:
     properties:
@@ -1842,8 +1842,8 @@ definitions:
         type: string
     required:
       - country_code
-      - start_month
       - end_month
+      - start_month
     type: object
   getDomesticSummaryReportOut:
     properties:
@@ -1914,9 +1914,9 @@ definitions:
         description: Which transformation should be applied. Please note that transformation will be applied only for xml and csv formats.
         type: string
     required:
+      - end_month
       - eu_country_code
       - start_month
-      - end_month
     type: object
   getEuViesReportOut:
     properties:
@@ -3116,17 +3116,17 @@ definitions:
         description: Purchase/order identifier for single purchase.
         type: string
     required:
-      - purchaser_business_type
-      - purchaser_exemption_reason_value
-      - purchaser_state
-      - purchaser_zip
-      - purchaser_city
-      - purchaser_last_name
-      - purchaser_exemption_reason
-      - purchaser_tax_id
-      - purchaser_address1
-      - purchaser_first_name
       - exempt_states
+      - purchaser_address1
+      - purchaser_business_type
+      - purchaser_city
+      - purchaser_exemption_reason
+      - purchaser_exemption_reason_value
+      - purchaser_first_name
+      - purchaser_last_name
+      - purchaser_state
+      - purchaser_tax_id
+      - purchaser_zip
     type: object
   us_tax_exemption_certificate_schema:
     properties:

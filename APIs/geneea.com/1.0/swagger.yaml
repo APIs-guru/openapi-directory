@@ -549,8 +549,8 @@ definitions:
         description: The raw text of the document which has been analysed
         type: string
     required:
-      - language
       - entities
+      - language
   Entity:
     description: The named entity
     properties:
@@ -573,9 +573,9 @@ definitions:
         type: string
     required:
       - entity
-      - type
-      - textOffset
       - links
+      - textOffset
+      - type
   'Entry«string,long»':
     properties:
       key:
@@ -610,8 +610,8 @@ definitions:
         description: The value of this label
         type: string
     required:
-      - label
       - confidence
+      - label
   LemmatizeResponse:
     description: Response for the lemmatization
     properties:
@@ -668,8 +668,8 @@ definitions:
         description: The raw text of the document which has been analysed
         type: string
     required:
-      - language
       - correctedText
+      - language
   SentimentResponse:
     description: Response for the sentiment analysis
     properties:
@@ -708,7 +708,7 @@ definitions:
         description: Detected topic of the document
         type: string
     required:
-      - language
-      - topic
       - confidence
       - labels
+      - language
+      - topic

@@ -3078,8 +3078,8 @@ definitions:
           This identifier represents where in the message queue this message lies. When you acknowledge the message with this identifier, the system removes the message and any older messages from the queue. You must acknowledge the 'watermark_id' to move forward in the message queue.
         type: string
     required:
-      - target_id
       - msg_id
+      - target_id
       - watermark_id
   MessageAcknowledge:
     properties:
@@ -3106,9 +3106,9 @@ definitions:
           The type of message is application-defined. For example, the message type could be message.create.wipe (to wipe the device), message.create.unlock (to unlock a door), or message.create.ping (to ping a device).
         type: string
     required:
-      - type
-      - target_id
       - data
+      - target_id
+      - type
   MessageFilter:
     description: A filter for the message.
     properties:

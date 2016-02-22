@@ -1355,11 +1355,11 @@ definitions:
           - canceled
         type: string
     required:
-      - id
       - backup_instance_id
-      - status
-      - started_at
       - ended_at
+      - id
+      - started_at
+      - status
   backup_definition:
     properties:
       description:
@@ -1373,11 +1373,11 @@ definitions:
       vendor_id:
         type: integer
     required:
+      - description
       - id
       - name
-      - description
-      - vendor_id
       - published
+      - vendor_id
   backup_definition_variable:
     properties:
       default_value:
@@ -1432,9 +1432,9 @@ definitions:
         format: date-time
         type: string
     required:
-      - id
       - backup_definition_id
       - customer_id
+      - id
   backup_instance_endpoint:
     properties:
       description:
@@ -1516,11 +1516,11 @@ definitions:
           - canceled
         type: string
     required:
-      - id
       - backup_instance_id
-      - status
-      - started_at
       - ended_at
+      - id
+      - started_at
+      - status
   export_reauth:
     properties:
       exported_data_url:
@@ -1541,8 +1541,8 @@ definitions:
         type: string
     required:
       - access_token
-      - token_type
       - expires_in
+      - token_type
   vendor_user:
     properties:
       client_id:
@@ -1561,8 +1561,8 @@ definitions:
         description: The ID of the vendor.
         type: integer
     required:
-      - vendor_id
-      - name
-      - email
       - client_id
       - client_secret
+      - email
+      - name
+      - vendor_id

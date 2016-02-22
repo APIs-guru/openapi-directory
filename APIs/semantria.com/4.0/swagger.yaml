@@ -1195,8 +1195,8 @@ definitions:
           $ref: '#/definitions/Mention'
         type: array
     required:
-      - label
       - count
+      - label
       - mentions
   AutoCategory:
     properties:
@@ -1216,10 +1216,10 @@ definitions:
         description: 'Type of category; can be either "node" (root level) or "leaf" (nested) value'
         type: string
     required:
+      - categories
+      - strength_score
       - title
       - type
-      - strength_score
-      - categories
   Category:
     properties:
       name:
@@ -1233,8 +1233,8 @@ definitions:
         type: number
     required:
       - name
-      - weight
       - samples
+      - weight
   Collection:
     properties:
       documents:
@@ -1252,10 +1252,10 @@ definitions:
         description: Any text of up to 50 characters used like marker
         type: string
     required:
-      - id
-      - tag
-      - job_id
       - documents
+      - id
+      - job_id
+      - tag
   CollectionAnalyticData:
     properties:
       config_id:
@@ -1298,14 +1298,14 @@ definitions:
           $ref: '#/definitions/Topic'
         type: array
     required:
-      - id
       - config_id
-      - tag
-      - status
-      - job_id
-      - facets
-      - themes
       - entities
+      - facets
+      - id
+      - job_id
+      - status
+      - tag
+      - themes
       - topics
   Configuration:
     properties:
@@ -1352,19 +1352,19 @@ definitions:
         description: 'Leads the service to clean HTML tags before processing. Default: false'
         type: boolean
     required:
-      - config_id
-      - name
-      - is_primary
       - auto_response
-      - chars_threshold
+      - callback
       - categories_threshold
+      - chars_threshold
+      - collection
+      - config_id
+      - document
       - entities_threshold
+      - is_primary
+      - language
+      - name
       - one_sentence
       - process_html
-      - language
-      - callback
-      - document
-      - collection
   ConfigurationCollectionSection:
     properties:
       attribute_mentions_limit:
@@ -1428,16 +1428,16 @@ definitions:
         minimum: 0
         type: integer
     required:
-      - facets_limit
-      - facet_atts_limit
-      - facet_mentions_limit
       - attribute_mentions_limit
       - concept_topics_limit
-      - query_topics_limit
+      - facet_atts_limit
+      - facet_mentions_limit
+      - facets_limit
       - named_entities_limit
       - named_mentions_limit
-      - themes_limit
+      - query_topics_limit
       - theme_mentions_limit
+      - themes_limit
       - user_entities_limit
       - user_mentions_limit
   ConfigurationDocumentSection:
@@ -1549,27 +1549,27 @@ definitions:
         minimum: 0
         type: integer
     required:
-      - model_sentiment
-      - intentions
-      - concept_topics_limit
-      - query_topics_limit
       - auto_categories_limit
-      - named_entities_limit
-      - user_entities_limit
-      - entity_themes_limit
-      - named_mentions_limit
-      - user_mentions_limit
-      - themes_limit
-      - theme_mentions_limit
-      - named_relations_limit
-      - user_relations_limit
-      - named_opinions_limit
-      - user_opinions_limit
-      - phrases_limit
-      - possible_phrases_limit
-      - pos_types
-      - summary_limit
+      - concept_topics_limit
       - detect_language
+      - entity_themes_limit
+      - intentions
+      - model_sentiment
+      - named_entities_limit
+      - named_mentions_limit
+      - named_opinions_limit
+      - named_relations_limit
+      - phrases_limit
+      - pos_types
+      - possible_phrases_limit
+      - query_topics_limit
+      - summary_limit
+      - theme_mentions_limit
+      - themes_limit
+      - user_entities_limit
+      - user_mentions_limit
+      - user_opinions_limit
+      - user_relations_limit
   Details:
     properties:
       is_imperative:
@@ -1603,9 +1603,9 @@ definitions:
         type: string
     required:
       - id
-      - text
-      - tag
       - job_id
+      - tag
+      - text
   DocumentAnalyticData:
     properties:
       auto_categories:
@@ -1697,26 +1697,26 @@ definitions:
           $ref: '#/definitions/Topic'
         type: array
     required:
-      - id
+      - auto_categories
       - config_id
-      - status
+      - details
+      - entities
+      - id
+      - intentions
       - job_id
-      - source_text
-      - summary
       - language
       - language_score
-      - sentiment_score
-      - sentiment_polarity
       - model_sentiment
-      - details
-      - auto_categories
-      - phrases
-      - themes
-      - entities
-      - relations
       - opinions
+      - phrases
+      - relations
+      - sentiment_polarity
+      - sentiment_score
+      - source_text
+      - status
+      - summary
+      - themes
       - topics
-      - intentions
   Entity:
     properties:
       count:
@@ -1756,15 +1756,15 @@ definitions:
           - user
         type: string
     required:
-      - title
-      - label
-      - type
-      - entity_type
       - count
-      - negative_count
-      - positive_count
-      - neutral_count
+      - entity_type
+      - label
       - mentions
+      - negative_count
+      - neutral_count
+      - positive_count
+      - title
+      - type
   Facet:
     properties:
       attributes:
@@ -1797,13 +1797,13 @@ definitions:
         minimum: 0
         type: integer
     required:
-      - label
-      - count
-      - negative_count
-      - positive_count
-      - neutral_count
       - attributes
+      - count
+      - label
       - mentions
+      - negative_count
+      - neutral_count
+      - positive_count
   Feature:
     properties:
       detailed_mode:
@@ -1825,12 +1825,12 @@ definitions:
         $ref: '#/definitions/FeatureSettingsSection'
         description: Includes analysis adjustment options for certain language
     required:
-      - id
-      - language
-      - html_processing
-      - settings
       - detailed_mode
       - discovery_mode
+      - html_processing
+      - id
+      - language
+      - settings
   FeatureDetailedModeSection:
     properties:
       auto_categories:
@@ -1888,24 +1888,24 @@ definitions:
         description: Represents whether user entities extraction supported for certain language or not
         type: boolean
     required:
-      - model_sentiment
+      - auto_categories
+      - entity_mentions
+      - entity_opinions
+      - entity_relations
+      - entity_themes
+      - intentions
       - language_detection
+      - model_sentiment
+      - named_entities
+      - pos_tagging
+      - queries
       - sentiment
       - sentiment_phrases
-      - pos_tagging
       - summarization
-      - intentions
-      - themes
       - theme_mentions
-      - named_entities
-      - user_entities
-      - entity_relations
-      - entity_opinions
-      - entity_mentions
-      - entity_themes
-      - auto_categories
+      - themes
       - user_categories
-      - queries
+      - user_entities
   FeatureDiscoveryModeSection:
     properties:
       entity_mentions:
@@ -1939,16 +1939,16 @@ definitions:
         description: Represents whether user entities extraction supported for certain language or not
         type: boolean
     required:
-      - facets
+      - entity_mentions
       - facet_attributes
       - facet_mentioins
-      - themes
-      - theme_mentions
+      - facets
       - named_entities
-      - user_entities
-      - entity_mentions
-      - user_categories
       - queries
+      - theme_mentions
+      - themes
+      - user_categories
+      - user_entities
   FeatureSettingsSection:
     properties:
       blacklist:
@@ -1967,11 +1967,11 @@ definitions:
         description: Represents whether user entities definition supported for certain language or not
         type: boolean
     required:
-      - sentiment_phrases
-      - user_entities
-      - user_categories
-      - queries
       - blacklist
+      - queries
+      - sentiment_phrases
+      - user_categories
+      - user_entities
   Intention:
     properties:
       evidence_phrase:
@@ -1987,10 +1987,10 @@ definitions:
         description: The author of the intention (if detected)
         type: string
     required:
-      - type
       - evidence_phrase
-      - who
+      - type
       - what
+      - who
   Location:
     properties:
       index:
@@ -2004,8 +2004,8 @@ definitions:
         type: integer
     required:
       - index
-      - offset
       - length
+      - offset
   Mention:
     properties:
       is_negated:
@@ -2023,10 +2023,10 @@ definitions:
         description: 'If the mention has been negated, this gives the negating phrase'
         type: string
     required:
-      - label
       - is_negated
-      - negating_phrase
+      - label
       - locations
+      - negating_phrase
   ModelSentiment:
     properties:
       mixed_score:
@@ -2056,8 +2056,8 @@ definitions:
           - neutral
         type: string
     required:
-      - model_name
       - mixed_score
+      - model_name
       - negative_score
       - neutral_score
       - positive_score
@@ -2093,11 +2093,11 @@ definitions:
         type: string
     required:
       - quotation
-      - type
+      - sentiment_polarity
+      - sentiment_score
       - speaker
       - topic
-      - sentiment_score
-      - sentiment_polarity
+      - type
   Phrase:
     properties:
       intensifying_phrase:
@@ -2130,14 +2130,14 @@ definitions:
         description: The sentiment score associated with the word
         type: string
     required:
-      - title
-      - type
-      - sentiment_score
-      - sentiment_polarity
+      - intensifying_phrase
+      - is_intensified
       - is_negated
       - negating_phrase
-      - is_intensified
-      - intensifying_phrase
+      - sentiment_polarity
+      - sentiment_score
+      - title
+      - type
   Query:
     properties:
       name:
@@ -2171,11 +2171,11 @@ definitions:
           - user
         type: string
     required:
-      - type
-      - relation_type
       - confidence_score
-      - extra
       - entities
+      - extra
+      - relation_type
+      - type
   RelationEntity:
     properties:
       entity_type:
@@ -2185,8 +2185,8 @@ definitions:
         description: Normalized entity title based on existing entity normalization rules
         type: string
     required:
-      - title
       - entity_type
+      - title
   Request_class: {}
   Statistic:
     properties:
@@ -2272,27 +2272,27 @@ definitions:
         description: A list of all the applications that have used the API on this account
         type: string
     required:
+      - calls_data
+      - calls_polling
+      - calls_settings
+      - colls_documents
+      - colls_failed
+      - colls_processed
+      - colls_responded
+      - configurations
+      - docs_failed
+      - docs_processed
+      - docs_responded
+      - latest_used_app
       - name
-      - status
-      - overall_texts
       - overall_batches
       - overall_calls
-      - overall_exceeded
-      - calls_settings
-      - calls_polling
-      - calls_data
       - overall_docs
-      - docs_processed
-      - docs_failed
-      - docs_responded
+      - overall_exceeded
+      - overall_texts
       - overcall_colls
-      - colls_processed
-      - colls_failed
-      - colls_responded
-      - colls_documents
-      - latest_used_app
+      - status
       - used_app
-      - configurations
   StatisticConfiguration:
     properties:
       calls_data:
@@ -2368,24 +2368,24 @@ definitions:
         description: A list of all the applications that have used the API on this account
         type: string
     required:
+      - calls_data
+      - calls_polling
+      - calls_settings
+      - colls_failed
+      - colls_processed
+      - colls_responded
       - config_id
+      - docs_failed
+      - docs_processed
+      - docs_responded
+      - latest_used_app
       - name
-      - overall_texts
       - overall_batches
       - overall_calls
-      - overall_exceeded
-      - calls_settings
-      - calls_polling
-      - calls_data
       - overall_docs
-      - docs_processed
-      - docs_failed
-      - docs_responded
+      - overall_exceeded
+      - overall_texts
       - overcall_colls
-      - colls_processed
-      - colls_failed
-      - colls_responded
-      - latest_used_app
       - used_app
   Status:
     properties:
@@ -2414,11 +2414,11 @@ definitions:
           type: string
         type: array
     required:
-      - service_status
       - api_version
+      - service_status
       - service_version
-      - supported_encoding
       - supported_compression
+      - supported_encoding
       - supported_languages
   SubCategory:
     properties:
@@ -2433,9 +2433,9 @@ definitions:
         description: 'Type of category; can be either "node" (root level) or "leaf" (nested) value'
         type: string
     required:
+      - sentiment_score
       - title
       - type
-      - sentiment_score
   Subscription:
     properties:
       basic_settings:
@@ -2454,11 +2454,11 @@ definitions:
         description: 'Semantria subscriber status. Can be active, expired, disabled, etc'
         type: string
     required:
+      - basic_settings
+      - billing_settings
+      - feature_settings
       - name
       - status
-      - billing_settings
-      - basic_settings
-      - feature_settings
   SubscriptionBasicSection:
     properties:
       auto_response_limit:
@@ -2521,21 +2521,21 @@ definitions:
         minimum: 0
         type: integer
     required:
-      - configurations_limit
-      - output_data_limit
+      - auto_response_limit
+      - batch_limit
       - blacklist_limit
+      - callback_batch_limit
       - categories_limit
       - category_samples_limit
-      - queries_limit
-      - entities_limit
-      - sentiment_limit
       - characters_limit
-      - batch_limit
       - collection_limit
-      - auto_response_limit
+      - configurations_limit
+      - entities_limit
+      - output_data_limit
       - processed_batch_limit
-      - callback_batch_limit
+      - queries_limit
       - return_source_text
+      - sentiment_limit
   SubscriptionBillingSection:
     properties:
       app_seats_allocated:
@@ -2612,15 +2612,8 @@ definitions:
         minimum: 0
         type: integer
     required:
-      - priority
-      - expiration_date
-      - limit_type
-      - settings_calls_balance
-      - settings_calls_limit
-      - settings_calls_limit_interval
-      - polling_calls_balance
-      - polling_calls_limit
-      - polling_calls_limit_interval
+      - app_seats_allocated
+      - app_seats_permitted
       - data_calls_balance
       - data_calls_limit
       - data_calls_limit_interval
@@ -2629,8 +2622,15 @@ definitions:
       - docs_limit_interval
       - docs_suggested
       - docs_suggested_interval
-      - app_seats_permitted
-      - app_seats_allocated
+      - expiration_date
+      - limit_type
+      - polling_calls_balance
+      - polling_calls_limit
+      - polling_calls_limit_interval
+      - priority
+      - settings_calls_balance
+      - settings_calls_limit
+      - settings_calls_limit_interval
   SubscriptionFeatureSection:
     properties:
       collection:
@@ -2646,10 +2646,10 @@ definitions:
         description: Lists all languages which are allowed for current subscription
         type: string
     required:
-      - supported_languages
-      - html_processing
-      - document
       - collection
+      - document
+      - html_processing
+      - supported_languages
   SubscriptionFeatureSectionCollection:
     properties:
       concept_topics:
@@ -2674,13 +2674,13 @@ definitions:
         description: Indicates whether user entities feature is allowed or not
         type: boolean
     required:
+      - concept_topics
       - facets
       - mentions
-      - themes
       - named_entities
-      - user_entities
       - query_topics
-      - concept_topics
+      - themes
+      - user_entities
   SubscriptionFeatureSectionDocument:
     properties:
       auto_categories:
@@ -2738,24 +2738,24 @@ definitions:
         description: Indicates whether relations for user entities are allowed or not
         type: boolean
     required:
-      - model_sentiment
-      - summary
-      - themes
-      - named_entities
-      - user_entities
-      - intentions
-      - entity_themes
-      - mentions
-      - opinions
-      - named_relations
-      - user_relations
-      - query_topics
+      - auto_categories
       - concept_topics
-      - sentiment_phrases
+      - entity_themes
+      - intentions
+      - language_detection
+      - mentions
+      - model_sentiment
+      - named_entities
+      - named_relations
+      - opinions
       - phrases_detection
       - pos_tagging
-      - language_detection
-      - auto_categories
+      - query_topics
+      - sentiment_phrases
+      - summary
+      - themes
+      - user_entities
+      - user_relations
   Theme:
     properties:
       mentions:
@@ -2786,12 +2786,12 @@ definitions:
         description: The text of the theme across the documents
         type: string
     required:
-      - sentiment_polarity
-      - themes_count
-      - phrases_count
-      - sentiment_score
-      - title
       - mentions
+      - phrases_count
+      - sentiment_polarity
+      - sentiment_score
+      - themes_count
+      - title
   Topic:
     properties:
       hitcount:
@@ -2824,12 +2824,12 @@ definitions:
           - query
         type: string
     required:
-      - title
-      - type
       - hitcount
-      - sentiment_score
       - sentiment_polarity
+      - sentiment_score
+      - title
       - topics
+      - type
   Word:
     properties:
       is_negated:
@@ -2852,9 +2852,9 @@ definitions:
         description: Verbal representation of part of speech in addition to certain tag
         type: string
     required:
-      - tag
-      - type
-      - title
-      - stemmed
       - is_negated
       - sentiment_score
+      - stemmed
+      - tag
+      - title
+      - type

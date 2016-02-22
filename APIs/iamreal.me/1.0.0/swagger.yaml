@@ -217,9 +217,9 @@ definitions:
         description: Social network access token of the end user
         type: string
     required:
-      - token
       - appId
       - appSecret
+      - token
   SmsValidationResponse:
     properties:
       validated:
@@ -239,9 +239,9 @@ definitions:
         description: User Id given by provider (e.g. Facebook Id)
         type: string
     required:
-      - userId
       - score
       - significance
+      - userId
   VideoValidationRequest:
     properties:
       appId:
@@ -265,8 +265,8 @@ definitions:
     required:
       - appId
       - appSecret
-      - userId
       - photoUrl
+      - userId
   VideoValidationResponse:
     properties:
       guid:
@@ -276,5 +276,5 @@ definitions:
         description: status code (201 - Created)
         type: string
     required:
-      - statusCode
       - guid
+      - statusCode

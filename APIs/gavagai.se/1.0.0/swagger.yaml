@@ -252,8 +252,8 @@ definitions:
         description: The keyword term.
         type: string
     required:
-      - term
       - occurrences
+      - term
   Label:
     properties:
       label:
@@ -305,16 +305,16 @@ definitions:
       wordInformation:
         $ref: '#/definitions/WordInformation'
     required:
-      - wordInformation
-      - semanticallySimilarWords
-      - leftSideNeighbours
-      - rightSideNeighbours
       - associations
-      - stringSimilarWords
-      - startsWithWords
       - endsWithWords
+      - leftSideNeighbours
       - nGrams
+      - rightSideNeighbours
       - semanticallySimilarWordFilaments
+      - semanticallySimilarWords
+      - startsWithWords
+      - stringSimilarWords
+      - wordInformation
   Score:
     properties:
       normalizedScore:
@@ -330,9 +330,9 @@ definitions:
         description: The name of the tone.
         type: string
     required:
-      - tone
-      - score
       - normalizedScore
+      - score
+      - tone
   ScoredText:
     properties:
       id:
@@ -413,8 +413,8 @@ definitions:
         description: The title of the text.
         type: string
     required:
-      - title
       - id
+      - title
   TonalityRequest:
     properties:
       language:
@@ -460,8 +460,8 @@ definitions:
         type: array
     required:
       - headline
-      - summary
       - keywords
+      - summary
       - texts
   TopicText:
     properties:
@@ -477,8 +477,8 @@ definitions:
           type: string
         type: array
     required:
-      - title
       - id
+      - title
       - utterances
   TopicsRequest:
     properties:
@@ -527,9 +527,9 @@ definitions:
       word:
         type: string
     required:
-      - word
       - forWord
       - strength
+      - word
   WordInformation:
     properties:
       additionalInformation:
@@ -543,10 +543,10 @@ definitions:
       word:
         type: string
     required:
-      - word
-      - frequency
       - documentFrequency
+      - frequency
       - ranksHigherThanPercentage
+      - word
   keywordsRequest:
     properties:
       language:
@@ -573,5 +573,5 @@ definitions:
         description: The total number of keywords in the texts
         type: number
     required:
-      - numberOfKeywords
       - keywords
+      - numberOfKeywords

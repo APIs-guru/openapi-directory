@@ -627,12 +627,12 @@ definitions:
         description: Object version
         type: integer
     required:
-      - id
-      - version
-      - created
-      - updated
       - _class
       - _links
+      - created
+      - id
+      - updated
+      - version
   Collection:
     $ref: '#/definitions/object'
     properties:
@@ -652,10 +652,10 @@ definitions:
         description: Total number of items available
         type: integer
     required:
-      - total
-      - limit
       - _class
       - _links
+      - limit
+      - total
   Insight:
     $ref: '#/definitions/object'
     properties:
@@ -691,14 +691,14 @@ definitions:
         description: 'Date the insight was updated, ex. "2014-02-25T14:23:45Z"'
         type: string
     required:
-      - id
-      - bundle_id
-      - name
-      - status
-      - created
-      - updated
       - _class
       - _links
+      - bundle_id
+      - created
+      - id
+      - name
+      - status
+      - updated
   Insights:
     $ref: '#/definitions/object'
     properties:
@@ -718,11 +718,11 @@ definitions:
         description: 'Date the insights was updated, ex. "2014-02-25T14:23:45Z"'
         type: string
     required:
+      - _class
+      - _links
       - bundle_id
       - created
       - updated
-      - _class
-      - _links
   ItemResult:
     $ref: '#/definitions/object'
     properties:
@@ -773,13 +773,13 @@ definitions:
         description: Object version
         type: integer
     required:
-      - bundle_id
-      - version
-      - created
-      - updated
-      - data
       - _class
       - _links
+      - bundle_id
+      - created
+      - data
+      - updated
+      - version
   Ref:
     $ref: '#/definitions/object'
     properties:
@@ -805,9 +805,9 @@ definitions:
         description: id of the bundle
         type: string
     required:
-      - id
       - _class
       - _links
+      - id
   SearchCollection:
     $ref: '#/definitions/object'
     properties:
@@ -837,12 +837,12 @@ definitions:
         description: Total number of items available
         type: integer
     required:
-      - total
-      - limit
-      - search_terms
-      - item_results
       - _class
       - _links
+      - item_results
+      - limit
+      - search_terms
+      - total
   SearchTerm:
     $ref: '#/definitions/object'
     properties:
@@ -866,8 +866,8 @@ definitions:
         description: 'Type of match: "text", "array", or "audio"'
         type: string
     required:
-      - type
       - hits
+      - type
   TermResult:
     $ref: '#/definitions/object'
     properties:
@@ -880,8 +880,8 @@ definitions:
         description: Score for the search term in the item. A value between 0 and 1
         type: number
     required:
-      - score
       - matches
+      - score
   Track:
     $ref: '#/definitions/object'
     properties:
@@ -942,20 +942,20 @@ definitions:
         description: 'Date the track was updated, ex. "2014-02-25T14:23:45Z"'
         type: string
     required:
-      - id
-      - track
-      - media_url
+      - _class
+      - _links
       - audio_channel
       - audio_language
       - created
-      - updated
-      - status
-      - media_size
       - duration
       - fetch_response_code
+      - id
       - media_code
-      - _class
-      - _links
+      - media_size
+      - media_url
+      - status
+      - track
+      - updated
   Track_(array_item):
     $ref: '#/definitions/object'
     properties:
@@ -1010,18 +1010,18 @@ definitions:
         description: 'Date the track was updated, ex. "2014-02-25T14:23:45Z"'
         type: string
     required:
-      - id
-      - track
-      - media_url
       - audio_channel
       - audio_language
       - created
-      - updated
-      - status
-      - media_size
       - duration
       - fetch_response_code
+      - id
       - media_code
+      - media_size
+      - media_url
+      - status
+      - track
+      - updated
   Tracks:
     $ref: '#/definitions/object'
     properties:
@@ -1052,13 +1052,13 @@ definitions:
         description: Object version
         type: integer
     required:
-      - bundle_id
-      - version
-      - status
-      - created
-      - updated
-      - tracks
       - _class
       - _links
+      - bundle_id
+      - created
+      - status
+      - tracks
+      - updated
+      - version
   object:
     $ref: '#/definitions/object'

@@ -75,9 +75,9 @@ paths:
         '503':
           description: unknown
       security:
-        - oauth2_implicit:
-            - write
         - oauth2_accessCode:
+            - write
+        - oauth2_implicit:
             - write
       summary: Send a batch for the given site
       tags:
@@ -109,9 +109,9 @@ paths:
         '503':
           description: unknown
       security:
-        - oauth2_implicit:
-            - write
         - oauth2_accessCode:
+            - write
+        - oauth2_implicit:
             - write
       summary: Send a cart for the given site
       tags:
@@ -143,9 +143,9 @@ paths:
         '503':
           description: unknown
       security:
-        - oauth2_implicit:
-            - write
         - oauth2_accessCode:
+            - write
+        - oauth2_implicit:
             - write
       summary: Send a category for the given site
       tags:
@@ -177,9 +177,9 @@ paths:
         '503':
           description: unknown
       security:
-        - oauth2_implicit:
-            - write
         - oauth2_accessCode:
+            - write
+        - oauth2_implicit:
             - write
       summary: Send a customer for the given site
       tags:
@@ -211,9 +211,9 @@ paths:
         '503':
           description: unknown
       security:
-        - oauth2_implicit:
-            - write
         - oauth2_accessCode:
+            - write
+        - oauth2_implicit:
             - write
       summary: Send a order for the given site
       tags:
@@ -245,9 +245,9 @@ paths:
         '503':
           description: unknown
       security:
-        - oauth2_implicit:
-            - write
         - oauth2_accessCode:
+            - write
+        - oauth2_implicit:
             - write
       summary: Send a product for the given site
       tags:

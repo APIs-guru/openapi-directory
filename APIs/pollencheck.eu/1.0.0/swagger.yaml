@@ -16,10 +16,10 @@ info:
     version: '1.2'
   x-providerName: pollencheck.eu
 tags:
-  - description: Operations about Locations
-    name: locations
   - description: Get Pollen Forecasts
     name: forecasts
+  - description: Operations about Locations
+    name: locations
 paths:
   '/api/1/forecasts/{woeid}':
     get:
@@ -170,13 +170,13 @@ definitions:
         description: Initial time of this period as unix timestamp (milliseconds from 1/1/1970)
         type: number
     required:
+      - birch
+      - combined
+      - grass
+      - olive
+      - ragweed
       - time
       - timestamp
-      - combined
-      - olive
-      - grass
-      - birch
-      - ragweed
   ForecastDailyFacade:
     properties:
       active:
@@ -205,10 +205,10 @@ definitions:
         description: 'Where On Earth ID (WOEID) as defined by Yahoo [https://developer.yahoo.com/geo/geoplanet/guide/concepts.html#woeids]'
         type: number
     required:
-      - woeid
       - creationTime
-      - location
       - interval
+      - location
+      - woeid
   ForecastHourlyFacade:
     properties:
       active:
@@ -237,10 +237,10 @@ definitions:
         description: 'Where On Earth ID (WOEID) as defined by Yahoo [https://developer.yahoo.com/geo/geoplanet/guide/concepts.html#woeids]'
         type: number
     required:
-      - woeid
       - creationTime
-      - location
       - interval
+      - location
+      - woeid
   HourlyPeriod:
     properties:
       birch:
@@ -269,13 +269,13 @@ definitions:
         description: Initial time of this forecast as unix timestamp (milliseconds from 1/1/1970)
         type: number
     required:
+      - birch
+      - combined
+      - grass
+      - olive
+      - ragweed
       - time
       - timestamp
-      - combined
-      - olive
-      - grass
-      - birch
-      - ragweed
   Location:
     properties:
       active:
@@ -362,10 +362,10 @@ definitions:
     required:
       - avgCounter
       - avgLevel
-      - minCounter
-      - minLevel
       - maxCounter
       - maxLevel
+      - minCounter
+      - minLevel
   PollenHourlyPeriod:
     properties:
       counter:
