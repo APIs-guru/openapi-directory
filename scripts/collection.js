@@ -448,14 +448,17 @@ function addToCollection(type, url, command) {
         return;
       }
 
-      var match = data.match(/\?+ Swagger.*$((?:.|\n)*?)^[!*-]/m);
-      if (!match || !match[1]) {
+      var match = data.match(/^\++ Begin.*$((?:.|\n)*?)^\?+ Swagger.*$((?:.|\n)*?)^[!*-]/m);
+      if (!match || !match[1] || !match[2]) {
         console.error('Can not match edited Swagger');
         process.exitCode = errExitCode;
         return;
       }
-      var editedSwagger = YAML.safeLoad(match[1]);
-      saveFixup(result.swagger, editedSwagger);
+
+      var editedOrigin = YAML.safeLoad(match[1]);
+      var editedSwagger = YAML.safeLoad(match[2]);
+      saveFixup(getOriginFixupPath(result.spec), serilazeSpec(result.spec), editedOrigin);
+      saveFixup(getSwaggerPath(result.swagger, 'fixup.yaml'), result.swagger, editedSwagger);
     });
   });
 }
@@ -472,9 +475,11 @@ function editFile(data, cb) {
   });
 }
 
-function saveFixup(swagger, editedSwagger) {
-  var fixupPath = getSwaggerPath(swagger, 'fixup.yaml');
+function getOriginFixupPath(spec) {
+  return '../fixes/' + encodeURIComponent(spec.source) + '.yaml';
+}
 
+function saveFixup(fixupPath, swagger, editedSwagger) {
   //Before diff we need to unpatch, it's a way to appeand changes
   var fixup = readYaml(fixupPath);
   if (fixup)
@@ -554,6 +559,9 @@ function writeSpec(source, type, exPatch, callback) {
   var getSpecTask = converter.getSpec.bind(this, source, type);
   async.retry({}, getSpecTask, function (err, spec) {
     assert(!err, err);
+
+    var fixup = readYaml(getOriginFixupPath(spec));
+    jsondiffpatch.patch(spec, fixup);
 
     convertToSwagger(spec, function (error, swagger) {
       var result = {
@@ -803,6 +811,13 @@ function logError(error, context) {
   process.exitCode = errExitCode;
 }
 
+function serilazeSpec(spec) {
+  var data = {spec: spec.spec};
+  if (spec.subResources)
+    data.subResources = spec.subResources;
+  return data;
+}
+
 function errorToString(errors, context) {
   var spec = context.spec;
   var swagger = context.swagger;
@@ -811,9 +826,7 @@ function errorToString(errors, context) {
 
   var result = '++++++++++++++++++++++++++ Begin ' + url + ' +++++++++++++++++++++++++\n';
   if (spec.type !== 'swagger_2' || _.isUndefined(swagger)) {
-    result += Yaml2String(spec.spec);
-    if (spec.subResources)
-      result += Yaml2String(spec.subResources);
+    result += Yaml2String(serilazeSpec(spec));
   }
 
   if (!_.isUndefined(swagger)) {
@@ -922,7 +935,7 @@ function patchSwagger(swagger, exPatch) {
   applyMergePatch(swagger, patch);
 
   var fixup = readYaml(getSwaggerPath(swagger, 'fixup.yaml'));
-  swagger = jsondiffpatch.patch(swagger, fixup);
+  jsondiffpatch.patch(swagger, fixup);
 }
 
 function removeEmpty(obj) {
