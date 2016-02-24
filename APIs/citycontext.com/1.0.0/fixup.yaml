@@ -1,0 +1,17 @@
+definitions:
+  Latlon:
+    - {}
+  PointInfo:
+    properties:
+      parks:
+        items:
+          required:
+            - - distanceMeters
+              - areaSqm
+              - centroid
+        required:
+          - - distanceMeters
+            - areaSqm
+            - centroid
+          - 0
+          - 0

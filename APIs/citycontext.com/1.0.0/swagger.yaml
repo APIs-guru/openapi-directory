@@ -114,6 +114,7 @@ paths:
       tags:
         - citycontext
 definitions:
+  Latlon: {}
   Location:
     description: 'Latitude, Longitude and other info related to the given point'
     properties:
@@ -141,15 +142,105 @@ definitions:
         $ref: '#/definitions/Location'
       lsoa:
         description: Statistics for lower layer super output areas (LSOA)
+        properties:
+          crimes:
+            type: object
+          name:
+            type: string
+          population:
+            properties:
+              allUsualResidents:
+                type: integer
+              communalEstablishmentResidents:
+                type: integer
+              householdResidents:
+                type: integer
+              households:
+                type: integer
+              personsPerHectare:
+                type: integer
+              personsPerHousehold:
+                type: integer
+            required:
+              - allUsualResidents
+              - householdResidents
+              - communalEstablishmentResidents
+              - households
+              - personsPerHousehold
+              - personsPerHectare
+            type: object
+        required:
+          - name
         type: object
       parks:
         description: 'Parks within 1km of the point of interest, sorted by descending area'
         items:
+          properties:
+            areaSqm:
+              type: integer
+            centroid:
+              $ref: '#/definitions/Latlon'
+            distanceMeters:
+              type: integer
+            name:
+              type: string
+          required:
+            - distanceMeters
+            - areaSqm
+            - centroid
           type: object
         type: array
       schools:
         description: 'Schools within 1km of the point of interest, sorted by ascending distance from the POI'
         items:
+          properties:
+            distanceMeters:
+              type: integer
+            lastInpectionUrl:
+              description: URL to the last inspection report
+              type: string
+            lastInspectionDate:
+              description: Date of the last Ofsted inspection
+              format: date-time
+              type: string
+            leadershipAndManagement:
+              description: 'Leadership and management grade in the last Ofsted report, from 1 (outstanding) to 4 (inadequate)'
+              maximum: 4
+              minimum: 1
+              type: integer
+            location:
+              $ref: '#/definitions/Latlon'
+            overallEffectiveness:
+              description: 'Overall effectiveness grade in the last Ofsted report, from 1 (outstanding) to 4 (inadequate)'
+              maximum: 4
+              minimum: 1
+              type: integer
+            phase:
+              type: string
+            qualityOfTeaching:
+              description: 'Quality of teaching grade in the last Ofsted report, from 1 (outstanding) to 4 (inadequate)'
+              maximum: 4
+              minimum: 1
+              type: integer
+            schoolName:
+              type: string
+            typeOfEstablishment:
+              type: string
+            urn:
+              description: Unique school identifier
+              type: integer
+          required:
+            - urn
+            - schoolName
+            - typeOfEstablishment
+            - location
+            - lastInspectionDate
+            - lastInpectionUrl
+            - overallEffectiveness
+            - leadershipAndManagement
+            - qualityOfTeaching
+            - phase
+            - distanceMeters
           type: object
         type: array
     required:

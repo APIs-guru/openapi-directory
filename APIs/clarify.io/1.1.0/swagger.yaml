@@ -594,17 +594,16 @@ paths:
         - search
 definitions:
   Bundle:
-    $ref: '#/definitions/object'
     properties:
       _class:
         description: Bundle
         type: string
       _embedded:
-        $ref: '#/definitions/object'
         description: 'Embedded objects, keyed by link relation'
+        type: object
       _links:
-        $ref: '#/definitions/object'
         description: 'HAL hyper links, keyed by relation (self, clarify:metadata, clarify:tracks)'
+        type: object
       created:
         description: 'Date the bundle was created, ex. "2014-02-25T14:23:45Z"'
         type: string
@@ -633,18 +632,18 @@ definitions:
       - id
       - updated
       - version
+    type: object
   Collection:
-    $ref: '#/definitions/object'
     properties:
       _class:
         description: Collection
         type: string
       _embedded:
-        $ref: '#/definitions/object'
         description: 'Embedded objects, keyed by link relation'
+        type: object
       _links:
-        $ref: '#/definitions/object'
         description: 'HAL hyper links, keyed by relation (items, first, last, next, prev)'
+        type: object
       limit:
         description: Maximum number of items requested
         type: integer
@@ -656,15 +655,15 @@ definitions:
       - _links
       - limit
       - total
+    type: object
   Insight:
-    $ref: '#/definitions/object'
     properties:
       _class:
         description: Class name of Insight
         type: string
       _links:
-        $ref: '#/definitions/object'
         description: 'HAL hyper links, keyed by relation (self, parent, clarify:bundle)'
+        type: object
       bundle_id:
         description: id of the bundle
         type: string
@@ -672,8 +671,8 @@ definitions:
         description: 'Date the insight was created, ex. "2014-02-25T14:23:45Z"'
         type: string
       data:
-        $ref: '#/definitions/object'
         description: Bundle insight data values (only present for some insights)
+        type: object
       id:
         description: id of the insight
         type: string
@@ -699,15 +698,15 @@ definitions:
       - name
       - status
       - updated
+    type: object
   Insights:
-    $ref: '#/definitions/object'
     properties:
       _class:
         description: Insights
         type: string
       _links:
-        $ref: '#/definitions/object'
         description: 'HAL hyper links, keyed by relation (self, parent, [insight:*])'
+        type: object
       bundle_id:
         description: id of the bundle
         type: string
@@ -723,8 +722,8 @@ definitions:
       - bundle_id
       - created
       - updated
+    type: object
   ItemResult:
-    $ref: '#/definitions/object'
     properties:
       score:
         description: Relevance of the item according to the search criteria. A value between 0 and 1
@@ -737,8 +736,8 @@ definitions:
     required:
       - score
       - term_results
+    type: object
   MatchHit:
-    $ref: '#/definitions/object'
     properties:
       end:
         description: 'For "text" matches, the index of the character in the string immediately after the matched term (exclusive.) For "audio" matches, the end time in seconds where the word was spoken'
@@ -748,15 +747,15 @@ definitions:
         type: number
     required:
       - start
+    type: object
   Metadata:
-    $ref: '#/definitions/object'
     properties:
       _class:
         description: Metadata
         type: string
       _links:
-        $ref: '#/definitions/object'
         description: 'HAL hyper links, keyed by relation (self, parent)'
+        type: object
       bundle_id:
         description: id of the bundle
         type: string
@@ -764,8 +763,8 @@ definitions:
         description: 'Date the metadata was created, ex. "2014-02-25T14:23:45Z"'
         type: string
       data:
-        $ref: '#/definitions/object'
         description: User-defined JSON metadata for the bundle
+        type: object
       updated:
         description: 'Date the metadata was updated, ex. "2014-02-25T14:23:45Z"'
         type: string
@@ -780,27 +779,27 @@ definitions:
       - data
       - updated
       - version
+    type: object
   Ref:
-    $ref: '#/definitions/object'
     properties:
       _class:
         description: Ref
         type: string
       _links:
-        $ref: '#/definitions/object'
         description: 'HAL hyper links, keyed by relation (self, parent)'
+        type: object
     required:
       - _class
       - _links
+    type: object
   Ref_(of_Bundle):
-    $ref: '#/definitions/object'
     properties:
       _class:
         description: Ref
         type: string
       _links:
-        $ref: '#/definitions/object'
         description: 'HAL hyper links, keyed by relation (self, clarify:metadata, clarify:tracks)'
+        type: object
       id:
         description: id of the bundle
         type: string
@@ -808,18 +807,18 @@ definitions:
       - _class
       - _links
       - id
+    type: object
   SearchCollection:
-    $ref: '#/definitions/object'
     properties:
       _class:
         description: SearchCollection
         type: string
       _embedded:
-        $ref: '#/definitions/object'
         description: 'Embedded objects, keyed by link relation'
+        type: object
       _links:
-        $ref: '#/definitions/object'
         description: 'HAL hyper links, keyed by relation (items, first, next, prev)'
+        type: object
       item_results:
         description: Search results per item. Indexes match the items array.
         items:
@@ -843,16 +842,16 @@ definitions:
       - limit
       - search_terms
       - total
+    type: object
   SearchTerm:
-    $ref: '#/definitions/object'
     properties:
       term:
         description: A term from the query
         type: string
     required:
       - term
+    type: object
   TermMatch:
-    $ref: '#/definitions/object'
     properties:
       field:
         description: 'For "text" or "array" match types, specifies the metadata field that contains the match'
@@ -868,8 +867,8 @@ definitions:
     required:
       - hits
       - type
+    type: object
   TermResult:
-    $ref: '#/definitions/object'
     properties:
       matches:
         description: Array of locations where the search term was found in the bundle
@@ -882,15 +881,15 @@ definitions:
     required:
       - matches
       - score
+    type: object
   Track:
-    $ref: '#/definitions/object'
     properties:
       _class:
         description: Track
         type: string
       _links:
-        $ref: '#/definitions/object'
         description: 'HAL hyper links, keyed by relation (self, parent, bundle)'
+        type: object
       audio_channel:
         description: 'The audio channel used for the track ( "" | left | right). Empty string means all channels of audio in the media file are used for the track'
         enum:
@@ -956,8 +955,8 @@ definitions:
       - status
       - track
       - updated
+    type: object
   Track_(array_item):
-    $ref: '#/definitions/object'
     properties:
       audio_channel:
         description: 'The audio channel used for the track ( "" | left | right). Empty string means all channels of audio in the media file are used for the track'
@@ -1022,15 +1021,15 @@ definitions:
       - status
       - track
       - updated
+    type: object
   Tracks:
-    $ref: '#/definitions/object'
     properties:
       _class:
         description: Tracks
         type: string
       _links:
-        $ref: '#/definitions/object'
         description: 'HAL hyper links, keyed by relation (self, parent)'
+        type: object
       bundle_id:
         description: id of the bundle
         type: string
@@ -1043,7 +1042,7 @@ definitions:
       tracks:
         description: Array of tracks
         items:
-          $ref: '#/definitions/Track (array item)'
+          $ref: '#/definitions/Track_(array_item)'
         type: array
       updated:
         description: 'Date the tracks was updated, ex. "2014-02-25T14:23:45Z"'
@@ -1060,5 +1059,4 @@ definitions:
       - tracks
       - updated
       - version
-  object:
-    $ref: '#/definitions/object'
+    type: object
