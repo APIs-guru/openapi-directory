@@ -442,26 +442,6 @@ paths:
       summary: (DEPRECATED) Update an application API KEY and API SECRET
       tags:
         - apps
-  '/apps/{id}/secret':
-    put:
-      consumes:
-        - application/json
-      description: |
-        Reset the API SECRET for an application. The existing API SECRET will be revoked immediately. This cannot be undone. The calling device must have the app.reset.secret capability for the specified application.
-      parameters:
-        - description: The universally unique identifier (UUID) of the application to update.
-          in: path
-          name: id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: No response was specified
-          schema:
-            $ref: '#/definitions/AppKeys'
-      summary: Reset the application API SECRET
-      tags:
-        - apps
   '/apps/{id}/tags/{tag_id}':
     delete:
       description: |
@@ -1861,7 +1841,7 @@ paths:
         - description: |
             The Elasticsearch DSL query to perform. For more information about DSL queries, see: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl.html
           in: body
-          name: query
+          name: body
           schema:
             $ref: '#/definitions/ElasticDSL'
       responses:

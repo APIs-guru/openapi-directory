@@ -414,7 +414,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Creates a Cloud SQL instance as a clone of the source instance.
+      description: Creates a Cloud SQL instance as a clone of the source instance. The API is not ready for Second Generation instances yet.
       operationId: sql.instances.clone
       parameters:
         - description: Project ID of the source as well as the clone Cloud SQL instance.
@@ -549,7 +549,7 @@ paths:
         - databases
   '/projects/{project}/instances/{instance}/databases/{database}':
     delete:
-      description: Deletes a resource containing information about a database inside a Cloud SQL instance.
+      description: Deletes a database from a Cloud SQL instance.
       operationId: sql.databases.delete
       parameters:
         - description: Project ID of the project that contains the instance.
@@ -1563,22 +1563,30 @@ definitions:
   DatabaseInstance:
     description: A Cloud SQL instance resource.
     properties:
+      backendType:
+        description: |-
+          FIRST_GEN: Basic Cloud SQL instance that runs in a Google-managed container.
+          SECOND_GEN: A newer Cloud SQL backend that runs in a Compute Engine VM.
+          EXTERNAL: A MySQL server that is not managed by Google.
+        type: string
       currentDiskSize:
-        description: The current disk usage of the instance in bytes.
+        description: 'The current disk usage of the instance in bytes. This property has been deprecated. Users should use the "cloudsql.googleapis.com/database/disk/bytes_used" metric in Cloud Monitoring API instead. Please see https://groups.google.com/d/msg/google-cloud-sql-announce/I_7-F9EBhT0/BtvFtdFeAgAJ for details.'
         format: int64
         type: string
       databaseVersion:
-        description: The database engine type and version. Can be MYSQL_5_5 or MYSQL_5_6. Defaults to MYSQL_5_5. The databaseVersion can not be changed after instance creation.
+        description: The database engine type and version. Can be MYSQL_5_5 or MYSQL_5_6. Defaults to MYSQL_5_6. The databaseVersion can not be changed after instance creation.
         type: string
       etag:
         description: HTTP 1.1 Entity tag for the resource.
         type: string
       failoverReplica:
-        description: The name and status of the failover replica. Only applies to Second Generation instances.
+        description: The name and status of the failover replica. This property is applicable only to Second Generation instances.
         properties:
           available:
+            description: The availability status of the failover replica. A false status indicates that the failover replica is out of sync. The master can only failover to the falover replica when the status is true.
             type: boolean
           name:
+            description: The name of the failover replica.
             type: string
         type: object
       instanceType:
@@ -1594,7 +1602,7 @@ definitions:
           $ref: '#/definitions/IpMapping'
         type: array
       ipv6Address:
-        description: The IPv6 address assigned to the instance.
+        description: The IPv6 address assigned to the instance. This property is applicable only to First Generation instances.
         type: string
       kind:
         default: 'sql#instance'
@@ -1617,7 +1625,7 @@ definitions:
         description: The project ID of the project containing the Cloud SQL instance. The Google apps domain is prefixed if applicable.
         type: string
       region:
-        description: 'The geographical region. Can be us-central, asia-east1 or europe-west1. Defaults to us-central. The region can not be changed after instance creation.'
+        description: 'The geographical region. Can be us-central (FIRST_GEN instances only), us-central1 (SECOND_GEN instances only), asia-east1 or europe-west1. Defaults to us-central or us-central1 depending on the instance type (First Generation or Second Generation). The region can not be changed after instance creation.'
         type: string
       replicaConfiguration:
         $ref: '#/definitions/ReplicaConfiguration'
@@ -1634,7 +1642,7 @@ definitions:
         $ref: '#/definitions/SslCert'
         description: SSL configuration.
       serviceAccountEmailAddress:
-        description: The service account email address assigned to the instance.
+        description: The service account email address assigned to the instance. This property is applicable only to Second Generation instances.
         type: string
       settings:
         $ref: '#/definitions/Settings'
@@ -1649,6 +1657,11 @@ definitions:
           FAILED: The instance creation failed.
           UNKNOWN_STATE: The state of the instance is unknown.
         type: string
+      suspensionReason:
+        description: 'If the instance state is SUSPENDED, the reason for the suspension.'
+        items:
+          type: string
+        type: array
     type: object
   DatabasesListResponse:
     description: Database list response.
@@ -2091,10 +2104,10 @@ definitions:
           The activation policy for this instance. This specifies when the instance should be activated and is applicable only when the instance state is RUNNABLE. This can be one of the following.
           ALWAYS: The instance should always be active.
           NEVER: The instance should never be activated.
-          ON_DEMAND: The instance is activated upon receiving requests.
+          ON_DEMAND: The instance is activated upon receiving requests; only applicable to First Generation instances.
         type: string
       authorizedGaeApplications:
-        description: The App Engine app IDs that can access this instance.
+        description: The App Engine app IDs that can access this instance. This property is only applicable to First Generation instances.
         items:
           type: string
         type: array
@@ -2102,14 +2115,14 @@ definitions:
         $ref: '#/definitions/BackupConfiguration'
         description: The daily backup configuration for the instance.
       crashSafeReplicationEnabled:
-        description: Configuration specific to read replica instances. Indicates whether database flags for crash-safe replication are enabled.
+        description: Configuration specific to read replica instances. Indicates whether database flags for crash-safe replication are enabled. This property is only applicable to First Generation instances.
         type: boolean
       dataDiskSizeGb:
-        description: 'The size of data disk, in GB. Only supported for 2nd Generation instances. The data disk size minimum is 10GB.'
+        description: 'The size of data disk, in GB. The data disk size minimum is 10GB. This property is only applicable to Second Generation instances.'
         format: int64
         type: string
       dataDiskType:
-        description: The type of data disk. Only supported for 2nd Generation instances. The default type is SSD.
+        description: The type of data disk. Only supported for Second Generation instances. The default type is PD_SSD. This property is only applicable to Second Generation instances.
         type: string
       databaseFlags:
         description: The database flags passed to the instance at startup.
@@ -2121,22 +2134,22 @@ definitions:
         type: boolean
       ipConfiguration:
         $ref: '#/definitions/IpConfiguration'
-        description: The settings for IP Management. This allows to enable or disable the instance IP and manage which external networks can connect to the instance.
+        description: The settings for IP Management. This allows to enable or disable the instance IP and manage which external networks can connect to the instance. The IPv4 address cannot be disabled for Second Generation instances.
       kind:
         default: 'sql#settings'
         description: 'This is always sql#settings.'
         type: string
       locationPreference:
         $ref: '#/definitions/LocationPreference'
-        description: The location preference settings. This allows the instance to be located as near as possible to either an App Engine app or GCE zone for better performance.
+        description: The location preference settings. This allows the instance to be located as near as possible to either an App Engine app or GCE zone for better performance. App Engine co-location is only applicable to First Generation instances.
       maintenanceWindow:
         $ref: '#/definitions/MaintenanceWindow'
-        description: The maintenance window for this instance. This specifies when the instance may be restarted for maintenance purposes.
+        description: The maintenance window for this instance. This specifies when the instance may be restarted for maintenance purposes. This property is only applicable to Second Generation instances.
       pricingPlan:
-        description: The pricing plan for this instance. This can be either PER_USE or PACKAGE.
+        description: The pricing plan for this instance. This can be either PER_USE or PACKAGE. Only PER_USE is supported for Second Generation instances.
         type: string
       replicationType:
-        description: The type of replication this instance uses. This can be either ASYNCHRONOUS or SYNCHRONOUS.
+        description: The type of replication this instance uses. This can be either ASYNCHRONOUS or SYNCHRONOUS. This property is only applicable to First Generation instances.
         type: string
       settingsVersion:
         description: 'The version of instance settings. This is a required field for update method to make sure concurrent updates are handled properly. During update, use the most recent settingsVersion value for this instance and do not try to update this value.'
@@ -2275,7 +2288,7 @@ definitions:
         description: HTTP 1.1 Entity tag for the resource.
         type: string
       host:
-        description: 'The host name from which the user can connect. For insert operations, host defaults to an empty string. For update operations, host is specified as part of the request URL. The host name is not mutable with this API.'
+        description: 'The host name from which the user can connect. For insert operations, host defaults to an empty string. For update operations, host is specified as part of the request URL. The host name cannot be updated after insertion.'
         type: string
       instance:
         description: The name of the Cloud SQL instance. This does not include the project ID. Can be omitted for update since it is already specified on the URL.

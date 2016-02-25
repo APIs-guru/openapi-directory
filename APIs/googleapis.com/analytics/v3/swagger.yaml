@@ -1868,17 +1868,17 @@ paths:
       description: Gets a view (profile) to which the user has access.
       operationId: analytics.management.profiles.get
       parameters:
-        - description: Account ID to retrieve the goal for.
+        - description: Account ID to retrieve the view (profile) for.
           in: path
           name: accountId
           required: true
           type: string
-        - description: Web property ID to retrieve the goal for.
+        - description: Web property ID to retrieve the view (profile) for.
           in: path
           name: webPropertyId
           required: true
           type: string
-        - description: View (Profile) ID to retrieve the goal for.
+        - description: View (Profile) ID to retrieve the view (profile) for.
           in: path
           name: profileId
           required: true
