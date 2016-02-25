@@ -77,7 +77,7 @@ paths:
         - accounts
   /articles:
     get:
-      description: Find listings related to an article
+      description: See all Reverb blog posts
       parameters:
         - description: Number of featured articles to exclude
           in: query
@@ -86,14 +86,16 @@ paths:
       responses:
         default:
           description: Unexpected error
-      summary: Find listings related to an article
+      summary: See all Reverb blog posts
       tags:
         - articles
   /articles/featured:
     get:
+      description: See featured Reverb blog posts
       responses:
         default:
           description: Unexpected error
+      summary: See featured Reverb blog posts
       tags:
         - articles
   '/articles/{slug}':
@@ -699,7 +701,7 @@ paths:
                   type: string
                 type: array
               condition:
-                description: 'Condition name (values: Non Functioning,Poor,Fair,Good,Very Good,Excellent,Mint,Mint (with inventory),Like New,Brand New)'
+                description: 'Condition name (Brand New, Very Good, etc)'
                 type: string
               description:
                 description: Product description. Please keep formatting to a minimum.
@@ -734,6 +736,9 @@ paths:
               offers_enabled:
                 description: 'Whether the listing accepts negotiated offers (default: true)'
                 type: boolean
+              origin_country_code:
+                description: 'Country of origin/manufacture, ISO code (e.g: US)'
+                type: string
               photos:
                 description: "An array of image URLs. Ex: ['http://my.site.com/image.jpg']"
                 items:
@@ -958,6 +963,38 @@ paths:
       summary: Make an offer to the seller of a listing
       tags:
         - listings
+  '/listings/{listing_id}/bump':
+    get:
+      description: View available bump tiers and stats for a listing
+      parameters:
+        - in: path
+          name: listing_id
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: View available bump tiers and stats for a listing
+      tags:
+        - listings
+  '/listings/{listing_id}/bump/{budget_type}':
+    post:
+      description: Bump a listing
+      parameters:
+        - in: path
+          name: listing_id
+          required: true
+          type: string
+        - in: path
+          name: budget_type
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Bump a listing
+      tags:
+        - listings
   '/listings/{listing_id}/conversations':
     post:
       description: Start a conversation with a seller
@@ -1041,7 +1078,7 @@ paths:
                   type: string
                 type: array
               condition:
-                description: 'Condition name (values: Non Functioning,Poor,Fair,Good,Very Good,Excellent,Mint,Mint (with inventory),Like New,Brand New)'
+                description: 'Condition name (Brand New, Very Good, etc)'
                 type: string
               description:
                 description: Product description. Please keep formatting to a minimum.
@@ -1076,6 +1113,9 @@ paths:
               offers_enabled:
                 description: 'Whether the listing accepts negotiated offers (default: true)'
                 type: boolean
+              origin_country_code:
+                description: 'Country of origin/manufacture, ISO code (e.g: US)'
+                type: string
               photos:
                 description: "An array of image URLs. Ex: ['http://my.site.com/image.jpg']"
                 items:
@@ -1929,6 +1969,20 @@ paths:
       summary: 'Returns all orders, newest first.'
       tags:
         - my
+  '/my/orders/buying/buying_history/{seller_id}':
+    get:
+      description: See previous orders from a seller
+      parameters:
+        - in: path
+          name: seller_id
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: See previous orders from a seller
+      tags:
+        - my
   /my/orders/buying/unpaid:
     get:
       description: 'Returns unpaid orders, newest first.'
@@ -2032,6 +2086,20 @@ paths:
         default:
           description: Unexpected error
       summary: 'Get seller orders awaiting shipment, newest first.'
+      tags:
+        - my
+  '/my/orders/selling/buyer_history/{buyer_id}':
+    get:
+      description: See previous orders from buyer
+      parameters:
+        - in: path
+          name: buyer_id
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: See previous orders from buyer
       tags:
         - my
   /my/orders/selling/unpaid:
@@ -2391,6 +2459,93 @@ paths:
       summary: Get a summary of transactions for a given price guide
       tags:
         - priceguide
+  '/products/reviews/{id}':
+    get:
+      description: View a review
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: View a review
+      tags:
+        - products
+    put:
+      description: Update a review
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - description: the content of the request
+          in: body
+          name: body
+          schema:
+            properties:
+              body:
+                description: Content of the review
+                type: string
+              rating:
+                description: Rating from 1 to 5
+                type: integer
+              title:
+                description: Title for the review
+                type: string
+            type: object
+      responses:
+        default:
+          description: Unexpected error
+      summary: Update a review
+      tags:
+        - products
+  '/products/{slug}/reviews':
+    get:
+      description: View reviews of a product
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: View reviews of a product
+      tags:
+        - products
+    post:
+      description: Create a review
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          type: string
+        - description: the content of the request
+          in: body
+          name: body
+          schema:
+            properties:
+              body:
+                description: Content of the review (html not allowed)
+                type: string
+              rating:
+                description: Rating from 1 to 5
+                type: integer
+              title:
+                description: Title for the review
+                type: string
+            required:
+              - rating
+              - body
+            type: object
+      responses:
+        default:
+          description: Unexpected error
+      summary: Create a review
+      tags:
+        - products
   /sales/reverb:
     get:
       description: View upcoming and live Reverb official sales.
@@ -2755,7 +2910,7 @@ paths:
           schema:
             properties:
               topic:
-                description: 'Valid values: listings/update, orders/create, orders/update, payments/create, payments/update'
+                description: 'Valid values: listings/update, orders/create'
                 type: string
               url:
                 type: string

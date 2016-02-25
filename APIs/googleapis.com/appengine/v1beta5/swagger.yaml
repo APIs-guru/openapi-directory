@@ -529,6 +529,43 @@ paths:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
+    patch:
+      description: 'Updates an existing version. Note: UNIMPLEMENTED.'
+      operationId: appengine.apps.services.versions.patch
+      parameters:
+        - description: 'Part of `name`. Name of the resource to update. For example: "apps/myapp/services/default/versions/1".'
+          in: path
+          name: appsId
+          required: true
+          type: string
+        - description: Part of `name`. See documentation of `appsId`.
+          in: path
+          name: servicesId
+          required: true
+          type: string
+        - description: Part of `name`. See documentation of `appsId`.
+          in: path
+          name: versionsId
+          required: true
+          type: string
+        - description: Standard field mask for the set of fields to be updated.
+          in: query
+          name: mask
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Version'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Version'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - apps
 definitions:
   ApiConfigHandler:
     description: API Serving configuration for Cloud Endpoints.
@@ -574,11 +611,20 @@ definitions:
   Application:
     description: An Application contains the top-level configuration of an App Engine application.
     properties:
+      authDomain:
+        description: 'If set, only users from the specified Google Apps authentication domain may access the application. If not set, any Google Account may access the application.'
+        type: string
       codeBucket:
         description: A Google Cloud Storage bucket which can be used for storing files associated with an application. This bucket is associated with the application and can be used by the gcloud deployment commands. @OutputOnly
         type: string
       defaultBucket:
         description: A Google Cloud Storage bucket which can be used by the application to store content. @OutputOnly
+        type: string
+      defaultCookieExpiration:
+        description: Determines the cookie expiration policy for the application.
+        type: string
+      defaultHostname:
+        description: 'The hostname used to reach the application, as resolved by App Engine. @OutputOnly'
         type: string
       dispatchRules:
         description: HTTP path dispatch rules for requests to the app that do not explicitly target a service or version. The rules are order-dependent.
@@ -586,7 +632,7 @@ definitions:
           $ref: '#/definitions/UrlDispatchRule'
         type: array
       id:
-        description: 'The relative name/path of the application. Example: "myapp". @OutputOnly'
+        description: 'The relative name/path of the application. Example: "myapp".'
         type: string
       location:
         description: "The location from which the application will be run. Choices are \"us\" for United States and \"eu\" for European Union. Application instances will run out of data centers in the chosen location and all of the application's End User Content will be stored at rest in the chosen location. The default is \"us\"."

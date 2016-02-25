@@ -82,6 +82,7 @@ tags:
   - name: pretargetingConfig
   - name: products
   - name: proposals
+  - name: pubprofiles
 paths:
   /accounts:
     get:
@@ -1037,6 +1038,32 @@ paths:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - marketplacenotes
+  '/proposals/{proposalId}/setupcomplete':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Update the given proposal to indicate that setup has been completed.
+      operationId: adexchangebuyer.proposals.setupcomplete
+      parameters:
+        - description: The proposal id for which the setup is complete
+          in: path
+          name: proposalId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - proposals
   '/proposals/{proposalId}/{revisionNumber}/{updateAction}':
     parameters:
       - $ref: '#/parameters/alt'
@@ -1124,6 +1151,34 @@ paths:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - proposals
+  '/publisher/{accountId}/profiles':
+    get:
+      description: Gets the requested publisher profile(s) by publisher accountId.
+      operationId: adexchangebuyer.pubprofiles.list
+      parameters:
+        - description: The accountId of the publisher to get profiles for.
+          in: path
+          name: accountId
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetPublisherProfilesByAccountIdResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - pubprofiles
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
 definitions:
   Account:
     description: Configuration data for an Ad Exchange buyer account.
@@ -1132,6 +1187,9 @@ definitions:
         description: Your bidder locations that have distinct URLs.
         items:
           properties:
+            bidProtocol:
+              description: "The protocol that the bidder endpoint is using. By default, OpenRTB protocols use JSON, except PROTOCOL_OPENRTB_PROTOBUF. PROTOCOL_OPENRTB_PROTOBUF uses protobuf encoding over the latest OpenRTB protocol version, which is 2.3 right now. Allowed values:  \n- PROTOCOL_ADX \n- PROTOCOL_OPENRTB_2_2 \n- PROTOCOL_OPENRTB_2_3 \n- PROTOCOL_OPENRTB_PROTOBUF"
+              type: string
             maximumQps:
               description: The maximum queries per second the Ad Exchange will send.
               format: int32
@@ -1582,6 +1640,20 @@ definitions:
         description: "Continuation token used to page through creatives. To retrieve the next page of results, set the next request's \"pageToken\" value to this."
         type: string
     type: object
+  DealServingMetadata:
+    properties:
+      dealPauseStatus:
+        $ref: '#/definitions/DealServingMetadataDealPauseStatus'
+        description: 'Tracks which parties (if any) have paused a deal. (readonly, except via PauseResumeOrderDeals action)'
+    type: object
+  DealServingMetadataDealPauseStatus:
+    description: 'Tracks which parties (if any) have paused a deal. The deal is considered paused if has_buyer_paused || has_seller_paused.'
+    properties:
+      hasBuyerPaused:
+        type: boolean
+      hasSellerPaused:
+        type: boolean
+    type: object
   DealTerms:
     properties:
       brandingType:
@@ -1625,9 +1697,9 @@ definitions:
     type: object
   DealTermsNonGuaranteedAuctionTerms:
     properties:
-      privateAuctionId:
-        description: Id of the corresponding private auction.
-        type: string
+      autoOptimizePrivateAuction:
+        description: True if open auction buyers are allowed to compete with invited buyers in this private auction (buyer-readonly).
+        type: boolean
       reservePricePerBuyers:
         description: Reserve price for the specified buyer.
         items:
@@ -1715,6 +1787,10 @@ definitions:
         items:
           $ref: '#/definitions/MarketplaceDeal'
         type: array
+      orderRevisionNumber:
+        description: The latest revision number after the update has been applied.
+        format: int64
+        type: string
     type: object
   GetOffersResponse:
     properties:
@@ -1748,6 +1824,14 @@ definitions:
           $ref: '#/definitions/Proposal'
         type: array
     type: object
+  GetPublisherProfilesByAccountIdResponse:
+    properties:
+      profiles:
+        description: Profiles for the requested publisher
+        items:
+          $ref: '#/definitions/PublisherProfileApiProto'
+        type: array
+    type: object
   MarketplaceDeal:
     description: A proposal can contain multiple deals. A deal contains the terms and targeting information that is used for serving.
     properties:
@@ -1761,9 +1845,15 @@ definitions:
       creativePreApprovalPolicy:
         description: Specifies the creative pre-approval policy (buyer-readonly)
         type: string
+      creativeSafeFrameCompatibility:
+        description: Specifies whether the creative is safeFrame compatible (buyer-readonly)
+        type: string
       dealId:
         description: A unique deal=id for the deal (readonly).
         type: string
+      dealServingMetadata:
+        $ref: '#/definitions/DealServingMetadata'
+        description: 'Metadata about the serving status of this deal (readonly, writes via custom actions)'
       deliveryControl:
         $ref: '#/definitions/DeliveryControl'
         description: The set of fields around delivery control that are interesting for a buyer to see but are non-negotiable. These are set by the publisher. This message is assigned an id of 100 since some day we would want to model this as a protobuf extension.
@@ -1799,6 +1889,9 @@ definitions:
         description: 'The revision number of the product that the deal was created from (readonly, except on create)'
         format: int64
         type: string
+      programmaticCreativeSource:
+        description: 'Specifies the creative source for programmatic deals, PUBLISHER means creative is provided by seller and ADVERTISR means creative is provided by buyer. (buyer-readonly)'
+        type: string
       proposalId:
         type: string
       sellerContacts:
@@ -1807,7 +1900,7 @@ definitions:
           $ref: '#/definitions/ContactInformation'
         type: array
       sharedTargetings:
-        description: The shared targeting visible to buyers and sellers. (updatable)
+        description: "The shared targeting visible to buyers and sellers. Each shared targeting entity is AND'd together. (updatable)"
         items:
           $ref: '#/definitions/SharedTargeting'
         type: array
@@ -2201,6 +2294,9 @@ definitions:
         items:
           $ref: '#/definitions/ContactInformation'
         type: array
+      deliveryControl:
+        $ref: '#/definitions/DeliveryControl'
+        description: The set of fields around delivery control that are interesting for a buyer to see but are non-negotiable. These are set by the publisher. This message is assigned an id of 100 since some day we would want to model this as a protobuf extension.
       flightEndTimeMs:
         description: The proposed end time for the deal (ms since epoch) (buyer-readonly)
         format: int64
@@ -2228,8 +2324,14 @@ definitions:
         description: Time of last update in ms. since epoch (readonly)
         format: int64
         type: string
+      legacyOfferId:
+        description: Optional legacy offer id if this offer is a preferred deal offer.
+        type: string
       name:
         description: The name for this product as set by the seller. (buyer-readonly)
+        type: string
+      privateAuctionId:
+        description: Optional private auction id if this offer is a private auction offer.
         type: string
       productId:
         description: The unique id for the product (readonly)
@@ -2291,7 +2393,7 @@ definitions:
         description: True if the proposal is being renegotiated (readonly).
         type: boolean
       isSetupComplete:
-        description: 'True, if the buyside inventory setup is complete for this proposal. (readonly)'
+        description: 'True, if the buyside inventory setup is complete for this proposal. (readonly, except via OrderSetupCompleted action)'
         type: boolean
       kind:
         default: 'adexchangebuyer#proposal'
@@ -2310,8 +2412,14 @@ definitions:
       name:
         description: The name for the proposal (updatable)
         type: string
+      negotiationId:
+        description: Optional negotiation id if this proposal is a preferred deal proposal.
+        type: string
       originatorRole:
         description: Indicates whether the buyer/seller created the proposal.(readonly)
+        type: string
+      privateAuctionId:
+        description: Optional private auction id if this proposal is a private auction proposal.
         type: string
       proposalId:
         description: The unique id of the proposal. (readonly).
@@ -2336,6 +2444,53 @@ definitions:
           $ref: '#/definitions/ContactInformation'
         type: array
     type: object
+  PublisherProfileApiProto:
+    properties:
+      buyerPitchStatement:
+        description: A pitch statement for the buyer
+        type: string
+      googlePlusLink:
+        description: "Link to publisher's Google+ page."
+        type: string
+      isParent:
+        description: 'True, if this is the parent profile, which represents all domains owned by the publisher.'
+        type: boolean
+      kind:
+        default: 'adexchangebuyer#publisherProfileApiProto'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "adexchangebuyer#publisherProfileApiProto".'
+        type: string
+      logoUrl:
+        description: The url to the logo for the publisher.
+        type: string
+      mediaKitLink:
+        description: The url for additional marketing and sales materials.
+        type: string
+      name:
+        type: string
+      overview:
+        description: Publisher provided overview.
+        type: string
+      profileId:
+        description: Unique id for the publisher profile
+        format: int32
+        type: integer
+      publisherDomains:
+        description: The list of domains represented in this publisher profile. Empty if this is a parent profile.
+        items:
+          type: string
+        type: array
+      rateCardInfoLink:
+        description: Link to publisher rate card
+        type: string
+      samplePageLink:
+        description: Link for a sample content page.
+        type: string
+      topHeadlines:
+        description: Publisher provided key metrics and rankings.
+        items:
+          type: string
+        type: array
+    type: object
   Seller:
     properties:
       accountId:
@@ -2348,12 +2503,12 @@ definitions:
   SharedTargeting:
     properties:
       exclusions:
-        description: The list of values to exclude from targeting.
+        description: "The list of values to exclude from targeting. Each value is AND'd together."
         items:
           $ref: '#/definitions/TargetingValue'
         type: array
       inclusions:
-        description: The list of value to include as part of the targeting.
+        description: "The list of value to include as part of the targeting. Each value is OR'd together."
         items:
           $ref: '#/definitions/TargetingValue'
         type: array

@@ -93,16 +93,16 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -298,16 +298,16 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
         - default: 500
-          description: 'The maximum number of results per page that Compute Engine should return. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -433,14 +433,9 @@ definitions:
         items:
           type: string
         type: array
-      projects:
-        description: Google Cloud projects for which the name of this endpoint should be resolvable through DNS.
-        items:
-          type: string
-        type: array
     type: object
   EndpointsListResponse:
-    description: 'A response containing a partial list of Endpoints and a page token used to build the next request if the request has been truncated. Next available tag: 5'
+    description: 'A response containing a partial list of Endpoints and a page token used to build the next request if the request has been truncated. Next available tag: 6'
     properties:
       endpoints:
         description: The endpoints contained in this response.
@@ -455,7 +450,7 @@ definitions:
     description: 'An Operation resource, used to manage asynchronous API requests.'
     properties:
       clientOperationId:
-        description: '[Output Only] A unique client ID generated by the server.'
+        description: '[Output Only] Reserved for future use.'
         type: string
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -477,7 +472,7 @@ definitions:
                   description: '[Output Only] The error type identifier for this error.'
                   type: string
                 location:
-                  description: '[Output Only] Indicates the field in the request which caused the error. This property is optional.'
+                  description: '[Output Only] Indicates the field in the request that caused the error. This property is optional.'
                   type: string
                 message:
                   description: '[Output Only] An optional, human-readable error message.'
@@ -501,20 +496,20 @@ definitions:
         type: string
       kind:
         default: 'serviceregistry#operation'
-        description: '[Output Only] Type of the resource. Always compute#operation for Operation resources.'
+        description: '[Output Only] Type of the resource. Always compute#operation for operation resources.'
         type: string
       name:
         description: '[Output Only] Name of the resource.'
         type: string
       operationType:
-        description: '[Output Only] The type of operation, which can be insert, update, or delete.'
+        description: '[Output Only] The type of operation, such as insert, update, or delete, and so on.'
         type: string
       progress:
         description: '[Output Only] An optional progress indicator that ranges from 0 to 100. There is no requirement that this be linear or support any granularity of operations. This should not be used to guess when the operation will be complete. This number should monotonically increase as the operation progresses.'
         format: int32
         type: integer
       region:
-        description: '[Output Only] URL of the region where the operation resides. Only available when performing regional operations.'
+        description: '[Output Only] The URL of the region where the operation resides. Only available when performing regional operations.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
@@ -533,7 +528,7 @@ definitions:
         format: uint64
         type: string
       targetLink:
-        description: '[Output Only] The URL of the resource that the operation is modifying.'
+        description: '[Output Only] The URL of the resource that the operation modifies.'
         type: string
       user:
         description: '[Output Only] User who requested the operation, for example: user@example.com.'
@@ -552,7 +547,7 @@ definitions:
               items:
                 properties:
                   key:
-                    description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource, and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                    description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
                     type: string
                   value:
                     description: '[Output Only] A warning data value corresponding to the key.'
@@ -565,7 +560,7 @@ definitions:
           type: object
         type: array
       zone:
-        description: '[Output Only] URL of the zone where the operation resides. Only available when performing per-zone operations.'
+        description: '[Output Only] The URL of the zone where the operation resides. Only available when performing per-zone operations.'
         type: string
     type: object
   OperationsListResponse:
