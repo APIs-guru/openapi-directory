@@ -438,7 +438,7 @@ function addToCollection(type, url, command) {
     if (!error && !command.fixup)
       return;
 
-    if (!command.fixup || !result.swagger)
+    if (!command.fixup || !result.spec)
       return logError(error, result);
 
     editFile(errorToString(error, result), function (error, data) {
@@ -456,9 +456,12 @@ function addToCollection(type, url, command) {
       }
 
       var editedOrigin = YAML.safeLoad(match[1]);
-      var editedSwagger = YAML.safeLoad(match[2]);
       saveFixup(getOriginFixupPath(result.spec), serilazeSpec(result.spec), editedOrigin);
-      saveFixup(getSwaggerPath(result.swagger, 'fixup.yaml'), result.swagger, editedSwagger);
+
+      if (!_.isUndefined(result.swagger)) {
+        var editedSwagger = YAML.safeLoad(match[2]);
+        saveFixup(getSwaggerPath(result.swagger, 'fixup.yaml'), result.swagger, editedSwagger);
+      }
     });
   });
 }
@@ -829,10 +832,9 @@ function errorToString(errors, context) {
     result += Yaml2String(serilazeSpec(spec));
   }
 
-  if (!_.isUndefined(swagger)) {
-    result += '???????????????????? Swagger ' + url + ' ????????????????????????????\n';
+  result += '???????????????????? Swagger ' + url + ' ????????????????????????????\n';
+  if (!_.isUndefined(swagger))
     result += Yaml2String(swagger);
-  }
 
   if (errors) {
     result += '!!!!!!!!!!!!!!!!!!!! Errors ' + url + ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n';
