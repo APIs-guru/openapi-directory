@@ -796,7 +796,7 @@ paths:
           name: invoice_number
           required: false
           type: string
-        - description: Comma separated list of of transaction statuses.
+        - description: "Comma separated list of of transaction statuses. 'N' - unconfirmed transaction, 'C' - confirmed transaction."
           in: query
           name: statuses
           required: false
@@ -2451,7 +2451,7 @@ definitions:
         description: 'If true, results are sorted in descending order.'
         type: boolean
       statuses:
-        description: Comma separated list of of transaction statuses.
+        description: "Comma separated list of of transaction statuses. 'N' - unconfirmed transaction, 'C' - confirmed transaction."
         type: string
       tax_country_code:
         description: Two letter ISO tax country code.

@@ -1205,6 +1205,41 @@ paths:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - variants
+  '/v1/variants:merge':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: 'Merges the given variants with existing variants. For the definitions of variants and other genomics resources, see [Fundamentals of Google Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics) Each variant will be merged with an existing variant that matches its reference sequence, start, end, reference bases, and alternative bases. If no such variant exists, a new one will be created. When variants are merged, the call information from the new variant is added to the existing variant, and other fields (such as key/value pairs) are discarded.'
+      operationId: genomics.variants.merge
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/MergeVariantsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/genomics'
+      tags:
+        - variants
   '/v1/variants:stream':
     parameters:
       - $ref: '#/parameters/access_token'
@@ -1314,7 +1349,7 @@ paths:
         - variantsets
   '/v1/variantsets/{variantSetId}':
     delete:
-      description: 'Deletes the contents of a variant set. The variant set object is not deleted. For the definitions of variant sets and other genomics resources, see [Fundamentals of Google Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)'
+      description: 'Deletes a variant set including all variants, call sets, and calls within. This is not reversible. For the definitions of variant sets and other genomics resources, see [Fundamentals of Google Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics)'
       operationId: genomics.variantsets.delete
       parameters:
         - description: The ID of the variant set to be deleted.
@@ -1940,6 +1975,17 @@ definitions:
           $ref: '#/definitions/Operation'
         type: array
     type: object
+  MergeVariantsRequest:
+    properties:
+      variantSetId:
+        description: The destination variant set.
+        type: string
+      variants:
+        description: The variants to be merged with existing variants.
+        items:
+          $ref: '#/definitions/Variant'
+        type: array
+    type: object
   Operation:
     description: This resource represents a long-running operation that is the result of a network API call.
     properties:
@@ -2555,10 +2601,18 @@ definitions:
       referenceName:
         description: 'The reference sequence name, for example `chr1`, `1`, or `chrX`. If set to *, only unmapped reads are returned.'
         type: string
+      shard:
+        description: 'Restricts results to a shard containing approximately `1/totalShards` of the normal response payload for this query. Results from a sharded request are disjoint from those returned by all queries which differ only in their shard parameter. A shard may yield 0 results; this is especially likely for large values of `totalShards`. Valid values are `[0, totalShards)`.'
+        format: int32
+        type: integer
       start:
         description: 'The start position of the range on the reference, 0-based inclusive. If specified, `referenceName` must also be specified.'
         format: int64
         type: string
+      totalShards:
+        description: 'Specifying `totalShards` causes a disjoint subset of the normal response payload to be returned for each query with a unique `shard` parameter specified. A best effort is made to yield equally sized shards. Sharding can be used to distribute processing amongst workers, where each worker is assigned a unique `shard` number and all workers specify the same `totalShards` number. The union of reads returned for all sharded queries `[0, totalShards)` is equal to those returned by a single unsharded query. Queries for different values of `totalShards` with common divisors will share shard boundaries. For example, streaming `shard` 2 of 5 `totalShards` yields the same results as streaming `shard`s 4 and 5 of 10 `totalShards`. This property can be leveraged for adaptive retries.'
+        format: int32
+        type: integer
     type: object
   StreamReadsResponse:
     properties:

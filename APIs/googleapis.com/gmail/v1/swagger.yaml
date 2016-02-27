@@ -91,6 +91,11 @@ paths:
           name: userId
           required: true
           type: string
+        - default: false
+          description: Include drafts from SPAM and TRASH in the results.
+          in: query
+          name: includeSpamTrash
+          type: boolean
         - default: 100
           description: Maximum number of drafts to return.
           in: query
@@ -650,6 +655,37 @@ paths:
             - 'https://www.googleapis.com/auth/gmail.insert'
         - Oauth2:
             - 'https://www.googleapis.com/auth/gmail.modify'
+      tags:
+        - users
+  '/{userId}/messages/batchDelete':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Deletes many messages by message ID. Provides no guarantees that messages were not already deleted or even existed at all.
+      operationId: gmail.users.messages.batchDelete
+      parameters:
+        - default: me
+          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          in: path
+          name: userId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BatchDeleteMessagesRequest'
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://mail.google.com/'
       tags:
         - users
   '/{userId}/messages/import':
@@ -1339,6 +1375,14 @@ paths:
       tags:
         - users
 definitions:
+  BatchDeleteMessagesRequest:
+    properties:
+      ids:
+        description: The IDs of the messages to delete.
+        items:
+          type: string
+        type: array
+    type: object
   Draft:
     description: "A draft email in the user's mailbox."
     properties:

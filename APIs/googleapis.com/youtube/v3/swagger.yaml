@@ -4316,10 +4316,13 @@ definitions:
         type: string
     type: object
   ChannelSnippet:
-    description: 'Basic details about a channel, including title, description and thumbnails.'
+    description: 'Basic details about a channel, including title, description and thumbnails. Next available id: 15.'
     properties:
       country:
         description: The country of the channel.
+        type: string
+      customUrl:
+        description: The custom url of the channel.
         type: string
       defaultLanguage:
         description: "The language of the channel's default title and description."
@@ -7682,6 +7685,7 @@ definitions:
           - copyright
           - duplicate
           - inappropriate
+          - legal
           - length
           - termsOfUse
           - trademark

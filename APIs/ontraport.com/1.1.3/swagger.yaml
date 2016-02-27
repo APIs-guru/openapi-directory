@@ -775,8 +775,7 @@ paths:
         '200':
           description: Success fetching Order
           schema:
-            items:
-              $ref: '#/definitions/Response'
+            $ref: '#/definitions/Response'
             type: object
         '400':
           description: Error fetching Order

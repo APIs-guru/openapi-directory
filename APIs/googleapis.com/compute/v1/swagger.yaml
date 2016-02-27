@@ -116,7 +116,7 @@ tags:
 paths:
   '/{project}':
     get:
-      description: Returns the specified project resource.
+      description: Returns the specified Project resource.
       operationId: compute.projects.get
       parameters:
         - description: Project ID for this request.
@@ -161,11 +161,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -217,11 +217,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -273,11 +273,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -329,11 +329,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -385,11 +385,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -441,11 +441,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -497,11 +497,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -553,11 +553,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -609,11 +609,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -665,11 +665,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -721,11 +721,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -777,11 +777,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -833,11 +833,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -889,11 +889,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -945,11 +945,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -1001,11 +1001,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -1095,7 +1095,7 @@ paths:
       tags:
         - globalAddresses
     get:
-      description: Returns the specified address resource.
+      description: Returns the specified address resource. Get a list of available addresses by making a list() request.
       operationId: compute.globalAddresses.get
       parameters:
         - description: Project ID for this request.
@@ -1145,11 +1145,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -1239,7 +1239,7 @@ paths:
       tags:
         - backendServices
     get:
-      description: Returns the specified BackendService resource.
+      description: Returns the specified BackendService resource. Get a list of available backend services by making a list() request.
       operationId: compute.backendServices.get
       parameters:
         - description: Project ID for this request.
@@ -1389,11 +1389,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -1593,11 +1593,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -1687,7 +1687,7 @@ paths:
       tags:
         - globalForwardingRules
     get:
-      description: Returns the specified ForwardingRule resource.
+      description: Returns the specified ForwardingRule resource. Get a list of available forwarding rules by making a list() request.
       operationId: compute.globalForwardingRules.get
       parameters:
         - description: Project ID for this request.
@@ -1776,11 +1776,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -1870,7 +1870,7 @@ paths:
       tags:
         - httpHealthChecks
     get:
-      description: Returns the specified HttpHealthCheck resource.
+      description: Returns the specified HttpHealthCheck resource. Get a list of available HTTP health checks by making a list() request.
       operationId: compute.httpHealthChecks.get
       parameters:
         - description: Project ID for this request.
@@ -1980,11 +1980,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -2074,7 +2074,7 @@ paths:
       tags:
         - httpsHealthChecks
     get:
-      description: Returns the specified HttpsHealthCheck resource.
+      description: Returns the specified HttpsHealthCheck resource. Get a list of available HTTPS health checks by making a list() request.
       operationId: compute.httpsHealthChecks.get
       parameters:
         - description: Project ID for this request.
@@ -2187,11 +2187,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -2287,7 +2287,7 @@ paths:
       tags:
         - images
     get:
-      description: Returns the specified image.
+      description: Returns the specified image. Get a list of available images by making a list() request.
       operationId: compute.images.get
       parameters:
         - description: Project ID for this request.
@@ -2379,11 +2379,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -2473,7 +2473,7 @@ paths:
       tags:
         - instanceTemplates
     get:
-      description: Returns the specified instance template resource.
+      description: Returns the specified instance template. Get a list of available instance templates by making a list() request.
       operationId: compute.instanceTemplates.get
       parameters:
         - description: Project ID for this request.
@@ -2510,7 +2510,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/global/licenses/{license}':
     get:
-      description: Returns the specified license resource.
+      description: Returns the specified License resource. Get a list of available licenses by making a list() request.
       operationId: compute.licenses.get
       parameters:
         - description: Project ID for this request.
@@ -2560,11 +2560,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -2654,7 +2654,7 @@ paths:
       tags:
         - networks
     get:
-      description: Returns the specified network.
+      description: Returns the specified network. Get a list of available networks by making a list() request.
       operationId: compute.networks.get
       parameters:
         - description: Project ID for this request.
@@ -2704,11 +2704,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -2771,7 +2771,7 @@ paths:
       tags:
         - globalOperations
     get:
-      description: Retrieves the specified Operations resource.
+      description: Retrieves the specified Operations resource. Get a list of operations by making a list() request.
       operationId: compute.globalOperations.get
       parameters:
         - description: Project ID for this request.
@@ -2808,7 +2808,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/global/routes':
     get:
-      description: Retrieves the list of route resources available to the specified project.
+      description: Retrieves the list of Route resources available to the specified project.
       operationId: compute.routes.list
       parameters:
         - description: Project ID for this request.
@@ -2821,11 +2821,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -2863,7 +2863,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Creates a route resource in the specified project using the data included in the request.
+      description: Creates a Route resource in the specified project using the data included in the request.
       operationId: compute.routes.insert
       parameters:
         - description: Project ID for this request.
@@ -2889,7 +2889,7 @@ paths:
         - routes
   '/{project}/global/routes/{route}':
     delete:
-      description: Deletes the specified route resource.
+      description: Deletes the specified Route resource.
       operationId: compute.routes.delete
       parameters:
         - description: Project ID for this request.
@@ -2897,7 +2897,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the route resource to delete.
+        - description: Name of the Route resource to delete.
           in: path
           name: route
           required: true
@@ -2915,7 +2915,7 @@ paths:
       tags:
         - routes
     get:
-      description: Returns the specified route resource.
+      description: Returns the specified Route resource. Get a list of available routes by making a list() request.
       operationId: compute.routes.get
       parameters:
         - description: Project ID for this request.
@@ -2923,7 +2923,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the route resource to return.
+        - description: Name of the Route resource to return.
           in: path
           name: route
           required: true
@@ -2965,11 +2965,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -3037,7 +3037,7 @@ paths:
       tags:
         - snapshots
     get:
-      description: Returns the specified Snapshot resource.
+      description: Returns the specified Snapshot resource. Get a list of available snapshots by making a list() request.
       operationId: compute.snapshots.get
       parameters:
         - description: Project ID for this request.
@@ -3087,11 +3087,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -3181,7 +3181,7 @@ paths:
       tags:
         - sslCertificates
     get:
-      description: Returns the specified SslCertificate resource.
+      description: Returns the specified SslCertificate resource. Get a list of available SSL certificates by making a list() request.
       operationId: compute.sslCertificates.get
       parameters:
         - description: Project ID for this request.
@@ -3231,11 +3231,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -3325,7 +3325,7 @@ paths:
       tags:
         - targetHttpProxies
     get:
-      description: Returns the specified TargetHttpProxy resource.
+      description: Returns the specified TargetHttpProxy resource. Get a list of available target HTTP proxies by making a list() request.
       operationId: compute.targetHttpProxies.get
       parameters:
         - description: Project ID for this request.
@@ -3375,11 +3375,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -3469,7 +3469,7 @@ paths:
       tags:
         - targetHttpsProxies
     get:
-      description: Returns the specified TargetHttpsProxy resource.
+      description: Returns the specified TargetHttpsProxy resource. Get a list of available target HTTPS proxies by making a list() request.
       operationId: compute.targetHttpsProxies.get
       parameters:
         - description: Project ID for this request.
@@ -3519,11 +3519,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -3613,7 +3613,7 @@ paths:
       tags:
         - urlMaps
     get:
-      description: Returns the specified UrlMap resource.
+      description: Returns the specified UrlMap resource. Get a list of available URL maps by making a list() request.
       operationId: compute.urlMaps.get
       parameters:
         - description: Project ID for this request.
@@ -3830,11 +3830,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -3873,7 +3873,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/regions/{region}':
     get:
-      description: Returns the specified region resource.
+      description: Returns the specified Region resource. Get a list of available regions by making a list() request.
       operationId: compute.regions.get
       parameters:
         - description: Project ID for this request.
@@ -3918,7 +3918,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: The name of the region for this request.
+        - description: Name of the region for this request.
           in: path
           name: region
           required: true
@@ -3928,11 +3928,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -3978,7 +3978,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: The name of the region for this request.
+        - description: Name of the region for this request.
           in: path
           name: region
           required: true
@@ -4009,7 +4009,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: The name of the region for this request.
+        - description: Name of the region for this request.
           in: path
           name: region
           required: true
@@ -4040,7 +4040,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: The name of the region for this request.
+        - description: Name of the region for this request.
           in: path
           name: region
           required: true
@@ -4092,11 +4092,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -4300,11 +4300,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -4432,11 +4432,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -4536,7 +4536,7 @@ paths:
       tags:
         - subnetworks
     get:
-      description: Returns the specified subnetwork.
+      description: Returns the specified subnetwork. Get a list of available subnetworks by making a list() request.
       operationId: compute.subnetworks.get
       parameters:
         - description: Project ID for this request.
@@ -4596,11 +4596,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -4700,7 +4700,7 @@ paths:
       tags:
         - targetPools
     get:
-      description: Returns the specified target pool.
+      description: Returns the specified target pool. Get a list of available target pools by making a list() request.
       operationId: compute.targetPools.get
       parameters:
         - description: Project ID for this request.
@@ -5020,7 +5020,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: The name of the region for this request.
+        - description: Name of the region for this request.
           in: path
           name: region
           required: true
@@ -5030,11 +5030,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -5080,7 +5080,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: The name of the region for this request.
+        - description: Name of the region for this request.
           in: path
           name: region
           required: true
@@ -5111,7 +5111,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: The name of the region for this request.
+        - description: Name of the region for this request.
           in: path
           name: region
           required: true
@@ -5134,7 +5134,7 @@ paths:
       tags:
         - targetVpnGateways
     get:
-      description: Returns the specified target VPN gateway.
+      description: Returns the specified target VPN gateway. Get a list of available target VPN gateways by making a list() request.
       operationId: compute.targetVpnGateways.get
       parameters:
         - description: Project ID for this request.
@@ -5142,7 +5142,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: The name of the region for this request.
+        - description: Name of the region for this request.
           in: path
           name: region
           required: true
@@ -5184,7 +5184,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: The name of the region for this request.
+        - description: Name of the region for this request.
           in: path
           name: region
           required: true
@@ -5194,11 +5194,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -5244,7 +5244,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: The name of the region for this request.
+        - description: Name of the region for this request.
           in: path
           name: region
           required: true
@@ -5275,7 +5275,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: The name of the region for this request.
+        - description: Name of the region for this request.
           in: path
           name: region
           required: true
@@ -5298,7 +5298,7 @@ paths:
       tags:
         - vpnTunnels
     get:
-      description: Returns the specified VpnTunnel resource.
+      description: Returns the specified VpnTunnel resource. Get a list of available VPN tunnels by making a list() request.
       operationId: compute.vpnTunnels.get
       parameters:
         - description: Project ID for this request.
@@ -5306,7 +5306,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: The name of the region for this request.
+        - description: Name of the region for this request.
           in: path
           name: region
           required: true
@@ -5430,7 +5430,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: The name of the TargetHttpProxy resource to set a URL map for.
+        - description: Name of the TargetHttpProxy to set a URL map for.
           in: path
           name: targetHttpProxy
           required: true
@@ -5469,7 +5469,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the TargetHttpsProxy resource to set an SSL certificate for.
+        - description: Name of the TargetHttpsProxy resource to set an SslCertificates resource for.
           in: path
           name: targetHttpsProxy
           required: true
@@ -5531,7 +5531,7 @@ paths:
         - targetHttpsProxies
   '/{project}/zones':
     get:
-      description: Retrieves the list of zone resources available to the specified project.
+      description: Retrieves the list of Zone resources available to the specified project.
       operationId: compute.zones.list
       parameters:
         - description: Project ID for this request.
@@ -5544,11 +5544,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -5587,7 +5587,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/zones/{zone}':
     get:
-      description: Returns the specified zone resource.
+      description: Returns the specified Zone resource. Get a list of available zones by making a list() request.
       operationId: compute.zones.get
       parameters:
         - description: Project ID for this request.
@@ -5624,7 +5624,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/zones/{zone}/autoscalers':
     get:
-      description: Retrieves a list of autoscaler resources contained within the specified zone.
+      description: Retrieves a list of autoscalers contained within the specified zone.
       operationId: compute.autoscalers.list
       parameters:
         - description: Project ID for this request.
@@ -5632,7 +5632,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the zone scoping this request.
+        - description: Name of the zone for this request.
           in: path
           name: zone
           required: true
@@ -5642,11 +5642,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -5684,7 +5684,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates an autoscaler resource in the specified project using the data included in the request. This method supports patch semantics.
+      description: Updates an autoscaler in the specified project using the data included in the request. This method supports patch semantics.
       operationId: compute.autoscalers.patch
       parameters:
         - description: Project ID for this request.
@@ -5692,12 +5692,12 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the zone scoping this request.
+        - description: Name of the zone for this request.
           in: path
           name: zone
           required: true
           type: string
-        - description: Name of the autoscaler resource to update.
+        - description: Name of the autoscaler to update.
           in: query
           name: autoscaler
           required: true
@@ -5719,7 +5719,7 @@ paths:
       tags:
         - autoscalers
     post:
-      description: Creates an autoscaler resource in the specified project using the data included in the request.
+      description: Creates an autoscaler in the specified project using the data included in the request.
       operationId: compute.autoscalers.insert
       parameters:
         - description: Project ID for this request.
@@ -5727,7 +5727,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the zone scoping this request.
+        - description: Name of the zone for this request.
           in: path
           name: zone
           required: true
@@ -5749,7 +5749,7 @@ paths:
       tags:
         - autoscalers
     put:
-      description: Updates an autoscaler resource in the specified project using the data included in the request.
+      description: Updates an autoscaler in the specified project using the data included in the request.
       operationId: compute.autoscalers.update
       parameters:
         - description: Project ID for this request.
@@ -5757,12 +5757,12 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the zone scoping this request.
+        - description: Name of the zone for this request.
           in: path
           name: zone
           required: true
           type: string
-        - description: Name of the autoscaler resource to update.
+        - description: Name of the autoscaler to update.
           in: query
           name: autoscaler
           type: string
@@ -5784,7 +5784,7 @@ paths:
         - autoscalers
   '/{project}/zones/{zone}/autoscalers/{autoscaler}':
     delete:
-      description: Deletes the specified autoscaler resource.
+      description: Deletes the specified autoscaler.
       operationId: compute.autoscalers.delete
       parameters:
         - description: Project ID for this request.
@@ -5792,12 +5792,12 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the zone scoping this request.
+        - description: Name of the zone for this request.
           in: path
           name: zone
           required: true
           type: string
-        - description: Name of the persistent autoscaler resource to delete.
+        - description: Name of the autoscaler to delete.
           in: path
           name: autoscaler
           required: true
@@ -5815,7 +5815,7 @@ paths:
       tags:
         - autoscalers
     get:
-      description: Returns the specified autoscaler resource.
+      description: Returns the specified autoscaler resource. Get a list of available autoscalers by making a list() request.
       operationId: compute.autoscalers.get
       parameters:
         - description: Project ID for this request.
@@ -5823,12 +5823,12 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the zone scoping this request.
+        - description: Name of the zone for this request.
           in: path
           name: zone
           required: true
           type: string
-        - description: Name of the persistent autoscaler resource to return.
+        - description: Name of the autoscaler to return.
           in: path
           name: autoscaler
           required: true
@@ -5875,11 +5875,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -5918,7 +5918,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/zones/{zone}/diskTypes/{diskType}':
     get:
-      description: Returns the specified disk type.
+      description: Returns the specified disk type. Get a list of available disk types by making a list() request.
       operationId: compute.diskTypes.get
       parameters:
         - description: Project ID for this request.
@@ -5978,11 +5978,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -6086,7 +6086,7 @@ paths:
       tags:
         - disks
     get:
-      description: Returns a specified persistent disk.
+      description: Returns a specified persistent disk. Get a list of available persistent disks by making a list() request.
       operationId: compute.disks.get
       parameters:
         - description: Project ID for this request.
@@ -6190,11 +6190,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -6294,7 +6294,7 @@ paths:
       tags:
         - instanceGroupManagers
     get:
-      description: Returns all of the details about the specified managed instance group.
+      description: Returns all of the details about the specified managed instance group. Get a list of available managed instance groups by making a list() request.
       operationId: compute.instanceGroupManagers.get
       parameters:
         - description: Project ID for this request.
@@ -6661,11 +6661,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -6765,7 +6765,7 @@ paths:
       tags:
         - instanceGroups
     get:
-      description: Returns the specified instance group resource.
+      description: Returns the specified instance group. Get a list of available instance groups by making a list() request.
       operationId: compute.instanceGroups.get
       parameters:
         - description: Project ID for this request.
@@ -6882,11 +6882,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -7027,11 +7027,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -7131,7 +7131,7 @@ paths:
       tags:
         - instances
     get:
-      description: Returns the specified Instance resource.
+      description: Returns the specified Instance resource. Get a list of available instances by making a list() request.
       operationId: compute.instances.get
       parameters:
         - description: Project ID for this request.
@@ -7774,11 +7774,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -7817,7 +7817,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{project}/zones/{zone}/machineTypes/{machineType}':
     get:
-      description: Returns the specified machine type.
+      description: Returns the specified machine type. Get a list of available machine types by making a list() request.
       operationId: compute.machineTypes.get
       parameters:
         - description: Project ID for this request.
@@ -7877,11 +7877,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -8009,11 +8009,11 @@ paths:
 
             The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, to filter for instances whose name is not equal to example-instance, you would use filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
 
             Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
 
-            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions meaning that resources must match all expressions to pass the filters.
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
@@ -8113,7 +8113,7 @@ paths:
       tags:
         - targetInstances
     get:
-      description: Returns the specified TargetInstance resource.
+      description: Returns the specified TargetInstance resource. Get a list of available target instances by making a list() request.
       operationId: compute.targetInstances.get
       parameters:
         - description: Project ID for this request.
@@ -8195,7 +8195,7 @@ definitions:
         description: '[Output Only] Type of the resource. Always compute#address for addresses.'
         type: string
       name:
-        description: 'Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
       region:
@@ -8273,6 +8273,7 @@ definitions:
           code:
             description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
             enum:
+              - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
               - INJECTED_KERNELS_DEPRECATED
@@ -8295,7 +8296,7 @@ definitions:
             items:
               properties:
                 key:
-                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource, and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
                   type: string
                 value:
                   description: '[Output Only] A warning data value corresponding to the key.'
@@ -8384,10 +8385,14 @@ definitions:
         type: string
     type: object
   Autoscaler:
+    description: 'Represents an Autoscaler resource. Autoscalers allow you to automatically scale virtual machine instances in managed instance groups according to an autoscaling policy that you define. For more information, read Autoscaling Groups of Instances.'
     properties:
       autoscalingPolicy:
         $ref: '#/definitions/AutoscalingPolicy'
-        description: Autoscaling configuration.
+        description: |-
+          The configuration parameters for the autoscaling algorithm. You can define one or more of the policies for an autoscaler: cpuUtilization, customMetricUtilizations, and loadBalancingUtilization.
+
+          If none of these are specified, the default will be to autoscale based on cpuUtilization to 0.8 or 80%.
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
@@ -8400,7 +8405,7 @@ definitions:
         type: string
       kind:
         default: 'compute#autoscaler'
-        description: Type of the resource.
+        description: '[Output Only] Type of the resource. Always compute#autoscaler for autoscalers.'
         type: string
       name:
         description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
@@ -8410,7 +8415,7 @@ definitions:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
       target:
-        description: URL of Instance Group Manager or Replica Pool which will be controlled by Autoscaler.
+        description: URL of the managed instance group that this autoscaler will scale.
         type: string
       zone:
         description: '[Output Only] URL of the zone where the instance group resides.'
@@ -8424,12 +8429,12 @@ definitions:
       items:
         additionalProperties:
           $ref: '#/definitions/AutoscalersScopedList'
-          description: Name of the scope containing this set of autoscalers.
+          description: '[Output Only] Name of the scope containing this set of autoscalers.'
         description: A map of scoped autoscaler lists.
         type: object
       kind:
         default: 'compute#autoscalerAggregatedList'
-        description: Type of resource.
+        description: '[Output Only] Type of resource. Always compute#autoscalerAggregatedList for aggregated lists of autoscalers.'
         type: string
       nextPageToken:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
@@ -8439,7 +8444,7 @@ definitions:
         type: string
     type: object
   AutoscalerList:
-    description: Contains a list of persistent autoscaler resources.
+    description: Contains a list of Autoscaler resources.
     properties:
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
@@ -8451,7 +8456,7 @@ definitions:
         type: array
       kind:
         default: 'compute#autoscalerList'
-        description: Type of resource.
+        description: '[Output Only] Type of resource. Always compute#autoscalerList for lists of autoscalers.'
         type: string
       nextPageToken:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
@@ -8463,16 +8468,17 @@ definitions:
   AutoscalersScopedList:
     properties:
       autoscalers:
-        description: List of autoscalers contained in this scope.
+        description: '[Output Only] List of autoscalers contained in this scope.'
         items:
           $ref: '#/definitions/Autoscaler'
         type: array
       warning:
-        description: Informational warning which replaces the list of autoscalers when the list is empty.
+        description: '[Output Only] Informational warning which replaces the list of autoscalers when the list is empty.'
         properties:
           code:
             description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
             enum:
+              - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
               - INJECTED_KERNELS_DEPRECATED
@@ -8495,7 +8501,7 @@ definitions:
             items:
               properties:
                 key:
-                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource, and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
                   type: string
                 value:
                   description: '[Output Only] A warning data value corresponding to the key.'
@@ -8511,14 +8517,17 @@ definitions:
     description: Cloud Autoscaler policy.
     properties:
       coolDownPeriodSec:
-        description: The number of seconds that the Autoscaler should wait between two succeeding changes to the number of virtual machines. You should define an interval that is at least as long as the initialization time of a virtual machine and the time it may take for replica pool to create the virtual machine. The default is 60 seconds.
+        description: |-
+          The number of seconds that the autoscaler should wait before it starts collecting information from a new instance. This prevents the autoscaler from collecting information when the instance is initializing, during which the collected usage would not be reliable. The default time autoscaler waits is 60 seconds.
+
+          Virtual machine initialization times might vary because of numerous factors. We recommend that you test how long an instance may take to initialize. To do this, create an instance and time the startup process.
         format: int32
         type: integer
       cpuUtilization:
         $ref: '#/definitions/AutoscalingPolicyCpuUtilization'
-        description: 'TODO(jbartosik): Add support for scaling based on muliple utilization metrics (take max recommendation). Exactly one utilization policy should be provided. Configuration parameters of CPU based autoscaling policy.'
+        description: Defines the CPU utilization policy that allows the autoscaler to scale based on the average CPU utilization of a managed instance group.
       customMetricUtilizations:
-        description: Configuration parameters of autoscaling based on custom metric.
+        description: Configuration parameters of autoscaling based on a custom metric.
         items:
           $ref: '#/definitions/AutoscalingPolicyCustomMetricUtilization'
         type: array
@@ -8526,11 +8535,11 @@ definitions:
         $ref: '#/definitions/AutoscalingPolicyLoadBalancingUtilization'
         description: Configuration parameters of autoscaling based on load balancer.
       maxNumReplicas:
-        description: The maximum number of replicas that the Autoscaler can scale up to. This field is required for config to be effective. Maximum number of replicas should be not lower than minimal number of replicas. Absolute limit for this value is defined in Autoscaler backend.
+        description: The maximum number of instances that the autoscaler can scale up to. This is required when creating or updating an autoscaler. The maximum number of replicas should not be lower than minimal number of replicas.
         format: int32
         type: integer
       minNumReplicas:
-        description: "The minimum number of replicas that the Autoscaler can scale down to. Can't be less than 0. If not provided Autoscaler will choose default value depending on maximal number of replicas."
+        description: 'The minimum number of replicas that the autoscaler can scale down to. This cannot be less than 0. If not provided, autoscaler will choose a default value depending on maximum number of instances allowed.'
         format: int32
         type: integer
     type: object
@@ -8538,7 +8547,12 @@ definitions:
     description: CPU utilization policy.
     properties:
       utilizationTarget:
-        description: 'The target utilization that the Autoscaler should maintain. It is represented as a fraction of used cores. For example: 6 cores used in 8-core VM are represented here as 0.75. Must be a float value between (0, 1]. If not defined, the default is 0.8.'
+        description: |-
+          The target CPU utilization that the autoscaler should maintain. Must be a float value in the range (0, 1]. If not specified, the default is 0.8.
+
+          If the CPU level is below the target utilization, the autoscaler scales down the number of instances until it reaches the minimum number of instances you specified or until the average CPU of your instances reaches the target utilization.
+
+          If the average CPU is above the target utilization, the autoscaler scales up until it reaches the maximum number of instances you specified or until the average utilization reaches the target utilization.
         format: double
         type: number
     type: object
@@ -8546,14 +8560,22 @@ definitions:
     description: Custom utilization metric policy.
     properties:
       metric:
-        description: 'Identifier of the metric. It should be a Cloud Monitoring metric. The metric can not have negative values. The metric should be an utilization metric (increasing number of VMs handling requests x times should reduce average value of the metric roughly x times). For example you could use: compute.googleapis.com/instance/network/received_bytes_count.'
+        description: |-
+          The identifier of the Cloud Monitoring metric. The metric cannot have negative values and should be a utilization metric, which means that the number of virtual machines handling requests should increase or decrease proportionally to the metric. The metric must also have a label of compute.googleapis.com/resource_id with the value of the instance's unique ID, although this alone does not guarantee that the metric is valid.
+
+          For example, the following is a valid metric:
+          compute.googleapis.com/instance/network/received_bytes_count
+
+
+          The following is not a valid metric because it does not increase or decrease based on usage:
+          compute.googleapis.com/instance/cpu/reserved_cores
         type: string
       utilizationTarget:
-        description: Target value of the metric which Autoscaler should maintain. Must be a positive value.
+        description: Target value of the metric which autoscaler should maintain. Must be a positive value.
         format: double
         type: number
       utilizationTargetType:
-        description: Defines type in which utilization_target is expressed.
+        description: 'Defines how target utilization value is expressed for a Cloud Monitoring metric. Either GAUGE, DELTA_PER_SECOND, or DELTA_PER_MINUTE. If not specified, the default is GAUGE.'
         enum:
           - DELTA_PER_MINUTE
           - DELTA_PER_SECOND
@@ -8561,10 +8583,10 @@ definitions:
         type: string
     type: object
   AutoscalingPolicyLoadBalancingUtilization:
-    description: Load balancing utilization policy.
+    description: Configuration parameters of autoscaling based on load balancing.
     properties:
       utilizationTarget:
-        description: 'Fraction of backend capacity utilization (set in HTTP load balancing configuration) that Autoscaler should maintain. Must be a positive float value. If not defined, the default is 0.8. For example if your maxRatePerInstance capacity (in HTTP Load Balancing configuration) is set at 10 and you would like to keep number of instances such that each instance receives 7 QPS on average, set this to 0.7.'
+        description: 'Fraction of backend capacity utilization (set in HTTP(s) load balancing configuration) that autoscaler should maintain. Must be a positive float value. If not defined, the default is 0.8.'
         format: double
         type: number
     type: object
@@ -8747,7 +8769,7 @@ definitions:
           type: string
         type: array
       name:
-        description: 'Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
       options:
@@ -8943,6 +8965,7 @@ definitions:
           code:
             description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
             enum:
+              - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
               - INJECTED_KERNELS_DEPRECATED
@@ -8965,7 +8988,7 @@ definitions:
             items:
               properties:
                 key:
-                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource, and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
                   type: string
                 value:
                   description: '[Output Only] A warning data value corresponding to the key.'
@@ -8990,6 +9013,7 @@ definitions:
           code:
             description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
             enum:
+              - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
               - INJECTED_KERNELS_DEPRECATED
@@ -9012,7 +9036,7 @@ definitions:
             items:
               properties:
                 key:
-                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource, and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
                   type: string
                 value:
                   description: '[Output Only] A warning data value corresponding to the key.'
@@ -9215,6 +9239,7 @@ definitions:
           code:
             description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
             enum:
+              - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
               - INJECTED_KERNELS_DEPRECATED
@@ -9237,7 +9262,7 @@ definitions:
             items:
               properties:
                 key:
-                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource, and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
                   type: string
                 value:
                   description: '[Output Only] A warning data value corresponding to the key.'
@@ -9603,7 +9628,7 @@ definitions:
         type: string
       tags:
         $ref: '#/definitions/Tags'
-        description: A list of tags to appy to this instance. Tags are used to identify valid sources or targets for network firewalls and are specified by the client during instance creation. The tags can be later modified by the setTags method. Each tag within the list must comply with RFC1035.
+        description: A list of tags to apply to this instance. Tags are used to identify valid sources or targets for network firewalls and are specified by the client during instance creation. The tags can be later modified by the setTags method. Each tag within the list must comply with RFC1035.
       zone:
         description: '[Output Only] URL of the zone where the instance resides.'
         type: string
@@ -9898,6 +9923,7 @@ definitions:
           code:
             description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
             enum:
+              - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
               - INJECTED_KERNELS_DEPRECATED
@@ -9920,7 +9946,7 @@ definitions:
             items:
               properties:
                 key:
-                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource, and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
                   type: string
                 value:
                   description: '[Output Only] A warning data value corresponding to the key.'
@@ -10009,6 +10035,7 @@ definitions:
           code:
             description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
             enum:
+              - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
               - INJECTED_KERNELS_DEPRECATED
@@ -10031,7 +10058,7 @@ definitions:
             items:
               properties:
                 key:
-                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource, and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
                   type: string
                 value:
                   description: '[Output Only] A warning data value corresponding to the key.'
@@ -10215,6 +10242,7 @@ definitions:
           code:
             description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
             enum:
+              - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
               - INJECTED_KERNELS_DEPRECATED
@@ -10237,7 +10265,7 @@ definitions:
             items:
               properties:
                 key:
-                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource, and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
                   type: string
                 value:
                   description: '[Output Only] A warning data value corresponding to the key.'
@@ -10391,6 +10419,7 @@ definitions:
           code:
             description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
             enum:
+              - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
               - INJECTED_KERNELS_DEPRECATED
@@ -10413,7 +10442,7 @@ definitions:
             items:
               properties:
                 key:
-                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource, and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
                   type: string
                 value:
                   description: '[Output Only] A warning data value corresponding to the key.'
@@ -10474,7 +10503,7 @@ definitions:
                   description: '[Output Only] The error type identifier for this error.'
                   type: string
                 location:
-                  description: '[Output Only] Indicates the field in the request which caused the error. This property is optional.'
+                  description: '[Output Only] Indicates the field in the request that caused the error. This property is optional.'
                   type: string
                 message:
                   description: '[Output Only] An optional, human-readable error message.'
@@ -10632,7 +10661,7 @@ definitions:
                   description: '[Output Only] The error type identifier for this error.'
                   type: string
                 location:
-                  description: '[Output Only] Indicates the field in the request which caused the error. This property is optional.'
+                  description: '[Output Only] Indicates the field in the request that caused the error. This property is optional.'
                   type: string
                 message:
                   description: '[Output Only] An optional, human-readable error message.'
@@ -10656,7 +10685,7 @@ definitions:
         type: string
       kind:
         default: 'compute#operation'
-        description: '[Output Only] Type of the resource. Always compute#operation for Operation resources.'
+        description: '[Output Only] Type of the resource. Always compute#operation for operation resources.'
         type: string
       name:
         description: '[Output Only] Name of the resource.'
@@ -10704,6 +10733,7 @@ definitions:
             code:
               description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
               enum:
+                - CLEANUP_FAILED
                 - DEPRECATED_RESOURCE_USED
                 - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
                 - INJECTED_KERNELS_DEPRECATED
@@ -10726,7 +10756,7 @@ definitions:
               items:
                 properties:
                   key:
-                    description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource, and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                    description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
                     type: string
                   value:
                     description: '[Output Only] A warning data value corresponding to the key.'
@@ -10799,6 +10829,7 @@ definitions:
           code:
             description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
             enum:
+              - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
               - INJECTED_KERNELS_DEPRECATED
@@ -10821,7 +10852,7 @@ definitions:
             items:
               properties:
                 key:
-                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource, and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
                   type: string
                 value:
                   description: '[Output Only] A warning data value corresponding to the key.'
@@ -11020,9 +11051,9 @@ definitions:
     type: object
   Route:
     description: |-
-      Represents a Routes resource. A route specifies how certain packets should be handled by the network. Routes are associated with instances by tags and the set of routes for a particular instance is called its routing table.
+      Represents a Route resource. A route specifies how certain packets should be handled by the network. Routes are associated with instances by tags and the set of routes for a particular instance is called its routing table.
 
-      For each packet leaving a instance, the system searches that instance's routing table for a single best matching route. Routes match packets by destination IP address, preferring smaller or more specific ranges over larger ones. If there is a tie, the system selects the route with the smallest priority value. If there is still a tie, it uses the layer three and four packet headers to select just one of the remaining matching Routes. The packet is then forwarded as specified by the nextHop field of the winning route - either to another instance destination, a instance gateway or a Google Compute Engine-operated gateway.
+      For each packet leaving a instance, the system searches that instance's routing table for a single best matching route. Routes match packets by destination IP address, preferring smaller or more specific ranges over larger ones. If there is a tie, the system selects the route with the smallest priority value. If there is still a tie, it uses the layer three and four packet headers to select just one of the remaining matching routes. The packet is then forwarded as specified by the nextHop field of the winning route - either to another instance destination, a instance gateway or a Google Compute Engine-operated gateway.
 
       Packets that do not match any route in the sending instance's routing table are dropped.
     properties:
@@ -11044,7 +11075,7 @@ definitions:
         description: '[Output Only] Type of this resource. Always compute#routes for Route resources.'
         type: string
       name:
-        description: 'Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
       network:
@@ -11086,6 +11117,7 @@ definitions:
             code:
               description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
               enum:
+                - CLEANUP_FAILED
                 - DEPRECATED_RESOURCE_USED
                 - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
                 - INJECTED_KERNELS_DEPRECATED
@@ -11108,7 +11140,7 @@ definitions:
               items:
                 properties:
                   key:
-                    description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource, and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                    description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
                     type: string
                   value:
                     description: '[Output Only] A warning data value corresponding to the key.'
@@ -11122,7 +11154,7 @@ definitions:
         type: array
     type: object
   RouteList:
-    description: Contains a list of route resources.
+    description: Contains a list of Route resources.
     properties:
       id:
         description: '[Output Only] Unique identifier for the resource. Defined by the server.'
@@ -11413,6 +11445,7 @@ definitions:
           code:
             description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
             enum:
+              - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
               - INJECTED_KERNELS_DEPRECATED
@@ -11435,7 +11468,7 @@ definitions:
             items:
               properties:
                 key:
-                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource, and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
                   type: string
                 value:
                   description: '[Output Only] A warning data value corresponding to the key.'
@@ -11481,7 +11514,7 @@ definitions:
         description: '[Output Only] Type of resource. Always compute#targetHttpProxy for target HTTP proxies.'
         type: string
       name:
-        description: 'Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
       selfLink:
@@ -11516,7 +11549,7 @@ definitions:
   TargetHttpsProxiesSetSslCertificatesRequest:
     properties:
       sslCertificates:
-        description: New set of URLs to SslCertificate resources to associate with this TargetHttpProxy. Currently exactly one SSL certificate must be specified.
+        description: New set of SslCertificate resources to associate with this TargetHttpsProxy resource. Currently exactly one SslCertificate resource must be specified.
         items:
           type: string
         type: array
@@ -11536,7 +11569,7 @@ definitions:
         type: string
       kind:
         default: 'compute#targetHttpsProxy'
-        description: '[Output Only] Type of the resource. Always compute#targetHttpsProxy for target HTTPS proxies.'
+        description: '[Output Only] Type of resource. Always compute#targetHttpsProxy for target HTTPS proxies.'
         type: string
       name:
         description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
@@ -11567,7 +11600,7 @@ definitions:
         type: array
       kind:
         default: 'compute#targetHttpsProxyList'
-        description: Type of resource.
+        description: 'Type of resource. Always compute#targetHttpsProxyList for lists of target HTTPS proxies.'
         type: string
       nextPageToken:
         description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
@@ -11669,6 +11702,7 @@ definitions:
           code:
             description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
             enum:
+              - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
               - INJECTED_KERNELS_DEPRECATED
@@ -11691,7 +11725,7 @@ definitions:
             items:
               properties:
                 key:
-                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource, and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
                   type: string
                 value:
                   description: '[Output Only] A warning data value corresponding to the key.'
@@ -11869,6 +11903,7 @@ definitions:
           code:
             description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
             enum:
+              - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
               - INJECTED_KERNELS_DEPRECATED
@@ -11891,7 +11926,7 @@ definitions:
             items:
               properties:
                 key:
-                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource, and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
                   type: string
                 value:
                   description: '[Output Only] A warning data value corresponding to the key.'
@@ -11931,7 +11966,7 @@ definitions:
         description: '[Output Only] Type of resource. Always compute#targetVpnGateway for target VPN gateways.'
         type: string
       name:
-        description: 'Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
       network:
@@ -12014,6 +12049,7 @@ definitions:
           code:
             description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
             enum:
+              - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
               - INJECTED_KERNELS_DEPRECATED
@@ -12036,7 +12072,7 @@ definitions:
             items:
               properties:
                 key:
-                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource, and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
                   type: string
                 value:
                   description: '[Output Only] A warning data value corresponding to the key.'
@@ -12217,7 +12253,7 @@ definitions:
           type: string
         type: array
       name:
-        description: 'Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
       peerIp:
@@ -12238,6 +12274,7 @@ definitions:
       status:
         description: '[Output Only] The status of the VPN tunnel.'
         enum:
+          - ALLOCATING_RESOURCES
           - AUTHORIZATION_ERROR
           - DEPROVISIONING
           - ESTABLISHED
@@ -12251,7 +12288,7 @@ definitions:
           - WAITING_FOR_FULL_CONFIG
         type: string
       targetVpnGateway:
-        description: URL of the VPN gateway to which this VPN tunnel is associated. Provided by the client when the VPN tunnel is created.
+        description: URL of the VPN gateway with which this VPN tunnel is associated. Provided by the client when the VPN tunnel is created.
         type: string
     type: object
   VpnTunnelAggregatedList:
@@ -12311,6 +12348,7 @@ definitions:
           code:
             description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
             enum:
+              - CLEANUP_FAILED
               - DEPRECATED_RESOURCE_USED
               - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
               - INJECTED_KERNELS_DEPRECATED
@@ -12333,7 +12371,7 @@ definitions:
             items:
               properties:
                 key:
-                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource, and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
                   type: string
                 value:
                   description: '[Output Only] A warning data value corresponding to the key.'
