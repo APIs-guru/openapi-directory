@@ -3,7 +3,7 @@
 This API implemented as `gh-pages` branch Github automatically mirror it's content to<BR> https://apis-guru.github.io/api-models/<BR>
 That mean API served as static content and support both caching and compression.
 
-http://apis-guru.github.io/api-models/api/v1/list.json - List all API specs.
+https://apis-guru.github.io/api-models/api/v1/list.json - List all API specs.
 It consist of JSON object with API IDs(`<provider>[:<service>]`) as keys.
 Values have following are objects with following attributes:
  - `added` - Timestamp when this API was first added to collection.
