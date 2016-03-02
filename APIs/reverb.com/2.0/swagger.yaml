@@ -458,7 +458,7 @@ paths:
           in: query
           name: product_type
           type: string
-        - description: Condition name
+        - description: 'Condition: new,used,all'
           in: query
           name: condition
           type: string
@@ -524,7 +524,15 @@ paths:
           in: query
           name: preferred_seller
           type: boolean
-        - description: Type of listing
+        - description: Slug of shop to search
+          in: query
+          name: shop
+          type: string
+        - description: ID of shop to search
+          in: query
+          name: shop_id
+          type: string
+        - description: 'Type of listing: auction,make_an_offer,buy_it_now'
           in: query
           name: listing_type
           type: string
@@ -532,7 +540,7 @@ paths:
           in: query
           name: ships_to
           type: string
-        - description: "If true, don't return any auctions"
+        - description: 'If true, exclude auctions'
           in: query
           name: exclude_auctions
           type: boolean
@@ -540,10 +548,6 @@ paths:
           in: query
           name: accepts_payment_plans
           type: boolean
-        - description: State of listing
-          in: query
-          name: state
-          type: string
         - description: Minimum number of watchers (used to find popular items)
           in: query
           name: watchers_count_min
@@ -583,7 +587,7 @@ paths:
           in: query
           name: product_type
           type: string
-        - description: Condition name
+        - description: 'Condition: new,used,all'
           in: query
           name: condition
           type: string
@@ -649,7 +653,15 @@ paths:
           in: query
           name: preferred_seller
           type: boolean
-        - description: Type of listing
+        - description: Slug of shop to search
+          in: query
+          name: shop
+          type: string
+        - description: ID of shop to search
+          in: query
+          name: shop_id
+          type: string
+        - description: 'Type of listing: auction,make_an_offer,buy_it_now'
           in: query
           name: listing_type
           type: string
@@ -657,7 +669,7 @@ paths:
           in: query
           name: ships_to
           type: string
-        - description: "If true, don't return any auctions"
+        - description: 'If true, exclude auctions'
           in: query
           name: exclude_auctions
           type: boolean
@@ -665,10 +677,6 @@ paths:
           in: query
           name: accepts_payment_plans
           type: boolean
-        - description: State of listing
-          in: query
-          name: state
-          type: string
         - description: Minimum number of watchers (used to find popular items)
           in: query
           name: watchers_count_min
@@ -701,7 +709,7 @@ paths:
                   type: string
                 type: array
               condition:
-                description: 'Condition name (Brand New, Very Good, etc)'
+                description: 'Condition name (values: Non Functioning,Poor,Fair,Good,Very Good,Excellent,Mint,Mint (with inventory),Like New,Brand New)'
                 type: string
               description:
                 description: Product description. Please keep formatting to a minimum.
@@ -828,7 +836,7 @@ paths:
           in: query
           name: product_type
           type: string
-        - description: Condition name
+        - description: 'Condition: new,used,all'
           in: query
           name: condition
           type: string
@@ -894,7 +902,15 @@ paths:
           in: query
           name: preferred_seller
           type: boolean
-        - description: Type of listing
+        - description: Slug of shop to search
+          in: query
+          name: shop
+          type: string
+        - description: ID of shop to search
+          in: query
+          name: shop_id
+          type: string
+        - description: 'Type of listing: auction,make_an_offer,buy_it_now'
           in: query
           name: listing_type
           type: string
@@ -902,7 +918,7 @@ paths:
           in: query
           name: ships_to
           type: string
-        - description: "If true, don't return any auctions"
+        - description: 'If true, exclude auctions'
           in: query
           name: exclude_auctions
           type: boolean
@@ -910,10 +926,6 @@ paths:
           in: query
           name: accepts_payment_plans
           type: boolean
-        - description: State of listing
-          in: query
-          name: state
-          type: string
         - description: Minimum number of watchers (used to find popular items)
           in: query
           name: watchers_count_min
@@ -1078,7 +1090,7 @@ paths:
                   type: string
                 type: array
               condition:
-                description: 'Condition name (Brand New, Very Good, etc)'
+                description: 'Condition name (values: Non Functioning,Poor,Fair,Good,Very Good,Excellent,Mint,Mint (with inventory),Like New,Brand New)'
                 type: string
               description:
                 description: Product description. Please keep formatting to a minimum.
@@ -1637,13 +1649,13 @@ paths:
                 description: Category slug from /api/categories
                 type: string
               condition:
-                description: Condition name
+                description: 'Condition: new,used,all'
                 type: string
               decade:
                 description: 'Decade: e.g. 1970s, early 70s'
                 type: string
               exclude_auctions:
-                description: "If true, don't return any auctions"
+                description: 'If true, exclude auctions'
                 type: boolean
               finish:
                 description: 'Visual finish of the item, common for guitars'
@@ -1661,7 +1673,7 @@ paths:
                 description: State or region code where item is located
                 type: string
               listing_type:
-                description: Type of listing
+                description: 'Type of listing: auction,make_an_offer,buy_it_now'
                 type: string
               make:
                 description: Make(s)/brand of item (e.g. Fender). Can take a single value or an array.
@@ -1694,8 +1706,11 @@ paths:
               ships_to:
                 description: Limit search to items that ship to this country code
                 type: string
-              state:
-                description: State of listing
+              shop:
+                description: Slug of shop to search
+                type: string
+              shop_id:
+                description: ID of shop to search
                 type: string
               watchers_count_min:
                 description: Minimum number of watchers (used to find popular items)
@@ -2910,7 +2925,7 @@ paths:
           schema:
             properties:
               topic:
-                description: 'Valid values: listings/update, orders/create'
+                description: 'Valid values: listings/update, orders/create, orders/update, payments/create, payments/update'
                 type: string
               url:
                 type: string

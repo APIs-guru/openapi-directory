@@ -798,6 +798,9 @@ definitions:
         type: string
       country:
         type: string
+      current_business_day:
+        format: date-time
+        type: string
       desc:
         type: string
       email:
@@ -824,6 +827,8 @@ definitions:
       street:
         type: string
       url:
+        type: string
+      utc_offset:
         type: string
     type: object
   JsonPatchOperationRequest:
@@ -1114,7 +1119,7 @@ definitions:
   TotalCountResponse:
     properties:
       _count:
-        format: int32
+        format: int64
         type: integer
     required:
       - _count

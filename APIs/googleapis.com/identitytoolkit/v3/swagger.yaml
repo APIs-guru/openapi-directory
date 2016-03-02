@@ -190,6 +190,15 @@ paths:
     get:
       description: Get project configuration.
       operationId: identitytoolkit.relyingparty.getProjectConfig
+      parameters:
+        - description: Delegated GCP project number of the request.
+          in: query
+          name: delegatedProjectNumber
+          type: string
+        - description: GCP project number of the request.
+          in: query
+          name: projectNumber
+          type: string
       responses:
         '200':
           description: Successful response
@@ -289,6 +298,30 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/SetAccountInfoResponse'
+      tags:
+        - relyingparty
+  /setProjectConfig:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Set project configuration.
+      operationId: identitytoolkit.relyingparty.setProjectConfig
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartySetProjectConfigRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/IdentitytoolkitRelyingpartySetProjectConfigResponse'
       tags:
         - relyingparty
   /signOutUser:
@@ -491,6 +524,28 @@ definitions:
           $ref: '#/definitions/UserInfo'
         type: array
     type: object
+  EmailTemplate:
+    description: Template for an email template.
+    properties:
+      body:
+        description: Email body.
+        type: string
+      format:
+        description: Email body format.
+        type: string
+      from:
+        description: From address of the email.
+        type: string
+      fromDisplayName:
+        description: From display name.
+        type: string
+      replyTo:
+        description: Reply-to address.
+        type: string
+      subject:
+        description: Subject of the email.
+        type: string
+    type: object
   GetAccountInfoResponse:
     description: Response of getting account information.
     properties:
@@ -595,6 +650,10 @@ definitions:
   IdentitytoolkitRelyingpartyGetAccountInfoRequest:
     description: Request to get the account information.
     properties:
+      delegatedProjectNumber:
+        description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
+        format: int64
+        type: string
       email:
         description: The list of emails of the users to inquiry.
         items:
@@ -618,6 +677,9 @@ definitions:
       apiKey:
         description: 'Browser API key, needed when making http request to Apiary.'
         type: string
+      changeEmailTemplate:
+        $ref: '#/definitions/EmailTemplate'
+        description: Change email template.
       idpConfig:
         description: OAuth2 provider configuration.
         items:
@@ -626,6 +688,15 @@ definitions:
       projectId:
         description: Project ID of the relying party.
         type: string
+      resetPasswordTemplate:
+        $ref: '#/definitions/EmailTemplate'
+        description: Reset password email template.
+      useEmailSending:
+        description: Whether to use email sending provided by Firebear.
+        type: boolean
+      verifyEmailTemplate:
+        $ref: '#/definitions/EmailTemplate'
+        description: Verify email template.
     type: object
   IdentitytoolkitRelyingpartyGetPublicKeysResponse:
     additionalProperties:
@@ -661,6 +732,11 @@ definitions:
         description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
         format: int64
         type: string
+      deleteAttribute:
+        description: The attributes users request to delete.
+        items:
+          type: string
+        type: array
       disableUser:
         description: Whether to disable the user.
         type: boolean
@@ -696,12 +772,53 @@ definitions:
         items:
           type: string
         type: array
+      returnSecureToken:
+        description: Whether return sts id token and refresh token instead of gitkit token.
+        type: boolean
       upgradeToFederatedLogin:
         description: Mark the user to upgrade to federated login.
         type: boolean
       validSince:
         description: Timestamp in seconds for valid login token.
         format: int64
+        type: string
+    type: object
+  IdentitytoolkitRelyingpartySetProjectConfigRequest:
+    description: Request to set the project configuration.
+    properties:
+      allowPasswordUser:
+        description: Whether to allow password user sign in or sign up.
+        type: boolean
+      apiKey:
+        description: 'Browser API key, needed when making http request to Apiary.'
+        type: string
+      changeEmailTemplate:
+        $ref: '#/definitions/EmailTemplate'
+        description: Change email template.
+      delegatedProjectNumber:
+        description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
+        format: int64
+        type: string
+      idpConfig:
+        description: Oauth2 provider configuration.
+        items:
+          $ref: '#/definitions/IdpConfig'
+        type: array
+      resetPasswordTemplate:
+        $ref: '#/definitions/EmailTemplate'
+        description: Reset password email template.
+      useEmailSending:
+        description: Whether to use email sending provided by Firebear.
+        type: boolean
+      verifyEmailTemplate:
+        $ref: '#/definitions/EmailTemplate'
+        description: Verify email template.
+    type: object
+  IdentitytoolkitRelyingpartySetProjectConfigResponse:
+    description: Response of setting the project configuration.
+    properties:
+      projectId:
+        description: Project ID of the relying party.
         type: string
     type: object
   IdentitytoolkitRelyingpartySignOutUserRequest:
@@ -745,6 +862,9 @@ definitions:
       password:
         description: The new password of the user.
         type: string
+      returnSecureToken:
+        description: Whether return sts id token and refresh token instead of gitkit token.
+        type: boolean
     type: object
   IdentitytoolkitRelyingpartyUploadAccountRequest:
     description: Request to upload user account in batch.
@@ -803,6 +923,9 @@ definitions:
       returnRefreshToken:
         description: Whether to return refresh tokens.
         type: boolean
+      returnSecureToken:
+        description: Whether return sts id token and refresh token instead of gitkit token.
+        type: boolean
       sessionId:
         description: 'Session ID, which should match the one in previous createAuthUri request.'
         type: string
@@ -813,6 +936,9 @@ definitions:
       instanceId:
         description: Instance id token of the app.
         type: string
+      returnSecureToken:
+        description: Whether return sts id token and refresh token instead of gitkit token.
+        type: boolean
       token:
         description: The custom token to verify
         type: string
@@ -845,6 +971,9 @@ definitions:
       pendingIdToken:
         description: 'The GITKit token for the non-trusted IDP, which is to be confirmed by the user.'
         type: string
+      returnSecureToken:
+        description: Whether return sts id token and refresh token instead of gitkit token.
+        type: boolean
     type: object
   IdpConfig:
     description: Template for a single idp configuration.
@@ -912,6 +1041,10 @@ definitions:
       email:
         description: The email of the user.
         type: string
+      expiresIn:
+        description: 'If idToken is STS id token, then this field will be expiration time of STS id token in seconds.'
+        format: int64
+        type: string
       idToken:
         description: The Gitkit id token to login the newly sign up user.
         type: string
@@ -940,6 +1073,9 @@ definitions:
               type: string
           type: object
         type: array
+      refreshToken:
+        description: 'If idToken is STS id token, then this field will be refresh token.'
+        type: string
     type: object
   SignupNewUserResponse:
     description: 'Response of signing up new user, creating anonymous user or anonymous user reauth.'
@@ -950,12 +1086,22 @@ definitions:
       email:
         description: The email of the user.
         type: string
+      expiresIn:
+        description: 'If idToken is STS id token, then this field will be expiration time of STS id token in seconds.'
+        format: int64
+        type: string
       idToken:
         description: The Gitkit id token to login the newly sign up user.
         type: string
       kind:
         default: 'identitytoolkit#SignupNewUserResponse'
         description: 'The fixed string "identitytoolkit#SignupNewUserResponse".'
+        type: string
+      localId:
+        description: The RP local ID of the user.
+        type: string
+      refreshToken:
+        description: 'If idToken is STS id token, then this field will be refresh token.'
         type: string
     type: object
   UploadAccountResponse:
@@ -1072,6 +1218,10 @@ definitions:
       emailVerified:
         description: The value is true if the IDP is also the email provider. It means the user owns the email.
         type: boolean
+      expiresIn:
+        description: 'If idToken is STS id token, then this field will be expiration time of STS id token in seconds.'
+        format: int64
+        type: string
       federatedId:
         description: The unique ID identifies the IdP account.
         type: string
@@ -1125,6 +1275,9 @@ definitions:
       oauthScope:
         description: The scope for the OpenID OAuth extension.
         type: string
+      oauthTokenSecret:
+        description: The OAuth1 access token secret.
+        type: string
       originalEmail:
         description: "The original email stored in the mapping storage. It's returned when the federated ID is associated to a different email."
         type: string
@@ -1133,6 +1286,9 @@ definitions:
         type: string
       providerId:
         description: "The IdP ID. For white listed IdPs it's a short domain name e.g. google.com, aol.com, live.net and yahoo.com. If the \"providerId\" param is set to OpenID OP identifer other than the whilte listed IdPs the OP identifier is returned. If the \"identifier\" param is federated ID in the createAuthUri request. The domain part of the federated ID is returned."
+        type: string
+      refreshToken:
+        description: 'If idToken is STS id token, then this field will be refresh token.'
         type: string
       timeZone:
         description: The timezone of the user.
@@ -1146,12 +1302,19 @@ definitions:
   VerifyCustomTokenResponse:
     description: Response from verifying a custom token
     properties:
+      expiresIn:
+        description: 'If idToken is STS id token, then this field will be expiration time of STS id token in seconds.'
+        format: int64
+        type: string
       idToken:
         description: The GITKit token for authenticated user.
         type: string
       kind:
         default: 'identitytoolkit#VerifyCustomTokenResponse'
         description: 'The fixed string "identitytoolkit#VerifyCustomTokenResponse".'
+        type: string
+      refreshToken:
+        description: 'If idToken is STS id token, then this field will be refresh token.'
         type: string
     type: object
   VerifyPasswordResponse:
@@ -1162,6 +1325,10 @@ definitions:
         type: string
       email:
         description: 'The email returned by the IdP. NOTE: The federated login user may not own the email.'
+        type: string
+      expiresIn:
+        description: 'If idToken is STS id token, then this field will be expiration time of STS id token in seconds.'
+        format: int64
         type: string
       idToken:
         description: The GITKit token for authenticated user.
@@ -1185,6 +1352,9 @@ definitions:
         type: integer
       photoUrl:
         description: "The URI of the user's photo at IdP"
+        type: string
+      refreshToken:
+        description: 'If idToken is STS id token, then this field will be refresh token.'
         type: string
       registered:
         description: Whether the email is registered.

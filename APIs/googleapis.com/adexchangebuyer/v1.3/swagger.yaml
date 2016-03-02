@@ -689,9 +689,6 @@ definitions:
         description: Your bidder locations that have distinct URLs.
         items:
           properties:
-            bidProtocol:
-              description: "The protocol that the bidder endpoint is using. By default, OpenRTB protocols use JSON, except PROTOCOL_OPENRTB_PROTOBUF. PROTOCOL_OPENRTB_PROTOBUF uses protobuf encoding over the latest OpenRTB protocol version, which is 2.3 right now. Allowed values:  \n- PROTOCOL_ADX \n- PROTOCOL_OPENRTB_2_2 \n- PROTOCOL_OPENRTB_2_3 \n- PROTOCOL_OPENRTB_PROTOBUF"
-              type: string
             maximumQps:
               description: The maximum queries per second the Ad Exchange will send.
               format: int32

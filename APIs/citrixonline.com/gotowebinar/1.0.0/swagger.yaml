@@ -27,9 +27,53 @@ consumes:
   - application/json
 produces:
   - application/json
+parameters:
+  Authorization:
+    description: Access token
+    in: header
+    name: Authorization
+    required: true
+    type: string
+  coorganizerKey:
+    description: The key of the internal or external co-organizer (memberKey)
+    format: int64
+    in: path
+    name: coorganizerKey
+    required: true
+    type: integer
+  organizerKey:
+    description: The key of the organizer
+    format: int64
+    in: path
+    name: organizerKey
+    required: true
+    type: integer
+  registrantKey:
+    description: The key of the registrant
+    format: int64
+    in: path
+    name: registrantKey
+    required: true
+    type: integer
+  sessionKey:
+    description: The key of the webinar session
+    format: int64
+    in: path
+    name: sessionKey
+    required: true
+    type: integer
+  webinarKey:
+    description: The key of the webinar
+    format: int64
+    in: path
+    name: webinarKey
+    required: true
+    type: integer
 tags:
   - description: Operations available for webinars of a given organizer.
     name: Webinars
+  - description: Operations available for co-organizers of a given webinar.
+    name: Co-organizers
   - description: Operations available for registrants of a given webinar.
     name: Registrants
   - description: Operations available for sessions of a given webinar.
@@ -42,17 +86,8 @@ paths:
       description: Returns details for completed webinars for the specified organizer and completed webinars of other organizers where the specified organizer is a co-organizer.
       operationId: getHistoricalWebinars
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
         - description: 'A required start of datetime range in ISO8601 UTC format, e.g. 2015-07-13T10:00:00Z'
           format: date-time
           in: query
@@ -84,17 +119,8 @@ paths:
       description: Retrieve all completed sessions of all the webinars of a given organizer.
       operationId: getOrganizerSessions
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
         - description: 'A required start of datetime range in ISO8601 UTC format, e.g. 2015-07-13T10:00:00Z'
           format: date-time
           in: query
@@ -126,17 +152,8 @@ paths:
       description: Returns webinars scheduled for the future for the specified organizer and webinars of other organizers where the specified organizer is a co-organizer.
       operationId: getUpcomingWebinars
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
       responses:
         '200':
           description: OK
@@ -156,17 +173,8 @@ paths:
       description: Returns webinars scheduled for the future for a specified organizer.
       operationId: getAllWebinars
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
       responses:
         '200':
           description: OK
@@ -182,20 +190,11 @@ paths:
       tags:
         - Webinars
     post:
-      description: 'Creates a single session webinar. The call requires an organizer, a webinar subject and description, and a start and end time. The response provides a numeric webinarKey in string format for the new webinar. Once a webinar has been created with this method, you can accept registrations.'
+      description: 'Creates a single session webinar. The call requires a webinar subject and description, and a start and end time. The response provides a numeric webinarKey in string format for the new webinar. Once a webinar has been created with this method, you can accept registrations.'
       operationId: createWebinar
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
         - description: The webinar details
           in: body
           name: body
@@ -215,27 +214,39 @@ paths:
       tags:
         - Webinars
   '/organizers/{organizerKey}/webinars/{webinarKey}':
+    delete:
+      description: 'Cancels a specific webinar. By default, cancellation notice emails to registrants will not be sent. To have the cancellation notice emails sent to registrants (as if the webinar was cancelled through the G2W website), include the parameter sendCancellationEmails=true in the request parameters. When the cancellation emails are sent, the default generated message is used in the cancellation email body'
+      operationId: cancelWebinar
+      parameters:
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
+        - description: Indicates whether cancellation notice emails should be sent. The default value is false
+          in: query
+          name: sendCancellationEmails
+          required: false
+          type: boolean
+      responses:
+        '204':
+          description: No Content
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+        '405':
+          description: Method Not Allowed (Webinar is in the past)
+        '409':
+          description: Conflict (Webinar is in session)
+      summary: Cancel webinar
+      tags:
+        - Webinars
     get:
       description: 'Retrieve information on a specific webinar. If the type of the webinar is "sequence", a sequence of future times will be provided. Webinars of type "series" are treated the same as normal webinars - each session in the webinar series has a different webinarKey. If an organizer cancels a webinar, then a request to get that webinar would return a "404 Not Found" error.'
       operationId: getWebinar
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: The key of the webinar
-          format: int64
-          in: path
-          name: webinarKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
       responses:
         '200':
           description: OK
@@ -250,28 +261,42 @@ paths:
       summary: Get webinar
       tags:
         - Webinars
+    put:
+      description: Updates a webinar. The call requires at least one of the parameters in the request body.
+      operationId: updateWebinar
+      parameters:
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
+        - description: Defines whether to send notifications to participants
+          in: query
+          name: notifyParticipants
+          required: false
+          type: boolean
+        - description: The webinar details
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/WebinarReqUpdate'
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: 'Bad Request (times not valid, webinar in progress, webinar ended, etc.)'
+        '403':
+          description: Forbidden
+      summary: Update webinar
+      tags:
+        - Webinars
   '/organizers/{organizerKey}/webinars/{webinarKey}/attendees':
     get:
       description: Returns all attendees for all sessions of the specified webinar.
       operationId: getAttendeesForAllWebinarSessions
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: The key of the webinar
-          format: int64
-          in: path
-          name: webinarKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
       responses:
         '200':
           description: OK
@@ -288,28 +313,66 @@ paths:
       summary: Get attendees for all webinar sessions
       tags:
         - Webinars
+  '/organizers/{organizerKey}/webinars/{webinarKey}/audio':
+    get:
+      description: Retrieves the audio/conferencing information for a specific webinar.
+      operationId: getAudioInformation
+      parameters:
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Audio'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Get audio information
+      tags:
+        - Webinars
+    post:
+      description: Updates the audio/conferencing settings for a specific webinar
+      operationId: updateAudioInformation
+      parameters:
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
+        - description: Defines whether to send notifications to participants
+          in: query
+          name: notifyParticipants
+          required: false
+          type: boolean
+        - description: The audio/conferencing settings
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/AudioUpdate'
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Update audio information
+      tags:
+        - Webinars
   '/organizers/{organizerKey}/webinars/{webinarKey}/coorganizers':
     get:
-      description: Gets the coorganizers of a specific webinar.
+      description: 'Returns the co-organizers for the specified webinar. The original organizer who created the webinar is filtered out of the list. If the webinar has no co-organizers, an empty array is returned. Co-organizers that do not have a GoToWebinar account are returned as external co-organizers. For those organizers no surname is returned.'
       operationId: getCoorganizers
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: The key of the webinar
-          format: int64
-          in: path
-          name: webinarKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
       responses:
         '200':
           description: OK
@@ -322,32 +385,97 @@ paths:
         '403':
           description: Forbidden
         '404':
-          description: Not found
-      summary: Get webinar coorganizers
+          description: Not Found
+      summary: Get co-organizers
       tags:
-        - Webinars
+        - Co-organizers
+    post:
+      description: 'Creates co-organizers for the specified webinar. This call requires the admin role. For co-organizers that have a GoToWebinar account you have to set the parameter "external" to "false". In this case you have to pass the parameter "organizerKey" only. For co-organizers that have no GoToWebinar account you have to set the parameter "external" to "true". In this case you have to pass the parameters "givenName" and "email". Since there is no parameter for "surname" you should pass first and last name to the parameter "givenName".'
+      operationId: createCoorganizers
+      parameters:
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
+        - description: The co-organizer details
+          in: body
+          name: body
+          required: true
+          schema:
+            items:
+              $ref: '#/definitions/CoorganizerReqCreate'
+            type: array
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Create co-organizers
+      tags:
+        - Co-organizers
+  '/organizers/{organizerKey}/webinars/{webinarKey}/coorganizers/{coorganizerKey}':
+    delete:
+      description: Deletes an internal co-organizer specified by the coorganizerKey (memberKey).
+      operationId: deleteCoorganizer
+      parameters:
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
+        - $ref: '#/parameters/coorganizerKey'
+        - description: 'By default only internal co-organizers (with a GoToWebinar account) can be deleted. If you want to use this call for external co-organizers you have to set this parameter to "true".'
+          in: query
+          name: external
+          required: false
+          type: boolean
+      responses:
+        '204':
+          description: No Content (Co-organizer was deleted)
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Delete co-organizer
+      tags:
+        - Co-organizers
+  '/organizers/{organizerKey}/webinars/{webinarKey}/coorganizers/{coorganizerKey}/resendInvitation':
+    post:
+      description: Resends an invitation email to the specified co-organizer
+      operationId: resendCoorganizerInvitation
+      parameters:
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
+        - $ref: '#/parameters/coorganizerKey'
+        - description: 'By default only internal co-organizers (with a GoToWebinar account) will retrieve the resent invitation email. If you want to use this call for external co-organizers you have to set this parameter to "true".'
+          in: query
+          name: external
+          required: false
+          type: boolean
+      responses:
+        '204':
+          description: No Content (Invitation email was sent)
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Resend invitation
+      tags:
+        - Co-organizers
   '/organizers/{organizerKey}/webinars/{webinarKey}/meetingtimes':
     get:
       description: Retrieves the meeting times for a webinar.
       operationId: getWebinarMeetingTimes
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: The key of the webinar
-          format: int64
-          in: path
-          name: webinarKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
       responses:
         '200':
           description: OK
@@ -369,23 +497,9 @@ paths:
       description: Retrieves all the panelists for a specific webinar.
       operationId: getPanelists
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: The key of the webinar
-          format: int64
-          in: path
-          name: webinarKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
       responses:
         '200':
           description: OK
@@ -402,28 +516,41 @@ paths:
       summary: Get webinar panelists
       tags:
         - Webinars
+    post:
+      description: Create panelists for a specified webinar
+      operationId: createPanelists
+      parameters:
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
+        - description: Array of panelists
+          in: body
+          name: body
+          required: true
+          schema:
+            items:
+              $ref: '#/definitions/PanelistReqCreate'
+            type: array
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Create Panelists
+      tags:
+        - Webinars
   '/organizers/{organizerKey}/webinars/{webinarKey}/performance':
     get:
       description: Gets performance details for all sessions of a specific webinar.
       operationId: getPerformanceForAllWebinarSessions
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: The key of the webinar
-          format: int64
-          in: path
-          name: webinarKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
       responses:
         '200':
           description: OK
@@ -446,23 +573,9 @@ paths:
       description: 'Retrieve registration details for all registrants of a specific webinar. Registrant details will not include all fields captured when creating the registrant. To see all data, use the API call "Get Registrant". Registrants can have one of the following states; <br />WAITING - registrant registered and is awaiting approval (where organizer has required approval), <br />APPROVED - registrant registered and is approved, and <br />DENIED - registrant registered and was denied.'
       operationId: getAllRegistrantsForWebinar
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: The key of the webinar
-          format: int64
-          in: path
-          name: webinarKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
       responses:
         '200':
           description: OK
@@ -480,26 +593,12 @@ paths:
       tags:
         - Registrants
     post:
-      description: "Register an attendee for a scheduled webinar. The response contains the registrantKey and join URL for the registrant. An email will be sent to the registrant unless the organizer turns off the confirmation email setting from the GoToWebinar website. Please note that you must provide all required fields including custom fields defined during the webinar creation. Use thr API call \"Get registration fields\" to get a list of all fields, if they are required, and their possible values. At this time there are two versions of the \"Create Registrant\" call. The first version only accepts firstName, lastName, and email and ignores all other fields. If you have custom fields or want to capture additional information this version won't work for you. The second version allows you to pass all required and optional fields, including custom fields defined when creating the webinar. To use the second version you must pass the header value \"Accept: application/vnd.citrix.g2wapi-v1.1+json\" instead of \"Accept: application/json\". Leaving this header out results in the first version of the API call."
+      description: "Register an attendee for a scheduled webinar. The response contains the registrantKey and join URL for the registrant. An email will be sent to the registrant unless the organizer turns off the confirmation email setting from the GoToWebinar website. Please note that you must provide all required fields including custom fields defined during the webinar creation. Use the API call \"Get registration fields\" to get a list of all fields, if they are required, and their possible values. At this time there are two versions of the \"Create Registrant\" call. The first version only accepts firstName, lastName, and email and ignores all other fields. If you have custom fields or want to capture additional information this version won't work for you. The second version allows you to pass all required and optional fields, including custom fields defined when creating the webinar. To use the second version you must pass the header value \"Accept: application/vnd.citrix.g2wapi-v1.1+json\" instead of \"Accept: application/json\". Leaving this header out results in the first version of the API call."
       operationId: createRegistrant
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: The key of the webinar
-          format: int64
-          in: path
-          name: webinarKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
         - description: 'Set to "application/vnd.citrix.g2wapi-v1.1+json" to make a registration using fields (custom or default) additional to the basic ones.'
           in: header
           name: Accept
@@ -535,23 +634,9 @@ paths:
       description: 'Retrieve required, optional registration, and custom questions for a specified webinar.'
       operationId: getRegistrationFields
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: The key of the webinar
-          format: int64
-          in: path
-          name: webinarKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
       responses:
         '200':
           description: OK
@@ -571,29 +656,10 @@ paths:
       description: 'Removes a webinar registrant from current registrations for the specified webinar. The webinar must be a scheduled, future webinar.'
       operationId: deleteRegistrant
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: The key of the webinar
-          format: int64
-          in: path
-          name: webinarKey
-          required: true
-          type: integer
-        - description: The key of the registrant
-          format: int64
-          in: path
-          name: registrantKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
+        - $ref: '#/parameters/registrantKey'
       responses:
         '204':
           description: No content
@@ -610,29 +676,10 @@ paths:
       description: Retrieve registration details for a specific registrant.
       operationId: getRegistrant
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: The key of the webinar
-          format: int64
-          in: path
-          name: webinarKey
-          required: true
-          type: integer
-        - description: The key of the registrant
-          format: int64
-          in: path
-          name: registrantKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
+        - $ref: '#/parameters/registrantKey'
       responses:
         '200':
           description: OK
@@ -652,23 +699,9 @@ paths:
       description: Retrieves details for all past sessions of a specific webinar.
       operationId: getAllSessions
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: The key of the webinar
-          format: int64
-          in: path
-          name: webinarKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
       responses:
         '200':
           description: OK
@@ -690,29 +723,10 @@ paths:
       description: 'Retrieves attendance details for a specific webinar session that has ended. If attendees attended the session ("registrantsAttended"), specific attendance details, such as attendenceTime for a registrant, will also be retrieved.'
       operationId: getWebinarSession
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: The key of the webinar
-          format: int64
-          in: path
-          name: webinarKey
-          required: true
-          type: integer
-        - description: The key of the webinar session
-          format: int64
-          in: path
-          name: sessionKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
+        - $ref: '#/parameters/sessionKey'
       responses:
         '200':
           description: OK
@@ -734,29 +748,10 @@ paths:
       description: Retrieve details for all attendees of a specific webinar session.
       operationId: getAttendees
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: The key of the webinar
-          format: int64
-          in: path
-          name: webinarKey
-          required: true
-          type: integer
-        - description: The key of the webinar session
-          format: int64
-          in: path
-          name: sessionKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
+        - $ref: '#/parameters/sessionKey'
       responses:
         '200':
           description: OK
@@ -778,35 +773,11 @@ paths:
       description: Retrieve registration details for a particular attendee of a specific webinar session.
       operationId: getAttendee
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: The key of the webinar
-          format: int64
-          in: path
-          name: webinarKey
-          required: true
-          type: integer
-        - description: The key of the webinar session
-          format: int64
-          in: path
-          name: sessionKey
-          required: true
-          type: integer
-        - description: The key of the registrant
-          format: int64
-          in: path
-          name: registrantKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
+        - $ref: '#/parameters/sessionKey'
+        - $ref: '#/parameters/registrantKey'
       responses:
         '200':
           description: OK
@@ -826,35 +797,11 @@ paths:
       description: Get poll answers from a particular attendee of a specific webinar session.
       operationId: getAttendeePollAnswers
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: The key of the webinar
-          format: int64
-          in: path
-          name: webinarKey
-          required: true
-          type: integer
-        - description: The key of the webinar session
-          format: int64
-          in: path
-          name: sessionKey
-          required: true
-          type: integer
-        - description: The key of the registrant
-          format: int64
-          in: path
-          name: registrantKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
+        - $ref: '#/parameters/sessionKey'
+        - $ref: '#/parameters/registrantKey'
       responses:
         '200':
           description: OK
@@ -876,35 +823,11 @@ paths:
       description: Get questions asked by an attendee during a webinar session.
       operationId: getAttendeeQuestions
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: The key of the webinar
-          format: int64
-          in: path
-          name: webinarKey
-          required: true
-          type: integer
-        - description: The key of the webinar session
-          format: int64
-          in: path
-          name: sessionKey
-          required: true
-          type: integer
-        - description: The key of the registrant
-          format: int64
-          in: path
-          name: registrantKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
+        - $ref: '#/parameters/sessionKey'
+        - $ref: '#/parameters/registrantKey'
       responses:
         '200':
           description: OK
@@ -926,35 +849,11 @@ paths:
       description: Retrieve survey answers from a particular attendee during a webinar session.
       operationId: getAttendeeSurveyAnswers
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: The key of the webinar
-          format: int64
-          in: path
-          name: webinarKey
-          required: true
-          type: integer
-        - description: The key of the webinar session
-          format: int64
-          in: path
-          name: sessionKey
-          required: true
-          type: integer
-        - description: The key of the registrant
-          format: int64
-          in: path
-          name: registrantKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
+        - $ref: '#/parameters/sessionKey'
+        - $ref: '#/parameters/registrantKey'
       responses:
         '200':
           description: OK
@@ -976,29 +875,10 @@ paths:
       description: Get performance details for a session.
       operationId: getPerformance
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: The key of the webinar
-          format: int64
-          in: path
-          name: webinarKey
-          required: true
-          type: integer
-        - description: The key of the webinar session
-          format: int64
-          in: path
-          name: sessionKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
+        - $ref: '#/parameters/sessionKey'
       responses:
         '200':
           description: OK
@@ -1018,29 +898,10 @@ paths:
       description: Retrieve all collated attendee questions and answers for polls from a specific webinar session.
       operationId: getPolls
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: The key of the webinar
-          format: int64
-          in: path
-          name: webinarKey
-          required: true
-          type: integer
-        - description: The key of the webinar session
-          format: int64
-          in: path
-          name: sessionKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
+        - $ref: '#/parameters/sessionKey'
       responses:
         '200':
           description: OK
@@ -1062,29 +923,10 @@ paths:
       description: Retrieve questions and answers for a past webinar session.
       operationId: getQuestions
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: The key of the webinar
-          format: int64
-          in: path
-          name: webinarKey
-          required: true
-          type: integer
-        - description: The key of the webinar session
-          format: int64
-          in: path
-          name: sessionKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
+        - $ref: '#/parameters/sessionKey'
       responses:
         '200':
           description: OK
@@ -1106,29 +948,10 @@ paths:
       description: Retrieve surveys for a past webinar session.
       operationId: getSurveys
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: The key of the webinar
-          format: int64
-          in: path
-          name: webinarKey
-          required: true
-          type: integer
-        - description: The key of the webinar session
-          format: int64
-          in: path
-          name: sessionKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
+        - $ref: '#/parameters/sessionKey'
       responses:
         '200':
           description: OK
@@ -1146,6 +969,22 @@ paths:
       tags:
         - Sessions
 definitions:
+  AccessCodes:
+    description: 'Describes the access codes for organizer, panelists and attendees.'
+    properties:
+      attendee:
+        description: Access code for attendees
+        type: string
+      organizer:
+        description: Access code for the organizer
+        type: string
+      panelist:
+        description: Access code for panelists
+        type: string
+    required:
+      - organizer
+      - panelist
+      - attendee
   AnswerToAttendeeQuestion:
     description: Describes an answer to a question asked by an attendee during a webinar session.
     properties:
@@ -1256,27 +1095,104 @@ definitions:
       - answers
       - question
       - askedBy
+  Audio:
+    description: Describes the audio/conferencing information for a webinar.
+    properties:
+      confCallNumbers:
+        additionalProperties:
+          $ref: '#/definitions/CallNumbers'
+        description: 'The conference call numbers and access codes per country. This will be returned only, if "type" is not set to "Private". Example for this object: "confCallNumbers":{"CA":{"accessCodes":{"attendee":"159-309-045","organizer":"791-426-085","panelist":"690-270-339"},"tollFree":"1 888 455 4198"},"FI":{"accessCodes":{"attendee":"159-309-045","organizer":"791-426-085","panelist":"690-270-339"},"toll":"+358 (0) 338 79 4198"},"US":{"accessCodes":{"attendee":"159-309-045","organizer":"791-426-085","panelist":"690-270-339"},"toll":"+1 (805) 879-4198","tollFree":"1 888 455 4198"}}'
+        type: object
+      privateInfo:
+        $ref: '#/definitions/PrivateInfo'
+        description: Phone numbers for an own conference call service
+        type: object
+      type:
+        description: "Indicates how to connect to the webinar's audio conference. The value of this field determines if other fields appear in the response or not"
+        enum:
+          - PSTN
+          - VOIP
+          - Hybrid
+          - Private
+        type: string
+    required:
+      - type
+  AudioUpdate:
+    description: Defines the audio/conferencing settings for the specified webinar
+    properties:
+      privateInfo:
+        $ref: '#/definitions/PrivateInfoUpdate'
+        description: Defines the audio data for an own conferencing system
+        type: object
+      pstnInfo:
+        $ref: '#/definitions/PstnInfoUpdate'
+        description: Defines via two-letter Alpha-2-code which toll and toll-free PSTN numbers are available per country
+        type: object
+      type:
+        description: "Indicates how to connect to the webinar's audio conference"
+        enum:
+          - PSTN
+          - VOIP
+          - Hybrid
+          - Private
+        type: string
+    required:
+      - type
+  CallNumbers:
+    description: Conference call numbers per country.
+    properties:
+      accessCodes:
+        $ref: '#/definitions/AccessCodes'
+        description: 'Describes the access codes for organizer, panelists and attendees.'
+      toll:
+        description: Conference number for toll calls.
+        type: string
+      tollFree:
+        description: Conference number for toll-free calls.
+        type: string
+    required:
+      - accessCodes
+      - toll
   Coorganizer:
-    description: Describes a webinar coorganizer.
+    description: Describes a webinar co-organizer. A co-organizer without a GoToWebinar account is marked as external and is returned without a surname
     properties:
       email:
-        description: "The coorganizer's email address"
+        description: "The co-organizer's email address"
         type: string
+      external:
+        description: 'If the co-organizer has no GoToWebinar account, this value is set to "true"'
+        type: boolean
       givenName:
-        description: "The coorganizer's first name"
+        description: "The co-organizer's given name"
         type: string
       memberKey:
-        description: "The coorganizer's key"
-        format: int64
-        type: integer
+        description: "The co-organizer's organizer key. A new member key will be created for external co-organizers"
+        type: string
       surname:
-        description: "The coorganizer's last name"
+        description: "The co-organizer's surname. For external co-organizers this parameter is not returned"
         type: string
     required:
       - email
       - memberKey
-      - surname
       - givenName
+      - external
+  CoorganizerReqCreate:
+    description: 'Details used for creating a co-organizer for a webinar. '
+    properties:
+      email:
+        description: "The co-organizer's email address. This parameter has to be passed only, if \"external\" is set to \"true\""
+        type: string
+      external:
+        description: 'If the co-organizer has no GoToWebinar account, this value has to be set to "true"'
+        type: boolean
+      givenName:
+        description: "The co-organizer's given name. This parameter has to be passed only, if \"external\" is set to \"true\""
+        type: string
+      organizerKey:
+        description: "The co-organizer's organizer key. This parameter has to be passed only, if \"external\" is set to \"false\""
+        type: string
+    required:
+      - external
   CreatedWebinar:
     description: Describes a newly created webinar.
     properties:
@@ -1332,6 +1248,9 @@ definitions:
         items:
           $ref: '#/definitions/DateTimeRange'
         type: array
+      webinarID:
+        description: The 9-digit webinar ID
+        type: string
       webinarKey:
         description: The unique key of the webinar
         format: int64
@@ -1342,6 +1261,7 @@ definitions:
       - subject
       - organizerKey
       - webinarKey
+      - webinarID
       - timeZone
   Panelist:
     description: Describes a webinar session panelist.
@@ -1350,10 +1270,13 @@ definitions:
         description: "The panelist's email address"
         type: string
       firstName:
-        description: "The panelist's first name"
+        description: 'DEPRECATED. The fields "firstName" and "lastName" are replaced by the field "name"'
         type: string
       lastName:
-        description: "The panelist's last name"
+        description: 'DEPRECATED. The fields "firstName" and "lastName" are replaced by the field "name"'
+        type: string
+      name:
+        description: "The panelist's name"
         type: string
       panelistId:
         description: "The panelist's ID"
@@ -1362,8 +1285,21 @@ definitions:
     required:
       - lastName
       - email
+      - name
       - panelistId
       - firstName
+  PanelistReqCreate:
+    description: Describes a single panelist
+    properties:
+      email:
+        description: "The panelist's email address"
+        type: string
+      name:
+        description: "The panelist's name"
+        type: string
+    required:
+      - email
+      - name
   Poll:
     description: A poll or survey launched by an organizer during or after a webinar session; includes the responses given to it by the attendees.
     properties:
@@ -1439,6 +1375,125 @@ definitions:
       - questionsAsked
       - percentagePollsCompleted
       - percentageSurveysCompleted
+  PrivateInfo:
+    description: Phone numbers for an own conference call service.
+    properties:
+      attendee:
+        description: Text for the panelist when using an own conference call service
+        type: string
+      organizer:
+        description: Text for the organizer when using an own conference call service
+        type: string
+      panelist:
+        description: Text for the panelist when using an own conference call service.
+        type: string
+    required:
+      - attendee
+  PrivateInfoUpdate:
+    description: Defines the audio data for an own conferencing system
+    properties:
+      attendee:
+        description: Attendee phone number for own conference call system
+        type: string
+      organizer:
+        description: Organizer phone number for own conference call system
+        type: string
+      panelist:
+        description: Panelist phone number for own conference call system
+        type: string
+    required:
+      - attendee
+  PstnInfoUpdate:
+    description: 'Defines the audio/conferencing settings for the specified webinar. It required to pass "tollFreeCountries" or "tollCountries" or both.'
+    properties:
+      tollCountries:
+        description: 'Defines in which countries toll PSTN numbers are available. Possible values are AT, AU, BE, CA, CH, DE, DK, ES, FI, FR, GB, IE, IT, NL, NO, NZ, SE, US'
+        items:
+          description: Countries in which toll PSTN numbers are available
+          enum:
+            - AT
+            - AU
+            - BE
+            - CA
+            - CH
+            - DE
+            - DK
+            - ES
+            - FI
+            - FR
+            - GB
+            - IE
+            - IT
+            - NL
+            - 'NO'
+            - NZ
+            - SE
+            - US
+          type: string
+        type: array
+      tollFreeCountries:
+        description: 'Defines in which countries toll free PSTN numbers are available. Possible values are AE, AR, AT, AU, BE, BG, BH, BR, BY, CA, CH, CL, CN, CO, CZ, DE, DK, ES, FI, FR, GB, GR, HK, HU, ID, IE, IL, IN, IS, IT, JP, KR, LU, MX, MY, NL, NO, NZ, PA, PE, PH, PL, PT, RO, RU, SA, SE, SG, TH, TR, TW, UA, US, UY, VN, ZA'
+        items:
+          description: Countries in which toll free PSTN numbers are available
+          enum:
+            - AE
+            - AR
+            - AT
+            - AU
+            - BE
+            - BG
+            - BH
+            - BR
+            - BY
+            - CA
+            - CH
+            - CL
+            - CN
+            - CO
+            - CZ
+            - DE
+            - DK
+            - ES
+            - FI
+            - FR
+            - GB
+            - GR
+            - HK
+            - HU
+            - ID
+            - IE
+            - IL
+            - IN
+            - IS
+            - IT
+            - JP
+            - KR
+            - LU
+            - MX
+            - MY
+            - NL
+            - 'NO'
+            - NZ
+            - PA
+            - PE
+            - PH
+            - PL
+            - PT
+            - RO
+            - RU
+            - SA
+            - SE
+            - SG
+            - TH
+            - TR
+            - TW
+            - UA
+            - US
+            - UY
+            - VN
+            - ZA
+          type: string
+        type: array
   Registrant:
     description: Describes a webinar registrant
     properties:
@@ -1525,7 +1580,7 @@ definitions:
         description: "The registrant's job title"
         type: string
       joinUrl:
-        description: URL the registrant can join the webinar
+        description: The URL the registrant will use to join the webinar
         type: string
       lastName:
         description: "The registrant's last name"
@@ -1561,6 +1616,9 @@ definitions:
         items:
           $ref: '#/definitions/CustomAnswers'
         type: array
+      source:
+        description: 'The source that led to the registration. This can be any string like "Newsletter 123" or "Marketing campaign ABC"'
+        type: string
       state:
         description: "The registrant's state (US only)"
         type: string
@@ -1644,6 +1702,9 @@ definitions:
         items:
           $ref: '#/definitions/RegistrantQAResponse'
         type: array
+      source:
+        description: 'The source that led to the registration. This can be any string like "Newsletter 123" or "Marketing campaign ABC"'
+        type: string
       state:
         description: "The registrant's state (US only)"
         type: string
@@ -1774,6 +1835,9 @@ definitions:
         description: The starting time of the webinar session
         format: date-time
         type: string
+      webinarID:
+        description: The 9-digit webinar ID
+        type: string
       webinarKey:
         description: The unique key of the webinar
         format: int64
@@ -1782,6 +1846,7 @@ definitions:
       - startTime
       - registrantsAttended
       - webinarKey
+      - webinarID
       - sessionKey
       - endTime
   SessionPerformance:
@@ -1823,6 +1888,9 @@ definitions:
         items:
           $ref: '#/definitions/DateTimeRange'
         type: array
+      webinarID:
+        description: The 9-digit webinar ID
+        type: string
       webinarKey:
         description: The unique key of the webinar
         format: int64
@@ -1834,6 +1902,7 @@ definitions:
       - inSession
       - organizerKey
       - webinarKey
+      - webinarID
       - timeZone
       - registrationUrl
   Webinar:
@@ -1867,6 +1936,9 @@ definitions:
         items:
           $ref: '#/definitions/DateTimeRange'
         type: array
+      webinarID:
+        description: The 9-digit webinar ID
+        type: string
       webinarKey:
         description: The unique key of the webinar
         format: int64
@@ -1879,6 +1951,7 @@ definitions:
       - inSession
       - organizerKey
       - webinarKey
+      - webinarID
       - timeZone
       - registrationUrl
   WebinarByKey:
@@ -1920,6 +1993,9 @@ definitions:
         items:
           $ref: '#/definitions/DateTimeRange'
         type: array
+      webinarID:
+        description: The 9-digit webinar ID
+        type: string
       webinarKey:
         description: The unique key of the webinar
         format: int64
@@ -1932,6 +2008,7 @@ definitions:
       - inSession
       - organizerKey
       - webinarKey
+      - webinarID
       - timeZone
       - numberOfOpenedInvitations
       - registrationUrl
@@ -1946,7 +2023,7 @@ definitions:
         description: The name/subject of the webinar (128 characters maximum)
         type: string
       timeZone:
-        description: "The time zone where the webinar is taking place (must be a valid time zone ID, see https://developer.citrixonline.com/citrix-rest-api-date-formats-and-time-zones). If this parameter is not passed the timezone of the organizer's profile will be used"
+        description: "The time zone where the webinar is taking place (must be a valid time zone ID, see https://developer.citrixonline.com/citrix-rest-api-date-formats-and-time-zones). If this parameter is not passed, the timezone of the organizer's profile will be used"
         type: string
       times:
         description: 'Array with startTime and endTime for webinar. Since this call creates single session webinars, the array can only contain a single pair of startTime and endTime'
@@ -1956,3 +2033,30 @@ definitions:
     required:
       - subject
       - times
+  WebinarReqUpdate:
+    description: Describes the details of the webinar
+    properties:
+      description:
+        description: A description of the webinar (2048 characters maximum)
+        type: string
+      locale:
+        description: The webinar language
+        enum:
+          - en_US
+          - de_DE
+          - es_ES
+          - fr_FR
+          - it_IT
+          - zh_CN
+        type: string
+      subject:
+        description: The name/subject of the webinar (128 characters maximum)
+        type: string
+      timeZone:
+        description: "The time zone where the webinar is taking place (must be a valid time zone ID, see https://developer.citrixonline.com/citrix-rest-api-date-formats-and-time-zones). If this parameter is not passed, the timezone of the organizer's profile will be used"
+        type: string
+      times:
+        description: Array with start and end time(s) for webinar
+        items:
+          $ref: '#/definitions/DateTimeRange'
+        type: array

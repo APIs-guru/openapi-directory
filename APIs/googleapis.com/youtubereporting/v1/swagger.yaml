@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: 'An API to schedule reporting jobs and download the resulting bulk data reports about YouTube channels, videos etc. in the form of CSV files.'
+  description: 'Schedules reporting jobs and downloads the resulting bulk data reports about YouTube channels, videos, etc. in the form of CSV files.'
   title: YouTube Reporting
   version: v1
   x-apiClientRegistration:
@@ -340,7 +340,7 @@ paths:
       description: 'Method for media download. Download is supported on the URI `/v1/media/{+name}?alt=media`.'
       operationId: youtubereporting.media.download
       parameters:
-        - description: 'Name of the media that is being downloaded. See [][ByteStream.ReadRequest.resource_name].'
+        - description: Name of the media that is being downloaded. See ByteStream.ReadRequest.resource_name.
           in: path
           name: resourceName
           required: true
@@ -429,7 +429,7 @@ definitions:
         description: The server-generated ID of the job (max. 40 characters).
         type: string
       name:
-        description: The name of the job (max. 100 characters). TODO(lanthaler) Clarify what this will actually be used for
+        description: The name of the job (max. 100 characters).
         type: string
       reportTypeId:
         description: The type of reports this job creates. Corresponds to the ID of a ReportType.

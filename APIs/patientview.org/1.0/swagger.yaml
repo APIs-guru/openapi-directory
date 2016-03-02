@@ -45,7 +45,7 @@ paths:
         '200':
           description: Description was not specified
           schema:
-            type: string
+            $ref: '#/definitions/UserToken'
         '201':
           description: Created
         '401':
@@ -564,6 +564,8 @@ definitions:
         type: string
       address4:
         type: string
+      allowInviteGp:
+        type: boolean
       contacts:
         items:
           $ref: '#/definitions/FhirContact'
@@ -573,6 +575,9 @@ definitions:
       id:
         format: int64
         type: integer
+      inviteDate:
+        format: date-time
+        type: string
       name:
         type: string
       postcode:
@@ -826,6 +831,27 @@ definitions:
         type: string
       visible:
         type: boolean
+  Route:
+    properties:
+      controller:
+        type: string
+      created:
+        format: date-time
+        type: string
+      displayOrder:
+        format: int32
+        type: integer
+      id:
+        format: int64
+        type: integer
+      lookup:
+        $ref: '#/definitions/Lookup'
+      templateUrl:
+        type: string
+      title:
+        type: string
+      url:
+        type: string
   UUID:
     properties:
       leastSignificantBits:
@@ -863,6 +889,8 @@ definitions:
           $ref: '#/definitions/GroupRole'
         type: array
         uniqueItems: true
+      hideSecretWordNotification:
+        type: boolean
       id:
         format: int64
         type: integer
@@ -887,6 +915,8 @@ definitions:
         type: string
       roleDescription:
         type: string
+      secretWordIsSet:
+        type: boolean
       surname:
         type: string
       userFeatures:
@@ -915,3 +945,74 @@ definitions:
         type: boolean
       optOutHidden:
         type: boolean
+  UserToken:
+    properties:
+      auditActions:
+        items:
+          type: string
+        type: array
+      checkSecretWord:
+        type: boolean
+      created:
+        format: date-time
+        type: string
+      expiration:
+        format: date-time
+        type: string
+      groupFeatures:
+        items:
+          $ref: '#/definitions/Feature'
+        type: array
+      groupMessagingEnabled:
+        type: boolean
+      mustSetSecretWord:
+        type: boolean
+      patientFeatures:
+        items:
+          $ref: '#/definitions/Feature'
+        type: array
+      patientMessagingFeatureTypes:
+        items:
+          type: string
+        type: array
+      patientRoles:
+        items:
+          $ref: '#/definitions/Role'
+        type: array
+      routes:
+        items:
+          $ref: '#/definitions/Route'
+        type: array
+        uniqueItems: true
+      secretWordChoices:
+        type: object
+      secretWordIndexes:
+        items:
+          type: string
+        type: array
+      secretWordToken:
+        type: string
+      securityRoles:
+        items:
+          $ref: '#/definitions/Role'
+        type: array
+      staffFeatures:
+        items:
+          $ref: '#/definitions/Feature'
+        type: array
+      staffRoles:
+        items:
+          $ref: '#/definitions/Role'
+        type: array
+      token:
+        type: string
+      user:
+        $ref: '#/definitions/User'
+      userFeatures:
+        items:
+          $ref: '#/definitions/Feature'
+        type: array
+      userGroups:
+        items:
+          $ref: '#/definitions/BaseGroup'
+        type: array

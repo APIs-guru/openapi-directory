@@ -334,8 +334,14 @@ definitions:
   User:
     description: A representation of a user.
     properties:
+      isDeleted:
+        description: 'A boolean which indicates whether the specified User was deleted. If true, name, photo and permission_id will be omitted.'
+        type: boolean
       name:
         description: The displayable name of the user.
+        type: string
+      permissionId:
+        description: "The permission ID associated with this user. Equivalent to the Drive API's permission ID for this user, returned as part of the Drive Permissions resource."
         type: string
       photo:
         $ref: '#/definitions/Photo'
