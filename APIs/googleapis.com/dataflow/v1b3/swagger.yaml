@@ -1938,6 +1938,9 @@ definitions:
           description: Properties of the object. Contains field @ype with type URL.
         description: Extra arguments for this worker pool.
         type: object
+      subnetwork:
+        description: 'Subnetwork to which VMs will be assigned, if desired. Expected to be of the form "zones/ZONE/subnetworks/SUBNETWORK".'
+        type: string
       taskrunnerSettings:
         $ref: '#/definitions/TaskRunnerSettings'
         description: Settings passed through to Google Compute Engine workers when using the standard Dataflow task runner. Users should ignore this field.

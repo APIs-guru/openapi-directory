@@ -677,6 +677,11 @@ definitions:
       apiKey:
         description: 'Browser API key, needed when making http request to Apiary.'
         type: string
+      authorizedDomains:
+        description: Authorized domains.
+        items:
+          type: string
+        type: array
       changeEmailTemplate:
         $ref: '#/definitions/EmailTemplate'
         description: Change email template.
@@ -1172,6 +1177,9 @@ definitions:
               type: string
             providerId:
               description: "The IdP ID. For white listed IdPs it's a short domain name, e.g., google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs it's the OP identifier."
+              type: string
+            rawId:
+              description: "User's raw identifier directly returned from IDP."
               type: string
           type: object
         type: array
