@@ -6,7 +6,7 @@ basePath: /api/v1
 info:
   description: A simple and elegant way to explore cancer data
   title: FireBrowse Beta API
-  version: '1.1.21 beta (2015-12-01 15:49:55 )'
+  version: '1.1.24 (2016-03-02 18:31:21 75d0413da78e25d54c0f793b)'
   x-logo:
     url: 'http://firebrowse.org/img/beta_smaller.png'
   x-origin:
@@ -1332,6 +1332,7 @@ paths:
           in: query
           items:
             enum:
+              - '2016_01_28'
               - '2015_11_01'
               - '2015_08_21'
               - '2015_06_01'
@@ -1980,6 +1981,7 @@ paths:
           in: query
           items:
             enum:
+              - '2016_01_28'
               - '2015_11_01'
               - '2015_08_21'
               - '2015_06_01'
@@ -2762,6 +2764,7 @@ paths:
               - tobacco_smoking_pack_years_smoked
               - tobacco_smoking_year_stopped
               - tumor_size
+              - tumor_stage
               - tumor_status
               - tumor_tissue_site
               - vital_status

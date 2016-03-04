@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: API for the Google Cloud User Accounts service.
+  description: Creates and manages users and groups for accessing Google Compute Engine virtual machines.
   title: Cloud User Accounts
   version: vm_beta
   x-apiClientRegistration:
@@ -91,16 +91,20 @@ paths:
           required: true
           type: string
         - description: |-
-            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
 
-            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+            Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
+
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
         - default: 500
-          description: Maximum count of results to be returned.
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -115,7 +119,7 @@ paths:
           in: query
           name: orderBy
           type: string
-        - description: Specifies a page token to use. Use this parameter if you want to list the next page of results. Set pageToken to the nextPageToken returned by a previous list request.
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
           in: query
           name: pageToken
           type: string
@@ -322,16 +326,20 @@ paths:
           required: true
           type: string
         - description: |-
-            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
 
-            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+            Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
+
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
         - default: 500
-          description: Maximum count of results to be returned.
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -346,7 +354,7 @@ paths:
           in: query
           name: orderBy
           type: string
-        - description: Specifies a page token to use. Use this parameter if you want to list the next page of results. Set pageToken to the nextPageToken returned by a previous list request.
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
           in: query
           name: pageToken
           type: string
@@ -448,16 +456,20 @@ paths:
           required: true
           type: string
         - description: |-
-            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
 
-            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+            Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
+
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
         - default: 500
-          description: Maximum count of results to be returned.
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -472,7 +484,7 @@ paths:
           in: query
           name: orderBy
           type: string
-        - description: Specifies a page token to use. Use this parameter if you want to list the next page of results. Set pageToken to the nextPageToken returned by a previous list request.
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
           in: query
           name: pageToken
           type: string
@@ -751,16 +763,20 @@ paths:
           required: true
           type: string
         - description: |-
-            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
 
-            The FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
 
-            For example, filter=name ne example-instance.
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+            Compute Engine Beta API Only: If you use filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. In particular, use filtering on nested fields to take advantage of instance labels to organize and filter results based on label values.
+
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
           in: query
           name: filter
           type: string
         - default: 500
-          description: Maximum count of results to be returned.
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
           in: query
           maximum: 500
           minimum: 0
@@ -775,7 +791,7 @@ paths:
           in: query
           name: orderBy
           type: string
-        - description: Specifies a page token to use. Use this parameter if you want to list the next page of results. Set pageToken to the nextPageToken returned by a previous list request.
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
           in: query
           name: pageToken
           type: string
@@ -949,13 +965,16 @@ definitions:
     description: 'An Operation resource, used to manage asynchronous API requests.'
     properties:
       clientOperationId:
-        description: '[Output Only] An optional identifier specified by the client when the mutation was initiated. Must be unique for all Operation resources in the project.'
+        description: '[Output Only] Reserved for future use.'
         type: string
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
+      description:
+        description: '[Output Only] A textual description of the operation, which is set when the operation is created.'
+        type: string
       endTime:
-        description: '[Output Only] The time that this operation was completed. This is in RFC3339 text format.'
+        description: '[Output Only] The time that this operation was completed. This value is in RFC3339 text format.'
         type: string
       error:
         description: '[Output Only] If errors are generated during processing of the operation, this field will be populated.'
@@ -968,7 +987,7 @@ definitions:
                   description: '[Output Only] The error type identifier for this error.'
                   type: string
                 location:
-                  description: '[Output Only] Indicates the field in the request which caused the error. This property is optional.'
+                  description: '[Output Only] Indicates the field in the request that caused the error. This property is optional.'
                   type: string
                 message:
                   description: '[Output Only] An optional, human-readable error message.'
@@ -980,41 +999,41 @@ definitions:
         description: '[Output Only] If the operation fails, this field contains the HTTP error message that was returned, such as NOT FOUND.'
         type: string
       httpErrorStatusCode:
-        description: '[Output Only] If the operation fails, this field contains the HTTP error message that was returned, such as 404.'
+        description: '[Output Only] If the operation fails, this field contains the HTTP error status code that was returned. For example, a 404 means the resource was not found.'
         format: int32
         type: integer
       id:
-        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
         format: uint64
         type: string
       insertTime:
-        description: '[Output Only] The time that this operation was requested. This is in RFC3339 text format.'
+        description: '[Output Only] The time that this operation was requested. This value is in RFC3339 text format.'
         type: string
       kind:
         default: 'clouduseraccounts#operation'
-        description: '[Output Only] Type of the resource. Always compute#operation for Operation resources.'
+        description: '[Output Only] Type of the resource. Always compute#operation for operation resources.'
         type: string
       name:
         description: '[Output Only] Name of the resource.'
         type: string
       operationType:
-        description: '[Output Only] Type of the operation, such as insert, compute.instanceGroups.update, or compute.instanceGroups.delete.'
+        description: '[Output Only] The type of operation, such as insert, update, or delete, and so on.'
         type: string
       progress:
-        description: '[Output Only] An optional progress indicator that ranges from 0 to 100. There is no requirement that this be linear or support any granularity of operations. This should not be used to guess at when the operation will be complete. This number should monotonically increase as the operation progresses.'
+        description: '[Output Only] An optional progress indicator that ranges from 0 to 100. There is no requirement that this be linear or support any granularity of operations. This should not be used to guess when the operation will be complete. This number should monotonically increase as the operation progresses.'
         format: int32
         type: integer
       region:
-        description: '[Output Only] URL of the region where the operation resides. Only applicable for regional resources.'
+        description: '[Output Only] The URL of the region where the operation resides. Only available when performing regional operations.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
       startTime:
-        description: '[Output Only] The time that this operation was started by the server. This is in RFC3339 text format.'
+        description: '[Output Only] The time that this operation was started by the server. This value is in RFC3339 text format.'
         type: string
       status:
-        description: '[Output Only] Status of the operation. Can be one of the following: PENDING, RUNNING, or DONE.'
+        description: '[Output Only] The status of the operation, which can be one of the following: PENDING, RUNNING, or DONE.'
         enum:
           - DONE
           - PENDING
@@ -1024,11 +1043,11 @@ definitions:
         description: '[Output Only] An optional textual description of the current status of the operation.'
         type: string
       targetId:
-        description: '[Output Only] Unique target ID which identifies a particular incarnation of the target.'
+        description: '[Output Only] The unique target ID, which identifies a specific incarnation of the target resource.'
         format: uint64
         type: string
       targetLink:
-        description: '[Output Only] URL of the resource the operation is mutating.'
+        description: '[Output Only] The URL of the resource that the operation modifies.'
         type: string
       user:
         description: '[Output Only] User who requested the operation, for example: user@example.com.'
@@ -1038,8 +1057,9 @@ definitions:
         items:
           properties:
             code:
-              description: '[Output Only] The warning type identifier for this warning.'
+              description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
               enum:
+                - CLEANUP_FAILED
                 - DEPRECATED_RESOURCE_USED
                 - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
                 - INJECTED_KERNELS_DEPRECATED
@@ -1056,11 +1076,13 @@ definitions:
                 - UNREACHABLE
               type: string
             data:
-              description: '[Output Only] Metadata for this warning in key: value format.'
+              description: |-
+                [Output Only] Metadata about this warning in key: value format. For example:
+                "data": [ { "key": "scope", "value": "zones/us-east1-d" }
               items:
                 properties:
                   key:
-                    description: '[Output Only] A key for the warning data.'
+                    description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
                     type: string
                   value:
                     description: '[Output Only] A warning data value corresponding to the key.'
@@ -1068,22 +1090,22 @@ definitions:
                 type: object
               type: array
             message:
-              description: '[Output Only] Optional human-readable details for this warning.'
+              description: '[Output Only] A human-readable description of the warning code.'
               type: string
           type: object
         type: array
       zone:
-        description: '[Output Only] URL of the zone where the operation resides.'
+        description: '[Output Only] The URL of the zone where the operation resides. Only available when performing per-zone operations.'
         type: string
     type: object
   OperationList:
     description: Contains a list of Operation resources.
     properties:
       id:
-        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
         type: string
       items:
-        description: '[Output Only] The Operation resources.'
+        description: '[Output Only] A list of Operation resources.'
         items:
           $ref: '#/definitions/Operation'
         type: array
@@ -1092,7 +1114,7 @@ definitions:
         description: '[Output Only] Type of resource. Always compute#operations for Operations resource.'
         type: string
       nextPageToken:
-        description: '[Output Only] A token used to continue a truncate.'
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
