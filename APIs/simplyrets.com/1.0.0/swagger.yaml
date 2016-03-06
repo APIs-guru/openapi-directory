@@ -42,6 +42,23 @@ paths:
           name: type
           required: false
           type: string
+        - description: |
+            Request openhouses for a specific `listingId`.
+          in: query
+          name: listingId
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: |
+            Filter the openhouses returned by a list of valid cities. A
+            list of valid cities can be found by making an OPTIONS
+            request to the `/openhouses` endpoint.
+          in: query
+          items:
+            type: string
+          name: cities
+          required: false
+          type: array
         - collectionFormat: multi
           description: |
             Filter the listings returned by brokerage with a Broker ID.
@@ -148,6 +165,7 @@ paths:
       parameters:
         - default: 189018
           description: A unique OpenHouse identification key
+          format: int64
           in: path
           name: openHouseKey
           required: true
@@ -200,13 +218,14 @@ paths:
         - description: |
             A textual keyword search. This parameter will search  the following
             fields, when available:
-              - mls number / listing id
+              - listingId (This does _not_ search the 'mlsId' field in the SimplyRETS response body)
               - street number
               - street name
               - mls area (major)
               - city
               - subdivision name
               - postal code
+            NOTE
           in: query
           name: q
           required: false
@@ -484,6 +503,8 @@ paths:
             - 'maintenanceExpense' data on maintenance expenses
             - 'parking' additional parking data
             - 'pool' includes an additional pool description
+            - 'taxAnnualAmount' include the annual tax amount
+            - 'taxYear' include the tax year data
             - 'rooms' include parameter will include
                any additional rooms as a list.
 
@@ -497,6 +518,8 @@ paths:
             - parking
             - pool
             - rooms
+            - taxYear
+            - taxAnnualAmount
           in: query
           items:
             type: string
@@ -565,6 +588,7 @@ paths:
       parameters:
         - default: 1005252
           description: A mlsId (unique indentifier).
+          format: int64
           in: path
           name: mlsId
           required: true

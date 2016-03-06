@@ -33,7 +33,39 @@ tags:
     name: people search
   - description: People who contributed to a podcast
     name: people
+  - description: Ranks of podcasts from the iTunes charts
+    name: charts
 paths:
+  /chart_daily:
+    get:
+      description: Returns shows that have been in the top 100 on the iTunes charts and their ranks
+      parameters:
+        - description: The start date of the charts data in the format YYYY-MM-DD. Maximum (and default) date is the current day minus one week; minimum is 2013-06-01)
+          format: date
+          in: query
+          name: start_date
+          required: false
+          type: string
+        - default: 10
+          description: 'The highest ranks for which to get data. Default is 10, maximum is 100.'
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: us
+          description: "The country for which to get charts data. US: 'us', Great Britain: 'gb', Ireland: 'ie', New Zealand: 'nz', South Africa: 'za'"
+          in: query
+          name: country
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Chart ranks of shows listed by title
+          schema:
+            $ref: '#/definitions/chart_entry'
+      tags:
+        - charts
   '/episodes/{id}':
     get:
       description: Gets a single episode record by ID
@@ -504,6 +536,22 @@ definitions:
       parent_id:
         description: ID for parent category
         type: integer
+  chart_entry:
+    properties:
+      country:
+        type: string
+      limit:
+        type: integer
+      shows:
+        example:
+          This American Life:
+            id: 27
+            ranks:
+              '2016-01-01': 3
+              '2016-01-02': 2
+      start_date:
+        format: date
+        type: string
   contribution:
     properties:
       episode:

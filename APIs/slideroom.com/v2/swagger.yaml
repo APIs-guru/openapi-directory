@@ -311,10 +311,6 @@ paths:
           name: delivery.folder
           required: false
           type: string
-        - in: query
-          name: batchFileName
-          required: false
-          type: string
         - description: 'Limit result to applications submitted after the "since" date. Format as the number of seconds since 1/1/1970 GMT.'
           format: int32
           in: query
@@ -604,10 +600,6 @@ paths:
         - description: Optionally specifies the subfolder in which to deliver the export when using an external storage account.
           in: query
           name: delivery.folder
-          required: false
-          type: string
-        - in: query
-          name: batchFileName
           required: false
           type: string
       produces:

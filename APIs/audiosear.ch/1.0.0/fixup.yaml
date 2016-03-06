@@ -26,6 +26,25 @@ definitions:
           wrapped:
             - 'true'
             - true
+  chart_entry:
+    properties:
+      shows:
+        properties:
+          - '[title]':
+              properties:
+                id:
+                  type: integer
+                ranks:
+                  '[date]':
+                    type: integer
+          - 0
+          - 0
+      start_date:
+        format:
+          - date
+        type:
+          - date
+          - string
   episode:
     properties:
       date_added:

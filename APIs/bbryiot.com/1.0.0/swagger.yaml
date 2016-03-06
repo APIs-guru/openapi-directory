@@ -442,6 +442,26 @@ paths:
       summary: (DEPRECATED) Update an application API KEY and API SECRET
       tags:
         - apps
+  '/apps/{id}/secret':
+    put:
+      consumes:
+        - application/json
+      description: |
+        Reset the API SECRET for an application. The existing API SECRET will be revoked immediately. This cannot be undone. The calling device must have the app.reset.secret capability for the specified application.
+      parameters:
+        - description: The universally unique identifier (UUID) of the application to update.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/AppKeys'
+      summary: Reset the application API SECRET
+      tags:
+        - apps
   '/apps/{id}/tags/{tag_id}':
     delete:
       description: |
@@ -787,6 +807,46 @@ paths:
       tags:
         - devices
   '/devices/{id}/data':
+    get:
+      consumes:
+        - application/json
+      description: |
+        Return named data set for a device. Devices can read their own data. To read the data of other devices, the caller must have the data.read capability on the target device.
+      parameters:
+        - description: The universally unique identifier (UUID) of the device to read from.
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Reserved for future use.
+          in: query
+          name: standard
+          type: string
+        - description: |
+            The data type that this data applies to. The default is "state".
+          enum:
+            - component
+            - log
+            - state
+            - alarm
+          in: query
+          name: category
+          type: string
+        - description: 'The number of results to provide, max is 1000. If not set, default as 25.'
+          in: query
+          name: limit
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            items:
+              $ref: '#/definitions/MData'
+            type: array
+      summary: GET data objects
+      tags:
+        - devices
     post:
       consumes:
         - application/json
@@ -1841,7 +1901,7 @@ paths:
         - description: |
             The Elasticsearch DSL query to perform. For more information about DSL queries, see: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl.html
           in: body
-          name: body
+          name: query
           schema:
             $ref: '#/definitions/ElasticDSL'
       responses:
@@ -3043,6 +3103,34 @@ definitions:
         description: |
           The total number of search results (specified by 'hits') that are found.
         type: integer
+  MData:
+    properties:
+      category:
+        description: |
+          The data type. You can specify "component", "log", "state", and "alarm". The default is "state".
+        enum:
+          - component
+          - log
+          - state
+          - alarm
+        type: string
+      id:
+        description: The universally unique identifier (UUID) of the device this data applies to.
+        type: string
+      recorded_on:
+        description: |
+          The timestamp of when the data was created. The timestamp is a 64-bit integer that represents the number of milliseconds since UNIX epoch.
+        format: int64
+        type: integer
+      standard:
+        description: Reserved for future use.
+        type: string
+      values:
+        description: |
+          The key-value pairs of the recorded data. Nested data can be stored (keys with arrays or objects for example), however flat data can only be indexed.
+        type: object
+    required:
+      - id
   Message:
     properties:
       created_on:
@@ -3131,7 +3219,7 @@ definitions:
         type: object
       type:
         description: |
-          The type of notification.
+          The type of notification. The value of "message" specifies a device message, a value of "data" specifies that the notification contains data, and the value of "file" specifies a file was added or removed.
         enum:
           - message
           - data

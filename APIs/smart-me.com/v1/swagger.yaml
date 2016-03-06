@@ -192,6 +192,10 @@ definitions:
         description: The Actvie Power or current flow rate
         format: double
         type: number
+      ActiveTariff:
+        description: The Number of the Active Tariff
+        format: int32
+        type: integer
       ActviePowerUnit:
         description: The Unit of the Active Power Value
         type: string
@@ -205,6 +209,14 @@ definitions:
         type: number
       CounterReadingT2:
         description: The Meter Counter Reading Tariff 2
+        format: double
+        type: number
+      CounterReadingT3:
+        description: The Meter Counter Reading Tariff 3
+        format: double
+        type: number
+      CounterReadingT4:
+        description: The Meter Counter Reading Tariff 4
         format: double
         type: number
       CounterReadingUnit:
