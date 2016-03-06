@@ -455,8 +455,10 @@ function addToCollection(type, url, command) {
         return;
       }
 
-      var editedOrigin = YAML.safeLoad(match[1]);
-      saveFixup(getOriginFixupPath(result.spec), serilazeSpec(result.spec), editedOrigin);
+      if (type !== 'swagger_2') {
+        var editedOrigin = YAML.safeLoad(match[1]);
+        saveFixup(getOriginFixupPath(result.spec), serilazeSpec(result.spec), editedOrigin);
+      }
 
       if (!_.isUndefined(result.swagger)) {
         var editedSwagger = YAML.safeLoad(match[2]);
