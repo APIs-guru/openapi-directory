@@ -34,7 +34,7 @@ securityDefinitions:
     name: api_key
     type: apiKey
   trello_auth:
-    authorizationUrl: "https:\\/\\/trello.com\\/1\\/appKey\\/generate"
+    authorizationUrl: 'https://trello.com/1/appKey/generate'
     flow: implicit
     scopes:
       'read:boards': read any of the boards in your account
