@@ -1,0 +1,13 @@
+paths:
+  /v2/github:
+    get:
+      parameters:
+        '1':
+          type:
+            - 'Virtus::Attribute::Boolean'
+            - boolean
+        '5':
+          type:
+            - 'Virtus::Attribute::Boolean'
+            - boolean
+        _t: a
