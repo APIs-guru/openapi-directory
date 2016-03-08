@@ -1,0 +1,1769 @@
+swagger: '2.0'
+schemes:
+  - https
+host: www.googleapis.com
+basePath: /toolresults/v1beta3/projects
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: Read and publish results from Cloud Test Lab.
+  title: Cloud Tool Results
+  version: v1beta3
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/toolresults/v1beta3/rest'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: toolresults
+externalDocs:
+  url: 'https://developers.google.com/cloud-test-lab/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+parameters:
+  alt:
+    default: json
+    description: Data format for the response.
+    enum:
+      - json
+    in: query
+    name: alt
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    in: query
+    name: quotaUser
+    type: string
+  userIp:
+    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    in: query
+    name: userIp
+    type: string
+tags:
+  - name: projects
+paths:
+  '/{projectId}/histories':
+    get:
+      description: |-
+        Lists Histories for a given Project.
+
+        The histories are sorted by modification time in descending order. The history_id key will be used to order the history with the same modification time.
+
+        May return any of the following canonical error codes:
+
+        - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the History does not exist
+      operationId: toolresults.projects.histories.list
+      parameters:
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            If set, only return histories with the given name.
+
+            Optional.
+          in: query
+          name: filterByName
+          type: string
+        - description: |-
+            The maximum number of Histories to fetch.
+
+            Default value: 20. The server will use this default if the field is not set or has a value of 0. Any value greater than 100 will be treated as 100.
+
+            Optional.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            A continuation token to resume the query at the next item.
+
+            Optional.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListHistoriesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: |-
+        Creates a History.
+
+        The returned History will have the id set.
+
+        May return any of the following canonical error codes:
+
+        - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the containing project does not exist
+      operationId: toolresults.projects.histories.create
+      parameters:
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            A unique request ID for server to detect duplicated requests. For example, a UUID.
+
+            Optional, but strongly recommended.
+          in: query
+          name: requestId
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/History'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/History'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/{projectId}/histories/{historyId}':
+    get:
+      description: |-
+        Gets a History.
+
+        May return any of the following canonical error codes:
+
+        - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the History does not exist
+      operationId: toolresults.projects.histories.get
+      parameters:
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            A History id.
+
+            Required.
+          in: path
+          name: historyId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/History'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{projectId}/histories/{historyId}/executions':
+    get:
+      description: |-
+        Lists Histories for a given Project.
+
+        The executions are sorted by creation_time in descending order. The execution_id key will be used to order the executions with the same creation_time.
+
+        May return any of the following canonical error codes:
+
+        - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the containing History does not exist
+      operationId: toolresults.projects.histories.executions.list
+      parameters:
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            A History id.
+
+            Required.
+          in: path
+          name: historyId
+          required: true
+          type: string
+        - description: |-
+            The maximum number of Executions to fetch.
+
+            Default value: 25. The server will use this default if the field is not set or has a value of 0.
+
+            Optional.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            A continuation token to resume the query at the next item.
+
+            Optional.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListExecutionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: |-
+        Creates an Execution.
+
+        The returned Execution will have the id set.
+
+        May return any of the following canonical error codes:
+
+        - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the containing History does not exist
+      operationId: toolresults.projects.histories.executions.create
+      parameters:
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            A History id.
+
+            Required.
+          in: path
+          name: historyId
+          required: true
+          type: string
+        - description: |-
+            A unique request ID for server to detect duplicated requests. For example, a UUID.
+
+            Optional, but strongly recommended.
+          in: query
+          name: requestId
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Execution'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Execution'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/{projectId}/histories/{historyId}/executions/{executionId}':
+    get:
+      description: |-
+        Gets an Execution.
+
+        May return any of the following canonical error codes:
+
+        - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the Execution does not exist
+      operationId: toolresults.projects.histories.executions.get
+      parameters:
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            A History id.
+
+            Required.
+          in: path
+          name: historyId
+          required: true
+          type: string
+        - description: |-
+            An Execution id.
+
+            Required.
+          in: path
+          name: executionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Execution'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: |-
+        Updates an existing Execution with the supplied partial entity.
+
+        May return any of the following canonical error codes:
+
+        - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the requested state transition is illegal - NOT_FOUND - if the containing History does not exist
+      operationId: toolresults.projects.histories.executions.patch
+      parameters:
+        - description: A Project id. Required.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Required.
+          in: path
+          name: historyId
+          required: true
+          type: string
+        - description: Required.
+          in: path
+          name: executionId
+          required: true
+          type: string
+        - description: |-
+            A unique request ID for server to detect duplicated requests. For example, a UUID.
+
+            Optional, but strongly recommended.
+          in: query
+          name: requestId
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Execution'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Execution'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/{projectId}/histories/{historyId}/executions/{executionId}/steps':
+    get:
+      description: |-
+        Lists Steps for a given Execution.
+
+        The steps are sorted by creation_time in descending order. The step_id key will be used to order the steps with the same creation_time.
+
+        May return any of the following canonical error codes:
+
+        - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if an argument in the request happens to be invalid; e.g. if an attempt is made to list the children of a nonexistent Step - NOT_FOUND - if the containing Execution does not exist
+      operationId: toolresults.projects.histories.executions.steps.list
+      parameters:
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            A History id.
+
+            Required.
+          in: path
+          name: historyId
+          required: true
+          type: string
+        - description: |-
+            A Execution id.
+
+            Required.
+          in: path
+          name: executionId
+          required: true
+          type: string
+        - description: |-
+            The maximum number of Steps to fetch.
+
+            Default value: 25. The server will use this default if the field is not set or has a value of 0.
+
+            Optional.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            A continuation token to resume the query at the next item.
+
+            Optional.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListStepsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: |-
+        Creates a Step.
+
+        The returned Step will have the id set.
+
+        May return any of the following canonical error codes:
+
+        - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the step is too large (more than 10Mib) - NOT_FOUND - if the containing Execution does not exist
+      operationId: toolresults.projects.histories.executions.steps.create
+      parameters:
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            A History id.
+
+            Required.
+          in: path
+          name: historyId
+          required: true
+          type: string
+        - description: |-
+            A Execution id.
+
+            Required.
+          in: path
+          name: executionId
+          required: true
+          type: string
+        - description: |-
+            A unique request ID for server to detect duplicated requests. For example, a UUID.
+
+            Optional, but strongly recommended.
+          in: query
+          name: requestId
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Step'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Step'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}':
+    get:
+      description: |-
+        Gets a Step.
+
+        May return any of the following canonical error codes:
+
+        - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the Step does not exist
+      operationId: toolresults.projects.histories.executions.steps.get
+      parameters:
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            A History id.
+
+            Required.
+          in: path
+          name: historyId
+          required: true
+          type: string
+        - description: |-
+            A Execution id.
+
+            Required.
+          in: path
+          name: executionId
+          required: true
+          type: string
+        - description: |-
+            A Step id.
+
+            Required.
+          in: path
+          name: stepId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Step'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: |-
+        Updates an existing Step with the supplied partial entity.
+
+        May return any of the following canonical error codes:
+
+        - PERMISSION_DENIED - if the user is not authorized to write project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the requested state transition is illegal (e.g try to upload a duplicate xml file), if the updated step is too large (more than 10Mib) - NOT_FOUND - if the containing Execution does not exist
+      operationId: toolresults.projects.histories.executions.steps.patch
+      parameters:
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            A History id.
+
+            Required.
+          in: path
+          name: historyId
+          required: true
+          type: string
+        - description: |-
+            A Execution id.
+
+            Required.
+          in: path
+          name: executionId
+          required: true
+          type: string
+        - description: |-
+            A Step id.
+
+            Required.
+          in: path
+          name: stepId
+          required: true
+          type: string
+        - description: |-
+            A unique request ID for server to detect duplicated requests. For example, a UUID.
+
+            Optional, but strongly recommended.
+          in: query
+          name: requestId
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Step'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Step'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}/thumbnails':
+    get:
+      description: |-
+        Lists thumbnails of images attached to a step.
+
+        May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to read from the project, or from any of the images - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the step does not exist, or if any of the images do not exist
+      operationId: toolresults.projects.histories.executions.steps.thumbnails.list
+      parameters:
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            A History id.
+
+            Required.
+          in: path
+          name: historyId
+          required: true
+          type: string
+        - description: |-
+            An Execution id.
+
+            Required.
+          in: path
+          name: executionId
+          required: true
+          type: string
+        - description: |-
+            A Step id.
+
+            Required.
+          in: path
+          name: stepId
+          required: true
+          type: string
+        - description: |-
+            The maximum number of thumbnails to fetch.
+
+            Default value: 50. The server will use this default if the field is not set or has a value of 0.
+
+            Optional.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            A continuation token to resume the query at the next item.
+
+            Optional.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListStepThumbnailsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{projectId}/histories/{historyId}/executions/{executionId}/steps/{stepId}:publishXunitXmlFiles':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: |-
+        Publish xml files to an existing Step.
+
+        May return any of the following canonical error codes:
+
+        - PERMISSION_DENIED - if the user is not authorized to write project - INVALID_ARGUMENT - if the request is malformed - FAILED_PRECONDITION - if the requested state transition is illegal, e.g try to upload a duplicate xml file or a file too large. - NOT_FOUND - if the containing Execution does not exist
+      operationId: toolresults.projects.histories.executions.steps.publishXunitXmlFiles
+      parameters:
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: |-
+            A History id.
+
+            Required.
+          in: path
+          name: historyId
+          required: true
+          type: string
+        - description: |-
+            A Execution id.
+
+            Required.
+          in: path
+          name: executionId
+          required: true
+          type: string
+        - description: |-
+            A Step id. Note: This step must include a TestExecutionStep.
+
+            Required.
+          in: path
+          name: stepId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PublishXunitXmlFilesRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Step'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/{projectId}/settings':
+    get:
+      description: |-
+        Gets the Tool Results settings for a project.
+
+        May return any of the following canonical error codes:
+
+        - PERMISSION_DENIED - if the user is not authorized to read from project
+      operationId: toolresults.projects.getSettings
+      parameters:
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ProjectSettings'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{projectId}:initializeSettings':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: |-
+        Creates resources for settings which have not yet been set.
+
+        Currently, this creates a single resource: a Google Cloud Storage bucket, to be used as the default bucket for this project. The bucket is created in the name of the user calling. Except in rare cases, calling this method in parallel from multiple clients will only create a single bucket. In order to avoid unnecessary storage charges, the bucket is configured to automatically delete objects older than 90 days.
+
+        The bucket is created with the project-private ACL: All project team members are given permissions to the bucket and objects created within it according to their roles. Project owners have owners rights, and so on. The default ACL on objects created in the bucket is project-private as well. See Google Cloud Storage documentation for more details.
+
+        If there is already a default bucket set, this call does nothing.
+
+        May return any canonical error codes, including the following:
+
+        - PERMISSION_DENIED - if the user is not authorized to write to project - Any error code raised by Google Cloud Storage
+      operationId: toolresults.projects.initializeSettings
+      parameters:
+        - description: |-
+            A Project id.
+
+            Required.
+          in: path
+          name: projectId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ProjectSettings'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+definitions:
+  Any:
+    description: |-
+      `Any` contains an arbitrary serialized message along with a URL that describes the type of the serialized message.
+
+      Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type.
+
+      Example 1: Pack and unpack a message in C++.
+
+      Foo foo = ...; Any any; any.PackFrom(foo); ... if (any.UnpackTo(&foo)) { ... }
+
+      Example 2: Pack and unpack a message in Java.
+
+      Foo foo = ...; Any any = Any.pack(foo); ... if (any.is(Foo.class)) { foo = any.unpack(Foo.class); }
+
+      The pack methods provided by protobuf library will by default use 'type.googleapis.com/full.type.name' as the type URL and the unpack methods only use the fully qualified type name after the last '/' in the type URL, for example "foo.bar.com/x/y.z" will yield type name "y.z".
+
+
+
+      JSON ==== The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:
+
+      package google.profile; message Person { string first_name = 1; string last_name = 2; }
+
+      { "@type": "type.googleapis.com/google.profile.Person", "firstName": , "lastName":  }
+
+      If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):
+
+      { "@type": "type.googleapis.com/google.protobuf.Duration", "value": "1.212s" }
+    properties:
+      typeUrl:
+        description: |-
+          A URL/resource name whose content describes the type of the serialized message.
+
+          For URLs which use the schema `http`, `https`, or no schema, the following restrictions and interpretations apply:
+
+          * If no schema is provided, `https` is assumed. * The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). * An HTTP GET on the URL must yield a [google.protobuf.Type][] value in binary format, or produce an error. * Applications are allowed to cache lookup results based on the URL, or have them precompiled into a binary to avoid any lookup. Therefore, binary compatibility needs to be preserved on changes to types. (Use versioned type names to manage breaking changes.)
+
+          Schemas other than `http`, `https` (or the empty schema) might be used with implementation specific semantics.
+        type: string
+      value:
+        description: Must be valid serialized data of the above specified type.
+        format: byte
+        type: string
+    type: object
+  Duration:
+    description: |-
+      A Duration represents a signed, fixed-length span of time represented as a count of seconds and fractions of seconds at nanosecond resolution. It is independent of any calendar and concepts like "day" or "month". It is related to Timestamp in that the difference between two Timestamp values is a Duration and it can be added or subtracted from a Timestamp. Range is approximately +-10,000 years.
+
+      Example 1: Compute Duration from two Timestamps in pseudo code.
+
+      Timestamp start = ...; Timestamp end = ...; Duration duration = ...;
+
+      duration.seconds = end.seconds - start.seconds; duration.nanos = end.nanos - start.nanos;
+
+      if (duration.seconds  0) { duration.seconds += 1; duration.nanos -= 1000000000; } else if (durations.seconds > 0 && duration.nanos < 0) { duration.seconds -= 1; duration.nanos += 1000000000; }
+
+      Example 2: Compute Timestamp from Timestamp + Duration in pseudo code.
+
+      Timestamp start = ...; Duration duration = ...; Timestamp end = ...;
+
+      end.seconds = start.seconds + duration.seconds; end.nanos = start.nanos + duration.nanos;
+
+      if (end.nanos = 1000000000) { end.seconds += 1; end.nanos -= 1000000000; }
+    properties:
+      nanos:
+        description: 'Signed fractions of a second at nanosecond resolution of the span of time. Durations less than one second are represented with a 0 `seconds` field and a positive or negative `nanos` field. For durations of one second or more, a non-zero value for the `nanos` field must be of the same sign as the `seconds` field. Must be from -999,999,999 to +999,999,999 inclusive.'
+        format: int32
+        type: integer
+      seconds:
+        description: 'Signed seconds of the span of time. Must be from -315,576,000,000 to +315,576,000,000 inclusive.'
+        format: int64
+        type: string
+    type: object
+  Execution:
+    description: |-
+      An Execution represents a collection of Steps. For instance, it could represent: - a mobile test executed across a range of device configurations - a jenkins job with a build step followed by a test step
+
+      The maximum size of an execution message is 1 MiB.
+
+      An Execution can be updated until its state is set to COMPLETE at which point it becomes immutable. Next tag: 12
+    properties:
+      completionTime:
+        $ref: '#/definitions/Timestamp'
+        description: |-
+          The time when the Execution status transitioned to COMPLETE.
+
+          This value will be set automatically when state transitions to COMPLETE.
+
+          - In response: set if the execution state is COMPLETE. - In create/update request: never set
+      creationTime:
+        $ref: '#/definitions/Timestamp'
+        description: |-
+          The time when the Execution was created.
+
+          This value will be set automatically when CreateExecution is called.
+
+          - In response: always set - In create/update request: never set
+      executionId:
+        description: |-
+          A unique identifier within a History for this Execution.
+
+          Returns INVALID_ARGUMENT if this field is set or overwritten by the caller.
+
+          - In response always set - In create/update request: never set
+        type: string
+      outcome:
+        $ref: '#/definitions/Outcome'
+        description: |-
+          Classify the result, for example into SUCCESS or FAILURE
+
+          - In response: present if set by create/update request - In create/update request: optional
+      state:
+        description: |-
+          The initial state is IN_PROGRESS.
+
+          The only legal state transitions is from IN_PROGRESS to COMPLETE.
+
+          A PRECONDITION_FAILED will be returned if an invalid transition is requested.
+
+          The state can only be set to COMPLETE once. A FAILED_PRECONDITION will be returned if the state is set to COMPLETE multiple times.
+
+          If the state is set to COMPLETE, all the in-progress steps within the execution will be set as COMPLETE. If the outcome of the step is not set, the outcome will be set to INCONCLUSIVE.
+
+          - In response always set - In create/update request: optional
+        enum:
+          - complete
+          - inProgress
+          - pending
+          - unknownState
+        type: string
+      testExecutionMatrixId:
+        description: |-
+          TestExecution Matrix ID that the Test Service uses.
+
+          - In response: present if set by create - In create: optional - In update: never set
+        type: string
+    type: object
+  FailureDetail:
+    properties:
+      crashed:
+        description: If the failure was severe because the system under test crashed.
+        type: boolean
+      notInstalled:
+        description: If an app is not installed and thus no test can be run with the app. This might be caused by trying to run a test on an unsupported platform.
+        type: boolean
+      otherNativeCrash:
+        description: If a native process other than the app crashed.
+        type: boolean
+      timedOut:
+        description: 'If the test overran some time limit, and that is why it failed.'
+        type: boolean
+    type: object
+  FileReference:
+    description: A reference to a file.
+    properties:
+      fileUri:
+        description: |-
+          The URI of a file stored in Google Cloud Storage.
+
+          For example: http://storage.googleapis.com/mybucket/path/to/test.xml or in gsutil format: gs://mybucket/path/to/test.xml with version-specific info, gs://mybucket/path/to/test.xml#1360383693690000
+
+          An INVALID_ARGUMENT error will be returned if the URI format is not supported.
+
+          - In response: always set - In create/update request: always set
+        type: string
+    type: object
+  History:
+    description: |-
+      A History represents a sorted list of Executions ordered by the start_timestamp_millis field (descending). It can be used to group all the Executions of a continuous build.
+
+      Note that the ordering only operates on one-dimension. If a repository has multiple branches, it means that multiple histories will need to be used in order to order Executions per branch. Next tag: 7
+    properties:
+      displayName:
+        description: |-
+          A short human-readable (plain text) name to display in the UI. Maximum of 100 characters.
+
+          - In response: present if set during create. - In create request: optional
+        type: string
+      historyId:
+        description: |-
+          A unique identifier within a project for this History.
+
+          Returns INVALID_ARGUMENT if this field is set or overwritten by the caller.
+
+          - In response always set - In create request: never set
+        type: string
+      name:
+        description: |-
+          A name to uniquely identify a history within a project. Maximum of 100 characters.
+
+          - In response always set - In create request: always set
+        type: string
+    type: object
+  Image:
+    description: |-
+      An image, with a link to the main image and a thumbnail.
+
+      Next tag: 6
+    properties:
+      error:
+        $ref: '#/definitions/Status'
+        description: An error explaining why the thumbnail could not be rendered.
+      sourceImage:
+        $ref: '#/definitions/ToolOutputReference'
+        description: |-
+          A reference to the full-size, original image.
+
+          This is the same as the tool_outputs entry for the image under its Step.
+
+          Always set.
+      stepId:
+        description: |-
+          The step to which the image is attached.
+
+          Always set.
+        type: string
+      thumbnail:
+        $ref: '#/definitions/Thumbnail'
+        description: The thumbnail.
+    type: object
+  InconclusiveDetail:
+    properties:
+      abortedByUser:
+        description: 'If the end user aborted the test execution before a pass or fail could be determined. For example, the user pressed ctrl-c which sent a kill signal to the test runner while the test was running.'
+        type: boolean
+      infrastructureFailure:
+        description: |-
+          If the test runner could not determine success or failure because the test depends on a component other than the system under test which failed.
+
+          For example, a mobile test requires provisioning a device where the test executes, and that provisioning can fail.
+        type: boolean
+      nativeCrash:
+        description: |-
+          A native process crashed on the device, producing a tombstone. It is unclear whether the crash was related to the app under test.
+
+          For example, OpenGL crashed, but it is unclear if the app is responsible. TODO(yinfu): Remove after all reference from TestService are deleted.
+        type: boolean
+    type: object
+  ListExecutionsResponse:
+    description: 'Next tag: 3'
+    properties:
+      executions:
+        description: |-
+          Executions.
+
+          Always set.
+        items:
+          $ref: '#/definitions/Execution'
+        type: array
+      nextPageToken:
+        description: |-
+          A continuation token to resume the query at the next item.
+
+          Will only be set if there are more Executions to fetch.
+        type: string
+    type: object
+  ListHistoriesResponse:
+    description: Response message for HistoryService.List
+    properties:
+      histories:
+        description: Histories.
+        items:
+          $ref: '#/definitions/History'
+        type: array
+      nextPageToken:
+        description: |-
+          A continuation token to resume the query at the next item.
+
+          Will only be set if there are more histories to fetch.
+
+          Tokens are valid for up to one hour from the time of the first list request. For instance, if you make a list request at 1PM and use the token from this first request 10 minutes later, the token from this second response will only be valid for 50 minutes.
+        type: string
+    type: object
+  ListStepThumbnailsResponse:
+    description: |-
+      A response containing the thumbnails in a step.
+
+      Next tag: 3
+    properties:
+      nextPageToken:
+        description: |-
+          A continuation token to resume the query at the next item.
+
+          If set, indicates that there are more thumbnails to read, by calling list again with this value in the page_token field.
+        type: string
+      thumbnails:
+        description: |-
+          A list of image data.
+
+          Images are returned in a deterministic order; they are ordered by these factors, in order of importance: * First, by their associated test case. Images without a test case are considered greater than images with one. * Second, by their creation time. Images without a creation time are greater than images with one. * Third, by the order in which they were added to the step (by calls to CreateStep or UpdateStep).
+        items:
+          $ref: '#/definitions/Image'
+        type: array
+    type: object
+  ListStepsResponse:
+    description: Response message for StepService.List.
+    properties:
+      nextPageToken:
+        description: |-
+          A continuation token to resume the query at the next item.
+
+          If set, indicates that there are more steps to read, by calling list again with this value in the page_token field.
+        type: string
+      steps:
+        description: Steps.
+        items:
+          $ref: '#/definitions/Step'
+        type: array
+    type: object
+  Outcome:
+    description: Interprets a result so that humans and machines can act on it.
+    properties:
+      failureDetail:
+        $ref: '#/definitions/FailureDetail'
+        description: |-
+          More information about a FAILURE outcome.
+
+          Returns INVALID_ARGUMENT if this field is set but the summary is not FAILURE.
+
+          Optional
+      inconclusiveDetail:
+        $ref: '#/definitions/InconclusiveDetail'
+        description: |-
+          More information about an INCONCLUSIVE outcome.
+
+          Returns INVALID_ARGUMENT if this field is set but the summary is not INCONCLUSIVE.
+
+          Optional
+      skippedDetail:
+        $ref: '#/definitions/SkippedDetail'
+        description: |-
+          More information about a SKIPPED outcome.
+
+          Returns INVALID_ARGUMENT if this field is set but the summary is not SKIPPED.
+
+          Optional
+      successDetail:
+        $ref: '#/definitions/SuccessDetail'
+        description: |-
+          More information about a SUCCESS outcome.
+
+          Returns INVALID_ARGUMENT if this field is set but the summary is not SUCCESS.
+
+          Optional
+      summary:
+        description: |-
+          The simplest way to interpret a result.
+
+          Required
+        enum:
+          - failure
+          - inconclusive
+          - skipped
+          - success
+          - unset
+        type: string
+    type: object
+  ProjectSettings:
+    description: Per-project settings for the Tool Results service.
+    properties:
+      defaultBucket:
+        description: |-
+          The name of the Google Cloud Storage bucket to which results are written.
+
+          By default, this is unset.
+
+          In update request: optional In response: optional
+        type: string
+      name:
+        description: |-
+          The name of the project's settings.
+
+          Always of the form: projects/{project-id}/settings
+
+          In update request: never set In response: always set
+        type: string
+    type: object
+  PublishXunitXmlFilesRequest:
+    description: Request message for StepService.PublishXunitXmlFiles.
+    properties:
+      xunitXmlFiles:
+        description: |-
+          URI of the Xunit XML files to publish.
+
+          The maximum size of the file this reference is pointing to is 50MB.
+
+          Required.
+        items:
+          $ref: '#/definitions/FileReference'
+        type: array
+    type: object
+  SkippedDetail:
+    properties:
+      incompatibleAppVersion:
+        description: "If the App doesn't support the specific API level."
+        type: boolean
+      incompatibleArchitecture:
+        description: "If the App doesn't run on the specific architecture, for example, x86."
+        type: boolean
+      incompatibleDevice:
+        description: "If the requested OS version doesn't run on the specific device model."
+        type: boolean
+    type: object
+  Status:
+    description: |-
+      The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). The error model is designed to be:
+
+      - Simple to use and understand for most users - Flexible enough to meet unexpected needs
+
+      # Overview
+
+      The `Status` message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of [google.rpc.Code][], but it may accept additional error codes if needed. The error message should be a developer-facing English message that helps developers *understand* and *resolve* the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package `google.rpc` which can be used for common error conditions.
+
+      # Language mapping
+
+      The `Status` message is the logical representation of the error model, but it is not necessarily the actual wire format. When the `Status` message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C.
+
+      # Other uses
+
+      The error model and the `Status` message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments.
+
+      Example uses of this error model include:
+
+      - Partial errors. If a service needs to return partial errors to the client, it may embed the `Status` in the normal response to indicate the partial errors.
+
+      - Workflow errors. A typical workflow has multiple steps. Each step may have a `Status` message for error reporting purpose.
+
+      - Batch operations. If a client uses batch request and batch response, the `Status` message should be used directly inside batch response, one for each error sub-response.
+
+      - Asynchronous operations. If an API call embeds asynchronous operation results in its response, the status of those operations should be represented directly using the `Status` message.
+
+      - Logging. If some API errors are stored in logs, the message `Status` could be used directly after any stripping needed for security/privacy reasons.
+    properties:
+      code:
+        description: 'The status code, which should be an enum value of [google.rpc.Code][].'
+        format: int32
+        type: integer
+      details:
+        description: A list of messages that carry the error details. There will be a common set of message types for APIs to use.
+        items:
+          $ref: '#/definitions/Any'
+        type: array
+      message:
+        description: 'A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][] field, or localized by the client.'
+        type: string
+    type: object
+  Step:
+    description: |-
+      A Step represents a single operation performed as part of Execution. A step can be used to represent the execution of a tool ( for example a test runner execution or an execution of a compiler).
+
+      Steps can overlap (for instance two steps might have the same start time if some operations are done in parallel).
+
+      Here is an example, let's consider that we have a continuous build is executing a test runner for each iteration. The workflow would look like: - user creates a Execution with id 1 - user creates an TestExecutionStep with id 100 for Execution 1 - user update TestExecutionStep with id 100 to add a raw xml log + the service parses the xml logs and returns a TestExecutionStep with updated TestResult(s). - user update the status of TestExecutionStep with id 100 to COMPLETE
+
+      A Step can be updated until its state is set to COMPLETE at which points it becomes immutable.
+
+      Next tag: 20
+    properties:
+      completionTime:
+        $ref: '#/definitions/Timestamp'
+        description: |-
+          The time when the step status was set to complete.
+
+          This value will be set automatically when state transitions to COMPLETE.
+
+          - In response: set if the execution state is COMPLETE. - In create/update request: never set
+      creationTime:
+        $ref: '#/definitions/Timestamp'
+        description: |-
+          The time when the step was created.
+
+          - In response: always set - In create/update request: never set
+      description:
+        description: |-
+          A description of this tool For example: mvn clean package -D skipTests=true
+
+          - In response: present if set by create/update request - In create/update request: optional
+        type: string
+      deviceUsageDuration:
+        $ref: '#/definitions/Duration'
+        description: |-
+          How much the device resource is used to perform the test.
+
+          This is the device usage used for billing purpose, which is different from the run_duration, for example, infrastructure failure won't be charged for device usage.
+
+          PRECONDITION_FAILED will be returned if one attempts to set a device_usage on a step which already has this field set.
+
+          - In response: present if previously set. - In create request: optional - In update request: optional
+      dimensionValue:
+        description: |-
+          If the execution containing this step has any dimension_definition set, then this field allows the child to specify the values of the dimensions.
+
+          The keys must exactly match the dimension_definition of the execution.
+
+          For example, if the execution has `dimension_definition = ['attempt', 'device']` then a step must define values for those dimensions, eg. `dimension_value = ['attempt': '1', 'device': 'Nexus 6']`
+
+          If a step does not participate in one dimension of the matrix, the value for that dimension should be empty string. For example, if one of the tests is executed by a runner which does not support retries, the step could have `dimension_value = ['attempt': '', 'device': 'Nexus 6']`
+
+          If the step does not participate in any dimensions of the matrix, it may leave dimension_value unset.
+
+          A PRECONDITION_FAILED will be returned if any of the keys do not exist in the dimension_definition of the execution.
+
+          A PRECONDITION_FAILED will be returned if another step in this execution already has the same name and dimension_value, but differs on other data fields, for example, step field is different.
+
+          A PRECONDITION_FAILED will be returned if dimension_value is set, and there is a dimension_definition in the execution which is not specified as one of the keys.
+
+          - In response: present if set by create - In create request: optional - In update request: never set
+        items:
+          $ref: '#/definitions/StepDimensionValueEntry'
+        type: array
+      hasImages:
+        description: |-
+          Whether any of the outputs of this step are images whose thumbnails can be fetched with ListThumbnails.
+
+          - In response: always set - In create/update request: never set
+        type: boolean
+      labels:
+        description: |-
+          Arbitrary user-supplied key/value pairs that are associated with the step.
+
+          Users are responsible for managing the key namespace such that keys don't accidentally collide.
+
+          An INVALID_ARGUMENT will be returned if the number of labels exceeds 100 or if the length of any of the keys or values exceeds 100 characters.
+
+          - In response: always set - In create request: optional - In update request: optional; any new key/value pair will be added to the map, and any new value for an existing key will update that key's value
+        items:
+          $ref: '#/definitions/StepLabelsEntry'
+        type: array
+      name:
+        description: |-
+          A short human-readable name to display in the UI. Maximum of 100 characters. For example: Clean build
+
+          A PRECONDITION_FAILED will be returned upon creating a new step if it shares its name and dimension_value with an existing step. If two steps represent a similar action, but have different dimension values, they should share the same name. For instance, if the same set of tests is run on two different platforms, the two steps should have the same name.
+
+          - In response: always set - In create request: always set - In update request: never set
+        type: string
+      outcome:
+        $ref: '#/definitions/Outcome'
+        description: |-
+          Classification of the result, for example into SUCCESS or FAILURE
+
+          - In response: present if set by create/update request - In create/update request: optional
+      runDuration:
+        $ref: '#/definitions/Duration'
+        description: |-
+          How long it took for this step to run.
+
+          If unset, this is set to the difference between creation_time and completion_time when the step is set to the COMPLETE state. In some cases, it is appropriate to set this value separately: For instance, if a step is created, but the operation it represents is queued for a few minutes before it executes, it would be appropriate not to include the time spent queued in its run_duration.
+
+          PRECONDITION_FAILED will be returned if one attempts to set a run_duration on a step which already has this field set.
+
+          - In response: present if previously set; always present on COMPLETE step - In create request: optional - In update request: optional
+      state:
+        description: |-
+          The initial state is IN_PROGRESS. The only legal state transitions are * IN_PROGRESS -> COMPLETE
+
+          A PRECONDITION_FAILED will be returned if an invalid transition is requested.
+
+          It is valid to create Step with a state set to COMPLETE. The state can only be set to COMPLETE once. A PRECONDITION_FAILED will be returned if the state is set to COMPLETE multiple times.
+
+          - In response: always set - In create/update request: optional
+        enum:
+          - complete
+          - inProgress
+          - pending
+          - unknownState
+        type: string
+      stepId:
+        description: |-
+          A unique identifier within a Execution for this Step.
+
+          Returns INVALID_ARGUMENT if this field is set or overwritten by the caller.
+
+          - In response: always set - In create/update request: never set
+        type: string
+      testExecutionStep:
+        $ref: '#/definitions/TestExecutionStep'
+        description: An execution of a test runner.
+      toolExecutionStep:
+        $ref: '#/definitions/ToolExecutionStep'
+        description: "An execution of a tool (used for steps we don't explicitly support)."
+    type: object
+  StepDimensionValueEntry:
+    properties:
+      key:
+        type: string
+      value:
+        type: string
+    type: object
+  StepLabelsEntry:
+    properties:
+      key:
+        type: string
+      value:
+        type: string
+    type: object
+  SuccessDetail:
+    properties:
+      otherNativeCrash:
+        description: If a native process other than the app crashed.
+        type: boolean
+    type: object
+  TestCaseReference:
+    description: |-
+      A reference to a test case.
+
+      Test case references are canonically ordered lexicographically by these three factors: * First, by test_suite_name. * Second, by class_name. * Third, by name.
+    properties:
+      className:
+        description: The name of the class.
+        type: string
+      name:
+        description: |-
+          The name of the test case.
+
+          Required.
+        type: string
+      testSuiteName:
+        description: The name of the test suite to which this test case belongs.
+        type: string
+    type: object
+  TestExecutionStep:
+    description: |-
+      A step that represents running tests.
+
+      It accepts ant-junit xml files which will be parsed into structured test results by the service. Xml file paths are updated in order to append more files, however they can't be deleted.
+
+      Users can also add test results manually by using the test_result field. Next tag: 7
+    properties:
+      testSuiteOverviews:
+        description: |-
+          List of test suite overview contents. This could be parsed from xUnit XML log by server, or uploaded directly by user. This references should only be called when test suites are fully parsed or uploaded.
+
+          The maximum allowed number of test suite overviews per step is 1000.
+
+          - In response: always set - In create request: optional - In update request: never (use publishXunitXmlFiles custom method instead)
+        items:
+          $ref: '#/definitions/TestSuiteOverview'
+        type: array
+      testTiming:
+        $ref: '#/definitions/TestTiming'
+        description: |-
+          The timing break down of the test execution.
+
+          - In response: present if set by create or update - In create/update request: optional
+      toolExecution:
+        $ref: '#/definitions/ToolExecution'
+        description: |-
+          Represents the execution of the test runner.
+
+          The exit code of this tool will be used to determine if the test passed.
+
+          - In response: always set - In create/update request: optional
+    type: object
+  TestSuiteOverview:
+    description: |-
+      A summary of a test suite result either parsed from XML or uploaded directly by a user.
+
+      Note: the API related comments are for StepService only. This message is also being used in ExecutionService in a read only mode for the corresponding step.
+
+      Next tag: 7
+    properties:
+      errorCount:
+        description: |-
+          Number of test cases in error, typically set by the service by parsing the xml_source.
+
+          - In create/response: always set - In update request: never
+        format: int32
+        type: integer
+      failureCount:
+        description: |-
+          Number of failed test cases, typically set by the service by parsing the xml_source. May also be set by the user.
+
+          - In create/response: always set - In update request: never
+        format: int32
+        type: integer
+      name:
+        description: |-
+          The name of the test suite.
+
+          - In create/response: always set - In update request: never
+        type: string
+      skippedCount:
+        description: |-
+          Number of test cases not run, typically set by the service by parsing the xml_source.
+
+          - In create/response: always set - In update request: never
+        format: int32
+        type: integer
+      totalCount:
+        description: |-
+          Number of test cases, typically set by the service by parsing the xml_source.
+
+          - In create/response: always set - In update request: never
+        format: int32
+        type: integer
+      xmlSource:
+        $ref: '#/definitions/FileReference'
+        description: |-
+          If this test suite was parsed from XML, this is the URI where the original XML file is stored.
+
+          Note: Multiple test suites can share the same xml_source
+
+          Returns INVALID_ARGUMENT if the uri format is not supported.
+
+          - In create/response: optional - In update request: never
+    type: object
+  TestTiming:
+    description: Testing timing break down to know phases.
+    properties:
+      testProcessDuration:
+        $ref: '#/definitions/Duration'
+        description: |-
+          How long it took to run the test process.
+
+          - In response: present if previously set. - In create/update request: optional
+    type: object
+  Thumbnail:
+    description: |-
+      A single thumbnail, with its size and format.
+
+      Next tag: 102
+    properties:
+      contentType:
+        description: |-
+          The thumbnail's content type, i.e. "image/png".
+
+          Always set.
+        type: string
+      data:
+        description: |-
+          The thumbnail file itself.
+
+          That is, the bytes here are precisely the bytes that make up the thumbnail file; they can be served as an image as-is (with the appropriate content type.)
+
+          Always set.
+        format: byte
+        type: string
+      heightPx:
+        description: |-
+          The height of the thumbnail, in pixels.
+
+          Always set.
+        format: int32
+        type: integer
+      widthPx:
+        description: |-
+          The width of the thumbnail, in pixels.
+
+          Always set.
+        format: int32
+        type: integer
+    type: object
+  Timestamp:
+    description: |-
+      A Timestamp represents a point in time independent of any time zone or calendar, represented as seconds and fractions of seconds at nanosecond resolution in UTC Epoch time. It is encoded using the Proleptic Gregorian Calendar which extends the Gregorian calendar backwards to year one. It is encoded assuming all minutes are 60 seconds long, i.e. leap seconds are "smeared" so that no leap second table is needed for interpretation. Range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By restricting to that range, we ensure that we can convert to and from RFC 3339 date strings. See [https://www.ietf.org/rfc/rfc3339.txt](https://www.ietf.org/rfc/rfc3339.txt).
+
+      Example 1: Compute Timestamp from POSIX `time()`.
+
+      Timestamp timestamp; timestamp.set_seconds(time(NULL)); timestamp.set_nanos(0);
+
+      Example 2: Compute Timestamp from POSIX `gettimeofday()`.
+
+      struct timeval tv; gettimeofday(&tv, NULL);
+
+      Timestamp timestamp; timestamp.set_seconds(tv.tv_sec); timestamp.set_nanos(tv.tv_usec * 1000);
+
+      Example 3: Compute Timestamp from Win32 `GetSystemTimeAsFileTime()`.
+
+      FILETIME ft; GetSystemTimeAsFileTime(&ft); UINT64 ticks = (((UINT64)ft.dwHighDateTime) << 32) | ft.dwLowDateTime;
+
+      // A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z // is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z. Timestamp timestamp; timestamp.set_seconds((INT64) ((ticks / 10000000) - 11644473600LL)); timestamp.set_nanos((INT32) ((ticks % 10000000) * 100));
+
+      Example 4: Compute Timestamp from Java `System.currentTimeMillis()`.
+
+      long millis = System.currentTimeMillis();
+
+      Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000) .setNanos((int) ((millis % 1000) * 1000000)).build();
+
+
+
+      Example 5: Compute Timestamp from current time in Python.
+
+      now = time.time() seconds = int(now) nanos = int((now - seconds) * 10**9) timestamp = Timestamp(seconds=seconds, nanos=nanos)
+    properties:
+      nanos:
+        description: 'Non-negative fractions of a second at nanosecond resolution. Negative second values with fractions must still have non-negative nanos values that count forward in time. Must be from 0 to 999,999,999 inclusive.'
+        format: int32
+        type: integer
+      seconds:
+        description: 'Represents seconds of UTC time since Unix epoch 1970-01-01T00:00:00Z. Must be from from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59Z inclusive.'
+        format: int64
+        type: string
+    type: object
+  ToolExecution:
+    description: 'An execution of an arbitrary tool. It could be a test runner or a tool copying artifacts or deploying code. Next tag: 7'
+    properties:
+      commandLineArguments:
+        description: |-
+          The full tokenized command line including the program name (equivalent to argv in a C program).
+
+          - In response: present if set by create request - In create request: optional - In update request: never set
+        items:
+          type: string
+        type: array
+      exitCode:
+        $ref: '#/definitions/ToolExitCode'
+        description: |-
+          Tool execution exit code. This field will be set once the tool has exited.
+
+          - In response: present if set by create/update request - In create request: optional - In update request: optional, a FAILED_PRECONDITION error will be returned if an exit_code is already set.
+      toolLogs:
+        description: |-
+          References to any plain text logs output the tool execution.
+
+          This field can be set before the tool has exited in order to be able to have access to a live view of the logs while the tool is running.
+
+          The maximum allowed number of tool logs per step is 1000.
+
+          - In response: present if set by create/update request - In create request: optional - In update request: optional, any value provided will be appended to the existing list
+        items:
+          $ref: '#/definitions/FileReference'
+        type: array
+      toolOutputs:
+        description: |-
+          References to opaque files of any format output by the tool execution.
+
+          The maximum allowed number of tool outputs per step is 1000.
+
+          - In response: present if set by create/update request - In create request: optional - In update request: optional, any value provided will be appended to the existing list
+        items:
+          $ref: '#/definitions/ToolOutputReference'
+        type: array
+    type: object
+  ToolExecutionStep:
+    description: 'Generic tool step to be used for binaries we do not explicitly support. For example: running cp to copy artifacts from one location to another.'
+    properties:
+      toolExecution:
+        $ref: '#/definitions/ToolExecution'
+        description: |-
+          A Tool execution.
+
+          - In response: present if set by create/update request - In create/update request: optional
+    type: object
+  ToolExitCode:
+    description: Exit code from a tool execution.
+    properties:
+      number:
+        description: |-
+          Tool execution exit code. A value of 0 means that the execution was successful.
+
+          - In response: always set - In create/update request: always set
+        format: int32
+        type: integer
+    type: object
+  ToolOutputReference:
+    description: A reference to a ToolExecution output file.
+    properties:
+      creationTime:
+        $ref: '#/definitions/Timestamp'
+        description: |-
+          The creation time of the file.
+
+          - In response: present if set by create/update request - In create/update request: optional
+      output:
+        $ref: '#/definitions/FileReference'
+        description: |-
+          A FileReference to an output file.
+
+          - In response: always set - In create/update request: always set
+      testCase:
+        $ref: '#/definitions/TestCaseReference'
+        description: |-
+          The test case to which this output file belongs.
+
+          - In response: present if set by create/update request - In create/update request: optional
+    type: object

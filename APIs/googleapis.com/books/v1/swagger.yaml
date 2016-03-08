@@ -1583,6 +1583,10 @@ paths:
             type: string
           name: acquireMethod
           type: array
+        - description: ISO-3166-1 code to override the IP-based location.
+          in: query
+          name: country
+          type: string
         - description: "ISO-639-1 language and ISO-3166-1 country code. Ex:'en_US'. Used for generating recommendations."
           in: query
           name: locale
@@ -2990,7 +2994,6 @@ definitions:
       body:
         type: string
       dont_show_notification:
-        default: false
         type: boolean
       iconUrl:
         type: string
@@ -3001,6 +3004,8 @@ definitions:
       notification_type:
         type: string
       pcampaign_id:
+        type: string
+      reason:
         type: string
       show_notification_settings_action:
         type: boolean

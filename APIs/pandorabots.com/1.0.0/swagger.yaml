@@ -451,7 +451,7 @@ paths:
           in: query
           name: topic
           type: string
-        - description: 'Return extra conversation information. If true, input, pattern, that and topic associated with the pattern matched are returned in addition to response.'
+        - description: 'Return extra conversation information. If true, input, pattern, that, topic, filename, and template associated with the pattern matched are returned in addition to response and sessionid.'
           in: query
           name: extra
           type: string
@@ -459,7 +459,7 @@ paths:
           in: query
           name: reset
           type: string
-        - description: 'Include trace data in the response. If true, the system will generate AIML trace information for the input.'
+        - description: 'Include trace data in the response. If true, the system will generate AIML trace information for the input. Trace data includes pattern matched, filename, input, template for all recursion levels.'
           in: query
           name: trace
           type: string

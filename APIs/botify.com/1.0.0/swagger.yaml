@@ -164,6 +164,10 @@ paths:
           required: false
           type: integer
         - description: frequency of sampling
+          enum:
+            - 1mn
+            - 5mn
+            - 60mn
           in: query
           name: frequency
           required: true
@@ -694,6 +698,10 @@ paths:
             $ref: '#/definitions/UrlsQuery'
         - default: current
           description: ''
+          enum:
+            - current
+            - disappeared
+            - new
           in: query
           name: area
           required: false
@@ -748,6 +756,10 @@ paths:
             $ref: '#/definitions/UrlsAggsQueries'
         - default: current
           description: ''
+          enum:
+            - current
+            - disappeared
+            - new
           in: query
           name: area
           required: false
@@ -773,6 +785,10 @@ paths:
       parameters:
         - default: current
           description: ''
+          enum:
+            - current
+            - disappeared
+            - new
           in: query
           name: area
           required: false
@@ -881,6 +897,9 @@ paths:
             $ref: '#/definitions/UrlsQuery'
         - default: current
           description: ''
+          enum:
+            - current
+            - disappeared
           in: query
           name: area
           required: false
@@ -942,6 +961,9 @@ paths:
       parameters:
         - default: current
           description: ''
+          enum:
+            - current
+            - disappeared
           in: query
           name: area
           required: false
@@ -1139,6 +1161,62 @@ paths:
         name: identifier
         required: true
         type: string
+  '/projects/{username}/{project_slug}/urls/aggs':
+    parameters:
+      - in: path
+        name: username
+        required: true
+        type: string
+      - in: path
+        name: project_slug
+        required: true
+        type: string
+    post:
+      description: Project Query aggregator. It accepts multiple queries that will be executed on all active/finished analyses of the project
+      operationId: getProjectUrlsAggs
+      parameters:
+        - in: body
+          name: UrlsAggsQueries
+          schema:
+            $ref: '#/definitions/UrlsAggsQueries'
+        - default: current
+          description: ''
+          enum:
+            - current
+            - disappeared
+            - new
+          in: query
+          name: area
+          required: false
+          type: string
+        - description: Last analysis on the trend
+          in: query
+          name: last_analysis_slug
+          required: false
+          type: string
+        - default: 20
+          description: Max number of analysis to return
+          format: int32
+          in: query
+          maximum: 20
+          minimum: 1
+          name: nb_analyses
+          required: false
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '201':
+          description: Successful operation
+          schema:
+            type: object
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Project Query aggregator
+      tags:
+        - Projects
 definitions:
   Analysis:
     properties:
@@ -1180,6 +1258,10 @@ definitions:
         readOnly: true
         type: string
       slug:
+        description: ''
+        readOnly: true
+        type: string
+      status:
         description: ''
         readOnly: true
         type: string

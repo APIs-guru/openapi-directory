@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: 'Manage product items, inventory, and Merchant Center accounts for Google Shopping.'
+  description: 'Manages product items, inventory, and Merchant Center accounts for Google Shopping.'
   title: Content API for Shopping
   version: v2
   x-apiClientRegistration:
@@ -2669,6 +2669,10 @@ definitions:
         type: string
       hour:
         description: The hour of the day the feed file should be fetched (0-23).
+        format: uint32
+        type: integer
+      minuteOfHour:
+        description: The minute of the hour the feed file should be fetched (0-59). Read-only.
         format: uint32
         type: integer
       password:
