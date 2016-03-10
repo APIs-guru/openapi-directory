@@ -6,10 +6,9 @@ basePath: /
 info:
   description: Pushpay® improves sales and business processes by making payments simple.
   title: Pushpay
-  version: 1.1.0.8420
+  version: 1.1.0.8434
   x-logo:
-    backgroundColor: '#CF150A'
-    url: 'https://p5.zdassets.com/hc/settings_assets/792403/200175877/RAAatKTbeaGTDUxxcpdFcw-pushpay_transparent_logo.png'
+    url: 'https://upload.wikimedia.org/wikipedia/en/f/f7/Pushpay_company_logo.png'
   x-origin:
     format: swagger
     url: 'https://api.pushpay.com/swagger'
@@ -3307,6 +3306,28 @@ definitions:
     required:
       - code
       - message
+    type: object
+  RunTheRedDlr:
+    properties:
+      deliveryReason:
+        type: string
+      deliveryStatus:
+        type: string
+      fromNumber:
+        type: string
+      message:
+        type: string
+      messageId:
+        type: string
+      toNumber:
+        type: string
+    required:
+      - deliveryReason
+      - deliveryStatus
+      - fromNumber
+      - message
+      - messageId
+      - toNumber
     type: object
   SetOperation:
     properties:
