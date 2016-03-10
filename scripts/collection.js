@@ -6,7 +6,6 @@ var _ = require('lodash');
 var fs = require('fs');
 var path = require('path');
 var exec = require('child_process').execSync;
-var Path = require('path');
 var jp = require('json-pointer');
 var jsonPath = require('jsonpath');
 var glob = require('glob')
@@ -399,16 +398,6 @@ function gitLogDate(options, filename) {
   assert(result && result !== '');
   return new Date(result);
 }
-
-/* TODO: automatic detection of version formats
-function compareVersions(ver1, ver2) {
-  assert(ver1 !== ver2);
-
-  var versionRegex = /^v(\d+(?:\.\d+)*)(?:beta(\d+))?$/
-  var ver1parts = ver1.match(versionRegex);
-  var ver2parts = ver2.match(versionRegex);
-}
-*/
 
 function validateCollection() {
   var specs = getSpecs();
@@ -1099,7 +1088,7 @@ function saveYaml(path, json) {
 
 function saveFile(path, data) {
   console.log(path);
-  mkdirp(Path.dirname(path));
+  mkdirp(path.dirname(path));
   fs.writeFileSync(path, data);
 }
 
