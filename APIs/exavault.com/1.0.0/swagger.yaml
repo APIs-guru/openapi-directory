@@ -4,7 +4,10 @@ schemes:
 host: api.exavault.com
 basePath: /
 info:
-  description: "ExaVault's API allows you to incorporate ExaVault's suite of file transfer and user management tools into your own application."
+  description: |
+    ExaVault's API allows you to incorporate ExaVault's suite of file transfer and user management tools into your own application.
+
+    ExaVault supports both POST (recommended when requesting large data sets) and GET operations, and requires an API key in order to use.
   title: ExaVault
   version: 1.0.0
   x-logo:
@@ -15,6 +18,8 @@ info:
     url: 'https://www.exavault.com/api/docs'
     version: '1.2'
   x-providerName: exavault.com
+externalDocs:
+  url: 'https://www.exavault.com/developer/'
 tags:
   - description: 'operations for files, notifications, sharing and users'
     name: v1
