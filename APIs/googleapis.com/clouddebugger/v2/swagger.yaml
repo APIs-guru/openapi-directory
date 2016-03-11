@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Lets you examine the stack and variables of your running application without stopping or slowing it down.
+  description: Examines the call stack and variables of a running application without stopping or slowing it down.
   title: Google Cloud Debugger
   version: v2
   x-apiClientRegistration:
@@ -243,6 +243,10 @@ paths:
           in: query
           name: includeInactive
           type: boolean
+        - description: 'The client version making the call. Following: `domain/type/version` (e.g., `google.com/intellij/v1`).'
+          in: query
+          name: clientVersion
+          type: string
       responses:
         '200':
           description: Successful response
@@ -302,6 +306,10 @@ paths:
           in: query
           name: waitToken
           type: string
+        - description: 'The client version making the call. Following: `domain/type/version` (e.g., `google.com/intellij/v1`).'
+          in: query
+          name: clientVersion
+          type: string
       responses:
         '200':
           description: Successful response
@@ -352,6 +360,10 @@ paths:
           name: debuggeeId
           required: true
           type: string
+        - description: 'The client version making the call. Following: `domain/type/version` (e.g., `google.com/intellij/v1`).'
+          in: query
+          name: clientVersion
+          type: string
         - in: body
           name: body
           schema:
@@ -383,6 +395,10 @@ paths:
           name: breakpointId
           required: true
           type: string
+        - description: 'The client version making the call. Following: `domain/type/version` (e.g., `google.com/intellij/v1`).'
+          in: query
+          name: clientVersion
+          type: string
       responses:
         '200':
           description: Successful response
@@ -408,6 +424,10 @@ paths:
           in: path
           name: breakpointId
           required: true
+          type: string
+        - description: 'The client version making the call. Following: `domain/type/version` (e.g., `google.com/intellij/v1`).'
+          in: query
+          name: clientVersion
           type: string
       responses:
         '200':
@@ -485,6 +505,11 @@ definitions:
       isFinalState:
         description: 'When true, indicates that this is a final result and the breakpoint state will not change from here on.'
         type: boolean
+      labels:
+        additionalProperties:
+          type: string
+        description: 'A set of custom breakpoint properties, populated by the agent, to be displayed to the user.'
+        type: object
       location:
         $ref: '#/definitions/SourceLocation'
         description: Breakpoint source location.
@@ -510,7 +535,7 @@ definitions:
         description: E-mail address of the user that created this breakpoint
         type: string
       variableTable:
-        description: 'The `variable_table` exists to aid with computation, memory and network traffic optimization. It enables storing a variable once and reference it from multiple variables, including variables stored in the `variable_table` itself. For example, the same `this` object, which may appear at many levels of the stack, can have all of its data stored once in this table. The stack frame variables then would hold only a reference to it. The variable `var_table_index` field is an index into this repeated field. The stored objects are nameless and get their name from the referencing variable. The effective variable is a merge of the referencing veariable and the referenced variable.'
+        description: 'The `variable_table` exists to aid with computation, memory and network traffic optimization. It enables storing a variable once and reference it from multiple variables, including variables stored in the `variable_table` itself. For example, the same `this` object, which may appear at many levels of the stack, can have all of its data stored once in this table. The stack frame variables then would hold only a reference to it. The variable `var_table_index` field is an index into this repeated field. The stored objects are nameless and get their name from the referencing variable. The effective variable is a merge of the referencing variable and the referenced variable.'
         items:
           $ref: '#/definitions/Variable'
         type: array
