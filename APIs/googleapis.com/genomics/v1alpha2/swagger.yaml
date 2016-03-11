@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: 'An API to store, process, explore, and share genomic data. It supports reference-based alignments, genetic variants, and reference genomes. This API provides an implementation of the Global Alliance for Genomics and Health (GA4GH) v0.5.1 API as well as several extensions.'
+  description: 'Stores, processes, explores and shares genomic data. This API implements the Global Alliance for Genomics and Health (GA4GH) v0.5.1 API as well as several extensions.'
   title: Genomics
   version: v1alpha2
   x-apiClientRegistration:
@@ -170,45 +170,6 @@ paths:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - pipelines
-  '/v1alpha2/pipelines/controller_config/{operationId}':
-    get:
-      description: Gets controller configuration information. Should only be called by VMs created by the Pipelines Service and not by end users.
-      operationId: genomics.pipelines.controller_config.get
-      parameters:
-        - description: The operation to retrieve controller configuration for.
-          in: path
-          name: operationId
-          required: true
-          type: string
-        - in: query
-          name: validationToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ControllerConfig'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/genomics'
-      tags:
-        - pipelines
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
   '/v1alpha2/pipelines/{pipelineId}':
     delete:
       description: Deletes a pipeline based on ID. Caller must have WRITE permission to the project.
@@ -266,6 +227,44 @@ paths:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
+  '/v1alpha2/pipelines:getControllerConfig':
+    get:
+      description: Gets controller configuration information. Should only be called by VMs created by the Pipelines Service and not by end users.
+      operationId: genomics.pipelines.getControllerConfig
+      parameters:
+        - description: The operation to retrieve controller configuration for.
+          in: query
+          name: operationId
+          type: string
+        - in: query
+          name: validationToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ControllerConfig'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/genomics'
+      tags:
+        - pipelines
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
   '/v1alpha2/pipelines:run':
     parameters:
       - $ref: '#/parameters/access_token'
@@ -301,7 +300,7 @@ paths:
             - 'https://www.googleapis.com/auth/genomics'
       tags:
         - pipelines
-  '/v1alpha2/pipelines:update_status':
+  '/v1alpha2/pipelines:setOperationStatus':
     parameters:
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
@@ -317,13 +316,13 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
     put:
-      description: Updates status of a given operation. Should only be called by VMs created by the Pipelines Service and not by end users.
-      operationId: genomics.pipelines.update_status
+      description: 'Sets status of a given operation. All timestamps are sent on each call, and the whole series of events is replaced, in case intermediate calls are lost. Should only be called by VMs created by the Pipelines Service and not by end users.'
+      operationId: genomics.pipelines.setOperationStatus
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/UpdateStatusRequest'
+            $ref: '#/definitions/SetOperationStatusRequest'
       responses:
         '200':
           description: Successful response
@@ -745,36 +744,8 @@ definitions:
           type: string
         type: array
     type: object
-  Status:
-    description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). The error model is designed to be: - Simple to use and understand for most users - Flexible enough to meet unexpected needs # Overview The `Status` message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed. The error message should be a developer-facing English message that helps developers *understand* and *resolve* the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package `google.rpc` which can be used for common error conditions. # Language mapping The `Status` message is the logical representation of the error model, but it is not necessarily the actual wire format. When the `Status` message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C. # Other uses The error model and the `Status` message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments. Example uses of this error model include: - Partial errors. If a service needs to return partial errors to the client, it may embed the `Status` in the normal response to indicate the partial errors. - Workflow errors. A typical workflow has multiple steps. Each step may have a `Status` message for error reporting purpose. - Batch operations. If a client uses batch request and batch response, the `Status` message should be used directly inside batch response, one for each error sub-response. - Asynchronous operations. If an API call embeds asynchronous operation results in its response, the status of those operations should be represented directly using the `Status` message. - Logging. If some API errors are stored in logs, the message `Status` could be used directly after any stripping needed for security/privacy reasons.'
-    properties:
-      code:
-        description: 'The status code, which should be an enum value of google.rpc.Code.'
-        format: int32
-        type: integer
-      details:
-        description: A list of messages that carry the error details. There will be a common set of message types for APIs to use.
-        items:
-          additionalProperties:
-            description: Properties of the object. Contains field @ype with type URL.
-          type: object
-        type: array
-      message:
-        description: 'A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.'
-        type: string
-    type: object
-  TimestampEvent:
-    description: Stores the list of events and times they occured for major events in job execution.
-    properties:
-      description:
-        description: String indicating the type of event
-        type: string
-      timestamp:
-        description: The time this event occured.
-        type: string
-    type: object
-  UpdateStatusRequest:
-    description: Request to update operation status. Should only be used by VMs created by the Pipelines Service and not by end users.
+  SetOperationStatusRequest:
+    description: Request to set operation status. Should only be used by VMs created by the Pipelines Service and not by end users.
     properties:
       errorCode:
         enum:
@@ -806,5 +777,33 @@ definitions:
         type: array
       validationToken:
         format: uint64
+        type: string
+    type: object
+  Status:
+    description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). The error model is designed to be: - Simple to use and understand for most users - Flexible enough to meet unexpected needs # Overview The `Status` message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed. The error message should be a developer-facing English message that helps developers *understand* and *resolve* the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package `google.rpc` which can be used for common error conditions. # Language mapping The `Status` message is the logical representation of the error model, but it is not necessarily the actual wire format. When the `Status` message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C. # Other uses The error model and the `Status` message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments. Example uses of this error model include: - Partial errors. If a service needs to return partial errors to the client, it may embed the `Status` in the normal response to indicate the partial errors. - Workflow errors. A typical workflow has multiple steps. Each step may have a `Status` message for error reporting purpose. - Batch operations. If a client uses batch request and batch response, the `Status` message should be used directly inside batch response, one for each error sub-response. - Asynchronous operations. If an API call embeds asynchronous operation results in its response, the status of those operations should be represented directly using the `Status` message. - Logging. If some API errors are stored in logs, the message `Status` could be used directly after any stripping needed for security/privacy reasons.'
+    properties:
+      code:
+        description: 'The status code, which should be an enum value of google.rpc.Code.'
+        format: int32
+        type: integer
+      details:
+        description: A list of messages that carry the error details. There will be a common set of message types for APIs to use.
+        items:
+          additionalProperties:
+            description: Properties of the object. Contains field @ype with type URL.
+          type: object
+        type: array
+      message:
+        description: 'A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.'
+        type: string
+    type: object
+  TimestampEvent:
+    description: Stores the list of events and times they occured for major events in job execution.
+    properties:
+      description:
+        description: String indicating the type of event
+        type: string
+      timestamp:
+        description: The time this event occured.
         type: string
     type: object

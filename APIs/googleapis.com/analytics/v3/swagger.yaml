@@ -2507,7 +2507,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: Updates an existing view (profile). This method supports patch semantics.
+      description: Updates an existing goal. This method supports patch semantics.
       operationId: analytics.management.goals.patch
       parameters:
         - description: Account ID to update the goal.
@@ -2545,7 +2545,7 @@ paths:
       tags:
         - management
     put:
-      description: Updates an existing view (profile).
+      description: Updates an existing goal.
       operationId: analytics.management.goals.update
       parameters:
         - description: Account ID to update the goal.
@@ -3119,6 +3119,9 @@ definitions:
       selfLink:
         description: Link for this account.
         type: string
+      starred:
+        description: Indicates whether this account is starred or not.
+        type: boolean
       updated:
         description: Time the account was last modified.
         format: date-time
@@ -3188,6 +3191,9 @@ definitions:
       name:
         description: Account name.
         type: string
+      starred:
+        description: Indicates whether this account is starred or not.
+        type: boolean
       webProperties:
         description: List of web properties under this account.
         items:
@@ -4694,6 +4700,9 @@ definitions:
       siteSearchQueryParameters:
         description: The site search query parameters for this view (profile).
         type: string
+      starred:
+        description: Indicates whether this view (profile) is starred or not.
+        type: boolean
       stripSiteSearchCategoryParameters:
         description: Whether or not Analytics will strip search category parameters from the URLs in your reports.
         type: boolean
@@ -4821,6 +4830,9 @@ definitions:
       name:
         description: View (profile) name.
         type: string
+      starred:
+        description: Indicates whether this view (profile) is starred or not.
+        type: boolean
       type:
         description: 'View (Profile) type. Supported types: WEB or APP.'
         type: string
@@ -5256,6 +5268,9 @@ definitions:
         items:
           $ref: '#/definitions/ProfileSummary'
         type: array
+      starred:
+        description: Indicates whether this web property is starred or not.
+        type: boolean
       websiteUrl:
         description: Website url for this web property.
         type: string
@@ -5372,6 +5387,9 @@ definitions:
         description: Link for this web property.
         readOnly: true
         type: string
+      starred:
+        description: Indicates whether this web property is starred or not.
+        type: boolean
       updated:
         description: Time this web property was last modified.
         format: date-time

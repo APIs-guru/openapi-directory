@@ -628,6 +628,9 @@ definitions:
         description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
         format: int64
         type: string
+      idToken:
+        description: The GITKit token or STS id token of the authenticated user.
+        type: string
       localId:
         description: The local ID of the user.
         type: string
@@ -739,6 +742,11 @@ definitions:
         type: string
       deleteAttribute:
         description: The attributes users request to delete.
+        items:
+          type: string
+        type: array
+      deleteProvider:
+        description: The IDPs the user request to delete.
         items:
           type: string
         type: array

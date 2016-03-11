@@ -2392,6 +2392,9 @@ definitions:
   ApplicationVerifyResponse:
     description: This is a JSON template for a third party application verification response resource.
     properties:
+      alternate_player_id:
+        description: An alternate ID that was once used for the player that was issued the auth token used in this request. (This field is not normally populated.)
+        type: string
       kind:
         default: 'games#applicationVerifyResponse'
         description: 'Uniquely identifies the type of this resource. Value is always the fixed string games#applicationVerifyResponse.'

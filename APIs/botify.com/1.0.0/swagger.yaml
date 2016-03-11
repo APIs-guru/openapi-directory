@@ -724,7 +724,34 @@ paths:
         '201':
           description: Successful operation
           schema:
-            $ref: '#/definitions/UrlsQuery'
+            properties:
+              count:
+                description: ''
+                readOnly: true
+                type: integer
+              next:
+                description: ''
+                readOnly: true
+                type: string
+              page:
+                description: ''
+                readOnly: true
+                type: integer
+              previous:
+                description: ''
+                readOnly: true
+                type: string
+              results:
+                description: ''
+                items:
+                  $ref: '#/definitions/Default'
+                readOnly: true
+                type: array
+              size:
+                description: ''
+                readOnly: true
+                type: integer
+            type: object
         default:
           description: error payload
           schema:
@@ -1209,14 +1236,14 @@ paths:
         '201':
           description: Successful operation
           schema:
-            type: object
+            $ref: '#/definitions/Default'
         default:
           description: error payload
           schema:
             $ref: '#/definitions/DefaultPayload'
       summary: Project Query aggregator
       tags:
-        - Projects
+        - Project
 definitions:
   Analysis:
     properties:
