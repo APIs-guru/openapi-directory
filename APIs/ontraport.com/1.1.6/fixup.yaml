@@ -70,6 +70,16 @@ paths:
         - POST
         - 0
         - 0
+  /objects/getInfo:
+    controller:
+      - Collection
+      - 0
+      - 0
+    get:
+      controllerMethod:
+        - getInfo
+        - 0
+        - 0
   /objects/meta:
     controller:
       - ObjectMeta
