@@ -4,7 +4,7 @@
 var assert = require('assert');
 var _ = require('lodash');
 var fs = require('fs');
-var path = require('path');
+var Path = require('path');
 var exec = require('child_process').execSync;
 var jp = require('json-pointer');
 var jsonPath = require('jsonpath');
@@ -170,7 +170,7 @@ function cacheResources(specRootUrl) {
       assert(mime.match('image/'));
       var extension = MIME.extension(mime);
       assert(extension);
-      var dirname = path.dirname(filename);
+      var dirname = Path.dirname(filename);
       var logoFile = 'cache/' + dirname + '/logo.' + extension;
       saveFile(logoFile, data);
 
@@ -357,7 +357,7 @@ function generateHTML(specRootUrl) {
     specRootUrl: specRootUrl
   };
 
-  var template = path.join(path.dirname(__filename), '../scripts/index.jade');
+  var template = Path.join(Path.dirname(__filename), '../scripts/index.jade');
   var html = jade.renderFile(template, locals);
   saveFile('index.html', html);
 }
@@ -1088,7 +1088,7 @@ function saveYaml(path, json) {
 
 function saveFile(path, data) {
   console.log(path);
-  mkdirp(path.dirname(path));
+  mkdirp(Path.dirname(path));
   fs.writeFileSync(path, data);
 }
 
