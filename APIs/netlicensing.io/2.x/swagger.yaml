@@ -7,7 +7,7 @@ info:
   description: "The Labs64 <a href='https://www.labs64.de/confluence/x/pwCo' target='_blank'>NetLicensing API</a> is a RESTful API and gives you access to NetLicensing’s core features.<br/><br/><strong>Authentication</strong><br/>You authenticate to the NetLicensing API by providing your account credentials or simply use our demo account - <code>demo:demo</code><br/><br/>Find out more about Labs64 NetLicensing at <a href='http://netlicensing.io' target='_blank'>netlicensing.io</a>"
   termsOfService: 'https://www.labs64.com/legal/terms-of-service/netlicensing'
   title: Labs64 NetLicensing
-  version: 2.2.0
+  version: 2.x
   x-logo:
     url: 'http://draft-labs64.rhcloud.com/content/uploads/2015/06/labs64-logo.png'
   x-origin:
@@ -352,7 +352,7 @@ paths:
           name: number
           required: false
           type: string
-        - description: productNumber to create licensee object
+        - description: productNumber to assign new licensee object
           in: formData
           name: productNumber
           required: true
@@ -389,7 +389,7 @@ paths:
         - Licensee
   '/licensee/{licenseeNumber}':
     delete:
-      description: Delete a lecensee by number
+      description: Delete a licensee by number
       operationId: deleteLicensee
       parameters:
         - description: Unique number (across all products of a vendor) that identifies the licensee.
@@ -424,7 +424,7 @@ paths:
       tags:
         - Licensee
     get:
-      description: Get a licensee by licenseeNumber
+      description: Return a licensee by licenseeNumber
       operationId: getLicensee
       parameters:
         - description: Unique number (across all products of a vendor) that identifies the licensee. Vendor can assign this number when creating a licensee or let NetLicensing generate one. Read-only after creation of the first license for the licensee.
@@ -501,13 +501,23 @@ paths:
         - Licensee
   '/licensee/{licenseeNumber}/validate':
     get:
-      description: Validate a licensee by licenseeNumber
+      description: Validates active licenses of the licensee
       operationId: validateLicensee
       parameters:
-        - description: Unique number (across all products of a vendor) that identifies the licensee. Vendor can assign this number when creating a licensee or let NetLicensing generate one. Read-only after creation of the first license for the licensee.
+        - description: Licensee number with a maximum length of 1000 characters
           in: path
           name: licenseeNumber
           required: true
+          type: string
+        - description: "Product number, must be provided when 'licensee auto-create' is enabled (see also Product JavaDoc). Identifies the product to which new licensee should be added"
+          in: query
+          name: productNumber
+          required: false
+          type: string
+        - description: Human-readable name for the auto-created licensee (will be set as custom Licensee property)
+          in: query
+          name: licenseeName
+          required: false
           type: string
       produces:
         - application/xml
@@ -1970,6 +1980,7 @@ definitions:
     xml:
       name: discount
   infos:
+    properties: {}
     xml:
       name: infos
   items:
