@@ -2,28 +2,20 @@
 'use strict';
 
 var assert = require('assert');
-var _ = require('lodash');
 var fs = require('fs');
-var Path = require('path');
-var exec = require('child_process').execSync;
+var _ = require('lodash');
+
 var jp = require('json-pointer');
 var jsonPath = require('jsonpath');
-var glob = require('glob')
 var editor = require('editor');
 var async = require('async')
-var sortobject = require('deep-sort-object');
 var converter = require('api-spec-converter');
 var parseDomain = require('parse-domain');
-var mkdirp = require('mkdirp').sync;
 var mktemp = require('mktemp').createFileSync;
 var jsonPatch = require('json-merge-patch');
-var Request = require('request');
-var MimeLookup = require('mime-lookup');
-var MIME = new MimeLookup(require('mime-db'));
-var URI = require('urijs');
-var csvStringify = require('csv-stringify');
 var YAML = require('js-yaml');
-var jade = require('jade');
+
+var util = require('./util');
 
 var jsondiffpatch = require('jsondiffpatch').create({
   arrays: {
@@ -72,40 +64,6 @@ program
   .action(updateGoogle);
 
 program
-  .command('cache')
-  .description('cache external resources')
-  .arguments('<SPEC_ROOT_URL>')
-  .action(cacheResources);
-
-program
-  .command('api')
-  .description('generate API')
-  .arguments('<SPEC_ROOT_URL>')
-  .action(generateAPI);
-
-program
-  .command('csv')
-  .description('generate CSV list')
-  .action(generateCSV);
-
-program
-  .command('apisjson')
-  .description('generate APIs.json file')
-  .arguments('<SPEC_ROOT_URL>')
-  .action(generateAPIsJSON);
-
-program
-  .command('html')
-  .description('generate html file with links to specs')
-  .arguments('<SPEC_ROOT_URL>')
-  .action(generateHTML);
-
-program
-  .command('banner')
-  .description('generate "APIs in collection" banner')
-  .action(generateBanner);
-
-program
   .command('add')
   .description('add new spec')
   .option('-f, --fixup', 'try to fix spec')
@@ -116,28 +74,28 @@ program
 program.parse(process.argv);
 
 function urlsCollection() {
-  _.each(getSpecs(), function (swagger) {
-    console.log(getOriginUrl(swagger));
+  _.each(util.getSpecs(), function (swagger) {
+    console.log(util.getOriginUrl(swagger));
   });
 }
 
 function refreshCollection(dir) {
-  _.each(getSpecs(dir), function (swagger, filename) {
-    assert(getSwaggerPath(swagger) === filename);
-    saveSwagger(swagger);
+  _.each(util.getSpecs(dir), function (swagger, filename) {
+    assert(util.getSwaggerPath(swagger) === filename);
+    util.saveSwagger(swagger);
   });
 }
 
 function updateCollection(dir) {
-  var specs = getSpecs(dir);
+  var specs = util.getSpecs(dir);
   async.forEachOfSeries(specs, function (swagger, filename, asyncCb) {
     var exPatch = {info: {}};
-    var serviceName = getServiceName(swagger);
+    var serviceName = util.getServiceName(swagger);
     var type = getSpecType(swagger);
     if (type !== 'google' && serviceName)
       exPatch.info['x-serviceName'] = serviceName;
 
-    var url = getOriginUrl(swagger);
+    var url = util.getOriginUrl(swagger);
     console.error(url);
 
     writeSpec(url, type, exPatch, function (error, result) {
@@ -146,7 +104,7 @@ function updateCollection(dir) {
         return asyncCb(error);
       }
 
-      var newFilename = getSwaggerPath(result.swagger);
+      var newFilename = util.getSwaggerPath(result.swagger);
       if (newFilename !== filename)
         asyncCb(Error("Spec was moved to new location: " + newFilename));
       asyncCb(null);
@@ -157,250 +115,8 @@ function updateCollection(dir) {
   });
 }
 
-function cacheResources(specRootUrl) {
-  _.each(getSpecs(), function (swagger, filename) {
-    if (_.isUndefined(swagger.info['x-logo']))
-      return;
-
-    var url = swagger.info['x-logo'].url;
-    getResource(url, {encoding: null}, function(err, response, data) {
-      assert(!err, err);
-
-      var mime = response.headers['content-type'];
-      assert(mime.match('image/'));
-      var extension = MIME.extension(mime);
-      assert(extension);
-      var dirname = Path.dirname(filename);
-      var logoFile = 'cache/' + dirname + '/logo.' + extension;
-      saveFile(logoFile, data);
-
-      var fragment = URI(url).fragment();
-      if (fragment)
-        fragment = '#' + fragment;
-
-      swagger.info['x-logo'].url = specRootUrl + logoFile + fragment;
-      saveYaml(filename, swagger);
-    });
-  });
-}
-
-function getResource(url, options, callback) {
-  if (_.isFunction(options)) {
-    callback = options;
-    options = {};
-  }
-
-  options.method = 'GET';
-  options.gzip = true;
-  options.url = url;
-  async.retry({}, function (asyncCallback) {
-    new Request(options, function(err, response, data) {
-      if (err)
-        return asyncCallback(new Error('Can not GET "' + url +'": ' + err));
-      if (response.statusCode !== 200)
-        return asyncCallback(new Error('Can not GET "' + url +'": ' + response.statusMessage));
-      asyncCallback(null, {response: response, data: data});
-    });
-  }, function (err, result) {
-    if (err)
-      return callback(err);
-
-    console.log(url);
-    callback(null, result.response, result.data);
-  });
-}
-
-function generateList() {
-  var list = {};
-
-  _.each(getSpecs(), function (swagger, filename) {
-    var id = getProviderName(swagger);
-    assert(id.indexOf(':') === -1);
-
-    var service = getServiceName(swagger);
-    if (!_.isUndefined(service)) {
-      assert(service.indexOf(':') === -1);
-      id += ':' + service;
-    }
-
-    var version = swagger.info.version;
-    if (_.isUndefined(list[id]))
-      list[id] = { versions: {} };
-
-    list[id].versions[version] = swagger;
-  });
-
-  _.each(list, function (api, id) {
-    if (_.size(api.versions) === 1)
-      api.preferred = _.keys(api.versions)[0];
-    else {
-      _.each(api.versions, function (spec, version) {
-        var preferred = spec.info['x-preferred'];
-        assert(_.isBoolean(preferred));
-        if (preferred) {
-          assert(!api.preferred, 'Multiply prefered versions in "' + id + '"');
-          api.preferred = version;
-        }
-      });
-    }
-  });
-
-  return list;
-}
-
-function generateAPI(specRootUrl) {
-  var list = {};
-
-  _.each(generateList(), function (api, id) {
-    var dir = id.replace(/:/, '/');
-    list[id] = {
-      preferred: api.preferred,
-      versions: {}
-    };
-    _.each(api.versions, function (swagger, version) {
-      var filename = getSwaggerPath(swagger);
-      var swaggerJsonPath = getSwaggerPath(swagger, 'swagger.json');
-      saveJson(swaggerJsonPath, swagger);
-
-      var versionObj = list[id].versions[version] = {
-        swaggerUrl: specRootUrl + swaggerJsonPath,
-        swaggerYamlUrl: specRootUrl + getSwaggerPath(swagger),
-        info: swagger.info,
-        added: gitLogDate('--follow --diff-filter=A -1', filename),
-        updated: gitLogDate('-1', filename)
-      };
-
-      if (swagger.externalDocs)
-        versionObj.externalDocs = swagger.externalDocs;
-    });
-    //FIXME: here we don't track deleted version, not a problem for right now :)
-    list[id].added = _(list[id].versions).values().pluck('added').min();
-  });
-
-  console.log('Generated list for ' + _.size(list) + ' API specs.');
-
-  saveJson('api/v1/list.json', list);
-}
-
-function generateCSV(list) {
-  var header = [
-    'id',
-    'info_title',
-    'info_description',
-    'info_termsOfService',
-    'info_contact_name',
-    'info_contact_url',
-    'info_contact_email',
-    'info_license_name',
-    'info_license_url',
-    'info_x-website',
-    'info_x-logo_url',
-    'info_x-logo_background',
-    'info_x-apiClientRegistration_url',
-    'info_x-pricing_type',
-    'info_x-pricing_url',
-    'externalDocs_description',
-    'externalDocs_url',
-  ];
-
-  var table = [header];
-  _.forEach(generateList(), function (api, id) {
-    var apiData = api.versions[api.preferred];
-    var row = [id];
-    _.forEach(header, function (column) {
-      if (column === 'id') return;
-
-      var path = column.replace(/_/g, '.');
-      row.push(_.get(apiData, path));
-    });
-    table.push(row);
-  });
-
-  csvStringify(table, function (err, output) {
-    assert(!err, 'Failed stringify: ' + err);
-    saveFile('internal_api/list.csv', output);
-  });
-}
-
-function generateAPIsJSON(specRootUrl) {
-  var apisJsonPath = __dirname + '/apis.json'
-  var collection = _.extend(readJson(apisJsonPath), {
-    created: '2015-10-15',
-    modified: new Date().toISOString().substring(0, 10),
-    url: specRootUrl + 'apis.json',
-    apis: []
-  });
-
-  _.each(getSpecs(), function (swagger) {
-    var info = swagger.info;
-    collection.apis.push({
-      name: info.title,
-      description: info.description,
-      image: info['x-logo'] && info['x-logo'].url,
-      humanURL: swagger.externalDocs && swagger.externalDocs.url,
-      baseURL: swagger.schemes[0] + '://' + swagger.host + swagger.basePath,
-      version: info.version,
-      properties: [{
-        type: 'Swagger',
-        url: specRootUrl + getSwaggerPath(swagger, 'swagger.json')
-      }]
-    });
-  });
-
-  saveJson('apis.json', collection);
-}
-
-function generateHTML(specRootUrl) {
-  var specs = _.keys(getSpecs())
-  var locals = {
-    specs: specs,
-    specRootUrl: specRootUrl
-  };
-
-  var template = Path.join(Path.dirname(__filename), '../scripts/index.jade');
-  var html = jade.renderFile(template, locals);
-  saveFile('index.html', html);
-}
-
-function saveShield(subject, status, color) {
-  function escape(str) {
-    return str.replace(/_/g, '__').replace(/-/g, '--').replace(/ /g, '_');
-  }
-  function join(left, right) {
-    return left + '-' + right;
-  }
-
-  var text = join(escape(subject), escape(status));
-  var url =  'https://img.shields.io/badge/' + join(text, color) + '.svg';
-
-  getResource(url, {encoding: null}, function(err, response, data) {
-    assert(!err, err);
-
-    var filename = escape(subject).toLowerCase() + '_banner.svg';
-    saveFile(filename, data);
-  });
-}
-
-function generateBanner() {
-  var numAPIs = _.size(generateList());
-  saveShield('APIs in collection' , numAPIs.toString(), 'orange');
-
-  var numEndpoints = 0;
-  _.each(getSpecs(), function (swagger) {
-    numEndpoints += _.size(swagger.paths);
-  });
-  saveShield('Endpoints', numEndpoints.toString(), 'red');
-}
-
-function gitLogDate(options, filename) {
-  var result = exec('git -C .. log --format=%aD ' + options + ' -- \'APIs/' + filename + '\'');
-  result = result.toString();
-  assert(result && result !== '');
-  return new Date(result);
-}
-
 function validateCollection() {
-  var specs = getSpecs();
+  var specs = util.getSpecs();
   var foundErrors = false;
   async.forEachOfSeries(specs, function (swagger, filename, asyncCb) {
     console.error('======================== ' + filename + ' ================');
@@ -451,7 +167,7 @@ function addToCollection(type, url, command) {
 
       if (!_.isUndefined(result.swagger)) {
         var editedSwagger = YAML.safeLoad(match[2]);
-        saveFixup(getSwaggerPath(result.swagger, 'fixup.yaml'), result.swagger, editedSwagger);
+        saveFixup(util.getSwaggerPath(result.swagger, 'fixup.yaml'), result.swagger, editedSwagger);
       }
     });
   });
@@ -475,23 +191,23 @@ function getOriginFixupPath(spec) {
 
 function saveFixup(fixupPath, swagger, editedSwagger) {
   //Before diff we need to unpatch, it's a way to appeand changes
-  var fixup = readYaml(fixupPath);
+  var fixup = util.readYaml(fixupPath);
   if (fixup)
     jsondiffpatch.unpatch(swagger, fixup);
 
   var diff = jsondiffpatch.diff(swagger, editedSwagger);
   if (diff)
-    saveYaml(fixupPath, diff);
+    util.saveYaml(fixupPath, diff);
 }
 
 function updateGoogle() {
-  var knownSpecs = _(getSpecs()).filter({
+  var knownSpecs = _(util.getSpecs()).filter({
     info: {
       'x-providerName': 'googleapis.com'
     }
-  }).mapKeys(getOriginUrl).value();
+  }).mapKeys(util.getOriginUrl).value();
 
-  getResource('https://www.googleapis.com/discovery/v1/apis', function(err, response, data) {
+  util.getResource('https://www.googleapis.com/discovery/v1/apis', function(err, response, data) {
     assert(!err, err);
 
     data = JSON.parse(data);
@@ -535,18 +251,18 @@ function updateGoogle() {
 
     _(knownSpecs).keys().difference(_.keys(googleSpecs)).each(function (url) {
       var swagger = knownSpecs[url];
-      console.log('!!! Delete ' + getSwaggerPath(swagger, ''));
+      console.log('!!! Delete ' + util.getSwaggerPath(swagger, ''));
     }).value();
   });
 }
 
 function mergePatch(swagger, addPatch) {
-  var path = getSwaggerPath(swagger, 'patch.yaml');
-  var patch = readYaml(path);
+  var path = util.getSwaggerPath(swagger, 'patch.yaml');
+  var patch = util.readYaml(path);
   var newPatch = jsonPatch.merge(patch, addPatch);
 
   if (!_.isEqual(patch, newPatch))
-    saveYaml(path, newPatch);
+    util.saveYaml(path, newPatch);
 }
 
 function writeSpec(source, type, exPatch, callback) {
@@ -554,7 +270,7 @@ function writeSpec(source, type, exPatch, callback) {
   async.retry({}, getSpecTask, function (err, spec) {
     assert(!err, err);
 
-    var fixup = readYaml(getOriginFixupPath(spec));
+    var fixup = util.readYaml(getOriginFixupPath(spec));
     jsondiffpatch.patch(spec, fixup);
 
     convertToSwagger(spec, function (error, swagger) {
@@ -587,7 +303,7 @@ function writeSpec(source, type, exPatch, callback) {
         if (warnings)
           logYaml(warnings);
 
-        saveSwagger(swagger);
+        util.saveSwagger(swagger);
         callback(null, result);
       }
 
@@ -820,39 +536,27 @@ function errorToString(errors, context) {
 
   var result = '++++++++++++++++++++++++++ Begin ' + url + ' +++++++++++++++++++++++++\n';
   if (spec.type !== 'swagger_2' || _.isUndefined(swagger)) {
-    result += Yaml2String(serilazeSpec(spec));
+    result += util.Yaml2String(serilazeSpec(spec));
   }
 
   result += '???????????????????? Swagger ' + url + ' ????????????????????????????\n';
   if (!_.isUndefined(swagger))
-    result += Yaml2String(swagger);
+    result += util.Yaml2String(swagger);
 
   if (errors) {
     result += '!!!!!!!!!!!!!!!!!!!! Errors ' + url + ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n';
     if (_.isArray(errors))
-      result += Yaml2String(errors);
+      result += util.Yaml2String(errors);
     else
       result += errors.stack + '\n';
   }
 
   if (warnings) {
     result += '******************** Warnings ' + url + ' ******************************\n';
-    result += Yaml2String(warnings);
+    result += util.Yaml2String(warnings);
   }
   result += '------------------------- End ' + url + ' ----------------------------\n';
   return result;
-}
-
-function Yaml2String(data) {
-  //FIXME: remove
-  data = JSON.parse(JSON.stringify(data));
-
-  data = sortJson(data);
-  return YAML.safeDump(data, {indent: 2, lineWidth: -1});
-}
-
-function logYaml(json) {
-  console.error(Yaml2String(json));
 }
 
 function validateSwagger(swagger, callback) {
@@ -871,14 +575,6 @@ function validateSwagger(swagger, callback) {
       callback(errors, warnings);
     });
   });
-}
-
-function getSpecs(dir) {
-  dir = dir || '';
-  var files = glob.sync(dir + '**/swagger.yaml');
-  return _.transform(files, function (result, filename) {
-    result[filename] = readYaml(filename);
-  }, {});
 }
 
 function patchSwagger(swagger, exPatch) {
@@ -910,12 +606,12 @@ function patchSwagger(swagger, exPatch) {
   removeEmpty(swagger.info);
 
   var patch = exPatch;
-  var pathComponents = getPathComponents(swagger);
+  var pathComponents = util.getPathComponents(swagger);
 
   var path = '';
   _.each(pathComponents, function (dir) {
     path += dir + '/';
-    var subPatch = readYaml(path + 'patch.yaml');
+    var subPatch = util.readYaml(path + 'patch.yaml');
 
     if (!_.isUndefined(subPatch))
       patch = jsonPatch.merge(patch, subPatch);
@@ -927,7 +623,7 @@ function patchSwagger(swagger, exPatch) {
 
   applyMergePatch(swagger, patch);
 
-  var fixup = readYaml(getSwaggerPath(swagger, 'fixup.yaml'));
+  var fixup = util.readYaml(util.getSwaggerPath(swagger, 'fixup.yaml'));
   jsondiffpatch.patch(swagger, fixup);
 }
 
@@ -978,125 +674,6 @@ function parseHost(swagger) {
   return host;
 }
 
-function readYaml(filename) {
-  if (!fs.existsSync(filename))
-    return;
-
-  var data = fs.readFileSync(filename, 'utf-8');
-  return YAML.safeLoad(data, {filename: filename});
-}
-
-function readJson(filename) {
-  if (!fs.existsSync(filename))
-    return;
-
-  var data = fs.readFileSync(filename, 'utf-8');
-  return JSON.parse(data);
-}
-
-function getOrigin(swagger) {
-  return swagger.info['x-origin'];
-}
-
-function getSpecType(swagger) {
-  var origin = getOrigin(swagger);
-  return converter.getTypeName(origin.format, origin.version);
-}
-
-function getOriginUrl(swagger) {
-  return getOrigin(swagger).url;
-}
-
-function getProviderName(swagger) {
-  return swagger.info['x-providerName'];
-}
-
-function getServiceName(swagger) {
-  return swagger.info['x-serviceName'];
-}
-
-function getPathComponents(swagger) {
-  var serviceName = getServiceName(swagger);
-  var path = [getProviderName(swagger)];
-  if (serviceName)
-    path.push(serviceName);
-  path.push(swagger.info.version);
-
-  _.each(path, function (str) {
-    assert(str.indexOf('/') === -1);
-  });
-
-  return path;
-}
-
-function getSwaggerPath(swagger, filename) {
-  filename = filename || 'swagger.yaml';
-  return getPathComponents(swagger).join('/') + '/' + filename;
-}
-
-function sortJson(json) {
-  var json = sortobject(json, function (a, b) {
-    if (a === b)
-      return 0;
-    return (a < b) ? -1 : 1;
-  });
-
-  //detect Swagger format.
-  if (_.get(json, 'swagger') !== '2.0')
-    return json;
-
-  var fieldOrder = [
-    'swagger',
-    'schemes',
-    'host',
-    'basePath',
-    'x-hasEquivalentPaths',
-    'info',
-    'externalDocs',
-    'consumes',
-    'produces',
-    'securityDefinitions',
-    'security',
-    'parameters',
-    'responses',
-    'tags',
-    'paths',
-    'definitions'
-  ];
-
-  var sorted = {};
-  _.each(fieldOrder, function (name) {
-    if (_.isUndefined(json[name]))
-      return;
-
-    sorted[name] = json[name];
-    delete json[name];
-  });
-  _.assign(sorted, json);
-
-  return sorted;
-}
-
-function saveJson(path, json) {
-  json = sortJson(json);
-  saveFile(path, JSON.stringify(json, null, 2) + '\n');
-}
-
-function saveYaml(path, json) {
-  saveFile(path, Yaml2String(json));
-}
-
-function saveFile(path, data) {
-  console.log(path);
-  mkdirp(Path.dirname(path));
-  fs.writeFileSync(path, data);
-}
-
-function saveSwagger(swagger) {
-  var path = getSwaggerPath(swagger);
-  saveYaml(path, swagger);
-}
-
 //code is taken from 'json-merge-patch' package and simplify to allow only adding props
 function applyMergePatch(target, patch) {
   assert(_.isPlainObject(target));
@@ -1115,3 +692,13 @@ function applyMergePatch(target, patch) {
     target[key] = value;
   });
 };
+
+function logYaml(json) {
+  console.error(util.Yaml2String(json));
+}
+
+function getSpecType(swagger) {
+  var origin = util.getOrigin(swagger);
+  return converter.getTypeName(origin.format, origin.version);
+}
+
