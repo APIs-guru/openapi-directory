@@ -24,15 +24,15 @@ process.on("unhandledRejection", function(reason, promise) {
 
 cacheResources()
   .then(function (specs) {
-     //Note: at this point all logo are cached
-     generateHTML(specs);
-     generateAPIsJSON(specs);
+    //Note: at this point all logo are cached
+    generateHTML(specs);
+    generateAPIsJSON(specs);
 
-     var apiList = generateList(specs);
+    var apiList = generateList(specs);
 
-     generateAPI(apiList);
-     generateCSV(apiList);
-     return generateBanner(specs, apiList);
+    generateAPI(apiList);
+    generateCSV(apiList);
+    return generateBanner(specs, apiList);
   });
 
 function cacheResources(specs) {
