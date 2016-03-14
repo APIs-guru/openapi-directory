@@ -1,0 +1,3495 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.pushpay.com
+basePath: /
+info:
+  description: Pushpay® improves sales and business processes by making payments simple.
+  title: Pushpay
+  version: 1.1.0.8434
+  x-logo:
+    url: 'https://upload.wikimedia.org/wikipedia/en/f/f7/Pushpay_company_logo.png'
+  x-origin:
+    format: swagger
+    url: 'https://api.pushpay.com/swagger'
+    version: '1.2'
+  x-providerName: pushpay.com
+externalDocs:
+  url: 'https://pushpay.io/'
+securityDefinitions:
+  oauth2_accessCode:
+    authorizationUrl: 'https://auth.pushpay.com/oauth/authorize'
+    flow: accessCode
+    scopes:
+      create_anticipated_payment: Create anticipated payments for any merchant
+      list_anticipated_payments: List anticipated payment for a merchant
+      list_my_merchants: List merchants that you are an administrator for
+      manage_webhooks: Manage webhooks for a merchant
+      'merchant:download_file': Download files From our storage
+      'merchant:make_ach_payment': Make ACH Payment
+      'merchant:make_card_payment': Make Card Payment
+      'merchant:make_cash_payment': Make Cash Payment
+      'merchant:manage_community_members': "Manage members in a merchant's community"
+      'merchant:manage_recurring_payment': 'Manage Recurring Payment (Pause, Resume, Cancel)'
+      'merchant:upload_file': Upload arbitrary files to our storage
+      'merchant:view_community_members': "List payers in a merchant's community"
+      'merchant:view_payments': View/search payments for in-scope merchants
+      'merchant:view_recurring_payments': View/search recurring payments for in-scope merchants
+      read: Read-only access to resources owned by the subject claim of the token
+    tokenUrl: 'https://auth.pushpay.com/oauth/token'
+    type: oauth2
+  oauth2_implicit:
+    authorizationUrl: 'https://auth.pushpay.com/oauth/authorize'
+    flow: implicit
+    scopes:
+      create_anticipated_payment: Create anticipated payments for any merchant
+      list_anticipated_payments: List anticipated payment for a merchant
+      list_my_merchants: List merchants that you are an administrator for
+      manage_webhooks: Manage webhooks for a merchant
+      'merchant:download_file': Download files From our storage
+      'merchant:make_ach_payment': Make ACH Payment
+      'merchant:make_card_payment': Make Card Payment
+      'merchant:make_cash_payment': Make Cash Payment
+      'merchant:manage_community_members': "Manage members in a merchant's community"
+      'merchant:manage_recurring_payment': 'Manage Recurring Payment (Pause, Resume, Cancel)'
+      'merchant:upload_file': Upload arbitrary files to our storage
+      'merchant:view_community_members': "List payers in a merchant's community"
+      'merchant:view_payments': View/search payments for in-scope merchants
+      'merchant:view_recurring_payments': View/search recurring payments for in-scope merchants
+      read: Read-only access to resources owned by the subject claim of the token
+    type: oauth2
+tags:
+  - description: "The API for viewing & querying a merchant's community of payers"
+    name: community
+  - description: Supporting API for diagnostics and testing of the platform
+    name: diagnostics
+  - description: Supporting API for 3rd party system integrations
+    name: integrations
+  - description: The API for managing merchants and merchant-related data in the pushpay playform
+    name: merchants
+  - description: Metadata about the various features exposed in the Pushpay API
+    name: meta
+  - description: The API for managing payments in the pushpay playform (including anticipated payments)
+    name: payments
+  - description: 'The API for viewing & querying settlement information'
+    name: settlements
+paths:
+  /swagger:
+    get:
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/ResourceListing'
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      summary: Retrieves a list of all swaggger resources exposed in the Pushpay API
+      tags:
+        - meta
+  '/swagger/{resourceName}':
+    get:
+      parameters:
+        - description: The name of the resource to fetch the swagger API declaration for
+          in: path
+          name: resourceName
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/ApiDeclaration'
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      summary: Retrieves details of a swagger resource (this will return the list of API operations that exist for this resource)
+      tags:
+        - meta
+  '/v1/anticipatedpayment/{token}':
+    delete:
+      description: "Deleting an anticipated payment will only work if the payment exists and the Status is 'Unassociated'."
+      parameters:
+        - description: The textual token that uniquely identifies the anticipated payment
+          in: path
+          name: token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+        '204':
+          description: Request was successful
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - create_anticipated_payment
+        - oauth2_implicit:
+            - create_anticipated_payment
+      summary: Delete an anticipated payment
+      tags:
+        - payments
+    get:
+      parameters:
+        - description: The textual token that uniquely identifies the anticipated payment
+          in: path
+          name: token
+          required: true
+          type: string
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/AnticipatedPaymentRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - create_anticipated_payment
+        - oauth2_implicit:
+            - create_anticipated_payment
+      summary: Return anticipated payment
+      tags:
+        - payments
+    put:
+      consumes:
+        - application/hal+json
+        - application/json
+      parameters:
+        - description: The textual token that uniquely identifies the anticipated payment
+          in: path
+          name: token
+          required: true
+          type: string
+        - in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/EditAnticipatedPaymentModel'
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/AnticipatedPaymentRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - create_anticipated_payment
+        - oauth2_implicit:
+            - create_anticipated_payment
+      summary: Update anticipated payment
+      tags:
+        - payments
+  '/v1/anticipatedpayment/{token}/payment':
+    get:
+      description: Get the payment details for the payment that was made for this anticipated payment (if payment has been completed).
+      parameters:
+        - description: The textual token that uniquely identifies the anticipated payment
+          in: path
+          name: token
+          required: true
+          type: string
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/PaymentRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - create_anticipated_payment
+        - oauth2_implicit:
+            - create_anticipated_payment
+      summary: Get the payment details for the payment that was made
+      tags:
+        - payments
+  '/v1/anticipatedpayment/{token}/status':
+    get:
+      description: "Get's the status of the anticipated payment.\r\nPossible values are:\r\n\r\n* Unassociated (payment link has not been clicked on)\r\n* Processing (payment link has been clicked on, user is attempting payment)\r\n* Completed (payment has been completed successfully\r\n* Failed (payment has failed - Declined for insufficient funds or payment process was abandonded by the user)"
+      parameters:
+        - description: The textual token that uniquely identifies the anticipated payment
+          in: path
+          name: token
+          required: true
+          type: string
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/AnticipatedPaymentStatusRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - create_anticipated_payment
+        - oauth2_implicit:
+            - create_anticipated_payment
+      summary: Get the status of the anticipated payment
+      tags:
+        - payments
+  /v1/anticipatedpayments:
+    post:
+      consumes:
+        - application/hal+json
+        - application/json
+      description: "When creating a new anticipated payment you must:\r\n\r\n* Specify a merchant (by setting the 'merchant' property to the ID or handle of the merchant).\r\n\r\nAll other fields are optional - but recommend setting the 'reference' field to a local identifier for the payment, and populating an fields that are required to be certain values for tracking the payment for the Merchant.\r\n\r\nFields are passed in as an array of objects, each object has 3 properties.\r\n\r\n* key\r\n* value\r\n* readOnly\r\n\r\nThe 'key' is a string and must be either the reference definition's ID, or the keyword 'amount' for setting the amount of this anticipated payment.\r\nThe value is the value of the reference field (a string) or the amount  (which must also be specified as a string, or using the format:\r\n\r\n    { \"value\": \"123.45\", \"currency\": \"USD\"}\r\n\r\nThe value readOnly is a boolean field - where if 'true' then field will be made read-only, this works for both reference definitions and the amount field"
+      parameters:
+        - in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/EditAnticipatedPaymentModel'
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/AnticipatedPaymentRepresentation'
+        '201':
+          description: Request was successful
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - create_anticipated_payment
+        - oauth2_implicit:
+            - create_anticipated_payment
+      summary: Create a new anticipated payment
+      tags:
+        - payments
+  /v1/diagnostics/identity:
+    get:
+      description: Retrieves details of the client being used to make this API request - allows clients/3rd party developers to see what claims are included in their access token
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/IdentityRepresentation'
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      summary: Retrieves details of the client making the request
+      tags:
+        - diagnostics
+  '/v1/merchant/{merchantKey}':
+    get:
+      description: Retrieves the details of the merchant including the reference definitions
+      parameters:
+        - description: The unique key of the merchant
+          in: path
+          name: merchantKey
+          required: true
+          type: string
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/MerchantRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - read
+        - oauth2_implicit:
+            - read
+      summary: Retrieve details of merchant
+      tags:
+        - merchants
+  '/v1/merchant/{merchantKey}/anticipatedpayments':
+    get:
+      description: 'Anticipated payments are returned sorted into descending order by create date, and are paged (with 25 per page)'
+      parameters:
+        - description: The unique key of the merchant
+          in: path
+          name: merchantKey
+          required: true
+          type: string
+        - description: 'The page parameter (Note: page numbering starts at 0)'
+          format: int32
+          in: query
+          name: page
+          required: true
+          type: integer
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/AnticipatedPaymentListRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - list_anticipated_payments
+        - oauth2_implicit:
+            - list_anticipated_payments
+      summary: Retrieve anticipated payments for a merchant
+      tags:
+        - payments
+  '/v1/merchant/{merchantKey}/community':
+    get:
+      description: Retrieves the details of all payers who have recently given to a merchant
+      parameters:
+        - description: The unique key of the merchant
+          in: path
+          name: merchantKey
+          required: true
+          type: string
+        - description: 'Filter community members shown to those whose email, full name, or mobile numbers contain this string'
+          in: query
+          name: filterBy
+          required: false
+          type: string
+        - description: "Order data by a particular property in ascending or descending order.  Uses format 'PropertyName ASC' or 'PropertyName DESC'"
+          in: query
+          name: orderBy
+          required: false
+          type: string
+        - description: 'The page parameter (Note: page numbering starts at 0)'
+          format: int32
+          in: query
+          name: page
+          required: true
+          type: integer
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/PagedPayerRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - 'merchant:view_community_members'
+        - oauth2_implicit:
+            - 'merchant:view_community_members'
+      summary: "Retrieve the set of payers in a merchant's community"
+      tags:
+        - community
+    patch:
+      consumes:
+        - application/json
+      description: "When updating a merchant's community you must:\r\n\r\n* Provide between 1 to 25 operations\r\n\r\n* Not rely on the execution order. Operations might be executed non-sequentially.\r\n\r\n* Have **from** populated on each *Update* operation\r\n\r\n* Have **key** populated on each *Set* operation\r\n"
+      parameters:
+        - description: The unique key of the merchant
+          in: path
+          name: merchantKey
+          required: true
+          type: string
+        - in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/BulkUpdateCommunityMemberModel'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: string
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - 'merchant:manage_community_members'
+        - oauth2_implicit:
+            - 'merchant:manage_community_members'
+      summary: Bulk update details of community members
+      tags:
+        - community
+  '/v1/merchant/{merchantKey}/community/{memberKey}':
+    get:
+      description: "Retrieves the details of specific payer in a merchant's community"
+      parameters:
+        - description: The unique key of the merchant
+          in: path
+          name: merchantKey
+          required: true
+          type: string
+        - description: The unique key of a community member
+          in: path
+          name: memberKey
+          required: true
+          type: string
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/PayerRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - 'merchant:view_community_members'
+        - oauth2_implicit:
+            - 'merchant:view_community_members'
+      summary: Retrieve the details of a particular community member
+      tags:
+        - community
+    patch:
+      consumes:
+        - application/hal+json
+        - application/json
+      description: "Updates the details of specific member in a merchant's community"
+      parameters:
+        - description: The unique key of the merchant
+          in: path
+          name: merchantKey
+          required: true
+          type: string
+        - description: The unique key of a community member
+          in: path
+          name: memberKey
+          required: true
+          type: string
+        - in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/EditCommunityMemberModel'
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/PayerRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - 'merchant:manage_community_members'
+        - oauth2_implicit:
+            - 'merchant:manage_community_members'
+      summary: Update the details of a particular community member
+      tags:
+        - community
+  '/v1/merchant/{merchantKey}/payment/{token}':
+    get:
+      parameters:
+        - description: The unique key of the merchant - it is case-sensitive series of characters
+          in: path
+          name: merchantKey
+          required: true
+          type: string
+        - description: The token is a unique identifier for this resource - it is case-sensitive series of characters
+          in: path
+          name: token
+          required: true
+          type: string
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/PaymentRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - 'merchant:view_payments'
+            - read
+        - oauth2_implicit:
+            - 'merchant:view_payments'
+            - read
+      summary: Get a payment made to a merchant identified by its payment token
+      tags:
+        - payments
+  '/v1/merchant/{merchantKey}/payments':
+    get:
+      parameters:
+        - description: The unique key of the merchant - it is case-sensitive series of characters
+          in: path
+          name: merchantKey
+          required: true
+          type: string
+        - description: Only include payments after a date/time (UTC)
+          format: date-time
+          in: query
+          name: from
+          required: false
+          type: string
+        - description: Only include payments before a date/time (UTC)
+          format: date-time
+          in: query
+          name: to
+          required: false
+          type: string
+        - description: Only include payments after a date/time (UTC)
+          format: date-time
+          in: query
+          name: createdFrom
+          required: false
+          type: string
+        - description: Only include payments before a date/time (UTC)
+          format: date-time
+          in: query
+          name: createdTo
+          required: false
+          type: string
+        - description: Only include payments changed after a date/time (UTC)
+          format: date-time
+          in: query
+          name: updatedFrom
+          required: false
+          type: string
+        - description: Only include payments changed before a date/time (UTC)
+          format: date-time
+          in: query
+          name: updatedTo
+          required: false
+          type: string
+        - description: "Order data by a particular property in ascending or descending order.  Uses format 'PropertyName ASC' or 'PropertyName DESC'"
+          in: query
+          name: orderby
+          required: false
+          type: string
+        - description: 'Only include payments made with the specified type of payment method (ACH, CreditCard, or NzBankAccount)'
+          enum:
+            - ACH
+            - AchCheck
+            - Cash
+            - CreditCard
+            - DepositedCheck
+            - NzBankAccount
+          in: query
+          name: type
+          required: false
+          type: string
+        - description: 'Only include payments with the specified status (Success, Failed, or Processing)'
+          enum:
+            - Failed
+            - Processing
+            - Success
+          in: query
+          name: status
+          required: false
+          type: string
+        - description: "Only include payments that contain a specified value within a custom field. Uses format 'fields[FieldNumber]'"
+          in: query
+          items:
+            type: string
+          name: fields
+          required: false
+          type: array
+        - description: 'The page parameter (Note: page numbering starts at 0)'
+          format: int32
+          in: query
+          name: page
+          required: true
+          type: integer
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/PaymentsRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - 'merchant:view_payments'
+        - oauth2_implicit:
+            - 'merchant:view_payments'
+      summary: Get payment for this merchant
+      tags:
+        - payments
+  '/v1/merchant/{merchantKey}/recurringpayment/{paymentToken}/payments':
+    get:
+      parameters:
+        - description: The unique key of the merchant - it is case-sensitive series of characters
+          in: path
+          name: merchantKey
+          required: true
+          type: string
+        - in: path
+          name: paymentToken
+          required: true
+          type: string
+        - description: Only include payments after a date/time (UTC)
+          format: date-time
+          in: query
+          name: from
+          required: false
+          type: string
+        - description: Only include payments before a date/time (UTC)
+          format: date-time
+          in: query
+          name: to
+          required: false
+          type: string
+        - description: Only include payments after a date/time (UTC)
+          format: date-time
+          in: query
+          name: createdFrom
+          required: false
+          type: string
+        - description: Only include payments before a date/time (UTC)
+          format: date-time
+          in: query
+          name: createdTo
+          required: false
+          type: string
+        - description: Only include payments changed after a date/time (UTC)
+          format: date-time
+          in: query
+          name: updatedFrom
+          required: false
+          type: string
+        - description: Only include payments changed before a date/time (UTC)
+          format: date-time
+          in: query
+          name: updatedTo
+          required: false
+          type: string
+        - description: "Order data by a particular property in ascending or descending order.  Uses format 'PropertyName ASC' or 'PropertyName DESC'"
+          in: query
+          name: orderby
+          required: false
+          type: string
+        - description: 'Only include payments made with the specified type of payment method (ACH, CreditCard, or NzBankAccount)'
+          enum:
+            - ACH
+            - AchCheck
+            - Cash
+            - CreditCard
+            - DepositedCheck
+            - NzBankAccount
+          in: query
+          name: type
+          required: false
+          type: string
+        - description: 'Only include payments with the specified status (Success, Failed, or Processing)'
+          enum:
+            - Failed
+            - Processing
+            - Success
+          in: query
+          name: status
+          required: false
+          type: string
+        - description: "Only include payments that contain a specified value within a custom field. Uses format 'fields[FieldNumber]'"
+          in: query
+          items:
+            type: string
+          name: fields
+          required: false
+          type: array
+        - description: 'The page parameter (Note: page numbering starts at 0)'
+          format: int32
+          in: query
+          name: page
+          required: true
+          type: integer
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/PaymentsRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - 'merchant:view_recurring_payments'
+            - read
+        - oauth2_implicit:
+            - 'merchant:view_recurring_payments'
+            - read
+      summary: Get payment for a recurring payment
+      tags:
+        - payments
+  '/v1/merchant/{merchantKey}/recurringpayment/{token}':
+    get:
+      description: 'Retrieves a single recurring payment record, given the keys for the payer and the '
+      parameters:
+        - description: The unique key of the merchant - it is case-sensitive series of characters
+          in: path
+          name: merchantKey
+          required: true
+          type: string
+        - description: The token is a unique identifier for this resource - it is case-sensitive series of characters
+          in: path
+          name: token
+          required: true
+          type: string
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/RecurringPaymentRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - 'merchant:view_recurring_payments'
+            - read
+        - oauth2_implicit:
+            - 'merchant:view_recurring_payments'
+            - read
+      summary: "Get a person's recurring payment"
+      tags:
+        - payments
+  '/v1/merchant/{merchantKey}/recurringpayments':
+    get:
+      description: Retrieves all recurring payment records associated with a merchant
+      parameters:
+        - description: The unique key of the merchant - it is case-sensitive series of characters
+          in: path
+          name: merchantKey
+          required: true
+          type: string
+        - description: Only include payments changed after a date/time (UTC)
+          format: date-time
+          in: query
+          name: updatedFrom
+          required: false
+          type: string
+        - description: Only include payments changed before a date/time (UTC)
+          format: date-time
+          in: query
+          name: updatedTo
+          required: false
+          type: string
+        - description: Only include payments after a date/time (UTC)
+          format: date-time
+          in: query
+          name: createdFrom
+          required: false
+          type: string
+        - description: Only include payments before a date/time (UTC)
+          format: date-time
+          in: query
+          name: createdTo
+          required: false
+          type: string
+        - description: 'Filter recurring payments by status, acceptable values are any combination of (Active, Cancelled, Paused)'
+          in: query
+          items:
+            enum:
+              - Active
+              - Cancelled
+              - Completed
+              - Paused
+            type: string
+          name: status
+          required: true
+          type: array
+        - description: "Order data by a particular property in ascending or descending order.  Uses format 'PropertyName ASC' or 'PropertyName DESC'"
+          in: query
+          name: orderBy
+          required: false
+          type: string
+        - description: 'The page parameter (Note: page numbering starts at 0)'
+          format: int32
+          in: query
+          name: page
+          required: true
+          type: integer
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/PagedRecurringPaymentsRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - 'merchant:view_recurring_payments'
+        - oauth2_implicit:
+            - 'merchant:view_recurring_payments'
+      summary: Get all recurring payments associated with a merchant
+      tags:
+        - payments
+  '/v1/merchant/{merchantKey}/settlements':
+    get:
+      description: 'Retrieves all settlements that belong to the in scope merchant & which pass the specified filters'
+      parameters:
+        - description: The unique key of the merchant - it is case-sensitive series of characters
+          in: path
+          name: merchantKey
+          required: true
+          type: string
+        - description: "Order data by a particular property in ascending or descending order.  Uses format 'PropertyName ASC' or 'PropertyName DESC'"
+          in: query
+          name: orderBy
+          required: false
+          type: string
+        - description: Only include settlements which have or have not been reconciled by the user
+          in: query
+          name: isReconciled
+          required: false
+          type: boolean
+        - description: 'Only include settlements which contain the following substring, wildcharacters implicitly prepended and appended'
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Only include settlements which are of the specified type (ACH or CreditCard)
+          enum:
+            - ACH
+            - CreditCard
+          in: query
+          name: type
+          required: false
+          type: string
+        - description: Only include settlements which have been deposited after the specified date (UTC)
+          format: date-time
+          in: query
+          name: depositFrom
+          required: false
+          type: string
+        - description: Only include settlements which have been deposited before the specified date (UTC)
+          format: date-time
+          in: query
+          name: depositTo
+          required: false
+          type: string
+        - description: 'The page parameter (Note: page numbering starts at 0)'
+          format: int32
+          in: query
+          name: page
+          required: true
+          type: integer
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/SettlementsRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - 'merchant:view_payments'
+        - oauth2_implicit:
+            - 'merchant:view_payments'
+      summary: Retrieve all settlements that belong to a merchant
+      tags:
+        - settlements
+  '/v1/merchant/{merchantKey}/webhook/{token}':
+    delete:
+      description: "Deletes a webhook - any queued webhook messages will still be delivered after the webhook subscription is removed, but no new webhook messages will be queued for this webhook subscription\r\n\r\nThis operation requires that the OAuth2 bearer token include a 'sub' (subject) claim."
+      parameters:
+        - description: The unique key of the merchant
+          in: path
+          name: merchantKey
+          required: true
+          type: string
+        - description: The textual token that uniquely identifies the webhook subscription
+          in: path
+          name: token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+        '204':
+          description: Request was successful
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - manage_webhooks
+        - oauth2_implicit:
+            - manage_webhooks
+      summary: Delete a webhook
+      tags:
+        - merchants
+    get:
+      description: "This operation requires that the OAuth2 bearer token include a 'sub' (subject) claim."
+      parameters:
+        - description: The unique key of the merchant
+          in: path
+          name: merchantKey
+          required: true
+          type: string
+        - description: The textual token that uniquely identifies the webhook subscription
+          in: path
+          name: token
+          required: true
+          type: string
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/WebhookRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - manage_webhooks
+        - oauth2_implicit:
+            - manage_webhooks
+      summary: Retrieve the details for a webhook
+      tags:
+        - merchants
+    put:
+      consumes:
+        - application/hal+json
+        - application/json
+      description: "This operation requires that the OAuth2 bearer token include a 'sub' (subject) claim."
+      parameters:
+        - description: The unique key of the merchant
+          in: path
+          name: merchantKey
+          required: true
+          type: string
+        - description: The textual token that uniquely identifies the webhook subscription
+          in: path
+          name: token
+          required: true
+          type: string
+        - in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/EditWebhookModel'
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/WebhookRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - manage_webhooks
+        - oauth2_implicit:
+            - manage_webhooks
+      summary: Update the details of the webhook
+      tags:
+        - merchants
+  '/v1/merchant/{merchantKey}/webhooks':
+    get:
+      description: "This operation requires that the OAuth2 bearer token include a 'sub' (subject) claim."
+      parameters:
+        - description: The unique key of the merchant
+          in: path
+          name: merchantKey
+          required: true
+          type: string
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/WebhookListRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - manage_webhooks
+        - oauth2_implicit:
+            - manage_webhooks
+      summary: Get all webhooks registered for this merchant
+      tags:
+        - merchants
+    post:
+      consumes:
+        - application/hal+json
+        - application/json
+      description: "This operation requires that the OAuth2 bearer token include a 'sub' (subject) claim."
+      parameters:
+        - description: The unique key of the merchant
+          in: path
+          name: merchantKey
+          required: true
+          type: string
+        - in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/EditWebhookModel'
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/WebhookRepresentation'
+        '201':
+          description: Request was successful
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - manage_webhooks
+        - oauth2_implicit:
+            - manage_webhooks
+      summary: Create a new webhook
+      tags:
+        - merchants
+  /v1/merchants:
+    get:
+      description: "You can find merchants matching one or more parameters for:\r\n\r\n* country  (Country, valid values are NZ, AU, CA or US currently).\r\n* name (Full or partial name)\r\n* handle (the full handle for a merchant)\r\n\r\nNote: Unfiltered requests will return merchants of Status = Active and Visibility = Visible\r\n\r\n"
+      parameters:
+        - description: One or more terms between spaces which will each be matched partially against the name of the merchant
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: "The unique text 'handle' assigned to the merchant"
+          in: query
+          name: handle
+          required: false
+          type: string
+        - description: The country the Merchant resides within
+          enum:
+            - AU
+            - BE
+            - CA
+            - CH
+            - DE
+            - DK
+            - FI
+            - GB
+            - IS
+            - LV
+            - MX
+            - 'NO'
+            - NZ
+            - SE
+            - US
+          in: query
+          name: country
+          required: false
+          type: string
+        - description: Only include merchant listings matching the specified visibility
+          enum:
+            - Hidden
+            - Visible
+          in: query
+          name: visibility
+          required: false
+          type: string
+        - description: Only include merchant listings matching the specified status
+          enum:
+            - Active
+            - Closed
+            - Pending
+          in: query
+          name: status
+          required: false
+          type: string
+        - description: 'The page parameter (Note: page numbering starts at 0)'
+          format: int32
+          in: query
+          name: page
+          required: true
+          type: integer
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/MerchantSearchResultsRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - read
+        - oauth2_implicit:
+            - read
+      summary: Search for merchants
+      tags:
+        - merchants
+  /v1/merchants/in-scope:
+    get:
+      description: "You can find merchants the client's scope applies to - you can further filter this list by using one or more parameters for:\r\n\r\n* country  (Country, valid values are NZ, AU, CA or US currently).\r\n* name (Full or partial name of a merchant listing)\r\n* handle (the full handle for a merchant listing)\r\n* visibility (if the merchant listings are visible or hidden)\r\n* status (if the merchant listings are active, closed or pending)\r\n\r\nNote: Unfiltered requests will return merchants of Status = Active/Pending/Closed and Visibility = Visible/Hidden"
+      parameters:
+        - description: One or more terms between spaces which will each be matched partially against the name of the merchant
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: "The unique text 'handle' assigned to the merchant"
+          in: query
+          name: handle
+          required: false
+          type: string
+        - description: The country the Merchant resides within
+          enum:
+            - AU
+            - BE
+            - CA
+            - CH
+            - DE
+            - DK
+            - FI
+            - GB
+            - IS
+            - LV
+            - MX
+            - 'NO'
+            - NZ
+            - SE
+            - US
+          in: query
+          name: country
+          required: false
+          type: string
+        - description: Only include merchant listings matching the specified visibility
+          enum:
+            - Hidden
+            - Visible
+          in: query
+          name: visibility
+          required: false
+          type: string
+        - description: Only include merchant listings matching the specified status
+          enum:
+            - Active
+            - Closed
+            - Pending
+          in: query
+          name: status
+          required: false
+          type: string
+        - description: 'The page parameter (Note: page numbering starts at 0)'
+          format: int32
+          in: query
+          name: page
+          required: true
+          type: integer
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/MerchantSearchResultsRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - read
+        - oauth2_implicit:
+            - read
+      summary: List in-scope Merchants
+      tags:
+        - merchants
+  /v1/merchants/near:
+    get:
+      description: "Will find merchants near a geolocation (latitude and longitude).\r\n\r\nIn addition to specifying position, you can also further scope the query to a specific country via the country query parameter.\r\n\r\nValid values for country are:\r\n\r\n* US\r\n* NZ\r\n* AU\r\n* CA\r\n"
+      parameters:
+        - description: Latitude in degrees (valid values for earth are between -90 and +90)
+          format: double
+          in: query
+          name: latitude
+          required: false
+          type: number
+        - description: Longitude in degrees (valid values for earth are between -180 to +180)
+          format: double
+          in: query
+          name: longitude
+          required: false
+          type: number
+        - description: The country the Merchant resides within
+          enum:
+            - AU
+            - BE
+            - CA
+            - CH
+            - DE
+            - DK
+            - FI
+            - GB
+            - IS
+            - LV
+            - MX
+            - 'NO'
+            - NZ
+            - SE
+            - US
+          in: query
+          name: country
+          required: false
+          type: string
+        - description: 'The page parameter (Note: page numbering starts at 0)'
+          format: int32
+          in: query
+          name: page
+          required: true
+          type: integer
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/MerchantSearchResultsRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - read
+        - oauth2_implicit:
+            - read
+      summary: Search for neraby merchants
+      tags:
+        - merchants
+  /v1/my/merchants:
+    get:
+      description: "Note: Unfiltered requests will return merchants of Status = Active/Pending/Closed and Visibility = Visible\r\n\r\nThis operation requires that the OAuth2 bearer token include a 'sub' (subject) claim."
+      parameters:
+        - description: Only include merchant listings matching the specified status
+          enum:
+            - Active
+            - Closed
+            - Pending
+          in: query
+          name: status
+          required: false
+          type: string
+        - description: Only include merchant listings matching the specified visibility
+          enum:
+            - Hidden
+            - Visible
+          in: query
+          name: visibility
+          required: false
+          type: string
+        - description: 'The page parameter (Note: page numbering starts at 0)'
+          format: int32
+          in: query
+          name: page
+          required: true
+          type: integer
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/MerchantSearchResultsRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - list_my_merchants
+        - oauth2_implicit:
+            - list_my_merchants
+      summary: Get merchants this pushpayer is an administrator for (identified by the subject claim)
+      tags:
+        - merchants
+  /v1/my/payments:
+    get:
+      description: "This operation requires that the OAuth2 bearer token include a 'sub' (subject) claim."
+      parameters:
+        - description: Only include payments after a date/time (UTC)
+          format: date-time
+          in: query
+          name: from
+          required: false
+          type: string
+        - description: Only include payments before a date/time (UTC)
+          format: date-time
+          in: query
+          name: to
+          required: false
+          type: string
+        - description: Only include payments after a date/time (UTC)
+          format: date-time
+          in: query
+          name: createdFrom
+          required: false
+          type: string
+        - description: Only include payments before a date/time (UTC)
+          format: date-time
+          in: query
+          name: createdTo
+          required: false
+          type: string
+        - description: Only include payments changed after a date/time (UTC)
+          format: date-time
+          in: query
+          name: updatedFrom
+          required: false
+          type: string
+        - description: Only include payments changed before a date/time (UTC)
+          format: date-time
+          in: query
+          name: updatedTo
+          required: false
+          type: string
+        - description: "Order data by a particular property in ascending or descending order.  Uses format 'PropertyName ASC' or 'PropertyName DESC'"
+          in: query
+          name: orderby
+          required: false
+          type: string
+        - description: 'Only include payments made with the specified type of payment method (ACH, CreditCard, or NzBankAccount)'
+          enum:
+            - ACH
+            - AchCheck
+            - Cash
+            - CreditCard
+            - DepositedCheck
+            - NzBankAccount
+          in: query
+          name: type
+          required: false
+          type: string
+        - description: 'Only include payments with the specified status (Success, Failed, or Processing)'
+          enum:
+            - Failed
+            - Processing
+            - Success
+          in: query
+          name: status
+          required: false
+          type: string
+        - description: "Only include payments that contain a specified value within a custom field. Uses format 'fields[FieldNumber]'"
+          in: query
+          items:
+            type: string
+          name: fields
+          required: false
+          type: array
+        - description: 'The page parameter (Note: page numbering starts at 0)'
+          format: int32
+          in: query
+          name: page
+          required: true
+          type: integer
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/PaymentsRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - read
+        - oauth2_implicit:
+            - read
+      summary: Get payments for this pushpayer (identified by the subject claim)
+      tags:
+        - payments
+  '/v1/paymentmethod/{key}':
+    get:
+      description: "This operation requires that the OAuth2 bearer token include a 'sub' (subject) claim."
+      parameters:
+        - description: 'The unique index of the payment method (Note: payment method indexes are only unique per pushpayer)'
+          format: int32
+          in: path
+          name: key
+          required: true
+          type: integer
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/PaymentMethodRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - read
+        - oauth2_implicit:
+            - read
+      summary: Get specific payment method (identified by its key) for this pushpayer
+      tags:
+        - payments
+  /v1/paymentmethods:
+    get:
+      description: "This operation requires that the OAuth2 bearer token include a 'sub' (subject) claim."
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/PaymentMethodListRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - read
+        - oauth2_implicit:
+            - read
+      summary: Get payment methods for this pushpayer
+      tags:
+        - payments
+  '/v1/person/{personKey}/recurringpayments':
+    get:
+      description: Retrieves all recurring payment records associated with a payer
+      parameters:
+        - in: path
+          name: personKey
+          required: true
+          type: string
+        - description: Only include payments changed after a date/time (UTC)
+          format: date-time
+          in: query
+          name: updatedFrom
+          required: false
+          type: string
+        - description: Only include payments changed before a date/time (UTC)
+          format: date-time
+          in: query
+          name: updatedTo
+          required: false
+          type: string
+        - description: Only include payments after a date/time (UTC)
+          format: date-time
+          in: query
+          name: createdFrom
+          required: false
+          type: string
+        - description: Only include payments before a date/time (UTC)
+          format: date-time
+          in: query
+          name: createdTo
+          required: false
+          type: string
+        - description: 'Filter recurring payments by status, acceptable values are any combination of (Active, Cancelled, Paused)'
+          in: query
+          items:
+            enum:
+              - Active
+              - Cancelled
+              - Completed
+              - Paused
+            type: string
+          name: status
+          required: true
+          type: array
+        - description: "Order data by a particular property in ascending or descending order.  Uses format 'PropertyName ASC' or 'PropertyName DESC'"
+          in: query
+          name: orderBy
+          required: false
+          type: string
+        - description: 'The page parameter (Note: page numbering starts at 0)'
+          format: int32
+          in: query
+          name: page
+          required: true
+          type: integer
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/PagedRecurringPaymentsRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - 'merchant:view_recurring_payments'
+            - read
+        - oauth2_implicit:
+            - 'merchant:view_recurring_payments'
+            - read
+      summary: Get all recurring payments associated with a payer
+      tags:
+        - payments
+  '/v1/settlement/{settlementKey}':
+    get:
+      description: Retrieve a single in scope settlement by its key
+      parameters:
+        - in: path
+          name: settlementKey
+          required: true
+          type: string
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/SettlementRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - 'merchant:view_payments'
+        - oauth2_implicit:
+            - 'merchant:view_payments'
+      summary: Retrieve a single settlement by key
+      tags:
+        - settlements
+  '/v1/settlement/{settlementKey}/payments':
+    get:
+      description: Retrieve the set of in scope payments related to the specified settlement
+      parameters:
+        - in: path
+          name: settlementKey
+          required: true
+          type: string
+        - format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/PaymentsRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - 'merchant:view_payments'
+        - oauth2_implicit:
+            - 'merchant:view_payments'
+      summary: Retrieve all visible payments from a settlement
+      tags:
+        - settlements
+  /v1/settlements:
+    get:
+      description: 'Retrieves settlements from all merchants that are in scope & which pass the specified filters'
+      parameters:
+        - description: "Order data by a particular property in ascending or descending order.  Uses format 'PropertyName ASC' or 'PropertyName DESC'"
+          in: query
+          name: orderBy
+          required: false
+          type: string
+        - description: Only include settlements which have or have not been reconciled by the user
+          in: query
+          name: isReconciled
+          required: false
+          type: boolean
+        - description: 'Only include settlements which contain the following substring, wildcharacters implicitly prepended and appended'
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Only include settlements which are of the specified type (ACH or CreditCard)
+          enum:
+            - ACH
+            - CreditCard
+          in: query
+          name: type
+          required: false
+          type: string
+        - description: Only include settlements which have been deposited after the specified date (UTC)
+          format: date-time
+          in: query
+          name: depositFrom
+          required: false
+          type: string
+        - description: Only include settlements which have been deposited before the specified date (UTC)
+          format: date-time
+          in: query
+          name: depositTo
+          required: false
+          type: string
+        - description: 'The page parameter (Note: page numbering starts at 0)'
+          format: int32
+          in: query
+          name: page
+          required: true
+          type: integer
+      produces:
+        - application/hal+json
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/SettlementsRepresentation'
+        '401':
+          description: Request failed because the client was not authorized to perform this action
+        '404':
+          description: Could not find resource
+        '429':
+          description: Request was throttled due to too many requests from this client or IP address
+      security:
+        - oauth2_accessCode:
+            - 'merchant:view_payments'
+        - oauth2_implicit:
+            - 'merchant:view_payments'
+      summary: Retrieve all accessible settlements
+      tags:
+        - settlements
+definitions:
+  AccountPaymentMethod:
+    properties:
+      accountName:
+        type: string
+      accountType:
+        type: integer
+      bankName:
+        type: string
+      reference:
+        type: string
+      routingNumber:
+        type: string
+    type: object
+  AchModel:
+    properties:
+      accountNumber:
+        type: string
+      accountType:
+        enum:
+          - Checking
+          - Savings
+        type: string
+      routingNumber:
+        type: string
+    required:
+      - accountNumber
+      - accountType
+      - routingNumber
+    type: object
+  AddressDetails:
+    properties:
+      city:
+        type: string
+      country:
+        type: integer
+      line1:
+        type: string
+      line2:
+        type: string
+      state:
+        type: string
+      zipOrPostCode:
+        type: string
+    type: object
+  AnticipatedPayer:
+    properties:
+      address:
+        $ref: '#/definitions/AddressDetails'
+      emailAddress:
+        type: string
+      firstName:
+        type: string
+      fullName:
+        type: string
+      key:
+        type: string
+      lastName:
+        type: string
+      mobileNumber:
+        type: string
+    required:
+      - emailAddress
+      - firstName
+      - fullName
+      - key
+      - lastName
+      - mobileNumber
+    type: object
+  AnticipatedPaymentListRepresentation:
+    properties:
+      _links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      items:
+        items:
+          $ref: '#/definitions/AnticipatedPaymentRepresentation'
+        type: array
+      page:
+        type: integer
+      pageSize:
+        type: integer
+      total:
+        type: integer
+      totalPages:
+        type: integer
+    required:
+      - _links
+      - items
+      - page
+      - pageSize
+    type: object
+  AnticipatedPaymentRepresentation:
+    properties:
+      _links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      description:
+        type: string
+      descriptionTitle:
+        type: string
+      expiresOn:
+        format: DateTime
+        type: string
+      fields:
+        items:
+          $ref: '#/definitions/FieldConfigModel'
+        type: array
+      fulfilmentMethod:
+        enum:
+          - BillPayment
+          - Hybrid
+          - Message
+          - Redirect
+        type: string
+      merchantKey:
+        type: string
+      payer:
+        $ref: '#/definitions/AnticipatedPayer'
+      reference:
+        type: string
+      returnTitle:
+        type: string
+      returnUrl:
+        type: object
+      token:
+        type: string
+    required:
+      - _links
+      - fulfilmentMethod
+      - merchantKey
+      - token
+    type: object
+  AnticipatedPaymentStatusRepresentation:
+    properties:
+      _links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      completed:
+        type: boolean
+      reference:
+        type: string
+      status:
+        enum:
+          - Completed
+          - Expired
+          - Failed
+          - MerchantCancelled
+          - New
+          - Opened
+          - PayerCancelled
+        type: string
+      statusCode:
+        type: integer
+    required:
+      - _links
+      - completed
+      - status
+      - statusCode
+    type: object
+  Api:
+    properties:
+      description:
+        type: string
+      operations:
+        items:
+          $ref: '#/definitions/Operation'
+        type: array
+      path:
+        type: string
+    required:
+      - description
+      - operations
+      - path
+    type: object
+  ApiDeclaration:
+    properties:
+      apiVersion:
+        type: string
+      apis:
+        items:
+          $ref: '#/definitions/Api'
+        type: array
+      basePath:
+        type: string
+      consumes:
+        items:
+          type: string
+        type: array
+      models:
+        type: object
+      produces:
+        items:
+          type: string
+        type: array
+      resourcePath:
+        type: string
+      swaggerVersion:
+        type: string
+    required:
+      - apis
+      - apiVersion
+      - basePath
+      - models
+      - resourcePath
+      - swaggerVersion
+    type: object
+  AuthorizationCodeGrantType:
+    properties:
+      tokenEndpoint:
+        $ref: '#/definitions/TokenEndpoint'
+      tokenRequestEndpoint:
+        $ref: '#/definitions/TokenRequestEndpoint'
+    required:
+      - tokenEndpoint
+      - tokenRequestEndpoint
+    type: object
+  Authorizations:
+    properties:
+      oauth2:
+        $ref: '#/definitions/OAuth2Authorization'
+    required:
+      - oauth2
+    type: object
+  BulkUpdateCommunityMemberModel:
+    properties:
+      operations:
+        items:
+          $ref: '#/definitions/Operation'
+        type: array
+    required:
+      - operations
+    type: object
+  CardModel:
+    properties:
+      cardNumber:
+        type: string
+      cvc:
+        type: string
+      expiryMonth:
+        type: integer
+      expiryYear:
+        type: integer
+    required:
+      - cardNumber
+      - cvc
+      - expiryMonth
+      - expiryYear
+    type: object
+  CardPaymentMethod:
+    properties:
+      brand:
+        type: string
+      logo:
+        type: object
+      reference:
+        type: string
+    type: object
+  Colors:
+    properties:
+      primary:
+        type: string
+    required:
+      - primary
+    type: object
+  DataType:
+    properties:
+      $ref:
+        type: string
+      default: {}
+      description:
+        type: string
+      disallow:
+        type: integer
+      discriminator:
+        type: string
+      divisibleBy:
+        type: number
+      enum:
+        items:
+          type: string
+        type: array
+      exclusiveMaximum:
+        type: boolean
+      exclusiveMinimum:
+        type: boolean
+      extends:
+        items:
+          $ref: '#/definitions/DataType'
+        type: array
+      format:
+        type: string
+      hidden:
+        type: boolean
+      id:
+        type: string
+      items:
+        $ref: '#/definitions/DataType'
+      maxItems:
+        type: integer
+      maxLength:
+        type: integer
+      maximum:
+        type: number
+      minItems:
+        type: integer
+      minLength:
+        type: integer
+      minimum:
+        type: number
+      pattern:
+        type: string
+      properties:
+        type: object
+      required:
+        items:
+          type: string
+        type: array
+      subTypes:
+        items:
+          type: string
+        type: array
+      suggestedTypeName:
+        type: string
+      title:
+        type: string
+      transient:
+        type: boolean
+      type:
+        type: string
+    type: object
+  EditAnticipatedPaymentModel:
+    properties:
+      description:
+        type: string
+      descriptionTitle:
+        type: string
+      expiresOn:
+        format: DateTime
+        type: string
+      fields:
+        items:
+          $ref: '#/definitions/FieldConfigModel'
+        type: array
+      fulfilmentMethod:
+        type: integer
+      merchantKey:
+        type: string
+      payer:
+        $ref: '#/definitions/AnticipatedPayer'
+      reference:
+        type: string
+      returnTitle:
+        type: string
+      returnUrl:
+        type: string
+      token:
+        type: string
+    required:
+      - description
+      - descriptionTitle
+      - fields
+      - merchantKey
+      - reference
+      - returnTitle
+      - returnUrl
+      - token
+    type: object
+  EditCommunityMemberModel:
+    properties:
+      exportKey:
+        type: string
+    required:
+      - exportKey
+    type: object
+  EditWebhookModel:
+    properties:
+      eventTypes:
+        items:
+          type: string
+        type: array
+      target:
+        type: object
+    required:
+      - eventTypes
+      - target
+    type: object
+  ErrorResponse:
+    properties:
+      id:
+        type: string
+      message:
+        type: string
+      resultCode:
+        $ref: '#/definitions/ErrorResultCode'
+      validationFailures:
+        type: object
+    type: object
+  ErrorResultCode:
+    properties:
+      code:
+        type: integer
+      description:
+        type: string
+      key:
+        type: string
+    required:
+      - code
+      - description
+      - key
+    type: object
+  Example:
+    properties:
+      description:
+        type: string
+      request:
+        $ref: '#/definitions/ExampleRequest'
+      response:
+        $ref: '#/definitions/ExampleResponse'
+      title:
+        type: string
+    required:
+      - description
+      - request
+      - response
+      - title
+    type: object
+  ExampleParameter:
+    properties:
+      description:
+        type: string
+      key:
+        type: string
+      parameterType:
+        type: string
+      value:
+        type: string
+    required:
+      - key
+      - value
+    type: object
+  ExampleRequest:
+    properties:
+      headers:
+        items:
+          $ref: '#/definitions/ExampleParameter'
+        type: array
+      httpMethod:
+        type: string
+      parameters:
+        items:
+          $ref: '#/definitions/ExampleParameter'
+        type: array
+      requestBody:
+        type: string
+      url:
+        type: string
+    required:
+      - headers
+      - httpMethod
+      - parameters
+      - url
+    type: object
+  ExampleResponse:
+    properties:
+      headers:
+        items:
+          $ref: '#/definitions/ExampleParameter'
+        type: array
+      isErrorResponse:
+        type: boolean
+      responseBody:
+        type: string
+      status:
+        $ref: '#/definitions/ExampleResponseStatus'
+    required:
+      - headers
+      - isErrorResponse
+      - responseBody
+      - status
+    type: object
+  ExampleResponseStatus:
+    properties:
+      code:
+        type: integer
+      description:
+        type: string
+    required:
+      - code
+      - description
+    type: object
+  ExportKeyModification:
+    properties:
+      from:
+        type: string
+      to:
+        type: string
+    required:
+      - from
+      - to
+    type: object
+  FieldConfigModel:
+    properties:
+      key:
+        type: string
+      readOnly:
+        type: boolean
+      value: {}
+    required:
+      - key
+    type: object
+  FieldValue:
+    properties:
+      key:
+        type: string
+      label:
+        type: string
+      value: {}
+    required:
+      - key
+    type: object
+  GeoLocation:
+    properties:
+      latitude:
+        type: number
+      longitude:
+        type: number
+    required:
+      - latitude
+      - longitude
+    type: object
+  GrantTypes:
+    properties:
+      authorization_code:
+        $ref: '#/definitions/AuthorizationCodeGrantType'
+      implicit:
+        $ref: '#/definitions/ImplicitGrantType'
+    required:
+      - authorization_code
+    type: object
+  HealthCheckResponse:
+    properties:
+      losses:
+        items:
+          type: string
+        type: array
+      wins:
+        items:
+          type: string
+        type: array
+    required:
+      - losses
+      - wins
+    type: object
+  IdentityRepresentation:
+    properties:
+      _links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      claims:
+        items:
+          $ref: '#/definitions/ViewClaim'
+        type: array
+    required:
+      - _links
+      - claims
+    type: object
+  ImplicitGrantType:
+    properties:
+      loginEndpoint:
+        $ref: '#/definitions/LoginEndpoint'
+      tokenName:
+        type: string
+    required:
+      - loginEndpoint
+      - tokenName
+    type: object
+  Link:
+    properties:
+      href:
+        type: string
+      isTemplated:
+        type: boolean
+      rel:
+        type: string
+      title:
+        type: string
+    required:
+      - href
+      - isTemplated
+      - rel
+      - title
+    type: object
+  LoginEndpoint:
+    properties:
+      url:
+        type: object
+    required:
+      - url
+    type: object
+  LogoInfo:
+    properties:
+      href:
+        type: string
+      size:
+        type: integer
+    required:
+      - href
+      - size
+    type: object
+  MakePaymentModel:
+    properties:
+      account:
+        $ref: '#/definitions/AchModel'
+      amount:
+        $ref: '#/definitions/Money'
+      card:
+        $ref: '#/definitions/CardModel'
+      data: {}
+      fields:
+        items:
+          $ref: '#/definitions/FieldValue'
+        type: array
+      givenOn:
+        $ref: '#/definitions/NullableOfLocalDate'
+      iPAddress:
+        type: string
+      notes:
+        type: string
+      payer:
+        $ref: '#/definitions/VirtualTerminalPayer'
+      paymentMethodType:
+        enum:
+          - ACH
+          - Card
+          - Cash
+          - PreviousPaymentToken
+          - Unknown
+        type: string
+      previousPaymentToken:
+        type: string
+    required:
+      - iPAddress
+      - paymentMethodType
+    type: object
+  MakeRecurringPaymentModel:
+    properties:
+      account:
+        $ref: '#/definitions/AchModel'
+      amount:
+        $ref: '#/definitions/Money'
+      card:
+        $ref: '#/definitions/CardModel'
+      data: {}
+      fields:
+        items:
+          $ref: '#/definitions/FieldValue'
+        type: array
+      givenOn:
+        $ref: '#/definitions/NullableOfLocalDate'
+      iPAddress:
+        type: string
+      notes:
+        type: string
+      payer:
+        $ref: '#/definitions/VirtualTerminalPayer'
+      paymentMethodType:
+        enum:
+          - ACH
+          - Card
+          - Cash
+          - PreviousPaymentToken
+          - Unknown
+        type: string
+      previousPaymentToken:
+        type: string
+      schedule:
+        $ref: '#/definitions/MakeRecurringPaymentScheduleDetails'
+    required:
+      - iPAddress
+      - paymentMethodType
+      - schedule
+    type: object
+  MakeRecurringPaymentScheduleDetails:
+    properties:
+      endDate:
+        $ref: '#/definitions/NullableOfOffsetDateTime'
+      endOccurrences:
+        type: integer
+      endType:
+        enum:
+          - Date
+          - Never
+          - Occurrences
+        type: string
+      frequency:
+        enum:
+          - FirstAndFifteenth
+          - Fortnightly
+          - Monthly
+          - Unspecified
+          - Weekly
+        type: string
+      startDate:
+        $ref: '#/definitions/OffsetDateTime'
+    required:
+      - endType
+      - frequency
+      - startDate
+    type: object
+  MerchantDetails:
+    properties:
+      handle:
+        type: string
+      key:
+        type: string
+      name:
+        type: string
+      role:
+        type: string
+    required:
+      - role
+    type: object
+  MerchantFileRepresentation:
+    properties:
+      _links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      contentType:
+        type: string
+      fileName:
+        type: string
+      fileType:
+        enum:
+          - BankPaymentBatchSettlement
+          - Bill
+          - CreditCardBatchSettlement
+          - Invitation
+          - RegistrationStatus
+          - TransactionExport
+        type: string
+      key:
+        type: string
+      title:
+        type: string
+    required:
+      - _links
+      - contentType
+      - fileName
+      - fileType
+      - key
+      - title
+    type: object
+  MerchantListFilesFileRepresentation:
+    properties:
+      _links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      fileType:
+        enum:
+          - BankPaymentBatchSettlement
+          - Bill
+          - CreditCardBatchSettlement
+          - Invitation
+          - RegistrationStatus
+          - TransactionExport
+        type: string
+      key:
+        type: string
+      lastModifiedOn:
+        format: DateTime
+        type: string
+    required:
+      - _links
+      - fileType
+      - key
+      - lastModifiedOn
+    type: object
+  MerchantListFilesResultsRepresentation:
+    properties:
+      _links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      items:
+        items:
+          $ref: '#/definitions/MerchantListFilesFileRepresentation'
+        type: array
+      total:
+        type: integer
+    required:
+      - _links
+      - items
+    type: object
+  MerchantRepresentation:
+    properties:
+      _links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      address:
+        type: string
+      colors:
+        $ref: '#/definitions/Colors'
+      handle:
+        type: string
+      homeCountry:
+        enum:
+          - AU
+          - BE
+          - CA
+          - CH
+          - DE
+          - DK
+          - FI
+          - GB
+          - IS
+          - LV
+          - MX
+          - 'NO'
+          - NZ
+          - SE
+          - US
+        type: string
+      key:
+        type: string
+      location:
+        $ref: '#/definitions/GeoLocation'
+      logo:
+        type: object
+      name:
+        type: string
+      note:
+        type: string
+      paymentParameters:
+        $ref: '#/definitions/PaymentParameters'
+      referenceDefinitions:
+        items:
+          $ref: '#/definitions/ReferenceDefinition'
+        type: array
+      status:
+        enum:
+          - Active
+          - Closed
+          - Pending
+        type: string
+      version:
+        type: integer
+      visibility:
+        enum:
+          - Hidden
+          - Visible
+        type: string
+    required:
+      - _links
+      - colors
+      - homeCountry
+      - key
+      - location
+      - logo
+      - name
+      - paymentParameters
+      - referenceDefinitions
+      - status
+      - version
+      - visibility
+    type: object
+  MerchantSearchResultsRepresentation:
+    properties:
+      _links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      items:
+        items:
+          $ref: '#/definitions/MerchantRepresentation'
+        type: array
+      page:
+        type: integer
+      pageSize:
+        type: integer
+      total:
+        type: integer
+      totalPages:
+        type: integer
+    required:
+      - _links
+      - items
+      - page
+      - pageSize
+    type: object
+  Money:
+    properties:
+      amount:
+        type: string
+      currency:
+        enum:
+          - AUD
+          - CAD
+          - NZD
+          - Unspecified
+          - USD
+        type: string
+    required:
+      - amount
+      - currency
+    type: object
+  NullableOfInstant:
+    type: object
+  NullableOfLocalDate:
+    type: object
+  NullableOfOffsetDateTime:
+    type: object
+  OAuth2Authorization:
+    properties:
+      grantTypes:
+        $ref: '#/definitions/GrantTypes'
+      scopes:
+        items:
+          $ref: '#/definitions/OAuth2Scope'
+        type: array
+      type:
+        type: string
+    required:
+      - grantTypes
+      - scopes
+      - type
+    type: object
+  OAuth2Scope:
+    properties:
+      description:
+        type: string
+      scope:
+        type: string
+    required:
+      - scope
+    type: object
+  OffsetDateTime:
+    type: object
+  Operation:
+    properties:
+      authorizations:
+        $ref: '#/definitions/OperationAuthorizations'
+      consumes:
+        items:
+          type: string
+        type: array
+      enum:
+        items:
+          type: string
+        type: array
+      examples:
+        items:
+          $ref: '#/definitions/Example'
+        type: array
+      format:
+        type: string
+      items:
+        $ref: '#/definitions/DataType'
+      method:
+        type: string
+      nickname:
+        type: string
+      notes:
+        type: string
+      parameters:
+        items:
+          $ref: '#/definitions/Parameter'
+        type: array
+      produces:
+        items:
+          type: string
+        type: array
+      responseMessages:
+        items:
+          $ref: '#/definitions/ResponseMessage'
+        type: array
+      summary:
+        type: string
+      title:
+        type: string
+      type:
+        type: string
+    required:
+      - method
+      - nickname
+      - parameters
+      - responseMessages
+      - summary
+      - type
+    type: object
+  OperationAuthorizations:
+    properties:
+      oauth2:
+        items:
+          $ref: '#/definitions/OAuth2Scope'
+        type: array
+    type: object
+  PagedPayerRepresentation:
+    properties:
+      _links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      items:
+        items:
+          $ref: '#/definitions/PayerRepresentation'
+        type: array
+      page:
+        type: integer
+      pageSize:
+        type: integer
+      total:
+        type: integer
+      totalPages:
+        type: integer
+    required:
+      - _links
+      - items
+      - page
+      - pageSize
+    type: object
+  PagedRecurringPaymentsRepresentation:
+    properties:
+      _links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      items:
+        items:
+          $ref: '#/definitions/RecurringPaymentRepresentation'
+        type: array
+      page:
+        type: integer
+      pageSize:
+        type: integer
+      total:
+        type: integer
+      totalPages:
+        type: integer
+    required:
+      - _links
+      - items
+      - page
+      - pageSize
+    type: object
+  Parameter:
+    properties:
+      description:
+        type: string
+      enum:
+        items:
+          type: string
+        type: array
+      format:
+        type: string
+      items:
+        $ref: '#/definitions/DataType'
+      name:
+        type: string
+      paramType:
+        type: string
+      required:
+        type: boolean
+      suggestedTypeName:
+        type: string
+      type:
+        type: string
+    required:
+      - description
+      - enum
+      - format
+      - name
+      - paramType
+      - required
+      - type
+    type: object
+  PatchRecurringPaymentModel:
+    properties:
+      status:
+        type: integer
+    type: object
+  PayerRepresentation:
+    properties:
+      _links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      address:
+        $ref: '#/definitions/AddressDetails'
+      emailAddress:
+        type: string
+      emailAddressVerified:
+        type: boolean
+      exportKey:
+        type: string
+      firstName:
+        type: string
+      fullName:
+        type: string
+      key:
+        type: string
+      lastName:
+        type: string
+      mobileNumber:
+        type: string
+      mobileNumberVerified:
+        type: boolean
+      payerType:
+        enum:
+          - Guest
+          - Registered
+        type: string
+      role:
+        type: string
+      updatedOn:
+        format: DateTime
+        type: string
+    required:
+      - _links
+      - emailAddressVerified
+      - exportKey
+      - mobileNumberVerified
+      - payerType
+      - role
+    type: object
+  PaymentLimits:
+    properties:
+      max:
+        type: number
+      min:
+        type: number
+    type: object
+  PaymentMethodListRepresentation:
+    properties:
+      _links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      items:
+        items:
+          $ref: '#/definitions/PaymentMethodRepresentation'
+        type: array
+    required:
+      - _links
+      - items
+    type: object
+  PaymentMethodRepresentation:
+    properties:
+      _links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      icon:
+        type: string
+      isPreferred:
+        type: boolean
+      key:
+        type: integer
+      nickname:
+        type: string
+      reference:
+        type: string
+      title:
+        type: string
+      type:
+        enum:
+          - ACH
+          - AchCheck
+          - Cash
+          - CreditCard
+          - DepositedCheck
+          - NzBankAccount
+        type: string
+    required:
+      - _links
+      - key
+      - nickname
+      - reference
+      - title
+      - type
+    type: object
+  PaymentParameters:
+    properties:
+      currency:
+        type: string
+      limits:
+        $ref: '#/definitions/PaymentLimits'
+      mustBePaidInSafari:
+        type: boolean
+      payButtonLabel:
+        type: string
+      paymentPlaceholder:
+        type: string
+      safariPaymentUrl:
+        type: string
+    required:
+      - currency
+      - limits
+      - mustBePaidInSafari
+      - payButtonLabel
+      - paymentPlaceholder
+      - safariPaymentUrl
+    type: object
+  PaymentRefundDetails:
+    properties:
+      paymentToken:
+        type: string
+      transactionId:
+        type: string
+    type: object
+  PaymentRepresentation:
+    properties:
+      _links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      account:
+        $ref: '#/definitions/AccountPaymentMethod'
+      amount:
+        $ref: '#/definitions/Money'
+      anticipatedPaymentToken:
+        type: string
+      card:
+        $ref: '#/definitions/CardPaymentMethod'
+      createdOn:
+        format: DateTime
+        type: string
+      data: {}
+      error:
+        $ref: '#/definitions/ErrorResponse'
+      fields:
+        items:
+          $ref: '#/definitions/FieldValue'
+        type: array
+      givenOn:
+        $ref: '#/definitions/NullableOfLocalDate'
+      ipAddress:
+        type: string
+      notes:
+        type: string
+      payer:
+        $ref: '#/definitions/PayerRepresentation'
+      paymentMethodType:
+        enum:
+          - ACH
+          - AchCheck
+          - Cash
+          - CreditCard
+          - DepositedCheck
+          - NzBankAccount
+        type: string
+      paymentToken:
+        type: string
+      recipient:
+        $ref: '#/definitions/MerchantDetails'
+      recurringPaymentToken:
+        type: string
+      refundFor:
+        $ref: '#/definitions/PaymentRefundDetails'
+      refundedBy:
+        $ref: '#/definitions/PaymentRefundDetails'
+      settlement:
+        $ref: '#/definitions/SettlementDetails'
+      source:
+        enum:
+          - Fastpay
+          - GuestAnticipatedPayment
+          - HostedPaymentsPage
+          - Kiosk
+          - LoggedInWeb
+          - MobileApp
+          - ScheduledPayment
+          - VirtualTerminal
+        type: string
+      status:
+        enum:
+          - Deleted
+          - Error
+          - Expired
+          - Failed
+          - New
+          - Processing
+          - Success
+        type: string
+      transactionId:
+        type: string
+      updatedOn:
+        format: DateTime
+        type: string
+    required:
+      - _links
+      - createdOn
+      - fields
+      - paymentMethodType
+      - source
+      - status
+      - updatedOn
+    type: object
+  PaymentScheduleDetails:
+    properties:
+      endDate:
+        $ref: '#/definitions/NullableOfOffsetDateTime'
+      endOccurrences:
+        type: integer
+      endType:
+        enum:
+          - Date
+          - Never
+          - Occurrences
+        type: string
+      frequency:
+        enum:
+          - FirstAndFifteenth
+          - FiveMinutes
+          - Fortnightly
+          - FourHours
+          - Monthly
+          - OneMinute
+          - Other
+          - Weekly
+        type: string
+      nextPaymentDate:
+        $ref: '#/definitions/NullableOfInstant'
+      remainingOccurrences:
+        type: integer
+      startDate:
+        $ref: '#/definitions/NullableOfOffsetDateTime'
+    required:
+      - endType
+      - frequency
+    type: object
+  PaymentsRepresentation:
+    properties:
+      _links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      items:
+        items:
+          $ref: '#/definitions/PaymentRepresentation'
+        type: array
+      page:
+        type: integer
+      pageSize:
+        type: integer
+      total:
+        type: integer
+      totalPages:
+        type: integer
+    required:
+      - _links
+      - items
+      - page
+      - pageSize
+    type: object
+  RecurringPaymentRepresentation:
+    properties:
+      _links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      account:
+        $ref: '#/definitions/AccountPaymentMethod'
+      amount:
+        $ref: '#/definitions/Money'
+      card:
+        $ref: '#/definitions/CardPaymentMethod'
+      createdOn:
+        format: DateTime
+        type: string
+      data: {}
+      fields:
+        items:
+          $ref: '#/definitions/FieldValue'
+        type: array
+      givenOn:
+        $ref: '#/definitions/NullableOfLocalDate'
+      ipAddress:
+        type: string
+      notes:
+        type: string
+      payer:
+        $ref: '#/definitions/PayerRepresentation'
+      paymentMethodType:
+        enum:
+          - ACH
+          - AchCheck
+          - Cash
+          - CreditCard
+          - DepositedCheck
+          - NzBankAccount
+        type: string
+      paymentToken:
+        type: string
+      recipient:
+        $ref: '#/definitions/MerchantDetails'
+      schedule:
+        $ref: '#/definitions/PaymentScheduleDetails'
+      source:
+        enum:
+          - Fastpay
+          - GuestAnticipatedPayment
+          - HostedPaymentsPage
+          - Kiosk
+          - LoggedInWeb
+          - MobileApp
+          - ScheduledPayment
+          - VirtualTerminal
+        type: string
+      status:
+        enum:
+          - Active
+          - Cancelled
+          - Completed
+          - Paused
+          - Pending
+        type: string
+      updatedOn:
+        format: DateTime
+        type: string
+    required:
+      - _links
+      - createdOn
+      - fields
+      - paymentMethodType
+      - schedule
+      - source
+      - status
+      - updatedOn
+    type: object
+  ReferenceDefinition:
+    properties:
+      choices:
+        items:
+          $ref: '#/definitions/ReferenceDefinitionChoice'
+        type: array
+      defaultValue:
+        type: string
+      defaultValueType:
+        type: string
+      hasChoices:
+        type: boolean
+      id:
+        type: integer
+      isRequired:
+        type: boolean
+      label:
+        type: string
+      maxLength:
+        type: integer
+      minLength:
+        type: integer
+      order:
+        type: integer
+      placeholder:
+        type: string
+      validationMessage:
+        type: string
+      validationRegex:
+        type: string
+      validationSchema:
+        type: string
+      valueType:
+        type: string
+    required:
+      - hasChoices
+      - id
+      - order
+      - valueType
+    type: object
+  ReferenceDefinitionChoice:
+    properties:
+      isDefault:
+        type: boolean
+      label:
+        type: string
+      order:
+        type: integer
+      value:
+        type: string
+    required:
+      - isDefault
+      - label
+      - order
+      - value
+    type: object
+  Resource:
+    properties:
+      description:
+        type: string
+      path:
+        type: string
+    required:
+      - description
+      - path
+    type: object
+  ResourceListing:
+    properties:
+      apiVersion:
+        type: string
+      apis:
+        items:
+          $ref: '#/definitions/Resource'
+        type: array
+      authorizations:
+        $ref: '#/definitions/Authorizations'
+      swaggerVersion:
+        type: string
+    required:
+      - apis
+      - apiVersion
+      - authorizations
+      - swaggerVersion
+    type: object
+  ResponseMessage:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    required:
+      - code
+      - message
+    type: object
+  RunTheRedDlr:
+    properties:
+      deliveryReason:
+        type: string
+      deliveryStatus:
+        type: string
+      fromNumber:
+        type: string
+      message:
+        type: string
+      messageId:
+        type: string
+      toNumber:
+        type: string
+    required:
+      - deliveryReason
+      - deliveryStatus
+      - fromNumber
+      - message
+      - messageId
+      - toNumber
+    type: object
+  SetOperation:
+    properties:
+      exportKey:
+        type: string
+      key:
+        type: string
+    required:
+      - exportKey
+      - key
+    type: object
+  SettlementDetails:
+    properties:
+      estimatedDepositDate:
+        type: object
+      key:
+        type: string
+      name:
+        type: string
+    required:
+      - estimatedDepositDate
+      - key
+      - name
+    type: object
+  SettlementRepresentation:
+    properties:
+      _links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      estimatedDepositDate:
+        type: object
+      isReconciled:
+        type: boolean
+      key:
+        type: string
+      name:
+        type: string
+      totalAmount:
+        $ref: '#/definitions/Money'
+      totalPayments:
+        type: integer
+      type:
+        enum:
+          - ACH
+          - CreditCard
+        type: string
+    required:
+      - _links
+      - estimatedDepositDate
+      - isReconciled
+      - key
+      - name
+      - totalAmount
+      - totalPayments
+      - type
+    type: object
+  SettlementsRepresentation:
+    properties:
+      _links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      items:
+        items:
+          $ref: '#/definitions/SettlementRepresentation'
+        type: array
+      page:
+        type: integer
+      pageSize:
+        type: integer
+      total:
+        type: integer
+      totalPages:
+        type: integer
+    required:
+      - _links
+      - items
+      - page
+      - pageSize
+    type: object
+  TokenEndpoint:
+    properties:
+      tokenName:
+        type: string
+      url:
+        type: object
+    required:
+      - tokenName
+      - url
+    type: object
+  TokenRequestEndpoint:
+    properties:
+      clientIdName:
+        type: string
+      clientSecretName:
+        type: string
+      url:
+        type: object
+    required:
+      - url
+    type: object
+  UpdateOperation:
+    properties:
+      exportKey:
+        $ref: '#/definitions/ExportKeyModification'
+    required:
+      - exportKey
+    type: object
+  ViewClaim:
+    properties:
+      type:
+        type: string
+      value:
+        type: string
+    required:
+      - type
+      - value
+    type: object
+  VirtualTerminalPayer:
+    properties:
+      address:
+        $ref: '#/definitions/AddressDetails'
+      emailAddress:
+        type: string
+      exportKey:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      mobileNumber:
+        type: string
+    type: object
+  WebhookListRepresentation:
+    properties:
+      _links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      items:
+        items:
+          $ref: '#/definitions/WebhookRepresentation'
+        type: array
+    required:
+      - _links
+      - items
+    type: object
+  WebhookRepresentation:
+    properties:
+      _links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      eventTypes:
+        items:
+          type: string
+        type: array
+      target:
+        type: object
+    required:
+      - _links
+      - eventTypes
+      - target
+    type: object

@@ -1,0 +1,20 @@
+paths:
+  '/media/math/check/{type}':
+    post:
+      security:
+        - - header_match:
+              - header: x-client-ip
+                patterns:
+                  - internal
+        - 0
+        - 0
+securityDefinitions:
+  header_match:
+    - description: Checks client ip against one of the predefined whitelists
+      x-error-message: This client is not allowed to use the endpoint
+      x-is-api: true
+      x-whitelists:
+        internal:
+          - "/^(?:::ffff:)?(?:10|127)\\./"
+    - 0
+    - 0

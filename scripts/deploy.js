@@ -20,8 +20,6 @@ var specRootUrl = 'https://apis-guru.github.io/api-models/';
 
 process.on("unhandledRejection", function(reason, promise) {
   process.exitCode = 255;
-  //TODO: better solution
-  setTimeout(function () { throw reason; });
 });
 
 cacheResources()

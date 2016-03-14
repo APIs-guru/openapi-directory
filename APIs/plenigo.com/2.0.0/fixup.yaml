@@ -1,6 +1,12 @@
 definitions:
   OAuthError:
     - {}
+  TransactionItem:
+    properties:
+      billingId:
+        type:
+          - int
+          - integer
 paths:
   '/access/app/token/{customerId}':
     post:
@@ -53,7 +59,7 @@ paths:
         - jwtSignature: {}
         - 0
         - 0
-  /categories/search:
+  /categories:
     get:
       authorizations:
         - jwtSignature: {}
@@ -119,7 +125,7 @@ paths:
         - jwtSignature: {}
         - 0
         - 0
-  /products/search:
+  /products:
     get:
       authorizations:
         - jwtSignature: {}
