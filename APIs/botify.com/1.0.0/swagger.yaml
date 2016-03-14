@@ -131,7 +131,7 @@ paths:
         '200':
           description: Successful operation
           schema:
-            $ref: '#/definitions/Default'
+            $ref: '#/definitions/CrawlStatistics'
         default:
           description: error payload
           schema:
@@ -1375,6 +1375,70 @@ definitions:
         readOnly: false
     required:
       - user
+    type: object
+  CrawlStatistics:
+    properties:
+      depth_current:
+        description: ''
+        format: int64
+        readOnly: false
+        type: integer
+      last_upd_dt:
+        description: ''
+        format: date-time
+        readOnly: false
+        type: string
+      pages_dones:
+        description: ''
+        format: int64
+        readOnly: false
+        type: integer
+      pages_dones_2xx:
+        description: ''
+        format: int64
+        readOnly: false
+        type: integer
+      pages_dones_3xx:
+        description: ''
+        format: int64
+        readOnly: false
+        type: integer
+      pages_dones_4xx:
+        description: ''
+        format: int64
+        readOnly: false
+        type: integer
+      pages_dones_5xx:
+        description: ''
+        format: int64
+        readOnly: false
+        type: integer
+      pages_dones_networkerror:
+        description: ''
+        format: int64
+        readOnly: false
+        type: integer
+      pages_dones_xxx:
+        description: ''
+        format: int64
+        readOnly: false
+        type: integer
+      pages_known:
+        description: ''
+        format: int64
+        readOnly: false
+        type: integer
+    required:
+      - depth_current
+      - pages_dones_networkerror
+      - pages_dones_3xx
+      - pages_dones
+      - pages_dones_2xx
+      - last_upd_dt
+      - pages_dones_5xx
+      - pages_dones_xxx
+      - pages_dones_4xx
+      - pages_known
     type: object
   CsvExportStatus:
     properties:

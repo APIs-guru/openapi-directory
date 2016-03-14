@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: The Google App Engine Admin API enables developers to provision and manage their App Engine applications.
+  description: Provisions and manages App Engine applications.
   title: Google App Engine Admin
   version: v1beta5
   x-apiClientRegistration:
@@ -560,7 +560,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Version'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -621,13 +621,13 @@ definitions:
         description: A Google Cloud Storage bucket which can be used by the application to store content. @OutputOnly
         type: string
       defaultCookieExpiration:
-        description: Determines the cookie expiration policy for the application.
+        description: Determines the cookie expiration policy for the application. @OutputOnly
         type: string
       defaultHostname:
         description: 'The hostname used to reach the application, as resolved by App Engine. @OutputOnly'
         type: string
       dispatchRules:
-        description: HTTP path dispatch rules for requests to the app that do not explicitly target a service or version. The rules are order-dependent.
+        description: HTTP path dispatch rules for requests to the app that do not explicitly target a service or version. The rules are order-dependent. @OutputOnly
         items:
           $ref: '#/definitions/UrlDispatchRule'
         type: array
@@ -635,7 +635,7 @@ definitions:
         description: 'The relative name/path of the application. Example: "myapp".'
         type: string
       location:
-        description: "The location from which the application will be run. Choices are \"us\" for United States and \"eu\" for European Union. Application instances will run out of data centers in the chosen location and all of the application's End User Content will be stored at rest in the chosen location. The default is \"us\"."
+        description: "The location from which the application will be run. Application instances will run out of data centers in the chosen location and all of the application's End User Content will be stored at rest. The default is \"us-central\". Choices are: \"us-central\" - Central US \"europe-west\" - Western Europe \"us-east1\" - Eastern US"
         type: string
       name:
         description: 'The full path to the application in the API. Example: "apps/myapp". @OutputOnly'
@@ -916,7 +916,7 @@ definitions:
         description: 'Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.'
         type: object
       name:
-        description: 'The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping above, the `name` should have the format of `operations/some/unique/name`.'
+        description: 'The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should have the format of `operations/some/unique/name`.'
         type: string
       response:
         additionalProperties:

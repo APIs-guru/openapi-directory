@@ -1040,6 +1040,10 @@ definitions:
       allowsAlcohol:
         description: Whether the publisher for this deal is eligible for alcohol ads.
         type: boolean
+      buyerAccountId:
+        description: The account id that this deal was negotiated for. It is either the buyer or the client that this deal was negotiated on behalf of.
+        format: int64
+        type: string
       currencyCode:
         description: The currency code that applies to the fixed_cpm value. If not set then assumed to be USD.
         type: string
