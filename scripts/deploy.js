@@ -172,7 +172,7 @@ function generateAPI(apiList) {
         versionObj.externalDocs = swagger.externalDocs;
     });
     //FIXME: here we don't track deleted version, not a problem for right now :)
-    list[id].added = _(list[id].versions).values().pluck('added').min();
+    list[id].added = _(list[id].versions).values().map('added').min();
   });
 
   console.log('Generated list for ' + _.size(list) + ' API specs.');

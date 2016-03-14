@@ -223,7 +223,7 @@ function updateGoogle() {
              //no paths
              'iam:v1alpha1'
            ].indexOf(api.id) === -1);
-    }).indexBy('discoveryRestUrl').mapValues('preferred').value();
+    }).keyBy('discoveryRestUrl').mapValues('preferred').value();
 
     _.each(googleSpecs, function (preferred, url) {
       assert(typeof preferred === 'boolean');
@@ -252,7 +252,7 @@ function updateGoogle() {
     _(knownSpecs).keys().difference(_.keys(googleSpecs)).each(function (url) {
       var swagger = knownSpecs[url];
       console.log('!!! Delete ' + util.getSwaggerPath(swagger, ''));
-    }).value();
+    });
   });
 }
 
@@ -332,7 +332,7 @@ function expandPathTemplates(swagger) {
     function applyParameter(pathItem, name, callback) {
       function applyParameterArray(paramArray, callback) {
         var newParamArray = [];
-        _.any(paramArray, function (param, index) {
+        _.some(paramArray, function (param, index) {
           if (param.name !== name) {
             newParamArray.push(param);
             return;
@@ -352,7 +352,7 @@ function expandPathTemplates(swagger) {
       pathItem.parameters = applyParameterArray(pathItem.parameters, callback)
       _(pathItem).pick(SwaggerMethods).each(function (value) {
         value.parameters = applyParameterArray(value.parameters, callback);
-      }).value();
+      });
     }
 
     var pathItem = paths[path];
