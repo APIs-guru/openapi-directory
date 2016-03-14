@@ -164,8 +164,8 @@ function generateAPI(apiList) {
         swaggerUrl: specRootUrl + swaggerJsonPath,
         swaggerYamlUrl: specRootUrl + util.getSwaggerPath(swagger),
         info: swagger.info,
-        added: gitLogDate('--follow --diff-filter=A -1', filename),
-        updated: gitLogDate('-1', filename)
+        added: gitLogDate('--follow --diff-filter=A', filename).pop(),
+        updated: gitLogDate('-1', filename)[0]
       };
 
       if (swagger.externalDocs)
@@ -235,9 +235,12 @@ function generateBanner(specs, apiList) {
 
 function gitLogDate(options, filename) {
   var result = exec('git -C .. log --format=%aD ' + options + ' -- \'APIs/' + filename + '\'');
-  result = result.toString();
+  result = _.trim(result.toString(), '\n');
   assert(result && result !== '');
-  return new Date(result);
+  result = result.split('\n');
+  return result.map(function (str) {
+    return new Date(str);
+  });
 }
 
 function saveShield(subject, status, color) {
