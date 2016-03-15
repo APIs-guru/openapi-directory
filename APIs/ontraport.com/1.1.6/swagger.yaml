@@ -295,7 +295,7 @@ tags:
     name: objects
   - description: Fetch form content
     name: forms
-  - description: 'Fetch E-mail, SMS, or other Message content'
+  - description: 'Create, update, or fetch E-mail, SMS, or other Message content'
     name: messages
   - description: Cancel and Complete Tasks
     name: tasks
@@ -348,7 +348,7 @@ paths:
         - landingPage
   /message:
     get:
-      description: ''
+      description: Fetch data from an existing Message
       operationId: getMessage
       parameters:
         - $ref: '#/parameters/idParam'
@@ -363,7 +363,219 @@ paths:
             type: object
         '404':
           description: Message not found
-      summary: Get an existing Message object
+      summary: Get an existing Message
+      tags:
+        - messages
+    post:
+      description: ''
+      operationId: saveMessage
+      parameters:
+        - description: Object Type ID
+          enum:
+            - 7
+          format: int32
+          in: formData
+          name: objectID
+          type: integer
+        - description: Message alias
+          in: formData
+          name: alias
+          type: string
+        - description: Name of your message
+          in: formData
+          name: name
+          type: string
+        - description: Subject to be sent with the Message.
+          in: formData
+          name: subject
+          type: string
+        - description: "Message type: 'Template' for ONTRAmail, 'e-mail' for Legacy E-mail, 'sms' for SMS Messages, 'Task' for Task Messages"
+          enum:
+            - Template
+            - e-mail
+            - sms
+            - Task
+          in: formData
+          name: type
+          type: string
+        - description: Object type to associate with this Message; most likely zero (0) for Contacts -- only change this if you are using Custom Objects.
+          format: int32
+          in: formData
+          name: object_type_id
+          type: integer
+        - description: 'Who will this Message come from? If not <b>owner</b> or <b>custom</b>, this field can contain the staff user ID to send the message from.'
+          enum:
+            - owner
+            - custom
+            - '<staff user ID>'
+          in: formData
+          name: from
+          type: string
+        - default: owner
+          description: 'Name to be used in the Message From field when <b>from</b> field is <b>custom</b>.'
+          in: formData
+          name: send_out_name
+          type: string
+        - default: Contact owner email
+          description: The email address to use as the reply-to in the Message.
+          in: formData
+          name: reply_to_email
+          type: string
+        - description: 'The plain text version of your Message (for Email messages). For SMS Messages, this is the content that will be sent.'
+          in: formData
+          name: plaintext
+          type: string
+        - description: 'Custom Send-from email address. Leave this empty to use your default email address. Otherwise, this must be a validated send-from email address.'
+          in: formData
+          name: send_from
+          type: string
+        - default: email
+          description: 'Only used with SMS Messages or Custom Objects. What field to use to send this Message when there may be a parent or child relationship to the Object type given in object_type_id. Default for SMS Message is <b>sms_number</b>'
+          in: formData
+          name: send_to
+          type: string
+        - description: For Legacy E-mail Messages only; this is the HTML content of the message.
+          in: formData
+          name: message_body
+          type: string
+        - description: 'For ONTRAmail Messages only; this is the content of the message. This can be extremely complex; your best bet is to inspect the resource that is sent when saving a Message from your browser and go from there. For SMS Messages, use plaintext field for content.'
+          in: formData
+          name: resource
+          type: string
+        - description: Short title that will appear as the first line in email clients.
+          in: formData
+          name: email_title
+          type: string
+        - description: Only for Task Messages; this is the content of the message.
+          in: formData
+          name: task_data
+          type: string
+        - description: Only for Task Messages; this is the number of days after assignment this Task is due.
+          format: int32
+          in: formData
+          name: due_date
+          type: integer
+        - description: Only for Task Messages; this is the Staff user ID of the Task owner.
+          format: int32
+          in: formData
+          name: task_owner
+          type: integer
+        - description: Only for Task Messages; this is the optional Form ID to be filled when the Task is completed. This form must already exist.
+          format: int32
+          in: formData
+          name: task_form
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Message successfully created
+          schema:
+            $ref: '#/definitions/Response'
+            type: object
+      summary: Create a new Message
+      tags:
+        - messages
+    put:
+      description: ''
+      operationId: updateMessage
+      parameters:
+        - description: ID of the Message to be updated
+          format: int32
+          in: formData
+          name: id
+          required: true
+          type: integer
+        - description: Object Type ID
+          enum:
+            - 7
+          format: int32
+          in: formData
+          name: objectID
+          type: integer
+        - description: Message alias
+          in: formData
+          name: alias
+          type: string
+        - description: Name of your message
+          in: formData
+          name: name
+          type: string
+        - description: Subject to be sent with the Message.
+          in: formData
+          name: subject
+          type: string
+        - description: 'Who will this Message come from? If not <b>owner</b> or <b>custom</b>, this field can contain the staff user ID to send the message from.'
+          enum:
+            - owner
+            - custom
+            - '<staff user ID>'
+          in: formData
+          name: from
+          type: string
+        - default: owner
+          description: 'Name to be used in the Message From field when <b>from</b> field is <b>custom</b>.'
+          in: formData
+          name: send_out_name
+          type: string
+        - default: Contact owner email
+          description: The email address to use as the reply-to in the Message.
+          in: formData
+          name: reply_to_email
+          type: string
+        - description: 'The plain text version of your Message (for Email messages). For SMS Messages, this is the content that will be sent.'
+          in: formData
+          name: plaintext
+          type: string
+        - description: 'Custom Send-from email address. Leave this empty to use your default email address. Otherwise, this must be a validated send-from email address.'
+          in: formData
+          name: send_from
+          type: string
+        - default: email
+          description: 'Only used with SMS Messages or Custom Objects. What field to use to send this Message when there may be a parent or child relationship to the Object type given in object_type_id. Default for SMS Message is <b>sms_number</b>'
+          in: formData
+          name: send_to
+          type: string
+        - description: For Legacy E-mail Messages only; this is the HTML content of the message.
+          in: formData
+          name: message_body
+          type: string
+        - description: 'For ONTRAmail Messages only; this is the content of the message. This can be extremely complex; your best bet is to inspect the resource that is sent when saving a Message from your browser and go from there. For SMS Messages, use plaintext field for content.'
+          in: formData
+          name: resource
+          type: string
+        - description: Short title that will appear as the first line in email clients.
+          in: formData
+          name: email_title
+          type: string
+        - description: Only for Task Messages; this is the content of the message.
+          in: formData
+          name: task_data
+          type: string
+        - description: Only for Task Messages; this is the number of days after assignment this Task is due.
+          format: int32
+          in: formData
+          name: due_date
+          type: integer
+        - description: Only for Task Messages; this is the Staff user ID of the Task owner.
+          format: int32
+          in: formData
+          name: task_owner
+          type: integer
+        - description: Only for Task Messages; this is the optional Form ID to be filled when the Task is completed. This form must already exist.
+          format: int32
+          in: formData
+          name: task_form
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Message successfully updated
+          schema:
+            $ref: '#/definitions/Response'
+            type: object
+      summary: Update an existing Message
       tags:
         - messages
   /object:
