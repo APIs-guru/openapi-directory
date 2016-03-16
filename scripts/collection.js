@@ -291,6 +291,7 @@ function writeSpec(source, type, exPatch, callback) {
 
       expandPathTemplates(swagger);
       replaceSpacesInSchemaNames(swagger);
+      extractApiKeysFromParameters(swagger);
 
       result.swagger = swagger;
 
@@ -326,6 +327,63 @@ function writeSpec(source, type, exPatch, callback) {
 
 //TODO: move into separate lib
 var SwaggerMethods = require('swagger-methods');
+function extractApiKeysFromParameters(swagger) {
+  if (swagger.securityDefinitions || swagger.security)
+    return;
+
+  var globalArgs = null;
+  _.each(swagger.paths, function (path) {
+    var intersection = _.spread(_.partialRight(_.intersectionWith, _.isEqual));
+    var pathArgs = _(path).pick(SwaggerMethods).map('parameters').value();
+    pathArgs = intersection(pathArgs);
+
+    if (_.isNull(globalArgs)) {
+      globalArgs = pathArgs;
+      return;
+    }
+    globalArgs = intersection([globalArgs, pathArgs]);
+  });
+
+  var apiKey = _.filter(globalArgs, function (arg) {
+    return _.some(
+      [
+        /^user[-_]?key$/i,
+        /^api[-_]?key$/i,
+        /^access[-_]?key$/i
+      ],
+      function (regExp) {
+        return regExp.test(arg.name);
+      }
+    );
+  });
+
+  if (_.size(apiKey) !== 1)
+    return;
+  apiKey = apiKey[0];
+
+  if (['header', 'query'].indexOf(apiKey.in) === -1)
+    return;
+
+  var name = apiKey.name;
+
+  swagger.securityDefinitions = {};
+  swagger.securityDefinitions[name] = {
+    type: 'apiKey',
+    name: name,
+    in: apiKey.in,
+    description: apiKey.description
+  };
+
+  swagger.security = [{}];
+  swagger.security[0][name] = [];
+
+  _.each(swagger.paths, function (path) {
+    _(path).pick(SwaggerMethods).map('parameters').each(function (parameters) {
+      _.remove(parameters, _.partial(_.isEqual, apiKey));
+    });
+  });
+}
+
 function expandPathTemplates(swagger) {
   var paths = swagger.paths;
   _.each(_.keys(paths), function (path) {
