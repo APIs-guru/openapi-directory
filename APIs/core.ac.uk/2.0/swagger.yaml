@@ -14,6 +14,14 @@ info:
     url: 'http://core.ac.uk/api-v2/doc'
     version: '1.2'
   x-providerName: core.ac.uk
+securityDefinitions:
+  apiKey:
+    description: Your Api Key. Also accepts apiKey as a header
+    in: query
+    name: apiKey
+    type: apiKey
+security:
+  - apiKey: []
 tags:
   - description: Global operations
     name: all
@@ -84,11 +92,6 @@ paths:
           name: faithfulMetadata
           required: false
           type: boolean
-        - description: Your Api Key. Also accepts apiKey as a header
-          in: query
-          name: apiKey
-          required: true
-          type: string
       produces:
         - application/json
       responses:
@@ -167,11 +170,6 @@ paths:
           name: faithfulMetadata
           required: false
           type: boolean
-        - description: Your Api Key. Also accepts apiKey as a header
-          in: query
-          name: apiKey
-          required: true
-          type: string
       produces:
         - application/json
       responses:
@@ -195,11 +193,6 @@ paths:
         - description: ID of article history that needs to be fetched
           in: path
           name: coreId
-          required: true
-          type: string
-        - description: Your Api Key. Also accepts apiKey as a header
-          in: query
-          name: apiKey
           required: true
           type: string
       produces:
@@ -243,11 +236,6 @@ paths:
           name: pageSize
           required: false
           type: integer
-        - description: Your Api Key. Also accepts apiKey as a header
-          in: query
-          name: apiKey
-          required: true
-          type: string
       produces:
         - application/json
       responses:
@@ -324,11 +312,6 @@ paths:
           name: faithfulMetadata
           required: false
           type: boolean
-        - description: Your Api Key. Also accepts apiKey as a header
-          in: query
-          name: apiKey
-          required: true
-          type: string
       produces:
         - application/json
       responses:
@@ -425,11 +408,6 @@ paths:
           name: faithfulMetadata
           required: false
           type: boolean
-        - description: Your Api Key. Also accepts apiKey as a header
-          in: query
-          name: apiKey
-          required: true
-          type: string
       produces:
         - application/json
       responses:
@@ -512,11 +490,6 @@ paths:
           name: faithfulMetadata
           required: false
           type: boolean
-        - description: Your Api Key. Also accepts apiKey as a header
-          in: query
-          name: apiKey
-          required: true
-          type: string
       produces:
         - application/json
       responses:
@@ -545,11 +518,6 @@ paths:
             items:
               type: string
             type: array
-        - description: Your Api Key. Also accepts apiKey as a header
-          in: query
-          name: apiKey
-          required: true
-          type: string
       produces:
         - application/json
       responses:
@@ -575,11 +543,6 @@ paths:
         - description: ISSN identifier of journal that needs to be fetched.
           in: path
           name: issn
-          required: true
-          type: string
-        - description: Your Api Key. Also accepts apiKey as a header
-          in: query
-          name: apiKey
           required: true
           type: string
       produces:
@@ -608,11 +571,6 @@ paths:
             items:
               $ref: '#/definitions/SearchRequest'
             type: array
-        - description: Your Api Key. Also accepts apiKey as a header
-          in: query
-          name: apiKey
-          required: true
-          type: string
       produces:
         - application/json
       responses:
@@ -658,11 +616,6 @@ paths:
           name: pageSize
           required: false
           type: integer
-        - description: Your Api Key. Also accepts apiKey as a header
-          in: query
-          name: apiKey
-          required: true
-          type: string
       produces:
         - application/json
       responses:
@@ -689,11 +642,6 @@ paths:
             items:
               type: integer
             type: array
-        - description: Your Api Key. Also accepts apiKey as a header
-          in: query
-          name: apiKey
-          required: true
-          type: string
       produces:
         - application/json
       responses:
@@ -723,11 +671,6 @@ paths:
           name: repositoryId
           required: true
           type: integer
-        - description: Your Api Key. Also accepts apiKey as a header
-          in: query
-          name: apiKey
-          required: true
-          type: string
       produces:
         - application/json
       responses:
@@ -756,11 +699,6 @@ paths:
             items:
               $ref: '#/definitions/SearchRequest'
             type: array
-        - description: Your Api Key. Also accepts apiKey as a header
-          in: query
-          name: apiKey
-          required: true
-          type: string
       produces:
         - application/json
       responses:
@@ -806,11 +744,6 @@ paths:
           name: pageSize
           required: false
           type: integer
-        - description: Your Api Key. Also accepts apiKey as a header
-          in: query
-          name: apiKey
-          required: true
-          type: string
       produces:
         - application/json
       responses:
@@ -839,11 +772,6 @@ paths:
             items:
               $ref: '#/definitions/SearchRequest'
             type: array
-        - description: Your Api Key. Also accepts apiKey as a header
-          in: query
-          name: apiKey
-          required: true
-          type: string
       produces:
         - application/json
       responses:
@@ -891,11 +819,6 @@ paths:
           name: pageSize
           required: false
           type: integer
-        - description: Your Api Key. Also accepts apiKey as a header
-          in: query
-          name: apiKey
-          required: true
-          type: string
       produces:
         - application/json
       responses:

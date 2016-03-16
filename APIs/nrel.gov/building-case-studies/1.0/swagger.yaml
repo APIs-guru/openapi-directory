@@ -16,6 +16,14 @@ info:
     version: '1.2'
   x-providerName: nrel.gov
   x-serviceName: building-case-studies
+securityDefinitions:
+  api_key:
+    description: API Key
+    in: query
+    name: api_key
+    type: apiKey
+security:
+  - api_key: []
 tags:
   - description: API endpoints related to buildings.
     name: project
@@ -31,12 +39,6 @@ paths:
             - xml
           in: path
           name: output_format
-          required: true
-          type: string
-        - default: DEMO_KEY
-          description: API Key
-          in: query
-          name: api_key
           required: true
           type: string
         - description: Search Text
@@ -89,12 +91,6 @@ paths:
             - xml
           in: path
           name: output_format
-          required: true
-          type: string
-        - default: DEMO_KEY
-          description: API Key
-          in: query
-          name: api_key
           required: true
           type: string
         - description: Project ID

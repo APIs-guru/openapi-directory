@@ -16,6 +16,14 @@ info:
     version: '1.2'
   x-providerName: nrel.gov
   x-serviceName: transportation-incentives-laws
+securityDefinitions:
+  api_key:
+    description: API Key
+    in: query
+    name: api_key
+    type: apiKey
+security:
+  - api_key: []
 tags:
   - description: Information about laws and incentives
     name: v1
@@ -31,12 +39,6 @@ paths:
             - csv
           in: path
           name: output_format
-          required: true
-          type: string
-        - default: DEMO_KEY
-          description: API Key
-          in: query
-          name: api_key
           required: true
           type: string
         - default: 10
@@ -112,12 +114,6 @@ paths:
           name: output_format
           required: true
           type: string
-        - default: DEMO_KEY
-          description: API Key
-          in: query
-          name: api_key
-          required: true
-          type: string
         - description: Search by the category type.
           enum:
             - tech
@@ -147,12 +143,6 @@ paths:
           name: output_format
           required: true
           type: string
-        - default: DEMO_KEY
-          description: API Key
-          in: query
-          name: api_key
-          required: true
-          type: string
         - description: "Return the points of contact for the given Jurisdiction. Jurisdiction must be given as a two character state code (eg, 'CO' for Colorado). A single jurisdiction, or a comma-separate list of multiple jurisdiction, may be given.  Use the code 'US' for federal laws and the code 'DC' for Washington D.C."
           in: query
           name: jurisdiction
@@ -176,12 +166,6 @@ paths:
             - xml
           in: path
           name: output_format
-          required: true
-          type: string
-        - default: DEMO_KEY
-          description: API Key
-          in: query
-          name: api_key
           required: true
           type: string
         - description: The id of the law that you are searching

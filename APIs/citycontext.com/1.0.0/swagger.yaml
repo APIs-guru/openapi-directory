@@ -12,6 +12,14 @@ info:
     url: 'https://www.citycontext.com/swagger/spec.json'
     version: '1.2'
   x-providerName: citycontext.com
+securityDefinitions:
+  user_key:
+    description: City context user key
+    in: query
+    name: user_key
+    type: apiKey
+security:
+  - user_key: []
 tags:
   - description: Core City Context API
     name: citycontext
@@ -32,12 +40,6 @@ paths:
           name: lon
           required: true
           type: number
-        - description: City context user key
-          in: query
-          name: user_key
-          required: true
-          type: string
-          x-data-threescale-name: user_keys
         - description: 'Search radius for schools, in metres, between 100 and 4000'
           in: query
           name: school_search_radius
@@ -67,12 +69,6 @@ paths:
           name: postcode
           required: true
           type: string
-        - description: City context user key
-          in: query
-          name: user_key
-          required: true
-          type: string
-          x-data-threescale-name: user_keys
         - description: 'Search radius for schools, in metres, between 100 and 4000'
           in: query
           name: school_search_radius
@@ -96,13 +92,7 @@ paths:
   /usage:
     get:
       operationId: usage
-      parameters:
-        - description: City context user key
-          in: query
-          name: user_key
-          required: true
-          type: string
-          x-data-threescale-name: user_keys
+      parameters: []
       produces:
         - application/json
       responses:

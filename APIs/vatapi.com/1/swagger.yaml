@@ -14,6 +14,14 @@ info:
     url: 'https://vatapi.com/api-docs.json'
     version: '1.2'
   x-providerName: vatapi.com
+securityDefinitions:
+  Apikey:
+    description: Enter your API key
+    in: header
+    name: Apikey
+    type: apiKey
+security:
+  - Apikey: []
 tags:
   - name: api
 paths:
@@ -21,11 +29,6 @@ paths:
     get:
       operationId: country_code_check
       parameters:
-        - description: Enter your API key
-          in: header
-          name: Apikey
-          required: true
-          type: string
         - description: The default response type is application/json if you would like to receive an XML response then set this to XML
           in: header
           name: Response-Type
@@ -47,11 +50,6 @@ paths:
     get:
       operationId: currency_conversion
       parameters:
-        - description: Enter your API key
-          in: header
-          name: Apikey
-          required: true
-          type: string
         - description: The default response type is application/json if you would like to receive an XML response then set this to XML
           in: header
           name: Response-Type
@@ -83,11 +81,6 @@ paths:
     post:
       operationId: create_invoice
       parameters:
-        - description: Enter your API key
-          in: header
-          name: Apikey
-          required: true
-          type: string
         - description: The default response type is application/json if you would like to receive an XML response then set this to XML
           in: header
           name: Response-Type
@@ -110,11 +103,6 @@ paths:
     delete:
       operationId: invoice_delete
       parameters:
-        - description: Enter your API key
-          in: header
-          name: Apikey
-          required: true
-          type: string
         - description: The default response type is application/json if you would like to receive an XML response then set this to XML
           in: header
           name: Response-Type
@@ -133,11 +121,6 @@ paths:
     get:
       operationId: get_invoice
       parameters:
-        - description: Enter your API key
-          in: header
-          name: Apikey
-          required: true
-          type: string
         - description: The default response type is application/json if you would like to receive an XML response then set this to XML
           in: header
           name: Response-Type
@@ -158,11 +141,6 @@ paths:
     put:
       operationId: invoice_update
       parameters:
-        - description: Enter your API key
-          in: header
-          name: Apikey
-          required: true
-          type: string
         - description: The default response type is application/json if you would like to receive an XML response then set this to XML
           in: header
           name: Response-Type
@@ -190,11 +168,6 @@ paths:
     get:
       operationId: ip_check
       parameters:
-        - description: Enter your API key
-          in: header
-          name: Apikey
-          required: true
-          type: string
         - description: The default response type is application/json if you would like to receive an XML response then set this to XML
           in: header
           name: Response-Type
@@ -217,11 +190,6 @@ paths:
       description: "<p>We highly recommend if you are able, to check a VAT number on your end first to save wasted API lookups. It maybe that your customer has simply entered the wrong format. <a href='http://www.braemoor.co.uk/software/vat.shtml' target='_blank'>Heres a client side way to check the format using Javascript</a></p>"
       operationId: vat_number_validate
       parameters:
-        - description: Enter your API key
-          in: header
-          name: Apikey
-          required: true
-          type: string
         - description: The default response type is application/json if you would like to receive an XML response then set this to XML
           in: header
           name: Response-Type
@@ -241,11 +209,6 @@ paths:
     get:
       operationId: convert_price
       parameters:
-        - description: Enter your API key
-          in: header
-          name: Apikey
-          required: true
-          type: string
         - description: The default response type is application/json if you would like to receive an XML response then set this to XML
           in: header
           name: Response-Type
@@ -282,11 +245,6 @@ paths:
     get:
       operationId: vat_rates
       parameters:
-        - description: Enter your API key
-          in: header
-          name: Apikey
-          required: true
-          type: string
         - description: The default response type is application/json if you would like to receive an XML response then set this to XML
           in: header
           name: Response-Type

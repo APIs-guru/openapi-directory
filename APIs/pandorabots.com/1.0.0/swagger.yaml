@@ -12,6 +12,14 @@ info:
     url: 'https://developer.pandorabots.com/swagger/spec.json'
     version: '1.2'
   x-providerName: pandorabots.com
+securityDefinitions:
+  user_key:
+    description: "Your application's user key."
+    in: query
+    name: user_key
+    type: apiKey
+security:
+  - user_key: []
 tags:
   - description: 'New API added "Anonymous Talk"'
     name: pandorabots_api_swagger_1_3
@@ -51,12 +59,6 @@ paths:
           name: recent
           required: false
           type: string
-        - description: "Your application's user key."
-          in: query
-          name: user_key
-          required: true
-          type: string
-          x-data-threescale-name: user_keys
       responses:
         '200':
           description: No response was specified
@@ -73,12 +75,6 @@ paths:
           name: app_id
           required: true
           type: string
-        - description: "Your application's user key."
-          in: query
-          name: user_key
-          required: true
-          type: string
-          x-data-threescale-name: user_keys
       responses:
         '200':
           description: No response was specified
@@ -100,12 +96,6 @@ paths:
           name: botname
           required: true
           type: string
-        - description: "Your application's user key."
-          in: query
-          name: user_key
-          required: true
-          type: string
-          x-data-threescale-name: user_keys
       responses:
         '200':
           description: No response was specified
@@ -130,12 +120,6 @@ paths:
           in: query
           name: return
           type: string
-        - description: "Your application's user key."
-          in: query
-          name: user_key
-          required: true
-          type: string
-          x-data-threescale-name: user_keys
       responses:
         '200':
           description: No response was specified
@@ -156,12 +140,6 @@ paths:
           name: botname
           required: true
           type: string
-        - description: "Your application's user key."
-          in: query
-          name: user_key
-          required: true
-          type: string
-          x-data-threescale-name: user_keys
       responses:
         '200':
           description: No response was specified
@@ -183,12 +161,6 @@ paths:
           name: botname
           required: true
           type: string
-        - description: "Your application's user key."
-          in: query
-          name: user_key
-          required: true
-          type: string
-          x-data-threescale-name: user_keys
       responses:
         '200':
           description: No response was specified
@@ -215,12 +187,6 @@ paths:
           name: file-kind
           required: true
           type: string
-        - description: "Your application's user key."
-          in: query
-          name: user_key
-          required: true
-          type: string
-          x-data-threescale-name: user_keys
       responses:
         '200':
           description: No response was specified
@@ -246,12 +212,6 @@ paths:
           name: file-kind
           required: true
           type: string
-        - description: "Your application's user key."
-          in: query
-          name: user_key
-          required: true
-          type: string
-          x-data-threescale-name: user_keys
       responses:
         '200':
           description: No response was specified
@@ -285,12 +245,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Your application's user key."
-          in: query
-          name: user_key
-          required: true
-          type: string
-          x-data-threescale-name: user_keys
       responses:
         '200':
           description: No response was specified
@@ -322,12 +276,6 @@ paths:
           name: filename
           required: true
           type: string
-        - description: "Your application's user key."
-          in: query
-          name: user_key
-          required: true
-          type: string
-          x-data-threescale-name: user_keys
       responses:
         '200':
           description: No response was specified
@@ -358,12 +306,6 @@ paths:
           name: filename
           required: true
           type: string
-        - description: "Your application's user key."
-          in: query
-          name: user_key
-          required: true
-          type: string
-          x-data-threescale-name: user_keys
       responses:
         '200':
           description: No response was specified
@@ -402,12 +344,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Your application's user key."
-          in: query
-          name: user_key
-          required: true
-          type: string
-          x-data-threescale-name: user_keys
       responses:
         '200':
           description: No response was specified
@@ -471,12 +407,6 @@ paths:
           in: query
           name: recent
           type: string
-        - description: "Your application's user key."
-          in: query
-          name: user_key
-          required: true
-          type: string
-          x-data-threescale-name: user_keys
       responses:
         '200':
           description: No response was specified

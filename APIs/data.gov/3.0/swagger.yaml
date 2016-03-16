@@ -16,6 +16,14 @@ info:
   x-providerName: data.gov
 externalDocs:
   url: 'http://regulationsgov.github.io/developers/'
+securityDefinitions:
+  api_key:
+    description: API Key
+    in: query
+    name: api_key
+    type: apiKey
+security:
+  - api_key: []
 tags:
   - description: Operations about Documents
     name: documents
@@ -33,12 +41,6 @@ paths:
             - xml
           in: path
           name: response_format
-          required: true
-          type: string
-        - default: DEMO_KEY
-          description: API Key
-          in: query
-          name: api_key
           required: true
           type: string
         - default: EPA-HQ-OAR-2011-0028
@@ -71,12 +73,6 @@ paths:
             - xml
           in: path
           name: response_format
-          required: true
-          type: string
-        - default: DEMO_KEY
-          description: API Key
-          in: query
-          name: api_key
           required: true
           type: string
         - default: EPA-HQ-OAR-2011-0028-0108
@@ -114,12 +110,6 @@ paths:
             - xml
           in: path
           name: response_format
-          required: true
-          type: string
-        - default: DEMO_KEY
-          description: API Key
-          in: query
-          name: api_key
           required: true
           type: string
         - description: 'Counts Only: <ul><li>1 (will return only the document count for a search query)</li><li>0 (will return documents as well)</li></ul>'

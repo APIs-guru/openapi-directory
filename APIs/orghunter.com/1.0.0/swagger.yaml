@@ -14,6 +14,14 @@ info:
     url: 'https://orghunter.3scale.net/swagger/spec.json'
     version: '1.2'
   x-providerName: orghunter.com
+securityDefinitions:
+  user_key:
+    description: Your API access key
+    in: query
+    name: user_key
+    type: apiKey
+security:
+  - user_key: []
 tags:
   - description: Charity NTEE Classification/Categories API Test
     name: categories
@@ -33,12 +41,7 @@ paths:
       consumes:
         - application/x-www-form-urlencoded
       description: '<p>This operation provides a list of categories.</p>'
-      parameters:
-        - description: Your API access key
-          in: query
-          name: user_key
-          type: string
-          x-data-threescale-name: user_key
+      parameters: []
       responses:
         '200':
           description: No response was specified
@@ -49,11 +52,6 @@ paths:
     post:
       description: '<p>This operation detail data.</p>'
       parameters:
-        - description: Your API access key
-          in: query
-          name: user_key
-          type: string
-          x-data-threescale-name: user_key
         - description: ein (Employer Identification Number)
           in: query
           name: ein
@@ -69,11 +67,6 @@ paths:
     post:
       description: '<p>This operation detail data.</p>'
       parameters:
-        - description: Your API access key
-          in: query
-          name: user_key
-          type: string
-          x-data-threescale-name: user_key
         - description: ein (Employer Identification Number)
           in: query
           name: ein
@@ -89,11 +82,6 @@ paths:
     post:
       description: '<p>This operation detail data.</p>'
       parameters:
-        - description: Your API access key
-          in: query
-          name: user_key
-          type: string
-          x-data-threescale-name: user_key
         - description: ein (Employer Identification Number)
           in: query
           name: ein
@@ -109,11 +97,6 @@ paths:
     post:
       description: '<p>This operation detail data.</p>'
       parameters:
-        - description: Your API access key
-          in: query
-          name: user_key
-          type: string
-          x-data-threescale-name: user_key
         - description: ein (Employer Identification Number)
           in: query
           name: ein
@@ -129,11 +112,6 @@ paths:
     post:
       description: '<p>This operation provides summary data.</p>'
       parameters:
-        - description: Your API access key
-          in: query
-          name: user_key
-          type: string
-          x-data-threescale-name: user_key
         - description: Employer Identification Number (EIN)
           in: query
           name: ein

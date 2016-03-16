@@ -14,6 +14,14 @@ info:
     url: 'https://developers.owler.com/swagger/spec.json'
     version: '1.2'
   x-providerName: owler.com
+securityDefinitions:
+  user_key:
+    description: API Access Key
+    in: header
+    name: user_key
+    type: apiKey
+security:
+  - user_key: []
 tags:
   - description: Provides Company information
     name: company
@@ -60,12 +68,6 @@ paths:
           name: format
           required: false
           type: string
-        - description: API Access Key
-          in: header
-          name: user_key
-          required: true
-          type: string
-          x-data-threescale-name: user_keys
       produces:
         - application/json
         - application/xml
@@ -104,12 +106,6 @@ paths:
           name: format
           required: false
           type: string
-        - description: API Access Key
-          in: header
-          name: user_key
-          required: true
-          type: string
-          x-data-threescale-name: user_keys
       produces:
         - application/json
         - application/xml
@@ -150,12 +146,6 @@ paths:
           name: format
           required: false
           type: string
-        - description: API Access Key
-          in: header
-          name: user_key
-          required: true
-          type: string
-          x-data-threescale-name: user_keys
       produces:
         - application/json
         - application/xml
@@ -196,12 +186,6 @@ paths:
           name: format
           required: false
           type: string
-        - description: API Access Key
-          in: header
-          name: user_key
-          required: true
-          type: string
-          x-data-threescale-name: user_keys
       produces:
         - application/json
         - application/xml
@@ -261,12 +245,6 @@ paths:
           name: format
           required: false
           type: string
-        - description: API Access Key
-          in: header
-          name: user_key
-          required: true
-          type: string
-          x-data-threescale-name: user_keys
       produces:
         - application/json
         - application/xml
@@ -305,12 +283,6 @@ paths:
           name: format
           required: false
           type: string
-        - description: API Access Key
-          in: header
-          name: user_key
-          required: true
-          type: string
-          x-data-threescale-name: user_keys
       produces:
         - application/json
         - application/xml
@@ -380,12 +352,6 @@ paths:
           name: category
           required: false
           type: array
-        - description: API Access Key
-          in: header
-          name: user_key
-          required: true
-          type: string
-          x-data-threescale-name: user_keys
       produces:
         - application/json
         - application/xml
