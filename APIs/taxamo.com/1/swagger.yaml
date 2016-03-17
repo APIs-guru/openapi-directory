@@ -25,7 +25,7 @@ tags:
   - description: Payments
     name: payments
   - description: Invoices
-    name: invoice
+    name: invoices
   - description: Transactions
     name: transactions
   - description: Tax
@@ -33,9 +33,9 @@ tags:
   - description: GeoIP
     name: geoip
   - description: Statistics
-    name: stats
+    name: statistics
   - description: Reporting
-    name: reports
+    name: reporting
   - description: Settlement
     name: settlement
   - description: Verification
@@ -194,7 +194,7 @@ paths:
           description: Incorrect token
       summary: Calculate domestic summary.
       tags:
-        - reports
+        - reporting
   /api/v1/reports/eu/vies:
     get:
       consumes:
@@ -254,7 +254,7 @@ paths:
           description: Incorrect token
       summary: Calculate EU VIES report.
       tags:
-        - reports
+        - reporting
   /api/v1/settlement/refunds:
     get:
       consumes:
@@ -434,7 +434,7 @@ paths:
           description: Incorrect token
       summary: Settlement by country
       tags:
-        - stats
+        - statistics
   /api/v1/stats/settlement/by_taxation_type:
     get:
       consumes:
@@ -464,7 +464,7 @@ paths:
           description: Incorrect token
       summary: Settlement by tax type
       tags:
-        - stats
+        - statistics
   /api/v1/stats/settlement/daily:
     get:
       consumes:
@@ -499,7 +499,7 @@ paths:
           description: Incorrect token
       summary: Settlement stats over time
       tags:
-        - stats
+        - statistics
   /api/v1/stats/transactions:
     get:
       consumes:
@@ -534,7 +534,7 @@ paths:
           description: Incorrect token
       summary: Transaction stats
       tags:
-        - stats
+        - statistics
   /api/v1/stats/transactions/by_country:
     get:
       consumes:
@@ -569,7 +569,7 @@ paths:
           description: Incorrect token
       summary: Settlement by country
       tags:
-        - stats
+        - statistics
   /api/v1/tax/calculate:
     get:
       consumes:
@@ -1005,7 +1005,7 @@ paths:
           description: Incorrect token
       summary: Email invoice
       tags:
-        - invoice
+        - invoices
   '/api/v1/transactions/{key}/payments':
     get:
       consumes:

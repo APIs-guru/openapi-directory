@@ -24,11 +24,11 @@ security:
   - user_key: []
 tags:
   - description: Provides Company information
-    name: company
+    name: CompanyAPI
   - description: Provides Competitor information
-    name: competitor
+    name: CompetitorAPI
   - description: Provides Feed information
-    name: feed
+    name: FeedAPI
 paths:
   /v1/company/basicsearch:
     get:
@@ -86,7 +86,7 @@ paths:
           description: Internal Server Error
       summary: Basic Search Company by Ticker or Website or Name or PermID
       tags:
-        - company
+        - CompanyAPI
   '/v1/company/competitor/id/{companyId}':
     get:
       description: The Competitors API provides basic information about top 3 competitors of a company specified in the Company Id
@@ -126,7 +126,7 @@ paths:
           description: Internal Server Error
       summary: Get Competitor information by Id
       tags:
-        - competitor
+        - CompetitorAPI
   '/v1/company/competitor/url/{website}':
     get:
       description: The Competitors API provides basic information about top 3 competitors of a company specified in the website
@@ -166,7 +166,7 @@ paths:
           description: Internal Server Error
       summary: Get Competitor information by URL
       tags:
-        - competitor
+        - CompetitorAPI
   '/v1/company/id/{companyId}':
     get:
       description: 'The Company Data API provides complete information about a company for the specified Company Id '
@@ -206,7 +206,7 @@ paths:
           description: Internal Server Error
       summary: Get Company by Id
       tags:
-        - company
+        - CompanyAPI
   /v1/company/search:
     get:
       description: The Company Search API searches for a company based on the input and will returns results containing basic details about matching companies. By default the API returns the top 10 available results unless the limit is specified. The maximum limit is restricted to 30.
@@ -263,7 +263,7 @@ paths:
           description: Internal Server Error
       summary: Search Company by Ticker or Website or Name or PermID
       tags:
-        - company
+        - CompanyAPI
   '/v1/company/url/{website}':
     get:
       description: 'The Company Data API provides complete information about a company for the specified URL '
@@ -303,7 +303,7 @@ paths:
           description: Internal Server Error
       summary: Get Company by URL
       tags:
-        - company
+        - CompanyAPI
   /v1/feed:
     get:
       description: The Feeds API provides a list of feeds and individual feed information for the given Company Ids and Category. By default the API returns the latest 10 feeds available unless the limit is specified. The maximum result is restricted to 100 feeds per API request.
@@ -370,7 +370,7 @@ paths:
           description: Internal Server Error
       summary: Get Feeds for given Company Ids
       tags:
-        - feed
+        - FeedAPI
 definitions:
   Address:
     properties:

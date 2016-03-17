@@ -16,6 +16,9 @@ info:
     url: 'http://api.oceandrivers.com/static/resources.json'
     version: '1.2'
   x-providerName: oceandrivers.com
+tags:
+  - description: ODWeather API service
+    name: ODWeather
 paths:
   '/v1.0/compareStation/{stationName}/':
     get:
@@ -34,6 +37,8 @@ paths:
       responses:
         '200':
           description: No response was specified
+      tags:
+        - ODWeather
   '/v1.0/getForecastPoints/{yatchclubid}/language/{language}':
     get:
       description: 'Get forecast points of a yatchclub<br/>None'
@@ -55,6 +60,8 @@ paths:
       responses:
         '200':
           description: No response was specified
+      tags:
+        - ODWeather
   '/v1.0/getForecastTimeSeries/{latitude}/{longitude}/':
     get:
       description: 'Get timeseries forecast information<br/>None'
@@ -112,6 +119,8 @@ paths:
       responses:
         '200':
           description: No response was specified
+      tags:
+        - ODWeather
   '/v1.0/getSocibWeatherStation/{period}/':
     get:
       description: 'Get data from the socib bahia de palma buoy<br/>None'
@@ -129,6 +138,8 @@ paths:
       responses:
         '200':
           description: No response was specified
+      tags:
+        - ODWeather
   '/v1.0/getWeatherDisplay/{stationName}/':
     get:
       description: 'Get data from the weather display software<br/>None'
@@ -152,6 +163,8 @@ paths:
       responses:
         '200':
           description: No response was specified
+      tags:
+        - ODWeather
   /v1.0/getWebCams/:
     get:
       description: 'Get forecast and realtime information for known points<br/>None'
@@ -162,3 +175,5 @@ paths:
       responses:
         '200':
           description: No response was specified
+      tags:
+        - ODWeather

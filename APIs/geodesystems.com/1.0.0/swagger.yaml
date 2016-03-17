@@ -22,501 +22,501 @@ tags:
   - description: Grid subset API
     name: gridsubset
   - description: ' API for Convert HMMER File'
-    name: bio_hmmer_convert
+    name: service/bio_hmmer_convert
   - description: ' API for Run HMMSTAT'
-    name: bio_hmmer_stat
+    name: service/bio_hmmer_stat
   - description: ' API for Run HMMEMIT'
-    name: bio_hmmer_emit
+    name: service/bio_hmmer_emit
   - description: ' API for Run HMMFETCH'
-    name: bio_hmmer_fetch
+    name: service/bio_hmmer_fetch
   - description: ' API for Convert SRA to ABI format'
-    name: bio_sra_to_abi
+    name: service/bio_sra_to_abi
   - description: ' API for Convert SRA to FASTQ'
-    name: bio_sra_to_fastq
+    name: service/bio_sra_to_fastq
   - description: ' API for Convert SRA to ILLUMA format'
-    name: bio_sra_to_illuma
+    name: service/bio_sra_to_illuma
   - description: ' API for Convert SRA to SAM'
-    name: bio_sra_to_sam
+    name: service/bio_sra_to_sam
   - description: ' API for Convert SRA to SFF format'
-    name: bio_sra_to_sff
+    name: service/bio_sra_to_sff
   - description: ' API for SRA stats'
-    name: bio_sra_stat
+    name: service/bio_sra_stat
   - description: ' API for SRA pileup'
-    name: bio_sra_pileup
+    name: service/bio_sra_pileup
   - description: ' API for Convert FASTQ to SAM'
-    name: bio_picard_fastqtosam
+    name: service/bio_picard_fastqtosam
   - description: ' API for Convert SAM to FASTQ'
-    name: bio_picard_samtofastq
+    name: service/bio_picard_samtofastq
   - description: ' API for Alignment Summary Statistics'
-    name: bio_picard_collectalignmentsummarymetrics
+    name: service/bio_picard_collectalignmentsummarymetrics
   - description: ' API for Add Or Replace Read Groups'
-    name: bio_picard_addorreplacegroups
+    name: service/bio_picard_addorreplacegroups
   - description: ' API for View DICOM attributes'
-    name: bio_dicom_txt
+    name: service/bio_dicom_txt
   - description: ' API for Make images from DICOM'
-    name: bio_dicom_image
+    name: service/bio_dicom_image
   - description: ' API for Convert image using bfconvert'
-    name: bio_ome_bfconvert
+    name: service/bio_ome_bfconvert
   - description: ' API for Extract ome metadata'
-    name: bio_ome_xml
+    name: service/bio_ome_xml
   - description: ' API for Convert Image'
-    name: imagemagick_convert
+    name: service/imagemagick_convert
   - description: ' API for Make animated GIF'
-    name: imagemagick_animate
+    name: service/imagemagick_animate
   - description: ' API for Strip EXIF Metadata'
-    name: imagemagick_strip
+    name: service/imagemagick_strip
   - description: ' API for Polaroid image'
-    name: imagemagick_polaroid
+    name: service/imagemagick_polaroid
   - description: ' API for Identify image'
-    name: imagemagick_identify
+    name: service/imagemagick_identify
   - description: ' API for Test Convert Image'
-    name: imagemagick_convert_test
+    name: service/imagemagick_convert_test
   - description: ' API for Extract sheets'
-    name: media_tabular_extractsheet
+    name: service/media_tabular_extractsheet
   - description: ' API for Gristle Slicer'
-    name: gristle_slicer
+    name: service/gristle_slicer
   - description: ' API for Gristle Determinator'
-    name: gristle_determinator
+    name: service/gristle_determinator
   - description: ' API for NCO Weighted Average'
-    name: geo_nco_ncwa
+    name: service/geo_nco_ncwa
   - description: ' API for CDO Info'
-    name: geo_cdo_info
+    name: service/geo_cdo_info
   - description: ' API for CDO Date Select'
-    name: geo_cdo_seldate
+    name: service/geo_cdo_seldate
   - description: ' API for H5 LS'
-    name: geo_h5_ls
+    name: service/geo_h5_ls
   - description: ' API for Create image from GeoTIFF'
-    name: gdal_tiff2image
+    name: service/gdal_tiff2image
   - description: ' API for Convert to RINEX'
-    name: gps.teqc.torinex
+    name: service/gps.teqc.torinex
   - description: ' API for View GPS QC'
-    name: gps.teqc.qc
+    name: service/gps.teqc.qc
   - description: "Search API for 'Folder' entry type"
-    name: group
+    name: type/group
   - description: "Search API for 'File' entry type"
-    name: file
+    name: type/file
   - description: "Search API for 'Link' entry type"
-    name: link
+    name: type/link
   - description: "Search API for 'Home Page' entry type"
-    name: homepage
+    name: type/homepage
   - description: "Search API for 'Virtual Group' entry type"
-    name: type_virtual
+    name: type/type_virtual
   - description: "Search API for 'Server Side Files' entry type"
-    name: localfiles
+    name: type/localfiles
   - description: "Search API for 'Remote FTP File View' entry type"
-    name: ftp
+    name: type/ftp
   - description: "Search API for 'Point Data Collection' entry type"
-    name: type_point_collection
+    name: type/type_point_collection
   - description: "Search API for 'Text Point Data' entry type"
-    name: point_text
+    name: type/point_text
   - description: "Search API for 'Service Group' entry type"
-    name: type_service_group
+    name: type/type_service_group
   - description: "Search API for 'Service Link' entry type"
-    name: type_service_link
+    name: type/type_service_link
   - description: "Search API for 'aWhere Farm' entry type"
-    name: type_awhere_farm
+    name: type/type_awhere_farm
   - description: "Search API for 'aWhere Field' entry type"
-    name: type_awhere_field
+    name: type/type_awhere_field
   - description: "Search API for 'Assay' entry type"
-    name: bio_ontology_assay
+    name: type/bio_ontology_assay
   - description: "Search API for 'Sample' entry type"
-    name: bio_ontology_sample
+    name: type/bio_ontology_sample
   - description: "Search API for 'Study' entry type"
-    name: bio_ontology_study
+    name: type/bio_ontology_study
   - description: "Search API for 'Series' entry type"
-    name: bio_ontology_series
+    name: type/bio_ontology_series
   - description: "Search API for 'Person' entry type"
-    name: bio_ontology_person
+    name: type/bio_ontology_person
   - description: "Search API for 'Cohort' entry type"
-    name: bio_ontology_cohort
+    name: type/bio_ontology_cohort
   - description: "Search API for 'FASTA File' entry type"
-    name: bio_fasta
+    name: type/bio_fasta
   - description: "Search API for 'FASTQ File' entry type"
-    name: bio_fastq
+    name: type/bio_fastq
   - description: "Search API for 'SAM Data' entry type"
-    name: bio_sam
+    name: type/bio_sam
   - description: "Search API for 'Stockholm File' entry type"
-    name: bio_stockholm
+    name: type/bio_stockholm
   - description: "Search API for 'Sequence Read Archive' entry type"
-    name: bio_sra
+    name: type/bio_sra
   - description: "Search API for 'HMMER Index File' entry type"
-    name: bio_hmmer_index
+    name: type/bio_hmmer_index
   - description: "Search API for 'PDB Protein File' entry type"
-    name: bio_sf_pdb
+    name: type/bio_sf_pdb
   - description: "Search API for 'DICOM File' entry type"
-    name: bio_dicom
+    name: type/bio_dicom
   - description: "Search API for 'DICOM Test File' entry type"
-    name: bio_dicom_test
+    name: type/bio_dicom_test
   - description: "Search API for 'OME TIFF File' entry type"
-    name: bio_ome_tiff
+    name: type/bio_ome_tiff
   - description: "Search API for 'Taxonomic Entry' entry type"
-    name: bio_taxonomy
+    name: type/bio_taxonomy
   - description: "Search API for 'US Census ACS Data' entry type"
-    name: type_census_acs
+    name: type/type_census_acs
   - description: "Search API for 'MetroTrends Employment Data' entry type"
-    name: type_urbaninstitute_employment
+    name: type/type_urbaninstitute_employment
   - description: "Search API for 'Before and After Images' entry type"
-    name: beforeafter
+    name: type/beforeafter
   - description: "Search API for 'Bibliographic Entry' entry type"
-    name: biblio
+    name: type/biblio
   - description: "Search API for 'Weblog' entry type"
-    name: weblog
+    name: type/weblog
   - description: "Search API for 'Weblog Entry' entry type"
-    name: blogentry
+    name: type/blogentry
   - description: "Search API for 'Calendar' entry type"
-    name: calendar
+    name: type/calendar
   - description: "Search API for 'FAQ' entry type"
-    name: faq
+    name: type/faq
   - description: "Search API for 'RSS/ATOM Feed' entry type"
-    name: feed
+    name: type/feed
   - description: "Search API for 'IFrames' entry type"
-    name: frames
+    name: type/frames
   - description: "Search API for 'Weather' entry type"
-    name: gadgets_weather
+    name: type/gadgets_weather
   - description: "Search API for 'Countdown' entry type"
-    name: gadgets_countdown
+    name: type/gadgets_countdown
   - description: "Search API for 'Stock Ticker' entry type"
-    name: gadgets_stock
+    name: type/gadgets_stock
   - description: "Search API for 'Clock' entry type"
-    name: gadgets_clock
+    name: type/gadgets_clock
   - description: "Search API for 'Google Docs View' entry type"
-    name: gdata_docs
+    name: type/gdata_docs
   - description: "Search API for 'Google Web Albums View' entry type"
-    name: gdata_photos
+    name: type/gdata_photos
   - description: "Search API for 'Glossary' entry type"
-    name: glossary
+    name: type/glossary
   - description: "Search API for 'KML/KMZ File' entry type"
-    name: geo_kml
+    name: type/geo_kml
   - description: "Search API for 'WMS Image' entry type"
-    name: latlonimage
+    name: type/latlonimage
   - description: "Search API for 'GPX GPS File' entry type"
-    name: geo_gpx
+    name: type/geo_gpx
   - description: "Search API for 'Shapefile' entry type"
-    name: geo_shapefile
+    name: type/geo_shapefile
   - description: "Search API for 'Google Map URL' entry type"
-    name: map_googlemap
+    name: type/map_googlemap
   - description: "Search API for 'PDF File' entry type"
-    name: type_document_pdf
+    name: type/type_document_pdf
   - description: "Search API for 'Microsoft Word File' entry type"
-    name: type_document_doc
+    name: type/type_document_doc
   - description: "Search API for 'Microsoft Powerpoint File' entry type"
-    name: type_document_ppt
+    name: type/type_document_ppt
   - description: "Search API for 'Microsoft Excel File' entry type"
-    name: type_document_xls
+    name: type/type_document_xls
   - description: "Search API for 'CSV File' entry type"
-    name: type_document_csv
+    name: type/type_document_csv
   - description: "Search API for 'YouTube Video' entry type"
-    name: media_youtubevideo
+    name: type/media_youtubevideo
   - description: "Search API for 'Video Channel' entry type"
-    name: media_video_channel
+    name: type/media_video_channel
   - description: "Search API for 'Audio File' entry type"
-    name: media_audiofile
+    name: type/media_audiofile
   - description: "Search API for 'Quicktime Video' entry type"
-    name: media_video_quicktime
+    name: type/media_video_quicktime
   - description: "Search API for 'Photo Album' entry type"
-    name: media_photoalbum
+    name: type/media_photoalbum
   - description: "Search API for 'Image Loop' entry type"
-    name: media_imageloop
+    name: type/media_imageloop
   - description: "Search API for 'Image' entry type"
-    name: type_image
+    name: type/type_image
   - description: "Search API for 'Database Table' entry type"
-    name: type_db_table
+    name: type/type_db_table
   - description: "Search API for 'HTML File' entry type"
-    name: type_document_html
+    name: type/type_document_html
   - description: "Search API for 'Data Dictionary: Metadata Collection' entry type"
-    name: type_metameta_collection
+    name: type/type_metameta_collection
   - description: "Search API for 'Data Dictionary: Metadata Dictionary' entry type"
-    name: type_metameta_dictionary
+    name: type/type_metameta_dictionary
   - description: "Search API for 'Data Dictionary: Metadata Field' entry type"
-    name: type_metameta_field
+    name: type/type_metameta_field
   - description: "Search API for 'Multiple Search' entry type"
-    name: multisearch
+    name: type/multisearch
   - description: "Search API for 'Note' entry type"
-    name: notes_note
+    name: type/notes_note
   - description: "Search API for 'OWL Ontology' entry type"
-    name: owl.ontology
+    name: type/owl.ontology
   - description: "Search API for 'OWL Class' entry type"
-    name: owl.class
+    name: type/owl.class
   - description: "Search API for 'Paste Text Entry' entry type"
-    name: pasteitentry
+    name: type/pasteitentry
   - description: "Search API for 'Poll' entry type"
-    name: poll
+    name: type/poll
   - description: "Search API for 'Trip Report' entry type"
-    name: trip_report
+    name: type/trip_report
   - description: "Search API for 'Trip' entry type"
-    name: trip_trip
+    name: type/trip_trip
   - description: "Search API for 'Lodging' entry type"
-    name: trip_hotel
+    name: type/trip_hotel
   - description: "Search API for 'Flight Leg' entry type"
-    name: trip_flight
+    name: type/trip_flight
   - description: "Search API for 'Event' entry type"
-    name: trip_event
+    name: type/trip_event
   - description: "Search API for 'Wiki Page' entry type"
-    name: wikipage
+    name: type/wikipage
   - description: "Search API for 'FITS Data File' entry type"
-    name: fits_data
+    name: type/fits_data
   - description: "Search API for 'OPeNDAP Link' entry type"
-    name: opendaplink
+    name: type/opendaplink
   - description: "Search API for 'Grid Aggregation' entry type"
-    name: gridaggregation
+    name: type/gridaggregation
   - description: "Search API for 'Gridded Data File' entry type"
-    name: cdm_grid
+    name: type/cdm_grid
   - description: "Search API for 'HDF5 File' entry type"
-    name: geo_hdf5
+    name: type/geo_hdf5
   - description: "Search API for 'MERRA Data' entry type"
-    name: earth_merra
+    name: type/earth_merra
   - description: "Search API for 'Landsat Satellite Data' entry type"
-    name: earth_satellite_landsat
+    name: type/earth_satellite_landsat
   - description: "Search API for 'Aqua Modis Satellite Data' entry type"
-    name: earth_satellite_modis_aqua
+    name: type/earth_satellite_modis_aqua
   - description: "Search API for 'WRF Namelist File' entry type"
-    name: earth_wrf_namelist
+    name: type/earth_wrf_namelist
   - description: "Search API for 'Software Tool' entry type"
-    name: project_softwarepackage
+    name: type/project_softwarepackage
   - description: "Search API for 'Data Access Service' entry type"
-    name: project_service
+    name: type/project_service
   - description: "Search API for 'Vocabulary' entry type"
-    name: project_vocabulary
+    name: type/project_vocabulary
   - description: "Search API for 'Vocabulary Term' entry type"
-    name: project_term
+    name: type/project_term
   - description: "Search API for 'Standard Parameter Name' entry type"
-    name: project_standard_name
+    name: type/project_standard_name
   - description: "Search API for 'Data Format' entry type"
-    name: project_dataformat
+    name: type/project_dataformat
   - description: "Search API for 'Program' entry type"
-    name: project_program
+    name: type/project_program
   - description: "Search API for 'Project' entry type"
-    name: project_project
+    name: type/project_project
   - description: "Search API for 'Site' entry type"
-    name: project_site
+    name: type/project_site
   - description: "Search API for 'Site Visit' entry type"
-    name: project_visit
+    name: type/project_visit
   - description: "Search API for 'Field Note' entry type"
-    name: project_fieldnote
+    name: type/project_fieldnote
   - description: "Search API for 'Dataset' entry type"
-    name: project_dataset
+    name: type/project_dataset
   - description: "Search API for 'Experiment' entry type"
-    name: project_experiment
+    name: type/project_experiment
   - description: "Search API for 'Instrument Data Collection' entry type"
-    name: project_instrument
+    name: type/project_instrument
   - description: "Search API for 'Deployment' entry type"
-    name: project_deployment
+    name: type/project_deployment
   - description: "Search API for 'Campaign' entry type"
-    name: project_campaign
+    name: type/project_campaign
   - description: "Search API for 'Meeting' entry type"
-    name: project_meeting
+    name: type/project_meeting
   - description: "Search API for 'Research Contribution' entry type"
-    name: project_contribution
+    name: type/project_contribution
   - description: "Search API for 'Survey Location' entry type"
-    name: project_surveylocation
+    name: type/project_surveylocation
   - description: "Search API for 'Organization' entry type"
-    name: project_organization
+    name: type/project_organization
   - description: "Search API for 'Case Study' entry type"
-    name: project_casestudy
+    name: type/project_casestudy
   - description: "Search API for 'Teaching Resource' entry type"
-    name: project_learning_resource
+    name: type/project_learning_resource
   - description: "Search API for 'RINEX File' entry type"
-    name: project_gps_rinex
+    name: type/project_gps_rinex
   - description: "Search API for 'Raw GPS File' entry type"
-    name: project_gps_raw
+    name: type/project_gps_raw
   - description: "Search API for 'Control Points File' entry type"
-    name: project_gps_controlpoints
+    name: type/project_gps_controlpoints
   - description: "Search API for 'IDV Bundle' entry type"
-    name: type_idv_bundle
+    name: type/type_idv_bundle
   - description: "Search API for 'Bathymetry Collection' entry type"
-    name: type_mb_collection
+    name: type/type_mb_collection
   - description: "Search API for 'MB Bathymetry' entry type"
-    name: type_mb
+    name: type/type_mb
   - description: "Search API for 'Basic MB point file' entry type"
-    name: type_mb_point_basic
+    name: type/type_mb_point_basic
   - description: "Search API for 'ESRI Web Server' entry type"
-    name: type_esri_restserver
+    name: type/type_esri_restserver
   - description: "Search API for 'ESRI Services Folder' entry type"
-    name: type_esri_restfolder
+    name: type/type_esri_restfolder
   - description: "Search API for 'ESRI Rest Service' entry type"
-    name: type_esri_restservice
+    name: type/type_esri_restservice
   - description: "Search API for 'ESRI Feature Server' entry type"
-    name: type_esri_featureserver
+    name: type/type_esri_featureserver
   - description: "Search API for 'ESRI Map Server' entry type"
-    name: type_esri_mapserver
+    name: type/type_esri_mapserver
   - description: "Search API for 'ESRI Image Server' entry type"
-    name: type_esri_imageserver
+    name: type/type_esri_imageserver
   - description: "Search API for 'ESRI GP Server' entry type"
-    name: type_esri_gpserver
+    name: type/type_esri_gpserver
   - description: "Search API for 'ESRI Geometry Server' entry type"
-    name: type_esri_geometryserver
+    name: type/type_esri_geometryserver
   - description: "Search API for 'WMS Capabilities' entry type"
-    name: type_wms_capabilities
+    name: type/type_wms_capabilities
   - description: "Search API for 'WMS Layer' entry type"
-    name: type_wms_layer
+    name: type/type_wms_layer
   - description: "Search API for 'Ameriflux Level 2 CSV File' entry type"
-    name: type_point_ameriflux_level2
+    name: type/type_point_ameriflux_level2
   - description: "Search API for 'AMRC Final QC Data' entry type"
-    name: type_point_amrc_final
+    name: type/type_point_amrc_final
   - description: "Search API for 'AMRC Freewave  Data' entry type"
-    name: type_point_amrc_freewave
+    name: type/type_point_amrc_freewave
   - description: "Search API for 'WaterML' entry type"
-    name: type_point_hydro_waterml
+    name: type/type_point_hydro_waterml
   - description: "Search API for 'CZO Display File Format' entry type"
-    name: type_point_czo
+    name: type/type_point_czo
   - description: "Search API for 'GC-Net Point Data' entry type"
-    name: type_point_gcnet
+    name: type/type_point_gcnet
   - description: "Search API for 'IAGA 2002 Geomagnetism Data' entry type"
-    name: type_point_geomag_iaga2002
+    name: type/type_point_geomag_iaga2002
   - description: "Search API for 'Colorado DNR Stream Gage' entry type"
-    name: type_hydro_colorado
+    name: type/type_hydro_colorado
   - description: "Search API for 'McCords Irmcr2 Data' entry type"
-    name: type_point_icebridge_mccords_irmcr2
+    name: type/type_point_icebridge_mccords_irmcr2
   - description: "Search API for 'McCords Irmcr3 Data' entry type"
-    name: type_point_icebridge_mccords_irmcr3
+    name: type/type_point_icebridge_mccords_irmcr3
   - description: "Search API for 'ATM Ice SSN Data' entry type"
-    name: type_point_icebridge_atm_icessn
+    name: type/type_point_icebridge_atm_icessn
   - description: "Search API for 'ATM QFIT Data' entry type"
-    name: type_point_icebridge_atm_qfit
+    name: type/type_point_icebridge_atm_qfit
   - description: "Search API for 'Paris Data' entry type"
-    name: type_point_icebridge_paris
+    name: type/type_point_icebridge_paris
   - description: "Search API for 'IDV Point File' entry type"
-    name: type_point_idv
+    name: type/type_point_idv
   - description: "Search API for 'AWC Weather Observations' entry type"
-    name: type_awc_metar
+    name: type/type_awc_metar
   - description: "Search API for 'NetCDF Point File' entry type"
-    name: type_point_netcdf
+    name: type/type_point_netcdf
   - description: "Search API for 'NOAA Tower Network' entry type"
-    name: type_point_noaa_tower
+    name: type/type_point_noaa_tower
   - description: "Search API for 'NOAA Carbon Measurements' entry type"
-    name: type_point_noaa_carbon
+    name: type/type_point_noaa_carbon
   - description: "Search API for 'NOAA Flask Event Measurements' entry type"
-    name: type_point_noaa_flask_event
+    name: type/type_point_noaa_flask_event
   - description: "Search API for 'NOAA Flask Month Measurements' entry type"
-    name: type_point_noaa_flask_month
+    name: type/type_point_noaa_flask_month
   - description: "Search API for 'NOAA MADIS Point Data' entry type"
-    name: type_point_noaa_madis
+    name: type/type_point_noaa_madis
   - description: "Search API for 'NC  DC Climate Data' entry type"
-    name: type_point_ncdc_climate
+    name: type/type_point_ncdc_climate
   - description: "Search API for 'NOAA-ESRL-PSD Monthly Climate Index' entry type"
-    name: type_psd_monthly_climate_index
+    name: type/type_psd_monthly_climate_index
   - description: "Search API for 'SNOTEL Snow Data' entry type"
-    name: type_point_snotel
+    name: type/type_point_snotel
   - description: "Search API for 'NetCDF Track Data' entry type"
-    name: type_point_ocean_netcdf_track
+    name: type/type_point_ocean_netcdf_track
   - description: "Search API for 'NetCDF Glider Data' entry type"
-    name: type_point_ocean_netcdf_glider
+    name: type/type_point_ocean_netcdf_glider
   - description: "Search API for 'SeaBird CNV Data' entry type"
-    name: type_point_ocean_cnv
+    name: type/type_point_ocean_cnv
   - description: "Search API for 'OOI Data' entry type"
-    name: type_point_ocean_ooi_dmgx
+    name: type/type_point_ocean_ooi_dmgx
   - description: "Search API for 'SADO Position Data' entry type"
-    name: type_point_ocean_csv_sado_position
+    name: type/type_point_ocean_csv_sado_position
   - description: "Search API for 'SADO TTS Data' entry type"
-    name: type_point_ocean_csv_sado_TTS
+    name: type/type_point_ocean_csv_sado_TTS
   - description: "Search API for 'SADO Meteo Data' entry type"
-    name: type_point_ocean_csv_sado_meteo
+    name: type/type_point_ocean_csv_sado_meteo
   - description: "Search API for 'PBO Position Time Series' entry type"
-    name: type_point_pbo_position_time_series
+    name: type/type_point_pbo_position_time_series
   - description: "Search API for 'Global Geodynamics GGP Format' entry type"
-    name: type_point_wsbb_ggp
+    name: type/type_point_wsbb_ggp
   - description: "Search API for 'IPython Notebook file' entry type"
-    name: python_notebook
+    name: type/python_notebook
   - description: "Search API for 'Investigation' entry type"
-    name: investigation_case
+    name: type/investigation_case
   - description: "Search API for 'Person' entry type"
-    name: investigation_person
+    name: type/investigation_person
   - description: "Search API for 'Thing' entry type"
-    name: investigation_thing
+    name: type/investigation_thing
   - description: "Search API for 'Event' entry type"
-    name: investigation_event
+    name: type/investigation_event
   - description: "Search API for 'HipChat Group' entry type"
-    name: hipchat_group
+    name: type/hipchat_group
   - description: "Search API for 'SEC EDGAR Filing' entry type"
-    name: type_edgar_filing
+    name: type/type_edgar_filing
   - description: "Search API for 'FRED Category' entry type"
-    name: type_fred_category
+    name: type/type_fred_category
   - description: "Search API for 'FRED Series' entry type"
-    name: type_fred_series
+    name: type/type_fred_series
   - description: "Search API for 'EIA Category' entry type"
-    name: type_eia_category
+    name: type/type_eia_category
   - description: "Search API for 'EIA Series' entry type"
-    name: type_eia_series
+    name: type/type_eia_series
   - description: "Search API for 'Stock Ticker Data' entry type"
-    name: type_biz_stockseries
+    name: type/type_biz_stockseries
   - description: "Search API for 'QUANDL Series' entry type"
-    name: type_quandl_series
+    name: type/type_quandl_series
   - description: "Search API for 'Resiliency Project' entry type"
-    name: type_resilience_project
+    name: type/type_resilience_project
   - description: "Search API for 'Resiliency Assessment' entry type"
-    name: type_resilience_assessment
+    name: type/type_resilience_assessment
   - description: "Search API for 'Data Hub' entry type"
-    name: community_datahub
+    name: type/community_datahub
   - description: "Search API for 'Facility' entry type"
-    name: community_resource
+    name: type/community_resource
   - description: "Search API for 'Development Review Case' entry type"
-    name: community_case
+    name: type/community_case
   - description: "Search API for 'Incident' entry type"
-    name: incident
+    name: type/incident
   - description: "Search API for 'Basement Flooding' entry type"
-    name: incident_basement
+    name: type/incident_basement
   - description: "Search API for 'MISO Foreacast XML' entry type"
-    name: type_power_miso_forecast
+    name: type/type_power_miso_forecast
   - description: "Search API for 'Slack Team' entry type"
-    name: slack_team
+    name: type/slack_team
   - description: "Search API for 'USDA ARMS Crop Data' entry type"
-    name: type_usda_arms_crop
+    name: type/type_usda_arms_crop
   - description: "Search API for 'USDA ARMS Finance Data' entry type"
-    name: type_usda_arms_finance
+    name: type/type_usda_arms_finance
   - description: "Search API for 'USDA NASS Data' entry type"
-    name: type_usda_nass
+    name: type/type_usda_nass
   - description: "Search API for 'CODATA Fundamental Physical Constants' entry type"
-    name: type_nist_constant
+    name: type/type_nist_constant
   - description: "Search API for 'NIST Ionization Energy Data' entry type"
-    name: type_nist_energy
+    name: type/type_nist_energy
   - description: "Search API for 'NIST Isotope' entry type"
-    name: type_nist_isotope
+    name: type/type_nist_isotope
   - description: "Search API for 'NIST JANAF Thermochemical Table' entry type"
-    name: type_nist_janaffile
+    name: type/type_nist_janaffile
   - description: "Search API for 'LiDAR Collection' entry type"
-    name: lidar_collection
+    name: type/lidar_collection
   - description: "Search API for 'LAS Lidar Data' entry type"
-    name: lidar_las
+    name: type/lidar_las
   - description: "Search API for 'LVIS Lidar Data' entry type"
-    name: lidar_lvis
+    name: type/lidar_lvis
   - description: "Search API for 'GLAS Lidar Data' entry type"
-    name: lidar_glas
+    name: type/lidar_glas
   - description: "Search API for 'SOCRATA Series' entry type"
-    name: type_socrata_series
+    name: type/type_socrata_series
   - description: "Search API for 'Colorado Election Contributions' entry type"
-    name: test_co_contributiondata
+    name: type/test_co_contributiondata
   - description: "Search API for 'Colorado Health Indicators' entry type"
-    name: db_co_indicators
+    name: type/db_co_indicators
   - description: "Search API for 'Property Database' entry type"
-    name: propertydb
+    name: type/propertydb
   - description: "Search API for 'Exercise' entry type"
-    name: exercise
+    name: type/exercise
   - description: "Search API for 'Locations' entry type"
-    name: locations
+    name: type/locations
   - description: "Search API for 'Tasks' entry type"
-    name: tasks
+    name: type/tasks
   - description: "Search API for 'Simple Yes-No Vote' entry type"
-    name: vote_yesno
+    name: type/vote_yesno
   - description: "Search API for 'Todo' entry type"
-    name: todo
+    name: type/todo
   - description: "Search API for 'Status Board' entry type"
-    name: statusboard
+    name: type/statusboard
   - description: "Search API for 'Notes' entry type"
-    name: notes
+    name: type/notes
   - description: "Search API for 'Bookmarks' entry type"
-    name: bookmarks
+    name: type/bookmarks
   - description: "Search API for 'Contact List' entry type"
-    name: contact
+    name: type/contact
   - description: "Search API for 'Cell Phone Log' entry type"
-    name: investigation_cellphonelog
+    name: type/investigation_cellphonelog
   - description: "Search API for 'Old Phone Log' entry type"
-    name: investigation_oldphonelog
+    name: type/investigation_oldphonelog
   - description: "Search API for 'Property Sales' entry type"
-    name: property_sales
+    name: type/property_sales
   - description: "Search API for 'Registrations' entry type"
-    name: registrations
+    name: type/registrations
   - description: "Search API for 'Boulder County Voter Details' entry type"
-    name: boulder_county_voter_details
+    name: type/boulder_county_voter_details
 paths:
   /repository/entry/show:
     get:
@@ -540,7 +540,7 @@ paths:
           description: No response was specified
       summary: API for View GPS QC
       tags:
-        - gps.teqc.qc
+        - service/gps.teqc.qc
   /repository/search/type/beforeafter:
     get:
       description: API to search for entries of type Before and After Images
@@ -651,7 +651,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Before and After Images' entry type"
       tags:
-        - beforeafter
+        - type/beforeafter
   /repository/search/type/biblio:
     get:
       description: API to search for entries of type Bibliographic Entry
@@ -787,7 +787,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Bibliographic Entry' entry type"
       tags:
-        - biblio
+        - type/biblio
   /repository/search/type/bio_dicom:
     get:
       description: API to search for entries of type DICOM File
@@ -898,7 +898,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'DICOM File' entry type"
       tags:
-        - bio_dicom
+        - type/bio_dicom
   /repository/search/type/bio_dicom_test:
     get:
       description: API to search for entries of type DICOM Test File
@@ -1019,7 +1019,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'DICOM Test File' entry type"
       tags:
-        - bio_dicom_test
+        - type/bio_dicom_test
   /repository/search/type/bio_fasta:
     get:
       description: API to search for entries of type FASTA File
@@ -1130,7 +1130,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'FASTA File' entry type"
       tags:
-        - bio_fasta
+        - type/bio_fasta
   /repository/search/type/bio_fastq:
     get:
       description: API to search for entries of type FASTQ File
@@ -1241,7 +1241,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'FASTQ File' entry type"
       tags:
-        - bio_fastq
+        - type/bio_fastq
   /repository/search/type/bio_hmmer_index:
     get:
       description: API to search for entries of type HMMER Index File
@@ -1352,7 +1352,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'HMMER Index File' entry type"
       tags:
-        - bio_hmmer_index
+        - type/bio_hmmer_index
   /repository/search/type/bio_ome_tiff:
     get:
       description: API to search for entries of type OME TIFF File
@@ -1463,7 +1463,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'OME TIFF File' entry type"
       tags:
-        - bio_ome_tiff
+        - type/bio_ome_tiff
   /repository/search/type/bio_ontology_assay:
     get:
       description: API to search for entries of type Assay
@@ -1574,7 +1574,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Assay' entry type"
       tags:
-        - bio_ontology_assay
+        - type/bio_ontology_assay
   /repository/search/type/bio_ontology_cohort:
     get:
       description: API to search for entries of type Cohort
@@ -1685,7 +1685,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Cohort' entry type"
       tags:
-        - bio_ontology_cohort
+        - type/bio_ontology_cohort
   /repository/search/type/bio_ontology_person:
     get:
       description: API to search for entries of type Person
@@ -1801,7 +1801,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Person' entry type"
       tags:
-        - bio_ontology_person
+        - type/bio_ontology_person
   /repository/search/type/bio_ontology_sample:
     get:
       description: API to search for entries of type Sample
@@ -1912,7 +1912,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Sample' entry type"
       tags:
-        - bio_ontology_sample
+        - type/bio_ontology_sample
   /repository/search/type/bio_ontology_series:
     get:
       description: API to search for entries of type Series
@@ -2023,7 +2023,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Series' entry type"
       tags:
-        - bio_ontology_series
+        - type/bio_ontology_series
   /repository/search/type/bio_ontology_study:
     get:
       description: API to search for entries of type Study
@@ -2134,7 +2134,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Study' entry type"
       tags:
-        - bio_ontology_study
+        - type/bio_ontology_study
   /repository/search/type/bio_sam:
     get:
       description: API to search for entries of type SAM Data
@@ -2245,7 +2245,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'SAM Data' entry type"
       tags:
-        - bio_sam
+        - type/bio_sam
   /repository/search/type/bio_sf_pdb:
     get:
       description: API to search for entries of type PDB Protein File
@@ -2356,7 +2356,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'PDB Protein File' entry type"
       tags:
-        - bio_sf_pdb
+        - type/bio_sf_pdb
   /repository/search/type/bio_sra:
     get:
       description: API to search for entries of type Sequence Read Archive
@@ -2467,7 +2467,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Sequence Read Archive' entry type"
       tags:
-        - bio_sra
+        - type/bio_sra
   /repository/search/type/bio_stockholm:
     get:
       description: API to search for entries of type Stockholm File
@@ -2578,7 +2578,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Stockholm File' entry type"
       tags:
-        - bio_stockholm
+        - type/bio_stockholm
   /repository/search/type/bio_taxonomy:
     get:
       description: API to search for entries of type Taxonomic Entry
@@ -2714,7 +2714,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Taxonomic Entry' entry type"
       tags:
-        - bio_taxonomy
+        - type/bio_taxonomy
   /repository/search/type/blogentry:
     get:
       description: API to search for entries of type Weblog Entry
@@ -2830,7 +2830,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Weblog Entry' entry type"
       tags:
-        - blogentry
+        - type/blogentry
   /repository/search/type/bookmarks:
     get:
       description: API to search for entries of type Bookmarks
@@ -2961,7 +2961,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Bookmarks' entry type"
       tags:
-        - bookmarks
+        - type/bookmarks
   /repository/search/type/boulder_county_voter_details:
     get:
       description: API to search for entries of type Boulder County Voter Details
@@ -3162,7 +3162,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Boulder County Voter Details' entry type"
       tags:
-        - boulder_county_voter_details
+        - type/boulder_county_voter_details
   /repository/search/type/calendar:
     get:
       description: API to search for entries of type Calendar
@@ -3273,7 +3273,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Calendar' entry type"
       tags:
-        - calendar
+        - type/calendar
   /repository/search/type/cdm_grid:
     get:
       description: API to search for entries of type Gridded Data File
@@ -3384,7 +3384,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Gridded Data File' entry type"
       tags:
-        - cdm_grid
+        - type/cdm_grid
   /repository/search/type/community_case:
     get:
       description: API to search for entries of type Development Review Case
@@ -3515,7 +3515,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Development Review Case' entry type"
       tags:
-        - community_case
+        - type/community_case
   /repository/search/type/community_datahub:
     get:
       description: API to search for entries of type Data Hub
@@ -3626,7 +3626,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Data Hub' entry type"
       tags:
-        - community_datahub
+        - type/community_datahub
   /repository/search/type/community_resource:
     get:
       description: API to search for entries of type Facility
@@ -3762,7 +3762,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Facility' entry type"
       tags:
-        - community_resource
+        - type/community_resource
   /repository/search/type/contact:
     get:
       description: API to search for entries of type Contact List
@@ -3888,7 +3888,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Contact List' entry type"
       tags:
-        - contact
+        - type/contact
   /repository/search/type/db_co_indicators:
     get:
       description: API to search for entries of type Colorado Health Indicators
@@ -4030,7 +4030,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Colorado Health Indicators' entry type"
       tags:
-        - db_co_indicators
+        - type/db_co_indicators
   /repository/search/type/earth_merra:
     get:
       description: API to search for entries of type MERRA Data
@@ -4171,7 +4171,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'MERRA Data' entry type"
       tags:
-        - earth_merra
+        - type/earth_merra
   /repository/search/type/earth_satellite_landsat:
     get:
       description: API to search for entries of type Landsat Satellite Data
@@ -4312,7 +4312,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Landsat Satellite Data' entry type"
       tags:
-        - earth_satellite_landsat
+        - type/earth_satellite_landsat
   /repository/search/type/earth_satellite_modis_aqua:
     get:
       description: API to search for entries of type Aqua Modis Satellite Data
@@ -4428,7 +4428,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Aqua Modis Satellite Data' entry type"
       tags:
-        - earth_satellite_modis_aqua
+        - type/earth_satellite_modis_aqua
   /repository/search/type/earth_wrf_namelist:
     get:
       description: API to search for entries of type WRF Namelist File
@@ -4539,7 +4539,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'WRF Namelist File' entry type"
       tags:
-        - earth_wrf_namelist
+        - type/earth_wrf_namelist
   /repository/search/type/exercise:
     get:
       description: API to search for entries of type Exercise
@@ -4660,7 +4660,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Exercise' entry type"
       tags:
-        - exercise
+        - type/exercise
   /repository/search/type/faq:
     get:
       description: API to search for entries of type FAQ
@@ -4771,7 +4771,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'FAQ' entry type"
       tags:
-        - faq
+        - type/faq
   /repository/search/type/feed:
     get:
       description: API to search for entries of type RSS/ATOM Feed
@@ -4882,7 +4882,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'RSS/ATOM Feed' entry type"
       tags:
-        - feed
+        - type/feed
   /repository/search/type/file:
     get:
       description: API to search for entries of type File
@@ -4993,7 +4993,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'File' entry type"
       tags:
-        - file
+        - type/file
   /repository/search/type/fits_data:
     get:
       description: API to search for entries of type FITS Data File
@@ -5119,7 +5119,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'FITS Data File' entry type"
       tags:
-        - fits_data
+        - type/fits_data
   /repository/search/type/frames:
     get:
       description: API to search for entries of type IFrames
@@ -5230,7 +5230,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'IFrames' entry type"
       tags:
-        - frames
+        - type/frames
   /repository/search/type/ftp:
     get:
       description: API to search for entries of type Remote FTP File View
@@ -5341,7 +5341,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Remote FTP File View' entry type"
       tags:
-        - ftp
+        - type/ftp
   /repository/search/type/gadgets_clock:
     get:
       description: API to search for entries of type Clock
@@ -5452,7 +5452,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Clock' entry type"
       tags:
-        - gadgets_clock
+        - type/gadgets_clock
   /repository/search/type/gadgets_countdown:
     get:
       description: API to search for entries of type Countdown
@@ -5563,7 +5563,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Countdown' entry type"
       tags:
-        - gadgets_countdown
+        - type/gadgets_countdown
   /repository/search/type/gadgets_stock:
     get:
       description: API to search for entries of type Stock Ticker
@@ -5674,7 +5674,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Stock Ticker' entry type"
       tags:
-        - gadgets_stock
+        - type/gadgets_stock
   /repository/search/type/gadgets_weather:
     get:
       description: API to search for entries of type Weather
@@ -5785,7 +5785,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Weather' entry type"
       tags:
-        - gadgets_weather
+        - type/gadgets_weather
   /repository/search/type/gdata_docs:
     get:
       description: API to search for entries of type Google Docs View
@@ -5896,7 +5896,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Google Docs View' entry type"
       tags:
-        - gdata_docs
+        - type/gdata_docs
   /repository/search/type/gdata_photos:
     get:
       description: API to search for entries of type Google Web Albums View
@@ -6007,7 +6007,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Google Web Albums View' entry type"
       tags:
-        - gdata_photos
+        - type/gdata_photos
   /repository/search/type/geo_gpx:
     get:
       description: API to search for entries of type GPX GPS File
@@ -6118,7 +6118,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'GPX GPS File' entry type"
       tags:
-        - geo_gpx
+        - type/geo_gpx
   /repository/search/type/geo_hdf5:
     get:
       description: API to search for entries of type HDF5 File
@@ -6229,7 +6229,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'HDF5 File' entry type"
       tags:
-        - geo_hdf5
+        - type/geo_hdf5
   /repository/search/type/geo_kml:
     get:
       description: API to search for entries of type KML/KMZ File
@@ -6340,7 +6340,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'KML/KMZ File' entry type"
       tags:
-        - geo_kml
+        - type/geo_kml
   /repository/search/type/geo_shapefile:
     get:
       description: API to search for entries of type Shapefile
@@ -6451,7 +6451,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Shapefile' entry type"
       tags:
-        - geo_shapefile
+        - type/geo_shapefile
   /repository/search/type/glossary:
     get:
       description: API to search for entries of type Glossary
@@ -6562,7 +6562,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Glossary' entry type"
       tags:
-        - glossary
+        - type/glossary
   /repository/search/type/gridaggregation:
     get:
       description: API to search for entries of type Grid Aggregation
@@ -6673,7 +6673,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Grid Aggregation' entry type"
       tags:
-        - gridaggregation
+        - type/gridaggregation
   /repository/search/type/group:
     get:
       description: API to search for entries of type Folder
@@ -6784,7 +6784,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Folder' entry type"
       tags:
-        - group
+        - type/group
   /repository/search/type/hipchat_group:
     get:
       description: API to search for entries of type HipChat Group
@@ -6895,7 +6895,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'HipChat Group' entry type"
       tags:
-        - hipchat_group
+        - type/hipchat_group
   /repository/search/type/homepage:
     get:
       description: API to search for entries of type Home Page
@@ -7006,7 +7006,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Home Page' entry type"
       tags:
-        - homepage
+        - type/homepage
   /repository/search/type/incident:
     get:
       description: API to search for entries of type Incident
@@ -7132,7 +7132,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Incident' entry type"
       tags:
-        - incident
+        - type/incident
   /repository/search/type/incident_basement:
     get:
       description: API to search for entries of type Basement Flooding
@@ -7268,7 +7268,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Basement Flooding' entry type"
       tags:
-        - incident_basement
+        - type/incident_basement
   /repository/search/type/investigation_case:
     get:
       description: API to search for entries of type Investigation
@@ -7379,7 +7379,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Investigation' entry type"
       tags:
-        - investigation_case
+        - type/investigation_case
   /repository/search/type/investigation_cellphonelog:
     get:
       description: API to search for entries of type Cell Phone Log
@@ -7556,7 +7556,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Cell Phone Log' entry type"
       tags:
-        - investigation_cellphonelog
+        - type/investigation_cellphonelog
   /repository/search/type/investigation_event:
     get:
       description: API to search for entries of type Event
@@ -7667,7 +7667,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Event' entry type"
       tags:
-        - investigation_event
+        - type/investigation_event
   /repository/search/type/investigation_oldphonelog:
     get:
       description: API to search for entries of type Old Phone Log
@@ -7833,7 +7833,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Old Phone Log' entry type"
       tags:
-        - investigation_oldphonelog
+        - type/investigation_oldphonelog
   /repository/search/type/investigation_person:
     get:
       description: API to search for entries of type Person
@@ -7944,7 +7944,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Person' entry type"
       tags:
-        - investigation_person
+        - type/investigation_person
   /repository/search/type/investigation_thing:
     get:
       description: API to search for entries of type Thing
@@ -8055,7 +8055,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Thing' entry type"
       tags:
-        - investigation_thing
+        - type/investigation_thing
   /repository/search/type/latlonimage:
     get:
       description: API to search for entries of type WMS Image
@@ -8166,7 +8166,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'WMS Image' entry type"
       tags:
-        - latlonimage
+        - type/latlonimage
   /repository/search/type/lidar_collection:
     get:
       description: API to search for entries of type LiDAR Collection
@@ -8277,7 +8277,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'LiDAR Collection' entry type"
       tags:
-        - lidar_collection
+        - type/lidar_collection
   /repository/search/type/lidar_glas:
     get:
       description: API to search for entries of type GLAS Lidar Data
@@ -8388,7 +8388,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'GLAS Lidar Data' entry type"
       tags:
-        - lidar_glas
+        - type/lidar_glas
   /repository/search/type/lidar_las:
     get:
       description: API to search for entries of type LAS Lidar Data
@@ -8499,7 +8499,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'LAS Lidar Data' entry type"
       tags:
-        - lidar_las
+        - type/lidar_las
   /repository/search/type/lidar_lvis:
     get:
       description: API to search for entries of type LVIS Lidar Data
@@ -8610,7 +8610,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'LVIS Lidar Data' entry type"
       tags:
-        - lidar_lvis
+        - type/lidar_lvis
   /repository/search/type/link:
     get:
       description: API to search for entries of type Link
@@ -8721,7 +8721,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Link' entry type"
       tags:
-        - link
+        - type/link
   /repository/search/type/localfiles:
     get:
       description: API to search for entries of type Server Side Files
@@ -8832,7 +8832,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Server Side Files' entry type"
       tags:
-        - localfiles
+        - type/localfiles
   /repository/search/type/locations:
     get:
       description: API to search for entries of type Locations
@@ -8958,7 +8958,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Locations' entry type"
       tags:
-        - locations
+        - type/locations
   /repository/search/type/map_googlemap:
     get:
       description: API to search for entries of type Google Map URL
@@ -9069,7 +9069,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Google Map URL' entry type"
       tags:
-        - map_googlemap
+        - type/map_googlemap
   /repository/search/type/media_audiofile:
     get:
       description: API to search for entries of type Audio File
@@ -9180,7 +9180,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Audio File' entry type"
       tags:
-        - media_audiofile
+        - type/media_audiofile
   /repository/search/type/media_imageloop:
     get:
       description: API to search for entries of type Image Loop
@@ -9291,7 +9291,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Image Loop' entry type"
       tags:
-        - media_imageloop
+        - type/media_imageloop
   /repository/search/type/media_photoalbum:
     get:
       description: API to search for entries of type Photo Album
@@ -9402,7 +9402,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Photo Album' entry type"
       tags:
-        - media_photoalbum
+        - type/media_photoalbum
   /repository/search/type/media_video_channel:
     get:
       description: API to search for entries of type Video Channel
@@ -9513,7 +9513,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Video Channel' entry type"
       tags:
-        - media_video_channel
+        - type/media_video_channel
   /repository/search/type/media_video_quicktime:
     get:
       description: API to search for entries of type Quicktime Video
@@ -9624,7 +9624,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Quicktime Video' entry type"
       tags:
-        - media_video_quicktime
+        - type/media_video_quicktime
   /repository/search/type/media_youtubevideo:
     get:
       description: API to search for entries of type YouTube Video
@@ -9735,7 +9735,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'YouTube Video' entry type"
       tags:
-        - media_youtubevideo
+        - type/media_youtubevideo
   /repository/search/type/multisearch:
     get:
       description: API to search for entries of type Multiple Search
@@ -9846,7 +9846,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Multiple Search' entry type"
       tags:
-        - multisearch
+        - type/multisearch
   /repository/search/type/notes:
     get:
       description: API to search for entries of type Notes
@@ -9957,7 +9957,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Notes' entry type"
       tags:
-        - notes
+        - type/notes
   /repository/search/type/notes_note:
     get:
       description: API to search for entries of type Note
@@ -10068,7 +10068,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Note' entry type"
       tags:
-        - notes_note
+        - type/notes_note
   /repository/search/type/opendaplink:
     get:
       description: API to search for entries of type OPeNDAP Link
@@ -10179,7 +10179,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'OPeNDAP Link' entry type"
       tags:
-        - opendaplink
+        - type/opendaplink
   /repository/search/type/owl.class:
     get:
       description: API to search for entries of type OWL Class
@@ -10290,7 +10290,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'OWL Class' entry type"
       tags:
-        - owl.class
+        - type/owl.class
   /repository/search/type/owl.ontology:
     get:
       description: API to search for entries of type OWL Ontology
@@ -10401,7 +10401,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'OWL Ontology' entry type"
       tags:
-        - owl.ontology
+        - type/owl.ontology
   /repository/search/type/pasteitentry:
     get:
       description: API to search for entries of type Paste Text Entry
@@ -10512,7 +10512,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Paste Text Entry' entry type"
       tags:
-        - pasteitentry
+        - type/pasteitentry
   /repository/search/type/point_text:
     get:
       description: API to search for entries of type Text Point Data
@@ -10623,7 +10623,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Text Point Data' entry type"
       tags:
-        - point_text
+        - type/point_text
   /repository/search/type/poll:
     get:
       description: API to search for entries of type Poll
@@ -10734,7 +10734,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Poll' entry type"
       tags:
-        - poll
+        - type/poll
   /repository/search/type/project_campaign:
     get:
       description: API to search for entries of type Campaign
@@ -10845,7 +10845,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Campaign' entry type"
       tags:
-        - project_campaign
+        - type/project_campaign
   /repository/search/type/project_casestudy:
     get:
       description: API to search for entries of type Case Study
@@ -10966,7 +10966,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Case Study' entry type"
       tags:
-        - project_casestudy
+        - type/project_casestudy
   /repository/search/type/project_contribution:
     get:
       description: API to search for entries of type Research Contribution
@@ -11077,7 +11077,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Research Contribution' entry type"
       tags:
-        - project_contribution
+        - type/project_contribution
   /repository/search/type/project_dataformat:
     get:
       description: API to search for entries of type Data Format
@@ -11198,7 +11198,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Data Format' entry type"
       tags:
-        - project_dataformat
+        - type/project_dataformat
   /repository/search/type/project_dataset:
     get:
       description: API to search for entries of type Dataset
@@ -11324,7 +11324,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Dataset' entry type"
       tags:
-        - project_dataset
+        - type/project_dataset
   /repository/search/type/project_deployment:
     get:
       description: API to search for entries of type Deployment
@@ -11435,7 +11435,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Deployment' entry type"
       tags:
-        - project_deployment
+        - type/project_deployment
   /repository/search/type/project_experiment:
     get:
       description: API to search for entries of type Experiment
@@ -11546,7 +11546,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Experiment' entry type"
       tags:
-        - project_experiment
+        - type/project_experiment
   /repository/search/type/project_fieldnote:
     get:
       description: API to search for entries of type Field Note
@@ -11657,7 +11657,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Field Note' entry type"
       tags:
-        - project_fieldnote
+        - type/project_fieldnote
   /repository/search/type/project_gps_controlpoints:
     get:
       description: API to search for entries of type Control Points File
@@ -11768,7 +11768,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Control Points File' entry type"
       tags:
-        - project_gps_controlpoints
+        - type/project_gps_controlpoints
   /repository/search/type/project_gps_raw:
     get:
       description: API to search for entries of type Raw GPS File
@@ -11879,7 +11879,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Raw GPS File' entry type"
       tags:
-        - project_gps_raw
+        - type/project_gps_raw
   /repository/search/type/project_gps_rinex:
     get:
       description: API to search for entries of type RINEX File
@@ -11990,7 +11990,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'RINEX File' entry type"
       tags:
-        - project_gps_rinex
+        - type/project_gps_rinex
   /repository/search/type/project_instrument:
     get:
       description: API to search for entries of type Instrument Data Collection
@@ -12101,7 +12101,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Instrument Data Collection' entry type"
       tags:
-        - project_instrument
+        - type/project_instrument
   /repository/search/type/project_learning_resource:
     get:
       description: API to search for entries of type Teaching Resource
@@ -12222,7 +12222,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Teaching Resource' entry type"
       tags:
-        - project_learning_resource
+        - type/project_learning_resource
   /repository/search/type/project_meeting:
     get:
       description: API to search for entries of type Meeting
@@ -12348,7 +12348,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Meeting' entry type"
       tags:
-        - project_meeting
+        - type/project_meeting
   /repository/search/type/project_organization:
     get:
       description: API to search for entries of type Organization
@@ -12469,7 +12469,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Organization' entry type"
       tags:
-        - project_organization
+        - type/project_organization
   /repository/search/type/project_program:
     get:
       description: API to search for entries of type Program
@@ -12580,7 +12580,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Program' entry type"
       tags:
-        - project_program
+        - type/project_program
   /repository/search/type/project_project:
     get:
       description: API to search for entries of type Project
@@ -12691,7 +12691,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Project' entry type"
       tags:
-        - project_project
+        - type/project_project
   /repository/search/type/project_service:
     get:
       description: API to search for entries of type Data Access Service
@@ -12812,7 +12812,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Data Access Service' entry type"
       tags:
-        - project_service
+        - type/project_service
   /repository/search/type/project_site:
     get:
       description: API to search for entries of type Site
@@ -12958,7 +12958,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Site' entry type"
       tags:
-        - project_site
+        - type/project_site
   /repository/search/type/project_softwarepackage:
     get:
       description: API to search for entries of type Software Tool
@@ -13104,7 +13104,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Software Tool' entry type"
       tags:
-        - project_softwarepackage
+        - type/project_softwarepackage
   /repository/search/type/project_standard_name:
     get:
       description: API to search for entries of type Standard Parameter Name
@@ -13225,7 +13225,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Standard Parameter Name' entry type"
       tags:
-        - project_standard_name
+        - type/project_standard_name
   /repository/search/type/project_surveylocation:
     get:
       description: API to search for entries of type Survey Location
@@ -13336,7 +13336,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Survey Location' entry type"
       tags:
-        - project_surveylocation
+        - type/project_surveylocation
   /repository/search/type/project_term:
     get:
       description: API to search for entries of type Vocabulary Term
@@ -13452,7 +13452,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Vocabulary Term' entry type"
       tags:
-        - project_term
+        - type/project_term
   /repository/search/type/project_visit:
     get:
       description: API to search for entries of type Site Visit
@@ -13563,7 +13563,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Site Visit' entry type"
       tags:
-        - project_visit
+        - type/project_visit
   /repository/search/type/project_vocabulary:
     get:
       description: API to search for entries of type Vocabulary
@@ -13674,7 +13674,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Vocabulary' entry type"
       tags:
-        - project_vocabulary
+        - type/project_vocabulary
   /repository/search/type/property_sales:
     get:
       description: API to search for entries of type Property Sales
@@ -13846,7 +13846,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Property Sales' entry type"
       tags:
-        - property_sales
+        - type/property_sales
   /repository/search/type/propertydb:
     get:
       description: API to search for entries of type Property Database
@@ -14019,7 +14019,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Property Database' entry type"
       tags:
-        - propertydb
+        - type/propertydb
   /repository/search/type/python_notebook:
     get:
       description: API to search for entries of type IPython Notebook file
@@ -14130,7 +14130,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'IPython Notebook file' entry type"
       tags:
-        - python_notebook
+        - type/python_notebook
   /repository/search/type/registrations:
     get:
       description: API to search for entries of type Registrations
@@ -14297,7 +14297,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Registrations' entry type"
       tags:
-        - registrations
+        - type/registrations
   /repository/search/type/slack_team:
     get:
       description: API to search for entries of type Slack Team
@@ -14408,7 +14408,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Slack Team' entry type"
       tags:
-        - slack_team
+        - type/slack_team
   /repository/search/type/statusboard:
     get:
       description: API to search for entries of type Status Board
@@ -14529,7 +14529,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Status Board' entry type"
       tags:
-        - statusboard
+        - type/statusboard
   /repository/search/type/tasks:
     get:
       description: API to search for entries of type Tasks
@@ -14676,7 +14676,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Tasks' entry type"
       tags:
-        - tasks
+        - type/tasks
   /repository/search/type/test_co_contributiondata:
     get:
       description: API to search for entries of type Colorado Election Contributions
@@ -14858,7 +14858,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Colorado Election Contributions' entry type"
       tags:
-        - test_co_contributiondata
+        - type/test_co_contributiondata
   /repository/search/type/todo:
     get:
       description: API to search for entries of type Todo
@@ -14984,7 +14984,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Todo' entry type"
       tags:
-        - todo
+        - type/todo
   /repository/search/type/trip_event:
     get:
       description: API to search for entries of type Event
@@ -15095,7 +15095,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Event' entry type"
       tags:
-        - trip_event
+        - type/trip_event
   /repository/search/type/trip_flight:
     get:
       description: API to search for entries of type Flight Leg
@@ -15206,7 +15206,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Flight Leg' entry type"
       tags:
-        - trip_flight
+        - type/trip_flight
   /repository/search/type/trip_hotel:
     get:
       description: API to search for entries of type Lodging
@@ -15317,7 +15317,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Lodging' entry type"
       tags:
-        - trip_hotel
+        - type/trip_hotel
   /repository/search/type/trip_report:
     get:
       description: API to search for entries of type Trip Report
@@ -15428,7 +15428,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Trip Report' entry type"
       tags:
-        - trip_report
+        - type/trip_report
   /repository/search/type/trip_trip:
     get:
       description: API to search for entries of type Trip
@@ -15539,7 +15539,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Trip' entry type"
       tags:
-        - trip_trip
+        - type/trip_trip
   /repository/search/type/type_awc_metar:
     get:
       description: API to search for entries of type AWC Weather Observations
@@ -15655,7 +15655,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'AWC Weather Observations' entry type"
       tags:
-        - type_awc_metar
+        - type/type_awc_metar
   /repository/search/type/type_awhere_farm:
     get:
       description: API to search for entries of type aWhere Farm
@@ -15766,7 +15766,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'aWhere Farm' entry type"
       tags:
-        - type_awhere_farm
+        - type/type_awhere_farm
   /repository/search/type/type_awhere_field:
     get:
       description: API to search for entries of type aWhere Field
@@ -15877,7 +15877,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'aWhere Field' entry type"
       tags:
-        - type_awhere_field
+        - type/type_awhere_field
   /repository/search/type/type_biz_stockseries:
     get:
       description: API to search for entries of type Stock Ticker Data
@@ -15988,7 +15988,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Stock Ticker Data' entry type"
       tags:
-        - type_biz_stockseries
+        - type/type_biz_stockseries
   /repository/search/type/type_census_acs:
     get:
       description: API to search for entries of type US Census ACS Data
@@ -16119,7 +16119,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'US Census ACS Data' entry type"
       tags:
-        - type_census_acs
+        - type/type_census_acs
   /repository/search/type/type_db_table:
     get:
       description: API to search for entries of type Database Table
@@ -16230,7 +16230,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Database Table' entry type"
       tags:
-        - type_db_table
+        - type/type_db_table
   /repository/search/type/type_document_csv:
     get:
       description: API to search for entries of type CSV File
@@ -16341,7 +16341,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'CSV File' entry type"
       tags:
-        - type_document_csv
+        - type/type_document_csv
   /repository/search/type/type_document_doc:
     get:
       description: API to search for entries of type Microsoft Word File
@@ -16452,7 +16452,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Microsoft Word File' entry type"
       tags:
-        - type_document_doc
+        - type/type_document_doc
   /repository/search/type/type_document_html:
     get:
       description: API to search for entries of type HTML File
@@ -16563,7 +16563,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'HTML File' entry type"
       tags:
-        - type_document_html
+        - type/type_document_html
   /repository/search/type/type_document_pdf:
     get:
       description: API to search for entries of type PDF File
@@ -16674,7 +16674,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'PDF File' entry type"
       tags:
-        - type_document_pdf
+        - type/type_document_pdf
   /repository/search/type/type_document_ppt:
     get:
       description: API to search for entries of type Microsoft Powerpoint File
@@ -16785,7 +16785,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Microsoft Powerpoint File' entry type"
       tags:
-        - type_document_ppt
+        - type/type_document_ppt
   /repository/search/type/type_document_xls:
     get:
       description: API to search for entries of type Microsoft Excel File
@@ -16896,7 +16896,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Microsoft Excel File' entry type"
       tags:
-        - type_document_xls
+        - type/type_document_xls
   /repository/search/type/type_edgar_filing:
     get:
       description: API to search for entries of type SEC EDGAR Filing
@@ -17037,7 +17037,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'SEC EDGAR Filing' entry type"
       tags:
-        - type_edgar_filing
+        - type/type_edgar_filing
   /repository/search/type/type_eia_category:
     get:
       description: API to search for entries of type EIA Category
@@ -17148,7 +17148,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'EIA Category' entry type"
       tags:
-        - type_eia_category
+        - type/type_eia_category
   /repository/search/type/type_eia_series:
     get:
       description: API to search for entries of type EIA Series
@@ -17259,7 +17259,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'EIA Series' entry type"
       tags:
-        - type_eia_series
+        - type/type_eia_series
   /repository/search/type/type_esri_featureserver:
     get:
       description: API to search for entries of type ESRI Feature Server
@@ -17370,7 +17370,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'ESRI Feature Server' entry type"
       tags:
-        - type_esri_featureserver
+        - type/type_esri_featureserver
   /repository/search/type/type_esri_geometryserver:
     get:
       description: API to search for entries of type ESRI Geometry Server
@@ -17481,7 +17481,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'ESRI Geometry Server' entry type"
       tags:
-        - type_esri_geometryserver
+        - type/type_esri_geometryserver
   /repository/search/type/type_esri_gpserver:
     get:
       description: API to search for entries of type ESRI GP Server
@@ -17592,7 +17592,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'ESRI GP Server' entry type"
       tags:
-        - type_esri_gpserver
+        - type/type_esri_gpserver
   /repository/search/type/type_esri_imageserver:
     get:
       description: API to search for entries of type ESRI Image Server
@@ -17703,7 +17703,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'ESRI Image Server' entry type"
       tags:
-        - type_esri_imageserver
+        - type/type_esri_imageserver
   /repository/search/type/type_esri_mapserver:
     get:
       description: API to search for entries of type ESRI Map Server
@@ -17814,7 +17814,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'ESRI Map Server' entry type"
       tags:
-        - type_esri_mapserver
+        - type/type_esri_mapserver
   /repository/search/type/type_esri_restfolder:
     get:
       description: API to search for entries of type ESRI Services Folder
@@ -17925,7 +17925,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'ESRI Services Folder' entry type"
       tags:
-        - type_esri_restfolder
+        - type/type_esri_restfolder
   /repository/search/type/type_esri_restserver:
     get:
       description: API to search for entries of type ESRI Web Server
@@ -18036,7 +18036,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'ESRI Web Server' entry type"
       tags:
-        - type_esri_restserver
+        - type/type_esri_restserver
   /repository/search/type/type_esri_restservice:
     get:
       description: API to search for entries of type ESRI Rest Service
@@ -18147,7 +18147,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'ESRI Rest Service' entry type"
       tags:
-        - type_esri_restservice
+        - type/type_esri_restservice
   /repository/search/type/type_fred_category:
     get:
       description: API to search for entries of type FRED Category
@@ -18258,7 +18258,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'FRED Category' entry type"
       tags:
-        - type_fred_category
+        - type/type_fred_category
   /repository/search/type/type_fred_series:
     get:
       description: API to search for entries of type FRED Series
@@ -18369,7 +18369,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'FRED Series' entry type"
       tags:
-        - type_fred_series
+        - type/type_fred_series
   /repository/search/type/type_hydro_colorado:
     get:
       description: API to search for entries of type Colorado DNR Stream Gage
@@ -18485,7 +18485,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Colorado DNR Stream Gage' entry type"
       tags:
-        - type_hydro_colorado
+        - type/type_hydro_colorado
   /repository/search/type/type_idv_bundle:
     get:
       description: API to search for entries of type IDV Bundle
@@ -18596,7 +18596,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'IDV Bundle' entry type"
       tags:
-        - type_idv_bundle
+        - type/type_idv_bundle
   /repository/search/type/type_image:
     get:
       description: API to search for entries of type Image
@@ -18707,7 +18707,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Image' entry type"
       tags:
-        - type_image
+        - type/type_image
   /repository/search/type/type_mb:
     get:
       description: API to search for entries of type MB Bathymetry
@@ -18818,7 +18818,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'MB Bathymetry' entry type"
       tags:
-        - type_mb
+        - type/type_mb
   /repository/search/type/type_mb_collection:
     get:
       description: API to search for entries of type Bathymetry Collection
@@ -18929,7 +18929,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Bathymetry Collection' entry type"
       tags:
-        - type_mb_collection
+        - type/type_mb_collection
   /repository/search/type/type_mb_point_basic:
     get:
       description: API to search for entries of type Basic MB point file
@@ -19040,7 +19040,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Basic MB point file' entry type"
       tags:
-        - type_mb_point_basic
+        - type/type_mb_point_basic
   /repository/search/type/type_metameta_collection:
     get:
       description: 'API to search for entries of type Data Dictionary: Metadata Collection'
@@ -19151,7 +19151,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Data Dictionary: Metadata Collection' entry type"
       tags:
-        - type_metameta_collection
+        - type/type_metameta_collection
   /repository/search/type/type_metameta_dictionary:
     get:
       description: 'API to search for entries of type Data Dictionary: Metadata Dictionary'
@@ -19302,7 +19302,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Data Dictionary: Metadata Dictionary' entry type"
       tags:
-        - type_metameta_dictionary
+        - type/type_metameta_dictionary
   /repository/search/type/type_metameta_field:
     get:
       description: 'API to search for entries of type Data Dictionary: Metadata Field'
@@ -19453,7 +19453,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Data Dictionary: Metadata Field' entry type"
       tags:
-        - type_metameta_field
+        - type/type_metameta_field
   /repository/search/type/type_nist_constant:
     get:
       description: API to search for entries of type CODATA Fundamental Physical Constants
@@ -19569,7 +19569,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'CODATA Fundamental Physical Constants' entry type"
       tags:
-        - type_nist_constant
+        - type/type_nist_constant
   /repository/search/type/type_nist_energy:
     get:
       description: API to search for entries of type NIST Ionization Energy Data
@@ -19695,7 +19695,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'NIST Ionization Energy Data' entry type"
       tags:
-        - type_nist_energy
+        - type/type_nist_energy
   /repository/search/type/type_nist_isotope:
     get:
       description: API to search for entries of type NIST Isotope
@@ -19806,7 +19806,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'NIST Isotope' entry type"
       tags:
-        - type_nist_isotope
+        - type/type_nist_isotope
   /repository/search/type/type_nist_janaffile:
     get:
       description: API to search for entries of type NIST JANAF Thermochemical Table
@@ -19917,7 +19917,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'NIST JANAF Thermochemical Table' entry type"
       tags:
-        - type_nist_janaffile
+        - type/type_nist_janaffile
   /repository/search/type/type_point_ameriflux_level2:
     get:
       description: API to search for entries of type Ameriflux Level 2 CSV File
@@ -20043,7 +20043,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Ameriflux Level 2 CSV File' entry type"
       tags:
-        - type_point_ameriflux_level2
+        - type/type_point_ameriflux_level2
   /repository/search/type/type_point_amrc_final:
     get:
       description: API to search for entries of type AMRC Final QC Data
@@ -20169,7 +20169,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'AMRC Final QC Data' entry type"
       tags:
-        - type_point_amrc_final
+        - type/type_point_amrc_final
   /repository/search/type/type_point_amrc_freewave:
     get:
       description: API to search for entries of type AMRC Freewave  Data
@@ -20300,7 +20300,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'AMRC Freewave  Data' entry type"
       tags:
-        - type_point_amrc_freewave
+        - type/type_point_amrc_freewave
   /repository/search/type/type_point_collection:
     get:
       description: API to search for entries of type Point Data Collection
@@ -20411,7 +20411,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Point Data Collection' entry type"
       tags:
-        - type_point_collection
+        - type/type_point_collection
   /repository/search/type/type_point_czo:
     get:
       description: API to search for entries of type CZO Display File Format
@@ -20522,7 +20522,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'CZO Display File Format' entry type"
       tags:
-        - type_point_czo
+        - type/type_point_czo
   /repository/search/type/type_point_gcnet:
     get:
       description: API to search for entries of type GC-Net Point Data
@@ -20633,7 +20633,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'GC-Net Point Data' entry type"
       tags:
-        - type_point_gcnet
+        - type/type_point_gcnet
   /repository/search/type/type_point_geomag_iaga2002:
     get:
       description: API to search for entries of type IAGA 2002 Geomagnetism Data
@@ -20774,7 +20774,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'IAGA 2002 Geomagnetism Data' entry type"
       tags:
-        - type_point_geomag_iaga2002
+        - type/type_point_geomag_iaga2002
   /repository/search/type/type_point_hydro_waterml:
     get:
       description: API to search for entries of type WaterML
@@ -20895,7 +20895,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'WaterML' entry type"
       tags:
-        - type_point_hydro_waterml
+        - type/type_point_hydro_waterml
   /repository/search/type/type_point_icebridge_atm_icessn:
     get:
       description: API to search for entries of type ATM Ice SSN Data
@@ -21006,7 +21006,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'ATM Ice SSN Data' entry type"
       tags:
-        - type_point_icebridge_atm_icessn
+        - type/type_point_icebridge_atm_icessn
   /repository/search/type/type_point_icebridge_atm_qfit:
     get:
       description: API to search for entries of type ATM QFIT Data
@@ -21117,7 +21117,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'ATM QFIT Data' entry type"
       tags:
-        - type_point_icebridge_atm_qfit
+        - type/type_point_icebridge_atm_qfit
   /repository/search/type/type_point_icebridge_mccords_irmcr2:
     get:
       description: API to search for entries of type McCords Irmcr2 Data
@@ -21228,7 +21228,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'McCords Irmcr2 Data' entry type"
       tags:
-        - type_point_icebridge_mccords_irmcr2
+        - type/type_point_icebridge_mccords_irmcr2
   /repository/search/type/type_point_icebridge_mccords_irmcr3:
     get:
       description: API to search for entries of type McCords Irmcr3 Data
@@ -21339,7 +21339,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'McCords Irmcr3 Data' entry type"
       tags:
-        - type_point_icebridge_mccords_irmcr3
+        - type/type_point_icebridge_mccords_irmcr3
   /repository/search/type/type_point_icebridge_paris:
     get:
       description: API to search for entries of type Paris Data
@@ -21450,7 +21450,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Paris Data' entry type"
       tags:
-        - type_point_icebridge_paris
+        - type/type_point_icebridge_paris
   /repository/search/type/type_point_idv:
     get:
       description: API to search for entries of type IDV Point File
@@ -21561,7 +21561,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'IDV Point File' entry type"
       tags:
-        - type_point_idv
+        - type/type_point_idv
   /repository/search/type/type_point_ncdc_climate:
     get:
       description: API to search for entries of type NC  DC Climate Data
@@ -21672,7 +21672,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'NC  DC Climate Data' entry type"
       tags:
-        - type_point_ncdc_climate
+        - type/type_point_ncdc_climate
   /repository/search/type/type_point_netcdf:
     get:
       description: API to search for entries of type NetCDF Point File
@@ -21783,7 +21783,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'NetCDF Point File' entry type"
       tags:
-        - type_point_netcdf
+        - type/type_point_netcdf
   /repository/search/type/type_point_noaa_carbon:
     get:
       description: API to search for entries of type NOAA Carbon Measurements
@@ -21919,7 +21919,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'NOAA Carbon Measurements' entry type"
       tags:
-        - type_point_noaa_carbon
+        - type/type_point_noaa_carbon
   /repository/search/type/type_point_noaa_flask_event:
     get:
       description: API to search for entries of type NOAA Flask Event Measurements
@@ -22055,7 +22055,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'NOAA Flask Event Measurements' entry type"
       tags:
-        - type_point_noaa_flask_event
+        - type/type_point_noaa_flask_event
   /repository/search/type/type_point_noaa_flask_month:
     get:
       description: API to search for entries of type NOAA Flask Month Measurements
@@ -22191,7 +22191,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'NOAA Flask Month Measurements' entry type"
       tags:
-        - type_point_noaa_flask_month
+        - type/type_point_noaa_flask_month
   /repository/search/type/type_point_noaa_madis:
     get:
       description: API to search for entries of type NOAA MADIS Point Data
@@ -22302,7 +22302,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'NOAA MADIS Point Data' entry type"
       tags:
-        - type_point_noaa_madis
+        - type/type_point_noaa_madis
   /repository/search/type/type_point_noaa_tower:
     get:
       description: API to search for entries of type NOAA Tower Network
@@ -22418,7 +22418,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'NOAA Tower Network' entry type"
       tags:
-        - type_point_noaa_tower
+        - type/type_point_noaa_tower
   /repository/search/type/type_point_ocean_cnv:
     get:
       description: API to search for entries of type SeaBird CNV Data
@@ -22529,7 +22529,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'SeaBird CNV Data' entry type"
       tags:
-        - type_point_ocean_cnv
+        - type/type_point_ocean_cnv
   /repository/search/type/type_point_ocean_csv_sado_TTS:
     get:
       description: API to search for entries of type SADO TTS Data
@@ -22640,7 +22640,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'SADO TTS Data' entry type"
       tags:
-        - type_point_ocean_csv_sado_TTS
+        - type/type_point_ocean_csv_sado_TTS
   /repository/search/type/type_point_ocean_csv_sado_meteo:
     get:
       description: API to search for entries of type SADO Meteo Data
@@ -22751,7 +22751,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'SADO Meteo Data' entry type"
       tags:
-        - type_point_ocean_csv_sado_meteo
+        - type/type_point_ocean_csv_sado_meteo
   /repository/search/type/type_point_ocean_csv_sado_position:
     get:
       description: API to search for entries of type SADO Position Data
@@ -22862,7 +22862,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'SADO Position Data' entry type"
       tags:
-        - type_point_ocean_csv_sado_position
+        - type/type_point_ocean_csv_sado_position
   /repository/search/type/type_point_ocean_netcdf_glider:
     get:
       description: API to search for entries of type NetCDF Glider Data
@@ -22978,7 +22978,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'NetCDF Glider Data' entry type"
       tags:
-        - type_point_ocean_netcdf_glider
+        - type/type_point_ocean_netcdf_glider
   /repository/search/type/type_point_ocean_netcdf_track:
     get:
       description: API to search for entries of type NetCDF Track Data
@@ -23094,7 +23094,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'NetCDF Track Data' entry type"
       tags:
-        - type_point_ocean_netcdf_track
+        - type/type_point_ocean_netcdf_track
   /repository/search/type/type_point_ocean_ooi_dmgx:
     get:
       description: API to search for entries of type OOI Data
@@ -23205,7 +23205,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'OOI Data' entry type"
       tags:
-        - type_point_ocean_ooi_dmgx
+        - type/type_point_ocean_ooi_dmgx
   /repository/search/type/type_point_pbo_position_time_series:
     get:
       description: API to search for entries of type PBO Position Time Series
@@ -23341,7 +23341,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'PBO Position Time Series' entry type"
       tags:
-        - type_point_pbo_position_time_series
+        - type/type_point_pbo_position_time_series
   /repository/search/type/type_point_snotel:
     get:
       description: API to search for entries of type SNOTEL Snow Data
@@ -23482,7 +23482,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'SNOTEL Snow Data' entry type"
       tags:
-        - type_point_snotel
+        - type/type_point_snotel
   /repository/search/type/type_point_wsbb_ggp:
     get:
       description: API to search for entries of type Global Geodynamics GGP Format
@@ -23608,7 +23608,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Global Geodynamics GGP Format' entry type"
       tags:
-        - type_point_wsbb_ggp
+        - type/type_point_wsbb_ggp
   /repository/search/type/type_power_miso_forecast:
     get:
       description: API to search for entries of type MISO Foreacast XML
@@ -23719,7 +23719,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'MISO Foreacast XML' entry type"
       tags:
-        - type_power_miso_forecast
+        - type/type_power_miso_forecast
   /repository/search/type/type_psd_monthly_climate_index:
     get:
       description: API to search for entries of type NOAA-ESRL-PSD Monthly Climate Index
@@ -23835,7 +23835,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'NOAA-ESRL-PSD Monthly Climate Index' entry type"
       tags:
-        - type_psd_monthly_climate_index
+        - type/type_psd_monthly_climate_index
   /repository/search/type/type_quandl_series:
     get:
       description: API to search for entries of type QUANDL Series
@@ -23946,7 +23946,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'QUANDL Series' entry type"
       tags:
-        - type_quandl_series
+        - type/type_quandl_series
   /repository/search/type/type_resilience_assessment:
     get:
       description: API to search for entries of type Resiliency Assessment
@@ -24092,7 +24092,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Resiliency Assessment' entry type"
       tags:
-        - type_resilience_assessment
+        - type/type_resilience_assessment
   /repository/search/type/type_resilience_project:
     get:
       description: API to search for entries of type Resiliency Project
@@ -24218,7 +24218,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Resiliency Project' entry type"
       tags:
-        - type_resilience_project
+        - type/type_resilience_project
   /repository/search/type/type_service_group:
     get:
       description: API to search for entries of type Service Group
@@ -24329,7 +24329,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Service Group' entry type"
       tags:
-        - type_service_group
+        - type/type_service_group
   /repository/search/type/type_service_link:
     get:
       description: API to search for entries of type Service Link
@@ -24440,7 +24440,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Service Link' entry type"
       tags:
-        - type_service_link
+        - type/type_service_link
   /repository/search/type/type_socrata_series:
     get:
       description: API to search for entries of type SOCRATA Series
@@ -24551,7 +24551,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'SOCRATA Series' entry type"
       tags:
-        - type_socrata_series
+        - type/type_socrata_series
   /repository/search/type/type_urbaninstitute_employment:
     get:
       description: API to search for entries of type MetroTrends Employment Data
@@ -24667,7 +24667,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'MetroTrends Employment Data' entry type"
       tags:
-        - type_urbaninstitute_employment
+        - type/type_urbaninstitute_employment
   /repository/search/type/type_usda_arms_crop:
     get:
       description: API to search for entries of type USDA ARMS Crop Data
@@ -24793,7 +24793,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'USDA ARMS Crop Data' entry type"
       tags:
-        - type_usda_arms_crop
+        - type/type_usda_arms_crop
   /repository/search/type/type_usda_arms_finance:
     get:
       description: API to search for entries of type USDA ARMS Finance Data
@@ -24919,7 +24919,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'USDA ARMS Finance Data' entry type"
       tags:
-        - type_usda_arms_finance
+        - type/type_usda_arms_finance
   /repository/search/type/type_usda_nass:
     get:
       description: API to search for entries of type USDA NASS Data
@@ -25045,7 +25045,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'USDA NASS Data' entry type"
       tags:
-        - type_usda_nass
+        - type/type_usda_nass
   /repository/search/type/type_virtual:
     get:
       description: API to search for entries of type Virtual Group
@@ -25156,7 +25156,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Virtual Group' entry type"
       tags:
-        - type_virtual
+        - type/type_virtual
   /repository/search/type/type_wms_capabilities:
     get:
       description: API to search for entries of type WMS Capabilities
@@ -25267,7 +25267,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'WMS Capabilities' entry type"
       tags:
-        - type_wms_capabilities
+        - type/type_wms_capabilities
   /repository/search/type/type_wms_layer:
     get:
       description: API to search for entries of type WMS Layer
@@ -25378,7 +25378,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'WMS Layer' entry type"
       tags:
-        - type_wms_layer
+        - type/type_wms_layer
   /repository/search/type/vote_yesno:
     get:
       description: API to search for entries of type Simple Yes-No Vote
@@ -25494,7 +25494,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Simple Yes-No Vote' entry type"
       tags:
-        - vote_yesno
+        - type/vote_yesno
   /repository/search/type/weblog:
     get:
       description: API to search for entries of type Weblog
@@ -25605,7 +25605,7 @@ paths:
           description: No response was specified
       summary: "Search API for 'Weblog' entry type"
       tags:
-        - weblog
+        - type/weblog
   /repository/search/type/wikipage:
     get:
       description: API to search for entries of type Wiki Page
@@ -25726,4 +25726,4 @@ paths:
           description: No response was specified
       summary: "Search API for 'Wiki Page' entry type"
       tags:
-        - wikipage
+        - type/wikipage

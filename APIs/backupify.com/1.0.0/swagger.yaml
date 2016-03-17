@@ -36,7 +36,7 @@ tags:
   - description: OAuth2 Access Token retrieval
     name: tokens
   - description: Simple utilities for testing various API functions
-    name: utilities
+    name: utils
   - description: Vendor retrieival
     name: vendors
   - description: Log viewer
@@ -96,7 +96,7 @@ paths:
           description: Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action
       summary: A simple method to test authentication of a customer access token.
       tags:
-        - utilities
+        - utils
   /v1/authenticate_vendor:
     get:
       description: Requires Access Token granted from client_credentials
@@ -113,7 +113,7 @@ paths:
           description: Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action
       summary: A simple method to test authentication of a vendor access token. The response body is empty JSON object.
       tags:
-        - utilities
+        - utils
   /v1/backup_definitions:
     get:
       description: 'This will retrieve a list of backup_defintions from all vendors. To view backup_defintions for a particular vendor, see the vendors API. Records are returned in ascending order (by id), with a default of 20 per page. Links to the next, previous, first, and last pages can be found in the response headers.'
@@ -1310,7 +1310,7 @@ paths:
           description: Success - The connection succeeded. The response body is an empty JSON object.
       summary: A simple method that returns a 200 response if the connection succeeds
       tags:
-        - utilities
+        - utils
   /v1/vendors/me:
     get:
       description: Requires Access Token granted from client credentials.

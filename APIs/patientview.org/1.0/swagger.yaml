@@ -17,13 +17,13 @@ info:
   x-providerName: patientview.org
 tags:
   - description: Auth Controller
-    name: auth
+    name: auth-controller
   - description: Observation Controller
-    name: observations
+    name: observation-controller
   - description: Observation Heading Controller
-    name: availableobservationheadings
+    name: observation-heading-controller
   - description: Patient Controller
-    name: basic
+    name: patient-controller
 paths:
   /auth/login:
     post:
@@ -56,7 +56,7 @@ paths:
           description: Not Found
       summary: Log In
       tags:
-        - auth
+        - auth-controller
   '/auth/logout/{token}':
     delete:
       consumes:
@@ -83,7 +83,7 @@ paths:
           description: Forbidden
       summary: Log Out
       tags:
-        - auth
+        - auth-controller
   '/auth/{token}/basicuserinformation':
     get:
       consumes:
@@ -112,7 +112,7 @@ paths:
           description: Not Found
       summary: Get Basic User Information
       tags:
-        - auth
+        - auth-controller
   '/patient/{userId}/basic':
     get:
       consumes:
@@ -145,7 +145,7 @@ paths:
           description: Not Found
       summary: Get Basic Patient Information
       tags:
-        - basic
+        - patient-controller
   '/user/{userId}/availableobservationheadings':
     get:
       consumes:
@@ -178,7 +178,7 @@ paths:
           description: Not Found
       summary: Get Available Observations Types For a User
       tags:
-        - availableobservationheadings
+        - observation-heading-controller
   '/user/{userId}/observations':
     get:
       consumes:
@@ -233,7 +233,7 @@ paths:
           description: Not Found
       summary: Get Observations of Multiple Types For a User
       tags:
-        - observations
+        - observation-controller
   '/user/{userId}/observations/{code}':
     get:
       consumes:
@@ -271,7 +271,7 @@ paths:
           description: Not Found
       summary: Get Observations of a Certain Type For a User
       tags:
-        - observations
+        - observation-controller
 definitions:
   BaseGroup:
     properties:

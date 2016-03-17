@@ -18,7 +18,7 @@ tags:
   - description: Core information related to your account
     name: account
   - description: Number context service
-    name: lookup
+    name: context
   - description: Send and schedule messages
     name: sms
   - description: Manage your contacts
@@ -329,7 +329,7 @@ paths:
           description: Not Found
       summary: lookup
       tags:
-        - lookup
+        - context
     post:
       consumes:
         - application/json
@@ -361,7 +361,7 @@ paths:
           description: Not Found
       summary: lookup
       tags:
-        - lookup
+        - context
   /api/rest/v1/groups/all:
     get:
       consumes:

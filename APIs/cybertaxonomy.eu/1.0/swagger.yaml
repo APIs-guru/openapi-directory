@@ -20,6 +20,9 @@ info:
     url: 'http://cybertaxonomy.eu/eubon-utis/api-docs'
     version: '1.2'
   x-providerName: cybertaxonomy.eu
+tags:
+  - description: Utis Controller
+    name: utis-controller
 paths:
   /capabilities:
     get:
@@ -43,6 +46,8 @@ paths:
         '404':
           description: Not Found
       summary: capabilities
+      tags:
+        - utis-controller
   /search:
     get:
       deprecated: false
@@ -100,6 +105,8 @@ paths:
         '404':
           description: Not Found
       summary: search
+      tags:
+        - utis-controller
 definitions:
   AtomisedName:
     properties:

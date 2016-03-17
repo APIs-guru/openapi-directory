@@ -93,7 +93,7 @@ tags:
   - description: Basic information about the user account.
     name: account
   - description: Geneea simple REST API version 1
-    name: s1
+    name: geneea-api-s1
 paths:
   /account:
     get:
@@ -169,7 +169,7 @@ paths:
           description: Not Found
       summary: Performs text correction (diacritization) on the given document
       tags:
-        - s1
+        - geneea-api-s1
     post:
       consumes:
         - application/json
@@ -200,7 +200,7 @@ paths:
           description: Not Found
       summary: Performs text correction (diacritization) on the given document
       tags:
-        - s1
+        - geneea-api-s1
   /s1/entities:
     get:
       consumes:
@@ -252,7 +252,7 @@ paths:
           description: Not Found
       summary: Performs named-entity recognition on the given document
       tags:
-        - s1
+        - geneea-api-s1
     post:
       consumes:
         - application/json
@@ -283,7 +283,7 @@ paths:
           description: Not Found
       summary: Performs named-entity recognition on the given document
       tags:
-        - s1
+        - geneea-api-s1
   /s1/lemmatize:
     get:
       consumes:
@@ -335,7 +335,7 @@ paths:
           description: Not Found
       summary: Performs lemmatization on the given document
       tags:
-        - s1
+        - geneea-api-s1
     post:
       consumes:
         - application/json
@@ -366,7 +366,7 @@ paths:
           description: Not Found
       summary: Performs lemmatization on the given document
       tags:
-        - s1
+        - geneea-api-s1
   /s1/sentiment:
     get:
       consumes:
@@ -418,7 +418,7 @@ paths:
           description: Not Found
       summary: Performs sentiment analysis on the given document
       tags:
-        - s1
+        - geneea-api-s1
     post:
       consumes:
         - application/json
@@ -449,7 +449,7 @@ paths:
           description: Not Found
       summary: Performs sentiment analysis on the given document
       tags:
-        - s1
+        - geneea-api-s1
   /s1/topic:
     get:
       consumes:
@@ -501,7 +501,7 @@ paths:
           description: Not Found
       summary: Performs topic detection on the given document
       tags:
-        - s1
+        - geneea-api-s1
     post:
       consumes:
         - application/json
@@ -532,7 +532,7 @@ paths:
           description: Not Found
       summary: Performs topic detection on the given document
       tags:
-        - s1
+        - geneea-api-s1
 definitions:
   EntitiesResponse:
     description: Response for the named-entity recognition
