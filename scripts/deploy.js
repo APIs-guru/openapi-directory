@@ -69,7 +69,7 @@ function cacheResources(specs) {
 
 function generateHTML(specs) {
   var locals = {
-    specs: _.map(specs, util.getSwaggerPath),
+    specs: _.map(specs, _.ary(util.getSwaggerPath, 1)),
     specRootUrl: specRootUrl
   };
 
