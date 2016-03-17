@@ -78,6 +78,7 @@ tags:
   - name: creatives
   - name: marketplacedeals
   - name: marketplacenotes
+  - name: marketplaceprivateauction
   - name: performanceReport
   - name: pretargetingConfig
   - name: products
@@ -717,6 +718,35 @@ paths:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - pretargetingConfig
+  '/privateauction/{private_auction_id}/updateproposal':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Update a given private auction proposal
+      operationId: adexchangebuyer.marketplaceprivateauction.updateproposal
+      parameters:
+        - in: path
+          name: private_auction_id
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UpdatePrivateAuctionProposalRequest'
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/adexchange.buyer'
+      tags:
+        - marketplaceprivateauction
   /products/search:
     get:
       description: Gets the requested product.
@@ -2582,4 +2612,23 @@ definitions:
         description: The width of the creative.
         format: int32
         type: integer
+    type: object
+  UpdatePrivateAuctionProposalRequest:
+    properties:
+      externalDealId:
+        description: The externalDealId of the deal to be updated.
+        type: string
+      note:
+        $ref: '#/definitions/MarketplaceNote'
+        description: Optional note to be added.
+      privateAuctionId:
+        description: The private auction id to be updated.
+        type: string
+      proposalRevisionNumber:
+        description: The current revision number of the proposal to be updated.
+        format: int64
+        type: string
+      updateAction:
+        description: The proposed action on the private auction proposal.
+        type: string
     type: object

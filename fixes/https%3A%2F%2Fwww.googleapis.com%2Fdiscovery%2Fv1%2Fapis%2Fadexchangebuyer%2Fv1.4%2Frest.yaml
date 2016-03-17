@@ -1,0 +1,10 @@
+spec:
+  resources:
+    marketplaceprivateauction:
+      methods:
+        updateproposal:
+          parameters:
+            - private_auction_id:
+                location: path
+                required: true
+                type: string
