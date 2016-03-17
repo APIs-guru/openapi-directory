@@ -196,7 +196,7 @@ function saveFixup(fixupPath, swagger, editedSwagger) {
     jsondiffpatch.unpatch(swagger, fixup);
 
   var diff = jsondiffpatch.diff(swagger, editedSwagger);
-  if (diff)
+  if (!_.isEqual(diff, fixup))
     util.saveYaml(fixupPath, diff);
 }
 
