@@ -38,7 +38,7 @@ cacheResources()
 function cacheResources(specs) {
   var specs = util.getSpecs('../APIs/');
 
-  return Promise.map(_.values(specs), function (swagger) {
+  return Promise.mapSeries(_.values(specs), function (swagger) {
     if (_.isUndefined(swagger.info['x-logo']))
       return swagger;
 
@@ -61,7 +61,7 @@ function cacheResources(specs) {
         swagger.info['x-logo'].url = specRootUrl + logoFile + fragment;
 
         return swagger;
-      }, {concurrency: 5});
+      });
   });
 }
 
