@@ -136,6 +136,18 @@ exports.getServiceName = function (swagger) {
   return swagger.info['x-serviceName'];
 }
 
+exports.getApiId = function (swagger) {
+  var id = exports.getProviderName(swagger);
+  assert(id.indexOf(':') === -1);
+
+  var service = exports.getServiceName(swagger);
+  if (!_.isUndefined(service)) {
+    assert(service.indexOf(':') === -1);
+    id += ':' + service;
+  }
+  return id;
+}
+
 exports.getPathComponents = function (swagger) {
   var serviceName = exports.getServiceName(swagger);
   var path = [exports.getProviderName(swagger)];

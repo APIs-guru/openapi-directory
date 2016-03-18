@@ -117,6 +117,9 @@ function updateCollection(dir) {
 
 function validateCollection() {
   var specs = util.getSpecs();
+
+  validatePrefered(specs);
+
   var foundErrors = false;
   async.forEachOfSeries(specs, function (swagger, filename, asyncCb) {
     console.error('======================== ' + filename + ' ================');
@@ -129,8 +132,30 @@ function validateCollection() {
     });
     asyncCb(null);
   }, function () {
+
     if (foundErrors)
       process.exitCode = errExitCode;
+  });
+}
+
+function validatePrefered(specs) {
+  var prefered = {}
+  _.each(specs, function (swagger) {
+    var id = util.getApiId(swagger);
+    prefered[id] = prefered[id] || [];
+    prefered[id].push(swagger.info['x-preferred']);
+  });
+
+  _.each(prefered, function (versions, id) {
+    if (_.size(versions) === 1)
+      return assert(_.isUndefined(versions[0]) || versions[0] === true);
+
+    var seenTrue = false;
+    _.each(versions, function (value) {
+      assert(_.isBoolean(value), 'Non boolean value for "x-preferred" in "' + id + '"');
+      assert(value !== true || !seenTrue, 'Multiply prefered versions in "' + id + '"');
+      seenTrue = value;
+    });
   });
 }
 
