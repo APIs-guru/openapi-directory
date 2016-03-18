@@ -470,11 +470,9 @@ function fixSpec(swagger, errors) {
   var fixed = false;
 
   _.each(errors, function (error) {
-    var parentPath = jp.compile(_.dropRight(error.path));
-    var path = jp.compile(error.path);
-
-    var parentValue = jp(swagger, parentPath);
-    var value = jp(swagger, path);
+    var path = error.path;
+    var parentValue = jp.get(swagger, _.dropRight(path));
+    var value = jp.get(swagger, path);
 
     var newValue;
 
@@ -567,7 +565,7 @@ function fixSpec(swagger, errors) {
         }
     }
     if (!_.isUndefined(newValue)) {
-      jp(swagger, path, newValue);
+      jp.set(swagger, path, newValue);
       fixed = true;
     }
   });
