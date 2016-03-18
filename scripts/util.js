@@ -18,6 +18,7 @@ exports.getResource = function (url, options, callback) {
     options = {};
   }
 
+  options.timeout = 5000;
   options.method = 'GET';
   options.gzip = true;
   options.url = url;
