@@ -10,7 +10,6 @@ var URI = require('urijs');
 var MimeLookup = require('mime-lookup');
 var MIME = new MimeLookup(require('mime-db'));
 var exec = require('child_process').execSync;
-var csvStringify = require('csv-stringify');
 var jade = require('jade');
 
 var util = require('./util');
@@ -33,7 +32,6 @@ cacheResources()
     var apiList = generateList(specs);
 
     generateAPI(apiList);
-    generateCSV(apiList);
     return generateBanner(specs, apiList);
   });
 
@@ -178,46 +176,6 @@ function generateAPI(apiList) {
   console.log('Generated list for ' + _.size(list) + ' API specs.');
 
   util.saveJson('api/v1/list.json', list);
-}
-
-function generateCSV(apiList) {
-  var header = [
-    'id',
-    'info_title',
-    'info_description',
-    'info_termsOfService',
-    'info_contact_name',
-    'info_contact_url',
-    'info_contact_email',
-    'info_license_name',
-    'info_license_url',
-    'info_x-website',
-    'info_x-logo_url',
-    'info_x-logo_background',
-    'info_x-apiClientRegistration_url',
-    'info_x-pricing_type',
-    'info_x-pricing_url',
-    'externalDocs_description',
-    'externalDocs_url',
-  ];
-
-  var table = [header];
-  _.forEach(apiList, function (api, id) {
-    var apiData = api.versions[api.preferred];
-    var row = [id];
-    _.forEach(header, function (column) {
-      if (column === 'id') return;
-
-      var path = column.replace(/_/g, '.');
-      row.push(_.get(apiData, path));
-    });
-    table.push(row);
-  });
-
-  csvStringify(table, function (err, output) {
-    assert(!err, 'Failed stringify: ' + err);
-    util.saveFile('internal_api/list.csv', output);
-  });
 }
 
 function generateBanner(specs, apiList) {
