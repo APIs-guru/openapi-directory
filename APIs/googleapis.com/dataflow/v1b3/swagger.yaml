@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Google Dataflow API.
+  description: 'Google Cloud Dataflow is a simple, flexible, and powerful system you can use to perform data processing tasks.'
   title: Google Dataflow
   version: v1b3
   x-apiClientRegistration:
@@ -1683,6 +1683,10 @@ definitions:
         type: array
       forwardingKeyBits:
         description: The size (in bits) of keys that will be assigned to source messages.
+        format: int32
+        type: integer
+      persistentStateVersion:
+        description: Version number for persistent state.
         format: int32
         type: integer
       userStageToComputationNameMap:

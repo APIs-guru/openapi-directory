@@ -2366,6 +2366,9 @@ definitions:
       productId:
         description: The unique id for the product (readonly)
         type: string
+      publisherProfileId:
+        description: 'Id of the publisher profile for a given seller. A (seller.account_id, publisher_profile_id) pair uniquely identifies a publisher profile. Buyers can call the PublisherProfiles::List endpoint to get a list of publisher profiles for a given seller.'
+        type: string
       revisionNumber:
         description: The revision number of the product. (readonly)
         format: int64
@@ -2388,6 +2391,7 @@ definitions:
         $ref: '#/definitions/DealTerms'
         description: The negotiable terms of the deal (buyer-readonly)
       webPropertyCode:
+        description: The web property code for the seller. This field is meant to be copied over as is when creating deals.
         type: string
     type: object
   Proposal:
@@ -2476,6 +2480,9 @@ definitions:
     type: object
   PublisherProfileApiProto:
     properties:
+      accountId:
+        description: The account id of the seller.
+        type: string
       buyerPitchStatement:
         description: A pitch statement for the buyer
         type: string
@@ -2501,7 +2508,7 @@ definitions:
         description: Publisher provided overview.
         type: string
       profileId:
-        description: Unique id for the publisher profile
+        description: 'The pair of (seller.account_id, profile_id) uniquely identifies a publisher profile for a given publisher.'
         format: int32
         type: integer
       publisherDomains:
@@ -2621,9 +2628,6 @@ definitions:
       note:
         $ref: '#/definitions/MarketplaceNote'
         description: Optional note to be added.
-      privateAuctionId:
-        description: The private auction id to be updated.
-        type: string
       proposalRevisionNumber:
         description: The current revision number of the proposal to be updated.
         format: int64

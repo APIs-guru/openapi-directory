@@ -6020,7 +6020,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Creates a persistent disk in the specified project using the data in the request. You can create a disk with a sourceImage, a sourceSnapshot, or create an empty 200 GB data disk by omitting all properties. You can also create a disk that is larger than the default size by specifying the sizeGb property.'
+      description: 'Creates a persistent disk in the specified project using the data in the request. You can create a disk with a sourceImage, a sourceSnapshot, or create an empty 500 GB data disk by omitting all properties. You can also create a disk that is larger than the default size by specifying the sizeGb property.'
       operationId: compute.disks.insert
       parameters:
         - description: Project ID for this request.
@@ -6158,6 +6158,50 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/Snapshot'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - disks
+  '/{project}/zones/{zone}/disks/{disk}/resize':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Resizes the specified persistent disk.
+      operationId: compute.disks.resize
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: The name of the persistent disk.
+          in: path
+          name: disk
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DisksResizeRequest'
       responses:
         '200':
           description: Successful response
@@ -8381,7 +8425,7 @@ definitions:
         description: "Specifies the disk type to use to create the instance. If not specified, the default is pd-standard, specified using the full URL. For example:\n\nhttps://www.googleapis.com/compute/v1/projects/project/zones/zone/diskTypes/pd-standard \n\nOther values include pd-ssd and local-ssd. If you define this field, you can provide either the full or partial URL. For example, the following are valid values:  \n- https://www.googleapis.com/compute/v1/projects/project/zones/zone/diskTypes/diskType \n- projects/project/zones/zone/diskTypes/diskType \n- zones/zone/diskTypes/diskType"
         type: string
       sourceImage:
-        description: "A source image used to create the disk. You can provide a private (custom) image, and Compute Engine will use the corresponding image from your project. For example:\n\nglobal/images/my-private-image \n\nOr you can provide an image from a publicly-available project. For example, to use a Debian image from the debian-cloud project, make sure to include the project in the URL:\n\nprojects/debian-cloud/global/images/debian-7-wheezy-vYYYYMMDD \n\nwhere vYYYYMMDD is the image version. The fully-qualified URL will also work in both cases."
+        description: "The source image used to create this disk.\n\nTo create a disk with a private image, specify the image name in the following format:\n\nglobal/images/my-private-image \n\nTo create a disk with a public image, specify the image name and the project that owns the image. For example, you can use a Debian image from the debian-cloud project:\n\nprojects/debian-cloud/global/images/debian-8-jessie-vYYYYMMDD \n\nThe vYYYYMMDD value is the image version. The fully-qualified URL also works in both examples."
         type: string
     type: object
   Autoscaler:
@@ -8786,7 +8830,7 @@ definitions:
         format: int64
         type: string
       sourceImage:
-        description: "The source image used to create this disk. If the source image is deleted from the system, this field will not be set, even if an image with the same name has been re-created.\n\nWhen creating a disk, you can provide a private (custom) image using the following input, and Compute Engine will use the corresponding image from your project. For example:\n\nglobal/images/my-private-image \n\nOr you can provide an image from a publicly-available project. For example, to use a Debian image from the debian-cloud project, make sure to include the project in the URL:\n\nprojects/debian-cloud/global/images/debian-7-wheezy-vYYYYMMDD \n\nwhere vYYYYMMDD is the image version. The fully-qualified URL will also work in both cases.\n\nYou can also specify the latest image for a private image family by replacing the image name suffix with family/family-name. For example:\n\nglobal/images/family/my-private-family \n\nOr you can specify an image family from a publicly-available project. For example, to use the latest Debian 7 from the debian-cloud project, make sure to include the project in the URL:\n\nprojects/debian-cloud/global/images/family/debian-7"
+        description: "The source image used to create this disk. If the source image is deleted, this field will not be set.\n\nTo create a disk with one of the public operating system images, specify the image by its family name. For example, specify family/debian-8 to use the latest Debian 8 image:\n\nprojects/debian-cloud/global/images/family/debian-8 \n\nAlternatively, use a specific version of a public operating system image:\n\nprojects/debian-cloud/global/images/debian-8-jessie-vYYYYMMDD \n\nTo create a disk with a private image that you created, specify the image name in the following format:\n\nglobal/images/my-private-image \n\nYou can also specify a private image by its image family, which returns the latest version of the image in that family. Replace the image name with family/family-name:\n\nglobal/images/family/my-private-family"
         type: string
       sourceImageId:
         description: '[Output Only] The ID value of the image used to create this disk. This value identifies the exact image that was used to create this persistent disk. For example, if you created the persistent disk from an image that was later deleted and recreated under the same name, the source image ID would identify the exact version of the image that was used.'
@@ -8999,6 +9043,13 @@ definitions:
             description: '[Output Only] A human-readable description of the warning code.'
             type: string
         type: object
+    type: object
+  DisksResizeRequest:
+    properties:
+      sizeGb:
+        description: 'The new size of the persistent disk, which is specified in GB.'
+        format: int64
+        type: string
     type: object
   DisksScopedList:
     properties:
@@ -10685,7 +10736,7 @@ definitions:
         type: string
       kind:
         default: 'compute#operation'
-        description: '[Output Only] Type of the resource. Always compute#operation for operation resources.'
+        description: '[Output Only] Type of the resource. Always compute#operation for Operation resources.'
         type: string
       name:
         description: '[Output Only] Name of the resource.'
@@ -12403,24 +12454,6 @@ definitions:
         default: 'compute#zone'
         description: '[Output Only] Type of the resource. Always compute#zone for zones.'
         type: string
-      maintenanceWindows:
-        description: '[Output Only] Any scheduled maintenance windows for this zone. When the zone is in a maintenance window, all resources which reside in the zone will be unavailable. For more information, see Maintenance Windows'
-        items:
-          properties:
-            beginTime:
-              description: '[Output Only] Starting time of the maintenance window, in RFC3339 format.'
-              type: string
-            description:
-              description: '[Output Only] Textual description of the maintenance window.'
-              type: string
-            endTime:
-              description: '[Output Only] Ending time of the maintenance window, in RFC3339 format.'
-              type: string
-            name:
-              description: '[Output Only] Name of the maintenance window.'
-              type: string
-          type: object
-        type: array
       name:
         description: '[Output Only] Name of the resource.'
         type: string

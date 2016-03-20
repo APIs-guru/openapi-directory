@@ -893,7 +893,7 @@ paths:
 definitions:
   Any:
     description: |-
-      `Any` contains an arbitrary serialized message along with a URL that describes the type of the serialized message.
+      `Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.
 
       Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type.
 
@@ -921,7 +921,7 @@ definitions:
     properties:
       typeUrl:
         description: |-
-          A URL/resource name whose content describes the type of the serialized message.
+          A URL/resource name whose content describes the type of the serialized protocol buffer message.
 
           For URLs which use the schema `http`, `https`, or no schema, the following restrictions and interpretations apply:
 
@@ -930,7 +930,7 @@ definitions:
           Schemas other than `http`, `https` (or the empty schema) might be used with implementation specific semantics.
         type: string
       value:
-        description: Must be valid serialized data of the above specified type.
+        description: Must be a valid serialized protocol buffer of the above specified type.
         format: byte
         type: string
     type: object

@@ -561,7 +561,7 @@ definitions:
         format: int64
         type: string
       revenueMicros:
-        description: 'The revenue amount of this TRANSACTION conversion, in micros (value multiplied by 1000, no decimal). For example, to specify a revenue value of "10" enter "10000" in your request.'
+        description: 'The revenue amount of this TRANSACTION conversion, in micros (value multiplied by 1000000, no decimal). For example, to specify a revenue value of "10" enter "10000000" (10 million) in your request.'
         format: int64
         type: string
       segmentationId:

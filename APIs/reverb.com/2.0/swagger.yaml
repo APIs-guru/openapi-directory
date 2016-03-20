@@ -75,6 +75,133 @@ paths:
       summary: Create an account.
       tags:
         - accounts
+  /addresses:
+    get:
+      description: See all addresses in your address book
+      responses:
+        default:
+          description: Unexpected error
+      summary: See all addresses in your address book
+      tags:
+        - addresses
+    post:
+      description: Create a new address in your address book
+      parameters:
+        - description: the content of the request
+          in: body
+          name: body
+          schema:
+            properties:
+              country_code:
+                description: Country Code
+                type: string
+              extended_address:
+                description: Extended Address
+                type: string
+              locality:
+                description: City
+                type: string
+              name:
+                description: Name
+                type: string
+              phone:
+                description: Phone
+                type: string
+              postal_code:
+                description: 'Postal, Zip Code'
+                type: string
+              primary:
+                description: Primary
+                type: boolean
+              region:
+                description: State
+                type: string
+              street_address:
+                description: Street Address
+                type: string
+            required:
+              - name
+              - street_address
+              - locality
+              - region
+              - postal_code
+              - country_code
+              - phone
+            type: object
+      responses:
+        default:
+          description: Unexpected error
+      summary: Create a new address in your address book
+      tags:
+        - addresses
+  '/addresses/{address_id}':
+    delete:
+      description: Delete an existing address in your address book
+      parameters:
+        - in: path
+          name: address_id
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Delete an existing address in your address book
+      tags:
+        - addresses
+    put:
+      description: Update an existing address in your address book
+      parameters:
+        - in: path
+          name: address_id
+          required: true
+          type: string
+        - description: the content of the request
+          in: body
+          name: body
+          schema:
+            properties:
+              country_code:
+                description: Country Code
+                type: string
+              extended_address:
+                description: Extended Address
+                type: string
+              locality:
+                description: City
+                type: string
+              name:
+                description: Name
+                type: string
+              phone:
+                description: Phone
+                type: string
+              postal_code:
+                description: 'Postal, Zip Code'
+                type: string
+              primary:
+                description: Primary
+                type: boolean
+              region:
+                description: State
+                type: string
+              street_address:
+                description: Street Address
+                type: string
+            required:
+              - name
+              - street_address
+              - locality
+              - region
+              - postal_code
+              - country_code
+              - phone
+            type: object
+      responses:
+        default:
+          description: Unexpected error
+      summary: Update an existing address in your address book
+      tags:
+        - addresses
   /articles:
     get:
       description: See all Reverb blog posts
@@ -753,7 +880,7 @@ paths:
                   type: string
                 type: array
               price:
-                description: Asking price in USD
+                description: Asking price in your currency
                 type: string
               product_type:
                 description: 'Top level category slug. Ex: electric-guitar, acoustic-guitar. Full list: /api/categories'
@@ -766,6 +893,9 @@ paths:
                   paypal_email:
                     type: string
                 type: object
+              seller_cost:
+                description: 'Cost of goods in your currency (internal use only, not shown to buyers)'
+                type: string
               shipping:
                 properties:
                   local:
@@ -776,7 +906,7 @@ paths:
                     items:
                       properties:
                         rate:
-                          description: Shipping rate in USD
+                          description: Shipping rate in your currency
                           type: string
                         region_code:
                           description: Country code or subregion/superregion code. Full list of codes at /api/shipping/regions
@@ -1134,7 +1264,7 @@ paths:
                   type: string
                 type: array
               price:
-                description: Asking price in USD
+                description: Asking price in your currency
                 type: string
               product_type:
                 description: 'Top level category slug. Ex: electric-guitar, acoustic-guitar. Full list: /api/categories'
@@ -1147,6 +1277,9 @@ paths:
                   paypal_email:
                     type: string
                 type: object
+              seller_cost:
+                description: 'Cost of goods in your currency (internal use only, not shown to buyers)'
+                type: string
               shipping:
                 properties:
                   local:
@@ -1157,7 +1290,7 @@ paths:
                     items:
                       properties:
                         rate:
-                          description: Shipping rate in USD
+                          description: Shipping rate in your currency
                           type: string
                         region_code:
                           description: Country code or subregion/superregion code. Full list of codes at /api/shipping/regions
@@ -2205,7 +2338,7 @@ paths:
                 description: Date the item was shipped
                 type: string
               provider:
-                description: 'Shipping provider: One of UPS, USPS, FedEx, DHL, Canada Post, Other'
+                description: 'Shipping provider: One of UPS, USPS, FedEx, DHL, Canada Post, Royal Mail, PostNL, Australia Post, EMS, La Poste, China Post, GLS, Parcelforce, Purolator, Other'
                 type: string
               send_notification:
                 description: Should we send an email notification to the buyer
@@ -2788,6 +2921,33 @@ paths:
         default:
           description: Unexpected error
       summary: Add paypal account
+      tags:
+        - shop
+  /shop/stats:
+    get:
+      description: Get listings stats
+      responses:
+        default:
+          description: Unexpected error
+      summary: Get listings stats
+      tags:
+        - shop
+  /shop/stats/activity:
+    get:
+      description: Get shop activity for a particular time period
+      parameters:
+        - description: 'Filter by date in ISO8601 format - e.g: 2015-04-09T10:52:23-05:00'
+          in: query
+          name: start_time
+          type: string
+        - description: 'Filter by date in ISO8601 format - e.g: 2015-04-09T10:52:23-05:00'
+          in: query
+          name: end_time
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Get shop activity for a particular time period
       tags:
         - shop
   /shop/vacation:

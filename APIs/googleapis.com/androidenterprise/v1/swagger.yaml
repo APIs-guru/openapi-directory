@@ -1844,7 +1844,7 @@ paths:
           name: userId
           required: true
           type: string
-        - description: 'The ID of the entitlement, e.g. "app:com.google.android.gm".'
+        - description: 'The ID of the entitlement (a product ID), e.g. "app:com.google.android.gm".'
           in: path
           name: entitlementId
           required: true
@@ -1871,7 +1871,7 @@ paths:
           name: userId
           required: true
           type: string
-        - description: 'The ID of the entitlement, e.g. "app:com.google.android.gm".'
+        - description: 'The ID of the entitlement (a product ID), e.g. "app:com.google.android.gm".'
           in: path
           name: entitlementId
           required: true
@@ -1908,7 +1908,7 @@ paths:
           name: userId
           required: true
           type: string
-        - description: 'The ID of the entitlement, e.g. "app:com.google.android.gm".'
+        - description: 'The ID of the entitlement (a product ID), e.g. "app:com.google.android.gm".'
           in: path
           name: entitlementId
           required: true
@@ -1945,7 +1945,7 @@ paths:
           name: userId
           required: true
           type: string
-        - description: 'The ID of the entitlement, e.g. "app:com.google.android.gm".'
+        - description: 'The ID of the entitlement (a product ID), e.g. "app:com.google.android.gm".'
           in: path
           name: entitlementId
           required: true
@@ -2484,7 +2484,7 @@ definitions:
         description: How and to whom the package is made available. The value publicGoogleHosted means that the package is available through the Play Store and not restricted to a specific enterprise. The value privateGoogleHosted means that the package is a private app (restricted to an enterprise) but hosted by Google. The value privateSelfHosted means that the package is a private app (restricted to an enterprise) and is privately hosted.
         type: string
       iconUrl:
-        description: A link to an image that can be used as an icon for the product.
+        description: A link to an image that can be used as an icon for the product. This image is suitable for use at up to 512px x 512px.
         type: string
       kind:
         default: 'androidenterprise#product'
@@ -2499,6 +2499,9 @@ definitions:
       requiresContainerApp:
         description: Whether this app can only be installed on devices using the Android for Work container app.
         type: boolean
+      smallIconUrl:
+        description: A link to a smaller image that can be used as an icon for the product. This image is suitable for use at up to 128px x 128px.
+        type: string
       title:
         description: The name of the product.
         type: string

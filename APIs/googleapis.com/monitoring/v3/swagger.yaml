@@ -111,9 +111,7 @@ paths:
       description: 'Deletes a metric descriptor. Only user-created [custom metrics](/monitoring/custom-metrics) can be deleted.'
       operationId: monitoring.projects.metricDescriptors.delete
       parameters:
-        - description: |-
-            The metric descriptor on which to execute the request. The format is `"projects/
-            /metricDescriptors/"`. An example of `` is: `"custom.googleapis.com/my_test_metric"`.
+        - description: 'The metric descriptor on which to execute the request. The format is `"projects/{project_id_or_number}/metricDescriptors/{metric_id}"`. An example of `{metric_id}` is: `"custom.googleapis.com/my_test_metric"`.'
           in: path
           name: name
           required: true
@@ -135,9 +133,7 @@ paths:
       description: Gets a single metric descriptor.
       operationId: monitoring.projects.metricDescriptors.get
       parameters:
-        - description: |-
-            The metric descriptor on which to execute the request. The format is `"projects/
-            /metricDescriptors/"`. An example value of `` is `"compute.googleapis.com/instance/disk/read_bytes_count"`.
+        - description: 'The metric descriptor on which to execute the request. The format is `"projects/{project_id_or_number}/metricDescriptors/{metric_id}"`. An example value of `{metric_id}` is `"compute.googleapis.com/instance/disk/read_bytes_count"`.'
           in: path
           name: name
           required: true
@@ -177,9 +173,7 @@ paths:
       description: Updates an existing group. You can change any group attributes except `name`.
       operationId: monitoring.projects.groups.update
       parameters:
-        - description: |-
-            The name of this group. The format is `"projects/
-            /groups/"`. When creating a group, this field is ignored and a new name is created consisting of the project specified in the call to `CreateGroup` and a unique `` that is generated automatically. @OutputOnly
+        - description: 'The name of this group. The format is `"projects/{project_id_or_number}/groups/{group_id}"`. When creating a group, this field is ignored and a new name is created consisting of the project specified in the call to `CreateGroup` and a unique `{group_id}` that is generated automatically. @OutputOnly'
           in: path
           name: name
           required: true
@@ -253,29 +247,21 @@ paths:
       description: Lists the existing groups.
       operationId: monitoring.projects.groups.list
       parameters:
-        - description: |-
-            The project whose groups are to be listed. The format is `"projects/
-            "`.
+        - description: 'The project whose groups are to be listed. The format is `"projects/{project_id_or_number}"`.'
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: |-
-            A group name: `"projects/
-            /groups/"`. Returns groups whose `parentName` field contains the group name. If no groups have this parent, the results are empty.
+        - description: 'A group name: `"projects/{project_id_or_number}/groups/{group_id}"`. Returns groups whose `parentName` field contains the group name. If no groups have this parent, the results are empty.'
           in: query
           name: childrenOfGroup
           type: string
-        - description: |-
-            A group name: `"projects/
-            /groups/<group_id"`. Returns groups that are ancestors of the specified group. The groups are returned in order, starting with the immediate parent and ending with the most distant ancestor. If the specified group has no immediate parent, the results are empty.
+        - description: 'A group name: `"projects/{project_id_or_number}/groups/{group_id}"`. Returns groups that are ancestors of the specified group. The groups are returned in order, starting with the immediate parent and ending with the most distant ancestor. If the specified group has no immediate parent, the results are empty.'
           in: query
           name: ancestorsOfGroup
           type: string
-        - description: |-
-            A group name: `"projects/
-            /groups/"`. Returns the descendants of the specified group. This is a superset of the results returned by the `childrenOfGroup` filter, and includes children-of-children, and so forth.
+        - description: 'A group name: `"projects/{project_id_or_number}/groups/{group_id}"`. Returns the descendants of the specified group. This is a superset of the results returned by the `childrenOfGroup` filter, and includes children-of-children, and so forth.'
           in: query
           name: descendantsOfGroup
           type: string
@@ -319,9 +305,7 @@ paths:
       description: Creates a new group.
       operationId: monitoring.projects.groups.create
       parameters:
-        - description: |-
-            The project in which to create the group. The format is `"projects/
-            "`.
+        - description: 'The project in which to create the group. The format is `"projects/{project_id_or_number}"`.'
           in: path
           name: name
           required: true
@@ -352,9 +336,7 @@ paths:
       description: Lists the monitored resources that are members of a group.
       operationId: monitoring.projects.groups.members.list
       parameters:
-        - description: |-
-            The group whose members are listed. The format is `"projects/
-            /groups/"`.
+        - description: 'The group whose members are listed. The format is `"projects/{project_id_or_number}/groups/{group_id}"`.'
           in: path
           name: name
           required: true
@@ -413,9 +395,7 @@ paths:
       description: Lists metric descriptors that match a filter.
       operationId: monitoring.projects.metricDescriptors.list
       parameters:
-        - description: |-
-            The project on which to execute the request. The format is `"projects/
-            "`.
+        - description: 'The project on which to execute the request. The format is `"projects/{project_id_or_number}"`.'
           in: path
           name: name
           required: true
@@ -467,9 +447,7 @@ paths:
       description: 'Creates a new metric descriptor. User-created metric descriptors define [custom metrics](/monitoring/custom-metrics).'
       operationId: monitoring.projects.metricDescriptors.create
       parameters:
-        - description: |-
-            The project on which to execute the request. The format is `"projects/
-            "`.
+        - description: 'The project on which to execute the request. The format is `"projects/{project_id_or_number}"`.'
           in: path
           name: name
           required: true
@@ -498,9 +476,7 @@ paths:
       description: Lists monitored resource descriptors that match a filter.
       operationId: monitoring.projects.monitoredResourceDescriptors.list
       parameters:
-        - description: |-
-            The project on which to execute the request. The format is `"projects/
-            "`.
+        - description: 'The project on which to execute the request. The format is `"projects/{project_id_or_number}"`.'
           in: path
           name: name
           required: true
@@ -553,9 +529,7 @@ paths:
       description: Lists time series that match a filter.
       operationId: monitoring.projects.timeSeries.list
       parameters:
-        - description: |-
-            The project on which to execute the request. The format is "projects/
-            ".
+        - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
           in: path
           name: name
           required: true
@@ -620,7 +594,7 @@ paths:
             type: string
           name: aggregation.groupByFields
           type: array
-        - description: 'By default, results are ordered by time, from earliest to latest. Currently, this field must be left blank.'
+        - description: 'Specifies the order in which the points of the time series should be returned. By default, results are not ordered. Currently, this field must be left blank.'
           in: query
           name: orderBy
           type: string
@@ -671,9 +645,7 @@ paths:
       description: 'Creates or adds data to one or more time series. The response is empty if all time series in the request were written. If any time series could not be written, a corresponding failure message is included in the error response.'
       operationId: monitoring.projects.timeSeries.create
       parameters:
-        - description: |-
-            The project on which to execute the request. The format is `"projects/
-            "`.
+        - description: 'The project on which to execute the request. The format is `"projects/{project_id_or_number}"`.'
           in: path
           name: name
           required: true
@@ -919,14 +891,10 @@ definitions:
         description: 'If true, the members of this group are considered to be a cluster. The system can perform additional analysis on groups that are clusters.'
         type: boolean
       name:
-        description: |-
-          The name of this group. The format is `"projects/
-          /groups/"`. When creating a group, this field is ignored and a new name is created consisting of the project specified in the call to `CreateGroup` and a unique `` that is generated automatically. @OutputOnly
+        description: 'The name of this group. The format is `"projects/{project_id_or_number}/groups/{group_id}"`. When creating a group, this field is ignored and a new name is created consisting of the project specified in the call to `CreateGroup` and a unique `{group_id}` that is generated automatically. @OutputOnly'
         type: string
       parentName:
-        description: |-
-          The name of the group's parent, if it has one. The format is `"projects/
-          /groups/"`. For groups with no parent, `parentName` is the empty string, `""`.
+        description: "The name of the group's parent, if it has one. The format is `\"projects/{project_id_or_number}/groups/{group_id}\"`. For groups with no parent, `parentName` is the empty string, `\"\"`."
         type: string
     type: object
   LabelDescriptor:
@@ -1108,9 +1076,7 @@ definitions:
           $ref: '#/definitions/LabelDescriptor'
         type: array
       name:
-        description: |-
-          Optional. The resource name of the monitored resource descriptor: `"projects/
-          /monitoredResourceDescriptors/"` where <type> is the value of the `type` field in this object and <project_id> is a project ID that provides API-specific context for accessing the type. APIs that do not use project information can use the resource name format `"monitoredResourceDescriptors/"`.
+        description: 'Optional. The resource name of the monitored resource descriptor: `"projects/{project_id}/monitoredResourceDescriptors/{type}"` where {type} is the value of the `type` field in this object and {project_id} is a project ID that provides API-specific context for accessing the type. APIs that do not use project information can use the resource name format `"monitoredResourceDescriptors/{type}"`.'
         type: string
       type:
         description: 'Required. The monitored resource type. For example, the type `"cloudsql_database"` represents databases in Google Cloud SQL.'

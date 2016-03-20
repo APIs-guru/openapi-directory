@@ -27,7 +27,7 @@ security:
 paths:
   '/analyses/{username}/{project_slug}':
     get:
-      description: List all active analyses for a project
+      description: List all analyses for a project
       operationId: getAnalyses
       parameters:
         - description: Page Number
@@ -76,21 +76,23 @@ paths:
           description: error payload
           schema:
             $ref: '#/definitions/DefaultPayload'
-      summary: List all active analyses for a project
+      summary: List all analyses for a project
       tags:
         - Analysis
     parameters:
-      - in: path
+      - description: "User's identifier"
+        in: path
         name: username
         required: true
         type: string
-      - in: path
+      - description: "Project's identifier"
+        in: path
         name: project_slug
         required: true
         type: string
   '/analyses/{username}/{project_slug}/{analysis_slug}':
     get:
-      description: Gets an Analysis detail
+      description: Get an Analysis detail
       operationId: getAnalysisSummary
       parameters: []
       produces:
@@ -104,19 +106,22 @@ paths:
           description: error payload
           schema:
             $ref: '#/definitions/DefaultPayload'
-      summary: Gets an Analysis detail
+      summary: Get an Analysis detail
       tags:
         - Analysis
     parameters:
-      - in: path
+      - description: "User's identifier"
+        in: path
         name: username
         required: true
         type: string
-      - in: path
+      - description: "Project's identifier"
+        in: path
         name: project_slug
         required: true
         type: string
-      - in: path
+      - description: "Analysis' identifier"
+        in: path
         name: analysis_slug
         required: true
         type: string
@@ -140,21 +145,24 @@ paths:
       tags:
         - Analysis
     parameters:
-      - in: path
+      - description: "User's identifier"
+        in: path
         name: username
         required: true
         type: string
-      - in: path
+      - description: "Project's identifier"
+        in: path
         name: project_slug
         required: true
         type: string
-      - in: path
+      - description: "Analysis' identifier"
+        in: path
         name: analysis_slug
         required: true
         type: string
   '/analyses/{username}/{project_slug}/{analysis_slug}/crawl_statistics/time':
     get:
-      description: 'Return statistics by 1mn, 5mn or 60mn for an analysis'
+      description: 'Return crawl statistics grouped by time frequency (1 min, 5 mins or 60 min) for an analysis'
       operationId: getCrawlStatisticsByFrequency
       parameters:
         - description: max number of elements to retrieve
@@ -163,7 +171,7 @@ paths:
           name: limit
           required: false
           type: integer
-        - description: frequency of sampling
+        - description: Aggregation frequency
           enum:
             - 1mn
             - 5mn
@@ -183,25 +191,28 @@ paths:
           description: error payload
           schema:
             $ref: '#/definitions/DefaultPayload'
-      summary: 'Return statistics by 1mn, 5mn or 60mn for an analysis'
+      summary: 'Return crawl statistics grouped by time frequency (1 min, 5 mins or 60 min)'
       tags:
         - Analysis
     parameters:
-      - in: path
+      - description: "User's identifier"
+        in: path
         name: username
         required: true
         type: string
-      - in: path
+      - description: "Project's identifier"
+        in: path
         name: project_slug
         required: true
         type: string
-      - in: path
+      - description: "Analysis' identifier"
+        in: path
         name: analysis_slug
         required: true
         type: string
   '/analyses/{username}/{project_slug}/{analysis_slug}/crawl_statistics/urls/{list_type}':
     get:
-      description: Return a list of 1000 latest URLs crawled or with errors
+      description: Return a list of 1000 latest URLs crawled (all crawled URLs or only URLS with HTTP errors)
       operationId: getCrawlStatisticsUrls
       parameters: []
       produces:
@@ -215,29 +226,36 @@ paths:
           description: error payload
           schema:
             $ref: '#/definitions/DefaultPayload'
-      summary: Return a list of 1000 latest URLs crawled or with errors
+      summary: Return a list of 1000 latest URLs crawled (all crawled URLs or only URLS with HTTP errors)
       tags:
         - Analysis
     parameters:
-      - in: path
+      - description: "User's identifier"
+        in: path
         name: username
         required: true
         type: string
-      - in: path
+      - description: "Project's identifier"
+        in: path
         name: project_slug
         required: true
         type: string
-      - in: path
+      - description: "Analysis' identifier"
+        in: path
         name: analysis_slug
         required: true
         type: string
-      - in: path
+      - description: URLs list type (crawled URLs or error URLs)
+        enum:
+          - crawled
+          - errors
+        in: path
         name: list_type
         required: true
         type: string
   '/analyses/{username}/{project_slug}/{analysis_slug}/features/ganalytics/orphan_urls/{medium}/{source}':
     get:
-      description: Orphan URLs
+      description: 'List of Orphan URLs. URLs which generated visits from the selected source according to Google Analytics data, but were not crawled with by the Botify crawler (either because no links to them were found on the website, or because the crawler was not allowed to follow these links according to the project settings).   For a search engine (medium: origanic; sources: all, aol, ask, baidu, bing, google, naver, yahoo, yandex) or a social network (medium: social; sources: all, facebook, google+, linkedin, pinterest, reddit, tumblr, twitter)'
       operationId: getGanalyticsOrphanURLs
       parameters:
         - description: Page Number
@@ -286,33 +304,58 @@ paths:
           description: error payload
           schema:
             $ref: '#/definitions/DefaultPayload'
-      summary: Orphan URLs
+      summary: List of Orphan URLs
       tags:
         - Analysis
     parameters:
-      - in: path
+      - description: "User's identifier"
+        in: path
         name: username
         required: true
         type: string
-      - in: path
+      - description: "Project's identifier"
+        in: path
         name: project_slug
         required: true
         type: string
-      - in: path
+      - description: "Analysis' identifier"
+        in: path
         name: analysis_slug
         required: true
         type: string
-      - in: path
+      - description: "Type of traffic, value: 'organic' (from search engine)or 'social' (from a social network)"
+        enum:
+          - organic
+          - social
+        in: path
         name: medium
         required: true
         type: string
-      - in: path
+      - description: 'Traffic source, value: name of the search engine or social network'
+        enum:
+          - all
+          - aol
+          - ask
+          - baidu
+          - bing
+          - facebook
+          - google
+          - google+
+          - linkedin
+          - naver
+          - pinterest
+          - reddit
+          - tumblr
+          - twitter
+          - yahoo
+          - yandex
+        in: path
         name: source
         required: true
         type: string
   '/analyses/{username}/{project_slug}/{analysis_slug}/features/links/percentiles':
     get:
-      description: Links percentiles
+      description: Get inlinks percentiles
       operationId: getLinksPercentiles
       parameters: []
       produces:
@@ -326,19 +369,22 @@ paths:
           description: error payload
           schema:
             $ref: '#/definitions/DefaultPayload'
-      summary: Links percentiles
+      summary: Get inlinks percentiles
       tags:
         - Analysis
     parameters:
-      - in: path
+      - description: "User's identifier"
+        in: path
         name: username
         required: true
         type: string
-      - in: path
+      - description: "Project's identifier"
+        in: path
         name: project_slug
         required: true
         type: string
-      - in: path
+      - description: "Analysis' identifier"
+        in: path
         name: analysis_slug
         required: true
         type: string
@@ -362,21 +408,24 @@ paths:
       tags:
         - Analysis
     parameters:
-      - in: path
+      - description: "User's identifier"
+        in: path
         name: username
         required: true
         type: string
-      - in: path
+      - description: "Project's identifier"
+        in: path
         name: project_slug
         required: true
         type: string
-      - in: path
+      - description: "Analysis' identifier"
+        in: path
         name: analysis_slug
         required: true
         type: string
   '/analyses/{username}/{project_slug}/{analysis_slug}/features/sitemaps/report':
     get:
-      description: Sitemaps reports
+      description: 'Get global information of the sitemaps found (sitemaps indexes, invalid sitemaps urls, etc.)'
       operationId: getSitemapsReport
       parameters: []
       produces:
@@ -390,25 +439,28 @@ paths:
           description: error payload
           schema:
             $ref: '#/definitions/DefaultPayload'
-      summary: Sitemaps reports
+      summary: 'Get global information of the sitemaps found (sitemaps indexes, invalid sitemaps urls, etc'
       tags:
         - Analysis
     parameters:
-      - in: path
+      - description: "User's identifier"
+        in: path
         name: username
         required: true
         type: string
-      - in: path
+      - description: "Project's identifier"
+        in: path
         name: project_slug
         required: true
         type: string
-      - in: path
+      - description: "Analysis' identifier"
+        in: path
         name: analysis_slug
         required: true
         type: string
   '/analyses/{username}/{project_slug}/{analysis_slug}/features/sitemaps/samples/out_of_config':
     get:
-      description: 'Sitemaps samples: out of config'
+      description: 'Sample list of URLs which were found in your sitemaps but outside of the crawl perimeter defined for the project, for instance domain/subdomain or protocol (HTTP/HTTPS) not allowed in the crawl settings.'
       operationId: getSitemapsSamplesOutOfConfig
       parameters:
         - description: Page Number
@@ -457,25 +509,28 @@ paths:
           description: error payload
           schema:
             $ref: '#/definitions/DefaultPayload'
-      summary: 'Sitemaps samples: out of config'
+      summary: Sample list of URLs which were found in your sitemaps but outside of the
       tags:
         - Analysis
     parameters:
-      - in: path
+      - description: "User's identifier"
+        in: path
         name: username
         required: true
         type: string
-      - in: path
+      - description: "Project's identifier"
+        in: path
         name: project_slug
         required: true
         type: string
-      - in: path
+      - description: "Analysis' identifier"
+        in: path
         name: analysis_slug
         required: true
         type: string
   '/analyses/{username}/{project_slug}/{analysis_slug}/features/sitemaps/samples/sitemap_only':
     get:
-      description: 'Sitemaps samples: only sitemaps'
+      description: 'Sample list of URLs which were found in your sitemaps, within the project allowed scope (allowed domains/subdomains/protocols), but not found by the Botify crawler.'
       operationId: getSitemapsSamplesSitemapsOnly
       parameters:
         - description: Page Number
@@ -524,19 +579,22 @@ paths:
           description: error payload
           schema:
             $ref: '#/definitions/DefaultPayload'
-      summary: 'Sitemaps samples: only sitemaps'
+      summary: 'Sample list of URLs which were found in your sitemaps, within the project'
       tags:
         - Analysis
     parameters:
-      - in: path
+      - description: "User's identifier"
+        in: path
         name: username
         required: true
         type: string
-      - in: path
+      - description: "Project's identifier"
+        in: path
         name: project_slug
         required: true
         type: string
-      - in: path
+      - description: "Analysis' identifier"
+        in: path
         name: analysis_slug
         required: true
         type: string
@@ -595,15 +653,18 @@ paths:
       tags:
         - Analysis
     parameters:
-      - in: path
+      - description: "User's identifier"
+        in: path
         name: username
         required: true
         type: string
-      - in: path
+      - description: "Project's identifier"
+        in: path
         name: project_slug
         required: true
         type: string
-      - in: path
+      - description: "Analysis' identifier"
+        in: path
         name: analysis_slug
         required: true
         type: string
@@ -662,29 +723,35 @@ paths:
       tags:
         - Analysis
     parameters:
-      - in: path
+      - description: "User's identifier"
+        in: path
         name: username
         required: true
         type: string
-      - in: path
+      - description: "Project's identifier"
+        in: path
         name: project_slug
         required: true
         type: string
-      - in: path
+      - description: "Analysis' identifier"
+        in: path
         name: analysis_slug
         required: true
         type: string
   '/analyses/{username}/{project_slug}/{analysis_slug}/urls':
     parameters:
-      - in: path
+      - description: "User's identifier"
+        in: path
         name: username
         required: true
         type: string
-      - in: path
+      - description: "Project's identifier"
+        in: path
         name: project_slug
         required: true
         type: string
-      - in: path
+      - description: "Analysis' identifier"
+        in: path
         name: analysis_slug
         required: true
         type: string
@@ -697,7 +764,7 @@ paths:
           schema:
             $ref: '#/definitions/UrlsQuery'
         - default: current
-          description: ''
+          description: Analysis context to execute the query
           enum:
             - current
             - disappeared
@@ -761,15 +828,18 @@ paths:
         - Analysis
   '/analyses/{username}/{project_slug}/{analysis_slug}/urls/aggs':
     parameters:
-      - in: path
+      - description: "User's identifier"
+        in: path
         name: username
         required: true
         type: string
-      - in: path
+      - description: "Project's identifier"
+        in: path
         name: project_slug
         required: true
         type: string
-      - in: path
+      - description: "Analysis' identifier"
+        in: path
         name: analysis_slug
         required: true
         type: string
@@ -835,21 +905,24 @@ paths:
       tags:
         - Analysis
     parameters:
-      - in: path
+      - description: "User's identifier"
+        in: path
         name: username
         required: true
         type: string
-      - in: path
+      - description: "Project's identifier"
+        in: path
         name: project_slug
         required: true
         type: string
-      - in: path
+      - description: "Analysis' identifier"
+        in: path
         name: analysis_slug
         required: true
         type: string
   '/analyses/{username}/{project_slug}/{analysis_slug}/urls/export':
     get:
-      description: Get list of Exported Urls
+      description: A list of the CSV Exports requests and their current status
       operationId: getUrlsExports
       parameters:
         - description: Page Number
@@ -898,19 +971,22 @@ paths:
           description: error payload
           schema:
             $ref: '#/definitions/DefaultPayload'
-      summary: Get list of Exported Urls
+      summary: A list of the CSV Exports requests and their current status
       tags:
         - Analysis
     parameters:
-      - in: path
+      - description: "User's identifier"
+        in: path
         name: username
         required: true
         type: string
-      - in: path
+      - description: "Project's identifier"
+        in: path
         name: project_slug
         required: true
         type: string
-      - in: path
+      - description: "Analysis' identifier"
+        in: path
         name: analysis_slug
         required: true
         type: string
@@ -947,7 +1023,7 @@ paths:
         - Analysis
   '/analyses/{username}/{project_slug}/{analysis_slug}/urls/export/{url_export_id}':
     get:
-      description: Checks the status of an CSVUrlExportJob object- - returns json object with the status.
+      description: Checks the status of an CSVUrlExportJob object. Returns json object with the status.
       operationId: getUrlsExportStatus
       parameters: []
       produces:
@@ -961,23 +1037,27 @@ paths:
           description: error payload
           schema:
             $ref: '#/definitions/DefaultPayload'
-      summary: Checks the status of an CSVUrlExportJob object-
+      summary: Checks the status of an CSVUrlExportJob object
       tags:
         - Analysis
     parameters:
-      - in: path
+      - description: "User's identifier"
+        in: path
         name: username
         required: true
         type: string
-      - in: path
+      - description: "Project's identifier"
+        in: path
         name: project_slug
         required: true
         type: string
-      - in: path
+      - description: "Analysis' identifier"
+        in: path
         name: analysis_slug
         required: true
         type: string
-      - in: path
+      - description: Url Export ID
+        in: path
         name: url_export_id
         required: true
         type: string
@@ -987,7 +1067,7 @@ paths:
       operationId: getUrlDetail
       parameters:
         - default: current
-          description: ''
+          description: Analysis lookup context
           enum:
             - current
             - disappeared
@@ -996,7 +1076,7 @@ paths:
           required: false
           type: string
         - collectionFormat: csv
-          description: ''
+          description: comma separated list of fields to return (c.f. URLs Datamodel)
           in: query
           items:
             type: string
@@ -1018,19 +1098,23 @@ paths:
       tags:
         - Analysis
     parameters:
-      - in: path
+      - description: "User's identifier"
+        in: path
         name: username
         required: true
         type: string
-      - in: path
+      - description: "Project's identifier"
+        in: path
         name: project_slug
         required: true
         type: string
-      - in: path
+      - description: "Analysis' identifier"
+        in: path
         name: analysis_slug
         required: true
         type: string
-      - in: path
+      - description: (Urlencoded) Searched URL
+        in: path
         name: url
         required: true
         type: string
@@ -1089,13 +1173,14 @@ paths:
       tags:
         - Project
     parameters:
-      - in: path
+      - description: "User's identifier"
+        in: path
         name: username
         required: true
         type: string
   '/projects/{username}/{project_slug}/filters':
     get:
-      description: "List all the project's saved queries"
+      description: "List all the project's saved filters (each filter's name, ID and filter value)"
       operationId: getSavedFilters
       parameters:
         - description: Page Number
@@ -1144,21 +1229,23 @@ paths:
           description: error payload
           schema:
             $ref: '#/definitions/DefaultPayload'
-      summary: "List all the project's saved queries"
+      summary: "List all the project's saved filters (each filter's name, ID and filter value)"
       tags:
         - Project
     parameters:
-      - in: path
+      - description: "User's identifier"
+        in: path
         name: username
         required: true
         type: string
-      - in: path
+      - description: "Project's identifier"
+        in: path
         name: project_slug
         required: true
         type: string
   '/projects/{username}/{project_slug}/filters/{identifier}':
     get:
-      description: Retrieves a Saved Query
+      description: "Retrieves a specific saved filter's name, ID and filter value"
       operationId: getSavedFilter
       parameters: []
       produces:
@@ -1172,34 +1259,39 @@ paths:
           description: error payload
           schema:
             $ref: '#/definitions/DefaultPayload'
-      summary: Retrieves a Saved Query
+      summary: "Retrieves a specific saved filter's name, ID and filter value"
       tags:
         - Project
     parameters:
-      - in: path
+      - description: "User's identifier"
+        in: path
         name: username
         required: true
         type: string
-      - in: path
+      - description: "Project's identifier"
+        in: path
         name: project_slug
         required: true
         type: string
-      - in: path
+      - description: "Saved Filter's identifier"
+        in: path
         name: identifier
         required: true
         type: string
   '/projects/{username}/{project_slug}/urls/aggs':
     parameters:
-      - in: path
+      - description: "User's identifier"
+        in: path
         name: username
         required: true
         type: string
-      - in: path
+      - description: "Project's identifier"
+        in: path
         name: project_slug
         required: true
         type: string
     post:
-      description: Project Query aggregator. It accepts multiple queries that will be executed on all active/finished analyses of the project
+      description: Project Query aggregator. It accepts multiple queries that will be executed on all completed analyses in the project
       operationId: getProjectUrlsAggs
       parameters:
         - in: body
@@ -1207,7 +1299,7 @@ paths:
           schema:
             $ref: '#/definitions/UrlsAggsQueries'
         - default: current
-          description: ''
+          description: Analysis context to execute the queries
           enum:
             - current
             - disappeared

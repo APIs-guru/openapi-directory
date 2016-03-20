@@ -353,6 +353,8 @@ definitions:
         type: string
   Credentials:
     properties:
+      apiKey:
+        type: string
       password:
         type: string
       username:
@@ -537,9 +539,8 @@ definitions:
         type: string
       group:
         $ref: '#/definitions/Group'
-      id:
-        format: int64
-        type: integer
+      groupCode:
+        type: string
       identifier:
         type: string
       identifiers:
@@ -572,9 +573,10 @@ definitions:
         type: array
       gender:
         type: string
-      id:
-        format: int64
-        type: integer
+      groupCode:
+        type: string
+      identifier:
+        type: string
       inviteDate:
         format: date-time
         type: string
@@ -828,6 +830,7 @@ definitions:
           - MEMBER
           - PUBLIC
           - UNIT_ADMIN_API
+          - IMPORTER
         type: string
       visible:
         type: boolean
