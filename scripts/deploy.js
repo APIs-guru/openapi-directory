@@ -57,6 +57,7 @@ function cacheResources(specs) {
       return swagger;
 
     var url = swagger.info['x-logo'].url;
+    assert(url.indexOf('#') === -1);
     return getResourceAsync(url, {encoding: null})
       .spread(function(response, data) {
 
@@ -67,12 +68,8 @@ function cacheResources(specs) {
         var logoFile = 'cache/' + util.getSwaggerPath(swagger, 'logo.' + extension);
         util.saveFile(logoFile, data);
 
-        var fragment = URI(url).fragment();
-        if (fragment)
-          fragment = '#' + fragment;
-
         //Modify object to 
-        swagger.info['x-logo'].url = specRootUrl + logoFile + fragment;
+        swagger.info['x-logo'].url = specRootUrl + logoFile;
 
         return swagger;
       });
