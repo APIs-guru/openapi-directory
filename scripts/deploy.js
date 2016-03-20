@@ -29,9 +29,17 @@ cacheResources()
     generateHTML(specs);
     generateAPIsJSON(specs);
 
-    var apiList = generateList(specs);
+    _.each(specs, function (swagger) {
+      util.saveSwagger(swagger);
 
-    generateAPI(apiList);
+      var swaggerJsonPath = util.getSwaggerPath(swagger, 'swagger.json');
+      util.saveJson(swaggerJsonPath, swagger);
+    });
+
+    var apiList = generateAPI(specs);
+    console.log('Generated list for ' + _.size(apiList) + ' API specs.');
+    util.saveJson('api/v1/list.json', apiList);
+
     return generateBanner(specs, apiList);
   });
 
@@ -104,78 +112,37 @@ function generateAPIsJSON(specs) {
   util.saveJson('apis.json', collection);
 }
 
-function generateList(specs) {
+function generateAPI(specs) {
   var list = {};
 
   _.each(specs, function (swagger) {
-    var id = util.getProviderName(swagger);
-    assert(id.indexOf(':') === -1);
-
-    var service = util.getServiceName(swagger);
-    if (!_.isUndefined(service)) {
-      assert(service.indexOf(':') === -1);
-      id += ':' + service;
-    }
-
+    var id = util.getApiId(swagger);
     var version = swagger.info.version;
-    if (_.isUndefined(list[id]))
-      list[id] = { versions: {} };
 
-    list[id].versions[version] = swagger;
-  });
+    list[id] = list[id] || { versions: {} };
+    var api = list[id];
 
-  _.each(list, function (api, id) {
-    if (_.size(api.versions) === 1)
-      api.preferred = _.keys(api.versions)[0];
-    else {
-      _.each(api.versions, function (spec, version) {
-        var preferred = spec.info['x-preferred'];
-        assert(_.isBoolean(preferred));
-        if (preferred) {
-          assert(!api.preferred, 'Multiply prefered versions in "' + id + '"');
-          api.preferred = version;
-        }
-      });
-    }
+    var filename = util.getSwaggerPath(swagger);
+    var updated = gitLogDate('-1', filename)[0];
+    //FIXME: here we don't track deleted version, not a problem for right now :)
+    var added = gitLogDate('--follow --diff-filter=A', filename).pop();
+    api.added = _.min([api.added, added]);
+
+    var preferred = swagger.info['x-preferred'];
+    if (_.isUndefined(preferred) || preferred === true)
+      api.preferred = version;
+
+    api.versions[version] = {
+      swaggerUrl: specRootUrl + util.getSwaggerPath(swagger, 'swagger.json'),
+      swaggerYamlUrl: specRootUrl + util.getSwaggerPath(swagger),
+      info: swagger.info,
+      externalDocs: swagger.externalDocs,
+      added: added,
+      updated: updated
+    };
   });
 
   return list;
-}
-
-function generateAPI(apiList) {
-  var list = {};
-
-  _.each(apiList, function (api, id) {
-    var dir = id.replace(/:/, '/');
-    list[id] = {
-      preferred: api.preferred,
-      versions: {}
-    };
-    _.each(api.versions, function (swagger, version) {
-      var filename = util.getSwaggerPath(swagger);
-      var swaggerJsonPath = util.getSwaggerPath(swagger, 'swagger.json');
-
-      util.saveYaml(filename, swagger);
-      util.saveJson(swaggerJsonPath, swagger);
-
-      var versionObj = list[id].versions[version] = {
-        swaggerUrl: specRootUrl + swaggerJsonPath,
-        swaggerYamlUrl: specRootUrl + util.getSwaggerPath(swagger),
-        info: swagger.info,
-        added: gitLogDate('--follow --diff-filter=A', filename).pop(),
-        updated: gitLogDate('-1', filename)[0]
-      };
-
-      if (swagger.externalDocs)
-        versionObj.externalDocs = swagger.externalDocs;
-    });
-    //FIXME: here we don't track deleted version, not a problem for right now :)
-    list[id].added = _(list[id].versions).values().map('added').min();
-  });
-
-  console.log('Generated list for ' + _.size(list) + ' API specs.');
-
-  util.saveJson('api/v1/list.json', list);
 }
 
 function generateBanner(specs, apiList) {
