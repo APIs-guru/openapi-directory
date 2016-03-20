@@ -40,7 +40,13 @@ cacheResources()
     console.log('Generated list for ' + _.size(apiList) + ' API specs.');
     util.saveJson('api/v1/list.json', apiList);
 
-    return generateBanner(specs, apiList);
+    var numAPIs = _.size(apiList);
+    var numEndpoints = _(specs).map('paths').map(_.size).sum();
+
+    return [
+      saveShield('APIs in collection' , numAPIs, 'orange'),
+      saveShield('Endpoints', numEndpoints, 'red')
+    ];
   });
 
 function cacheResources(specs) {
@@ -145,19 +151,6 @@ function generateAPI(specs) {
   return list;
 }
 
-function generateBanner(specs, apiList) {
-  var numAPIs = _.size(apiList);
-  var numEndpoints = 0;
-  _.each(specs, function (swagger) {
-    numEndpoints += _.size(swagger.paths);
-  });
-
-  return [
-    saveShield('APIs in collection' , numAPIs.toString(), 'orange'),
-    saveShield('Endpoints', numEndpoints.toString(), 'red')
-  ];
-}
-
 function gitLogDate(options, filename) {
   var result = exec('git -C .. log --format=%aD ' + options + ' -- \'APIs/' + filename + '\'');
   result = _.trim(result.toString(), '\n');
@@ -169,7 +162,8 @@ function gitLogDate(options, filename) {
 }
 
 function saveShield(subject, status, color) {
-  function escape(str) {
+  function escape(obj) {
+    var str = _.isString(obj) ? obj : obj.toString();
     return str.replace(/_/g, '__').replace(/-/g, '--').replace(/ /g, '_');
   }
   function join(left, right) {
