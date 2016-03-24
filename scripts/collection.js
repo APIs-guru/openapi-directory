@@ -15,6 +15,7 @@ var mktemp = require('mktemp').createFileSync;
 var jsonPatch = require('json-merge-patch');
 var YAML = require('js-yaml');
 
+var makeRequest = require('makeRequest');
 var util = require('./util');
 
 var jsondiffpatch = require('jsondiffpatch').create({
@@ -72,6 +73,12 @@ program
   .action(addToCollection);
 
 program.parse(process.argv);
+
+process.on("unhandledRejection", function(reason, promise) {
+  process.exitCode = errExitCode;
+  //TODO: better solution
+  setTimeout(function () { throw reason; });
+});
 
 function urlsCollection() {
   _.each(util.getSpecs(), function (swagger) {
@@ -232,9 +239,8 @@ function updateGoogle() {
     }
   }).mapKeys(util.getOriginUrl).value();
 
-  util.getResource('https://www.googleapis.com/discovery/v1/apis', function(err, response, data) {
-    assert(!err, err);
-
+  makeRequest('get', 'https://www.googleapis.com/discovery/v1/apis')
+  .then(function(response, data) {
     data = JSON.parse(data);
     assert.equal(data.kind, 'discovery#directoryList');
     assert.equal(data.discoveryVersion, 'v1');

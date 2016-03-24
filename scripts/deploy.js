@@ -12,9 +12,9 @@ var MIME = new MimeLookup(require('mime-db'));
 var exec = require('child_process').execSync;
 var jade = require('jade');
 
+var makeRequest = require('makeRequest');
 var util = require('./util');
 
-var getResourceAsync = Promise.promisify(util.getResource, {multiArgs: true});
 var specRootUrl = 'https://apis-guru.github.io/api-models/';
 
 process.on("unhandledRejection", function(reason, promise) {
@@ -58,7 +58,7 @@ function cacheResources(specs) {
 
     var url = swagger.info['x-logo'].url;
     assert(url.indexOf('#') === -1);
-    return getResourceAsync(url, {encoding: null})
+    return makeRequest('get', url, {encoding: null})
       .spread(function(response, data) {
 
         var mime = response.headers['content-type'];
@@ -170,7 +170,7 @@ function saveShield(subject, status, color) {
   var text = join(escape(subject), escape(status));
   var url =  'https://img.shields.io/badge/' + join(text, color) + '.svg';
 
-  return getResourceAsync(url, {encoding: null})
+  return makeRequest('get', url, {encoding: null})
     .spread(function(response, data) {
       var filename = escape(subject).toLowerCase() + '_banner.svg';
       util.saveFile(filename, data);

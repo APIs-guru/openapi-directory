@@ -7,37 +7,8 @@ var fs = require('fs');
 var _ = require('lodash');
 var glob = require('glob')
 var YAML = require('js-yaml');
-var async = require('async')
-var Request = require('request');
 var mkdirp = require('mkdirp').sync;
 var sortobject = require('deep-sort-object');
-
-exports.getResource = function (url, options, callback) {
-  if (_.isFunction(options)) {
-    callback = options;
-    options = {};
-  }
-
-  options.timeout = 5000;
-  options.method = 'GET';
-  options.gzip = true;
-  options.url = url;
-  async.retry({}, function (asyncCallback) {
-    new Request(options, function(err, response, data) {
-      if (err)
-        return asyncCallback(new Error('Can not GET "' + url +'": ' + err));
-      if (response.statusCode !== 200)
-        return asyncCallback(new Error('Can not GET "' + url +'": ' + response.statusMessage));
-      asyncCallback(null, {response: response, data: data});
-    });
-  }, function (err, result) {
-    if (err)
-      return callback(err);
-
-    console.log(url);
-    callback(null, result.response, result.data);
-  });
-}
 
 exports.readYaml = function (filename) {
   if (!fs.existsSync(filename))
