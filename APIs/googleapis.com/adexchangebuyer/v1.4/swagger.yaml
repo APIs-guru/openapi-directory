@@ -718,7 +718,7 @@ paths:
             - 'https://www.googleapis.com/auth/adexchange.buyer'
       tags:
         - pretargetingConfig
-  '/privateauction/{private_auction_id}/updateproposal':
+  '/privateauction/{privateAuctionId}/updateproposal':
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -732,7 +732,7 @@ paths:
       operationId: adexchangebuyer.marketplaceprivateauction.updateproposal
       parameters:
         - in: path
-          name: private_auction_id
+          name: privateAuctionId
           required: true
           type: string
         - in: body

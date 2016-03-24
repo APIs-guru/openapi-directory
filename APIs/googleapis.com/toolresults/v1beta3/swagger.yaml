@@ -969,7 +969,7 @@ definitions:
 
       The maximum size of an execution message is 1 MiB.
 
-      An Execution can be updated until its state is set to COMPLETE at which point it becomes immutable. Next tag: 12
+      An Execution can be updated until its state is set to COMPLETE at which point it becomes immutable.
     properties:
       completionTime:
         $ref: '#/definitions/Timestamp'
@@ -1060,7 +1060,7 @@ definitions:
     description: |-
       A History represents a sorted list of Executions ordered by the start_timestamp_millis field (descending). It can be used to group all the Executions of a continuous build.
 
-      Note that the ordering only operates on one-dimension. If a repository has multiple branches, it means that multiple histories will need to be used in order to order Executions per branch. Next tag: 7
+      Note that the ordering only operates on one-dimension. If a repository has multiple branches, it means that multiple histories will need to be used in order to order Executions per branch.
     properties:
       displayName:
         description: |-
@@ -1084,10 +1084,7 @@ definitions:
         type: string
     type: object
   Image:
-    description: |-
-      An image, with a link to the main image and a thumbnail.
-
-      Next tag: 6
+    description: 'An image, with a link to the main image and a thumbnail.'
     properties:
       error:
         $ref: '#/definitions/Status'
@@ -1125,11 +1122,10 @@ definitions:
         description: |-
           A native process crashed on the device, producing a tombstone. It is unclear whether the crash was related to the app under test.
 
-          For example, OpenGL crashed, but it is unclear if the app is responsible. TODO(yinfu): Remove after all reference from TestService are deleted.
+          For example, OpenGL crashed, but it is unclear if the app is responsible.
         type: boolean
     type: object
   ListExecutionsResponse:
-    description: 'Next tag: 3'
     properties:
       executions:
         description: |-
@@ -1164,10 +1160,7 @@ definitions:
         type: string
     type: object
   ListStepThumbnailsResponse:
-    description: |-
-      A response containing the thumbnails in a step.
-
-      Next tag: 3
+    description: A response containing the thumbnails in a step.
     properties:
       nextPageToken:
         description: |-
@@ -1293,6 +1286,16 @@ definitions:
         description: "If the requested OS version doesn't run on the specific device model."
         type: boolean
     type: object
+  StackTrace:
+    description: A stacktrace.
+    properties:
+      exception:
+        description: |-
+          The stack trace message.
+
+          Required
+        type: string
+    type: object
   Status:
     description: |-
       The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). The error model is designed to be:
@@ -1345,8 +1348,6 @@ definitions:
       Here is an example, let's consider that we have a continuous build is executing a test runner for each iteration. The workflow would look like: - user creates a Execution with id 1 - user creates an TestExecutionStep with id 100 for Execution 1 - user update TestExecutionStep with id 100 to add a raw xml log + the service parses the xml logs and returns a TestExecutionStep with updated TestResult(s). - user update the status of TestExecutionStep with id 100 to COMPLETE
 
       A Step can be updated until its state is set to COMPLETE at which points it becomes immutable.
-
-      Next tag: 20
     properties:
       completionTime:
         $ref: '#/definitions/Timestamp'
@@ -1519,6 +1520,16 @@ definitions:
 
       Users can also add test results manually by using the test_result field. Next tag: 7
     properties:
+      testIssues:
+        description: |-
+          Issues observed during the test execution.
+
+          For example, if the mobile app under test crashed during the test, the error message and the stack trace content can be recorded here to assist debugging.
+
+          - In response: present if set by create or update - In create/update request: optional
+        items:
+          $ref: '#/definitions/TestIssue'
+        type: array
       testSuiteOverviews:
         description: |-
           List of test suite overview contents. This could be parsed from xUnit XML log by server, or uploaded directly by user. This references should only be called when test suites are fully parsed or uploaded.
@@ -1544,13 +1555,24 @@ definitions:
 
           - In response: always set - In create/update request: optional
     type: object
+  TestIssue:
+    description: An abnormal event observed during the test execution.
+    properties:
+      errorMessage:
+        description: |-
+          A brief human-readable message describing the abnormal event.
+
+          Required.
+        type: string
+      stackTrace:
+        $ref: '#/definitions/StackTrace'
+        description: Optional.
+    type: object
   TestSuiteOverview:
     description: |-
       A summary of a test suite result either parsed from XML or uploaded directly by a user.
 
       Note: the API related comments are for StepService only. This message is also being used in ExecutionService in a read only mode for the corresponding step.
-
-      Next tag: 7
     properties:
       errorCount:
         description: |-
@@ -1608,10 +1630,7 @@ definitions:
           - In response: present if previously set. - In create/update request: optional
     type: object
   Thumbnail:
-    description: |-
-      A single thumbnail, with its size and format.
-
-      Next tag: 102
+    description: 'A single thumbnail, with its size and format.'
     properties:
       contentType:
         description: |-
@@ -1685,7 +1704,7 @@ definitions:
         type: string
     type: object
   ToolExecution:
-    description: 'An execution of an arbitrary tool. It could be a test runner or a tool copying artifacts or deploying code. Next tag: 7'
+    description: An execution of an arbitrary tool. It could be a test runner or a tool copying artifacts or deploying code.
     properties:
       commandLineArguments:
         description: |-

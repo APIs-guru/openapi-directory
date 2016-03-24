@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: 'The Google Container Engine API is used for building and managing container based applications, powered by the open source Kubernetes technology.'
+  description: 'Builds and manages clusters that run container-based applications, powered by open source Kubernetes technology.'
   title: Google Container Engine
   version: v1
   x-apiClientRegistration:
@@ -108,7 +108,7 @@ paths:
       description: Lists all clusters owned by a project in either the specified zone or all zones.
       operationId: container.projects.zones.clusters.list
       parameters:
-        - description: 'The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber).'
+        - description: 'The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840).'
           in: path
           name: projectId
           required: true
@@ -143,10 +143,10 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
     post:
-      description: "Creates a cluster, consisting of the specified number and type of Google Compute Engine instances, plus a Kubernetes master endpoint. By default, the cluster is created in the project's [default network](/compute/docs/networking#networks_1). One firewall is added for the cluster. After cluster creation, the cluster creates routes for each node to allow the containers on that node to communicate with all other instances in the cluster. Finally, an entry is added to the project's global metadata indicating which CIDR range is being used by the cluster."
+      description: "Creates a cluster, consisting of the specified number and type of Google Compute Engine instances. By default, the cluster is created in the project's [default network](/compute/docs/networks-and-firewalls#networks). One firewall is added for the cluster. After cluster creation, the cluster creates routes for each node to allow the containers on that node to communicate with all other instances in the cluster. Finally, an entry is added to the project's global metadata indicating which CIDR range is being used by the cluster."
       operationId: container.projects.zones.clusters.create
       parameters:
-        - description: 'The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber).'
+        - description: 'The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840).'
           in: path
           name: projectId
           required: true
@@ -172,10 +172,10 @@ paths:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}':
     delete:
-      description: 'Deletes the cluster, including the Kubernetes endpoint and all worker nodes. Firewalls and routes that were configured during cluster creation are also deleted.'
+      description: "Deletes the cluster, including the Kubernetes endpoint and all worker nodes. Firewalls and routes that were configured during cluster creation are also deleted. Other Google Compute Engine resources that might be in use by the cluster (e.g. load balancer resources) will not be deleted if they weren't present at the initial create time."
       operationId: container.projects.zones.clusters.delete
       parameters:
-        - description: 'The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber).'
+        - description: 'The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840).'
           in: path
           name: projectId
           required: true
@@ -201,10 +201,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets a specific cluster.
+      description: Gets the details of a specific cluster.
       operationId: container.projects.zones.clusters.get
       parameters:
-        - description: 'The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber).'
+        - description: 'The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840).'
           in: path
           name: projectId
           required: true
@@ -244,10 +244,10 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
     put:
-      description: Update settings of a specific cluster.
+      description: Updates the settings of a specific cluster.
       operationId: container.projects.zones.clusters.update
       parameters:
-        - description: 'The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber).'
+        - description: 'The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840).'
           in: path
           name: projectId
           required: true
@@ -281,12 +281,12 @@ paths:
       description: Lists all operations in a project in a specific zone or all zones.
       operationId: container.projects.zones.operations.list
       parameters:
-        - description: 'The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber).'
+        - description: 'The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840).'
           in: path
           name: projectId
           required: true
           type: string
-        - description: 'The name of the Google Compute Engine [zone](/compute/docs/zones#available) to return operations for, or "-" for all zones.'
+        - description: 'The name of the Google Compute Engine [zone](/compute/docs/zones#available) to return operations for, or `-` for all zones.'
           in: path
           name: zone
           required: true
@@ -320,7 +320,7 @@ paths:
       description: Gets the specified operation.
       operationId: container.projects.zones.operations.get
       parameters:
-        - description: 'The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber).'
+        - description: 'The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840).'
           in: path
           name: projectId
           required: true
@@ -364,12 +364,12 @@ paths:
       description: Returns configuration info about the Container Engine service.
       operationId: container.projects.zones.getServerconfig
       parameters:
-        - description: 'The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber).'
+        - description: 'The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840).'
           in: path
           name: projectId
           required: true
           type: string
-        - description: 'The name of the Google Compute Engine [zone](/compute/docs/zones#available) to return operations for, or "-" for all zones.'
+        - description: 'The name of the Google Compute Engine [zone](/compute/docs/zones#available) to return operations for.'
           in: path
           name: zone
           required: true
@@ -399,9 +399,22 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
 definitions:
+  AddonsConfig:
+    description: 'Configuration for the addons that can be automatically spun up in the cluster, enabling additional functionality.'
+    properties:
+      horizontalPodAutoscaling:
+        $ref: '#/definitions/HorizontalPodAutoscaling'
+        description: 'Configuration for the horizontal pod autoscaling feature, which increases or decreases the number of replica pods a replication controller has based on the resource usage of the existing pods.'
+      httpLoadBalancing:
+        $ref: '#/definitions/HttpLoadBalancing'
+        description: 'Configuration for the HTTP (L7) load balancing controller addon, which makes it easy to set up HTTP load balancers for services in a cluster.'
+    type: object
   Cluster:
     description: A Google Container Engine cluster.
     properties:
+      addonsConfig:
+        $ref: '#/definitions/AddonsConfig'
+        description: Configurations for the various addons available to run in the cluster.
       clusterIpv4Cidr:
         description: 'The IP address range of the container pods in this cluster, in [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) notation (e.g. `10.96.0.0/14`). Leave blank to have one automatically chosen or specify a `/14` block in `10.0.0.0/8`.'
         type: string
@@ -411,20 +424,24 @@ definitions:
       currentMasterVersion:
         description: '[Output only] The current software version of the master endpoint.'
         type: string
+      currentNodeCount:
+        description: '[Output only] The number of nodes currently in the cluster.'
+        format: int32
+        type: integer
       currentNodeVersion:
-        description: "[Output only] The current version of the node software components. If they are currently at different versions because they're in the process of being upgraded, this reflects the minimum version of any of them."
+        description: "[Output only] The current version of the node software components. If they are currently at multiple versions because they're in the process of being upgraded, this reflects the minimum version of all nodes."
         type: string
       description:
         description: An optional description of this cluster.
         type: string
       endpoint:
-        description: "[Output only] The IP address of this cluster's Kubernetes master endpoint. The endpoint can be accessed from the internet at `https://username:password@endpoint/`. See the `masterAuth` property of this resource for username and password information."
+        description: "[Output only] The IP address of this cluster's master endpoint. The endpoint can be accessed from the internet at `https://username:password@endpoint/`. See the `masterAuth` property of this resource for username and password information."
         type: string
       initialClusterVersion:
-        description: '[Output only] The software version of Kubernetes master and kubelets used in the cluster when it was first created. The version can be upgraded over time.'
+        description: '[Output only] The software version of the master endpoint and kubelets used in the cluster when it was first created. The version can be upgraded over time.'
         type: string
       initialNodeCount:
-        description: 'The number of nodes to create in this cluster. You must ensure that your Compute Engine [resource quota](/compute/docs/resource-quotas) is sufficient for this number of instances. You must also have available firewall and routes quota.'
+        description: 'The number of nodes to create in this cluster. You must ensure that your Compute Engine resource quota is sufficient for this number of instances. You must also have available firewall and routes quota. For requests, this field should only be used in lieu of a "node_pool" object, since this configuration (along with the "node_config") will be used to create a "NodePool" object with an auto-generated name. Do not use this and a node_pool at the same time.'
         format: int32
         type: integer
       instanceGroupUrls:
@@ -433,32 +450,32 @@ definitions:
           type: string
         type: array
       loggingService:
-        description: 'The logging service that the cluster should write logs to. Currently available options: * "logging.googleapis.com" - the Google Cloud Logging service * "none" - no logs will be exported from the cluster * "" - default value; the default is "logging.googleapis.com"'
+        description: 'The logging service the cluster should use to write logs. Currently available options: * `logging.googleapis.com` - the Google Cloud Logging service. * `none` - no logs will be exported from the cluster. * if left as an empty string,`logging.googleapis.com` will be used.'
         type: string
       masterAuth:
         $ref: '#/definitions/MasterAuth'
-        description: The authentication information for accessing the master.
+        description: The authentication information for accessing the master endpoint.
       monitoringService:
-        description: 'The monitoring service that the cluster should write metrics to. Currently available options: * "monitoring.googleapis.com" - the Google Cloud Monitoring service * "none" - no metrics will be exported from the cluster * "" - default value; the default is "monitoring.googleapis.com"'
+        description: 'The monitoring service the cluster should use to write metrics. Currently available options: * `monitoring.googleapis.com` - the Google Cloud Monitoring service. * `none` - no metrics will be exported from the cluster. * if left as an empty string, `monitoring.googleapis.com` will be used.'
         type: string
       name:
         description: 'The name of this cluster. The name must be unique within this project and zone, and can be up to 40 characters with the following restrictions: * Lowercase letters, numbers, and hyphens only. * Must start with a letter. * Must end with a number or a letter.'
         type: string
       network:
-        description: 'The name of the Google Compute Engine [network](/compute/docs/networking#networks_1) to which the cluster is connected. If left unspecified, the "default" network will be used.'
+        description: 'The name of the Google Compute Engine [network](/compute/docs/networks-and-firewalls#networks) to which the cluster is connected. If left unspecified, the `default` network will be used.'
         type: string
       nodeConfig:
         $ref: '#/definitions/NodeConfig'
-        description: "Parameters used in creating the cluster's nodes. See the descriptions of the child properties of `nodeConfig`. If unspecified, the defaults for all child properties are used."
+        description: "Parameters used in creating the cluster's nodes. See `nodeConfig` for the description of its properties. For requests, this field should only be used in lieu of a \"node_pool\" object, since this configuration (along with the \"initial_node_count\") will be used to create a \"NodePool\" object with an auto-generated name. Do not use this and a node_pool at the same time. For responses, this field will be populated with the node configuration of the first node pool. If unspecified, the defaults are used."
       nodeIpv4CidrSize:
-        description: '[Output only] The size of the address space on each node for hosting containers. This is provisioned from within the container_ipv4_cidr range.'
+        description: '[Output only] The size of the address space on each node for hosting containers. This is provisioned from within the `container_ipv4_cidr` range.'
         format: int32
         type: integer
       selfLink:
         description: '[Output only] Server-defined URL for the resource.'
         type: string
       servicesIpv4Cidr:
-        description: '[Output only] The IP address range of the Kubernetes services in this cluster, in [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) notation (e.g. `1.2.3.4/29`). Service addresses are typically put in the last /16 from the container CIDR.'
+        description: '[Output only] The IP address range of the Kubernetes services in this cluster, in [CIDR](http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) notation (e.g. `1.2.3.4/29`). Service addresses are typically put in the last `/16` from the container CIDR.'
         type: string
       status:
         description: '[Output only] The current status of this cluster.'
@@ -473,15 +490,27 @@ definitions:
       statusMessage:
         description: '[Output only] Additional information about the current status of this cluster, if available.'
         type: string
+      subnetwork:
+        description: 'The name of the Google Compute Engine [subnetwork](/compute/docs/subnetworks) to which the cluster is connected.'
+        type: string
       zone:
         description: '[Output only] The name of the Google Compute Engine [zone](/compute/docs/zones#available) in which the cluster resides.'
         type: string
     type: object
   ClusterUpdate:
-    description: ClusterUpdate describes an update to the cluster.
+    description: 'ClusterUpdate describes an update to the cluster. Exactly one update can be applied to a cluster with each request, so at most one field can be provided.'
     properties:
+      desiredAddonsConfig:
+        $ref: '#/definitions/AddonsConfig'
+        description: Configurations for the various addons available to run in the cluster.
+      desiredMasterVersion:
+        description: 'The Kubernetes version to change the master to. The only valid value is the latest supported version. Use "-" to have the server automatically select the latest version.'
+        type: string
+      desiredMonitoringService:
+        description: 'The monitoring service the cluster should use to write metrics. Currently available options: * "monitoring.googleapis.com" - the Google Cloud Monitoring service * "none" - no metrics will be exported from the cluster'
+        type: string
       desiredNodeVersion:
-        description: 'The Kubernetes version to change the nodes to (typically an upgrade). Use "-" to upgrade to the latest version supported by the server.'
+        description: The Kubernetes version to change the nodes to (typically an upgrade). Use `-` to upgrade to the latest version supported by the server.
         type: string
     type: object
   CreateClusterRequest:
@@ -491,6 +520,20 @@ definitions:
         $ref: '#/definitions/Cluster'
         description: 'A [cluster resource](/container-engine/reference/rest/v1/projects.zones.clusters)'
     type: object
+  HorizontalPodAutoscaling:
+    description: 'Configuration options for the horizontal pod autoscaling feature, which increases or decreases the number of replica pods a replication controller has based on the resource usage of the existing pods.'
+    properties:
+      disabled:
+        description: 'Whether the Horizontal Pod Autoscaling feature is enabled in the cluster. When enabled, it ensures that a Heapster pod is running in the cluster, which is also used by the Cloud Monitoring service.'
+        type: boolean
+    type: object
+  HttpLoadBalancing:
+    description: 'Configuration options for the HTTP (L7) load balancing controller addon, which makes it easy to set up HTTP load balancers for services in a cluster.'
+    properties:
+      disabled:
+        description: 'Whether the HTTP Load Balancing controller is enabled in the cluster. When enabled, it runs a small pod in the cluster that manages the load balancers.'
+        type: boolean
+    type: object
   ListClustersResponse:
     description: ListClustersResponse is the result of ListClustersRequest.
     properties:
@@ -499,10 +542,20 @@ definitions:
         items:
           $ref: '#/definitions/Cluster'
         type: array
+      missingZones:
+        description: 'If any zones are listed here, the list of clusters returned may be missing those zones.'
+        items:
+          type: string
+        type: array
     type: object
   ListOperationsResponse:
     description: ListOperationsResponse is the result of ListOperationsRequest.
     properties:
+      missingZones:
+        description: 'If any zones are listed here, the list of operations returned may be missing the operations from those zones.'
+        items:
+          type: string
+        type: array
       operations:
         description: A list of operations in the project in the specified zone.
         items:
@@ -513,23 +566,23 @@ definitions:
     description: The authentication information for accessing the master endpoint. Authentication can be done using HTTP basic auth or using client certificates.
     properties:
       clientCertificate:
-        description: '[Output only] Base64 encoded public certificate used by clients to authenticate to the cluster endpoint.'
+        description: '[Output only] Base64-encoded public certificate used by clients to authenticate to the cluster endpoint.'
         type: string
       clientKey:
-        description: '[Output only] Base64 encoded private key used by clients to authenticate to the cluster endpoint.'
+        description: '[Output only] Base64-encoded private key used by clients to authenticate to the cluster endpoint.'
         type: string
       clusterCaCertificate:
-        description: '[Output only] Base64 encoded public certificate that is the root of trust for the cluster.'
+        description: '[Output only] Base64-encoded public certificate that is the root of trust for the cluster.'
         type: string
       password:
-        description: 'The password to use for HTTP basic authentication when accessing the Kubernetes master endpoint. Because the master endpoint is open to the internet, you should create a strong password.'
+        description: 'The password to use for HTTP basic authentication to the master endpoint. Because the master endpoint is open to the Internet, you should create a strong password.'
         type: string
       username:
-        description: The username to use for HTTP basic authentication when accessing the Kubernetes master endpoint.
+        description: The username to use for HTTP basic authentication to the master endpoint.
         type: string
     type: object
   NodeConfig:
-    description: Per-node parameters.
+    description: Parameters that describe the nodes in a cluster.
     properties:
       diskSizeGb:
         description: 'Size of the disk attached to each node, specified in GB. The smallest allowed disk size is 10GB. If unspecified, the default disk size is 100GB.'
@@ -538,15 +591,23 @@ definitions:
       machineType:
         description: 'The name of a Google Compute Engine [machine type](/compute/docs/machine-types) (e.g. `n1-standard-1`). If unspecified, the default machine type is `n1-standard-1`.'
         type: string
+      metadata:
+        additionalProperties:
+          type: string
+        description: "The metadata key/value pairs assigned to instances in the cluster. Keys must conform to the regexp [a-zA-Z0-9-_]+ and be less than 128 bytes in length. These are reflected as part of a URL in the metadata server. Additionally, to avoid ambiguity, keys must not conflict with any other metadata keys for the project or be one of the four reserved keys: \"instance-template\", \"kube-env\", \"startup-script\", and \"user-data\" Values are free-form strings, and only have meaning as interpreted by the image running in the instance. The only restriction placed on them is that each value's size must be less than or equal to 32 KB. The total size of all keys and values must be less than 512 KB."
+        type: object
       oauthScopes:
-        description: 'The set of Google API scopes to be made available on all of the node VMs under the "default" service account. The following scopes are recommended, but not required, and by default are not included: * `https://www.googleapis.com/auth/compute` is required for mounting persistent storage on your nodes. * `https://www.googleapis.com/auth/devstorage.read_only` is required for communicating with *gcr.io*. If unspecified, no scopes are added.'
+        description: 'The set of Google API scopes to be made available on all of the node VMs under the "default" service account. The following scopes are recommended, but not required, and by default are not included: * `https://www.googleapis.com/auth/compute` is required for mounting persistent storage on your nodes. * `https://www.googleapis.com/auth/devstorage.read_only` is required for communicating with **gcr.io** (the [Google Container Registry](/container-registry/)). If unspecified, no scopes are added, unless Cloud Logging or Cloud Monitoring are enabled, in which case their required scopes will be added.'
         items:
           type: string
         type: array
     type: object
   Operation:
-    description: Defines the operation resource. All fields are output only.
+    description: This operation resource represents operations that may have happened or are happening on the cluster. All fields are output only.
     properties:
+      detail:
+        description: 'Detailed operation progress, if available.'
+        type: string
       name:
         description: The server-assigned ID for the operation.
         type: string
@@ -559,6 +620,9 @@ definitions:
           - UPGRADE_MASTER
           - UPGRADE_NODES
           - REPAIR_CLUSTER
+          - UPDATE_CLUSTER
+          - CREATE_NODE_POOL
+          - DELETE_NODE_POOL
         type: string
       selfLink:
         description: Server-defined URL for the resource.
@@ -582,10 +646,10 @@ definitions:
         type: string
     type: object
   ServerConfig:
-    description: Container Engine Server configuration.
+    description: Container Engine service configuration.
     properties:
       defaultClusterVersion:
-        description: What version this server deploys by default.
+        description: Version of Kubernetes the service deploys by default.
         type: string
       validNodeVersions:
         description: List of valid node upgrade target versions.
@@ -594,7 +658,7 @@ definitions:
         type: array
     type: object
   UpdateClusterRequest:
-    description: UpdateClusterRequest updates a cluster.
+    description: UpdateClusterRequest updates the settings of a cluster.
     properties:
       update:
         $ref: '#/definitions/ClusterUpdate'

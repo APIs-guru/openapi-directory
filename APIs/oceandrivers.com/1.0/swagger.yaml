@@ -26,9 +26,34 @@ paths:
       operationId: compareStation
       parameters:
         - default: cnarenal
-          description: Weather station to compare
+          description: 'Weather station to compare, values: cnareanl|cmsap|boyaenderrocat|areopuertopalma'
           in: path
           name: stationName
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      tags:
+        - ODWeather
+  '/v1.0/getAemetStation/{stationName}/{period}/':
+    get:
+      description: 'Get data from the aemet stations<br/>None'
+      operationId: getAemetStation
+      parameters:
+        - default: aeropuertopalma
+          description: 'station name currently: aeropuertoPalma'
+          in: path
+          name: stationName
+          required: true
+          type: string
+        - default: lastdata
+          description: 'Period of time to get the data. Options: lastdata lastday'
+          in: path
+          name: period
           required: true
           type: string
       produces:
@@ -121,13 +146,19 @@ paths:
           description: No response was specified
       tags:
         - ODWeather
-  '/v1.0/getSocibWeatherStation/{period}/':
+  '/v1.0/getSocibWeatherStation/{stationName}/{period}/':
     get:
       description: 'Get data from the socib bahia de palma buoy<br/>None'
       operationId: getSocibWeatherStation
       parameters:
+        - default: boyaenderrocat
+          description: 'station name currently: boyaenderrocat | playadepalma'
+          in: path
+          name: stationName
+          required: true
+          type: string
         - default: lastdata
-          description: "Period of time to get the data 'lastdata', 'lasthour','lastday'"
+          description: 'Period of time to get the data. Options: lastdata lasthour lastday'
           in: path
           name: period
           required: true
@@ -146,13 +177,13 @@ paths:
       operationId: getWeatherDisplay
       parameters:
         - default: cnarenal
-          description: "station name options now: 'cnarenal' | 'cmsap'"
+          description: "currently: 'cnarenal'|'campastilla'"
           in: path
           name: stationName
           required: true
           type: string
         - default: latestdata
-          description: "Period of time to get the data posible values 'latestdata', 'latesthour','latestday','dailylog'"
+          description: 'Period of time to get the data latestdata|latesthour|latestday|dailylog'
           in: query
           name: period
           required: true
