@@ -317,7 +317,7 @@ function writeSpec(source, type, exPatch, callback) {
         patchSwagger(swagger, exPatch);
       }
       catch (e) {
-        callback(e, result);
+        return callback(e, result);
       }
 
       expandPathTemplates(swagger);
@@ -692,7 +692,9 @@ function patchSwagger(swagger, exPatch) {
 
   removeEmpty(swagger.info);
 
-  var patch = exPatch;
+  applyMergePatch(swagger, exPatch);
+
+  var patch = {};
   var pathComponents = util.getPathComponents(swagger);
 
   var path = '';
