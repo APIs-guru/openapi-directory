@@ -16,9 +16,9 @@ Our goal is to create a machine-readable Wikipedia for REST APIs, with the follo
 - All data can be accessed through a [REST API](API.md).
 
 **Note**: All specs are automatically updated from their original source.
-You can see it under `x-origin` property inside each of `swagger.yaml` files.
+You can see it under `x-origin` property inside [each](https://github.com/APIs-guru/api-models/search?utf8=%E2%9C%93&q=x-origin+filename%3Aswagger.yaml) of `swagger.yaml` files.
 I try to run update script every day and than manually check diffs before commite.
-If you see some API not beeing updated for more that 48 hours please open an issue.
+If you see some API not beeing updated for more that 48 hours please open [an issue](https://github.com/APIs-guru/api-models/issues/new).
 
 If you want to reference this project and you need an icon or even a banner, check our [branding guide](branding/README.md).
 
