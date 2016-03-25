@@ -15,6 +15,11 @@ Our goal is to create a machine-readable Wikipedia for REST APIs, with the follo
 - Anyone can add or change an API, not only API owners.
 - All data can be accessed through a [REST API](API.md).
 
+**Note**: All specs are automatically updated from their original source.
+You can see it under `x-origin` property inside each of `swagger.yaml` files.
+I try to run update script every day and than manually check diffs before commite.
+If you see some API not beeing updated for more that 48 hours please open an issue.
+
 If you want to reference this project and you need an icon or even a banner, check our [branding guide](branding/README.md).
 
 Also, we provide services and consultancy around the Swagger spec and REST APIs in general.
