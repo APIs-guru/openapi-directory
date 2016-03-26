@@ -146,8 +146,8 @@ paths:
 definitions:
   AnnotateImageRequest:
     description: |-
-      Request for performing Vision tasks over a user-provided image, with
-      user-requested features.
+      Request for performing Google Cloud Vision API tasks over a user-provided
+      image, with user-requested features.
     properties:
       features:
         description: Requested features.
@@ -407,7 +407,9 @@ definitions:
     properties:
       boundingPoly:
         $ref: '#/definitions/BoundingPoly'
-        description: Image region to which this entity belongs.
+        description: |-
+          Image region to which this entity belongs. Not filled currently
+          for LABEL_DETECTION features.
       confidence:
         description: |-
           The accuracy of the entity detection in an image.
@@ -591,9 +593,9 @@ definitions:
   Feature:
     description: |-
       The <em>Feature</em> indicates what type of image detection task to perform.
-      Users describe the type of Vision tasks to perform over images by
-      using <em>Feature</em>s. Features encode the Vision vertical to operate on
-      and the number of top-scoring results to return.
+      Users describe the type of Google Cloud Vision API tasks to perform over
+      images by using <em>Feature</em>s. Features encode the Cloud Vision API
+      vertical to operate on and the number of top-scoring results to return.
     properties:
       maxResults:
         description: Maximum number of results of this type.
@@ -613,7 +615,7 @@ definitions:
         type: string
     type: object
   Image:
-    description: Client image to perform Vision tasks over.
+    description: Client image to perform Google Cloud Vision API tasks over.
     properties:
       content:
         description: 'Image content, represented as a stream of bytes.'
