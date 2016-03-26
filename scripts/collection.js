@@ -94,19 +94,21 @@ function refreshCollection(dir) {
   });
 }
 
+function swaggerToSpecLead(swagger) {
+  var spec = {
+    info: {
+      'x-serviceName': util.getServiceName(swagger),
+      'x-origin': util.getOrigin(swagger)
+    }
+  };
+  removeEmpty(spec);
+  return spec;
+}
+
 function updateCollection(dir) {
   var specs = util.getSpecs(dir);
   async.forEachOfSeries(specs, function (swagger, filename, asyncCb) {
-    var exPatch = {info: {}};
-    var serviceName = util.getServiceName(swagger);
-    var type = getSpecType(swagger);
-    if (type !== 'google' && serviceName)
-      exPatch.info['x-serviceName'] = serviceName;
-
-    var url = util.getOriginUrl(swagger);
-    console.error(url);
-
-    writeSpec(url, type, exPatch, function (error, result) {
+    writeSpec(swaggerToSpecLead(swagger), function (error, result) {
       if (error) {
         logError(error, result);
         return asyncCb(error);
@@ -233,7 +235,7 @@ function saveFixup(fixupPath, swagger, editedSwagger) {
     util.saveYaml(fixupPath, diff);
 }
 
-function getGoogleSpecs() {
+function getGoogleSpecLeads() {
   return makeRequest('get', 'https://www.googleapis.com/discovery/v1/apis')
     .spread(function(response, data) {
       data = JSON.parse(data);
@@ -271,8 +273,8 @@ function updateGoogle() {
     }
   }).mapValues(util.getOriginUrl).invert().value();
 
-  getGoogleSpecs().then(function (googleSpecs) {
-    var newSpecs = _.keyBy(googleSpecs, util.getOriginUrl);
+  getGoogleSpecLeads().then(function (leads) {
+    var newSpecs = _.keyBy(leads, util.getOriginUrl);
 
     var oldURLs = _.keys(oldSpecs);
     var newURLs = _.keys(newSpecs);
@@ -280,16 +282,9 @@ function updateGoogle() {
     var deleted = _.difference(oldURLs, newURLs);
 
     Promise.each(added, function (url) {
-      var spec = newSpecs[url];
-
-      //TODO: change writeSpec to have only one 'spec' arg
-      var url = util.getOriginUrl(spec);
-      var type = getSpecType(spec);
-      delete spec.info['x-origin'];
-
       //FIXME: remove wrapper
       return Promise.fromCallback(function (promiseCb) {
-        writeSpec(url, type, spec, function (error, result) {
+        writeSpec(newSpecs[url], function (error, result) {
           if (error) {
             console.error(errorToString(error, result));
             return promiseCb(error, result);
@@ -306,6 +301,19 @@ function updateGoogle() {
 }
 
 function writeSpec(source, type, exPatch, callback) {
+  //FIXME: remove hack and unify API
+  if (_.isObject(source)) {
+    var spec = source;
+
+    source = util.getOriginUrl(spec);
+    callback = type;
+    type = getSpecType(spec);
+
+    exPatch = spec;
+    delete exPatch.info['x-origin'];
+  }
+
+  console.error(source);
   var getSpecTask = converter.getSpec.bind(this, source, type);
   async.retry({}, getSpecTask, function (err, spec) {
     assert(!err, err);
