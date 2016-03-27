@@ -85,12 +85,6 @@ program
 
 program.parse(process.argv);
 
-process.on("unhandledRejection", function(reason, promise) {
-  process.exitCode = errExitCode;
-  //TODO: better solution
-  setTimeout(function () { throw reason; });
-});
-
 function urlsCollection() {
   _.each(util.getSpecs(), function (swagger) {
     console.log(util.getOriginUrl(swagger));
@@ -283,7 +277,8 @@ function updateGoogle() {
     }
   }).mapValues(util.getOriginUrl).invert().value();
 
-  getGoogleSpecLeads().then(function (leads) {
+  getGoogleSpecLeads()
+  .then(function (leads) {
     var newSpecs = _.keyBy(leads, util.getOriginUrl);
 
     var oldURLs = _.keys(oldSpecs);
@@ -307,7 +302,8 @@ function updateGoogle() {
         console.log('!!! Delete ' + oldSpecs[url]);
       });
     });
-  });
+  })
+  .done();
 }
 
 function writeSpec(source, type, exPatch, callback) {

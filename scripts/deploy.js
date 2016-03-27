@@ -17,12 +17,6 @@ var util = require('./util');
 
 var specRootUrl = 'https://apis-guru.github.io/api-models/';
 
-process.on("unhandledRejection", function(reason, promise) {
-  process.exitCode = 255;
-  //TODO: better solution
-  setTimeout(function () { throw reason; });
-});
-
 cacheResources()
   .then(function (specs) {
     //Note: at this point all logo are cached
@@ -47,7 +41,8 @@ cacheResources()
       saveShield('APIs in collection' , numAPIs, 'orange'),
       saveShield('Endpoints', numEndpoints, 'red')
     ];
-  });
+  })
+  .done();
 
 function cacheResources(specs) {
   var specs = util.getSpecs('../APIs/');
