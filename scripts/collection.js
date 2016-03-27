@@ -30,6 +30,16 @@ var jsondiffpatch = require('jsondiffpatch').create({
   }
 });
 
+converter.ResourceReaders.url = function (url, callback) {
+  var options = {
+    headers: {
+      'Accept': 'application/json,*/*',
+    }
+  };
+  makeRequest('get', url, options).spread(function (response, data) {
+    callback(null, data);
+  }).catch(callback);
+}
 var program = require('commander');
 
 var errExitCode = 255;
@@ -313,9 +323,7 @@ function writeSpec(source, type, exPatch, callback) {
     delete exPatch.info['x-origin'];
   }
 
-  console.error(source);
-  var getSpecTask = converter.getSpec.bind(this, source, type);
-  async.retry({}, getSpecTask, function (err, spec) {
+  converter.getSpec(source, type, function (err, spec) {
     assert(!err, err);
 
     var fixup = util.readYaml(getOriginFixupPath(spec));
