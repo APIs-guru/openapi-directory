@@ -315,7 +315,7 @@ function writeSpec(source, type, exPatch, callback) {
     callback = type;
     type = getSpecType(spec);
 
-    exPatch = spec;
+    exPatch = _.cloneDeep(spec);
     delete exPatch.info['x-origin'];
   }
 
