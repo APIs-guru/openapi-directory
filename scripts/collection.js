@@ -347,7 +347,7 @@ function writeSpec(source, type, exPatch, callback) {
 
       result.swagger = swagger;
 
-      function done(errors, warnings) {
+      validateAndFix(swagger, function (errors, warnings) {
         result.warnings = warnings;
 
         if (errors)
@@ -358,22 +358,20 @@ function writeSpec(source, type, exPatch, callback) {
 
         util.saveSwagger(swagger);
         callback(null, result);
-      }
-
-      function validateAndFix() {
-        validateSwagger(swagger, function (errors, warnings) {
-          if (!_.isArray(errors))
-            return done(errors, warnings);
-
-          if (fixSpec(swagger, errors))
-            validateAndFix();
-          else
-            validateSwagger(swagger, done);
-        });
-      }
-
-      validateAndFix();
+      });
     });
+  });
+}
+
+function validateAndFix(swagger, callback) {
+  validateSwagger(swagger, function (errors, warnings) {
+    if (!_.isArray(errors))
+      return callback(errors, warnings);
+
+    if (fixSpec(swagger, errors))
+      validateAndFix(swagger, callback);
+    else
+      validateSwagger(swagger, callback);
   });
 }
 
