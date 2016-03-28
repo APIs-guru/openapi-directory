@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: The Service Registry API allows users to manage service endpoints in Service Registry and use DNS-based service discovery / name resolution.
+  description: Manages service endpoints in Service Registry and provides integration with DNS for service discovery and name resolution.
   title: Google Cloud Service Registry
   version: alpha
   x-apiClientRegistration:
@@ -496,7 +496,7 @@ definitions:
         type: string
       kind:
         default: 'serviceregistry#operation'
-        description: '[Output Only] Type of the resource. Always compute#operation for operation resources.'
+        description: '[Output Only] Type of the resource. Always compute#operation for Operation resources.'
         type: string
       name:
         description: '[Output Only] Name of the resource.'

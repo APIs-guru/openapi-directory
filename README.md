@@ -9,16 +9,24 @@
 
 Repository for API models in [OpenAPI(aka Swagger)](https://openapis.org) [2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) format
 
-Our goal is to create a machine-readable Wikipedia for REST APIs, with the following principals:
-- Open source, community driven project
+Our goal is to create a machine-readable Wikipedia for REST APIs with the following principals:
+- Open source, community driven project.
 - Only publicly available APIs (free or paid).
 - Anyone can add or change an API, not only API owners.
 - All data can be accessed through a [REST API](API.md).
+
 
 If you want to reference this project and you need an icon or even a banner, check our [branding guide](branding/README.md).
 
 Also, we provide services and consultancy around the Swagger spec and REST APIs in general.
 You can contact us at founders@apis.guru.
+
+Update procedure
+--------------------------
+All specs are automatically updated from their original source.
+You can see it under `x-origin` property inside [each](https://github.com/APIs-guru/api-models/search?utf8=%E2%9C%93&q=x-origin+filename%3Aswagger.yaml) of `swagger.yaml` files.
+I run update script every day and manually check diffs before commit.
+If you see some API is not updated for more that 48 hours please open [an issue](https://github.com/APIs-guru/api-models/issues/new).
 
 Existing integrations
 --------------------------

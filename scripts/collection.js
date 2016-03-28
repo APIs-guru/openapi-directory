@@ -14,7 +14,9 @@ var parseDomain = require('parse-domain');
 var mktemp = require('mktemp').createFileSync;
 var jsonPatch = require('json-merge-patch');
 var YAML = require('js-yaml');
+var Promise = require('bluebird');
 
+var makeRequest = require('makeRequest');
 var util = require('./util');
 
 var jsondiffpatch = require('jsondiffpatch').create({
@@ -73,6 +75,12 @@ program
 
 program.parse(process.argv);
 
+process.on("unhandledRejection", function(reason, promise) {
+  process.exitCode = errExitCode;
+  //TODO: better solution
+  setTimeout(function () { throw reason; });
+});
+
 function urlsCollection() {
   _.each(util.getSpecs(), function (swagger) {
     console.log(util.getOriginUrl(swagger));
@@ -86,19 +94,21 @@ function refreshCollection(dir) {
   });
 }
 
+function swaggerToSpecLead(swagger) {
+  var spec = {
+    info: {
+      'x-serviceName': util.getServiceName(swagger),
+      'x-origin': util.getOrigin(swagger)
+    }
+  };
+  removeEmpty(spec);
+  return spec;
+}
+
 function updateCollection(dir) {
   var specs = util.getSpecs(dir);
   async.forEachOfSeries(specs, function (swagger, filename, asyncCb) {
-    var exPatch = {info: {}};
-    var serviceName = util.getServiceName(swagger);
-    var type = getSpecType(swagger);
-    if (type !== 'google' && serviceName)
-      exPatch.info['x-serviceName'] = serviceName;
-
-    var url = util.getOriginUrl(swagger);
-    console.error(url);
-
-    writeSpec(url, type, exPatch, function (error, result) {
+    writeSpec(swaggerToSpecLead(swagger), function (error, result) {
       if (error) {
         logError(error, result);
         return asyncCb(error);
@@ -225,72 +235,85 @@ function saveFixup(fixupPath, swagger, editedSwagger) {
     util.saveYaml(fixupPath, diff);
 }
 
+function getGoogleSpecLeads() {
+  return makeRequest('get', 'https://www.googleapis.com/discovery/v1/apis')
+    .spread(function(response, data) {
+      data = JSON.parse(data);
+      assert.equal(data.kind, 'discovery#directoryList');
+      assert.equal(data.discoveryVersion, 'v1');
+
+      return _(data.items).filter(function (api) {
+        //blacklist
+        return ([
+               //duplicate preferred
+               'genomics:v1beta2',
+               //no paths
+               'iam:v1alpha1',
+             ].indexOf(api.id) === -1);
+      }).map(function (value) {
+        return {
+          info: {
+            'x-serviceName': value.name,
+            'x-preferred': value.preferred,
+            'x-origin': {
+              url: value.discoveryRestUrl,
+              format: 'google',
+              version: 'v1'
+            }
+          }
+        };
+      }).value();
+    });
+}
+
 function updateGoogle() {
-  var knownSpecs = _(util.getSpecs()).filter({
+  var oldSpecs = _(util.getSpecs()).pickBy({
     info: {
       'x-providerName': 'googleapis.com'
     }
-  }).mapKeys(util.getOriginUrl).value();
+  }).mapValues(util.getOriginUrl).invert().value();
 
-  util.getResource('https://www.googleapis.com/discovery/v1/apis', function(err, response, data) {
-    assert(!err, err);
+  getGoogleSpecLeads().then(function (leads) {
+    var newSpecs = _.keyBy(leads, util.getOriginUrl);
 
-    data = JSON.parse(data);
-    assert.equal(data.kind, 'discovery#directoryList');
-    assert.equal(data.discoveryVersion, 'v1');
+    var oldURLs = _.keys(oldSpecs);
+    var newURLs = _.keys(newSpecs);
+    var added = _.difference(newURLs, oldURLs);
+    var deleted = _.difference(oldURLs, newURLs);
 
-    var result = [];
-    var googleSpecs = _(data.items).filter(function (api) {
-      //blacklist
-      return ([
-             //duplicate preferred
-             'genomics:v1beta2',
-             //no paths
-             'iam:v1alpha1'
-           ].indexOf(api.id) === -1);
-    }).keyBy('discoveryRestUrl').mapValues('preferred').value();
-
-    _.each(googleSpecs, function (preferred, url) {
-      assert(typeof preferred === 'boolean');
-      var addPath = {
-        info: {
-          'x-preferred': preferred
-        }
-      };
-
-      var knownSpec = knownSpecs[url];
-      if (!_.isUndefined(knownSpec)) {
-        mergePatch(knownSpec, addPath);
-        return;
-      }
-
-      console.error(url);
-      writeSpec(url, 'google', null, function (error, result) {
-        if (error)
-          return logError(error, result);
-        mergePatch(result.swagger, addPath);
-        //FIXME: too update with patch
-        writeSpec(url, 'google', null, _.noop);
+    Promise.each(added, function (url) {
+      //FIXME: remove wrapper
+      return Promise.fromCallback(function (promiseCb) {
+        writeSpec(newSpecs[url], function (error, result) {
+          if (error) {
+            console.error(errorToString(error, result));
+            return promiseCb(error, result);
+          }
+          promiseCb(null, result);
+        });
       });
-    });
-
-    _(knownSpecs).keys().difference(_.keys(googleSpecs)).each(function (url) {
-      var swagger = knownSpecs[url];
-      console.log('!!! Delete ' + util.getSwaggerPath(swagger, ''));
+    }).then(function () {
+      _.each(deleted, function (url) {
+        console.log('!!! Delete ' + oldSpecs[url]);
+      });
     });
   });
 }
 
-function mergePatch(swagger, addPatch) {
-  var path = util.getSwaggerPath(swagger, 'patch.yaml');
-  var patch = util.readYaml(path);
-  var newPatch = jsonPatch.merge(patch, addPatch);
-
-  if (!_.isEqual(patch, newPatch))
-    util.saveYaml(path, newPatch);
-}
-
 function writeSpec(source, type, exPatch, callback) {
+  //FIXME: remove hack and unify API
+  if (_.isObject(source)) {
+    var spec = source;
+
+    source = util.getOriginUrl(spec);
+    callback = type;
+    type = getSpecType(spec);
+
+    exPatch = spec;
+    delete exPatch.info['x-origin'];
+  }
+
+  console.error(source);
   var getSpecTask = converter.getSpec.bind(this, source, type);
   async.retry({}, getSpecTask, function (err, spec) {
     assert(!err, err);
@@ -311,7 +334,7 @@ function writeSpec(source, type, exPatch, callback) {
         patchSwagger(swagger, exPatch);
       }
       catch (e) {
-        callback(e, result);
+        return callback(e, result);
       }
 
       expandPathTemplates(swagger);
@@ -686,7 +709,9 @@ function patchSwagger(swagger, exPatch) {
 
   removeEmpty(swagger.info);
 
-  var patch = exPatch;
+  applyMergePatch(swagger, exPatch);
+
+  var patch = {};
   var pathComponents = util.getPathComponents(swagger);
 
   var path = '';

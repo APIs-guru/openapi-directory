@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: API for Cloud SQL database instance management.
+  description: 'Creates and configures Cloud SQL instances, which provide fully-managed MySQL databases.'
   title: Cloud SQL Administration
   version: v1beta4
   x-apiClientRegistration:
@@ -1574,7 +1574,7 @@ definitions:
         format: int64
         type: string
       databaseVersion:
-        description: The database engine type and version. Can be MYSQL_5_5 or MYSQL_5_6. Defaults to MYSQL_5_6. The databaseVersion can not be changed after instance creation.
+        description: 'The database engine type and version. The databaseVersion can not be changed after instance creation. Can be MYSQL_5_5, MYSQL_5_6 or MYSQL_5_7. Defaults to MYSQL_5_6. MYSQL_5_7 is applicable only to Second Generation instances.'
         type: string
       etag:
         description: HTTP 1.1 Entity tag for the resource.
@@ -1738,7 +1738,7 @@ definitions:
           type: string
         type: array
       appliesTo:
-        description: 'The database version this flag applies to. Can be MYSQL_5_5, MYSQL_5_6, or both.'
+        description: 'The database version this flag applies to. Can be MYSQL_5_5, MYSQL_5_6, or MYSQL_5_7. MYSQL_5_7 is applicable only to Second Generation instances.'
         items:
           type: string
         type: array

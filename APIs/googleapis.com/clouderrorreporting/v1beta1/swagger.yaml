@@ -1,0 +1,719 @@
+swagger: '2.0'
+schemes:
+  - https
+host: clouderrorreporting.googleapis.com
+basePath: /
+x-hasEquivalentPaths: true
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: |
+    Collects errors from Cloud Logging data or sent directly from client applications. Groups and counts similar errors to provide an overview on the health of the application and to enable further analysis.
+  title: Google Cloud Error Reporting
+  version: v1beta1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    format: google
+    url: 'https://clouderrorreporting.googleapis.com/$discovery/rest?version=v1beta1'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: clouderrorreporting
+externalDocs:
+  url: 'https://cloud.google.com/error-reporting/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+parameters:
+  $.xgafv:
+    description: V1 error format.
+    enum:
+      - '1'
+      - '2'
+    in: query
+    name: $.xgafv
+    type: string
+  access_token:
+    description: OAuth access token.
+    in: query
+    name: access_token
+    type: string
+  alt:
+    default: json
+    description: Data format for response.
+    enum:
+      - json
+      - media
+      - proto
+    in: query
+    name: alt
+    type: string
+  bearer_token:
+    description: OAuth bearer token.
+    in: query
+    name: bearer_token
+    type: string
+  callback:
+    description: JSONP
+    in: query
+    name: callback
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  pp:
+    default: true
+    description: Pretty-print response.
+    in: query
+    name: pp
+    type: boolean
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+    in: query
+    name: quotaUser
+    type: string
+  uploadType:
+    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+    in: query
+    name: uploadType
+    type: string
+  upload_protocol:
+    description: 'Upload protocol for media (e.g. "raw", "multipart").'
+    in: query
+    name: upload_protocol
+    type: string
+tags:
+  - name: projects
+paths:
+  '/v1beta1/{groupName}':
+    get:
+      description: Get the specified group.
+      operationId: clouderrorreporting.projects.groups.get
+      parameters:
+        - description: |-
+            Group resource name. Required.
+            Example: projects/my-project/groups/my-group
+          in: path
+          name: groupName
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ErrorGroup'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/bearer_token'
+  '/v1beta1/{name}':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/bearer_token'
+    put:
+      description: |-
+        Replace the data for the specified group.
+        Fails if the group does not exist.
+      operationId: clouderrorreporting.projects.groups.update
+      parameters:
+        - description: |-
+            Group resource name.
+            Example: projects/my-projectid/groups/my-groupid
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ErrorGroup'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ErrorGroup'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1beta1/{projectName}/events':
+    delete:
+      description: Deletes all error events of a given project.
+      operationId: clouderrorreporting.projects.deleteEvents
+      parameters:
+        - description: |-
+            The resource name of the Google Cloud Platform project. Required.
+            Example: `projects/my-project`.
+          in: path
+          name: projectName
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DeleteEventsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    get:
+      description: Lists the specified events.
+      operationId: clouderrorreporting.projects.events.list
+      parameters:
+        - description: |-
+            The resource name of the Google Cloud Platform project. Required.
+            Example: projects/my-project
+          in: path
+          name: projectName
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: Restricts the query to the specified time range.
+          enum:
+            - PERIOD_UNSPECIFIED
+            - PERIOD_1_HOUR
+            - PERIOD_6_HOURS
+            - PERIOD_1_DAY
+            - PERIOD_1_WEEK
+            - PERIOD_30_DAYS
+          in: query
+          name: timeRange.period
+          type: string
+        - description: |-
+            The exact value to match against
+            [`ServiceContext.environment`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.environment).
+          in: query
+          name: serviceFilter.environment
+          type: string
+        - description: |-
+            The exact value to match against
+            [`ServiceContext.service`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.service).
+          in: query
+          name: serviceFilter.service
+          type: string
+        - description: The group for which events shall be returned. Required.
+          in: query
+          name: groupId
+          type: string
+        - description: The maximum number of results to return per response.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            The exact value to match against
+            [`ServiceContext.version`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
+          in: query
+          name: serviceFilter.version
+          type: string
+        - description: A `next_page_token` provided by a previous response.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListEventsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/bearer_token'
+  '/v1beta1/{projectName}/groupStats':
+    get:
+      description: Lists the specified groups.
+      operationId: clouderrorreporting.projects.groupStats.list
+      parameters:
+        - description: |-
+            The
+            [Google Cloud Platform project ID](https://support.google.com/cloud/answer/6158840).
+            Required. Example: `my-project-123`.
+          in: path
+          name: projectName
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            The alignment of the timed counts to be returned.
+            Default is `ALIGNMENT_EQUAL_AT_END`.
+          enum:
+            - ERROR_COUNT_ALIGNMENT_UNSPECIFIED
+            - ALIGNMENT_EQUAL_ROUNDED
+            - ALIGNMENT_EQUAL_AT_END
+          in: query
+          name: alignment
+          type: string
+        - description: Restricts the query to the specified time range.
+          enum:
+            - PERIOD_UNSPECIFIED
+            - PERIOD_1_HOUR
+            - PERIOD_6_HOURS
+            - PERIOD_1_DAY
+            - PERIOD_1_WEEK
+            - PERIOD_30_DAYS
+          in: query
+          name: timeRange.period
+          type: string
+        - description: |-
+            The exact value to match against
+            [`ServiceContext.environment`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.environment).
+          in: query
+          name: serviceFilter.environment
+          type: string
+        - description: |-
+            The sort order in which the results are returned.
+            Default is `COUNT_DESC`.
+          enum:
+            - GROUP_ORDER_UNSPECIFIED
+            - COUNT_DESC
+            - LAST_SEEN_DESC
+            - CREATED_DESC
+            - AFFECTED_USERS_DESC
+          in: query
+          name: order
+          type: string
+        - description: |-
+            The exact value to match against
+            [`ServiceContext.service`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.service).
+          in: query
+          name: serviceFilter.service
+          type: string
+        - collectionFormat: multi
+          description: |-
+            List all `ErrorGroupStats` with these IDs.
+            If not specified, all error group stats with a non-zero error count
+            for the given selection criteria are returned.
+          in: query
+          items:
+            type: string
+          name: groupId
+          type: array
+        - description: |-
+            Time where the timed counts shall be aligned if rounded alignment
+            is chosen. Default is 00:00 UTC.
+          in: query
+          name: alignmentTime
+          type: string
+        - description: |-
+            The maximum number of results to return per response.
+            Default is 20.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            The exact value to match against
+            [`ServiceContext.version`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
+          in: query
+          name: serviceFilter.version
+          type: string
+        - description: |-
+            The preferred duration for a single returned `TimedCount`.
+            If not set, no timed counts are returned.
+          in: query
+          name: timedCountDuration
+          type: string
+        - description: |-
+            A `next_page_token` provided by a previous response. To view additional
+            results, pass this token along with the identical query parameters as the
+            first request.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListGroupStatsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/bearer_token'
+definitions:
+  DeleteEventsResponse:
+    description: Response message for deleting error events.
+    properties: {}
+    type: object
+  ErrorContext:
+    description: |-
+      A description of the context in which an error occurred.
+      This data should be provided by the application when reporting an error,
+      unless the
+      error report has been generated automatically from Google App Engine logs.
+      All fields are optional.
+    properties:
+      httpRequest:
+        $ref: '#/definitions/HttpRequestContext'
+        description: The HTTP request which was processed when the error was triggered.
+      reportLocation:
+        $ref: '#/definitions/SourceLocation'
+        description: |-
+          The location in the source code where the decision was made to
+          report the error, usually the place where it was logged.
+          For a logged exception this would be the source line where the
+          exception is logged, usually close to the place where it was
+          caught. This value is in contrast to `Exception.cause_location`,
+          which describes the source line where the exception was thrown.
+      user:
+        description: |-
+          The user who caused or was affected by the crash.
+          This can be a user ID, an email address, or an arbitrary token that
+          uniquely identifies the user.
+          When sending an error report, leave this field empty if the user was not
+          logged in. In this case the
+          Error Reporting system will use other data, such as remote IP address, to
+          distinguish affected users. See `affected_users_count` in
+          `ErrorGroupStats`.
+        type: string
+    type: object
+  ErrorEvent:
+    description: An error event which is returned by the Error Reporting system.
+    properties:
+      context:
+        $ref: '#/definitions/ErrorContext'
+        description: Data about the context in which the error occurred.
+      eventTime:
+        description: |-
+          Time when the event occurred as provided in the error report.
+          If the report did not contain a timestamp, the time the error was received
+          by the Error Reporting system is used.
+        format: google-datetime
+        type: string
+      message:
+        description: Error message that was reported or logged by the service.
+        type: string
+      serviceContext:
+        $ref: '#/definitions/ServiceContext'
+        description: The service_context for which this error was reported.
+    type: object
+  ErrorGroup:
+    description: Description of a group of similar error events.
+    properties:
+      groupId:
+        description: |-
+          Group IDs are unique for a given project. If the same kind of error
+          occurs in different service contexts, it will receive the same group ID.
+        type: string
+      name:
+        description: |-
+          Group resource name.
+          Example: projects/my-projectid/groups/my-groupid
+        type: string
+      trackingIssues:
+        description: Associated tracking issues.
+        items:
+          $ref: '#/definitions/TrackingIssue'
+        type: array
+    type: object
+  ErrorGroupStats:
+    description: |-
+      Data extracted for a specific group based on certain selection criteria,
+      such as a given time period and/or service filter.
+    properties:
+      affectedServices:
+        description: |-
+          Service contexts with a non-zero error count for the given selection
+          criteria. This list can be truncated if multiple services are affected.
+          Refer to `num_affected_services` for the total count.
+        items:
+          $ref: '#/definitions/ServiceContext'
+        type: array
+      affectedUsersCount:
+        description: |-
+          Approximate number of affected users in the given group that
+          match the selection criteria.
+          Users are distinguished by data in the `ErrorContext` of the
+          individual error events, such as their login name or their remote
+          IP address in case of HTTP requests.
+          The number of affected users can be zero even if the number of
+          errors is non-zero if no data was provided from which the
+          affected user could be deduced.
+          Users are counted based on data in the request
+          context that was provided in the error report. If more users are
+          implicitly affected, such as due to a crash of the whole service,
+          this is not reflected here.
+        format: int64
+        type: string
+      count:
+        description: |-
+          Approximate total number of events in the given group that match
+          the selection criteria.
+        format: int64
+        type: string
+      firstSeenTime:
+        description: |-
+          Approximate first occurrence that was seen for this group and
+          which matches the given selection criteria.
+        format: google-datetime
+        type: string
+      group:
+        $ref: '#/definitions/ErrorGroup'
+        description: Group data that is independent of the selection criteria.
+      lastSeenTime:
+        description: |-
+          Approximate last occurrence that was seen for this group
+          and which matches the given selection criteria.
+        format: google-datetime
+        type: string
+      numAffectedServices:
+        description: |-
+          The total number of services with a non-zero error count for the given
+          selection criteria.
+        format: int32
+        type: integer
+      representative:
+        $ref: '#/definitions/ErrorEvent'
+        description: |-
+          An arbitrary event that is chosen as representative for the whole group.
+          The representative event is intended to be used as a quick preview for
+          the whole group. Events in the group are usually sufficiently similar
+          to each other such that showing an arbitrary representative provides
+          insight into the characteristics of the group as a whole.
+      timedCounts:
+        description: |-
+          Approximate number of occurrences over time.
+          Timed counts returned by ListGroups are guaranteed to be:
+
+          - Inside the requested time interval
+          - Non-overlapping, and
+          - Ordered by ascending time.
+        items:
+          $ref: '#/definitions/TimedCount'
+        type: array
+    type: object
+  HttpRequestContext:
+    description: |-
+      HTTP request data that is related to a reported error.
+      This data should be provided by the application when reporting an error,
+      unless the
+      error report has been generated automatically from Google App Engine logs.
+      All fields are optional.
+    properties:
+      method:
+        description: 'The type of HTTP request, such as `GET`, `POST`, etc.'
+        type: string
+      referrer:
+        description: The referrer information that is provided with the request.
+        type: string
+      remoteIp:
+        description: |-
+          The IP address from which the request originated.
+          This can be IPv4, IPv6, or a token which is derived from the
+          IP address, depending on the data that has been provided
+          in the error report.
+        type: string
+      responseStatusCode:
+        description: The HTTP response status code for the request.
+        format: int32
+        type: integer
+      url:
+        description: The URL of the request.
+        type: string
+      userAgent:
+        description: The user agent information that is provided with the request.
+        type: string
+    type: object
+  ListEventsResponse:
+    description: Contains a set of requested error events.
+    properties:
+      errorEvents:
+        description: The error events which match the given request.
+        items:
+          $ref: '#/definitions/ErrorEvent'
+        type: array
+      nextPageToken:
+        description: |-
+          If non-empty, more results are available.
+          Pass this token, along with the same query parameters as the first
+          request, to view the next page of results.
+        type: string
+    type: object
+  ListGroupStatsResponse:
+    description: Contains a set of requested error group stats.
+    properties:
+      errorGroupStats:
+        description: The error group stats which match the given request.
+        items:
+          $ref: '#/definitions/ErrorGroupStats'
+        type: array
+      nextPageToken:
+        description: |-
+          If non-empty, more results are available.
+          Pass this token, along with the same query parameters as the first
+          request, to view the next page of results.
+        type: string
+    type: object
+  ServiceContext:
+    description: |-
+      Describes a running service that sends errors.
+      Services can be deployed to multiple environments,
+      for example, `test` or `prod`. Their version changes over time and
+      multiple versions can run in parallel.
+    properties:
+      environment:
+        description: |-
+          The identifier describes a set of running services that are
+          operated as a single unit, such as `test`, `canary`, or `prod`.
+          If the error originates
+          from Google App Engine logs, or if the identifier is empty, the value
+          appears as `default`.
+        type: string
+      service:
+        description: |-
+          An identifier of the service, such as the name of the executable, job, or
+          Google App Engine module name. This field is expected to have a low number
+          of values that are relatively stable over time, as opposed to
+          `version`, which can be changed whenever new code is deployed.
+
+          Contains the module name for error reports extracted from Google
+          App Engine logs or `default` if the App Engine default module is used. If
+          empty, the value is set to `default`.
+        type: string
+      version:
+        description: |-
+          Represents the source code version that the developer provided,
+          which could represent a version label or a Git SHA-1 hash, for example.
+          If the developer did not provide a version, the value is set to
+          `default`. For App Engine, the version is set to the version of the
+          app.
+        type: string
+    type: object
+  SourceLocation:
+    description: |-
+      Indicates a location in the source code of the service for which
+      errors are reported.
+      This data should be provided by the application when reporting an error,
+      unless the error report has been generated automatically from Google App
+      Engine logs. All fields are optional.
+    properties:
+      filePath:
+        description: |-
+          The source code filename, which can include a truncated relative path, or
+          a full path from a production machine.
+        type: string
+      functionName:
+        description: |-
+          Human-readable name of a function or method.
+          The value can include optional context like the class or package name.
+          For example, `my.package.MyClass.method` in case of Java.
+        type: string
+      lineNumber:
+        description: 1-based. 0 indicates that the line number is unknown.
+        format: int32
+        type: integer
+    type: object
+  TimedCount:
+    description: |-
+      The number of errors in a given time period.
+      All numbers are approximate since the error events are sampled
+      before counting them.
+    properties:
+      count:
+        description: Approximate number of occurrences in the given time period.
+        format: int64
+        type: string
+      endTime:
+        description: End of the time period to which `count` refers (excluded).
+        format: google-datetime
+        type: string
+      startTime:
+        description: Start of the time period to which `count` refers (included).
+        format: google-datetime
+        type: string
+    type: object
+  TrackingIssue:
+    description: Information related to tracking the progress on resolving the error.
+    properties:
+      url:
+        description: |-
+          A URL pointing to a related entry in an issue tracking system.
+          Example: https://github.com/user/project/issues/4
+        type: string
+    type: object

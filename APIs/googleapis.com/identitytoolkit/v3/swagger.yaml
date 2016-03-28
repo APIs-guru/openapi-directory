@@ -688,11 +688,17 @@ definitions:
       changeEmailTemplate:
         $ref: '#/definitions/EmailTemplate'
         description: Change email template.
+      enableAnonymousUser:
+        description: Whether anonymous user is enabled.
+        type: boolean
       idpConfig:
         description: OAuth2 provider configuration.
         items:
           $ref: '#/definitions/IdpConfig'
         type: array
+      legacyResetPasswordTemplate:
+        $ref: '#/definitions/EmailTemplate'
+        description: Legacy reset password email template.
       projectId:
         description: Project ID of the relying party.
         type: string
@@ -812,11 +818,17 @@ definitions:
         description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
         format: int64
         type: string
+      enableAnonymousUser:
+        description: Whether to enable anonymous user.
+        type: boolean
       idpConfig:
         description: Oauth2 provider configuration.
         items:
           $ref: '#/definitions/IdpConfig'
         type: array
+      legacyResetPasswordTemplate:
+        $ref: '#/definitions/EmailTemplate'
+        description: Legacy reset password email template.
       resetPasswordTemplate:
         $ref: '#/definitions/EmailTemplate'
         description: Reset password email template.
@@ -1003,6 +1015,9 @@ definitions:
         type: integer
       provider:
         description: OAuth2 provider.
+        type: string
+      secret:
+        description: OAuth2 client secret.
         type: string
     type: object
   Relyingparty:

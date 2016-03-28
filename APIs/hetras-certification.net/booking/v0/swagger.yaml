@@ -101,7 +101,9 @@ paths:
         '400':
           description: Bad request. Request parameters syntactically erroneous.
         '401':
-          description: You are not authorized to access this resource or you reached your API limit.
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
         '422':
@@ -145,7 +147,9 @@ paths:
         '400':
           description: Bad request. Request parameters syntactically erroneous.
         '401':
-          description: You are not authorized to access this resource or you reached your API limit.
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
         '500':
@@ -187,7 +191,9 @@ paths:
         '400':
           description: Bad request. Request parameters syntactically erroneous.
         '401':
-          description: You are not authorized to access this resource or you reached your API limit.
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
         '500':
@@ -199,7 +205,7 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "Here you can easily find bookings matching various criteria. The booking you are looking for has to fullfill all the specified criteria\r\n            at the same time. So if you specify a customer name and a channel code you will get all bookings where the a guest or a contact has a name containing\r\n            the specified value and that has been done through the defined channel.\r\n            A booking can consist of multiple reservations, so even if you are looking for a specific reservation which is part of a multi-room booking you will get\r\n            all reservations for this booking returned."
+      description: "Here you can easily find bookings matching various criteria. The booking you are looking for has to fullfill all the specified criteria\r\n            at the same time. So if you specify a customer name and a channel code you will get all bookings where the firstname or lastname of a guest or a \r\n            contact contains the specified value and that have been done through the defined channel.\r\n            A booking can consist of multiple reservations, so even if you are looking for a specific reservation which is part of a multi-room booking you will get\r\n            all reservations for this booking returned."
       parameters:
         - description: Application identifier
           in: header
@@ -387,7 +393,9 @@ paths:
         '204':
           description: There are no bookings matching your filter criteria.
         '401':
-          description: You are not authorized to access this resource or you reached your API limit.
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
         '422':
@@ -396,14 +404,14 @@ paths:
           description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         '503':
           description: The server is currently unavailable. Please try later.
-      summary: Get a list of bookings.
+      summary: Find bookings matching the given filter criteria.
       tags:
         - Reservation
     post:
       consumes:
+        - application/x-www-form-urlencoded
         - application/json
         - text/json
-        - application/x-www-form-urlencoded
       deprecated: false
       description: "Create a new booking as defined in the requests payload. You can get more information about the payload if you check out the\r\n            documentation for the reservation request model.<br />\r\n            Please also have a look at the <a href=\"https://developer.hetras.com/docs/tutorials\" onfocus=\"this.blur()\">Tutorials</a>.<br />\r\n            For more details on how the API responds to errors please check our documentation on \r\n            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>."
       parameters:
@@ -441,7 +449,9 @@ paths:
         '400':
           description: Bad request. Request parameters or request body erroneous.
         '401':
-          description: You are not authorized to create new bookings or you reached your API limit.
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
         '422':
@@ -457,6 +467,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      description: "Get the count of all bookings matching your criteria. The bookings have to fullfill all the specified criteria\r\n            at the same time. So if you specify a customer name and a channel code you will get the count for all bookings where the firstname or lastname \r\n            of a guest or a contact contains the specified value and that have been done through the defined channel."
       parameters:
         - description: Application identifier
           in: header
@@ -622,12 +633,14 @@ paths:
           schema:
             $ref: '#/definitions/TotalCountResponse'
         '401':
-          description: You are not authorized to access this resource or you reached your API limit.
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
         '500':
-          description: "We couldn't return the representation due to an internal server error."
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         '503':
           description: The server is currently unavailable. Please try later.
-      summary: Get total count of bookings that match the given filter criteria.
+      summary: Get total count of bookings matchung the given filter criteria.
       tags:
         - Reservation
   '/api/booking/v0/bookings/{confirmationId}':
@@ -672,7 +685,9 @@ paths:
         '400':
           description: Bad request. Request parameters syntactically erroneous.
         '401':
-          description: You are not authorized to access this resource or you reached your API limit.
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
         '500':
@@ -730,7 +745,9 @@ paths:
         '400':
           description: Bad request. Request parameters syntactically erroneous.
         '401':
-          description: You are not authorized to access this resource or you reached your API limit.
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
         '500':
@@ -743,9 +760,9 @@ paths:
   '/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}/assign_room':
     post:
       consumes:
+        - application/x-www-form-urlencoded
         - application/json
         - text/json
-        - application/x-www-form-urlencoded
       deprecated: false
       description: "By default this API call assigns a random room, which has the proper room type, is not already assigned\r\n            to another reservation or has any maintenance status set for the stay period of the underlying reservation. If the\r\n            arrival date for the underlying reservation is the current business day dirty rooms are excluded by default. For reservation\r\n            arriving on any latter day the room condition is not taken into account.<br />\r\n            By specifiying the room selection criteria in the request body you can influence which room will be assigned. See the request model\r\n            for further details.<br />\r\n            For more details on how the API responds to errors please check our documentation on \r\n            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>."
       parameters:
@@ -789,7 +806,9 @@ paths:
         '400':
           description: Bad request. Request parameters or request body erroneous.
         '401':
-          description: You are not authorized to access this resource or you reached your API limit.
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
         '422':
@@ -841,7 +860,9 @@ paths:
         '400':
           description: Bad request. Request parameters or request body erroneous.
         '401':
-          description: You are not authorized to access this resource or you reached your API limit.
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
         '500':
@@ -940,7 +961,9 @@ paths:
         '400':
           description: Bad request. Request parameters syntactically erroneous.
         '401':
-          description: You are not authorized to access this resource or you reached your API limit.
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
         '422':
@@ -1187,6 +1210,20 @@ definitions:
           - Definite
         type: string
     type: object
+  BlockInfo:
+    properties:
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources
+        type: object
+      code:
+        description: "The code is composed of the hotel code a dash and the block code shown in the hetras UI. An \r\n            example block code on the API for a block with code TRAVEL1 defined for the hotel with code ABC would \r\n            be ABC-TRAVEL1"
+        type: string
+      name:
+        description: The name of the block
+        type: string
+    type: object
   BlockResponse:
     properties:
       code:
@@ -1399,13 +1436,13 @@ definitions:
         format: double
         type: number
       block_code:
-        description: The block code of the reservation
+        description: If this reservation is a pick-up from a block you will see the appropriate block code here
         type: string
       cancellation_id:
         description: The cancellation id if the reservation has been cancelled
         type: string
       channel_code:
-        description: The channel code of the reservation
+        description: "The code of the channel that was used when the booking has been created. It is also known as source. \r\n            Possible values can be OTA, GDS or DIRECT, but it is configurable per hotel"
         type: string
       companies:
         $ref: '#/definitions/CompaniesInfo'
@@ -1418,13 +1455,13 @@ definitions:
         format: date-time
         type: string
       external_id:
-        description: The external id for this reservation
+        description: "The external id for this reservation is the unique identifier from the system that created the booking in hetras. It could be the id of an\r\n            OTA like Expedia or booking.com or one of the GDS systems like Amadeus or Galileo"
         type: string
       hotel:
         $ref: '#/definitions/HotelInfo'
         description: Information about the hotel the reservation belongs to
       market_code:
-        description: The market code of the reservation
+        description: The code of the market segment the rate plan for this reservation is linked to
         type: string
       rate_plan:
         $ref: '#/definitions/RatePlan'
@@ -1465,17 +1502,19 @@ definitions:
           $ref: '#/definitions/Service'
         type: array
       subchannel_code:
-        description: The subchannel code of the reservation
+        description: "The code of the subchannel that was used when the booking has been created. Possible values can be \r\n            BOOKING, EXPEDIA or WALKIN, but it is configurable per hotel"
         type: string
     type: object
   BookingListResponse:
     properties:
       _count:
+        description: The number of items matching your request in total for all pages.
         format: int32
         type: integer
       _links:
         additionalProperties:
           $ref: '#/definitions/LinkObject'
+        description: 'Navigation links to get the fast access to the previous, current and next page if existing.'
         type: object
       bookings:
         description: Collection of bookings that match the defined filter criteria.
@@ -1517,6 +1556,11 @@ definitions:
         description: The id of the successful cancellation. With this id the hotel staff will be able to find the reservation
         type: string
     type: object
+  Card:
+    properties:
+      id:
+        type: string
+    type: object
   CompaniesInfo:
     properties:
       company:
@@ -1547,15 +1591,52 @@ definitions:
         description: Whether to send a confirmation email to the primary guest
         type: boolean
     type: object
+  Customer:
+    properties:
+      customer_id:
+        description: "The id of a customer profile. The id is build out of the Supplier Code a dash and the profile id\r\n            shown in the hetras UI. An example id on the API for a profile with id 12345 on the level of supplier ABC \r\n            would be ABC-12345"
+        type: string
+      email:
+        description: The primary email address of the guest
+        type: string
+      first_name:
+        description: First name of the guest
+        type: string
+      gender:
+        description: Gender
+        enum:
+          - Unspecified
+          - Male
+          - Female
+        type: string
+      last_name:
+        description: Last name of the guest
+        type: string
+      mailing_address:
+        $ref: '#/definitions/MailingAddress'
+        description: "The home mailing address of the guest or if no home mailing address is specified it will\r\n            give you the first address found on the guest profile."
+      nationality:
+        description: "The nationality of the guest in ISO 3166-1 alpha-2 format\r\n            (see: http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm)"
+        type: string
+      phone:
+        description: The primary phone number of the guest
+        type: string
+      primary:
+        description: Defines if the guest is the primary guest of the reservation
+        type: boolean
+      title:
+        description: Title of the guest. Needs to be taken from the available titles defined in the codes
+        type: string
+    type: object
   CustomersInfo:
     properties:
       contact:
-        $ref: '#/definitions/Guest'
+        $ref: '#/definitions/Customer'
         description: The contact linked to this reservation
       guests:
         description: A list of guest details for this reservation
         items:
-          $ref: '#/definitions/Guest'
+          $ref: '#/definitions/Customer'
         type: array
     type: object
   DailyRate:
@@ -1703,6 +1784,13 @@ definitions:
       - roomType
       - ratePlanCode
     type: object
+  GetCardsResponse:
+    properties:
+      cards:
+        items:
+          $ref: '#/definitions/Card'
+        type: array
+    type: object
   GroupMaster:
     properties:
       code:
@@ -1753,46 +1841,13 @@ definitions:
           - Waitlist
         type: string
       valid_token:
-        description: "Tells you if there is a valid token on the reservation that can be used to capture the\r\n            reservations amount of to guarantee for the reservation"
+        description: "Tells you if there is a token for a valid creadit card on the reservation that can be used to\r\n            capture the reservations amount or to guarantee for the reservation"
         type: boolean
-    type: object
-  Guest:
-    properties:
-      customer_id:
-        description: "The id of a customer profile. The id is build out of the Supplier Code a dash and the profile id\r\n            shown in the hetras UI. An example id on the API for a profile with id 12345 on the level of supplier ABC \r\n            would be ABC-12345"
-        type: string
-      email:
-        description: The primary email address of the guest
-        type: string
-      first_name:
-        description: First name of the guest
-        type: string
-      gender:
-        description: Gender
-        type: string
-      last_name:
-        description: Last name of the guest
-        type: string
-      mailing_address:
-        $ref: '#/definitions/MailingAddress'
-        description: "The home mailing address of the guest or if no home mailing address is specified it will\r\n            give you the first address found on the guest profile."
-      nationality:
-        description: "The nationality of the guest in ISO 3166-1 alpha-2 format\r\n            (see: http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm)"
-        type: string
-      phone:
-        description: The primary phone number of the guest
-        type: string
-      primary:
-        description: Defines if the guest is the primary guest of the reservation
-        type: boolean
-      title:
-        description: Title of the guest. Needs to be taken from the available titles defined in the codes
-        type: string
     type: object
   HotelInfo:
     properties:
       code:
-        description: Hotel Code
+        description: Hotel Code which is also called property or component code
         type: string
       id:
         description: Hotel Identifier
@@ -1884,7 +1939,7 @@ definitions:
         description: The city name for this address
         type: string
       country:
-        description: "The country code for this address in ISO 3166-1 alpha-2 format\r\n            (see: http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm)"
+        description: "The country code for this address in ISO 3166-1 alpha-2 format\r\n            (see: <a href=\"http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm\" onfocus=\"this.blur()\" target=\"_blank\">http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm</a>)"
         type: string
       postal_code:
         description: The postal code for this address
@@ -2152,7 +2207,7 @@ definitions:
       guests:
         description: A list of guests with some basic guest details
         items:
-          $ref: '#/definitions/Guest'
+          $ref: '#/definitions/Customer'
         type: array
       hotel_id:
         description: The id of the hotel this reservation is valid for
@@ -2209,13 +2264,24 @@ definitions:
         description: "The balance for all folios of this reservartion. It is calculated by all already charged room and service\r\n            rates plus manual charges or charges from other systems like POS minus all payments. A negative balance\r\n            indicates the reservation is overpaid, a positive balance that the guest owes the hotel money"
         format: double
         type: number
+      block:
+        $ref: '#/definitions/BlockInfo'
+        description: If this reservation is a pick-up from a block you will see the appropriate block here
       cancellation_policies:
         description: The cancellation policies that were applicable on the date the booking was done
         items:
           $ref: '#/definitions/CancellationPolicy'
         type: array
       channel_code:
-        description: The code of the channel that was used when the booking has been created
+        description: "The code of the channel that was used when the booking has been created. It is also known as source. \r\n            Possible values can be OTA, GDS or DIRECT, but it is configurable per hotel"
+        type: string
+      checkin_time:
+        description: The real checkin time of the guests. It will be set after the checkin has been performed
+        format: date-time
+        type: string
+      checkout_time:
+        description: The real checkout time of the guests. It will be set after the checkout has been performed
+        format: date-time
         type: string
       comment:
         description: The comment for this reservation
@@ -2237,7 +2303,7 @@ definitions:
         format: date-time
         type: string
       external_id:
-        description: The external id for this reservation
+        description: "The external id for this reservation is the unique identifier from the system that created the booking in hetras. It could be the id of an\r\n            OTA like Expedia or booking.com or one of the GDS systems like Amadeus or Galileo"
         type: string
       general_policies:
         description: The general policies that were applicable on the date the booking was done
@@ -2250,12 +2316,15 @@ definitions:
       guests:
         description: A list of guest details for this reservation
         items:
-          $ref: '#/definitions/Guest'
+          $ref: '#/definitions/Customer'
         type: array
       hotel_id:
         description: The id of the hotel this reservation is valid for
         format: int32
         type: integer
+      market_code:
+        description: The code of the market segment the rate plan for this reservation is linked to
+        type: string
       noshow_policy:
         $ref: '#/definitions/NoShowPolicy'
         description: The noshow policy that were applicable on the date the booking was done
@@ -2316,6 +2385,9 @@ definitions:
         items:
           $ref: '#/definitions/Service'
         type: array
+      subchannel_code:
+        description: "The code of the subchannel that was used when the booking has been created. Possible values can be \r\n            BOOKING, EXPEDIA or WALKIN, but it is configurable per hotel"
+        type: string
       total_stay:
         $ref: '#/definitions/Rate'
         description: The total stay amounts for this reservation
@@ -2348,11 +2420,11 @@ definitions:
   RoomInfo:
     properties:
       number:
-        description: Room Number
+        description: Number of the room if one is assigned already
         type: string
       room_type:
         $ref: '#/definitions/RoomTypeInfo'
-        description: Type of the room
+        description: Room type information
     type: object
   RoomNightCount:
     properties:
@@ -2486,6 +2558,7 @@ definitions:
   TotalCountResponse:
     properties:
       _count:
+        description: Returns the total count for all items matching the query parameters. If none is matching it will return 0.
         format: int64
         type: integer
     required:

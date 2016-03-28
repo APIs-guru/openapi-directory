@@ -8,10 +8,10 @@ info:
     email: support@ontraport.com
     name: ONTRAPORT Engineering
     url: 'http://support.ontraport.com/'
-  description: "<p>Enter App ID and API Key above. If you don't have an API Key, <a href=\"https://app.ontraport.com/#!/api_settings/listAll\">go here to get one</a>. Authentication parameters must be sent in the request header as <strong>Api-Appid</strong> and <strong>Api-Key</strong>. Up to 180 requests per minute are allowed per ONTRAPORT account."
-  termsOfService: 'http://ontraport.com/terms/'
+  description: "<p>Enter App ID and API Key above. If you don't have an API Key, <a href=\"https://app.ontraport.com/#!/api_settings/listAll\">go here to get one</a>. Authentication parameters must be sent in the request header as <strong>Api-Appid</strong> and <strong>Api-Key</strong>. Up to 180 requests per minute are allowed per ONTRAPORT account.</p>"
+  termsOfService: 'https://ontraport.com/terms-of-service'
   title: ONTRAPORT
-  version: 1.1.6
+  version: 1.2.1
   x-logo:
     url: 'https://ontraport.com/assets/images/ONTRAPORT_logo_150px.png'
   x-origin:
@@ -29,6 +29,7 @@ parameters:
       format: int32
       type: integer
     name: add_list
+    required: true
     type: array
   bmasksParam:
     description: '???'
@@ -109,12 +110,14 @@ parameters:
     format: int32
     in: query
     name: id
+    required: true
     type: integer
   idParamFormData:
     description: ID of Object
     format: int32
     in: formData
     name: id
+    required: true
     type: integer
   idsParam:
     description: Array of Object IDs as comma-delimited list
@@ -151,12 +154,14 @@ parameters:
     format: int32
     in: query
     name: objectID
+    required: true
     type: integer
   objectIdParamFormData:
     description: Object Type ID
     format: int32
     in: formData
     name: objectID
+    required: true
     type: integer
   object_type_idParam:
     description: Return results pertaining only to this Object type ID
@@ -203,6 +208,7 @@ parameters:
       format: int32
       type: integer
     name: remove_list
+    required: true
     type: array
   searchNotesParam:
     description: Boolean flag to additionally search Object Notes for the Search term given in Search parameter
@@ -291,7 +297,7 @@ responses:
       items:
         $ref: '#/definitions/Response'
 tags:
-  - description: 'Create, Update, and Fetch Contacts or other Objects'
+  - description: 'Create, Update, Fetch, and Delete Contacts or other Objects'
     name: objects
   - description: Fetch form content
     name: forms
@@ -310,7 +316,6 @@ paths:
       operationId: getForm
       parameters:
         - $ref: '#/parameters/idParam'
-          required: true
       produces:
         - application/json
       responses:
@@ -330,9 +335,6 @@ paths:
       operationId: getHostedURL
       parameters:
         - $ref: '#/parameters/idParam'
-          description: Id of the Landing Page
-          name: id
-          required: true
       produces:
         - application/json
       responses:
@@ -352,7 +354,6 @@ paths:
       operationId: getMessage
       parameters:
         - $ref: '#/parameters/idParam'
-          required: true
       produces:
         - application/json
       responses:
@@ -579,14 +580,33 @@ paths:
       tags:
         - messages
   /object:
+    delete:
+      description: Delete object with given object type and ID
+      operationId: deleteObject
+      parameters:
+        - $ref: '#/parameters/objectIdParam'
+        - $ref: '#/parameters/idParam'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful object query
+          schema:
+            $ref: '#/definitions/Response'
+            type: object
+        '400':
+          description: Invalid objectID
+        '404':
+          description: Object not found
+      summary: Delete an object
+      tags:
+        - objects
     get:
       description: Fetch data for a given object type and ID
       operationId: getObject
       parameters:
         - $ref: '#/parameters/objectIdParam'
-          required: true
         - $ref: '#/parameters/idParam'
-          required: true
       produces:
         - application/json
       responses:
@@ -603,38 +623,55 @@ paths:
       tags:
         - objects
   /objects:
+    delete:
+      description: ''
+      operationId: deleteObjects
+      parameters:
+        - $ref: '#/parameters/objectIdParam'
+        - $ref: '#/parameters/idsParam'
+        - $ref: '#/parameters/performAllParam'
+        - $ref: '#/parameters/startParam'
+        - $ref: '#/parameters/rangeParam'
+        - $ref: '#/parameters/sortParam'
+        - $ref: '#/parameters/sortDirParam'
+        - $ref: '#/parameters/conditionParam'
+        - $ref: '#/parameters/searchParam'
+        - $ref: '#/parameters/searchNotesParam'
+        - $ref: '#/parameters/date_rangeParam'
+        - $ref: '#/parameters/group_idsParam'
+        - $ref: '#/parameters/externsParam'
+        - $ref: '#/parameters/listFieldsParam'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful object query
+          schema:
+            $ref: '#/definitions/Response'
+            type: object
+        '400':
+          description: Invalid objectID
+      summary: Delete a list of objects
+      tags:
+        - objects
     get:
       description: ''
       operationId: getObjects
       parameters:
         - $ref: '#/parameters/objectIdParam'
-          required: true
         - $ref: '#/parameters/idsParam'
-          required: false
         - $ref: '#/parameters/performAllParam'
-          required: false
         - $ref: '#/parameters/startParam'
-          required: false
         - $ref: '#/parameters/rangeParam'
-          required: false
         - $ref: '#/parameters/sortParam'
-          required: false
         - $ref: '#/parameters/sortDirParam'
-          required: false
         - $ref: '#/parameters/conditionParam'
-          required: false
         - $ref: '#/parameters/searchParam'
-          required: false
         - $ref: '#/parameters/searchNotesParam'
-          required: false
         - $ref: '#/parameters/date_rangeParam'
-          required: false
         - $ref: '#/parameters/group_idsParam'
-          required: false
         - $ref: '#/parameters/externsParam'
-          required: false
         - $ref: '#/parameters/listFieldsParam'
-          required: false
       produces:
         - application/json
       responses:
@@ -653,7 +690,6 @@ paths:
       operationId: createObject
       parameters:
         - $ref: '#/parameters/objectIdParamFormData'
-          required: true
         - description: New first name for object
           in: formData
           name: firstname
@@ -684,9 +720,7 @@ paths:
       operationId: updateObjects
       parameters:
         - $ref: '#/parameters/objectIdParamFormData'
-          required: true
         - $ref: '#/parameters/idParamFormData'
-          required: true
         - description: New first name for object
           in: formData
           name: firstname
@@ -714,21 +748,15 @@ paths:
         - objects
   /objects/getInfo:
     get:
-      description: 'Get information about a colloection of objects, such as the number of objects that match the given criteria'
+      description: 'Get information about a collection of objects, such as the number of objects that match the given criteria'
       operationId: getObjectsInfo
       parameters:
         - $ref: '#/parameters/objectIdParam'
-          required: true
         - $ref: '#/parameters/conditionParam'
-          required: false
         - $ref: '#/parameters/searchParam'
-          required: false
         - $ref: '#/parameters/searchNotesParam'
-          required: false
         - $ref: '#/parameters/date_rangeParam'
-          required: false
         - $ref: '#/parameters/group_idsParam'
-          required: false
       produces:
         - application/json
       responses:
@@ -756,7 +784,6 @@ paths:
           name: format
           type: string
         - $ref: '#/parameters/objectIdParam'
-          required: false
       produces:
         - application/json
       responses:
@@ -771,10 +798,9 @@ paths:
   /objects/saveorupdate:
     post:
       description: 'Create an object with given data or merge if the unique field matches another in the database. Object type is a required parameters, but other parameters are optional and depend on the object type. We have provided optional parameters as examples for updating a contact object. When using this in your application, invalid parameters will be ignored.'
-      operationId: createormergeObject
+      operationId: saveorupdateObject
       parameters:
         - $ref: '#/parameters/objectIdParamFormData'
-          required: true
         - description: First name for object
           in: formData
           name: firstname
@@ -802,39 +828,24 @@ paths:
         - objects
   /objects/tag:
     delete:
-      description: 'Remove a Tag from an Object. When adding and removing tags, either <b>ids</b> or <b>group_ids</b> must be given.'
+      description: 'Remove a Tag from an Object using Tag ID. When adding and removing tags, either <b>ids</b> or <b>group_ids</b> must be given.'
       operationId: removeTag
       parameters:
         - $ref: '#/parameters/objectIdParamFormData'
-          required: true
         - $ref: '#/parameters/removeListParamFormData'
-          required: true
         - $ref: '#/parameters/idsParamFormData'
-          required: false
         - $ref: '#/parameters/performAllParamFormData'
-          required: false
         - $ref: '#/parameters/startParamFormData'
-          required: false
         - $ref: '#/parameters/rangeParamFormData'
-          required: false
         - $ref: '#/parameters/sortParamFormData'
-          required: false
         - $ref: '#/parameters/sortDirParamFormData'
-          required: false
         - $ref: '#/parameters/conditionParamFormData'
-          required: false
         - $ref: '#/parameters/searchParamFormData'
-          required: false
         - $ref: '#/parameters/searchNotesParamFormData'
-          required: false
         - $ref: '#/parameters/date_rangeParamFormData'
-          required: false
         - $ref: '#/parameters/group_idsParamFormData'
-          required: false
         - $ref: '#/parameters/externsParamFormData'
-          required: false
         - $ref: '#/parameters/listFieldsParamFormData'
-          required: false
       produces:
         - application/json
       responses:
@@ -851,35 +862,20 @@ paths:
       operationId: addTag
       parameters:
         - $ref: '#/parameters/objectIdParamFormData'
-          required: true
         - $ref: '#/parameters/addListParamFormData'
-          required: true
         - $ref: '#/parameters/idsParamFormData'
-          required: false
         - $ref: '#/parameters/performAllParamFormData'
-          required: false
         - $ref: '#/parameters/startParamFormData'
-          required: false
         - $ref: '#/parameters/rangeParamFormData'
-          required: false
         - $ref: '#/parameters/sortParamFormData'
-          required: false
         - $ref: '#/parameters/sortDirParamFormData'
-          required: false
         - $ref: '#/parameters/conditionParamFormData'
-          required: false
         - $ref: '#/parameters/searchParamFormData'
-          required: false
         - $ref: '#/parameters/searchNotesParamFormData'
-          required: false
         - $ref: '#/parameters/date_rangeParamFormData'
-          required: false
         - $ref: '#/parameters/group_idsParamFormData'
-          required: false
         - $ref: '#/parameters/externsParamFormData'
-          required: false
         - $ref: '#/parameters/listFieldsParamFormData'
-          required: false
       produces:
         - application/json
       responses:
@@ -941,7 +937,6 @@ paths:
       operationId: convertToCollections
       parameters:
         - $ref: '#/parameters/idParamFormData'
-          required: true
       produces:
         - application/json
       responses:
@@ -963,7 +958,6 @@ paths:
       operationId: convertToDecline
       parameters:
         - $ref: '#/parameters/idParamFormData'
-          required: true
       produces:
         - application/json
       responses:
@@ -985,7 +979,6 @@ paths:
       operationId: markPaid
       parameters:
         - $ref: '#/parameters/idParamFormData'
-          required: true
       produces:
         - application/json
       responses:
@@ -1150,12 +1143,12 @@ paths:
       description: ''
       operationId: resendInvoice
       parameters:
-        - description: Definition of transaction
+        - description: Criteria of transactions to resend invoices
           in: body
-          name: body
+          name: criteria
           required: true
           schema:
-            $ref: '#/definitions/Transaction'
+            $ref: '#/definitions/Criteria'
       produces:
         - application/json
       responses:
@@ -1172,7 +1165,7 @@ paths:
   /transaction/void:
     put:
       description: ''
-      operationId: void
+      operationId: voidTransaction
       parameters:
         - description: Criteria of transactions to void
           in: body
@@ -1199,7 +1192,6 @@ paths:
       operationId: voidPurchase
       parameters:
         - $ref: '#/parameters/idParamFormData'
-          required: true
       produces:
         - application/json
       responses:
@@ -1221,7 +1213,6 @@ paths:
       operationId: writeOff
       parameters:
         - $ref: '#/parameters/idParamFormData'
-          required: true
       produces:
         - application/json
       responses:
@@ -1676,4 +1667,8 @@ definitions:
       - gateway_id
       - offer
   Update:
+    properties:
+      id:
+        format: int32
+        type: integer
     type: object

@@ -663,6 +663,10 @@ definitions:
   PipelineResources:
     description: The system resources for the pipeline run.
     properties:
+      bootDiskSizeGb:
+        description: Optional. The size of the boot disk. Can be overridden at runtime.
+        format: int32
+        type: integer
       disks:
         description: Disks to attach.
         items:

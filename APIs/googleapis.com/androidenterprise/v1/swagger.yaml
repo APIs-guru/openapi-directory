@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Allows MDMs/EMMs and enterprises to manage the deployment of apps to Android for Work users.
+  description: Manages the deployment of apps to Android for Work users.
   title: Google Play EMM
   version: v1
   x-apiClientRegistration:
@@ -2242,7 +2242,7 @@ definitions:
     type: object
   Enterprise:
     description: |-
-      An enterprise resource represents a binding between an organisation and their EMM.
+      An enterprise resource represents a binding between an organization and their EMM.
 
       To create an enterprise, an admin of the enterprise must first go through a Play for Work sign-up flow. At the end of this the admin will be presented with a token (a short opaque alphanumeric string). They must then present this to the EMM, who then supplies it to the enroll method. Until this is done the EMM will not have any access to the enterprise.
 
@@ -2672,7 +2672,7 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#user".'
         type: string
       primaryEmail:
-        description: "The user's primary email, e.g. \"jsmith@example.com\". Will always be set for Google managed users and not set for EMM managed users."
+        description: "The user's primary email, e.g. \"jsmith@example.com\"."
         type: string
     type: object
   UserToken:

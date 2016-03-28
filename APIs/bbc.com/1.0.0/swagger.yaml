@@ -1,6 +1,7 @@
 swagger: '2.0'
 schemes:
   - http
+  - https
 host: programmes.api.bbc.com
 basePath: /nitro/api
 info:
@@ -1017,7 +1018,7 @@ paths:
             * mixin to return the alternate images for a programme
             * mixin to return ancestor programme titles
             * mixin to return programme availability information
-            * mixin to return information about programmes that are currently available
+            * mixin to return information about programmes that are currently available on demand
             * mixin to return information about contributors to a programme
             * mixin to return original version duration in programme concept entities
             * mixin to return list of genre groupings
@@ -1025,6 +1026,7 @@ paths:
             * mixin to add embeddable information for a programme
             * mixin to return the programmes which appear before and after a programme (as determined by the sort applied in the request)
             * mixin to return information about related links to a programme
+            * mixin to return information about programmes that are currently available as webcasts
           enum:
             - alternate_images
             - ancestor_titles
@@ -1037,10 +1039,23 @@ paths:
             - is_embeddable
             - previous_next
             - related_links
+            - available_webcasts
           in: query
           items:
             format: string
           name: mixin
+          required: false
+          type: array
+        - collectionFormat: multi
+          description: |
+            Unstable mixins:
+            * mixin to return information about programmes that are currently available as webcasts
+          enum:
+            - available_webcasts
+          in: query
+          items:
+            format: string
+          name: unstable_mixin
           required: false
           type: array
         - collectionFormat: multi

@@ -1467,9 +1467,29 @@ paths:
           name: tokenType
           required: true
           type: string
-        - description: 'Mandatory for <i>tokenType=SHOP</i> only, identifies licensee that will be assigned to the shop token'
+        - description: 'for <i>tokenType=SHOP</i> only (mandatory); identifies licensee that will be assigned to the shop token'
           in: formData
           name: licenseeNumber
+          required: false
+          type: string
+        - description: 'for <i>tokenType=SHOP</i> only; take customers to this URL when they finish checkout'
+          in: formData
+          name: successURL
+          required: false
+          type: string
+        - description: 'for <i>tokenType=SHOP</i> only; shop link title for successful checkout process'
+          in: formData
+          name: successURLTitle
+          required: false
+          type: string
+        - description: 'for <i>tokenType=SHOP</i> only; take customers to this URL when they cancel their checkout'
+          in: formData
+          name: cancelURL
+          required: false
+          type: string
+        - description: 'for <i>tokenType=SHOP</i> only; shop link title for cancel checkout process'
+          in: formData
+          name: cancelURLTitle
           required: false
           type: string
       produces:

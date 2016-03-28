@@ -42,8 +42,10 @@ paths:
             items:
               $ref: '#/definitions/Hotel'
             type: array
+        '401':
+          description: 'You provided wrong credentials, or you reached your API limit.'
         '403':
-          description: You are not authorized to access this resource or the data for the specified hotels.
+          description: The application does not have access to the requested resource.
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
         '500':
@@ -83,8 +85,10 @@ paths:
           description: Hotel details for the hotel with the id specified in the URL.
           schema:
             $ref: '#/definitions/Hotel'
+        '401':
+          description: 'You provided wrong credentials, or you reached your API limit.'
         '403':
-          description: You are not authorized to access this resource or the data for the specified hotels.
+          description: The application does not have access to the requested resource.
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
         '500':
@@ -125,6 +129,10 @@ paths:
             items:
               $ref: '#/definitions/RoomType'
             type: array
+        '401':
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
         '500':
           description: "We couldn't return the representation due to an internal server error."
         '503':
@@ -168,6 +176,10 @@ paths:
           description: Room type details for the hotel with the id specified in the URL.
           schema:
             $ref: '#/definitions/RoomType'
+        '401':
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
         '500':
           description: "We couldn't return the representation due to an internal server error."
         '503':
@@ -288,6 +300,10 @@ paths:
             $ref: '#/definitions/RoomListResponse'
         '204':
           description: There are no rooms found for the given combination of filtering and pagination criteria.
+        '401':
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
         '500':
           description: "We couldn't return the representation due to an internal server error."
         '503':
@@ -386,6 +402,10 @@ paths:
           description: The total room count for a given filter criteria.
           schema:
             $ref: '#/definitions/TotalCountResponse'
+        '401':
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
         '500':
           description: "We couldn't return the representation due to an internal server error."
         '503':
@@ -497,6 +517,10 @@ paths:
             $ref: '#/definitions/RoomListResponse'
         '204':
           description: There are no rooms found for the given combination of filtering criteria.
+        '401':
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
         '500':
           description: "We couldn't return the representation due to an internal server error."
         '503':
@@ -540,6 +564,10 @@ paths:
           description: Room details for the hotel with the id specified in the URL.
           schema:
             $ref: '#/definitions/Room'
+        '401':
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
         '404':
           description: Requested room could not be found.
         '500':
@@ -551,9 +579,9 @@ paths:
         - Room
     patch:
       consumes:
+        - application/x-www-form-urlencoded
         - application/json
         - text/json
-        - application/x-www-form-urlencoded
       deprecated: false
       description: "The hetras API is using <a href=\"https://tools.ietf.org/html/rfc6902\" onfocus=\"this.blur()\" target=\"_blank\">IETF JSON Patch RFC 6902</a>\r\n            to partially update an existing resource. Currently this call only allows to modify condition and housekeeping occupancy status of the room.\r\n            <br /><br />\r\n            A request example:<br /><pre>\r\n            [\r\n              {\r\n                \"op\": \"replace\", \"path\": \"/status/condition\", \"value\": \"CleanNotInspected\"\r\n              }, {\r\n                \"op\": \"replace\", \"path\": \"/status/housekeeping_occupancy\", \"value\": \"Vacant\"\r\n              }\r\n            ]\r\n            </pre><br />\r\n            For more details on how the API responds to errors please check our documentation on \r\n            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>.<br />"
       parameters:
@@ -599,7 +627,9 @@ paths:
         '400':
           description: Bad request. Request parameters or request body erroneous.
         '401':
-          description: You are not authorized to change reservations or you reached your API limit.
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
         '422':
@@ -998,11 +1028,13 @@ definitions:
   RoomListResponse:
     properties:
       _count:
+        description: The number of items matching your request in total for all pages.
         format: int32
         type: integer
       _links:
         additionalProperties:
           $ref: '#/definitions/LinkObject'
+        description: 'Navigation links to get the fast access to the previous, current and next page if existing.'
         type: object
       rooms:
         items:
@@ -1119,6 +1151,7 @@ definitions:
   TotalCountResponse:
     properties:
       _count:
+        description: Returns the total count for all items matching the query parameters. If none is matching it will return 0.
         format: int64
         type: integer
     required:
