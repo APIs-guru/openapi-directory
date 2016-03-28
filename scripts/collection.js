@@ -98,35 +98,32 @@ function refreshCollection(dir) {
   });
 }
 
-function swaggerToSpecLead(swagger) {
-  var spec = {
-    info: {
-      'x-serviceName': util.getServiceName(swagger),
-      'x-origin': util.getOrigin(swagger)
-    }
-  };
-  removeEmpty(spec);
-  return spec;
-}
-
 function updateCollection(dir) {
   var specs = util.getSpecs(dir);
-  async.forEachOfSeries(specs, function (swagger, filename, asyncCb) {
-    writeSpec(swaggerToSpecLead(swagger), function (error, result) {
-      if (error) {
-        logError(error, result);
-        return asyncCb(error);
-      }
+  var files = originUrlsToFilenames(specs);
 
-      var newFilename = util.getSwaggerPath(result.swagger);
-      if (newFilename !== filename)
-        asyncCb(Error("Spec was moved to new location: " + newFilename));
-      asyncCb(null);
+  getSpecLeads(specs)
+   .then(function (leads) {
+     var knownUrls = _(specs).values().map(util.getOriginUrl).value();
+     return _(leads).pick(knownUrls).values().value();
+   })
+   .each(function (lead) {
+    //TODO: remove wrapper
+    return Promise.fromCallback(function (promiseCb) {
+      writeSpec(lead, function (error, result) {
+        if (error) {
+          logError(error, result);
+          return promiseCb(error);
+        }
+
+        var oldFilename = files[util.getOriginUrl(lead)];
+        var newFilename = util.getSwaggerPath(result.swagger);
+        if (newFilename !== oldFilename)
+          return promiseCb(Error("Spec was moved to new location: " + newFilename));
+        promiseCb(null);
+      });
     });
-  }, function (error) {
-    if (error)
-      throw error;
-  });
+  }).done();
 }
 
 function validateCollection() {
@@ -270,17 +267,37 @@ function getGoogleSpecLeads() {
     });
 }
 
-function updateGoogle() {
-  var oldSpecs = _(util.getSpecs()).pickBy({
+function swaggerToSpecLead(swagger) {
+  var spec = {
     info: {
-      'x-providerName': 'googleapis.com'
+      'x-serviceName': util.getServiceName(swagger),
+      'x-origin': util.getOrigin(swagger)
     }
-  }).mapValues(util.getOriginUrl).invert().value();
+  };
+  removeEmpty(spec);
+  return spec;
+}
 
-  getGoogleSpecLeads()
-  .then(function (leads) {
-    var newSpecs = _.keyBy(leads, util.getOriginUrl);
+function getSpecLeads(specs) {
+  var leads = _(specs).mapValues(swaggerToSpecLead)
+    .keyBy(util.getOriginUrl).value();
 
+  return getGoogleSpecLeads()
+    .then(function (googleLeads) {
+      return _.assign(leads, _.keyBy(googleLeads, util.getOriginUrl));
+    })
+}
+
+function originUrlsToFilenames(specs) {
+  return _(specs).mapValues(util.getOriginUrl).invert().value();
+}
+
+function updateGoogle() {
+  var specs = util.getSpecs();
+  var oldSpecs = originUrlsToFilenames(specs);
+
+  getSpecLeads(specs)
+  .then(function (newSpecs) {
     var oldURLs = _.keys(oldSpecs);
     var newURLs = _.keys(newSpecs);
     var added = _.difference(newURLs, oldURLs);
