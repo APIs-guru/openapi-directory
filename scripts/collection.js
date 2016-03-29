@@ -60,6 +60,12 @@ program
   .action(refreshCollection);
 
 program
+  .command('fixup')
+  .description('update "fixup.json" for specified Swagger')
+  .arguments('<Swagger>')
+  .action(fixupSwagger);
+
+program
   .command('update')
   .description('run update')
   .arguments('[DIR]')
@@ -96,6 +102,16 @@ function refreshCollection(dir) {
     assert(util.getSwaggerPath(swagger) === filename);
     util.saveSwagger(swagger);
   });
+}
+
+function fixupSwagger(swaggerPath) {
+  var swagger = util.readYaml(swaggerPath);
+  editFile(util.Yaml2String(swagger))
+    .then(function (editedSwagger) {
+      editedSwagger = YAML.safeLoad(editedSwagger);
+      saveSwaggerFixup(swagger, editedSwagger);
+    })
+    .done();
 }
 
 function updateCollection(dir) {
@@ -182,42 +198,37 @@ function addToCollection(type, url, command) {
     if (!command.fixup || !result.spec)
       return logError(error, result);
 
-    editFile(errorToString(error, result), function (error, data) {
-      if (error) {
-        console.error(error);
-        process.exitCode = errExitCode;
-        return;
-      }
+    editFile(errorToString(error, result))
+      .then(function (data) {
+        var match = data.match(/^\++ Begin.*$((?:.|\n)*?)^\?+ Swagger.*$((?:.|\n)*?)^[!*-]/m);
+        if (!match || !match[1] || !match[2])
+          throw Error('Can not match edited Swagger');
 
-      var match = data.match(/^\++ Begin.*$((?:.|\n)*?)^\?+ Swagger.*$((?:.|\n)*?)^[!*-]/m);
-      if (!match || !match[1] || !match[2]) {
-        console.error('Can not match edited Swagger');
-        process.exitCode = errExitCode;
-        return;
-      }
+        if (type !== 'swagger_2') {
+          var editedOrigin = YAML.safeLoad(match[1]);
+          saveFixup(getOriginFixupPath(result.spec), serilazeSpec(result.spec), editedOrigin);
+        }
 
-      if (type !== 'swagger_2') {
-        var editedOrigin = YAML.safeLoad(match[1]);
-        saveFixup(getOriginFixupPath(result.spec), serilazeSpec(result.spec), editedOrigin);
-      }
-
-      if (!_.isUndefined(result.swagger)) {
-        var editedSwagger = YAML.safeLoad(match[2]);
-        saveFixup(util.getSwaggerPath(result.swagger, 'fixup.yaml'), result.swagger, editedSwagger);
-      }
-    });
+        if (!_.isUndefined(result.swagger)) {
+          var editedSwagger = YAML.safeLoad(match[2]);
+          saveSwaggerFixup(result.swagger, editedSwagger);
+        }
+      })
+      .done();
   });
 }
 
-function editFile(data, cb) {
-  var tmpfile = mktemp('/tmp/XXXXXX.fixup.txt');
-  fs.writeFileSync(tmpfile, data);
+function editFile(str, cb) {
+  var tmpfile = mktemp('/tmp/XXXXXX.txt');
+  fs.writeFileSync(tmpfile, str);
 
-  editor(tmpfile, function (code) {
-    if (code !== 0)
-      return cb(Error('Editor closed with code ' + code));
+  return Promise.fromCallback(function (promiseCb) {
+    editor(tmpfile, function (code) {
+      if (code !== 0)
+        return promiseCb(Error('Editor closed with code ' + code));
 
-    cb(null, fs.readFileSync(tmpfile, 'utf-8'));
+      promiseCb(null, fs.readFileSync(tmpfile, 'utf-8'));
+    });
   });
 }
 
@@ -225,13 +236,17 @@ function getOriginFixupPath(spec) {
   return '../fixes/' + encodeURIComponent(spec.source) + '.yaml';
 }
 
-function saveFixup(fixupPath, swagger, editedSwagger) {
+function saveSwaggerFixup(swagger, editedSwagger) {
+  saveFixup(util.getSwaggerPath(swagger, 'fixup.yaml'), swagger, editedSwagger);
+}
+
+function saveFixup(fixupPath, spec, editedSpec) {
   //Before diff we need to unpatch, it's a way to appeand changes
   var fixup = util.readYaml(fixupPath);
   if (fixup)
-    jsondiffpatch.unpatch(swagger, fixup);
+    jsondiffpatch.unpatch(spec, fixup);
 
-  var diff = jsondiffpatch.diff(swagger, editedSwagger);
+  var diff = jsondiffpatch.diff(spec, editedSpec);
   if (!_.isEqual(diff, fixup))
     util.saveYaml(fixupPath, diff);
 }
