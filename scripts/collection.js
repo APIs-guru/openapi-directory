@@ -246,8 +246,6 @@ function getGoogleSpecLeads() {
       return _(data.items).filter(function (api) {
         //blacklist
         return ([
-               //duplicate preferred
-               'genomics:v1beta2',
                //no paths
                'iam:v1alpha1',
              ].indexOf(api.id) === -1);
