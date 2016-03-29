@@ -282,9 +282,12 @@ function getSpecLeads(specs) {
   var leads = _(specs).mapValues(swaggerToSpecLead)
     .keyBy(util.getOriginUrl).value();
 
-  return getGoogleSpecLeads()
-    .then(function (googleLeads) {
-      return _.assign(leads, _.keyBy(googleLeads, util.getOriginUrl));
+  return Promise.all([getGoogleSpecLeads()])
+    .then(function (catalogsLeads) {
+      catalogsLeads = _(catalogsLeads).flatten()
+        .keyBy(util.getOriginUrl).omit([
+        ]).value();
+      return _.assign(leads, catalogsLeads);
     })
 }
 
