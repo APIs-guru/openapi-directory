@@ -258,13 +258,7 @@ function getGoogleSpecLeads() {
       assert.equal(data.kind, 'discovery#directoryList');
       assert.equal(data.discoveryVersion, 'v1');
 
-      return _(data.items).filter(function (api) {
-        //blacklist
-        return ([
-               //no paths
-               'iam:v1alpha1',
-             ].indexOf(api.id) === -1);
-      }).map(function (value) {
+      return _.map(data.items, function (value) {
         return {
           info: {
             'x-serviceName': value.name,
@@ -276,7 +270,7 @@ function getGoogleSpecLeads() {
             }
           }
         };
-      }).value();
+      });
     });
 }
 
@@ -299,6 +293,12 @@ function getSpecLeads(specs) {
     .then(function (catalogsLeads) {
       catalogsLeads = _(catalogsLeads).flatten()
         .keyBy(util.getOriginUrl).omit([
+          //blacklisted URLs
+          //TODO: move into separate file
+          //No paths
+          'https://www.googleapis.com/discovery/v1/apis/iam/v1alpha1/rest',
+          //Invalid link
+          'https://datastore.googleapis.com/$discovery/rest?version=v1'
         ]).value();
       return _.assign(leads, catalogsLeads);
     })
@@ -319,7 +319,7 @@ function updateGoogle() {
     var added = _.difference(newURLs, oldURLs);
     var deleted = _.difference(oldURLs, newURLs);
 
-    Promise.each(added, function (url) {
+    return Promise.each(added, function (url) {
       //FIXME: remove wrapper
       return Promise.fromCallback(function (promiseCb) {
         writeSpec(newSpecs[url], function (error, result) {
