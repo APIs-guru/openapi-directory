@@ -582,6 +582,9 @@ definitions:
   ChangePlanRequest:
     description: JSON template for the ChangePlan rpc request.
     properties:
+      dealCode:
+        description: "External name of the deal code applicable for the subscription. This field is optional. If missing, the deal price plan won't be used."
+        type: string
       kind:
         default: 'subscriptions#changePlanRequest'
         description: Identifies the resource as a subscription change plan request.
@@ -672,6 +675,9 @@ definitions:
       customerId:
         description: The id of the customer to whom the subscription belongs.
         type: string
+      dealCode:
+        description: 'External name of the deal, if this subscription was provisioned under one. Otherwise this field will be empty.'
+        type: string
       kind:
         default: 'reseller#subscription'
         description: Identifies the resource as a Subscription.
@@ -720,7 +726,7 @@ definitions:
         description: The id of the subscription.
         type: string
       suspensionReasons:
-        description: "field listing all current reasons the subscription is suspended. It is possible for a subscription to have multiple suspension reasons. A subscription's status is SUSPENDED until all pending suspensions are removed. Possible options include:  \n- PENDING_TOS_ACCEPTANCE — The customer has not logged in and accepted the Google Apps Resold Terms of Services.  \n- RENEWAL_WITH_TYPE_CANCEL — The customer's commitment ended and their service was cancelled at the end of their term.  \n- RESELLER_INITIATED — A manual suspension invoked by a Reseller.  \n- TRIAL_ENDED — The customer's trial expired without a plan selected.  \n- OTHER — The customer is suspended for an internal Google reason (e.g. abuse or otherwise)."
+        description: "Read-only field containing an enumerable of all the current suspension reasons for a subscription. It is possible for a subscription to have many concurrent, overlapping suspension reasons. A subscription's STATUS is SUSPENDED until all pending suspensions are removed. Possible options include:  \n- PENDING_TOS_ACCEPTANCE - The customer has not logged in and accepted the Google Apps Resold Terms of Services.  \n- RENEWAL_WITH_TYPE_CANCEL - The customer's commitment ended and their service was cancelled at the end of their term.  \n- RESELLER_INITIATED - A manual suspension invoked by a Reseller.  \n- TRIAL_ENDED - The customer's trial expired without a plan selected.  \n- OTHER - The customer is suspended for an internal Google reason (e.g. abuse or otherwise)."
         items:
           type: string
         type: array
