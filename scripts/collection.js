@@ -137,7 +137,7 @@ function updateCollection(dir) {
         var oldFilename = files[util.getOriginUrl(lead)];
         var newFilename = util.getSwaggerPath(result.swagger);
         if (newFilename !== oldFilename)
-          return promiseCb(Error("Spec was moved to new location: " + newFilename));
+          return promiseCb(Error("Spec was moved from '" + oldFilename + '" to "' + newFilename + '"'));
         promiseCb(null);
       });
     });
