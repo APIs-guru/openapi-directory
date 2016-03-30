@@ -36,9 +36,11 @@ converter.ResourceReaders.url = function (url, callback) {
       'Accept': 'application/json,*/*',
     }
   };
-  makeRequest('get', url, options).spread(function (response, data) {
-    callback(null, data);
-  }).catch(callback);
+  makeRequest('get', url, options)
+    .spread(function (response, data) {
+      return data;
+    })
+    .asCallback(callback);
 }
 var program = require('commander');
 
