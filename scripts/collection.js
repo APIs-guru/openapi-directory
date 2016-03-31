@@ -780,7 +780,8 @@ function convertToSwagger(spec, callback) {
 }
 
 function parseHost(swagger) {
-  assert(swagger.host);
+  assert(swagger.host, 'Missing host');
+  assert(!/^localhost/.test(swagger.host), 'Can't add localhost API');
   var p = parseDomain(swagger.host);
   p.domain = p.domain.replace(/^www.?/, '')
   p.subdomain = p.subdomain.replace(/^www.?/, '')
