@@ -19,6 +19,10 @@ var Promise = require('bluebird');
 var makeRequest = require('makeRequest');
 var util = require('./util');
 
+var specSources = [
+  require('./spec_sources/google')
+];
+
 var jsondiffpatch = require('jsondiffpatch').create({
   arrays: {
     includeValueOnMove: true
@@ -253,29 +257,6 @@ function saveFixup(fixupPath, spec, editedSpec) {
     util.saveYaml(fixupPath, diff);
 }
 
-function getGoogleSpecLeads() {
-  return makeRequest('get', 'https://www.googleapis.com/discovery/v1/apis')
-    .spread(function(response, data) {
-      data = JSON.parse(data);
-      assert.equal(data.kind, 'discovery#directoryList');
-      assert.equal(data.discoveryVersion, 'v1');
-
-      return _.map(data.items, function (value) {
-        return {
-          info: {
-            'x-serviceName': value.name,
-            'x-preferred': value.preferred,
-            'x-origin': {
-              url: value.discoveryRestUrl,
-              format: 'google',
-              version: 'v1'
-            }
-          }
-        };
-      });
-    });
-}
-
 function swaggerToSpecLead(swagger) {
   var spec = {
     info: {
@@ -291,7 +272,7 @@ function getSpecLeads(specs) {
   var leads = _(specs).mapValues(swaggerToSpecLead)
     .keyBy(util.getOriginUrl).value();
 
-  return Promise.all([getGoogleSpecLeads()])
+  return Promise.all(_.invokeMap(specSources, _.call))
     .then(function (catalogsLeads) {
       catalogsLeads = _(catalogsLeads).flatten()
         .keyBy(util.getOriginUrl).omit([
@@ -303,7 +284,7 @@ function getSpecLeads(specs) {
           'https://datastore.googleapis.com/$discovery/rest?version=v1'
         ]).value();
       return _.assign(leads, catalogsLeads);
-    })
+    });
 }
 
 function originUrlsToFilenames(specs) {
