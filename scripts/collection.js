@@ -20,7 +20,8 @@ var makeRequest = require('makeRequest');
 var util = require('./util');
 
 var specSources = [
-  require('./spec_sources/google')
+  require('./spec_sources/google'),
+  require('./spec_sources/azure')
 ];
 
 var jsondiffpatch = require('jsondiffpatch').create({
@@ -281,7 +282,12 @@ function getSpecLeads(specs) {
           //No paths
           'https://www.googleapis.com/discovery/v1/apis/iam/v1alpha1/rest',
           //Invalid link
-          'https://datastore.googleapis.com/$discovery/rest?version=v1'
+          'https://datastore.googleapis.com/$discovery/rest?version=v1',
+          //localhost
+          'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-servicefabric/2016-01-28/swagger/servicefabric.json',
+          //Missing host and incorrect location
+          'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/search/2015-02-28/swagger/searchservice.json',
+          'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/search/2015-02-28/swagger/searchindex.json',
         ]).value();
       return _.assign(leads, catalogsLeads);
     });
