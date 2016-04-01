@@ -24,6 +24,8 @@ var specSources = [
   require('./spec_sources/azure')
 ];
 
+var blackListedUrls = util.readYaml(__dirname + '/spec_sources/blacklist.yaml');
+
 var jsondiffpatch = require('jsondiffpatch').create({
   arrays: {
     includeValueOnMove: true
@@ -276,19 +278,8 @@ function getSpecLeads(specs) {
   return Promise.all(_.invokeMap(specSources, _.call))
     .then(function (catalogsLeads) {
       catalogsLeads = _(catalogsLeads).flatten()
-        .keyBy(util.getOriginUrl).omit([
-          //blacklisted URLs
-          //TODO: move into separate file
-          //No paths
-          'https://www.googleapis.com/discovery/v1/apis/iam/v1alpha1/rest',
-          //Invalid link
-          'https://datastore.googleapis.com/$discovery/rest?version=v1',
-          //localhost
-          'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-servicefabric/2016-01-28/swagger/servicefabric.json',
-          //Missing host and incorrect location
-          'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/search/2015-02-28/swagger/searchservice.json',
-          'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/search/2015-02-28/swagger/searchindex.json',
-        ]).value();
+        .keyBy(util.getOriginUrl)
+        .omit(blackListedUrls).value();
       return _.assign(leads, catalogsLeads);
     });
 }
