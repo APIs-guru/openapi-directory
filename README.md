@@ -21,6 +21,14 @@ If you want to reference this project and you need an icon or even a banner, che
 Also, we provide services and consultancy around the Swagger spec and REST APIs in general.
 You can contact us at founders@apis.guru.
 
+What APIs.guru do?
+--------------------------
+* Filter out private and non-reliable APIs.
+* Convert different formats into OpenAPI(fka Swagger) 2.0
+* Fix mistakes, ~80% of spec have them
+* Add additional data, like: logo, categories, …
+* Update specs on daily basis
+
 Update procedure
 --------------------------
 All specs are automatically updated from their original source.
