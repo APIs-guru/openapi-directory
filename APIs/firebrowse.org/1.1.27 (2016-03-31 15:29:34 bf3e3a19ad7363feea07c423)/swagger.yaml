@@ -6,7 +6,7 @@ basePath: /api/v1
 info:
   description: A simple and elegant way to explore cancer data
   title: FireBrowse Beta API
-  version: '1.1.24 (2016-03-02 18:31:21 75d0413da78e25d54c0f793b)'
+  version: '1.1.27 (2016-03-31 15:29:34 bf3e3a19ad7363feea07c423)'
   x-logo:
     url: 'http://firebrowse.org/img/beta_smaller.png'
   x-origin:
@@ -2091,6 +2091,14 @@ paths:
           name: totals
           required: false
           type: boolean
+        - default: cohort
+          description: Which column in the results should be used for sorting paginated results?
+          enum:
+            - cohort
+          in: query
+          name: sort_by
+          required: false
+          type: string
       produces:
         - application/json
         - text/tab-separated-values

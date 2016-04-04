@@ -783,7 +783,12 @@ paths:
           in: query
           name: format
           type: string
-        - $ref: '#/parameters/objectIdParam'
+        - default: 0
+          description: Object Type ID
+          format: int32
+          in: query
+          name: objectID
+          type: integer
       produces:
         - application/json
       responses:

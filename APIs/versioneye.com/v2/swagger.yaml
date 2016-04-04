@@ -614,6 +614,11 @@ paths:
           name: team_name
           required: false
           type: string
+        - description: "If 'true' this project will not show up in the UI and gets removed later."
+          in: formData
+          name: temp
+          required: false
+          type: string
       responses:
         '200':
           description: No response was specified

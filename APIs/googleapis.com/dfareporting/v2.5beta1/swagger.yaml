@@ -2,21 +2,21 @@ swagger: '2.0'
 schemes:
   - https
 host: www.googleapis.com
-basePath: /dfareporting/v2.3
+basePath: /dfareporting/v2.5beta1
 info:
   contact:
     name: Google
     url: 'https://google.com'
   description: Manages your DoubleClick Campaign Manager ad campaigns and reports.
   title: DCM/DFA Reporting And Trafficking
-  version: v2.3
+  version: v2.5beta1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/dfareporting/v2.3/rest'
+    url: 'https://www.googleapis.com/discovery/v1/apis/dfareporting/v2.5beta1/rest'
     version: v1
   x-preferred: false
   x-providerName: googleapis.com
@@ -29,6 +29,7 @@ securityDefinitions:
     description: Oauth 2.0 authentication
     flow: implicit
     scopes:
+      'https://www.googleapis.com/auth/ddmconversions': Manage DoubleClick Digital Marketing conversions
       'https://www.googleapis.com/auth/dfareporting': View and manage DoubleClick for Advertisers reports
       'https://www.googleapis.com/auth/dfatrafficking': "View and manage your DoubleClick Campaign Manager's (DCM) display ad campaigns"
     type: oauth2
@@ -88,6 +89,7 @@ tags:
   - name: cities
   - name: connectionTypes
   - name: contentCategories
+  - name: conversions
   - name: countries
   - name: creativeAssets
   - name: creativeFieldValues
@@ -97,6 +99,7 @@ tags:
   - name: dimensionValues
   - name: directorySiteContacts
   - name: directorySites
+  - name: dynamicTargetingKeys
   - name: eventTags
   - name: files
   - name: floodlightActivities
@@ -736,13 +739,13 @@ paths:
             type: string
           name: campaignIds
           type: array
-        - description: 'Select default ads with the specified compatibility. Applicable when type is AD_SERVING_DEFAULT_AD. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering an in-stream video ads developed with the VAST standard.'
+        - description: 'Select default ads with the specified compatibility. Applicable when type is AD_SERVING_DEFAULT_AD. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering an in-stream video ads developed with the VAST standard.'
           enum:
             - APP
             - APP_INTERSTITIAL
+            - DISPLAY
+            - DISPLAY_INTERSTITIAL
             - IN_STREAM_VIDEO
-            - WEB
-            - WEB_INTERSTITIAL
           in: query
           name: compatibility
           type: string
@@ -2370,6 +2373,38 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/conversions/batchinsert':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Inserts conversions.
+      operationId: dfareporting.conversions.batchinsert
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ConversionsBatchInsertRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ConversionsBatchInsertResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ddmconversions'
+      tags:
+        - conversions
   '/userprofiles/{profileId}/countries':
     get:
       description: Retrieves a list of countries.
@@ -3594,6 +3629,127 @@ paths:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - directorySites
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/dynamicTargetingKeys':
+    get:
+      description: Retrieves a list of dynamic targeting keys.
+      operationId: dfareporting.dynamicTargetingKeys.list
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Select only dynamic targeting keys whose object has this advertiser ID.
+          in: query
+          name: advertiserId
+          type: string
+        - collectionFormat: multi
+          description: Select only dynamic targeting keys exactly matching these names.
+          in: query
+          items:
+            type: string
+          name: names
+          type: array
+        - description: Select only dynamic targeting keys with this object ID.
+          in: query
+          name: objectId
+          type: string
+        - description: Select only dynamic targeting keys with this object type.
+          enum:
+            - OBJECT_AD
+            - OBJECT_ADVERTISER
+            - OBJECT_CREATIVE
+            - OBJECT_PLACEMENT
+          in: query
+          name: objectType
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DynamicTargetingKeysListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - dynamicTargetingKeys
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: "Inserts a new dynamic targeting key. Keys must be created at the advertiser level before being assigned to the advertiser's ads, creatives or placements. There is a maximum of 1000 keys per advertiser, out of which a maximum of 20 keys can be assigned per ad, creative or placement."
+      operationId: dfareporting.dynamicTargetingKeys.insert
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DynamicTargetingKey'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DynamicTargetingKey'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - dynamicTargetingKeys
+  '/userprofiles/{profileId}/dynamicTargetingKeys/{objectId}':
+    delete:
+      description: Deletes an existing dynamic targeting key.
+      operationId: dfareporting.dynamicTargetingKeys.delete
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: ID of the object of this dynamic targeting key. This is a required field.
+          in: path
+          name: objectId
+          required: true
+          type: string
+        - description: Name of this dynamic targeting key. This is a required field. Must be less than 256 characters long and cannot contain commas. All characters are converted to lowercase.
+          in: query
+          name: name
+          required: true
+          type: string
+        - description: Type of the object of this dynamic targeting key. This is a required field.
+          enum:
+            - OBJECT_AD
+            - OBJECT_ADVERTISER
+            - OBJECT_CREATIVE
+            - OBJECT_PLACEMENT
+          in: query
+          name: objectType
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - dynamicTargetingKeys
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -5116,15 +5272,15 @@ paths:
           name: campaignIds
           type: array
         - collectionFormat: multi
-          description: Select only placements that are associated with these compatibilities. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard.
+          description: Select only placements that are associated with these compatibilities. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard.
           in: query
           items:
             enum:
               - APP
               - APP_INTERSTITIAL
+              - DISPLAY
+              - DISPLAY_INTERSTITIAL
               - IN_STREAM_VIDEO
-              - WEB
-              - WEB_INTERSTITIAL
             type: string
           name: compatibilities
           type: array
@@ -5713,6 +5869,13 @@ paths:
             - DESCENDING
           in: query
           name: sortOrder
+          type: string
+        - description: Select only inventory items with this type.
+          enum:
+            - PLANNING_PLACEMENT_TYPE_CREDIT
+            - PLANNING_PLACEMENT_TYPE_REGULAR
+          in: query
+          name: type
           type: string
       responses:
         '200':
@@ -7914,13 +8077,13 @@ definitions:
         description: Comments for this ad.
         type: string
       compatibility:
-        description: 'Compatibility of this ad. Applicable when type is AD_SERVING_DEFAULT_AD. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering an in-stream video ads developed with the VAST standard.'
+        description: 'Compatibility of this ad. Applicable when type is AD_SERVING_DEFAULT_AD. DISPLAY and DISPLAY_INTERSTITIAL refer to either rendering on desktop or on mobile devices or in mobile apps for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are only used for existing default ads. New mobile placements must be assigned DISPLAY or  DISPLAY_INTERSTITIAL and default ads created for those placements will be limited to those compatibility types. IN_STREAM_VIDEO refers to rendering in-stream video ads developed with the VAST standard.'
         enum:
           - APP
           - APP_INTERSTITIAL
+          - DISPLAY
+          - DISPLAY_INTERSTITIAL
           - IN_STREAM_VIDEO
-          - WEB
-          - WEB_INTERSTITIAL
         type: string
       createInfo:
         $ref: '#/definitions/LastModifiedInfo'
@@ -8021,13 +8184,13 @@ definitions:
         description: Comment for this ad slot.
         type: string
       compatibility:
-        description: Ad slot compatibility. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard.
+        description: 'Ad slot compatibility. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop, mobile devices or in mobile apps for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard.'
         enum:
-          - PLANNING_RENDERING_ENVIRONMENT_TYPE_APP
-          - PLANNING_RENDERING_ENVIRONMENT_TYPE_APP_INTERSTITIAL
-          - PLANNING_RENDERING_ENVIRONMENT_TYPE_IN_STREAM_VIDEO
-          - PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB
-          - PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB_INTERSTITIAL
+          - APP
+          - APP_INTERSTITIAL
+          - DISPLAY
+          - DISPLAY_INTERSTITIAL
+          - IN_STREAM_VIDEO
         type: string
       height:
         description: Height of this ad slot.
@@ -8657,6 +8820,121 @@ definitions:
         description: Name of this content category. This is a required field and must be less than 256 characters long and unique among content categories of the same account.
         type: string
     type: object
+  Conversion:
+    description: A Conversion represents when a user successfully performs a desired action after seeing an ad.
+    properties:
+      childDirectedTreatment:
+        description: Whether the conversion was directed toward children.
+        type: boolean
+      customVariables:
+        description: Custom floodlight variables.
+        items:
+          $ref: '#/definitions/CustomFloodlightVariable'
+        type: array
+      encryptedUserId:
+        description: 'The alphanumeric encrypted user ID. When set, encryptionInfo should also be specified. This field is mutually exclusive with mobileDeviceId. This or mobileDeviceId is a required field.'
+        type: string
+      floodlightActivityId:
+        description: Floodlight Activity ID of this conversion. This is a required field.
+        format: int64
+        type: string
+      floodlightConfigurationId:
+        description: Floodlight Configuration ID of this conversion. This is a required field.
+        format: int64
+        type: string
+      kind:
+        default: 'dfareporting#conversion'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#conversion".'
+        type: string
+      limitAdTracking:
+        description: Whether the user has Limit Ad Tracking set.
+        type: boolean
+      mobileDeviceId:
+        description: The mobile device ID. This field is mutually exclusive with encryptedUserId. This or encryptedUserId is a required field.
+        type: string
+      ordinal:
+        description: The ordinal of the conversion. Use this field to control how conversions of the same user and day are de-duplicated. This is a required field.
+        type: string
+      quantity:
+        description: The quantity of the conversion.
+        format: int64
+        type: string
+      timestampMicros:
+        description: 'The timestamp of conversion, in Unix epoch micros. This is a required field.'
+        format: int64
+        type: string
+      value:
+        description: The value of the conversion.
+        format: double
+        type: number
+    type: object
+  ConversionError:
+    description: The error code and description for a conversion that failed to insert.
+    properties:
+      code:
+        description: The error code.
+        enum:
+          - INTERNAL
+          - INVALID_ARGUMENT
+          - NOT_FOUND
+          - PERMISSION_DENIED
+        type: string
+      kind:
+        default: 'dfareporting#conversionError'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#conversionError".'
+        type: string
+      message:
+        description: A description of the error.
+        type: string
+    type: object
+  ConversionStatus:
+    description: The original conversion that was inserted and whether there were any errors.
+    properties:
+      conversion:
+        $ref: '#/definitions/Conversion'
+        description: The original conversion that was inserted.
+      errors:
+        description: A list of errors related to this conversion.
+        items:
+          $ref: '#/definitions/ConversionError'
+        type: array
+      kind:
+        default: 'dfareporting#conversionStatus'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#conversionStatus".'
+        type: string
+    type: object
+  ConversionsBatchInsertRequest:
+    description: Insert Conversions Request.
+    properties:
+      conversions:
+        description: The set of conversions to insert.
+        items:
+          $ref: '#/definitions/Conversion'
+        type: array
+      encryptionInfo:
+        $ref: '#/definitions/EncryptionInfo'
+        description: Describes how encryptedUserId is encrypted. This is a required field if encryptedUserId is used.
+      kind:
+        default: 'dfareporting#conversionsBatchInsertRequest'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#conversionsBatchInsertRequest".'
+        type: string
+    type: object
+  ConversionsBatchInsertResponse:
+    description: Insert Conversions Response.
+    properties:
+      hasFailures:
+        description: Indicates that some or all conversions failed to insert.
+        type: boolean
+      kind:
+        default: 'dfareporting#conversionsBatchInsertResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#conversionsBatchInsertResponse".'
+        type: string
+      status:
+        description: "The status of each conversion's insertion status. The status is returned in the same order that conversions are inserted."
+        items:
+          $ref: '#/definitions/ConversionStatus'
+        type: array
+    type: object
   CountriesListResponse:
     description: Country List Response
     properties:
@@ -8843,21 +9121,21 @@ definitions:
         type: array
       compatibility:
         description: |-
-          Compatibilities associated with this creative. This is a read-only field. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard. Applicable to all creative types.
+          Compatibilities associated with this creative. This is a read-only field. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop or on mobile devices or in mobile apps for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL  are for rendering in mobile apps. Only pre-existing creatives may have these compatibilities since new creatives will either be assigned DISPLAY or DISPLAY_INTERSTITIAL instead. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard. Applicable to all creative types.
 
           Acceptable values are:
           - "APP"
           - "APP_INTERSTITIAL"
           - "IN_STREAM_VIDEO"
-          - "WEB"
-          - "WEB_INTERSTITIAL"
+          - "DISPLAY"
+          - "DISPLAY_INTERSTITIAL"
         items:
           enum:
             - APP
             - APP_INTERSTITIAL
+            - DISPLAY
+            - DISPLAY_INTERSTITIAL
             - IN_STREAM_VIDEO
-            - WEB
-            - WEB_INTERSTITIAL
           type: string
         type: array
       convertFlashToHtml5:
@@ -9818,6 +10096,41 @@ definitions:
           $ref: '#/definitions/Metric'
         type: array
     type: object
+  CustomFloodlightVariable:
+    description: A custom floodlight variable.
+    properties:
+      kind:
+        default: 'dfareporting#customFloodlightVariable'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#customFloodlightVariable".'
+        type: string
+      type:
+        description: 'The type of custom floodlight variable to supply a value for. These map to the "u[1-20]=" in the tags.'
+        enum:
+          - U1
+          - U10
+          - U11
+          - U12
+          - U13
+          - U14
+          - U15
+          - U16
+          - U17
+          - U18
+          - U19
+          - U2
+          - U20
+          - U3
+          - U4
+          - U5
+          - U6
+          - U7
+          - U8
+          - U9
+        type: string
+      value:
+        description: The value of the custom floodlight variable. The length of string must not exceed 50 characters.
+        type: string
+    type: object
   CustomRichMediaEvents:
     description: Represents a Custom Rich Media Events group.
     properties:
@@ -10255,6 +10568,71 @@ definitions:
         type: string
       nextPageToken:
         description: Pagination token to be used for the next list operation.
+        type: string
+    type: object
+  DynamicTargetingKey:
+    description: 'Contains properties of a dynamic targeting key. Dynamic targeting keys are unique, user-friendly labels, created at the advertiser level in DCM, that can be assigned to ads, creatives and placements and used for targeting with DoubleClick Studio dynamic creatives. Use these labels instead of numeric DCM IDs (such as placement IDs) to save time and avoid errors in your dynamic feeds.'
+    properties:
+      kind:
+        default: 'dfareporting#dynamicTargetingKey'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#dynamicTargetingKey".'
+        type: string
+      name:
+        description: Name of this dynamic targeting key. This is a required field. Must be less than 256 characters long and cannot contain commas. All characters are converted to lowercase.
+        type: string
+      objectId:
+        description: ID of the object of this dynamic targeting key. This is a required field.
+        format: int64
+        type: string
+      objectType:
+        description: Type of the object of this dynamic targeting key. This is a required field.
+        enum:
+          - OBJECT_AD
+          - OBJECT_ADVERTISER
+          - OBJECT_CREATIVE
+          - OBJECT_PLACEMENT
+        type: string
+    type: object
+  DynamicTargetingKeysListResponse:
+    description: Dynamic Targeting Key List Response
+    properties:
+      dynamicTargetingKeys:
+        description: Dynamic targeting key collection.
+        items:
+          $ref: '#/definitions/DynamicTargetingKey'
+        type: array
+      kind:
+        default: 'dfareporting#dynamicTargetingKeysListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#dynamicTargetingKeysListResponse".'
+        type: string
+    type: object
+  EncryptionInfo:
+    description: A description of how user IDs are encrypted.
+    properties:
+      encryptionEntityId:
+        description: The encryption entity ID. This should match the encryption configuration for ad serving or Data Transfer.
+        format: int64
+        type: string
+      encryptionEntityType:
+        description: The encryption entity type. This should match the encryption configuration for ad serving or Data Transfer.
+        enum:
+          - ADWORDS_CUSTOMER
+          - DBM_ADVERTISER
+          - DBM_PARTNER
+          - DCM_ACCOUNT
+          - DCM_ADVERTISER
+          - ENCRYPTION_ENTITY_TYPE_UNKNOWN
+        type: string
+      encryptionSource:
+        description: 'Describes whether the encrypted cookie was received from ad serving (the %m macro) or from Data Transfer.'
+        enum:
+          - AD_SERVING
+          - DATA_TRANSFER
+          - ENCRYPTION_SCOPE_UNKNOWN
+        type: string
+      kind:
+        default: 'dfareporting#encryptionInfo'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#encryptionInfo".'
         type: string
     type: object
   EventTag:
@@ -11011,6 +11389,12 @@ definitions:
         description: Subaccount ID of this inventory item.
         format: int64
         type: string
+      type:
+        description: Type of inventory item.
+        enum:
+          - PLANNING_PLACEMENT_TYPE_CREDIT
+          - PLANNING_PLACEMENT_TYPE_REGULAR
+        type: string
     type: object
   InventoryItemsListResponse:
     description: Inventory item List Response
@@ -11645,13 +12029,13 @@ definitions:
         description: Comments for this placement.
         type: string
       compatibility:
-        description: 'Placement compatibility. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard. This field is required on insertion.'
+        description: 'Placement compatibility. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering on desktop, mobile devices or in mobile apps for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are no longer allowed for new placement insertions. Instead, use DISPLAY or DISPLAY_INTERSTITIAL. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard. This field is required on insertion.'
         enum:
           - APP
           - APP_INTERSTITIAL
+          - DISPLAY
+          - DISPLAY_INTERSTITIAL
           - IN_STREAM_VIDEO
-          - WEB
-          - WEB_INTERSTITIAL
         type: string
       contentCategoryId:
         description: ID of the content category assigned to this placement.

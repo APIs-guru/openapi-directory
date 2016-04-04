@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Manage your DoubleClick Campaign Manager ad campaigns and reports.
+  description: Manages your DoubleClick Campaign Manager ad campaigns and reports.
   title: DCM/DFA Reporting And Trafficking
   version: v2.4
   x-apiClientRegistration:
@@ -5116,7 +5116,7 @@ paths:
           name: campaignIds
           type: array
         - collectionFormat: multi
-          description: Select only placements that are associated with these compatibilities. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps.IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard.
+          description: Select only placements that are associated with these compatibilities. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard.
           in: query
           items:
             enum:
@@ -7819,6 +7819,7 @@ definitions:
         enum:
           - INTERNAL_ADMINISTRATOR
           - NORMAL_USER
+          - READ_ONLY_SUPER_USER
           - SUPER_USER
         type: string
       userRoleFilter:
@@ -9455,6 +9456,7 @@ definitions:
             - NOT_SSL_COMPLIANT
             - ORPHANED_ASSET
             - PRIMARY_HTML_MISSING
+            - SVG_INVALID
             - ZIP_INVALID
           type: string
         type: array
@@ -11656,7 +11658,7 @@ definitions:
         description: Comments for this placement.
         type: string
       compatibility:
-        description: 'Placement compatibility. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering on desktop, mobile devices or in mobile apps for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are no longer allowed for new placement insertions. Instead, use DISPLAY or DISPLAY_INTERSTITIAL. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard.This field is required on insertion.'
+        description: 'Placement compatibility. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering on desktop, mobile devices or in mobile apps for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are no longer allowed for new placement insertions. Instead, use DISPLAY or DISPLAY_INTERSTITIAL. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard. This field is required on insertion.'
         enum:
           - APP
           - APP_INTERSTITIAL
