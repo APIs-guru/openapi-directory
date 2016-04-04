@@ -298,8 +298,10 @@ paths:
         - collectionFormat: multi
           description: |
             Filter the listings returned by brokerage with a Broker
-            ID. You can specific multiple broker parameters. Note, the
-            Broker ID is provided by your MLS.
+            ID. For some MLS areas, this is the ListOfficeId (Listing
+            Office ID).  You can specific multiple broker
+            parameters. Note, this query parameter is only available
+            if a Broker ID is provided by your MLS.
           in: query
           items:
             type: string
@@ -585,9 +587,18 @@ paths:
         make a search to the `/properties` endpoint, each listing in
         the response will contain a unique `mlsId` field which should
         be used to request that listing on this route.
+
+        The `mlsId` field is a unique identifier for a listing which
+        is specific to the SimplyRETS API only.  It is different from
+        the `listingId` field is the public number given to a listing
+        by the MLS and is not used here.
       parameters:
         - default: 1005252
-          description: A mlsId (unique indentifier).
+          description: |
+            The `mlsId` field is a unique identifier which is specific
+            to the SimplyRETS API only.  This field is different from
+            the `listingId` field (which is the public number given to
+            a listing by the MLS and is not used here).
           format: int64
           in: path
           name: mlsId
