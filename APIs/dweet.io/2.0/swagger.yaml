@@ -13,14 +13,14 @@ info:
     version: '1.2'
   x-providerName: dweet.io
 tags:
-  - description: Lock and unlock your things.
-    name: locks
-  - description: Create or read dweets in short term cache.
-    name: dweets
-  - description: Read dweets from long term storage.
-    name: storage
   - description: Alerts for things.
     name: alerts
+  - description: Create or read dweets in short term cache.
+    name: dweets
+  - description: Lock and unlock your things.
+    name: locks
+  - description: Read dweets from long term storage.
+    name: storage
 paths:
   '/alert/{who}/when/{thing}/{condition}':
     get:

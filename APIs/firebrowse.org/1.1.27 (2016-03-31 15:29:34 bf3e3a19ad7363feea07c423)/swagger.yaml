@@ -15,14 +15,14 @@ info:
     version: '1.2'
   x-providerName: firebrowse.org
 tags:
-  - description: Fine grained retrieval of sample-level data
-    name: Samples
   - description: Fine grained retrieval of analysis pipeline results
     name: Analyses
   - description: Bulk retrieval of data or analysis pipeline results
     name: Archives
   - description: 'Retrieve disease, sample, and datatype descriptions, sample counts, and more'
     name: Metadata
+  - description: Fine grained retrieval of sample-level data
+    name: Samples
 paths:
   /Analyses/CopyNumber/Genes/All:
     get:

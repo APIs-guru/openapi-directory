@@ -22,18 +22,18 @@ securityDefinitions:
     name: api_key
     type: apiKey
 tags:
+  - description: Operations about DNS Records
+    name: contacts
+  - description: Operations about DNS Records
+    name: dns
+  - description: Operations about DNS Domains
+    name: domains
+  - description: Operations about API Keys
+    name: key
   - description: Operations about pods
     name: pods
   - description: Operations about SolarRay Monitoring
     name: solarray
-  - description: Operations about API Keys
-    name: key
-  - description: Operations about DNS Domains
-    name: domains
-  - description: Operations about DNS Records
-    name: dns
-  - description: Operations about DNS Records
-    name: contacts
   - description: Operations about Support / Billing / Sales Tickets
     name: tickets
 paths:

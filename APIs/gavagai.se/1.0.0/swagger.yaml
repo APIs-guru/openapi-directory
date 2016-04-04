@@ -25,16 +25,16 @@ securityDefinitions:
 security:
   - apiKey: []
 tags:
+  - description: 'Extract salient concepts from a collection of texts. Order by number of occurrences. '
+    name: keywords
+  - description: Lookup a word in Gavagai living lexicon.
+    name: lexicon
   - description: Multi-language story extraction from large amounts of text into conveniently short and exact executive summaries. Available for multiple languages.
     name: stories
   - description: 'Multidimensional tonality analysis - we compute scores for Positivity, Negativity, Fear, Hate, Love, Skepticism, Violence, and Desire in all supported languages.'
     name: tonality
   - description: Multi-language topic extraction from large amounts of text into conveniently short and exact executive summaries. Available for multiple languages. Allows for ignoring and merging of terms.
     name: topics
-  - description: 'Extract salient concepts from a collection of texts. Order by number of occurrences. '
-    name: keywords
-  - description: Lookup a word in Gavagai living lexicon.
-    name: lexicon
 paths:
   /keywords:
     post:
