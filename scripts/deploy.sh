@@ -5,8 +5,6 @@ set -x
 mkdir deploy
 cd deploy
 
-#FIXME: remove
-export NODE_TLS_REJECT_UNAUTHORIZED=0
 ../scripts/deploy.js
 
 cp -R ../branding/ .
