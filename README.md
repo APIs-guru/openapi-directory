@@ -25,7 +25,7 @@ What APIs.guru do?
 --------------------------
 * Filter out private and non-reliable APIs.
 * Convert different formats into OpenAPI(fka Swagger) 2.0
-* Fix mistakes, ~80% of spec  have some
+* Fix mistakes, ~80% of spec have some
 * Add additional data, like: logo, categories, …
 * Update specs on daily basis
 
