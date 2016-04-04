@@ -159,6 +159,7 @@ function validateCollection() {
   var foundErrors = false;
   async.forEachOfSeries(specs, function (swagger, filename, asyncCb) {
     console.error('======================== ' + filename + ' ================');
+    assert(!_.isEmpty(swagger.paths), 'Spec should have operations');
     validateSwagger(swagger, function (errors, warnings) {
       foundErrors = !_.isEmpty(errors) || foundErrors;
       if (errors)
