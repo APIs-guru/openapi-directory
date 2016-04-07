@@ -105,6 +105,8 @@ parameters:
     name: upload_protocol
     type: string
 tags:
+  - name: annotationsets
+  - name: annotations
   - name: datasets
   - name: operations
   - name: readgroupsets
@@ -115,6 +117,361 @@ tags:
   - name: variantsets
   - name: callsets
 paths:
+  /v1/annotations:
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: 'Creates a new annotation. Caller must have WRITE permission for the associated annotation set. The following fields are required: * annotationSetId * referenceName or referenceId or ### Transcripts transcript transcript.exons transcript.exons.start For annotations of type TRANSCRIPT, the following fields of transcript must be provided: * `exons.start` * `exons.end` All other fields may be optionally specified, unless documented as being server-generated (for example, the `id` field). The annotated range must be no longer than 100Mbp (mega base pairs). See the Annotation resource for additional restrictions on each field.'
+      operationId: genomics.annotations.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Annotation'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Annotation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/genomics'
+      tags:
+        - annotations
+  /v1/annotations/search:
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: 'Searches for annotations that match the given criteria. Results are ordered by genomic coordinate (by reference sequence, then position). Annotations with equivalent genomic coordinates are returned in an unspecified order. This order is consistent, such that two queries for the same content (regardless of page size) yield annotations in the same order across their respective streams of paginated responses. Caller must have READ permission for the queried annotation sets.'
+      operationId: genomics.annotations.search
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SearchAnnotationsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SearchAnnotationsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/genomics'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/genomics.readonly'
+      tags:
+        - annotations
+  '/v1/annotations/{annotationId}':
+    delete:
+      description: Deletes an annotation. Caller must have WRITE permission for the associated annotation set.
+      operationId: genomics.annotations.delete
+      parameters:
+        - description: The ID of the annotation to be deleted.
+          in: path
+          name: annotationId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/genomics'
+      tags:
+        - annotations
+    get:
+      description: Gets an annotation. Caller must have READ permission for the associated annotation set.
+      operationId: genomics.annotations.get
+      parameters:
+        - description: The ID of the annotation to be retrieved.
+          in: path
+          name: annotationId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Annotation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/genomics'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/genomics.readonly'
+      tags:
+        - annotations
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    put:
+      description: Updates an annotation. Caller must have WRITE permission for the associated dataset.
+      operationId: genomics.annotations.update
+      parameters:
+        - description: The ID of the annotation to be updated.
+          in: path
+          name: annotationId
+          required: true
+          type: string
+        - description: 'An optional mask specifying which fields to update. Mutable fields are name, variant, transcript, and info. If unspecified, all mutable fields will be updated.'
+          in: query
+          name: updateMask
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Annotation'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Annotation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/genomics'
+      tags:
+        - annotations
+  '/v1/annotations:batchCreate':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: 'Creates one or more new annotations atomically. All annotations must belong to the same annotation set. Caller must have WRITE permission for this annotation set. For optimal performance, batch positionally adjacent annotations together. If the request has a systemic issue, such as an attempt to write to an inaccessible annotation set, the entire RPC will fail accordingly. For lesser data issues, when possible an error will be isolated to the corresponding batch entry in the response; the remaining well formed annotations will be created normally. For details on the requirements for each individual annotation resource, see CreateAnnotation.'
+      operationId: genomics.annotations.batchCreate
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BatchCreateAnnotationsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BatchCreateAnnotationsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/genomics'
+      tags:
+        - annotations
+  /v1/annotationsets:
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: 'Creates a new annotation set. Caller must have WRITE permission for the associated dataset. The following fields are required: * datasetId * referenceSetId All other fields may be optionally specified, unless documented as being server-generated (for example, the `id` field).'
+      operationId: genomics.annotationsets.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AnnotationSet'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AnnotationSet'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/genomics'
+      tags:
+        - annotationsets
+  /v1/annotationsets/search:
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: 'Searches for annotation sets that match the given criteria. Annotation sets are returned in an unspecified order. This order is consistent, such that two queries for the same content (regardless of page size) yield annotation sets in the same order across their respective streams of paginated responses. Caller must have READ permission for the queried datasets.'
+      operationId: genomics.annotationsets.search
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SearchAnnotationSetsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SearchAnnotationSetsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/genomics'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/genomics.readonly'
+      tags:
+        - annotationsets
+  '/v1/annotationsets/{annotationSetId}':
+    delete:
+      description: Deletes an annotation set. Caller must have WRITE permission for the associated annotation set.
+      operationId: genomics.annotationsets.delete
+      parameters:
+        - description: The ID of the annotation set to be deleted.
+          in: path
+          name: annotationSetId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/genomics'
+      tags:
+        - annotationsets
+    get:
+      description: Gets an annotation set. Caller must have READ permission for the associated dataset.
+      operationId: genomics.annotationsets.get
+      parameters:
+        - description: The ID of the annotation set to be retrieved.
+          in: path
+          name: annotationSetId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AnnotationSet'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/genomics'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/genomics.readonly'
+      tags:
+        - annotationsets
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    put:
+      description: Updates an annotation set. The update must respect all mutability restrictions and other invariants described on the annotation set resource. Caller must have WRITE permission for the associated dataset.
+      operationId: genomics.annotationsets.update
+      parameters:
+        - description: The ID of the annotation set to be updated.
+          in: path
+          name: annotationSetId
+          required: true
+          type: string
+        - description: 'An optional mask specifying which fields to update. Mutable fields are name, source_uri, and info. If unspecified, all mutable fields will be updated.'
+          in: query
+          name: updateMask
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AnnotationSet'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AnnotationSet'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/genomics'
+      tags:
+        - annotationsets
   /v1/callsets:
     parameters:
       - $ref: '#/parameters/access_token'
@@ -1223,7 +1580,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
     post:
-      description: 'Merges the given variants with existing variants. For the definitions of variants and other genomics resources, see [Fundamentals of Google Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics) Each variant will be merged with an existing variant that matches its reference sequence, start, end, reference bases, and alternative bases. If no such variant exists, a new one will be created. When variants are merged, the call information from the new variant is added to the existing variant. Variant info fields are merged as specified in the infoMergeConfig field of the MergeVariantsRequest. Please exercise caution when using this method! It is easy to introduce mistakes in existing variants and difficult to back out of them. For example, suppose you were trying to merge a new variant with an existing one and both variants contain calls that belong to callsets with the same callset ID. // Existing variant - irrelevant fields trimmed for clarity { "variantSetId": "10473108253681171589", "referenceName": "1", "start": "10582", "referenceBases": "G", "alternateBases": [ "A" ], "calls": [ { "callSetId": "10473108253681171589-0", "callSetName": "EXISTINGCALLSET", "genotype": [ 0, 1 ], } ] } // New variant with conflicting call information { "variantSetId": "10473108253681171589", "referenceName": "1", "start": "10582", "referenceBases": "G", "alternateBases": [ "A" ], "calls": [ { "callSetId": "10473108253681171589-0", "callSetName": "NEWCALLSET", "genotype": [ 1, 1 ], } ] } The resulting merged variant would overwrite the existing calls with those from the new variant: { "variantSetId": "10473108253681171589", "referenceName": "1", "start": "10582", "referenceBases": "G", "alternateBases": [ "A" ], "calls": [ { "callSetId": "10473108253681171589-0", "callSetName": "NEWCALLSET", "genotype": [ 1, 1 ], } ] } This may be the desired outcome, but it is up to the user to determine if if that is indeed the case.'
+      description: 'Merges the given variants with existing variants. For the definitions of variants and other genomics resources, see [Fundamentals of Google Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics) Each variant will be merged with an existing variant that matches its reference sequence, start, end, reference bases, and alternative bases. If no such variant exists, a new one will be created. When variants are merged, the call information from the new variant is added to the existing variant. Variant info fields are merged as specified in the infoMergeConfig field of the MergeVariantsRequest. Please exercise caution when using this method! It is easy to introduce mistakes in existing variants and difficult to back out of them. For example, suppose you were trying to merge a new variant with an existing one and both variants contain calls that belong to callsets with the same callset ID. // Existing variant - irrelevant fields trimmed for clarity { "variantSetId": "10473108253681171589", "referenceName": "1", "start": "10582", "referenceBases": "G", "alternateBases": [ "A" ], "calls": [ { "callSetId": "10473108253681171589-0", "callSetName": "CALLSET0", "genotype": [ 0, 1 ], } ] } // New variant with conflicting call information { "variantSetId": "10473108253681171589", "referenceName": "1", "start": "10582", "referenceBases": "G", "alternateBases": [ "A" ], "calls": [ { "callSetId": "10473108253681171589-0", "callSetName": "CALLSET0", "genotype": [ 1, 1 ], } ] } The resulting merged variant would overwrite the existing calls with those from the new variant: { "variantSetId": "10473108253681171589", "referenceName": "1", "start": "10582", "referenceBases": "G", "alternateBases": [ "A" ], "calls": [ { "callSetId": "10473108253681171589-0", "callSetName": "CALLSET0", "genotype": [ 1, 1 ], } ] } This may be the desired outcome, but it is up to the user to determine if if that is indeed the case.'
       operationId: genomics.variants.merge
       parameters:
         - in: body
@@ -1693,6 +2050,107 @@ paths:
       tags:
         - datasets
 definitions:
+  Annotation:
+    description: 'An annotation describes a region of reference genome. The value of an annotation may be one of several canonical types, supplemented by arbitrary info tags. An annotation is not inherently associated with a specific sample or individual (though a client could choose to use annotations in this way). Example canonical annotation types are `GENE` and `VARIANT`.'
+    properties:
+      annotationSetId:
+        description: The annotation set to which this annotation belongs.
+        type: string
+      end:
+        description: 'The end position of the range on the reference, 0-based exclusive.'
+        format: int64
+        type: string
+      id:
+        description: 'The server-generated annotation ID, unique across all annotations.'
+        type: string
+      info:
+        additionalProperties:
+          items: {}
+          type: array
+        description: A map of additional read alignment information. This must be of the form map (string key mapping to a list of string values).
+        type: object
+      name:
+        description: The display name of this annotation.
+        type: string
+      referenceId:
+        description: The ID of the Google Genomics reference associated with this range.
+        type: string
+      referenceName:
+        description: 'The display name corresponding to the reference specified by `referenceId`, for example `chr1`, `1`, or `chrX`.'
+        type: string
+      reverseStrand:
+        description: 'Whether this range refers to the reverse strand, as opposed to the forward strand. Note that regardless of this field, the start/end position of the range always refer to the forward strand.'
+        type: boolean
+      start:
+        description: 'The start position of the range on the reference, 0-based inclusive.'
+        format: int64
+        type: string
+      transcript:
+        $ref: '#/definitions/Transcript'
+        description: A transcript value represents the assertion that a particular region of the reference genome may be transcribed as RNA. An alternative splicing pattern would be represented as a separate transcript object. This field is only set for annotations of type `TRANSCRIPT`.
+      type:
+        description: "The data type for this annotation. Must match the containing annotation set's type."
+        enum:
+          - ANNOTATION_TYPE_UNSPECIFIED
+          - GENERIC
+          - VARIANT
+          - GENE
+          - TRANSCRIPT
+        type: string
+      variant:
+        $ref: '#/definitions/VariantAnnotation'
+        description: 'A variant annotation, which describes the effect of a variant on the genome, the coding sequence, and/or higher level consequences at the organism level e.g. pathogenicity. This field is only set for annotations of type `VARIANT`.'
+    type: object
+  AnnotationSet:
+    description: "An annotation set is a logical grouping of annotations that share consistent type information and provenance. Examples of annotation sets include 'all genes from refseq', and 'all variant annotations from ClinVar'."
+    properties:
+      datasetId:
+        description: The dataset to which this annotation set belongs.
+        type: string
+      id:
+        description: 'The server-generated annotation set ID, unique across all annotation sets.'
+        type: string
+      info:
+        additionalProperties:
+          items: {}
+          type: array
+        description: A map of additional read alignment information. This must be of the form map (string key mapping to a list of string values).
+        type: object
+      name:
+        description: The display name for this annotation set.
+        type: string
+      referenceSetId:
+        description: "The ID of the reference set that defines the coordinate space for this set's annotations."
+        type: string
+      sourceUri:
+        description: 'The source URI describing the file from which this annotation set was generated, if any.'
+        type: string
+      type:
+        description: The type of annotations contained within this set.
+        enum:
+          - ANNOTATION_TYPE_UNSPECIFIED
+          - GENERIC
+          - VARIANT
+          - GENE
+          - TRANSCRIPT
+        type: string
+    type: object
+  BatchCreateAnnotationsRequest:
+    properties:
+      annotations:
+        description: The annotations to be created. At most 4096 can be specified in a single request.
+        items:
+          $ref: '#/definitions/Annotation'
+        type: array
+    type: object
+  BatchCreateAnnotationsResponse:
+    properties:
+      entries:
+        description: 'The resulting per-annotation entries, ordered consistently with the original request.'
+        items:
+          $ref: '#/definitions/Entry'
+        type: array
+    type: object
   Binding:
     description: Associates `members` with a `role`.
     properties:
@@ -1760,6 +2218,36 @@ definitions:
         description: "`referenceSequence` is only used at mismatches (`SEQUENCE_MISMATCH`) and deletions (`DELETE`). Filling this field replaces SAM's MD tag. If the relevant information is not available, this field is unset."
         type: string
     type: object
+  ClinicalCondition:
+    properties:
+      conceptId:
+        description: 'The MedGen concept id associated with this gene. Search for these IDs at http://www.ncbi.nlm.nih.gov/medgen/'
+        type: string
+      externalIds:
+        description: The set of external IDs for this condition.
+        items:
+          $ref: '#/definitions/ExternalId'
+        type: array
+      names:
+        description: A set of names for the condition.
+        items:
+          type: string
+        type: array
+      omimId:
+        description: 'The OMIM id for this condition. Search for these IDs at http://omim.org/'
+        type: string
+    type: object
+  CodingSequence:
+    properties:
+      end:
+        description: "The end of the coding sequence on this annotation's reference sequence, 0-based exclusive. Note that this position is relative to the reference start, and *not* the containing annotation start."
+        format: int64
+        type: string
+      start:
+        description: "The start of the coding sequence on this annotation's reference sequence, 0-based inclusive. Note that this position is relative to the reference start, and *not* the containing annotation start."
+        format: int64
+        type: string
+    type: object
   CoverageBucket:
     description: A bucket over which read coverage has been precomputed. A bucket corresponds to a specific range of the reference sequence.
     properties:
@@ -1789,6 +2277,28 @@ definitions:
     type: object
   Empty:
     description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`.'
+    type: object
+  Entry:
+    properties:
+      annotation:
+        $ref: '#/definitions/Annotation'
+      status:
+        $ref: '#/definitions/Status'
+    type: object
+  Exon:
+    properties:
+      end:
+        description: "The end position of the exon on this annotation's reference sequence, 0-based exclusive. Note that this is relative to the reference start, and *not* the containing annotation start."
+        format: int64
+        type: string
+      frame:
+        description: 'The frame of this exon. Contains a value of 0, 1, or 2, which indicates the offset of the first coding base of the exon within the reading frame of the coding DNA sequence, if any. This field is dependent on the strandedness of this annotation (see Annotation.reverse_strand). For forward stranded annotations, this offset is relative to the `exon.start`. For reverse strand annotations, this offset is relative to the `exon.end - 1`. Unset if this exon does not intersect the coding sequence. Upon creation of a transcript, the frame must be populated for all or none of the coding exons.'
+        format: int32
+        type: integer
+      start:
+        description: "The start position of the exon on this annotation's reference sequence, 0-based inclusive. Note that this is relative to the reference start, and **not** the containing annotation start."
+        format: int64
+        type: string
     type: object
   Experiment:
     properties:
@@ -1842,6 +2352,15 @@ definitions:
         type: string
       projectId:
         description: Required. The Google Cloud project ID that owns the destination BigQuery dataset. The caller must have WRITE access to this project. This project will also own the resulting export job.
+        type: string
+    type: object
+  ExternalId:
+    properties:
+      id:
+        description: The id used by the source of this data.
+        type: string
+      sourceName:
+        description: The name of the source of this data.
         type: string
     type: object
   GetIamPolicyRequest:
@@ -2327,6 +2846,89 @@ definitions:
         description: The URI from which the references were obtained.
         type: string
     type: object
+  SearchAnnotationSetsRequest:
+    properties:
+      datasetIds:
+        description: Required. The dataset IDs to search within. Caller must have `READ` access to these datasets.
+        items:
+          type: string
+        type: array
+      name:
+        description: Only return annotations sets for which a substring of the name matches this string (case insensitive).
+        type: string
+      pageSize:
+        description: 'The maximum number of results to return in a single page. If unspecified, defaults to 128. The maximum value is 1024.'
+        format: int32
+        type: integer
+      pageToken:
+        description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of `nextPageToken` from the previous response.'
+        type: string
+      referenceSetId:
+        description: 'If specified, only annotation sets associated with the given reference set are returned.'
+        type: string
+      types:
+        description: 'If specified, only annotation sets that have any of these types are returned.'
+        items:
+          enum:
+            - ANNOTATION_TYPE_UNSPECIFIED
+            - GENERIC
+            - VARIANT
+            - GENE
+            - TRANSCRIPT
+          type: string
+        type: array
+    type: object
+  SearchAnnotationSetsResponse:
+    properties:
+      annotationSets:
+        description: The matching annotation sets.
+        items:
+          $ref: '#/definitions/AnnotationSet'
+        type: array
+      nextPageToken:
+        description: "The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results."
+        type: string
+    type: object
+  SearchAnnotationsRequest:
+    properties:
+      annotationSetIds:
+        description: Required. The annotation sets to search within. The caller must have `READ` access to these annotation sets. All queried annotation sets must have the same type.
+        items:
+          type: string
+        type: array
+      end:
+        description: 'The end position of the range on the reference, 0-based exclusive. If referenceId or referenceName must be specified, Defaults to the length of the reference.'
+        format: int64
+        type: string
+      pageSize:
+        description: 'The maximum number of results to return in a single page. If unspecified, defaults to 256. The maximum value is 2048.'
+        format: int32
+        type: integer
+      pageToken:
+        description: 'The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of `nextPageToken` from the previous response.'
+        type: string
+      referenceId:
+        description: The ID of the reference to query.
+        type: string
+      referenceName:
+        description: 'The name of the reference to query, within the reference set associated with this query.'
+        type: string
+      start:
+        description: 'The start position of the range on the reference, 0-based inclusive. If specified, referenceId or referenceName must be specified. Defaults to 0.'
+        format: int64
+        type: string
+    type: object
+  SearchAnnotationsResponse:
+    properties:
+      annotations:
+        description: The matching annotations.
+        items:
+          $ref: '#/definitions/Annotation'
+        type: array
+      nextPageToken:
+        description: "The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results."
+        type: string
+    type: object
   SearchCallSetsRequest:
     description: The call set search request.
     properties:
@@ -2692,6 +3294,21 @@ definitions:
           type: string
         type: array
     type: object
+  Transcript:
+    description: A transcript represents the assertion that a particular region of the reference genome may be transcribed as RNA.
+    properties:
+      codingSequence:
+        $ref: '#/definitions/CodingSequence'
+        description: 'The range of the coding sequence for this transcript, if any. To determine the exact ranges of coding sequence, intersect this range with those of the `exons`, if any. If there are any `exons`, the `codingSequence` must start and end within them. Note that in some cases, the reference genome will not exactly match the observed mRNA transcript e.g. due to variance in the source genome from reference. In these cases, `exon.frame` will not necessarily match the expected reference reading frame and coding exon reference bases cannot necessarily be concatenated to produce the original transcript mRNA.'
+      exons:
+        description: 'The exons that compose this transcript. This field should be unset for genomes where transcript splicing does not occur, for example prokaryotes. Introns are regions of the transcript that are not included in the spliced RNA product. Though not explicitly modeled here, intron ranges can be deduced; all regions of this transcript that are not exons are introns. Exonic sequences do not necessarily code for a translational product (amino acids). Only the regions of exons bounded by the `codingSequence` correspond to coding DNA sequence. Exons are ordered by start position and may not overlap.'
+        items:
+          $ref: '#/definitions/Exon'
+        type: array
+      geneId:
+        description: The annotation ID of the gene from which this transcript is transcribed.
+        type: string
+    type: object
   UndeleteDatasetRequest:
     type: object
   Variant:
@@ -2750,6 +3367,68 @@ definitions:
         type: string
       variantSetId:
         description: The ID of the variant set this variant belongs to.
+        type: string
+    type: object
+  VariantAnnotation:
+    properties:
+      alternateBases:
+        description: 'The alternate allele for this variant. If multiple alternate alleles exist at this location, create a separate variant for each one, as they may represent distinct conditions.'
+        type: string
+      clinicalSignificance:
+        description: 'Describes the clinical significance of a variant. It is adapted from the ClinVar controlled vocabulary for clinical significance described at: http://www.ncbi.nlm.nih.gov/clinvar/docs/clinsig/'
+        enum:
+          - CLINICAL_SIGNIFICANCE_UNSPECIFIED
+          - CLINICAL_SIGNIFICANCE_OTHER
+          - UNCERTAIN
+          - BENIGN
+          - LIKELY_BENIGN
+          - LIKELY_PATHOGENIC
+          - PATHOGENIC
+          - DRUG_RESPONSE
+          - HISTOCOMPATIBILITY
+          - CONFERS_SENSITIVITY
+          - RISK_FACTOR
+          - ASSOCIATION
+          - PROTECTIVE
+          - MULTIPLE_REPORTED
+        type: string
+      conditions:
+        description: The set of conditions associated with this variant. A condition describes the way a variant influences human health.
+        items:
+          $ref: '#/definitions/ClinicalCondition'
+        type: array
+      effect:
+        description: Effect of the variant on the coding sequence.
+        enum:
+          - EFFECT_UNSPECIFIED
+          - EFFECT_OTHER
+          - FRAMESHIFT
+          - FRAME_PRESERVING_INDEL
+          - SYNONYMOUS_SNP
+          - NONSYNONYMOUS_SNP
+          - STOP_GAIN
+          - STOP_LOSS
+          - SPLICE_SITE_DISRUPTION
+        type: string
+      geneId:
+        description: Google annotation ID of the gene affected by this variant. This should be provided when the variant is created.
+        type: string
+      transcriptIds:
+        description: Google annotation IDs of the transcripts affected by this variant. These should be provided when the variant is created.
+        items:
+          type: string
+        type: array
+      type:
+        description: "Type has been adapted from ClinVar's list of variant types."
+        enum:
+          - TYPE_UNSPECIFIED
+          - TYPE_OTHER
+          - INSERTION
+          - DELETION
+          - SUBSTITUTION
+          - SNP
+          - STRUCTURAL
+          - CNV
         type: string
     type: object
   VariantCall:

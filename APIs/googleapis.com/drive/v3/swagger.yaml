@@ -1820,6 +1820,9 @@ definitions:
             format: int32
             type: integer
         type: object
+      isAppAuthorized:
+        description: Whether the file was created or opened by the requesting app.
+        type: boolean
       kind:
         default: 'drive#file'
         description: 'This is always drive#file.'

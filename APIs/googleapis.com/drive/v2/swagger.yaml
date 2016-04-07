@@ -3356,6 +3356,9 @@ definitions:
             description: The text to be indexed for this file.
             type: string
         type: object
+      isAppAuthorized:
+        description: Whether the file was created or opened by the requesting app.
+        type: boolean
       kind:
         default: 'drive#file'
         description: 'The type of file. This is always drive#file.'

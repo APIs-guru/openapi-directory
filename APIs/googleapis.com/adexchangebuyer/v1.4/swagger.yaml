@@ -1708,6 +1708,9 @@ definitions:
       nonGuaranteedFixedPriceTerms:
         $ref: '#/definitions/DealTermsNonGuaranteedFixedPriceTerms'
         description: The terms for non-guaranteed fixed price deals.
+      sellerTimeZone:
+        description: 'For deals with Cost Per Day billing, defines the timezone used to mark the boundaries of a day (buyer-readonly)'
+        type: string
     type: object
   DealTermsGuaranteedFixedPriceTerms:
     properties:
@@ -1790,6 +1793,27 @@ definitions:
         format: int32
         type: integer
       timeUnitType:
+        type: string
+    type: object
+  Dimension:
+    description: "This message carries publisher provided breakdown. E.g. {dimension_type: 'COUNTRY', [{dimension_value: {id: 1, name: 'US'}}, {dimension_value: {id: 2, name: 'UK'}}]}"
+    properties:
+      dimensionType:
+        type: string
+      dimensionValues:
+        items:
+          $ref: '#/definitions/DimensionDimensionValue'
+        type: array
+    type: object
+  DimensionDimensionValue:
+    description: Value of the dimension.
+    properties:
+      id:
+        description: Id of the dimension.
+        format: int32
+        type: integer
+      name:
+        description: Name of the dimension mainly for debugging purposes.
         type: string
     type: object
   EditAllOrderDealsRequest:
@@ -2091,7 +2115,7 @@ definitions:
         type: number
     type: object
   PerformanceReportList:
-    description: 'The configuration data for an Ad Exchange performance report list. https://sites.google.com/a/google.com/adx-integration/Home/engineering/binary-releases/rtb-api-release https://cs.corp.google.com/#piper///depot/google3/contentads/adx/tools/rtb_api/adxrtb.py'
+    description: The configuration data for an Ad Exchange performance report list.
     properties:
       kind:
         default: 'adexchangebuyer#performanceReportList'
@@ -2483,14 +2507,26 @@ definitions:
       accountId:
         description: The account id of the seller.
         type: string
+      audience:
+        description: Publisher provided info on its audience.
+        type: string
       buyerPitchStatement:
         description: A pitch statement for the buyer
+        type: string
+      directContact:
+        $ref: '#/definitions/ContactInformation'
+        description: Direct contact for the publisher profile.
+      exchange:
+        description: 'Exchange where this publisher profile is from. E.g. AdX, Rubicon etc...'
         type: string
       googlePlusLink:
         description: "Link to publisher's Google+ page."
         type: string
       isParent:
         description: 'True, if this is the parent profile, which represents all domains owned by the publisher.'
+        type: boolean
+      isPublished:
+        description: 'True, if this profile is published. Deprecated for state.'
         type: boolean
       kind:
         default: 'adexchangebuyer#publisherProfileApiProto'
@@ -2511,22 +2547,54 @@ definitions:
         description: 'The pair of (seller.account_id, profile_id) uniquely identifies a publisher profile for a given publisher.'
         format: int32
         type: integer
+      programmaticContact:
+        $ref: '#/definitions/ContactInformation'
+        description: Programmatic contact for the publisher profile.
       publisherDomains:
         description: The list of domains represented in this publisher profile. Empty if this is a parent profile.
         items:
           type: string
         type: array
+      publisherProfileId:
+        description: Unique Id for publisher profile.
+        type: string
+      publisherProvidedForecast:
+        $ref: '#/definitions/PublisherProvidedForecast'
+        description: Publisher provided forecasting information.
       rateCardInfoLink:
         description: Link to publisher rate card
         type: string
       samplePageLink:
         description: Link for a sample content page.
         type: string
+      seller:
+        $ref: '#/definitions/Seller'
+        description: Seller of the publisher profile.
+      state:
+        description: State of the publisher profile.
+        type: string
       topHeadlines:
         description: Publisher provided key metrics and rankings.
         items:
           type: string
         type: array
+    type: object
+  PublisherProvidedForecast:
+    description: This message carries publisher provided forecasting information.
+    properties:
+      dimensions:
+        description: 'Publisher provided dimensions. E.g. geo, sizes etc...'
+        items:
+          $ref: '#/definitions/Dimension'
+        type: array
+      weeklyImpressions:
+        description: Publisher provided weekly impressions.
+        format: int64
+        type: string
+      weeklyUniques:
+        description: Publisher provided weekly uniques.
+        format: int64
+        type: string
     type: object
   Seller:
     properties:

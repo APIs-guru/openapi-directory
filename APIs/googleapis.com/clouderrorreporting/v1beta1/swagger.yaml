@@ -119,7 +119,7 @@ paths:
       parameters:
         - description: |-
             Group resource name. Required.
-            Example: projects/my-project/groups/my-group
+            Example: `projects/my-project-123/groups/my-group`
           in: path
           name: groupName
           required: true
@@ -172,7 +172,7 @@ paths:
       parameters:
         - description: |-
             Group resource name.
-            Example: projects/my-projectid/groups/my-groupid
+            Example: `projects/my-project-123/groups/my-groupid`
           in: path
           name: name
           required: true
@@ -240,12 +240,6 @@ paths:
           type: string
         - description: |-
             The exact value to match against
-            [`ServiceContext.environment`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.environment).
-          in: query
-          name: serviceFilter.environment
-          type: string
-        - description: |-
-            The exact value to match against
             [`ServiceContext.service`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.service).
           in: query
           name: serviceFilter.service
@@ -298,9 +292,10 @@ paths:
       operationId: clouderrorreporting.projects.groupStats.list
       parameters:
         - description: |-
-            The
+            The resource name of the Google Cloud Platform project. Written as
+            `projects/` plus the
             [Google Cloud Platform project ID](https://support.google.com/cloud/answer/6158840).
-            Required. Example: `my-project-123`.
+            Required. Example: `projects/my-project-123`.
           in: path
           name: projectName
           required: true
@@ -326,12 +321,6 @@ paths:
             - PERIOD_30_DAYS
           in: query
           name: timeRange.period
-          type: string
-        - description: |-
-            The exact value to match against
-            [`ServiceContext.environment`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.environment).
-          in: query
-          name: serviceFilter.environment
           type: string
         - description: |-
             The sort order in which the results are returned.
@@ -467,7 +456,7 @@ definitions:
         format: google-datetime
         type: string
       message:
-        description: Error message that was reported or logged by the service.
+        description: The stack trace that was reported or logged by the service.
         type: string
       serviceContext:
         $ref: '#/definitions/ServiceContext'
@@ -484,7 +473,7 @@ definitions:
       name:
         description: |-
           Group resource name.
-          Example: projects/my-projectid/groups/my-groupid
+          Example: `projects/my-project-123/groups/my-groupid`
         type: string
       trackingIssues:
         description: Associated tracking issues.
@@ -633,18 +622,8 @@ definitions:
   ServiceContext:
     description: |-
       Describes a running service that sends errors.
-      Services can be deployed to multiple environments,
-      for example, `test` or `prod`. Their version changes over time and
-      multiple versions can run in parallel.
+      Its version changes over time and multiple versions can run in parallel.
     properties:
-      environment:
-        description: |-
-          The identifier describes a set of running services that are
-          operated as a single unit, such as `test`, `canary`, or `prod`.
-          If the error originates
-          from Google App Engine logs, or if the identifier is empty, the value
-          appears as `default`.
-        type: string
       service:
         description: |-
           An identifier of the service, such as the name of the executable, job, or

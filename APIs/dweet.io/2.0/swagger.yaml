@@ -76,6 +76,31 @@ paths:
       summary: Create a dweet for a thing.
       tags:
         - dweets
+  '/dweet/quietly/for/{thing}':
+    post:
+      parameters:
+        - description: A unique name of a thing. It is recommended that you use a GUID as to avoid name collisions.
+          in: path
+          name: thing
+          required: true
+          type: string
+        - description: 'A valid key for a locked thing. If the thing is not locked, this can be ignored.'
+          in: query
+          name: key
+          required: false
+          type: string
+        - description: The actual content of the string. Can be any valid JSON string.
+          in: body
+          name: content
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: 'Create a dweet for a thing.  This method differs from /dweet/for/{thing} only in that successful dweets result in an HTTP 204 response rather than the typical verbose response.'
+      tags:
+        - dweets
   '/get/alert/for/{thing}':
     get:
       parameters:
