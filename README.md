@@ -84,7 +84,7 @@ Some specs are taken from Open Source projects:
 
 [banner]: https://apis-guru.github.io/api-models/branding/banner.svg "APIs.guru"
 [twitter-image]: https://img.shields.io/twitter/url/http/APIs.guru.svg?style=social
-[twitter-link]: https://twitter.com/intent/tweet?text=http%3A%2F%2FAPIs.guru%20-%20Wikipedia%20for%20%23Web%20%23APIs%20pic.twitter.com/UhlhbMw1NP
+[twitter-link]: https://twitter.com/intent/tweet?text=http%3A%2F%2FAPIs.guru%20-%20Wikipedia%20for%20%23Web%20%23APIs%20by%20@APIs_guru%20pic.twitter.com/UhlhbMw1NP
 [twitterFollow-image]: https://img.shields.io/twitter/follow/APIs_guru.svg?style=social
 [twitterFollow-link]: https://twitter.com/intent/follow?screen_name=APIs_guru
 [gitter-image]: https://img.shields.io/gitter/room/APIs-guru/api-models.svg
