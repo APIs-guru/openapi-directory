@@ -1,7 +1,8 @@
 **Warning**: If you want to be notified about changes in advance please send us email to founders@APIs.guru
 
 This API implemented as `gh-pages` branch Github automatically mirror it's content to<BR> https://apis-guru.github.io/api-models/<BR>
-That mean API served as static content and support both caching and compression.
+That mean API served as static content and support both caching and compression.<BR>
+Here is simplest possible API client: https://apis-guru.github.io/simple-ui/
 
 https://apis-guru.github.io/api-models/api/v1/list.json - List all API specs.
 It consist of JSON object with API IDs(`<provider>[:<service>]`) as keys.
