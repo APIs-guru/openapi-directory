@@ -1,0 +1,338 @@
+swagger: '2.0'
+schemes:
+  - https
+host: rbaskets.in
+basePath: /
+info:
+  contact:
+    name: darklynx
+    url: 'https://github.com/darklynx'
+  description: RESTful API of Request Baskets service
+  title: Request Baskets
+  version: '0.4'
+  x-origin:
+    format: swagger
+    url: 'https://raw.githubusercontent.com/darklynx/request-baskets/master/doc/api-swagger.yaml'
+    version: '2.0'
+  x-providerName: rbaskets.in
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  basket_token:
+    description: Basket assigned secure token
+    in: header
+    name: Authorization
+    type: apiKey
+tags:
+  - description: Manage baskets
+    name: baskets
+  - description: Manage collected requests
+    name: requests
+paths:
+  /baskets:
+    get:
+      description: Returns list of registered basket names
+      parameters:
+        - description: Maximum number of basket names to return; default 20
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number of basket names to skip; default 0
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: 'Query string to filter result, only those basket names that match the query will be included in response'
+          in: query
+          name: q
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK. Returns list of available baskets.
+          schema:
+            $ref: '#/definitions/Baskets'
+        '204':
+          description: No Content. No baskets available for specified limits
+      summary: Retrieve registered basket names
+      tags:
+        - baskets
+  '/baskets/{name}':
+    delete:
+      description: Delete basket and all collected requests
+      parameters:
+        - description: The basket name
+          in: path
+          name: name
+          required: true
+          type: string
+      responses:
+        '204':
+          description: No Content. Basket is deleted
+        '401':
+          description: Unauthorized. Invalid or missing basket token
+        '404':
+          description: Not Found. No basket with such name
+      security:
+        - basket_token: []
+      summary: Delete basket
+      tags:
+        - baskets
+    get:
+      description: Get current configuration of a basket
+      parameters:
+        - description: The basket name
+          in: path
+          name: name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK. Returns basket configuration
+          schema:
+            $ref: '#/definitions/Config'
+        '401':
+          description: Unauthorized. Invalid or missing basket token
+        '404':
+          description: Not Found. No basket with such name
+      security:
+        - basket_token: []
+      summary: Get basket configuration
+      tags:
+        - baskets
+    post:
+      description: Creates a new basket with specified name
+      parameters:
+        - description: The name of basket to create
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: Basket configuration
+          in: body
+          name: config
+          required: false
+          schema:
+            $ref: '#/definitions/Config'
+      responses:
+        '201':
+          description: Created. Indicates that basket is successfully created
+          schema:
+            $ref: '#/definitions/Token'
+        '403':
+          description: 'Forbidden. Indicates that basket name conflicts with reserved paths; e.g. `baskets`, `web`, etc.'
+        '409':
+          description: Conflict. Indicates that basket with such name already exists
+      summary: Create a new basket
+      tags:
+        - baskets
+    put:
+      description: |
+        Update current configuration of basket.
+
+        Special configuration parameters for request forwarding:
+          * `insecure_tls` controls certificate verification when forwarding requests. Setting this parameter to `true`
+          allows to forward collected HTTP requests via HTTPS protocol even if the forward end-point is configured with
+          self-signed TLS/SSL certificate. **Warning:** enabling this feature has known security implications.
+          * `expand_path` changes the logic of constructing taget URL when forwarding requests. If this parameter is
+          set to `true` the forward URL path will be expanded when original HTTP request contains compound path. For
+          example, a basket with name **server1** is configured to forward all requests to `http://server1.intranet:8001/myservice`
+          and it has received an HTTP request like `GET http://baskets.example.com/server1/component/123/events?status=OK`
+          then depending on `expand_path` settings the request will be forwarded to:
+            * `true` => `GET http://server1.intranet:8001/myservice/component/123/events?status=OK`
+            * `false` => `GET http://server1.intranet:8001/myservice?status=OK`
+      parameters:
+        - description: The basket name
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: New configuration to apply
+          in: body
+          name: config
+          required: true
+          schema:
+            $ref: '#/definitions/Config'
+      responses:
+        '204':
+          description: No Content. Basket configuration is updated
+        '401':
+          description: Unauthorized. Invalid or missing basket token
+        '404':
+          description: Not Found. No basket with such name
+      security:
+        - basket_token: []
+      summary: Update basket configuration
+      tags:
+        - baskets
+  '/baskets/{name}/requests':
+    delete:
+      description: Delete all requests collected by this basket
+      parameters:
+        - description: The basket name
+          in: path
+          name: name
+          required: true
+          type: string
+      responses:
+        '204':
+          description: No Content. Basket requests are cleared
+        '401':
+          description: Unauthorized. Invalid or missing basket token
+        '404':
+          description: Not Found. No basket with such name
+      security:
+        - basket_token: []
+      summary: Delete all requests
+      tags:
+        - requests
+    get:
+      description: Returns list of collected requests
+      parameters:
+        - description: The basket name
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: Maximum number of requests to return; default 20
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number of requests to skip; default 0
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: 'Query string to filter result, only requests that match the query will be included in response'
+          in: query
+          name: q
+          required: false
+          type: string
+        - description: |
+            Defines what is taken into account when filtering is applied: `body` - search in content body of collected requests,
+            `query` - search among query parameters of collected requests, `headers` - search among request header values,
+            `any` - search anywhere; default `any`
+          enum:
+            - any
+            - body
+            - query
+            - headers
+          in: query
+          name: in
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK. Returns list of basket requests.
+          schema:
+            $ref: '#/definitions/Requests'
+        '204':
+          description: No Content. No requests found for specified limits
+        '401':
+          description: Unauthorized. Invalid or missing basket token
+        '404':
+          description: Not Found. No basket with such name
+      security:
+        - basket_token: []
+      summary: Retrieve requests collected by basket
+      tags:
+        - requests
+definitions:
+  Baskets:
+    properties:
+      count:
+        description: Total number of baskets in the system; not present if query is applied
+        type: integer
+      has_more:
+        description: Indicates if there are more baskets to fetch
+        type: boolean
+      names:
+        description: Collection of basket names
+        items:
+          type: string
+        type: array
+    required:
+      - names
+      - has_more
+    type: object
+  Config:
+    properties:
+      capacity:
+        description: 'Baskets capacity, defines maximum number of requests to store'
+        type: integer
+      expand_path:
+        description: If set to `true` the forward URL path will be expanded when original HTTP request contains compound path.
+        type: boolean
+      forward_url:
+        description: 'URL to forward all incoming requests of the basket, `empty` value disables forwarding'
+        type: string
+      insecure_tls:
+        description: |
+          If set to `true` the certificate verification will be disabled if forward URL indicates HTTPS scheme.
+          **Warning:** enabling this feature has known security implications.
+        type: boolean
+    type: object
+  Headers:
+    additionalProperties:
+      description: Collection of header values
+      items:
+        type: string
+      type: array
+    type: object
+  Request:
+    properties:
+      body:
+        description: Content of request body
+        type: string
+      content_length:
+        description: Content lenght of request
+        type: integer
+      date:
+        description: 'Date and time of request in Unix time ms. format (number of miliseconds elapsed since January 1, 1970 UTC)'
+        format: int64
+        type: integer
+      headers:
+        $ref: '#/definitions/Headers'
+        description: 'Map of request headers, key represents name, value is array of values'
+      method:
+        description: HTTP methof of request
+        type: string
+      path:
+        description: URL path of request
+        type: string
+      query:
+        description: Query parameters of request
+        type: string
+    type: object
+  Requests:
+    properties:
+      count:
+        description: Current number of collected requests hold by basket; not present if query is applied
+        type: integer
+      has_more:
+        description: Indicates if there are more requests collected by basket to fetch
+        type: boolean
+      requests:
+        description: Collection of collected requests
+        items:
+          $ref: '#/definitions/Request'
+        type: array
+      total_count:
+        description: Total number of all requests passed through this basket; not present if query is applied
+        type: integer
+    required:
+      - requests
+      - has_more
+    type: object
+  Token:
+    properties:
+      token:
+        description: 'Secure token to manage the basket, generated by system'
+        type: string
+    required:
+      - token
+    type: object
