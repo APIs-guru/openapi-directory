@@ -163,6 +163,12 @@ paths:
           name: id
           required: true
           type: string
+        - default: false
+          description: Include interactors
+          in: query
+          name: interactors
+          required: false
+          type: boolean
         - default: 20
           description: pathways per page
           format: int32
@@ -182,8 +188,10 @@ paths:
           enum:
             - NAME
             - TOTAL_ENTITIES
+            - TOTAL_INTERACTORS
             - TOTAL_REACTIONS
             - FOUND_ENTITIES
+            - FOUND_INTERACTORS
             - FOUND_REACTIONS
             - ENTITIES_RATIO
             - ENTITIES_PVALUE
@@ -243,6 +251,12 @@ paths:
           name: id
           required: true
           type: string
+        - default: false
+          description: Include interactors
+          in: query
+          name: interactors
+          required: false
+          type: boolean
         - default: 20
           description: pathways per page
           format: int32
@@ -262,8 +276,10 @@ paths:
           enum:
             - NAME
             - TOTAL_ENTITIES
+            - TOTAL_INTERACTORS
             - TOTAL_REACTIONS
             - FOUND_ENTITIES
+            - FOUND_INTERACTORS
             - FOUND_REACTIONS
             - ENTITIES_RATIO
             - ENTITIES_PVALUE
@@ -326,6 +342,12 @@ paths:
           required: true
           schema:
             type: string
+        - default: false
+          description: Include interactors
+          in: query
+          name: interactors
+          required: false
+          type: boolean
         - default: 20
           description: pathways per page
           format: int32
@@ -345,8 +367,10 @@ paths:
           enum:
             - NAME
             - TOTAL_ENTITIES
+            - TOTAL_INTERACTORS
             - TOTAL_REACTIONS
             - FOUND_ENTITIES
+            - FOUND_INTERACTORS
             - FOUND_REACTIONS
             - ENTITIES_RATIO
             - ENTITIES_PVALUE
@@ -404,6 +428,12 @@ paths:
           name: file
           required: true
           type: file
+        - default: false
+          description: Include interactors
+          in: query
+          name: interactors
+          required: false
+          type: boolean
         - default: 20
           description: pathways per page
           format: int32
@@ -423,8 +453,10 @@ paths:
           enum:
             - NAME
             - TOTAL_ENTITIES
+            - TOTAL_INTERACTORS
             - TOTAL_REACTIONS
             - FOUND_ENTITIES
+            - FOUND_INTERACTORS
             - FOUND_REACTIONS
             - ENTITIES_RATIO
             - ENTITIES_PVALUE
@@ -486,6 +518,12 @@ paths:
           name: file
           required: true
           type: file
+        - default: false
+          description: Include interactors
+          in: query
+          name: interactors
+          required: false
+          type: boolean
         - default: 20
           description: pathways per page
           format: int32
@@ -505,8 +543,10 @@ paths:
           enum:
             - NAME
             - TOTAL_ENTITIES
+            - TOTAL_INTERACTORS
             - TOTAL_REACTIONS
             - FOUND_ENTITIES
+            - FOUND_INTERACTORS
             - FOUND_REACTIONS
             - ENTITIES_RATIO
             - ENTITIES_PVALUE
@@ -569,6 +609,12 @@ paths:
           required: true
           schema:
             type: string
+        - default: false
+          description: Include interactors
+          in: query
+          name: interactors
+          required: false
+          type: boolean
         - default: 20
           description: pathways per page
           format: int32
@@ -588,8 +634,10 @@ paths:
           enum:
             - NAME
             - TOTAL_ENTITIES
+            - TOTAL_INTERACTORS
             - TOTAL_REACTIONS
             - FOUND_ENTITIES
+            - FOUND_INTERACTORS
             - FOUND_REACTIONS
             - ENTITIES_RATIO
             - ENTITIES_PVALUE
@@ -648,6 +696,12 @@ paths:
           required: true
           schema:
             type: string
+        - default: false
+          description: Include interactors
+          in: query
+          name: interactors
+          required: false
+          type: boolean
         - default: 20
           description: pathways per page
           format: int32
@@ -667,8 +721,10 @@ paths:
           enum:
             - NAME
             - TOTAL_ENTITIES
+            - TOTAL_INTERACTORS
             - TOTAL_REACTIONS
             - FOUND_ENTITIES
+            - FOUND_INTERACTORS
             - FOUND_REACTIONS
             - ENTITIES_RATIO
             - ENTITIES_PVALUE
@@ -733,6 +789,12 @@ paths:
           required: true
           schema:
             type: string
+        - default: false
+          description: Include interactors
+          in: query
+          name: interactors
+          required: false
+          type: boolean
         - default: 20
           description: pathways per page
           format: int32
@@ -752,8 +814,10 @@ paths:
           enum:
             - NAME
             - TOTAL_ENTITIES
+            - TOTAL_INTERACTORS
             - TOTAL_REACTIONS
             - FOUND_ENTITIES
+            - FOUND_INTERACTORS
             - FOUND_REACTIONS
             - ENTITIES_RATIO
             - ENTITIES_PVALUE
@@ -835,8 +899,10 @@ paths:
           enum:
             - NAME
             - TOTAL_ENTITIES
+            - TOTAL_INTERACTORS
             - TOTAL_REACTIONS
             - FOUND_ENTITIES
+            - FOUND_INTERACTORS
             - FOUND_REACTIONS
             - ENTITIES_RATIO
             - ENTITIES_PVALUE
@@ -913,8 +979,10 @@ paths:
           enum:
             - NAME
             - TOTAL_ENTITIES
+            - TOTAL_INTERACTORS
             - TOTAL_REACTIONS
             - FOUND_ENTITIES
+            - FOUND_INTERACTORS
             - FOUND_REACTIONS
             - ENTITIES_RATIO
             - ENTITIES_PVALUE
@@ -1058,6 +1126,175 @@ paths:
       summary: Filters the result by species
       tags:
         - token
+  '/token/{token}/found/all/{pathway}':
+    get:
+      consumes:
+        - text/plain
+      deprecated: false
+      description: The identifiers submitted by the user that have a match in Reactome database. It also retrieves the mapping to the main identifiers for those that have been found.
+      parameters:
+        - description: The token associated with the data to query
+          in: path
+          name: token
+          required: true
+          type: string
+        - description: The dbId of the pathway of interest
+          format: int64
+          in: path
+          name: pathway
+          required: true
+          type: integer
+        - default: TOTAL
+          description: the resource to sort
+          enum:
+            - TOTAL
+            - UNIPROT
+            - ENSEMBL
+            - CHEBI
+            - MIRBASE
+            - NCBI_PROTEIN
+            - EMBL
+            - COMPOUND
+          in: query
+          name: resource
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/FoundElements'
+        '404':
+          description: No result corresponding to the token was found
+        '410':
+          description: Result deleted due to a new data release
+      summary: Returns a summary of the contained identifiers for a pathway in the result for a given token
+      tags:
+        - token
+  '/token/{token}/found/entities/{pathway}':
+    get:
+      consumes:
+        - text/plain
+      deprecated: false
+      description: The identifiers submitted by the user that have a match in Reactome database. It also retrieves the mapping to the main identifiers for those that have been found.
+      parameters:
+        - description: The token associated with the data to query
+          in: path
+          name: token
+          required: true
+          type: string
+        - description: The dbId of the pathway of interest
+          format: int64
+          in: path
+          name: pathway
+          required: true
+          type: integer
+        - default: 1
+          description: page number
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - default: 20
+          description: identifiers per page
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+        - default: TOTAL
+          description: the resource to sort
+          enum:
+            - TOTAL
+            - UNIPROT
+            - ENSEMBL
+            - CHEBI
+            - MIRBASE
+            - NCBI_PROTEIN
+            - EMBL
+            - COMPOUND
+          in: query
+          name: resource
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/FoundEntities'
+        '404':
+          description: No result corresponding to the token was found
+        '410':
+          description: Result deleted due to a new data release
+      summary: Returns a summary of the contained identifiers for a pathway in the result for a given token
+      tags:
+        - token
+  '/token/{token}/found/interactors/{pathway}':
+    get:
+      consumes:
+        - text/plain
+      deprecated: false
+      description: The identifiers submitted by the user that have a match with an interactor in Reactome database. It also retrieves the mapping to the main identifiers (the one interacting with) for those that have been found.
+      parameters:
+        - description: The token associated with the data to query
+          in: path
+          name: token
+          required: true
+          type: string
+        - description: The dbId of the pathway of interest
+          format: int64
+          in: path
+          name: pathway
+          required: true
+          type: integer
+        - default: 1
+          description: page number
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - default: 20
+          description: identifiers per page
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+        - default: TOTAL
+          description: the resource to sort
+          enum:
+            - TOTAL
+            - UNIPROT
+            - ENSEMBL
+            - CHEBI
+            - MIRBASE
+            - NCBI_PROTEIN
+            - EMBL
+            - COMPOUND
+          in: query
+          name: resource
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/FoundInteractors'
+        '404':
+          description: No result corresponding to the token was found
+        '410':
+          description: Result deleted due to a new data release
+      summary: Returns a summary of the contained interactors for a pathway in the result for a given token
+      tags:
+        - token
   '/token/{token}/notFound':
     get:
       consumes:
@@ -1130,8 +1367,10 @@ paths:
           enum:
             - NAME
             - TOTAL_ENTITIES
+            - TOTAL_INTERACTORS
             - TOTAL_REACTIONS
             - FOUND_ENTITIES
+            - FOUND_INTERACTORS
             - FOUND_REACTIONS
             - ENTITIES_RATIO
             - ENTITIES_PVALUE
@@ -1306,67 +1545,6 @@ paths:
       summary: Returns the resources summary associated with the token
       tags:
         - token
-  '/token/{token}/summary/{pathway}':
-    get:
-      consumes:
-        - text/plain
-      deprecated: false
-      description: The identifiers submitted by the user that have a match in Reactome database. It also retrieves the mapping to the main identifiers for those that have been found.
-      parameters:
-        - description: The token associated with the data to query
-          in: path
-          name: token
-          required: true
-          type: string
-        - description: The dbId of the pathway of interest
-          format: int64
-          in: path
-          name: pathway
-          required: true
-          type: integer
-        - default: 1
-          description: page number
-          format: int32
-          in: query
-          name: page
-          required: false
-          type: integer
-        - default: 20
-          description: identifiers per page
-          format: int32
-          in: query
-          name: pageSize
-          required: false
-          type: integer
-        - default: TOTAL
-          description: the resource to sort
-          enum:
-            - TOTAL
-            - UNIPROT
-            - ENSEMBL
-            - CHEBI
-            - MIRBASE
-            - NCBI_PROTEIN
-            - EMBL
-            - COMPOUND
-          in: query
-          name: resource
-          required: false
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: No response was specified
-          schema:
-            $ref: '#/definitions/PathwayIdentifiers'
-        '404':
-          description: No result corresponding to the token was found
-        '410':
-          description: Result deleted due to a new data release
-      summary: Returns a summary of the contained identifiers for a pathway in the result for a given token
-      tags:
-        - token
 definitions:
   AnalysisResult:
     properties:
@@ -1409,6 +1587,12 @@ definitions:
         type: string
   EntityStatistics:
     properties:
+      curatedFound:
+        format: int32
+        type: integer
+      curatedTotal:
+        format: int32
+        type: integer
       exp:
         items:
           format: double
@@ -1418,6 +1602,12 @@ definitions:
         format: double
         type: number
       found:
+        format: int32
+        type: integer
+      interactorsFound:
+        format: int32
+        type: integer
+      interactorsTotal:
         format: int32
         type: integer
       pValue:
@@ -1498,6 +1688,97 @@ definitions:
         type: boolean
       writable:
         type: boolean
+  FoundElements:
+    properties:
+      entities:
+        items:
+          $ref: '#/definitions/FoundEntity'
+        type: array
+      expNames:
+        items:
+          type: string
+        type: array
+      foundEntities:
+        format: int32
+        type: integer
+      foundInteractors:
+        format: int32
+        type: integer
+      interactors:
+        items:
+          $ref: '#/definitions/FoundInteractor'
+        type: array
+      resources:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+  FoundEntities:
+    properties:
+      expNames:
+        items:
+          type: string
+        type: array
+      found:
+        format: int32
+        type: integer
+      identifiers:
+        items:
+          $ref: '#/definitions/FoundEntity'
+        type: array
+      resources:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+  FoundEntity:
+    properties:
+      exp:
+        items:
+          format: double
+          type: number
+        type: array
+      id:
+        type: string
+      mapsTo:
+        items:
+          $ref: '#/definitions/IdentifierMap'
+        type: array
+        uniqueItems: true
+  FoundInteractor:
+    properties:
+      exp:
+        items:
+          format: double
+          type: number
+        type: array
+      id:
+        type: string
+      interactsWith:
+        $ref: '#/definitions/IdentifierMap'
+      mapsTo:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+  FoundInteractors:
+    properties:
+      expNames:
+        items:
+          type: string
+        type: array
+      found:
+        format: int32
+        type: integer
+      identifiers:
+        items:
+          $ref: '#/definitions/FoundInteractor'
+        type: array
+      resources:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
   IdentifierMap:
     properties:
       ids:
@@ -1527,38 +1808,6 @@ definitions:
         $ref: '#/definitions/EntityStatistics'
       stId:
         type: string
-  PathwayIdentifier:
-    properties:
-      exp:
-        items:
-          format: double
-          type: number
-        type: array
-      identifier:
-        type: string
-      mapsTo:
-        items:
-          $ref: '#/definitions/IdentifierMap'
-        type: array
-        uniqueItems: true
-  PathwayIdentifiers:
-    properties:
-      expNames:
-        items:
-          type: string
-        type: array
-      found:
-        format: int32
-        type: integer
-      identifiers:
-        items:
-          $ref: '#/definitions/PathwayIdentifier'
-        type: array
-      resources:
-        items:
-          type: string
-        type: array
-        uniqueItems: true
   PathwaySummary:
     properties:
       dbId:

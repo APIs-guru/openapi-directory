@@ -133,7 +133,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
     post:
-      description: 'Creates a new annotation. Caller must have WRITE permission for the associated annotation set. The following fields are required: * annotationSetId * referenceName or referenceId or ### Transcripts transcript transcript.exons transcript.exons.start For annotations of type TRANSCRIPT, the following fields of transcript must be provided: * `exons.start` * `exons.end` All other fields may be optionally specified, unless documented as being server-generated (for example, the `id` field). The annotated range must be no longer than 100Mbp (mega base pairs). See the Annotation resource for additional restrictions on each field.'
+      description: 'Creates a new annotation. Caller must have WRITE permission for the associated annotation set. The following fields are required: * annotationSetId * referenceName or referenceId ### Transcripts For annotations of type TRANSCRIPT, the following fields of transcript must be provided: * `exons.start` * `exons.end` All other fields may be optionally specified, unless documented as being server-generated (for example, the `id` field). The annotated range must be no longer than 100Mbp (mega base pairs). See the Annotation resource for additional restrictions on each field.'
       operationId: genomics.annotations.create
       parameters:
         - in: body
@@ -2282,8 +2282,10 @@ definitions:
     properties:
       annotation:
         $ref: '#/definitions/Annotation'
+        description: 'The created annotation, if creation was successful.'
       status:
         $ref: '#/definitions/Status'
+        description: The creation status.
     type: object
   Exon:
     properties:
