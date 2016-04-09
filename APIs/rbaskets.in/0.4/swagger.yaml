@@ -10,6 +10,8 @@ info:
   description: RESTful API of Request Baskets service
   title: Request Baskets
   version: '0.4'
+  x-logo:
+    url: 'https://raw.githubusercontent.com/darklynx/request-baskets/master/doc/logo.svg'
   x-origin:
     format: swagger
     url: 'https://raw.githubusercontent.com/darklynx/request-baskets/master/doc/api-swagger.yaml'
@@ -282,6 +284,7 @@ definitions:
       items:
         type: string
       type: array
+    description: 'Map of request headers, key represents name, value is array of values'
     type: object
   Request:
     properties:
@@ -297,7 +300,6 @@ definitions:
         type: integer
       headers:
         $ref: '#/definitions/Headers'
-        description: 'Map of request headers, key represents name, value is array of values'
       method:
         description: HTTP methof of request
         type: string
