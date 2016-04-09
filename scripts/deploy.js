@@ -53,10 +53,14 @@ function cacheResources(specs) {
     return makeRequest('get', url, {encoding: null})
       .spread(function(response, data) {
 
-        var mime = response.headers['content-type'];
-        assert(mime.match('image/'));
-        var extension = MIME.extension(mime);
-        assert(extension);
+        var extension = URI(url).suffix();
+        if (!extension) {
+          var mime = response.headers['content-type'];
+          assert(mime.match('image/'));
+          extension = MIME.extension(mime);
+          assert(extension);
+        }
+
         var logoFile = 'cache/' + util.getSwaggerPath(swagger, 'logo.' + extension);
         util.saveFile(logoFile, data);
 
