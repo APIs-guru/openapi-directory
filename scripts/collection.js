@@ -70,7 +70,7 @@ program
 
 program
   .command('fixup')
-  .description('update "fixup.json" for specified Swagger')
+  .description('update "fixup.yaml" for specified Swagger')
   .arguments('<Swagger>')
   .action(fixupSwagger);
 
