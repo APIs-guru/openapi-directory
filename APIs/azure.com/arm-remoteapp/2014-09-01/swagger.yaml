@@ -1,0 +1,1905 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  title: RemoteAppManagementClient
+  version: '2014-09-01'
+  x-logo:
+    backgroundColor: '#333333'
+    url: 'https://azure.github.io/images/logo-msft-dark@2x.png'
+  x-origin:
+    format: swagger
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-remoteapp/2014-09-01/swagger/remoteapp.json'
+    version: '2.0'
+  x-prefered: false
+  x-providerName: azure.com
+  x-serviceName: arm-remoteapp
+consumes:
+  - application/json
+  - text/json
+produces:
+  - application/json
+  - text/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  apiVersion:
+    description: Client Api Version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  armNamespace:
+    description: Azure Resource Manager namespace for RemoteApp service environments.
+    in: path
+    name: armNamespace
+    required: true
+    type: string
+  subscriptionId:
+    description: A Microsoft Azure subscription ID.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  '/providers/{armNamespace}/operations':
+    get:
+      description: Gets the available RemoteApp operations
+      operationId: Operations_GetAvailable
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/OperationInfoList'
+        '202':
+          description: ''
+      tags:
+        - Operations
+  '/subscriptions/{subscriptionId}/providers/{armNamespace}/accounts/{subscriptionId}':
+    get:
+      description: Gets the account associated with the subscription id.
+      operationId: Account_Get
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/AccountDetailsWrapperList'
+        '202':
+          description: ''
+      tags:
+        - Account
+  '/subscriptions/{subscriptionId}/providers/{armNamespace}/accounts/{subscriptionId}/activateBilling':
+    post:
+      description: Activates billing for the account
+      operationId: Account_ActivateBilling
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+        '202':
+          description: ''
+      tags:
+        - Account
+  '/subscriptions/{subscriptionId}/providers/{armNamespace}/accounts/{subscriptionId}/update':
+    post:
+      description: Updates the account PrivacyUrl and WorkspaceName.
+      operationId: Account_Update
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - description: The new PrivacyUrl and WorkspaceName
+          in: body
+          name: accountInfo
+          required: true
+          schema:
+            $ref: '#/definitions/AccountDetailsWrapper'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/AccountDetailsWrapperList'
+        '202':
+          description: ''
+      tags:
+        - Account
+  '/subscriptions/{subscriptionId}/providers/{armNamespace}/collections':
+    get:
+      description: Gets the list of collections details in the subscription.
+      operationId: Collection_ListInSubscription
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/CollectionListResult'
+        '202':
+          description: ''
+      tags:
+        - Collection
+  '/subscriptions/{subscriptionId}/providers/{armNamespace}/templateImages':
+    get:
+      description: Gets available template images in the specified location
+      operationId: TemplateImage_List
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/TemplateImageList'
+      tags:
+        - TemplateImages
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/providers/{armNamespace}/templateImages/{templateImageName}':
+    get:
+      description: Gets a template image.
+      operationId: TemplateImage_Get
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/TemplateImage'
+      tags:
+        - TemplateImages
+    parameters:
+      - description: The name of the template image
+        in: path
+        name: templateImageName
+        required: true
+        type: string
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections':
+    get:
+      description: Gets the list of collections details in the resource group.
+      operationId: Collection_ListInResourceGroup
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/CollectionListResult'
+        '202':
+          description: ''
+      tags:
+        - Collection
+    parameters:
+      - description: The name of the resource group
+        in: path
+        name: resourceGroupName
+        required: true
+        type: string
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}':
+    delete:
+      description: Delete the collection
+      operationId: Collection_Delete
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+        '202':
+          description: ''
+      tags:
+        - Collection
+      x-ms-long-running-operation: true
+    get:
+      description: Gets the collection details.
+      operationId: Collection_Get
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Collection'
+        '202':
+          description: ''
+      tags:
+        - Collection
+    parameters:
+      - description: The collection name.
+        in: path
+        name: collectionName
+        required: true
+        type: string
+      - description: The name of the resource group
+        in: path
+        name: resourceGroupName
+        required: true
+        type: string
+    put:
+      description: Create or update a collection.
+      operationId: Collection_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - description: The details of the created or updated collection
+          in: body
+          name: details
+          required: true
+          schema:
+            $ref: '#/definitions/CollectionCreationDetailsWrapper'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/CollectionCreationDetailsWrapper'
+        '202':
+          description: ''
+      tags:
+        - Collection
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/applications':
+    get:
+      description: Gets the list of published applications in this collection.
+      operationId: Collection_ListPublishedApps
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/PublishedApplicationDetailsListResult'
+        '202':
+          description: ''
+      tags:
+        - Collection
+    parameters:
+      - description: The collection name.
+        in: path
+        name: collectionName
+        required: true
+        type: string
+      - description: The name of the resource group
+        in: path
+        name: resourceGroupName
+        required: true
+        type: string
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/applications/{alias}':
+    delete:
+      description: Unpublishes published application matching the application alias (short unique name) from the collection.
+      operationId: Collection_Unpublish
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/PublishingOperationResult'
+        '202':
+          description: ''
+      tags:
+        - Collection
+    get:
+      description: Gets the specified published application in this collection.
+      operationId: Collection_GetPublishedApp
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/PublishedApplicationDetails'
+        '202':
+          description: ''
+      tags:
+        - Collection
+    parameters:
+      - description: The collection name.
+        in: path
+        name: collectionName
+        required: true
+        type: string
+      - description: The alias for the application.
+        in: path
+        name: alias
+        required: true
+        type: string
+      - description: The name of the resource group
+        in: path
+        name: resourceGroupName
+        required: true
+        type: string
+    put:
+      description: Publishes a new application or updates a previously published application.
+      operationId: Collection_PublishOrUpdateApplication
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - description: Details of the applicaton to publish or modify
+          in: body
+          name: applicationDetails
+          required: true
+          schema:
+            $ref: '#/definitions/ApplicationDetails'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/PublishingOperationResult'
+        '202':
+          description: ''
+      tags:
+        - Collection
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/metrics':
+    get:
+      description: Gets the list of collection metric values for specified time window.
+      operationId: Collection_GetMetrics
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - description: "UTC start time for the time window formatted as 'yyyyMMdd'"
+          in: query
+          name: startTimeUtc
+          required: false
+          type: string
+        - description: "UTC end time for the time window formatted as 'yyyyMMdd'"
+          in: query
+          name: endTimeUtc
+          required: false
+          type: string
+        - $ref: '#/parameters/apiVersion'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/CollectionMetricsDetailsWrapper'
+        '202':
+          description: ''
+      tags:
+        - Collection
+    parameters:
+      - description: The collection name.
+        in: path
+        name: collectionName
+        required: true
+        type: string
+      - description: The name of the resource group
+        in: path
+        name: resourceGroupName
+        required: true
+        type: string
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/sessions':
+    get:
+      description: Gets a list of sessions on the current collection
+      operationId: Collection_ListSessions
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/SessionList'
+        '202':
+          description: ''
+      tags:
+        - Collection
+    parameters:
+      - description: The collection name.
+        in: path
+        name: collectionName
+        required: true
+        type: string
+      - description: The name of the resource group
+        in: path
+        name: resourceGroupName
+        required: true
+        type: string
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/sessions/{userUpn}':
+    get:
+      description: "Gets the specified user's session on the current collection"
+      operationId: Collection_GetSession
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Session'
+        '202':
+          description: ''
+      tags:
+        - Collection
+    parameters:
+      - description: The collection name.
+        in: path
+        name: collectionName
+        required: true
+        type: string
+      - description: The UPN of the user
+        in: path
+        name: userUpn
+        required: true
+        type: string
+      - description: The name of the resource group
+        in: path
+        name: resourceGroupName
+        required: true
+        type: string
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/sessions/{userUpn}/disconnect':
+    parameters:
+      - description: The collection name.
+        in: path
+        name: collectionName
+        required: true
+        type: string
+      - description: The UPN of the user
+        in: path
+        name: userUpn
+        required: true
+        type: string
+      - description: The name of the resource group
+        in: path
+        name: resourceGroupName
+        required: true
+        type: string
+    post:
+      description: Disconnects the specified user
+      operationId: Collection_SessionDisconnect
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+        '202':
+          description: ''
+      tags:
+        - Collection
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/sessions/{userUpn}/logoff':
+    parameters:
+      - description: The collection name.
+        in: path
+        name: collectionName
+        required: true
+        type: string
+      - description: The UPN of the user
+        in: path
+        name: userUpn
+        required: true
+        type: string
+      - description: The name of the resource group
+        in: path
+        name: resourceGroupName
+        required: true
+        type: string
+    post:
+      description: Logs off the specified user
+      operationId: Collection_SessionLogOff
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+        '202':
+          description: ''
+      tags:
+        - Collection
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/sessions/{userUpn}/sendMessage':
+    parameters:
+      - description: The collection name.
+        in: path
+        name: collectionName
+        required: true
+        type: string
+      - description: The UPN of the user
+        in: path
+        name: userUpn
+        required: true
+        type: string
+      - description: The name of the resource group
+        in: path
+        name: resourceGroupName
+        required: true
+        type: string
+    post:
+      description: Sends a message to the specified user
+      operationId: Collection_SessionSendMessage
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - description: Session message details
+          in: body
+          name: messageDetails
+          required: true
+          schema:
+            $ref: '#/definitions/SessionSendMessageCommandParameter'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+        '202':
+          description: ''
+      tags:
+        - Collection
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/startMenuApps':
+    get:
+      description: Gets the list of applications available in this collection.
+      operationId: Collection_ListStartMenuApps
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/StartMenuApplicationListResult'
+        '202':
+          description: ''
+      tags:
+        - Collection
+    parameters:
+      - description: The collection name.
+        in: path
+        name: collectionName
+        required: true
+        type: string
+      - description: The name of the resource group
+        in: path
+        name: resourceGroupName
+        required: true
+        type: string
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/startMenuApps/{applicationId}':
+    get:
+      description: Gets the specified Start Menu application available in this collection.
+      operationId: Collection_GetStartMenuApp
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - description: The identifier of the application.
+          in: path
+          name: applicationId
+          required: true
+          type: string
+        - $ref: '#/parameters/apiVersion'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/StartMenuApplication'
+        '202':
+          description: ''
+      tags:
+        - Collection
+    parameters:
+      - description: The collection name.
+        in: path
+        name: collectionName
+        required: true
+        type: string
+      - description: The name of the resource group
+        in: path
+        name: resourceGroupName
+        required: true
+        type: string
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/usageDetails':
+    parameters:
+      - description: The collection name.
+        in: path
+        name: collectionName
+        required: true
+        type: string
+      - description: The name of the resource group
+        in: path
+        name: resourceGroupName
+        required: true
+        type: string
+      - description: The year and month to get billing for
+        in: body
+        name: date
+        required: true
+        schema:
+          $ref: '#/definitions/BillingDate'
+    post:
+      description: Generates a CSV file of collection usage details and returns the URI
+      operationId: Collection_GetUsageDetails
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/UsageDetailsInfo'
+        '202':
+          description: ''
+      tags:
+        - Collection
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/usageSummaries':
+    get:
+      description: Gets a summary of usage data for all users in the collection.
+      operationId: Collection_GetUsageSummaryList
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - description: The requested month for collection usage information
+          in: query
+          name: usageMonth
+          required: true
+          type: string
+        - description: The requested year for collection usage information
+          in: query
+          name: usageYear
+          required: true
+          type: string
+        - $ref: '#/parameters/apiVersion'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/CollectionUsageSummaryList'
+        '202':
+          description: ''
+      tags:
+        - Collection
+    parameters:
+      - description: The collection name.
+        in: path
+        name: collectionName
+        required: true
+        type: string
+      - description: The name of the resource group
+        in: path
+        name: resourceGroupName
+        required: true
+        type: string
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/usageSummaries/{userUpn}':
+    get:
+      description: Gets a summary of collection usage data for the specified user.
+      operationId: Collection_GetUsageSummary
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - description: The requested month for collection usage information
+          in: query
+          name: usageMonth
+          required: true
+          type: string
+        - description: The requested year for collection usage information
+          in: query
+          name: usageYear
+          required: true
+          type: string
+        - $ref: '#/parameters/apiVersion'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/CollectionUsageSummary'
+        '202':
+          description: ''
+      tags:
+        - Collection
+    parameters:
+      - description: The collection name.
+        in: path
+        name: collectionName
+        required: true
+        type: string
+      - description: The UPN of the user
+        in: path
+        name: userUpn
+        required: true
+        type: string
+      - description: The name of the resource group
+        in: path
+        name: resourceGroupName
+        required: true
+        type: string
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/users':
+    get:
+      description: Gets a list of all RemoteApp users associated with the given collection.
+      operationId: Collection_GetUsers
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/SecurityPrincipalList'
+        '202':
+          description: ''
+      tags:
+        - Collection
+    parameters:
+      - description: The collection name.
+        in: path
+        name: collectionName
+        required: true
+        type: string
+      - description: The name of the resource group
+        in: path
+        name: resourceGroupName
+        required: true
+        type: string
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{armNamespace}/collections/{collectionName}/users/{userUpn}':
+    delete:
+      description: Deletes a user from the given collection.
+      operationId: Collection_DeleteUser
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - description: The RemoteApp user to remove.
+          in: body
+          name: securityPrincipal
+          required: true
+          schema:
+            $ref: '#/definitions/SecurityPrincipal'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/SecurityPrincipalOperationErrorDetails'
+        '202':
+          description: ''
+      tags:
+        - Collection
+    get:
+      description: Gets a RemoteApp user by their UPN.
+      operationId: Collection_GetUser
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/SecurityPrincipalInfo'
+        '202':
+          description: ''
+      tags:
+        - Collection
+    parameters:
+      - description: The collection name.
+        in: path
+        name: collectionName
+        required: true
+        type: string
+      - description: The UPN of the user
+        in: path
+        name: userUpn
+        required: true
+        type: string
+      - description: The name of the resource group
+        in: path
+        name: resourceGroupName
+        required: true
+        type: string
+    put:
+      description: Adds a user to the given collection.
+      operationId: Collection_AddUser
+      parameters:
+        - $ref: '#/parameters/armNamespace'
+        - $ref: '#/parameters/apiVersion'
+        - description: A RemoteApp user to add.
+          in: body
+          name: securityPrincipal
+          required: true
+          schema:
+            $ref: '#/definitions/SecurityPrincipal'
+        - $ref: '#/parameters/subscriptionId'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/SecurityPrincipalOperationErrorDetails'
+        '202':
+          description: ''
+      tags:
+        - Collection
+definitions:
+  AccountDetails:
+    description: The details of an account.
+    properties:
+      accountId:
+        description: The account subscriptionId
+        type: string
+      accountLocation:
+        description: The home location for the account
+        type: string
+      billingState:
+        description: The billing state of the account
+        enum:
+          - Trial
+          - TrialExpired
+          - Active
+          - Inactive
+          - Preview
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: AccountBillingState
+      isDesktopEnabled:
+        description: Whether or not desktops are enabled on this account
+        type: boolean
+      maxPublishedAppsPerService:
+        description: The maximum number of apps per collection
+        format: int32
+        type: integer
+      maxServices:
+        description: The maximum number of collections
+        format: int32
+        type: integer
+      maxUsersPerService:
+        description: The maximum number of users per collection
+        format: int32
+        type: integer
+      privacyUrl:
+        description: Admin-defined URL to the privacy statement
+        type: string
+      rdWebUrl:
+        description: The URL users can go to to access available apps
+        type: string
+      trialEndTime:
+        description: Trial end time for the account when in trial billing state
+        format: date-time
+        type: string
+      workspaceName:
+        description: Name of the workspace
+        type: string
+  AccountDetailsAll:
+    description: A wrapper for account details to be used as a parameter and a response.
+    properties:
+      accountInfo:
+        $ref: '#/definitions/AccountDetails'
+        description: Account properties
+      billingPlans:
+        description: Available billing plans.
+        items:
+          $ref: '#/definitions/BillingPlan'
+        type: array
+      locationList:
+        description: List of locations for creating a collection.
+        items:
+          $ref: '#/definitions/Location'
+        type: array
+  AccountDetailsWrapper:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: A wrapper for account details to be used as a parameter
+    properties:
+      etag:
+        description: The etag of the resource.
+        type: string
+      nextLink:
+        description: The URL for requesting next page of resources.
+        type: string
+      properties:
+        $ref: '#/definitions/AccountDetailsAll'
+        description: Account properties
+  AccountDetailsWrapperList:
+    description: A wrapper for account details to be used as a response.
+    properties:
+      value:
+        description: Account properties
+        items:
+          $ref: '#/definitions/AccountDetailsWrapper'
+        type: array
+  ActiveDirectoryConfig:
+    description: Details of a RemoteApp active directory configuration.
+    properties:
+      DomainName:
+        description: The name of the on-premise domain to join the RD Session Host servers to.
+        type: string
+      OrganizationalUnit:
+        description: "The name of your domain's organizational unit to assign the RD Session Host servers to, e.g. OU=MyOu,DC=MyDomain,DC=ParentDomain,DC=com. Attributes such as OU, DC, etc. must be in uppercase."
+        type: string
+      ServiceAccountPassword:
+        description: "The service account's password."
+        type: string
+      ServiceAccountUserName:
+        description: "The user name of a service account that has permission to add computers to the domain. The username must be specified in the UPN or down-level logon name format (user@some.domain or some.domain\\user)."
+        type: string
+  ApplicationDetails:
+    description: The application details.
+    properties:
+      applicationAlias:
+        description: A short unique name for the application.
+        type: string
+      availableToUsers:
+        description: A flag to denote if the application will be available to end users.
+        type: boolean
+      commandLineArguments:
+        description: Optional command-line arguments to pass to the application.
+        type: string
+      displayName:
+        description: "The application's display name."
+        type: string
+      iconPngUris:
+        additionalProperties:
+          type: string
+        description: 'The available map of icon PNG file URIs for different resolutions (e.g. 16x16, 32x32, 64x64). The key of the map is the first dimension of the PNG resolution.'
+        type: object
+      iconUri:
+        description: "The URI for the application's default icon PNG file."
+        type: string
+      status:
+        description: The application status.
+        enum:
+          - Publishing
+          - Published
+          - Unpublishing
+          - Modifying
+          - Invalid
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: AppPublishingStatus
+      virtualPath:
+        description: "Path to the application.  The path should reference default operating system environment variables such as %ProgramFiles%, %ProgramFiles(x86)%, %SystemRoot%, etc. where possible.  For example, use '%SystemRoot%\\notepad.exe' rather than 'C:\\Windows\\notepad.exe'."
+        type: string
+  ApplicationDetailsList:
+    description: List of application details used to create or update a collection.
+    properties:
+      DetailsList:
+        description: List of publishing details for remote applications.
+        items:
+          $ref: '#/definitions/ApplicationDetails'
+        type: array
+  BillingDate:
+    description: The input to get usage details.
+    properties:
+      month:
+        description: The billing month
+        type: string
+      year:
+        description: The billing year
+        type: string
+  BillingMeterInformation:
+    properties:
+      flatMeterId:
+        description: The MINT ID for the flat rate
+        type: string
+      flatMeterKey:
+        description: Key for the flat meter for the billing system
+        type: string
+      geo:
+        description: geo for the billing meter
+        type: string
+      overageMeterId:
+        description: The MINT ID for the overage rate
+        type: string
+      overageMeterKey:
+        description: Key for the flat meter for the billing system
+        type: string
+  BillingPlan:
+    description: Contains details of a billing plan.
+    properties:
+      addOns:
+        description: Associated add-ons.
+        type: string
+      billingMeters:
+        description: List of meters for this billing plan
+        items:
+          $ref: '#/definitions/BillingMeterInformation'
+        type: array
+      coresPerUser:
+        description: Computing cores per user.
+        format: double
+        type: number
+      minimumBilledUserCount:
+        description: Minimum number of user to bill.
+        format: int32
+        type: integer
+      planId:
+        description: Unique identifier of billing plan.
+        type: string
+      planName:
+        description: Short name of billing plan.
+        type: string
+      specCode:
+        description: Unique portal plan identifier
+        type: string
+      specString1:
+        description: Some information displayed about the plan for portal use
+        type: string
+      specString2:
+        description: Some information displayed about the plan for portal use
+        type: string
+  Collection:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: The response for the get collection operation.
+    properties:
+      etag:
+        description: The etag of the resource.
+        type: string
+      nextLink:
+        description: The URL for requesting next page of resources.
+        type: string
+      properties:
+        $ref: '#/definitions/CollectionProperties'
+        description: Collection properties.
+  CollectionCreationDetails:
+    description: The details for creating a collection.
+    properties:
+      DnsServers:
+        description: List of the DNS Servers.
+        items:
+          type: string
+        type: array
+      adInfo:
+        $ref: '#/definitions/ActiveDirectoryConfig'
+        description: The account subscriptionId
+      allowedPrincipals:
+        $ref: '#/definitions/SecurityPrincipalList'
+        description: A list of allowed security principals
+      billingPlanName:
+        description: The plan name associated with this collection.
+        type: string
+      collectionLocation:
+        description: The home location for the account
+        type: string
+      collectionName:
+        description: "The collection's name"
+        type: string
+      customRdpProperty:
+        description: Optional customer-defined RDP properties of the collection.
+        type: string
+      description:
+        description: A description for the collection
+        type: string
+      mode:
+        description: The collection mode.
+        enum:
+          - Unassigned
+          - Apps
+          - Desktop
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: CollectionMode
+      notDomainJoined:
+        description: 'True if the collection is domain joined, false otherwise'
+        type: boolean
+      publishedApplications:
+        $ref: '#/definitions/ApplicationDetailsList'
+        description: A list of details of the published applications
+      readyForPublishing:
+        description: A flag denoting if this collection is ready for publishing operations.
+        type: boolean
+      resourceGroupName:
+        description: The name of the resource group the collection is in
+        type: string
+      sourceImageSasUri:
+        description: SAS URI for an OS image in the VM library
+        type: string
+      subnetName:
+        description: The subnet name of the customer created Azure VNet.
+        type: string
+      templateImageName:
+        description: The name of the template image for the collection
+        type: string
+      virtualNetworkId:
+        description: The ID of the Vnet for the collection
+        type: string
+      vnetName:
+        description: The name of the Vnet for the collection
+        type: string
+      waitBeforeShutdownInMinutes:
+        description: 'The amount of time to wait, in minutes, before forcing logoff.'
+        format: int32
+        type: integer
+  CollectionCreationDetailsWrapper:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Details of collection creation operation results.
+    properties:
+      etag:
+        description: The etag of the resource.
+        type: string
+      nextLink:
+        description: The URL for requesting next page of resources.
+        type: string
+      properties:
+        $ref: '#/definitions/CollectionCreationDetails'
+        description: Collection creation properties.
+  CollectionListResult:
+    description: A list of collection details
+    properties:
+      nextLink:
+        description: URL to use for request paging.
+        type: string
+      value:
+        description: A list of collection details
+        items:
+          $ref: '#/definitions/Collection'
+        type: array
+  CollectionMetric:
+    properties:
+      count:
+        description: Number of samples taken over the aggregation period
+        format: int32
+        type: integer
+      maximum:
+        description: Maximum value of the metric over the aggregation period
+        format: double
+        type: number
+      minimum:
+        description: Minimum value of the metric over the aggregation period
+        format: double
+        type: number
+      timeCreated:
+        description: Time when the metric value sample was taken
+        format: date-time
+        type: string
+      total:
+        description: Total number of metric values over the aggregation period
+        format: double
+        type: number
+  CollectionMetrics:
+    properties:
+      aggregationMinutes:
+        description: Number of minutes over which the metric is aggregated
+        format: int32
+        type: integer
+      values:
+        description: Values of metric
+        items:
+          $ref: '#/definitions/CollectionMetric'
+        type: array
+  CollectionMetricsDetails:
+    properties:
+      billedUsers:
+        $ref: '#/definitions/CollectionMetrics'
+        description: Number of users billed
+      overageHours:
+        $ref: '#/definitions/CollectionMetrics'
+        description: Number of overage hours incurred
+  CollectionMetricsDetailsWrapper:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Details of collection metrics.
+    properties:
+      etag:
+        description: The etag of the resource.
+        type: string
+      properties:
+        $ref: '#/definitions/CollectionMetricsDetails'
+        description: Collection usage summary information.
+  CollectionProperties:
+    description: The collection details.
+    properties:
+      DnsServers:
+        description: List of the DNS Servers.
+        items:
+          type: string
+        type: array
+      adInfo:
+        $ref: '#/definitions/ActiveDirectoryConfig'
+        description: The domain join details for this collection.
+      billingPlanName:
+        description: The plan name associated with this collection.
+        type: string
+      collectionName:
+        description: The collection name.
+        type: string
+      collectionType:
+        description: The type of the collection
+        enum:
+          - Hybrid
+          - CloudOnly
+          - HybridWithoutDomain
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: RemoteAppCollectionType
+      customRdpProperty:
+        description: Optional customer-defined RDP properties of the collection.
+        type: string
+      description:
+        description: The description of the collection.
+        type: string
+      diagnosticDetails:
+        description: 'Details of diagnostics for the collection. Each entry in this list is in the form of Key#Value.'
+        items:
+          type: string
+        type: array
+      diagnosticOperations:
+        description: List of diagnostics operations for the collection.
+        items:
+          $ref: '#/definitions/DiagnosticOp'
+        type: array
+      healthStatus:
+        description: List of collection health status messages
+        items:
+          type: string
+        type: array
+      lastErrorCode:
+        description: The last operation error code on this collection.
+        type: string
+      lastModifiedTimeUtc:
+        description: UTC date and time of the last modification of this collection.
+        format: date-time
+        type: string
+      maxSessions:
+        description: The maximum number of concurrent users allowed for this collection.
+        format: int32
+        type: integer
+      mode:
+        description: The collection mode.
+        enum:
+          - Unassigned
+          - Apps
+          - Desktop
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: CollectionMode
+      officeType:
+        description: If the template image for this collection includes Office this will specify the type.
+        enum:
+          - None
+          - OfficeSAL
+          - Office365
+          - Unknown
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: OfficeType
+      provisioningState:
+        description: The collection provisioning state.
+        enum:
+          - Cancelled
+          - Creating
+          - Deprovisioning
+          - Disabling
+          - Disabled
+          - Enabling
+          - Failed
+          - InProgress
+          - Provisioning
+          - Succeeded
+          - Upgrading
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ProvisioningState
+      readyForPublishing:
+        description: A flag denoting if this collection is ready for publishing operations.
+        type: boolean
+      sessionWarningThreshold:
+        description: The end-user session limit warning threshold.  Reaching or crossing this threshold will cause a capacity warning message to be shown in the management portal.
+        format: int32
+        type: integer
+      status:
+        description: The collection status.
+        type: string
+      subnetName:
+        description: The subnet name of the customer created Azure VNet.
+        type: string
+      templateImageName:
+        description: The name of the template image associated with this collection.
+        type: string
+      trialOnly:
+        description: 'Trial-only collections can be used only during the trial period of your subscription. When the trial expires or you activate your subscription, these collections will be permanently disabled.'
+        type: boolean
+      virtualNetworkId:
+        description: The ID of the Vnet for this collection.
+        type: string
+      vnetName:
+        description: The VNet name associated with this collection.
+        type: string
+  CollectionUsageSummary:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Details of usage summary operation results.
+    properties:
+      etag:
+        description: The etag of the resource.
+        type: string
+      properties:
+        $ref: '#/definitions/CollectionUsageSummaryProperties'
+        description: Collection usage summary information.
+  CollectionUsageSummaryList:
+    description: A list of usage summary details
+    properties:
+      value:
+        description: A list of usage summary details
+        items:
+          $ref: '#/definitions/CollectionUsageSummary'
+        type: array
+  CollectionUsageSummaryListItemProperties:
+    description: The collection usage billing summary.
+    properties:
+      includedUsage:
+        description: "The number of hours used which are included in the billing plan's base rate."
+        format: double
+        type: number
+      overageUsage:
+        description: "The number of hours used beyond the billing plan's included usage, but not exceeding the billing plan's maximum cost."
+        format: double
+        type: number
+      totalUsage:
+        description: The total usage hours by the user.
+        format: double
+        type: number
+      userName:
+        description: "The user's UPN."
+        type: string
+      waivedUsage:
+        description: "The number of hours used beyond the billing plan's maximum cost.  These usage hours are not billed."
+        format: double
+        type: number
+  CollectionUsageSummaryProperties:
+    description: The collection usage billing summary.
+    properties:
+      includedUsage:
+        description: "The number of hours used which are included in the billing plan's base rate."
+        format: double
+        type: number
+      overageUsage:
+        description: "The number of hours used beyond the billing plan's included usage, but not exceeding the billing plan's maximum cost."
+        format: double
+        type: number
+      totalUsage:
+        description: The total usage hours by the user.
+        format: double
+        type: number
+      userName:
+        description: "The user's UPN."
+        type: string
+      waivedUsage:
+        description: "The number of hours used beyond the billing plan's maximum cost.  These usage hours are not billed."
+        format: double
+        type: number
+  DiagnosticOp:
+    description: The application security principal details.
+    properties:
+      id:
+        description: Id of diagnostic operation.
+        type: string
+      result:
+        description: Result of diagnostic operation. Zero indicates success; other values indicate errors.
+        type: string
+  Location:
+    description: The location a resource can be in.
+    properties:
+      displayName:
+        description: The display name of the location
+        type: string
+      locationName:
+        description: The name of the location
+        type: string
+  OperationDisplayInfo:
+    description: Display information about an operation
+    properties:
+      description:
+        description: A description of the resource
+        type: string
+      operation:
+        description: The name of the operation
+        type: string
+      provider:
+        description: The name of the resource provider
+        type: string
+      resource:
+        description: The name of the related resource
+        type: string
+  OperationInfo:
+    description: Information about a particular operation.
+    properties:
+      display:
+        $ref: '#/definitions/OperationDisplayInfo'
+        description: Display information about the operation
+      name:
+        description: The name of the operation being performed on this particular object.
+        type: string
+      origin:
+        description: The intended executor of the operation.
+        type: string
+      properties:
+        additionalProperties:
+          type: string
+        type: object
+  OperationInfoList:
+    description: A list of operation details
+    properties:
+      nextLink:
+        description: URL to use for request paging.
+        type: string
+      value:
+        description: A list of operation details
+        items:
+          $ref: '#/definitions/OperationInfo'
+        type: array
+  PublishedApplicationDetails:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Publishing details of remote application.
+    properties:
+      etag:
+        description: The etag of the resource.
+        type: string
+      nextLink:
+        description: The URL for requesting next page of resources.
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationDetails'
+        description: PublishedApplication properties.
+  PublishedApplicationDetailsListResult:
+    description: Publishing details of remote application.
+    properties:
+      value:
+        description: PublishedApplication properties.
+        items:
+          $ref: '#/definitions/PublishedApplicationDetails'
+        type: array
+  PublishingDetails:
+    description: Result of the operation
+    properties:
+      applicationAlias:
+        description: The application alias.
+        type: string
+      applicationVirtualPath:
+        description: The application virtual path with respect to local machine.
+        type: string
+      errorMessage:
+        description: Error message with respect to operation result.
+        type: string
+      success:
+        description: Whether operation was successful.
+        type: boolean
+  PublishingOperationResult:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Details of publishing / unpublishing operation results.
+    properties:
+      etag:
+        description: The etag of the resource.
+        type: string
+      nextLink:
+        description: The URL for requesting next page of resources.
+        type: string
+      properties:
+        $ref: '#/definitions/PublishingDetails'
+        description: PublishingOperation properties.
+  Resource:
+    properties:
+      id:
+        description: Resource Id
+        readOnly: true
+        type: string
+      location:
+        description: Resource location
+        type: string
+      name:
+        description: Resource name
+        readOnly: true
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags
+        type: object
+      type:
+        description: Resource type
+        readOnly: true
+        type: string
+    required:
+      - location
+    x-ms-azure-resource: true
+  SecurityPrincipal:
+    description: The application security principal details.
+    properties:
+      aadObjectId:
+        description: "For OrgId principals, the principal's Azure ActiveDirectory object ID"
+        type: string
+      description:
+        description: The security principal description.
+        type: string
+      securityPrincipalType:
+        description: The security principal type.
+        enum:
+          - User
+          - Group
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: PrincipalType
+      upn:
+        description: The security principal UPN.
+        type: string
+      userIdType:
+        description: The security principal provider type.
+        enum:
+          - OrgId
+          - MicrosoftAccount
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: PrincipalProviderType
+  SecurityPrincipalErrorDetails:
+    description: The security principal which failed this operation and the error.
+    properties:
+      error:
+        description: 'The security principal operation result error code, if any.'
+        enum:
+          - CouldNotBeResolved
+          - NotFound
+          - AlreadyExists
+          - NotSupported
+          - NotDirsynced
+          - AssignedToAnotherCollection
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: SecurityPrincipalOperationError
+      errorDetails:
+        description: 'Additional details about the error code, if available.'
+        type: string
+      securityPrincipal:
+        description: The security principal name.
+        type: string
+  SecurityPrincipalInfo:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: "Contains details about the security principal and that principal's consent status for this collection."
+    properties:
+      etag:
+        description: The etag of the resource.
+        type: string
+      nextLink:
+        description: The URL for requesting next page of resources.
+        type: string
+      properties:
+        $ref: '#/definitions/SecurityPrincipalInfoProperties'
+        description: SecurityPrincipalInfo properties.
+  SecurityPrincipalInfoProperties:
+    description: "Contains a security principal and that principal's consent status for this collection."
+    properties:
+      status:
+        description: The user consent status.
+        enum:
+          - Unknown
+          - NotFound
+          - Pending
+          - Accepted
+          - Rejected
+          - Ignored
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ConsentStatus
+      user:
+        $ref: '#/definitions/SecurityPrincipal'
+        description: The security principal information.
+  SecurityPrincipalList:
+    description: The list of security principals.
+    properties:
+      value:
+        items:
+          $ref: '#/definitions/SecurityPrincipalInfo'
+        type: array
+  SecurityPrincipalListParameter:
+    description: The list of security principals.
+    properties:
+      SecurityPrincipals:
+        description: The list of security principals.
+        items:
+          $ref: '#/definitions/SecurityPrincipal'
+        type: array
+  SecurityPrincipalOperationErrorDetails:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Operational results of adding or removing a security principal.
+    properties:
+      etag:
+        description: The etag of the resource.
+        type: string
+      nextLink:
+        description: The URL for requesting next page of resources.
+        type: string
+      properties:
+        $ref: '#/definitions/SecurityPrincipalErrorDetails'
+        description: Security principal error details properties.
+  Session:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: The wrapper for the session object
+    properties:
+      etag:
+        description: The etag of the resource.
+        type: string
+      properties:
+        $ref: '#/definitions/SessionProperties'
+        description: A RemoteApp session
+  SessionList:
+    description: The response for the get session list operation.
+    properties:
+      value:
+        description: A list of sessions
+        items:
+          $ref: '#/definitions/Session'
+        type: array
+  SessionProperties:
+    description: The details of a session.
+    properties:
+      logonTimeUtc:
+        description: The UTC time the session started
+        format: date-time
+        type: string
+      state:
+        description: "The session state. Possible values are 'Active', 'Disconnected', 'NoSession', 'Unknown'"
+        enum:
+          - Active
+          - Connected
+          - Disconnected
+          - NoSession
+          - Unknown
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: SessionState
+      userUpn:
+        description: The Upn of the currently active user
+        type: string
+  SessionSendMessageCommandParameter:
+    description: Parameter definition for session commands.
+    properties:
+      message:
+        description: Message to send to the specified user.
+        type: string
+  StartMenuApplication:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Definition containing details of Start Menu applications.
+    properties:
+      etag:
+        description: The etag of the resource.
+        type: string
+      nextLink:
+        description: The URL for requesting next page of resources.
+        type: string
+      properties:
+        $ref: '#/definitions/StartMenuApplicationProperties'
+        description: StartMenuApplication properties.
+  StartMenuApplicationListResult:
+    description: Definition containing details of Start Menu applications.
+    properties:
+      value:
+        description: StartMenuApplication properties.
+        items:
+          $ref: '#/definitions/StartMenuApplication'
+        type: array
+  StartMenuApplicationProperties:
+    description: The StartMenuApplication details.
+    properties:
+      commandLineArguments:
+        description: The command line arguments to launch the application.
+        type: string
+      iconPngUris:
+        additionalProperties:
+          type: string
+        description: 'The available map of icon PNG file URIs for different resolutions (e.g. 16x16, 32x32, 64x64). The key of the map is the first dimension of the PNG resolution.'
+        type: object
+      iconUri:
+        description: The default URI to the application icon png file.
+        type: string
+      startMenuApplicationId:
+        description: The start menu application id.
+        type: string
+      startMenuApplicationName:
+        description: The application name.
+        type: string
+      virtualPath:
+        description: The application image path on the destination machine specified with environment variables for the drive and known system path.
+        type: string
+  SubResource:
+    properties:
+      id:
+        description: Resource Id
+        type: string
+    x-ms-azure-resource: true
+  TemplateImage:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: The wrapper for the template image object
+    properties:
+      etag:
+        description: The etag of the resource.
+        type: string
+      properties:
+        $ref: '#/definitions/TemplateImageProperties'
+        description: A template image
+  TemplateImageList:
+    description: The response for the get template images operation.
+    properties:
+      value:
+        description: A list of template images
+        items:
+          $ref: '#/definitions/TemplateImage'
+        type: array
+  TemplateImageProperties:
+    description: Details of a template image
+    properties:
+      locationList:
+        description: The list of locations where the image can be used
+        items:
+          type: string
+        type: array
+      numberOfLinkedCollections:
+        description: The number of collections linked to the template image.
+        format: int64
+        type: integer
+      officeType:
+        description: If the template image for this collection includes Office this will specify the type.
+        enum:
+          - None
+          - OfficeSAL
+          - Office365
+          - Unknown
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: OfficeType
+      size:
+        description: The image size in bytes
+        format: int64
+        type: integer
+      status:
+        description: The status of the template image
+        enum:
+          - UploadPending
+          - UploadInProgress
+          - UploadComplete
+          - UploadFailed
+          - ImportInProgress
+          - ImportFailed
+          - ImportComplete
+          - ValidationFailed
+          - Ready
+          - Corrupted
+          - Deleting
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: TemplateImageStatus
+      templateImageName:
+        description: The friendly name for the image
+        type: string
+      templateImageType:
+        description: The type of the template image.
+        enum:
+          - CustomerImage
+          - MicrosoftImage
+          - Unknown
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: TemplateImageType
+      trialOnly:
+        description: "A TrialOnly platform template image may be used only during a subscription's RemoteApp trial period. Once billing is activated, a collection using a TrialOnly template image will be permanently disabled."
+        type: boolean
+      uploadCompleteTime:
+        description: The time when the template image upload was completed.
+        format: date-time
+        type: string
+  UsageDetailsInfo:
+    description: URI information about the usage details CSV file
+    properties:
+      extraData:
+        description: URI for the CSV file
+        type: string
+      resultId:
+        description: ID of the CSV file creation operation
+        type: string
+  VirtualMachineDetailsListResult:
+    description: A list of virtual machine details
+    properties:
+      nextLink:
+        description: URL to use for request paging.
+        type: string
+      value:
+        description: A list of virtual machine details
+        items:
+          $ref: '#/definitions/VmDetails'
+        type: array
+  VmCommandDetailsAll:
+    description: The virtual machine details.
+    properties:
+      logoffMessage:
+        description: Message to display to the user.
+        type: string
+      logoffWaitTimeInSeconds:
+        description: Time to wait before restarting the virtual machine.
+        type: integer
+  VmCommandDetailsWrapper:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: A wrapper for virtual machine command details to be used as a parameter
+    properties:
+      etag:
+        description: The etag of the resource.
+        type: string
+      nextLink:
+        description: The URL for requesting next page of resources.
+        type: string
+      properties:
+        $ref: '#/definitions/VmCommandDetailsAll'
+        description: Virtual machine properties
+  VmDetailProperties:
+    description: The virtual machine details.
+    properties:
+      loggedOnUserUpn:
+        description: List of the users logged onto this virtual machine.
+        items:
+          type: string
+        type: array
+      virtualMachineName:
+        description: The virtual machine name.
+        type: string
+  VmDetails:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: The response for the get virtual machine operation.
+    properties:
+      etag:
+        description: The etag of the resource.
+        type: string
+      nextLink:
+        description: The URL for requesting next page of resources.
+        type: string
+      properties:
+        $ref: '#/definitions/VmDetailProperties'
+        description: VmDetails properties.
