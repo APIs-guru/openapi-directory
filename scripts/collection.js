@@ -86,9 +86,9 @@ program
   .action(validateCollection);
 
 program
-  .command('google')
-  .description('add new Google APIs')
-  .action(updateGoogle);
+  .command('leads')
+  .description('add/remove specs from 3rd-party catalogs')
+  .action(updateCatalogLeads);
 
 program
   .command('add')
@@ -297,7 +297,7 @@ function originUrlsToFilenames(specs) {
   return _(specs).mapValues(util.getOriginUrl).invert().value();
 }
 
-function updateGoogle() {
+function updateCatalogLeads() {
   var specs = _.pickBy(util.getSpecs(), function (swagger) {
     //TODO: create more generic mechanism
     var providerName = swagger.info['x-providerName'];
