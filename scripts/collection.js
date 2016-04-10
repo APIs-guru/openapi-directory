@@ -272,16 +272,24 @@ function swaggerToSpecLead(swagger) {
   return spec;
 }
 
+function getCatalogsLeads() {
+  return Promise.all(_.invokeMap(specSources, _.call))
+    .then(function (catalogsLeads) {
+      return _(catalogsLeads).flatten()
+        .keyBy(util.getOriginUrl)
+        .omit(blackListedUrls).value();
+    });
+}
+
 function getSpecLeads(specs) {
   var leads = _(specs).mapValues(swaggerToSpecLead)
     .keyBy(util.getOriginUrl).value();
 
-  return Promise.all(_.invokeMap(specSources, _.call))
+  return getCatalogsLeads()
     .then(function (catalogsLeads) {
-      catalogsLeads = _(catalogsLeads).flatten()
-        .keyBy(util.getOriginUrl)
-        .omit(blackListedUrls).value();
-      return _.assign(leads, catalogsLeads);
+      return _.mapValues(leads, function (lead, url) {
+        return catalogsLeads[url] || lead;
+      });
     });
 }
 
@@ -290,10 +298,14 @@ function originUrlsToFilenames(specs) {
 }
 
 function updateGoogle() {
-  var specs = util.getSpecs();
+  var specs = _.pickBy(util.getSpecs(), function (swagger) {
+    //TODO: create more generic mechanism
+    var providerName = swagger.info['x-providerName'];
+    return ['googleapis.com', 'azure.com', 'windows.net'].indexOf(providerName) !== -1;
+  });
   var oldSpecs = originUrlsToFilenames(specs);
 
-  getSpecLeads(specs)
+  getCatalogsLeads()
   .then(function (newSpecs) {
     var oldURLs = _.keys(oldSpecs);
     var newURLs = _.keys(newSpecs);
