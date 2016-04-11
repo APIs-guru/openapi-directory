@@ -5,34 +5,23 @@ host: management.azure.com
 info:
   description: The Container Service Client.
   title: ContainerServiceClient
-  version: 2015-11-01-preview
+  version: '2016-03-30'
   x-logo:
     backgroundColor: '#333333'
     url: 'https://azure.github.io/images/logo-msft-dark@2x.png'
   x-origin:
     format: swagger
-    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-compute/2015-11-01-preview/swagger/containerService.json'
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-compute/2016-03-30/swagger/containerService.json'
     version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
-  x-serviceName: arm-compute
+  x-serviceName: arm-compute-containerService
 consumes:
   - application/json
   - text/json
 produces:
   - application/json
   - text/json
-securityDefinitions:
-  azure_auth:
-    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
-    description: Azure Active Directory OAuth2 Flow
-    flow: implicit
-    scopes:
-      user_impersonation: impersonate your user account
-    type: oauth2
-security:
-  - azure_auth:
-      - user_impersonation
 parameters:
   ApiVersionParameter:
     description: Client Api Version.
@@ -50,7 +39,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/containerServices':
     get:
       description: The operation to list container services.
-      operationId: ContainerService_ListByResourceGroup
+      operationId: ContainerService_List
       parameters:
         - description: The name of the resource group.
           in: path
@@ -244,7 +233,7 @@ definitions:
         $ref: '#/definitions/ContainerServiceVMDiagnostics'
         description: Profile for container service VM diagnostic agent
   ContainerServiceLinuxProfile:
-    description: Profile for Linux VM
+    description: Profile for Linux VMs
     properties:
       adminUsername:
         description: The administrator username to use for all Linux VMs
@@ -289,7 +278,6 @@ definitions:
       orchestratorType:
         description: Specifies what orchestrator will be used to manage container cluster resources.
         enum:
-          - Mesos
           - SwarmPreview
           - DCOS
         type: string
@@ -354,13 +342,13 @@ definitions:
         readOnly: true
         type: string
   ContainerServiceWindowsProfile:
-    description: Profile for Windows jumpbox
+    description: Profile for Windows VMs
     properties:
       adminPassword:
-        description: The administrator password to use for Windows jumpbox
+        description: The administrator password to use for Windows VMs
         type: string
       adminUsername:
-        description: The administrator username to use for Windows jumpbox
+        description: The administrator username to use for Windows VMs
         type: string
     required:
       - adminUsername
