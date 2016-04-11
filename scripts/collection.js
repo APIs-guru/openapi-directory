@@ -184,8 +184,11 @@ function validatePrefered(specs) {
   });
 
   _.each(preferred, function (versions, id) {
-    if (_.size(versions) === 1)
-      return assert(_.isUndefined(versions[0]) || versions[0] === true);
+    if (_.size(versions) === 1) {
+      assert(_.isUndefined(versions[0]) || versions[0] === true,
+        'Preferred not true in "' + id + '"');
+      return;
+    }
 
     var seenTrue = false;
     _.each(versions, function (value) {
