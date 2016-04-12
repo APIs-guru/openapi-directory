@@ -1213,6 +1213,54 @@ paths:
         name: url_export_id
         required: true
         type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/urls/suggested_filters':
+    parameters:
+      - description: "User's identifier"
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: "Project's identifier"
+        in: path
+        name: project_slug
+        required: true
+        type: string
+      - description: "Analysis' identifier"
+        in: path
+        name: analysis_slug
+        required: true
+        type: string
+    post:
+      description: Return most frequent segments (= suggested patterns in the previous version) for a Botify Query.
+      operationId: getUrlsSuggestedFilters
+      parameters:
+        - in: body
+          name: UrlsAggsQuery
+          schema:
+            $ref: '#/definitions/UrlsAggsQuery'
+        - default: current
+          description: ''
+          enum:
+            - current
+            - new
+          in: query
+          name: area
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '201':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/UrlsAggsQuery'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Return most frequent segments (= suggested patterns in the previous version)
+      tags:
+        - Analysis
   '/analyses/{username}/{project_slug}/{analysis_slug}/urls/{url}':
     get:
       description: Gets the detail of an URL for an analysis

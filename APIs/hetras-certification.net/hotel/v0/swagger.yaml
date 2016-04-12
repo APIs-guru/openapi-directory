@@ -712,20 +712,20 @@ definitions:
       _links:
         additionalProperties:
           $ref: '#/definitions/LinkObject'
-        description: Collection of links to related resources.
+        description: Collection of links to related resources
         type: object
       description:
-        description: Description of the room.
+        description: Description of the room
         type: string
       name:
-        description: Name of the room.
+        description: Name of the room
         type: string
       number:
-        description: Number of the room.
+        description: Number of the room
         type: string
       room_type:
         $ref: '#/definitions/EmbeddedRoomType'
-        description: "Room type of the room.\r\n            \r\n            Contains only the basic properties of the room type."
+        description: Room type of the room. Contains only the basic properties of the room type
       status:
         $ref: '#/definitions/RoomStatus'
         description: Contains information about room status.

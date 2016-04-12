@@ -8425,7 +8425,7 @@ definitions:
         description: "Specifies the disk type to use to create the instance. If not specified, the default is pd-standard, specified using the full URL. For example:\n\nhttps://www.googleapis.com/compute/v1/projects/project/zones/zone/diskTypes/pd-standard \n\nOther values include pd-ssd and local-ssd. If you define this field, you can provide either the full or partial URL. For example, the following are valid values:  \n- https://www.googleapis.com/compute/v1/projects/project/zones/zone/diskTypes/diskType \n- projects/project/zones/zone/diskTypes/diskType \n- zones/zone/diskTypes/diskType"
         type: string
       sourceImage:
-        description: "The source image used to create this disk.\n\nTo create a disk with a private image, specify the image name in the following format:\n\nglobal/images/my-private-image \n\nTo create a disk with a public image, specify the image name and the project that owns the image. For example, you can use a Debian image from the debian-cloud project:\n\nprojects/debian-cloud/global/images/debian-8-jessie-vYYYYMMDD \n\nThe vYYYYMMDD value is the image version. The fully-qualified URL also works in both examples."
+        description: "The source image used to create this disk. If the source image is deleted, this field will not be set.\n\nTo create a disk with one of the public operating system images, specify the image by its family name. For example, specify family/debian-8 to use the latest Debian 8 image:\n\nprojects/debian-cloud/global/images/family/debian-8 \n\nAlternatively, use a specific version of a public operating system image:\n\nprojects/debian-cloud/global/images/debian-8-jessie-vYYYYMMDD \n\nTo create a disk with a private image that you created, specify the image name in the following format:\n\nglobal/images/my-private-image \n\nYou can also specify a private image by its image family, which returns the latest version of the image in that family. Replace the image name with family/family-name:\n\nglobal/images/family/my-private-family"
         type: string
     type: object
   Autoscaler:
@@ -11436,7 +11436,7 @@ definitions:
         description: 'The URL of the network to which this subnetwork belongs, provided by the client when initially creating the subnetwork. Only networks that are in the distributed mode can have subnetworks.'
         type: string
       region:
-        description: '[Output Only] URL of the region where the Subnetwork resides.'
+        description: URL of the region where the Subnetwork resides.
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'

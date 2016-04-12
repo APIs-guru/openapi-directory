@@ -25,12 +25,6 @@ tags:
     name: shows
   - description: Podcast episodes
     name: episodes
-  - description: Search podcast episodes
-    name: episode search
-  - description: Search podcast series
-    name: show search
-  - description: Search people who contributed to a podcast
-    name: people search
   - description: People who contributed to a podcast
     name: people
   - description: Ranks of podcasts from the iTunes charts
@@ -228,7 +222,6 @@ paths:
             $ref: '#/definitions/results'
       tags:
         - episodes
-        - episode search
   '/search/people/{query}':
     get:
       description: This endpoint returns search results for People
@@ -282,7 +275,6 @@ paths:
             $ref: '#/definitions/person_search_results'
       tags:
         - people
-        - people search
   '/search/shows/{query}':
     get:
       description: This endpoint returns search results for Shows
@@ -336,7 +328,6 @@ paths:
             $ref: '#/definitions/show_results'
       tags:
         - shows
-        - show search
   '/shows/{id}':
     get:
       description: This endpoint will return the medatdata for a single show.
@@ -375,6 +366,26 @@ paths:
             $ref: '#/definitions/show_search_result'
       tags:
         - shows
+  '/shows/{id}/stats':
+    get:
+      description: Returns in-depth statistics for the supplied show.
+      parameters:
+        - description: ID of show to fetch
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: related show response
+          schema:
+            $ref: '#/definitions/show_stats_result'
+      tags:
+        - shows
+        - charts
   '/tastemakers/episodes/source/{tastemaker_id}/{n}':
     get:
       description: Returns search results based on what podcast tastemakers are talking about filtered by tastemaker source.
@@ -1210,6 +1221,27 @@ definitions:
     required:
       - id
       - title
+  show_stats_result:
+    properties:
+      day_on_charts:
+        description: Total number of days on the charts since 1 June 2013.
+        type: integer
+      last_month_median:
+        description: The median rank from the previous calendar month. NULL if not on the charts.
+        type: integer
+      last_month_peak:
+        description: The highest rank from the previous calendar month. NULL if not on the charts.
+        type: integer
+      most_recent:
+        description: The rank on the charts from the last 24 hours. NULL if not on the charts.
+        type: integer
+      peak_rank:
+        description: Highest all-time rank since 1 June 2013.
+        type: integer
+      show_id:
+        type: integer
+      show_title:
+        type: string
   shows:
     properties:
       page:
