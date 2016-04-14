@@ -1,0 +1,91 @@
+swagger: '2.0'
+schemes:
+  - https
+host: apitransformer.com
+basePath: /api
+info:
+  contact:
+    email: transform@apimatic.io
+    name: API Transformer
+    url: 'https://apitransformer.com/'
+  description: Transform API Descriptions from/to various formats
+  license:
+    name: MIT
+    url: 'https://opensource.org/licenses/MIT'
+  termsOfService: 'https://apitransformer.com/'
+  title: APIMATIC API Transformer
+  version: '1.0'
+  x-logo:
+    backgroundColor: '#18bbee'
+    url: 'https://apitransformer.com/img/transformer.png'
+  x-origin:
+    format: swagger
+    url: 'https://raw.githubusercontent.com/Mermade/open_api_specifications/master/APIMATIC%20API%20Transformer/swagger.json'
+    version: '2.0'
+  x-providerName: apitransformer.com
+externalDocs:
+  description: API Transformer Website
+  url: 'https://apitransformer.com/'
+consumes:
+  - application/x-www-form-urlencoded
+  - text/plain
+  - multipart/form-data
+produces:
+  - application/json
+  - application/x-yaml
+securityDefinitions: {}
+paths:
+  /transform:
+    post:
+      description: |-
+        Transform API Descriptions from/to various formats e.g., Swagger, API Blueprint, RAML, WADL, Google Discovery, I/O Docs.
+
+        INPUTS
+        API Blueprint
+        Swagger 1.0 - 1.2
+        Swagger 2.0 JSON
+        Swagger 2.0 YAML
+        WADL - W3C 2009
+        Google Discovery
+        RAML 0.8
+        I/O Docs - Mashery
+        HAR 1.2
+        Postman Collection
+        APIMATIC Format
+
+        OUTPUTS
+        API Blueprint
+        Swagger 1.2
+        Swagger 2.0 JSON
+        Swagger 2.0 YAML
+        WADL - W3C 2009
+        RAML 0.8
+        APIMATIC Format
+      operationId: Convert_API
+      parameters:
+        - enum:
+            - swagger12
+            - swagger20json
+            - swagger20yaml
+            - apiblueprint
+            - wadl
+            - raml08
+            - apimatic
+          in: query
+          name: output
+          required: true
+          type: string
+        - in: formData
+          name: url
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/x-yaml
+      responses:
+        '200':
+          description: The converted API specification
+          schema:
+            type: object
+      security: []
+      summary: Transform API Descriptions from/to various formats
