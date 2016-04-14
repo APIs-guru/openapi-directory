@@ -395,7 +395,7 @@ paths:
           in: query
           name: reset
           type: string
-        - description: 'Include trace data in the response. If true, the system will generate AIML trace information for the input. Trace data includes pattern matched, filename, input, template for all recursion levels.'
+        - description: 'Include trace data in the response. If true, the system will generate AIML trace information for the input. Trace data includes pattern matched, filename, input, template for all recursion levels. NOTE: for security reasons, trace does not work with client_name.'
           in: query
           name: trace
           type: string

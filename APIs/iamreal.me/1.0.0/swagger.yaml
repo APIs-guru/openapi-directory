@@ -15,12 +15,12 @@ info:
     version: '1.2'
   x-providerName: iamreal.me
 tags:
+  - description: Validate users phone number via SMS
+    name: sms
   - description: "Validate a user's Social Network profile"
     name: social
   - description: Validate users by comparing live video of user with profile picture
     name: video
-  - description: Validate users phone number via SMS
-    name: sms
 paths:
   '/sms/check/{userId}/':
     get:

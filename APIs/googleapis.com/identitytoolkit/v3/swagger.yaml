@@ -811,6 +811,11 @@ definitions:
       apiKey:
         description: 'Browser API key, needed when making http request to Apiary.'
         type: string
+      authorizedDomains:
+        description: Authorized domains for widget redirect.
+        items:
+          type: string
+        type: array
       changeEmailTemplate:
         $ref: '#/definitions/EmailTemplate'
         description: Change email template.
@@ -1083,6 +1088,10 @@ definitions:
       newEmail:
         description: The new email the user attempts to change to.
         type: string
+      passwordHash:
+        description: "The user's hashed password."
+        format: byte
+        type: string
       photoUrl:
         description: The photo url of the user.
         type: string
@@ -1300,6 +1309,9 @@ definitions:
         description: The lifetime in seconds of the OAuth2 access token.
         format: int32
         type: integer
+      oauthIdToken:
+        description: The OIDC id token.
+        type: string
       oauthRequestToken:
         description: The user approved request token for the OpenID OAuth extension.
         type: string

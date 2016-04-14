@@ -997,7 +997,7 @@ definitions:
         $ref: '#/definitions/DatasetReference'
         description: '[Required] A reference that identifies the dataset.'
       defaultTableExpirationMs:
-        description: "[Experimental] The default lifetime of all tables in the dataset, in milliseconds. The minimum value is 3600000 milliseconds (one hour). Once this property is set, all newly-created tables in the dataset will have an expirationTime property set to the creation time plus the value in this property, and changing the value will only affect new tables, not existing ones. When the expirationTime for a given table is reached, that table will be deleted automatically. If a table's expirationTime is modified or removed before the table expires, or if you provide an explicit expirationTime when creating a table, that value takes precedence over the default expiration time indicated by this property."
+        description: "[Optional] The default lifetime of all tables in the dataset, in milliseconds. The minimum value is 3600000 milliseconds (one hour). Once this property is set, all newly-created tables in the dataset will have an expirationTime property set to the creation time plus the value in this property, and changing the value will only affect new tables, not existing ones. When the expirationTime for a given table is reached, that table will be deleted automatically. If a table's expirationTime is modified or removed before the table expires, or if you provide an explicit expirationTime when creating a table, that value takes precedence over the default expiration time indicated by this property."
         format: int64
         type: string
       description:
@@ -1223,6 +1223,14 @@ definitions:
       totalRows:
         description: 'The total number of rows in the complete query result set, which can be more than the number of rows in this single page of results. Present only when the query completes successfully.'
         format: uint64
+        type: string
+    type: object
+  IntervalPartitionConfiguration:
+    properties:
+      expirationMs:
+        format: int64
+        type: string
+      type:
         type: string
     type: object
   Job:
@@ -1785,6 +1793,11 @@ definitions:
         description: '[Output-only] The number of rows of data in this table, excluding any data in the streaming buffer.'
         format: uint64
         type: string
+      partitionConfigurations:
+        description: '[Experimental] List of partition configurations for this table. Currently only one configuration can be specified and it can only be an interval partition with type daily.'
+        items:
+          $ref: '#/definitions/TablePartitionConfiguration'
+        type: array
       schema:
         $ref: '#/definitions/TableSchema'
         description: '[Optional] Describes the schema of this table.'
@@ -1897,7 +1910,7 @@ definitions:
         description: '[Required] The field name. The name must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_), and must start with a letter or underscore. The maximum length is 128 characters.'
         type: string
       type:
-        description: '[Required] The field data type. Possible values include STRING, INTEGER, FLOAT, BOOLEAN, TIMESTAMP or RECORD (where RECORD indicates that the field contains a nested schema).'
+        description: '[Required] The field data type. Possible values include STRING, BYTES, INTEGER, FLOAT, BOOLEAN, TIMESTAMP or RECORD (where RECORD indicates that the field contains a nested schema).'
         type: string
     type: object
   TableList:
@@ -1938,6 +1951,13 @@ definitions:
         description: The total number of tables in the dataset.
         format: int32
         type: integer
+    type: object
+  TablePartitionConfiguration:
+    description: '[Required] A partition configuration. Only one type of partition should be configured.'
+    properties:
+      interval:
+        $ref: '#/definitions/IntervalPartitionConfiguration'
+        description: '[Pick one] Configures an interval partition.'
     type: object
   TableReference:
     properties:

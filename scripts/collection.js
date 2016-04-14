@@ -19,6 +19,13 @@ var Promise = require('bluebird');
 var makeRequest = require('makeRequest');
 var util = require('./util');
 
+var specSources = [
+  require('./spec_sources/google'),
+  require('./spec_sources/azure')
+];
+
+var blackListedUrls = util.readYaml(__dirname + '/spec_sources/blacklist.yaml');
+
 var jsondiffpatch = require('jsondiffpatch').create({
   arrays: {
     includeValueOnMove: true
@@ -30,6 +37,18 @@ var jsondiffpatch = require('jsondiffpatch').create({
   }
 });
 
+converter.ResourceReaders.url = function (url, callback) {
+  var options = {
+    headers: {
+      'Accept': 'application/json,*/*',
+    }
+  };
+  makeRequest('get', url, options)
+    .spread(function (response, data) {
+      return data;
+    })
+    .asCallback(callback);
+}
 var program = require('commander');
 
 var errExitCode = 255;
@@ -50,6 +69,12 @@ program
   .action(refreshCollection);
 
 program
+  .command('fixup')
+  .description('update "fixup.yaml" for specified Swagger')
+  .arguments('<Swagger>')
+  .action(fixupSwagger);
+
+program
   .command('update')
   .description('run update')
   .arguments('[DIR]')
@@ -61,9 +86,9 @@ program
   .action(validateCollection);
 
 program
-  .command('google')
-  .description('add new Google APIs')
-  .action(updateGoogle);
+  .command('leads')
+  .description('add/remove specs from 3rd-party catalogs')
+  .action(updateCatalogLeads);
 
 program
   .command('add')
@@ -74,12 +99,6 @@ program
   .action(addToCollection);
 
 program.parse(process.argv);
-
-process.on("unhandledRejection", function(reason, promise) {
-  process.exitCode = errExitCode;
-  //TODO: better solution
-  setTimeout(function () { throw reason; });
-});
 
 function urlsCollection() {
   _.each(util.getSpecs(), function (swagger) {
@@ -94,35 +113,42 @@ function refreshCollection(dir) {
   });
 }
 
-function swaggerToSpecLead(swagger) {
-  var spec = {
-    info: {
-      'x-serviceName': util.getServiceName(swagger),
-      'x-origin': util.getOrigin(swagger)
-    }
-  };
-  removeEmpty(spec);
-  return spec;
+function fixupSwagger(swaggerPath) {
+  var swagger = util.readYaml(swaggerPath);
+  editFile(util.Yaml2String(swagger))
+    .then(function (editedSwagger) {
+      editedSwagger = YAML.safeLoad(editedSwagger);
+      saveSwaggerFixup(swagger, editedSwagger);
+    })
+    .done();
 }
 
 function updateCollection(dir) {
   var specs = util.getSpecs(dir);
-  async.forEachOfSeries(specs, function (swagger, filename, asyncCb) {
-    writeSpec(swaggerToSpecLead(swagger), function (error, result) {
-      if (error) {
-        logError(error, result);
-        return asyncCb(error);
-      }
+  var files = originUrlsToFilenames(specs);
 
-      var newFilename = util.getSwaggerPath(result.swagger);
-      if (newFilename !== filename)
-        asyncCb(Error("Spec was moved to new location: " + newFilename));
-      asyncCb(null);
+  getSpecLeads(specs)
+   .then(function (leads) {
+     var knownUrls = _(specs).values().map(util.getOriginUrl).value();
+     return _(leads).pick(knownUrls).values().value();
+   })
+   .each(function (lead) {
+    //TODO: remove wrapper
+    return Promise.fromCallback(function (promiseCb) {
+      writeSpec(lead, function (error, result) {
+        if (error) {
+          logError(error, result);
+          return promiseCb(error);
+        }
+
+        var oldFilename = files[util.getOriginUrl(lead)];
+        var newFilename = util.getSwaggerPath(result.swagger);
+        if (newFilename !== oldFilename)
+          return promiseCb(Error("Spec was moved from '" + oldFilename + '" to "' + newFilename + '"'));
+        promiseCb(null);
+      });
     });
-  }, function (error) {
-    if (error)
-      throw error;
-  });
+  }).done();
 }
 
 function validateCollection() {
@@ -133,6 +159,7 @@ function validateCollection() {
   var foundErrors = false;
   async.forEachOfSeries(specs, function (swagger, filename, asyncCb) {
     console.error('======================== ' + filename + ' ================');
+    assert(!_.isEmpty(swagger.paths), 'Spec should have operations');
     validateSwagger(swagger, function (errors, warnings) {
       foundErrors = !_.isEmpty(errors) || foundErrors;
       if (errors)
@@ -149,21 +176,24 @@ function validateCollection() {
 }
 
 function validatePrefered(specs) {
-  var prefered = {}
+  var preferred = {}
   _.each(specs, function (swagger) {
     var id = util.getApiId(swagger);
-    prefered[id] = prefered[id] || [];
-    prefered[id].push(swagger.info['x-preferred']);
+    preferred[id] = preferred[id] || [];
+    preferred[id].push(swagger.info['x-preferred']);
   });
 
-  _.each(prefered, function (versions, id) {
-    if (_.size(versions) === 1)
-      return assert(_.isUndefined(versions[0]) || versions[0] === true);
+  _.each(preferred, function (versions, id) {
+    if (_.size(versions) === 1) {
+      assert(_.isUndefined(versions[0]) || versions[0] === true,
+        'Preferred not true in "' + id + '"');
+      return;
+    }
 
     var seenTrue = false;
     _.each(versions, function (value) {
       assert(_.isBoolean(value), 'Non boolean value for "x-preferred" in "' + id + '"');
-      assert(value !== true || !seenTrue, 'Multiply prefered versions in "' + id + '"');
+      assert(value !== true || !seenTrue, 'Multiply preferred versions in "' + id + '"');
       seenTrue = value;
     });
   });
@@ -181,42 +211,37 @@ function addToCollection(type, url, command) {
     if (!command.fixup || !result.spec)
       return logError(error, result);
 
-    editFile(errorToString(error, result), function (error, data) {
-      if (error) {
-        console.error(error);
-        process.exitCode = errExitCode;
-        return;
-      }
+    editFile(errorToString(error, result))
+      .then(function (data) {
+        var match = data.match(/^\++ Begin.*$((?:.|\n)*?)^\?+ Swagger.*$((?:.|\n)*?)^[!*-]/m);
+        if (!match || !match[1] || !match[2])
+          throw Error('Can not match edited Swagger');
 
-      var match = data.match(/^\++ Begin.*$((?:.|\n)*?)^\?+ Swagger.*$((?:.|\n)*?)^[!*-]/m);
-      if (!match || !match[1] || !match[2]) {
-        console.error('Can not match edited Swagger');
-        process.exitCode = errExitCode;
-        return;
-      }
+        if (type !== 'swagger_2') {
+          var editedOrigin = YAML.safeLoad(match[1]);
+          saveFixup(getOriginFixupPath(result.spec), serilazeSpec(result.spec), editedOrigin);
+        }
 
-      if (type !== 'swagger_2') {
-        var editedOrigin = YAML.safeLoad(match[1]);
-        saveFixup(getOriginFixupPath(result.spec), serilazeSpec(result.spec), editedOrigin);
-      }
-
-      if (!_.isUndefined(result.swagger)) {
-        var editedSwagger = YAML.safeLoad(match[2]);
-        saveFixup(util.getSwaggerPath(result.swagger, 'fixup.yaml'), result.swagger, editedSwagger);
-      }
-    });
+        if (!_.isUndefined(result.swagger)) {
+          var editedSwagger = YAML.safeLoad(match[2]);
+          saveSwaggerFixup(result.swagger, editedSwagger);
+        }
+      })
+      .done();
   });
 }
 
-function editFile(data, cb) {
-  var tmpfile = mktemp('/tmp/XXXXXX.fixup.txt');
-  fs.writeFileSync(tmpfile, data);
+function editFile(str, cb) {
+  var tmpfile = mktemp('/tmp/XXXXXX.txt');
+  fs.writeFileSync(tmpfile, str);
 
-  editor(tmpfile, function (code) {
-    if (code !== 0)
-      return cb(Error('Editor closed with code ' + code));
+  return Promise.fromCallback(function (promiseCb) {
+    editor(tmpfile, function (code) {
+      if (code !== 0)
+        return promiseCb(Error('Editor closed with code ' + code));
 
-    cb(null, fs.readFileSync(tmpfile, 'utf-8'));
+      promiseCb(null, fs.readFileSync(tmpfile, 'utf-8'));
+    });
   });
 }
 
@@ -224,64 +249,73 @@ function getOriginFixupPath(spec) {
   return '../fixes/' + encodeURIComponent(spec.source) + '.yaml';
 }
 
-function saveFixup(fixupPath, swagger, editedSwagger) {
+function saveSwaggerFixup(swagger, editedSwagger) {
+  saveFixup(util.getSwaggerPath(swagger, 'fixup.yaml'), swagger, editedSwagger);
+}
+
+function saveFixup(fixupPath, spec, editedSpec) {
   //Before diff we need to unpatch, it's a way to appeand changes
   var fixup = util.readYaml(fixupPath);
   if (fixup)
-    jsondiffpatch.unpatch(swagger, fixup);
+    jsondiffpatch.unpatch(spec, fixup);
 
-  var diff = jsondiffpatch.diff(swagger, editedSwagger);
+  var diff = jsondiffpatch.diff(spec, editedSpec);
   if (!_.isEqual(diff, fixup))
     util.saveYaml(fixupPath, diff);
 }
 
-function getGoogleSpecLeads() {
-  return makeRequest('get', 'https://www.googleapis.com/discovery/v1/apis')
-    .spread(function(response, data) {
-      data = JSON.parse(data);
-      assert.equal(data.kind, 'discovery#directoryList');
-      assert.equal(data.discoveryVersion, 'v1');
+function swaggerToSpecLead(swagger) {
+  var spec = {
+    info: {
+      'x-serviceName': util.getServiceName(swagger),
+      'x-origin': util.getOrigin(swagger)
+    }
+  };
+  removeEmpty(spec);
+  return spec;
+}
 
-      return _(data.items).filter(function (api) {
-        //blacklist
-        return ([
-               //duplicate preferred
-               'genomics:v1beta2',
-               //no paths
-               'iam:v1alpha1',
-             ].indexOf(api.id) === -1);
-      }).map(function (value) {
-        return {
-          info: {
-            'x-serviceName': value.name,
-            'x-preferred': value.preferred,
-            'x-origin': {
-              url: value.discoveryRestUrl,
-              format: 'google',
-              version: 'v1'
-            }
-          }
-        };
-      }).value();
+function getCatalogsLeads() {
+  return Promise.all(_.invokeMap(specSources, _.call))
+    .then(function (catalogsLeads) {
+      return _(catalogsLeads).flatten()
+        .keyBy(util.getOriginUrl)
+        .omit(blackListedUrls).value();
     });
 }
 
-function updateGoogle() {
-  var oldSpecs = _(util.getSpecs()).pickBy({
-    info: {
-      'x-providerName': 'googleapis.com'
-    }
-  }).mapValues(util.getOriginUrl).invert().value();
+function getSpecLeads(specs) {
+  var leads = _(specs).mapValues(swaggerToSpecLead)
+    .keyBy(util.getOriginUrl).value();
 
-  getGoogleSpecLeads().then(function (leads) {
-    var newSpecs = _.keyBy(leads, util.getOriginUrl);
+  return getCatalogsLeads()
+    .then(function (catalogsLeads) {
+      return _.mapValues(leads, function (lead, url) {
+        return catalogsLeads[url] || lead;
+      });
+    });
+}
 
+function originUrlsToFilenames(specs) {
+  return _(specs).mapValues(util.getOriginUrl).invert().value();
+}
+
+function updateCatalogLeads() {
+  var specs = _.pickBy(util.getSpecs(), function (swagger) {
+    //TODO: create more generic mechanism
+    var providerName = swagger.info['x-providerName'];
+    return ['googleapis.com', 'azure.com', 'windows.net'].indexOf(providerName) !== -1;
+  });
+  var oldSpecs = originUrlsToFilenames(specs);
+
+  getCatalogsLeads()
+  .then(function (newSpecs) {
     var oldURLs = _.keys(oldSpecs);
     var newURLs = _.keys(newSpecs);
     var added = _.difference(newURLs, oldURLs);
     var deleted = _.difference(oldURLs, newURLs);
 
-    Promise.each(added, function (url) {
+    return Promise.each(added, function (url) {
       //FIXME: remove wrapper
       return Promise.fromCallback(function (promiseCb) {
         writeSpec(newSpecs[url], function (error, result) {
@@ -297,7 +331,8 @@ function updateGoogle() {
         console.log('!!! Delete ' + oldSpecs[url]);
       });
     });
-  });
+  })
+  .done();
 }
 
 function writeSpec(source, type, exPatch, callback) {
@@ -309,13 +344,11 @@ function writeSpec(source, type, exPatch, callback) {
     callback = type;
     type = getSpecType(spec);
 
-    exPatch = spec;
+    exPatch = _.cloneDeep(spec);
     delete exPatch.info['x-origin'];
   }
 
-  console.error(source);
-  var getSpecTask = converter.getSpec.bind(this, source, type);
-  async.retry({}, getSpecTask, function (err, spec) {
+  converter.getSpec(source, type, function (err, spec) {
     assert(!err, err);
 
     var fixup = util.readYaml(getOriginFixupPath(spec));
@@ -343,7 +376,7 @@ function writeSpec(source, type, exPatch, callback) {
 
       result.swagger = swagger;
 
-      function done(errors, warnings) {
+      validateAndFix(swagger, function (errors, warnings) {
         result.warnings = warnings;
 
         if (errors)
@@ -354,22 +387,20 @@ function writeSpec(source, type, exPatch, callback) {
 
         util.saveSwagger(swagger);
         callback(null, result);
-      }
-
-      function validateAndFix() {
-        validateSwagger(swagger, function (errors, warnings) {
-          if (!_.isArray(errors))
-            return done(errors, warnings);
-
-          if (fixSpec(swagger, errors))
-            validateAndFix();
-          else
-            validateSwagger(swagger, done);
-        });
-      }
-
-      validateAndFix();
+      });
     });
+  });
+}
+
+function validateAndFix(swagger, callback) {
+  validateSwagger(swagger, function (errors, warnings) {
+    if (!_.isArray(errors))
+      return callback(errors, warnings);
+
+    if (fixSpec(swagger, errors))
+      validateAndFix(swagger, callback);
+    else
+      validateSwagger(swagger, callback);
   });
 }
 
@@ -762,7 +793,8 @@ function convertToSwagger(spec, callback) {
 }
 
 function parseHost(swagger) {
-  assert(swagger.host);
+  assert(swagger.host, 'Missing host');
+  assert(!/^localhost/.test(swagger.host), 'Can not add localhost API');
   var p = parseDomain(swagger.host);
   p.domain = p.domain.replace(/^www.?/, '')
   p.subdomain = p.subdomain.replace(/^www.?/, '')

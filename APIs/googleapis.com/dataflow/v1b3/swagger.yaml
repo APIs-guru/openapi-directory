@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: 'Google Cloud Dataflow is a simple, flexible, and powerful system you can use to perform data processing tasks.'
+  description: 'Develops and executes data processing patterns like ETL, batch computation, and continuous computation.'
   title: Google Dataflow
   version: v1b3
   x-apiClientRegistration:
@@ -153,6 +153,14 @@ paths:
           in: path
           name: projectId
           required: true
+          type: string
+        - description: The kind of filter to use.
+          enum:
+            - ALL
+            - TERMINATED
+            - ACTIVE
+          in: query
+          name: filter
           type: string
         - description: Level of information requested in response. Default is SUMMARY.
           enum:
@@ -1925,6 +1933,10 @@ definitions:
       network:
         description: 'Network to which VMs will be assigned. If empty or unspecified, the service will use the network "default".'
         type: string
+      numThreadsPerWorker:
+        description: 'The number of threads per worker harness. If empty or unspecified, the service will choose a number of threads (according to the number of cores on the selected machine type for batch, or 1 by convention for streaming).'
+        format: int32
+        type: integer
       numWorkers:
         description: 'Number of Google Compute Engine workers in this pool needed to execute the job. If zero or unspecified, the service will attempt to choose a reasonable default.'
         format: int32

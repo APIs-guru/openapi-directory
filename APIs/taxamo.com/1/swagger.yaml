@@ -20,28 +20,28 @@ securityDefinitions:
     name: Token
     type: apiKey
 tags:
-  - description: Refunds
-    name: refunds
-  - description: Payments
-    name: payments
-  - description: Invoices
-    name: invoices
-  - description: Transactions
-    name: transactions
-  - description: Tax
-    name: tax
+  - description: Dictionaries
+    name: dictionaries
   - description: GeoIP
     name: geoip
-  - description: Statistics
-    name: statistics
+  - description: Invoices
+    name: invoices
+  - description: Payments
+    name: payments
+  - description: Refunds
+    name: refunds
   - description: Reporting
     name: reporting
   - description: Settlement
     name: settlement
+  - description: Statistics
+    name: statistics
+  - description: Tax
+    name: tax
+  - description: Transactions
+    name: transactions
   - description: Verification
     name: verification
-  - description: Dictionaries
-    name: dictionaries
 paths:
   /api/v1/dictionaries/countries:
     get:

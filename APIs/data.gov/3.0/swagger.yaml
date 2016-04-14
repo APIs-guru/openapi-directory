@@ -25,10 +25,10 @@ securityDefinitions:
 security:
   - api_key: []
 tags:
-  - description: Operations about Documents
-    name: documents
   - description: Operations about Dockets
     name: dockets
+  - description: Operations about Documents
+    name: documents
 paths:
   '/docket.{response_format}':
     get:

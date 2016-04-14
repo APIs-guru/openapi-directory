@@ -15,32 +15,32 @@ info:
     version: '1.2'
   x-providerName: backupify.com
 tags:
-  - description: 'Backup index, retrieval, and creation'
-    name: backups
-  - description: BackupDefinition index and retrieval
-    name: backup_definitions
   - description: 'BackupDefinition Variable index, creation, retrieval, and modification'
     name: backup_definition_variables
-  - description: 'BackupInstance creation, retrieval, backup, and export'
-    name: backup_instances
+  - description: BackupDefinition index and retrieval
+    name: backup_definitions
   - description: BackupInstance Endpoints index and retrieval
     name: backup_instance_endpoints
   - description: 'BackupInstance Variable index, creation, retrieval, and modification'
     name: backup_instance_variables
+  - description: 'BackupInstance creation, retrieval, backup, and export'
+    name: backup_instances
+  - description: 'Backup index, retrieval, and creation'
+    name: backups
   - description: 'Customer index, creation, retrieval, and modification'
     name: customers
   - description: EndpointRecord index and retrieval
     name: endpoint_records
   - description: 'Export index, retrieval, and creation'
     name: exports
+  - description: Log viewer
+    name: logs
   - description: OAuth2 Access Token retrieval
     name: tokens
   - description: Simple utilities for testing various API functions
     name: utils
   - description: Vendor retrieival
     name: vendors
-  - description: Log viewer
-    name: logs
 paths:
   /oauth/token:
     post:

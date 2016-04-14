@@ -23,18 +23,18 @@ securityDefinitions:
 security:
   - user_key: []
 tags:
-  - description: Charity NTEE Classification/Categories API Test
-    name: categories
-  - description: Charity Search Summary API Test
-    name: summary
-  - description: Charity Basic API Test
-    name: details
   - description: Charity Financial API Test
     name: CharityFinancial
-  - description: Charity GeoLocation API Test
-    name: GeoLocation
   - description: Charity Premium API Test
     name: CharityPremium
+  - description: Charity GeoLocation API Test
+    name: GeoLocation
+  - description: Charity NTEE Classification/Categories API Test
+    name: categories
+  - description: Charity Basic API Test
+    name: details
+  - description: Charity Search Summary API Test
+    name: summary
 paths:
   /v1/categories:
     post:

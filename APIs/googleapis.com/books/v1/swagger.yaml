@@ -2993,6 +2993,16 @@ definitions:
     properties:
       body:
         type: string
+      crmExperimentIds:
+        description: The list of crm experiment ids.
+        items:
+          format: int64
+          type: string
+        type: array
+      doc_id:
+        type: string
+      doc_type:
+        type: string
       dont_show_notification:
         type: boolean
       iconUrl:
@@ -3415,6 +3425,19 @@ definitions:
             description: 'Whether this volume is purchased, sample, pd download etc.'
             format: int32
             type: integer
+          familySharing:
+            description: Information on the ability to share with the family.
+            properties:
+              familyRole:
+                description: The role of the user in the family.
+                type: string
+              isSharingAllowed:
+                description: 'Whether or not this volume can be shared with the family by the user. This includes sharing eligibility of both the volume and the user. If the value is true, the user can initiate a family sharing action.'
+                type: boolean
+              isSharingDisabledByFop:
+                description: Whether or not sharing this volume is temporarily disabled due to issues with the Family Wallet.
+                type: boolean
+            type: object
           isFamilySharedFromUser:
             description: Whether or not the user shared this volume with the family.
             type: boolean
@@ -3422,7 +3445,10 @@ definitions:
             description: Whether or not the user received this volume through family sharing.
             type: boolean
           isFamilySharingAllowed:
-            description: 'Whether or not this volume can be shared with the family by the user. This includes sharing eligibility of both the volume and the user. If the value is true, the user can initiate a family sharing action.'
+            description: 'Deprecated: Replaced by familySharing.'
+            type: boolean
+          isFamilySharingDisabledByFop:
+            description: 'Deprecated: Replaced by familySharing.'
             type: boolean
           isInMyBooks:
             description: 'Whether or not this volume is currently in "my books."'

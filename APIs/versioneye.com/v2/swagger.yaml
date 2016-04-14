@@ -15,14 +15,14 @@ info:
     version: '1.1'
   x-providerName: versioneye.com
 tags:
-  - name: products
-  - name: services
-  - name: projects
-  - name: sessions
-  - name: me
-  - name: users
   - name: github
+  - name: me
+  - name: products
+  - name: projects
   - name: security
+  - name: services
+  - name: sessions
+  - name: users
 paths:
   /v2/github:
     get:
@@ -612,6 +612,11 @@ paths:
         - description: The name of the team in the organisation this project should be assigned to.
           in: formData
           name: team_name
+          required: false
+          type: string
+        - description: "If 'true' this project will not show up in the UI and gets removed later."
+          in: formData
+          name: temp
           required: false
           type: string
       responses:

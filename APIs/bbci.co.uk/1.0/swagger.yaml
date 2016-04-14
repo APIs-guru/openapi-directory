@@ -1,0 +1,2138 @@
+swagger: '2.0'
+schemes:
+  - http
+  - https
+host: ibl.api.bbci.co.uk
+basePath: /ibl/v1
+info:
+  contact:
+    email: ibl-team@lists.forge.bbc.co.uk
+    name: Open iBL Project
+    url: 'http://developer.bbc.co.uk/'
+  description: BBC iPlayer Business logic Layer
+  license:
+    name: MIT
+    url: 'https://opensource.org/licenses/MIT'
+  title: BBC iPlayer Business Layer
+  version: '1.0'
+  x-logo:
+    backgroundColor: white
+    url: 'http://static.bbci.co.uk/tviplayer/1.101.2/img/navigation/iplayer_pink.svg'
+  x-origin:
+    format: swagger
+    url: 'https://raw.githubusercontent.com/Mermade/bbcparse/master/iblApi/swagger.json'
+    version: '2.0'
+  x-providerName: bbci.co.uk
+  x-release: '366'
+  x-schema-id: 'https://ibl.api.bbci.co.uk/ibl/v1/schema/ibl.json'
+externalDocs:
+  description: BBC iPlayer documentation
+  url: 'http://smethur.st/posts/176135860'
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  api_key:
+    in: query
+    name: api_key
+    type: apiKey
+security:
+  - api_key: []
+paths:
+  '/atoz/{letter}/programmes':
+    get:
+      description: Get programmes by initial letter
+      operationId: Get_Programmes AtoZ search_
+      parameters:
+        - in: path
+          name: letter
+          pattern: '[a-z](0-9)'
+          required: true
+          type: string
+        - enum:
+            - mobile
+            - tv
+            - web
+          in: query
+          name: rights
+          required: true
+          type: string
+        - format: int64
+          in: query
+          name: page
+          required: true
+          type: integer
+        - format: int64
+          in: query
+          name: per_page
+          required: true
+          type: integer
+        - in: query
+          maximum: 4
+          minimum: 1
+          name: initial_child_count
+          required: true
+          type: integer
+        - enum:
+            - title
+          in: query
+          name: sort
+          required: true
+          type: string
+        - enum:
+            - asc
+            - desc
+          in: query
+          name: sort_direction
+          required: true
+          type: string
+        - enum:
+            - all
+            - available
+          in: query
+          name: availability
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Programmes
+  /categories:
+    get:
+      description: Get top-level categories
+      operationId: Get_Categories_
+      parameters:
+        - enum:
+            - en
+            - cy
+            - ga
+            - gd
+          in: query
+          name: lang
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Categories
+  '/categories/{category}':
+    get:
+      description: Get sub-categories
+      operationId: Get_Sub-categories_
+      parameters:
+        - in: path
+          name: category
+          required: true
+          type: string
+        - enum:
+            - en
+            - cy
+            - ga
+            - gd
+          in: query
+          name: lang
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Categories
+  '/categories/{category}/highlights':
+    get:
+      description: Get highlights by category
+      operationId: Get_Highlights by category_
+      parameters:
+        - in: path
+          name: category
+          required: true
+          type: string
+        - enum:
+            - en
+            - cy
+            - ga
+            - gd
+          in: query
+          name: lang
+          required: true
+          type: string
+        - enum:
+            - mobile
+            - tv
+            - web
+          in: query
+          name: rights
+          required: true
+          type: string
+        - enum:
+            - all
+            - available
+          in: query
+          name: availability
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Programmes
+  '/categories/{category}/programmes':
+    get:
+      description: Get programmes by category
+      operationId: Get_Programmes by category_
+      parameters:
+        - in: path
+          name: category
+          required: true
+          type: string
+        - enum:
+            - en
+            - cy
+            - ga
+            - gd
+          in: query
+          name: lang
+          required: true
+          type: string
+        - enum:
+            - mobile
+            - tv
+            - web
+          in: query
+          name: rights
+          required: true
+          type: string
+        - enum:
+            - all
+            - available
+          in: query
+          name: availability
+          required: true
+          type: string
+        - format: int64
+          in: query
+          name: page
+          required: true
+          type: integer
+        - format: int64
+          in: query
+          name: per_page
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Programmes
+  /channels:
+    get:
+      description: Get channels
+      operationId: Get_Channels_
+      parameters:
+        - in: query
+          name: region
+          required: false
+          type: string
+        - enum:
+            - en
+            - cy
+            - ga
+            - gd
+          in: query
+          name: lang
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Channels
+  '/channels/{channel}/broadcasts':
+    get:
+      description: Get broadcasts by channel
+      operationId: Get_Broadcasts by channel_
+      parameters:
+        - in: path
+          name: channel
+          required: true
+          type: string
+        - enum:
+            - en
+            - cy
+            - ga
+            - gd
+          in: query
+          name: lang
+          required: true
+          type: string
+        - enum:
+            - mobile
+            - tv
+            - web
+          in: query
+          name: rights
+          required: true
+          type: string
+        - enum:
+            - all
+            - available
+          in: query
+          name: availability
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Programmes
+  '/channels/{channel}/highlights':
+    get:
+      description: Get highlights by channel
+      operationId: Get_Highlights by channel_
+      parameters:
+        - in: path
+          name: channel
+          required: true
+          type: string
+        - enum:
+            - en
+            - cy
+            - ga
+            - gd
+          in: query
+          name: lang
+          required: true
+          type: string
+        - enum:
+            - mobile
+            - tv
+            - web
+          in: query
+          name: rights
+          required: true
+          type: string
+        - enum:
+            - all
+            - available
+          in: query
+          name: availability
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Programmes
+  '/channels/{channel}/programmes':
+    get:
+      description: Get programmes by channel
+      operationId: Get_Programmes by channel_
+      parameters:
+        - in: path
+          name: channel
+          required: true
+          type: string
+        - enum:
+            - en
+            - cy
+            - ga
+            - gd
+          in: query
+          name: lang
+          required: true
+          type: string
+        - enum:
+            - mobile
+            - tv
+            - web
+          in: query
+          name: rights
+          required: true
+          type: string
+        - enum:
+            - all
+            - available
+          in: query
+          name: availability
+          required: true
+          type: string
+        - format: int64
+          in: query
+          name: page
+          required: true
+          type: integer
+        - format: int64
+          in: query
+          name: per_page
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Programmes
+  '/channels/{channel}/schedule/{date}':
+    get:
+      description: Get schedule by channel
+      operationId: Get_Schedule by channel_
+      parameters:
+        - in: path
+          name: channel
+          required: true
+          type: string
+        - in: path
+          name: date
+          required: true
+          type: string
+        - enum:
+            - en
+            - cy
+            - ga
+            - gd
+          in: query
+          name: lang
+          required: true
+          type: string
+        - enum:
+            - mobile
+            - tv
+            - web
+          in: query
+          name: rights
+          required: true
+          type: string
+        - enum:
+            - all
+            - available
+          in: query
+          name: availability
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Programmes
+  '/episodes/{pid}':
+    get:
+      description: Get programme by PID
+      operationId: Get_Programme by PID_
+      parameters:
+        - in: path
+          minLength: 8
+          name: pid
+          pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+          required: true
+          type: string
+        - enum:
+            - mobile
+            - tv
+            - web
+          in: query
+          name: rights
+          required: true
+          type: string
+        - enum:
+            - all
+            - available
+          in: query
+          name: availability
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Programmes
+  '/episodes/{pid}/prerolls':
+    get:
+      description: Get Trailers (pre-rolls)
+      operationId: Get_Trailers (pre-rolls)_
+      parameters:
+        - in: path
+          minLength: 8
+          name: pid
+          pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+          required: true
+          type: string
+        - enum:
+            - mobile
+            - tv
+            - web
+          in: query
+          name: rights
+          required: true
+          type: string
+        - enum:
+            - all
+            - available
+          in: query
+          name: availability
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Programmes
+  '/episodes/{pid}/recommendations':
+    get:
+      description: Get programme recommendations
+      operationId: Get_Programme recommendations_
+      parameters:
+        - in: path
+          minLength: 8
+          name: pid
+          pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+          required: true
+          type: string
+        - enum:
+            - mobile
+            - tv
+            - web
+          in: query
+          name: rights
+          required: true
+          type: string
+        - enum:
+            - all
+            - available
+          in: query
+          name: availability
+          required: true
+          type: string
+        - format: int64
+          in: query
+          name: page
+          required: true
+          type: integer
+        - format: int64
+          in: query
+          name: per_page
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Programmes
+  /groups/popular/episodes:
+    get:
+      description: Get programmes popular
+      operationId: Get_Programmes popular_
+      parameters:
+        - enum:
+            - mobile
+            - tv
+            - web
+          in: query
+          name: rights
+          required: true
+          type: string
+        - format: int64
+          in: query
+          name: page
+          required: true
+          type: integer
+        - format: int64
+          in: query
+          name: per_page
+          required: true
+          type: integer
+        - in: query
+          maximum: 4
+          minimum: 1
+          name: initial_child_count
+          required: true
+          type: integer
+        - in: query
+          name: sort
+          required: true
+          type: string
+        - enum:
+            - asc
+            - desc
+          in: query
+          name: sort_direction
+          required: true
+          type: string
+        - enum:
+            - all
+            - available
+          in: query
+          name: availability
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Programmes
+  '/groups/{pid}/episodes':
+    get:
+      description: 'Get programmes by group, brand or series'
+      operationId: Get_Programmes by group_
+      parameters:
+        - in: path
+          minLength: 8
+          name: pid
+          pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+          required: true
+          type: string
+        - enum:
+            - mobile
+            - tv
+            - web
+          in: query
+          name: rights
+          required: true
+          type: string
+        - format: int64
+          in: query
+          name: page
+          required: true
+          type: integer
+        - format: int64
+          in: query
+          name: per_page
+          required: true
+          type: integer
+        - in: query
+          maximum: 4
+          minimum: 1
+          name: initial_child_count
+          required: true
+          type: integer
+        - in: query
+          name: sort
+          required: true
+          type: string
+        - enum:
+            - asc
+            - desc
+          in: query
+          name: sort_direction
+          required: true
+          type: string
+        - enum:
+            - all
+            - available
+          in: query
+          name: availability
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Programmes
+  /home/highlights:
+    get:
+      description: Get programme highlights
+      operationId: Get_Programme highlights_
+      parameters:
+        - enum:
+            - en
+            - cy
+            - ga
+            - gd
+          in: query
+          name: lang
+          required: true
+          type: string
+        - enum:
+            - mobile
+            - tv
+            - web
+          in: query
+          name: rights
+          required: true
+          type: string
+        - enum:
+            - all
+            - available
+          in: query
+          name: availability
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Programmes
+  '/programmes/{pid}':
+    get:
+      description: Get programmes by parent PID
+      operationId: Get_Programmes by parent PID_
+      parameters:
+        - in: path
+          minLength: 8
+          name: pid
+          pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+          required: true
+          type: string
+        - enum:
+            - mobile
+            - tv
+            - web
+          in: query
+          name: rights
+          required: true
+          type: string
+        - enum:
+            - all
+            - available
+          in: query
+          name: availability
+          required: true
+          type: string
+        - in: query
+          maximum: 4
+          minimum: 1
+          name: initial_child_count
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Programmes
+  /regions:
+    get:
+      description: Get regions
+      operationId: Get_Regions_
+      parameters:
+        - enum:
+            - en
+            - cy
+            - ga
+            - gd
+          in: query
+          name: lang
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Regions
+  /schema/ibl.json:
+    get:
+      description: Get schema
+      operationId: Get_Schema_
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Metadata
+  /search:
+    get:
+      description: Search
+      operationId: Search_
+      parameters:
+        - in: query
+          name: q
+          required: true
+          type: string
+        - enum:
+            - en
+            - cy
+            - ga
+            - gd
+          in: query
+          name: lang
+          required: true
+          type: string
+        - enum:
+            - mobile
+            - tv
+            - web
+          in: query
+          name: rights
+          required: true
+          type: string
+        - enum:
+            - all
+            - available
+          in: query
+          name: availability
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Programmes
+  /search-suggest:
+    get:
+      description: Search-suggest
+      operationId: Search-suggest_
+      parameters:
+        - in: query
+          name: q
+          required: true
+          type: string
+        - enum:
+            - en
+            - cy
+            - ga
+            - gd
+          in: query
+          name: lang
+          required: true
+          type: string
+        - enum:
+            - mobile
+            - tv
+            - web
+          in: query
+          name: rights
+          required: true
+          type: string
+        - enum:
+            - all
+            - available
+          in: query
+          name: availability
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Programmes
+  /status:
+    get:
+      description: Get status
+      operationId: Get_Status_
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Metadata
+  /user/purchases:
+    get:
+      description: Get user store purchases
+      operationId: Get_User store purchases_
+      parameters:
+        - format: double
+          in: query
+          name: identity_cookie
+          required: true
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Programmes
+  /user/watching:
+    get:
+      description: Get user watching
+      operationId: Get_User watching_
+      parameters:
+        - format: double
+          in: query
+          name: identity_cookie
+          required: true
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Programmes
+definitions:
+  added:
+    additionalProperties: false
+    properties:
+      programme:
+        $ref: '#/definitions/programme'
+      type:
+        enum:
+          - added
+      urn:
+        type: string
+    required:
+      - urn
+      - type
+      - programme
+    type: object
+  broadcast:
+    additionalProperties: false
+    properties:
+      blanked:
+        type: boolean
+      channel_title:
+        type: string
+      duration:
+        additionalProperties: false
+        properties:
+          text:
+            type: string
+          value:
+            type: string
+        required:
+          - value
+          - text
+        type: object
+      episode:
+        $ref: '#/definitions/episode'
+      id:
+        type: string
+      repeat:
+        type: boolean
+      scheduled_end:
+        type: string
+      scheduled_start:
+        type: string
+      transmission_end:
+        type: string
+      transmission_start:
+        type: string
+      type:
+        enum:
+          - broadcast
+    required:
+      - id
+      - type
+      - scheduled_start
+      - scheduled_end
+      - repeat
+      - blanked
+      - episode
+    type: object
+  category:
+    additionalProperties: false
+    properties:
+      child_episode_count:
+        type: number
+      child_programme_count:
+        type: number
+      contextual_title:
+        type: string
+      id:
+        type: string
+      kind:
+        enum:
+          - genre
+          - accessibility
+          - national
+      parent_category:
+        type: string
+      sub_categories:
+        items:
+          $ref: '#/definitions/category'
+        type: array
+      title:
+        type: string
+      type:
+        enum:
+          - category
+    required:
+      - id
+      - title
+      - type
+      - kind
+    type: object
+  channel:
+    additionalProperties: false
+    properties:
+      has_schedule:
+        type: boolean
+      id:
+        type: string
+      master_brand_id:
+        type: string
+      master_brand_title:
+        type: string
+      on_air:
+        type: boolean
+      title:
+        type: string
+      type:
+        enum:
+          - channel
+    required:
+      - id
+      - title
+      - type
+      - has_schedule
+      - master_brand_id
+      - master_brand_title
+    type: object
+  episode:
+    additionalProperties: false
+    properties:
+      audio_described:
+        type: boolean
+      categories:
+        items:
+          type: string
+        type: array
+      editorial_subtitle:
+        type: string
+      guidance:
+        type: boolean
+      has_credits:
+        type: boolean
+      id:
+        type: string
+      images:
+        additionalProperties: false
+        properties:
+          inherited_from:
+            type: string
+          standard:
+            type: string
+          type:
+            enum:
+              - image
+        required:
+          - type
+          - standard
+        type: object
+      labels:
+        additionalProperties: false
+        properties:
+          category:
+            type: string
+          editorial:
+            type: string
+          editorial_category:
+            type: string
+          time:
+            type: string
+        type: object
+      lexical_sort_letter:
+        type: string
+      live:
+        type: boolean
+      master_brand:
+        $ref: '#/definitions/master_brand'
+      next_broadcast:
+        additionalProperties: false
+        properties:
+          channel_title:
+            type: string
+          scheduled_start:
+            type: string
+        required:
+          - channel_title
+          - scheduled_start
+        type: object
+      parent_id:
+        type: string
+      parent_position:
+        type: number
+      promoted:
+        type: boolean
+      related_links:
+        items:
+          additionalProperties: false
+          properties:
+            id:
+              type: string
+            kind:
+              type: string
+            title:
+              type: string
+            type:
+              enum:
+                - link
+            url:
+              type: string
+          required:
+            - id
+            - url
+            - type
+            - kind
+            - title
+          type: object
+        type: array
+      release_date:
+        type: string
+      release_date_time:
+        type: string
+      signed:
+        type: boolean
+      status:
+        enum:
+          - available
+          - unavailable
+      subtitle:
+        type: string
+      suppliers:
+        additionalProperties: false
+        items:
+          properties:
+            id:
+              type: string
+            title:
+              type: string
+          required:
+            - id
+            - title
+          type: object
+        type: array
+      synopses:
+        additionalProperties: false
+        properties:
+          editorial:
+            type: string
+          large:
+            type: string
+          medium:
+            type: string
+          small:
+            type: string
+        type: object
+      title:
+        type: string
+      tleo_id:
+        type: string
+      tleo_type:
+        enum:
+          - episode
+          - brand
+          - series
+      type:
+        enum:
+          - episode
+          - episode_large
+      versions:
+        items: {}
+        type: array
+        x-anyOf:
+          - additionalProperties: false
+            properties:
+              availability:
+                additionalProperties: false
+                properties:
+                  end:
+                    type: string
+                  remaining:
+                    additionalProperties: false
+                    properties:
+                      text:
+                        type: string
+                    required:
+                      - text
+                    type: object
+                  start:
+                    type: string
+                required:
+                  - start
+                type: object
+              credits_start:
+                type: number
+              download:
+                type: boolean
+              duration:
+                additionalProperties: false
+                properties:
+                  text:
+                    type: string
+                  value:
+                    type: string
+                required:
+                  - text
+                  - value
+                type: object
+              first_broadcast:
+                type: string
+              guidance:
+                additionalProperties: false
+                properties:
+                  id:
+                    type: string
+                  text:
+                    additionalProperties: false
+                    properties:
+                      large:
+                        type: string
+                      medium:
+                        type: string
+                      small:
+                        type: string
+                    type: object
+                required:
+                  - id
+                type: object
+              hd:
+                type: boolean
+              id:
+                type: string
+              kind:
+                type: string
+              rrc:
+                additionalProperties: false
+                properties:
+                  description:
+                    additionalProperties: false
+                    properties:
+                      large:
+                        type: string
+                      small:
+                        type: string
+                    required:
+                      - small
+                      - large
+                    type: object
+                  url:
+                    type: string
+                required:
+                  - description
+                type: object
+              service_id:
+                type: string
+              type:
+                enum:
+                  - version
+                  - version_large
+            required:
+              - id
+              - type
+              - hd
+              - download
+              - duration
+              - kind
+              - availability
+            type: object
+          - additionalProperties: false
+            properties:
+              download:
+                type: boolean
+              duration:
+                additionalProperties: false
+                properties:
+                  text:
+                    type: string
+                  value:
+                    type: string
+                required:
+                  - text
+                  - value
+                type: object
+              guidance:
+                additionalProperties: false
+                properties:
+                  id:
+                    type: string
+                  text:
+                    additionalProperties: false
+                    properties:
+                      large:
+                        type: string
+                      medium:
+                        type: string
+                      small:
+                        type: string
+                    type: object
+                required:
+                  - id
+                type: object
+              id:
+                type: string
+              kind:
+                type: string
+              store_id:
+                type: string
+              store_profile:
+                type: string
+              type:
+                enum:
+                  - store_version
+            required:
+              - id
+              - type
+              - store_id
+              - store_profile
+              - download
+              - duration
+              - kind
+            type: object
+    required:
+      - id
+      - type
+      - title
+      - images
+      - signed
+      - audio_described
+      - status
+      - tleo_id
+      - guidance
+      - synopses
+      - versions
+      - suppliers
+      - tleo_type
+      - categories
+      - master_brand
+      - lexical_sort_letter
+    type: object
+  group:
+    additionalProperties: false
+    properties:
+      count:
+        type: number
+      episode_sort_direction:
+        type: string
+      group_type:
+        enum:
+          - tleo
+          - curated
+      id:
+        type: string
+      images:
+        additionalProperties: false
+        properties:
+          standard:
+            type: string
+          type:
+            enum:
+              - image
+          vertical:
+            type: string
+        required:
+          - type
+          - standard
+          - vertical
+        type: object
+      initial_children:
+        items: {}
+        type: array
+        x-anyOf:
+          - $ref: '#/definitions/episode'
+          - $ref: '#/definitions/broadcast'
+      master_brand:
+        $ref: '#/definitions/master_brand'
+      related_links:
+        items:
+          additionalProperties: false
+          properties:
+            kind:
+              type: string
+            title:
+              type: string
+            url:
+              type: string
+          required:
+            - kind
+            - url
+            - title
+          type: object
+        type: array
+      stacked:
+        type: boolean
+      synopses:
+        additionalProperties: false
+        properties:
+          large:
+            type: string
+          medium:
+            type: string
+          small:
+            type: string
+        type: object
+      title:
+        type: string
+      type:
+        enum:
+          - group
+          - group_large
+    required:
+      - id
+      - type
+    type: object
+  ibl:
+    additionalProperties: false
+    properties:
+      added:
+        additionalProperties: false
+        properties:
+          count:
+            type: number
+          count_all:
+            type: number
+          elements:
+            items:
+              $ref: '#/definitions/added'
+            type: array
+        required:
+          - elements
+          - count
+          - count_all
+        type: object
+      atoz_programmes:
+        additionalProperties: false
+        properties:
+          character:
+            type: string
+          count:
+            type: number
+          elements:
+            items:
+              $ref: '#/definitions/programme'
+            type: array
+          page:
+            type: number
+          per_page:
+            type: number
+        required:
+          - character
+          - page
+          - count
+          - per_page
+          - elements
+        type: object
+      broadcasts:
+        additionalProperties: false
+        properties:
+          channel:
+            $ref: '#/definitions/channel'
+          count:
+            type: number
+          elements:
+            items:
+              $ref: '#/definitions/broadcast'
+            type: array
+          page:
+            type: number
+          per_page:
+            type: number
+        required:
+          - elements
+          - page
+          - per_page
+          - count
+          - channel
+        type: object
+      categories:
+        items:
+          $ref: '#/definitions/category'
+        type: array
+      category:
+        $ref: '#/definitions/category'
+      category_highlights:
+        additionalProperties: false
+        properties:
+          category:
+            $ref: '#/definitions/category'
+          elements:
+            items: {}
+            type: array
+            x-anyOf:
+              - $ref: '#/definitions/episode'
+              - $ref: '#/definitions/group'
+              - $ref: '#/definitions/promotion'
+        required:
+          - category
+          - elements
+        type: object
+      category_programmes:
+        additionalProperties: false
+        properties:
+          category:
+            $ref: '#/definitions/category'
+          count:
+            type: number
+          elements:
+            items:
+              $ref: '#/definitions/programme'
+            type: array
+          page:
+            type: number
+          per_page:
+            type: number
+        required:
+          - category
+          - page
+          - count
+          - per_page
+          - elements
+        type: object
+      channel_highlights:
+        additionalProperties: false
+        properties:
+          channel:
+            $ref: '#/definitions/channel'
+          elements:
+            items: {}
+            type: array
+            x-anyOf:
+              - $ref: '#/definitions/episode'
+              - $ref: '#/definitions/group'
+              - $ref: '#/definitions/promotion'
+        required:
+          - channel
+          - elements
+        type: object
+      channels:
+        items:
+          $ref: '#/definitions/channel'
+        type: array
+      episode_recommendations:
+        additionalProperties: false
+        properties:
+          blend:
+            enum:
+              - curated
+              - algorithmic
+          count:
+            type: number
+          elements:
+            items:
+              $ref: '#/definitions/episode'
+            type: array
+        required:
+          - elements
+          - count
+          - blend
+        type: object
+      episodes:
+        items:
+          $ref: '#/definitions/episode'
+        type: array
+      error:
+        additionalProperties: false
+        properties:
+          details:
+            type: string
+          http_response_code:
+            type: number
+        required:
+          - details
+          - http_response_code
+        type: object
+      group_episodes:
+        additionalProperties: false
+        properties:
+          count:
+            type: number
+          elements:
+            items:
+              $ref: '#/definitions/episode'
+            type: array
+          group:
+            $ref: '#/definitions/group'
+          page:
+            type: number
+          per_page:
+            type: number
+        required:
+          - elements
+          - page
+          - per_page
+          - count
+        type: object
+      home_highlights:
+        additionalProperties: false
+        properties:
+          elements:
+            items: {}
+            type: array
+            x-anyOf:
+              - $ref: '#/definitions/episode'
+              - $ref: '#/definitions/group'
+              - $ref: '#/definitions/promotion'
+        required:
+          - elements
+        type: object
+      prerolls:
+        items:
+          $ref: '#/definitions/trailer'
+        type: array
+      programme_episodes:
+        additionalProperties: false
+        properties:
+          count:
+            type: number
+          elements:
+            items:
+              $ref: '#/definitions/episode'
+            type: array
+          page:
+            type: number
+          per_page:
+            type: number
+        required:
+          - elements
+          - page
+          - per_page
+          - count
+        type: object
+      programmes:
+        items:
+          $ref: '#/definitions/programme'
+        type: array
+      purchases:
+        additionalProperties: false
+        properties:
+          count:
+            type: number
+          elements:
+            items:
+              $ref: '#/definitions/episode'
+            type: array
+          page:
+            type: number
+          per_page:
+            type: number
+          revocations:
+            type: boolean
+          value_added_material:
+            type: boolean
+        required:
+          - elements
+          - page
+          - per_page
+          - count
+          - revocations
+          - value_added_material
+        type: object
+      regions:
+        items:
+          $ref: '#/definitions/region'
+        type: array
+      schedule:
+        additionalProperties: false
+        properties:
+          channel:
+            $ref: '#/definitions/channel'
+          elements:
+            items:
+              $ref: '#/definitions/broadcast'
+            type: array
+        required:
+          - elements
+          - channel
+        type: object
+      schema:
+        type: string
+      search:
+        additionalProperties: false
+        properties:
+          count:
+            type: number
+          page:
+            type: number
+          per_page:
+            type: number
+          query:
+            type: string
+          results:
+            items: {}
+            type: array
+            x-anyOf:
+              - $ref: '#/definitions/episode'
+              - $ref: '#/definitions/programme'
+              - $ref: '#/definitions/search_group'
+        required:
+          - results
+          - query
+        type: object
+      search_suggest:
+        additionalProperties: false
+        properties:
+          query:
+            type: string
+          results:
+            items:
+              $ref: '#/definitions/programme'
+            type: array
+        required:
+          - results
+          - query
+        type: object
+      status:
+        additionalProperties: false
+        properties:
+          release:
+            type: string
+          service:
+            type: string
+        required:
+          - service
+          - release
+        type: object
+      user_recommendations:
+        additionalProperties: false
+        properties:
+          elements:
+            items:
+              $ref: '#/definitions/user_recommendation'
+            type: array
+          rec_source:
+            type: string
+        required:
+          - elements
+          - rec_source
+        type: object
+      version:
+        type: string
+      versions:
+        items:
+          $ref: '#/definitions/store_version'
+        type: array
+      watching:
+        additionalProperties: false
+        properties:
+          count:
+            type: number
+          elements:
+            items:
+              $ref: '#/definitions/watching'
+            type: array
+        required:
+          - elements
+          - count
+        type: object
+    required:
+      - schema
+      - version
+    type: object
+  master_brand:
+    additionalProperties: false
+    properties:
+      attribution:
+        type: string
+      id:
+        type: string
+      ident_id:
+        type: string
+      titles:
+        additionalProperties: false
+        properties:
+          large:
+            type: string
+          medium:
+            type: string
+          small:
+            type: string
+        required:
+          - small
+          - medium
+          - large
+        type: object
+    required:
+      - id
+      - titles
+      - attribution
+    type: object
+  programme:
+    additionalProperties: false
+    properties:
+      categories:
+        items:
+          type: string
+        type: array
+      count:
+        type: number
+      id:
+        type: string
+      images:
+        additionalProperties: false
+        properties:
+          inherited_from:
+            type: string
+          standard:
+            type: string
+          type:
+            enum:
+              - image
+        required:
+          - type
+          - standard
+        type: object
+      initial_children:
+        items:
+          $ref: '#/definitions/episode'
+        type: array
+      lexical_sort_letter:
+        type: string
+      master_brand:
+        $ref: '#/definitions/master_brand'
+      status:
+        enum:
+          - available
+          - unavailable
+      suppliers:
+        additionalProperties: false
+        items:
+          properties:
+            id:
+              type: string
+            title:
+              type: string
+          required:
+            - id
+            - title
+          type: object
+        type: array
+      synopses:
+        additionalProperties: false
+        properties:
+          large:
+            type: string
+          medium:
+            type: string
+          small:
+            type: string
+        type: object
+      title:
+        type: string
+      tleo_type:
+        enum:
+          - brand
+          - series
+          - episode
+      type:
+        enum:
+          - programme
+          - programme_large
+    required:
+      - id
+      - type
+      - title
+      - synopses
+      - lexical_sort_letter
+      - images
+      - master_brand
+      - suppliers
+      - categories
+      - status
+      - count
+      - initial_children
+    type: object
+  promotion:
+    additionalProperties: false
+    properties:
+      id:
+        type: string
+      images:
+        additionalProperties: false
+        properties:
+          inherited_from:
+            type: string
+          standard:
+            type: string
+          type:
+            enum:
+              - image
+        required:
+          - type
+          - standard
+        type: object
+      labels:
+        additionalProperties: false
+        properties:
+          promotion:
+            type: string
+        required:
+          - promotion
+        type: object
+      subtitle:
+        type: string
+      synopses:
+        additionalProperties: false
+        properties:
+          large:
+            type: string
+          medium:
+            type: string
+          small:
+            type: string
+        type: object
+      title:
+        type: string
+      type:
+        enum:
+          - promotion
+      url:
+        type: string
+    required:
+      - id
+      - type
+    type: object
+  region:
+    additionalProperties: false
+    properties:
+      id:
+        type: string
+      kind:
+        enum:
+          - regional
+          - national
+      title:
+        type: string
+      type:
+        enum:
+          - region
+    required:
+      - id
+      - type
+      - title
+      - kind
+    type: object
+  search_group:
+    additionalProperties: false
+    properties:
+      episode:
+        $ref: '#/definitions/episode'
+      id:
+        type: string
+      type:
+        enum:
+          - search_group
+    required:
+      - id
+      - type
+      - episode
+    type: object
+  store_version:
+    additionalProperties: false
+    properties:
+      download:
+        type: boolean
+      duration:
+        additionalProperties: false
+        properties:
+          text:
+            type: string
+          value:
+            type: string
+        required:
+          - text
+          - value
+        type: object
+      guidance:
+        additionalProperties: false
+        properties:
+          id:
+            type: string
+          text:
+            additionalProperties: false
+            properties:
+              large:
+                type: string
+              medium:
+                type: string
+              small:
+                type: string
+            type: object
+        required:
+          - id
+        type: object
+      id:
+        type: string
+      kind:
+        type: string
+      store_id:
+        type: string
+      store_profile:
+        type: string
+      type:
+        enum:
+          - store_version
+    required:
+      - id
+      - type
+      - store_id
+      - store_profile
+      - download
+      - duration
+      - kind
+    type: object
+  trailer:
+    additionalProperties: false
+    properties:
+      id:
+        type: string
+      kind:
+        enum:
+          - available_now
+          - coming_soon
+          - other
+      title:
+        type: string
+      type:
+        enum:
+          - trailer
+      version_id:
+        type: string
+    required:
+      - id
+      - type
+      - title
+      - kind
+      - version_id
+    type: object
+  user_recommendation:
+    additionalProperties: false
+    properties:
+      algorithm:
+        type: string
+      episode:
+        $ref: '#/definitions/episode'
+      type:
+        enum:
+          - user_recommendation
+    required:
+      - algorithm
+      - type
+      - episode
+    type: object
+  watching:
+    additionalProperties: false
+    properties:
+      episode:
+        $ref: '#/definitions/episode'
+      has_next:
+        type: boolean
+      offset:
+        type: number
+      programme:
+        $ref: '#/definitions/programme'
+      progress:
+        type: number
+      remaining:
+        type: number
+      status:
+        enum:
+          - current
+          - next
+      type:
+        enum:
+          - watching
+      urn:
+        type: string
+    required:
+      - type
+      - urn
+      - episode
+      - programme
+      - has_next
+    type: object

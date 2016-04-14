@@ -566,6 +566,58 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - apps
+  '/v1beta5/apps/{appsId}/services/{servicesId}/versions/{versionsId}/instances':
+    get:
+      description: Lists the instances of a version.
+      operationId: appengine.apps.services.versions.instances.list
+      parameters:
+        - description: 'Part of `name`. Name of the resource requested. For example: "apps/myapp/services/default/versions/v1".'
+          in: path
+          name: appsId
+          required: true
+          type: string
+        - description: Part of `name`. See documentation of `appsId`.
+          in: path
+          name: servicesId
+          required: true
+          type: string
+        - description: Part of `name`. See documentation of `appsId`.
+          in: path
+          name: versionsId
+          required: true
+          type: string
+        - description: Maximum results to return per page.
+          in: query
+          name: pageSize
+          type: integer
+        - description: Continuation token for fetching the next page of results.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListInstancesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - apps
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
 definitions:
   ApiConfigHandler:
     description: API Serving configuration for Cloud Endpoints.
@@ -812,6 +864,64 @@ definitions:
         format: uint32
         type: integer
     type: object
+  Instance:
+    description: Instances are the computing units that App Engine uses to automatically scale an application.
+    properties:
+      appEngineRelease:
+        description: The App Engine release the instance is running on. @OutputOnly
+        type: string
+      availability:
+        description: Availability of instance. @OutputOnly
+        enum:
+          - UNSPECIFIED
+          - RESIDENT
+          - DYNAMIC
+        type: string
+      averageLatency:
+        description: Latency in milliseconds (averaged over the last minute). @OutputOnly
+        format: int32
+        type: integer
+      errors:
+        description: Number of errors since the instance was started. @OutputOnly
+        format: uint32
+        type: integer
+      id:
+        description: 'The relative name/path of the instance within the version. Example: "instance-1" @OutputOnly'
+        type: string
+      memoryUsage:
+        description: Memory usage (in bytes). @OutputOnly
+        format: int64
+        type: string
+      name:
+        description: 'The full path to the Instance resource in the API. Example: "apps/myapp/services/default/versions/v1/instances/instance-1" @OutputOnly'
+        type: string
+      qps:
+        description: QPS for this instance (averaged over the last minute). @OutputOnly
+        format: float
+        type: number
+      requests:
+        description: Number of requests (since the clone was started). @OutputOnly
+        format: int32
+        type: integer
+      startTimestamp:
+        description: Time when instance was started. @OutputOnly
+        type: string
+      vmId:
+        description: 'For VMEngines instances, the GCE VM ID of the instance. @OutputOnly'
+        type: string
+      vmName:
+        description: 'For VMEngines instances, the name of GCE VM where the instance lives. @OutputOnly'
+        type: string
+      vmStatus:
+        description: 'For VMEngines instances, the status of GCE VM where the instance lives. @OutputOnly'
+        type: string
+      vmUnlocked:
+        description: 'For VMEngines instances, whether the instance has been unlocked. @OutputOnly'
+        type: boolean
+      vmZoneName:
+        description: 'For VMEngines instances, the zone where the GCE VM is located. @OutputOnly'
+        type: string
+    type: object
   Library:
     description: A Python runtime third-party library required by the application.
     properties:
@@ -820,6 +930,18 @@ definitions:
         type: string
       version:
         description: 'The version of the library to select, or "latest".'
+        type: string
+    type: object
+  ListInstancesResponse:
+    description: Response message for `Instances.ListInstances`.
+    properties:
+      instances:
+        description: The instances belonging to the requested version.
+        items:
+          $ref: '#/definitions/Instance'
+        type: array
+      nextPageToken:
+        description: Continuation token for fetching the next page of results.
         type: string
     type: object
   ListOperationsResponse:

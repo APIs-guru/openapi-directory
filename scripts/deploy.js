@@ -3,30 +3,21 @@
 
 var assert = require('assert');
 var _ = require('lodash');
-var Path = require('path');
 var Promise = require('bluebird');
 
 var URI = require('urijs');
 var MimeLookup = require('mime-lookup');
 var MIME = new MimeLookup(require('mime-db'));
 var exec = require('child_process').execSync;
-var jade = require('jade');
 
 var makeRequest = require('makeRequest');
 var util = require('./util');
 
 var specRootUrl = 'https://apis-guru.github.io/api-models/';
 
-process.on("unhandledRejection", function(reason, promise) {
-  process.exitCode = 255;
-  //TODO: better solution
-  setTimeout(function () { throw reason; });
-});
-
 cacheResources()
   .then(function (specs) {
     //Note: at this point all logo are cached
-    generateHTML(specs);
     generateAPIsJSON(specs);
 
     _.each(specs, function (swagger) {
@@ -47,7 +38,8 @@ cacheResources()
       saveShield('APIs in collection' , numAPIs, 'orange'),
       saveShield('Endpoints', numEndpoints, 'red')
     ];
-  });
+  })
+  .done();
 
 function cacheResources(specs) {
   var specs = util.getSpecs('../APIs/');
@@ -61,10 +53,14 @@ function cacheResources(specs) {
     return makeRequest('get', url, {encoding: null})
       .spread(function(response, data) {
 
-        var mime = response.headers['content-type'];
-        assert(mime.match('image/'));
-        var extension = MIME.extension(mime);
-        assert(extension);
+        var extension = URI(url).suffix();
+        if (!extension) {
+          var mime = response.headers['content-type'];
+          assert(mime.match('image/'));
+          extension = MIME.extension(mime);
+          assert(extension);
+        }
+
         var logoFile = 'cache/' + util.getSwaggerPath(swagger, 'logo.' + extension);
         util.saveFile(logoFile, data);
 
@@ -74,17 +70,6 @@ function cacheResources(specs) {
         return swagger;
       });
   });
-}
-
-function generateHTML(specs) {
-  var locals = {
-    specs: _.map(specs, _.ary(util.getSwaggerPath, 1)),
-    specRootUrl: specRootUrl
-  };
-
-  var template = Path.join(Path.dirname(__filename), '../scripts/index.jade');
-  var html = jade.renderFile(template, locals);
-  util.saveFile('index.html', html);
 }
 
 function generateAPIsJSON(specs) {

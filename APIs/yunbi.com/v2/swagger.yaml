@@ -15,20 +15,20 @@ info:
     version: '1.2'
   x-providerName: yunbi.com
 tags:
-  - name: markets
-  - name: tickers
-  - name: members
-  - name: deposits
   - name: deposit
   - name: deposit_address
-  - name: orders
-  - name: order
-  - name: order_book
+  - name: deposits
   - name: depth
-  - name: trades
-  - name: timestamp
   - name: k
   - name: k_with_pending_trades
+  - name: markets
+  - name: members
+  - name: order
+  - name: order_book
+  - name: orders
+  - name: tickers
+  - name: timestamp
+  - name: trades
 paths:
   /v2/deposit.json:
     get:

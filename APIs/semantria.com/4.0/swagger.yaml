@@ -17,30 +17,30 @@ info:
 externalDocs:
   url: 'https://semantria.com/support/developer/'
 tags:
-  - description: API status
-    name: Status
-  - description: Supported features
-    name: Features
-  - description: Subscription details
-    name: Subscription
-  - description: Usage statistics
-    name: Statistics
-  - description: Configurations
-    name: Configuration
   - description: Blacklisted output
     name: Blacklist
   - description: User categories
     name: Categories
-  - description: Queries
-    name: Queries
+  - description: Configurations
+    name: Configuration
   - description: User entities
     name: Entities
+  - description: Supported features
+    name: Features
   - description: Sentiment-Bearing Phrases
     name: Phrases
-  - description: Basic analysis
-    name: ProcessingDocuments
   - description: Discovery analysis
     name: ProcessingCollections
+  - description: Basic analysis
+    name: ProcessingDocuments
+  - description: Queries
+    name: Queries
+  - description: Usage statistics
+    name: Statistics
+  - description: API status
+    name: Status
+  - description: Subscription details
+    name: Subscription
 paths:
   '/blacklist.{content_type}':
     delete:

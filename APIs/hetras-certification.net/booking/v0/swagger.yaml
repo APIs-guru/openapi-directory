@@ -131,11 +131,45 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-        - description: Optionally filter the blocks by the specified group code.
+        - description: Only return blocks for this specific hotel.
+          format: int32
+          in: query
+          name: hotelId
+          required: false
+          type: integer
+        - description: Filter the blocks by the specified group code
           in: query
           name: groupCode
           required: false
           type: string
+        - description: "Return all blocks where the block's last_departure is greater than specified date."
+          format: date-time
+          in: query
+          name: from
+          required: false
+          type: string
+        - description: "Return all blocks where the block's last_departure is less than specified date."
+          format: date-time
+          in: query
+          name: to
+          required: false
+          type: string
+        - description: Return all blocks where the block status is one of the specified values.
+          enum:
+            - Cancelled
+            - Tentative
+            - Definite
+          in: query
+          name: status
+          required: false
+          type: string
+        - description: Return all blocks that have related the specified comma-separated rate plans.
+          in: query
+          items:
+            type: string
+          name: ratePlanCodes
+          required: false
+          type: array
       produces:
         - application/json
         - text/json
@@ -144,6 +178,8 @@ paths:
           description: Returns a list of blocks matching the provided filter criteria.
           schema:
             $ref: '#/definitions/BlocksResponse'
+        '204':
+          description: There are no blocks matching your filter criteria.
         '400':
           description: Bad request. Request parameters syntactically erroneous.
         '401':
@@ -256,7 +292,7 @@ paths:
           name: roomNumber
           required: false
           type: string
-        - description: Return all bookings matching the specified external id.
+        - description: Return all bookings exactly matching the specified external id. This filter is case sensitive.
           in: query
           name: externalId
           required: false
@@ -518,7 +554,7 @@ paths:
           name: roomNumber
           required: false
           type: string
-        - description: Return all bookings matching the specified external id.
+        - description: Return all bookings exactly matching the specified external id. This filter is case sensitive.
           in: query
           name: externalId
           required: false
@@ -1170,13 +1206,17 @@ definitions:
       _links:
         additionalProperties:
           $ref: '#/definitions/LinkObject'
-        description: Collection of links to related resources.
+        description: Collection of links to related resources
         type: object
+      average_daily_rate:
+        description: Average daily rate for this block. You can multiply by the count of blocked room nights and get a forecast value for this block
+        format: double
+        type: number
       code:
         description: "The code of a block. The code is composed of the hotel code a dash and the block code shown in the hetras UI. \r\n            An example block code on the API for a block with code TRAVEL1 defined for the hotel with code ABC \r\n            would be ABC-TRAVEL1"
         type: string
       count:
-        description: Total number of room night blocked across all room types and days
+        description: Total number of room nights blocked across all room types and days
         format: int32
         type: integer
       first_arrival:
@@ -1196,15 +1236,19 @@ definitions:
       name:
         description: The name of the block
         type: string
+      picked:
+        description: Total number of room nights picked up accross all room types and days
+        format: int32
+        type: integer
       rate_plans:
         description: The rateplans linked to this block
         items:
-          $ref: '#/definitions/RatePlan'
+          $ref: '#/definitions/BlockRatePlan'
         type: array
       status:
         description: The current status of the block
         enum:
-          - NotSet
+          - Physical
           - Cancelled
           - Tentative
           - Definite
@@ -1224,13 +1268,67 @@ definitions:
         description: The name of the block
         type: string
     type: object
+  BlockListRequest:
+    properties:
+      from:
+        description: "Return all blocks where the block's last_departure is greater than specified date."
+        format: date-time
+        type: string
+      groupCode:
+        description: Filter the blocks by the specified group code
+        type: string
+      hotelId:
+        description: Only return blocks for this specific hotel.
+        format: int32
+        type: integer
+      ratePlanCodes:
+        description: Return all blocks that have related the specified comma-separated rate plans.
+        items:
+          type: string
+        type: array
+      status:
+        description: Return all blocks where the block status is one of the specified values.
+        enum:
+          - Cancelled
+          - Tentative
+          - Definite
+        type: string
+      to:
+        description: "Return all blocks where the block's last_departure is less than specified date."
+        format: date-time
+        type: string
+    type: object
+  BlockRatePlan:
+    properties:
+      code:
+        description: Code of the rate plan
+        type: string
+      description:
+        description: Description of the rate plan suitable for being displayed to customers
+        type: string
+      forecast:
+        description: Speficies if this is the rateplan that should be used for calculating the forecast
+        type: boolean
+      name:
+        description: Name of the rate plan
+        type: string
+    type: object
   BlockResponse:
     properties:
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources
+        type: object
+      average_daily_rate:
+        description: Average daily rate for this block. You can multiply by the count of blocked room nights and get a forecast value for this block
+        format: double
+        type: number
       code:
         description: "The code of a block. The code is composed of the hotel code a dash and the block code shown in the hetras UI. \r\n            An example block code on the API for a block with code TRAVEL1 defined for the hotel with code ABC \r\n            would be ABC-TRAVEL1"
         type: string
       count:
-        description: Total number of room night blocked across all room types and days
+        description: Total number of room nights blocked across all room types and days
         format: int32
         type: integer
       first_arrival:
@@ -1250,20 +1348,24 @@ definitions:
       name:
         description: The name of the block
         type: string
+      picked:
+        description: Total number of room nights picked up accross all room types and days
+        format: int32
+        type: integer
       rate_plans:
         description: The rateplans linked to this block
         items:
-          $ref: '#/definitions/RatePlan'
+          $ref: '#/definitions/BlockRatePlan'
         type: array
       room_type_counts:
-        description: Number of blocked rooms per room type and day.
+        description: Number of blocked and picked up rooms per room type and day.
         items:
           $ref: '#/definitions/RoomTypeCount'
         type: array
       status:
         description: The current status of the block
         enum:
-          - NotSet
+          - Physical
           - Cancelled
           - Tentative
           - Definite
@@ -1274,7 +1376,7 @@ definitions:
       _links:
         additionalProperties:
           $ref: '#/definitions/LinkObject'
-        description: Collection of links to related resources.
+        description: Collection of links to related resources
         type: object
       code:
         description: Code of the room type
@@ -1348,7 +1450,7 @@ definitions:
           - ModificationDate
         type: string
       externalId:
-        description: Return all bookings matching the specified external id.
+        description: Return all bookings exactly matching the specified external id. This filter is case sensitive.
         type: string
       from:
         description: "Start date for the selected date filter. If you select arrival date as date filter the bookings returned will have at least\r\n            one reservation arriving on the specified date or later."
@@ -1686,25 +1788,25 @@ definitions:
         type: string
     type: object
   EmbeddedRoom:
-    description: "Represents a short version of room information. To get the full version\r\n            please follow the self link from the links collection."
+    description: "Represents a short version of room information. To get the full version\r\n            please follow the self link from the links collection"
     properties:
       _links:
         additionalProperties:
           $ref: '#/definitions/LinkObject'
-        description: Collection of links to related resources.
+        description: Collection of links to related resources
         type: object
       description:
-        description: Description of the room.
+        description: Description of the room
         type: string
       name:
-        description: Name of the room.
+        description: Name of the room
         type: string
       number:
-        description: Number of the room.
+        description: Number of the room
         type: string
       room_type:
         $ref: '#/definitions/EmbeddedRoomType'
-        description: "Room type of the room.\r\n            \r\n            Contains only the basic properties of the room type."
+        description: Room type of the room. Contains only the basic properties of the room type
     type: object
   EmbeddedRoomType:
     description: "Represents a short version of room type. To get the full version\r\n            please follow the self link from the links collection."
@@ -1859,14 +1961,15 @@ definitions:
       _links:
         additionalProperties:
           $ref: '#/definitions/LinkObject'
-        description: Collection of links to related resources.
+        description: Collection of links to related resources
         type: object
       code:
         description: Hotel code
         type: string
       id:
         description: Hotel Identity
-        type: string
+        format: int32
+        type: integer
       name:
         description: Hotel name
         type: string
@@ -2267,6 +2370,9 @@ definitions:
       block:
         $ref: '#/definitions/BlockInfo'
         description: If this reservation is a pick-up from a block you will see the appropriate block here
+      cancellation_id:
+        description: 'Given the reservation was cancelled, this field contains the cancellation id'
+        type: string
       cancellation_policies:
         description: The cancellation policies that were applicable on the date the booking was done
         items:
@@ -2436,6 +2542,10 @@ definitions:
         description: Business day rooms are blocked for
         format: date-time
         type: string
+      picked:
+        description: Number of rooms picked up
+        format: int32
+        type: integer
     type: object
   RoomOffer:
     properties:
@@ -2470,13 +2580,13 @@ definitions:
   RoomTypeCount:
     properties:
       counts:
-        description: Number of rooms blocked for this room type per day.
+        description: Number of rooms blocked or picked up for this room type per day
         items:
           $ref: '#/definitions/RoomNightCount'
         type: array
       room_type:
         $ref: '#/definitions/BlockRoomType'
-        description: Room type for which rooms are blocked.
+        description: Room type for which rooms are blocked
     type: object
   RoomTypeInfo:
     properties:

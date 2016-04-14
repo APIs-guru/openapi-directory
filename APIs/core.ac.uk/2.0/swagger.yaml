@@ -81,13 +81,7 @@ paths:
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve a list of URLs which were extracted from the article fulltext. The default value is false. This parameter is not available in CORE API v2.0 beta
-          in: query
-          name: extractedUrls
-          required: false
-          type: boolean
-        - default: false
-          description: Whether to retrieve the raw XML metadata of the articles. The default value is false
+          description: Returns the records raw XML metadata from the original repository. The default value is false
           in: query
           name: faithfulMetadata
           required: false
@@ -159,13 +153,7 @@ paths:
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve a list of URLs which were extracted from the article fulltext. The default value is false. This parameter is not available in CORE API v2.0 beta
-          in: query
-          name: extractedUrls
-          required: false
-          type: boolean
-        - default: false
-          description: Whether to retrieve the raw XML metadata of the article. The default value is false
+          description: Returns the records raw XML metadata from the original repository. The default value is false
           in: query
           name: faithfulMetadata
           required: false
@@ -301,12 +289,6 @@ paths:
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve a list of URLs which were extracted from the article fulltext. The default value is false. This parameter is not available in CORE API v2.0 beta
-          in: query
-          name: extractedUrls
-          required: false
-          type: boolean
-        - default: false
           description: Whether to retrieve the raw XML metadata of the article. The default value is false
           in: query
           name: faithfulMetadata
@@ -397,13 +379,7 @@ paths:
           required: false
           type: boolean
         - default: false
-          description: Whether to retrieve a list of URLs which were extracted from the article fulltext. The default value is false. This parameter is not available in CORE API v2.0 beta
-          in: query
-          name: extractedUrls
-          required: false
-          type: boolean
-        - default: false
-          description: Whether to retrieve the raw XML metadata of the article. The default value is false
+          description: Returns the records raw XML metadata from the original repository. The default value is false
           in: query
           name: faithfulMetadata
           required: false
@@ -476,12 +452,6 @@ paths:
           description: Whether to retrieve lists of URLs of the article fulltexts. The default value is false
           in: query
           name: urls
-          required: false
-          type: boolean
-        - default: false
-          description: Whether to retrieve a list of URLs which were extracted from the article fulltext. The default value is false. This parameter is not available in CORE API v2.0 beta
-          in: query
-          name: extractedUrls
           required: false
           type: boolean
         - default: false
@@ -859,8 +829,14 @@ definitions:
       description:
         description: The abstract
         type: string
+      doi:
+        description: The DOI of the Article
+        type: string
       fulltext:
         description: Article full text
+        type: string
+      fulltextIdentifier:
+        description: The URL to the fulltext
         type: string
       fulltextUrls:
         description: URLs of the fulltext version of this article

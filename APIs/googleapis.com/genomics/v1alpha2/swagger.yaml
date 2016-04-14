@@ -114,15 +114,15 @@ paths:
           in: query
           name: projectId
           type: string
-        - description: 'Optional. Pipelines with names that match this prefix should be returned. If unspecified, all pipelines in the project, up to `pageSize`, will be returned.'
+        - description: 'Pipelines with names that match this prefix should be returned. If unspecified, all pipelines in the project, up to `pageSize`, will be returned.'
           in: query
           name: namePrefix
           type: string
-        - description: 'Optional. Number of pipelines to return at once. Defaults to 256, and max is 2048.'
+        - description: 'Number of pipelines to return at once. Defaults to 256, and max is 2048.'
           in: query
           name: pageSize
           type: integer
-        - description: 'Optional. Token to use to indicate where to start getting results. If unspecified, returns the first page of results.'
+        - description: 'Token to use to indicate where to start getting results. If unspecified, returns the first page of results.'
           in: query
           name: pageToken
           type: string
@@ -463,7 +463,7 @@ definitions:
     description: A Google Compute Engine disk resource specification.
     properties:
       autoDelete:
-        description: 'Specifies whether or not to delete the disk when the pipeline completes. This field is applicable only for newly created disks. See https://cloud.google.com/compute/docs/reference/latest/instances#resource for more details. Optional. At create time means that an auto delete disk may be used. At run time, means it should be used. Cannot be true at run time if false at create time.'
+        description: 'Specifies whether or not to delete the disk when the pipeline completes. This field is applicable only for newly created disks. See https://cloud.google.com/compute/docs/reference/latest/instances#resource for more details. By default, `autoDelete` is `false`. `autoDelete` will be enabled if set to `true` at create time or run time.'
         type: boolean
       mountPoint:
         description: 'Required at create time and cannot be overridden at run time. Specifies the path in the docker container where files on this disk should be located. For example, if `mountPoint` is `/mnt/disk`, and the parameter has `localPath` `inputs/file.txt`, the docker container can access the data at `/mnt/disk/inputs/file.txt`.'
@@ -475,7 +475,7 @@ definitions:
         description: 'Specifies how a sourced-base persistent disk will be mounted. See https://cloud.google.com/compute/docs/disks/persistent-disks#use_multi_instances for more details. Can only be set at create time.'
         type: boolean
       sizeGb:
-        description: The size of the disk. This field is not applicable for local SSD.
+        description: The size of the disk. Defaults to 500 (GB). This field is not applicable for local SSD.
         format: int32
         type: integer
       source:
@@ -616,7 +616,7 @@ definitions:
     description: 'The pipeline object. Represents a transformation from a set of input parameters to a set of output parameters. The transformation is defined as a docker image and command to run within that image. Each pipeline is run on a Google Compute Engine VM. A pipeline can be created with the `create` method and then later run with the `run` method, or a pipeline can be defined and run all at once with the `run` method.'
     properties:
       description:
-        description: Optional. User-specified description.
+        description: User-specified description.
         type: string
       docker:
         $ref: '#/definitions/DockerExecutor'
@@ -651,7 +651,7 @@ definitions:
         description: 'The default value for this parameter. Can be overridden at runtime. If `localCopy` is present, then this must be a Google Cloud Storage path beginning with `gs://`.'
         type: string
       description:
-        description: Optional. Human-readable description.
+        description: Human-readable description.
         type: string
       localCopy:
         $ref: '#/definitions/LocalCopy'
@@ -664,7 +664,7 @@ definitions:
     description: The system resources for the pipeline run.
     properties:
       bootDiskSizeGb:
-        description: Optional. The size of the boot disk. Can be overridden at runtime.
+        description: The size of the boot disk. Defaults to 10 (GB).
         format: int32
         type: integer
       disks:
@@ -673,15 +673,15 @@ definitions:
           $ref: '#/definitions/Disk'
         type: array
       minimumCpuCores:
-        description: Required at create time; optional at run time. The minimum number of cores to use.
+        description: The minimum number of cores to use. Defaults to 1.
         format: int32
         type: integer
       minimumRamGb:
-        description: Required at create time; optional at run time. The minimum amount of RAM to use.
+        description: The minimum amount of RAM to use. Defaults to 3.75 (GB)
         format: double
         type: number
       preemptible:
-        description: 'Optional. At create time means that preemptible machines may be used for the run. At run time, means they should be used. Cannot be true at run time if false at create time.'
+        description: 'At create time means that preemptible machines may be used for the run. At run time, means they should be used. Cannot be true at run time if false at create time. Defaults to `false`.'
         type: boolean
       zones:
         description: 'List of Google Compute Engine availability zones to which resource creation will restricted. If empty, any zone may be chosen.'
@@ -700,7 +700,7 @@ definitions:
     description: The pipeline run arguments.
     properties:
       clientId:
-        description: Optional. For callers to use in filtering operations returned by this request.
+        description: Client-specified pipeline operation identifier.
         type: string
       inputs:
         additionalProperties:
@@ -742,10 +742,10 @@ definitions:
     description: A Google Cloud Service Account.
     properties:
       email:
-        description: "Required. Email address of the service account. 'default' is a valid option and uses the compute service account associated with the project."
+        description: 'Email address of the service account. Defaults to `default`, which uses the compute service account associated with the project.'
         type: string
       scopes:
-        description: 'Required. List of scopes to be made available for this service account. Should include * https://www.googleapis.com/auth/genomics * https://www.googleapis.com/auth/compute * https://www.googleapis.com/auth/devstorage.full_control'
+        description: 'List of scopes to be enabled for this service account on the pipeline virtual machine. The following scopes are automatically included: * https://www.googleapis.com/auth/genomics * https://www.googleapis.com/auth/compute * https://www.googleapis.com/auth/devstorage.full_control'
         items:
           type: string
         type: array

@@ -1,0 +1,794 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+x-hasEquivalentPaths: true
+info:
+  title: AuthorizationManagementClient
+  version: '2015-07-01'
+  x-logo:
+    backgroundColor: '#333333'
+    url: 'https://azure.github.io/images/logo-msft-dark@2x.png'
+  x-origin:
+    format: swagger
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-authorization/2015-07-01/swagger/authorization.json'
+    version: '2.0'
+  x-preferred: true
+  x-providerName: azure.com
+  x-serviceName: arm-authorization
+consumes:
+  - application/json
+  - text/json
+produces:
+  - application/json
+  - text/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  ApiVersionParameter:
+    description: Client Api Version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  SubscriptionIdParameter:
+    description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  /providers/Microsoft.Authorization/providerOperations:
+    get:
+      description: Gets provider operations metadata list
+      operationId: ProviderOperationsMetadata_List
+      parameters:
+        - in: query
+          name: api-version
+          required: true
+          type: string
+        - default: resourceTypes
+          in: query
+          name: $expand
+          required: false
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/ProviderOperationsMetadataListResult'
+      tags:
+        - ProviderOperationsMetadata
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}':
+    get:
+      description: Gets provider operations metadata
+      operationId: ProviderOperationsMetadata_Get
+      parameters:
+        - description: Namespace of the resource provider.
+          in: path
+          name: resourceProviderNamespace
+          required: true
+          type: string
+        - in: query
+          name: api-version
+          required: true
+          type: string
+        - default: resourceTypes
+          in: query
+          name: $expand
+          required: false
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/ProviderOperationsMetadata'
+      tags:
+        - ProviderOperationsMetadata
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/classicAdministrators':
+    get:
+      description: Gets a list of classic administrators for the subscription.
+      operationId: ClassicAdministrators_List
+      parameters:
+        - in: query
+          name: api-version
+          required: true
+          type: string
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/ClassicAdministratorListResult'
+      tags:
+        - ClassicAdministrators
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleAssignments':
+    get:
+      description: Gets role assignments of the subscription.
+      operationId: RoleAssignments_List
+      parameters:
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/RoleAssignmentListResult'
+      tags:
+        - RoleAssignments
+      x-ms-odata: '#/definitions/RoleAssignmentFilter'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Authorization/roleAssignments':
+    get:
+      description: Gets role assignments of the resource group.
+      operationId: RoleAssignments_ListForResourceGroup
+      parameters:
+        - description: Resource group name.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/RoleAssignmentListResult'
+      tags:
+        - RoleAssignments
+      x-ms-odata: '#/definitions/RoleAssignmentFilter'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Authorization/permissions':
+    get:
+      description: Gets a resource group permissions.
+      operationId: Permissions_ListForResourceGroup
+      parameters:
+        - description: Name of the resource group to get the permissions for.The name is case insensitive.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/PermissionGetResult'
+      tags:
+        - Permissions
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}/providers/Microsoft.Authorization/permissions':
+    get:
+      description: Gets a resource permissions.
+      operationId: Permissions_ListForResource
+      parameters:
+        - description: The name of the resource group. The name is case insensitive.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Resource
+          in: path
+          name: resourceProviderNamespace
+          required: true
+          type: string
+        - description: Resource
+          in: path
+          name: parentResourcePath
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: Resource
+          in: path
+          name: resourceType
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: Resource
+          in: path
+          name: resourceName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/PermissionGetResult'
+      tags:
+        - Permissions
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{parentResourcePath}/{resourceType}/{resourceName}providers/Microsoft.Authorization/roleAssignments':
+    get:
+      description: Gets role assignments of the resource.
+      operationId: RoleAssignments_ListForResource
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Resource identity.
+          in: path
+          name: resourceProviderNamespace
+          required: true
+          type: string
+        - description: Resource identity.
+          in: path
+          name: parentResourcePath
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: Resource identity.
+          in: path
+          name: resourceType
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: Resource identity.
+          in: path
+          name: resourceName
+          required: true
+          type: string
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/RoleAssignmentListResult'
+      tags:
+        - RoleAssignments
+      x-ms-odata: '#/definitions/RoleAssignmentFilter'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/{roleAssignmentId}':
+    delete:
+      description: Delete role assignment.
+      operationId: RoleAssignments_DeleteById
+      parameters:
+        - description: Role assignment Id
+          in: path
+          name: roleAssignmentId
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/RoleAssignment'
+      tags:
+        - RoleAssignments
+    get:
+      description: Get single role assignment.
+      operationId: RoleAssignments_GetById
+      parameters:
+        - description: Role assignment Id
+          in: path
+          name: roleAssignmentId
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/RoleAssignment'
+      tags:
+        - RoleAssignments
+    put:
+      description: Create role assignment by Id.
+      operationId: RoleAssignments_CreateById
+      parameters:
+        - description: Role assignment Id
+          in: path
+          name: roleAssignmentId
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: Role assignment.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/RoleAssignmentCreateParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/RoleAssignment'
+      tags:
+        - RoleAssignments
+  '/{roleDefinitionId}':
+    get:
+      description: Get role definition by name (GUID).
+      operationId: RoleDefinitions_GetById
+      parameters:
+        - description: Fully qualified role definition Id
+          in: path
+          name: roleDefinitionId
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/RoleDefinition'
+      tags:
+        - RoleDefinitions
+  '/{scope}/providers/Microsoft.Authorization/roleAssignments':
+    get:
+      description: Gets role assignments of the scope.
+      operationId: RoleAssignments_ListForScope
+      parameters:
+        - description: Scope.
+          in: path
+          name: scope
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/RoleAssignmentListResult'
+      tags:
+        - RoleAssignments
+      x-ms-odata: '#/definitions/RoleAssignmentFilter'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}':
+    delete:
+      description: Delete role assignment.
+      operationId: RoleAssignments_Delete
+      parameters:
+        - description: Scope.
+          in: path
+          name: scope
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: Role assignment name.
+          in: path
+          name: roleAssignmentName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/RoleAssignment'
+      tags:
+        - RoleAssignments
+    get:
+      description: Get single role assignment.
+      operationId: RoleAssignments_Get
+      parameters:
+        - description: Scope.
+          in: path
+          name: scope
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: Role assignment name.
+          in: path
+          name: roleAssignmentName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/RoleAssignment'
+      tags:
+        - RoleAssignments
+    put:
+      description: Create role assignment.
+      operationId: RoleAssignments_Create
+      parameters:
+        - description: Scope.
+          in: path
+          name: scope
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: Role assignment name.
+          in: path
+          name: roleAssignmentName
+          required: true
+          type: string
+        - description: Role assignment.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/RoleAssignmentCreateParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/RoleAssignment'
+      tags:
+        - RoleAssignments
+  '/{scope}/providers/Microsoft.Authorization/roleDefinitions':
+    get:
+      description: Get all role definitions that are applicable at scope and above. Use atScopeAndBelow filter to search below the given scope as well
+      operationId: RoleDefinitions_List
+      parameters:
+        - description: Scope
+          in: path
+          name: scope
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/RoleDefinitionListResult'
+      tags:
+        - RoleDefinitions
+      x-ms-odata: '#/definitions/RoleDefinitionFilter'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/{scope}/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId}':
+    delete:
+      description: Deletes the role definition.
+      operationId: RoleDefinitions_Delete
+      parameters:
+        - description: Scope
+          in: path
+          name: scope
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: Role definition id.
+          in: path
+          name: roleDefinitionId
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/RoleDefinition'
+      tags:
+        - RoleDefinitions
+    get:
+      description: Get role definition by name (GUID).
+      operationId: RoleDefinitions_Get
+      parameters:
+        - description: Scope
+          in: path
+          name: scope
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: Role definition Id
+          in: path
+          name: roleDefinitionId
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/RoleDefinition'
+      tags:
+        - RoleDefinitions
+    put:
+      description: Creates or updates a role definition.
+      operationId: RoleDefinitions_CreateOrUpdate
+      parameters:
+        - description: Scope
+          in: path
+          name: scope
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: Role definition id.
+          in: path
+          name: roleDefinitionId
+          required: true
+          type: string
+        - description: Role definition.
+          in: body
+          name: roleDefinition
+          required: true
+          schema:
+            $ref: '#/definitions/RoleDefinition'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/RoleDefinition'
+      tags:
+        - RoleDefinitions
+definitions:
+  ClassicAdministrator:
+    description: Classic Administrators
+    properties:
+      id:
+        description: Gets or sets the classic administrator id.
+        type: string
+      name:
+        description: Gets or sets the classic administrator name.
+        type: string
+      properties:
+        $ref: '#/definitions/ClassicAdministratorProperties'
+        description: Gets or sets the classic administrator properties.
+      type:
+        description: Gets or sets the classic administrator type.
+        type: string
+  ClassicAdministratorListResult:
+    description: ClassicAdministrator list result information.
+    properties:
+      value:
+        description: Gets or sets ClassicAdministrators.
+        items:
+          $ref: '#/definitions/ClassicAdministrator'
+        type: array
+  ClassicAdministratorProperties:
+    description: Classic Administrator properties.
+    properties:
+      emailAddress:
+        description: Gets or sets the email address
+        type: string
+      role:
+        description: Gets or sets the role
+        type: string
+  Permission:
+    description: Role definition permissions.
+    properties:
+      actions:
+        description: Role definition allowed actions.
+        items:
+          type: string
+        type: array
+      notActions:
+        description: Role definition denied actions.
+        items:
+          type: string
+        type: array
+  PermissionGetResult:
+    description: Permissions information.
+    properties:
+      value:
+        description: Gets or sets permissions.
+        items:
+          $ref: '#/definitions/Permission'
+        type: array
+  ProviderOperation:
+    description: Operation
+    properties:
+      description:
+        description: Gets or sets the operation description
+        type: string
+      displayName:
+        description: Gets or sets the operation display name
+        type: string
+      name:
+        description: Gets or sets the operation name
+        type: string
+      origin:
+        description: Gets or sets the operation origin
+        type: string
+      properties:
+        description: Gets or sets the operation properties
+        type: object
+  ProviderOperationsMetadata:
+    description: Provider Operations metadata
+    properties:
+      displayName:
+        description: Gets or sets the provider display name
+        type: string
+      id:
+        description: Gets or sets the provider id.
+        type: string
+      name:
+        description: Gets or sets the provider name
+        type: string
+      operations:
+        description: Gets or sets the provider operations
+        items:
+          $ref: '#/definitions/ProviderOperation'
+        type: array
+      resourceTypes:
+        description: Gets or sets the provider resource types
+        items:
+          $ref: '#/definitions/ResourceType'
+        type: array
+      type:
+        description: Gets or sets the provider type
+        type: string
+  ProviderOperationsMetadataListResult:
+    description: Provider operations metadata list
+    properties:
+      value:
+        description: Gets or sets the list of providers.
+        items:
+          $ref: '#/definitions/ProviderOperationsMetadata'
+        type: array
+  ResourceType:
+    description: Resource Type
+    properties:
+      displayName:
+        description: Gets or sets the resource type display name
+        type: string
+      name:
+        description: Gets or sets the resource type name
+        type: string
+      operations:
+        description: Gets or sets the resource type operations
+        items:
+          $ref: '#/definitions/ProviderOperation'
+        type: array
+  RoleAssignment:
+    description: Role Assignments
+    properties:
+      id:
+        description: Gets or sets role assignment id.
+        type: string
+      name:
+        description: Gets or sets role assignment name.
+        type: string
+      properties:
+        $ref: '#/definitions/RoleAssignmentPropertiesWithScope'
+        description: Gets or sets role assignment properties.
+      type:
+        description: Gets or sets role assignment type.
+        type: string
+  RoleAssignmentCreateParameters:
+    description: Role assignment create parameters.
+    properties:
+      properties:
+        $ref: '#/definitions/RoleAssignmentProperties'
+        description: Gets or sets role assignment properties.
+  RoleAssignmentFilter:
+    description: Role Assignments filter
+    properties:
+      principalId:
+        description: Returns role assignment of the specific principal.
+        type: string
+  RoleAssignmentListResult:
+    description: Role assignment list operation result.
+    properties:
+      nextLink:
+        description: Gets or sets the URL to get the next set of role assignment results.
+        type: string
+      value:
+        description: Role assignment list.
+        items:
+          $ref: '#/definitions/RoleAssignment'
+        type: array
+  RoleAssignmentProperties:
+    description: Role assignment properties.
+    properties:
+      principalId:
+        description: Gets or sets principal Id.
+        type: string
+      roleDefinitionId:
+        description: Gets or sets role definition id.
+        type: string
+  RoleAssignmentPropertiesWithScope:
+    description: Role assignment properties with scope.
+    properties:
+      principalId:
+        description: Gets or sets principal Id.
+        type: string
+      roleDefinitionId:
+        description: Gets or sets role definition id.
+        type: string
+      scope:
+        description: Gets or sets role assignment scope.
+        type: string
+  RoleDefinition:
+    description: Role definition.
+    properties:
+      id:
+        description: Gets or sets role definition id.
+        type: string
+      name:
+        description: Gets or sets role definition name.
+        type: string
+      properties:
+        $ref: '#/definitions/RoleDefinitionProperties'
+        description: Gets or sets role definition properties.
+      type:
+        description: Gets or sets role definition type.
+        type: string
+  RoleDefinitionFilter:
+    description: Role Definitions filter
+    properties:
+      roleName:
+        description: Returns role definition with the specific name.
+        type: string
+  RoleDefinitionListResult:
+    description: Role definition list operation result.
+    properties:
+      value:
+        description: Role definition list.
+        items:
+          $ref: '#/definitions/RoleDefinition'
+        type: array
+  RoleDefinitionProperties:
+    description: Role definition properties.
+    properties:
+      assignableScopes:
+        description: Gets or sets role definition assignable scopes.
+        items:
+          type: string
+        type: array
+      description:
+        description: Gets or sets role definition description.
+        type: string
+      permissions:
+        description: Gets or sets role definition permissions.
+        items:
+          $ref: '#/definitions/Permission'
+        type: array
+      roleName:
+        description: Gets or sets role name.
+        type: string
+      type:
+        description: Gets or sets role type.
+        type: string

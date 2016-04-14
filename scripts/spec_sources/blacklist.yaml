@@ -1,0 +1,15 @@
+#blacklisted URLs
+#
+#No paths
+ - 'https://www.googleapis.com/discovery/v1/apis/iam/v1alpha1/rest'
+#Invalid link
+ - 'https://datastore.googleapis.com/$discovery/rest?version=v1'
+#localhost
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-servicefabric/2016-01-28/swagger/servicefabric.json'
+#Missing host and incorrect location
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/search/2015-02-28/swagger/searchservice.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/search/2015-02-28/swagger/searchindex.json'
+#Marked as internal APIs
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-graphrbac/1.42-previewInternal/swagger/graphrbac.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-graphrbac/1.6-internal/swagger/graphrbac.json'
+ - 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-intune/2015-01-14-privatepreview/swagger/intune.json'

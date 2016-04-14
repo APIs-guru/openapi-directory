@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Programmatic access to YouTube features.
+  description: 'Supports core YouTube features, such as uploading videos, creating and managing playlists, searching for content, and much more.'
   title: YouTube Data
   version: v3
   x-apiClientRegistration:
@@ -4704,6 +4704,7 @@ definitions:
         description: "The video's rating from Portugal's Comissão de Classificação de Espect´culos."
         enum:
           - cceM12
+          - cceM14
           - cceM16
           - cceM18
           - cceM4
@@ -5105,6 +5106,8 @@ definitions:
           - moctwP
           - moctwPg
           - moctwR
+          - moctwR12
+          - moctwR15
           - moctwUnrated
         type: string
       mpaaRating:
@@ -5737,6 +5740,10 @@ definitions:
       boundStreamId:
         description: This value uniquely identifies the live stream bound to the broadcast.
         type: string
+      boundStreamLastUpdateTimeMs:
+        description: The date and time that the live stream referenced by boundStreamId was last updated.
+        format: date-time
+        type: string
       closedCaptionsType:
         enum:
           - closedCaptionsDisabled
@@ -6028,6 +6035,11 @@ definitions:
         description: "The channels's avatar URL."
         type: string
     type: object
+  LiveChatMessageDeletedDetails:
+    properties:
+      deletedMessageId:
+        type: string
+    type: object
   LiveChatMessageListResponse:
     properties:
       etag:
@@ -6064,10 +6076,15 @@ definitions:
         description: The visitorId identifies the visitor.
         type: string
     type: object
+  LiveChatMessageRetractedDetails:
+    properties:
+      retractedMessageId:
+        type: string
+    type: object
   LiveChatMessageSnippet:
     properties:
       authorChannelId:
-        description: 'The ID of the user that authored this message, this field is not always filled. textMessageEvent - the user that wrote the message fanFundingEvent - the user that funded the broadcast newSponsorEvent - the user that just became a sponsor'
+        description: 'The ID of the user that authored this message, this field is not always filled. textMessageEvent - the user that wrote the message fanFundingEvent - the user that funded the broadcast newSponsorEvent - the user that just became a sponsor messageDeletedEvent - the moderator that took the action messageRetractedEvent - the author that retracted their message userBannedEvent - the moderator that took the action'
         type: string
       displayMessage:
         description: 'Contains a string that can be displayed to the user. If this field is not present the message is silent, at the moment only messages of type TOMBSTONE and CHAT_ENDED_EVENT are silent.'
@@ -6080,6 +6097,10 @@ definitions:
         type: boolean
       liveChatId:
         type: string
+      messageDeletedDetails:
+        $ref: '#/definitions/LiveChatMessageDeletedDetails'
+      messageRetractedDetails:
+        $ref: '#/definitions/LiveChatMessageRetractedDetails'
       publishedAt:
         description: 'The date and time when the message was orignally published. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.'
         format: date-time
@@ -6092,12 +6113,17 @@ definitions:
         enum:
           - chatEndedEvent
           - fanFundingEvent
+          - messageDeletedEvent
+          - messageRetractedEvent
           - newSponsorEvent
           - sponsorOnlyModeEndedEvent
           - sponsorOnlyModeStartedEvent
           - textMessageEvent
           - tombstone
+          - userBannedEvent
         type: string
+      userBannedDetails:
+        $ref: '#/definitions/LiveChatUserBannedMessageDetails'
     type: object
   LiveChatModerator:
     description: 'A liveChatModerator resource represents a moderator for a YouTube live chat. A chat moderator has the ability to ban/unban users from a chat, remove message, etc.'
@@ -6161,6 +6187,22 @@ definitions:
       messageText:
         description: "The user's message."
         type: string
+    type: object
+  LiveChatUserBannedMessageDetails:
+    properties:
+      banDurationSeconds:
+        description: The duration of the ban. This property is only present if the banType is temporary.
+        format: uint64
+        type: string
+      banType:
+        description: The type of ban.
+        enum:
+          - permanent
+          - temporary
+        type: string
+      bannedUserDetails:
+        $ref: '#/definitions/ChannelProfileDetails'
+        description: The details of the user that was banned.
     type: object
   LiveStream:
     description: A live stream describes a live ingestion point.
@@ -7781,7 +7823,7 @@ definitions:
         type: array
     type: object
   WatchSettings:
-    description: Branding properties for the watch.
+    description: Branding properties for the watch. All deprecated.
     properties:
       backgroundColor:
         description: "The text color for the video watch page's branded area."
