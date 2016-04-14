@@ -133,7 +133,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
     post:
-      description: 'Creates a new annotation. Caller must have WRITE permission for the associated annotation set. The following fields are required: * annotationSetId * referenceName or referenceId ### Transcripts For annotations of type TRANSCRIPT, the following fields of transcript must be provided: * `exons.start` * `exons.end` All other fields may be optionally specified, unless documented as being server-generated (for example, the `id` field). The annotated range must be no longer than 100Mbp (mega base pairs). See the Annotation resource for additional restrictions on each field.'
+      description: 'Creates a new annotation. Caller must have WRITE permission for the associated annotation set. The following fields are required: * annotationSetId * referenceName or referenceId ### Transcripts For annotations of type TRANSCRIPT, the following fields of transcript must be provided: * exons.start * exons.end All other fields may be optionally specified, unless documented as being server-generated (for example, the `id` field). The annotated range must be no longer than 100Mbp (mega base pairs). See the Annotation resource for additional restrictions on each field.'
       operationId: genomics.annotations.create
       parameters:
         - in: body
@@ -2294,7 +2294,7 @@ definitions:
         format: int64
         type: string
       frame:
-        description: 'The frame of this exon. Contains a value of 0, 1, or 2, which indicates the offset of the first coding base of the exon within the reading frame of the coding DNA sequence, if any. This field is dependent on the strandedness of this annotation (see Annotation.reverse_strand). For forward stranded annotations, this offset is relative to the `exon.start`. For reverse strand annotations, this offset is relative to the `exon.end - 1`. Unset if this exon does not intersect the coding sequence. Upon creation of a transcript, the frame must be populated for all or none of the coding exons.'
+        description: 'The frame of this exon. Contains a value of 0, 1, or 2, which indicates the offset of the first coding base of the exon within the reading frame of the coding DNA sequence, if any. This field is dependent on the strandedness of this annotation (see Annotation.reverse_strand). For forward stranded annotations, this offset is relative to the exon.start. For reverse strand annotations, this offset is relative to the exon.end `- 1`. Unset if this exon does not intersect the coding sequence. Upon creation of a transcript, the frame must be populated for all or none of the coding exons.'
         format: int32
         type: integer
       start:
@@ -3301,9 +3301,9 @@ definitions:
     properties:
       codingSequence:
         $ref: '#/definitions/CodingSequence'
-        description: 'The range of the coding sequence for this transcript, if any. To determine the exact ranges of coding sequence, intersect this range with those of the `exons`, if any. If there are any `exons`, the `codingSequence` must start and end within them. Note that in some cases, the reference genome will not exactly match the observed mRNA transcript e.g. due to variance in the source genome from reference. In these cases, `exon.frame` will not necessarily match the expected reference reading frame and coding exon reference bases cannot necessarily be concatenated to produce the original transcript mRNA.'
+        description: 'The range of the coding sequence for this transcript, if any. To determine the exact ranges of coding sequence, intersect this range with those of the exons, if any. If there are any exons, the codingSequence must start and end within them. Note that in some cases, the reference genome will not exactly match the observed mRNA transcript e.g. due to variance in the source genome from reference. In these cases, exon.frame will not necessarily match the expected reference reading frame and coding exon reference bases cannot necessarily be concatenated to produce the original transcript mRNA.'
       exons:
-        description: 'The exons that compose this transcript. This field should be unset for genomes where transcript splicing does not occur, for example prokaryotes. Introns are regions of the transcript that are not included in the spliced RNA product. Though not explicitly modeled here, intron ranges can be deduced; all regions of this transcript that are not exons are introns. Exonic sequences do not necessarily code for a translational product (amino acids). Only the regions of exons bounded by the `codingSequence` correspond to coding DNA sequence. Exons are ordered by start position and may not overlap.'
+        description: 'The exons that compose this transcript. This field should be unset for genomes where transcript splicing does not occur, for example prokaryotes. Introns are regions of the transcript that are not included in the spliced RNA product. Though not explicitly modeled here, intron ranges can be deduced; all regions of this transcript that are not exons are introns. Exonic sequences do not necessarily code for a translational product (amino acids). Only the regions of exons bounded by the codingSequence correspond to coding DNA sequence. Exons are ordered by start position and may not overlap.'
         items:
           $ref: '#/definitions/Exon'
         type: array

@@ -6,9 +6,9 @@ basePath: /1
 info:
   contact:
     email: support@ontraport.com
-    name: ONTRAPORT Engineering
+    name: The ONTRAPORT Engineering Team
     url: 'http://support.ontraport.com/'
-  description: "<p>Enter App ID and API Key above. If you don't have an API Key, <a href=\"https://app.ontraport.com/#!/api_settings/listAll\">go here to get one</a>. Authentication parameters must be sent in the request header as <strong>Api-Appid</strong> and <strong>Api-Key</strong>. Up to 180 requests per minute are allowed per ONTRAPORT account.</p>"
+  description: '<p>Enter your App ID and API Key above. If you do not have an App ID or API Key login to your ONTRAPORT account and navigate <a href="https://app.ontraport.com/#!/api_settings/listAll">here</a>. Authentication parameters must be sent in the request header as <strong>Api-Appid</strong> and <strong>Api-Key</strong>. Each ONTRAPORT account is allowed up to 180 requests per minute.</p>'
   termsOfService: 'https://ontraport.com/terms-of-service'
   title: ONTRAPORT
   version: 1.2.1
@@ -23,7 +23,7 @@ externalDocs:
   url: 'https://ontraport.com/ontraport-api'
 parameters:
   addListParamFormData:
-    description: Array of Tag IDs as comma-delimited list
+    description: Array of Tag IDs as comma-delimited list.
     in: formData
     items:
       format: int32
@@ -106,21 +106,21 @@ parameters:
     name: group_ids
     type: array
   idParam:
-    description: ID of Object
+    description: ID of Object.
     format: int32
     in: query
     name: id
     required: true
     type: integer
   idParamFormData:
-    description: ID of Object
+    description: ID of Object.
     format: int32
     in: formData
     name: id
     required: true
     type: integer
   idsParam:
-    description: Array of Object IDs as comma-delimited list
+    description: Array of Object IDs as comma-delimited list.
     in: query
     items:
       format: int32
@@ -128,7 +128,7 @@ parameters:
     name: ids
     type: array
   idsParamFormData:
-    description: Array of Object IDs as comma-delimited list
+    description: Array of Object IDs as comma-delimited list.
     in: formData
     items:
       format: int32
@@ -136,28 +136,28 @@ parameters:
     name: ids
     type: array
   listFieldsParam:
-    description: Array of fields to return in response as comma-delimited list
+    description: Array of fields to return in response as comma-delimited list.
     in: query
     items:
       type: string
     name: listFields
     type: array
   listFieldsParamFormData:
-    description: Array of fields to return in response as comma-delimited list
+    description: Array of fields to return in response as comma-delimited list.
     in: formData
     items:
       type: string
     name: listFields
     type: array
   objectIdParam:
-    description: Object Type ID
+    description: Object Type ID.
     format: int32
     in: query
     name: objectID
     required: true
     type: integer
   objectIdParamFormData:
-    description: Object Type ID
+    description: Object Type ID.
     format: int32
     in: formData
     name: objectID
@@ -177,13 +177,13 @@ parameters:
     type: integer
   performAllParam:
     default: false
-    description: Perform request on all objects that match criteria
+    description: Perform request on all Objects that match criteria.
     in: query
     name: performAll
     type: boolean
   performAllParamFormData:
     default: false
-    description: Perform request on all objects that match criteria
+    description: Perform request on all objects that match criteria.
     in: formData
     name: performAll
     type: boolean
@@ -202,7 +202,7 @@ parameters:
     name: range
     type: integer
   removeListParamFormData:
-    description: Array of Tag IDs as comma-delimited list
+    description: Array of Tag IDs as comma-delimited list.
     in: formData
     items:
       format: int32
@@ -243,7 +243,7 @@ parameters:
     name: search_fields
     type: boolean
   sortDirParam:
-    description: 'Sort direction, must be used in conjunction with <b>sort</b> parameter'
+    description: 'Sort direction, must be used in conjunction with <b>sort</b> parameter.'
     enum:
       - asc
       - desc
@@ -251,7 +251,7 @@ parameters:
     name: sortDir
     type: string
   sortDirParamFormData:
-    description: 'Sort direction, must be used in conjunction with <b>sort</b> parameter'
+    description: 'Sort direction, must be used in conjunction with <b>sort</b> parameter.'
     enum:
       - asc
       - desc
@@ -297,22 +297,22 @@ responses:
       items:
         $ref: '#/definitions/Response'
 tags:
-  - description: 'Create, Update, Fetch, and Delete Contacts or other Objects'
-    name: objects
-  - description: Fetch form content
-    name: forms
-  - description: 'Create, update, or fetch E-mail, SMS, or other Message content'
-    name: messages
-  - description: Cancel and Complete Tasks
-    name: tasks
+  - description: 'Create, update, fetch, and delete Contacts or other Objects'
+    name: object
+  - description: Fetch Form content
+    name: form
+  - description: 'Create, update, or fetch Email, SMS, or other Message content'
+    name: message
+  - description: Cancel and complete Tasks
+    name: task
   - description: Everything to do with payment Transactions
-    name: transactions
-  - description: Methods specifically belonging to Landing Pages
+    name: transaction
+  - description: Fetch Landing Page content
     name: landingPage
 paths:
   /form:
     get:
-      description: 'Fetch form HTML for a given ID<br/><b>Note</b>: HTML is returned in the <code>data</code> member of the JSON response. Therefore, the HTML is escaped, so you will have to unescape the HTML before using it.'
+      description: "This will fetch a Form's HTML for a given ID.<br/><b>Note</b>: HTML is returned in the <code>data</code> member of the JSON response. As a result, the HTML is escaped and you will have to unescape the HTML before using it."
       operationId: getForm
       parameters:
         - $ref: '#/parameters/idParam'
@@ -326,12 +326,12 @@ paths:
             type: object
         '404':
           description: Form not found
-      summary: "Get a Form's HTML"
+      summary: This will get an existing Form
       tags:
         - forms
   /landingPage/getHostedURL:
     get:
-      description: This will grab the permenant URL for that landingpage
+      description: This will grab the permanent URL for a given Landing Page.
       operationId: getHostedURL
       parameters:
         - $ref: '#/parameters/idParam'
@@ -350,7 +350,7 @@ paths:
         - landingPage
   /message:
     get:
-      description: Fetch data from an existing Message
+      description: This will fetch data from an existing Message.
       operationId: getMessage
       parameters:
         - $ref: '#/parameters/idParam'
@@ -364,25 +364,25 @@ paths:
             type: object
         '404':
           description: Message not found
-      summary: Get an existing Message
+      summary: This will get an existing Message
       tags:
         - messages
     post:
       description: ''
       operationId: saveMessage
       parameters:
-        - description: Object Type ID
+        - description: Object Type ID.
           enum:
             - 7
           format: int32
           in: formData
           name: objectID
           type: integer
-        - description: Message alias
+        - description: Message alias.
           in: formData
           name: alias
           type: string
-        - description: Name of your message
+        - description: Name of your Message.
           in: formData
           name: name
           type: string
@@ -390,21 +390,21 @@ paths:
           in: formData
           name: subject
           type: string
-        - description: "Message type: 'Template' for ONTRAmail, 'e-mail' for Legacy E-mail, 'sms' for SMS Messages, 'Task' for Task Messages"
+        - description: 'Message type: use <b>template</b> for ONTRAmail, <b>e-mail</b> for Legacy Email, <b>sms</b> for SMS Messages, <b>task</b> for Task Messages.'
           enum:
-            - Template
+            - template
             - e-mail
             - sms
-            - Task
+            - task
           in: formData
           name: type
           type: string
-        - description: Object type to associate with this Message; most likely zero (0) for Contacts -- only change this if you are using Custom Objects.
+        - description: Object type to associate with this Message. This will be zero (0) for Contacts. You should only change this if you are using Custom Objects.
           format: int32
           in: formData
           name: object_type_id
           type: integer
-        - description: 'Who will this Message come from? If not <b>owner</b> or <b>custom</b>, this field can contain the staff user ID to send the message from.'
+        - description: 'Who will this Message come from? If not <b>owner</b> or <b>custom</b>, this field can contain the Staff user ID to send the Message from.'
           enum:
             - owner
             - custom
@@ -413,7 +413,7 @@ paths:
           name: from
           type: string
         - default: owner
-          description: 'Name to be used in the Message From field when <b>from</b> field is <b>custom</b>.'
+          description: "Name to be used in the 'Message From' field when the <b>from</b> field is set to <b>custom</b>."
           in: formData
           name: send_out_name
           type: string
@@ -431,15 +431,15 @@ paths:
           name: send_from
           type: string
         - default: email
-          description: 'Only used with SMS Messages or Custom Objects. What field to use to send this Message when there may be a parent or child relationship to the Object type given in object_type_id. Default for SMS Message is <b>sms_number</b>'
+          description: 'Only used with SMS Messages or Custom Objects. Select the field to use when there may be a parent or child relationship to the Object type given in object_type_id. The default for SMS Message is <b>sms_number.</b>'
           in: formData
           name: send_to
           type: string
-        - description: For Legacy E-mail Messages only; this is the HTML content of the message.
+        - description: Use this for Legacy Email Messages only. This is the HTML content of the Message.
           in: formData
           name: message_body
           type: string
-        - description: 'For ONTRAmail Messages only; this is the content of the message. This can be extremely complex; your best bet is to inspect the resource that is sent when saving a Message from your browser and go from there. For SMS Messages, use plaintext field for content.'
+        - description: 'For ONTRAmail Messages only; this is the content of the message. Note that this can be extremely complex, so you should start by inspecting the resource that is sent when saving a Message from inside the App. For SMS Messages, use the plaintext field for content.'
           in: formData
           name: resource
           type: string
@@ -447,21 +447,21 @@ paths:
           in: formData
           name: email_title
           type: string
-        - description: Only for Task Messages; this is the content of the message.
+        - description: Use this only for Task Messages. This is the content of the Message.
           in: formData
           name: task_data
           type: string
-        - description: Only for Task Messages; this is the number of days after assignment this Task is due.
+        - description: Use this only for Task Messages. This is the number of days after assignment this Task is due.
           format: int32
           in: formData
           name: due_date
           type: integer
-        - description: Only for Task Messages; this is the Staff user ID of the Task owner.
+        - description: Use this only for Task Messages. This is the Staff user ID of the Task owner.
           format: int32
           in: formData
           name: task_owner
           type: integer
-        - description: Only for Task Messages; this is the optional Form ID to be filled when the Task is completed. This form must already exist.
+        - description: Use this only for Task Messages. This is the optional Form ID to be filled when the Task is completed. This form must already exist.
           format: int32
           in: formData
           name: task_form
@@ -474,31 +474,31 @@ paths:
           schema:
             $ref: '#/definitions/Response'
             type: object
-      summary: Create a new Message
+      summary: This will create a new Message
       tags:
         - messages
     put:
       description: ''
       operationId: updateMessage
       parameters:
-        - description: ID of the Message to be updated
+        - description: ID of the Message to be updated.
           format: int32
           in: formData
           name: id
           required: true
           type: integer
-        - description: Object Type ID
+        - description: Object Type ID.
           enum:
             - 7
           format: int32
           in: formData
           name: objectID
           type: integer
-        - description: Message alias
+        - description: Message alias.
           in: formData
           name: alias
           type: string
-        - description: Name of your message
+        - description: Name of your Message.
           in: formData
           name: name
           type: string
@@ -506,7 +506,7 @@ paths:
           in: formData
           name: subject
           type: string
-        - description: 'Who will this Message come from? If not <b>owner</b> or <b>custom</b>, this field can contain the staff user ID to send the message from.'
+        - description: 'Who will this Message come from? If not <b>owner</b> or <b>custom</b>, this field can contain the Staff user ID to send the Message from.'
           enum:
             - owner
             - custom
@@ -515,7 +515,7 @@ paths:
           name: from
           type: string
         - default: owner
-          description: 'Name to be used in the Message From field when <b>from</b> field is <b>custom</b>.'
+          description: "Name to be used in the 'Message From' field when the <b>from</b> field is set to <b>custom</b>."
           in: formData
           name: send_out_name
           type: string
@@ -533,15 +533,15 @@ paths:
           name: send_from
           type: string
         - default: email
-          description: 'Only used with SMS Messages or Custom Objects. What field to use to send this Message when there may be a parent or child relationship to the Object type given in object_type_id. Default for SMS Message is <b>sms_number</b>'
+          description: 'Only used with SMS Messages or Custom Objects. Select the field to use when there may be a parent or child relationship to the Object type given in object_type_id. The default for SMS Message is <b>sms_number.</b>'
           in: formData
           name: send_to
           type: string
-        - description: For Legacy E-mail Messages only; this is the HTML content of the message.
+        - description: Use this for Legacy Email Messages only. This is the HTML content of the Message.
           in: formData
           name: message_body
           type: string
-        - description: 'For ONTRAmail Messages only; this is the content of the message. This can be extremely complex; your best bet is to inspect the resource that is sent when saving a Message from your browser and go from there. For SMS Messages, use plaintext field for content.'
+        - description: 'For ONTRAmail Messages only; this is the content of the message. Note that this can be extremely complex, so you should start by inspecting the resource that is sent when saving a Message from inside the App. For SMS Messages, use the plaintext field for content.'
           in: formData
           name: resource
           type: string
@@ -549,21 +549,21 @@ paths:
           in: formData
           name: email_title
           type: string
-        - description: Only for Task Messages; this is the content of the message.
+        - description: Use this only for Task Messages. This is the content of the Message.
           in: formData
           name: task_data
           type: string
-        - description: Only for Task Messages; this is the number of days after assignment this Task is due.
+        - description: Use this only for Task Messages. This is the number of days after assignment this Task is due.
           format: int32
           in: formData
           name: due_date
           type: integer
-        - description: Only for Task Messages; this is the Staff user ID of the Task owner.
+        - description: Use this only for Task Messages. This is the Staff user ID of the Task owner.
           format: int32
           in: formData
           name: task_owner
           type: integer
-        - description: Only for Task Messages; this is the optional Form ID to be filled when the Task is completed. This form must already exist.
+        - description: Use this only for Task Messages. This is the optional Form ID to be filled when the Task is completed. This form must already exist.
           format: int32
           in: formData
           name: task_form
@@ -576,12 +576,12 @@ paths:
           schema:
             $ref: '#/definitions/Response'
             type: object
-      summary: Update an existing Message
+      summary: This will update an existing Message
       tags:
         - messages
   /object:
     delete:
-      description: Delete object with given object type and ID
+      description: This will delete an Object with the given object type and ID.
       operationId: deleteObject
       parameters:
         - $ref: '#/parameters/objectIdParam'
@@ -598,11 +598,11 @@ paths:
           description: Invalid objectID
         '404':
           description: Object not found
-      summary: Delete an object
+      summary: This will delete an Object
       tags:
         - objects
     get:
-      description: Fetch data for a given object type and ID
+      description: This will fetch data for a given object type and ID.
       operationId: getObject
       parameters:
         - $ref: '#/parameters/objectIdParam'
@@ -619,7 +619,7 @@ paths:
           description: Invalid objectID
         '404':
           description: Object not found
-      summary: "Get an object's data"
+      summary: "This will get an object's data"
       tags:
         - objects
   /objects:
@@ -651,7 +651,7 @@ paths:
             type: object
         '400':
           description: Invalid objectID
-      summary: Delete a list of objects
+      summary: This will delete a list of objects
       tags:
         - objects
     get:
@@ -682,23 +682,23 @@ paths:
             type: object
         '400':
           description: Invalid objectID
-      summary: Get a list of objects
+      summary: This will get a list of objects
       tags:
         - objects
     post:
-      description: 'Create an object with given data. Object type is a required parameters, but other parameters are optional and depend on the object type. We have provided optional parameters as examples for updating a contact object. When using this in your application, invalid parameters will be ignored.'
+      description: 'This will create an Object with the given data. Object type is a required parameters, but other parameters are optional and dependent upon the object type. We have provided optional parameters as examples for updating a Contact. When using this in your application, all invalid parameters will be ignored.'
       operationId: createObject
       parameters:
         - $ref: '#/parameters/objectIdParamFormData'
-        - description: New first name for object
+        - description: New first name for the Object.
           in: formData
           name: firstname
           type: string
-        - description: New last name for object
+        - description: New last name for the Object.
           in: formData
           name: lastname
           type: string
-        - description: New email address for object
+        - description: New email address for the Object.
           in: formData
           name: email
           type: string
@@ -712,24 +712,24 @@ paths:
             type: object
         '400':
           description: Invalid objectID
-      summary: Create an object
+      summary: This will create an Object
       tags:
         - objects
     put:
-      description: "Update an object's data. Object type and ID and required parameters, but other parameters depend on the object type. We have provided optional parameters as examples for updating a contact object. When using this in your application, invalid parameters will be ignored."
+      description: "This will update an Object's data. The object type and ID and required parameters, but other parameters are dependent upon the object type. We have provided optional parameters as examples for updating a Contact. When using this in your application, all invalid parameters will be ignored."
       operationId: updateObjects
       parameters:
         - $ref: '#/parameters/objectIdParamFormData'
         - $ref: '#/parameters/idParamFormData'
-        - description: New first name for object
+        - description: New first name for the Object.
           in: formData
           name: firstname
           type: string
-        - description: New last name for object
+        - description: New last name for the Object.
           in: formData
           name: lastname
           type: string
-        - description: New email address for object
+        - description: New email address for the Object.
           in: formData
           name: email
           type: string
@@ -743,12 +743,12 @@ paths:
             type: object
         '404':
           description: Object not found
-      summary: "Update an object's data"
+      summary: "This will update an Object's data"
       tags:
         - objects
   /objects/getInfo:
     get:
-      description: 'Get information about a collection of objects, such as the number of objects that match the given criteria'
+      description: 'Get information about an Objects Collection, such as the number of Objects that match the given criteria.'
       operationId: getObjectsInfo
       parameters:
         - $ref: '#/parameters/objectIdParam'
@@ -767,16 +767,16 @@ paths:
             type: object
         '400':
           description: Invalid objectID
-      summary: Get information about a collection of objects
+      summary: Get information about an Objects Collection
       tags:
         - objects
   /objects/meta:
     get:
-      description: Get a list of existing object types and corresponding field names. Use objectID parameter to get a single Object type.
+      description: This will get a list of existing object types and their corresponding field names. Use the objectID parameter to This will get a single object type.
       operationId: getMeta
       parameters:
         - default: byId
-          description: Choose to get the list indexed by Object class name or integer ID
+          description: Choose to get the list indexed by Object class name or integer ID.
           enum:
             - byId
             - byName
@@ -784,7 +784,7 @@ paths:
           name: format
           type: string
         - default: 0
-          description: Object Type ID
+          description: Object Type ID.
           format: int32
           in: query
           name: objectID
@@ -797,24 +797,24 @@ paths:
           schema:
             $ref: '#/definitions/Response'
             type: object
-      summary: Get a list of existing object types
+      summary: This will get a list of existing object types
       tags:
         - objects
   /objects/saveorupdate:
     post:
-      description: 'Create an object with given data or merge if the unique field matches another in the database. Object type is a required parameters, but other parameters are optional and depend on the object type. We have provided optional parameters as examples for updating a contact object. When using this in your application, invalid parameters will be ignored.'
+      description: 'Creates an Object with the given data or will merge with an Object in the database if the unique field matches another Object’s. Object type is a required parameters, but other parameters are optional and depend on the object type. We have provided optional parameters as examples for updating a Contact. When using this in your application, all invalid parameters will be ignored.'
       operationId: saveorupdateObject
       parameters:
         - $ref: '#/parameters/objectIdParamFormData'
-        - description: First name for object
+        - description: First name for the Object.
           in: formData
           name: firstname
           type: string
-        - description: Last name for object
+        - description: Last name for the Object.
           in: formData
           name: lastname
           type: string
-        - description: Email address for object
+        - description: Email address for the Object.
           in: formData
           name: email
           type: string
@@ -833,7 +833,7 @@ paths:
         - objects
   /objects/tag:
     delete:
-      description: 'Remove a Tag from an Object using Tag ID. When adding and removing tags, either <b>ids</b> or <b>group_ids</b> must be given.'
+      description: 'This will remove a Tag from an Object using a Tag ID. When adding or removing Tags, either <b>ids</b> or <b>group_ids</b> must be given.'
       operationId: removeTag
       parameters:
         - $ref: '#/parameters/objectIdParamFormData'
@@ -859,11 +859,11 @@ paths:
           schema:
             $ref: '#/definitions/Response'
             type: object
-      summary: Remove an Object Tag
+      summary: This will remove an Object Tag
       tags:
         - objects
     put:
-      description: 'Add a Tag to an Object. When adding and removing tags, either <b>ids</b> or <b>group_ids</b> must be given.'
+      description: 'This will add a Tag to an Object. when adding or removing Tags, either <b>ids</b> or <b>group_ids</b> must be given.'
       operationId: addTag
       parameters:
         - $ref: '#/parameters/objectIdParamFormData'
@@ -889,15 +889,15 @@ paths:
           schema:
             $ref: '#/definitions/Response'
             type: object
-      summary: Add an Object Tag
+      summary: This will add an Object Tag
       tags:
         - objects
   /task/cancel:
     post:
-      description: 'To affect a single task or list of specific tasks, use the <strong>ids</strong> array in the <strong>criteria</strong> parameter; otherwise, use <strong>performAll</strong> and other criteria to select a group of Tasks to cancel.'
+      description: 'To affect a single Task or list of specific Tasks, use the <strong>ids</strong> array in the <strong>criteria</strong> parameter. Otherwise, you should use <strong>performAll</strong> and other criteria to select a Group of Tasks to cancel.'
       operationId: taskCancel
       parameters:
-        - description: Criteria of tasks to cancel
+        - description: Criteria of the Tasks to cancel.
           in: body
           name: criteria
           required: true
@@ -911,15 +911,15 @@ paths:
           schema:
             $ref: '#/definitions/Response'
             type: object
-      summary: Cancel a set of tasks
+      summary: Cancel a set of Tasks
       tags:
         - tasks
   /task/complete:
     post:
-      description: 'Mark one or many Tasks complete and optionally assign a new Task for further followup. To affect a single task or list of specific tasks, use the <strong>ids</strong> array in the <strong>criteria</strong> parameter; otherwise, use <strong>performAll</strong> and other criteria to select a group of Tasks to complete.'
+      description: 'This will mark one or many Tasks as complete. As an option, you can assign a new Task for further follow-up. To affect a single Task or list of specific Tasks, use the <strong>ids</strong> array in the <strong>criteria</strong> parameter. Otherwise, you should use <strong>performAll</strong> and other criteria to select a Group of Tasks to complete.'
       operationId: taskComplete
       parameters:
-        - description: Criteria and data of tasks to complete
+        - description: Criteria and data of the Tasks to complete.
           in: body
           name: body
           required: true
@@ -933,7 +933,7 @@ paths:
           schema:
             $ref: '#/definitions/Response'
             type: object
-      summary: Complete a set of tasks
+      summary: Complete a set of Tasks
       tags:
         - tasks
   /transaction/convertToCollections:
@@ -954,7 +954,7 @@ paths:
           description: Error converting transaction
         '404':
           description: Object not found
-      summary: Convert status of one or more transactions to Collections
+      summary: Convert the status of one or more Transactions to Collections
       tags:
         - transactions
   /transaction/convertToDecline:
@@ -975,7 +975,7 @@ paths:
           description: Error converting transaction
         '404':
           description: Object not found
-      summary: Convert status of one or more transactions to Declined
+      summary: Convert the status of one or more Transactions to Declined
       tags:
         - transactions
   /transaction/markPaid:
@@ -996,7 +996,7 @@ paths:
           description: Error marking Transaction as paid
         '404':
           description: Object not found
-      summary: Mark a transaction as Paid
+      summary: Mark a Transaction as Paid
       tags:
         - transactions
   /transaction/order:
@@ -1004,7 +1004,7 @@ paths:
       description: ''
       operationId: getOrder
       parameters:
-        - description: Order ID
+        - description: Order ID.
           in: query
           name: id
           required: true
@@ -1025,10 +1025,10 @@ paths:
     put:
       consumes:
         - application/json
-      description: 'Update information about an Order. If Offer data is omitted, this Order will be Deleted.'
+      description: 'Update information about an Order. Please note that if offer data is omitted, this Order will be deleted.'
       operationId: setOrder
       parameters:
-        - description: Order object
+        - description: Order Object.
           in: body
           name: order
           required: true
@@ -1049,10 +1049,10 @@ paths:
         - transactions
   /transaction/processManual:
     post:
-      description: 'Create a transaction for a contact. This request requires valid parameters for all associated members of the transaction; otherwise, the request will fail. If you have doubled-checked all parameters and the request is still failing, check the payload JSON format is correct using <a href="http://jsonlint.com/">JSONLint</a>. If credit card and billing information already exist for this contact, <b>billing_address</b> and <b>payer</b> can be omitted from the request. Note that <b>trans_date</b> is given in milliseconds since midnight 1/1/1970.'
+      description: 'This will create a Transaction for a Contact. Please note that this request requires valid parameters for all associated members of the Transaction or the request will fail. If you have doubled-checked all parameters and the request is still failing, check that the payload JSON format is correct by using <a href="http://jsonlint.com/">JSONLint</a>. If credit card and billing information already exist for this contact, you may omit <b>billing_address</b> and <b>payer</b> from the request. Note that <b>trans_date</b> is given in milliseconds elapsed since midnight on 1/1/1970.'
       operationId: processManual
       parameters:
-        - description: Definition of transaction
+        - description: Definition of the Transaction.
           in: body
           name: transaction
           required: true
@@ -1068,7 +1068,7 @@ paths:
             type: object
         '400':
           description: Error processing transaction
-      summary: Create a new transaction
+      summary: This will create a new Transaction
       tags:
         - transactions
   /transaction/refund:
@@ -1076,7 +1076,7 @@ paths:
       description: ''
       operationId: refund
       parameters:
-        - description: Criteria of transactions to refund
+        - description: Criteria of Transactions to refund.
           in: body
           name: criteria
           required: true
@@ -1092,15 +1092,15 @@ paths:
             type: object
         '400':
           description: Error refunding transaction
-      summary: Refund one or more transactions
+      summary: Refund one or more Transactions
       tags:
         - transactions
   /transaction/rerun:
     post:
-      description: Re-run a single or group of Transactions that are currently in Collections.
+      description: Re-run a single Transaction or a Group of Transactions that are currently in Collections.
       operationId: rerun
       parameters:
-        - description: Criteria of transactions to rerun
+        - description: Criteria of Transactions to rerun.
           in: body
           name: criteria
           required: true
@@ -1116,7 +1116,7 @@ paths:
             type: object
         '400':
           description: Error rerunning transaction
-      summary: Re-run a transaction
+      summary: Re-run a Transaction
       tags:
         - transactions
   /transaction/rerunCommission:
@@ -1124,7 +1124,7 @@ paths:
       description: ''
       operationId: rerunCommission
       parameters:
-        - description: Criteria of transactions to rerun commissions
+        - description: Criteria of Transactions to rerun commissions.
           in: body
           name: criteria
           required: true
@@ -1140,7 +1140,7 @@ paths:
             type: object
         '400':
           description: Error rerunning commission
-      summary: Re-run a Partner Commission
+      summary: Re-run a Partner commission
       tags:
         - transactions
   /transaction/resendInvoice:
@@ -1148,7 +1148,7 @@ paths:
       description: ''
       operationId: resendInvoice
       parameters:
-        - description: Criteria of transactions to resend invoices
+        - description: Criteria of Transactions to resend invoices.
           in: body
           name: criteria
           required: true
@@ -1164,7 +1164,7 @@ paths:
             type: object
         '400':
           description: Error processing transaction
-      summary: Re-send a transaction invoice
+      summary: Re-send a Transaction invoice
       tags:
         - transactions
   /transaction/void:
@@ -1172,7 +1172,7 @@ paths:
       description: ''
       operationId: voidTransaction
       parameters:
-        - description: Criteria of transactions to void
+        - description: Criteria of Transactions to void.
           in: body
           name: criteria
           required: true
@@ -1188,7 +1188,7 @@ paths:
             type: object
         '400':
           description: Error voiding transaction
-      summary: Void a transaction
+      summary: Void a Transaction
       tags:
         - transactions
   /transaction/voidPurchase:
@@ -1230,7 +1230,7 @@ paths:
           description: Error writing off transaction
         '404':
           description: Object not found
-      summary: Write-off a transaction
+      summary: Write-off a Transaction
       tags:
         - transactions
 definitions:
@@ -1291,7 +1291,7 @@ definitions:
         type: integer
       performAll:
         default: false
-        description: Perform request on all objects that match criteria
+        description: Perform request on all objects that match criteria.
         type: boolean
       range:
         description: Number of results to return (maximum=50)
@@ -1308,7 +1308,7 @@ definitions:
         description: Field used to sort results
         type: string
       sortDir:
-        description: 'Sort direction, must be used in conjunction with <b>sort</b> parameter'
+        description: 'Sort direction, must be used in conjunction with <b>sort</b> parameter.'
         enum:
           - asc
           - desc
@@ -1344,14 +1344,14 @@ definitions:
     properties:
       ccExpirationDate:
         default: ''
-        description: Credit card expiration date
+        description: Credit card expiration date.
         type: string
       delay:
-        description: Days to delay start of offer
+        description: Days to delay start of offer.
         format: int32
         type: integer
       grandTotal:
-        description: Total amount of sale
+        description: Total amount of sale.
         type: number
       hasShipping:
         default: false
@@ -1362,11 +1362,11 @@ definitions:
         description: Are there applicable taxes?
         type: boolean
       offer_id:
-        description: This must be a valid Offer ID
+        description: This must be a valid Offer ID.
         format: int32
         type: integer
       order_id:
-        description: This must be a valid Order ID
+        description: This must be a valid Order ID.
         format: int32
         type: integer
       products:
@@ -1374,14 +1374,14 @@ definitions:
           $ref: '#/definitions/Product'
         type: array
       shipping:
-        description: Shipping amount
+        description: Shipping amount.
         type: number
       shipping_charge_reoccurring_orders:
         default: false
         description: Add shipping charge to reoccurring orders?
         type: boolean
       subTotal:
-        description: Subtotal
+        description: Subtotal.
         type: number
       taxes:
         items:
@@ -1394,7 +1394,7 @@ definitions:
   Order:
     properties:
       affiliate_id:
-        description: Affiliate ID
+        description: Affiliate ID.
         format: int32
         type: integer
       billing_address:
@@ -1407,11 +1407,11 @@ definitions:
         format: int32
         type: integer
       gateway_id:
-        description: Gateway ID
+        description: Gateway ID.
         format: int32
         type: integer
       invoice_template:
-        description: Invoice template ID
+        description: Invoice template ID.
         format: int32
         type: integer
       objectID:
@@ -1431,13 +1431,13 @@ definitions:
         type: string
       code:
         default: ''
-        description: CVV code
+        description: CVV code.
         type: string
       expire_month:
-        description: Expiration month (1-12)
+        description: Expiration month (1-12).
         type: integer
       expire_year:
-        description: 'Expiration year (four-digit year, e.g. 2018)'
+        description: 'Expiration year (four-digit year, e.g. 2018).'
         type: integer
     required:
       - ccnumber
@@ -1467,25 +1467,25 @@ definitions:
   Product:
     properties:
       delay_start:
-        description: Days to delay start
+        description: Days to delay start.
         format: int32
         type: integer
       id:
-        description: This must be an existing Product ID
+        description: This must be an existing Product ID.
         format: int32
         type: integer
       level1:
-        description: Partner Level 1 Commission Percentage
+        description: Partner Level 1 commission percentage.
         type: number
       level2:
-        description: Partner Level 2 Commission Percentage
+        description: Partner Level 2 commission percentage.
         type: number
       offer_to_affiliates:
         default: false
-        description: Is this offered to affiliates?
+        description: Is this offered to Partners (affiliates)?
         type: boolean
       owner:
-        description: Product owner (Staff ID)
+        description: Product owner (Staff ID).
         format: int32
         type: integer
       price:
@@ -1497,10 +1497,10 @@ definitions:
         format: int32
         type: integer
       setup_fee:
-        description: One-time setup fee
+        description: One-time setup fee.
         type: number
       setup_fee_date:
-        description: 'Date to charge setup fee (when setup_fee_when is "on_date")'
+        description: 'Date to charge setup fee (when setup_fee_when is "on_date").'
         type: string
       setup_fee_when:
         description: When should setup fee be applied?
@@ -1537,11 +1537,11 @@ definitions:
         description: What is the total amount of this sale?
         type: number
       trial_period_count:
-        description: Length of trial period (also set trial_period_units)
+        description: Length of trial period (also set trial_period_units).
         format: int32
         type: integer
       trial_period_unit:
-        description: Units describing length of trial period
+        description: Units describing length of trial period.
         enum:
           - day
           - week
@@ -1550,7 +1550,7 @@ definitions:
           - year
         type: string
       trial_price:
-        description: Price during trial period
+        description: Price during trial period.
         type: number
       type:
         enum:
@@ -1607,7 +1607,7 @@ definitions:
       followup:
         $ref: '#/definitions/TaskFollowup'
       outcome:
-        description: 'Task outcome name. This must start with ":=" For example, <strong>":=signed"</strong>'
+        description: 'Task outcome name. This must start with ":=" For example, <strong>":=signed"</strong>.'
         type: string
       task_form_data:
         description: "These fields can be used to update associated Object data when completing a task. For example, set <strong>task_form_title</strong> to \"New title\" to change the Contact's title."
@@ -1615,15 +1615,15 @@ definitions:
   TaskFollowup:
     properties:
       due_date:
-        description: 'Due date of new Task, given as number of days from current date'
+        description: 'Due date of new Task, given as number of days from current date.'
         format: int32
         type: integer
       message_id:
-        description: 'Message ID of new Task to be created for further followup. This Task must currently exist. New tasks can be created using the <a href="http://api.ontraport.com/doc/#!/objects/createObject">Objects Create endpoint</a> with objectID=1'
+        description: 'Message ID of new Task to be created for further followup. This Task must currently exist. New tasks can be created using the <a href="http://api.ontraport.com/doc/#!/objects/createObject">Objects Create endpoint</a> with objectID=1.'
         format: int32
         type: integer
       task_owner:
-        description: New Task assignee
+        description: New Task assignee.
         format: int32
         type: integer
     required:
@@ -1643,19 +1643,19 @@ definitions:
       billing_address:
         $ref: '#/definitions/Address'
       chargeNow:
-        description: Charge transaction now or or just log a transaction
+        description: Charge Transaction now or or just log a Transaction.
         enum:
           - chargeNow
           - chargeLog
         type: string
       contact_id:
-        description: Create new transaction for this Object instance (Contact ID)
+        description: Create new Transaction for this Object instance (Contact ID).
         type: integer
       gateway_id:
-        description: Gateway ID to use for this transaction
+        description: Gateway ID to use for this Transaction.
         type: integer
       invoice_template:
-        description: Invoice ID to use for this transaction
+        description: Invoice ID to use for this Transaction.
         example: 1
         type: integer
       offer:
@@ -1663,7 +1663,7 @@ definitions:
       payer:
         $ref: '#/definitions/Payer'
       trans_date:
-        description: Timestamp (in milliseconds since midnight 1/1/1970) of the transaction
+        description: Timestamp (in milliseconds since midnight 1/1/1970) of the Transaction.
         type: integer
     required:
       - contact_id

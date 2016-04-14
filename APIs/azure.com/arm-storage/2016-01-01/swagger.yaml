@@ -5,15 +5,15 @@ host: management.azure.com
 info:
   description: The Storage Management Client.
   title: StorageManagementClient
-  version: '2015-06-15'
+  version: '2016-01-01'
   x-logo:
     backgroundColor: '#333333'
     url: 'https://azure.github.io/images/logo-msft-dark@2x.png'
   x-origin:
     format: swagger
-    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2015-06-15/swagger/storage.json'
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-storage/2016-01-01/swagger/storage.json'
     version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: arm-storage
 consumes:
@@ -22,17 +22,6 @@ consumes:
 produces:
   - application/json
   - text/json
-securityDefinitions:
-  azure_auth:
-    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
-    description: Azure Active Directory OAuth2 Flow
-    flow: implicit
-    scopes:
-      user_impersonation: impersonate your user account
-    type: oauth2
-security:
-  - azure_auth:
-      - user_impersonation
 parameters:
   ApiVersionParameter:
     description: Client Api Version.
@@ -96,7 +85,6 @@ paths:
             $ref: '#/definitions/UsageListResult'
       tags:
         - Usage
-      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts':
     get:
       description: Lists all the storage accounts available under the given resource group. Note that storage keys are not returned; use the ListKeys operation for this.
@@ -169,7 +157,7 @@ paths:
       tags:
         - StorageAccounts
     patch:
-      description: 'Updates the account type or tags for a storage account. It can also be used to add a custom domain (note that custom domains cannot be added via the Create operation). Only one custom domain is supported per storage account. In order to replace a custom domain, the old value must be cleared before a new value may be set. To clear a custom domain, simply update the custom domain with empty string. Then call update again with the new cutsom domain name. The update API can only be used to update one of tags, accountType, or customDomain per call. To update multiple of these properties, call the API multiple times with one change per call. This call does not change the storage keys for the account. If you want to change storage account keys, use the RegenerateKey operation. The location and name of the storage account cannot be changed after creation.'
+      description: 'The update operation can be used to update the account type, encryption, or tags for a storage account. It can also be used to map the account to a custom domain. Only one custom domain is supported per storage account and. replacement/change of custom domain is not supported. In order to replace an old custom domain, the old value must be cleared/unregistered before a new value may be set. Update of multiple properties is supported. This call does not change the storage keys for the account. If you want to change storage account keys, use the regenerate keys operation.  The location and name of the storage account cannot be changed after creation.'
       operationId: StorageAccounts_Update
       parameters:
         - description: "The name of the resource group within the user's subscription."
@@ -184,7 +172,7 @@ paths:
           name: accountName
           required: true
           type: string
-        - description: 'The parameters to update on the account. Note that only one property can be changed at a time using this API. '
+        - description: The parameters to provide for the updated account.
           in: body
           name: parameters
           required: true
@@ -200,7 +188,7 @@ paths:
       tags:
         - StorageAccounts
     put:
-      description: 'Asynchronously creates a new storage account with the specified parameters. Existing accounts cannot be updated with this API and should instead use the Update Storage Account API. If an account is already created and subsequent PUT request is issued with exact same set of properties, then HTTP 200 would be returned. '
+      description: 'Asynchronously creates a new storage account with the specified parameters. If an account is already created and subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and subsequent create or update request is issued with exact same set of properties, the request will succeed.'
       operationId: StorageAccounts_Create
       parameters:
         - description: "The name of the resource group within the user's subscription."
@@ -256,7 +244,7 @@ paths:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/StorageAccountKeys'
+            $ref: '#/definitions/StorageAccountListKeysResult'
       tags:
         - StorageAccounts
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey':
@@ -288,7 +276,7 @@ paths:
         '200':
           description: ''
           schema:
-            $ref: '#/definitions/StorageAccountKeys'
+            $ref: '#/definitions/StorageAccountListKeysResult'
       tags:
         - StorageAccounts
 definitions:
@@ -297,15 +285,18 @@ definitions:
     properties:
       message:
         description: Gets an error message explaining the Reason value in more detail.
+        readOnly: true
         type: string
       nameAvailable:
         description: 'Gets a boolean value that indicates whether the name is available for you to use. If true, the name is available. If false, the name has already been taken or invalid and cannot be used.'
+        readOnly: true
         type: boolean
       reason:
         description: Gets the reason that a storage account name could not be used. The Reason element is only returned if NameAvailable is false.
         enum:
           - AccountNameInvalid
           - AlreadyExists
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: false
@@ -321,20 +312,54 @@ definitions:
         type: boolean
     required:
       - name
+  Encryption:
+    description: The encryption settings on the account.
+    properties:
+      keySource:
+        description: 'Gets the encryption keySource(provider). Possible values (case-insensitive):  Microsoft.Storage'
+        enum:
+          - Microsoft.Storage
+        type: string
+      services:
+        $ref: '#/definitions/EncryptionServices'
+        description: Gets the services which are encrypted.
+    required:
+      - keySource
+  EncryptionService:
+    description: An encrypted service.
+    properties:
+      enabled:
+        description: A boolean indicating whether or not the service is encrypted.
+        type: boolean
+      lastEnabledTime:
+        description: Gets a time value indicating when was the encryption enabled by the user last time. We return this value only when encryption is enabled. There might be some unencrypted blobs which were written after this time. This time is just to give a rough estimate of when encryption was enabled.
+        format: date-time
+        readOnly: true
+        type: string
+  EncryptionServices:
+    description: The encrypted services.
+    properties:
+      blob:
+        $ref: '#/definitions/EncryptionService'
+        description: The blob service.
   Endpoints:
     description: 'The URIs that are used to perform a retrieval of a public blob, queue or table object.'
     properties:
       blob:
         description: Gets the blob endpoint.
+        readOnly: true
         type: string
       file:
         description: Gets the file endpoint.
+        readOnly: true
         type: string
       queue:
         description: Gets the queue endpoint.
+        readOnly: true
         type: string
       table:
         description: Gets the table endpoint.
+        readOnly: true
         type: string
   Resource:
     properties:
@@ -359,49 +384,126 @@ definitions:
         readOnly: true
         type: string
     x-ms-azure-resource: true
+  Sku:
+    description: The SKU of the storage account.
+    properties:
+      name:
+        description: 'Gets or sets the sku name. Required for account creation, optional for update. Note that in older versions, sku name was called accountType.'
+        enum:
+          - Standard_LRS
+          - Standard_GRS
+          - Standard_RAGRS
+          - Standard_ZRS
+          - Premium_LRS
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: SkuName
+      tier:
+        description: Gets the sku tier. This is based on the SKU name.
+        enum:
+          - Standard
+          - Premium
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: SkuTier
+    required:
+      - name
   StorageAccount:
     allOf:
       - $ref: '#/definitions/Resource'
     description: The storage account.
     properties:
+      kind:
+        description: Gets the Kind.
+        enum:
+          - Storage
+          - BlobStorage
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: Kind
       properties:
         $ref: '#/definitions/StorageAccountProperties'
         x-ms-client-flatten: true
+      sku:
+        $ref: '#/definitions/Sku'
+        description: Gets the SKU.
+        readOnly: true
   StorageAccountCheckNameAvailabilityParameters:
     properties:
       name:
         type: string
       type:
-        default: Microsoft.Storage/storageAccounts
+        enum:
+          - Microsoft.Storage/storageAccounts
         type: string
     required:
       - name
+      - type
   StorageAccountCreateParameters:
     description: The parameters to provide for the account.
     properties:
+      kind:
+        description: Required. Indicates the type of storage account.
+        enum:
+          - Storage
+          - BlobStorage
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: Kind
       location:
-        description: Resource location
+        description: 'Required. Gets or sets the location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update the request will succeed.'
         type: string
       properties:
         $ref: '#/definitions/StorageAccountPropertiesCreateParameters'
         x-ms-client-flatten: true
+      sku:
+        $ref: '#/definitions/Sku'
+        description: Required. Gets or sets the sku type.
       tags:
         additionalProperties:
           type: string
-        description: Resource tags
+        description: Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters.
         type: object
     required:
+      - sku
+      - kind
       - location
-    x-ms-azure-resource: true
-  StorageAccountKeys:
-    description: The access keys for the storage account.
+  StorageAccountKey:
+    description: An access key for the storage account.
     properties:
-      key1:
-        description: Gets the value of key 1.
+      keyName:
+        description: Name of the key.
+        readOnly: true
         type: string
-      key2:
-        description: Gets the value of key 2.
+      permissions:
+        description: Permissions for the key.
+        enum:
+          - READ
+          - FULL
+        readOnly: true
         type: string
+        x-ms-enum:
+          modelAsString: false
+          name: KeyPermission
+      value:
+        description: Base 64 encoded value of the key.
+        readOnly: true
+        type: string
+  StorageAccountListKeysResult:
+    description: The ListKeys operation response.
+    properties:
+      keys:
+        description: Gets the list of account keys and their properties.
+        items:
+          $ref: '#/definitions/StorageAccountKey'
+        readOnly: true
+        type: array
   StorageAccountListResult:
     description: The list storage accounts operation response.
     properties:
@@ -409,37 +511,45 @@ definitions:
         description: Gets the list of storage accounts and their properties.
         items:
           $ref: '#/definitions/StorageAccount'
+        readOnly: true
         type: array
   StorageAccountProperties:
     properties:
-      accountType:
-        description: Gets the type of the storage account.
+      accessTier:
+        description: 'The access tier used for billing. Access tier cannot be changed more than once every 7 days (168 hours). Access tier cannot be set for StandardLRS, StandardGRS, StandardRAGRS, or PremiumLRS account types.'
         enum:
-          - Standard_LRS
-          - Standard_ZRS
-          - Standard_GRS
-          - Standard_RAGRS
-          - Premium_LRS
+          - Hot
+          - Cool
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: false
-          name: AccountType
+          name: AccessTier
       creationTime:
         description: Gets the creation date and time of the storage account in UTC.
         format: date-time
+        readOnly: true
         type: string
       customDomain:
         $ref: '#/definitions/CustomDomain'
         description: Gets the user assigned custom domain assigned to this storage account.
+        readOnly: true
+      encryption:
+        $ref: '#/definitions/Encryption'
+        description: Gets the encryption settings on the account. If unspecified the account is unencrypted.
+        readOnly: true
       lastGeoFailoverTime:
         description: Gets the timestamp of the most recent instance of a failover to the secondary location. Only the most recent timestamp is retained. This element is not returned if there has never been a failover instance. Only available if the accountType is StandardGRS or StandardRAGRS.
         format: date-time
+        readOnly: true
         type: string
       primaryEndpoints:
         $ref: '#/definitions/Endpoints'
         description: 'Gets the URLs that are used to perform a retrieval of a public blob, queue or table object.Note that StandardZRS and PremiumLRS accounts only return the blob endpoint.'
+        readOnly: true
       primaryLocation:
         description: Gets the location of the primary for the storage account.
+        readOnly: true
         type: string
       provisioningState:
         description: Gets the status of the storage account at the time the operation was called.
@@ -447,6 +557,7 @@ definitions:
           - Creating
           - ResolvingDNS
           - Succeeded
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: false
@@ -454,14 +565,17 @@ definitions:
       secondaryEndpoints:
         $ref: '#/definitions/Endpoints'
         description: 'Gets the URLs that are used to perform a retrieval of a public blob, queue or table object from the secondary location of the storage account. Only available if the accountType is StandardRAGRS.'
+        readOnly: true
       secondaryLocation:
         description: Gets the location of the geo replicated secondary for the storage account. Only available if the accountType is StandardGRS or StandardRAGRS.
+        readOnly: true
         type: string
       statusOfPrimary:
         description: Gets the status indicating whether the primary location of the storage account is available or unavailable.
         enum:
           - Available
           - Unavailable
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: false
@@ -471,43 +585,45 @@ definitions:
         enum:
           - Available
           - Unavailable
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: false
           name: AccountStatus
   StorageAccountPropertiesCreateParameters:
     properties:
-      accountType:
-        description: Gets or sets the account type.
+      accessTier:
+        description: 'Required for StandardBlob accounts. The access tier used for billing. Access tier cannot be changed more than once every 7 days (168 hours). Access tier cannot be set for StandardLRS, StandardGRS, StandardRAGRS, or PremiumLRS account types.'
         enum:
-          - Standard_LRS
-          - Standard_ZRS
-          - Standard_GRS
-          - Standard_RAGRS
-          - Premium_LRS
+          - Hot
+          - Cool
         type: string
         x-ms-enum:
           modelAsString: false
-          name: AccountType
-    required:
-      - accountType
-  StorageAccountPropertiesUpdateParameters:
-    properties:
-      accountType:
-        description: 'Gets or sets the account type. Note that StandardZRS and PremiumLRS accounts cannot be changed to other account types, and other account types cannot be changed to StandardZRS or PremiumLRS.'
-        enum:
-          - Standard_LRS
-          - Standard_ZRS
-          - Standard_GRS
-          - Standard_RAGRS
-          - Premium_LRS
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: AccountType
+          name: AccessTier
       customDomain:
         $ref: '#/definitions/CustomDomain'
         description: 'User domain assigned to the storage account. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom domain name property.'
+      encryption:
+        $ref: '#/definitions/Encryption'
+        description: Provides the encryption settings on the account. If left unspecified the account encryption settings will remain. The default setting is unencrypted.
+  StorageAccountPropertiesUpdateParameters:
+    properties:
+      accessTier:
+        description: 'The access tier used for billing. Access tier cannot be changed more than once every 7 days (168 hours). Access tier cannot be set for StandardLRS, StandardGRS, StandardRAGRS, or PremiumLRS account types.'
+        enum:
+          - Hot
+          - Cool
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: AccessTier
+      customDomain:
+        $ref: '#/definitions/CustomDomain'
+        description: 'User domain assigned to the storage account. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom domain name property.'
+      encryption:
+        $ref: '#/definitions/Encryption'
+        description: Provides the encryption settings on the account. The default setting is unencrypted.
   StorageAccountRegenerateKeyParameters:
     properties:
       keyName:
@@ -515,31 +631,36 @@ definitions:
     required:
       - keyName
   StorageAccountUpdateParameters:
-    description: The parameters to update on the account.
+    description: The parameters to provide for the account.
     properties:
       properties:
         $ref: '#/definitions/StorageAccountPropertiesUpdateParameters'
         x-ms-client-flatten: true
+      sku:
+        $ref: '#/definitions/Sku'
+        description: 'Gets or sets the sku type. Note that sku cannot be updated to StandardZRS or ProvisionedLRS, nor can accounts of that sku type be updated to any other value.'
       tags:
         additionalProperties:
           type: string
-        description: Resource tags
+        description: Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters.
         type: object
-    x-ms-azure-resource: true
   Usage:
     description: Describes Storage Resource Usage.
     properties:
       currentValue:
         description: Gets the current count of the allocated resources in the subscription.
         format: int32
+        readOnly: true
         type: integer
       limit:
         description: Gets the maximum count of the resources that can be allocated in the subscription.
         format: int32
+        readOnly: true
         type: integer
       name:
         $ref: '#/definitions/UsageName'
         description: Gets the name of the type of usage.
+        readOnly: true
       unit:
         description: Gets the unit of measurement.
         enum:
@@ -549,15 +670,11 @@ definitions:
           - Percent
           - CountsPerSecond
           - BytesPerSecond
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: false
           name: UsageUnit
-    required:
-      - unit
-      - currentValue
-      - limit
-      - name
   UsageListResult:
     description: The List Usages operation response.
     properties:
@@ -571,7 +688,9 @@ definitions:
     properties:
       localizedValue:
         description: Gets a localized string describing the resource name.
+        readOnly: true
         type: string
       value:
         description: Gets a string describing the resource name.
+        readOnly: true
         type: string

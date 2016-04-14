@@ -2474,6 +2474,9 @@ definitions:
       storageProfile:
         $ref: '#/definitions/StorageProfile'
         description: Gets or sets the storage profile.
+      vmId:
+        description: Gets the virtual machine unique id.
+        type: string
   VirtualMachineScaleSet:
     allOf:
       - $ref: '#/definitions/Resource'

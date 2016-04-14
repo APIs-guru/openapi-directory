@@ -3085,7 +3085,7 @@ definitions:
         description: Only return variants which have exactly this name.
         type: string
       variantSetIds:
-        description: 'At most one variant set ID must be provided. Only variants from this variant set will be returned. If omitted, a call set id must be included in the request.'
+        description: 'At most one variant set ID must be provided. Only variants from this variant set will be returned. If omitted, a call set id must be included in the request. Both this and call_set_ids may be set.'
         items:
           type: string
         type: array
