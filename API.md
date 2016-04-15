@@ -1,9 +1,14 @@
 **Warning**: If you want to be notified about changes in advance please send us email to founders@APIs.guru
 
+## Implementation
 This API implemented as `gh-pages` branch Github automatically mirror it's content to<BR> https://apis-guru.github.io/api-models/<BR>
 That mean API served as static content and support both caching and compression.<BR>
-Here is simplest possible API client: https://apis-guru.github.io/simple-ui/
 
+## Client examples
+Here is simplest possible API client: https://apis-guru.github.io/simple-ui<BR>
+Example of more advanced UI: https://apis-guru.github.io
+
+## Endpoint
 https://apis-guru.github.io/api-models/api/v1/list.json - List all API specs.
 It consist of JSON object with API IDs(`<provider>[:<service>]`) as keys.
 Values have following are objects with following attributes:
@@ -43,3 +48,6 @@ For example:
 }
 ```
 
+## Alternatives
+In case if you really need it, we also support [APIs.json](http://apisjson.org/) format:
+https://apis-guru.github.io/api-models/apis.json
