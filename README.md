@@ -41,7 +41,7 @@ Existing integrations
 --------------------------
  - https://any-api.com - Documentation and Test Consoles for Public APIs
  - [https://sdks.io](https://sdks.io/Search/FindSDKs?Bridge=APIs.guru) - Explore Automatically Generated SDKs
- - [http://www.cenit.io](http://www.cenit.io/directory?spec=swagger) - Social Data and Business Integration platform
+ - [https://cenit.io](https://cenit.io/directory?spec=swagger) - Data integration platform
  - [commandcar](https://github.com/tikalk/commandcar#installing-from-api-models) - Curl on steroids
  - https://datafire.io - allows you to process and transfer data between APIs, databases, and more
  - [Material Swagger UI Hub](https://darosh.github.io/angular-swagger-ui-material/hub/) - testing and exploring hub for Material Swagger UI demo
