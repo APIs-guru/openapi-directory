@@ -6,7 +6,7 @@ host: programmes.api.bbc.com
 basePath: /nitro/api
 info:
   contact:
-    email: Jon.Billings@bbc.co.uk
+    email: nitro@bbc.co.uk
     name: Open Nitro Project
     url: 'http://developer.bbc.co.uk/'
   description: "BBC Nitro is the BBC's application programming interface (API) for BBC Programmes Metadata."
@@ -54,7 +54,7 @@ paths:
       parameters: []
       responses:
         '200':
-          description: Nitro response
+          description: Metadata response
         default:
           description: Unexpected error
           schema:
@@ -138,9 +138,16 @@ paths:
           name: territory
           required: false
           type: array
+        - description: Turn on debug information (undocumented)
+          in: query
+          name: debug
+          required: false
+          type: boolean
       responses:
         '200':
           description: Nitro response
+          schema:
+            $ref: '#/definitions/nitro'
         default:
           description: Unexpected error
           schema:
@@ -339,6 +346,8 @@ paths:
       responses:
         '200':
           description: Nitro response
+          schema:
+            $ref: '#/definitions/nitro'
         default:
           description: Unexpected error
           schema:
@@ -478,6 +487,8 @@ paths:
       responses:
         '200':
           description: Nitro response
+          schema:
+            $ref: '#/definitions/nitro'
         default:
           description: Unexpected error
           schema:
@@ -596,6 +607,8 @@ paths:
       responses:
         '200':
           description: Nitro response
+          schema:
+            $ref: '#/definitions/nitro'
         default:
           description: Unexpected error
           schema:
@@ -741,6 +754,8 @@ paths:
       responses:
         '200':
           description: Nitro response
+          schema:
+            $ref: '#/definitions/nitro'
         default:
           description: Unexpected error
           schema:
@@ -831,6 +846,8 @@ paths:
       responses:
         '200':
           description: Nitro response
+          schema:
+            $ref: '#/definitions/nitro'
         default:
           description: Unexpected error
           schema:
@@ -929,6 +946,8 @@ paths:
       responses:
         '200':
           description: Nitro response
+          schema:
+            $ref: '#/definitions/nitro'
         default:
           description: Unexpected error
           schema:
@@ -963,6 +982,8 @@ paths:
       responses:
         '200':
           description: Nitro response
+          schema:
+            $ref: '#/definitions/nitro'
         default:
           description: Unexpected error
           schema:
@@ -1354,6 +1375,8 @@ paths:
       responses:
         '200':
           description: Nitro response
+          schema:
+            $ref: '#/definitions/nitro'
         default:
           description: Unexpected error
           schema:
@@ -1463,6 +1486,8 @@ paths:
       responses:
         '200':
           description: Nitro response
+          schema:
+            $ref: '#/definitions/nitro'
         default:
           description: Unexpected error
           schema:
@@ -1703,6 +1728,8 @@ paths:
       responses:
         '200':
           description: Nitro response
+          schema:
+            $ref: '#/definitions/nitro'
         default:
           description: Unexpected error
           schema:
@@ -1717,7 +1744,7 @@ paths:
       parameters: []
       responses:
         '200':
-          description: Nitro response
+          description: Metadata response
         default:
           description: Unexpected error
           schema:
@@ -1826,6 +1853,8 @@ paths:
       responses:
         '200':
           description: Nitro response
+          schema:
+            $ref: '#/definitions/nitro'
         default:
           description: Unexpected error
           schema:
@@ -1925,6 +1954,8 @@ paths:
       responses:
         '200':
           description: Nitro response
+          schema:
+            $ref: '#/definitions/nitro'
         default:
           description: Unexpected error
           schema:
@@ -1946,3 +1977,3142 @@ definitions:
             type: string
         type: object
     type: object
+  accurate_programme_time:
+    $ref: '#/definitions/dateRange'
+  accurate_time:
+    $ref: '#/definitions/broadcastTime'
+  actual_start:
+    format: date-time
+    type: string
+  advertising_allowed:
+    pattern: '[a-z0-9_]+'
+    type: string
+  affected_by:
+    additionalProperties: false
+    properties:
+      filter:
+        items:
+          additionalProperties: false
+          properties:
+            description:
+              type: string
+            filter:
+              items:
+                additionalProperties: false
+                properties:
+                  description:
+                    type: string
+                  name:
+                    type: string
+                required:
+                  - name
+                  - description
+                type: object
+              type: array
+            name:
+              type: string
+          required:
+            - name
+            - description
+          type: object
+        type: array
+    type: object
+  alternate_images_mixin:
+    additionalProperties: false
+    properties:
+      alternate_images:
+        additionalProperties: false
+        properties:
+          alternate_image:
+            items:
+              additionalProperties: false
+              properties:
+                alternate_images:
+                  additionalProperties: false
+                  properties:
+                    alternate_image:
+                      items:
+                        additionalProperties: false
+                        properties:
+                          href:
+                            type: string
+                          template_url:
+                            type: string
+                          type:
+                            type: string
+                        required:
+                          - template_url
+                        type: object
+                      type: array
+                  type: object
+                href:
+                  type: string
+                template_url:
+                  type: string
+                type:
+                  type: string
+              required:
+                - template_url
+                - alternate_images
+              type: object
+            type: array
+        type: object
+    required:
+      - alternate_images
+    type: object
+  ancestor_titles:
+    additionalProperties: false
+    properties:
+      brand:
+        additionalProperties: false
+        properties:
+          pid:
+            $ref: '#/definitions/pid'
+          title:
+            $ref: '#/definitions/title'
+        required:
+          - pid
+        type: object
+      episode:
+        additionalProperties: false
+        properties:
+          brand:
+            additionalProperties: false
+            properties:
+              pid:
+                $ref: '#/definitions/pid'
+              title:
+                $ref: '#/definitions/title'
+            required:
+              - pid
+            type: object
+          containers_title:
+            $ref: '#/definitions/containers_title'
+          episode:
+            additionalProperties: false
+            properties:
+              containers_title:
+                $ref: '#/definitions/containers_title'
+              pid:
+                $ref: '#/definitions/pid'
+              presentation_title:
+                $ref: '#/definitions/presentation_title'
+              title:
+                $ref: '#/definitions/title'
+            required:
+              - pid
+            type: object
+          pid:
+            $ref: '#/definitions/pid'
+          presentation_title:
+            $ref: '#/definitions/presentation_title'
+          series:
+            items:
+              additionalProperties: false
+              properties:
+                pid:
+                  $ref: '#/definitions/pid'
+                title:
+                  $ref: '#/definitions/title'
+              required:
+                - pid
+              type: object
+            type: array
+          title:
+            $ref: '#/definitions/title'
+        required:
+          - pid
+        type: object
+      series:
+        items:
+          additionalProperties: false
+          properties:
+            pid:
+              $ref: '#/definitions/pid'
+            title:
+              $ref: '#/definitions/title'
+          required:
+            - pid
+          type: object
+        type: array
+    type: object
+  ancestors:
+    $ref: '#/definitions/reference'
+  ancestors_titles:
+    additionalProperties: false
+    properties:
+      brand:
+        additionalProperties: false
+        properties:
+          pid:
+            $ref: '#/definitions/pid'
+          title:
+            $ref: '#/definitions/title'
+        required:
+          - pid
+        type: object
+      episode:
+        additionalProperties: false
+        properties:
+          brand:
+            additionalProperties: false
+            properties:
+              pid:
+                $ref: '#/definitions/pid'
+              title:
+                $ref: '#/definitions/title'
+            required:
+              - pid
+            type: object
+          containers_title:
+            $ref: '#/definitions/containers_title'
+          episode:
+            additionalProperties: false
+            properties:
+              containers_title:
+                $ref: '#/definitions/containers_title'
+              pid:
+                $ref: '#/definitions/pid'
+              presentation_title:
+                $ref: '#/definitions/presentation_title'
+              title:
+                $ref: '#/definitions/title'
+            required:
+              - pid
+            type: object
+          pid:
+            $ref: '#/definitions/pid'
+          presentation_title:
+            $ref: '#/definitions/presentation_title'
+          series:
+            items:
+              additionalProperties: false
+              properties:
+                pid:
+                  $ref: '#/definitions/pid'
+                title:
+                  $ref: '#/definitions/title'
+              required:
+                - pid
+              type: object
+            type: array
+          title:
+            $ref: '#/definitions/title'
+        required:
+          - pid
+        type: object
+      series:
+        items:
+          additionalProperties: false
+          properties:
+            pid:
+              $ref: '#/definitions/pid'
+            title:
+              $ref: '#/definitions/title'
+          required:
+            - pid
+          type: object
+        type: array
+    type: object
+  availability:
+    additionalProperties: false
+    properties:
+      accurate_programme_time:
+        $ref: '#/definitions/accurate_programme_time'
+      actual_start:
+        $ref: '#/definitions/actual_start'
+      availability-debug:
+        $ref: '#/definitions/availability-debug'
+      availability_of:
+        items:
+          $ref: '#/definitions/availability_of'
+        type: array
+      availability_type:
+        $ref: '#/definitions/availability_type'
+      media_availability_time:
+        $ref: '#/definitions/media_availability_time'
+      media_set:
+        items:
+          $ref: '#/definitions/media_set'
+        type: array
+      revocation_status:
+        $ref: '#/definitions/revocation_status'
+      scheduled_time:
+        $ref: '#/definitions/scheduled_time'
+      status:
+        $ref: '#/definitions/status'
+    required:
+      - status
+      - availability_type
+    type: object
+  availability-debug:
+    additionalProperties: false
+    properties:
+      availability_of:
+        $ref: '#/definitions/pidReference'
+      media_profile_groups:
+        $ref: '#/definitions/media_profile_groups'
+      service:
+        $ref: '#/definitions/serviceReference'
+      territory:
+        type: string
+    required:
+      - availability_of
+    type: object
+  availability_mixin:
+    additionalProperties: false
+    properties:
+      availability:
+        items:
+          additionalProperties: false
+          properties:
+            status:
+              $ref: '#/definitions/status'
+            version_types:
+              additionalProperties: false
+              properties:
+                version_type:
+                  items:
+                    additionalProperties: false
+                    properties:
+                      end:
+                        format: date-time
+                        type: string
+                      id:
+                        type: string
+                      start:
+                        format: date-time
+                        type: string
+                      version_type:
+                        items:
+                          additionalProperties: false
+                          properties:
+                            availability:
+                              items:
+                                additionalProperties: false
+                                properties:
+                                  status:
+                                    $ref: '#/definitions/status'
+                                  version_types:
+                                    additionalProperties: false
+                                    properties:
+                                      version_type:
+                                        items:
+                                          additionalProperties: false
+                                          properties:
+                                            end:
+                                              format: date-time
+                                              type: string
+                                            id:
+                                              type: string
+                                            start:
+                                              format: date-time
+                                              type: string
+                                            version_type:
+                                              items:
+                                                additionalProperties: false
+                                                properties:
+                                                  end:
+                                                    format: date-time
+                                                    type: string
+                                                  id:
+                                                    type: string
+                                                  start:
+                                                    format: date-time
+                                                    type: string
+                                                type: object
+                                              type: array
+                                          required:
+                                            - version_type
+                                          type: object
+                                        type: array
+                                    required:
+                                      - version_type
+                                    type: object
+                                required:
+                                  - status
+                                  - version_types
+                                type: object
+                              type: array
+                            end:
+                              format: date-time
+                              type: string
+                            id:
+                              type: string
+                            start:
+                              format: date-time
+                              type: string
+                          type: object
+                        type: array
+                    required:
+                      - version_type
+                    type: object
+                  type: array
+              required:
+                - version_type
+              type: object
+          required:
+            - status
+            - version_types
+          type: object
+        type: array
+    type: object
+  availability_of:
+    additionalProperties: false
+    properties:
+      href:
+        type: string
+      pid:
+        $ref: '#/definitions/pid'
+      result_type:
+        type: string
+      type:
+        type: string
+    required:
+      - result_type
+      - pid
+      - href
+    type: object
+  availability_type:
+    enum:
+      - ondemand
+      - simulcast
+      - webcast
+  available_media_sets:
+    additionalProperties: false
+    properties:
+      media_sets:
+        additionalProperties: false
+        properties:
+          media_set:
+            items:
+              additionalProperties: false
+              properties:
+                media_sets:
+                  additionalProperties: false
+                  properties:
+                    media_set:
+                      items:
+                        type: object
+                      type: array
+                  required:
+                    - media_set
+                  type: object
+              type: object
+            type: array
+        required:
+          - media_set
+        type: object
+    type: object
+  available_mixins:
+    additionalProperties: false
+    properties:
+      availabilities:
+        additionalProperties: false
+        properties:
+          availabilities:
+            additionalProperties: false
+            properties:
+              availability:
+                items:
+                  additionalProperties: false
+                  properties:
+                    accurate_end:
+                      format: date-time
+                      type: string
+                    accurate_start:
+                      format: date-time
+                      type: string
+                    available_versions_media_sets:
+                      $ref: '#/definitions/available_versions_media_sets'
+                    available_versions_services:
+                      $ref: '#/definitions/available_versions_services'
+                    media_availability_end:
+                      format: date-time
+                      type: string
+                    media_availability_start:
+                      format: date-time
+                      type: string
+                    payment_type:
+                      type: string
+                    scheduled_end:
+                      format: date-time
+                      type: string
+                    scheduled_start:
+                      format: date-time
+                      type: string
+                    status:
+                      type: string
+                    type:
+                      type: string
+                  required:
+                    - available_versions_media_sets
+                  type: object
+                type: array
+              type:
+                type: string
+            required:
+              - availability
+            type: object
+          availability:
+            items:
+              additionalProperties: false
+              properties:
+                accurate_end:
+                  format: date-time
+                  type: string
+                accurate_start:
+                  format: date-time
+                  type: string
+                available_versions_media_sets:
+                  $ref: '#/definitions/available_versions_media_sets'
+                available_versions_services:
+                  $ref: '#/definitions/available_versions_services'
+                media_availability_end:
+                  format: date-time
+                  type: string
+                media_availability_start:
+                  format: date-time
+                  type: string
+                payment_type:
+                  type: string
+                scheduled_end:
+                  format: date-time
+                  type: string
+                scheduled_start:
+                  format: date-time
+                  type: string
+                status:
+                  type: string
+                type:
+                  type: string
+              required:
+                - available_versions_media_sets
+              type: object
+            type: array
+          type:
+            type: string
+        required:
+          - availability
+          - availabilities
+        type: object
+    required:
+      - availabilities
+    type: object
+  available_versions:
+    additionalProperties: false
+    properties:
+      available:
+        type: integer
+      available_versions_element:
+        $ref: '#/definitions/available_versions_element'
+    required:
+      - available_versions_element
+      - available
+    type: object
+  available_versions_element:
+    additionalProperties: false
+    properties:
+      version:
+        items:
+          additionalProperties: false
+          properties:
+            available_mixins:
+              $ref: '#/definitions/available_mixins'
+            competition_warning:
+              type: boolean
+            duration:
+              pattern: '^(-)?P(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)W)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?$'
+              type: string
+            guidance_warnings:
+              $ref: '#/definitions/guidance_warnings'
+            pid:
+              $ref: '#/definitions/pid'
+            types:
+              items:
+                additionalProperties: false
+                properties:
+                  type:
+                    items:
+                      type: string
+                    type: array
+                type: object
+              type: array
+            version:
+              items:
+                additionalProperties: false
+                properties:
+                  available_mixins:
+                    $ref: '#/definitions/available_mixins'
+                  competition_warning:
+                    type: boolean
+                  duration:
+                    pattern: '^(-)?P(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)W)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?$'
+                    type: string
+                  guidance_warnings:
+                    $ref: '#/definitions/guidance_warnings'
+                  pid:
+                    $ref: '#/definitions/pid'
+                  types:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        type:
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                required:
+                  - types
+                type: object
+              type: array
+          required:
+            - types
+          type: object
+        type: array
+    type: object
+  available_versions_media_sets:
+    additionalProperties: false
+    properties:
+      media_sets:
+        additionalProperties: false
+        properties:
+          media_set:
+            items:
+              additionalProperties: false
+              properties:
+                actual_start:
+                  format: date-time
+                  type: string
+                media_sets:
+                  additionalProperties: false
+                  properties:
+                    media_set:
+                      items:
+                        additionalProperties: false
+                        properties:
+                          actual_start:
+                            format: date-time
+                            type: string
+                          name:
+                            type: string
+                        required:
+                          - name
+                        type: object
+                      type: array
+                  required:
+                    - media_set
+                  type: object
+                name:
+                  type: string
+              required:
+                - name
+              type: object
+            type: array
+        required:
+          - media_set
+        type: object
+    type: object
+  available_versions_services:
+    additionalProperties: false
+    properties:
+      services:
+        additionalProperties: false
+        properties:
+          service:
+            items:
+              additionalProperties: false
+              properties:
+                services:
+                  additionalProperties: false
+                  properties:
+                    service:
+                      items:
+                        additionalProperties: false
+                        properties:
+                          sid:
+                            type: string
+                        type: object
+                      type: array
+                  required:
+                    - service
+                  type: object
+                sid:
+                  type: string
+              type: object
+            type: array
+        required:
+          - service
+        type: object
+    type: object
+  available_webcasts:
+    additionalProperties: false
+    properties:
+      available:
+        type: integer
+      available_versions_element:
+        $ref: '#/definitions/available_versions_element'
+    required:
+      - available_versions_element
+      - available
+    type: object
+  brand:
+    additionalProperties: false
+    properties:
+      alternate_images_mixin:
+        $ref: '#/definitions/alternate_images_mixin'
+      availability_mixin:
+        $ref: '#/definitions/availability_mixin'
+      contributions_mixin:
+        $ref: '#/definitions/contributions_mixin'
+      embargoed:
+        $ref: '#/definitions/embargoed'
+      expected_child_count:
+        $ref: '#/definitions/expected_child_count'
+      franchises:
+        $ref: '#/definitions/franchises'
+      genre_groupings:
+        $ref: '#/definitions/genre_groupings'
+      image_link:
+        $ref: '#/definitions/image_link'
+      images_mixin:
+        $ref: '#/definitions/images_mixin'
+      is_embeddable:
+        $ref: '#/definitions/is_embeddable'
+      items_for:
+        $ref: '#/definitions/items_for'
+      master_brand_link:
+        $ref: '#/definitions/master_brand_link'
+      partner:
+        $ref: '#/definitions/partner'
+      pid:
+        $ref: '#/definitions/pid'
+      previous_next_mixin:
+        $ref: '#/definitions/previous_next_mixin'
+      programme_formats:
+        $ref: '#/definitions/programme_formats'
+      related_links:
+        $ref: '#/definitions/related_links'
+      release_date_group:
+        $ref: '#/definitions/release_date_group'
+      synopses:
+        $ref: '#/definitions/synopses'
+      title:
+        $ref: '#/definitions/title'
+      updated_time:
+        $ref: '#/definitions/updated_time'
+      uri:
+        $ref: '#/definitions/uri'
+    required:
+      - pid
+      - partner
+      - updated_time
+      - embargoed
+    type: object
+  broadcast:
+    additionalProperties: false
+    properties:
+      ancestor_titles:
+        $ref: '#/definitions/ancestor_titles'
+      ancestors_titles:
+        $ref: '#/definitions/ancestors_titles'
+      broadcast_of:
+        items:
+          $ref: '#/definitions/broadcast_of'
+        type: array
+      ids:
+        $ref: '#/definitions/ids'
+      image_link:
+        $ref: '#/definitions/image_link'
+      images_mixin:
+        $ref: '#/definitions/images_mixin'
+      is_audio_described:
+        $ref: '#/definitions/is_audio_described'
+      is_blanked:
+        $ref: '#/definitions/is_blanked'
+      is_critical:
+        $ref: '#/definitions/is_critical'
+      is_repeat:
+        $ref: '#/definitions/is_repeat'
+      is_simulcast:
+        $ref: '#/definitions/is_simulcast'
+      partner:
+        $ref: '#/definitions/partner'
+      pid:
+        $ref: '#/definitions/pid'
+      published_time:
+        $ref: '#/definitions/published_time'
+      service:
+        $ref: '#/definitions/serviceReference'
+      tx_time:
+        $ref: '#/definitions/tx_time'
+      updated_time:
+        $ref: '#/definitions/updated_time'
+    required:
+      - pid
+      - partner
+    type: object
+  broadcastTime:
+    additionalProperties: false
+    properties:
+      duration:
+        pattern: '^(-)?P(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)W)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?$'
+        type: string
+    type: object
+  broadcast_of:
+    $ref: '#/definitions/pidReference'
+  broadcaster:
+    additionalProperties: false
+    properties:
+      href:
+        type: string
+      result_type:
+        type: string
+      sid:
+        $ref: '#/definitions/sid'
+    required:
+      - href
+      - sid
+      - result_type
+    type: object
+  catalogue_number:
+    maxLength: 32
+    minLength: 1
+    type: string
+  chapter:
+    $ref: '#/definitions/item'
+  clip:
+    additionalProperties: false
+    properties:
+      advertising_allowed:
+        $ref: '#/definitions/advertising_allowed'
+      alternate_images_mixin:
+        $ref: '#/definitions/alternate_images_mixin'
+      ancestor_titles:
+        $ref: '#/definitions/ancestor_titles'
+      ancestors:
+        $ref: '#/definitions/ancestors'
+      ancestors_titles:
+        $ref: '#/definitions/ancestors_titles'
+      availability_mixin:
+        $ref: '#/definitions/availability_mixin'
+      clip_of:
+        $ref: '#/definitions/clip_of'
+      contributions_mixin:
+        $ref: '#/definitions/contributions_mixin'
+      embargoed:
+        $ref: '#/definitions/embargoed'
+      genre_groupings:
+        $ref: '#/definitions/genre_groupings'
+      genre_groups:
+        $ref: '#/definitions/genre_groups'
+      image_link:
+        $ref: '#/definitions/image_link'
+      images_mixin:
+        $ref: '#/definitions/images_mixin'
+      is_embeddable:
+        $ref: '#/definitions/is_embeddable'
+      items_for:
+        $ref: '#/definitions/items_for'
+      master_brand_link:
+        $ref: '#/definitions/master_brand_link'
+      media_type:
+        $ref: '#/definitions/media_type'
+      original_version_duration:
+        $ref: '#/definitions/original_version_duration'
+      partner:
+        $ref: '#/definitions/partner'
+      pid:
+        $ref: '#/definitions/pid'
+      previous_next_mixin:
+        $ref: '#/definitions/previous_next_mixin'
+      programme_formats:
+        $ref: '#/definitions/programme_formats'
+      related_links:
+        $ref: '#/definitions/related_links'
+      release_date_group:
+        $ref: '#/definitions/release_date_group'
+      synopses:
+        $ref: '#/definitions/synopses'
+      title:
+        $ref: '#/definitions/title'
+      updated_time:
+        $ref: '#/definitions/updated_time'
+      uri:
+        $ref: '#/definitions/uri'
+      versions_mixin:
+        $ref: '#/definitions/versions_mixin'
+    required:
+      - pid
+      - partner
+      - updated_time
+      - embargoed
+      - advertising_allowed
+    type: object
+  clip_of:
+    $ref: '#/definitions/pidReference'
+  code:
+    type: string
+  collection:
+    $ref: '#/definitions/group-body'
+  competition_warning:
+    type: boolean
+  containers_title:
+    type: string
+  context:
+    additionalProperties: false
+    properties:
+      cascades_to_descendants:
+        type: boolean
+      href:
+        type: string
+      pid:
+        $ref: '#/definitions/pid'
+      result_type:
+        type: string
+    required:
+      - pid
+      - result_type
+    type: object
+  contributions_mixin:
+    additionalProperties: false
+    properties:
+      contributions:
+        additionalProperties: false
+        properties:
+          contributions:
+            additionalProperties: false
+            properties:
+              contributions_mixin_contribution:
+                items:
+                  $ref: '#/definitions/contributions_mixin_contribution'
+                type: array
+              href:
+                type: string
+            type: object
+          contributions_mixin_contribution:
+            items:
+              $ref: '#/definitions/contributions_mixin_contribution'
+            type: array
+          href:
+            type: string
+        required:
+          - contributions
+        type: object
+    required:
+      - contributions
+    type: object
+  contributions_mixin_contribution:
+    additionalProperties: false
+    properties:
+      contribution:
+        additionalProperties: false
+        properties:
+          character_name:
+            type: string
+          contribution:
+            additionalProperties: false
+            properties:
+              character_name:
+                type: string
+              contributions_mixin_contributor:
+                $ref: '#/definitions/contributions_mixin_contributor'
+              credit_role:
+                additionalProperties: false
+                properties:
+                  id:
+                    type: string
+                type: object
+            type: object
+          contributions_mixin_contributor:
+            $ref: '#/definitions/contributions_mixin_contributor'
+          credit_role:
+            additionalProperties: false
+            properties:
+              id:
+                type: string
+            type: object
+        required:
+          - contribution
+        type: object
+    required:
+      - contribution
+    type: object
+  contributions_mixin_contributor:
+    additionalProperties: false
+    properties:
+      contributor:
+        additionalProperties: false
+        properties:
+          contributions_mixin_contributor_name:
+            $ref: '#/definitions/contributions_mixin_contributor_name'
+          contributor:
+            additionalProperties: false
+            properties:
+              contributions_mixin_contributor_name:
+                $ref: '#/definitions/contributions_mixin_contributor_name'
+              href:
+                type: string
+              type:
+                $ref: '#/definitions/type'
+            type: object
+          href:
+            type: string
+          type:
+            $ref: '#/definitions/type'
+        required:
+          - contributor
+        type: object
+    required:
+      - contributor
+    type: object
+  contributions_mixin_contributor_name:
+    additionalProperties: false
+    properties:
+      name:
+        additionalProperties: false
+        properties:
+          family:
+            type: string
+          given:
+            type: string
+          name:
+            additionalProperties: false
+            properties:
+              family:
+                type: string
+              given:
+                type: string
+              presentation:
+                type: string
+              title:
+                type: string
+            type: object
+          presentation:
+            type: string
+          title:
+            type: string
+        required:
+          - name
+        type: object
+    required:
+      - name
+    type: object
+  contributor:
+    additionalProperties: false
+    properties:
+      contributor_name:
+        $ref: '#/definitions/contributor_name'
+      contributor_to:
+        items:
+          $ref: '#/definitions/contributor_to'
+        type: array
+      disambiguation:
+        $ref: '#/definitions/disambiguation'
+      href:
+        type: string
+      ids:
+        $ref: '#/definitions/ids'
+      partner:
+        $ref: '#/definitions/partner'
+      pid:
+        $ref: '#/definitions/pid'
+      type:
+        $ref: '#/definitions/type'
+    required:
+      - pid
+      - partner
+    type: object
+  contributor_name:
+    additionalProperties: false
+    properties:
+      name:
+        additionalProperties: false
+        properties:
+          family:
+            type: string
+          given:
+            type: string
+          lang:
+            type: string
+          name:
+            additionalProperties: false
+            properties:
+              family:
+                type: string
+              given:
+                type: string
+              lang:
+                type: string
+              presentation:
+                type: string
+              title:
+                type: string
+            type: object
+          presentation:
+            type: string
+          title:
+            type: string
+        required:
+          - name
+        type: object
+    required:
+      - name
+    type: object
+  contributor_to:
+    additionalProperties: false
+    properties:
+      href:
+        type: string
+      result_type:
+        type: string
+    required:
+      - result_type
+      - href
+    type: object
+  credits_time:
+    additionalProperties: false
+    properties:
+      squeeze_end:
+        format: date-time
+        type: string
+      squeeze_start:
+        format: date-time
+        type: string
+    type: object
+  data:
+    additionalProperties: false
+    properties:
+      datum:
+        $ref: '#/definitions/datum'
+    type: object
+  dateRange:
+    additionalProperties: false
+    properties:
+      end:
+        format: date-time
+        type: string
+      start:
+        format: date-time
+        type: string
+    type: object
+  date_range:
+    $ref: '#/definitions/dateRange'
+  datum:
+    type: string
+  dependency_on:
+    additionalProperties: false
+    properties:
+      filter:
+        type: string
+      value:
+        type: string
+    type: object
+  deprecated:
+    additionalProperties: false
+    properties:
+      deprecated_since:
+        pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}.*$'
+        type: string
+      name:
+        type: string
+      replaced_by:
+        type: string
+      replacement_type:
+        type: string
+      type:
+        type: string
+    required:
+      - name
+      - type
+      - deprecated_since
+    type: object
+  deprecatedReferenceElement:
+    additionalProperties: false
+    properties:
+      deprecationAttributes:
+        $ref: '#/definitions/deprecationAttributes'
+    required:
+      - deprecationAttributes
+    type: object
+  deprecationAttributes:
+    additionalProperties: false
+    properties:
+      deprecated:
+        type: boolean
+      deprecated_since:
+        pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}.*$'
+        type: string
+      replaced_by:
+        type: string
+    required:
+      - deprecated
+      - deprecated_since
+      - replaced_by
+    type: object
+  deprecations:
+    additionalProperties: false
+    properties:
+      deprecated:
+        items:
+          $ref: '#/definitions/deprecated'
+        type: array
+    type: object
+  description:
+    type: string
+  dimensions:
+    additionalProperties: false
+    properties:
+      height:
+        type: integer
+      width:
+        type: integer
+    type: object
+  disambiguation:
+    type: string
+  embargoed:
+    enum:
+      - 'true'
+      - 'false'
+  end:
+    format: date-time
+    type: string
+  end_time:
+    format: date-time
+    type: string
+  episode:
+    additionalProperties: false
+    properties:
+      advertising_allowed:
+        $ref: '#/definitions/advertising_allowed'
+      alternate_images_mixin:
+        $ref: '#/definitions/alternate_images_mixin'
+      ancestor_titles:
+        $ref: '#/definitions/ancestor_titles'
+      ancestors:
+        $ref: '#/definitions/ancestors'
+      ancestors_titles:
+        $ref: '#/definitions/ancestors_titles'
+      availability_mixin:
+        $ref: '#/definitions/availability_mixin'
+      contributions_mixin:
+        $ref: '#/definitions/contributions_mixin'
+      embargoed:
+        $ref: '#/definitions/embargoed'
+      episode_of:
+        $ref: '#/definitions/episode_of'
+      genre_groupings:
+        $ref: '#/definitions/genre_groupings'
+      genre_groups:
+        $ref: '#/definitions/genre_groups'
+      has_guidance:
+        $ref: '#/definitions/has_guidance'
+      image_link:
+        $ref: '#/definitions/image_link'
+      images_mixin:
+        $ref: '#/definitions/images_mixin'
+      is_embeddable:
+        $ref: '#/definitions/is_embeddable'
+      is_stacked:
+        $ref: '#/definitions/is_stacked'
+      items_for:
+        $ref: '#/definitions/items_for'
+      master_brand_link:
+        $ref: '#/definitions/master_brand_link'
+      media_type:
+        $ref: '#/definitions/media_type'
+      original_version_duration:
+        $ref: '#/definitions/original_version_duration'
+      partner:
+        $ref: '#/definitions/partner'
+      pid:
+        $ref: '#/definitions/pid'
+      presentation_title:
+        $ref: '#/definitions/presentation_title'
+      previous_next_mixin:
+        $ref: '#/definitions/previous_next_mixin'
+      programme_formats:
+        $ref: '#/definitions/programme_formats'
+      related_links:
+        $ref: '#/definitions/related_links'
+      release_date_group:
+        $ref: '#/definitions/release_date_group'
+      synopses:
+        $ref: '#/definitions/synopses'
+      title:
+        $ref: '#/definitions/title'
+      updated_time:
+        $ref: '#/definitions/updated_time'
+      uri:
+        $ref: '#/definitions/uri'
+      versions_mixin:
+        $ref: '#/definitions/versions_mixin'
+    required:
+      - pid
+      - partner
+      - updated_time
+      - embargoed
+      - advertising_allowed
+    type: object
+  episode_of:
+    $ref: '#/definitions/pidReference'
+  error:
+    additionalProperties: false
+    properties:
+      code:
+        $ref: '#/definitions/code'
+      data:
+        $ref: '#/definitions/data'
+      error-name:
+        $ref: '#/definitions/error-name'
+      expr:
+        $ref: '#/definitions/expr'
+      format-string:
+        $ref: '#/definitions/format-string'
+      message:
+        $ref: '#/definitions/message'
+      retryable:
+        $ref: '#/definitions/retryable'
+      xquery-version:
+        $ref: '#/definitions/xquery-version'
+    required:
+      - code
+      - error-name
+      - xquery-version
+      - message
+      - format-string
+      - retryable
+      - expr
+      - data
+    type: object
+  error-name:
+    type: string
+  errors:
+    additionalProperties: false
+    properties:
+      error:
+        $ref: '#/definitions/error'
+    type: object
+  expected_child_count:
+    type: integer
+  expr:
+    type: string
+  feed:
+    additionalProperties: false
+    properties:
+      deprecations:
+        $ref: '#/definitions/deprecations'
+      filters:
+        $ref: '#/definitions/filters'
+      href:
+        type: string
+      mixins:
+        $ref: '#/definitions/mixins'
+      name:
+        type: string
+      rel:
+        type: string
+      release_status:
+        $ref: '#/definitions/release_status_type'
+      sorts:
+        $ref: '#/definitions/sorts'
+      title:
+        type: string
+    required:
+      - href
+      - name
+      - rel
+      - title
+    type: object
+  feeds:
+    additionalProperties: false
+    properties:
+      deployment_root:
+        type: string
+      deprecations:
+        $ref: '#/definitions/deprecations'
+      feed:
+        items:
+          $ref: '#/definitions/feed'
+        type: array
+    type: object
+  filter:
+    additionalProperties: false
+    properties:
+      default:
+        type: string
+      depends_on:
+        type: string
+      deprecated:
+        type: boolean
+      deprecated_since:
+        pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}.*$'
+        type: string
+      guaranteed_until:
+        pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}.*$'
+        type: string
+      max_value:
+        type: integer
+      min_value:
+        type: integer
+      multiple_values:
+        type: boolean
+      name:
+        type: string
+      option:
+        items:
+          $ref: '#/definitions/option'
+        type: array
+      prefer:
+        type: string
+      prohibits:
+        items:
+          $ref: '#/definitions/prohibits'
+        type: array
+      release_status:
+        $ref: '#/definitions/release_status_type'
+      replaced_by:
+        type: string
+      required:
+        type: boolean
+      title:
+        type: string
+      type:
+        type: string
+    required:
+      - name
+      - title
+      - type
+    type: object
+  filters:
+    additionalProperties: false
+    properties:
+      filter:
+        items:
+          $ref: '#/definitions/filter'
+        type: array
+      unstable_filters:
+        $ref: '#/definitions/unstable_filters'
+    type: object
+  focus_point:
+    additionalProperties: false
+    properties:
+      x:
+        type: integer
+      'y':
+        type: integer
+    type: object
+  for_programme:
+    additionalProperties: false
+    properties:
+      href:
+        type: string
+    type: object
+  for_programmes:
+    additionalProperties: false
+    properties:
+      for_programme:
+        items:
+          $ref: '#/definitions/for_programme'
+        type: array
+    type: object
+  format:
+    additionalProperties: false
+    properties:
+      format_id:
+        type: string
+    type: object
+  format-string:
+    type: string
+  franchise:
+    $ref: '#/definitions/group-body'
+  franchises:
+    $ref: '#/definitions/reference'
+  gallery:
+    $ref: '#/definitions/group-body'
+  genre:
+    additionalProperties: false
+    properties:
+      id:
+        type: string
+      type:
+        type: string
+    type: object
+  genreGroupingsType:
+    additionalProperties: false
+    properties:
+      genre_group:
+        items:
+          $ref: '#/definitions/genre_group'
+        type: array
+    type: object
+  genreGroupsType:
+    additionalProperties: false
+    properties:
+      genre_group:
+        items:
+          $ref: '#/definitions/genre_group'
+        type: array
+    type: object
+  genre_group:
+    additionalProperties: false
+    properties:
+      genres:
+        additionalProperties: false
+        properties:
+          genre:
+            items:
+              $ref: '#/definitions/genre'
+            type: array
+        type: object
+      id:
+        type: string
+      type:
+        type: string
+    required:
+      - genres
+    type: object
+  genre_groupings:
+    $ref: '#/definitions/genreGroupingsType'
+  genre_groups:
+    $ref: '#/definitions/genreGroupsType'
+  group-body:
+    additionalProperties: false
+    properties:
+      alternate_images_mixin:
+        $ref: '#/definitions/alternate_images_mixin'
+      embargoed:
+        $ref: '#/definitions/embargoed'
+      for_programmes:
+        $ref: '#/definitions/for_programmes'
+      ids:
+        $ref: '#/definitions/ids'
+      images_mixin:
+        $ref: '#/definitions/images_mixin'
+      master_brand_link:
+        $ref: '#/definitions/master_brand_link'
+      partner:
+        $ref: '#/definitions/partner'
+      pid:
+        $ref: '#/definitions/pid'
+      related_links:
+        $ref: '#/definitions/related_links'
+      scheduled:
+        $ref: '#/definitions/scheduled'
+      synopses:
+        $ref: '#/definitions/synopses'
+      title:
+        $ref: '#/definitions/title'
+      updated_time:
+        $ref: '#/definitions/updated_time'
+      url_key:
+        $ref: '#/definitions/url_key'
+    required:
+      - pid
+      - embargoed
+      - partner
+      - updated_time
+    type: object
+  guidance_warnings:
+    additionalProperties: false
+    properties:
+      warnings:
+        additionalProperties: false
+        properties:
+          warning_items:
+            $ref: '#/definitions/warning_items'
+          warning_texts:
+            $ref: '#/definitions/warning_texts'
+          warnings:
+            additionalProperties: false
+            properties:
+              warning_items:
+                $ref: '#/definitions/warning_items'
+              warning_texts:
+                $ref: '#/definitions/warning_texts'
+            type: object
+        type: object
+    type: object
+  has_guidance:
+    type: boolean
+  highlight:
+    $ref: '#/definitions/item'
+  id:
+    additionalProperties: false
+    properties:
+      authority:
+        type: string
+      type:
+        type: string
+    type: object
+  ids:
+    additionalProperties: false
+    properties:
+      id:
+        items:
+          $ref: '#/definitions/id'
+        type: array
+    required:
+      - id
+    type: object
+  image:
+    additionalProperties: false
+    properties:
+      author:
+        type: string
+      embargoed:
+        $ref: '#/definitions/embargoed'
+      partner:
+        $ref: '#/definitions/partner'
+      pid:
+        $ref: '#/definitions/pid'
+      shoot_date:
+        format: date-time
+        type: string
+      source_asset:
+        $ref: '#/definitions/source_asset'
+      synopses:
+        $ref: '#/definitions/synopses'
+      template_url:
+        type: string
+      title:
+        $ref: '#/definitions/title'
+      type:
+        type: string
+    required:
+      - pid
+      - embargoed
+      - partner
+    type: object
+  image_link:
+    additionalProperties: false
+    properties:
+      image:
+        additionalProperties: false
+        properties:
+          deprecationAttributes:
+            $ref: '#/definitions/deprecationAttributes'
+          image:
+            additionalProperties: false
+            properties:
+              deprecationAttributes:
+                $ref: '#/definitions/deprecationAttributes'
+              pid:
+                $ref: '#/definitions/pid'
+              template_url:
+                type: string
+            required:
+              - deprecationAttributes
+              - template_url
+            type: object
+          pid:
+            $ref: '#/definitions/pid'
+          template_url:
+            type: string
+        required:
+          - deprecationAttributes
+          - template_url
+          - image
+        type: object
+    required:
+      - image
+    type: object
+  images_mixin:
+    additionalProperties: false
+    properties:
+      images:
+        additionalProperties: false
+        properties:
+          image:
+            additionalProperties: false
+            properties:
+              href:
+                type: string
+              images:
+                additionalProperties: false
+                properties:
+                  image:
+                    additionalProperties: false
+                    properties:
+                      href:
+                        type: string
+                      inherited_from:
+                        additionalProperties: false
+                        properties:
+                          href:
+                            type: string
+                          result_type:
+                            type: string
+                        type: object
+                      template_url:
+                        type: string
+                      type:
+                        type: string
+                    required:
+                      - template_url
+                    type: object
+                type: object
+              inherited_from:
+                additionalProperties: false
+                properties:
+                  href:
+                    type: string
+                  result_type:
+                    type: string
+                type: object
+              template_url:
+                type: string
+              type:
+                type: string
+            required:
+              - template_url
+              - images
+            type: object
+        type: object
+    required:
+      - images
+    type: object
+  is_audio_described:
+    type: boolean
+  is_blanked:
+    type: boolean
+  is_concrete:
+    type: boolean
+  is_critical:
+    type: boolean
+  is_downloadable:
+    type: boolean
+  is_embeddable:
+    type: boolean
+  is_external:
+    type: boolean
+  is_repeat:
+    type: boolean
+  is_signed:
+    type: boolean
+  is_simulcast:
+    type: boolean
+  is_stacked:
+    type: boolean
+  is_streamable:
+    type: boolean
+  item:
+    additionalProperties: false
+    properties:
+      catalogue_number:
+        $ref: '#/definitions/catalogue_number'
+      contributions_mixin:
+        $ref: '#/definitions/contributions_mixin'
+      duration:
+        type: number
+      ids:
+        $ref: '#/definitions/ids'
+      images_mixin:
+        $ref: '#/definitions/images_mixin'
+      item_of:
+        $ref: '#/definitions/item_of'
+      music_code:
+        $ref: '#/definitions/music_code'
+      offsets:
+        $ref: '#/definitions/offsets'
+      partner:
+        $ref: '#/definitions/partner'
+      pid:
+        $ref: '#/definitions/pid'
+      play_events:
+        $ref: '#/definitions/play_events'
+      publisher:
+        $ref: '#/definitions/publisher'
+      record_label:
+        $ref: '#/definitions/record_label'
+      recording_date:
+        $ref: '#/definitions/recording_date'
+      release_title:
+        $ref: '#/definitions/release_title'
+      snippet_url:
+        $ref: '#/definitions/snippet_url'
+      source_media:
+        $ref: '#/definitions/source_media'
+      synopses:
+        $ref: '#/definitions/synopses'
+      title:
+        $ref: '#/definitions/title'
+      track_number:
+        $ref: '#/definitions/track_number'
+      track_side:
+        $ref: '#/definitions/track_side'
+      type:
+        type: string
+      updated_time:
+        $ref: '#/definitions/updated_time'
+    required:
+      - pid
+      - partner
+    type: object
+  item_of:
+    $ref: '#/definitions/reference'
+  items_for:
+    $ref: '#/definitions/reference'
+  long:
+    type: string
+  master_brand:
+    additionalProperties: false
+    properties:
+      colour:
+        type: object
+      competition_warning:
+        additionalProperties: false
+        properties:
+          href:
+            type: string
+          pid:
+            $ref: '#/definitions/pid'
+        required:
+          - href
+          - pid
+        type: object
+      ident:
+        type: object
+      image_link:
+        $ref: '#/definitions/image_link'
+      images_mixin:
+        $ref: '#/definitions/images_mixin'
+      master_brand_date_range:
+        additionalProperties: false
+        properties:
+          end:
+            format: date-time
+            type: string
+          start:
+            format: date-time
+            type: string
+        type: object
+      mid:
+        $ref: '#/definitions/mid'
+      name:
+        $ref: '#/definitions/name'
+      partner:
+        $ref: '#/definitions/partner'
+      position:
+        $ref: '#/definitions/position'
+      synopses:
+        additionalProperties: false
+        properties:
+          long:
+            $ref: '#/definitions/long'
+          medium:
+            $ref: '#/definitions/medium'
+          short:
+            $ref: '#/definitions/short'
+        type: object
+      title:
+        $ref: '#/definitions/title'
+      url_key:
+        type: object
+    required:
+      - mid
+      - partner
+    type: object
+  master_brand_link:
+    additionalProperties: false
+    properties:
+      master_brand:
+        additionalProperties: false
+        properties:
+          href:
+            type: string
+          master_brand:
+            additionalProperties: false
+            properties:
+              href:
+                type: string
+              mid:
+                $ref: '#/definitions/mid'
+              result_type:
+                type: string
+            required:
+              - href
+              - mid
+              - result_type
+            type: object
+          mid:
+            $ref: '#/definitions/mid'
+          result_type:
+            type: string
+        required:
+          - href
+          - mid
+          - result_type
+          - master_brand
+        type: object
+    required:
+      - master_brand
+    type: object
+  media_availability_time:
+    $ref: '#/definitions/dateRange'
+  media_profile_group:
+    additionalProperties: false
+    properties:
+      context:
+        type: string
+      pid:
+        $ref: '#/definitions/pid'
+      platform:
+        type: string
+      territory:
+        type: string
+      transport:
+        type: string
+    type: object
+  media_profile_groups:
+    additionalProperties: false
+    properties:
+      media_profile_group:
+        items:
+          $ref: '#/definitions/media_profile_group'
+        type: array
+    type: object
+  media_set:
+    type: string
+  media_type:
+    enum:
+      - Video
+      - Audio
+  medium:
+    type: string
+  message:
+    type: string
+  mid:
+    type: string
+  mixin:
+    additionalProperties: false
+    properties:
+      affected_by:
+        items:
+          $ref: '#/definitions/affected_by'
+        type: array
+      dependency_on:
+        items:
+          $ref: '#/definitions/dependency_on'
+        type: array
+      depends_on:
+        type: string
+      deprecated:
+        type: boolean
+      deprecated_since:
+        pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}.*$'
+        type: string
+      guaranteed_until:
+        pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}.*$'
+        type: string
+      href:
+        type: string
+      name:
+        type: string
+      prohibits:
+        items:
+          $ref: '#/definitions/prohibits'
+        type: array
+      release_status:
+        $ref: '#/definitions/release_status_type'
+      replaced_by:
+        type: string
+      title:
+        type: string
+    required:
+      - name
+      - title
+    type: object
+  mixins:
+    additionalProperties: false
+    properties:
+      mixin:
+        items:
+          $ref: '#/definitions/mixin'
+        type: array
+      unstable_mixins:
+        $ref: '#/definitions/unstable_mixins'
+    type: object
+  music:
+    $ref: '#/definitions/item'
+  music_code:
+    maxLength: 8
+    minLength: 1
+    type: string
+  name:
+    type: string
+  next:
+    additionalProperties: false
+    properties:
+      href:
+        type: string
+    required:
+      - href
+    type: object
+  nitro:
+    additionalProperties: true
+    properties:
+      deprecations:
+        $ref: '#/definitions/deprecations'
+      filters:
+        $ref: '#/definitions/filters'
+      mixins:
+        $ref: '#/definitions/mixins'
+      pagination:
+        $ref: '#/definitions/pagination'
+      results:
+        $ref: '#/definitions/results'
+      sorts:
+        $ref: '#/definitions/sorts'
+  offset_in:
+    additionalProperties: false
+    properties:
+      href:
+        type: string
+      offset:
+        type: integer
+      position:
+        type: number
+      programme:
+        $ref: '#/definitions/pid'
+      version:
+        $ref: '#/definitions/pid'
+    required:
+      - programme
+      - version
+      - href
+    type: object
+  offsets:
+    additionalProperties: false
+    properties:
+      offset_in:
+        items:
+          $ref: '#/definitions/offset_in'
+        type: array
+    type: object
+  option:
+    additionalProperties: false
+    properties:
+      href:
+        type: string
+      release_status:
+        $ref: '#/definitions/release_status_type'
+      title:
+        type: string
+      value:
+        type: string
+    required:
+      - value
+      - title
+    type: object
+  original_version_duration:
+    additionalProperties: false
+    properties:
+      version:
+        additionalProperties: false
+        properties:
+          duration:
+            pattern: '^(-)?P(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)W)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?$'
+            type: string
+          href:
+            type: string
+          pid:
+            $ref: '#/definitions/pid'
+          version:
+            additionalProperties: false
+            properties:
+              duration:
+                pattern: '^(-)?P(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)W)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?$'
+                type: string
+              href:
+                type: string
+              pid:
+                $ref: '#/definitions/pid'
+            required:
+              - pid
+              - href
+            type: object
+        required:
+          - pid
+          - href
+        type: object
+    type: object
+  other:
+    $ref: '#/definitions/item'
+  pagination:
+    additionalProperties: false
+    properties:
+      next:
+        $ref: '#/definitions/next'
+      previous:
+        $ref: '#/definitions/previous'
+    type: object
+  partner:
+    $ref: '#/definitions/pid'
+  pid:
+    pattern: "([a-z0-9\\.\\-]+|.*PID.*)"
+    type: string
+  pidReference:
+    additionalProperties: false
+    properties:
+      href:
+        type: string
+      pid:
+        $ref: '#/definitions/pid'
+      position:
+        type: integer
+      result_type:
+        type: string
+    required:
+      - pid
+      - result_type
+    type: object
+  play_event:
+    additionalProperties: false
+    properties:
+      offset:
+        type: integer
+      pid:
+        $ref: '#/definitions/pid'
+      played_in_links:
+        items:
+          $ref: '#/definitions/played_in_links'
+        type: array
+      position:
+        type: number
+      synopses:
+        $ref: '#/definitions/synopses'
+      title:
+        type: string
+    required:
+      - pid
+    type: object
+  play_events:
+    additionalProperties: false
+    properties:
+      play_event:
+        items:
+          $ref: '#/definitions/play_event'
+        type: array
+    type: object
+  played_in_links:
+    additionalProperties: false
+    properties:
+      played_in:
+        additionalProperties: false
+        properties:
+          href:
+            type: string
+          played_in:
+            additionalProperties: false
+            properties:
+              href:
+                type: string
+              result_type:
+                type: string
+            type: object
+          result_type:
+            type: string
+        type: object
+    type: object
+  position:
+    type: integer
+  presentation_title:
+    type: string
+  previous:
+    additionalProperties: false
+    properties:
+      href:
+        type: string
+    required:
+      - href
+    type: object
+  previous_next_mixin:
+    additionalProperties: false
+    properties:
+      previous_next:
+        additionalProperties: false
+        properties:
+          next:
+            $ref: '#/definitions/reference'
+          previous:
+            $ref: '#/definitions/reference'
+          previous_next:
+            additionalProperties: false
+            properties:
+              next:
+                $ref: '#/definitions/reference'
+              previous:
+                $ref: '#/definitions/reference'
+            type: object
+        required:
+          - previous_next
+        type: object
+    required:
+      - previous_next
+    type: object
+  priority:
+    type: integer
+  programme_formats:
+    additionalProperties: false
+    properties:
+      format:
+        items:
+          $ref: '#/definitions/format'
+        type: array
+    required:
+      - format
+    type: object
+  prohibits:
+    additionalProperties: false
+    properties:
+      filter:
+        items:
+          additionalProperties: false
+          properties:
+            name:
+              type: string
+          required:
+            - name
+          type: object
+        type: array
+      mixin:
+        items:
+          additionalProperties: false
+          properties:
+            filter:
+              items:
+                additionalProperties: false
+                properties:
+                  name:
+                    type: string
+                required:
+                  - name
+                type: object
+              type: array
+            mixin:
+              items:
+                additionalProperties: false
+                properties:
+                  name:
+                    type: string
+                required:
+                  - name
+                type: object
+              type: array
+            name:
+              type: string
+          required:
+            - name
+          type: object
+        type: array
+    type: object
+  promoted_by:
+    type: string
+  promoted_for:
+    type: string
+  promotion:
+    additionalProperties: false
+    properties:
+      context:
+        $ref: '#/definitions/context'
+      end_time:
+        $ref: '#/definitions/end_time'
+      partner:
+        $ref: '#/definitions/partner'
+      pid:
+        $ref: '#/definitions/pid'
+      priority:
+        $ref: '#/definitions/priority'
+      promoted_by:
+        $ref: '#/definitions/promoted_by'
+      promoted_for:
+        $ref: '#/definitions/promoted_for'
+      promotion_of:
+        $ref: '#/definitions/promotion_of'
+      related_links:
+        $ref: '#/definitions/related_links'
+      start_time:
+        $ref: '#/definitions/start_time'
+      status:
+        $ref: '#/definitions/status'
+      synopses:
+        $ref: '#/definitions/synopses'
+      title:
+        $ref: '#/definitions/title'
+      updated_time:
+        $ref: '#/definitions/updated_time'
+      uri:
+        $ref: '#/definitions/uri'
+      url:
+        $ref: '#/definitions/url'
+    required:
+      - pid
+      - partner
+      - updated_time
+    type: object
+  promotion_of:
+    $ref: '#/definitions/pidReference'
+  publication_rights:
+    additionalProperties: false
+    properties:
+      context:
+        type: string
+      platform:
+        type: string
+      territory:
+        type: string
+      transport:
+        type: string
+    type: object
+  published_time:
+    $ref: '#/definitions/broadcastTime'
+  publisher:
+    maxLength: 255
+    minLength: 1
+    type: string
+  record_label:
+    maxLength: 255
+    minLength: 1
+    type: string
+  recording_date:
+    maxLength: 10
+    minLength: 4
+    type: string
+  reference:
+    additionalProperties: false
+    properties:
+      href_deprecated:
+        type: boolean
+      result_type_deprecated:
+        type: boolean
+    type: object
+  referenceAttributes:
+    additionalProperties: false
+    properties:
+      href:
+        type: string
+      result_type:
+        type: string
+    required:
+      - href
+      - result_type
+    type: object
+  region:
+    type: string
+  related_link:
+    additionalProperties: false
+    properties:
+      is_external:
+        $ref: '#/definitions/is_external'
+      pid:
+        $ref: '#/definitions/pid'
+      position:
+        $ref: '#/definitions/position'
+      synopses:
+        $ref: '#/definitions/synopses'
+      title:
+        $ref: '#/definitions/title'
+      type:
+        $ref: '#/definitions/type'
+      uri:
+        $ref: '#/definitions/uri'
+    required:
+      - pid
+    type: object
+  related_links:
+    additionalProperties: false
+    properties:
+      related_link:
+        items:
+          $ref: '#/definitions/related_link'
+        type: array
+    type: object
+  release_date_group:
+    additionalProperties: false
+    properties:
+      release_date:
+        pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}.*$'
+        type: string
+      release_year:
+        pattern: '[0-9]{4}'
+        type: string
+      release_year_month:
+        pattern: '[0-9]{4}-[0-9]{2}'
+        type: string
+    type: object
+  release_status_type:
+    enum:
+      - alpha
+      - beta
+      - supported
+      - deprecated
+  release_title:
+    maxLength: 255
+    minLength: 1
+    type: string
+  results:
+    additionalProperties: false
+    properties:
+      availability:
+        $ref: '#/definitions/availability'
+      brand:
+        $ref: '#/definitions/brand'
+      broadcast:
+        $ref: '#/definitions/broadcast'
+      chapter:
+        $ref: '#/definitions/chapter'
+      clip:
+        $ref: '#/definitions/clip'
+      collection:
+        $ref: '#/definitions/collection'
+      contributor:
+        $ref: '#/definitions/contributor'
+      episode:
+        $ref: '#/definitions/episode'
+      franchise:
+        $ref: '#/definitions/franchise'
+      gallery:
+        $ref: '#/definitions/gallery'
+      highlight:
+        $ref: '#/definitions/highlight'
+      image:
+        $ref: '#/definitions/image'
+      master_brand:
+        $ref: '#/definitions/master_brand'
+      more_than:
+        type: integer
+      music:
+        $ref: '#/definitions/music'
+      other:
+        $ref: '#/definitions/other'
+      page:
+        type: integer
+      page_size:
+        type: integer
+      promotion:
+        $ref: '#/definitions/promotion'
+      season:
+        $ref: '#/definitions/season'
+      series:
+        $ref: '#/definitions/series'
+      service:
+        $ref: '#/definitions/service'
+      speech:
+        $ref: '#/definitions/speech'
+      total:
+        type: integer
+      version_group:
+        $ref: '#/definitions/version_group'
+      window:
+        $ref: '#/definitions/window'
+    required:
+      - page
+      - page_size
+    type: object
+  retryable:
+    type: boolean
+  revocation_status:
+    type: string
+  schedule_date:
+    pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}.*$'
+    type: string
+  scheduled:
+    additionalProperties: false
+    properties:
+      end:
+        format: date-time
+        type: string
+      start:
+        format: date-time
+        type: string
+    type: object
+  scheduled_publication_rights:
+    additionalProperties: false
+    properties:
+      publication_rights:
+        items:
+          $ref: '#/definitions/publication_rights'
+        type: array
+    type: object
+  scheduled_time:
+    additionalProperties: false
+    properties:
+      end:
+        format: date-time
+        type: string
+      start:
+        format: date-time
+        type: string
+    type: object
+  season:
+    $ref: '#/definitions/group-body'
+  series:
+    additionalProperties: false
+    properties:
+      alternate_images_mixin:
+        $ref: '#/definitions/alternate_images_mixin'
+      ancestor_titles:
+        $ref: '#/definitions/ancestor_titles'
+      ancestors:
+        $ref: '#/definitions/ancestors'
+      ancestors_titles:
+        $ref: '#/definitions/ancestors_titles'
+      availability_mixin:
+        $ref: '#/definitions/availability_mixin'
+      contributions_mixin:
+        $ref: '#/definitions/contributions_mixin'
+      embargoed:
+        $ref: '#/definitions/embargoed'
+      expected_child_count:
+        $ref: '#/definitions/expected_child_count'
+      genre_groupings:
+        $ref: '#/definitions/genre_groupings'
+      image_link:
+        $ref: '#/definitions/image_link'
+      images_mixin:
+        $ref: '#/definitions/images_mixin'
+      is_embeddable:
+        $ref: '#/definitions/is_embeddable'
+      items_for:
+        $ref: '#/definitions/items_for'
+      master_brand_link:
+        $ref: '#/definitions/master_brand_link'
+      partner:
+        $ref: '#/definitions/partner'
+      pid:
+        $ref: '#/definitions/pid'
+      previous_next_mixin:
+        $ref: '#/definitions/previous_next_mixin'
+      programme_formats:
+        $ref: '#/definitions/programme_formats'
+      related_links:
+        $ref: '#/definitions/related_links'
+      release_date_group:
+        $ref: '#/definitions/release_date_group'
+      series_of:
+        $ref: '#/definitions/series_of'
+      synopses:
+        $ref: '#/definitions/synopses'
+      title:
+        $ref: '#/definitions/title'
+      updated_time:
+        $ref: '#/definitions/updated_time'
+      uri:
+        $ref: '#/definitions/uri'
+    required:
+      - pid
+      - partner
+      - updated_time
+      - embargoed
+    type: object
+  series_of:
+    $ref: '#/definitions/pidReference'
+  service:
+    additionalProperties: false
+    properties:
+      date_range:
+        $ref: '#/definitions/date_range'
+      description:
+        $ref: '#/definitions/description'
+      ids:
+        $ref: '#/definitions/ids'
+      is_concrete:
+        $ref: '#/definitions/is_concrete'
+      is_downloadable:
+        $ref: '#/definitions/is_downloadable'
+      is_streamable:
+        $ref: '#/definitions/is_streamable'
+      master_brand_link:
+        $ref: '#/definitions/master_brand_link'
+      media_type:
+        $ref: '#/definitions/media_type'
+      name:
+        $ref: '#/definitions/name'
+      partner:
+        $ref: '#/definitions/partner'
+      region:
+        $ref: '#/definitions/region'
+      sid:
+        $ref: '#/definitions/sid'
+      type:
+        $ref: '#/definitions/type'
+      updated_time:
+        $ref: '#/definitions/updated_time'
+    required:
+      - sid
+      - partner
+    type: object
+  serviceReference:
+    additionalProperties: false
+    properties:
+      href:
+        type: string
+      result_type:
+        type: string
+      sid:
+        type: string
+    required:
+      - result_type
+      - href
+      - sid
+    type: object
+  short:
+    type: string
+  sid:
+    pattern: "[a-z0-9A-Z_\\.\\-]+"
+    type: string
+  size:
+    additionalProperties: false
+    properties:
+      units:
+        type: string
+    type: object
+  snippet_url:
+    type: string
+  sort:
+    additionalProperties: false
+    properties:
+      deprecated:
+        type: boolean
+      deprecated_since:
+        pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}.*$'
+        type: string
+      guaranteed_until:
+        pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}.*$'
+        type: string
+      is_default:
+        type: string
+      name:
+        type: string
+      release_status:
+        $ref: '#/definitions/release_status_type'
+      replaced_by:
+        type: string
+      sort_direction:
+        items:
+          $ref: '#/definitions/sort_direction'
+        type: array
+      title:
+        type: string
+    required:
+      - name
+      - title
+    type: object
+  sort_direction:
+    additionalProperties: false
+    properties:
+      href:
+        type: string
+      is_default:
+        type: string
+      name:
+        type: string
+      value:
+        type: string
+    required:
+      - name
+      - value
+      - is_default
+      - href
+    type: object
+  sorts:
+    additionalProperties: false
+    properties:
+      sort:
+        items:
+          $ref: '#/definitions/sort'
+        type: array
+      unstable_sorts:
+        $ref: '#/definitions/unstable_sorts'
+    type: object
+  source_asset:
+    additionalProperties: false
+    properties:
+      dimensions:
+        $ref: '#/definitions/dimensions'
+      focus_point:
+        $ref: '#/definitions/focus_point'
+      mime_type:
+        type: string
+      size:
+        $ref: '#/definitions/size'
+      uri:
+        type: string
+    type: object
+  source_media:
+    maxLength: 64
+    minLength: 1
+    type: string
+  speech:
+    $ref: '#/definitions/item'
+  start_time:
+    format: date-time
+    type: string
+  status:
+    type: string
+  synopses:
+    additionalProperties: false
+    properties:
+      long:
+        $ref: '#/definitions/long'
+      medium:
+        $ref: '#/definitions/medium'
+      short:
+        $ref: '#/definitions/short'
+    type: object
+  title:
+    type: string
+  track_number:
+    maxLength: 8
+    minLength: 1
+    type: string
+  track_side:
+    maxLength: 8
+    minLength: 1
+    type: string
+  tx_time:
+    additionalProperties: false
+    properties:
+      credits_showing:
+        format: date-time
+        type: string
+      end:
+        format: date-time
+        type: string
+      start:
+        format: date-time
+        type: string
+    type: object
+  type:
+    type: string
+  types_with_id:
+    additionalProperties: false
+    properties:
+      types:
+        additionalProperties: false
+        properties:
+          type:
+            items:
+              additionalProperties: false
+              properties:
+                id:
+                  type: string
+                types:
+                  additionalProperties: false
+                  properties:
+                    type:
+                      items:
+                        additionalProperties: false
+                        properties:
+                          id:
+                            type: string
+                        type: object
+                      type: array
+                  required:
+                    - type
+                  type: object
+              required:
+                - types
+              type: object
+            type: array
+        required:
+          - type
+        type: object
+    required:
+      - types
+    type: object
+  unstable_filters:
+    additionalProperties: false
+    properties:
+      filter:
+        items:
+          $ref: '#/definitions/filter'
+        type: array
+    type: object
+  unstable_mixins:
+    additionalProperties: false
+    properties:
+      mixin:
+        items:
+          $ref: '#/definitions/mixin'
+        type: array
+    type: object
+  unstable_sorts:
+    additionalProperties: false
+    properties:
+      sort:
+        items:
+          $ref: '#/definitions/sort'
+        type: array
+    type: object
+  updated_time:
+    format: date-time
+    type: string
+  uri:
+    type: string
+  url:
+    type: string
+  url_key:
+    type: string
+  version_availability:
+    additionalProperties: false
+    properties:
+      availability:
+        additionalProperties: false
+        properties:
+          availability:
+            additionalProperties: false
+            properties:
+              availability_end:
+                format: date-time
+                type: string
+              availability_start:
+                format: date-time
+                type: string
+              available_media_sets:
+                $ref: '#/definitions/available_media_sets'
+              status:
+                type: string
+            required:
+              - available_media_sets
+            type: object
+          availability_end:
+            format: date-time
+            type: string
+          availability_start:
+            format: date-time
+            type: string
+          available_media_sets:
+            $ref: '#/definitions/available_media_sets'
+          status:
+            type: string
+        required:
+          - available_media_sets
+          - availability
+        type: object
+    required:
+      - availability
+    type: object
+  version_availability_mixin:
+    additionalProperties: false
+    properties:
+      version:
+        items:
+          additionalProperties: false
+          properties:
+            availabilities:
+              items:
+                additionalProperties: false
+                properties:
+                  version_availability:
+                    items:
+                      $ref: '#/definitions/version_availability'
+                    type: array
+                required:
+                  - version_availability
+                type: object
+              type: array
+            competition_warning:
+              type: string
+            duration:
+              pattern: '^(-)?P(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)W)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?$'
+              type: string
+            guidance_warnings:
+              $ref: '#/definitions/guidance_warnings'
+            pid:
+              $ref: '#/definitions/pid'
+            types:
+              items:
+                additionalProperties: false
+                properties:
+                  type:
+                    items:
+                      type: string
+                    type: array
+                type: object
+              type: array
+            version:
+              items:
+                additionalProperties: false
+                properties:
+                  availabilities:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        version_availability:
+                          items:
+                            $ref: '#/definitions/version_availability'
+                          type: array
+                      required:
+                        - version_availability
+                      type: object
+                    type: array
+                  competition_warning:
+                    type: string
+                  duration:
+                    pattern: '^(-)?P(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)W)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?$'
+                    type: string
+                  guidance_warnings:
+                    $ref: '#/definitions/guidance_warnings'
+                  pid:
+                    $ref: '#/definitions/pid'
+                  types:
+                    items:
+                      additionalProperties: false
+                      properties:
+                        type:
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                required:
+                  - types
+                type: object
+              type: array
+          required:
+            - types
+          type: object
+        type: array
+    type: object
+  version_group:
+    additionalProperties: false
+    properties:
+      version:
+        additionalProperties: false
+        properties:
+          aspect_ratio:
+            type: string
+          competition_warning:
+            $ref: '#/definitions/competition_warning'
+          duration:
+            pattern: '^(-)?P(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)W)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?$'
+            type: string
+          ids:
+            $ref: '#/definitions/ids'
+          pid:
+            $ref: '#/definitions/pid'
+          types_with_id:
+            $ref: '#/definitions/types_with_id'
+          updated_time:
+            $ref: '#/definitions/updated_time'
+          version:
+            additionalProperties: false
+            properties:
+              aspect_ratio:
+                type: string
+              competition_warning:
+                $ref: '#/definitions/competition_warning'
+              duration:
+                pattern: '^(-)?P(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)W)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?$'
+                type: string
+              ids:
+                $ref: '#/definitions/ids'
+              pid:
+                $ref: '#/definitions/pid'
+              types_with_id:
+                $ref: '#/definitions/types_with_id'
+              updated_time:
+                $ref: '#/definitions/updated_time'
+              version_of:
+                $ref: '#/definitions/version_of'
+              version_types_with_id:
+                $ref: '#/definitions/version_types_with_id'
+              warnings:
+                $ref: '#/definitions/warnings'
+            required:
+              - pid
+              - updated_time
+            type: object
+          version_of:
+            $ref: '#/definitions/version_of'
+          version_types_with_id:
+            $ref: '#/definitions/version_types_with_id'
+          warnings:
+            $ref: '#/definitions/warnings'
+        required:
+          - pid
+          - updated_time
+          - version
+        type: object
+    required:
+      - version
+    type: object
+  version_of:
+    $ref: '#/definitions/pidReference'
+  version_types_with_id:
+    additionalProperties: false
+    properties:
+      version_types:
+        additionalProperties: false
+        properties:
+          version_type:
+            items:
+              additionalProperties: false
+              properties:
+                id:
+                  type: string
+                version_types:
+                  additionalProperties: false
+                  properties:
+                    version_type:
+                      items:
+                        additionalProperties: false
+                        properties:
+                          id:
+                            type: string
+                        type: object
+                      type: array
+                  required:
+                    - version_type
+                  type: object
+              required:
+                - version_types
+              type: object
+            type: array
+        required:
+          - version_type
+        type: object
+    required:
+      - version_types
+    type: object
+  versions:
+    additionalProperties: false
+    properties:
+      available:
+        type: integer
+      version_availability_mixin:
+        $ref: '#/definitions/version_availability_mixin'
+    required:
+      - version_availability_mixin
+      - available
+    type: object
+  versions_mixin:
+    additionalProperties: false
+    properties:
+      available_versions:
+        $ref: '#/definitions/available_versions'
+      available_webcasts:
+        $ref: '#/definitions/available_webcasts'
+      versions:
+        items:
+          $ref: '#/definitions/versions'
+        type: array
+    type: object
+  warning:
+    additionalProperties: false
+    properties:
+      short_description:
+        type: string
+      warning_code:
+        type: string
+    type: object
+  warning_items:
+    additionalProperties: false
+    properties:
+      warning:
+        items:
+          additionalProperties: false
+          properties:
+            short_description:
+              type: string
+            warning:
+              items:
+                additionalProperties: false
+                properties:
+                  short_description:
+                    type: string
+                  warning_code:
+                    type: string
+                type: object
+              type: array
+            warning_code:
+              type: string
+          type: object
+        type: array
+    type: object
+  warning_text:
+    additionalProperties: false
+    properties:
+      length:
+        type: string
+    type: object
+  warning_texts:
+    additionalProperties: false
+    properties:
+      warning_text:
+        items:
+          additionalProperties: false
+          properties:
+            length:
+              type: string
+            warning_text:
+              items:
+                additionalProperties: false
+                properties:
+                  length:
+                    type: string
+                type: object
+              type: array
+          type: object
+        type: array
+    type: object
+  warnings:
+    additionalProperties: false
+    properties:
+      warning:
+        items:
+          $ref: '#/definitions/warning'
+        type: array
+      warning_text:
+        items:
+          $ref: '#/definitions/warning_text'
+        type: array
+    type: object
+  window:
+    additionalProperties: false
+    properties:
+      accurate_programme_time:
+        $ref: '#/definitions/accurate_programme_time'
+      ancestor_titles:
+        $ref: '#/definitions/ancestor_titles'
+      ancestors_titles:
+        $ref: '#/definitions/ancestors_titles'
+      ids:
+        $ref: '#/definitions/ids'
+      image_link:
+        $ref: '#/definitions/image_link'
+      images_mixin:
+        $ref: '#/definitions/images_mixin'
+      media_availability_time:
+        $ref: '#/definitions/media_availability_time'
+      partner:
+        $ref: '#/definitions/partner'
+      pid:
+        $ref: '#/definitions/pid'
+      scheduled_publication_rights:
+        $ref: '#/definitions/scheduled_publication_rights'
+      scheduled_time:
+        $ref: '#/definitions/scheduled_time'
+      service:
+        $ref: '#/definitions/serviceReference'
+      updated_time:
+        $ref: '#/definitions/updated_time'
+      window_of:
+        items:
+          $ref: '#/definitions/window_of'
+        type: array
+    required:
+      - pid
+      - partner
+    type: object
+  window_of:
+    $ref: '#/definitions/pidReference'
+  xquery-version:
+    enum:
+      - 1.0-ml
+      - 0.9-ml
+      - '1.0'
+      - XSLT

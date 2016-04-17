@@ -156,6 +156,11 @@ paths:
         - application/json
       operationId: getDomesticSummaryReport
       parameters:
+        - description: "Output format. 'xml' and 'csv' values are accepted. Default format - json"
+          in: query
+          name: format
+          required: false
+          type: string
         - description: ISO 2-letter country code which will be used for determining which country is domestic.
           in: query
           name: country_code
@@ -801,6 +806,11 @@ paths:
           name: statuses
           required: false
           type: string
+        - description: Taxamo provided original transaction key
+          in: query
+          name: original_transaction_key
+          required: false
+          type: string
         - description: Order date from in yyyy-MM-dd format.
           in: query
           name: order_date_from
@@ -975,6 +985,42 @@ paths:
       summary: Confirm transaction
       tags:
         - transactions
+  '/api/v1/transactions/{key}/invoice/refunds/{refund_note_number}/send_email':
+    post:
+      consumes:
+        - application/json
+      operationId: emailRefund
+      parameters:
+        - description: Transaction key.
+          in: path
+          name: key
+          required: true
+          type: string
+        - description: Refund note id.
+          in: path
+          name: refund_note_number
+          required: true
+          type: string
+        - description: Input
+          in: body
+          name: input
+          required: true
+          schema:
+            $ref: '#/definitions/emailRefundIn'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/emailRefundOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Email invoice
+      tags:
+        - invoices
   '/api/v1/transactions/{key}/invoice/send_email':
     post:
       consumes:
@@ -1097,6 +1143,30 @@ paths:
       tags:
         - payments
   '/api/v1/transactions/{key}/refunds':
+    get:
+      consumes:
+        - application/json
+      operationId: listRefunds
+      parameters:
+        - description: Transaction key.
+          in: path
+          name: key
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/listRefundsOut'
+        '400':
+          description: 'Validation failed, see JSON body response for details.'
+        '401':
+          description: Incorrect token
+      summary: Get transaction refunds
+      tags:
+        - refunds
     post:
       consumes:
         - application/json
@@ -1623,6 +1693,9 @@ definitions:
       line_key:
         description: 'Line identifier. If neither line key or custom id is provided, the refund amount will be assigned to lines in order.'
         type: string
+      refund_reason:
+        description: 'Refund reason, displayed on the credit note.'
+        type: string
       total_amount:
         description: 'Total amount, including tax, to be refunded. Either amount or total amount is required. In case of line key and custom id missing, only total_amount can be used.'
         type: number
@@ -1721,6 +1794,18 @@ definitions:
         type: string
     type: object
   emailInvoiceOut:
+    properties:
+      success:
+        description: Was operation successful?
+        type: boolean
+    type: object
+  emailRefundIn:
+    properties:
+      buyer_email:
+        description: 'Email to send the credit note/refund note. If not provided, transaction.buyer_email will be used.'
+        type: string
+    type: object
+  emailRefundOut:
     properties:
       success:
         description: Was operation successful?
@@ -1833,6 +1918,9 @@ definitions:
         type: string
       end_month:
         description: Period end month in yyyy-MM-dd format.
+        type: string
+      format:
+        description: "Output format. 'xml' and 'csv' values are accepted. Default format - json"
         type: string
       fx_date_type:
         description: Which date should be used for FX.
@@ -2418,6 +2506,14 @@ definitions:
           $ref: '#/definitions/payments'
         type: array
     type: object
+  listRefundsOut:
+    properties:
+      refunds:
+        description: Refunds
+        items:
+          $ref: '#/definitions/refunds'
+        type: array
+    type: object
   listTransactionsIn:
     properties:
       currency_code:
@@ -2446,6 +2542,9 @@ definitions:
         type: string
       order_date_to:
         description: Order date to in yyyy-MM-dd format.
+        type: string
+      original_transaction_key:
+        description: Taxamo provided original transaction key
         type: string
       sort_reverse:
         description: 'If true, results are sorted in descending order.'
@@ -2512,6 +2611,39 @@ definitions:
       code:
         description: Product type code.
         type: string
+    type: object
+  refunds:
+    properties:
+      amount:
+        description: 'Amount, excluding tax, that was refunded.'
+        type: number
+      informative:
+        description: Was this refund applied to an informative line?
+        type: boolean
+      line_key:
+        description: 'Line identifier. If neither line key or custom id is provided, the refund amount will be assigned to lines in order.'
+        type: string
+      refund_note_number:
+        description: Sequential refund note number.
+        type: string
+      refund_note_url:
+        description: Refund note image url.
+        type: string
+      refund_reason:
+        description: 'Refund reason, displayed on the credit note.'
+        type: string
+      refund_timestamp:
+        description: Refund timestamp in UTC timezone.
+        type: string
+      tax_amount:
+        description: 'Calculated tax amount, that was refunded.'
+        type: number
+      tax_rate:
+        description: Tax rate for the line that was used for the refund calculation.
+        type: number
+      total_amount:
+        description: 'Total amount, including tax, that was refunded.'
+        type: number
     type: object
   report:
     properties:

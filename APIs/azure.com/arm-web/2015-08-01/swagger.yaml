@@ -455,6 +455,10 @@ paths:
       deprecated: false
       operationId: Global_GetSubscriptionGeoRegions
       parameters:
+        - description: Filter only to regions that support this sku
+          in: query
+          name: sku
+          type: string
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
       produces:
@@ -4301,6 +4305,7 @@ paths:
       summary: Restores a web app
       tags:
         - Sites
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/appsettings':
     put:
       consumes:
@@ -6003,9 +6008,9 @@ paths:
           name: name
           required: true
           type: string
-        - description: Snapshot data used for web app recovery. Snapshot information can be obtained by call GetDeletedSites API.
+        - description: Snapshot data used for web app recovery. Snapshot information can be obtained by calling GetDeletedSites or GetSiteSnapshots API.
           in: body
-          name: snapshot
+          name: recoveryEntity
           required: true
           schema:
             $ref: '#/definitions/CsmSiteRecoveryEntity'
@@ -6017,13 +6022,16 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: OK
+        '202':
+          description: Asynchronous operation in progress
           schema:
-            $ref: '#/definitions/Object'
+            $ref: '#/definitions/Site'
+        '404':
+          description: Web app not found
       summary: Recovers a deleted web app
       tags:
         - Sites
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/resetSlotConfig':
     post:
       consumes: []
@@ -6092,46 +6100,6 @@ paths:
           schema:
             $ref: '#/definitions/Object'
       summary: Restarts web app
-      tags:
-        - Sites
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/restorableSnapshots':
-    put:
-      consumes: []
-      deprecated: false
-      operationId: Sites_GetSiteSnapshotsOnSku
-      parameters:
-        - description: Azure subscription
-          in: query
-          name: subscriptionName
-          required: true
-          type: string
-        - description: Webspace
-          in: query
-          name: webspaceName
-          required: true
-          type: string
-        - description: Website Name
-          in: path
-          name: name
-          required: true
-          type: string
-        - in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - $ref: '#/parameters/subscriptionIdParameter'
-        - $ref: '#/parameters/apiVersionParameter'
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Object'
-      summary: Returns Snapshots to the user based on their SKU.
       tags:
         - Sites
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots':
@@ -6675,6 +6643,7 @@ paths:
       summary: Restores a web app
       tags:
         - Sites
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/appsettings':
     put:
       consumes:
@@ -8528,9 +8497,9 @@ paths:
           name: name
           required: true
           type: string
-        - description: Snapshot data used for web app recovery. Snapshot information can be obtained by call GetDeletedSites API.
+        - description: Snapshot data used for web app recovery. Snapshot information can be obtained by calling GetDeletedSites or GetSiteSnapshots API.
           in: body
-          name: snapshot
+          name: recoveryEntity
           required: true
           schema:
             $ref: '#/definitions/CsmSiteRecoveryEntity'
@@ -8547,13 +8516,16 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: OK
+        '202':
+          description: Asynchronous operation in progress
           schema:
-            $ref: '#/definitions/Object'
+            $ref: '#/definitions/Site'
+        '404':
+          description: Web app not found
       summary: Recovers a deleted web app
       tags:
         - Sites
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/resetSlotConfig':
     post:
       consumes: []
@@ -8632,50 +8604,6 @@ paths:
           schema:
             $ref: '#/definitions/Object'
       summary: Restarts web app
-      tags:
-        - Sites
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/restorableSnapshots':
-    put:
-      consumes: []
-      deprecated: false
-      operationId: Sites_GetSiteSnapshotsOnSkuSlot
-      parameters:
-        - description: Azure subscription
-          in: query
-          name: subscriptionName
-          required: true
-          type: string
-        - description: Webspace
-          in: query
-          name: webspaceName
-          required: true
-          type: string
-        - description: Website Name
-          in: path
-          name: name
-          required: true
-          type: string
-        - in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - in: path
-          name: slot
-          required: true
-          type: string
-        - $ref: '#/parameters/subscriptionIdParameter'
-        - $ref: '#/parameters/apiVersionParameter'
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Object'
-      summary: Returns Snapshots to the user based on their SKU.
       tags:
         - Sites
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/slotsdiffs':
@@ -8781,14 +8709,9 @@ paths:
       deprecated: false
       operationId: Sites_GetSiteSnapshotsSlot
       parameters:
-        - description: Azure subscription
-          in: query
-          name: subscriptionName
-          required: true
-          type: string
         - description: Webspace
-          in: query
-          name: webspaceName
+          in: path
+          name: resourceGroupName
           required: true
           type: string
         - description: Website Name
@@ -8796,11 +8719,8 @@ paths:
           name: name
           required: true
           type: string
-        - in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - in: path
+        - description: Website Slot
+          in: path
           name: slot
           required: true
           type: string
@@ -9586,23 +9506,14 @@ paths:
       deprecated: false
       operationId: Sites_GetSiteSnapshots
       parameters:
-        - description: Azure subscription
-          in: query
-          name: subscriptionName
-          required: true
-          type: string
         - description: Webspace
-          in: query
-          name: webspaceName
+          in: path
+          name: resourceGroupName
           required: true
           type: string
         - description: Website Name
           in: path
           name: name
-          required: true
-          type: string
-        - in: path
-          name: resourceGroupName
           required: true
           type: string
         - $ref: '#/parameters/subscriptionIdParameter'
@@ -10941,6 +10852,9 @@ definitions:
   CsmSiteRecoveryEntity:
     description: Class containting details about site recovery operation.
     properties:
+      recoverConfig:
+        description: "If true, then the website's configuration will be reverted to its state at SnapshotTime"
+        type: boolean
       siteName:
         description: '[Optional] Destination web app name into which web app should be recovered. This is case when new web app should be created instead.'
         type: string
@@ -11814,6 +11728,18 @@ definitions:
             items:
               $ref: '#/definitions/NetworkAccessControlEntry'
             type: array
+          provisioningState:
+            description: Provisioning state of the hostingEnvironment (App Service Environment)
+            enum:
+              - Succeeded
+              - Failed
+              - Canceled
+              - InProgress
+              - Deleting
+            type: string
+            x-ms-enum:
+              modelAsString: false
+              name: ProvisioningState
           resourceGroup:
             description: Resource group of the hostingEnvironment (App Service Environment)
             type: string
@@ -12182,18 +12108,6 @@ definitions:
       actionName:
         description: Name of action recommended by this object.
         type: string
-      category:
-        description: The category that this recommendation belongs to.
-        enum:
-          - Uncategorized
-          - Test
-          - UpSell
-          - CrossSell
-          - LiveSite
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: Category
       channels:
         description: List of channels that this recommendation can apply.
         enum:
@@ -12266,10 +12180,14 @@ definitions:
         description: The beginning time of a range that the recommendation refers to.
         format: date-time
         type: string
+      tags:
+        description: The list of category tags that this recommendation belongs to.
+        items:
+          type: string
+        type: array
     required:
       - level
       - channels
-      - category
     type: object
   RecommendationRule:
     description: Represents a recommendation rule that the recommendation engine can perform
@@ -12277,18 +12195,6 @@ definitions:
       actionName:
         description: Name of action that is recommended by this rule in string
         type: string
-      category:
-        description: The category that the rule belongs to.
-        enum:
-          - Uncategorized
-          - Test
-          - UpSell
-          - CrossSell
-          - LiveSite
-        type: string
-        x-ms-enum:
-          modelAsString: false
-          name: Category
       channels:
         description: List of available channels that this rule applies.
         enum:
@@ -12330,10 +12236,14 @@ definitions:
       recommendationId:
         description: "Recommendation ID of an associated recommendation object tied to the rule, if exists.\r\n            If such an object doesn't exist, it is set to null."
         type: string
+      tags:
+        description: An array of category tags that the rule contains.
+        items:
+          type: string
+        type: array
     required:
       - level
       - channels
-      - category
     type: object
   RelayServiceConnectionEntity:
     allOf:
@@ -12374,6 +12284,9 @@ definitions:
     properties:
       id:
         description: Resource Id
+        type: string
+      kind:
+        description: Kind of resource
         type: string
       location:
         description: Resource Location
@@ -13390,6 +13303,7 @@ definitions:
         enum:
           - Shared
           - Dedicated
+          - Dynamic
         type: string
         x-ms-enum:
           modelAsString: false
@@ -13550,6 +13464,7 @@ definitions:
             enum:
               - Shared
               - Dedicated
+              - Dynamic
             type: string
             x-ms-enum:
               modelAsString: false
@@ -13695,6 +13610,9 @@ definitions:
           certThumbprint:
             description: The client certificate thumbprint
             type: string
+          dnsServers:
+            description: Dns servers to be used by this VNET. This should be a comma-separated list of IP addresses.
+            type: string
           resyncRequired:
             description: Flag to determine if a resync is required
             type: boolean
@@ -13741,6 +13659,7 @@ definitions:
             enum:
               - Shared
               - Dedicated
+              - Dynamic
             type: string
             x-ms-enum:
               modelAsString: false

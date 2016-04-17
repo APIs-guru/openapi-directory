@@ -1225,14 +1225,6 @@ definitions:
         format: uint64
         type: string
     type: object
-  IntervalPartitionConfiguration:
-    properties:
-      expirationMs:
-        format: int64
-        type: string
-      type:
-        type: string
-    type: object
   Job:
     properties:
       configuration:
@@ -1419,7 +1411,7 @@ definitions:
         description: '[Optional] If querying an external data source outside of BigQuery, describes the data format, location and other properties of the data source. By defining these properties, the data source can then be queried as if it were a standard BigQuery table.'
         type: object
       useLegacySql:
-        description: "[Experimental] Specifies whether to use BigQuery's legacy SQL dialect for this query. The default value is true. If set to false, the query will use BigQuery's updated SQL dialect with improved standards compliance. When using BigQuery's updated SQL, the values of allowLargeResults and flattenResults are ignored. Queries with useLegacySql set to false will be run as if allowLargeResults is true and flattenResults is false."
+        description: "[Experimental] Specifies whether to use BigQuery's legacy SQL dialect for this query. The default value is true. If set to false, the query will use BigQuery's updated SQL dialect with improved standards compliance: https://cloud.google.com/bigquery/sql-reference/ When using BigQuery's updated SQL, the values of allowLargeResults and flattenResults are ignored. Queries with useLegacySql set to false will be run as if allowLargeResults is true and flattenResults is false."
         type: boolean
       useQueryCache:
         default: true
@@ -1557,6 +1549,9 @@ definitions:
         items:
           $ref: '#/definitions/TableReference'
         type: array
+      schema:
+        $ref: '#/definitions/TableSchema'
+        description: '[Output-only, Experimental] The schema of the results. Present only for successful dry run of non-legacy SQL queries.'
       totalBytesBilled:
         description: '[Output-only] Total bytes billed for the job.'
         format: int64
@@ -1687,7 +1682,7 @@ definitions:
         format: uint32
         type: integer
       useLegacySql:
-        description: "[Experimental] Specifies whether to use BigQuery's legacy SQL dialect for this query. The default value is true. If set to false, the query will use BigQuery's updated SQL dialect with improved standards compliance. When using BigQuery's updated SQL, the values of allowLargeResults and flattenResults are ignored. Queries with useLegacySql set to false will be run as if allowLargeResults is true and flattenResults is false."
+        description: "[Experimental] Specifies whether to use BigQuery's legacy SQL dialect for this query. The default value is true. If set to false, the query will use BigQuery's updated SQL dialect with improved standards compliance: https://cloud.google.com/bigquery/sql-reference/ When using BigQuery's updated SQL, the values of allowLargeResults and flattenResults are ignored. Queries with useLegacySql set to false will be run as if allowLargeResults is true and flattenResults is false."
         type: boolean
       useQueryCache:
         default: true
@@ -1793,11 +1788,6 @@ definitions:
         description: '[Output-only] The number of rows of data in this table, excluding any data in the streaming buffer.'
         format: uint64
         type: string
-      partitionConfigurations:
-        description: '[Experimental] List of partition configurations for this table. Currently only one configuration can be specified and it can only be an interval partition with type daily.'
-        items:
-          $ref: '#/definitions/TablePartitionConfiguration'
-        type: array
       schema:
         $ref: '#/definitions/TableSchema'
         description: '[Optional] Describes the schema of this table.'
@@ -1810,6 +1800,9 @@ definitions:
       tableReference:
         $ref: '#/definitions/TableReference'
         description: '[Required] Reference describing the ID of this table.'
+      timePartitioning:
+        $ref: '#/definitions/TimePartitioning'
+        description: '[Experimental] If specified, configures time-based partitioning for this table.'
       type:
         description: '[Output-only] Describes the table type. The following values are supported: TABLE: A normal BigQuery table. VIEW: A virtual table defined by a SQL query. EXTERNAL: A table that references data stored in an external storage system, such as Google Cloud Storage. The default value is TABLE.'
         type: string
@@ -1952,13 +1945,6 @@ definitions:
         format: int32
         type: integer
     type: object
-  TablePartitionConfiguration:
-    description: '[Required] A partition configuration. Only one type of partition should be configured.'
-    properties:
-      interval:
-        $ref: '#/definitions/IntervalPartitionConfiguration'
-        description: '[Pick one] Configures an interval partition.'
-    type: object
   TableReference:
     properties:
       datasetId:
@@ -1986,6 +1972,16 @@ definitions:
         items:
           $ref: '#/definitions/TableFieldSchema'
         type: array
+    type: object
+  TimePartitioning:
+    properties:
+      expirationMs:
+        description: '[Optional] Number of milliseconds for which to keep the storage for a partition.'
+        format: int64
+        type: string
+      type:
+        description: '[Required] The only type supported is DAY, which will generate one partition per day based on data loading time.'
+        type: string
     type: object
   UserDefinedFunctionResource:
     properties:

@@ -574,6 +574,17 @@ paths:
 
 
       operationId: GET--version-projects---format-
+      parameters:
+        - description: The name of the organisation the project is assigned to.
+          in: query
+          name: orga_name
+          required: false
+          type: string
+        - description: The name of the team in the organisation this project is assigned to.
+          in: query
+          name: team_name
+          required: false
+          type: string
       responses:
         '200':
           description: No response was specified
