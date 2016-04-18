@@ -15,6 +15,14 @@ info:
     url: 'https://api.gettyimages.com/swagger/api-docs'
     version: '1.2'
   x-providerName: gettyimages.com
+securityDefinitions:
+  Api-Key:
+    description: Provide your API key.
+    in: header
+    name: Api-Key
+    type: apiKey
+security:
+  - Api-Key: []
 tags:
   - name: AssetChanges
   - name: AssetRegistration
@@ -34,11 +42,6 @@ paths:
     put:
       consumes: []
       parameters:
-        - description: Api-Key
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
           in: header
           name: Accept-Language
@@ -80,11 +83,6 @@ paths:
     delete:
       consumes: []
       parameters:
-        - description: Api-Key
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
           in: header
           name: Accept-Language
@@ -120,11 +118,6 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: Api-Key
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
           in: header
           name: Accept-Language
@@ -157,11 +150,6 @@ paths:
           name: Authorization
           required: true
           type: string
-        - description: Api-Key
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
           in: header
           name: Accept-Language
@@ -192,11 +180,6 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: Api-Key
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: Authorization token required. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.
           in: header
           name: Authorization
@@ -224,11 +207,6 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: Api-Key
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: Authorization token required. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.
           in: header
           name: Authorization
@@ -265,11 +243,6 @@ paths:
         - application/json
         - text/json
       parameters:
-        - description: Api-Key
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: Authorization token required. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.
           in: header
           name: Authorization
@@ -313,11 +286,6 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: Provide your API key.
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: "Provide access token in the format of 'Bearer: {token}'."
           in: header
           name: Authorization
@@ -345,11 +313,6 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: Provide your API key.
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: Specifies the language of result values.
           in: header
           name: Accept-Language
@@ -377,11 +340,6 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: Provide your API key.
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: "Provide access token in the format of 'Bearer: {token}'."
           in: header
           name: Authorization
@@ -452,11 +410,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PremiumAccessDownloadData'
-        - description: Provide your API key.
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: "Provide access token in the format of 'Bearer: {token}'."
           in: header
           name: Authorization
@@ -524,11 +477,6 @@ paths:
       consumes: []
       description: "The single step download call returns either a redirect or a response message with the URI to download the largest\r\n                video available.\r\n                Returns HTTP status code 303 Redirect to download URI or HTTP status code 200."
       parameters:
-        - description: Provide your API key.
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: "Provide access token in the format of 'Bearer: {token}'."
           in: header
           name: Authorization
@@ -579,11 +527,6 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PremiumAccessDownloadData'
-        - description: Provide your API key.
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: "Provide access token in the format of 'Bearer: {token}'."
           in: header
           name: Authorization
@@ -651,11 +594,6 @@ paths:
       consumes: []
       description: Returns an array of event metadata
       parameters:
-        - description: Provide your API key.
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: Specifies the language of result values.
           in: header
           name: Accept-Language
@@ -723,11 +661,6 @@ paths:
       consumes: []
       description: Returns an array of event metadata
       parameters:
-        - description: Provide your API key.
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: Specifies the language of result values.
           in: header
           name: Accept-Language
@@ -792,11 +725,6 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: Provide your API key.
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: Specifies the language of result values.
           in: header
           name: Accept-Language
@@ -936,11 +864,6 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: Provide your API key.
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: Specifies the language of result values.
           in: header
           name: Accept-Language
@@ -1078,11 +1001,6 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: Provide your API key.
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: Specifies the language of result values.
           in: header
           name: Accept-Language
@@ -1216,11 +1134,6 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: Provide your API key.
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: "Provide access token in the format of 'Bearer: {token}'."
           in: header
           name: Authorization
@@ -1261,11 +1174,6 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: Provide your API key.
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: "Provide access token in the format of 'Bearer: {token}'."
           in: header
           name: Authorization
@@ -1312,11 +1220,6 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: Provide your API key.
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: "Provide access token in the format of 'Bearer: {token}'."
           in: header
           name: Authorization
@@ -1363,11 +1266,6 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: Provide your API key.
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: Specifies the language of result values.
           in: header
           name: Accept-Language
@@ -1450,11 +1348,6 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: Provide your API key.
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: Specifies the language of result values.
           in: header
           name: Accept-Language
@@ -1918,11 +1811,6 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: Provide your API key.
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: Specifies the language of result values.
           in: header
           name: Accept-Language
@@ -2361,11 +2249,6 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: Provide your API key.
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: Specifies the language of result values.
           in: header
           name: Accept-Language
@@ -2846,11 +2729,6 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: Provide your API key.
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: Specifies the language of result values.
           in: header
           name: Accept-Language
@@ -3145,11 +3023,6 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: Provide your API key.
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: Specifies the language of result values.
           in: header
           name: Accept-Language
@@ -3433,11 +3306,6 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: Provide your API key.
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: Specifies the language of result values.
           in: header
           name: Accept-Language
@@ -3728,11 +3596,6 @@ paths:
         - application/json
         - text/json
       parameters:
-        - description: Api-Key
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
           in: header
           name: Accept-Language
@@ -3775,11 +3638,6 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: Provide your API key.
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: Specifies the language of result values.
           in: header
           name: Accept-Language
@@ -3889,11 +3747,6 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: Provide your API key.
-          in: header
-          name: Api-Key
-          required: true
-          type: string
         - description: Specifies the language of result values.
           in: header
           name: Accept-Language
