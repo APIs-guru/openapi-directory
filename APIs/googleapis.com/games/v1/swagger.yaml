@@ -3047,6 +3047,9 @@ definitions:
       playerId:
         description: The ID of the player.
         type: string
+      profileSettings:
+        $ref: '#/definitions/ProfileSettings'
+        description: "The player's profile settings. Controls whether or not the player's profile is visible to other players."
       title:
         description: "The player's title rewarded for their game activities."
         type: string
@@ -3317,6 +3320,17 @@ definitions:
         items:
           $ref: '#/definitions/ScoreSubmission'
         type: array
+    type: object
+  ProfileSettings:
+    description: This is a JSON template for profile settings
+    properties:
+      kind:
+        default: 'games#profileSettings'
+        description: 'Uniquely identifies the type of this resource. Value is always the fixed string games#profileSettings.'
+        type: string
+      profileVisible:
+        description: "The player's current profile visibility. This field is visible to both 1P and 3P APIs."
+        type: boolean
     type: object
   PushToken:
     description: This is a JSON template for a push token resource.

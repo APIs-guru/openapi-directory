@@ -75,6 +75,14 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
+        - description: Data Enable
+          enum:
+            - 'false'
+            - 'true'
+          in: header
+          name: X-API2CRM-DATA-ENABLE
+          required: false
+          type: string
         - description: 'Amount of results (default: 25)'
           format: int32
           in: query
@@ -87,14 +95,9 @@ paths:
           name: offset
           required: false
           type: integer
-        - description: Name
+        - description: Filter
           in: query
-          name: name
-          required: false
-          type: string
-        - description: Email
-          in: query
-          name: email
+          name: filter
           required: false
           type: string
       produces:
@@ -353,6 +356,14 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
+        - description: Data Enable
+          enum:
+            - 'false'
+            - 'true'
+          in: header
+          name: X-API2CRM-DATA-ENABLE
+          required: false
+          type: string
         - description: 'Amount of results (default: 25)'
           format: int32
           in: query
@@ -365,6 +376,11 @@ paths:
           name: offset
           required: false
           type: integer
+        - description: Filter
+          in: query
+          name: filter
+          required: false
+          type: string
         - description: Parent Type
           enum:
             - account
@@ -639,6 +655,14 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
+        - description: Data Enable
+          enum:
+            - 'false'
+            - 'true'
+          in: header
+          name: X-API2CRM-DATA-ENABLE
+          required: false
+          type: string
         - description: 'Amount of results (default: 25)'
           format: int32
           in: query
@@ -651,6 +675,11 @@ paths:
           name: offset
           required: false
           type: integer
+        - description: Filter
+          in: query
+          name: filter
+          required: false
+          type: string
         - description: Parent Type
           enum:
             - account
@@ -924,6 +953,14 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
+        - description: Data Enable
+          enum:
+            - 'false'
+            - 'true'
+          in: header
+          name: X-API2CRM-DATA-ENABLE
+          required: false
+          type: string
         - description: 'Amount of results (default: 25)'
           format: int32
           in: query
@@ -936,24 +973,9 @@ paths:
           name: offset
           required: false
           type: integer
-        - description: Name
+        - description: Filter
           in: query
-          name: name
-          required: false
-          type: string
-        - description: First Name
-          in: query
-          name: first_name
-          required: false
-          type: string
-        - description: Last Name
-          in: query
-          name: last_name
-          required: false
-          type: string
-        - description: Email
-          in: query
-          name: email
+          name: filter
           required: false
           type: string
       produces:
@@ -1218,6 +1240,11 @@ paths:
           name: offset
           required: false
           type: integer
+        - description: Filter
+          in: query
+          name: filter
+          required: false
+          type: string
         - description: Type
           enum:
             - Bitrix24
@@ -1435,6 +1462,14 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
+        - description: Data Enable
+          enum:
+            - 'false'
+            - 'true'
+          in: header
+          name: X-API2CRM-DATA-ENABLE
+          required: false
+          type: string
         - description: 'Amount of results (default: 25)'
           format: int32
           in: query
@@ -1447,6 +1482,11 @@ paths:
           name: offset
           required: false
           type: integer
+        - description: Filter
+          in: query
+          name: filter
+          required: false
+          type: string
         - description: Entity
           enum:
             - account
@@ -1667,6 +1707,14 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
+        - description: Data Enable
+          enum:
+            - 'false'
+            - 'true'
+          in: header
+          name: X-API2CRM-DATA-ENABLE
+          required: false
+          type: string
         - description: 'Amount of results (default: 25)'
           format: int32
           in: query
@@ -1679,6 +1727,11 @@ paths:
           name: offset
           required: false
           type: integer
+        - description: Filter
+          in: query
+          name: filter
+          required: false
+          type: string
         - description: Parent Type
           enum:
             - account
@@ -1952,6 +2005,14 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
+        - description: Data Enable
+          enum:
+            - 'false'
+            - 'true'
+          in: header
+          name: X-API2CRM-DATA-ENABLE
+          required: false
+          type: string
         - description: 'Amount of results (default: 25)'
           format: int32
           in: query
@@ -1964,6 +2025,11 @@ paths:
           name: offset
           required: false
           type: integer
+        - description: Filter
+          in: query
+          name: filter
+          required: false
+          type: string
         - description: Parent Type
           enum:
             - account
@@ -2237,6 +2303,14 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
+        - description: Data Enable
+          enum:
+            - 'false'
+            - 'true'
+          in: header
+          name: X-API2CRM-DATA-ENABLE
+          required: false
+          type: string
         - description: 'Amount of results (default: 25)'
           format: int32
           in: query
@@ -2249,19 +2323,9 @@ paths:
           name: offset
           required: false
           type: integer
-        - description: First Name
+        - description: Filter
           in: query
-          name: first_name
-          required: false
-          type: string
-        - description: Last Name
-          in: query
-          name: last_name
-          required: false
-          type: string
-        - description: Email
-          in: query
-          name: email
+          name: filter
           required: false
           type: string
       produces:
@@ -2520,6 +2584,14 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
+        - description: Data Enable
+          enum:
+            - 'false'
+            - 'true'
+          in: header
+          name: X-API2CRM-DATA-ENABLE
+          required: false
+          type: string
         - description: 'Amount of results (default: 25)'
           format: int32
           in: query
@@ -2532,6 +2604,11 @@ paths:
           name: offset
           required: false
           type: integer
+        - description: Filter
+          in: query
+          name: filter
+          required: false
+          type: string
         - description: Parent Type
           enum:
             - account
@@ -2804,6 +2881,14 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
+        - description: Data Enable
+          enum:
+            - 'false'
+            - 'true'
+          in: header
+          name: X-API2CRM-DATA-ENABLE
+          required: false
+          type: string
         - description: 'Amount of results (default: 25)'
           format: int32
           in: query
@@ -2816,6 +2901,11 @@ paths:
           name: offset
           required: false
           type: integer
+        - description: Filter
+          in: query
+          name: filter
+          required: false
+          type: string
         - description: Parent Type
           enum:
             - account
@@ -3090,6 +3180,14 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
+        - description: Data Enable
+          enum:
+            - 'false'
+            - 'true'
+          in: header
+          name: X-API2CRM-DATA-ENABLE
+          required: false
+          type: string
         - description: 'Amount of results (default: 25)'
           format: int32
           in: query
@@ -3102,6 +3200,11 @@ paths:
           name: offset
           required: false
           type: integer
+        - description: Filter
+          in: query
+          name: filter
+          required: false
+          type: string
       produces:
         - application/json
         - application/hal+json
@@ -3358,6 +3461,14 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
+        - description: Data Enable
+          enum:
+            - 'false'
+            - 'true'
+          in: header
+          name: X-API2CRM-DATA-ENABLE
+          required: false
+          type: string
         - description: 'Amount of results (default: 25)'
           format: int32
           in: query
@@ -3370,6 +3481,11 @@ paths:
           name: offset
           required: false
           type: integer
+        - description: Filter
+          in: query
+          name: filter
+          required: false
+          type: string
       produces:
         - application/json
         - application/hal+json
@@ -3626,6 +3742,14 @@ paths:
           name: X-API2CRM-CRMKEY
           required: true
           type: string
+        - description: Data Enable
+          enum:
+            - 'false'
+            - 'true'
+          in: header
+          name: X-API2CRM-DATA-ENABLE
+          required: false
+          type: string
         - description: 'Amount of results (default: 25)'
           format: int32
           in: query
@@ -3638,6 +3762,11 @@ paths:
           name: offset
           required: false
           type: integer
+        - description: Filter
+          in: query
+          name: filter
+          required: false
+          type: string
       produces:
         - application/json
         - application/hal+json

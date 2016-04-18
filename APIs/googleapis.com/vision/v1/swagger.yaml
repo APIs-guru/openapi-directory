@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: 'The Google Cloud Vision API allows developers to easily integrate Google vision features, including image labeling, face, logo, and landmark detection, optical character recognition (OCR), and detection of explicit content, into applications.'
-  title: Cloud Vision
+  title: Google Cloud Vision
   version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -409,7 +409,9 @@ definitions:
         $ref: '#/definitions/BoundingPoly'
         description: |-
           Image region to which this entity belongs. Not filled currently
-          for LABEL_DETECTION features.
+          for `LABEL_DETECTION` features. For `TEXT_DETECTION` (OCR), `boundingPoly`s
+          are produced for the entire text detected in an image region, followed by
+          `boundingPoly`s for each word within the detected text.
       confidence:
         description: |-
           The accuracy of the entity detection in an image.
@@ -462,7 +464,7 @@ definitions:
         type: number
     type: object
   FaceAnnotation:
-    description: A face annotation contains the results of face detection.
+    description: A face annotation object contains the results of face detection.
     properties:
       angerLikelihood:
         description: Anger likelihood.
@@ -658,12 +660,12 @@ definitions:
         description: 'If present, dominant colors completed successfully.'
     type: object
   ImageSource:
-    description: External image source (i.e. Google Cloud Storage image location).
+    description: External image source (Google Cloud Storage image location).
     properties:
       gcsImageUri:
         description: |-
           Google Cloud Storage image URI. It must be in the following form:
-          "gs://bucket_name/object_name". For more
+          `gs://bucket_name/object_name`. For more
           details, please see: https://cloud.google.com/storage/docs/reference-uris.
           NOTE: Cloud Storage object versioning is not supported!
         type: string

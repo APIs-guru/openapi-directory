@@ -7,7 +7,8 @@
 [![Share on Twitter][twitter-image]][twitter-link]
 [![Follow on Twitter][twitterFollow-image]][twitterFollow-link]
 
-Repository for API models in [OpenAPI(aka Swagger)](https://openapis.org) [2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) format
+Repository for API models in [OpenAPI(aka Swagger)](https://openapis.org) [2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) format.<BR>
+API access to collection: [Go!](API.md)
 
 Our goal is to create a machine-readable Wikipedia for REST APIs with the following principals:
 - Open source, community driven project.
@@ -40,7 +41,7 @@ Existing integrations
 --------------------------
  - https://any-api.com - Documentation and Test Consoles for Public APIs
  - [https://sdks.io](https://sdks.io/Search/FindSDKs?Bridge=APIs.guru) - Explore Automatically Generated SDKs
- - [http://www.cenit.io](http://www.cenit.io/directory?spec=swagger) - Social Data and Business Integration platform
+ - [https://cenit.io](https://cenit.io/directory?spec=swagger) - Data integration platform
  - [commandcar](https://github.com/tikalk/commandcar#installing-from-api-models) - Curl on steroids
  - https://datafire.io - allows you to process and transfer data between APIs, databases, and more
  - [Material Swagger UI Hub](https://darosh.github.io/angular-swagger-ui-material/hub/) - testing and exploring hub for Material Swagger UI demo
@@ -65,9 +66,7 @@ If you have an API spec in any format (OpenAPI, Swagger, RAML, WADL, ...) for an
 Integration with 3rd-party services
 --------------------------
 We discourage you from using Github RAW links or Git directly, repository structure isn't stable and could be changed in future.
-Instead, we strongly recomend you to use our [REST API](API.md).<BR>
-In case if you really need it, we also support [APIs.json](http://apisjson.org/) format:<BR>
-https://apis-guru.github.io/api-models/apis.json
+Instead, we strongly recomend you to use our [REST API](API.md).
 
 Licenses
 --------------------------

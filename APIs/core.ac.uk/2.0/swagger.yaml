@@ -409,7 +409,7 @@ paths:
           name: body
           required: true
           schema:
-            type: string
+            $ref: '#/definitions/SimilarRequest'
         - default: 10
           description: 'How many similar articles to retrieve at most. Can be any number betwen 1 and 100, default is 10'
           in: query
@@ -830,7 +830,7 @@ definitions:
         description: The abstract
         type: string
       doi:
-        description: The DOI of the Article
+        description: The DOI of the article
         type: string
       fulltext:
         description: Article full text
@@ -859,6 +859,9 @@ definitions:
       language:
         $ref: '#/definitions/Language'
         description: Language of the article
+      oai:
+        description: The OAI of the article
+        type: string
       publisher:
         description: Publisher of the article
         type: string
@@ -1242,3 +1245,10 @@ definitions:
     required:
       - id
       - score
+  SimilarRequest:
+    properties:
+      text:
+        description: Find Similar articles based on this string
+        type: string
+    required:
+      - text
