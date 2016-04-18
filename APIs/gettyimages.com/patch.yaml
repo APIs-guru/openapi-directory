@@ -4,3 +4,10 @@ info:
   x-logo:
     backgroundColor: '#333333'
     url: 'http://www.gettyimages.com/landing/assets/unisporkal_engine/images/getty-logo-negative-b117d413642b91fba020901fbd8949ba.svg'
+securityDefinitions:
+  api_key:
+    in: header
+    name: api_key
+    type: apiKey
+security:
+  - api_key: []
