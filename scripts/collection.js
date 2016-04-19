@@ -410,20 +410,7 @@ function extractApiKeysFromParameters(swagger) {
   if (swagger.securityDefinitions || swagger.security)
     return;
 
-  var globalArgs = null;
-  _.each(swagger.paths, function (path) {
-    var intersection = _.spread(_.partialRight(_.intersectionWith, _.isEqual));
-    var pathArgs = _(path).pick(SwaggerMethods).map('parameters').value();
-    pathArgs = intersection(pathArgs);
-
-    if (_.isNull(globalArgs)) {
-      globalArgs = pathArgs;
-      return;
-    }
-    globalArgs = intersection([globalArgs, pathArgs]);
-  });
-
-  var apiKey = _.filter(globalArgs, function (arg) {
+  function isApiKeyParam(param) {
     return _.some(
       [
         /^user[-_]?key$/i,
@@ -431,34 +418,59 @@ function extractApiKeysFromParameters(swagger) {
         /^access[-_]?key$/i
       ],
       function (regExp) {
-        return regExp.test(arg.name);
+        return regExp.test(param.name);
       }
     );
+  }
+
+  var inAllMethods = true;
+  var apiKeys = [];
+  _.each(swagger.paths, function (path) {
+    _(path).pick(SwaggerMethods).map('parameters').each(function (params) {
+      var apiKey = _.filter(params, isApiKeyParam);
+
+      if (_.size(apiKey) !== 1)
+        apiKeys.push(apiKey[0]);
+      else
+        inAllMethods = false;
+    });
   });
 
-  if (_.size(apiKey) !== 1)
-    return;
-  apiKey = apiKey[0];
-
-  if (['header', 'query'].indexOf(apiKey.in) === -1)
+  if (!inAllMethods)
     return;
 
-  var name = apiKey.name;
+  var paramName = _(apiKeys).map('name').uniq().value();
+  if (_.size(paramName) !== 1)
+    return;
+  paramName = paramName[0];
+
+  var paramIn = _(apiKeys).map('in').uniq().value();
+  if (_.size(paramIn) !== 1)
+    return;
+  paramIn = paramIn[0];
+
+  if (['header', 'query'].indexOf(paramIn) === -1)
+    return;
+
+  //Ignore duplicates, and choose longest description.
+  var paramDescription = _(apiKeys).map('description').uniq().sortBy(_.size).last();
 
   swagger.securityDefinitions = {};
-  swagger.securityDefinitions[name] = {
+  swagger.securityDefinitions[paramName] = {
     type: 'apiKey',
-    name: name,
-    in: apiKey.in,
-    description: apiKey.description
+    name: paramName,
+    in: paramIn,
+    description: paramDescription
   };
 
   swagger.security = [{}];
-  swagger.security[0][name] = [];
+  swagger.security[0][paramName] = [];
 
   _.each(swagger.paths, function (path) {
     _(path).pick(SwaggerMethods).map('parameters').each(function (parameters) {
-      _.remove(parameters, _.partial(_.isEqual, apiKey));
+      _.remove(parameters, function (param) {
+        return param.name === paramName && param.in === paramIn;
+      });
     });
   });
 }
