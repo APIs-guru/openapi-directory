@@ -1,2 +1,9 @@
 externalDocs:
   url: 'http://docs.statsocial.com/home/'
+securityDefinitions:
+  api_key:
+    in: header
+    name: api_key
+    type: apiKey
+security:
+  - api_key: []
