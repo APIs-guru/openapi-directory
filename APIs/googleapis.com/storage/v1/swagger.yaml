@@ -333,8 +333,6 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - buckets
     put:
@@ -396,8 +394,6 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - buckets
   '/b/{bucket}/acl':
@@ -1139,8 +1135,6 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
     put:
@@ -1209,8 +1203,6 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/devstorage.read_write'
       tags:
         - objects
   '/b/{bucket}/o/{object}/acl':

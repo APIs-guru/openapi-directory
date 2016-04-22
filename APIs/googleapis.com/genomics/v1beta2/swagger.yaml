@@ -1619,7 +1619,7 @@ paths:
       description: 'Deletes a variant set including all variants, call sets, and calls within. This is not reversible.'
       operationId: genomics.variantsets.delete
       parameters:
-        - description: The ID of the variant set to be deleted.
+        - description: The ID of the variant set to be deleted. Required.
           in: path
           name: variantSetId
           required: true
@@ -1638,7 +1638,7 @@ paths:
       description: Gets a variant set by ID.
       operationId: genomics.variantsets.get
       parameters:
-        - description: The ID of the variant set.
+        - description: The ID of the variant set. Required.
           in: path
           name: variantSetId
           required: true
@@ -1728,7 +1728,7 @@ paths:
       description: Exports variant set data to an external destination.
       operationId: genomics.variantsets.export
       parameters:
-        - description: Required. The ID of the variant set that contains variant data which should be exported. The caller must have READ access to this variant set.
+        - description: The ID of the variant set that contains variant data which should be exported. Required. The caller must have READ access to this variant set.
           in: path
           name: variantSetId
           required: true
@@ -2365,7 +2365,6 @@ definitions:
         type: string
     type: object
   MergeVariantsRequest:
-    description: ''
     properties:
       variants:
         description: The variants to be merged with existing variants.
@@ -2954,7 +2953,6 @@ definitions:
         type: string
     type: object
   SearchReferenceSetsRequest:
-    description: ''
     properties:
       accessions:
         description: 'If present, return references for which the accession matches any of these strings. Best to give a version number, for example GCF_000001405.26. If only the main accession number is given then all records with that main accession will be returned, whichever version. Note that different versions will have different sequences.'
@@ -2989,7 +2987,6 @@ definitions:
         type: array
     type: object
   SearchReferencesRequest:
-    description: ''
     properties:
       accessions:
         description: 'If present, return references for which the accession matches this string. Best to give a version number, for example GCF_000001405.26. If only the main accession number is given then all records with that main accession will be returned, whichever version. Note that different versions will have different sequences.'

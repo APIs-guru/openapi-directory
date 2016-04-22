@@ -276,6 +276,166 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools':
+    get:
+      description: Lists the node pools for a cluster.
+      operationId: container.projects.zones.clusters.nodePools.list
+      parameters:
+        - description: 'The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber).'
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: 'The name of the Google Compute Engine [zone](/compute/docs/zones#available) in which the cluster resides.'
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: The name of the cluster.
+          in: path
+          name: clusterId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListNodePoolsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: Creates a node pool for a cluster.
+      operationId: container.projects.zones.clusters.nodePools.create
+      parameters:
+        - description: 'The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber).'
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: 'The name of the Google Compute Engine [zone](/compute/docs/zones#available) in which the cluster resides.'
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: The name of the cluster.
+          in: path
+          name: clusterId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateNodePoolRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}':
+    delete:
+      description: Deletes a node pool from a cluster.
+      operationId: container.projects.zones.clusters.nodePools.delete
+      parameters:
+        - description: 'The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber).'
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: 'The name of the Google Compute Engine [zone](/compute/docs/zones#available) in which the cluster resides.'
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: The name of the cluster.
+          in: path
+          name: clusterId
+          required: true
+          type: string
+        - description: The name of the node pool to delete.
+          in: path
+          name: nodePoolId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    get:
+      description: Retrieves the node pool requested.
+      operationId: container.projects.zones.clusters.nodePools.get
+      parameters:
+        - description: 'The Google Developers Console [project ID or project number](https://developers.google.com/console/help/new/#projectnumber).'
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: 'The name of the Google Compute Engine [zone](/compute/docs/zones#available) in which the cluster resides.'
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: The name of the cluster.
+          in: path
+          name: clusterId
+          required: true
+          type: string
+        - description: The name of the node pool.
+          in: path
+          name: nodePoolId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/NodePool'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
   '/v1/projects/{projectId}/zones/{zone}/operations':
     get:
       description: Lists all operations in a project in a specific zone or all zones.
@@ -449,6 +609,11 @@ definitions:
         items:
           type: string
         type: array
+      locations:
+        description: "The list of Google Compute Engine [locations](/compute/docs/zones#available) in which the cluster's nodes should be located."
+        items:
+          type: string
+        type: array
       loggingService:
         description: 'The logging service the cluster should use to write logs. Currently available options: * `logging.googleapis.com` - the Google Cloud Logging service. * `none` - no logs will be exported from the cluster. * if left as an empty string,`logging.googleapis.com` will be used.'
         type: string
@@ -471,6 +636,11 @@ definitions:
         description: '[Output only] The size of the address space on each node for hosting containers. This is provisioned from within the `container_ipv4_cidr` range.'
         format: int32
         type: integer
+      nodePools:
+        description: 'The node pools associated with this cluster. When creating a new cluster, only a single node pool should be specified. This field should not be set if "node_config" or "initial_node_count" are specified.'
+        items:
+          $ref: '#/definitions/NodePool'
+        type: array
       selfLink:
         description: '[Output only] Server-defined URL for the resource.'
         type: string
@@ -509,6 +679,9 @@ definitions:
       desiredMonitoringService:
         description: 'The monitoring service the cluster should use to write metrics. Currently available options: * "monitoring.googleapis.com" - the Google Cloud Monitoring service * "none" - no metrics will be exported from the cluster'
         type: string
+      desiredNodePoolId:
+        description: 'The node pool to be upgraded. This field is mandatory if the "desired_node_version" or "desired_image_family" is specified and there is more than one node pool on the cluster.'
+        type: string
       desiredNodeVersion:
         description: The Kubernetes version to change the nodes to (typically an upgrade). Use `-` to upgrade to the latest version supported by the server.
         type: string
@@ -519,6 +692,13 @@ definitions:
       cluster:
         $ref: '#/definitions/Cluster'
         description: 'A [cluster resource](/container-engine/reference/rest/v1/projects.zones.clusters)'
+    type: object
+  CreateNodePoolRequest:
+    description: CreateNodePoolRequest creates a node pool for a cluster.
+    properties:
+      nodePool:
+        $ref: '#/definitions/NodePool'
+        description: The node pool to create.
     type: object
   HorizontalPodAutoscaling:
     description: 'Configuration options for the horizontal pod autoscaling feature, which increases or decreases the number of replica pods a replication controller has based on the resource usage of the existing pods.'
@@ -546,6 +726,15 @@ definitions:
         description: 'If any zones are listed here, the list of clusters returned may be missing those zones.'
         items:
           type: string
+        type: array
+    type: object
+  ListNodePoolsResponse:
+    description: ListNodePoolsResponse is the result of ListNodePoolsRequest.
+    properties:
+      nodePools:
+        description: A list of node pools for a cluster.
+        items:
+          $ref: '#/definitions/NodePool'
         type: array
     type: object
   ListOperationsResponse:
@@ -602,6 +791,45 @@ definitions:
           type: string
         type: array
     type: object
+  NodePool:
+    description: "NodePool contains the name and configuration for a cluster's node pool. Node pools are a set of nodes (i.e. VM's), with a common configuration and specification, under the control of the cluster master. They may have a set of Kubernetes labels applied to them, which may be used to reference them during pod scheduling. They may also be resized up or down, to accommodate the workload."
+    properties:
+      config:
+        $ref: '#/definitions/NodeConfig'
+        description: The node configuration of the pool.
+      initialNodeCount:
+        description: The initial node count for the pool. You must ensure that your Compute Engine resource quota is sufficient for this number of instances. You must also have available firewall and routes quota.
+        format: int32
+        type: integer
+      instanceGroupUrls:
+        description: '[Output only] The resource URLs of [instance groups](/compute/docs/instance-groups/) associated with this node pool.'
+        items:
+          type: string
+        type: array
+      name:
+        description: The name of the node pool.
+        type: string
+      selfLink:
+        description: Server-defined URL for the resource.
+        type: string
+      status:
+        description: The status of the nodes in this pool instance.
+        enum:
+          - STATUS_UNSPECIFIED
+          - PROVISIONING
+          - RUNNING
+          - RUNNING_WITH_ERROR
+          - RECONCILING
+          - STOPPING
+          - ERROR
+        type: string
+      statusMessage:
+        description: '[Output only] Additional information about the current status of this node pool instance, if available.'
+        type: string
+      version:
+        description: The version of the Kubernetes of this node.
+        type: string
+    type: object
   Operation:
     description: This operation resource represents operations that may have happened or are happening on the cluster. All fields are output only.
     properties:
@@ -651,6 +879,14 @@ definitions:
       defaultClusterVersion:
         description: Version of Kubernetes the service deploys by default.
         type: string
+      defaultImageFamily:
+        description: Default image family.
+        type: string
+      validImageFamilies:
+        description: List of valid image families.
+        items:
+          type: string
+        type: array
       validNodeVersions:
         description: List of valid node upgrade target versions.
         items:

@@ -598,6 +598,9 @@ definitions:
       createTime:
         description: The time at which the job was submitted to the Genomics service.
         type: string
+      endTime:
+        description: The time at which the job stopped running.
+        type: string
       events:
         description: "Optional event messages that were generated during the job's execution. This also contains any warnings that were generated during import or export."
         items:

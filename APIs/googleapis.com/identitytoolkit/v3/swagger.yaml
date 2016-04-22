@@ -892,9 +892,6 @@ definitions:
       password:
         description: The new password of the user.
         type: string
-      returnSecureToken:
-        description: Whether return sts id token and refresh token instead of gitkit token.
-        type: boolean
     type: object
   IdentitytoolkitRelyingpartyUploadAccountRequest:
     description: Request to upload user account in batch.
@@ -1085,6 +1082,9 @@ definitions:
         default: 'identitytoolkit#SetAccountInfoResponse'
         description: 'The fixed string "identitytoolkit#SetAccountInfoResponse".'
         type: string
+      localId:
+        description: The local ID of the user.
+        type: string
       newEmail:
         description: The new email the user attempts to change to.
         type: string
@@ -1101,6 +1101,9 @@ definitions:
           properties:
             displayName:
               description: "The user's display name at the IDP."
+              type: string
+            federatedId:
+              description: "User's identifier at IDP."
               type: string
             photoUrl:
               description: "The user's photo url at the IDP."
