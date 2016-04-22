@@ -4042,6 +4042,11 @@ definitions:
             description: Billing Zip
             example: '47212'
             type: string
+          created_at:
+            description: Created At
+            example: '2015-01-01T05:18:23-0700'
+            format: date-time
+            type: string
           description:
             description: Description
             example: Some long description
@@ -4164,6 +4169,11 @@ definitions:
             description: Type
             example: Company
             type: string
+          updated_at:
+            description: Updated At
+            example: '2015-02-10T17:12:23-0700'
+            format: date-time
+            type: string
           website:
             description: Website
             example: 'http://google.com/'
@@ -4224,6 +4234,11 @@ definitions:
         description: Billing Zip
         example: '47212'
         type: string
+      created_at:
+        description: Created At
+        example: '2015-01-01T05:18:23-0700'
+        format: date-time
+        type: string
       description:
         description: Description
         example: Some long description
@@ -4353,6 +4368,11 @@ definitions:
       type:
         description: Type
         example: Company
+        type: string
+      updated_at:
+        description: Updated At
+        example: '2015-02-10T17:12:23-0700'
+        format: date-time
         type: string
       website:
         description: Website
@@ -4405,6 +4425,11 @@ definitions:
         description: Billing Zip
         example: '47212'
         type: string
+      created_at:
+        description: Created At
+        example: '2015-01-01T05:18:23-0700'
+        format: date-time
+        type: string
       description:
         description: Description
         example: Some long description
@@ -4534,6 +4559,11 @@ definitions:
       type:
         description: Type
         example: Company
+        type: string
+      updated_at:
+        description: Updated At
+        example: '2015-02-10T17:12:23-0700'
+        format: date-time
         type: string
       website:
         description: Website
@@ -5100,6 +5130,11 @@ definitions:
             description: Alternative Address Zip Code
             example: '47212'
             type: string
+          created_at:
+            description: Created At
+            example: '2015-01-01T05:18:23-0700'
+            format: date-time
+            type: string
           date_created:
             description: Date Created
             example: '2015-01-01T05:18:23-0700'
@@ -5197,6 +5232,11 @@ definitions:
             description: Type
             example: Bill Wall
             type: string
+          updated_at:
+            description: Updated At
+            example: '2015-02-10T17:12:23-0700'
+            format: date-time
+            type: string
           user:
             description: User
             example: Bill Wall
@@ -5272,6 +5312,11 @@ definitions:
         description: Alternative Address Zip Code
         example: '47212'
         type: string
+      created_at:
+        description: Created At
+        example: '2015-01-01T05:18:23-0700'
+        format: date-time
+        type: string
       date_created:
         description: Date Created
         example: '2015-01-01T05:18:23-0700'
@@ -5376,6 +5421,11 @@ definitions:
       type:
         description: Type
         example: Bill Wall
+        type: string
+      updated_at:
+        description: Updated At
+        example: '2015-02-10T17:12:23-0700'
+        format: date-time
         type: string
       user:
         description: User
@@ -5439,6 +5489,11 @@ definitions:
         description: Alternative Address Zip Code
         example: '47212'
         type: string
+      created_at:
+        description: Created At
+        example: '2015-01-01T05:18:23-0700'
+        format: date-time
+        type: string
       date_created:
         description: Date Created
         example: '2015-01-01T05:18:23-0700'
@@ -5543,6 +5598,11 @@ definitions:
       type:
         description: Type
         example: Bill Wall
+        type: string
+      updated_at:
+        description: Updated At
+        example: '2015-02-10T17:12:23-0700'
+        format: date-time
         type: string
       user:
         description: User
@@ -6573,6 +6633,7 @@ definitions:
               - Partner
               - Word of mouth
               - Self Generated
+              - Purchased List
               - Other
             type: string
           lead_source_description:
@@ -6582,11 +6643,6 @@ definitions:
           opened:
             description: Opened
             type: string
-          opportunity_amount:
-            description: Opportunity Amount
-            example: 442.21
-            format: float
-            type: number
           pager:
             description: Pager Number
             example: 123-12
@@ -6875,6 +6931,7 @@ definitions:
           - Partner
           - Word of mouth
           - Self Generated
+          - Purchased List
           - Other
         type: string
       lead_source_description:
@@ -6884,11 +6941,6 @@ definitions:
       opened:
         description: Opened
         type: string
-      opportunity_amount:
-        description: Opportunity Amount
-        example: 442.21
-        format: float
-        type: number
       opportunity_id:
         description: Opportunity Identifier
         example: '21312411'
@@ -7156,6 +7208,7 @@ definitions:
           - Partner
           - Word of mouth
           - Self Generated
+          - Purchased List
           - Other
         type: string
       lead_source_description:
@@ -7165,11 +7218,6 @@ definitions:
       opened:
         description: Opened
         type: string
-      opportunity_amount:
-        description: Opportunity Amount
-        example: 442.21
-        format: float
-        type: number
       opportunity_id:
         description: Opportunity Identifier
         example: '21312411'

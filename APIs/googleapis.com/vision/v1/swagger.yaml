@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: 'The Google Cloud Vision API allows developers to easily integrate Google vision features, including image labeling, face, logo, and landmark detection, optical character recognition (OCR), and detection of explicit content, into applications.'
+  description: 'Integrates Google Vision features, including image labeling, face, logo, and landmark detection, optical character recognition (OCR), and detection of explicit content, into applications.'
   title: Google Cloud Vision
   version: v1
   x-apiClientRegistration:
@@ -439,8 +439,9 @@ definitions:
         type: array
       mid:
         description: |-
-          Knowledge Graph entity ID. Maps to a freebase entity ID.
-          (for example, "Google" maps to: mid /m/045c7b).
+          Opaque entity ID. Some IDs might be available in Knowledge Graph(KG).
+          For more details on KG please see:
+          https://developers.google.com/knowledge-graph/
         type: string
       properties:
         description: |-

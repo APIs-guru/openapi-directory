@@ -666,7 +666,7 @@ paths:
             items:
               $ref: '#/definitions/BigOven.Model.API.Image'
             type: array
-      summary: Get all the images for a recipe
+      summary: 'Get all the images for a recipe. DEPRECATED. Please use /recipe/{recipeId}/photos.'
       tags:
         - Images
   '/recipe/{recipeId}/note':
@@ -841,6 +841,41 @@ paths:
       summary: recipe/100/notes
       tags:
         - Note
+  '/recipe/{recipeId}/photos':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: Images_GetRecipePhotos
+      parameters:
+        - description: Recipe ID (required)
+          format: int32
+          in: path
+          name: recipeId
+          required: true
+          type: integer
+        - format: int32
+          in: query
+          name: pg
+          required: false
+          type: integer
+        - format: int32
+          in: query
+          name: rpp
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/API2.Controllers.ImagesController.RecipePhotosResponse'
+      summary: Get all the photos for a recipe
+      tags:
+        - Images
   '/recipe/{recipeId}/related':
     get:
       consumes: []
@@ -1413,6 +1448,16 @@ definitions:
         type: string
       unit:
         type: string
+    type: object
+  API2.Controllers.ImagesController.RecipePhotosResponse:
+    properties:
+      ResultCount:
+        format: int32
+        type: integer
+      Results:
+        items:
+          $ref: '#/definitions/BigOven.Model.API2.Photo'
+        type: array
     type: object
   API2.Controllers.NoteController.NoteRequest:
     properties:
@@ -2001,6 +2046,25 @@ definitions:
         type: array
       VersionGuid:
         type: string
+    type: object
+  BigOven.Model.API2.Photo:
+    properties:
+      Caption:
+        type: string
+      CreationDate:
+        type: string
+      ImageID:
+        format: int64
+        type: integer
+      IsPrimary:
+        type: boolean
+      MaxImageSquare:
+        format: int32
+        type: integer
+      PhotoUrl:
+        type: string
+      Poster:
+        $ref: '#/definitions/BigOven.Model.API2.UserInfoTinyx'
     type: object
   BigOven.Model.API2.Recipe:
     properties:

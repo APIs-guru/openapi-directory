@@ -211,7 +211,7 @@ paths:
       x-ms-pageable:
         nextLinkName: nextLink
     post:
-      description: 'Create a Reach campaign (announcement, poll, data push or native push).'
+      description: 'Create a push campaign (announcement, poll, data push or native push).'
       operationId: Campaigns_Create
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -380,7 +380,7 @@ paths:
       - $ref: '#/parameters/AppNameParameter'
       - $ref: '#/parameters/ApiVersionParameter'
     put:
-      description: 'Update an existing Reach campaign (announcement, poll, data push or native push).'
+      description: 'Update an existing push campaign (announcement, poll, data push or native push).'
       operationId: Campaigns_Update
       parameters:
         - description: Campaign kind.
@@ -468,7 +468,7 @@ paths:
         - Action
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/campaigns/{kind}/{id}/finish':
     post:
-      description: Finish a Reach campaign previously activated by a call to Activate campaign.
+      description: Finish a push campaign previously activated by a call to Activate campaign.
       operationId: Campaigns_Finish
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -603,7 +603,7 @@ paths:
       - $ref: '#/parameters/ApiVersionParameter'
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/campaigns/{kind}/{id}/suspend':
     post:
-      description: Suspend a Reach campaign previously activated by a call to Activate campaign.
+      description: Suspend a push campaign previously activated by a call to Activate campaign.
       operationId: Campaigns_Suspend
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -831,6 +831,154 @@ paths:
         - List
       x-ms-pageable:
         nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportJobs/campaignStatsByIds':
+    post:
+      description: Creates a job to export a push campaign data to a storageUrl.
+      operationId: ExportJobs_CreateCampaignStatsByIds
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AppCollectionParameter'
+        - $ref: '#/parameters/AppNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/CampaignStatsByIdsExportJob'
+      responses:
+        '202':
+          description: 'Success, export job is returned.'
+          headers:
+            Location:
+              description: URL path to get the created export job.
+              type: string
+          schema:
+            $ref: '#/definitions/ExportJobResult'
+        default:
+          description: |
+            * `400`: Invalid parameters or application is disabled. Check response body for details.
+            * `401`: Authentication error.
+          schema:
+            $ref: '#/definitions/ApiError'
+      tags:
+        - Export
+        - CRUD
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportJobs/campaignStatsByPeriod':
+    post:
+      description: Creates a job to export a push campaign data for a period to a storageUrl.
+      operationId: ExportJobs_CreateCampaignStatsByPeriod
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AppCollectionParameter'
+        - $ref: '#/parameters/AppNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/CampaignStatsByPeriodExportJob'
+      responses:
+        '202':
+          description: 'Success, export job is returned.'
+          headers:
+            Location:
+              description: URL path to get the created export job.
+              type: string
+          schema:
+            $ref: '#/definitions/ExportJobResult'
+        default:
+          description: |
+            * `400`: Invalid parameters or application is disabled. Check response body for details.
+            * `401`: Authentication error.
+          schema:
+            $ref: '#/definitions/ApiError'
+      tags:
+        - Export
+        - CRUD
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportJobs/historical':
+    post:
+      description: Creates a job to export the specified data to a storageUrl.
+      operationId: ExportJobs_CreateHistorical
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AppCollectionParameter'
+        - $ref: '#/parameters/AppNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/HistoricalExportJob'
+      responses:
+        '201':
+          description: 'Success, export job is returned.'
+          headers:
+            Location:
+              description: URL path to get the created export job.
+              type: string
+          schema:
+            $ref: '#/definitions/ExportJobResult'
+        '202':
+          description: 'Success, export job is returned.'
+          headers:
+            Location:
+              description: URL path to get the created export job.
+              type: string
+          schema:
+            $ref: '#/definitions/ExportJobResult'
+        default:
+          description: |
+            * `400`: Invalid parameters or application is disabled. Check response body for details.
+            * `401`: Authentication error.
+          schema:
+            $ref: '#/definitions/ApiError'
+      tags:
+        - Export
+        - CRUD
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportJobs/snapshot':
+    post:
+      description: Creates a job to export the specified data to a storageUrl.
+      operationId: ExportJobs_CreateSnapshot
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AppCollectionParameter'
+        - $ref: '#/parameters/AppNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/SnapshotExportJob'
+      responses:
+        '201':
+          description: 'Success, export job is returned.'
+          headers:
+            Location:
+              description: URL path to get the created export job.
+              type: string
+          schema:
+            $ref: '#/definitions/ExportJobResult'
+        '202':
+          description: 'Success, export job is returned.'
+          headers:
+            Location:
+              description: URL path to get the created export job.
+              type: string
+          schema:
+            $ref: '#/definitions/ExportJobResult'
+        default:
+          description: |
+            * `400`: Invalid parameters or application is disabled. Check response body for details.
+            * `401`: Authentication error.
+          schema:
+            $ref: '#/definitions/ApiError'
+      tags:
+        - Export
+        - CRUD
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportJobs/{id}':
     get:
       description: The Get export job operation retrieves information about a previously created export job.
@@ -862,35 +1010,6 @@ paths:
       - $ref: '#/parameters/AppCollectionParameter'
       - $ref: '#/parameters/AppNameParameter'
       - $ref: '#/parameters/ApiVersionParameter'
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/historicalExportJobs':
-    post:
-      description: Creates a job to export the specified data to a storageUrl.
-      operationId: ExportJobs_CreateHistorical
-      parameters:
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/AppCollectionParameter'
-        - $ref: '#/parameters/AppNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - in: body
-          name: parameters
-          required: true
-          schema:
-            $ref: '#/definitions/HistoricalExportJob'
-      responses:
-        '202':
-          description: 'Success, export job is returned.'
-          schema:
-            $ref: '#/definitions/ExportJobResult'
-        default:
-          description: |
-            * `400`: Invalid parameters or application is disabled. Check response body for details.
-            * `401`: Authentication error.
-          schema:
-            $ref: '#/definitions/ApiError'
-      tags:
-        - Export
-        - CRUD
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/importJobs':
     get:
       description: Get the list of import jobs.
@@ -961,6 +1080,14 @@ paths:
           schema:
             $ref: '#/definitions/ImportJob'
       responses:
+        '201':
+          description: 'Success, import job is returned.'
+          headers:
+            Location:
+              description: URL path to get the created import job.
+              type: string
+          schema:
+            $ref: '#/definitions/ImportJobResult'
         '202':
           description: 'Success, import job is returned.'
           headers:
@@ -1009,35 +1136,6 @@ paths:
       - $ref: '#/parameters/AppCollectionParameter'
       - $ref: '#/parameters/AppNameParameter'
       - $ref: '#/parameters/ApiVersionParameter'
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/snapshotExportJobs':
-    post:
-      description: Creates a job to export the specified data to a storageUrl.
-      operationId: ExportJobs_CreateSnapshot
-      parameters:
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/AppCollectionParameter'
-        - $ref: '#/parameters/AppNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - in: body
-          name: parameters
-          required: true
-          schema:
-            $ref: '#/definitions/SnapshotExportJob'
-      responses:
-        '202':
-          description: 'Success, export job is returned.'
-          schema:
-            $ref: '#/definitions/ExportJobResult'
-        default:
-          description: |
-            * `400`: Invalid parameters or application is disabled. Check response body for details.
-            * `401`: Authentication error.
-          schema:
-            $ref: '#/definitions/ApiError'
-      tags:
-        - Export
-        - CRUD
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/tag':
     post:
       description: |
@@ -1334,13 +1432,13 @@ definitions:
           name: DeliveryTimes
       endTime:
         description: |
-          The date at which the campaign should be finished. The date shall conform to the following format: `yyyy-MM-dd HH:mm'Z'`. Example: `2011-11-21 15:23Z`
+          The date at which the campaign should be finished. The date shall conform to the following format: `yyyy-MM-ddTHH:mm:ssZ`. Example: `2011-11-21 15:23Z`
         type: string
       localization:
         additionalProperties:
           $ref: '#/definitions/CampaignLocalization'
         description: |
-          Reach campaigns can be localized using an optional JSON object. The JSON key is a two-character language code as specified by the ISO 639-1 standard. The corresponding value is an object containing the localizable properties.
+          Push campaigns can be localized using an optional JSON object. The JSON key is a two-character language code as specified by the ISO 639-1 standard. The corresponding value is an object containing the localizable properties.
         type: object
       name:
         description: Unique name of the campaign.
@@ -1398,7 +1496,7 @@ definitions:
         type: array
       startTime:
         description: |
-          The date at which the campaign should be started. The date shall conform to the following format: `yyyy-MM-dd HH:mm'Z'`. * If you set pushMode property to manual, this attribute will be ignored. * If you set pushMode property to one-shot, then the timezone attribute must be specified. Example: `2011-11-21 15:23Z`
+          The date at which the campaign should be started. The date shall conform to the following format: `yyyy-MM-ddTHH:mm:ssZ`. * If you set pushMode property to manual, this attribute will be ignored. * If you set pushMode property to one-shot, then the timezone attribute must be specified. Example: `2011-11-21 15:23Z`
         type: string
       timezone:
         description: |
@@ -1422,17 +1520,17 @@ definitions:
     properties:
       activatedDate:
         description: |
-          The date at which the campaign was activated (Not present if not yet activated). The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.
+          The date at which the campaign was activated (Not present if not yet activated). The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
         format: date-time
         type: string
       endTime:
         description: |
-          The date at which the campaign should be finished if specified. The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard. Applicable only to announcements and polls.
+          The date at which the campaign should be finished if specified. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard. Applicable only to announcements and polls.
         format: date-time
         type: string
       finishedDate:
         description: |
-          The date at which the campaign was finished (Not present if not yet finished). The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.
+          The date at which the campaign was finished (Not present if not yet finished). The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
         format: date-time
         type: string
       name:
@@ -1440,7 +1538,7 @@ definitions:
         type: string
       startTime:
         description: |
-          The date at which the campaign should be started if specified. The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard. Applicable only to announcements and polls.
+          The date at which the campaign should be started if specified. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard. Applicable only to announcements and polls.
         format: date-time
         type: string
       timezone:
@@ -1516,12 +1614,12 @@ definitions:
     properties:
       activatedDate:
         description: |
-          The date at which the campaign was activated (Not present if not yet activated). The date conforms to the following format: yyyy-MM-dd HH:mm'Z' as specified by the ISO 8601 standard.
+          The date at which the campaign was activated (Not present if not yet activated). The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.
         format: date-time
         type: string
       finishedDate:
         description: |
-          The date at which the campaign was finished (Not present if not yet finished). The date conforms to the following format: yyyy-MM-dd HH:mm'Z' as specified by the ISO 8601 standard.
+          The date at which the campaign was finished (Not present if not yet finished). The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.
         format: date-time
         type: string
       id:
@@ -1617,6 +1715,40 @@ definitions:
       system-notification-exited:
         description: Number of times the system notification was exited (Not present in case of a data-push or a native-push).
         type: integer
+  CampaignStatsByIdsExportJob:
+    properties:
+      campaignIds:
+        description: |
+          A list of campaign identifiers.
+        items:
+          type: string
+        type: array
+      campaignType:
+        description: |
+          The push campaign type.
+        type: string
+      storageUrl:
+        description: A shared Access Signature (SAS) Storage URI where the output will be written.
+        type: string
+  CampaignStatsByPeriodExportJob:
+    properties:
+      campaignType:
+        description: |
+          The push campaign type.
+        type: string
+      campaignWindowEnd:
+        description: |
+          For push exports, the end of the period for inclusion of active campaigns. The date conforms to the ISO8601 format.
+        format: date-time
+        type: string
+      campaignWindowStart:
+        description: |
+          For push exports, the start of the period for inclusion of active campaigns. The date conforms to the ISO8601 format.
+        format: date-time
+        type: string
+      storageUrl:
+        description: A shared Access Signature (SAS) Storage URI where the output will be written.
+        type: string
   CampaignTestNewParameters:
     allOf:
       - $ref: '#/definitions/CampaignTestSavedParameters'
@@ -1957,18 +2089,13 @@ definitions:
       dateCompleted:
         description: |
           The date at which the export job completed (Not present if not yet completed).
-          The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.
+          The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
         format: date-time
         type: string
       dateCreated:
         description: |
           The date at which the export job was created.
-          The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.
-        format: date-time
-        type: string
-      endDate:
-        description: |
-          The date at which the export should export data to. The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.
+          The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
         format: date-time
         type: string
       errorDetails:
@@ -1978,24 +2105,20 @@ definitions:
         description: The type of data to export.
         enum:
           - Activity
-          - AppInfo
+          - Tag
           - Crash
           - Error
           - Event
           - Job
           - Session
           - Token
+          - Push
         type: string
         x-ms-enum:
           modelAsString: true
           name: ExportDataTypes
       id:
         description: Unique identifier of the export job.
-        type: string
-      startDate:
-        description: |
-          The date at which the export should be started from. The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.
-        format: date-time
         type: string
       state:
         description: The current state of the export job.
@@ -2050,7 +2173,7 @@ definitions:
     properties:
       endDate:
         description: |
-          The date at which the export should export data to. The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.
+          The date at which the export should export data to. The date conforms to the ISO 8601 standard.
         format: date-time
         type: string
       historicalDataType:
@@ -2068,11 +2191,11 @@ definitions:
           name: HistoricalDataTypes
       startDate:
         description: |
-          The date at which the export should be started from. The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.
+          The date at which the export should be started from. The date conforms to the ISO 8601 standard.
         format: date-time
         type: string
       storageUrl:
-        description: A shared Access Signature (SAS) Storage URI where the job results will be placed.
+        description: A shared Access Signature (SAS) Storage URI where the output will be written.
         type: string
   ImportJob:
     properties:
@@ -2097,13 +2220,13 @@ definitions:
       dateCompleted:
         description: |
           The date at which the import job completed (Not present if not yet completed).
-          The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.
+          The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
         format: date-time
         type: string
       dateCreated:
         description: |
           The date at which the import job was created.
-          The date conforms to the following format: `yyyy-MM-dd HH:mm'Z'` as specified by the ISO 8601 standard.
+          The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
         format: date-time
         type: string
       errorDetails:
@@ -2364,14 +2487,14 @@ definitions:
       snapshotDataType:
         description: The type of data to export.
         enum:
-          - AppInfo
+          - Tag
           - Token
         type: string
         x-ms-enum:
           modelAsString: true
           name: SnapshotDataTypes
       storageUrl:
-        description: A shared Access Signature (SAS) Storage URI where the job results will be placed.
+        description: A shared Access Signature (SAS) Storage URI where the output will be written.
         type: string
   StringTagCriterion:
     allOf:

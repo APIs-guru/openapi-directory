@@ -3,7 +3,7 @@ schemes:
   - https
 host: management.azure.com
 info:
-  description: .Net client wrapper for the REST API for Azure NotificationHub Service
+  description: Azure NotificationHub client
   title: NotificationHubsManagementClient
   version: '2014-09-01'
   x-logo:
@@ -180,7 +180,7 @@ paths:
           name: namespaceName
           required: true
           type: string
-        - description: Parameters supplied to the create a Namespace Resource.
+        - description: Parameters supplied to create a Namespace Resource.
           in: body
           name: parameters
           required: true
@@ -201,7 +201,7 @@ paths:
         - Namespaces
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/AuthorizationRules':
     post:
-      description: The get authorization rules operation gets the authorization rules for a namespace.
+      description: Gets the authorization rules for a namespace.
       operationId: Namespaces_ListAuthorizationRules
       parameters:
         - description: The name of the resource group.
@@ -209,7 +209,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The namespace to get the authorization rule for.
+        - description: The namespace name
           in: path
           name: namespaceName
           required: true
@@ -227,7 +227,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}':
     delete:
-      description: 'The delete a namespace authorization rule operation '
+      description: Deletes a namespace authorization rule
       operationId: Namespaces_DeleteAuthorizationRule
       parameters:
         - description: The name of the resource group.
@@ -240,7 +240,7 @@ paths:
           name: namespaceName
           required: true
           type: string
-        - description: The namespace authorizationRuleName name.
+        - description: Authorization Rule Name.
           in: path
           name: authorizationRuleName
           required: true
@@ -255,7 +255,7 @@ paths:
       tags:
         - Namespaces
     post:
-      description: The get authorization rule operation gets an authorization rule for a namespace by name.
+      description: Gets an authorization rule for a namespace by name.
       operationId: Namespaces_GetAuthorizationRule
       parameters:
         - description: The name of the resource group.
@@ -263,12 +263,12 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The namespace to get the authorization rule for.
+        - description: The namespace name
           in: path
           name: namespaceName
           required: true
           type: string
-        - description: The entity name to get the authorization rule for.
+        - description: Authorization rule name.
           in: path
           name: authorizationRuleName
           required: true
@@ -283,7 +283,7 @@ paths:
       tags:
         - Namespaces
     put:
-      description: The create namespace authorization rule operation creates an authorization rule for a namespace
+      description: Creates an authorization rule for a namespace
       operationId: Namespaces_CreateOrUpdateAuthorizationRule
       parameters:
         - description: The name of the resource group.
@@ -296,7 +296,7 @@ paths:
           name: namespaceName
           required: true
           type: string
-        - description: The namespace authorizationRuleName name.
+        - description: Aauthorization Rule Name.
           in: path
           name: authorizationRuleName
           required: true
@@ -481,11 +481,7 @@ paths:
           name: notificationHubName
           required: true
           type: string
-        - description: 'A notificationHub can be updated if this header is set to *. '
-          in: header
-          name: If-Match
-          type: string
-        - description: Parameters supplied to the create/update a NotificatioHub Resource.
+        - description: Parameters supplied to the create/update a NotificationHub Resource.
           in: body
           name: parameters
           required: true
@@ -506,7 +502,7 @@ paths:
         - NotificationHubs
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/AuthorizationRules':
     post:
-      description: The get authorization rules operation gets the authorization rules for a NotificationHub.
+      description: Gets the authorization rules for a NotificationHub.
       operationId: NotificationHubs_ListAuthorizationRules
       parameters:
         - description: The name of the resource group.
@@ -514,7 +510,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The NotificationHub to get the authorization rule for.
+        - description: The namespace name
           in: path
           name: namespaceName
           required: true
@@ -537,7 +533,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/AuthorizationRules/{authorizationRuleName}':
     delete:
-      description: 'The delete a notificationHub authorization rule operation '
+      description: Deletes a notificationHub authorization rule
       operationId: NotificationHubs_DeleteAuthorizationRule
       parameters:
         - description: The name of the resource group.
@@ -555,7 +551,7 @@ paths:
           name: notificationHubName
           required: true
           type: string
-        - description: The namespace authorizationRuleName name.
+        - description: Authorization Rule Name.
           in: path
           name: authorizationRuleName
           required: true
@@ -570,7 +566,7 @@ paths:
       tags:
         - NotificationHubs
     post:
-      description: The get authorization rule operation gets an authorization rule for a NotificationHub by name.
+      description: Gets an authorization rule for a NotificationHub by name.
       operationId: NotificationHubs_GetAuthorizationRule
       parameters:
         - description: The name of the resource group.
@@ -578,7 +574,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The namespace to get the authorization rule for.
+        - description: The namespace name
           in: path
           name: namespaceName
           required: true
@@ -588,7 +584,7 @@ paths:
           name: notificationHubName
           required: true
           type: string
-        - description: The entity name to get the authorization rule for.
+        - description: authorization rule name.
           in: path
           name: authorizationRuleName
           required: true
@@ -603,7 +599,7 @@ paths:
       tags:
         - NotificationHubs
     put:
-      description: The create NotificationHub authorization rule operation creates an authorization rule for a NotificationHub
+      description: Creates/Updates an authorization rule for a NotificationHub
       operationId: NotificationHubs_CreateOrUpdateAuthorizationRule
       parameters:
         - description: The name of the resource group.
@@ -621,7 +617,7 @@ paths:
           name: notificationHubName
           required: true
           type: string
-        - description: The namespace authorizationRuleName name.
+        - description: Authorization Rule Name.
           in: path
           name: authorizationRuleName
           required: true
@@ -1020,27 +1016,27 @@ definitions:
         $ref: '#/definitions/WnsCredential'
         description: The WnsCredential of the created NotificationHub
   NotificationHubResource:
-    description: Description of a NotificatioHub Resource.
+    description: Description of a NotificationHub Resource.
     properties:
       id:
-        description: Gets or sets the id of the created NotificatioHub.
+        description: Gets or sets the id of the created NotificationHub.
         type: string
       location:
-        description: Gets or sets datacenter location of the NotificatioHub.
+        description: Gets or sets datacenter location of the NotificationHub.
         type: string
       name:
-        description: Gets or sets name of the NotificatioHub.
+        description: Gets or sets name of the NotificationHub.
         type: string
       properties:
         $ref: '#/definitions/NotificationHubProperties'
-        description: Gets or sets properties of the NotificatioHub.
+        description: Gets or sets properties of the NotificationHub.
       tags:
         additionalProperties:
           type: string
-        description: Gets or sets tags of the NotificatioHub.
+        description: Gets or sets tags of the NotificationHub.
         type: object
       type:
-        description: Gets or sets resource type of the NotificatioHub.
+        description: Gets or sets resource type of the NotificationHub.
         type: string
   Resource:
     properties:
