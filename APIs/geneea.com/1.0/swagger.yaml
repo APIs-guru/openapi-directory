@@ -89,6 +89,13 @@ info:
     url: 'https://api.geneea.com/api-docs?group=s1'
     version: '1.2'
   x-providerName: geneea.com
+securityDefinitions:
+  user_key:
+    in: query
+    name: user_key
+    type: apiKey
+security:
+  - user_key: []
 tags:
   - description: Basic information about the user account.
     name: account

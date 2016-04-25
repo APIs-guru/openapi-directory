@@ -1,3 +1,10 @@
 info:
   x-logo:
     url: 'http://www.geneea.com/wp-content/uploads/2015/05/vrstva-8.png'
+securityDefinitions:
+  user_key:
+    in: query
+    name: user_key
+    type: apiKey
+security:
+  - user_key: []
