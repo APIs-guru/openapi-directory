@@ -429,7 +429,7 @@ function extractApiKeysFromParameters(swagger) {
     _(path).pick(SwaggerMethods).map('parameters').each(function (params) {
       var apiKey = _.filter(params, isApiKeyParam);
 
-      if (_.size(apiKey) !== 1)
+      if (_.size(apiKey) === 1)
         apiKeys.push(apiKey[0]);
       else
         inAllMethods = false;
