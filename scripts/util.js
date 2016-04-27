@@ -8,6 +8,7 @@ var _ = require('lodash');
 var glob = require('glob')
 var YAML = require('js-yaml');
 var mkdirp = require('mkdirp').sync;
+var sanitize = require('sanitize-filename');
 var sortobject = require('deep-sort-object');
 
 exports.readYaml = function (filename) {
@@ -127,8 +128,10 @@ exports.getPathComponents = function (swagger) {
     path.push(serviceName);
   path.push(swagger.info.version);
 
-  _.each(path, function (str) {
-    assert(str.indexOf('/') === -1);
+  path = _.map(path, function (str) {
+    str = sanitize(str);
+    assert(!_.isEmpty(str));
+    return str;
   });
 
   return path;
