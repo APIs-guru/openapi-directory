@@ -5,9 +5,48 @@ schemes:
 host: api-dev.thetvdb.com
 basePath: /
 info:
-  description: "This is an early draft and targets v1 functionality with a few minor additions. The API is accessible via https://api.thetvdb.com and provides the following REST endpoints in JSON format.\n\n\nHow to use this API documentation\n----------------\n\n\nYou may browse the API routes without authentication, but if you wish to send requests to the API and see response data, then you must authenticate.\n1. Obtain a JWT token by `POST`ing  to the `/login` route in the `Authentication` section with your API key and credentials.\n1. Paste the JWT token from the response into the \"JWT Token\" field at the top of the page and click the 'Add Token' button.\n\n\nYou will now be able to use the remaining routes to send requests to the API and get a response.\n\n\nLanguage Selection\n----------------\n\n\nLanguage selection is done via the `Accept-Language` header. At the moment, you may only pass one language abbreviation in the header at a time. Valid language abbreviations can be found at the `/languages` route..\n\n\nAuthentication\n----------------\n\n\nAuthentication to use the API is similar to the How-to section above. Users must `POST` to the `/login` route with their API key and credentials in the following format in order to obtain a JWT token. \n\n`{\"apikey\":\"APIKEY\",\"username\":\"USERNAME\",\"userkey\":\"USERKEY\"}`\n\nNote that the username and key are ONLY required for the `/user` routes. The user's key is labled `Account Identifier` in the account section of the main site.\nThe token is then used in all subsequent requests by providing it in the `Authorization` header. The header will look like: `Authorization: Bearer <yourJWTtoken>`. Currently, the token expires after 1 hour. You can `GET` the `/refresh_token` route to extend that expiration date.\n\n\nVersioning\n----------------\n\n\nYou may request a different version of the API by including an `Accept` header in your request with the following format: `Accept:application/vnd.thetvdb.v$VERSION`. This documentation automatically uses the version seen at the top and bottom of the page."
+  description: |-
+    API v2 targets v1 functionality with a few minor additions. The API is accessible via https://api.thetvdb.com and provides the following REST endpoints in JSON format.
+
+
+    How to use this API documentation
+    ----------------
+
+
+    You may browse the API routes without authentication, but if you wish to send requests to the API and see response data, then you must authenticate.
+    1. Obtain a JWT token by `POST`ing  to the `/login` route in the `Authentication` section with your API key and credentials.
+    1. Paste the JWT token from the response into the "JWT Token" field at the top of the page and click the 'Add Token' button.
+
+
+    You will now be able to use the remaining routes to send requests to the API and get a response.
+
+
+    Language Selection
+    ----------------
+
+
+    Language selection is done via the `Accept-Language` header. At the moment, you may only pass one language abbreviation in the header at a time. Valid language abbreviations can be found at the `/languages` route..
+
+
+    Authentication
+    ----------------
+
+
+    Authentication to use the API is similar to the How-to section above. Users must `POST` to the `/login` route with their API key and credentials in the following format in order to obtain a JWT token.
+
+    `{"apikey":"APIKEY","username":"USERNAME","userkey":"USERKEY"}`
+
+    Note that the username and key are ONLY required for the `/user` routes. The user's key is labled `Account Identifier` in the account section of the main site.
+    The token is then used in all subsequent requests by providing it in the `Authorization` header. The header will look like: `Authorization: Bearer <yourJWTtoken>`. Currently, the token expires after 24 hours. You can `GET` the `/refresh_token` route to extend that expiration date.
+
+
+    Versioning
+    ----------------
+
+
+    You may request a different version of the API by including an `Accept` header in your request with the following format: `Accept:application/vnd.thetvdb.v$VERSION`. This documentation automatically uses the version seen at the top and bottom of the page.
   title: TheTVDB API v2
-  version: 2.0.0
+  version: 2.1.0
   x-origin:
     format: swagger
     url: 'https://api-dev.thetvdb.com/swagger.json'
@@ -74,7 +113,7 @@ parameters:
     required: true
     type: string
   imdbId:
-    description: IMDB id of the episode
+    description: IMDB id of the series
     in: query
     name: imdbId
     type: string
@@ -179,7 +218,7 @@ paths:
         '200':
           description: An array of query keys as strings
           schema:
-            $ref: '#/definitions/EpisodeData'
+            $ref: '#/definitions/EpisodeRecordData'
         '401':
           description: Returned if your JWT token is missing or expired
           schema:
@@ -258,7 +297,7 @@ paths:
         '200':
           description: Returns a new token to use in your subsequent requests
           schema:
-            $ref: '#/definitions/Auth'
+            $ref: '#/definitions/Token'
         '401':
           description: Returned if your JWT token is missing or expired
           schema:
@@ -279,7 +318,7 @@ paths:
         '200':
           description: An array of results that match the provided query.
           schema:
-            $ref: '#/definitions/EpisodeData'
+            $ref: '#/definitions/SeriesSearchData'
         '401':
           description: Returned if your JWT token is missing or expired
           schema:
@@ -318,7 +357,7 @@ paths:
         '200':
           description: A series record.
           schema:
-            $ref: '#/definitions/Series'
+            $ref: '#/definitions/SeriesData'
         '401':
           description: Returned if your JWT token is missing or expired
           schema:
@@ -358,7 +397,7 @@ paths:
         - $ref: '#/parameters/seriesId'
       responses:
         '200':
-          description: An array of episode objects for the given series id.
+          description: An array of actor objects for the given series id.
           schema:
             $ref: '#/definitions/SeriesActors'
         '401':
@@ -484,7 +523,7 @@ paths:
         '200':
           description: A filtered series record
           schema:
-            $ref: '#/definitions/Series'
+            $ref: '#/definitions/SeriesData'
         '401':
           description: Returned if your JWT token is missing or expired
           schema:
@@ -925,6 +964,8 @@ definitions:
         type: string
       siteRating:
         type: number
+      siteRatingCount:
+        type: integer
       thumbAdded:
         type: string
       thumbAuthor:
@@ -938,11 +979,6 @@ definitions:
           type: string
         type: array
     type: object
-  EpisodeData:
-    properties:
-      data:
-        $ref: '#/definitions/Episode'
-    type: object
   EpisodeDataQueryParams:
     properties:
       data:
@@ -950,12 +986,35 @@ definitions:
           type: string
         type: array
     type: object
+  EpisodeRecordData:
+    properties:
+      data:
+        $ref: '#/definitions/Episode'
+      errors:
+        $ref: '#/definitions/JSONErrors'
+    type: object
   FilterKeys:
     properties:
       data:
         items:
           type: string
         type: array
+  JSONErrors:
+    properties:
+      invalidFilters:
+        description: Invalid filters passed to route
+        items:
+          type: string
+        type: array
+      invalidLanguage:
+        description: Invalid language or translation missing
+        type: string
+      invalidQueryParams:
+        description: Invalid query params passed to route
+        items:
+          type: string
+        type: array
+    type: object
   Language:
     properties:
       abbreviation:
@@ -1037,6 +1096,8 @@ definitions:
         type: string
       siteRating:
         type: number
+      siteRatingCount:
+        type: integer
       status:
         type: string
       zap2itId:
@@ -1048,6 +1109,8 @@ definitions:
         items:
           $ref: '#/definitions/SeriesActorsData'
         type: array
+      errors:
+        $ref: '#/definitions/JSONErrors'
   SeriesActorsData:
     properties:
       id:
@@ -1069,12 +1132,22 @@ definitions:
       sortOrder:
         type: integer
     type: object
+  SeriesData:
+    properties:
+      data:
+        $ref: '#/definitions/Series'
+      errors:
+        $ref: '#/definitions/JSONErrors'
+        description: Informative error messages (optional)
+    type: object
   SeriesEpisodes:
     properties:
       data:
         items:
           $ref: '#/definitions/BasicEpisode'
         type: array
+      errors:
+        $ref: '#/definitions/JSONErrors'
       links:
         $ref: '#/definitions/Links'
   SeriesEpisodesQuery:
@@ -1083,6 +1156,8 @@ definitions:
         items:
           $ref: '#/definitions/BasicEpisode'
         type: array
+      errors:
+        $ref: '#/definitions/JSONErrors'
       links:
         $ref: '#/definitions/Links'
   SeriesEpisodesQueryParams:
@@ -1119,8 +1194,14 @@ definitions:
       languageId:
         type: integer
       ratingsInfo:
-        description: Average rating for the given record.
-        type: integer
+        properties:
+          average:
+            description: Average rating for the given record.
+            type: number
+          count:
+            description: Number of ratings for the given record.
+            type: integer
+        type: object
       resolution:
         type: string
       subKey:
@@ -1134,6 +1215,8 @@ definitions:
         items:
           $ref: '#/definitions/SeriesImageQueryResult'
         type: array
+      errors:
+        $ref: '#/definitions/JSONErrors'
   SeriesImagesCount:
     properties:
       fanart:
@@ -1171,6 +1254,27 @@ definitions:
         items:
           $ref: '#/definitions/SeriesImagesQueryParam'
         type: array
+  SeriesSearchData:
+    properties:
+      aliases:
+        items:
+          type: string
+        type: array
+      banner:
+        type: string
+      firstAired:
+        type: string
+      id:
+        type: integer
+      network:
+        type: string
+      overview:
+        type: string
+      seriesName:
+        type: string
+      status:
+        type: string
+    type: object
   Token:
     properties:
       token:
@@ -1188,6 +1292,8 @@ definitions:
         items:
           $ref: '#/definitions/Update'
         type: array
+      errors:
+        $ref: '#/definitions/JSONErrors'
     type: object
   UpdateDataQueryParams:
     properties:
@@ -1221,6 +1327,8 @@ definitions:
     properties:
       data:
         $ref: '#/definitions/UserFavorites'
+      errors:
+        $ref: '#/definitions/JSONErrors'
     type: object
   UserRatings:
     properties:
@@ -1237,6 +1345,8 @@ definitions:
         items:
           $ref: '#/definitions/UserRatings'
         type: array
+      errors:
+        $ref: '#/definitions/JSONErrors'
       links:
         $ref: '#/definitions/Links'
     type: object

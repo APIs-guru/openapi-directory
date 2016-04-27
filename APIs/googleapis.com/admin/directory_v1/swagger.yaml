@@ -3148,7 +3148,8 @@ definitions:
     properties:
       aliases:
         description: List of alias objects.
-        items: {}
+        items:
+          $ref: '#/definitions/Alias'
         type: array
       etag:
         description: ETag of the resource.

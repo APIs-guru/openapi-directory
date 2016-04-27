@@ -16,6 +16,13 @@ externalDocs:
   url: 'http://docs.statsocial.com/home/'
 produces:
   - application/json
+securityDefinitions:
+  api_key:
+    in: header
+    name: api_key
+    type: apiKey
+security:
+  - api_key: []
 paths:
   /applications/status/:
     get:
