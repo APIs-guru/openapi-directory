@@ -3200,7 +3200,7 @@ definitions:
         format: uint32
         type: integer
       reason:
-        description: The reason for the cancellation.
+        description: The reason for the cancellation. Orders that are cancelled with a noIventory reason will lead to the removal of the product from POG until you make an update to that product. This will not affect your Shopping ads.
         type: string
       reasonText:
         description: The explanation of the reason.
@@ -3212,7 +3212,7 @@ definitions:
         description: Email address of the customer.
         type: string
       explicitMarketingPreference:
-        description: 'If set, this indicates the user had a choice to opt in or out of providing marketing rights to the merchant. If unset, this indicates the user has already made this choice in a previous purchase, and was thus not shown the marketing right opt in/out checkbox during the Purchases on Google checkout flow.'
+        description: 'If set, this indicates the user explicitly chose to opt in or out of providing marketing rights to the merchant. If unset, this indicates the user has already made this choice in a previous purchase, and was thus not shown the marketing right opt in/out checkbox during the Purchases on Google checkout flow.'
         type: boolean
       fullName:
         description: Full name of the customer.
@@ -4124,7 +4124,7 @@ definitions:
         format: int64
         type: string
       offerId:
-        description: An identifier of the item.
+        description: An identifier of the item. Leading and trailing whitespaces are stripped and multiple whitespaces are replaced by a single whitespace upon submission. Only valid unicode characters are accepted. See the products feed specification for details.
         type: string
       onlineOnly:
         description: Whether an item is available for purchase only online.
@@ -4136,7 +4136,7 @@ definitions:
         $ref: '#/definitions/Price'
         description: Price of the item.
       productType:
-        description: Your category of the item (formatted as in product feeds specification).
+        description: Your category of the item (formatted as in products feed specification).
         type: string
       promotionIds:
         description: The unique ID of a promotion.
@@ -4147,7 +4147,7 @@ definitions:
         $ref: '#/definitions/Price'
         description: Advertised sale price of the item.
       salePriceEffectiveDate:
-        description: Date range during which the item is on sale (see product feed specifications).
+        description: Date range during which the item is on sale (see products feed specification).
         type: string
       sellOnGoogleQuantity:
         description: The quantity of the product that is reserved for sell-on-google ads.
@@ -4604,7 +4604,7 @@ definitions:
         description: Email address of the customer.
         type: string
       explicitMarketingPreference:
-        description: 'If set, this indicates the user had a choice to opt in or out of providing marketing rights to the merchant. If unset, this indicates the user has already made this choice in a previous purchase, and was thus not shown the marketing right opt in/out checkbox during the Purchases on Google checkout flow. Optional.'
+        description: 'If set, this indicates the user explicitly chose to opt in or out of providing marketing rights to the merchant. If unset, this indicates the user has already made this choice in a previous purchase, and was thus not shown the marketing right opt in/out checkbox during the Purchases on Google checkout flow. Optional.'
         type: boolean
       fullName:
         description: Full name of the customer.

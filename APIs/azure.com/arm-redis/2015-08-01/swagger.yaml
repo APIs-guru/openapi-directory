@@ -166,6 +166,38 @@ paths:
             $ref: '#/definitions/RedisResourceWithAccessKey'
       tags:
         - Redis
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/forceReboot':
+    post:
+      description: Reboot specified redis node(s). This operation requires write permission to the cache resource. There can be potential data loss.
+      operationId: Redis_ForceReboot
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the redis cache.
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: Specifies which redis node(s) to reboot.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/RedisRebootParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+        '202':
+          description: ''
+        '404':
+          description: ''
+      tags:
+        - Redis
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/listKeys':
     post:
       description: "Retrieve a redis cache's access keys. This operation requires write permission to the cache resource."
@@ -325,6 +357,25 @@ definitions:
       accessKeys:
         $ref: '#/definitions/RedisAccessKeys'
         description: Redis cache access keys.
+  RedisRebootParameters:
+    description: Specifies which redis node(s) to reboot.
+    properties:
+      rebootType:
+        description: Which redis node(s) to reboot. Depending on this value data loss is possible.
+        enum:
+          - PrimaryNode
+          - SecondaryNode
+          - AllNodes
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: RebootType
+      shardId:
+        description: 'In case of cluster cache, this specifies shard id which should be rebooted.'
+        format: int32
+        type: integer
+    required:
+      - rebootType
   RedisRegenerateKeyParameters:
     description: Specifies which redis access keys to reset.
     properties:

@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: The Google Monitoring API lets you manage your monitoring data and configurations.
+  description: 'Manages your Stackdriver monitoring data and configurations. Projects must be associated with a Stackdriver account, except for the following methods: [monitoredResourceDescriptors.list](v3/projects.monitoredResourceDescriptors/list), [monitoredResourceDescriptors.get](v3/projects.monitoredResourceDescriptors/get), [metricDescriptors.list](v3/projects.metricDescriptors/list), [metricDescriptors.get](v3/projects.metricDescriptors/get), and [timeSeries.list](v3/projects.timeSeries/list).'
   title: Google Monitoring
   version: v3
   x-apiClientRegistration:
@@ -130,7 +130,7 @@ paths:
       tags:
         - projects
     get:
-      description: Gets a single metric descriptor.
+      description: Gets a single metric descriptor. This method does not require a Stackdriver account.
       operationId: monitoring.projects.metricDescriptors.get
       parameters:
         - description: 'The metric descriptor on which to execute the request. The format is `"projects/{project_id_or_number}/metricDescriptors/{metric_id}"`. An example value of `{metric_id}` is `"compute.googleapis.com/instance/disk/read_bytes_count"`.'
@@ -354,11 +354,11 @@ paths:
           in: query
           name: filter
           type: string
-        - description: (required) The end of the interval. The interval includes this time.
+        - description: Required. The end of the interval. The interval includes this time.
           in: query
           name: interval.endTime
           type: string
-        - description: '(optional) If omitted, the interval is a point in time, `endTime`. If `startTime` is present, it must be earlier than (less than) `endTime`. The interval begins after `startTime`—it does not include `startTime`.'
+        - description: 'If this value is omitted, the interval is a point in time, `endTime`. If `startTime` is present, it must be earlier than (less than) `endTime`. The interval begins after `startTime`—it does not include `startTime`.'
           in: query
           name: interval.startTime
           type: string
@@ -392,7 +392,7 @@ paths:
       - $ref: '#/parameters/$.xgafv'
   '/v3/{name}/metricDescriptors':
     get:
-      description: Lists metric descriptors that match a filter.
+      description: Lists metric descriptors that match a filter. This method does not require a Stackdriver account.
       operationId: monitoring.projects.metricDescriptors.list
       parameters:
         - description: 'The project on which to execute the request. The format is `"projects/{project_id_or_number}"`.'
@@ -473,7 +473,7 @@ paths:
         - projects
   '/v3/{name}/monitoredResourceDescriptors':
     get:
-      description: Lists monitored resource descriptors that match a filter.
+      description: Lists monitored resource descriptors that match a filter. This method does not require a Stackdriver account.
       operationId: monitoring.projects.monitoredResourceDescriptors.list
       parameters:
         - description: 'The project on which to execute the request. The format is `"projects/{project_id_or_number}"`.'
@@ -526,7 +526,7 @@ paths:
       - $ref: '#/parameters/$.xgafv'
   '/v3/{name}/timeSeries':
     get:
-      description: Lists time series that match a filter.
+      description: Lists time series that match a filter. This method does not require a Stackdriver account.
       operationId: monitoring.projects.timeSeries.list
       parameters:
         - description: 'The project on which to execute the request. The format is "projects/{project_id_or_number}".'
@@ -539,11 +539,11 @@ paths:
           in: query
           name: filter
           type: string
-        - description: (required) The end of the interval. The interval includes this time.
+        - description: Required. The end of the interval. The interval includes this time.
           in: query
           name: interval.endTime
           type: string
-        - description: '(optional) If omitted, the interval is a point in time, `endTime`. If `startTime` is present, it must be earlier than (less than) `endTime`. The interval begins after `startTime`—it does not include `startTime`.'
+        - description: 'If this value is omitted, the interval is a point in time, `endTime`. If `startTime` is present, it must be earlier than (less than) `endTime`. The interval begins after `startTime`—it does not include `startTime`.'
           in: query
           name: interval.startTime
           type: string
@@ -1127,10 +1127,10 @@ definitions:
     description: 'A time interval extending from after `startTime` through `endTime`. If `startTime` is omitted, the interval is the single point in time, `endTime`.'
     properties:
       endTime:
-        description: (required) The end of the interval. The interval includes this time.
+        description: Required. The end of the interval. The interval includes this time.
         type: string
       startTime:
-        description: '(optional) If omitted, the interval is a point in time, `endTime`. If `startTime` is present, it must be earlier than (less than) `endTime`. The interval begins after `startTime`—it does not include `startTime`.'
+        description: 'If this value is omitted, the interval is a point in time, `endTime`. If `startTime` is present, it must be earlier than (less than) `endTime`. The interval begins after `startTime`—it does not include `startTime`.'
         type: string
     type: object
   TimeSeries:

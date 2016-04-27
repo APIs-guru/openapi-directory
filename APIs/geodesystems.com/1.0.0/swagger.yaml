@@ -14,6 +14,10 @@ info:
     url: 'http://geodesystems.com/repository/swagger/api-docs'
     version: '1.2'
   x-providerName: geodesystems.com
+securityDefinitions:
+  basic:
+    description: Basic HTTP Authentication
+    type: basic
 tags:
   - description: Grid point data API
     name: gridaspoint

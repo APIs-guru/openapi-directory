@@ -609,7 +609,7 @@ paths:
         - ExpressRouteCircuits
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}':
     delete:
       description: The delete ExpressRouteCircuit operation deletes the specified ExpressRouteCircuit.
       operationId: ExpressRouteCircuits_Delete
@@ -3471,19 +3471,19 @@ definitions:
     properties:
       primarybytesIn:
         description: Gets BytesIn of the peering.
-        format: int32
+        format: int64
         type: integer
       primarybytesOut:
         description: Gets BytesOut of the peering.
-        format: int32
+        format: int64
         type: integer
       secondarybytesIn:
         description: Gets BytesIn of the peering.
-        format: int32
+        format: int64
         type: integer
       secondarybytesOut:
         description: Gets BytesOut of the peering.
-        format: int32
+        format: int64
         type: integer
   ExpressRouteCircuitsArpTableListResult:
     description: Response for ListArpTable associated with the Express Route Circuits Api

@@ -30,6 +30,7 @@ securityDefinitions:
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/compute': View and manage your Google Compute Engine resources
       'https://www.googleapis.com/auth/genomics': View and manage Genomics data
     type: oauth2
 parameters:
@@ -298,6 +299,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
         - Oauth2:
             - 'https://www.googleapis.com/auth/genomics'
       tags:

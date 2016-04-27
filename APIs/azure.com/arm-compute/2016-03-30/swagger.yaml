@@ -343,7 +343,7 @@ paths:
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachineScaleSets':
     get:
-      description: Gets the list of Virtual Machine Scale Sets in the subscription. Use nextLink property in the response to get the next page of Virtual Machine Scale Sets. Do this till nextLink is not null to fetch all the Virtual Machine Scale Sets.
+      description: Lists all Virtual Machine Scale Sets in the subscription. Use nextLink property in the response to get the next page of Virtual Machine Scale Sets. Do this till nextLink is not null to fetch all the Virtual Machine Scale Sets.
       operationId: VirtualMachineScaleSets_ListAll
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -497,7 +497,7 @@ paths:
         - AvailabilitySets
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets':
     get:
-      description: The operation to list virtual machine scale sets under a resource group.
+      description: Lists all virtual machine scale sets under a resource group.
       operationId: VirtualMachineScaleSets_List
       parameters:
         - description: The name of the resource group.
@@ -518,7 +518,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{name}':
     put:
-      description: The operation to create or update a virtual machine scale set.
+      description: Allows you to create or update a virtual machine scale set by providing parameters or a path to pre-configured parameter file.
       operationId: VirtualMachineScaleSets_CreateOrUpdate
       parameters:
         - description: The name of the resource group.
@@ -553,7 +553,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines':
     get:
-      description: The operation to list virtual machine scale sets VMs.
+      description: Lists all virtual machines in a VM scale sets.
       operationId: VirtualMachineScaleSetVMs_List
       parameters:
         - description: The name of the resource group.
@@ -595,7 +595,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}':
     delete:
-      description: The operation to delete a virtual machine scale set.
+      description: Allows you to delete a virtual machine scale set.
       operationId: VirtualMachineScaleSets_Delete
       parameters:
         - description: The name of the resource group.
@@ -621,7 +621,7 @@ paths:
         - VirtualMachineScaleSets
       x-ms-long-running-operation: true
     get:
-      description: The operation to get a virtual machine scale set.
+      description: Display information about a virtual machine scale set.
       operationId: VirtualMachineScaleSets_Get
       parameters:
         - description: The name of the resource group.
@@ -645,7 +645,7 @@ paths:
         - VirtualMachineScaleSets
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/deallocate':
     post:
-      description: The operation to deallocate virtual machines in a virtual machine scale set.
+      description: Allows you to deallocate virtual machines in a virtual machine scale set. Shuts down the virtual machines and releases the compute resources. You are not billed for the compute resources that this virtual machine scale set uses.
       operationId: VirtualMachineScaleSets_Deallocate
       parameters:
         - description: The name of the resource group.
@@ -674,7 +674,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/delete':
     post:
-      description: The operation to delete virtual machines in a virtual machine scale set.
+      description: Allows you to delete virtual machines in a virtual machine scale set.
       operationId: VirtualMachineScaleSets_DeleteInstances
       parameters:
         - description: The name of the resource group.
@@ -703,7 +703,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/instanceView':
     get:
-      description: The operation to get a virtual machine scale set instance view.
+      description: Displays status of a virtual machine scale set instance.
       operationId: VirtualMachineScaleSets_GetInstanceView
       parameters:
         - description: The name of the resource group.
@@ -727,7 +727,7 @@ paths:
         - VirtualMachineScaleSets
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/manualupgrade':
     post:
-      description: The operation to manually upgrade virtual machines in a virtual machine scale set.
+      description: Allows you to manually upgrade virtual machines in a virtual machine scale set.
       operationId: VirtualMachineScaleSets_UpdateInstances
       parameters:
         - description: The name of the resource group.
@@ -756,7 +756,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/poweroff':
     post:
-      description: The operation to power off (stop) virtual machines in a virtual machine scale set.
+      description: Allows you to power off (stop) virtual machines in a virtual machine scale set. Note that resources are still attached and you are getting charged for the resources. Use deallocate to release resources.
       operationId: VirtualMachineScaleSets_PowerOff
       parameters:
         - description: The name of the resource group.
@@ -785,7 +785,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimage':
     post:
-      description: The operation to re-image virtual machines in a virtual machine scale set.
+      description: Allows you to re-image(update the version of the installed operating system) virtual machines in a virtual machine scale set.
       operationId: VirtualMachineScaleSets_Reimage
       parameters:
         - description: The name of the resource group.
@@ -808,7 +808,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/restart':
     post:
-      description: The operation to restart virtual machines in a virtual machine scale set.
+      description: Allows you to restart virtual machines in a virtual machine scale set.
       operationId: VirtualMachineScaleSets_Restart
       parameters:
         - description: The name of the resource group.
@@ -837,7 +837,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/skus':
     get:
-      description: The operation to list available skus for a virtual machine scale set.
+      description: Displays available skus for your virtual machine scale set including the minimum and maximum vm instances allowed for a particular sku.
       operationId: VirtualMachineScaleSets_ListSkus
       parameters:
         - description: The name of the resource group.
@@ -863,7 +863,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/start':
     post:
-      description: The operation to start virtual machines in a virtual machine scale set.
+      description: Allows you to start virtual machines in a virtual machine scale set.
       operationId: VirtualMachineScaleSets_Start
       parameters:
         - description: The name of the resource group.
@@ -892,7 +892,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}':
     delete:
-      description: The operation to delete a virtual machine scale set.
+      description: Allows you to delete a virtual machine scale set.
       operationId: VirtualMachineScaleSetVMs_Delete
       parameters:
         - description: The name of the resource group.
@@ -923,7 +923,7 @@ paths:
         - VirtualMachineScaleSetVMs
       x-ms-long-running-operation: true
     get:
-      description: The operation to get a virtual machine scale set virtual machine.
+      description: Displays information about a virtual machine scale set virtual machine.
       operationId: VirtualMachineScaleSetVMs_Get
       parameters:
         - description: The name of the resource group.
@@ -952,7 +952,7 @@ paths:
         - VirtualMachineScaleSetVMs
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/deallocate':
     post:
-      description: The operation to deallocate a virtual machine scale set.
+      description: Allows you to deallocate a virtual machine virtual machine scale set.Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses.
       operationId: VirtualMachineScaleSetVMs_Deallocate
       parameters:
         - description: The name of the resource group.
@@ -980,7 +980,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/instanceView':
     get:
-      description: The operation to get a virtual machine scale set virtual machine.
+      description: Displays the status of a virtual machine scale set virtual machine.
       operationId: VirtualMachineScaleSetVMs_GetInstanceView
       parameters:
         - description: The name of the resource group.
@@ -1009,7 +1009,7 @@ paths:
         - VirtualMachineScaleSetVMs
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/poweroff':
     post:
-      description: The operation to power off (stop) a virtual machine scale set.
+      description: Allows you to power off (stop) a virtual machine in a VM scale set.
       operationId: VirtualMachineScaleSetVMs_PowerOff
       parameters:
         - description: The name of the resource group.
@@ -1037,7 +1037,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/reimage':
     post:
-      description: The operation to re-image a virtual machine scale set instance.
+      description: Allows you to re-image(update the version of the installed operating system) a virtual machine scale set instance.
       operationId: VirtualMachineScaleSetVMs_Reimage
       parameters:
         - description: The name of the resource group.
@@ -1065,7 +1065,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/restart':
     post:
-      description: The operation to restart a virtual machine scale set.
+      description: Allows you to restart a virtual machine in a VM scale set.
       operationId: VirtualMachineScaleSetVMs_Restart
       parameters:
         - description: The name of the resource group.
@@ -1093,7 +1093,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/start':
     post:
-      description: The operation to start a virtual machine scale set.
+      description: Allows you to start a virtual machine in a VM scale set.
       operationId: VirtualMachineScaleSetVMs_Start
       parameters:
         - description: The name of the resource group.
@@ -1564,7 +1564,7 @@ definitions:
     description: The API entity reference.
     properties:
       id:
-        description: 'Gets or sets ARM resource id in the form of /subscriptions/{SubcriptionId}/resourceGroups/{ResourceGroupName}/...'
+        description: 'Gets or sets the ARM resource id in the form of /subscriptions/{SubcriptionId}/resourceGroups/{ResourceGroupName}/...'
         type: string
   ApiError:
     description: Api error.
@@ -1631,7 +1631,7 @@ definitions:
           $ref: '#/definitions/InstanceViewStatus'
         type: array
       virtualMachines:
-        description: Gets or sets a list containing reference to all Virtual Machines  created under this Availability Set.
+        description: Gets or sets a list containing reference to all Virtual Machines created under this Availability Set.
         items:
           $ref: '#/definitions/SubResource'
         type: array
@@ -1781,6 +1781,7 @@ definitions:
           - Standard_D12_v2
           - Standard_D13_v2
           - Standard_D14_v2
+          - Standard_D15_v2
           - Standard_DS1
           - Standard_DS2
           - Standard_DS3
@@ -1789,6 +1790,16 @@ definitions:
           - Standard_DS12
           - Standard_DS13
           - Standard_DS14
+          - Standard_DS1_v2
+          - Standard_DS2_v2
+          - Standard_DS3_v2
+          - Standard_DS4_v2
+          - Standard_DS5_v2
+          - Standard_DS11_v2
+          - Standard_DS12_v2
+          - Standard_DS13_v2
+          - Standard_DS14_v2
+          - Standard_DS15_v2
           - Standard_G1
           - Standard_G2
           - Standard_G3

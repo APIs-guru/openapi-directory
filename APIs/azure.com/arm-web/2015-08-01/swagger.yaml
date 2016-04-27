@@ -165,6 +165,57 @@ paths:
       summary: Updates source control token
       tags:
         - Provider
+  '/subscriptions/{subscriptionId}/providers/Microsoft.CertificateRegistration/certificateOrders':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: GlobalCertificateOrder_GetAllCertificateOrders
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CertificateOrderCollection'
+      summary: Lists all domains in a subscription
+      tags:
+        - GlobalCertificateOrder
+  '/subscriptions/{subscriptionId}/providers/Microsoft.CertificateRegistration/validateCertificateRegistrationInformation':
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: GlobalCertificateOrder_ValidateCertificatePurchaseInformation
+      parameters:
+        - description: Certificate order
+          in: body
+          name: certificateOrder
+          required: true
+          schema:
+            $ref: '#/definitions/CertificateOrder'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      summary: Validate certificate purchase information
+      tags:
+        - GlobalCertificateOrder
   '/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/checkDomainAvailability':
     post:
       consumes:
@@ -734,6 +785,569 @@ paths:
           description: No Content
       tags:
         - GlobalResourceGroups
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: CertificateOrders_GetCertificateOrders
+      parameters:
+        - description: Azure resource group name
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CertificateOrderCollection'
+      summary: Get certificate orders in a resource group
+      tags:
+        - CertificateOrders
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/certificates':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: CertificateOrders_GetCertificates
+      parameters:
+        - description: Azure resource group name
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Certificate name
+          in: path
+          name: certificateOrderName
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CertificateOrderCertificateCollection'
+      summary: List all certificates associated with a certificate order (only one certificate can be associated with an order at a time)
+      tags:
+        - CertificateOrders
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/certificates/{name}':
+    delete:
+      consumes: []
+      deprecated: false
+      operationId: CertificateOrders_DeleteCertificate
+      parameters:
+        - description: Azure resource group name
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Certificate name
+          in: path
+          name: certificateOrderName
+          required: true
+          type: string
+        - description: Certificate name
+          in: path
+          name: name
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      summary: Deletes the certificate associated with the certificate order
+      tags:
+        - CertificateOrders
+    get:
+      consumes: []
+      deprecated: false
+      operationId: CertificateOrders_GetCertificate
+      parameters:
+        - description: Azure resource group name
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Certificate name
+          in: path
+          name: certificateOrderName
+          required: true
+          type: string
+        - description: Certificate name
+          in: path
+          name: name
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CertificateOrderCertificate'
+      summary: Get certificate associated with the certificate order
+      tags:
+        - CertificateOrders
+    patch:
+      consumes:
+        - application/json
+        - text/json
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: CertificateOrders_UpdateCertificate
+      parameters:
+        - description: Azure resource group name
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Certificate name
+          in: path
+          name: certificateOrderName
+          required: true
+          type: string
+        - description: Certificate name
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: Key Vault secret csm Id
+          in: body
+          name: keyVaultCertificate
+          required: true
+          schema:
+            $ref: '#/definitions/CertificateOrderCertificate'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CertificateOrderCertificate'
+      summary: "Associates a Key Vault secret to a certificate store that will be used for storing the certificate once it's ready"
+      tags:
+        - CertificateOrders
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: CertificateOrders_CreateOrUpdateCertificate
+      parameters:
+        - description: Azure resource group name
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Certificate name
+          in: path
+          name: certificateOrderName
+          required: true
+          type: string
+        - description: Certificate name
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: Key Vault secret csm Id
+          in: body
+          name: keyVaultCertificate
+          required: true
+          schema:
+            $ref: '#/definitions/CertificateOrderCertificate'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CertificateOrderCertificate'
+      summary: "Associates a Key Vault secret to a certificate store that will be used for storing the certificate once it's ready"
+      tags:
+        - CertificateOrders
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}':
+    delete:
+      consumes: []
+      deprecated: false
+      operationId: CertificateOrders_DeleteCertificateOrder
+      parameters:
+        - description: Azure resource group name
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Certificate name
+          in: path
+          name: name
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      summary: Delete an existing certificate order
+      tags:
+        - CertificateOrders
+    get:
+      consumes: []
+      deprecated: false
+      operationId: CertificateOrders_GetCertificateOrder
+      parameters:
+        - description: Azure resource group name
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Certificate name
+          in: path
+          name: name
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CertificateOrder'
+      summary: Get a certificate order
+      tags:
+        - CertificateOrders
+    patch:
+      consumes:
+        - application/json
+        - text/json
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: CertificateOrders_UpdateCertificateOrder
+      parameters:
+        - description: Azure resource group name
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Certificate name
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: Distinguished name to be used for purchasing certificate
+          in: body
+          name: certificateDistinguishedName
+          required: true
+          schema:
+            $ref: '#/definitions/CertificateOrder'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CertificateOrder'
+      summary: Create or update a certificate purchase order
+      tags:
+        - CertificateOrders
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: CertificateOrders_CreateOrUpdateCertificateOrder
+      parameters:
+        - description: Azure resource group name
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Certificate name
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: Distinguished name to be used for purchasing certificate
+          in: body
+          name: certificateDistinguishedName
+          required: true
+          schema:
+            $ref: '#/definitions/CertificateOrder'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CertificateOrder'
+      summary: Create or update a certificate purchase order
+      tags:
+        - CertificateOrders
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/reissue':
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: CertificateOrders_ReissueCertificateOrder
+      parameters:
+        - description: Azure resource group name
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Certificate name
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: Reissue parameters
+          in: body
+          name: reissueCertificateOrderRequest
+          required: true
+          schema:
+            $ref: '#/definitions/ReissueCertificateOrderRequest'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      summary: Reissue an existing certificate order
+      tags:
+        - CertificateOrders
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/renew':
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: CertificateOrders_RenewCertificateOrder
+      parameters:
+        - description: Azure resource group name
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Certificate name
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: Renew parameters
+          in: body
+          name: renewCertificateOrderRequest
+          required: true
+          schema:
+            $ref: '#/definitions/RenewCertificateOrderRequest'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      summary: Renew an existing certificate order
+      tags:
+        - CertificateOrders
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/resendEmail':
+    post:
+      consumes: []
+      deprecated: false
+      operationId: CertificateOrders_ResendCertificateEmail
+      parameters:
+        - description: Azure resource group name
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Certificate order name
+          in: path
+          name: name
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      summary: Resend certificate email
+      tags:
+        - CertificateOrders
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/retrieveCertificateActions':
+    post:
+      consumes: []
+      deprecated: false
+      operationId: CertificateOrders_RetrieveCertificateActions
+      parameters:
+        - description: Azure resource group name
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Certificate order name
+          in: path
+          name: name
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/CertificateOrderAction'
+            type: array
+      summary: Retrieve the list of certificate actions
+      tags:
+        - CertificateOrders
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/retrieveEmailHistory':
+    post:
+      consumes: []
+      deprecated: false
+      operationId: CertificateOrders_RetrieveCertificateEmailHistory
+      parameters:
+        - description: Azure resource group name
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Certificate order name
+          in: path
+          name: name
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/CertificateEmail'
+            type: array
+      summary: Retrive email history
+      tags:
+        - CertificateOrders
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/verifyDomainOwnership':
+    post:
+      consumes: []
+      deprecated: false
+      operationId: CertificateOrders_VerifyDomainOwnership
+      parameters:
+        - description: Azure resource group name
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Certificate order name
+          in: path
+          name: name
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      summary: Verify domain ownership for this certificate order
+      tags:
+        - CertificateOrders
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains':
     get:
       consumes: []
@@ -10677,6 +11291,240 @@ definitions:
           $ref: '#/definitions/Certificate'
         type: array
     type: object
+  CertificateDetails:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Certificate Details
+    properties:
+      properties:
+        properties:
+          issuer:
+            description: Issuer
+            type: string
+          notAfter:
+            description: Valid to
+            format: date-time
+            type: string
+          notBefore:
+            description: Valid from
+            format: date-time
+            type: string
+          rawData:
+            description: Raw certificate data
+            type: string
+          serialNumber:
+            description: Serial Number
+            type: string
+          signatureAlgorithm:
+            description: Signature Algorithm
+            type: string
+          subject:
+            description: Subject
+            type: string
+          thumbprint:
+            description: Thumbprint
+            type: string
+          version:
+            description: Version
+            format: int32
+            type: integer
+        x-ms-client-flatten: true
+    type: object
+  CertificateEmail:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Certificate Email
+    properties:
+      properties:
+        properties:
+          emailId:
+            description: Email id
+            type: string
+          timeStamp:
+            description: Time stamp
+            format: date-time
+            type: string
+        x-ms-client-flatten: true
+    type: object
+  CertificateOrder:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Certificate purchase order
+    properties:
+      properties:
+        properties:
+          autoRenew:
+            description: Auto renew
+            type: boolean
+          certificates:
+            additionalProperties:
+              $ref: '#/definitions/CertificateOrderCertificate'
+            description: State of the Key Vault secret
+            type: object
+          csr:
+            description: Last CSR that was created for this order
+            type: string
+          distinguishedName:
+            description: Certificate distinguished name
+            type: string
+          domainVerificationToken:
+            description: Domain Verification Token
+            type: string
+          expirationTime:
+            description: Certificate expiration time
+            format: date-time
+            type: string
+          intermediate:
+            $ref: '#/definitions/CertificateDetails'
+            description: Intermediate certificate
+          keySize:
+            description: Certificate Key Size
+            format: int32
+            type: integer
+          lastCertificateIssuanceTime:
+            description: Certificate last issuance time
+            format: date-time
+            type: string
+          productType:
+            description: Certificate product type
+            enum:
+              - StandardDomainValidatedSsl
+              - StandardDomainValidatedWildCardSsl
+            type: string
+            x-ms-enum:
+              modelAsString: false
+              name: CertificateProductType
+          provisioningState:
+            description: Status of certificate order
+            enum:
+              - Succeeded
+              - Failed
+              - Canceled
+              - InProgress
+              - Deleting
+            type: string
+            x-ms-enum:
+              modelAsString: false
+              name: ProvisioningState
+          root:
+            $ref: '#/definitions/CertificateDetails'
+            description: Root certificate
+          serialNumber:
+            description: Current serial number of the certificate
+            type: string
+          signedCertificate:
+            $ref: '#/definitions/CertificateDetails'
+            description: Signed certificate
+          status:
+            description: Current order status
+            enum:
+              - Pendingissuance
+              - Issued
+              - Revoked
+              - Canceled
+              - Denied
+              - Pendingrevocation
+              - PendingRekey
+              - Unused
+              - Expired
+              - NotSubmitted
+            type: string
+            x-ms-enum:
+              modelAsString: false
+              name: CertificateOrderStatus
+          validityInYears:
+            description: Duration in years (must be between 1 and 3)
+            format: int32
+            type: integer
+        x-ms-client-flatten: true
+    type: object
+  CertificateOrderAction:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Represents a certificate action
+    properties:
+      properties:
+        properties:
+          createdAt:
+            description: Time at which the certificate action was performed
+            format: date-time
+            type: string
+          type:
+            description: Type
+            enum:
+              - CertificateIssued
+              - CertificateOrderCanceled
+              - CertificateOrderCreated
+              - CertificateRevoked
+              - DomainValidationComplete
+              - FraudDetected
+              - OrgNameChange
+              - OrgValidationComplete
+              - SanDrop
+            type: string
+            x-ms-enum:
+              modelAsString: false
+              name: CertificateOrderActionType
+        required:
+          - type
+        x-ms-client-flatten: true
+    type: object
+  CertificateOrderCertificate:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Class representing the Key Vault container for certificate purchased through Azure
+    properties:
+      properties:
+        properties:
+          keyVaultId:
+            description: Key Vault Csm resource Id
+            type: string
+          keyVaultSecretName:
+            description: Key Vault secret name
+            type: string
+          provisioningState:
+            description: Status of the Key Vault secret
+            enum:
+              - Initialized
+              - WaitingOnCertificateOrder
+              - Succeeded
+              - CertificateOrderFailed
+              - OperationNotPermittedOnKeyVault
+              - AzureServiceUnauthorizedToAccessKeyVault
+              - KeyVaultDoesNotExist
+              - KeyVaultSecretDoesNotExist
+              - UnknownError
+              - Unknown
+            type: string
+            x-ms-enum:
+              modelAsString: false
+              name: KeyVaultSecretStatus
+        x-ms-client-flatten: true
+    type: object
+  CertificateOrderCertificateCollection:
+    description: Collection of ceritificateorder certificates
+    properties:
+      nextLink:
+        description: Link to next page of resources
+        type: string
+      value:
+        description: Collection of resources
+        items:
+          $ref: '#/definitions/CertificateOrderCertificate'
+        type: array
+    type: object
+  CertificateOrderCollection:
+    description: Collection of ceritificate orders
+    properties:
+      nextLink:
+        description: Link to next page of resources
+        type: string
+      value:
+        description: Collection of resources
+        items:
+          $ref: '#/definitions/CertificateOrder'
+        type: array
+    type: object
   ClassicMobileService:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -11190,6 +12038,15 @@ definitions:
             description: Domain creation timestamp
             format: date-time
             type: string
+          domainNotRenewableReasons:
+            description: Reasons why domain is not renewable
+            items:
+              enum:
+                - RegistrationStatusNotSupportedForRenewal
+                - ExpirationNotInRenewalTimeRange
+                - SubscriptionNotActive
+              type: string
+            type: array
           expirationTime:
             description: Domain expiration timestamp
             format: date-time
@@ -11356,6 +12213,15 @@ definitions:
             description: Domain creation timestamp
             format: date-time
             type: string
+          domainNotRenewableReasons:
+            description: Reasons why domain is not renewable
+            items:
+              enum:
+                - RegistrationStatusNotSupportedForRenewal
+                - ExpirationNotInRenewalTimeRange
+                - SubscriptionNotActive
+              type: string
+            type: array
           expirationTime:
             description: Domain expiration timestamp
             format: date-time
@@ -12245,6 +13111,23 @@ definitions:
       - level
       - channels
     type: object
+  ReissueCertificateOrderRequest:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Class representing certificate reissue request
+    properties:
+      properties:
+        properties:
+          delayExistingRevokeInHours:
+            description: Delay in hours to revoke existing certificate after the new certificate is issued
+            format: int32
+            type: integer
+          keySize:
+            description: Certificate Key Size
+            format: int32
+            type: integer
+        x-ms-client-flatten: true
+    type: object
   RelayServiceConnectionEntity:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -12267,6 +13150,19 @@ definitions:
             type: string
           resourceType:
             type: string
+        x-ms-client-flatten: true
+    type: object
+  RenewCertificateOrderRequest:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Class representing certificate renew request
+    properties:
+      properties:
+        properties:
+          keySize:
+            description: Certificate Key Size
+            format: int32
+            type: integer
         x-ms-client-flatten: true
     type: object
   RequestsBasedTrigger:
@@ -12768,6 +13664,10 @@ definitions:
         type: array
       openIdIssuer:
         type: string
+      tokenRefreshExtensionHours:
+        description: "Gets or sets the number of hours after session token expiration that a session token can be used to\r\n            call the token refresh API. The default is 72 hours."
+        format: double
+        type: number
       tokenStoreEnabled:
         description: "Gets or sets a value indicating whether to durably store platform-specific security tokens\r\n            obtained during login flows. This capability is disabled by default."
         type: boolean
