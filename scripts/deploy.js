@@ -6,6 +6,7 @@ var _ = require('lodash');
 var Promise = require('bluebird');
 
 var URI = require('urijs');
+var sh = require('shelljs');
 var MimeLookup = require('mime-lookup');
 var MIME = new MimeLookup(require('mime-db'));
 var exec = require('child_process').execSync;
@@ -15,7 +16,20 @@ var util = require('./util');
 
 var specRootUrl = 'https://apis-guru.github.io/api-models/';
 
-cacheResources()
+sh.set('-e');
+sh.set('-v');
+
+sh.mkdir('deploy');
+sh.cd('deploy');
+
+sh.cp('../scripts/index.html', '.');
+sh.cp('-R', '../branding/', '.');
+
+sh.mkdir('-p', 'api/v1');
+sh.cp('../scripts/apis_guru_swagger.yaml', 'api/v1/swagger.yaml');
+sh.cp('../scripts/apis.json', './api/apis.json');
+
+cacheResources(util.getSpecs('../APIs/'))
   .then(function (specs) {
     //Note: at this point all logo are cached
     generateAPIsJSON(specs);
@@ -42,8 +56,6 @@ cacheResources()
   .done();
 
 function cacheResources(specs) {
-  var specs = util.getSpecs('../APIs/');
-
   return Promise.mapSeries(_.values(specs), function (swagger) {
     if (_.isUndefined(swagger.info['x-logo']))
       return swagger;

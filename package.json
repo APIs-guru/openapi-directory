@@ -21,6 +21,7 @@
     "mktemp": "sasaplus1/mktemp",
     "parse-domain": "^0.2.0",
     "sanitize-filename": "^1.5.3",
+    "shelljs": "^0.7.0",
     "swagger-methods": "^1.0.0",
     "urijs": "^1.16.1"
   },
@@ -31,6 +32,6 @@
   },
   "scripts": {
     "test": "scripts/collection.js validate",
-    "deploy": "scripts/deploy.sh && deploy-to-gh-pages deploy"
+    "deploy": "scripts/deploy.js && deploy-to-gh-pages deploy"
   }
 }
