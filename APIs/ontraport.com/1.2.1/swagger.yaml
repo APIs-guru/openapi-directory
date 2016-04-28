@@ -183,7 +183,7 @@ parameters:
     type: boolean
   performAllParamFormData:
     default: false
-    description: Perform request on all objects that match criteria.
+    description: Perform request on all Objects that match criteria.
     in: formData
     name: performAll
     type: boolean
@@ -221,7 +221,7 @@ parameters:
     name: searchNotes
     type: boolean
   searchParam:
-    description: Search objects for this string
+    description: Search Objects for this string
     in: query
     name: search
     type: string
@@ -431,7 +431,7 @@ paths:
           name: send_from
           type: string
         - default: email
-          description: 'Only used with SMS Messages or Custom Objects. Select the field to use when there may be a parent or child relationship to the Object type given in object_type_id. The default for SMS Message is <b>sms_number.</b>'
+          description: 'Only used with SMS Messages or Custom Objects. Select the field to use when there may be a parent or child relationship to the Object type given in <b>object_type_id</b>. The default for SMS Message is <b>sms_number.</b>'
           in: formData
           name: send_to
           type: string
@@ -533,7 +533,7 @@ paths:
           name: send_from
           type: string
         - default: email
-          description: 'Only used with SMS Messages or Custom Objects. Select the field to use when there may be a parent or child relationship to the Object type given in object_type_id. The default for SMS Message is <b>sms_number.</b>'
+          description: 'Only used with SMS Messages or Custom Objects. Select the field to use when there may be a parent or child relationship to the Object type given in <b>object_type_id</b>. The default for SMS Message is <b>sms_number.</b>'
           in: formData
           name: send_to
           type: string
@@ -581,7 +581,7 @@ paths:
         - messages
   /object:
     delete:
-      description: This will delete an Object with the given object type and ID.
+      description: This will delete an Object with the given Object type and ID.
       operationId: deleteObject
       parameters:
         - $ref: '#/parameters/objectIdParam'
@@ -602,7 +602,7 @@ paths:
       tags:
         - objects
     get:
-      description: This will fetch data for a given object type and ID.
+      description: This will fetch data for a given Object type and ID.
       operationId: getObject
       parameters:
         - $ref: '#/parameters/objectIdParam'
@@ -619,7 +619,7 @@ paths:
           description: Invalid objectID
         '404':
           description: Object not found
-      summary: "This will get an object's data"
+      summary: "This will get an Object's data"
       tags:
         - objects
   /objects:
@@ -651,7 +651,7 @@ paths:
             type: object
         '400':
           description: Invalid objectID
-      summary: This will delete a list of objects
+      summary: This will delete a list of Objects
       tags:
         - objects
     get:
@@ -682,7 +682,7 @@ paths:
             type: object
         '400':
           description: Invalid objectID
-      summary: This will get a list of objects
+      summary: This will get a list of Objects
       tags:
         - objects
     post:
@@ -716,7 +716,7 @@ paths:
       tags:
         - objects
     put:
-      description: "This will update an Object's data. The object type and ID and required parameters, but other parameters are dependent upon the object type. We have provided optional parameters as examples for updating a Contact. When using this in your application, all invalid parameters will be ignored."
+      description: "This will update an Object's data. The Object type and ID and required parameters, but other parameters are dependent upon the object type. We have provided optional parameters as examples for updating a Contact. When using this in your application, all invalid parameters will be ignored."
       operationId: updateObjects
       parameters:
         - $ref: '#/parameters/objectIdParamFormData'
@@ -772,7 +772,7 @@ paths:
         - objects
   /objects/meta:
     get:
-      description: This will get a list of existing object types and their corresponding field names. Use the objectID parameter to This will get a single object type.
+      description: 'This will get a list of existing Object types and their corresponding field names. Use the <b>objectID</b> parameter to This will get a single Object type.'
       operationId: getMeta
       parameters:
         - default: byId
@@ -797,12 +797,12 @@ paths:
           schema:
             $ref: '#/definitions/Response'
             type: object
-      summary: This will get a list of existing object types
+      summary: This will get a list of existing Object types
       tags:
         - objects
   /objects/saveorupdate:
     post:
-      description: 'Creates an Object with the given data or will merge with an Object in the database if the unique field matches another Object’s. Object type is a required parameters, but other parameters are optional and depend on the object type. We have provided optional parameters as examples for updating a Contact. When using this in your application, all invalid parameters will be ignored.'
+      description: 'This will create an Object with the given data or will merge with an Object in the database if the unique field matches another Object’s. Object type is a required parameter, but other parameters are optional and depend on the Object type. We have provided optional parameters as examples for updating a Contact. When using this in your application, all invalid parameters will be ignored.'
       operationId: saveorupdateObject
       parameters:
         - $ref: '#/parameters/objectIdParamFormData'
@@ -1291,7 +1291,7 @@ definitions:
         type: integer
       performAll:
         default: false
-        description: Perform request on all objects that match criteria.
+        description: Perform request on all Objects that match criteria.
         type: boolean
       range:
         description: Number of results to return (maximum=50)
@@ -1299,7 +1299,7 @@ definitions:
         maximum: 50
         type: integer
       search:
-        description: Search objects for this string
+        description: Search Objects for this string
         type: string
       searchNotes:
         description: Boolean flag to additionally search Object Notes for the Search term given in Search parameter

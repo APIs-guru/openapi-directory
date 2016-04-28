@@ -388,6 +388,25 @@ paths:
       tags:
         - shows
         - charts
+  '/shows?itunes_id={id}':
+    get:
+      description: This endpoint will return the medatdata for a single show given its iTunes id
+      parameters:
+        - description: ID of show to fetch
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: show id response
+          schema:
+            $ref: '#/definitions/shows'
+      tags:
+        - shows
   '/tastemakers/episodes/source/{tastemaker_id}/{n}':
     get:
       description: Returns search results based on what podcast tastemakers are talking about filtered by tastemaker source.

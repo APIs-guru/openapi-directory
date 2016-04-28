@@ -666,6 +666,55 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/enterprises/{enterpriseId}/products':
+    get:
+      description: Finds approved products that match a query.
+      operationId: androidenterprise.products.list
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: 'Whether to search amongst all products or only amongst approved ones. Only "true" is supported, and should be specified.'
+          in: query
+          name: approved
+          type: boolean
+        - description: "The BCP47 tag for the user's preferred language (e.g. \"en-US\", \"de\"). Results are returned in the language best matching it."
+          in: query
+          name: language
+          type: string
+        - in: query
+          name: maxResults
+          type: integer
+        - description: 'The search query as typed in the Google Play Store search box. If omitted, all approved apps will be returned.'
+          in: query
+          name: query
+          type: string
+        - in: query
+          name: startIndex
+          type: integer
+        - in: query
+          name: token
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ProductsListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - products
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/enterprises/{enterpriseId}/products/{productId}':
     get:
       description: Retrieves details of a product for display to an enterprise admin.
@@ -2443,6 +2492,18 @@ definitions:
         description: The text localized in the associated locale.
         type: string
     type: object
+  PageInfo:
+    properties:
+      resultPerPage:
+        format: int32
+        type: integer
+      startIndex:
+        format: int32
+        type: integer
+      totalResults:
+        format: int32
+        type: integer
+    type: object
   Permission:
     description: |-
       A permission represents some extra capability, to be granted to an Android app, which requires explicit consent. An enterprise admin must consent to these permissions on behalf of their users before an entitlement for the app can be created.
@@ -2563,6 +2624,25 @@ definitions:
         description: 'A URL that can be rendered in an iframe to display the permissions (if any) of a product. This URL can be used to approve the product only once and only within 24 hours of being generated, using the Products.approve call. If the product is currently unapproved and has no permissions, this URL will point to an empty page. If the product is currently approved, a URL will only be generated if that product has added permissions since it was last approved, and the URL will only display those new permissions that have not yet been accepted.'
         type: string
     type: object
+  ProductsListResponse:
+    description: The matching products.
+    properties:
+      kind:
+        default: 'androidenterprise#productsListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#productsListResponse".'
+        type: string
+      pageInfo:
+        $ref: '#/definitions/PageInfo'
+        description: General pagination information.
+      product:
+        description: 'Information about a product (e.g. an app) in the Google Play Store, for display to an enterprise admin.'
+        items:
+          $ref: '#/definitions/Product'
+        type: array
+      tokenPagination:
+        $ref: '#/definitions/TokenPagination'
+        description: Pagination information for token pagination.
+    type: object
   StoreCluster:
     description: 'Definition of a Google Play for Work store cluster, a list of products displayed as part of a store page.'
     properties:
@@ -2582,7 +2662,7 @@ definitions:
         description: |-
           String (US-ASCII only) used to determine order of this cluster within the parent page's elements. Page elements are sorted in lexicographic order of this field. Duplicated values are allowed, but ordering between elements with duplicate order is undefined.
 
-          The value of this field is never visible to a user, it is used solely for the purpose of defining an ordering. Maximum length is 20 characters.
+          The value of this field is never visible to a user, it is used solely for the purpose of defining an ordering. Maximum length is 256 characters.
         type: string
       productId:
         description: List of products in the order they are displayed in the cluster. There should not be duplicates within a cluster.
@@ -2655,6 +2735,13 @@ definitions:
         items:
           $ref: '#/definitions/LocalizedText'
         type: array
+    type: object
+  TokenPagination:
+    properties:
+      nextPageToken:
+        type: string
+      previousPageToken:
+        type: string
     type: object
   User:
     description: |-

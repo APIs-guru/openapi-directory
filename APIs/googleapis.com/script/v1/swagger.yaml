@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: An API for executing Google Apps Script projects.
+  description: Executes Google Apps Script projects.
   title: Google Apps Script Execution
   version: v1
   x-apiClientRegistration:
@@ -22,7 +22,7 @@ info:
   x-providerName: googleapis.com
   x-serviceName: script
 externalDocs:
-  url: 'https://developers.google.com/apps-script/execution/rest/v1/run'
+  url: 'https://developers.google.com/apps-script/execution/rest/v1/scripts/run'
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -38,6 +38,7 @@ securityDefinitions:
       'https://www.googleapis.com/auth/forms': View and manage your forms in Google Drive
       'https://www.googleapis.com/auth/forms.currentonly': View and manage forms that this application has been installed in
       'https://www.googleapis.com/auth/groups': View and manage your Google Groups
+      'https://www.googleapis.com/auth/spreadsheets': View and manage your spreadsheets in Google Drive
       'https://www.googleapis.com/auth/userinfo.email': View your email address
     type: oauth2
 parameters:
@@ -164,6 +165,8 @@ paths:
             - 'https://www.googleapis.com/auth/forms.currentonly'
         - Oauth2:
             - 'https://www.googleapis.com/auth/groups'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
