@@ -45,10 +45,13 @@ cacheResources(util.getSpecs('APIs/'))
 
     var numAPIs = _.size(apiList);
     var numEndpoints = _(specs).map('paths').map(_.size).sum();
+    var numSpecs = _.size(specs);
 
     return [
       saveShield('APIs in collection' , numAPIs, 'orange'),
-      saveShield('Endpoints', numEndpoints, 'red')
+      saveShield('Endpoints', numEndpoints, 'red'),
+      saveShield('OpenAPI specs', numSpecs, 'yellow'),
+      saveShield('Tested on', numSpecs + ' specs', 'green')
     ];
   })
   .done();
