@@ -134,7 +134,7 @@ paths:
             required: true
             type: array
           - in: path
-            name: '/orgUnitPath*'
+            name: /orgUnitPath*
             required: true
             type: string
         responses:
@@ -163,7 +163,7 @@ paths:
             required: true
             type: array
           - in: path
-            name: '/orgUnitPath*'
+            name: /orgUnitPath*
             required: true
             type: string
         responses:
@@ -207,7 +207,7 @@ paths:
             schema:
               $ref: '#/definitions/OrgUnit'
           - in: path
-            name: '/orgUnitPath*'
+            name: /orgUnitPath*
             required: true
             type: string
         responses:
@@ -242,7 +242,7 @@ paths:
             schema:
               $ref: '#/definitions/OrgUnit'
           - in: path
-            name: '/orgUnitPath*'
+            name: /orgUnitPath*
             required: true
             type: string
         responses:
