@@ -3,7 +3,7 @@ schemes:
   - https
 host: 'smart-me.com:443'
 info:
-  description: "With the smart-me REST API you get Access to all your devices in the smart-me Cloud and you can add your own devices. So it's a easy way to add the smart-me Cloud support to your Hardware or Software Product."
+  description: With the smart-me REST API you get Access to all your devices in the smart-me Cloud and you can add your own devices. So it's a easy way to add the smart-me Cloud support to your Hardware or Software Product.
   title: smart-me
   version: v1
   x-logo:
@@ -22,7 +22,7 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "Gets a Device by it's Serial Number. The Serial is the part before the \"-\"."
+      description: Gets a Device by it's Serial Number. The Serial is the part before the "-".
       parameters:
         - description: The Serial Number of the device
           format: int64
@@ -40,7 +40,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/Device'
-      summary: "Gets a Device by it's Serial Number. The Serial is the part before the \"-\"."
+      summary: Gets a Device by it's Serial Number. The Serial is the part before the "-".
       tags:
         - DeviceBySerial
   /api/Devices:
@@ -91,14 +91,14 @@ paths:
             $ref: '#/definitions/DeviceToPost'
         '401':
           description: Unauthorized
-      summary: "Creates or updates a Device or updates it's values."
+      summary: Creates or updates a Device or updates it's values.
       tags:
         - Devices
   '/api/Devices/{id}':
     get:
       consumes: []
       deprecated: false
-      description: "Gets a Device by it's ID"
+      description: Gets a Device by it's ID
       parameters:
         - description: The ID of the device
           in: path
@@ -115,7 +115,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/Device'
-      summary: "Gets a Device by it's ID"
+      summary: Gets a Device by it's ID
       tags:
         - Devices
     put:

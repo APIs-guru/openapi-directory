@@ -174,7 +174,7 @@ paths:
           in: query
           name: pageSize
           type: integer
-        - description: "Set this to the 'next_page_token' field of a previous response to request additional results in a long list."
+        - description: Set this to the 'next_page_token' field of a previous response to request additional results in a long list.
           in: query
           name: pageToken
           type: string
@@ -335,7 +335,7 @@ paths:
           name: jobId
           required: true
           type: string
-        - description: 'Filter to only get messages with importance >= level'
+        - description: Filter to only get messages with importance >= level
           enum:
             - JOB_MESSAGE_IMPORTANCE_UNKNOWN
             - JOB_MESSAGE_DEBUG
@@ -497,7 +497,7 @@ paths:
       description: Reports the status of dataflow WorkItems leased by a worker.
       operationId: dataflow.projects.jobs.workItems.reportStatus
       parameters:
-        - description: "The project which owns the WorkItem's job."
+        - description: The project which owns the WorkItem's job.
           in: path
           name: projectId
           required: true
@@ -636,7 +636,7 @@ definitions:
     description: Data disk assignment for a given VM instance.
     properties:
       dataDisks:
-        description: "Mounted data disks. The order is important a data disk's 0-based index in this list defines which persistent directory the disk is mounted to, for example the list of { \"myproject-1014-104817-4c2-harness-0-disk-0\" }, { \"myproject-1014-104817-4c2-harness-0-disk-1\" }."
+        description: 'Mounted data disks. The order is important a data disk''s 0-based index in this list defines which persistent directory the disk is mounted to, for example the list of { "myproject-1014-104817-4c2-harness-0-disk-0" }, { "myproject-1014-104817-4c2-harness-0-disk-1" }.'
         items:
           type: string
         type: array
@@ -676,7 +676,7 @@ definitions:
         type: integer
     type: object
   DynamicSourceSplit:
-    description: "When a task splits using WorkItemStatus.dynamic_source_split, this message describes the two parts of the split relative to the description of the current task's input."
+    description: 'When a task splits using WorkItemStatus.dynamic_source_split, this message describes the two parts of the split relative to the description of the current task''s input.'
     properties:
       primary:
         $ref: '#/definitions/DerivedSource'
@@ -723,7 +723,7 @@ definitions:
         description: A structure describing which components and their versions of the service are required in order to run the job.
         type: object
       workerPools:
-        description: 'Worker pools. At least one "harness" worker pool must be specified in order for the job to have workers.'
+        description: Worker pools. At least one "harness" worker pool must be specified in order for the job to have workers.
         items:
           $ref: '#/definitions/WorkerPool'
         type: array
@@ -745,7 +745,7 @@ definitions:
         format: int32
         type: integer
       producerInstructionIndex:
-        description: "The index (origin zero) of the parallel instruction that produces the output to be consumed by this input. This index is relative to the list of instructions in this input's instruction's containing MapTask."
+        description: The index (origin zero) of the parallel instruction that produces the output to be consumed by this input. This index is relative to the list of instructions in this input's instruction's containing MapTask.
         format: int32
         type: integer
     type: object
@@ -768,7 +768,7 @@ definitions:
     description: Defines a job to be run by the Dataflow service.
     properties:
       clientRequestId:
-        description: "Client's unique identifier of the job, re-used by SDK across retried attempts. If this field is set, the service will ensure its uniqueness. That is, the request to create a job will fail if the service has knowledge of a previously submitted job with the same client's id and job name. The caller may, for example, use this field to ensure idempotence of job creation across retried attempts to create a job. By default, the field is empty and, in that case, the service ignores it."
+        description: 'Client''s unique identifier of the job, re-used by SDK across retried attempts. If this field is set, the service will ensure its uniqueness. That is, the request to create a job will fail if the service has knowledge of a previously submitted job with the same client''s id and job name. The caller may, for example, use this field to ensure idempotence of job creation across retried attempts to create a job. By default, the field is empty and, in that case, the service ignores it.'
         type: string
       createTime:
         description: 'Timestamp when job was initially created. Immutable, set by the Dataflow service.'
@@ -811,7 +811,7 @@ definitions:
         description: 'If another job is an update of this job (and thus, this job is in JOB_STATE_UPDATED), this field will contain the ID of that job.'
         type: string
       requestedState:
-        description: "The job's requested state. UpdateJob may be used to switch between the JOB_STATE_STOPPED and JOB_STATE_RUNNING states, by setting requested_state. UpdateJob may also be used to directly set a job's requested state to JOB_STATE_CANCELLED or JOB_STATE_DONE, irrevocably terminating the job if it has not already reached a terminal state."
+        description: 'The job''s requested state. UpdateJob may be used to switch between the JOB_STATE_STOPPED and JOB_STATE_RUNNING states, by setting requested_state. UpdateJob may also be used to directly set a job''s requested state to JOB_STATE_CANCELLED or JOB_STATE_DONE, irrevocably terminating the job if it has not already reached a terminal state.'
         enum:
           - JOB_STATE_UNKNOWN
           - JOB_STATE_STOPPED
@@ -988,7 +988,7 @@ definitions:
         type: string
     type: object
   MapTask:
-    description: "MapTask consists of an ordered set of instructions, each of which describes one particular low-level operation for the worker to perform in order to accomplish the MapTask's WorkItem. Each instruction must appear in the list before any instructions which depends on its output."
+    description: 'MapTask consists of an ordered set of instructions, each of which describes one particular low-level operation for the worker to perform in order to accomplish the MapTask''s WorkItem. Each instruction must appear in the list before any instructions which depends on its output.'
     properties:
       instructions:
         description: The instructions in the MapTask.
@@ -1016,7 +1016,7 @@ definitions:
         description: Worker-defined metric name.
         type: string
       origin:
-        description: 'Origin (namespace) of metric name. May be blank for user-define metrics; will be "dataflow" for metrics defined by the Dataflow service or SDK.'
+        description: Origin (namespace) of metric name. May be blank for user-define metrics; will be "dataflow" for metrics defined by the Dataflow service or SDK.
         type: string
     type: object
   MetricUpdate:
@@ -1031,16 +1031,16 @@ definitions:
         description: 'Metric aggregation kind. The possible metric aggregation kinds are "Sum", "Max", "Min", "Mean", "Set", "And", and "Or". The specified aggregation kind is case-insensitive. If omitted, this is not an aggregated value but instead a single metric sample value.'
         type: string
       meanCount:
-        description: 'Worker-computed aggregate value for the "Mean" aggregation kind. This holds the count of the aggregated values and is used in combination with mean_sum above to obtain the actual mean aggregate value. The only possible value type is Long.'
+        description: Worker-computed aggregate value for the "Mean" aggregation kind. This holds the count of the aggregated values and is used in combination with mean_sum above to obtain the actual mean aggregate value. The only possible value type is Long.
       meanSum:
-        description: 'Worker-computed aggregate value for the "Mean" aggregation kind. This holds the sum of the aggregated values and is used in combination with mean_count below to obtain the actual mean aggregate value. The only possible value types are Long and Double.'
+        description: Worker-computed aggregate value for the "Mean" aggregation kind. This holds the sum of the aggregated values and is used in combination with mean_count below to obtain the actual mean aggregate value. The only possible value types are Long and Double.
       name:
         $ref: '#/definitions/MetricStructuredName'
         description: Name of the metric.
       scalar:
         description: 'Worker-computed aggregate value for aggregation kinds "Sum", "Max", "Min", "And", and "Or". The possible value types are Long, Double, and Boolean.'
       set:
-        description: "Worker-computed aggregate value for the \"Set\" aggregation kind. The only possible value type is a list of Values whose type can be Long, Double, or String, according to the metric's type. All Values in the list must be of the same type."
+        description: 'Worker-computed aggregate value for the "Set" aggregation kind. The only possible value type is a list of Values whose type can be Long, Double, or String, according to the metric''s type. All Values in the list must be of the same type.'
       updateTime:
         description: Timestamp associated with the metric value. Optional when workers are reporting work progress; it will be filled in responses from the metrics API.
         type: string
@@ -1060,7 +1060,7 @@ definitions:
         type: string
     type: object
   Package:
-    description: "Packages that need to be installed in order for a worker to run the steps of the Dataflow job which will be assigned to its worker pool. This is the mechanism by which the SDK causes code to be loaded onto the workers. For example, the Dataflow Java SDK might use this to install jars containing the user's code and all of the various dependencies (libraries, data files, etc) required in order for that code to run."
+    description: 'Packages that need to be installed in order for a worker to run the steps of the Dataflow job which will be assigned to its worker pool. This is the mechanism by which the SDK causes code to be loaded onto the workers. For example, the Dataflow Java SDK might use this to install jars containing the user''s code and all of the various dependencies (libraries, data files, etc) required in order for that code to run.'
     properties:
       location:
         description: 'The resource to read the package from. The supported resource type is: Google Cloud Storage: storage.googleapis.com/{bucket} bucket.storage.googleapis.com/'
@@ -1229,7 +1229,7 @@ definitions:
         type: array
     type: object
   ReportedParallelism:
-    description: "Represents the level of parallelism in a WorkItem's input, reported by the worker."
+    description: 'Represents the level of parallelism in a WorkItem''s input, reported by the worker.'
     properties:
       isInfinite:
         description: 'Specifies whether the parallelism is infinite. If true, "value" is ignored. Infinite parallelism means the service will assume that the work item can always be split into more non-empty work items by dynamic splitting. This is a work-around for lack of support for infinity by the current JSON-based Java RPC stack.'
@@ -1353,11 +1353,11 @@ definitions:
         description: The codec to use to decode data read from the source.
         type: object
       doesNotNeedSplitting:
-        description: "Setting this value to true hints to the framework that the source doesn't need splitting, and using SourceSplitRequest on it would yield SOURCE_SPLIT_OUTCOME_USE_CURRENT. E.g. a file splitter may set this to true when splitting a single file into a set of byte ranges of appropriate size, and set this to false when splitting a filepattern into individual files. However, for efficiency, a file splitter may decide to produce file subranges directly from the filepattern to avoid a splitting round-trip. See SourceSplitRequest for an overview of the splitting process. This field is meaningful only in the Source objects populated by the user (e.g. when filling in a DerivedSource). Source objects supplied by the framework to the user don't have this field populated."
+        description: 'Setting this value to true hints to the framework that the source doesn''t need splitting, and using SourceSplitRequest on it would yield SOURCE_SPLIT_OUTCOME_USE_CURRENT. E.g. a file splitter may set this to true when splitting a single file into a set of byte ranges of appropriate size, and set this to false when splitting a filepattern into individual files. However, for efficiency, a file splitter may decide to produce file subranges directly from the filepattern to avoid a splitting round-trip. See SourceSplitRequest for an overview of the splitting process. This field is meaningful only in the Source objects populated by the user (e.g. when filling in a DerivedSource). Source objects supplied by the framework to the user don''t have this field populated.'
         type: boolean
       metadata:
         $ref: '#/definitions/SourceMetadata'
-        description: "Optionally, metadata for this source can be supplied right away, avoiding a SourceGetMetadataOperation roundtrip (see SourceOperationRequest). This field is meaningful only in the Source objects populated by the user (e.g. when filling in a DerivedSource). Source objects supplied by the framework to the user don't have this field populated."
+        description: 'Optionally, metadata for this source can be supplied right away, avoiding a SourceGetMetadataOperation roundtrip (see SourceOperationRequest). This field is meaningful only in the Source objects populated by the user (e.g. when filling in a DerivedSource). Source objects supplied by the framework to the user don''t have this field populated.'
       spec:
         additionalProperties:
           description: Properties of the object.
@@ -1441,7 +1441,7 @@ definitions:
         type: string
     type: object
   SourceSplitRequest:
-    description: "Represents the operation to split a high-level Source specification into bundles (parts for parallel processing). At a high level, splitting of a source into bundles happens as follows: SourceSplitRequest is applied to the source. If it returns SOURCE_SPLIT_OUTCOME_USE_CURRENT, no further splitting happens and the source is used \"as is\". Otherwise, splitting is applied recursively to each produced DerivedSource. As an optimization, for any Source, if its does_not_need_splitting is true, the framework assumes that splitting this source would return SOURCE_SPLIT_OUTCOME_USE_CURRENT, and doesn't initiate a SourceSplitRequest. This applies both to the initial source being split and to bundles produced from it."
+    description: 'Represents the operation to split a high-level Source specification into bundles (parts for parallel processing). At a high level, splitting of a source into bundles happens as follows: SourceSplitRequest is applied to the source. If it returns SOURCE_SPLIT_OUTCOME_USE_CURRENT, no further splitting happens and the source is used "as is". Otherwise, splitting is applied recursively to each produced DerivedSource. As an optimization, for any Source, if its does_not_need_splitting is true, the framework assumes that splitting this source would return SOURCE_SPLIT_OUTCOME_USE_CURRENT, and doesn''t initiate a SourceSplitRequest. This applies both to the initial source being split and to bundles produced from it.'
     properties:
       options:
         $ref: '#/definitions/SourceSplitOptions'
@@ -1515,7 +1515,7 @@ definitions:
         type: string
     type: object
   Step:
-    description: "Defines a particular step within a Dataflow job. A job consists of multiple steps, each of which performs some specific operation as part of the overall job. Data is typically passed from one step to another as part of the job. Here's an example of a sequence of steps which together implement a Map-Reduce job: * Read a collection of data from some source, parsing the collection's elements. * Validate the elements. * Apply a user-defined function to map each element to some value and extract an element-specific key value. * Group elements with the same key into a single element with that key, transforming a multiply-keyed collection into a uniquely-keyed collection. * Write the elements out to some data sink. (Note that the Dataflow service may be used to run many different types of jobs, not just Map-Reduce)."
+    description: 'Defines a particular step within a Dataflow job. A job consists of multiple steps, each of which performs some specific operation as part of the overall job. Data is typically passed from one step to another as part of the job. Here''s an example of a sequence of steps which together implement a Map-Reduce job: * Read a collection of data from some source, parsing the collection''s elements. * Validate the elements. * Apply a user-defined function to map each element to some value and extract an element-specific key value. * Group elements with the same key into a single element with that key, transforming a multiply-keyed collection into a uniquely-keyed collection. * Write the elements out to some data sink. (Note that the Dataflow service may be used to run many different types of jobs, not just Map-Reduce).'
     properties:
       kind:
         description: The kind of step in the dataflow Job.
@@ -1661,10 +1661,10 @@ definitions:
         description: Streaming worker main class name.
         type: string
       taskGroup:
-        description: 'The UNIX group ID on the worker VM to use for tasks launched by taskrunner; e.g. "wheel".'
+        description: The UNIX group ID on the worker VM to use for tasks launched by taskrunner; e.g. "wheel".
         type: string
       taskUser:
-        description: 'The UNIX user ID on the worker VM to use for tasks launched by taskrunner; e.g. "root".'
+        description: The UNIX user ID on the worker VM to use for tasks launched by taskrunner; e.g. "root".
         type: string
       tempStoragePrefix:
         description: 'The prefix of the resources the taskrunner should use for temporary storage. The supported resource type is: Google Cloud Storage: storage.googleapis.com/{bucket}/{object} bucket.storage.googleapis.com/{object}'
@@ -1754,7 +1754,7 @@ definitions:
         description: Additional information for StreamingSetupTask WorkItems.
     type: object
   WorkItemServiceState:
-    description: "The Dataflow service's idea of the current state of a WorkItem being processed by a worker."
+    description: The Dataflow service's idea of the current state of a WorkItem being processed by a worker.
     properties:
       harnessData:
         additionalProperties:
@@ -1782,7 +1782,7 @@ definitions:
         description: 'Obsolete, always empty.'
     type: object
   WorkItemStatus:
-    description: "Conveys a worker's progress through the work described by a WorkItem."
+    description: Conveys a worker's progress through the work described by a WorkItem.
     properties:
       completed:
         description: True if the WorkItem was completed (successfully or unsuccessfully).
@@ -1804,12 +1804,12 @@ definitions:
         $ref: '#/definitions/ApproximateProgress'
         description: DEPRECATED in favor of reported_progress.
       reportIndex:
-        description: "The report index. When a WorkItem is leased, the lease will contain an initial report index. When a WorkItem's status is reported to the system, the report should be sent with that report index, and the response will contain the index the worker should use for the next report. Reports received with unexpected index values will be rejected by the service. In order to preserve idempotency, the worker should not alter the contents of a report, even if the worker must submit the same report multiple times before getting back a response. The worker should not submit a subsequent report until the response for the previous report had been received from the service."
+        description: 'The report index. When a WorkItem is leased, the lease will contain an initial report index. When a WorkItem''s status is reported to the system, the report should be sent with that report index, and the response will contain the index the worker should use for the next report. Reports received with unexpected index values will be rejected by the service. In order to preserve idempotency, the worker should not alter the contents of a report, even if the worker must submit the same report multiple times before getting back a response. The worker should not submit a subsequent report until the response for the previous report had been received from the service.'
         format: int64
         type: string
       reportedProgress:
         $ref: '#/definitions/ApproximateReportedProgress'
-        description: "The worker's progress through this WorkItem."
+        description: The worker's progress through this WorkItem.
       requestedLeaseDuration:
         description: Amount of time the worker requests for its lease.
         type: string
@@ -1821,7 +1821,7 @@ definitions:
         description: 'If the work item represented a SourceOperationRequest, and the work is completed, contains the result of the operation.'
       stopPosition:
         $ref: '#/definitions/Position'
-        description: "A worker may split an active map task in two parts, \"primary\" and \"residual\", continuing to process the primary part and returning the residual part into the pool of available work. This event is called a \"dynamic split\" and is critical to the dynamic work rebalancing feature. The two obtained sub-tasks are called \"parts\" of the split. The parts, if concatenated, must represent the same input as would be read by the current task if the split did not happen. The exact way in which the original task is decomposed into the two parts is specified either as a position demarcating them (stop_position), or explicitly as two DerivedSources, if this task consumes a user-defined source type (dynamic_source_split). The \"current\" task is adjusted as a result of the split: after a task with range [A, B) sends a stop_position update at C, its range is considered to be [A, C), e.g.: * Progress should be interpreted relative to the new range, e.g. \"75% completed\" means \"75% of [A, C) completed\" * The worker should interpret proposed_stop_position relative to the new range, e.g. \"split at 68%\" should be interpreted as \"split at 68% of [A, C)\". * If the worker chooses to split again using stop_position, only stop_positions in [A, C) will be accepted. * Etc. dynamic_source_split has similar semantics: e.g., if a task with source S splits using dynamic_source_split into {P, R} (where P and R must be together equivalent to S), then subsequent progress and proposed_stop_position should be interpreted relative to P, and in a potential subsequent dynamic_source_split into {P', R'}, P' and R' must be together equivalent to P, etc."
+        description: 'A worker may split an active map task in two parts, "primary" and "residual", continuing to process the primary part and returning the residual part into the pool of available work. This event is called a "dynamic split" and is critical to the dynamic work rebalancing feature. The two obtained sub-tasks are called "parts" of the split. The parts, if concatenated, must represent the same input as would be read by the current task if the split did not happen. The exact way in which the original task is decomposed into the two parts is specified either as a position demarcating them (stop_position), or explicitly as two DerivedSources, if this task consumes a user-defined source type (dynamic_source_split). The "current" task is adjusted as a result of the split: after a task with range [A, B) sends a stop_position update at C, its range is considered to be [A, C), e.g.: * Progress should be interpreted relative to the new range, e.g. "75% completed" means "75% of [A, C) completed" * The worker should interpret proposed_stop_position relative to the new range, e.g. "split at 68%" should be interpreted as "split at 68% of [A, C)". * If the worker chooses to split again using stop_position, only stop_positions in [A, C) will be accepted. * Etc. dynamic_source_split has similar semantics: e.g., if a task with source S splits using dynamic_source_split into {P, R} (where P and R must be together equivalent to S), then subsequent progress and proposed_stop_position should be interpreted relative to P, and in a potential subsequent dynamic_source_split into {P'', R''}, P'' and R'' must be together equivalent to P, etc.'
       workItemId:
         description: Identifies the WorkItem.
         type: string
@@ -1880,7 +1880,7 @@ definitions:
       parameters:
         additionalProperties:
           description: Properties of the object.
-        description: "Parameters contains specific information about the code. This is a struct to allow parameters of different types. Examples: 1. For a \"HARNESS_STARTED\" message parameters might provide the name of the worker and additional data like timing information. 2. For a \"GCS_DOWNLOAD_ERROR\" parameters might contain fields listing the GCS objects being downloaded and fields containing errors. In general complex data structures should be avoided. If a worker needs to send a specific and complicated data structure then please consider defining a new proto and adding it to the data oneof in WorkerMessageResponse. Conventions: Parameters should only be used for information that isn't typically passed as a label. hostname and other worker identifiers should almost always be passed as labels since they will be included on most messages."
+        description: 'Parameters contains specific information about the code. This is a struct to allow parameters of different types. Examples: 1. For a "HARNESS_STARTED" message parameters might provide the name of the worker and additional data like timing information. 2. For a "GCS_DOWNLOAD_ERROR" parameters might contain fields listing the GCS objects being downloaded and fields containing errors. In general complex data structures should be avoided. If a worker needs to send a specific and complicated data structure then please consider defining a new proto and adding it to the data oneof in WorkerMessageResponse. Conventions: Parameters should only be used for information that isn''t typically passed as a label. hostname and other worker identifiers should almost always be passed as labels since they will be included on most messages.'
         type: object
     type: object
   WorkerMessageResponse:
@@ -1888,7 +1888,7 @@ definitions:
     properties:
       workerHealthReportResponse:
         $ref: '#/definitions/WorkerHealthReportResponse'
-        description: "The service's response to a worker's health report."
+        description: The service's response to a worker's health report.
     type: object
   WorkerPool:
     description: 'Describes one particular pool of Dataflow workers to be instantiated by the Dataflow service in order to perform the computations required by a job. Note that a workflow job may use multiple pools, in order to match the various computational requirements of the various stages of the job.'
@@ -1920,7 +1920,7 @@ definitions:
         description: 'Type of root disk for VMs. If empty or unspecified, the service will attempt to choose a reasonable default.'
         type: string
       kind:
-        description: "The kind of the worker pool; currently only 'harness' and 'shuffle' are supported."
+        description: The kind of the worker pool; currently only 'harness' and 'shuffle' are supported.
         type: string
       machineType:
         description: 'Machine type (e.g. "n1-standard-1"). If empty or unspecified, the service will attempt to choose a reasonable default.'
@@ -1961,7 +1961,7 @@ definitions:
         $ref: '#/definitions/TaskRunnerSettings'
         description: Settings passed through to Google Compute Engine workers when using the standard Dataflow task runner. Users should ignore this field.
       teardownPolicy:
-        description: "Sets the policy for determining when to turndown worker pool. Allowed values are: TEARDOWN_ALWAYS, TEARDOWN_ON_SUCCESS, and TEARDOWN_NEVER. TEARDOWN_ALWAYS means workers are always torn down regardless of whether the job succeeds. TEARDOWN_ON_SUCCESS means workers are torn down if the job succeeds. TEARDOWN_NEVER means the workers are never torn down. If the workers are not torn down by the service, they will continue to run and use Google Compute Engine VM resources in the user's project until they are explicitly terminated by the user. Because of this, Google recommends using the TEARDOWN_ALWAYS policy except for small, manually supervised test jobs. If unknown or unspecified, the service will attempt to choose a reasonable default."
+        description: 'Sets the policy for determining when to turndown worker pool. Allowed values are: TEARDOWN_ALWAYS, TEARDOWN_ON_SUCCESS, and TEARDOWN_NEVER. TEARDOWN_ALWAYS means workers are always torn down regardless of whether the job succeeds. TEARDOWN_ON_SUCCESS means workers are torn down if the job succeeds. TEARDOWN_NEVER means the workers are never torn down. If the workers are not torn down by the service, they will continue to run and use Google Compute Engine VM resources in the user''s project until they are explicitly terminated by the user. Because of this, Google recommends using the TEARDOWN_ALWAYS policy except for small, manually supervised test jobs. If unknown or unspecified, the service will attempt to choose a reasonable default.'
         enum:
           - TEARDOWN_POLICY_UNKNOWN
           - TEARDOWN_ALWAYS

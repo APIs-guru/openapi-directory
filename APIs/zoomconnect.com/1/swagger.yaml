@@ -4,7 +4,7 @@ schemes:
 host: www.zoomconnect.com
 basePath: /app
 info:
-  description: "The world's greatest SMS API"
+  description: The world's greatest SMS API
   title: Zoom Connect
   version: '1'
   x-logo:
@@ -36,7 +36,7 @@ paths:
         - application/json
         - application/xml
       deprecated: false
-      description: "Returns your account's credit balance"
+      description: Returns your account's credit balance
       produces:
         - application/json
         - application/xml
@@ -653,7 +653,7 @@ paths:
         - application/json
         - application/xml
       deprecated: false
-      description: 'Sends a single message. The <i>recipientNumber</i> and <i>message</i> fields are required. All other fields are optional.'
+      description: Sends a single message. The <i>recipientNumber</i> and <i>message</i> fields are required. All other fields are optional.
       parameters:
         - description: request
           in: body
@@ -746,7 +746,7 @@ paths:
         - application/json
         - application/xml
       deprecated: false
-      description: 'Send a single message using URL parameters.The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional.'
+      description: Send a single message using URL parameters.The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional.
       parameters:
         - description: the phone number of the recipient to send to
           in: query
@@ -797,7 +797,7 @@ paths:
         - application/json
         - application/xml
       deprecated: false
-      description: 'Send a single message using URL parameters.The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional.'
+      description: Send a single message using URL parameters.The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional.
       parameters:
         - description: the phone number of the recipient to send to
           in: query

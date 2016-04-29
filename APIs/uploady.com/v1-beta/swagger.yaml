@@ -427,7 +427,9 @@ paths:
         - users
   /users/logout:
     post:
-      description: "Logout user. User will be detached from access token. \n Implicit grant does not provide a refresh token, but provided access token will be destroyed."
+      description: |-
+        Logout user. User will be detached from access token. 
+         Implicit grant does not provide a refresh token, but provided access token will be destroyed.
       parameters:
         - description: Refresh token to be deleted
           in: formData

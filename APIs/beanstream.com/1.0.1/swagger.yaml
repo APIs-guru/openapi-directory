@@ -687,7 +687,7 @@ definitions:
         format: integer
         type: number
       created:
-        description: "The date it was created '2015-04-22T10:03:19.323-07:00'"
+        description: 'The date it was created ''2015-04-22T10:03:19.323-07:00'''
         type: string
       id:
         format: integer
@@ -861,7 +861,7 @@ definitions:
         description: 'characters (16). Http method. post, put, get etc.'
         type: string
       ref:
-        description: 'characters (16). Eg. "void" or "return"'
+        description: characters (16). Eg. "void" or "return"
         type: string
   PaymentProfile:
     properties:
@@ -910,7 +910,7 @@ definitions:
         description: The billing address
       card:
         $ref: '#/definitions/Card'
-        description: "Payment with a credit card. The payment_method must be 'card'"
+        description: Payment with a credit card. The payment_method must be 'card'
       comments:
         description: alphanumeric (256)
         type: string
@@ -930,7 +930,7 @@ definitions:
         type: string
       payment_profile:
         $ref: '#/definitions/ProfilePurchase'
-        description: "Payment with a Payment Profile. The payment_method must be 'payment_profile'"
+        description: Payment with a Payment Profile. The payment_method must be 'payment_profile'
       shipping:
         $ref: '#/definitions/Address'
         description: The shipping address
@@ -939,7 +939,7 @@ definitions:
         type: string
       token:
         $ref: '#/definitions/TokenPurchase'
-        description: "Payment with a Legato token. The payment_method must be 'token'"
+        description: Payment with a Legato token. The payment_method must be 'token'
     required:
       - amount
       - payment_method
@@ -1116,7 +1116,7 @@ definitions:
           $ref: '#/definitions/Criteria'
         type: array
       end_date:
-        description: "The end date (inclusive) '2015-04-22T10:03:19' in the timezone of your merchant account."
+        description: 'The end date (inclusive) ''2015-04-22T10:03:19'' in the timezone of your merchant account.'
         type: string
       end_row:
         default: 2
@@ -1124,10 +1124,10 @@ definitions:
         format: integer
         type: number
       name:
-        description: "Only accepts 2 values. Can be either 'Search' for all fields or 'TransHistoryMinimal' for a subset of the fields returned in the results."
+        description: Only accepts 2 values. Can be either 'Search' for all fields or 'TransHistoryMinimal' for a subset of the fields returned in the results.
         type: string
       start_date:
-        description: "The start date (inclusive) '2015-04-22T10:03:19' in the timezone of your merchant account."
+        description: 'The start date (inclusive) ''2015-04-22T10:03:19'' in the timezone of your merchant account.'
         type: string
       start_row:
         default: 1
@@ -1236,7 +1236,7 @@ definitions:
       trn_ip:
         type: string
       trn_masked_card:
-        description: "The credit card with the middle digits redacted with X's"
+        description: The credit card with the middle digits redacted with X's
         type: string
       trn_order_number:
         type: string
@@ -1333,7 +1333,7 @@ definitions:
       comments:
         type: string
       created:
-        description: "The date it was created '2015-04-22T10:03:19.323-07:00'"
+        description: 'The date it was created ''2015-04-22T10:03:19.323-07:00'''
         type: string
       custom:
         $ref: '#/definitions/Custom'

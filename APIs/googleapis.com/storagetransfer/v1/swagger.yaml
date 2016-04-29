@@ -240,7 +240,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
     patch:
-      description: "Updates a transfer job. Updating a job's transfer spec does not affect transfer operations that are running already. Updating the scheduling of a job is not allowed."
+      description: Updates a transfer job. Updating a job's transfer spec does not affect transfer operations that are running already. Updating the scheduling of a job is not allowed.
       operationId: storagetransfer.transferJobs.patch
       parameters:
         - description: The name of job to update. Required.
@@ -285,7 +285,7 @@ paths:
       tags:
         - transferOperations
     get:
-      description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding below allows API services to override the binding to use different resource name schemes, such as `users/*/operations`."
+      description: 'Lists operations that match the specified filter in the request. If the server doesn''t support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding below allows API services to override the binding to use different resource name schemes, such as `users/*/operations`.'
       operationId: storagetransfer.transferOperations.list
       parameters:
         - description: The value `transferOperations`.
@@ -488,7 +488,7 @@ definitions:
         type: string
     type: object
   AwsS3Data:
-    description: "An AwsS3Data can be a data source, but not a data sink. In an AwsS3Data, an object's name is the S3 object's key name."
+    description: 'An AwsS3Data can be a data source, but not a data sink. In an AwsS3Data, an object''s name is the S3 object''s key name.'
     properties:
       awsAccessKey:
         $ref: '#/definitions/AwsAccessKey'
@@ -563,7 +563,7 @@ definitions:
         type: array
     type: object
   GcsData:
-    description: "In a GcsData, an object's name is the Google Cloud Storage object's name and its `lastModificationTime` refers to the object's updated time, which changes when the content or the metadata of the object is updated."
+    description: 'In a GcsData, an object''s name is the Google Cloud Storage object''s name and its `lastModificationTime` refers to the object''s updated time, which changes when the content or the metadata of the object is updated.'
     properties:
       bucketName:
         description: 'Google Cloud Storage bucket name (see [Bucket Name Requirements](https://cloud.google.com/storage/docs/bucket-naming#requirements)). Required.'
@@ -881,10 +881,10 @@ definitions:
         description: An HTTP URL data source.
       objectConditions:
         $ref: '#/definitions/ObjectConditions'
-        description: "Only objects that satisfy these object conditions are included in the set of data source and data sink objects. Object conditions based on objects' `lastModificationTime` do not exclude objects in a data sink."
+        description: Only objects that satisfy these object conditions are included in the set of data source and data sink objects. Object conditions based on objects' `lastModificationTime` do not exclude objects in a data sink.
       transferOptions:
         $ref: '#/definitions/TransferOptions'
-        description: "If the option `deleteObjectsUniqueInSink` is `true`, object conditions based on objects' `lastModificationTime` are ignored and do not exclude objects in a data source or a data sink."
+        description: 'If the option `deleteObjectsUniqueInSink` is `true`, object conditions based on objects'' `lastModificationTime` are ignored and do not exclude objects in a data source or a data sink.'
     type: object
   UpdateTransferJobRequest:
     description: Request passed to UpdateTransferJob.

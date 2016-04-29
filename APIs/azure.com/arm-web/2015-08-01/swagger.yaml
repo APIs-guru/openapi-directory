@@ -694,7 +694,7 @@ paths:
           in: query
           name: featured
           type: boolean
-        - description: "Return only channels specified in the filter. Filter is specified by using OData syntax. Example: $filter=channels eq 'Api' or channel eq 'Notification'"
+        - description: 'Return only channels specified in the filter. Filter is specified by using OData syntax. Example: $filter=channels eq ''Api'' or channel eq ''Notification'''
           in: query
           name: $filter
           type: string
@@ -950,7 +950,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/CertificateOrderCertificate'
-      summary: "Associates a Key Vault secret to a certificate store that will be used for storing the certificate once it's ready"
+      summary: Associates a Key Vault secret to a certificate store that will be used for storing the certificate once it's ready
       tags:
         - CertificateOrders
     put:
@@ -994,7 +994,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/CertificateOrderCertificate'
-      summary: "Associates a Key Vault secret to a certificate store that will be used for storing the certificate once it's ready"
+      summary: Associates a Key Vault secret to a certificate store that will be used for storing the certificate once it's ready
       tags:
         - CertificateOrders
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}':
@@ -2384,7 +2384,7 @@ paths:
           in: query
           name: details
           type: boolean
-        - description: "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'."
+        - description: 'Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq ''Metric1'' or name.value eq ''Metric2'') and startTime eq ''2014-01-01T00:00:00Z'' and endTime eq ''2014-12-31T23:59:59Z'' and timeGrain eq duration''[Hour|Minute|Day]''.'
           in: query
           name: $filter
           type: string
@@ -2527,7 +2527,7 @@ paths:
           name: name
           required: true
           type: string
-        - description: 'Name of instance in the multiRole pool&gt;'
+        - description: Name of instance in the multiRole pool&gt;
           in: path
           name: instance
           required: true
@@ -2648,7 +2648,7 @@ paths:
           in: query
           name: details
           type: boolean
-        - description: "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'."
+        - description: 'Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq ''Metric1'' or name.value eq ''Metric2'') and startTime eq ''2014-01-01T00:00:00Z'' and endTime eq ''2014-12-31T23:59:59Z'' and timeGrain eq duration''[Hour|Minute|Day]''.'
           in: query
           name: $filter
           type: string
@@ -2981,7 +2981,7 @@ paths:
           name: name
           required: true
           type: string
-        - description: "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'."
+        - description: 'Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq ''Metric1'' or name.value eq ''Metric2'') and startTime eq ''2014-01-01T00:00:00Z'' and endTime eq ''2014-12-31T23:59:59Z'' and timeGrain eq duration''[Hour|Minute|Day]''.'
           in: query
           name: $filter
           type: string
@@ -3218,7 +3218,7 @@ paths:
           in: query
           name: details
           type: boolean
-        - description: "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'."
+        - description: 'Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq ''Metric1'' or name.value eq ''Metric2'') and startTime eq ''2014-01-01T00:00:00Z'' and endTime eq ''2014-12-31T23:59:59Z'' and timeGrain eq duration''[Hour|Minute|Day]''.'
           in: query
           name: $filter
           type: string
@@ -3296,7 +3296,7 @@ paths:
           in: query
           name: details
           type: boolean
-        - description: "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'."
+        - description: 'Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq ''Metric1'' or name.value eq ''Metric2'') and startTime eq ''2014-01-01T00:00:00Z'' and endTime eq ''2014-12-31T23:59:59Z'' and timeGrain eq duration''[Hour|Minute|Day]''.'
           in: query
           name: $filter
           type: string
@@ -3871,7 +3871,7 @@ paths:
           in: query
           name: details
           type: boolean
-        - description: "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'."
+        - description: 'Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq ''Metric1'' or name.value eq ''Metric2'') and startTime eq ''2014-01-01T00:00:00Z'' and endTime eq ''2014-12-31T23:59:59Z'' and timeGrain eq duration''[Hour|Minute|Day]''.'
           in: query
           name: $filter
           type: string
@@ -3904,7 +3904,7 @@ paths:
           name: name
           required: true
           type: string
-        - description: 'Id of Server farm operation"&gt;'
+        - description: Id of Server farm operation"&gt;
           in: path
           name: operationId
           required: true
@@ -4094,7 +4094,7 @@ paths:
           name: vnetName
           required: true
           type: string
-        - description: "Name of the gateway. Only the 'primary' gateway is supported."
+        - description: Name of the gateway. Only the 'primary' gateway is supported.
           in: path
           name: gatewayName
           required: true
@@ -4137,7 +4137,7 @@ paths:
           name: vnetName
           required: true
           type: string
-        - description: "The name of the gateway. Only 'primary' is supported."
+        - description: The name of the gateway. Only 'primary' is supported.
           in: path
           name: gatewayName
           required: true
@@ -4583,7 +4583,7 @@ paths:
           in: query
           name: forceDnsRegistration
           type: string
-        - description: "Time to live in seconds for web app's default domain name"
+        - description: Time to live in seconds for web app's default domain name
           in: query
           name: ttlInSeconds
           type: string
@@ -6307,7 +6307,7 @@ paths:
           in: query
           name: details
           type: boolean
-        - description: "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'."
+        - description: 'Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq ''Metric1'' or name.value eq ''Metric2'') and startTime eq ''2014-01-01T00:00:00Z'' and endTime eq ''2014-12-31T23:59:59Z'' and timeGrain eq duration''[Hour|Minute|Day]''.'
           in: query
           name: $filter
           type: string
@@ -6340,7 +6340,7 @@ paths:
           name: name
           required: true
           type: string
-        - description: 'The type of view. This can either be "summary" or "detailed".'
+        - description: The type of view. This can either be "summary" or "detailed".
           in: path
           name: view
           required: true
@@ -6881,7 +6881,7 @@ paths:
           in: query
           name: forceDnsRegistration
           type: string
-        - description: "Time to live in seconds for web app's default domain name"
+        - description: Time to live in seconds for web app's default domain name
           in: query
           name: ttlInSeconds
           type: string
@@ -8760,7 +8760,7 @@ paths:
           in: query
           name: details
           type: boolean
-        - description: "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'."
+        - description: 'Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq ''Metric1'' or name.value eq ''Metric2'') and startTime eq ''2014-01-01T00:00:00Z'' and endTime eq ''2014-12-31T23:59:59Z'' and timeGrain eq duration''[Hour|Minute|Day]''.'
           in: query
           name: $filter
           type: string
@@ -8793,7 +8793,7 @@ paths:
           name: name
           required: true
           type: string
-        - description: 'The type of view. This can either be "summary" or "detailed".'
+        - description: The type of view. This can either be "summary" or "detailed".
           in: path
           name: view
           required: true
@@ -9637,7 +9637,7 @@ paths:
           name: slot
           required: true
           type: string
-        - description: "Return only usages specified in the filter. Filter is specified by using OData syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'."
+        - description: 'Return only usages specified in the filter. Filter is specified by using OData syntax. Example: $filter=(name.value eq ''Metric1'' or name.value eq ''Metric2'') and startTime eq ''2014-01-01T00:00:00Z'' and endTime eq ''2014-12-31T23:59:59Z'' and timeGrain eq duration''[Hour|Minute|Day]''.'
           in: query
           name: $filter
           type: string
@@ -9819,7 +9819,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/VnetInfo'
-      summary: "Adds a Virtual Network Connection or updates it's properties."
+      summary: Adds a Virtual Network Connection or updates it's properties.
       tags:
         - Sites
     put:
@@ -9868,7 +9868,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/VnetInfo'
-      summary: "Adds a Virtual Network Connection or updates it's properties."
+      summary: Adds a Virtual Network Connection or updates it's properties.
       tags:
         - Sites
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/virtualNetworkConnections/{vnetName}/gateways/{gatewayName}':
@@ -9892,7 +9892,7 @@ paths:
           name: vnetName
           required: true
           type: string
-        - description: 'The name of the gateway. The only gateway that exists presently is "primary"'
+        - description: The name of the gateway. The only gateway that exists presently is "primary"
           in: path
           name: gatewayName
           required: true
@@ -9915,7 +9915,7 @@ paths:
           schema:
             $ref: '#/definitions/Object'
         '404':
-          description: 'Gateway does not exist. Only the "primary" gateway exists presently.'
+          description: Gateway does not exist. Only the "primary" gateway exists presently.
       summary: Retrieves a Virtual Network connection gateway associated with this web app and virtual network.
       tags:
         - Sites
@@ -9942,7 +9942,7 @@ paths:
           name: vnetName
           required: true
           type: string
-        - description: 'The name of the gateway. The only gateway that exists presently is "primary"'
+        - description: The name of the gateway. The only gateway that exists presently is "primary"
           in: path
           name: gatewayName
           required: true
@@ -9996,7 +9996,7 @@ paths:
           name: vnetName
           required: true
           type: string
-        - description: 'The name of the gateway. The only gateway that exists presently is "primary"'
+        - description: The name of the gateway. The only gateway that exists presently is "primary"
           in: path
           name: gatewayName
           required: true
@@ -10390,7 +10390,7 @@ paths:
           name: name
           required: true
           type: string
-        - description: "Return only usages specified in the filter. Filter is specified by using OData syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq '2014-01-01T00:00:00Z' and endTime eq '2014-12-31T23:59:59Z' and timeGrain eq duration'[Hour|Minute|Day]'."
+        - description: 'Return only usages specified in the filter. Filter is specified by using OData syntax. Example: $filter=(name.value eq ''Metric1'' or name.value eq ''Metric2'') and startTime eq ''2014-01-01T00:00:00Z'' and endTime eq ''2014-12-31T23:59:59Z'' and timeGrain eq duration''[Hour|Minute|Day]''.'
           in: query
           name: $filter
           type: string
@@ -10552,7 +10552,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/VnetInfo'
-      summary: "Adds a Virtual Network Connection or updates it's properties."
+      summary: Adds a Virtual Network Connection or updates it's properties.
       tags:
         - Sites
     put:
@@ -10596,7 +10596,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/VnetInfo'
-      summary: "Adds a Virtual Network Connection or updates it's properties."
+      summary: Adds a Virtual Network Connection or updates it's properties.
       tags:
         - Sites
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/virtualNetworkConnections/{vnetName}/gateways/{gatewayName}':
@@ -10620,7 +10620,7 @@ paths:
           name: vnetName
           required: true
           type: string
-        - description: 'The name of the gateway. The only gateway that exists presently is "primary"'
+        - description: The name of the gateway. The only gateway that exists presently is "primary"
           in: path
           name: gatewayName
           required: true
@@ -10638,7 +10638,7 @@ paths:
           schema:
             $ref: '#/definitions/Object'
         '404':
-          description: 'Gateway does not exist. Only the "primary" gateway exists presently.'
+          description: Gateway does not exist. Only the "primary" gateway exists presently.
       summary: Retrieves a Virtual Network connection gateway associated with this web app and virtual network.
       tags:
         - Sites
@@ -10665,7 +10665,7 @@ paths:
           name: vnetName
           required: true
           type: string
-        - description: 'The name of the gateway. The only gateway that exists presently is "primary"'
+        - description: The name of the gateway. The only gateway that exists presently is "primary"
           in: path
           name: gatewayName
           required: true
@@ -10714,7 +10714,7 @@ paths:
           name: vnetName
           required: true
           type: string
-        - description: 'The name of the gateway. The only gateway that exists presently is "primary"'
+        - description: The name of the gateway. The only gateway that exists presently is "primary"
           in: path
           name: gatewayName
           required: true
@@ -10756,11 +10756,11 @@ paths:
           name: siteName
           required: true
           type: string
-        - description: "The start time of a time range to query, e.g. $filter=startTime eq '2015-01-01T00:00:00Z' and endTime eq '2015-01-02T00:00:00Z'"
+        - description: 'The start time of a time range to query, e.g. $filter=startTime eq ''2015-01-01T00:00:00Z'' and endTime eq ''2015-01-02T00:00:00Z'''
           in: query
           name: startTime
           type: string
-        - description: "The end time of a time range to query, e.g. $filter=startTime eq '2015-01-01T00:00:00Z' and endTime eq '2015-01-02T00:00:00Z'"
+        - description: 'The end time of a time range to query, e.g. $filter=startTime eq ''2015-01-01T00:00:00Z'' and endTime eq ''2015-01-02T00:00:00Z'''
           in: query
           name: endTime
           type: string
@@ -11641,7 +11641,7 @@ definitions:
         x-ms-client-flatten: true
     type: object
   Contact:
-    description: "Contact information for domain registration. If 'Domain Privacy' option is not selected then the contact information will be  be made publicly available through the Whois directories as per ICANN requirements."
+    description: Contact information for domain registration. If 'Domain Privacy' option is not selected then the contact information will be  be made publicly available through the Whois directories as per ICANN requirements.
     properties:
       addressMailing:
         $ref: '#/definitions/Address'
@@ -11701,7 +11701,7 @@ definitions:
     description: Class containting details about site recovery operation.
     properties:
       recoverConfig:
-        description: "If true, then the website's configuration will be reverted to its state at SnapshotTime"
+        description: 'If true, then the website''s configuration will be reverted to its state at SnapshotTime'
         type: boolean
       siteName:
         description: '[Optional] Destination web app name into which web app should be recovered. This is case when new web app should be created instead.'
@@ -11855,7 +11855,7 @@ definitions:
             description: Name of gateway app associated with web app
             type: string
           hostNameSslStates:
-            description: "Hostname SSL states are  used to manage the SSL bindings for site's hostnames."
+            description: Hostname SSL states are  used to manage the SSL bindings for site's hostnames.
             items:
               $ref: '#/definitions/HostNameSslState'
             type: array
@@ -12151,7 +12151,7 @@ definitions:
         description: Post parameter key
         type: string
       postParameterValue:
-        description: "Post parameter value. Client should use 'application/x-www-form-urlencoded' encoding for this value."
+        description: Post parameter value. Client should use 'application/x-www-form-urlencoded' encoding for this value.
         type: string
       url:
         description: Url where the single sign on request is to be made
@@ -12533,10 +12533,10 @@ definitions:
               $ref: '#/definitions/NameValuePair'
             type: array
           databaseEdition:
-            description: 'Edition of the metadata database for the hostingEnvironment (App Service Environment) e.g. "Standard"'
+            description: Edition of the metadata database for the hostingEnvironment (App Service Environment) e.g. "Standard"
             type: string
           databaseServiceObjective:
-            description: 'Service objective of the metadata database for the hostingEnvironment (App Service Environment) e.g. "S0"'
+            description: Service objective of the metadata database for the hostingEnvironment (App Service Environment) e.g. "S0"
             type: string
           dnsSuffix:
             description: DNS suffix of the hostingEnvironment (App Service Environment)
@@ -12553,7 +12553,7 @@ definitions:
             description: Detailed message about with results of the last check of the hostingEnvironment (App Service Environment)
             type: string
           internalLoadBalancingMode:
-            description: "Specifies which endpoints to serve internally in the hostingEnvironment's (App Service Environment) VNET"
+            description: Specifies which endpoints to serve internally in the hostingEnvironment's (App Service Environment) VNET
             enum:
               - None
               - Web
@@ -12637,15 +12637,15 @@ definitions:
             type: array
           virtualNetwork:
             $ref: '#/definitions/VirtualNetworkProfile'
-            description: "Description of the hostingEnvironment's (App Service Environment) virtual network"
+            description: Description of the hostingEnvironment's (App Service Environment) virtual network
           vnetName:
-            description: "Name of the hostingEnvironment's (App Service Environment) virtual network"
+            description: Name of the hostingEnvironment's (App Service Environment) virtual network
             type: string
           vnetResourceGroupName:
-            description: "Resource group of the hostingEnvironment's (App Service Environment) virtual network"
+            description: Resource group of the hostingEnvironment's (App Service Environment) virtual network
             type: string
           vnetSubnetName:
-            description: "Subnet of the hostingEnvironment's (App Service Environment) virtual network"
+            description: Subnet of the hostingEnvironment's (App Service Environment) virtual network
             type: string
           workerPools:
             description: 'Description of worker pools with worker size ids, VM sizes, and number of workers in each pool'
@@ -12754,7 +12754,7 @@ definitions:
             format: int32
             type: integer
           location:
-            description: 'Location of the managed hosting environment e.g. "West US"'
+            description: Location of the managed hosting environment e.g. "West US"
             type: string
           name:
             description: Name of the managed hosting environment
@@ -12780,7 +12780,7 @@ definitions:
             type: boolean
           virtualNetwork:
             $ref: '#/definitions/VirtualNetworkProfile'
-            description: "Description of the managed hosting environment's virtual network"
+            description: Description of the managed hosting environment's virtual network
         required:
           - status
         x-ms-client-flatten: true
@@ -12936,7 +12936,7 @@ definitions:
         type: object
     type: object
   RampUpRule:
-    description: 'Routing rules for ramp up testing. This rule allows to redirect static traffic % to a slot or to gradually change routing % based on performance'
+    description: Routing rules for ramp up testing. This rule allows to redirect static traffic % to a slot or to gradually change routing % based on performance
     properties:
       actionHostName:
         description: Hostname of a slot to which the traffic will be redirected if decided to. E.g. mysite-stage.azurewebsites.net
@@ -13023,7 +13023,7 @@ definitions:
         format: date-time
         type: string
       notifiedTime:
-        description: "Last timestamp this instance was actually notified. Null means that this recommendation hasn't been notified yet."
+        description: Last timestamp this instance was actually notified. Null means that this recommendation hasn't been notified yet.
         format: date-time
         type: string
       recommendationId:
@@ -13293,7 +13293,7 @@ definitions:
         description: 'True indicates name is valid and available.  False indicates the name is invalid, unavailable, or both.'
         type: boolean
       reason:
-        description: "Required if nameAvailable is false. 'Invalid' indicates the name provided does not match Azure WebApp service’s naming requirements. 'AlreadyExists' indicates that the name is already in use and is therefore unavailable."
+        description: Required if nameAvailable is false. 'Invalid' indicates the name provided does not match Azure WebApp service’s naming requirements. 'AlreadyExists' indicates that the name is already in use and is therefore unavailable.
         type: string
     type: object
   ResourceNameAvailabilityRequest:
@@ -13344,7 +13344,7 @@ definitions:
               modelAsString: false
               name: BackupRestoreOperationType
           overwrite:
-            description: 'True if the restore operation can overwrite target site. "True" needed if trying to restore over an existing site.'
+            description: True if the restore operation can overwrite target site. "True" needed if trying to restore over an existing site.
             type: boolean
           siteName:
             description: Name of a site (Web App)
@@ -13494,7 +13494,7 @@ definitions:
             description: Name of gateway app associated with web app
             type: string
           hostNameSslStates:
-            description: "Hostname SSL states are  used to manage the SSL bindings for site's hostnames."
+            description: Hostname SSL states are  used to manage the SSL bindings for site's hostnames.
             items:
               $ref: '#/definitions/HostNameSslState'
             type: array

@@ -77,7 +77,7 @@ tags:
 paths:
   /accounts:
     get:
-      description: "Retrieves the authenticated user's list of accounts."
+      description: Retrieves the authenticated user's list of accounts.
       operationId: adexchangebuyer.accounts.list
       responses:
         '200':
@@ -173,7 +173,7 @@ paths:
         - accounts
   /creatives:
     get:
-      description: "Retrieves a list of the authenticated user's active creatives. A creative will be available 30-40 minutes after submission."
+      description: Retrieves a list of the authenticated user's active creatives. A creative will be available 30-40 minutes after submission.
       operationId: adexchangebuyer.creatives.list
       parameters:
         - description: 'Maximum number of entries returned on one result page. If not set, the default is 100. Optional.'
@@ -276,7 +276,12 @@ definitions:
               format: int32
               type: integer
             region:
-              description: "The geographical region the Ad Exchange should send requests from. Only used by some quota systems, but always setting the value is recommended. Allowed values:  \n- ASIA \n- EUROPE \n- US_EAST \n- US_WEST"
+              description: |-
+                The geographical region the Ad Exchange should send requests from. Only used by some quota systems, but always setting the value is recommended. Allowed values:  
+                - ASIA 
+                - EUROPE 
+                - US_EAST 
+                - US_WEST
               type: string
             url:
               description: The URL to which the Ad Exchange will send bid requests.
@@ -478,6 +483,6 @@ definitions:
         description: Resource type.
         type: string
       nextPageToken:
-        description: "Continuation token used to page through creatives. To retrieve the next page of results, set the next request's \"pageToken\" value to this."
+        description: 'Continuation token used to page through creatives. To retrieve the next page of results, set the next request''s "pageToken" value to this.'
         type: string
     type: object

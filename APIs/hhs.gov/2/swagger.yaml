@@ -64,7 +64,7 @@ paths:
     get:
       consumes:
         - ''
-      description: "Returns the list of Resources matching the search query 'q'.<p>The search query 'q' is a Lucene query.<br>The syntax for a Lucene query can be found <a href=\"http://lucene.apache.org/core/2_9_4/queryparsersyntax.html\">here</a>."
+      description: 'Returns the list of Resources matching the search query ''q''.<p>The search query ''q'' is a Lucene query.<br>The syntax for a Lucene query can be found <a href="http://lucene.apache.org/core/2_9_4/queryparsersyntax.html">here</a>.'
       parameters:
         - description: The search query supplied by the user
           in: query
@@ -134,7 +134,7 @@ paths:
     get:
       consumes:
         - ''
-      description: "Returns the Campaign identified by the 'id'."
+      description: Returns the Campaign identified by the 'id'.
       parameters:
         - description: The id of the record to look up
           format: int64
@@ -164,7 +164,7 @@ paths:
     get:
       consumes:
         - ''
-      description: "Returns the list of MediaItems for the Campaign identified by the 'id'."
+      description: Returns the list of MediaItems for the Campaign identified by the 'id'.
       parameters:
         - description: The id of the campaign to find media items for
           format: int64
@@ -211,7 +211,7 @@ paths:
     get:
       consumes:
         - ''
-      description: "Renders the list of MediaItems associated with the Campaign identified by the 'id'."
+      description: Renders the list of MediaItems associated with the Campaign identified by the 'id'.
       parameters:
         - description: The id of the record to look up
           format: int64
@@ -287,7 +287,7 @@ paths:
     get:
       consumes:
         - ''
-      description: "Returns the Language identified by the 'id'."
+      description: Returns the Language identified by the 'id'.
       parameters:
         - description: The id of the language to look up
           format: int64
@@ -708,7 +708,7 @@ paths:
     get:
       consumes:
         - ''
-      description: "Returns the list of MediaItems matching the search query 'q'.<p>The search query 'q' is a Lucene query.<br>The syntax for a Lucene query can be found <a href=\"http://lucene.apache.org/core/2_9_4/queryparsersyntax.html\">here</a>"
+      description: 'Returns the list of MediaItems matching the search query ''q''.<p>The search query ''q'' is a Lucene query.<br>The syntax for a Lucene query can be found <a href="http://lucene.apache.org/core/2_9_4/queryparsersyntax.html">here</a>'
       parameters:
         - description: The search query supplied by the user
           in: query
@@ -749,7 +749,7 @@ paths:
     get:
       consumes:
         - ''
-      description: "Returns the MediaItem identified by the 'id'."
+      description: Returns the MediaItem identified by the 'id'.
       parameters:
         - description: The id of the record to look up
           format: int64
@@ -779,7 +779,7 @@ paths:
     get:
       consumes:
         - ''
-      description: "Returns the raw content (html, image, etc...) for the MediaItem identified by the 'id'."
+      description: 'Returns the raw content (html, image, etc...) for the MediaItem identified by the ''id''.'
       parameters:
         - description: The id of the media to show content for.
           format: int64
@@ -817,7 +817,7 @@ paths:
     get:
       consumes:
         - ''
-      description: "Returns the javascript or iframe embed code for the MediaItem identified by 'id'."
+      description: Returns the javascript or iframe embed code for the MediaItem identified by 'id'.
       parameters:
         - description: The id of the media to get embed code for.
           format: int64
@@ -825,7 +825,7 @@ paths:
           name: id
           required: true
           type: integer
-        - description: "Currently supports 'iframe', defaults to 'javascript'."
+        - description: 'Currently supports ''iframe'', defaults to ''javascript''.'
           in: query
           name: flavor
           required: false
@@ -891,7 +891,7 @@ paths:
     get:
       consumes:
         - ''
-      description: "Returns the JPG preview, where applicable, for the MediaItem identified by the 'id'."
+      description: 'Returns the JPG preview, where applicable, for the MediaItem identified by the ''id''.'
       parameters:
         - description: The id of the media to get a preview for.
           format: int64
@@ -921,9 +921,9 @@ paths:
     get:
       consumes:
         - ''
-      description: "Get the Ratings (number of 'likes') for the MediaItem identified by the 'id'."
+      description: Get the Ratings (number of 'likes') for the MediaItem identified by the 'id'.
       parameters:
-        - description: "The ID of the media item to 'like'."
+        - description: The ID of the media item to 'like'.
           format: int64
           in: path
           name: id
@@ -951,7 +951,7 @@ paths:
     get:
       consumes:
         - ''
-      description: "Returns the list of MediaItems related to the MediaItem identified by the 'id'."
+      description: Returns the list of MediaItems related to the MediaItem identified by the 'id'.
       parameters:
         - description: The id of the media item to get related media for
           format: int64
@@ -998,7 +998,7 @@ paths:
     get:
       consumes:
         - ''
-      description: "Returns the syndicated content for a given MediaItem in the specified 'format' (HTML or JSON)."
+      description: Returns the syndicated content for a given MediaItem in the specified 'format' (HTML or JSON).
       parameters:
         - description: The id of the media to show embed code for.
           format: int64
@@ -1037,7 +1037,7 @@ paths:
           required: false
           type: boolean
         - default: false
-          description: "Remove class attributes from content (except 'syndicate')."
+          description: Remove class attributes from content (except 'syndicate').
           in: query
           name: stripClasses
           required: false
@@ -1048,12 +1048,12 @@ paths:
           name: font-size
           required: false
           type: integer
-        - description: "Accepts valid CSS float options, such as 'left' or 'right'. Will inject a style into the content before rendering."
+        - description: 'Accepts valid CSS float options, such as ''left'' or ''right''. Will inject a style into the content before rendering.'
           in: query
           name: imageFloat
           required: false
           type: string
-        - description: "Accepts 4 CSV values representing pixel sizes of margin similar to CSS. Default format is 'north,east,south,west' - for example '0,10,10,0' would put a 10 pixel margin on the right and bottom sides of an image. Will inject a style into the content before rendering."
+        - description: 'Accepts 4 CSV values representing pixel sizes of margin similar to CSS. Default format is ''north,east,south,west'' - for example ''0,10,10,0'' would put a 10 pixel margin on the right and bottom sides of an image. Will inject a style into the content before rendering.'
           in: query
           name: imageMargin
           required: false
@@ -1093,7 +1093,7 @@ paths:
     get:
       consumes:
         - ''
-      description: "Returns the JPG thumbnail, where applicable, for the MediaItem identified by the 'id'."
+      description: 'Returns the JPG thumbnail, where applicable, for the MediaItem identified by the ''id''.'
       parameters:
         - description: The id of the media to get a thumbnail for.
           format: int64
@@ -1123,7 +1123,7 @@ paths:
     get:
       consumes:
         - ''
-      description: "Returns the Youtube metadata, where applicable, for the MediaItem identified by the 'id'."
+      description: 'Returns the Youtube metadata, where applicable, for the MediaItem identified by the ''id''.'
       parameters:
         - description: The id of the video to show meta data for.
           format: int64
@@ -1213,7 +1213,7 @@ paths:
     get:
       consumes:
         - ''
-      description: "Returns the Source identified by the 'id'."
+      description: Returns the Source identified by the 'id'.
       parameters:
         - description: The id of the source to look up
           format: int64
@@ -1243,7 +1243,7 @@ paths:
     get:
       consumes:
         - ''
-      description: "Renders the list of MediaItems associated with the Source identified by the 'id'."
+      description: Renders the list of MediaItems associated with the Source identified by the 'id'.
       parameters:
         - description: The id of the record to look up
           format: int64
@@ -1278,7 +1278,7 @@ paths:
     get:
       consumes:
         - ''
-      description: "Returns the list of Tags matching the specified query parameters in the specified 'format'."
+      description: Returns the list of Tags matching the specified query parameters in the specified 'format'.
       parameters:
         - description: The name of the property to which sorting will be applied
           in: query
@@ -1384,7 +1384,7 @@ paths:
     get:
       consumes:
         - ''
-      description: "Returns the Tag identified by the 'id' in the specified 'format'."
+      description: Returns the Tag identified by the 'id' in the specified 'format'.
       parameters:
         - description: The id of the record to look up
           format: int64
@@ -1414,7 +1414,7 @@ paths:
     get:
       consumes:
         - ''
-      description: "Returns the list of MediaItems associated with the Tag identified by the 'id'."
+      description: Returns the list of MediaItems associated with the Tag identified by the 'id'.
       parameters:
         - description: The id of the record to look up
           format: int64
@@ -1461,7 +1461,7 @@ paths:
     get:
       consumes:
         - ''
-      description: "Returns the list of Tags related to the Tag identified by the 'id' in the specified format."
+      description: Returns the list of Tags related to the Tag identified by the 'id' in the specified format.
       parameters:
         - description: The id of the tag to look up
           format: int64
@@ -1508,7 +1508,7 @@ paths:
     get:
       consumes:
         - ''
-      description: "Renders the list of MediaItems associated with the Tag identified by the 'id'."
+      description: Renders the list of MediaItems associated with the Tag identified by the 'id'.
       parameters:
         - description: The id of the record to look up
           format: int64
@@ -1543,7 +1543,7 @@ paths:
     get:
       consumes:
         - ''
-      description: "Get a specific user media list by 'id'."
+      description: Get a specific user media list by 'id'.
       parameters:
         - description: The id of the record to look up
           format: int64

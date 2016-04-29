@@ -96,12 +96,12 @@ paths:
           name: end-date
           required: true
           type: string
-        - description: "A comma-separated list of Analytics metrics. E.g., 'ga:sessions,ga:pageviews'. At least one metric must be specified to retrieve a valid Analytics report."
+        - description: 'A comma-separated list of Analytics metrics. E.g., ''ga:sessions,ga:pageviews''. At least one metric must be specified to retrieve a valid Analytics report.'
           in: query
           name: metrics
           required: true
           type: string
-        - description: "A comma-separated list of Analytics dimensions. E.g., 'ga:browser,ga:city'."
+        - description: 'A comma-separated list of Analytics dimensions. E.g., ''ga:browser,ga:city''.'
           in: query
           name: dimensions
           type: string
@@ -181,7 +181,7 @@ paths:
       description: Lists web properties to which the user has access.
       operationId: analytics.management.webproperties.list
       parameters:
-        - description: "Account ID to retrieve web properties for. Can either be a specific account ID or '~all', which refers to all the accounts that user has access to."
+        - description: 'Account ID to retrieve web properties for. Can either be a specific account ID or ''~all'', which refers to all the accounts that user has access to.'
           in: path
           name: accountId
           required: true
@@ -218,12 +218,12 @@ paths:
       description: Lists views (profiles) to which the user has access.
       operationId: analytics.management.profiles.list
       parameters:
-        - description: "Account ID for the views (profiles) to retrieve. Can either be a specific account ID or '~all', which refers to all the accounts to which the user has access."
+        - description: 'Account ID for the views (profiles) to retrieve. Can either be a specific account ID or ''~all'', which refers to all the accounts to which the user has access.'
           in: path
           name: accountId
           required: true
           type: string
-        - description: "Web property ID for the views (profiles) to retrieve. Can either be a specific web property ID or '~all', which refers to all the web properties to which the user has access."
+        - description: 'Web property ID for the views (profiles) to retrieve. Can either be a specific web property ID or ''~all'', which refers to all the web properties to which the user has access.'
           in: path
           name: webPropertyId
           required: true
@@ -260,17 +260,17 @@ paths:
       description: Lists goals to which the user has access.
       operationId: analytics.management.goals.list
       parameters:
-        - description: "Account ID to retrieve goals for. Can either be a specific account ID or '~all', which refers to all the accounts that user has access to."
+        - description: 'Account ID to retrieve goals for. Can either be a specific account ID or ''~all'', which refers to all the accounts that user has access to.'
           in: path
           name: accountId
           required: true
           type: string
-        - description: "Web property ID to retrieve goals for. Can either be a specific web property ID or '~all', which refers to all the web properties that user has access to."
+        - description: 'Web property ID to retrieve goals for. Can either be a specific web property ID or ''~all'', which refers to all the web properties that user has access to.'
           in: path
           name: webPropertyId
           required: true
           type: string
-        - description: "View (Profile) ID to retrieve goals for. Can either be a specific view (profile) ID or '~all', which refers to all the views (profiles) that user has access to."
+        - description: 'View (Profile) ID to retrieve goals for. Can either be a specific view (profile) ID or ''~all'', which refers to all the views (profiles) that user has access to.'
           in: path
           name: profileId
           required: true

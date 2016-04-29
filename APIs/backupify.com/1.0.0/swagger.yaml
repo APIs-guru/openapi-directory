@@ -56,7 +56,7 @@ paths:
           name: client_secret
           required: true
           type: string
-        - description: "String identifying the grant type to be used for token retrieval. MUST be 'client_credentials' to retrieve Access Token using client_id and client_secret."
+        - description: String identifying the grant type to be used for token retrieval. MUST be 'client_credentials' to retrieve Access Token using client_id and client_secret.
           enum:
             - client_credentials
           in: formData
@@ -354,7 +354,7 @@ paths:
       tags:
         - backup_definition_variables
     put:
-      description: "You can only update variables for backup_definitions you have access to. Additionally, it is not possible to update a variable's key. Requests including a modified key name will result in an error."
+      description: 'You can only update variables for backup_definitions you have access to. Additionally, it is not possible to update a variable''s key. Requests including a modified key name will result in an error.'
       parameters:
         - description: Bearer Access Token granted from client credentials authorizing vendor to perform action
           in: header
@@ -936,7 +936,7 @@ paths:
         - exports
   '/v1/backup_instances/{backup_instance_id}/exports/{export_id}/reauth':
     post:
-      description: "You can only re-authorize an export when there's already a valid exported_data_url"
+      description: You can only re-authorize an export when there's already a valid exported_data_url
       parameters:
         - description: Bearer Access Token granted from client credentials authorizing vendor to perform action
           in: header
@@ -1476,7 +1476,7 @@ definitions:
       blob_url:
         description: URL to download the blob associated with the given endpoint record
       field_data:
-        description: "JSON object (possibly nested) matching the structure of the endpoint's source"
+        description: JSON object (possibly nested) matching the structure of the endpoint's source
     required:
       - field_data
   export:

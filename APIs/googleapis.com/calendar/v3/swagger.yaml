@@ -221,7 +221,7 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: 'Whether to include deleted ACLs in the result. Deleted ACLs are represented by role equal to "none". Deleted ACLs will always be included if syncToken is provided. Optional. The default is False.'
+        - description: Whether to include deleted ACLs in the result. Deleted ACLs are represented by role equal to "none". Deleted ACLs will always be included if syncToken is provided. Optional. The default is False.
           in: query
           name: showDeleted
           type: boolean
@@ -301,7 +301,7 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: 'Whether to include deleted ACLs in the result. Deleted ACLs are represented by role equal to "none". Deleted ACLs will always be included if syncToken is provided. Optional. The default is False.'
+        - description: Whether to include deleted ACLs in the result. Deleted ACLs are represented by role equal to "none". Deleted ACLs will always be included if syncToken is provided. Optional. The default is False.
           in: query
           name: showDeleted
           type: boolean
@@ -535,15 +535,29 @@ paths:
           in: query
           name: singleEvents
           type: boolean
-        - description: "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All events deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.\nThere are several query parameters that cannot be specified together with nextSyncToken to ensure consistency of the client state.\n\nThese are: \n- iCalUID \n- orderBy \n- privateExtendedProperty \n- q \n- sharedExtendedProperty \n- timeMin \n- timeMax \n- updatedMin If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries."
+        - description: |-
+            Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All events deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.
+            There are several query parameters that cannot be specified together with nextSyncToken to ensure consistency of the client state.
+
+            These are: 
+            - iCalUID 
+            - orderBy 
+            - privateExtendedProperty 
+            - q 
+            - sharedExtendedProperty 
+            - timeMin 
+            - timeMax 
+            - updatedMin If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
+            Learn more about incremental synchronization.
+            Optional. The default is to return all entries.
           in: query
           name: syncToken
           type: string
-        - description: "Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored."
+        - description: 'Upper bound (exclusive) for an event''s start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.'
           in: query
           name: timeMax
           type: string
-        - description: "Lower bound (inclusive) for an event's end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored."
+        - description: 'Lower bound (inclusive) for an event''s end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.'
           in: query
           name: timeMin
           type: string
@@ -551,7 +565,7 @@ paths:
           in: query
           name: timeZone
           type: string
-        - description: "Lower bound for an event's last modification time (as a RFC3339 timestamp) to filter by. When specified, entries deleted since this time will always be included regardless of showDeleted. Optional. The default is not to filter by last modification time."
+        - description: 'Lower bound for an event''s last modification time (as a RFC3339 timestamp) to filter by. When specified, entries deleted since this time will always be included regardless of showDeleted. Optional. The default is not to filter by last modification time.'
           in: query
           name: updatedMin
           type: string
@@ -761,15 +775,29 @@ paths:
           in: query
           name: singleEvents
           type: boolean
-        - description: "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All events deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.\nThere are several query parameters that cannot be specified together with nextSyncToken to ensure consistency of the client state.\n\nThese are: \n- iCalUID \n- orderBy \n- privateExtendedProperty \n- q \n- sharedExtendedProperty \n- timeMin \n- timeMax \n- updatedMin If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries."
+        - description: |-
+            Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All events deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.
+            There are several query parameters that cannot be specified together with nextSyncToken to ensure consistency of the client state.
+
+            These are: 
+            - iCalUID 
+            - orderBy 
+            - privateExtendedProperty 
+            - q 
+            - sharedExtendedProperty 
+            - timeMin 
+            - timeMax 
+            - updatedMin If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
+            Learn more about incremental synchronization.
+            Optional. The default is to return all entries.
           in: query
           name: syncToken
           type: string
-        - description: "Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored."
+        - description: 'Upper bound (exclusive) for an event''s start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.'
           in: query
           name: timeMax
           type: string
-        - description: "Lower bound (inclusive) for an event's end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored."
+        - description: 'Lower bound (inclusive) for an event''s end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.'
           in: query
           name: timeMin
           type: string
@@ -777,7 +805,7 @@ paths:
           in: query
           name: timeZone
           type: string
-        - description: "Lower bound for an event's last modification time (as a RFC3339 timestamp) to filter by. When specified, entries deleted since this time will always be included regardless of showDeleted. Optional. The default is not to filter by last modification time."
+        - description: 'Lower bound for an event''s last modification time (as a RFC3339 timestamp) to filter by. When specified, entries deleted since this time will always be included regardless of showDeleted. Optional. The default is not to filter by last modification time.'
           in: query
           name: updatedMin
           type: string
@@ -894,7 +922,7 @@ paths:
           minimum: 1
           name: maxAttendees
           type: integer
-        - description: "Whether to send notifications about the event update (e.g. attendee's responses, title changes, etc.). Optional. The default is False."
+        - description: 'Whether to send notifications about the event update (e.g. attendee''s responses, title changes, etc.). Optional. The default is False.'
           in: query
           name: sendNotifications
           type: boolean
@@ -939,7 +967,7 @@ paths:
           minimum: 1
           name: maxAttendees
           type: integer
-        - description: "Whether to send notifications about the event update (e.g. attendee's responses, title changes, etc.). Optional. The default is False."
+        - description: 'Whether to send notifications about the event update (e.g. attendee''s responses, title changes, etc.). Optional. The default is False.'
           in: query
           name: sendNotifications
           type: boolean
@@ -998,15 +1026,15 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: 'Whether to include deleted events (with status equals "cancelled") in the result. Cancelled instances of recurring events will still be included if singleEvents is False. Optional. The default is False.'
+        - description: Whether to include deleted events (with status equals "cancelled") in the result. Cancelled instances of recurring events will still be included if singleEvents is False. Optional. The default is False.
           in: query
           name: showDeleted
           type: boolean
-        - description: "Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset."
+        - description: Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset.
           in: query
           name: timeMax
           type: string
-        - description: "Lower bound (inclusive) for an event's end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset."
+        - description: Lower bound (inclusive) for an event's end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset.
           in: query
           name: timeMin
           type: string
@@ -1044,7 +1072,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Moves an event to another calendar, i.e. changes an event's organizer."
+      description: 'Moves an event to another calendar, i.e. changes an event''s organizer.'
       operationId: calendar.events.move
       parameters:
         - description: Calendar identifier of the source calendar where the event currently is on.
@@ -1062,7 +1090,7 @@ paths:
           name: destination
           required: true
           type: string
-        - description: "Whether to send notifications about the change of the event's organizer. Optional. The default is False."
+        - description: Whether to send notifications about the change of the event's organizer. Optional. The default is False.
           in: query
           name: sendNotifications
           type: boolean
@@ -1158,7 +1186,7 @@ paths:
         - freebusy
   /users/me/calendarList:
     get:
-      description: "Returns entries on the user's calendar list."
+      description: Returns entries on the user's calendar list.
       operationId: calendar.calendarList.list
       parameters:
         - description: Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
@@ -1217,7 +1245,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Adds an entry to the user's calendar list."
+      description: Adds an entry to the user's calendar list.
       operationId: calendar.calendarList.insert
       parameters:
         - description: 'Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False.'
@@ -1304,7 +1332,7 @@ paths:
         - calendarList
   '/users/me/calendarList/{calendarId}':
     delete:
-      description: "Deletes an entry on the user's calendar list."
+      description: Deletes an entry on the user's calendar list.
       operationId: calendar.calendarList.delete
       parameters:
         - description: 'Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.'
@@ -1321,7 +1349,7 @@ paths:
       tags:
         - calendarList
     get:
-      description: "Returns an entry on the user's calendar list."
+      description: Returns an entry on the user's calendar list.
       operationId: calendar.calendarList.get
       parameters:
         - description: 'Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.'
@@ -1350,7 +1378,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: "Updates an entry on the user's calendar list. This method supports patch semantics."
+      description: Updates an entry on the user's calendar list. This method supports patch semantics.
       operationId: calendar.calendarList.patch
       parameters:
         - description: 'Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.'
@@ -1377,7 +1405,7 @@ paths:
       tags:
         - calendarList
     put:
-      description: "Updates an entry on the user's calendar list."
+      description: Updates an entry on the user's calendar list.
       operationId: calendar.calendarList.update
       parameters:
         - description: 'Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.'
@@ -1556,13 +1584,24 @@ definitions:
         description: 'Type of the resource ("calendar#aclRule").'
         type: string
       role:
-        description: "The role assigned to the scope. Possible values are:  \n- \"none\" - Provides no access. \n- \"freeBusyReader\" - Provides read access to free/busy information. \n- \"reader\" - Provides read access to the calendar. Private events will appear to users with reader access, but event details will be hidden. \n- \"writer\" - Provides read and write access to the calendar. Private events will appear to users with writer access, and event details will be visible. \n- \"owner\" - Provides ownership of the calendar. This role has all of the permissions of the writer role with the additional ability to see and manipulate ACLs."
+        description: |-
+          The role assigned to the scope. Possible values are:  
+          - "none" - Provides no access. 
+          - "freeBusyReader" - Provides read access to free/busy information. 
+          - "reader" - Provides read access to the calendar. Private events will appear to users with reader access, but event details will be hidden. 
+          - "writer" - Provides read and write access to the calendar. Private events will appear to users with writer access, and event details will be visible. 
+          - "owner" - Provides ownership of the calendar. This role has all of the permissions of the writer role with the additional ability to see and manipulate ACLs.
         type: string
       scope:
         description: The scope of the rule.
         properties:
           type:
-            description: "The type of the scope. Possible values are:  \n- \"default\" - The public scope. This is the default value. \n- \"user\" - Limits the scope to a single user. \n- \"group\" - Limits the scope to a group. \n- \"domain\" - Limits the scope to a domain.  Note: The permissions granted to the \"default\", or public, scope apply to any user, authenticated or not."
+            description: |-
+              The type of the scope. Possible values are:  
+              - "default" - The public scope. This is the default value. 
+              - "user" - Limits the scope to a single user. 
+              - "group" - Limits the scope to a group. 
+              - "domain" - Limits the scope to a domain.  Note: The permissions granted to the "default", or public, scope apply to any user, authenticated or not.
             type: string
           value:
             description: 'The email address of a user or group, or the name of a domain, depending on the scope type. Omitted for type "default".'
@@ -1600,7 +1639,7 @@ definitions:
         description: ETag of the collection.
         type: string
       items:
-        description: "Calendars that are present on the user's calendar list."
+        description: Calendars that are present on the user's calendar list.
         items:
           $ref: '#/definitions/CalendarListEntry'
         type: array
@@ -1618,7 +1657,12 @@ definitions:
   CalendarListEntry:
     properties:
       accessRole:
-        description: "The effective access role that the authenticated user has on the calendar. Read-only. Possible values are:  \n- \"freeBusyReader\" - Provides read access to free/busy information. \n- \"reader\" - Provides read access to the calendar. Private events will appear to users with reader access, but event details will be hidden. \n- \"writer\" - Provides read and write access to the calendar. Private events will appear to users with writer access, and event details will be visible. \n- \"owner\" - Provides ownership of the calendar. This role has all of the permissions of the writer role with the additional ability to see and manipulate ACLs."
+        description: |-
+          The effective access role that the authenticated user has on the calendar. Read-only. Possible values are:  
+          - "freeBusyReader" - Provides read access to free/busy information. 
+          - "reader" - Provides read access to the calendar. Private events will appear to users with reader access, but event details will be hidden. 
+          - "writer" - Provides read and write access to the calendar. Private events will appear to users with writer access, and event details will be visible. 
+          - "owner" - Provides ownership of the calendar. This role has all of the permissions of the writer role with the additional ability to see and manipulate ACLs.
         type: string
       backgroundColor:
         description: 'The main color of the calendar in the hexadecimal format "#0088aa". This property supersedes the index-based colorId property. To set or change this property, you need to specify colorRgbFormat=true in the parameters of the insert, update and patch methods. Optional.'
@@ -1688,10 +1732,19 @@ definitions:
   CalendarNotification:
     properties:
       method:
-        description: "The method used to deliver the notification. Possible values are:  \n- \"email\" - Reminders are sent via email. \n- \"sms\" - Reminders are sent via SMS. This value is read-only and is ignored on inserts and updates. SMS reminders are only available for Google Apps for Work, Education, and Government customers."
+        description: |-
+          The method used to deliver the notification. Possible values are:  
+          - "email" - Reminders are sent via email. 
+          - "sms" - Reminders are sent via SMS. This value is read-only and is ignored on inserts and updates. SMS reminders are only available for Google Apps for Work, Education, and Government customers.
         type: string
       type:
-        description: "The type of notification. Possible values are:  \n- \"eventCreation\" - Notification sent when a new event is put on the calendar. \n- \"eventChange\" - Notification sent when an event is changed. \n- \"eventCancellation\" - Notification sent when an event is cancelled. \n- \"eventResponse\" - Notification sent when an event is changed. \n- \"agenda\" - An agenda with the events of the day (sent out in the morning)."
+        description: |-
+          The type of notification. Possible values are:  
+          - "eventCreation" - Notification sent when a new event is put on the calendar. 
+          - "eventChange" - Notification sent when an event is changed. 
+          - "eventCancellation" - Notification sent when an event is cancelled. 
+          - "eventResponse" - Notification sent when an event is changed. 
+          - "agenda" - An agenda with the events of the day (sent out in the morning).
         type: string
     type: object
   Channel:
@@ -1738,7 +1791,7 @@ definitions:
         description: The background color associated with this color definition.
         type: string
       foreground:
-        description: "The foreground color that can be used to write on top of a background with 'background' color."
+        description: The foreground color that can be used to write on top of a background with 'background' color.
         type: string
     type: object
   Colors:
@@ -1770,7 +1823,12 @@ definitions:
         description: 'Domain, or broad category, of the error.'
         type: string
       reason:
-        description: "Specific reason for the error. Some of the possible values are:  \n- \"groupTooBig\" - The group of users requested is too large for a single query. \n- \"tooManyCalendarsRequested\" - The number of calendars requested is too large for a single query. \n- \"notFound\" - The requested resource was not found. \n- \"internalError\" - The API service has encountered an internal error.  Additional error types may be added in the future, so clients should gracefully handle additional error statuses not included in this list."
+        description: |-
+          Specific reason for the error. Some of the possible values are:  
+          - "groupTooBig" - The group of users requested is too large for a single query. 
+          - "tooManyCalendarsRequested" - The number of calendars requested is too large for a single query. 
+          - "notFound" - The requested resource was not found. 
+          - "internalError" - The API service has encountered an internal error.  Additional error types may be added in the future, so clients should gracefully handle additional error statuses not included in this list.
         type: string
     type: object
   Event:
@@ -1794,7 +1852,7 @@ definitions:
         type: array
       attendeesOmitted:
         default: false
-        description: "Whether attendees may have been omitted from the event's representation. When retrieving an event, this may be due to a restriction specified by the maxAttendee query parameter. When updating an event, this can be used to only update the participant's response. Optional. The default is False."
+        description: 'Whether attendees may have been omitted from the event''s representation. When retrieving an event, this may be due to a restriction specified by the maxAttendee query parameter. When updating an event, this can be used to only update the participant''s response. Optional. The default is False.'
         type: boolean
       colorId:
         description: The color of the event. This is an ID referring to an entry in the event section of the colors definition (see the  colors endpoint). Optional.
@@ -1807,13 +1865,13 @@ definitions:
         description: The creator of the event. Read-only.
         properties:
           displayName:
-            description: "The creator's name, if available."
+            description: 'The creator''s name, if available.'
             type: string
           email:
-            description: "The creator's email address, if available."
+            description: 'The creator''s email address, if available.'
             type: string
           id:
-            description: "The creator's Profile ID, if available. It corresponds to theid field in the People collection of the Google+ API"
+            description: 'The creator''s Profile ID, if available. It corresponds to theid field in the People collection of the Google+ API'
             type: string
           self:
             default: false
@@ -1846,24 +1904,27 @@ definitions:
             additionalProperties:
               description: The name of the shared property and the corresponding value.
               type: string
-            description: "Properties that are shared between copies of the event on other attendees' calendars."
+            description: Properties that are shared between copies of the event on other attendees' calendars.
             type: object
         type: object
       gadget:
         description: A gadget that extends this event.
         properties:
           display:
-            description: "The gadget's display mode. Optional. Possible values are:  \n- \"icon\" - The gadget displays next to the event's title in the calendar view. \n- \"chip\" - The gadget displays when the event is clicked."
+            description: |-
+              The gadget's display mode. Optional. Possible values are:  
+              - "icon" - The gadget displays next to the event's title in the calendar view. 
+              - "chip" - The gadget displays when the event is clicked.
             type: string
           height:
-            description: "The gadget's height in pixels. The height must be an integer greater than 0. Optional."
+            description: The gadget's height in pixels. The height must be an integer greater than 0. Optional.
             format: int32
             type: integer
           iconLink:
-            description: "The gadget's icon URL. The URL scheme must be HTTPS."
+            description: The gadget's icon URL. The URL scheme must be HTTPS.
             type: string
           link:
-            description: "The gadget's URL. The URL scheme must be HTTPS."
+            description: The gadget's URL. The URL scheme must be HTTPS.
             type: string
           preferences:
             additionalProperties:
@@ -1872,13 +1933,13 @@ definitions:
             description: Preferences.
             type: object
           title:
-            description: "The gadget's title."
+            description: The gadget's title.
             type: string
           type:
-            description: "The gadget's type."
+            description: The gadget's type.
             type: string
           width:
-            description: "The gadget's width in pixels. The width must be an integer greater than 0. Optional."
+            description: The gadget's width in pixels. The width must be an integer greater than 0. Optional.
             format: int32
             type: integer
         type: object
@@ -1892,7 +1953,7 @@ definitions:
         type: boolean
       guestsCanSeeOtherGuests:
         default: true
-        description: "Whether attendees other than the organizer can see who the event's attendees are. Optional. The default is True."
+        description: Whether attendees other than the organizer can see who the event's attendees are. Optional. The default is True.
         type: boolean
       hangoutLink:
         description: An absolute link to the Google+ hangout associated with this event. Read-only.
@@ -1906,7 +1967,13 @@ definitions:
           Note that the icalUID and the id are not identical and only one of them should be supplied at event creation time. One difference in their semantics is that in recurring events, all occurrences of one event have different ids while they all share the same icalUIDs.
         type: string
       id:
-        description: "Opaque identifier of the event. When creating new single or recurring events, you can specify their IDs. Provided IDs must follow these rules:  \n- characters allowed in the ID are those used in base32hex encoding, i.e. lowercase letters a-v and digits 0-9, see section 3.1.2 in RFC2938 \n- the length of the ID must be between 5 and 1024 characters \n- the ID must be unique per calendar  Due to the globally distributed nature of the system, we cannot guarantee that ID collisions will be detected at event creation time. To minimize the risk of collisions we recommend using an established UUID algorithm such as one described in RFC4122.\nIf you do not specify an ID, it will be automatically generated by the server.\nNote that the icalUID and the id are not identical and only one of them should be supplied at event creation time. One difference in their semantics is that in recurring events, all occurrences of one event have different ids while they all share the same icalUIDs."
+        description: |-
+          Opaque identifier of the event. When creating new single or recurring events, you can specify their IDs. Provided IDs must follow these rules:  
+          - characters allowed in the ID are those used in base32hex encoding, i.e. lowercase letters a-v and digits 0-9, see section 3.1.2 in RFC2938 
+          - the length of the ID must be between 5 and 1024 characters 
+          - the ID must be unique per calendar  Due to the globally distributed nature of the system, we cannot guarantee that ID collisions will be detected at event creation time. To minimize the risk of collisions we recommend using an established UUID algorithm such as one described in RFC4122.
+          If you do not specify an ID, it will be automatically generated by the server.
+          Note that the icalUID and the id are not identical and only one of them should be supplied at event creation time. One difference in their semantics is that in recurring events, all occurrences of one event have different ids while they all share the same icalUIDs.
         type: string
       kind:
         default: 'calendar#event'
@@ -1923,13 +1990,13 @@ definitions:
         description: 'The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.'
         properties:
           displayName:
-            description: "The organizer's name, if available."
+            description: 'The organizer''s name, if available.'
             type: string
           email:
-            description: "The organizer's email address, if available. It must be a valid email address as per RFC5322."
+            description: 'The organizer''s email address, if available. It must be a valid email address as per RFC5322.'
             type: string
           id:
-            description: "The organizer's Profile ID, if available. It corresponds to theid field in the People collection of the Google+ API"
+            description: 'The organizer''s Profile ID, if available. It corresponds to theid field in the People collection of the Google+ API'
             type: string
           self:
             default: false
@@ -1952,10 +2019,10 @@ definitions:
         description: 'For an instance of a recurring event, this is the id of the recurring event to which this instance belongs. Immutable.'
         type: string
       reminders:
-        description: "Information about the event's reminders for the authenticated user."
+        description: Information about the event's reminders for the authenticated user.
         properties:
           overrides:
-            description: "If the event doesn't use the default reminders, this lists the reminders specific to the event, or, if not set, indicates that no reminders are set for this event. The maximum number of override reminders is 5."
+            description: 'If the event doesn''t use the default reminders, this lists the reminders specific to the event, or, if not set, indicates that no reminders are set for this event. The maximum number of override reminders is 5.'
             items:
               $ref: '#/definitions/EventReminder'
             type: array
@@ -1981,14 +2048,21 @@ definitions:
         $ref: '#/definitions/EventDateTime'
         description: 'The (inclusive) start time of the event. For a recurring event, this is the start time of the first instance.'
       status:
-        description: "Status of the event. Optional. Possible values are:  \n- \"confirmed\" - The event is confirmed. This is the default status. \n- \"tentative\" - The event is tentatively confirmed. \n- \"cancelled\" - The event is cancelled."
+        description: |-
+          Status of the event. Optional. Possible values are:  
+          - "confirmed" - The event is confirmed. This is the default status. 
+          - "tentative" - The event is tentatively confirmed. 
+          - "cancelled" - The event is cancelled.
         type: string
       summary:
         description: Title of the event.
         type: string
       transparency:
         default: opaque
-        description: "Whether the event blocks time on the calendar. Optional. Possible values are:  \n- \"opaque\" - The event blocks time on the calendar. This is the default value. \n- \"transparent\" - The event does not block time on the calendar."
+        description: |-
+          Whether the event blocks time on the calendar. Optional. Possible values are:  
+          - "opaque" - The event blocks time on the calendar. This is the default value. 
+          - "transparent" - The event does not block time on the calendar.
         type: string
       updated:
         description: Last modification time of the event (as a RFC3339 timestamp). Read-only.
@@ -1996,7 +2070,12 @@ definitions:
         type: string
       visibility:
         default: default
-        description: "Visibility of the event. Optional. Possible values are:  \n- \"default\" - Uses the default visibility for events on the calendar. This is the default value. \n- \"public\" - The event is public and event details are visible to all readers of the calendar. \n- \"private\" - The event is private and only event attendees may view event details. \n- \"confidential\" - The event is private. This value is provided for compatibility reasons."
+        description: |-
+          Visibility of the event. Optional. Possible values are:  
+          - "default" - Uses the default visibility for events on the calendar. This is the default value. 
+          - "public" - The event is public and event details are visible to all readers of the calendar. 
+          - "private" - The event is private and only event attendees may view event details. 
+          - "confidential" - The event is private. This value is provided for compatibility reasons.
         type: string
     type: object
   EventAttachment:
@@ -2012,7 +2091,7 @@ definitions:
           For adding Google Drive file attachments use the same format as in alternateLink property of the Files resource in the Drive API.
         type: string
       iconLink:
-        description: "URL link to the attachment's icon. Read-only."
+        description: URL link to the attachment's icon. Read-only.
         type: string
       mimeType:
         description: Internet media type (MIME type) of the attachment.
@@ -2029,16 +2108,16 @@ definitions:
         format: int32
         type: integer
       comment:
-        description: "The attendee's response comment. Optional."
+        description: The attendee's response comment. Optional.
         type: string
       displayName:
-        description: "The attendee's name, if available. Optional."
+        description: 'The attendee''s name, if available. Optional.'
         type: string
       email:
-        description: "The attendee's email address, if available. This field must be present when adding an attendee. It must be a valid email address as per RFC5322."
+        description: 'The attendee''s email address, if available. This field must be present when adding an attendee. It must be a valid email address as per RFC5322.'
         type: string
       id:
-        description: "The attendee's Profile ID, if available. It corresponds to theid field in the People collection of the Google+ API"
+        description: 'The attendee''s Profile ID, if available. It corresponds to theid field in the People collection of the Google+ API'
         type: string
       optional:
         default: false
@@ -2052,7 +2131,12 @@ definitions:
         description: Whether the attendee is a resource. Read-only. The default is False.
         type: boolean
       responseStatus:
-        description: "The attendee's response status. Possible values are:  \n- \"needsAction\" - The attendee has not responded to the invitation. \n- \"declined\" - The attendee has declined the invitation. \n- \"tentative\" - The attendee has tentatively accepted the invitation. \n- \"accepted\" - The attendee has accepted the invitation."
+        description: |-
+          The attendee's response status. Possible values are:  
+          - "needsAction" - The attendee has not responded to the invitation. 
+          - "declined" - The attendee has declined the invitation. 
+          - "tentative" - The attendee has tentatively accepted the invitation. 
+          - "accepted" - The attendee has accepted the invitation.
         type: string
       self:
         default: false
@@ -2076,7 +2160,11 @@ definitions:
   EventReminder:
     properties:
       method:
-        description: "The method used by this reminder. Possible values are:  \n- \"email\" - Reminders are sent via email. \n- \"sms\" - Reminders are sent via SMS. These are only available for Google Apps for Work, Education, and Government customers. Requests to set SMS reminders for other account types are ignored. \n- \"popup\" - Reminders are sent via a UI popup."
+        description: |-
+          The method used by this reminder. Possible values are:  
+          - "email" - Reminders are sent via email. 
+          - "sms" - Reminders are sent via SMS. These are only available for Google Apps for Work, Education, and Government customers. Requests to set SMS reminders for other account types are ignored. 
+          - "popup" - Reminders are sent via a UI popup.
         type: string
       minutes:
         description: Number of minutes before the start of the event when the reminder should trigger. Valid values are between 0 and 40320 (4 weeks in minutes).
@@ -2086,7 +2174,13 @@ definitions:
   Events:
     properties:
       accessRole:
-        description: "The user's access role for this calendar. Read-only. Possible values are:  \n- \"none\" - The user has no access. \n- \"freeBusyReader\" - The user has read access to free/busy information. \n- \"reader\" - The user has read access to the calendar. Private events will appear to users with reader access, but event details will be hidden. \n- \"writer\" - The user has read and write access to the calendar. Private events will appear to users with writer access, and event details will be visible. \n- \"owner\" - The user has ownership of the calendar. This role has all of the permissions of the writer role with the additional ability to see and manipulate ACLs."
+        description: |-
+          The user's access role for this calendar. Read-only. Possible values are:  
+          - "none" - The user has no access. 
+          - "freeBusyReader" - The user has read access to free/busy information. 
+          - "reader" - The user has read access to the calendar. Private events will appear to users with reader access, but event details will be hidden. 
+          - "writer" - The user has read and write access to the calendar. Private events will appear to users with writer access, and event details will be visible. 
+          - "owner" - The user has ownership of the calendar. This role has all of the permissions of the writer role with the additional ability to see and manipulate ACLs.
         type: string
       defaultReminders:
         description: The default reminders on the calendar for the authenticated user. These reminders apply to all events on this calendar that do not explicitly override them (i.e. do not have reminders.useDefault set to True).
@@ -2141,7 +2235,7 @@ definitions:
   FreeBusyGroup:
     properties:
       calendars:
-        description: "List of calendars' identifiers within a group."
+        description: List of calendars' identifiers within a group.
         items:
           type: string
         type: array

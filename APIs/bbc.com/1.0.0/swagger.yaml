@@ -9,7 +9,7 @@ info:
     email: nitro@bbc.co.uk
     name: Open Nitro Project
     url: 'http://developer.bbc.co.uk/'
-  description: "BBC Nitro is the BBC's application programming interface (API) for BBC Programmes Metadata."
+  description: BBC Nitro is the BBC's application programming interface (API) for BBC Programmes Metadata.
   license:
     name: Nitro Public License
     url: 'https://developer.bbc.co.uk/nitropubliclicence/'
@@ -1191,7 +1191,7 @@ paths:
           pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
           required: false
           type: string
-        - description: "filter for subset of programmes with title beginning with initial letter librarian style (ignoring leading 'The', 'An' (Welsh), etc) 0-9 a-z"
+        - description: 'filter for subset of programmes with title beginning with initial letter librarian style (ignoring leading ''The'', ''An'' (Welsh), etc) 0-9 a-z'
           in: query
           maxLength: 1
           minLength: 1
@@ -1754,7 +1754,7 @@ paths:
         - schema
   /services:
     get:
-      description: 'The services feed exposes the linear broadcast "services" from PIPs. These are the actual services which broadcast programmes (eg bbc_one_oxford is the service for BBC One in Oxford).'
+      description: The services feed exposes the linear broadcast "services" from PIPs. These are the actual services which broadcast programmes (eg bbc_one_oxford is the service for BBC One in Oxford).
       operationId: listServices
       parameters:
         - description: Return services that end on or later than the specified datetime
@@ -4051,7 +4051,7 @@ definitions:
   partner:
     $ref: '#/definitions/pid'
   pid:
-    pattern: "([a-z0-9\\.\\-]+|.*PID.*)"
+    pattern: '([a-z0-9\.\-]+|.*PID.*)'
     type: string
   pidReference:
     additionalProperties: false
@@ -4561,7 +4561,7 @@ definitions:
   short:
     type: string
   sid:
-    pattern: "[a-z0-9A-Z_\\.\\-]+"
+    pattern: '[a-z0-9A-Z_\.\-]+'
     type: string
   size:
     additionalProperties: false

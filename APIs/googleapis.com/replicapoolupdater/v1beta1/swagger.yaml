@@ -178,7 +178,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: "The name of the zone in which the update's target resides."
+        - description: The name of the zone in which the update's target resides.
           in: path
           name: zone
           required: true
@@ -231,7 +231,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: "The name of the zone in which the update's target resides."
+        - description: The name of the zone in which the update's target resides.
           in: path
           name: zone
           required: true
@@ -262,7 +262,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: "The name of the zone in which the update's target resides."
+        - description: The name of the zone in which the update's target resides.
           in: path
           name: zone
           required: true
@@ -314,7 +314,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: "The name of the zone in which the update's target resides."
+        - description: The name of the zone in which the update's target resides.
           in: path
           name: zone
           required: true
@@ -346,7 +346,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: "The name of the zone in which the update's target resides."
+        - description: The name of the zone in which the update's target resides.
           in: path
           name: zone
           required: true
@@ -413,7 +413,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: "The name of the zone in which the update's target resides."
+        - description: The name of the zone in which the update's target resides.
           in: path
           name: zone
           required: true
@@ -453,7 +453,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: "The name of the zone in which the update's target resides."
+        - description: The name of the zone in which the update's target resides.
           in: path
           name: zone
           required: true
@@ -493,7 +493,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: "The name of the zone in which the update's target resides."
+        - description: The name of the zone in which the update's target resides.
           in: path
           name: zone
           required: true
@@ -542,7 +542,15 @@ definitions:
         description: Fully-qualified URL of the instance being updated.
         type: string
       status:
-        description: "Status of the instance update. Possible values are:  \n- \"PENDING\": The instance update is pending execution. \n- \"ROLLING_FORWARD\": The instance update is going forward. \n- \"ROLLING_BACK\": The instance update is being rolled back. \n- \"PAUSED\": The instance update is temporarily paused (inactive). \n- \"ROLLED_OUT\": The instance update is finished, the instance is running the new template. \n- \"ROLLED_BACK\": The instance update is finished, the instance has been reverted to the previous template. \n- \"CANCELLED\": The instance update is paused and no longer can be resumed, undefined in which template the instance is running."
+        description: |-
+          Status of the instance update. Possible values are:  
+          - "PENDING": The instance update is pending execution. 
+          - "ROLLING_FORWARD": The instance update is going forward. 
+          - "ROLLING_BACK": The instance update is being rolled back. 
+          - "PAUSED": The instance update is temporarily paused (inactive). 
+          - "ROLLED_OUT": The instance update is finished, the instance is running the new template. 
+          - "ROLLED_BACK": The instance update is finished, the instance has been reverted to the previous template. 
+          - "CANCELLED": The instance update is paused and no longer can be resumed, undefined in which template the instance is running.
         type: string
     type: object
   InstanceUpdateList:
@@ -772,7 +780,14 @@ definitions:
         description: '[Output Only] The fully qualified URL for the resource.'
         type: string
       status:
-        description: "[Output Only] Status of the update. Possible values are:  \n- \"ROLLING_FORWARD\": The update is going forward. \n- \"ROLLING_BACK\": The update is being rolled back. \n- \"PAUSED\": The update is temporarily paused (inactive). \n- \"ROLLED_OUT\": The update is finished, all instances have been updated successfully. \n- \"ROLLED_BACK\": The update is finished, all instances have been reverted to the previous template. \n- \"CANCELLED\": The update is paused and no longer can be resumed, undefined how many instances are running in which template."
+        description: |-
+          [Output Only] Status of the update. Possible values are:  
+          - "ROLLING_FORWARD": The update is going forward. 
+          - "ROLLING_BACK": The update is being rolled back. 
+          - "PAUSED": The update is temporarily paused (inactive). 
+          - "ROLLED_OUT": The update is finished, all instances have been updated successfully. 
+          - "ROLLED_BACK": The update is finished, all instances have been reverted to the previous template. 
+          - "CANCELLED": The update is paused and no longer can be resumed, undefined how many instances are running in which template.
         type: string
       statusMessage:
         description: '[Output Only] An optional textual description of the current status of the update.'

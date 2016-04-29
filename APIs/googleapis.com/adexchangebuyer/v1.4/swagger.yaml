@@ -87,7 +87,7 @@ tags:
 paths:
   /accounts:
     get:
-      description: "Retrieves the authenticated user's list of accounts."
+      description: Retrieves the authenticated user's list of accounts.
       operationId: adexchangebuyer.accounts.list
       responses:
         '200':
@@ -322,7 +322,7 @@ paths:
         - budget
   /creatives:
     get:
-      description: "Retrieves a list of the authenticated user's active creatives. A creative will be available 30-40 minutes after submission."
+      description: Retrieves a list of the authenticated user's active creatives. A creative will be available 30-40 minutes after submission.
       operationId: adexchangebuyer.creatives.list
       parameters:
         - collectionFormat: multi
@@ -510,7 +510,7 @@ paths:
         - creatives
   /performancereport:
     get:
-      description: "Retrieves the authenticated user's list of performance metrics."
+      description: Retrieves the authenticated user's list of performance metrics.
       operationId: adexchangebuyer.performanceReport.list
       parameters:
         - description: The account id to get the reports.
@@ -558,7 +558,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/pretargetingconfigs/{accountId}':
     get:
-      description: "Retrieves a list of the authenticated user's pretargeting configurations."
+      description: Retrieves a list of the authenticated user's pretargeting configurations.
       operationId: adexchangebuyer.pretargetingConfig.list
       parameters:
         - description: The account id to get the pretargeting configs for.
@@ -1218,14 +1218,24 @@ definitions:
         items:
           properties:
             bidProtocol:
-              description: "The protocol that the bidder endpoint is using. By default, OpenRTB protocols use JSON, except PROTOCOL_OPENRTB_PROTOBUF. PROTOCOL_OPENRTB_PROTOBUF uses protobuf encoding over the latest OpenRTB protocol version, which is 2.3 right now. Allowed values:  \n- PROTOCOL_ADX \n- PROTOCOL_OPENRTB_2_2 \n- PROTOCOL_OPENRTB_2_3 \n- PROTOCOL_OPENRTB_PROTOBUF"
+              description: |-
+                The protocol that the bidder endpoint is using. By default, OpenRTB protocols use JSON, except PROTOCOL_OPENRTB_PROTOBUF. PROTOCOL_OPENRTB_PROTOBUF uses protobuf encoding over the latest OpenRTB protocol version, which is 2.3 right now. Allowed values:  
+                - PROTOCOL_ADX 
+                - PROTOCOL_OPENRTB_2_2 
+                - PROTOCOL_OPENRTB_2_3 
+                - PROTOCOL_OPENRTB_PROTOBUF
               type: string
             maximumQps:
               description: The maximum queries per second the Ad Exchange will send.
               format: int32
               type: integer
             region:
-              description: "The geographical region the Ad Exchange should send requests from. Only used by some quota systems, but always setting the value is recommended. Allowed values:  \n- ASIA \n- EUROPE \n- US_EAST \n- US_WEST"
+              description: |-
+                The geographical region the Ad Exchange should send requests from. Only used by some quota systems, but always setting the value is recommended. Allowed values:  
+                - ASIA 
+                - EUROPE 
+                - US_EAST 
+                - US_WEST
               type: string
             url:
               description: The URL to which the Ad Exchange will send bid requests.
@@ -1667,7 +1677,7 @@ definitions:
         description: Resource type.
         type: string
       nextPageToken:
-        description: "Continuation token used to page through creatives. To retrieve the next page of results, set the next request's \"pageToken\" value to this."
+        description: 'Continuation token used to page through creatives. To retrieve the next page of results, set the next request''s "pageToken" value to this.'
         type: string
     type: object
   DealServingMetadata:
@@ -1677,7 +1687,7 @@ definitions:
         description: 'Tracks which parties (if any) have paused a deal. (readonly, except via PauseResumeOrderDeals action)'
     type: object
   DealServingMetadataDealPauseStatus:
-    description: 'Tracks which parties (if any) have paused a deal. The deal is considered paused if has_buyer_paused || has_seller_paused.'
+    description: Tracks which parties (if any) have paused a deal. The deal is considered paused if has_buyer_paused || has_seller_paused.
     properties:
       hasBuyerPaused:
         type: boolean
@@ -1796,7 +1806,7 @@ definitions:
         type: string
     type: object
   Dimension:
-    description: "This message carries publisher provided breakdown. E.g. {dimension_type: 'COUNTRY', [{dimension_value: {id: 1, name: 'US'}}, {dimension_value: {id: 2, name: 'UK'}}]}"
+    description: 'This message carries publisher provided breakdown. E.g. {dimension_type: ''COUNTRY'', [{dimension_value: {id: 1, name: ''US''}}, {dimension_value: {id: 2, name: ''UK''}}]}'
     properties:
       dimensionType:
         type: string
@@ -1954,7 +1964,7 @@ definitions:
           $ref: '#/definitions/ContactInformation'
         type: array
       sharedTargetings:
-        description: "The shared targeting visible to buyers and sellers. Each shared targeting entity is AND'd together. (updatable)"
+        description: The shared targeting visible to buyers and sellers. Each shared targeting entity is AND'd together. (updatable)
         items:
           $ref: '#/definitions/SharedTargeting'
         type: array
@@ -2320,7 +2330,7 @@ definitions:
     properties:
       buyer:
         $ref: '#/definitions/Buyer'
-        description: "The buyer who will pay this price. If unset, all buyers can pay this price (if the advertisers match, and there's no more specific rule matching the buyer)."
+        description: 'The buyer who will pay this price. If unset, all buyers can pay this price (if the advertisers match, and there''s no more specific rule matching the buyer).'
       price:
         $ref: '#/definitions/Price'
         description: The specified price
@@ -2520,7 +2530,7 @@ definitions:
         description: 'Exchange where this publisher profile is from. E.g. AdX, Rubicon etc...'
         type: string
       googlePlusLink:
-        description: "Link to publisher's Google+ page."
+        description: Link to publisher's Google+ page.
         type: string
       isParent:
         description: 'True, if this is the parent profile, which represents all domains owned by the publisher.'
@@ -2608,12 +2618,12 @@ definitions:
   SharedTargeting:
     properties:
       exclusions:
-        description: "The list of values to exclude from targeting. Each value is AND'd together."
+        description: The list of values to exclude from targeting. Each value is AND'd together.
         items:
           $ref: '#/definitions/TargetingValue'
         type: array
       inclusions:
-        description: "The list of value to include as part of the targeting. Each value is OR'd together."
+        description: The list of value to include as part of the targeting. Each value is OR'd together.
         items:
           $ref: '#/definitions/TargetingValue'
         type: array

@@ -187,7 +187,7 @@ paths:
         - api
   /vat-number-check:
     get:
-      description: "<p>We highly recommend if you are able, to check a VAT number on your end first to save wasted API lookups. It maybe that your customer has simply entered the wrong format. <a href='http://www.braemoor.co.uk/software/vat.shtml' target='_blank'>Heres a client side way to check the format using Javascript</a></p>"
+      description: '<p>We highly recommend if you are able, to check a VAT number on your end first to save wasted API lookups. It maybe that your customer has simply entered the wrong format. <a href=''http://www.braemoor.co.uk/software/vat.shtml'' target=''_blank''>Heres a client side way to check the format using Javascript</a></p>'
       operationId: vat_number_validate
       parameters:
         - description: The default response type is application/json if you would like to receive an XML response then set this to XML
@@ -228,7 +228,7 @@ paths:
           name: price
           required: true
           type: integer
-        - description: "Optional, if the price is including VAT set the type to 'incl'. Otherwise the default is assumed as excluding VAT already, 'excl'"
+        - description: 'Optional, if the price is including VAT set the type to ''incl''. Otherwise the default is assumed as excluding VAT already, ''excl'''
           in: query
           name: type
           required: false
@@ -273,7 +273,7 @@ definitions:
         description: The price including VAT
         type: integer
       rate:
-        description: 'The rate % for the country_rate'
+        description: The rate % for the country_rate
         type: integer
       status:
         description: Response code
@@ -461,13 +461,13 @@ definitions:
         description: Total amount excluding VAT
         type: integer
       tax_point:
-        description: "(or 'time of supply') if this is different from the invoice date"
+        description: (or 'time of supply') if this is different from the invoice date
         type: string
       total:
         description: Total amount of including VAT
         type: integer
       type:
-        description: "The type of invoice. Either 'sale' or 'refund'"
+        description: The type of invoice. Either 'sale' or 'refund'
         type: string
       vat_number:
         description: Your VAT number
@@ -531,13 +531,13 @@ definitions:
         description: Add a note to the invoice.
         type: string
       price_type:
-        description: "Optional, if the price is including VAT set the type to 'incl'. Otherwise the default is assumed as excluding VAT already, 'excl'"
+        description: 'Optional, if the price is including VAT set the type to ''incl''. Otherwise the default is assumed as excluding VAT already, ''excl'''
         type: string
       tax_point:
-        description: "(or 'time of supply') if this is different from the invoice date"
+        description: (or 'time of supply') if this is different from the invoice date
         type: string
       type:
-        description: "The type of invoice. Either 'sale' or 'refund'"
+        description: The type of invoice. Either 'sale' or 'refund'
         type: string
       vat_number:
         description: Your VAT number
@@ -635,19 +635,19 @@ definitions:
         description: Any notes attached to the invoice
         type: string
       price_type:
-        description: "Optional, if the price is including VAT set the type to 'incl'. Otherwise the default is assumed as excluding VAT already, 'excl'"
+        description: 'Optional, if the price is including VAT set the type to ''incl''. Otherwise the default is assumed as excluding VAT already, ''excl'''
         type: string
       subtotal:
         description: Total amount excluding VAT
         type: integer
       tax_point:
-        description: "(or 'time of supply') if this is different from the invoice date"
+        description: (or 'time of supply') if this is different from the invoice date
         type: string
       total:
         description: Total amount of including VAT
         type: integer
       type:
-        description: "The type of invoice. Either 'sale' or 'refund'"
+        description: The type of invoice. Either 'sale' or 'refund'
         type: string
       vat_number:
         description: Your VAT number
@@ -728,10 +728,10 @@ definitions:
         description: Add a note to the invoice.
         type: string
       tax_point:
-        description: "(or 'time of supply') if this is different from the invoice date"
+        description: (or 'time of supply') if this is different from the invoice date
         type: string
       type:
-        description: "The type of invoice. Either 'sale' or 'refund'"
+        description: The type of invoice. Either 'sale' or 'refund'
         type: string
       vat_number:
         description: Your VAT number
@@ -769,7 +769,7 @@ definitions:
         description: The type of goods the rate applies to
         type: string
       value:
-        description: 'The % VAT rate'
+        description: The % VAT rate
         type: integer
     required:
       - applies_to
@@ -780,7 +780,7 @@ definitions:
         description: The type of goods the rate applies to
         type: string
       value:
-        description: 'The % VAT rate'
+        description: The % VAT rate
         type: integer
     required:
       - applies_to
@@ -791,7 +791,7 @@ definitions:
         description: The type of goods the rate applies to
         type: string
       value:
-        description: 'The % VAT rate'
+        description: The % VAT rate
         type: integer
     required:
       - applies_to
@@ -799,7 +799,7 @@ definitions:
   standard:
     properties:
       value:
-        description: 'The % VAT rate'
+        description: The % VAT rate
         type: integer
     required:
       - value
@@ -809,7 +809,7 @@ definitions:
         description: The type of goods the rate applies to
         type: string
       value:
-        description: 'The % VAT rate'
+        description: The % VAT rate
         type: integer
     required:
       - applies_to

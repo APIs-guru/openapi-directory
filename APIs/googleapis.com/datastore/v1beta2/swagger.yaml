@@ -365,7 +365,7 @@ definitions:
           $ref: '#/definitions/Filter'
         type: array
       operator:
-        description: 'The operator for combining multiple filters. Only "and" is currently supported.'
+        description: The operator for combining multiple filters. Only "and" is currently supported.
         enum:
           - AND
         type: string
@@ -382,8 +382,8 @@ definitions:
       properties:
         additionalProperties:
           $ref: '#/definitions/Property'
-          description: 'The name of the property. A property name matching regex "__.*__" is reserved. A reserved property name is forbidden in certain documented contexts. The name must not contain more than 500 characters. Cannot be "".'
-        description: "The entity's properties."
+          description: The name of the property. A property name matching regex "__.*__" is reserved. A reserved property name is forbidden in certain documented contexts. The name must not contain more than 500 characters. Cannot be "".
+        description: The entity's properties.
         type: object
     type: object
   EntityResult:
@@ -442,7 +442,7 @@ definitions:
         $ref: '#/definitions/PartitionId'
         description: 'Entities are partitioned into subsets, currently identified by a dataset (usually implicitly specified by the project) and namespace ID. Queries are scoped to a single partition.'
       path:
-        description: "The entity path. An entity path consists of one or more elements composed of a kind and a string or numerical identifier, which identify entities. The first element identifies a root entity, the second element identifies a child of the root entity, the third element a child of the second entity, and so forth. The entities identified by all prefixes of the path are called the element's ancestors. An entity path is always fully complete: ALL of the entity's ancestors are required to be in the path along with the entity identifier itself. The only exception is that in some documented cases, the identifier in the last path element (for the entity) itself may be omitted. A path can never be empty. The path can have at most 100 elements."
+        description: 'The entity path. An entity path consists of one or more elements composed of a kind and a string or numerical identifier, which identify entities. The first element identifies a root entity, the second element identifies a child of the root entity, the third element a child of the second entity, and so forth. The entities identified by all prefixes of the path are called the element''s ancestors. An entity path is always fully complete: ALL of the entity''s ancestors are required to be in the path along with the entity identifier itself. The only exception is that in some documented cases, the identifier in the last path element (for the entity) itself may be omitted. A path can never be empty. The path can have at most 100 elements.'
         items:
           $ref: '#/definitions/KeyPathElement'
         type: array
@@ -458,10 +458,10 @@ definitions:
         format: int64
         type: string
       kind:
-        description: 'The kind of the entity. A kind matching regex "__.*__" is reserved/read-only. A kind must not contain more than 500 characters. Cannot be "".'
+        description: The kind of the entity. A kind matching regex "__.*__" is reserved/read-only. A kind must not contain more than 500 characters. Cannot be "".
         type: string
       name:
-        description: 'The name of the entity. A name matching regex "__.*__" is reserved/read-only. A name must not be more than 500 characters. Cannot be "".'
+        description: The name of the entity. A name matching regex "__.*__" is reserved/read-only. A name must not be more than 500 characters. Cannot be "".
         type: string
     type: object
   KindExpression:
@@ -514,22 +514,22 @@ definitions:
         description: Ignore a user specified read-only period. Optional.
         type: boolean
       insert:
-        description: "Entities to insert. Each inserted entity's key must have a complete path and must not be reserved/read-only."
+        description: Entities to insert. Each inserted entity's key must have a complete path and must not be reserved/read-only.
         items:
           $ref: '#/definitions/Entity'
         type: array
       insertAutoId:
-        description: "Insert entities with a newly allocated ID. Each inserted entity's key must omit the final identifier in its path and must not be reserved/read-only."
+        description: Insert entities with a newly allocated ID. Each inserted entity's key must omit the final identifier in its path and must not be reserved/read-only.
         items:
           $ref: '#/definitions/Entity'
         type: array
       update:
-        description: "Entities to update. Each updated entity's key must have a complete path and must not be reserved/read-only."
+        description: Entities to update. Each updated entity's key must have a complete path and must not be reserved/read-only.
         items:
           $ref: '#/definitions/Entity'
         type: array
       upsert:
-        description: "Entities to upsert. Each upserted entity's key must have a complete path and must not be reserved/read-only."
+        description: Entities to upsert. Each upserted entity's key must have a complete path and must not be reserved/read-only.
         items:
           $ref: '#/definitions/Entity'
         type: array
@@ -613,7 +613,7 @@ definitions:
     description: A representation of a property in a projection.
     properties:
       aggregationFunction:
-        description: "The aggregation function to apply to the property. Optional. Can only be used when grouping by at least one property. Must then be set on all properties in the projection that are not being grouped by. Aggregation functions: first selects the first result as determined by the query's order."
+        description: 'The aggregation function to apply to the property. Optional. Can only be used when grouping by at least one property. Must then be set on all properties in the projection that are not being grouped by. Aggregation functions: first selects the first result as determined by the query''s order.'
         enum:
           - FIRST
         type: string

@@ -614,7 +614,7 @@ paths:
           name: leaderboardId
           required: true
           type: string
-        - description: "The score you're submitting. The submitted score is ignored if it is worse than a previously submitted score, where worse depends on the leaderboard sort order. The meaning of the score value depends on the leaderboard format type. For fixed-point, the score represents the raw value. For time, the score represents elapsed time in milliseconds. For currency, the score represents a value in micro units."
+        - description: 'The score you''re submitting. The submitted score is ignored if it is worse than a previously submitted score, where worse depends on the leaderboard sort order. The meaning of the score value depends on the leaderboard format type. For fixed-point, the score represents the raw value. For time, the score represents elapsed time in milliseconds. For currency, the score represents a value in micro units.'
           in: query
           name: score
           required: true
@@ -623,7 +623,7 @@ paths:
           in: query
           name: language
           type: string
-        - description: "Additional information about the score you're submitting. Values must contain no more than 64 URI-safe characters as defined by section 2.3 of RFC 3986."
+        - description: Additional information about the score you're submitting. Values must contain no more than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
           in: query
           name: scoreTag
           type: string
@@ -649,7 +649,7 @@ paths:
           name: leaderboardId
           required: true
           type: string
-        - description: "The collection of scores you're requesting."
+        - description: The collection of scores you're requesting.
           enum:
             - PUBLIC
             - SOCIAL
@@ -658,7 +658,7 @@ paths:
           name: collection
           required: true
           type: string
-        - description: "The time span for the scores and ranks you're requesting."
+        - description: The time span for the scores and ranks you're requesting.
           enum:
             - ALL_TIME
             - DAILY
@@ -703,7 +703,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/leaderboards/{leaderboardId}/window/{collection}':
     get:
-      description: "Lists the scores in a leaderboard around (and including) a player's score."
+      description: Lists the scores in a leaderboard around (and including) a player's score.
       operationId: games.scores.listWindow
       parameters:
         - description: The ID of the leaderboard.
@@ -711,7 +711,7 @@ paths:
           name: leaderboardId
           required: true
           type: string
-        - description: "The collection of scores you're requesting."
+        - description: The collection of scores you're requesting.
           enum:
             - PUBLIC
             - SOCIAL
@@ -720,7 +720,7 @@ paths:
           name: collection
           required: true
           type: string
-        - description: "The time span for the scores and ranks you're requesting."
+        - description: The time span for the scores and ranks you're requesting.
           enum:
             - ALL_TIME
             - DAILY
@@ -743,7 +743,7 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: "The preferred number of scores to return above the player's score. More scores may be returned if the player is at the bottom of the leaderboard; fewer may be returned if the player is at the top. Must be less than or equal to maxResults."
+        - description: The preferred number of scores to return above the player's score. More scores may be returned if the player is at the bottom of the leaderboard; fewer may be returned if the player is at the top. Must be less than or equal to maxResults.
           in: query
           name: resultsAbove
           type: integer
@@ -849,7 +849,7 @@ paths:
       description: 'Retrieves the Player resource with the given ID. To retrieve the player for the currently authenticated user, set playerId to me.'
       operationId: games.players.get
       parameters:
-        - description: "A player ID. A value of me may be used in place of the authenticated player's ID."
+        - description: A player ID. A value of me may be used in place of the authenticated player's ID.
           in: path
           name: playerId
           required: true
@@ -880,10 +880,10 @@ paths:
       - $ref: '#/parameters/userIp'
   '/players/{playerId}/achievements':
     get:
-      description: "Lists the progress for all your application's achievements for the currently authenticated player."
+      description: Lists the progress for all your application's achievements for the currently authenticated player.
       operationId: games.achievements.list
       parameters:
-        - description: "A player ID. A value of me may be used in place of the authenticated player's ID."
+        - description: A player ID. A value of me may be used in place of the authenticated player's ID.
           in: path
           name: playerId
           required: true
@@ -902,7 +902,7 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: "Tells the server to return only achievements with the specified state. If this parameter isn't specified, all achievements are returned."
+        - description: 'Tells the server to return only achievements with the specified state. If this parameter isn''t specified, all achievements are returned.'
           enum:
             - ALL
             - HIDDEN
@@ -936,7 +936,7 @@ paths:
       description: List play data aggregated per category for the player corresponding to playerId.
       operationId: games.metagame.listCategoriesByPlayer
       parameters:
-        - description: "A player ID. A value of me may be used in place of the authenticated player's ID."
+        - description: A player ID. A value of me may be used in place of the authenticated player's ID.
           in: path
           name: playerId
           required: true
@@ -989,17 +989,17 @@ paths:
         NOTE: You cannot ask for 'ALL' leaderboards and 'ALL' timeSpans in the same request; only one parameter may be set to 'ALL'.
       operationId: games.scores.get
       parameters:
-        - description: "A player ID. A value of me may be used in place of the authenticated player's ID."
+        - description: A player ID. A value of me may be used in place of the authenticated player's ID.
           in: path
           name: playerId
           required: true
           type: string
-        - description: "The ID of the leaderboard. Can be set to 'ALL' to retrieve data for all leaderboards for this application."
+        - description: The ID of the leaderboard. Can be set to 'ALL' to retrieve data for all leaderboards for this application.
           in: path
           name: leaderboardId
           required: true
           type: string
-        - description: "The time span for the scores and ranks you're requesting."
+        - description: The time span for the scores and ranks you're requesting.
           enum:
             - ALL
             - ALL_TIME
@@ -1056,7 +1056,7 @@ paths:
       description: Get a list of quests for your application and the currently authenticated player.
       operationId: games.quests.list
       parameters:
-        - description: "A player ID. A value of me may be used in place of the authenticated player's ID."
+        - description: A player ID. A value of me may be used in place of the authenticated player's ID.
           in: path
           name: playerId
           required: true
@@ -1100,7 +1100,7 @@ paths:
       description: Retrieves a list of snapshots created by your application for the player corresponding to the player ID.
       operationId: games.snapshots.list
       parameters:
-        - description: "A player ID. A value of me may be used in place of the authenticated player's ID."
+        - description: A player ID. A value of me may be used in place of the authenticated player's ID.
           in: path
           name: playerId
           required: true
@@ -1272,7 +1272,13 @@ paths:
       description: Checks whether the games client is out of date.
       operationId: games.revisions.check
       parameters:
-        - description: "The revision of the client SDK used by your application. Format:\n[PLATFORM_TYPE]:[VERSION_NUMBER]. Possible values of PLATFORM_TYPE are:\n \n- \"ANDROID\" - Client is running the Android SDK. \n- \"IOS\" - Client is running the iOS SDK. \n- \"WEB_APP\" - Client is running as a Web App."
+        - description: |-
+            The revision of the client SDK used by your application. Format:
+            [PLATFORM_TYPE]:[VERSION_NUMBER]. Possible values of PLATFORM_TYPE are:
+             
+            - "ANDROID" - Client is running the Android SDK. 
+            - "IOS" - Client is running the iOS SDK. 
+            - "WEB_APP" - Client is running as a Web App.
           in: query
           name: clientRevision
           required: true
@@ -1956,7 +1962,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     put:
-      description: "Leave a turn-based match when it is not the current player's turn, without canceling the match."
+      description: 'Leave a turn-based match when it is not the current player''s turn, without canceling the match.'
       operationId: games.turnBasedMatches.leave
       parameters:
         - description: The ID of the match.
@@ -1990,7 +1996,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     put:
-      description: "Leave a turn-based match during the current player's turn, without canceling the match."
+      description: 'Leave a turn-based match during the current player''s turn, without canceling the match.'
       operationId: games.turnBasedMatches.leaveTurn
       parameters:
         - description: The ID of the match.
@@ -2033,7 +2039,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Create a rematch of a match that was previously completed, with the same participants. This can be called by only one player on a match still in their list; the player must have called Finish first. Returns the newly created match; it will be the caller's turn."
+      description: 'Create a rematch of a match that was previously completed, with the same participants. This can be called by only one player on a match still in their list; the player must have called Finish first. Returns the newly created match; it will be the caller''s turn.'
       operationId: games.turnBasedMatches.rematch
       parameters:
         - description: The ID of the match.
@@ -2104,7 +2110,11 @@ definitions:
     description: This is a JSON template for an achievement definition object.
     properties:
       achievementType:
-        description: "The type of the achievement.\nPossible values are:  \n- \"STANDARD\" - Achievement is either locked or unlocked. \n- \"INCREMENTAL\" - Achievement is incremental."
+        description: |-
+          The type of the achievement.
+          Possible values are:  
+          - "STANDARD" - Achievement is either locked or unlocked. 
+          - "INCREMENTAL" - Achievement is incremental.
         type: string
       description:
         description: The description of the achievement.
@@ -2120,7 +2130,12 @@ definitions:
         description: The ID of the achievement.
         type: string
       initialState:
-        description: "The initial state of the achievement.\nPossible values are:  \n- \"HIDDEN\" - Achievement is hidden. \n- \"REVEALED\" - Achievement is revealed. \n- \"UNLOCKED\" - Achievement is unlocked."
+        description: |-
+          The initial state of the achievement.
+          Possible values are:  
+          - "HIDDEN" - Achievement is hidden. 
+          - "REVEALED" - Achievement is revealed. 
+          - "UNLOCKED" - Achievement is unlocked.
         type: string
       isRevealedIconUrlDefault:
         description: 'Indicates whether the revealed icon image being returned is a default image, or is provided by the game.'
@@ -2181,7 +2196,11 @@ definitions:
     description: This is a JSON template for an achievement reveal response
     properties:
       currentState:
-        description: "The current state of the achievement for which a reveal was attempted. This might be UNLOCKED if the achievement was already unlocked.\nPossible values are:  \n- \"REVEALED\" - Achievement is revealed. \n- \"UNLOCKED\" - Achievement is unlocked."
+        description: |-
+          The current state of the achievement for which a reveal was attempted. This might be UNLOCKED if the achievement was already unlocked.
+          Possible values are:  
+          - "REVEALED" - Achievement is revealed. 
+          - "UNLOCKED" - Achievement is unlocked.
         type: string
       kind:
         default: 'games#achievementRevealResponse'
@@ -2257,7 +2276,13 @@ definitions:
         $ref: '#/definitions/GamesAchievementSetStepsAtLeast'
         description: The payload if an update of type SET_STEPS_AT_LEAST was requested for the achievement.
       updateType:
-        description: "The type of update being applied.\nPossible values are:  \n- \"REVEAL\" - Achievement is revealed. \n- \"UNLOCK\" - Achievement is unlocked. \n- \"INCREMENT\" - Achievement is incremented. \n- \"SET_STEPS_AT_LEAST\" - Achievement progress is set to at least the passed value."
+        description: |-
+          The type of update being applied.
+          Possible values are:  
+          - "REVEAL" - Achievement is revealed. 
+          - "UNLOCK" - Achievement is unlocked. 
+          - "INCREMENT" - Achievement is incremented. 
+          - "SET_STEPS_AT_LEAST" - Achievement progress is set to at least the passed value.
         type: string
     type: object
   AchievementUpdateResponse:
@@ -2267,7 +2292,12 @@ definitions:
         description: The achievement this update is was applied to.
         type: string
       currentState:
-        description: "The current state of the achievement.\nPossible values are:  \n- \"HIDDEN\" - Achievement is hidden. \n- \"REVEALED\" - Achievement is revealed. \n- \"UNLOCKED\" - Achievement is unlocked."
+        description: |-
+          The current state of the achievement.
+          Possible values are:  
+          - "HIDDEN" - Achievement is hidden. 
+          - "REVEALED" - Achievement is revealed. 
+          - "UNLOCKED" - Achievement is unlocked.
         type: string
       currentSteps:
         description: The current steps recorded for this achievement if it is incremental.
@@ -2344,7 +2374,10 @@ definitions:
         description: The description of the application.
         type: string
       enabledFeatures:
-        description: "A list of features that have been enabled for the application.\nPossible values are:  \n- \"SNAPSHOTS\" - Snapshots has been enabled"
+        description: |-
+          A list of features that have been enabled for the application.
+          Possible values are:  
+          - "SNAPSHOTS" - Snapshots has been enabled
         items:
           type: string
         type: array
@@ -2372,7 +2405,7 @@ definitions:
         description: The name of the application.
         type: string
       themeColor:
-        description: 'A hint to the client UI for what color to use as an app-themed color. The color is given as an RGB triplet (e.g. "E0E0E0").'
+        description: A hint to the client UI for what color to use as an app-themed color. The color is given as an RGB triplet (e.g. "E0E0E0").
         type: string
     type: object
   ApplicationCategory:
@@ -2438,7 +2471,15 @@ definitions:
     description: This is a JSON template for a batch update failure resource.
     properties:
       failureCause:
-        description: "The cause for the update failure.\nPossible values are:  \n- \"TOO_LARGE\": A batch request was issued with more events than are allowed in a single batch. \n- \"TIME_PERIOD_EXPIRED\": A batch was sent with data too far in the past to record. \n- \"TIME_PERIOD_SHORT\": A batch was sent with a time range that was too short. \n- \"TIME_PERIOD_LONG\": A batch was sent with a time range that was too long. \n- \"ALREADY_UPDATED\": An attempt was made to record a batch of data which was already seen. \n- \"RECORD_RATE_HIGH\": An attempt was made to record data faster than the server will apply updates."
+        description: |-
+          The cause for the update failure.
+          Possible values are:  
+          - "TOO_LARGE": A batch request was issued with more events than are allowed in a single batch. 
+          - "TIME_PERIOD_EXPIRED": A batch was sent with data too far in the past to record. 
+          - "TIME_PERIOD_SHORT": A batch was sent with a time range that was too short. 
+          - "TIME_PERIOD_LONG": A batch was sent with a time range that was too long. 
+          - "ALREADY_UPDATED": An attempt was made to record a batch of data which was already seen. 
+          - "RECORD_RATE_HIGH": An attempt was made to record data faster than the server will apply updates.
         type: string
       kind:
         default: 'games#eventBatchRecordFailure'
@@ -2487,7 +2528,11 @@ definitions:
         description: 'Uniquely identifies the type of this resource. Value is always the fixed string games#eventDefinition.'
         type: string
       visibility:
-        description: "The visibility of event being tracked in this definition.\nPossible values are:  \n- \"REVEALED\": This event should be visible to all users. \n- \"HIDDEN\": This event should only be shown to users that have recorded this event at least once."
+        description: |-
+          The visibility of event being tracked in this definition.
+          Possible values are:  
+          - "REVEALED": This event should be visible to all users. 
+          - "HIDDEN": This event should only be shown to users that have recorded this event at least once.
         type: string
     type: object
   EventDefinitionListResponse:
@@ -2545,7 +2590,11 @@ definitions:
         description: The ID of the event that was not updated.
         type: string
       failureCause:
-        description: "The cause for the update failure.\nPossible values are:  \n- \"NOT_FOUND\" - An attempt was made to set an event that was not defined. \n- \"INVALID_UPDATE_VALUE\" - An attempt was made to increment an event by a non-positive value."
+        description: |-
+          The cause for the update failure.
+          Possible values are:  
+          - "NOT_FOUND" - An attempt was made to set an event that was not defined. 
+          - "INVALID_UPDATE_VALUE" - An attempt was made to increment an event by a non-positive value.
         type: string
       kind:
         default: 'games#eventRecordFailure'
@@ -2681,7 +2730,12 @@ definitions:
         description: Localized display name.
         type: string
       platformType:
-        description: "The platform type.\nPossible values are:  \n- \"ANDROID\" - Instance is for Android. \n- \"IOS\" - Instance is for iOS \n- \"WEB_APP\" - Instance is for Web App."
+        description: |-
+          The platform type.
+          Possible values are:  
+          - "ANDROID" - Instance is for Android. 
+          - "IOS" - Instance is for iOS 
+          - "WEB_APP" - Instance is for Web App.
         type: string
       realtimePlay:
         description: Flag to show if this game instance supports realtime play.
@@ -2770,7 +2824,11 @@ definitions:
         description: The name of the leaderboard.
         type: string
       order:
-        description: "How scores are ordered.\nPossible values are:  \n- \"LARGER_IS_BETTER\" - Larger values are better; scores are sorted in descending order. \n- \"SMALLER_IS_BETTER\" - Smaller values are better; scores are sorted in ascending order."
+        description: |-
+          How scores are ordered.
+          Possible values are:  
+          - "LARGER_IS_BETTER" - Larger values are better; scores are sorted in descending order. 
+          - "SMALLER_IS_BETTER" - Smaller values are better; scores are sorted in ascending order.
         type: string
     type: object
   LeaderboardEntry:
@@ -2801,7 +2859,12 @@ definitions:
         format: int64
         type: string
       timeSpan:
-        description: "The time span of this high score.\nPossible values are:  \n- \"ALL_TIME\" - The score is an all-time high score. \n- \"WEEKLY\" - The score is a weekly high score. \n- \"DAILY\" - The score is a daily high score."
+        description: |-
+          The time span of this high score.
+          Possible values are:  
+          - "ALL_TIME" - The score is an all-time high score. 
+          - "WEEKLY" - The score is a weekly high score. 
+          - "DAILY" - The score is a daily high score.
         type: string
       writeTimestampMillis:
         description: 'The timestamp at which this score was recorded, in milliseconds since the epoch in UTC.'
@@ -2867,7 +2930,7 @@ definitions:
         type: string
       playerScore:
         $ref: '#/definitions/LeaderboardEntry'
-        description: "The score of the requesting player on the leaderboard. The player's score may appear both here and in the list of scores above. If you are viewing a public leaderboard and the player is not sharing their gameplay information publicly, the scoreRank and formattedScoreRank values will not be present."
+        description: 'The score of the requesting player on the leaderboard. The player''s score may appear both here and in the list of scores above. If you are viewing a public leaderboard and the player is not sharing their gameplay information publicly, the scoreRank and formattedScoreRank values will not be present.'
       prevPageToken:
         description: The pagination token for the previous page of results.
         type: string
@@ -2909,10 +2972,10 @@ definitions:
         description: 'Uniquely identifies the type of this resource. Value is always the fixed string games#networkDiagnostics.'
         type: string
       networkOperatorCode:
-        description: "The MCC+MNC code for the client's network connection. On Android: http://developer.android.com/reference/android/telephony/TelephonyManager.html#getNetworkOperator() On iOS, see: https://developer.apple.com/library/ios/documentation/NetworkingInternet/Reference/CTCarrier/Reference/Reference.html"
+        description: 'The MCC+MNC code for the client''s network connection. On Android: http://developer.android.com/reference/android/telephony/TelephonyManager.html#getNetworkOperator() On iOS, see: https://developer.apple.com/library/ios/documentation/NetworkingInternet/Reference/CTCarrier/Reference/Reference.html'
         type: string
       networkOperatorName:
-        description: "The name of the carrier of the client's network connection. On Android: http://developer.android.com/reference/android/telephony/TelephonyManager.html#getNetworkOperatorName() On iOS: https://developer.apple.com/library/ios/documentation/NetworkingInternet/Reference/CTCarrier/Reference/Reference.html#//apple_ref/occ/instp/CTCarrier/carrierName"
+        description: 'The name of the carrier of the client''s network connection. On Android: http://developer.android.com/reference/android/telephony/TelephonyManager.html#getNetworkOperatorName() On iOS: https://developer.apple.com/library/ios/documentation/NetworkingInternet/Reference/CTCarrier/Reference/Reference.html#//apple_ref/occ/instp/CTCarrier/carrierName'
         type: string
       registrationLatencyMillis:
         description: The amount of time in milliseconds it took for the client to establish a connection with the XMPP server.
@@ -2934,7 +2997,15 @@ definitions:
         format: int32
         type: integer
       result:
-        description: "The result of the participant for this match.\nPossible values are:  \n- \"MATCH_RESULT_WIN\" - The participant won the match. \n- \"MATCH_RESULT_LOSS\" - The participant lost the match. \n- \"MATCH_RESULT_TIE\" - The participant tied the match. \n- \"MATCH_RESULT_NONE\" - There was no winner for the match (nobody wins or loses this kind of game.) \n- \"MATCH_RESULT_DISCONNECT\" - The participant disconnected / left during the match. \n- \"MATCH_RESULT_DISAGREED\" - Different clients reported different results for this participant."
+        description: |-
+          The result of the participant for this match.
+          Possible values are:  
+          - "MATCH_RESULT_WIN" - The participant won the match. 
+          - "MATCH_RESULT_LOSS" - The participant lost the match. 
+          - "MATCH_RESULT_TIE" - The participant tied the match. 
+          - "MATCH_RESULT_NONE" - There was no winner for the match (nobody wins or loses this kind of game.) 
+          - "MATCH_RESULT_DISCONNECT" - The participant disconnected / left during the match. 
+          - "MATCH_RESULT_DISAGREED" - Different clients reported different results for this participant.
         type: string
     type: object
   PeerChannelDiagnostics:
@@ -3032,7 +3103,7 @@ definitions:
         $ref: '#/definitions/Played'
         description: Details about the last time this player played a multiplayer game with the currently authenticated player. Populated for PLAYED_WITH player collection members.
       name:
-        description: "An object representation of the individual components of the player's name. For some players, these fields may not be present."
+        description: 'An object representation of the individual components of the player''s name. For some players, these fields may not be present.'
         properties:
           familyName:
             description: 'The family name of this player. In some places, this is known as the last name.'
@@ -3049,16 +3120,21 @@ definitions:
         type: string
       profileSettings:
         $ref: '#/definitions/ProfileSettings'
-        description: "The player's profile settings. Controls whether or not the player's profile is visible to other players."
+        description: The player's profile settings. Controls whether or not the player's profile is visible to other players.
       title:
-        description: "The player's title rewarded for their game activities."
+        description: The player's title rewarded for their game activities.
         type: string
     type: object
   PlayerAchievement:
     description: This is a JSON template for an achievement object.
     properties:
       achievementState:
-        description: "The state of the achievement.\nPossible values are:  \n- \"HIDDEN\" - Achievement is hidden. \n- \"REVEALED\" - Achievement is revealed. \n- \"UNLOCKED\" - Achievement is unlocked."
+        description: |-
+          The state of the achievement.
+          Possible values are:  
+          - "HIDDEN" - Achievement is hidden. 
+          - "REVEALED" - Achievement is revealed. 
+          - "UNLOCKED" - Achievement is unlocked.
         type: string
       currentSteps:
         description: The current steps for an incremental achievement.
@@ -3079,7 +3155,7 @@ definitions:
         description: 'Uniquely identifies the type of this resource. Value is always the fixed string games#playerAchievement.'
         type: string
       lastUpdatedTimestamp:
-        description: "The timestamp of the last modification to this achievement's state."
+        description: The timestamp of the last modification to this achievement's state.
         format: int64
         type: string
     type: object
@@ -3137,7 +3213,7 @@ definitions:
         type: string
     type: object
   PlayerExperienceInfo:
-    description: "This is a JSON template for 1P/3P metadata about the player's experience."
+    description: This is a JSON template for 1P/3P metadata about the player's experience.
     properties:
       currentExperiencePoints:
         description: The current number of experience points for the player.
@@ -3185,7 +3261,12 @@ definitions:
         $ref: '#/definitions/LeaderboardScoreRank'
         description: The social rank of the score in this leaderboard.
       timeSpan:
-        description: "The time span of this score.\nPossible values are:  \n- \"ALL_TIME\" - The score is an all-time score. \n- \"WEEKLY\" - The score is a weekly score. \n- \"DAILY\" - The score is a daily score."
+        description: |-
+          The time span of this score.
+          Possible values are:  
+          - "ALL_TIME" - The score is an all-time score. 
+          - "WEEKLY" - The score is a weekly score. 
+          - "DAILY" - The score is a daily score.
         type: string
       writeTimestamp:
         description: 'The timestamp at which this score was recorded, in milliseconds since the epoch in UTC.'
@@ -3212,7 +3293,7 @@ definitions:
         description: The Player resources for the owner of this score.
     type: object
   PlayerLevel:
-    description: "This is a JSON template for 1P/3P metadata about a user's level."
+    description: This is a JSON template for 1P/3P metadata about a user's level.
     properties:
       kind:
         default: 'games#playerLevel'
@@ -3265,7 +3346,12 @@ definitions:
         description: Additional information about this score. Values will contain no more than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
         type: string
       timeSpan:
-        description: "The time span for this player score.\nPossible values are:  \n- \"ALL_TIME\" - The score is an all-time score. \n- \"WEEKLY\" - The score is a weekly score. \n- \"DAILY\" - The score is a daily score."
+        description: |-
+          The time span for this player score.
+          Possible values are:  
+          - "ALL_TIME" - The score is an all-time score. 
+          - "WEEKLY" - The score is a weekly score. 
+          - "DAILY" - The score is a daily score.
         type: string
     type: object
   PlayerScoreListResponse:
@@ -3285,7 +3371,12 @@ definitions:
     description: This is a JSON template for a list of leaderboard entry resources.
     properties:
       beatenScoreTimeSpans:
-        description: "The time spans where the submitted score is better than the existing score for that time span.\nPossible values are:  \n- \"ALL_TIME\" - The score is an all-time score. \n- \"WEEKLY\" - The score is a weekly score. \n- \"DAILY\" - The score is a daily score."
+        description: |-
+          The time spans where the submitted score is better than the existing score for that time span.
+          Possible values are:  
+          - "ALL_TIME" - The score is an all-time score. 
+          - "WEEKLY" - The score is a weekly score. 
+          - "DAILY" - The score is a daily score.
         items:
           type: string
         type: array
@@ -3303,7 +3394,7 @@ definitions:
         description: Additional information about this score. Values will contain no more than 64 URI-safe characters as defined by section 2.3 of RFC 3986.
         type: string
       unbeatenScores:
-        description: "The scores in time spans that have not been beaten. As an example, the submitted score may be better than the player's DAILY score, but not better than the player's scores for the WEEKLY or ALL_TIME time spans."
+        description: 'The scores in time spans that have not been beaten. As an example, the submitted score may be better than the player''s DAILY score, but not better than the player''s scores for the WEEKLY or ALL_TIME time spans.'
         items:
           $ref: '#/definitions/PlayerScore'
         type: array
@@ -3329,14 +3420,16 @@ definitions:
         description: 'Uniquely identifies the type of this resource. Value is always the fixed string games#profileSettings.'
         type: string
       profileVisible:
-        description: "The player's current profile visibility. This field is visible to both 1P and 3P APIs."
+        description: The player's current profile visibility. This field is visible to both 1P and 3P APIs.
         type: boolean
     type: object
   PushToken:
     description: This is a JSON template for a push token resource.
     properties:
       clientRevision:
-        description: "The revision of the client SDK used by your application, in the same format that's used by revisions.check. Used to send backward compatible messages. Format: [PLATFORM_TYPE]:[VERSION_NUMBER]. Possible values of PLATFORM_TYPE are:  \n- IOS - Push token is for iOS"
+        description: |-
+          The revision of the client SDK used by your application, in the same format that's used by revisions.check. Used to send backward compatible messages. Format: [PLATFORM_TYPE]:[VERSION_NUMBER]. Possible values of PLATFORM_TYPE are:  
+          - IOS - Push token is for iOS
         type: string
       id:
         $ref: '#/definitions/PushTokenId'
@@ -3425,7 +3518,16 @@ definitions:
         format: int64
         type: string
       state:
-        description: "The state of the quest.\nPossible values are:  \n- \"UPCOMING\": The quest is upcoming. The user can see the quest, but cannot accept it until it is open. \n- \"OPEN\": The quest is currently open and may be accepted at this time. \n- \"ACCEPTED\": The user is currently participating in this quest. \n- \"COMPLETED\": The user has completed the quest. \n- \"FAILED\": The quest was attempted but was not completed before the deadline expired. \n- \"EXPIRED\": The quest has expired and was not accepted. \n- \"DELETED\": The quest should be deleted from the local database."
+        description: |-
+          The state of the quest.
+          Possible values are:  
+          - "UPCOMING": The quest is upcoming. The user can see the quest, but cannot accept it until it is open. 
+          - "OPEN": The quest is currently open and may be accepted at this time. 
+          - "ACCEPTED": The user is currently participating in this quest. 
+          - "COMPLETED": The user has completed the quest. 
+          - "FAILED": The quest was attempted but was not completed before the deadline expired. 
+          - "EXPIRED": The quest has expired and was not accepted. 
+          - "DELETED": The quest should be deleted from the local database.
         type: string
     type: object
   QuestContribution:
@@ -3503,7 +3605,13 @@ definitions:
         description: 'Uniquely identifies the type of this resource. Value is always the fixed string games#questMilestone.'
         type: string
       state:
-        description: "The current state of the milestone.\nPossible values are:  \n- \"COMPLETED_NOT_CLAIMED\" - The milestone is complete, but has not yet been claimed. \n- \"CLAIMED\" - The milestone is complete and has been claimed. \n- \"NOT_COMPLETED\" - The milestone has not yet been completed. \n- \"NOT_STARTED\" - The milestone is for a quest that has not yet been accepted."
+        description: |-
+          The current state of the milestone.
+          Possible values are:  
+          - "COMPLETED_NOT_CLAIMED" - The milestone is complete, but has not yet been claimed. 
+          - "CLAIMED" - The milestone is complete and has been claimed. 
+          - "NOT_COMPLETED" - The milestone has not yet been completed. 
+          - "NOT_STARTED" - The milestone is for a quest that has not yet been accepted.
         type: string
     type: object
   RevisionCheckResponse:
@@ -3517,7 +3625,12 @@ definitions:
         description: 'Uniquely identifies the type of this resource. Value is always the fixed string games#revisionCheckResponse.'
         type: string
       revisionStatus:
-        description: "The result of the revision check.\nPossible values are:  \n- \"OK\" - The revision being used is current. \n- \"DEPRECATED\" - There is currently a newer version available, but the revision being used still works. \n- \"INVALID\" - The revision being used is not supported in any released version."
+        description: |-
+          The result of the revision check.
+          Possible values are:  
+          - "OK" - The revision being used is current. 
+          - "DEPRECATED" - There is currently a newer version available, but the revision being used still works. 
+          - "INVALID" - The revision being used is not supported in any released version.
         type: string
     type: object
   Room:
@@ -3561,7 +3674,14 @@ definitions:
         format: int32
         type: integer
       status:
-        description: "The status of the room.\nPossible values are:  \n- \"ROOM_INVITING\" - One or more players have been invited and not responded. \n- \"ROOM_AUTO_MATCHING\" - One or more slots need to be filled by auto-matching. \n- \"ROOM_CONNECTING\" - Players have joined and are connecting to each other (either before or after auto-matching). \n- \"ROOM_ACTIVE\" - All players have joined and connected to each other. \n- \"ROOM_DELETED\" - The room should no longer be shown on the client. Returned in sync calls when a player joins a room (as a tombstone), or for rooms where all joined participants have left."
+        description: |-
+          The status of the room.
+          Possible values are:  
+          - "ROOM_INVITING" - One or more players have been invited and not responded. 
+          - "ROOM_AUTO_MATCHING" - One or more slots need to be filled by auto-matching. 
+          - "ROOM_CONNECTING" - Players have joined and are connecting to each other (either before or after auto-matching). 
+          - "ROOM_ACTIVE" - All players have joined and connected to each other. 
+          - "ROOM_DELETED" - The room should no longer be shown on the client. Returned in sync calls when a player joins a room (as a tombstone), or for rooms where all joined participants have left.
         type: string
       variant:
         description: 'The variant / mode of the application being played; can be any integer value, or left blank.'
@@ -3685,10 +3805,10 @@ definitions:
         description: 'Uniquely identifies the type of this resource. Value is always the fixed string games#roomLeaveDiagnostics.'
         type: string
       networkOperatorCode:
-        description: "The MCC+MNC code for the client's network connection. On Android: http://developer.android.com/reference/android/telephony/TelephonyManager.html#getNetworkOperator() On iOS, see: https://developer.apple.com/library/ios/documentation/NetworkingInternet/Reference/CTCarrier/Reference/Reference.html"
+        description: 'The MCC+MNC code for the client''s network connection. On Android: http://developer.android.com/reference/android/telephony/TelephonyManager.html#getNetworkOperator() On iOS, see: https://developer.apple.com/library/ios/documentation/NetworkingInternet/Reference/CTCarrier/Reference/Reference.html'
         type: string
       networkOperatorName:
-        description: "The name of the carrier of the client's network connection. On Android: http://developer.android.com/reference/android/telephony/TelephonyManager.html#getNetworkOperatorName() On iOS: https://developer.apple.com/library/ios/documentation/NetworkingInternet/Reference/CTCarrier/Reference/Reference.html#//apple_ref/occ/instp/CTCarrier/carrierName"
+        description: 'The name of the carrier of the client''s network connection. On Android: http://developer.android.com/reference/android/telephony/TelephonyManager.html#getNetworkOperatorName() On iOS: https://developer.apple.com/library/ios/documentation/NetworkingInternet/Reference/CTCarrier/Reference/Reference.html#//apple_ref/occ/instp/CTCarrier/carrierName'
         type: string
       peerSession:
         description: Diagnostics about all peer sessions.
@@ -3710,7 +3830,22 @@ definitions:
         $ref: '#/definitions/RoomLeaveDiagnostics'
         description: Diagnostics for a player leaving the room.
       reason:
-        description: "Reason for leaving the match.\nPossible values are:  \n- \"PLAYER_LEFT\" - The player chose to leave the room.. \n- \"GAME_LEFT\" - The game chose to remove the player from the room. \n- \"REALTIME_ABANDONED\" - The player switched to another application and abandoned the room. \n- \"REALTIME_PEER_CONNECTION_FAILURE\" - The client was unable to establish a connection to other peer(s). \n- \"REALTIME_SERVER_CONNECTION_FAILURE\" - The client was unable to communicate with the server. \n- \"REALTIME_SERVER_ERROR\" - The client received an error response when it tried to communicate with the server. \n- \"REALTIME_TIMEOUT\" - The client timed out while waiting for a room. \n- \"REALTIME_CLIENT_DISCONNECTING\" - The client disconnects without first calling Leave. \n- \"REALTIME_SIGN_OUT\" - The user signed out of G+ while in the room. \n- \"REALTIME_GAME_CRASHED\" - The game crashed. \n- \"REALTIME_ROOM_SERVICE_CRASHED\" - RoomAndroidService crashed. \n- \"REALTIME_DIFFERENT_CLIENT_ROOM_OPERATION\" - Another client is trying to enter a room. \n- \"REALTIME_SAME_CLIENT_ROOM_OPERATION\" - The same client is trying to enter a new room."
+        description: |-
+          Reason for leaving the match.
+          Possible values are:  
+          - "PLAYER_LEFT" - The player chose to leave the room.. 
+          - "GAME_LEFT" - The game chose to remove the player from the room. 
+          - "REALTIME_ABANDONED" - The player switched to another application and abandoned the room. 
+          - "REALTIME_PEER_CONNECTION_FAILURE" - The client was unable to establish a connection to other peer(s). 
+          - "REALTIME_SERVER_CONNECTION_FAILURE" - The client was unable to communicate with the server. 
+          - "REALTIME_SERVER_ERROR" - The client received an error response when it tried to communicate with the server. 
+          - "REALTIME_TIMEOUT" - The client timed out while waiting for a room. 
+          - "REALTIME_CLIENT_DISCONNECTING" - The client disconnects without first calling Leave. 
+          - "REALTIME_SIGN_OUT" - The user signed out of G+ while in the room. 
+          - "REALTIME_GAME_CRASHED" - The game crashed. 
+          - "REALTIME_ROOM_SERVICE_CRASHED" - RoomAndroidService crashed. 
+          - "REALTIME_DIFFERENT_CLIENT_ROOM_OPERATION" - Another client is trying to enter a room. 
+          - "REALTIME_SAME_CLIENT_ROOM_OPERATION" - The same client is trying to enter a new room.
         type: string
     type: object
   RoomList:
@@ -3752,7 +3887,12 @@ definitions:
         format: int32
         type: integer
       error:
-        description: "The error code in event of a failure.\nPossible values are:  \n- \"P2P_FAILED\" - The client failed to establish a P2P connection with the peer. \n- \"PRESENCE_FAILED\" - The client failed to register to receive P2P connections. \n- \"RELAY_SERVER_FAILED\" - The client received an error when trying to use the relay server to establish a P2P connection with the peer."
+        description: |-
+          The error code in event of a failure.
+          Possible values are:  
+          - "P2P_FAILED" - The client failed to establish a P2P connection with the peer. 
+          - "PRESENCE_FAILED" - The client failed to register to receive P2P connections. 
+          - "RELAY_SERVER_FAILED" - The client received an error when trying to use the relay server to establish a P2P connection with the peer.
         type: string
       error_reason:
         description: More detailed diagnostic message returned in event of a failure.
@@ -3765,7 +3905,11 @@ definitions:
         description: The ID of the participant.
         type: string
       status:
-        description: "The status of the peer in the room.\nPossible values are:  \n- \"CONNECTION_ESTABLISHED\" - The client established a P2P connection with the peer. \n- \"CONNECTION_FAILED\" - The client failed to establish directed presence with the peer."
+        description: |-
+          The status of the peer in the room.
+          Possible values are:  
+          - "CONNECTION_ESTABLISHED" - The client established a P2P connection with the peer. 
+          - "CONNECTION_FAILED" - The client failed to establish directed presence with the peer.
         type: string
       unreliableRoundtripLatencyMillis:
         description: The amount of time in milliseconds it took to send packets back and forth on the unreliable channel with this peer.
@@ -3813,13 +3957,28 @@ definitions:
         description: 'Uniquely identifies the type of this resource. Value is always the fixed string games#roomParticipant.'
         type: string
       leaveReason:
-        description: "The reason the participant left the room; populated if the participant status is PARTICIPANT_LEFT.\nPossible values are:  \n- \"PLAYER_LEFT\" - The player explicitly chose to leave the room. \n- \"GAME_LEFT\" - The game chose to remove the player from the room. \n- \"ABANDONED\" - The player switched to another application and abandoned the room.\n- \"PEER_CONNECTION_FAILURE\" - The client was unable to establish or maintain a connection to other peer(s) in the room.\n- \"SERVER_ERROR\" - The client received an error response when it tried to communicate with the server. \n- \"TIMEOUT\" - The client timed out while waiting for players to join and connect. \n- \"PRESENCE_FAILURE\" - The client's XMPP connection ended abruptly."
+        description: |-
+          The reason the participant left the room; populated if the participant status is PARTICIPANT_LEFT.
+          Possible values are:  
+          - "PLAYER_LEFT" - The player explicitly chose to leave the room. 
+          - "GAME_LEFT" - The game chose to remove the player from the room. 
+          - "ABANDONED" - The player switched to another application and abandoned the room.
+          - "PEER_CONNECTION_FAILURE" - The client was unable to establish or maintain a connection to other peer(s) in the room.
+          - "SERVER_ERROR" - The client received an error response when it tried to communicate with the server. 
+          - "TIMEOUT" - The client timed out while waiting for players to join and connect. 
+          - "PRESENCE_FAILURE" - The client's XMPP connection ended abruptly.
         type: string
       player:
         $ref: '#/definitions/Player'
         description: Information about the player. Not populated if this player was anonymously auto-matched against the requesting player. (Either player or autoMatchedPlayer will be set.)
       status:
-        description: "The status of the participant with respect to the room.\nPossible values are:  \n- \"PARTICIPANT_INVITED\" - The participant has been invited to join the room, but has not yet responded. \n- \"PARTICIPANT_JOINED\" - The participant has joined the room (either after creating it or accepting an invitation.) \n- \"PARTICIPANT_DECLINED\" - The participant declined an invitation to join the room. \n- \"PARTICIPANT_LEFT\" - The participant joined the room and then left it."
+        description: |-
+          The status of the participant with respect to the room.
+          Possible values are:  
+          - "PARTICIPANT_INVITED" - The participant has been invited to join the room, but has not yet responded. 
+          - "PARTICIPANT_JOINED" - The participant has joined the room (either after creating it or accepting an invitation.) 
+          - "PARTICIPANT_DECLINED" - The participant declined an invitation to join the room. 
+          - "PARTICIPANT_LEFT" - The participant joined the room and then left it.
         type: string
     type: object
   RoomStatus:
@@ -3841,7 +4000,14 @@ definitions:
         description: Globally unique ID for a room.
         type: string
       status:
-        description: "The status of the room.\nPossible values are:  \n- \"ROOM_INVITING\" - One or more players have been invited and not responded. \n- \"ROOM_AUTO_MATCHING\" - One or more slots need to be filled by auto-matching. \n- \"ROOM_CONNECTING\" - Players have joined are connecting to each other (either before or after auto-matching). \n- \"ROOM_ACTIVE\" - All players have joined and connected to each other. \n- \"ROOM_DELETED\" - All joined players have left."
+        description: |-
+          The status of the room.
+          Possible values are:  
+          - "ROOM_INVITING" - One or more players have been invited and not responded. 
+          - "ROOM_AUTO_MATCHING" - One or more slots need to be filled by auto-matching. 
+          - "ROOM_CONNECTING" - Players have joined are connecting to each other (either before or after auto-matching). 
+          - "ROOM_ACTIVE" - All players have joined and connected to each other. 
+          - "ROOM_DELETED" - All joined players have left.
         type: string
       statusVersion:
         description: 'The version of the status for the room: an increasing counter, used by the client to ignore out-of-order updates to room status.'
@@ -3905,7 +4071,10 @@ definitions:
         description: The title of this snapshot.
         type: string
       type:
-        description: "The type of this snapshot.\nPossible values are:  \n- \"SAVE_GAME\" - A snapshot representing a save game."
+        description: |-
+          The type of this snapshot.
+          Possible values are:  
+          - "SAVE_GAME" - A snapshot representing a save game.
         type: string
       uniqueName:
         description: The unique name provided when the snapshot was created.
@@ -4028,10 +4197,24 @@ definitions:
           $ref: '#/definitions/ParticipantResult'
         type: array
       status:
-        description: "The status of the match.\nPossible values are:  \n- \"MATCH_AUTO_MATCHING\" - One or more slots need to be filled by auto-matching; the match cannot be established until they are filled. \n- \"MATCH_ACTIVE\" - The match has started. \n- \"MATCH_COMPLETE\" - The match has finished. \n- \"MATCH_CANCELED\" - The match was canceled. \n- \"MATCH_EXPIRED\" - The match expired due to inactivity. \n- \"MATCH_DELETED\" - The match should no longer be shown on the client. Returned only for tombstones for matches when sync is called."
+        description: |-
+          The status of the match.
+          Possible values are:  
+          - "MATCH_AUTO_MATCHING" - One or more slots need to be filled by auto-matching; the match cannot be established until they are filled. 
+          - "MATCH_ACTIVE" - The match has started. 
+          - "MATCH_COMPLETE" - The match has finished. 
+          - "MATCH_CANCELED" - The match was canceled. 
+          - "MATCH_EXPIRED" - The match expired due to inactivity. 
+          - "MATCH_DELETED" - The match should no longer be shown on the client. Returned only for tombstones for matches when sync is called.
         type: string
       userMatchStatus:
-        description: "The status of the current user in the match. Derived from the match type, match status, the user's participant status, and the pending participant for the match.\nPossible values are:  \n- \"USER_INVITED\" - The user has been invited to join the match and has not responded yet. \n- \"USER_AWAITING_TURN\" - The user is waiting for their turn. \n- \"USER_TURN\" - The user has an action to take in the match. \n- \"USER_MATCH_COMPLETED\" - The match has ended (it is completed, canceled, or expired.)"
+        description: |-
+          The status of the current user in the match. Derived from the match type, match status, the user's participant status, and the pending participant for the match.
+          Possible values are:  
+          - "USER_INVITED" - The user has been invited to join the match and has not responded yet. 
+          - "USER_AWAITING_TURN" - The user is waiting for their turn. 
+          - "USER_TURN" - The user has an action to take in the match. 
+          - "USER_MATCH_COMPLETED" - The match has ended (it is completed, canceled, or expired.)
         type: string
       variant:
         description: 'The variant / mode of the application being played; can be any integer value, or left blank.'
@@ -4073,7 +4256,7 @@ definitions:
         format: byte
         type: string
       dataAvailable:
-        description: "True if this match has data available but it wasn't returned in a list response; fetching the match individually will retrieve this data."
+        description: True if this match has data available but it wasn't returned in a list response; fetching the match individually will retrieve this data.
         type: boolean
       kind:
         default: 'games#turnBasedMatchData'
@@ -4143,7 +4326,16 @@ definitions:
         $ref: '#/definitions/Player'
         description: Information about the player. Not populated if this player was anonymously auto-matched against the requesting player. (Either player or autoMatchedPlayer will be set.)
       status:
-        description: "The status of the participant with respect to the match.\nPossible values are:  \n- \"PARTICIPANT_NOT_INVITED_YET\" - The participant is slated to be invited to the match, but the invitation has not been sent; the invite will be sent when it becomes their turn. \n- \"PARTICIPANT_INVITED\" - The participant has been invited to join the match, but has not yet responded. \n- \"PARTICIPANT_JOINED\" - The participant has joined the match (either after creating it or accepting an invitation.) \n- \"PARTICIPANT_DECLINED\" - The participant declined an invitation to join the match. \n- \"PARTICIPANT_LEFT\" - The participant joined the match and then left it. \n- \"PARTICIPANT_FINISHED\" - The participant finished playing in the match. \n- \"PARTICIPANT_UNRESPONSIVE\" - The participant did not take their turn in the allotted time."
+        description: |-
+          The status of the participant with respect to the match.
+          Possible values are:  
+          - "PARTICIPANT_NOT_INVITED_YET" - The participant is slated to be invited to the match, but the invitation has not been sent; the invite will be sent when it becomes their turn. 
+          - "PARTICIPANT_INVITED" - The participant has been invited to join the match, but has not yet responded. 
+          - "PARTICIPANT_JOINED" - The participant has joined the match (either after creating it or accepting an invitation.) 
+          - "PARTICIPANT_DECLINED" - The participant declined an invitation to join the match. 
+          - "PARTICIPANT_LEFT" - The participant joined the match and then left it. 
+          - "PARTICIPANT_FINISHED" - The participant finished playing in the match. 
+          - "PARTICIPANT_UNRESPONSIVE" - The participant did not take their turn in the allotted time.
         type: string
     type: object
   TurnBasedMatchRematch:
@@ -4214,7 +4406,7 @@ definitions:
         format: int32
         type: integer
       pendingParticipantId:
-        description: "The ID of the participant who should take their turn next. May be set to the current player's participant ID to update match state without changing the turn. If not set, the match will wait for other player(s) to join via automatching; this is only valid if automatch criteria is set on the match with remaining slots for automatched players."
+        description: 'The ID of the participant who should take their turn next. May be set to the current player''s participant ID to update match state without changing the turn. If not set, the match will wait for other player(s) to join via automatching; this is only valid if automatch criteria is set on the match with remaining slots for automatched players.'
         type: string
       results:
         description: The match results for the participants in the match.

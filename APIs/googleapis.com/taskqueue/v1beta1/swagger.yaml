@@ -300,12 +300,12 @@ definitions:
               type: string
             type: array
           consumerEmails:
-            description: 'Email addresses of users who can "consume" tasks from the TaskQueue. This means they can Dequeue and Delete tasks from the queue.'
+            description: Email addresses of users who can "consume" tasks from the TaskQueue. This means they can Dequeue and Delete tasks from the queue.
             items:
               type: string
             type: array
           producerEmails:
-            description: 'Email addresses of users who can "produce" tasks into the TaskQueue. This means they can Insert tasks into the queue.'
+            description: Email addresses of users who can "produce" tasks into the TaskQueue. This means they can Insert tasks into the queue.
             items:
               type: string
             type: array

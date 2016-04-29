@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: "Accesses AdSense publishers' inventory and generates performance reports."
+  description: Accesses AdSense publishers' inventory and generates performance reports.
   title: AdSense Management
   version: v1.4
   x-apiClientRegistration:
@@ -654,7 +654,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/accounts/{accountId}/reports':
     get:
-      description: 'Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.'
+      description: Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
       operationId: adsense.accounts.reports.generate
       parameters:
         - description: Account upon which to report.
@@ -672,7 +672,7 @@ paths:
           name: endDate
           required: true
           type: string
-        - description: "Optional currency to use when reporting on monetary metrics. Defaults to the account's currency if not set."
+        - description: Optional currency to use when reporting on monetary metrics. Defaults to the account's currency if not set.
           in: query
           name: currency
           type: string
@@ -690,7 +690,7 @@ paths:
             type: string
           name: filter
           type: array
-        - description: 'Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.'
+        - description: Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.
           in: query
           name: locale
           type: string
@@ -720,7 +720,7 @@ paths:
           minimum: 0
           name: startIndex
           type: integer
-        - description: "Whether the report should be generated in the AdSense account's local timezone. If false default PST/PDT timezone will be used."
+        - description: Whether the report should be generated in the AdSense account's local timezone. If false default PST/PDT timezone will be used.
           in: query
           name: useTimezoneReporting
           type: boolean
@@ -799,7 +799,7 @@ paths:
           name: savedReportId
           required: true
           type: string
-        - description: 'Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.'
+        - description: Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.
           in: query
           name: locale
           type: string
@@ -1299,7 +1299,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/alerts/{alertId}':
     delete:
-      description: "Dismiss (delete) the specified alert from the publisher's AdSense account."
+      description: Dismiss (delete) the specified alert from the publisher's AdSense account.
       operationId: adsense.alerts.delete
       parameters:
         - description: Alert to delete.
@@ -1397,7 +1397,7 @@ paths:
       - $ref: '#/parameters/userIp'
   /reports:
     get:
-      description: 'Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.'
+      description: Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
       operationId: adsense.reports.generate
       parameters:
         - description: 'Start of the date range to report on in "YYYY-MM-DD" format, inclusive.'
@@ -1417,7 +1417,7 @@ paths:
             type: string
           name: accountId
           type: array
-        - description: "Optional currency to use when reporting on monetary metrics. Defaults to the account's currency if not set."
+        - description: Optional currency to use when reporting on monetary metrics. Defaults to the account's currency if not set.
           in: query
           name: currency
           type: string
@@ -1435,7 +1435,7 @@ paths:
             type: string
           name: filter
           type: array
-        - description: 'Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.'
+        - description: Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.
           in: query
           name: locale
           type: string
@@ -1465,7 +1465,7 @@ paths:
           minimum: 0
           name: startIndex
           type: integer
-        - description: "Whether the report should be generated in the AdSense account's local timezone. If false default PST/PDT timezone will be used."
+        - description: Whether the report should be generated in the AdSense account's local timezone. If false default PST/PDT timezone will be used.
           in: query
           name: useTimezoneReporting
           type: boolean
@@ -1534,7 +1534,7 @@ paths:
           name: savedReportId
           required: true
           type: string
-        - description: 'Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.'
+        - description: Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.
           in: query
           name: locale
           type: string
@@ -1572,7 +1572,7 @@ paths:
       - $ref: '#/parameters/userIp'
   /savedadstyles:
     get:
-      description: "List all saved ad styles in the user's account."
+      description: List all saved ad styles in the user's account.
       operationId: adsense.savedadstyles.list
       parameters:
         - description: 'The maximum number of saved ad styles to include in the response, used for paging.'
@@ -1607,7 +1607,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/savedadstyles/{savedAdStyleId}':
     get:
-      description: "Get a specific saved ad style from the user's account."
+      description: Get a specific saved ad style from the user's account.
       operationId: adsense.savedadstyles.get
       parameters:
         - description: Saved ad style to retrieve.
@@ -1678,7 +1678,7 @@ definitions:
         description: 'Kind of list this is, in this case adsense#accounts.'
         type: string
       nextPageToken:
-        description: "Continuation token used to page through accounts. To retrieve the next page of results, set the next request's \"pageToken\" value to this."
+        description: 'Continuation token used to page through accounts. To retrieve the next page of results, set the next request''s "pageToken" value to this.'
         type: string
     type: object
   AdClient:
@@ -1694,7 +1694,7 @@ definitions:
         description: 'Kind of resource this is, in this case adsense#adClient.'
         type: string
       productCode:
-        description: "This ad client's product code, which corresponds to the PRODUCT_CODE report dimension."
+        description: 'This ad client''s product code, which corresponds to the PRODUCT_CODE report dimension.'
         type: string
       supportsReporting:
         description: Whether this ad client supports being reported on.
@@ -1715,7 +1715,7 @@ definitions:
         description: 'Kind of list this is, in this case adsense#adClients.'
         type: string
       nextPageToken:
-        description: "Continuation token used to page through ad clients. To retrieve the next page of results, set the next request's \"pageToken\" value to this."
+        description: 'Continuation token used to page through ad clients. To retrieve the next page of results, set the next request''s "pageToken" value to this.'
         type: string
     type: object
   AdCode:
@@ -1843,7 +1843,7 @@ definitions:
         description: Name of this ad unit.
         type: string
       savedStyleId:
-        description: "ID of the saved ad style which holds this ad unit's style information."
+        description: ID of the saved ad style which holds this ad unit's style information.
         type: string
       status:
         description: |-
@@ -1870,7 +1870,7 @@ definitions:
         description: 'Kind of list this is, in this case adsense#adUnits.'
         type: string
       nextPageToken:
-        description: "Continuation token used to page through ad units. To retrieve the next page of results, set the next request's \"pageToken\" value to this."
+        description: 'Continuation token used to page through ad units. To retrieve the next page of results, set the next request''s "pageToken" value to this.'
         type: string
     type: object
   AdsenseReportsGenerateResponse:
@@ -2008,7 +2008,7 @@ definitions:
         description: 'Kind of list this is, in this case adsense#customChannels.'
         type: string
       nextPageToken:
-        description: "Continuation token used to page through custom channels. To retrieve the next page of results, set the next request's \"pageToken\" value to this."
+        description: 'Continuation token used to page through custom channels. To retrieve the next page of results, set the next request''s "pageToken" value to this.'
         type: string
     type: object
   Metadata:
@@ -2044,7 +2044,7 @@ definitions:
   Payments:
     properties:
       items:
-        description: "The list of Payments for the account. One or both of a) the account's most recent payment; and b) the account's upcoming payment."
+        description: The list of Payments for the account. One or both of a) the account's most recent payment; and b) the account's upcoming payment.
         items:
           $ref: '#/definitions/Payment'
         type: array
@@ -2119,7 +2119,7 @@ definitions:
         description: 'Kind of list this is, in this case adsense#savedAdStyles.'
         type: string
       nextPageToken:
-        description: "Continuation token used to page through ad units. To retrieve the next page of results, set the next request's \"pageToken\" value to this."
+        description: 'Continuation token used to page through ad units. To retrieve the next page of results, set the next request''s "pageToken" value to this.'
         type: string
     type: object
   SavedReport:
@@ -2132,7 +2132,7 @@ definitions:
         description: 'Kind of resource this is, in this case adsense#savedReport.'
         type: string
       name:
-        description: "This saved report's name."
+        description: This saved report's name.
         type: string
     type: object
   SavedReports:
@@ -2150,7 +2150,7 @@ definitions:
         description: 'Kind of list this is, in this case adsense#savedReports.'
         type: string
       nextPageToken:
-        description: "Continuation token used to page through saved reports. To retrieve the next page of results, set the next request's \"pageToken\" value to this."
+        description: 'Continuation token used to page through saved reports. To retrieve the next page of results, set the next request''s "pageToken" value to this.'
         type: string
     type: object
   UrlChannel:
@@ -2181,6 +2181,6 @@ definitions:
         description: 'Kind of list this is, in this case adsense#urlChannels.'
         type: string
       nextPageToken:
-        description: "Continuation token used to page through URL channels. To retrieve the next page of results, set the next request's \"pageToken\" value to this."
+        description: 'Continuation token used to page through URL channels. To retrieve the next page of results, set the next request''s "pageToken" value to this.'
         type: string
     type: object

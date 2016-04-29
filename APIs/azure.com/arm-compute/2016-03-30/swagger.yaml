@@ -306,7 +306,7 @@ paths:
         - description: The location upon which resource usage is queried.
           in: path
           name: location
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
@@ -328,7 +328,7 @@ paths:
         - description: The location upon which virtual-machine-sizes is queried.
           in: path
           name: location
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
@@ -1827,7 +1827,7 @@ definitions:
         description: Gets or sets the image sku.
         type: string
       version:
-        description: "Gets or sets the image version. The allowed formats are Major.Minor.Build or 'latest'. Major, Minor and Build being decimal numbers. Specify 'latest' to use the latest version of image."
+        description: 'Gets or sets the image version. The allowed formats are Major.Minor.Build or ''latest''. Major, Minor and Build being decimal numbers. Specify ''latest'' to use the latest version of image.'
         type: string
   InnerError:
     description: Inner error details.
@@ -2197,7 +2197,7 @@ definitions:
     description: Describes the uri of a disk.
     properties:
       uri:
-        description: "Gets or sets the virtual hard disk's uri. It should be a valid Uri to a virtual hard disk."
+        description: Gets or sets the virtual hard disk's uri. It should be a valid Uri to a virtual hard disk.
         type: string
   VirtualMachine:
     allOf:
@@ -2242,7 +2242,7 @@ definitions:
         description: 'Gets or sets whether it overwrites destination VirtualHardDisk if true, in case of conflict.'
         type: boolean
       vhdPrefix:
-        description: "Gets or sets the captured VirtualHardDisk's name prefix."
+        description: Gets or sets the captured VirtualHardDisk's name prefix.
         type: string
     required:
       - vhdPrefix
@@ -2546,7 +2546,7 @@ definitions:
   VirtualMachineScaleSetIPConfiguration:
     allOf:
       - $ref: '#/definitions/SubResource'
-    description: "Describes a virtual machine scale set network profile's IP configuration."
+    description: Describes a virtual machine scale set network profile's IP configuration.
     properties:
       name:
         description: Gets or sets the IP configuration name.
@@ -2557,7 +2557,7 @@ definitions:
     required:
       - name
   VirtualMachineScaleSetIPConfigurationProperties:
-    description: "Describes a virtual machine scale set network profile's IP configuration properties."
+    description: Describes a virtual machine scale set network profile's IP configuration properties.
     properties:
       applicationGatewayBackendAddressPools:
         description: Gets or sets the application gateway backend address pools.
@@ -2637,7 +2637,7 @@ definitions:
   VirtualMachineScaleSetNetworkConfiguration:
     allOf:
       - $ref: '#/definitions/SubResource'
-    description: "Describes a virtual machine scale set network profile's network configurations."
+    description: Describes a virtual machine scale set network profile's network configurations.
     properties:
       name:
         description: Gets or sets the network configuration name.
@@ -2648,7 +2648,7 @@ definitions:
     required:
       - name
   VirtualMachineScaleSetNetworkConfigurationProperties:
-    description: "Describes a virtual machine scale set network profile's IP configuration."
+    description: Describes a virtual machine scale set network profile's IP configuration.
     properties:
       ipConfigurations:
         description: Gets or sets the virtual machine scale set IP Configuration.

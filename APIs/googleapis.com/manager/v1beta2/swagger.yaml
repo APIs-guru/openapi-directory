@@ -431,7 +431,15 @@ definitions:
         description: '[Output Only] Human readable details about the current state.'
         type: string
       status:
-        description: "[Output Only] The status of the deployment. Possible values include: \n- UNKNOWN\n- DEPLOYING\n- DEPLOYED\n- DEPLOYMENT_FAILED\n- DELETING\n- DELETED\n- DELETE_FAILED"
+        description: |-
+          [Output Only] The status of the deployment. Possible values include: 
+          - UNKNOWN
+          - DEPLOYING
+          - DEPLOYED
+          - DEPLOYMENT_FAILED
+          - DELETING
+          - DELETED
+          - DELETE_FAILED
         type: string
     type: object
   Deployment:
@@ -516,7 +524,7 @@ definitions:
         description: The description of the firewall (optional)
         type: string
       network:
-        description: "The NetworkModule to which this firewall should apply. If not specified, or if specified as 'default', this firewall will be applied to the 'default' network."
+        description: 'The NetworkModule to which this firewall should apply. If not specified, or if specified as ''default'', this firewall will be applied to the ''default'' network.'
         type: string
       sourceRanges:
         description: 'Source IP ranges to apply this firewall to, see the GCE Spec for details on syntax'
@@ -681,7 +689,7 @@ definitions:
         description: Name of the interface.
         type: string
       network:
-        description: "The name of the NetworkModule to which this interface applies. If not specified, or specified as 'default', this will use the 'default' network."
+        description: 'The name of the NetworkModule to which this interface applies. If not specified, or specified as ''default'', this will use the ''default'' network.'
         type: string
       networkIp:
         description: An optional IPV4 internal network address to assign to the instance for this network interface.
@@ -719,7 +727,7 @@ definitions:
         type: boolean
       initializeParams:
         $ref: '#/definitions/NewDiskInitializeParams'
-        description: 'Create the new disk using these parameters. The name of the disk will be <instance_name>-<five_random_charactersgt;.'
+        description: Create the new disk using these parameters. The name of the disk will be <instance_name>-<five_random_charactersgt;.
     type: object
   NewDiskInitializeParams:
     description: Initialization parameters for creating a new disk.
@@ -729,7 +737,7 @@ definitions:
         format: int64
         type: string
       diskType:
-        description: "Name of the disk type resource describing which disk type to use to create the disk. For example 'pd-ssd' or 'pd-standard'. Default is 'pd-standard'"
+        description: Name of the disk type resource describing which disk type to use to create the disk. For example 'pd-ssd' or 'pd-standard'. Default is 'pd-standard'
         type: string
       sourceImage:
         description: The fully-qualified URL of a source image to use to create this disk.

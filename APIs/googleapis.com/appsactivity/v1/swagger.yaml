@@ -108,7 +108,9 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: "The Google service from which to return activities. Possible values of source are: \n- drive.google.com"
+        - description: |-
+            The Google service from which to return activities. Possible values of source are: 
+            - drive.google.com
           in: query
           name: source
           type: string
@@ -185,7 +187,7 @@ definitions:
         type: boolean
       move:
         $ref: '#/definitions/Move'
-        description: "Extra information for move type events, such as changes in an object's parents."
+        description: 'Extra information for move type events, such as changes in an object''s parents.'
       permissionChanges:
         description: 'Extra information for permissionChange type events, such as the user or group the new permission applies to.'
         items:
@@ -229,7 +231,7 @@ definitions:
         type: string
     type: object
   Move:
-    description: "Contains information about changes in an object's parents as a result of a move type event."
+    description: Contains information about changes in an object's parents as a result of a move type event.
     properties:
       addedParents:
         description: The added parent(s).
@@ -246,13 +248,13 @@ definitions:
     description: 'Contains information about a parent object. For example, a folder in Drive is a parent for all files within it.'
     properties:
       id:
-        description: "The parent's ID."
+        description: The parent's ID.
         type: string
       isRoot:
         description: Whether this is the root folder.
         type: boolean
       title:
-        description: "The parent's title."
+        description: The parent's title.
         type: string
     type: object
   Permission:
@@ -262,10 +264,10 @@ definitions:
         description: The name of the user or group the permission applies to.
         type: string
       permissionId:
-        description: "The ID for this permission. Corresponds to the Drive API's permission ID returned as part of the Drive Permissions resource."
+        description: The ID for this permission. Corresponds to the Drive API's permission ID returned as part of the Drive Permissions resource.
         type: string
       role:
-        description: "Indicates the Google Drive permissions role. The role determines a user's ability to read, write, or comment on the file."
+        description: 'Indicates the Google Drive permissions role. The role determines a user''s ability to read, write, or comment on the file.'
         enum:
           - commenter
           - owner
@@ -282,13 +284,13 @@ definitions:
         type: string
       user:
         $ref: '#/definitions/User'
-        description: "The user's information if the type is USER."
+        description: The user's information if the type is USER.
       withLink:
         description: Whether the permission requires a link to the file.
         type: boolean
     type: object
   PermissionChange:
-    description: "Contains information about a Drive object's permissions that changed as a result of a permissionChange type event."
+    description: Contains information about a Drive object's permissions that changed as a result of a permissionChange type event.
     properties:
       addedPermissions:
         description: Lists all Permission objects added.
@@ -341,7 +343,7 @@ definitions:
         description: The displayable name of the user.
         type: string
       permissionId:
-        description: "The permission ID associated with this user. Equivalent to the Drive API's permission ID for this user, returned as part of the Drive Permissions resource."
+        description: 'The permission ID associated with this user. Equivalent to the Drive API''s permission ID for this user, returned as part of the Drive Permissions resource.'
         type: string
       photo:
         $ref: '#/definitions/Photo'

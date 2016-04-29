@@ -850,7 +850,7 @@ definitions:
         description: 'An [advanced logs filter](/logging/docs/view/advanced_filters). Example: `"logName:syslog AND severity>=ERROR"`.'
         type: string
       name:
-        description: "Required. The client-assigned metric identifier. Example: `\"severe_errors\"`. Metric identifiers are limited to 1000 characters and can include only the following characters: `A-Z`, `a-z`, `0-9`, and the special characters `_-.,+!*',()%/\\`. The forward-slash character (`/`) denotes a hierarchy of name pieces, and it cannot be the first character of the name."
+        description: 'Required. The client-assigned metric identifier. Example: `"severe_errors"`. Metric identifiers are limited to 1000 characters and can include only the following characters: `A-Z`, `a-z`, `0-9`, and the special characters `_-.,+!*'',()%/\`. The forward-slash character (`/`) denotes a hierarchy of name pieces, and it cannot be the first character of the name.'
         type: string
     type: object
   LogSink:
@@ -866,7 +866,7 @@ definitions:
         description: 'Required. The client-assigned sink identifier. Example: `"my-severe-errors-to-pubsub"`. Sink identifiers are limited to 1000 characters and can include only the following characters: `A-Z`, `a-z`, `0-9`, and the special characters `_-.`.'
         type: string
       outputVersionFormat:
-        description: "The log entry version to use for this sink's exported log entries. This version does not have to correspond to the version of the log entry when it was written to Cloud Logging."
+        description: The log entry version to use for this sink's exported log entries. This version does not have to correspond to the version of the log entry when it was written to Cloud Logging.
         enum:
           - VERSION_FORMAT_UNSPECIFIED
           - V2
@@ -874,7 +874,7 @@ definitions:
         type: string
     type: object
   MonitoredResource:
-    description: "An object representing a resource that can be used for monitoring, logging, billing, or other purposes. Examples include virtual machine instances, databases, and storage devices such as disks. The `type` field identifies a MonitoredResourceDescriptor object that describes the resource's schema. Information in the `labels` field identifies the actual resource and its attributes according to the schema. For example, a particular Compute Engine VM instance could be represented by the following object, because the MonitoredResourceDescriptor for `\"gce_instance\"` has labels `\"instance_id\"` and `\"zone\"`: { \"type\": \"gce_instance\", \"labels\": { \"instance_id\": \"my-instance\", \"zone\": \"us-central1-a\" }}"
+    description: 'An object representing a resource that can be used for monitoring, logging, billing, or other purposes. Examples include virtual machine instances, databases, and storage devices such as disks. The `type` field identifies a MonitoredResourceDescriptor object that describes the resource''s schema. Information in the `labels` field identifies the actual resource and its attributes according to the schema. For example, a particular Compute Engine VM instance could be represented by the following object, because the MonitoredResourceDescriptor for `"gce_instance"` has labels `"instance_id"` and `"zone"`: { "type": "gce_instance", "labels": { "instance_id": "my-instance", "zone": "us-central1-a" }}'
     properties:
       labels:
         additionalProperties:
@@ -963,7 +963,7 @@ definitions:
         description: Module of the application that handled this request.
         type: string
       nickname:
-        description: "The logged-in user who made the request. Most likely, this is the part of the user's email before the `@` sign. The field value is the same for different requests from the same user, but different users can have similar names. This information is also available to the application via the App Engine Users API. This field will be populated starting with App Engine 1.9.21."
+        description: 'The logged-in user who made the request. Most likely, this is the part of the user''s email before the `@` sign. The field value is the same for different requests from the same user, but different users can have similar names. This information is also available to the application via the App Engine Users API. This field will be populated starting with App Engine 1.9.21.'
         type: string
       pendingTime:
         description: Time this request spent in the pending request queue.

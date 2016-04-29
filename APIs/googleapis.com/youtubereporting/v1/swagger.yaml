@@ -111,7 +111,7 @@ paths:
       description: Lists jobs.
       operationId: youtubereporting.jobs.list
       parameters:
-        - description: "The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel)."
+        - description: 'The content owner''s external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).'
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -157,7 +157,7 @@ paths:
       description: Creates a job and returns it.
       operationId: youtubereporting.jobs.create
       parameters:
-        - description: "The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel)."
+        - description: 'The content owner''s external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).'
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -187,7 +187,7 @@ paths:
           name: jobId
           required: true
           type: string
-        - description: "The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel)."
+        - description: 'The content owner''s external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).'
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -212,7 +212,7 @@ paths:
           name: jobId
           required: true
           type: string
-        - description: "The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel)."
+        - description: 'The content owner''s external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).'
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -252,7 +252,7 @@ paths:
           name: jobId
           required: true
           type: string
-        - description: "The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel)."
+        - description: 'The content owner''s external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).'
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -317,7 +317,7 @@ paths:
           name: reportId
           required: true
           type: string
-        - description: "The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel)."
+        - description: 'The content owner''s external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).'
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -389,7 +389,7 @@ paths:
       description: Lists report types.
       operationId: youtubereporting.reportTypes.list
       parameters:
-        - description: "The content owner's external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel)."
+        - description: 'The content owner''s external ID on which behalf the user is acting on. If not set, the user is acting for himself (his own channel).'
           in: query
           name: onBehalfOfContentOwner
           type: string
@@ -498,7 +498,7 @@ definitions:
         type: string
     type: object
   Report:
-    description: "A report's metadata including the URL from which the report itself can be downloaded."
+    description: A report's metadata including the URL from which the report itself can be downloaded.
     properties:
       createTime:
         description: The date/time when this report was created.

@@ -192,7 +192,7 @@ definitions:
   JsonSchema:
     properties:
       $ref:
-        description: 'A reference to another schema. The value of this property is the "id" of another schema.'
+        description: A reference to another schema. The value of this property is the "id" of another schema.
         type: string
       additionalProperties:
         $ref: '#/definitions/JsonSchema'
@@ -218,7 +218,7 @@ definitions:
           type: string
         type: array
       enumDescriptions:
-        description: 'The descriptions for the enums. Each position maps to the corresponding value in the "enum" array.'
+        description: The descriptions for the enums. Each position maps to the corresponding value in the "enum" array.
         items:
           type: string
         type: array
@@ -512,7 +512,7 @@ definitions:
         description: Whether this method supports subscriptions.
         type: boolean
       useMediaDownloadService:
-        description: 'Indicates that downloads from this method should use the download service URL (i.e. "/download"). Only applies if the method supports media download.'
+        description: Indicates that downloads from this method should use the download service URL (i.e. "/download"). Only applies if the method supports media download.
         type: boolean
     type: object
   RestResource:

@@ -312,7 +312,7 @@ paths:
           name: datasetId
           required: true
           type: string
-        - description: "The client's current time in milliseconds since epoch."
+        - description: The client's current time in milliseconds since epoch.
           in: query
           name: currentTimeMillis
           type: string
@@ -406,7 +406,7 @@ paths:
           name: datasetId
           required: true
           type: string
-        - description: "The client's current time in milliseconds since epoch. Note that the minStartTimeNs and maxEndTimeNs properties in the request body are in nanoseconds instead of milliseconds."
+        - description: The client's current time in milliseconds since epoch. Note that the minStartTimeNs and maxEndTimeNs properties in the request body are in nanoseconds instead of milliseconds.
           in: query
           name: currentTimeMillis
           type: string
@@ -539,7 +539,7 @@ paths:
           name: sessionId
           required: true
           type: string
-        - description: "The client's current time in milliseconds since epoch."
+        - description: The client's current time in milliseconds since epoch.
           in: query
           name: currentTimeMillis
           type: string
@@ -573,7 +573,7 @@ paths:
           name: sessionId
           required: true
           type: string
-        - description: "The client's current time in milliseconds since epoch."
+        - description: The client's current time in milliseconds since epoch.
           in: query
           name: currentTimeMillis
           type: string
@@ -765,7 +765,22 @@ definitions:
         $ref: '#/definitions/Application'
         description: Information about an application which feeds sensor data into the platform.
       dataStreamId:
-        description: "A unique identifier for the data stream produced by this data source. The identifier includes:\n\n \n- The physical device's manufacturer, model, and serial number (UID). \n- The application's package name or name. Package name is used when the data source was created by an Android application. The developer project number is used when the data source was created by a REST client. \n- The data source's type. \n- The data source's stream name.  Note that not all attributes of the data source are used as part of the stream identifier. In particular, the version of the hardware/the application isn't used. This allows us to preserve the same stream through version updates. This also means that two DataSource objects may represent the same data stream even if they're not equal.\n\nThe exact format of the data stream ID created by an Android application is: type:dataType.name:application.packageName:device.manufacturer:device.model:device.uid:dataStreamName \n\nThe exact format of the data stream ID created by a REST client is: type:dataType.name:developer project number:device.manufacturer:device.model:device.uid:dataStreamName \n\nWhen any of the optional fields that comprise of the data stream ID are blank, they will be omitted from the data stream ID. The minnimum viable data stream ID would be: type:dataType.name:developer project number\n\nFinally, the developer project number is obfuscated when read by any REST or Android client that did not create the data source. Only the data source creator will see the developer project number in clear and normal form."
+        description: |-
+          A unique identifier for the data stream produced by this data source. The identifier includes:
+
+           
+          - The physical device's manufacturer, model, and serial number (UID). 
+          - The application's package name or name. Package name is used when the data source was created by an Android application. The developer project number is used when the data source was created by a REST client. 
+          - The data source's type. 
+          - The data source's stream name.  Note that not all attributes of the data source are used as part of the stream identifier. In particular, the version of the hardware/the application isn't used. This allows us to preserve the same stream through version updates. This also means that two DataSource objects may represent the same data stream even if they're not equal.
+
+          The exact format of the data stream ID created by an Android application is: type:dataType.name:application.packageName:device.manufacturer:device.model:device.uid:dataStreamName 
+
+          The exact format of the data stream ID created by a REST client is: type:dataType.name:developer project number:device.manufacturer:device.model:device.uid:dataStreamName 
+
+          When any of the optional fields that comprise of the data stream ID are blank, they will be omitted from the data stream ID. The minnimum viable data stream ID would be: type:dataType.name:developer project number
+
+          Finally, the developer project number is obfuscated when read by any REST or Android client that did not create the data source. Only the data source creator will see the developer project number in clear and normal form.
         type: string
       dataStreamName:
         description: 'The stream name uniquely identifies this particular data source among other data sources of the same type from the same underlying producer. Setting the stream name is optional, but should be done whenever an application exposes two streams for the same data type, or when a device has two equivalent sensors.'
@@ -845,7 +860,14 @@ definitions:
         type: array
     type: object
   Device:
-    description: "Representation of an integrated device (such as a phone or a wearable) that can hold sensors. Each sensor is exposed as a data source.\n\nThe main purpose of the device information contained in this class is to identify the hardware of a particular data source. This can be useful in different ways, including:  \n- Distinguishing two similar sensors on different devices (the step counter on two nexus 5 phones, for instance)\n- Display the source of data to the user (by using the device make / model)\n- Treat data differently depending on sensor type (accelerometers on a watch may give different patterns than those on a phone)\n- Build different analysis models for each device/version."
+    description: |-
+      Representation of an integrated device (such as a phone or a wearable) that can hold sensors. Each sensor is exposed as a data source.
+
+      The main purpose of the device information contained in this class is to identify the hardware of a particular data source. This can be useful in different ways, including:  
+      - Distinguishing two similar sensors on different devices (the step counter on two nexus 5 phones, for instance)
+      - Display the source of data to the user (by using the device make / model)
+      - Treat data differently depending on sensor type (accelerometers on a watch may give different patterns than those on a phone)
+      - Build different analysis models for each device/version.
     properties:
       manufacturer:
         description: Manufacturer of the product/hardware.

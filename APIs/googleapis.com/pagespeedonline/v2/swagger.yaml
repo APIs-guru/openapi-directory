@@ -182,7 +182,7 @@ definitions:
           type: object
         type: array
       format:
-        description: "A localized format string with {{FOO}} placeholders, where 'FOO' is the key of the argument whose value should be substituted. For HYPERLINK arguments, the format string will instead contain {{BEGIN_FOO}} and {{END_FOO}} for the argument with key 'FOO'."
+        description: 'A localized format string with {{FOO}} placeholders, where ''FOO'' is the key of the argument whose value should be substituted. For HYPERLINK arguments, the format string will instead contain {{BEGIN_FOO}} and {{END_FOO}} for the argument with key ''FOO''.'
         type: string
     type: object
   PagespeedApiImageV2:
@@ -199,7 +199,7 @@ definitions:
         description: 'Unique string key, if any, identifying this image.'
         type: string
       mime_type:
-        description: 'Mime type of image data (e.g. "image/jpeg").'
+        description: Mime type of image data (e.g. "image/jpeg").
         type: string
       page_rect:
         description: 'The region of the page that is captured by this image, with dimensions measured in CSS pixels.'
@@ -236,10 +236,10 @@ definitions:
             type: string
           ruleResults:
             additionalProperties:
-              description: 'The enum-like identifier for this rule. For instance "EnableKeepAlive" or "AvoidCssImport". Not localized.'
+              description: The enum-like identifier for this rule. For instance "EnableKeepAlive" or "AvoidCssImport". Not localized.
               properties:
                 groups:
-                  description: 'List of rule groups that this rule belongs to. Each entry in the list is one of "SPEED" or "USABILITY".'
+                  description: List of rule groups that this rule belongs to. Each entry in the list is one of "SPEED" or "USABILITY".
                   items:
                     type: string
                   type: array
@@ -247,7 +247,7 @@ definitions:
                   description: 'Localized name of the rule, intended for presentation to a user.'
                   type: string
                 ruleImpact:
-                  description: "The impact (unbounded floating point value) that implementing the suggestions for this rule would have on making the page faster. Impact is comparable between rules to determine which rule's suggestions would have a higher or lower impact on making a page faster. For instance, if enabling compression would save 1MB, while optimizing images would save 500kB, the enable compression rule would have 2x the impact of the image optimization rule, all other things being equal."
+                  description: 'The impact (unbounded floating point value) that implementing the suggestions for this rule would have on making the page faster. Impact is comparable between rules to determine which rule''s suggestions would have a higher or lower impact on making a page faster. For instance, if enabling compression would save 1MB, while optimizing images would save 500kB, the enable compression rule would have 2x the impact of the image optimization rule, all other things being equal.'
                   format: double
                   type: number
                 summary:
@@ -367,7 +367,7 @@ definitions:
         $ref: '#/definitions/PagespeedApiImageV2'
         description: Base64-encoded screenshot of the page that was analyzed.
       title:
-        description: "Title of the page, as displayed in the browser's title bar."
+        description: 'Title of the page, as displayed in the browser''s title bar.'
         type: string
       version:
         description: The version of PageSpeed used to generate these results.

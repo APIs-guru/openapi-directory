@@ -200,7 +200,7 @@ paths:
         - Redis
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/listKeys':
     post:
-      description: "Retrieve a redis cache's access keys. This operation requires write permission to the cache resource."
+      description: Retrieve a redis cache's access keys. This operation requires write permission to the cache resource.
       operationId: Redis_ListKeys
       parameters:
         - description: The name of the resource group.
@@ -224,7 +224,7 @@ paths:
         - Redis
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/regenerateKey':
     post:
-      description: "Regenerate redis cache's access keys. This operation requires write permission to the cache resource."
+      description: Regenerate redis cache's access keys. This operation requires write permission to the cache resource.
       operationId: Redis_RegenerateKey
       parameters:
         - description: The name of the resource group.

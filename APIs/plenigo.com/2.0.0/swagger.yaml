@@ -1128,7 +1128,7 @@ definitions:
         description: Customer Id.
         type: string
       description:
-        description: "Customer's description for this app"
+        description: Customer's description for this app
         type: string
       productId:
         description: Id of the product represented by this app id
@@ -1154,7 +1154,7 @@ definitions:
         description: Customer Id.
         type: string
       token:
-        description: "Token needed to request the customer's app id"
+        description: Token needed to request the customer's app id
         type: string
   AppAccessTokenRequest:
     properties:
@@ -1217,57 +1217,57 @@ definitions:
   CompanyUserBillingAddressItem:
     properties:
       additionalAddressInfo:
-        description: "the user's additional address info"
+        description: the user's additional address info
         type: string
       city:
-        description: "the user's city"
+        description: the user's city
         type: string
       company:
         description: the company name
         type: string
       country:
-        description: "the user's country"
+        description: the user's country
         type: string
       firstName:
-        description: "the user's first name"
+        description: the user's first name
         type: string
       gender:
-        description: "the user's gender"
+        description: the user's gender
         type: string
       name:
-        description: "the user's last name"
+        description: the user's last name
         type: string
       postCode:
-        description: "the user's postal code address"
+        description: the user's postal code address
         type: string
       state:
-        description: "the user's state address"
+        description: the user's state address
         type: string
       street:
-        description: "the user's street address"
+        description: the user's street address
         type: string
       vatNumber:
-        description: "the user's vat number"
+        description: the user's vat number
         type: string
   CompanyUserItem:
     properties:
       additionalAddressInfo:
-        description: "the user's additional address info"
+        description: the user's additional address info
         type: string
       agreementState:
-        description: "the user's newsletter agreement state"
+        description: the user's newsletter agreement state
         type: string
       billingAddress:
         $ref: '#/definitions/CompanyUserBillingAddressItem'
-        description: "the user's billing address"
+        description: the user's billing address
       birthday:
-        description: "the user's birth date"
+        description: the user's birth date
         type: string
       city:
-        description: "the user's city"
+        description: the user's city
         type: string
       country:
-        description: "the user's country in ISO 3166-1 Alpha 2 format (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)"
+        description: 'the user''s country in ISO 3166-1 Alpha 2 format (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)'
         type: string
       customerId:
         description: The user id
@@ -1276,31 +1276,31 @@ definitions:
         description: the email address
         type: string
       firstName:
-        description: "the user's first name"
+        description: the user's first name
         type: string
       gender:
-        description: "the user's gender"
+        description: the user's gender
         type: string
       language:
-        description: "the user's language"
+        description: the user's language
         type: string
       mobileNumber:
-        description: "the user's mobile phone number"
+        description: the user's mobile phone number
         type: string
       name:
-        description: "the user's last name"
+        description: the user's last name
         type: string
       postCode:
-        description: "the user's postal code address"
+        description: the user's postal code address
         type: string
       state:
-        description: "the user's state address"
+        description: the user's state address
         type: string
       street:
-        description: "the user's street address"
+        description: the user's street address
         type: string
       userState:
-        description: "the user's account status"
+        description: the user's account status
         type: string
       username:
         description: the user login

@@ -143,7 +143,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
     post:
-      description: "Creates a cluster, consisting of the specified number and type of Google Compute Engine instances. By default, the cluster is created in the project's [default network](/compute/docs/networks-and-firewalls#networks). One firewall is added for the cluster. After cluster creation, the cluster creates routes for each node to allow the containers on that node to communicate with all other instances in the cluster. Finally, an entry is added to the project's global metadata indicating which CIDR range is being used by the cluster."
+      description: 'Creates a cluster, consisting of the specified number and type of Google Compute Engine instances. By default, the cluster is created in the project''s [default network](/compute/docs/networks-and-firewalls#networks). One firewall is added for the cluster. After cluster creation, the cluster creates routes for each node to allow the containers on that node to communicate with all other instances in the cluster. Finally, an entry is added to the project''s global metadata indicating which CIDR range is being used by the cluster.'
       operationId: container.projects.zones.clusters.create
       parameters:
         - description: 'The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840).'
@@ -172,7 +172,7 @@ paths:
         - projects
   '/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}':
     delete:
-      description: "Deletes the cluster, including the Kubernetes endpoint and all worker nodes. Firewalls and routes that were configured during cluster creation are also deleted. Other Google Compute Engine resources that might be in use by the cluster (e.g. load balancer resources) will not be deleted if they weren't present at the initial create time."
+      description: 'Deletes the cluster, including the Kubernetes endpoint and all worker nodes. Firewalls and routes that were configured during cluster creation are also deleted. Other Google Compute Engine resources that might be in use by the cluster (e.g. load balancer resources) will not be deleted if they weren''t present at the initial create time.'
       operationId: container.projects.zones.clusters.delete
       parameters:
         - description: 'The Google Developers Console [project ID or project number](https://support.google.com/cloud/answer/6158840).'
@@ -589,13 +589,13 @@ definitions:
         format: int32
         type: integer
       currentNodeVersion:
-        description: "[Output only] The current version of the node software components. If they are currently at multiple versions because they're in the process of being upgraded, this reflects the minimum version of all nodes."
+        description: '[Output only] The current version of the node software components. If they are currently at multiple versions because they''re in the process of being upgraded, this reflects the minimum version of all nodes.'
         type: string
       description:
         description: An optional description of this cluster.
         type: string
       endpoint:
-        description: "[Output only] The IP address of this cluster's master endpoint. The endpoint can be accessed from the internet at `https://username:password@endpoint/`. See the `masterAuth` property of this resource for username and password information."
+        description: '[Output only] The IP address of this cluster''s master endpoint. The endpoint can be accessed from the internet at `https://username:password@endpoint/`. See the `masterAuth` property of this resource for username and password information.'
         type: string
       initialClusterVersion:
         description: '[Output only] The software version of the master endpoint and kubelets used in the cluster when it was first created. The version can be upgraded over time.'
@@ -610,7 +610,7 @@ definitions:
           type: string
         type: array
       locations:
-        description: "The list of Google Compute Engine [locations](/compute/docs/zones#available) in which the cluster's nodes should be located."
+        description: 'The list of Google Compute Engine [locations](/compute/docs/zones#available) in which the cluster''s nodes should be located.'
         items:
           type: string
         type: array
@@ -631,7 +631,7 @@ definitions:
         type: string
       nodeConfig:
         $ref: '#/definitions/NodeConfig'
-        description: "Parameters used in creating the cluster's nodes. See `nodeConfig` for the description of its properties. For requests, this field should only be used in lieu of a \"node_pool\" object, since this configuration (along with the \"initial_node_count\") will be used to create a \"NodePool\" object with an auto-generated name. Do not use this and a node_pool at the same time. For responses, this field will be populated with the node configuration of the first node pool. If unspecified, the defaults are used."
+        description: 'Parameters used in creating the cluster''s nodes. See `nodeConfig` for the description of its properties. For requests, this field should only be used in lieu of a "node_pool" object, since this configuration (along with the "initial_node_count") will be used to create a "NodePool" object with an auto-generated name. Do not use this and a node_pool at the same time. For responses, this field will be populated with the node configuration of the first node pool. If unspecified, the defaults are used.'
       nodeIpv4CidrSize:
         description: '[Output only] The size of the address space on each node for hosting containers. This is provisioned from within the `container_ipv4_cidr` range.'
         format: int32
@@ -674,13 +674,13 @@ definitions:
         $ref: '#/definitions/AddonsConfig'
         description: Configurations for the various addons available to run in the cluster.
       desiredMasterVersion:
-        description: 'The Kubernetes version to change the master to. The only valid value is the latest supported version. Use "-" to have the server automatically select the latest version.'
+        description: The Kubernetes version to change the master to. The only valid value is the latest supported version. Use "-" to have the server automatically select the latest version.
         type: string
       desiredMonitoringService:
         description: 'The monitoring service the cluster should use to write metrics. Currently available options: * "monitoring.googleapis.com" - the Google Cloud Monitoring service * "none" - no metrics will be exported from the cluster'
         type: string
       desiredNodePoolId:
-        description: 'The node pool to be upgraded. This field is mandatory if the "desired_node_version" or "desired_image_family" is specified and there is more than one node pool on the cluster.'
+        description: The node pool to be upgraded. This field is mandatory if the "desired_node_version" or "desired_image_family" is specified and there is more than one node pool on the cluster.
         type: string
       desiredNodeVersion:
         description: The Kubernetes version to change the nodes to (typically an upgrade). Use `-` to upgrade to the latest version supported by the server.
@@ -783,7 +783,7 @@ definitions:
       metadata:
         additionalProperties:
           type: string
-        description: "The metadata key/value pairs assigned to instances in the cluster. Keys must conform to the regexp [a-zA-Z0-9-_]+ and be less than 128 bytes in length. These are reflected as part of a URL in the metadata server. Additionally, to avoid ambiguity, keys must not conflict with any other metadata keys for the project or be one of the four reserved keys: \"instance-template\", \"kube-env\", \"startup-script\", and \"user-data\" Values are free-form strings, and only have meaning as interpreted by the image running in the instance. The only restriction placed on them is that each value's size must be less than or equal to 32 KB. The total size of all keys and values must be less than 512 KB."
+        description: 'The metadata key/value pairs assigned to instances in the cluster. Keys must conform to the regexp [a-zA-Z0-9-_]+ and be less than 128 bytes in length. These are reflected as part of a URL in the metadata server. Additionally, to avoid ambiguity, keys must not conflict with any other metadata keys for the project or be one of the four reserved keys: "instance-template", "kube-env", "startup-script", and "user-data" Values are free-form strings, and only have meaning as interpreted by the image running in the instance. The only restriction placed on them is that each value''s size must be less than or equal to 32 KB. The total size of all keys and values must be less than 512 KB.'
         type: object
       oauthScopes:
         description: 'The set of Google API scopes to be made available on all of the node VMs under the "default" service account. The following scopes are recommended, but not required, and by default are not included: * `https://www.googleapis.com/auth/compute` is required for mounting persistent storage on your nodes. * `https://www.googleapis.com/auth/devstorage.read_only` is required for communicating with **gcr.io** (the [Google Container Registry](/container-registry/)). If unspecified, no scopes are added, unless Cloud Logging or Cloud Monitoring are enabled, in which case their required scopes will be added.'
@@ -792,7 +792,7 @@ definitions:
         type: array
     type: object
   NodePool:
-    description: "NodePool contains the name and configuration for a cluster's node pool. Node pools are a set of nodes (i.e. VM's), with a common configuration and specification, under the control of the cluster master. They may have a set of Kubernetes labels applied to them, which may be used to reference them during pod scheduling. They may also be resized up or down, to accommodate the workload."
+    description: 'NodePool contains the name and configuration for a cluster''s node pool. Node pools are a set of nodes (i.e. VM''s), with a common configuration and specification, under the control of the cluster master. They may have a set of Kubernetes labels applied to them, which may be used to reference them during pod scheduling. They may also be resized up or down, to accommodate the workload.'
     properties:
       config:
         $ref: '#/definitions/NodeConfig'

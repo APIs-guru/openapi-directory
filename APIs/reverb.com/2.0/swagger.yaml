@@ -695,7 +695,7 @@ paths:
         - handpicked
   /listings:
     get:
-      description: 'Default search of listings includes only used & handmade. Add a filter to view all listings or use the /listings/all endpoint.'
+      description: Default search of listings includes only used & handmade. Add a filter to view all listings or use the /listings/all endpoint.
       parameters:
         - description: Search query.
           in: query
@@ -819,7 +819,7 @@ paths:
       responses:
         default:
           description: Unexpected error
-      summary: 'Default search of listings includes only used & handmade. Add a filter to view all listings or use the /listings/all endpoint.'
+      summary: Default search of listings includes only used & handmade. Add a filter to view all listings or use the /listings/all endpoint.
       tags:
         - listings
     post:
@@ -842,7 +842,7 @@ paths:
                 description: Product description. Please keep formatting to a minimum.
                 type: string
               finish:
-                description: "Finish, e.g. 'Sunburst'"
+                description: 'Finish, e.g. ''Sunburst'''
                 type: string
               has_inventory:
                 description: Set true if selling more than one
@@ -875,7 +875,7 @@ paths:
                 description: 'Country of origin/manufacture, ISO code (e.g: US)'
                 type: string
               photos:
-                description: "An array of image URLs. Ex: ['http://my.site.com/image.jpg']"
+                description: 'An array of image URLs. Ex: [''http://my.site.com/image.jpg'']'
                 items:
                   type: string
                 type: array
@@ -918,7 +918,7 @@ paths:
                     type: array
                 type: object
               shipping_profile_id:
-                description: "id of a shop's shipping profile"
+                description: id of a shop's shipping profile
                 type: string
               shipping_profile_name:
                 description: Name of a shipping profile
@@ -1226,7 +1226,7 @@ paths:
                 description: Product description. Please keep formatting to a minimum.
                 type: string
               finish:
-                description: "Finish, e.g. 'Sunburst'"
+                description: 'Finish, e.g. ''Sunburst'''
                 type: string
               has_inventory:
                 description: Set true if selling more than one
@@ -1259,7 +1259,7 @@ paths:
                 description: 'Country of origin/manufacture, ISO code (e.g: US)'
                 type: string
               photos:
-                description: "An array of image URLs. Ex: ['http://my.site.com/image.jpg']"
+                description: 'An array of image URLs. Ex: [''http://my.site.com/image.jpg'']'
                 items:
                   type: string
                 type: array
@@ -1302,7 +1302,7 @@ paths:
                     type: array
                 type: object
               shipping_profile_id:
-                description: "id of a shop's shipping profile"
+                description: id of a shop's shipping profile
                 type: string
               shipping_profile_name:
                 description: Name of a shipping profile
@@ -1357,7 +1357,7 @@ paths:
           schema:
             properties:
               reason:
-                description: "Valid reasons: 'Sexuality/nudity', 'Hateful or inappropriate speech', 'Item not as described or potential fraud', 'Trademark infringement', 'Other'"
+                description: 'Valid reasons: ''Sexuality/nudity'', ''Hateful or inappropriate speech'', ''Item not as described or potential fraud'', ''Trademark infringement'', ''Other'''
                 type: string
             required:
               - reason
@@ -1919,7 +1919,7 @@ paths:
     get:
       description: Retrieve a list of live listings for the seller. To search all listings specify state=all
       parameters:
-        - description: "Available: [\"all\", \"draft\", \"ended\", \"live\", \"ordered\", \"sold_out\", \"suspended\", \"seller_unavailable\"]. Defaults to 'live'"
+        - description: 'Available: ["all", "draft", "ended", "live", "ordered", "sold_out", "suspended", "seller_unavailable"]. Defaults to ''live'''
           in: query
           name: state
           type: string
@@ -2456,7 +2456,7 @@ paths:
         - my
   '/orders/{order_id}/feedback/buyer':
     get:
-      description: "Feedback details for an order's buyer"
+      description: Feedback details for an order's buyer
       parameters:
         - in: path
           name: order_id
@@ -2465,11 +2465,11 @@ paths:
       responses:
         default:
           description: Unexpected error
-      summary: "Feedback details for an order's buyer"
+      summary: Feedback details for an order's buyer
       tags:
         - orders
     post:
-      description: "Add feedback about an order's buyer"
+      description: Add feedback about an order's buyer
       parameters:
         - in: path
           name: order_id
@@ -2489,12 +2489,12 @@ paths:
       responses:
         default:
           description: Unexpected error
-      summary: "Add feedback about an order's buyer"
+      summary: Add feedback about an order's buyer
       tags:
         - orders
   '/orders/{order_id}/feedback/seller':
     get:
-      description: "Feedback details for an order's seller"
+      description: Feedback details for an order's seller
       parameters:
         - in: path
           name: order_id
@@ -2503,11 +2503,11 @@ paths:
       responses:
         default:
           description: Unexpected error
-      summary: "Feedback details for an order's seller"
+      summary: Feedback details for an order's seller
       tags:
         - orders
     post:
-      description: "Add feedback about an order's seller"
+      description: Add feedback about an order's seller
       parameters:
         - in: path
           name: order_id
@@ -2527,7 +2527,7 @@ paths:
       responses:
         default:
           description: Unexpected error
-      summary: "Add feedback about an order's seller"
+      summary: Add feedback about an order's seller
       tags:
         - orders
   /payment_methods:
@@ -2991,7 +2991,7 @@ paths:
         - shops
   '/shops/{slug}/feedback':
     get:
-      description: "Get seller's feedback"
+      description: Get seller's feedback
       parameters:
         - in: path
           name: slug
@@ -3000,12 +3000,12 @@ paths:
       responses:
         default:
           description: Unexpected error
-      summary: "Get seller's feedback"
+      summary: Get seller's feedback
       tags:
         - shops
   '/shops/{slug}/feedback/buyer':
     get:
-      description: "Get seller's feedback as a buyer"
+      description: Get seller's feedback as a buyer
       parameters:
         - in: path
           name: slug
@@ -3014,12 +3014,12 @@ paths:
       responses:
         default:
           description: Unexpected error
-      summary: "Get seller's feedback as a buyer"
+      summary: Get seller's feedback as a buyer
       tags:
         - shops
   '/shops/{slug}/feedback/seller':
     get:
-      description: "Get seller's feedback as a seller"
+      description: Get seller's feedback as a seller
       parameters:
         - in: path
           name: slug
@@ -3028,7 +3028,7 @@ paths:
       responses:
         default:
           description: Unexpected error
-      summary: "Get seller's feedback as a seller"
+      summary: Get seller's feedback as a seller
       tags:
         - shops
   /wants:

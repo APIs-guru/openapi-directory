@@ -1063,10 +1063,10 @@ paths:
         - linux
 definitions:
   AuditConfig:
-    description: 'Enables "data access" audit logging for a service and specifies a list of members that are log-exempted.'
+    description: Enables "data access" audit logging for a service and specifies a list of members that are log-exempted.
     properties:
       exemptedMembers:
-        description: 'Specifies the identities that are exempted from "data access" audit logging for the `service` specified above. Follows the same format of Binding.members.'
+        description: Specifies the identities that are exempted from "data access" audit logging for the `service` specified above. Follows the same format of Binding.members.
         items:
           type: string
         type: array
@@ -1147,7 +1147,7 @@ definitions:
         description: The object of the condition. Exactly one of these must be set.
         type: string
       values:
-        description: "The objects of the condition. This is mutually exclusive with 'value'."
+        description: The objects of the condition. This is mutually exclusive with 'value'.
         items:
           type: string
         type: array
@@ -1272,7 +1272,7 @@ definitions:
         description: '[Output Only] The GECOS (user information) entry for this account.'
         type: string
       gid:
-        description: "[Output Only] User's default group ID."
+        description: '[Output Only] User''s default group ID.'
         format: uint32
         type: integer
       homeDirectory:
@@ -1568,7 +1568,7 @@ definitions:
           type: string
         type: array
       permissions:
-        description: "A permission is a string of form '..' (e.g., 'storage.buckets.list'). A value of '*' matches all permissions, and a verb part of '*' (e.g., 'storage.buckets.*') matches all verbs."
+        description: 'A permission is a string of form ''..'' (e.g., ''storage.buckets.list''). A value of ''*'' matches all permissions, and a verb part of ''*'' (e.g., ''storage.buckets.*'') matches all verbs.'
         items:
           type: string
         type: array
@@ -1576,7 +1576,7 @@ definitions:
   TestPermissionsRequest:
     properties:
       permissions:
-        description: "The set of permissions to check for the 'resource'. Permissions with wildcards (such as '*' or 'storage.*') are not allowed."
+        description: The set of permissions to check for the 'resource'. Permissions with wildcards (such as '*' or 'storage.*') are not allowed.
         items:
           type: string
         type: array
@@ -1616,7 +1616,7 @@ definitions:
         pattern: '[a-z][-a-z0-9_]{0,31}'
         type: string
       owner:
-        description: "Email address of account's owner. This account will be validated to make sure it exists. The email can belong to any domain, but it must be tied to a Google account."
+        description: 'Email address of account''s owner. This account will be validated to make sure it exists. The email can belong to any domain, but it must be tied to a Google account.'
         type: string
       publicKeys:
         description: '[Output Only] Public keys that this user may use to login.'

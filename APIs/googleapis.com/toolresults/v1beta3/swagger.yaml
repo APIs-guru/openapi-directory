@@ -1277,13 +1277,13 @@ definitions:
   SkippedDetail:
     properties:
       incompatibleAppVersion:
-        description: "If the App doesn't support the specific API level."
+        description: If the App doesn't support the specific API level.
         type: boolean
       incompatibleArchitecture:
-        description: "If the App doesn't run on the specific architecture, for example, x86."
+        description: 'If the App doesn''t run on the specific architecture, for example, x86.'
         type: boolean
       incompatibleDevice:
-        description: "If the requested OS version doesn't run on the specific device model."
+        description: If the requested OS version doesn't run on the specific device model.
         type: boolean
     type: object
   StackTrace:
@@ -1471,7 +1471,7 @@ definitions:
         description: An execution of a test runner.
       toolExecutionStep:
         $ref: '#/definitions/ToolExecutionStep'
-        description: "An execution of a tool (used for steps we don't explicitly support)."
+        description: An execution of a tool (used for steps we don't explicitly support).
     type: object
   StepDimensionValueEntry:
     properties:

@@ -31,7 +31,7 @@ tags:
 paths:
   /api/contracts/:
     get:
-      description: "<p>This endpoint returns contract history from FPDS for a specific vendor. The vendor's DUNS number is a required parameter. You can also filter contracts by their NAICS code to find contracts relevant to a particular category.  </p>"
+      description: <p>This endpoint returns contract history from FPDS for a specific vendor. The vendor's DUNS number is a required parameter. You can also filter contracts by their NAICS code to find contracts relevant to a particular category.  </p>
       operationId: List_Contracts
       parameters:
         - description: A 9-digit DUNS number that uniquely identifies a vendor (required).
@@ -72,7 +72,7 @@ paths:
         - contracts
   /api/metadata/:
     get:
-      description: '<p>This endpoint returns metadata for the most recent data loads of SAM and FPDS data. It takes no parameters.  </p>'
+      description: <p>This endpoint returns metadata for the most recent data loads of SAM and FPDS data. It takes no parameters.  </p>
       operationId: Metadata
       responses:
         '200':
@@ -82,7 +82,7 @@ paths:
         - metadata
   /api/naics/:
     get:
-      description: '<p>This endpoint lists all of the NAICS codes that are relevant to the OASIS family of vehicles. It takes no parameters.  </p>'
+      description: <p>This endpoint lists all of the NAICS codes that are relevant to the OASIS family of vehicles. It takes no parameters.  </p>
       operationId: List_Naics
       responses:
         '200':

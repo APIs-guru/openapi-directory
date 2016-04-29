@@ -388,7 +388,7 @@ paths:
         - projects
   '/v1beta1/projects/{projectId}':
     delete:
-      description: "Marks the Project identified by the specified `project_id` (for example, `my-project-123`) for deletion. This method will only affect the Project if the following criteria are met: + The Project does not have a billing account associated with it. + The Project has a lifecycle state of ACTIVE. This method changes the Project's lifecycle state from ACTIVE to DELETE_REQUESTED. The deletion starts at an unspecified time, at which point the lifecycle state changes to DELETE_IN_PROGRESS. Until the deletion completes, you can check the lifecycle state checked by retrieving the Project with GetProject, and the Project remains visible to ListProjects. However, you cannot update the project. After the deletion completes, the Project is not retrievable by the GetProject and ListProjects methods. The caller must have modify permissions for this Project."
+      description: 'Marks the Project identified by the specified `project_id` (for example, `my-project-123`) for deletion. This method will only affect the Project if the following criteria are met: + The Project does not have a billing account associated with it. + The Project has a lifecycle state of ACTIVE. This method changes the Project''s lifecycle state from ACTIVE to DELETE_REQUESTED. The deletion starts at an unspecified time, at which point the lifecycle state changes to DELETE_IN_PROGRESS. Until the deletion completes, you can check the lifecycle state checked by retrieving the Project with GetProject, and the Project remains visible to ListProjects. However, you cannot update the project. After the deletion completes, the Project is not retrievable by the GetProject and ListProjects methods. The caller must have modify permissions for this Project.'
       operationId: cloudresourcemanager.projects.delete
       parameters:
         - description: 'The Project ID (for example, `foo-bar-123`). Required.'
@@ -664,7 +664,7 @@ definitions:
         type: array
     type: object
   Organization:
-    description: "The root node in the resource hierarchy to which a particular entity's (e.g., company) resources belong."
+    description: 'The root node in the resource hierarchy to which a particular entity''s (e.g., company) resources belong.'
     properties:
       creationTime:
         description: Timestamp when the Organization was created. Assigned by the server. @OutputOnly
@@ -687,7 +687,7 @@ definitions:
         type: string
     type: object
   Policy:
-    description: "Defines an Identity and Access Management (IAM) policy. It is used to specify access control policies for Cloud Platform resources. A `Policy` consists of a list of `bindings`. A `Binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM. **Example** { \"bindings\": [ { \"role\": \"roles/owner\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-other-app@appspot.gserviceaccount.com\", ] }, { \"role\": \"roles/viewer\", \"members\": [\"user:sean@example.com\"] } ] } For a description of IAM and its features, see the [IAM developer's guide](https://cloud.google.com/iam)."
+    description: 'Defines an Identity and Access Management (IAM) policy. It is used to specify access control policies for Cloud Platform resources. A `Policy` consists of a list of `bindings`. A `Binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM. **Example** { "bindings": [ { "role": "roles/owner", "members": [ "user:mike@example.com", "group:admins@example.com", "domain:google.com", "serviceAccount:my-other-app@appspot.gserviceaccount.com", ] }, { "role": "roles/viewer", "members": ["user:sean@example.com"] } ] } For a description of IAM and its features, see the [IAM developer''s guide](https://cloud.google.com/iam).'
     properties:
       bindings:
         description: Associates a list of `members` to a `role`. Multiple `bindings` must not be specified for the same `role`. `bindings` with no members will result in an error.
@@ -712,7 +712,7 @@ definitions:
       labels:
         additionalProperties:
           type: string
-        description: "The labels associated with this Project. Label keys must be between 1 and 63 characters long and must conform to the following regular expression: \\[a-z\\](\\[-a-z0-9\\]*\\[a-z0-9\\])?. Label values must be between 0 and 63 characters long and must conform to the regular expression (\\[a-z\\](\\[-a-z0-9\\]*\\[a-z0-9\\])?)?. No more than 256 labels can be associated with a given resource. Clients should store labels in a representation such as JSON that does not depend on specific characters being disallowed. Example: \"environment\" : \"dev\" Read-write."
+        description: 'The labels associated with this Project. Label keys must be between 1 and 63 characters long and must conform to the following regular expression: \[a-z\](\[-a-z0-9\]*\[a-z0-9\])?. Label values must be between 0 and 63 characters long and must conform to the regular expression (\[a-z\](\[-a-z0-9\]*\[a-z0-9\])?)?. No more than 256 labels can be associated with a given resource. Clients should store labels in a representation such as JSON that does not depend on specific characters being disallowed. Example: "environment" : "dev" Read-write.'
         type: object
       lifecycleState:
         description: The Project lifecycle state. Read-only.
@@ -737,10 +737,10 @@ definitions:
         type: string
     type: object
   ResourceId:
-    description: "A container to reference an id for any resource type. A `resource` in Google Cloud Platform is a generic term for something you (a developer) may want to interact with through one of our API's. Some examples are an AppEngine app, a Compute Engine instance, a Cloud SQL database, and so on."
+    description: 'A container to reference an id for any resource type. A `resource` in Google Cloud Platform is a generic term for something you (a developer) may want to interact with through one of our API''s. Some examples are an AppEngine app, a Compute Engine instance, a Cloud SQL database, and so on.'
     properties:
       id:
-        description: "Required field for the type-specific id. This should correspond to the id used in the type-specific API's."
+        description: Required field for the type-specific id. This should correspond to the id used in the type-specific API's.
         type: string
       type:
         description: 'Required field representing the resource type this id is for. At present, the only valid type is "organization".'
@@ -757,7 +757,7 @@ definitions:
     description: Request message for `TestIamPermissions` method.
     properties:
       permissions:
-        description: "The set of permissions to check for the `resource`. Permissions with wildcards (such as '*' or 'storage.*') are not allowed. For more information see IAM Overview."
+        description: The set of permissions to check for the `resource`. Permissions with wildcards (such as '*' or 'storage.*') are not allowed. For more information see IAM Overview.
         items:
           type: string
         type: array

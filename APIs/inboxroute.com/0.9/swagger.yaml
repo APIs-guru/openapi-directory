@@ -82,7 +82,7 @@ paths:
           in: query
           name: limit
           type: integer
-        - description: "Property to sort by. Append '-' for descending order."
+        - description: Property to sort by. Append '-' for descending order.
           in: query
           name: sort
           type: string
@@ -113,7 +113,7 @@ paths:
           in: query
           name: limit
           type: integer
-        - description: "Property to sort by. Append '-' for descending order."
+        - description: Property to sort by. Append '-' for descending order.
           in: query
           name: sort
           type: string
@@ -307,10 +307,12 @@ definitions:
           Full name (Last name, First Name) of the subscriber
         type: string
       ip:
-        description: "Subscriber's IP address when he/she confirmed list opt-in"
+        description: Subscriber's IP address when he/she confirmed list opt-in
         type: string
       lang:
-        description: "ISO 639-1 language code of the subscriber. When lang is one the supported system language, all communication\nwill be in this language. \n"
+        description: |
+          ISO 639-1 language code of the subscriber. When lang is one the supported system language, all communication
+          will be in this language. 
         type: string
       listid:
         description: Unique 16 characters ID of the list owner
@@ -336,7 +338,7 @@ definitions:
         description: Email address
         type: string
       ip:
-        description: "Subscriber's IP address when he/she confirmed list opt-in"
+        description: Subscriber's IP address when he/she confirmed list opt-in
         type: string
       listid:
         description: Unique 16 characters ID of the list owner
@@ -462,7 +464,7 @@ definitions:
         description: Email address
         type: string
       ip:
-        description: "Subscriber's IP address when he/she confirmed list opt-in"
+        description: Subscriber's IP address when he/she confirmed list opt-in
         type: string
       status:
         description: |

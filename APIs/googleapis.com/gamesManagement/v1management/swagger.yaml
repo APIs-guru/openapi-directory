@@ -255,7 +255,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/applications/{applicationId}/players/hidden/{playerId}':
     delete:
-      description: "Unhide the given player's leaderboard scores from the given application. This method is only available to user accounts for your developer console."
+      description: Unhide the given player's leaderboard scores from the given application. This method is only available to user accounts for your developer console.
       operationId: gamesManagement.players.unhide
       parameters:
         - description: The application ID from the Google Play developer console.
@@ -263,7 +263,7 @@ paths:
           name: applicationId
           required: true
           type: string
-        - description: "A player ID. A value of me may be used in place of the authenticated player's ID."
+        - description: A player ID. A value of me may be used in place of the authenticated player's ID.
           in: path
           name: playerId
           required: true
@@ -287,7 +287,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Hide the given player's leaderboard scores from the given application. This method is only available to user accounts for your developer console."
+      description: Hide the given player's leaderboard scores from the given application. This method is only available to user accounts for your developer console.
       operationId: gamesManagement.players.hide
       parameters:
         - description: The application ID from the Google Play developer console.
@@ -295,7 +295,7 @@ paths:
           name: applicationId
           required: true
           type: string
-        - description: "A player ID. A value of me may be used in place of the authenticated player's ID."
+        - description: A player ID. A value of me may be used in place of the authenticated player's ID.
           in: path
           name: playerId
           required: true
@@ -814,7 +814,12 @@ definitions:
     description: This is a JSON template for an achievement reset response.
     properties:
       currentState:
-        description: "The current state of the achievement. This is the same as the initial state of the achievement.\nPossible values are:  \n- \"HIDDEN\"- Achievement is hidden. \n- \"REVEALED\" - Achievement is revealed. \n- \"UNLOCKED\" - Achievement is unlocked."
+        description: |-
+          The current state of the achievement. This is the same as the initial state of the achievement.
+          Possible values are:  
+          - "HIDDEN"- Achievement is hidden. 
+          - "REVEALED" - Achievement is revealed. 
+          - "UNLOCKED" - Achievement is unlocked.
         type: string
       definitionId:
         description: The ID of an achievement for which player state has been updated.
@@ -852,7 +857,7 @@ definitions:
         type: string
     type: object
   GamesPlayerExperienceInfoResource:
-    description: "This is a JSON template for 1P/3P metadata about the player's experience."
+    description: This is a JSON template for 1P/3P metadata about the player's experience.
     properties:
       currentExperiencePoints:
         description: The current number of experience points for the player.
@@ -870,7 +875,7 @@ definitions:
         description: 'The next level of the player. If the current level is the maximum level, this should be same as the current level.'
     type: object
   GamesPlayerLevelResource:
-    description: "This is a JSON template for 1P/3P metadata about a user's level."
+    description: This is a JSON template for 1P/3P metadata about a user's level.
     properties:
       level:
         description: The level for the user.
@@ -942,7 +947,7 @@ definitions:
         $ref: '#/definitions/GamesPlayedResource'
         description: Details about the last time this player played a multiplayer game with the currently authenticated player. Populated for PLAYED_WITH player collection members.
       name:
-        description: "An object representation of the individual components of the player's name. For some players, these fields may not be present."
+        description: 'An object representation of the individual components of the player''s name. For some players, these fields may not be present.'
         properties:
           familyName:
             description: 'The family name of this player. In some places, this is known as the last name.'
@@ -959,9 +964,9 @@ definitions:
         type: string
       profileSettings:
         $ref: '#/definitions/ProfileSettings'
-        description: "The player's profile settings. Controls whether or not the player's profile is visible to other players."
+        description: The player's profile settings. Controls whether or not the player's profile is visible to other players.
       title:
-        description: "The player's title rewarded for their game activities."
+        description: The player's title rewarded for their game activities.
         type: string
     type: object
   PlayerScoreResetAllResponse:
@@ -988,7 +993,12 @@ definitions:
         description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#playerScoreResetResponse.'
         type: string
       resetScoreTimeSpans:
-        description: "The time spans of the updated score.\nPossible values are:  \n- \"ALL_TIME\" - The score is an all-time score. \n- \"WEEKLY\" - The score is a weekly score. \n- \"DAILY\" - The score is a daily score."
+        description: |-
+          The time spans of the updated score.
+          Possible values are:  
+          - "ALL_TIME" - The score is an all-time score. 
+          - "WEEKLY" - The score is a weekly score. 
+          - "DAILY" - The score is a daily score.
         items:
           type: string
         type: array
@@ -1001,7 +1011,7 @@ definitions:
         description: 'Uniquely identifies the type of this resource. Value is always the fixed string gamesManagement#profileSettings.'
         type: string
       profileVisible:
-        description: "The player's current profile visibility. This field is visible to both 1P and 3P APIs."
+        description: The player's current profile visibility. This field is visible to both 1P and 3P APIs.
         type: boolean
     type: object
   QuestsResetMultipleForAllRequest:

@@ -220,11 +220,11 @@ paths:
           name: name
           required: true
           type: string
-        - description: "The delimiter used to separate cell values. This can only consist of a single character. Default is ','."
+        - description: 'The delimiter used to separate cell values. This can only consist of a single character. Default is '',''.'
           in: query
           name: delimiter
           type: string
-        - description: "The encoding of the content. Default is UTF-8. Use 'auto-detect' if you are unsure of the encoding."
+        - description: The encoding of the content. Default is UTF-8. Use 'auto-detect' if you are unsure of the encoding.
           in: query
           name: encoding
           type: string
@@ -568,11 +568,11 @@ paths:
           name: tableId
           required: true
           type: string
-        - description: "The delimiter used to separate cell values. This can only consist of a single character. Default is ','."
+        - description: 'The delimiter used to separate cell values. This can only consist of a single character. Default is '',''.'
           in: query
           name: delimiter
           type: string
-        - description: "The encoding of the content. Default is UTF-8. Use 'auto-detect' if you are unsure of the encoding."
+        - description: The encoding of the content. Default is UTF-8. Use 'auto-detect' if you are unsure of the encoding.
           in: query
           name: encoding
           type: string
@@ -1441,7 +1441,7 @@ definitions:
         format: int64
         type: string
       type:
-        description: 'Type of background task. One of  DELETE_ROWS Deletes one or more rows from the table. ADD_ROWS "Adds one or more rows to a table. Includes importing data into a new table and importing more rows into an existing table. ADD_COLUMN Adds a new column to the table. CHANGE_TYPE Changes the type of a column.'
+        description: Type of background task. One of  DELETE_ROWS Deletes one or more rows from the table. ADD_ROWS "Adds one or more rows to a table. Includes importing data into a new table and importing more rows into an existing table. ADD_COLUMN Adds a new column to the table. CHANGE_TYPE Changes the type of a column.
         type: string
     type: object
   TaskList:

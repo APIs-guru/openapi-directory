@@ -655,7 +655,7 @@ paths:
       description: |
         Revoke a capability that an entity ('granted_to') has been granted to perform on the specified device. The calling device requires the cap.delete capability on the specified device.
       parameters:
-        - description: "The universally unique identifier (UUID) that the 'granted_to' entity has permissions on."
+        - description: The universally unique identifier (UUID) that the 'granted_to' entity has permissions on.
           in: path
           name: id
           required: true
@@ -768,7 +768,8 @@ paths:
           name: id
           required: true
           type: string
-        - description: "The PEM-encoded CSR. The value you provide must be valid JSON. For the CSR, you must include the newline character (\"\\n\") to separate the lines of the CSR.\n"
+        - description: |
+            The PEM-encoded CSR. The value you provide must be valid JSON. For the CSR, you must include the newline character ("\n") to separate the lines of the CSR.
           in: body
           name: body
           schema:
@@ -1593,7 +1594,8 @@ paths:
     post:
       consumes:
         - application/json
-      description: "Any device can post to this path and it will get its own unique stream of notifications.  This REST route doesn&#39;t close and continues to stay open. The route also sends keep-alive messages approximately every five minutes. The keep-alive messages are \"\\r\\n\" characters. Notifications are JSON-formatted objects that are separated with \"\\r\\n\" characters. The notifications with the \"\\r\\n\" separators are delivered on one line to make it easier to parse. To get notifications for data, the device must have data.read capability on the device where the data resides. To receive notifications for updates to files, you must have the file.read\n"
+      description: |
+        Any device can post to this path and it will get its own unique stream of notifications.  This REST route doesn&#39;t close and continues to stay open. The route also sends keep-alive messages approximately every five minutes. The keep-alive messages are "\r\n" characters. Notifications are JSON-formatted objects that are separated with "\r\n" characters. The notifications with the "\r\n" separators are delivered on one line to make it easier to parse. To get notifications for data, the device must have data.read capability on the device where the data resides. To receive notifications for updates to files, you must have the file.read
       parameters:
         - in: body
           name: body
@@ -2334,7 +2336,7 @@ paths:
           description: No response was specified
           schema:
             $ref: '#/definitions/UserProfile'
-      summary: "Read a user's profile"
+      summary: Read a user's profile
       tags:
         - users
   '/users/{id}/tags/{tag_id}':
@@ -2444,7 +2446,7 @@ definitions:
   AppCapability:
     properties:
       association:
-        description: 'The association to use. This call be an empty string or "user".'
+        description: The association to use. This call be an empty string or "user".
         type: string
       cap_name:
         description: The capability name.
@@ -2658,7 +2660,7 @@ definitions:
           The number of days to store the data. The string "forever" can be used to specify to store the data indefinitely; "last_only" means to store only the most recent piece of data.
         type: string
       standard:
-        description: 'Reserved for future use. The returned value is "null".'
+        description: Reserved for future use. The returned value is "null".
         type: string
     required:
       - id
@@ -2759,7 +2761,7 @@ definitions:
         description: The UUID of the user associated with the device.
         type: string
       version_hash:
-        description: 'A hash of the version information. This value is available for "component" category.'
+        description: A hash of the version information. This value is available for "component" category.
         type: string
   DeviceCSR:
     properties:
@@ -2771,7 +2773,7 @@ definitions:
   DeviceCapability:
     properties:
       association:
-        description: 'The association to use. This call be an empty string or "user".'
+        description: The association to use. This call be an empty string or "user".
         type: string
       cap_name:
         description: The capability name.
@@ -2879,7 +2881,7 @@ definitions:
   FileCapability:
     properties:
       association:
-        description: 'The association to use. This call be an empty string or "user".'
+        description: The association to use. This call be an empty string or "user".
         type: string
       cap_name:
         description: The capability name.
@@ -3300,7 +3302,7 @@ definitions:
         description: The scope name.
         type: string
       scope_type:
-        description: 'The scope type.  Valid values are "app" and "device".'
+        description: The scope type.  Valid values are "app" and "device".
         type: string
     required:
       - id
@@ -3322,7 +3324,7 @@ definitions:
         description: The UUID of the entity the subscription is scoped to.
         type: string
       scope_type:
-        description: 'The scope type.  Valid values are "app" and "device".'
+        description: The scope type.  Valid values are "app" and "device".
         type: string
     required:
       - scope_id
@@ -3378,13 +3380,13 @@ definitions:
           The name of the capability.
         type: string
       granted_name:
-        description: "The name of the entity that you have granted the capability to. The entity is specified in the 'granted_to' parameter."
+        description: The name of the entity that you have granted the capability to. The entity is specified in the 'granted_to' parameter.
         type: string
       granted_org_id:
-        description: "The UUID of the organization which the entity belongs to. The entity is specified in the 'granted_to' parameter."
+        description: The UUID of the organization which the entity belongs to. The entity is specified in the 'granted_to' parameter.
         type: string
       granted_org_name:
-        description: "The name of the organization which the entity belongs to. The entity is specified in the 'granted_to' parameter."
+        description: The name of the organization which the entity belongs to. The entity is specified in the 'granted_to' parameter.
         type: string
       granted_to:
         description: |

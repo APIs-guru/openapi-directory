@@ -112,7 +112,7 @@ definitions:
         description: 'The city code an airport is located in. For example, for JFK airport, this is NYC.'
         type: string
       code:
-        description: "An airport's code. For example, for Boston Logan airport, this is BOS."
+        description: 'An airport''s code. For example, for Boston Logan airport, this is BOS.'
         type: string
       kind:
         default: 'qpxexpress#airportData'
@@ -177,7 +177,7 @@ definitions:
         type: string
     type: object
   Data:
-    description: "Detailed information about components found in the solutions of this response, including a trip's airport, city, taxes, airline, and aircraft."
+    description: 'Detailed information about components found in the solutions of this response, including a trip''s airport, city, taxes, airline, and aircraft.'
     properties:
       aircraft:
         description: The aircraft that is flying between an origin and destination.
@@ -201,7 +201,7 @@ definitions:
         type: array
       kind:
         default: 'qpxexpress#data'
-        description: "Identifies this as QPX Express response resource, including a trip's airport, city, taxes, airline, and aircraft. Value: the fixed string qpxexpress#data."
+        description: 'Identifies this as QPX Express response resource, including a trip''s airport, city, taxes, airline, and aircraft. Value: the fixed string qpxexpress#data.'
         type: string
       tax:
         description: The taxes due for flying between an origin and a destination.
@@ -484,7 +484,7 @@ definitions:
         type: integer
       kind:
         default: 'qpxexpress#sliceInfo'
-        description: "Identifies this as a slice object. A slice represents a traveller's intent, the portion of a low-fare search corresponding to a traveler's request to get between two points. One-way journeys are generally expressed using 1 slice, round-trips using 2. Value: the fixed string qpxexpress#sliceInfo."
+        description: 'Identifies this as a slice object. A slice represents a traveller''s intent, the portion of a low-fare search corresponding to a traveler''s request to get between two points. One-way journeys are generally expressed using 1 slice, round-trips using 2. Value: the fixed string qpxexpress#sliceInfo.'
         type: string
       segment:
         description: The segment(s) constituting the slice.
@@ -557,7 +557,7 @@ definitions:
         description: Whether this is a government charge or a carrier surcharge.
         type: string
       code:
-        description: "The code to enter in the ticket's tax box."
+        description: The code to enter in the ticket's tax box.
         type: string
       country:
         description: 'For government charges, the country levying the charge.'
@@ -606,7 +606,7 @@ definitions:
         description: 'The total price for all passengers on the trip, in the form of a currency followed by an amount, e.g. USD253.35.'
         type: string
       slice:
-        description: "The slices that make up this trip's itinerary."
+        description: The slices that make up this trip's itinerary.
         items:
           $ref: '#/definitions/SliceInfo'
         type: array
@@ -615,7 +615,7 @@ definitions:
     description: 'A QPX Express search request, which will yield one or more solutions.'
     properties:
       maxPrice:
-        description: "Do not return solutions that cost more than this price. The alphabetical part of the price is in ISO 4217. The format, in regex, is [A-Z]{3}\\d+(\\.\\d+)? Example: $102.07"
+        description: 'Do not return solutions that cost more than this price. The alphabetical part of the price is in ISO 4217. The format, in regex, is [A-Z]{3}\d+(\.\d+)? Example: $102.07'
         type: string
       passengers:
         $ref: '#/definitions/PassengerCounts'
@@ -624,10 +624,10 @@ definitions:
         description: Return only solutions with refundable fares.
         type: boolean
       saleCountry:
-        description: 'IATA country code representing the point of sale. This determines the "equivalent amount paid" currency for the ticket.'
+        description: IATA country code representing the point of sale. This determines the "equivalent amount paid" currency for the ticket.
         type: string
       slice:
-        description: "The slices that make up the itinerary of this trip. A slice represents a traveler's intent, the portion of a low-fare search corresponding to a traveler's request to get between two points. One-way journeys are generally expressed using one slice, round-trips using two. An example of a one slice trip with three segments might be BOS-SYD, SYD-LAX, LAX-BOS if the traveler only stopped in SYD and LAX just long enough to change planes."
+        description: 'The slices that make up the itinerary of this trip. A slice represents a traveler''s intent, the portion of a low-fare search corresponding to a traveler''s request to get between two points. One-way journeys are generally expressed using one slice, round-trips using two. An example of a one slice trip with three segments might be BOS-SYD, SYD-LAX, LAX-BOS if the traveler only stopped in SYD and LAX just long enough to change planes.'
         items:
           $ref: '#/definitions/SliceInput'
         type: array

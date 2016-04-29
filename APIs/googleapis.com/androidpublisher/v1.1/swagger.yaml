@@ -80,17 +80,17 @@ paths:
       description: Checks the purchase and consumption status of an inapp item.
       operationId: androidpublisher.inapppurchases.get
       parameters:
-        - description: "The package name of the application the inapp product was sold in (for example, 'com.some.thing')."
+        - description: 'The package name of the application the inapp product was sold in (for example, ''com.some.thing'').'
           in: path
           name: packageName
           required: true
           type: string
-        - description: "The inapp product SKU (for example, 'com.some.thing.inapp1')."
+        - description: 'The inapp product SKU (for example, ''com.some.thing.inapp1'').'
           in: path
           name: productId
           required: true
           type: string
-        - description: "The token provided to the user's device when the inapp product was purchased."
+        - description: The token provided to the user's device when the inapp product was purchased.
           in: path
           name: token
           required: true
@@ -115,20 +115,20 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{packageName}/subscriptions/{subscriptionId}/purchases/{token}':
     get:
-      description: "Checks whether a user's subscription purchase is valid and returns its expiry time."
+      description: Checks whether a user's subscription purchase is valid and returns its expiry time.
       operationId: androidpublisher.purchases.get
       parameters:
-        - description: "The package name of the application for which this subscription was purchased (for example, 'com.some.thing')."
+        - description: 'The package name of the application for which this subscription was purchased (for example, ''com.some.thing'').'
           in: path
           name: packageName
           required: true
           type: string
-        - description: "The purchased subscription ID (for example, 'monthly001')."
+        - description: 'The purchased subscription ID (for example, ''monthly001'').'
           in: path
           name: subscriptionId
           required: true
           type: string
-        - description: "The token provided to the user's device when the subscription was purchased."
+        - description: The token provided to the user's device when the subscription was purchased.
           in: path
           name: token
           required: true
@@ -161,20 +161,20 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Cancels a user's subscription purchase. The subscription remains valid until its expiration time."
+      description: Cancels a user's subscription purchase. The subscription remains valid until its expiration time.
       operationId: androidpublisher.purchases.cancel
       parameters:
-        - description: "The package name of the application for which this subscription was purchased (for example, 'com.some.thing')."
+        - description: 'The package name of the application for which this subscription was purchased (for example, ''com.some.thing'').'
           in: path
           name: packageName
           required: true
           type: string
-        - description: "The purchased subscription ID (for example, 'monthly001')."
+        - description: 'The purchased subscription ID (for example, ''monthly001'').'
           in: path
           name: subscriptionId
           required: true
           type: string
-        - description: "The token provided to the user's device when the subscription was purchased."
+        - description: The token provided to the user's device when the subscription was purchased.
           in: path
           name: token
           required: true
@@ -189,10 +189,13 @@ paths:
         - purchases
 definitions:
   InappPurchase:
-    description: "An InappPurchase resource indicates the status of a user's inapp product purchase."
+    description: An InappPurchase resource indicates the status of a user's inapp product purchase.
     properties:
       consumptionState:
-        description: "The consumption state of the inapp product. Possible values are:  \n- Yet to be consumed \n- Consumed"
+        description: |-
+          The consumption state of the inapp product. Possible values are:  
+          - Yet to be consumed 
+          - Consumed
         format: int32
         type: integer
       developerPayload:
@@ -203,7 +206,10 @@ definitions:
         description: This kind represents an inappPurchase object in the androidpublisher service.
         type: string
       purchaseState:
-        description: "The purchase state of the order. Possible values are:  \n- Purchased \n- Cancelled"
+        description: |-
+          The purchase state of the order. Possible values are:  
+          - Purchased 
+          - Cancelled
         format: int32
         type: integer
       purchaseTime:
@@ -212,7 +218,7 @@ definitions:
         type: string
     type: object
   SubscriptionPurchase:
-    description: "A SubscriptionPurchase resource indicates the status of a user's subscription purchase."
+    description: A SubscriptionPurchase resource indicates the status of a user's subscription purchase.
     properties:
       autoRenewing:
         description: Whether the subscription will automatically be renewed when it reaches its current expiry time.

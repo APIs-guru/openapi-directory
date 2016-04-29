@@ -80,12 +80,12 @@ paths:
       tags:
         - Analysis
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
@@ -110,17 +110,17 @@ paths:
       tags:
         - Analysis
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
         type: string
-      - description: "Analysis' identifier"
+      - description: Analysis' identifier
         in: path
         name: analysis_slug
         required: true
@@ -145,17 +145,17 @@ paths:
       tags:
         - Analysis
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
         type: string
-      - description: "Analysis' identifier"
+      - description: Analysis' identifier
         in: path
         name: analysis_slug
         required: true
@@ -195,17 +195,17 @@ paths:
       tags:
         - Analysis
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
         type: string
-      - description: "Analysis' identifier"
+      - description: Analysis' identifier
         in: path
         name: analysis_slug
         required: true
@@ -230,17 +230,17 @@ paths:
       tags:
         - Analysis
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
         type: string
-      - description: "Analysis' identifier"
+      - description: Analysis' identifier
         in: path
         name: analysis_slug
         required: true
@@ -308,22 +308,22 @@ paths:
       tags:
         - Analysis
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
         type: string
-      - description: "Analysis' identifier"
+      - description: Analysis' identifier
         in: path
         name: analysis_slug
         required: true
         type: string
-      - description: "Type of traffic, value: 'organic' (from search engine)or 'social' (from a social network)"
+      - description: 'Type of traffic, value: ''organic'' (from search engine)or ''social'' (from a social network)'
         enum:
           - organic
           - social
@@ -373,17 +373,17 @@ paths:
       tags:
         - Analysis
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
         type: string
-      - description: "Analysis' identifier"
+      - description: Analysis' identifier
         in: path
         name: analysis_slug
         required: true
@@ -408,34 +408,34 @@ paths:
       tags:
         - Analysis
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
         type: string
-      - description: "Analysis' identifier"
+      - description: Analysis' identifier
         in: path
         name: analysis_slug
         required: true
         type: string
   '/analyses/{username}/{project_slug}/{analysis_slug}/features/search_engines/top_orphans':
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
         type: string
-      - description: "Analysis' identifier"
+      - description: Analysis' identifier
         in: path
         name: analysis_slug
         required: true
@@ -503,17 +503,17 @@ paths:
         - Analysis
   '/analyses/{username}/{project_slug}/{analysis_slug}/features/search_engines/top_orphans/aggs':
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
         type: string
-      - description: "Analysis' identifier"
+      - description: Analysis' identifier
         in: path
         name: analysis_slug
         required: true
@@ -560,17 +560,17 @@ paths:
       tags:
         - Analysis
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
         type: string
-      - description: "Analysis' identifier"
+      - description: Analysis' identifier
         in: path
         name: analysis_slug
         required: true
@@ -595,17 +595,17 @@ paths:
       tags:
         - Analysis
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
         type: string
-      - description: "Analysis' identifier"
+      - description: Analysis' identifier
         in: path
         name: analysis_slug
         required: true
@@ -665,17 +665,17 @@ paths:
       tags:
         - Analysis
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
         type: string
-      - description: "Analysis' identifier"
+      - description: Analysis' identifier
         in: path
         name: analysis_slug
         required: true
@@ -735,17 +735,17 @@ paths:
       tags:
         - Analysis
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
         type: string
-      - description: "Analysis' identifier"
+      - description: Analysis' identifier
         in: path
         name: analysis_slug
         required: true
@@ -805,17 +805,17 @@ paths:
       tags:
         - Analysis
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
         type: string
-      - description: "Analysis' identifier"
+      - description: Analysis' identifier
         in: path
         name: analysis_slug
         required: true
@@ -875,34 +875,34 @@ paths:
       tags:
         - Analysis
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
         type: string
-      - description: "Analysis' identifier"
+      - description: Analysis' identifier
         in: path
         name: analysis_slug
         required: true
         type: string
   '/analyses/{username}/{project_slug}/{analysis_slug}/urls':
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
         type: string
-      - description: "Analysis' identifier"
+      - description: Analysis' identifier
         in: path
         name: analysis_slug
         required: true
@@ -980,17 +980,17 @@ paths:
         - Analysis
   '/analyses/{username}/{project_slug}/{analysis_slug}/urls/aggs':
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
         type: string
-      - description: "Analysis' identifier"
+      - description: Analysis' identifier
         in: path
         name: analysis_slug
         required: true
@@ -1057,17 +1057,17 @@ paths:
       tags:
         - Analysis
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
         type: string
-      - description: "Analysis' identifier"
+      - description: Analysis' identifier
         in: path
         name: analysis_slug
         required: true
@@ -1127,17 +1127,17 @@ paths:
       tags:
         - Analysis
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
         type: string
-      - description: "Analysis' identifier"
+      - description: Analysis' identifier
         in: path
         name: analysis_slug
         required: true
@@ -1194,17 +1194,17 @@ paths:
       tags:
         - Analysis
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
         type: string
-      - description: "Analysis' identifier"
+      - description: Analysis' identifier
         in: path
         name: analysis_slug
         required: true
@@ -1216,17 +1216,17 @@ paths:
         type: string
   '/analyses/{username}/{project_slug}/{analysis_slug}/urls/suggested_filters':
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
         type: string
-      - description: "Analysis' identifier"
+      - description: Analysis' identifier
         in: path
         name: analysis_slug
         required: true
@@ -1299,17 +1299,17 @@ paths:
       tags:
         - Analysis
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
         type: string
-      - description: "Analysis' identifier"
+      - description: Analysis' identifier
         in: path
         name: analysis_slug
         required: true
@@ -1374,14 +1374,14 @@ paths:
       tags:
         - Project
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
   '/projects/{username}/{project_slug}/filters':
     get:
-      description: "List all the project's saved filters (each filter's name, ID and filter value)"
+      description: 'List all the project''s saved filters (each filter''s name, ID and filter value)'
       operationId: getSavedFilters
       parameters:
         - description: Page Number
@@ -1430,23 +1430,23 @@ paths:
           description: error payload
           schema:
             $ref: '#/definitions/DefaultPayload'
-      summary: "List all the project's saved filters (each filter's name, ID and filter value)"
+      summary: 'List all the project''s saved filters (each filter''s name, ID and filter value)'
       tags:
         - Project
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
         type: string
   '/projects/{username}/{project_slug}/filters/{identifier}':
     get:
-      description: "Retrieves a specific saved filter's name, ID and filter value"
+      description: 'Retrieves a specific saved filter''s name, ID and filter value'
       operationId: getSavedFilter
       parameters: []
       produces:
@@ -1460,33 +1460,33 @@ paths:
           description: error payload
           schema:
             $ref: '#/definitions/DefaultPayload'
-      summary: "Retrieves a specific saved filter's name, ID and filter value"
+      summary: 'Retrieves a specific saved filter''s name, ID and filter value'
       tags:
         - Project
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true
         type: string
-      - description: "Saved Filter's identifier"
+      - description: Saved Filter's identifier
         in: path
         name: identifier
         required: true
         type: string
   '/projects/{username}/{project_slug}/urls/aggs':
     parameters:
-      - description: "User's identifier"
+      - description: User's identifier
         in: path
         name: username
         required: true
         type: string
-      - description: "Project's identifier"
+      - description: Project's identifier
         in: path
         name: project_slug
         required: true

@@ -108,7 +108,7 @@ paths:
       description: Deletes a service account key.
       operationId: iam.projects.serviceAccounts.keys.delete
       parameters:
-        - description: "The resource name of the service account key in the format \"projects/{project}/serviceAccounts/{account}/keys/{key}\". Using '-' as a wildcard for the project will infer the project from the account. The account value can be the email address or the unique_id of the service account."
+        - description: 'The resource name of the service account key in the format "projects/{project}/serviceAccounts/{account}/keys/{key}". Using ''-'' as a wildcard for the project will infer the project from the account. The account value can be the email address or the unique_id of the service account.'
           in: path
           name: name
           required: true
@@ -128,7 +128,7 @@ paths:
       description: Gets the ServiceAccountKey by key id.
       operationId: iam.projects.serviceAccounts.keys.get
       parameters:
-        - description: "The resource name of the service account key in the format \"projects/{project}/serviceAccounts/{account}/keys/{key}\". Using '-' as a wildcard for the project will infer the project from the account. The account value can be the email address or the unique_id of the service account."
+        - description: 'The resource name of the service account key in the format "projects/{project}/serviceAccounts/{account}/keys/{key}". Using ''-'' as a wildcard for the project will infer the project from the account. The account value can be the email address or the unique_id of the service account.'
           in: path
           name: name
           required: true
@@ -159,10 +159,10 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
     put:
-      description: "Updates a service account. Currently, only the following fields are updatable: 'display_name' . The 'etag' is mandatory."
+      description: 'Updates a service account. Currently, only the following fields are updatable: ''display_name'' . The ''etag'' is mandatory.'
       operationId: iam.projects.serviceAccounts.update
       parameters:
-        - description: "The resource name of the service account in the format \"projects/{project}/serviceAccounts/{account}\". In requests using '-' as a wildcard for the project, will infer the project from the account and the account value can be the email address or the unique_id of the service account. In responses the resource name will always be in the format \"projects/{project}/serviceAccounts/{email}\"."
+        - description: 'The resource name of the service account in the format "projects/{project}/serviceAccounts/{account}". In requests using ''-'' as a wildcard for the project, will infer the project from the account and the account value can be the email address or the unique_id of the service account. In responses the resource name will always be in the format "projects/{project}/serviceAccounts/{email}".'
           in: path
           name: name
           required: true
@@ -187,7 +187,7 @@ paths:
       description: Lists service account keys
       operationId: iam.projects.serviceAccounts.keys.list
       parameters:
-        - description: "The resource name of the service account in the format \"projects/{project}/serviceAccounts/{account}\". Using '-' as a wildcard for the project, will infer the project from the account. The account value can be the email address or the unique_id of the service account."
+        - description: 'The resource name of the service account in the format "projects/{project}/serviceAccounts/{account}". Using ''-'' as a wildcard for the project, will infer the project from the account. The account value can be the email address or the unique_id of the service account.'
           in: path
           name: name
           required: true
@@ -232,7 +232,7 @@ paths:
       description: Creates a service account key and returns it.
       operationId: iam.projects.serviceAccounts.keys.create
       parameters:
-        - description: "The resource name of the service account in the format \"projects/{project}/serviceAccounts/{account}\". Using '-' as a wildcard for the project, will infer the project from the account. The account value can be the email address or the unique_id of the service account."
+        - description: 'The resource name of the service account in the format "projects/{project}/serviceAccounts/{account}". Using ''-'' as a wildcard for the project, will infer the project from the account. The account value can be the email address or the unique_id of the service account.'
           in: path
           name: name
           required: true
@@ -338,7 +338,7 @@ paths:
       description: Signs a blob using a service account.
       operationId: iam.projects.serviceAccounts.signBlob
       parameters:
-        - description: "The resource name of the service account in the format \"projects/{project}/serviceAccounts/{account}\". Using '-' as a wildcard for the project, will infer the project from the account. The account value can be the email address or the unique_id of the service account."
+        - description: 'The resource name of the service account in the format "projects/{project}/serviceAccounts/{account}". Using ''-'' as a wildcard for the project, will infer the project from the account. The account value can be the email address or the unique_id of the service account.'
           in: path
           name: name
           required: true
@@ -523,7 +523,7 @@ definitions:
         description: The object of the condition. Exactly one of these must be set.
         type: string
       values:
-        description: "The objects of the condition. This is mutually exclusive with 'value'."
+        description: The objects of the condition. This is mutually exclusive with 'value'.
         items:
           type: string
         type: array
@@ -587,7 +587,7 @@ definitions:
         type: string
     type: object
   LogConfig:
-    description: "Specifies what kind of log the caller must write Increment a streamz counter with the specified metric and field names. Metric names should start with a '/', generally be lowercase-only, and end in \"_count\". Field names should not contain an initial slash. The actual exported metric names will have \"/iam/policy\" prepended. Field names correspond to IAM request parameters and field values are their respective values. At present only \"iam_principal\", corresponding to IAMContext.principal, is supported. Examples: counter { metric: \"/debug_access_count\" field: \"iam_principal\" } ==> increment counter /iam/policy/backend_debug_access_count {iam_principal=[value of IAMContext.principal]} At this time we do not support: * multiple field names (though this may be supported in the future) * decrementing the counter * incrementing it by anything other than 1"
+    description: 'Specifies what kind of log the caller must write Increment a streamz counter with the specified metric and field names. Metric names should start with a ''/'', generally be lowercase-only, and end in "_count". Field names should not contain an initial slash. The actual exported metric names will have "/iam/policy" prepended. Field names correspond to IAM request parameters and field values are their respective values. At present only "iam_principal", corresponding to IAMContext.principal, is supported. Examples: counter { metric: "/debug_access_count" field: "iam_principal" } ==> increment counter /iam/policy/backend_debug_access_count {iam_principal=[value of IAMContext.principal]} At this time we do not support: * multiple field names (though this may be supported in the future) * decrementing the counter * incrementing it by anything other than 1'
     properties:
       cloudAudit:
         $ref: '#/definitions/CloudAuditOptions'
@@ -600,7 +600,7 @@ definitions:
         description: Data access options.
     type: object
   Policy:
-    description: "Defines an Identity and Access Management (IAM) policy. It is used to specify access control policies for Cloud Platform resources. A `Policy` consists of a list of `bindings`. A `Binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM. **Example** { \"bindings\": [ { \"role\": \"roles/owner\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-other-app@appspot.gserviceaccount.com\"] }, { \"role\": \"roles/viewer\", \"members\": [\"user:sean@example.com\"] } ] } For a description of IAM and its features, see the [IAM developer's guide](https://cloud.google.com/iam)."
+    description: 'Defines an Identity and Access Management (IAM) policy. It is used to specify access control policies for Cloud Platform resources. A `Policy` consists of a list of `bindings`. A `Binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM. **Example** { "bindings": [ { "role": "roles/owner", "members": [ "user:mike@example.com", "group:admins@example.com", "domain:google.com", "serviceAccount:my-other-app@appspot.gserviceaccount.com"] }, { "role": "roles/viewer", "members": ["user:sean@example.com"] } ] } For a description of IAM and its features, see the [IAM developer''s guide](https://cloud.google.com/iam).'
     properties:
       bindings:
         description: Associates a list of `members` to a `role`. Multiple `bindings` must not be specified for the same `role`. `bindings` with no members will result in an error.
@@ -657,13 +657,13 @@ definitions:
           type: string
         type: array
       permissions:
-        description: "A permission is a string of form '..' (e.g., 'storage.buckets.list'). A value of '*' matches all permissions, and a verb part of '*' (e.g., 'storage.buckets.*') matches all verbs."
+        description: 'A permission is a string of form ''..'' (e.g., ''storage.buckets.list''). A value of ''*'' matches all permissions, and a verb part of ''*'' (e.g., ''storage.buckets.*'') matches all verbs.'
         items:
           type: string
         type: array
     type: object
   ServiceAccount:
-    description: "A service account in the Identity and Access Management API. To create a service account, you specify the project_id and account_id for the account. The account_id is unique within the project, and used to generate the service account email address and a stable unique id. All other methods can identify accounts using the format \"projects/{project}/serviceAccounts/{account}\". Using '-' as a wildcard for the project, will infer the project from the account. The account value can be the email address or the unique_id of the service account."
+    description: 'A service account in the Identity and Access Management API. To create a service account, you specify the project_id and account_id for the account. The account_id is unique within the project, and used to generate the service account email address and a stable unique id. All other methods can identify accounts using the format "projects/{project}/serviceAccounts/{account}". Using ''-'' as a wildcard for the project, will infer the project from the account. The account value can be the email address or the unique_id of the service account.'
     properties:
       displayName:
         description: Optional. A user-specified description of the service account. Must be fewer than 100 UTF-8 bytes.
@@ -676,7 +676,7 @@ definitions:
         format: byte
         type: string
       name:
-        description: "The resource name of the service account in the format \"projects/{project}/serviceAccounts/{account}\". In requests using '-' as a wildcard for the project, will infer the project from the account and the account value can be the email address or the unique_id of the service account. In responses the resource name will always be in the format \"projects/{project}/serviceAccounts/{email}\"."
+        description: 'The resource name of the service account in the format "projects/{project}/serviceAccounts/{account}". In requests using ''-'' as a wildcard for the project, will infer the project from the account and the account value can be the email address or the unique_id of the service account. In responses the resource name will always be in the format "projects/{project}/serviceAccounts/{email}".'
         type: string
       oauth2ClientId:
         description: '@OutputOnly. The OAuth2 client id for the service account. This is used in conjunction with the OAuth2 clientconfig API to make three legged OAuth2 (3LO) flows to access the data of Google users.'
@@ -742,7 +742,7 @@ definitions:
     description: Request message for `TestIamPermissions` method.
     properties:
       permissions:
-        description: "The set of permissions to check for the `resource`. Permissions with wildcards (such as '*' or 'storage.*') are not allowed. For more information see IAM Overview."
+        description: The set of permissions to check for the `resource`. Permissions with wildcards (such as '*' or 'storage.*') are not allowed. For more information see IAM Overview.
         items:
           type: string
         type: array

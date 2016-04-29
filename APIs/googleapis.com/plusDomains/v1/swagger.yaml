@@ -294,7 +294,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: "Update a circle's description. This method supports patch semantics."
+      description: Update a circle's description. This method supports patch semantics.
       operationId: plusDomains.circles.patch
       parameters:
         - description: The ID of the circle to update.
@@ -319,7 +319,7 @@ paths:
       tags:
         - circles
     put:
-      description: "Update a circle's description."
+      description: Update a circle's description.
       operationId: plusDomains.circles.update
       parameters:
         - description: The ID of the circle to update.
@@ -484,10 +484,10 @@ paths:
       - $ref: '#/parameters/userIp'
   '/people/{userId}':
     get:
-      description: "Get a person's profile."
+      description: Get a person's profile.
       operationId: plusDomains.people.get
       parameters:
-        - description: 'The ID of the person to get the profile for. The special value "me" can be used to indicate the authenticated user.'
+        - description: The ID of the person to get the profile for. The special value "me" can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -563,7 +563,7 @@ paths:
       description: List all of the activities in the specified collection for a particular user.
       operationId: plusDomains.activities.list
       parameters:
-        - description: 'The ID of the user to get activities for. The special value "me" can be used to indicate the authenticated user.'
+        - description: The ID of the user to get activities for. The special value "me" can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -613,7 +613,7 @@ paths:
       description: List all of the audiences to which a user can share.
       operationId: plusDomains.audiences.list
       parameters:
-        - description: 'The ID of the user to get audiences for. The special value "me" can be used to indicate the authenticated user.'
+        - description: The ID of the user to get audiences for. The special value "me" can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -656,7 +656,7 @@ paths:
       description: List all of the circles for a user.
       operationId: plusDomains.circles.list
       parameters:
-        - description: 'The ID of the user to get circles for. The special value "me" can be used to indicate the authenticated user.'
+        - description: The ID of the user to get circles for. The special value "me" can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -698,7 +698,7 @@ paths:
       description: Create a new circle for the authenticated user.
       operationId: plusDomains.circles.insert
       parameters:
-        - description: 'The ID of the user to create the circle on behalf of. The value "me" can be used to indicate the authenticated user.'
+        - description: The ID of the user to create the circle on behalf of. The value "me" can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -928,7 +928,7 @@ paths:
       description: List all of the people in the specified collection.
       operationId: plusDomains.people.list
       parameters:
-        - description: 'Get the collection of people for the person identified. Use "me" to indicate the authenticated user.'
+        - description: Get the collection of people for the person identified. Use "me" to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -1022,27 +1022,27 @@ definitions:
             description: 'The name of the actor, suitable for display.'
             type: string
           id:
-            description: "The ID of the actor's Person resource."
+            description: The ID of the actor's Person resource.
             type: string
           image:
             description: The image representation of the actor.
             properties:
               url:
-                description: "The URL of the actor's profile photo. To resize the image and crop it to a square, append the query string ?sz=x, where x is the dimension in pixels of each side."
+                description: 'The URL of the actor''s profile photo. To resize the image and crop it to a square, append the query string ?sz=x, where x is the dimension in pixels of each side.'
                 type: string
             type: object
           name:
             description: An object representation of the individual components of name.
             properties:
               familyName:
-                description: 'The family name ("last name") of the actor.'
+                description: The family name ("last name") of the actor.
                 type: string
               givenName:
-                description: 'The given name ("first name") of the actor.'
+                description: The given name ("first name") of the actor.
                 type: string
             type: object
           url:
-            description: "The link to the actor's Google profile."
+            description: The link to the actor's Google profile.
             type: string
           verification:
             description: Verification status of actor.
@@ -1081,7 +1081,7 @@ definitions:
         description: The object of this activity.
         properties:
           actor:
-            description: "If this activity's object is itself another activity, such as when a person reshares an activity, this property specifies the original activity's actor."
+            description: 'If this activity''s object is itself another activity, such as when a person reshares an activity, this property specifies the original activity''s actor.'
             properties:
               clientSpecificActorInfo:
                 description: Actor info specific to particular clients.
@@ -1095,7 +1095,7 @@ definitions:
                     type: object
                 type: object
               displayName:
-                description: "The original actor's name, which is suitable for display."
+                description: 'The original actor''s name, which is suitable for display.'
                 type: string
               id:
                 description: ID of the original actor.
@@ -1108,7 +1108,7 @@ definitions:
                     type: string
                 type: object
               url:
-                description: "A link to the original actor's Google profile."
+                description: A link to the original actor's Google profile.
                 type: string
               verification:
                 description: Verification status of actor.
@@ -1178,10 +1178,15 @@ definitions:
                       type: integer
                   type: object
                 objectType:
-                  description: "The type of media object. Possible values include, but are not limited to, the following values:  \n- \"photo\" - A photo. \n- \"album\" - A photo album. \n- \"video\" - A video. \n- \"article\" - An article, specified by a link."
+                  description: |-
+                    The type of media object. Possible values include, but are not limited to, the following values:  
+                    - "photo" - A photo. 
+                    - "album" - A photo album. 
+                    - "video" - A video. 
+                    - "article" - An article, specified by a link.
                   type: string
                 previewThumbnails:
-                  description: "When previewing, these are the optional thumbnails for the post. When posting an article, choose one by setting the attachment.image.url property. If you don't choose one, one will be chosen for you."
+                  description: 'When previewing, these are the optional thumbnails for the post. When posting an article, choose one by setting the attachment.image.url property. If you don''t choose one, one will be chosen for you.'
                   items:
                     properties:
                       url:
@@ -1231,19 +1236,22 @@ definitions:
             description: 'The ID of the object. When resharing an activity, this is the ID of the activity that is being reshared.'
             type: string
           objectType:
-            description: "The type of the object. Possible values include, but are not limited to, the following values:  \n- \"note\" - Textual content. \n- \"activity\" - A Google+ activity."
+            description: |-
+              The type of the object. Possible values include, but are not limited to, the following values:  
+              - "note" - Textual content. 
+              - "activity" - A Google+ activity.
             type: string
           originalContent:
             description: 'The content (text) as provided by the author, which is stored without any HTML formatting. When creating or updating an activity, this value must be supplied as plain text in the request.'
             type: string
           plusoners:
-            description: "People who +1'd this activity."
+            description: People who +1'd this activity.
             properties:
               selfLink:
-                description: "The URL for the collection of people who +1'd this activity."
+                description: The URL for the collection of people who +1'd this activity.
                 type: string
               totalItems:
-                description: "Total number of people who +1'd this activity."
+                description: Total number of people who +1'd this activity.
                 format: uint32
                 type: integer
             type: object
@@ -1282,7 +1290,7 @@ definitions:
                 description: Whether the viewer can edit or delete the activity.
                 type: boolean
               isPlusOned:
-                description: "Whether the viewer has +1'd the activity."
+                description: Whether the viewer has +1'd the activity.
                 type: boolean
               resharingDisabled:
                 description: Whether reshares are disabled for the activity.
@@ -1323,7 +1331,10 @@ definitions:
         description: The link to this activity.
         type: string
       verb:
-        description: "This activity's verb, which indicates the action that was performed. Possible values include, but are not limited to, the following values:  \n- \"post\" - Publish content to the stream. \n- \"share\" - Reshare an activity."
+        description: |-
+          This activity's verb, which indicates the action that was performed. Possible values include, but are not limited to, the following values:  
+          - "post" - Publish content to the stream. 
+          - "share" - Reshare an activity.
         type: string
     type: object
   ActivityFeed:
@@ -1377,7 +1388,11 @@ definitions:
         format: uint32
         type: integer
       visibility:
-        description: "The circle members' visibility as chosen by the owner of the circle. This only applies for items with \"item.type\" equals \"circle\". Possible values are:  \n- \"public\" - Members are visible to the public. \n- \"limited\" - Members are visible to a limited audience. \n- \"private\" - Members are visible to the owner only."
+        description: |-
+          The circle members' visibility as chosen by the owner of the circle. This only applies for items with "item.type" equals "circle". Possible values are:  
+          - "public" - Members are visible to the public. 
+          - "limited" - Members are visible to a limited audience. 
+          - "private" - Members are visible to the owner only.
         type: string
     type: object
   AudiencesFeed:
@@ -1489,7 +1504,7 @@ definitions:
             description: The image representation of this actor.
             properties:
               url:
-                description: "The URL of the actor's profile photo. To resize the image and crop it to a square, append the query string ?sz=x, where x is the dimension in pixels of each side."
+                description: 'The URL of the actor''s profile photo. To resize the image and crop it to a square, append the query string ?sz=x, where x is the dimension in pixels of each side.'
                 type: string
             type: object
           url:
@@ -1533,17 +1548,19 @@ definitions:
             type: string
           objectType:
             default: comment
-            description: "The object type of this comment. Possible values are:  \n- \"comment\" - A comment in reply to an activity."
+            description: |-
+              The object type of this comment. Possible values are:  
+              - "comment" - A comment in reply to an activity.
             type: string
           originalContent:
             description: 'The content (text) as provided by the author, stored without any HTML formatting. When creating or updating a comment, this value must be supplied as plain text in the request.'
             type: string
         type: object
       plusoners:
-        description: "People who +1'd this comment."
+        description: People who +1'd this comment.
         properties:
           totalItems:
-            description: "Total number of people who +1'd this comment."
+            description: Total number of people who +1'd this comment.
             format: uint32
             type: integer
         type: object
@@ -1560,7 +1577,9 @@ definitions:
         type: string
       verb:
         default: post
-        description: "This comment's verb, indicating what action was performed. Possible values are:  \n- \"post\" - Publish content to the stream."
+        description: |-
+          This comment's verb, indicating what action was performed. Possible values are:  
+          - "post" - Publish content to the stream.
         type: string
     type: object
   CommentFeed:
@@ -1600,20 +1619,20 @@ definitions:
         description: The person who uploaded this media.
         properties:
           displayName:
-            description: "The author's name."
+            description: The author's name.
             type: string
           id:
             description: ID of the author.
             type: string
           image:
-            description: "The author's Google profile image."
+            description: The author's Google profile image.
             properties:
               url:
-                description: "The URL of the author's profile photo. To resize the image and crop it to a square, append the query string ?sz=x, where x is the dimension in pixels of each side."
+                description: 'The URL of the author''s profile photo. To resize the image and crop it to a square, append the query string ?sz=x, where x is the dimension in pixels of each side.'
                 type: string
             type: object
           url:
-            description: "A link to the author's Google profile."
+            description: A link to the author's Google profile.
             type: string
         type: object
       displayName:
@@ -1646,7 +1665,7 @@ definitions:
         format: date-time
         type: string
       mediaUrl:
-        description: "The URL of this photo or video's still image."
+        description: The URL of this photo or video's still image.
         type: string
       published:
         description: The time at which this media was uploaded. Formatted as an RFC 3339 timestamp.
@@ -1676,7 +1695,13 @@ definitions:
         format: int64
         type: string
       videoStatus:
-        description: "The encoding status of this video. Possible values are:  \n- \"UPLOADING\" - Not all the video bytes have been received. \n- \"PENDING\" - Video not yet processed. \n- \"FAILED\" - Video processing failed. \n- \"READY\" - A single video stream is playable. \n- \"FINAL\" - All video streams are playable."
+        description: |-
+          The encoding status of this video. Possible values are:  
+          - "UPLOADING" - Not all the video bytes have been received. 
+          - "PENDING" - Video not yet processed. 
+          - "FAILED" - Video processing failed. 
+          - "READY" - A single video stream is playable. 
+          - "FINAL" - All video streams are playable.
         type: string
       width:
         description: The width in pixels of the original image.
@@ -1717,10 +1742,10 @@ definitions:
         description: A short biography for this person.
         type: string
       birthday:
-        description: "The person's date of birth, represented as YYYY-MM-DD."
+        description: 'The person''s date of birth, represented as YYYY-MM-DD.'
         type: string
       braggingRights:
-        description: 'The "bragging rights" line of this person.'
+        description: The "bragging rights" line of this person.
         type: string
       circledByCount:
         description: 'For followers who are visible, the number of people who have added this person or page to a circle.'
@@ -1742,7 +1767,7 @@ definitions:
                 type: integer
             type: object
           coverPhoto:
-            description: "The person's primary cover image."
+            description: The person's primary cover image.
             properties:
               height:
                 description: The height of the image.
@@ -1757,7 +1782,9 @@ definitions:
                 type: integer
             type: object
           layout:
-            description: "The layout of the cover art. Possible values include, but are not limited to, the following values:  \n- \"banner\" - One large image banner."
+            description: |-
+              The layout of the cover art. Possible values include, but are not limited to, the following values:  
+              - "banner" - One large image banner.
             type: string
         type: object
       currentLocation:
@@ -1767,14 +1794,19 @@ definitions:
         description: 'The name of this person, which is suitable for display.'
         type: string
       domain:
-        description: "The hosted domain name for the user's Google Apps account. For instance, example.com. The plus.profile.emails.read or email scope is needed to get this domain name."
+        description: 'The hosted domain name for the user''s Google Apps account. For instance, example.com. The plus.profile.emails.read or email scope is needed to get this domain name.'
         type: string
       emails:
         description: 'A list of email addresses that this person has, including their Google account email address, and the public verified email addresses on their Google+ profile. The plus.profile.emails.read scope is needed to retrieve these email addresses, or the email scope can be used to retrieve just the Google account email address.'
         items:
           properties:
             type:
-              description: "The type of address. Possible values include, but are not limited to, the following values:  \n- \"account\" - Google account email address. \n- \"home\" - Home email address. \n- \"work\" - Work email address. \n- \"other\" - Other."
+              description: |-
+                The type of address. Possible values include, but are not limited to, the following values:  
+                - "account" - Google account email address. 
+                - "home" - Home email address. 
+                - "work" - Work email address. 
+                - "other" - Other.
               type: string
             value:
               description: The email address.
@@ -1785,19 +1817,23 @@ definitions:
         description: ETag of this response for caching purposes.
         type: string
       gender:
-        description: "The person's gender. Possible values include, but are not limited to, the following values:  \n- \"male\" - Male gender. \n- \"female\" - Female gender. \n- \"other\" - Other."
+        description: |-
+          The person's gender. Possible values include, but are not limited to, the following values:  
+          - "male" - Male gender. 
+          - "female" - Female gender. 
+          - "other" - Other.
         type: string
       id:
         description: The ID of this person.
         type: string
       image:
-        description: "The representation of the person's profile photo."
+        description: The representation of the person's profile photo.
         properties:
           isDefault:
-            description: "Whether the person's profile photo is the default one"
+            description: Whether the person's profile photo is the default one
             type: boolean
           url:
-            description: "The URL of the person's profile photo. To resize the image and crop it to a square, append the query string ?sz=x, where x is the dimension in pixels of each side."
+            description: 'The URL of the person''s profile photo. To resize the image and crop it to a square, append the query string ?sz=x, where x is the dimension in pixels of each side.'
             type: string
         type: object
       isPlusUser:
@@ -1808,7 +1844,7 @@ definitions:
         description: 'Identifies this resource as a person. Value: "plus#person".'
         type: string
       name:
-        description: "An object representation of the individual components of a person's name."
+        description: An object representation of the individual components of a person's name.
         properties:
           familyName:
             description: The family name (last name) of this person.
@@ -1820,10 +1856,10 @@ definitions:
             description: The given name (first name) of this person.
             type: string
           honorificPrefix:
-            description: 'The honorific prefixes (such as "Dr." or "Mrs.") for this person.'
+            description: The honorific prefixes (such as "Dr." or "Mrs.") for this person.
             type: string
           honorificSuffix:
-            description: 'The honorific suffixes (such as "Jr.") for this person.'
+            description: The honorific suffixes (such as "Jr.") for this person.
             type: string
           middleName:
             description: The middle name of this person.
@@ -1833,7 +1869,10 @@ definitions:
         description: The nickname of this person.
         type: string
       objectType:
-        description: "Type of person within Google+. Possible values include, but are not limited to, the following values:  \n- \"person\" - represents an actual person. \n- \"page\" - represents a page."
+        description: |-
+          Type of person within Google+. Possible values include, but are not limited to, the following values:  
+          - "person" - represents an actual person. 
+          - "page" - represents a page.
         type: string
       occupation:
         description: The occupation of this person.
@@ -1846,7 +1885,7 @@ definitions:
               description: The department within the organization. Deprecated.
               type: string
             description:
-              description: "A short description of the person's role in this organization. Deprecated."
+              description: A short description of the person's role in this organization. Deprecated.
               type: string
             endDate:
               description: The date that the person left this organization.
@@ -1858,16 +1897,19 @@ definitions:
               description: The name of the organization.
               type: string
             primary:
-              description: "If \"true\", indicates this organization is the person's primary one, which is typically interpreted as the current one."
+              description: 'If "true", indicates this organization is the person''s primary one, which is typically interpreted as the current one.'
               type: boolean
             startDate:
               description: The date that the person joined this organization.
               type: string
             title:
-              description: "The person's job title or role within the organization."
+              description: The person's job title or role within the organization.
               type: string
             type:
-              description: "The type of organization. Possible values include, but are not limited to, the following values:  \n- \"work\" - Work. \n- \"school\" - School."
+              description: |-
+                The type of organization. Possible values include, but are not limited to, the following values:  
+                - "work" - Work. 
+                - "school" - School.
               type: string
           type: object
         type: array
@@ -1876,7 +1918,7 @@ definitions:
         items:
           properties:
             primary:
-              description: "If \"true\", this place of residence is this person's primary residence."
+              description: 'If "true", this place of residence is this person''s primary residence.'
               type: boolean
             value:
               description: 'A place where this person has lived. For example: "Seattle, WA", "Near Toronto".'
@@ -1884,20 +1926,30 @@ definitions:
           type: object
         type: array
       plusOneCount:
-        description: "If a Google+ Page, the number of people who have +1'd this page."
+        description: 'If a Google+ Page, the number of people who have +1''d this page.'
         format: int32
         type: integer
       relationshipStatus:
-        description: "The person's relationship status. Possible values include, but are not limited to, the following values:  \n- \"single\" - Person is single. \n- \"in_a_relationship\" - Person is in a relationship. \n- \"engaged\" - Person is engaged. \n- \"married\" - Person is married. \n- \"its_complicated\" - The relationship is complicated. \n- \"open_relationship\" - Person is in an open relationship. \n- \"widowed\" - Person is widowed. \n- \"in_domestic_partnership\" - Person is in a domestic partnership. \n- \"in_civil_union\" - Person is in a civil union."
+        description: |-
+          The person's relationship status. Possible values include, but are not limited to, the following values:  
+          - "single" - Person is single. 
+          - "in_a_relationship" - Person is in a relationship. 
+          - "engaged" - Person is engaged. 
+          - "married" - Person is married. 
+          - "its_complicated" - The relationship is complicated. 
+          - "open_relationship" - Person is in an open relationship. 
+          - "widowed" - Person is widowed. 
+          - "in_domestic_partnership" - Person is in a domestic partnership. 
+          - "in_civil_union" - Person is in a civil union.
         type: string
       skills:
-        description: "The person's skills."
+        description: The person's skills.
         type: string
       tagline:
         description: The brief description (tagline) of this person.
         type: string
       url:
-        description: "The URL of this person's profile."
+        description: The URL of this person's profile.
         type: string
       urls:
         description: A list of URLs for this person.
@@ -1907,7 +1959,12 @@ definitions:
               description: The label of the URL.
               type: string
             type:
-              description: "The type of URL. Possible values include, but are not limited to, the following values:  \n- \"otherProfile\" - URL for another profile. \n- \"contributor\" - URL to a site for which this person is a contributor. \n- \"website\" - URL for this Google+ Page's primary website. \n- \"other\" - Other URL."
+              description: |-
+                The type of URL. Possible values include, but are not limited to, the following values:  
+                - "otherProfile" - URL for another profile. 
+                - "contributor" - URL to a site for which this person is a contributor. 
+                - "website" - URL for this Google+ Page's primary website. 
+                - "other" - Other URL.
               type: string
             value:
               description: The URL value.
@@ -1959,7 +2016,14 @@ definitions:
         description: 'The ID of the entry. For entries of type "person" or "circle", this is the ID of the resource. For other types, this property is not set.'
         type: string
       type:
-        description: "The type of entry describing to whom access is granted. Possible values are:  \n- \"person\" - Access to an individual. \n- \"circle\" - Access to members of a circle. \n- \"myCircles\" - Access to members of all the person's circles. \n- \"extendedCircles\" - Access to members of all the person's circles, plus all of the people in their circles. \n- \"domain\" - Access to members of the person's Google Apps domain. \n- \"public\" - Access to anyone on the web."
+        description: |-
+          The type of entry describing to whom access is granted. Possible values are:  
+          - "person" - Access to an individual. 
+          - "circle" - Access to members of a circle. 
+          - "myCircles" - Access to members of all the person's circles. 
+          - "extendedCircles" - Access to members of all the person's circles, plus all of the people in their circles. 
+          - "domain" - Access to members of the person's Google Apps domain. 
+          - "public" - Access to anyone on the web.
         type: string
     type: object
   Videostream:

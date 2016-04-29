@@ -82,11 +82,11 @@ tags:
 paths:
   '/{userId}/drafts':
     get:
-      description: "Lists the drafts in the user's mailbox."
+      description: Lists the drafts in the user's mailbox.
       operationId: gmail.users.drafts.list
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -136,7 +136,7 @@ paths:
       operationId: gmail.users.drafts.create
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -175,7 +175,7 @@ paths:
       operationId: gmail.users.drafts.send
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -204,7 +204,7 @@ paths:
       operationId: gmail.users.drafts.delete
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -231,7 +231,7 @@ paths:
       operationId: gmail.users.drafts.get
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -278,11 +278,11 @@ paths:
     put:
       consumes:
         - message/rfc822
-      description: "Replaces a draft's content."
+      description: Replaces a draft's content.
       operationId: gmail.users.drafts.update
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -316,7 +316,7 @@ paths:
       operationId: gmail.users.history.list
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -362,11 +362,11 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{userId}/labels':
     get:
-      description: "Lists all labels in the user's mailbox."
+      description: Lists all labels in the user's mailbox.
       operationId: gmail.users.labels.list
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -400,7 +400,7 @@ paths:
       operationId: gmail.users.labels.create
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -429,7 +429,7 @@ paths:
       operationId: gmail.users.labels.delete
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -456,7 +456,7 @@ paths:
       operationId: gmail.users.labels.get
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -495,7 +495,7 @@ paths:
       operationId: gmail.users.labels.patch
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -528,7 +528,7 @@ paths:
       operationId: gmail.users.labels.update
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -558,11 +558,11 @@ paths:
         - users
   '/{userId}/messages':
     get:
-      description: "Lists the messages in the user's mailbox."
+      description: Lists the messages in the user's mailbox.
       operationId: gmail.users.messages.list
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -617,11 +617,11 @@ paths:
     post:
       consumes:
         - message/rfc822
-      description: "Directly inserts a message into only this user's mailbox similar to IMAP APPEND, bypassing most scanning and classification. Does not send a message."
+      description: 'Directly inserts a message into only this user''s mailbox similar to IMAP APPEND, bypassing most scanning and classification. Does not send a message.'
       operationId: gmail.users.messages.insert
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -632,7 +632,7 @@ paths:
           name: deleted
           type: boolean
         - default: receivedTime
-          description: "Source for Gmail's internal date of the message."
+          description: Source for Gmail's internal date of the message.
           enum:
             - dateHeader
             - receivedTime
@@ -671,7 +671,7 @@ paths:
       operationId: gmail.users.messages.batchDelete
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -700,11 +700,11 @@ paths:
     post:
       consumes:
         - message/rfc822
-      description: "Imports a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via SMTP. Does not send a message."
+      description: 'Imports a message into only this user''s mailbox, with standard email delivery scanning and classification similar to receiving via SMTP. Does not send a message.'
       operationId: gmail.users.messages.import
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -715,7 +715,7 @@ paths:
           name: deleted
           type: boolean
         - default: dateHeader
-          description: "Source for Gmail's internal date of the message."
+          description: Source for Gmail's internal date of the message.
           enum:
             - dateHeader
             - receivedTime
@@ -766,7 +766,7 @@ paths:
       operationId: gmail.users.messages.send
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -797,7 +797,7 @@ paths:
       operationId: gmail.users.messages.delete
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -820,7 +820,7 @@ paths:
       operationId: gmail.users.messages.get
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -883,7 +883,7 @@ paths:
       operationId: gmail.users.messages.modify
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -923,7 +923,7 @@ paths:
       operationId: gmail.users.messages.trash
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -959,7 +959,7 @@ paths:
       operationId: gmail.users.messages.untrash
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -987,7 +987,7 @@ paths:
       operationId: gmail.users.messages.attachments.get
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -1026,11 +1026,11 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{userId}/profile':
     get:
-      description: "Gets the current user's Gmail profile."
+      description: Gets the current user's Gmail profile.
       operationId: gmail.users.getProfile
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -1073,7 +1073,7 @@ paths:
       operationId: gmail.users.stop
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -1092,11 +1092,11 @@ paths:
         - users
   '/{userId}/threads':
     get:
-      description: "Lists the threads in the user's mailbox."
+      description: Lists the threads in the user's mailbox.
       operationId: gmail.users.threads.list
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -1154,7 +1154,7 @@ paths:
       operationId: gmail.users.threads.delete
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -1177,7 +1177,7 @@ paths:
       operationId: gmail.users.threads.get
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -1239,7 +1239,7 @@ paths:
       operationId: gmail.users.threads.modify
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -1279,7 +1279,7 @@ paths:
       operationId: gmail.users.threads.trash
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -1315,7 +1315,7 @@ paths:
       operationId: gmail.users.threads.untrash
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -1351,7 +1351,7 @@ paths:
       operationId: gmail.users.watch
       parameters:
         - default: me
-          description: "The user's email address. The special value me can be used to indicate the authenticated user."
+          description: The user's email address. The special value me can be used to indicate the authenticated user.
           in: path
           name: userId
           required: true
@@ -1384,7 +1384,7 @@ definitions:
         type: array
     type: object
   Draft:
-    description: "A draft email in the user's mailbox."
+    description: A draft email in the user's mailbox.
     properties:
       id:
         description: The immutable ID of the draft.
@@ -1394,7 +1394,7 @@ definitions:
         description: The message content of the draft.
     type: object
   History:
-    description: "A record of a change to the user's mailbox. Each history change may affect multiple messages in multiple ways."
+    description: A record of a change to the user's mailbox. Each history change may affect multiple messages in multiple ways.
     properties:
       id:
         description: The mailbox sequence ID.
@@ -1457,7 +1457,7 @@ definitions:
         $ref: '#/definitions/Message'
     type: object
   Label:
-    description: "Labels are used to categorize messages and threads within the user's mailbox."
+    description: Labels are used to categorize messages and threads within the user's mailbox.
     properties:
       id:
         description: The immutable ID of the label.
@@ -1524,7 +1524,7 @@ definitions:
           $ref: '#/definitions/History'
         type: array
       historyId:
-        description: "The ID of the mailbox's current history record."
+        description: The ID of the mailbox's current history record.
         format: uint64
         type: string
       nextPageToken:
@@ -1603,7 +1603,11 @@ definitions:
         description: A short part of the message text.
         type: string
       threadId:
-        description: "The ID of the thread the message belongs to. To add a message or draft to a thread, the following criteria must be met: \n- The requested threadId must be specified on the Message or Draft.Message you supply with your request. \n- The References and In-Reply-To headers must be set in compliance with the RFC 2822 standard. \n- The Subject headers must match."
+        description: |-
+          The ID of the thread the message belongs to. To add a message or draft to a thread, the following criteria must be met: 
+          - The requested threadId must be specified on the Message or Draft.Message you supply with your request. 
+          - The References and In-Reply-To headers must be set in compliance with the RFC 2822 standard. 
+          - The Subject headers must match.
         type: string
     type: object
   MessagePart:
@@ -1686,10 +1690,10 @@ definitions:
     description: Profile for a Gmail user.
     properties:
       emailAddress:
-        description: "The user's email address."
+        description: The user's email address.
         type: string
       historyId:
-        description: "The ID of the mailbox's current history record."
+        description: The ID of the mailbox's current history record.
         format: uint64
         type: string
       messagesTotal:
@@ -1721,7 +1725,7 @@ definitions:
         type: string
     type: object
   WatchRequest:
-    description: "Set up or update a new push notification watch on this user's mailbox."
+    description: Set up or update a new push notification watch on this user's mailbox.
     properties:
       labelFilterAction:
         description: Filtering behavior of labelIds list specified.
@@ -1749,7 +1753,7 @@ definitions:
         format: int64
         type: string
       historyId:
-        description: "The ID of the mailbox's current history record."
+        description: The ID of the mailbox's current history record.
         format: uint64
         type: string
     type: object

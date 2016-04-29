@@ -156,7 +156,7 @@ paths:
         - application/json
       operationId: getDomesticSummaryReport
       parameters:
-        - description: "Output format. 'xml' and 'csv' values are accepted. Default format - json"
+        - description: Output format. 'xml' and 'csv' values are accepted. Default format - json
           in: query
           name: format
           required: false
@@ -206,7 +206,7 @@ paths:
         - application/json
       operationId: getEuViesReport
       parameters:
-        - description: "Output format. 'xml' and 'csv' values are accepted as well"
+        - description: Output format. 'xml' and 'csv' values are accepted as well
           in: query
           name: format
           required: false
@@ -226,7 +226,7 @@ paths:
           name: currency_code
           required: false
           type: string
-        - description: "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used."
+        - description: 'MOSS-assigned tax ID - if not provided, merchant''s national tax number will be used.'
           in: query
           name: tax_id
           required: false
@@ -266,7 +266,7 @@ paths:
         - application/json
       operationId: getRefunds
       parameters:
-        - description: "Output format. 'csv' value is accepted as well"
+        - description: Output format. 'csv' value is accepted as well
           in: query
           name: format
           required: false
@@ -326,7 +326,7 @@ paths:
           name: end_month
           required: false
           type: string
-        - description: "Quarter in yyyy-MM format. If start-date and end-date are provided, quarter is ignored and should be set to 'range'."
+        - description: 'Quarter in yyyy-MM format. If start-date and end-date are provided, quarter is ignored and should be set to ''range''.'
           in: path
           name: quarter
           required: true
@@ -351,7 +351,7 @@ paths:
         - application/json
       operationId: getSettlement
       parameters:
-        - description: "Output format. 'csv' value is accepted as well"
+        - description: Output format. 'csv' value is accepted as well
           in: query
           name: format
           required: false
@@ -366,17 +366,17 @@ paths:
           name: tax_country_code
           required: false
           type: string
-        - description: "ISO 3-letter currency code, e.g. EUR or USD. If provided, all amounts will be coerced for this currency. Defaults to region's currency code."
+        - description: 'ISO 3-letter currency code, e.g. EUR or USD. If provided, all amounts will be coerced for this currency. Defaults to region''s currency code.'
           in: query
           name: currency_code
           required: false
           type: string
-        - description: "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used. Deprecated, please use tax-id."
+        - description: 'MOSS-assigned tax ID - if not provided, merchant''s national tax number will be used. Deprecated, please use tax-id.'
           in: query
           name: moss_tax_id
           required: false
           type: string
-        - description: "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used. Deprecated, please use tax-id."
+        - description: 'MOSS-assigned tax ID - if not provided, merchant''s national tax number will be used. Deprecated, please use tax-id.'
           in: query
           name: tax_id
           required: false
@@ -391,7 +391,7 @@ paths:
           name: end_month
           required: false
           type: string
-        - description: "Quarter in yyyy-MM format. If start-date and end-date are provided, quarter is ignored and should be set to 'range'."
+        - description: 'Quarter in yyyy-MM format. If start-date and end-date are provided, quarter is ignored and should be set to ''range''.'
           in: path
           name: quarter
           required: true
@@ -521,7 +521,7 @@ paths:
           name: date_to
           required: true
           type: string
-        - description: "Interval. Accepted values are 'day', 'week' and 'month'."
+        - description: 'Interval. Accepted values are ''day'', ''week'' and ''month''.'
           in: query
           name: interval
           required: false
@@ -546,7 +546,7 @@ paths:
         - application/json
       operationId: getTransactionsStatsByCountry
       parameters:
-        - description: "Global currency code to use for conversion - in addition to country's currency if rate is available. Conversion is indicative and based on most-recent rate from ECB."
+        - description: Global currency code to use for conversion - in addition to country's currency if rate is available. Conversion is indicative and based on most-recent rate from ECB.
           in: query
           name: global_currency_code
           required: false
@@ -591,7 +591,7 @@ paths:
           name: invoice_address_city
           required: false
           type: string
-        - description: "Buyer's credit card prefix."
+        - description: Buyer's credit card prefix.
           in: query
           name: buyer_credit_card_prefix
           required: false
@@ -616,7 +616,7 @@ paths:
           name: quantity
           required: false
           type: number
-        - description: " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly."
+        - description: ' Buyer''s tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly.'
           in: query
           name: buyer_tax_number
           required: false
@@ -626,7 +626,7 @@ paths:
           name: force_country_code
           required: false
           type: string
-        - description: "Order date in yyyy-MM-dd format, in merchant's timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used."
+        - description: 'Order date in yyyy-MM-dd format, in merchant''s timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used.'
           in: query
           name: order_date
           required: false
@@ -706,7 +706,7 @@ paths:
           name: billing_country_code
           required: false
           type: string
-        - description: "Buyer's credit card prefix."
+        - description: Buyer's credit card prefix.
           in: query
           name: buyer_credit_card_prefix
           required: false
@@ -801,7 +801,7 @@ paths:
           name: invoice_number
           required: false
           type: string
-        - description: "Comma separated list of of transaction statuses. 'N' - unconfirmed transaction, 'C' - confirmed transaction."
+        - description: 'Comma separated list of of transaction statuses. ''N'' - unconfirmed transaction, ''C'' - confirmed transaction.'
           in: query
           name: statuses
           required: false
@@ -821,7 +821,7 @@ paths:
           name: total_amount_greater_than
           required: false
           type: string
-        - description: "Output format - supports 'csv' value for this operation."
+        - description: Output format - supports 'csv' value for this operation.
           in: query
           name: format
           required: false
@@ -1286,7 +1286,7 @@ definitions:
         description: Date for stats in yyyy-MM-dd format.
         type: string
       day_raw:
-        description: "Date for stats in yyyy-MM-dd'T'hh:mm:ss'Z' format."
+        description: 'Date for stats in yyyy-MM-dd''T''hh:mm:ss''Z'' format.'
         type: string
       status:
         description: Transaction status (C or N).
@@ -1301,7 +1301,7 @@ definitions:
         description: Date for stats in yyyy-MM-dd format.
         type: string
       day_raw:
-        description: "Date for stats in yyyy-MM-dd'T'hh:mm:ss'Z' format."
+        description: 'Date for stats in yyyy-MM-dd''T''hh:mm:ss''Z'' format.'
         type: string
       status:
         description: Transaction status (C or N).
@@ -1389,10 +1389,10 @@ definitions:
         description: Billing two letter ISO country code.
         type: string
       buyer_credit_card_prefix:
-        description: "Buyer's credit card prefix."
+        description: Buyer's credit card prefix.
         type: string
       buyer_tax_number:
-        description: " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly."
+        description: ' Buyer''s tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly.'
         type: string
       currency_code:
         description: Currency code for transaction - e.g. EUR.
@@ -1410,7 +1410,7 @@ definitions:
         description: Invoice address/region
         type: string
       order_date:
-        description: "Order date in yyyy-MM-dd format, in merchant's timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used."
+        description: 'Order date in yyyy-MM-dd format, in merchant''s timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used.'
         type: string
       product_type:
         description: 'Product type, according to dictionary /dictionaries/product_types. '
@@ -1433,7 +1433,7 @@ definitions:
   calculateSimpleTaxOut:
     properties:
       storage_required_fields:
-        description: "Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type."
+        description: Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type.
         items:
           $ref: '#/definitions/storage_required_fields'
         type: array
@@ -1460,7 +1460,7 @@ definitions:
         description: Billing two letter ISO country code.
         type: string
       buyer_credit_card_prefix:
-        description: "Buyer's credit card prefix."
+        description: Buyer's credit card prefix.
         type: string
     type: object
   calculateTaxLocationOut:
@@ -1469,7 +1469,7 @@ definitions:
         description: Billing two letter ISO country code.
         type: string
       buyer_credit_card_prefix:
-        description: "Buyer's credit card prefix."
+        description: Buyer's credit card prefix.
         type: string
       buyer_ip:
         description: IP address of the buyer in dotted decimal (IPv4) or text format (IPv6).
@@ -1493,7 +1493,7 @@ definitions:
   calculateTaxOut:
     properties:
       storage_required_fields:
-        description: "Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type."
+        description: Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type.
         items:
           $ref: '#/definitions/storage_required_fields'
         type: array
@@ -1527,7 +1527,7 @@ definitions:
   confirmTransactionOut:
     properties:
       storage_required_fields:
-        description: "Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type."
+        description: Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type.
         items:
           $ref: '#/definitions/storage_required_fields'
         type: array
@@ -1671,7 +1671,7 @@ definitions:
         description: Additional payment information.
         type: string
       payment_timestamp:
-        description: "When the payment was received in yyyy-MM-dd'T'HH:mm:ss(.SSS)'Z' format (24 hour, UTC timezone). Defaults to current date and time."
+        description: 'When the payment was received in yyyy-MM-dd''T''HH:mm:ss(.SSS)''Z'' format (24 hour, UTC timezone). Defaults to current date and time.'
         type: string
     required:
       - amount
@@ -1747,7 +1747,7 @@ definitions:
   createTransactionOut:
     properties:
       storage_required_fields:
-        description: "Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type."
+        description: Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type.
         items:
           $ref: '#/definitions/storage_required_fields'
         type: array
@@ -1781,10 +1781,10 @@ definitions:
   custom_fields:
     properties:
       key:
-        description: "Field's key."
+        description: Field's key.
         type: string
       value:
-        description: "Field's value."
+        description: Field's value.
         type: string
     type: object
   emailInvoiceIn:
@@ -1920,7 +1920,7 @@ definitions:
         description: Period end month in yyyy-MM-dd format.
         type: string
       format:
-        description: "Output format. 'xml' and 'csv' values are accepted. Default format - json"
+        description: Output format. 'xml' and 'csv' values are accepted. Default format - json
         type: string
       fx_date_type:
         description: Which date should be used for FX.
@@ -1951,7 +1951,7 @@ definitions:
         description: Domestic sales tax amout.
         type: number
       end_date:
-        description: "Period end date in yyyy-MM-dd'T'hh:mm:ss'Z' format."
+        description: 'Period end date in yyyy-MM-dd''T''hh:mm:ss''Z'' format.'
         type: string
       eu_tax_deducted_refunds:
         description: EU deducted tax sales.
@@ -1972,7 +1972,7 @@ definitions:
         description: Global sales amount. This includes sales from domestic country too.
         type: number
       start_date:
-        description: "Period start date in yyyy-MM-dd'T'hh:mm:ss'Z' format."
+        description: 'Period start date in yyyy-MM-dd''T''hh:mm:ss''Z'' format.'
         type: string
     type: object
   getEuViesReportIn:
@@ -1987,7 +1987,7 @@ definitions:
         description: ISO 2-letter country code which will be used for determining which country is domestic.
         type: string
       format:
-        description: "Output format. 'xml' and 'csv' values are accepted as well"
+        description: Output format. 'xml' and 'csv' values are accepted as well
         type: string
       fx_date_type:
         description: Which date should be used for FX.
@@ -1996,7 +1996,7 @@ definitions:
         description: Period start month in yyyy-MM format.
         type: string
       tax_id:
-        description: "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used."
+        description: 'MOSS-assigned tax ID - if not provided, merchant''s national tax number will be used.'
         type: string
       transformation:
         description: Which transformation should be applied. Please note that transformation will be applied only for xml and csv formats.
@@ -2012,7 +2012,7 @@ definitions:
         description: Three-letter ISO currency code.
         type: string
       end_date:
-        description: "Period end date in yyyy-MM-dd'T'hh:mm:ss'Z' format."
+        description: 'Period end date in yyyy-MM-dd''T''hh:mm:ss''Z'' format.'
         type: string
       report:
         description: Settlement report.
@@ -2020,7 +2020,7 @@ definitions:
           $ref: '#/definitions/report'
         type: array
       start_date:
-        description: "Period start date in yyyy-MM-dd'T'hh:mm:ss'Z' format."
+        description: 'Period start date in yyyy-MM-dd''T''hh:mm:ss''Z'' format.'
         type: string
     type: object
   getProductTypesDictOut:
@@ -2037,7 +2037,7 @@ definitions:
         description: 'Take only refunds issued at or after the date. Format: yyyy-MM-dd'
         type: string
       format:
-        description: "Output format. 'csv' value is accepted as well"
+        description: Output format. 'csv' value is accepted as well
         type: string
       moss_country_code:
         description: 'MOSS country code, used to determine currency. If ommited, merchant default setting is used.'
@@ -2059,19 +2059,19 @@ definitions:
   getSettlementIn:
     properties:
       currency_code:
-        description: "ISO 3-letter currency code, e.g. EUR or USD. If provided, all amounts will be coerced for this currency. Defaults to region's currency code."
+        description: 'ISO 3-letter currency code, e.g. EUR or USD. If provided, all amounts will be coerced for this currency. Defaults to region''s currency code.'
         type: string
       end_month:
         description: Period end month in yyyy-MM-dd format. Either quarter or start-month and end-month have to be provided.
         type: string
       format:
-        description: "Output format. 'csv' value is accepted as well"
+        description: Output format. 'csv' value is accepted as well
         type: string
       moss_country_code:
         description: 'MOSS country code, used to determine currency/region. If ommited, merchant default setting is used. Deprecated: please use tax-country-code.'
         type: string
       moss_tax_id:
-        description: "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used. Deprecated, please use tax-id."
+        description: 'MOSS-assigned tax ID - if not provided, merchant''s national tax number will be used. Deprecated, please use tax-id.'
         type: string
       start_month:
         description: Period start month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.
@@ -2080,19 +2080,19 @@ definitions:
         description: 'Tax entity country code, used to determine currency/region. '
         type: string
       tax_id:
-        description: "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used. Deprecated, please use tax-id."
+        description: 'MOSS-assigned tax ID - if not provided, merchant''s national tax number will be used. Deprecated, please use tax-id.'
         type: string
     type: object
   getSettlementOut:
     properties:
       end_date:
-        description: "Period end date in yyyy-MM-dd'T'hh:mm:ss'Z' format."
+        description: 'Period end date in yyyy-MM-dd''T''hh:mm:ss''Z'' format.'
         type: string
       fx_rate_date:
-        description: "Date of ECB FX rate used for conversions in yyyy-MM-dd'T'hh:mm:ss'Z' format. Applies to tax regions where "
+        description: 'Date of ECB FX rate used for conversions in yyyy-MM-dd''T''hh:mm:ss''Z'' format. Applies to tax regions where '
         type: string
       indicative:
-        description: "If the quarter isn't closed yet, tax amount is indicative, as we cannot determine FX rate or all transactions yet."
+        description: 'If the quarter isn''t closed yet, tax amount is indicative, as we cannot determine FX rate or all transactions yet.'
         type: boolean
       report:
         description: Settlement report.
@@ -2100,7 +2100,7 @@ definitions:
           $ref: '#/definitions/report'
         type: array
       start_date:
-        description: "Period start date in yyyy-MM-dd'T'hh:mm:ss'Z' format."
+        description: 'Period start date in yyyy-MM-dd''T''hh:mm:ss''Z'' format.'
         type: string
     type: object
   getSettlementStatsByCountryIn:
@@ -2165,7 +2165,7 @@ definitions:
   getTransactionOut:
     properties:
       storage_required_fields:
-        description: "Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type."
+        description: Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type.
         items:
           $ref: '#/definitions/storage_required_fields'
         type: array
@@ -2187,7 +2187,7 @@ definitions:
         description: Date to in yyyy-MM format.
         type: string
       global_currency_code:
-        description: "Global currency code to use for conversion - in addition to country's currency if rate is available. Conversion is indicative and based on most-recent rate from ECB."
+        description: Global currency code to use for conversion - in addition to country's currency if rate is available. Conversion is indicative and based on most-recent rate from ECB.
         type: string
     required:
       - date_from
@@ -2210,7 +2210,7 @@ definitions:
         description: Date to in yyyy-MM format.
         type: string
       interval:
-        description: "Interval. Accepted values are 'day', 'week' and 'month'."
+        description: 'Interval. Accepted values are ''day'', ''week'' and ''month''.'
         type: string
     required:
       - date_from
@@ -2231,19 +2231,19 @@ definitions:
         description: Billing two letter ISO country code.
         type: string
       buyer_credit_card_prefix:
-        description: "Buyer's credit card prefix."
+        description: Buyer's credit card prefix.
         type: string
       buyer_email:
-        description: "Buyer's declared email address."
+        description: Buyer's declared email address.
         type: string
       buyer_ip:
         description: IP address of the buyer in dotted decimal (IPv4) or text format (IPv6).
         type: string
       buyer_name:
-        description: "Buyer's name - first name and last name or company name."
+        description: Buyer's name - first name and last name or company name.
         type: string
       buyer_tax_number:
-        description: " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly."
+        description: ' Buyer''s tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly.'
         type: string
       currency_code:
         description: Currency code for transaction - e.g. EUR.
@@ -2284,13 +2284,13 @@ definitions:
         description: Invoice place of issue.
         type: string
       order_date:
-        description: "Order date in yyyy-MM-dd format, in merchant's timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used."
+        description: 'Order date in yyyy-MM-dd format, in merchant''s timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used.'
         type: string
       original_transaction_key:
-        description: "Use data and evidence from original transaction. Tax will be re-calculated, but evidence won't be re-checked. This parameter is taken into account only when 'manual' flag is raised."
+        description: 'Use data and evidence from original transaction. Tax will be re-calculated, but evidence won''t be re-checked. This parameter is taken into account only when ''manual'' flag is raised.'
         type: string
       status:
-        description: "Transaction status: 'N' - new, 'C' - confirmed. Can use 'C' in store-transaction! with private-token to create confirmed transaction, otherwise 'N' is default status. Not applicable for update-transaction!."
+        description: 'Transaction status: ''N'' - new, ''C'' - confirmed. Can use ''C'' in store-transaction! with private-token to create confirmed transaction, otherwise ''N'' is default status. Not applicable for update-transaction!.'
         type: string
       supply_date:
         description: Supply date in yyyy-MM-dd format.
@@ -2380,19 +2380,19 @@ definitions:
         description: Billing two letter ISO country code.
         type: string
       buyer_credit_card_prefix:
-        description: "Buyer's credit card prefix."
+        description: Buyer's credit card prefix.
         type: string
       buyer_email:
-        description: "Buyer's declared email address."
+        description: Buyer's declared email address.
         type: string
       buyer_ip:
         description: IP address of the buyer in dotted decimal (IPv4) or text format (IPv6).
         type: string
       buyer_name:
-        description: "Buyer's name - first name and last name or company name."
+        description: Buyer's name - first name and last name or company name.
         type: string
       buyer_tax_number:
-        description: " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly."
+        description: ' Buyer''s tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly.'
         type: string
       currency_code:
         description: Currency code for transaction - e.g. EUR.
@@ -2433,13 +2433,13 @@ definitions:
         description: Invoice place of issue.
         type: string
       order_date:
-        description: "Order date in yyyy-MM-dd format, in merchant's timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used."
+        description: 'Order date in yyyy-MM-dd format, in merchant''s timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used.'
         type: string
       original_transaction_key:
-        description: "Use data and evidence from original transaction. Tax will be re-calculated, but evidence won't be re-checked. This parameter is taken into account only when 'manual' flag is raised."
+        description: 'Use data and evidence from original transaction. Tax will be re-calculated, but evidence won''t be re-checked. This parameter is taken into account only when ''manual'' flag is raised.'
         type: string
       status:
-        description: "Transaction status: 'N' - new, 'C' - confirmed. Can use 'C' in store-transaction! with private-token to create confirmed transaction, otherwise 'N' is default status. Not applicable for update-transaction!."
+        description: 'Transaction status: ''N'' - new, ''C'' - confirmed. Can use ''C'' in store-transaction! with private-token to create confirmed transaction, otherwise ''N'' is default status. Not applicable for update-transaction!.'
         type: string
       supply_date:
         description: Supply date in yyyy-MM-dd format.
@@ -2523,7 +2523,7 @@ definitions:
         description: Filtering expression
         type: string
       format:
-        description: "Output format - supports 'csv' value for this operation."
+        description: Output format - supports 'csv' value for this operation.
         type: string
       invoice_number:
         description: Transaction invoice number.
@@ -2550,7 +2550,7 @@ definitions:
         description: 'If true, results are sorted in descending order.'
         type: boolean
       statuses:
-        description: "Comma separated list of of transaction statuses. 'N' - unconfirmed transaction, 'C' - confirmed transaction."
+        description: 'Comma separated list of of transaction statuses. ''N'' - unconfirmed transaction, ''C'' - confirmed transaction.'
         type: string
       tax_country_code:
         description: Two letter ISO tax country code.
@@ -2690,7 +2690,7 @@ definitions:
         description: Date for stats in yyyy-MM-dd format.
         type: string
       day_raw:
-        description: "Date for stats in yyyy-MM-dd'T'hh:mm:ss'Z' format."
+        description: 'Date for stats in yyyy-MM-dd''T''hh:mm:ss''Z'' format.'
         type: string
       eu_b2b:
         description: Total EU B2B transaction count.
@@ -2717,19 +2717,19 @@ definitions:
         description: In which currency code the settlement was calculated.
         type: string
       end_date:
-        description: "Period end date in yyyy-MM-dd'T'hh:mm:ss'Z' format."
+        description: 'Period end date in yyyy-MM-dd''T''hh:mm:ss''Z'' format.'
         type: string
       fx_rate_date:
-        description: "Date of ECB FX rate used for conversions in yyyy-MM-dd'T'hh:mm:ss'Z' format."
+        description: 'Date of ECB FX rate used for conversions in yyyy-MM-dd''T''hh:mm:ss''Z'' format.'
         type: string
       indicative:
-        description: "If the quarter isn't closed yet, tax amount is indicative, as we cannot determine FX rate or all transactions yet."
+        description: 'If the quarter isn''t closed yet, tax amount is indicative, as we cannot determine FX rate or all transactions yet.'
         type: boolean
       quarter:
         description: Quarter that this summary applies to.
         type: string
       start_date:
-        description: "Period start date in yyyy-MM-dd'T'hh:mm:ss'Z' format."
+        description: 'Period start date in yyyy-MM-dd''T''hh:mm:ss''Z'' format.'
         type: string
       tax_amount:
         description: Tax amount due in this quarter.
@@ -2762,22 +2762,22 @@ definitions:
         description: Billing two letter ISO country code.
         type: string
       buyer_credit_card_prefix:
-        description: "Buyer's credit card prefix."
+        description: Buyer's credit card prefix.
         type: string
       buyer_email:
-        description: "Buyer's declared email address."
+        description: Buyer's declared email address.
         type: string
       buyer_ip:
         description: IP address of the buyer in dotted decimal (IPv4) or text format (IPv6).
         type: string
       buyer_name:
-        description: "Buyer's name - first name and last name or company name."
+        description: Buyer's name - first name and last name or company name.
         type: string
       buyer_tax_number:
-        description: " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly."
+        description: ' Buyer''s tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly.'
         type: string
       buyer_tax_number_valid:
-        description: "If the buyer tax number has been provided and was validated successfully. Always true for domestic transactions (billing country same as merchant's country), tax number doesn't get validated in that case."
+        description: 'If the buyer tax number has been provided and was validated successfully. Always true for domestic transactions (billing country same as merchant''s country), tax number doesn''t get validated in that case.'
         type: boolean
       confirm_timestamp:
         description: Date and time of transaction confirmation.
@@ -2845,13 +2845,13 @@ definitions:
         description: 'Transaction kind: eu-b2c, eu-b2b, domestic, untaxed'
         type: string
       manual:
-        description: "Is the transaction created manually - using private token. In manual mode, it is the merchant who calculates tax country and validates evidence. If you need API to do that when accessing the API with private token, just skip the 'manual' flag or use false value there and provide customer's ip address through buyer_ip field. Manual mode is also used when using original_transaction_key field."
+        description: 'Is the transaction created manually - using private token. In manual mode, it is the merchant who calculates tax country and validates evidence. If you need API to do that when accessing the API with private token, just skip the ''manual'' flag or use false value there and provide customer''s ip address through buyer_ip field. Manual mode is also used when using original_transaction_key field.'
         type: boolean
       order_date:
-        description: "Order date in yyyy-MM-dd format, in merchant's timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used."
+        description: 'Order date in yyyy-MM-dd format, in merchant''s timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used.'
         type: string
       original_transaction_key:
-        description: "Use data and evidence from original transaction. Tax will be re-calculated, but evidence won't be re-checked. This parameter is taken into account only when 'manual' flag is raised."
+        description: 'Use data and evidence from original transaction. Tax will be re-calculated, but evidence won''t be re-checked. This parameter is taken into account only when ''manual'' flag is raised.'
         type: string
       refunded_tax_amount:
         description: Refunded tax amount.
@@ -2863,7 +2863,7 @@ definitions:
         description: Transaction source software - e.g. plugin
         type: string
       status:
-        description: "Transaction status: 'N' - new, 'C' - confirmed. Can use 'C' in store-transaction! with private-token to create confirmed transaction, otherwise 'N' is default status. Not applicable for update-transaction!."
+        description: 'Transaction status: ''N'' - new, ''C'' - confirmed. Can use ''C'' in store-transaction! with private-token to create confirmed transaction, otherwise ''N'' is default status. Not applicable for update-transaction!.'
         type: string
       supply_date:
         description: Supply date in yyyy-MM-dd format.
@@ -2992,22 +2992,22 @@ definitions:
         description: Billing two letter ISO country code.
         type: string
       buyer_credit_card_prefix:
-        description: "Buyer's credit card prefix."
+        description: Buyer's credit card prefix.
         type: string
       buyer_email:
-        description: "Buyer's declared email address."
+        description: Buyer's declared email address.
         type: string
       buyer_ip:
         description: IP address of the buyer in dotted decimal (IPv4) or text format (IPv6).
         type: string
       buyer_name:
-        description: "Buyer's name - first name and last name or company name."
+        description: Buyer's name - first name and last name or company name.
         type: string
       buyer_tax_number:
-        description: " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly."
+        description: ' Buyer''s tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly.'
         type: string
       buyer_tax_number_valid:
-        description: "If the buyer tax number has been provided and was validated successfully. Always true for domestic transactions (billing country same as merchant's country), tax number doesn't get validated in that case."
+        description: 'If the buyer tax number has been provided and was validated successfully. Always true for domestic transactions (billing country same as merchant''s country), tax number doesn''t get validated in that case.'
         type: boolean
       confirm_timestamp:
         description: Date and time of transaction confirmation.
@@ -3075,13 +3075,13 @@ definitions:
         description: 'Transaction kind: eu-b2c, eu-b2b, domestic, untaxed'
         type: string
       manual:
-        description: "Is the transaction created manually - using private token. In manual mode, it is the merchant who calculates tax country and validates evidence. If you need API to do that when accessing the API with private token, just skip the 'manual' flag or use false value there and provide customer's ip address through buyer_ip field. Manual mode is also used when using original_transaction_key field."
+        description: 'Is the transaction created manually - using private token. In manual mode, it is the merchant who calculates tax country and validates evidence. If you need API to do that when accessing the API with private token, just skip the ''manual'' flag or use false value there and provide customer''s ip address through buyer_ip field. Manual mode is also used when using original_transaction_key field.'
         type: boolean
       order_date:
-        description: "Order date in yyyy-MM-dd format, in merchant's timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used."
+        description: 'Order date in yyyy-MM-dd format, in merchant''s timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used.'
         type: string
       original_transaction_key:
-        description: "Use data and evidence from original transaction. Tax will be re-calculated, but evidence won't be re-checked. This parameter is taken into account only when 'manual' flag is raised."
+        description: 'Use data and evidence from original transaction. Tax will be re-calculated, but evidence won''t be re-checked. This parameter is taken into account only when ''manual'' flag is raised.'
         type: string
       refunded_tax_amount:
         description: Refunded tax amount.
@@ -3093,7 +3093,7 @@ definitions:
         description: Transaction source software - e.g. plugin
         type: string
       status:
-        description: "Transaction status: 'N' - new, 'C' - confirmed. Can use 'C' in store-transaction! with private-token to create confirmed transaction, otherwise 'N' is default status. Not applicable for update-transaction!."
+        description: 'Transaction status: ''N'' - new, ''C'' - confirmed. Can use ''C'' in store-transaction! with private-token to create confirmed transaction, otherwise ''N'' is default status. Not applicable for update-transaction!.'
         type: string
       supply_date:
         description: Supply date in yyyy-MM-dd format.
@@ -3146,7 +3146,7 @@ definitions:
   unconfirmTransactionOut:
     properties:
       storage_required_fields:
-        description: "Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type."
+        description: Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type.
         items:
           $ref: '#/definitions/storage_required_fields'
         type: array
@@ -3168,7 +3168,7 @@ definitions:
   updateTransactionOut:
     properties:
       storage_required_fields:
-        description: "Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type."
+        description: Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type.
         items:
           $ref: '#/definitions/storage_required_fields'
         type: array
@@ -3203,10 +3203,10 @@ definitions:
           $ref: '#/definitions/us_tax_exempt_state'
         type: array
       purchaser_address1:
-        description: "Purchaser's first address line."
+        description: Purchaser's first address line.
         type: string
       purchaser_address2:
-        description: "Purchaser's second address line."
+        description: Purchaser's second address line.
         type: string
       purchaser_business_type:
         description: Purchaser business type.
@@ -3215,7 +3215,7 @@ definitions:
         description: 'If business type is other, a short description must be provided.'
         type: string
       purchaser_city:
-        description: "Purchaser's city."
+        description: Purchaser's city.
         type: string
       purchaser_exemption_reason:
         description: The reason for exemption reason.
@@ -3224,22 +3224,22 @@ definitions:
         description: The value of exemption reason.
         type: string
       purchaser_first_name:
-        description: "Purchaser's first name."
+        description: Purchaser's first name.
         type: string
       purchaser_last_name:
-        description: "Purchaser's last name."
+        description: Purchaser's last name.
         type: string
       purchaser_state:
-        description: "Purchaser's state."
+        description: Purchaser's state.
         type: string
       purchaser_tax_id:
         $ref: '#/definitions/us_tax_id'
-        description: "Purchaser's TAX ID."
+        description: Purchaser's TAX ID.
       purchaser_title:
-        description: "Purchaser's title."
+        description: Purchaser's title.
         type: string
       purchaser_zip:
-        description: "Purchaser's zip code."
+        description: Purchaser's zip code.
         type: string
       single_purchase:
         description: Set to true if this certificate is valid for single purchase only.
@@ -3295,10 +3295,10 @@ definitions:
         description: Billing two letter ISO country code.
         type: string
       buyer_tax_number:
-        description: " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly."
+        description: ' Buyer''s tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly.'
         type: string
       buyer_tax_number_valid:
-        description: "If the buyer tax number has been provided and was validated successfully. Always true for domestic transactions (billing country same as merchant's country), tax number doesn't get validated in that case."
+        description: 'If the buyer tax number has been provided and was validated successfully. Always true for domestic transactions (billing country same as merchant''s country), tax number doesn''t get validated in that case.'
         type: boolean
       tax_deducted:
         description: 'If the transaction is in a country supported by Taxamo, but the tax is not calculated due to merchant settings or EU B2B transaction for example.'

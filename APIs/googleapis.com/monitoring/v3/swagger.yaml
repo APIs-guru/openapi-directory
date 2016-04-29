@@ -218,7 +218,7 @@ paths:
       description: 'Creates a new time series with the given data points. This method is only for use in `collectd`-related code, including the Google Monitoring Agent. See [google.monitoring.v3.MetricService.CreateTimeSeries] instead.'
       operationId: monitoring.projects.collectdTimeSeries.create
       parameters:
-        - description: 'The project in which to create the time series. The format is `"projects/PROJECT_ID_OR_NUMBER"`.'
+        - description: The project in which to create the time series. The format is `"projects/PROJECT_ID_OR_NUMBER"`.
           in: path
           name: name
           required: true
@@ -482,7 +482,7 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: "An optional [filter](/monitoring/api/v3/filters) describing the descriptors to be returned. The filter can reference the descriptor's type and labels. For example, the following filter returns only Google Compute Engine descriptors that have an `id` label: resource.type = starts_with(\"gce_\") AND resource.label:id"
+        - description: 'An optional [filter](/monitoring/api/v3/filters) describing the descriptors to be returned. The filter can reference the descriptor''s type and labels. For example, the following filter returns only Google Compute Engine descriptors that have an `id` label: resource.type = starts_with("gce_") AND resource.label:id'
           in: query
           name: filter
           type: string
@@ -782,7 +782,7 @@ definitions:
         $ref: '#/definitions/Range'
         description: 'If specified, contains the range of the population values. The field must not be present if the `count` is zero.'
       sumOfSquaredDeviation:
-        description: "The sum of squared deviations from the mean of the values in the population. For values x_i this is: Sum[i=1..n]((x_i - mean)^2) Knuth, \"The Art of Computer Programming\", Vol. 2, page 323, 3rd edition describes Welford's method for accumulating this sum in one pass. If `count` is zero then this field must be zero."
+        description: 'The sum of squared deviations from the mean of the values in the population. For values x_i this is: Sum[i=1..n]((x_i - mean)^2) Knuth, "The Art of Computer Programming", Vol. 2, page 323, 3rd edition describes Welford''s method for accumulating this sum in one pass. If `count` is zero then this field must be zero.'
         format: double
         type: number
     type: object
@@ -879,7 +879,7 @@ definitions:
         type: string
     type: object
   Group:
-    description: "The description of a dynamic collection of monitored resources. Each group has a filter that is matched against monitored resources and their associated metadata. If a group's filter matches an available monitored resource, then that resource is a member of that group. Groups can contain any number of monitored resources, and each monitored resource can be a member of any number of groups. Groups can be nested in parent-child hierarchies. The `parentName` field identifies an optional parent for each group. If a group has a parent, then the only monitored resources available to be matched by the group's filter are the resources contained in the parent group. In other words, a group contains the monitored resources that match its filter and the filters of all the group's ancestors. A group without a parent can contain any monitored resource. For example, consider an infrastructure running a set of instances with two user-defined tags: `\"environment\"` and `\"role\"`. A parent group has a filter, `environment=\"production\"`. A child of that parent group has a filter, `role=\"transcoder\"`. The parent group contains all instances in the production environment, regardless of their roles. The child group contains instances that have the transcoder role *and* are in the production environment. The monitored resources contained in a group can change at any moment, depending on what resources exist and what filters are associated with the group and its ancestors."
+    description: 'The description of a dynamic collection of monitored resources. Each group has a filter that is matched against monitored resources and their associated metadata. If a group''s filter matches an available monitored resource, then that resource is a member of that group. Groups can contain any number of monitored resources, and each monitored resource can be a member of any number of groups. Groups can be nested in parent-child hierarchies. The `parentName` field identifies an optional parent for each group. If a group has a parent, then the only monitored resources available to be matched by the group''s filter are the resources contained in the parent group. In other words, a group contains the monitored resources that match its filter and the filters of all the group''s ancestors. A group without a parent can contain any monitored resource. For example, consider an infrastructure running a set of instances with two user-defined tags: `"environment"` and `"role"`. A parent group has a filter, `environment="production"`. A child of that parent group has a filter, `role="transcoder"`. The parent group contains all instances in the production environment, regardless of their roles. The child group contains instances that have the transcoder role *and* are in the production environment. The monitored resources contained in a group can change at any moment, depending on what resources exist and what filters are associated with the group and its ancestors.'
     properties:
       displayName:
         description: 'A user-assigned name for this group, used only for display purposes.'
@@ -894,7 +894,7 @@ definitions:
         description: 'The name of this group. The format is `"projects/{project_id_or_number}/groups/{group_id}"`. When creating a group, this field is ignored and a new name is created consisting of the project specified in the call to `CreateGroup` and a unique `{group_id}` that is generated automatically. @OutputOnly'
         type: string
       parentName:
-        description: "The name of the group's parent, if it has one. The format is `\"projects/{project_id_or_number}/groups/{group_id}\"`. For groups with no parent, `parentName` is the empty string, `\"\"`."
+        description: 'The name of the group''s parent, if it has one. The format is `"projects/{project_id_or_number}/groups/{group_id}"`. For groups with no parent, `parentName` is the empty string, `""`.'
         type: string
     type: object
   LabelDescriptor:
@@ -1035,7 +1035,7 @@ definitions:
         description: 'The metric type including a DNS name prefix, for example `"compute.googleapis.com/instance/cpu/utilization"`. Metric types should use a natural hierarchical grouping such as the following: compute.googleapis.com/instance/cpu/utilization compute.googleapis.com/instance/disk/read_ops_count compute.googleapis.com/instance/network/received_bytes_count Note that if the metric type changes, the monitoring data will be discontinued, and anything depends on it will break, such as monitoring dashboards, alerting rules and quota limits. Therefore, once a metric has been published, its type should be immutable.'
         type: string
       unit:
-        description: "The unit in which the metric value is reported. It is only applicable if the `value_type` is `INT64`, `DOUBLE`, or `DISTRIBUTION`. The supported units are a subset of [The Unified Code for Units of Measure](http://unitsofmeasure.org/ucum.html) standard: **Basic units (UNIT)** * `bit` bit * `By` byte * `s` second * `min` minute * `h` hour * `d` day **Prefixes (PREFIX)** * `k` kilo (10**3) * `M` mega (10**6) * `G` giga (10**9) * `T` tera (10**12) * `P` peta (10**15) * `E` exa (10**18) * `Z` zetta (10**21) * `Y` yotta (10**24) * `m` milli (10**-3) * `u` micro (10**-6) * `n` nano (10**-9) * `p` pico (10**-12) * `f` femto (10**-15) * `a` atto (10**-18) * `z` zepto (10**-21) * `y` yocto (10**-24) * `Ki` kibi (2**10) * `Mi` mebi (2**20) * `Gi` gibi (2**30) * `Ti` tebi (2**40) **Grammar** The grammar includes the dimensionless unit `1`, such as `1/s`. The grammar also includes these connectors: * `/` division (as an infix operator, e.g. `1/s`). * `.` multiplication (as an infix operator, e.g. `GBy.d`) The grammar for a unit is as follows: Expression = Component { \".\" Component } { \"/\" Component } ; Component = [ PREFIX ] UNIT [ Annotation ] | Annotation | \"1\" ; Annotation = \"{\" NAME \"}\" ; Notes: * `Annotation` is just a comment if it follows a `UNIT` and is equivalent to `1` if it is used alone. For examples, `{requests}/s == 1/s`, `By{transmitted}/s == By/s`. * `NAME` is a sequence of non-blank printable ASCII characters not containing '{' or '}'."
+        description: 'The unit in which the metric value is reported. It is only applicable if the `value_type` is `INT64`, `DOUBLE`, or `DISTRIBUTION`. The supported units are a subset of [The Unified Code for Units of Measure](http://unitsofmeasure.org/ucum.html) standard: **Basic units (UNIT)** * `bit` bit * `By` byte * `s` second * `min` minute * `h` hour * `d` day **Prefixes (PREFIX)** * `k` kilo (10**3) * `M` mega (10**6) * `G` giga (10**9) * `T` tera (10**12) * `P` peta (10**15) * `E` exa (10**18) * `Z` zetta (10**21) * `Y` yotta (10**24) * `m` milli (10**-3) * `u` micro (10**-6) * `n` nano (10**-9) * `p` pico (10**-12) * `f` femto (10**-15) * `a` atto (10**-18) * `z` zepto (10**-21) * `y` yocto (10**-24) * `Ki` kibi (2**10) * `Mi` mebi (2**20) * `Gi` gibi (2**30) * `Ti` tebi (2**40) **Grammar** The grammar includes the dimensionless unit `1`, such as `1/s`. The grammar also includes these connectors: * `/` division (as an infix operator, e.g. `1/s`). * `.` multiplication (as an infix operator, e.g. `GBy.d`) The grammar for a unit is as follows: Expression = Component { "." Component } { "/" Component } ; Component = [ PREFIX ] UNIT [ Annotation ] | Annotation | "1" ; Annotation = "{" NAME "}" ; Notes: * `Annotation` is just a comment if it follows a `UNIT` and is equivalent to `1` if it is used alone. For examples, `{requests}/s == 1/s`, `By{transmitted}/s == By/s`. * `NAME` is a sequence of non-blank printable ASCII characters not containing ''{'' or ''}''.'
         type: string
       valueType:
         description: 'Whether the measurement is an integer, a floating-point number, etc.'
@@ -1050,7 +1050,7 @@ definitions:
         type: string
     type: object
   MonitoredResource:
-    description: "An object representing a resource that can be used for monitoring, logging, billing, or other purposes. Examples include virtual machine instances, databases, and storage devices such as disks. The `type` field identifies a MonitoredResourceDescriptor object that describes the resource's schema. Information in the `labels` field identifies the actual resource and its attributes according to the schema. For example, a particular Compute Engine VM instance could be represented by the following object, because the MonitoredResourceDescriptor for `\"gce_instance\"` has labels `\"instance_id\"` and `\"zone\"`: { \"type\": \"gce_instance\", \"labels\": { \"instance_id\": \"my-instance\", \"zone\": \"us-central1-a\" }}"
+    description: 'An object representing a resource that can be used for monitoring, logging, billing, or other purposes. Examples include virtual machine instances, databases, and storage devices such as disks. The `type` field identifies a MonitoredResourceDescriptor object that describes the resource''s schema. Information in the `labels` field identifies the actual resource and its attributes according to the schema. For example, a particular Compute Engine VM instance could be represented by the following object, because the MonitoredResourceDescriptor for `"gce_instance"` has labels `"instance_id"` and `"zone"`: { "type": "gce_instance", "labels": { "instance_id": "my-instance", "zone": "us-central1-a" }}'
     properties:
       labels:
         additionalProperties:
@@ -1086,12 +1086,12 @@ definitions:
     description: 'A protocol buffer option, which can be attached to a message, field, enumeration, etc.'
     properties:
       name:
-        description: "The option's name. For example, `\"java_package\"`."
+        description: 'The option''s name. For example, `"java_package"`.'
         type: string
       value:
         additionalProperties:
           description: Properties of the object. Contains field @ype with type URL.
-        description: "The option's value. For example, `\"com.google.protobuf\"`."
+        description: 'The option''s value. For example, `"com.google.protobuf"`.'
         type: object
     type: object
   Point:

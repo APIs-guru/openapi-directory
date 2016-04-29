@@ -604,7 +604,7 @@ paths:
         - Analyses
   /Analyses/FeatureTable:
     get:
-      description: "This service returns part or all of the so-called <strong>feature table</strong>; which aggregates the most important findings across ALL pipelines in the GDAC Firehose analysis workflow into a single table for simple access.  One feature table is created per disease cohort.  Results may be filtered by date or cohort, but at least 1 cohort must be specified here. For more details please visit the <a href=https://confluence.broadinstitute.org/display/GDAC/Documentation\\#Documentation-FeatureTable>online documentation</a>.  Please note that the service is still undergoing experimental evaluation and does not return JSON format."
+      description: 'This service returns part or all of the so-called <strong>feature table</strong>; which aggregates the most important findings across ALL pipelines in the GDAC Firehose analysis workflow into a single table for simple access.  One feature table is created per disease cohort.  Results may be filtered by date or cohort, but at least 1 cohort must be specified here. For more details please visit the <a href=https://confluence.broadinstitute.org/display/GDAC/Documentation\#Documentation-FeatureTable>online documentation</a>.  Please note that the service is still undergoing experimental evaluation and does not return JSON format.'
       operationId: FeatureTable
       parameters:
         - default: tsv
@@ -2454,7 +2454,7 @@ paths:
         - Metadata
   '/Metadata/SampleType/ShortLetterCode/{short_letter_code}':
     get:
-      description: "Convert a TCGA sample type code in symbolic form (or 'short letter code' like TP, TR) to its corresponding numeric form (e.g. 01, 02)."
+      description: 'Convert a TCGA sample type code in symbolic form (or ''short letter code'' like TP, TR) to its corresponding numeric form (e.g. 01, 02).'
       operationId: ShortLetterCode
       parameters:
         - default: json
@@ -2646,7 +2646,7 @@ paths:
         - Samples
   /Samples/Clinical_FH:
     get:
-      description: "This service returns patient-level clinical data elements (CDEs) that have been normalized by Firehose for use in analyses. Results may be selected by disease cohort, patient barcode or CDE name, but at least one cohort, barcode or CDE must be provided. When filtering by CDE note that only when a  patient record contains one or more of the selected CDEs will it be returned. Visit <a href=\"http://gdac.broadinstitute.org/runs/info/clinical\">this table of CDEs</a> to see what's available for every disase cohort; for more information on how these CDEs are processed see our <a href=\"https://confluence.broadinstitute.org/display/GDAC/Documentation#Documentation-ClinicalPipeline\">pipeline documentation</a>."
+      description: 'This service returns patient-level clinical data elements (CDEs) that have been normalized by Firehose for use in analyses. Results may be selected by disease cohort, patient barcode or CDE name, but at least one cohort, barcode or CDE must be provided. When filtering by CDE note that only when a  patient record contains one or more of the selected CDEs will it be returned. Visit <a href="http://gdac.broadinstitute.org/runs/info/clinical">this table of CDEs</a> to see what''s available for every disase cohort; for more information on how these CDEs are processed see our <a href="https://confluence.broadinstitute.org/display/GDAC/Documentation#Documentation-ClinicalPipeline">pipeline documentation</a>.'
       operationId: Clinical_FH
       parameters:
         - default: json

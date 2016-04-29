@@ -1555,7 +1555,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Restores a Container Version. This will overwrite the container's current configuration (including its variables, triggers and tags). The operation will not have any effect on the version that is being served (i.e. the published version)."
+      description: 'Restores a Container Version. This will overwrite the container''s current configuration (including its variables, triggers and tags). The operation will not have any effect on the version that is being served (i.e. the published version).'
       operationId: tagmanager.accounts.containers.versions.restore
       parameters:
         - description: The GTM Account ID.
@@ -1650,7 +1650,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Creates a user's Account & Container Permissions."
+      description: Creates a user's Account & Container Permissions.
       operationId: tagmanager.accounts.permissions.create
       parameters:
         - description: The GTM Account ID.
@@ -1696,7 +1696,7 @@ paths:
       tags:
         - accounts
     get:
-      description: "Gets a user's Account & Container Permissions."
+      description: Gets a user's Account & Container Permissions.
       operationId: tagmanager.accounts.permissions.get
       parameters:
         - description: The GTM Account ID.
@@ -1728,7 +1728,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     put:
-      description: "Updates a user's Account & Container Permissions."
+      description: Updates a user's Account & Container Permissions.
       operationId: tagmanager.accounts.permissions.update
       parameters:
         - description: The GTM Account ID.
@@ -1791,7 +1791,12 @@ definitions:
     description: Represents a predicate.
     properties:
       parameter:
-        description: "A list of named parameters (key/value), depending on the condition's type. Notes: \n- For binary operators, include parameters named arg0 and arg1 for specifying the left and right operands, respectively. \n- At this time, the left operand (arg0) must be a reference to a variable. \n- For case-insensitive Regex matching, include a boolean parameter named ignore_case that is set to true. If not specified or set to any other value, the matching will be case sensitive. \n- To negate an operator, include a boolean parameter named negate boolean parameter that is set to true."
+        description: |-
+          A list of named parameters (key/value), depending on the condition's type. Notes: 
+          - For binary operators, include parameters named arg0 and arg1 for specifying the left and right operands, respectively. 
+          - At this time, the left operand (arg0) must be a reference to a variable. 
+          - For case-insensitive Regex matching, include a boolean parameter named ignore_case that is set to true. If not specified or set to any other value, the matching will be case sensitive. 
+          - To negate an operator, include a boolean parameter named negate boolean parameter that is set to true.
         items:
           $ref: '#/definitions/Parameter'
         type: array
@@ -2024,7 +2029,7 @@ definitions:
         description: The notes of the container version to be created.
         type: string
       quickPreview:
-        description: "The creation of this version may be for quick preview and shouldn't be saved."
+        description: The creation of this version may be for quick preview and shouldn't be saved.
         type: boolean
     type: object
   CreateContainerVersionResponse:
@@ -2103,7 +2108,7 @@ definitions:
         type: string
     type: object
   FolderEntities:
-    description: "Represents a Google Tag Manager Folder's contents."
+    description: Represents a Google Tag Manager Folder's contents.
     properties:
       tag:
         description: The list of tags inside the folder.
@@ -2239,7 +2244,7 @@ definitions:
         description: User notes on how to apply this macro in the container.
         type: string
       parameter:
-        description: "The macro's parameters."
+        description: The macro's parameters.
         items:
           $ref: '#/definitions/Parameter'
         type: array
@@ -2265,17 +2270,23 @@ definitions:
         description: 'The named key that uniquely identifies a parameter. Required for top-level parameters, as well as map values. Ignored for list values.'
         type: string
       list:
-        description: "This list parameter's parameters (keys will be ignored)."
+        description: This list parameter's parameters (keys will be ignored).
         items:
           $ref: '#/definitions/Parameter'
         type: array
       map:
-        description: "This map parameter's parameters (must have keys; keys must be unique)."
+        description: This map parameter's parameters (must have keys; keys must be unique).
         items:
           $ref: '#/definitions/Parameter'
         type: array
       type:
-        description: "The parameter type. Valid values are: \n- boolean: The value represents a boolean, represented as 'true' or 'false' \n- integer: The value represents a 64-bit signed integer value, in base 10 \n- list: A list of parameters should be specified \n- map: A map of parameters should be specified \n- template: The value represents any text; this can include variable references (even variable references that might return non-string types)"
+        description: |-
+          The parameter type. Valid values are: 
+          - boolean: The value represents a boolean, represented as 'true' or 'false' 
+          - integer: The value represents a 64-bit signed integer value, in base 10 
+          - list: A list of parameters should be specified 
+          - map: A map of parameters should be specified 
+          - template: The value represents any text; this can include variable references (even variable references that might return non-string types)
         enum:
           - boolean
           - integer
@@ -2284,7 +2295,7 @@ definitions:
           - template
         type: string
       value:
-        description: "A parameter's value (may contain variable references such as \"{{myVariable}}\") as appropriate to the specified type."
+        description: 'A parameter''s value (may contain variable references such as "{{myVariable}}") as appropriate to the specified type.'
         type: string
     type: object
   PublishContainerVersionResponse:
@@ -2375,7 +2386,7 @@ definitions:
         description: User notes on how to apply this tag in the container.
         type: string
       parameter:
-        description: "The tag's parameters."
+        description: The tag's parameters.
         items:
           $ref: '#/definitions/Parameter'
         type: array
@@ -2384,7 +2395,7 @@ definitions:
         type: string
       priority:
         $ref: '#/definitions/Parameter'
-        description: "User defined numeric priority of the tag. Tags are fired asynchronously in order of priority. Tags with higher numeric value fire first. A tag's priority can be a positive or negative value. The default value is 0."
+        description: User defined numeric priority of the tag. Tags are fired asynchronously in order of priority. Tags with higher numeric value fire first. A tag's priority can be a positive or negative value. The default value is 0.
       scheduleEndMs:
         description: The end timestamp in milliseconds to schedule a tag.
         format: int64
@@ -2450,7 +2461,7 @@ definitions:
         type: array
       enableAllVideos:
         $ref: '#/definitions/Parameter'
-        description: "Reloads the videos in the page that don't already have the YT API enabled. If false, only capture events from videos that already have the API enabled. Only valid for YouTube triggers."
+        description: 'Reloads the videos in the page that don''t already have the YT API enabled. If false, only capture events from videos that already have the API enabled. Only valid for YouTube triggers.'
       eventName:
         $ref: '#/definitions/Parameter'
         description: Name of the GTM event that is fired. Only valid for Timer triggers.
@@ -2496,7 +2507,7 @@ definitions:
         type: string
       uniqueTriggerId:
         $ref: '#/definitions/Parameter'
-        description: "Globally unique id of the trigger that auto-generates this (a Form Submit, Link Click or Timer listener) if any. Used to make incompatible auto-events work together with trigger filtering based on trigger ids. This value is populated during output generation since the tags implied by triggers don't exist until then. Only valid for Form Submit, Link Click and Timer triggers."
+        description: 'Globally unique id of the trigger that auto-generates this (a Form Submit, Link Click or Timer listener) if any. Used to make incompatible auto-events work together with trigger filtering based on trigger ids. This value is populated during output generation since the tags implied by triggers don''t exist until then. Only valid for Form Submit, Link Click and Timer triggers.'
       videoPercentageList:
         $ref: '#/definitions/Parameter'
         description: List of integer percentage values. The trigger will fire as each percentage is reached in any instrumented videos. Only valid for YouTube triggers.
@@ -2505,10 +2516,10 @@ definitions:
         description: Whether or not we should delay the form submissions or link opening until all of the tags have fired (by preventing the default action and later simulating the default action). Only valid for Form Submission and Link Click triggers.
       waitForTagsTimeout:
         $ref: '#/definitions/Parameter'
-        description: "How long to wait (in milliseconds) for tags to fire when 'waits_for_tags' above evaluates to true. Only valid for Form Submission and Link Click triggers."
+        description: How long to wait (in milliseconds) for tags to fire when 'waits_for_tags' above evaluates to true. Only valid for Form Submission and Link Click triggers.
     type: object
   UserAccess:
-    description: "Represents a user's permissions to an account and its container."
+    description: Represents a user's permissions to an account and its container.
     properties:
       accountAccess:
         $ref: '#/definitions/AccountAccess'
@@ -2522,7 +2533,7 @@ definitions:
           $ref: '#/definitions/ContainerAccess'
         type: array
       emailAddress:
-        description: "User's email address."
+        description: User's email address.
         type: string
       permissionId:
         description: Account Permission ID.
@@ -2557,7 +2568,7 @@ definitions:
         description: User notes on how to apply this variable in the container.
         type: string
       parameter:
-        description: "The variable's parameters."
+        description: The variable's parameters.
         items:
           $ref: '#/definitions/Parameter'
         type: array

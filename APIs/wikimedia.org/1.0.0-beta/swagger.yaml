@@ -33,7 +33,7 @@ securityDefinitions:
     name: cookie
     type: apiKey
     x-internal-request-whitelist:
-      - "/https?:\\/\\/[a-zA-Z0-9\\.]+\\/w\\/api\\.php/"
+      - '/https?:\/\/[a-zA-Z0-9\.]+\/w\/api\.php/'
       - 'http://parsoid-lb.eqiad.wikimedia.org'
       - 'http://parsoid-beta.wmflabs.org'
 paths:
@@ -91,7 +91,7 @@ paths:
               success: true
             headers:
               cache-control: /s-maxage/
-              content-type: "/^application\\/json/"
+              content-type: /^application\/json/
               x-resource-location: /.+/
             status: 200
           title: Mathoid - check test formula
@@ -177,7 +177,7 @@ paths:
               uri: '/wikimedia.org/sys/key_value/mathoid.{$.request.params.format}/{$.request.params.hash}'
             return:
               body: '{{ check_storage.body }}'
-              headers: "{{ merge({ 'cache-control': options.cache-control }, check_storage.headers) }}"
+              headers: '{{ merge({ ''cache-control'': options.cache-control }, check_storage.headers) }}'
               status: 200
             return_if:
               status: 2xx
@@ -194,19 +194,19 @@ paths:
         - store_mml:
             request:
               body: '{{ mathoid.body.mml.body }}'
-              headers: "{{ merge(mathoid.body.mml.headers, { 'x-resource-location': request.params.hash }) }}"
+              headers: '{{ merge(mathoid.body.mml.headers, { ''x-resource-location'': request.params.hash }) }}'
               method: put
               uri: '/wikimedia.org/sys/key_value/mathoid.mml/{$.request.params.hash}'
           store_svg:
             request:
               body: '{$.mathoid.body.svg.body}'
-              headers: "{{ merge(mathoid.body.svg.headers, { 'x-resource-location': request.params.hash }) }}"
+              headers: '{{ merge(mathoid.body.svg.headers, { ''x-resource-location'': request.params.hash }) }}'
               method: put
               uri: '/wikimedia.org/sys/key_value/mathoid.svg/{$.request.params.hash}'
         - return:
             return:
               body: '{{ mathoid.body[request.params.format].body }}'
-              headers: "{{ merge(mathoid.body[request.params.format].headers, { 'x-resource-location': request.params.hash, 'cache-control': options.cache-control }) }}"
+              headers: '{{ merge(mathoid.body[request.params.format].headers, { ''x-resource-location'': request.params.hash, ''cache-control'': options.cache-control }) }}'
               status: 200
       x-setup-handler:
         - init_svg:
@@ -311,9 +311,9 @@ paths:
               title: Foobar
           response:
             body:
-              counter: "/\\d+/"
-              ids: '/.*/'
-              sectionOffsets: '/.*/'
+              counter: /\d+/
+              ids: /.*/
+              sectionOffsets: /.*/
             headers:
               content-type: application/json
               etag: /.+/
@@ -449,7 +449,7 @@ paths:
           name: revision
           required: true
           type: integer
-        - description: "The revision's time ID"
+        - description: The revision's time ID
           in: path
           name: tid
           required: true
@@ -617,7 +617,7 @@ paths:
           name: sections
           type: string
       produces:
-        - 'text/html; profile="mediawiki.org/specs/html/1.1.0"'
+        - text/html; profile="mediawiki.org/specs/html/1.1.0"
       responses:
         '200':
           description: |
@@ -639,9 +639,9 @@ paths:
               domain: en.wikipedia.org
               title: Foobar
           response:
-            body: '/^<!DOCTYPE html>.*/'
+            body: /^<!DOCTYPE html>.*/
             headers:
-              content-type: "/^text\\/html.+/"
+              content-type: /^text\/html.+/
               etag: /.+/
             status: 200
           title: Get html by title from storage
@@ -828,7 +828,7 @@ paths:
           name: sections
           type: string
       produces:
-        - 'text/html; profile="mediawiki.org/specs/html/1.1.0"'
+        - text/html; profile="mediawiki.org/specs/html/1.1.0"
       responses:
         '200':
           description: |
@@ -901,7 +901,7 @@ paths:
           name: revision
           required: true
           type: string
-        - description: "The revision's time ID"
+        - description: The revision's time ID
           in: path
           name: tid
           required: true
@@ -911,7 +911,7 @@ paths:
           name: sections
           type: string
       produces:
-        - 'text/html; profile="mediawiki.org/specs/html/1.1.0"'
+        - text/html; profile="mediawiki.org/specs/html/1.1.0"
       responses:
         '200':
           description: |
@@ -1062,7 +1062,7 @@ paths:
               lead: /.+/
               remaining: /.+/
             headers:
-              content-type: "/application\\/json/"
+              content-type: /application\/json/
             status: 200
           title: Get MobileApps Foobar page
       x-monitor: true
@@ -1160,7 +1160,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: "The revision's properties"
+          description: The revision's properties
           schema:
             $ref: '#/definitions/revision'
         '400':
@@ -1189,8 +1189,8 @@ paths:
           response:
             body:
               items:
-                - comment: '/.*/'
-                  rev: "/\\d+/"
+                - comment: /.*/
+                  rev: /\d+/
                   tid: '/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/'
                   title: Foobar
             headers:
@@ -1252,7 +1252,7 @@ paths:
               thumbnail:
                 source: '/^https:/'
             headers:
-              content-type: "/^application\\/json$/"
+              content-type: /^application\/json$/
               etag: /.+/
             status: 200
           title: Get summary from storage
@@ -1288,7 +1288,7 @@ paths:
                 exsentences: 5
                 piprop: thumbnail
                 pithumbsize: 320
-                prop: 'info|extracts|pageimages'
+                prop: info|extracts|pageimages
                 redirects: true
                 titles: '{{rev_info.body.title}}'
               method: post
@@ -1392,8 +1392,8 @@ paths:
           response:
             body:
               items:
-                - comment: '/.*/'
-                  rev: "/\\d+/"
+                - comment: /.*/
+                  rev: /\d+/
                   tid: '/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/'
                   title: Foobar
             headers:
@@ -1557,7 +1557,7 @@ paths:
           required: false
           type: boolean
       produces:
-        - 'text/html; profile="mediawiki.org/specs/html/1.1.0"'
+        - text/html; profile="mediawiki.org/specs/html/1.1.0"
       responses:
         '200':
           description: 'See wikipage https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec'
@@ -1621,7 +1621,7 @@ paths:
           required: false
           type: boolean
       produces:
-        - 'text/html; profile="mediawiki.org/specs/html/1.1.0"'
+        - text/html; profile="mediawiki.org/specs/html/1.1.0"
       responses:
         '200':
           description: 'See wikipage https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec'
@@ -1690,7 +1690,7 @@ paths:
           required: false
           type: boolean
       produces:
-        - 'text/html; profile="mediawiki.org/specs/html/1.1.0"'
+        - text/html; profile="mediawiki.org/specs/html/1.1.0"
       responses:
         '200':
           description: 'See wikipage https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec'
@@ -1754,7 +1754,7 @@ paths:
           required: false
           type: boolean
       produces:
-        - 'text/plain; profile="mediawiki.org/specs/wikitext/1.0.0"'
+        - text/plain; profile="mediawiki.org/specs/wikitext/1.0.0"
       responses:
         '200':
           description: 'See wikipage https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec'
@@ -1824,7 +1824,7 @@ paths:
           required: false
           type: boolean
       produces:
-        - 'text/plain; profile="mediawiki.org/specs/wikitext/1.0.0"'
+        - text/plain; profile="mediawiki.org/specs/wikitext/1.0.0"
       responses:
         '200':
           description: 'See wikipage https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec'
@@ -1899,7 +1899,7 @@ paths:
           required: false
           type: boolean
       produces:
-        - 'text/plain; profile="mediawiki.org/specs/wikitext/1.0.0"'
+        - text/plain; profile="mediawiki.org/specs/wikitext/1.0.0"
       responses:
         '200':
           description: 'See wikipage https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec'
@@ -1969,7 +1969,7 @@ paths:
               - sections
             type: object
       produces:
-        - 'text/html; profile="mediawiki.org/specs/html/1.1.0"'
+        - text/html; profile="mediawiki.org/specs/html/1.1.0"
       responses:
         '200':
           description: 'See wikipage https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec'
@@ -2035,7 +2035,7 @@ paths:
           required: false
           type: boolean
       produces:
-        - 'text/html; profile="mediawiki.org/specs/html/1.1.0"'
+        - text/html; profile="mediawiki.org/specs/html/1.1.0"
       responses:
         '200':
           description: 'See wikipage https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec'
@@ -2070,9 +2070,9 @@ paths:
               domain: en.wikipedia.org
               title: Foobar
           response:
-            body: "/^<h2.*> Heading <\\/h2>$/"
+            body: /^<h2.*> Heading <\/h2>$/
             headers:
-              content-type: "/^text\\/html.+/"
+              content-type: /^text\/html.+/
             status: 200
           title: Transform wikitext to html
       x-monitor: true
@@ -2118,7 +2118,7 @@ paths:
           required: false
           type: boolean
       produces:
-        - 'text/html; profile="mediawiki.org/specs/html/1.1.0"'
+        - text/html; profile="mediawiki.org/specs/html/1.1.0"
       responses:
         '200':
           description: 'See wikipage https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec'
@@ -2153,9 +2153,9 @@ paths:
               domain: en.wikipedia.org
               title: Foobar
           response:
-            body: "/^<h2.*> Heading <\\/h2>$/"
+            body: /^<h2.*> Heading <\/h2>$/
             headers:
-              content-type: "/^text\\/html.+/"
+              content-type: /^text\/html.+/
             status: 200
           title: Transform wikitext to html
       x-monitor: true
@@ -2206,7 +2206,7 @@ paths:
           required: false
           type: boolean
       produces:
-        - 'text/html; profile="mediawiki.org/specs/html/1.1.0"'
+        - text/html; profile="mediawiki.org/specs/html/1.1.0"
       responses:
         '200':
           description: 'See wikipage https://www.mediawiki.org/wiki/Parsoid/MediaWiki_DOM_spec'
@@ -2241,9 +2241,9 @@ paths:
               domain: en.wikipedia.org
               title: Foobar
           response:
-            body: "/^<h2.*> Heading <\\/h2>$/"
+            body: /^<h2.*> Heading <\/h2>$/
             headers:
-              content-type: "/^text\\/html.+/"
+              content-type: /^text\/html.+/
             status: 200
           title: Transform wikitext to html
       x-monitor: true

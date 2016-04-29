@@ -484,7 +484,7 @@ definitions:
         description: True if captcha is required.
         type: boolean
       forExistingProvider:
-        description: "True if the authUri is for user's existing provider."
+        description: True if the authUri is for user's existing provider.
         type: boolean
       kind:
         default: 'identitytoolkit#CreateAuthUriResponse'
@@ -606,7 +606,7 @@ definitions:
         description: The email or federated ID of the user.
         type: string
       oauthConsumerKey:
-        description: "The developer's consumer key for OpenId OAuth Extension"
+        description: The developer's consumer key for OpenId OAuth Extension
         type: string
       oauthScope:
         description: 'Additional oauth scopes, beyond the basid user profile, that the user would be prompted to grant'
@@ -618,7 +618,7 @@ definitions:
         description: The native app package for OTA installation.
         type: string
       providerId:
-        description: "The IdP ID. For white listed IdPs it's a short domain name e.g. google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs it's the OP identifier."
+        description: 'The IdP ID. For white listed IdPs it''s a short domain name e.g. google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs it''s the OP identifier.'
         type: string
     type: object
   IdentitytoolkitRelyingpartyDeleteAccountRequest:
@@ -666,7 +666,7 @@ definitions:
         description: The GITKit token of the authenticated user.
         type: string
       localId:
-        description: "The list of local ID's of the users to inquiry."
+        description: The list of local ID's of the users to inquiry.
         items:
           type: string
         type: array
@@ -1035,7 +1035,7 @@ definitions:
         description: The email of the user.
         type: string
       idToken:
-        description: "The user's Gitkit login token for email change."
+        description: The user's Gitkit login token for email change.
         type: string
       kind:
         default: 'identitytoolkit#relyingparty'
@@ -1055,7 +1055,7 @@ definitions:
     description: Response of resetting the password.
     properties:
       email:
-        description: "The user's email."
+        description: The user's email.
         type: string
       kind:
         default: 'identitytoolkit#ResetPasswordResponse'
@@ -1089,27 +1089,27 @@ definitions:
         description: The new email the user attempts to change to.
         type: string
       passwordHash:
-        description: "The user's hashed password."
+        description: The user's hashed password.
         format: byte
         type: string
       photoUrl:
         description: The photo url of the user.
         type: string
       providerUserInfo:
-        description: "The user's profiles at the associated IdPs."
+        description: The user's profiles at the associated IdPs.
         items:
           properties:
             displayName:
-              description: "The user's display name at the IDP."
+              description: The user's display name at the IDP.
               type: string
             federatedId:
-              description: "User's identifier at IDP."
+              description: User's identifier at IDP.
               type: string
             photoUrl:
-              description: "The user's photo url at the IDP."
+              description: The user's photo url at the IDP.
               type: string
             providerId:
-              description: "The IdP ID. For whitelisted IdPs it's a short domain name, e.g., google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs it's the OP identifier."
+              description: 'The IdP ID. For whitelisted IdPs it''s a short domain name, e.g., google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs it''s the OP identifier.'
               type: string
           type: object
         type: array
@@ -1184,7 +1184,7 @@ definitions:
         description: The local ID of the user.
         type: string
       passwordHash:
-        description: "The user's hashed password."
+        description: The user's hashed password.
         format: byte
         type: string
       passwordUpdatedAt:
@@ -1199,27 +1199,27 @@ definitions:
         items:
           properties:
             displayName:
-              description: "The user's display name at the IDP."
+              description: The user's display name at the IDP.
               type: string
             email:
-              description: "User's email at IDP."
+              description: User's email at IDP.
               type: string
             federatedId:
-              description: "User's identifier at IDP."
+              description: User's identifier at IDP.
               type: string
             photoUrl:
-              description: "The user's photo url at the IDP."
+              description: The user's photo url at the IDP.
               type: string
             providerId:
-              description: "The IdP ID. For white listed IdPs it's a short domain name, e.g., google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs it's the OP identifier."
+              description: 'The IdP ID. For white listed IdPs it''s a short domain name, e.g., google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs it''s the OP identifier.'
               type: string
             rawId:
-              description: "User's raw identifier directly returned from IDP."
+              description: User's raw identifier directly returned from IDP.
               type: string
           type: object
         type: array
       salt:
-        description: "The user's password salt."
+        description: The user's password salt.
         format: byte
         type: string
       validSince:
@@ -1227,7 +1227,7 @@ definitions:
         format: int64
         type: string
       version:
-        description: "Version of the user's password."
+        description: Version of the user's password.
         format: int32
         type: integer
     type: object
@@ -1256,7 +1256,7 @@ definitions:
         description: 'The email returned by the IdP. NOTE: The federated login user may not own the email.'
         type: string
       emailRecycled:
-        description: "It's true if the email is recycled."
+        description: It's true if the email is recycled.
         type: boolean
       emailVerified:
         description: The value is true if the IDP is also the email provider. It means the user owns the email.
@@ -1278,7 +1278,7 @@ definitions:
         description: The ID token.
         type: string
       inputEmail:
-        description: "It's the identifier param in the createAuthUri request if the identifier is an email. It can be used to check whether the user input email is different from the asserted email."
+        description: It's the identifier param in the createAuthUri request if the identifier is an email. It can be used to check whether the user input email is different from the asserted email.
         type: string
       kind:
         default: 'identitytoolkit#VerifyAssertionResponse'
@@ -1291,7 +1291,7 @@ definitions:
         description: The last name of the user.
         type: string
       localId:
-        description: "The RP local ID if it's already been mapped to the IdP account identified by the federated ID."
+        description: The RP local ID if it's already been mapped to the IdP account identified by the federated ID.
         type: string
       needConfirmation:
         description: Whether the assertion is from a non-trusted IDP and need account linking confirmation.
@@ -1325,13 +1325,13 @@ definitions:
         description: The OAuth1 access token secret.
         type: string
       originalEmail:
-        description: "The original email stored in the mapping storage. It's returned when the federated ID is associated to a different email."
+        description: The original email stored in the mapping storage. It's returned when the federated ID is associated to a different email.
         type: string
       photoUrl:
         description: The URI of the public accessible profiel picture.
         type: string
       providerId:
-        description: "The IdP ID. For white listed IdPs it's a short domain name e.g. google.com, aol.com, live.net and yahoo.com. If the \"providerId\" param is set to OpenID OP identifer other than the whilte listed IdPs the OP identifier is returned. If the \"identifier\" param is federated ID in the createAuthUri request. The domain part of the federated ID is returned."
+        description: 'The IdP ID. For white listed IdPs it''s a short domain name e.g. google.com, aol.com, live.net and yahoo.com. If the "providerId" param is set to OpenID OP identifer other than the whilte listed IdPs the OP identifier is returned. If the "identifier" param is federated ID in the createAuthUri request. The domain part of the federated ID is returned.'
         type: string
       refreshToken:
         description: 'If idToken is STS id token, then this field will be refresh token.'
@@ -1340,7 +1340,7 @@ definitions:
         description: The timezone of the user.
         type: string
       verifiedProvider:
-        description: "When action is 'map', contains the idps which can be used for confirmation."
+        description: 'When action is ''map'', contains the idps which can be used for confirmation.'
         items:
           type: string
         type: array
@@ -1384,7 +1384,7 @@ definitions:
         description: 'The fixed string "identitytoolkit#VerifyPasswordResponse".'
         type: string
       localId:
-        description: "The RP local ID if it's already been mapped to the IdP account identified by the federated ID."
+        description: The RP local ID if it's already been mapped to the IdP account identified by the federated ID.
         type: string
       oauthAccessToken:
         description: The OAuth2 access token.
@@ -1397,7 +1397,7 @@ definitions:
         format: int32
         type: integer
       photoUrl:
-        description: "The URI of the user's photo at IdP"
+        description: The URI of the user's photo at IdP
         type: string
       refreshToken:
         description: 'If idToken is STS id token, then this field will be refresh token.'

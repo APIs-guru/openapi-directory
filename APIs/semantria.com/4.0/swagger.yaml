@@ -1155,7 +1155,7 @@ paths:
         - Status
   '/subscription.{content_type}':
     get:
-      description: "This method retrieves user's subscription details that consist of the list of allowed features, configured limits and options on Semantria side."
+      description: 'This method retrieves user''s subscription details that consist of the list of allowed features, configured limits and options on Semantria side.'
       operationId: getSubscription
       parameters:
         - in: path
@@ -1213,7 +1213,7 @@ definitions:
         description: 'The category title, which is its label in the text'
         type: string
       type:
-        description: 'Type of category; can be either "node" (root level) or "leaf" (nested) value'
+        description: Type of category; can be either "node" (root level) or "leaf" (nested) value
         type: string
     required:
       - categories
@@ -2430,7 +2430,7 @@ definitions:
         description: 'The category title, which is its label in the text'
         type: string
       type:
-        description: 'Type of category; can be either "node" (root level) or "leaf" (nested) value'
+        description: Type of category; can be either "node" (root level) or "leaf" (nested) value
         type: string
     required:
       - sentiment_score
@@ -2551,11 +2551,11 @@ definitions:
         minimum: 0
         type: integer
       data_calls_limit:
-        description: 'Represents the limit of data API calls per "data_calls_limit_interval" value'
+        description: Represents the limit of data API calls per "data_calls_limit_interval" value
         minimum: 0
         type: integer
       data_calls_limit_interval:
-        description: 'Represents an interval for the "data_calls_limit" value of current subscription'
+        description: Represents an interval for the "data_calls_limit" value of current subscription
         minimum: 0
         type: integer
       docs_balance:
@@ -2563,11 +2563,11 @@ definitions:
         minimum: 0
         type: integer
       docs_limit:
-        description: 'Represents the transactions limit per "docs_limit_interval" value'
+        description: Represents the transactions limit per "docs_limit_interval" value
         minimum: 0
         type: integer
       docs_limit_interval:
-        description: 'Represents the timeframe for the "docs_limit" value of current subscription'
+        description: Represents the timeframe for the "docs_limit" value of current subscription
         minimum: 0
         type: integer
       docs_suggested:
@@ -2589,11 +2589,11 @@ definitions:
         minimum: 0
         type: integer
       polling_calls_limit:
-        description: 'Represents the limit of polling API calls per "polling_calls_limit_interval" value'
+        description: Represents the limit of polling API calls per "polling_calls_limit_interval" value
         minimum: 0
         type: integer
       polling_calls_limit_interval:
-        description: 'Represents an interval for the "polling_calls_limit" value of current subscription'
+        description: Represents an interval for the "polling_calls_limit" value of current subscription
         minimum: 0
         type: integer
       priority:
@@ -2604,11 +2604,11 @@ definitions:
         minimum: 0
         type: integer
       settings_calls_limit:
-        description: 'Represents the limit of settings API calls per "settings_calls_limit_interval" value'
+        description: Represents the limit of settings API calls per "settings_calls_limit_interval" value
         minimum: 0
         type: integer
       settings_calls_limit_interval:
-        description: 'Represents an interval for the "settings_calls_limit" value of current subscription'
+        description: Represents an interval for the "settings_calls_limit" value of current subscription
         minimum: 0
         type: integer
     required:
@@ -2764,7 +2764,7 @@ definitions:
           $ref: '#/definitions/Mention'
         type: array
       phrases_count:
-        description: "Count of sentiment-bearing phrases was used in calculating theme's sentiment"
+        description: Count of sentiment-bearing phrases was used in calculating theme's sentiment
         minimum: 0
         type: integer
       sentiment_polarity:
@@ -2818,7 +2818,7 @@ definitions:
           $ref: '#/definitions/Topic'
         type: array
       type:
-        description: 'Type of the topic; can be either "concept" or "query"'
+        description: Type of the topic; can be either "concept" or "query"
         enum:
           - concept
           - query

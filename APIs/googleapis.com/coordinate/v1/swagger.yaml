@@ -207,12 +207,12 @@ paths:
           name: address
           required: true
           type: string
-        - description: "The latitude coordinate of this job's location."
+        - description: The latitude coordinate of this job's location.
           in: query
           name: lat
           required: true
           type: number
-        - description: "The longitude coordinate of this job's location."
+        - description: The longitude coordinate of this job's location.
           in: query
           name: lng
           required: true
@@ -227,7 +227,7 @@ paths:
           name: assignee
           type: string
         - collectionFormat: multi
-          description: "Sets the value of custom fields. To set a custom field, pass the field id (from /team/teamId/custom_fields), a URL escaped '=' character, and the desired value as a parameter. For example, customField=12%3DAlice. Repeat the parameter for each custom field. Note that '=' cannot appear in the parameter value. Specifying an invalid, or inactive enum field will result in an error 500."
+          description: 'Sets the value of custom fields. To set a custom field, pass the field id (from /team/teamId/custom_fields), a URL escaped ''='' character, and the desired value as a parameter. For example, customField=12%3DAlice. Repeat the parameter for each custom field. Note that ''='' cannot appear in the parameter value. Specifying an invalid, or inactive enum field will result in an error 500.'
           in: query
           items:
             type: string
@@ -317,7 +317,7 @@ paths:
           name: assignee
           type: string
         - collectionFormat: multi
-          description: "Sets the value of custom fields. To set a custom field, pass the field id (from /team/teamId/custom_fields), a URL escaped '=' character, and the desired value as a parameter. For example, customField=12%3DAlice. Repeat the parameter for each custom field. Note that '=' cannot appear in the parameter value. Specifying an invalid, or inactive enum field will result in an error 500."
+          description: 'Sets the value of custom fields. To set a custom field, pass the field id (from /team/teamId/custom_fields), a URL escaped ''='' character, and the desired value as a parameter. For example, customField=12%3DAlice. Repeat the parameter for each custom field. Note that ''='' cannot appear in the parameter value. Specifying an invalid, or inactive enum field will result in an error 500.'
           in: query
           items:
             type: string
@@ -331,11 +331,11 @@ paths:
           in: query
           name: customerPhoneNumber
           type: string
-        - description: "The latitude coordinate of this job's location."
+        - description: The latitude coordinate of this job's location.
           in: query
           name: lat
           type: number
-        - description: "The longitude coordinate of this job's location."
+        - description: The longitude coordinate of this job's location.
           in: query
           name: lng
           type: number
@@ -394,7 +394,7 @@ paths:
           name: assignee
           type: string
         - collectionFormat: multi
-          description: "Sets the value of custom fields. To set a custom field, pass the field id (from /team/teamId/custom_fields), a URL escaped '=' character, and the desired value as a parameter. For example, customField=12%3DAlice. Repeat the parameter for each custom field. Note that '=' cannot appear in the parameter value. Specifying an invalid, or inactive enum field will result in an error 500."
+          description: 'Sets the value of custom fields. To set a custom field, pass the field id (from /team/teamId/custom_fields), a URL escaped ''='' character, and the desired value as a parameter. For example, customField=12%3DAlice. Repeat the parameter for each custom field. Note that ''='' cannot appear in the parameter value. Specifying an invalid, or inactive enum field will result in an error 500.'
           in: query
           items:
             type: string
@@ -408,11 +408,11 @@ paths:
           in: query
           name: customerPhoneNumber
           type: string
-        - description: "The latitude coordinate of this job's location."
+        - description: The latitude coordinate of this job's location.
           in: query
           name: lat
           type: number
-        - description: "The longitude coordinate of this job's location."
+        - description: The longitude coordinate of this job's location.
           in: query
           name: lng
           type: number
@@ -672,7 +672,7 @@ definitions:
         description: Whether the field is enabled.
         type: boolean
       enumitems:
-        description: "List of enum items for this custom field. Populated only if the field type is enum. Enum fields appear as 'lists' in the Coordinate web and mobile UI."
+        description: List of enum items for this custom field. Populated only if the field type is enum. Enum fields appear as 'lists' in the Coordinate web and mobile UI.
         items:
           $ref: '#/definitions/EnumItemDef'
         type: array
@@ -867,7 +867,7 @@ definitions:
         format: int64
         type: string
       confidenceRadius:
-        description: 'The location accuracy in meters. This is the radius of a 95% confidence interval around the location measurement.'
+        description: The location accuracy in meters. This is the radius of a 95% confidence interval around the location measurement.
         format: double
         type: number
       kind:

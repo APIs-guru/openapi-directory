@@ -22,7 +22,7 @@ tags:
 paths:
   '/v1.0/compareStation/{stationName}/':
     get:
-      description: 'Get forecast and realtime information for known points<br/>None'
+      description: Get forecast and realtime information for known points<br/>None
       operationId: compareStation
       parameters:
         - default: cnarenal
@@ -41,7 +41,7 @@ paths:
         - ODWeather
   '/v1.0/getAemetStation/{stationName}/{period}/':
     get:
-      description: 'Get data from the aemet stations<br/>None'
+      description: Get data from the aemet stations<br/>None
       operationId: getAemetStation
       parameters:
         - default: aeropuertopalma
@@ -66,7 +66,7 @@ paths:
         - ODWeather
   '/v1.0/getForecastPoints/{yatchclubid}/language/{language}':
     get:
-      description: 'Get forecast points of a yatchclub<br/>None'
+      description: Get forecast points of a yatchclub<br/>None
       operationId: getForecastPoints
       parameters:
         - default: cnarenal
@@ -89,7 +89,7 @@ paths:
         - ODWeather
   '/v1.0/getForecastTimeSeries/{latitude}/{longitude}/':
     get:
-      description: 'Get timeseries forecast information<br/>None'
+      description: Get timeseries forecast information<br/>None
       operationId: getForecastTimeSeries
       parameters:
         - default: 39.49
@@ -148,7 +148,7 @@ paths:
         - ODWeather
   '/v1.0/getSocibWeatherStation/{stationName}/{period}/':
     get:
-      description: 'Get data from the socib bahia de palma buoy<br/>None'
+      description: Get data from the socib bahia de palma buoy<br/>None
       operationId: getSocibWeatherStation
       parameters:
         - default: boyaenderrocat
@@ -173,17 +173,17 @@ paths:
         - ODWeather
   '/v1.0/getWeatherDisplay/{stationName}/':
     get:
-      description: 'Get data from the weather display software<br/>None'
+      description: Get data from the weather display software<br/>None
       operationId: getWeatherDisplay
       parameters:
         - default: cnarenal
-          description: "currently: 'cnarenal'|'campastilla' | 'cncg'"
+          description: 'currently: ''cnarenal''|''campastilla'' | ''cncg'''
           in: path
           name: stationName
           required: true
           type: string
         - default: latestdata
-          description: 'Period of time to get the data latestdata|latesthour|latestday|dailylog'
+          description: Period of time to get the data latestdata|latesthour|latestday|dailylog
           in: query
           name: period
           required: true
@@ -198,7 +198,7 @@ paths:
         - ODWeather
   /v1.0/getWebCams/:
     get:
-      description: 'Get forecast and realtime information for known points<br/>None'
+      description: Get forecast and realtime information for known points<br/>None
       operationId: getWebCams
       produces:
         - application/json

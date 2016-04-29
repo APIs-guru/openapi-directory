@@ -46,23 +46,23 @@ paths:
           in: query
           name: limit
           type: integer
-        - description: "Return laws for the given Jurisdiction. Jurisdiction must be given as a two character state code (eg, 'CO' for Colorado). A single jurisdiction, or a comma-separate list of multiple jurisdiction, may be given.  Use the code 'US' for federal laws and the code 'DC' for Washington D.C."
+        - description: 'Return laws for the given Jurisdiction. Jurisdiction must be given as a two character state code (eg, ''CO'' for Colorado). A single jurisdiction, or a comma-separate list of multiple jurisdiction, may be given.  Use the code ''US'' for federal laws and the code ''DC'' for Washington D.C.'
           in: query
           name: jurisdiction
           type: string
-        - description: "Search by the technology type. A single type, or a comma-separate list of multiple types, may be given. Values and what they stand for are as follows: 'BIOD' for Biodiesel, 'ETH' for Ethanol, 'NG' for Natural Gas, 'LPG' for Propane (LPG), 'HY' for Hydrogen Fuel Cells, 'EFFEC' for Fuel Economy / Efficiency, 'IR' for Idle Reduction, 'ELEC' for EVs, 'HEV' for HEVs / PHEVs, 'OTHER' for Other, 'AFTMKTCONV' for Aftermarket Conversions, and 'NEVS' for NEVs"
+        - description: 'Search by the technology type. A single type, or a comma-separate list of multiple types, may be given. Values and what they stand for are as follows: ''BIOD'' for Biodiesel, ''ETH'' for Ethanol, ''NG'' for Natural Gas, ''LPG'' for Propane (LPG), ''HY'' for Hydrogen Fuel Cells, ''EFFEC'' for Fuel Economy / Efficiency, ''IR'' for Idle Reduction, ''ELEC'' for EVs, ''HEV'' for HEVs / PHEVs, ''OTHER'' for Other, ''AFTMKTCONV'' for Aftermarket Conversions, and ''NEVS'' for NEVs'
           in: query
           name: technology
           type: string
-        - description: "Search by the incentive type. A single type, or a comma-separate list of multiple types, may be given. Values and what they stand for are as follows: 'GNT' for Grants, 'TAX' for Tax Incentives, 'LOANS' for Loans and Leases, 'RBATE' for Rebates, 'EXEM' for Exemptions, and 'OTHER' for Other."
+        - description: 'Search by the incentive type. A single type, or a comma-separate list of multiple types, may be given. Values and what they stand for are as follows: ''GNT'' for Grants, ''TAX'' for Tax Incentives, ''LOANS'' for Loans and Leases, ''RBATE'' for Rebates, ''EXEM'' for Exemptions, and ''OTHER'' for Other.'
           in: query
           name: incentive_type
           type: string
-        - description: "Search by the regulation type. A single type, or a comma-separate list of multiple types, may be given. Values and what they stand for are as follows: 'REGIS' for Registration / Licensing, 'STD' for Fuel Production / Quality, 'DREST' for Driving / Idling, 'REQ' for Acquisition / Fuel Use, 'FUEL' for Fuel Taxes, 'RFS' for Renewable Fuel Standard / Mandate, 'OTHER' for Other, 'AIRQEMISSIONS' for Air Quality / Emissions, and 'CCEINIT' for Climate Change / Energy Initiatives"
+        - description: 'Search by the regulation type. A single type, or a comma-separate list of multiple types, may be given. Values and what they stand for are as follows: ''REGIS'' for Registration / Licensing, ''STD'' for Fuel Production / Quality, ''DREST'' for Driving / Idling, ''REQ'' for Acquisition / Fuel Use, ''FUEL'' for Fuel Taxes, ''RFS'' for Renewable Fuel Standard / Mandate, ''OTHER'' for Other, ''AIRQEMISSIONS'' for Air Quality / Emissions, and ''CCEINIT'' for Climate Change / Energy Initiatives'
           in: query
           name: regulation_type
           type: string
-        - description: "Search by the user type. A single type, or a comma-separate list of multiple types, may be given. Values and what they stand for are as follows: 'IND' for Vehicle Owner/Driver, 'FLEET' for Fleet Purchaser/Manager, 'STATION' for Fueling / TSE Infrastructure Owner, 'AFP' for Alternative Fuel Producer, 'AFS' for Alternative Fuel Dealer, 'PURCH' for Alternative Fuel Purchaser, 'MAN' for AFV Manufacturer/Retrofitter, and 'OTHER' for Other"
+        - description: 'Search by the user type. A single type, or a comma-separate list of multiple types, may be given. Values and what they stand for are as follows: ''IND'' for Vehicle Owner/Driver, ''FLEET'' for Fleet Purchaser/Manager, ''STATION'' for Fueling / TSE Infrastructure Owner, ''AFP'' for Alternative Fuel Producer, ''AFS'' for Alternative Fuel Dealer, ''PURCH'' for Alternative Fuel Purchaser, ''MAN'' for AFV Manufacturer/Retrofitter, and ''OTHER'' for Other'
           in: query
           name: user_type
           type: string
@@ -81,7 +81,7 @@ paths:
           in: query
           name: expired
           type: boolean
-        - description: "Search by the law type. A single type, or a comma-separate list of multiple types, may be given. Values are as follows: 'STATEINC' for State Incentives, 'UPINC ' for Utility/Private Incentives, 'LAWREG' for Laws and Regulations, 'INC' for Incentives, 'PROG' for Programs, 'LUP' for Last Updated, 'OVIEW' for Overview, and 'HILITE' for Highlights"
+        - description: 'Search by the law type. A single type, or a comma-separate list of multiple types, may be given. Values are as follows: ''STATEINC'' for State Incentives, ''UPINC '' for Utility/Private Incentives, ''LAWREG'' for Laws and Regulations, ''INC'' for Incentives, ''PROG'' for Programs, ''LUP'' for Last Updated, ''OVIEW'' for Overview, and ''HILITE'' for Highlights'
           in: query
           name: law_type
           type: string
@@ -143,7 +143,7 @@ paths:
           name: output_format
           required: true
           type: string
-        - description: "Return the points of contact for the given Jurisdiction. Jurisdiction must be given as a two character state code (eg, 'CO' for Colorado). A single jurisdiction, or a comma-separate list of multiple jurisdiction, may be given.  Use the code 'US' for federal laws and the code 'DC' for Washington D.C."
+        - description: 'Return the points of contact for the given Jurisdiction. Jurisdiction must be given as a two character state code (eg, ''CO'' for Colorado). A single jurisdiction, or a comma-separate list of multiple jurisdiction, may be given.  Use the code ''US'' for federal laws and the code ''DC'' for Washington D.C.'
           in: query
           name: jurisdiction
           required: true
@@ -183,7 +183,7 @@ paths:
           description: No response was specified
           schema:
             $ref: '#/definitions/LawResult'
-      summary: "Fetch the details of a specific law given the law's ID."
+      summary: Fetch the details of a specific law given the law's ID.
       tags:
         - v1
 definitions:
@@ -439,7 +439,7 @@ definitions:
         description: The name of the contact
         type: string
       state:
-        description: "The state in which the contact is based ('US' for Federal laws and 'DC' for the District of Columbia)"
+        description: The state in which the contact is based ('US' for Federal laws and 'DC' for the District of Columbia)
         type: string
       telephone:
         description: The contacts phone number

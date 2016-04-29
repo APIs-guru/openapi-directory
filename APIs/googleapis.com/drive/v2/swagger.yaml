@@ -37,7 +37,7 @@ securityDefinitions:
       'https://www.googleapis.com/auth/drive.metadata.readonly': View metadata for files in your Google Drive
       'https://www.googleapis.com/auth/drive.photos.readonly': 'View the photos, videos and albums in your Google Photos'
       'https://www.googleapis.com/auth/drive.readonly': View the files in your Google Drive
-      'https://www.googleapis.com/auth/drive.scripts': "Modify your Google Apps Script scripts' behavior"
+      'https://www.googleapis.com/auth/drive.scripts': Modify your Google Apps Script scripts' behavior
     type: oauth2
 parameters:
   alt:
@@ -145,7 +145,7 @@ paths:
       - $ref: '#/parameters/userIp'
   /apps:
     get:
-      description: "Lists a user's installed apps."
+      description: Lists a user's installed apps.
       operationId: drive.apps.list
       parameters:
         - default: ''
@@ -158,7 +158,7 @@ paths:
           in: query
           name: appFilterMimeTypes
           type: string
-        - description: "A language or locale code, as defined by BCP 47, with some extensions from Unicode's LDML format (http://www.unicode.org/reports/tr35/)."
+        - description: 'A language or locale code, as defined by BCP 47, with some extensions from Unicode''s LDML format (http://www.unicode.org/reports/tr35/).'
           in: query
           name: languageCode
           type: string
@@ -245,7 +245,7 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: "A comma-separated list of spaces to query. Supported values are 'drive', 'appDataFolder' and 'photos'."
+        - description: 'A comma-separated list of spaces to query. Supported values are ''drive'', ''appDataFolder'' and ''photos''.'
           in: query
           name: spaces
           type: string
@@ -318,7 +318,7 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: "A comma-separated list of spaces to query. Supported values are 'drive', 'appDataFolder' and 'photos'."
+        - description: 'A comma-separated list of spaces to query. Supported values are ''drive'', ''appDataFolder'' and ''photos''.'
           in: query
           name: spaces
           type: string
@@ -437,7 +437,7 @@ paths:
         - channels
   /files:
     get:
-      description: "Lists the user's files."
+      description: Lists the user's files.
       operationId: drive.files.list
       parameters:
         - description: The body of items (files/documents) to which the query applies.
@@ -453,7 +453,7 @@ paths:
           minimum: 0
           name: maxResults
           type: integer
-        - description: "A comma-separated list of sort keys. Valid keys are 'createdDate', 'folder', 'lastViewedByMeDate', 'modifiedByMeDate', 'modifiedDate', 'quotaBytesUsed', 'recency', 'sharedWithMeDate', 'starred', and 'title'. Each key sorts ascending by default, but may be reversed with the 'desc' modifier. Example usage: ?orderBy=folder,modifiedDate desc,title. Please note that there is a current limitation for users with approximately one million files in which the requested sort order is ignored."
+        - description: 'A comma-separated list of sort keys. Valid keys are ''createdDate'', ''folder'', ''lastViewedByMeDate'', ''modifiedByMeDate'', ''modifiedDate'', ''quotaBytesUsed'', ''recency'', ''sharedWithMeDate'', ''starred'', and ''title''. Each key sorts ascending by default, but may be reversed with the ''desc'' modifier. Example usage: ?orderBy=folder,modifiedDate desc,title. Please note that there is a current limitation for users with approximately one million files in which the requested sort order is ignored.'
           in: query
           name: orderBy
           type: string
@@ -472,7 +472,7 @@ paths:
           in: query
           name: q
           type: string
-        - description: "A comma-separated list of spaces to query. Supported values are 'drive', 'appDataFolder' and 'photos'."
+        - description: 'A comma-separated list of spaces to query. Supported values are ''drive'', ''appDataFolder'' and ''photos''.'
           in: query
           name: spaces
           type: string
@@ -587,7 +587,7 @@ paths:
           name: maxResults
           type: integer
         - default: drive
-          description: "The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'."
+          description: The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'.
           in: query
           name: space
           type: string
@@ -615,7 +615,7 @@ paths:
       - $ref: '#/parameters/userIp'
   /files/trash:
     delete:
-      description: "Permanently deletes all of the user's trashed files."
+      description: Permanently deletes all of the user's trashed files.
       operationId: drive.files.emptyTrash
       responses:
         '200':
@@ -656,7 +656,7 @@ paths:
       tags:
         - files
     get:
-      description: "Gets a file's metadata by ID."
+      description: Gets a file's metadata by ID.
       operationId: drive.files.get
       parameters:
         - description: The ID for the file in question.
@@ -917,7 +917,7 @@ paths:
         - files
   '/files/{fileId}/comments':
     get:
-      description: "Lists a file's comments."
+      description: Lists a file's comments.
       operationId: drive.comments.list
       parameters:
         - description: The ID of the file.
@@ -1459,7 +1459,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/files/{fileId}/parents':
     get:
-      description: "Lists a file's parents."
+      description: Lists a file's parents.
       operationId: drive.parents.list
       parameters:
         - description: The ID of the file.
@@ -1595,7 +1595,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/files/{fileId}/permissions':
     get:
-      description: "Lists a file's permissions."
+      description: Lists a file's permissions.
       operationId: drive.permissions.list
       parameters:
         - description: The ID for the file.
@@ -1747,7 +1747,7 @@ paths:
           required: true
           type: string
         - default: false
-          description: "Whether changing a role to 'owner' downgrades the current owners to writers. Does nothing if the specified role is not 'owner'."
+          description: Whether changing a role to 'owner' downgrades the current owners to writers. Does nothing if the specified role is not 'owner'.
           in: query
           name: transferOwnership
           type: boolean
@@ -1782,7 +1782,7 @@ paths:
           required: true
           type: string
         - default: false
-          description: "Whether changing a role to 'owner' downgrades the current owners to writers. Does nothing if the specified role is not 'owner'."
+          description: Whether changing a role to 'owner' downgrades the current owners to writers. Does nothing if the specified role is not 'owner'.
           in: query
           name: transferOwnership
           type: boolean
@@ -1804,7 +1804,7 @@ paths:
         - permissions
   '/files/{fileId}/properties':
     get:
-      description: "Lists a file's properties."
+      description: Lists a file's properties.
       operationId: drive.properties.list
       parameters:
         - description: The ID of the file.
@@ -1955,7 +1955,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: "Updates a property, or adds it if it doesn't exist. This method supports patch semantics."
+      description: 'Updates a property, or adds it if it doesn''t exist. This method supports patch semantics.'
       operationId: drive.properties.patch
       parameters:
         - description: The ID of the file.
@@ -1994,7 +1994,7 @@ paths:
       tags:
         - properties
     put:
-      description: "Updates a property, or adds it if it doesn't exist."
+      description: 'Updates a property, or adds it if it doesn''t exist.'
       operationId: drive.properties.update
       parameters:
         - description: The ID of the file.
@@ -2094,7 +2094,7 @@ paths:
         - realtime
   '/files/{fileId}/revisions':
     get:
-      description: "Lists a file's revisions."
+      description: Lists a file's revisions.
       operationId: drive.revisions.list
       parameters:
         - description: The ID of the file.
@@ -2277,7 +2277,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Set the file's updated time to the current server time."
+      description: Set the file's updated time to the current server time.
       operationId: drive.files.touch
       parameters:
         - description: The ID of the file to update.
@@ -2438,7 +2438,7 @@ paths:
         - files
   '/files/{folderId}/children':
     get:
-      description: "Lists a folder's children."
+      description: Lists a folder's children.
       operationId: drive.children.list
       parameters:
         - description: The ID of the folder.
@@ -2452,7 +2452,7 @@ paths:
           minimum: 0
           name: maxResults
           type: integer
-        - description: "A comma-separated list of sort keys. Valid keys are 'createdDate', 'folder', 'lastViewedByMeDate', 'modifiedByMeDate', 'modifiedDate', 'quotaBytesUsed', 'recency', 'sharedWithMeDate', 'starred', and 'title'. Each key sorts ascending by default, but may be reversed with the 'desc' modifier. Example usage: ?orderBy=folder,modifiedDate desc,title. Please note that there is a current limitation for users with approximately one million files in which the requested sort order is ignored."
+        - description: 'A comma-separated list of sort keys. Valid keys are ''createdDate'', ''folder'', ''lastViewedByMeDate'', ''modifiedByMeDate'', ''modifiedDate'', ''quotaBytesUsed'', ''recency'', ''sharedWithMeDate'', ''starred'', and ''title''. Each key sorts ascending by default, but may be reversed with the ''desc'' modifier. Example usage: ?orderBy=folder,modifiedDate desc,title. Please note that there is a current limitation for users with approximately one million files in which the requested sort order is ignored.'
           in: query
           name: orderBy
           type: string
@@ -2660,7 +2660,12 @@ definitions:
           type: object
         type: array
       domainSharingPolicy:
-        description: "The domain sharing policy for the current user. Possible values are:  \n- allowed \n- allowedWithWarning \n- incomingOnly \n- disallowed"
+        description: |-
+          The domain sharing policy for the current user. Possible values are:  
+          - allowed 
+          - allowedWithWarning 
+          - incomingOnly 
+          - disallowed
         type: string
       etag:
         description: The ETag of the item.
@@ -2702,7 +2707,7 @@ definitions:
         items:
           properties:
             source:
-              description: "The imported file's content type to convert from."
+              description: The imported file's content type to convert from.
               type: string
             targets:
               description: The possible content types to convert to.
@@ -2719,7 +2724,7 @@ definitions:
         description: 'This is always drive#about.'
         type: string
       languageCode:
-        description: "The user's language or locale code, as defined by BCP 47, with some extensions from Unicode's LDML format (http://www.unicode.org/reports/tr35/)."
+        description: 'The user''s language or locale code, as defined by BCP 47, with some extensions from Unicode''s LDML format (http://www.unicode.org/reports/tr35/).'
         type: string
       largestChangeId:
         description: The largest change id.
@@ -2742,7 +2747,7 @@ definitions:
         description: The name of the current user.
         type: string
       permissionId:
-        description: "The current user's ID as visible in the permissions collection."
+        description: The current user's ID as visible in the permissions collection.
         type: string
       quotaBytesByService:
         description: The amount of storage quota used by different Google services.
@@ -2753,7 +2758,7 @@ definitions:
               format: int64
               type: string
             serviceName:
-              description: "The service's name, e.g. DRIVE, GMAIL, or PHOTOS."
+              description: 'The service''s name, e.g. DRIVE, GMAIL, or PHOTOS.'
               type: string
           type: object
         type: array
@@ -2774,7 +2779,10 @@ definitions:
         format: int64
         type: string
       quotaType:
-        description: "The type of the user's storage quota. Possible values are:  \n- LIMITED \n- UNLIMITED"
+        description: |-
+          The type of the user's storage quota. Possible values are:  
+          - LIMITED 
+          - UNLIMITED
         type: string
       remainingChangeIds:
         description: The number of remaining change ids.
@@ -2791,10 +2799,10 @@ definitions:
         description: The authenticated user.
     type: object
   App:
-    description: "The apps resource provides a list of the apps that a user has installed, with information about each app's supported MIME types, file extensions, and other details."
+    description: 'The apps resource provides a list of the apps that a user has installed, with information about each app''s supported MIME types, file extensions, and other details.'
     properties:
       authorized:
-        description: "Whether the app is authorized to access data on the user's Drive."
+        description: Whether the app is authorized to access data on the user's Drive.
         type: boolean
       createInFolderTemplate:
         description: 'The template url to create a new file with this app in a given folder. The template will contain {folderId} to be replaced by the folder to create the new file in.'
@@ -2803,14 +2811,18 @@ definitions:
         description: The url to create a new file with this app.
         type: string
       hasDriveWideScope:
-        description: "Whether the app has drive-wide scope. An app with drive-wide scope can access all files in the user's drive."
+        description: Whether the app has drive-wide scope. An app with drive-wide scope can access all files in the user's drive.
         type: boolean
       icons:
         description: The various icons for the app.
         items:
           properties:
             category:
-              description: "Category of the icon. Allowed values are:  \n- application - icon for the application \n- document - icon for a file associated with the app \n- documentShared - icon for a shared file associated with the app"
+              description: |-
+                Category of the icon. Allowed values are:  
+                - application - icon for the application 
+                - document - icon for a file associated with the app 
+                - documentShared - icon for a shared file associated with the app
               type: string
             iconUrl:
               description: URL for the icon.
@@ -3034,7 +3046,7 @@ definitions:
         type: string
     type: object
   ChildReference:
-    description: "A reference to a folder's child."
+    description: A reference to a folder's child.
     properties:
       childLink:
         description: A link to the child.
@@ -3063,7 +3075,7 @@ definitions:
         description: The ID of the comment.
         type: string
       content:
-        description: "The plain text content used to create this comment. This is not HTML safe and should only be used as a starting point to make edits to a comment's content."
+        description: The plain text content used to create this comment. This is not HTML safe and should only be used as a starting point to make edits to a comment's content.
         type: string
       context:
         description: The context of the file which is being commented on.
@@ -3108,7 +3120,10 @@ definitions:
         description: A link back to this comment.
         type: string
       status:
-        description: "The status of this comment. Status can be changed by posting a reply to a comment with the desired status.  \n- \"open\" - The comment is still open. \n- \"resolved\" - The comment has been resolved by one of its replies."
+        description: |-
+          The status of this comment. Status can be changed by posting a reply to a comment with the desired status.  
+          - "open" - The comment is still open. 
+          - "resolved" - The comment has been resolved by one of its replies.
         type: string
     type: object
   CommentList:
@@ -3140,7 +3155,7 @@ definitions:
         $ref: '#/definitions/User'
         description: The user who wrote this reply.
       content:
-        description: "The plain text content used to create this reply. This is not HTML safe and should only be used as a starting point to make edits to a reply's content. This field is required on inserts if no verb is specified (resolve/reopen)."
+        description: The plain text content used to create this reply. This is not HTML safe and should only be used as a starting point to make edits to a reply's content. This field is required on inserts if no verb is specified (resolve/reopen).
         type: string
       createdDate:
         description: The date when this reply was first created.
@@ -3164,7 +3179,10 @@ definitions:
         description: The ID of the reply.
         type: string
       verb:
-        description: "The action this reply performed to the parent comment. When creating a new reply this is the action to be perform to the parent comment. Possible values are:  \n- \"resolve\" - To resolve a comment. \n- \"reopen\" - To reopen (un-resolve) a comment."
+        description: |-
+          The action this reply performed to the parent comment. When creating a new reply this is the action to be perform to the parent comment. Possible values are:  
+          - "resolve" - To resolve a comment. 
+          - "reopen" - To reopen (un-resolve) a comment.
         type: string
     type: object
   CommentReplyList:
@@ -3212,7 +3230,7 @@ definitions:
         format: date-time
         type: string
       defaultOpenWithLink:
-        description: "A link to open this file with the user's default app for this file. Only populated when the drive.apps.readonly scope is used."
+        description: A link to open this file with the user's default app for this file. Only populated when the drive.apps.readonly scope is used.
         type: string
       description:
         description: A short description of the file.
@@ -3251,10 +3269,10 @@ definitions:
         description: 'The full file extension; extracted from the title. May contain multiple concatenated extensions, such as "tar.gz". Removing an extension from the title does not clear this field; however, changing the extension on the title does update this field. This field is only populated for files with content stored in Drive; it is not populated for Google Docs or shortcut files.'
         type: string
       headRevisionId:
-        description: "The ID of the file's head revision. This field is only populated for files with content stored in Drive; it is not populated for Google Docs or shortcut files."
+        description: The ID of the file's head revision. This field is only populated for files with content stored in Drive; it is not populated for Google Docs or shortcut files.
         type: string
       iconLink:
-        description: "A link to the file's icon."
+        description: A link to the file's icon.
         type: string
       id:
         description: The ID of the file.
@@ -3331,7 +3349,7 @@ definitions:
             description: The metering mode used to create the photo.
             type: string
           rotation:
-            description: "The rotation in clockwise degrees from the image's original orientation."
+            description: The rotation in clockwise degrees from the image's original orientation.
             format: int32
             type: integer
           sensor:
@@ -3400,7 +3418,7 @@ definitions:
         description: An MD5 checksum for the content of this file. This field is only populated for files with content stored in Drive; it is not populated for Google Docs or shortcut files.
         type: string
       mimeType:
-        description: "The MIME type of the file. This is only mutable on update when uploading new content. This field can be left blank, and the mimetype will be determined from the uploaded content's MIME type."
+        description: 'The MIME type of the file. This is only mutable on update when uploading new content. This field can be left blank, and the mimetype will be determined from the uploaded content''s MIME type.'
         type: string
       modifiedByMeDate:
         description: Last time this file was modified by the user (formatted RFC 3339 timestamp). Note that setting modifiedDate will also update the modifiedByMe date for the user which set the date.
@@ -3413,7 +3431,7 @@ definitions:
       openWithLinks:
         additionalProperties:
           type: string
-        description: "A map of the id of each of the user's apps to a link to open this file with that app. Only populated when the drive.apps.readonly scope is used."
+        description: A map of the id of each of the user's apps to a link to open this file with that app. Only populated when the drive.apps.readonly scope is used.
         type: object
       originalFilename:
         description: 'The original filename of the uploaded content if available, or else the original value of the title field. This is only available for files with binary content in Drive.'
@@ -3456,7 +3474,7 @@ definitions:
         description: A link back to this file.
         type: string
       shareable:
-        description: "Whether the file's sharing settings can be modified by the current user."
+        description: Whether the file's sharing settings can be modified by the current user.
         type: boolean
       shared:
         description: Whether the file has been shared.
@@ -3469,7 +3487,7 @@ definitions:
         $ref: '#/definitions/User'
         description: 'User that shared the item with the current user, if available.'
       spaces:
-        description: "The list of spaces which contain the file. Supported values are 'drive', 'appDataFolder' and 'photos'."
+        description: 'The list of spaces which contain the file. Supported values are ''drive'', ''appDataFolder'' and ''photos''.'
         items:
           type: string
         type: array
@@ -3485,7 +3503,7 @@ definitions:
             type: string
         type: object
       thumbnailLink:
-        description: "A short-lived link to the file's thumbnail. Typically lasts on the order of hours."
+        description: A short-lived link to the file's thumbnail. Typically lasts on the order of hours.
         type: string
       title:
         description: The title of this file.
@@ -3517,7 +3535,7 @@ definitions:
         description: 'A link for downloading the content of the file in a browser using cookie based authentication. In cases where the content is shared publicly, the content can be downloaded without any credentials.'
         type: string
       webViewLink:
-        description: "A link only available on public folders for viewing their static web assets (HTML, CSS, JS, etc) via Google Drive's Website Hosting."
+        description: 'A link only available on public folders for viewing their static web assets (HTML, CSS, JS, etc) via Google Drive''s Website Hosting.'
         type: string
       writersCanShare:
         description: Whether writers can share the document with other users.
@@ -3565,7 +3583,7 @@ definitions:
         type: string
     type: object
   ParentList:
-    description: "A list of a file's parents."
+    description: A list of a file's parents.
     properties:
       etag:
         description: The ETag of the list.
@@ -3584,7 +3602,7 @@ definitions:
         type: string
     type: object
   ParentReference:
-    description: "A reference to a file's parent."
+    description: A reference to a file's parent.
     properties:
       id:
         description: The ID of the parent.
@@ -3637,13 +3655,22 @@ definitions:
         description: 'A link to the profile photo, if available.'
         type: string
       role:
-        description: "The primary role for this user. Allowed values are:  \n- owner \n- reader \n- writer"
+        description: |-
+          The primary role for this user. Allowed values are:  
+          - owner 
+          - reader 
+          - writer
         type: string
       selfLink:
         description: A link back to this permission.
         type: string
       type:
-        description: "The account type. Allowed values are:  \n- user \n- group \n- domain \n- anyone"
+        description: |-
+          The account type. Allowed values are:  
+          - user 
+          - group 
+          - domain 
+          - anyone
         type: string
       value:
         description: 'The email address or domain name for the entity. This is used during inserts and is not populated in responses. When making a drive.permissions.insert request, exactly one of the id or value fields must be specified.'
@@ -3683,7 +3710,13 @@ definitions:
         type: string
     type: object
   Property:
-    description: "A key-value pair attached to a file that is either public or private to an application.\nThe following limits apply to file properties:  \n- Maximum of 100 properties total per file\n- Maximum of 30 private properties per app\n- Maximum of 30 public properties\n- Maximum of 124 bytes size limit on (key + value) string in UTF-8 encoding for a single property."
+    description: |-
+      A key-value pair attached to a file that is either public or private to an application.
+      The following limits apply to file properties:  
+      - Maximum of 100 properties total per file
+      - Maximum of 30 private properties per app
+      - Maximum of 30 public properties
+      - Maximum of 124 bytes size limit on (key + value) string in UTF-8 encoding for a single property.
     properties:
       etag:
         description: ETag of the property.
@@ -3824,10 +3857,10 @@ definitions:
         description: 'This is always drive#user.'
         type: string
       permissionId:
-        description: "The user's ID as visible in the permissions collection."
+        description: The user's ID as visible in the permissions collection.
         type: string
       picture:
-        description: "The user's profile picture."
+        description: The user's profile picture.
         properties:
           url:
             description: A URL that points to a profile picture of this user.

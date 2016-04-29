@@ -500,12 +500,12 @@ paths:
       description: Stores new data blobs and associated metadata.
       operationId: storage.objects.insert
       parameters:
-        - description: "Name of the bucket in which to store the new object. Overrides the provided object metadata's bucket value, if any."
+        - description: 'Name of the bucket in which to store the new object. Overrides the provided object metadata''s bucket value, if any.'
           in: path
           name: bucket
           required: true
           type: string
-        - description: "Name of the object. Required when the object metadata is not otherwise provided. Overrides the object metadata's name value, if any."
+        - description: 'Name of the object. Required when the object metadata is not otherwise provided. Overrides the object metadata''s name value, if any.'
           in: query
           name: name
           type: string
@@ -601,7 +601,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: "Updates a data blob's associated metadata. This method supports patch semantics."
+      description: Updates a data blob's associated metadata. This method supports patch semantics.
       operationId: storage.objects.patch
       parameters:
         - description: Name of the bucket in which the object resides.
@@ -638,7 +638,7 @@ paths:
       tags:
         - objects
     put:
-      description: "Updates a data blob's associated metadata."
+      description: Updates a data blob's associated metadata.
       operationId: storage.objects.update
       parameters:
         - description: Name of the bucket in which the object resides.
@@ -891,7 +891,7 @@ definitions:
         description: The location of the bucket. Object data for objects in the bucket resides in physical storage in this location. Can be US or EU. Defaults to US.
         type: string
       owner:
-        description: "The owner of the bucket. This will always be the project team's owner group."
+        description: The owner of the bucket. This will always be the project team's owner group.
         properties:
           entity:
             description: 'The entity, in the form group-groupId.'
@@ -912,10 +912,10 @@ definitions:
         format: date-time
         type: string
       website:
-        description: "The bucket's website configuration."
+        description: The bucket's website configuration.
         properties:
           mainPageSuffix:
-            description: "Behaves as the bucket's directory index where missing objects are treated as potential directories."
+            description: Behaves as the bucket's directory index where missing objects are treated as potential directories.
             type: string
           notFoundPage:
             description: The custom object to return when a requested resource is not found.
@@ -935,7 +935,18 @@ definitions:
         description: 'The email address associated with the entity, if any.'
         type: string
       entity:
-        description: "The entity holding the permission, in one of the following forms: \n- user-userId \n- user-email \n- group-groupId \n- group-email \n- domain-domain \n- allUsers \n- allAuthenticatedUsers Examples: \n- The user liz@example.com would be user-liz@example.com. \n- The group example@googlegroups.com would be group-example@googlegroups.com. \n- To refer to all members of the Google Apps for Business domain example.com, the entity would be domain-example.com."
+        description: |-
+          The entity holding the permission, in one of the following forms: 
+          - user-userId 
+          - user-email 
+          - group-groupId 
+          - group-email 
+          - domain-domain 
+          - allUsers 
+          - allAuthenticatedUsers Examples: 
+          - The user liz@example.com would be user-liz@example.com. 
+          - The group example@googlegroups.com would be group-example@googlegroups.com. 
+          - To refer to all members of the Google Apps for Business domain example.com, the entity would be domain-example.com.
         type: string
       entityId:
         description: 'The ID for the entity, if any.'
@@ -1078,7 +1089,18 @@ definitions:
         description: 'The email address associated with the entity, if any.'
         type: string
       entity:
-        description: "The entity holding the permission, in one of the following forms: \n- user-userId \n- user-email \n- group-groupId \n- group-email \n- domain-domain \n- allUsers \n- allAuthenticatedUsers Examples: \n- The user liz@example.com would be user-liz@example.com. \n- The group example@googlegroups.com would be group-example@googlegroups.com. \n- To refer to all members of the Google Apps for Business domain example.com, the entity would be domain-example.com."
+        description: |-
+          The entity holding the permission, in one of the following forms: 
+          - user-userId 
+          - user-email 
+          - group-groupId 
+          - group-email 
+          - domain-domain 
+          - allUsers 
+          - allAuthenticatedUsers Examples: 
+          - The user liz@example.com would be user-liz@example.com. 
+          - The group example@googlegroups.com would be group-example@googlegroups.com. 
+          - To refer to all members of the Google Apps for Business domain example.com, the entity would be domain-example.com.
         type: string
       entityId:
         description: 'The ID for the entity, if any.'

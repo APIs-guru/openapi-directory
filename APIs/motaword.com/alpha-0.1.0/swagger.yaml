@@ -65,7 +65,7 @@ paths:
         - Static
   /glossary:
     get:
-      description: "Download your corporate account's global glossary. This endpoint is available only for corporate account customers."
+      description: Download your corporate account's global glossary. This endpoint is available only for corporate account customers.
       operationId: downloadGlobalGlossary
       produces:
         - application/json
@@ -85,7 +85,7 @@ paths:
         - Account
         - Glossary
     post:
-      description: "Update your corporate account's global glossary. This endpoint is available only for corporate account customers."
+      description: Update your corporate account's global glossary. This endpoint is available only for corporate account customers.
       operationId: updateGlobalGlossary
       parameters:
         - description: |
@@ -194,7 +194,7 @@ paths:
           name: 'target_languages[]'
           required: true
           type: array
-        - description: "Optional. If you provide a callback URL, we will send POST callbacks when the status of the current project is changed. Possible status changes are, 'translated', 'proofread', 'completed'."
+        - description: 'Optional. If you provide a callback URL, we will send POST callbacks when the status of the current project is changed. Possible status changes are, ''translated'', ''proofread'', ''completed''.'
           in: formData
           name: callback_url
           type: string
@@ -294,7 +294,7 @@ paths:
           name: 'target_languages[]'
           required: true
           type: array
-        - description: "Optional. If you provide a callback URL, we will send POST callbacks when the status of the current project is changed. Possible status changes are, 'translated', 'proofread', 'completed'."
+        - description: 'Optional. If you provide a callback URL, we will send POST callbacks when the status of the current project is changed. Possible status changes are, ''translated'', ''proofread'', ''completed''.'
           in: formData
           name: callback_url
           type: string
@@ -328,7 +328,7 @@ paths:
         - Project
   '/projects/{id}/download':
     post:
-      description: "Download the latest translation package. You must have given a /package call beforehand and wait until the packaging status is 'completed'."
+      description: Download the latest translation package. You must have given a /package call beforehand and wait until the packaging status is 'completed'.
       operationId: download
       parameters:
         - description: Project ID
@@ -359,7 +359,7 @@ paths:
         - Project
   '/projects/{id}/download/{language}':
     post:
-      description: "Download only the translation package of this language. You must have given a /package call beforehand and wait until the packaging status is 'completed'."
+      description: Download only the translation package of this language. You must have given a /package call beforehand and wait until the packaging status is 'completed'.
       operationId: downloadLanguage
       parameters:
         - description: Project ID
@@ -403,7 +403,7 @@ paths:
           name: id
           required: true
           type: integer
-        - description: "Optional. Determines which method to use for payment. Options are 'corporate', 'client'."
+        - description: 'Optional. Determines which method to use for payment. Options are ''corporate'', ''client''.'
           enum:
             - corporate
             - client
@@ -458,7 +458,7 @@ paths:
           required: true
           type: integer
         - default: 0
-          description: "If you want to package and download the translation synchronously, mark this parameter as '0'. It will package the translation and then return the packaged file in the response, identical to /download call after an asynchronous /package call."
+          description: 'If you want to package and download the translation synchronously, mark this parameter as ''0''. It will package the translation and then return the packaged file in the response, identical to /download call after an asynchronous /package call.'
           in: query
           name: async
           type: integer
@@ -484,7 +484,7 @@ paths:
         - Project
   '/projects/{id}/package/check':
     get:
-      description: "This request will tell you the current progress of the translation packaging. You will use the 'key' provided by the /package call."
+      description: This request will tell you the current progress of the translation packaging. You will use the 'key' provided by the /package call.
       operationId: trackPackage
       parameters:
         - description: Project ID
@@ -534,7 +534,7 @@ paths:
           required: true
           type: string
         - default: 0
-          description: "If you want to package and download the translation synchronously, mark this parameter as '0'. It will package the translation and then return the packaged file in the response, identical to /download call after an asynchronous /package call."
+          description: 'If you want to package and download the translation synchronously, mark this parameter as ''0''. It will package the translation and then return the packaged file in the response, identical to /download call after an asynchronous /package call.'
           in: query
           name: async
           type: integer
@@ -1435,7 +1435,7 @@ paths:
         - Style Guide
   /styleguide:
     get:
-      description: "Download your corporate account's global style guide. This endpoint is available only for corporate account customers."
+      description: Download your corporate account's global style guide. This endpoint is available only for corporate account customers.
       operationId: downloadGlobalStyleGuide
       produces:
         - application/json
@@ -1455,7 +1455,7 @@ paths:
         - Account
         - Style Guide
     post:
-      description: "Update your corporate account's global style guide. This endpoint is available only for corporate account customers."
+      description: Update your corporate account's global style guide. This endpoint is available only for corporate account customers.
       operationId: updateGlobalStyleGuide
       parameters:
         - description: |
@@ -1495,7 +1495,7 @@ paths:
         MotaWord API is using OAuth2 procedures when authenticating or authorizing your API call. Currently, we only allow Client Credential type flow.
       operationId: getAccessToken
       parameters:
-        - description: "OAuth2 grant type. Currently only 'client_credentials' available."
+        - description: OAuth2 grant type. Currently only 'client_credentials' available.
           in: formData
           name: grant_type
           required: true
@@ -1580,7 +1580,7 @@ definitions:
         description: Unique identifier of the translator/proofreader of this activity.
         type: integer
       type:
-        description: "Currently there are two available activity types; 'translated', 'proofread'."
+        description: 'Currently there are two available activity types; ''translated'', ''proofread''.'
         enum:
           - translated
           - proofread
@@ -1773,7 +1773,7 @@ definitions:
         description: This is the unique package tracking key. You can use this key to track the current progress of the translation packaging with /package/check call.
         type: string
       status:
-        description: "The status of translation packaging. Possible values are 'started', 'packaging', 'completed'. When completed, you can make a /download call to download the last translation package."
+        description: 'The status of translation packaging. Possible values are ''started'', ''packaging'', ''completed''. When completed, you can make a /download call to download the last translation package.'
         enum:
           - started
           - packaging
@@ -1783,7 +1783,7 @@ definitions:
   PackageStatus:
     properties:
       status:
-        description: "The status of translation packaging. Possible values are 'started', 'packaging', 'completed'. When completed, you can make a /download call to download the last translation package."
+        description: 'The status of translation packaging. Possible values are ''started'', ''packaging'', ''completed''. When completed, you can make a /download call to download the last translation package.'
         enum:
           - started
           - packaging

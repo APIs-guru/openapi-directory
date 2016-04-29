@@ -8,7 +8,7 @@ info:
     email: developer-support@citrixonline.com
     name: Developer Support
     url: 'https://developer.citrixonline.com'
-  description: "The SCIM API lets you manage users in your Citrix organization. You can then automate the provisioning of product licenses for these users, and they can use your company's Single Sign-On solution through an Identity Provider."
+  description: 'The SCIM API lets you manage users in your Citrix organization. You can then automate the provisioning of product licenses for these users, and they can use your company''s Single Sign-On solution through an Identity Provider.'
   termsOfService: 'https://developer.citrixonline.com/terms-use'
   title: SCIM
   version: N/A
@@ -40,7 +40,7 @@ paths:
       description: 'Queries multiple group identities in the organization domain. Filtering, sorting and pagination are available. This call requires the role ROLE_ORG_READ.'
       operationId: getGroups
       parameters:
-        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
+        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
           in: header
           name: Authorization
           required: true
@@ -71,7 +71,7 @@ paths:
       description: Creates a new organization group and adds it to the user domain. Member groups and member users must be in the organization. This call requires the role ROLE_ORG_WRITE.
       operationId: createGroup
       parameters:
-        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
+        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
           in: header
           name: Authorization
           required: true
@@ -107,7 +107,7 @@ paths:
       description: Deletes a group from the organization (but not from the account). The group must be in the organization. This call requires the role ROLE_ORG_WRITE.
       operationId: deleteGroup
       parameters:
-        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
+        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
           in: header
           name: Authorization
           required: true
@@ -136,7 +136,7 @@ paths:
       description: Queries group details in the organization domain. This call requires the role ROLE_ORG_READ.
       operationId: getGroup
       parameters:
-        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
+        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
           in: header
           name: Authorization
           required: true
@@ -167,7 +167,7 @@ paths:
       description: Updates one or more values of an existing group without sending the full definition. Member groups and member users must be in the organization. This call requires the role ROLE_ORG_WRITE.
       operationId: updateGroup
       parameters:
-        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
+        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
           in: header
           name: Authorization
           required: true
@@ -208,7 +208,7 @@ paths:
       description: 'Updates an existing group. The request must include the full group definition. To modify one or more values without sending the full definition, see "Update Group". Member groups and member users must be in the organization. This call requires the role ROLE_ORG_WRITE.'
       operationId: replaceGroup
       parameters:
-        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
+        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
           in: header
           name: Authorization
           required: true
@@ -250,7 +250,7 @@ paths:
       description: 'Queries the user schema. The user schema is defined in SCIM Core Schema (http://www.simplecloud.info/specs/draft-scim-core-schema-01.html#resource-schema).'
       operationId: getUserSchema
       parameters:
-        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
+        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
           in: header
           name: Authorization
           required: true
@@ -274,7 +274,7 @@ paths:
       description: 'Queries service provider configurations. The service provider configurations are defined in SCIM Core Schema (http://www.simplecloud.info/specs/draft-scim-core-schema-01.html#anchor6). This call returns a description, a documentationURL, name, and specURL.'
       operationId: getServiceProviderConfigs
       parameters:
-        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
+        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
           in: header
           name: Authorization
           required: true
@@ -298,7 +298,7 @@ paths:
       description: Queries multiple user identities in the organization domain. Filtering is available.
       operationId: getUsers
       parameters:
-        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
+        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
           in: header
           name: Authorization
           required: true
@@ -329,7 +329,7 @@ paths:
       description: Creates a new organization user and adds them to the user domain. The user email domain must match an existing organization email domain.
       operationId: createUsers
       parameters:
-        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
+        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
           in: header
           name: Authorization
           required: true
@@ -365,7 +365,7 @@ paths:
       description: Queries the identity of the current authenticated user.
       operationId: getMe
       parameters:
-        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
+        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
           in: header
           name: Authorization
           required: true
@@ -389,10 +389,10 @@ paths:
       tags:
         - Users
     patch:
-      description: "Changes a limited set (or all if you choose) of the current authenticated user's data. The updated user email domain must be an existing organization email domain. "
+      description: 'Changes a limited set (or all if you choose) of the current authenticated user''s data. The updated user email domain must be an existing organization email domain. '
       operationId: updateMe
       parameters:
-        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
+        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
           in: header
           name: Authorization
           required: true
@@ -426,10 +426,10 @@ paths:
       tags:
         - Users
     put:
-      description: "Changes the current authenticated user's displayName, locale, timezone, username and password. The request must include the full user definition (to modify one or more values without sending the full definition, see Update User). The replaced user email domain must be an existing organization email domain. "
+      description: 'Changes the current authenticated user''s displayName, locale, timezone, username and password. The request must include the full user definition (to modify one or more values without sending the full definition, see Update User). The replaced user email domain must be an existing organization email domain. '
       operationId: replaceMe
       parameters:
-        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
+        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
           in: header
           name: Authorization
           required: true
@@ -467,7 +467,7 @@ paths:
       description: Deletes a user from the organization (but not from the account).
       operationId: deleteUser
       parameters:
-        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
+        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
           in: header
           name: Authorization
           required: true
@@ -498,7 +498,7 @@ paths:
       description: Queries user identity in the organization domain.
       operationId: getUser
       parameters:
-        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
+        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
           in: header
           name: Authorization
           required: true
@@ -528,10 +528,10 @@ paths:
       tags:
         - Users
     patch:
-      description: "Changes a limited set (or all if you choose) of the user's data. The updated user email domain must be an existing organization email domain."
+      description: Changes a limited set (or all if you choose) of the user's data. The updated user email domain must be an existing organization email domain.
       operationId: updateUser
       parameters:
-        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
+        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
           in: header
           name: Authorization
           required: true
@@ -571,10 +571,10 @@ paths:
       tags:
         - Users
     put:
-      description: "Changes an existing user's displayName, locale, timezone, username and password. The request must include the full user definition (to modify one or more values without sending the full definition, see Update User). The replaced user email domain must be an existing organization email domain."
+      description: 'Changes an existing user''s displayName, locale, timezone, username and password. The request must include the full user definition (to modify one or more values without sending the full definition, see Update User). The replaced user email domain must be an existing organization email domain.'
       operationId: replaceUser
       parameters:
-        - description: "Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'"
+        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
           in: header
           name: Authorization
           required: true
@@ -621,13 +621,13 @@ definitions:
         description: The description of the Authentication Scheme
         type: string
       documentationUrl:
-        description: "A HTTP addressable URL pointing to the Authentication Scheme's usage documentation"
+        description: A HTTP addressable URL pointing to the Authentication Scheme's usage documentation
         type: string
       name:
         description: 'The common authentication scheme name, e.g. HTTP Basic'
         type: string
       specUrl:
-        description: "A HTTP addressable URL pointing to the Authentication Scheme's specification"
+        description: A HTTP addressable URL pointing to the Authentication Scheme's specification
         type: string
     required:
       - name
@@ -670,10 +670,10 @@ definitions:
     description: Describes a group belonging to an organization
     properties:
       displayName:
-        description: "The group's display name"
+        description: The group's display name
         type: string
       id:
-        description: "The group's unique key"
+        description: The group's unique key
         type: string
       members:
         description: An array of members
@@ -706,7 +706,7 @@ definitions:
     description: Describes the group to create
     properties:
       displayName:
-        description: "The group's display name"
+        description: The group's display name
         type: string
       members:
         description: An array of members
@@ -755,24 +755,24 @@ definitions:
     description: Describes the attributes and metadata constituting a resource such as a user.
     properties:
       attributes:
-        description: "The resource's attributes"
+        description: The resource's attributes
         items:
           $ref: '#/definitions/SchemaAttribute'
         type: array
       description:
-        description: "The resource's description"
+        description: The resource's description
         type: string
       endpoint:
-        description: "The resource's HTTP addressable endpoint relative to the base URL, e.g. /Users."
+        description: 'The resource''s HTTP addressable endpoint relative to the base URL, e.g. /Users.'
         type: string
       id:
-        description: "The resource's id, e.g. urn:scim:schemas:core:1.0:User"
+        description: 'The resource''s id, e.g. urn:scim:schemas:core:1.0:User'
         type: string
       name:
-        description: "The resource's name, e.g. \"User\""
+        description: 'The resource''s name, e.g. "User"'
         type: string
       schema:
-        description: "The resource's associated schema, e.g. urn:scim:schemas:core:1.0"
+        description: 'The resource''s associated schema, e.g. urn:scim:schemas:core:1.0'
         type: string
     required:
       - id
@@ -788,13 +788,13 @@ definitions:
         description: Indicates whether the attribute is case sensitive
         type: boolean
       description:
-        description: "The attribute's description"
+        description: The attribute's description
         type: string
       multiValued:
         description: Indicates whether the attribute can have multiple values
         type: boolean
       name:
-        description: "The attribute's name"
+        description: The attribute's name
         type: string
       readOnly:
         description: Indicates whether the attribute is mutable
@@ -803,15 +803,15 @@ definitions:
         description: Indicates whether the attribute is required
         type: boolean
       schema:
-        description: "The attribute's associated scheme, e.g. urn:scim:schemas:core:1.0"
+        description: 'The attribute''s associated scheme, e.g. urn:scim:schemas:core:1.0'
         type: string
       subAttributes:
-        description: "The attribute's potential sub-attributes"
+        description: The attribute's potential sub-attributes
         items:
           $ref: '#/definitions/SchemaSubAttribute'
         type: array
       type:
-        description: "The attribute's data type, e.g. String"
+        description: 'The attribute''s data type, e.g. String'
         type: string
     required:
       - name
@@ -829,10 +829,10 @@ definitions:
         description: Indicates whether the attribute is case sensitive
         type: boolean
       description:
-        description: "The attribute's description"
+        description: The attribute's description
         type: string
       name:
-        description: "The attribute's name"
+        description: The attribute's name
         type: string
       readOnly:
         description: Indicates whether the attribute is mutable
@@ -841,7 +841,7 @@ definitions:
         description: Indicates whether the attribute is required
         type: boolean
       type:
-        description: "The attribute's data type, e.g. String"
+        description: 'The attribute''s data type, e.g. String'
         type: string
     required:
       - name
@@ -851,7 +851,7 @@ definitions:
       - required
       - caseExact
   ServiceProviderConfigs:
-    description: "Represents the Service Provider's configuration"
+    description: Represents the Service Provider's configuration
     properties:
       authenticationSchemes:
         $ref: '#/definitions/AuthenticationSchemes'
@@ -863,7 +863,7 @@ definitions:
         $ref: '#/definitions/ChangePassword'
         description: Specifies Change Password configuration options
       documentationUrl:
-        description: "An HTTP addressable URL pointing to the Service Provider's help documentation"
+        description: An HTTP addressable URL pointing to the Service Provider's help documentation
         type: string
       etag:
         $ref: '#/definitions/Etag'
@@ -902,25 +902,25 @@ definitions:
     description: Describes a user belonging to an organization
     properties:
       displayName:
-        description: "The user's display name"
+        description: The user's display name
         type: string
       id:
-        description: "The user's unique key"
+        description: The user's unique key
         type: string
       locale:
-        description: "The user's language settings"
+        description: The user's language settings
         type: string
       meta:
         $ref: '#/definitions/UserMetadata'
         description: User metadata
       name:
         $ref: '#/definitions/UserFullName'
-        description: "The user's full name"
+        description: The user's full name
       timezone:
-        description: "The user's time zone"
+        description: The user's time zone
         type: string
       userName:
-        description: "The user's username, usually their email address"
+        description: 'The user''s username, usually their email address'
         type: string
     required:
       - displayName
@@ -949,31 +949,31 @@ definitions:
     description: Describes a new user
     properties:
       displayName:
-        description: "The user's display name"
+        description: The user's display name
         type: string
       locale:
-        description: "The user's language settings"
+        description: The user's language settings
         type: string
       name:
         $ref: '#/definitions/UserFullName'
-        description: "The user's full name"
+        description: The user's full name
       password:
-        description: "The user's password"
+        description: The user's password
         type: string
       timezone:
-        description: "The user's time zone"
+        description: The user's time zone
         type: string
       userName:
-        description: "The user's username, usually their email address"
+        description: 'The user''s username, usually their email address'
         type: string
   UserFullName:
     description: The full name of the user
     properties:
       familyName:
-        description: "The user's surname"
+        description: The user's surname
         type: string
       givenName:
-        description: "The user's first name"
+        description: The user's first name
         type: string
     required:
       - familyName

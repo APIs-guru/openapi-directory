@@ -57,7 +57,7 @@ paths:
           name: username
           required: true
           type: string
-        - description: "The user's password"
+        - description: The user's password
           in: query
           name: password
           required: true
@@ -78,7 +78,7 @@ paths:
           name: username
           required: true
           type: string
-        - description: "The user's password"
+        - description: The user's password
           in: body
           name: body
           required: true
@@ -153,7 +153,7 @@ paths:
           required: true
           type: string
         - default: 'false'
-          description: "If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested."
+          description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
           in: query
           name: useCanonical
           required: false
@@ -232,7 +232,7 @@ paths:
           name: includeRelated
           required: false
           type: string
-        - description: "Source dictionary to return definitions from.  If 'all' is received, results are returned from all sources. If multiple values are received (e.g. 'century,wiktionary'), results are returned from the first specified dictionary that has definitions. If left blank, results are returned from the first dictionary that has definitions. By default, dictionaries are searched in this order: ahd, wiktionary, webster, century, wordnet"
+        - description: 'Source dictionary to return definitions from.  If ''all'' is received, results are returned from all sources. If multiple values are received (e.g. ''century,wiktionary''), results are returned from the first specified dictionary that has definitions. If left blank, results are returned from the first dictionary that has definitions. By default, dictionaries are searched in this order: ahd, wiktionary, webster, century, wordnet'
           in: query
           items:
             type: string
@@ -240,7 +240,7 @@ paths:
           required: false
           type: array
         - default: 'false'
-          description: "If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested."
+          description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
           in: query
           name: useCanonical
           required: false
@@ -270,7 +270,7 @@ paths:
           name: word
           required: true
           type: string
-        - description: "If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested."
+        - description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
           in: query
           name: useCanonical
           required: false
@@ -301,7 +301,7 @@ paths:
           required: false
           type: string
         - default: 'false'
-          description: "If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested."
+          description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
           in: query
           name: useCanonical
           required: false
@@ -338,7 +338,7 @@ paths:
           required: true
           type: string
         - default: 'false'
-          description: "If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested."
+          description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
           in: query
           name: useCanonical
           required: false
@@ -375,7 +375,7 @@ paths:
           required: true
           type: string
         - default: 'false'
-          description: "If true will try to return a correct word root ('cats' -> 'cat'). If false returns exactly what was requested."
+          description: If true will try to return a correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
           in: query
           name: useCanonical
           required: false
@@ -426,7 +426,7 @@ paths:
           required: false
           type: integer
         - default: 'false'
-          description: "If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested."
+          description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
           in: query
           name: useCanonical
           required: false
@@ -451,7 +451,7 @@ paths:
           required: true
           type: string
         - default: 'false'
-          description: "If true will try to return a correct word root ('cats' -> 'cat'). If false returns exactly what was requested."
+          description: If true will try to return a correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
           in: query
           name: useCanonical
           required: false
@@ -493,7 +493,7 @@ paths:
           required: true
           type: string
         - default: 'false'
-          description: "If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested."
+          description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
           in: query
           name: useCanonical
           required: false
@@ -530,7 +530,7 @@ paths:
           required: true
           type: string
         - default: 'false'
-          description: "If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested."
+          description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
           in: query
           name: useCanonical
           required: false

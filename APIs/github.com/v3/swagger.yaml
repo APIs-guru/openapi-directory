@@ -284,7 +284,7 @@ paths:
             for details.
   /gists/starred:
     get:
-      description: "List the authenticated user's starred gists."
+      description: List the authenticated user's starred gists.
       parameters:
         - description: |
             Timestamp in ISO 8601 format YYYY-MM-DDTHH:MM:SSZ.
@@ -2023,7 +2023,7 @@ paths:
             for details.
   '/orgs/{org}/public_members/{username}':
     delete:
-      description: "Conceal a user's membership."
+      description: Conceal a user's membership.
       parameters:
         - description: Name of organisation.
           in: path
@@ -2107,7 +2107,7 @@ paths:
         '404':
           description: User is not a public member.
     put:
-      description: "Publicize a user's membership."
+      description: Publicize a user's membership.
       parameters:
         - description: Name of organisation.
           in: path
@@ -2595,7 +2595,7 @@ paths:
             API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting
             for details.
         '404':
-          description: "User isn't an assignee."
+          description: User isn't an assignee.
   '/repos/{owner}/{repo}/branches':
     get:
       description: Get list of branches
@@ -3477,7 +3477,7 @@ paths:
           in: query
           name: path
           type: string
-        - description: "The String name of the Commit/Branch/Tag. Defaults to 'master'."
+        - description: The String name of the Commit/Branch/Tag. Defaults to 'master'.
           in: query
           name: ref
           type: string
@@ -4389,7 +4389,10 @@ paths:
             for details.
   '/repos/{owner}/{repo}/git/refs/{ref}':
     delete:
-      description: "Delete a Reference\nExample: Deleting a branch: DELETE /repos/octocat/Hello-World/git/refs/heads/feature-a \nExample: Deleting a tag:        DELETE /repos/octocat/Hello-World/git/refs/tags/v1.0\n"
+      description: |
+        Delete a Reference
+        Example: Deleting a branch: DELETE /repos/octocat/Hello-World/git/refs/heads/feature-a 
+        Example: Deleting a tag:        DELETE /repos/octocat/Hello-World/git/refs/tags/v1.0
       parameters:
         - description: Name of repository owner.
           in: path
@@ -5193,7 +5196,7 @@ paths:
           name: repo
           required: true
           type: string
-        - description: "Ignored without 'sort' parameter."
+        - description: Ignored without 'sort' parameter.
           in: query
           name: direction
           type: string
@@ -6550,7 +6553,7 @@ paths:
           in: query
           name: state
           type: string
-        - description: "Ignored without 'sort' parameter."
+        - description: Ignored without 'sort' parameter.
           in: query
           name: direction
           type: string
@@ -7075,7 +7078,7 @@ paths:
           name: repo
           required: true
           type: string
-        - description: "Ignored without 'sort' parameter."
+        - description: Ignored without 'sort' parameter.
           in: query
           name: direction
           type: string
@@ -7634,7 +7637,7 @@ paths:
         '404':
           description: Pull request has not been merged.
     put:
-      description: "Merge a pull request (Merge Button's)"
+      description: Merge a pull request (Merge Button's)
       parameters:
         - description: Name of repository owner.
           in: path
@@ -8894,7 +8897,7 @@ paths:
           name: archive_format
           required: true
           type: string
-        - description: "Valid Git reference, defaults to 'master'."
+        - description: 'Valid Git reference, defaults to ''master''.'
           in: path
           name: path
           required: true
@@ -10057,7 +10060,7 @@ paths:
             for details.
   /user/followers:
     get:
-      description: "List the authenticated user's followers"
+      description: List the authenticated user's followers
       parameters:
         - description: |
             You can check the current version of media type in responses.
@@ -10604,7 +10607,7 @@ paths:
     get:
       description: List repositories being starred by the authenticated user.
       parameters:
-        - description: "Ignored without 'sort' parameter."
+        - description: Ignored without 'sort' parameter.
           in: query
           name: direction
           type: string
@@ -10974,7 +10977,7 @@ paths:
         Note: Pagination is powered exclusively by the since parameter. Use the Link
         header to get the URL for the next page of users.
       parameters:
-        - description: "The integer ID of the last User that you've seen."
+        - description: The integer ID of the last User that you've seen.
           in: query
           name: since
           type: integer
@@ -11049,7 +11052,7 @@ paths:
             for details.
   '/users/{username}/events':
     get:
-      description: "If you are authenticated as the given user, you will see your private events. Otherwise, you'll only see public events."
+      description: 'If you are authenticated as the given user, you will see your private events. Otherwise, you''ll only see public events.'
       parameters:
         - description: Name of user.
           in: path
@@ -11084,7 +11087,7 @@ paths:
             for details.
   '/users/{username}/events/orgs/{org}':
     get:
-      description: "This is the user's organization dashboard. You must be authenticated as the user to view this."
+      description: This is the user's organization dashboard. You must be authenticated as the user to view this.
       parameters:
         - description: Name of user.
           in: path
@@ -11123,7 +11126,7 @@ paths:
             for details.
   '/users/{username}/followers':
     get:
-      description: "List a user's followers"
+      description: List a user's followers
       parameters:
         - description: Name of user.
           in: path
@@ -11331,7 +11334,7 @@ paths:
             for details.
   '/users/{username}/received_events':
     get:
-      description: "These are events that you'll only see public events."
+      description: These are events that you'll only see public events.
       parameters:
         - description: Name of user.
           in: path

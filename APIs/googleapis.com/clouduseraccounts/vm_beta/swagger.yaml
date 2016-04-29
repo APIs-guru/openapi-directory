@@ -944,7 +944,7 @@ definitions:
         description: '[Output Only] The GECOS (user information) entry for this account.'
         type: string
       gid:
-        description: "[Output Only] User's default group ID."
+        description: '[Output Only] User''s default group ID.'
         format: uint32
         type: integer
       homeDirectory:
@@ -1166,7 +1166,7 @@ definitions:
         pattern: '[a-z][-a-z0-9_]{0,31}'
         type: string
       owner:
-        description: "Email address of account's owner. This account will be validated to make sure it exists. The email can belong to any domain, but it must be tied to a Google account."
+        description: 'Email address of account''s owner. This account will be validated to make sure it exists. The email can belong to any domain, but it must be tied to a Google account.'
         type: string
       publicKeys:
         description: '[Output Only] Public keys that this user may use to login.'

@@ -113,7 +113,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Creates a new edit for an app, populated with the app's current state."
+      description: 'Creates a new edit for an app, populated with the app''s current state.'
       operationId: androidpublisher.edits.insert
       parameters:
         - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
@@ -331,7 +331,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: "Updates the APK's Expansion File configuration to reference another APK's Expansion Files. To add a new Expansion File use the Upload method. This method supports patch semantics."
+      description: Updates the APK's Expansion File configuration to reference another APK's Expansion Files. To add a new Expansion File use the Upload method. This method supports patch semantics.
       operationId: androidpublisher.edits.expansionfiles.patch
       parameters:
         - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
@@ -409,7 +409,7 @@ paths:
       tags:
         - edits
     put:
-      description: "Updates the APK's Expansion File configuration to reference another APK's Expansion Files. To add a new Expansion File use the Upload method."
+      description: Updates the APK's Expansion File configuration to reference another APK's Expansion Files. To add a new Expansion File use the Upload method.
       operationId: androidpublisher.edits.expansionfiles.update
       parameters:
         - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
@@ -1514,7 +1514,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Checks that the edit can be successfully committed. The edit's changes are not applied to the live app."
+      description: Checks that the edit can be successfully committed. The edit's changes are not applied to the live app.
       operationId: androidpublisher.edits.validate
       parameters:
         - description: 'Unique identifier for the Android app that is being updated; for example, "com.spiffygame".'
@@ -1539,10 +1539,10 @@ paths:
         - edits
   '/{packageName}/entitlements':
     get:
-      description: "Lists the user's current inapp item or subscription entitlements"
+      description: Lists the user's current inapp item or subscription entitlements
       operationId: androidpublisher.entitlements.list
       parameters:
-        - description: "The package name of the application the inapp product was sold in (for example, 'com.some.thing')."
+        - description: 'The package name of the application the inapp product was sold in (for example, ''com.some.thing'').'
           in: path
           name: packageName
           required: true
@@ -1550,7 +1550,7 @@ paths:
         - in: query
           name: maxResults
           type: integer
-        - description: "The product id of the inapp product (for example, 'sku1'). This can be used to restrict the result set."
+        - description: 'The product id of the inapp product (for example, ''sku1''). This can be used to restrict the result set.'
           in: query
           name: productId
           type: string
@@ -1621,7 +1621,7 @@ paths:
           name: packageName
           required: true
           type: string
-        - description: "If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false."
+        - description: If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.
           in: query
           name: autoConvertMissingPrices
           type: boolean
@@ -1707,7 +1707,7 @@ paths:
           name: sku
           required: true
           type: string
-        - description: "If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false."
+        - description: If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.
           in: query
           name: autoConvertMissingPrices
           type: boolean
@@ -1739,7 +1739,7 @@ paths:
           name: sku
           required: true
           type: string
-        - description: "If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false."
+        - description: If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.
           in: query
           name: autoConvertMissingPrices
           type: boolean
@@ -1762,17 +1762,17 @@ paths:
       description: Checks the purchase and consumption status of an inapp item.
       operationId: androidpublisher.purchases.products.get
       parameters:
-        - description: "The package name of the application the inapp product was sold in (for example, 'com.some.thing')."
+        - description: 'The package name of the application the inapp product was sold in (for example, ''com.some.thing'').'
           in: path
           name: packageName
           required: true
           type: string
-        - description: "The inapp product SKU (for example, 'com.some.thing.inapp1')."
+        - description: 'The inapp product SKU (for example, ''com.some.thing.inapp1'').'
           in: path
           name: productId
           required: true
           type: string
-        - description: "The token provided to the user's device when the inapp product was purchased."
+        - description: The token provided to the user's device when the inapp product was purchased.
           in: path
           name: token
           required: true
@@ -1797,20 +1797,20 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}':
     get:
-      description: "Checks whether a user's subscription purchase is valid and returns its expiry time."
+      description: Checks whether a user's subscription purchase is valid and returns its expiry time.
       operationId: androidpublisher.purchases.subscriptions.get
       parameters:
-        - description: "The package name of the application for which this subscription was purchased (for example, 'com.some.thing')."
+        - description: 'The package name of the application for which this subscription was purchased (for example, ''com.some.thing'').'
           in: path
           name: packageName
           required: true
           type: string
-        - description: "The purchased subscription ID (for example, 'monthly001')."
+        - description: 'The purchased subscription ID (for example, ''monthly001'').'
           in: path
           name: subscriptionId
           required: true
           type: string
-        - description: "The token provided to the user's device when the subscription was purchased."
+        - description: The token provided to the user's device when the subscription was purchased.
           in: path
           name: token
           required: true
@@ -1843,20 +1843,20 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Cancels a user's subscription purchase. The subscription remains valid until its expiration time."
+      description: Cancels a user's subscription purchase. The subscription remains valid until its expiration time.
       operationId: androidpublisher.purchases.subscriptions.cancel
       parameters:
-        - description: "The package name of the application for which this subscription was purchased (for example, 'com.some.thing')."
+        - description: 'The package name of the application for which this subscription was purchased (for example, ''com.some.thing'').'
           in: path
           name: packageName
           required: true
           type: string
-        - description: "The purchased subscription ID (for example, 'monthly001')."
+        - description: 'The purchased subscription ID (for example, ''monthly001'').'
           in: path
           name: subscriptionId
           required: true
           type: string
-        - description: "The token provided to the user's device when the subscription was purchased."
+        - description: The token provided to the user's device when the subscription was purchased.
           in: path
           name: token
           required: true
@@ -1879,20 +1879,20 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Defers a user's subscription purchase until a specified future expiration time."
+      description: Defers a user's subscription purchase until a specified future expiration time.
       operationId: androidpublisher.purchases.subscriptions.defer
       parameters:
-        - description: "The package name of the application for which this subscription was purchased (for example, 'com.some.thing')."
+        - description: 'The package name of the application for which this subscription was purchased (for example, ''com.some.thing'').'
           in: path
           name: packageName
           required: true
           type: string
-        - description: "The purchased subscription ID (for example, 'monthly001')."
+        - description: 'The purchased subscription ID (for example, ''monthly001'').'
           in: path
           name: subscriptionId
           required: true
           type: string
-        - description: "The token provided to the user's device when the subscription was purchased."
+        - description: The token provided to the user's device when the subscription was purchased.
           in: path
           name: token
           required: true
@@ -1921,20 +1921,20 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Refunds a user's subscription purchase, but the subscription remains valid until its expiration time and it will continue to recur."
+      description: 'Refunds a user''s subscription purchase, but the subscription remains valid until its expiration time and it will continue to recur.'
       operationId: androidpublisher.purchases.subscriptions.refund
       parameters:
-        - description: "The package name of the application for which this subscription was purchased (for example, 'com.some.thing')."
+        - description: 'The package name of the application for which this subscription was purchased (for example, ''com.some.thing'').'
           in: path
           name: packageName
           required: true
           type: string
-        - description: "The purchased subscription ID (for example, 'monthly001')."
+        - description: 'The purchased subscription ID (for example, ''monthly001'').'
           in: path
           name: subscriptionId
           required: true
           type: string
-        - description: "The token provided to the user's device when the subscription was purchased."
+        - description: The token provided to the user's device when the subscription was purchased.
           in: path
           name: token
           required: true
@@ -1957,20 +1957,20 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Refunds and immediately revokes a user's subscription purchase. Access to the subscription will be terminated immediately and it will stop recurring."
+      description: Refunds and immediately revokes a user's subscription purchase. Access to the subscription will be terminated immediately and it will stop recurring.
       operationId: androidpublisher.purchases.subscriptions.revoke
       parameters:
-        - description: "The package name of the application for which this subscription was purchased (for example, 'com.some.thing')."
+        - description: 'The package name of the application for which this subscription was purchased (for example, ''com.some.thing'').'
           in: path
           name: packageName
           required: true
           type: string
-        - description: "The purchased subscription ID (for example, 'monthly001')."
+        - description: 'The purchased subscription ID (for example, ''monthly001'').'
           in: path
           name: subscriptionId
           required: true
           type: string
-        - description: "The token provided to the user's device when the subscription was purchased."
+        - description: The token provided to the user's device when the subscription was purchased.
           in: path
           name: token
           required: true
@@ -1990,7 +1990,7 @@ definitions:
         $ref: '#/definitions/ApkBinary'
         description: Information about the binary payload of this APK.
       versionCode:
-        description: "The version code of the APK, as specified in the APK's manifest file."
+        description: 'The version code of the APK, as specified in the APK''s manifest file.'
         format: int32
         type: integer
     type: object
@@ -2007,7 +2007,7 @@ definitions:
         description: 'The language code, in BCP 47 format (eg "en-US").'
         type: string
       recentChanges:
-        description: "Describe what's new in your APK."
+        description: Describe what's new in your APK.
         type: string
     type: object
   ApkListingsListResponse:
@@ -2070,7 +2070,7 @@ definitions:
         type: string
     type: object
   Entitlement:
-    description: "An Entitlement resource indicates a user's current entitlement to an inapp item or subscription."
+    description: An Entitlement resource indicates a user's current entitlement to an inapp item or subscription.
     properties:
       kind:
         default: 'androidpublisher#entitlement'
@@ -2080,7 +2080,10 @@ definitions:
         description: The SKU of the product.
         type: string
       productType:
-        description: "The type of the inapp product. Possible values are:  \n- In-app item: \"inapp\" \n- Subscription: \"subs\""
+        description: |-
+          The type of the inapp product. Possible values are:  
+          - In-app item: "inapp" 
+          - Subscription: "subs"
         type: string
       token:
         description: The token which can be verified using the subscriptions or products API.
@@ -2100,11 +2103,11 @@ definitions:
   ExpansionFile:
     properties:
       fileSize:
-        description: "If set this field indicates that this APK has an Expansion File uploaded to it: this APK does not reference another APK's Expansion File. The field's value is the size of the uploaded Expansion File in bytes."
+        description: 'If set this field indicates that this APK has an Expansion File uploaded to it: this APK does not reference another APK''s Expansion File. The field''s value is the size of the uploaded Expansion File in bytes.'
         format: int64
         type: string
       referencesVersion:
-        description: "If set this APK's Expansion File references another APK's Expansion File. The file_size field will not be set."
+        description: If set this APK's Expansion File references another APK's Expansion File. The file_size field will not be set.
         format: int32
         type: integer
     type: object
@@ -2223,7 +2226,7 @@ definitions:
         type: string
       defaultPrice:
         $ref: '#/definitions/Price'
-        description: "Default price cannot be zero. In-app products can never be free. Default price is always in the developer's Checkout merchant currency."
+        description: Default price cannot be zero. In-app products can never be free. Default price is always in the developer's Checkout merchant currency.
       listings:
         additionalProperties:
           $ref: '#/definitions/InAppProductListing'
@@ -2351,7 +2354,7 @@ definitions:
         description: Short description of the app (previously known as promo text); this may be up to 80 characters in length.
         type: string
       title:
-        description: "App's localized title."
+        description: App's localized title.
         type: string
       video:
         description: URL of a promotional YouTube video for the app.
@@ -2401,10 +2404,13 @@ definitions:
         type: string
     type: object
   ProductPurchase:
-    description: "A ProductPurchase resource indicates the status of a user's inapp product purchase."
+    description: A ProductPurchase resource indicates the status of a user's inapp product purchase.
     properties:
       consumptionState:
-        description: "The consumption state of the inapp product. Possible values are:  \n- Yet to be consumed \n- Consumed"
+        description: |-
+          The consumption state of the inapp product. Possible values are:  
+          - Yet to be consumed 
+          - Consumed
         format: int32
         type: integer
       developerPayload:
@@ -2415,7 +2421,10 @@ definitions:
         description: This kind represents an inappPurchase object in the androidpublisher service.
         type: string
       purchaseState:
-        description: "The purchase state of the order. Possible values are:  \n- Purchased \n- Cancelled"
+        description: |-
+          The purchase state of the order. Possible values are:  
+          - Purchased 
+          - Cancelled
         format: int32
         type: integer
       purchaseTimeMillis:
@@ -2427,7 +2436,7 @@ definitions:
     properties:
       defaultPrice:
         $ref: '#/definitions/Price'
-        description: "Default price cannot be zero and must be less than the full subscription price. Default price is always in the developer's Checkout merchant currency. Targeted countries have their prices set automatically based on the default_price."
+        description: Default price cannot be zero and must be less than the full subscription price. Default price is always in the developer's Checkout merchant currency. Targeted countries have their prices set automatically based on the default_price.
       start:
         $ref: '#/definitions/MonthDay'
         description: Defines the first day on which the price takes effect.
@@ -2459,13 +2468,16 @@ definitions:
         type: string
     type: object
   SubscriptionPurchase:
-    description: "A SubscriptionPurchase resource indicates the status of a user's subscription purchase."
+    description: A SubscriptionPurchase resource indicates the status of a user's subscription purchase.
     properties:
       autoRenewing:
         description: Whether the subscription will automatically be renewed when it reaches its current expiry time.
         type: boolean
       cancelReason:
-        description: "The cancel reason of the subscription, if the subscription is not auto renewing. Possible values are:  \n- User cancelled the subscription \n- Subscription was cancelled by the system, for example because of a billing problem"
+        description: |-
+          The cancel reason of the subscription, if the subscription is not auto renewing. Possible values are:  
+          - User cancelled the subscription 
+          - Subscription was cancelled by the system, for example because of a billing problem
         format: int32
         type: integer
       countryCode:
@@ -2483,7 +2495,10 @@ definitions:
         description: This kind represents a subscriptionPurchase object in the androidpublisher service.
         type: string
       paymentState:
-        description: "The payment state of the subscription. Possible values are:  \n- Payment pending \n- Payment received"
+        description: |-
+          The payment state of the subscription. Possible values are:  
+          - Payment pending 
+          - Payment received
         format: int32
         type: integer
       priceAmountMicros:

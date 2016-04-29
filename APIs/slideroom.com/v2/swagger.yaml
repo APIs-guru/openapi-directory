@@ -3,7 +3,7 @@ schemes:
   - https
 host: api.slideroom.com
 info:
-  description: "SlideRoom provides a RESTful API for exporting data out of your organization's SlideRoom account."
+  description: SlideRoom provides a RESTful API for exporting data out of your organization's SlideRoom account.
   title: SlideRoom API V2
   version: v2
   x-logo:
@@ -187,7 +187,7 @@ paths:
           name: format
           required: false
           type: string
-        - description: "Selects which evaluation round(s) should be used in the result.  Current: use evaluations from the program's current round.  Assigned: use evaluations from the round the application is currently assigned, Named: use evaluations from a specific round.  All: include all evaluation rounds (not applicable on tabular exports)."
+        - description: 'Selects which evaluation round(s) should be used in the result.  Current: use evaluations from the program''s current round.  Assigned: use evaluations from the round the application is currently assigned, Named: use evaluations from a specific round.  All: include all evaluation rounds (not applicable on tabular exports).'
           enum:
             - Assigned
             - Current
@@ -197,7 +197,7 @@ paths:
           name: roundType
           required: false
           type: string
-        - description: 'The round used to filter the data when roundtype is "Named"'
+        - description: The round used to filter the data when roundtype is "Named"
           in: query
           name: roundName
           required: false
@@ -312,7 +312,7 @@ paths:
           name: delivery.folder
           required: false
           type: string
-        - description: 'Limit result to applications submitted after the "since" date. Format as the number of seconds since 1/1/1970 GMT.'
+        - description: Limit result to applications submitted after the "since" date. Format as the number of seconds since 1/1/1970 GMT.
           format: int32
           in: query
           name: since
@@ -478,7 +478,7 @@ paths:
           name: format
           required: false
           type: string
-        - description: "Selects which evaluation round(s) should be used in the result.  Current: use evaluations from the program's current round.  Assigned: use evaluations from the round the application is currently assigned, Named: use evaluations from a specific round.  All: include all evaluation rounds (not applicable on tabular exports)."
+        - description: 'Selects which evaluation round(s) should be used in the result.  Current: use evaluations from the program''s current round.  Assigned: use evaluations from the round the application is currently assigned, Named: use evaluations from a specific round.  All: include all evaluation rounds (not applicable on tabular exports).'
           enum:
             - Assigned
             - Current
@@ -488,7 +488,7 @@ paths:
           name: roundType
           required: false
           type: string
-        - description: 'The round used to filter the data when roundtype is "Named"'
+        - description: The round used to filter the data when roundtype is "Named"
           in: query
           name: roundName
           required: false

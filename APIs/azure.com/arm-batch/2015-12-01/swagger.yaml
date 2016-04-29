@@ -89,7 +89,7 @@ paths:
         - description: The name of the resource group that constrains the set of accounts that are returned.
           in: path
           name: resourceGroupName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
@@ -111,7 +111,7 @@ paths:
         - description: The name of the resource group that contains the Batch account to be deleted.
           in: path
           name: resourceGroupName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The name of the account to be deleted.
@@ -119,7 +119,7 @@ paths:
           maxLength: 24
           minLength: 3
           name: accountName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
@@ -141,7 +141,7 @@ paths:
         - description: The name of the resource group that contains the Batch account.
           in: path
           name: resourceGroupName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The name of the account.
@@ -149,7 +149,7 @@ paths:
           maxLength: 24
           minLength: 3
           name: accountName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
@@ -168,7 +168,7 @@ paths:
         - description: The name of the resource group that contains the Batch account.
           in: path
           name: resourceGroupName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The name of the account.
@@ -176,7 +176,7 @@ paths:
           maxLength: 24
           minLength: 3
           name: accountName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: Additional parameters for account update.
@@ -201,7 +201,7 @@ paths:
         - description: The name of the resource group that contains the new Batch account.
           in: path
           name: resourceGroupName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: 'A name for the Batch account which must be unique within Azure. Batch account names must be between 3 and 24 characters in length and must use only numbers and lower-case letters. This name is used as part of the DNS name that is used to access the batch service in the region in which the account is created. For example: http://AccountName.batch.core.windows.net/.'
@@ -209,7 +209,7 @@ paths:
           maxLength: 24
           minLength: 3
           name: accountName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: Additional parameters for account creation.
@@ -238,7 +238,7 @@ paths:
         - description: The name of the resource group that contains the Batch account.
           in: path
           name: resourceGroupName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The name of the Batch account.
@@ -246,7 +246,7 @@ paths:
           maxLength: 24
           minLength: 3
           name: accountName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The maximum number of items to return in the response.
@@ -274,7 +274,7 @@ paths:
         - description: The name of the resource group that contains the Batch account.
           in: path
           name: resourceGroupName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The name of the Batch account.
@@ -282,7 +282,7 @@ paths:
           maxLength: 24
           minLength: 3
           name: accountName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The id of the application.
@@ -304,7 +304,7 @@ paths:
         - description: The name of the resource group that contains the Batch account.
           in: path
           name: resourceGroupName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The name of the Batch account.
@@ -312,7 +312,7 @@ paths:
           maxLength: 24
           minLength: 3
           name: accountName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The id of the application.
@@ -336,7 +336,7 @@ paths:
         - description: The name of the resource group that contains the Batch account.
           in: path
           name: resourceGroupName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The name of the Batch account.
@@ -344,7 +344,7 @@ paths:
           maxLength: 24
           minLength: 3
           name: accountName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The id of the application.
@@ -372,7 +372,7 @@ paths:
         - description: The name of the resource group that contains the Batch account.
           in: path
           name: resourceGroupName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The name of the Batch account.
@@ -380,7 +380,7 @@ paths:
           maxLength: 24
           minLength: 3
           name: accountName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The id of the application.
@@ -409,7 +409,7 @@ paths:
         - description: The name of the resource group that contains the Batch account.
           in: path
           name: resourceGroupName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The name of the Batch account.
@@ -417,7 +417,7 @@ paths:
           maxLength: 24
           minLength: 3
           name: accountName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The id of the application.
@@ -444,7 +444,7 @@ paths:
         - description: The name of the resource group that contains the Batch account.
           in: path
           name: resourceGroupName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The name of the Batch account.
@@ -452,7 +452,7 @@ paths:
           maxLength: 24
           minLength: 3
           name: accountName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The id of the application.
@@ -481,7 +481,7 @@ paths:
         - description: The name of the resource group that contains the Batch account.
           in: path
           name: resourceGroupName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The name of the Batch account.
@@ -489,7 +489,7 @@ paths:
           maxLength: 24
           minLength: 3
           name: accountName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The id of the application.
@@ -519,7 +519,7 @@ paths:
         - description: The name of the resource group that contains the Batch account.
           in: path
           name: resourceGroupName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The name of the Batch account.
@@ -527,7 +527,7 @@ paths:
           maxLength: 24
           minLength: 3
           name: accountName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The id of the application.
@@ -561,7 +561,7 @@ paths:
         - description: The name of the resource group that contains the Batch account.
           in: path
           name: resourceGroupName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The name of the account.
@@ -569,7 +569,7 @@ paths:
           maxLength: 24
           minLength: 3
           name: accountName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
@@ -589,7 +589,7 @@ paths:
         - description: The name of the resource group that contains the Batch account.
           in: path
           name: resourceGroupName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The name of the account.
@@ -597,7 +597,7 @@ paths:
           maxLength: 24
           minLength: 3
           name: accountName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The type of key to regenerate.
@@ -623,7 +623,7 @@ paths:
         - description: The name of the resource group that contains the Batch account.
           in: path
           name: resourceGroupName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - description: The name of the Batch account.
@@ -631,7 +631,7 @@ paths:
           maxLength: 24
           minLength: 3
           name: accountName
-          pattern: "^[-\\w\\._]+$"
+          pattern: '^[-\w\._]+$'
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'

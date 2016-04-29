@@ -4,7 +4,7 @@ schemes:
 host: winning.email
 basePath: /api/v1
 info:
-  description: "The Winning Email API allows you to access our services from your applications. Contact us if you need help with anything, or require access to something we don't yet offer. The API overview is available <a href='/api/v1/docs' target='_blank'>here</a>."
+  description: 'The Winning Email API allows you to access our services from your applications. Contact us if you need help with anything, or require access to something we don''t yet offer. The API overview is available <a href=''/api/v1/docs'' target=''_blank''>here</a>.'
   termsOfService: 'https://winning.email/terms/'
   title: Winning Email
   version: 1.0.0
@@ -34,7 +34,7 @@ tags:
 paths:
   /email-booster:
     post:
-      description: "With our API, you can access the same results available through the Winning Email website, but in a raw, JSON, format, that you can use however you wish in your application. Read more about Email Booster <a href='/email-booster/' target='_blank'>here</a>.<br><br><strong>Input Parameters</strong><br>If <strong>source</strong> provided, then all other inputs are ignored. Otherwise, <strong>subject</strong> AND one or both of <strong>html</strong> and <strong>text</strong> are required."
+      description: 'With our API, you can access the same results available through the Winning Email website, but in a raw, JSON, format, that you can use however you wish in your application. Read more about Email Booster <a href=''/email-booster/'' target=''_blank''>here</a>.<br><br><strong>Input Parameters</strong><br>If <strong>source</strong> provided, then all other inputs are ignored. Otherwise, <strong>subject</strong> AND one or both of <strong>html</strong> and <strong>text</strong> are required.'
       operationId: emailBooster
       parameters:
         - description: email subject
@@ -100,7 +100,7 @@ paths:
         - email-booster
   /rate-limit-status:
     get:
-      description: "Check how many API queries you've used, and what your limit is."
+      description: 'Check how many API queries you''ve used, and what your limit is.'
       operationId: rateLimitStatus
       produces:
         - application/json

@@ -952,7 +952,7 @@ paths:
         - readgroupsets
   '/v1/readgroupsets/{readGroupSetId}/coveragebuckets':
     get:
-      description: "Lists fixed width coverage buckets for a read group set, each of which correspond to a range of a reference sequence. Each bucket summarizes coverage information across its corresponding genomic range. For the definitions of read group sets and other genomics resources, see [Fundamentals of Google Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics) Coverage is defined as the number of reads which are aligned to a given base in the reference sequence. Coverage buckets are available at several precomputed bucket widths, enabling retrieval of various coverage 'zoom levels'. The caller must have READ permissions for the target read group set."
+      description: 'Lists fixed width coverage buckets for a read group set, each of which correspond to a range of a reference sequence. Each bucket summarizes coverage information across its corresponding genomic range. For the definitions of read group sets and other genomics resources, see [Fundamentals of Google Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics) Coverage is defined as the number of reads which are aligned to a given base in the reference sequence. Coverage buckets are available at several precomputed bucket widths, enabling retrieval of various coverage ''zoom levels''. The caller must have READ permissions for the target read group set.'
       operationId: genomics.readgroupsets.coveragebuckets.list
       parameters:
         - description: Required. The ID of the read group set over which coverage is requested.
@@ -2089,7 +2089,7 @@ definitions:
         $ref: '#/definitions/Transcript'
         description: A transcript value represents the assertion that a particular region of the reference genome may be transcribed as RNA. An alternative splicing pattern would be represented as a separate transcript object. This field is only set for annotations of type `TRANSCRIPT`.
       type:
-        description: "The data type for this annotation. Must match the containing annotation set's type."
+        description: The data type for this annotation. Must match the containing annotation set's type.
         enum:
           - ANNOTATION_TYPE_UNSPECIFIED
           - GENERIC
@@ -2102,7 +2102,7 @@ definitions:
         description: 'A variant annotation, which describes the effect of a variant on the genome, the coding sequence, and/or higher level consequences at the organism level e.g. pathogenicity. This field is only set for annotations of type `VARIANT`.'
     type: object
   AnnotationSet:
-    description: "An annotation set is a logical grouping of annotations that share consistent type information and provenance. Examples of annotation sets include 'all genes from refseq', and 'all variant annotations from ClinVar'."
+    description: 'An annotation set is a logical grouping of annotations that share consistent type information and provenance. Examples of annotation sets include ''all genes from refseq'', and ''all variant annotations from ClinVar''.'
     properties:
       datasetId:
         description: The dataset to which this annotation set belongs.
@@ -2120,7 +2120,7 @@ definitions:
         description: The display name for this annotation set.
         type: string
       referenceSetId:
-        description: "The ID of the reference set that defines the coordinate space for this set's annotations."
+        description: The ID of the reference set that defines the coordinate space for this set's annotations.
         type: string
       sourceUri:
         description: 'The source URI describing the file from which this annotation set was generated, if any.'
@@ -2215,7 +2215,7 @@ definitions:
         format: int64
         type: string
       referenceSequence:
-        description: "`referenceSequence` is only used at mismatches (`SEQUENCE_MISMATCH`) and deletions (`DELETE`). Filling this field replaces SAM's MD tag. If the relevant information is not available, this field is unset."
+        description: '`referenceSequence` is only used at mismatches (`SEQUENCE_MISMATCH`) and deletions (`DELETE`). Filling this field replaces SAM''s MD tag. If the relevant information is not available, this field is unset.'
         type: string
     type: object
   ClinicalCondition:
@@ -2240,11 +2240,11 @@ definitions:
   CodingSequence:
     properties:
       end:
-        description: "The end of the coding sequence on this annotation's reference sequence, 0-based exclusive. Note that this position is relative to the reference start, and *not* the containing annotation start."
+        description: 'The end of the coding sequence on this annotation''s reference sequence, 0-based exclusive. Note that this position is relative to the reference start, and *not* the containing annotation start.'
         format: int64
         type: string
       start:
-        description: "The start of the coding sequence on this annotation's reference sequence, 0-based inclusive. Note that this position is relative to the reference start, and *not* the containing annotation start."
+        description: 'The start of the coding sequence on this annotation''s reference sequence, 0-based inclusive. Note that this position is relative to the reference start, and *not* the containing annotation start.'
         format: int64
         type: string
     type: object
@@ -2290,7 +2290,7 @@ definitions:
   Exon:
     properties:
       end:
-        description: "The end position of the exon on this annotation's reference sequence, 0-based exclusive. Note that this is relative to the reference start, and *not* the containing annotation start."
+        description: 'The end position of the exon on this annotation''s reference sequence, 0-based exclusive. Note that this is relative to the reference start, and *not* the containing annotation start.'
         format: int64
         type: string
       frame:
@@ -2298,7 +2298,7 @@ definitions:
         format: int32
         type: integer
       start:
-        description: "The start position of the exon on this annotation's reference sequence, 0-based inclusive. Note that this is relative to the reference start, and **not** the containing annotation start."
+        description: 'The start position of the exon on this annotation''s reference sequence, 0-based inclusive. Note that this is relative to the reference start, and **not** the containing annotation start.'
         format: int64
         type: string
     type: object
@@ -2336,10 +2336,10 @@ definitions:
     description: The variant data export request.
     properties:
       bigqueryDataset:
-        description: 'Required. The BigQuery dataset to export data to. This dataset must already exist. Note that this is distinct from the Genomics concept of "dataset".'
+        description: Required. The BigQuery dataset to export data to. This dataset must already exist. Note that this is distinct from the Genomics concept of "dataset".
         type: string
       bigqueryTable:
-        description: "Required. The BigQuery table to export data to. If the table doesn't exist, it will be created. If it already exists, it will be overwritten."
+        description: 'Required. The BigQuery table to export data to. If the table doesn''t exist, it will be created. If it already exists, it will be overwritten.'
         type: string
       callSetIds:
         description: 'If provided, only variant call information from the specified call sets will be exported. By default all variant calls are exported.'
@@ -2422,7 +2422,7 @@ definitions:
         description: 'Convert reference names to the canonical representation. hg19 haploytypes (those reference names containing "_hap") are not modified in any way. All other reference names are modified according to the following rules: The reference name is capitalized. The "chr" prefix is dropped for all autosomes and sex chromsomes. For example "chr17" becomes "17" and "chrX" becomes "X". All mitochondrial chromosomes ("chrM", "chrMT", etc) become "MT".'
         type: boolean
       sourceUris:
-        description: "A list of URIs referencing variant files in Google Cloud Storage. URIs can include wildcards [as described here](https://cloud.google.com/storage/docs/gsutil/addlhelp/WildcardNames). Note that recursive wildcards ('**') are not supported."
+        description: 'A list of URIs referencing variant files in Google Cloud Storage. URIs can include wildcards [as described here](https://cloud.google.com/storage/docs/gsutil/addlhelp/WildcardNames). Note that recursive wildcards (''**'') are not supported.'
         items:
           type: string
         type: array
@@ -2458,7 +2458,7 @@ definitions:
   ListBasesResponse:
     properties:
       nextPageToken:
-        description: "The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results."
+        description: 'The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren''t any additional results.'
         type: string
       offset:
         description: The offset position (0-based) of the given `sequence` from the start of this `Reference`. This value will differ for each page in a paginated request.
@@ -2480,7 +2480,7 @@ definitions:
           $ref: '#/definitions/CoverageBucket'
         type: array
       nextPageToken:
-        description: "The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results."
+        description: 'The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren''t any additional results.'
         type: string
     type: object
   ListDatasetsResponse:
@@ -2492,7 +2492,7 @@ definitions:
           $ref: '#/definitions/Dataset'
         type: array
       nextPageToken:
-        description: "The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results."
+        description: 'The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren''t any additional results.'
         type: string
     type: object
   ListOperationsResponse:
@@ -2567,7 +2567,7 @@ definitions:
         description: The time at which the job stopped running.
         type: string
       events:
-        description: "Optional event messages that were generated during the job's execution. This also contains any warnings that were generated during import or export."
+        description: Optional event messages that were generated during the job's execution. This also contains any warnings that were generated during import or export.
         items:
           $ref: '#/definitions/OperationEvent'
         type: array
@@ -2581,7 +2581,7 @@ definitions:
         type: object
     type: object
   Policy:
-    description: "Defines an Identity and Access Management (IAM) policy. It is used to specify access control policies for Cloud Platform resources. A `Policy` consists of a list of `bindings`. A `Binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM. **Example** { \"bindings\": [ { \"role\": \"roles/owner\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-other-app@appspot.gserviceaccount.com\", ] }, { \"role\": \"roles/viewer\", \"members\": [\"user:sean@example.com\"] } ] } For a description of IAM and its features, see the [IAM developer's guide](https://cloud.google.com/iam)."
+    description: 'Defines an Identity and Access Management (IAM) policy. It is used to specify access control policies for Cloud Platform resources. A `Policy` consists of a list of `bindings`. A `Binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM. **Example** { "bindings": [ { "role": "roles/owner", "members": [ "user:mike@example.com", "group:admins@example.com", "domain:google.com", "serviceAccount:my-other-app@appspot.gserviceaccount.com", ] }, { "role": "roles/viewer", "members": ["user:sean@example.com"] } ] } For a description of IAM and its features, see the [IAM developer''s guide](https://cloud.google.com/iam).'
     properties:
       bindings:
         description: Associates a list of `members` to a `role`. Multiple `bindings` must not be specified for the same `role`. `bindings` with no members will result in an error.
@@ -2620,7 +2620,7 @@ definitions:
         description: The user specified locally unique ID of the program. Used along with `prevProgramId` to define an ordering between programs.
         type: string
       name:
-        description: "The display name of the program. This is typically the colloquial name of the tool used, for example 'bwa' or 'picard'."
+        description: 'The display name of the program. This is typically the colloquial name of the tool used, for example ''bwa'' or ''picard''.'
         type: string
       prevProgramId:
         description: The ID of the program run before this one.
@@ -2645,7 +2645,7 @@ definitions:
         type: string
     type: object
   Read:
-    description: "A read alignment describes a linear alignment of a string of DNA to a reference sequence, in addition to metadata about the fragment (the molecule of DNA sequenced) and the read (the bases which were read by the sequencer). A read is equivalent to a line in a SAM file. A read belongs to exactly one read group and exactly one read group set. For more genomics resource definitions, see [Fundamentals of Google Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics) ### Reverse-stranded reads Mapped reads (reads having a non-null `alignment`) can be aligned to either the forward or the reverse strand of their associated reference. Strandedness of a mapped read is encoded by `alignment.position.reverseStrand`. If we consider the reference to be a forward-stranded coordinate space of `[0, reference.length)` with `0` as the left-most position and `reference.length` as the right-most position, reads are always aligned left to right. That is, `alignment.position.position` always refers to the left-most reference coordinate and `alignment.cigar` describes the alignment of this read to the reference from left to right. All per-base fields such as `alignedSequence` and `alignedQuality` share this same left-to-right orientation; this is true of reads which are aligned to either strand. For reverse-stranded reads, this means that `alignedSequence` is the reverse complement of the bases that were originally reported by the sequencing machine. ### Generating a reference-aligned sequence string When interacting with mapped reads, it's often useful to produce a string representing the local alignment of the read to reference. The following pseudocode demonstrates one way of doing this: out = \"\" offset = 0 for c in read.alignment.cigar { switch c.operation { case \"ALIGNMENT_MATCH\", \"SEQUENCE_MATCH\", \"SEQUENCE_MISMATCH\": out += read.alignedSequence[offset:offset+c.operationLength] offset += c.operationLength break case \"CLIP_SOFT\", \"INSERT\": offset += c.operationLength break case \"PAD\": out += repeat(\"*\", c.operationLength) break case \"DELETE\": out += repeat(\"-\", c.operationLength) break case \"SKIP\": out += repeat(\" \", c.operationLength) break case \"CLIP_HARD\": break } } return out ### Converting to SAM's CIGAR string The following pseudocode generates a SAM CIGAR string from the `cigar` field. Note that this is a lossy conversion (`cigar.referenceSequence` is lost). cigarMap = { \"ALIGNMENT_MATCH\": \"M\", \"INSERT\": \"I\", \"DELETE\": \"D\", \"SKIP\": \"N\", \"CLIP_SOFT\": \"S\", \"CLIP_HARD\": \"H\", \"PAD\": \"P\", \"SEQUENCE_MATCH\": \"=\", \"SEQUENCE_MISMATCH\": \"X\", } cigarStr = \"\" for c in read.alignment.cigar { cigarStr += c.operationLength + cigarMap[c.operation] } return cigarStr"
+    description: 'A read alignment describes a linear alignment of a string of DNA to a reference sequence, in addition to metadata about the fragment (the molecule of DNA sequenced) and the read (the bases which were read by the sequencer). A read is equivalent to a line in a SAM file. A read belongs to exactly one read group and exactly one read group set. For more genomics resource definitions, see [Fundamentals of Google Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics) ### Reverse-stranded reads Mapped reads (reads having a non-null `alignment`) can be aligned to either the forward or the reverse strand of their associated reference. Strandedness of a mapped read is encoded by `alignment.position.reverseStrand`. If we consider the reference to be a forward-stranded coordinate space of `[0, reference.length)` with `0` as the left-most position and `reference.length` as the right-most position, reads are always aligned left to right. That is, `alignment.position.position` always refers to the left-most reference coordinate and `alignment.cigar` describes the alignment of this read to the reference from left to right. All per-base fields such as `alignedSequence` and `alignedQuality` share this same left-to-right orientation; this is true of reads which are aligned to either strand. For reverse-stranded reads, this means that `alignedSequence` is the reverse complement of the bases that were originally reported by the sequencing machine. ### Generating a reference-aligned sequence string When interacting with mapped reads, it''s often useful to produce a string representing the local alignment of the read to reference. The following pseudocode demonstrates one way of doing this: out = "" offset = 0 for c in read.alignment.cigar { switch c.operation { case "ALIGNMENT_MATCH", "SEQUENCE_MATCH", "SEQUENCE_MISMATCH": out += read.alignedSequence[offset:offset+c.operationLength] offset += c.operationLength break case "CLIP_SOFT", "INSERT": offset += c.operationLength break case "PAD": out += repeat("*", c.operationLength) break case "DELETE": out += repeat("-", c.operationLength) break case "SKIP": out += repeat(" ", c.operationLength) break case "CLIP_HARD": break } } return out ### Converting to SAM''s CIGAR string The following pseudocode generates a SAM CIGAR string from the `cigar` field. Note that this is a lossy conversion (`cigar.referenceSequence` is lost). cigarMap = { "ALIGNMENT_MATCH": "M", "INSERT": "I", "DELETE": "D", "SKIP": "N", "CLIP_SOFT": "S", "CLIP_HARD": "H", "PAD": "P", "SEQUENCE_MATCH": "=", "SEQUENCE_MISMATCH": "X", } cigarStr = "" for c in read.alignment.cigar { cigarStr += c.operationLength + cigarMap[c.operation] } return cigarStr'
     properties:
       alignedQuality:
         description: 'The quality of the read sequence contained in this alignment record (equivalent to QUAL in SAM). `alignedSequence` and `alignedQuality` may be shorter than the full read sequence and quality. This will occur if the alignment is part of a chimeric alignment, or if the read was trimmed. When this occurs, the CIGAR for this read will begin/end with a hard clip operator that will indicate the length of the excised sequence.'
@@ -2683,7 +2683,7 @@ definitions:
         type: object
       nextMatePosition:
         $ref: '#/definitions/Position'
-        description: 'The mapping of the primary alignment of the `(readNumber+1)%numberReads` read in the fragment. It replaces mate position and mate strand in SAM.'
+        description: The mapping of the primary alignment of the `(readNumber+1)%numberReads` read in the fragment. It replaces mate position and mate strand in SAM.
       numberReads:
         description: The number of reads in the fragment (extension to SAM flag 0x1).
         format: int32
@@ -2692,7 +2692,7 @@ definitions:
         description: The orientation and the distance between reads from the fragment are consistent with the sequencing protocol (SAM flag 0x2).
         type: boolean
       readGroupId:
-        description: "The ID of the read group this read belongs to. A read belongs to exactly one read group. This is a server-generated ID which is distinct from SAM's RG tag (for that value, see ReadGroup.name)."
+        description: 'The ID of the read group this read belongs to. A read belongs to exactly one read group. This is a server-generated ID which is distinct from SAM''s RG tag (for that value, see ReadGroup.name).'
         type: string
       readGroupSetId:
         description: The ID of the read group set this read belongs to. A read belongs to exactly one read group set.
@@ -2709,7 +2709,7 @@ definitions:
         type: boolean
     type: object
   ReadGroup:
-    description: "A read group is all the data that's processed the same way by the sequencer."
+    description: A read group is all the data that's processed the same way by the sequencer.
     properties:
       datasetId:
         description: The dataset to which this read group belongs.
@@ -2785,7 +2785,7 @@ definitions:
         description: 'The server-generated reference ID, unique across all references.'
         type: string
       length:
-        description: "The length of this reference's sequence."
+        description: The length of this reference's sequence.
         format: int64
         type: string
       md5checksum:
@@ -2891,7 +2891,7 @@ definitions:
           $ref: '#/definitions/AnnotationSet'
         type: array
       nextPageToken:
-        description: "The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results."
+        description: 'The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren''t any additional results.'
         type: string
     type: object
   SearchAnnotationsRequest:
@@ -2931,7 +2931,7 @@ definitions:
           $ref: '#/definitions/Annotation'
         type: array
       nextPageToken:
-        description: "The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results."
+        description: 'The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren''t any additional results.'
         type: string
     type: object
   SearchCallSetsRequest:
@@ -2962,7 +2962,7 @@ definitions:
           $ref: '#/definitions/CallSet'
         type: array
       nextPageToken:
-        description: "The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results."
+        description: 'The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren''t any additional results.'
         type: string
     type: object
   SearchReadGroupSetsRequest:
@@ -2988,7 +2988,7 @@ definitions:
     description: The read group set search response.
     properties:
       nextPageToken:
-        description: "The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results."
+        description: 'The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren''t any additional results.'
         type: string
       readGroupSets:
         description: The list of matching read group sets.
@@ -3037,7 +3037,7 @@ definitions:
           $ref: '#/definitions/Read'
         type: array
       nextPageToken:
-        description: "The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results."
+        description: 'The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren''t any additional results.'
         type: string
     type: object
   SearchReferenceSetsRequest:
@@ -3066,7 +3066,7 @@ definitions:
   SearchReferenceSetsResponse:
     properties:
       nextPageToken:
-        description: "The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results."
+        description: 'The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren''t any additional results.'
         type: string
       referenceSets:
         description: The matching references sets.
@@ -3100,7 +3100,7 @@ definitions:
   SearchReferencesResponse:
     properties:
       nextPageToken:
-        description: "The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results."
+        description: 'The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren''t any additional results.'
         type: string
       references:
         description: The matching references.
@@ -3128,7 +3128,7 @@ definitions:
     description: The search variant sets response.
     properties:
       nextPageToken:
-        description: "The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results."
+        description: 'The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren''t any additional results.'
         type: string
       variantSets:
         description: The variant sets belonging to the requested dataset.
@@ -3140,7 +3140,7 @@ definitions:
     description: The variant search request.
     properties:
       callSetIds:
-        description: "Only return variant calls which belong to call sets with these ids. Leaving this blank returns all variant calls. If a variant has no calls belonging to any of these call sets, it won't be returned at all. Currently, variants with no calls from any call set will never be returned."
+        description: 'Only return variant calls which belong to call sets with these ids. Leaving this blank returns all variant calls. If a variant has no calls belonging to any of these call sets, it won''t be returned at all. Currently, variants with no calls from any call set will never be returned.'
         items:
           type: string
         type: array
@@ -3179,7 +3179,7 @@ definitions:
     description: The variant search response.
     properties:
       nextPageToken:
-        description: "The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren't any additional results."
+        description: 'The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results. This field will be empty if there aren''t any additional results.'
         type: string
       variants:
         description: The list of matching Variants.
@@ -3285,7 +3285,7 @@ definitions:
     description: Request message for `TestIamPermissions` method.
     properties:
       permissions:
-        description: "REQUIRED: The set of permissions to check for the 'resource'. Permissions with wildcards (such as '*' or 'storage.*') are not allowed. Allowed permissions are: * `genomics.datasets.create` * `genomics.datasets.delete` * `genomics.datasets.get` * `genomics.datasets.list` * `genomics.datasets.update` * `genomics.datasets.getIamPolicy` * `genomics.datasets.setIamPolicy`"
+        description: 'REQUIRED: The set of permissions to check for the ''resource''. Permissions with wildcards (such as ''*'' or ''storage.*'') are not allowed. Allowed permissions are: * `genomics.datasets.create` * `genomics.datasets.delete` * `genomics.datasets.get` * `genomics.datasets.list` * `genomics.datasets.update` * `genomics.datasets.getIamPolicy` * `genomics.datasets.setIamPolicy`'
         items:
           type: string
         type: array
@@ -3334,7 +3334,7 @@ definitions:
         format: int64
         type: string
       end:
-        description: "The end position (0-based) of this variant. This corresponds to the first base after the last base in the reference allele. So, the length of the reference allele is (end - start). This is useful for variants that don't explicitly give alternate bases, for example large deletions."
+        description: 'The end position (0-based) of this variant. This corresponds to the first base after the last base in the reference allele. So, the length of the reference allele is (end - start). This is useful for variants that don''t explicitly give alternate bases, for example large deletions.'
         format: int64
         type: string
       filter:
@@ -3424,7 +3424,7 @@ definitions:
           type: string
         type: array
       type:
-        description: "Type has been adapted from ClinVar's list of variant types."
+        description: Type has been adapted from ClinVar's list of variant types.
         enum:
           - TYPE_UNSPECIFIED
           - TYPE_OTHER
@@ -3464,7 +3464,7 @@ definitions:
         description: A map of additional variant call information. This must be of the form map (string key mapping to a list of string values).
         type: object
       phaseset:
-        description: "If this field is present, this variant call's genotype ordering implies the phase of the bases and is consistent with any other variant calls in the same reference sequence which have the same phaseset value. When importing data from VCF, if the genotype data was phased but no phase set was specified this field will be set to `*`."
+        description: 'If this field is present, this variant call''s genotype ordering implies the phase of the bases and is consistent with any other variant calls in the same reference sequence which have the same phaseset value. When importing data from VCF, if the genotype data was phased but no phase set was specified this field will be set to `*`.'
         type: string
     type: object
   VariantSet:
@@ -3487,7 +3487,7 @@ definitions:
           $ref: '#/definitions/ReferenceBound'
         type: array
       referenceSetId:
-        description: "The reference set to which the variant set is mapped. The reference set describes the alignment provenance of the variant set, while the `referenceBounds` describe the shape of the actual variant data. The reference set's reference names are a superset of those found in the `referenceBounds`. For example, given a variant set that is mapped to the GRCh38 reference set and contains a single variant on reference 'X', `referenceBounds` would contain only an entry for 'X', while the associated reference set enumerates all possible references: '1', '2', 'X', 'Y', 'MT', etc."
+        description: 'The reference set to which the variant set is mapped. The reference set describes the alignment provenance of the variant set, while the `referenceBounds` describe the shape of the actual variant data. The reference set''s reference names are a superset of those found in the `referenceBounds`. For example, given a variant set that is mapped to the GRCh38 reference set and contains a single variant on reference ''X'', `referenceBounds` would contain only an entry for ''X'', while the associated reference set enumerates all possible references: ''1'', ''2'', ''X'', ''Y'', ''MT'', etc.'
         type: string
     type: object
   VariantSetMetadata:

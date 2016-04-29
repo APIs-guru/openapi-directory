@@ -160,11 +160,11 @@ paths:
           minimum: 1
           name: maxResults
           type: integer
-        - description: "Destination user's profile ID."
+        - description: Destination user's profile ID.
           in: query
           name: newOwnerUserId
           type: string
-        - description: "Source user's profile ID."
+        - description: Source user's profile ID.
           in: query
           name: oldOwnerUserId
           type: string
@@ -252,7 +252,7 @@ definitions:
         description: Etag of the resource.
         type: string
       id:
-        description: "The application's ID."
+        description: The application's ID.
         format: int64
         type: string
       kind:
@@ -260,7 +260,7 @@ definitions:
         description: Identifies the resource as a DataTransfer Application Resource.
         type: string
       name:
-        description: "The application's name."
+        description: The application's name.
         type: string
       transferParams:
         description: The list of all possible transfer parameters for this application. These parameters can be used to select the data of the user in this application to be transfered.
@@ -272,7 +272,7 @@ definitions:
     description: Template to map fields of ApplicationDataTransfer resource.
     properties:
       applicationId:
-        description: "The application's ID."
+        description: The application's ID.
         format: int64
         type: string
       applicationTransferParams:
@@ -288,10 +288,10 @@ definitions:
     description: Template for application transfer parameters.
     properties:
       key:
-        description: "The type of the transfer parameter. eg: 'PRIVACY_LEVEL'"
+        description: 'The type of the transfer parameter. eg: ''PRIVACY_LEVEL'''
         type: string
       value:
-        description: "The value of the coressponding transfer parameter. eg: 'PRIVATE' or 'SHARED'"
+        description: 'The value of the coressponding transfer parameter. eg: ''PRIVATE'' or ''SHARED'''
         items:
           type: string
         type: array
@@ -327,7 +327,7 @@ definitions:
         description: ETag of the resource.
         type: string
       id:
-        description: "The transfer's ID (Read-only)."
+        description: The transfer's ID (Read-only).
         type: string
       kind:
         default: 'admin#datatransfer#DataTransfer'

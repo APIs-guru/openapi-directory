@@ -116,7 +116,7 @@ paths:
       tags:
         - Trainings
     post:
-      description: "Schedules a training of one or more sessions. The call requires a training's name, at least one start and end time, and optionally may include additional sessions, a description, additional organizers (presenters), and registration settings. You can only add organizers to a training if you have a multi-user account. Once a training has been created with this method, you can accept registrations to the training. Registration is for the entire training – all sessions. (The GoToTraining admin site enables you to create trainings that allow participants to register for individual sessions as well as automatically create weekly or monthly events.) Registration settings controls whether you allow web registration for this training, and whether a confirmation email is sent to the registrant following registration. Disabling the confirmation email is an API-only setting. If the user registers through the GoToTraining website, a confirmation email is sent. If the user is manually approved by the training administrator through the GoToTraining web site, the confirmation email is sent. It is recommended that you disable web registration if you disable confirmation emails. The response contains a trainingKey for the scheduled training."
+      description: 'Schedules a training of one or more sessions. The call requires a training''s name, at least one start and end time, and optionally may include additional sessions, a description, additional organizers (presenters), and registration settings. You can only add organizers to a training if you have a multi-user account. Once a training has been created with this method, you can accept registrations to the training. Registration is for the entire training – all sessions. (The GoToTraining admin site enables you to create trainings that allow participants to register for individual sessions as well as automatically create weekly or monthly events.) Registration settings controls whether you allow web registration for this training, and whether a confirmation email is sent to the registrant following registration. Disabling the confirmation email is an API-only setting. If the user registers through the GoToTraining website, a confirmation email is sent. If the user is manually approved by the training administrator through the GoToTraining web site, the confirmation email is sent. It is recommended that you disable web registration if you disable confirmation emails. The response contains a trainingKey for the scheduled training.'
       operationId: scheduleTraining
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -423,7 +423,7 @@ paths:
         - Trainings
   '/organizers/{organizerKey}/trainings/{trainingKey}/times':
     put:
-      description: " A request to update a scheduled training's start and end times. If the request contains \"notifyTrainers = true\" and \"notifyRegistrants = true\", both organizers and registrants are notified. The response provides the number of notified trainers and registrants."
+      description: ' A request to update a scheduled training''s start and end times. If the request contains "notifyTrainers = true" and "notifyRegistrants = true", both organizers and registrants are notified. The response provides the number of notified trainers and registrants.'
       operationId: updateTrainingTimes
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -620,10 +620,10 @@ definitions:
     description: Describes the attendee of a training session.
     properties:
       email:
-        description: "The attendee's email address"
+        description: The attendee's email address
         type: string
       givenName:
-        description: "The attendee's first name"
+        description: The attendee's first name
         type: string
       inSessionTimes:
         description: List of the parts of the training session the attendee joined
@@ -631,7 +631,7 @@ definitions:
           $ref: '#/definitions/Attendance'
         type: array
       surname:
-        description: "The attendee's surname"
+        description: The attendee's surname
         type: string
       timeInSession:
         description: The total time in minutes spent at all the parts of the training session the attendee joined
@@ -686,13 +686,13 @@ definitions:
         description: The email address of the training (co-)organizer
         type: string
       givenName:
-        description: "The (co-)organizer's first name"
+        description: The (co-)organizer's first name
         type: string
       organizerKey:
         description: The key of the training (co-)organizer
         type: string
       surname:
-        description: "The (co-)organizer's surname"
+        description: The (co-)organizer's surname
         type: string
     required:
       - organizerKey
@@ -740,7 +740,7 @@ definitions:
           $ref: '#/definitions/Recording'
         type: array
       trainingKey:
-        description: "The training's unique key"
+        description: The training's unique key
         format: int64
         type: integer
     required:
@@ -753,30 +753,30 @@ definitions:
         description: The URL where the confirmation for the registration can be found
         type: string
       email:
-        description: "The registrant's email address"
+        description: The registrant's email address
         type: string
       givenName:
-        description: "The registrant's first name"
+        description: The registrant's first name
         type: string
       joinUrl:
         description: The URL the registrant will use to join the training
         type: string
       registrantKey:
-        description: "The registrant's key"
+        description: The registrant's key
         type: string
       registrationDate:
         description: The date and time the registration took place
         format: date-time
         type: string
       status:
-        description: "The registrant's status"
+        description: The registrant's status
         enum:
           - WAITING
           - APPROVED
           - DENIED
         type: string
       surname:
-        description: "The registrant's surname"
+        description: The registrant's surname
         type: string
     required:
       - email
@@ -797,7 +797,7 @@ definitions:
         description: The URL the registrant will use to join the training
         type: string
       registrantKey:
-        description: "The registrant's key"
+        description: The registrant's key
         type: string
     required:
       - joinUrl
@@ -807,13 +807,13 @@ definitions:
     description: Details required to make a new training registration.
     properties:
       email:
-        description: "The registrant's email address"
+        description: The registrant's email address
         type: string
       givenName:
-        description: "The registrant's first name"
+        description: The registrant's first name
         type: string
       surname:
-        description: "The registrant's surname"
+        description: The registrant's surname
         type: string
     required:
       - email
@@ -873,10 +873,10 @@ definitions:
     description: Describes a scheduled training.
     properties:
       description:
-        description: "The training's description"
+        description: The training's description
         type: string
       name:
-        description: "The training's subject"
+        description: The training's subject
         type: string
       organizers:
         description: The list of (co-)organizers for the training
@@ -895,10 +895,10 @@ definitions:
           $ref: '#/definitions/DateTimeRange'
         type: array
       trainingId:
-        description: "The 9-digit training's ID"
+        description: The 9-digit training's ID
         type: string
       trainingKey:
-        description: "The training's unique key"
+        description: The training's unique key
         type: string
     required:
       - trainingId
@@ -910,13 +910,13 @@ definitions:
       - registrationSettings
       - trainingKey
   TrainingNameDescription:
-    description: "Details required to update a training's name and description."
+    description: Details required to update a training's name and description.
     properties:
       description:
-        description: "The training's description"
+        description: The training's description
         type: string
       name:
-        description: "The training's name"
+        description: The training's name
         type: string
     required:
       - name
@@ -924,7 +924,7 @@ definitions:
     description: Details required to update the list of organizers for a training.
     properties:
       notifyOrganizers:
-        description: "Specifies whether an email should be sent notifying of the change to the training's organizers."
+        description: Specifies whether an email should be sent notifying of the change to the training's organizers.
         type: boolean
       organizers:
         description: List of keys of the organizers for the training.

@@ -58,7 +58,7 @@ produces:
   - application/json
 securityDefinitions:
   jwtToken:
-    description: 'JWT token prefixed with "Bearer "'
+    description: JWT token prefixed with "Bearer "
     in: header
     name: Authorization
     type: apiKey
@@ -132,20 +132,20 @@ parameters:
     required: true
     type: integer
   itemType:
-    description: "Item to update. Can be either 'series', 'episode', or 'image'"
+    description: 'Item to update. Can be either ''series'', ''episode'', or ''image'''
     format: string
     in: path
     name: itemType
     required: true
     type: string
   itemTypeNR:
-    description: "Item to query. Can be either 'series', 'episode', or 'banner'"
+    description: 'Item to query. Can be either ''series'', ''episode'', or ''banner'''
     format: string
     in: query
     name: itemType
     type: string
   keyType:
-    description: "Type of image you're querying for (fanart, poster, etc. See ../images/query/params for more details)."
+    description: 'Type of image you''re querying for (fanart, poster, etc. See ../images/query/params for more details).'
     in: query
     name: keyType
     type: string

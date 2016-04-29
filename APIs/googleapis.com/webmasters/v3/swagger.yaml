@@ -81,7 +81,7 @@ tags:
 paths:
   /sites:
     get:
-      description: "Lists the user's Search Console sites."
+      description: Lists the user's Search Console sites.
       operationId: webmasters.sites.list
       responses:
         '200':
@@ -105,7 +105,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/sites/{siteUrl}':
     delete:
-      description: "Removes a site from the set of the user's Search Console sites."
+      description: Removes a site from the set of the user's Search Console sites.
       operationId: webmasters.sites.delete
       parameters:
         - description: 'The URI of the property as defined in Search Console. Examples: http://www.example.com/ or android-app://com.example/'
@@ -151,7 +151,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     put:
-      description: "Adds a site to the set of the user's sites in Search Console."
+      description: Adds a site to the set of the user's sites in Search Console.
       operationId: webmasters.sites.add
       parameters:
         - description: The URL of the site to add.
@@ -183,7 +183,7 @@ paths:
         When date is one of the group by values, any days without data are omitted from the result list. If you need to know which days have data, issue a broad date range query grouped by date for any metric, and see which day rows are returned.
       operationId: webmasters.searchanalytics.query
       parameters:
-        - description: "The site's URL, including protocol. For example: http://www.example.com/"
+        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
           in: path
           name: siteUrl
           required: true
@@ -209,12 +209,12 @@ paths:
       description: 'Lists the sitemaps-entries submitted for this site, or included in the sitemap index file (if sitemapIndex is specified in the request).'
       operationId: webmasters.sitemaps.list
       parameters:
-        - description: "The site's URL, including protocol. For example: http://www.example.com/"
+        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
           in: path
           name: siteUrl
           required: true
           type: string
-        - description: "A URL of a site's sitemap index. For example: http://www.example.com/sitemapindex.xml"
+        - description: 'A URL of a site''s sitemap index. For example: http://www.example.com/sitemapindex.xml'
           in: query
           name: sitemapIndex
           type: string
@@ -243,7 +243,7 @@ paths:
       description: Deletes a sitemap from this site.
       operationId: webmasters.sitemaps.delete
       parameters:
-        - description: "The site's URL, including protocol. For example: http://www.example.com/"
+        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
           in: path
           name: siteUrl
           required: true
@@ -265,7 +265,7 @@ paths:
       description: Retrieves information about a specific sitemap.
       operationId: webmasters.sitemaps.get
       parameters:
-        - description: "The site's URL, including protocol. For example: http://www.example.com/"
+        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
           in: path
           name: siteUrl
           required: true
@@ -299,7 +299,7 @@ paths:
       description: Submits a sitemap for a site.
       operationId: webmasters.sitemaps.submit
       parameters:
-        - description: "The site's URL, including protocol. For example: http://www.example.com/"
+        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
           in: path
           name: siteUrl
           required: true
@@ -322,7 +322,7 @@ paths:
       description: Retrieves a time series of the number of URL crawl errors per error category and platform.
       operationId: webmasters.urlcrawlerrorscounts.query
       parameters:
-        - description: "The site's URL, including protocol. For example: http://www.example.com/"
+        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
           in: path
           name: siteUrl
           required: true
@@ -376,10 +376,10 @@ paths:
       - $ref: '#/parameters/userIp'
   '/sites/{siteUrl}/urlCrawlErrorsSamples':
     get:
-      description: "Lists a site's sample URLs for the specified crawl error category and platform."
+      description: Lists a site's sample URLs for the specified crawl error category and platform.
       operationId: webmasters.urlcrawlerrorssamples.list
       parameters:
-        - description: "The site's URL, including protocol. For example: http://www.example.com/"
+        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
           in: path
           name: siteUrl
           required: true
@@ -430,10 +430,10 @@ paths:
       - $ref: '#/parameters/userIp'
   '/sites/{siteUrl}/urlCrawlErrorsSamples/{url}':
     delete:
-      description: "Marks the provided site's sample URL as fixed, and removes it from the samples list."
+      description: 'Marks the provided site''s sample URL as fixed, and removes it from the samples list.'
       operationId: webmasters.urlcrawlerrorssamples.markAsFixed
       parameters:
-        - description: "The site's URL, including protocol. For example: http://www.example.com/"
+        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
           in: path
           name: siteUrl
           required: true
@@ -476,10 +476,10 @@ paths:
       tags:
         - urlcrawlerrorssamples
     get:
-      description: "Retrieves details about crawl errors for a site's sample URL."
+      description: Retrieves details about crawl errors for a site's sample URL.
       operationId: webmasters.urlcrawlerrorssamples.get
       parameters:
-        - description: "The site's URL, including protocol. For example: http://www.example.com/"
+        - description: 'The site''s URL, including protocol. For example: http://www.example.com/'
           in: path
           name: siteUrl
           required: true
@@ -582,7 +582,7 @@ definitions:
           If you specify any value other than AUTO, the aggregation type in the result will match the requested type, or if you request an invalid type, you will get an error. The API will never change your aggregation type if the requested type is invalid.
         type: string
       dimensionFilterGroups:
-        description: "[Optional] Zero or more filters to apply to the dimension grouping values; for example, 'query contains \"buy\"' to see only data where the query string contains the substring \"buy\" (not case-sensitive). You can filter by a dimension without grouping by it."
+        description: '[Optional] Zero or more filters to apply to the dimension grouping values; for example, ''query contains "buy"'' to see only data where the query string contains the substring "buy" (not case-sensitive). You can filter by a dimension without grouping by it.'
         items:
           $ref: '#/definitions/ApiDimensionFilterGroup'
         type: array
@@ -724,7 +724,7 @@ definitions:
     description: 'Contains permission level information about a Search Console site. For more information, see  Permissions in Search Console.'
     properties:
       permissionLevel:
-        description: "The user's permission level for the site."
+        description: The user's permission level for the site.
         type: string
       siteUrl:
         description: The URL of the site.
@@ -749,11 +749,11 @@ definitions:
         description: 'If true, the sitemap is a collection of sitemaps.'
         type: boolean
       lastDownloaded:
-        description: 'Date & time in which this sitemap was last downloaded. Date format is in RFC 3339 format (yyyy-mm-dd).'
+        description: Date & time in which this sitemap was last downloaded. Date format is in RFC 3339 format (yyyy-mm-dd).
         format: date-time
         type: string
       lastSubmitted:
-        description: 'Date & time in which this sitemap was submitted. Date format is in RFC 3339 format (yyyy-mm-dd).'
+        description: Date & time in which this sitemap was submitted. Date format is in RFC 3339 format (yyyy-mm-dd).
         format: date-time
         type: string
       path:

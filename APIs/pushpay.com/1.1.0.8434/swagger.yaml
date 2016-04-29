@@ -29,10 +29,10 @@ securityDefinitions:
       'merchant:make_ach_payment': Make ACH Payment
       'merchant:make_card_payment': Make Card Payment
       'merchant:make_cash_payment': Make Cash Payment
-      'merchant:manage_community_members': "Manage members in a merchant's community"
+      'merchant:manage_community_members': Manage members in a merchant's community
       'merchant:manage_recurring_payment': 'Manage Recurring Payment (Pause, Resume, Cancel)'
       'merchant:upload_file': Upload arbitrary files to our storage
-      'merchant:view_community_members': "List payers in a merchant's community"
+      'merchant:view_community_members': List payers in a merchant's community
       'merchant:view_payments': View/search payments for in-scope merchants
       'merchant:view_recurring_payments': View/search recurring payments for in-scope merchants
       read: Read-only access to resources owned by the subject claim of the token
@@ -50,16 +50,16 @@ securityDefinitions:
       'merchant:make_ach_payment': Make ACH Payment
       'merchant:make_card_payment': Make Card Payment
       'merchant:make_cash_payment': Make Cash Payment
-      'merchant:manage_community_members': "Manage members in a merchant's community"
+      'merchant:manage_community_members': Manage members in a merchant's community
       'merchant:manage_recurring_payment': 'Manage Recurring Payment (Pause, Resume, Cancel)'
       'merchant:upload_file': Upload arbitrary files to our storage
-      'merchant:view_community_members': "List payers in a merchant's community"
+      'merchant:view_community_members': List payers in a merchant's community
       'merchant:view_payments': View/search payments for in-scope merchants
       'merchant:view_recurring_payments': View/search recurring payments for in-scope merchants
       read: Read-only access to resources owned by the subject claim of the token
     type: oauth2
 tags:
-  - description: "The API for viewing & querying a merchant's community of payers"
+  - description: The API for viewing & querying a merchant's community of payers
     name: community
   - description: Supporting API for diagnostics and testing of the platform
     name: diagnostics
@@ -71,7 +71,7 @@ tags:
     name: meta
   - description: The API for managing payments in the pushpay playform (including anticipated payments)
     name: payments
-  - description: 'The API for viewing & querying settlement information'
+  - description: The API for viewing & querying settlement information
     name: settlements
 paths:
   /swagger:
@@ -112,7 +112,7 @@ paths:
         - meta
   '/v1/anticipatedpayment/{token}':
     delete:
-      description: "Deleting an anticipated payment will only work if the payment exists and the Status is 'Unassociated'."
+      description: Deleting an anticipated payment will only work if the payment exists and the Status is 'Unassociated'.
       parameters:
         - description: The textual token that uniquely identifies the anticipated payment
           in: path
@@ -390,7 +390,7 @@ paths:
           name: filterBy
           required: false
           type: string
-        - description: "Order data by a particular property in ascending or descending order.  Uses format 'PropertyName ASC' or 'PropertyName DESC'"
+        - description: Order data by a particular property in ascending or descending order.  Uses format 'PropertyName ASC' or 'PropertyName DESC'
           in: query
           name: orderBy
           required: false
@@ -419,7 +419,7 @@ paths:
             - 'merchant:view_community_members'
         - oauth2_implicit:
             - 'merchant:view_community_members'
-      summary: "Retrieve the set of payers in a merchant's community"
+      summary: Retrieve the set of payers in a merchant's community
       tags:
         - community
     patch:
@@ -460,7 +460,7 @@ paths:
         - community
   '/v1/merchant/{merchantKey}/community/{memberKey}':
     get:
-      description: "Retrieves the details of specific payer in a merchant's community"
+      description: Retrieves the details of specific payer in a merchant's community
       parameters:
         - description: The unique key of the merchant
           in: path
@@ -497,7 +497,7 @@ paths:
       consumes:
         - application/hal+json
         - application/json
-      description: "Updates the details of specific member in a merchant's community"
+      description: Updates the details of specific member in a merchant's community
       parameters:
         - description: The unique key of the merchant
           in: path
@@ -615,7 +615,7 @@ paths:
           name: updatedTo
           required: false
           type: string
-        - description: "Order data by a particular property in ascending or descending order.  Uses format 'PropertyName ASC' or 'PropertyName DESC'"
+        - description: Order data by a particular property in ascending or descending order.  Uses format 'PropertyName ASC' or 'PropertyName DESC'
           in: query
           name: orderby
           required: false
@@ -641,7 +641,7 @@ paths:
           name: status
           required: false
           type: string
-        - description: "Only include payments that contain a specified value within a custom field. Uses format 'fields[FieldNumber]'"
+        - description: 'Only include payments that contain a specified value within a custom field. Uses format ''fields[FieldNumber]'''
           in: query
           items:
             type: string
@@ -723,7 +723,7 @@ paths:
           name: updatedTo
           required: false
           type: string
-        - description: "Order data by a particular property in ascending or descending order.  Uses format 'PropertyName ASC' or 'PropertyName DESC'"
+        - description: Order data by a particular property in ascending or descending order.  Uses format 'PropertyName ASC' or 'PropertyName DESC'
           in: query
           name: orderby
           required: false
@@ -749,7 +749,7 @@ paths:
           name: status
           required: false
           type: string
-        - description: "Only include payments that contain a specified value within a custom field. Uses format 'fields[FieldNumber]'"
+        - description: 'Only include payments that contain a specified value within a custom field. Uses format ''fields[FieldNumber]'''
           in: query
           items:
             type: string
@@ -819,7 +819,7 @@ paths:
         - oauth2_implicit:
             - 'merchant:view_recurring_payments'
             - read
-      summary: "Get a person's recurring payment"
+      summary: Get a person's recurring payment
       tags:
         - payments
   '/v1/merchant/{merchantKey}/recurringpayments':
@@ -867,7 +867,7 @@ paths:
           name: status
           required: true
           type: array
-        - description: "Order data by a particular property in ascending or descending order.  Uses format 'PropertyName ASC' or 'PropertyName DESC'"
+        - description: Order data by a particular property in ascending or descending order.  Uses format 'PropertyName ASC' or 'PropertyName DESC'
           in: query
           name: orderBy
           required: false
@@ -901,14 +901,14 @@ paths:
         - payments
   '/v1/merchant/{merchantKey}/settlements':
     get:
-      description: 'Retrieves all settlements that belong to the in scope merchant & which pass the specified filters'
+      description: Retrieves all settlements that belong to the in scope merchant & which pass the specified filters
       parameters:
         - description: The unique key of the merchant - it is case-sensitive series of characters
           in: path
           name: merchantKey
           required: true
           type: string
-        - description: "Order data by a particular property in ascending or descending order.  Uses format 'PropertyName ASC' or 'PropertyName DESC'"
+        - description: Order data by a particular property in ascending or descending order.  Uses format 'PropertyName ASC' or 'PropertyName DESC'
           in: query
           name: orderBy
           required: false
@@ -1004,7 +1004,7 @@ paths:
       tags:
         - merchants
     get:
-      description: "This operation requires that the OAuth2 bearer token include a 'sub' (subject) claim."
+      description: This operation requires that the OAuth2 bearer token include a 'sub' (subject) claim.
       parameters:
         - description: The unique key of the merchant
           in: path
@@ -1041,7 +1041,7 @@ paths:
       consumes:
         - application/hal+json
         - application/json
-      description: "This operation requires that the OAuth2 bearer token include a 'sub' (subject) claim."
+      description: This operation requires that the OAuth2 bearer token include a 'sub' (subject) claim.
       parameters:
         - description: The unique key of the merchant
           in: path
@@ -1081,7 +1081,7 @@ paths:
         - merchants
   '/v1/merchant/{merchantKey}/webhooks':
     get:
-      description: "This operation requires that the OAuth2 bearer token include a 'sub' (subject) claim."
+      description: This operation requires that the OAuth2 bearer token include a 'sub' (subject) claim.
       parameters:
         - description: The unique key of the merchant
           in: path
@@ -1113,7 +1113,7 @@ paths:
       consumes:
         - application/hal+json
         - application/json
-      description: "This operation requires that the OAuth2 bearer token include a 'sub' (subject) claim."
+      description: This operation requires that the OAuth2 bearer token include a 'sub' (subject) claim.
       parameters:
         - description: The unique key of the merchant
           in: path
@@ -1155,7 +1155,7 @@ paths:
           name: name
           required: false
           type: string
-        - description: "The unique text 'handle' assigned to the merchant"
+        - description: The unique text 'handle' assigned to the merchant
           in: query
           name: handle
           required: false
@@ -1234,7 +1234,7 @@ paths:
           name: name
           required: false
           type: string
-        - description: "The unique text 'handle' assigned to the merchant"
+        - description: The unique text 'handle' assigned to the merchant
           in: query
           name: handle
           required: false
@@ -1418,7 +1418,7 @@ paths:
         - merchants
   /v1/my/payments:
     get:
-      description: "This operation requires that the OAuth2 bearer token include a 'sub' (subject) claim."
+      description: This operation requires that the OAuth2 bearer token include a 'sub' (subject) claim.
       parameters:
         - description: Only include payments after a date/time (UTC)
           format: date-time
@@ -1456,7 +1456,7 @@ paths:
           name: updatedTo
           required: false
           type: string
-        - description: "Order data by a particular property in ascending or descending order.  Uses format 'PropertyName ASC' or 'PropertyName DESC'"
+        - description: Order data by a particular property in ascending or descending order.  Uses format 'PropertyName ASC' or 'PropertyName DESC'
           in: query
           name: orderby
           required: false
@@ -1482,7 +1482,7 @@ paths:
           name: status
           required: false
           type: string
-        - description: "Only include payments that contain a specified value within a custom field. Uses format 'fields[FieldNumber]'"
+        - description: 'Only include payments that contain a specified value within a custom field. Uses format ''fields[FieldNumber]'''
           in: query
           items:
             type: string
@@ -1518,7 +1518,7 @@ paths:
         - payments
   '/v1/paymentmethod/{key}':
     get:
-      description: "This operation requires that the OAuth2 bearer token include a 'sub' (subject) claim."
+      description: This operation requires that the OAuth2 bearer token include a 'sub' (subject) claim.
       parameters:
         - description: 'The unique index of the payment method (Note: payment method indexes are only unique per pushpayer)'
           format: int32
@@ -1549,7 +1549,7 @@ paths:
         - payments
   /v1/paymentmethods:
     get:
-      description: "This operation requires that the OAuth2 bearer token include a 'sub' (subject) claim."
+      description: This operation requires that the OAuth2 bearer token include a 'sub' (subject) claim.
       produces:
         - application/hal+json
       responses:
@@ -1613,7 +1613,7 @@ paths:
           name: status
           required: true
           type: array
-        - description: "Order data by a particular property in ascending or descending order.  Uses format 'PropertyName ASC' or 'PropertyName DESC'"
+        - description: Order data by a particular property in ascending or descending order.  Uses format 'PropertyName ASC' or 'PropertyName DESC'
           in: query
           name: orderBy
           required: false
@@ -1712,9 +1712,9 @@ paths:
         - settlements
   /v1/settlements:
     get:
-      description: 'Retrieves settlements from all merchants that are in scope & which pass the specified filters'
+      description: Retrieves settlements from all merchants that are in scope & which pass the specified filters
       parameters:
-        - description: "Order data by a particular property in ascending or descending order.  Uses format 'PropertyName ASC' or 'PropertyName DESC'"
+        - description: Order data by a particular property in ascending or descending order.  Uses format 'PropertyName ASC' or 'PropertyName DESC'
           in: query
           name: orderBy
           required: false

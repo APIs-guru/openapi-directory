@@ -488,13 +488,16 @@ definitions:
         format: int64
         type: string
       channel:
-        description: "Sales channel for the product. Acceptable values are:  \n- \"local\": a physical store \n- \"online\": an online store"
+        description: |-
+          Sales channel for the product. Acceptable values are:  
+          - "local": a physical store 
+          - "online": an online store
         type: string
       clickId:
         description: DS click ID for the conversion.
         type: string
       conversionId:
-        description: "For offline conversions, this is an ID that advertisers are required to provide. Advertisers can specify any ID that is meaningful to them. For online conversions, DS copies the dsConversionId or floodlightOrderId into this property depending on the advertiser's Floodlight instructions."
+        description: 'For offline conversions, this is an ID that advertisers are required to provide. Advertisers can specify any ID that is meaningful to them. For online conversions, DS copies the dsConversionId or floodlightOrderId into this property depending on the advertiser''s Floodlight instructions.'
         type: string
       conversionModifiedTimestamp:
         description: 'The time at which the conversion was last modified, in epoch millis UTC.'
@@ -513,7 +516,7 @@ definitions:
         format: int64
         type: string
       currencyCode:
-        description: "The currency code for the conversion's revenue. Should be in ISO 4217 alphabetic (3-char) format."
+        description: The currency code for the conversion's revenue. Should be in ISO 4217 alphabetic (3-char) format.
         type: string
       customDimension:
         description: 'Custom dimensions for the conversion, which can be used to filter data in a report.'
@@ -578,7 +581,7 @@ definitions:
         description: 'The state of the conversion, that is, either ACTIVE or REMOVED. Note: state DELETED is deprecated.'
         type: string
       storeId:
-        description: 'The ID of the local store for which the product was advertised. Applicable only when the channel is "local".'
+        description: The ID of the local store for which the product was advertised. Applicable only when the channel is "local".
         type: string
       type:
         description: 'The type of the conversion, that is, either ACTION or TRANSACTION. An ACTION conversion is an action by the user that has no monetarily quantifiable value, while a TRANSACTION conversion is an action that does have a monetarily quantifiable value. Examples are email list signups (ACTION) versus ecommerce purchases (TRANSACTION).'
@@ -688,10 +691,13 @@ definitions:
         description: Text used to identify this column in the report output; defaults to columnName or savedColumnName when not specified. This can be used to prevent collisions between DoubleClick Search columns and saved columns with the same name.
         type: string
       platformSource:
-        description: 'The platform that is used to provide data for the custom dimension. Acceptable values are "floodlight".'
+        description: The platform that is used to provide data for the custom dimension. Acceptable values are "floodlight".
         type: string
       productReportPerspective:
-        description: "Returns metrics only for a specific type of product activity. Accepted values are:  \n- \"sold\": returns metrics only for products that were sold \n- \"advertised\": returns metrics only for products that were advertised in a Shopping campaign, and that might or might not have been sold"
+        description: |-
+          Returns metrics only for a specific type of product activity. Accepted values are:  
+          - "sold": returns metrics only for products that were sold 
+          - "advertised": returns metrics only for products that were advertised in a Shopping campaign, and that might or might not have been sold
         type: string
       savedColumnName:
         description: 'Name of a saved column to include in the report. The report must be scoped at advertiser or lower, and this saved column must already be created in the DoubleClick Search UI.'
@@ -848,7 +854,7 @@ definitions:
         type: string
     type: object
   SavedColumnList:
-    description: "A list of saved columns. Advertisers create saved columns to report on Floodlight activities, Google Analytics goals, or custom KPIs. To request reports with saved columns, you'll need the saved column names that are available from this list."
+    description: 'A list of saved columns. Advertisers create saved columns to report on Floodlight activities, Google Analytics goals, or custom KPIs. To request reports with saved columns, you''ll need the saved column names that are available from this list.'
     properties:
       items:
         description: The saved columns being requested.

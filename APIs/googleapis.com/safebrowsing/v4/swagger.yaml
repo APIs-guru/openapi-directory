@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: "The Safe Browsing APIs enable client applications to check web resources (most commonly URLs) against Google's constantly updated lists of unsafe web resources."
+  description: The Safe Browsing APIs enable client applications to check web resources (most commonly URLs) against Google's constantly updated lists of unsafe web resources.
   title: Safe Browsing APIs
   version: v4
   x-apiClientRegistration:
@@ -215,7 +215,7 @@ paths:
         - threatMatches
 definitions:
   Checksum:
-    description: "The expected state of a client's local database."
+    description: The expected state of a client's local database.
     properties:
       sha256:
         description: 'The SHA256 hash of the client state; that is, of the sorted list of all hashes present in the database.'
@@ -244,7 +244,7 @@ definitions:
         format: int32
         type: integer
       region:
-        description: "Requests the list for a specific geographic location. If not set the server may pick that value based on the user's IP address. Expects ISO 3166-1 alpha-2 format."
+        description: Requests the list for a specific geographic location. If not set the server may pick that value based on the user's IP address. Expects ISO 3166-1 alpha-2 format.
         type: string
       supportedCompressions:
         description: The compression types supported by the client.
@@ -287,7 +287,7 @@ definitions:
         $ref: '#/definitions/ClientInfo'
         description: The client metadata.
       clientStates:
-        description: "The current client states for each of the client's local threat lists."
+        description: The current client states for each of the client's local threat lists.
         items:
           format: byte
           type: string
@@ -384,13 +384,13 @@ definitions:
     description: An update to an individual list.
     properties:
       additions:
-        description: "A set of entries to add to a local threat type's list. Repeated to allow for a combination of compressed and raw data to be sent in a single response."
+        description: A set of entries to add to a local threat type's list. Repeated to allow for a combination of compressed and raw data to be sent in a single response.
         items:
           $ref: '#/definitions/ThreatEntrySet'
         type: array
       checksum:
         $ref: '#/definitions/Checksum'
-        description: "The expected SHA256 hash of the client state; that is, of the sorted list of all hashes present in the database after applying the provided update. If the client state doesn't match the expected state, the client must disregard this update and retry later."
+        description: 'The expected SHA256 hash of the client state; that is, of the sorted list of all hashes present in the database after applying the provided update. If the client state doesn''t match the expected state, the client must disregard this update and retry later.'
       newClientState:
         description: 'The new client state, in encrypted format. Opaque to clients.'
         format: byte
@@ -409,7 +409,7 @@ definitions:
           - CHROME
         type: string
       removals:
-        description: "A set of entries to remove from a local threat type's list. Repeated for the same reason as above."
+        description: A set of entries to remove from a local threat type's list. Repeated for the same reason as above.
         items:
           $ref: '#/definitions/ThreatEntrySet'
         type: array
@@ -480,7 +480,7 @@ definitions:
         format: byte
         type: string
       firstValue:
-        description: "The offset of the first entry in the encoded data, or, if only a single integer was encoded, that single integer's value."
+        description: 'The offset of the first entry in the encoded data, or, if only a single integer was encoded, that single integer''s value.'
         format: int64
         type: string
       numEntries:
@@ -513,7 +513,7 @@ definitions:
         type: array
     type: object
   ThreatEntrySet:
-    description: "A set of threats that should be added or removed from a client's local database."
+    description: A set of threats that should be added or removed from a client's local database.
     properties:
       compressionType:
         description: The compression type for the entries in this set.
@@ -584,7 +584,7 @@ definitions:
     description: 'Describes an individual threat list. A list is defined by three parameters: the type of threat posed, the type of platform targeted by the threat, and the type of entries in the list.'
     properties:
       platformType:
-        description: "The platform type targeted by the list's entries."
+        description: The platform type targeted by the list's entries.
         enum:
           - PLATFORM_TYPE_UNSPECIFIED
           - WINDOWS
@@ -605,7 +605,7 @@ definitions:
           - IP_RANGE
         type: string
       threatType:
-        description: "The threat type posed by the list's entries."
+        description: The threat type posed by the list's entries.
         enum:
           - THREAT_TYPE_UNSPECIFIED
           - MALWARE

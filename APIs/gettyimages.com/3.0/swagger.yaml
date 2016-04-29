@@ -4,7 +4,7 @@ schemes:
 host: api.gettyimages.com
 basePath: /
 info:
-  description: "Build applications using the world's most powerful imagery"
+  description: Build applications using the world's most powerful imagery
   title: Getty Images
   version: '3.0'
   x-logo:
@@ -200,7 +200,7 @@ paths:
             $ref: '#/definitions/board_list'
         '401':
           description: Unauthorized
-      summary: '<b>***BETA***</b> Returns a list of boards for the authenticated user.'
+      summary: <b>***BETA***</b> Returns a list of boards for the authenticated user.
       tags:
         - Boards
   '/v3/boards/{board_id}':
@@ -234,7 +234,7 @@ paths:
           description: Unauthorized
         '404':
           description: BoardNotFound
-      summary: '<b>***BETA***</b> Returns metadata for a specific board given its id.'
+      summary: <b>***BETA***</b> Returns metadata for a specific board given its id.
       tags:
         - Boards
   '/v3/boards/{board_id}/assets/{asset_id}':
@@ -253,7 +253,7 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: "Id of the asset to add. If it is already in the board's asset collection, no action taken."
+        - description: 'Id of the asset to add. If it is already in the board''s asset collection, no action taken.'
           in: path
           name: asset_id
           required: true
@@ -279,14 +279,14 @@ paths:
           description: asset not found
         '404':
           description: BoardNotFound
-      summary: '<b>***BETA***</b> Adds asset to board.'
+      summary: <b>***BETA***</b> Adds asset to board.
       tags:
         - Boards
   /v3/collections:
     get:
       consumes: []
       parameters:
-        - description: "Provide access token in the format of 'Bearer: {token}'."
+        - description: 'Provide access token in the format of ''Bearer: {token}''.'
           in: header
           name: Authorization
           required: true
@@ -318,7 +318,7 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: "Provide access token in the format of 'Bearer: {token}'."
+        - description: 'Provide access token in the format of ''Bearer: {token}''.'
           in: header
           name: Authorization
           required: false
@@ -340,7 +340,7 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: "Provide access token in the format of 'Bearer: {token}'."
+        - description: 'Provide access token in the format of ''Bearer: {token}''.'
           in: header
           name: Authorization
           required: true
@@ -394,7 +394,7 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
-      summary: "Returns information about a customer's downloaded assets."
+      summary: Returns information about a customer's downloaded assets.
       tags:
         - Downloads
   '/v3/downloads/images/{id}':
@@ -410,7 +410,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PremiumAccessDownloadData'
-        - description: "Provide access token in the format of 'Bearer: {token}'."
+        - description: 'Provide access token in the format of ''Bearer: {token}''.'
           in: header
           name: Authorization
           required: true
@@ -477,7 +477,7 @@ paths:
       consumes: []
       description: "The single step download call returns either a redirect or a response message with the URI to download the largest\r\n                video available.\r\n                Returns HTTP status code 303 Redirect to download URI or HTTP status code 200."
       parameters:
-        - description: "Provide access token in the format of 'Bearer: {token}'."
+        - description: 'Provide access token in the format of ''Bearer: {token}''.'
           in: header
           name: Authorization
           required: true
@@ -527,7 +527,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PremiumAccessDownloadData'
-        - description: "Provide access token in the format of 'Bearer: {token}'."
+        - description: 'Provide access token in the format of ''Bearer: {token}''.'
           in: header
           name: Authorization
           required: true
@@ -599,7 +599,7 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: "Provide access token in the format of 'Bearer: {token}'."
+        - description: 'Provide access token in the format of ''Bearer: {token}''.'
           in: header
           name: Authorization
           required: false
@@ -666,7 +666,7 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: "Provide access token in the format of 'Bearer: {token}'."
+        - description: 'Provide access token in the format of ''Bearer: {token}''.'
           in: header
           name: Authorization
           required: false
@@ -730,7 +730,7 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: "Provide access token in the format of 'Bearer: {token}'."
+        - description: 'Provide access token in the format of ''Bearer: {token}''.'
           in: header
           name: Authorization
           required: false
@@ -742,7 +742,7 @@ paths:
           name: ids
           required: true
           type: array
-        - description: "Specifies fields to return. Defaults to 'summary_set'."
+        - description: Specifies fields to return. Defaults to 'summary_set'.
           enum:
             - allowed_use
             - alternative_ids
@@ -869,7 +869,7 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: "Provide access token in the format of 'Bearer: {token}'."
+        - description: 'Provide access token in the format of ''Bearer: {token}''.'
           in: header
           name: Authorization
           required: false
@@ -879,7 +879,7 @@ paths:
           name: id
           required: true
           type: string
-        - description: "Specifies fields to return. Defaults to 'summary_set'."
+        - description: Specifies fields to return. Defaults to 'summary_set'.
           enum:
             - allowed_use
             - alternative_ids
@@ -1006,7 +1006,7 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: "Provide access token in the format of 'Bearer: {token}'."
+        - description: 'Provide access token in the format of ''Bearer: {token}''.'
           in: header
           name: Authorization
           required: false
@@ -1016,7 +1016,7 @@ paths:
           name: id
           required: true
           type: string
-        - description: "Specifies fields to return. Defaults to 'summary_set'."
+        - description: Specifies fields to return. Defaults to 'summary_set'.
           enum:
             - accessrestriction
             - allowed_use
@@ -1134,7 +1134,7 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: "Provide access token in the format of 'Bearer: {token}'."
+        - description: 'Provide access token in the format of ''Bearer: {token}''.'
           in: header
           name: Authorization
           required: true
@@ -1174,7 +1174,7 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: "Provide access token in the format of 'Bearer: {token}'."
+        - description: 'Provide access token in the format of ''Bearer: {token}''.'
           in: header
           name: Authorization
           required: true
@@ -1220,7 +1220,7 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: "Provide access token in the format of 'Bearer: {token}'."
+        - description: 'Provide access token in the format of ''Bearer: {token}''.'
           in: header
           name: Authorization
           required: true
@@ -1271,7 +1271,7 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: "Provide access token in the format of 'Bearer: {token}'."
+        - description: 'Provide access token in the format of ''Bearer: {token}''.'
           in: header
           name: Authorization
           required: false
@@ -1300,7 +1300,7 @@ paths:
           name: date_to
           required: false
           type: string
-        - description: "Specifies fields to return. Default set is 'id','name','start_date'."
+        - description: 'Specifies fields to return. Default set is ''id'',''name'',''start_date''.'
           enum:
             - id
             - child_event_count
@@ -1353,7 +1353,7 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: "Provide access token in the format of 'Bearer: {token}'."
+        - description: 'Provide access token in the format of ''Bearer: {token}''.'
           in: header
           name: Authorization
           required: false
@@ -1561,7 +1561,7 @@ paths:
           name: exclude_nudity
           required: false
           type: boolean
-        - description: "Specifies fields to return. Defaults to 'summary_set'."
+        - description: Specifies fields to return. Defaults to 'summary_set'.
           enum:
             - accessrestriction
             - allowed_use
@@ -1816,7 +1816,7 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: "Provide access token in the format of 'Bearer: {token}'."
+        - description: 'Provide access token in the format of ''Bearer: {token}''.'
           in: header
           name: Authorization
           required: false
@@ -2016,7 +2016,7 @@ paths:
           name: exclude_nudity
           required: false
           type: boolean
-        - description: "Specifies fields to return. Defaults to 'summary_set'."
+        - description: Specifies fields to return. Defaults to 'summary_set'.
           enum:
             - allowed_use
             - alternative_ids
@@ -2254,7 +2254,7 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: "Provide access token in the format of 'Bearer: {token}'."
+        - description: 'Provide access token in the format of ''Bearer: {token}''.'
           in: header
           name: Authorization
           required: false
@@ -2502,7 +2502,7 @@ paths:
           name: exclude_nudity
           required: false
           type: boolean
-        - description: "Specifies fields to return. Defaults to 'summary_set'."
+        - description: Specifies fields to return. Defaults to 'summary_set'.
           enum:
             - allowed_use
             - alternative_ids
@@ -2734,7 +2734,7 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: "Provide access token in the format of 'Bearer: {token}'."
+        - description: 'Provide access token in the format of ''Bearer: {token}''.'
           in: header
           name: Authorization
           required: false
@@ -2852,7 +2852,7 @@ paths:
           name: exclude_nudity
           required: false
           type: boolean
-        - description: "Specifies fields to return. Defaults to 'summary_set'."
+        - description: Specifies fields to return. Defaults to 'summary_set'.
           enum:
             - allowed_use
             - artist
@@ -2995,7 +2995,7 @@ paths:
           name: sort_order
           required: false
           type: string
-        - description: "Provides filtering by specific peoples' names."
+        - description: Provides filtering by specific peoples' names.
           in: query
           items:
             type: string
@@ -3028,7 +3028,7 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: "Provide access token in the format of 'Bearer: {token}'."
+        - description: 'Provide access token in the format of ''Bearer: {token}''.'
           in: header
           name: Authorization
           required: false
@@ -3146,7 +3146,7 @@ paths:
           name: exclude_nudity
           required: false
           type: boolean
-        - description: "Specifies fields to return. Defaults to 'summary_set'."
+        - description: Specifies fields to return. Defaults to 'summary_set'.
           enum:
             - allowed_use
             - artist
@@ -3311,7 +3311,7 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: "Provide access token in the format of 'Bearer: {token}'."
+        - description: 'Provide access token in the format of ''Bearer: {token}''.'
           in: header
           name: Authorization
           required: false
@@ -3436,7 +3436,7 @@ paths:
           name: exclude_nudity
           required: false
           type: boolean
-        - description: "Specifies fields to return. Defaults to 'summary_set'."
+        - description: Specifies fields to return. Defaults to 'summary_set'.
           enum:
             - allowed_use
             - artist
@@ -3566,7 +3566,7 @@ paths:
           name: sort_order
           required: false
           type: string
-        - description: "Allows filtering by specific peoples' names."
+        - description: Allows filtering by specific peoples' names.
           in: query
           items:
             type: string
@@ -3643,7 +3643,7 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: "Provide access token in the format of 'Bearer: {token}'."
+        - description: 'Provide access token in the format of ''Bearer: {token}''.'
           in: header
           name: Authorization
           required: false
@@ -3655,7 +3655,7 @@ paths:
           name: ids
           required: true
           type: array
-        - description: "Specifies fields to return. Defaults to 'summary_set'."
+        - description: Specifies fields to return. Defaults to 'summary_set'.
           enum:
             - id
             - allowed_use
@@ -3752,7 +3752,7 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: "Provide access token in the format of 'Bearer: {token}'."
+        - description: 'Provide access token in the format of ''Bearer: {token}''.'
           in: header
           name: Authorization
           required: false
@@ -4910,7 +4910,7 @@ definitions:
   link:
     properties:
       rel:
-        description: "Specifies the link's relationship to the asset."
+        description: Specifies the link's relationship to the asset.
         type: string
       uri:
         description: GET this URI to retrieve image details regarding the related resource.

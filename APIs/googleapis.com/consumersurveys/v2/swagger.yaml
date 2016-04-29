@@ -363,21 +363,21 @@ definitions:
     description: Specifications for the target audience of a survey run through the API.
     properties:
       ages:
-        description: "Optional list of age buckets to target. Supported age buckets are: ['18-24', '25-34', '35-44', '45-54', '55-64', '65+']"
+        description: 'Optional list of age buckets to target. Supported age buckets are: [''18-24'', ''25-34'', ''35-44'', ''45-54'', ''55-64'', ''65+'']'
         items:
           type: string
         type: array
       country:
-        description: "Required country code that surveys should be targeted to. Accepts standard ISO 3166-1 2 character language codes. For instance, 'US' for the United States, and 'GB' for the United Kingdom."
+        description: 'Required country code that surveys should be targeted to. Accepts standard ISO 3166-1 2 character language codes. For instance, ''US'' for the United States, and ''GB'' for the United Kingdom.'
         type: string
       countrySubdivision:
-        description: "Country subdivision (states/provinces/etc) that surveys should be targeted to. For all countries except GB, ISO-3166-2 subdivision code is required (eg. 'US-OH' for Ohio, United States). For GB, NUTS 1 statistical region codes for the United Kingdom is required (eg. 'UK-UKC' for North East England)."
+        description: 'Country subdivision (states/provinces/etc) that surveys should be targeted to. For all countries except GB, ISO-3166-2 subdivision code is required (eg. ''US-OH'' for Ohio, United States). For GB, NUTS 1 statistical region codes for the United Kingdom is required (eg. ''UK-UKC'' for North East England).'
         type: string
       gender:
         description: Optional gender to target.
         type: string
       languages:
-        description: "Language code that surveys should be targeted to. For instance, 'en-US'. Surveys may target bilingual users by specifying a list of language codes (for example, 'de' and 'en-US'). In that case, all languages will be used for targeting users but the survey content (which is displayed) must match the first language listed. Accepts standard BCP47 language codes. See specification."
+        description: 'Language code that surveys should be targeted to. For instance, ''en-US''. Surveys may target bilingual users by specifying a list of language codes (for example, ''de'' and ''en-US''). In that case, all languages will be used for targeting users but the survey content (which is displayed) must match the first language listed. Accepts standard BCP47 language codes. See specification.'
         items:
           type: string
         type: array
@@ -411,7 +411,7 @@ definitions:
         description: 'Option to allow open-ended text box for Single Answer and Multiple Answer question types. This can be used with SINGLE_ANSWER, SINGLE_ANSWER_WITH_IMAGE, MULTIPLE_ANSWERS, and MULTIPLE_ANSWERS_WITH_IMAGE question types.'
         type: boolean
       highValueLabel:
-        description: "For rating questions, the text for the higher end of the scale, such as 'Best'. For numeric questions, a string representing a floating-point that is the maximum allowed number for a response."
+        description: 'For rating questions, the text for the higher end of the scale, such as ''Best''. For numeric questions, a string representing a floating-point that is the maximum allowed number for a response.'
         type: string
       images:
         items:
@@ -421,7 +421,7 @@ definitions:
         description: Currently only support pinning an answer option to the last position.
         type: boolean
       lowValueLabel:
-        description: "For rating questions, the text for the lower end of the scale, such as 'Worst'. For numeric questions, a string representing a floating-point that is the minimum allowed number for a response."
+        description: 'For rating questions, the text for the lower end of the scale, such as ''Worst''. For numeric questions, a string representing a floating-point that is the minimum allowed number for a response.'
         type: string
       mustPickSuggestion:
         description: Option to force the user to pick one of the open text suggestions. This requires that suggestions are provided for this question.
@@ -444,7 +444,7 @@ definitions:
         description: 'Used by the Rating Scale with Text question type. This text goes along with the question field that is presented to the respondent, and is the actual text that the respondent is asked to rate.'
         type: string
       singleLineResponse:
-        description: "Option to allow multiple line open text responses instead of a single line response. Note that we don't show auto-complete suggestions with multiple line responses."
+        description: Option to allow multiple line open text responses instead of a single line response. Note that we don't show auto-complete suggestions with multiple line responses.
         type: boolean
       thresholdAnswers:
         description: 'The threshold/screener answer options, which will screen a user into the rest of the survey. These will be a subset of the answer option strings.'

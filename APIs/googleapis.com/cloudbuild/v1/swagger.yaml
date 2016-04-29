@@ -424,7 +424,7 @@ definitions:
     description: BuildStep describes a step to perform in the build pipeline.
     properties:
       args:
-        description: "Command-line arguments to use when running this step's container."
+        description: Command-line arguments to use when running this step's container.
         items:
           type: string
         type: array
@@ -434,7 +434,7 @@ definitions:
           this operation's container.
         type: string
       env:
-        description: "Additional environment variables to set for this step's container."
+        description: Additional environment variables to set for this step's container.
         items:
           type: string
         type: array

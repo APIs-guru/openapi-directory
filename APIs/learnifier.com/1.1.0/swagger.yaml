@@ -483,7 +483,11 @@ paths:
         - Projects
   '/orgunits/{orgid}/projects/{projectid}/participants/${participantId}':
     delete:
-      description: "Deletes a participant. The user itself will still remain but any state related to the project will be deleted. \nIt might not be possible due to constraints from the products in the project to delete the participant. However\nthis can only be determined at the time of the delete. If a delete fails the participant will have their inError\nflag set.\n"
+      description: |
+        Deletes a participant. The user itself will still remain but any state related to the project will be deleted. 
+        It might not be possible due to constraints from the products in the project to delete the participant. However
+        this can only be determined at the time of the delete. If a delete fails the participant will have their inError
+        flag set.
       parameters:
         - description: Id of the organization unit
           in: path
@@ -845,7 +849,7 @@ paths:
       tags:
         - Users
     post:
-      description: "Adds a user. No two users can have the same email address. Email is saved WITH case but compared regardless of case. Email can be changed for a user assuming it doesn't cause a conflict."
+      description: Adds a user. No two users can have the same email address. Email is saved WITH case but compared regardless of case. Email can be changed for a user assuming it doesn't cause a conflict.
       parameters:
         - in: body
           name: body
@@ -1042,7 +1046,7 @@ definitions:
         format: countrycode
         type: string
       createdBy:
-        description: 'The id of the user that created the project. If the creator is not known this value can be *null* or not specified'
+        description: The id of the user that created the project. If the creator is not known this value can be *null* or not specified
         example: 8c102c8e-fabd-4c8a-b245-4d2d2f77fc4b
         format: uuid
         type: string
@@ -1101,7 +1105,7 @@ definitions:
         example: Doe
         format: string
       locale:
-        description: "The user's preferred language/locale setting. Affects date and number formatting."
+        description: The user's preferred language/locale setting. Affects date and number formatting.
         example: en-US
         format: locale
         type: string
@@ -1295,11 +1299,11 @@ definitions:
         description: The name of the client.
         type: string
       parentId:
-        description: 'Unique identifier of the parent or *null* if there is no parent.'
+        description: Unique identifier of the parent or *null* if there is no parent.
         format: int64
         type: integer
       type:
-        description: 'The organization unit type. The only type is *client* at the moment.'
+        description: The organization unit type. The only type is *client* at the moment.
         type: string
     required:
       - id
@@ -1334,7 +1338,7 @@ definitions:
         description: An optional error message that may describe why the participation is in error state.
         type: string
       expiration:
-        description: 'The timestamp when this participation will expire. Expiration never happens if this value is *null*.'
+        description: The timestamp when this participation will expire. Expiration never happens if this value is *null*.
         format: date-time
         type: string
       externalId:
@@ -1407,7 +1411,7 @@ definitions:
         format: date-time
         type: string
       createdBy:
-        description: 'The id of the user that created the project. If the creator is not known this value is *null*'
+        description: The id of the user that created the project. If the creator is not known this value is *null*
         example: 8c102c8e-fabd-4c8a-b245-4d2d2f77fc4b
         format: uuid
         type: string
@@ -1451,7 +1455,7 @@ definitions:
         format: timezone
         type: string
       userDescription:
-        description: 'The description presented to participants. This value can be *null*.'
+        description: The description presented to participants. This value can be *null*.
         type: string
       userTitle:
         description: The title presented to participants
@@ -1462,7 +1466,7 @@ definitions:
         $ref: '#/definitions/TeamRole'
         type: array
       userid:
-        description: 'The id of the user that created the project. If the creator is not known this value is *null*'
+        description: The id of the user that created the project. If the creator is not known this value is *null*
         example: 81590981-1e05-4fd5-aa15-15bc4b06cf7f
         format: uuid
         type: string
@@ -1534,7 +1538,7 @@ definitions:
         format: timezone
         type: string
       userDescription:
-        description: 'The description presented to participants. This value can be *null*.'
+        description: The description presented to participants. This value can be *null*.
         type: string
       userTitle:
         description: The title presented to participants
@@ -1552,7 +1556,7 @@ definitions:
         description: The external id (foreign key). Must not exceed 255 characters.
         type: string
       firstLogin:
-        description: 'The timestamp when the first login was made. This value can be *null*.'
+        description: The timestamp when the first login was made. This value can be *null*.
         format: date-time
         type: string
       firstName:
@@ -1573,7 +1577,7 @@ definitions:
         format: uuid
         type: string
       lastLogin:
-        description: 'The timestamp when the last login was made. This value can be *null*.'
+        description: The timestamp when the last login was made. This value can be *null*.
         format: date-time
         type: string
       lastName:
@@ -1586,7 +1590,7 @@ definitions:
       prefs:
         $ref: '#/definitions/UserPreferences'
       primaryEmail:
-        description: 'The primary email for this user. If the user has no email this value is *null*.'
+        description: The primary email for this user. If the user has no email this value is *null*.
         format: email
         type: string
   UserGroup:
@@ -1608,7 +1612,7 @@ definitions:
         description: The name of the User Group.
         type: string
       parent:
-        description: 'Unique identifier of the parent or *null* if there is no parent.'
+        description: Unique identifier of the parent or *null* if there is no parent.
         format: int64
         type: integer
       userGroup:
@@ -1650,7 +1654,7 @@ definitions:
         description: An optional error message that may describe why the participation is in error state.
         type: string
       expiration:
-        description: 'The timestamp when this participation will expire. Expiration never happens if this value is *null*.'
+        description: The timestamp when this participation will expire. Expiration never happens if this value is *null*.
         format: date-time
         type: string
       externalId:
@@ -1717,7 +1721,7 @@ definitions:
   UserPreferences:
     properties:
       locale:
-        description: 'The preferred locale. This value can be *null* if no specific preference has been selected.'
+        description: The preferred locale. This value can be *null* if no specific preference has been selected.
         example: sv-SE
         format: locale
         type: string

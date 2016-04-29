@@ -34,7 +34,7 @@ paths:
           name: username
           required: true
           type: string
-        - description: "User's password"
+        - description: User's password
           in: query
           name: password
           required: true
@@ -74,7 +74,7 @@ paths:
         - v1
   /v1/copyResources:
     get:
-      description: "Requires access token obtained via the authenticateUser operation. Available to users with the 'upload' permission."
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'upload' permission.
       operationId: copyResources
       parameters:
         - description: Access token required to make the API call
@@ -104,7 +104,7 @@ paths:
         - v1
   /v1/createFolder:
     get:
-      description: "Requires access token obtained via the authenticateUser operation. Available to users with the 'upload' permission."
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'upload' permission.
       operationId: createFolder
       parameters:
         - description: Access token required to make the API call
@@ -132,7 +132,7 @@ paths:
         - v1
   /v1/createNotification:
     get:
-      description: "Requires access token obtained via the authenticateUser operation. Available to users with 'notification' permission"
+      description: Requires access token obtained via the authenticateUser operation. Available to users with 'notification' permission
       operationId: createNotification
       parameters:
         - description: Access token required to make the API call
@@ -145,12 +145,12 @@ paths:
           name: path
           required: true
           type: string
-        - description: "Type of action to filter on: 'upload', 'download', 'delete', 'all'"
+        - description: 'Type of action to filter on: ''upload'', ''download'', ''delete'', ''all'''
           in: query
           name: action
           required: true
           type: string
-        - description: "User type to filter on: 'notice_user_all', 'notice_user_all_recipients', 'notice_user_all_users'"
+        - description: 'User type to filter on: ''notice_user_all'', ''notice_user_all_recipients'', ''notice_user_all_users'''
           in: query
           name: usernames
           required: true
@@ -176,7 +176,7 @@ paths:
         - v1
   /v1/createShare:
     get:
-      description: "Requires access token obtained via the authenticateUser operation. Available to users with the 'share' permission"
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'share' permission
       operationId: createShare
       parameters:
         - description: Access token required to make the API call
@@ -224,7 +224,7 @@ paths:
           required: false
           type: string
         - default: false
-          description: "Requires a user's email to access (defaults to false if not specified)."
+          description: Requires a user's email to access (defaults to false if not specified).
           in: query
           name: requireEmail
           required: false
@@ -284,7 +284,7 @@ paths:
         - v1
   /v1/createUser:
     get:
-      description: "Requires access token obtained via the authenticateUser operation. Available to users with the 'manage users' permission"
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'manage users' permission
       operationId: createUser
       parameters:
         - description: Access token required to make the API call
@@ -297,22 +297,22 @@ paths:
           name: username
           required: true
           type: string
-        - description: "The user's home folder"
+        - description: The user's home folder
           in: query
           name: destinationFolder
           required: true
           type: string
-        - description: "The user's email address"
+        - description: The user's email address
           in: query
           name: email
           required: true
           type: string
-        - description: "The user's password"
+        - description: The user's password
           in: query
           name: password
           required: true
           type: string
-        - description: "The user's role, i.e: 'user' or 'admin'"
+        - description: 'The user''s role, i.e: ''user'' or ''admin'''
           in: query
           name: role
           required: true
@@ -323,12 +323,12 @@ paths:
           required: true
           type: string
         - default: America/Los_Angeles
-          description: "The user's timezone, used for accurate time display within SWFT. See <a href='https://php.net/manual/en/timezones.php' target='blank'>this page</a> for allowed values"
+          description: 'The user''s timezone, used for accurate time display within SWFT. See <a href=''https://php.net/manual/en/timezones.php'' target=''blank''>this page</a> for allowed values'
           in: query
           name: timeZone
           required: true
           type: string
-        - description: "The user's nickname"
+        - description: The user's nickname
           in: query
           name: nickname
           type: string
@@ -337,7 +337,7 @@ paths:
           name: expiration
           type: string
         - default: false
-          description: "If true, the user's account is locked by default"
+          description: 'If true, the user''s account is locked by default'
           in: query
           name: locked
           type: boolean
@@ -356,7 +356,7 @@ paths:
         - v1
   /v1/deleteNotification:
     get:
-      description: "Requires access token obtained via the authenticateUser operation. Available to users with 'notification' permission"
+      description: Requires access token obtained via the authenticateUser operation. Available to users with 'notification' permission
       operationId: deleteNotification
       parameters:
         - description: Access token required to make the API call
@@ -380,7 +380,7 @@ paths:
         - v1
   /v1/deleteResources:
     get:
-      description: "Requires access token obtained via the authenticateUser operation. Available to users with the 'delete' permission"
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'delete' permission
       operationId: deleteResources
       parameters:
         - description: Access token required to make the API call
@@ -405,7 +405,7 @@ paths:
         - v1
   /v1/deleteShare:
     get:
-      description: "Requires access token obtained via the authenticateUser operation. Available to users with 'share' permission"
+      description: Requires access token obtained via the authenticateUser operation. Available to users with 'share' permission
       operationId: deleteShare
       parameters:
         - description: Access token required to make the API call
@@ -429,7 +429,7 @@ paths:
         - v1
   /v1/deleteUser:
     get:
-      description: "Requires access token obtained via the authenticateUser operation. Available to users with 'manage users' permission"
+      description: Requires access token obtained via the authenticateUser operation. Available to users with 'manage users' permission
       operationId: deleteUser
       parameters:
         - description: Access token required to make the API call
@@ -531,7 +531,7 @@ paths:
           required: false
           type: integer
         - default: sort_logs_date
-          description: "Sort method ['sort_logs_date' or 'sort_logs_ip_address' or 'sort_logs_username' or 'sort_logs_file' or 'sort_logs_file_source' or 'sort_logs_operation', or 'sort_logs_duration', or 'sort_logs_size', or 'sort_logs_protocol']"
+          description: 'Sort method [''sort_logs_date'' or ''sort_logs_ip_address'' or ''sort_logs_username'' or ''sort_logs_file'' or ''sort_logs_file_source'' or ''sort_logs_operation'', or ''sort_logs_duration'', or ''sort_logs_size'', or ''sort_logs_protocol'']'
           in: query
           name: sortBy
           required: false
@@ -542,12 +542,12 @@ paths:
           name: sortOrder
           required: false
           type: string
-        - description: "Field to search on ['filter_logs_date' or 'filter_logs_ip_address' or 'filter_logs_username' or 'filter_logs_operation' or 'filter_logs_file']"
+        - description: 'Field to search on [''filter_logs_date'' or ''filter_logs_ip_address'' or ''filter_logs_username'' or ''filter_logs_operation'' or ''filter_logs_file'']'
           in: query
           name: filterBy
           required: false
           type: string
-        - description: "Search criteria. For date ranges, use format 'start_date::end_date'"
+        - description: 'Search criteria. For date ranges, use format ''start_date::end_date'''
           in: query
           name: filter
           required: false
@@ -591,7 +591,7 @@ paths:
         - v1
   /v1/getNotification:
     get:
-      description: "Requires access token obtained via the authenticateUser operation. Available to users with the 'notification' permission"
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'notification' permission
       operationId: getNotification
       parameters:
         - description: Access token required to make the API call
@@ -615,7 +615,7 @@ paths:
         - v1
   /v1/getNotificationActivity:
     get:
-      description: "Requires access token obtained via the authenticateUser operation. Available to users with the 'notification' permission"
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'notification' permission
       operationId: getNotificationActivity
       parameters:
         - description: Access token required to make the API call
@@ -633,7 +633,7 @@ paths:
         - v1
   /v1/getNotifications:
     get:
-      description: "Requires access token obtained via the authenticateUser operation. Available to users with the 'notification' permission"
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'notification' permission
       operationId: getNotifications
       parameters:
         - description: Access token required to make the API call
@@ -641,17 +641,17 @@ paths:
           name: access_token
           required: true
           type: string
-        - description: "Type of notification to filter on: 'file', 'folder', 'shared_folder', 'send_receipt', 'share_receipt', 'file_drop'"
+        - description: 'Type of notification to filter on: ''file'', ''folder'', ''shared_folder'', ''send_receipt'', ''share_receipt'', ''file_drop'''
           in: query
           name: type
           required: true
           type: string
-        - description: "Sort by one of the following: 'sort_notifications_folder_name', 'sort_notifications_path', 'sort_notifications_date'"
+        - description: 'Sort by one of the following: ''sort_notifications_folder_name'', ''sort_notifications_path'', ''sort_notifications_date'''
           in: query
           name: sortBy
           required: false
           type: string
-        - description: "Sort by 'asc' or 'desc' order."
+        - description: Sort by 'asc' or 'desc' order.
           in: query
           name: sortOrder
           required: false
@@ -671,7 +671,7 @@ paths:
         - v1
   /v1/getResourceList:
     get:
-      description: "Requires access token obtained via the authenticateUser operation. Available to users with 'list files' permission."
+      description: Requires access token obtained via the authenticateUser operation. Available to users with 'list files' permission.
       operationId: getResourceList
       parameters:
         - description: Access token required to make the API call
@@ -750,7 +750,7 @@ paths:
         - v1
   /v1/getShare:
     get:
-      description: "Requires access token obtained via the authenticateUser operation. Available to users with the 'share' permission"
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'share' permission
       operationId: getShare
       parameters:
         - description: Access token required to make the API call
@@ -774,7 +774,7 @@ paths:
         - v1
   /v1/getShareActivity:
     get:
-      description: "Requires access token obtained via the authenticateUser operation. Available to users with the 'share' permission"
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'share' permission
       operationId: getShareActivity
       parameters:
         - description: Access token required to make the API call
@@ -798,7 +798,7 @@ paths:
         - v1
   /v1/getShares:
     get:
-      description: "Requires access token obtained via the authenticateUser operation. Available to users with the 'share' permission"
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'share' permission
       operationId: getShares
       parameters:
         - description: Access token required to make the API call
@@ -806,17 +806,17 @@ paths:
           name: access_token
           required: true
           type: string
-        - description: "The type of share to return: 'shared_folder', 'send', or 'receive'. If no argument specified, will return all Shares types."
+        - description: 'The type of share to return: ''shared_folder'', ''send'', or ''receive''. If no argument specified, will return all Shares types.'
           in: query
           name: type
           required: false
           type: string
-        - description: "Sort by one of the following: 'sort_shares_name', 'sort_shares_date', 'sort_shares_user', 'sort_shares_access_mode'."
+        - description: 'Sort by one of the following: ''sort_shares_name'', ''sort_shares_date'', ''sort_shares_user'', ''sort_shares_access_mode''.'
           in: query
           name: sortBy
           required: false
           type: string
-        - description: "Sort by 'asc' or 'desc' order."
+        - description: Sort by 'asc' or 'desc' order.
           in: query
           name: sortOrder
           required: false
@@ -826,7 +826,7 @@ paths:
           name: filter
           required: false
           type: string
-        - description: "Filter by all, active-only, or current user's only."
+        - description: 'Filter by all, active-only, or current user''s only.'
           in: query
           name: include
           required: false
@@ -853,7 +853,7 @@ paths:
         - v1
   /v1/getUploadFileUrl:
     get:
-      description: "Requires access token obtained via the authenticateUser operation. Called before an upload is started to get URL to appropriate storage server. Available to users with the 'write' permission."
+      description: Requires access token obtained via the authenticateUser operation. Called before an upload is started to get URL to appropriate storage server. Available to users with the 'write' permission.
       operationId: getUploadFileUrl
       parameters:
         - description: Access token required to make the API call
@@ -867,7 +867,7 @@ paths:
           name: fileSize
           required: true
           type: integer
-        - description: "Path relative to account's home directory, including file name"
+        - description: 'Path relative to account''s home directory, including file name'
           in: query
           name: destinationPath
           required: true
@@ -879,7 +879,7 @@ paths:
           required: false
           type: boolean
         - default: false
-          description: "True if upload resume is supported, false if it isn't"
+          description: 'True if upload resume is supported, false if it isn''t'
           in: query
           name: resume
           required: false
@@ -917,7 +917,7 @@ paths:
         - v1
   /v1/getUsers:
     get:
-      description: "Requires access token obtained via the authenticateUser operation. Available to users with the 'manage users' permission set"
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'manage users' permission set
       operationId: getUsers
       parameters:
         - description: Access token required to make the API call
@@ -925,12 +925,12 @@ paths:
           name: access_token
           required: true
           type: string
-        - description: "sort method ['sort_users_username' or 'sort_users_nickname' or 'sort_users_email' or 'sort_users_home_folder']"
+        - description: 'sort method [''sort_users_username'' or ''sort_users_nickname'' or ''sort_users_email'' or ''sort_users_home_folder'']'
           in: query
           name: sortBy
           required: true
           type: string
-        - description: "sort order, i.e. 'asc' or 'desc'"
+        - description: 'sort order, i.e. ''asc'' or ''desc'''
           in: query
           name: sortOrder
           required: true
@@ -958,12 +958,12 @@ paths:
           description: No response was specified
           schema:
             $ref: '#/definitions/Response'
-      summary: "Removes user's access token from database, logging them out of API"
+      summary: 'Removes user''s access token from database, logging them out of API'
       tags:
         - v1
   /v1/moveResources:
     get:
-      description: "Requires access token obtained via the authenticateUser operation. Available to users with the 'upload' permission"
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'upload' permission
       operationId: moveResources
       parameters:
         - description: Access token required to make the API call
@@ -1001,7 +1001,7 @@ paths:
           name: access_token
           required: true
           type: string
-        - description: "Path of the image relative to the user's home directory"
+        - description: Path of the image relative to the user's home directory
           in: query
           name: path
           required: true
@@ -1036,7 +1036,7 @@ paths:
         - v1
   /v1/renameResource:
     get:
-      description: "Requires access token obtained via the authenticateUser operation. Available to users with the 'modify' permission"
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'modify' permission
       operationId: renameResource
       parameters:
         - description: Access token required to make the API call
@@ -1064,7 +1064,7 @@ paths:
         - v1
   /v1/updateNotification:
     get:
-      description: "Requires access token obtained via the authenticateUser operation. Available to users with 'notification' permission"
+      description: Requires access token obtained via the authenticateUser operation. Available to users with 'notification' permission
       operationId: updateNotification
       parameters:
         - description: Access token required to make the API call
@@ -1082,11 +1082,11 @@ paths:
           in: query
           name: path
           type: string
-        - description: "Type of action to filter on: 'upload', 'download', 'delete', 'all'"
+        - description: 'Type of action to filter on: ''upload'', ''download'', ''delete'', ''all'''
           in: query
           name: action
           type: string
-        - description: "User type to filter on: 'notice_user_all', 'notice_user_all_recipients', 'notice_user_all_users'"
+        - description: 'User type to filter on: ''notice_user_all'', ''notice_user_all_recipients'', ''notice_user_all_users'''
           in: query
           name: usernames
           type: string
@@ -1110,7 +1110,7 @@ paths:
         - v1
   /v1/updateShare:
     get:
-      description: "Requires access token obtained via the authenticateUser operation. Available to users with the 'share' permission"
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'share' permission
       operationId: updateShare
       parameters:
         - description: Access token required to make the API call
@@ -1152,7 +1152,7 @@ paths:
           in: query
           name: ccEmail
           type: string
-        - description: "Requires a user's email to access."
+        - description: Requires a user's email to access.
           in: query
           name: requireEmail
           type: boolean
@@ -1200,7 +1200,7 @@ paths:
         - v1
   /v1/updateUser:
     get:
-      description: "Requires access token obtained via the authenticateUser operation. Available to users with 'manage users' permission"
+      description: Requires access token obtained via the authenticateUser operation. Available to users with 'manage users' permission
       operationId: updateUser
       parameters:
         - description: Access token required to make the API call
@@ -1218,7 +1218,7 @@ paths:
           in: query
           name: username
           type: string
-        - description: "The user's nickname"
+        - description: The user's nickname
           in: query
           name: nickname
           type: string
@@ -1226,23 +1226,23 @@ paths:
           in: query
           name: expiration
           type: string
-        - description: "The user's email"
+        - description: The user's email
           in: query
           name: email
           type: string
-        - description: "The user's home folder"
+        - description: The user's home folder
           in: query
           name: destinationFolder
           type: string
-        - description: "The user's password"
+        - description: The user's password
           in: query
           name: password
           type: string
-        - description: "If true, the user's account is locked by default"
+        - description: 'If true, the user''s account is locked by default'
           in: query
           name: locked
           type: boolean
-        - description: "The user's role, i.e: 'user', 'admin', 'master'"
+        - description: 'The user''s role, i.e: ''user'', ''admin'', ''master'''
           in: query
           name: role
           type: string
@@ -1260,7 +1260,7 @@ paths:
         - v1
   /v1/userAvailable:
     get:
-      description: "Requires access token obtained via the authenticateUser operation. Available to users with the 'manage users' permission"
+      description: Requires access token obtained via the authenticateUser operation. Available to users with the 'manage users' permission
       operationId: userAvailable
       parameters:
         - description: Access token required to make the API call

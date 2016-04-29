@@ -173,10 +173,10 @@ paths:
         - scripts
 definitions:
   ExecutionError:
-    description: "An object that provides information about the nature of an error in the Apps Script Execution API. If an `run` call succeeds but the script function (or Apps Script itself) throws an exception, the response body's `error` field will contain a `Status` object. The `Status` object's `details` field will contain an array with a single one of these `ExecutionError` objects."
+    description: 'An object that provides information about the nature of an error in the Apps Script Execution API. If an `run` call succeeds but the script function (or Apps Script itself) throws an exception, the response body''s `error` field will contain a `Status` object. The `Status` object''s `details` field will contain an array with a single one of these `ExecutionError` objects.'
     properties:
       errorMessage:
-        description: "The error message thrown by Apps Script, usually localized into the user's language."
+        description: 'The error message thrown by Apps Script, usually localized into the user''s language.'
         type: string
       errorType:
         description: 'The error type, for example `TypeError` or `ReferenceError`. If the error type is unavailable, this field is not included.'
@@ -205,7 +205,7 @@ definitions:
         type: string
     type: object
   ExecutionResponse:
-    description: "An object that provides the return value of a function executed through the Apps Script Execution API. If an `run` call succeeds and the script function returns successfully, the response body's `response` field will contain this `ExecutionResponse` object."
+    description: 'An object that provides the return value of a function executed through the Apps Script Execution API. If an `run` call succeeds and the script function returns successfully, the response body''s `response` field will contain this `ExecutionResponse` object.'
     properties:
       result:
         description: 'The return value of the script function. The type will match the type returned in Apps Script. Functions called through the Execution API cannot return Apps Script-specific objects (such as a `Document` or `Calendar`); they can only return primitive types such as a `string`, `number`, `array`, `object`, or `boolean`.'
@@ -224,7 +224,7 @@ definitions:
         type: boolean
       error:
         $ref: '#/definitions/Status'
-        description: "If a `run` call succeeds but the script function (or Apps Script itself) throws an exception, this field will contain a `Status` object. The `Status` object's `details` field will contain an array with a single `ExecutionError` object that provides information about the nature of the error."
+        description: 'If a `run` call succeeds but the script function (or Apps Script itself) throws an exception, this field will contain a `Status` object. The `Status` object''s `details` field will contain an array with a single `ExecutionError` object that provides information about the nature of the error.'
       metadata:
         additionalProperties:
           description: Properties of the object. Contains field @ype with type URL.
@@ -236,7 +236,7 @@ definitions:
       response:
         additionalProperties:
           description: Properties of the object. Contains field @ype with type URL.
-        description: "If the script function returns successfully, this field will contain an `ExecutionResponse` object with the function's return value as the object's `result` field."
+        description: 'If the script function returns successfully, this field will contain an `ExecutionResponse` object with the function''s return value as the object''s `result` field.'
         type: object
     type: object
   ScriptStackTraceElement:
@@ -251,7 +251,7 @@ definitions:
         type: integer
     type: object
   Status:
-    description: "If a `run` call succeeds but the script function (or Apps Script itself) throws an exception, the response body's `error` field will contain this `Status` object."
+    description: 'If a `run` call succeeds but the script function (or Apps Script itself) throws an exception, the response body''s `error` field will contain this `Status` object.'
     properties:
       code:
         description: 'The status code, which should be an enum value of google.rpc.Code.'

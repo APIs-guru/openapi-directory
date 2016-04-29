@@ -354,7 +354,7 @@ paths:
           required: true
           type: string
         - collectionFormat: multi
-          description: "List of features supported by the client, i.e., 'RENTALS'"
+          description: 'List of features supported by the client, i.e., ''RENTALS'''
           in: query
           items:
             enum:
@@ -988,7 +988,7 @@ paths:
           name: notification_id
           required: true
           type: string
-        - description: "ISO-639-1 language and ISO-3166-1 country code. Ex: 'en_US'. Used for generating notification title and body."
+        - description: 'ISO-639-1 language and ISO-3166-1 country code. Ex: ''en_US''. Used for generating notification title and body.'
           in: query
           name: locale
           type: string
@@ -1095,7 +1095,7 @@ paths:
       description: Returns a stream of personalized book clusters
       operationId: books.personalizedstream.get
       parameters:
-        - description: "ISO-639-1 language and ISO-3166-1 country code. Ex: 'en_US'. Used for generating recommendations."
+        - description: 'ISO-639-1 language and ISO-3166-1 country code. Ex: ''en_US''. Used for generating recommendations.'
           in: query
           name: locale
           type: string
@@ -1493,7 +1493,7 @@ paths:
           in: query
           name: langRestrict
           type: string
-        - description: "Restrict search to this user's library."
+        - description: Restrict search to this user's library.
           enum:
             - my-library
             - no-restrict
@@ -1587,7 +1587,7 @@ paths:
           in: query
           name: country
           type: string
-        - description: "ISO-639-1 language and ISO-3166-1 country code. Ex:'en_US'. Used for generating recommendations."
+        - description: 'ISO-639-1 language and ISO-3166-1 country code. Ex:''en_US''. Used for generating recommendations.'
           in: query
           name: locale
           type: string
@@ -1640,7 +1640,7 @@ paths:
       description: Return a list of recommended books for the current user.
       operationId: books.volumes.recommended.list
       parameters:
-        - description: "ISO-639-1 language and ISO-3166-1 country code. Ex: 'en_US'. Used for generating recommendations."
+        - description: 'ISO-639-1 language and ISO-3166-1 country code. Ex: ''en_US''. Used for generating recommendations.'
           in: query
           name: locale
           type: string
@@ -1699,7 +1699,7 @@ paths:
           name: volumeId
           required: true
           type: string
-        - description: "ISO-639-1 language and ISO-3166-1 country code. Ex: 'en_US'. Used for generating recommendations."
+        - description: 'ISO-639-1 language and ISO-3166-1 country code. Ex: ''en_US''. Used for generating recommendations.'
           in: query
           name: locale
           type: string
@@ -1722,7 +1722,7 @@ paths:
       description: Return a list of books uploaded by the current user.
       operationId: books.volumes.useruploaded.list
       parameters:
-        - description: "ISO-639-1 language and ISO-3166-1 country code. Ex: 'en_US'. Used for generating recommendations."
+        - description: 'ISO-639-1 language and ISO-3166-1 country code. Ex: ''en_US''. Used for generating recommendations.'
           in: query
           name: locale
           type: string
@@ -1849,7 +1849,7 @@ paths:
           in: query
           name: association
           type: string
-        - description: "ISO-639-1 language and ISO-3166-1 country code. Ex: 'en_US'. Used for generating recommendations."
+        - description: 'ISO-639-1 language and ISO-3166-1 country code. Ex: ''en_US''. Used for generating recommendations.'
           in: query
           name: locale
           type: string
@@ -1910,7 +1910,7 @@ paths:
           in: query
           name: endPosition
           type: string
-        - description: "The locale information for the data. ISO-639-1 language and ISO-3166-1 country code. Ex: 'en_US'."
+        - description: 'The locale information for the data. ISO-639-1 language and ISO-3166-1 country code. Ex: ''en_US''.'
           in: query
           name: locale
           type: string
@@ -1990,7 +1990,7 @@ paths:
           name: annotationId
           required: true
           type: string
-        - description: "The locale information for the data. ISO-639-1 language and ISO-3166-1 country code. Ex: 'en_US'."
+        - description: 'The locale information for the data. ISO-639-1 language and ISO-3166-1 country code. Ex: ''en_US''.'
           in: query
           name: locale
           type: string
@@ -2047,7 +2047,7 @@ paths:
           in: query
           name: h
           type: integer
-        - description: "The locale information for the data. ISO-639-1 language and ISO-3166-1 country code. Ex: 'en_US'."
+        - description: 'The locale information for the data. ISO-639-1 language and ISO-3166-1 country code. Ex: ''en_US''.'
           in: query
           name: locale
           type: string
@@ -2133,7 +2133,7 @@ paths:
           in: query
           name: h
           type: integer
-        - description: "The locale information for the data. ISO-639-1 language and ISO-3166-1 country code. Ex: 'en_US'."
+        - description: 'The locale information for the data. ISO-639-1 language and ISO-3166-1 country code. Ex: ''en_US''.'
           in: query
           name: locale
           type: string
@@ -2332,7 +2332,7 @@ definitions:
             format: int32
             type: integer
           limitType:
-            description: 'Type of limitation on this layer. "limited" or "unlimited" for the "copy" layer.'
+            description: Type of limitation on this layer. "limited" or "unlimited" for the "copy" layer.
             type: string
           remainingCharacterCount:
             description: 'Remaining allowed characters on this layer, especially for the "copy" layer.'
@@ -2376,17 +2376,17 @@ definitions:
         description: Resource Type
         type: string
       layerId:
-        description: 'The Layer id for this data. *'
+        description: The Layer id for this data. *
         type: string
       selfLink:
-        description: 'URL for this resource. *'
+        description: URL for this resource. *
         type: string
       updated:
         description: Timestamp for the last time this data was updated. (RFC 3339 UTC date-time format).
         format: date-time
         type: string
       volumeId:
-        description: 'The volume id for this data. *'
+        description: The volume id for this data. *
         type: string
     type: object
   Annotations:
@@ -2958,7 +2958,7 @@ definitions:
         format: date-time
         type: string
       volumeAnnotationsVersion:
-        description: "The current version of this layer's volume annotations. Note that this version applies only to the data in the books.layers.volumeAnnotations.* responses. The actual annotation data is versioned separately."
+        description: The current version of this layer's volume annotations. Note that this version applies only to the data in the books.layers.volumeAnnotations.* responses. The actual annotation data is versioned separately.
         type: string
       volumeId:
         description: The volume id this resource is for.
@@ -3218,7 +3218,7 @@ definitions:
             type: string
           downloadAccess:
             $ref: '#/definitions/DownloadAccessRestriction'
-            description: "Information about a volume's download license access restrictions."
+            description: Information about a volume's download license access restrictions.
           driveImportedContentLink:
             description: URL to the Google Drive viewer if this volume is uploaded by the user by selecting the file from Google Drive.
             type: string
@@ -3291,10 +3291,10 @@ definitions:
             items:
               properties:
                 layerId:
-                  description: 'The layer id of this layer (e.g. "geo").'
+                  description: The layer id of this layer (e.g. "geo").
                   type: string
                 volumeAnnotationsVersion:
-                  description: "The current version of this layer's volume annotations. Note that this version applies only to the data in the books.layers.volumeAnnotations.* responses. The actual annotation data is versioned separately."
+                  description: The current version of this layer's volume annotations. Note that this version applies only to the data in the books.layers.volumeAnnotations.* responses. The actual annotation data is versioned separately.
                   type: string
               type: object
             type: array
@@ -3451,7 +3451,7 @@ definitions:
             description: 'Deprecated: Replaced by familySharing.'
             type: boolean
           isInMyBooks:
-            description: 'Whether or not this volume is currently in "my books."'
+            description: Whether or not this volume is currently in "my books."
             type: boolean
           isPreordered:
             description: Whether or not this volume was pre-ordered by the authenticated user making the request. (In LITE projection.)
@@ -3464,7 +3464,7 @@ definitions:
             type: boolean
           readingPosition:
             $ref: '#/definitions/ReadingPosition'
-            description: "The user's current reading position in the volume, if one is available. (In LITE projection.)"
+            description: 'The user''s current reading position in the volume, if one is available. (In LITE projection.)'
           rentalPeriod:
             description: Period during this book is/was a valid rental.
             properties:
@@ -3480,7 +3480,7 @@ definitions:
             type: string
           review:
             $ref: '#/definitions/Review'
-            description: "This user's review of this volume, if one exists."
+            description: 'This user''s review of this volume, if one exists.'
           updated:
             description: 'Timestamp when this volume was last modified by a user action, such as a reading position update, volume purchase or writing a review. (RFC 3339 UTC date-time format).'
             format: date-time
@@ -3515,7 +3515,7 @@ definitions:
               type: string
             type: array
           contentVersion:
-            description: 'An identifier for the version of the volume content (text & images). (In LITE projection)'
+            description: An identifier for the version of the volume content (text & images). (In LITE projection)
             type: string
           description:
             description: 'A synopsis of the volume. The text of the description is formatted in HTML and includes simple formatting elements, such as b, i, and br tags. (In LITE projection.)'
@@ -3571,7 +3571,7 @@ definitions:
             description: URL to view information about this volume on the Google Books site. (In LITE projection)
             type: string
           language:
-            description: "Best language for this volume (based on content). It is the two-letter ISO 639-1 code such as 'fr', 'en', etc."
+            description: 'Best language for this volume (based on content). It is the two-letter ISO 639-1 code such as ''fr'', ''en'', etc.'
             type: string
           mainCategory:
             description: The main category to which this volume belongs. It will be the category from the categories list returned below that has the highest weight.
@@ -3713,7 +3713,7 @@ definitions:
         format: int32
         type: integer
       version:
-        description: "The version string for all of the volume annotations in this layer (not just the ones in this response). Note: the version string doesn't apply to the annotation data, just the information in this response (e.g. the location of annotations in the book)."
+        description: 'The version string for all of the volume annotations in this layer (not just the ones in this response). Note: the version string doesn''t apply to the annotation data, just the information in this response (e.g. the location of annotations in the book).'
         type: string
     type: object
   Volumes:

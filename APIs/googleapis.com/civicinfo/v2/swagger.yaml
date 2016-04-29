@@ -126,7 +126,7 @@ paths:
           name: includeOffices
           type: boolean
         - collectionFormat: multi
-          description: "A list of office levels to filter by. Only offices that serve at least one of these levels will be returned. Divisions that don't contain a matching office will not be returned."
+          description: A list of office levels to filter by. Only offices that serve at least one of these levels will be returned. Divisions that don't contain a matching office will not be returned.
           in: query
           items:
             enum:
@@ -143,7 +143,7 @@ paths:
           name: levels
           type: array
         - collectionFormat: multi
-          description: "A list of office roles to filter by. Only offices fulfilling one of these roles will be returned. Divisions that don't contain a matching office will not be returned."
+          description: A list of office roles to filter by. Only offices fulfilling one of these roles will be returned. Divisions that don't contain a matching office will not be returned.
           in: query
           items:
             enum:
@@ -187,7 +187,7 @@ paths:
           required: true
           type: string
         - collectionFormat: multi
-          description: "A list of office levels to filter by. Only offices that serve at least one of these levels will be returned. Divisions that don't contain a matching office will not be returned."
+          description: A list of office levels to filter by. Only offices that serve at least one of these levels will be returned. Divisions that don't contain a matching office will not be returned.
           in: query
           items:
             enum:
@@ -203,12 +203,12 @@ paths:
             type: string
           name: levels
           type: array
-        - description: "If true, information about all divisions contained in the division requested will be included as well. For example, if querying ocd-division/country:us/district:dc, this would also return all DC's wards and ANCs."
+        - description: 'If true, information about all divisions contained in the division requested will be included as well. For example, if querying ocd-division/country:us/district:dc, this would also return all DC''s wards and ANCs.'
           in: query
           name: recursive
           type: boolean
         - collectionFormat: multi
-          description: "A list of office roles to filter by. Only offices fulfilling one of these roles will be returned. Divisions that don't contain a matching office will not be returned."
+          description: A list of office roles to filter by. Only offices fulfilling one of these roles will be returned. Divisions that don't contain a matching office will not be returned.
           in: query
           items:
             enum:
@@ -243,7 +243,7 @@ paths:
       - $ref: '#/parameters/userIp'
   /voterinfo:
     get:
-      description: "Looks up information relevant to a voter based on the voter's registered address."
+      description: Looks up information relevant to a voter based on the voter's registered address.
       operationId: civicinfo.elections.voterInfoQuery
       parameters:
         - description: The registered address of the voter to look up.
@@ -349,7 +349,7 @@ definitions:
     description: Information about a candidate running for elected office.
     properties:
       candidateUrl:
-        description: "The URL for the candidate's campaign web site."
+        description: The URL for the candidate's campaign web site.
         type: string
       channels:
         description: A list of known (social) media channels for this candidate.
@@ -357,10 +357,10 @@ definitions:
           $ref: '#/definitions/Channel'
         type: array
       email:
-        description: "The email address for the candidate's campaign."
+        description: The email address for the candidate's campaign.
         type: string
       name:
-        description: "The candidate's name."
+        description: The candidate's name.
         type: string
       orderOnBallot:
         description: The order the candidate appears on the ballot for this contest.
@@ -370,7 +370,7 @@ definitions:
         description: The full name of the party the candidate is a member of.
         type: string
       phone:
-        description: "The voice phone number for the candidate's campaign office."
+        description: The voice phone number for the candidate's campaign office.
         type: string
       photoUrl:
         description: A URL for a photo of the candidate.
@@ -380,17 +380,17 @@ definitions:
     description: A social media or web channel for a candidate.
     properties:
       id:
-        description: "The unique public identifier for the candidate's channel."
+        description: The unique public identifier for the candidate's channel.
         type: string
       type:
         description: 'The type of channel. The following is a list of types of channels, but is not exhaustive. More channel types may be added at a later time. One of: GooglePlus, YouTube, Facebook, Twitter'
         type: string
     type: object
   Contest:
-    description: "Information about a contest that appears on a voter's ballot."
+    description: Information about a contest that appears on a voter's ballot.
     properties:
       ballotPlacement:
-        description: "A number specifying the position of this contest on the voter's ballot."
+        description: A number specifying the position of this contest on the voter's ballot.
         format: int64
         type: string
       candidates:
@@ -427,36 +427,36 @@ definitions:
         description: 'If this is a partisan election, the name of the party it is for.'
         type: string
       referendumBallotResponses:
-        description: "The set of ballot responses for the referendum. A ballot response represents a line on the ballot. Common examples might include \"yes\" or \"no\" for referenda, or a judge's name for a retention contest. This field is only populated for contests of type 'Referendum'."
+        description: 'The set of ballot responses for the referendum. A ballot response represents a line on the ballot. Common examples might include "yes" or "no" for referenda, or a judge''s name for a retention contest. This field is only populated for contests of type ''Referendum''.'
         items:
           type: string
         type: array
       referendumBrief:
-        description: "Specifies a short summary of the referendum that is typically on the ballot below the title but above the text. This field is only populated for contests of type 'Referendum'."
+        description: Specifies a short summary of the referendum that is typically on the ballot below the title but above the text. This field is only populated for contests of type 'Referendum'.
         type: string
       referendumConStatement:
-        description: "A statement in opposition to the referendum. It does not necessarily appear on the ballot. This field is only populated for contests of type 'Referendum'."
+        description: A statement in opposition to the referendum. It does not necessarily appear on the ballot. This field is only populated for contests of type 'Referendum'.
         type: string
       referendumEffectOfAbstain:
-        description: "Specifies what effect abstaining (not voting) on the proposition will have (i.e. whether abstaining is considered a vote against it). This field is only populated for contests of type 'Referendum'."
+        description: Specifies what effect abstaining (not voting) on the proposition will have (i.e. whether abstaining is considered a vote against it). This field is only populated for contests of type 'Referendum'.
         type: string
       referendumPassageThreshold:
-        description: "The threshold of votes that the referendum needs in order to pass, e.g. \"two-thirds\". This field is only populated for contests of type 'Referendum'."
+        description: 'The threshold of votes that the referendum needs in order to pass, e.g. "two-thirds". This field is only populated for contests of type ''Referendum''.'
         type: string
       referendumProStatement:
-        description: "A statement in favor of the referendum. It does not necessarily appear on the ballot. This field is only populated for contests of type 'Referendum'."
+        description: A statement in favor of the referendum. It does not necessarily appear on the ballot. This field is only populated for contests of type 'Referendum'.
         type: string
       referendumSubtitle:
-        description: "A brief description of the referendum. This field is only populated for contests of type 'Referendum'."
+        description: A brief description of the referendum. This field is only populated for contests of type 'Referendum'.
         type: string
       referendumText:
-        description: "The full text of the referendum. This field is only populated for contests of type 'Referendum'."
+        description: The full text of the referendum. This field is only populated for contests of type 'Referendum'.
         type: string
       referendumTitle:
-        description: "The title of the referendum (e.g. 'Proposition 42'). This field is only populated for contests of type 'Referendum'."
+        description: The title of the referendum (e.g. 'Proposition 42'). This field is only populated for contests of type 'Referendum'.
         type: string
       referendumUrl:
-        description: "A link to the referendum. This field is only populated for contests of type 'Referendum'."
+        description: A link to the referendum. This field is only populated for contests of type 'Referendum'.
         type: string
       roles:
         description: The roles which this office fulfills.
@@ -472,7 +472,7 @@ definitions:
         description: '"Yes" or "No" depending on whether this a contest being held outside the normal election cycle.'
         type: string
       type:
-        description: "The type of contest. Usually this will be 'General', 'Primary', or 'Run-off' for contests with candidates. For referenda this will be 'Referendum'."
+        description: 'The type of contest. Usually this will be ''General'', ''Primary'', or ''Run-off'' for contests with candidates. For referenda this will be ''Referendum''.'
         type: string
     type: object
   DivisionSearchResponse:
@@ -561,7 +561,7 @@ definitions:
         description: The name of the district.
         type: string
       scope:
-        description: "The geographic scope of this district. If unspecified the district's geography is not known. One of: national, statewide, congressional, stateUpper, stateLower, countywide, judicial, schoolBoard, cityWide, township, countyCouncil, cityCouncil, ward, special"
+        description: 'The geographic scope of this district. If unspecified the district''s geography is not known. One of: national, statewide, congressional, stateUpper, stateLower, countywide, judicial, schoolBoard, cityWide, township, countyCouncil, cityCouncil, ward, special'
         type: string
     type: object
   GeographicDivision:
@@ -637,13 +637,13 @@ definitions:
           type: string
         type: array
       name:
-        description: "The official's name."
+        description: The official's name.
         type: string
       party:
         description: The full name of the party the official belongs to.
         type: string
       phones:
-        description: "The official's public contact phone numbers."
+        description: The official's public contact phone numbers.
         items:
           type: string
         type: array
@@ -651,7 +651,7 @@ definitions:
         description: A URL for a photo of the official.
         type: string
       urls:
-        description: "The official's public website URLs."
+        description: The official's public website URLs.
         items:
           type: string
         type: array
@@ -774,7 +774,7 @@ definitions:
     description: The result of a voter info lookup query.
     properties:
       contests:
-        description: "Contests that will appear on the voter's ballot."
+        description: Contests that will appear on the voter's ballot.
         items:
           $ref: '#/definitions/Contest'
         type: array

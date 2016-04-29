@@ -4,7 +4,7 @@ schemes:
 host: go.netlicensing.io
 basePath: /core/v2/rest
 info:
-  description: "The Labs64 <a href='https://www.labs64.de/confluence/x/pwCo' target='_blank'>NetLicensing API</a> is a RESTful API and gives you access to NetLicensing’s core features.<br/><br/><strong>Authentication</strong><br/>You authenticate to the NetLicensing API by providing your account credentials or simply use our demo account - <code>demo:demo</code><br/><br/>Find out more about Labs64 NetLicensing at <a href='http://netlicensing.io' target='_blank'>netlicensing.io</a>"
+  description: 'The Labs64 <a href=''https://www.labs64.de/confluence/x/pwCo'' target=''_blank''>NetLicensing API</a> is a RESTful API and gives you access to NetLicensing’s core features.<br/><br/><strong>Authentication</strong><br/>You authenticate to the NetLicensing API by providing your account credentials or simply use our demo account - <code>demo:demo</code><br/><br/>Find out more about Labs64 NetLicensing at <a href=''http://netlicensing.io'' target=''_blank''>netlicensing.io</a>'
   termsOfService: 'https://www.labs64.com/legal/terms-of-service/netlicensing'
   title: Labs64 NetLicensing
   version: 2.x
@@ -124,17 +124,17 @@ paths:
           name: name
           required: false
           type: string
-        - description: "Mandatory for 'TIMEVOLUME' license type and 'RENTAL' licensing model"
+        - description: Mandatory for 'TIMEVOLUME' license type and 'RENTAL' licensing model
           in: formData
           name: parentfeature
           required: false
           type: string
-        - description: "Mandatory for 'TIMEVOLUME' license type."
+        - description: Mandatory for 'TIMEVOLUME' license type.
           in: formData
           name: timeVolume
           required: false
           type: string
-        - description: "Mandatory for 'TIMEVOLUME' license type."
+        - description: Mandatory for 'TIMEVOLUME' license type.
           format: date-time
           in: formData
           name: startDate
@@ -151,7 +151,7 @@ paths:
           name: currency
           required: false
           type: string
-        - description: "If set to 'true', this license is not shown in NetLicensing Shop as purchased license. Set from license template on creation, if not specified explicitly"
+        - description: 'If set to ''true'', this license is not shown in NetLicensing Shop as purchased license. Set from license template on creation, if not specified explicitly'
           in: formData
           name: hidden
           required: false
@@ -288,7 +288,7 @@ paths:
           name: currency
           required: false
           type: string
-        - description: "If set to 'true', this license is not shown in NetLicensing Shop as purchased license. Set from license template on creation, if not specified explicitly"
+        - description: 'If set to ''true'', this license is not shown in NetLicensing Shop as purchased license. Set from license template on creation, if not specified explicitly'
           in: formData
           name: hidden
           required: false
@@ -361,7 +361,7 @@ paths:
           name: name
           required: false
           type: string
-        - description: "If set to 'false', the licensee is disabled. Licensee can not obtain new licenses, and validation is disabled"
+        - description: 'If set to ''false'', the licensee is disabled. Licensee can not obtain new licenses, and validation is disabled'
           in: formData
           name: active
           required: true
@@ -469,7 +469,7 @@ paths:
           name: number
           required: false
           type: string
-        - description: "If set to 'false', the licensee is disabled. Licensee can not obtain new licenses, and validation is disabled"
+        - description: 'If set to ''false'', the licensee is disabled. Licensee can not obtain new licenses, and validation is disabled'
           in: formData
           name: active
           required: false
@@ -509,7 +509,7 @@ paths:
           name: licenseeNumber
           required: true
           type: string
-        - description: "Product number, must be provided when 'licensee auto-create' is enabled (see also Product JavaDoc). Identifies the product to which new licensee should be added"
+        - description: 'Product number, must be provided when ''licensee auto-create'' is enabled (see also Product JavaDoc). Identifies the product to which new licensee should be added'
           in: query
           name: productNumber
           required: false
@@ -588,7 +588,7 @@ paths:
           name: name
           required: true
           type: string
-        - description: "If set to 'false', the license template is disabled. Licensee can not obtain any new licenses off this license template."
+        - description: 'If set to ''false'', the license template is disabled. Licensee can not obtain any new licenses off this license template.'
           in: formData
           name: active
           required: true
@@ -606,12 +606,12 @@ paths:
           name: licenseType
           required: true
           type: array
-        - description: "Mandatory for 'TIMEVOLUME' license type."
+        - description: Mandatory for 'TIMEVOLUME' license type.
           in: formData
           name: timeVolume
           required: false
           type: string
-        - description: "Mandatory for 'FLOATING' license type."
+        - description: Mandatory for 'FLOATING' license type.
           in: formData
           name: maxSessions
           required: false
@@ -627,17 +627,17 @@ paths:
           name: currency
           required: false
           type: string
-        - description: "If set to 'true', every new licensee automatically gets one license out of this license template on creation. Automatic licenses must have their price set to 0."
+        - description: 'If set to ''true'', every new licensee automatically gets one license out of this license template on creation. Automatic licenses must have their price set to 0.'
           in: formData
           name: automatic
           required: false
           type: boolean
-        - description: "If set to 'true', this license template is not shown in NetLicensing Shop as offered for purchase."
+        - description: 'If set to ''true'', this license template is not shown in NetLicensing Shop as offered for purchase.'
           in: formData
           name: hidden
           required: false
           type: boolean
-        - description: "If set to 'true', licenses from this license template are not visible to the end customer, but participate in validation."
+        - description: 'If set to ''true'', licenses from this license template are not visible to the end customer, but participate in validation.'
           in: formData
           name: hideLicenses
           required: false
@@ -752,7 +752,7 @@ paths:
           name: name
           required: false
           type: string
-        - description: "If set to 'false', the license template is disabled. Licensee can not obtain any new licenses off this license template."
+        - description: 'If set to ''false'', the license template is disabled. Licensee can not obtain any new licenses off this license template.'
           in: formData
           name: active
           required: false
@@ -770,12 +770,12 @@ paths:
           name: licenseType
           required: false
           type: array
-        - description: "Mandatory for 'TIMEVOLUME' license type."
+        - description: Mandatory for 'TIMEVOLUME' license type.
           in: formData
           name: timeVolume
           required: false
           type: string
-        - description: "Mandatory for 'FLOATING' license type."
+        - description: Mandatory for 'FLOATING' license type.
           in: formData
           name: maxSessions
           required: false
@@ -791,17 +791,17 @@ paths:
           name: currency
           required: false
           type: string
-        - description: "If set to 'true', every new licensee automatically gets one license out of this license template on creation. Automatic licenses must have their price set to 0."
+        - description: 'If set to ''true'', every new licensee automatically gets one license out of this license template on creation. Automatic licenses must have their price set to 0.'
           in: formData
           name: automatic
           required: false
           type: boolean
-        - description: "If set to 'true', this license template is not shown in NetLicensing Shop as offered for purchase."
+        - description: 'If set to ''true'', this license template is not shown in NetLicensing Shop as offered for purchase.'
           in: formData
           name: hidden
           required: false
           type: boolean
-        - description: "If set to 'true', licenses from this license template are not visible to the end customer, but participate in validation."
+        - description: 'If set to ''true'', licenses from this license template are not visible to the end customer, but participate in validation.'
           in: formData
           name: hideLicenses
           required: false
@@ -896,7 +896,7 @@ paths:
           name: paymentMethodNumber
           required: true
           type: string
-        - description: "If set to 'false', the payment method is disabled."
+        - description: 'If set to ''false'', the payment method is disabled.'
           in: formData
           name: active
           required: false
@@ -965,7 +965,7 @@ paths:
           name: number
           required: false
           type: string
-        - description: "If set to 'false', the product is disabled. No new licensees can be registered for the product, existing licensees can not obtain new licenses."
+        - description: 'If set to ''false'', the product is disabled. No new licensees can be registered for the product, existing licensees can not obtain new licenses.'
           in: formData
           name: active
           required: true
@@ -980,7 +980,7 @@ paths:
           name: version
           required: true
           type: string
-        - description: "If set to 'true', non-existing licensees will be created at first validation attempt."
+        - description: 'If set to ''true'', non-existing licensees will be created at first validation attempt.'
           in: formData
           name: licenseeAutoCreate
           required: false
@@ -1100,7 +1100,7 @@ paths:
           name: number
           required: false
           type: string
-        - description: "If set to 'false', the product is disabled. No new licensees can be registered for the product, existing licensees can not obtain new licenses."
+        - description: 'If set to ''false'', the product is disabled. No new licensees can be registered for the product, existing licensees can not obtain new licenses.'
           in: formData
           name: active
           required: false
@@ -1115,7 +1115,7 @@ paths:
           name: version
           required: false
           type: string
-        - description: "If set to 'true', non-existing licensees will be created at first validation attempt."
+        - description: 'If set to ''true'', non-existing licensees will be created at first validation attempt.'
           in: formData
           name: licenseeAutoCreate
           required: false
@@ -1194,7 +1194,7 @@ paths:
           name: number
           required: false
           type: string
-        - description: "If set to 'false', the product module is disabled. Licensees can not obtain any new licenses for this product module."
+        - description: 'If set to ''false'', the product module is disabled. Licensees can not obtain any new licenses for this product module.'
           in: formData
           name: active
           required: true
@@ -1218,25 +1218,25 @@ paths:
           name: licensingModel
           required: true
           type: array
-        - description: "Maximum checkout validity (days). Mandatory for 'Floating' licensing model."
+        - description: Maximum checkout validity (days). Mandatory for 'Floating' licensing model.
           format: int32
           in: formData
           name: maxCheckoutValidity
           required: false
           type: integer
-        - description: "Remaining time volume for yellow level. Mandatory for 'Rental' licensing model."
+        - description: Remaining time volume for yellow level. Mandatory for 'Rental' licensing model.
           format: int32
           in: formData
           name: yellowThreshold
           required: false
           type: integer
-        - description: "Remaining time volume for red level. Mandatory for 'Rental' licensing model."
+        - description: Remaining time volume for red level. Mandatory for 'Rental' licensing model.
           format: int32
           in: formData
           name: redThreshold
           required: false
           type: integer
-        - description: "License template. Mandatory for 'Try &amp; Buy' licensing model."
+        - description: License template. Mandatory for 'Try &amp; Buy' licensing model.
           in: formData
           items:
             default: TIMEVOLUME
@@ -1350,7 +1350,7 @@ paths:
           name: number
           required: false
           type: string
-        - description: "If set to 'false', the product module is disabled. Licensees can not obtain any new licenses for this product module."
+        - description: 'If set to ''false'', the product module is disabled. Licensees can not obtain any new licenses for this product module.'
           in: formData
           name: active
           required: false
@@ -1374,25 +1374,25 @@ paths:
           name: licensingModel
           required: false
           type: array
-        - description: "Maximum checkout validity (days). Mandatory for 'Floating' licensing model."
+        - description: Maximum checkout validity (days). Mandatory for 'Floating' licensing model.
           format: int32
           in: formData
           name: maxCheckoutValidity
           required: false
           type: integer
-        - description: "Remaining time volume for yellow level. Mandatory for 'Rental' licensing model."
+        - description: Remaining time volume for yellow level. Mandatory for 'Rental' licensing model.
           format: int32
           in: formData
           name: yellowThreshold
           required: false
           type: integer
-        - description: "Remaining time volume for red level. Mandatory for 'Rental' licensing model."
+        - description: Remaining time volume for red level. Mandatory for 'Rental' licensing model.
           format: int32
           in: formData
           name: redThreshold
           required: false
           type: integer
-        - description: "License template. Mandatory for 'Try &amp; Buy' licensing model."
+        - description: License template. Mandatory for 'Try &amp; Buy' licensing model.
           in: formData
           items:
             default: TIMEVOLUME
@@ -1467,27 +1467,27 @@ paths:
           name: tokenType
           required: true
           type: string
-        - description: 'for <i>tokenType=SHOP</i> only (mandatory); identifies licensee that will be assigned to the shop token'
+        - description: for <i>tokenType=SHOP</i> only (mandatory); identifies licensee that will be assigned to the shop token
           in: formData
           name: licenseeNumber
           required: false
           type: string
-        - description: 'for <i>tokenType=SHOP</i> only; take customers to this URL when they finish checkout'
+        - description: for <i>tokenType=SHOP</i> only; take customers to this URL when they finish checkout
           in: formData
           name: successURL
           required: false
           type: string
-        - description: 'for <i>tokenType=SHOP</i> only; shop link title for successful checkout process'
+        - description: for <i>tokenType=SHOP</i> only; shop link title for successful checkout process
           in: formData
           name: successURLTitle
           required: false
           type: string
-        - description: 'for <i>tokenType=SHOP</i> only; take customers to this URL when they cancel their checkout'
+        - description: for <i>tokenType=SHOP</i> only; take customers to this URL when they cancel their checkout
           in: formData
           name: cancelURL
           required: false
           type: string
-        - description: 'for <i>tokenType=SHOP</i> only; shop link title for cancel checkout process'
+        - description: for <i>tokenType=SHOP</i> only; shop link title for cancel checkout process
           in: formData
           name: cancelURLTitle
           required: false
@@ -1832,13 +1832,13 @@ definitions:
   License:
     properties:
       active:
-        description: "If set to 'false', the license is disabled. License can be re-enabled, but as long as it is disabled, the license is excluded from the validation process."
+        description: 'If set to ''false'', the license is disabled. License can be re-enabled, but as long as it is disabled, the license is excluded from the validation process.'
         type: boolean
       currency:
         description: 'specifies currency for the license price. Check data types to discover which currencies are supported. Read-only, set from license template on creation.'
         type: string
       hidden:
-        description: "If set to 'true', this license is not shown in NetLicensing Shop as purchased license. Set from license template on creation, if not specified explicitly."
+        description: 'If set to ''true'', this license is not shown in NetLicensing Shop as purchased license. Set from license template on creation, if not specified explicitly.'
         type: boolean
       name:
         description: 'Name for the licensed item. Set from license template on creation, if not specified explicitly.'
@@ -1856,19 +1856,19 @@ definitions:
   LicenseTemplate:
     properties:
       active:
-        description: "If set to 'false', the license template is disabled. Licensee can not obtain any new licenses off this license template."
+        description: 'If set to ''false'', the license template is disabled. Licensee can not obtain any new licenses off this license template.'
         type: boolean
       automatic:
-        description: "If set to 'true', every new licensee automatically gets one license out of this license template on creation. Automatic licenses must have their price set to 0."
+        description: 'If set to ''true'', every new licensee automatically gets one license out of this license template on creation. Automatic licenses must have their price set to 0.'
         type: boolean
       currency:
         description: specifies currency for the license price. Check data types to discover which currencies are supported.
         type: string
       hidden:
-        description: "If set to 'true', this license template is not shown in NetLicensing Shop as offered for purchase."
+        description: 'If set to ''true'', this license template is not shown in NetLicensing Shop as offered for purchase.'
         type: boolean
       hiddenLicenses:
-        description: "If set to 'true', licenses from this license template are not visible to the end customer, but participate in validation."
+        description: 'If set to ''true'', licenses from this license template are not visible to the end customer, but participate in validation.'
         type: boolean
       licenseType:
         description: type of licenses created from this license template
@@ -1892,7 +1892,7 @@ definitions:
   Licensee:
     properties:
       active:
-        description: "If set to 'false', the licensee is disabled. Licensee can not obtain new licenses, and validation is disabled."
+        description: 'If set to ''false'', the licensee is disabled. Licensee can not obtain new licenses, and validation is disabled.'
         type: boolean
       number:
         description: Unique number (across all products of a vendor) that identifies the licensee. Vendor can assign this number when creating a licensee or let NetLicensing generate one. Read-only after creation of the first license for the licensee.
@@ -1912,10 +1912,10 @@ definitions:
   Product:
     properties:
       active:
-        description: "If set to 'false', the product is disabled. No new licensees can be registered for the product, existing licensees can not obtain new licenses"
+        description: 'If set to ''false'', the product is disabled. No new licensees can be registered for the product, existing licensees can not obtain new licenses'
         type: boolean
       licenseeAutoCreate:
-        description: "If set to 'true', non-existing licensees will be created at first validation attempt."
+        description: 'If set to ''true'', non-existing licensees will be created at first validation attempt.'
         type: boolean
       name:
         description: Product name. Together with the version identifies the product for the end customer
@@ -1932,7 +1932,7 @@ definitions:
   ProductModule:
     properties:
       active:
-        description: "If set to 'false', the product module is disabled. Licensees can not obtain any new licenses for this product module."
+        description: 'If set to ''false'', the product module is disabled. Licensees can not obtain any new licenses for this product module.'
         type: boolean
       licensingInfo:
         description: Licensing model applied to this product module. Defines what license templates can be configured for the product module and how licenses for this product module are processed during validation.

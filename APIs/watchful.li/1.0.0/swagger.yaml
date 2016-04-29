@@ -181,7 +181,7 @@ paths:
     get:
       description: Returns a list Extensions
       parameters:
-        - description: "Do a 'LIKE' search, you can also use '%'"
+        - description: 'Do a ''LIKE'' search, you can also use ''%'''
           in: query
           name: ext_name
           required: false
@@ -191,12 +191,12 @@ paths:
           name: siteids
           required: false
           type: string
-        - description: "Do a 'LIKE' search, you can also use '%'. technical name of the extension com_xxxx"
+        - description: 'Do a ''LIKE'' search, you can also use ''%''. technical name of the extension com_xxxx'
           in: query
           name: ext_prefix
           required: false
           type: string
-        - description: "Do a 'LIKE' search, you can also use '%'"
+        - description: 'Do a ''LIKE'' search, you can also use ''%'''
           in: query
           name: version
           required: false
@@ -266,7 +266,7 @@ paths:
         - extensions
   '/extensions/{id}/ignore':
     post:
-      description: "Set 'ignore updates' for a given extension / site_id"
+      description: Set 'ignore updates' for a given extension / site_id
       parameters:
         - description: ID of the extension
           format: int64
@@ -286,12 +286,12 @@ paths:
             type: string
         '404':
           description: Update not found for the given extension
-      summary: "Set 'ignore updates' for a given extension / site_id"
+      summary: Set 'ignore updates' for a given extension / site_id
       tags:
         - extensions
   '/extensions/{id}/unignore':
     post:
-      description: "Remove 'ignore updates' for a given extension"
+      description: Remove 'ignore updates' for a given extension
       parameters:
         - description: ID of the extension
           format: int64
@@ -311,7 +311,7 @@ paths:
             type: string
         '404':
           description: Update not found for the given extension
-      summary: "Remove 'ignore updates' for a given extension"
+      summary: Remove 'ignore updates' for a given extension
       tags:
         - extensions
   '/extensions/{id}/update':
@@ -427,7 +427,7 @@ paths:
           in: query
           name: log_type
           type: string
-        - description: "Do a 'LIKE' search, you can also use '%'"
+        - description: 'Do a ''LIKE'' search, you can also use ''%'''
           in: query
           name: log_entry
           required: false
@@ -515,7 +515,7 @@ paths:
           in: query
           name: filter_type
           type: string
-        - description: "Do a 'LIKE' search, you can also use '%'"
+        - description: 'Do a ''LIKE'' search, you can also use ''%'''
           in: query
           name: search
           required: false
@@ -777,22 +777,22 @@ paths:
           name: siteids
           required: false
           type: string
-        - description: "Site name. Do a 'LIKE' search, you can also use '%'"
+        - description: 'Site name. Do a ''LIKE'' search, you can also use ''%'''
           in: query
           name: name
           required: false
           type: string
-        - description: "Access URL. Do a 'LIKE' search, you can also use '%'"
+        - description: 'Access URL. Do a ''LIKE'' search, you can also use ''%'''
           in: query
           name: access_url
           required: false
           type: string
-        - description: "Joomla version. Do a 'LIKE' search, you can also use '%'"
+        - description: 'Joomla version. Do a ''LIKE'' search, you can also use ''%'''
           in: query
           name: j_version
           required: false
           type: string
-        - description: "Ip address. Do a 'LIKE' search, you can also use '%'"
+        - description: 'Ip address. Do a ''LIKE'' search, you can also use ''%'''
           in: query
           name: ip
           required: false
@@ -1315,7 +1315,7 @@ paths:
           name: id
           required: true
           type: integer
-        - description: "Do a 'LIKE' search, you can also use '%'"
+        - description: 'Do a ''LIKE'' search, you can also use ''%'''
           in: query
           name: log_entry
           required: false
@@ -1513,7 +1513,7 @@ paths:
           name: id
           required: true
           type: integer
-        - description: "Do a 'LIKE' search, you can also use '%'"
+        - description: 'Do a ''LIKE'' search, you can also use ''%'''
           in: query
           name: name
           required: false
@@ -1855,7 +1855,7 @@ paths:
     get:
       description: Returns a list of tags
       parameters:
-        - description: "Do a 'LIKE' search, you can also use '%'"
+        - description: 'Do a ''LIKE'' search, you can also use ''%'''
           in: query
           name: name
           required: false
@@ -2057,22 +2057,22 @@ paths:
           name: id
           required: true
           type: integer
-        - description: "Do a 'LIKE' search, you can also use '%'"
+        - description: 'Do a ''LIKE'' search, you can also use ''%'''
           in: query
           name: name
           required: false
           type: string
-        - description: "Do a 'LIKE' search, you can also use '%'"
+        - description: 'Do a ''LIKE'' search, you can also use ''%'''
           in: query
           name: access_url
           required: false
           type: string
-        - description: "Do a 'LIKE' search, you can also use '%'"
+        - description: 'Do a ''LIKE'' search, you can also use ''%'''
           in: query
           name: j_version
           required: false
           type: string
-        - description: "Do a 'LIKE' search, you can also use '%'"
+        - description: 'Do a ''LIKE'' search, you can also use ''%'''
           in: query
           name: ip
           required: false

@@ -31,11 +31,11 @@ securityDefinitions:
     scopes:
       'https://www.googleapis.com/auth/admin.directory.customer': View and manage customer related information
       'https://www.googleapis.com/auth/admin.directory.customer.readonly': View customer related information
-      'https://www.googleapis.com/auth/admin.directory.device.chromeos': "View and manage your Chrome OS devices' metadata"
-      'https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly': "View your Chrome OS devices' metadata"
-      'https://www.googleapis.com/auth/admin.directory.device.mobile': "View and manage your mobile devices' metadata"
+      'https://www.googleapis.com/auth/admin.directory.device.chromeos': View and manage your Chrome OS devices' metadata
+      'https://www.googleapis.com/auth/admin.directory.device.chromeos.readonly': View your Chrome OS devices' metadata
+      'https://www.googleapis.com/auth/admin.directory.device.mobile': View and manage your mobile devices' metadata
       'https://www.googleapis.com/auth/admin.directory.device.mobile.action': Manage your mobile devices by performing administrative tasks
-      'https://www.googleapis.com/auth/admin.directory.device.mobile.readonly': "View your mobile devices' metadata"
+      'https://www.googleapis.com/auth/admin.directory.device.mobile.readonly': View your mobile devices' metadata
       'https://www.googleapis.com/auth/admin.directory.domain': View and manage the provisioning of domains for your customers
       'https://www.googleapis.com/auth/admin.directory.domain.readonly': View domains related to your customers
       'https://www.googleapis.com/auth/admin.directory.group': View and manage the provisioning of groups on your domain
@@ -516,7 +516,7 @@ paths:
           required: true
           type: string
         - default: ''
-          description: "the URL-encoded organization unit's path or its Id"
+          description: the URL-encoded organization unit's path or its Id
           in: query
           name: orgUnitPath
           type: string
@@ -1081,7 +1081,7 @@ paths:
       description: Retrieves a list of notifications.
       operationId: directory.notifications.list
       parameters:
-        - description: "The unique ID for the customer's Google account."
+        - description: The unique ID for the customer's Google account.
           in: path
           name: customer
           required: true
@@ -1121,7 +1121,7 @@ paths:
       description: Deletes a notification
       operationId: directory.notifications.delete
       parameters:
-        - description: "The unique ID for the customer's Google account. The customerId is also returned as part of the Users resource."
+        - description: The unique ID for the customer's Google account. The customerId is also returned as part of the Users resource.
           in: path
           name: customer
           required: true
@@ -1143,7 +1143,7 @@ paths:
       description: Retrieves a notification.
       operationId: directory.notifications.get
       parameters:
-        - description: "The unique ID for the customer's Google account. The customerId is also returned as part of the Users resource."
+        - description: The unique ID for the customer's Google account. The customerId is also returned as part of the Users resource.
           in: path
           name: customer
           required: true
@@ -1175,7 +1175,7 @@ paths:
       description: Updates a notification. This method supports patch semantics.
       operationId: directory.notifications.patch
       parameters:
-        - description: "The unique ID for the customer's Google account."
+        - description: The unique ID for the customer's Google account.
           in: path
           name: customer
           required: true
@@ -1203,7 +1203,7 @@ paths:
       description: Updates a notification.
       operationId: directory.notifications.update
       parameters:
-        - description: "The unique ID for the customer's Google account."
+        - description: The unique ID for the customer's Google account.
           in: path
           name: customer
           required: true
@@ -1232,7 +1232,7 @@ paths:
       description: Retrieves a list of calendar resources for an account.
       operationId: directory.resources.calendars.list
       parameters:
-        - description: "The unique ID for the customer's Google account. As an account administrator, you can also use the my_customer alias to represent your account's customer ID."
+        - description: 'The unique ID for the customer''s Google account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
           in: path
           name: customer
           required: true
@@ -1271,7 +1271,7 @@ paths:
       description: Inserts a calendar resource.
       operationId: directory.resources.calendars.insert
       parameters:
-        - description: "The unique ID for the customer's Google account. As an account administrator, you can also use the my_customer alias to represent your account's customer ID."
+        - description: 'The unique ID for the customer''s Google account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
           in: path
           name: customer
           required: true
@@ -1295,7 +1295,7 @@ paths:
       description: Deletes a calendar resource.
       operationId: directory.resources.calendars.delete
       parameters:
-        - description: "The unique ID for the customer's Google account. As an account administrator, you can also use the my_customer alias to represent your account's customer ID."
+        - description: 'The unique ID for the customer''s Google account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
           in: path
           name: customer
           required: true
@@ -1317,7 +1317,7 @@ paths:
       description: Retrieves a calendar resource.
       operationId: directory.resources.calendars.get
       parameters:
-        - description: "The unique ID for the customer's Google account. As an account administrator, you can also use the my_customer alias to represent your account's customer ID."
+        - description: 'The unique ID for the customer''s Google account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
           in: path
           name: customer
           required: true
@@ -1351,7 +1351,7 @@ paths:
       description: Updates a calendar resource. This method supports patch semantics.
       operationId: directory.resources.calendars.patch
       parameters:
-        - description: "The unique ID for the customer's Google account. As an account administrator, you can also use the my_customer alias to represent your account's customer ID."
+        - description: 'The unique ID for the customer''s Google account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
           in: path
           name: customer
           required: true
@@ -1379,7 +1379,7 @@ paths:
       description: Updates a calendar resource.
       operationId: directory.resources.calendars.update
       parameters:
-        - description: "The unique ID for the customer's Google account. As an account administrator, you can also use the my_customer alias to represent your account's customer ID."
+        - description: 'The unique ID for the customer''s Google account. As an account administrator, you can also use the my_customer alias to represent your account''s customer ID.'
           in: path
           name: customer
           required: true
@@ -1427,7 +1427,7 @@ paths:
           in: query
           name: roleId
           type: string
-        - description: "The user's primary email address, alias email address, or unique user ID. If included in the request, returns role assignments only for this user."
+        - description: 'The user''s primary email address, alias email address, or unique user ID. If included in the request, returns role assignments only for this user.'
           in: query
           name: userKey
           type: string
@@ -2728,7 +2728,7 @@ paths:
       description: List the ASPs issued by a user.
       operationId: directory.asps.list
       parameters:
-        - description: "Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID."
+        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
           in: path
           name: userKey
           required: true
@@ -2756,7 +2756,7 @@ paths:
       description: Delete an ASP issued by a user.
       operationId: directory.asps.delete
       parameters:
-        - description: "Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID."
+        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
           in: path
           name: userKey
           required: true
@@ -2778,7 +2778,7 @@ paths:
       description: Get information about an ASP issued by a user.
       operationId: directory.asps.get
       parameters:
-        - description: "Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID."
+        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
           in: path
           name: userKey
           required: true
@@ -2934,7 +2934,7 @@ paths:
       description: Returns the set of tokens specified user has issued to 3rd party applications.
       operationId: directory.tokens.list
       parameters:
-        - description: "Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID."
+        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
           in: path
           name: userKey
           required: true
@@ -2962,7 +2962,7 @@ paths:
       description: Delete all access tokens issued by a user for an application.
       operationId: directory.tokens.delete
       parameters:
-        - description: "Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID."
+        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
           in: path
           name: userKey
           required: true
@@ -2984,7 +2984,7 @@ paths:
       description: Get information about an access token issued by a user.
       operationId: directory.tokens.get
       parameters:
-        - description: "Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID."
+        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
           in: path
           name: userKey
           required: true
@@ -3047,7 +3047,7 @@ paths:
       description: Returns the current set of valid backup verification codes for the specified user.
       operationId: directory.verificationCodes.list
       parameters:
-        - description: "Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID."
+        - description: 'Identifies the user in the API request. The value can be the user''s primary email address, alias email address, or unique user ID.'
           in: path
           name: userKey
           required: true
@@ -3140,7 +3140,7 @@ definitions:
         description: Kind of resource this is.
         type: string
       primaryEmail:
-        description: "Group's primary email (Read-only) User's primary email (Read-only)"
+        description: Group's primary email (Read-only) User's primary email (Read-only)
         type: string
     type: object
   Aliases:
@@ -3412,40 +3412,40 @@ definitions:
     description: JSON template for Customer Resource object in Directory API.
     properties:
       alternateEmail:
-        description: "The customer's secondary contact email address. This email address cannot be on the same domain as the customerDomain"
+        description: The customer's secondary contact email address. This email address cannot be on the same domain as the customerDomain
         type: string
       customerCreationTime:
-        description: "The customer's creation time (Readonly)"
+        description: The customer's creation time (Readonly)
         format: date-time
         type: string
       customerDomain:
-        description: "The customer's primary domain name string. Do not include the www prefix when creating a new customer."
+        description: The customer's primary domain name string. Do not include the www prefix when creating a new customer.
         type: string
       etag:
         description: ETag of the resource.
         type: string
       id:
-        description: "The unique ID for the customer's Google account. (Readonly)"
+        description: The unique ID for the customer's Google account. (Readonly)
         type: string
       kind:
         default: 'admin#directory#customer'
         description: 'Identifies the resource as a customer. Value: admin#directory#customer'
         type: string
       language:
-        description: "The customer's ISO 639-2 language code. The default value is en-US"
+        description: The customer's ISO 639-2 language code. The default value is en-US
         type: string
       phoneNumber:
-        description: "The customer's contact phone number in E.164 format."
+        description: The customer's contact phone number in E.164 format.
         type: string
       postalAddress:
         $ref: '#/definitions/CustomerPostalAddress'
-        description: "The customer's postal address information."
+        description: The customer's postal address information.
     type: object
   CustomerPostalAddress:
     description: JSON template for postal address of a customer.
     properties:
       addressLine1:
-        description: "A customer's physical address. The address can be composed of one to three lines."
+        description: A customer's physical address. The address can be composed of one to three lines.
         type: string
       addressLine2:
         description: Address line 2 of the address.
@@ -3454,7 +3454,7 @@ definitions:
         description: Address line 3 of the address.
         type: string
       contactName:
-        description: "The customer contact's name."
+        description: The customer contact's name.
         type: string
       countryCode:
         description: This is a required property. For countryCode information see the ISO 3166 country code elements.
@@ -3561,7 +3561,7 @@ definitions:
     description: JSON template for Group resource in Directory API.
     properties:
       adminCreated:
-        description: 'Is the group created by admin (Read-only) *'
+        description: Is the group created by admin (Read-only) *
         type: boolean
       aliases:
         description: List of aliases (Read-only)
@@ -3707,7 +3707,7 @@ definitions:
         description: Mobile Device serial number (Read-only)
         type: string
       email:
-        description: "List of owner user's email addresses (Read-only)"
+        description: List of owner user's email addresses (Read-only)
         items:
           type: string
         type: array
@@ -3745,7 +3745,7 @@ definitions:
         description: Name of the model of the device
         type: string
       name:
-        description: "List of owner user's names (Read-only)"
+        description: List of owner user's names (Read-only)
         items:
           type: string
         type: array
@@ -4019,7 +4019,10 @@ definitions:
         format: int64
         type: string
       scopeType:
-        description: "The scope in which this role is assigned. Possible values are: \n- CUSTOMER\n- ORG_UNIT"
+        description: |-
+          The scope in which this role is assigned. Possible values are: 
+          - CUSTOMER
+          - ORG_UNIT
         type: string
     type: object
   RoleAssignments:
@@ -4120,7 +4123,7 @@ definitions:
         type: object
       readAccessType:
         default: ALL_DOMAIN_USERS
-        description: 'Read ACLs on the field specifying who can view values of this field. Valid values are "ALL_DOMAIN_USERS" and "ADMINS_AND_SELF".'
+        description: Read ACLs on the field specifying who can view values of this field. Valid values are "ALL_DOMAIN_USERS" and "ADMINS_AND_SELF".
         type: string
     type: object
   Schemas:
@@ -4204,7 +4207,7 @@ definitions:
         description: Boolean indicating if the user should change password in next login
         type: boolean
       creationTime:
-        description: "User's Google account creation time. (Read-only)"
+        description: User's Google account creation time. (Read-only)
         format: date-time
         readOnly: true
         type: string
@@ -4258,13 +4261,13 @@ definitions:
         readOnly: true
         type: string
       lastLoginTime:
-        description: "User's last login time. (Read-only)"
+        description: User's last login time. (Read-only)
         format: date-time
         readOnly: true
         type: string
       name:
         $ref: '#/definitions/UserName'
-        description: "User's name"
+        description: User's name
       nonEditableAliases:
         description: List of non editable aliases (Read-only)
         items:
@@ -4277,7 +4280,7 @@ definitions:
         type: string
       organizations: {}
       password:
-        description: "User's password"
+        description: User's password
         type: string
       phones: {}
       primaryEmail:
@@ -4292,7 +4295,7 @@ definitions:
         readOnly: true
         type: string
       thumbnailPhotoEtag:
-        description: "ETag of the user's photo (Read-only)"
+        description: ETag of the user's photo (Read-only)
         readOnly: true
         type: string
       thumbnailPhotoUrl:
@@ -4339,7 +4342,7 @@ definitions:
         description: Postal code.
         type: string
       primary:
-        description: "If this is user's primary address. Only one entry could be marked as primary."
+        description: If this is user's primary address. Only one entry could be marked as primary.
         type: boolean
       region:
         description: Region.
@@ -4368,7 +4371,7 @@ definitions:
         description: Custom Type.
         type: string
       primary:
-        description: "If this is user's primary email. Only one entry could be marked as primary."
+        description: If this is user's primary email. Only one entry could be marked as primary.
         type: boolean
       type:
         description: 'Each entry can have a type which indicates standard types of that entry. For example email could be of home, work etc. In addition to the standard type, an entry can have a custom type and can take any value Such types should have the CUSTOM value as type and also have a customType value.'
@@ -4400,7 +4403,7 @@ definitions:
         description: Instant messenger id.
         type: string
       primary:
-        description: "If this is user's primary im. Only one entry could be marked as primary."
+        description: If this is user's primary im. Only one entry could be marked as primary.
         type: boolean
       protocol:
         description: 'Protocol used in the instant messenger. It should be one of the values from ImProtocolTypes map. Similar to type, it can take a CUSTOM value and specify the custom name in customProtocol field.'
@@ -4454,7 +4457,7 @@ definitions:
         description: Name of the organization
         type: string
       primary:
-        description: "If it user's primary organization."
+        description: If it user's primary organization.
         type: boolean
       symbol:
         description: Symbol of the organization.
@@ -4473,7 +4476,7 @@ definitions:
         description: Custom Type.
         type: string
       primary:
-        description: "If this is user's primary phone or not."
+        description: If this is user's primary phone or not.
         type: boolean
       type:
         description: 'Each entry can have a type which indicates standard types of that entry. For example phone could be of home_fax, work, mobile etc. In addition to the standard type, an entry can have a custom type and can give it any name. Such types should have the CUSTOM value as type and also have a customType value.'
@@ -4541,7 +4544,7 @@ definitions:
         description: Custom Type.
         type: string
       primary:
-        description: "If this is user's primary website or not."
+        description: If this is user's primary website or not.
         type: boolean
       type:
         description: 'Each entry can have a type which indicates standard types of that entry. For example website could be of home, work, blog etc. In addition to the standard type, an entry can have a custom type and can give it any name. Such types should have the CUSTOM value as type and also have a customType value.'

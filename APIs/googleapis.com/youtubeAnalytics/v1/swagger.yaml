@@ -273,11 +273,11 @@ paths:
       description: 'Returns a collection of groups that match the API request parameters. For example, you can retrieve all groups that the authenticated user owns, or you can retrieve one or more groups by their unique IDs.'
       operationId: youtubeAnalytics.groups.list
       parameters:
-        - description: "The id parameter specifies a comma-separated list of the YouTube group ID(s) for the resource(s) that are being retrieved. In a group resource, the id property specifies the group's YouTube group ID."
+        - description: 'The id parameter specifies a comma-separated list of the YouTube group ID(s) for the resource(s) that are being retrieved. In a group resource, the id property specifies the group''s YouTube group ID.'
           in: query
           name: id
           type: string
-        - description: "Set this parameter's value to true to instruct the API to only return groups owned by the authenticated user."
+        - description: Set this parameter's value to true to instruct the API to only return groups owned by the authenticated user.
           in: query
           name: mine
           type: boolean
@@ -344,7 +344,7 @@ paths:
       tags:
         - groups
     put:
-      description: "Modifies a group. For example, you could change a group's title."
+      description: 'Modifies a group. For example, you could change a group''s title.'
       operationId: youtubeAnalytics.groups.update
       parameters:
         - description: |-
@@ -415,7 +415,7 @@ paths:
           minimum: 1
           name: max-results
           type: integer
-        - description: "A comma-separated list of dimensions or metrics that determine the sort order for YouTube Analytics data. By default the sort order is ascending. The '-' prefix causes descending sort order."
+        - description: A comma-separated list of dimensions or metrics that determine the sort order for YouTube Analytics data. By default the sort order is ascending. The '-' prefix causes descending sort order.
           in: query
           name: sort
           type: string

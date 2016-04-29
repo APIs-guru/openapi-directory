@@ -62,13 +62,13 @@ paths:
           required: true
           type: string
         - default: '2016-01-28'
-          description: "The beginning date of the search IN YYYY-MM-DD format (America/New_York timezone). '2016-01-28'"
+          description: The beginning date of the search IN YYYY-MM-DD format (America/New_York timezone). '2016-01-28'
           in: query
           name: date_from
           required: true
           type: string
         - default: '2016-01-28'
-          description: "The ending date of the search IN YYYY-MM-DD format (America/New_York timezone). '2016-01-28'"
+          description: The ending date of the search IN YYYY-MM-DD format (America/New_York timezone). '2016-01-28'
           in: query
           name: date_to
           required: true
@@ -98,13 +98,13 @@ paths:
           required: true
           type: string
         - default: '2016-01-28'
-          description: "The beginning date of the search IN YYYY-MM-DD format (America/New_York timezone). '2016-01-28'"
+          description: The beginning date of the search IN YYYY-MM-DD format (America/New_York timezone). '2016-01-28'
           in: query
           name: date_from
           required: true
           type: string
         - default: '2016-01-28'
-          description: "The ending date of the search IN YYYY-MM-DD format (America/New_York timezone). '2016-01-28'"
+          description: The ending date of the search IN YYYY-MM-DD format (America/New_York timezone). '2016-01-28'
           in: query
           name: date_to
           required: true
@@ -134,13 +134,13 @@ paths:
           required: true
           type: string
         - default: BR
-          description: "2-digit code of the country in ISO 3166 format. 'BR'"
+          description: 2-digit code of the country in ISO 3166 format. 'BR'
           in: query
           name: country_code
           required: true
           type: string
         - default: '5521983115555'
-          description: "The mobile number you would like to validate. '5521983115555'"
+          description: The mobile number you would like to validate. '5521983115555'
           in: query
           name: mobile_number
           required: true
@@ -242,25 +242,25 @@ paths:
           required: true
           type: string
         - default: GT
-          description: "2-digit code of the country in ISO 3166 format. 'GT'"
+          description: 2-digit code of the country in ISO 3166 format. 'GT'
           in: query
           name: country_code
           required: true
           type: string
         - default: Claro
-          description: "Name of the mobile carrier. 'Claro'"
+          description: Name of the mobile carrier. 'Claro'
           in: query
           name: carrier_code
           required: true
           type: string
         - default: 500
-          description: "This is the amount, in cents, of the product you are purchasing. '500' = $5.00"
+          description: 'This is the amount, in cents, of the product you are purchasing. ''500'' = $5.00'
           in: query
           name: amount
           required: true
           type: integer
         - default: USD
-          description: "The currency code (ISO 4217) on the product you are querying. 'USD'"
+          description: The currency code (ISO 4217) on the product you are querying. 'USD'
           in: query
           name: currency_code
           required: true
@@ -315,7 +315,7 @@ paths:
         - topups
   /iatu/topups/reports:
     post:
-      description: "Search topups transactions, by date, with client_transaction_id or to_service_number. Use 'client_transaction_id' to search by transaction number, or 'to_service_number' to get transaction status."
+      description: 'Search topups transactions, by date, with client_transaction_id or to_service_number. Use ''client_transaction_id'' to search by transaction number, or ''to_service_number'' to get transaction status.'
       parameters:
         - default: APP_ID
           description: Application ID you would like to use
@@ -360,13 +360,13 @@ paths:
           required: true
           type: string
         - default: '2016-01-28'
-          description: "The beginning date of the search IN YYYY-MM-DD format (America/New_York timezone). '2016-01-28'"
+          description: The beginning date of the search IN YYYY-MM-DD format (America/New_York timezone). '2016-01-28'
           in: query
           name: date_from
           required: true
           type: string
         - default: '2016-01-28'
-          description: "The ending date of the search IN YYYY-MM-DD format (America/New_York timezone). '2016-01-28'"
+          description: The ending date of the search IN YYYY-MM-DD format (America/New_York timezone). '2016-01-28'
           in: query
           name: date_to
           required: true
@@ -396,13 +396,13 @@ paths:
           required: true
           type: string
         - default: '2016-01-28'
-          description: "The beginning date of the search IN YYYY-MM-DD format (America/New_York timezone). '2016-01-28'"
+          description: The beginning date of the search IN YYYY-MM-DD format (America/New_York timezone). '2016-01-28'
           in: query
           name: date_from
           required: true
           type: string
         - default: '2016-01-28'
-          description: "The ending date of the search IN YYYY-MM-DD format (America/New_York timezone). '2016-01-28'"
+          description: The ending date of the search IN YYYY-MM-DD format (America/New_York timezone). '2016-01-28'
           in: query
           name: date_to
           required: true
@@ -432,13 +432,13 @@ paths:
           required: true
           type: string
         - default: '2016-01-28'
-          description: "The beginning date of the search IN YYYY-MM-DD format (America/New_York timezone). '2016-01-28'"
+          description: The beginning date of the search IN YYYY-MM-DD format (America/New_York timezone). '2016-01-28'
           in: query
           name: date_from
           required: true
           type: string
         - default: '2016-01-28'
-          description: "The ending date of the search IN YYYY-MM-DD format (America/New_York timezone). '2016-01-28'"
+          description: The ending date of the search IN YYYY-MM-DD format (America/New_York timezone). '2016-01-28'
           in: query
           name: date_to
           required: true
@@ -453,7 +453,7 @@ paths:
         - topups
   /iatu/topups/reverse:
     post:
-      description: "Occasionally, a carrier will not be able to successfully complete a topup request. In this case, we will attempt to automatically reverse the transaction for you, and return the money into your account. In the case when this is not possible, you may need to request a reverse on the transaction that has a status of 'transaction_status' 'notredeemed'."
+      description: 'Occasionally, a carrier will not be able to successfully complete a topup request. In this case, we will attempt to automatically reverse the transaction for you, and return the money into your account. In the case when this is not possible, you may need to request a reverse on the transaction that has a status of ''transaction_status'' ''notredeemed''.'
       parameters:
         - default: APP_ID
           description: Application ID you would like to use
@@ -510,53 +510,53 @@ definitions:
     properties:
       amount:
         default: 500
-        description: "The amount, in cents, of the product you are purchasing. '500' = $5.00"
+        description: 'The amount, in cents, of the product you are purchasing. ''500'' = $5.00'
         type: integer
       carrier_code:
         default: Claro
-        description: "Name of the mobile carrier. 'Claro'"
+        description: Name of the mobile carrier. 'Claro'
         type: string
       client_transaction_id:
         default: ''
-        description: "UNIQUE 15 char ID you use to track topups. 'trans0123456789'"
+        description: UNIQUE 15 char ID you use to track topups. 'trans0123456789'
         type: string
       country_code:
         default: GT
-        description: "2-digit code of the country in ISO 3166 format. 'GT'"
+        description: 2-digit code of the country in ISO 3166 format. 'GT'
         type: string
       mobile_number:
         default: '50231234567'
-        description: "Mobile number to topup. VALIDATE prior to submission. '50231234567'"
+        description: Mobile number to topup. VALIDATE prior to submission. '50231234567'
         type: string
       plan:
         default: Sandbox
-        description: "The Application plan being used. Case-sensitive. 'Sandbox' or 'Production'"
+        description: The Application plan being used. Case-sensitive. 'Sandbox' or 'Production'
         type: string
       product_code:
         default: ''
-        description: "Optional code to distinguish one particular product from another. '76560'"
+        description: Optional code to distinguish one particular product from another. '76560'
         type: string
       terminal_id:
         default: Kiosk 5
-        description: "ID for the Terminal used to perform the topup. 'Kiosk 5'"
+        description: ID for the Terminal used to perform the topup. 'Kiosk 5'
         type: string
   TopupsReports:
     properties:
       client_transaction_id:
         default: trans0123456789
-        description: "The UNIQUE 15 char ID used to track topups. 'trans0123456789'"
+        description: The UNIQUE 15 char ID used to track topups. 'trans0123456789'
         type: string
       date_from:
         default: '2016-01-28'
-        description: "The beginning date of the search IN YYYY-MM-DD format (America/New_York timezone). Not used in query by to_service_number. '2016-01-28'"
+        description: The beginning date of the search IN YYYY-MM-DD format (America/New_York timezone). Not used in query by to_service_number. '2016-01-28'
         type: string
       date_to:
         default: '2016-01-28'
-        description: "The ending date of the search IN YYYY-MM-DD format (America/New_York timezone). Not used in query by to_service_number. '2016-01-28'"
+        description: The ending date of the search IN YYYY-MM-DD format (America/New_York timezone). Not used in query by to_service_number. '2016-01-28'
         type: string
       to_service_number:
         default: 0123456789
-        description: "Enter the to_service_number returned in the response to track the current transaction status. '0123456789'"
+        description: Enter the to_service_number returned in the response to track the current transaction status. '0123456789'
         type: string
       type_of_report:
         default: client_transaction_id or to_service_number
@@ -566,9 +566,9 @@ definitions:
     properties:
       client_transaction_id:
         default: trans0123456789
-        description: "UNIQUE 15 char ID you use to track topups. 'trans0123456789'"
+        description: UNIQUE 15 char ID you use to track topups. 'trans0123456789'
         type: string
       to_service_number:
         default: 0123456789
-        description: "UNIQUE IDT transaction number found in the response of a successful topup request. '0123456789'"
+        description: UNIQUE IDT transaction number found in the response of a successful topup request. '0123456789'
         type: string

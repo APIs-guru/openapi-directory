@@ -143,7 +143,7 @@ paths:
       - $ref: '#/parameters/$.xgafv'
   '/v1beta5/apps/{appsId}/operations':
     get:
-      description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding below allows API services to override the binding to use different resource name schemes, such as `users/*/operations`."
+      description: 'Lists operations that match the specified filter in the request. If the server doesn''t support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding below allows API services to override the binding to use different resource name schemes, such as `users/*/operations`.'
       operationId: appengine.apps.operations.list
       parameters:
         - description: Part of `name`. The name of the operation collection.
@@ -630,7 +630,7 @@ definitions:
           - AUTH_FAIL_ACTION_UNAUTHORIZED
         type: string
       login:
-        description: 'What level of login is required to access this resource. Default is "optional".'
+        description: What level of login is required to access this resource. Default is "optional".
         enum:
           - LOGIN_UNSPECIFIED
           - LOGIN_OPTIONAL
@@ -687,7 +687,7 @@ definitions:
         description: 'The relative name/path of the application. Example: "myapp".'
         type: string
       location:
-        description: "The location from which the application will be run. Application instances will run out of data centers in the chosen location and all of the application's End User Content will be stored at rest. The default is \"us-central\". Choices are: \"us-central\" - Central US \"europe-west\" - Western Europe \"us-east1\" - Eastern US"
+        description: 'The location from which the application will be run. Application instances will run out of data centers in the chosen location and all of the application''s End User Content will be stored at rest. The default is "us-central". Choices are: "us-central" - Central US "europe-west" - Western Europe "us-east1" - Eastern US'
         type: string
       name:
         description: 'The full path to the application in the API. Example: "apps/myapp". @OutputOnly'
@@ -772,7 +772,7 @@ definitions:
     properties:
       container:
         $ref: '#/definitions/ContainerInfo'
-        description: "If supplied, a docker (container) image which should be used to start the application. Only applicable to the 'vm' runtime."
+        description: 'If supplied, a docker (container) image which should be used to start the application. Only applicable to the ''vm'' runtime.'
       files:
         additionalProperties:
           $ref: '#/definitions/FileInfo'
@@ -833,7 +833,7 @@ definitions:
         description: The SHA1 (160 bits) hash of the file in hex.
         type: string
       sourceUrl:
-        description: "The URL source to use to fetch this file. Must be a URL to a resource in Google Cloud Storage in the form 'http(s)://storage.googleapis.com/\\/\\'."
+        description: 'The URL source to use to fetch this file. Must be a URL to a resource in Google Cloud Storage in the form ''http(s)://storage.googleapis.com/\/\''.'
         type: string
     type: object
   HealthCheck:
@@ -1160,7 +1160,7 @@ definitions:
         description: HTTP headers to use for all responses from these URLs.
         type: object
       mimeType:
-        description: "If specified, all files served by this handler will be served using the specified MIME type. If not specified, the MIME type for a file will be derived from the file's filename extension."
+        description: 'If specified, all files served by this handler will be served using the specified MIME type. If not specified, the MIME type for a file will be derived from the file''s filename extension.'
         type: string
       path:
         description: 'The path to the static files matched by the URL pattern, from the application root directory. The path can refer to text matched in groupings in the URL pattern.'
@@ -1211,10 +1211,10 @@ definitions:
     description: Rules to match an HTTP request and dispatch that request to a service.
     properties:
       domain:
-        description: "The domain name to match on. Supports '*' (glob) wildcarding on the left-hand side of a '.'. If empty, all domains will be matched (the same as '*')."
+        description: 'The domain name to match on. Supports ''*'' (glob) wildcarding on the left-hand side of a ''.''. If empty, all domains will be matched (the same as ''*'').'
         type: string
       path:
-        description: "The pathname within the host. This must start with a '/'. A single '*' (glob) can be included at the end of the path. The sum of the lengths of the domain and path may not exceed 100 characters."
+        description: The pathname within the host. This must start with a '/'. A single '*' (glob) can be included at the end of the path. The sum of the lengths of the domain and path may not exceed 100 characters.
         type: string
       service:
         description: 'The resource id of a Service in this application that should service the matched request. The Service must already exist. Example: "default".'

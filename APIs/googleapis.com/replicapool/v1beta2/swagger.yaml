@@ -170,7 +170,7 @@ paths:
         - instanceGroupManagers
   '/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}':
     delete:
-      description: "Deletes the instance group manager and all instances contained within. If you'd like to delete the manager without deleting the instances, you must first abandon the instances to remove them from the group."
+      description: 'Deletes the instance group manager and all instances contained within. If you''d like to delete the manager without deleting the instances, you must first abandon the instances to remove them from the group.'
       operationId: replicapool.instanceGroupManagers.delete
       parameters:
         - description: The Google Developers Console project name.
@@ -341,7 +341,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Recreates the specified instances. The instances are deleted, then recreated using the instance group manager's current instance template."
+      description: 'Recreates the specified instances. The instances are deleted, then recreated using the instance group manager''s current instance template.'
       operationId: replicapool.instanceGroupManagers.recreateInstances
       parameters:
         - description: The Google Developers Console project name.

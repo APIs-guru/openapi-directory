@@ -198,7 +198,7 @@ paths:
           name: sortField
           type: string
         - default: DESCENDING
-          description: "Order of sorted results, default is 'DESCENDING'."
+          description: 'Order of sorted results, default is ''DESCENDING''.'
           enum:
             - ASCENDING
             - DESCENDING
@@ -253,7 +253,7 @@ paths:
           name: sortField
           type: string
         - default: DESCENDING
-          description: "Order of sorted results, default is 'DESCENDING'."
+          description: 'Order of sorted results, default is ''DESCENDING''.'
           enum:
             - ASCENDING
             - DESCENDING
@@ -446,7 +446,7 @@ paths:
           name: sortField
           type: string
         - default: DESCENDING
-          description: "Order of sorted results, default is 'DESCENDING'."
+          description: 'Order of sorted results, default is ''DESCENDING''.'
           enum:
             - ASCENDING
             - DESCENDING
@@ -597,7 +597,7 @@ definitions:
         description: 'Kind of list this is, in this case dfareporting#dimensionValueList.'
         type: string
       nextPageToken:
-        description: "Continuation token used to page through dimension values. To retrieve the next page of results, set the next request's \"pageToken\" to the value of this field. The page token is only valid for a limited amount of time and should not be persisted."
+        description: 'Continuation token used to page through dimension values. To retrieve the next page of results, set the next request''s "pageToken" to the value of this field. The page token is only valid for a limited amount of time and should not be persisted.'
         type: string
     type: object
   DimensionValueRequest:
@@ -625,7 +625,7 @@ definitions:
         type: string
     type: object
   File:
-    description: 'Represents a File resource. A File contains the meta-data for a report run. It shows the status of the run and holds the urls to the generated report data if the run is finished and the status is "REPORT_AVAILABLE".'
+    description: Represents a File resource. A File contains the meta-data for a report run. It shows the status of the run and holds the urls to the generated report data if the run is finished and the status is "REPORT_AVAILABLE".
     properties:
       dateRange:
         description: The date range for which the file has report data.
@@ -662,7 +662,12 @@ definitions:
         format: int64
         type: string
       status:
-        description: "The status of the report file, one of:  \n- \"PROCESSING\" \n- \"REPORT_AVAILABLE\" \n- \"FAILED\" \n- \"CANCELLED\""
+        description: |-
+          The status of the report file, one of:  
+          - "PROCESSING" 
+          - "REPORT_AVAILABLE" 
+          - "FAILED" 
+          - "CANCELLED"
         type: string
       urls:
         description: The urls where the completed report file can be downloaded.
@@ -695,7 +700,7 @@ definitions:
         description: 'Kind of list this is, in this case dfareporting#fileList.'
         type: string
       nextPageToken:
-        description: "Continuation token used to page through files. To retrieve the next page of results, set the next request's \"pageToken\" to the value of this field. The page token is only valid for a limited amount of time and should not be persisted."
+        description: 'Continuation token used to page through files. To retrieve the next page of results, set the next request''s "pageToken" to the value of this field. The page token is only valid for a limited amount of time and should not be persisted.'
         type: string
     type: object
   Report:
@@ -739,7 +744,23 @@ definitions:
                 format: date
                 type: string
               relativeDateRange:
-                description: "The date range relative to the date of when the report is run, one of:  \n- \"TODAY\" \n- \"YESTERDAY\" \n- \"WEEK_TO_DATE\" \n- \"MONTH_TO_DATE\" \n- \"QUARTER_TO_DATE\" \n- \"YEAR_TO_DATE\" \n- \"PREVIOUS_WEEK\" \n- \"PREVIOUS_MONTH\" \n- \"PREVIOUS_QUARTER\" \n- \"PREVIOUS_YEAR\" \n- \"LAST_7_DAYS\" \n- \"LAST_30_DAYS\" \n- \"LAST_90_DAYS\" \n- \"LAST_365_DAYS\" \n- \"LAST_24_MONTHS\""
+                description: |-
+                  The date range relative to the date of when the report is run, one of:  
+                  - "TODAY" 
+                  - "YESTERDAY" 
+                  - "WEEK_TO_DATE" 
+                  - "MONTH_TO_DATE" 
+                  - "QUARTER_TO_DATE" 
+                  - "YEAR_TO_DATE" 
+                  - "PREVIOUS_WEEK" 
+                  - "PREVIOUS_MONTH" 
+                  - "PREVIOUS_QUARTER" 
+                  - "PREVIOUS_YEAR" 
+                  - "LAST_7_DAYS" 
+                  - "LAST_30_DAYS" 
+                  - "LAST_90_DAYS" 
+                  - "LAST_365_DAYS" 
+                  - "LAST_24_MONTHS"
                 type: string
               startDate:
                 description: 'The start date of the date range, inclusive. A string of the format: "yyyy-MM-dd".'
@@ -790,7 +811,7 @@ definitions:
         format: int64
         type: string
       schedule:
-        description: "The report's schedule. Can only be set if the report's 'dateRange' is a relative date range and the relative date range is not \"TODAY\"."
+        description: The report's schedule. Can only be set if the report's 'dateRange' is a relative date range and the relative date range is not "TODAY".
         properties:
           active:
             description: Whether the schedule is active or not. Must be set to either true or false.
@@ -804,15 +825,26 @@ definitions:
             format: date
             type: string
           repeats:
-            description: "The interval the report is repeated for, one of:  \n- \"DAILY\", also requires field \"every\" to be set. \n- \"WEEKLY\", also requires fields \"every\" and \"repeatsOnWeekDays\" to be set. \n- \"TWICE_A_MONTH\" \n- \"MONTHLY\", also requires fields \"every\" and \"runsOnDayOfMonth\" to be set. \n- \"QUARTERLY\" \n- \"YEARLY\""
+            description: |-
+              The interval the report is repeated for, one of:  
+              - "DAILY", also requires field "every" to be set. 
+              - "WEEKLY", also requires fields "every" and "repeatsOnWeekDays" to be set. 
+              - "TWICE_A_MONTH" 
+              - "MONTHLY", also requires fields "every" and "runsOnDayOfMonth" to be set. 
+              - "QUARTERLY" 
+              - "YEARLY"
             type: string
           repeatsOnWeekDays:
-            description: 'List of week days "WEEKLY" scheduled reports should run on.'
+            description: List of week days "WEEKLY" scheduled reports should run on.
             items:
               type: string
             type: array
           runsOnDayOfMonth:
-            description: "Enum to define for \"MONTHLY\" scheduled reports whether reports should be repeated on the same day of the month as \"startDate\" or the same day of the week of the month. Possible values are:  \n- DAY_OF_MONTH \n- WEEK_OF_MONTH  \nExample: If 'startDate' is Monday, April 2nd 2012 (2012-04-02), \"DAY_OF_MONTH\" would run subsequent reports on the 2nd of every Month, and \"WEEK_OF_MONTH\" would run subsequent reports on the first Monday of the month."
+            description: |-
+              Enum to define for "MONTHLY" scheduled reports whether reports should be repeated on the same day of the month as "startDate" or the same day of the week of the month. Possible values are:  
+              - DAY_OF_MONTH 
+              - WEEK_OF_MONTH  
+              Example: If 'startDate' is Monday, April 2nd 2012 (2012-04-02), "DAY_OF_MONTH" would run subsequent reports on the 2nd of every Month, and "WEEK_OF_MONTH" would run subsequent reports on the first Monday of the month.
             type: string
           startDate:
             description: Start date of date range for which scheduled reports should be run.
@@ -843,7 +875,7 @@ definitions:
         description: 'Kind of list this is, in this case dfareporting#reportList.'
         type: string
       nextPageToken:
-        description: "Continuation token used to page through reports. To retrieve the next page of results, set the next request's \"pageToken\" to the value of this field. The page token is only valid for a limited amount of time and should not be persisted."
+        description: 'Continuation token used to page through reports. To retrieve the next page of results, set the next request''s "pageToken" to the value of this field. The page token is only valid for a limited amount of time and should not be persisted.'
         type: string
     type: object
   SortedDimension:
@@ -857,7 +889,10 @@ definitions:
         description: The name of the dimension.
         type: string
       sortOrder:
-        description: "An optional sort order for the dimension column, one of:  \n- \"ASCENDING\" \n- \"DESCENDING\""
+        description: |-
+          An optional sort order for the dimension column, one of:  
+          - "ASCENDING" 
+          - "DESCENDING"
         type: string
     type: object
   UserProfile:

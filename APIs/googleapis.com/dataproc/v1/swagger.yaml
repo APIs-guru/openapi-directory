@@ -638,7 +638,7 @@ paths:
         - projects
   '/v1/{name}':
     delete:
-      description: "Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`."
+      description: 'Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn''t support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.'
       operationId: dataproc.projects.regions.operations.delete
       parameters:
         - description: The name of the operation resource to be deleted.
@@ -658,7 +658,7 @@ paths:
       tags:
         - projects
     get:
-      description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding below allows API services to override the binding to use different resource name schemes, such as `users/*/operations`."
+      description: 'Lists operations that match the specified filter in the request. If the server doesn''t support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding below allows API services to override the binding to use different resource name schemes, such as `users/*/operations`.'
       operationId: dataproc.projects.regions.operations.list
       parameters:
         - description: The name of the operation collection.
@@ -719,7 +719,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
     post:
-      description: "Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation."
+      description: 'Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn''t support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation.'
       operationId: dataproc.projects.regions.operations.cancel
       parameters:
         - description: The name of the operation resource to be cancelled.
@@ -770,13 +770,13 @@ definitions:
     description: The cluster config.
     properties:
       configBucket:
-        description: "[Optional] A Google Cloud Storage staging bucket used for sharing generated SSH keys and config. If you do not specify a staging bucket, Cloud Dataproc will determine an appropriate Cloud Storage location (US, ASIA, or EU) for your cluster's staging bucket according to the Google Compute Engine zone where your cluster is deployed, and then it will create and manage this project-level, per-location bucket for you."
+        description: '[Optional] A Google Cloud Storage staging bucket used for sharing generated SSH keys and config. If you do not specify a staging bucket, Cloud Dataproc will determine an appropriate Cloud Storage location (US, ASIA, or EU) for your cluster''s staging bucket according to the Google Compute Engine zone where your cluster is deployed, and then it will create and manage this project-level, per-location bucket for you.'
         type: string
       gceClusterConfig:
         $ref: '#/definitions/GceClusterConfig'
         description: '[Optional] The shared Google Compute Engine config settings for all instances in a cluster.'
       initializationActions:
-        description: "[Optional] Commands to execute on each node after config is completed. By default, executables are run on master and all worker nodes. You can test a node's role metadata to run an executable on a master or worker node, as shown below: ROLE=$(/usr/share/google/get_metadata_value attributes/role) if [[ \"${ROLE}\" == 'Master' ]]; then ... master specific actions ... else ... worker specific actions ... fi"
+        description: '[Optional] Commands to execute on each node after config is completed. By default, executables are run on master and all worker nodes. You can test a node''s role metadata to run an executable on a master or worker node, as shown below: ROLE=$(/usr/share/google/get_metadata_value attributes/role) if [[ "${ROLE}" == ''Master'' ]]; then ... master specific actions ... else ... worker specific actions ... fi'
         items:
           $ref: '#/definitions/NodeInitializationAction'
         type: array
@@ -842,10 +842,10 @@ definitions:
     description: The status of a cluster and its instances.
     properties:
       detail:
-        description: "Optional details of cluster's state."
+        description: Optional details of cluster's state.
         type: string
       state:
-        description: "The cluster's state."
+        description: The cluster's state.
         enum:
           - UNKNOWN
           - CREATING
@@ -945,10 +945,10 @@ definitions:
         $ref: '#/definitions/LoggingConfig'
         description: '[Optional] The runtime log config for job execution.'
       mainClass:
-        description: "The name of the driver's main class. The jar file containing the class must be in the default CLASSPATH or specified in `jar_file_uris`."
+        description: The name of the driver's main class. The jar file containing the class must be in the default CLASSPATH or specified in `jar_file_uris`.
         type: string
       mainJarFileUri:
-        description: "The HCFS URI of the jar file containing the main class. Examples: 'gs://foo-bucket/analytics-binaries/extract-useful-metrics-mr.jar' 'hdfs:/tmp/test-samples/custom-wordcount.jar' 'file:///home/usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar'"
+        description: 'The HCFS URI of the jar file containing the main class. Examples: ''gs://foo-bucket/analytics-binaries/extract-useful-metrics-mr.jar'' ''hdfs:/tmp/test-samples/custom-wordcount.jar'' ''file:///home/usr/lib/hadoop-mapreduce/hadoop-mapreduce-examples.jar'''
         type: string
       properties:
         additionalProperties:
@@ -1019,7 +1019,7 @@ definitions:
         description: '[Output-only] If present, the location of miscellaneous control files which may be used as part of job setup and handling. If not present, control files may be placed in the same location as `driver_output_uri`.'
         type: string
       driverOutputResourceUri:
-        description: "[Output-only] A URI pointing to the location of the stdout of the job's driver program."
+        description: '[Output-only] A URI pointing to the location of the stdout of the job''s driver program.'
         type: string
       hadoopJob:
         $ref: '#/definitions/HadoopJob'
@@ -1149,7 +1149,7 @@ definitions:
             - FATAL
             - 'OFF'
           type: string
-        description: "The per-package log levels for the driver. This may include \"root\" package name to configure rootLogger. Examples: 'com.google = FATAL', 'root = INFO', 'org.apache = DEBUG'"
+        description: 'The per-package log levels for the driver. This may include "root" package name to configure rootLogger. Examples: ''com.google = FATAL'', ''root = INFO'', ''org.apache = DEBUG'''
         type: object
     type: object
   ManagedGroupConfig:
@@ -1354,7 +1354,7 @@ definitions:
     description: Specifies the selection and config of software inside the cluster.
     properties:
       imageVersion:
-        description: "[Optional] The version of software inside the cluster. It must match the regular expression `[0-9]+\\.[0-9]+`. If unspecified, it defaults to the latest version (see [Cloud Dataproc Versioning](/dataproc/versioning))."
+        description: '[Optional] The version of software inside the cluster. It must match the regular expression `[0-9]+\.[0-9]+`. If unspecified, it defaults to the latest version (see [Cloud Dataproc Versioning](/dataproc/versioning)).'
         type: string
       properties:
         additionalProperties:
@@ -1389,7 +1389,7 @@ definitions:
         $ref: '#/definitions/LoggingConfig'
         description: '[Optional] The runtime log config for job execution.'
       mainClass:
-        description: "The name of the driver's main class. The jar file that contains the class must be in the default CLASSPATH or specified in `jar_file_uris`."
+        description: The name of the driver's main class. The jar file that contains the class must be in the default CLASSPATH or specified in `jar_file_uris`.
         type: string
       mainJarFileUri:
         description: The HCFS URI of the jar file that contains the main class.
@@ -1414,7 +1414,7 @@ definitions:
       properties:
         additionalProperties:
           type: string
-        description: "[Optional] A mapping of property names to values, used to configure Spark SQL's SparkConf. Properties that conflict with values set by the Cloud Dataproc API may be overwritten."
+        description: '[Optional] A mapping of property names to values, used to configure Spark SQL''s SparkConf. Properties that conflict with values set by the Cloud Dataproc API may be overwritten.'
         type: object
       queryFileUri:
         description: The HCFS URI of the script that contains SQL queries.

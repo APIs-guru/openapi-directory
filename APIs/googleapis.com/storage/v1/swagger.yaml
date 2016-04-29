@@ -233,11 +233,11 @@ paths:
           name: bucket
           required: true
           type: string
-        - description: "Makes the return of the bucket metadata conditional on whether the bucket's current metageneration matches the given value."
+        - description: Makes the return of the bucket metadata conditional on whether the bucket's current metageneration matches the given value.
           in: query
           name: ifMetagenerationMatch
           type: string
-        - description: "Makes the return of the bucket metadata conditional on whether the bucket's current metageneration does not match the given value."
+        - description: Makes the return of the bucket metadata conditional on whether the bucket's current metageneration does not match the given value.
           in: query
           name: ifMetagenerationNotMatch
           type: string
@@ -283,11 +283,11 @@ paths:
           name: bucket
           required: true
           type: string
-        - description: "Makes the return of the bucket metadata conditional on whether the bucket's current metageneration matches the given value."
+        - description: Makes the return of the bucket metadata conditional on whether the bucket's current metageneration matches the given value.
           in: query
           name: ifMetagenerationMatch
           type: string
-        - description: "Makes the return of the bucket metadata conditional on whether the bucket's current metageneration does not match the given value."
+        - description: Makes the return of the bucket metadata conditional on whether the bucket's current metageneration does not match the given value.
           in: query
           name: ifMetagenerationNotMatch
           type: string
@@ -344,11 +344,11 @@ paths:
           name: bucket
           required: true
           type: string
-        - description: "Makes the return of the bucket metadata conditional on whether the bucket's current metageneration matches the given value."
+        - description: Makes the return of the bucket metadata conditional on whether the bucket's current metageneration matches the given value.
           in: query
           name: ifMetagenerationMatch
           type: string
-        - description: "Makes the return of the bucket metadata conditional on whether the bucket's current metageneration does not match the given value."
+        - description: Makes the return of the bucket metadata conditional on whether the bucket's current metageneration does not match the given value.
           in: query
           name: ifMetagenerationNotMatch
           type: string
@@ -580,11 +580,11 @@ paths:
           name: bucket
           required: true
           type: string
-        - description: "If present, only return default ACL listing if the bucket's current metageneration matches this value."
+        - description: 'If present, only return default ACL listing if the bucket''s current metageneration matches this value.'
           in: query
           name: ifMetagenerationMatch
           type: string
-        - description: "If present, only return default ACL listing if the bucket's current metageneration does not match the given value."
+        - description: 'If present, only return default ACL listing if the bucket''s current metageneration does not match the given value.'
           in: query
           name: ifMetagenerationNotMatch
           type: string
@@ -822,7 +822,7 @@ paths:
       description: Stores a new object and metadata.
       operationId: storage.objects.insert
       parameters:
-        - description: "Name of the bucket in which to store the new object. Overrides the provided object metadata's bucket value, if any."
+        - description: 'Name of the bucket in which to store the new object. Overrides the provided object metadata''s bucket value, if any.'
           in: path
           name: bucket
           required: true
@@ -831,23 +831,23 @@ paths:
           in: query
           name: contentEncoding
           type: string
-        - description: "Makes the operation conditional on whether the object's current generation matches the given value."
+        - description: Makes the operation conditional on whether the object's current generation matches the given value.
           in: query
           name: ifGenerationMatch
           type: string
-        - description: "Makes the operation conditional on whether the object's current generation does not match the given value."
+        - description: Makes the operation conditional on whether the object's current generation does not match the given value.
           in: query
           name: ifGenerationNotMatch
           type: string
-        - description: "Makes the operation conditional on whether the object's current metageneration matches the given value."
+        - description: Makes the operation conditional on whether the object's current metageneration matches the given value.
           in: query
           name: ifMetagenerationMatch
           type: string
-        - description: "Makes the operation conditional on whether the object's current metageneration does not match the given value."
+        - description: Makes the operation conditional on whether the object's current metageneration does not match the given value.
           in: query
           name: ifMetagenerationNotMatch
           type: string
-        - description: "Name of the object. Required when the object metadata is not otherwise provided. Overrides the object metadata's name value, if any. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts."
+        - description: 'Name of the object. Required when the object metadata is not otherwise provided. Overrides the object metadata''s name value, if any. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.'
           in: query
           name: name
           type: string
@@ -974,19 +974,19 @@ paths:
           in: query
           name: generation
           type: string
-        - description: "Makes the operation conditional on whether the object's current generation matches the given value."
+        - description: Makes the operation conditional on whether the object's current generation matches the given value.
           in: query
           name: ifGenerationMatch
           type: string
-        - description: "Makes the operation conditional on whether the object's current generation does not match the given value."
+        - description: Makes the operation conditional on whether the object's current generation does not match the given value.
           in: query
           name: ifGenerationNotMatch
           type: string
-        - description: "Makes the operation conditional on whether the object's current metageneration matches the given value."
+        - description: Makes the operation conditional on whether the object's current metageneration matches the given value.
           in: query
           name: ifMetagenerationMatch
           type: string
-        - description: "Makes the operation conditional on whether the object's current metageneration does not match the given value."
+        - description: Makes the operation conditional on whether the object's current metageneration does not match the given value.
           in: query
           name: ifMetagenerationNotMatch
           type: string
@@ -1020,19 +1020,19 @@ paths:
           in: query
           name: generation
           type: string
-        - description: "Makes the operation conditional on whether the object's generation matches the given value."
+        - description: Makes the operation conditional on whether the object's generation matches the given value.
           in: query
           name: ifGenerationMatch
           type: string
-        - description: "Makes the operation conditional on whether the object's generation does not match the given value."
+        - description: Makes the operation conditional on whether the object's generation does not match the given value.
           in: query
           name: ifGenerationNotMatch
           type: string
-        - description: "Makes the operation conditional on whether the object's current metageneration matches the given value."
+        - description: Makes the operation conditional on whether the object's current metageneration matches the given value.
           in: query
           name: ifMetagenerationMatch
           type: string
-        - description: "Makes the operation conditional on whether the object's current metageneration does not match the given value."
+        - description: Makes the operation conditional on whether the object's current metageneration does not match the given value.
           in: query
           name: ifMetagenerationNotMatch
           type: string
@@ -1070,7 +1070,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: "Updates an object's metadata. This method supports patch semantics."
+      description: Updates an object's metadata. This method supports patch semantics.
       operationId: storage.objects.patch
       parameters:
         - description: Name of the bucket in which the object resides.
@@ -1087,19 +1087,19 @@ paths:
           in: query
           name: generation
           type: string
-        - description: "Makes the operation conditional on whether the object's current generation matches the given value."
+        - description: Makes the operation conditional on whether the object's current generation matches the given value.
           in: query
           name: ifGenerationMatch
           type: string
-        - description: "Makes the operation conditional on whether the object's current generation does not match the given value."
+        - description: Makes the operation conditional on whether the object's current generation does not match the given value.
           in: query
           name: ifGenerationNotMatch
           type: string
-        - description: "Makes the operation conditional on whether the object's current metageneration matches the given value."
+        - description: Makes the operation conditional on whether the object's current metageneration matches the given value.
           in: query
           name: ifMetagenerationMatch
           type: string
-        - description: "Makes the operation conditional on whether the object's current metageneration does not match the given value."
+        - description: Makes the operation conditional on whether the object's current metageneration does not match the given value.
           in: query
           name: ifMetagenerationNotMatch
           type: string
@@ -1138,7 +1138,7 @@ paths:
       tags:
         - objects
     put:
-      description: "Updates an object's metadata."
+      description: Updates an object's metadata.
       operationId: storage.objects.update
       parameters:
         - description: Name of the bucket in which the object resides.
@@ -1155,19 +1155,19 @@ paths:
           in: query
           name: generation
           type: string
-        - description: "Makes the operation conditional on whether the object's current generation matches the given value."
+        - description: Makes the operation conditional on whether the object's current generation matches the given value.
           in: query
           name: ifGenerationMatch
           type: string
-        - description: "Makes the operation conditional on whether the object's current generation does not match the given value."
+        - description: Makes the operation conditional on whether the object's current generation does not match the given value.
           in: query
           name: ifGenerationNotMatch
           type: string
-        - description: "Makes the operation conditional on whether the object's current metageneration matches the given value."
+        - description: Makes the operation conditional on whether the object's current metageneration matches the given value.
           in: query
           name: ifMetagenerationMatch
           type: string
-        - description: "Makes the operation conditional on whether the object's current metageneration does not match the given value."
+        - description: Makes the operation conditional on whether the object's current metageneration does not match the given value.
           in: query
           name: ifMetagenerationNotMatch
           type: string
@@ -1467,11 +1467,11 @@ paths:
           in: query
           name: destinationPredefinedAcl
           type: string
-        - description: "Makes the operation conditional on whether the object's current generation matches the given value."
+        - description: Makes the operation conditional on whether the object's current generation matches the given value.
           in: query
           name: ifGenerationMatch
           type: string
-        - description: "Makes the operation conditional on whether the object's current metageneration matches the given value."
+        - description: Makes the operation conditional on whether the object's current metageneration matches the given value.
           in: query
           name: ifMetagenerationMatch
           type: string
@@ -1516,12 +1516,12 @@ paths:
           name: sourceObject
           required: true
           type: string
-        - description: "Name of the bucket in which to store the new object. Overrides the provided object metadata's bucket value, if any.For information about how to URL encode object names to be path safe, see Encoding URI Path Parts."
+        - description: 'Name of the bucket in which to store the new object. Overrides the provided object metadata''s bucket value, if any.For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.'
           in: path
           name: destinationBucket
           required: true
           type: string
-        - description: "Name of the new object. Required when the object metadata is not otherwise provided. Overrides the object metadata's name value, if any."
+        - description: 'Name of the new object. Required when the object metadata is not otherwise provided. Overrides the object metadata''s name value, if any.'
           in: path
           name: destinationObject
           required: true
@@ -1537,35 +1537,35 @@ paths:
           in: query
           name: destinationPredefinedAcl
           type: string
-        - description: "Makes the operation conditional on whether the destination object's current generation matches the given value."
+        - description: Makes the operation conditional on whether the destination object's current generation matches the given value.
           in: query
           name: ifGenerationMatch
           type: string
-        - description: "Makes the operation conditional on whether the destination object's current generation does not match the given value."
+        - description: Makes the operation conditional on whether the destination object's current generation does not match the given value.
           in: query
           name: ifGenerationNotMatch
           type: string
-        - description: "Makes the operation conditional on whether the destination object's current metageneration matches the given value."
+        - description: Makes the operation conditional on whether the destination object's current metageneration matches the given value.
           in: query
           name: ifMetagenerationMatch
           type: string
-        - description: "Makes the operation conditional on whether the destination object's current metageneration does not match the given value."
+        - description: Makes the operation conditional on whether the destination object's current metageneration does not match the given value.
           in: query
           name: ifMetagenerationNotMatch
           type: string
-        - description: "Makes the operation conditional on whether the source object's generation matches the given value."
+        - description: Makes the operation conditional on whether the source object's generation matches the given value.
           in: query
           name: ifSourceGenerationMatch
           type: string
-        - description: "Makes the operation conditional on whether the source object's generation does not match the given value."
+        - description: Makes the operation conditional on whether the source object's generation does not match the given value.
           in: query
           name: ifSourceGenerationNotMatch
           type: string
-        - description: "Makes the operation conditional on whether the source object's current metageneration matches the given value."
+        - description: Makes the operation conditional on whether the source object's current metageneration matches the given value.
           in: query
           name: ifSourceMetagenerationMatch
           type: string
-        - description: "Makes the operation conditional on whether the source object's current metageneration does not match the given value."
+        - description: Makes the operation conditional on whether the source object's current metageneration does not match the given value.
           in: query
           name: ifSourceMetagenerationNotMatch
           type: string
@@ -1621,12 +1621,12 @@ paths:
           name: sourceObject
           required: true
           type: string
-        - description: "Name of the bucket in which to store the new object. Overrides the provided object metadata's bucket value, if any."
+        - description: 'Name of the bucket in which to store the new object. Overrides the provided object metadata''s bucket value, if any.'
           in: path
           name: destinationBucket
           required: true
           type: string
-        - description: "Name of the new object. Required when the object metadata is not otherwise provided. Overrides the object metadata's name value, if any. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts."
+        - description: 'Name of the new object. Required when the object metadata is not otherwise provided. Overrides the object metadata''s name value, if any. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.'
           in: path
           name: destinationObject
           required: true
@@ -1642,39 +1642,39 @@ paths:
           in: query
           name: destinationPredefinedAcl
           type: string
-        - description: "Makes the operation conditional on whether the destination object's current generation matches the given value."
+        - description: Makes the operation conditional on whether the destination object's current generation matches the given value.
           in: query
           name: ifGenerationMatch
           type: string
-        - description: "Makes the operation conditional on whether the destination object's current generation does not match the given value."
+        - description: Makes the operation conditional on whether the destination object's current generation does not match the given value.
           in: query
           name: ifGenerationNotMatch
           type: string
-        - description: "Makes the operation conditional on whether the destination object's current metageneration matches the given value."
+        - description: Makes the operation conditional on whether the destination object's current metageneration matches the given value.
           in: query
           name: ifMetagenerationMatch
           type: string
-        - description: "Makes the operation conditional on whether the destination object's current metageneration does not match the given value."
+        - description: Makes the operation conditional on whether the destination object's current metageneration does not match the given value.
           in: query
           name: ifMetagenerationNotMatch
           type: string
-        - description: "Makes the operation conditional on whether the source object's generation matches the given value."
+        - description: Makes the operation conditional on whether the source object's generation matches the given value.
           in: query
           name: ifSourceGenerationMatch
           type: string
-        - description: "Makes the operation conditional on whether the source object's generation does not match the given value."
+        - description: Makes the operation conditional on whether the source object's generation does not match the given value.
           in: query
           name: ifSourceGenerationNotMatch
           type: string
-        - description: "Makes the operation conditional on whether the source object's current metageneration matches the given value."
+        - description: Makes the operation conditional on whether the source object's current metageneration matches the given value.
           in: query
           name: ifSourceMetagenerationMatch
           type: string
-        - description: "Makes the operation conditional on whether the source object's current metageneration does not match the given value."
+        - description: Makes the operation conditional on whether the source object's current metageneration does not match the given value.
           in: query
           name: ifSourceMetagenerationNotMatch
           type: string
-        - description: "The maximum number of bytes that will be rewritten per rewrite request. Most callers shouldn't need to specify this parameter - it is primarily in place to support testing. If specified the value must be an integral multiple of 1 MiB (1048576). Also, this only applies to requests where the source and destination span locations and/or storage classes. Finally, this value must not change across rewrite calls else you'll get an error that the rewriteToken is invalid."
+        - description: 'The maximum number of bytes that will be rewritten per rewrite request. Most callers shouldn''t need to specify this parameter - it is primarily in place to support testing. If specified the value must be an integral multiple of 1 MiB (1048576). Also, this only applies to requests where the source and destination span locations and/or storage classes. Finally, this value must not change across rewrite calls else you''ll get an error that the rewriteToken is invalid.'
           in: query
           name: maxBytesRewrittenPerCall
           type: string
@@ -1685,7 +1685,7 @@ paths:
           in: query
           name: projection
           type: string
-        - description: "Include this field (from the previous rewrite response) on each rewrite request after the first one, until the rewrite response 'done' flag is true. Calls that provide a rewriteToken can omit all other request fields, but if included those fields must match the values provided in the first rewrite request."
+        - description: 'Include this field (from the previous rewrite response) on each rewrite request after the first one, until the rewrite response ''done'' flag is true. Calls that provide a rewriteToken can omit all other request fields, but if included those fields must match the values provided in the first rewrite request.'
           in: query
           name: rewriteToken
           type: string
@@ -1754,7 +1754,7 @@ definitions:
           $ref: '#/definitions/BucketAccessControl'
         type: array
       cors:
-        description: "The bucket's Cross-Origin Resource Sharing (CORS) configuration."
+        description: The bucket's Cross-Origin Resource Sharing (CORS) configuration.
         items:
           properties:
             maxAgeSeconds:
@@ -1794,7 +1794,7 @@ definitions:
         description: 'The kind of item this is. For buckets, this is always storage#bucket.'
         type: string
       lifecycle:
-        description: "The bucket's lifecycle configuration. See lifecycle management for more information."
+        description: The bucket's lifecycle configuration. See lifecycle management for more information.
         properties:
           rule:
             description: 'A lifecycle management rule, which is made of an action to take and the condition(s) under which the action will be taken.'
@@ -1830,13 +1830,13 @@ definitions:
             type: array
         type: object
       location:
-        description: "The location of the bucket. Object data for objects in the bucket resides in physical storage within this region. Defaults to US. See the developer's guide for the authoritative list."
+        description: The location of the bucket. Object data for objects in the bucket resides in physical storage within this region. Defaults to US. See the developer's guide for the authoritative list.
         type: string
       logging:
-        description: "The bucket's logging configuration, which defines the destination bucket and optional name prefix for the current bucket's logs."
+        description: 'The bucket''s logging configuration, which defines the destination bucket and optional name prefix for the current bucket''s logs.'
         properties:
           logBucket:
-            description: "The destination bucket where the current bucket's logs should be placed."
+            description: The destination bucket where the current bucket's logs should be placed.
             type: string
           logObjectPrefix:
             description: A prefix for log object names.
@@ -1850,7 +1850,7 @@ definitions:
         description: The name of the bucket.
         type: string
       owner:
-        description: "The owner of the bucket. This is always the project team's owner group."
+        description: The owner of the bucket. This is always the project team's owner group.
         properties:
           entity:
             description: 'The entity, in the form project-owner-projectId.'
@@ -1867,7 +1867,7 @@ definitions:
         description: The URI of this bucket.
         type: string
       storageClass:
-        description: "The bucket's storage class. This defines how objects in the bucket are stored and determines the SLA and the cost of storage. Values include STANDARD, NEARLINE and DURABLE_REDUCED_AVAILABILITY. Defaults to STANDARD. For more information, see storage classes."
+        description: 'The bucket''s storage class. This defines how objects in the bucket are stored and determines the SLA and the cost of storage. Values include STANDARD, NEARLINE and DURABLE_REDUCED_AVAILABILITY. Defaults to STANDARD. For more information, see storage classes.'
         type: string
       timeCreated:
         description: The creation time of the bucket in RFC 3339 format.
@@ -1878,17 +1878,17 @@ definitions:
         format: date-time
         type: string
       versioning:
-        description: "The bucket's versioning configuration."
+        description: The bucket's versioning configuration.
         properties:
           enabled:
             description: 'While set to true, versioning is fully enabled for this bucket.'
             type: boolean
         type: object
       website:
-        description: "The bucket's website configuration."
+        description: The bucket's website configuration.
         properties:
           mainPageSuffix:
-            description: "Behaves as the bucket's directory index where missing objects are treated as potential directories."
+            description: Behaves as the bucket's directory index where missing objects are treated as potential directories.
             type: string
           notFoundPage:
             description: The custom object to return when a requested resource is not found.
@@ -1908,7 +1908,19 @@ definitions:
         description: 'The email address associated with the entity, if any.'
         type: string
       entity:
-        description: "The entity holding the permission, in one of the following forms: \n- user-userId \n- user-email \n- group-groupId \n- group-email \n- domain-domain \n- project-team-projectId \n- allUsers \n- allAuthenticatedUsers Examples: \n- The user liz@example.com would be user-liz@example.com. \n- The group example@googlegroups.com would be group-example@googlegroups.com. \n- To refer to all members of the Google Apps for Business domain example.com, the entity would be domain-example.com."
+        description: |-
+          The entity holding the permission, in one of the following forms: 
+          - user-userId 
+          - user-email 
+          - group-groupId 
+          - group-email 
+          - domain-domain 
+          - project-team-projectId 
+          - allUsers 
+          - allAuthenticatedUsers Examples: 
+          - The user liz@example.com would be user-liz@example.com. 
+          - The group example@googlegroups.com would be group-example@googlegroups.com. 
+          - To refer to all members of the Google Apps for Business domain example.com, the entity would be domain-example.com.
         type: string
       entityId:
         description: 'The ID for the entity, if any.'
@@ -2027,7 +2039,7 @@ definitions:
               format: int64
               type: string
             name:
-              description: "The source object's name. The source object's bucket is implicitly the destination bucket."
+              description: The source object's name. The source object's bucket is implicitly the destination bucket.
               type: string
             objectPreconditions:
               description: Conditions that must be met for this operation to execute.
@@ -2162,7 +2174,19 @@ definitions:
         description: 'The email address associated with the entity, if any.'
         type: string
       entity:
-        description: "The entity holding the permission, in one of the following forms: \n- user-userId \n- user-email \n- group-groupId \n- group-email \n- domain-domain \n- project-team-projectId \n- allUsers \n- allAuthenticatedUsers Examples: \n- The user liz@example.com would be user-liz@example.com. \n- The group example@googlegroups.com would be group-example@googlegroups.com. \n- To refer to all members of the Google Apps for Business domain example.com, the entity would be domain-example.com."
+        description: |-
+          The entity holding the permission, in one of the following forms: 
+          - user-userId 
+          - user-email 
+          - group-groupId 
+          - group-email 
+          - domain-domain 
+          - project-team-projectId 
+          - allUsers 
+          - allAuthenticatedUsers Examples: 
+          - The user liz@example.com would be user-liz@example.com. 
+          - The group example@googlegroups.com would be group-example@googlegroups.com. 
+          - To refer to all members of the Google Apps for Business domain example.com, the entity would be domain-example.com.
         type: string
       entityId:
         description: 'The ID for the entity, if any.'

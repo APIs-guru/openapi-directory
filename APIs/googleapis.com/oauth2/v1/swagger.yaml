@@ -342,16 +342,16 @@ definitions:
   Userinfoplus:
     properties:
       email:
-        description: "The user's email address."
+        description: The user's email address.
         type: string
       family_name:
-        description: "The user's last name."
+        description: The user's last name.
         type: string
       gender:
-        description: "The user's gender."
+        description: The user's gender.
         type: string
       given_name:
-        description: "The user's first name."
+        description: The user's first name.
         type: string
       hd:
         description: The hosted domain e.g. example.com if the user is Google apps user.
@@ -363,17 +363,17 @@ definitions:
         description: URL of the profile page.
         type: string
       locale:
-        description: "The user's preferred locale."
+        description: The user's preferred locale.
         type: string
       name:
-        description: "The user's full name."
+        description: The user's full name.
         type: string
       picture:
-        description: "URL of the user's picture image."
+        description: URL of the user's picture image.
         type: string
       verified_email:
         default: true
-        description: "Boolean flag which is true if the email address is verified. Always verified because we only return the user's primary email address."
+        description: Boolean flag which is true if the email address is verified. Always verified because we only return the user's primary email address.
         type: boolean
     type: object
   X509:

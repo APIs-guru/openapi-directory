@@ -40,17 +40,17 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: '<p>This operation provides a list of categories.</p>'
+      description: <p>This operation provides a list of categories.</p>
       parameters: []
       responses:
         '200':
           description: No response was specified
-      summary: 'Get categories!'
+      summary: Get categories!
       tags:
         - categories
   /v1/charitybasic:
     post:
-      description: '<p>This operation detail data.</p>'
+      description: <p>This operation detail data.</p>
       parameters:
         - description: ein (Employer Identification Number)
           in: query
@@ -60,12 +60,12 @@ paths:
       responses:
         '200':
           description: No response was specified
-      summary: 'Get details!'
+      summary: Get details!
       tags:
         - details
   /v1/charityfinancial:
     post:
-      description: '<p>This operation detail data.</p>'
+      description: <p>This operation detail data.</p>
       parameters:
         - description: ein (Employer Identification Number)
           in: query
@@ -75,12 +75,12 @@ paths:
       responses:
         '200':
           description: No response was specified
-      summary: 'Get details!'
+      summary: Get details!
       tags:
         - CharityFinancial
   /v1/charitygeolocation:
     post:
-      description: '<p>This operation detail data.</p>'
+      description: <p>This operation detail data.</p>
       parameters:
         - description: ein (Employer Identification Number)
           in: query
@@ -90,12 +90,12 @@ paths:
       responses:
         '200':
           description: No response was specified
-      summary: 'Get details!'
+      summary: Get details!
       tags:
         - GeoLocation
   /v1/charitypremium:
     post:
-      description: '<p>This operation detail data.</p>'
+      description: <p>This operation detail data.</p>
       parameters:
         - description: ein (Employer Identification Number)
           in: query
@@ -105,12 +105,12 @@ paths:
       responses:
         '200':
           description: No response was specified
-      summary: 'Get details!'
+      summary: Get details!
       tags:
         - CharityPremium
   /v1/charitysearch:
     post:
-      description: '<p>This operation provides summary data.</p>'
+      description: <p>This operation provides summary data.</p>
       parameters:
         - description: Employer Identification Number (EIN)
           in: query
@@ -160,6 +160,6 @@ paths:
       responses:
         '200':
           description: No response was specified
-      summary: 'Get summary data!'
+      summary: Get summary data!
       tags:
         - summary

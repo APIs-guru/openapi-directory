@@ -189,7 +189,7 @@ paths:
       description: Gets a client buyer with a given client account ID.
       operationId: adexchangebuyer2.accounts.clients.get
       parameters:
-        - description: "Numerical account ID of the client's sponsor buyer. (required)"
+        - description: Numerical account ID of the client's sponsor buyer. (required)
           in: path
           name: accountId
           required: true
@@ -260,7 +260,7 @@ paths:
         with a given account ID.
       operationId: adexchangebuyer2.accounts.clients.invitations.list
       parameters:
-        - description: "Numerical account ID of the client's sponsor buyer. (required)"
+        - description: Numerical account ID of the client's sponsor buyer. (required)
           in: path
           name: accountId
           required: true
@@ -322,7 +322,7 @@ paths:
         an Ad Exchange client buyer account.
       operationId: adexchangebuyer2.accounts.clients.invitations.create
       parameters:
-        - description: "Numerical account ID of the client's sponsor buyer. (required)"
+        - description: Numerical account ID of the client's sponsor buyer. (required)
           in: path
           name: accountId
           required: true
@@ -353,7 +353,7 @@ paths:
       description: Retrieves an existing client user invitation.
       operationId: adexchangebuyer2.accounts.clients.invitations.get
       parameters:
-        - description: "Numerical account ID of the client's sponsor buyer. (required)"
+        - description: Numerical account ID of the client's sponsor buyer. (required)
           in: path
           name: accountId
           required: true
@@ -462,7 +462,7 @@ paths:
       description: Retrieves an existing client user.
       operationId: adexchangebuyer2.accounts.clients.users.get
       parameters:
-        - description: "Numerical account ID of the client's sponsor buyer. (required)"
+        - description: Numerical account ID of the client's sponsor buyer. (required)
           in: path
           name: accountId
           required: true
@@ -509,7 +509,7 @@ paths:
         Only the user status can be changed on update.
       operationId: adexchangebuyer2.accounts.clients.users.update
       parameters:
-        - description: "Numerical account ID of the client's sponsor buyer. (required)"
+        - description: Numerical account ID of the client's sponsor buyer. (required)
           in: path
           name: accountId
           required: true

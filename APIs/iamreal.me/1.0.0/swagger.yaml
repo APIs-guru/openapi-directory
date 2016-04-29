@@ -4,7 +4,7 @@ schemes:
 host: api.iamreal.me
 basePath: /api/v2
 info:
-  description: "Use I Am Real's patented technology to perform social, video, and SMS validation on your users."
+  description: 'Use I Am Real''s patented technology to perform social, video, and SMS validation on your users.'
   title: I Am Real
   version: 1.0.0
   x-logo:
@@ -17,7 +17,7 @@ info:
 tags:
   - description: Validate users phone number via SMS
     name: sms
-  - description: "Validate a user's Social Network profile"
+  - description: Validate a user's Social Network profile
     name: social
   - description: Validate users by comparing live video of user with profile picture
     name: video
@@ -208,7 +208,7 @@ definitions:
         description: Application Secret. This should never be shared and should be done from server only
         type: string
       callbackUrl:
-        description: "The URL address I Am Real will call once the end user's score is calculated"
+        description: The URL address I Am Real will call once the end user's score is calculated
         type: string
       clientProof:
         description: A string that will be sent back with the analysis to prove that the response is sent from I Am Real servers

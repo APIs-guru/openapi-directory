@@ -49,7 +49,7 @@ paths:
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
         '500':
-          description: "We couldn't return the representation due to an internal server error."
+          description: We couldn't return the representation due to an internal server error.
       summary: Get a list with the details of all the hotels specified.
       tags:
         - Hotels
@@ -92,7 +92,7 @@ paths:
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
         '500':
-          description: "We couldn't return the representation due to an internal server error."
+          description: We couldn't return the representation due to an internal server error.
       summary: Get the details for the specified hotel id.
       tags:
         - Hotels
@@ -134,7 +134,7 @@ paths:
         '403':
           description: The application does not have access to the requested resource.
         '500':
-          description: "We couldn't return the representation due to an internal server error."
+          description: We couldn't return the representation due to an internal server error.
         '503':
           description: The server is currently unavailable. Please try later.
       summary: Get a list with the details of all room types for for the specified hotel id
@@ -181,7 +181,7 @@ paths:
         '403':
           description: The application does not have access to the requested resource.
         '500':
-          description: "We couldn't return the representation due to an internal server error."
+          description: We couldn't return the representation due to an internal server error.
         '503':
           description: The server is currently unavailable. Please try later.
       summary: Get a requested room type for for the specified hotel id
@@ -305,7 +305,7 @@ paths:
         '403':
           description: The application does not have access to the requested resource.
         '500':
-          description: "We couldn't return the representation due to an internal server error."
+          description: We couldn't return the representation due to an internal server error.
         '503':
           description: The server is currently unavailable. Please try later.
       summary: Get a list of rooms using provided filtering and pagination criteria.
@@ -407,7 +407,7 @@ paths:
         '403':
           description: The application does not have access to the requested resource.
         '500':
-          description: "We couldn't return the representation due to an internal server error."
+          description: We couldn't return the representation due to an internal server error.
         '503':
           description: The server is currently unavailable. Please try later.
       summary: Get total rooms count that match the given filter criteria.
@@ -522,7 +522,7 @@ paths:
         '403':
           description: The application does not have access to the requested resource.
         '500':
-          description: "We couldn't return the representation due to an internal server error."
+          description: We couldn't return the representation due to an internal server error.
         '503':
           description: The server is currently unavailable. Please try later.
       summary: Request available rooms using a given criteria.
@@ -571,7 +571,7 @@ paths:
         '404':
           description: Requested room could not be found.
         '500':
-          description: "We couldn't return the representation due to an internal server error."
+          description: We couldn't return the representation due to an internal server error.
         '503':
           description: The server is currently unavailable. Please try later.
       summary: Get a specific room with all the details for the specified hotel id.

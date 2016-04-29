@@ -6587,7 +6587,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Changes a backup target pool's configurations."
+      description: Changes a backup target pool's configurations.
       operationId: compute.targetPools.setBackup
       parameters:
         - description: Project ID for this request.
@@ -9338,7 +9338,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Adds an access config to an instance's network interface."
+      description: Adds an access config to an instance's network interface.
       operationId: compute.instances.addAccessConfig
       parameters:
         - description: Project ID for this request.
@@ -9431,7 +9431,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Deletes an access config from an instance's network interface."
+      description: Deletes an access config from an instance's network interface.
       operationId: compute.instances.deleteAccessConfig
       parameters:
         - description: Project ID for this request.
@@ -9558,7 +9558,7 @@ paths:
         - instances
   '/{project}/zones/{zone}/instances/{instance}/serialPort':
     get:
-      description: "Returns the specified instance's serial port output."
+      description: Returns the specified instance's serial port output.
       operationId: compute.instances.getSerialPortOutput
       parameters:
         - description: Project ID for this request.
@@ -9801,7 +9801,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Sets an instance's scheduling options."
+      description: Sets an instance's scheduling options.
       operationId: compute.instances.setScheduling
       parameters:
         - description: Project ID for this request.
@@ -10523,7 +10523,7 @@ paths:
       - $ref: '#/parameters/userIp'
 definitions:
   AccessConfig:
-    description: "An access configuration attached to an instance's network interface."
+    description: An access configuration attached to an instance's network interface.
     properties:
       kind:
         default: 'compute#accessConfig'
@@ -10762,10 +10762,35 @@ definitions:
           - SSD
         type: string
       diskType:
-        description: "Specifies the disk type to use to create the instance. If not specified, the default is pd-standard, specified using the full URL. For example:\n\nhttps://www.googleapis.com/compute/v1/projects/project/zones/zone/diskTypes/pd-standard \n\nOther values include pd-ssd and local-ssd. If you define this field, you can provide either the full or partial URL. For example, the following are valid values:  \n- https://www.googleapis.com/compute/v1/projects/project/zones/zone/diskTypes/diskType \n- projects/project/zones/zone/diskTypes/diskType \n- zones/zone/diskTypes/diskType"
+        description: |-
+          Specifies the disk type to use to create the instance. If not specified, the default is pd-standard, specified using the full URL. For example:
+
+          https://www.googleapis.com/compute/v1/projects/project/zones/zone/diskTypes/pd-standard 
+
+          Other values include pd-ssd and local-ssd. If you define this field, you can provide either the full or partial URL. For example, the following are valid values:  
+          - https://www.googleapis.com/compute/v1/projects/project/zones/zone/diskTypes/diskType 
+          - projects/project/zones/zone/diskTypes/diskType 
+          - zones/zone/diskTypes/diskType
         type: string
       sourceImage:
-        description: "The source image used to create this disk. If the source image is deleted, this field will not be set.\n\nTo create a disk with one of the public operating system images, specify the image by its family name. For example, specify family/debian-8 to use the latest Debian 8 image:\n\nprojects/debian-cloud/global/images/family/debian-8 \n\nAlternatively, use a specific version of a public operating system image:\n\nprojects/debian-cloud/global/images/debian-8-jessie-vYYYYMMDD \n\nTo create a disk with a private image that you created, specify the image name in the following format:\n\nglobal/images/my-private-image \n\nYou can also specify a private image by its image family, which returns the latest version of the image in that family. Replace the image name with family/family-name:\n\nglobal/images/family/my-private-family"
+        description: |-
+          The source image used to create this disk. If the source image is deleted, this field will not be set.
+
+          To create a disk with one of the public operating system images, specify the image by its family name. For example, specify family/debian-8 to use the latest Debian 8 image:
+
+          projects/debian-cloud/global/images/family/debian-8 
+
+          Alternatively, use a specific version of a public operating system image:
+
+          projects/debian-cloud/global/images/debian-8-jessie-vYYYYMMDD 
+
+          To create a disk with a private image that you created, specify the image name in the following format:
+
+          global/images/my-private-image 
+
+          You can also specify a private image by its image family, which returns the latest version of the image in that family. Replace the image name with family/family-name:
+
+          global/images/family/my-private-family
         type: string
       sourceImageEncryptionKey:
         $ref: '#/definitions/CustomerEncryptionKey'
@@ -10990,7 +11015,7 @@ definitions:
           - UTILIZATION
         type: string
       capacityScaler:
-        description: "A multiplier applied to the group's maximum servicing capacity (either UTILIZATION or RATE). Default value is 1, which means the group will serve up to 100% of its configured CPU or RPS (depending on balancingMode). A setting of 0 means the group is completely drained, offering 0% of its available CPU or RPS. Valid range is [0.0,1.0]."
+        description: 'A multiplier applied to the group''s maximum servicing capacity (either UTILIZATION or RATE). Default value is 1, which means the group will serve up to 100% of its configured CPU or RPS (depending on balancingMode). A setting of 0 means the group is completely drained, offering 0% of its available CPU or RPS. Valid range is [0.0,1.0].'
         format: float
         type: number
       description:
@@ -11125,7 +11150,13 @@ definitions:
         description: 'Specifies a 256-bit customer-supplied encryption key, encoded in base64 to either encrypt or decrypt this resource.'
         type: string
       rsaEncryptedKey:
-        description: "Specifies a base64 encoded, RSA-wrapped 2048-bit customer-supplied encryption key to either encrypt or decrypt this resource.\n\nThe key must meet the following requirements before you can provide it to Compute Engine:  \n- The key is wrapped using a RSA public key certificate provided by Google. \n- After being wrapped, the key must be encoded in base64 encoding.  Get the RSA public key certificate provided by Google at:\nhttps://cloud-certs.storage.googleapis.com/google-cloud-csek-ingress.pem"
+        description: |-
+          Specifies a base64 encoded, RSA-wrapped 2048-bit customer-supplied encryption key to either encrypt or decrypt this resource.
+
+          The key must meet the following requirements before you can provide it to Compute Engine:  
+          - The key is wrapped using a RSA public key certificate provided by Google. 
+          - After being wrapped, the key must be encoded in base64 encoding.  Get the RSA public key certificate provided by Google at:
+          https://cloud-certs.storage.googleapis.com/google-cloud-csek-ingress.pem
         type: string
       sha256:
         description: '[Output only] The base64 encoded SHA-256 hash of the customer-supplied encryption key that protects this resource.'
@@ -11231,7 +11262,24 @@ definitions:
         format: int64
         type: string
       sourceImage:
-        description: "The source image used to create this disk. If the source image is deleted, this field will not be set.\n\nTo create a disk with one of the public operating system images, specify the image by its family name. For example, specify family/debian-8 to use the latest Debian 8 image:\n\nprojects/debian-cloud/global/images/family/debian-8 \n\nAlternatively, use a specific version of a public operating system image:\n\nprojects/debian-cloud/global/images/debian-8-jessie-vYYYYMMDD \n\nTo create a disk with a private image that you created, specify the image name in the following format:\n\nglobal/images/my-private-image \n\nYou can also specify a private image by its image family, which returns the latest version of the image in that family. Replace the image name with family/family-name:\n\nglobal/images/family/my-private-family"
+        description: |-
+          The source image used to create this disk. If the source image is deleted, this field will not be set.
+
+          To create a disk with one of the public operating system images, specify the image by its family name. For example, specify family/debian-8 to use the latest Debian 8 image:
+
+          projects/debian-cloud/global/images/family/debian-8 
+
+          Alternatively, use a specific version of a public operating system image:
+
+          projects/debian-cloud/global/images/debian-8-jessie-vYYYYMMDD 
+
+          To create a disk with a private image that you created, specify the image name in the following format:
+
+          global/images/my-private-image 
+
+          You can also specify a private image by its image family, which returns the latest version of the image in that family. Replace the image name with family/family-name:
+
+          global/images/family/my-private-family
         type: string
       sourceImageEncryptionKey:
         $ref: '#/definitions/CustomerEncryptionKey'
@@ -11243,7 +11291,11 @@ definitions:
         description: '[Output Only] The ID value of the image used to create this disk. This value identifies the exact image that was used to create this persistent disk. For example, if you created the persistent disk from an image that was later deleted and recreated under the same name, the source image ID would identify the exact version of the image that was used.'
         type: string
       sourceSnapshot:
-        description: "The source snapshot used to create this disk. You can provide this as a partial or full URL to the resource. For example, the following are valid values:  \n- https://www.googleapis.com/compute/v1/projects/project/global/snapshots/snapshot \n- projects/project/global/snapshots/snapshot \n- global/snapshots/snapshot"
+        description: |-
+          The source snapshot used to create this disk. You can provide this as a partial or full URL to the resource. For example, the following are valid values:  
+          - https://www.googleapis.com/compute/v1/projects/project/global/snapshots/snapshot 
+          - projects/project/global/snapshots/snapshot 
+          - global/snapshots/snapshot
         type: string
       sourceSnapshotEncryptionKey:
         $ref: '#/definitions/CustomerEncryptionKey'
@@ -11548,7 +11600,13 @@ definitions:
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
       network:
-        description: "URL of the network resource for this firewall rule. If not specified when creating a firewall rule, the default network is used:\nglobal/networks/default\nIf you choose to specify this property, you can specify the network as a full or partial URL. For example, the following are all valid URLs:  \n- https://www.googleapis.com/compute/v1/projects/myproject/global/networks/my-network \n- projects/myproject/global/networks/my-network \n- global/networks/default"
+        description: |-
+          URL of the network resource for this firewall rule. If not specified when creating a firewall rule, the default network is used:
+          global/networks/default
+          If you choose to specify this property, you can specify the network as a full or partial URL. For example, the following are all valid URLs:  
+          - https://www.googleapis.com/compute/v1/projects/myproject/global/networks/my-network 
+          - projects/myproject/global/networks/my-network 
+          - global/networks/default
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
@@ -11748,7 +11806,11 @@ definitions:
         type: object
     type: object
   HealthCheckReference:
-    description: "A full or valid partial URL to a health check. For example, the following are valid URLs:  \n- https://www.googleapis.com/compute/beta/projects/project-id/global/httpHealthChecks/health-check \n- projects/project-id/global/httpHealthChecks/health-check \n- global/httpHealthChecks/health-check"
+    description: |-
+      A full or valid partial URL to a health check. For example, the following are valid URLs:  
+      - https://www.googleapis.com/compute/beta/projects/project-id/global/httpHealthChecks/health-check 
+      - projects/project-id/global/httpHealthChecks/health-check 
+      - global/httpHealthChecks/health-check
     properties:
       healthCheck:
         type: string
@@ -11784,7 +11846,7 @@ definitions:
           type: string
         type: array
       pathMatcher:
-        description: "The name of the PathMatcher to use to match the path portion of the URL if the hostRule matches the URL's host portion."
+        description: The name of the PathMatcher to use to match the path portion of the URL if the hostRule matches the URL's host portion.
         type: string
     type: object
   HttpHealthCheck:
@@ -11897,7 +11959,7 @@ definitions:
         format: int32
         type: integer
       requestPath:
-        description: 'The request path of the HTTPS health check request. The default value is "/".'
+        description: The request path of the HTTPS health check request. The default value is "/".
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
@@ -12015,7 +12077,11 @@ definitions:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
       sourceDisk:
-        description: "URL of the The source disk used to create this image. This can be a full or valid partial URL. You must provide either this property or the rawDisk.source property but not both to create an image. For example, the following are valid values:  \n- https://www.googleapis.com/compute/v1/projects/project/zones/zone/disk/disk \n- projects/project/zones/zone/disk/disk \n- zones/zone/disks/disk"
+        description: |-
+          URL of the The source disk used to create this image. This can be a full or valid partial URL. You must provide either this property or the rawDisk.source property but not both to create an image. For example, the following are valid values:  
+          - https://www.googleapis.com/compute/v1/projects/project/zones/zone/disk/disk 
+          - projects/project/zones/zone/disk/disk 
+          - zones/zone/disks/disk
         type: string
       sourceDiskEncryptionKey:
         $ref: '#/definitions/CustomerEncryptionKey'
@@ -12103,7 +12169,18 @@ definitions:
         description: Labels to apply to this instance. These can be later modified by the setLabels method. Each label key/value pair must comply with RFC1035. Label values may be empty.
         type: object
       machineType:
-        description: "Full or partial URL of the machine type resource to use for this instance, in the format: zones/zone/machineTypes/machine-type. This is provided by the client when the instance is created. For example, the following is a valid partial url to a predefined machine type:\n\nzones/us-central1-f/machineTypes/n1-standard-1 \n\nTo create a custom machine type, provide a URL to a machine type in the following format, where CPUS is 1 or an even number up to 32 (2, 4, 6, ... 24, etc), and MEMORY is the total memory for this instance. Memory must be a multiple of 256 MB and must be supplied in MB (e.g. 5 GB of memory is 5120 MB):\n\nzones/zone/machineTypes/custom-CPUS-MEMORY \n\nFor example: zones/us-central1-f/machineTypes/custom-4-5120 \n\nFor a full list of restrictions, read the Specifications for custom machine types."
+        description: |-
+          Full or partial URL of the machine type resource to use for this instance, in the format: zones/zone/machineTypes/machine-type. This is provided by the client when the instance is created. For example, the following is a valid partial url to a predefined machine type:
+
+          zones/us-central1-f/machineTypes/n1-standard-1 
+
+          To create a custom machine type, provide a URL to a machine type in the following format, where CPUS is 1 or an even number up to 32 (2, 4, 6, ... 24, etc), and MEMORY is the total memory for this instance. Memory must be a multiple of 256 MB and must be supplied in MB (e.g. 5 GB of memory is 5120 MB):
+
+          zones/zone/machineTypes/custom-CPUS-MEMORY 
+
+          For example: zones/us-central1-f/machineTypes/custom-4-5120 
+
+          For a full list of restrictions, read the Specifications for custom machine types.
         type: string
       metadata:
         $ref: '#/definitions/Metadata'
@@ -12196,7 +12273,12 @@ definitions:
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
       namedPorts:
-        description: "Assigns a name to a port number. For example: {name: \"http\", port: 80}\n\nThis allows the system to reference ports by the assigned name instead of a port number. Named ports can also contain multiple ports. For example: [{name: \"http\", port: 80},{name: \"http\", port: 8080}] \n\nNamed ports apply to all instances in this instance group."
+        description: |-
+          Assigns a name to a port number. For example: {name: "http", port: 80}
+
+          This allows the system to reference ports by the assigned name instead of a port number. Named ports can also contain multiple ports. For example: [{name: "http", port: 80},{name: "http", port: 8080}] 
+
+          Named ports apply to all instances in this instance group.
         items:
           $ref: '#/definitions/NamedPort'
         type: array
@@ -12335,7 +12417,7 @@ definitions:
         format: int32
         type: integer
       creatingWithoutRetries:
-        description: "[Output Only] The number of instances that the managed instance group will attempt to create. The group attempts to create each instance only once. If the group fails to create one of these instances, it decreases the group's target_size value accordingly."
+        description: '[Output Only] The number of instances that the managed instance group will attempt to create. The group attempts to create each instance only once. If the group fails to create one of these instances, it decreases the group''s target_size value accordingly.'
         format: int32
         type: integer
       deleting:
@@ -13024,7 +13106,16 @@ definitions:
   ManagedInstance:
     properties:
       currentAction:
-        description: "[Output Only] The current action that the managed instance group has scheduled for the instance. Possible values: \n- NONE The instance is running, and the managed instance group does not have any scheduled actions for this instance. \n- CREATING The managed instance group is creating this instance. If the group fails to create this instance, it will try again until it is successful. \n- CREATING_WITHOUT_RETRIES The managed instance group is attempting to create this instance only once. If the group fails to create this instance, it does not try again and the group's target_size value is decreased. \n- RECREATING The managed instance group is recreating this instance. \n- DELETING The managed instance group is permanently deleting this instance. \n- ABANDONING The managed instance group is abandoning this instance. The instance will be removed from the instance group and from any target pools that are associated with this group. \n- RESTARTING The managed instance group is restarting the instance. \n- REFRESHING The managed instance group is applying configuration changes to the instance without stopping it. For example, the group can update the target pool list for an instance without stopping that instance."
+        description: |-
+          [Output Only] The current action that the managed instance group has scheduled for the instance. Possible values: 
+          - NONE The instance is running, and the managed instance group does not have any scheduled actions for this instance. 
+          - CREATING The managed instance group is creating this instance. If the group fails to create this instance, it will try again until it is successful. 
+          - CREATING_WITHOUT_RETRIES The managed instance group is attempting to create this instance only once. If the group fails to create this instance, it does not try again and the group's target_size value is decreased. 
+          - RECREATING The managed instance group is recreating this instance. 
+          - DELETING The managed instance group is permanently deleting this instance. 
+          - ABANDONING The managed instance group is abandoning this instance. The instance will be removed from the instance group and from any target pools that are associated with this group. 
+          - RESTARTING The managed instance group is restarting the instance. 
+          - REFRESHING The managed instance group is applying configuration changes to the instance without stopping it. For example, the group can update the target pool list for an instance without stopping that instance.
         enum:
           - ABANDONING
           - CREATING
@@ -13084,7 +13175,7 @@ definitions:
     description: A metadata key/value entry.
     properties:
       fingerprint:
-        description: "Specifies a fingerprint for this request, which is essentially a hash of the metadata's contents and used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update metadata. You must always provide an up-to-date fingerprint hash in order to update or change metadata."
+        description: 'Specifies a fingerprint for this request, which is essentially a hash of the metadata''s contents and used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update metadata. You must always provide an up-to-date fingerprint hash in order to update or change metadata.'
         format: byte
         type: string
       items:
@@ -13121,7 +13212,7 @@ definitions:
     properties:
       IPv4Range:
         description: 'The range of internal addresses that are legal on this network. This range is a CIDR specification, for example: 192.168.0.0/16. Provided by the client when the network is created.'
-        pattern: "[0-9]{1,3}(?:\\.[0-9]{1,3}){3}/[0-9]{1,2}"
+        pattern: '[0-9]{1,3}(?:\.[0-9]{1,3}){3}/[0-9]{1,2}'
         type: string
       autoCreateSubnetworks:
         description: |-
@@ -13137,7 +13228,7 @@ definitions:
         type: string
       gatewayIPv4:
         description: 'A gateway address for default routing to other networks. This value is read only and is selected by the Google Compute Engine, typically as the first usable address in the IPv4Range.'
-        pattern: "[0-9]{1,3}(?:\\.[0-9]{1,3}){3}"
+        pattern: '[0-9]{1,3}(?:\.[0-9]{1,3}){3}'
         type: string
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
@@ -13172,13 +13263,24 @@ definitions:
         description: '[Output Only] The name of the network interface, generated by the server. For network devices, these are eth0, eth1, etc.'
         type: string
       network:
-        description: "URL of the network resource for this instance. This is required for creating an instance but optional when creating a firewall rule. If not specified when creating a firewall rule, the default network is used:\n\nglobal/networks/default \n\nIf you specify this property, you can specify the network as a full or partial URL. For example, the following are all valid URLs:  \n- https://www.googleapis.com/compute/v1/projects/project/global/networks/network \n- projects/project/global/networks/network \n- global/networks/default"
+        description: |-
+          URL of the network resource for this instance. This is required for creating an instance but optional when creating a firewall rule. If not specified when creating a firewall rule, the default network is used:
+
+          global/networks/default 
+
+          If you specify this property, you can specify the network as a full or partial URL. For example, the following are all valid URLs:  
+          - https://www.googleapis.com/compute/v1/projects/project/global/networks/network 
+          - projects/project/global/networks/network 
+          - global/networks/default
         type: string
       networkIP:
         description: An IPV4 internal network address to assign to the instance for this network interface. If not specified by user an unused internal IP is assigned by system.
         type: string
       subnetwork:
-        description: "The URL of the Subnetwork resource for this instance. If the network resource is in legacy mode, do not provide this property. If the network is in auto subnet mode, providing the subnetwork is optional. If the network is in custom subnet mode, then this field should be specified. If you specify this property, you can specify the subnetwork as a full or partial URL. For example, the following are all valid URLs:  \n- https://www.googleapis.com/compute/v1/projects/project/regions/region/subnetworks/subnetwork \n- regions/region/subnetworks/subnetwork"
+        description: |-
+          The URL of the Subnetwork resource for this instance. If the network resource is in legacy mode, do not provide this property. If the network is in auto subnet mode, providing the subnetwork is optional. If the network is in custom subnet mode, then this field should be specified. If you specify this property, you can specify the subnetwork as a full or partial URL. For example, the following are all valid URLs:  
+          - https://www.googleapis.com/compute/v1/projects/project/regions/region/subnetworks/subnetwork 
+          - regions/region/subnetworks/subnetwork
         type: string
     type: object
   NetworkList:
@@ -13436,7 +13538,11 @@ definitions:
     description: 'A matcher for the path portion of the URL. The BackendService from the longest-matched rule will serve the URL. If no rule was matched, the default service will be used.'
     properties:
       defaultService:
-        description: "The full or partial URL to the BackendService resource. This will be used if none of the pathRules defined by this PathMatcher is matched by the URL's path portion. For example, the following are all valid URLs to a BackendService resource:  \n- https://www.googleapis.com/compute/v1/projects/project/global/backendServices/backendService \n- compute/v1/projects/project/global/backendServices/backendService \n- global/backendServices/backendService"
+        description: |-
+          The full or partial URL to the BackendService resource. This will be used if none of the pathRules defined by this PathMatcher is matched by the URL's path portion. For example, the following are all valid URLs to a BackendService resource:  
+          - https://www.googleapis.com/compute/v1/projects/project/global/backendServices/backendService 
+          - compute/v1/projects/project/global/backendServices/backendService 
+          - global/backendServices/backendService
         type: string
       description:
         description: An optional description of this resource. Provide this property when you create the resource.
@@ -14008,7 +14114,7 @@ definitions:
         type: boolean
     type: object
   SerialPortOutput:
-    description: "An instance's serial console output."
+    description: An instance's serial console output.
     properties:
       contents:
         description: '[Output Only] The contents of the console output.'
@@ -14436,7 +14542,11 @@ definitions:
           type: string
         type: array
       urlMap:
-        description: "A fully-qualified or valid partial URL to the UrlMap resource that defines the mapping from URL to the BackendService. For example, the following are all valid URLs for specifying a URL map:  \n- https://www.googleapis.compute/v1/projects/project/global/urlMaps/url-map \n- projects/project/global/urlMaps/url-map \n- global/urlMaps/url-map"
+        description: |-
+          A fully-qualified or valid partial URL to the UrlMap resource that defines the mapping from URL to the BackendService. For example, the following are all valid URLs for specifying a URL map:  
+          - https://www.googleapis.compute/v1/projects/project/global/urlMaps/url-map 
+          - projects/project/global/urlMaps/url-map 
+          - global/urlMaps/url-map
         type: string
     type: object
   TargetHttpsProxyList:
@@ -14475,7 +14585,11 @@ definitions:
         format: uint64
         type: string
       instance:
-        description: "A URL to the virtual machine instance that handles traffic for this target instance. When creating a target instance, you can provide the fully-qualified URL or a valid partial URL to the desired virtual machine. For example, the following are all valid URLs: \n- https://www.googleapis.com/compute/v1/projects/project/zones/zone/instances/instance \n- projects/project/zones/zone/instances/instance \n- zones/zone/instances/instance"
+        description: |-
+          A URL to the virtual machine instance that handles traffic for this target instance. When creating a target instance, you can provide the fully-qualified URL or a valid partial URL to the desired virtual machine. For example, the following are all valid URLs: 
+          - https://www.googleapis.com/compute/v1/projects/project/zones/zone/instances/instance 
+          - projects/project/zones/zone/instances/instance 
+          - zones/zone/instances/instance
         type: string
       kind:
         default: 'compute#targetInstance'
@@ -14486,7 +14600,7 @@ definitions:
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
       natPolicy:
-        description: "NAT option controlling how IPs are NAT'ed to the instance. Currently only NO_NAT (default value) is supported."
+        description: NAT option controlling how IPs are NAT'ed to the instance. Currently only NO_NAT (default value) is supported.
         enum:
           - NO_NAT
         type: string
@@ -14721,7 +14835,11 @@ definitions:
   TargetPoolsAddInstanceRequest:
     properties:
       instances:
-        description: "A full or partial URL to an instance to add to this target pool. This can be a full or partial URL. For example, the following are valid URLs:  \n- https://www.googleapis.com/compute/v1/projects/project-id/zones/zone/instances/instance-name \n- projects/project-id/zones/zone/instances/instance-name \n- zones/zone/instances/instance-name"
+        description: |-
+          A full or partial URL to an instance to add to this target pool. This can be a full or partial URL. For example, the following are valid URLs:  
+          - https://www.googleapis.com/compute/v1/projects/project-id/zones/zone/instances/instance-name 
+          - projects/project-id/zones/zone/instances/instance-name 
+          - zones/zone/instances/instance-name
         items:
           $ref: '#/definitions/InstanceReference'
         type: array
@@ -14729,7 +14847,11 @@ definitions:
   TargetPoolsRemoveHealthCheckRequest:
     properties:
       healthChecks:
-        description: "Health check URL to be removed. This can be a full or valid partial URL. For example, the following are valid URLs:  \n- https://www.googleapis.com/compute/beta/projects/project/global/httpHealthChecks/health-check \n- projects/project/global/httpHealthChecks/health-check \n- global/httpHealthChecks/health-check"
+        description: |-
+          Health check URL to be removed. This can be a full or valid partial URL. For example, the following are valid URLs:  
+          - https://www.googleapis.com/compute/beta/projects/project/global/httpHealthChecks/health-check 
+          - projects/project/global/httpHealthChecks/health-check 
+          - global/httpHealthChecks/health-check
         items:
           $ref: '#/definitions/HealthCheckReference'
         type: array
@@ -14950,7 +15072,7 @@ definitions:
   TestPermissionsRequest:
     properties:
       permissions:
-        description: "The set of permissions to check for the 'resource'. Permissions with wildcards (such as '*' or 'storage.*') are not allowed."
+        description: The set of permissions to check for the 'resource'. Permissions with wildcards (such as '*' or 'storage.*') are not allowed.
         items:
           type: string
         type: array
@@ -14964,7 +15086,7 @@ definitions:
         type: array
     type: object
   UrlMap:
-    description: "A UrlMap resource. This resource defines the mapping from URL to the BackendService resource, based on the \"longest-match\" of the URL's host and path."
+    description: 'A UrlMap resource. This resource defines the mapping from URL to the BackendService resource, based on the "longest-match" of the URL''s host and path.'
     properties:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -15061,14 +15183,14 @@ definitions:
           type: string
         type: array
       loadSucceeded:
-        description: "Whether the given UrlMap can be successfully loaded. If false, 'loadErrors' indicates the reasons."
+        description: 'Whether the given UrlMap can be successfully loaded. If false, ''loadErrors'' indicates the reasons.'
         type: boolean
       testFailures:
         items:
           $ref: '#/definitions/TestFailure'
         type: array
       testPassed:
-        description: "If successfully loaded, this field indicates whether the test passed. If false, 'testFailures's indicate the reason of failure."
+        description: 'If successfully loaded, this field indicates whether the test passed. If false, ''testFailures''s indicate the reason of failure.'
         type: boolean
     type: object
   UrlMapsValidateRequest:

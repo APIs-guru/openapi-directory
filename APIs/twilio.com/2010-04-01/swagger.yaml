@@ -53,11 +53,11 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't DELETE the resource."
+          description: You can't DELETE the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
-          description: "We couldn't delete the resource. Please try again."
+          description: We couldn't delete the resource. Please try again.
     get:
       description: Get application instance resource.
       parameters:
@@ -159,7 +159,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -260,7 +260,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -806,7 +806,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -905,7 +905,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -946,11 +946,11 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't DELETE the resource."
+          description: You can't DELETE the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
-          description: "We couldn't delete the resource. Please try again."
+          description: We couldn't delete the resource. Please try again.
     get:
       description: Returns a representation of this participant.
       parameters:
@@ -1057,7 +1057,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -1326,7 +1326,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -1400,7 +1400,7 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: "Adds a new phone number to your account. If a phone number is found for your request, Twilio will add it to your account and bill you for the first month's cost of the phone number. "
+      description: 'Adds a new phone number to your account. If a phone number is found for your request, Twilio will add it to your account and bill you for the first month''s cost of the phone number. '
       parameters:
         - in: path
           name: AccountSid
@@ -1414,7 +1414,7 @@ paths:
         '201':
           description: Created
         '400':
-          description: "If Twilio can't find a phone number to match your request, you will receive an HTTP 400 with Twilio error code 21452."
+          description: 'If Twilio can''t find a phone number to match your request, you will receive an HTTP 400 with Twilio error code 21452.'
   '/Accounts/{AccountSid}/IncomingPhoneNumbers/Mobile{mediaTypeExtension}':
     get:
       description: 'Returns a list of local <IncomingPhoneNumber> elements, each representing a mobile phone number given to your account, under an <IncomingPhoneNumbers> list element that includes paging information. Works exactly the same as the IncomingPhoneNumber resource, but filters out local and toll free numbers.'
@@ -1433,7 +1433,7 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: "Adds a new phone number to your account. If a phone number is found for your request, Twilio will add it to your account and bill you for the first month's cost of the phone number."
+      description: 'Adds a new phone number to your account. If a phone number is found for your request, Twilio will add it to your account and bill you for the first month''s cost of the phone number.'
       parameters:
         - in: path
           name: AccountSid
@@ -1447,10 +1447,10 @@ paths:
         '201':
           description: Created
         '400':
-          description: "If Twilio can't find a phone number to match your request, you will receive an HTTP 400 with Twilio error code 21452."
+          description: 'If Twilio can''t find a phone number to match your request, you will receive an HTTP 400 with Twilio error code 21452.'
   '/Accounts/{AccountSid}/IncomingPhoneNumbers/TollFree{mediaTypeExtension}':
     get:
-      description: "Returns a list of local <IncomingPhoneNumber> elements, each representing a toll-free phone number given to your account, under an <IncomingPhoneNumbers> list element that includes paging information. Works exactly the same as the IncomingPhoneNumber resource, but filters out all numbers that aren't toll-free."
+      description: 'Returns a list of local <IncomingPhoneNumber> elements, each representing a toll-free phone number given to your account, under an <IncomingPhoneNumbers> list element that includes paging information. Works exactly the same as the IncomingPhoneNumber resource, but filters out all numbers that aren''t toll-free.'
       parameters:
         - in: path
           name: AccountSid
@@ -1466,7 +1466,7 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: "Adds a new phone number to your account. If a phone number is found for your request, Twilio will add it to your account and bill you for the first month's cost of the phone number. "
+      description: 'Adds a new phone number to your account. If a phone number is found for your request, Twilio will add it to your account and bill you for the first month''s cost of the phone number. '
       parameters:
         - in: path
           name: AccountSid
@@ -1480,7 +1480,7 @@ paths:
         '201':
           description: Created
         '400':
-          description: "If Twilio can't find a phone number to match your request, you will receive an HTTP 400 with Twilio error code 21452."
+          description: 'If Twilio can''t find a phone number to match your request, you will receive an HTTP 400 with Twilio error code 21452.'
   '/Accounts/{AccountSid}/IncomingPhoneNumbers/{IncomingPhoneNumberSid}{mediaTypeExtension}':
     delete:
       description: |
@@ -1517,13 +1517,13 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't DELETE the resource."
+          description: You can't DELETE the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
-          description: "We couldn't delete the resource. Please try again."
+          description: We couldn't delete the resource. Please try again.
     get:
-      description: "Get info about incoming call's phone number."
+      description: Get info about incoming call's phone number.
       parameters:
         - in: path
           name: AccountSid
@@ -1623,7 +1623,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -1679,7 +1679,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -1784,7 +1784,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -2046,7 +2046,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -2084,11 +2084,11 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't DELETE the resource."
+          description: You can't DELETE the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
-          description: "We couldn't delete the resource. Please try again."
+          description: We couldn't delete the resource. Please try again.
     get:
       description: Get a notification entry.
       parameters:
@@ -2225,13 +2225,13 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't DELETE the resource."
+          description: You can't DELETE the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
-          description: "We couldn't delete the resource. Please try again."
+          description: We couldn't delete the resource. Please try again.
     get:
-      description: "Get the set of an account's verified phone numbers."
+      description: Get the set of an account's verified phone numbers.
       parameters:
         - in: path
           name: AccountSid
@@ -2328,7 +2328,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -2377,7 +2377,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -2478,7 +2478,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -2584,7 +2584,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -2700,7 +2700,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -2791,11 +2791,11 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't DELETE the resource."
+          description: You can't DELETE the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
-          description: "We couldn't delete the resource. Please try again."
+          description: We couldn't delete the resource. Please try again.
     get:
       description: |
         Get resource's individual Queue instance.
@@ -2896,7 +2896,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -2996,7 +2996,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -3087,11 +3087,11 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't DELETE the resource."
+          description: You can't DELETE the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
-          description: "We couldn't delete the resource. Please try again."
+          description: We couldn't delete the resource. Please try again.
     get:
       description: |
         Returns one of several representations:
@@ -3234,11 +3234,11 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't DELETE the resource."
+          description: You can't DELETE the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
-          description: "We couldn't delete the resource. Please try again."
+          description: We couldn't delete the resource. Please try again.
     get:
       description: 'Get a specific Credential in a list. Though a password is stored for each username in your list, the password is not returned to protect your password. If you cannot remember your password, you will need to POST to this resource to update it.'
       parameters:
@@ -3348,7 +3348,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -3456,7 +3456,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -3493,11 +3493,11 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't DELETE the resource."
+          description: You can't DELETE the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
-          description: "We couldn't delete the resource. Please try again."
+          description: We couldn't delete the resource. Please try again.
     get:
       description: Get a credential list instance resource
       parameters:
@@ -3596,7 +3596,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -3693,7 +3693,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -3734,11 +3734,11 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't DELETE the resource."
+          description: You can't DELETE the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
-          description: "We couldn't delete the resource. Please try again."
+          description: We couldn't delete the resource. Please try again.
   '/Accounts/{AccountSid}/SIP/Domains/{SipDomainSid}/CredentialListMappings{mediaTypeExtension}':
     get:
       description: Get the user lists mapped to this domain.
@@ -3838,7 +3838,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -3879,11 +3879,11 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't DELETE the resource."
+          description: You can't DELETE the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
-          description: "We couldn't delete the resource. Please try again."
+          description: We couldn't delete the resource. Please try again.
     get:
       description: Return a specific IpAccessControlListMapping instance by Sid.
       parameters:
@@ -4011,11 +4011,11 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't DELETE the resource."
+          description: You can't DELETE the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
-          description: "We couldn't delete the resource. Please try again."
+          description: We couldn't delete the resource. Please try again.
     get:
       description: Return a specific instance by Sid.
       parameters:
@@ -4112,7 +4112,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -4211,7 +4211,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -4252,11 +4252,11 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't DELETE the resource."
+          description: You can't DELETE the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
-          description: "We couldn't delete the resource. Please try again."
+          description: We couldn't delete the resource. Please try again.
     get:
       description: Return a single IP Address resource.
       parameters:
@@ -4363,7 +4363,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -4468,7 +4468,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -4505,11 +4505,11 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't DELETE the resource."
+          description: You can't DELETE the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
-          description: "We couldn't delete the resource. Please try again."
+          description: We couldn't delete the resource. Please try again.
     get:
       description: Return a specific IpAccessControlList resource.
       parameters:
@@ -4608,7 +4608,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -4753,7 +4753,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -4845,11 +4845,11 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't DELETE the resource."
+          description: You can't DELETE the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
-          description: "We couldn't delete the resource. Please try again."
+          description: We couldn't delete the resource. Please try again.
     get:
       description: |
         Returns a single Transcription resource representation identified by the
@@ -5117,11 +5117,11 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't DELETE the resource."
+          description: You can't DELETE the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
-          description: "We couldn't delete the resource. Please try again."
+          description: We couldn't delete the resource. Please try again.
     get:
       description: Returns a repesentation of the UsageTrigger.
       parameters:
@@ -5222,7 +5222,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -5329,7 +5329,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -5432,7 +5432,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -5484,7 +5484,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -5579,7 +5579,7 @@ paths:
         '404':
           description: NOT FOUND.
         '405':
-          description: "You can't POST or PUT to the resource."
+          description: You can't POST or PUT to the resource.
         '429':
           description: Your application is sending too many simultaneous requests.
         '500':
@@ -5608,7 +5608,7 @@ definitions:
       subresource_uris:
         type: object
       type:
-        description: "The type of this account. Either Trial or Full if you've upgraded."
+        description: The type of this account. Either Trial or Full if you've upgraded.
         type: string
       uri:
         type: string
@@ -5634,7 +5634,7 @@ definitions:
               description: 'The status of this account. Usually active, but can be suspended or closed.'
               type: string
             type:
-              description: "The type of this account. Either Trial or Full if you've upgraded."
+              description: The type of this account. Either Trial or Full if you've upgraded.
               type: string
           type: object
         type: array
@@ -6065,7 +6065,7 @@ definitions:
       api_version:
         type: string
       caller_name:
-        description: "If this call was an incoming call to a phone number with Caller ID Lookup enabled, the caller's name. Empty otherwise."
+        description: 'If this call was an incoming call to a phone number with Caller ID Lookup enabled, the caller''s name. Empty otherwise.'
         type: string
       date_created:
         description: GMT in RFC 2822 format.
@@ -7496,7 +7496,7 @@ definitions:
               description: The longitude coordinate of this phone number.
               type: string
             phone_number:
-              description: "The phone number, in E.164 (i.e. '+1') format."
+              description: 'The phone number, in E.164 (i.e. ''+1'') format.'
               type: string
             postal_code:
               description: The postal (zip) code of this phone number.
@@ -7900,7 +7900,7 @@ definitions:
         description: 'How this trigger recurs. Empty for non-recurring triggers. One of daily, monthly, or yearly for recurring triggers. A trigger will only fire once during each recurring period. Recurring periods are in GMT.'
         type: string
       sid:
-        description: "The trigger's unique Sid."
+        description: The trigger's unique Sid.
         type: string
       trigger_by:
         description: 'The field in the UsageRecord that fires the trigger. One of count, usage, or price.'

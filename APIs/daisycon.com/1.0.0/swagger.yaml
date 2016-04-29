@@ -148,7 +148,7 @@ paths:
           name: per_page
           required: false
           type: integer
-        - description: "Click types ('cpc', 'click', 'clickout')"
+        - description: 'Click types (''cpc'', ''click'', ''clickout'')'
           in: query
           items:
             enum:
@@ -274,7 +274,7 @@ paths:
           name: program_id
           required: false
           type: array
-        - description: 'Name (wildcards * allowed)'
+        - description: Name (wildcards * allowed)
           in: query
           items:
             type: string
@@ -369,7 +369,7 @@ paths:
           name: per_page
           required: false
           type: integer
-        - description: "Mime type ('image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'text/html', 'text/plain', 'application/x-shockwave-flash')"
+        - description: 'Mime type (''image/jpeg'', ''image/jpg'', ''image/png'', ''image/gif'', ''text/html'', ''text/plain'', ''application/x-shockwave-flash'')'
           in: query
           items:
             enum:
@@ -384,7 +384,7 @@ paths:
           name: type
           required: false
           type: array
-        - description: "Ad dimensions format: 'WIDTHxHEIGHT' eg 468x60"
+        - description: 'Ad dimensions format: ''WIDTHxHEIGHT'' eg 468x60'
           in: query
           items:
             type: string
@@ -503,14 +503,14 @@ paths:
           name: media_id
           required: false
           type: array
-        - description: 'Name (wildcards * allowed)'
+        - description: Name (wildcards * allowed)
           in: query
           items:
             type: string
           name: name
           required: false
           type: array
-        - description: "Status ('active', 'disabled', 'deleted')"
+        - description: 'Status (''active'', ''disabled'', ''deleted'')'
           in: query
           items:
             enum:
@@ -521,7 +521,7 @@ paths:
           name: status
           required: false
           type: array
-        - description: "Ad dimensions format: 'WIDTHxHEIGHT' eg 468x60"
+        - description: 'Ad dimensions format: ''WIDTHxHEIGHT'' eg 468x60'
           in: query
           items:
             type: string
@@ -621,7 +621,7 @@ paths:
           name: adgroup_id
           required: false
           type: array
-        - description: "Mime type ('image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'text/html', 'text/plain', 'application/x-shockwave-flash')"
+        - description: 'Mime type (''image/jpeg'', ''image/jpg'', ''image/png'', ''image/gif'', ''text/html'', ''text/plain'', ''application/x-shockwave-flash'')'
           in: query
           items:
             enum:
@@ -636,7 +636,7 @@ paths:
           name: type
           required: false
           type: array
-        - description: "Ad dimensions format: 'WIDTHxHEIGHT' eg 468x60"
+        - description: 'Ad dimensions format: ''WIDTHxHEIGHT'' eg 468x60'
           in: query
           items:
             type: string
@@ -710,21 +710,21 @@ paths:
           name: media_id
           required: false
           type: integer
-        - description: 'Name (wildcards * allowed)'
+        - description: Name (wildcards * allowed)
           in: query
           items:
             type: string
           name: name
           required: false
           type: array
-        - description: 'Description (wildcards * allowed)'
+        - description: Description (wildcards * allowed)
           in: query
           items:
             type: string
           name: description
           required: false
           type: array
-        - description: 'Promotion code (wildcards * allowed)'
+        - description: Promotion code (wildcards * allowed)
           in: query
           items:
             type: string
@@ -844,21 +844,21 @@ paths:
           name: media_id
           required: false
           type: array
-        - description: 'Name (wildcards * allowed)'
+        - description: Name (wildcards * allowed)
           in: query
           items:
             type: string
           name: name
           required: false
           type: array
-        - description: 'Description (wildcards * allowed)'
+        - description: Description (wildcards * allowed)
           in: query
           items:
             type: string
           name: description
           required: false
           type: array
-        - description: "Mobile ready ('true', 'false')"
+        - description: 'Mobile ready (''true'', ''false'')'
           in: query
           items:
             enum:
@@ -868,7 +868,7 @@ paths:
           name: mobile
           required: false
           type: array
-        - description: "Type ('website', 'keyword_marketing', 'email_marketing', 'socialmedia')"
+        - description: 'Type (''website'', ''keyword_marketing'', ''email_marketing'', ''socialmedia'')'
           in: query
           items:
             enum:
@@ -880,7 +880,7 @@ paths:
           name: type
           required: false
           type: array
-        - description: "CPC status ('approved', 'disapproved')"
+        - description: 'CPC status (''approved'', ''disapproved'')'
           in: query
           items:
             enum:
@@ -890,7 +890,7 @@ paths:
           name: cpc_status
           required: false
           type: array
-        - description: "CO status ('approved', 'disapproved')"
+        - description: 'CO status (''approved'', ''disapproved'')'
           in: query
           items:
             enum:
@@ -900,7 +900,7 @@ paths:
           name: co_status
           required: false
           type: array
-        - description: "Approval status ('open', 'pending', 'approved')"
+        - description: 'Approval status (''open'', ''pending'', ''approved'')'
           in: query
           items:
             enum:
@@ -911,7 +911,7 @@ paths:
           name: approval_status
           required: false
           type: array
-        - description: "Verification status ('pending', 'verified')"
+        - description: 'Verification status (''pending'', ''verified'')'
           in: query
           items:
             enum:
@@ -945,7 +945,7 @@ paths:
           name: category_id
           required: false
           type: array
-        - description: "Status ('active', 'deleted', 'offline')"
+        - description: 'Status (''active'', ''deleted'', ''offline'')'
           in: query
           items:
             enum:
@@ -1102,7 +1102,7 @@ paths:
           name: program_id
           required: false
           type: array
-        - description: "Clickout status ('approved', 'pending' and or 'disapproved')"
+        - description: 'Clickout status (''approved'', ''pending'' and or ''disapproved'')'
           in: query
           items:
             enum:
@@ -1113,7 +1113,7 @@ paths:
           name: co_status
           required: false
           type: array
-        - description: "CPC status ('approved', 'pending' and or 'disapproved')"
+        - description: 'CPC status (''approved'', ''pending'' and or ''disapproved'')'
           in: query
           items:
             enum:
@@ -1124,7 +1124,7 @@ paths:
           name: cpc_status
           required: false
           type: array
-        - description: "Status ('open', 'approved', 'disapproved' and or 'canceled')"
+        - description: 'Status (''open'', ''approved'', ''disapproved'' and or ''canceled'')'
           in: query
           items:
             enum:
@@ -1230,21 +1230,21 @@ paths:
           name: type
           required: false
           type: array
-        - description: 'Title (wildcards * allowed)'
+        - description: Title (wildcards * allowed)
           in: query
           items:
             type: string
           name: title
           required: false
           type: array
-        - description: 'Content short (wildcards * allowed)'
+        - description: Content short (wildcards * allowed)
           in: query
           items:
             type: string
           name: content_short
           required: false
           type: array
-        - description: 'Content long (wildcards * allowed)'
+        - description: Content long (wildcards * allowed)
           in: query
           items:
             type: string
@@ -1332,7 +1332,7 @@ paths:
           name: program_id
           required: false
           type: array
-        - description: 'Name (wildcards * allowed)'
+        - description: Name (wildcards * allowed)
           in: query
           items:
             type: string
@@ -1458,7 +1458,7 @@ paths:
           name: program_id
           required: false
           type: array
-        - description: 'Name (wildcards * allowed)'
+        - description: Name (wildcards * allowed)
           in: query
           items:
             type: string
@@ -1489,7 +1489,7 @@ paths:
           name: supply_locale_id
           required: false
           type: array
-        - description: "Keyword marketing ('false', 'partial', 'true')"
+        - description: 'Keyword marketing (''false'', ''partial'', ''true'')'
           in: query
           items:
             enum:
@@ -1500,7 +1500,7 @@ paths:
           name: keywordmarketing
           required: false
           type: array
-        - description: "Email marketing ('false', 'partial', 'true')"
+        - description: 'Email marketing (''false'', ''partial'', ''true'')'
           in: query
           items:
             enum:
@@ -1511,7 +1511,7 @@ paths:
           name: emailmarketing
           required: false
           type: array
-        - description: "Social media ('false', 'partial', 'true')"
+        - description: 'Social media (''false'', ''partial'', ''true'')'
           in: query
           items:
             enum:
@@ -1522,7 +1522,7 @@ paths:
           name: socialmedia
           required: false
           type: array
-        - description: "Cash back ('false', 'partial', 'true')"
+        - description: 'Cash back (''false'', ''partial'', ''true'')'
           in: query
           items:
             enum:
@@ -1533,7 +1533,7 @@ paths:
           name: cashback
           required: false
           type: array
-        - description: "Product feed ('false', 'true')"
+        - description: 'Product feed (''false'', ''true'')'
           in: query
           items:
             enum:
@@ -1543,7 +1543,7 @@ paths:
           name: productfeed
           required: false
           type: array
-        - description: "Deeplink possible ('false', 'true')"
+        - description: 'Deeplink possible (''false'', ''true'')'
           in: query
           items:
             enum:
@@ -1553,7 +1553,7 @@ paths:
           name: deeplink
           required: false
           type: array
-        - description: "Publisher tag ('false', 'true')"
+        - description: 'Publisher tag (''false'', ''true'')'
           in: query
           items:
             enum:
@@ -1681,7 +1681,7 @@ paths:
           name: media_id
           required: false
           type: array
-        - description: "Clickout status ('approved', 'pending' and or 'disapproved')"
+        - description: 'Clickout status (''approved'', ''pending'' and or ''disapproved'')'
           in: query
           items:
             enum:
@@ -1692,7 +1692,7 @@ paths:
           name: co_status
           required: false
           type: array
-        - description: "CPC status ('approved', 'pending' and or 'disapproved')"
+        - description: 'CPC status (''approved'', ''pending'' and or ''disapproved'')'
           in: query
           items:
             enum:
@@ -1703,7 +1703,7 @@ paths:
           name: cpc_status
           required: false
           type: array
-        - description: "Status ('open', 'approved', 'disapproved' and or 'canceled')"
+        - description: 'Status (''open'', ''approved'', ''disapproved'' and or ''canceled'')'
           in: query
           items:
             enum:
@@ -2988,7 +2988,7 @@ paths:
           name: description
           required: false
           type: array
-        - description: "Status ('approved', 'disapproved', 'open')"
+        - description: 'Status (''approved'', ''disapproved'', ''open'')'
           in: query
           items:
             enum:

@@ -179,7 +179,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/BigOven.Model.API2.GroceryList'
-      summary: "Get the user's grocery list.  User is determined by Basic Authentication."
+      summary: Get the user's grocery list.  User is determined by Basic Authentication.
       tags:
         - GroceryList
   /grocerylist/department:
@@ -747,7 +747,7 @@ paths:
           name: recipeId
           required: true
           type: integer
-        - description: "The note ID (note -- it's not the RecipeID)"
+        - description: The note ID (note -- it's not the RecipeID)
           format: int32
           in: path
           name: noteId
@@ -763,7 +763,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/BigOven.Model.API.RecipeNote'
-      summary: "Get a given note. Make sure you're passing authentication information in the header for the user who owns the note."
+      summary: Get a given note. Make sure you're passing authentication information in the header for the user who owns the note.
       tags:
         - Note
     put:
@@ -1142,7 +1142,7 @@ paths:
           name: coll
           required: false
           type: integer
-        - description: "optionally set to either \"myrecipes\", \"try\", \"favorites\",\"added\" to filter to just the authenticated user's recipe set"
+        - description: 'optionally set to either "myrecipes", "try", "favorites","added" to filter to just the authenticated user''s recipe set'
           in: query
           name: filter
           required: false
@@ -1177,7 +1177,7 @@ paths:
           name: boostmine
           required: false
           type: boolean
-        - description: "integer of the subcategory you'd like to limit searches to (see the /recipe/categories endpoint for available id numbers). For instance, 58 is \"Main Dish &gt; Casseroles\"."
+        - description: 'integer of the subcategory you''d like to limit searches to (see the /recipe/categories endpoint for available id numbers). For instance, 58 is "Main Dish &gt; Casseroles".'
           in: query
           name: include_cat
           required: false
@@ -1211,7 +1211,7 @@ paths:
           name: db
           required: false
           type: string
-        - description: "If set to a given username, it'll force the search to filter to just that username"
+        - description: 'If set to a given username, it''ll force the search to filter to just that username'
           in: query
           name: userset
           required: false

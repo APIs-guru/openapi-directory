@@ -198,7 +198,7 @@ paths:
           name: sortBy
           required: false
           type: string
-        - description: 'Direction of sort "asc" or "desc"'
+        - description: Direction of sort "asc" or "desc"
           enum:
             - asc
             - desc
@@ -389,7 +389,7 @@ paths:
           name: guestId
           required: true
           type: integer
-        - description: 'Can be "datapoint" or "group"'
+        - description: Can be "datapoint" or "group"
           enum:
             - datapoint
             - group
@@ -412,7 +412,7 @@ paths:
           name: limit
           required: false
           type: integer
-        - description: 'Can be "w" or "r"'
+        - description: Can be "w" or "r"
           enum:
             - r
             - w
@@ -452,7 +452,7 @@ paths:
           name: guestId
           required: true
           type: integer
-        - description: 'Can be "datapoint" or "group"'
+        - description: Can be "datapoint" or "group"
           enum:
             - datapoint
             - group
@@ -460,7 +460,7 @@ paths:
           name: entityType
           required: false
           type: string
-        - description: 'Can be "w" or "r"'
+        - description: Can be "w" or "r"
           enum:
             - r
             - w
@@ -507,7 +507,7 @@ paths:
           name: guestId
           required: true
           type: integer
-        - description: 'Can be "datapoint" or "group"'
+        - description: Can be "datapoint" or "group"
           enum:
             - datapoint
             - group
@@ -553,7 +553,7 @@ paths:
           name: guestId
           required: true
           type: integer
-        - description: 'Can be "datapoint" or "group"'
+        - description: Can be "datapoint" or "group"
           enum:
             - datapoint
             - group
@@ -725,17 +725,17 @@ paths:
           name: timeFrame
           required: true
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
           type: string
-        - description: 'If using "yesterday" or "today" timeframe you can ask for the hourly detail'
+        - description: If using "yesterday" or "today" timeframe you can ask for the hourly detail
           in: query
           name: hourly
           required: false
@@ -786,17 +786,17 @@ paths:
           name: timeFrame
           required: true
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
           type: string
-        - description: 'The temporal entity you want to group by ("week"/"month"). If unspecified is "day".'
+        - description: The temporal entity you want to group by ("week"/"month"). If unspecified is "day".
           enum:
             - week
             - month
@@ -845,17 +845,17 @@ paths:
           name: timeFrame
           required: true
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
           type: string
-        - description: 'Status of conversion ("deleted"/"active")'
+        - description: Status of conversion ("deleted"/"active")
           enum:
             - deleted
             - active
@@ -868,7 +868,7 @@ paths:
           name: sortBy
           required: false
           type: string
-        - description: 'Direction of sort "asc" or "desc"'
+        - description: Direction of sort "asc" or "desc"
           enum:
             - asc
             - desc
@@ -937,7 +937,7 @@ paths:
           name: timeFrame
           required: true
           type: string
-        - description: 'Type of datapoint ("tl"/"tp")'
+        - description: Type of datapoint ("tl"/"tp")
           enum:
             - tp
             - tl
@@ -945,17 +945,17 @@ paths:
           name: type
           required: true
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
           type: string
-        - description: 'Status of datapoint ("deleted"/"active"/"paused"/"spam")'
+        - description: Status of datapoint ("deleted"/"active"/"paused"/"spam")
           enum:
             - deleted
             - active
@@ -980,7 +980,7 @@ paths:
           name: sortBy
           required: false
           type: string
-        - description: 'Direction of sort "asc" or "desc"'
+        - description: Direction of sort "asc" or "desc"
           enum:
             - asc
             - desc
@@ -1055,17 +1055,17 @@ paths:
           name: timeFrame
           required: true
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
           type: string
-        - description: 'Status of group ("deleted"/"active")'
+        - description: Status of group ("deleted"/"active")
           enum:
             - deleted
             - active
@@ -1088,7 +1088,7 @@ paths:
           name: sortBy
           required: false
           type: string
-        - description: 'Direction of sort "asc" or "desc"'
+        - description: Direction of sort "asc" or "desc"
           enum:
             - asc
             - desc
@@ -1136,19 +1136,19 @@ paths:
       consumes: []
       deprecated: false
       parameters:
-        - description: 'Filter by this group id (mutually exclusive with "datapoint" and "conversion")'
+        - description: Filter by this group id (mutually exclusive with "datapoint" and "conversion")
           format: int64
           in: query
           name: group
           required: false
           type: integer
-        - description: 'Filter by this datapoint id (mutually exclusive with "group" and "conversion")'
+        - description: Filter by this datapoint id (mutually exclusive with "group" and "conversion")
           format: int64
           in: query
           name: datapoint
           required: false
           type: integer
-        - description: 'Filter by this conversion id (mutually exclusive with "datapoint" and "group")'
+        - description: Filter by this conversion id (mutually exclusive with "datapoint" and "group")
           format: int64
           in: query
           name: conversion
@@ -1161,7 +1161,7 @@ paths:
           name: pageSize
           required: false
           type: integer
-        - description: 'Filter event type ("spiders"/"uniques"/"nonuniques"/"conversions")'
+        - description: Filter event type ("spiders"/"uniques"/"nonuniques"/"conversions")
           enum:
             - ''
             - spiders
@@ -1207,7 +1207,7 @@ paths:
           name: limit
           required: false
           type: integer
-        - description: 'Status of conversion ("deleted"/"active")'
+        - description: Status of conversion ("deleted"/"active")
           enum:
             - deleted
             - active
@@ -1305,17 +1305,17 @@ paths:
           name: timeFrame
           required: true
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
           type: string
-        - description: 'Status of conversion ("deleted"/"active")'
+        - description: Status of conversion ("deleted"/"active")
           enum:
             - deleted
             - active
@@ -1323,7 +1323,7 @@ paths:
           name: status
           required: false
           type: string
-        - description: 'The temporal entity you want to group by ("week"/"month"). If unspecified is "day".'
+        - description: The temporal entity you want to group by ("week"/"month"). If unspecified is "day".
           enum:
             - week
             - month
@@ -1351,7 +1351,7 @@ paths:
       consumes: []
       deprecated: false
       parameters:
-        - description: 'Status of conversion ("deleted"/"active")'
+        - description: Status of conversion ("deleted"/"active")
           enum:
             - deleted
             - active
@@ -1522,12 +1522,12 @@ paths:
           name: timeFrame
           required: true
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
@@ -1542,7 +1542,7 @@ paths:
           name: favourite
           required: false
           type: boolean
-        - description: 'If using "yesterday" or "today" timeframe you can ask for the hourly detail'
+        - description: If using "yesterday" or "today" timeframe you can ask for the hourly detail
           in: query
           name: hourly
           required: false
@@ -1594,17 +1594,17 @@ paths:
           name: timeFrame
           required: true
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
           type: string
-        - description: 'The temporal entity you want to group by ("week"/"month"). If unspecified is "day".'
+        - description: The temporal entity you want to group by ("week"/"month"). If unspecified is "day".
           enum:
             - week
             - month
@@ -1653,7 +1653,7 @@ paths:
           name: limit
           required: false
           type: integer
-        - description: 'Type of datapoint ("tl"/"tp")'
+        - description: Type of datapoint ("tl"/"tp")
           enum:
             - tp
             - tl
@@ -1661,7 +1661,7 @@ paths:
           name: type
           required: false
           type: string
-        - description: 'Status of datapoint ("deleted"/"active"/"paused"/"spam")'
+        - description: Status of datapoint ("deleted"/"active"/"paused"/"spam")
           enum:
             - deleted
             - active
@@ -1756,12 +1756,12 @@ paths:
           name: conversionId
           required: true
           type: integer
-        - description: 'Type of datapoint ("tl"/"tp")'
+        - description: Type of datapoint ("tl"/"tp")
           in: query
           name: type
           required: false
           type: string
-        - description: 'Status of datapoint ("deleted"/"active"/"paused"/"spam")'
+        - description: Status of datapoint ("deleted"/"active"/"paused"/"spam")
           in: query
           name: status
           required: false
@@ -1879,22 +1879,22 @@ paths:
           name: limit
           required: false
           type: integer
-        - description: "Offset where to start from (it's the lastKey field in the response object)"
+        - description: Offset where to start from (it's the lastKey field in the response object)
           in: query
           name: offset
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
           type: string
-        - description: 'Filter event type ("spiders"/"uniques"/"nonuniques"/"conversions")'
+        - description: Filter event type ("spiders"/"uniques"/"nonuniques"/"conversions")
           enum:
             - spiders
             - uniques
@@ -1959,7 +1959,7 @@ paths:
           description: Not found
         '500':
           description: Internal Server Error
-      summary: 'Fast patch the "notes" field of a conversion'
+      summary: Fast patch the "notes" field of a conversion
       tags:
         - Conversions
   '/conversions/{conversionId}/reports':
@@ -2017,12 +2017,12 @@ paths:
           name: hittype
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
@@ -2066,7 +2066,7 @@ paths:
           name: limit
           required: false
           type: integer
-        - description: 'Type of the datapoint ("tp"/"tl")'
+        - description: Type of the datapoint ("tp"/"tl")
           enum:
             - tp
             - tl
@@ -2104,7 +2104,7 @@ paths:
           name: sortBy
           required: false
           type: string
-        - description: 'Direction of sort "asc" or "desc"'
+        - description: Direction of sort "asc" or "desc"
           enum:
             - asc
             - desc
@@ -2197,7 +2197,7 @@ paths:
           name: timeFrame
           required: true
           type: string
-        - description: 'Type of datapoint ("tl"/"tp")'
+        - description: Type of datapoint ("tl"/"tp")
           enum:
             - tp
             - tl
@@ -2205,22 +2205,22 @@ paths:
           name: type
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
           type: string
-        - description: 'If using "yesterday" or "today" timeframe you can ask for the hourly detail'
+        - description: If using "yesterday" or "today" timeframe you can ask for the hourly detail
           in: query
           name: hourly
           required: false
           type: boolean
-        - description: 'Status of datapoint ("deleted"/"active"/"paused"/"spam")'
+        - description: Status of datapoint ("deleted"/"active"/"paused"/"spam")
           enum:
             - deleted
             - active
@@ -2260,7 +2260,7 @@ paths:
       consumes: []
       deprecated: false
       parameters:
-        - description: 'Type of datapoint ("tl"/"tp")'
+        - description: Type of datapoint ("tl"/"tp")
           enum:
             - tp
             - tl
@@ -2289,17 +2289,17 @@ paths:
           name: timeFrame
           required: true
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
           type: string
-        - description: 'Status of datapoint ("deleted"/"active"/"paused"/"spam")'
+        - description: Status of datapoint ("deleted"/"active"/"paused"/"spam")
           enum:
             - deleted
             - active
@@ -2319,7 +2319,7 @@ paths:
           name: favourite
           required: false
           type: boolean
-        - description: 'The temporal entity you want to group by ("week"/"month"). If unspecified is "day".'
+        - description: The temporal entity you want to group by ("week"/"month"). If unspecified is "day".
           enum:
             - week
             - month
@@ -2438,7 +2438,7 @@ paths:
       consumes: []
       deprecated: false
       parameters:
-        - description: 'Type of the datapoint ("tp"/"tl")'
+        - description: Type of the datapoint ("tp"/"tl")
           enum:
             - tp
             - tl
@@ -2627,17 +2627,17 @@ paths:
           name: timeFrame
           required: true
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
           type: string
-        - description: 'If using "yesterday" or "today" timeframe you can ask for the hourly detail'
+        - description: If using "yesterday" or "today" timeframe you can ask for the hourly detail
           in: query
           name: hourly
           required: false
@@ -2689,17 +2689,17 @@ paths:
           name: timeFrame
           required: true
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
           type: string
-        - description: 'The temporal entity you want to group by ("week"/"month"). If unspecified is "day".'
+        - description: The temporal entity you want to group by ("week"/"month"). If unspecified is "day".
           enum:
             - week
             - month
@@ -2751,7 +2751,7 @@ paths:
           description: Not found
         '500':
           description: Internal Server Error
-      summary: 'Fast switch the "favourite" field of a datapoint'
+      summary: Fast switch the "favourite" field of a datapoint
       tags:
         - DataPoints
   '/datapoints/{id}/hits':
@@ -2789,22 +2789,22 @@ paths:
           name: limit
           required: false
           type: integer
-        - description: "Offset where to start from (it's the lastKey field in the response object)"
+        - description: Offset where to start from (it's the lastKey field in the response object)
           in: query
           name: offset
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
           type: string
-        - description: 'Filter event type ("spiders"/"uniques"/"nonuniques"/"conversions")'
+        - description: Filter event type ("spiders"/"uniques"/"nonuniques"/"conversions")
           enum:
             - spiders
             - uniques
@@ -2869,7 +2869,7 @@ paths:
           description: Not found
         '500':
           description: Internal Server Error
-      summary: 'Fast patch the "notes" field of a datapoint'
+      summary: Fast patch the "notes" field of a datapoint
       tags:
         - DataPoints
   '/datapoints/{id}/reports':
@@ -2920,12 +2920,12 @@ paths:
           name: timeframe
           required: true
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
@@ -2968,7 +2968,7 @@ paths:
           required: false
           type: integer
         - default: system
-          description: 'Type of domain ("system"/"go"/"personal"/"dedicated"). If not specified default is "system"'
+          description: Type of domain ("system"/"go"/"personal"/"dedicated"). If not specified default is "system"
           enum:
             - system
             - go
@@ -3036,7 +3036,7 @@ paths:
       deprecated: false
       parameters:
         - default: system
-          description: 'Type of domain ("system"/"go"/"personal"/"dedicated"). If not specified default is "system"'
+          description: Type of domain ("system"/"go"/"personal"/"dedicated"). If not specified default is "system"
           enum:
             - system
             - go
@@ -3291,22 +3291,22 @@ paths:
           name: timeFrame
           required: true
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
           type: string
-        - description: 'If using "yesterday" or "today" timeframe you can ask for the hourly detail'
+        - description: If using "yesterday" or "today" timeframe you can ask for the hourly detail
           in: query
           name: hourly
           required: false
           type: boolean
-        - description: 'Status of group ("deleted"/"active")'
+        - description: Status of group ("deleted"/"active")
           enum:
             - deleted
             - active
@@ -3365,17 +3365,17 @@ paths:
           name: timeFrame
           required: true
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
           type: string
-        - description: 'Status of group ("deleted"/"active")'
+        - description: Status of group ("deleted"/"active")
           in: query
           name: status
           required: false
@@ -3390,7 +3390,7 @@ paths:
           name: favourite
           required: false
           type: boolean
-        - description: 'The temporal entity you want to group by ("week"/"month"). If unspecified is "day".'
+        - description: The temporal entity you want to group by ("week"/"month"). If unspecified is "day".
           enum:
             - deleted
             - active
@@ -3597,17 +3597,17 @@ paths:
           name: timeFrame
           required: true
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
           type: string
-        - description: 'If using "yesterday" or "today" timeframe you can ask for the hourly detail'
+        - description: If using "yesterday" or "today" timeframe you can ask for the hourly detail
           in: query
           name: hourly
           required: false
@@ -3659,17 +3659,17 @@ paths:
           name: timeFrame
           required: true
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
           type: string
-        - description: 'The temporal entity you want to group by ("week"/"month"). If unspecified is "day".'
+        - description: The temporal entity you want to group by ("week"/"month"). If unspecified is "day".
           enum:
             - week
             - month
@@ -3724,7 +3724,7 @@ paths:
           name: timeFrame
           required: true
           type: string
-        - description: 'Type of datapoint ("tl"/"tp")'
+        - description: Type of datapoint ("tl"/"tp")
           enum:
             - tp
             - tl
@@ -3732,17 +3732,17 @@ paths:
           name: type
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
           type: string
-        - description: 'Status of datapoint ("deleted"/"active"/"paused"/"spam")'
+        - description: Status of datapoint ("deleted"/"active"/"paused"/"spam")
           enum:
             - deleted
             - active
@@ -3765,7 +3765,7 @@ paths:
           name: sortBy
           required: false
           type: string
-        - description: 'Direction of sort "asc" or "desc"'
+        - description: Direction of sort "asc" or "desc"
           enum:
             - asc
             - desc
@@ -3838,7 +3838,7 @@ paths:
           name: limit
           required: false
           type: integer
-        - description: 'Type of the datapoint ("tp"/"tl")'
+        - description: Type of the datapoint ("tp"/"tl")
           enum:
             - tp
             - tl
@@ -3876,7 +3876,7 @@ paths:
           name: sortBy
           required: false
           type: string
-        - description: 'Direction of sort "asc" or "desc"'
+        - description: Direction of sort "asc" or "desc"
           enum:
             - asc
             - desc
@@ -3960,7 +3960,7 @@ paths:
           name: id
           required: true
           type: integer
-        - description: 'Type of the datapoint ("tp"/"tl")'
+        - description: Type of the datapoint ("tp"/"tl")
           enum:
             - tp
             - tl
@@ -4051,7 +4051,7 @@ paths:
           description: Not found
         '500':
           description: Internal Server Error
-      summary: 'Fast switch the "favourite" field of a group'
+      summary: Fast switch the "favourite" field of a group
       tags:
         - Groups
   '/groups/{id}/hits':
@@ -4089,22 +4089,22 @@ paths:
           name: limit
           required: false
           type: integer
-        - description: "Offset where to start from (it's the lastKey field in the response object)"
+        - description: Offset where to start from (it's the lastKey field in the response object)
           in: query
           name: offset
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
           type: string
-        - description: 'Filter event type ("spiders"/"uniques"/"nonuniques"/"conversions")'
+        - description: Filter event type ("spiders"/"uniques"/"nonuniques"/"conversions")
           enum:
             - spiders
             - uniques
@@ -4169,7 +4169,7 @@ paths:
           description: Not found
         '500':
           description: Internal Server Error
-      summary: 'Fast patch the "notes" field of a group'
+      summary: Fast patch the "notes" field of a group
       tags:
         - Groups
   '/groups/{id}/reports':
@@ -4228,12 +4228,12 @@ paths:
           name: hittype
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
@@ -4282,22 +4282,22 @@ paths:
           name: limit
           required: false
           type: integer
-        - description: "Offset where to start from (it's the lastKey field in the response object)"
+        - description: Offset where to start from (it's the lastKey field in the response object)
           in: query
           name: offset
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
           type: string
-        - description: 'Filter event type ("spiders"/"uniques"/"nonuniques"/"conversions")'
+        - description: Filter event type ("spiders"/"uniques"/"nonuniques"/"conversions")
           enum:
             - spiders
             - uniques
@@ -4411,30 +4411,30 @@ paths:
           name: hittype
           required: false
           type: string
-        - description: 'Filter by this group id (mutually exclusive with "datapoint" and "conversion")'
+        - description: Filter by this group id (mutually exclusive with "datapoint" and "conversion")
           format: int64
           in: query
           name: group
           required: false
           type: integer
-        - description: 'Filter by this datapoint id (mutually exclusive with "group" and "conversion")'
+        - description: Filter by this datapoint id (mutually exclusive with "group" and "conversion")
           format: int64
           in: query
           name: datapoint
           required: false
           type: integer
-        - description: 'Filter by this conversion id (mutually exclusive with "datapoint" and "group")'
+        - description: Filter by this conversion id (mutually exclusive with "datapoint" and "group")
           format: int64
           in: query
           name: conversion
           required: false
           type: integer
-        - description: 'If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the starting day (YYYYMMDD)
           in: query
           name: fromDay
           required: false
           type: string
-        - description: 'If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)'
+        - description: If using a "custom" timeFrame you can specify the ending day (YYYYMMDD)
           in: query
           name: toDay
           required: false
@@ -4707,7 +4707,7 @@ paths:
           name: sortBy
           required: false
           type: string
-        - description: 'Direction of sort "asc" or "desc"'
+        - description: Direction of sort "asc" or "desc"
           enum:
             - asc
             - desc
@@ -5056,7 +5056,7 @@ paths:
           name: limit
           required: false
           type: integer
-        - description: 'Type of the datapoint ("tp"/"tl")'
+        - description: Type of the datapoint ("tp"/"tl")
           enum:
             - tp
             - tl
@@ -5117,7 +5117,7 @@ paths:
           name: tagId
           required: true
           type: integer
-        - description: 'Type of the datapoint ("tp"/"tl")'
+        - description: Type of the datapoint ("tp"/"tl")
           enum:
             - tp
             - tl

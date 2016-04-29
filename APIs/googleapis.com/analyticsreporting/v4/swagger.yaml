@@ -708,7 +708,7 @@ definitions:
         format: int32
         type: integer
       rows:
-        description: "There's one ReportRow for every unique combination of dimensions."
+        description: There's one ReportRow for every unique combination of dimensions.
         items:
           $ref: '#/definitions/ReportRow'
         type: array
@@ -895,7 +895,7 @@ definitions:
         $ref: '#/definitions/DynamicSegment'
         description: A dynamic segment definition in the request.
       segmentId:
-        description: "The segment ID of a built-in or custom segment, for example 'gaid::-3'."
+        description: 'The segment ID of a built-in or custom segment, for example ''gaid::-3''.'
         type: string
     type: object
   SegmentDefinition:
@@ -999,7 +999,7 @@ definitions:
         $ref: '#/definitions/SegmentMetricFilter'
         description: Metric Filter for the segment definition.
       not:
-        description: 'Matches the complement (`!`) of the filter.'
+        description: Matches the complement (`!`) of the filter.
         type: boolean
     type: object
   SegmentMetricFilter:

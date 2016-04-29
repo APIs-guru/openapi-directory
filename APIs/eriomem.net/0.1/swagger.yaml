@@ -6,7 +6,7 @@ basePath: /
 info:
   contact:
     name: info@massiverand.com
-  description: "This is the experimental API documentation for <a href='http://www.massiverand.com/'>MassiveRand</a> TRNG Web Service. Serving true random numbers since December 2014!<p>Explore our <a href='../tutorials'>Tutorials</a>.</p>"
+  description: 'This is the experimental API documentation for <a href=''http://www.massiverand.com/''>MassiveRand</a> TRNG Web Service. Serving true random numbers since December 2014!<p>Explore our <a href=''../tutorials''>Tutorials</a>.</p>'
   license:
     name: Terms of Use
     url: terms.html
@@ -49,7 +49,7 @@ paths:
         - True Random Number Generator
   /randb58:
     get:
-      description: "Returns a <a href='http://en.wikipedia.org/wiki/Base58'>base58</a> string of true random bytes from the MassiveRand True Random Number Generator."
+      description: 'Returns a <a href=''http://en.wikipedia.org/wiki/Base58''>base58</a> string of true random bytes from the MassiveRand True Random Number Generator.'
       produces:
         - application/octetstream
       responses:
@@ -62,7 +62,7 @@ paths:
         - True Random Number Generator
   /randb64:
     get:
-      description: "Returns a <a href='http://en.wikipedia.org/wiki/Base64'>base64</a> string of true random bytes from the MassiveRand True Random Number Generator."
+      description: 'Returns a <a href=''http://en.wikipedia.org/wiki/Base64''>base64</a> string of true random bytes from the MassiveRand True Random Number Generator.'
       produces:
         - application/octetstream
       responses:
@@ -75,7 +75,7 @@ paths:
         - True Random Number Generator
   /randbindl:
     get:
-      description: "Returns a binary blob of true random bytes from the MassiveRand True Random Number Generator as an attached file 'rand.raw'."
+      description: Returns a binary blob of true random bytes from the MassiveRand True Random Number Generator as an attached file 'rand.raw'.
       parameters:
         - description: Number of bytes to return
           in: query
@@ -139,7 +139,7 @@ paths:
         - True Random Number Generator
   /randprime:
     get:
-      description: "Returns a large prime number (1536b long) from MassiveRand's Million Prime Database, as an hexadecimal string."
+      description: 'Returns a large prime number (1536b long) from MassiveRand''s Million Prime Database, as an hexadecimal string.'
       parameters: []
       produces:
         - text/plain

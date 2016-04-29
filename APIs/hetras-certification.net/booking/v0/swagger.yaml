@@ -39,7 +39,7 @@ paths:
           name: hotelId
           required: true
           type: integer
-        - description: 'Date from when the addon service will be booked to the reservation in the ISO-8601 format "YYYY-MM-DD".'
+        - description: Date from when the addon service will be booked to the reservation in the ISO-8601 format "YYYY-MM-DD".
           format: date-time
           in: query
           name: arrivalDate
@@ -142,13 +142,13 @@ paths:
           name: groupCode
           required: false
           type: string
-        - description: "Return all blocks where the block's last_departure is greater than specified date."
+        - description: Return all blocks where the block's last_departure is greater than specified date.
           format: date-time
           in: query
           name: from
           required: false
           type: string
-        - description: "Return all blocks where the block's last_departure is less than specified date."
+        - description: Return all blocks where the block's last_departure is less than specified date.
           format: date-time
           in: query
           name: to
@@ -932,13 +932,13 @@ paths:
           name: hotelId
           required: true
           type: integer
-        - description: 'Date of arrival for the guest in the ISO-8601 format "YYYY-MM-DD".'
+        - description: Date of arrival for the guest in the ISO-8601 format "YYYY-MM-DD".
           format: date-time
           in: query
           name: arrivalDate
           required: true
           type: string
-        - description: 'Date of departure for the guest in the ISO-8601 format "YYYY-MM-DD".'
+        - description: Date of departure for the guest in the ISO-8601 format "YYYY-MM-DD".
           format: date-time
           in: query
           name: departureDate
@@ -1271,7 +1271,7 @@ definitions:
   BlockListRequest:
     properties:
       from:
-        description: "Return all blocks where the block's last_departure is greater than specified date."
+        description: Return all blocks where the block's last_departure is greater than specified date.
         format: date-time
         type: string
       groupCode:
@@ -1294,7 +1294,7 @@ definitions:
           - Definite
         type: string
       to:
-        description: "Return all blocks where the block's last_departure is less than specified date."
+        description: Return all blocks where the block's last_departure is less than specified date.
         format: date-time
         type: string
     type: object
@@ -1844,7 +1844,7 @@ definitions:
         minimum: 1
         type: string
       arrivalDate:
-        description: 'Date from when the addon service will be booked to the reservation in the ISO-8601 format "YYYY-MM-DD".'
+        description: Date from when the addon service will be booked to the reservation in the ISO-8601 format "YYYY-MM-DD".
         format: date-time
         type: string
       channelCode:
@@ -2226,14 +2226,14 @@ definitions:
         minimum: 1
         type: string
       arrivalDate:
-        description: 'Date of arrival for the guest in the ISO-8601 format "YYYY-MM-DD".'
+        description: Date of arrival for the guest in the ISO-8601 format "YYYY-MM-DD".
         format: date-time
         type: string
       channelCode:
         description: Channel Code the rate plan needs to be configured for.
         type: string
       departureDate:
-        description: 'Date of departure for the guest in the ISO-8601 format "YYYY-MM-DD".'
+        description: Date of departure for the guest in the ISO-8601 format "YYYY-MM-DD".
         format: date-time
         type: string
       expand:

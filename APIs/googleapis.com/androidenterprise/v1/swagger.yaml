@@ -171,7 +171,7 @@ paths:
         - enterprises
   '/enterprises/{enterpriseId}':
     delete:
-      description: "Deletes the binding between the EMM and enterprise. This is now deprecated; use this to unenroll customers that were previously enrolled with the 'insert' call, then enroll them again with the 'enroll' call."
+      description: 'Deletes the binding between the EMM and enterprise. This is now deprecated; use this to unenroll customers that were previously enrolled with the ''insert'' call, then enroll them again with the ''enroll'' call.'
       operationId: androidenterprise.enterprises.delete
       parameters:
         - description: The ID of the enterprise.
@@ -410,7 +410,7 @@ paths:
         - collections
   '/enterprises/{enterpriseId}/collections/{collectionId}/users':
     get:
-      description: "Retrieves the IDs of the users who have been specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only these users will see the collection."
+      description: Retrieves the IDs of the users who have been specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only these users will see the collection.
       operationId: androidenterprise.collectionviewers.list
       parameters:
         - description: The ID of the enterprise.
@@ -443,7 +443,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/enterprises/{enterpriseId}/collections/{collectionId}/users/{userId}':
     delete:
-      description: "Removes the user from the list of those specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only such users will see the collection."
+      description: Removes the user from the list of those specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only such users will see the collection.
       operationId: androidenterprise.collectionviewers.delete
       parameters:
         - description: The ID of the enterprise.
@@ -470,7 +470,7 @@ paths:
       tags:
         - collectionviewers
     get:
-      description: "Retrieves the ID of the user if they have been specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only these users will see the collection."
+      description: Retrieves the ID of the user if they have been specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only these users will see the collection.
       operationId: androidenterprise.collectionviewers.get
       parameters:
         - description: The ID of the enterprise.
@@ -507,7 +507,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: "Adds the user to the list of those specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only such users will see the collection. This method supports patch semantics."
+      description: Adds the user to the list of those specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only such users will see the collection. This method supports patch semantics.
       operationId: androidenterprise.collectionviewers.patch
       parameters:
         - description: The ID of the enterprise.
@@ -540,7 +540,7 @@ paths:
       tags:
         - collectionviewers
     put:
-      description: "Adds the user to the list of those specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only such users will see the collection."
+      description: Adds the user to the list of those specifically allowed to see the collection. If the collection's visibility is set to viewersOnly then only such users will see the collection.
       operationId: androidenterprise.collectionviewers.update
       parameters:
         - description: The ID of the enterprise.
@@ -602,7 +602,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/enterprises/{enterpriseId}/groupLicenses/{groupLicenseId}':
     get:
-      description: "Retrieves details of an enterprise's group license for a product."
+      description: Retrieves details of an enterprise's group license for a product.
       operationId: androidenterprise.grouplicenses.get
       parameters:
         - description: The ID of the enterprise.
@@ -680,7 +680,7 @@ paths:
           in: query
           name: approved
           type: boolean
-        - description: "The BCP47 tag for the user's preferred language (e.g. \"en-US\", \"de\"). Results are returned in the language best matching it."
+        - description: 'The BCP47 tag for the user''s preferred language (e.g. "en-US", "de"). Results are returned in the language best matching it.'
           in: query
           name: language
           type: string
@@ -730,7 +730,7 @@ paths:
           name: productId
           required: true
           type: string
-        - description: "The BCP47 tag for the user's preferred language (e.g. \"en-US\", \"de\")."
+        - description: 'The BCP47 tag for the user''s preferred language (e.g. "en-US", "de").'
           in: query
           name: language
           type: string
@@ -767,7 +767,7 @@ paths:
           name: productId
           required: true
           type: string
-        - description: "The BCP47 tag for the user's preferred language (e.g. \"en-US\", \"de\")."
+        - description: 'The BCP47 tag for the user''s preferred language (e.g. "en-US", "de").'
           in: query
           name: language
           type: string
@@ -1422,7 +1422,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/enterprises/{enterpriseId}/users/{userId}':
     get:
-      description: "Retrieves a user's details."
+      description: Retrieves a user's details.
       operationId: androidenterprise.users.get
       parameters:
         - description: The ID of the enterprise.
@@ -1516,7 +1516,7 @@ paths:
         - users
   '/enterprises/{enterpriseId}/users/{userId}/devices':
     get:
-      description: "Retrieves the IDs of all of a user's devices."
+      description: Retrieves the IDs of all of a user's devices.
       operationId: androidenterprise.devices.list
       parameters:
         - description: The ID of the enterprise.
@@ -1962,7 +1962,7 @@ paths:
           name: entitlementId
           required: true
           type: string
-        - description: "Set to true to also install the product on all the user's devices where possible. Failure to install on one or more devices will not prevent this operation from returning successfully, as long as the entitlement was successfully assigned to the user."
+        - description: 'Set to true to also install the product on all the user''s devices where possible. Failure to install on one or more devices will not prevent this operation from returning successfully, as long as the entitlement was successfully assigned to the user.'
           in: query
           name: install
           type: boolean
@@ -1999,7 +1999,7 @@ paths:
           name: entitlementId
           required: true
           type: string
-        - description: "Set to true to also install the product on all the user's devices where possible. Failure to install on one or more devices will not prevent this operation from returning successfully, as long as the entitlement was successfully assigned to the user."
+        - description: 'Set to true to also install the product on all the user''s devices where possible. Failure to install on one or more devices will not prevent this operation from returning successfully, as long as the entitlement was successfully assigned to the user.'
           in: query
           name: install
           type: boolean
@@ -2085,7 +2085,7 @@ paths:
           name: permissionId
           required: true
           type: string
-        - description: "The BCP47 tag for the user's preferred language (e.g. \"en-US\", \"de\")"
+        - description: 'The BCP47 tag for the user''s preferred language (e.g. "en-US", "de")'
           in: query
           name: language
           type: string
@@ -2131,12 +2131,12 @@ definitions:
         description: 'A longer description of the restriction, giving more detail of what it affects.'
         type: string
       entry:
-        description: "For choice or multiselect restrictions, the list of possible entries' human-readable names."
+        description: 'For choice or multiselect restrictions, the list of possible entries'' human-readable names.'
         items:
           type: string
         type: array
       entryValue:
-        description: "For choice or multiselect restrictions, the list of possible entries' machine-readable values."
+        description: 'For choice or multiselect restrictions, the list of possible entries'' machine-readable values.'
         items:
           type: string
         type: array
@@ -2187,7 +2187,7 @@ definitions:
     description: Information on an approval URL.
     properties:
       approvalUrl:
-        description: "A URL that displays a product's permissions and that can also be used to approve the product with the Products.approve call."
+        description: A URL that displays a product's permissions and that can also be used to approve the product with the Products.approve call.
         type: string
       kind:
         default: 'androidenterprise#approvalUrlInfo'
@@ -2262,11 +2262,11 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#device".'
         type: string
       managementType:
-        description: "The mechanism by which this device is managed by the EMM. \"managedDevice\" means that the EMM's app is a device owner. \"managedProfile\" means that the EMM's app is the profile owner (and there is a separate personal profile which is not managed). \"containerApp\" means that the EMM's app is managing the Android for Work container app on the device."
+        description: The mechanism by which this device is managed by the EMM. "managedDevice" means that the EMM's app is a device owner. "managedProfile" means that the EMM's app is the profile owner (and there is a separate personal profile which is not managed). "containerApp" means that the EMM's app is managing the Android for Work container app on the device.
         type: string
     type: object
   DeviceState:
-    description: "The state of a user's device, as accessed by the getState and setState methods on device resources."
+    description: 'The state of a user''s device, as accessed by the getState and setState methods on device resources.'
     properties:
       accountState:
         description: 'The state of the Google account on the device. "enabled" indicates that the Google account on the device can be used to access Google services (including Google Play), while "disabled" means that it cannot. A new device is initially in the "disabled" state.'
@@ -2312,7 +2312,7 @@ definitions:
         description: 'The name of the enterprise, e.g. "Example Inc".'
         type: string
       primaryDomain:
-        description: "The enterprise's primary domain, e.g. \"example.com\"."
+        description: 'The enterprise''s primary domain, e.g. "example.com".'
         type: string
     type: object
   EnterpriseAccount:
@@ -2345,7 +2345,7 @@ definitions:
         description: The message ID of the test push notification that was sent.
         type: string
       topicName:
-        description: "The name of the Cloud Pub/Sub topic to which notifications for this enterprise's enrolled account will be sent."
+        description: The name of the Cloud Pub/Sub topic to which notifications for this enterprise's enrolled account will be sent.
         type: string
     type: object
   Entitlement:
@@ -2393,7 +2393,7 @@ definitions:
       Group license objects are never deleted. If, for example, a free app is added to a collection and then removed, the group license will remain, allowing the enterprise admin to keep track of any remaining entitlements. An enterprise admin may indicate they are no longer interested in the group license by marking it as unapproved in Google Play.
     properties:
       acquisitionKind:
-        description: 'How this group license was acquired. "bulkPurchase" means that this group license object was created because the enterprise purchased licenses for this product; this is "free" otherwise (for free products).'
+        description: How this group license was acquired. "bulkPurchase" means that this group license object was created because the enterprise purchased licenses for this product; this is "free" otherwise (for free products).
         type: string
       approval:
         description: 'Whether the product to which this group license relates is currently approved by the enterprise, as either "approved" or "unapproved". Products are approved when a group license is first created, but this approval may be revoked by an enterprise admin via Google Play. Unapproved products will not be visible to end users in collections and new entitlements to them should not normally be created.'
@@ -2407,7 +2407,7 @@ definitions:
         format: int32
         type: integer
       numPurchased:
-        description: 'The number of purchased licenses (possibly in multiple purchases). If this field is omitted then there is no limit on the number of licenses that can be provisioned (e.g. if the acquisition kind is "free").'
+        description: The number of purchased licenses (possibly in multiple purchases). If this field is omitted then there is no limit on the number of licenses that can be provisioned (e.g. if the acquisition kind is "free").
         format: int32
         type: integer
       productId:
@@ -2455,7 +2455,7 @@ definitions:
       The API can also be used to delete an install resource, which triggers the removal of the app from the device. Note that deleting an install does not automatically remove the corresponding entitlement, even if there are no remaining installs. The install resource will also be deleted if the user uninstalls the app themselves.
     properties:
       installState:
-        description: 'Install state. The state "installPending" means that an install request has recently been made and download to the device is in progress. The state "installed" means that the app has been installed. This field is read-only.'
+        description: Install state. The state "installPending" means that an install request has recently been made and download to the device is in progress. The state "installed" means that the app has been installed. This field is read-only.
         type: string
       kind:
         default: 'androidenterprise#install'
@@ -2465,7 +2465,7 @@ definitions:
         description: 'The ID of the product that the install is for, e.g. "app:com.google.android.gm".'
         type: string
       versionCode:
-        description: 'The version of the installed product. Guaranteed to be set only if the install state is "installed".'
+        description: The version of the installed product. Guaranteed to be set only if the install state is "installed".
         format: int32
         type: integer
     type: object
@@ -2616,7 +2616,7 @@ definitions:
     properties:
       approvalUrlInfo:
         $ref: '#/definitions/ApprovalUrlInfo'
-        description: "The approval URL that was shown to the user. Only the permissions shown to the user with that URL will be accepted, which may not be the product's entire set of permissions. For example, the URL may only display new permissions from an update after the product was approved, or not include new permissions if the product was updated since the URL was generated."
+        description: 'The approval URL that was shown to the user. Only the permissions shown to the user with that URL will be accepted, which may not be the product''s entire set of permissions. For example, the URL may only display new permissions from an update after the product was approved, or not include new permissions if the product was updated since the URL was generated.'
     type: object
   ProductsGenerateApprovalUrlResponse:
     properties:
@@ -2759,7 +2759,7 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#user".'
         type: string
       primaryEmail:
-        description: "The user's primary email, e.g. \"jsmith@example.com\"."
+        description: 'The user''s primary email, e.g. "jsmith@example.com".'
         type: string
     type: object
   UserToken:

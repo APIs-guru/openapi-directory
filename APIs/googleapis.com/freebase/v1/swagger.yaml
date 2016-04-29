@@ -85,7 +85,7 @@ paths:
           name: kind
           type: array
         - collectionFormat: multi
-          description: "Languages for names and values. First language is used for display. Default is 'en'."
+          description: Languages for names and values. First language is used for display. Default is 'en'.
           in: query
           items:
             type: string
@@ -192,7 +192,7 @@ paths:
           name: indent
           type: boolean
         - collectionFormat: multi
-          description: "The code of the language to run the query with. Default is 'en'."
+          description: The code of the language to run the query with. Default is 'en'.
           in: query
           items:
             type: string
@@ -236,7 +236,7 @@ paths:
           name: scoring
           type: string
         - default: no_spelling
-          description: "Request 'did you mean' suggestions"
+          description: Request 'did you mean' suggestions
           enum:
             - always
             - no_results

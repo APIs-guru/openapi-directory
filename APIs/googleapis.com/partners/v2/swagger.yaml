@@ -133,11 +133,11 @@ paths:
       description: Lists companies.
       operationId: partners.companies.list
       parameters:
-        - description: "IP address to use instead of the user's geo-located IP address."
+        - description: IP address to use instead of the user's geo-located IP address.
           in: query
           name: requestMetadata.userOverrides.ipAddress
           type: string
-        - description: "Logged-in user ID to impersonate instead of the user's ID."
+        - description: Logged-in user ID to impersonate instead of the user's ID.
           in: query
           name: requestMetadata.userOverrides.userId
           type: string
@@ -302,11 +302,11 @@ paths:
           name: companyId
           required: true
           type: string
-        - description: "IP address to use instead of the user's geo-located IP address."
+        - description: IP address to use instead of the user's geo-located IP address.
           in: query
           name: requestMetadata.userOverrides.ipAddress
           type: string
-        - description: "Logged-in user ID to impersonate instead of the user's ID."
+        - description: Logged-in user ID to impersonate instead of the user's ID.
           in: query
           name: requestMetadata.userOverrides.userId
           type: string
@@ -344,11 +344,11 @@ paths:
           in: query
           name: orderBy
           type: string
-        - description: "If the company's budget is in a different currency code than this one, then the converted budget is converted to this currency code."
+        - description: 'If the company''s budget is in a different currency code than this one, then the converted budget is converted to this currency code.'
           in: query
           name: currencyCode
           type: string
-        - description: "The address to use for sorting the company's addresses by proximity. If not given, the geo-located address of the request is used. Used when order_by is set."
+        - description: 'The address to use for sorting the company''s addresses by proximity. If not given, the geo-located address of the request is used. Used when order_by is set.'
           in: query
           name: address
           type: string
@@ -443,11 +443,11 @@ paths:
       description: Lists states for current user.
       operationId: partners.userStates.list
       parameters:
-        - description: "IP address to use instead of the user's geo-located IP address."
+        - description: IP address to use instead of the user's geo-located IP address.
           in: query
           name: requestMetadata.userOverrides.ipAddress
           type: string
-        - description: "Logged-in user ID to impersonate instead of the user's ID."
+        - description: Logged-in user ID to impersonate instead of the user's ID.
           in: query
           name: requestMetadata.userOverrides.userId
           type: string
@@ -589,7 +589,7 @@ definitions:
         description: The unconverted minimum monthly budget that the company accepts for partner business.
       publicProfile:
         $ref: '#/definitions/PublicProfile'
-        description: "Basic information from the company's public profile."
+        description: Basic information from the company's public profile.
       ranks:
         description: Information related to the ranking of the company within the list of companies.
         items:
@@ -608,7 +608,7 @@ definitions:
           type: string
         type: array
       websiteUrl:
-        description: "URL of the company's website."
+        description: URL of the company's website.
         type: string
     type: object
   CreateLeadRequest:
@@ -794,7 +794,7 @@ definitions:
         $ref: '#/definitions/ResponseMetadata'
         description: Current response metadata.
       userStates:
-        description: "User's states."
+        description: User's states.
         items:
           enum:
             - USER_STATE_UNSPECIFIED
@@ -1145,7 +1145,7 @@ definitions:
         description: Source of traffic for the current request.
       userOverrides:
         $ref: '#/definitions/UserOverrides'
-        description: "Values to use instead of the user's respective defaults for the current request. These are only honored by whitelisted products."
+        description: Values to use instead of the user's respective defaults for the current request. These are only honored by whitelisted products.
     type: object
   ResponseMetadata:
     description: Common data that is in each API response.
@@ -1165,12 +1165,12 @@ definitions:
         type: string
     type: object
   UserOverrides:
-    description: "Values to use instead of the user's respective defaults. These are only honored by whitelisted products."
+    description: Values to use instead of the user's respective defaults. These are only honored by whitelisted products.
     properties:
       ipAddress:
-        description: "IP address to use instead of the user's geo-located IP address."
+        description: IP address to use instead of the user's geo-located IP address.
         type: string
       userId:
-        description: "Logged-in user ID to impersonate instead of the user's ID."
+        description: Logged-in user ID to impersonate instead of the user's ID.
         type: string
     type: object

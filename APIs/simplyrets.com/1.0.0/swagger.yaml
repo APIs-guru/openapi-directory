@@ -4,7 +4,69 @@ schemes:
 host: api.simplyrets.com
 basePath: /
 info:
-  description: "The SimplyRETS API is an exciting step towards making it easier for\ndevelopers and real estate agents to build something awesome with\nreal estate data!\n\nThe documentation below makes live requests to our API using the\ntrial data. To get set up with the API using live MLS data, you\nmust have RETS credentials from your MLS, which you can then use to\ncreate an app with SimplyRETS. For more information on that\nprocess, please see our [FAQ](https://simplyrets.com/faq), [Getting\nStarted](https://simplyrets.com/blog/getting-set-up.html) page, or\n[contact us](https://simplyrets.com/\\#home-contact).\n\nBelow you'll find the API endpoints, query parameters, response bodies,\nand other information about using the SimplyRETS API. You can run\nqueries by clicking the 'Try it Out' button at the bottom of each\nsection.\n\n### Authentication\nThe SimplyRETS API uses Basic Authentication. When you create an\napp, you'll get a set of API credentials to access your\nlistings. If you're trying out the test data, you can use\n`simplyrets:simplyrets` for connecting to the API.\n\n### Media Types\nThe SimplyRETS API uses the 'Accept' header to allow clients to\ncontrol media types (content versions). We maintain backwards\ncompatibility with API clients by allowing them to specify a\ncontent version. We highly recommend setting and explicity media\ntype when your application reaches production. Both the structure\nand content of our API response bodies is subject to change so we\ncan add new features while respecting the stability of applications\nwhich have already been developed.\n\nTo always use the latest SimplyRETS content version, simply use\n`application/json` in your application `Accept` header.\n\nIf you want to pin your clients media type to a specific version,\nyou can use the vendor-specific SimplyRETS media type, e.g.\n`application/vnd.simplyrets-v0.1+json\"`\n\nTo view all valid content-types for making an `OPTIONS`, make a\nrequest to the SimplyRETS api root\n\n`curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/`\n\nThe default media types used in our API responses may change in the\nfuture. If you're building an application and care about the\nstability of the API, be sure to request a specific media type in the\nAccept header as shown in the examples below.\n\nThe wordpress plugin automatically sets the `Accept` header for the\ncompatible SimplyRETS media types.\n\n### Pagination\nThere a few pieces of useful information about each request stored\nin the HTTP Headers:\n\n- `X-Total-Count` shows you the total amount of listings that match\n  your current query.\n- `Link` contains pre-built pagination links for accessing the next\n'page' of listings that match your query. Read more about that\n[here](https://simplyrets.com/blog/api-pagination.html).\n"
+  description: |
+    The SimplyRETS API is an exciting step towards making it easier for
+    developers and real estate agents to build something awesome with
+    real estate data!
+
+    The documentation below makes live requests to our API using the
+    trial data. To get set up with the API using live MLS data, you
+    must have RETS credentials from your MLS, which you can then use to
+    create an app with SimplyRETS. For more information on that
+    process, please see our [FAQ](https://simplyrets.com/faq), [Getting
+    Started](https://simplyrets.com/blog/getting-set-up.html) page, or
+    [contact us](https://simplyrets.com/\#home-contact).
+
+    Below you'll find the API endpoints, query parameters, response bodies,
+    and other information about using the SimplyRETS API. You can run
+    queries by clicking the 'Try it Out' button at the bottom of each
+    section.
+
+    ### Authentication
+    The SimplyRETS API uses Basic Authentication. When you create an
+    app, you'll get a set of API credentials to access your
+    listings. If you're trying out the test data, you can use
+    `simplyrets:simplyrets` for connecting to the API.
+
+    ### Media Types
+    The SimplyRETS API uses the 'Accept' header to allow clients to
+    control media types (content versions). We maintain backwards
+    compatibility with API clients by allowing them to specify a
+    content version. We highly recommend setting and explicity media
+    type when your application reaches production. Both the structure
+    and content of our API response bodies is subject to change so we
+    can add new features while respecting the stability of applications
+    which have already been developed.
+
+    To always use the latest SimplyRETS content version, simply use
+    `application/json` in your application `Accept` header.
+
+    If you want to pin your clients media type to a specific version,
+    you can use the vendor-specific SimplyRETS media type, e.g.
+    `application/vnd.simplyrets-v0.1+json"`
+
+    To view all valid content-types for making an `OPTIONS`, make a
+    request to the SimplyRETS api root
+
+    `curl -XOPTIONS -u simplyrets:simplyrets https://api.simplyrets.com/`
+
+    The default media types used in our API responses may change in the
+    future. If you're building an application and care about the
+    stability of the API, be sure to request a specific media type in the
+    Accept header as shown in the examples below.
+
+    The wordpress plugin automatically sets the `Accept` header for the
+    compatible SimplyRETS media types.
+
+    ### Pagination
+    There a few pieces of useful information about each request stored
+    in the HTTP Headers:
+
+    - `X-Total-Count` shows you the total amount of listings that match
+      your current query.
+    - `Link` contains pre-built pagination links for accessing the next
+    'page' of listings that match your query. Read more about that
+    [here](https://simplyrets.com/blog/api-pagination.html).
   title: SimplyRETS
   version: 1.0.0
   x-origin:

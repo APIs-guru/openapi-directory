@@ -1229,7 +1229,7 @@ paths:
           in: query
           name: maxResults
           type: integer
-        - description: "The ordering of the returned list. The only supported value are placedDate desc and placedDate asc for now, which returns orders sorted by placement date. \"placedDate desc\" stands for listing orders by placement date, from oldest to most recent. \"placedDate asc\" stands for listing orders by placement date, from most recent to oldest. In future releases we'll support other sorting criteria."
+        - description: 'The ordering of the returned list. The only supported value are placedDate desc and placedDate asc for now, which returns orders sorted by placement date. "placedDate desc" stands for listing orders by placement date, from oldest to most recent. "placedDate asc" stands for listing orders by placement date, from most recent to oldest. In future releases we''ll support other sorting criteria.'
           enum:
             - placedDate asc
             - placedDate desc
@@ -1587,7 +1587,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Updates a shipment's status, carrier, and/or tracking ID."
+      description: 'Updates a shipment''s status, carrier, and/or tracking ID.'
       operationId: content.orders.updateshipment
       parameters:
         - description: The ID of the managing account.
@@ -1888,7 +1888,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Sandbox only. Moves a test order from state "inProgress" to state "pendingShipment".'
+      description: Sandbox only. Moves a test order from state "inProgress" to state "pendingShipment".
       operationId: content.orders.advancetestorder
       parameters:
         - description: The ID of the managing account.
@@ -1984,7 +1984,7 @@ definitions:
           $ref: '#/definitions/AccountUser'
         type: array
       websiteUrl:
-        description: "The merchant's website."
+        description: The merchant's website.
         type: string
     type: object
   AccountAdwordsLink:
@@ -1994,7 +1994,7 @@ definitions:
         format: uint64
         type: string
       status:
-        description: "Status of the link between this Merchant Center account and the AdWords account. Upon retrieval, it represents the actual status of the link and can be either active if it was approved in Google AdWords or pending if it's pending approval. Upon insertion, it represents the intended status of the link. Re-uploading a link with status active when it's still pending or with status pending when it's already active will have no effect: the status will remain unchanged. Re-uploading a link with deprecated status inactive is equivalent to not submitting the link at all and will delete the link if it was active or cancel the link request if it was pending."
+        description: 'Status of the link between this Merchant Center account and the AdWords account. Upon retrieval, it represents the actual status of the link and can be either active if it was approved in Google AdWords or pending if it''s pending approval. Upon insertion, it represents the intended status of the link. Re-uploading a link with status active when it''s still pending or with status pending when it''s already active will have no effect: the status will remain unchanged. Re-uploading a link with deprecated status inactive is equivalent to not submitting the link at all and will delete the link if it was active or cancel the link request if it was pending.'
         type: string
     type: object
   AccountIdentifier:
@@ -2111,13 +2111,19 @@ definitions:
           $ref: '#/definitions/AccountShippingPostalCodeRange'
         type: array
       postalCodes:
-        description: "A postal code representing a city or a set of cities.  \n- A single postal code (e.g., 12345)\n- A postal code prefix followed by a star (e.g., 1234*)"
+        description: |-
+          A postal code representing a city or a set of cities.  
+          - A single postal code (e.g., 12345)
+          - A postal code prefix followed by a star (e.g., 1234*)
         items:
           type: string
         type: array
     type: object
   AccountShippingPostalCodeRange:
-    description: "A postal code range, that can be either:  \n- A range of postal codes (e.g., start=12340, end=12359)\n- A range of postal codes prefixes (e.g., start=1234* end=1235*). Prefixes must be of the same length (e.g., start=12* end=2* is invalid)."
+    description: |-
+      A postal code range, that can be either:  
+      - A range of postal codes (e.g., start=12340, end=12359)
+      - A range of postal codes prefixes (e.g., start=1234* end=1235*). Prefixes must be of the same length (e.g., start=12* end=2* is invalid).
     properties:
       end:
         description: The last (inclusive) postal code or prefix of the range.
@@ -2130,7 +2136,7 @@ definitions:
     description: 'A single or bi-dimensional table of shipping rates. Each dimension is defined in terms of consecutive price/weight ranges, delivery locations, or shipping labels.'
     properties:
       content:
-        description: 'One-dimensional table cells define one condition along the same dimension. Bi-dimensional table cells use two dimensions with respectively M and N distinct values and must contain exactly M * N cells with distinct conditions (for each possible value pairs).'
+        description: One-dimensional table cells define one condition along the same dimension. Bi-dimensional table cells use two dimensions with respectively M and N distinct values and must contain exactly M * N cells with distinct conditions (for each possible value pairs).
         items:
           $ref: '#/definitions/AccountShippingRateTableCell'
         type: array
@@ -2158,10 +2164,10 @@ definitions:
         type: boolean
       calculationMethod:
         $ref: '#/definitions/AccountShippingShippingServiceCalculationMethod'
-        description: 'Calculation method for the "simple" case that needs no rules.'
+        description: Calculation method for the "simple" case that needs no rules.
       costRuleTree:
         $ref: '#/definitions/AccountShippingShippingServiceCostRule'
-        description: 'Decision tree for "complicated" shipping cost calculation.'
+        description: Decision tree for "complicated" shipping cost calculation.
       name:
         description: The name of this shipping service.
         type: string
@@ -2189,7 +2195,12 @@ definitions:
         type: string
     type: object
   AccountShippingShippingServiceCostRule:
-    description: "Building block of the cost calculation decision tree.  \n- The tree root should have no condition and no calculation method.\n- All the children must have a condition on the same dimension. The first child matching a condition is entered, therefore, price and weight conditions form contiguous intervals.\n- The last child of an element must have no condition and matches all elements not previously matched.\n- Children and calculation method are mutually exclusive, and exactly one of them must be defined; the root must only have children."
+    description: |-
+      Building block of the cost calculation decision tree.  
+      - The tree root should have no condition and no calculation method.
+      - All the children must have a condition on the same dimension. The first child matching a condition is entered, therefore, price and weight conditions form contiguous intervals.
+      - The last child of an element must have no condition and matches all elements not previously matched.
+      - Children and calculation method are mutually exclusive, and exactly one of them must be defined; the root must only have children.
     properties:
       calculationMethod:
         $ref: '#/definitions/AccountShippingShippingServiceCalculationMethod'
@@ -2311,7 +2322,7 @@ definitions:
         description: Whether user is an admin.
         type: boolean
       emailAddress:
-        description: "User's email address."
+        description: User's email address.
         type: string
     type: object
   AccountsAuthInfoResponse:
@@ -2969,7 +2980,7 @@ definitions:
         $ref: '#/definitions/Price'
         description: The sale price of the product. Mandatory if sale_price_effective_date is defined.
       salePriceEffectiveDate:
-        description: "A date range represented by a pair of ISO 8601 dates separated by a space, comma, or slash. Both dates might be specified as 'null' if undecided."
+        description: 'A date range represented by a pair of ISO 8601 dates separated by a space, comma, or slash. Both dates might be specified as ''null'' if undecided.'
         type: string
       sellOnGoogleQuantity:
         description: The quantity of the product that is reserved for sell-on-google ads. Supported only for online products.
@@ -3054,7 +3065,7 @@ definitions:
         $ref: '#/definitions/Price'
         description: The sale price of the product. Mandatory if sale_price_effective_date is defined.
       salePriceEffectiveDate:
-        description: "A date range represented by a pair of ISO 8601 dates separated by a space, comma, or slash. Both dates might be specified as 'null' if undecided."
+        description: 'A date range represented by a pair of ISO 8601 dates separated by a space, comma, or slash. Both dates might be specified as ''null'' if undecided.'
         type: string
       sellOnGoogleQuantity:
         description: The quantity of the product that is reserved for sell-on-google ads. Supported only for online products.
@@ -3074,7 +3085,7 @@ definitions:
         description: Name of loyalty points program. It is recommended to limit the name to 12 full-width characters or 24 Roman characters.
         type: string
       pointsValue:
-        description: "The retailer's loyalty points in absolute value."
+        description: The retailer's loyalty points in absolute value.
         format: int64
         type: string
       ratio:
@@ -3154,7 +3165,7 @@ definitions:
   OrderAddress:
     properties:
       country:
-        description: 'CLDR country code (e.g. "US").'
+        description: CLDR country code (e.g. "US").
         type: string
       fullAddress:
         description: |-
@@ -3173,13 +3184,13 @@ definitions:
         description: 'City, town or commune. May also include dependent localities or sublocalities (e.g. neighborhoods or suburbs).'
         type: string
       postalCode:
-        description: 'Postal Code or ZIP (e.g. "94043").'
+        description: Postal Code or ZIP (e.g. "94043").
         type: string
       recipientName:
         description: Name of the recipient.
         type: string
       region:
-        description: 'Top-level administrative subdivision of the country (e.g. "CA").'
+        description: Top-level administrative subdivision of the country (e.g. "CA").
         type: string
       streetAddress:
         description: Street-level part of the address.
@@ -3288,7 +3299,7 @@ definitions:
         description: Brand of the item.
         type: string
       channel:
-        description: "The item's channel (online or local)."
+        description: The item's channel (online or local).
         type: string
       condition:
         description: Condition or state of the item.
@@ -3450,7 +3461,7 @@ definitions:
         $ref: '#/definitions/Price'
         description: The impact on tax when the promotion is applied.
       type:
-        description: 'Describes whether the promotion applies to products (e.g. 20% off) or to shipping (e.g. Free Shipping).'
+        description: Describes whether the promotion applies to products (e.g. 20% off) or to shipping (e.g. Free Shipping).
         type: string
     type: object
   OrderRefund:
@@ -4005,7 +4016,7 @@ definitions:
         description: Brand of the item.
         type: string
       channel:
-        description: "The item's channel (online or local)."
+        description: The item's channel (online or local).
         type: string
       color:
         description: Color of the item.
@@ -4053,7 +4064,7 @@ definitions:
         description: An identifier for an item for dynamic remarketing campaigns.
         type: string
       displayAdsLink:
-        description: "URL directly to your item's landing page for dynamic remarketing campaigns."
+        description: URL directly to your item's landing page for dynamic remarketing campaigns.
         type: string
       displayAdsSimilarIds:
         description: Advertiser-specified recommendations.
@@ -4077,7 +4088,7 @@ definitions:
         description: Target gender of the item.
         type: string
       googleProductCategory:
-        description: "Google's category of the item (see Google product taxonomy)."
+        description: Google's category of the item (see Google product taxonomy).
         type: string
       gtin:
         description: Global Trade Item Number (GTIN) of the item.
@@ -4105,7 +4116,7 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "content#product".'
         type: string
       link:
-        description: "URL directly linking to your item's page on your website."
+        description: URL directly linking to your item's page on your website.
         type: string
       loyaltyPoints:
         $ref: '#/definitions/LoyaltyPoints'
@@ -4130,7 +4141,7 @@ definitions:
         description: Whether an item is available for purchase only online.
         type: boolean
       pattern:
-        description: "The item's pattern (e.g. polka dots)."
+        description: The item's pattern (e.g. polka dots).
         type: string
       price:
         $ref: '#/definitions/Price'
@@ -4287,7 +4298,12 @@ definitions:
   ProductShippingDimension:
     properties:
       unit:
-        description: "The unit of value.\n\nAcceptable values are:  \n- \"cm\" \n- \"in\""
+        description: |-
+          The unit of value.
+
+          Acceptable values are:  
+          - "cm" 
+          - "in"
         type: string
       value:
         description: The dimension of the product used to calculate the shipping cost of the item.
@@ -4370,7 +4386,7 @@ definitions:
   ProductStatusDestinationStatus:
     properties:
       approvalStatus:
-        description: "The destination's approval status."
+        description: The destination's approval status.
         type: string
       destination:
         description: The name of the destination
@@ -4635,7 +4651,7 @@ definitions:
         description: Brand of the item.
         type: string
       channel:
-        description: "The item's channel."
+        description: The item's channel.
         type: string
       condition:
         description: Condition or state of the item.

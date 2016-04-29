@@ -1310,7 +1310,7 @@ paths:
       description: 'Retrieves a list of blogs, possibly filtered.'
       operationId: blogger.blogs.listByUser
       parameters:
-        - description: "ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier."
+        - description: ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
           in: path
           name: userId
           required: true
@@ -1373,7 +1373,7 @@ paths:
       description: Gets one blog and user info pair by blogId and userId.
       operationId: blogger.blogUserInfos.get
       parameters:
-        - description: "ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier."
+        - description: ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
           in: path
           name: userId
           required: true
@@ -1412,7 +1412,7 @@ paths:
       description: 'Retrieves a list of post and post user info pairs, possibly filtered. The post user info contains per-user information about the post, such as access rights, specific to the user.'
       operationId: blogger.postUserInfos.list
       parameters:
-        - description: "ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier."
+        - description: ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
           in: path
           name: userId
           required: true
@@ -1498,7 +1498,7 @@ paths:
       description: 'Gets one post and user info pair, by post ID and user ID. The post user info contains per-user information about the post, such as access rights, specific to the user.'
       operationId: blogger.postUserInfos.get
       parameters:
-        - description: "ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier."
+        - description: ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.
           in: path
           name: userId
           required: true
@@ -1557,7 +1557,7 @@ definitions:
         description: The locale this Blog is set to.
         properties:
           country:
-            description: "The country this blog's locale is set to."
+            description: The country this blog's locale is set to.
             type: string
           language:
             description: The language this blog is authored in.
@@ -1678,14 +1678,14 @@ definitions:
             description: The identifier of the Comment creator.
             type: string
           image:
-            description: "The comment creator's avatar."
+            description: The comment creator's avatar.
             properties:
               url:
-                description: "The comment creator's avatar URL."
+                description: The comment creator's avatar URL.
                 type: string
             type: object
           url:
-            description: "The URL of the Comment creator's Profile page."
+            description: The URL of the Comment creator's Profile page.
             type: string
         type: object
       blog:
@@ -1767,14 +1767,14 @@ definitions:
             description: The identifier of the Page creator.
             type: string
           image:
-            description: "The page author's avatar."
+            description: The page author's avatar.
             properties:
               url:
-                description: "The page author's avatar URL."
+                description: The page author's avatar URL.
                 type: string
             type: object
           url:
-            description: "The URL of the Page creator's Profile page."
+            description: The URL of the Page creator's Profile page.
             type: string
         type: object
       blog:
@@ -1871,14 +1871,14 @@ definitions:
             description: The identifier of the Post creator.
             type: string
           image:
-            description: "The Post author's avatar."
+            description: The Post author's avatar.
             properties:
               url:
-                description: "The Post author's avatar URL."
+                description: The Post author's avatar URL.
                 type: string
             type: object
           url:
-            description: "The URL of the Post creator's Profile page."
+            description: The URL of the Post creator's Profile page.
             type: string
         type: object
       blog:
@@ -1921,18 +1921,18 @@ definitions:
         description: The location for geotagged posts.
         properties:
           lat:
-            description: "Location's latitude."
+            description: Location's latitude.
             format: double
             type: number
           lng:
-            description: "Location's longitude."
+            description: Location's longitude.
             format: double
             type: number
           name:
             description: Location name.
             type: string
           span:
-            description: "Location's viewport span. Can be used when rendering a map preview."
+            description: Location's viewport span. Can be used when rendering a map preview.
             type: string
         type: object
       published:
@@ -1968,7 +1968,7 @@ definitions:
         description: The title of the Post.
         type: string
       titleLink:
-        description: "The title link URL, similar to atom's related link."
+        description: 'The title link URL, similar to atom''s related link.'
         type: string
       updated:
         description: RFC 3339 date-time when this Post was last updated.
@@ -2070,22 +2070,22 @@ definitions:
         description: 'The kind of this entity. Always blogger#user'
         type: string
       locale:
-        description: "This user's locale"
+        description: This user's locale
         properties:
           country:
-            description: "The user's country setting."
+            description: The user's country setting.
             type: string
           language:
-            description: "The user's language setting."
+            description: The user's language setting.
             type: string
           variant:
-            description: "The user's language variant setting."
+            description: The user's language variant setting.
             type: string
         type: object
       selfLink:
         description: The API REST URL to fetch this resource from.
         type: string
       url:
-        description: "The user's profile page."
+        description: The user's profile page.
         type: string
     type: object

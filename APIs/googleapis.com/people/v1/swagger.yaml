@@ -224,7 +224,7 @@ paths:
       - $ref: '#/parameters/$.xgafv'
   '/v1/{resourceName}/connections':
     get:
-      description: "Provides a list of the authenticated user's contacts merged with any linked profiles."
+      description: Provides a list of the authenticated user's contacts merged with any linked profiles.
       operationId: people.people.connections.list
       parameters:
         - description: The resource name to return connections for. Only `people/me` is valid.
@@ -285,7 +285,7 @@ paths:
       - $ref: '#/parameters/$.xgafv'
 definitions:
   Address:
-    description: "A person's physical address. May be a P.O. box or street address. All fields are optional."
+    description: A person's physical address. May be a P.O. box or street address. All fields are optional.
     properties:
       city:
         description: The city of the address.
@@ -300,10 +300,10 @@ definitions:
         description: 'The extended address of the address; for example, the apartment number.'
         type: string
       formattedType:
-        description: "The read-only type of the address translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale."
+        description: The read-only type of the address translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
         type: string
       formattedValue:
-        description: "The read-only value of the address formatted in the viewer's account locale or the `Accept-Language` HTTP header locale."
+        description: The read-only value of the address formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
         type: string
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -325,7 +325,7 @@ definitions:
         type: string
     type: object
   Biography:
-    description: "A person's short biography."
+    description: A person's short biography.
     properties:
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -335,7 +335,7 @@ definitions:
         type: string
     type: object
   Birthday:
-    description: "A person's birthday. At least one of the `date` and `text` fields are specified. The `date` and `text` fields typically represent the same date, but are not guaranteed to."
+    description: 'A person''s birthday. At least one of the `date` and `text` fields are specified. The `date` and `text` fields typically represent the same date, but are not guaranteed to.'
     properties:
       date:
         $ref: '#/definitions/Date'
@@ -344,11 +344,11 @@ definitions:
         $ref: '#/definitions/FieldMetadata'
         description: Metadata about the birthday.
       text:
-        description: "A free-form string representing the user's birthday."
+        description: A free-form string representing the user's birthday.
         type: string
     type: object
   BraggingRights:
-    description: "A person's bragging rights."
+    description: A person's bragging rights.
     properties:
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -365,7 +365,7 @@ definitions:
         type: string
     type: object
   CoverPhoto:
-    description: "A person's cover photo. A large image shown on the person's profile page that represents who they are or what they care about."
+    description: A person's cover photo. A large image shown on the person's profile page that represents who they are or what they care about.
     properties:
       default:
         description: True if the cover photo is the default cover photo; false if the cover photo is a user-provided cover photo.
@@ -397,14 +397,14 @@ definitions:
     description: A Google Apps Domain membership.
     properties:
       inViewerDomain:
-        description: "True if the person is in the viewer's Google Apps domain."
+        description: True if the person is in the viewer's Google Apps domain.
         type: boolean
     type: object
   EmailAddress:
-    description: "A person's email address."
+    description: A person's email address.
     properties:
       formattedType:
-        description: "The read-only type of the email address translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale."
+        description: The read-only type of the email address translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
         type: string
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -423,7 +423,7 @@ definitions:
         $ref: '#/definitions/Date'
         description: The date of the event.
       formattedType:
-        description: "The read-only type of the event translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale."
+        description: The read-only type of the event translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
         type: string
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -446,10 +446,10 @@ definitions:
         type: boolean
     type: object
   Gender:
-    description: "A person's gender."
+    description: A person's gender.
     properties:
       formattedValue:
-        description: "The read-only value of the gender translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale."
+        description: The read-only value of the gender translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
         type: string
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -467,13 +467,13 @@ definitions:
         type: array
     type: object
   ImClient:
-    description: "A person's instant messaging client."
+    description: A person's instant messaging client.
     properties:
       formattedProtocol:
-        description: "The read-only protocol of the IM client formatted in the viewer's account locale or the `Accept-Language` HTTP header locale."
+        description: The read-only protocol of the IM client formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
         type: string
       formattedType:
-        description: "The read-only type of the IM client translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale."
+        description: The read-only type of the IM client translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
         type: string
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -489,7 +489,7 @@ definitions:
         type: string
     type: object
   Interest:
-    description: "One of the person's interests."
+    description: One of the person's interests.
     properties:
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -513,7 +513,7 @@ definitions:
         type: string
     type: object
   Locale:
-    description: "A person's locale preference."
+    description: A person's locale preference.
     properties:
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -523,7 +523,7 @@ definitions:
         type: string
     type: object
   Membership:
-    description: "A person's membership in a group."
+    description: A person's membership in a group.
     properties:
       contactGroupMembership:
         $ref: '#/definitions/ContactGroupMembership'
@@ -536,10 +536,10 @@ definitions:
         description: Metadata about the membership.
     type: object
   Name:
-    description: "A person's name. If the name is a mononym, the family name is empty."
+    description: 'A person''s name. If the name is a mononym, the family name is empty.'
     properties:
       displayName:
-        description: "The display name formatted according to the locale specified by the viewer's account or the Accept-Language HTTP header."
+        description: The display name formatted according to the locale specified by the viewer's account or the Accept-Language HTTP header.
         type: string
       familyName:
         description: The family name.
@@ -576,7 +576,7 @@ definitions:
         type: string
     type: object
   Nickname:
-    description: "A person's nickname."
+    description: A person's nickname.
     properties:
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -595,7 +595,7 @@ definitions:
         type: string
     type: object
   Occupation:
-    description: "A person's occupation."
+    description: A person's occupation.
     properties:
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -605,13 +605,13 @@ definitions:
         type: string
     type: object
   Organization:
-    description: "A person's past or current organization. Overlapping date ranges are permitted."
+    description: A person's past or current organization. Overlapping date ranges are permitted.
     properties:
       current:
-        description: "True if the organization is the person's current organization; false if the organization is a past organization."
+        description: True if the organization is the person's current organization; false if the organization is a past organization.
         type: boolean
       department:
-        description: "The person's department at the organization."
+        description: The person's department at the organization.
         type: string
       domain:
         description: 'The domain name associated with the organization; for example, `google.com`.'
@@ -620,10 +620,10 @@ definitions:
         $ref: '#/definitions/Date'
         description: The end date when the person left the organization.
       formattedType:
-        description: "The read-only type of the organization translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale."
+        description: The read-only type of the organization translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
         type: string
       jobDescription:
-        description: "The person's job description at the organization."
+        description: The person's job description at the organization.
         type: string
       location:
         description: The location of the organization office the person works at.
@@ -644,22 +644,22 @@ definitions:
         description: 'The symbol associated with the organization; for example, a stock ticker symbol, abbreviation, or acronym.'
         type: string
       title:
-        description: "The person's job title at the organization."
+        description: The person's job title at the organization.
         type: string
       type:
         description: 'The type of the organization. The type can be custom or predefined. Possible values include, but are not limited to, the following: * `work` * `school`'
         type: string
     type: object
   Person:
-    description: "Information about a person merged from various data sources such as the authenticated user's contacts and profile data. Fields other than IDs, metadata, and group memberships are user-edited. Most fields can have multiple items. The items in a field have no guaranteed order, but each non-empty field is guaranteed to have exactly one field with `metadata.primary` set to true."
+    description: 'Information about a person merged from various data sources such as the authenticated user''s contacts and profile data. Fields other than IDs, metadata, and group memberships are user-edited. Most fields can have multiple items. The items in a field have no guaranteed order, but each non-empty field is guaranteed to have exactly one field with `metadata.primary` set to true.'
     properties:
       addresses:
-        description: "The person's street addresses."
+        description: The person's street addresses.
         items:
           $ref: '#/definitions/Address'
         type: array
       ageRange:
-        description: "The person's age range."
+        description: The person's age range.
         enum:
           - AGE_RANGE_UNSPECIFIED
           - LESS_THAN_EIGHTEEN
@@ -667,27 +667,27 @@ definitions:
           - TWENTY_ONE_OR_OLDER
         type: string
       biographies:
-        description: "The person's biographies."
+        description: The person's biographies.
         items:
           $ref: '#/definitions/Biography'
         type: array
       birthdays:
-        description: "The person's birthdays."
+        description: The person's birthdays.
         items:
           $ref: '#/definitions/Birthday'
         type: array
       braggingRights:
-        description: "The person's bragging rights."
+        description: The person's bragging rights.
         items:
           $ref: '#/definitions/BraggingRights'
         type: array
       coverPhotos:
-        description: "The person's cover photos."
+        description: The person's cover photos.
         items:
           $ref: '#/definitions/CoverPhoto'
         type: array
       emailAddresses:
-        description: "The person's email addresses."
+        description: The person's email addresses.
         items:
           $ref: '#/definitions/EmailAddress'
         type: array
@@ -695,32 +695,32 @@ definitions:
         description: 'The [HTTP entity tag](https://en.wikipedia.org/wiki/HTTP_ETag) of the resource. Used for web cache validation.'
         type: string
       events:
-        description: "The person's events."
+        description: The person's events.
         items:
           $ref: '#/definitions/Event'
         type: array
       genders:
-        description: "The person's genders."
+        description: The person's genders.
         items:
           $ref: '#/definitions/Gender'
         type: array
       imClients:
-        description: "The person's instant messaging clients."
+        description: The person's instant messaging clients.
         items:
           $ref: '#/definitions/ImClient'
         type: array
       interests:
-        description: "The person's interests."
+        description: The person's interests.
         items:
           $ref: '#/definitions/Interest'
         type: array
       locales:
-        description: "The person's locale preferences."
+        description: The person's locale preferences.
         items:
           $ref: '#/definitions/Locale'
         type: array
       memberships:
-        description: "The person's group memberships."
+        description: The person's group memberships.
         items:
           $ref: '#/definitions/Membership'
         type: array
@@ -728,37 +728,37 @@ definitions:
         $ref: '#/definitions/PersonMetadata'
         description: Metadata about the person.
       names:
-        description: "The person's names."
+        description: The person's names.
         items:
           $ref: '#/definitions/Name'
         type: array
       nicknames:
-        description: "The person's nicknames."
+        description: The person's nicknames.
         items:
           $ref: '#/definitions/Nickname'
         type: array
       occupations:
-        description: "The person's occupations."
+        description: The person's occupations.
         items:
           $ref: '#/definitions/Occupation'
         type: array
       organizations:
-        description: "The person's past or current organizations."
+        description: The person's past or current organizations.
         items:
           $ref: '#/definitions/Organization'
         type: array
       phoneNumbers:
-        description: "The person's phone numbers."
+        description: The person's phone numbers.
         items:
           $ref: '#/definitions/PhoneNumber'
         type: array
       photos:
-        description: "The person's photos."
+        description: The person's photos.
         items:
           $ref: '#/definitions/Photo'
         type: array
       relations:
-        description: "The person's relations."
+        description: The person's relations.
         items:
           $ref: '#/definitions/Relation'
         type: array
@@ -768,12 +768,12 @@ definitions:
           $ref: '#/definitions/RelationshipInterest'
         type: array
       relationshipStatuses:
-        description: "The person's relationship statuses."
+        description: The person's relationship statuses.
         items:
           $ref: '#/definitions/RelationshipStatus'
         type: array
       residences:
-        description: "The person's residences."
+        description: The person's residences.
         items:
           $ref: '#/definitions/Residence'
         type: array
@@ -781,17 +781,17 @@ definitions:
         description: 'The resource name for the person, assigned by the server. An ASCII string with a max length of 27 characters. Always starts with `people/`.'
         type: string
       skills:
-        description: "The person's skills."
+        description: The person's skills.
         items:
           $ref: '#/definitions/Skill'
         type: array
       taglines:
-        description: "The person's taglines."
+        description: The person's taglines.
         items:
           $ref: '#/definitions/Tagline'
         type: array
       urls:
-        description: "The person's associated URLs."
+        description: The person's associated URLs.
         items:
           $ref: '#/definitions/Url'
         type: array
@@ -835,13 +835,13 @@ definitions:
         type: string
     type: object
   PhoneNumber:
-    description: "A person's phone number."
+    description: A person's phone number.
     properties:
       canonicalForm:
         description: 'The read-only canonicalized [ITU-T E.164](https://law.resource.org/pub/us/cfr/ibr/004/itu-t.E.164.1.2008.pdf) form of the phone number.'
         type: string
       formattedType:
-        description: "The read-only type of the phone number translated and formatted in the viewer's account locale or the the `Accept-Language` HTTP header locale."
+        description: The read-only type of the phone number translated and formatted in the viewer's account locale or the the `Accept-Language` HTTP header locale.
         type: string
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -854,7 +854,7 @@ definitions:
         type: string
     type: object
   Photo:
-    description: "A person's photo. A picture shown next to the person's name to help others recognize the person."
+    description: A person's photo. A picture shown next to the person's name to help others recognize the person.
     properties:
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -864,10 +864,10 @@ definitions:
         type: string
     type: object
   Relation:
-    description: "A person's relation to another person."
+    description: A person's relation to another person.
     properties:
       formattedType:
-        description: "The type of the relation translated and formatted in the viewer's account locale or the locale specified in the Accept-Language HTTP header."
+        description: The type of the relation translated and formatted in the viewer's account locale or the locale specified in the Accept-Language HTTP header.
         type: string
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -876,14 +876,14 @@ definitions:
         description: The name of the other person this relation refers to.
         type: string
       type:
-        description: "The person's relation to the other person. The type can be custom or predefined. Possible values include, but are not limited to, the following values: * `spouse` * `child` * `mother` * `father` * `parent` * `brother` * `sister` * `friend` * `relative` * `domesticPartner` * `manager` * `assistant` * `referredBy` * `partner`"
+        description: 'The person''s relation to the other person. The type can be custom or predefined. Possible values include, but are not limited to, the following values: * `spouse` * `child` * `mother` * `father` * `parent` * `brother` * `sister` * `friend` * `relative` * `domesticPartner` * `manager` * `assistant` * `referredBy` * `partner`'
         type: string
     type: object
   RelationshipInterest:
     description: The kind of relationship the person is looking for.
     properties:
       formattedValue:
-        description: "The value of the relationship interest translated and formatted in the viewer's account locale or the locale specified in the Accept-Language HTTP header."
+        description: The value of the relationship interest translated and formatted in the viewer's account locale or the locale specified in the Accept-Language HTTP header.
         type: string
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -893,10 +893,10 @@ definitions:
         type: string
     type: object
   RelationshipStatus:
-    description: "A person's relationship status."
+    description: A person's relationship status.
     properties:
       formattedValue:
-        description: "The read-only value of the relationship status translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale."
+        description: The read-only value of the relationship status translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
         type: string
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -906,10 +906,10 @@ definitions:
         type: string
     type: object
   Residence:
-    description: "A person's past or current residence."
+    description: A person's past or current residence.
     properties:
       current:
-        description: "True if the residence is the person's current residence; false if the residence is a past residence."
+        description: True if the residence is the person's current residence; false if the residence is a past residence.
         type: boolean
       metadata:
         $ref: '#/definitions/FieldMetadata'
@@ -955,10 +955,10 @@ definitions:
         type: string
     type: object
   Url:
-    description: "A person's associated URLs."
+    description: A person's associated URLs.
     properties:
       formattedType:
-        description: "The read-only type of the URL translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale."
+        description: The read-only type of the URL translated and formatted in the viewer's account locale or the `Accept-Language` HTTP header locale.
         type: string
       metadata:
         $ref: '#/definitions/FieldMetadata'

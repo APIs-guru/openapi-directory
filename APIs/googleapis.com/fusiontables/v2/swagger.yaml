@@ -83,10 +83,18 @@ tags:
 paths:
   /query:
     get:
-      description: "Executes a SQL statement which can be any of \n- SELECT\n- SHOW\n- DESCRIBE"
+      description: |-
+        Executes a SQL statement which can be any of 
+        - SELECT
+        - SHOW
+        - DESCRIBE
       operationId: fusiontables.query.sqlGet
       parameters:
-        - description: "A SQL statement which can be any of \n- SELECT\n- SHOW\n- DESCRIBE"
+        - description: |-
+            A SQL statement which can be any of 
+            - SELECT
+            - SHOW
+            - DESCRIBE
           in: query
           name: sql
           required: true
@@ -120,10 +128,26 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Executes a Fusion Tables SQL statement, which can be any of \n- SELECT\n- INSERT\n- UPDATE\n- DELETE\n- SHOW\n- DESCRIBE\n- CREATE statement."
+      description: |-
+        Executes a Fusion Tables SQL statement, which can be any of 
+        - SELECT
+        - INSERT
+        - UPDATE
+        - DELETE
+        - SHOW
+        - DESCRIBE
+        - CREATE statement.
       operationId: fusiontables.query.sql
       parameters:
-        - description: "A Fusion Tables SQL statement, which can be any of \n- SELECT\n- INSERT\n- UPDATE\n- DELETE\n- SHOW\n- DESCRIBE\n- CREATE"
+        - description: |-
+            A Fusion Tables SQL statement, which can be any of 
+            - SELECT
+            - INSERT
+            - UPDATE
+            - DELETE
+            - SHOW
+            - DESCRIBE
+            - CREATE
           in: query
           name: sql
           required: true
@@ -622,7 +646,7 @@ paths:
           in: query
           name: delimiter
           type: string
-        - description: "The encoding of the content. Default is UTF-8. Use 'auto-detect' if you are unsure of the encoding."
+        - description: The encoding of the content. Default is UTF-8. Use 'auto-detect' if you are unsure of the encoding.
           in: query
           name: encoding
           type: string

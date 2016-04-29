@@ -44,12 +44,12 @@ parameters:
     name: bmasks
     type: integer
   conditionParam:
-    description: "Apply this condition to the collection query. This is essentially like a SQL WHERE clause, e.g. firstname='Ben'"
+    description: 'Apply this condition to the collection query. This is essentially like a SQL WHERE clause, e.g. firstname=''Ben'''
     in: query
     name: condition
     type: string
   conditionParamFormData:
-    description: "Apply this condition to the collection query. This is essentially like a SQL WHERE clause, e.g. firstname='Ben'"
+    description: 'Apply this condition to the collection query. This is essentially like a SQL WHERE clause, e.g. firstname=''Ben'''
     in: formData
     name: condition
     type: string
@@ -312,7 +312,7 @@ tags:
 paths:
   /form:
     get:
-      description: "This will fetch a Form's HTML for a given ID.<br/><b>Note</b>: HTML is returned in the <code>data</code> member of the JSON response. As a result, the HTML is escaped and you will have to unescape the HTML before using it."
+      description: 'This will fetch a Form''s HTML for a given ID.<br/><b>Note</b>: HTML is returned in the <code>data</code> member of the JSON response. As a result, the HTML is escaped and you will have to unescape the HTML before using it.'
       operationId: getForm
       parameters:
         - $ref: '#/parameters/idParam'
@@ -408,12 +408,12 @@ paths:
           enum:
             - owner
             - custom
-            - '<staff user ID>'
+            - <staff user ID>
           in: formData
           name: from
           type: string
         - default: owner
-          description: "Name to be used in the 'Message From' field when the <b>from</b> field is set to <b>custom</b>."
+          description: Name to be used in the 'Message From' field when the <b>from</b> field is set to <b>custom</b>.
           in: formData
           name: send_out_name
           type: string
@@ -431,7 +431,7 @@ paths:
           name: send_from
           type: string
         - default: email
-          description: 'Only used with SMS Messages or Custom Objects. Select the field to use when there may be a parent or child relationship to the Object type given in <b>object_type_id</b>. The default for SMS Message is <b>sms_number.</b>'
+          description: Only used with SMS Messages or Custom Objects. Select the field to use when there may be a parent or child relationship to the Object type given in <b>object_type_id</b>. The default for SMS Message is <b>sms_number.</b>
           in: formData
           name: send_to
           type: string
@@ -510,12 +510,12 @@ paths:
           enum:
             - owner
             - custom
-            - '<staff user ID>'
+            - <staff user ID>
           in: formData
           name: from
           type: string
         - default: owner
-          description: "Name to be used in the 'Message From' field when the <b>from</b> field is set to <b>custom</b>."
+          description: Name to be used in the 'Message From' field when the <b>from</b> field is set to <b>custom</b>.
           in: formData
           name: send_out_name
           type: string
@@ -533,7 +533,7 @@ paths:
           name: send_from
           type: string
         - default: email
-          description: 'Only used with SMS Messages or Custom Objects. Select the field to use when there may be a parent or child relationship to the Object type given in <b>object_type_id</b>. The default for SMS Message is <b>sms_number.</b>'
+          description: Only used with SMS Messages or Custom Objects. Select the field to use when there may be a parent or child relationship to the Object type given in <b>object_type_id</b>. The default for SMS Message is <b>sms_number.</b>
           in: formData
           name: send_to
           type: string
@@ -619,7 +619,7 @@ paths:
           description: Invalid objectID
         '404':
           description: Object not found
-      summary: "This will get an Object's data"
+      summary: This will get an Object's data
       tags:
         - objects
   /objects:
@@ -716,7 +716,7 @@ paths:
       tags:
         - objects
     put:
-      description: "This will update an Object's data. The Object type and ID and required parameters, but other parameters are dependent upon the object type. We have provided optional parameters as examples for updating a Contact. When using this in your application, all invalid parameters will be ignored."
+      description: 'This will update an Object''s data. The Object type and ID and required parameters, but other parameters are dependent upon the object type. We have provided optional parameters as examples for updating a Contact. When using this in your application, all invalid parameters will be ignored.'
       operationId: updateObjects
       parameters:
         - $ref: '#/parameters/objectIdParamFormData'
@@ -743,7 +743,7 @@ paths:
             type: object
         '404':
           description: Object not found
-      summary: "This will update an Object's data"
+      summary: This will update an Object's data
       tags:
         - objects
   /objects/getInfo:
@@ -772,7 +772,7 @@ paths:
         - objects
   /objects/meta:
     get:
-      description: 'This will get a list of existing Object types and their corresponding field names. Use the <b>objectID</b> parameter to This will get a single Object type.'
+      description: This will get a list of existing Object types and their corresponding field names. Use the <b>objectID</b> parameter to This will get a single Object type.
       operationId: getMeta
       parameters:
         - default: byId
@@ -1258,7 +1258,7 @@ definitions:
   Criteria:
     properties:
       condition:
-        description: "Apply this condition to the collection query. This is essentially like a SQL WHERE clause, e.g. firstname='Ben'"
+        description: 'Apply this condition to the collection query. This is essentially like a SQL WHERE clause, e.g. firstname=''Ben'''
         type: string
       date_range:
         description: 'Start and End dates to search, in seconds since Jan 1, 1970, as a comma-separated list. Start (index 0 in the array) is inclusive, End (index 1) is exclusive. Either or both can be empty.'
@@ -1500,7 +1500,7 @@ definitions:
         description: One-time setup fee.
         type: number
       setup_fee_date:
-        description: 'Date to charge setup fee (when setup_fee_when is "on_date").'
+        description: Date to charge setup fee (when setup_fee_when is "on_date").
         type: string
       setup_fee_when:
         description: When should setup fee be applied?
@@ -1610,7 +1610,7 @@ definitions:
         description: 'Task outcome name. This must start with ":=" For example, <strong>":=signed"</strong>.'
         type: string
       task_form_data:
-        description: "These fields can be used to update associated Object data when completing a task. For example, set <strong>task_form_title</strong> to \"New title\" to change the Contact's title."
+        description: 'These fields can be used to update associated Object data when completing a task. For example, set <strong>task_form_title</strong> to "New title" to change the Contact''s title.'
         type: string
   TaskFollowup:
     properties:

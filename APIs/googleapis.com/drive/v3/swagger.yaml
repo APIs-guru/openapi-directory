@@ -36,7 +36,7 @@ securityDefinitions:
       'https://www.googleapis.com/auth/drive.metadata.readonly': View metadata for files in your Google Drive
       'https://www.googleapis.com/auth/drive.photos.readonly': 'View the photos, videos and albums in your Google Photos'
       'https://www.googleapis.com/auth/drive.readonly': View the files in your Google Drive
-      'https://www.googleapis.com/auth/drive.scripts': "Modify your Google Apps Script scripts' behavior"
+      'https://www.googleapis.com/auth/drive.scripts': Modify your Google Apps Script scripts' behavior
     type: oauth2
 parameters:
   alt:
@@ -90,7 +90,7 @@ tags:
 paths:
   /about:
     get:
-      description: "Gets information about the user, the user's Drive, and system capabilities."
+      description: 'Gets information about the user, the user''s Drive, and system capabilities.'
       operationId: drive.about.get
       responses:
         '200':
@@ -127,7 +127,7 @@ paths:
       description: Lists changes for a user.
       operationId: drive.changes.list
       parameters:
-        - description: "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method."
+        - description: The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
           in: query
           name: pageToken
           required: true
@@ -150,7 +150,7 @@ paths:
           name: restrictToMyDrive
           type: boolean
         - default: drive
-          description: "A comma-separated list of spaces to query within the user corpus. Supported values are 'drive', 'appDataFolder' and 'photos'."
+          description: 'A comma-separated list of spaces to query within the user corpus. Supported values are ''drive'', ''appDataFolder'' and ''photos''.'
           in: query
           name: spaces
           type: string
@@ -231,7 +231,7 @@ paths:
       description: Subscribes to changes for a user.
       operationId: drive.changes.watch
       parameters:
-        - description: "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method."
+        - description: The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response or to the response from the getStartPageToken method.
           in: query
           name: pageToken
           required: true
@@ -254,7 +254,7 @@ paths:
           name: restrictToMyDrive
           type: boolean
         - default: drive
-          description: "A comma-separated list of spaces to query within the user corpus. Supported values are 'drive', 'appDataFolder' and 'photos'."
+          description: 'A comma-separated list of spaces to query within the user corpus. Supported values are ''drive'', ''appDataFolder'' and ''photos''.'
           in: query
           name: spaces
           type: string
@@ -334,7 +334,7 @@ paths:
           in: query
           name: corpus
           type: string
-        - description: "A comma-separated list of sort keys. Valid keys are 'createdTime', 'folder', 'modifiedByMeTime', 'modifiedTime', 'name', 'quotaBytesUsed', 'recency', 'sharedWithMeTime', 'starred', and 'viewedByMeTime'. Each key sorts ascending by default, but may be reversed with the 'desc' modifier. Example usage: ?orderBy=folder,modifiedTime desc,name. Please note that there is a current limitation for users with approximately one million files in which the requested sort order is ignored."
+        - description: 'A comma-separated list of sort keys. Valid keys are ''createdTime'', ''folder'', ''modifiedByMeTime'', ''modifiedTime'', ''name'', ''quotaBytesUsed'', ''recency'', ''sharedWithMeTime'', ''starred'', and ''viewedByMeTime''. Each key sorts ascending by default, but may be reversed with the ''desc'' modifier. Example usage: ?orderBy=folder,modifiedTime desc,name. Please note that there is a current limitation for users with approximately one million files in which the requested sort order is ignored.'
           in: query
           name: orderBy
           type: string
@@ -345,16 +345,16 @@ paths:
           minimum: 1
           name: pageSize
           type: integer
-        - description: "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response."
+        - description: The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
           in: query
           name: pageToken
           type: string
-        - description: 'A query for filtering the file results. See the "Search for Files" guide for supported syntax.'
+        - description: A query for filtering the file results. See the "Search for Files" guide for supported syntax.
           in: query
           name: q
           type: string
         - default: drive
-          description: "A comma-separated list of spaces to query within the corpus. Supported values are 'drive', 'appDataFolder' and 'photos'."
+          description: 'A comma-separated list of spaces to query within the corpus. Supported values are ''drive'', ''appDataFolder'' and ''photos''.'
           in: query
           name: spaces
           type: string
@@ -395,12 +395,12 @@ paths:
       operationId: drive.files.create
       parameters:
         - default: false
-          description: "Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders."
+          description: Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.
           in: query
           name: ignoreDefaultVisibility
           type: boolean
         - default: false
-          description: "Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Drive."
+          description: Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Drive.
           in: query
           name: keepRevisionForever
           type: boolean
@@ -444,7 +444,7 @@ paths:
           name: count
           type: integer
         - default: drive
-          description: "The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'."
+          description: The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'.
           in: query
           name: space
           type: string
@@ -472,7 +472,7 @@ paths:
       - $ref: '#/parameters/userIp'
   /files/trash:
     delete:
-      description: "Permanently deletes all of the user's trashed files."
+      description: Permanently deletes all of the user's trashed files.
       operationId: drive.files.emptyTrash
       responses:
         '200':
@@ -513,7 +513,7 @@ paths:
       tags:
         - files
     get:
-      description: "Gets a file's metadata or content by ID."
+      description: Gets a file's metadata or content by ID.
       operationId: drive.files.get
       parameters:
         - description: The ID of the file.
@@ -559,7 +559,7 @@ paths:
     patch:
       consumes:
         - application/octet-stream
-      description: "Updates a file's metadata and/or content with patch semantics."
+      description: Updates a file's metadata and/or content with patch semantics.
       operationId: drive.files.update
       parameters:
         - description: The ID of the file.
@@ -572,7 +572,7 @@ paths:
           name: addParents
           type: string
         - default: false
-          description: "Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Drive."
+          description: Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Drive.
           in: query
           name: keepRevisionForever
           type: boolean
@@ -613,7 +613,7 @@ paths:
         - files
   '/files/{fileId}/comments':
     get:
-      description: "Lists a file's comments."
+      description: Lists a file's comments.
       operationId: drive.comments.list
       parameters:
         - description: The ID of the file.
@@ -633,11 +633,11 @@ paths:
           minimum: 1
           name: pageSize
           type: integer
-        - description: "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response."
+        - description: The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
           in: query
           name: pageToken
           type: string
-        - description: "The minimum value of 'modifiedTime' for the result comments (RFC 3339 date-time)."
+        - description: The minimum value of 'modifiedTime' for the result comments (RFC 3339 date-time).
           in: query
           name: startModifiedTime
           type: string
@@ -786,7 +786,7 @@ paths:
         - comments
   '/files/{fileId}/comments/{commentId}/replies':
     get:
-      description: "Lists a comment's replies."
+      description: Lists a comment's replies.
       operationId: drive.replies.list
       parameters:
         - description: The ID of the file.
@@ -811,7 +811,7 @@ paths:
           minimum: 1
           name: pageSize
           type: integer
-        - description: "The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response."
+        - description: The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
           in: query
           name: pageToken
           type: string
@@ -997,12 +997,12 @@ paths:
           required: true
           type: string
         - default: false
-          description: "Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders."
+          description: Whether to ignore the domain's default visibility settings for the created file. Domain administrators can choose to make all uploaded files visible to the domain by default; this parameter bypasses that behavior for the request. Permissions are still inherited from parent folders.
           in: query
           name: ignoreDefaultVisibility
           type: boolean
         - default: false
-          description: "Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Drive."
+          description: Whether to set the 'keepForever' field in the new head revision. This is only applicable to files with binary content in Drive.
           in: query
           name: keepRevisionForever
           type: boolean
@@ -1067,7 +1067,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/files/{fileId}/permissions':
     get:
-      description: "Lists a file's permissions."
+      description: Lists a file's permissions.
       operationId: drive.permissions.list
       parameters:
         - description: The ID of the file.
@@ -1245,7 +1245,7 @@ paths:
         - permissions
   '/files/{fileId}/revisions':
     get:
-      description: "Lists a file's revisions."
+      description: Lists a file's revisions.
       operationId: drive.revisions.list
       parameters:
         - description: The ID of the file.
@@ -1311,7 +1311,7 @@ paths:
       tags:
         - revisions
     get:
-      description: "Gets a revision's metadata or content by ID."
+      description: Gets a revision's metadata or content by ID.
       operationId: drive.revisions.get
       parameters:
         - description: The ID of the file.
@@ -1442,7 +1442,7 @@ paths:
         - files
 definitions:
   About:
-    description: "Information about the user, the user's Drive, and system capabilities."
+    description: 'Information about the user, the user''s Drive, and system capabilities.'
     properties:
       appInstalled:
         description: Whether the user has installed the requesting app.
@@ -1481,7 +1481,7 @@ definitions:
         format: int64
         type: string
       storageQuota:
-        description: "The user's storage quota limits and usage. All fields are measured in bytes."
+        description: The user's storage quota limits and usage. All fields are measured in bytes.
         properties:
           limit:
             description: 'The usage limit, if applicable. This will not be present if the user has unlimited storage.'
@@ -1671,13 +1671,13 @@ definitions:
             description: Whether the user can copy the file.
             type: boolean
           canEdit:
-            description: "Whether the user can edit the file's content."
+            description: Whether the user can edit the file's content.
             type: boolean
           canReadRevisions:
             description: Whether the current user has read access to the Revisions resource of the file.
             type: boolean
           canShare:
-            description: "Whether the user can modify the file's permissions and sharing settings."
+            description: Whether the user can modify the file's permissions and sharing settings.
             type: boolean
         type: object
       contentHints:
@@ -1722,10 +1722,10 @@ definitions:
           This is automatically updated when the name field changes, however it is not cleared if the new name does not contain a valid extension.
         type: string
       headRevisionId:
-        description: "The ID of the file's head revision. This is currently only available for files with binary content in Drive."
+        description: The ID of the file's head revision. This is currently only available for files with binary content in Drive.
         type: string
       iconLink:
-        description: "A static, unauthenticated link to the file's icon."
+        description: 'A static, unauthenticated link to the file''s icon.'
         type: string
       id:
         description: The ID of the file.
@@ -1799,7 +1799,7 @@ definitions:
             description: The metering mode used to create the photo.
             type: string
           rotation:
-            description: "The rotation in clockwise degrees from the image's original orientation."
+            description: The rotation in clockwise degrees from the image's original orientation.
             format: int32
             type: integer
           sensor:
@@ -1897,11 +1897,11 @@ definitions:
         $ref: '#/definitions/User'
         description: 'The user who shared the file with the requesting user, if applicable.'
       size:
-        description: "The size of the file's content in bytes. This is only applicable to files with binary content in Drive."
+        description: The size of the file's content in bytes. This is only applicable to files with binary content in Drive.
         format: int64
         type: string
       spaces:
-        description: "The list of spaces which contain the file. The currently supported values are 'drive', 'appDataFolder' and 'photos'."
+        description: 'The list of spaces which contain the file. The currently supported values are ''drive'', ''appDataFolder'' and ''photos''.'
         items:
           type: string
         type: array
@@ -1909,10 +1909,10 @@ definitions:
         description: Whether the user has starred the file.
         type: boolean
       thumbnailLink:
-        description: "A short-lived link to the file's thumbnail, if available. Typically lasts on the order of hours."
+        description: 'A short-lived link to the file''s thumbnail, if available. Typically lasts on the order of hours.'
         type: string
       trashed:
-        description: "Whether the file has been trashed, either explicitly or from a trashed parent folder. Only the owner may trash a file, and other users cannot see files in the owner's trash."
+        description: 'Whether the file has been trashed, either explicitly or from a trashed parent folder. Only the owner may trash a file, and other users cannot see files in the owner''s trash.'
         type: boolean
       version:
         description: 'A monotonically increasing version number for the file. This reflects every change made to the file on the server, even those not visible to the user.'
@@ -1942,7 +1942,7 @@ definitions:
         format: date-time
         type: string
       viewersCanCopyContent:
-        description: "Whether users with only reader or commenter permission can copy the file's content. This affects copy, download, and print operations."
+        description: 'Whether users with only reader or commenter permission can copy the file''s content. This affects copy, download, and print operations.'
         type: boolean
       webContentLink:
         description: A link for downloading the content of the file in a browser. This is only available for files with binary content in Drive.
@@ -1951,7 +1951,7 @@ definitions:
         description: A link for opening the file in a relevant Google editor or viewer in a browser.
         type: string
       writersCanShare:
-        description: "Whether users with only writer permission can modify the file's permissions."
+        description: Whether users with only writer permission can modify the file's permissions.
         type: boolean
     type: object
   FileList:
@@ -2009,13 +2009,23 @@ definitions:
         description: 'This is always drive#permission.'
         type: string
       photoLink:
-        description: "A link to the user's profile photo, if available."
+        description: 'A link to the user''s profile photo, if available.'
         type: string
       role:
-        description: "The role granted by this permission. Valid values are:  \n- owner \n- writer \n- commenter \n- reader"
+        description: |-
+          The role granted by this permission. Valid values are:  
+          - owner 
+          - writer 
+          - commenter 
+          - reader
         type: string
       type:
-        description: "The type of the grantee. Valid values are:  \n- user \n- group \n- domain \n- anyone"
+        description: |-
+          The type of the grantee. Valid values are:  
+          - user 
+          - group 
+          - domain 
+          - anyone
         type: string
     type: object
   PermissionList:
@@ -2035,7 +2045,10 @@ definitions:
     description: A reply to a comment on a file.
     properties:
       action:
-        description: "The action the reply performed to the parent comment. Valid values are:  \n- resolve \n- reopen"
+        description: |-
+          The action the reply performed to the parent comment. Valid values are:  
+          - resolve 
+          - reopen
         type: string
       author:
         $ref: '#/definitions/User'
@@ -2100,7 +2113,7 @@ definitions:
         $ref: '#/definitions/User'
         description: The last user to modify this revision.
       md5Checksum:
-        description: "The MD5 checksum of the revision's content. This is only applicable to files with binary content in Drive."
+        description: The MD5 checksum of the revision's content. This is only applicable to files with binary content in Drive.
         type: string
       mimeType:
         description: The MIME type of the revision.
@@ -2122,7 +2135,7 @@ definitions:
         description: Whether this revision is published outside the domain. This is only applicable to Google Docs.
         type: boolean
       size:
-        description: "The size of the revision's content in bytes. This is only applicable to files with binary content in Drive."
+        description: The size of the revision's content in bytes. This is only applicable to files with binary content in Drive.
         format: int64
         type: string
     type: object
@@ -2166,9 +2179,9 @@ definitions:
         description: Whether this user is the requesting user.
         type: boolean
       permissionId:
-        description: "The user's ID as visible in Permission resources."
+        description: The user's ID as visible in Permission resources.
         type: string
       photoLink:
-        description: "A link to the user's profile photo, if available."
+        description: 'A link to the user''s profile photo, if available.'
         type: string
     type: object

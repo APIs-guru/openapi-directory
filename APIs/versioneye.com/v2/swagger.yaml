@@ -144,7 +144,7 @@ paths:
       responses:
         '200':
           description: No response was specified
-      summary: "lists your's github repos"
+      summary: lists your's github repos
       tags:
         - github
   '/v2/github/hook/{project_id}':
@@ -355,7 +355,10 @@ paths:
           name: q
           required: true
           type: string
-        - description: "Filter results by programming languages;\n                                  For filtering multiple languages submit a comma separated list of language strings.\n                                "
+        - description: |-
+            Filter results by programming languages;
+                                              For filtering multiple languages submit a comma separated list of language strings.
+                                            
           in: query
           name: lang
           required: false
@@ -665,7 +668,7 @@ paths:
           name: upload
           required: true
           type: file
-        - description: "By default 'public'. If 'public' everybody can see the project."
+        - description: By default 'public'. If 'public' everybody can see the project.
           in: formData
           name: visibility
           required: false
@@ -685,7 +688,7 @@ paths:
           name: team_name
           required: false
           type: string
-        - description: "If 'true' this project will not show up in the UI and gets removed later."
+        - description: If 'true' this project will not show up in the UI and gets removed later.
           in: formData
           name: temp
           required: false
@@ -818,7 +821,7 @@ paths:
       responses:
         '200':
           description: No response was specified
-      summary: "shows the project's information"
+      summary: shows the project's information
       tags:
         - projects
     post:
@@ -997,7 +1000,7 @@ paths:
     get:
       operationId: GET--version-users--username-comments---format-
       parameters:
-        - description: "VersionEye users' nickname"
+        - description: VersionEye users' nickname
           in: path
           name: username
           required: true
@@ -1010,7 +1013,7 @@ paths:
       responses:
         '200':
           description: No response was specified
-      summary: "shows user's comments"
+      summary: shows user's comments
       tags:
         - users
   '/v2/users/{username}/favorites':
@@ -1030,7 +1033,7 @@ paths:
       responses:
         '200':
           description: No response was specified
-      summary: "shows user's favorite packages"
+      summary: shows user's favorite packages
       tags:
         - users
   /v2/watchers:
@@ -1074,12 +1077,12 @@ paths:
           name: type
           required: false
           type: string
-        - description: "Hash of config: {:email => 'ho@do.bo', :url => 'http://my.webhook.com'}]"
+        - description: 'Hash of config: {:email => ''ho@do.bo'', :url => ''http://my.webhook.com''}]'
           in: formData
           name: config
           required: false
           type: file
-        - description: "Array of constraints: [{:type => 'wildcard', :value => '*.jar'}]"
+        - description: 'Array of constraints: [{:type => ''wildcard'', :value => ''*.jar''}]'
           in: formData
           items:
             type: string

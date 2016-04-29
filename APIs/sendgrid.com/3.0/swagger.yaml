@@ -224,7 +224,7 @@ paths:
             example:
               ips:
                 - ip: 192.168.1.1
-                - ip: '192.*.*.*'
+                - ip: 192.*.*.*
                 - ip: 192.168.1.3/32
             properties:
               ips:
@@ -687,7 +687,7 @@ paths:
           examples:
             application/json:
               errors:
-                - message: "expected JSON request body with 'name' property"
+                - message: expected JSON request body with 'name' property
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '401':
@@ -704,7 +704,7 @@ paths:
             $ref: '#/definitions/global:ErrorResponse'
       security:
         - Authorization: []
-      summary: 'Update the name & scopes of an API Key'
+      summary: Update the name & scopes of an API Key
   /asm/groups:
     get:
       consumes:
@@ -1258,35 +1258,35 @@ paths:
                 - categories:
                     - spring line
                   custom_unsubscribe_url: ''
-                  html_content: '<html><head><title></title></head><body><p>Check out our spring line!</p></body></html>'
+                  html_content: <html><head><title></title></head><body><p>Check out our spring line!</p></body></html>
                   id: 986724
                   ip_pool: marketing
                   list_ids:
                     - 110
                     - 124
-                  plain_content: 'Check out our spring line!'
+                  plain_content: Check out our spring line!
                   segment_ids:
                     - 110
                   sender_id: 124451
                   status: Draft
-                  subject: 'New Products for Spring!'
+                  subject: New Products for Spring!
                   suppression_group_id: 42
                   title: March Newsletter
                 - categories:
                     - winter line
                   custom_unsubscribe_url: ''
-                  html_content: '<html><head><title></title></head><body><p>Last call for winter clothes!</p></body></html>'
+                  html_content: <html><head><title></title></head><body><p>Last call for winter clothes!</p></body></html>
                   id: 986723
                   ip_pool: marketing
                   list_ids:
                     - 110
                     - 124
-                  plain_content: 'Last call for winter clothes!'
+                  plain_content: Last call for winter clothes!
                   segment_ids:
                     - 110
                   sender_id: 124451
                   status: Sent
-                  subject: 'Final Winter Product Sale!'
+                  subject: Final Winter Product Sale!
                   suppression_group_id: 42
                   title: February Newsletter
           schema:
@@ -1325,16 +1325,16 @@ paths:
               categories:
                 - spring line
               custom_unsubscribe_url: ''
-              html_content: '<html><head><title></title></head><body><p>Check out our spring line!</p></body></html>'
+              html_content: <html><head><title></title></head><body><p>Check out our spring line!</p></body></html>
               ip_pool: marketing
               list_ids:
                 - 110
                 - 124
-              plain_content: 'Check out our spring line!'
+              plain_content: Check out our spring line!
               segment_ids:
                 - 110
               sender_id: 124451
-              subject: 'New Products for Spring!'
+              subject: New Products for Spring!
               suppression_group_id: 42
               title: March Newsletter
       produces:
@@ -1347,18 +1347,18 @@ paths:
               categories:
                 - spring line
               custom_unsubscribe_url: ''
-              html_content: '<html><head><title></title></head><body><p>Check out our spring line!</p></body></html>'
+              html_content: <html><head><title></title></head><body><p>Check out our spring line!</p></body></html>
               id: 986724
               ip_pool: marketing
               list_ids:
                 - 110
                 - 124
-              plain_content: 'Check out our spring line!'
+              plain_content: Check out our spring line!
               segment_ids:
                 - 110
               sender_id: 124451
               status: Draft
-              subject: 'New Products for Spring!'
+              subject: New Products for Spring!
               suppression_group_id: 42
               title: March Newsletter
           schema:
@@ -1383,7 +1383,7 @@ paths:
             application/json:
               errors:
                 - field: title
-                  message: "title can't be blank"
+                  message: title can't be blank
                 - field: title
                   message: title is too long (maximum is 100 characters)
                 - field: categories
@@ -1407,7 +1407,7 @@ paths:
                 - field: unsubscribes
                   message: 'Either suppression_group_id or custom_unsubscribe_url may be set/used, but not both. Please remove one before setting the other.'
                 - message: The JSON you have submitted cannot be parsed.
-                - message: "You've reached your limit of 250 campaigns. Please delete one or more and try again."
+                - message: You've reached your limit of 250 campaigns. Please delete one or more and try again.
           schema:
             $ref: '#/definitions/global:ErrorResponse'
         '401':
@@ -1478,18 +1478,18 @@ paths:
               categories:
                 - spring line
               custom_unsubscribe_url: ''
-              html_content: '<html><head><title></title></head><body><p>Check out our spring line!</p></body></html>'
+              html_content: <html><head><title></title></head><body><p>Check out our spring line!</p></body></html>
               id: 986724
               ip_pool: marketing
               list_ids:
                 - 110
                 - 124
-              plain_content: 'Check out our spring line!'
+              plain_content: Check out our spring line!
               segment_ids:
                 - 110
               sender_id: 124451
               status: Draft
-              subject: 'New Products for Spring!'
+              subject: New Products for Spring!
               suppression_group_id: 42
               title: March Newsletter
           schema:
@@ -1536,9 +1536,9 @@ paths:
             example:
               categories:
                 - summer line
-              html_content: '<html><head><title></title></head><body><p>Check out our summer line!</p></body></html>'
-              plain_content: 'Check out our summer line!'
-              subject: 'New Products for Summer!'
+              html_content: <html><head><title></title></head><body><p>Check out our summer line!</p></body></html>
+              plain_content: Check out our summer line!
+              subject: New Products for Summer!
               title: May Newsletter
             properties:
               categories:
@@ -1576,18 +1576,18 @@ paths:
               categories:
                 - summer line
               custom_unsubscribe_url: ''
-              html_content: '<html><head><title></title></head><body><p>Check out our summer line!</p></body></html>'
+              html_content: <html><head><title></title></head><body><p>Check out our summer line!</p></body></html>
               id: 986724
               ip_pool: marketing
               list_ids:
                 - 110
                 - 124
-              plain_content: 'Check out our summer line!'
+              plain_content: Check out our summer line!
               segment_ids:
                 - 110
               sender_id: 124451
               status: Draft
-              subject: 'New Products for Summer!'
+              subject: New Products for Summer!
               suppression_group_id: 42
               title: May Newsletter
           schema:
@@ -1611,7 +1611,7 @@ paths:
             application/json:
               errors:
                 - field: title
-                  message: "title can't be blank"
+                  message: title can't be blank
                 - field: title
                   message: title is too long (maximum is 100 characters)
                 - field: categories
@@ -1902,11 +1902,11 @@ paths:
             application/json:
               errors:
                 - field: subject
-                  message: "subject can't be blank"
+                  message: subject can't be blank
                 - field: sender_id
-                  message: "sender_id can't be blank"
+                  message: sender_id can't be blank
                 - field: plain_content
-                  message: "plain_content can't be blank, please provide plain text or html content"
+                  message: 'plain_content can''t be blank, please provide plain text or html content'
                 - field: list_id
                   message: You must select at least 1 segment or 1 list to send to.
                 - field: unsubscribe_tag
@@ -1996,11 +1996,11 @@ paths:
             application/json:
               errors:
                 - field: subject
-                  message: "subject can't be blank"
+                  message: subject can't be blank
                 - field: sender_id
-                  message: "sender_id can't be blank"
+                  message: sender_id can't be blank
                 - field: plain_content
-                  message: "plain_content can't be blank, please provide plain text or html content"
+                  message: 'plain_content can''t be blank, please provide plain text or html content'
                 - field: list_id
                   message: You must select at least 1 segment or 1 list to send to.
                 - field: unsubscribe_tag
@@ -2187,7 +2187,12 @@ paths:
     get:
       consumes:
         - application/json
-      description: "**This endpoint allows you to retrieve all of your email statistics for each of your categories.**\n\nIf you do not define any query parameters, this endpoint will return a sum for each category in groups of 10.\n\nCategories allow you to group your emails together according to broad topics that you define. For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/categories.html). "
+      description: |-
+        **This endpoint allows you to retrieve all of your email statistics for each of your categories.**
+
+        If you do not define any query parameters, this endpoint will return a sum for each category in groups of 10.
+
+        Categories allow you to group your emails together according to broad topics that you define. For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/categories.html). 
       operationId: GET_categories-stats
       parameters:
         - description: The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD
@@ -2327,7 +2332,12 @@ paths:
     get:
       consumes:
         - application/json
-      description: "**This endpoint allows you to retrieve the total sum of each email statistic for every category over the given date range.**\n\nIf you do not define any query parameters, this endpoint will return a sum for each category in groups of 10.\n\nCategories allow you to group your emails together according to broad topics that you define. For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/categories.html). "
+      description: |-
+        **This endpoint allows you to retrieve the total sum of each email statistic for every category over the given date range.**
+
+        If you do not define any query parameters, this endpoint will return a sum for each category in groups of 10.
+
+        Categories allow you to group your emails together according to broad topics that you define. For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/categories.html). 
       operationId: GET_categories-stats-sums
       parameters:
         - default: delivered
@@ -2633,7 +2643,10 @@ paths:
     get:
       consumes:
         - application/json
-      description: "**This endpoint allows you to retrieve all custom fields.** \n\nThe contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html)."
+      description: |-
+        **This endpoint allows you to retrieve all custom fields.** 
+
+        The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
       operationId: GET_contactdb-custom_fields
       parameters: []
       produces:
@@ -3154,7 +3167,10 @@ paths:
     get:
       consumes:
         - application/json
-      description: "**This endpoint allows you to retrieve all recipients on the list with the given ID.** \n\nThe Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients."
+      description: |-
+        **This endpoint allows you to retrieve all recipients on the list with the given ID.** 
+
+        The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
       operationId: GET_contactdb-lists-list_id-recipients
       parameters:
         - description: Page index of first recipient to return (must be a positive integer)
@@ -3966,7 +3982,7 @@ paths:
                 type: array
             required:
               - reserved_fields
-            title: "List fields that are reserved and can't be used for custom field names. response"
+            title: List fields that are reserved and can't be used for custom field names. response
             type: object
         '401':
           description: ''
@@ -4041,7 +4057,30 @@ paths:
     post:
       consumes:
         - application/json
-      description: "**This endpoint allows you to create a segment.**\n\nAll recipients in your contactdb will be added or removed automatically depending on whether they match the criteria for this segment.\n\nList Id:\n\n* Send this to segment from an existing list\n* Don't send this in order to segment from your entire contactdb.\n\nValid operators for create and update depend on the type of the field you are segmenting: \n\n* **Dates:** \"eq\", \"ne\", \"lt\" (before), \"gt\" (after) \n* **Text:** \"contains\", \"eq\" (is - matches the full field), \"ne\" (is not - matches any field where the entire field is not the condition value) \n* **Numbers:** \"eq\", \"lt\", \"gt\" \n* **Email Clicks and Opens:** \"eq\" (opened), \"ne\" (not opened) \n\nSegment conditions using \"eq\" or \"ne\" for email clicks and opens should provide a \"field\" of either *clicks.campaign_identifier* or *opens.campaign_identifier*. The condition value should be a string containing the id of a completed campaign. \n\nSegments may contain multiple condtions, joined by an \"and\" or \"or\" in the \"and_or\" field. The first condition in the conditions list must have an empty \"and_or\", and subsequent conditions must all specify an \"and_or\".\n\nThe Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.\n\nFor more information about segments in Marketing Campaigns, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/lists.html#-Create-a-Segment)."
+      description: |-
+        **This endpoint allows you to create a segment.**
+
+        All recipients in your contactdb will be added or removed automatically depending on whether they match the criteria for this segment.
+
+        List Id:
+
+        * Send this to segment from an existing list
+        * Don't send this in order to segment from your entire contactdb.
+
+        Valid operators for create and update depend on the type of the field you are segmenting: 
+
+        * **Dates:** "eq", "ne", "lt" (before), "gt" (after) 
+        * **Text:** "contains", "eq" (is - matches the full field), "ne" (is not - matches any field where the entire field is not the condition value) 
+        * **Numbers:** "eq", "lt", "gt" 
+        * **Email Clicks and Opens:** "eq" (opened), "ne" (not opened) 
+
+        Segment conditions using "eq" or "ne" for email clicks and opens should provide a "field" of either *clicks.campaign_identifier* or *opens.campaign_identifier*. The condition value should be a string containing the id of a completed campaign. 
+
+        Segments may contain multiple condtions, joined by an "and" or "or" in the "and_or" field. The first condition in the conditions list must have an empty "and_or", and subsequent conditions must all specify an "and_or".
+
+        The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
+
+        For more information about segments in Marketing Campaigns, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/lists.html#-Create-a-Segment).
       operationId: POST_contactdb-segments
       parameters:
         - in: body
@@ -5637,7 +5676,7 @@ paths:
                     field:
                       type: 'null'
                     message:
-                      description: "A message explaining why the IP couldn't entered into warmup mode."
+                      description: A message explaining why the IP couldn't entered into warmup mode.
                       type: string
                   type: object
                 type: array
@@ -5681,7 +5720,7 @@ paths:
                     field:
                       type: 'null'
                     message:
-                      description: "A message explaining why the IP couldn't be removed from warmup."
+                      description: A message explaining why the IP couldn't be removed from warmup.
                       type: string
                   type: object
                 type: array
@@ -5816,7 +5855,14 @@ paths:
     post:
       consumes:
         - application/json
-      description: "**This endpoint allows you to generate a new batch ID. This batch ID can be associated with scheduled sends via the mail/send endpoint.**\n\nIf you set the SMTPAPI header `batch_id`, it allows you to then associate multiple scheduled mail/send requests together with the same ID. Then at anytime up to 10 minutes before the schedule date, you can cancel all of the mail/send requests that have this batch ID by calling the Cancel Scheduled Send endpoint. \n\nMore Information:\n\n* [Scheduling Parameters > Batch ID](https://sendgrid.com/docs/API_Reference/SMTP_API/scheduling_parameters.html)"
+      description: |-
+        **This endpoint allows you to generate a new batch ID. This batch ID can be associated with scheduled sends via the mail/send endpoint.**
+
+        If you set the SMTPAPI header `batch_id`, it allows you to then associate multiple scheduled mail/send requests together with the same ID. Then at anytime up to 10 minutes before the schedule date, you can cancel all of the mail/send requests that have this batch ID by calling the Cancel Scheduled Send endpoint. 
+
+        More Information:
+
+        * [Scheduling Parameters > Batch ID](https://sendgrid.com/docs/API_Reference/SMTP_API/scheduling_parameters.html)
       operationId: POST_mail-batch
       parameters: []
       produces:
@@ -5846,7 +5892,14 @@ paths:
     get:
       consumes:
         - application/json
-      description: "**This endpoint allows you to validate a batch ID.**\n\nIf you set the SMTPAPI header `batch_id`, it allows you to then associate multiple scheduled mail/send requests together with the same ID. Then at anytime up to 10 minutes before the schedule date, you can cancel all of the mail/send requests that have this batch ID by calling the Cancel Scheduled Send endpoint. \n\nMore Information:\n\n* [Scheduling Parameters > Batch ID](https://sendgrid.com/docs/API_Reference/SMTP_API/scheduling_parameters.html)"
+      description: |-
+        **This endpoint allows you to validate a batch ID.**
+
+        If you set the SMTPAPI header `batch_id`, it allows you to then associate multiple scheduled mail/send requests together with the same ID. Then at anytime up to 10 minutes before the schedule date, you can cancel all of the mail/send requests that have this batch ID by calling the Cancel Scheduled Send endpoint. 
+
+        More Information:
+
+        * [Scheduling Parameters > Batch ID](https://sendgrid.com/docs/API_Reference/SMTP_API/scheduling_parameters.html)
       operationId: GET_mail-batch-batch_id
       parameters: []
       produces:
@@ -6497,7 +6550,14 @@ paths:
     get:
       consumes:
         - application/json
-      description: "**This endpoint allows you to retrieve your current legacy email template settings.**\n\nThis setting refers to our original email templates. We currently support more fully featured [transactional templates](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html). \n\nThe legacy email template setting wraps an HTML template around your email content. This can be useful for sending out marketing email and/or other HTML formatted messages.\n\nMail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid’s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html)."
+      description: |-
+        **This endpoint allows you to retrieve your current legacy email template settings.**
+
+        This setting refers to our original email templates. We currently support more fully featured [transactional templates](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html). 
+
+        The legacy email template setting wraps an HTML template around your email content. This can be useful for sending out marketing email and/or other HTML formatted messages.
+
+        Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid’s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
       operationId: GET_mail_settings-template
       parameters: []
       produces:
@@ -6519,7 +6579,14 @@ paths:
     patch:
       consumes:
         - application/json
-      description: "**This endpoint allows you to update your current legacy email template settings.**\n\nThis setting refers to our original email templates. We currently support more fully featured [transactional templates](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html). \n\nThe legacy email template setting wraps an HTML template around your email content. This can be useful for sending out marketing email and/or other HTML formatted messages.\n\nMail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid’s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html)."
+      description: |-
+        **This endpoint allows you to update your current legacy email template settings.**
+
+        This setting refers to our original email templates. We currently support more fully featured [transactional templates](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html). 
+
+        The legacy email template setting wraps an HTML template around your email content. This can be useful for sending out marketing email and/or other HTML formatted messages.
+
+        Mail settings allow you to tell SendGrid specific things to do to every email that you send to your recipients over SendGrid’s [Web API](https://sendgrid.com/docs/API_Reference/Web_API/mail.html) or [SMTP Relay](https://sendgrid.com/docs/API_Reference/SMTP_API/index.html).
       operationId: PATCH_mail_settings-template
       parameters:
         - in: body
@@ -6527,7 +6594,7 @@ paths:
           schema:
             example:
               enabled: true
-              html_content: '<% body %>'
+              html_content: <% body %>
             properties:
               enabled:
                 description: Indicates if you want to enable the legacy email template mail setting.
@@ -7259,7 +7326,10 @@ paths:
     get:
       consumes:
         - application/json
-      description: "**This endpoint returns a list of all scopes that this user has access to.**\n\nAPI Keys can be used to authenticate the use of [SendGrid’s v3 Web API](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html), or the [Mail API Endpoint](https://sendgrid.com/docs/API_Reference/Web_API/mail.html). API Keys may be assigned certain permissions, or scopes, that limit which API endpoints they are able to access. For a more detailed explanation of how you can use API Key permissios, please visit our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/api_keys.html#-API-Key-Permissions) or [Classroom](https://sendgrid.com/docs/Classroom/Basics/API/api_key_permissions.html). "
+      description: |-
+        **This endpoint returns a list of all scopes that this user has access to.**
+
+        API Keys can be used to authenticate the use of [SendGrid’s v3 Web API](https://sendgrid.com/docs/API_Reference/Web_API_v3/index.html), or the [Mail API Endpoint](https://sendgrid.com/docs/API_Reference/Web_API/mail.html). API Keys may be assigned certain permissions, or scopes, that limit which API endpoints they are able to access. For a more detailed explanation of how you can use API Key permissios, please visit our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/api_keys.html#-API-Key-Permissions) or [Classroom](https://sendgrid.com/docs/Classroom/Basics/API/api_key_permissions.html). 
       operationId: GET_scopes
       parameters: []
       produces:
@@ -7293,11 +7363,11 @@ paths:
           schema:
             properties:
               errors:
-                description: "This 401 response indicates that the user making the call doesn't have the authorization to view the list of scopes."
+                description: This 401 response indicates that the user making the call doesn't have the authorization to view the list of scopes.
                 items:
                   properties:
                     field:
-                      description: "This empty field is returned instead of the list of scopes if the user making the call doesn't have the authorization required."
+                      description: This empty field is returned instead of the list of scopes if the user making the call doesn't have the authorization required.
                       type: 'null'
                     message:
                       description: Explains why the scopes cannot be returned.
@@ -8220,7 +8290,13 @@ paths:
     put:
       consumes:
         - application/json
-      description: "Each subuser should be assigned to an IP address, from which all of this subuser's mail will be sent. Often, this is the same IP as the parent account, but each subuser can have their own, or multiple, IP addresses as well. \n\nMore information:\n\n* [How to request more IPs](https://sendgrid.com/docs/Classroom/Basics/Account/adding_an_additional_dedicated_ip_to_your_account.html)\n* [IPs can be whitelabeled](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/ips.html)"
+      description: |-
+        Each subuser should be assigned to an IP address, from which all of this subuser's mail will be sent. Often, this is the same IP as the parent account, but each subuser can have their own, or multiple, IP addresses as well. 
+
+        More information:
+
+        * [How to request more IPs](https://sendgrid.com/docs/Classroom/Basics/Account/adding_an_additional_dedicated_ip_to_your_account.html)
+        * [IPs can be whitelabeled](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/ips.html)
       operationId: PUT_subusers-subuser_name-ips
       parameters: []
       produces:
@@ -8412,7 +8488,17 @@ paths:
     delete:
       consumes:
         - application/json
-      description: "**This endpoint allows you to delete all email addresses on your blocks list.**\n\nThere are two options for deleting blocked emails: \n\n1. You can delete all blocked emails by setting `delete_all` to true in the request body. \n2. You can delete some blocked emails by specifying the email addresses in an array in the request body.\n\n[Blocks](https://sendgrid.com/docs/Glossary/blocks.html) happen when your message was rejected for a reason related to the message, not the recipient address. This can happen when your mail server IP address has been added to a blacklist or blocked by an ISP, or if the message content is flagged by a filter on the receiving server.\n\nFor more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/blocks.html)."
+      description: |-
+        **This endpoint allows you to delete all email addresses on your blocks list.**
+
+        There are two options for deleting blocked emails: 
+
+        1. You can delete all blocked emails by setting `delete_all` to true in the request body. 
+        2. You can delete some blocked emails by specifying the email addresses in an array in the request body.
+
+        [Blocks](https://sendgrid.com/docs/Glossary/blocks.html) happen when your message was rejected for a reason related to the message, not the recipient address. This can happen when your mail server IP address has been added to a blacklist or blocked by an ISP, or if the message content is flagged by a filter on the receiving server.
+
+        For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/blocks.html).
       operationId: DELETE_suppression-blocks
       parameters:
         - in: body
@@ -8586,7 +8672,18 @@ paths:
     delete:
       consumes:
         - application/json
-      description: "**This endpoint allows you to delete all of your bounces. You can also use this endpoint to remove a specific email address from your bounce list.**\n\nBounces are messages that are returned to the server that sent it.\n\nFor more information see: \n\n* [User Guide > Bounces](https://sendgrid.com/docs/User_Guide/Suppressions/bounces.html) for more information\n* [Glossary > Bounces](https://sendgrid.com/docs/Glossary/Bounces.html)\n* [Classroom > List Scrubbing Guide](https://sendgrid.com/docs/Classroom/Deliver/list_scrubbing.html)\n\nNote: the `delete_all` and `emails` parameters should be used independently of each other as they have different purposes."
+      description: |-
+        **This endpoint allows you to delete all of your bounces. You can also use this endpoint to remove a specific email address from your bounce list.**
+
+        Bounces are messages that are returned to the server that sent it.
+
+        For more information see: 
+
+        * [User Guide > Bounces](https://sendgrid.com/docs/User_Guide/Suppressions/bounces.html) for more information
+        * [Glossary > Bounces](https://sendgrid.com/docs/Glossary/Bounces.html)
+        * [Classroom > List Scrubbing Guide](https://sendgrid.com/docs/Classroom/Deliver/list_scrubbing.html)
+
+        Note: the `delete_all` and `emails` parameters should be used independently of each other as they have different purposes.
       operationId: DELETE_suppression-bounces
       parameters:
         - in: body
@@ -8599,7 +8696,7 @@ paths:
                 - example2@example.com
             properties:
               delete_all:
-                description: 'This parameter allows you to delete **every** email in your bounce list. This should not be used with the emails parameter.'
+                description: This parameter allows you to delete **every** email in your bounce list. This should not be used with the emails parameter.
                 type: boolean
               emails:
                 description: Delete multiple emails from your bounce list at the same time. This should not be used with the delete_all parameter.
@@ -8630,7 +8727,15 @@ paths:
     get:
       consumes:
         - application/json
-      description: "**This endpoint allows you to retrieve all of your bounces.**\n\nBounces are messages that are returned to the server that sent it. \n\nFor more information see: \n\n* [User Guide > Bounces](https://sendgrid.com/docs/User_Guide/Suppressions/bounces.html) for more information\n* [Glossary > Bounces](https://sendgrid.com/docs/Glossary/Bounces.html)"
+      description: |-
+        **This endpoint allows you to retrieve all of your bounces.**
+
+        Bounces are messages that are returned to the server that sent it. 
+
+        For more information see: 
+
+        * [User Guide > Bounces](https://sendgrid.com/docs/User_Guide/Suppressions/bounces.html) for more information
+        * [Glossary > Bounces](https://sendgrid.com/docs/Glossary/Bounces.html)
       operationId: GET_suppression-bounces
       parameters:
         - description: Refers start of the time range in unix timestamp when a bounce was created (inclusive).
@@ -8654,7 +8759,7 @@ paths:
             application/json:
               - created: 1250337600
                 email: example@example.com
-                reason: "550 5.1.1 The email account that you tried to reach does not exist. Please try double-checking the recipient's email address for typos or unnecessary spaces. Learn more at  https://support.google.com/mail/answer/6596 o186si2389584ioe.63 - gsmtp "
+                reason: '550 5.1.1 The email account that you tried to reach does not exist. Please try double-checking the recipient''s email address for typos or unnecessary spaces. Learn more at  https://support.google.com/mail/answer/6596 o186si2389584ioe.63 - gsmtp '
                 status: 5.1.1
               - created: 1250337600
                 email: example@example.com
@@ -8691,7 +8796,16 @@ paths:
     delete:
       consumes:
         - application/json
-      description: "**This endpoint allows you to remove an email address from your bounce list.**\n\nBounces are messages that are returned to the server that sent it. This endpoint allows you to delete a single email addresses from your bounce list. \n\nFor more information see: \n\n* [User Guide > Bounces](https://sendgrid.com/docs/User_Guide/Suppressions/bounces.html) for more information\n* [Glossary > Bounces](https://sendgrid.com/docs/Glossary/Bounces.html)\n* [Classroom > List Scrubbing Guide](https://sendgrid.com/docs/Classroom/Deliver/list_scrubbing.html)"
+      description: |-
+        **This endpoint allows you to remove an email address from your bounce list.**
+
+        Bounces are messages that are returned to the server that sent it. This endpoint allows you to delete a single email addresses from your bounce list. 
+
+        For more information see: 
+
+        * [User Guide > Bounces](https://sendgrid.com/docs/User_Guide/Suppressions/bounces.html) for more information
+        * [Glossary > Bounces](https://sendgrid.com/docs/Glossary/Bounces.html)
+        * [Classroom > List Scrubbing Guide](https://sendgrid.com/docs/Classroom/Deliver/list_scrubbing.html)
       operationId: DELETE_suppression-bounces-email
       parameters:
         - description: The email address you would like to remove from the bounce list.
@@ -8723,7 +8837,16 @@ paths:
     get:
       consumes:
         - application/json
-      description: "**This endpoint allows you to retrieve a specific bounce for a given email address.**\n\nBounces are messages that are returned to the server that sent it.\n\nFor more information see: \n\n* [User Guide > Bounces](https://sendgrid.com/docs/User_Guide/Suppressions/bounces.html) for more information\n* [Glossary > Bounces](https://sendgrid.com/docs/Glossary/Bounces.html)\n* [Classroom > List Scrubbing Guide](https://sendgrid.com/docs/Classroom/Deliver/list_scrubbing.html)"
+      description: |-
+        **This endpoint allows you to retrieve a specific bounce for a given email address.**
+
+        Bounces are messages that are returned to the server that sent it.
+
+        For more information see: 
+
+        * [User Guide > Bounces](https://sendgrid.com/docs/User_Guide/Suppressions/bounces.html) for more information
+        * [Glossary > Bounces](https://sendgrid.com/docs/Glossary/Bounces.html)
+        * [Classroom > List Scrubbing Guide](https://sendgrid.com/docs/Classroom/Deliver/list_scrubbing.html)
       operationId: GET_suppression-bounces-email
       parameters: []
       produces:
@@ -8735,7 +8858,7 @@ paths:
             application/json:
               - created: 1443651125
                 email: bounce1@test.com
-                reason: "550 5.1.1 The email account that you tried to reach does not exist. Please try double-checking the recipient's email address for typos or unnecessary spaces. Learn more at  https://support.google.com/mail/answer/6596 o186si2389584ioe.63 - gsmtp "
+                reason: '550 5.1.1 The email account that you tried to reach does not exist. Please try double-checking the recipient''s email address for typos or unnecessary spaces. Learn more at  https://support.google.com/mail/answer/6596 o186si2389584ioe.63 - gsmtp '
                 status: 5.1.1
           schema:
             items:
@@ -8764,7 +8887,19 @@ paths:
     delete:
       consumes:
         - application/json
-      description: "**This endpoint allows you to remove email addresses from your invalid email address list.**\n\nThere are two options for deleting invalid email addresses: \n\n1) You can delete all invalid email addresses by setting `delete_all` to true in the request body.\n2) You can delete some invalid email addresses by specifying certain addresses in an array in the request body.\n\nAn invalid email occurs when you attempt to send email to an address that is formatted in a manner that does not meet internet email format standards or the email does not exist at the recipient’s mail server.\n\nExamples include addresses without the “@” sign or addresses that include certain special characters and/or spaces. This response can come from our own server or the recipient mail server.\n\nFor more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/invalid_emails.html)."
+      description: |-
+        **This endpoint allows you to remove email addresses from your invalid email address list.**
+
+        There are two options for deleting invalid email addresses: 
+
+        1) You can delete all invalid email addresses by setting `delete_all` to true in the request body.
+        2) You can delete some invalid email addresses by specifying certain addresses in an array in the request body.
+
+        An invalid email occurs when you attempt to send email to an address that is formatted in a manner that does not meet internet email format standards or the email does not exist at the recipient’s mail server.
+
+        Examples include addresses without the “@” sign or addresses that include certain special characters and/or spaces. This response can come from our own server or the recipient mail server.
+
+        For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/invalid_emails.html).
       operationId: DELETE_suppression-invalid_emails
       parameters:
         - in: body
@@ -8999,7 +9134,17 @@ paths:
     delete:
       consumes:
         - application/json
-      description: "**This endpoint allows you to delete your spam reports.**\n\nThere are two options for deleting spam reports: \n\n1) You can delete all spam reports by setting \"delete_all\" to true in the request body. \n2) You can delete some spam reports by specifying the email addresses in an array in the request body.\n\n[Spam reports](https://sendgrid.com/docs/Glossary/spam_reports.html) happen when a recipient indicates that they think your email is [spam](https://sendgrid.com/docs/Glossary/spam.html) and then their email provider reports this to SendGrid.\n\nFor more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/spam_reports.html)."
+      description: |-
+        **This endpoint allows you to delete your spam reports.**
+
+        There are two options for deleting spam reports: 
+
+        1) You can delete all spam reports by setting "delete_all" to true in the request body. 
+        2) You can delete some spam reports by specifying the email addresses in an array in the request body.
+
+        [Spam reports](https://sendgrid.com/docs/Glossary/spam_reports.html) happen when a recipient indicates that they think your email is [spam](https://sendgrid.com/docs/Glossary/spam.html) and then their email provider reports this to SendGrid.
+
+        For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/spam_reports.html).
       operationId: DELETE_suppression-spam_reports
       parameters:
         - in: body
@@ -9320,10 +9465,10 @@ paths:
             $ref: '#/definitions/transactional_template_version'
             example:
               active: 1
-              html_content: '<%body%>'
+              html_content: <%body%>
               name: example_version_name
-              plain_content: '<%body%>'
-              subject: '<%subject%>'
+              plain_content: <%body%>
+              subject: <%subject%>
               template_id: ddb96bbc-9b92-425e-8979-99464621b543
       produces:
         - application/json
@@ -9333,11 +9478,11 @@ paths:
           examples:
             application/json:
               active: 1
-              html_content: '<%body%>'
+              html_content: <%body%>
               id: 8aefe0ee-f12b-4575-b5b7-c97e21cb36f3
               name: example_version_name
-              plain_content: '<%body%>'
-              subject: '<%subject%>'
+              plain_content: <%body%>
+              subject: <%subject%>
               template_id: ddb96bbc-9b92-425e-8979-99464621b543
               updated_at: '2014-03-19 18:56:33'
           schema:
@@ -9409,11 +9554,11 @@ paths:
           examples:
             application/json:
               active: 1
-              html_content: '<%body%>'
+              html_content: <%body%>
               id: 5997fcf6-2b9f-484d-acd5-7e9a99f0dc1f
               name: version 1 name
-              plain_content: '<%body%>'
-              subject: '<%subject%>'
+              plain_content: <%body%>
+              subject: <%subject%>
               template_id: d51480ca-ca3f-465c-bc3e-ceb71d73c38d
               updated_at: '2014-03-19 18:56:33'
           schema:
@@ -9464,10 +9609,10 @@ paths:
           schema:
             example:
               active: 1
-              html_content: '<%body%>'
+              html_content: <%body%>
               name: updated_example_name
-              plain_content: '<%body%>'
-              subject: '<%subject%>'
+              plain_content: <%body%>
+              subject: <%subject%>
             properties:
               active:
                 description: Indicates if the template version is active.
@@ -9493,11 +9638,11 @@ paths:
           examples:
             application/json:
               active: 1
-              html_content: '<%body%>'
+              html_content: <%body%>
               id: 5997fcf6-2b9f-484d-acd5-7e9a99f0dc1f
               name: version 1 name
-              plain_content: '<%body%>'
-              subject: '<%subject%>'
+              plain_content: <%body%>
+              subject: <%subject%>
               template_id: d51480ca-ca3f-465c-bc3e-ceb71d73c38d
               updated_at: '2014-03-19 18:56:33'
           schema:
@@ -9553,11 +9698,11 @@ paths:
           examples:
             application/json:
               active: 1
-              html_content: '<%body%>'
+              html_content: <%body%>
               id: 8aefe0ee-f12b-4575-b5b7-c97e21cb36f3
               name: example_version_name
-              plain_content: '<%body%>'
-              subject: '<%subject%>'
+              plain_content: <%body%>
+              subject: <%subject%>
               template_id: e3a61852-1acb-4b32-a1bc-b44b3814ab78
               updated_at: '2014-06-12 11:33:00'
           schema:
@@ -9897,7 +10042,7 @@ paths:
                 <p>Something something unsubscribe <% %> something something</p>
               landing: |
                 <p>subscribehere</p>
-              plain_content: 'Something something unsubscribe <% %> something something'
+              plain_content: Something something unsubscribe <% %> something something
               replace: thetag
               url: ''
           schema:
@@ -9952,7 +10097,7 @@ paths:
     get:
       consumes:
         - application/json
-      description: "Your user's account information includes the user's account type and reputation."
+      description: Your user's account information includes the user's account type and reputation.
       operationId: GET_user-account
       parameters: []
       produces:
@@ -9982,7 +10127,7 @@ paths:
             type: object
       security:
         - Authorization: []
-      summary: "Get a user's account information."
+      summary: Get a user's account information.
       tags:
         - Users API
     parameters: []
@@ -10019,37 +10164,37 @@ paths:
           schema:
             properties:
               address:
-                description: "The user's address."
+                description: The user's address.
                 type: string
               address2:
-                description: "The second line of the user's address."
+                description: The second line of the user's address.
                 type: string
               city:
-                description: "The user's city."
+                description: The user's city.
                 type: string
               company:
-                description: "The name of the user's company."
+                description: The name of the user's company.
                 type: string
               country:
-                description: "The user's country."
+                description: The user's country.
                 type: string
               first_name:
-                description: "The user's first name."
+                description: The user's first name.
                 type: string
               last_name:
-                description: "The user's last name."
+                description: The user's last name.
                 type: string
               phone:
-                description: "The user's phone number."
+                description: The user's phone number.
                 type: string
               state:
-                description: "The user's state."
+                description: The user's state.
                 type: string
               website:
-                description: "The user's website URL."
+                description: The user's website URL.
                 type: string
               zip:
-                description: "The user's zip code."
+                description: The user's zip code.
                 type: string
             required:
               - address
@@ -10070,7 +10215,7 @@ paths:
             type: object
       security:
         - Authorization: []
-      summary: "Get a user's profile"
+      summary: Get a user's profile
       tags:
         - Users API
     parameters: []
@@ -10095,7 +10240,7 @@ paths:
               city: Orange
               first_name: Example
               last_name: User
-        - description: "You can enter a subuser name as the value for this header, in order to update the subuser's profile."
+        - description: 'You can enter a subuser name as the value for this header, in order to update the subuser''s profile.'
           in: header
           name: on-behalf-of
           type: string
@@ -10129,7 +10274,7 @@ paths:
             $ref: '#/definitions/global:ErrorResponse'
       security:
         - Authorization: []
-      summary: "Update a user's profile"
+      summary: Update a user's profile
       tags:
         - Users API
   /user/scheduled_sends:
@@ -11110,7 +11255,7 @@ paths:
                 description: Specify whether to use a custom SPF or allow SendGrid to manage your SPF. This option is only available to domain whitelabels setup for manual security.
                 type: boolean
               default:
-                description: "Whether to use this whitelabel as the fallback if no domain whitelabels match the sender's domain."
+                description: Whether to use this whitelabel as the fallback if no domain whitelabels match the sender's domain.
                 type: boolean
               domain:
                 description: Domain being whitelabeled.
@@ -11659,7 +11804,7 @@ paths:
                 dkim2:
                   valid: true
                 mail_cname:
-                  reason: 'Expected your MX record to be "mx.sendgrid.net" but found "example.com".'
+                  reason: Expected your MX record to be "mx.sendgrid.net" but found "example.com".
                   valid: false
                 spf:
                   valid: true
@@ -12556,7 +12701,7 @@ paths:
               valid: true
               validation_results:
                 domain_cname:
-                  reason: 'Expected CNAME to match "sendgrid.net." but found "example.com.".'
+                  reason: Expected CNAME to match "sendgrid.net." but found "example.com.".
                   valid: false
                 owner_cname:
                   valid: true
@@ -12938,18 +13083,18 @@ definitions:
       categories:
         - summer line
       custom_unsubscribe_url: ''
-      html_content: '<html><head><title></title></head><body><p>Check out our summer line!</p></body></html>'
+      html_content: <html><head><title></title></head><body><p>Check out our summer line!</p></body></html>
       id: 986724
       ip_pool: marketing
       list_ids:
         - 110
         - 124
-      plain_content: 'Check out our summer line!'
+      plain_content: Check out our summer line!
       segment_ids:
         - 110
       sender_id: 124451
       status: Draft
-      subject: 'New Products for Summer!'
+      subject: New Products for Summer!
       suppression_group_id: 42
       title: May Newsletter
     properties:
@@ -12995,7 +13140,7 @@ definitions:
           - array
           - 'null'
       sender_id:
-        description: 'The ID of the "sender" identity that you have created. Your recipients will see this as the "from" on your marketing emails.'
+        description: The ID of the "sender" identity that you have created. Your recipients will see this as the "from" on your marketing emails.
         type:
           - 'null'
           - integer
@@ -13188,7 +13333,7 @@ definitions:
       - $ref: '#/definitions/contactdb_custom_field_with_id'
       - properties:
           value:
-            description: "The value of this recipient's custom field"
+            description: The value of this recipient's custom field
             type:
               - string
               - 'null'
@@ -13261,7 +13406,7 @@ definitions:
                 - number
                 - 'null'
             updated_at:
-              description: "The last update date for this recipient's record."
+              description: The last update date for this recipient's record.
               type: number
           required:
             - email
@@ -13466,7 +13611,7 @@ definitions:
         description: Recipient clicked on a link within the message. You need to enable Click Tracking for getting this type of event.
         type: boolean
       deferred:
-        description: "Recipient's email server temporarily rejected message."
+        description: Recipient's email server temporarily rejected message.
         type: boolean
       delivered:
         description: Message has been successfully delivered to the receiving server.
@@ -13493,7 +13638,7 @@ definitions:
         description: Recipient marked a message as spam.
         type: boolean
       unsubscribe:
-        description: "Recipient clicked on message's subscription management link. You need to enable Subscription Tracking for getting this type of event."
+        description: Recipient clicked on message's subscription management link. You need to enable Subscription Tracking for getting this type of event.
         type: boolean
       url:
         description: The URL that you want the event webhook to POST to.
@@ -13558,7 +13703,7 @@ definitions:
         description: Used to differentiate ads
         type: string
       utm_medium:
-        description: 'Name of the marketing medium (e.g. "Email").'
+        description: Name of the marketing medium (e.g. "Email").
         type: string
       utm_source:
         description: 'Name of the referrer source. '
@@ -13792,7 +13937,7 @@ definitions:
       batch_id: HkJ5yLYULb7Rj8GKSx7u025ouWVlMgAi
     properties:
       batch_id:
-        pattern: "^[a-zA-Z0-9\\-\\_]"
+        pattern: '^[a-zA-Z0-9\-\_]'
         type: string
     required:
       - batch_id
@@ -14121,7 +14266,7 @@ definitions:
     example:
       created: 1250337600
       email: example@example.com
-      reason: "550 5.1.1 The email account that you tried to reach does not exist. Please try double-checking the recipient's email address for typos or unnecessary spaces. Learn more at  https://support.google.com/mail/answer/6596 o186si2389584ioe.63 - gsmtp "
+      reason: '550 5.1.1 The email account that you tried to reach does not exist. Please try double-checking the recipient''s email address for typos or unnecessary spaces. Learn more at  https://support.google.com/mail/answer/6596 o186si2389584ioe.63 - gsmtp '
       status: 5.1.1
     properties:
       created:
@@ -14197,16 +14342,16 @@ definitions:
           - 1
         type: integer
       html_content:
-        description: 'The HTML content of the new version. Must include <%body%> tag. Maximum of 1048576 bytes allowed for plain content.'
+        description: The HTML content of the new version. Must include <%body%> tag. Maximum of 1048576 bytes allowed for plain content.
         type: string
       name:
         description: Name of the new transactional template version.
         type: string
       plain_content:
-        description: 'Text/plain content of the new transactional template version. Must include <%body%> tag. Maximum of 1048576 bytes allowed for plain content.'
+        description: Text/plain content of the new transactional template version. Must include <%body%> tag. Maximum of 1048576 bytes allowed for plain content.
         type: string
       subject:
-        description: 'Subject of the new transactional template version. Must include <%subject%> tag.'
+        description: Subject of the new transactional template version. Must include <%subject%> tag.
         type: string
       template_id:
         description: The name of the original transactional template.

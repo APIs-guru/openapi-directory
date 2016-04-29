@@ -223,7 +223,13 @@ paths:
           name: count
           type: integer
         - collectionFormat: multi
-          description: "A collection of labels for the matching time series, which are represented as:  \n- key==value: key equals the value \n- key=~value: key regex matches the value \n- key!=value: key does not equal the value \n- key!~value: key regex does not match the value  For example, to list all of the time series descriptors for the region us-central1, you could specify:\nlabel=cloud.googleapis.com%2Flocation=~us-central1.*"
+          description: |-
+            A collection of labels for the matching time series, which are represented as:  
+            - key==value: key equals the value 
+            - key=~value: key regex matches the value 
+            - key!=value: key does not equal the value 
+            - key!~value: key regex does not match the value  For example, to list all of the time series descriptors for the region us-central1, you could specify:
+            label=cloud.googleapis.com%2Flocation=~us-central1.*
           in: query
           items:
             type: string
@@ -237,11 +243,24 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: "Length of the time interval to query, which is an alternative way to declare the interval: (youngest - timespan, youngest]. The timespan and oldest parameters should not be used together. Units:  \n- s: second \n- m: minute \n- h: hour \n- d: day \n- w: week  Examples: 2s, 3m, 4w. Only one unit is allowed, for example: 2w3d is not allowed; you should use 17d instead.\n\nIf neither oldest nor timespan is specified, the default time interval will be (youngest - 4 hours, youngest]."
+        - description: |-
+            Length of the time interval to query, which is an alternative way to declare the interval: (youngest - timespan, youngest]. The timespan and oldest parameters should not be used together. Units:  
+            - s: second 
+            - m: minute 
+            - h: hour 
+            - d: day 
+            - w: week  Examples: 2s, 3m, 4w. Only one unit is allowed, for example: 2w3d is not allowed; you should use 17d instead.
+
+            If neither oldest nor timespan is specified, the default time interval will be (youngest - 4 hours, youngest].
           in: query
           name: timespan
           type: string
-        - description: "The sampling window. At most one data point will be returned for each window in the requested time interval. This parameter is only valid for non-cumulative metric types. Units:  \n- m: minute \n- h: hour \n- d: day \n- w: week  Examples: 3m, 4w. Only one unit is allowed, for example: 2w3d is not allowed; you should use 17d instead."
+        - description: |-
+            The sampling window. At most one data point will be returned for each window in the requested time interval. This parameter is only valid for non-cumulative metric types. Units:  
+            - m: minute 
+            - h: hour 
+            - d: day 
+            - w: week  Examples: 3m, 4w. Only one unit is allowed, for example: 2w3d is not allowed; you should use 17d instead.
           in: query
           name: window
           type: string
@@ -340,7 +359,13 @@ paths:
           name: count
           type: integer
         - collectionFormat: multi
-          description: "A collection of labels for the matching time series, which are represented as:  \n- key==value: key equals the value \n- key=~value: key regex matches the value \n- key!=value: key does not equal the value \n- key!~value: key regex does not match the value  For example, to list all of the time series descriptors for the region us-central1, you could specify:\nlabel=cloud.googleapis.com%2Flocation=~us-central1.*"
+          description: |-
+            A collection of labels for the matching time series, which are represented as:  
+            - key==value: key equals the value 
+            - key=~value: key regex matches the value 
+            - key!=value: key does not equal the value 
+            - key!~value: key regex does not match the value  For example, to list all of the time series descriptors for the region us-central1, you could specify:
+            label=cloud.googleapis.com%2Flocation=~us-central1.*
           in: query
           items:
             type: string
@@ -354,11 +379,24 @@ paths:
           in: query
           name: pageToken
           type: string
-        - description: "Length of the time interval to query, which is an alternative way to declare the interval: (youngest - timespan, youngest]. The timespan and oldest parameters should not be used together. Units:  \n- s: second \n- m: minute \n- h: hour \n- d: day \n- w: week  Examples: 2s, 3m, 4w. Only one unit is allowed, for example: 2w3d is not allowed; you should use 17d instead.\n\nIf neither oldest nor timespan is specified, the default time interval will be (youngest - 4 hours, youngest]."
+        - description: |-
+            Length of the time interval to query, which is an alternative way to declare the interval: (youngest - timespan, youngest]. The timespan and oldest parameters should not be used together. Units:  
+            - s: second 
+            - m: minute 
+            - h: hour 
+            - d: day 
+            - w: week  Examples: 2s, 3m, 4w. Only one unit is allowed, for example: 2w3d is not allowed; you should use 17d instead.
+
+            If neither oldest nor timespan is specified, the default time interval will be (youngest - 4 hours, youngest].
           in: query
           name: timespan
           type: string
-        - description: "The sampling window. At most one data point will be returned for each window in the requested time interval. This parameter is only valid for non-cumulative metric types. Units:  \n- m: minute \n- h: hour \n- d: day \n- w: week  Examples: 3m, 4w. Only one unit is allowed, for example: 2w3d is not allowed; you should use 17d instead."
+        - description: |-
+            The sampling window. At most one data point will be returned for each window in the requested time interval. This parameter is only valid for non-cumulative metric types. Units:  
+            - m: minute 
+            - h: hour 
+            - d: day 
+            - w: week  Examples: 3m, 4w. Only one unit is allowed, for example: 2w3d is not allowed; you should use 17d instead.
           in: query
           name: window
           type: string
@@ -521,14 +559,14 @@ definitions:
         description: The method of collecting data for the metric. See Metric types.
         type: string
       valueType:
-        description: "The data type of of individual points in the metric's time series. See Metric value types."
+        description: The data type of of individual points in the metric's time series. See Metric value types.
         type: string
     type: object
   Point:
     description: 'Point is a single point in a time series. It consists of a start time, an end time, and a value.'
     properties:
       boolValue:
-        description: 'The value of this data point. Either "true" or "false".'
+        description: The value of this data point. Either "true" or "false".
         type: boolean
       distributionValue:
         $ref: '#/definitions/PointDistribution'
@@ -538,7 +576,7 @@ definitions:
         format: double
         type: number
       end:
-        description: "The interval [start, end] is the time period to which the point's value applies. For gauge metrics, whose values are instantaneous measurements, this interval should be empty (start should equal end). For cumulative metrics (of which deltas and rates are special cases), the interval should be non-empty. Both start and end are RFC 3339 strings."
+        description: 'The interval [start, end] is the time period to which the point''s value applies. For gauge metrics, whose values are instantaneous measurements, this interval should be empty (start should equal end). For cumulative metrics (of which deltas and rates are special cases), the interval should be non-empty. Both start and end are RFC 3339 strings.'
         format: date-time
         type: string
       int64Value:
@@ -546,7 +584,7 @@ definitions:
         format: int64
         type: string
       start:
-        description: "The interval [start, end] is the time period to which the point's value applies. For gauge metrics, whose values are instantaneous measurements, this interval should be empty (start should equal end). For cumulative metrics (of which deltas and rates are special cases), the interval should be non-empty. Both start and end are RFC 3339 strings."
+        description: 'The interval [start, end] is the time period to which the point''s value applies. For gauge metrics, whose values are instantaneous measurements, this interval should be empty (start should equal end). For cumulative metrics (of which deltas and rates are special cases), the interval should be non-empty. Both start and end are RFC 3339 strings.'
         format: date-time
         type: string
       stringValue:
@@ -569,7 +607,7 @@ definitions:
         description: The underflow bucket.
     type: object
   PointDistributionBucket:
-    description: "The histogram's bucket. Buckets that form the histogram of a distribution value. If the upper bound of a bucket, say U1, does not equal the lower bound of the next bucket, say L2, this means that there is no event in [U1, L2)."
+    description: 'The histogram''s bucket. Buckets that form the histogram of a distribution value. If the upper bound of a bucket, say U1, does not equal the lower bound of the next bucket, say L2, this means that there is no event in [U1, L2).'
     properties:
       count:
         description: The number of events whose values are in the interval defined by this bucket.
@@ -625,9 +663,9 @@ definitions:
     properties:
       labels:
         additionalProperties:
-          description: "The label's name."
+          description: The label's name.
           type: string
-        description: "The label's name."
+        description: The label's name.
         type: object
       metric:
         description: The name of the metric.
@@ -639,10 +677,10 @@ definitions:
   TimeseriesDescriptorLabel:
     properties:
       key:
-        description: "The label's name."
+        description: The label's name.
         type: string
       value:
-        description: "The label's value."
+        description: The label's value.
         type: string
     type: object
   TimeseriesPoint:
@@ -660,9 +698,9 @@ definitions:
     properties:
       commonLabels:
         additionalProperties:
-          description: "The label's name."
+          description: The label's name.
           type: string
-        description: "The label's name."
+        description: The label's name.
         type: object
       timeseries:
         description: Provide time series specific labels and the data points for each time series. The labels in timeseries and the common_labels should form a complete list of labels that required by the metric.

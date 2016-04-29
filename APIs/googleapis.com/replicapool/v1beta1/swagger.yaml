@@ -568,7 +568,7 @@ definitions:
           $ref: '#/definitions/EnvVariable'
         type: array
       timeoutMilliSeconds:
-        description: "If an action's commands on a particular replica do not finish in the specified timeoutMilliSeconds, the replica is considered to be in a FAILING state. No efforts are made to stop any processes that were spawned or created as the result of running the action's commands. The default is the max allowed value, 1 hour (i.e. 3600000 milliseconds)."
+        description: 'If an action''s commands on a particular replica do not finish in the specified timeoutMilliSeconds, the replica is considered to be in a FAILING state. No efforts are made to stop any processes that were spawned or created as the result of running the action''s commands. The default is the max allowed value, 1 hour (i.e. 3600000 milliseconds).'
         format: int32
         type: integer
     type: object
@@ -702,7 +702,7 @@ definitions:
         type: boolean
       initializeParams:
         $ref: '#/definitions/NewDiskInitializeParams'
-        description: 'Create the new disk using these parameters. The name of the disk will be <instance_name>-<four_random_charactersgt;.'
+        description: Create the new disk using these parameters. The name of the disk will be <instance_name>-<four_random_charactersgt;.
     type: object
   NewDiskInitializeParams:
     description: Initialization parameters for creating a new disk.
@@ -712,7 +712,7 @@ definitions:
         format: int64
         type: string
       diskType:
-        description: "Name of the disk type resource describing which disk type to use to create the disk. For example 'pd-ssd' or 'pd-standard'. Default is 'pd-standard'"
+        description: Name of the disk type resource describing which disk type to use to create the disk. For example 'pd-ssd' or 'pd-standard'. Default is 'pd-standard'
         type: string
       sourceImage:
         description: |-
@@ -756,7 +756,7 @@ definitions:
         description: 'The name of the replica pool. Must follow the regex [a-z]([-a-z0-9]*[a-z0-9])? and be 1-28 characters long.'
         type: string
       numReplicas:
-        description: 'Deprecated! Use initial_num_replicas instead.'
+        description: Deprecated! Use initial_num_replicas instead.
         format: int32
         type: integer
       resourceViews:
@@ -779,13 +779,13 @@ definitions:
         $ref: '#/definitions/Template'
         description: 'The template to use when creating replicas in this pool. This template is used during initial instance creation of the pool, when growing the pool in size, or when a replica restarts.'
       type:
-        description: 'Deprecated! Do not set.'
+        description: Deprecated! Do not set.
         type: string
     type: object
   PoolsDeleteRequest:
     properties:
       abandonInstances:
-        description: "If there are instances you would like to keep, you can specify them here. These instances won't be deleted, but the associated replica objects will be removed."
+        description: 'If there are instances you would like to keep, you can specify them here. These instances won''t be deleted, but the associated replica objects will be removed.'
         items:
           type: string
         type: array

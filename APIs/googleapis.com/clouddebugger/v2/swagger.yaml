@@ -143,7 +143,7 @@ paths:
         - controller
   '/v2/controller/debuggees/{debuggeeId}/breakpoints':
     get:
-      description: "Returns the list of all active breakpoints for the debuggee. The breakpoint specification (location, condition, and expression fields) is semantically immutable, although the field values may change. For example, an agent may update the location line number to reflect the actual line where the breakpoint was set, but this doesn't change the breakpoint semantics. This means that an agent does not need to check if a breakpoint has changed when it encounters the same breakpoint on a successive call. Moreover, an agent should remember the breakpoints that are completed until the controller removes them from the active list to avoid setting those breakpoints again."
+      description: 'Returns the list of all active breakpoints for the debuggee. The breakpoint specification (location, condition, and expression fields) is semantically immutable, although the field values may change. For example, an agent may update the location line number to reflect the actual line where the breakpoint was set, but this doesn''t change the breakpoint semantics. This means that an agent does not need to check if a breakpoint has changed when it encounters the same breakpoint on a successive call. Moreover, an agent should remember the breakpoints that are completed until the controller removes them from the active list to avoid setting those breakpoints again.'
       operationId: clouddebugger.controller.debuggees.breakpoints.list
       parameters:
         - description: Identifies the debuggee.
@@ -560,7 +560,7 @@ definitions:
     description: A CloudWorkspaceId is a unique identifier for a cloud workspace. A cloud workspace is a place associated with a repo where modified files can be stored before they are committed.
     properties:
       name:
-        description: "The unique name of the workspace within the repo. This is the name chosen by the client in the Source API's CreateWorkspace method."
+        description: The unique name of the workspace within the repo. This is the name chosen by the client in the Source API's CreateWorkspace method.
         type: string
       repoId:
         $ref: '#/definitions/RepoId'
@@ -638,7 +638,7 @@ definitions:
     description: Represents a message with parameters.
     properties:
       format:
-        description: "Format template for the message. The `format` uses placeholders `$0`, `$1`, etc. to reference parameters. `$$` can be used to denote the `$` character. Examples: * `Failed to load '$0' which helps debug $1 the first time it is loaded. Again, $0 is very important.` * `Please pay $$10 to use $0 instead of $1.`"
+        description: 'Format template for the message. The `format` uses placeholders `$0`, `$1`, etc. to reference parameters. `$$` can be used to denote the `$` character. Examples: * `Failed to load ''$0'' which helps debug $1 the first time it is loaded. Again, $0 is very important.` * `Please pay $$10 to use $0 instead of $1.`'
         type: string
       parameters:
         description: Optional parameters to be embedded into the message.
@@ -831,7 +831,7 @@ definitions:
     properties:
       breakpoint:
         $ref: '#/definitions/Breakpoint'
-        description: "Updated breakpoint information. The field 'id' must be set."
+        description: Updated breakpoint information. The field 'id' must be set.
     type: object
   UpdateActiveBreakpointResponse:
     description: Response for updating an active breakpoint. The message is defined to allow future extensions.

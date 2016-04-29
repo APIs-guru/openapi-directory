@@ -437,7 +437,7 @@ definitions:
         description: Message from publisher.
         type: string
       source:
-        description: 'Equals "publisher" for notification from Rubicon.'
+        description: Equals "publisher" for notification from Rubicon.
         type: string
       timestamp:
         description: 'Time when the note was added, e.g. "2015-12-16T17:25:35.000-08:00".'
@@ -1119,7 +1119,7 @@ definitions:
         description: Entity name.
         type: string
       errors:
-        description: "Reasons why the entity can't be uploaded."
+        description: Reasons why the entity can't be uploaded.
         items:
           type: string
         type: array
@@ -1194,7 +1194,7 @@ definitions:
     description: Represents the status of upload.
     properties:
       errors:
-        description: "Reasons why upload can't be completed."
+        description: Reasons why upload can't be completed.
         items:
           type: string
         type: array

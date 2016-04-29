@@ -18,7 +18,7 @@ externalDocs:
   url: 'https://developer.gavagai.se/docs'
 securityDefinitions:
   apiKey:
-    description: "Your api key required to use this api. Login to have it pre-filled or sign up if you don't have an account."
+    description: Your api key required to use this api. Login to have it pre-filled or sign up if you don't have an account.
     in: query
     name: apiKey
     type: apiKey
@@ -40,7 +40,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: "<p>Given a set of texts, return the top 10 keywords.</p> <p>'Keywords' in this context means single words or short phrases of words (like 'ebola outbreak') that are significant in the collection. The top 10 keywords will be displayed. Some words that carry little significance are filtered out before compiling the result list. These include the most common words in the language of the texts.</p> <p>Language is specified for the whole submitted batch of texts. If you have texts in more than one language you should make separate calls for each language.</p> <p>Max upload size, per request: 5&nbsp;MB.</p>"
+      description: '<p>Given a set of texts, return the top 10 keywords.</p> <p>''Keywords'' in this context means single words or short phrases of words (like ''ebola outbreak'') that are significant in the collection. The top 10 keywords will be displayed. Some words that carry little significance are filtered out before compiling the result list. These include the most common words in the language of the texts.</p> <p>Language is specified for the whole submitted batch of texts. If you have texts in more than one language you should make separate calls for each language.</p> <p>Max upload size, per request: 5&nbsp;MB.</p>'
       operationId: keywords
       parameters:
         - description: The JSON payload should contain an array of texts from which the keywords will be created. The model description contains the details of the required structure.
@@ -63,12 +63,12 @@ paths:
           schema:
             $ref: '#/definitions/keywordsResponse'
         '400':
-          description: "Can't parse input JSON body."
+          description: Can't parse input JSON body.
         '401':
           description: The apiKey is wrong or missing.
         '405':
           description: Faulty request method. I.e. use POST for this method.
-      summary: "Extract 'keywords' from a set of texts."
+      summary: Extract 'keywords' from a set of texts.
       tags:
         - keywords
   '/lexicon/{language}/{word}':
@@ -128,7 +128,7 @@ paths:
           schema:
             $ref: '#/definitions/StoriesResponse'
         '400':
-          description: "Can't parse input JSON body."
+          description: Can't parse input JSON body.
         '401':
           description: The apiKey is wrong or missing.
         '405':
@@ -163,7 +163,7 @@ paths:
           schema:
             $ref: '#/definitions/TonalityResponse'
         '400':
-          description: "Can't parse input JSON body."
+          description: Can't parse input JSON body.
         '401':
           description: The apiKey is wrong or missing
         '405':
@@ -200,7 +200,7 @@ paths:
           schema:
             $ref: '#/definitions/TopicsResponse'
         '400':
-          description: "Can't parse input JSON body."
+          description: Can't parse input JSON body.
         '401':
           description: The apiKey is wrong or missing.
         '405':

@@ -4,7 +4,7 @@ schemes:
 host: api.statsocial.com
 basePath: /api
 info:
-  description: "API Reference: <br><br> The StatSocial API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and to use HTTP response codes to indicate API errors. We use built-in HTTP features, like HTTP authentication and HTTP verbs, which can be understood by off-the-shelf HTTP clients, and we support cross-origin resource sharing to allow you to interact securely with our API from a client-side web application (remember that you should never expose your secret API key in any public website's client-side code). JSON will be returned in all responses from the API, including errors (though if you're using API bindings, we will convert the response to the appropriate language-specific object).<br><br>Contact help@statsocial.com to obtain a test API key"
+  description: 'API Reference: <br><br> The StatSocial API is organized around REST. Our API is designed to have predictable, resource-oriented URLs and to use HTTP response codes to indicate API errors. We use built-in HTTP features, like HTTP authentication and HTTP verbs, which can be understood by off-the-shelf HTTP clients, and we support cross-origin resource sharing to allow you to interact securely with our API from a client-side web application (remember that you should never expose your secret API key in any public website''s client-side code). JSON will be returned in all responses from the API, including errors (though if you''re using API bindings, we will convert the response to the appropriate language-specific object).<br><br>Contact help@statsocial.com to obtain a test API key'
   title: StatSocial Platform
   version: 1.0.0.
   x-origin:
@@ -40,7 +40,7 @@ paths:
           schema:
             $ref: '#/definitions/Application_Status'
         '400':
-          description: "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the ''action'' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}'
           schema:
             $ref: '#/definitions/400_Error'
         '401':
@@ -52,7 +52,7 @@ paths:
           schema:
             $ref: '#/definitions/403_Error'
         '500':
-          description: "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Error getting application''s credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}'
           schema:
             $ref: '#/definitions/500_Error'
       summary: Used to understand API usage
@@ -67,7 +67,7 @@ paths:
           name: report_hash
           required: true
           type: string
-        - description: "Default value will be 'world'"
+        - description: Default value will be 'world'
           in: query
           name: baseline
           required: false
@@ -89,7 +89,7 @@ paths:
           schema:
             $ref: '#/definitions/Report_Success'
         '400':
-          description: "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}<br>{success: 0, msg: Invalid or non-existent baseline supplied, error_code_msg: INVALID_BASELINE}<br>{success: 0, msg: Invalid report_date parameter value. Must be an integer, error_code_msg: INVALID_REPORT_DATE}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the ''action'' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}<br>{success: 0, msg: Invalid or non-existent baseline supplied, error_code_msg: INVALID_BASELINE}<br>{success: 0, msg: Invalid report_date parameter value. Must be an integer, error_code_msg: INVALID_REPORT_DATE}'
           schema:
             $ref: '#/definitions/400_Error'
         '401':
@@ -105,7 +105,7 @@ paths:
           schema:
             $ref: '#/definitions/404_Error'
         '500':
-          description: "Possible reasons include:<br>{success: 0, msg: Report has no data, error_code_msg: API_ERROR_EMPTY_REPORT}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Report has no data, error_code_msg: API_ERROR_EMPTY_REPORT}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Error getting application''s credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}'
           schema:
             $ref: '#/definitions/500_Error'
       summary: Obtain report output
@@ -120,7 +120,7 @@ paths:
           name: report_hash
           required: true
           type: string
-        - description: "Default value will be 'world'"
+        - description: Default value will be 'world'
           in: query
           name: baseline
           required: false
@@ -142,7 +142,7 @@ paths:
           schema:
             $ref: '#/definitions/Report_Success'
         '400':
-          description: "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}<br>{success: 0, msg: Invalid or non-existent baseline supplied, error_code_msg: INVALID_BASELINE}<br>{success: 0, msg: Invalid report_date parameter value. Must be an integer, error_code_msg: INVALID_REPORT_DATE}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the ''action'' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}<br>{success: 0, msg: Invalid or non-existent baseline supplied, error_code_msg: INVALID_BASELINE}<br>{success: 0, msg: Invalid report_date parameter value. Must be an integer, error_code_msg: INVALID_REPORT_DATE}'
           schema:
             $ref: '#/definitions/400_Error'
         '401':
@@ -158,7 +158,7 @@ paths:
           schema:
             $ref: '#/definitions/404_Error'
         '500':
-          description: "Possible reasons include:<br>{success: 0, msg: Report has no data, error_code_msg: API_ERROR_EMPTY_REPORT}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Report has no data, error_code_msg: API_ERROR_EMPTY_REPORT}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Error getting application''s credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}'
           schema:
             $ref: '#/definitions/500_Error'
       summary: Obtain report output
@@ -174,7 +174,7 @@ paths:
           name: upload_hash
           required: true
           type: string
-        - description: "Filtering options to be used when creating a filtered report. The options must be in JSON form, example: {'gender':['male'],'ages':['18-24'],'countries':['usa']}"
+        - description: 'Filtering options to be used when creating a filtered report. The options must be in JSON form, example: {''gender'':[''male''],''ages'':[''18-24''],''countries'':[''usa'']}'
           in: query
           name: filter
           required: false
@@ -185,7 +185,7 @@ paths:
           schema:
             $ref: '#/definitions/Custom_Create'
         '400':
-          description: "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the ''action'' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}'
           schema:
             $ref: '#/definitions/400_Error'
         '401':
@@ -201,7 +201,7 @@ paths:
           schema:
             $ref: '#/definitions/404_Error'
         '500':
-          description: "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Report has no data, error_code_msg: API_ERROR_EMPTY_REPORT}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Error getting application''s credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Report has no data, error_code_msg: API_ERROR_EMPTY_REPORT}'
           schema:
             $ref: '#/definitions/500_Error'
       summary: Step 3 of executing custom report
@@ -216,7 +216,7 @@ paths:
           name: upload_hash
           required: true
           type: string
-        - description: "Filtering options to be used when creating a filtered report. The options must be in JSON form, example: {'gender':['male'],'ages':['18-24'],'countries':['usa']}"
+        - description: 'Filtering options to be used when creating a filtered report. The options must be in JSON form, example: {''gender'':[''male''],''ages'':[''18-24''],''countries'':[''usa'']}'
           in: query
           name: filter
           required: false
@@ -227,7 +227,7 @@ paths:
           schema:
             $ref: '#/definitions/Custom_Create'
         '400':
-          description: "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the ''action'' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}'
           schema:
             $ref: '#/definitions/400_Error'
         '401':
@@ -243,7 +243,7 @@ paths:
           schema:
             $ref: '#/definitions/404_Error'
         '500':
-          description: "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Report has no data, error_code_msg: API_ERROR_EMPTY_REPORT}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Error getting application''s credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Report has no data, error_code_msg: API_ERROR_EMPTY_REPORT}'
           schema:
             $ref: '#/definitions/500_Error'
       summary: Step 3 of executing custom report
@@ -265,7 +265,7 @@ paths:
           schema:
             $ref: '#/definitions/Custom_Generate'
         '400':
-          description: "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the ''action'' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}'
           schema:
             $ref: '#/definitions/400_Error'
         '401':
@@ -277,7 +277,7 @@ paths:
           schema:
             $ref: '#/definitions/403_Error'
         '500':
-          description: "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Error getting application''s credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}'
           schema:
             $ref: '#/definitions/500_Error'
       summary: Step 1 of executing custom report
@@ -298,7 +298,7 @@ paths:
           schema:
             $ref: '#/definitions/Custom_Generate'
         '400':
-          description: "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the ''action'' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}'
           schema:
             $ref: '#/definitions/400_Error'
         '401':
@@ -310,7 +310,7 @@ paths:
           schema:
             $ref: '#/definitions/403_Error'
         '500':
-          description: "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Error getting application''s credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}'
           schema:
             $ref: '#/definitions/500_Error'
       summary: Step 1 of executing custom report
@@ -338,7 +338,7 @@ paths:
           schema:
             $ref: '#/definitions/Custom_Insert'
         '400':
-          description: "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}<br>{success: 0, msg: IDS array is too long or in an incorrect format, error_code_msg: API_INVALID_IDS}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the ''action'' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}<br>{success: 0, msg: IDS array is too long or in an incorrect format, error_code_msg: API_INVALID_IDS}'
           schema:
             $ref: '#/definitions/400_Error'
         '401':
@@ -354,7 +354,7 @@ paths:
           schema:
             $ref: '#/definitions/404_Error'
         '500':
-          description: "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Error trying to insert relations to custom, error_code_msg: API_ERROR_INSERTING_TO_CUSTOM}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Error getting application''s credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Error trying to insert relations to custom, error_code_msg: API_ERROR_INSERTING_TO_CUSTOM}'
           schema:
             $ref: '#/definitions/500_Error'
       summary: Step 2 of executing custom report
@@ -381,7 +381,7 @@ paths:
           schema:
             $ref: '#/definitions/Custom_Insert'
         '400':
-          description: "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}<br>{success: 0, msg: IDS array is too long or in an incorrect format, error_code_msg: API_INVALID_IDS}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the ''action'' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}<br>{success: 0, msg: IDS array is too long or in an incorrect format, error_code_msg: API_INVALID_IDS}'
           schema:
             $ref: '#/definitions/400_Error'
         '401':
@@ -397,7 +397,7 @@ paths:
           schema:
             $ref: '#/definitions/404_Error'
         '500':
-          description: "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Error trying to insert relations to custom, error_code_msg: API_ERROR_INSERTING_TO_CUSTOM}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Error getting application''s credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Error trying to insert relations to custom, error_code_msg: API_ERROR_INSERTING_TO_CUSTOM}'
           schema:
             $ref: '#/definitions/500_Error'
       summary: Step 2 of executing custom report
@@ -419,7 +419,7 @@ paths:
           schema:
             $ref: '#/definitions/Report_Dates'
         '400':
-          description: "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the ''action'' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}'
           schema:
             $ref: '#/definitions/400_Error'
         '401':
@@ -435,7 +435,7 @@ paths:
           schema:
             $ref: '#/definitions/404_Error'
         '500':
-          description: "Possible reasons include:<br>{success: 0, msg: Report has no data, error_code_msg: API_ERROR_EMPTY_REPORT}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Report has no data, error_code_msg: API_ERROR_EMPTY_REPORT}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Error getting application''s credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}'
           schema:
             $ref: '#/definitions/500_Error'
       summary: Get report dates available for a specific report
@@ -456,7 +456,7 @@ paths:
           schema:
             $ref: '#/definitions/Report_Dates'
         '400':
-          description: "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the ''action'' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}'
           schema:
             $ref: '#/definitions/400_Error'
         '401':
@@ -472,7 +472,7 @@ paths:
           schema:
             $ref: '#/definitions/404_Error'
         '500':
-          description: "Possible reasons include:<br>{success: 0, msg: Report has no data, error_code_msg: API_ERROR_EMPTY_REPORT}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Report has no data, error_code_msg: API_ERROR_EMPTY_REPORT}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Error getting application''s credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}'
           schema:
             $ref: '#/definitions/500_Error'
       summary: Get report dates available for a specific report
@@ -494,7 +494,7 @@ paths:
           schema:
             $ref: '#/definitions/Report_Status'
         '400':
-          description: "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the ''action'' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}'
           schema:
             $ref: '#/definitions/400_Error'
         '401':
@@ -506,7 +506,7 @@ paths:
           schema:
             $ref: '#/definitions/403_Error'
         '500':
-          description: "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Report has no data, error_code_msg: API_ERROR_EMPTY_REPORT}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Error getting application''s credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Report has no data, error_code_msg: API_ERROR_EMPTY_REPORT}'
           schema:
             $ref: '#/definitions/500_Error'
       summary: Get list of generated reports
@@ -527,7 +527,7 @@ paths:
           schema:
             $ref: '#/definitions/Report_Status'
         '400':
-          description: "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the ''action'' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}'
           schema:
             $ref: '#/definitions/400_Error'
         '401':
@@ -539,7 +539,7 @@ paths:
           schema:
             $ref: '#/definitions/403_Error'
         '500':
-          description: "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Report has no data, error_code_msg: API_ERROR_EMPTY_REPORT}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Error getting application''s credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Report has no data, error_code_msg: API_ERROR_EMPTY_REPORT}'
           schema:
             $ref: '#/definitions/500_Error'
       summary: Get list of generated reports
@@ -565,12 +565,12 @@ paths:
           name: end_date
           required: true
           type: integer
-        - description: "If you are tracking a single term, then the keyword itself is suffice otherwise, tracking multiple terms must be in JSON form, example '[{\"operator\":\"\",\"word\":\"http://google.com\"},{\"operator\":\"or\",\"word\":\"#test\"},{\"operator\":\"and\",\"word\":\"test2\"}]' Which results in filtering tweets containing 'http://google.com' OR '#test' AND 'test2'. (NOTE) Make sure to URL encode the terms value for multiple terms."
+        - description: 'If you are tracking a single term, then the keyword itself is suffice otherwise, tracking multiple terms must be in JSON form, example ''[{"operator":"","word":"http://google.com"},{"operator":"or","word":"#test"},{"operator":"and","word":"test2"}]'' Which results in filtering tweets containing ''http://google.com'' OR ''#test'' AND ''test2''. (NOTE) Make sure to URL encode the terms value for multiple terms.'
           in: query
           name: terms
           required: true
           type: string
-        - description: "Filtering options to be used when creating a filtered report. The options must be in JSON form, example: {'gender':['male'],'ages':['18-24'],'countries':['usa']}"
+        - description: 'Filtering options to be used when creating a filtered report. The options must be in JSON form, example: {''gender'':[''male''],''ages'':[''18-24''],''countries'':[''usa'']}'
           in: query
           name: filter
           required: false
@@ -581,7 +581,7 @@ paths:
           schema:
             $ref: '#/definitions/Create_Tweet'
         '400':
-          description: "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the ''action'' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}'
           schema:
             $ref: '#/definitions/400_Error'
         '401':
@@ -593,7 +593,7 @@ paths:
           schema:
             $ref: '#/definitions/403_Error'
         '500':
-          description: "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Error getting application''s credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}'
           schema:
             $ref: '#/definitions/500_Error'
       summary: Used to create tweet reports
@@ -618,12 +618,12 @@ paths:
           name: end_date
           required: true
           type: integer
-        - description: "If you are tracking a single term, then the keyword itself is suffice otherwise, tracking multiple terms must be in JSON form, example '[{\"operator\":\"\",\"word\":\"http://google.com\"},{\"operator\":\"or\",\"word\":\"#test\"},{\"operator\":\"and\",\"word\":\"test2\"}]' Which results in filtering tweets containing 'http://google.com' OR '#test' AND 'test2'. (NOTE) Make sure to URL encode the terms value for multiple terms."
+        - description: 'If you are tracking a single term, then the keyword itself is suffice otherwise, tracking multiple terms must be in JSON form, example ''[{"operator":"","word":"http://google.com"},{"operator":"or","word":"#test"},{"operator":"and","word":"test2"}]'' Which results in filtering tweets containing ''http://google.com'' OR ''#test'' AND ''test2''. (NOTE) Make sure to URL encode the terms value for multiple terms.'
           in: query
           name: terms
           required: true
           type: string
-        - description: "Filtering options to be used when creating a filtered report. The options must be in JSON form, example: {'gender':['male'],'ages':['18-24'],'countries':['usa']}"
+        - description: 'Filtering options to be used when creating a filtered report. The options must be in JSON form, example: {''gender'':[''male''],''ages'':[''18-24''],''countries'':[''usa'']}'
           in: query
           name: filter
           required: false
@@ -634,7 +634,7 @@ paths:
           schema:
             $ref: '#/definitions/Create_Tweet'
         '400':
-          description: "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the ''action'' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}'
           schema:
             $ref: '#/definitions/400_Error'
         '401':
@@ -646,7 +646,7 @@ paths:
           schema:
             $ref: '#/definitions/403_Error'
         '500':
-          description: "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Error getting application''s credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}'
           schema:
             $ref: '#/definitions/500_Error'
       summary: Used to create tweet reports
@@ -667,7 +667,7 @@ paths:
           name: twitter_handle
           required: false
           type: string
-        - description: "Filtering options to be used when creating a filtered report. The options must be in JSON form, example: {'gender':['male'],'ages':['18-24'],'countries':['usa']}"
+        - description: 'Filtering options to be used when creating a filtered report. The options must be in JSON form, example: {''gender'':[''male''],''ages'':[''18-24''],''countries'':[''usa'']}'
           in: query
           name: filter
           required: false
@@ -678,7 +678,7 @@ paths:
           schema:
             $ref: '#/definitions/Create_Twitter'
         '400':
-          description: "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}<br>{success: 0, msg: The twitter account provided has no audience, error_code_msg: API_TWITTER_ERROR_INSUFFICIENT_COUNT}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the ''action'' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}<br>{success: 0, msg: The twitter account provided has no audience, error_code_msg: API_TWITTER_ERROR_INSUFFICIENT_COUNT}'
           schema:
             $ref: '#/definitions/400_Error'
         '401':
@@ -690,7 +690,7 @@ paths:
           schema:
             $ref: '#/definitions/403_Error'
         '500':
-          description: "Possible reasons include:<br>{success: 0, msg: Error requesting twitter info, error_code_msg: API_TWITTER_ERROR}<br>{success: 0, msg: Error inserting new twitter report, error_code_msg: API_ERROR_CREATING_TWITTER_ACCOUNT}<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Error requesting twitter info, error_code_msg: API_TWITTER_ERROR}<br>{success: 0, msg: Error inserting new twitter report, error_code_msg: API_ERROR_CREATING_TWITTER_ACCOUNT}<br>{success: 0, msg: Error getting application''s credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}'
           schema:
             $ref: '#/definitions/500_Error'
       summary: Used to create twitter follower report
@@ -710,7 +710,7 @@ paths:
           name: twitter_handle
           required: false
           type: string
-        - description: "Filtering options to be used when creating a filtered report. The options must be in JSON form, example: {'gender':['male'],'ages':['18-24'],'countries':['usa']}"
+        - description: 'Filtering options to be used when creating a filtered report. The options must be in JSON form, example: {''gender'':[''male''],''ages'':[''18-24''],''countries'':[''usa'']}'
           in: query
           name: filter
           required: false
@@ -721,7 +721,7 @@ paths:
           schema:
             $ref: '#/definitions/Create_Twitter'
         '400':
-          description: "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}<br>{success: 0, msg: The twitter account provided has no audience, error_code_msg: API_TWITTER_ERROR_INSUFFICIENT_COUNT}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the ''action'' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}<br>{success: 0, msg: The twitter account provided has no audience, error_code_msg: API_TWITTER_ERROR_INSUFFICIENT_COUNT}'
           schema:
             $ref: '#/definitions/400_Error'
         '401':
@@ -733,7 +733,7 @@ paths:
           schema:
             $ref: '#/definitions/403_Error'
         '500':
-          description: "Possible reasons include:<br>{success: 0, msg: Error requesting twitter info, error_code_msg: API_TWITTER_ERROR}<br>{success: 0, msg: Error inserting new twitter report, error_code_msg: API_ERROR_CREATING_TWITTER_ACCOUNT}<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}"
+          description: 'Possible reasons include:<br>{success: 0, msg: Error requesting twitter info, error_code_msg: API_TWITTER_ERROR}<br>{success: 0, msg: Error inserting new twitter report, error_code_msg: API_ERROR_CREATING_TWITTER_ACCOUNT}<br>{success: 0, msg: Error getting application''s credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}'
           schema:
             $ref: '#/definitions/500_Error'
       summary: Used to create twitter follower report

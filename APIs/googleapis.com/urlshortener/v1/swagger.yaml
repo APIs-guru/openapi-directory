@@ -228,7 +228,7 @@ definitions:
         $ref: '#/definitions/AnalyticsSummary'
         description: A summary of the click analytics for the short and long URL. Might not be present if not requested or currently unavailable.
       created:
-        description: "Time the short URL was created; ISO 8601 representation using the yyyy-MM-dd'T'HH:mm:ss.SSSZZ format, e.g. \"2010-10-14T19:01:24.944+00:00\"."
+        description: 'Time the short URL was created; ISO 8601 representation using the yyyy-MM-dd''T''HH:mm:ss.SSSZZ format, e.g. "2010-10-14T19:01:24.944+00:00".'
         type: string
       id:
         description: 'Short URL, e.g. "http://goo.gl/l6MS".'
@@ -252,7 +252,7 @@ definitions:
           $ref: '#/definitions/Url'
         type: array
       itemsPerPage:
-        description: 'Number of items returned with each full "page" of results. Note that the last page could have fewer items than the "itemsPerPage" value.'
+        description: Number of items returned with each full "page" of results. Note that the last page could have fewer items than the "itemsPerPage" value.
         format: int32
         type: integer
       kind:

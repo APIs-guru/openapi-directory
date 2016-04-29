@@ -129,7 +129,7 @@ paths:
     get:
       description: Lists all channels in a Slack team.
       parameters:
-        - description: "Don't return archived channels."
+        - description: Don't return archived channels.
           in: query
           name: exclude_archived
           type: string
@@ -431,7 +431,7 @@ paths:
     get:
       description: Lists private groups that the calling user has access to.
       parameters:
-        - description: "Don't return archived channels."
+        - description: Don't return archived channels.
           in: query
           name: exclude_archived
           type: string

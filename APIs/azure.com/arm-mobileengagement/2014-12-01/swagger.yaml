@@ -179,7 +179,7 @@ paths:
           name: $top
           required: false
           type: integer
-        - description: "Filter can be used to restrict the results to campaigns matching a specific state. The syntax is `$filter=state eq 'draft'`. Valid state values are: draft, scheduled, in-progress, and finished. Only the eq operator and the state property are supported."
+        - description: 'Filter can be used to restrict the results to campaigns matching a specific state. The syntax is `$filter=state eq ''draft''`. Valid state values are: draft, scheduled, in-progress, and finished. Only the eq operator and the state property are supported.'
           in: query
           name: $filter
           required: false
@@ -756,7 +756,7 @@ paths:
           name: $select
           required: false
           type: string
-        - description: "Filter can be used to reduce the number of results. Filter is a boolean expression that can look like the following examples: * `$filter=deviceId gt 'abcdef0123456789abcdef0123456789'` * `$filter=lastModified le 1447284263690L` * `$filter=(deviceId ge 'abcdef0123456789abcdef0123456789') and (deviceId lt 'bacdef0123456789abcdef0123456789') and (lastModified gt 1447284263690L)` The first example is used automatically for paging when returning the `nextLink` property. The filter expression is a combination of checks on some properties that can be compared to their value. The available operators are: * `gt`  : greater than * `ge`  : greater than or equals * `lt`  : less than * `le`  : less than or equals * `and` : to add multiple checks (all checks must pass), optional parentheses can be used. The properties that can be used in the expression are the following: * `deviceId {operator} '{deviceIdValue}'` : a lexicographical comparison is made on the deviceId value, use single quotes for the value. * `lastModified {operator} {number}L` : returns only meta properties or appInfo properties whose last value modification timestamp compared to the specified value is matching (value is milliseconds since January 1st, 1970 UTC). Please note the `L` character after the number of milliseconds, its required when the number of milliseconds exceeds `2^31 - 1` (which is always the case for recent timestamps). Using `lastModified` excludes all devices from the output that have no property matching the timestamp criteria, like `$select`. Please note that the internal value of `lastModified` timestamp for a given property is never part of the results."
+        - description: 'Filter can be used to reduce the number of results. Filter is a boolean expression that can look like the following examples: * `$filter=deviceId gt ''abcdef0123456789abcdef0123456789''` * `$filter=lastModified le 1447284263690L` * `$filter=(deviceId ge ''abcdef0123456789abcdef0123456789'') and (deviceId lt ''bacdef0123456789abcdef0123456789'') and (lastModified gt 1447284263690L)` The first example is used automatically for paging when returning the `nextLink` property. The filter expression is a combination of checks on some properties that can be compared to their value. The available operators are: * `gt`  : greater than * `ge`  : greater than or equals * `lt`  : less than * `le`  : less than or equals * `and` : to add multiple checks (all checks must pass), optional parentheses can be used. The properties that can be used in the expression are the following: * `deviceId {operator} ''{deviceIdValue}''` : a lexicographical comparison is made on the deviceId value, use single quotes for the value. * `lastModified {operator} {number}L` : returns only meta properties or appInfo properties whose last value modification timestamp compared to the specified value is matching (value is milliseconds since January 1st, 1970 UTC). Please note the `L` character after the number of milliseconds, its required when the number of milliseconds exceeds `2^31 - 1` (which is always the case for recent timestamps). Using `lastModified` excludes all devices from the output that have no property matching the timestamp criteria, like `$select`. Please note that the internal value of `lastModified` timestamp for a given property is never part of the results.'
           in: query
           name: $filter
           required: false
@@ -1591,7 +1591,7 @@ definitions:
     properties:
       data:
         $ref: '#/definitions/Campaign'
-        description: "Alternative campaign's content to use instead of the referenced campaign. All campaign's properties can be overridden except for the following: `name`, `manualPush`, `audience`, `startTime` and `timezone`. `endTime` can be overridden while keeping original `timezone` parameter. The effect is to change the client side expiration of the received campaign for the specific devices. If your campaign is a *poll*, the provided data should contain the same number of questions and choices that the one you created with the create command. Please note that all the push messages created using this parameter will expire after 4 weeks at maximum (`endTime` property of the campaign will be used if lower than 4 weeks in the future)."
+        description: 'Alternative campaign''s content to use instead of the referenced campaign. All campaign''s properties can be overridden except for the following: `name`, `manualPush`, `audience`, `startTime` and `timezone`. `endTime` can be overridden while keeping original `timezone` parameter. The effect is to change the client side expiration of the received campaign for the specific devices. If your campaign is a *poll*, the provided data should contain the same number of questions and choices that the one you created with the create command. Please note that all the push messages created using this parameter will expire after 4 weeks at maximum (`endTime` property of the campaign will be used if lower than 4 weeks in the future).'
       deviceIds:
         description: |
           Device identifiers to push as a JSON array of strings. Note that if you want to push the same campaign several times to the same device, you need to make several API calls.
@@ -1626,7 +1626,7 @@ definitions:
         description: Campaign identifier.
         type: integer
       state:
-        description: "State of the campaign, or 'queued' when testing a campaign."
+        description: 'State of the campaign, or ''queued'' when testing a campaign.'
         enum:
           - draft
           - scheduled
@@ -1640,7 +1640,7 @@ definitions:
   CampaignState:
     properties:
       state:
-        description: "State of the campaign, or 'queued' when testing a campaign."
+        description: 'State of the campaign, or ''queued'' when testing a campaign.'
         enum:
           - draft
           - scheduled
@@ -2041,7 +2041,7 @@ definitions:
             description: An integer value representing the threshold to apply on this filter.
             type: integer
         type: object
-    description: "Send only to users who haven't used the app in the last {threshold} days."
+    description: 'Send only to users who haven''t used the app in the last {threshold} days.'
     x-ms-discriminator-value: engage-idle-users
   EngageNewUsersFilter:
     allOf:
@@ -2464,7 +2464,7 @@ definitions:
       - $ref: '#/definitions/Criterion'
       - properties:
           name:
-            description: 'Screen size using the following format WIDTH**x**HEIGHT.'
+            description: Screen size using the following format WIDTH**x**HEIGHT.
             type: string
         type: object
     description: Used to target devices based on the screen resolution of their device.
@@ -2504,7 +2504,7 @@ definitions:
             description: The name of the custom tag.
             type: string
           value:
-            description: 'A custom string to match for tag value (? and * characters can be used to perform wildcard matching).'
+            description: A custom string to match for tag value (? and * characters can be used to perform wildcard matching).
             type: string
         type: object
     description: Target devices based on a string tag value.

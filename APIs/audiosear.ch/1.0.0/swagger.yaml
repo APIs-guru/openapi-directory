@@ -7,7 +7,7 @@ info:
   contact:
     email: info@audiosear.ch
     name: Audiosear.ch
-  description: "The Audiosear.ch API requires OAuth, which you can manage at <a href='/oauth/applications'>OAuth Applications</a>.<br/>API SDK clients available in <a href='https://github.com/popuparchive/audiosearch-client-python' target='_blank'>Python</a>, <a href='https://github.com/popuparchive/audiosearch-client-ruby' target='_blank'>Ruby</a>, <a href='https://github.com/popuparchive/audiosearch-client-php' target='_blank'>PHP</a>, <a href='https://github.com/popuparchive/audiosearch-client-node' target='_blank'>Node</a>, and <a href='https://github.com/popuparchive/AudiosearchClientSwift' target='_blank'>Swift</a>.<br/>Read the <a href='https://github.com/popuparchive/audiosearch-cookbook/wiki'>API Cookbook</a> for easy copy-and-paste recipes."
+  description: 'The Audiosear.ch API requires OAuth, which you can manage at <a href=''/oauth/applications''>OAuth Applications</a>.<br/>API SDK clients available in <a href=''https://github.com/popuparchive/audiosearch-client-python'' target=''_blank''>Python</a>, <a href=''https://github.com/popuparchive/audiosearch-client-ruby'' target=''_blank''>Ruby</a>, <a href=''https://github.com/popuparchive/audiosearch-client-php'' target=''_blank''>PHP</a>, <a href=''https://github.com/popuparchive/audiosearch-client-node'' target=''_blank''>Node</a>, and <a href=''https://github.com/popuparchive/AudiosearchClientSwift'' target=''_blank''>Swift</a>.<br/>Read the <a href=''https://github.com/popuparchive/audiosearch-cookbook/wiki''>API Cookbook</a> for easy copy-and-paste recipes.'
   termsOfService: 'https://www.auidosear.ch/terms_of_use'
   title: Audiosear.ch
   version: 1.0.0
@@ -49,7 +49,7 @@ paths:
           required: false
           type: integer
         - default: us
-          description: "The country for which to get charts data. US: 'us', Great Britain: 'gb', Ireland: 'ie', New Zealand: 'nz', South Africa: 'za'"
+          description: 'The country for which to get charts data. US: ''us'', Great Britain: ''gb'', Ireland: ''ie'', New Zealand: ''nz'', South Africa: ''za'''
           in: query
           name: country
           type: string
@@ -91,13 +91,13 @@ paths:
           name: id
           required: true
           type: integer
-        - description: 'Number of episodes to be returned. Must be paired with <b>from</b>.'
+        - description: Number of episodes to be returned. Must be paired with <b>from</b>.
           format: int64
           in: query
           name: size
           required: false
           type: integer
-        - description: 'Offset of result from which to start (zero-based). Must be paired with <b>size</b>.'
+        - description: Offset of result from which to start (zero-based). Must be paired with <b>size</b>.
           format: int64
           in: query
           name: from
@@ -165,7 +165,7 @@ paths:
           name: query
           required: true
           type: string
-        - description: "Limit a search by any field value. This example uses <b>network</b> but any field name could be used. (Note: the filter uses a 'term' match, so it returns a result if the field contains the term. It is most reliably used with integer values, such as <b>filters[show_id]=15</b>) Examples: <b>filters[physical_location]=popuparchive</b> or <b>filters[network]=NPR</b> or <b>filters[categories.name]=Talk%20Show</b>."
+        - description: 'Limit a search by any field value. This example uses <b>network</b> but any field name could be used. (Note: the filter uses a ''term'' match, so it returns a result if the field contains the term. It is most reliably used with integer values, such as <b>filters[show_id]=15</b>) Examples: <b>filters[physical_location]=popuparchive</b> or <b>filters[network]=NPR</b> or <b>filters[categories.name]=Talk%20Show</b>.'
           in: query
           name: 'filters[network]'
           required: false
@@ -180,17 +180,17 @@ paths:
           name: 'fitlers[with_transcript]'
           required: false
           type: string
-        - description: 'Sort results by any field value. The default is by the relevancy score (<b>_score</b>). Must be paired with <b>sort_order</b>.'
+        - description: Sort results by any field value. The default is by the relevancy score (<b>_score</b>). Must be paired with <b>sort_order</b>.
           in: query
           name: sort_by
           required: false
           type: string
-        - description: 'Sort direction. Must be either <b>asc</b> or <b>desc</b>. Must be paired with <b>sort_by</b>.'
+        - description: Sort direction. Must be either <b>asc</b> or <b>desc</b>. Must be paired with <b>sort_by</b>.
           in: query
           name: sort_order
           required: false
           type: string
-        - description: 'Shortcut for specifying sort_by and sort_order in a single value. E.g. <b>date_created desc</b>.'
+        - description: Shortcut for specifying sort_by and sort_order in a single value. E.g. <b>date_created desc</b>.
           in: query
           name: s
           required: false
@@ -200,12 +200,12 @@ paths:
           name: size
           required: false
           type: string
-        - description: 'Offset when doing manual pagination. Must be paired with <b>size</b>.'
+        - description: Offset when doing manual pagination. Must be paired with <b>size</b>.
           in: query
           name: from
           required: false
           type: string
-        - description: 'The page number of results. Default is <b>1</b>.'
+        - description: The page number of results. Default is <b>1</b>.
           in: query
           name: page
           required: false
@@ -238,17 +238,17 @@ paths:
           name: 'filters[shows.id]'
           required: false
           type: string
-        - description: 'Sort results by any field value. The default is by the relevancy score (<b>_score</b>). Must be paired with <b>sort_order</b>.'
+        - description: Sort results by any field value. The default is by the relevancy score (<b>_score</b>). Must be paired with <b>sort_order</b>.
           in: query
           name: sort_by
           required: false
           type: string
-        - description: 'Sort direction. Must be either <b>asc</b> or <b>desc</b>. Must be paired with <b>sort_by</b>.'
+        - description: Sort direction. Must be either <b>asc</b> or <b>desc</b>. Must be paired with <b>sort_by</b>.
           in: query
           name: sort_order
           required: false
           type: string
-        - description: 'Shortcut for specifying sort_by and sort_order in a single value. E.g. <b>name desc</b>.'
+        - description: Shortcut for specifying sort_by and sort_order in a single value. E.g. <b>name desc</b>.
           in: query
           name: s
           required: false
@@ -258,12 +258,12 @@ paths:
           name: size
           required: false
           type: string
-        - description: 'Offset when doing manual pagination. Must be paired with <b>size</b>.'
+        - description: Offset when doing manual pagination. Must be paired with <b>size</b>.
           in: query
           name: from
           required: false
           type: string
-        - description: 'The page number of results. Default is <b>1</b>.'
+        - description: The page number of results. Default is <b>1</b>.
           in: query
           name: page
           required: false
@@ -286,22 +286,22 @@ paths:
           name: query
           required: true
           type: string
-        - description: "Limit a search by any field value. This example uses <b>network</b> but any field name could be used. (Note: the filter uses a 'term' match, so it returns a result if the field contains the term. It is most reliably used with integer values.) E.g. <b>filters[network]=NPR</b> or <b>filters[categories.name]=Talk%20Show</b>."
+        - description: 'Limit a search by any field value. This example uses <b>network</b> but any field name could be used. (Note: the filter uses a ''term'' match, so it returns a result if the field contains the term. It is most reliably used with integer values.) E.g. <b>filters[network]=NPR</b> or <b>filters[categories.name]=Talk%20Show</b>.'
           in: query
           name: 'filters[network]'
           required: false
           type: string
-        - description: 'Sort results by any field value. The default is by the relevancy score (<b>_score</b>). Must be paired with <b>sort_order</b>.'
+        - description: Sort results by any field value. The default is by the relevancy score (<b>_score</b>). Must be paired with <b>sort_order</b>.
           in: query
           name: sort_by
           required: false
           type: string
-        - description: 'Sort direction. Must be either <b>asc</b> or <b>desc</b>. Must be paired with <b>sort_by</b>.'
+        - description: Sort direction. Must be either <b>asc</b> or <b>desc</b>. Must be paired with <b>sort_by</b>.
           in: query
           name: sort_order
           required: false
           type: string
-        - description: 'Shortcut for specifying sort_by and sort_order in a single value. E.g. <b>date_created desc</b>.'
+        - description: Shortcut for specifying sort_by and sort_order in a single value. E.g. <b>date_created desc</b>.
           in: query
           name: s
           required: false
@@ -311,12 +311,12 @@ paths:
           name: size
           required: false
           type: string
-        - description: 'Offset when doing manual pagination. Must be paired with <b>size</b>.'
+        - description: Offset when doing manual pagination. Must be paired with <b>size</b>.
           in: query
           name: from
           required: false
           type: string
-        - description: 'The page number of results. Default is <b>1</b>.'
+        - description: The page number of results. Default is <b>1</b>.
           in: query
           name: page
           required: false
@@ -543,7 +543,7 @@ definitions:
         description: Audio file name
         type: string
       id:
-        description: "Unique identifier for the show's audio file"
+        description: Unique identifier for the show's audio file
         type: integer
       url:
         description: Absolute paths to audio files
@@ -883,7 +883,7 @@ definitions:
         description: ID for the Person
         type: integer
       name:
-        description: "Person's name"
+        description: Person's name
         type: string
       shows:
         items:
@@ -894,7 +894,7 @@ definitions:
           name: show
           wrapped: true
       slug:
-        description: "URI-safe Person's name"
+        description: URI-safe Person's name
         type: string
       urls:
         properties:

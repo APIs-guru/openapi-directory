@@ -83,7 +83,7 @@ paths:
       description: Retrieves a list of activities for a specific customer and application.
       operationId: reports.activities.list
       parameters:
-        - description: "Represents the profile id or the user email for which the data should be filtered. When 'all' is specified as the userKey, it returns usageReports for all users."
+        - description: 'Represents the profile id or the user email for which the data should be filtered. When ''all'' is specified as the userKey, it returns usageReports for all users.'
           in: path
           name: userKey
           required: true
@@ -158,7 +158,7 @@ paths:
       description: Push changes to activities
       operationId: reports.activities.watch
       parameters:
-        - description: "Represents the profile id or the user email for which the data should be filtered. When 'all' is specified as the userKey, it returns usageReports for all users."
+        - description: 'Represents the profile id or the user email for which the data should be filtered. When ''all'' is specified as the userKey, it returns usageReports for all users.'
           in: path
           name: userKey
           required: true
@@ -510,7 +510,7 @@ definitions:
             readOnly: true
             type: string
           userEmail:
-            description: "user's email."
+            description: user's email.
             readOnly: true
             type: string
         readOnly: true

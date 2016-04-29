@@ -405,7 +405,7 @@ paths:
       - $ref: '#/parameters/userIp'
   /reports:
     get:
-      description: 'Generate an Ad Exchange report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.'
+      description: Generate an Ad Exchange report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
       operationId: adexchangeseller.reports.generate
       parameters:
         - description: 'Start of the date range to report on in "YYYY-MM-DD" format, inclusive.'
@@ -432,7 +432,7 @@ paths:
             type: string
           name: filter
           type: array
-        - description: 'Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.'
+        - description: Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.
           in: query
           name: locale
           type: string
@@ -527,7 +527,7 @@ paths:
           name: savedReportId
           required: true
           type: string
-        - description: 'Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.'
+        - description: Optional locale to use for translating report output to a local language. Defaults to "en_US" if not specified.
           in: query
           name: locale
           type: string
@@ -577,7 +577,7 @@ definitions:
         description: 'Kind of resource this is, in this case adexchangeseller#adClient.'
         type: string
       productCode:
-        description: "This ad client's product code, which corresponds to the PRODUCT_CODE report dimension."
+        description: 'This ad client''s product code, which corresponds to the PRODUCT_CODE report dimension.'
         type: string
       supportsReporting:
         description: Whether this ad client supports being reported on.
@@ -598,7 +598,7 @@ definitions:
         description: 'Kind of list this is, in this case adexchangeseller#adClients.'
         type: string
       nextPageToken:
-        description: "Continuation token used to page through ad clients. To retrieve the next page of results, set the next request's \"pageToken\" value to this."
+        description: 'Continuation token used to page through ad clients. To retrieve the next page of results, set the next request''s "pageToken" value to this.'
         type: string
     type: object
   AdUnit:
@@ -641,7 +641,7 @@ definitions:
         description: 'Kind of list this is, in this case adexchangeseller#adUnits.'
         type: string
       nextPageToken:
-        description: "Continuation token used to page through ad units. To retrieve the next page of results, set the next request's \"pageToken\" value to this."
+        description: 'Continuation token used to page through ad units. To retrieve the next page of results, set the next request''s "pageToken" value to this.'
         type: string
     type: object
   CustomChannel:
@@ -691,7 +691,7 @@ definitions:
         description: 'Kind of list this is, in this case adexchangeseller#customChannels.'
         type: string
       nextPageToken:
-        description: "Continuation token used to page through custom channels. To retrieve the next page of results, set the next request's \"pageToken\" value to this."
+        description: 'Continuation token used to page through custom channels. To retrieve the next page of results, set the next request''s "pageToken" value to this.'
         type: string
     type: object
   Report:
@@ -752,7 +752,7 @@ definitions:
         description: 'Kind of resource this is, in this case adexchangeseller#savedReport.'
         type: string
       name:
-        description: "This saved report's name."
+        description: This saved report's name.
         type: string
     type: object
   SavedReports:
@@ -770,7 +770,7 @@ definitions:
         description: 'Kind of list this is, in this case adexchangeseller#savedReports.'
         type: string
       nextPageToken:
-        description: "Continuation token used to page through saved reports. To retrieve the next page of results, set the next request's \"pageToken\" value to this."
+        description: 'Continuation token used to page through saved reports. To retrieve the next page of results, set the next request''s "pageToken" value to this.'
         type: string
     type: object
   UrlChannel:
@@ -801,6 +801,6 @@ definitions:
         description: 'Kind of list this is, in this case adexchangeseller#urlChannels.'
         type: string
       nextPageToken:
-        description: "Continuation token used to page through URL channels. To retrieve the next page of results, set the next request's \"pageToken\" value to this."
+        description: 'Continuation token used to page through URL channels. To retrieve the next page of results, set the next request''s "pageToken" value to this.'
         type: string
     type: object

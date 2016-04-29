@@ -495,7 +495,11 @@ definitions:
     description: This is a JSON template for an achievement configuration resource.
     properties:
       achievementType:
-        description: "The type of the achievement.\nPossible values are:  \n- \"STANDARD\" - Achievement is either locked or unlocked. \n- \"INCREMENTAL\" - Achievement is incremental."
+        description: |-
+          The type of the achievement.
+          Possible values are:  
+          - "STANDARD" - Achievement is either locked or unlocked. 
+          - "INCREMENTAL" - Achievement is incremental.
         type: string
       draft:
         $ref: '#/definitions/AchievementConfigurationDetail'
@@ -504,7 +508,12 @@ definitions:
         description: The ID of the achievement.
         type: string
       initialState:
-        description: "The initial state of the achievement.\nPossible values are:  \n- \"HIDDEN\" - Achievement is hidden. \n- \"REVEALED\" - Achievement is revealed. \n- \"UNLOCKED\" - Achievement is unlocked."
+        description: |-
+          The initial state of the achievement.
+          Possible values are:  
+          - "HIDDEN" - Achievement is hidden. 
+          - "REVEALED" - Achievement is revealed. 
+          - "UNLOCKED" - Achievement is unlocked.
         type: string
       kind:
         default: 'gamesConfiguration#achievementConfiguration'
@@ -570,7 +579,7 @@ definitions:
         description: 'When the language requires special treatment of "small" numbers (as with 2, 3, and 4 in Czech; or numbers ending 2, 3, or 4 but not 12, 13, or 14 in Polish).'
       many:
         $ref: '#/definitions/LocalizedStringBundle'
-        description: 'When the language requires special treatment of "large" numbers (as with numbers ending 11-99 in Maltese).'
+        description: When the language requires special treatment of "large" numbers (as with numbers ending 11-99 in Maltese).
       one:
         $ref: '#/definitions/LocalizedStringBundle'
         description: 'When the language requires special treatment of numbers like one (as with the number 1 in English and most other languages; in Russian, any number ending in 1 but not ending in 11 is in this class).'
@@ -595,7 +604,12 @@ definitions:
         format: int32
         type: integer
       numberFormatType:
-        description: "The formatting for the number.\nPossible values are:  \n- \"NUMERIC\" - Numbers are formatted to have no digits or a fixed number of digits after the decimal point according to locale. An optional custom unit can be added.\n- \"TIME_DURATION\" - Numbers are formatted to hours, minutes and seconds.\n- \"CURRENCY\" - Numbers are formatted to currency according to locale."
+        description: |-
+          The formatting for the number.
+          Possible values are:  
+          - "NUMERIC" - Numbers are formatted to have no digits or a fixed number of digits after the decimal point according to locale. An optional custom unit can be added.
+          - "TIME_DURATION" - Numbers are formatted to hours, minutes and seconds.
+          - "CURRENCY" - Numbers are formatted to currency according to locale.
         type: string
       suffix:
         $ref: '#/definitions/GamesNumberAffixConfiguration'
@@ -643,7 +657,11 @@ definitions:
         format: int64
         type: string
       scoreOrder:
-        description: "The type of the leaderboard.\nPossible values are:  \n- \"LARGER_IS_BETTER\" - Larger scores posted are ranked higher. \n- \"SMALLER_IS_BETTER\" - Smaller scores posted are ranked higher."
+        description: |-
+          The type of the leaderboard.
+          Possible values are:  
+          - "LARGER_IS_BETTER" - Larger scores posted are ranked higher. 
+          - "SMALLER_IS_BETTER" - Smaller scores posted are ranked higher.
         type: string
       token:
         description: The token for this resource.

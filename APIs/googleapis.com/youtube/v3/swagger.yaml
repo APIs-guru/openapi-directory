@@ -106,7 +106,7 @@ tags:
 paths:
   /activities:
     get:
-      description: "Returns a list of channel activity events that match the request criteria. For example, you can retrieve events associated with a particular channel, events associated with the user's subscriptions and Google+ friends, or the YouTube home page feed, which is customized for each user."
+      description: 'Returns a list of channel activity events that match the request criteria. For example, you can retrieve events associated with a particular channel, events associated with the user''s subscriptions and Google+ friends, or the YouTube home page feed, which is customized for each user.'
       operationId: youtube.activities.list
       parameters:
         - description: |-
@@ -117,11 +117,11 @@ paths:
           name: part
           required: true
           type: string
-        - description: "The channelId parameter specifies a unique YouTube channel ID. The API will then return a list of that channel's activities."
+        - description: The channelId parameter specifies a unique YouTube channel ID. The API will then return a list of that channel's activities.
           in: query
           name: channelId
           type: string
-        - description: "Set this parameter's value to true to retrieve the activity feed that displays on the YouTube home page for the currently authenticated user."
+        - description: Set this parameter's value to true to retrieve the activity feed that displays on the YouTube home page for the currently authenticated user.
           in: query
           name: home
           type: boolean
@@ -132,7 +132,7 @@ paths:
           minimum: 0
           name: maxResults
           type: integer
-        - description: "Set this parameter's value to true to retrieve a feed of the authenticated user's activities."
+        - description: Set this parameter's value to true to retrieve a feed of the authenticated user's activities.
           in: query
           name: mine
           type: boolean
@@ -148,7 +148,7 @@ paths:
           in: query
           name: publishedBefore
           type: string
-        - description: "The regionCode parameter instructs the API to return results for the specified country. The parameter value is an ISO 3166-1 alpha-2 country code. YouTube uses this value when the authorized user's previous activity on YouTube does not provide enough information to generate the activity feed."
+        - description: The regionCode parameter instructs the API to return results for the specified country. The parameter value is an ISO 3166-1 alpha-2 country code. YouTube uses this value when the authorized user's previous activity on YouTube does not provide enough information to generate the activity feed.
           in: query
           name: regionCode
           type: string
@@ -332,10 +332,10 @@ paths:
       consumes:
         - application/octet-stream
         - text/xml
-      description: "Updates a caption track. When updating a caption track, you can change the track's draft status, upload a new caption file for the track, or both."
+      description: 'Updates a caption track. When updating a caption track, you can change the track''s draft status, upload a new caption file for the track, or both.'
       operationId: youtube.captions.update
       parameters:
-        - description: "The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include. Set the property value to snippet if you are updating the track's draft status. Otherwise, set the property value to id."
+        - description: 'The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include. Set the property value to snippet if you are updating the track''s draft status. Otherwise, set the property value to id.'
           in: query
           name: part
           required: true
@@ -515,7 +515,7 @@ paths:
           name: part
           required: true
           type: string
-        - description: "The channelId parameter specifies a YouTube channel ID. The API will only return that channel's channelSections."
+        - description: The channelId parameter specifies a YouTube channel ID. The API will only return that channel's channelSections.
           in: query
           name: channelId
           type: string
@@ -527,7 +527,7 @@ paths:
           in: query
           name: id
           type: string
-        - description: "Set this parameter's value to true to retrieve a feed of the authenticated user's channelSections."
+        - description: Set this parameter's value to true to retrieve a feed of the authenticated user's channelSections.
           in: query
           name: mine
           type: boolean
@@ -563,7 +563,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Adds a channelSection for the authenticated user's channel."
+      description: Adds a channelSection for the authenticated user's channel.
       operationId: youtube.channelSections.insert
       parameters:
         - description: |-
@@ -670,7 +670,7 @@ paths:
           in: query
           name: hl
           type: string
-        - description: "The id parameter specifies a comma-separated list of the YouTube channel ID(s) for the resource(s) that are being retrieved. In a channel resource, the id property specifies the channel's YouTube channel ID."
+        - description: 'The id parameter specifies a comma-separated list of the YouTube channel ID(s) for the resource(s) that are being retrieved. In a channel resource, the id property specifies the channel''s YouTube channel ID.'
           in: query
           name: id
           type: string
@@ -688,11 +688,11 @@ paths:
           minimum: 0
           name: maxResults
           type: integer
-        - description: "Set this parameter's value to true to instruct the API to only return channels owned by the authenticated user."
+        - description: Set this parameter's value to true to instruct the API to only return channels owned by the authenticated user.
           in: query
           name: mine
           type: boolean
-        - description: "Use the subscriptions.list method and its mySubscribers parameter to retrieve a list of subscribers to the authenticated user's channel."
+        - description: Use the subscriptions.list method and its mySubscribers parameter to retrieve a list of subscribers to the authenticated user's channel.
           in: query
           name: mySubscribers
           type: boolean
@@ -734,7 +734,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     put:
-      description: "Updates a channel's metadata. Note that this method currently only supports updates to the channel resource's brandingSettings and invideoPromotion objects and their child properties."
+      description: Updates a channel's metadata. Note that this method currently only supports updates to the channel resource's brandingSettings and invideoPromotion objects and their child properties.
       operationId: youtube.channels.update
       parameters:
         - description: |-
@@ -779,7 +779,7 @@ paths:
           name: part
           required: true
           type: string
-        - description: "The allThreadsRelatedToChannelId parameter instructs the API to return all comment threads associated with the specified channel. The response can include comments about the channel or about the channel's videos."
+        - description: The allThreadsRelatedToChannelId parameter instructs the API to return all comment threads associated with the specified channel. The response can include comments about the channel or about the channel's videos.
           in: query
           name: allThreadsRelatedToChannelId
           type: string
@@ -813,7 +813,10 @@ paths:
           in: query
           name: moderationStatus
           type: string
-        - description: "The order parameter specifies the order in which the API response should list comment threads. Valid values are: \n- time - Comment threads are ordered by time. This is the default behavior.\n- relevance - Comment threads are ordered by relevance.Note: This parameter is not supported for use in conjunction with the id parameter."
+        - description: |-
+            The order parameter specifies the order in which the API response should list comment threads. Valid values are: 
+            - time - Comment threads are ordered by time. This is the default behavior.
+            - relevance - Comment threads are ordered by relevance.Note: This parameter is not supported for use in conjunction with the id parameter.
           enum:
             - relevance
             - time
@@ -835,7 +838,7 @@ paths:
           name: searchTerms
           type: string
         - default: html
-          description: "Set this parameter's value to html or plainText to instruct the API to return the comments left by users in html formatted or in plain text."
+          description: Set this parameter's value to html or plainText to instruct the API to return the comments left by users in html formatted or in plain text.
           enum:
             - html
             - plainText
@@ -937,7 +940,7 @@ paths:
           name: part
           required: true
           type: string
-        - description: "The id parameter specifies a comma-separated list of comment IDs for the resources that are being retrieved. In a comment resource, the id property specifies the comment's ID."
+        - description: 'The id parameter specifies a comma-separated list of comment IDs for the resources that are being retrieved. In a comment resource, the id property specifies the comment''s ID.'
           in: query
           name: id
           type: string
@@ -1047,7 +1050,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Expresses the caller's opinion that one or more comments should be flagged as spam."
+      description: Expresses the caller's opinion that one or more comments should be flagged as spam.
       operationId: youtube.comments.markAsSpam
       parameters:
         - description: The id parameter specifies a comma-separated list of IDs of comments that the caller believes should be classified as spam.
@@ -1344,7 +1347,7 @@ paths:
           in: query
           name: broadcastType
           type: string
-        - description: "The id parameter specifies a comma-separated list of YouTube broadcast IDs that identify the broadcasts being retrieved. In a liveBroadcast resource, the id property specifies the broadcast's ID."
+        - description: 'The id parameter specifies a comma-separated list of YouTube broadcast IDs that identify the broadcasts being retrieved. In a liveBroadcast resource, the id property specifies the broadcast''s ID.'
           in: query
           name: id
           type: string
@@ -1446,7 +1449,7 @@ paths:
       tags:
         - liveBroadcasts
     put:
-      description: "Updates a broadcast. For example, you could modify the broadcast settings defined in the liveBroadcast resource's contentDetails object."
+      description: 'Updates a broadcast. For example, you could modify the broadcast settings defined in the liveBroadcast resource''s contentDetails object.'
       operationId: youtube.liveBroadcasts.update
       parameters:
         - description: |-
@@ -1624,7 +1627,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Changes the status of a YouTube live broadcast and initiates any processes associated with the new status. For example, when you transition a broadcast's status to testing, YouTube starts to transmit video to that broadcast's monitor stream. Before calling this method, you should confirm that the value of the status.streamStatus property for the stream bound to your broadcast is active."
+      description: 'Changes the status of a YouTube live broadcast and initiates any processes associated with the new status. For example, when you transition a broadcast''s status to testing, YouTube starts to transmit video to that broadcast''s monitor stream. Before calling this method, you should confirm that the value of the status.streamStatus property for the stream bound to your broadcast is active.'
       operationId: youtube.liveBroadcasts.transition
       parameters:
         - description: 'The broadcastStatus parameter identifies the state to which the broadcast is changing. Note that to transition a broadcast to either the testing or live state, the status.streamStatus must be active for the stream that the broadcast is bound to.'
@@ -1969,7 +1972,7 @@ paths:
           name: part
           required: true
           type: string
-        - description: "The id parameter specifies a comma-separated list of YouTube stream IDs that identify the streams being retrieved. In a liveStream resource, the id property specifies the stream's ID."
+        - description: 'The id parameter specifies a comma-separated list of YouTube stream IDs that identify the streams being retrieved. In a liveStream resource, the id property specifies the stream''s ID.'
           in: query
           name: id
           type: string
@@ -2121,7 +2124,7 @@ paths:
       description: Deletes a playlist item.
       operationId: youtube.playlistItems.delete
       parameters:
-        - description: "The id parameter specifies the YouTube playlist item ID for the playlist item that is being deleted. In a playlistItem resource, the id property specifies the playlist item's ID."
+        - description: 'The id parameter specifies the YouTube playlist item ID for the playlist item that is being deleted. In a playlistItem resource, the id property specifies the playlist item''s ID.'
           in: query
           name: id
           required: true
@@ -2239,7 +2242,7 @@ paths:
       tags:
         - playlistItems
     put:
-      description: "Modifies a playlist item. For example, you could update the item's position in the playlist."
+      description: 'Modifies a playlist item. For example, you could update the item''s position in the playlist.'
       operationId: youtube.playlistItems.update
       parameters:
         - description: |-
@@ -2273,7 +2276,7 @@ paths:
       description: Deletes a playlist.
       operationId: youtube.playlists.delete
       parameters:
-        - description: "The id parameter specifies the YouTube playlist ID for the playlist that is being deleted. In a playlist resource, the id property specifies the playlist's ID."
+        - description: 'The id parameter specifies the YouTube playlist ID for the playlist that is being deleted. In a playlist resource, the id property specifies the playlist''s ID.'
           in: query
           name: id
           required: true
@@ -2309,7 +2312,7 @@ paths:
           name: part
           required: true
           type: string
-        - description: "This value indicates that the API should only return the specified channel's playlists."
+        - description: This value indicates that the API should only return the specified channel's playlists.
           in: query
           name: channelId
           type: string
@@ -2317,7 +2320,7 @@ paths:
           in: query
           name: hl
           type: string
-        - description: "The id parameter specifies a comma-separated list of the YouTube playlist ID(s) for the resource(s) that are being retrieved. In a playlist resource, the id property specifies the playlist's YouTube playlist ID."
+        - description: 'The id parameter specifies a comma-separated list of the YouTube playlist ID(s) for the resource(s) that are being retrieved. In a playlist resource, the id property specifies the playlist''s YouTube playlist ID.'
           in: query
           name: id
           type: string
@@ -2328,7 +2331,7 @@ paths:
           minimum: 0
           name: maxResults
           type: integer
-        - description: "Set this parameter's value to true to instruct the API to only return playlists owned by the authenticated user."
+        - description: Set this parameter's value to true to instruct the API to only return playlists owned by the authenticated user.
           in: query
           name: mine
           type: boolean
@@ -2420,7 +2423,7 @@ paths:
       tags:
         - playlists
     put:
-      description: "Modifies a playlist. For example, you could change a playlist's title, description, or privacy status."
+      description: 'Modifies a playlist. For example, you could change a playlist''s title, description, or privacy status.'
       operationId: youtube.playlists.update
       parameters:
         - description: |-
@@ -2477,7 +2480,7 @@ paths:
           in: query
           name: channelType
           type: string
-        - description: "The eventType parameter restricts a search to broadcast events. If you specify a value for this parameter, you must also set the type parameter's value to video."
+        - description: 'The eventType parameter restricts a search to broadcast events. If you specify a value for this parameter, you must also set the type parameter''s value to video.'
           enum:
             - completed
             - live
@@ -2492,11 +2495,11 @@ paths:
           in: query
           name: forContentOwner
           type: boolean
-        - description: "The forDeveloper parameter restricts the search to only retrieve videos uploaded via the developer's application or website. The API server uses the request's authorization credentials to identify the developer. Therefore, a developer can restrict results to videos uploaded through the developer's own app or website but not to videos uploaded through other apps or sites."
+        - description: 'The forDeveloper parameter restricts the search to only retrieve videos uploaded via the developer''s application or website. The API server uses the request''s authorization credentials to identify the developer. Therefore, a developer can restrict results to videos uploaded through the developer''s own app or website but not to videos uploaded through other apps or sites.'
           in: query
           name: forDeveloper
           type: boolean
-        - description: "The forMine parameter restricts the search to only retrieve videos owned by the authenticated user. If you set this parameter to true, then the type parameter's value must also be set to video."
+        - description: 'The forMine parameter restricts the search to only retrieve videos owned by the authenticated user. If you set this parameter to true, then the type parameter''s value must also be set to video.'
           in: query
           name: forMine
           type: boolean
@@ -2592,7 +2595,7 @@ paths:
           in: query
           name: type
           type: string
-        - description: "The videoCaption parameter indicates whether the API should filter video search results based on whether they have captions. If you specify a value for this parameter, you must also set the type parameter's value to video."
+        - description: 'The videoCaption parameter indicates whether the API should filter video search results based on whether they have captions. If you specify a value for this parameter, you must also set the type parameter''s value to video.'
           enum:
             - any
             - closedCaption
@@ -2600,11 +2603,11 @@ paths:
           in: query
           name: videoCaption
           type: string
-        - description: "The videoCategoryId parameter filters video search results based on their category. If you specify a value for this parameter, you must also set the type parameter's value to video."
+        - description: 'The videoCategoryId parameter filters video search results based on their category. If you specify a value for this parameter, you must also set the type parameter''s value to video.'
           in: query
           name: videoCategoryId
           type: string
-        - description: "The videoDefinition parameter lets you restrict a search to only include either high definition (HD) or standard definition (SD) videos. HD videos are available for playback in at least 720p, though higher resolutions, like 1080p, might also be available. If you specify a value for this parameter, you must also set the type parameter's value to video."
+        - description: 'The videoDefinition parameter lets you restrict a search to only include either high definition (HD) or standard definition (SD) videos. HD videos are available for playback in at least 720p, though higher resolutions, like 1080p, might also be available. If you specify a value for this parameter, you must also set the type parameter''s value to video.'
           enum:
             - any
             - high
@@ -2612,7 +2615,7 @@ paths:
           in: query
           name: videoDefinition
           type: string
-        - description: "The videoDimension parameter lets you restrict a search to only retrieve 2D or 3D videos. If you specify a value for this parameter, you must also set the type parameter's value to video."
+        - description: 'The videoDimension parameter lets you restrict a search to only retrieve 2D or 3D videos. If you specify a value for this parameter, you must also set the type parameter''s value to video.'
           enum:
             - 2d
             - 3d
@@ -2620,7 +2623,7 @@ paths:
           in: query
           name: videoDimension
           type: string
-        - description: "The videoDuration parameter filters video search results based on their duration. If you specify a value for this parameter, you must also set the type parameter's value to video."
+        - description: 'The videoDuration parameter filters video search results based on their duration. If you specify a value for this parameter, you must also set the type parameter''s value to video.'
           enum:
             - any
             - long
@@ -2629,14 +2632,14 @@ paths:
           in: query
           name: videoDuration
           type: string
-        - description: "The videoEmbeddable parameter lets you to restrict a search to only videos that can be embedded into a webpage. If you specify a value for this parameter, you must also set the type parameter's value to video."
+        - description: 'The videoEmbeddable parameter lets you to restrict a search to only videos that can be embedded into a webpage. If you specify a value for this parameter, you must also set the type parameter''s value to video.'
           enum:
             - any
             - 'true'
           in: query
           name: videoEmbeddable
           type: string
-        - description: "The videoLicense parameter filters search results to only include videos with a particular license. YouTube lets video uploaders choose to attach either the Creative Commons license or the standard YouTube license to each of their videos. If you specify a value for this parameter, you must also set the type parameter's value to video."
+        - description: 'The videoLicense parameter filters search results to only include videos with a particular license. YouTube lets video uploaders choose to attach either the Creative Commons license or the standard YouTube license to each of their videos. If you specify a value for this parameter, you must also set the type parameter''s value to video.'
           enum:
             - any
             - creativeCommon
@@ -2644,14 +2647,14 @@ paths:
           in: query
           name: videoLicense
           type: string
-        - description: "The videoSyndicated parameter lets you to restrict a search to only videos that can be played outside youtube.com. If you specify a value for this parameter, you must also set the type parameter's value to video."
+        - description: 'The videoSyndicated parameter lets you to restrict a search to only videos that can be played outside youtube.com. If you specify a value for this parameter, you must also set the type parameter''s value to video.'
           enum:
             - any
             - 'true'
           in: query
           name: videoSyndicated
           type: string
-        - description: "The videoType parameter lets you restrict a search to a particular type of videos. If you specify a value for this parameter, you must also set the type parameter's value to video."
+        - description: 'The videoType parameter lets you restrict a search to a particular type of videos. If you specify a value for this parameter, you must also set the type parameter''s value to video.'
           enum:
             - any
             - episode
@@ -2768,7 +2771,7 @@ paths:
           name: part
           required: true
           type: string
-        - description: "The channelId parameter specifies a YouTube channel ID. The API will only return that channel's subscriptions."
+        - description: The channelId parameter specifies a YouTube channel ID. The API will only return that channel's subscriptions.
           in: query
           name: channelId
           type: string
@@ -2787,11 +2790,11 @@ paths:
           minimum: 0
           name: maxResults
           type: integer
-        - description: "Set this parameter's value to true to retrieve a feed of the authenticated user's subscriptions."
+        - description: Set this parameter's value to true to retrieve a feed of the authenticated user's subscriptions.
           in: query
           name: mine
           type: boolean
-        - description: "Set this parameter's value to true to retrieve a feed of the subscribers of the authenticated user."
+        - description: Set this parameter's value to true to retrieve a feed of the subscribers of the authenticated user.
           in: query
           name: mySubscribers
           type: boolean
@@ -2849,7 +2852,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Adds a subscription for the authenticated user's channel."
+      description: Adds a subscription for the authenticated user's channel.
       operationId: youtube.subscriptions.insert
       parameters:
         - description: The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.
@@ -3009,7 +3012,7 @@ paths:
       description: Deletes a YouTube video.
       operationId: youtube.videos.delete
       parameters:
-        - description: "The id parameter specifies the YouTube video ID for the resource that is being deleted. In a video resource, the id property specifies the video's ID."
+        - description: 'The id parameter specifies the YouTube video ID for the resource that is being deleted. In a video resource, the id property specifies the video''s ID.'
           in: query
           name: id
           required: true
@@ -3058,7 +3061,7 @@ paths:
           in: query
           name: hl
           type: string
-        - description: "The id parameter specifies a comma-separated list of the YouTube video ID(s) for the resource(s) that are being retrieved. In a video resource, the id property specifies the video's ID."
+        - description: 'The id parameter specifies a comma-separated list of the YouTube video ID(s) for the resource(s) that are being retrieved. In a video resource, the id property specifies the video''s ID.'
           in: query
           name: id
           type: string
@@ -3076,7 +3079,7 @@ paths:
           minimum: 1
           name: maxResults
           type: integer
-        - description: "Set this parameter's value to like or dislike to instruct the API to only return videos liked or disliked by the authenticated user."
+        - description: Set this parameter's value to like or dislike to instruct the API to only return videos liked or disliked by the authenticated user.
           enum:
             - dislike
             - like
@@ -3219,7 +3222,7 @@ paths:
         - video/x-msvideo
         - video/x-sgi-movie
         - video/x-smv
-      description: "Uploads a video to YouTube and optionally sets the video's metadata."
+      description: Uploads a video to YouTube and optionally sets the video's metadata.
       operationId: youtube.videos.insert
       parameters:
         - description: |-
@@ -3230,12 +3233,12 @@ paths:
           name: part
           required: true
           type: string
-        - description: "The autoLevels parameter indicates whether YouTube should automatically enhance the video's lighting and color."
+        - description: The autoLevels parameter indicates whether YouTube should automatically enhance the video's lighting and color.
           in: query
           name: autoLevels
           type: boolean
         - default: true
-          description: "The notifySubscribers parameter indicates whether YouTube should send a notification about the new video to users who subscribe to the video's channel. A parameter value of True indicates that subscribers will be notified of newly uploaded videos. However, a channel owner who is uploading many videos might prefer to set the value to False to avoid sending a notification about each new video to the channel's subscribers."
+          description: 'The notifySubscribers parameter indicates whether YouTube should send a notification about the new video to users who subscribe to the video''s channel. A parameter value of True indicates that subscribers will be notified of newly uploaded videos. However, a channel owner who is uploading many videos might prefer to set the value to False to avoid sending a notification about each new video to the channel''s subscribers.'
           in: query
           name: notifySubscribers
           type: boolean
@@ -3280,7 +3283,7 @@ paths:
       tags:
         - videos
     put:
-      description: "Updates a video's metadata."
+      description: Updates a video's metadata.
       operationId: youtube.videos.update
       parameters:
         - description: |-
@@ -3323,7 +3326,7 @@ paths:
       description: Retrieves the ratings that the authorized user gave to a list of specified videos.
       operationId: youtube.videos.getRating
       parameters:
-        - description: "The id parameter specifies a comma-separated list of the YouTube video ID(s) for the resource(s) for which you are retrieving rating data. In a video resource, the id property specifies the video's ID."
+        - description: 'The id parameter specifies a comma-separated list of the YouTube video ID(s) for the resource(s) for which you are retrieving rating data. In a video resource, the id property specifies the video''s ID.'
           in: query
           name: id
           required: true
@@ -3489,7 +3492,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: "Deletes a channel's watermark image."
+      description: Deletes a channel's watermark image.
       operationId: youtube.watermarks.unset
       parameters:
         - description: The channelId parameter specifies the YouTube channel ID for which the watermark is being unset.
@@ -3534,7 +3537,7 @@ definitions:
     properties:
       contentDetails:
         $ref: '#/definitions/ActivityContentDetails'
-        description: "The contentDetails object contains information about the content associated with the activity. For example, if the snippet.type value is videoRated, then the contentDetails object's content identifies the rated video."
+        description: 'The contentDetails object contains information about the content associated with the activity. For example, if the snippet.type value is videoRated, then the contentDetails object''s content identifies the rated video.'
       etag:
         description: Etag of this resource.
         type: string
@@ -3547,7 +3550,7 @@ definitions:
         type: string
       snippet:
         $ref: '#/definitions/ActivitySnippet'
-        description: "The snippet object contains basic details about the activity, including the activity's type and group ID."
+        description: 'The snippet object contains basic details about the activity, including the activity''s type and group ID.'
     type: object
   ActivityContentDetails:
     description: 'Details about the content of an activity: the video that was shared, the channel that was subscribed to, etc.'
@@ -3659,7 +3662,7 @@ definitions:
         description: The text description to accompany the promoted item.
         type: string
       destinationUrl:
-        description: "The URL the client should direct the user to, if the user chooses to visit the advertiser's website."
+        description: 'The URL the client should direct the user to, if the user chooses to visit the advertiser''s website.'
         type: string
       forecastingUrl:
         description: 'The list of forecasting URLs. The client should ping all of these URLs when a promoted item is not available, to indicate that a promoted item could have been shown.'
@@ -3700,7 +3703,7 @@ definitions:
         description: The author of the social network post.
         type: string
       imageUrl:
-        description: "An image of the post's author."
+        description: An image of the post's author.
         type: string
       referenceUrl:
         description: The URL of the social network post.
@@ -3775,7 +3778,7 @@ definitions:
         description: The description of the resource primarily associated with the activity.
         type: string
       groupId:
-        description: "The group ID associated with the activity. A group ID identifies user events that are associated with the same user and resource. For example, if a user rates a video and marks the same video as a favorite, the entries for those events would have the same group ID in the user's activity feed. In your user interface, you can avoid repetition by grouping events with the same groupId value."
+        description: 'The group ID associated with the activity. A group ID identifies user events that are associated with the same user and resource. For example, if a user rates a video and marks the same video as a favorite, the entries for those events would have the same group ID in the user''s activity feed. In your user interface, you can avoid repetition by grouping events with the same groupId value.'
         type: string
       publishedAt:
         description: 'The date and time that the video was uploaded. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.'
@@ -3853,7 +3856,7 @@ definitions:
           - unknown
         type: string
       failureReason:
-        description: "The reason that YouTube failed to process the caption track. This property is only present if the state property's value is failed."
+        description: The reason that YouTube failed to process the caption track. This property is only present if the state property's value is failed.
         enum:
           - processingFailed
           - unknownFormat
@@ -3885,14 +3888,14 @@ definitions:
         description: The name of the caption track. The name is intended to be visible to the user as an option during playback.
         type: string
       status:
-        description: "The caption track's status."
+        description: The caption track's status.
         enum:
           - failed
           - serving
           - syncing
         type: string
       trackKind:
-        description: "The caption track's type."
+        description: The caption track's type.
         enum:
           - ASR
           - forced
@@ -3945,7 +3948,7 @@ definitions:
         description: The brandingSettings object encapsulates information about the branding of the channel.
       contentDetails:
         $ref: '#/definitions/ChannelContentDetails'
-        description: "The contentDetails object encapsulates information about the channel's content."
+        description: The contentDetails object encapsulates information about the channel's content.
       contentOwnerDetails:
         $ref: '#/definitions/ChannelContentOwnerDetails'
         description: The contentOwnerDetails object encapsulates channel data that is relevant for YouTube Partners linked with the channel.
@@ -4041,19 +4044,19 @@ definitions:
       relatedPlaylists:
         properties:
           favorites:
-            description: 'The ID of the playlist that contains the channel"s favorite videos. Use the  playlistItems.insert and  playlistItems.delete to add or remove items from that list.'
+            description: The ID of the playlist that contains the channel"s favorite videos. Use the  playlistItems.insert and  playlistItems.delete to add or remove items from that list.
             type: string
           likes:
-            description: 'The ID of the playlist that contains the channel"s liked videos. Use the   playlistItems.insert and  playlistItems.delete to add or remove items from that list.'
+            description: The ID of the playlist that contains the channel"s liked videos. Use the   playlistItems.insert and  playlistItems.delete to add or remove items from that list.
             type: string
           uploads:
-            description: 'The ID of the playlist that contains the channel"s uploaded videos. Use the  videos.insert method to upload new videos and the videos.delete method to delete previously uploaded videos.'
+            description: The ID of the playlist that contains the channel"s uploaded videos. Use the  videos.insert method to upload new videos and the videos.delete method to delete previously uploaded videos.
             type: string
           watchHistory:
-            description: 'The ID of the playlist that contains the channel"s watch history. Use the  playlistItems.insert and  playlistItems.delete to add or remove items from that list.'
+            description: The ID of the playlist that contains the channel"s watch history. Use the  playlistItems.insert and  playlistItems.delete to add or remove items from that list.
             type: string
           watchLater:
-            description: 'The ID of the playlist that contains the channel"s watch later playlist. Use the playlistItems.insert and  playlistItems.delete to add or remove items from that list.'
+            description: The ID of the playlist that contains the channel"s watch later playlist. Use the playlistItems.insert and  playlistItems.delete to add or remove items from that list.
             type: string
         type: object
     type: object
@@ -4079,7 +4082,7 @@ definitions:
           - unsubscribe
         type: string
       conversionUrl:
-        description: "The url (without the schema) that the player shall send the ping to. It's at caller's descretion to decide which schema to use (http vs https) Example of a returned url: //googleads.g.doubleclick.net/pagead/ viewthroughconversion/962985656/?data=path%3DtHe_path%3Btype%3D cview%3Butuid%3DGISQtTNGYqaYl4sKxoVvKA&labe=default The caller must append biscotti authentication (ms param in case of mobile, for example) to this ping."
+        description: 'The url (without the schema) that the player shall send the ping to. It''s at caller''s descretion to decide which schema to use (http vs https) Example of a returned url: //googleads.g.doubleclick.net/pagead/ viewthroughconversion/962985656/?data=path%3DtHe_path%3Btype%3D cview%3Butuid%3DGISQtTNGYqaYl4sKxoVvKA&labe=default The caller must append biscotti authentication (ms param in case of mobile, for example) to this ping.'
         type: string
     type: object
   ChannelConversionPings:
@@ -4126,10 +4129,10 @@ definitions:
     description: Channel localization setting
     properties:
       description:
-        description: "The localized strings for channel's description."
+        description: The localized strings for channel's description.
         type: string
       title:
-        description: "The localized strings for channel's title."
+        description: The localized strings for channel's title.
         type: string
     type: object
   ChannelProfileDetails:
@@ -4138,13 +4141,13 @@ definitions:
         description: The YouTube channel ID.
         type: string
       channelUrl:
-        description: "The channel's URL."
+        description: The channel's URL.
         type: string
       displayName:
-        description: "The channel's display name."
+        description: The channel's display name.
         type: string
       profileImageUrl:
-        description: "The channels's avatar URL."
+        description: The channels's avatar URL.
         type: string
     type: object
   ChannelSection:
@@ -4214,7 +4217,7 @@ definitions:
     description: ChannelSection localization setting
     properties:
       title:
-        description: "The localized strings for channel section's title."
+        description: The localized strings for channel section's title.
         type: string
     type: object
   ChannelSectionSnippet:
@@ -4224,7 +4227,7 @@ definitions:
         description: The ID that YouTube uses to uniquely identify the channel that published the channel section.
         type: string
       defaultLanguage:
-        description: "The language of the channel section's default title and description."
+        description: The language of the channel section's default title and description.
         type: string
       localized:
         $ref: '#/definitions/ChannelSectionLocalization'
@@ -4241,7 +4244,7 @@ definitions:
           - verticalList
         type: string
       title:
-        description: "The channel section's title for multiple_playlists and multiple_channels."
+        description: The channel section's title for multiple_playlists and multiple_channels.
         type: string
       type:
         description: The type of the channel section.
@@ -4341,7 +4344,7 @@ definitions:
         description: The custom url of the channel.
         type: string
       defaultLanguage:
-        description: "The language of the channel's default title and description."
+        description: The language of the channel's default title and description.
         type: string
       description:
         description: The description of the channel.
@@ -4357,7 +4360,7 @@ definitions:
         $ref: '#/definitions/ThumbnailDetails'
         description: 'A map of thumbnail images associated with the channel. For each object in the map, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail.'
       title:
-        description: "The channel's title."
+        description: The channel's title.
         type: string
     type: object
   ChannelStatistics:
@@ -4387,7 +4390,7 @@ definitions:
     description: JSON template for the status part of a channel.
     properties:
       isLinked:
-        description: "If true, then the user is linked to either a YouTube username or G+ account. Otherwise, the user doesn't have a public YouTube identity."
+        description: 'If true, then the user is linked to either a YouTube username or G+ account. Otherwise, the user doesn''t have a public YouTube identity.'
         type: boolean
       longUploadsStatus:
         description: The long uploads status of this channel. See
@@ -4463,15 +4466,15 @@ definitions:
     description: 'Basic details about a comment, such as its author and text.'
     properties:
       authorChannelId:
-        description: "The id of the author's YouTube channel, if any."
+        description: 'The id of the author''s YouTube channel, if any.'
       authorChannelUrl:
-        description: "Link to the author's YouTube channel, if any."
+        description: 'Link to the author''s YouTube channel, if any.'
         type: string
       authorDisplayName:
         description: The name of the user who posted the comment.
         type: string
       authorGoogleplusProfileUrl:
-        description: "Link to the author's Google+ profile, if any."
+        description: 'Link to the author''s Google+ profile, if any.'
         type: string
       authorProfileImageUrl:
         description: The URL for the avatar of the user who posted the comment.
@@ -4480,14 +4483,14 @@ definitions:
         description: Whether the current viewer can rate this comment.
         type: boolean
       channelId:
-        description: "The id of the corresponding YouTube channel. In case of a channel comment this is the channel the comment refers to. In case of a video comment it's the video's channel."
+        description: The id of the corresponding YouTube channel. In case of a channel comment this is the channel the comment refers to. In case of a video comment it's the video's channel.
         type: string
       likeCount:
         description: The total number of likes this comment has received.
         format: uint32
         type: integer
       moderationStatus:
-        description: "The comment's moderation status. Will not be set if the comments were requested through the id filter."
+        description: The comment's moderation status. Will not be set if the comments were requested through the id filter.
         enum:
           - heldForReview
           - likelySpam
@@ -4502,10 +4505,10 @@ definitions:
         format: date-time
         type: string
       textDisplay:
-        description: "The comment's text. The format is either plain text or HTML dependent on what has been requested. Even the plain text representation may differ from the text originally posted in that it may replace video links with video titles etc."
+        description: The comment's text. The format is either plain text or HTML dependent on what has been requested. Even the plain text representation may differ from the text originally posted in that it may replace video links with video titles etc.
         type: string
       textOriginal:
-        description: "The comment's original raw text as initially posted or last updated. The original text will only be returned if it is accessible to the viewer, which is only guaranteed if the viewer is the comment's author."
+        description: 'The comment''s original raw text as initially posted or last updated. The original text will only be returned if it is accessible to the viewer, which is only guaranteed if the viewer is the comment''s author.'
         type: string
       updatedAt:
         description: 'The date and time when was last updated . The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.'
@@ -4587,7 +4590,7 @@ definitions:
         description: Whether the current viewer of the thread can reply to it. This is viewer specific - other viewers may see a different value for this field.
         type: boolean
       channelId:
-        description: "The YouTube channel the comments in the thread refer to or the channel with the video the comments refer to. If video_id isn't set the comments refer to the channel itself."
+        description: The YouTube channel the comments in the thread refer to or the channel with the video the comments refer to. If video_id isn't set the comments refer to the channel itself.
         type: string
       isPublic:
         description: Whether the thread (and therefore all its comments) is visible to all YouTube users.
@@ -4607,7 +4610,7 @@ definitions:
     description: 'Ratings schemes. The country-specific ratings are mostly for movies and shows. NEXT_ID: 67'
     properties:
       acbRating:
-        description: "The video's Australian Classification Board (ACB) or Australian Communications and Media Authority (ACMA) rating. ACMA ratings are used to classify children's television programming."
+        description: The video's Australian Classification Board (ACB) or Australian Communications and Media Authority (ACMA) rating. ACMA ratings are used to classify children's television programming.
         enum:
           - acbC
           - acbE
@@ -4620,7 +4623,7 @@ definitions:
           - acbUnrated
         type: string
       agcomRating:
-        description: "The video's rating from Italy's Autorità per le Garanzie nelle Comunicazioni (AGCOM)."
+        description: The video's rating from Italy's Autorità per le Garanzie nelle Comunicazioni (AGCOM).
         enum:
           - agcomT
           - agcomUnrated
@@ -4628,7 +4631,7 @@ definitions:
           - agcomVm18
         type: string
       anatelRating:
-        description: "The video's Anatel (Asociación Nacional de Televisión) rating for Chilean television."
+        description: The video's Anatel (Asociación Nacional de Televisión) rating for Chilean television.
         enum:
           - anatelA
           - anatelF
@@ -4640,7 +4643,7 @@ definitions:
           - anatelUnrated
         type: string
       bbfcRating:
-        description: "The video's British Board of Film Classification (BBFC) rating."
+        description: The video's British Board of Film Classification (BBFC) rating.
         enum:
           - bbfc12
           - bbfc12a
@@ -4652,7 +4655,7 @@ definitions:
           - bbfcUnrated
         type: string
       bfvcRating:
-        description: "The video's rating from Thailand's Board of Film and Video Censors."
+        description: The video's rating from Thailand's Board of Film and Video Censors.
         enum:
           - bfvc13
           - bfvc15
@@ -4664,7 +4667,7 @@ definitions:
           - bfvcUnrated
         type: string
       bmukkRating:
-        description: "The video's rating from the Austrian Board of Media Classification (Bundesministerium für Unterricht, Kunst und Kultur)."
+        description: 'The video''s rating from the Austrian Board of Media Classification (Bundesministerium für Unterricht, Kunst und Kultur).'
         enum:
           - bmukk10
           - bmukk12
@@ -4676,7 +4679,7 @@ definitions:
           - bmukkUnrated
         type: string
       catvRating:
-        description: "Rating system for Canadian TV - Canadian TV Classification System The video's rating from the Canadian Radio-Television and Telecommunications Commission (CRTC) for Canadian English-language broadcasts. For more information, see the Canadian Broadcast Standards Council website."
+        description: 'Rating system for Canadian TV - Canadian TV Classification System The video''s rating from the Canadian Radio-Television and Telecommunications Commission (CRTC) for Canadian English-language broadcasts. For more information, see the Canadian Broadcast Standards Council website.'
         enum:
           - catv14plus
           - catv18plus
@@ -4687,7 +4690,7 @@ definitions:
           - catvUnrated
         type: string
       catvfrRating:
-        description: "The video's rating from the Canadian Radio-Television and Telecommunications Commission (CRTC) for Canadian French-language broadcasts. For more information, see the Canadian Broadcast Standards Council website."
+        description: 'The video''s rating from the Canadian Radio-Television and Telecommunications Commission (CRTC) for Canadian French-language broadcasts. For more information, see the Canadian Broadcast Standards Council website.'
         enum:
           - catvfr13plus
           - catvfr16plus
@@ -4697,7 +4700,7 @@ definitions:
           - catvfrUnrated
         type: string
       cbfcRating:
-        description: "The video's Central Board of Film Certification (CBFC - India) rating."
+        description: The video's Central Board of Film Certification (CBFC - India) rating.
         enum:
           - cbfcA
           - cbfcS
@@ -4706,7 +4709,7 @@ definitions:
           - cbfcUnrated
         type: string
       cccRating:
-        description: "The video's Consejo de Calificación Cinematográfica (Chile) rating."
+        description: The video's Consejo de Calificación Cinematográfica (Chile) rating.
         enum:
           - ccc14
           - ccc18
@@ -4717,7 +4720,7 @@ definitions:
           - cccUnrated
         type: string
       cceRating:
-        description: "The video's rating from Portugal's Comissão de Classificação de Espect´culos."
+        description: The video's rating from Portugal's Comissão de Classificação de Espect´culos.
         enum:
           - cceM12
           - cceM14
@@ -4728,7 +4731,7 @@ definitions:
           - cceUnrated
         type: string
       chfilmRating:
-        description: "The video's rating in Switzerland."
+        description: The video's rating in Switzerland.
         enum:
           - chfilm0
           - chfilm12
@@ -4738,7 +4741,7 @@ definitions:
           - chfilmUnrated
         type: string
       chvrsRating:
-        description: "The video's Canadian Home Video Rating System (CHVRS) rating."
+        description: The video's Canadian Home Video Rating System (CHVRS) rating.
         enum:
           - chvrs14a
           - chvrs18a
@@ -4749,7 +4752,7 @@ definitions:
           - chvrsUnrated
         type: string
       cicfRating:
-        description: "The video's rating from the Commission de Contrôle des Films (Belgium)."
+        description: The video's rating from the Commission de Contrôle des Films (Belgium).
         enum:
           - cicfE
           - cicfKntEna
@@ -4757,7 +4760,7 @@ definitions:
           - cicfUnrated
         type: string
       cnaRating:
-        description: "The video's rating from Romania's CONSILIUL NATIONAL AL AUDIOVIZUALULUI (CNA)."
+        description: The video's rating from Romania's CONSILIUL NATIONAL AL AUDIOVIZUALULUI (CNA).
         enum:
           - cna12
           - cna15
@@ -4778,7 +4781,7 @@ definitions:
           - cncUnrated
         type: string
       csaRating:
-        description: "The video's rating from France's Conseil supérieur de l?audiovisuel, which rates broadcast content."
+        description: 'The video''s rating from France''s Conseil supérieur de l?audiovisuel, which rates broadcast content.'
         enum:
           - csa10
           - csa12
@@ -4789,7 +4792,7 @@ definitions:
           - csaUnrated
         type: string
       cscfRating:
-        description: "The video's rating from Luxembourg's Commission de surveillance de la classification des films (CSCF)."
+        description: The video's rating from Luxembourg's Commission de surveillance de la classification des films (CSCF).
         enum:
           - cscf12
           - cscf16
@@ -4801,7 +4804,7 @@ definitions:
           - cscfUnrated
         type: string
       czfilmRating:
-        description: "The video's rating in the Czech Republic."
+        description: The video's rating in the Czech Republic.
         enum:
           - czfilm12
           - czfilm14
@@ -4810,7 +4813,7 @@ definitions:
           - czfilmUnrated
         type: string
       djctqRating:
-        description: "The video's Departamento de Justiça, Classificação, Qualificação e Títulos (DJCQT - Brazil) rating."
+        description: 'The video''s Departamento de Justiça, Classificação, Qualificação e Títulos (DJCQT - Brazil) rating.'
         enum:
           - djctq10
           - djctq12
@@ -4852,7 +4855,7 @@ definitions:
           - ecbmctUnrated
         type: string
       eefilmRating:
-        description: "The video's rating in Estonia."
+        description: The video's rating in Estonia.
         enum:
           - eefilmK12
           - eefilmK14
@@ -4865,7 +4868,7 @@ definitions:
           - eefilmUnrated
         type: string
       egfilmRating:
-        description: "The video's rating in Egypt."
+        description: The video's rating in Egypt.
         enum:
           - egfilm18
           - egfilmBn
@@ -4873,7 +4876,7 @@ definitions:
           - egfilmUnrated
         type: string
       eirinRating:
-        description: "The video's Eirin (映倫) rating. Eirin is the Japanese rating system."
+        description: The video's Eirin (映倫) rating. Eirin is the Japanese rating system.
         enum:
           - eirinG
           - eirinPg12
@@ -4882,7 +4885,7 @@ definitions:
           - eirinUnrated
         type: string
       fcbmRating:
-        description: "The video's rating from Malaysia's Film Censorship Board."
+        description: The video's rating from Malaysia's Film Censorship Board.
         enum:
           - fcbm18
           - fcbm18pa
@@ -4895,7 +4898,7 @@ definitions:
           - fcbmUnrated
         type: string
       fcoRating:
-        description: "The video's rating from Hong Kong's Office for Film, Newspaper and Article Administration."
+        description: 'The video''s rating from Hong Kong''s Office for Film, Newspaper and Article Administration.'
         enum:
           - fcoI
           - fcoIi
@@ -4916,7 +4919,7 @@ definitions:
           - fmocUnrated
         type: string
       fpbRating:
-        description: "The video's rating from South Africa's Film and Publication Board."
+        description: The video's rating from South Africa's Film and Publication Board.
         enum:
           - fpb10
           - fpb1012Pg
@@ -4931,7 +4934,7 @@ definitions:
           - fpbXx
         type: string
       fskRating:
-        description: "The video's Freiwillige Selbstkontrolle der Filmwirtschaft (FSK - Germany) rating."
+        description: The video's Freiwillige Selbstkontrolle der Filmwirtschaft (FSK - Germany) rating.
         enum:
           - fsk0
           - fsk12
@@ -4941,7 +4944,7 @@ definitions:
           - fskUnrated
         type: string
       grfilmRating:
-        description: "The video's rating in Greece."
+        description: The video's rating in Greece.
         enum:
           - grfilmE
           - grfilmK
@@ -4950,7 +4953,7 @@ definitions:
           - grfilmUnrated
         type: string
       icaaRating:
-        description: "The video's Instituto de la Cinematografía y de las Artes Audiovisuales (ICAA - Spain) rating."
+        description: The video's Instituto de la Cinematografía y de las Artes Audiovisuales (ICAA - Spain) rating.
         enum:
           - icaa12
           - icaa13
@@ -4962,7 +4965,7 @@ definitions:
           - icaaX
         type: string
       ifcoRating:
-        description: "The video's Irish Film Classification Office (IFCO - Ireland) rating. See the IFCO website for more information."
+        description: The video's Irish Film Classification Office (IFCO - Ireland) rating. See the IFCO website for more information.
         enum:
           - ifco12
           - ifco12a
@@ -4975,7 +4978,7 @@ definitions:
           - ifcoUnrated
         type: string
       ilfilmRating:
-        description: "The video's rating in Israel."
+        description: The video's rating in Israel.
         enum:
           - ilfilm12
           - ilfilm16
@@ -4984,7 +4987,7 @@ definitions:
           - ilfilmUnrated
         type: string
       incaaRating:
-        description: "The video's INCAA (Instituto Nacional de Cine y Artes Audiovisuales - Argentina) rating."
+        description: The video's INCAA (Instituto Nacional de Cine y Artes Audiovisuales - Argentina) rating.
         enum:
           - incaaAtp
           - incaaC
@@ -4994,7 +4997,7 @@ definitions:
           - incaaUnrated
         type: string
       kfcbRating:
-        description: "The video's rating from the Kenya Film Classification Board."
+        description: The video's rating from the Kenya Film Classification Board.
         enum:
           - kfcb16plus
           - kfcbG
@@ -5014,7 +5017,7 @@ definitions:
           - kijkwijzerUnrated
         type: string
       kmrbRating:
-        description: "The video's Korea Media Rating Board (영상물등급위원회) rating. The KMRB rates videos in South Korea."
+        description: The video's Korea Media Rating Board (영상물등급위원회) rating. The KMRB rates videos in South Korea.
         enum:
           - kmrb12plus
           - kmrb15plus
@@ -5024,7 +5027,7 @@ definitions:
           - kmrbUnrated
         type: string
       lsfRating:
-        description: "The video's rating from Indonesia's Lembaga Sensor Film."
+        description: The video's rating from Indonesia's Lembaga Sensor Film.
         enum:
           - lsf13
           - lsf17
@@ -5037,7 +5040,7 @@ definitions:
           - lsfUnrated
         type: string
       mccaaRating:
-        description: "The video's rating from Malta's Film Age-Classification Board."
+        description: The video's rating from Malta's Film Age-Classification Board.
         enum:
           - mccaa12
           - mccaa12a
@@ -5050,7 +5053,7 @@ definitions:
           - mccaaUnrated
         type: string
       mccypRating:
-        description: "The video's rating from the Danish Film Institute's (Det Danske Filminstitut) Media Council for Children and Young People."
+        description: The video's rating from the Danish Film Institute's (Det Danske Filminstitut) Media Council for Children and Young People.
         enum:
           - mccyp11
           - mccyp15
@@ -5059,7 +5062,7 @@ definitions:
           - mccypUnrated
         type: string
       mdaRating:
-        description: "The video's rating from Singapore's Media Development Authority (MDA) and, specifically, it's Board of Film Censors (BFC)."
+        description: 'The video''s rating from Singapore''s Media Development Authority (MDA) and, specifically, it''s Board of Film Censors (BFC).'
         enum:
           - mdaG
           - mdaM18
@@ -5070,7 +5073,7 @@ definitions:
           - mdaUnrated
         type: string
       medietilsynetRating:
-        description: "The video's rating from Medietilsynet, the Norwegian Media Authority."
+        description: 'The video''s rating from Medietilsynet, the Norwegian Media Authority.'
         enum:
           - medietilsynet11
           - medietilsynet12
@@ -5083,7 +5086,7 @@ definitions:
           - medietilsynetUnrated
         type: string
       mekuRating:
-        description: "The video's rating from Finland's Kansallinen Audiovisuaalinen Instituutti (National Audiovisual Institute)."
+        description: The video's rating from Finland's Kansallinen Audiovisuaalinen Instituutti (National Audiovisual Institute).
         enum:
           - meku12
           - meku16
@@ -5093,7 +5096,7 @@ definitions:
           - mekuUnrated
         type: string
       mibacRating:
-        description: "The video's rating from the Ministero dei Beni e delle Attività Culturali e del Turismo (Italy)."
+        description: The video's rating from the Ministero dei Beni e delle Attività Culturali e del Turismo (Italy).
         enum:
           - mibacT
           - mibacUnrated
@@ -5103,7 +5106,7 @@ definitions:
           - mibacVm18
         type: string
       mocRating:
-        description: "The video's Ministerio de Cultura (Colombia) rating."
+        description: The video's Ministerio de Cultura (Colombia) rating.
         enum:
           - moc12
           - moc15
@@ -5116,7 +5119,7 @@ definitions:
           - mocX
         type: string
       moctwRating:
-        description: "The video's rating from Taiwan's Ministry of Culture (文化部)."
+        description: The video's rating from Taiwan's Ministry of Culture (文化部).
         enum:
           - moctwG
           - moctwP
@@ -5127,7 +5130,7 @@ definitions:
           - moctwUnrated
         type: string
       mpaaRating:
-        description: "The video's Motion Picture Association of America (MPAA) rating."
+        description: The video's Motion Picture Association of America (MPAA) rating.
         enum:
           - mpaaG
           - mpaaNc17
@@ -5137,7 +5140,7 @@ definitions:
           - mpaaUnrated
         type: string
       mtrcbRating:
-        description: "The video's rating from the Movie and Television Review and Classification Board (Philippines)."
+        description: The video's rating from the Movie and Television Review and Classification Board (Philippines).
         enum:
           - mtrcbG
           - mtrcbPg
@@ -5148,7 +5151,7 @@ definitions:
           - mtrcbX
         type: string
       nbcRating:
-        description: "The video's rating from the Maldives National Bureau of Classification."
+        description: The video's rating from the Maldives National Bureau of Classification.
         enum:
           - nbc12plus
           - nbc15plus
@@ -5160,7 +5163,7 @@ definitions:
           - nbcUnrated
         type: string
       nbcplRating:
-        description: "The video's rating in Poland."
+        description: The video's rating in Poland.
         enum:
           - nbcpl18plus
           - nbcplI
@@ -5170,7 +5173,7 @@ definitions:
           - nbcplUnrated
         type: string
       nfrcRating:
-        description: "The video's rating from the Bulgarian National Film Center."
+        description: The video's rating from the Bulgarian National Film Center.
         enum:
           - nfrcA
           - nfrcB
@@ -5180,7 +5183,7 @@ definitions:
           - nfrcX
         type: string
       nfvcbRating:
-        description: "The video's rating from Nigeria's National Film and Video Censors Board."
+        description: The video's rating from Nigeria's National Film and Video Censors Board.
         enum:
           - nfvcb12
           - nfvcb12a
@@ -5192,7 +5195,7 @@ definitions:
           - nfvcbUnrated
         type: string
       nkclvRating:
-        description: "The video's rating from the Nacionãlais Kino centrs (National Film Centre of Latvia)."
+        description: The video's rating from the Nacionãlais Kino centrs (National Film Centre of Latvia).
         enum:
           - nkclv12plus
           - nkclv18plus
@@ -5201,7 +5204,7 @@ definitions:
           - nkclvUnrated
         type: string
       oflcRating:
-        description: "The video's Office of Film and Literature Classification (OFLC - New Zealand) rating."
+        description: The video's Office of Film and Literature Classification (OFLC - New Zealand) rating.
         enum:
           - oflcG
           - oflcM
@@ -5215,7 +5218,7 @@ definitions:
           - oflcUnrated
         type: string
       pefilmRating:
-        description: "The video's rating in Peru."
+        description: The video's rating in Peru.
         enum:
           - pefilm14
           - pefilm18
@@ -5224,7 +5227,7 @@ definitions:
           - pefilmUnrated
         type: string
       rcnofRating:
-        description: "The video's rating from the Hungarian Nemzeti Filmiroda, the Rating Committee of the National Office of Film."
+        description: 'The video''s rating from the Hungarian Nemzeti Filmiroda, the Rating Committee of the National Office of Film.'
         enum:
           - rcnofI
           - rcnofIi
@@ -5235,7 +5238,7 @@ definitions:
           - rcnofVi
         type: string
       resorteviolenciaRating:
-        description: "The video's rating in Venezuela."
+        description: The video's rating in Venezuela.
         enum:
           - resorteviolenciaA
           - resorteviolenciaB
@@ -5245,7 +5248,7 @@ definitions:
           - resorteviolenciaUnrated
         type: string
       rtcRating:
-        description: "The video's General Directorate of Radio, Television and Cinematography (Mexico) rating."
+        description: 'The video''s General Directorate of Radio, Television and Cinematography (Mexico) rating.'
         enum:
           - rtcA
           - rtcAa
@@ -5256,7 +5259,7 @@ definitions:
           - rtcUnrated
         type: string
       rteRating:
-        description: "The video's rating from Ireland's Raidió Teilifís Éireann."
+        description: The video's rating from Ireland's Raidió Teilifís Éireann.
         enum:
           - rteCh
           - rteGa
@@ -5265,7 +5268,7 @@ definitions:
           - rteUnrated
         type: string
       russiaRating:
-        description: "The video's National Film Registry of the Russian Federation (MKRF - Russia) rating."
+        description: The video's National Film Registry of the Russian Federation (MKRF - Russia) rating.
         enum:
           - russia0
           - russia12
@@ -5275,7 +5278,7 @@ definitions:
           - russiaUnrated
         type: string
       skfilmRating:
-        description: "The video's rating in Slovakia."
+        description: The video's rating in Slovakia.
         enum:
           - skfilmG
           - skfilmP2
@@ -5284,7 +5287,7 @@ definitions:
           - skfilmUnrated
         type: string
       smaisRating:
-        description: "The video's rating in Iceland."
+        description: The video's rating in Iceland.
         enum:
           - smais12
           - smais14
@@ -5295,7 +5298,7 @@ definitions:
           - smaisUnrated
         type: string
       smsaRating:
-        description: "The video's rating from Statens medieråd (Sweden's National Media Council)."
+        description: The video's rating from Statens medieråd (Sweden's National Media Council).
         enum:
           - smsa11
           - smsa15
@@ -5304,7 +5307,7 @@ definitions:
           - smsaUnrated
         type: string
       tvpgRating:
-        description: "The video's TV Parental Guidelines (TVPG) rating."
+        description: The video's TV Parental Guidelines (TVPG) rating.
         enum:
           - pg14
           - tvpgG
@@ -5409,7 +5412,7 @@ definitions:
         type: number
     type: object
   GuideCategory:
-    description: "A guideCategory resource identifies a category that YouTube algorithmically assigns based on a channel's content or other indicators, such as the channel's popularity. The list is similar to video categories, with the difference being that a video's uploader can assign a video category but only YouTube can assign a channel category."
+    description: 'A guideCategory resource identifies a category that YouTube algorithmically assigns based on a channel''s content or other indicators, such as the channel''s popularity. The list is similar to video categories, with the difference being that a video''s uploader can assign a video category but only YouTube can assign a channel category.'
     properties:
       etag:
         description: Etag of this resource.
@@ -5569,7 +5572,7 @@ definitions:
         $ref: '#/definitions/LocalizedProperty'
         description: 'The URL for the background image shown on the video watch page. The image should be 1200px by 615px, with a maximum file size of 128k.'
       bannerExternalUrl:
-        description: "This is used only in update requests; if it's set, we use this URL to generate all of the above banner URLs."
+        description: 'This is used only in update requests; if it''s set, we use this URL to generate all of the above banner URLs.'
         type: string
       bannerImageUrl:
         description: Banner image. Desktop size (1060x175).
@@ -5696,7 +5699,7 @@ definitions:
         $ref: '#/definitions/InvideoPosition'
         description: The spatial position within the video where the promoted item will be displayed.
       useSmartTiming:
-        description: "Indicates whether the channel's promotional campaign uses \"smart timing.\" This feature attempts to show promotions at a point in the video when they are more likely to be clicked and less likely to disrupt the viewing experience. This feature also picks up a single promotion to show on each video."
+        description: Indicates whether the channel's promotional campaign uses "smart timing." This feature attempts to show promotions at a point in the video when they are more likely to be clicked and less likely to disrupt the viewing experience. This feature also picks up a single promotion to show on each video.
         type: boolean
     type: object
   InvideoTiming:
@@ -5727,7 +5730,7 @@ definitions:
     properties:
       contentDetails:
         $ref: '#/definitions/LiveBroadcastContentDetails'
-        description: "The contentDetails object contains information about the event's video content, such as whether the content can be shown in an embedded video player or if it will be archived and therefore available for viewing after the event has concluded."
+        description: 'The contentDetails object contains information about the event''s video content, such as whether the content can be shown in an embedded video player or if it will be archived and therefore available for viewing after the event has concluded.'
       etag:
         description: Etag of this resource.
         type: string
@@ -5743,10 +5746,10 @@ definitions:
         description: 'The snippet object contains basic details about the event, including its title, description, start time, and end time.'
       statistics:
         $ref: '#/definitions/LiveBroadcastStatistics'
-        description: "The statistics object contains info about the event's current stats. These include concurrent viewers and total chat count. Statistics can change (in either direction) during the lifetime of an event. Statistics are only returned while the event is live."
+        description: The statistics object contains info about the event's current stats. These include concurrent viewers and total chat count. Statistics can change (in either direction) during the lifetime of an event. Statistics are only returned while the event is live.
       status:
         $ref: '#/definitions/LiveBroadcastStatus'
-        description: "The status object contains information about the event's status."
+        description: The status object contains information about the event's status.
       topicDetails:
         $ref: '#/definitions/LiveBroadcastTopicDetails'
     type: object
@@ -5804,7 +5807,7 @@ definitions:
           Important: You must also set the enableDvr property's value to true if you want the playback to be available immediately after the broadcast ends. If you set this property's value to true but do not also set the enableDvr property to true, there may be a delay of around one day before the archived video will be available for playback.
         type: boolean
       startWithSlate:
-        description: "This setting indicates whether the broadcast should automatically begin with an in-stream slate when you update the broadcast's status to live. After updating the status, you then need to send a liveCuepoints.insert request that sets the cuepoint's eventState to end to remove the in-stream slate and make your broadcast stream visible to viewers."
+        description: 'This setting indicates whether the broadcast should automatically begin with an in-stream slate when you update the broadcast''s status to live. After updating the status, you then need to send a liveCuepoints.insert request that sets the cuepoint''s eventState to end to remove the in-stream slate and make your broadcast stream visible to viewers.'
         type: boolean
     type: object
   LiveBroadcastListResponse:
@@ -5841,18 +5844,18 @@ definitions:
   LiveBroadcastSnippet:
     properties:
       actualEndTime:
-        description: "The date and time that the broadcast actually ended. This information is only available once the broadcast's state is complete. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format."
+        description: 'The date and time that the broadcast actually ended. This information is only available once the broadcast''s state is complete. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.'
         format: date-time
         type: string
       actualStartTime:
-        description: "The date and time that the broadcast actually started. This information is only available once the broadcast's state is live. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format."
+        description: 'The date and time that the broadcast actually started. This information is only available once the broadcast''s state is live. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.'
         format: date-time
         type: string
       channelId:
         description: The ID that YouTube uses to uniquely identify the channel that is publishing the broadcast.
         type: string
       description:
-        description: "The broadcast's description. As with the title, you can set this field by modifying the broadcast resource or by setting the description field of the corresponding video resource."
+        description: 'The broadcast''s description. As with the title, you can set this field by modifying the broadcast resource or by setting the description field of the corresponding video resource.'
         type: string
       isDefaultBroadcast:
         type: boolean
@@ -5860,7 +5863,7 @@ definitions:
         description: The id of the live chat for this broadcast.
         type: string
       publishedAt:
-        description: "The date and time that the broadcast was added to YouTube's live broadcast schedule. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format."
+        description: 'The date and time that the broadcast was added to YouTube''s live broadcast schedule. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.'
         format: date-time
         type: string
       scheduledEndTime:
@@ -5875,7 +5878,7 @@ definitions:
         $ref: '#/definitions/ThumbnailDetails'
         description: 'A map of thumbnail images associated with the broadcast. For each nested object in this object, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail.'
       title:
-        description: "The broadcast's title. Note that the broadcast represents exactly one YouTube video. You can set this field by modifying the broadcast resource or by setting the title field of the corresponding video resource."
+        description: The broadcast's title. Note that the broadcast represents exactly one YouTube video. You can set this field by modifying the broadcast resource or by setting the title field of the corresponding video resource.
         type: string
     type: object
   LiveBroadcastStatistics:
@@ -5893,7 +5896,7 @@ definitions:
   LiveBroadcastStatus:
     properties:
       lifeCycleStatus:
-        description: "The broadcast's status. The status can be updated using the API's liveBroadcasts.transition method."
+        description: The broadcast's status. The status can be updated using the API's liveBroadcasts.transition method.
         enum:
           - abandoned
           - complete
@@ -5915,14 +5918,14 @@ definitions:
           - normal
         type: string
       privacyStatus:
-        description: "The broadcast's privacy status. Note that the broadcast represents exactly one YouTube video, so the privacy settings are identical to those supported for videos. In addition, you can set this field by modifying the broadcast resource or by setting the privacyStatus field of the corresponding video resource."
+        description: 'The broadcast''s privacy status. Note that the broadcast represents exactly one YouTube video, so the privacy settings are identical to those supported for videos. In addition, you can set this field by modifying the broadcast resource or by setting the privacyStatus field of the corresponding video resource.'
         enum:
           - private
           - public
           - unlisted
         type: string
       recordingStatus:
-        description: "The broadcast's recording status."
+        description: The broadcast's recording status.
         enum:
           - notRecording
           - recorded
@@ -6036,10 +6039,10 @@ definitions:
         description: The YouTube channel ID.
         type: string
       channelUrl:
-        description: "The channel's URL."
+        description: The channel's URL.
         type: string
       displayName:
-        description: "The channel's display name."
+        description: The channel's display name.
         type: string
       isChatModerator:
         description: Whether the author is a moderator of the live chat.
@@ -6051,10 +6054,10 @@ definitions:
         description: Whether the author is a sponsor of the live chat.
         type: boolean
       isVerified:
-        description: "Whether the author's identity has been verified by YouTube."
+        description: Whether the author's identity has been verified by YouTube.
         type: boolean
       profileImageUrl:
-        description: "The channels's avatar URL."
+        description: The channels's avatar URL.
         type: string
     type: object
   LiveChatMessageDeletedDetails:
@@ -6113,7 +6116,7 @@ definitions:
         type: string
       fanFundingEventDetails:
         $ref: '#/definitions/LiveChatFanFundingEventDetails'
-        description: "Details about the funding event, this is only set if the type is 'fanFundingEvent'."
+        description: 'Details about the funding event, this is only set if the type is ''fanFundingEvent''.'
       hasDisplayContent:
         description: Whether the message has display content that should be displayed to users.
         type: boolean
@@ -6129,7 +6132,7 @@ definitions:
         type: string
       textMessageDetails:
         $ref: '#/definitions/LiveChatTextMessageDetails'
-        description: "Details about the text message, this is only set if the type is 'textMessageEvent'."
+        description: 'Details about the text message, this is only set if the type is ''textMessageEvent''.'
       type:
         description: 'The type of message, this will always be present, it determines the contents of the message as well as which fields will be present.'
         enum:
@@ -6207,7 +6210,7 @@ definitions:
   LiveChatTextMessageDetails:
     properties:
       messageText:
-        description: "The user's message."
+        description: The user's message.
         type: string
     type: object
   LiveChatUserBannedMessageDetails:
@@ -6231,7 +6234,7 @@ definitions:
     properties:
       cdn:
         $ref: '#/definitions/CdnSettings'
-        description: "The cdn object defines the live stream's content delivery network (CDN) settings. These settings provide details about the manner in which you stream your content to YouTube."
+        description: The cdn object defines the live stream's content delivery network (CDN) settings. These settings provide details about the manner in which you stream your content to YouTube.
       contentDetails:
         $ref: '#/definitions/LiveStreamContentDetails'
         description: 'The content_details object contains information about the stream, including the closed captions ingestion URL.'
@@ -6250,7 +6253,7 @@ definitions:
         description: 'The snippet object contains basic details about the stream, including its channel, title, and description.'
       status:
         $ref: '#/definitions/LiveStreamStatus'
-        description: "The status object contains information about live stream's status."
+        description: The status object contains information about live stream's status.
     type: object
   LiveStreamConfigurationIssue:
     properties:
@@ -6312,7 +6315,13 @@ definitions:
         description: The ingestion URL where the closed captions of this stream are sent.
         type: string
       isReusable:
-        description: "Indicates whether the stream is reusable, which means that it can be bound to multiple broadcasts. It is common for broadcasters to reuse the same stream for many different broadcasts if those broadcasts occur at different times.\n\nIf you set this value to false, then the stream will not be reusable, which means that it can only be bound to one broadcast. Non-reusable streams differ from reusable streams in the following ways:  \n- A non-reusable stream can only be bound to one broadcast. \n- A non-reusable stream might be deleted by an automated process after the broadcast ends. \n- The  liveStreams.list method does not list non-reusable streams if you call the method and set the mine parameter to true. The only way to use that method to retrieve the resource for a non-reusable stream is to use the id parameter to identify the stream."
+        description: |-
+          Indicates whether the stream is reusable, which means that it can be bound to multiple broadcasts. It is common for broadcasters to reuse the same stream for many different broadcasts if those broadcasts occur at different times.
+
+          If you set this value to false, then the stream will not be reusable, which means that it can only be bound to one broadcast. Non-reusable streams differ from reusable streams in the following ways:  
+          - A non-reusable stream can only be bound to one broadcast. 
+          - A non-reusable stream might be deleted by an automated process after the broadcast ends. 
+          - The  liveStreams.list method does not list non-reusable streams if you call the method and set the mine parameter to true. The only way to use that method to retrieve the resource for a non-reusable stream is to use the id parameter to identify the stream.
         type: boolean
     type: object
   LiveStreamHealthStatus:
@@ -6373,7 +6382,7 @@ definitions:
         description: The ID that YouTube uses to uniquely identify the channel that is transmitting the stream.
         type: string
       description:
-        description: "The stream's description. The value cannot be longer than 10000 characters."
+        description: The stream's description. The value cannot be longer than 10000 characters.
         type: string
       isDefaultStream:
         type: boolean
@@ -6382,7 +6391,7 @@ definitions:
         format: date-time
         type: string
       title:
-        description: "The stream's title. The value must be between 1 and 128 characters long."
+        description: The stream's title. The value must be between 1 and 128 characters long.
         type: string
     type: object
   LiveStreamStatus:
@@ -6451,7 +6460,17 @@ definitions:
         type: integer
     type: object
   Playlist:
-    description: "A playlist resource represents a YouTube playlist. A playlist is a collection of videos that can be viewed sequentially and shared with other users. A playlist can contain up to 200 videos, and YouTube does not limit the number of playlists that each user creates. By default, playlists are publicly visible to other users, but playlists can be public or private.\n\nYouTube also uses playlists to identify special collections of videos for a channel, such as:  \n- uploaded videos \n- favorite videos \n- positively rated (liked) videos \n- watch history \n- watch later  To be more specific, these lists are associated with a channel, which is a collection of a person, group, or company's videos, playlists, and other YouTube information. You can retrieve the playlist IDs for each of these lists from the  channel resource for a given channel.\n\nYou can then use the   playlistItems.list method to retrieve any of those lists. You can also add or remove items from those lists by calling the   playlistItems.insert and   playlistItems.delete methods."
+    description: |-
+      A playlist resource represents a YouTube playlist. A playlist is a collection of videos that can be viewed sequentially and shared with other users. A playlist can contain up to 200 videos, and YouTube does not limit the number of playlists that each user creates. By default, playlists are publicly visible to other users, but playlists can be public or private.
+
+      YouTube also uses playlists to identify special collections of videos for a channel, such as:  
+      - uploaded videos 
+      - favorite videos 
+      - positively rated (liked) videos 
+      - watch history 
+      - watch later  To be more specific, these lists are associated with a channel, which is a collection of a person, group, or company's videos, playlists, and other YouTube information. You can retrieve the playlist IDs for each of these lists from the  channel resource for a given channel.
+
+      You can then use the   playlistItems.list method to retrieve any of those lists. You can also add or remove items from those lists by calling the   playlistItems.insert and   playlistItems.delete methods.
     properties:
       contentDetails:
         $ref: '#/definitions/PlaylistContentDetails'
@@ -6490,7 +6509,17 @@ definitions:
         type: integer
     type: object
   PlaylistItem:
-    description: "A playlistItem resource identifies another resource, such as a video, that is included in a playlist. In addition, the playlistItem  resource contains details about the included resource that pertain specifically to how that resource is used in that playlist.\n\nYouTube uses playlists to identify special collections of videos for a channel, such as:  \n- uploaded videos \n- favorite videos \n- positively rated (liked) videos \n- watch history \n- watch later  To be more specific, these lists are associated with a channel, which is a collection of a person, group, or company's videos, playlists, and other YouTube information.\n\nYou can retrieve the playlist IDs for each of these lists from the  channel resource  for a given channel. You can then use the   playlistItems.list method to retrieve any of those lists. You can also add or remove items from those lists by calling the   playlistItems.insert and   playlistItems.delete methods. For example, if a user gives a positive rating to a video, you would insert that video into the liked videos playlist for that user's channel."
+    description: |-
+      A playlistItem resource identifies another resource, such as a video, that is included in a playlist. In addition, the playlistItem  resource contains details about the included resource that pertain specifically to how that resource is used in that playlist.
+
+      YouTube uses playlists to identify special collections of videos for a channel, such as:  
+      - uploaded videos 
+      - favorite videos 
+      - positively rated (liked) videos 
+      - watch history 
+      - watch later  To be more specific, these lists are associated with a channel, which is a collection of a person, group, or company's videos, playlists, and other YouTube information.
+
+      You can retrieve the playlist IDs for each of these lists from the  channel resource  for a given channel. You can then use the   playlistItems.list method to retrieve any of those lists. You can also add or remove items from those lists by calling the   playlistItems.insert and   playlistItems.delete methods. For example, if a user gives a positive rating to a video, you would insert that video into the liked videos playlist for that user's channel.
     properties:
       contentDetails:
         $ref: '#/definitions/PlaylistItemContentDetails'
@@ -6510,7 +6539,7 @@ definitions:
         description: 'The snippet object contains basic details about the playlist item, such as its title and position in the playlist.'
       status:
         $ref: '#/definitions/PlaylistItemStatus'
-        description: "The status object contains information about the playlist item's privacy status."
+        description: The status object contains information about the playlist item's privacy status.
     type: object
   PlaylistItemContentDetails:
     properties:
@@ -6568,7 +6597,7 @@ definitions:
         description: Channel title for the channel that the playlist item belongs to.
         type: string
       description:
-        description: "The item's description."
+        description: The item's description.
         type: string
       playlistId:
         description: The ID that YouTube uses to uniquely identify the playlist that the playlist item is in.
@@ -6588,14 +6617,14 @@ definitions:
         $ref: '#/definitions/ThumbnailDetails'
         description: 'A map of thumbnail images associated with the playlist item. For each object in the map, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail.'
       title:
-        description: "The item's title."
+        description: The item's title.
         type: string
     type: object
   PlaylistItemStatus:
-    description: "Information about the playlist item's privacy status."
+    description: Information about the playlist item's privacy status.
     properties:
       privacyStatus:
-        description: "This resource's privacy status."
+        description: This resource's privacy status.
         enum:
           - private
           - public
@@ -6637,16 +6666,16 @@ definitions:
     description: Playlist localization setting
     properties:
       description:
-        description: "The localized strings for playlist's description."
+        description: The localized strings for playlist's description.
         type: string
       title:
-        description: "The localized strings for playlist's title."
+        description: The localized strings for playlist's title.
         type: string
     type: object
   PlaylistPlayer:
     properties:
       embedHtml:
-        description: 'An <iframe> tag that embeds a player that will play the playlist.'
+        description: An <iframe> tag that embeds a player that will play the playlist.
         type: string
     type: object
   PlaylistSnippet:
@@ -6659,10 +6688,10 @@ definitions:
         description: The channel title of the channel that the video belongs to.
         type: string
       defaultLanguage:
-        description: "The language of the playlist's default title and description."
+        description: The language of the playlist's default title and description.
         type: string
       description:
-        description: "The playlist's description."
+        description: The playlist's description.
         type: string
       localized:
         $ref: '#/definitions/PlaylistLocalization'
@@ -6680,13 +6709,13 @@ definitions:
         $ref: '#/definitions/ThumbnailDetails'
         description: 'A map of thumbnail images associated with the playlist. For each object in the map, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail.'
       title:
-        description: "The playlist's title."
+        description: The playlist's title.
         type: string
     type: object
   PlaylistStatus:
     properties:
       privacyStatus:
-        description: "The playlist's privacy status."
+        description: The playlist's privacy status.
         enum:
           - private
           - public
@@ -6703,7 +6732,7 @@ definitions:
         $ref: '#/definitions/PromotedItemId'
         description: Identifies the promoted item.
       promotedByContentOwner:
-        description: "If true, the content owner's name will be used when displaying the promotion. This field can only be set when the update is made on behalf of the content owner."
+        description: 'If true, the content owner''s name will be used when displaying the promotion. This field can only be set when the update is made on behalf of the content owner.'
         type: boolean
       timing:
         $ref: '#/definitions/InvideoTiming'
@@ -6736,7 +6765,7 @@ definitions:
         description: A property.
         type: string
       value:
-        description: "The property's value."
+        description: The property's value.
         type: string
     type: object
   ResourceId:
@@ -6803,7 +6832,7 @@ definitions:
         type: string
       snippet:
         $ref: '#/definitions/SearchResultSnippet'
-        description: "The snippet object contains basic details about a search result, such as its title or description. For example, if the search result is a video, then the title will be the video's title and the description will be the video's description."
+        description: 'The snippet object contains basic details about a search result, such as its title or description. For example, if the search result is a video, then the title will be the video''s title and the description will be the video''s description.'
     type: object
   SearchResultSnippet:
     description: 'Basic details about a search result, including title, description and thumbnails of the item referenced by the search result.'
@@ -6818,7 +6847,7 @@ definitions:
         description: A description of the search result.
         type: string
       liveBroadcastContent:
-        description: "It indicates if the resource (video or channel) has upcoming/active live broadcast content. Or it's \"none\" if there is not any upcoming/active live broadcasts."
+        description: It indicates if the resource (video or channel) has upcoming/active live broadcast content. Or it's "none" if there is not any upcoming/active live broadcasts.
         enum:
           - live
           - none
@@ -6969,13 +6998,13 @@ definitions:
     description: 'Basic details about a subscription, including title, description and thumbnails of the subscribed item.'
     properties:
       channelId:
-        description: "The ID that YouTube uses to uniquely identify the subscriber's channel."
+        description: The ID that YouTube uses to uniquely identify the subscriber's channel.
         type: string
       channelTitle:
         description: Channel title for the channel that the subscription belongs to.
         type: string
       description:
-        description: "The subscription's details."
+        description: The subscription's details.
         type: string
       publishedAt:
         description: 'The date and time that the subscription was created. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.'
@@ -6988,11 +7017,11 @@ definitions:
         $ref: '#/definitions/ThumbnailDetails'
         description: 'A map of thumbnail images associated with the video. For each object in the map, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail.'
       title:
-        description: "The subscription's title."
+        description: The subscription's title.
         type: string
     type: object
   SubscriptionSubscriberSnippet:
-    description: "Basic details about a subscription's subscriber including title, description, channel ID and thumbnails."
+    description: 'Basic details about a subscription''s subscriber including title, description, channel ID and thumbnails.'
     properties:
       channelId:
         description: The channel ID of the subscriber.
@@ -7015,7 +7044,7 @@ definitions:
         format: uint32
         type: integer
       url:
-        description: "The thumbnail image's URL."
+        description: The thumbnail image's URL.
         type: string
       width:
         description: (Optional) Width of the thumbnail image.
@@ -7079,7 +7108,7 @@ definitions:
         type: string
       fileDetails:
         $ref: '#/definitions/VideoFileDetails'
-        description: "The fileDetails object encapsulates information about the video file that was uploaded to YouTube, including the file's resolution, duration, audio and video codecs, stream bitrates, and more. This data can only be retrieved by the video owner."
+        description: 'The fileDetails object encapsulates information about the video file that was uploaded to YouTube, including the file''s resolution, duration, audio and video codecs, stream bitrates, and more. This data can only be retrieved by the video owner.'
       id:
         description: The ID that YouTube uses to uniquely identify the video.
         type: string
@@ -7122,7 +7151,7 @@ definitions:
         description: The statistics object contains statistics about the video.
       status:
         $ref: '#/definitions/VideoStatus'
-        description: "The status object contains information about the video's uploading, processing, and privacy statuses."
+        description: 'The status object contains information about the video''s uploading, processing, and privacy statuses.'
       suggestions:
         $ref: '#/definitions/VideoSuggestions'
         description: The suggestions object encapsulates suggestions that identify opportunities to improve the video quality or the metadata for the uploaded video. This data can only be retrieved by the video owner.
@@ -7213,7 +7242,7 @@ definitions:
         description: 'Indicates whether or not the video has alcoholic beverage content. Only users of legal purchasing age in a particular country, as identified by ICAP, can view the content.'
         type: boolean
       restricted:
-        description: "Age-restricted trailers. For redband trailers and adult-rated video-games. Only users aged 18+ can view the content. The the field is true the content is restricted to viewers aged 18+. Otherwise The field won't be present."
+        description: Age-restricted trailers. For redband trailers and adult-rated video-games. Only users aged 18+ can view the content. The the field is true the content is restricted to viewers aged 18+. Otherwise The field won't be present.
         type: boolean
       videoGameRating:
         description: 'Video game rating, if any.'
@@ -7282,7 +7311,7 @@ definitions:
         description: The YouTube channel that created the video category.
         type: string
       title:
-        description: "The video category's title."
+        description: The video category's title.
         type: string
     type: object
   VideoContentDetails:
@@ -7342,28 +7371,32 @@ definitions:
           $ref: '#/definitions/VideoFileDetailsAudioStream'
         type: array
       bitrateBps:
-        description: "The uploaded video file's combined (video and audio) bitrate in bits per second."
+        description: The uploaded video file's combined (video and audio) bitrate in bits per second.
         format: uint64
         type: string
       container:
-        description: "The uploaded video file's container format."
+        description: The uploaded video file's container format.
         type: string
       creationTime:
-        description: "The date and time when the uploaded video file was created. The value is specified in ISO 8601 format. Currently, the following ISO 8601 formats are supported:  \n- Date only: YYYY-MM-DD \n- Naive time: YYYY-MM-DDTHH:MM:SS \n- Time with timezone: YYYY-MM-DDTHH:MM:SS+HH:MM"
+        description: |-
+          The date and time when the uploaded video file was created. The value is specified in ISO 8601 format. Currently, the following ISO 8601 formats are supported:  
+          - Date only: YYYY-MM-DD 
+          - Naive time: YYYY-MM-DDTHH:MM:SS 
+          - Time with timezone: YYYY-MM-DDTHH:MM:SS+HH:MM
         type: string
       durationMs:
         description: The length of the uploaded video in milliseconds.
         format: uint64
         type: string
       fileName:
-        description: "The uploaded file's name. This field is present whether a video file or another type of file was uploaded."
+        description: The uploaded file's name. This field is present whether a video file or another type of file was uploaded.
         type: string
       fileSize:
-        description: "The uploaded file's size in bytes. This field is present whether a video file or another type of file was uploaded."
+        description: The uploaded file's size in bytes. This field is present whether a video file or another type of file was uploaded.
         format: uint64
         type: string
       fileType:
-        description: "The uploaded file's type as detected by YouTube's video processing engine. Currently, YouTube only processes video files, but this field is present whether a video file or another type of file was uploaded."
+        description: 'The uploaded file''s type as detected by YouTube''s video processing engine. Currently, YouTube only processes video files, but this field is present whether a video file or another type of file was uploaded.'
         enum:
           - archive
           - audio
@@ -7386,7 +7419,7 @@ definitions:
     description: Information about an audio stream.
     properties:
       bitrateBps:
-        description: "The audio stream's bitrate, in bits per second."
+        description: 'The audio stream''s bitrate, in bits per second.'
         format: uint64
         type: string
       channelCount:
@@ -7404,22 +7437,22 @@ definitions:
     description: Information about a video stream.
     properties:
       aspectRatio:
-        description: "The video content's display aspect ratio, which specifies the aspect ratio in which the video should be displayed."
+        description: 'The video content''s display aspect ratio, which specifies the aspect ratio in which the video should be displayed.'
         format: double
         type: number
       bitrateBps:
-        description: "The video stream's bitrate, in bits per second."
+        description: 'The video stream''s bitrate, in bits per second.'
         format: uint64
         type: string
       codec:
         description: The video codec that the stream uses.
         type: string
       frameRateFps:
-        description: "The video stream's frame rate, in frames per second."
+        description: 'The video stream''s frame rate, in frames per second.'
         format: double
         type: number
       heightPixels:
-        description: "The encoded video content's height in pixels."
+        description: The encoded video content's height in pixels.
         format: uint32
         type: integer
       rotation:
@@ -7522,10 +7555,10 @@ definitions:
     description: Localized versions of certain video properties (e.g. title).
     properties:
       description:
-        description: "Localized version of the video's description."
+        description: Localized version of the video's description.
         type: string
       title:
-        description: "Localized version of the video's title."
+        description: Localized version of the video's title.
         type: string
     type: object
   VideoMonetizationDetails:
@@ -7539,7 +7572,7 @@ definitions:
     description: Player to be used for a video playback.
     properties:
       embedHtml:
-        description: 'An <iframe> tag that embeds a player that will play the video.'
+        description: An <iframe> tag that embeds a player that will play the video.
         type: string
     type: object
   VideoProcessingDetails:
@@ -7549,10 +7582,10 @@ definitions:
         description: 'This value indicates whether video editing suggestions, which might improve video quality or the playback experience, are available for the video. You can retrieve these suggestions by requesting the suggestions part in your videos.list() request.'
         type: string
       fileDetailsAvailability:
-        description: "This value indicates whether file details are available for the uploaded video. You can retrieve a video's file details by requesting the fileDetails part in your videos.list() request."
+        description: This value indicates whether file details are available for the uploaded video. You can retrieve a video's file details by requesting the fileDetails part in your videos.list() request.
         type: string
       processingFailureReason:
-        description: "The reason that YouTube failed to process the video. This property will only have a value if the processingStatus property's value is failed."
+        description: The reason that YouTube failed to process the video. This property will only have a value if the processingStatus property's value is failed.
         enum:
           - other
           - streamingFailed
@@ -7560,13 +7593,13 @@ definitions:
           - uploadFailed
         type: string
       processingIssuesAvailability:
-        description: "This value indicates whether the video processing engine has generated suggestions that might improve YouTube's ability to process the the video, warnings that explain video processing problems, or errors that cause video processing problems. You can retrieve these suggestions by requesting the suggestions part in your videos.list() request."
+        description: 'This value indicates whether the video processing engine has generated suggestions that might improve YouTube''s ability to process the the video, warnings that explain video processing problems, or errors that cause video processing problems. You can retrieve these suggestions by requesting the suggestions part in your videos.list() request.'
         type: string
       processingProgress:
         $ref: '#/definitions/VideoProcessingDetailsProcessingProgress'
-        description: "The processingProgress object contains information about the progress YouTube has made in processing the video. The values are really only relevant if the video's processing status is processing."
+        description: The processingProgress object contains information about the progress YouTube has made in processing the video. The values are really only relevant if the video's processing status is processing.
       processingStatus:
-        description: "The video's processing status. This value indicates whether YouTube was able to process the video or if the video is still being processed."
+        description: The video's processing status. This value indicates whether YouTube was able to process the video or if the video is still being processed.
         enum:
           - failed
           - processing
@@ -7574,7 +7607,7 @@ definitions:
           - terminated
         type: string
       tagSuggestionsAvailability:
-        description: "This value indicates whether keyword (tag) suggestions are available for the video. Tags can be added to a video's metadata to make it easier for other users to find the video. You can retrieve these suggestions by requesting the suggestions part in your videos.list() request."
+        description: This value indicates whether keyword (tag) suggestions are available for the video. Tags can be added to a video's metadata to make it easier for other users to find the video. You can retrieve these suggestions by requesting the suggestions part in your videos.list() request.
         type: string
       thumbnailsAvailability:
         description: This value indicates whether thumbnail images have been generated for the video.
@@ -7648,16 +7681,16 @@ definitions:
         description: Channel title for the channel that the video belongs to.
         type: string
       defaultAudioLanguage:
-        description: "The default_audio_language property specifies the language spoken in the video's default audio track."
+        description: The default_audio_language property specifies the language spoken in the video's default audio track.
         type: string
       defaultLanguage:
-        description: "The language of the videos's default snippet."
+        description: The language of the videos's default snippet.
         type: string
       description:
-        description: "The video's description."
+        description: The video's description.
         type: string
       liveBroadcastContent:
-        description: "Indicates if the video is an upcoming/active live broadcast. Or it's \"none\" if the video is not an upcoming/active live broadcast."
+        description: Indicates if the video is an upcoming/active live broadcast. Or it's "none" if the video is not an upcoming/active live broadcast.
         enum:
           - live
           - none
@@ -7679,7 +7712,7 @@ definitions:
         $ref: '#/definitions/ThumbnailDetails'
         description: 'A map of thumbnail images associated with the video. For each object in the map, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail.'
       title:
-        description: "The video's title."
+        description: The video's title.
         type: string
     type: object
   VideoStatistics:
@@ -7723,13 +7756,13 @@ definitions:
           - uploadAborted
         type: string
       license:
-        description: "The video's license."
+        description: The video's license.
         enum:
           - creativeCommon
           - youtube
         type: string
       privacyStatus:
-        description: "The video's privacy status."
+        description: The video's privacy status.
         enum:
           - private
           - public
@@ -7780,7 +7813,7 @@ definitions:
           type: string
         type: array
       processingErrors:
-        description: "A list of errors that will prevent YouTube from successfully processing the uploaded video video. These errors indicate that, regardless of the video's current processing status, eventually, that status will almost certainly be failed."
+        description: 'A list of errors that will prevent YouTube from successfully processing the uploaded video video. These errors indicate that, regardless of the video''s current processing status, eventually, that status will almost certainly be failed.'
         items:
           enum:
             - archiveFile
@@ -7792,7 +7825,7 @@ definitions:
           type: string
         type: array
       processingHints:
-        description: "A list of suggestions that may improve YouTube's ability to process the video."
+        description: A list of suggestions that may improve YouTube's ability to process the video.
         items:
           enum:
             - nonStreamableMov
@@ -7813,13 +7846,13 @@ definitions:
           type: string
         type: array
       tagSuggestions:
-        description: "A list of keyword tags that could be added to the video's metadata to increase the likelihood that users will locate your video when searching or browsing on YouTube."
+        description: A list of keyword tags that could be added to the video's metadata to increase the likelihood that users will locate your video when searching or browsing on YouTube.
         items:
           $ref: '#/definitions/VideoSuggestionsTagSuggestion'
         type: array
     type: object
   VideoSuggestionsTagSuggestion:
-    description: "A single tag suggestion with it's relevance information."
+    description: A single tag suggestion with it's relevance information.
     properties:
       categoryRestricts:
         description: 'A set of video categories for which the tag is relevant. You can use this information to display appropriate tag suggestions based on the video category that the video uploader associates with the video. By default, tag suggestions are relevant for all categories if there are no restricts defined for the keyword.'
@@ -7848,12 +7881,12 @@ definitions:
     description: Branding properties for the watch. All deprecated.
     properties:
       backgroundColor:
-        description: "The text color for the video watch page's branded area."
+        description: The text color for the video watch page's branded area.
         type: string
       featuredPlaylistId:
         description: An ID that uniquely identifies a playlist that displays next to the video player.
         type: string
       textColor:
-        description: "The background color for the video watch page's branded area."
+        description: The background color for the video watch page's branded area.
         type: string
     type: object
