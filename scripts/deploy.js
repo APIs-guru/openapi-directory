@@ -15,35 +15,33 @@ var makeRequest = require('makeRequest');
 var util = require('./util');
 
 var specRootUrl = 'https://apis-guru.github.io/api-models/';
+var deployDir = 'deploy/';
 
 sh.set('-e');
 sh.set('-v');
 
-sh.mkdir('deploy');
-sh.cd('deploy');
+sh.mkdir(deployDir);
+sh.cp('scripts/index.html', deployDir);
+sh.cp('-R', 'branding/', deployDir);
 
-sh.cp('../scripts/index.html', '.');
-sh.cp('-R', '../branding/', '.');
+sh.mkdir('-p', deployDir + 'api/v1');
+sh.cp('scripts/apis_guru_swagger.yaml', deployDir + 'api/v1/swagger.yaml');
+sh.cp('scripts/apis.json', deployDir + 'api/apis.json');
 
-sh.mkdir('-p', 'api/v1');
-sh.cp('../scripts/apis_guru_swagger.yaml', 'api/v1/swagger.yaml');
-sh.cp('../scripts/apis.json', './api/apis.json');
-
-cacheResources(util.getSpecs('../APIs/'))
+cacheResources(util.getSpecs('APIs/'))
   .then(function (specs) {
     //Note: at this point all logo are cached
     generateAPIsJSON(specs);
 
     _.each(specs, function (swagger) {
-      util.saveSwagger(swagger);
-
-      var swaggerJsonPath = util.getSwaggerPath(swagger, 'swagger.json');
-      util.saveJson(swaggerJsonPath, swagger);
+      var swaggerPath = deployDir + util.getSwaggerPath(swagger, 'swagger');
+      util.saveJson(swaggerPath + '.json', swagger);
+      util.saveYaml(swaggerPath + '.yaml', swagger);
     });
 
     var apiList = generateAPI(specs);
     console.log('Generated list for ' + _.size(apiList) + ' API specs.');
-    util.saveJson('api/v1/list.json', apiList);
+    util.saveJson(deployDir + 'api/v1/list.json', apiList);
 
     var numAPIs = _.size(apiList);
     var numEndpoints = _(specs).map('paths').map(_.size).sum();
@@ -74,7 +72,7 @@ function cacheResources(specs) {
         }
 
         var logoFile = 'cache/' + util.getSwaggerPath(swagger, 'logo.' + extension);
-        util.saveFile(logoFile, data);
+        util.saveFile(deployDir + logoFile, data);
 
         //Modify object to 
         swagger.info['x-logo'].url = specRootUrl + logoFile;
@@ -109,7 +107,7 @@ function generateAPIsJSON(specs) {
     });
   });
 
-  util.saveJson('apis.json', collection);
+  util.saveJson(deployDir + 'apis.json', collection);
 }
 
 function generateAPI(specs) {
@@ -146,10 +144,9 @@ function generateAPI(specs) {
 }
 
 function gitLogDate(options, filename) {
-  var result = exec('git -C .. log --format=%aD ' + options + ' -- \'APIs/' + filename + '\'');
-  result = _.trim(result.toString(), '\n');
-  assert(result && result !== '');
-  result = result.split('\n');
+  var result = exec('git log --format=%aD ' + options + ' -- \'APIs/' + filename + '\'');
+  result = _.trim(result.stdout, '\n').split('\n');
+  assert(!_.isEmpty(result));
   return result.map(function (str) {
     return new Date(str);
   });
@@ -169,7 +166,7 @@ function saveShield(subject, status, color) {
 
   return makeRequest('get', url, {encoding: null})
     .spread(function(response, data) {
-      var filename = escape(subject).toLowerCase() + '_banner.svg';
+      var filename = deployDir + escape(subject).toLowerCase() + '_banner.svg';
       util.saveFile(filename, data);
     });
 }
