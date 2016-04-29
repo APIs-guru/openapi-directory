@@ -3,8 +3,10 @@
 
 var assert = require('assert');
 var fs = require('fs');
-var _ = require('lodash');
+var os = require('os');
+var path = require('path');
 
+var _ = require('lodash');
 var jp = require('json-pointer');
 var jsonPath = require('jsonpath');
 var editor = require('editor');
@@ -232,7 +234,8 @@ function addToCollection(type, url, command) {
 }
 
 function editFile(str, cb) {
-  var tmpfile = mktemp('/tmp/XXXXXX.txt');
+  var pattern = path.join(os.tmpdir(),'XXXXXX.txt');
+  var tmpfile = mktemp(pattern);
   fs.writeFileSync(tmpfile, str);
 
   return Promise.fromCallback(function (promiseCb) {
