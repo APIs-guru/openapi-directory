@@ -169,7 +169,7 @@ function saveShield(subject, status, color) {
 
   return makeRequest('get', url, {encoding: null})
     .spread(function(response, data) {
-      var filename = deployDir + escape(subject).toLowerCase() + '_banner.svg';
+      var filename = deployDir + 'banners/' + escape(subject).toLowerCase() + '_banner.svg';
       util.saveFile(filename, data);
     });
 }
