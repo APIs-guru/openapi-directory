@@ -1,6 +1,7 @@
 ![banner]
 
 [![APIs in collection][numApis-image]][apisDir-link]
+[![OpenAPI specs][numSpecs-image]][apisDir-link]
 [![Endpoints][endpoints-image]][apisDir-link]
 [![Chat on gitter][gitter-image]][gitter-link]
 
@@ -88,6 +89,7 @@ Some specs are taken from Open Source projects:
 [twitterFollow-link]: https://twitter.com/intent/follow?screen_name=APIs_guru
 [gitter-image]: https://img.shields.io/gitter/room/APIs-guru/api-models.svg
 [gitter-link]: https://gitter.im/APIs-guru/api-models
-[numApis-image]: https://apis-guru.github.io/api-models/apis_in_collection_banner.svg
-[endpoints-image]: https://apis-guru.github.io/api-models/endpoints_banner.svg
+[numApis-image]: https://apis-guru.github.io/api-models/banners/apis_in_collection_banner.svg
+[numSpecs-image]: https://apis-guru.github.io/api-models/banners/openapi_specs_banner.svg
+[endpoints-image]: https://apis-guru.github.io/api-models/banners/endpoints_banner.svg
 [apisDir-link]: ./APIs
