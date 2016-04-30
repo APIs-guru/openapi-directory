@@ -15,7 +15,6 @@ info:
     version: '1.1'
   x-providerName: versioneye.com
 tags:
-  - name: artifactory
   - name: github
   - name: me
   - name: products
@@ -24,77 +23,7 @@ tags:
   - name: services
   - name: sessions
   - name: users
-  - name: watchers
 paths:
-  /v2/artifactory:
-    delete:
-      description: |+
-
-        <p>This will create a new artifactory connection in X-Ray.</p>
-
-
-      operationId: DELETE--version-artifactory---format-
-      parameters:
-        - description: Admin user in Artifactory
-          in: query
-          name: admin_user
-          required: true
-          type: string
-        - description: Admin password in Artifactory
-          in: query
-          name: admin_pass
-          required: true
-          type: string
-        - description: The ID of Artifactory
-          in: query
-          name: artifactory_id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: No response was specified
-      summary: create a new artifactory connection
-      tags:
-        - artifactory
-    post:
-      description: |+
-
-        <p>This will create a new artifactory connection in X-Ray.</p>
-
-
-      operationId: POST--version-artifactory---format-
-      parameters:
-        - description: Base URL to Artifactory
-          in: formData
-          name: baseurl
-          required: true
-          type: string
-        - description: Admin user in Artifactory
-          in: formData
-          name: admin_user
-          required: true
-          type: string
-        - description: Admin password in Artifactory
-          in: formData
-          name: admin_pass
-          required: true
-          type: string
-        - description: The ID of Artifactory
-          in: formData
-          name: artifactory_id
-          required: true
-          type: string
-        - description: URL to X-Ray server
-          in: formData
-          name: xray_url
-          required: false
-          type: string
-      responses:
-        '200':
-          description: No response was specified
-      summary: create a new artifactory connection
-      tags:
-        - artifactory
   /v2/github:
     get:
       description: |+
@@ -107,7 +36,6 @@ paths:
 
         <p>If it shows no or old data, then you can use the <code>github/sync</code> endpoint
         to update your account with the current meta data from GitHub.</p>
-
 
       operationId: GET--version-github---format-
       parameters:
@@ -175,7 +103,6 @@ paths:
         <p>This endpoint works asynchronously and returns a status code. The status code is either
         <strong>running</strong> or <strong>done</strong>.</p>
 
-
       operationId: GET--version-github-sync---format-
       responses:
         '200':
@@ -195,7 +122,6 @@ paths:
 
         <p>For example,  repository with fullname <code>versioneye/veye</code> has to transformed
         to <code>versioneye:veye</code>.</p>
-
 
       operationId: DELETE--version-github--repo_key---format-
       parameters:
@@ -227,7 +153,6 @@ paths:
         <p>For example,  repository with fullname <code>versioneye/veye</code> has to transformed
         to <code>versioneye:veye</code>.</p>
 
-
       operationId: GET--version-github--repo_key---format-
       parameters:
         - description: encoded repo name with optional branch info.
@@ -252,7 +177,6 @@ paths:
 
         <p>For example,  repository with fullname <code>versioneye/veye</code> has to transformed
         to <code>versioneye:veye</code>.</p>
-
 
       operationId: POST--version-github--repo_key---format-
       parameters:
@@ -282,7 +206,6 @@ paths:
       description: |+
 
         <p>On Swagger, you can create session by adding additional parameter :api_key.</p>
-
 
       operationId: GET--version-me---format-
       responses:
@@ -330,7 +253,6 @@ paths:
         <p>If there are new versions out there for software packages you follow directly on VersionEye, then
         each new version is a new <strong>notification</strong> for your account.</p>
 
-
       operationId: GET--version-me-notifications---format-
       responses:
         '200':
@@ -346,7 +268,6 @@ paths:
         the result is an JSON array of product objects.</p>
 
         <p>When there’s no match for the query, the result array will be empty.</p>
-
 
       operationId: GET--version-products-search--q---format-
       parameters:
@@ -398,7 +319,6 @@ paths:
           </li>
         </ul>
 
-
       operationId: GET--version-products--lang--prod_key---format-
       parameters:
         - description: '"Name of programming language"'
@@ -438,7 +358,6 @@ paths:
           <li>403 - forbidden; you are not authorized; or just missed api_key;</li>
         </ul>
 
-
       operationId: DELETE--version-products--lang--prod_key-follow---format-
       parameters:
         - description: Programming language
@@ -469,7 +388,6 @@ paths:
         <p>This resource will returns the status code 404 if there is no product
         for the given prod_key.</p>
 
-
       operationId: GET--version-products--lang--prod_key-follow---format-
       parameters:
         - description: '"Name of programming language"'
@@ -498,7 +416,6 @@ paths:
         <h4 id="notes-about-status-codes">Notes about status codes</h4>
 
         <p>It will respond 404, when you are using wrong product key or encode it uncorrectly.</p>
-
 
       operationId: POST--version-products--lang--prod_key-follow---format-
       parameters:
@@ -532,7 +449,6 @@ paths:
 
         <p>This resource will return the status code 404 if there is no product for
         the given prod_key or the product has 0 references.</p>
-
 
       operationId: GET--version-products--lang--prod_key-references---format-
       parameters:
@@ -576,7 +492,6 @@ paths:
           </li>
         </ul>
 
-
       operationId: GET--version-products--lang--prod_key-versions---format-
       parameters:
         - description: '"Name of programming language"'
@@ -609,7 +524,6 @@ paths:
         <h4 id="notes-about-status-codes">Notes about status codes</h4>
 
         <p>It will respond 404, when you are using wrong product key or encode it uncorrectly.</p>
-
 
       operationId: POST--version-products--lang--prod_key--prod_version-scm_changes---format-
       parameters:
@@ -646,7 +560,6 @@ paths:
         <p>To use this resource you need either an active session or you have to append
         your API Key to the URL as parameter. For example: “?api_key=666_your_api_key_666”</p>
 
-
       operationId: GET--version-projects---format-
       responses:
         '200':
@@ -659,7 +572,6 @@ paths:
 
         <p>To use this resource you need either an active session or you have to append
         your API Key to the URL as parameter. For example: “?api_key=666_your_api_key_666”</p>
-
 
       operationId: POST--version-projects---format-
       parameters:
@@ -708,7 +620,6 @@ paths:
         To use this resource you need either an active session or you have to append
         your API Key to the URL as parameter. For example: “?api_key=666_your_api_key_666”</p>
 
-
       operationId: GET--version-projects--group_id--artifact_id-merge_ga--child_id---format-
       parameters:
         - description: GroupId of the parent project
@@ -740,7 +651,6 @@ paths:
         To use this resource you need either an active session or you have to append
         your API Key to the URL as parameter. For example: “?api_key=666_your_api_key_666”</p>
 
-
       operationId: GET--version-projects--parent_id-merge--child_id---format-
       parameters:
         - description: Project ID of the parent
@@ -768,7 +678,6 @@ paths:
         To use this resource you need either an active session or you have to append
         your API Key to the URL as parameter. For example: “?api_key=666_your_api_key_666”</p>
 
-
       operationId: GET--version-projects--parent_id-unmerge--child_id---format-
       parameters:
         - description: Project ID of the parent
@@ -793,7 +702,6 @@ paths:
 
         <p>To use this resource you need either an active session or you have to append
         your API Key to the URL as parameter. For example: “?api_key=666_your_api_key_666”</p>
-
 
       operationId: DELETE--version-projects--project_key---format-
       parameters:
@@ -830,7 +738,6 @@ paths:
         <p>To use this resource you need either an active session or you have to append
         your API Key to the URL as parameter. For example: “?api_key=666_your_api_key_666”</p>
 
-
       operationId: POST--version-projects--project_key---format-
       parameters:
         - description: Project ID
@@ -855,7 +762,6 @@ paths:
 
         <p>To use this resource you need either an active session or you have to append
         your API Key to the URL as parameter. For example: “?api_key=666_your_api_key_666”</p>
-
 
       operationId: GET--version-projects--project_key-licenses---format-
       parameters:
@@ -905,6 +811,90 @@ paths:
       summary: Security Vulnerabilities
       tags:
         - security
+    post:
+      operationId: POST--version-security---format-
+      parameters:
+        - description: Computer language. For example 'Java' or 'Ruby'.
+          in: formData
+          name: language
+          required: true
+          type: string
+        - description: Uniq. identifier from the package manager. For Maven it's 'groupId/artefactId'.
+          in: formData
+          name: prod_key
+          required: true
+          type: string
+        - description: The affected versions.
+          in: formData
+          name: affected_versions_string
+          required: true
+          type: string
+        - description: Uniq. identifier. For example the CVE ID.
+          in: formData
+          name: name_id
+          required: true
+          type: string
+        - description: A short summary.
+          in: formData
+          name: summary
+          required: true
+          type: string
+        - description: Author of the security vulnerability.
+          in: formData
+          name: author
+          required: false
+          type: string
+        - description: A description.
+          in: formData
+          name: description
+          required: false
+          type: string
+        - description: Platform if available.
+          in: formData
+          name: platform
+          required: false
+          type: string
+        - description: Osvdb id if available.
+          in: formData
+          name: osvdb
+          required: false
+          type: string
+        - description: CVE id if available.
+          in: formData
+          name: cve
+          required: false
+          type: string
+        - description: CvSSv2 if available.
+          in: formData
+          name: cvss_v2
+          required: false
+          type: string
+        - description: Related Framework if available.
+          in: formData
+          name: framework
+          required: false
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: New Security Vulnerabilities
+      tags:
+        - security
+  '/v2/security/{name_id}':
+    delete:
+      operationId: DELETE--version-security--name_id---format-
+      parameters:
+        - description: Delete security vulnerability with given ID.
+          in: path
+          name: name_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: delete given security vulnerability
+      tags:
+        - security
   /v2/services/ping:
     get:
       operationId: GET--version-services-ping---format-
@@ -932,7 +922,6 @@ paths:
                         method will return 200 with short user profile.
                         For othercase, it will return error message with status code 401.</p>
 
-
       operationId: GET--version-sessions---format-
       responses:
         '200':
@@ -956,31 +945,6 @@ paths:
       summary: creates new sessions
       tags:
         - sessions
-  /v2/users:
-    post:
-      operationId: POST--version-users---format-
-      parameters:
-        - description: username
-          in: formData
-          name: fullname
-          required: true
-          type: string
-        - description: password
-          in: formData
-          name: password
-          required: true
-          type: string
-        - description: email
-          in: formData
-          name: email
-          required: true
-          type: string
-      responses:
-        '200':
-          description: No response was specified
-      summary: create new user
-      tags:
-        - users
   '/v2/users/{username}':
     get:
       operationId: GET--version-users--username---format-
@@ -1036,91 +1000,3 @@ paths:
       summary: shows user's favorite packages
       tags:
         - users
-  /v2/watchers:
-    get:
-      operationId: GET--version-watchers---format-
-      responses:
-        '200':
-          description: No response was specified
-      summary: get all notification watchers
-      tags:
-        - watchers
-    post:
-      description: |+
-
-        <p>Create a new notification watcher to get notified about specific events.</p>
-
-        <p>With CURL:</p>
-
-        <p><code>curl --data "name=hans&amp;event=security&amp;config[email]=ho@do.bo&amp;constraints[][type]=wildcard&amp;constraints[][value]=**/*.jar" https://www.versioneye.com/api/v2/watchers?api_key=API_KEY</code></p>
-
-
-      operationId: POST--version-watchers---format-
-      parameters:
-        - description: Name of the watcher.
-          in: formData
-          name: name
-          required: false
-          type: string
-        - description: Description of the watcher.
-          in: formData
-          name: description
-          required: false
-          type: string
-        - description: 'One of this: [security, license, version]'
-          in: formData
-          name: event
-          required: false
-          type: string
-        - description: 'One of this: [email, webhook]'
-          in: formData
-          name: type
-          required: false
-          type: string
-        - description: 'Hash of config: {:email => ''ho@do.bo'', :url => ''http://my.webhook.com''}]'
-          in: formData
-          name: config
-          required: false
-          type: file
-        - description: 'Array of constraints: [{:type => ''wildcard'', :value => ''*.jar''}]'
-          in: formData
-          items:
-            type: string
-          name: constraints
-          required: false
-          type: array
-      responses:
-        '200':
-          description: No response was specified
-      summary: create a new notification watcher
-      tags:
-        - watchers
-  '/v2/watchers/{watcher_id}':
-    delete:
-      operationId: DELETE--version-watchers--watcher_id---format-
-      parameters:
-        - description: Delete watcher with given ID.
-          in: path
-          name: watcher_id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: No response was specified
-      summary: delete given watcher
-      tags:
-        - watchers
-    get:
-      operationId: GET--version-watchers--watcher_id---format-
-      parameters:
-        - description: Watcher ID
-          in: path
-          name: watcher_id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: No response was specified
-      summary: get a watcher by id
-      tags:
-        - watchers

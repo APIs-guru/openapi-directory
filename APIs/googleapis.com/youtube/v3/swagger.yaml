@@ -7344,6 +7344,12 @@ definitions:
       licensedContent:
         description: The value of is_license_content indicates whether the video is licensed content.
         type: boolean
+      projection:
+        description: Specifies the projection format of the video.
+        enum:
+          - '360'
+          - rectangular
+        type: string
       regionRestriction:
         $ref: '#/definitions/VideoContentDetailsRegionRestriction'
         description: The regionRestriction object contains information about the countries where a video is (or is not) viewable. The object will contain either the contentDetails.regionRestriction.allowed property or the contentDetails.regionRestriction.blocked property.

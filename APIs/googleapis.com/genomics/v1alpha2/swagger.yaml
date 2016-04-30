@@ -729,7 +729,7 @@ definitions:
         description: Specifies resource requirements/overrides for the pipeline run.
       serviceAccount:
         $ref: '#/definitions/ServiceAccount'
-        description: Required. The Google Cloud Service Account that will be used to access data and services.
+        description: 'The Google Cloud Service Account that will be used to access data and services. By default, the compute service account associated with `projectId` is used.'
     type: object
   RunPipelineRequest:
     description: 'The request to run a pipeline. If `pipelineId` is specified, it refers to a saved pipeline created with CreatePipeline and set as the `pipelineId` of the returned Pipeline object. If `ephemeralPipeline` is specified, that pipeline is run once with the given args and not saved. It is an error to specify both `pipelineId` and `ephemeralPipeline`. `pipelineArgs` must be specified.'

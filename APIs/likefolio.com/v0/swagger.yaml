@@ -376,6 +376,23 @@ paths:
       summary: Returns list of available tickers.
       tags:
         - companies
+  /v0/companies/tickers/forCharting.json:
+    get:
+      operationId: GET--version-companies-tickers-forCharting---format-
+      parameters:
+        - description: 'Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.'
+          in: query
+          name: apiKey
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+      summary: Lists available tickers to query company/statistics
+      tags:
+        - companies
   /v0/companies/tickers/show.json:
     get:
       operationId: GET--version-companies-tickers-show---format-

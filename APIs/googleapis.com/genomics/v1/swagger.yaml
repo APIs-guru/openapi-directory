@@ -1774,7 +1774,7 @@ paths:
           name: variantSetId
           required: true
           type: string
-        - description: 'An optional mask specifying which fields to update. Supported fields: * metadata. Leaving `updateMask` unset is equivalent to specifying all mutable fields.'
+        - description: 'An optional mask specifying which fields to update. Supported fields: * metadata. * name. * description. Leaving `updateMask` unset is equivalent to specifying all mutable fields.'
           in: query
           name: updateMask
           type: string
