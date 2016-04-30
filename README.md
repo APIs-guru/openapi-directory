@@ -52,6 +52,7 @@ Also used as test suite in following projects:
  - [swagger-parser](https://github.com/BigstickCarpet/swagger-parser) - Swagger 2.0 parser and validator for Node and browsers
  - [SwaggerProvider](https://github.com/sergey-tihon/SwaggerProvider) - F# Type Provider for Swagger
  - [ReDoc](https://github.com/Rebilly/ReDoc) - Swagger-generated API Reference Documentation
+ - [ardoq-swagger-addon](https://github.com/ardoq/ardoq-swagger-addon) - Ardoq Open API (Swagger) Addon
 
 API spec acceptance criteria
 --------------------------
