@@ -164,8 +164,8 @@ function saveShield(subject, status, color) {
     return left + '-' + right;
   }
 
-  var text = join(escape(subject), escape(status));
-  var url =  'https://img.shields.io/badge/' + join(text, color) + '.svg';
+  var filename = join(join(escape(subject), escape(status)), color);
+  var url = `https://img.shields.io/badge/${filename}.svg`;
 
   return makeRequest('get', url, {encoding: null})
     .spread(function(response, data) {
