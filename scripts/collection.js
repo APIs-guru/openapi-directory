@@ -109,6 +109,11 @@ function urlsCollection() {
 }
 
 function refreshCollection(dir) {
+  var fixups = util.getYamlFiles('**/fixup.yaml', dir);
+  _.each(fixups, function (fixup, filename) {
+    util.saveYaml(filename, fixup);
+  });
+
   _.each(util.getSpecs(dir), function (swagger, filename) {
     assert(util.getSwaggerPath(swagger) === filename);
     util.saveSwagger(swagger);

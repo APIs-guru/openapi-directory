@@ -94,8 +94,12 @@ exports.sortJson = function (json) {
 }
 
 exports.getSpecs = function (dir) {
+  return exports.getYamlFiles('**/swagger.yaml', dir);
+}
+
+exports.getYamlFiles = function (pattern, dir) {
   dir = dir || '';
-  var files = glob.sync(dir + '**/swagger.yaml');
+  var files = glob.sync(dir + pattern);
   return _.transform(files, function (result, filename) {
     result[filename] = exports.readYaml(filename);
   }, {});
