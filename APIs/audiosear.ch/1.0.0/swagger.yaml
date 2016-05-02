@@ -8,7 +8,7 @@ info:
     email: info@audiosear.ch
     name: Audiosear.ch
   description: 'The Audiosear.ch API requires OAuth, which you can manage at <a href=''/oauth/applications''>OAuth Applications</a>.<br/>API SDK clients available in <a href=''https://github.com/popuparchive/audiosearch-client-python'' target=''_blank''>Python</a>, <a href=''https://github.com/popuparchive/audiosearch-client-ruby'' target=''_blank''>Ruby</a>, <a href=''https://github.com/popuparchive/audiosearch-client-php'' target=''_blank''>PHP</a>, <a href=''https://github.com/popuparchive/audiosearch-client-node'' target=''_blank''>Node</a>, and <a href=''https://github.com/popuparchive/AudiosearchClientSwift'' target=''_blank''>Swift</a>.<br/>Read the <a href=''https://github.com/popuparchive/audiosearch-cookbook/wiki''>API Cookbook</a> for easy copy-and-paste recipes.'
-  termsOfService: 'https://www.auidosear.ch/terms_of_use'
+  termsOfService: 'https://www.audiosear.ch/terms'
   title: Audiosear.ch
   version: 1.0.0
   x-apiClientRegistration:
@@ -177,7 +177,7 @@ paths:
           type: string
         - description: Add this filter (no value required) to filter out episodes with no transcript.
           in: query
-          name: 'fitlers[with_transcript]'
+          name: 'filters[with_transcript]'
           required: false
           type: string
         - description: Sort results by any field value. The default is by the relevancy score (<b>_score</b>). Must be paired with <b>sort_order</b>.

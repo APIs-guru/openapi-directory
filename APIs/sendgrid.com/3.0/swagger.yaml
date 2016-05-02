@@ -886,6 +886,10 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              description: Suggestions for items our users might like.
+              id: 103
+              name: Item Suggestions
             properties:
               description:
                 description: The description of the suppression group.
@@ -2865,7 +2869,18 @@ paths:
 
         The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
       operationId: DELETE_contactdb-lists
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            example:
+              - 1
+              - 2
+              - 3
+              - 4
+            items:
+              type: number
+            type: array
       produces:
         - application/json
       responses:
@@ -3280,7 +3295,16 @@ paths:
 
         The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
       operationId: POST_contactdb-lists-list_id-recipients
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            example:
+              - recipient_id1
+              - recipient_id2
+            items:
+              type: string
+            type: array
       produces:
         - application/json
       responses:
@@ -3466,7 +3490,16 @@ paths:
 
         The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
       operationId: DELETE_contactdb-recipients
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            example:
+              - recipient_id1
+              - recipient_id2
+            items:
+              type: string
+            type: array
       produces:
         - application/json
       responses:
@@ -3567,7 +3600,29 @@ paths:
 
         The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
       operationId: PATCH_contactdb-recipients
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            example:
+              - email: jones@example.com
+                first_name: Guy
+                last_name: Jones
+            items:
+              properties:
+                email:
+                  format: email
+                  type: string
+                first_name:
+                  description: The first name of the recipient. This is one of the default custom fields.
+                  type: string
+                last_name:
+                  description: The last name of the recipient. This is one of the default custom fields.
+                  type: string
+              required:
+                - email
+              type: object
+            type: array
       produces:
         - application/json
       responses:
@@ -3606,7 +3661,35 @@ paths:
 
         The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
       operationId: POST_contactdb-recipients
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            example:
+              - age: 25
+                email: example@example.com
+                first_name: ''
+                last_name: User
+              - age: 25
+                email: example2@example.com
+                first_name: Example
+                last_name: User
+            items:
+              properties:
+                email:
+                  description: The email address of the recipient.
+                  format: email
+                  type: string
+                first_name:
+                  description: The first name of the recipient.
+                  type: string
+                last_name:
+                  description: The last name of the recipient.
+                  type: string
+              required:
+                - email
+              type: object
+            type: array
       produces:
         - application/json
       responses:
@@ -8116,6 +8199,117 @@ paths:
       tags:
         - Stats - Subuser Stats
     parameters: []
+  /subusers/stats/monthly:
+    get:
+      consumes:
+        - application/json
+      description: |-
+        **This endpoint allows you to retrieve the monthly email statistics for all subusers over the given date range.**
+
+        While you can always view the statistics for all email activity on your account, subuser statistics enable you to view specific segments of your stats for your subusers. Emails sent, bounces, and spam reports are always tracked for subusers. Unsubscribes, clicks, and opens are tracked if you have enabled the required settings.
+
+        When using the `sort_by_metric` to sort your stats by a specific metric, you can not sort by the following metrics:
+        `bounce_drops`, `deferred`, `invalid_emails`, `processed`, `spam_report_drops`, `spam_reports`, or `unsubscribe_drops`.
+
+        For more information, see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/subuser.html).
+      operationId: GET_subusers-stats-monthly
+      parameters:
+        - description: The date of the month to retrieve statistics for. Must be formatted YYYY-MM-DD
+          in: query
+          name: date
+          required: true
+          type: string
+        - description: A substring search of your subusers.
+          in: query
+          name: subuser
+          required: false
+          type: string
+        - default: delivered
+          description: 'The metric that you want to sort by. Metrics that you can sort by are: `blocks`, `bounces`, `clicks`, `delivered`, `opens`, `requests`, `unique_clicks`, `unique_opens`, and `unsubscribes`.'''
+          in: query
+          name: sort_by_metric
+          required: false
+          type: string
+        - default: desc
+          description: The direction you want to sort.
+          enum:
+            - desc
+            - asc
+          in: query
+          name: sort_by_direction
+          required: false
+          type: string
+        - default: 5
+          description: Optional field to limit the number of results returned.
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: 0
+          description: Optional beginning point in the list to retrieve from.
+          in: query
+          name: offset
+          required: false
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              date: '2016-02-01'
+              stats:
+                - first_name: John
+                  last_name: Doe
+                  metrics:
+                    blocks: 0
+                    bounce_drops: 0
+                    bounces: 0
+                    clicks: 0
+                    deferred: 0
+                    delivered: 0
+                    invalid_emails: 0
+                    opens: 1
+                    processed: 0
+                    requests: 100
+                    spam_report_drops: 0
+                    spam_reports: 99
+                    unique_clicks: 0
+                    unique_opens: 0
+                    unsubscribe_drops: 0
+                    unsubscribes: 0
+                  name: user1
+                  type: subuser
+                - first_name: Jane
+                  last_name: Doe
+                  metrics:
+                    blocks: 0
+                    bounce_drops: 0
+                    bounces: 0
+                    clicks: 5
+                    deferred: 0
+                    delivered: 0
+                    invalid_emails: 0
+                    opens: 10
+                    processed: 10
+                    requests: 10
+                    spam_report_drops: 0
+                    spam_reports: 0
+                    unique_clicks: 0
+                    unique_opens: 0
+                    unsubscribe_drops: 0
+                    unsubscribes: 0
+                  name: user2
+                  type: subuser
+          schema:
+            $ref: '#/definitions/subuser_stats'
+      security:
+        - Authorization: []
+      summary: Retrieve monthly stats for all subusers
+      tags:
+        - Stats - Subuser Stats
+    parameters: []
   /subusers/stats/sums:
     get:
       consumes:
@@ -8298,7 +8492,16 @@ paths:
         * [How to request more IPs](https://sendgrid.com/docs/Classroom/Basics/Account/adding_an_additional_dedicated_ip_to_your_account.html)
         * [IPs can be whitelabeled](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/ips.html)
       operationId: PUT_subusers-subuser_name-ips
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            example:
+              - 127.0.0.1
+            items:
+              format: ipv4
+              type: string
+            type: array
       produces:
         - application/json
       responses:
@@ -8393,7 +8596,8 @@ paths:
         - Authorization: []
       summary: Retrieve monitor settings for a subuser
     parameters:
-      - in: path
+      - description: The name of the subuser for which to retrieve monitor settings.
+        in: path
         name: subuser_name
         required: true
         type: string
@@ -8484,6 +8688,93 @@ paths:
       security:
         - Authorization: []
       summary: Update Monitor Settings for a subuser
+  '/subusers/{subuser_name}/stats/monthly':
+    get:
+      consumes:
+        - application/json
+      description: |-
+        **This endpoint allows you to retrive the monthly email statistics for a specific subuser.**
+
+        While you can always view the statistics for all email activity on your account, subuser statistics enable you to view specific segments of your stats for your subusers. Emails sent, bounces, and spam reports are always tracked for subusers. Unsubscribes, clicks, and opens are tracked if you have enabled the required settings.
+
+        When using the `sort_by_metric` to sort your stats by a specific metric, you can not sort by the following metrics:
+        `bounce_drops`, `deferred`, `invalid_emails`, `processed`, `spam_report_drops`, `spam_reports`, or `unsubscribe_drops`.
+
+        For more information, see our [User Guide](https://sendgrid.com/docs/User_Guide/Statistics/subuser.html).
+      operationId: GET_subusers-subuser_name-stats-monthly
+      parameters:
+        - description: The date of the month to retrieve statistics for. Must be formatted YYYY-MM-DD
+          in: query
+          name: date
+          required: true
+          type: string
+        - default: delivered
+          description: 'The metric that you want to sort by. Metrics that you can sort by are: `blocks`, `bounces`, `clicks`, `delivered`, `opens`, `requests`, `unique_clicks`, `unique_opens`, and `unsubscribes`.'''
+          in: query
+          name: sort_by_metric
+          required: false
+          type: string
+        - default: desc
+          description: The direction you want to sort.
+          enum:
+            - desc
+            - asc
+          in: query
+          name: sort_by_direction
+          required: false
+          type: string
+        - default: 5
+          description: Optional field to limit the number of results returned.
+          in: query
+          name: limit
+          required: false
+          type: number
+        - default: 0
+          description: Optional beginning point in the list to retrieve from.
+          in: query
+          name: offset
+          required: false
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              date: '2016-02-01'
+              stats:
+                - first_name: John
+                  last_name: Doe
+                  metrics:
+                    blocks: 0
+                    bounce_drops: 0
+                    bounces: 0
+                    clicks: 5
+                    deferred: 0
+                    delivered: 0
+                    invalid_emails: 0
+                    opens: 10
+                    processed: 10
+                    requests: 10
+                    spam_report_drops: 0
+                    spam_reports: 0
+                    unique_clicks: 0
+                    unique_opens: 0
+                    unsubscribe_drops: 0
+                    unsubscribes: 0
+                  name: user1
+                  type: subuser
+          schema:
+            $ref: '#/definitions/subuser_stats'
+      security:
+        - Authorization: []
+      summary: Retrieve the monthly email statistics for a single subuser
+    parameters:
+      - in: path
+        name: subuser_name
+        required: true
+        type: string
   /suppression/blocks:
     delete:
       consumes:
@@ -9150,6 +9441,11 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              delete_all: false
+              emails:
+                - example1@example.com
+                - example2@example.com
             properties:
               delete_all:
                 description: Indicates if you want to delete all email addresses on the spam report list.
@@ -10097,7 +10393,16 @@ paths:
     get:
       consumes:
         - application/json
-      description: Your user's account information includes the user's account type and reputation.
+      description: |-
+        **This endpoint allows you to retrieve your user account details.**
+
+        Your user's account information includes the user's account type and reputation.
+
+        Keeping your user profile up to date is important. This will help SendGrid to verify who you are as well as contact you should we need to.
+
+        For more information about your user profile:
+
+        * [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
       operationId: GET_user-account
       parameters: []
       produces:
@@ -10131,6 +10436,189 @@ paths:
       tags:
         - Users API
     parameters: []
+  /user/credits:
+    get:
+      consumes:
+        - application/json
+      description: |-
+        **This endpoint allows you to retrieve the current credit balance for your account.**
+
+        Your monthly credit allotment limits the number of emails you may send before incurring overage charges. For more information about credits and billing, please visit our [Clssroom](https://sendgrid.com/docs/Classroom/Basics/Billing/billing_info_and_faqs.html).
+      operationId: GET_user-credits
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              last_reset: '2013-01-01'
+              next_reset: '2013-02-01'
+              overage: 0
+              remain: 200
+              reset_frequency: monthly
+              total: 200
+              used: 0
+          schema:
+            properties:
+              last_reset:
+                description: The date that your credit balance was last reset.
+                type: string
+              next_reset:
+                description: The next date that your credit balance will be reset.
+                type: string
+              overage:
+                description: The number of overdrawn credits for your account.
+                type: integer
+              remain:
+                description: The remaining number of credits available on your account.
+                type: integer
+              reset_frequency:
+                description: The frequency at which your credit balance will be reset.
+                type: string
+              total:
+                description: The total number of credits assigned to your account.
+                type: integer
+              used:
+                description: The number of credits that you have used.
+                type: integer
+            required:
+              - remain
+              - total
+              - overage
+              - used
+              - last_reset
+              - next_reset
+              - reset_frequency
+            type: object
+      security:
+        - Authorization: []
+      summary: Retrieve your credit balance
+      tags:
+        - Users API
+    parameters: []
+  /user/email:
+    get:
+      consumes:
+        - application/json
+      description: |-
+        **This endpoint allows you to retrieve the email address currently on file for your account.**
+
+        Keeping your user profile up to date is important. This will help SendGrid to verify who you are as well as contact you should we need to.
+
+        For more information about your user profile:
+
+        * [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
+      operationId: GET_user-email
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              email: test@example.com
+          schema:
+            properties:
+              email:
+                description: The email address currently on file for your account.
+                type: string
+            required:
+              - email
+            type: object
+      security:
+        - Authorization: []
+      summary: Retrieve your account email address
+      tags:
+        - Users API
+    parameters: []
+    put:
+      consumes:
+        - application/json
+      description: |-
+        **This endpoint allows you to update the email address currently on file for your account.**
+
+        Keeping your user profile up to date is important. This will help SendGrid to verify who you are as well as contact you should we need to.
+
+        For more information about your user profile:
+
+        * [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
+      operationId: PUT_user-email
+      parameters:
+        - in: body
+          name: body
+          schema:
+            example:
+              email: example@example.com
+            properties:
+              email:
+                description: The new email address that you would like to use for your account.
+                type: string
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties:
+              email:
+                description: The current email address on file for your account.
+                type: string
+            required:
+              - email
+            type: object
+      security:
+        - Authorization: []
+      summary: Update your account email address
+      tags:
+        - Users API
+  /user/password:
+    parameters: []
+    put:
+      consumes:
+        - application/json
+      description: |-
+        **This endpoint allows you to update your password.**
+
+        Keeping your user profile up to date is important. This will help SendGrid to verify who you are as well as contact you should we need to.
+
+        For more information about your user profile:
+
+        * [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
+      operationId: PUT_user-password
+      parameters:
+        - in: body
+          name: body
+          schema:
+            example:
+              new_password: new_password
+              old_password: old_password
+            properties:
+              new_password:
+                description: The new password you would like to use for your account.
+                type: string
+              old_password:
+                description: The old password for your account.
+                type: string
+            required:
+              - new_password
+              - old_password
+            type: object
+      produces: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            properties: {}
+            type: object
+      security:
+        - Authorization: []
+      summary: Update your password
+      tags:
+        - Users API
   /user/profile:
     get:
       consumes:
@@ -10223,6 +10711,8 @@ paths:
       consumes:
         - application/json
       description: |-
+        **This endpoint allows you to update your current profile details.**
+
         Keeping your user profile up to date is important. This will help SendGrid to verify who you are as well as contact you should we need to.
 
         For more information about your user profile:
@@ -10604,6 +11094,91 @@ paths:
       security:
         - Authorization: []
       summary: Update Enforced TLS settings
+  /user/username:
+    get:
+      consumes:
+        - application/json
+      description: |-
+        **This endpoint allows you to retrieve your current account username.**
+
+        Keeping your user profile up to date is important. This will help SendGrid to verify who you are as well as contact you should we need to.
+
+        For more information about your user profile:
+
+        * [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
+      operationId: GET_user-username
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              user_id: 1
+              username: test_username
+          schema:
+            properties:
+              user_id:
+                description: The user ID for your account.
+                type: integer
+              username:
+                description: Your account username.
+                type: string
+            required:
+              - username
+              - user_id
+            type: object
+      security:
+        - Authorization: []
+      summary: Retrieve your username
+      tags:
+        - Users API
+    parameters: []
+    put:
+      consumes:
+        - application/json
+      description: |-
+        **This endpoint allows you to update the username for your account.**
+
+        Keeping your user profile up to date is important. This will help SendGrid to verify who you are as well as contact you should we need to.
+
+        For more information about your user profile:
+
+        * [SendGrid Account Settings](https://sendgrid.com/docs/User_Guide/Settings/account.html)
+      operationId: PUT_user-username
+      parameters:
+        - in: body
+          name: body
+          schema:
+            example:
+              username: test_username
+            properties:
+              username:
+                description: The new username you would like to use for your account.
+                type: string
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              username: test_username
+          schema:
+            properties:
+              username:
+                description: The current username on file for your account.
+                type: string
+            required:
+              - username
+            type: object
+      security:
+        - Authorization: []
+      summary: Update your username
+      tags:
+        - Users API
   /user/webhooks/event/settings:
     get:
       consumes:
@@ -14261,6 +14836,81 @@ definitions:
       - username
       - user_id
       - email
+    type: object
+  subuser_stats:
+    properties:
+      date:
+        description: The date the statistics were gathered.
+        type: string
+      stats:
+        description: The list of statistics.
+        items:
+          properties:
+            first_name:
+              description: The first name of the subuser.
+              type: string
+            last_name:
+              description: The last name of the subuser.
+              type: string
+            metrics:
+              properties:
+                blocks:
+                  description: The number of emails that were not allowed to be delivered by ISPs.
+                  type: integer
+                bounce_drops:
+                  description: The number of emails that were dropped because of a bounce.
+                  type: integer
+                bounces:
+                  description: The number of emails that bounced instead of being delivered.
+                  type: integer
+                clicks:
+                  description: The number of links that were clicked in your emails.
+                  type: integer
+                deferred:
+                  description: The number of emails that temporarily could not be delivered.
+                  type: integer
+                delivered:
+                  description: The number of emails SendGrid was able to confirm were actually delivered to a recipient.
+                  type: integer
+                invalid_emails:
+                  description: The number of recipients who had malformed email addresses or whose mail provider reported the address as invalid.
+                  type: integer
+                opens:
+                  description: The total number of times your emails were opened by recipients.
+                  type: integer
+                processed:
+                  description: 'Requests from your website, application, or mail client via SMTP Relay or the API that SendGrid processed.'
+                  type: integer
+                requests:
+                  description: The number of emails that were requested to be delivered.
+                  type: integer
+                spam_report_drops:
+                  description: The number of emails that were dropped due to a recipient previously marking your emails as spam.
+                  type: integer
+                spam_reports:
+                  description: The number of recipients who marked your email as spam.
+                  type: integer
+                unique_clicks:
+                  description: The number of unique recipients who clicked links in your emails.
+                  type: integer
+                unique_opens:
+                  description: The number of unique recipients who opened your emails.
+                  type: integer
+                unsubscribe_drops:
+                  description: The number of emails dropped due to a recipient unsubscribing from your emails.
+                  type: integer
+                unsubscribes:
+                  description: The number of recipients who unsubscribed from your emails.
+                  type: integer
+              type: object
+            name:
+              description: The username of the subuser.
+              type: string
+            type:
+              description: The type of account.
+              type: string
+          type: object
+        type: array
     type: object
   suppression_bounce:
     example:

@@ -145,10 +145,10 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
   '/v1beta1/{name}':
     parameters:
       - $ref: '#/parameters/access_token'
@@ -160,10 +160,10 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
     put:
       description: |-
         Replace the data for the specified group.
@@ -248,16 +248,16 @@ paths:
           in: query
           name: groupId
           type: string
-        - description: The maximum number of results to return per response.
-          in: query
-          name: pageSize
-          type: integer
         - description: |-
             The exact value to match against
             [`ServiceContext.version`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
           in: query
           name: serviceFilter.version
           type: string
+        - description: The maximum number of results to return per response.
+          in: query
+          name: pageSize
+          type: integer
         - description: A `next_page_token` provided by a previous response.
           in: query
           name: pageToken
@@ -282,10 +282,10 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
   '/v1beta1/{projectName}/groupStats':
     get:
       description: Lists the specified groups.
@@ -334,12 +334,6 @@ paths:
           in: query
           name: order
           type: string
-        - description: |-
-            The exact value to match against
-            [`ServiceContext.service`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.service).
-          in: query
-          name: serviceFilter.service
-          type: string
         - collectionFormat: multi
           description: |-
             List all `ErrorGroupStats` with these IDs.
@@ -351,10 +345,22 @@ paths:
           name: groupId
           type: array
         - description: |-
+            The exact value to match against
+            [`ServiceContext.service`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.service).
+          in: query
+          name: serviceFilter.service
+          type: string
+        - description: |-
             Time where the timed counts shall be aligned if rounded alignment
             is chosen. Default is 00:00 UTC.
           in: query
           name: alignmentTime
+          type: string
+        - description: |-
+            The exact value to match against
+            [`ServiceContext.version`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
+          in: query
+          name: serviceFilter.version
           type: string
         - description: |-
             The maximum number of results to return per response.
@@ -362,12 +368,6 @@ paths:
           in: query
           name: pageSize
           type: integer
-        - description: |-
-            The exact value to match against
-            [`ServiceContext.version`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
-          in: query
-          name: serviceFilter.version
-          type: string
         - description: |-
             The preferred duration for a single returned `TimedCount`.
             If not set, no timed counts are returned.
@@ -401,10 +401,10 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
 definitions:
   DeleteEventsResponse:
     description: Response message for deleting error events.
