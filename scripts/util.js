@@ -6,6 +6,7 @@ var fs = require('fs');
 
 var _ = require('lodash');
 var glob = require('glob')
+var sh = require('shelljs');
 var YAML = require('js-yaml');
 var mkdirp = require('mkdirp').sync;
 var sanitize = require('sanitize-filename');
@@ -157,4 +158,16 @@ exports.getOriginUrl = function (swagger) {
 exports.saveSwagger = function (swagger) {
   var path = exports.getSwaggerPath(swagger);
   exports.saveYaml(path, swagger);
+}
+
+exports.exec = function (cmd) {
+  var glovalVerbose = sh.config.verbose;
+  sh.config.verbose = false;
+  var result = sh.exec(cmd, {
+    async: false,
+    silent: true
+  });
+  sh.config.verbose = glovalVerbose;
+  assert(result.code === 0);
+  return result;
 }

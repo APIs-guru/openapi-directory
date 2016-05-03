@@ -9,7 +9,6 @@ var URI = require('urijs');
 var sh = require('shelljs');
 var MimeLookup = require('mime-lookup');
 var MIME = new MimeLookup(require('mime-db'));
-var exec = require('child_process').execSync;
 
 var makeRequest = require('makeRequest');
 var util = require('./util');
@@ -147,7 +146,7 @@ function generateAPI(specs) {
 }
 
 function gitLogDate(options, filename) {
-  var result = exec('git log --format=%aD ' + options + ' -- \'APIs/' + filename + '\'');
+  var result = util.exec(`git log --format=%aD ${options} -- 'APIs/${filename}'`);
   result = _.trim(result.stdout, '\n').split('\n');
   assert(!_.isEmpty(result));
   return result.map(function (str) {
