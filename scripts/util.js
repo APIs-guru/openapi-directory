@@ -163,6 +163,7 @@ exports.saveSwagger = function (swagger) {
 exports.exec = function (cmd) {
   var glovalVerbose = sh.config.verbose;
   sh.config.verbose = false;
+  console.log(cmd);
   var result = sh.exec(cmd, {
     async: false,
     silent: true
