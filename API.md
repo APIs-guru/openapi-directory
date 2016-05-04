@@ -6,7 +6,7 @@ That mean API served as static content and support both caching and compression.
 
 ## Client examples
 Here is simplest possible API client: [[Demo]](https://apis-guru.github.io/simple-ui) [[Repo]](https://github.com/APIs-guru/simple-ui)<BR>
-Example of more advanced UI: [[Demo]](https://apis-guru.github.io)[[Repo]](https://github.com/APIs-guru/APIs-guru.github.io)
+Example of more advanced UI: [[Demo]](https://apis-guru.github.io) [[Repo]](https://github.com/APIs-guru/APIs-guru.github.io)
 
 ## Endpoint
 https://apis-guru.github.io/api-models/api/v1/list.json - List all API specs.
