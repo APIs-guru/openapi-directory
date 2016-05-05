@@ -1379,6 +1379,36 @@ paths:
         name: username
         required: true
         type: string
+  '/projects/{username}/{project_slug}/features/url_rewriting/rules_validator':
+    parameters:
+      - description: User's identifier
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: Project's identifier
+        in: path
+        name: project_slug
+        required: true
+        type: string
+    post:
+      description: Match and replace parts of a URL based on rules passed in POST data.
+      operationId: testUrlRewritingRules
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '201':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/URLRewritingRulesSerializer'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Match and replace parts of a URL based on rules passed in POST data
+      tags:
+        - Project
   '/projects/{username}/{project_slug}/filters':
     get:
       description: 'List all the project''s saved filters (each filter''s name, ID and filter value)'
@@ -1985,6 +2015,43 @@ definitions:
       - allowed_domains
       - sitemaps
       - header_settings
+    type: object
+  RewritingRuleSerializer:
+    properties:
+      ignore_case:
+        description: ''
+        readOnly: false
+        type: boolean
+      regex:
+        description: ''
+        readOnly: false
+        type: string
+      replace:
+        description: ''
+        readOnly: false
+        type: string
+    required:
+      - regex
+      - replace
+      - ignore_case
+    type: object
+  URLRewritingRulesSerializer:
+    properties:
+      rules:
+        description: ''
+        items:
+          $ref: '#/definitions/RewritingRuleSerializer'
+        readOnly: false
+        type: array
+      urls:
+        description: ''
+        items:
+          type: string
+        readOnly: false
+        type: array
+    required:
+      - urls
+      - rules
     type: object
   UrlsAggsQueries:
     items:

@@ -2118,11 +2118,11 @@ definitions:
         description: Configuration specific to read replica instances. Indicates whether database flags for crash-safe replication are enabled. This property is only applicable to First Generation instances.
         type: boolean
       dataDiskSizeGb:
-        description: 'The size of data disk, in GB. The data disk size minimum is 10GB. This property is only applicable to Second Generation instances.'
+        description: 'The size of data disk, in GB. The data disk size minimum is 10GB. Applies only to Second Generation instances.'
         format: int64
         type: string
       dataDiskType:
-        description: The type of data disk. Only supported for Second Generation instances. The default type is PD_SSD. This property is only applicable to Second Generation instances.
+        description: The type of data disk. Only supported for Second Generation instances. The default type is PD_SSD. Applies only to Second Generation instances.
         type: string
       databaseFlags:
         description: The database flags passed to the instance at startup.
@@ -2144,7 +2144,7 @@ definitions:
         description: The location preference settings. This allows the instance to be located as near as possible to either an App Engine app or GCE zone for better performance. App Engine co-location is only applicable to First Generation instances.
       maintenanceWindow:
         $ref: '#/definitions/MaintenanceWindow'
-        description: The maintenance window for this instance. This specifies when the instance may be restarted for maintenance purposes. This property is only applicable to Second Generation instances.
+        description: The maintenance window for this instance. This specifies when the instance may be restarted for maintenance purposes. Applies only to Second Generation instances.
       pricingPlan:
         description: The pricing plan for this instance. This can be either PER_USE or PACKAGE. Only PER_USE is supported for Second Generation instances.
         type: string
@@ -2155,6 +2155,9 @@ definitions:
         description: 'The version of instance settings. This is a required field for update method to make sure concurrent updates are handled properly. During update, use the most recent settingsVersion value for this instance and do not try to update this value.'
         format: int64
         type: string
+      storageAutoResize:
+        description: Configuration to increase storage size automatically. The default value is false. Applies only to Second Generation instances.
+        type: boolean
       tier:
         description: 'The tier of service for this instance, for example D1, D2. For more information, see pricing.'
         type: string

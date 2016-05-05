@@ -3473,6 +3473,9 @@ definitions:
       datasetId:
         description: The dataset to which this variant set belongs.
         type: string
+      description:
+        description: A textual description of this variant set.
+        type: string
       id:
         description: 'The server-generated variant set ID, unique across all variant sets.'
         type: string
@@ -3481,6 +3484,9 @@ definitions:
         items:
           $ref: '#/definitions/VariantSetMetadata'
         type: array
+      name:
+        description: 'User-specified, mutable name.'
+        type: string
       referenceBounds:
         description: A list of all references used by the variants in a variant set with associated coordinate upper bounds for each one.
         items:

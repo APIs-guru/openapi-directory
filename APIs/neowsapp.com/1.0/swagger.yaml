@@ -13,8 +13,6 @@ info:
 
      Get <a href="http://apps.getpebble.com/en_US/application/55bc4913d1690c372900000f" target="_blank">Asteroid Today on Pebble</a> 
 
-    Follow us on <a href="http://n.numerousapp.com/m/289c3ktc8fi0" target="_blank">Numerous</a> 
-
     Follow us on <a href="https://twitter.com/AsteroidTracker" target="_blank">Twitter</a>
   license:
     name: Licence Type
@@ -31,6 +29,8 @@ tags:
     name: feed
   - description: Operations with NearEarthObjects
     name: neo
+  - description: Stats on Near Earth Object data sets
+    name: stats
 paths:
   /rest/v1/feed:
     get:
@@ -64,6 +64,29 @@ paths:
         '404':
           description: Not Found
       summary: Find Near Earth Objects by date
+      tags:
+        - feed
+  /rest/v1/feed/today:
+    get:
+      consumes:
+        - application/json
+      deprecated: false
+      description: Get a list of Near Earth Objects for today
+      operationId: retrieveNEOFeedToday
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NearEarthObject'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Find Near Earth Objects for today
       tags:
         - feed
   /rest/v1/neo/browse:
@@ -133,6 +156,29 @@ paths:
       summary: Find Near Earth Objects by id
       tags:
         - neo
+  /rest/v1/stats:
+    get:
+      consumes:
+        - application/json
+      deprecated: false
+      description: retrieveCurrentNeoStatistics
+      operationId: retrieveCurrentNeoStatistics
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Statistics'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get the Near Earth Object data set totals
+      tags:
+        - stats
 definitions:
   CloseApproachData:
     properties:
@@ -168,6 +214,14 @@ definitions:
       miles:
         $ref: '#/definitions/EstimatedDiameter'
   'HashMap«string,List«NearEarthObjectFeedDto»»': {}
+  Link:
+    properties:
+      href:
+        type: string
+      rel:
+        type: string
+      templated:
+        type: boolean
   MissDistance:
     properties:
       astronomical:
@@ -250,6 +304,50 @@ definitions:
       perihelion_time:
         type: string
       semi_major_axis:
+        type: string
+  Statistics:
+    properties:
+      close_approach_count:
+        format: int64
+        type: integer
+      last_updated:
+        type: string
+      links:
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      nasa_jpl_url:
+        $ref: '#/definitions/URL'
+      near_earth_object_count:
+        format: int64
+        type: integer
+      source:
+        type: string
+  URL:
+    properties:
+      authority:
+        type: string
+      content:
+        type: object
+      defaultPort:
+        format: int32
+        type: integer
+      file:
+        type: string
+      host:
+        type: string
+      path:
+        type: string
+      port:
+        format: int32
+        type: integer
+      protocol:
+        type: string
+      query:
+        type: string
+      ref:
+        type: string
+      userInfo:
         type: string
   relativeVelocity:
     properties:

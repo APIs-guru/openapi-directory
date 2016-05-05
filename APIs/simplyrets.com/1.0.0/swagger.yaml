@@ -89,7 +89,8 @@ paths:
       description: |
         This is the main endpoint for accessing openhouses.
       parameters:
-        - description: |
+        - collectionFormat: multi
+          description: |
             Request listings by a specific property type. This
             defaults to Residential, and you can only specify one type
             in a single query.
@@ -762,14 +763,22 @@ definitions:
     description: RETS MLS Contact Information
     properties:
       cell:
-        description: Contact Information Cell Phone
+        description: |
+          Contact Information Cell Phone
+
+          **Not available for all RETS vendors**
         type: string
-      full:
-        description: Full pretty-printed address with suffix (if available)
+      email:
+        description: |
+          The email address of the `ContactInformation`
+
+          **Not available for all RETS vendors**
         type: string
       office:
-        description: Contact Information Office Phone Number
-        format: byte
+        description: |
+          Contact Information Office Phone Number
+
+          **Not available for all RETS vendors**
         type: string
     type: object
   Error:
@@ -901,6 +910,12 @@ definitions:
       tax:
         $ref: '#/definitions/Tax'
         description: Associate tax data
+      virtualTourUrl:
+        description: |
+          The URL for an unbranded virtual tour of the property.
+
+          **Added on 2016/05/04 - Not available for all RETS vendors**
+        type: string
     type: object
   MlsInformation:
     description: RETS MLS Vendor Data
@@ -952,7 +967,10 @@ definitions:
     description: RETS MLS Office
     properties:
       brokerid:
-        description: Office or brokerage MLS identifier
+        description: |
+          Office or brokerage MLS identifier
+
+          **Not available for all RETS vendors**
         type: string
       contact:
         $ref: '#/definitions/ContactInformation'
@@ -1087,7 +1105,38 @@ definitions:
         type: string
       lotSize:
         default: 3/4 Up To 1 Acre
-        description: Square footage of the entire property lot
+        description: |
+          Lot size dimensions or square footage as a text. This
+          field is generally used to show the pretty formatted
+          lot size.
+        type: string
+      lotSizeAcres:
+        default: 10
+        description: |
+          Lot size in acres
+
+          **Added on 2016/05/04 - Not available for all RETS vendors**
+        format: float
+        type: number
+      lotSizeArea:
+        default: 5000
+        description: |
+          The total area of the lot.  See `lotSizeUnits` for the units
+          of measurement (Square Feet, Square Meters, Acres, etc.).
+
+          **Added on 2016/05/04 - Not available for all RETS vendors**
+        format: double
+        type: number
+      lotSizeAreaUnits:
+        default: Sq Ft
+        description: |
+          Unit of measurement for the lotSizeArea field.  e.g. Square
+          Feet, Square Meters, Acres, etc.
+
+          If this field is `null` the units is the default unit
+          of measure specified by your RETS provider.
+
+          **Added on 2016/05/04 - Not available for all RETS vendors**
         type: string
       maintenanceExpense:
         description: Yearly maintenance expense
@@ -1217,6 +1266,10 @@ definitions:
       postalCode:
         description: Street Address postal code
         type: string
+      state:
+        default: Texas
+        description: State or province. Maps to the data dictionary field `StateOrProvince`.
+        type: string
       streetName:
         default: SimplyRETS Drive
         description: Name of the street
@@ -1226,6 +1279,16 @@ definitions:
         description: Street number
         format: int64
         type: integer
+      streetNumberText:
+        default: '1234'
+        description: |
+          Textual representation of the street number. This field
+          is usually redundant with what's in `streetNumber` but is
+          occassionally usefuly for street number which are actually
+          alpha-numerical. For example, "N63453" or "34556B".
+
+          **Added on 2016/05/02**
+        type: string
     type: object
   Tax:
     description: RETS MLS Tax Data

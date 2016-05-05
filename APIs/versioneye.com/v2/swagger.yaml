@@ -15,6 +15,7 @@ info:
     version: '1.1'
   x-providerName: versioneye.com
 tags:
+  - name: artifactory
   - name: github
   - name: me
   - name: products
@@ -23,7 +24,75 @@ tags:
   - name: services
   - name: sessions
   - name: users
+  - name: watchers
 paths:
+  /v2/artifactory:
+    delete:
+      description: |+
+
+        <p>This will create a new artifactory connection in X-Ray.</p>
+
+      operationId: DELETE--version-artifactory---format-
+      parameters:
+        - description: Admin user in Artifactory
+          in: query
+          name: admin_user
+          required: true
+          type: string
+        - description: Admin password in Artifactory
+          in: query
+          name: admin_pass
+          required: true
+          type: string
+        - description: The ID of Artifactory
+          in: query
+          name: artifactory_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: create a new artifactory connection
+      tags:
+        - artifactory
+    post:
+      description: |+
+
+        <p>This will create a new artifactory connection in X-Ray.</p>
+
+      operationId: POST--version-artifactory---format-
+      parameters:
+        - description: Base URL to Artifactory
+          in: formData
+          name: baseurl
+          required: true
+          type: string
+        - description: Admin user in Artifactory
+          in: formData
+          name: admin_user
+          required: true
+          type: string
+        - description: Admin password in Artifactory
+          in: formData
+          name: admin_pass
+          required: true
+          type: string
+        - description: The ID of Artifactory
+          in: formData
+          name: artifactory_id
+          required: true
+          type: string
+        - description: URL to X-Ray server
+          in: formData
+          name: xray_url
+          required: false
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: create a new artifactory connection
+      tags:
+        - artifactory
   /v2/github:
     get:
       description: |+
@@ -561,17 +630,6 @@ paths:
         your API Key to the URL as parameter. For example: “?api_key=666_your_api_key_666”</p>
 
       operationId: GET--version-projects---format-
-      parameters:
-        - description: The name of the organisation the project is assigned to.
-          in: query
-          name: orga_name
-          required: false
-          type: string
-        - description: The name of the team in the organisation this project is assigned to.
-          in: query
-          name: team_name
-          required: false
-          type: string
       responses:
         '200':
           description: No response was specified
@@ -822,90 +880,6 @@ paths:
       summary: Security Vulnerabilities
       tags:
         - security
-    post:
-      operationId: POST--version-security---format-
-      parameters:
-        - description: Computer language. For example 'Java' or 'Ruby'.
-          in: formData
-          name: language
-          required: true
-          type: string
-        - description: Uniq. identifier from the package manager. For Maven it's 'groupId/artefactId'.
-          in: formData
-          name: prod_key
-          required: true
-          type: string
-        - description: The affected versions.
-          in: formData
-          name: affected_versions_string
-          required: true
-          type: string
-        - description: Uniq. identifier. For example the CVE ID.
-          in: formData
-          name: name_id
-          required: true
-          type: string
-        - description: A short summary.
-          in: formData
-          name: summary
-          required: true
-          type: string
-        - description: Author of the security vulnerability.
-          in: formData
-          name: author
-          required: false
-          type: string
-        - description: A description.
-          in: formData
-          name: description
-          required: false
-          type: string
-        - description: Platform if available.
-          in: formData
-          name: platform
-          required: false
-          type: string
-        - description: Osvdb id if available.
-          in: formData
-          name: osvdb
-          required: false
-          type: string
-        - description: CVE id if available.
-          in: formData
-          name: cve
-          required: false
-          type: string
-        - description: CvSSv2 if available.
-          in: formData
-          name: cvss_v2
-          required: false
-          type: string
-        - description: Related Framework if available.
-          in: formData
-          name: framework
-          required: false
-          type: string
-      responses:
-        '200':
-          description: No response was specified
-      summary: New Security Vulnerabilities
-      tags:
-        - security
-  '/v2/security/{name_id}':
-    delete:
-      operationId: DELETE--version-security--name_id---format-
-      parameters:
-        - description: Delete security vulnerability with given ID.
-          in: path
-          name: name_id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: No response was specified
-      summary: delete given security vulnerability
-      tags:
-        - security
   /v2/services/ping:
     get:
       operationId: GET--version-services-ping---format-
@@ -1011,3 +985,90 @@ paths:
       summary: shows user's favorite packages
       tags:
         - users
+  /v2/watchers:
+    get:
+      operationId: GET--version-watchers---format-
+      responses:
+        '200':
+          description: No response was specified
+      summary: get all notification watchers
+      tags:
+        - watchers
+    post:
+      description: |+
+
+        <p>Create a new notification watcher to get notified about specific events.</p>
+
+        <p>With CURL:</p>
+
+        <p><code>curl --data "name=hans&amp;event=security&amp;config[email]=ho@do.bo&amp;constraints[][type]=wildcard&amp;constraints[][value]=**/*.jar" https://www.versioneye.com/api/v2/watchers?api_key=API_KEY</code></p>
+
+      operationId: POST--version-watchers---format-
+      parameters:
+        - description: Name of the watcher.
+          in: formData
+          name: name
+          required: false
+          type: string
+        - description: Description of the watcher.
+          in: formData
+          name: description
+          required: false
+          type: string
+        - description: 'One of this: [security, license, version]'
+          in: formData
+          name: event
+          required: false
+          type: string
+        - description: 'One of this: [email, webhook]'
+          in: formData
+          name: type
+          required: false
+          type: string
+        - description: 'Hash of config: {:email => ''ho@do.bo'', :url => ''http://my.webhook.com''}]'
+          in: formData
+          name: config
+          required: false
+          type: file
+        - description: 'Array of constraints: [{:type => ''wildcard'', :value => ''*.jar''}]'
+          in: formData
+          items:
+            type: string
+          name: constraints
+          required: false
+          type: array
+      responses:
+        '200':
+          description: No response was specified
+      summary: create a new notification watcher
+      tags:
+        - watchers
+  '/v2/watchers/{watcher_id}':
+    delete:
+      operationId: DELETE--version-watchers--watcher_id---format-
+      parameters:
+        - description: Delete watcher with given ID.
+          in: path
+          name: watcher_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: delete given watcher
+      tags:
+        - watchers
+    get:
+      operationId: GET--version-watchers--watcher_id---format-
+      parameters:
+        - description: Watcher ID
+          in: path
+          name: watcher_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: get a watcher by id
+      tags:
+        - watchers

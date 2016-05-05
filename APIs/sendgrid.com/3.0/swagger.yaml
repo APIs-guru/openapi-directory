@@ -5,7 +5,7 @@ schemes:
 host: api.sendgrid.com
 basePath: /v3
 info:
-  title: SendGrid V3
+  title: DX - v3 - Officially Documented Only - DO NOT EDIT
   version: '3.0'
   x-logo:
     url: 'https://assets3.sendgrid.com/mkt/assets/logos_brands/small/sglogo_2015_blue-9c87423c2ff2ff393ebce1ab3bd018a4.png'
@@ -501,8 +501,6 @@ paths:
       security:
         - Authorization: []
       summary: Create API keys
-      tags:
-        - API Keys
   '/api_keys/{api_key_id}':
     delete:
       consumes:
@@ -526,8 +524,6 @@ paths:
       responses:
         '204':
           description: ''
-          schema:
-            type: 'null'
         '404':
           description: ''
           examples:
@@ -1015,8 +1011,6 @@ paths:
       responses:
         '204':
           description: ''
-          schema:
-            type: 'null'
       security:
         - Authorization: []
       summary: Delete a suppression from a suppression group
@@ -1442,8 +1436,6 @@ paths:
       responses:
         '204':
           description: ''
-          schema:
-            type: 'null'
         '401':
           description: ''
           examples:
@@ -1688,8 +1680,6 @@ paths:
       responses:
         '204':
           description: ''
-          schema:
-            type: 'null'
         '403':
           description: |-
             "": "This campaign is already In Progress."
@@ -2886,8 +2876,6 @@ paths:
       responses:
         '204':
           description: ''
-          schema:
-            type: 'null'
         '400':
           description: '"id" : "Returned if all list ids are not valid"'
           examples:
@@ -3028,8 +3016,6 @@ paths:
       responses:
         '202':
           description: ''
-          schema:
-            type: 'null'
         '400':
           description: |-
             "list_id" : "Returned if list_id is not valid"
@@ -3310,8 +3296,6 @@ paths:
       responses:
         '201':
           description: ''
-          schema:
-            type: 'null'
         '400':
           description: |-
             "list_id" : "Returned if list_id is not a valid integer"
@@ -3376,8 +3360,6 @@ paths:
       responses:
         '204':
           description: ''
-          schema:
-            type: 'null'
         '400':
           description: |-
             "list_id" : "Returned if list_id is not valid"
@@ -3440,8 +3422,6 @@ paths:
       responses:
         '201':
           description: ''
-          schema:
-            type: 'null'
         '400':
           description: |-
             "list_id" : "Returned if list_id is invalid"
@@ -4286,8 +4266,6 @@ paths:
       responses:
         '204':
           description: ''
-          schema:
-            type: 'null'
         '400':
           description: |-
             "segment_id" : "Returned if segment_id is not valid"
@@ -5947,7 +5925,11 @@ paths:
 
         * [Scheduling Parameters > Batch ID](https://sendgrid.com/docs/API_Reference/SMTP_API/scheduling_parameters.html)
       operationId: POST_mail-batch
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:
@@ -9105,6 +9087,10 @@ paths:
           name: email_address
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:
@@ -10881,7 +10867,11 @@ paths:
 
         The Cancel Scheduled Sends feature allows the customer to cancel a scheduled send based on a Batch ID included in the SMTPAPI header.Scheduled sends cancelled less than 10 minutes before the scheduled time are not guaranteed to be cancelled.
       operationId: DELETE_user-scheduled_sends-batch_id
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:

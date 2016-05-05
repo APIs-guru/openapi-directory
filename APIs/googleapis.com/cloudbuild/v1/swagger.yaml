@@ -153,10 +153,10 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
         Starts a build with the specified configuration.
@@ -224,10 +224,10 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/projects/{projectId}/builds/{id}:cancel':
     parameters:
       - $ref: '#/parameters/access_token'
@@ -239,10 +239,10 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
     post:
       description: Cancels a requested build in progress.
       operationId: cloudbuild.projects.builds.cancel
@@ -319,10 +319,10 @@ paths:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
 definitions:
   Build:
     description: |-

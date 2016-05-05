@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: An API for managing Hadoop-based clusters and jobs on Google Cloud Platform.
+  description: Manages Hadoop-based clusters and jobs on Google Cloud Platform.
   title: Google Cloud Dataproc
   version: v1
   x-apiClientRegistration:
@@ -30,9 +30,6 @@ securityDefinitions:
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/logging.admin': Administrate log data for your projects
-      'https://www.googleapis.com/auth/logging.read': View log data for your projects
-      'https://www.googleapis.com/auth/logging.write': Submit log data for your projects
     type: oauth2
 parameters:
   $.xgafv:
@@ -104,82 +101,8 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: media
   - name: projects
 paths:
-  '/v1/media/{resourceName}':
-    get:
-      description: 'Method for media download. Download is supported on the URI `/v1/media/{+name}?alt=media`.'
-      operationId: dataproc.media.download
-      parameters:
-        - description: Name of the media that is being downloaded. See ByteStream.ReadRequest.resource_name.
-          in: path
-          name: resourceName
-          required: true
-          type: string
-          x-reservedExpansion: true
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Media'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.admin'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.read'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.write'
-      tags:
-        - media
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-    post:
-      consumes:
-        - application/octet-stream
-      description: 'Method for media upload. Upload is supported on the URI `/upload/v1/media/{+name}`.'
-      operationId: dataproc.media.upload
-      parameters:
-        - description: Name of the media that is being downloaded. See ByteStream.ReadRequest.resource_name.
-          in: path
-          name: resourceName
-          required: true
-          type: string
-          x-reservedExpansion: true
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Media'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Media'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.admin'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.read'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/logging.write'
-      tags:
-        - media
   '/v1/projects/{projectId}/regions/{region}/clusters':
     get:
       description: 'Lists all regions/{region}/clusters in a project.'
@@ -347,7 +270,7 @@ paths:
           name: clusterName
           required: true
           type: string
-        - description: '[Required] Specifies the path, relative to Cluster, of the field to update. For example, to change the number of workers in a cluster to 5, the update_mask parameter would be specified as config.worker_config.num_instances, and the `PATCH` request body would specify the new value, as follows: { "config":{ "workerConfig":{ "numInstances":"5" } } } Note: Currently, config.worker_config.num_instances is the only field that can be updated.'
+        - description: '[Required] Specifies the path, relative to Cluster, of the field to update. For example, to change the number of workers in a cluster to 5, the update_mask parameter would be specified as config.worker_config.num_instances, and the `PATCH` request body would specify the new value, as follows: { "config":{ "workerConfig":{ "numInstances":"5" } } } Similarly, to change the number of preemptible workers in a cluster to 5, the update_mask parameter would be config.secondary_worker_config.num_instances, and the `PATCH` request body would be set as follows: { "config":{ "secondaryWorkerConfig":{ "numInstances":"5" } } } Note: Currently, config.worker_config.num_instances and config.secondary_worker_config.num_instances are the only fields that can be updated.'
           in: query
           name: updateMask
           type: string
@@ -774,7 +697,7 @@ definitions:
         type: string
       gceClusterConfig:
         $ref: '#/definitions/GceClusterConfig'
-        description: '[Optional] The shared Google Compute Engine config settings for all instances in a cluster.'
+        description: '[Required] The shared Google Compute Engine config settings for all instances in a cluster.'
       initializationActions:
         description: '[Optional] Commands to execute on each node after config is completed. By default, executables are run on master and all worker nodes. You can test a node''s role metadata to run an executable on a master or worker node, as shown below: ROLE=$(/usr/share/google/get_metadata_value attributes/role) if [[ "${ROLE}" == ''Master'' ]]; then ... master specific actions ... else ... worker specific actions ... fi'
         items:
@@ -1160,13 +1083,6 @@ definitions:
         type: string
       instanceTemplateName:
         description: '[Output-only] The name of the Instance Template used for the Managed Instance Group.'
-        type: string
-    type: object
-  Media:
-    description: Media resource.
-    properties:
-      resourceName:
-        description: Name of the media resource.
         type: string
     type: object
   NodeInitializationAction:

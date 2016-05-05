@@ -649,7 +649,7 @@ definitions:
     properties:
       autoStorage:
         $ref: '#/definitions/AutoStorageBaseProperties'
-        description: The properties related to auto storage.
+        description: The properties related to auto storage account.
   AccountProperties:
     description: Account specific properties.
     properties:
@@ -662,7 +662,7 @@ definitions:
         type: integer
       autoStorage:
         $ref: '#/definitions/AutoStorageProperties'
-        description: The properties and status of any auto storage associated with the account.
+        description: The properties and status of any auto storage account associated with the account.
       coreQuota:
         description: The core quota for this Batch account.
         format: int32
@@ -774,22 +774,22 @@ definitions:
         description: 'The version of the application package. '
         type: string
   AutoStorageBaseProperties:
-    description: The properties related to auto storage.
+    description: The properties related to auto storage account.
     properties:
       storageAccountId:
-        description: The resource id of the storage account to be used for auto storage.
+        description: The resource id of the storage account to be used for auto storage account.
         type: string
     required:
       - storageAccountId
   AutoStorageProperties:
-    description: Contains information about the auto storage associated with a Batch account.
+    description: Contains information about the auto storage account associated with a Batch account.
     properties:
       lastKeySync:
         description: The UTC time at which storage keys were last synchronized with the Batch account.
         format: date-time
         type: string
       storageAccountId:
-        description: The resource id of the storage account to be used for auto storage.
+        description: The resource id of the storage account to be used for auto storage account.
         type: string
     required:
       - storageAccountId

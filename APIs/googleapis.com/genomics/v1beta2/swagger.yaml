@@ -3331,6 +3331,9 @@ definitions:
       datasetId:
         description: The dataset to which this variant set belongs. Immutable.
         type: string
+      description:
+        description: A textual description of this variant set.
+        type: string
       id:
         description: The Google-generated ID of the variant set. Immutable.
         type: string
@@ -3339,6 +3342,9 @@ definitions:
         items:
           $ref: '#/definitions/Metadata'
         type: array
+      name:
+        description: 'User-specified, mutable name.'
+        type: string
       referenceBounds:
         description: A list of all references used by the variants in a variant set with associated coordinate upper bounds for each one.
         items:

@@ -384,7 +384,7 @@ paths:
       summary: Create or recreate mobile secret
       tags:
         - mobile secret
-  /categories:
+  /categories/search:
     get:
       description: Returns a list of categories of the specified company
       operationId: getCategories
@@ -400,10 +400,18 @@ paths:
           description: Size of the page - must be between 10 and 100
           format: int32
           in: query
-          maximum: 100
+          maximum: 200
           minimum: 10
           name: size
-          required: true
+          required: false
+          type: integer
+        - default: 0
+          description: Number of the page
+          format: int32
+          in: query
+          minimum: 0
+          name: page
+          required: false
           type: integer
       produces:
         - application/json
@@ -813,7 +821,7 @@ paths:
       summary: Find product by Id
       tags:
         - product
-  /products:
+  /products/search:
     get:
       description: Returns a list of products of the specified company
       operationId: getProducts
@@ -829,10 +837,18 @@ paths:
           description: Size of the page - must be between 10 and 100
           format: int32
           in: query
-          maximum: 100
+          maximum: 200
           minimum: 10
           name: size
-          required: true
+          required: false
+          type: integer
+        - default: 0
+          description: Number of the page
+          format: int32
+          in: query
+          minimum: 0
+          name: page
+          required: false
           type: integer
       produces:
         - application/json
@@ -1179,14 +1195,11 @@ definitions:
         description: 'Price of the product in format ##.##'
         format: double
         type: number
-      taxes:
-        description: 'Tax in percent as number, e.g. 19.6'
-        type: number
       title:
         description: Title of the category
         type: string
-      validityTime:
-        description: Validity time in days an article is accessible after the article is bought (0 is forever)
+      type:
+        description: Type of the products represented by this category
         type: string
   CategoryItem:
     properties:
@@ -1203,9 +1216,10 @@ definitions:
         items:
           $ref: '#/definitions/CategoryItem'
         type: array
-      lastId:
-        description: Id of last element in page
-        type: string
+      pageNumber:
+        description: Page number
+        format: int32
+        type: integer
       size:
         description: Page size
         format: int32
@@ -1611,23 +1625,18 @@ definitions:
       subscription:
         description: Flag indicating if product represents a subscription
         type: boolean
-      taxes:
-        description: 'Tax in percent as a number, e.g. 19.6'
-        format: double
-        type: number
       term:
         description: Subscription term in month
         type: string
       title:
         description: Title of the product
         type: string
+      type:
+        description: Type of the products represented by this category
+        type: string
       url:
         description: Product url
         type: string
-      validityTime:
-        description: Validity time in days a product is accessible after the product is bought (0 is forever)
-        format: int32
-        type: integer
       videoPrequelTime:
         description: Video prequel time if one is defined
         format: int32
@@ -1650,9 +1659,10 @@ definitions:
         items:
           $ref: '#/definitions/ProductItem'
         type: array
-      lastId:
-        description: Id of last element in page
-        type: string
+      pageNumber:
+        description: Page number
+        format: int32
+        type: integer
       size:
         description: Page size
         format: int32
@@ -1713,7 +1723,7 @@ definitions:
       billingId:
         description: The billing id of this transaction
         format: double
-        type: integer
+        type: number
       cancellationTransactionId:
         description: Id of the transaction that cancelled this transaction
         type: string
@@ -1736,18 +1746,6 @@ definitions:
       productId:
         description: Product Id
         type: string
-      shippingCosts:
-        description: Amount of the shipping costs
-        format: double
-        type: number
-      shippingCostsTaxesAmount:
-        description: Amount of the shipping costs taxes amount
-        format: double
-        type: number
-      shippingCostsTaxesPercentage:
-        description: Amount of the shipping costs taxes percentage
-        format: double
-        type: number
       status:
         description: The transaction status
         type: string

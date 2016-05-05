@@ -12363,7 +12363,7 @@ definitions:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
       tests:
-        description: The list of expected URL mappings. Request to update this UrlMap will succeed only all of the test cases pass.
+        description: The list of expected URL mappings. Request to update this UrlMap will succeed only if all of the test cases pass.
         items:
           $ref: '#/definitions/UrlMapTest'
         type: array
