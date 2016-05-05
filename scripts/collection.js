@@ -145,7 +145,8 @@ function updateCollection(dir) {
       writeSpec(lead, function (error, result) {
         if (error) {
           logError(error, result);
-          return promiseCb(error);
+          //TODO: Better error handling
+          return promiseCb(new Error('Error during update'));
         }
 
         var oldFilename = files[util.getOriginUrl(lead)];
