@@ -570,8 +570,14 @@ function fixSpec(swagger, errors) {
 
   _.each(errors, function (error) {
     var path = error.path;
-    var parentValue = jp.get(swagger, _.dropRight(path));
-    var value = jp.get(swagger, path);
+    try {
+      var parentValue = jp.get(swagger, _.dropRight(path));
+      var value = jp.get(swagger, path);
+    }
+    catch(e) {
+      //FIXME: sway give path with intermediate $refs in them
+      return;
+    }
 
     var newValue;
 
