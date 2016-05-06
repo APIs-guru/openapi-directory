@@ -245,6 +245,10 @@ paths:
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Profile'
         '201':
           description: Created
           schema:
@@ -426,6 +430,10 @@ paths:
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Endpoint'
         '201':
           description: Created
           schema:
@@ -627,6 +635,10 @@ paths:
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CustomDomain'
         '201':
           description: Created
           schema:
@@ -873,6 +885,10 @@ paths:
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
       responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Origin'
         '201':
           description: Created
           schema:

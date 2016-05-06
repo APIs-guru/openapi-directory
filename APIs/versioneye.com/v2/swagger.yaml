@@ -630,6 +630,17 @@ paths:
         your API Key to the URL as parameter. For example: “?api_key=666_your_api_key_666”</p>
 
       operationId: GET--version-projects---format-
+      parameters:
+        - description: The name of the organisation the project is assigned to.
+          in: query
+          name: orga_name
+          required: false
+          type: string
+        - description: The name of the team in the organisation this project is assigned to.
+          in: query
+          name: team_name
+          required: false
+          type: string
       responses:
         '200':
           description: No response was specified
@@ -930,6 +941,31 @@ paths:
       summary: creates new sessions
       tags:
         - sessions
+  /v2/users:
+    post:
+      operationId: POST--version-users---format-
+      parameters:
+        - description: username
+          in: formData
+          name: fullname
+          required: true
+          type: string
+        - description: password
+          in: formData
+          name: password
+          required: true
+          type: string
+        - description: email
+          in: formData
+          name: email
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: create new user
+      tags:
+        - users
   '/v2/users/{username}':
     get:
       operationId: GET--version-users--username---format-

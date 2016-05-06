@@ -29,7 +29,7 @@ info:
     `simplyrets:simplyrets` for connecting to the API.
 
     ### Media Types
-    The SimplyRETS API uses the 'Accept' header to allow clients to
+    The SimplyRETS API uses the `Accept` header to allow clients to
     control media types (content versions). We maintain backwards
     compatibility with API clients by allowing them to specify a
     content version. We highly recommend setting and explicity media
@@ -281,7 +281,7 @@ paths:
         - description: |
             A textual keyword search. This parameter will search  the following
             fields, when available:
-              - listingId (This does _not_ search the 'mlsId' field in the SimplyRETS response body)
+              - listingId (This does _not_ search the `mlsId` field in the SimplyRETS response body)
               - street number
               - street name
               - mls area (major)
@@ -497,7 +497,7 @@ paths:
           required: false
           type: array
         - description: |
-            Query water/waterfront listings only. Specify 'true' to
+            Query water/waterfront listings only. Specify `true` to
             filter waterfront listings.
           in: query
           name: water
@@ -852,7 +852,7 @@ definitions:
           for the listing. The value is the id or number by the MLS as
           a public identifier for the listing.
 
-          This identifier should not be confused with the 'mlsId', which is
+          This identifier should not be confused with the `mlsId`, which is
           specific to the SimplyRETS API.
         type: string
       mls:
@@ -867,12 +867,12 @@ definitions:
           number. Use this id when making requests to the single
           listing endpoint (eg, `/properties/{mlsId}`).
 
-          Applications should not rely on specific 'mlsId's being
-          present. Instead, apps should dynamically use the 'mlsId'
+          Applications should not rely on specific `mlsId`s being
+          present. Instead, apps should dynamically use the `mlsId`
           after using other more general query parameters. Many mls
           vendors require listings which are expired, terminated or
           sold to be purged, which will render calls to specific
-          mlsId's to return nothing (or possibly a 404).
+          `mlsId`s to return nothing (or possibly a 404).
         format: int64
         type: integer
       modified:
@@ -1072,7 +1072,8 @@ definitions:
         default: |
           1-2 Step Entry,Barn(s),Fenced Yard,Front Porch,Garden
           Area,Guest House,Out-Buildings,Patio,Prof Landscaping
-        description: ''
+        description: |
+          Exterior Features for the listing
         type: string
       fireplaces:
         default: 1
@@ -1180,7 +1181,7 @@ definitions:
         description: |
           Abbreviated property type. RES is Residential, CND is CondoOrTownhome,
           RNT is Rental, MLF is Multi-Family, CRE is Commercial, LND is Land,
-          FRM is Farm. See the 'propertySubType' field for more information.
+          FRM is Farm. See the `propertySubType` field for more information.
         enum:
           - RES
           - CND

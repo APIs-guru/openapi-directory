@@ -184,6 +184,42 @@ paths:
       summary: "M-BUS API: Adds data of a M-BUS Meter to the smart-me Cloud.\r\n            Just send us the M-BUS Telegram (RSP_UD) and we will do the Rest."
       tags:
         - MBus
+  /api/VirtualMeterActivate:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      description: 'Beta: Virtual Meter API: Activates a Meter and add the Consumption to a Virtual Meter assosiated with the User.'
+      parameters:
+        - description: The Meter to activate
+          in: body
+          name: meterToActivate
+          required: true
+          schema:
+            $ref: '#/definitions/VMeterToActivate'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+        '400':
+          description: BadRequest
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      summary: 'Beta: Virtual Meter API: Activates a Meter and add the Consumption to a Virtual Meter assosiated with the User.'
+      tags:
+        - VirtualMeterActivate
 definitions:
   Device:
     description: Container Class for the Web API
@@ -346,4 +382,11 @@ definitions:
     type: object
   Object:
     properties: {}
+    type: object
+  VMeterToActivate:
+    description: Actives a virtual Meter
+    properties:
+      SerialNumber:
+        description: The Serialnumber of the Meter to activate.
+        type: string
     type: object
