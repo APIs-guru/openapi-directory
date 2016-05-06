@@ -4,6 +4,7 @@
 var assert = require('assert');
 var _ = require('lodash');
 var Promise = require('bluebird');
+var fs = require('fs');
 
 var URI = require('urijs');
 var sh = require('shelljs');
@@ -50,7 +51,7 @@ cacheResources(util.getSpecs('APIs/'))
       saveShield('APIs in collection' , numAPIs, 'orange'),
       saveShield('Endpoints', numEndpoints, 'red'),
       saveShield('OpenAPI specs', numSpecs, 'yellow'),
-      saveShield('Tested on', numSpecs + ' specs', 'green')
+      saveShield('Tested on', numSpecs + ' specs', 'green', true)
     ];
   })
   .done();
@@ -154,7 +155,7 @@ function gitLogDate(options, filename) {
   });
 }
 
-function saveShield(subject, status, color) {
+function saveShield(subject, status, color, addLogo) {
   function escape(obj) {
     var str = _.isString(obj) ? obj : obj.toString();
     return str.replace(/_/g, '__').replace(/-/g, '--').replace(/ /g, '_');
@@ -164,9 +165,13 @@ function saveShield(subject, status, color) {
   }
 
   var filename = join(join(escape(subject), escape(status)), color);
-  var url = `https://img.shields.io/badge/${filename}.svg`;
+  var url = new URI(`https://img.shields.io/badge/${filename}.svg`);
+  if (addLogo) {
+    var data = fs.readFileSync('./branding/icon-16x16.png', 'base64');
+    url.addQuery('logo', URI.encodeQuery(`data:image/png;base64,${data}`));
+  }
 
-  return makeRequest('get', url, {encoding: null})
+  return makeRequest('get', url.href(), {encoding: null})
     .spread(function(response, data) {
       var filename = deployDir + 'banners/' + escape(subject).toLowerCase() + '_banner.svg';
       util.saveFile(filename, data);
