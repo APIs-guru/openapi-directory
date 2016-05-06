@@ -167,8 +167,8 @@ function saveShield(subject, status, color, addLogo) {
   var filename = join(join(escape(subject), escape(status)), color);
   var url = new URI(`https://img.shields.io/badge/${filename}.svg`);
   if (addLogo) {
-    var data = fs.readFileSync('./branding/icon-16x16.png', 'base64');
-    url.addQuery('logo', URI.encodeQuery(`data:image/png;base64,${data}`));
+    var data = URI.encodeQuery(fs.readFileSync('./branding/icon-16x16.png', 'base64'));
+    url.addQuery('logo', `data:image/png;base64,${data}`);
   }
 
   return makeRequest('get', url.href(), {encoding: null})
