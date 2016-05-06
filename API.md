@@ -1,4 +1,4 @@
-**Warning**: If you want to be notified about changes in advance please send us email to founders@APIs.guru
+**Warning**: If you want to be notified about changes in advance please subscribe to our [Gitter channel](https://gitter.im/APIs-guru/api-models).
 
 ## Implementation
 This API implemented as `gh-pages` branch Github automatically mirror it's content to<BR> https://apis-guru.github.io/api-models/<BR>
