@@ -1,39 +1,3 @@
-definitions:
-  UserWithPermissions:
-    allOf:
-      '0':
-        - $ref: '#/definitions/User'
-      '1':
-        - properties:
-            backOfficeRoles:
-              items:
-                $ref: '#/definitions/BackOfficeRole'
-              type: array
-            clientRoles:
-              description: A list with client roles
-              items:
-                $ref: '#/definitions/ClientRoles'
-              type: array
-          type: object
-      '_0':
-        - $ref: '#/definitions/User'
-        - 0
-        - 0
-      '_1':
-        - properties:
-            backOfficeRoles:
-              items:
-                $ref: '#/definitions/BackOfficeRole'
-              type: array
-            clientRoles:
-              description: A list with client roles
-              items:
-                $ref: '#/definitions/ClientRoles'
-              type: array
-          type: object
-        - 0
-        - 0
-      _t: a
 paths:
   '/orgunits/{orgid}/usergroups':
     get:
