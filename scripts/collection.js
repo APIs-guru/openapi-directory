@@ -109,14 +109,15 @@ function urlsCollection() {
 }
 
 function refreshCollection(dir) {
-  var fixups = util.getYamlFiles('**/fixup.yaml', dir);
-  _.each(fixups, function (fixup, filename) {
-    util.saveYaml(filename, fixup);
-  });
-
   _.each(util.getSpecs(dir), function (swagger, filename) {
+    console.log(filename);
     assert(util.getSwaggerPath(swagger) === filename);
     util.saveSwagger(swagger);
+
+    var fixupPath = util.getSwaggerPath(swagger, 'fixup.yaml')
+    var revertSwagger = _.cloneDeep(swagger);
+    revertFixup(fixupPath, revertSwagger);
+    saveFixup(fixupPath, revertSwagger, swagger);
   });
 }
 
@@ -125,7 +126,7 @@ function fixupSwagger(swaggerPath) {
   editFile(util.Yaml2String(swagger))
     .then(function (editedSwagger) {
       editedSwagger = YAML.safeLoad(editedSwagger);
-      saveSwaggerFixup(swagger, editedSwagger);
+      appendSwaggerFixup(swagger, editedSwagger);
     })
     .done();
 }
@@ -227,12 +228,12 @@ function addToCollection(type, url, command) {
 
         if (type !== 'swagger_2') {
           var editedOrigin = YAML.safeLoad(match[1]);
-          saveFixup(getOriginFixupPath(result.spec), serilazeSpec(result.spec), editedOrigin);
+          appendFixup(getOriginFixupPath(result.spec), serilazeSpec(result.spec), editedOrigin);
         }
 
         if (!_.isUndefined(result.swagger)) {
           var editedSwagger = YAML.safeLoad(match[2]);
-          saveSwaggerFixup(result.swagger, editedSwagger);
+          appendSwaggerFixup(result.swagger, editedSwagger);
         }
       })
       .done();
@@ -258,19 +259,29 @@ function getOriginFixupPath(spec) {
   return '../fixes/' + encodeURIComponent(spec.source) + '.yaml';
 }
 
-function saveSwaggerFixup(swagger, editedSwagger) {
-  saveFixup(util.getSwaggerPath(swagger, 'fixup.yaml'), swagger, editedSwagger);
+function appendSwaggerFixup(swagger, editedSwagger) {
+  appendFixup(util.getSwaggerPath(swagger, 'fixup.yaml'), swagger, editedSwagger);
 }
 
-function saveFixup(fixupPath, spec, editedSpec) {
-  //Before diff we need to unpatch, it's a way to appeand changes
+function revertFixup(fixupPath, spec) {
   var fixup = util.readYaml(fixupPath);
   if (fixup)
     jsondiffpatch.unpatch(spec, fixup);
+}
 
+function saveFixup(fixupPath, spec, editedSpec) {
   var diff = jsondiffpatch.diff(spec, editedSpec);
-  if (!_.isEqual(diff, fixup))
+  if (!_.isEmpty(diff))
     util.saveYaml(fixupPath, diff);
+}
+
+function appendFixup(fixupPath, spec, editedSpec) {
+  if (_.isEqual(spec, editedSpec))
+    return;
+
+  //Before diff we need to unpatch, it's a way to appeand changes
+  revertFixup(fixupPath, spec);
+  saveFixup(fixupPath, spec, editedSpec);
 }
 
 function swaggerToSpecLead(swagger) {
