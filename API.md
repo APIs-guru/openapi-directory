@@ -47,7 +47,3 @@ For example:
   ...
 }
 ```
-
-## Alternatives
-In case if you really need it, we also support [APIs.json](http://apisjson.org/) format:
-https://apis-guru.github.io/api-models/apis.json

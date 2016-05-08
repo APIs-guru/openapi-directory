@@ -14,8 +14,8 @@ var MIME = new MimeLookup(require('mime-db'));
 var makeRequest = require('makeRequest');
 var util = require('./util');
 
-var specRootUrl = 'https://apis-guru.github.io/api-models/';
-var deployDir = 'deploy/';
+var specRootUrl = 'https://apis-guru.github.io/api-models';
+var deployDir = 'deploy';
 
 sh.set('-e');
 sh.set('-v');
@@ -24,24 +24,16 @@ sh.mkdir(deployDir);
 sh.cp('scripts/index.html', deployDir);
 sh.cp('-R', 'branding/', deployDir);
 
-sh.mkdir('-p', deployDir + 'api/v1');
-sh.cp('scripts/apis_guru_swagger.yaml', deployDir + 'api/v1/swagger.yaml');
-sh.cp('scripts/apis.json', deployDir + 'api/apis.json');
+sh.mkdir('-p', `${deployDir}/api/v1`);
+sh.cp('scripts/apis_guru_swagger.yaml', `${deployDir}/api/v1/swagger.yaml`);
 
-cacheResources(util.getSpecs('APIs/'))
+var specs = util.getSpecs('APIs/');
+cacheResources(specs)
   .then(function (specs) {
     //Note: at this point all logo are cached
-    generateAPIsJSON(specs);
-
-    _.each(specs, function (swagger) {
-      var swaggerPath = deployDir + util.getSwaggerPath(swagger, 'swagger');
-      util.saveJson(swaggerPath + '.json', swagger);
-      util.saveYaml(swaggerPath + '.yaml', swagger);
-    });
-
-    var apiList = generateAPI(specs);
+    var apiList = buildApiList(specs);
     console.log('Generated list for ' + _.size(apiList) + ' API specs.');
-    util.saveJson(deployDir + 'api/v1/list.json', apiList);
+    util.saveJson(`${deployDir}/api/v1/list.json`, apiList);
 
     var numAPIs = _.size(apiList);
     var numEndpoints = _(specs).map('paths').map(_.size).sum();
@@ -74,98 +66,60 @@ function cacheResources(specs) {
           assert(extension);
         }
 
-        var logoFile = 'cache/' + util.getSwaggerPath(swagger, 'logo.' + extension);
-        util.saveFile(deployDir + logoFile, data);
+        var logoFile = 'cache/' + util.getSwaggerPath(swagger, `logo.${extension}`);
+        util.saveFile(`${deployDir}/${logoFile}`, data);
 
         //Modify object to 
-        swagger.info['x-logo'].url = specRootUrl + logoFile;
+        swagger.info['x-logo'].url = `${specRootUrl}/${logoFile}`;
 
         return swagger;
       });
   });
 }
 
-function generateAPIsJSON(specs) {
-  var apisJsonPath = __dirname + '/apis.json'
-  var collection = _.extend(util.readJson(apisJsonPath), {
-    created: '2015-10-15',
-    modified: new Date().toISOString().substring(0, 10),
-    url: specRootUrl + 'apis.json',
-    apis: []
-  });
-
-  _.each(specs, function (swagger) {
-    var info = swagger.info;
-    collection.apis.push({
-      name: info.title,
-      description: info.description,
-      image: info['x-logo'] && info['x-logo'].url,
-      humanURL: swagger.externalDocs && swagger.externalDocs.url,
-      baseURL: swagger.schemes[0] + '://' + swagger.host + swagger.basePath,
-      version: info.version,
-      properties: [{
-        type: 'Swagger',
-        url: specRootUrl + util.getSwaggerPath(swagger, 'swagger.json')
-      }]
-    });
-  });
-
-  util.saveJson(deployDir + 'apis.json', collection);
+function buildApiList(specs) {
+  return _(specs)
+    .map(buildApiListEntry)
+    .groupBy(util.getApiId)
+    .mapValues(versions => ({
+      versions: _.keyBy(versions, 'info.version'),
+      //FIXME: here we don't track deleted version, not a problem for right now :)
+      added: _(versions).map('added').min(),
+      preferred: _.find(versions, 'info["x-preferred"]').info.version
+    })).value();
 }
 
-function generateAPI(specs) {
-  var list = {};
+function buildApiListEntry(swagger) {
+  //TODO: remove
+  var filename = 'APIs/' + util.getSwaggerPath(swagger);
 
-  _.each(specs, function (swagger) {
-    var id = util.getApiId(swagger);
-    var version = swagger.info.version;
+  _.defaults(swagger.info, {'x-preferred': true});
 
-    list[id] = list[id] || { versions: {} };
-    var api = list[id];
+  var basename = util.getSwaggerPath(swagger, 'swagger');
+  util.saveJson(`${deployDir}/${basename}.json`, swagger);
+  util.saveYaml(`${deployDir}/${basename}.yaml`, swagger);
 
-    var filename = util.getSwaggerPath(swagger);
-    var updated = gitLogDate('-1', filename)[0];
-    //FIXME: here we don't track deleted version, not a problem for right now :)
-    var added = gitLogDate('--follow --diff-filter=A', filename).pop();
-    api.added = _.min([api.added, added]);
-
-    var preferred = swagger.info['x-preferred'];
-    if (_.isUndefined(preferred) || preferred === true)
-      api.preferred = version;
-
-    api.versions[version] = {
-      swaggerUrl: specRootUrl + util.getSwaggerPath(swagger, 'swagger.json'),
-      swaggerYamlUrl: specRootUrl + util.getSwaggerPath(swagger),
-      info: swagger.info,
-      externalDocs: swagger.externalDocs,
-      added: added,
-      updated: updated
-    };
-  });
-
-  return list;
-}
-
-function gitLogDate(options, filename) {
-  var result = util.exec(`git log --format=%aD ${options} -- 'APIs/${filename}'`);
-  result = _.trim(result.stdout, '\n').split('\n');
-  assert(!_.isEmpty(result));
-  return result.map(function (str) {
-    return new Date(str);
-  });
+  var dates = util.exec(`git log --format=%aD --follow -- '${filename}'`).stdout;
+  dates = _(dates).split('\n').compact()
+  return {
+    swaggerUrl: `${specRootUrl}/${basename}.json`,
+    swaggerYamlUrl: `${specRootUrl}/${basename}.yaml`,
+    info: swagger.info,
+    externalDocs: swagger.externalDocs,
+    added: new Date(dates.last()),
+    updated: new Date(dates.first())
+  };
 }
 
 function saveShield(subject, status, color, addLogo) {
   function escape(obj) {
-    var str = _.isString(obj) ? obj : obj.toString();
-    return str.replace(/_/g, '__').replace(/-/g, '--').replace(/ /g, '_');
-  }
-  function join(left, right) {
-    return left + '-' + right;
+    return obj.toString().replace(/_/g, '__').replace(/-/g, '--').replace(/ /g, '_');
   }
 
-  var filename = join(join(escape(subject), escape(status)), color);
-  var url = new URI(`https://img.shields.io/badge/${filename}.svg`);
+  subject = escape(subject);
+  status = escape(status);
+
+  var url = new URI(`https://img.shields.io/badge/${subject}-${status}-${color}.svg`);
   if (addLogo) {
     var data = URI.encodeQuery(fs.readFileSync('./branding/icon-16x16.png', 'base64'));
     url.addQuery('logo', `data:image/png;base64,${data}`);
@@ -173,7 +127,6 @@ function saveShield(subject, status, color, addLogo) {
 
   return makeRequest('get', url.href(), {encoding: null})
     .spread(function(response, data) {
-      var filename = deployDir + 'banners/' + escape(subject).toLowerCase() + '_banner.svg';
-      util.saveFile(filename, data);
+      util.saveFile(`${deployDir}/banners/${subject.toLowerCase()}_banner.svg`, data);
     });
 }
