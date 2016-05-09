@@ -11,8 +11,7 @@ module.exports = function () {
 
   //TODO: use makeRequest lib to dowload archive
   var files = util.exec('wget -q -O- https://codeload.github.com/Azure/azure-rest-api-specs/tar.gz/master | tar -tz');
-  files = files.toString().split('\n');
-  return _(files).map(function (filename) {
+  return _(files).split('\n').map(function (filename) {
     var result = regex.exec(filename);
     if (!result)
       return;

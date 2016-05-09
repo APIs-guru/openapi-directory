@@ -170,5 +170,5 @@ exports.exec = function (cmd) {
   });
   sh.config.verbose = glovalVerbose;
   assert(result.code === 0);
-  return result;
+  return result.stdout;
 }

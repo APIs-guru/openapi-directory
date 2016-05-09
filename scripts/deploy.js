@@ -28,10 +28,8 @@ sh.mkdir('-p', `${deployDir}/api/v1`);
 sh.cp('scripts/apis_guru_swagger.yaml', `${deployDir}/api/v1/swagger.yaml`);
 
 var specs = util.getSpecs('APIs/');
-cacheResources(specs)
-  .then(function (specs) {
-    //Note: at this point all logo are cached
-    var apiList = buildApiList(specs);
+buildApiList(specs)
+  .then(function (apiList) {
     console.log('Generated list for ' + _.size(apiList) + ' API specs.');
     util.saveJson(`${deployDir}/api/v1/list.json`, apiList);
 
@@ -48,59 +46,72 @@ cacheResources(specs)
   })
   .done();
 
-function cacheResources(specs) {
-  return Promise.mapSeries(_.values(specs), function (swagger) {
-    if (_.isUndefined(swagger.info['x-logo']))
-      return swagger;
+function cacheLogo(url) {
+  assert(url.indexOf('#') === -1);
+  return makeRequest('get', url, {encoding: null})
+    .spread(function(response, data) {
+      var logoFile = 'cache/logo/' + encodeURIComponent(url);
 
-    var url = swagger.info['x-logo'].url;
-    assert(url.indexOf('#') === -1);
-    return makeRequest('get', url, {encoding: null})
-      .spread(function(response, data) {
+      if (!URI(url).suffix()) {
+        var mime = response.headers['content-type'];
+        assert(mime.match('image/'));
+        var extension = MIME.extension(mime);
+        assert(extension);
+        logoFile += `.${extension}`;
+      }
 
-        var extension = URI(url).suffix();
-        if (!extension) {
-          var mime = response.headers['content-type'];
-          assert(mime.match('image/'));
-          extension = MIME.extension(mime);
-          assert(extension);
-        }
-
-        var logoFile = 'cache/' + util.getSwaggerPath(swagger, `logo.${extension}`);
-        util.saveFile(`${deployDir}/${logoFile}`, data);
-
-        //Modify object to 
-        swagger.info['x-logo'].url = `${specRootUrl}/${logoFile}`;
-
-        return swagger;
-      });
-  });
+      util.saveFile(`${deployDir}/${logoFile}`, data);
+      return `${specRootUrl}/${logoFile}`;
+    });
 }
 
 function buildApiList(specs) {
-  return _(specs)
-    .map(buildApiListEntry)
-    .groupBy(util.getApiId)
-    .mapValues(versions => ({
-      versions: _.keyBy(versions, 'info.version'),
-      //FIXME: here we don't track deleted version, not a problem for right now :)
-      added: _(versions).map('added').min(),
-      preferred: _.find(versions, 'info["x-preferred"]').info.version
-    })).value();
+  return Promise.coroutine(function* () {
+    var apiList = {};
+    var cachedLogo = {};
+
+    for (var filename in specs) {
+      var swagger = specs[filename];
+
+      var logoUrl = _.get(swagger, 'info["x-logo"].url');
+      if (logoUrl) {
+        if (!cachedLogo[logoUrl])
+          cachedLogo[logoUrl] = yield cacheLogo(logoUrl);
+        swagger.info['x-logo'].url = cachedLogo[logoUrl];
+      }
+
+      _.defaults(swagger.info, {'x-preferred': true});
+
+      addSwagger(apiList, swagger, filename);
+    }
+    return apiList;
+  })();
 }
 
-function buildApiListEntry(swagger) {
-  //TODO: remove
-  var filename = 'APIs/' + util.getSwaggerPath(swagger);
+function addSwagger(apiList, swagger, filename) {
+  var id = util.getApiId(swagger);
+  var apiEntry = apiList[id] = apiList[id] || {versions: {}};
+  var versionEntry = buildVersionEntry(swagger, filename);
 
-  _.defaults(swagger.info, {'x-preferred': true});
+  apiEntry.versions[versionEntry.info.version] = versionEntry;
 
+  if (versionEntry.info['x-preferred'])
+    apiEntry.preferred = versionEntry.info.version;
+
+  //FIXME: here we don't track deleted version, not a problem for right now :)
+  apiEntry.added = _([apiEntry.added, versionEntry.added]).compact().min();
+
+  return apiEntry;
+}
+
+function buildVersionEntry(swagger, filename) {
   var basename = util.getSwaggerPath(swagger, 'swagger');
   util.saveJson(`${deployDir}/${basename}.json`, swagger);
   util.saveYaml(`${deployDir}/${basename}.yaml`, swagger);
 
-  var dates = util.exec(`git log --format=%aD --follow -- '${filename}'`).stdout;
-  dates = _(dates).split('\n').compact()
+  var dates = util.exec(`git log --format=%aD --follow -- '${filename}'`);
+  dates = _(dates).split('\n').compact();
+
   return {
     swaggerUrl: `${specRootUrl}/${basename}.json`,
     swaggerYamlUrl: `${specRootUrl}/${basename}.yaml`,
