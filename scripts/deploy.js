@@ -61,7 +61,7 @@ function cacheLogo(url) {
       }
 
       util.saveFile(`${deployDir}/${logoFile}`, data);
-      return `${specRootUrl}/${logoFile}`;
+      return `${specRootUrl}/` + encodeURIComponent(logoFile);
     });
 }
 
