@@ -6,6 +6,7 @@ var fs = require('fs');
 
 var _ = require('lodash');
 var glob = require('glob')
+var URI = require('urijs');
 var sh = require('shelljs');
 var YAML = require('js-yaml');
 var mkdirp = require('mkdirp').sync;
@@ -173,6 +174,10 @@ exports.exec = function (cmd) {
   return result.stdout;
 }
 
-exports.urlToFilename = function (url) {
-  return sanitize(url, {replacement: '_'}).replace(/_+/, '_');
+exports.urlToFilename = function (url, stripQuery) {
+  url = URI(url)
+
+  if (stripQuery)
+    url = url.query('');
+  return sanitize(url.readable(), {replacement: '_'}).replace(/_+/, '_');
 }

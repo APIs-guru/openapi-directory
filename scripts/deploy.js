@@ -50,7 +50,7 @@ function cacheLogo(url) {
   assert(url.indexOf('#') === -1);
   return makeRequest('get', url, {encoding: null})
     .spread(function(response, data) {
-      var logoFile = 'cache/logo/' + util.urlToFilename(url);
+      var logoFile = 'cache/logo/' + util.urlToFilename(url, true);
 
       if (!URI(url).suffix()) {
         var mime = response.headers['content-type'];
