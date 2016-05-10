@@ -172,3 +172,7 @@ exports.exec = function (cmd) {
   assert(result.code === 0);
   return result.stdout;
 }
+
+exports.urlToFilename = function (url) {
+  return sanitize(url, {replacement: '_'}).replace(/_+/, '_');
+}
