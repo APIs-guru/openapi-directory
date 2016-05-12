@@ -40,9 +40,14 @@ definitions:
     type: object
     additionalProperties:
       $ref: "#/definitions/API"
+    minProperties: 1
   API:
     description: Meta information about API
     type: object
+    required:
+      - added
+      - preferred
+      - versions
     properties:
       added:
         description: Timestamp when this API was first added to collection
@@ -56,8 +61,16 @@ definitions:
         type: object
         additionalProperties:
           $ref: "#/definitions/ApiVersion"
+        minProperties: 1
+    additionalProperties: false
   ApiVersion:
     type: object
+    required:
+      - added
+      - updated
+      - swaggerUrl
+      - swaggerYamlUrl
+      - info
     properties:
       added:
         description: Timestamp when this version was added
@@ -78,3 +91,5 @@ definitions:
       info:
         description: Copy of `info` section from Swagger spec
         type: object
+        minProperties: 1
+    additionalProperties: false
