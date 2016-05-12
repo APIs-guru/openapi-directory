@@ -23,7 +23,7 @@ If you want to reference this project and you need an icon or even a banner, che
 Also, we provide services and consultancy around the Swagger spec and REST APIs in general.
 You can contact us at founders@apis.guru.
 
-What APIs.guru do?
+What does APIs.guru do?
 --------------------------
 * Filter out private and non-reliable APIs.
 * [Convert](https://github.com/lucybot/api-spec-converter) different formats into OpenAPI(fka Swagger) 2.0
