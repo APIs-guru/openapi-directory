@@ -310,6 +310,26 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: DiagnosticsLevel
+    required:
+      - level
+    type: object
+  ExampleRequest:
+    description: Sample input data for the service's input(s).
+    properties:
+      globalParameters:
+        additionalProperties:
+          type: object
+        description: Sample input data for the web service's global parameters
+        type: object
+      inputs:
+        additionalProperties:
+          items:
+            items:
+              type: object
+            type: array
+          type: array
+        description: Sample input data for the web service's input(s) given as an input name to sample input values matrix map.
+        type: object
     type: object
   GraphEdge:
     description: Defines an edge within the web service's graph.
@@ -343,6 +363,25 @@ definitions:
         additionalProperties:
           type: string
         description: 'If applicable, parameters of the node. Global graph parameters map into these, with values set at runtime.'
+        type: object
+    type: object
+  GraphPackage:
+    description: Defines the graph of modules making up the machine learning solution.
+    properties:
+      edges:
+        description: The list of edges making up the graph.
+        items:
+          $ref: '#/definitions/GraphEdge'
+        type: array
+      graphParameters:
+        additionalProperties:
+          $ref: '#/definitions/GraphParameter'
+        description: 'The collection of global parameters for the graph, given as a global parameter name to GraphParameter map. Each parameter here has a 1:1 match with the global parameters values map declared at the WebServiceProperties level.'
+        type: object
+      nodes:
+        additionalProperties:
+          $ref: '#/definitions/GraphNode'
+        description: 'The set of nodes making up the graph, provided as a nodeId to GraphNode map'
         type: object
     type: object
   GraphParameter:
@@ -507,7 +546,7 @@ definitions:
       properties:
         additionalProperties:
           $ref: '#/definitions/TableSpecification'
-        description: Collection of (name -> swagger schema) for each input or output of the web service.
+        description: Map of name to swagger schema for each input or output of the web service.
         type: object
       title:
         description: Swagger schema title.
@@ -560,6 +599,8 @@ definitions:
       properties:
         $ref: '#/definitions/WebServiceProperties'
         description: Web service resource properties.
+    required:
+      - properties
     type: object
   WebServiceKeys:
     description: Access keys for the web service calls.
@@ -594,6 +635,9 @@ definitions:
       diagnostics:
         $ref: '#/definitions/DiagnosticsConfiguration'
         description: Settings controlling the diagnostics traces collection for the web service.
+      exampleRequest:
+        $ref: '#/definitions/ExampleRequest'
+        description: 'Sample request data for each of the service''s inputs, as applicable.'
       input:
         $ref: '#/definitions/ServiceInputOutputSpecification'
         description: 'Swagger schema for the service''s input(s), as applicable.'
@@ -619,7 +663,7 @@ definitions:
       parameters:
         additionalProperties:
           type: string
-        description: 'The set of global parameters values defined for the web service, given as a global parameter name -> default value collection. If no default value is specified, the parameter is considered to be required.'
+        description: 'The set of global parameters values defined for the web service, given as a global parameter name to default value map. If no default value is specified, the parameter is considered to be required.'
         type: object
       provisioningState:
         description: The web service resource's provisioning state.
@@ -659,22 +703,6 @@ definitions:
     description: Properties specific to a Graph based web service.
     properties:
       package:
+        $ref: '#/definitions/GraphPackage'
         description: The definition of the graph package making up this web service.
-        properties:
-          edges:
-            description: The list of edges making up the graph.
-            items:
-              $ref: '#/definitions/GraphEdge'
-            type: array
-          graphParameters:
-            additionalProperties:
-              $ref: '#/definitions/GraphParameter'
-            description: 'The collection of global parameters for the graph, given as a global parameter name -> GraphParameter map. Each parameter here has a 1:1 match with the global parameters values map declared at the WebServiceProperties level.'
-            type: object
-          nodes:
-            additionalProperties:
-              $ref: '#/definitions/GraphNode'
-            description: 'The set of nodes making up the graph, provided as a nodeId -> GraphNode map'
-            type: object
-        type: object
     x-ms-discriminator-value: Graph

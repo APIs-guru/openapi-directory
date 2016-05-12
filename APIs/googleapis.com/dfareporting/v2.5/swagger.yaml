@@ -2,23 +2,23 @@ swagger: '2.0'
 schemes:
   - https
 host: www.googleapis.com
-basePath: /dfareporting/v2.0
+basePath: /dfareporting/v2.5
 info:
   contact:
     name: Google
     url: 'https://google.com'
   description: Manages your DoubleClick Campaign Manager ad campaigns and reports.
   title: DCM/DFA Reporting And Trafficking
-  version: v2.0
+  version: v2.5
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/dfareporting/v2.0/rest'
+    url: 'https://www.googleapis.com/discovery/v1/apis/dfareporting/v2.5/rest'
     version: v1
-  x-preferred: false
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: dfareporting
 externalDocs:
@@ -29,6 +29,7 @@ securityDefinitions:
     description: Oauth 2.0 authentication
     flow: implicit
     scopes:
+      'https://www.googleapis.com/auth/ddmconversions': Manage DoubleClick Digital Marketing conversions
       'https://www.googleapis.com/auth/dfareporting': View and manage DoubleClick for Advertisers reports
       'https://www.googleapis.com/auth/dfatrafficking': View and manage your DoubleClick Campaign Manager's (DCM) display ad campaigns
     type: oauth2
@@ -88,6 +89,7 @@ tags:
   - name: cities
   - name: connectionTypes
   - name: contentCategories
+  - name: conversions
   - name: countries
   - name: creativeAssets
   - name: creativeFieldValues
@@ -97,26 +99,34 @@ tags:
   - name: dimensionValues
   - name: directorySiteContacts
   - name: directorySites
+  - name: dynamicTargetingKeys
   - name: eventTags
   - name: files
   - name: floodlightActivities
   - name: floodlightActivityGroups
   - name: floodlightConfigurations
+  - name: inventoryItems
   - name: landingPages
   - name: metros
   - name: mobileCarriers
   - name: operatingSystemVersions
   - name: operatingSystems
+  - name: orderDocuments
+  - name: orders
   - name: placementGroups
   - name: placementStrategies
   - name: placements
   - name: platformTypes
   - name: postalCodes
+  - name: projects
   - name: regions
+  - name: remarketingListShares
+  - name: remarketingLists
   - name: reports
   - name: sites
   - name: sizes
   - name: subaccounts
+  - name: targetableRemarketingLists
   - name: userProfiles
   - name: userRolePermissionGroups
   - name: userRolePermissions
@@ -465,6 +475,29 @@ paths:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - accountUserProfiles
+    post:
+      description: Inserts a new account user profile.
+      operationId: dfareporting.accountUserProfiles.insert
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AccountUserProfile'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AccountUserProfile'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - accountUserProfiles
     put:
       description: Updates an existing account user profile.
       operationId: dfareporting.accountUserProfiles.update
@@ -706,13 +739,13 @@ paths:
             type: string
           name: campaignIds
           type: array
-        - description: 'Select default ads with the specified compatibility. Applicable when type is AD_SERVING_DEFAULT_AD. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering an in-stream video ads developed with the VAST standard.'
+        - description: 'Select default ads with the specified compatibility. Applicable when type is AD_SERVING_DEFAULT_AD. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering an in-stream video ads developed with the VAST standard.'
           enum:
             - APP
             - APP_INTERSTITIAL
+            - DISPLAY
+            - DISPLAY_INTERSTITIAL
             - IN_STREAM_VIDEO
-            - WEB
-            - WEB_INTERSTITIAL
           in: query
           name: compatibility
           type: string
@@ -733,29 +766,29 @@ paths:
         - description: Select only ads with the specified creativeType.
           enum:
             - BRAND_SAFE_DEFAULT_INSTREAM_VIDEO
-            - CUSTOM_INPAGE
-            - CUSTOM_INTERSTITIAL
-            - ENHANCED_BANNER
-            - ENHANCED_IMAGE
+            - CUSTOM_DISPLAY
+            - CUSTOM_DISPLAY_INTERSTITIAL
+            - DISPLAY
+            - DISPLAY_IMAGE_GALLERY
+            - DISPLAY_REDIRECT
             - FLASH_INPAGE
             - HTML5_BANNER
             - IMAGE
             - INSTREAM_VIDEO
+            - INSTREAM_VIDEO_REDIRECT
             - INTERNAL_REDIRECT
             - INTERSTITIAL_INTERNAL_REDIRECT
-            - REDIRECT
-            - RICH_MEDIA_EXPANDING
+            - RICH_MEDIA_DISPLAY_BANNER
+            - RICH_MEDIA_DISPLAY_EXPANDING
+            - RICH_MEDIA_DISPLAY_INTERSTITIAL
+            - RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL
             - RICH_MEDIA_IM_EXPAND
-            - RICH_MEDIA_INPAGE
             - RICH_MEDIA_INPAGE_FLOATING
-            - RICH_MEDIA_INTERSTITIAL_FLOAT
             - RICH_MEDIA_MOBILE_IN_APP
-            - RICH_MEDIA_MULTI_FLOATING
             - RICH_MEDIA_PEEL_DOWN
             - TRACKING_TEXT
-            - VAST_REDIRECT
-            - VPAID_LINEAR
-            - VPAID_NON_LINEAR
+            - VPAID_LINEAR_VIDEO
+            - VPAID_NON_LINEAR_VIDEO
           in: query
           name: creativeType
           type: string
@@ -2117,6 +2150,39 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/connectionTypes/{id}':
+    get:
+      description: Gets one connection type by ID.
+      operationId: dfareporting.connectionTypes.get
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Connection type ID.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ConnectionType'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - connectionTypes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/contentCategories':
     get:
       description: 'Retrieves a list of content categories, possibly filtered.'
@@ -2307,6 +2373,38 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/conversions/batchinsert':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Inserts conversions.
+      operationId: dfareporting.conversions.batchinsert
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ConversionsBatchInsertRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ConversionsBatchInsertResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ddmconversions'
+      tags:
+        - conversions
   '/userprofiles/{profileId}/countries':
     get:
       description: Retrieves a list of countries.
@@ -3100,29 +3198,29 @@ paths:
           items:
             enum:
               - BRAND_SAFE_DEFAULT_INSTREAM_VIDEO
-              - CUSTOM_INPAGE
-              - CUSTOM_INTERSTITIAL
-              - ENHANCED_BANNER
-              - ENHANCED_IMAGE
+              - CUSTOM_DISPLAY
+              - CUSTOM_DISPLAY_INTERSTITIAL
+              - DISPLAY
+              - DISPLAY_IMAGE_GALLERY
+              - DISPLAY_REDIRECT
               - FLASH_INPAGE
               - HTML5_BANNER
               - IMAGE
               - INSTREAM_VIDEO
+              - INSTREAM_VIDEO_REDIRECT
               - INTERNAL_REDIRECT
               - INTERSTITIAL_INTERNAL_REDIRECT
-              - REDIRECT
-              - RICH_MEDIA_EXPANDING
+              - RICH_MEDIA_DISPLAY_BANNER
+              - RICH_MEDIA_DISPLAY_EXPANDING
+              - RICH_MEDIA_DISPLAY_INTERSTITIAL
+              - RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL
               - RICH_MEDIA_IM_EXPAND
-              - RICH_MEDIA_INPAGE
               - RICH_MEDIA_INPAGE_FLOATING
-              - RICH_MEDIA_INTERSTITIAL_FLOAT
               - RICH_MEDIA_MOBILE_IN_APP
-              - RICH_MEDIA_MULTI_FLOATING
               - RICH_MEDIA_PEEL_DOWN
               - TRACKING_TEXT
-              - VAST_REDIRECT
-              - VPAID_LINEAR
-              - VPAID_NON_LINEAR
+              - VPAID_LINEAR_VIDEO
+              - VPAID_NON_LINEAR_VIDEO
             type: string
           name: types
           type: array
@@ -3483,6 +3581,29 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+    post:
+      description: Inserts a new directory site.
+      operationId: dfareporting.directorySites.insert
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DirectorySite'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DirectorySite'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - directorySites
   '/userprofiles/{profileId}/directorySites/{id}':
     get:
       description: Gets one directory site by ID.
@@ -3508,6 +3629,127 @@ paths:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - directorySites
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/dynamicTargetingKeys':
+    get:
+      description: Retrieves a list of dynamic targeting keys.
+      operationId: dfareporting.dynamicTargetingKeys.list
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Select only dynamic targeting keys whose object has this advertiser ID.
+          in: query
+          name: advertiserId
+          type: string
+        - collectionFormat: multi
+          description: Select only dynamic targeting keys exactly matching these names.
+          in: query
+          items:
+            type: string
+          name: names
+          type: array
+        - description: Select only dynamic targeting keys with this object ID.
+          in: query
+          name: objectId
+          type: string
+        - description: Select only dynamic targeting keys with this object type.
+          enum:
+            - OBJECT_AD
+            - OBJECT_ADVERTISER
+            - OBJECT_CREATIVE
+            - OBJECT_PLACEMENT
+          in: query
+          name: objectType
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DynamicTargetingKeysListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - dynamicTargetingKeys
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Inserts a new dynamic targeting key. Keys must be created at the advertiser level before being assigned to the advertiser''s ads, creatives, or placements. There is a maximum of 1000 keys per advertiser, out of which a maximum of 20 keys can be assigned per ad, creative, or placement.'
+      operationId: dfareporting.dynamicTargetingKeys.insert
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DynamicTargetingKey'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DynamicTargetingKey'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - dynamicTargetingKeys
+  '/userprofiles/{profileId}/dynamicTargetingKeys/{objectId}':
+    delete:
+      description: Deletes an existing dynamic targeting key.
+      operationId: dfareporting.dynamicTargetingKeys.delete
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: ID of the object of this dynamic targeting key. This is a required field.
+          in: path
+          name: objectId
+          required: true
+          type: string
+        - description: Name of this dynamic targeting key. This is a required field. Must be less than 256 characters long and cannot contain commas. All characters are converted to lowercase.
+          in: query
+          name: name
+          required: true
+          type: string
+        - description: Type of the object of this dynamic targeting key. This is a required field.
+          enum:
+            - OBJECT_AD
+            - OBJECT_ADVERTISER
+            - OBJECT_CREATIVE
+            - OBJECT_PLACEMENT
+          in: query
+          name: objectType
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - dynamicTargetingKeys
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -4199,28 +4441,6 @@ paths:
       tags:
         - floodlightActivityGroups
   '/userprofiles/{profileId}/floodlightActivityGroups/{id}':
-    delete:
-      description: Deletes an existing floodlight activity group.
-      operationId: dfareporting.floodlightActivityGroups.delete
-      parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          type: string
-        - description: Floodlight activity Group ID.
-          in: path
-          name: id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/dfatrafficking'
-      tags:
-        - floodlightActivityGroups
     get:
       description: Gets one floodlight activity group by ID.
       operationId: dfareporting.floodlightActivityGroups.get
@@ -4428,6 +4648,39 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/mobileCarriers/{id}':
+    get:
+      description: Gets one mobile carrier by ID.
+      operationId: dfareporting.mobileCarriers.get
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Mobile carrier ID.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/MobileCarrier'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - mobileCarriers
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/operatingSystemVersions':
     get:
       description: Retrieves a list of operating system versions.
@@ -4456,6 +4709,39 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/operatingSystemVersions/{id}':
+    get:
+      description: Gets one operating system version by ID.
+      operationId: dfareporting.operatingSystemVersions.get
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Operating system version ID.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OperatingSystemVersion'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - operatingSystemVersions
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/operatingSystems':
     get:
       description: Retrieves a list of operating systems.
@@ -4471,6 +4757,39 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/OperatingSystemsListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - operatingSystems
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/operatingSystems/{dartId}':
+    get:
+      description: Gets one operating system by DART ID.
+      operationId: dfareporting.operatingSystems.get
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Operating system DART ID.
+          in: path
+          name: dartId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OperatingSystem'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/dfatrafficking'
@@ -4533,10 +4852,26 @@ paths:
             type: string
           name: ids
           type: array
+        - description: Select only placements or placement groups whose end date is on or before the specified maxEndDate. The date should be formatted as "yyyy-MM-dd".
+          in: query
+          name: maxEndDate
+          type: string
         - description: Maximum number of results to return.
           in: query
           name: maxResults
           type: integer
+        - description: Select only placements or placement groups whose start date is on or before the specified maxStartDate. The date should be formatted as "yyyy-MM-dd".
+          in: query
+          name: maxStartDate
+          type: string
+        - description: Select only placements or placement groups whose end date is on or after the specified minEndDate. The date should be formatted as "yyyy-MM-dd".
+          in: query
+          name: minEndDate
+          type: string
+        - description: Select only placements or placement groups whose start date is on or after the specified minStartDate. The date should be formatted as "yyyy-MM-dd".
+          in: query
+          name: minStartDate
+          type: string
         - description: Value of the nextPageToken from the previous result page.
           in: query
           name: pageToken
@@ -4937,15 +5272,15 @@ paths:
           name: campaignIds
           type: array
         - collectionFormat: multi
-          description: Select only placements that are associated with these compatibilities. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard.
+          description: Select only placements that are associated with these compatibilities. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard.
           in: query
           items:
             enum:
               - APP
               - APP_INTERSTITIAL
+              - DISPLAY
+              - DISPLAY_INTERSTITIAL
               - IN_STREAM_VIDEO
-              - WEB
-              - WEB_INTERSTITIAL
             type: string
           name: compatibilities
           type: array
@@ -4977,10 +5312,26 @@ paths:
             type: string
           name: ids
           type: array
+        - description: Select only placements or placement groups whose end date is on or before the specified maxEndDate. The date should be formatted as "yyyy-MM-dd".
+          in: query
+          name: maxEndDate
+          type: string
         - description: Maximum number of results to return.
           in: query
           name: maxResults
           type: integer
+        - description: Select only placements or placement groups whose start date is on or before the specified maxStartDate. The date should be formatted as "yyyy-MM-dd".
+          in: query
+          name: maxStartDate
+          type: string
+        - description: Select only placements or placement groups whose end date is on or after the specified minEndDate. The date should be formatted as "yyyy-MM-dd".
+          in: query
+          name: minEndDate
+          type: string
+        - description: Select only placements or placement groups whose start date is on or after the specified minStartDate. The date should be formatted as "yyyy-MM-dd".
+          in: query
+          name: minStartDate
+          type: string
         - description: Value of the nextPageToken from the previous result page.
           in: query
           name: pageToken
@@ -5262,6 +5613,39 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/platformTypes/{id}':
+    get:
+      description: Gets one platform type by ID.
+      operationId: dfareporting.platformTypes.get
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Platform type ID.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PlatformType'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - platformTypes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/postalCodes':
     get:
       description: Retrieves a list of postal codes.
@@ -5290,6 +5674,498 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/postalCodes/{code}':
+    get:
+      description: Gets one postal code by ID.
+      operationId: dfareporting.postalCodes.get
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Postal code ID.
+          in: path
+          name: code
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/PostalCode'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - postalCodes
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/projects':
+    get:
+      description: 'Retrieves a list of projects, possibly filtered.'
+      operationId: dfareporting.projects.list
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: Select only projects with these advertiser IDs.
+          in: query
+          items:
+            type: string
+          name: advertiserIds
+          type: array
+        - collectionFormat: multi
+          description: Select only projects with these IDs.
+          in: query
+          items:
+            type: string
+          name: ids
+          type: array
+        - description: Maximum number of results to return.
+          in: query
+          name: maxResults
+          type: integer
+        - description: Value of the nextPageToken from the previous result page.
+          in: query
+          name: pageToken
+          type: string
+        - description: 'Allows searching for projects by name or ID. Wildcards (*) are allowed. For example, "project*2015" will return projects with names like "project June 2015", "project April 2015", or simply "project 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "project" will match projects with name "my project", "project 2015", or simply "project".'
+          in: query
+          name: searchString
+          type: string
+        - description: Field by which to sort the list.
+          enum:
+            - ID
+            - NAME
+          in: query
+          name: sortField
+          type: string
+        - description: 'Order of sorted results, default is ASCENDING.'
+          enum:
+            - ASCENDING
+            - DESCENDING
+          in: query
+          name: sortOrder
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ProjectsListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/projects/{id}':
+    get:
+      description: Gets one project by ID.
+      operationId: dfareporting.projects.get
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Project ID.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Project'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/projects/{projectId}/inventoryItems':
+    get:
+      description: 'Retrieves a list of inventory items, possibly filtered.'
+      operationId: dfareporting.inventoryItems.list
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Project ID for order documents.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: Select only inventory items with these IDs.
+          in: query
+          items:
+            type: string
+          name: ids
+          type: array
+        - description: Select only inventory items that are in plan.
+          in: query
+          name: inPlan
+          type: boolean
+        - description: Maximum number of results to return.
+          in: query
+          name: maxResults
+          type: integer
+        - collectionFormat: multi
+          description: Select only inventory items that belong to specified orders.
+          in: query
+          items:
+            type: string
+          name: orderId
+          type: array
+        - description: Value of the nextPageToken from the previous result page.
+          in: query
+          name: pageToken
+          type: string
+        - collectionFormat: multi
+          description: Select only inventory items that are associated with these sites.
+          in: query
+          items:
+            type: string
+          name: siteId
+          type: array
+        - description: Field by which to sort the list.
+          enum:
+            - ID
+            - NAME
+          in: query
+          name: sortField
+          type: string
+        - description: 'Order of sorted results, default is ASCENDING.'
+          enum:
+            - ASCENDING
+            - DESCENDING
+          in: query
+          name: sortOrder
+          type: string
+        - description: Select only inventory items with this type.
+          enum:
+            - PLANNING_PLACEMENT_TYPE_CREDIT
+            - PLANNING_PLACEMENT_TYPE_REGULAR
+          in: query
+          name: type
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/InventoryItemsListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - inventoryItems
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/projects/{projectId}/inventoryItems/{id}':
+    get:
+      description: Gets one inventory item by ID.
+      operationId: dfareporting.inventoryItems.get
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Project ID for order documents.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Inventory item ID.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/InventoryItem'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - inventoryItems
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/projects/{projectId}/orderDocuments':
+    get:
+      description: 'Retrieves a list of order documents, possibly filtered.'
+      operationId: dfareporting.orderDocuments.list
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Project ID for order documents.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Select only order documents that have been approved by at least one user.
+          in: query
+          name: approved
+          type: boolean
+        - collectionFormat: multi
+          description: Select only order documents with these IDs.
+          in: query
+          items:
+            type: string
+          name: ids
+          type: array
+        - description: Maximum number of results to return.
+          in: query
+          name: maxResults
+          type: integer
+        - collectionFormat: multi
+          description: Select only order documents for specified orders.
+          in: query
+          items:
+            type: string
+          name: orderId
+          type: array
+        - description: Value of the nextPageToken from the previous result page.
+          in: query
+          name: pageToken
+          type: string
+        - description: 'Allows searching for order documents by name or ID. Wildcards (*) are allowed. For example, "orderdocument*2015" will return order documents with names like "orderdocument June 2015", "orderdocument April 2015", or simply "orderdocument 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "orderdocument" will match order documents with name "my orderdocument", "orderdocument 2015", or simply "orderdocument".'
+          in: query
+          name: searchString
+          type: string
+        - collectionFormat: multi
+          description: Select only order documents that are associated with these sites.
+          in: query
+          items:
+            type: string
+          name: siteId
+          type: array
+        - description: Field by which to sort the list.
+          enum:
+            - ID
+            - NAME
+          in: query
+          name: sortField
+          type: string
+        - description: 'Order of sorted results, default is ASCENDING.'
+          enum:
+            - ASCENDING
+            - DESCENDING
+          in: query
+          name: sortOrder
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrderDocumentsListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - orderDocuments
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/projects/{projectId}/orderDocuments/{id}':
+    get:
+      description: Gets one order document by ID.
+      operationId: dfareporting.orderDocuments.get
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Project ID for order documents.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Order document ID.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrderDocument'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - orderDocuments
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/projects/{projectId}/orders':
+    get:
+      description: 'Retrieves a list of orders, possibly filtered.'
+      operationId: dfareporting.orders.list
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Project ID for orders.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - collectionFormat: multi
+          description: Select only orders with these IDs.
+          in: query
+          items:
+            type: string
+          name: ids
+          type: array
+        - description: Maximum number of results to return.
+          in: query
+          name: maxResults
+          type: integer
+        - description: Value of the nextPageToken from the previous result page.
+          in: query
+          name: pageToken
+          type: string
+        - description: 'Allows searching for orders by name or ID. Wildcards (*) are allowed. For example, "order*2015" will return orders with names like "order June 2015", "order April 2015", or simply "order 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "order" will match orders with name "my order", "order 2015", or simply "order".'
+          in: query
+          name: searchString
+          type: string
+        - collectionFormat: multi
+          description: Select only orders that are associated with these site IDs.
+          in: query
+          items:
+            type: string
+          name: siteId
+          type: array
+        - description: Field by which to sort the list.
+          enum:
+            - ID
+            - NAME
+          in: query
+          name: sortField
+          type: string
+        - description: 'Order of sorted results, default is ASCENDING.'
+          enum:
+            - ASCENDING
+            - DESCENDING
+          in: query
+          name: sortOrder
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OrdersListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - orders
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/projects/{projectId}/orders/{id}':
+    get:
+      description: Gets one order by ID.
+      operationId: dfareporting.orders.get
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Project ID for orders.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Order ID.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Order'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - orders
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/regions':
     get:
       description: Retrieves a list of regions.
@@ -5310,6 +6186,273 @@ paths:
             - 'https://www.googleapis.com/auth/dfatrafficking'
       tags:
         - regions
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/remarketingListShares':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates an existing remarketing list share. This method supports patch semantics.
+      operationId: dfareporting.remarketingListShares.patch
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Remarketing list ID.
+          in: query
+          name: remarketingListId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemarketingListShare'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RemarketingListShare'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - remarketingListShares
+    put:
+      description: Updates an existing remarketing list share.
+      operationId: dfareporting.remarketingListShares.update
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemarketingListShare'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RemarketingListShare'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - remarketingListShares
+  '/userprofiles/{profileId}/remarketingListShares/{remarketingListId}':
+    get:
+      description: Gets one remarketing list share by remarketing list ID.
+      operationId: dfareporting.remarketingListShares.get
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Remarketing list ID.
+          in: path
+          name: remarketingListId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RemarketingListShare'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - remarketingListShares
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/remarketingLists':
+    get:
+      description: 'Retrieves a list of remarketing lists, possibly filtered.'
+      operationId: dfareporting.remarketingLists.list
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Select only remarketing lists owned by this advertiser.
+          in: query
+          name: advertiserId
+          required: true
+          type: string
+        - description: Select only active or only inactive remarketing lists.
+          in: query
+          name: active
+          type: boolean
+        - description: Select only remarketing lists that have this floodlight activity ID.
+          in: query
+          name: floodlightActivityId
+          type: string
+        - description: Maximum number of results to return.
+          in: query
+          name: maxResults
+          type: integer
+        - description: 'Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, "remarketing list*2015" will return objects with names like "remarketing list June 2015", "remarketing list April 2015", or simply "remarketing list 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "remarketing list" will match objects with name "my remarketing list", "remarketing list 2015", or simply "remarketing list".'
+          in: query
+          name: name
+          type: string
+        - description: Value of the nextPageToken from the previous result page.
+          in: query
+          name: pageToken
+          type: string
+        - description: Field by which to sort the list.
+          enum:
+            - ID
+            - NAME
+          in: query
+          name: sortField
+          type: string
+        - description: 'Order of sorted results, default is ASCENDING.'
+          enum:
+            - ASCENDING
+            - DESCENDING
+          in: query
+          name: sortOrder
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RemarketingListsListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - remarketingLists
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates an existing remarketing list. This method supports patch semantics.
+      operationId: dfareporting.remarketingLists.patch
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Remarketing list ID.
+          in: query
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemarketingList'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RemarketingList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - remarketingLists
+    post:
+      description: Inserts a new remarketing list.
+      operationId: dfareporting.remarketingLists.insert
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemarketingList'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RemarketingList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - remarketingLists
+    put:
+      description: Updates an existing remarketing list.
+      operationId: dfareporting.remarketingLists.update
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemarketingList'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RemarketingList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - remarketingLists
+  '/userprofiles/{profileId}/remarketingLists/{id}':
+    get:
+      description: Gets one remarketing list by ID.
+      operationId: dfareporting.remarketingLists.get
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Remarketing list ID.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RemarketingList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - remarketingLists
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -6162,6 +7305,102 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/targetableRemarketingLists':
+    get:
+      description: 'Retrieves a list of targetable remarketing lists, possibly filtered.'
+      operationId: dfareporting.targetableRemarketingLists.list
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Select only targetable remarketing lists targetable by these advertisers.
+          in: query
+          name: advertiserId
+          required: true
+          type: string
+        - description: Select only active or only inactive targetable remarketing lists.
+          in: query
+          name: active
+          type: boolean
+        - description: Maximum number of results to return.
+          in: query
+          name: maxResults
+          type: integer
+        - description: 'Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, "remarketing list*2015" will return objects with names like "remarketing list June 2015", "remarketing list April 2015", or simply "remarketing list 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "remarketing list" will match objects with name "my remarketing list", "remarketing list 2015", or simply "remarketing list".'
+          in: query
+          name: name
+          type: string
+        - description: Value of the nextPageToken from the previous result page.
+          in: query
+          name: pageToken
+          type: string
+        - description: Field by which to sort the list.
+          enum:
+            - ID
+            - NAME
+          in: query
+          name: sortField
+          type: string
+        - description: 'Order of sorted results, default is ASCENDING.'
+          enum:
+            - ASCENDING
+            - DESCENDING
+          in: query
+          name: sortOrder
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TargetableRemarketingListsListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - targetableRemarketingLists
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/userprofiles/{profileId}/targetableRemarketingLists/{id}':
+    get:
+      description: Gets one remarketing list by ID.
+      operationId: dfareporting.targetableRemarketingLists.get
+      parameters:
+        - description: User profile ID associated with this request.
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: Remarketing list ID.
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TargetableRemarketingList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/dfatrafficking'
+      tags:
+        - targetableRemarketingLists
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/userprofiles/{profileId}/userRolePermissionGroups':
     get:
       description: Gets a list of all supported user role permission groups.
@@ -6923,13 +8162,13 @@ definitions:
         description: Comments for this ad.
         type: string
       compatibility:
-        description: 'Compatibility of this ad. Applicable when type is AD_SERVING_DEFAULT_AD. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering an in-stream video ads developed with the VAST standard.'
+        description: 'Compatibility of this ad. Applicable when type is AD_SERVING_DEFAULT_AD. DISPLAY and DISPLAY_INTERSTITIAL refer to either rendering on desktop or on mobile devices or in mobile apps for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are only used for existing default ads. New mobile placements must be assigned DISPLAY or DISPLAY_INTERSTITIAL and default ads created for those placements will be limited to those compatibility types. IN_STREAM_VIDEO refers to rendering in-stream video ads developed with the VAST standard.'
         enum:
           - APP
           - APP_INTERSTITIAL
+          - DISPLAY
+          - DISPLAY_INTERSTITIAL
           - IN_STREAM_VIDEO
-          - WEB
-          - WEB_INTERSTITIAL
         type: string
       createInfo:
         $ref: '#/definitions/LastModifiedInfo'
@@ -6991,7 +8230,7 @@ definitions:
         items:
           $ref: '#/definitions/PlacementAssignment'
         type: array
-      remarketing_list_expression:
+      remarketingListExpression:
         $ref: '#/definitions/ListTargetingExpression'
         description: Applicable when type is AD_SERVING_STANDARD_AD. Remarketing list targeting expression for this ad.
       size:
@@ -7021,6 +8260,46 @@ definitions:
           - AD_SERVING_DEFAULT_AD
           - AD_SERVING_STANDARD_AD
           - AD_SERVING_TRACKING
+        type: string
+    type: object
+  AdSlot:
+    description: Ad Slot
+    properties:
+      comment:
+        description: Comment for this ad slot.
+        type: string
+      compatibility:
+        description: 'Ad slot compatibility. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop, mobile devices or in mobile apps for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard.'
+        enum:
+          - APP
+          - APP_INTERSTITIAL
+          - DISPLAY
+          - DISPLAY_INTERSTITIAL
+          - IN_STREAM_VIDEO
+        type: string
+      height:
+        description: Height of this ad slot.
+        format: int64
+        type: string
+      linkedPlacementId:
+        description: ID of the placement from an external platform that is linked to this ad slot.
+        format: int64
+        type: string
+      name:
+        description: Name of this ad slot.
+        type: string
+      paymentSourceType:
+        description: Payment source type of this ad slot.
+        enum:
+          - PLANNING_PAYMENT_SOURCE_TYPE_AGENCY_PAID
+          - PLANNING_PAYMENT_SOURCE_TYPE_PUBLISHER_PAID
+        type: string
+      primary:
+        description: Primary ad slot of a roadblock inventory item.
+        type: boolean
+      width:
+        description: Width of this ad slot.
+        format: int64
         type: string
     type: object
   AdsListResponse:
@@ -7084,6 +8363,10 @@ definitions:
       name:
         description: Name of this advertiser. This is a required field and must be less than 256 characters long and unique among advertisers of the same account.
         type: string
+      originalFloodlightConfigurationId:
+        description: Original floodlight configuration before any sharing occurred. Set the floodlightConfigurationId of this advertiser to originalFloodlightConfigurationId to unshare the advertiser's current floodlight configuration. You cannot unshare an advertiser's floodlight configuration if the shared configuration has activities associated with any campaign or placement.
+        format: int64
+        type: string
       status:
         description: Status of this advertiser.
         enum:
@@ -7094,6 +8377,9 @@ definitions:
         description: Subaccount ID of this advertiser.This is a read-only field that can be left blank.
         format: int64
         type: string
+      suspended:
+        description: Suspension status of this advertiser.
+        type: boolean
     type: object
   AdvertiserGroup:
     description: Groups advertisers together so that reports can be generated for the entire group at once.
@@ -7501,6 +8787,13 @@ definitions:
   ClickThroughUrl:
     description: Click-through URL
     properties:
+      computedClickThroughUrl:
+        description: |-
+          Read-only convenience field representing the actual URL that will be used for this click-through. The URL is computed as follows: 
+          - If defaultLandingPage is enabled then the campaign's default landing page URL is assigned to this field.
+          - If defaultLandingPage is not enabled and a landingPageId is specified then that landing page's URL is assigned to this field.
+          - If neither of the above cases apply, then the customClickThroughUrl is assigned to this field.
+        type: string
       customClickThroughUrl:
         description: Custom click-through URL. Applicable if the defaultLandingPage field is set to false and the landingPageId field is left unset.
         type: string
@@ -7607,9 +8900,6 @@ definitions:
         description: Account ID of this content category. This is a read-only field that can be left blank.
         format: int64
         type: string
-      description:
-        description: Description of this content category.
-        type: string
       id:
         description: 'ID of this content category. This is a read-only, auto-generated field.'
         format: int64
@@ -7621,6 +8911,121 @@ definitions:
       name:
         description: Name of this content category. This is a required field and must be less than 256 characters long and unique among content categories of the same account.
         type: string
+    type: object
+  Conversion:
+    description: A Conversion represents when a user successfully performs a desired action after seeing an ad.
+    properties:
+      childDirectedTreatment:
+        description: Whether the conversion was directed toward children.
+        type: boolean
+      customVariables:
+        description: Custom floodlight variables.
+        items:
+          $ref: '#/definitions/CustomFloodlightVariable'
+        type: array
+      encryptedUserId:
+        description: 'The alphanumeric encrypted user ID. When set, encryptionInfo should also be specified. This field is mutually exclusive with mobileDeviceId. This or mobileDeviceId is a required field.'
+        type: string
+      floodlightActivityId:
+        description: Floodlight Activity ID of this conversion. This is a required field.
+        format: int64
+        type: string
+      floodlightConfigurationId:
+        description: Floodlight Configuration ID of this conversion. This is a required field.
+        format: int64
+        type: string
+      kind:
+        default: 'dfareporting#conversion'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#conversion".'
+        type: string
+      limitAdTracking:
+        description: Whether the user has Limit Ad Tracking set.
+        type: boolean
+      mobileDeviceId:
+        description: The mobile device ID. This field is mutually exclusive with encryptedUserId. This or encryptedUserId is a required field.
+        type: string
+      ordinal:
+        description: The ordinal of the conversion. Use this field to control how conversions of the same user and day are de-duplicated. This is a required field.
+        type: string
+      quantity:
+        description: The quantity of the conversion.
+        format: int64
+        type: string
+      timestampMicros:
+        description: 'The timestamp of conversion, in Unix epoch micros. This is a required field.'
+        format: int64
+        type: string
+      value:
+        description: The value of the conversion.
+        format: double
+        type: number
+    type: object
+  ConversionError:
+    description: The error code and description for a conversion that failed to insert.
+    properties:
+      code:
+        description: The error code.
+        enum:
+          - INTERNAL
+          - INVALID_ARGUMENT
+          - NOT_FOUND
+          - PERMISSION_DENIED
+        type: string
+      kind:
+        default: 'dfareporting#conversionError'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#conversionError".'
+        type: string
+      message:
+        description: A description of the error.
+        type: string
+    type: object
+  ConversionStatus:
+    description: The original conversion that was inserted and whether there were any errors.
+    properties:
+      conversion:
+        $ref: '#/definitions/Conversion'
+        description: The original conversion that was inserted.
+      errors:
+        description: A list of errors related to this conversion.
+        items:
+          $ref: '#/definitions/ConversionError'
+        type: array
+      kind:
+        default: 'dfareporting#conversionStatus'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#conversionStatus".'
+        type: string
+    type: object
+  ConversionsBatchInsertRequest:
+    description: Insert Conversions Request.
+    properties:
+      conversions:
+        description: The set of conversions to insert.
+        items:
+          $ref: '#/definitions/Conversion'
+        type: array
+      encryptionInfo:
+        $ref: '#/definitions/EncryptionInfo'
+        description: Describes how encryptedUserId is encrypted. This is a required field if encryptedUserId is used.
+      kind:
+        default: 'dfareporting#conversionsBatchInsertRequest'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#conversionsBatchInsertRequest".'
+        type: string
+    type: object
+  ConversionsBatchInsertResponse:
+    description: Insert Conversions Response.
+    properties:
+      hasFailures:
+        description: Indicates that some or all conversions failed to insert.
+        type: boolean
+      kind:
+        default: 'dfareporting#conversionsBatchInsertResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#conversionsBatchInsertResponse".'
+        type: string
+      status:
+        description: The status of each conversion's insertion status. The status is returned in the same order that conversions are inserted.
+        items:
+          $ref: '#/definitions/ConversionStatus'
+        type: array
     type: object
   CountriesListResponse:
     description: Country List Response
@@ -7692,6 +9097,13 @@ definitions:
           - ARTWORK_TYPE_IMAGE
           - ARTWORK_TYPE_MIXED
         type: string
+      authoringSource:
+        description: 'Source application where creative was authored. Presently, only DBM authored creatives will have this field set. Applicable to all creative types.'
+        enum:
+          - CREATIVE_AUTHORING_SOURCE_DBM
+          - CREATIVE_AUTHORING_SOURCE_DCM
+          - CREATIVE_AUTHORING_SOURCE_STUDIO
+        type: string
       authoringTool:
         description: 'Authoring tool for HTML5 banner creatives. This is a read-only field. Applicable to the following creative types: HTML5_BANNER.'
         enum:
@@ -7699,16 +9111,16 @@ definitions:
           - SWIFFY
         type: string
       auto_advance_images:
-        description: 'Whether images are automatically advanced for enhanced image creatives. Applicable to the following creative types: ENHANCED_IMAGE.'
+        description: 'Whether images are automatically advanced for enhanced image creatives. Applicable to the following creative types: DISPLAY_IMAGE_GALLERY.'
         type: boolean
       backgroundColor:
         description: 'The 6-character HTML color code, beginning with #, for the background of the window area where the Flash file is displayed. Default is white. Applicable to the following creative types: FLASH_INPAGE.'
         type: string
       backupImageClickThroughUrl:
-        description: 'Click-through URL for backup image. Applicable to the following creative types: ENHANCED_BANNER, FLASH_INPAGE, and HTML5_BANNER.'
+        description: 'Click-through URL for backup image. Applicable to the following creative types: FLASH_INPAGE and HTML5_BANNER. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
         type: string
       backupImageFeatures:
-        description: 'List of feature dependencies that will cause a backup image to be served if the browser that serves the ad does not support them. Feature dependencies are features that a browser must be able to support in order to render your HTML5 creative asset correctly. This field is initially auto-generated to contain all features detected by DCM for all the assets of this creative and can then be modified by the client. To reset this field, copy over all the creativeAssets'' detected features. Applicable to the following creative types: ENHANCED_BANNER and HTML5_BANNER.'
+        description: 'List of feature dependencies that will cause a backup image to be served if the browser that serves the ad does not support them. Feature dependencies are features that a browser must be able to support in order to render your HTML5 creative asset correctly. This field is initially auto-generated to contain all features detected by DCM for all the assets of this creative and can then be modified by the client. To reset this field, copy over all the creativeAssets'' detected features. Applicable to the following creative types: HTML5_BANNER. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
         items:
           enum:
             - APPLICATION_CACHE
@@ -7780,13 +9192,13 @@ definitions:
           type: string
         type: array
       backupImageReportingLabel:
-        description: 'Reporting label used for HTML5 banner backup image. Applicable to the following creative types: ENHANCED_BANNER.'
+        description: 'Reporting label used for HTML5 banner backup image. Applicable to the following creative types: DISPLAY when the primary asset type is not HTML_IMAGE.'
         type: string
       backupImageTargetWindow:
         $ref: '#/definitions/TargetWindow'
-        description: 'Target window for backup image. Applicable to the following creative types: ENHANCED_BANNER, FLASH_INPAGE, and HTML5_BANNER.'
+        description: 'Target window for backup image. Applicable to the following creative types: FLASH_INPAGE and HTML5_BANNER. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
       clickTags:
-        description: 'Click tags of the creative. For ENHANCED_BANNER, FLASH_INPAGE, and HTML5_BANNER creatives, this is a subset of detected click tags for the assets associated with this creative. After creating a flash asset, detected click tags will be returned in the creativeAssetMetadata. When inserting the creative, populate the creative clickTags field using the creativeAssetMetadata.clickTags field. For ENHANCED_IMAGE creatives, there should be exactly one entry in this list for each image creative asset. A click tag is matched with a corresponding creative asset by matching the clickTag.name field with the creativeAsset.assetIdentifier.name field. Applicable to the following creative types: ENHANCED_BANNER, ENHANCED_IMAGE, FLASH_INPAGE, HTML5_BANNER.'
+        description: 'Click tags of the creative. For DISPLAY, FLASH_INPAGE, and HTML5_BANNER creatives, this is a subset of detected click tags for the assets associated with this creative. After creating a flash asset, detected click tags will be returned in the creativeAssetMetadata. When inserting the creative, populate the creative clickTags field using the creativeAssetMetadata.clickTags field. For DISPLAY_IMAGE_GALLERY creatives, there should be exactly one entry in this list for each image creative asset. A click tag is matched with a corresponding creative asset by matching the clickTag.name field with the creativeAsset.assetIdentifier.name field. Applicable to the following creative types: DISPLAY_IMAGE_GALLERY, FLASH_INPAGE, HTML5_BANNER. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
         items:
           $ref: '#/definitions/ClickTag'
         type: array
@@ -7801,25 +9213,28 @@ definitions:
         type: array
       compatibility:
         description: |-
-          Compatibilities associated with this creative. This is a read-only field. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard. Applicable to all creative types.
+          Compatibilities associated with this creative. This is a read-only field. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering either on desktop or on mobile devices or in mobile apps for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL  are for rendering in mobile apps. Only pre-existing creatives may have these compatibilities since new creatives will either be assigned DISPLAY or DISPLAY_INTERSTITIAL instead. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard. Applicable to all creative types.
 
           Acceptable values are:
           - "APP"
           - "APP_INTERSTITIAL"
           - "IN_STREAM_VIDEO"
-          - "WEB"
-          - "WEB_INTERSTITIAL"
+          - "DISPLAY"
+          - "DISPLAY_INTERSTITIAL"
         items:
           enum:
             - APP
             - APP_INTERSTITIAL
+            - DISPLAY
+            - DISPLAY_INTERSTITIAL
             - IN_STREAM_VIDEO
-            - WEB
-            - WEB_INTERSTITIAL
           type: string
         type: array
+      convertFlashToHtml5:
+        description: 'Whether Flash assets associated with the creative need to be automatically converted to HTML5. This flag is enabled by default and users can choose to disable it if they don''t want the system to generate and use HTML5 asset for this creative. Applicable to the following creative type: FLASH_INPAGE. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
+        type: boolean
       counterCustomEvents:
-        description: 'List of counter events configured for the creative. For ENHANCED_IMAGE creatives, these are read-only and auto-generated from clickTags. Applicable to the following creative types: ENHANCED_IMAGE, all RICH_MEDIA, and all VPAID.'
+        description: 'List of counter events configured for the creative. For DISPLAY_IMAGE_GALLERY creatives, these are read-only and auto-generated from clickTags. Applicable to the following creative types: DISPLAY_IMAGE_GALLERY, all RICH_MEDIA, and all VPAID.'
         items:
           $ref: '#/definitions/CreativeCustomEvent'
         type: array
@@ -7839,7 +9254,7 @@ definitions:
           type: string
         type: array
       exitCustomEvents:
-        description: 'List of exit events configured for the creative. For ENHANCED_BANNER and ENHANCED_IMAGE creatives, these are read-only and auto-generated from clickTags, For ENHANCED_BANNER, an event is also created from the backupImageReportingLabel. Applicable to the following creative types: ENHANCED_BANNER, ENHANCED_IMAGE, all RICH_MEDIA, and all VPAID.'
+        description: 'List of exit events configured for the creative. For DISPLAY and DISPLAY_IMAGE_GALLERY creatives, these are read-only and auto-generated from clickTags, For DISPLAY, an event is also created from the backupImageReportingLabel. Applicable to the following creative types: DISPLAY_IMAGE_GALLERY, all RICH_MEDIA, and all VPAID. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
         items:
           $ref: '#/definitions/CreativeCustomEvent'
         type: array
@@ -7877,7 +9292,7 @@ definitions:
         description: 'Override CSS value for rich media creatives. Applicable to the following creative types: all RICH_MEDIA.'
         type: string
       redirectUrl:
-        description: 'URL of hosted image or hosted video or another ad tag. For INSTREAM_VIDEO_REDIRECT creatives this is the in-stream video redirect URL. The standard for a VAST (Video Ad Serving Template) ad response allows for a redirect link to another VAST 2.0 or 3.0 call. This is a required field when applicable. Applicable to the following creative types: INTERNAL_REDIRECT, INTERSTITIAL_INTERNAL_REDIRECT, REDIRECT, and INSTREAM_VIDEO_REDIRECT'
+        description: 'URL of hosted image or hosted video or another ad tag. For INSTREAM_VIDEO_REDIRECT creatives this is the in-stream video redirect URL. The standard for a VAST (Video Ad Serving Template) ad response allows for a redirect link to another VAST 2.0 or 3.0 call. This is a required field when applicable. Applicable to the following creative types: DISPLAY_REDIRECT, INTERNAL_REDIRECT, INTERSTITIAL_INTERNAL_REDIRECT, and INSTREAM_VIDEO_REDIRECT'
         type: string
       renderingId:
         description: ID of current rendering version. This is a read-only field. Applicable to all creative types.
@@ -7890,17 +9305,20 @@ definitions:
         description: 'The minimum required Flash plugin version for this creative. For example, 11.2.202.235. This is a read-only field. Applicable to the following creative types: all RICH_MEDIA, and all VPAID.'
         type: string
       requiredFlashVersion:
-        description: 'The internal Flash version for this creative as calculated by DoubleClick Studio. This is a read-only field. Applicable to the following creative types: FLASH_INPAGE, ENHANCED_BANNER, all RICH_MEDIA, and all VPAID.'
+        description: 'The internal Flash version for this creative as calculated by DoubleClick Studio. This is a read-only field. Applicable to the following creative types: FLASH_INPAGE all RICH_MEDIA, and all VPAID. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
         format: int32
         type: integer
       size:
         $ref: '#/definitions/Size'
-        description: 'Size associated with this creative. When inserting or updating a creative either the size ID field or size width and height fields can be used. This is a required field when applicable; however for IMAGE and FLASH_INPAGE creatives, if left blank, this field will be automatically set using the actual size of the associated image assets. Applicable to the following creative types: ENHANCED_BANNER, ENHANCED_IMAGE, FLASH_INPAGE, HTML5_BANNER, IMAGE, and all RICH_MEDIA.'
+        description: 'Size associated with this creative. When inserting or updating a creative either the size ID field or size width and height fields can be used. This is a required field when applicable; however for IMAGE, FLASH_INPAGE creatives, and for DISPLAY creatives with a primary asset of type HTML_IMAGE, if left blank, this field will be automatically set using the actual size of the associated image assets. Applicable to the following creative types: DISPLAY, DISPLAY_IMAGE_GALLERY, FLASH_INPAGE, HTML5_BANNER, IMAGE, and all RICH_MEDIA.'
       skippable:
         description: 'Whether the user can choose to skip the creative. Applicable to the following creative types: all INSTREAM_VIDEO and all VPAID.'
         type: boolean
       sslCompliant:
         description: Whether the creative is SSL-compliant. This is a read-only field. Applicable to all creative types.
+        type: boolean
+      sslOverride:
+        description: Whether creative should be treated as SSL compliant even if the system scan shows it's not. Applicable to all creative types.
         type: boolean
       studioAdvertiserId:
         description: 'Studio advertiser ID associated with rich media and VPAID creatives. This is a read-only field. Applicable to the following creative types: all RICH_MEDIA, and all VPAID.'
@@ -7919,10 +9337,10 @@ definitions:
         format: int64
         type: string
       thirdPartyBackupImageImpressionsUrl:
-        description: 'Third-party URL used to record backup image impressions. Applicable to the following creative types: all RICH_MEDIA'
+        description: 'Third-party URL used to record backup image impressions. Applicable to the following creative types: all RICH_MEDIA.'
         type: string
       thirdPartyRichMediaImpressionsUrl:
-        description: 'Third-party URL used to record rich media impressions. Applicable to the following creative types: all RICH_MEDIA'
+        description: 'Third-party URL used to record rich media impressions. Applicable to the following creative types: all RICH_MEDIA.'
         type: string
       thirdPartyUrls:
         description: 'Third-party URLs for tracking in-stream video creative events. Applicable to the following creative types: all INSTREAM_VIDEO and all VPAID.'
@@ -7930,7 +9348,7 @@ definitions:
           $ref: '#/definitions/ThirdPartyTrackingUrl'
         type: array
       timerCustomEvents:
-        description: 'List of timer events configured for the creative. For ENHANCED_IMAGE creatives, these are read-only and auto-generated from clickTags. Applicable to the following creative types: ENHANCED_IMAGE, all RICH_MEDIA, and all VPAID.'
+        description: 'List of timer events configured for the creative. For DISPLAY_IMAGE_GALLERY creatives, these are read-only and auto-generated from clickTags. Applicable to the following creative types: DISPLAY_IMAGE_GALLERY, all RICH_MEDIA, and all VPAID. Applicable to DISPLAY when the primary asset is not HTML_IMAGE.'
         items:
           $ref: '#/definitions/CreativeCustomEvent'
         type: array
@@ -7942,29 +9360,29 @@ definitions:
         description: Type of this creative.This is a required field. Applicable to all creative types.
         enum:
           - BRAND_SAFE_DEFAULT_INSTREAM_VIDEO
-          - CUSTOM_INPAGE
-          - CUSTOM_INTERSTITIAL
-          - ENHANCED_BANNER
-          - ENHANCED_IMAGE
+          - CUSTOM_DISPLAY
+          - CUSTOM_DISPLAY_INTERSTITIAL
+          - DISPLAY
+          - DISPLAY_IMAGE_GALLERY
+          - DISPLAY_REDIRECT
           - FLASH_INPAGE
           - HTML5_BANNER
           - IMAGE
           - INSTREAM_VIDEO
+          - INSTREAM_VIDEO_REDIRECT
           - INTERNAL_REDIRECT
           - INTERSTITIAL_INTERNAL_REDIRECT
-          - REDIRECT
-          - RICH_MEDIA_EXPANDING
+          - RICH_MEDIA_DISPLAY_BANNER
+          - RICH_MEDIA_DISPLAY_EXPANDING
+          - RICH_MEDIA_DISPLAY_INTERSTITIAL
+          - RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL
           - RICH_MEDIA_IM_EXPAND
-          - RICH_MEDIA_INPAGE
           - RICH_MEDIA_INPAGE_FLOATING
-          - RICH_MEDIA_INTERSTITIAL_FLOAT
           - RICH_MEDIA_MOBILE_IN_APP
-          - RICH_MEDIA_MULTI_FLOATING
           - RICH_MEDIA_PEEL_DOWN
           - TRACKING_TEXT
-          - VAST_REDIRECT
-          - VPAID_LINEAR
-          - VPAID_NON_LINEAR
+          - VPAID_LINEAR_VIDEO
+          - VPAID_NON_LINEAR_VIDEO
         type: string
       version:
         description: 'The version number helps you keep track of multiple versions of your creative in your reports. The version number will always be auto-generated during insert operations to start at 1. For tracking creatives the version cannot be incremented and will always remain at 1. For all other creative types the version can be incremented only by 1 during update operations. In addition, the version will be automatically incremented by 1 when undergoing Rich Media creative merging. Applicable to all creative types.'
@@ -7982,13 +9400,13 @@ definitions:
     description: Creative Asset.
     properties:
       actionScript3:
-        description: 'Whether ActionScript3 is enabled for the flash asset. This is a read-only field. Applicable to the following creative types: FLASH_INPAGE and ENHANCED_BANNER.'
+        description: 'Whether ActionScript3 is enabled for the flash asset. This is a read-only field. Applicable to the following creative type: FLASH_INPAGE. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
         type: boolean
       active:
-        description: 'Whether the video asset is active. This is a read-only field for VPAID_NON_LINEAR assets. Applicable to the following creative types: INSTREAM_VIDEO and all VPAID.'
+        description: 'Whether the video asset is active. This is a read-only field for VPAID_NON_LINEAR_VIDEO assets. Applicable to the following creative types: INSTREAM_VIDEO and all VPAID.'
         type: boolean
       alignment:
-        description: 'Possible alignments for an asset. This is a read-only field. Applicable to the following creative types: RICH_MEDIA_MULTI_FLOATING.'
+        description: 'Possible alignments for an asset. This is a read-only field. Applicable to the following creative types: RICH_MEDIA_DISPLAY_MULTI_FLOATING_INTERSTITIAL.'
         enum:
           - ALIGNMENT_BOTTOM
           - ALIGNMENT_LEFT
@@ -8029,7 +9447,7 @@ definitions:
         format: int32
         type: integer
       detectedFeatures:
-        description: 'List of feature dependencies for the creative asset that are detected by DCM. Feature dependencies are features that a browser must be able to support in order to render your HTML5 creative correctly. This is a read-only, auto-generated field. Applicable to the following creative types: ENHANCED_BANNER and HTML5_BANNER.'
+        description: 'List of feature dependencies for the creative asset that are detected by DCM. Feature dependencies are features that a browser must be able to support in order to render your HTML5 creative correctly. This is a read-only, auto-generated field. Applicable to the following creative types: HTML5_BANNER. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
         items:
           enum:
             - APPLICATION_CACHE
@@ -8114,7 +9532,7 @@ definitions:
           - ASSET_DISPLAY_TYPE_VPAID_NON_LINEAR
         type: string
       duration:
-        description: 'Duration in seconds for which an asset will be displayed. Applicable to the following creative types: INSTREAM_VIDEO and VPAID_LINEAR.'
+        description: 'Duration in seconds for which an asset will be displayed. Applicable to the following creative types: INSTREAM_VIDEO and VPAID_LINEAR_VIDEO.'
         format: int32
         type: integer
       durationType:
@@ -8132,7 +9550,7 @@ definitions:
         format: int64
         type: string
       flashVersion:
-        description: 'Flash version of the asset. This is a read-only field. Applicable to the following creative types: FLASH_INPAGE, ENHANCED_BANNER, all RICH_MEDIA, and all VPAID.'
+        description: 'Flash version of the asset. This is a read-only field. Applicable to the following creative types: FLASH_INPAGE, all RICH_MEDIA, and all VPAID. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
         format: int32
         type: integer
       hideFlashObjects:
@@ -8187,14 +9605,14 @@ definitions:
       role:
         description: |-
           Role of the asset in relation to creative. Applicable to all but the following creative types: all REDIRECT and TRACKING_TEXT. This is a required field.
-          PRIMARY applies to ENHANCED_BANNER, FLASH_INPAGE, HTML5_BANNER, IMAGE, IMAGE_GALLERY, all RICH_MEDIA (which may contain multiple primary assets), and all VPAID creatives.
-          BACKUP_IMAGE applies to ENHANCED_BANNER, FLASH_INPAGE, HTML5_BANNER, all RICH_MEDIA, and all VPAID creatives.
+          PRIMARY applies to DISPLAY, FLASH_INPAGE, HTML5_BANNER, IMAGE, DISPLAY_IMAGE_GALLERY, all RICH_MEDIA (which may contain multiple primary assets), and all VPAID creatives.
+          BACKUP_IMAGE applies to FLASH_INPAGE, HTML5_BANNER, all RICH_MEDIA, and all VPAID creatives. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.
           ADDITIONAL_IMAGE and ADDITIONAL_FLASH apply to FLASH_INPAGE creatives.
           OTHER refers to assets from sources other than DCM, such as Studio uploaded assets, applicable to all RICH_MEDIA and all VPAID creatives.
-          PARENT_VIDEO refers to videos uploaded by the user in DCM and is applicable to INSTREAM_VIDEO and VPAID_LINEAR creatives.
-          TRANSCODED_VIDEO refers to videos transcoded by DCM from PARENT_VIDEO assets and is applicable to INSTREAM_VIDEO and VPAID_LINEAR creatives.
-          ALTERNATE_VIDEO refers to the DCM representation of child asset videos from Studio, and is applicable to VPAID_LINEAR creatives. These cannot be added or removed within DCM.
-          For VPAID_LINEAR creatives, PARENT_VIDEO, TRANSCODED_VIDEO and ALTERNATE_VIDEO assets that are marked active serve as backup in case the VPAID creative cannot be served. Only PARENT_VIDEO assets can be added or removed for an INSTREAM_VIDEO or VPAID_LINEAR creative.
+          PARENT_VIDEO refers to videos uploaded by the user in DCM and is applicable to INSTREAM_VIDEO and VPAID_LINEAR_VIDEO creatives.
+          TRANSCODED_VIDEO refers to videos transcoded by DCM from PARENT_VIDEO assets and is applicable to INSTREAM_VIDEO and VPAID_LINEAR_VIDEO creatives.
+          ALTERNATE_VIDEO refers to the DCM representation of child asset videos from Studio, and is applicable to VPAID_LINEAR_VIDEO creatives. These cannot be added or removed within DCM.
+          For VPAID_LINEAR_VIDEO creatives, PARENT_VIDEO, TRANSCODED_VIDEO and ALTERNATE_VIDEO assets that are marked active serve as backup in case the VPAID creative cannot be served. Only PARENT_VIDEO assets can be added or removed for an INSTREAM_VIDEO or VPAID_LINEAR_VIDEO creative.
         enum:
           - ADDITIONAL_FLASH
           - ADDITIONAL_IMAGE
@@ -8207,7 +9625,7 @@ definitions:
         type: string
       size:
         $ref: '#/definitions/Size'
-        description: 'Size associated with this creative asset. This is a required field when applicable; however for IMAGE and FLASH_INPAGE creatives, if left blank, this field will be automatically set using the actual size of the associated image asset. Applicable to the following creative types: ENHANCED_BANNER, ENHANCED_IMAGE, FLASH_INPAGE, HTML5_BANNER, IMAGE, and all RICH_MEDIA.'
+        description: 'Size associated with this creative asset. This is a required field when applicable; however for IMAGE and FLASH_INPAGE, creatives if left blank, this field will be automatically set using the actual size of the associated image asset. Applicable to the following creative types: DISPLAY_IMAGE_GALLERY, FLASH_INPAGE, HTML5_BANNER, IMAGE, and all RICH_MEDIA. Applicable to DISPLAY when the primary asset type is not HTML_IMAGE.'
       sslCompliant:
         description: 'Whether the asset is SSL-compliant. This is a read-only field. Applicable to all but the following creative types: all REDIRECT and TRACKING_TEXT.'
         type: boolean
@@ -8231,7 +9649,7 @@ definitions:
         format: float
         type: number
       windowMode:
-        description: 'Window mode options for flash assets. Applicable to the following creative types: FLASH_INPAGE, RICH_MEDIA_EXPANDING, RICH_MEDIA_IM_EXPAND, RICH_MEDIA_INPAGE, and RICH_MEDIA_INPAGE_FLOATING.'
+        description: 'Window mode options for flash assets. Applicable to the following creative types: FLASH_INPAGE, RICH_MEDIA_DISPLAY_EXPANDING, RICH_MEDIA_IM_EXPAND, RICH_MEDIA_DISPLAY_BANNER, and RICH_MEDIA_INPAGE_FLOATING.'
         enum:
           - OPAQUE
           - TRANSPARENT
@@ -8356,27 +9774,30 @@ definitions:
           Rules validated during code generation that generated a warning. This is a read-only, auto-generated field.
 
           Possible values are:
-          - "CLICK_TAG_NON_TOP_LEVEL"
+          - "ADMOB_REFERENCED"
+          - "ASSET_FORMAT_UNSUPPORTED_DCM"
+          - "ASSET_INVALID"
+          - "CLICK_TAG_HARD_CODED"
+          - "CLICK_TAG_INVALID"
+          - "CLICK_TAG_IN_GWD"
           - "CLICK_TAG_MISSING"
           - "CLICK_TAG_MORE_THAN_ONE"
-          - "CLICK_TAG_INVALID"
-          - "ORPHANED_ASSET"
-          - "PRIMARY_HTML_MISSING"
+          - "CLICK_TAG_NON_TOP_LEVEL"
+          - "COMPONENT_UNSUPPORTED_DCM"
+          - "ENABLER_UNSUPPORTED_METHOD_DCM"
           - "EXTERNAL_FILE_REFERENCED"
-          - "MRAID_REFERENCED"
-          - "ADMOB_REFERENCED"
+          - "FILE_DETAIL_EMPTY"
           - "FILE_TYPE_INVALID"
-          - "ZIP_INVALID"
+          - "GWD_PROPERTIES_INVALID"
+          - "HTML5_FEATURE_UNSUPPORTED"
           - "LINKED_FILE_NOT_FOUND"
           - "MAX_FLASH_VERSION_11"
+          - "MRAID_REFERENCED"
           - "NOT_SSL_COMPLIANT"
-          - "FILE_DETAIL_EMPTY"
-          - "ASSET_INVALID"
-          - "GWD_PROPERTIES_INVALID"
-          - "ENABLER_UNSUPPORTED_METHOD_DCM"
-          - "ASSET_FORMAT_UNSUPPORTED_DCM"
-          - "COMPONENT_UNSUPPORTED_DCM"
-          - "HTML5_FEATURE_UNSUPPORTED' "
+          - "ORPHANED_ASSET"
+          - "PRIMARY_HTML_MISSING"
+          - "SVG_INVALID"
+          - "ZIP_INVALID"
         items:
           enum:
             - ADMOB_REFERENCED
@@ -8476,9 +9897,10 @@ definitions:
   CreativeCustomEvent:
     description: Creative Custom Event.
     properties:
-      active:
-        description: Whether the event is active.
-        type: boolean
+      advertiserCustomEventId:
+        description: Unique ID of this event used by DDM Reporting and Data Transfer. This is a read-only field.
+        format: int64
+        type: string
       advertiserCustomEventName:
         description: User-entered name for the event.
         type: string
@@ -8785,6 +10207,41 @@ definitions:
         items:
           $ref: '#/definitions/Metric'
         type: array
+    type: object
+  CustomFloodlightVariable:
+    description: A custom floodlight variable.
+    properties:
+      kind:
+        default: 'dfareporting#customFloodlightVariable'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#customFloodlightVariable".'
+        type: string
+      type:
+        description: 'The type of custom floodlight variable to supply a value for. These map to the "u[1-20]=" in the tags.'
+        enum:
+          - U1
+          - U10
+          - U11
+          - U12
+          - U13
+          - U14
+          - U15
+          - U16
+          - U17
+          - U18
+          - U19
+          - U2
+          - U20
+          - U3
+          - U4
+          - U5
+          - U6
+          - U7
+          - U8
+          - U9
+        type: string
+      value:
+        description: The value of the custom floodlight variable. The length of string must not exceed 50 characters.
+        type: string
     type: object
   CustomRichMediaEvents:
     description: Represents a Custom Rich Media Events group.
@@ -9161,6 +10618,9 @@ definitions:
   DirectorySiteContact:
     description: Contains properties of a Site Directory contact.
     properties:
+      address:
+        description: Address of this directory site contact.
+        type: string
       email:
         description: Email address of this directory site contact.
         type: string
@@ -9178,12 +10638,18 @@ definitions:
       lastName:
         description: Last name of this directory site contact.
         type: string
+      phone:
+        description: Phone number of this directory site contact.
+        type: string
       role:
         description: Directory site contact role.
         enum:
           - ADMIN
           - EDIT
           - VIEW
+        type: string
+      title:
+        description: Title or designation of this directory site contact.
         type: string
       type:
         description: Directory site contact type.
@@ -9265,6 +10731,71 @@ definitions:
         description: Pagination token to be used for the next list operation.
         type: string
     type: object
+  DynamicTargetingKey:
+    description: 'Contains properties of a dynamic targeting key. Dynamic targeting keys are unique, user-friendly labels, created at the advertiser level in DCM, that can be assigned to ads, creatives, and placements and used for targeting with DoubleClick Studio dynamic creatives. Use these labels instead of numeric DCM IDs (such as placement IDs) to save time and avoid errors in your dynamic feeds.'
+    properties:
+      kind:
+        default: 'dfareporting#dynamicTargetingKey'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#dynamicTargetingKey".'
+        type: string
+      name:
+        description: Name of this dynamic targeting key. This is a required field. Must be less than 256 characters long and cannot contain commas. All characters are converted to lowercase.
+        type: string
+      objectId:
+        description: ID of the object of this dynamic targeting key. This is a required field.
+        format: int64
+        type: string
+      objectType:
+        description: Type of the object of this dynamic targeting key. This is a required field.
+        enum:
+          - OBJECT_AD
+          - OBJECT_ADVERTISER
+          - OBJECT_CREATIVE
+          - OBJECT_PLACEMENT
+        type: string
+    type: object
+  DynamicTargetingKeysListResponse:
+    description: Dynamic Targeting Key List Response
+    properties:
+      dynamicTargetingKeys:
+        description: Dynamic targeting key collection.
+        items:
+          $ref: '#/definitions/DynamicTargetingKey'
+        type: array
+      kind:
+        default: 'dfareporting#dynamicTargetingKeysListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#dynamicTargetingKeysListResponse".'
+        type: string
+    type: object
+  EncryptionInfo:
+    description: A description of how user IDs are encrypted.
+    properties:
+      encryptionEntityId:
+        description: The encryption entity ID. This should match the encryption configuration for ad serving or Data Transfer.
+        format: int64
+        type: string
+      encryptionEntityType:
+        description: The encryption entity type. This should match the encryption configuration for ad serving or Data Transfer.
+        enum:
+          - ADWORDS_CUSTOMER
+          - DBM_ADVERTISER
+          - DBM_PARTNER
+          - DCM_ACCOUNT
+          - DCM_ADVERTISER
+          - ENCRYPTION_ENTITY_TYPE_UNKNOWN
+        type: string
+      encryptionSource:
+        description: Describes whether the encrypted cookie was received from ad serving (the %m macro) or from Data Transfer.
+        enum:
+          - AD_SERVING
+          - DATA_TRANSFER
+          - ENCRYPTION_SCOPE_UNKNOWN
+        type: string
+      kind:
+        default: 'dfareporting#encryptionInfo'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#encryptionInfo".'
+        type: string
+    type: object
   EventTag:
     description: Contains properties of an event tag.
     properties:
@@ -9288,6 +10819,9 @@ definitions:
         description: 'Dimension value for the ID of the campaign. This is a read-only, auto-generated field.'
       enabledByDefault:
         description: Whether this event tag should be automatically enabled for all of the advertiser's campaigns and ads.
+        type: boolean
+      excludeFromAdxRequests:
+        description: 'Whether to remove this event tag from ads that are trafficked through DoubleClick Bid Manager to Ad Exchange. This may be useful if the event tag uses a pixel that is unapproved for Ad Exchange bids on one or more networks, such as the Google Display Network.'
         type: boolean
       id:
         description: 'ID of this event tag. This is a read-only, auto-generated field.'
@@ -9434,6 +10968,26 @@ definitions:
         type: string
       nextPageToken:
         description: 'Continuation token used to page through files. To retrieve the next page of results, set the next request''s "pageToken" to the value of this field. The page token is only valid for a limited amount of time and should not be persisted.'
+        type: string
+    type: object
+  Flight:
+    description: Flight
+    properties:
+      endDate:
+        description: Inventory item flight end date.
+        format: date
+        type: string
+      rateOrCost:
+        description: Rate or cost of this flight.
+        format: int64
+        type: string
+      startDate:
+        description: Inventory item flight start date.
+        format: date
+        type: string
+      units:
+        description: Units of this flight.
+        format: int64
         type: string
     type: object
   FloodlightActivitiesGenerateTagResponse:
@@ -9761,6 +11315,9 @@ definitions:
       idDimensionValue:
         $ref: '#/definitions/DimensionValue'
         description: 'Dimension value for the ID of this floodlight configuration. This is a read-only, auto-generated field.'
+      inAppAttributionTrackingEnabled:
+        description: Whether in-app attribution tracking is enabled.
+        type: boolean
       kind:
         default: 'dfareporting#floodlightConfiguration'
         description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#floodlightConfiguration".'
@@ -9778,9 +11335,6 @@ definitions:
       omnitureSettings:
         $ref: '#/definitions/OmnitureSettings'
         description: Settings for DCM Omniture integration.
-      sslRequired:
-        description: Whether floodlight activities owned by this configuration are required to be SSL-compliant.
-        type: boolean
       standardVariableTypes:
         description: |-
           List of standard variables enabled for this configuration.
@@ -9803,6 +11357,11 @@ definitions:
       tagSettings:
         $ref: '#/definitions/TagSettings'
         description: Configuration settings for dynamic and image floodlight tags.
+      thirdPartyAuthenticationTokens:
+        description: List of third-party authentication tokens enabled for this configuration.
+        items:
+          $ref: '#/definitions/ThirdPartyAuthenticationToken'
+        type: array
       userDefinedVariableConfigurations:
         description: List of user defined variables enabled for this configuration.
         items:
@@ -9915,6 +11474,105 @@ definitions:
           $ref: '#/definitions/Region'
         type: array
     type: object
+  InventoryItem:
+    description: Represents a buy from the DoubleClick Planning inventory store.
+    properties:
+      accountId:
+        description: Account ID of this inventory item.
+        format: int64
+        type: string
+      adSlots:
+        description: 'Ad slots of this inventory item. If this inventory item represents a standalone placement, there will be exactly one ad slot. If this inventory item represents a placement group, there will be more than one ad slot, each representing one child placement in that placement group.'
+        items:
+          $ref: '#/definitions/AdSlot'
+        type: array
+      advertiserId:
+        description: Advertiser ID of this inventory item.
+        format: int64
+        type: string
+      contentCategoryId:
+        description: Content category ID of this inventory item.
+        format: int64
+        type: string
+      estimatedClickThroughRate:
+        description: Estimated click-through rate of this inventory item.
+        format: int64
+        type: string
+      estimatedConversionRate:
+        description: Estimated conversion rate of this inventory item.
+        format: int64
+        type: string
+      id:
+        description: ID of this inventory item.
+        format: int64
+        type: string
+      inPlan:
+        description: Whether this inventory item is in plan.
+        type: boolean
+      kind:
+        default: 'dfareporting#inventoryItem'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#inventoryItem".'
+        type: string
+      lastModifiedInfo:
+        $ref: '#/definitions/LastModifiedInfo'
+        description: Information about the most recent modification of this inventory item.
+      name:
+        description: 'Name of this inventory item. For standalone inventory items, this is the same name as that of its only ad slot. For group inventory items, this can differ from the name of any of its ad slots.'
+        type: string
+      negotiationChannelId:
+        description: Negotiation channel ID of this inventory item.
+        format: int64
+        type: string
+      orderId:
+        description: Order ID of this inventory item.
+        format: int64
+        type: string
+      placementStrategyId:
+        description: Placement strategy ID of this inventory item.
+        format: int64
+        type: string
+      pricing:
+        $ref: '#/definitions/Pricing'
+        description: Pricing of this inventory item.
+      projectId:
+        description: Project ID of this inventory item.
+        format: int64
+        type: string
+      rfpId:
+        description: RFP ID of this inventory item.
+        format: int64
+        type: string
+      siteId:
+        description: ID of the site this inventory item is associated with.
+        format: int64
+        type: string
+      subaccountId:
+        description: Subaccount ID of this inventory item.
+        format: int64
+        type: string
+      type:
+        description: Type of inventory item.
+        enum:
+          - PLANNING_PLACEMENT_TYPE_CREDIT
+          - PLANNING_PLACEMENT_TYPE_REGULAR
+        type: string
+    type: object
+  InventoryItemsListResponse:
+    description: Inventory item List Response
+    properties:
+      inventoryItems:
+        description: Inventory item collection
+        items:
+          $ref: '#/definitions/InventoryItem'
+        type: array
+      kind:
+        default: 'dfareporting#inventoryItemsListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#inventoryItemsListResponse".'
+        type: string
+      nextPageToken:
+        description: Pagination token to be used for the next list operation.
+        type: string
+    type: object
   KeyValueTargetingExpression:
     description: Key Value Targeting Expression.
     properties:
@@ -9962,6 +11620,72 @@ definitions:
       time:
         description: Timestamp of the last change in milliseconds since epoch.
         format: int64
+        type: string
+    type: object
+  ListPopulationClause:
+    description: A group clause made up of list population terms representing constraints joined by ORs.
+    properties:
+      terms:
+        description: Terms of this list population clause. Each clause is made up of list population terms representing constraints and are joined by ORs.
+        items:
+          $ref: '#/definitions/ListPopulationTerm'
+        type: array
+    type: object
+  ListPopulationRule:
+    description: Remarketing List Population Rule.
+    properties:
+      floodlightActivityId:
+        description: Floodlight activity ID associated with this rule. This field can be left blank.
+        format: int64
+        type: string
+      floodlightActivityName:
+        description: 'Name of floodlight activity associated with this rule. This is a read-only, auto-generated field.'
+        type: string
+      listPopulationClauses:
+        description: 'Clauses that make up this list population rule. Clauses are joined by ANDs, and the clauses themselves are made up of list population terms which are joined by ORs.'
+        items:
+          $ref: '#/definitions/ListPopulationClause'
+        type: array
+    type: object
+  ListPopulationTerm:
+    description: Remarketing List Population Rule Term.
+    properties:
+      contains:
+        description: Will be true if the term should check if the user is in the list and false if the term should check if the user is not in the list. This field is only relevant when type is set to LIST_MEMBERSHIP_TERM. False by default.
+        type: boolean
+      negation:
+        description: Whether to negate the comparison result of this term during rule evaluation. This field is only relevant when type is left unset or set to CUSTOM_VARIABLE_TERM or REFERRER_TERM.
+        type: boolean
+      operator:
+        description: Comparison operator of this term. This field is only relevant when type is left unset or set to CUSTOM_VARIABLE_TERM or REFERRER_TERM.
+        enum:
+          - NUM_EQUALS
+          - NUM_GREATER_THAN
+          - NUM_GREATER_THAN_EQUAL
+          - NUM_LESS_THAN
+          - NUM_LESS_THAN_EQUAL
+          - STRING_CONTAINS
+          - STRING_EQUALS
+        type: string
+      remarketingListId:
+        description: ID of the list in question. This field is only relevant when type is set to LIST_MEMBERSHIP_TERM.
+        format: int64
+        type: string
+      type:
+        description: 'List population term type determines the applicable fields in this object. If left unset or set to CUSTOM_VARIABLE_TERM, then variableName, variableFriendlyName, operator, value, and negation are applicable. If set to LIST_MEMBERSHIP_TERM then remarketingListId and contains are applicable. If set to REFERRER_TERM then operator, value, and negation are applicable.'
+        enum:
+          - CUSTOM_VARIABLE_TERM
+          - LIST_MEMBERSHIP_TERM
+          - REFERRER_TERM
+        type: string
+      value:
+        description: Literal to compare the variable to. This field is only relevant when type is left unset or set to CUSTOM_VARIABLE_TERM or REFERRER_TERM.
+        type: string
+      variableFriendlyName:
+        description: 'Friendly name of this term''s variable. This is a read-only, auto-generated field. This field is only relevant when type is left unset or set to CUSTOM_VARIABLE_TERM.'
+        type: string
+      variableName:
+        description: 'Name of the variable (U1, U2, etc.) being compared in this term. This field is only relevant when type is set to null, CUSTOM_VARIABLE_TERM or REFERRER_TERM.'
         type: string
     type: object
   ListTargetingExpression:
@@ -10200,6 +11924,216 @@ definitions:
         format: int32
         type: integer
     type: object
+  Order:
+    description: Describes properties of a DoubleClick Planning order.
+    properties:
+      accountId:
+        description: Account ID of this order.
+        format: int64
+        type: string
+      advertiserId:
+        description: Advertiser ID of this order.
+        format: int64
+        type: string
+      approverUserProfileIds:
+        description: IDs for users that have to approve documents created for this order.
+        items:
+          format: int64
+          type: string
+        type: array
+      buyerInvoiceId:
+        description: Buyer invoice ID associated with this order.
+        type: string
+      buyerOrganizationName:
+        description: Name of the buyer organization.
+        type: string
+      comments:
+        description: Comments in this order.
+        type: string
+      contacts:
+        description: Contacts for this order.
+        items:
+          $ref: '#/definitions/OrderContact'
+        type: array
+      id:
+        description: 'ID of this order. This is a read-only, auto-generated field.'
+        format: int64
+        type: string
+      kind:
+        default: 'dfareporting#order'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#order".'
+        type: string
+      lastModifiedInfo:
+        $ref: '#/definitions/LastModifiedInfo'
+        description: Information about the most recent modification of this order.
+      name:
+        description: Name of this order.
+        type: string
+      notes:
+        description: Notes of this order.
+        type: string
+      planningTermId:
+        description: ID of the terms and conditions template used in this order.
+        format: int64
+        type: string
+      projectId:
+        description: Project ID of this order.
+        format: int64
+        type: string
+      sellerOrderId:
+        description: Seller order ID associated with this order.
+        type: string
+      sellerOrganizationName:
+        description: Name of the seller organization.
+        type: string
+      siteId:
+        description: Site IDs this order is associated with.
+        items:
+          format: int64
+          type: string
+        type: array
+      siteNames:
+        description: Free-form site names this order is associated with.
+        items:
+          type: string
+        type: array
+      subaccountId:
+        description: Subaccount ID of this order.
+        format: int64
+        type: string
+      termsAndConditions:
+        description: Terms and conditions of this order.
+        type: string
+    type: object
+  OrderContact:
+    description: Contact of an order.
+    properties:
+      contactInfo:
+        description: 'Free-form information about this contact. It could be any information related to this contact in addition to type, title, name, and signature user profile ID.'
+        type: string
+      contactName:
+        description: Name of this contact.
+        type: string
+      contactTitle:
+        description: Title of this contact.
+        type: string
+      contactType:
+        description: Type of this contact.
+        enum:
+          - PLANNING_ORDER_CONTACT_BUYER_BILLING_CONTACT
+          - PLANNING_ORDER_CONTACT_BUYER_CONTACT
+          - PLANNING_ORDER_CONTACT_SELLER_CONTACT
+        type: string
+      signatureUserProfileId:
+        description: ID of the user profile containing the signature that will be embedded into order documents.
+        format: int64
+        type: string
+    type: object
+  OrderDocument:
+    description: Contains properties of a DoubleClick Planning order document.
+    properties:
+      accountId:
+        description: Account ID of this order document.
+        format: int64
+        type: string
+      advertiserId:
+        description: Advertiser ID of this order document.
+        format: int64
+        type: string
+      amendedOrderDocumentId:
+        description: The amended order document ID of this order document. An order document can be created by optionally amending another order document so that the change history can be preserved.
+        format: int64
+        type: string
+      approvedByUserProfileIds:
+        description: IDs of users who have approved this order document.
+        items:
+          format: int64
+          type: string
+        type: array
+      cancelled:
+        description: Whether this order document is cancelled.
+        type: boolean
+      createdInfo:
+        $ref: '#/definitions/LastModifiedInfo'
+        description: Information about the creation of this order document.
+      effectiveDate:
+        description: Effective date of this order document.
+        format: date
+        type: string
+      id:
+        description: ID of this order document.
+        format: int64
+        type: string
+      kind:
+        default: 'dfareporting#orderDocument'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#orderDocument".'
+        type: string
+      lastSentRecipients:
+        description: List of email addresses that received the last sent document.
+        items:
+          type: string
+        type: array
+      lastSentTime:
+        description: Timestamp of the last email sent with this order document.
+        format: date-time
+        type: string
+      orderId:
+        description: ID of the order from which this order document is created.
+        format: int64
+        type: string
+      projectId:
+        description: Project ID of this order document.
+        format: int64
+        type: string
+      signed:
+        description: Whether this order document has been signed.
+        type: boolean
+      subaccountId:
+        description: Subaccount ID of this order document.
+        format: int64
+        type: string
+      title:
+        description: Title of this order document.
+        type: string
+      type:
+        description: Type of this order document
+        enum:
+          - PLANNING_ORDER_TYPE_CHANGE_ORDER
+          - PLANNING_ORDER_TYPE_INSERTION_ORDER
+        type: string
+    type: object
+  OrderDocumentsListResponse:
+    description: Order document List Response
+    properties:
+      kind:
+        default: 'dfareporting#orderDocumentsListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#orderDocumentsListResponse".'
+        type: string
+      nextPageToken:
+        description: Pagination token to be used for the next list operation.
+        type: string
+      orderDocuments:
+        description: Order document collection
+        items:
+          $ref: '#/definitions/OrderDocument'
+        type: array
+    type: object
+  OrdersListResponse:
+    description: Order List Response
+    properties:
+      kind:
+        default: 'dfareporting#ordersListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#ordersListResponse".'
+        type: string
+      nextPageToken:
+        description: Pagination token to be used for the next list operation.
+        type: string
+      orders:
+        description: Order collection.
+        items:
+          $ref: '#/definitions/Order'
+        type: array
+    type: object
   PathToConversionReportCompatibleFields:
     description: Represents fields that are compatible to be selected for a report of type "PATH_TO_CONVERSION".
     properties:
@@ -10256,13 +12190,13 @@ definitions:
         description: Comments for this placement.
         type: string
       compatibility:
-        description: 'Placement compatibility. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard. This field is required on insertion.'
+        description: 'Placement compatibility. DISPLAY and DISPLAY_INTERSTITIAL refer to rendering on desktop, on mobile devices or in mobile apps for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are no longer allowed for new placement insertions. Instead, use DISPLAY or DISPLAY_INTERSTITIAL. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard. This field is required on insertion.'
         enum:
           - APP
           - APP_INTERSTITIAL
+          - DISPLAY
+          - DISPLAY_INTERSTITIAL
           - IN_STREAM_VIDEO
-          - WEB
-          - WEB_INTERSTITIAL
         type: string
       contentCategoryId:
         description: ID of the content category assigned to this placement.
@@ -10507,9 +12441,6 @@ definitions:
       primaryPlacementIdDimensionValue:
         $ref: '#/definitions/DimensionValue'
         description: 'Dimension value for the ID of the primary placement. This is a read-only, auto-generated field.'
-      programmaticSetting:
-        $ref: '#/definitions/ProgrammaticSetting'
-        description: Settings for a programmatic placement.
       siteId:
         description: 'Site ID associated with this placement group. On insert, you must set either this field or the directorySiteId field to specify the site associated with this placement group. This is a required field that is read-only after insertion.'
         format: int64
@@ -10680,6 +12611,9 @@ definitions:
   PostalCode:
     description: Contains information about a postal code that can be targeted by ads.
     properties:
+      code:
+        description: Postal code. This is equivalent to the id field.
+        type: string
       countryCode:
         description: Country code of the country to which this postal code belongs.
         type: string
@@ -10707,6 +12641,47 @@ definitions:
         items:
           $ref: '#/definitions/PostalCode'
         type: array
+    type: object
+  Pricing:
+    description: Pricing Information
+    properties:
+      capCostType:
+        description: Cap cost type of this inventory item.
+        enum:
+          - PLANNING_PLACEMENT_CAP_COST_TYPE_CUMULATIVE
+          - PLANNING_PLACEMENT_CAP_COST_TYPE_MONTHLY
+          - PLANNING_PLACEMENT_CAP_COST_TYPE_NONE
+        type: string
+      endDate:
+        description: End date of this inventory item.
+        format: date
+        type: string
+      flights:
+        description: Flights of this inventory item. A flight (a.k.a. pricing period) represents the inventory item pricing information for a specific period of time.
+        items:
+          $ref: '#/definitions/Flight'
+        type: array
+      groupType:
+        description: 'Group type of this inventory item if it represents a placement group. Is null otherwise. There are two type of placement groups: PLANNING_PLACEMENT_GROUP_TYPE_PACKAGE is a simple group of inventory items that acts as a single pricing point for a group of tags. PLANNING_PLACEMENT_GROUP_TYPE_ROADBLOCK is a group of inventory items that not only acts as a single pricing point, but also assumes that all the tags in it will be served at the same time. A roadblock requires one of its assigned inventory items to be marked as primary.'
+        enum:
+          - PLANNING_PLACEMENT_GROUP_TYPE_PACKAGE
+          - PLANNING_PLACEMENT_GROUP_TYPE_ROADBLOCK
+        type: string
+      pricingType:
+        description: Pricing type of this inventory item.
+        enum:
+          - PLANNING_PLACEMENT_PRICING_TYPE_CLICKS
+          - PLANNING_PLACEMENT_PRICING_TYPE_CPA
+          - PLANNING_PLACEMENT_PRICING_TYPE_CPC
+          - PLANNING_PLACEMENT_PRICING_TYPE_CPM
+          - PLANNING_PLACEMENT_PRICING_TYPE_FLAT_RATE_CLICKS
+          - PLANNING_PLACEMENT_PRICING_TYPE_FLAT_RATE_IMPRESSIONS
+          - PLANNING_PLACEMENT_PRICING_TYPE_IMPRESSIONS
+        type: string
+      startDate:
+        description: Start date of this inventory item.
+        format: date
+        type: string
     type: object
   PricingSchedule:
     description: Pricing Schedule
@@ -10778,32 +12753,112 @@ definitions:
         format: int64
         type: string
     type: object
-  ProgrammaticSetting:
-    description: Programmatic Setting
+  Project:
+    description: Contains properties of a DoubleClick Planning project.
     properties:
-      adxDealIds:
-        description: Adx deal IDs assigned to the placement.
-        items:
-          format: int64
-          type: string
-        type: array
-      insertionOrderId:
-        description: Insertion order ID.
-        type: string
-      insertionOrderIdStatus:
-        description: Whether insertion order ID has been placed in DFP. This is a read-only field.
-        type: boolean
-      mediaCostNanos:
-        description: Media cost for the programmatic placement.
+      accountId:
+        description: Account ID of this project.
         format: int64
         type: string
-      programmatic:
-        description: Whether programmatic is enabled.
-        type: boolean
-      traffickerEmails:
-        description: Trafficker emails assigned to the placement.
+      advertiserId:
+        description: Advertiser ID of this project.
+        format: int64
+        type: string
+      audienceAgeGroup:
+        description: Audience age group of this project.
+        enum:
+          - PLANNING_AUDIENCE_AGE_18_24
+          - PLANNING_AUDIENCE_AGE_25_34
+          - PLANNING_AUDIENCE_AGE_35_44
+          - PLANNING_AUDIENCE_AGE_45_54
+          - PLANNING_AUDIENCE_AGE_55_64
+          - PLANNING_AUDIENCE_AGE_65_OR_MORE
+          - PLANNING_AUDIENCE_AGE_UNKNOWN
+        type: string
+      audienceGender:
+        description: Audience gender of this project.
+        enum:
+          - PLANNING_AUDIENCE_GENDER_FEMALE
+          - PLANNING_AUDIENCE_GENDER_MALE
+        type: string
+      budget:
+        description: 'Budget of this project in the currency specified by the current account. The value stored in this field represents only the non-fractional amount. For example, for USD, the smallest value that can be represented by this field is 1 US dollar.'
+        format: int64
+        type: string
+      clientBillingCode:
+        description: Client billing code of this project.
+        type: string
+      clientName:
+        description: Name of the project client.
+        type: string
+      endDate:
+        description: End date of the project.
+        format: date
+        type: string
+      id:
+        description: 'ID of this project. This is a read-only, auto-generated field.'
+        format: int64
+        type: string
+      kind:
+        default: 'dfareporting#project'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#project".'
+        type: string
+      lastModifiedInfo:
+        $ref: '#/definitions/LastModifiedInfo'
+        description: Information about the most recent modification of this project.
+      name:
+        description: Name of this project.
+        type: string
+      overview:
+        description: Overview of this project.
+        type: string
+      startDate:
+        description: Start date of the project.
+        format: date
+        type: string
+      subaccountId:
+        description: Subaccount ID of this project.
+        format: int64
+        type: string
+      targetClicks:
+        description: Number of clicks that the advertiser is targeting.
+        format: int64
+        type: string
+      targetConversions:
+        description: Number of conversions that the advertiser is targeting.
+        format: int64
+        type: string
+      targetCpaNanos:
+        description: CPA that the advertiser is targeting.
+        format: int64
+        type: string
+      targetCpcNanos:
+        description: CPC that the advertiser is targeting.
+        format: int64
+        type: string
+      targetCpmNanos:
+        description: CPM that the advertiser is targeting.
+        format: int64
+        type: string
+      targetImpressions:
+        description: Number of impressions that the advertiser is targeting.
+        format: int64
+        type: string
+    type: object
+  ProjectsListResponse:
+    description: Project List Response
+    properties:
+      kind:
+        default: 'dfareporting#projectsListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#projectsListResponse".'
+        type: string
+      nextPageToken:
+        description: Pagination token to be used for the next list operation.
+        type: string
+      projects:
+        description: Project collection.
         items:
-          type: string
+          $ref: '#/definitions/Project'
         type: array
     type: object
   ReachReportCompatibleFields:
@@ -10892,6 +12947,108 @@ definitions:
         description: Region collection.
         items:
           $ref: '#/definitions/Region'
+        type: array
+    type: object
+  RemarketingList:
+    description: 'Contains properties of a remarketing list. Remarketing enables you to create lists of users who have performed specific actions on a site, then target ads to members of those lists. This resource can be used to manage remarketing lists that are owned by your advertisers. To see all remarketing lists that are visible to your advertisers, including those that are shared to your advertiser or account, use the TargetableRemarketingLists resource.'
+    properties:
+      accountId:
+        description: 'Account ID of this remarketing list. This is a read-only, auto-generated field that is only returned in GET requests.'
+        format: int64
+        type: string
+      active:
+        description: Whether this remarketing list is active.
+        type: boolean
+      advertiserId:
+        description: Dimension value for the advertiser ID that owns this remarketing list. This is a required field.
+        format: int64
+        type: string
+      advertiserIdDimensionValue:
+        $ref: '#/definitions/DimensionValue'
+        description: 'Dimension value for the ID of the advertiser. This is a read-only, auto-generated field.'
+      description:
+        description: Remarketing list description.
+        type: string
+      id:
+        description: 'Remarketing list ID. This is a read-only, auto-generated field.'
+        format: int64
+        type: string
+      kind:
+        default: 'dfareporting#remarketingList'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#remarketingList".'
+        type: string
+      lifeSpan:
+        description: Number of days that a user should remain in the remarketing list without an impression.
+        format: int64
+        type: string
+      listPopulationRule:
+        $ref: '#/definitions/ListPopulationRule'
+        description: Rule used to populate the remarketing list with users.
+      listSize:
+        description: Number of users currently in the list. This is a read-only field.
+        format: int64
+        type: string
+      listSource:
+        description: Product from which this remarketing list was originated.
+        enum:
+          - REMARKETING_LIST_SOURCE_ADX
+          - REMARKETING_LIST_SOURCE_DBM
+          - REMARKETING_LIST_SOURCE_DFA
+          - REMARKETING_LIST_SOURCE_DFP
+          - REMARKETING_LIST_SOURCE_DMP
+          - REMARKETING_LIST_SOURCE_GA
+          - REMARKETING_LIST_SOURCE_GPLUS
+          - REMARKETING_LIST_SOURCE_OTHER
+          - REMARKETING_LIST_SOURCE_PLAY_STORE
+          - REMARKETING_LIST_SOURCE_XFP
+          - REMARKETING_LIST_SOURCE_YOUTUBE
+        type: string
+      name:
+        description: Name of the remarketing list. This is a required field. Must be no greater than 128 characters long.
+        type: string
+      subaccountId:
+        description: 'Subaccount ID of this remarketing list. This is a read-only, auto-generated field that is only returned in GET requests.'
+        format: int64
+        type: string
+    type: object
+  RemarketingListShare:
+    description: Contains properties of a remarketing list's sharing information. Sharing allows other accounts or advertisers to target to your remarketing lists. This resource can be used to manage remarketing list sharing to other accounts and advertisers.
+    properties:
+      kind:
+        default: 'dfareporting#remarketingListShare'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#remarketingListShare".'
+        type: string
+      remarketingListId:
+        description: 'Remarketing list ID. This is a read-only, auto-generated field.'
+        format: int64
+        type: string
+      sharedAccountIds:
+        description: Accounts that the remarketing list is shared with.
+        items:
+          format: int64
+          type: string
+        type: array
+      sharedAdvertiserIds:
+        description: Advertisers that the remarketing list is shared with.
+        items:
+          format: int64
+          type: string
+        type: array
+    type: object
+  RemarketingListsListResponse:
+    description: Remarketing list response
+    properties:
+      kind:
+        default: 'dfareporting#remarketingListsListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#remarketingListsListResponse".'
+        type: string
+      nextPageToken:
+        description: Pagination token to be used for the next list operation.
+        type: string
+      remarketingLists:
+        description: Remarketing list collection.
+        items:
+          $ref: '#/definitions/RemarketingList'
         type: array
     type: object
   Report:
@@ -11382,6 +13539,9 @@ definitions:
   SiteContact:
     description: Site Contact
     properties:
+      address:
+        description: Address of this site contact.
+        type: string
       contactType:
         description: Site contact type.
         enum:
@@ -11400,6 +13560,12 @@ definitions:
         type: string
       lastName:
         description: Last name of this site contact.
+        type: string
+      phone:
+        description: Primary phone number of this site contact.
+        type: string
+      title:
+        description: Title or designation of this site contact.
         type: string
     type: object
   SiteSettings:
@@ -11423,6 +13589,9 @@ definitions:
       tagSetting:
         $ref: '#/definitions/TagSetting'
         description: Configuration settings for dynamic and image floodlight tags.
+      videoActiveViewOptOut:
+        description: 'Whether Verification and ActiveView are disabled for in-stream video creatives on this site. The same setting videoActiveViewOptOut exists on the directory site level -- the opt out occurs if either of these settings are true. These settings are distinct from DirectorySites.settings.activeViewOptOut or Sites.siteSettings.activeViewOptOut which only apply to display ads. However, Accounts.activeViewOptOut opts out both video traffic, as well as display ads, from Verification and ActiveView.'
+        type: boolean
     type: object
   SitesListResponse:
     description: Site List Response
@@ -11618,6 +13787,81 @@ definitions:
           - NEW_WINDOW
         type: string
     type: object
+  TargetableRemarketingList:
+    description: 'Contains properties of a targetable remarketing list. Remarketing enables you to create lists of users who have performed specific actions on a site, then target ads to members of those lists. This resource is a read-only view of a remarketing list to be used to faciliate targeting ads to specific lists. Remarketing lists that are owned by your advertisers and those that are shared to your advertisers or account are accessible via this resource. To manage remarketing lists that are owned by your advertisers, use the RemarketingLists resource.'
+    properties:
+      accountId:
+        description: 'Account ID of this remarketing list. This is a read-only, auto-generated field that is only returned in GET requests.'
+        format: int64
+        type: string
+      active:
+        description: Whether this targetable remarketing list is active.
+        type: boolean
+      advertiserId:
+        description: Dimension value for the advertiser ID that owns this targetable remarketing list.
+        format: int64
+        type: string
+      advertiserIdDimensionValue:
+        $ref: '#/definitions/DimensionValue'
+        description: Dimension value for the ID of the advertiser.
+      description:
+        description: Targetable remarketing list description.
+        type: string
+      id:
+        description: Targetable remarketing list ID.
+        format: int64
+        type: string
+      kind:
+        default: 'dfareporting#targetableRemarketingList'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#targetableRemarketingList".'
+        type: string
+      lifeSpan:
+        description: Number of days that a user should remain in the targetable remarketing list without an impression.
+        format: int64
+        type: string
+      listSize:
+        description: Number of users currently in the list. This is a read-only field.
+        format: int64
+        type: string
+      listSource:
+        description: Product from which this targetable remarketing list was originated.
+        enum:
+          - REMARKETING_LIST_SOURCE_ADX
+          - REMARKETING_LIST_SOURCE_DBM
+          - REMARKETING_LIST_SOURCE_DFA
+          - REMARKETING_LIST_SOURCE_DFP
+          - REMARKETING_LIST_SOURCE_DMP
+          - REMARKETING_LIST_SOURCE_GA
+          - REMARKETING_LIST_SOURCE_GPLUS
+          - REMARKETING_LIST_SOURCE_OTHER
+          - REMARKETING_LIST_SOURCE_PLAY_STORE
+          - REMARKETING_LIST_SOURCE_XFP
+          - REMARKETING_LIST_SOURCE_YOUTUBE
+        type: string
+      name:
+        description: Name of the targetable remarketing list. Is no greater than 128 characters long.
+        type: string
+      subaccountId:
+        description: 'Subaccount ID of this remarketing list. This is a read-only, auto-generated field that is only returned in GET requests.'
+        format: int64
+        type: string
+    type: object
+  TargetableRemarketingListsListResponse:
+    description: Targetable remarketing list response
+    properties:
+      kind:
+        default: 'dfareporting#targetableRemarketingListsListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#targetableRemarketingListsListResponse".'
+        type: string
+      nextPageToken:
+        description: Pagination token to be used for the next list operation.
+        type: string
+      targetableRemarketingLists:
+        description: Targetable remarketing list collection.
+        items:
+          $ref: '#/definitions/TargetableRemarketingList'
+        type: array
+    type: object
   TechnologyTargeting:
     description: Technology Targeting.
     properties:
@@ -11651,6 +13895,16 @@ definitions:
         items:
           $ref: '#/definitions/PlatformType'
         type: array
+    type: object
+  ThirdPartyAuthenticationToken:
+    description: Third Party Authentication Token
+    properties:
+      name:
+        description: Name of the third-party authentication token.
+        type: string
+      value:
+        description: 'Value of the third-party authentication token. This is a read-only, auto-generated field.'
+        type: string
     type: object
   ThirdPartyTrackingUrl:
     description: Third-party Tracking URL.

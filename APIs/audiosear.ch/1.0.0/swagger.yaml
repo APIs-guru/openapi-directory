@@ -137,6 +137,25 @@ paths:
             $ref: '#/definitions/snippet'
       tags:
         - episodes
+  '/episodes?itunes_id={id}':
+    get:
+      description: Gets a single episode record by iTunes ID
+      parameters:
+        - description: ID of show to fetch
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Returns an individual episode
+          schema:
+            $ref: '#/definitions/episode'
+      tags:
+        - episodes
   '/people/{id}':
     get:
       description: This endpoint will return the metadata for a single person.

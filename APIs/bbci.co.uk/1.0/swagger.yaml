@@ -23,7 +23,7 @@ info:
     url: 'https://raw.githubusercontent.com/Mermade/bbcparse/master/iblApi/swagger.json'
     version: '2.0'
   x-providerName: bbci.co.uk
-  x-release: '366'
+  x-release: '373'
   x-schema-id: 'https://ibl.api.bbci.co.uk/ibl/v1/schema/ibl.json'
   x-unofficialSpec: true
 externalDocs:
@@ -1356,6 +1356,8 @@ definitions:
                 required:
                   - id
                 type: object
+              hd:
+                type: boolean
               id:
                 type: string
               kind:
@@ -1372,6 +1374,7 @@ definitions:
               - type
               - store_id
               - store_profile
+              - hd
               - download
               - duration
               - kind
@@ -2047,6 +2050,8 @@ definitions:
         required:
           - id
         type: object
+      hd:
+        type: boolean
       id:
         type: string
       kind:
@@ -2063,6 +2068,7 @@ definitions:
       - type
       - store_id
       - store_profile
+      - hd
       - download
       - duration
       - kind

@@ -1,0 +1,701 @@
+swagger: '2.0'
+schemes:
+  - https
+host: firebaserules.googleapis.com
+basePath: /
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: |
+    The Firebase Rules API allows developers to create and manage rules that determine when a Firebase Rules-enabled service should permit a request.
+  title: Firebase Rules
+  version: v1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    format: google
+    url: 'https://firebaserules.googleapis.com/$discovery/rest?version=v1'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: firebaserules
+externalDocs:
+  url: 'https://firebase.google.com/docs/storage/security/start'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+    type: oauth2
+parameters:
+  $.xgafv:
+    description: V1 error format.
+    enum:
+      - '1'
+      - '2'
+    in: query
+    name: $.xgafv
+    type: string
+  access_token:
+    description: OAuth access token.
+    in: query
+    name: access_token
+    type: string
+  alt:
+    default: json
+    description: Data format for response.
+    enum:
+      - json
+      - media
+      - proto
+    in: query
+    name: alt
+    type: string
+  bearer_token:
+    description: OAuth bearer token.
+    in: query
+    name: bearer_token
+    type: string
+  callback:
+    description: JSONP
+    in: query
+    name: callback
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  pp:
+    default: true
+    description: Pretty-print response.
+    in: query
+    name: pp
+    type: boolean
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+    in: query
+    name: quotaUser
+    type: string
+  uploadType:
+    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+    in: query
+    name: uploadType
+    type: string
+  upload_protocol:
+    description: 'Upload protocol for media (e.g. "raw", "multipart").'
+    in: query
+    name: upload_protocol
+    type: string
+tags:
+  - name: projects
+paths:
+  '/v1/{name}':
+    delete:
+      description: Delete a `Release` by resource name.
+      operationId: firebaserules.projects.releases.delete
+      parameters:
+        - description: |-
+            Resource name for the `Release` to delete.
+
+            Format: `projects/{project_id}/releases/{release_id}`
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    get:
+      description: |
+        Get a `Release` by name.
+      operationId: firebaserules.projects.releases.get
+      parameters:
+        - description: |-
+            Resource name of the `Release`.
+
+
+            Format: `projects/{project_id}/releases/{release_id}`
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Release'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    put:
+      description: |-
+        Update a `Release`.
+
+        Only updates to the `ruleset_name` field will be honored. `Release` rename
+        is not supported. To create a `Release` use the CreateRelease method
+        instead.
+      operationId: firebaserules.projects.releases.update
+      parameters:
+        - description: |
+            Resource name for the `Release`.
+
+            `Release` names may be structured `app1/prod/v2` or flat `app1_prod_v2`
+            which affords developers a great deal of flexibility in mapping the name
+            to the style that best fits their existing development practices. For
+            example, a name could refer to an environment, an app, a version, or some
+            combination of three.
+
+            In the table below, for the project name `projects/foo`, the following
+            relative release paths show how flat and structured names might be chosen
+            to match a desired development / deployment strategy.
+
+            Use Case     | Flat Name           | Structured Name
+            -------------|---------------------|----------------
+            Environments | releases/qa         | releases/qa
+            Apps         | releases/app1_qa    | releases/app1/qa
+            Versions     | releases/app1_v2_qa | releases/app1/v2/qa
+
+            The delimiter between the release name path elements can be almost anything
+            and it should work equally well with the release name list filter, but in
+            many ways the structured paths provide a clearer picture of the
+            relationship between `Release` instances.
+
+            Format: `projects/{project_id}/releases/{release_id}`
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Release'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Release'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1/{name}/releases':
+    get:
+      description: |-
+        List the `Release` values for a project. This list may optionally be
+        filtered by `Release` name or `Ruleset` id or both.
+      operationId: firebaserules.projects.releases.list
+      parameters:
+        - description: |-
+            Resource name for the project.
+
+            Format: `projects/{project_id}`
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            Page size to load. Maximum of 100. Defaults to 10.
+            Note: `page_size` is just a hint and the service may choose to load less
+            than `page_size` due to the size of the output. To traverse all of the
+            releases, caller should iterate until the `page_token` is empty.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            `Release` filter. The list method supports filters with restrictions on the
+            `Release` `name` and also on the `Ruleset` `ruleset_name`.
+
+            Example 1) A filter of 'name=prod*' might return `Release`s with names
+            within 'projects/foo' prefixed with 'prod':
+
+            Name                          | Ruleset Name
+            ------------------------------|-------------
+            projects/foo/releases/prod    | projects/foo/rulesets/uuid1234
+            projects/foo/releases/prod/v1 | projects/foo/rulesets/uuid1234
+            projects/foo/releases/prod/v2 | projects/foo/rulesets/uuid8888
+
+            Example 2) A filter of `name=prod* ruleset_name=uuid1234` would return only
+            `Release` instances for 'projects/foo' with names prefixed with 'prod'
+            referring to the same `Ruleset` name of 'uuid1234':
+
+            Name                          | Ruleset Name
+            ------------------------------|-------------
+            projects/foo/releases/prod    | projects/foo/rulesets/1234
+            projects/foo/releases/prod/v1 | projects/foo/rulesets/1234
+
+            In the examples, the filter parameters refer to the search filters for
+            release and ruleset names are relative to the project releases and rulesets
+            collections. Fully qualified prefixed may also be used. e.g.
+            `name=projects/foo/releases/prod* ruleset_name=projects/foo/rulesets/uuid1`
+          in: query
+          name: filter
+          type: string
+        - description: Next page token for the next batch of `Release` instances.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListReleasesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Create a `Release`.
+
+        Release names should reflect the developer's deployment practices. For
+        example, the release name may include the environment name, application
+        name, application version, or any other name meaningful to the developer.
+        Once a `Release` refers to a `Ruleset`, the rules can be enforced by
+        Firebase Rules-enabled services.
+
+        More than one `Release` may be 'live' concurrently. Consider the following
+        three `Release` names for `projects/foo` and the `Ruleset` to which they
+        refer.
+
+        Release Name                    | Ruleset Name
+        --------------------------------|-------------
+        projects/foo/releases/prod      | projects/foo/rulesets/uuid123
+        projects/foo/releases/prod/beta | projects/foo/rulesets/uuid123
+        projects/foo/releases/prod/v23  | projects/foo/rulesets/uuid456
+
+        The table reflects the `Ruleset` rollout in progress. The `prod` and
+        `prod/beta` releases refer to the same `Ruleset`. However, `prod/v23`
+        refers to a new `Ruleset`. The `Ruleset` reference for a `Release` may be
+        updated using the UpdateRelease method, and the custom `Release` name
+        may be referenced by specifying the `X-Firebase-Rules-Release-Name` header.
+      operationId: firebaserules.projects.releases.create
+      parameters:
+        - description: |-
+            Resource name for the project which owns this `Release`.
+
+            Format: `projects/{project_id}`
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Release'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Release'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1/{name}/rulesets':
+    get:
+      description: |-
+        List `Ruleset` metadata only and optionally filter the results by Ruleset
+        name.
+
+        The full `Source` contents of a `Ruleset` may be retrieved with
+        GetRuleset.
+      operationId: firebaserules.projects.rulesets.list
+      parameters:
+        - description: |-
+            Resource name for the project.
+
+            Format: `projects/{project_id}`
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            Page size to load. Maximum of 100. Defaults to 10.
+            Note: `page_size` is just a hint and the service may choose to load less
+            than `page_size` due to the size of the output. To traverse all of the
+            releases, caller should iterate until the `page_token` is empty.
+          in: query
+          name: pageSize
+          type: integer
+        - description: Next page token for loading the next batch of `Ruleset` instances.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListRulesetsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Create a `Ruleset` from `Source`.
+
+        The `Ruleset` is given a unique generated name which is returned to the
+        caller. `Source` containing syntactic or semantics errors will result in an
+        error response indicating the first error encountered. For a detailed view
+        of `Source` issues, use TestRuleset.
+      operationId: firebaserules.projects.rulesets.create
+      parameters:
+        - description: |-
+            Resource name for Project which owns this `Ruleset`.
+
+            Format: `projects/{project_id}`
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Ruleset'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Ruleset'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1/{name}:test':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Test `Source` for syntactic and semantic correctness. Issues present in the
+        rules, if any, will be returned to the caller with a description, severity,
+        and source location.
+
+        The test method will typically be executed with a developer provided
+        `Source`, but if regression testing is desired, this method may be
+        executed against a `Ruleset` resource name and the `Source` will be
+        retrieved from the persisted `Ruleset`.
+
+        The following is an example of `Source` that permits users to upload images
+        to a bucket bearing their user id and matching the correct metadata:
+
+        _*Example*_
+
+            // Users are allowed to subscribe and unsubscribe to the blog.
+            service firebase.storage {
+              match /users/{userId}/images/{imageName} {
+                  allow write: if userId == request.userId
+                      && (imageName.endsWith('.png') || imageName.endsWith('.jpg'))
+                      && resource.mimeType.startsWith('image/')
+              }
+            }
+      operationId: firebaserules.projects.test
+      parameters:
+        - description: |-
+            Name of the project.
+
+            Format: `projects/{project_id}`
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestRulesetRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestRulesetResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+definitions:
+  Empty:
+    description: |-
+      A generic empty message that you can re-use to avoid defining duplicated
+      empty messages in your APIs. A typical example is to use it as the request
+      or the response type of an API method. For instance:
+
+          service Foo {
+            rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+          }
+
+      The JSON representation for `Empty` is empty JSON object `{}`.
+    properties: {}
+    type: object
+  File:
+    description: '`File` containing source content.'
+    properties:
+      content:
+        description: Textual Content.
+        type: string
+      fingerprint:
+        description: Fingerprint (e.g. github sha) associated with the `File`.
+        format: byte
+        type: string
+      name:
+        description: File name.
+        type: string
+    type: object
+  Issue:
+    description: 'Issues include warnings, errors, and deprecation notices.'
+    properties:
+      description:
+        description: Short error description.
+        type: string
+      severity:
+        description: The severity of the issue.
+        enum:
+          - SEVERITY_UNSPECIFIED
+          - DEPRECATION
+          - WARNING
+          - ERROR
+        type: string
+      sourcePosition:
+        $ref: '#/definitions/SourcePosition'
+        description: Position of the issue in the `Source`.
+    type: object
+  ListReleasesResponse:
+    description: The response for FirebaseRulesService.ListReleases.
+    properties:
+      nextPageToken:
+        description: |-
+          The pagination token to retrieve the next page of results. If the value is
+          empty, no further results remain.
+        type: string
+      releases:
+        description: List of `Release` instances.
+        items:
+          $ref: '#/definitions/Release'
+        type: array
+    type: object
+  ListRulesetsResponse:
+    description: The response for FirebaseRulesService.ListRulesets
+    properties:
+      nextPageToken:
+        description: |-
+          The pagination token to retrieve the next page of results. If the value is
+          empty, no further results remain.
+        type: string
+      rulesets:
+        description: List of `Ruleset` instances.
+        items:
+          $ref: '#/definitions/Ruleset'
+        type: array
+    type: object
+  Release:
+    description: |-
+      `Release` is a named reference to a `Ruleset`. Once a `Release` refers to a
+      `Ruleset`, rules-enabled services will be able to enforce the `Ruleset`.
+    properties:
+      createTime:
+        description: |-
+          Time the release was created.
+          @OutputOnly
+        format: google-datetime
+        type: string
+      name:
+        description: |
+          Resource name for the `Release`.
+
+          `Release` names may be structured `app1/prod/v2` or flat `app1_prod_v2`
+          which affords developers a great deal of flexibility in mapping the name
+          to the style that best fits their existing development practices. For
+          example, a name could refer to an environment, an app, a version, or some
+          combination of three.
+
+          In the table below, for the project name `projects/foo`, the following
+          relative release paths show how flat and structured names might be chosen
+          to match a desired development / deployment strategy.
+
+          Use Case     | Flat Name           | Structured Name
+          -------------|---------------------|----------------
+          Environments | releases/qa         | releases/qa
+          Apps         | releases/app1_qa    | releases/app1/qa
+          Versions     | releases/app1_v2_qa | releases/app1/v2/qa
+
+          The delimiter between the release name path elements can be almost anything
+          and it should work equally well with the release name list filter, but in
+          many ways the structured paths provide a clearer picture of the
+          relationship between `Release` instances.
+
+          Format: `projects/{project_id}/releases/{release_id}`
+        type: string
+      rulesetName:
+        description: |-
+          Name of the `Ruleset` referred to by this `Release`. The `Ruleset` must
+          exist the `Release` to be created.
+        type: string
+      updateTime:
+        description: |-
+          Time the release was updated.
+          @OutputOnly
+        format: google-datetime
+        type: string
+    type: object
+  Ruleset:
+    description: |-
+      `Ruleset` is an immutable copy of `Source` with a globally unique identifier
+      and a creation time.
+    properties:
+      createTime:
+        description: |-
+          Time the `Ruleset` was created.
+          @OutputOnly
+        format: google-datetime
+        type: string
+      name:
+        description: |-
+          Name of the `Ruleset`. The ruleset_id is auto generated by the service.
+          Format: `projects/{project_id}/rulesets/{ruleset_id}`
+          @OutputOnly
+        type: string
+      source:
+        $ref: '#/definitions/Source'
+        description: '`Source` for the `Ruleset`.'
+    type: object
+  Source:
+    description: '`Source` is one or more `File` messages comprising a logical set of rules.'
+    properties:
+      files:
+        description: '`File` set constituting the `Source` bundle.'
+        items:
+          $ref: '#/definitions/File'
+        type: array
+    type: object
+  SourcePosition:
+    description: |-
+      Position in the `Source` content including its line, column number, and an
+      index of the `File` in the `Source` message. Used for debug purposes.
+    properties:
+      column:
+        description: First column on the source line associated with the source fragment.
+        format: int32
+        type: integer
+      fileName:
+        description: Name of the `File`.
+        type: string
+      line:
+        description: Line number of the source fragment. 1-based.
+        format: int32
+        type: integer
+    type: object
+  TestRulesetRequest:
+    description: The request for FirebaseRulesService.TestRuleset.
+    properties:
+      source:
+        $ref: '#/definitions/Source'
+        description: '`Source` to be checked for correctness.'
+    type: object
+  TestRulesetResponse:
+    description: The response for FirebaseRulesService.TestRuleset.
+    properties:
+      issues:
+        description: |-
+          Syntactic and semantic `Source` issues of varying severity. Issues of
+          `ERROR` severity will prevent tests from executing.
+        items:
+          $ref: '#/definitions/Issue'
+        type: array
+    type: object
