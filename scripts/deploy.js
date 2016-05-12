@@ -27,11 +27,11 @@ sh.set('-e');
 sh.set('-v');
 
 sh.mkdir(deployDir());
-sh.cp('scripts/index.html', deployDir());
+sh.cp('resources/index.html', deployDir());
 sh.cp('-R', 'branding/', deployDir());
 
 sh.mkdir('-p', deployDir('api/v1'));
-sh.cp('scripts/apis_guru_swagger.yaml', deployDir('api/v1/swagger.yaml'));
+sh.cp('resources/apis_guru_swagger.yaml', deployDir('api/v1/swagger.yaml'));
 
 var specs = util.getSpecs('APIs/');
 buildApiList(specs)
