@@ -1,37 +1,43 @@
 #!/usr/bin/env node
 'use strict';
 
-var assert = require('assert');
-var _ = require('lodash');
-var Promise = require('bluebird');
 var fs = require('fs');
+var Path = require('path');
+var assert = require('assert');
 
+var _ = require('lodash');
 var URI = require('urijs');
 var sh = require('shelljs');
+var Promise = require('bluebird');
 var MimeLookup = require('mime-lookup');
 var MIME = new MimeLookup(require('mime-db'));
 
 var makeRequest = require('makeRequest');
 var util = require('./util');
 
-var specRootUrl = 'https://apis-guru.github.io/api-models';
-var deployDir = 'deploy';
+function deployDir(path) {
+  return Path.join('deploy', path || '');
+}
+
+function rootUrl(url) {
+  return URI('https://apis-guru.github.io/api-models/' + url).href();
+}
 
 sh.set('-e');
 sh.set('-v');
 
-sh.mkdir(deployDir);
-sh.cp('scripts/index.html', deployDir);
-sh.cp('-R', 'branding/', deployDir);
+sh.mkdir(deployDir());
+sh.cp('scripts/index.html', deployDir());
+sh.cp('-R', 'branding/', deployDir());
 
-sh.mkdir('-p', `${deployDir}/api/v1`);
-sh.cp('scripts/apis_guru_swagger.yaml', `${deployDir}/api/v1/swagger.yaml`);
+sh.mkdir('-p', deployDir('api/v1'));
+sh.cp('scripts/apis_guru_swagger.yaml', deployDir('api/v1/swagger.yaml'));
 
 var specs = util.getSpecs('APIs/');
 buildApiList(specs)
   .then(function (apiList) {
     console.log('Generated list for ' + _.size(apiList) + ' API specs.');
-    util.saveJson(`${deployDir}/api/v1/list.json`, apiList);
+    util.saveJson(deployDir('api/v1/list.json'), apiList);
 
     var numAPIs = _.size(apiList);
     var numEndpoints = _(specs).map('paths').map(_.size).sum();
@@ -60,8 +66,8 @@ function cacheLogo(url) {
         logoFile += `.${extension}`;
       }
 
-      util.saveFile(`${deployDir}/${logoFile}`, data);
-      return `${specRootUrl}/${logoFile}`;
+      util.saveFile(deployDir(logoFile), data);
+      return rootUrl(logoFile);
     });
 }
 
@@ -106,15 +112,15 @@ function addSwagger(apiList, swagger, filename) {
 
 function buildVersionEntry(swagger, filename) {
   var basename = util.getSwaggerPath(swagger, 'swagger');
-  util.saveJson(`${deployDir}/${basename}.json`, swagger);
-  util.saveYaml(`${deployDir}/${basename}.yaml`, swagger);
+  util.saveJson(deployDir(`${basename}.json`), swagger);
+  util.saveYaml(deployDir(`${basename}.yaml`), swagger);
 
   var dates = util.exec(`git log --format=%aD --follow -- '${filename}'`);
   dates = _(dates).split('\n').compact();
 
   return {
-    swaggerUrl: `${specRootUrl}/${basename}.json`,
-    swaggerYamlUrl: `${specRootUrl}/${basename}.yaml`,
+    swaggerUrl: rootUrl(`${basename}.json`),
+    swaggerYamlUrl: rootUrl(`${basename}.yaml`),
     info: swagger.info,
     externalDocs: swagger.externalDocs,
     added: new Date(dates.last()),
@@ -138,6 +144,6 @@ function saveShield(subject, status, color, addLogo) {
 
   return makeRequest('get', url.href(), {encoding: null})
     .spread(function(response, data) {
-      util.saveFile(`${deployDir}/banners/${subject.toLowerCase()}_banner.svg`, data);
+      util.saveFile(deployDir(`banners/${subject.toLowerCase()}_banner.svg`), data);
     });
 }
