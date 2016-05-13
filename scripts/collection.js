@@ -298,15 +298,22 @@ function swaggerToSpecLead(swagger) {
 function getCatalogsLeads() {
   return Promise.all(_.invokeMap(specSources, _.call))
     .then(function (catalogsLeads) {
-      return _(catalogsLeads).flatten()
-        .keyBy(util.getOriginUrl)
-        .omit(blackListedUrls).value();
+      var allLeads = _.flatten(catalogsLeads);
+      return _.omit(indexByOriginUrl(allLeads), blackListedUrls);
     });
 }
 
+function indexByOriginUrl(leads) {
+  return _(leads)
+    .groupBy(util.getOriginUrl)
+    .mapValues(function (array, url) {
+      assert(_.size(array) === 1, `Duplicate leads for '${url}' URL.`);
+      return array[0];
+    }).value();
+}
+
 function getSpecLeads(specs) {
-  var leads = _(specs).mapValues(swaggerToSpecLead)
-    .keyBy(util.getOriginUrl).value();
+  var leads = indexByOriginUrl(_.map(specs, swaggerToSpecLead));
 
   return getCatalogsLeads()
     .then(function (catalogsLeads) {
