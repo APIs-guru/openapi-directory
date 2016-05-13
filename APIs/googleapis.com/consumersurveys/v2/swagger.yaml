@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: API for Google Consumer Surveys.
+  description: 'Creates and conducts surveys, lists the surveys that an authenticated user owns, and retrieves survey results and information about specified surveys.'
   title: Consumer Surveys
   version: v2
   x-apiClientRegistration:
@@ -381,6 +381,9 @@ definitions:
         items:
           type: string
         type: array
+      mobileAppPanelId:
+        description: Key for predefined panel that causes survey to be sent to a predefined set of Opinion Rewards App users. PopulationSource must be set to ANDROID_APP_PANEL to use this field.
+        type: string
       populationSource:
         description: Online population source where the respondents are sampled from.
         type: string

@@ -19,6 +19,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      description: Load the details about all the hotels your application has access to.
       parameters:
         - description: Application identifier
           in: header
@@ -37,27 +38,33 @@ paths:
         - text/json
       responses:
         '200':
-          description: An array of hotels for each of the hotels listed in the hetras-hotels parameter.
+          description: A list of hotels.
           schema:
             items:
               $ref: '#/definitions/Hotel'
             type: array
+        '204':
+          description: You don´t have access to any hotels.
         '401':
           description: 'You provided wrong credentials, or you reached your API limit.'
         '403':
           description: The application does not have access to the requested resource.
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
+        '422':
+          description: Bad request. Request parameters syntactically erroneous.
         '500':
-          description: We couldn't return the representation due to an internal server error.
-      summary: Get a list with the details of all the hotels specified.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+        '503':
+          description: The server is currently unavailable. Please try later.
+      summary: Get a list of all the hotels of a chain your application has access to.
       tags:
         - Hotels
   '/api/hotel/v0/hotels/{hotelId}':
     get:
       consumes: []
       deprecated: false
-      description: "Based on the url parameter hotelId the API evaluates if the client making the request is allowed to access the data and \r\n            returns 403 if the client is not subscribed to that hotel."
+      description: Load the details about the specified hotel.
       parameters:
         - description: Application identifier
           in: header
@@ -71,8 +78,7 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-        - description: Specifies the hotel id to process.
-          format: int32
+        - format: int32
           in: path
           name: hotelId
           required: true
@@ -82,7 +88,7 @@ paths:
         - text/json
       responses:
         '200':
-          description: Hotel details for the hotel with the id specified in the URL.
+          description: The details about the hotel.
           schema:
             $ref: '#/definitions/Hotel'
         '401':
@@ -91,9 +97,13 @@ paths:
           description: The application does not have access to the requested resource.
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
+        '422':
+          description: Bad request. Request parameters syntactically erroneous.
         '500':
-          description: We couldn't return the representation due to an internal server error.
-      summary: Get the details for the specified hotel id.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+        '503':
+          description: The server is currently unavailable. Please try later.
+      summary: Get the details of the hotel with the speccified hotel id.
       tags:
         - Hotels
   '/api/hotel/v0/hotels/{hotelId}/room_types':
@@ -191,6 +201,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      description: "Find all rooms for the hotel that match the specified filter criteria. The filtering will be done based on the current state of\r\n            the rooms."
       parameters:
         - description: Application identifier
           in: header
@@ -204,13 +215,13 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-        - description: Specifies the hotel id to process.
+        - description: The hotel you are trying to find rooms for.
           format: int32
           in: path
           name: hotelId
           required: true
           type: integer
-        - description: Return a list of rooms that only have the given ocuppancy status.
+        - description: Return results only for rooms that have the given frontdesk ocuppancy status.
           enum:
             - Occupied
             - Vacant
@@ -218,7 +229,7 @@ paths:
           name: occupancy
           required: false
           type: string
-        - description: Return a list of rooms that only have the given room condition status.
+        - description: Return results only for rooms that have the given room condition status.
           in: query
           items:
             enum:
@@ -229,7 +240,7 @@ paths:
           name: conditions
           required: false
           type: array
-        - description: Return a list of rooms that only have the given maintenance status.
+        - description: Return results only for rooms that have the given maintenance status.
           in: query
           items:
             enum:
@@ -242,28 +253,28 @@ paths:
           name: maintenances
           required: false
           type: array
-        - description: Return a count of rooms that only have the given room type. Allows to pass a comma-separated list of room types.
+        - description: Return result only for rooms for the given room types. Allows to pass a comma-separated list of room types.
           in: query
           items:
             type: string
           name: roomTypes
           required: false
           type: array
-        - description: Return count of rooms that only have the given amenity. Allows to pass a comma-separated list of amenities.
+        - description: "Return result only for rooms having all of the given amenities. You can provide a comma seperated list of \r\n            amenity codes."
           in: query
           items:
             type: string
           name: amenities
           required: false
           type: array
-        - description: Return a count of rooms that only have the given view. Allows to pass a comma-separated list of views.
+        - description: "Return result only for rooms having at least one of the specified views. You can provide a comma seperated list of \r\n            view codes."
           in: query
           items:
             type: string
           name: views
           required: false
           type: array
-        - description: Return a count of rooms that only have the given location. Allows to pass a comma-separated list of locations.
+        - description: "Return result only for rooms having at least one of the specified locations. You can provide a comma seperated list of \r\n            location codes."
           in: query
           items:
             type: string
@@ -295,20 +306,22 @@ paths:
         - text/json
       responses:
         '200':
-          description: A list of room for the hotel with the id specified in the URL.
+          description: A list of rooms for the hotel based on the set filter criteria.
           schema:
             $ref: '#/definitions/RoomListResponse'
         '204':
-          description: There are no rooms found for the given combination of filtering and pagination criteria.
+          description: There are no rooms found for the given filtering and pagination criteria.
         '401':
           description: 'You provided wrong credentials, or you reached your API limit.'
         '403':
           description: The application does not have access to the requested resource.
+        '422':
+          description: The request failed to validate.
         '500':
-          description: We couldn't return the representation due to an internal server error.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         '503':
           description: The server is currently unavailable. Please try later.
-      summary: Get a list of rooms using provided filtering and pagination criteria.
+      summary: Get a list of rooms using the provided filtering and pagination criteria.
       tags:
         - Room
   '/api/hotel/v0/hotels/{hotelId}/rooms/$count':
@@ -328,13 +341,13 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-        - description: Specifies the hotel id to process.
+        - description: The hotel you are counting the rooms for.
           format: int32
           in: path
           name: hotelId
           required: true
           type: integer
-        - description: Return a list of rooms that only have the given ocuppancy status.
+        - description: Return results only for rooms that have the given frontdesk ocuppancy status.
           enum:
             - Occupied
             - Vacant
@@ -342,7 +355,7 @@ paths:
           name: occupancy
           required: false
           type: string
-        - description: Return a list of rooms that only have the given room condition status.
+        - description: Return results only for rooms that have the given room condition status.
           in: query
           items:
             enum:
@@ -353,7 +366,7 @@ paths:
           name: conditions
           required: false
           type: array
-        - description: Return a list of rooms that only have the given maintenance status.
+        - description: Return results only for rooms that have the given maintenance status.
           in: query
           items:
             enum:
@@ -366,28 +379,28 @@ paths:
           name: maintenances
           required: false
           type: array
-        - description: Return a count of rooms that only have the given room type. Allows to pass a comma-separated list of room types.
+        - description: Return result only for rooms for the given room types. Allows to pass a comma-separated list of room types.
           in: query
           items:
             type: string
           name: roomTypes
           required: false
           type: array
-        - description: Return count of rooms that only have the given amenity. Allows to pass a comma-separated list of amenities.
+        - description: "Return result only for rooms having all of the given amenities. You can provide a comma seperated list of \r\n            amenity codes."
           in: query
           items:
             type: string
           name: amenities
           required: false
           type: array
-        - description: Return a count of rooms that only have the given view. Allows to pass a comma-separated list of views.
+        - description: "Return result only for rooms having at least one of the specified views. You can provide a comma seperated list of \r\n            view codes."
           in: query
           items:
             type: string
           name: views
           required: false
           type: array
-        - description: Return a count of rooms that only have the given location. Allows to pass a comma-separated list of locations.
+        - description: "Return result only for rooms having at least one of the specified locations. You can provide a comma seperated list of \r\n            location codes."
           in: query
           items:
             type: string
@@ -399,18 +412,20 @@ paths:
         - text/json
       responses:
         '200':
-          description: The total room count for a given filter criteria.
+          description: The room count in the hotel matching the given filter criteria.
           schema:
             $ref: '#/definitions/TotalCountResponse'
         '401':
           description: 'You provided wrong credentials, or you reached your API limit.'
         '403':
           description: The application does not have access to the requested resource.
+        '422':
+          description: The request failed to validate.
         '500':
-          description: We couldn't return the representation due to an internal server error.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         '503':
           description: The server is currently unavailable. Please try later.
-      summary: Get total rooms count that match the given filter criteria.
+      summary: Get the count of all rooms in the hotel matching the given filter criteria.
       tags:
         - Room
   '/api/hotel/v0/hotels/{hotelId}/rooms/available':
@@ -430,57 +445,57 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-        - description: Specifies the hotel id to process.
+        - description: The hotel you are looking for available rooms.
           format: int32
           in: path
           name: hotelId
           required: true
           type: integer
-        - description: Specifies a starting date for a desired room availability range.
+        - description: "Rooms returned will not be assigned to a reservation or be under maintenance between this date\r\n            and the specified to date. Still there could be departing reservations or ending maintenances\r\n            for this date."
           format: date-time
           in: query
           name: from
           required: true
           type: string
-        - description: Specifies a finishing date for a desired room availability range.
+        - description: "Rooms returned will not be assigned to a reservation or be under maintenance between the specified\r\n            from date and this date. Still there could be arriving reservations or beginning maintenances\r\n            for this date."
           format: date-time
           in: query
           name: to
           required: true
           type: string
-        - description: Specifies number of adults. The default value is 1.
+        - description: Specifies number of adults the returned rooms will have to be able to house. The default value is 1.
           format: byte
           in: query
           name: adults
           required: false
           type: string
-        - description: "Specifies if the endpoint should return rooms that are out of service for a requested date range.\r\n            The default value is false."
+        - description: "Should rooms that are set OutOfService in the defined time period be returned as available. By default\r\n            they are not."
           in: query
           name: includeOutOfService
           required: false
           type: boolean
-        - description: Return a count of rooms that only have the given room type. Allows to pass a comma-separated list of room types.
+        - description: Return result only for rooms for the given room types. Allows to pass a comma-separated list of room types.
           in: query
           items:
             type: string
           name: roomTypes
           required: false
           type: array
-        - description: Return count of rooms that only have the given amenity. Allows to pass a comma-separated list of amenities.
+        - description: "Return result only for rooms having all of the given amenities. You can provide a comma seperated list of \r\n            amenity codes."
           in: query
           items:
             type: string
           name: amenities
           required: false
           type: array
-        - description: Return a count of rooms that only have the given view. Allows to pass a comma-separated list of views.
+        - description: "Return result only for rooms having at least one of the specified views. You can provide a comma seperated list of \r\n            view codes."
           in: query
           items:
             type: string
           name: views
           required: false
           type: array
-        - description: Return a count of rooms that only have the given location. Allows to pass a comma-separated list of locations.
+        - description: "Return result only for rooms having at least one of the specified locations. You can provide a comma seperated list of \r\n            location codes."
           in: query
           items:
             type: string
@@ -512,17 +527,19 @@ paths:
         - text/json
       responses:
         '200':
-          description: The total room count for a given filter criteria.
+          description: A list of available rooms in the specified time period.
           schema:
             $ref: '#/definitions/RoomListResponse'
         '204':
-          description: There are no rooms found for the given combination of filtering criteria.
+          description: There are no available rooms found for the given criteria.
         '401':
           description: 'You provided wrong credentials, or you reached your API limit.'
         '403':
           description: The application does not have access to the requested resource.
+        '422':
+          description: The request failed to validate.
         '500':
-          description: We couldn't return the representation due to an internal server error.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         '503':
           description: The server is currently unavailable. Please try later.
       summary: Request available rooms using a given criteria.
@@ -532,6 +549,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      description: With this call you can load the details about a specific room in the hotel. It will show you the current status of the room.
       parameters:
         - description: Application identifier
           in: header
@@ -545,13 +563,13 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-        - description: Specifies the hotel id to process.
+        - description: The hotel id the room belongs to.
           format: int32
           in: path
           name: hotelId
           required: true
           type: integer
-        - description: Specifies the room number to process.
+        - description: The room number you want to see details for.
           in: path
           name: roomNumber
           required: true
@@ -561,7 +579,7 @@ paths:
         - text/json
       responses:
         '200':
-          description: Room details for the hotel with the id specified in the URL.
+          description: Room details for the given room and hotel.
           schema:
             $ref: '#/definitions/Room'
         '401':
@@ -569,9 +587,9 @@ paths:
         '403':
           description: The application does not have access to the requested resource.
         '404':
-          description: Requested room could not be found.
+          description: Not Found. The server has not found anything matching the Request-URI or the requested room could not be found.
         '500':
-          description: We couldn't return the representation due to an internal server error.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         '503':
           description: The server is currently unavailable. Please try later.
       summary: Get a specific room with all the details for the specified hotel id.
@@ -579,7 +597,6 @@ paths:
         - Room
     patch:
       consumes:
-        - application/x-www-form-urlencoded
         - application/json
         - text/json
       deprecated: false
@@ -597,18 +614,18 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-        - description: Specifies the hotel id to process.
+        - description: The hotel id the room belongs to.
           format: int32
           in: path
           name: hotelId
           required: true
           type: integer
-        - description: Specifies the room number to process.
+        - description: The room number of the room you would like to update.
           in: path
           name: roomNumber
           required: true
           type: string
-        - description: A set of JSON Patch operations
+        - description: A set of JSON Patch operations.
           in: body
           name: patchRequest
           required: true
@@ -621,7 +638,7 @@ paths:
         - text/json
       responses:
         '200':
-          description: The update was successful. Reponse would contain a referer to the updated reservation.
+          description: The update was successful
           schema:
             $ref: '#/definitions/Object'
         '400':
@@ -633,38 +650,40 @@ paths:
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
         '422':
-          description: The request failed to validated.
+          description: The request failed to validate.
         '500':
           description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+        '503':
+          description: The server is currently unavailable. Please try later.
       summary: Partially updates a room
       tags:
         - Room
 definitions:
   EmbeddedReservation:
-    description: Represents basic information about a reservation
+    description: Basic data about a reservation
     properties:
       _links:
         additionalProperties:
           $ref: '#/definitions/LinkObject'
-        description: Collection of links to the full representation of the reservation and other related resources
+        description: Collection of links to related resources
         type: object
       arrival_date:
-        description: Reservation arrival date
+        description: The arrival date of the guests
         format: date-time
         type: string
       confirmation_id:
-        description: Confirmation Identifier for the reservation
+        description: "he confirmation id for the booking which the guest can use to check in on the kiosk, add the \r\n            booking to the mobile app etc. It is used as identifier for all reservations done with the \r\n            same booking request"
         type: string
       departure_date:
-        description: Reservation departure date
+        description: The departure date of the guests
         format: date-time
         type: string
       reservation_number:
-        description: Number of the reservation
+        description: The reservation number of the reservation
         format: int32
         type: integer
       reservation_status:
-        description: Current reservation status
+        description: The current status of this reservation
         enum:
           - Tentative
           - Waitlisted
@@ -690,21 +709,21 @@ definitions:
       - departure_date
     type: object
   EmbeddedRoomType:
-    description: "Represents a short version of room type. To get the full version\r\n            please follow the self link from the links collection."
+    description: "Basic data for a room type. To get the full details please follow the self link\r\n            from the links collection"
     properties:
       _links:
         additionalProperties:
           $ref: '#/definitions/LinkObject'
-        description: Collection of links to related resources.
+        description: Collection of links to related resources
         type: object
       code:
-        description: Code of the room type.
+        description: Code of the room type
         type: string
       description:
-        description: Description of the room type.
+        description: Description of the room type
         type: string
       name:
-        description: Name of the room type.
+        description: Name of the room type
         type: string
     type: object
   EmbeddedRoomWithStatus:
@@ -733,37 +752,37 @@ definitions:
   GetAvailableRoomsRequest:
     properties:
       adults:
-        description: Specifies number of adults. The default value is 1.
+        description: Specifies number of adults the returned rooms will have to be able to house. The default value is 1.
         format: byte
         type: string
       amenities:
-        description: Return count of rooms that only have the given amenity. Allows to pass a comma-separated list of amenities.
+        description: "Return result only for rooms having all of the given amenities. You can provide a comma seperated list of \r\n            amenity codes."
         items:
           type: string
         type: array
       from:
-        description: Specifies a starting date for a desired room availability range.
+        description: "Rooms returned will not be assigned to a reservation or be under maintenance between this date\r\n            and the specified to date. Still there could be departing reservations or ending maintenances\r\n            for this date."
         format: date-time
         type: string
       includeOutOfService:
-        description: "Specifies if the endpoint should return rooms that are out of service for a requested date range.\r\n            The default value is false."
+        description: "Should rooms that are set OutOfService in the defined time period be returned as available. By default\r\n            they are not."
         type: boolean
       locations:
-        description: Return a count of rooms that only have the given location. Allows to pass a comma-separated list of locations.
+        description: "Return result only for rooms having at least one of the specified locations. You can provide a comma seperated list of \r\n            location codes."
         items:
           type: string
         type: array
       roomTypes:
-        description: Return a count of rooms that only have the given room type. Allows to pass a comma-separated list of room types.
+        description: Return result only for rooms for the given room types. Allows to pass a comma-separated list of room types.
         items:
           type: string
         type: array
       to:
-        description: Specifies a finishing date for a desired room availability range.
+        description: "Rooms returned will not be assigned to a reservation or be under maintenance between the specified\r\n            from date and this date. Still there could be arriving reservations or beginning maintenances\r\n            for this date."
         format: date-time
         type: string
       views:
-        description: Return a count of rooms that only have the given view. Allows to pass a comma-separated list of views.
+        description: "Return result only for rooms having at least one of the specified views. You can provide a comma seperated list of \r\n            view codes."
         items:
           type: string
         type: array
@@ -774,12 +793,12 @@ definitions:
   GetRoomListRequest:
     properties:
       amenities:
-        description: Return count of rooms that only have the given amenity. Allows to pass a comma-separated list of amenities.
+        description: "Return result only for rooms having all of the given amenities. You can provide a comma seperated list of \r\n            amenity codes."
         items:
           type: string
         type: array
       conditions:
-        description: Return a list of rooms that only have the given room condition status.
+        description: Return results only for rooms that have the given room condition status.
         items:
           enum:
             - CleanNotInspected
@@ -788,12 +807,12 @@ definitions:
           type: string
         type: array
       locations:
-        description: Return a count of rooms that only have the given location. Allows to pass a comma-separated list of locations.
+        description: "Return result only for rooms having at least one of the specified locations. You can provide a comma seperated list of \r\n            location codes."
         items:
           type: string
         type: array
       maintenances:
-        description: Return a list of rooms that only have the given maintenance status.
+        description: Return results only for rooms that have the given maintenance status.
         items:
           enum:
             - NotSet
@@ -804,18 +823,18 @@ definitions:
           type: string
         type: array
       occupancy:
-        description: Return a list of rooms that only have the given ocuppancy status.
+        description: Return results only for rooms that have the given frontdesk ocuppancy status.
         enum:
           - Occupied
           - Vacant
         type: string
       roomTypes:
-        description: Return a count of rooms that only have the given room type. Allows to pass a comma-separated list of room types.
+        description: Return result only for rooms for the given room types. Allows to pass a comma-separated list of room types.
         items:
           type: string
         type: array
       views:
-        description: Return a count of rooms that only have the given view. Allows to pass a comma-separated list of views.
+        description: "Return result only for rooms having at least one of the specified views. You can provide a comma seperated list of \r\n            view codes."
         items:
           type: string
         type: array
@@ -823,48 +842,66 @@ definitions:
   Hotel:
     properties:
       city:
+        description: The city the hotel is located in
         type: string
       code:
+        description: The code of the hotel
         type: string
       country:
+        description: "The country the hotel is located. The country code is in ISO 3166-1 alpha-2 format\r\n            (see: <a href=\"http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm\" onfocus=\"this.blur()\" target=\"_blank\">http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm</a>)"
         type: string
       current_business_day:
+        description: Return the current business day of the hotel in the ISO-8601 format "YYYY-MM-DD"
         format: date-time
         type: string
       desc:
+        description: The descriptive text for the the hotel
         type: string
       email:
+        description: The email address of the hotel
         type: string
       fax:
+        description: The fax number of the hotel
         type: string
       hotel_id:
+        description: The id of the hotel
         format: int32
         type: integer
       latitude:
+        description: The latitude for the geolocation of the hotel. This allows you to show the hotel on a map
         format: double
         type: number
       longitude:
+        description: The longitude for the geolocation of the hotel. This allows you to show the hotel on a map
         format: double
         type: number
       name:
+        description: The name of the hotel
         type: string
       phone:
+        description: The main phone number to call the hotel
         type: string
       postal_code:
+        description: The postal code of the hotel
         type: string
       state:
+        description: The state the hotel is located in
         type: string
       street:
+        description: The street address of the hotel
         type: string
       url:
+        description: The homepage URL of the hotel
         type: string
       utc_offset:
+        description: "The current time offset of the hotel to UTC. This is taking into account daylight saving times and shows the offset for the time the request is handled. The response\r\n            will be in the format of \"UTC±hh:mm\". If there is no offset to UTC it will be shown as \"UTC+00:00\""
         type: string
     type: object
   JsonPatchOperationRequest:
     description: Represents JSON Patch request
     properties:
       op:
+        description: The operation that should be performed on the object or attribute defined in the path
         enum:
           - Add
           - Remove
@@ -874,9 +911,11 @@ definitions:
           - Test
         type: string
       path:
+        description: The path to the object or attribute the operation should be performed on
         type: string
       value:
         $ref: '#/definitions/Object'
+        description: The new value of the object or attribute after the operation has been performed
     required:
       - op
       - path
@@ -936,61 +975,61 @@ definitions:
     description: Represents a room for a property.
     properties:
       amenities:
-        description: Provides a collection of amenities for the room.
+        description: List of amenities for the room
         items:
           $ref: '#/definitions/SimpleAttribute'
         type: array
       beddings:
-        description: Provides information about available beds in the room.
+        description: Provides information about available beds in the room
         items:
           $ref: '#/definitions/RoomBedding'
         type: array
       description:
-        description: Description of the room.
+        description: Description of the room
         type: string
       expected_occupancy:
-        description: The usual amount of persons for the room.
+        description: The common amount of persons for the room
         format: int32
         type: integer
       extra_bed_allowed:
-        description: Extra bed allowed in the room.
+        description: Is there an extra bed allowed in the room
         type: boolean
       floor:
-        description: Floor of the room.
+        description: Floor of the room
         format: int32
         type: integer
       locations:
-        description: Provides a collection of locations for the room.
+        description: List of locations for the room
         items:
           $ref: '#/definitions/SimpleAttribute'
         type: array
       max_persons:
-        description: Maximum number of allowed persons in the room.
+        description: Maximum number of allowed persons in the room
         format: int32
         type: integer
       min_persons:
-        description: Minimum number of allowed persons in the room.
+        description: Minimum number of allowed persons in the room
         format: int32
         type: integer
       name:
-        description: Name of the room.
+        description: Name of the room
         type: string
       number:
-        description: Number of the room.
+        description: Number of the room
         type: string
       reservations:
-        description: Current reservation(s) for the room
+        description: "Current reservation(s) for the room. It shows reservations due to arrive today and the one still inhouse.\r\n            If there is a day-use reservation assigned for today it can show you up to 3 reservations. One that will\r\n            depart today, the day-use reservqation for today and the one due to arrive"
         items:
           $ref: '#/definitions/EmbeddedReservation'
         type: array
       room_type:
         $ref: '#/definitions/EmbeddedRoomType'
-        description: "Room type of the room.\r\n            \r\n            Contains only the basic properties of the room type."
+        description: Room type of the room. Contains only the basic properties of the room type
       status:
         $ref: '#/definitions/RoomStatus'
-        description: Contains information about room status.
+        description: Contains information about room status
       views:
-        description: Provides a collection of views for the room.
+        description: List of views for the room
         items:
           $ref: '#/definitions/SimpleAttribute'
         type: array
@@ -1004,14 +1043,14 @@ definitions:
       - floor
     type: object
   RoomBedding:
-    description: Represent information about room bedding
+    description: Information about room bedding
     properties:
       count:
-        description: Amount of available beds of the specified bedding type
+        description: Number of available beds of the specified type
         format: int32
         type: integer
       type:
-        description: The type of bed for the room type
+        description: The type of bed
         enum:
           - NotDefined
           - Double
@@ -1034,9 +1073,10 @@ definitions:
       _links:
         additionalProperties:
           $ref: '#/definitions/LinkObject'
-        description: 'Navigation links to get the fast access to the previous, current and next page if existing.'
+        description: Collection of links to related resources
         type: object
       rooms:
+        description: List of rooms
         items:
           $ref: '#/definitions/EmbeddedRoomWithStatus'
         type: array
@@ -1044,12 +1084,16 @@ definitions:
   RoomMaintenance:
     properties:
       from:
+        description: Start date of the current maintenance work
         type: string
       reason:
+        description: A description about the reason for the ongoing maintenance work
         type: string
       to:
+        description: End date of the current maintenance work
         type: string
       value:
+        description: Maintenance Status
         enum:
           - NotSet
           - None
@@ -1062,27 +1106,27 @@ definitions:
     description: Represents current room status data.
     properties:
       condition:
-        description: Room Condition status.
+        description: Room Condition status
         enum:
           - CleanNotInspected
           - Clean
           - Dirty
         type: string
       frontdesk_occupancy:
-        description: FrontDesk occupancy status.
+        description: "The frontdesk occupancy is set by reservation checkin and checkout. It can differ from the\r\n            housekeeping occupancy"
         enum:
           - Occupied
           - Vacant
         type: string
       housekeeping_occupancy:
-        description: Housekeeping occupancy status.
+        description: "The housekeeping occupancy status is defined by the housekeeping staff. Usually it matches the\r\n            frontdesk occupancy, but sometimes the reservation is still inhouse, but it looks like there is no\r\n            guest in the room anymore. Then the statuses can differ."
         enum:
           - Occupied
           - Vacant
         type: string
       maintenance:
         $ref: '#/definitions/RoomMaintenance'
-        description: Provides information about current room maintenance status.
+        description: Information about current ongoing room maintenance
     type: object
   RoomType:
     description: Represent a room type for a property

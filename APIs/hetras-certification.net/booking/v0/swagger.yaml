@@ -2,9 +2,10 @@ swagger: '2.0'
 schemes:
   - https
 host: api.hetras-certification.net
+basePath: /
 info:
-  title: Booking API V0
-  version: booking_v0
+  title: hetras booking API v0
+  version: v0
   x-logo:
     url: 'https://hetras.zendesk.com/hc/logo'
   x-origin:
@@ -886,69 +887,6 @@ paths:
       summary: Load a specific reservation from a booking
       tags:
         - Reservation
-    patch:
-      consumes:
-        - application/json
-        - text/json
-      deprecated: false
-      description: "The hetras API is using <a href=\"https://tools.ietf.org/html/rfc6902\" onfocus=\"this.blur()\" target=\"_blank\">IETF JSON Patch RFC 6902</a>\r\n            to partially update an existing resource. Currently this call only allows to add and remove package elements to a\r\n            reservation.<br />\r\n            This call is currently only used by hetras internally and not publically available.<br /><br />\r\n            A request example:<br /><pre>\r\n            [\r\n              {\r\n                \"op\": \"replace\", \"path\": \"/addon_services\", \"value\": [\"BREAKFAST\", \"PARKING\"]\r\n              }\r\n            ]\r\n            </pre><br />\r\n            For more details on how the API responds to errors please check our documentation on \r\n            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>."
-      parameters:
-        - description: Application identifier
-          in: header
-          name: App-Id
-          required: true
-          type: string
-          x-data-threescale-name: app_ids
-        - description: Application key.
-          in: header
-          name: App-Key
-          required: true
-          type: string
-          x-data-threescale-name: app_keys
-        - description: The confirmation id for the booking the reservation was made.
-          in: path
-          name: confirmationId
-          required: true
-          type: string
-        - description: Specifies the reservation number for the reservation that has to be updated.
-          format: int32
-          in: path
-          name: reservationNumber
-          required: true
-          type: integer
-        - description: A set of JSON Patch operations
-          in: body
-          name: patchRequest
-          required: true
-          schema:
-            items:
-              $ref: '#/definitions/JsonPatchOperationRequest'
-            type: array
-      produces:
-        - application/json
-        - text/json
-      responses:
-        '200':
-          description: The update was successful. Reponse would contain a referer to the updated reservation.
-          schema:
-            $ref: '#/definitions/Object'
-        '400':
-          description: Bad request. Request parameters or request body erroneous.
-        '401':
-          description: 'You provided wrong credentials, or you reached your API limit.'
-        '403':
-          description: The application does not have access to the requested resource.
-        '404':
-          description: Not Found. The server has not found anything matching the Request-URI.
-        '422':
-          description: The request failed to validated.
-        '500':
-          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
-        '503':
-          description: The server is currently unavailable. Please try later.
-      summary: Partially updates a reservation
-      tags:
-        - Reservation
   '/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}/assign_room':
     post:
       consumes:
@@ -992,9 +930,6 @@ paths:
       responses:
         '200':
           description: The room assignment was successful. The Reponse would contain the room number assigned.
-          examples:
-            application/json:
-              room_number: '1229'
           schema:
             $ref: '#/definitions/AssignRoomResponse'
         '400':
@@ -1064,120 +999,6 @@ paths:
         '503':
           description: The server is currently unavailable. Please try later.
       summary: Cancel one reservation
-      tags:
-        - Reservation
-  '/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}/cards':
-    get:
-      consumes: []
-      deprecated: false
-      description: With this request you can load a list of cards for a specific reservation
-      parameters:
-        - description: Application identifier
-          in: header
-          name: App-Id
-          required: true
-          type: string
-          x-data-threescale-name: app_ids
-        - description: Application key.
-          in: header
-          name: App-Key
-          required: true
-          type: string
-          x-data-threescale-name: app_keys
-        - description: The confirmation id for the booking the reservation was made.
-          in: path
-          name: confirmationId
-          required: true
-          type: string
-        - description: Specifies the reservation number for the reservation to load.
-          format: int32
-          in: path
-          name: reservationNumber
-          required: true
-          type: integer
-      produces:
-        - application/json
-        - text/json
-      responses:
-        '200':
-          description: Returns cards of the reservation specified.
-          schema:
-            $ref: '#/definitions/GetCardsResponse'
-        '400':
-          description: Bad request. Request parameters syntactically erroneous.
-        '401':
-          description: 'You provided wrong credentials, or you reached your API limit.'
-        '403':
-          description: The application does not have access to the requested resource.
-        '404':
-          description: Not Found. The server has not found anything matching the Request-URI.
-        '500':
-          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
-        '503':
-          description: The server is currently unavailable. Please try later.
-      summary: Load cards registered for a reservation
-      tags:
-        - Reservation
-  '/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}/pre_checkin':
-    post:
-      consumes:
-        - application/json
-        - text/json
-      deprecated: false
-      description: "With this call you can set a reservation to the status \"Registered\" and optionally set a device id on the reservation.<br />\r\n            This call is currently only used by the hetras Mobile App and not publically available.<br />\r\n            For more details on how the API responds to errors please check our documentation on \r\n            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>."
-      parameters:
-        - description: Application identifier
-          in: header
-          name: App-Id
-          required: true
-          type: string
-          x-data-threescale-name: app_ids
-        - description: Application key.
-          in: header
-          name: App-Key
-          required: true
-          type: string
-          x-data-threescale-name: app_keys
-        - description: The confirmation id for the booking the reservation was made.
-          in: path
-          name: confirmationId
-          required: true
-          type: string
-        - description: Specifies the reservation number for the reservation that is supposed to be pre-checked in.
-          format: int32
-          in: path
-          name: reservationNumber
-          required: true
-          type: integer
-        - description: The pre-checkin payload.
-          in: body
-          name: requestBody
-          required: true
-          schema:
-            $ref: '#/definitions/PreCheckInRequest'
-      produces:
-        - application/json
-        - text/json
-      responses:
-        '200':
-          description: The pre-checkin was successful.
-          schema:
-            $ref: '#/definitions/Object'
-        '400':
-          description: Bad request. Request parameters or request body erroneous.
-        '401':
-          description: 'You provided wrong credentials, or you reached your API limit.'
-        '403':
-          description: The application does not have access to the requested resource.
-        '404':
-          description: Not Found. The server has not found anything matching the Request-URI.
-        '422':
-          description: The request failed to validate.
-        '500':
-          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
-        '503':
-          description: The server is currently unavailable. Please try later.
-      summary: Performs a pre-checkin operation for a reservation
       tags:
         - Reservation
   /api/booking/v0/rates:
@@ -2090,7 +1911,7 @@ definitions:
         description: Room type of the room. Contains only the basic properties of the room type
     type: object
   EmbeddedRoomType:
-    description: "Represents a short version of room type. To get the full version\r\n            please follow the self link from the links collection."
+    description: "Basic data for a room type. To get the full details please follow the self link\r\n            from the links collection"
     properties:
       _links:
         additionalProperties:
@@ -2098,13 +1919,13 @@ definitions:
         description: Collection of links to related resources
         type: object
       code:
-        description: Code of the room type.
+        description: Code of the room type
         type: string
       description:
-        description: Description of the room type.
+        description: Description of the room type
         type: string
       name:
-        description: Name of the room type.
+        description: Name of the room type
         type: string
     type: object
   GeneralPolicy:
@@ -2259,6 +2080,7 @@ definitions:
     description: Represents JSON Patch request
     properties:
       op:
+        description: The operation that should be performed on the object or attribute defined in the path
         enum:
           - Add
           - Remove
@@ -2268,9 +2090,11 @@ definitions:
           - Test
         type: string
       path:
+        description: The path to the object or attribute the operation should be performed on
         type: string
       value:
         $ref: '#/definitions/Object'
+        description: The new value of the object or attribute after the operation has been performed
     required:
       - op
       - path
@@ -2280,28 +2104,28 @@ definitions:
     description: A Link Object represents a hyperlink from the containing resource to a URI.
     properties:
       deprecation:
-        description: "<para>The \"deprecation\" property is OPTIONAL.</para>\r\n<para> </para>\r\n<para>Its presence indicates that the link is to be deprecated (i.e.\r\n            removed) at a future date.  Its value is a URL that SHOULD provide\r\n            further information about the deprecation.\r\n            A client SHOULD provide some notification (for example, by logging a\r\n            warning message) whenever it traverses over a link that has this\r\n            property.  The notification SHOULD include the deprecation property's\r\n            value so that a client maintainer can easily find information about\r\n            the deprecation.</para>"
+        description: "<para>The \"deprecation\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its presence indicates that the link is to be deprecated (i.e.\r\n            removed) at a future date.  Its value is a URL that SHOULD provide\r\n            further information about the deprecation.\r\n            A client SHOULD provide some notification (for example, by logging a\r\n            warning message) whenever it traverses over a link that has this\r\n            property.  The notification SHOULD include the deprecation property's\r\n            value so that a client maintainer can easily find information about\r\n            the deprecation.</para>"
         type: string
       href:
-        description: "<para>The \"href\" property is REQUIRED.</para>\r\n<para> </para>\r\n<para>Its value is either a URI [RFC3986] or a URI Template [RFC6570].\r\n            If the value is a URI Template then the Link Object SHOULD have a\r\n            \"templated\" attribute whose value is true.</para>"
+        description: "<para>The \"href\" property is REQUIRED.</para>\r\n<para>\_</para>\r\n<para>Its value is either a URI [RFC3986] or a URI Template [RFC6570].\r\n            If the value is a URI Template then the Link Object SHOULD have a\r\n            \"templated\" attribute whose value is true.</para>"
         type: string
       hreflang:
-        description: "<para>The \"hreflang\" property is OPTIONAL.</para>\r\n<para> </para>\r\n<para>Its value is a string and is intended for indicating the language of\r\n            the target resource (as defined by [RFC5988]).</para>"
+        description: "<para>The \"hreflang\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its value is a string and is intended for indicating the language of\r\n            the target resource (as defined by [RFC5988]).</para>"
         type: string
       name:
-        description: "<para>The \"name\" property is OPTIONAL.</para>\r\n<para> </para>\r\n<para>Its value MAY be used as a secondary key for selecting Link Objects\r\n            which share the same relation type.</para>"
+        description: "<para>The \"name\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its value MAY be used as a secondary key for selecting Link Objects\r\n            which share the same relation type.</para>"
         type: string
       profile:
-        description: "<para>The \"profile\" property is OPTIONAL.</para>\r\n<para> </para>\r\n<para>Its value is a string which is a URI that hints about the profile.</para>"
+        description: "<para>The \"profile\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its value is a string which is a URI that hints about the profile.</para>"
         type: string
       templated:
-        description: "<para>The \"templated\" property is OPTIONAL.</para>\r\n<para> </para>\r\n<para>Its value is boolean and SHOULD be true when the Link Object's \"href\"\r\n            property is a URI Template.\r\n            Its value SHOULD be considered false if it is undefined or any other\r\n            value than true.</para>"
+        description: "<para>The \"templated\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its value is boolean and SHOULD be true when the Link Object's \"href\"\r\n            property is a URI Template.\r\n            Its value SHOULD be considered false if it is undefined or any other\r\n            value than true.</para>"
         type: boolean
       title:
-        description: "<para>The \"title\" property is OPTIONAL.</para>\r\n<para> </para>\r\n<para>Its value is a string and is intended for labelling the link with a\r\n            human-readable identifier (as defined by [RFC5988]).</para>"
+        description: "<para>The \"title\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its value is a string and is intended for labelling the link with a\r\n            human-readable identifier (as defined by [RFC5988]).</para>"
         type: string
       type:
-        description: "<para>The \"type\" property is OPTIONAL.</para>\r\n<para> </para>\r\n<para>Its value is a string used as a hint to indicate the media type\r\n            expected when dereferencing the target resource.</para>"
+        description: "<para>The \"type\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its value is a string used as a hint to indicate the media type\r\n            expected when dereferencing the target resource.</para>"
         type: string
     required:
       - href

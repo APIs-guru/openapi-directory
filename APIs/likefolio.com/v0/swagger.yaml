@@ -17,6 +17,7 @@ info:
 tags:
   - name: brands
   - name: companies
+  - name: companydivisions
   - name: sessions
   - name: swagger_doc
   - name: tags
@@ -630,6 +631,53 @@ paths:
       summary: Returns the list of Twitter IDs that have posted more mentions for the company.
       tags:
         - companies
+  /v0/companyDivisions/show.json:
+    get:
+      operationId: GET--version-companyDivisions-show---format-
+      parameters:
+        - description: 'Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.'
+          in: query
+          name: apiKey
+          required: true
+          type: string
+        - in: query
+          name: id
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+      summary: Returns division basic information
+      tags:
+        - companydivisions
+  /v0/companyDivisions/statistics.json:
+    get:
+      operationId: GET--version-companyDivisions-statistics---format-
+      parameters:
+        - description: 'Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.'
+          in: query
+          name: apiKey
+          required: true
+          type: string
+        - in: query
+          name: id
+          required: true
+          type: integer
+        - description: 'Number of days/hours to get daya from. Period is calculated backwards from now. For example, 1day means today. 7days means past 7 days and so on. The YTD value is the period from the beginning of the current year to now, different from 1year, which means the past 365 days. Posible values: ["1hour", "6hours", "12hours", "24hours", "72hours", "120hours", "168hours", "240hours", "336hours", "1day", "3days", "5days", "7days", "10days", "14days", "1month", "3months", "6months", "9months", "YTD", "1year", "2years", "3years"]'
+          in: query
+          name: period
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+      summary: Returns statistics about the division
+      tags:
+        - companydivisions
   /v0/sessions/create.json:
     post:
       operationId: POST--version-sessions-create---format-

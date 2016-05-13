@@ -676,25 +676,24 @@ paths:
           name: enterpriseId
           required: true
           type: string
-        - description: 'Whether to search amongst all products or only amongst approved ones. Only "true" is supported, and should be specified.'
+        - description: 'Specifies whether to search among all products (false) or among only products that have been approved (true). Only "true" is supported, and should be specified.'
           in: query
           name: approved
           type: boolean
-        - description: 'The BCP47 tag for the user''s preferred language (e.g. "en-US", "de"). Results are returned in the language best matching it.'
+        - description: 'The BCP47 tag for the user''s preferred language (e.g. "en-US", "de"). Results are returned in the language best matching the preferred language.'
           in: query
           name: language
           type: string
-        - in: query
+        - description: 'Specifies the maximum number of products that can be returned per request. If not specified, uses a default value of 100, which is also the maximum retrievable within a single response.'
+          in: query
           name: maxResults
           type: integer
-        - description: 'The search query as typed in the Google Play Store search box. If omitted, all approved apps will be returned.'
+        - description: 'The search query as typed in the Google Play Store search box. If omitted, all approved apps will be returned (using the pagination parameters).'
           in: query
           name: query
           type: string
-        - in: query
-          name: startIndex
-          type: integer
-        - in: query
+        - description: "A pagination token is contained in a request\x92s response when there are more products. The token can be used in a subsequent request to obtain more products, and so forth. This parameter cannot be used in the initial request."
+          in: query
           name: token
           type: string
       responses:
@@ -799,7 +798,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Approves the specified product (and the relevant app permissions, if any).'
+      description: |-
+        Approves the specified product and the relevant app permissions, if any. The maximum number of products that you can approve per enterprise customer is 1,000.
+
+        To learn how to use Google Play for Work to design and create a store layout to display approved products to your users, see Store Layout Design.
       operationId: androidenterprise.products.approve
       parameters:
         - description: The ID of the enterprise.
@@ -2262,7 +2264,7 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#device".'
         type: string
       managementType:
-        description: The mechanism by which this device is managed by the EMM. "managedDevice" means that the EMM's app is a device owner. "managedProfile" means that the EMM's app is the profile owner (and there is a separate personal profile which is not managed). "containerApp" means that the EMM's app is managing the Android for Work container app on the device.
+        description: The mechanism by which this device is managed by the EMM. "managedDevice" means that the EMM's app is a device owner. "managedProfile" means that the EMM's app is the profile owner (and there is a separate personal profile which is not managed). "containerApp" means that the EMM's app is managing the Android for Work container app on the device. ?unmanagedProfile? means that the EMM?s app is managing a managed user on an unmanaged device
         type: string
     type: object
   DeviceState:

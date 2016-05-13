@@ -287,15 +287,11 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - autoscalers
-  '/{project}/zones':
+  /zones:
     get:
       description: ''
       operationId: autoscaler.zones.list
       parameters:
-        - in: path
-          name: project
-          required: true
-          type: string
         - in: query
           name: filter
           type: string
@@ -307,6 +303,9 @@ paths:
           type: integer
         - in: query
           name: pageToken
+          type: string
+        - in: query
+          name: project
           type: string
       responses:
         '200':
@@ -489,7 +488,7 @@ definitions:
         type: integer
       cpuUtilization:
         $ref: '#/definitions/AutoscalingPolicyCpuUtilization'
-        description: Exactly one utilization policy should be provided. Configuration parameters of CPU based autoscaling policy.
+        description: Configuration parameters of CPU based autoscaling policy.
       customMetricUtilizations:
         description: Configuration parameters of autoscaling based on custom metric.
         items:
@@ -556,6 +555,8 @@ definitions:
         type: string
       creationTimestamp:
         type: string
+      description:
+        type: string
       endTime:
         type: string
       error:
@@ -584,7 +585,7 @@ definitions:
         type: string
       kind:
         default: 'autoscaler#operation'
-        description: '[Output Only] Type of the resource. Always compute#Operation for Operation resources.'
+        description: '[Output Only] Type of the resource. Always compute#operation for Operation resources.'
         type: string
       name:
         type: string
@@ -661,27 +662,13 @@ definitions:
         type: string
       kind:
         default: 'autoscaler#zone'
-        description: '[Output Only] Type of the resource. Always kind#zone for zones.'
+        description: '[Output Only] Type of the resource. Always compute#zone for zones.'
         type: string
-      maintenanceWindows:
-        items:
-          properties:
-            beginTime:
-              type: string
-            description:
-              type: string
-            endTime:
-              type: string
-            name:
-              type: string
-          type: object
-        type: array
       name:
         type: string
       region:
         type: string
       selfLink:
-        description: '[Output Only] Server defined URL for the resource.'
         type: string
       status:
         type: string
@@ -701,6 +688,6 @@ definitions:
       nextPageToken:
         type: string
       selfLink:
-        description: Server defined URL for this resource (output only).
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object

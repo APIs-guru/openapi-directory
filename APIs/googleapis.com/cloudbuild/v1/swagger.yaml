@@ -398,6 +398,11 @@ definitions:
           - TIMEOUT
           - CANCELLED
         type: string
+      statusDetail:
+        description: |-
+          Customer-readable message about the current status.
+          @OutputOnly
+        type: string
       steps:
         description: Describes the operations to be performed on the workspace.
         items:

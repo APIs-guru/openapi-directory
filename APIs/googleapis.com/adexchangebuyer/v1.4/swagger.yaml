@@ -1695,8 +1695,11 @@ definitions:
         description: 'Tracks which parties (if any) have paused a deal. (readonly, except via PauseResumeOrderDeals action)'
     type: object
   DealServingMetadataDealPauseStatus:
-    description: Tracks which parties (if any) have paused a deal. The deal is considered paused if has_buyer_paused || has_seller_paused.
+    description: Tracks which parties (if any) have paused a deal. The deal is considered paused if has_buyer_paused || has_seller_paused. Each of the has_buyer_paused or the has_seller_paused bits can be set independently.
     properties:
+      firstPausedBy:
+        description: 'If the deal is paused, records which party paused the deal first.'
+        type: string
       hasBuyerPaused:
         type: boolean
       hasSellerPaused:

@@ -154,6 +154,10 @@ paths:
           in: query
           name: pageSize
           type: integer
+        - description: The project id to list beacons under. If not present then the project credential that made the request is used as the project. Optional.
+          in: query
+          name: projectId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -197,6 +201,10 @@ paths:
       description: 'Registers a previously unregistered beacon given its `advertisedId`. These IDs are unique within the system. An ID can be registered only once. Authenticate using an [OAuth access token](https://developers.google.com/identity/protocols/OAuth2) from a signed-in user with **Is owner** or **Can edit** permissions in the Google Developers Console project.'
       operationId: proximitybeacon.beacons.register
       parameters:
+        - description: The project id of the project the beacon will be registered to. If the project id is not specified then the project making the request is used. Optional.
+          in: query
+          name: projectId
+          type: string
         - in: body
           name: body
           schema:
@@ -243,6 +251,11 @@ paths:
     get:
       description: 'Lists all attachment namespaces owned by your Google Developers Console project. Attachment data associated with a beacon must include a namespaced type, and the namespace must be owned by your project. Authenticate using an [OAuth access token](https://developers.google.com/identity/protocols/OAuth2) from a signed-in user with **viewer**, **Is owner** or **Can edit** permissions in the Google Developers Console project.'
       operationId: proximitybeacon.namespaces.list
+      parameters:
+        - description: The project id to list namespaces under. Optional.
+          in: query
+          name: projectId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -278,6 +291,10 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: 'The project id of the attachment to delete. If not provided, the project that is making the request is used. Optional.'
+          in: query
+          name: projectId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -313,6 +330,10 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: The project id of the beacon to request. If the project id is not specified then the project making the request is used. The project id must match the project that owns the beacon. Optional.
+          in: query
+          name: projectId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -347,6 +368,10 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: The project id of the beacon to update. If the project id is not specified then the project making the request is used. The project id must match the project that owns the beacon. Optional.
+          in: query
+          name: projectId
+          type: string
         - in: body
           name: body
           schema:
@@ -375,6 +400,10 @@ paths:
         - description: Specifies the namespace and type of attachment to include in response in namespace/type format. Accepts `*/*` to specify "all types in all namespaces".
           in: query
           name: namespacedType
+          type: string
+        - description: 'The project id to list beacon attachments under. This field can be used when "*" is specified to mean all attachment namespaces. Projects may have multiple attachments with multiple namespaces. If "*" is specified and the projectId string is empty, then the project making the request is used. Optional.'
+          in: query
+          name: projectId
           type: string
       responses:
         '200':
@@ -413,6 +442,10 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: The project id of the project the attachment will belong to. If the project id is not specified then the project making the request is used. Optional.
+          in: query
+          name: projectId
+          type: string
         - in: body
           name: body
           schema:
@@ -456,6 +489,10 @@ paths:
           in: query
           name: namespacedType
           type: string
+        - description: 'The project id to delete beacon attachments under. This field can be used when "*" is specified to mean all attachment namespaces. Projects may have multiple attachments with multiple namespaces. If "*" is specified and the projectId string is empty, then the project making the request is used. Optional.'
+          in: query
+          name: projectId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -492,6 +529,10 @@ paths:
             - LOW_BATTERY
           in: query
           name: alertFilter
+          type: string
+        - description: 'Requests only diagnostic records for the given project id. If not set, then the project making the request will be used for looking up diagnostic records. Optional.'
+          in: query
+          name: projectId
           type: string
       responses:
         '200':
@@ -542,6 +583,10 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: The project id of the beacon to activate. If the project id is not specified then the project making the request is used. The project id must match the project that owns the beacon. Optional.
+          in: query
+          name: projectId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -577,6 +622,10 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: The project id of the beacon to deactivate. If the project id is not specified then the project making the request is used. The project id must match the project that owns the beacon. Optional.
+          in: query
+          name: projectId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -612,6 +661,10 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: The project id of the beacon to decommission. If the project id is not specified then the project making the request is used. The project id must match the project that owns the beacon. Optional.
+          in: query
+          name: projectId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -622,6 +675,49 @@ paths:
             - 'https://www.googleapis.com/auth/userlocation.beacon.registry'
       tags:
         - beacons
+  '/v1beta1/{namespaceName}':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    put:
+      description: Updates the information about the specified namespace. Only the namespace visibility can be updated.
+      operationId: proximitybeacon.namespaces.update
+      parameters:
+        - description: 'Resource name of this namespace. Namespaces names have the format: namespaces/namespace.'
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: The project id of the namespace to update. If the project id is not specified then the project making the request is used. The project id must match the project that owns the beacon. Optional.
+          in: query
+          name: projectId
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Namespace'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Namespace'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userlocation.beacon.registry'
+      tags:
+        - namespaces
 definitions:
   AdvertisedId:
     description: Defines a unique identifier of a beacon as broadcast by the device.

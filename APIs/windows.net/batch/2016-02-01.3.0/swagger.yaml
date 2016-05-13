@@ -53,7 +53,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -61,7 +61,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -97,7 +97,7 @@ paths:
           schema:
             $ref: '#/definitions/ApplicationListResult'
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -124,7 +124,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -132,7 +132,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -168,7 +168,7 @@ paths:
           schema:
             $ref: '#/definitions/ApplicationSummary'
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -211,7 +211,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -219,7 +219,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -255,7 +255,7 @@ paths:
           schema:
             $ref: '#/definitions/CertificateListResult'
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -267,7 +267,7 @@ paths:
       description: Adds a certificate to the specified account.
       operationId: Certificate_Add
       parameters:
-        - description: Specifies the certificate to be added.
+        - description: The certificate to be added.
           in: body
           name: Certificate
           required: true
@@ -282,7 +282,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -290,7 +290,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -327,7 +327,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -357,7 +357,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -365,7 +365,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -399,7 +399,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -435,7 +435,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -443,7 +443,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -479,7 +479,7 @@ paths:
           schema:
             $ref: '#/definitions/Certificate'
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -509,7 +509,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -517,7 +517,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -554,7 +554,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -604,7 +604,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -612,7 +612,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -648,7 +648,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudJobListResult'
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -660,7 +660,7 @@ paths:
       description: Adds a job to the specified account.
       operationId: Job_Add
       parameters:
-        - description: Specifies the job to be added.
+        - description: The job to be added.
           in: body
           name: Job
           required: true
@@ -675,7 +675,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -683,7 +683,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -720,7 +720,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -745,7 +745,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -753,7 +753,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -810,7 +810,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -848,7 +848,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -856,7 +856,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -892,7 +892,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudJob'
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -922,7 +922,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -930,7 +930,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -997,7 +997,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -1027,7 +1027,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -1035,7 +1035,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -1102,7 +1102,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -1133,7 +1133,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -1141,7 +1141,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -1201,7 +1201,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -1209,7 +1209,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -1276,7 +1276,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -1301,7 +1301,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -1309,7 +1309,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -1376,7 +1376,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -1424,7 +1424,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -1432,7 +1432,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -1468,7 +1468,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudJobListPreparationAndReleaseTaskStatusResult'
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -1525,7 +1525,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -1533,7 +1533,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -1569,7 +1569,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudTaskListResult'
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -1586,7 +1586,7 @@ paths:
           name: jobId
           required: true
           type: string
-        - description: Specifies the task to be added.
+        - description: The task to be added.
           in: body
           name: task
           required: true
@@ -1601,7 +1601,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -1609,7 +1609,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -1646,7 +1646,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -1676,7 +1676,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -1684,7 +1684,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -1741,7 +1741,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -1784,7 +1784,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -1792,7 +1792,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -1861,7 +1861,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudTask'
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -1896,7 +1896,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -1904,7 +1904,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -1971,7 +1971,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -2022,7 +2022,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -2030,7 +2030,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -2066,7 +2066,7 @@ paths:
           schema:
             $ref: '#/definitions/NodeFileListResult'
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -2108,7 +2108,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -2116,7 +2116,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -2143,7 +2143,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -2177,7 +2177,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -2185,7 +2185,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -2200,7 +2200,7 @@ paths:
           type: string
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies the byte range to be retrieved. The default is to retrieve the entire file.  The format is startRange-endRange.
+        - description: The byte range to be retrieved. The default is to retrieve the entire file. The format is startRange-endRange.
           in: header
           name: ocp-range
           required: false
@@ -2264,7 +2264,7 @@ paths:
           schema:
             type: file
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -2298,7 +2298,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -2306,7 +2306,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -2376,7 +2376,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -2413,7 +2413,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -2421,7 +2421,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -2457,7 +2457,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudTaskListSubtasksResult'
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -2487,7 +2487,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -2495,7 +2495,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -2562,7 +2562,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -2593,7 +2593,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -2601,7 +2601,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -2668,7 +2668,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -2718,7 +2718,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -2726,7 +2726,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -2762,7 +2762,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudJobScheduleListResult'
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -2783,13 +2783,13 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies the job schedule to be added.
+        - description: The job schedule to be added.
           in: body
           name: CloudJobSchedule
           required: true
           schema:
             $ref: '#/definitions/JobScheduleAddParameter'
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -2797,7 +2797,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -2834,7 +2834,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -2859,7 +2859,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -2867,7 +2867,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -2924,7 +2924,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -2962,7 +2962,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -2970,7 +2970,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -3036,7 +3036,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudJobSchedule'
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -3060,7 +3060,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -3068,7 +3068,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -3134,7 +3134,7 @@ paths:
         '404':
           description: JobSchedules not found
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -3164,7 +3164,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -3172,7 +3172,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -3239,7 +3239,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -3269,7 +3269,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -3277,7 +3277,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -3344,7 +3344,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -3369,7 +3369,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -3377,7 +3377,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -3444,7 +3444,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -3469,7 +3469,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -3477,7 +3477,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -3544,7 +3544,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -3599,7 +3599,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -3607,7 +3607,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -3643,7 +3643,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudJobListResult'
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -3670,7 +3670,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -3678,7 +3678,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -3745,7 +3745,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -3765,7 +3765,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -3773,7 +3773,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -3809,7 +3809,7 @@ paths:
           schema:
             $ref: '#/definitions/JobStatistics'
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -3829,7 +3829,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -3837,7 +3837,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -3873,7 +3873,7 @@ paths:
           schema:
             $ref: '#/definitions/PoolStatistics'
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -3881,7 +3881,7 @@ paths:
       x-ms-request-id: request-id
   /nodeagentskus:
     get:
-      description: Lists all the node agent SKUs supported by Azure Batch service.
+      description: Lists all node agent SKUs supported by the Azure Batch service.
       operationId: Account_ListNodeAgentSkus
       parameters:
         - description: An OData $filter clause.
@@ -3909,7 +3909,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -3917,7 +3917,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -3953,7 +3953,7 @@ paths:
           schema:
             $ref: '#/definitions/AccountListNodeAgentSkusResult'
         default:
-          description: Error from the Batch service..
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -4005,7 +4005,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -4013,7 +4013,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -4049,7 +4049,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudPoolListResult'
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -4061,7 +4061,7 @@ paths:
       description: Adds a pool to the specified account.
       operationId: Pool_Add
       parameters:
-        - description: Specifies the pool to be added.
+        - description: The pool to be added.
           in: body
           name: Pool
           required: true
@@ -4076,7 +4076,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -4084,7 +4084,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -4121,7 +4121,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -4146,7 +4146,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -4154,7 +4154,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -4211,7 +4211,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -4249,7 +4249,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -4257,7 +4257,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -4323,7 +4323,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudPool'
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -4347,7 +4347,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -4355,7 +4355,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -4421,7 +4421,7 @@ paths:
         '404':
           description: Pool not found
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -4451,7 +4451,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -4459,7 +4459,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -4526,7 +4526,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -4551,7 +4551,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -4559,7 +4559,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -4596,7 +4596,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -4627,7 +4627,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -4635,7 +4635,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -4702,7 +4702,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -4733,7 +4733,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -4741,7 +4741,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -4780,7 +4780,7 @@ paths:
           schema:
             $ref: '#/definitions/AutoScaleRun'
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -4828,7 +4828,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -4836,7 +4836,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -4872,7 +4872,7 @@ paths:
           schema:
             $ref: '#/definitions/ComputeNodeListResult'
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -4911,7 +4911,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -4919,7 +4919,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -4955,7 +4955,7 @@ paths:
           schema:
             $ref: '#/definitions/ComputeNode'
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -4991,7 +4991,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -4999,7 +4999,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -5036,7 +5036,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -5066,7 +5066,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -5074,7 +5074,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -5111,7 +5111,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -5162,7 +5162,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -5170,7 +5170,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -5206,7 +5206,7 @@ paths:
           schema:
             $ref: '#/definitions/NodeFileListResult'
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -5248,7 +5248,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -5256,7 +5256,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -5283,7 +5283,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -5317,7 +5317,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -5325,7 +5325,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -5340,7 +5340,7 @@ paths:
           type: string
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies the byte range to be retrieved. The default is to retrieve the entire file.  The format is startRange-endRange.
+        - description: The byte range to be retrieved. The default is to retrieve the entire file. The format is startRange-endRange.
           in: header
           name: ocp-range
           required: false
@@ -5404,7 +5404,7 @@ paths:
           schema:
             type: file
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -5438,7 +5438,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -5446,7 +5446,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -5516,7 +5516,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -5546,7 +5546,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -5554,7 +5554,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -5590,7 +5590,7 @@ paths:
           schema:
             type: file
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -5626,7 +5626,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -5634,7 +5634,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -5671,7 +5671,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -5707,7 +5707,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -5715,7 +5715,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -5752,7 +5752,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -5782,7 +5782,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -5790,7 +5790,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -5826,7 +5826,7 @@ paths:
           schema:
             $ref: '#/definitions/ComputeNodeGetRemoteLoginSettingsResult'
         default:
-          description: Error from the Batch service..
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -5847,7 +5847,7 @@ paths:
           name: nodeId
           required: true
           type: string
-        - description: Specifies the user account to be created.
+        - description: The user account to be created.
           in: body
           name: User
           required: true
@@ -5862,7 +5862,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -5870,7 +5870,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -5907,7 +5907,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -5942,7 +5942,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -5950,7 +5950,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -5977,7 +5977,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -6017,7 +6017,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -6025,7 +6025,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -6062,7 +6062,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -6093,7 +6093,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -6101,7 +6101,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -6168,7 +6168,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -6199,7 +6199,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -6207,7 +6207,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -6274,7 +6274,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -6299,7 +6299,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -6307,7 +6307,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -6374,7 +6374,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -6405,7 +6405,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -6413,7 +6413,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -6450,7 +6450,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -6481,7 +6481,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -6489,7 +6489,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -6556,7 +6556,7 @@ paths:
               description: The value that uniquely identifies a request.
               type: string
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -6610,7 +6610,7 @@ paths:
           type: integer
           x-ms-parameter-grouping:
             postfix: Options
-        - description: 'Caller generated request identity, in the form of a GUID with no decoration such as curly braces e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
+        - description: 'The caller-generated request identity, in the form of a GUID with no decoration such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.'
           in: header
           name: client-request-id
           required: false
@@ -6618,7 +6618,7 @@ paths:
           x-ms-client-request-id: true
           x-ms-parameter-grouping:
             postfix: Options
-        - description: Specifies if the server should return the client-request-id identifier in the response.
+        - description: Whether the server should return the client-request-id identifier in the response.
           in: header
           name: return-client-request-id
           required: false
@@ -6654,7 +6654,7 @@ paths:
           schema:
             $ref: '#/definitions/PoolListPoolUsageMetricsResult'
         default:
-          description: Error from the Batch service.
+          description: The error from the Batch service.
           schema:
             $ref: '#/definitions/BatchError'
       tags:
@@ -6678,7 +6678,7 @@ definitions:
     description: A locality hint that can be used by the Batch service to select a compute node on which to start a task.
     properties:
       affinityId:
-        description: An opaque string representing the location of a compute node or a task that has run previously.  You can pass the AffinityId of a compute node or task to indicate that this task needs to be placed close to the node or task.
+        description: An opaque string representing the location of a compute node or a task that has run previously. You can pass the AffinityId of a compute node or task to indicate that this task needs to be placed close to the node or task.
         type: string
   ApplicationListResult:
     description: Response to a ApplicationOperations.List request.
@@ -6695,10 +6695,10 @@ definitions:
     description: A reference to an application package to be installed on compute nodes in a pool.
     properties:
       applicationId:
-        description: The application package id.
+        description: The id of the application to install.
         type: string
       version:
-        description: 'The application package version. If not specified, the default is used.'
+        description: 'The version of the application to install. If omitted, the default version is installed.'
         type: string
     required:
       - applicationId
@@ -6750,7 +6750,7 @@ definitions:
         $ref: '#/definitions/AutoScaleRunError'
         description: 'Details of the error encountered evaluating the autoscale formula on the pool, if the evaluation was unsuccessful.'
       results:
-        description: 'The final values of all variables used in the evaluation of the autoscale formula.  Each variable value is returned in the form $variable=value, and variables are separated by semicolons.'
+        description: 'The final values of all variables used in the evaluation of the autoscale formula. Each variable value is returned in the form $variable=value, and variables are separated by semicolons.'
         type: string
       timestamp:
         description: The time at which the autoscale formula was last evaluated.
@@ -6762,7 +6762,7 @@ definitions:
     description: An error that occurred when executing or evaluating a pool autoscale formula.
     properties:
       code:
-        description: An identifier for the autoscale error.  Codes are invariant and are intended to be consumed programmatically.
+        description: An identifier for the autoscale error. Codes are invariant and are intended to be consumed programmatically.
         type: string
       message:
         description: 'A message describing the autoscale error, intended to be suitable for display in a user interface.'
@@ -6800,7 +6800,7 @@ definitions:
     properties:
       deleteCertificateError:
         $ref: '#/definitions/DeleteCertificateError'
-        description: The error that occurred on the last attempt to delete this certificate.  This property is set only if the certificate is in the deletefailed state.
+        description: The error that occurred on the last attempt to delete this certificate. This property is set only if the certificate is in the deletefailed state.
       previousState:
         description: The previous state of the certificate. This property is not set if the certificate is in its initial Active state.
         enum:
@@ -6812,7 +6812,7 @@ definitions:
           modelAsString: false
           name: CertificateState
       previousStateTransitionTime:
-        description: The time at which the certificate entered its previous state.  This property is not set if the certificate is in its initial Active state.
+        description: The time at which the certificate entered its previous state. This property is not set if the certificate is in its initial Active state.
         format: date-time
         type: string
       publicData:
@@ -6833,7 +6833,7 @@ definitions:
         format: date-time
         type: string
       thumbprint:
-        description: Get or The X.509 thumbprint of the certificate. This is a sequence of up to 40 hex digits (it may include spaces but these are removed).
+        description: The X.509 thumbprint of the certificate. This is a sequence of up to 40 hex digits (it may include spaces but these are removed).
         type: string
       thumbprintAlgorithm:
         description: The algorithm used to derive the thumbprint. This must be sha1.
@@ -6855,13 +6855,13 @@ definitions:
           modelAsString: false
           name: CertificateFormat
       data:
-        description: The base64-encoded contents of the certificate. The maximum size is 10KB. This property is not populated by the Get Certificate operation.
+        description: The base64-encoded contents of the certificate. The maximum size is 10KB.
         type: string
       password:
-        description: The password to access the certificate's private key. This property is not populated by the Get Certificate operation.
+        description: The password to access the certificate's private key.
         type: string
       thumbprint:
-        description: Get or The X.509 thumbprint of the certificate. This is a sequence of up to 40 hex digits (it may include spaces but these are removed).
+        description: The X.509 thumbprint of the certificate. This is a sequence of up to 40 hex digits (it may include spaces but these are removed).
         type: string
       thumbprintAlgorithm:
         description: The algorithm used to derive the thumbprint. This must be sha1.
@@ -6901,7 +6901,7 @@ definitions:
         description: The thumbprint of the certificate.
         type: string
       thumbprintAlgorithm:
-        description: The algorithm with which the thumbprint is associated.  This must be sha1.
+        description: The algorithm with which the thumbprint is associated. This must be sha1.
         type: string
       visibility:
         description: 'Which user accounts on the compute node should have access to the private data of the certificate. This may be any subset of the values ''starttask'', ''task'' and ''remoteuser'', separated by commas. The default is all accounts, corresponding to the string ''starttask,task,remoteuser''.'
@@ -6923,7 +6923,7 @@ definitions:
     description: An Azure Batch job.
     properties:
       commonEnvironmentSettings:
-        description: 'The list of common environment variable settings.  These environment variables are set for all tasks in the job (including the Job Manager, Job Preparation and Job Release tasks).'
+        description: 'The list of common environment variable settings. These environment variables are set for all tasks in the job (including the Job Manager, Job Preparation and Job Release tasks).'
         items:
           $ref: '#/definitions/EnvironmentSetting'
         type: array
@@ -7238,7 +7238,7 @@ definitions:
         $ref: '#/definitions/VirtualMachineConfiguration'
         description: The virtual machine configuration for the pool. This property and CloudServiceConfiguration are mutually exclusive and one of the properties must be specified.
       vmSize:
-        description: The size of virtual machines in the pool.  All virtual machines in a pool are the same size.
+        description: The size of virtual machines in the pool. All virtual machines in a pool are the same size.
         type: string
   CloudPoolListResult:
     description: Response to a CloudPoolOperations.List request.
@@ -7469,7 +7469,7 @@ definitions:
     description: An error encountered by a compute node.
     properties:
       code:
-        description: An identifier for the compute node error.  Codes are invariant and are intended to be consumed programmatically.
+        description: An identifier for the compute node error. Codes are invariant and are intended to be consumed programmatically.
         type: string
       errorDetails:
         description: The list of additional error details related to the compute node error.
@@ -7549,7 +7549,7 @@ definitions:
     description: An error encountered by the Batch service when deleting a certificate.
     properties:
       code:
-        description: An identifier for the certificate deletion error.  Codes are invariant and are intended to be consumed programmatically.
+        description: An identifier for the certificate deletion error. Codes are invariant and are intended to be consumed programmatically.
         type: string
       message:
         description: 'A message describing the certificate deletion error, intended to be suitable for display in a user interface.'
@@ -7624,7 +7624,7 @@ definitions:
     description: An Azure Batch job to add.
     properties:
       commonEnvironmentSettings:
-        description: 'The list of common environment variable settings.  These environment variables are set for all tasks in the job (including the Job Manager, Job Preparation and Job Release tasks).'
+        description: 'The list of common environment variable settings. These environment variables are set for all tasks in the job (including the Job Manager, Job Preparation and Job Release tasks).'
         items:
           $ref: '#/definitions/EnvironmentSetting'
         type: array
@@ -7882,7 +7882,7 @@ definitions:
           $ref: '#/definitions/ResourceFile'
         type: array
       retentionTime:
-        description: 'The minimum time to retain the working directory for the Job Release task on the compute node.  After this time, the Batch service may delete the working directory and all its contents. The default is infinite.'
+        description: 'The minimum time to retain the working directory for the Job Release task on the compute node. After this time, the Batch service may delete the working directory and all its contents. The default is infinite.'
         format: duration
         type: string
       runElevated:
@@ -7992,7 +7992,7 @@ definitions:
         format: int64
         type: integer
       numSucceededTasks:
-        description: The total number of tasks successfully completed during the given time range in jobs created under the schedule.  A task completes successfully if it returns exit code 0.
+        description: The total number of tasks successfully completed during the given time range in jobs created under the schedule. A task completes successfully if it returns exit code 0.
         format: int64
         type: integer
       numTaskRetries:
@@ -8000,7 +8000,7 @@ definitions:
         format: int64
         type: integer
       readIOGiB:
-        description: The total gibibytes of I/O read from disk by all tasks in all jobs created under the schedule.
+        description: The total gibibytes read from disk by all tasks in all jobs created under the schedule.
         format: double
         type: number
       readIOps:
@@ -8027,7 +8027,7 @@ definitions:
         format: duration
         type: string
       writeIOGiB:
-        description: The total gibibytes of I/O written to disk by all tasks in all jobs created under the schedule.
+        description: The total gibibytes written to disk by all tasks in all jobs created under the schedule.
         format: double
         type: number
       writeIOps:
@@ -8080,7 +8080,7 @@ definitions:
           modelAsString: false
           name: SchedulingErrorCategory
       code:
-        description: An identifier for the job scheduling error.  Codes are invariant and are intended to be consumed programmatically.
+        description: An identifier for the job scheduling error. Codes are invariant and are intended to be consumed programmatically.
         type: string
       details:
         description: A list of additional error details related to the scheduling error.
@@ -8096,7 +8096,7 @@ definitions:
     description: Specifies details of the jobs to be created on a schedule.
     properties:
       commonEnvironmentSettings:
-        description: 'A list of common environment variable settings.  These environment variables are set for all tasks in jobs created under this schedule (including the Job Manager, Job Preparation and Job Release tasks).'
+        description: 'A list of common environment variable settings. These environment variables are set for all tasks in jobs created under this schedule (including the Job Manager, Job Preparation and Job Release tasks).'
         items:
           $ref: '#/definitions/EnvironmentSetting'
         type: array
@@ -8154,7 +8154,7 @@ definitions:
         format: int64
         type: integer
       readIOGiB:
-        description: The total gibibytes of I/O read from disk by all tasks in the job.
+        description: The total gibibytes read from disk by all tasks in the job.
         format: double
         type: number
       readIOps:
@@ -8181,7 +8181,7 @@ definitions:
         format: duration
         type: string
       writeIOGiB:
-        description: The total gibibytes of I/O written to disk by all tasks in the job.
+        description: The total gibibytes written to disk by all tasks in the job.
         format: double
         type: number
       writeIOps:
@@ -8452,7 +8452,7 @@ definitions:
         $ref: '#/definitions/VirtualMachineConfiguration'
         description: The virtual machine configuration for the pool. This property and CloudServiceConfiguration are mutually exclusive and one of the properties must be specified.
       vmSize:
-        description: The size of virtual machines in the pool.  All virtual machines in a pool are the same size.
+        description: The size of virtual machines in the pool. All virtual machines in a pool are the same size.
         type: string
     required:
       - id
@@ -8685,7 +8685,7 @@ definitions:
         format: double
         type: number
       vmSize:
-        description: The size of virtual machines in the pool.  All VMs in a pool are the same size.
+        description: The size of virtual machines in the pool. All VMs in a pool are the same size.
         type: string
     required:
       - poolId
@@ -8708,7 +8708,7 @@ definitions:
     description: An error that occurred when resizing a pool.
     properties:
       code:
-        description: An identifier for the pool resize error.  Codes are invariant and are intended to be consumed programmatically.
+        description: An identifier for the pool resize error. Codes are invariant and are intended to be consumed programmatically.
         type: string
       message:
         description: 'A message describing the pool resize error, intended to be suitable for display in a user interface.'
@@ -8803,7 +8803,7 @@ definitions:
     description: The schedule according to which jobs will be created
     properties:
       doNotRunAfter:
-        description: A time after which no job will be created under this job schedule.  The schedule will move to the completed state as soon as this deadline is past and there is no active job under this job schedule.
+        description: A time after which no job will be created under this job schedule. The schedule will move to the completed state as soon as this deadline is past and there is no active job under this job schedule.
         format: date-time
         type: string
       doNotRunUntil:
@@ -8815,7 +8815,7 @@ definitions:
         format: duration
         type: string
       startWindow:
-        description: 'The time interval, starting from the time at which the schedule indicates a job should be created, within which a job must be created.  If a job is not created within the startWindow interval, then the ''opportunity'' is lost; no job will be created until the next recurrence of the schedule.'
+        description: 'The time interval, starting from the time at which the schedule indicates a job should be created, within which a job must be created. If a job is not created within the startWindow interval, then the ''opportunity'' is lost; no job will be created until the next recurrence of the schedule.'
         format: duration
         type: string
   StartTask:
@@ -8970,7 +8970,7 @@ definitions:
         description: The execution constraints that apply to this task.
       dependsOn:
         $ref: '#/definitions/TaskDependencies'
-        description: Any dependencies this task has.
+        description: Any other tasks that this task depends on.
       displayName:
         description: A display name for the task.
         type: string
@@ -9044,7 +9044,7 @@ definitions:
         format: duration
         type: string
   TaskDependencies:
-    description: Specifies any dependencies of a task.  Any task that is explicitly specified or within a dependency range must complete before the dependant task will be scheduled.
+    description: Specifies any dependencies of a task. Any task that is explicitly specified or within a dependency range must complete before the dependant task will be scheduled.
     properties:
       taskIdRanges:
         description: The list of task ranges that must complete before this task can be scheduled.
@@ -9153,7 +9153,7 @@ definitions:
           modelAsString: false
           name: SchedulingErrorCategory
       code:
-        description: An identifier for the task scheduling error.  Codes are invariant and are intended to be consumed programmatically.
+        description: An identifier for the task scheduling error. Codes are invariant and are intended to be consumed programmatically.
         type: string
       details:
         description: The list of additional error details related to the scheduling error.
@@ -9192,7 +9192,7 @@ definitions:
         format: date-time
         type: string
       readIOGiB:
-        description: The total gibibytes of I/O read from disk by the task.
+        description: The total gibibytes read from disk by the task.
         format: double
         type: number
       readIOps:
@@ -9219,7 +9219,7 @@ definitions:
         format: duration
         type: string
       writeIOGiB:
-        description: The total gibibytes of I/O written to disk by the task.
+        description: The total gibibytes written to disk by the task.
         format: double
         type: number
       writeIOps:

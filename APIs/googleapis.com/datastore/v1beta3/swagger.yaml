@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: |
-    Google Cloud Datastore is a schemaless NoSQL datastore providing robust, scalable storage for your application.
+    Accesses the schemaless NoSQL database to provide fully managed, robust, scalable storage for your application.
   title: Google Cloud Datastore
   version: v1beta3
   x-apiClientRegistration:
@@ -863,7 +863,8 @@ definitions:
       endCursor:
         description: |-
           An ending point for the query results. Query cursors are
-          returned in query result batches.
+          returned in query result batches and
+          [can only be used to limit the same query](https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets).
         format: byte
         type: string
       filter:
@@ -903,7 +904,8 @@ definitions:
       startCursor:
         description: |-
           A starting point for the query results. Query cursors are
-          returned in query result batches.
+          returned in query result batches and
+          [can only be used to continue the same query](https://cloud.google.com/datastore/docs/concepts/queries#cursors_limits_and_offsets).
         format: byte
         type: string
     type: object
@@ -960,7 +962,10 @@ definitions:
           - EVENTUAL
         type: string
       transaction:
-        description: The transaction in which to read.
+        description: |-
+          The identifier of the transaction in which to read. A
+          transaction identifier is returned by a call to
+          BeginTransaction.
         format: byte
         type: string
     type: object

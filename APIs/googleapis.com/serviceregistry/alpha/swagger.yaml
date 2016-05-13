@@ -391,6 +391,7 @@ paths:
       - $ref: '#/parameters/userIp'
 definitions:
   Endpoint:
+    description: 'Next available tag: 13'
     properties:
       address:
         description: 'A user-provided address of the service represented by this endpoint. This can be an IPv4 or IPv6 address, or a hostname.'
@@ -428,6 +429,9 @@ definitions:
     type: object
   EndpointEndpointVisibility:
     properties:
+      internalDnsName:
+        description: '[Output Only] Fully qualified domain name for the endpoint; used when addressing the endpoint from within Compute Networks specified in the networks field.'
+        type: string
       networks:
         description: Google Compute Engine networks for which the name of this endpoint should be resolvable through DNS.
         items:

@@ -7,8 +7,8 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: The Analytics Reporting API provides access to Analytics report data.
-  title: Analytics Reporting API V4
+  description: Accesses Analytics report data.
+  title: Google Analytics Reporting
   version: v4
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -159,13 +159,14 @@ definitions:
           This is used for `FIRST_VISIT_DATE` cohort, the cohort selects users
           whose first visit date is between start date and end date defined in the
           DateRange. The date ranges should be aligned for cohort requests. If the
-          request contains cohort_nth_day it should be exactly one day long,
+          request contains `ga:cohortNthDay` it should be exactly one day long,
           if `ga:cohortNthWeek` it should be aligned to the week boundary (starting
-          at Sunday and ending Saturday), and for cohort_nth_month the date range
+          at Sunday and ending Saturday), and for `ga:cohortNthMonth` the date range
           should be aligned to the month (starting at the first and ending on the
           last day of the month).
           For LTV requests there are no such restrictions.
-          You do not need to supply a date range for the reportsRequest object.
+          You do not need to supply a date range for the
+          `reportsRequest.dateRanges` field.
       name:
         description: |-
           A unique name for the cohort. If not defined name will be auto-generated
@@ -232,6 +233,8 @@ definitions:
             increment.
           - The cohort definition date ranges need not be aligned to the calendar
             week and month boundaries.
+          - The `viewId` must be an
+            [app view ID](https://support.google.com/analytics/answer/2649553#WebVersusAppViews)
         type: boolean
     type: object
   ColumnHeader:
@@ -398,7 +401,10 @@ definitions:
     description: The batch request containing multiple report request.
     properties:
       reportRequests:
-        description: 'Requests, each request will have a separate response.'
+        description: |-
+          Requests, each request will have a separate response.
+          There can be a maximum of 5 requests. All requests should have the same
+          `dateRange`, `viewId`, `segments`, `samplingLevel`, and `cohortGroup`.
         items:
           $ref: '#/definitions/ReportRequest'
         type: array
@@ -406,7 +412,7 @@ definitions:
   GetReportsResponse:
     description: |-
       The main response class which holds the reports from the Reporting API
-      batchRequest call.
+      `batchGet` call.
     properties:
       reports:
         description: Responses corresponding to each of the request.
@@ -433,6 +439,8 @@ definitions:
           Positive cardinal numbers (0-9), can include decimals and is limited to
           1024 characters. Example `ga:totalRefunds/ga:users`, in most cases the
           metric expression is just a single metric name like `ga:users`.
+          Adding mixed `MetricType` (E.g., `CURRENCY` + `PERCENTAGE`) metrics
+          will result in unexpected results.
         type: string
       formattingType:
         description: |-
@@ -596,7 +604,7 @@ definitions:
       maxGroupCount:
         description: |-
           Specifies the maximum number of groups to return.
-          If set to -1, returns all groups. The default value is 5.
+          The default value is 10, also the maximum value is 1,000.
         format: int32
         type: integer
       metrics:
@@ -749,7 +757,8 @@ definitions:
         $ref: '#/definitions/CohortGroup'
         description: |-
           Cohort group associated with this request. If there is a cohort group
-          in the request the `ga:cohort` dimension must be present.
+          in the request the `ga:cohort` dimension must be present. All requests
+          should have the same cohort definitions.
       dateRanges:
         description: |-
           Date ranges in the request. The request can have a maximum of 2 date
@@ -757,8 +766,10 @@ definitions:
           combination of the dimensions for each date range in the request. So, if
           there are two date ranges, there will be two set of metric values, one for
           the original date range and one for the second date range.
-          Date ranges should not be specified for cohorts or Lifetime value
-          requests.
+          The `reportRequest.dateRanges` field should not be specified for cohorts
+          or Lifetime value requests.
+          If a date range is not provided, the default date range is (startDate:
+          current date - 7 days, endDate: current date - 1 day)
         items:
           $ref: '#/definitions/DateRange'
         type: array
@@ -779,7 +790,7 @@ definitions:
       filtersExpression:
         description: |-
           Dimension or metric filters that restrict the data returned for your
-          request. To use the filtersExpression, supply a dimension or metric on
+          request. To use the `filtersExpression`, supply a dimension or metric on
           which to filter, followed by the filter expression. For example, the
           following expression selects `ga:browser` dimension which starts with
           Firefox; `ga:browser=~^Firefox`. For more information on dimensions
@@ -812,7 +823,9 @@ definitions:
           $ref: '#/definitions/MetricFilterClause'
         type: array
       metrics:
-        description: Metrics (numbers) requested in the request.
+        description: |-
+          Metrics, the quantitative measurements, requested in the request.
+          Requests must specify at least one metric.
         items:
           $ref: '#/definitions/Metric'
         type: array
@@ -820,15 +833,14 @@ definitions:
         description: |-
           Sort order on output rows. To compare two rows, the elements of the
           following are applied in order until a difference is found.  All date
-          ranges in the output get the same row order. The `order_by` field gets
-          applied first followed by the sorts in the `additional_ordering` fields.
+          ranges in the output get the same row order.
         items:
           $ref: '#/definitions/OrderBy'
         type: array
       pageSize:
         description: |-
           Page size is for paging and specifies the maximum number of returned rows.
-          Page size should be >= 0. A query returns the default of 1000 rows.
+          Page size should be >= 0. A query returns the default of 1,000 rows.
           The Analytics Core Reporting API returns a maximum of 10,000 rows per
           request, no matter how many you ask for. It can also return fewer rows
           than requested, if there aren't as many dimension segments as you expect.
@@ -852,7 +864,8 @@ definitions:
       samplingLevel:
         description: |-
           The desired sampling level. If the sampling level is not specified the
-          DEFAULT sampling level will be used.
+          DEFAULT sampling level will be used. All requests should have same
+          `samplingLevel`.
         enum:
           - SAMPLING_UNSPECIFIED
           - DEFAULT
@@ -863,7 +876,8 @@ definitions:
         description: |-
           Segment the data returned for the request. A segment definition helps look
           at a subset of the segment request. A request can contain up to four
-          segments.
+          segments. All requests should have the same segment definitions. Requests
+          with segments must have the `ga:segment` dimension.
         items:
           $ref: '#/definitions/Segment'
         type: array
@@ -895,7 +909,7 @@ definitions:
         $ref: '#/definitions/DynamicSegment'
         description: A dynamic segment definition in the request.
       segmentId:
-        description: 'The segment ID of a built-in or custom segment, for example ''gaid::-3''.'
+        description: 'The segment ID of a built-in or custom segment, for example `gaid::-3`.'
         type: string
     type: object
   SegmentDefinition:
@@ -915,7 +929,7 @@ definitions:
     description: Dimension filter specifies the filtering options on a dimension.
     properties:
       caseSensitive:
-        description: 'Should the match be case sensitive, ignored for IN_LIST operator.'
+        description: 'Should the match be case sensitive, ignored for `IN_LIST` operator.'
         type: boolean
       dimensionName:
         description: Name of the dimension for which the filter is being applied.
@@ -926,10 +940,10 @@ definitions:
           type: string
         type: array
       maxComparisonValue:
-        description: Maximum comparison values for BETWEEN match type.
+        description: Maximum comparison values for `BETWEEN` match type.
         type: string
       minComparisonValue:
-        description: Minimum comparison values for BETWEEN match type.
+        description: Minimum comparison values for `BETWEEN` match type.
         type: string
       operator:
         description: The operator to use to match the dimension with the expressions.
@@ -1011,7 +1025,7 @@ definitions:
           treated as minimum comparison value.
         type: string
       maxComparisonValue:
-        description: Max comparison value is only used for BETWEEN operator.
+        description: Max comparison value is only used for `BETWEEN` operator.
         type: string
       metricName:
         description: |-
