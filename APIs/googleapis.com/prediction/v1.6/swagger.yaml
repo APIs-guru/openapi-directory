@@ -29,6 +29,7 @@ securityDefinitions:
     description: Oauth 2.0 authentication
     flow: implicit
     scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
       'https://www.googleapis.com/auth/devstorage.full_control': Manage your data and permissions in Google Cloud Storage
       'https://www.googleapis.com/auth/devstorage.read_only': View your data in Google Cloud Storage
       'https://www.googleapis.com/auth/devstorage.read_write': Manage your data in Google Cloud Storage
@@ -112,6 +113,8 @@ paths:
             $ref: '#/definitions/Output'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/prediction'
       tags:
         - hostedmodels
@@ -143,6 +146,8 @@ paths:
           schema:
             $ref: '#/definitions/Insert2'
       security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/devstorage.full_control'
         - Oauth2:
@@ -179,6 +184,8 @@ paths:
             $ref: '#/definitions/List'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/prediction'
       tags:
         - trainedmodels
@@ -210,6 +217,8 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/prediction'
       tags:
         - trainedmodels
@@ -233,6 +242,8 @@ paths:
           schema:
             $ref: '#/definitions/Insert2'
       security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/prediction'
       tags:
@@ -270,6 +281,8 @@ paths:
             $ref: '#/definitions/Insert2'
       security:
         - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
             - 'https://www.googleapis.com/auth/prediction'
       tags:
         - trainedmodels
@@ -294,6 +307,8 @@ paths:
           schema:
             $ref: '#/definitions/Analyze'
       security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/prediction'
       tags:
@@ -339,6 +354,8 @@ paths:
           schema:
             $ref: '#/definitions/Output'
       security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/prediction'
       tags:

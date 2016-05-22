@@ -10119,6 +10119,9 @@ paths:
           name: disk
           required: true
           type: string
+        - in: query
+          name: guestFlush
+          type: boolean
         - in: body
           name: body
           schema:
@@ -14167,6 +14170,8 @@ definitions:
           A list of instance tags which this rule applies to. One or both of sourceRanges and sourceTags may be set.
 
           If both properties are set, an inbound connection is allowed if the range matches the sourceRanges OR the tag of the source matches the sourceTags property. The connection does not need to match both properties.
+
+          Source tags cannot be used to allow access to an instance's external IP address. Because tags are associated with an instance, not an IP address, source tags can only be used to control traffic traveling from an instance inside the same network as the firewall.
         items:
           type: string
         type: array
@@ -14197,6 +14202,22 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+    type: object
+  FixedOrPercent:
+    description: Encapsulates numeric value that can be either absolute or relative.
+    properties:
+      calculated:
+        description: '[Output Only] Absolute value calculated based on mode: mode = fixed -> calculated = fixed = percent -> calculated = ceiling(percent/100 * base_value)'
+        format: int32
+        type: integer
+      fixed:
+        description: fixed must be non-negative.
+        format: int32
+        type: integer
+      percent:
+        description: 'percent must belong to [0, 100].'
+        format: int32
+        type: integer
     type: object
   ForwardingRule:
     description: 'A ForwardingRule resource. A ForwardingRule resource specifies which pool of target virtual machines to forward a packet to if it matches the given [IPAddress, IPProtocol, portRange] tuple.'
@@ -15116,6 +15137,14 @@ definitions:
         description: The target number of running instances for this managed instance group. Deleting or abandoning instances reduces this number. Resizing the group changes this number.
         format: int32
         type: integer
+      updatePolicy:
+        $ref: '#/definitions/InstanceGroupManagerUpdatePolicy'
+        description: The update policy for this managed instance group.
+      versions:
+        description: 'Versions supported by this IGM. User should set this field if they need fine-grained control over how many instances in each version are run by this IGM. Versions are keyed by instanceTemplate. Every instanceTemplate can appear at most once. This field overrides instanceTemplate field. If both instanceTemplate and versions are set, the user receives a warning. "instanceTemplate: X" is semantically equivalent to "versions [ { instanceTemplate: X } ]". Exactly one version must have targetSize field left unset. Size of such a version will be calculated automatically.'
+        items:
+          $ref: '#/definitions/InstanceGroupManagerVersion'
+        type: array
       zone:
         description: The name of the zone where the managed instance group is located.
         type: string
@@ -15208,6 +15237,49 @@ definitions:
       selfLink:
         description: '[Output Only] The URL for this resource type. The server generates this URL.'
         type: string
+    type: object
+  InstanceGroupManagerUpdatePolicy:
+    properties:
+      maxSurge:
+        $ref: '#/definitions/FixedOrPercent'
+        description: 'Maximum number of instances that can be created above the InstanceGroupManager.targetSize during the update process. By default, a fixed value of 1 is used. Using maxSurge > 0 will cause instance names to change during the update process. At least one of { maxSurge, maxUnavailable } must be greater than 0.'
+      maxUnavailable:
+        $ref: '#/definitions/FixedOrPercent'
+        description: 'Maximum number of instances that can be unavailable during the update process. The instance is considered available if all of the following conditions are satisfied: 1. instance''s status is RUNNING 2. instance''s liveness health check result was observed to be HEALTHY at least once By default, a fixed value of 1 is used. At least one of { maxSurge, maxUnavailable } must be greater than 0.'
+      minReadySec:
+        description: Minimum number of seconds to wait for after a newly created instance becomes available.
+        format: int32
+        type: integer
+      minimalAction:
+        description: 'Minimal action to be taken on an instance. The order of action types is: REBOOT < REPLACE.'
+        enum:
+          - REBOOT
+          - REPLACE
+        type: string
+      standbyMode:
+        description: Standby mode of all the standby instances managed by the IGM.
+        enum:
+          - DRAINED
+        type: string
+      type:
+        enum:
+          - OPPORTUNISTIC
+          - PROACTIVE
+        type: string
+    type: object
+  InstanceGroupManagerVersion:
+    properties:
+      instanceTemplate:
+        type: string
+      keepStandbyInstances:
+        description: 'If this field is set, IGM maintains a pool of standby instances created from instanceTemplate. The number of standby instances is such that the total number of instances created from this instanceTemplate is equal to InstanceGroupManager.targetSize regardless of what is the value of targetSize.fixed or targetSize.percent. Standby instances are useful during the update, when the user wants to be able to quickly rollout/rollback to the target version.'
+        type: boolean
+      tag:
+        description: Tag describing the version. Changing it may trigger an action configured in UpdatePolicy.
+        type: string
+      targetSize:
+        $ref: '#/definitions/FixedOrPercent'
+        description: 'Intended number of instances that are created from instanceTemplate. The final number of instances created from instanceTemplate will be equal to: * if expressed as fixed number: min(targetSize.fixed, instanceGroupManager.targetSize), * if expressed as percent: ceiling(targetSize.percent * InstanceGroupManager.targetSize). If unset, this version will handle all the remaining instances.'
     type: object
   InstanceGroupManagersAbandonInstancesRequest:
     properties:
@@ -15742,7 +15814,7 @@ definitions:
         format: uint64
         type: string
       isSharedCpu:
-        description: '[Output Only] Whether this machine type has a shared CPU.'
+        description: '[Output Only] Whether this machine type has a shared CPU. See Shared-core machine types for more information.'
         type: boolean
       kind:
         default: 'compute#machineType'
@@ -15911,6 +15983,11 @@ definitions:
       lastAttempt:
         $ref: '#/definitions/ManagedInstanceLastAttempt'
         description: '[Output Only] Information about the last attempt to create or delete the instance.'
+      standbyMode:
+        description: '[Output Only] Standby mode of the instance. This field is non-empty iff the instance is a standby.'
+        enum:
+          - DRAINED
+        type: string
     type: object
   ManagedInstanceLastAttempt:
     properties:
@@ -16037,7 +16114,7 @@ definitions:
           - global/networks/default
         type: string
       networkIP:
-        description: An IPV4 internal network address to assign to the instance for this network interface. If not specified by user an unused internal IP is assigned by system.
+        description: 'An IPv4 internal network address to assign to the instance for this network interface. If not specified by the user, an unused internal IP is assigned by the system.'
         type: string
       subnetwork:
         description: |-
@@ -17819,7 +17896,9 @@ definitions:
           CLIENT_IP_PROTO: Connections from the same client IP with the same IP protocol will go to the same instance in the pool while that instance remains healthy.
         enum:
           - CLIENT_IP
+          - CLIENT_IP_PORT_PROTO
           - CLIENT_IP_PROTO
+          - GENERATED_COOKIE
           - NONE
         type: string
     type: object

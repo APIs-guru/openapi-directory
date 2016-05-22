@@ -638,6 +638,9 @@ definitions:
       exampleRequest:
         $ref: '#/definitions/ExampleRequest'
         description: 'Sample request data for each of the service''s inputs, as applicable.'
+      exposeSampleData:
+        description: Flag that controls whether to expose sample data or not in the web service's swagger definition.
+        type: boolean
       input:
         $ref: '#/definitions/ServiceInputOutputSpecification'
         description: 'Swagger schema for the service''s input(s), as applicable.'

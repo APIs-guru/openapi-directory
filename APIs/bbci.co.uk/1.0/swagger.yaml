@@ -23,7 +23,7 @@ info:
     url: 'https://raw.githubusercontent.com/Mermade/bbcparse/master/iblApi/swagger.json'
     version: '2.0'
   x-providerName: bbci.co.uk
-  x-release: '373'
+  x-release: '378'
   x-schema-id: 'https://ibl.api.bbci.co.uk/ibl/v1/schema/ibl.json'
   x-unofficialSpec: true
 externalDocs:
@@ -946,6 +946,26 @@ paths:
       security: []
       tags:
         - Programmes
+  /user/recommendations:
+    get:
+      description: Get user store recommendations
+      operationId: Get_User store recommendations_
+      parameters:
+        - format: double
+          in: query
+          name: identity_cookie
+          required: true
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      tags:
+        - Programmes
   /user/watching:
     get:
       description: Get user watching
@@ -1789,11 +1809,14 @@ definitions:
             items:
               $ref: '#/definitions/user_recommendation'
             type: array
+          rec_set:
+            type: string
           rec_source:
             type: string
         required:
           - elements
           - rec_source
+          - rec_set
         type: object
       version:
         type: string

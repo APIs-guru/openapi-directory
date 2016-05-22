@@ -954,8 +954,8 @@ definitions:
       card:
         $ref: '#/definitions/CardPurchaseResponse'
       created:
-        description: digits (10)
-        type: integer
+        description: alphanumeric (32)
+        type: string
       id:
         description: digits (9)
         type: string
@@ -968,7 +968,7 @@ definitions:
         type: string
       message_id:
         description: digits (3)
-        type: integer
+        type: string
       order_number:
         description: alphanumeric (32)
         type: string

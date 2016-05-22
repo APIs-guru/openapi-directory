@@ -1,0 +1,335 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  title: UsageManagementClient
+  version: 2015-06-01-preview
+  x-logo:
+    backgroundColor: '#333333'
+    url: 'https://azure.github.io/images/logo-msft-dark@2x.png'
+  x-origin:
+    format: swagger
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-commerce/2015-06-01-preview/swagger/commerce.json'
+    version: '2.0'
+  x-preferred: true
+  x-providerName: azure.com
+  x-serviceName: arm-commerce
+consumes:
+  - application/json
+  - text/json
+produces:
+  - application/json
+  - text/json
+parameters:
+  ApiVersionParameter:
+    description: Client Api Version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  SubscriptionIdParameter:
+    description: It uniquely identifes Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Commerce/RateCard':
+    get:
+      description: 'Enables you to query for the resource/meter metadata and related prices used in a given subscription by Offer ID, Currency, Locale and Region. The metadata associated with the billing meters, including but not limited to service names, types, resources, units of measure, and regions, is subject to change at any time and without notice. If you intend to use this billing data in an automated fashion, please use the billing meter GUID to uniquely identify each billable item. If the billing meter GUID is scheduled to change due to a new billing model, you will be notified in advance of the change. '
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt219004.aspx'
+      operationId: RateCard_Get
+      parameters:
+        - description: 'The filter to apply on the operation. It ONLY supports the �eq� and �and� logical operators at this time. All the 4 query parameters ''OfferDurableId'',  ''Currency'', ''Locale'', ''Region'' are required to be a part of the $filter.'
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Normal response for a successful query. The response body will contain the data that matches the filters specified in the query parameters.
+          schema:
+            $ref: '#/definitions/ResourceRateCardInfo'
+        default:
+          description: CDN error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - RateCard
+      x-ms-odata: '#/definitions/RateCardQueryParameters'
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Commerce/UsageAggregates':
+    get:
+      description: Query aggregated Azure subscription consumption data for a date range.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/library/azure/1ea5b323-54bb-423d-916f-190de96c6a3c'
+      operationId: UsageAggregates_List
+      parameters:
+        - description: The start of the time range to retrieve data for.
+          format: date-time
+          in: query
+          name: reportedstartTime
+          required: true
+          type: string
+        - description: The end of the time range to retrieve data for.
+          format: date-time
+          in: query
+          name: reportedEndTime
+          required: true
+          type: string
+        - description: 'When set to true (default), the aggregates are broken down into the instance metadata which is more granular.'
+          in: query
+          name: showDetails
+          required: false
+          type: boolean
+        - default: Daily
+          description: Value is either daily (default) or hourly to tell the API how to return the results grouped by day or hour.
+          enum:
+            - Daily
+            - Hourly
+          in: query
+          name: aggregationGranularity
+          required: false
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: AggregationGranularity
+        - description: 'Retrieved from previous calls, this is the bookmark used for progress when the responses are paged.'
+          in: query
+          name: continuationToken
+          required: false
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Normal response for a successful query. The response body will contain the data that matches the filters specified in the query parameters.
+          schema:
+            $ref: '#/definitions/UsageAggregationListResult'
+        default:
+          description: CDN error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - UsageAggregates
+      x-ms-pageable:
+        nextLinkName: nextLink
+definitions:
+  ErrorResponse:
+    description: Describes ehe format of Error response.
+    properties:
+      code:
+        description: Error code
+        type: string
+      message:
+        description: Error message indicating why the operation failed.
+        type: string
+    type: object
+  InfoField:
+    description: Key-value pairs of instance details in the legacy format.
+    properties:
+      project:
+        description: Identifies the name of the instance provisioned by the user.
+        type: string
+  MeterInfo:
+    description: Detailed information about the meter.
+    properties:
+      EffectiveDate:
+        description: Indicates the date from which the meter rate or offer term is effective.
+        format: date-time
+        type: string
+      IncludedQuantity:
+        description: The resource quantity that is included in the offer at no cost. Consumption beyond this quantity will be charged.
+        format: float
+        type: number
+      MeterCategory:
+        description: 'The category of the meter, e.g., ''Cloud services'', ''Networking'', etc..'
+        type: string
+      MeterId:
+        description: The unique identifier of the resource.
+        format: uuid
+        type: string
+      MeterName:
+        description: 'The name of the meter, within the given meter category'
+        type: string
+      MeterRates:
+        additionalProperties:
+          format: float
+          type: number
+        description: 'The list of key/value pairs for the meter rates, in the format ''key'':''value'' where key = the meter quantity, and value = the corresponding price'
+        type: object
+      MeterSubCategory:
+        description: 'The subcategory of the meter, e.g., ''A6 Cloud services'', ''ExpressRoute (IXP)'', etc..'
+        type: string
+      Unit:
+        description: 'The unit in which the meter consumption is charged, e.g., ''Hours'', ''GB'', etc.'
+        type: string
+  MonetaryCommitment:
+    allOf:
+      - $ref: '#/definitions/OfferTermInfo'
+    properties:
+      TieredDiscount:
+        additionalProperties:
+          format: decimal
+          type: number
+        description: 'The list of key/value pairs for the tiered meter rates, in the format ''key'':''value'' where key = price, and value = the corresponding discount percentage. This field is used only by offer terms of type ''Monetary Commitment''.'
+        type: object
+    x-ms-discriminator-value: Monetary Commitment
+  MonetaryCredit:
+    allOf:
+      - $ref: '#/definitions/OfferTermInfo'
+    properties:
+      Credit:
+        description: The amount of credit provided under the terms of the given offer level. This field is used only by offer terms of type 'MonetaryCredit'.
+        format: decimal
+        type: number
+    x-ms-discriminator-value: Monetary Credit
+  OfferTermInfo:
+    description: Describes the offer term.
+    discriminator: Name
+    properties:
+      EffectiveDate:
+        description: Indicates the date from which the meter rate or offer term is effective.
+        format: date-time
+        type: string
+      ExcludedMeterIds:
+        description: An array of meter ids that are excluded from the given offer terms.
+        items:
+          format: uuid
+          type: string
+        type: array
+      Name:
+        description: 'Name of the offer term. For example: ''Monetary Credit'', ''Monetary Commitment'
+        type: string
+    required:
+      - Name
+  RateCardQueryParameters:
+    description: Parameters that are used in the odata $filter query parameter for providing RateCard information.
+    properties:
+      Currency:
+        description: The currency in which the rates need to be provided.
+        type: string
+      Locale:
+        description: The culture in which the resource metadata needs to be localized.
+        type: string
+      OfferDurableId:
+        description: 'The Offer ID parameter consists of the ''MS-AZR-'' prefix, plus the Offer ID number (e.g., MS-AZR-0026P). See https://azure.microsoft.com/en-us/support/legal/offer-details/ for more information on the list of available Offer IDs, country/region availability, and billing currency.'
+        pattern: '^MS-AZR-\d{4}P(-\d{4}P)*$'
+        type: string
+      RegionInfo:
+        description: 2 letter ISO code where the offer was purchased.
+        type: string
+    required:
+      - OfferDurableId
+      - Currency
+      - Locale
+      - RegionInfo
+  RecurringCharge:
+    allOf:
+      - $ref: '#/definitions/OfferTermInfo'
+    properties:
+      RecurringCharge:
+        description: The amount of recurring charge as per the offer term.
+        type: integer
+    x-ms-discriminator-value: Recurring Charge
+  ResourceRateCardInfo:
+    description: Price and Metadata information for resources
+    properties:
+      Currency:
+        description: The currency in which the rates are provided.
+        type: string
+      IsTaxIncluded:
+        description: 'All rates are pretax, so this will always be returned as ''false''.'
+        type: boolean
+      Locale:
+        description: The culture in which the resource information is localized.
+        type: string
+      MeterRegion:
+        description: The region in which the Azure service is available.
+        type: string
+      Meters:
+        description: A list of meters.
+        items:
+          $ref: '#/definitions/MeterInfo'
+        type: array
+      OfferTerms:
+        description: A list of offer terms.
+        items:
+          $ref: '#/definitions/OfferTermInfo'
+        type: array
+      Tags:
+        description: Provides additional meter data. 'Third Party' indicates a meter with no discount. Blanks indicate First Party.
+        items:
+          type: string
+        type: array
+  UsageAggregation:
+    description: Describes the usageAggregation.
+    properties:
+      id:
+        description: Unique Id for the usage aggregate.
+        type: string
+      name:
+        description: Name of the usage aggregate.
+        type: string
+      properties:
+        $ref: '#/definitions/UsageSample'
+        description: Usage data.
+        x-ms-client-flatten: true
+      type:
+        description: Type of the resource being returned.
+        type: string
+  UsageAggregationListResult:
+    description: The Get UsageAggregates operation response.
+    properties:
+      nextLink:
+        description: Gets or sets the link to the next set of results.
+        type: string
+      value:
+        description: Gets or sets details for the requested aggregation.
+        items:
+          $ref: '#/definitions/UsageAggregation'
+        type: array
+  UsageSample:
+    description: Describes a sample of the usageAggregation.
+    properties:
+      infoFields:
+        $ref: '#/definitions/InfoField'
+        description: Key-value pairs of instance details (legacy format).
+      instanceData:
+        description: Key-value pairs of instance details represented as a string.
+        type: string
+      meterCategory:
+        description: Category of the consumed resource.
+        type: string
+      meterId:
+        description: Unique ID for the resource that was consumed (aka ResourceID).
+        type: string
+      meterName:
+        description: Friendly name of the resource being consumed.
+        type: string
+      meterRegion:
+        description: Region of the meterId used for billing purposes
+        type: string
+      meterSubCategory:
+        description: Sub-category of the consumed resource.
+        type: string
+      quantity:
+        description: The amount of the resource consumption that occurred in this time frame.
+      subscriptionId:
+        description: The subscription identifier for the Azure user.
+        format: uuid
+        type: string
+      unit:
+        description: 'The unit in which the usage for this resource is being counted, e.g. Hours, GB.'
+        type: string
+      usageEndTime:
+        description: UTC end time for the usage bucket to which this usage aggregate belongs.
+        format: date-time
+        type: string
+      usageStartTime:
+        description: UTC start time for the usage bucket to which this usage aggregate belongs.
+        format: date-time
+        type: string

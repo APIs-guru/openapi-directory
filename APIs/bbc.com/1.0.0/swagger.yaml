@@ -2117,6 +2117,7 @@ definitions:
               required:
                 - pid
               type: object
+            maxItems: 5
             type: array
           title:
             $ref: '#/definitions/title'
@@ -2134,6 +2135,7 @@ definitions:
           required:
             - pid
           type: object
+        maxItems: 5
         type: array
     type: object
   ancestors:
@@ -2195,6 +2197,7 @@ definitions:
               required:
                 - pid
               type: object
+            maxItems: 5
             type: array
           title:
             $ref: '#/definitions/title'
@@ -2212,6 +2215,7 @@ definitions:
           required:
             - pid
           type: object
+        maxItems: 5
         type: array
     type: object
   availability:
@@ -2321,10 +2325,12 @@ definitions:
                                                     format: date-time
                                                     type: string
                                                 type: object
+                                              minItems: 1
                                               type: array
                                           required:
                                             - version_type
                                           type: object
+                                        minItems: 1
                                         type: array
                                     required:
                                       - version_type
@@ -2343,10 +2349,12 @@ definitions:
                               format: date-time
                               type: string
                           type: object
+                        minItems: 1
                         type: array
                     required:
                       - version_type
                     type: object
+                  minItems: 1
                   type: array
               required:
                 - version_type
@@ -2394,11 +2402,13 @@ definitions:
                     media_set:
                       items:
                         type: object
+                      minItems: 1
                       type: array
                   required:
                     - media_set
                   type: object
               type: object
+            minItems: 1
             type: array
         required:
           - media_set
@@ -2448,6 +2458,7 @@ definitions:
                   required:
                     - available_versions_media_sets
                   type: object
+                minItems: 1
                 type: array
               type:
                 type: string
@@ -2489,6 +2500,7 @@ definitions:
               required:
                 - available_versions_media_sets
               type: object
+            minItems: 1
             type: array
           type:
             type: string
@@ -2537,6 +2549,7 @@ definitions:
                       type: string
                     type: array
                 type: object
+              minItems: 1
               type: array
             version:
               items:
@@ -2562,6 +2575,7 @@ definitions:
                             type: string
                           type: array
                       type: object
+                    minItems: 1
                     type: array
                 required:
                   - types
@@ -2600,6 +2614,7 @@ definitions:
                         required:
                           - name
                         type: object
+                      minItems: 1
                       type: array
                   required:
                     - media_set
@@ -2609,6 +2624,7 @@ definitions:
               required:
                 - name
               type: object
+            minItems: 1
             type: array
         required:
           - media_set
@@ -2634,6 +2650,7 @@ definitions:
                           sid:
                             type: string
                         type: object
+                      minItems: 1
                       type: array
                   required:
                     - service
@@ -2641,6 +2658,7 @@ definitions:
                 sid:
                   type: string
               type: object
+            minItems: 1
             type: array
         required:
           - service
@@ -2819,6 +2837,8 @@ definitions:
         $ref: '#/definitions/master_brand_link'
       media_type:
         $ref: '#/definitions/media_type'
+      most_popular:
+        $ref: '#/definitions/most_popular'
       original_version_duration:
         $ref: '#/definitions/original_version_duration'
       partner:
@@ -3222,6 +3242,8 @@ definitions:
         $ref: '#/definitions/master_brand_link'
       media_type:
         $ref: '#/definitions/media_type'
+      most_popular:
+        $ref: '#/definitions/most_popular'
       original_version_duration:
         $ref: '#/definitions/original_version_duration'
       partner:
@@ -3552,6 +3574,7 @@ definitions:
       id:
         items:
           $ref: '#/definitions/id'
+        minItems: 1
         type: array
     required:
       - id
@@ -3705,6 +3728,7 @@ definitions:
       contributions_mixin:
         $ref: '#/definitions/contributions_mixin'
       duration:
+        format: float
         type: number
       ids:
         $ref: '#/definitions/ids'
@@ -3934,6 +3958,13 @@ definitions:
       unstable_mixins:
         $ref: '#/definitions/unstable_mixins'
     type: object
+  most_popular:
+    additionalProperties: false
+    properties:
+      updated_at:
+        format: date-time
+        type: string
+    type: object
   music:
     $ref: '#/definitions/item'
   music_code:
@@ -4160,6 +4191,7 @@ definitions:
       format:
         items:
           $ref: '#/definitions/format'
+        minItems: 1
         type: array
     required:
       - format
@@ -4709,6 +4741,7 @@ definitions:
                           id:
                             type: string
                         type: object
+                      minItems: 1
                       type: array
                   required:
                     - type
@@ -4716,6 +4749,7 @@ definitions:
               required:
                 - types
               type: object
+            minItems: 1
             type: array
         required:
           - type
@@ -4809,6 +4843,7 @@ definitions:
                   version_availability:
                     items:
                       $ref: '#/definitions/version_availability'
+                    minItems: 1
                     type: array
                 required:
                   - version_availability
@@ -4832,6 +4867,7 @@ definitions:
                       type: string
                     type: array
                 type: object
+              minItems: 1
               type: array
             version:
               items:
@@ -4844,6 +4880,7 @@ definitions:
                         version_availability:
                           items:
                             $ref: '#/definitions/version_availability'
+                          minItems: 1
                           type: array
                       required:
                         - version_availability
@@ -4867,6 +4904,7 @@ definitions:
                             type: string
                           type: array
                       type: object
+                    minItems: 1
                     type: array
                 required:
                   - types
@@ -4964,6 +5002,7 @@ definitions:
                           id:
                             type: string
                         type: object
+                      minItems: 1
                       type: array
                   required:
                     - version_type
@@ -4971,6 +5010,7 @@ definitions:
               required:
                 - version_types
               type: object
+            minItems: 1
             type: array
         required:
           - version_type

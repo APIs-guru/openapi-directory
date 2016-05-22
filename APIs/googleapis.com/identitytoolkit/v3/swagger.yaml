@@ -960,6 +960,10 @@ definitions:
   IdentitytoolkitRelyingpartyVerifyCustomTokenRequest:
     description: Request to verify a custom token
     properties:
+      delegatedProjectNumber:
+        description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
+        format: int64
+        type: string
       instanceId:
         description: Instance id token of the app.
         type: string

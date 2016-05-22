@@ -76,6 +76,7 @@ tags:
   - name: entitlements
   - name: inappproducts
   - name: purchases
+  - name: reviews
 paths:
   /inappproducts/batch:
     parameters:
@@ -1983,6 +1984,111 @@ paths:
             - 'https://www.googleapis.com/auth/androidpublisher'
       tags:
         - purchases
+  '/{packageName}/reviews':
+    get:
+      description: Returns a list of reviews.
+      operationId: androidpublisher.reviews.list
+      parameters:
+        - description: 'Unique identifier for the Android app for which we want reviews; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          type: string
+        - in: query
+          name: maxResults
+          type: integer
+        - in: query
+          name: startIndex
+          type: integer
+        - in: query
+          name: token
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ReviewsListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+      tags:
+        - reviews
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{packageName}/reviews/{reviewId}':
+    get:
+      description: Returns a single review.
+      operationId: androidpublisher.reviews.get
+      parameters:
+        - description: 'Unique identifier for the Android app for which we want reviews; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          type: string
+        - in: path
+          name: reviewId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Review'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+      tags:
+        - reviews
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{packageName}/reviews/{reviewId}:reply':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Reply to a single review, or update an existing reply.'
+      operationId: androidpublisher.reviews.reply
+      parameters:
+        - description: 'Unique identifier for the Android app for which we want reviews; for example, "com.spiffygame".'
+          in: path
+          name: packageName
+          required: true
+          type: string
+        - in: path
+          name: reviewId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ReviewsReplyRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ReviewsReplyResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidpublisher'
+      tags:
+        - reviews
 definitions:
   Apk:
     properties:
@@ -2067,6 +2173,24 @@ definitions:
         type: string
       id:
         description: The ID of the edit that can be used in subsequent API calls.
+        type: string
+    type: object
+  Comment:
+    properties:
+      developerComment:
+        $ref: '#/definitions/DeveloperComment'
+        description: A comment from a developer.
+      userComment:
+        $ref: '#/definitions/UserComment'
+        description: A comment from a user.
+    type: object
+  DeveloperComment:
+    properties:
+      lastModified:
+        $ref: '#/definitions/Timestamp'
+        description: The last time at which this comment was updated.
+      text:
+        description: 'The content of the comment, i.e. reply body.'
         type: string
     type: object
   Entitlement:
@@ -2441,6 +2565,51 @@ definitions:
         $ref: '#/definitions/MonthDay'
         description: Defines the first day on which the price takes effect.
     type: object
+  Review:
+    properties:
+      authorName:
+        description: The name of the user who wrote the review.
+        type: string
+      comments:
+        description: A repeated field containing comments for the review.
+        items:
+          $ref: '#/definitions/Comment'
+        type: array
+      reviewId:
+        description: Unique identifier for this review.
+        type: string
+    type: object
+  ReviewReplyResult:
+    properties:
+      lastEdited:
+        $ref: '#/definitions/Timestamp'
+        description: The time at which the reply took effect.
+      replyText:
+        description: The reply text that was applied.
+        type: string
+    type: object
+  ReviewsListResponse:
+    properties:
+      pageInfo:
+        $ref: '#/definitions/PageInfo'
+      reviews:
+        items:
+          $ref: '#/definitions/Review'
+        type: array
+      tokenPagination:
+        $ref: '#/definitions/TokenPagination'
+    type: object
+  ReviewsReplyRequest:
+    properties:
+      replyText:
+        description: The text to set as the reply. Replies of more than approximately 350 characters will be rejected. HTML tags will be stripped.
+        type: string
+    type: object
+  ReviewsReplyResponse:
+    properties:
+      result:
+        $ref: '#/definitions/ReviewReplyResult'
+    type: object
   Season:
     properties:
       end:
@@ -2537,6 +2706,15 @@ definitions:
           type: string
         type: array
     type: object
+  Timestamp:
+    properties:
+      nanos:
+        format: int32
+        type: integer
+      seconds:
+        format: int64
+        type: string
+    type: object
   TokenPagination:
     properties:
       nextPageToken:
@@ -2567,4 +2745,34 @@ definitions:
         items:
           $ref: '#/definitions/Track'
         type: array
+    type: object
+  UserComment:
+    properties:
+      androidOsVersion:
+        description: 'Integer Android SDK version of the user''s device at the time the review was written, e.g. 23 is Marshmallow. May be absent.'
+        format: int32
+        type: integer
+      appVersionCode:
+        description: Integer version code of the app as installed at the time the review was written. May be absent.
+        format: int32
+        type: integer
+      appVersionName:
+        description: String version name of the app as installed at the time the review was written. May be absent.
+        type: string
+      device:
+        description: 'Codename for the reviewer''s device, e.g. klte, flounder. May be absent.'
+        type: string
+      lastModified:
+        $ref: '#/definitions/Timestamp'
+        description: The last time at which this comment was updated.
+      reviewerLanguage:
+        description: Language code for the reviewer. This is taken from the device settings so is not guaranteed to match the language the review is written in. May be absent.
+        type: string
+      starRating:
+        description: 'The star rating associated with the review, from 1 to 5.'
+        format: int32
+        type: integer
+      text:
+        description: 'The content of the comment, i.e. review body. In some cases users have been able to write a review with separate title and body; in those cases the title and body are concatenated and separated by a tab character.'
+        type: string
     type: object

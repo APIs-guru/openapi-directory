@@ -9256,6 +9256,8 @@ definitions:
           A list of instance tags which this rule applies to. One or both of sourceRanges and sourceTags may be set.
 
           If both properties are set, an inbound connection is allowed if the range matches the sourceRanges OR the tag of the source matches the sourceTags property. The connection does not need to match both properties.
+
+          Source tags cannot be used to allow access to an instance's external IP address. Because tags are associated with an instance, not an IP address, source tags can only be used to control traffic traveling from an instance inside the same network as the firewall.
         items:
           type: string
         type: array
@@ -10810,7 +10812,7 @@ definitions:
           - global/networks/default
         type: string
       networkIP:
-        description: An IPV4 internal network address to assign to the instance for this network interface. If not specified by user an unused internal IP is assigned by system.
+        description: 'An IPv4 internal network address to assign to the instance for this network interface. If not specified by the user, an unused internal IP is assigned by the system.'
         type: string
       subnetwork:
         description: |-

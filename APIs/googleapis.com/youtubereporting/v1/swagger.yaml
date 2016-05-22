@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: 'Schedules reporting jobs and downloads the resulting bulk data reports about YouTube channels, videos, etc. in the form of CSV files.'
+  description: Schedules reporting jobs containing your YouTube Analytics data and downloads the resulting bulk data reports in the form of CSV files.
   title: YouTube Reporting
   version: v1
   x-apiClientRegistration:
@@ -352,7 +352,7 @@ paths:
       description: 'Method for media download. Download is supported on the URI `/v1/media/{+name}?alt=media`.'
       operationId: youtubereporting.media.download
       parameters:
-        - description: Name of the media that is being downloaded. See ByteStream.ReadRequest.resource_name.
+        - description: Name of the media that is being downloaded. See ReadRequest.resource_name.
           in: path
           name: resourceName
           required: true
@@ -441,6 +441,9 @@ definitions:
       createTime:
         description: The creation date/time of the job.
         type: string
+      expireTime:
+        description: 'The date/time when this job will expire/expired. After a job expired, no new reports are generated.'
+        type: string
       id:
         description: The server-generated ID of the job (max. 40 characters).
         type: string
@@ -512,6 +515,9 @@ definitions:
       id:
         description: The server-generated ID of the report.
         type: string
+      jobExpireTime:
+        description: The date/time when the job this report belongs to will expire/expired.
+        type: string
       jobId:
         description: The ID of the job that created this report.
         type: string
@@ -522,6 +528,9 @@ definitions:
   ReportType:
     description: A report type.
     properties:
+      deprecateTime:
+        description: The date/time when this report type was/will be deprecated.
+        type: string
       id:
         description: The ID of the report type (max. 100 characters).
         type: string

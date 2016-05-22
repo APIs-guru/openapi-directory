@@ -3,17 +3,17 @@ schemes:
   - https
 host: management.azure.com
 info:
-  description: .Net client wrapper for the REST API for Azure Redis Cache Management Service
+  description: REST API for Azure Redis Cache Service
   title: RedisManagementClient
-  version: '2015-08-01'
+  version: '2016-04-01'
   x-logo:
     backgroundColor: '#333333'
     url: 'https://azure.github.io/images/logo-msft-dark@2x.png'
   x-origin:
     format: swagger
-    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-redis/2015-08-01/swagger/redis.json'
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-redis/2016-04-01/swagger/redis.json'
     version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: arm-redis
 consumes:
@@ -104,9 +104,7 @@ paths:
       responses:
         '200':
           description: ''
-        '202':
-          description: ''
-        '404':
+        '204':
           description: ''
       tags:
         - Redis
@@ -192,9 +190,7 @@ paths:
       responses:
         '200':
           description: ''
-        '202':
-          description: ''
-        '404':
+        '204':
           description: ''
       tags:
         - Redis
@@ -317,17 +313,14 @@ definitions:
       staticIP:
         description: Required when deploying a redis cache inside an existing Azure Virtual Network.
         type: string
-      subnet:
-        description: Required when deploying a redis cache inside an existing Azure Virtual Network.
+      subnetId:
+        description: 'The full resource ID of a subnet in a virtual network to deploy the redis cache in. Example format: /subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1'
         type: string
       tenantSettings:
         additionalProperties:
           type: string
         description: tenantSettings
         type: object
-      virtualNetwork:
-        description: 'The exact ARM resource ID of the virtual network to deploy the redis cache in. Example format: /subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.ClassicNetwork/VirtualNetworks/vnet1'
-        type: string
     required:
       - sku
   RedisReadableProperties:

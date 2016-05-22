@@ -1041,6 +1041,9 @@ definitions:
       timedOut:
         description: 'If the test overran some time limit, and that is why it failed.'
         type: boolean
+      unableToCrawl:
+        description: If the robo was unable to crawl the app; perhaps because the app did not start.
+        type: boolean
     type: object
   FileReference:
     description: A reference to a file.

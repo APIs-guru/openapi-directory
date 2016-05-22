@@ -1,0 +1,860 @@
+swagger: '2.0'
+schemes:
+  - https
+host: runtimeconfig.googleapis.com
+basePath: /
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: |
+    Provides capabilities for dynamic configuration and coordination for applications running on Google Cloud Platform.
+  title: Google Cloud RuntimeConfig
+  version: v1beta1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    format: google
+    url: 'https://runtimeconfig.googleapis.com/$discovery/rest?version=v1beta1'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: runtimeconfig
+externalDocs:
+  url: 'https://cloud.google.com/deployment-manager/docs/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloudruntimeconfig': Manage your Google Cloud Platform services' runtime configuration
+    type: oauth2
+parameters:
+  $.xgafv:
+    description: V1 error format.
+    enum:
+      - '1'
+      - '2'
+    in: query
+    name: $.xgafv
+    type: string
+  access_token:
+    description: OAuth access token.
+    in: query
+    name: access_token
+    type: string
+  alt:
+    default: json
+    description: Data format for response.
+    enum:
+      - json
+      - media
+      - proto
+    in: query
+    name: alt
+    type: string
+  bearer_token:
+    description: OAuth bearer token.
+    in: query
+    name: bearer_token
+    type: string
+  callback:
+    description: JSONP
+    in: query
+    name: callback
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  pp:
+    default: true
+    description: Pretty-print response.
+    in: query
+    name: pp
+    type: boolean
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+    in: query
+    name: quotaUser
+    type: string
+  uploadType:
+    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+    in: query
+    name: uploadType
+    type: string
+  upload_protocol:
+    description: 'Upload protocol for media (e.g. "raw", "multipart").'
+    in: query
+    name: upload_protocol
+    type: string
+tags:
+  - name: projects
+paths:
+  '/v1beta1/{name}':
+    delete:
+      description: Deletes the Waiter with the specified name.
+      operationId: runtimeconfig.projects.configs.waiters.delete
+      parameters:
+        - description: The Waiter resource to delete.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            If recursive is false and name is a prefix of other variables, then
+            the request will fail.
+          in: query
+          name: recursive
+          type: boolean
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudruntimeconfig'
+      tags:
+        - projects
+    get:
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: runtimeconfig.projects.configs.operations.get
+      parameters:
+        - description: The name of the operation resource.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudruntimeconfig'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    put:
+      description: Updates an existing variable with a new value.
+      operationId: runtimeconfig.projects.configs.variables.update
+      parameters:
+        - description: |-
+            The name of the variable to update.
+            In the format of:
+            "projects/{project_id}/configs/{config_id}/variables/{variable_id}"
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Variable'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Variable'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudruntimeconfig'
+      tags:
+        - projects
+  '/v1beta1/{name}:watch':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        WatchVariable watches for a variable to change and then returns the new
+        value or times out.
+        If variable is deleted while being watched, VariableState will be DELETED
+        and the Value will contain the last known value.
+        If the operation deadline is set to a larger value than internal timeout
+        existing, current variable value will be returned and Variable state will
+        be VARIABLE_STATE_UNSPECIFIED.
+      operationId: runtimeconfig.projects.configs.variables.watch
+      parameters:
+        - description: The name of the variable to retrieve.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/WatchVariableRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Variable'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudruntimeconfig'
+      tags:
+        - projects
+  '/v1beta1/{parent}/configs':
+    get:
+      description: Lists all the config objects within project.
+      operationId: runtimeconfig.projects.configs.list
+      parameters:
+        - description: |-
+            The cloud project, whose configuration resources we want to list.
+            Required. Must be a valid GCP project.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            List pagination support.
+            The size of the page to return. We may return fewer elements.
+          in: query
+          name: pageSize
+          type: integer
+        - description: The token for pagination.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListConfigsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudruntimeconfig'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        CreateConfig creates a new config resource object.
+        The configuration name must be unique within project.
+      operationId: runtimeconfig.projects.configs.create
+      parameters:
+        - description: |-
+            The cloud project to which configuration belongs.
+            Required. Must be a valid GCP project.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RuntimeConfig'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RuntimeConfig'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudruntimeconfig'
+      tags:
+        - projects
+  '/v1beta1/{parent}/variables':
+    get:
+      description: |-
+        Lists variables within given RuntimeConfig object, matching optionally
+        provided filter.
+        List contains only variable metadata, but not values.
+      operationId: runtimeconfig.projects.configs.variables.list
+      parameters:
+        - description: Which RuntimeConfig object to list for variables.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            List pagination support.
+            The size of the page to return. We may return fewer elements.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            List only variables matching filter prefix exactly.
+            e.g. `projects/{project_id}/config/{config_id}/variables/{variable/id}`.
+          in: query
+          name: filter
+          type: string
+        - description: The token for pagination.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListVariablesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudruntimeconfig'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Creates a variable within the given configuration.
+        Create variable will create all required intermediate path elements.
+        It is a FAILED_PRECONDITION error to create a variable with a name that is
+        a prefix of an existing variable name, or that has an existing variable
+        name as a prefix.
+      operationId: runtimeconfig.projects.configs.variables.create
+      parameters:
+        - description: |-
+            The configuration parent, that will own the variable.
+            Required, must a valid configuration name within project_id.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Variable'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Variable'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudruntimeconfig'
+      tags:
+        - projects
+  '/v1beta1/{parent}/waiters':
+    get:
+      description: List Waiters within the given RuntimeConfig resource.
+      operationId: runtimeconfig.projects.configs.waiters.list
+      parameters:
+        - description: |-
+            The fully-qualified name of the configuration to list.
+            Required. Must be a valid configuration name.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: |-
+            List pagination support.
+            The size of the page to return. We may return fewer elements.
+          in: query
+          name: pageSize
+          type: integer
+        - description: The token for pagination.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListWaitersResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudruntimeconfig'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Creates a Waiter resource. This operation returns a long-running Operation
+        resource which can be polled for completion. However, a Waiter with the
+        given name will exist (and can be retrieved) prior to the resultant
+        Operation completing. If the resultant Operation indicates a failure, the
+        failed Waiter resource will still exist and must be deleted prior to
+        subsequent creation attempts.
+      operationId: runtimeconfig.projects.configs.waiters.create
+      parameters:
+        - description: |-
+            The fully-qualified name of the configuration that will own the waiter.
+            Required. Must be a valid configuration name.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Waiter'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudruntimeconfig'
+      tags:
+        - projects
+definitions:
+  Cardinality:
+    description: |-
+      The Cardinality condition is met when the count of `Variable` resources
+      under the specified path prefix reaches the specified number.
+      For example, take the following variables in a RuntimeConfig object:
+        /foo/variable1 = "value1"
+        /foo/variable2 = "value2"
+        /bar/variable3 = "value3"
+
+      These variables would satisfy a Cardinality condition with `path` set to
+      "/foo" and `number` set to 2, but would not satisify the same condition
+      with `number` set to 3.
+    properties:
+      number:
+        description: |-
+          The number of decendents of `path` that must exist before this condition
+          is met. Optional; defaults to 1 if not specified.
+        format: int32
+        type: integer
+      path:
+        description: The root of the variable subtree to monitor. Required.
+        type: string
+    type: object
+  Empty:
+    description: |-
+      A generic empty message that you can re-use to avoid defining duplicated
+      empty messages in your APIs. A typical example is to use it as the request
+      or the response type of an API method. For instance:
+
+          service Foo {
+            rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+          }
+
+      The JSON representation for `Empty` is empty JSON object `{}`.
+    properties: {}
+    type: object
+  EndCondition:
+    description: |-
+      A condition that a Waiter resource is waiting for. The set of possible
+      conditions may expand over time.
+    properties:
+      cardinality:
+        $ref: '#/definitions/Cardinality'
+        description: The Cardinality condition type configuration.
+    type: object
+  ListConfigsResponse:
+    description: |-
+      Response for the `ListConfigs()` method.
+      Order of returned configuration objects is arbitrary.
+    properties:
+      configs:
+        description: Found configurations in the project.
+        items:
+          $ref: '#/definitions/RuntimeConfig'
+        type: array
+      nextPageToken:
+        description: Pagination support.
+        type: string
+    type: object
+  ListVariablesResponse:
+    description: |-
+      Response for the `ListVariables()` method.
+      Order of returned variable objects is arbitrary.
+    properties:
+      nextPageToken:
+        description: Pagination support.
+        type: string
+      variables:
+        description: Matched variables and their values.
+        items:
+          $ref: '#/definitions/Variable'
+        type: array
+    type: object
+  ListWaitersResponse:
+    description: |-
+      Response for the `ListWaiters()` method.
+      Order of returned waiter objects is arbitrary.
+    properties:
+      nextPageToken:
+        description: Pagination support.
+        type: string
+      waiters:
+        description: Found waiters in the project.
+        items:
+          $ref: '#/definitions/Waiter'
+        type: array
+    type: object
+  Operation:
+    description: |-
+      This resource represents a long-running operation that is the result of a
+      network API call.
+    properties:
+      done:
+        description: |-
+          If the value is `false`, it means the operation is still in progress.
+          If true, the operation is completed, and either `error` or `response` is
+          available.
+        type: boolean
+      error:
+        $ref: '#/definitions/Status'
+        description: The error result of the operation in case of failure.
+      metadata:
+        additionalProperties:
+          description: Properties of the object. Contains field @ype with type URL.
+        description: |-
+          Service-specific metadata associated with the operation.  It typically
+          contains progress information and common metadata such as create time.
+          Some services might not provide such metadata.  Any method that returns a
+          long-running operation should document the metadata type, if any.
+        type: object
+      name:
+        description: |-
+          The server-assigned name, which is only unique within the same service that
+          originally returns it. If you use the default HTTP mapping, the
+          `name` should have the format of `operations/some/unique/name`.
+        type: string
+      response:
+        additionalProperties:
+          description: Properties of the object. Contains field @ype with type URL.
+        description: |-
+          The normal response of the operation in case of success.  If the original
+          method returns no data on success, such as `Delete`, the response is
+          `google.protobuf.Empty`.  If the original method is standard
+          `Get`/`Create`/`Update`, the response should be the resource.  For other
+          methods, the response should have the type `XxxResponse`, where `Xxx`
+          is the original method name.  For example, if the original method name
+          is `TakeSnapshot()`, the inferred response type is
+          `TakeSnapshotResponse`.
+        type: object
+    type: object
+  RuntimeConfig:
+    description: |-
+      RuntimeConfig is the primary resource in the Configuration service.
+      It consists of metadata and a hierarchy of variables.
+    properties:
+      description:
+        description: |-
+          Description of the configuration object.
+          `len(description)` must be less than 256.
+        type: string
+      name:
+        description: |-
+          The resource name of a runtime config.
+          It has the format of "projects/{project_id}/configs/{config_id}",
+          where `project_id` is a valid Google cloud project ID, and the
+          `config_id` must match RFC 1035 segment specification, and
+          `len(config_id)` must be less than 64 bytes.
+          The name is assigned by the client, but will be validated on the server
+          side to adhere to the format.
+          Name is immutable and cannot be changed.
+        type: string
+    type: object
+  Status:
+    description: |-
+      The `Status` type defines a logical error model that is suitable for different
+      programming environments, including REST APIs and RPC APIs. It is used by
+      [gRPC](https://github.com/grpc). The error model is designed to be:
+
+      - Simple to use and understand for most users
+      - Flexible enough to meet unexpected needs
+
+      # Overview
+
+      The `Status` message contains three pieces of data: error code, error message,
+      and error details. The error code should be an enum value of
+      google.rpc.Code, but it may accept additional error codes if needed.  The
+      error message should be a developer-facing English message that helps
+      developers *understand* and *resolve* the error. If a localized user-facing
+      error message is needed, put the localized message in the error details or
+      localize it in the client. The optional error details may contain arbitrary
+      information about the error. There is a predefined set of error detail types
+      in the package `google.rpc` which can be used for common error conditions.
+
+      # Language mapping
+
+      The `Status` message is the logical representation of the error model, but it
+      is not necessarily the actual wire format. When the `Status` message is
+      exposed in different client libraries and different wire protocols, it can be
+      mapped differently. For example, it will likely be mapped to some exceptions
+      in Java, but more likely mapped to some error codes in C.
+
+      # Other uses
+
+      The error model and the `Status` message can be used in a variety of
+      environments, either with or without APIs, to provide a
+      consistent developer experience across different environments.
+
+      Example uses of this error model include:
+
+      - Partial errors. If a service needs to return partial errors to the client,
+          it may embed the `Status` in the normal response to indicate the partial
+          errors.
+
+      - Workflow errors. A typical workflow has multiple steps. Each step may
+          have a `Status` message for error reporting purpose.
+
+      - Batch operations. If a client uses batch request and batch response, the
+          `Status` message should be used directly inside batch response, one for
+          each error sub-response.
+
+      - Asynchronous operations. If an API call embeds asynchronous operation
+          results in its response, the status of those operations should be
+          represented directly using the `Status` message.
+
+      - Logging. If some API errors are stored in logs, the message `Status` could
+          be used directly after any stripping needed for security/privacy reasons.
+    properties:
+      code:
+        description: 'The status code, which should be an enum value of google.rpc.Code.'
+        format: int32
+        type: integer
+      details:
+        description: |-
+          A list of messages that carry the error details.  There will be a
+          common set of message types for APIs to use.
+        items:
+          additionalProperties:
+            description: Properties of the object. Contains field @ype with type URL.
+          type: object
+        type: array
+      message:
+        description: |-
+          A developer-facing error message, which should be in English. Any
+          user-facing error message should be localized and sent in the
+          google.rpc.Status.details field, or localized by the client.
+        type: string
+    type: object
+  Variable:
+    description: |-
+      Variable message describes a single variable within a Configuration object.
+      name denotes the hierarchical variable name, e.g.
+      ports/serving_port within flags configuration object.
+      Value is an opaque string and only leaf variables can have values.
+    properties:
+      name:
+        description: |-
+          Name of the variable resource.
+          It has format of
+          "projects/{project_id}/configs/{config_id}/variables/{variable_id}",
+          Where `project_id` must be a valid Google Cloud project ID, `config_id`
+          must be a valid RuntimeConfig object and `variable_id` follows Unix
+          file system file path naming.
+          `variable_id` can contain ASCII letters, numbers, slashes and dashes.
+          Slashes are used as path element separators and are not part of the
+          `variable_id` itself, so `variable_id` must contain at least one non-slash
+          character. Multiple slashes are coalesced into single slash character.
+          Each path segment should follow RFC 1035 segment specification.
+          `len(variable_id)` must be less than 256 bytes.
+          The name is assigned by the client, but will be validated on the server
+          side to adhere to the format.
+          Name is immutable and cannot be changed.
+        type: string
+      state:
+        description: |-
+          [Ouput only] The current state of the variable.
+          State denotes the outcome of the Watch call and is unset by the Get/List
+          calls.
+        enum:
+          - VARIABLE_STATE_UNSPECIFIED
+          - UPDATED
+          - DELETED
+        type: string
+      updateTime:
+        description: '[Output Only] The time of the last variable update.'
+        format: google-datetime
+        type: string
+      value:
+        description: |-
+          `len(value)` must be less than 4096 bytes. Empty values are also accepted.
+          value must be Base64 encoded.
+        format: byte
+        type: string
+    type: object
+  Waiter:
+    description: |-
+      A Waiter resource waits for some condition within a RuntimeConfig resource
+      to be met. For example: each node in a distributed system startup process
+      writes a value to a Variable resource indicating its readiness. A Waiter
+      configured with the proper `success` condition can be used to wait until
+      some number of nodes have checked in.
+      Once created, a Waiter resource is immutable.
+    properties:
+      createTime:
+        description: |-
+          The instant at which this Waiter was created. Adding the value of `timeout`
+          to this instant yields the timeout deadline for this Waiter. Output only.
+        format: google-datetime
+        type: string
+      done:
+        description: |-
+          If the value is `false`, it means the Waiter is still waiting for one of
+          its conditions to be met.
+          If true, the Waiter has finished. If the Waiter finished due to a timeout
+          or failure, `error` will be set. Output only.
+        type: boolean
+      error:
+        $ref: '#/definitions/Status'
+        description: |
+          If the Waiter ended due to a failure or timeout, this value will be set.
+          Output only.
+      failure:
+        $ref: '#/definitions/EndCondition'
+        description: |-
+          The failure condition. If this condition is met, `done` will be set to
+          `true` and the `error` code will be set to ABORTED. The failure condition
+          takes precedence over the success condition. If both conditions are met, a
+          failure will be indicated. This value is optional; if no failure condition
+          is set, the only failure scenario will be a timeout. Optional.
+      name:
+        description: |-
+          Name of the variable resource.
+          It has format of
+          "projects/{project_id}/configs/{config_id}/waiters/{waiter_id}",
+          Where `project_id` must be a valid Google Cloud project ID, `config_id`
+          must be a valid RuntimeConfig object and the `waiter_id` must match
+          RFC 1035 segment specification, and `len(waiter_id)` must be less than
+          64 bytes.
+          The name is assigned by the client, but will be validated on the server
+          side to adhere to the format.
+          Name is immutable and cannot be changed. Required.
+        type: string
+      success:
+        $ref: '#/definitions/EndCondition'
+        description: |-
+          The success condition. If this condition is met, `done` will be set to
+          `true` and the `error` value will remain unset. The failure condition
+          takes precedence over the success condition. If both conditions are met, a
+          failure will be indicated. Required.
+      timeout:
+        description: |-
+          The timeout, beginning from the instant that CreateWaiter is called. If
+          this timeout elapses prior to the success or failure conditions being met,
+          the Waiter will fail and the `error` code will be set to DEADLINE_EXCEEDED.
+          Required.
+        format: google-duration
+        type: string
+    type: object
+  WatchVariableRequest:
+    description: Request for the `WatchVariable()` method.
+    properties:
+      newerThan:
+        description: |-
+          If backend has a variable that has a newer value than this timestamp, then
+          request will return immediately with current value.
+          If not specified or variable has an older timestamp, will wait for the new
+          value.
+        format: google-datetime
+        type: string
+    type: object

@@ -345,6 +345,8 @@ tags:
     name: type/trip_report
   - description: Search API for 'Trip' entry type
     name: type/trip_trip
+  - description: Search API for 'Artists Space' entry type
+    name: type/type_artists_space
   - description: Search API for 'AWC Weather Observations' entry type
     name: type/type_awc_metar
   - description: Search API for 'aWhere Farm' entry type
@@ -15365,6 +15367,137 @@ paths:
       summary: Search API for 'Trip' entry type
       tags:
         - type/trip_trip
+  /repository/search/type/type_artists_space:
+    get:
+      description: API to search for entries of type Artists Space
+      operationId: search_type_artists_space
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Address
+          in: query
+          name: search.type_artists_space.address
+          required: false
+          type: string
+        - description: Area
+          in: query
+          name: search.type_artists_space.sqft
+          required: false
+          type: integer
+        - description: Occupancy
+          in: query
+          name: search.type_artists_space.occupancy
+          required: false
+          type: integer
+        - description: Use
+          in: query
+          name: search.type_artists_space.use
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: Search API for 'Artists Space' entry type
+      tags:
+        - type/type_artists_space
   /repository/search/type/type_awc_metar:
     get:
       description: API to search for entries of type AWC Weather Observations

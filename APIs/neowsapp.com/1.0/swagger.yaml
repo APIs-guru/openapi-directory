@@ -56,7 +56,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/NearEarthObject'
+            $ref: '#/definitions/NearEarthObjectList'
         '401':
           description: Unauthorized
         '403':
@@ -79,7 +79,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/NearEarthObject'
+            $ref: '#/definitions/NearEarthObjectList'
         '401':
           description: Unauthorized
         '403':
@@ -117,7 +117,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/NearEarthObjectFeedDto'
+            $ref: '#/definitions/NearEarthObject'
         '401':
           description: Unauthorized
         '403':
@@ -146,7 +146,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/NearEarthObjectFeedDto'
+            $ref: '#/definitions/NearEarthObject'
         '401':
           description: Unauthorized
         '403':
@@ -207,13 +207,17 @@ definitions:
     properties:
       feet:
         $ref: '#/definitions/EstimatedDiameter'
+        description: estimated diameter feet
       kilometers:
         $ref: '#/definitions/EstimatedDiameter'
+        description: estimated diameter kilometer
       meters:
         $ref: '#/definitions/EstimatedDiameter'
+        description: estimated diameter meter
       miles:
         $ref: '#/definitions/EstimatedDiameter'
-  'HashMap«string,List«NearEarthObjectFeedDto»»': {}
+        description: estimated diameter miles
+  'HashMap«string,List«NearEarthObject»»': {}
   Link:
     properties:
       href:
@@ -234,15 +238,6 @@ definitions:
         type: string
   NearEarthObject:
     properties:
-      element_count:
-        format: int32
-        type: integer
-      links:
-        type: object
-      near_earth_objects:
-        $ref: '#/definitions/HashMap«string,List«NearEarthObjectFeedDto»»'
-  NearEarthObjectFeedDto:
-    properties:
       absolute_magnitude_h:
         description: Is a measure of an asteroids brightness
         format: double
@@ -254,6 +249,7 @@ definitions:
         type: array
       estimated_diameter:
         $ref: '#/definitions/EstimatedDiameterContainer'
+        description: 'A collection of estimated diameters (kilometers, meters, miles, feet'
       is_potentially_hazardous_asteroid:
         type: boolean
       name:
@@ -267,6 +263,18 @@ definitions:
       orbital_data:
         $ref: '#/definitions/OrbitalData'
         description: Orbital information of the asteroid
+  NearEarthObjectList:
+    properties:
+      element_count:
+        description: Number of NEOs in list
+        format: int32
+        type: integer
+      links:
+        description: Hypermedia links to collection
+        type: object
+      near_earth_objects:
+        $ref: '#/definitions/HashMap«string,List«NearEarthObject»»'
+        description: A collection of NearEarthObjects
   OrbitalData:
     properties:
       aphelion_distance:
@@ -308,9 +316,11 @@ definitions:
   Statistics:
     properties:
       close_approach_count:
+        description: Number of Close Approach listings across all NEOs listed in NeoWs
         format: int64
         type: integer
       last_updated:
+        description: TimeStamp the last time the DB was updated
         type: string
       links:
         items:
@@ -319,6 +329,7 @@ definitions:
       nasa_jpl_url:
         $ref: '#/definitions/URL'
       near_earth_object_count:
+        description: Number of NearEarthObjects listed in NeoWs
         format: int64
         type: integer
       source:

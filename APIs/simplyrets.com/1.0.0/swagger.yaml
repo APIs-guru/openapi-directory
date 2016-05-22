@@ -354,6 +354,8 @@ paths:
         - description: |
             Filter the listings returned by an agent ID.  Note, the
             Agent ID is provided by your MLS.
+
+            The co-listing agent is not included in this query parameter.
           in: query
           name: agent
           required: false
@@ -741,6 +743,8 @@ definitions:
           Agent contact info. This information is only present when
           your RETS feed specifies the agent wishes to show their
           contact information publicly.
+
+          *Contact information is not available for all RETS Vendors.*
       firstName:
         description: Agent first name
         type: string
@@ -824,6 +828,14 @@ definitions:
       agent:
         $ref: '#/definitions/Agent'
         description: Comprehensive listing agent information
+      coAgent:
+        $ref: '#/definitions/Agent'
+        description: |
+          co-listing agent information.
+
+          *NOTE*: If your RETS feed stores co-list information outside
+          of the `Property` resource, co-list agent information will not
+          be available.
       disclaimer:
         description: |
           Data accuracy disclaimer. The value in the disclaimer may
@@ -927,6 +939,20 @@ definitions:
         description: Amount of days the property has been Active
         format: int64
         type: integer
+      originatingSystemName:
+        description: |
+          Alias for the listing office or brokerage
+
+          This field corresponds to the data-dictionary `OriginatingSystemName` field
+
+          The name of the originating record provider.  Most commonly
+          the name of the MLS. The place where the listing is
+          originally input by the member.  The legal name of the
+          company.  To be used for display.
+
+          If you're RETS provider aggregates feeds from multiple
+          MLS's, this will be the name of the corresponding MLS.
+        type: string
       status:
         description: |
           MLS Status Code. Compliant with data dictionary v1.3 ListingStatus
@@ -974,6 +1000,8 @@ definitions:
         description: |
           Associated contact details for the office. The availability of this
           information depends on your MLS rules and regulations
+
+          *Contact information is not available for all RETS Vendors.*
       name:
         description: Pimary office name
         type: string

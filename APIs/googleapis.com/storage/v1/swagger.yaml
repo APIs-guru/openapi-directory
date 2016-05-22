@@ -2080,7 +2080,7 @@ definitions:
         description: Content-Language of the object data.
         type: string
       contentType:
-        description: Content-Type of the object data.
+        description: 'Content-Type of the object data. If contentType is not specified, object downloads will be served as application/octet-stream.'
         type: string
       crc32c:
         description: 'CRC32c checksum, as described in RFC 4960, Appendix B; encoded using base64 in big-endian byte order. For more information about using the CRC32c checksum, see Hashes and ETags: Best Practices.'

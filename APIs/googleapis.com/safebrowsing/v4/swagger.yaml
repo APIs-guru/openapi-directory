@@ -269,7 +269,6 @@ definitions:
         type: array
     type: object
   FetchThreatListUpdatesResponse:
-    description: Response type for threat list update requests.
     properties:
       listUpdateResponses:
         description: The list updates requested by the clients.
@@ -297,7 +296,6 @@ definitions:
         description: The lists and hashes to be checked.
     type: object
   FindFullHashesResponse:
-    description: Response type for requests to find full hashes.
     properties:
       matches:
         description: The full hashes that matched the requested prefixes.
@@ -322,7 +320,6 @@ definitions:
         description: The lists and entries to be checked for matches.
     type: object
   FindThreatMatchesResponse:
-    description: Response type for requests to find threat matches.
     properties:
       matches:
         description: The threat list matches.
@@ -331,7 +328,6 @@ definitions:
         type: array
     type: object
   ListThreatListsResponse:
-    description: A collection of lists available for download by the client.
     properties:
       threatLists:
         description: The lists available for download by the client.
@@ -359,15 +355,15 @@ definitions:
           - CHROME
         type: string
       state:
-        description: The current state of the client for the requested list (the encrypted ClientState that was sent to the client from the previous update request).
+        description: The current state of the client for the requested list (the encrypted client state that was received from the last successful list update).
         format: byte
         type: string
       threatEntryType:
         description: The types of entries present in the list.
         enum:
           - THREAT_ENTRY_TYPE_UNSPECIFIED
-          - URL_EXPRESSION
-          - BINARY_DIGEST
+          - URL
+          - EXECUTABLE
           - IP_RANGE
         type: string
       threatType:
@@ -424,8 +420,8 @@ definitions:
         description: The format of the threats.
         enum:
           - THREAT_ENTRY_TYPE_UNSPECIFIED
-          - URL_EXPRESSION
-          - BINARY_DIGEST
+          - URL
+          - EXECUTABLE
           - IP_RANGE
         type: string
       threatType:
@@ -484,19 +480,23 @@ definitions:
         format: int64
         type: string
       numEntries:
-        description: 'The number of entries that are delta encoded in the encoded data. If only a single integer was encoded, this will be zero and the single value will be stored in first_value.'
+        description: 'The number of entries that are delta encoded in the encoded data. If only a single integer was encoded, this will be zero and the single value will be stored in `first_value`.'
         format: int32
         type: integer
       riceParameter:
-        description: 'The Golomb-Rice parameter which is a number between 2 and 28. This field is missing (that is, zero) if num_entries is zero.'
+        description: 'The Golomb-Rice parameter, which is a number between 2 and 28. This field is missing (that is, zero) if `num_entries` is zero.'
         format: int32
         type: integer
     type: object
   ThreatEntry:
     description: 'An individual threat; for example, a malicious URL or its hash representation. Only one of these fields should be set.'
     properties:
+      digest:
+        description: The digest of an executable in SHA256 format. The API supports both binary and hex digests.
+        format: byte
+        type: string
       hash:
-        description: 'A hash prefix, consisting of the most significant 4-32 bytes of a SHA256 hash.'
+        description: 'A hash prefix, consisting of the most significant 4-32 bytes of a SHA256 hash. This field is in binary format.'
         format: byte
         type: string
       url:
@@ -563,8 +563,8 @@ definitions:
         items:
           enum:
             - THREAT_ENTRY_TYPE_UNSPECIFIED
-            - URL_EXPRESSION
-            - BINARY_DIGEST
+            - URL
+            - EXECUTABLE
             - IP_RANGE
           type: string
         type: array
@@ -600,8 +600,8 @@ definitions:
         description: The entry types contained in the list.
         enum:
           - THREAT_ENTRY_TYPE_UNSPECIFIED
-          - URL_EXPRESSION
-          - BINARY_DIGEST
+          - URL
+          - EXECUTABLE
           - IP_RANGE
         type: string
       threatType:
@@ -643,8 +643,8 @@ definitions:
         description: The threat entry type matching this threat.
         enum:
           - THREAT_ENTRY_TYPE_UNSPECIFIED
-          - URL_EXPRESSION
-          - BINARY_DIGEST
+          - URL
+          - EXECUTABLE
           - IP_RANGE
         type: string
       threatType:

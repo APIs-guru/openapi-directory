@@ -24,6 +24,8 @@ tags:
     name: observation-heading-controller
   - description: Patient Controller
     name: patient-controller
+  - description: Patient Management Controller
+    name: patient-management-controller
 paths:
   /auth/login:
     post:
@@ -146,6 +148,225 @@ paths:
       summary: Get Basic Patient Information
       tags:
         - patient-controller
+  /patientmanagement/diagnoses:
+    get:
+      consumes:
+        - application/json
+      deprecated: false
+      description: getPatientManagementDiagnoses
+      operationId: getPatientManagementDiagnoses
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Code'
+            type: array
+            uniqueItems: false
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: getPatientManagementDiagnoses
+      tags:
+        - patient-management-controller
+  /patientmanagement/lookuptypes:
+    get:
+      consumes:
+        - application/json
+      deprecated: false
+      description: getPatientManagementLookupTypes
+      operationId: getPatientManagementLookupTypes
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/LookupType'
+            type: array
+            uniqueItems: false
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: getPatientManagementLookupTypes
+      tags:
+        - patient-management-controller
+  /patientmanagement/validate:
+    post:
+      consumes:
+        - application/json
+      deprecated: false
+      description: validatePatientManagement
+      operationId: validatePatientManagement
+      parameters:
+        - description: patientManagement
+          in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/PatientManagement'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Description was not specified
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: validatePatientManagement
+      tags:
+        - patient-management-controller
+  '/patientmanagement/{userId}/group/{groupId}/identifier/{identifierId}':
+    get:
+      consumes:
+        - application/json
+      deprecated: false
+      description: getPatientManagement
+      operationId: getPatientManagement
+      parameters:
+        - description: userId
+          format: int64
+          in: path
+          name: userId
+          required: true
+          type: integer
+        - description: groupId
+          format: int64
+          in: path
+          name: groupId
+          required: true
+          type: integer
+        - description: identifierId
+          format: int64
+          in: path
+          name: identifierId
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PatientManagement'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: getPatientManagement
+      tags:
+        - patient-management-controller
+    post:
+      consumes:
+        - application/json
+      deprecated: false
+      description: savePatientManagement
+      operationId: savePatientManagement
+      parameters:
+        - description: userId
+          format: int64
+          in: path
+          name: userId
+          required: true
+          type: integer
+        - description: groupId
+          format: int64
+          in: path
+          name: groupId
+          required: true
+          type: integer
+        - description: identifierId
+          format: int64
+          in: path
+          name: identifierId
+          required: true
+          type: integer
+        - description: patientManagement
+          in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/PatientManagement'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Description was not specified
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: savePatientManagement
+      tags:
+        - patient-management-controller
+  '/patientmanagement/{userId}/group/{groupId}/identifier/{identifierId}/surgeries':
+    post:
+      consumes:
+        - application/json
+      deprecated: false
+      description: savePatientManagementSurgeries
+      operationId: savePatientManagementSurgeries
+      parameters:
+        - description: userId
+          format: int64
+          in: path
+          name: userId
+          required: true
+          type: integer
+        - description: groupId
+          format: int64
+          in: path
+          name: groupId
+          required: true
+          type: integer
+        - description: identifierId
+          format: int64
+          in: path
+          name: identifierId
+          required: true
+          type: integer
+        - description: patientManagement
+          in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/PatientManagement'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Description was not specified
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: savePatientManagementSurgeries
+      tags:
+        - patient-management-controller
   '/user/{userId}/availableobservationheadings':
     get:
       consumes:
@@ -434,6 +655,8 @@ definitions:
         uniqueItems: true
       notes:
         type: string
+      severity:
+        type: string
       status:
         type: string
   FhirContact:
@@ -449,6 +672,9 @@ definitions:
         type: string
   FhirEncounter:
     properties:
+      date:
+        format: date-time
+        type: string
       encounterType:
         type: string
       group:
@@ -461,6 +687,16 @@ definitions:
       links:
         items:
           $ref: '#/definitions/Link'
+        type: array
+        uniqueItems: true
+      observations:
+        items:
+          $ref: '#/definitions/FhirObservation'
+        type: array
+        uniqueItems: true
+      procedures:
+        items:
+          $ref: '#/definitions/FhirProcedure'
         type: array
         uniqueItems: true
       status:
@@ -488,10 +724,12 @@ definitions:
       diagram:
         type: string
       group:
-        $ref: '#/definitions/BaseGroup'
+        $ref: '#/definitions/Group'
       id:
         format: int64
         type: integer
+      identifier:
+        type: string
       location:
         type: string
       name:
@@ -586,13 +824,39 @@ definitions:
         type: string
       role:
         type: string
+  FhirProcedure:
+    properties:
+      bodySite:
+        type: string
+      id:
+        format: int64
+        type: integer
+      type:
+        type: string
   Group:
     properties:
+      address1:
+        type: string
+      address2:
+        type: string
+      address3:
+        type: string
       childGroups:
         items:
           $ref: '#/definitions/Group'
         type: array
       code:
+        type: string
+      contactPoints:
+        items:
+          $ref: '#/definitions/ContactPoint'
+        type: array
+        uniqueItems: true
+      created:
+        format: date-time
+        type: string
+      fhirResourceId:
+        format: uuid
         type: string
       groupFeatures:
         items:
@@ -611,6 +875,7 @@ definitions:
         items:
           $ref: '#/definitions/Link'
         type: array
+        uniqueItems: true
       locations:
         items:
           $ref: '#/definitions/Location'
@@ -622,6 +887,10 @@ definitions:
         items:
           $ref: '#/definitions/Group'
         type: array
+      postcode:
+        type: string
+      sftpUser:
+        type: string
       shortName:
         type: string
       visible:
@@ -691,6 +960,11 @@ definitions:
         type: string
       description:
         type: string
+      descriptionFriendly:
+        type: string
+      displayOrder:
+        format: int64
+        type: integer
       id:
         format: int64
         type: integer
@@ -721,6 +995,16 @@ definitions:
           - CONTACT_POINT_TYPE
           - STATISTIC_TYPE
           - NEWS_TYPE
+          - GENDER
+          - IBD_CROHNSLOCATION
+          - IBD_CROHNSPROXIMALTERMINALILEUM
+          - IBD_CROHNSPERIANAL
+          - IBD_CROHNSBEHAVIOUR
+          - IBD_UCEXTENT
+          - IBD_EGIMCOMPLICATION
+          - IBD_SURGERYMAINPROCEDURE
+          - IBD_SMOKINGSTATUS
+          - IBD_FAMILYHISTORY
         type: string
   ObservationHeading:
     properties:
@@ -811,6 +1095,28 @@ definitions:
       id:
         format: int64
         type: integer
+  PatientManagement:
+    properties:
+      condition:
+        $ref: '#/definitions/FhirCondition'
+      encounters:
+        items:
+          $ref: '#/definitions/FhirEncounter'
+        type: array
+      groupCode:
+        type: string
+      identifier:
+        type: string
+      observations:
+        items:
+          $ref: '#/definitions/FhirObservation'
+        type: array
+      patient:
+        $ref: '#/definitions/FhirPatient'
+      practitioners:
+        items:
+          $ref: '#/definitions/FhirPractitioner'
+        type: array
   Role:
     properties:
       description:
@@ -855,14 +1161,7 @@ definitions:
         type: string
       url:
         type: string
-  UUID:
-    properties:
-      leastSignificantBits:
-        format: int64
-        type: integer
-      mostSignificantBits:
-        format: int64
-        type: integer
+  UUID: {}
   User:
     properties:
       canSwitchUser:
@@ -873,6 +1172,11 @@ definitions:
         type: string
       created:
         format: date-time
+        type: string
+      currentLogin:
+        format: date-time
+        type: string
+      currentLoginIpAddress:
         type: string
       dateOfBirth:
         format: date-time

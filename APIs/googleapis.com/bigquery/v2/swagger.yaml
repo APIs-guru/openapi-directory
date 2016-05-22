@@ -1180,7 +1180,7 @@ definitions:
         description: '[Required] The data format. For CSV files, specify "CSV". For Google sheets, specify "GOOGLE_SHEETS". For newline-delimited JSON, specify "NEWLINE_DELIMITED_JSON". For Avro files, specify "AVRO". For Google Cloud Datastore backups, specify "DATASTORE_BACKUP". [Experimental] For Google Cloud Bigtable, specify "BIGTABLE". Please note that reading from Google Cloud Bigtable is experimental and has to be enabled for your project. Please contact Google Cloud Support to enable this for your project.'
         type: string
       sourceUris:
-        description: '[Required] The fully-qualified URIs that point to your data in Google Cloud. For Google Cloud Storage URIs: Each URI can contain one ''*'' wildcard character and it must come after the ''bucket'' name. Size limits related to load jobs apply to external data sources, plus an additional limit of 10 GB maximum size across all URIs. For Google Cloud Bigtable URIs: Exactly one URI can be specified and it has be a fully specified and valid HTTPS URL for a Google Cloud Bigtable table. For Google Cloud Datastore backups, exactly one URI can be specified, and it must end with ''.backup_info''. Also, the ''*'' wildcard character is not allowed.'
+        description: '[Required] The fully-qualified URIs that point to your data in Google Cloud. For Google Cloud Storage URIs: Each URI can contain one ''*'' wildcard character and it must come after the ''bucket'' name. Size limits related to load jobs apply to external data sources. For Google Cloud Bigtable URIs: Exactly one URI can be specified and it has be a fully specified and valid HTTPS URL for a Google Cloud Bigtable table. For Google Cloud Datastore backups, exactly one URI can be specified, and it must end with ''.backup_info''. Also, the ''*'' wildcard character is not allowed.'
         items:
           type: string
         type: array
@@ -1328,6 +1328,9 @@ definitions:
         type: boolean
       allowQuotedNewlines:
         description: Indicates if BigQuery should allow quoted data sections that contain newline characters in a CSV file. The default value is false.
+        type: boolean
+      autodetect:
+        description: '[Experimental] Indicates if we should automatically infer the options and schema for CSV and JSON sources.'
         type: boolean
       createDisposition:
         description: '[Optional] Specifies whether the job is allowed to create new tables. The following values are supported: CREATE_IF_NEEDED: If the table does not exist, BigQuery creates the table. CREATE_NEVER: The table must already exist. If it does not, a ''notFound'' error is returned in the job result. The default value is CREATE_IF_NEEDED. Creation, truncation and append actions occur as one atomic update upon job completion.'
@@ -1792,6 +1795,10 @@ definitions:
         type: string
       numBytes:
         description: '[Output-only] The size of this table in bytes, excluding any data in the streaming buffer.'
+        format: int64
+        type: string
+      numLongTermBytes:
+        description: '[Output-only] The number of bytes in the table that are considered "long-term storage".'
         format: int64
         type: string
       numRows:

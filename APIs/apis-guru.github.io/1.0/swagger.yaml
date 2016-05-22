@@ -49,6 +49,7 @@ paths:
             $ref: '#/definitions/APIs'
 definitions:
   API:
+    additionalProperties: false
     description: Meta information about API
     properties:
       added:
@@ -62,7 +63,12 @@ definitions:
         additionalProperties:
           $ref: '#/definitions/ApiVersion'
         description: List supported versions of API
+        minProperties: 1
         type: object
+    required:
+      - added
+      - preferred
+      - versions
     type: object
   APIs:
     additionalProperties:
@@ -70,8 +76,10 @@ definitions:
     description: |
       List of API details.
       It consist of JSON object with API IDs(`<provider>[:<service>]`) as keys.
+    minProperties: 1
     type: object
   ApiVersion:
+    additionalProperties: false
     properties:
       added:
         description: Timestamp when this version was added
@@ -79,6 +87,7 @@ definitions:
         type: string
       info:
         description: Copy of `info` section from Swagger spec
+        minProperties: 1
         type: object
       swaggerUrl:
         description: URL of Swagger spec in JSON format
@@ -92,4 +101,10 @@ definitions:
         description: Timestamp when this version was updated
         format: date-time
         type: string
+    required:
+      - added
+      - updated
+      - swaggerUrl
+      - swaggerYamlUrl
+      - info
     type: object

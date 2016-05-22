@@ -80,7 +80,7 @@ paths:
           name: signature
           required: true
           type: string
-        - description: 'The account to which you want to deposit. Available values: cny, btc, eth, pls, note, bts, bitcny, bitusd, bitbtc, yun, nxt, ltc, doge, dgd'
+        - description: 'The account to which you want to deposit. Available values: cny, btc, eth, pls, note, bts, bitcny, bitusd, bitbtc, yun, nxt, ltc, doge, sc, dgd, dcs'
           in: query
           name: currency
           required: true
@@ -112,7 +112,7 @@ paths:
           name: signature
           required: true
           type: string
-        - description: 'Currency value contains  cny,btc,eth,pls,note,bts,bitcny,bitusd,bitbtc,yun,nxt,ltc,doge,dgd'
+        - description: 'Currency value contains  cny,btc,eth,pls,note,bts,bitcny,bitusd,bitbtc,yun,nxt,ltc,doge,sc,dgd,dcs'
           in: query
           name: currency
           required: false

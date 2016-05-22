@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Lets Google Play Movies Partners get the delivery status of their titles.
+  description: Gets the delivery status of titles for Google Play Movies Partners.
   title: Google Play Movies Partner
   version: v1
   x-apiClientRegistration:
@@ -135,7 +135,7 @@ paths:
             type: string
           name: studioNames
           type: array
-        - description: Filter Avails that match a case-insensitive substring of the default Title name.
+        - description: 'Filter that matches Avails with a `title_internal_alias`, `series_title_internal_alias`, `season_title_internal_alias`, or `episode_title_internal_alias` that contains the given case-insensitive title.'
           in: query
           name: title
           type: string
@@ -146,7 +146,7 @@ paths:
             type: string
           name: territories
           type: array
-        - description: 'Filter Avails that match a case-insensitive, partner-specific custom id.'
+        - description: 'Filter Avails that match a case-insensitive, partner-specific custom id. NOTE: this field is deprecated and will be removed on V2; `alt_ids` should be used instead.'
           in: query
           name: altId
           type: string
@@ -157,11 +157,215 @@ paths:
             type: string
           name: videoIds
           type: array
+        - collectionFormat: multi
+          description: Filter Avails that match (case-insensitive) any of the given partner-specific custom ids.
+          in: query
+          items:
+            type: string
+          name: altIds
+          type: array
       responses:
         '200':
           description: Successful response
           schema:
             $ref: '#/definitions/ListAvailsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/playmovies_partner.readonly'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+  '/v1/accounts/{accountId}/avails/{availId}':
+    get:
+      description: Get an Avail given its avail group id and avail id.
+      operationId: playmoviespartner.accounts.avails.get
+      parameters:
+        - description: REQUIRED. See _General rules_ for more information about this field.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: REQUIRED. Avail ID.
+          in: path
+          name: availId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Avail'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/playmovies_partner.readonly'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+  '/v1/accounts/{accountId}/components':
+    get:
+      description: List Components owned or managed by the partner. See _Authentication and Authorization rules_ and _List methods rules_ for more information about this method.
+      operationId: playmoviespartner.accounts.components.list
+      parameters:
+        - description: REQUIRED. See _General rules_ for more information about this field.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: See _List methods rules_ for info about this field.
+          in: query
+          name: pageSize
+          type: integer
+        - description: See _List methods rules_ for info about this field.
+          in: query
+          name: pageToken
+          type: string
+        - collectionFormat: multi
+          description: See _List methods rules_ for info about this field.
+          in: query
+          items:
+            type: string
+          name: pphNames
+          type: array
+        - collectionFormat: multi
+          description: See _List methods rules_ for info about this field.
+          in: query
+          items:
+            type: string
+          name: studioNames
+          type: array
+        - description: Filter Components that match a given title-level EIDR.
+          in: query
+          name: titleLevelEidr
+          type: string
+        - description: Filter Components that match a given edit-level EIDR.
+          in: query
+          name: editLevelEidr
+          type: string
+        - collectionFormat: multi
+          description: Filter Components that match one of the given status.
+          in: query
+          items:
+            enum:
+              - STATUS_UNSPECIFIED
+              - STATUS_APPROVED
+              - STATUS_FAILED
+              - STATUS_PROCESSING
+              - STATUS_UNFULFILLED
+              - STATUS_NOT_AVAILABLE
+            type: string
+          name: status
+          type: array
+        - description: Filter Components that match a case-insensitive partner-specific custom id.
+          in: query
+          name: customId
+          type: string
+        - description: InventoryID available in Common Manifest.
+          in: query
+          name: inventoryId
+          type: string
+        - description: PresentationID available in Common Manifest.
+          in: query
+          name: presentationId
+          type: string
+        - description: PlayableSequenceID available in Common Manifest.
+          in: query
+          name: playableSequenceId
+          type: string
+        - description: 'Experience ID, as defined by Google.'
+          in: query
+          name: elId
+          type: string
+        - description: 'Filter Components that match a case-insensitive, partner-specific Alternative Cut ID.'
+          in: query
+          name: altCutId
+          type: string
+        - description: Filter Components that match a case-insensitive substring of the physical name of the delivered file.
+          in: query
+          name: filename
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListComponentsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/playmovies_partner.readonly'
+      tags:
+        - accounts
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+  '/v1/accounts/{accountId}/components/{componentId}/type/{type}':
+    get:
+      description: Get a Component given its id.
+      operationId: playmoviespartner.accounts.components.type.get
+      parameters:
+        - description: REQUIRED. See _General rules_ for more information about this field.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: REQUIRED. Component ID.
+          in: path
+          name: componentId
+          required: true
+          type: string
+        - description: REQUIRED. Component Type.
+          enum:
+            - COMPONENT_TYPE_UNSPECIFIED
+            - VIDEO
+            - AUDIO_20
+            - AUDIO_51
+            - SUBTITLE
+            - ARTWORK
+            - METADATA
+          in: path
+          name: type
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Component'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/playmovies_partner.readonly'
@@ -338,7 +542,7 @@ paths:
             type: string
           name: studioNames
           type: array
-        - description: 'Filter Orders that match a title name (case-insensitive, sub-string match).'
+        - description: 'Filter that matches Orders with a `name`, `show`, `season` or `episode` that contains the given case-insensitive name.'
           in: query
           name: name
           type: string
@@ -360,6 +564,13 @@ paths:
           in: query
           name: customId
           type: string
+        - collectionFormat: multi
+          description: Filter Orders that match any of the given `video_id`s.
+          in: query
+          items:
+            type: string
+          name: videoIds
+          type: array
       responses:
         '200':
           description: Successful response
@@ -466,7 +677,7 @@ paths:
             type: string
           name: countries
           type: array
-        - description: Filter StoreInfos that match a case-insensitive substring of the default name.
+        - description: Filter that matches StoreInfos with a `name` or `show_name` that contains the given case-insensitive name.
           in: query
           name: name
           type: string
@@ -476,6 +687,20 @@ paths:
           items:
             type: string
           name: videoIds
+          type: array
+        - collectionFormat: multi
+          description: Filter StoreInfos that match any of the given `mid`s.
+          in: query
+          items:
+            type: string
+          name: mids
+          type: array
+        - collectionFormat: multi
+          description: Filter StoreInfos that match any of the given `season_id`s.
+          in: query
+          items:
+            type: string
+          name: seasonIds
           type: array
       responses:
         '200':
@@ -552,6 +777,9 @@ definitions:
       altId:
         description: 'Other identifier referring to the Edit, as defined by partner. Example: "GOOGLER_2006"'
         type: string
+      availId:
+        description: ID internally generated by Google to uniquely identify an Avail. Not part of EMA Specs.
+        type: string
       captionExemption:
         description: 'Communicating an exempt category as defined by FCC regulations. It is not required for non-US Avails. Example: "1"'
         type: string
@@ -593,6 +821,7 @@ definitions:
           - EST
           - VOD
           - SVOD
+          - POEST
         type: string
       pphNames:
         description: Name of the post-production houses that manage the Avail. Not part of EMA Specs.
@@ -660,6 +889,129 @@ definitions:
           - MOVIE
           - SEASON
           - EPISODE
+          - BUNDLE
+        type: string
+    type: object
+  Component:
+    description: 'A Component is an element (audio, video, subtitle, artwork, trailer, etc...) that is used in a set of ExperienceLocales. A Component is owned by a Studio and managed either by the Studio itself or by one Post-Production House. Each Component is identified by a `component_id` and its `type`.'
+    properties:
+      altCutIds:
+        description: 'List of Alternative Cut IDs, sometimes available in lieu of the main Edit-level EIDR IDs. This is not an EIDR ID, but a Partner-provided ID. Example: "206346_79838".'
+        items:
+          type: string
+        type: array
+      approvedTime:
+        description: Timestamp when the Component was approved.
+        type: string
+      componentDetailType:
+        description: Detail about the type of the Component.
+        enum:
+          - COMPONENT_DETAIL_TYPE_UNSPECIFIED
+          - COMPONENT_DETAIL_TYPE_NORMAL
+          - COMPONENT_DETAIL_TYPE_POSTER
+          - COMPONENT_DETAIL_TYPE_PRIMARY
+          - COMPONENT_DETAIL_TYPE_FORCED
+          - COMPONENT_DETAIL_TYPE_DUBBED
+          - COMPONENT_DETAIL_TYPE_SDH
+        type: string
+      componentId:
+        description: 'ID internally generated by Google to uniquely identify the Component. Example: ''wteyrc_647xc'''
+        type: string
+      customIds:
+        description: 'List of custom IDs (defined by the partner) linked to the ExperienceLocale using this Component. Example: "R86241"'
+        items:
+          type: string
+        type: array
+      editLevelEidrs:
+        description: 'List of Edit-level EIDR IDs. Example: "10.5240/1489-49A2-3956-4B2D-FE16-6".'
+        items:
+          type: string
+        type: array
+      elIds:
+        description: 'IDs internally generated by Google to uniquely identify the ExperienceLocales for which the Component is used. Example: ''KRZiVjY9h7t'''
+        items:
+          type: string
+        type: array
+      filename:
+        description: File name of the Component when delivered.
+        type: string
+      language:
+        description: 'Language of the component, using the "BCP 47" format. Examples: "en", "en-US", "es", "es-419".'
+        type: string
+      name:
+        description: 'Default Edit name, usually in the language of the country of origin. Example: "Googlers, The".'
+        type: string
+      normalizedPriority:
+        description: A simpler representation of the priority.
+        enum:
+          - NORMALIZED_PRIORITY_UNSPECIFIED
+          - LOW_PRIORITY
+          - HIGH_PRIORITY
+        type: string
+      playableUnitType:
+        description: Type of the playable unit for which the Component is intended.
+        enum:
+          - PLAYABLE_UNIT_TYPE_UNSPECIFIED
+          - PLAYABLE_UNIT_TYPE_FEATURE
+          - PLAYABLE_UNIT_TYPE_TRAILER
+          - PLAYBLE_UNIT_TYPE_BONUS_CONTENT
+        type: string
+      pphName:
+        description: Name of the post-production house that manages the Component.
+        type: string
+      priority:
+        description: 'Component priority, as defined by Google. The higher the value, the higher the priority.'
+        format: double
+        type: number
+      processingErrors:
+        description: 'Processing errors during XML file parsing. Example: ''Invalid input file'''
+        items:
+          type: string
+        type: array
+      receivedTime:
+        description: Timestamp when the Component was received.
+        type: string
+      rejectionNote:
+        description: Notes explaining why a Component has been rejected.
+        type: string
+      status:
+        description: High-level status of the Component.
+        enum:
+          - STATUS_UNSPECIFIED
+          - STATUS_APPROVED
+          - STATUS_FAILED
+          - STATUS_PROCESSING
+          - STATUS_UNFULFILLED
+          - STATUS_NOT_AVAILABLE
+        type: string
+      statusDetail:
+        description: Detailed status of the Component
+        enum:
+          - COMPONENT_STATUS_UNSPECIFIED
+          - COMPONENT_STATUS_QC_APPROVED
+          - COMPONENT_STATUS_QC_REJECTION
+          - COMPONENT_STATUS_FILE_REJECTION
+          - COMPONENT_STATUS_FILE_PROCESSING
+          - COMPONENT_STATUS_READY_FOR_QC
+        type: string
+      studioName:
+        description: Name of the studio that owns the Component.
+        type: string
+      titleLevelEidrs:
+        description: 'List of Title-level EIDR IDs. Example: "10.5240/1489-49A2-3956-4B2D-FE16-5".'
+        items:
+          type: string
+        type: array
+      type:
+        description: 'Type of the Component. Example: AUDIO_51'
+        enum:
+          - COMPONENT_TYPE_UNSPECIFIED
+          - VIDEO
+          - AUDIO_20
+          - AUDIO_51
+          - SUBTITLE
+          - ARTWORK
+          - METADATA
         type: string
     type: object
   ExperienceLocale:
@@ -751,6 +1103,7 @@ definitions:
           - MOVIE
           - SEASON
           - EPISODE
+          - BUNDLE
         type: string
       videoId:
         description: 'Video ID, as defined by Google, linked to the feature video in the ExperienceLocale. Example: ''gtry456_xc''.'
@@ -767,6 +1120,26 @@ definitions:
       nextPageToken:
         description: See _List methods rules_ for info about this field.
         type: string
+      totalSize:
+        description: See _List methods rules_ for more information about this field.
+        format: int32
+        type: integer
+    type: object
+  ListComponentsResponse:
+    description: Response to the 'ListComponents' method.
+    properties:
+      components:
+        description: List of Components that match the request criteria.
+        items:
+          $ref: '#/definitions/Component'
+        type: array
+      nextPageToken:
+        description: See _List methods rules_ for info about this field.
+        type: string
+      totalSize:
+        description: See _List methods rules_ for more information about this field.
+        format: int32
+        type: integer
     type: object
   ListExperienceLocalesResponse:
     description: Response to the 'ListExperienceLocales' method.
@@ -779,6 +1152,10 @@ definitions:
       nextPageToken:
         description: See _List methods rules_ for info about this field.
         type: string
+      totalSize:
+        description: See _List methods rules_ for more information about this field.
+        format: int32
+        type: integer
     type: object
   ListOrdersResponse:
     description: Response to the 'ListOrders' method.
@@ -791,6 +1168,10 @@ definitions:
         items:
           $ref: '#/definitions/Order'
         type: array
+      totalSize:
+        description: See _List methods rules_ for more information about this field.
+        format: int32
+        type: integer
     type: object
   ListStoreInfosResponse:
     description: Response to the 'ListStoreInfos' method.
@@ -803,6 +1184,10 @@ definitions:
         items:
           $ref: '#/definitions/StoreInfo'
         type: array
+      totalSize:
+        description: See _List methods rules_ for more information about this field.
+        format: int32
+        type: integer
     type: object
   Order:
     description: 'An Order tracks the fulfillment of an Edit when delivered using the legacy, non-component-based delivery. Each Order is uniquely identified by an `order_id`, which is generated by Google. Externally, Orders can also be identified by partners using its `custom_id` (when provided).'
@@ -889,6 +1274,7 @@ definitions:
           - ORDER_STATUS_NOT_AVAILABLE
           - ORDER_STATUS_AWAITING_REDELIVERY
           - ORDER_STATUS_READY_FOR_QC
+          - ORDER_STATUS_FILE_PROCESSING
         type: string
       studioName:
         description: Name of the studio that owns the Edit ordered.
@@ -900,6 +1286,7 @@ definitions:
           - MOVIE
           - SEASON
           - EPISODE
+          - BUNDLE
         type: string
       videoId:
         description: 'Google-generated ID identifying the video linked to this Order, once delivered. Example: ''gtry456_xc''.'
@@ -990,6 +1377,7 @@ definitions:
           - MOVIE
           - SEASON
           - EPISODE
+          - BUNDLE
         type: string
       videoId:
         description: 'Google-generated ID identifying the video linked to the Edit. Example: ''gtry456_xc'''

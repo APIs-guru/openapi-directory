@@ -464,6 +464,46 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/v1beta1/projects/{projectId}:getAncestry':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: 'Gets a list of ancestors in the resource hierarchy for the Project identified by the specified `project_id` (for example, `my-project-123`). The caller must have read permissions for this Project.'
+      operationId: cloudresourcemanager.projects.getAncestry
+      parameters:
+        - description: 'The Project ID (for example, `my-project-123`). Required.'
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GetAncestryRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetAncestryResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+      tags:
+        - projects
   '/v1beta1/projects/{projectId}:undelete':
     parameters:
       - $ref: '#/parameters/access_token'
@@ -621,6 +661,13 @@ paths:
       tags:
         - projects
 definitions:
+  Ancestor:
+    description: Identifying information for a single ancestor of a project.
+    properties:
+      resourceId:
+        $ref: '#/definitions/ResourceId'
+        description: Resource id of the ancestor.
+    type: object
   Binding:
     description: Associates `members` with a `role`.
     properties:
@@ -635,6 +682,18 @@ definitions:
     type: object
   Empty:
     description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`.'
+    type: object
+  GetAncestryRequest:
+    description: The request sent to the GetAncestry method.
+    type: object
+  GetAncestryResponse:
+    description: Response from the GetAncestry method.
+    properties:
+      ancestor:
+        description: 'Ancestors are ordered from bottom to top of the resource hierarchy. The first ancestor is the project itself, followed by the project''s parent, etc.'
+        items:
+          $ref: '#/definitions/Ancestor'
+        type: array
     type: object
   GetIamPolicyRequest:
     description: Request message for `GetIamPolicy` method.

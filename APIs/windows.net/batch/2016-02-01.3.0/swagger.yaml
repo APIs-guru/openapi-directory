@@ -6966,7 +6966,7 @@ definitions:
         type: array
       poolInfo:
         $ref: '#/definitions/PoolInformation'
-        description: The pool on which the Batch service runs the job’s tasks.
+        description: The pool on which the Batch service runs the job's tasks.
       previousState:
         description: The previous state of the job. This property is not set if the job is in its initial Active state.
         enum:
@@ -7653,7 +7653,7 @@ definitions:
         type: array
       poolInfo:
         $ref: '#/definitions/PoolInformation'
-        description: The pool on which the Batch service runs the job’s tasks.
+        description: The pool on which the Batch service runs the job's tasks.
       priority:
         description: 'The priority of the job. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0.'
         format: int32
@@ -7744,7 +7744,7 @@ definitions:
         description: Whether to run the Job Manager task in elevated mode. The default value is false.
         type: boolean
       runExclusive:
-        description: 'Whether the Job Manager task requires exclusive use of the compute node where it runs. If true, no other tasks will run on the same compute node for as long as the Job Manager is running. If false, other tasks can run simultaneously with the Job Manager on a compute node. (The Job Manager task counts normally against the node’s concurrent task limit, so this is only relevant if the node allows multiple concurrent tasks.)'
+        description: 'Whether the Job Manager task requires exclusive use of the compute node where it runs. If true, no other tasks will run on the same compute node for as long as the Job Manager is running. If false, other tasks can run simultaneously with the Job Manager on a compute node. (The Job Manager task counts normally against the node''s concurrent task limit, so this is only relevant if the node allows multiple concurrent tasks.)'
         type: boolean
   JobPatchParameter:
     description: Parameters for a CloudJobOperations.Patch request.
@@ -9277,6 +9277,7 @@ definitions:
         description: Windows operating system settings on the virtual machine. This property must not be specified if the ImageReference property specifies a Linux OS image.
     required:
       - imageReference
+      - nodeAgentSKUId
   WindowsConfiguration:
     description: Windows operating system settings to apply to the virtual machine.
     properties:
