@@ -241,7 +241,7 @@ paths:
       tags:
         - Webinars
     get:
-      description: 'Retrieve information on a specific webinar. If the type of the webinar is "sequence", a sequence of future times will be provided. Webinars of type "series" are treated the same as normal webinars - each session in the webinar series has a different webinarKey. If an organizer cancels a webinar, then a request to get that webinar would return a "404 Not Found" error.'
+      description: 'Retrieve information on a specific webinar. If the type of the webinar is ''sequence'', a sequence of future times will be provided. Webinars of type ''series'' are treated the same as normal webinars - each session in the webinar series has a different webinarKey. If an organizer cancels a webinar, then a request to get that webinar would return a ''404 Not Found'' error.'
       operationId: getWebinar
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -390,7 +390,7 @@ paths:
       tags:
         - Co-organizers
     post:
-      description: Creates co-organizers for the specified webinar. This call requires the admin role. For co-organizers that have a GoToWebinar account you have to set the parameter "external" to "false". In this case you have to pass the parameter "organizerKey" only. For co-organizers that have no GoToWebinar account you have to set the parameter "external" to "true". In this case you have to pass the parameters "givenName" and "email". Since there is no parameter for "surname" you should pass first and last name to the parameter "givenName".
+      description: Creates co-organizers for the specified webinar. This call requires the admin role. For co-organizers that have a GoToWebinar account you have to set the parameter 'external' to 'false'. In this case you have to pass the parameter 'organizerKey' only. For co-organizers that have no GoToWebinar account you have to set the parameter 'external' to 'true'. In this case you have to pass the parameters 'givenName' and 'email'. Since there is no parameter for 'surname' you should pass first and last name to the parameter 'givenName'.
       operationId: createCoorganizers
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -407,6 +407,10 @@ paths:
       responses:
         '201':
           description: Created
+          schema:
+            items:
+              $ref: '#/definitions/Coorganizer'
+            type: array
         '400':
           description: Bad Request
         '403':
@@ -425,7 +429,7 @@ paths:
         - $ref: '#/parameters/organizerKey'
         - $ref: '#/parameters/webinarKey'
         - $ref: '#/parameters/coorganizerKey'
-        - description: By default only internal co-organizers (with a GoToWebinar account) can be deleted. If you want to use this call for external co-organizers you have to set this parameter to "true".
+        - description: By default only internal co-organizers (with a GoToWebinar account) can be deleted. If you want to use this call for external co-organizers you have to set this parameter to 'true'.
           in: query
           name: external
           required: false
@@ -451,7 +455,7 @@ paths:
         - $ref: '#/parameters/organizerKey'
         - $ref: '#/parameters/webinarKey'
         - $ref: '#/parameters/coorganizerKey'
-        - description: By default only internal co-organizers (with a GoToWebinar account) will retrieve the resent invitation email. If you want to use this call for external co-organizers you have to set this parameter to "true".
+        - description: By default only internal co-organizers (with a GoToWebinar account) will retrieve the resent invitation email. If you want to use this call for external co-organizers you have to set this parameter to 'true'.
           in: query
           name: external
           required: false
@@ -534,6 +538,10 @@ paths:
       responses:
         '201':
           description: Created
+          schema:
+            items:
+              $ref: '#/definitions/CreatedPanelist'
+            type: array
         '400':
           description: Bad Request
         '403':
@@ -570,7 +578,7 @@ paths:
         - Webinars
   '/organizers/{organizerKey}/webinars/{webinarKey}/registrants':
     get:
-      description: 'Retrieve registration details for all registrants of a specific webinar. Registrant details will not include all fields captured when creating the registrant. To see all data, use the API call "Get Registrant". Registrants can have one of the following states; <br />WAITING - registrant registered and is awaiting approval (where organizer has required approval), <br />APPROVED - registrant registered and is approved, and <br />DENIED - registrant registered and was denied.'
+      description: 'Retrieve registration details for all registrants of a specific webinar. Registrant details will not include all fields captured when creating the registrant. To see all data, use the API call ''Get Registrant''. Registrants can have one of the following states; <br>WAITING - registrant registered and is awaiting approval (where organizer has required approval), <br>APPROVED - registrant registered and is approved, and <br>DENIED - registrant registered and was denied.'
       operationId: getAllRegistrantsForWebinar
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -593,13 +601,13 @@ paths:
       tags:
         - Registrants
     post:
-      description: 'Register an attendee for a scheduled webinar. The response contains the registrantKey and join URL for the registrant. An email will be sent to the registrant unless the organizer turns off the confirmation email setting from the GoToWebinar website. Please note that you must provide all required fields including custom fields defined during the webinar creation. Use the API call "Get registration fields" to get a list of all fields, if they are required, and their possible values. At this time there are two versions of the "Create Registrant" call. The first version only accepts firstName, lastName, and email and ignores all other fields. If you have custom fields or want to capture additional information this version won''t work for you. The second version allows you to pass all required and optional fields, including custom fields defined when creating the webinar. To use the second version you must pass the header value "Accept: application/vnd.citrix.g2wapi-v1.1+json" instead of "Accept: application/json". Leaving this header out results in the first version of the API call.'
+      description: 'Register an attendee for a scheduled webinar. The response contains the registrantKey and join URL for the registrant. An email will be sent to the registrant unless the organizer turns off the confirmation email setting from the GoToWebinar website. Please note that you must provide all required fields including custom fields defined during the webinar creation. Use the API call ''Get registration fields'' to get a list of all fields, if they are required, and their possible values. At this time there are two versions of the ''Create Registrant'' call. The first version only accepts firstName, lastName, and email and ignores all other fields. If you have custom fields or want to capture additional information this version won''t work for you. The second version allows you to pass all required and optional fields, including custom fields defined when creating the webinar. To use the second version you must pass the header value ''Accept: application/vnd.citrix.g2wapi-v1.1+json'' instead of ''Accept: application/json''. Leaving this header out results in the first version of the API call.'
       operationId: createRegistrant
       parameters:
         - $ref: '#/parameters/Authorization'
         - $ref: '#/parameters/organizerKey'
         - $ref: '#/parameters/webinarKey'
-        - description: Set to "application/vnd.citrix.g2wapi-v1.1+json" to make a registration using fields (custom or default) additional to the basic ones.
+        - description: Set to 'application/vnd.citrix.g2wapi-v1.1+json' to make a registration using fields (custom or default) additional to the basic ones.
           in: header
           name: Accept
           required: false
@@ -609,7 +617,7 @@ paths:
           name: resendConfirmation
           required: false
           type: boolean
-        - description: The registrant details. To get all possible values run the API call "Get registration fields" which is also part of this documentation.
+        - description: The registrant details. To get all possible values run the API call 'Get registration fields' which is also part of this documentation.
           in: body
           name: body
           required: true
@@ -720,7 +728,7 @@ paths:
         - Sessions
   '/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}':
     get:
-      description: 'Retrieves attendance details for a specific webinar session that has ended. If attendees attended the session ("registrantsAttended"), specific attendance details, such as attendenceTime for a registrant, will also be retrieved.'
+      description: 'Retrieves attendance details for a specific webinar session that has ended. If attendees attended the session (''registrantsAttended''), specific attendance details, such as attendenceTime for a registrant, will also be retrieved.'
       operationId: getWebinarSession
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -970,7 +978,7 @@ paths:
         - Sessions
 definitions:
   AccessCodes:
-    description: 'Describes the access codes for organizer, panelists and attendees.'
+    description: 'Describes the access codes for organizer, panelists and attendees'
     properties:
       attendee:
         description: Access code for attendees
@@ -1101,22 +1109,25 @@ definitions:
       confCallNumbers:
         additionalProperties:
           $ref: '#/definitions/CallNumbers'
-        description: 'The conference call numbers and access codes per country. This will be returned only, if "type" is not set to "Private". Example for this object: "confCallNumbers":{"CA":{"accessCodes":{"attendee":"159-309-045","organizer":"791-426-085","panelist":"690-270-339"},"tollFree":"1 888 455 4198"},"FI":{"accessCodes":{"attendee":"159-309-045","organizer":"791-426-085","panelist":"690-270-339"},"toll":"+358 (0) 338 79 4198"},"US":{"accessCodes":{"attendee":"159-309-045","organizer":"791-426-085","panelist":"690-270-339"},"toll":"+1 (805) 879-4198","tollFree":"1 888 455 4198"}}'
+        description: 'The conference call numbers and access codes per country. This will be returned only, if ''type'' is not set to ''Private''. Example for this object: "confCallNumbers":{"CA":{"accessCodes":{"attendee":"159-309-045","organizer":"791-426-085","panelist":"690-270-339"},"tollFree":"1 888 455 4198"},"FI":{"accessCodes":{"attendee":"159-309-045","organizer":"791-426-085","panelist":"690-270-339"},"toll":"+358 (0) 338 79 4198"},"US":{"accessCodes":{"attendee":"159-309-045","organizer":"791-426-085","panelist":"690-270-339"},"toll":"+1 (805) 879-4198","tollFree":"1 888 455 4198"}}'
         type: object
       privateInfo:
         $ref: '#/definitions/PrivateInfo'
         description: Phone numbers for an own conference call service
         type: object
       type:
+        $ref: '#/definitions/AudioType'
         description: Indicates how to connect to the webinar's audio conference. The value of this field determines if other fields appear in the response or not
-        enum:
-          - PSTN
-          - VOIP
-          - Hybrid
-          - Private
-        type: string
     required:
       - type
+  AudioType:
+    description: How to connect to the webinar's audio conference
+    enum:
+      - PSTN
+      - VOIP
+      - Hybrid
+      - Private
+    type: string
   AudioUpdate:
     description: Defines the audio/conferencing settings for the specified webinar
     properties:
@@ -1129,13 +1140,8 @@ definitions:
         description: Defines via two-letter Alpha-2-code which toll and toll-free PSTN numbers are available per country
         type: object
       type:
+        $ref: '#/definitions/AudioType'
         description: Indicates how to connect to the webinar's audio conference
-        enum:
-          - PSTN
-          - VOIP
-          - Hybrid
-          - Private
-        type: string
     required:
       - type
   CallNumbers:
@@ -1160,39 +1166,64 @@ definitions:
         description: The co-organizer's email address
         type: string
       external:
-        description: 'If the co-organizer has no GoToWebinar account, this value is set to "true"'
+        description: 'If the co-organizer has no GoToWebinar account, this value is set to ''true'''
         type: boolean
       givenName:
         description: The co-organizer's given name
         type: string
+      joinLink:
+        description: The co-organizer's join link
+        type: string
       memberKey:
-        description: The co-organizer's organizer key. A new member key will be created for external co-organizers
+        description: The co-organizer's organizer key. A new member key is created for external co-organizers
         type: string
       surname:
         description: The co-organizer's surname. For external co-organizers this parameter is not returned
         type: string
     required:
+      - joinLink
       - email
       - memberKey
-      - givenName
       - external
+      - surname
+      - givenName
   CoorganizerReqCreate:
     description: 'Details used for creating a co-organizer for a webinar. '
     properties:
       email:
-        description: 'The co-organizer''s email address. This parameter has to be passed only, if "external" is set to "true"'
+        description: 'The co-organizer''s email address. This parameter has to be passed only, if ''external'' is set to ''true'''
         type: string
       external:
-        description: 'If the co-organizer has no GoToWebinar account, this value has to be set to "true"'
+        description: 'If the co-organizer has no GoToWebinar account, this value has to be set to ''true'''
         type: boolean
       givenName:
-        description: 'The co-organizer''s given name. This parameter has to be passed only, if "external" is set to "true"'
+        description: 'The co-organizer''s given name. This parameter has to be passed only, if ''external'' is set to ''true'''
         type: string
       organizerKey:
-        description: 'The co-organizer''s organizer key. This parameter has to be passed only, if "external" is set to "false"'
+        description: 'The co-organizer''s organizer key. This parameter has to be passed only, if ''external'' is set to ''false'''
         type: string
     required:
       - external
+  CreatedPanelist:
+    description: Describes a created panelist
+    properties:
+      email:
+        description: The panelist's email address
+        type: string
+      joinLink:
+        description: The panelist's join link
+        type: string
+      name:
+        description: The panelist's name
+        type: string
+      panelistKey:
+        description: The panelist's key
+        type: string
+    required:
+      - name
+      - email
+      - joinLink
+      - panelistKey
   CreatedWebinar:
     description: Describes a newly created webinar.
     properties:
@@ -1264,16 +1295,19 @@ definitions:
       - webinarID
       - timeZone
   Panelist:
-    description: Describes a webinar session panelist.
+    description: Describes a webinar session panelist
     properties:
       email:
         description: The panelist's email address
         type: string
       firstName:
-        description: DEPRECATED. The fields "firstName" and "lastName" are replaced by the field "name"
+        description: DEPRECATED. The fields 'firstName' and 'lastName' are replaced by the field 'name'
+        type: string
+      joinLink:
+        description: The co-organizer's join link
         type: string
       lastName:
-        description: DEPRECATED. The fields "firstName" and "lastName" are replaced by the field "name"
+        description: DEPRECATED. The fields 'firstName' and 'lastName' are replaced by the field 'name'
         type: string
       name:
         description: The panelist's name
@@ -1283,6 +1317,7 @@ definitions:
         format: int64
         type: integer
     required:
+      - joinLink
       - lastName
       - email
       - name
@@ -1294,12 +1329,20 @@ definitions:
       email:
         description: The panelist's email address
         type: string
+      joinLink:
+        description: The co-organizer's join link
+        type: string
       name:
         description: The panelist's name
+        type: string
+      panelistKey:
+        description: The panelist's key
         type: string
     required:
       - email
       - name
+      - joinLink
+      - panelistKey
   Poll:
     description: A poll or survey launched by an organizer during or after a webinar session; includes the responses given to it by the attendees.
     properties:
@@ -1385,7 +1428,7 @@ definitions:
         description: Text for the organizer when using an own conference call service
         type: string
       panelist:
-        description: Text for the panelist when using an own conference call service.
+        description: Text for the panelist when using an own conference call service
         type: string
     required:
       - attendee
@@ -1404,95 +1447,17 @@ definitions:
     required:
       - attendee
   PstnInfoUpdate:
-    description: Defines the audio/conferencing settings for the specified webinar. It required to pass "tollFreeCountries" or "tollCountries" or both.
+    description: Defines the audio/conferencing settings for the specified webinar. It required to pass 'tollFreeCountries' or 'tollCountries' or both.
     properties:
       tollCountries:
         description: 'Defines in which countries toll PSTN numbers are available. Possible values are AT, AU, BE, CA, CH, DE, DK, ES, FI, FR, GB, IE, IT, NL, NO, NZ, SE, US'
         items:
-          description: Countries in which toll PSTN numbers are available
-          enum:
-            - AT
-            - AU
-            - BE
-            - CA
-            - CH
-            - DE
-            - DK
-            - ES
-            - FI
-            - FR
-            - GB
-            - IE
-            - IT
-            - NL
-            - 'NO'
-            - NZ
-            - SE
-            - US
-          type: string
+          $ref: '#/definitions/TollCountries'
         type: array
       tollFreeCountries:
         description: 'Defines in which countries toll free PSTN numbers are available. Possible values are AE, AR, AT, AU, BE, BG, BH, BR, BY, CA, CH, CL, CN, CO, CZ, DE, DK, ES, FI, FR, GB, GR, HK, HU, ID, IE, IL, IN, IS, IT, JP, KR, LU, MX, MY, NL, NO, NZ, PA, PE, PH, PL, PT, RO, RU, SA, SE, SG, TH, TR, TW, UA, US, UY, VN, ZA'
         items:
-          description: Countries in which toll free PSTN numbers are available
-          enum:
-            - AE
-            - AR
-            - AT
-            - AU
-            - BE
-            - BG
-            - BH
-            - BR
-            - BY
-            - CA
-            - CH
-            - CL
-            - CN
-            - CO
-            - CZ
-            - DE
-            - DK
-            - ES
-            - FI
-            - FR
-            - GB
-            - GR
-            - HK
-            - HU
-            - ID
-            - IE
-            - IL
-            - IN
-            - IS
-            - IT
-            - JP
-            - KR
-            - LU
-            - MX
-            - MY
-            - NL
-            - 'NO'
-            - NZ
-            - PA
-            - PE
-            - PH
-            - PL
-            - PT
-            - RO
-            - RU
-            - SA
-            - SE
-            - SG
-            - TH
-            - TR
-            - TW
-            - UA
-            - US
-            - UY
-            - VN
-            - ZA
-          type: string
+          $ref: '#/definitions/TollFreeCountries'
         type: array
   Registrant:
     description: Describes a webinar registrant
@@ -1617,7 +1582,7 @@ definitions:
           $ref: '#/definitions/CustomAnswers'
         type: array
       source:
-        description: The source that led to the registration. This can be any string like "Newsletter 123" or "Marketing campaign ABC"
+        description: The source that led to the registration. This can be any string like 'Newsletter 123' or 'Marketing campaign ABC'
         type: string
       state:
         description: The registrant's state (US only)
@@ -1633,7 +1598,7 @@ definitions:
         description: The time zone where the webinar will take place
         type: string
       type:
-        description: The type is REGULAR for "One session" and "Sequence" webinars. For webinar series this parameter is not passed
+        description: The type is REGULAR for 'One session' and 'Sequence' webinars. For webinar series this parameter is not passed
         enum:
           - REGULAR
         type: string
@@ -1703,7 +1668,7 @@ definitions:
           $ref: '#/definitions/RegistrantQAResponse'
         type: array
       source:
-        description: The source that led to the registration. This can be any string like "Newsletter 123" or "Marketing campaign ABC"
+        description: The source that led to the registration. This can be any string like 'Newsletter 123' or 'Marketing campaign ABC'
         type: string
       state:
         description: The registrant's state (US only)
@@ -1716,7 +1681,7 @@ definitions:
       - lastName
       - email
   RegistrantQAResponse:
-    description: 'Describes a completed registration question for a webinar registrant. If you use "Multiple choice" questions the response contains the numeric answerKey, otherwise the answer text. Example:<br />{<br />  "firstName": "First",<br />  "lastName": "Last",<br />  "email": "First.Last@example.com",<br />  "responses": [{<br />      "questionKey": 17023549,<br />      "responseText": "This is a short answer"},{<br />      "questionKey": 17023550,<br />      "answerKey": 17023553}  ]<br />}'
+    description: 'Describes a completed registration question for a webinar registrant. If you use ''Multiple choice'' questions the response contains the numeric answerKey, otherwise the answer text. Example:<br>{<br>  "firstName": "First",<br>  "lastName": "Last",<br>  "email": "First.Last@example.com",<br>  "responses": [{<br>      "questionKey": 17023549,<br>      "responseText": "This is a short answer"},{<br>      "questionKey": 17023550,<br>      "answerKey": 17023553}  ]<br>}'
     properties:
       answerKey:
         description: The numeric key of the answer to a multiple-choice question.
@@ -1861,6 +1826,88 @@ definitions:
     required:
       - attendance
       - pollsAndSurveys
+  TollCountries:
+    description: Defines in which countries toll PSTN numbers are available.
+    enum:
+      - AT
+      - AU
+      - BE
+      - CA
+      - CH
+      - DE
+      - DK
+      - ES
+      - FI
+      - FR
+      - GB
+      - IE
+      - IT
+      - NL
+      - 'NO'
+      - NZ
+      - SE
+      - US
+    type: string
+  TollFreeCountries:
+    description: Countries in which toll free PSTN numbers are available.
+    enum:
+      - AE
+      - AR
+      - AT
+      - AU
+      - BE
+      - BG
+      - BH
+      - BR
+      - BY
+      - CA
+      - CH
+      - CL
+      - CN
+      - CO
+      - CZ
+      - DE
+      - DK
+      - ES
+      - FI
+      - FR
+      - GB
+      - GR
+      - HK
+      - HU
+      - ID
+      - IE
+      - IL
+      - IN
+      - IS
+      - IT
+      - JP
+      - KR
+      - LU
+      - MX
+      - MY
+      - NL
+      - 'NO'
+      - NZ
+      - PA
+      - PE
+      - PH
+      - PL
+      - PT
+      - RO
+      - RU
+      - SA
+      - SE
+      - SG
+      - TH
+      - TR
+      - TW
+      - UA
+      - US
+      - UY
+      - VN
+      - ZA
+    type: string
   UpcomingWebinar:
     description: Describes a scheduled webinar
     properties:

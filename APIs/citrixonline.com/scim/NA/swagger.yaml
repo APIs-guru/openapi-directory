@@ -27,6 +27,27 @@ consumes:
   - application/json
 produces:
   - application/json
+parameters:
+  Authorization:
+    description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
+    in: header
+    name: Authorization
+    required: true
+    type: string
+  groupKey:
+    description: The key of the group to query. The group must be in the organization domain
+    format: int64
+    in: path
+    name: groupKey
+    required: true
+    type: integer
+  userKey:
+    description: The key of the user to query. The user must be in the organization domain
+    format: int64
+    in: path
+    name: userKey
+    required: true
+    type: integer
 tags:
   - description: Operations on users belonging to an organization
     name: Users
@@ -40,11 +61,7 @@ paths:
       description: 'Queries multiple group identities in the organization domain. Filtering, sorting and pagination are available. This call requires the role ROLE_ORG_READ.'
       operationId: getGroups
       parameters:
-        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
-          in: header
-          name: Authorization
-          required: true
-          type: string
+        - $ref: '#/parameters/Authorization'
         - description: ' Without a filter, all groups are returned. The filter parameter must be a properly formed SCIM filter using the operator "eq" (equals), "sw" (starts with), or "co" (contains). The filter works for the displayName attribute. Sorting and pagination are supported. For example, GET /Groups?filter=displayName%20eq%20%22Engineering%22&sortBy=displayName&sortOrder=ascending&count=50&startIndex=51'
           in: query
           name: filter
@@ -71,11 +88,7 @@ paths:
       description: Creates a new organization group and adds it to the user domain. Member groups and member users must be in the organization. This call requires the role ROLE_ORG_WRITE.
       operationId: createGroup
       parameters:
-        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
-          in: header
-          name: Authorization
-          required: true
-          type: string
+        - $ref: '#/parameters/Authorization'
         - description: The details of the group to create
           in: body
           name: body
@@ -107,17 +120,8 @@ paths:
       description: Deletes a group from the organization (but not from the account). The group must be in the organization. This call requires the role ROLE_ORG_WRITE.
       operationId: deleteGroup
       parameters:
-        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the group to delete. The group must be in the organization domain
-          format: int64
-          in: path
-          name: groupKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/groupKey'
       responses:
         '200':
           description: The request has succeeded
@@ -136,17 +140,8 @@ paths:
       description: Queries group details in the organization domain. This call requires the role ROLE_ORG_READ.
       operationId: getGroup
       parameters:
-        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the group to query. The group must be in the organization domain
-          format: int64
-          in: path
-          name: groupKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/groupKey'
       responses:
         '200':
           description: The request has succeeded
@@ -167,17 +162,8 @@ paths:
       description: Updates one or more values of an existing group without sending the full definition. Member groups and member users must be in the organization. This call requires the role ROLE_ORG_WRITE.
       operationId: updateGroup
       parameters:
-        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the group to query. The group must be in the organization domain
-          format: int64
-          in: path
-          name: groupKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/groupKey'
         - description: The group data to update. It is allowed to update one or more values of the group definition
           in: body
           name: body
@@ -208,17 +194,8 @@ paths:
       description: 'Updates an existing group. The request must include the full group definition. To modify one or more values without sending the full definition, see "Update Group". Member groups and member users must be in the organization. This call requires the role ROLE_ORG_WRITE.'
       operationId: replaceGroup
       parameters:
-        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the group to query. The group must be in the organization domain
-          format: int64
-          in: path
-          name: groupKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/groupKey'
         - description: The new group definition
           in: body
           name: body
@@ -250,11 +227,7 @@ paths:
       description: 'Queries the user schema. The user schema is defined in SCIM Core Schema (http://www.simplecloud.info/specs/draft-scim-core-schema-01.html#resource-schema).'
       operationId: getUserSchema
       parameters:
-        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
-          in: header
-          name: Authorization
-          required: true
-          type: string
+        - $ref: '#/parameters/Authorization'
       responses:
         '200':
           description: The request has succeeded.
@@ -274,11 +247,7 @@ paths:
       description: 'Queries service provider configurations. The service provider configurations are defined in SCIM Core Schema (http://www.simplecloud.info/specs/draft-scim-core-schema-01.html#anchor6). This call returns a description, a documentationURL, name, and specURL.'
       operationId: getServiceProviderConfigs
       parameters:
-        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
-          in: header
-          name: Authorization
-          required: true
-          type: string
+        - $ref: '#/parameters/Authorization'
       responses:
         '200':
           description: The request has succeeded.
@@ -298,11 +267,7 @@ paths:
       description: Queries multiple user identities in the organization domain. Filtering is available.
       operationId: getUsers
       parameters:
-        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
-          in: header
-          name: Authorization
-          required: true
-          type: string
+        - $ref: '#/parameters/Authorization'
         - description: ' Without a filter, all users in a user domain are returned. The filter parameter must be a properly formed SCIM filter using either the operator eq (equals) or the operator sw (starts with). The filter works for userName, displayName, name.givenName, and name.familyName attributes. For example, /Users?filter=name.familyName%20eq%20%%22Smith%22'
           in: query
           name: filter
@@ -329,11 +294,7 @@ paths:
       description: Creates a new organization user and adds them to the user domain. The user email domain must match an existing organization email domain.
       operationId: createUsers
       parameters:
-        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
-          in: header
-          name: Authorization
-          required: true
-          type: string
+        - $ref: '#/parameters/Authorization'
         - description: The details of the user to create
           in: body
           name: body
@@ -365,11 +326,7 @@ paths:
       description: Queries the identity of the current authenticated user.
       operationId: getMe
       parameters:
-        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
-          in: header
-          name: Authorization
-          required: true
-          type: string
+        - $ref: '#/parameters/Authorization'
       responses:
         '200':
           description: The request has succeeded.
@@ -392,11 +349,7 @@ paths:
       description: 'Changes a limited set (or all if you choose) of the current authenticated user''s data. The updated user email domain must be an existing organization email domain. '
       operationId: updateMe
       parameters:
-        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
-          in: header
-          name: Authorization
-          required: true
-          type: string
+        - $ref: '#/parameters/Authorization'
         - description: The new user data
           in: body
           name: body
@@ -429,11 +382,7 @@ paths:
       description: 'Changes the current authenticated user''s displayName, locale, timezone, username and password. The request must include the full user definition (to modify one or more values without sending the full definition, see Update User). The replaced user email domain must be an existing organization email domain. '
       operationId: replaceMe
       parameters:
-        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
-          in: header
-          name: Authorization
-          required: true
-          type: string
+        - $ref: '#/parameters/Authorization'
         - description: The new user data
           in: body
           name: body
@@ -467,17 +416,8 @@ paths:
       description: Deletes a user from the organization (but not from the account).
       operationId: deleteUser
       parameters:
-        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the user to delete. The user must be in the organization domain
-          format: int64
-          in: path
-          name: userKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/userKey'
       responses:
         '200':
           description: The request has succeeded.
@@ -498,17 +438,8 @@ paths:
       description: Queries user identity in the organization domain.
       operationId: getUser
       parameters:
-        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the user to query. The user must be in the organization domain
-          format: int64
-          in: path
-          name: userKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/userKey'
       responses:
         '200':
           description: The request has succeeded.
@@ -531,17 +462,8 @@ paths:
       description: Changes a limited set (or all if you choose) of the user's data. The updated user email domain must be an existing organization email domain.
       operationId: updateUser
       parameters:
-        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the user to query. The user must be in the organization domain
-          format: int64
-          in: path
-          name: userKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/userKey'
         - description: The new user data
           in: body
           name: body
@@ -574,17 +496,8 @@ paths:
       description: 'Changes an existing user''s displayName, locale, timezone, username and password. The request must include the full user definition (to modify one or more values without sending the full definition, see Update User). The replaced user email domain must be an existing organization email domain.'
       operationId: replaceUser
       parameters:
-        - description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the user to query. The user must be in the organization domain
-          format: int64
-          in: path
-          name: userKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/userKey'
         - description: The new user data
           in: body
           name: body

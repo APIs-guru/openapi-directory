@@ -70,7 +70,7 @@ paths:
   '/accounts/{accountKey}/organizers':
     get:
       deprecated: true
-      description: 'DEPRECATED: Please use the Admin API call "Get all users" instead. For details see https://developer.citrixonline.com/get-all-users.'
+      description: 'DEPRECATED: Please use the Admin API call ''Get all users'' instead. For details see https://developer.citrixonline.com/get-all-users.'
       operationId: getAllOrganisers
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -116,7 +116,7 @@ paths:
       tags:
         - Trainings
     post:
-      description: 'Schedules a training of one or more sessions. The call requires a training''s name, at least one start and end time, and optionally may include additional sessions, a description, additional organizers (presenters), and registration settings. You can only add organizers to a training if you have a multi-user account. Once a training has been created with this method, you can accept registrations to the training. Registration is for the entire training – all sessions. (The GoToTraining admin site enables you to create trainings that allow participants to register for individual sessions as well as automatically create weekly or monthly events.) Registration settings controls whether you allow web registration for this training, and whether a confirmation email is sent to the registrant following registration. Disabling the confirmation email is an API-only setting. If the user registers through the GoToTraining website, a confirmation email is sent. If the user is manually approved by the training administrator through the GoToTraining web site, the confirmation email is sent. It is recommended that you disable web registration if you disable confirmation emails. The response contains a trainingKey for the scheduled training.'
+      description: 'Schedules a training of one or more sessions. The call requires a training''s name, at least one start and end time, and optionally may include additional sessions, a description, additional organizers (presenters), and registration settings. You can only add organizers to a training if you have a multi-user account. Once a training has been created with this method, you can accept registrations to the training. Registration is for the entire training - all sessions. (The GoToTraining admin site enables you to create trainings that allow participants to register for individual sessions as well as automatically create weekly or monthly events.) Registration settings controls whether you allow web registration for this training, and whether a confirmation email is sent to the registrant following registration. Disabling the confirmation email is an API-only setting. If the user registers through the GoToTraining website, a confirmation email is sent. If the user is manually approved by the training administrator through the GoToTraining web site, the confirmation email is sent. It is recommended that you disable web registration if you disable confirmation emails. The response contains a trainingKey for the scheduled training.'
       operationId: scheduleTraining
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -279,7 +279,7 @@ paths:
         - Trainings
   '/organizers/{organizerKey}/trainings/{trainingKey}/registrants':
     get:
-      description: 'Retrieves details on all registrants for a specific training. Registrants can be:<br/>WAITING - registrant registered and is awaiting approval (where organizer has required approval)<br/>APPROVED - registrant registered and is approved<br/>DENIED - registrant registered and was not approved.<br/><br/>IMPORTANT: The registrant data caches are typically updated immediately and the data will be returned in the response. However, the update can take as long as two hours.'
+      description: 'Retrieves details on all registrants for a specific training. Registrants can be:<br>WAITING - registrant registered and is awaiting approval (where organizer has required approval)<br>APPROVED - registrant registered and is approved<br>DENIED - registrant registered and was not approved.<br><br>IMPORTANT: The registrant data caches are typically updated immediately and the data will be returned in the response. However, the update can take as long as two hours.'
       operationId: getRegistrants
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -352,7 +352,7 @@ paths:
       tags:
         - Registrations
     get:
-      description: 'Retrieves details for specific registrant in a specific training. Registrants can be:<br/>WAITING - registrant registered and is awaiting approval (where organizer has required approval)<br/>APPROVED - registrant registered and is approved<br/>DENIED - registrant registered and was not approved.<br/><br/>IMPORTANT: The registrant data caches are typically updated immediately and the data will be returned in the response. However, the update can take as long as two hours.'
+      description: 'Retrieves details for specific registrant in a specific training. Registrants can be:<br>WAITING - registrant registered and is awaiting approval (where organizer has required approval)<br>APPROVED - registrant registered and is approved<br>DENIED - registrant registered and was not approved.<br><br>IMPORTANT: The registrant data caches are typically updated immediately and the data will be returned in the response. However, the update can take as long as two hours.'
       operationId: getRegistrant
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -423,7 +423,7 @@ paths:
         - Trainings
   '/organizers/{organizerKey}/trainings/{trainingKey}/times':
     put:
-      description: ' A request to update a scheduled training''s start and end times. If the request contains "notifyTrainers = true" and "notifyRegistrants = true", both organizers and registrants are notified. The response provides the number of notified trainers and registrants.'
+      description: ' A request to update a scheduled training''s start and end times. If the request contains ''notifyTrainers = true'' and ''notifyRegistrants = true'', both organizers and registrants are notified. The response provides the number of notified trainers and registrants.'
       operationId: updateTrainingTimes
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -478,7 +478,7 @@ paths:
         - Reports
   '/reports/organizers/{organizerKey}/sessions/{sessionKey}/attendees':
     get:
-      description: 'This call retrieves a list of registrants from a specific completed training session. The response includes the registrants’ email addresses, and if they attended, it includes the duration of each period of their attendance in minutes, and the times at which they joined and left. If a registrant does not attend, they appear at the bottom of the listing with timeInSession = 0.'
+      description: 'This call retrieves a list of registrants from a specific completed training session. The response includes the registrants'' email addresses, and if they attended, it includes the duration of each period of their attendance in minutes, and the times at which they joined and left. If a registrant does not attend, they appear at the bottom of the listing with timeInSession = 0.'
       operationId: getAttendanceDetails
       parameters:
         - $ref: '#/parameters/Authorization'

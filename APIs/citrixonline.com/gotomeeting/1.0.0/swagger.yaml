@@ -8,7 +8,7 @@ info:
     email: developer-support@citrixonline.com
     name: Developer Support
     url: 'https://developer.citrixonline.com'
-  description: '<br />The Citrix GoToMeeting API provides seamless integration of GoToMeeting provisioning and meeting management into your existing infrastructure or third party applications.<br /><br />For customers, the ability to add, suspend or delete an organizer in your GoToMeeting Corporate account from within your primary management systems simplifies and streamlines the entire process of account management. The ability to monitor meeting schedules, history and active meeting status allows managers to leverage GoToMeeting activities through your primary applications.<br /><br />For third parties, the ability to create, update or delete a meeting from within your application makes real-time collaboration possible for your customers. The ability to update meeting schedules, view history and scheduled meetings, and view attendees from past meetings allows you to enhance your users'' experience and the value of your applications.'
+  description: '<br>The Citrix GoToMeeting API provides seamless integration of GoToMeeting provisioning and meeting management into your existing infrastructure or third party applications.<br><br>For customers, the ability to add, suspend or delete an organizer in your GoToMeeting Corporate account from within your primary management systems simplifies and streamlines the entire process of account management. The ability to monitor meeting schedules, history and active meeting status allows managers to leverage GoToMeeting activities through your primary applications.<br><br>For third parties, the ability to create, update or delete a meeting from within your application makes real-time collaboration possible for your customers. The ability to update meeting schedules, view history and scheduled meetings, and view attendees from past meetings allows you to enhance your users'' experience and the value of your applications.'
   termsOfService: 'https://developer.citrixonline.com/terms-use'
   title: GoToMeeting
   version: 1.0.0
@@ -27,6 +27,34 @@ consumes:
   - application/json
 produces:
   - application/json
+parameters:
+  Authorization:
+    description: Access token
+    in: header
+    name: Authorization
+    required: true
+    type: string
+  groupKey:
+    description: The key of the group
+    format: int64
+    in: path
+    name: groupKey
+    required: true
+    type: integer
+  meetingId:
+    description: The meeting ID
+    format: int64
+    in: path
+    name: meetingId
+    required: true
+    type: integer
+  organizerKey:
+    description: The key of the organizer
+    format: int64
+    in: path
+    name: organizerKey
+    required: true
+    type: integer
 tags:
   - description: Operations on organizers. Only available to users with the admin role.
     name: Organizers
@@ -39,11 +67,7 @@ paths:
     get:
       description: List all groups for an account. This API call is only available to users with the admin role.
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
+        - $ref: '#/parameters/Authorization'
       responses:
         '200':
           description: OK
@@ -60,17 +84,8 @@ paths:
     get:
       description: Returns all attendees for all meetings within specified date range held by organizers within the specified group. This API call is only available to users with the admin role. This API call can be used only for groups with maximum 50 organizers.
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the group. Only groups with maximum 50 organizers are supported
-          format: int64
-          in: path
-          name: groupKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/groupKey'
         - description: 'Start of date range, in ISO8601 UTC format, e.g. 2015-07-01T22:00:00Z'
           format: date-time
           in: query
@@ -97,17 +112,8 @@ paths:
     get:
       description: Get historical meetings for a specified group within a specified date range. This API call is only available to users with the admin role. This API call can be used only for groups with maximum 50 organizers.
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the group. Only groups with maximum 50 organizers are supported
-          format: int64
-          in: path
-          name: groupKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/groupKey'
         - description: 'Required start of date range, in ISO8601 UTC format, e.g. 2015-07-01T22:00:00Z'
           format: date-time
           in: query
@@ -139,20 +145,11 @@ paths:
   '/groups/{groupKey}/meetings':
     get:
       deprecated: true
-      description: 'DEPRECATED: Please use the new API calls "Get historical meetings by group" and "Get upcoming meetings by group". Get meetings for a specified group. Additional filters can be used to view only meetings within a specified date range. This API call is only available to users with the admin role.'
+      description: 'DEPRECATED: Please use the new API calls ''Get historical meetings by group'' and ''Get upcoming meetings by group''. Get meetings for a specified group. Additional filters can be used to view only meetings within a specified date range. This API call is only available to users with the admin role.'
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the group
-          format: int64
-          in: path
-          name: groupKey
-          required: true
-          type: integer
-        - description: When "true" returns all past meetings within date range
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/groupKey'
+        - description: 'When ''true'', returns all past meetings within date range'
           in: query
           name: history
           required: true
@@ -185,17 +182,8 @@ paths:
     get:
       description: Returns all the organizers within a specific group. This API call is only available to users with the admin role.
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the group
-          format: int64
-          in: path
-          name: groupKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/groupKey'
       responses:
         '200':
           description: OK
@@ -211,19 +199,10 @@ paths:
       tags:
         - Groups
     post:
-      description: 'Creates a new organizer and sends an email to the email address defined in request. This API call is only available to users with the admin role. You may also pass "G2W" or "G2T" or "OPENVOICE" as productType variables, creating organizers for those products. A G2W or G2T organizer will also have access to G2M.'
+      description: 'Creates a new organizer and sends an email to the email address defined in request. This API call is only available to users with the admin role. You may also pass ''G2W'' or ''G2T'' or ''OPENVOICE'' as productType variables, creating organizers for those products. A G2W or G2T organizer will also have access to G2M.'
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the group
-          format: int64
-          in: path
-          name: groupKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/groupKey'
         - description: The details of the organizer to be created
           in: body
           name: body
@@ -250,17 +229,8 @@ paths:
     get:
       description: Get upcoming meetings for a specified group. This API call is only available to users with the admin role. This API call can be used only for groups with maximum 50 organizers.
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the group. Only groups with maximum 50 organizers are supported
-          format: int64
-          in: path
-          name: groupKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/groupKey'
       responses:
         '200':
           description: OK
@@ -281,11 +251,7 @@ paths:
     get:
       description: Gets historical meetings for the current authenticated organizer. Requires date range for filtering results to only meetings within specified dates.
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
+        - $ref: '#/parameters/Authorization'
         - description: 'Required start of date range, in ISO8601 UTC format, e.g. 2015-07-01T22:00:00Z'
           format: date-time
           in: query
@@ -315,14 +281,10 @@ paths:
   /meetings:
     get:
       deprecated: true
-      description: 'DEPRECATED: Please use the new API calls "Get historical meetings" and "Get upcoming meetings".  Gets historical meetings for the current authenticated organizer. Requires date range for filtering results to only meetings within specified dates. History searches will contain the parameter "meetingInstanceKey" which is used in conjunction with the call "Get Attendees by Meeting" to get attendee information for a past meeting.'
+      description: 'DEPRECATED: Please use the new API calls ''Get historical meetings'' and ''Get upcoming meetings''.  Gets historical meetings for the current authenticated organizer. Requires date range for filtering results to only meetings within specified dates. History searches will contain the parameter ''meetingInstanceKey'' which is used in conjunction with the call ''Get Attendees by Meeting'' to get attendee information for a past meeting.'
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: When "true" returns all past meetings within date range
+        - $ref: '#/parameters/Authorization'
+        - description: 'When ''true'', returns all past meetings within date range'
           enum:
             - true
           in: query
@@ -351,11 +313,7 @@ paths:
     post:
       description: Create a new meeting based on the parameters specified.
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
+        - $ref: '#/parameters/Authorization'
         - description: The meeting details
           in: body
           name: body
@@ -378,16 +336,8 @@ paths:
     delete:
       description: Deletes the meeting identified by the meetingId.
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - format: int64
-          in: path
-          name: meetingId
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/meetingId'
       responses:
         '204':
           description: No Content
@@ -401,16 +351,8 @@ paths:
     get:
       description: Returns the meeting details for the specified meeting.
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - format: int64
-          in: path
-          name: meetingId
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/meetingId'
       responses:
         '200':
           description: OK
@@ -426,16 +368,8 @@ paths:
     put:
       description: Updates an existing meeting specified by meetingId.
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - format: int64
-          in: path
-          name: meetingId
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/meetingId'
         - description: The meeting details
           in: body
           name: body
@@ -456,16 +390,8 @@ paths:
     get:
       description: 'Returns a host URL that can be used to start a meeting. When this URL is opened in a web browser, the GoToMeeting client will be downloaded and launched and the meeting will start. The end user is not required to login to a client.'
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - format: int64
-          in: path
-          name: meetingId
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/meetingId'
       responses:
         '200':
           description: OK
@@ -476,13 +402,9 @@ paths:
         - Meetings
   '/meetings/{meetingInstanceKey}/attendees':
     get:
-      description: 'List all attendees for specified meeting instance key. The meeting instance key is only available for meetings that were successfully started and can be found for historical meetings using "Get Meetings", "Get Meetings by Organizer", and "Get Meetings by Group". For users with the admin role this call returns attendees for any meeting. For any other user the call will return attendees for meetings on which the user is a valid organizer.'
+      description: 'List all attendees for specified meeting instance key. The meeting instance key is only available for meetings that were successfully started and can be found for historical meetings using ''Get Meetings'', ''Get Meetings by Organizer'', and ''Get Meetings by Group''. For users with the admin role this call returns attendees for any meeting. For any other user the call will return attendees for meetings on which the user is a valid organizer.'
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
+        - $ref: '#/parameters/Authorization'
         - description: The key of the unique meeting instance
           format: int64
           in: path
@@ -505,11 +427,7 @@ paths:
     delete:
       description: Deletes the individual organizer specified by the email address. This API call is only available to users with the admin role.
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
+        - $ref: '#/parameters/Authorization'
         - description: The email address of the organizer
           in: query
           name: email
@@ -524,13 +442,9 @@ paths:
       tags:
         - Organizers
     get:
-      description: Gets the individual organizer specified by the organizer's email address. If an email address is not specified all organizers are returned. This API call is only available to users with the admin role.
+      description: 'Gets the individual organizer specified by the organizer''s email address. If an email address is not specified, all organizers are returned. This API call is only available to users with the admin role.'
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
+        - $ref: '#/parameters/Authorization'
         - description: The email address of the organizer
           in: query
           name: email
@@ -549,13 +463,9 @@ paths:
       tags:
         - Organizers
     post:
-      description: 'Creates a new organizer and sends an email to the email address defined in the request. This API call is only available to users with the admin role. You may also pass "G2W" or "G2T" or "OPENVOICE" as productType variables, creating organizers for those products. A G2W or G2T organizer will also have access to G2M.'
+      description: 'Creates a new organizer and sends an email to the email address defined in the request. This API call is only available to users with the admin role. You may also pass ''G2W'' or ''G2T'' or ''OPENVOICE'' as productType variables, creating organizers for those products. A G2W or G2T organizer will also have access to G2M.'
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
+        - $ref: '#/parameters/Authorization'
         - description: The details of the organizer to be created
           in: body
           name: body
@@ -582,17 +492,8 @@ paths:
     delete:
       description: Deletes the individual organizer specified by the organizer key. This API call is only available to users with the admin role.
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
       responses:
         '204':
           description: No Content
@@ -606,17 +507,8 @@ paths:
     get:
       description: Returns the individual organizer specified by the key. This API call is only available to users with the admin role. Non-admin users can only make this call for their own organizerKey.
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
       responses:
         '200':
           description: OK
@@ -632,19 +524,10 @@ paths:
       tags:
         - Organizers
     put:
-      description: Updates the specified organizer status. Status can either by "active" or "suspended". Suspending an organizer disables their access to GoToMeeting. This API call is only available to users with the admin role.
+      description: 'Updates the products of the specified organizer. To add a product (G2M, G2W, G2T, OPENVOICE) for the organizer, the call must be sent once for each product you want to add. To remove all products for the organizer, set status to ''suspended''. The call is limited to users with the admin role.'
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
         - description: The organizer's status
           in: body
           name: body
@@ -667,17 +550,8 @@ paths:
     get:
       description: Lists all attendees for all meetings within a specified date range for a specified organizer. This API call is only available to users with the admin role.
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
         - description: 'A required start of date range in ISO8601 UTC format, e.g. 2015-07-01T22:00:00Z'
           format: date-time
           in: query
@@ -708,17 +582,8 @@ paths:
     get:
       description: Get historical meetings for a specified organizer within a specified date range. This API call is only available to users with the admin role.
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
         - description: 'Required start of date range, in ISO8601 UTC format, e.g. 2015-07-01T22:00:00Z'
           format: date-time
           in: query
@@ -750,33 +615,24 @@ paths:
   '/organizers/{organizerKey}/meetings':
     get:
       deprecated: true
-      description: 'DEPRECATED: Please use the new API calls "Get historical meetings by organizer" and "Get upcoming meetings by organizer". Gets future (scheduled) or past (history) meetings for a specified organizer. Include "history=true" and the past start and end dates in the URL to retrieve past meetings. Enter "scheduled=true" (without dates) to get scheduled meetings.'
+      description: 'DEPRECATED: Please use the new API calls ''Get historical meetings by organizer'' and ''Get upcoming meetings by organizer''. Gets future (scheduled) or past (history) meetings for a specified organizer. Include ''history=true'' and the past start and end dates in the URL to retrieve past meetings. Enter ''scheduled=true'' (without dates) to get scheduled meetings.'
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
-        - description: When "true" returns all future meetings. Date range not supported.
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - description: 'When ''true'', returns all future meetings. Date range not supported.'
           in: query
           name: scheduled
           type: boolean
-        - description: When "true" returns all past meetings within date range
+        - description: 'When ''true'', returns all past meetings within date range'
           in: query
           name: history
           type: boolean
-        - description: 'If history is "true", required start of date range, in ISO8601 UTC format, e.g. 2015-07-01T22:00:00Z'
+        - description: 'If history is ''true'', required start of date range, in ISO8601 UTC format, e.g. 2015-07-01T22:00:00Z'
           format: date-time
           in: query
           name: startDate
           type: string
-        - description: 'If history is "true", required end of date range, in ISO8601 UTC format, e.g. 2015-07-01T23:00:00Z'
+        - description: 'If history is ''true'', required end of date range, in ISO8601 UTC format, e.g. 2015-07-01T23:00:00Z'
           format: date-time
           in: query
           name: endDate
@@ -799,17 +655,8 @@ paths:
     get:
       description: Get upcoming meetings for a specified organizer. This API call is only available to users with the admin role.
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
-        - description: The key of the organizer
-          format: int64
-          in: path
-          name: organizerKey
-          required: true
-          type: integer
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
       responses:
         '200':
           description: OK
@@ -828,11 +675,7 @@ paths:
     get:
       description: Gets upcoming meetings for the current authenticated organizer.
       parameters:
-        - description: Access token
-          in: header
-          name: Authorization
-          required: true
-          type: string
+        - $ref: '#/parameters/Authorization'
       responses:
         '200':
           description: OK
@@ -894,12 +737,8 @@ definitions:
         format: int64
         type: integer
       meetingType:
+        $ref: '#/definitions/MeetingType'
         description: The meeting type
-        enum:
-          - immediate
-          - recurring
-          - scheduled
-        type: string
       numAttendees:
         description: The number of attendees at the attended meeting instance
         format: int32
@@ -965,7 +804,7 @@ definitions:
         description: The first name of the meeting organizer
         type: string
       groupName:
-        description: DEPRECATED. Returns "NA" only
+        description: DEPRECATED. Returns 'NA'
         type: string
       joinTime:
         description: The time the attendee joined the meeting instance
@@ -987,12 +826,8 @@ definitions:
         format: int64
         type: integer
       meetingType:
+        $ref: '#/definitions/MeetingType'
         description: The meeting type
-        enum:
-          - immediate
-          - recurring
-          - scheduled
-        type: string
       name:
         description: The attendee's full name
         type: string
@@ -1080,12 +915,8 @@ definitions:
         format: int64
         type: integer
       meetingType:
+        $ref: '#/definitions/MeetingType'
         description: The meeting type
-        enum:
-          - immediate
-          - recurring
-          - scheduled
-        type: string
       name:
         description: The full name of the meeting organizer
         type: string
@@ -1131,29 +962,26 @@ definitions:
   Group:
     description: 'Describes a collection of organizers categorized by department or job function, for example. Can be a subgroup of a larger group.'
     properties:
-      groupKey:
-        description: The key of this group
-        format: int64
-        type: integer
       groupName:
         description: The name of this group
         type: string
+      groupkey:
+        description: The key of this group
+        format: int64
+        type: integer
       numOrganizers:
         description: The number of organizers assigned to this group
         format: int32
         type: integer
       parentKey:
-        description: The key of the parent group this group belongs to. Identical with the groupKey if this group is not a subgroup
+        description: The key of the parent group this group belongs to. Identical with the groupkey if this group is not a subgroup
         format: int64
         type: integer
       status:
+        $ref: '#/definitions/Status'
         description: 'The status of this group, i.e. whether the organizers assigned to it are able to host meetings'
-        enum:
-          - active
-          - suspended
-        type: string
     required:
-      - groupKey
+      - groupkey
       - groupName
       - parentKey
       - status
@@ -1190,12 +1018,8 @@ definitions:
         description: The meeting ID
         type: string
       meetingType:
+        $ref: '#/definitions/MeetingType'
         description: The meeting type
-        enum:
-          - immediate
-          - recurring
-          - scheduled
-        type: string
       numAttendees:
         description: The number of attendees at the meeting instance
         type: string
@@ -1260,12 +1084,8 @@ definitions:
         description: The meeting ID
         type: string
       meetingType:
+        $ref: '#/definitions/MeetingType'
         description: The meeting type
-        enum:
-          - immediate
-          - recurring
-          - scheduled
-        type: string
       numAttendees:
         description: The number of attendees at the meeting instance
         type: string
@@ -1327,12 +1147,8 @@ definitions:
         format: int64
         type: integer
       meetingType:
+        $ref: '#/definitions/MeetingType'
         description: The meeting type
-        enum:
-          - immediate
-          - recurring
-          - scheduled
-        type: string
       numAttendees:
         description: The number of attendees at this meeting instance
         format: int32
@@ -1374,7 +1190,7 @@ definitions:
         description: Audio options of the meeting
         type: string
       createTime:
-        description: DEPRECATED. Returns an empty string ""
+        description: DEPRECATED. Returns an empty string ''
         format: date-time
         type: string
       duration:
@@ -1398,12 +1214,8 @@ definitions:
         format: int64
         type: integer
       meetingType:
+        $ref: '#/definitions/MeetingType'
         description: The meeting type
-        enum:
-          - immediate
-          - recurring
-          - scheduled
-        type: string
       passwordRequired:
         description: Indicates whether a password is required to join the meeting
         type: boolean
@@ -1412,11 +1224,8 @@ definitions:
         format: date-time
         type: string
       status:
-        description: The meeting status
-        enum:
-          - ACTIVE
-          - INACTIVE
-        type: string
+        $ref: '#/definitions/MeetingStatus'
+        description: 'The meeting status, i.e whether the meeting is running or not'
       subject:
         description: The subject of the meeting
         type: string
@@ -1445,7 +1254,7 @@ definitions:
         description: Audio options for the meeting
         type: string
       createTime:
-        description: DEPRECATED. Returns an empty string ""
+        description: DEPRECATED. Returns an empty string ''
         format: date-time
         type: string
       endTime:
@@ -1457,12 +1266,8 @@ definitions:
         format: int32
         type: integer
       meetingType:
+        $ref: '#/definitions/MeetingType'
         description: The meeting type
-        enum:
-          - immediate
-          - recurring
-          - scheduled
-        type: string
       meetingid:
         description: The meeting ID
         format: int64
@@ -1475,11 +1280,8 @@ definitions:
         format: date-time
         type: string
       status:
-        description: The status of the meeting
-        enum:
-          - ACTIVE
-          - INACTIVE
-        type: string
+        $ref: '#/definitions/MeetingStatus'
+        description: 'The meeting status, i.e whether the meeting is running or not'
       subject:
         description: The subject of the meeting
         type: string
@@ -1551,7 +1353,7 @@ definitions:
         description: The meeting organizer's first name
         type: string
       groupName:
-        description: DEPRECATED. An empty string "" is returned
+        description: DEPRECATED. An empty string '' is returned
         type: string
       lastName:
         description: The surname of the meeting organizer
@@ -1569,12 +1371,8 @@ definitions:
         format: int64
         type: integer
       meetingType:
+        $ref: '#/definitions/MeetingType'
         description: The meeting type
-        enum:
-          - immediate
-          - recurring
-          - scheduled
-        type: string
       newMeetingId:
         description: Formatted meeting ID
         type: string
@@ -1592,7 +1390,7 @@ definitions:
         description: The key of the meeting organizer. Field retained for backwards compatibility reasons
         type: string
       passwordRequired:
-        description: DEPRECATED. An empty string "" is returned
+        description: DEPRECATED. An empty string '' is returned
         type: boolean
       sessionId:
         description: The ID of the meeting session
@@ -1603,7 +1401,7 @@ definitions:
         format: date-time
         type: string
       status:
-        description: DEPRECATED. An empty string "" is returned
+        description: DEPRECATED. An empty string '' is returned
         type: string
       subject:
         description: The subject of the meeting
@@ -1640,19 +1438,15 @@ definitions:
     description: Describes the information required to create a meeting.
     properties:
       conferencecallinfo:
-        description: 'A required string. Can be one of the following options: <br />PSTN (PSTN only), <br />Free (PSTN and VoIP), <br />Hybrid, (PSTN and VoIP), <br />Private (you provide numbers and access code), or <br />VoIP (VoIP only). <br />You may also enter plain text for numbers and access codes with a limit of 255 characters'
+        description: 'A required string. Can be one of the following options: <br>PSTN (PSTN only), <br>Free (PSTN and VoIP), <br>Hybrid, (PSTN and VoIP), <br>Private (you provide numbers and access code), or <br>VoIP (VoIP only). <br>You may also enter plain text for numbers and access codes with a limit of 255 characters'
         type: string
       endtime:
         description: 'The ending time of the meeting. Required ISO8601 UTC string, e.g. 2015-07-01T23:00:00Z'
         format: date-time
         type: string
       meetingtype:
+        $ref: '#/definitions/MeetingType'
         description: The meeting type
-        enum:
-          - immediate
-          - recurring
-          - scheduled
-        type: string
       passwordrequired:
         description: Indicates whether a password is required to join the meeting. Required parameter
         type: boolean
@@ -1664,7 +1458,7 @@ definitions:
         description: 'The subject of the meeting. 100 characters maximum. The characters ''&gt;'' and ''&lt;'' have to be replaced with the corresponding html character code (&amp;gt; for &#39;&gt;&#39; and &amp;lt; for &#39;&lt;&#39;)'
         type: string
       timezonekey:
-        description: DEPRECATED. Must be provided and set to empty string ""
+        description: DEPRECATED. Must be provided and set to empty string ''
         type: string
     required:
       - subject
@@ -1678,19 +1472,15 @@ definitions:
     description: Describes the information required to update a meeting.
     properties:
       conferencecallinfo:
-        description: 'A required string. Can be one of the following options: <br />PSTN (PSTN only), <br />Free (PSTN and VoIP), <br />Hybrid, (PSTN and VoIP), <br />Private (you provide numbers and access code), or <br />VoIP (VoIP only). <br />You may also enter plain text for numbers and access codes with a limit of 255 characters'
+        description: 'A required string. Can be one of the following options: <br>PSTN (PSTN only), <br>Free (PSTN and VoIP), <br>Hybrid, (PSTN and VoIP), <br>Private (you provide numbers and access code), or <br>VoIP (VoIP only). <br>You may also enter plain text for numbers and access codes with a limit of 255 characters'
         type: string
       endtime:
         description: 'The ending time of the meeting. A required ISO8601 UTC string, e.g. 2015-07-01T22:00:00Z'
         format: date-time
         type: string
       meetingtype:
+        $ref: '#/definitions/MeetingType'
         description: The meeting type
-        enum:
-          - immediate
-          - recurring
-          - scheduled
-        type: string
       passwordrequired:
         description: Indicates whether a password is required to join the meeting. Required parameter
         type: boolean
@@ -1702,7 +1492,7 @@ definitions:
         description: 'A description of the meeting. 100 characters maximum. The characters ''&gt;'' and ''&lt;'' have to be replaced with the corresponding html character code (&amp;gt; for &#39;&gt;&#39; and &amp;lt; for &#39;&lt;&#39;)'
         type: string
       timezonekey:
-        description: DEPRECATED. Must be provided and set to empty string ""
+        description: DEPRECATED. Must be provided and set to empty string ''
         type: string
     required:
       - subject
@@ -1731,12 +1521,8 @@ definitions:
         format: int32
         type: integer
       meetingType:
+        $ref: '#/definitions/MeetingType'
         description: The meeting type
-        enum:
-          - immediate
-          - recurring
-          - scheduled
-        type: string
       meetingid:
         description: The meeting ID.
         format: int64
@@ -1749,11 +1535,8 @@ definitions:
         format: date-time
         type: string
       status:
-        description: The meeting type
-        enum:
-          - ACTIVE
-          - INACTIVE
-        type: string
+        $ref: '#/definitions/MeetingStatus'
+        description: 'The meeting status, i.e whether the meeting is running or not'
       subject:
         description: The subject of the meeting.
         type: string
@@ -1773,6 +1556,19 @@ definitions:
       - endTime
       - uniqueMeetingId
       - conferenceCallInfo
+  MeetingStatus:
+    description: 'The meeting status, i.e whether the meeting is running or not'
+    enum:
+      - ACTIVE
+      - INACTIVE
+    type: string
+  MeetingType:
+    description: The meeting type
+    enum:
+      - immediate
+      - recurring
+      - scheduled
+    type: string
   Organizer:
     description: Describes an organizer.
     properties:
@@ -1801,21 +1597,13 @@ definitions:
         format: int64
         type: integer
       products:
-        description: The products the organizer has access to
+        description: 'The products the organizer has access to, can be ''G2M'', ''G2W'', ''G2T'' or ''OPENVOICE'''
         items:
-          enum:
-            - OPENVOICE
-            - G2M
-            - G2T
-            - G2W
-          type: string
+          $ref: '#/definitions/Product'
         type: array
       status:
-        description: The status of the organizer
-        enum:
-          - active
-          - suspended
-        type: string
+        $ref: '#/definitions/Status'
+        description: 'The status of the organizer, i.e. whether the organizer is able to host meetings'
     required:
       - lastName
       - groupId
@@ -1854,21 +1642,13 @@ definitions:
         format: int64
         type: integer
       products:
-        description: The products the organizer has access to
+        description: 'The products the organizer has access to, can be ''G2M'', ''G2W'', ''G2T'' or ''OPENVOICE'''
         items:
-          enum:
-            - OPENVOICE
-            - G2M
-            - G2T
-            - G2W
-          type: string
+          $ref: '#/definitions/Product'
         type: array
       status:
-        description: The status of the organizer
-        enum:
-          - active
-          - suspended
-        type: string
+        $ref: '#/definitions/Status'
+        description: 'The status of the organizer, i.e. whether the organizer is able to host meetings'
     required:
       - lastName
       - groupId
@@ -1892,13 +1672,8 @@ definitions:
         description: The email address of the organizer
         type: string
       productType:
-        description: The product the organizer has access to
-        enum:
-          - G2M
-          - G2W
-          - G2T
-          - OPENVOICE
-        type: string
+        $ref: '#/definitions/Product'
+        description: 'A product the organizer has access to, can be ''G2M'', ''G2W'', ''G2T'' or ''OPENVOICE'''
     required:
       - organizerEmail
       - firstName
@@ -1920,14 +1695,22 @@ definitions:
   OrganizerStatus:
     description: 'Describes the status of an organizer, i.e. whether they are able to host meetings.'
     properties:
+      productType:
+        $ref: '#/definitions/Product'
+        description: The product you want to add to the organizer. The call must be sent once for each product you want to add
       status:
-        description: The value the status of the organizer can be set to
+        description: The status of the organizer can be set to. Use 'suspended' to remove all products. The formerly used status 'active' is now DEPRECATED for this call. To activate the organizer please assign a product. In this case do not pass this parameter
         enum:
-          - active
           - suspended
         type: string
-    required:
-      - status
+  Product:
+    description: 'The products the organizer has access to, can be ''G2M'', ''G2W'', ''G2T'' or ''OPENVOICE'''
+    enum:
+      - G2M
+      - G2T
+      - G2W
+      - OPENVOICE
+    type: string
   ScheduledMeetingByGroup:
     description: Describes a meeting scheduled by an organizer within a specified group.
     properties:
@@ -1953,12 +1736,8 @@ definitions:
         description: The meeting ID.
         type: string
       meetingType:
+        $ref: '#/definitions/MeetingType'
         description: The meeting type
-        enum:
-          - immediate
-          - recurring
-          - scheduled
-        type: string
       organizerKey:
         description: The key of the meeting organizer.
         type: string
@@ -1993,6 +1772,12 @@ definitions:
         type: string
     required:
       - hostURL
+  Status:
+    description: 'The status of an organizer (or group), i.e. whether the organizer (or the members of the group respectively) are able to host meetings'
+    enum:
+      - active
+      - suspended
+    type: string
   UpcomingMeeting:
     description: Describes an upcoming meeting.
     properties:
@@ -2022,12 +1807,8 @@ definitions:
         description: The meeting ID
         type: string
       meetingType:
+        $ref: '#/definitions/MeetingType'
         description: The meeting type
-        enum:
-          - immediate
-          - recurring
-          - scheduled
-        type: string
       organizerKey:
         description: The key of the meeting organizer
         type: string
@@ -2039,11 +1820,8 @@ definitions:
         format: date-time
         type: string
       status:
-        description: Indicates if the meeting is currently running
-        enum:
-          - ACTIVE
-          - INACTIVE
-        type: string
+        $ref: '#/definitions/MeetingStatus'
+        description: 'The meeting status, i.e whether the meeting is running or not'
       subject:
         description: The subject of the meeting
         type: string
@@ -2079,7 +1857,7 @@ definitions:
         description: The meeting organizer's first name
         type: string
       groupName:
-        description: The group´s name that belongs to the given group key
+        description: The name of the group the meeting belongs to
         type: string
       lastName:
         description: The surname of the meeting organizer
@@ -2091,12 +1869,8 @@ definitions:
         description: The meeting ID
         type: string
       meetingType:
+        $ref: '#/definitions/MeetingType'
         description: The meeting type
-        enum:
-          - immediate
-          - recurring
-          - scheduled
-        type: string
       organizerKey:
         description: The key of the meeting organizer
         type: string
@@ -2108,11 +1882,8 @@ definitions:
         format: date-time
         type: string
       status:
-        description: Indicates if the meeting is currently running
-        enum:
-          - ACTIVE
-          - INACTIVE
-        type: string
+        $ref: '#/definitions/MeetingStatus'
+        description: DEPRECATED. This status flag is always set to 'INACTIVE'. It exists for backwards compatibility reasons only
       subject:
         description: The subject of the meeting
         type: string
@@ -2122,7 +1893,6 @@ definitions:
       - accountKey
       - passwordRequired
       - email
-      - status
       - subject
       - locale
       - organizerKey
