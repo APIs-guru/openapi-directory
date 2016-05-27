@@ -5,13 +5,13 @@ schemes:
 host: api.sendgrid.com
 basePath: /v3
 info:
-  title: DX - v3 - Officially Documented Only - DO NOT EDIT
+  title: SendGrid V3
   version: '3.0'
   x-logo:
-    url: 'https://assets3.sendgrid.com/mkt/assets/logos_brands/small/sglogo_2015_blue-9c87423c2ff2ff393ebce1ab3bd018a4.png'
+    url: 'https://sendgrid.com/wp-content/themes/sgdotcom/pages/logo-brand/img/2015_SG_Logo_RGB.png'
   x-origin:
     format: swagger
-    url: 'https://raw.githubusercontent.com/sendgrid/sendgrid-swagger/master/swagger.json'
+    url: 'https://raw.githubusercontent.com/sendgrid/sendgrid-oai/master/oai.json'
     version: '2.0'
   x-providerName: sendgrid.com
 externalDocs:
@@ -524,6 +524,8 @@ paths:
       responses:
         '204':
           description: ''
+          schema:
+            type: 'null'
         '404':
           description: ''
           examples:
@@ -1006,11 +1008,17 @@ paths:
 
         Suppressions are recipient email addresses that are added to [unsubscribe groups](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html). Once a recipient's address is on the suppressions list for an unsubscribe group, they will not receive any emails that are tagged with that unsubscribe group.
       operationId: DELETE_asm-groups-group_id-suppressions-email
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces: []
       responses:
         '204':
           description: ''
+          schema:
+            type: 'null'
       security:
         - Authorization: []
       summary: Delete a suppression from a suppression group
@@ -1430,12 +1438,18 @@ paths:
 
         * [User Guide > Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html)
       operationId: DELETE_campaigns-campaign_id
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:
         '204':
           description: ''
+          schema:
+            type: 'null'
         '401':
           description: ''
           examples:
@@ -1680,6 +1694,8 @@ paths:
       responses:
         '204':
           description: ''
+          schema:
+            type: 'null'
         '403':
           description: |-
             "": "This campaign is already In Progress."
@@ -1764,6 +1780,8 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              send_at: 1489451436
             properties:
               send_at:
                 format: int64
@@ -1955,7 +1973,11 @@ paths:
 
         * [User Guide > Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html)
       operationId: POST_campaigns-campaign_id-schedules-now
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:
@@ -2876,6 +2898,8 @@ paths:
       responses:
         '204':
           description: ''
+          schema:
+            type: 'null'
         '400':
           description: '"id" : "Returned if all list ids are not valid"'
           examples:
@@ -3011,11 +3035,17 @@ paths:
           in: query
           name: delete_contacts
           type: boolean
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:
         '202':
           description: ''
+          schema:
+            type: 'null'
         '400':
           description: |-
             "list_id" : "Returned if list_id is not valid"
@@ -3296,6 +3326,8 @@ paths:
       responses:
         '201':
           description: ''
+          schema:
+            type: 'null'
         '400':
           description: |-
             "list_id" : "Returned if list_id is not a valid integer"
@@ -3355,11 +3387,17 @@ paths:
           name: recipient_id
           required: true
           type: number
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:
         '204':
           description: ''
+          schema:
+            type: 'null'
         '400':
           description: |-
             "list_id" : "Returned if list_id is not valid"
@@ -3416,12 +3454,18 @@ paths:
 
         The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
       operationId: POST_contactdb-lists-list_id-recipients-recipient_id
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:
         '201':
           description: ''
+          schema:
+            type: 'null'
         '400':
           description: |-
             "list_id" : "Returned if list_id is invalid"
@@ -4266,6 +4310,8 @@ paths:
       responses:
         '204':
           description: ''
+          schema:
+            type: 'null'
         '400':
           description: |-
             "segment_id" : "Returned if segment_id is not valid"
@@ -6001,6 +6047,441 @@ paths:
         name: batch_id
         required: true
         type: string
+  /mail/send/beta:
+    parameters: []
+    post:
+      consumes:
+        - application/json
+      description: |-
+        This endpoint allows you to send email over SendGrid’s v3 Web API, the most recent version of our API. If you are looking for documentation about the v2 Mail Send endpoint, please see our [v2 API Reference](https://sendgrid.com/docs/API_Reference/Web_API/mail.html).
+
+        * Top level parameters are referred to as "global".
+        * Individual fields within the personalizations array will override any other global, or “message level”, parameters that are defined outside of personalizations.
+
+        For an overview of the v3 Mail Send endpoint, please visit our [v3 API Reference](https://sendgrid.com/docs/API_Reference/Web_API_v3/Mail/index.html)
+
+        For more detailed information about how to use the v3 Mail Send endpoint, please visit our [Classroom](https://sendgrid.com/docs/Classroom/Send/v3_Mail_Send/index.html).
+      operationId: POST_mail-send-beta
+      parameters:
+        - in: body
+          name: body
+          schema:
+            example:
+              asm:
+                group_id: 1
+                groups_to_display:
+                  - 1
+                  - 2
+                  - 3
+              attachments:
+                - content: '[BASE64 encoded content block here]'
+                  content_id: ii_139db99fdb5c3704
+                  disposition: inline
+                  filename: file1.jpg
+                  name: file1
+                  type: jpg
+              batch_id: '[YOUR BATCH ID GOES HERE]'
+              categories:
+                - category1
+                - category2
+              content:
+                - type: text/html
+                  value: '<html><p>Hello, world!</p><img src=''cid:ii_139db99fdb5c3704''></img></html>'
+              custom_args:
+                New Argument 1: New Value 1
+                activationAttempt: '1'
+                customerAccountNumber: '[CUSTOMER ACCOUNT NUMBER GOES HERE]'
+              from:
+                email: sam.smith@example.com
+                name: Sam Smith
+              headers: {}
+              ip_pool_name: '[YOUR POOL NAME GOES HERE]'
+              mail_settings:
+                bcc:
+                  email: ben.doe@example.com
+                  enable: true
+                bypass_list_management:
+                  enable: true
+                footer:
+                  enable: true
+                  html: <p>Thanks</br>The SendGrid Team</p>
+                  text: 'Thanks,/n The SendGrid Team'
+                sandbox_mode:
+                  enable: false
+                spam_check:
+                  enable: true
+                  post_to_url: 'http://example.com/compliance'
+                  threshold: 3
+              personalizations:
+                - bcc:
+                    - email: sam.doe@example.com
+                      name: Sam Doe
+                  cc:
+                    - email: jane.doe@example.com
+                      name: Jane Doe
+                  custom_args:
+                    New Argument 1: New Value 1
+                    activationAttempt: '1'
+                    customerAccountNumber: '[CUSTOMER ACCOUNT NUMBER GOES HERE]'
+                  headers:
+                    X-Accept-Language: en
+                    X-Mailer: MyApp
+                  send_at: 1409348513
+                  subject: 'Hello, World!'
+                  substitutions:
+                    sub:
+                      '%name%':
+                        - John
+                        - Jane
+                        - Sam
+                  to:
+                    - email: john.doe@example.com
+                      name: John Doe
+              reply_to:
+                email: sam.smith@example.com
+                name: Sam Smith
+              sections:
+                section:
+                  ':sectionName1': section 1 text
+                  ':sectionName2': section 2 text
+              send_at: 1409348513
+              subject: 'Hello, World!'
+              template_id: '[YOUR TEMPLATE ID GOES HERE]'
+              tracking_settings:
+                click_tracking:
+                  enable: true
+                  enable_text: true
+                ganalytics:
+                  enable: true
+                  utm_campaign: '[NAME OF YOUR REFERRER SOURCE]'
+                  utm_content: '[USE THIS SPACE TO DIFFERENTIATE YOUR EMAIL FROM ADS]'
+                  utm_medium: '[NAME OF YOUR MARKETING MEDIUM e.g. email]'
+                  utm_name: '[NAME OF YOUR CAMPAIGN]'
+                  utm_term: '[IDENTIFY PAID KEYWORDS HERE]'
+                open_tracking:
+                  enable: true
+                  substitution_tag: '%opentrack'
+                subscription_tracking:
+                  enable: true
+                  html: If you would like to unsubscribe and stop receiving these emails <% clickhere %>.
+                  substitution_tag: <%click here%>
+                  text: If you would like to unsubscribe and stop receiveing these emails <% click here %>.
+            properties:
+              asm:
+                description: An object allowing you to specify how to handle unsubscribes.
+                properties:
+                  group_id:
+                    description: The unsubscribe group to associate with this email.
+                    type: integer
+                  groups_to_display:
+                    description: An array containing the unsubscribe groups that you would like to be displayed on the unsubscribe preferences page.
+                    items:
+                      type: integer
+                    maxItems: 25
+                    type: array
+                required:
+                  - group_id
+                type: object
+              attachments:
+                description: An array of objects in which you can specify any attachments you want to include.
+                items:
+                  properties:
+                    content:
+                      description: The Base64 encoded content of the attachment.
+                      minLength: 1
+                      type: string
+                    content_id:
+                      description: 'The content id for the attachment. This is used when the disposition is set to “inline” and the attachment is an image, allowing the file to be displayed within the body of your email.'
+                      type: string
+                    disposition:
+                      default: attachment
+                      description: 'The content-disposition of the attachment specifying how you would like the attachment to be displayed. For example, “inline” results in the attached file being displayed automatically within the message while “attachment” results in the attached file requiring some action to be taken before it is displayed (e.g. opening or downloading the file).'
+                      enum:
+                        - inline
+                        - attachment
+                      type: string
+                    filename:
+                      description: The filename of the attachment.
+                      type: string
+                    type:
+                      description: 'The mime type of the content you are attaching. For example, “text/plain” or “text/html”.'
+                      minLength: 1
+                      type: string
+                  required:
+                    - content
+                    - filename
+                  type: object
+                type: array
+              batch_id:
+                description: 'This ID represents a batch of emails to be sent at the same time. Including a batch_id in your request allows you include this email in that batch, and also enables you to cancel or pause the delivery of that batch. For more information, see https://sendgrid.com/docs/API_Reference/Web_API_v3/cancel_schedule_send.html '
+                type: string
+              categories:
+                description: 'An array of category names for this message. Each category name may not exceed 255 characters. '
+                items:
+                  maxLength: 255
+                  type: string
+                maxItems: 10
+                type: array
+                uniqueItems: true
+              content:
+                description: 'An array in which you may specify the content of your email. You can include multiple mime types of content, but you must specify at least one mime type. To include more than one mime type, simply add another object to the array containing the `type` and `value` parameters.'
+                items:
+                  properties:
+                    type:
+                      description: 'The mime type of the content you are including in your email. For example, “text/plain” or “text/html”.'
+                      minLength: 1
+                      type: string
+                    value:
+                      description: The actual content of the specified mime type that you are including in your email.
+                      minLength: 1
+                      type: string
+                  required:
+                    - type
+                    - value
+                  type: object
+                type: array
+              custom_args:
+                description: 'Values that are specific to the entire send that will be carried along with the email and its activity data. Substitutions will not be made on custom arguments, so any string that is entered into this parameter will be assumed to be the custom argument that you would like to be used. This parameter is overridden by personalizations[x].custom_args if that parameter has been defined. Total custom args size may not exceed 10,000 bytes.'
+                type: object
+              from:
+                description: An email object containing the email address and name of the sender.
+                properties:
+                  '':
+                    $ref: '#/definitions/email_object'
+                type: object
+              headers:
+                description: An object containing key/value pairs of header names and the value to substitute for them. You must ensure these are properly encoded if they contain unicode characters. Must not be one of the reserved headers.
+                type: object
+              ip_pool_name:
+                description: The IP Pool that you would like to send this email from.
+                maxLength: 64
+                minLength: 2
+                type: string
+              mail_settings:
+                description: A collection of different mail settings that you can use to specify how you would like this email to be handled.
+                properties:
+                  bcc:
+                    description: This allows you to have a blind carbon copy automatically sent to the specified email address for every email that is sent.
+                    properties:
+                      email:
+                        description: The email address that you would like to receive the BCC.
+                        format: email
+                        type: string
+                      enable:
+                        description: Indicates if this setting is enabled.
+                        type: boolean
+                    type: object
+                  bypass_list_management:
+                    description: Allows you to bypass all unsubscribe groups and suppressions to ensure that the email is delivered to every single recipient. This should only be used in emergencies when it is absolutely necessary that every recipient receives your email.
+                    properties:
+                      enable:
+                        description: Indicates if this setting is enabled.
+                        type: boolean
+                    type: object
+                  footer:
+                    description: The default footer that you would like included on every email.
+                    properties:
+                      enable:
+                        description: Indicates if this setting is enabled.
+                        type: boolean
+                      html:
+                        description: The HTML content of your footer.
+                        type: string
+                      text:
+                        description: The plain text content of your footer.
+                        type: string
+                    type: object
+                  sandbox_mode:
+                    description: This allows you to send a test email to ensure that your request body is valid and formatted correctly.
+                    properties:
+                      enable:
+                        description: Indicates if this setting is enabled.
+                        type: boolean
+                    type: object
+                  spam_check:
+                    description: This allows you to test the content of your email for spam.
+                    properties:
+                      enable:
+                        description: Indicates if this setting is enabled.
+                        type: boolean
+                      post_to_url:
+                        description: An Inbound Parse URL that you would like a copy of your email along with the spam report to be sent to.
+                        type: string
+                      threshold:
+                        description: 'The threshold used to determine if your content qualifies as spam on a scale from 1 to 10, with 10 being most strict, or most likely to be considered as spam.'
+                        maximum: 10
+                        minimum: 1
+                        type: integer
+                    type: object
+                type: object
+              personalizations:
+                description: An array of messages and their metadata. Each object within personalizations can be thought of as an envelope - it defines who should receive an individual message and how that message should be handled.
+                items:
+                  properties:
+                    bcc:
+                      description: 'An array of recipients who will receive a blind carbon copy of your email. Each object within this array may contain the name, but must always contain the email, of a recipient.'
+                      items:
+                        properties:
+                          '':
+                            $ref: '#/definitions/email_object'
+                        type: object
+                      maxItems: 100
+                      type: array
+                    cc:
+                      description: 'An array of recipients who will receive a copy of your email. Each object within this array may contain the name, but must always contain the email, of a recipient.'
+                      items:
+                        properties:
+                          '':
+                            $ref: '#/definitions/email_object'
+                        type: object
+                      maxItems: 100
+                      type: array
+                    custom_args:
+                      description: 'Values that are specific to this personalization that will be carried along with the email and its activity data. Substitutions will not be made on custom arguments, so any string that is entered into this parameter will be assumed to be the custom argument that you would like to be used. May not exceed 10,000 bytes.'
+                      type: object
+                    headers:
+                      description: 'A collection of JSON key/value pairs allowing you to specify specific handling instructions for your email. You may not overwrite the following headers: x-sg-id, x-sg-eid, received, dkim-signature, Content-Type, Content-Transfer-Encoding, To, From, Subject, Reply-To, CC, BCC'
+                      type: object
+                    send_at:
+                      description: A unix timestamp allowing you to specify when you want your email to be delivered. Scheduling more than 72 hours in advance is forbidden.
+                      type: integer
+                    subject:
+                      description: 'The subject of your email. Char length requirements, according to the RFC - http://stackoverflow.com/questions/1592291/what-is-the-email-subject-length-limit#answer-1592310'
+                      minLength: 1
+                      type: string
+                    substitutions:
+                      description: 'A collection of key/value pairs following the pattern "substitution_tag":"value to substitute". All are assumed to be strings. These substitutions will apply to the text and html content of the body of your email, in addition to the `subject` and `reply-to` parameters.'
+                      maxProperties: 10000
+                      type: object
+                    to:
+                      description: 'An array of recipients. Each object within this array may contain the name, but must always contain the email, of a recipient.'
+                      items:
+                        properties:
+                          '':
+                            $ref: '#/definitions/email_object'
+                        type: object
+                      maxItems: 100
+                      minItems: 1
+                      type: array
+                  required:
+                    - to
+                  type: object
+                maxItems: 100
+                type: array
+                uniqueItems: false
+              reply_to:
+                description: An email object containing the email address and name of the individual who should receive responses to your email.
+                properties:
+                  '':
+                    $ref: '#/definitions/email_object'
+                type: object
+              sections:
+                description: An object of key/value pairs that define block sections of code to be used as substitutions.
+                type: object
+              send_at:
+                description: 'A unix timestamp allowing you to specify when you want your email to be delivered. This may be overridden by the personalizations[x].send_at parameter. Scheduling more ta 72 hours in advance is forbidden.'
+                type: integer
+              subject:
+                description: 'The global, or “message level”, subject of your email. This may be overridden by personalizations[x].subject.'
+                minLength: 1
+                type: string
+              template_id:
+                description: 'The id of a template that you would like to use. If you use a template that contains a subject and content (either text or html), you do not need to specify those at the personalizations nor message level. '
+                type: string
+              tracking_settings:
+                description: Settings to determine how you would like to track the metrics of how your recipients interact with your email.
+                properties:
+                  click_tracking:
+                    description: Allows you to track whether a recipient clicked a link in your email.
+                    properties:
+                      enable:
+                        description: Indicates if this setting is enabled.
+                        type: boolean
+                      enable_text:
+                        description: Indicates if this setting should be included in the text/plain portion of your email.
+                        type: boolean
+                    type: object
+                  ganalytics:
+                    description: Allows you to enable tracking provided by Google Analytics.
+                    properties:
+                      enable:
+                        description: Indicates if this setting is enabled.
+                        type: boolean
+                      utm_campaign:
+                        description: "The name of the campaign.\t"
+                        type: string
+                      utm_content:
+                        description: "Used to differentiate your campaign from advertisements.\t"
+                        type: string
+                      utm_medium:
+                        description: Name of the marketing medium. (e.g. Email)
+                        type: string
+                      utm_source:
+                        description: 'Name of the referrer source. (e.g. Google, SomeDomain.com, or Marketing Email)'
+                        type: string
+                      utm_term:
+                        description: "Used to identify any paid keywords.\t"
+                        type: string
+                    type: object
+                  open_tracking:
+                    description: 'Allows you to track whether the email was opened or not, but including a single pixel image in the body of the content. When the pixel is loaded, we can log that the email was opened.'
+                    properties:
+                      enable:
+                        description: Indicates if this setting is enabled.
+                        type: boolean
+                      substitution_tag:
+                        description: Allows you to specify a substitution tag that you can insert in the body of your email at a location that you desire. This tag will be replaced by the open tracking pixel.
+                        type: string
+                    type: object
+                  subscription_tracking:
+                    description: 'Allows you to insert a subscription management link at the bottom of the text and html bodies of your email. If you would like to specify the location of the link within your email, you may use the substitution_tag.'
+                    properties:
+                      enable:
+                        description: Indicates if this setting is enabled.
+                        type: boolean
+                      html:
+                        description: 'HTML to be appended to the email, with the subscription tracking link. You may control where the link is by using the tag <% %>'
+                        type: string
+                      substitution_tag:
+                        description: 'A tag that will be replaced with the unsubscribe URL. for example: [unsubscribe_url]. If this parameter is used, it will override both the `text` and `html` parameters. The URL of the link will be placed at the substitution tag’s location, with no additional formatting.'
+                        type: string
+                      text:
+                        description: 'Text to be appended to the email, with the subscription tracking link. You may control where the link is by using the tag <% %>'
+                        type: string
+                    type: object
+                type: object
+            required:
+              - personalizations
+              - from
+              - reply_to
+              - subject
+              - content
+            type: object
+      produces:
+        - application/json
+      responses:
+        '202':
+          description: ''
+          schema:
+            properties: {}
+            type: object
+        '400':
+          description: ''
+          schema:
+            $ref: '#/definitions/errors'
+        '401':
+          description: ''
+          schema:
+            $ref: '#/definitions/errors'
+        '413':
+          description: ''
+          schema:
+            $ref: '#/definitions/errors'
+      security:
+        - Authorization: []
+      summary: v3 Mail Send Beta
+      tags:
+        - Mail Send
   /mail_settings:
     get:
       consumes:
@@ -7345,48 +7826,6 @@ paths:
       security:
         - Authorization: []
       summary: Updates New Relic partner settings.
-  /partner_settings/sendwithus:
-    get:
-      consumes:
-        - application/json
-      description: ''
-      operationId: GET_partner_settings-sendwithus
-      parameters: []
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: ''
-          schema:
-            type: object
-      security:
-        - Authorization: []
-      summary: Get SendWithUs Settings
-    parameters: []
-    patch:
-      consumes:
-        - application/json
-      description: ''
-      operationId: PATCH_partner_settings-sendwithus
-      parameters:
-        - in: body
-          name: body
-          schema:
-            properties:
-              body:
-                description: ''
-                type: object
-            required:
-              - body
-            type: object
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: ''
-          schema:
-            type: object
-      summary: Update SendWithUs Settings
   /scopes:
     get:
       consumes:
@@ -8777,6 +9216,11 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              delete_all: false
+              emails:
+                - example1@example.com
+                - example2@example.com
             properties:
               delete_all:
                 description: Indicates if you want to delete all blocked email addresses.
@@ -9182,6 +9626,11 @@ paths:
         - in: body
           name: body
           schema:
+            example:
+              delete_all: false
+              emails:
+                - example1@example.com
+                - example2@example.com
             properties:
               delete_all:
                 description: Indicates if you want to remove all email address from the invalid emails list.
@@ -14166,6 +14615,33 @@ definitions:
         type: object
       username:
         type: string
+    type: object
+  email_object:
+    properties:
+      email:
+        format: email
+        type: string
+      name:
+        description: The name of the person to whom you are sending an email.
+        type: string
+    required:
+      - email
+    type: object
+  errors:
+    properties:
+      errors:
+        items:
+          properties:
+            field:
+              description: The field that has the error.
+              type:
+                - 'null'
+                - string
+            message:
+              description: The message the API caller will receive.
+              type: string
+          type: object
+        type: array
     type: object
   event_webhook_settings:
     properties:
