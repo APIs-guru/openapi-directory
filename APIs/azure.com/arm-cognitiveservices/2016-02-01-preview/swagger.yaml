@@ -82,8 +82,6 @@ paths:
               }
           schema:
             $ref: '#/definitions/CognitiveServicesAccountListResult'
-        '404':
-          description: 'If the subscription does not exist, 404 (NotFound) will be returned by the proxy *without* reaching the resource provider.If the subscription is not registered with the resource provider, it should return a 404 (NotFound) or an empty collection.'
         default:
           description: Error response describing why the operation failed
           schema:
@@ -119,10 +117,8 @@ paths:
             application/json: "{\n  “value”: [\n    {\n        “id”: “{url to resource 1}”,\n        “name”: “Name1”,\n        “type”: “Microsoft.CognitiveServices/accounts”,\n        \"location\": \"North US\"    \n        \"kind\" : \"resource kind\",\n        \"sku\": {\n\t        \"name\": \"sku code\"\n\t  }, \n        \"etag\": \"00000000-0000-0000-0000-000000000000\",\n        \"properties\": { }\n    },\n    {\n        “id”: “{url to resource 2}”,\n        “name”: “Name2”,\n        “type”: “Microsoft.CognitiveServices/accounts”,\n        \"location\": \"North US\",\n        \"kind\" : \"resource kind\",\n        \"sku\": {\n\t        \"name\": \"sku code\"\n\t  }, \n        \"etag\": \"00000000-0000-0000-0000-000000000000\",\n        \"properties\": { }\n    }\n  ],\n  “nextLink”: “{originalRequestUrl}?$skipToken={opaqueString}”\n}"
           schema:
             $ref: '#/definitions/CognitiveServicesAccountListResult'
-        '404':
-          description: 'If the resource group does not exist, 404 (NotFound) will be returned by the proxy *without* reaching the resource provider. '
         default:
-          description: Error response describing why the operation failed
+          description: 'Error response describing why the operation failed. If the resource group does not exist, 404 (NotFound) will be returned.'
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -153,10 +149,6 @@ paths:
           description: A 200 (OK) should be returned if the object exists and was deleted successfully;
         '204':
           description: a 204 (NoContent) should be used if the resource does not exist and the request is well formed.
-        '404':
-          description: 'If the resource group does not exist, 404 (NotFound) will be returned by the proxy layer and will not reach the resource provider.'
-        '412':
-          description: 412 (PreconditionFailed) and other normal REST codes are acceptable as long as they match the REST guidelines.
         default:
           description: Error response describing why the operation failed
           schema:
@@ -189,10 +181,8 @@ paths:
             application/json: "{\n  “id”: “/subscriptions/{id}/resourceGroups/{group}/providers/{rpns}/{type}/{name}”,\n  “name”: “{name}”,\n  “type”: “Microsoft.CognitiveSerices/accounts”,\n  \"location\": \"North US\",\n  \"tags\": {\n    \"key1\": \"value 1\",\n    \"key2\": \"value 2\"\n   },\n  \"kind\" : \"resource kind\",\n   \"sku\": {\n\t    \"name\": \"sku code\"\n\t} \n  “etag”: “00000000-0000-0000-0000-000000000000”,\n  \"properties\": { }\n}"
           schema:
             $ref: '#/definitions/CognitiveServicesAccount'
-        '404':
-          description: 'If the resource does not exist, 404 (NotFound) should be returned. For other errors (e.g. internal errors) use the appropriate HTTP error code.'
         default:
-          description: Error response describing why the operation failed
+          description: 'Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) should be returned.'
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -216,10 +206,11 @@ paths:
           type: string
         - description: The parameters to provide for the created account.
           in: body
-          name: parameters
+          name: body
           required: true
           schema:
             $ref: '#/definitions/CognitiveServicesAccountUpdateParameters'
+          x-ms-client-flatten: true
         - $ref: '#/parameters/apiVersionParameter'
         - $ref: '#/parameters/subscriptionIdParameter'
       responses:
@@ -227,10 +218,8 @@ paths:
           description: 'The resource provider should return 200 (OK) to indicate that the operation completed successfully. '
           schema:
             $ref: '#/definitions/CognitiveServicesAccount'
-        '404':
-          description: 'If the resource group *or* resource does not exist, 404 (NotFound) should be returned.'
         default:
-          description: Error response describing why the operation failed
+          description: 'Error response describing why the operation failed. If the resource group *or* resource does not exist, 404 (NotFound) should be returned.'
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -335,10 +324,11 @@ paths:
           type: string
         - description: regenerate key parameters.
           in: body
-          name: parameters
+          name: body
           required: true
           schema:
             $ref: '#/definitions/RegenerateKeyParameters'
+          x-ms-client-flatten: true
         - $ref: '#/parameters/apiVersionParameter'
         - $ref: '#/parameters/subscriptionIdParameter'
       responses:
@@ -397,10 +387,8 @@ paths:
               }
           schema:
             $ref: '#/definitions/CognitiveServicesAccountEnumerateSkusResult'
-        '404':
-          description: 'If the resource does not exist, 404 (NotFound) should be returned. For other errors (e.g. internal errors) use the appropriate HTTP error code.  If no skus are valid, return 200 + an empty value array.'
         default:
-          description: Error response describing why the operation failed
+          description: 'Error response describing why the operation failed. If the resource does not exist, 404 (NotFound) will be returned.'
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -462,6 +450,7 @@ definitions:
         type: string
       properties:
         $ref: '#/definitions/CognitiveServicesAccountPropertiesCreateParameters'
+        description: Must exist in the request. Must not be null.
         x-ms-client-flatten: true
       sku:
         $ref: '#/definitions/Sku'
@@ -520,7 +509,7 @@ definitions:
           modelAsString: false
           name: ProvisioningState
   CognitiveServicesAccountPropertiesCreateParameters:
-    description: required empty proprties object
+    description: 'required empty proprties object. Must be an empty object, and must exist in the request.'
   CognitiveServicesAccountUpdateParameters:
     description: The parameters to provide for the account.
     properties:
@@ -540,6 +529,10 @@ definitions:
         $ref: '#/definitions/Sku'
   Error:
     properties:
+      error:
+        $ref: '#/definitions/ErrorBody'
+  ErrorBody:
+    properties:
       code:
         description: error code
         type: string
@@ -553,14 +546,14 @@ definitions:
     description: Regenerate key parameters.
     properties:
       keyName:
-        description: key name to generate (key1|key2)
+        description: key name to generate (Key1|Key2)
         enum:
           - Key1
           - Key2
         type: string
         x-ms-enum:
           modelAsString: false
-          name: KeyNameEnum
+          name: KeyName
   Sku:
     description: The SKU of the cognitive services account.
     properties:

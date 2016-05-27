@@ -3984,6 +3984,11 @@ definitions:
         items:
           type: string
         type: array
+      additionalProductTypes:
+        description: Additional categories of the item (formatted as in products feed specification).
+        items:
+          type: string
+        type: array
       adult:
         description: Set to true if the item is targeted towards adults.
         type: boolean

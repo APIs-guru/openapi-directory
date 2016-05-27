@@ -139,7 +139,7 @@ paths:
         - episodes
   '/episodes?itunes_id={id}':
     get:
-      description: Gets a single episode record by iTunes ID
+      description: 'Gets a single episode record by iTunes ID. (Note: we may not have every episode for every show.)'
       parameters:
         - description: ID of show to fetch
           format: int64
@@ -179,7 +179,7 @@ paths:
     get:
       description: Returns search results
       parameters:
-        - description: Thing you would like to search for
+        - description: 'Thing you would like to search for. A wildcard character (`*`) can be used to substitute for any other character or characters in a string. Submitting `*` will return all results. To restrict the query to a single field, preface the query with the field name followed by `:`, (e.g. `title: roller coaster` or `itunes_episode:348644077` or `entity:Obama`).'
           in: path
           name: query
           required: true
@@ -247,7 +247,7 @@ paths:
     get:
       description: This endpoint returns search results for People
       parameters:
-        - description: Thing you would like to search for
+        - description: 'Thing you would like to search for. A wildcard character (`*`) can be used to substitute for any other character or characters in a string. Submitting `*` will return all results. To restrict the query to a single field, preface the query with the field name followed by `:`, (e.g. `name: Gene`).'
           in: path
           name: query
           required: true
@@ -300,7 +300,7 @@ paths:
     get:
       description: This endpoint returns search results for Shows
       parameters:
-        - description: Thing you would like to search for
+        - description: 'Thing you would like to search for. A wildcard character (`*`) can be used to substitute for any other character or characters in a string. Submitting `*` will return all results. To restrict the query to a single field, preface the query with the field name followed by `:`, (e.g. `title: radio`).'
           in: path
           name: query
           required: true
@@ -409,7 +409,7 @@ paths:
         - charts
   '/shows?itunes_id={id}':
     get:
-      description: This endpoint will return the medatdata for a single show given its iTunes id
+      description: 'This endpoint will return the medatdata for a single show given its iTunes id. (Note: we do not have every show in iTunes''s database)'
       parameters:
         - description: ID of show to fetch
           format: int64
@@ -1094,6 +1094,9 @@ definitions:
       image_urls:
         $ref: '#/definitions/image_urls'
         type: object
+      itunes_episode:
+        description: iTunes episode id
+        type: integer
       locations:
         items:
           type: object

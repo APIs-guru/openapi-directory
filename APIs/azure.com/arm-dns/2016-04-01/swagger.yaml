@@ -52,6 +52,10 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/ZoneListResult'
+        default:
+          description: Default Response. It will be deserialized as per the Error defintion
+          schema:
+            $ref: '#/definitions/CloudError'
       tags:
         - Zones
       x-ms-pageable:
@@ -78,6 +82,10 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/ZoneListResult'
+        default:
+          description: Default Response. It will be deserialized as per the Error defintion
+          schema:
+            $ref: '#/definitions/CloudError'
       tags:
         - Zones
       x-ms-pageable:
@@ -99,14 +107,16 @@ paths:
           type: string
         - description: Defines the If-Match condition. The delete operation will be performed only if the ETag of the zone on the server matches this value.
           in: header
-          name: IfMatch
+          name: If-Match
           required: false
           type: string
+          x-ms-client-name: IfMatch
         - description: Defines the If-None-Match condition. The delete operation will be performed only if the ETag of the zone on the server does not match this value.
           in: header
-          name: IfNoneMatch
+          name: If-None-Match
           required: false
           type: string
+          x-ms-client-name: IfNoneMatch
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -117,9 +127,11 @@ paths:
         '202':
           description: ''
         '204':
-          description: ''
+          description: Zone does not exist
+        default:
+          description: Default Response. It will be deserialized as per the Error defintion
           schema:
-            $ref: '#/definitions/ZoneDeleteResult'
+            $ref: '#/definitions/CloudError'
       tags:
         - Zones
       x-ms-long-running-operation: true
@@ -144,6 +156,10 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/Zone'
+        default:
+          description: Default Response. It will be deserialized as per the Error defintion
+          schema:
+            $ref: '#/definitions/CloudError'
       tags:
         - Zones
     put:
@@ -168,14 +184,16 @@ paths:
             $ref: '#/definitions/Zone'
         - description: The etag of Zone.
           in: header
-          name: IfMatch
+          name: If-Match
           required: false
           type: string
+          x-ms-client-name: IfMatch
         - description: Defines the If-None-Match condition. Set to '*' to force Create-If-Not-Exist. Other values will be ignored.
           in: header
-          name: IfNoneMatch
+          name: If-None-Match
           required: false
           type: string
+          x-ms-client-name: IfNoneMatch
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -187,6 +205,10 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/Zone'
+        default:
+          description: Default Response. It will be deserialized as per the Error defintion
+          schema:
+            $ref: '#/definitions/CloudError'
       tags:
         - Zones
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/dnszones/{zoneName}/recordsets':
@@ -216,6 +238,10 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/RecordSetListResult'
+        default:
+          description: Default Response. It will be deserialized as per the Error defintion
+          schema:
+            $ref: '#/definitions/CloudError'
       tags:
         - RecordSets
       x-ms-pageable:
@@ -265,6 +291,10 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/RecordSetListResult'
+        default:
+          description: Default Response. It will be deserialized as per the Error defintion
+          schema:
+            $ref: '#/definitions/CloudError'
       tags:
         - RecordSets
       x-ms-pageable:
@@ -310,14 +340,16 @@ paths:
             name: RecordType
         - description: Defines the If-Match condition. The delete operation will be performed only if the ETag of the zone on the server matches this value.
           in: header
-          name: IfMatch
+          name: If-Match
           required: false
           type: string
+          x-ms-client-name: IfMatch
         - description: Defines the If-None-Match condition. The delete operation will be performed only if the ETag of the zone on the server does not match this value.
           in: header
-          name: IfNoneMatch
+          name: If-None-Match
           required: false
           type: string
+          x-ms-client-name: IfNoneMatch
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -325,6 +357,10 @@ paths:
           description: ''
         '204':
           description: ''
+        default:
+          description: Default Response. It will be deserialized as per the Error defintion
+          schema:
+            $ref: '#/definitions/CloudError'
       tags:
         - RecordSets
     get:
@@ -372,6 +408,10 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/RecordSet'
+        default:
+          description: Default Response. It will be deserialized as per the Error defintion
+          schema:
+            $ref: '#/definitions/CloudError'
       tags:
         - RecordSets
     patch:
@@ -420,14 +460,16 @@ paths:
             $ref: '#/definitions/RecordSet'
         - description: The etag of Zone.
           in: header
-          name: IfMatch
+          name: If-Match
           required: false
           type: string
+          x-ms-client-name: IfMatch
         - description: Defines the If-None-Match condition. Set to '*' to force Create-If-Not-Exist. Other values will be ignored.
           in: header
-          name: IfNoneMatch
+          name: If-None-Match
           required: false
           type: string
+          x-ms-client-name: IfNoneMatch
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -435,6 +477,10 @@ paths:
           description: Recordse has been updated successfully
           schema:
             $ref: '#/definitions/RecordSet'
+        default:
+          description: Default Response. It will be deserialized as per the Error defintion
+          schema:
+            $ref: '#/definitions/CloudError'
       tags:
         - RecordSets
     put:
@@ -481,16 +527,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RecordSet'
-        - description: The etag of RecordSet.
+        - description: The etag of Recordset.
           in: header
-          name: IfMatch
+          name: If-Match
           required: false
           type: string
+          x-ms-client-name: IfMatch
         - description: Defines the If-None-Match condition. Set to '*' to force Create-If-Not-Exist. Other values will be ignored.
           in: header
-          name: IfNoneMatch
+          name: If-None-Match
           required: false
           type: string
+          x-ms-client-name: IfNoneMatch
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -502,6 +550,10 @@ paths:
           description: Record set has been created
           schema:
             $ref: '#/definitions/RecordSet'
+        default:
+          description: Default Response. It will be deserialized as per the Error defintion
+          schema:
+            $ref: '#/definitions/CloudError'
       tags:
         - RecordSets
 definitions:
@@ -517,6 +569,26 @@ definitions:
       ipv6Address:
         description: Gets or sets the IPv6 address of this AAAA record in string notation.
         type: string
+  CloudError:
+    properties:
+      error:
+        $ref: '#/definitions/CloudErrorBody'
+    type: object
+    x-ms-external: true
+  CloudErrorBody:
+    properties:
+      code:
+        type: string
+      details:
+        items:
+          $ref: '#/definitions/CloudErrorBody'
+        type: array
+      message:
+        type: string
+      target:
+        type: string
+    type: object
+    x-ms-external: true
   CnameRecord:
     description: A CNAME record.
     properties:

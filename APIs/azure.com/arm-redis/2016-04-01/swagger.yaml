@@ -164,6 +164,35 @@ paths:
             $ref: '#/definitions/RedisResourceWithAccessKey'
       tags:
         - Redis
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/export':
+    post:
+      description: Import data into redis cache.
+      operationId: Redis_export
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the redis cache.
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: Parameters for redis export operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ExportRDBParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '202':
+          description: ''
+      tags:
+        - Redis
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/forceReboot':
     post:
       description: Reboot specified redis node(s). This operation requires write permission to the cache resource. There can be potential data loss.
@@ -194,6 +223,35 @@ paths:
           description: ''
       tags:
         - Redis
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/import':
+    post:
+      description: Import data into redis cache.
+      operationId: Redis_import
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the redis cache.
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: Parameters for redis import operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ImportRDBParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '202':
+          description: ''
+      tags:
+        - Redis
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/listKeys':
     post:
       description: Retrieve a redis cache's access keys. This operation requires write permission to the cache resource.
@@ -249,6 +307,34 @@ paths:
       tags:
         - Redis
 definitions:
+  ExportRDBParameters:
+    description: Parameters for redis export operation.
+    properties:
+      container:
+        description: Container name to export to.
+        type: string
+      format:
+        description: File format.
+        type: string
+      prefix:
+        description: Prifix to use for exported files.
+        type: string
+    required:
+      - container
+      - prefix
+  ImportRDBParameters:
+    description: Parameters for redis import operation.
+    properties:
+      files:
+        description: files to import
+        items:
+          type: string
+        type: array
+      format:
+        description: File format.
+        type: string
+    required:
+      - files
   RedisAccessKeys:
     description: Redis cache access keys.
     properties:
@@ -290,7 +376,7 @@ definitions:
           $ref: '#/definitions/RedisResource'
         type: array
   RedisProperties:
-    description: Parameters supplied to CreateOrUpdate redis operation.
+    description: Properties supplied to CreateOrUpdate redis operation.
     properties:
       enableNonSslPort:
         description: 'If the value is true, then the non-ssl redis server port (6379) will be enabled.'
@@ -361,7 +447,7 @@ definitions:
           - AllNodes
         type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: RebootType
       shardId:
         description: 'In case of cluster cache, this specifies shard id which should be rebooted.'

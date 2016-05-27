@@ -980,6 +980,43 @@ paths:
       tags:
         - ExpressRouteCircuitArpTable
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTables/{devicePath}':
+    post:
+      description: The ListRoutesTable from ExpressRouteCircuit opertion retrieves the currently advertised routes table associated with the ExpressRouteCircuits in a resource group.
+      operationId: ExpressRouteCircuits_ListRoutesTable
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the circuit.
+          in: path
+          name: circuitName
+          required: true
+          type: string
+        - description: The name of the peering.
+          in: path
+          name: peeringName
+          required: true
+          type: string
+        - description: The path of the device.
+          in: path
+          name: devicePath
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/ExpressRouteCircuitsRoutesTableListResult'
+        '202':
+          description: ''
+      tags:
+        - ExpressRouteCircuitRoutesTable
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTablesSummary/{devicePath}':
     post:
       description: The ListRoutesTable from ExpressRouteCircuit opertion retrieves the currently advertised routes table associated with the ExpressRouteCircuits in a resource group.
@@ -1016,43 +1053,6 @@ paths:
           description: ''
       tags:
         - ExpressRouteCircuitRoutesTableSummary
-      x-ms-long-running-operation: true
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routesTable/{devicePath}':
-    post:
-      description: The ListRoutesTable from ExpressRouteCircuit opertion retrieves the currently advertised routes table associated with the ExpressRouteCircuits in a resource group.
-      operationId: ExpressRouteCircuits_ListRoutesTable
-      parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the circuit.
-          in: path
-          name: circuitName
-          required: true
-          type: string
-        - description: The name of the peering.
-          in: path
-          name: peeringName
-          required: true
-          type: string
-        - description: The path of the device.
-          in: path
-          name: devicePath
-          required: true
-          type: string
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-      responses:
-        '200':
-          description: ''
-          schema:
-            $ref: '#/definitions/ExpressRouteCircuitsRoutesTableListResult'
-        '202':
-          description: ''
-      tags:
-        - ExpressRouteCircuitRoutesTable
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/stats':
     get:
@@ -3995,6 +3995,9 @@ definitions:
         items:
           $ref: '#/definitions/InboundNatRule'
         type: array
+      primary:
+        description: Gets whether this is a primary customer address on the NIC
+        type: boolean
       privateIPAddress:
         type: string
       privateIPAddressVersion:

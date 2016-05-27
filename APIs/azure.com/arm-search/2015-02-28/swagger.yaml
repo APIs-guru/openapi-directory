@@ -188,27 +188,32 @@ definitions:
     description: Response containing the primary and secondary API keys for a given Azure Search service.
     properties:
       primaryKey:
-        description: Gets the primary API key of the Search service.
+        description: The primary API key of the Search service.
+        readOnly: true
         type: string
       secondaryKey:
-        description: Gets the secondary API key of the Search service.
+        description: The secondary API key of the Search service.
+        readOnly: true
         type: string
   ListQueryKeysResult:
     description: Response containing the query API keys for a given Azure Search service.
     properties:
       value:
-        description: Gets the query keys for the Azure Search service.
+        description: The query keys for the Azure Search service.
         items:
           $ref: '#/definitions/QueryKey'
+        readOnly: true
         type: array
   QueryKey:
     description: Describes an API key for a given Azure Search service that has permissions for query operations only.
     properties:
       key:
-        description: Gets the value of the query API key.
+        description: The value of the query API key.
+        readOnly: true
         type: string
       name:
-        description: Gets the name of the query API key; may be empty.
+        description: The name of the query API key; may be empty.
+        readOnly: true
         type: string
   Resource:
     properties:
@@ -239,63 +244,65 @@ definitions:
     description: Properties that describe an Azure Search service.
     properties:
       location:
-        description: Gets or sets the geographic location of the Search service.
+        description: The geographic location of the Search service.
         type: string
       properties:
         $ref: '#/definitions/SearchServiceProperties'
-        description: Gets or sets properties of the Search service.
+        description: Properties of the Search service.
       tags:
         additionalProperties:
           type: string
-        description: Gets or sets tags to help categorize the Search service in the Azure Portal.
+        description: Tags to help categorize the Search service in the Azure Portal.
         type: object
   SearchServiceListResult:
     description: Response containing a list of Azure Search services for a given resource group.
     properties:
       value:
-        description: Gets the Search services in the resource group.
+        description: The Search services in the resource group.
         items:
           $ref: '#/definitions/SearchServiceResource'
+        readOnly: true
         type: array
   SearchServiceProperties:
     description: Defines properties of an Azure Search service that can be modified.
     properties:
       partitionCount:
-        description: 'Gets or sets the number of partitions in the Search service; if specified, it can be 1, 2, 3, 4, 6, or 12.'
+        description: 'The number of partitions in the Search service; if specified, it can be 1, 2, 3, 4, 6, or 12.'
         format: int32
         type: integer
       replicaCount:
-        description: 'Gets or sets the number of replicas in the Search service. If specified, it must be a value between 1 and 6 inclusive.'
+        description: 'The number of replicas in the Search service. If specified, it must be a value between 1 and 6 inclusive.'
         format: int32
         type: integer
       sku:
         $ref: '#/definitions/Sku'
-        description: 'Gets or sets the SKU of the Search Service, which determines price tier and capacity limits.'
+        description: 'The SKU of the Search Service, which determines price tier and capacity limits.'
   SearchServiceReadableProperties:
     description: Defines all the properties of an Azure Search service.
     properties:
       partitionCount:
-        description: 'Gets or sets the number of partitions in the Search service; if specified, it can be 1, 2, 3, 4, 6, or 12.'
+        description: 'The number of partitions in the Search service; if specified, it can be 1, 2, 3, 4, 6, or 12.'
         format: int32
         type: integer
       provisioningState:
-        description: Gets the state of the last provisioning operation performed on the Search service.
+        description: The state of the last provisioning operation performed on the Search service.
         enum:
           - succeeded
           - provisioning
           - failed
+        readOnly: true
         type: string
         x-ms-enum:
           name: ProvisioningState
       replicaCount:
-        description: 'Gets or sets the number of replicas in the Search service. If specified, it must be a value between 1 and 6 inclusive.'
+        description: 'The number of replicas in the Search service. If specified, it must be a value between 1 and 6 inclusive.'
         format: int32
         type: integer
       sku:
         $ref: '#/definitions/Sku'
-        description: 'Gets or sets the SKU of the Search Service, which determines price tier and capacity limits.'
+        description: 'The SKU of the Search Service, which determines price tier and capacity limits.'
       status:
-        description: Gets the status of the Search service.
+        description: The status of the Search service.
         enum:
           - running
           - provisioning
@@ -303,40 +310,43 @@ definitions:
           - degraded
           - disabled
           - error
+        readOnly: true
         type: string
         x-ms-enum:
           name: SearchServiceStatus
       statusDetails:
-        description: Gets the details of the Search service status.
+        description: The details of the Search service status.
+        readOnly: true
         type: string
   SearchServiceResource:
     description: Describes an Azure Search service and its current state.
     properties:
       id:
-        description: Resource Id
+        description: The resource Id of the Azure Search service.
         readOnly: true
         type: string
       location:
-        description: Gets or sets the geographic location of the Search service.
+        description: The geographic location of the Search service.
         type: string
       name:
-        description: Gets or sets the name of the Search service.
+        description: The name of the Search service.
         externalDocs:
           url: 'https://msdn.microsoft.com/library/azure/dn857353.aspx'
         type: string
       properties:
         $ref: '#/definitions/SearchServiceReadableProperties'
-        description: Gets properties of the Search service.
+        description: Properties of the Search service.
+        readOnly: true
       tags:
         additionalProperties:
           type: string
-        description: Gets or sets tags to help categorize the Search service in the Azure Portal.
+        description: Tags to help categorize the Search service in the Azure Portal.
         type: object
   Sku:
     description: 'Defines the SKU of an Azure Search Service, which determines price tier and capacity limits.'
     properties:
       name:
-        description: Gets or sets the SKU of the Search service.
+        description: The SKU of the Search service.
         enum:
           - free
           - standard

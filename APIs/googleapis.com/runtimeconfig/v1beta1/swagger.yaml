@@ -114,18 +114,21 @@ tags:
 paths:
   '/v1beta1/{name}':
     delete:
-      description: Deletes the Waiter with the specified name.
+      description: Deletes the waiter with the specified name.
       operationId: runtimeconfig.projects.configs.waiters.delete
       parameters:
-        - description: The Waiter resource to delete.
+        - description: |-
+            The Waiter resource to delete, in the format:
+
+             `projects/[PROJECT_ID]/configs/[CONFIG_NAME]/waiters/[WAITER_NAME]`
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
         - description: |-
-            If recursive is false and name is a prefix of other variables, then
-            the request will fail.
+            Set to `true` to recursively delete multiple variables with the same
+            prefix.
           in: query
           name: recursive
           type: boolean
@@ -185,9 +188,9 @@ paths:
       operationId: runtimeconfig.projects.configs.variables.update
       parameters:
         - description: |-
-            The name of the variable to update.
-            In the format of:
-            "projects/{project_id}/configs/{config_id}/variables/{variable_id}"
+            The name of the variable to update, in the format:
+
+            `projects/[PROJECT_ID]/configs/[CONFIG_NAME]/variables/[VARIABLE_NAME]`
           in: path
           name: name
           required: true
@@ -226,16 +229,25 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        WatchVariable watches for a variable to change and then returns the new
-        value or times out.
-        If variable is deleted while being watched, VariableState will be DELETED
-        and the Value will contain the last known value.
-        If the operation deadline is set to a larger value than internal timeout
-        existing, current variable value will be returned and Variable state will
-        be VARIABLE_STATE_UNSPECIFIED.
+        Watches a specific variable and waits for a change in the variable's value.
+        When there is a change, this method returns the new value or times out.
+
+        If a variable is deleted while being watched, the `variableState` state is
+        set to `DELETED` and the method returns the last known variable `value`.
+
+        If you set the deadline for watching to a larger value than internal timeout
+        (60 seconds), the current variable value is returned and the `variableState`
+        will be `VARIABLE_STATE_UNSPECIFIED`.
+
+        To learn more about creating a watcher, read the
+        [Watching a Variable for Changes](/deployment-manager/runtime-configurator/watching-a-variable)
+        documentation.
       operationId: runtimeconfig.projects.configs.variables.watch
       parameters:
-        - description: The name of the variable to retrieve.
+        - description: |-
+            The name of the variable to watch, in the format:
+
+            `projects/[PROJECT_ID]/configs/[CONFIG_NAME]`
           in: path
           name: name
           required: true
@@ -259,24 +271,26 @@ paths:
         - projects
   '/v1beta1/{parent}/configs':
     get:
-      description: Lists all the config objects within project.
+      description: Lists all the RuntimeConfig resources within project.
       operationId: runtimeconfig.projects.configs.list
       parameters:
         - description: |-
-            The cloud project, whose configuration resources we want to list.
-            Required. Must be a valid GCP project.
+            The [project ID](https://support.google.com/cloud/answer/6158840?hl=en&ref_topic=6158848)
+            for this request, in the format `projects/[PROJECT_ID]`.
           in: path
           name: parent
           required: true
           type: string
           x-reservedExpansion: true
         - description: |-
-            List pagination support.
-            The size of the page to return. We may return fewer elements.
+            Specifies the number of results to return per page. If there are fewer
+            elements than the specified number, returns all elements.
           in: query
           name: pageSize
           type: integer
-        - description: The token for pagination.
+        - description: |-
+            Specifies a page token to use. Set `pageToken` to a `nextPageToken`
+            returned by a previous list request to get the next page of results.
           in: query
           name: pageToken
           type: string
@@ -308,13 +322,13 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        CreateConfig creates a new config resource object.
-        The configuration name must be unique within project.
+        Creates a new RuntimeConfig resource. The configuration name must be
+        unique within project.
       operationId: runtimeconfig.projects.configs.create
       parameters:
         - description: |-
-            The cloud project to which configuration belongs.
-            Required. Must be a valid GCP project.
+            The [project ID](https://support.google.com/cloud/answer/6158840?hl=en&ref_topic=6158848)
+            for this request, in the format `projects/[PROJECT_ID]`.
           in: path
           name: parent
           required: true
@@ -339,30 +353,36 @@ paths:
   '/v1beta1/{parent}/variables':
     get:
       description: |-
-        Lists variables within given RuntimeConfig object, matching optionally
-        provided filter.
-        List contains only variable metadata, but not values.
+        Lists variables within given a configuration, matching any provided filters.
+        This only lists variable names, not the values.
       operationId: runtimeconfig.projects.configs.variables.list
       parameters:
-        - description: Which RuntimeConfig object to list for variables.
+        - description: |-
+            The path to the RuntimeConfig resource for which you want to list variables.
+            The configuration must exist beforehand; the path must by in the format:
+
+            `projects/[PROJECT_ID]/configs/[CONFIG_NAME]`
           in: path
           name: parent
           required: true
           type: string
           x-reservedExpansion: true
         - description: |-
-            List pagination support.
-            The size of the page to return. We may return fewer elements.
+            Specifies the number of results to return per page. If there are fewer
+            elements than the specified number, returns all elements.
           in: query
           name: pageSize
           type: integer
         - description: |-
-            List only variables matching filter prefix exactly.
-            e.g. `projects/{project_id}/config/{config_id}/variables/{variable/id}`.
+            Filters variables by matching the specified filter. For example:
+
+            `projects/example-project/config/[CONFIG_NAME]/variables/example-variable`.
           in: query
           name: filter
           type: string
-        - description: The token for pagination.
+        - description: |-
+            Specifies a page token to use. Set `pageToken` to a `nextPageToken`
+            returned by a previous list request to get the next page of results.
           in: query
           name: pageToken
           type: string
@@ -394,16 +414,20 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Creates a variable within the given configuration.
-        Create variable will create all required intermediate path elements.
-        It is a FAILED_PRECONDITION error to create a variable with a name that is
-        a prefix of an existing variable name, or that has an existing variable
-        name as a prefix.
+        Creates a variable within the given configuration. You cannot create
+        a variable with a name that is a prefix of an existing variable name, or a
+        name that has an existing variable name as a prefix.
+
+        To learn more about creating a variable, read the
+        [Setting and Getting Data](/deployment-manager/runtime-configurator/seta-and-get-variables)
+        documentation.
       operationId: runtimeconfig.projects.configs.variables.create
       parameters:
         - description: |-
-            The configuration parent, that will own the variable.
-            Required, must a valid configuration name within project_id.
+            The path to the RutimeConfig resource that this variable should belong to.
+            The configuration must exist beforehand; the path must by in the format:
+
+            `projects/[PROJECT_ID]/configs/[CONFIG_NAME]`
           in: path
           name: parent
           required: true
@@ -427,24 +451,28 @@ paths:
         - projects
   '/v1beta1/{parent}/waiters':
     get:
-      description: List Waiters within the given RuntimeConfig resource.
+      description: List waiters within the given configuration.
       operationId: runtimeconfig.projects.configs.waiters.list
       parameters:
         - description: |-
-            The fully-qualified name of the configuration to list.
-            Required. Must be a valid configuration name.
+            The path to the configuration for which you want to get a list of waiters.
+            The configuration must exist beforehand; the path must by in the format:
+
+            `projects/[PROJECT_ID]/configs/[CONFIG_NAME]`
           in: path
           name: parent
           required: true
           type: string
           x-reservedExpansion: true
         - description: |-
-            List pagination support.
-            The size of the page to return. We may return fewer elements.
+            Specifies the number of results to return per page. If there are fewer
+            elements than the specified number, returns all elements.
           in: query
           name: pageSize
           type: integer
-        - description: The token for pagination.
+        - description: |-
+            Specifies a page token to use. Set `pageToken` to a `nextPageToken`
+            returned by a previous list request to get the next page of results.
           in: query
           name: pageToken
           type: string
@@ -477,16 +505,17 @@ paths:
     post:
       description: |-
         Creates a Waiter resource. This operation returns a long-running Operation
-        resource which can be polled for completion. However, a Waiter with the
-        given name will exist (and can be retrieved) prior to the resultant
-        Operation completing. If the resultant Operation indicates a failure, the
-        failed Waiter resource will still exist and must be deleted prior to
-        subsequent creation attempts.
+        resource which can be polled for completion. However, a waiter with the
+        given name will exist (and can be retrieved) prior to the operation
+        completing. If the operation fails, the failed Waiter resource will
+        still exist and must be deleted prior to subsequent creation attempts.
       operationId: runtimeconfig.projects.configs.waiters.create
       parameters:
         - description: |-
-            The fully-qualified name of the configuration that will own the waiter.
-            Required. Must be a valid configuration name.
+            The path to the configuration that will own the waiter.
+            The configuration must exist beforehand; the path must by in the format:
+
+            `projects/[PROJECT_ID]/configs/[CONFIG_NAME]`.
           in: path
           name: parent
           required: true
@@ -511,25 +540,29 @@ paths:
 definitions:
   Cardinality:
     description: |-
-      The Cardinality condition is met when the count of `Variable` resources
-      under the specified path prefix reaches the specified number.
-      For example, take the following variables in a RuntimeConfig object:
-        /foo/variable1 = "value1"
-        /foo/variable2 = "value2"
-        /bar/variable3 = "value3"
+      A Cardinality condition for the Waiter resource. A cardinality condition is
+      met when the number of variables under a specified path prefix reaches a
+      predefined number. For example, if you set a Cardinality condition where
+      the `path` is set to `/foo` and the number of paths is set to 2, the
+      following variables would meet the condition in a RuntimeConfig resource:
 
-      These variables would satisfy a Cardinality condition with `path` set to
-      "/foo" and `number` set to 2, but would not satisify the same condition
-      with `number` set to 3.
+      + `/foo/variable1 = "value1"`
+      + `/foo/variable2 = "value2"`
+      + `/bar/variable3 = "value3"`
+
+      It would not would not satisify the same condition with the `number` set to
+      3, however, because there is only 2 paths that start with `/foo`.
+      Cardinality conditions are recursive; all subtrees under the specific
+      path prefix are counted.
     properties:
       number:
         description: |-
-          The number of decendents of `path` that must exist before this condition
-          is met. Optional; defaults to 1 if not specified.
+          The number variables under the `path` that must exist to meet this
+          condition. Defaults to 1 if not specified.
         format: int32
         type: integer
       path:
-        description: The root of the variable subtree to monitor. Required.
+        description: 'The root of the variable subtree to monitor. For example, `/foo`.'
         type: string
     type: object
   Empty:
@@ -546,38 +579,44 @@ definitions:
     properties: {}
     type: object
   EndCondition:
-    description: |-
-      A condition that a Waiter resource is waiting for. The set of possible
-      conditions may expand over time.
+    description: The condition that a Waiter resource is waiting for.
     properties:
       cardinality:
         $ref: '#/definitions/Cardinality'
-        description: The Cardinality condition type configuration.
+        description: The cardinality of the `EndCondition`.
     type: object
   ListConfigsResponse:
-    description: |-
-      Response for the `ListConfigs()` method.
-      Order of returned configuration objects is arbitrary.
     properties:
       configs:
-        description: Found configurations in the project.
+        description: |-
+          A list of the configurations in the project. The order of returned
+          objects is arbitrary; that is, it is not ordered in any particular way.
         items:
           $ref: '#/definitions/RuntimeConfig'
         type: array
       nextPageToken:
-        description: Pagination support.
+        description: |-
+          This token allows you to get the next page of results for list requests.
+          If the number of results is larger than `pageSize`, use the `nextPageToken`
+          as a value for the query parameter `pageToken` in the next list request.
+          Subsequent list requests will have their own `nextPageToken` to continue
+          paging through the results
         type: string
     type: object
   ListVariablesResponse:
-    description: |-
-      Response for the `ListVariables()` method.
-      Order of returned variable objects is arbitrary.
     properties:
       nextPageToken:
-        description: Pagination support.
+        description: |-
+          This token allows you to get the next page of results for list requests.
+          If the number of results is larger than `pageSize`, use the `nextPageToken`
+          as a value for the query parameter `pageToken` in the next list request.
+          Subsequent list requests will have their own `nextPageToken` to continue
+          paging through the results
         type: string
       variables:
-        description: Matched variables and their values.
+        description: |-
+          A list of variables and their values. The order of returned variable
+          objects is arbitrary.
         items:
           $ref: '#/definitions/Variable'
         type: array
@@ -588,7 +627,12 @@ definitions:
       Order of returned waiter objects is arbitrary.
     properties:
       nextPageToken:
-        description: Pagination support.
+        description: |-
+          This token allows you to get the next page of results for list requests.
+          If the number of results is larger than `pageSize`, use the `nextPageToken`
+          as a value for the query parameter `pageToken` in the next list request.
+          Subsequent list requests will have their own `nextPageToken` to continue
+          paging through the results
         type: string
       waiters:
         description: Found waiters in the project.
@@ -641,24 +685,28 @@ definitions:
     type: object
   RuntimeConfig:
     description: |-
-      RuntimeConfig is the primary resource in the Configuration service.
-      It consists of metadata and a hierarchy of variables.
+      A RuntimeConfig resource is the primary resource in the Cloud RuntimeConfig
+      service. A RuntimeConfig resource consists of metadata and a hierarchy of
+      variables.
     properties:
       description:
         description: |-
-          Description of the configuration object.
-          `len(description)` must be less than 256.
+          An optional description of the RuntimeConfig object.
+          The length of the description must be less than 256 bytes.
         type: string
       name:
         description: |-
-          The resource name of a runtime config.
-          It has the format of "projects/{project_id}/configs/{config_id}",
-          where `project_id` is a valid Google cloud project ID, and the
-          `config_id` must match RFC 1035 segment specification, and
-          `len(config_id)` must be less than 64 bytes.
-          The name is assigned by the client, but will be validated on the server
-          side to adhere to the format.
-          Name is immutable and cannot be changed.
+          The resource name of a runtime config. The name must have the format:
+
+              projects/[PROJECT_ID]/configs/[CONFIG_NAME]
+
+          The `[PROJECT_ID]` must be a valid project ID, and `[CONFIG_NAME]` is an
+          arbitrary name that matches RFC 1035 segment specification. The length of
+          `[CONFIG_NAME]` must be less than 64 bytes.
+
+          You pick the RuntimeConfig resource name, but the server will validate that
+          the name adheres to this format. After you create the resource, you cannot
+          change the resource's name.
         type: string
     type: object
   Status:
@@ -738,34 +786,36 @@ definitions:
     type: object
   Variable:
     description: |-
-      Variable message describes a single variable within a Configuration object.
-      name denotes the hierarchical variable name, e.g.
-      ports/serving_port within flags configuration object.
-      Value is an opaque string and only leaf variables can have values.
+      Describes a single variable within a RuntimeConfig resource.
+      The name denotes the hierarchical variable name. For example,
+      `ports/serving_port` is a valid variable name. The variable value is an
+      opaque string and only leaf variables can have values (that is, variables
+      that do not have any child variables).
     properties:
       name:
         description: |-
-          Name of the variable resource.
-          It has format of
-          "projects/{project_id}/configs/{config_id}/variables/{variable_id}",
-          Where `project_id` must be a valid Google Cloud project ID, `config_id`
-          must be a valid RuntimeConfig object and `variable_id` follows Unix
-          file system file path naming.
-          `variable_id` can contain ASCII letters, numbers, slashes and dashes.
-          Slashes are used as path element separators and are not part of the
-          `variable_id` itself, so `variable_id` must contain at least one non-slash
-          character. Multiple slashes are coalesced into single slash character.
-          Each path segment should follow RFC 1035 segment specification.
-          `len(variable_id)` must be less than 256 bytes.
-          The name is assigned by the client, but will be validated on the server
-          side to adhere to the format.
-          Name is immutable and cannot be changed.
+          The name of the variable resource, in the format:
+
+              projects/[PROJECT_ID]/configs/[CONFIG_NAME]/variables/[VARIABLE_NAME]
+
+          The `[PROJECT_ID]` must be a valid project ID, `[CONFIG_NAME]` must be a
+          valid RuntimeConfig reource and `[VARIABLE_NAME]` follows Unix file system
+          file path naming.
+
+          The `[VARIABLE_NAME]` can contain ASCII letters, numbers, slashes and
+          dashes. Slashes are used as path element separators and are not part of the
+          `[VARIABLE_NAME]` itself, so `[VARIABLE_NAME]` must contain at least one
+          non-slash character. Multiple slashes are coalesced into single slash
+          character. Each path segment should follow RFC 1035 segment specification.
+          The length of a `[VARIABLE_NAME]` must be less than 256 bytes.
+
+          Once you create a variable, you cannot change the variable name.
         type: string
       state:
         description: |-
-          [Ouput only] The current state of the variable.
-          State denotes the outcome of the Watch call and is unset by the Get/List
-          calls.
+          [Ouput only] The current state of the variable. The variable state indicates
+          the outcome of the `variables().watch` call and is visible through the
+          `get` and `list` calls.
         enum:
           - VARIABLE_STATE_UNSPECIFIED
           - UPDATED
@@ -777,72 +827,83 @@ definitions:
         type: string
       value:
         description: |-
-          `len(value)` must be less than 4096 bytes. Empty values are also accepted.
-          value must be Base64 encoded.
+          The value of the variable. The length of the value must be less than 4096
+          bytes. Empty values are also accepted. The value must be Base64 encoded.
         format: byte
         type: string
     type: object
   Waiter:
     description: |-
-      A Waiter resource waits for some condition within a RuntimeConfig resource
-      to be met. For example: each node in a distributed system startup process
-      writes a value to a Variable resource indicating its readiness. A Waiter
-      configured with the proper `success` condition can be used to wait until
-      some number of nodes have checked in.
+      A Waiter resource waits for some end condition within a RuntimeConfig resource
+      to be met before it returns. For example, assume you have a distributed
+      system where each node writes to a Variable resource indidicating the node's
+      readiness as part of the startup process.
+
+      You then configure a Waiter resource with the success condition set to wait
+      until some number of nodes have checked in. Afterwards, your application
+      runs some arbitrary code after the condition has been met and the waiter
+      returns successfully.
+
       Once created, a Waiter resource is immutable.
+
+      To learn more about using waiters, read the
+      [Creating a Waiter](/deployment-manager/runtime-config/creating-a-water)
+      documentation.
     properties:
       createTime:
         description: |-
-          The instant at which this Waiter was created. Adding the value of `timeout`
-          to this instant yields the timeout deadline for this Waiter. Output only.
+          [Output Only] The instant at which this Waiter resource was created. Adding
+          the value of `timeout` to this instant yields the timeout deadline for the
+          waiter.
         format: google-datetime
         type: string
       done:
         description: |-
-          If the value is `false`, it means the Waiter is still waiting for one of
-          its conditions to be met.
-          If true, the Waiter has finished. If the Waiter finished due to a timeout
-          or failure, `error` will be set. Output only.
+          [Output Only] If the value is `false`, it means the waiter is still waiting
+          for one of its conditions to be met.
+
+          If true, the waiter has finished. If the waiter finished due to a timeout
+          or failure, `error` will be set.
         type: boolean
       error:
         $ref: '#/definitions/Status'
         description: |
-          If the Waiter ended due to a failure or timeout, this value will be set.
-          Output only.
+          [Output Only] If the waiter ended due to a failure or timeout, this value
+          will be set.
       failure:
         $ref: '#/definitions/EndCondition'
         description: |-
-          The failure condition. If this condition is met, `done` will be set to
-          `true` and the `error` code will be set to ABORTED. The failure condition
-          takes precedence over the success condition. If both conditions are met, a
-          failure will be indicated. This value is optional; if no failure condition
-          is set, the only failure scenario will be a timeout. Optional.
+          [Optional] The failure condition of this waiter. If this condition is met,
+          `done` will be set to `true` and the `error` code will be set to `ABORTED`.
+          The failure condition takes precedence over the success condition. If both
+          conditions are met, a failure will be indicated. This value is optional; if
+          no failure condition is set, the only failure scenario will be a timeout.
       name:
         description: |-
-          Name of the variable resource.
-          It has format of
-          "projects/{project_id}/configs/{config_id}/waiters/{waiter_id}",
-          Where `project_id` must be a valid Google Cloud project ID, `config_id`
-          must be a valid RuntimeConfig object and the `waiter_id` must match
-          RFC 1035 segment specification, and `len(waiter_id)` must be less than
-          64 bytes.
-          The name is assigned by the client, but will be validated on the server
-          side to adhere to the format.
-          Name is immutable and cannot be changed. Required.
+          The name of the Waiter resource, in the format:
+
+              projects/[PROJECT_ID]/configs/[CONFIG_NAME]/waiters/[WAITER_NAME]
+
+          The `[PROJECT_ID]` must be a valid Google Cloud project ID,
+          the `[CONFIG_NAME]` must be a valid RuntimeConfig resource, the
+          `[WAITER_NAME]` must match RFC 1035 segment specification, and the length
+          of `[WAITER_NAME]` must be less than 64 bytes.
+
+          After you create a Waiter resource, you cannot change the resource name.
         type: string
       success:
         $ref: '#/definitions/EndCondition'
         description: |-
-          The success condition. If this condition is met, `done` will be set to
-          `true` and the `error` value will remain unset. The failure condition
+          [Required] The success condition. If this condition is met, `done` will be
+          set to `true` and the `error` value will remain unset. The failure condition
           takes precedence over the success condition. If both conditions are met, a
-          failure will be indicated. Required.
+          failure will be indicated.
       timeout:
         description: |-
-          The timeout, beginning from the instant that CreateWaiter is called. If
-          this timeout elapses prior to the success or failure conditions being met,
-          the Waiter will fail and the `error` code will be set to DEADLINE_EXCEEDED.
-          Required.
+          [Required] Specifies the timeout of the waiter in seconds, beginning from
+          the instant that `waiters().create` method is called. If this time elapses
+          before the success or failure conditions are met, the waiter fails and sets
+          the `error` code to `DEADLINE_EXCEEDED`.
         format: google-duration
         type: string
     type: object
@@ -851,10 +912,12 @@ definitions:
     properties:
       newerThan:
         description: |-
-          If backend has a variable that has a newer value than this timestamp, then
-          request will return immediately with current value.
-          If not specified or variable has an older timestamp, will wait for the new
-          value.
+          If specified, checks the current timestamp of the variable and if the
+          current timestamp is newer than `newerThan` timestamp, the method returns
+          immediately.
+
+          If not specified or the variable has an older timestamp, the watcher waits
+          for a the value to change before returning.
         format: google-datetime
         type: string
     type: object

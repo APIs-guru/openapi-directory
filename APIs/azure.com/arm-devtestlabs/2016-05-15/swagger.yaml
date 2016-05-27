@@ -3,17 +3,17 @@ schemes:
   - https
 host: management.azure.com
 info:
-  description: The DevTest Labs client version 2015-05-21-preview.
+  description: The DevTest Labs Client.
   title: DevTestLabsClient
-  version: 2015-05-21-preview
+  version: '2016-05-15'
   x-logo:
     backgroundColor: '#333333'
     url: 'https://azure.github.io/images/logo-msft-dark@2x.png'
   x-origin:
     format: swagger
-    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-devtestlabs/2015-05-21-preview/swagger/DTL.json'
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-devtestlabs/2016-05-15/swagger/DTL.json'
     version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: arm-devtestlabs
 securityDefinitions:
@@ -29,7 +29,7 @@ security:
       - user_impersonation
 parameters:
   api-version:
-    default: 2015-05-21-preview
+    default: '2016-05-15'
     description: Client API version.
     in: query
     name: api-version
@@ -45,7 +45,7 @@ paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.DevTestLab/labs':
     get:
       consumes: []
-      description: List labs.
+      description: List labs in a subscription.
       operationId: Lab_ListBySubscription
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -54,12 +54,14 @@ paths:
           name: $filter
           required: false
           type: string
-        - format: int32
+        - description: The maximum number of resources to return from the operation.
+          format: int32
           in: query
           name: $top
           required: false
           type: integer
-        - in: query
+        - description: 'The ordering expression for the results, using OData notation.'
+          in: query
           name: $orderBy
           required: false
           type: string
@@ -87,7 +89,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs':
     get:
       consumes: []
-      description: List labs.
+      description: List labs in a resource group.
       operationId: Lab_ListByResourceGroup
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -101,12 +103,14 @@ paths:
           name: $filter
           required: false
           type: string
-        - format: int32
+        - description: The maximum number of resources to return from the operation.
+          format: int32
           in: query
           name: $top
           required: false
           type: integer
-        - in: query
+        - description: 'The ordering expression for the results, using OData notation.'
+          in: query
           name: $orderBy
           required: false
           type: string
@@ -134,7 +138,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources':
     get:
       consumes: []
-      description: List artifact sources.
+      description: List artifact sources in a given lab.
       operationId: ArtifactSource_List
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -153,12 +157,14 @@ paths:
           name: $filter
           required: false
           type: string
-        - format: int32
+        - description: The maximum number of resources to return from the operation.
+          format: int32
           in: query
           name: $top
           required: false
           type: integer
-        - in: query
+        - description: 'The ordering expression for the results, using OData notation.'
+          in: query
           name: $orderBy
           required: false
           type: string
@@ -186,7 +192,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/artifactsources/{artifactSourceName}/artifacts':
     get:
       consumes: []
-      description: List artifacts.
+      description: List artifacts in a given artifact source.
       operationId: Artifact_List
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -210,12 +216,14 @@ paths:
           name: $filter
           required: false
           type: string
-        - format: int32
+        - description: The maximum number of resources to return from the operation.
+          format: int32
           in: query
           name: $top
           required: false
           type: integer
-        - in: query
+        - description: 'The ordering expression for the results, using OData notation.'
+          in: query
           name: $orderBy
           required: false
           type: string
@@ -512,191 +520,6 @@ paths:
             - user_impersonation
       tags:
         - ArtifactSource
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costinsights':
-    get:
-      consumes: []
-      description: List cost insights.
-      operationId: CostInsight_List
-      parameters:
-        - $ref: '#/parameters/subscriptionId'
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the lab.
-          in: path
-          name: labName
-          required: true
-          type: string
-        - description: The filter to apply on the operation.
-          in: query
-          name: $filter
-          required: false
-          type: string
-        - format: int32
-          in: query
-          name: $top
-          required: false
-          type: integer
-        - in: query
-          name: $orderBy
-          required: false
-          type: string
-        - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/ResponseWithContinuation[CostInsight]'
-        default:
-          description: BadRequest
-          schema:
-            $ref: '#/definitions/CloudError'
-      security:
-        - oauth2:
-            - user_impersonation
-      tags:
-        - CostInsight
-      x-ms-odata: '#/definitions/CostInsight'
-      x-ms-pageable:
-        nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costinsights/{name}':
-    get:
-      consumes: []
-      description: Get cost insight.
-      operationId: CostInsight_GetResource
-      parameters:
-        - $ref: '#/parameters/subscriptionId'
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the lab.
-          in: path
-          name: labName
-          required: true
-          type: string
-        - description: The name of the cost insight.
-          in: path
-          name: name
-          required: true
-          type: string
-        - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/CostInsight'
-        default:
-          description: BadRequest
-          schema:
-            $ref: '#/definitions/CloudError'
-      security:
-        - oauth2:
-            - user_impersonation
-      tags:
-        - CostInsight
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costinsights/{name}/refreshData':
-    post:
-      consumes: []
-      description: Refresh Lab's Cost Insight Data. This operation can take a while to complete.
-      operationId: CostInsight_RefreshData
-      parameters:
-        - $ref: '#/parameters/subscriptionId'
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the lab.
-          in: path
-          name: labName
-          required: true
-          type: string
-        - description: The name of the cost insight.
-          in: path
-          name: name
-          required: true
-          type: string
-        - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
-      responses:
-        '200':
-          description: OK
-        '202':
-          description: Accepted
-        default:
-          description: BadRequest
-          schema:
-            $ref: '#/definitions/CloudError'
-      security:
-        - oauth2:
-            - user_impersonation
-      tags:
-        - CostInsight
-      x-ms-long-running-operation: true
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costs':
-    get:
-      consumes: []
-      description: List costs.
-      operationId: Cost_List
-      parameters:
-        - $ref: '#/parameters/subscriptionId'
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the lab.
-          in: path
-          name: labName
-          required: true
-          type: string
-        - description: The filter to apply on the operation.
-          in: query
-          name: $filter
-          required: false
-          type: string
-        - format: int32
-          in: query
-          name: $top
-          required: false
-          type: integer
-        - in: query
-          name: $orderBy
-          required: false
-          type: string
-        - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/ResponseWithContinuation[Cost]'
-        default:
-          description: BadRequest
-          schema:
-            $ref: '#/definitions/CloudError'
-      security:
-        - oauth2:
-            - user_impersonation
-      tags:
-        - Cost
-      x-ms-odata: '#/definitions/Cost'
-      x-ms-pageable:
-        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costs/{name}':
     get:
       consumes: []
@@ -737,51 +560,10 @@ paths:
             - user_impersonation
       tags:
         - Cost
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/costs/{name}/refreshData':
-    post:
-      consumes: []
-      description: Refresh Lab's Cost Data. This operation can take a while to complete.
-      operationId: Cost_RefreshData
-      parameters:
-        - $ref: '#/parameters/subscriptionId'
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The name of the lab.
-          in: path
-          name: labName
-          required: true
-          type: string
-        - description: The name of the cost.
-          in: path
-          name: name
-          required: true
-          type: string
-        - $ref: '#/parameters/api-version'
-      produces:
-        - application/json
-        - text/json
-      responses:
-        '200':
-          description: OK
-        '202':
-          description: Accepted
-        default:
-          description: BadRequest
-          schema:
-            $ref: '#/definitions/CloudError'
-      security:
-        - oauth2:
-            - user_impersonation
-      tags:
-        - Cost
-      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/customimages':
     get:
       consumes: []
-      description: List custom images.
+      description: List custom images in a given lab.
       operationId: CustomImage_List
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -800,12 +582,14 @@ paths:
           name: $filter
           required: false
           type: string
-        - format: int32
+        - description: The maximum number of resources to return from the operation.
+          format: int32
           in: query
           name: $top
           required: false
           type: integer
-        - in: query
+        - description: 'The ordering expression for the results, using OData notation.'
+          in: query
           name: $orderBy
           required: false
           type: string
@@ -964,7 +748,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/formulas':
     get:
       consumes: []
-      description: List formulas.
+      description: List formulas in a given lab.
       operationId: Formula_List
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -983,12 +767,14 @@ paths:
           name: $filter
           required: false
           type: string
-        - format: int32
+        - description: The maximum number of resources to return from the operation.
+          format: int32
           in: query
           name: $top
           required: false
           type: integer
-        - in: query
+        - description: 'The ordering expression for the results, using OData notation.'
+          in: query
           name: $orderBy
           required: false
           type: string
@@ -1146,7 +932,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/galleryimages':
     get:
       consumes: []
-      description: List gallery images.
+      description: List gallery images in a given lab.
       operationId: GalleryImage_List
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -1165,12 +951,14 @@ paths:
           name: $filter
           required: false
           type: string
-        - format: int32
+        - description: The maximum number of resources to return from the operation.
+          format: int32
           in: query
           name: $top
           required: false
           type: integer
-        - in: query
+        - description: 'The ordering expression for the results, using OData notation.'
+          in: query
           name: $orderBy
           required: false
           type: string
@@ -1245,7 +1033,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/policysets/{policySetName}/policies':
     get:
       consumes: []
-      description: List policies.
+      description: List policies in a given policy set.
       operationId: Policy_List
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -1269,12 +1057,14 @@ paths:
           name: $filter
           required: false
           type: string
-        - format: int32
+        - description: The maximum number of resources to return from the operation.
+          format: int32
           in: query
           name: $top
           required: false
           type: integer
-        - in: query
+        - description: 'The ordering expression for the results, using OData notation.'
+          in: query
           name: $orderBy
           required: false
           type: string
@@ -1497,7 +1287,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/schedules':
     get:
       consumes: []
-      description: List schedules.
+      description: List schedules in a given lab.
       operationId: Schedule_List
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -1516,12 +1306,14 @@ paths:
           name: $filter
           required: false
           type: string
-        - format: int32
+        - description: The maximum number of resources to return from the operation.
+          format: int32
           in: query
           name: $top
           required: false
           type: integer
-        - in: query
+        - description: 'The ordering expression for the results, using OData notation.'
+          in: query
           name: $orderBy
           required: false
           type: string
@@ -1549,7 +1341,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/schedules/{name}':
     delete:
       consumes: []
-      description: Delete schedule. This operation can take a while to complete.
+      description: Delete schedule.
       operationId: Schedule_DeleteResource
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -1573,8 +1365,8 @@ paths:
         - application/json
         - text/json
       responses:
-        '202':
-          description: Accepted
+        '200':
+          description: OK
         '204':
           description: No Content
         default:
@@ -1586,7 +1378,6 @@ paths:
             - user_impersonation
       tags:
         - Schedule
-      x-ms-long-running-operation: true
     get:
       consumes: []
       description: Get schedule.
@@ -1676,7 +1467,7 @@ paths:
       consumes:
         - application/json
         - text/json
-      description: Create or replace an existing schedule. This operation can take a while to complete.
+      description: Create or replace an existing schedule.
       operationId: Schedule_CreateOrUpdateResource
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -1722,7 +1513,6 @@ paths:
             - user_impersonation
       tags:
         - Schedule
-      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/schedules/{name}/execute':
     post:
       consumes: []
@@ -1767,7 +1557,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualmachines':
     get:
       consumes: []
-      description: List virtual machines.
+      description: List virtual machines in a given lab.
       operationId: VirtualMachine_List
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -1786,12 +1576,14 @@ paths:
           name: $filter
           required: false
           type: string
-        - format: int32
+        - description: The maximum number of resources to return from the operation.
+          format: int32
           in: query
           name: $top
           required: false
           type: integer
-        - in: query
+        - description: 'The ordering expression for the results, using OData notation.'
+          in: query
           name: $orderBy
           required: false
           type: string
@@ -2126,7 +1918,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/virtualnetworks':
     get:
       consumes: []
-      description: List virtual networks.
+      description: List virtual networks in a given lab.
       operationId: VirtualNetwork_List
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -2145,12 +1937,14 @@ paths:
           name: $filter
           required: false
           type: string
-        - format: int32
+        - description: The maximum number of resources to return from the operation.
+          format: int32
           in: query
           name: $top
           required: false
           type: integer
-        - in: query
+        - description: 'The ordering expression for the results, using OData notation.'
+          in: query
           name: $orderBy
           required: false
           type: string
@@ -2798,6 +2592,9 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: EnableStatus
+      uniqueIdentifier:
+        description: The unique immutable identifier of a resource (Guid).
+        type: string
       uri:
         description: The URI of the artifact source.
         type: string
@@ -2848,48 +2645,11 @@ definitions:
         type: string
     type: object
     x-ms-azure-resource: true
-  CostInsight:
-    properties:
-      id:
-        description: The identifier of the resource.
-        type: string
-      location:
-        description: The location of the resource.
-        type: string
-      name:
-        description: The name of the resource.
-        type: string
-      properties:
-        $ref: '#/definitions/CostInsightProperties'
-        description: The properties of the resource.
-        x-ms-client-flatten: true
-      tags:
-        additionalProperties:
-          type: string
-        description: The tags of the resource.
-        type: object
-      type:
-        description: The type of the resource.
-        type: string
-    type: object
-    x-ms-azure-resource: true
-  CostInsightProperties:
-    properties:
-      currencyCode:
-        type: string
-      provisioningState:
-        description: The provisioning status of the resource.
-        type: string
-      vmCosts:
-        items:
-          $ref: '#/definitions/VMCostProperties'
-        type: array
-    type: object
   CostPerDayProperties:
-    description: The per-day properties of a cost item.
+    description: The properties of a lab cost item.
     properties:
       cost:
-        description: The cost of the cost item.
+        description: The cost component of the cost item.
         format: double
         type: number
       costType:
@@ -2901,7 +2661,7 @@ definitions:
         type: string
         x-ms-enum:
           modelAsString: true
-          name: CostPropertyType
+          name: LabCostType
       date:
         description: The date of the cost item.
         format: date-time
@@ -2911,13 +2671,18 @@ definitions:
     description: Properties of a cost item.
     properties:
       costs:
-        description: The per-day costs items of the cost.
+        description: The lab cost component of the cost data.
         items:
           $ref: '#/definitions/CostPerDayProperties'
         type: array
       currencyCode:
         description: The currency code of the cost.
         type: string
+      resourceCosts:
+        description: The resource cost component of the cost data.
+        items:
+          $ref: '#/definitions/ResourceCostProperties'
+        type: array
     type: object
   CustomImage:
     description: A custom image.
@@ -2958,18 +2723,11 @@ definitions:
       description:
         description: The description of the custom image.
         type: string
-      osType:
-        description: The OS type of the custom image.
-        enum:
-          - Windows
-          - Linux
-          - None
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: CustomImageOsType
       provisioningState:
         description: The provisioning status of the resource.
+        type: string
+      uniqueIdentifier:
+        description: The unique immutable identifier of a resource (Guid).
         type: string
       vhd:
         $ref: '#/definitions/CustomImagePropertiesCustom'
@@ -2984,6 +2742,16 @@ definitions:
       imageName:
         description: The image name.
         type: string
+      osType:
+        description: The OS type of the custom image.
+        enum:
+          - Windows
+          - Linux
+          - None
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: CustomImageOsType
       sysPrep:
         description: Indicates whether sysprep has been run on the VHD.
         type: boolean
@@ -2997,9 +2765,6 @@ definitions:
       sourceVmId:
         description: The source vm identifier.
         type: string
-      sysPrep:
-        description: Indicates whether sysprep has been run on the VHD.
-        type: boolean
       windowsOsInfo:
         $ref: '#/definitions/WindowsOsInfo'
         description: The Windows OS information of the VM.
@@ -3088,6 +2853,9 @@ definitions:
         type: string
       provisioningState:
         description: The provisioning status of the resource.
+        type: string
+      uniqueIdentifier:
+        description: The unique immutable identifier of a resource (Guid).
         type: string
       vm:
         $ref: '#/definitions/FormulaPropertiesFromVm'
@@ -3244,9 +3012,6 @@ definitions:
       defaultStorageAccount:
         description: The lab's default storage account.
         type: string
-      defaultVirtualNetworkId:
-        description: The default virtual network identifier of the lab.
-        type: string
       labStorageType:
         description: The type of the lab storage.
         enum:
@@ -3259,11 +3024,9 @@ definitions:
       provisioningState:
         description: The provisioning status of the resource.
         type: string
-      storageAccounts:
-        description: The storage accounts of the lab.
-        items:
-          type: string
-        type: array
+      uniqueIdentifier:
+        description: The unique immutable identifier of a resource (Guid).
+        type: string
       vaultName:
         description: The name of the key vault of the lab.
         type: string
@@ -3362,6 +3125,9 @@ definitions:
         type: string
       sshKey:
         description: The SSH key of the virtual machine administrator.
+        type: string
+      uniqueIdentifier:
+        description: The unique immutable identifier of a resource (Guid).
         type: string
       userName:
         description: The user name of the virtual machine.
@@ -3462,6 +3228,9 @@ definitions:
       threshold:
         description: The threshold of the policy.
         type: string
+      uniqueIdentifier:
+        description: The unique immutable identifier of a resource (Guid).
+        type: string
     type: object
   PolicySetResult:
     description: Result of a policy set evaluation.
@@ -3483,6 +3252,32 @@ definitions:
         type: string
       message:
         description: The message of the policy violation.
+        type: string
+    type: object
+  ResourceCostProperties:
+    description: The properties of a resource cost item.
+    properties:
+      category:
+        description: 'The category of the resource. For VM this will be set to its size, for storage account it will be set to standard or premium'
+        type: string
+      exists:
+        description: Whether the resource still exists or not
+        type: boolean
+      owner:
+        description: The email address of the owner of the resource
+        type: string
+      resourceCost:
+        description: The cost component of the resource cost item.
+        format: double
+        type: number
+      resourceGroupName:
+        description: The name of the resource group.
+        type: string
+      resourceType:
+        description: 'The logical resource type (ex. virtualmachine, storageaccount)'
+        type: string
+      resourcename:
+        description: The name of the resource.
         type: string
     type: object
   'ResponseWithContinuation[ArtifactSource]':
@@ -3507,30 +3302,6 @@ definitions:
         description: Results of the list operation.
         items:
           $ref: '#/definitions/Artifact'
-        type: array
-    type: object
-  'ResponseWithContinuation[CostInsight]':
-    description: The response of a list operation.
-    properties:
-      nextLink:
-        description: Link for next set of results.
-        type: string
-      value:
-        description: Results of the list operation.
-        items:
-          $ref: '#/definitions/CostInsight'
-        type: array
-    type: object
-  'ResponseWithContinuation[Cost]':
-    description: The response of a list operation.
-    properties:
-      nextLink:
-        description: Link for next set of results.
-        type: string
-      value:
-        description: Results of the list operation.
-        items:
-          $ref: '#/definitions/Cost'
         type: array
     type: object
   'ResponseWithContinuation[CustomImage]':
@@ -3690,16 +3461,12 @@ definitions:
           name: EnableStatus
       taskType:
         description: The task type of the schedule.
-        enum:
-          - LabVmsShutdownTask
-          - LabVmsStartupTask
-          - LabBillingTask
         type: string
-        x-ms-enum:
-          modelAsString: true
-          name: TaskType
       timeZoneId:
         description: The time zone id.
+        type: string
+      uniqueIdentifier:
+        description: The unique immutable identifier of a resource (Guid).
         type: string
       weeklyRecurrence:
         $ref: '#/definitions/WeekDetails'
@@ -3775,16 +3542,6 @@ definitions:
       tenantId:
         type: string
     type: object
-  VMCostProperties:
-    properties:
-      cost:
-        format: double
-        type: number
-      name:
-        type: string
-      resourceGroupName:
-        type: string
-    type: object
   VirtualNetwork:
     description: A virtual network.
     properties:
@@ -3833,6 +3590,9 @@ definitions:
         items:
           $ref: '#/definitions/SubnetOverride'
         type: array
+      uniqueIdentifier:
+        description: The unique immutable identifier of a resource (Guid).
+        type: string
     type: object
   WeekDetails:
     description: Properties of a weekly schedule.

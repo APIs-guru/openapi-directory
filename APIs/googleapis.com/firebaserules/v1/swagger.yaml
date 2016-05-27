@@ -31,6 +31,8 @@ securityDefinitions:
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/firebase': View and administer all your Firebase data and settings
+      'https://www.googleapis.com/auth/firebase.readonly': View all your Firebase data and settings
     type: oauth2
 parameters:
   $.xgafv:
@@ -133,6 +135,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase'
       tags:
         - projects
     get:
@@ -158,6 +162,10 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase.readonly'
       tags:
         - projects
     parameters:
@@ -225,6 +233,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase'
       tags:
         - projects
   '/v1/{name}/releases':
@@ -292,6 +302,10 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase.readonly'
       tags:
         - projects
     parameters:
@@ -356,6 +370,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase'
       tags:
         - projects
   '/v1/{name}/rulesets':
@@ -397,6 +413,10 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase.readonly'
       tags:
         - projects
     parameters:
@@ -444,6 +464,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase'
       tags:
         - projects
   '/v1/{name}:test':
@@ -508,6 +530,10 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/firebase.readonly'
       tags:
         - projects
 definitions:
