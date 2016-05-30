@@ -165,23 +165,22 @@ function validateCollection() {
 
   validatePrefered(specs);
 
-  var foundErrors = false;
-  async.forEachOfSeries(specs, function (swagger, filename, asyncCb) {
+  Promise.mapSeries(_.toPairs(specs), ([filename, swagger]) => {
     console.error('======================== ' + filename + ' ================');
     assert(!_.isEmpty(swagger.paths), 'Spec should have operations');
-    validateSwagger(swagger, function (errors, warnings) {
-      foundErrors = !_.isEmpty(errors) || foundErrors;
-      if (errors)
-        logYaml(errors);
-      if (warnings)
-        logYaml(warnings);
-    });
-    asyncCb(null);
-  }, function () {
+    //FIXME: check location
+    //assert(util.getSwaggerPath(swagger) === filename, 'Incorect location');
 
-    if (foundErrors)
-      process.exitCode = errExitCode;
-  });
+    return validateSwagger(swagger)
+      .then(({errors, warnings}) => {
+        if (warnings)
+          logYaml(warnings);
+        if (errors) {
+          logYaml(errors);
+          throw Error('Validation errors detected');
+        }
+      });
+  }).done();
 }
 
 function validatePrefered(specs) {
@@ -739,22 +738,21 @@ function errorToString(errors, context) {
   return result;
 }
 
-function validateSwagger(swagger, callback) {
-  //TODO: remove 'getSpec', instead do it when reading file.
-  converter.getSpec(swagger, 'swagger_2', function (err, spec) {
-    assert(!err, err);
-    spec.validate(function (errors, warnings) {
-      if (errors && swagger['x-hasEquivalentPaths']) {
-        _.remove(errors, function (error) {
+function validateSwagger(swagger) {
+  return converter.getSpec(swagger, 'swagger_2')
+    .then(spec => spec.validate())
+    .then(result => {
+      if (result.errors && swagger['x-hasEquivalentPaths']) {
+        _.remove(result.errors, function (error) {
           return (error.code === 'EQUIVALENT_PATH');
         });
-        if (_.isEmpty(errors))
-          errors = null;
+
+        if (_.isEmpty(result.errors))
+          result.errors = null;
       }
 
-      callback(errors, warnings);
+      return result;
     });
-  });
 }
 
 function patchSwagger(swagger, exPatch) {
