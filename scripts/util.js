@@ -3,15 +3,18 @@
 var assert = require('assert');
 var Path = require('path');
 var fs = require('fs');
+var os = require('os');
 
 var _ = require('lodash');
 var glob = require('glob')
 var URI = require('urijs');
 var sh = require('shelljs');
 var YAML = require('js-yaml');
+var editor = require('editor');
 var mkdirp = require('mkdirp').sync;
 var sanitize = require('sanitize-filename');
 var sortobject = require('deep-sort-object');
+var mktemp = require('mktemp').createFileSync;
 
 exports.readYaml = function (filename) {
   if (!fs.existsSync(filename))
@@ -180,4 +183,19 @@ exports.urlToFilename = function (url, stripQuery) {
   if (stripQuery)
     url = url.query('');
   return sanitize(url.readable(), {replacement: '_'}).replace(/_+/, '_');
+}
+
+exports.editFile = function (str) {
+  var pattern = Path.join(os.tmpdir(),'XXXXXX.txt');
+  var tmpfile = mktemp(pattern);
+  fs.writeFileSync(tmpfile, str);
+
+  return Promise.fromCallback(function (promiseCb) {
+    editor(tmpfile, function (code) {
+      if (code !== 0)
+        return promiseCb(Error('Editor closed with code ' + code));
+
+      promiseCb(null, fs.readFileSync(tmpfile, 'utf-8'));
+    });
+  });
 }

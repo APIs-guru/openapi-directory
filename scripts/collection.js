@@ -3,17 +3,12 @@
 
 var assert = require('assert');
 var fs = require('fs');
-var os = require('os');
-var path = require('path');
 
 var _ = require('lodash');
 var jp = require('json-pointer');
 var jsonPath = require('jsonpath');
-var editor = require('editor');
-var async = require('async')
 var converter = require('api-spec-converter');
 var parseDomain = require('parse-domain');
-var mktemp = require('mktemp').createFileSync;
 var jsonPatch = require('json-merge-patch');
 var YAML = require('js-yaml');
 var Promise = require('bluebird');
@@ -39,17 +34,14 @@ var jsondiffpatch = require('jsondiffpatch').create({
   }
 });
 
-converter.ResourceReaders.url = function (url, callback) {
+converter.ResourceReaders.url = function (url) {
   var options = {
     headers: {
       'Accept': 'application/json,*/*',
     }
   };
-  makeRequest('get', url, options)
-    .spread(function (response, data) {
-      return data;
-    })
-    .asCallback(callback);
+  return makeRequest('get', url, options)
+    .then(([, data]) => data);
 }
 var program = require('commander');
 
@@ -123,7 +115,7 @@ function refreshCollection(dir) {
 
 function fixupSwagger(swaggerPath) {
   var swagger = util.readYaml(swaggerPath);
-  editFile(util.Yaml2String(swagger))
+  util.editFile(util.Yaml2String(swagger))
     .then(function (editedSwagger) {
       editedSwagger = YAML.safeLoad(editedSwagger);
       appendSwaggerFixup(swagger, editedSwagger);
@@ -219,7 +211,7 @@ function addToCollection(type, url, command) {
     if (!command.fixup || !result.spec)
       return logError(error, result);
 
-    editFile(errorToString(error, result))
+    util.editFile(errorToString(error, result))
       .then(function (data) {
         var match = data.match(/^\++ Begin.*$((?:.|\n)*?)^\?+ Swagger.*$((?:.|\n)*?)^[!*-]/m);
         if (!match || !match[1] || !match[2])
@@ -236,21 +228,6 @@ function addToCollection(type, url, command) {
         }
       })
       .done();
-  });
-}
-
-function editFile(str, cb) {
-  var pattern = path.join(os.tmpdir(),'XXXXXX.txt');
-  var tmpfile = mktemp(pattern);
-  fs.writeFileSync(tmpfile, str);
-
-  return Promise.fromCallback(function (promiseCb) {
-    editor(tmpfile, function (code) {
-      if (code !== 0)
-        return promiseCb(Error('Editor closed with code ' + code));
-
-      promiseCb(null, fs.readFileSync(tmpfile, 'utf-8'));
-    });
   });
 }
 
@@ -878,4 +855,3 @@ function getSpecType(swagger) {
   var origin = util.getOrigin(swagger);
   return converter.getTypeName(origin.format, origin.version);
 }
-
