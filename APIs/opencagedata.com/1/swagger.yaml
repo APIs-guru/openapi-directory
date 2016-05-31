@@ -10,10 +10,22 @@ info:
   termsOfService: https://geocoder.opencagedata.com/terms
   title: "OpenCage Geocoder"
   description: "Worldwide forward and reverse geocoding"
+  x-origin:
+    format: swagger
+    url: 'https://geocoder.opencagedata.com/swagger.yaml'
+    version: '2.0'
+  x-logo:
+    url: 'http://www.opencagedata.com/img/opencage_logo_200_200.png'
 externalDocs:
+  description: "OpenCage Geocoder Website"
   url: https://geocoder.opencagedata.com/api
 host: api.opencagedata.com
-
+consumes:
+  - text/plain
+produces:
+  - application/json
+  - application/xml
+  - text/html
 paths:
   /v{version}/{format}:
     get:
