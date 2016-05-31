@@ -132,24 +132,16 @@ function updateCollection(dir) {
      var knownUrls = _(specs).values().map(util.getOriginUrl).value();
      return _(leads).pick(knownUrls).values().value();
    })
-   .each(function (lead) {
-    //TODO: remove wrapper
-    return Promise.fromCallback(function (promiseCb) {
-      writeSpec(lead, function (error, result) {
-        if (error) {
-          logError(error, result);
-          //TODO: Better error handling
-          return promiseCb(new Error('Error during update'));
-        }
-
-        var oldFilename = files[util.getOriginUrl(lead)];
-        var newFilename = util.getSwaggerPath(result.swagger);
-        if (newFilename !== oldFilename)
-          return promiseCb(Error("Spec was moved from '" + oldFilename + '" to "' + newFilename + '"'));
-        promiseCb(null);
-      });
-    });
-  }).done();
+   .each(lead => {
+     return writeSpecFromLead(lead)
+       .then(swagger => {
+         var newFilename = util.getSwaggerPath(swagger);
+         var oldFilename = files[util.getOriginUrl(lead)];
+         if (newFilename !== oldFilename)
+           throw Error(`Spec was moved from "${oldFilename}" to "${newFilename}"`);
+       });
+   })
+   .done();
 }
 
 function validateCollection() {
@@ -204,31 +196,30 @@ function addToCollection(type, url, command) {
   if (command.service)
     exPatch.info['x-serviceName'] = command.service;
 
-  writeSpec(url, type, exPatch, function (error, result) {
-    if (!error && !command.fixup)
-      return;
+  writeSpec(url, type, exPatch)
+    .catch(error => {
+      if (!command.fixup)
+        throw error;
 
-    if (!command.fixup || !result.spec)
-      return logError(error, result);
+      return util.editFile(errorToString(error, error.context))
+        .then(function (data) {
+          //FIXME: regex
+          var match = data.match(/^\++ Begin.*$((?:.|\n)*?)^\?+ Swagger.*$((?:.|\n)*?)^[*!~-]/m);
+          if (!match || !match[1] || !match[2])
+            throw Error('Can not match edited Swagger');
 
-    util.editFile(errorToString(error, result))
-      .then(function (data) {
-        var match = data.match(/^\++ Begin.*$((?:.|\n)*?)^\?+ Swagger.*$((?:.|\n)*?)^[!*-]/m);
-        if (!match || !match[1] || !match[2])
-          throw Error('Can not match edited Swagger');
+          if (result.spec.type !== 'swagger_2') {
+            var editedOrigin = YAML.safeLoad(match[1]);
+            appendFixup(getOriginFixupPath(result.spec), serilazeSpec(result.spec), editedOrigin);
+          }
 
-        if (type !== 'swagger_2') {
-          var editedOrigin = YAML.safeLoad(match[1]);
-          appendFixup(getOriginFixupPath(result.spec), serilazeSpec(result.spec), editedOrigin);
-        }
-
-        if (!_.isUndefined(result.swagger)) {
-          var editedSwagger = YAML.safeLoad(match[2]);
-          appendSwaggerFixup(result.swagger, editedSwagger);
-        }
-      })
-      .done();
-  });
+          if (!_.isUndefined(result.swagger)) {
+            var editedSwagger = YAML.safeLoad(match[2]);
+            appendSwaggerFixup(result.swagger, editedSwagger);
+          }
+        })
+    })
+    .done();
 }
 
 function getOriginFixupPath(spec) {
@@ -318,93 +309,80 @@ function updateCatalogLeads() {
     var added = _.difference(newURLs, oldURLs);
     var deleted = _.difference(oldURLs, newURLs);
 
-    return Promise.each(added, function (url) {
-      //FIXME: remove wrapper
-      return Promise.fromCallback(function (promiseCb) {
-        writeSpec(newSpecs[url], function (error, result) {
-          if (error) {
-            console.error(errorToString(error, result));
-            return promiseCb(error, result);
-          }
-          promiseCb(null, result);
+    return Promise.each(added, url => writeSpecFromLead(newSpecs[url]))
+      .then(() => {
+        _.each(deleted, function (url) {
+          console.log('!!! Delete ' + oldSpecs[url]);
         });
       });
-    }).then(function () {
-      _.each(deleted, function (url) {
-        console.log('!!! Delete ' + oldSpecs[url]);
-      });
-    });
   })
   .done();
 }
 
-function writeSpec(source, type, exPatch, callback) {
-  //FIXME: remove hack and unify API
-  if (_.isObject(source)) {
-    var spec = source;
+function writeSpecFromLead(lead) {
+  var origin = util.getOrigin(lead);
+  var source = origin.url;
+  var type = converter.getTypeName(origin.format, origin.version);
 
-    source = util.getOriginUrl(spec);
-    callback = type;
-    type = getSpecType(spec);
+  var exPatch = _.cloneDeep(lead);
+  delete exPatch.info['x-origin'];
 
-    exPatch = _.cloneDeep(spec);
-    delete exPatch.info['x-origin'];
-  }
+  return writeSpec(source, type, exPatch);
+}
 
-  converter.getSpec(source, type, function (err, spec) {
-    assert(!err, err);
+function writeSpec(source, type, exPatch) {
+  var context = {};
 
-    var fixup = util.readYaml(getOriginFixupPath(spec));
-    jsondiffpatch.patch(spec, fixup);
+  return converter.getSpec(source, type)
+    .then(spec => {
+      context.spec = spec;
 
-    convertToSwagger(spec, function (error, swagger) {
-      var result = {
-        spec: spec,
-        errors: error
-      };
+      var fixup = util.readYaml(getOriginFixupPath(spec));
+      jsondiffpatch.patch(spec, fixup);
 
-      if (error)
-        return callback(error, result);
+      return convertToSwagger(spec);
+    })
+    .then(swagger => {
+      context.swagger = swagger;
 
-      try {
-        patchSwagger(swagger, exPatch);
-      }
-      catch (e) {
-        return callback(e, result);
-      }
+      patchSwagger(swagger, exPatch);
 
       expandPathTemplates(swagger);
       replaceSpacesInSchemaNames(swagger);
       extractApiKeysFromParameters(swagger);
 
-      result.swagger = swagger;
 
-      validateAndFix(swagger, function (errors, warnings) {
-        result.warnings = warnings;
+      return validateAndFix(swagger)
+    })
+    .then(validation => {
+      context.validation = validation;
 
-        if (errors)
-          return callback(errors, result);
+      if (validation.errors)
+        throw Error(errorToString(null, context));
 
-        if (warnings)
-          logYaml(warnings);
+      if (validation.warnings)
+        logYaml(validation.warnings);
 
-        util.saveSwagger(swagger);
-        callback(null, result);
-      });
+      util.saveSwagger(context.swagger);
+      return context.swagger;
+    })
+    .catch(e => {
+      e.context = context;
+      throw e;
     });
-  });
 }
 
-function validateAndFix(swagger, callback) {
-  validateSwagger(swagger, function (errors, warnings) {
-    if (!_.isArray(errors))
-      return callback(errors, warnings);
+function validateAndFix(swagger) {
+  return validateSwagger(swagger)
+    .then(result => {
+      if (!result.errors)
+        return result;
 
-    if (fixSpec(swagger, errors))
-      validateAndFix(swagger, callback);
-    else
-      validateSwagger(swagger, callback);
-  });
+      if (fixSpec(swagger, result.errors))
+        return validateAndFix(swagger);
+      else
+        return validateSwagger(swagger);
+    });
 }
 
 //TODO: move into separate lib
@@ -672,11 +650,6 @@ function fixSpec(swagger, errors) {
   return fixed;
 }
 
-function logError(error, context) {
-  console.error(errorToString(error, context));
-  process.exitCode = errExitCode;
-}
-
 function serilazeSpec(spec) {
   var data = {spec: spec.spec};
   if (spec.subResources)
@@ -684,10 +657,8 @@ function serilazeSpec(spec) {
   return data;
 }
 
-function errorToString(errors, context) {
-  var spec = context.spec;
-  var swagger = context.swagger;
-  var warnings = context.warnings;
+function errorToString(error, context) {
+  var {spec, swagger, validation} = error.context;
   var url = spec.source;
 
   var result = '++++++++++++++++++++++++++ Begin ' + url + ' +++++++++++++++++++++++++\n';
@@ -699,17 +670,15 @@ function errorToString(errors, context) {
   if (!_.isUndefined(swagger))
     result += util.Yaml2String(swagger);
 
-  if (errors) {
-    result += '!!!!!!!!!!!!!!!!!!!! Errors ' + url + ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n';
-    if (_.isArray(errors))
-      result += util.Yaml2String(errors);
-    else
-      result += errors.stack + '\n';
-  }
+  result += '!!!!!!!!!!!!!!!!!!!! Errors ' + url + ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n';
+  if (validation.errors)
+    result += util.Yaml2String(validation.errors);
+  else
+    result += error.stack + '\n';
 
-  if (warnings) {
+  if (validation.warnings) {
     result += '******************** Warnings ' + url + ' ******************************\n';
-    result += util.Yaml2String(warnings);
+    result += util.Yaml2String(validation.warnings);
   }
   result += '------------------------- End ' + url + ' ----------------------------\n';
   return result;
@@ -791,21 +760,19 @@ function removeEmpty(obj) {
   });
 }
 
-function convertToSwagger(spec, callback) {
-  spec.convertTo('swagger_2', function (err, swagger) {
-    if (err)
-      return callback(err);
-
-    _.merge(swagger.spec.info, {
-      'x-providerName': parseHost(swagger.spec),
-      'x-origin': {
-        format: spec.formatName,
-        version: spec.getFormatVersion(),
-        url: spec.source
-      }
+function convertToSwagger(spec) {
+  return spec.convertTo('swagger_2')
+    .then(swagger => {
+      _.merge(swagger.spec.info, {
+        'x-providerName': parseHost(swagger.spec),
+        'x-origin': {
+          format: spec.formatName,
+          version: spec.getFormatVersion(),
+          url: spec.source
+        }
+      });
+      return swagger.spec;
     });
-    callback(null, swagger.spec)
-  });
 }
 
 function parseHost(swagger) {
@@ -849,9 +816,4 @@ function applyMergePatch(target, patch) {
 
 function logYaml(json) {
   console.error(util.Yaml2String(json));
-}
-
-function getSpecType(swagger) {
-  var origin = util.getOrigin(swagger);
-  return converter.getTypeName(origin.format, origin.version);
 }
