@@ -1,0 +1,203 @@
+swagger: '2.0'
+schemes: 
+  - https
+basePath: /geocode
+info:
+  contact: 
+    name: "OpenCage Data Ltd"
+    url: https://geocoder.opencagedata.com/contact
+  version: "1"
+  termsOfService: https://geocoder.opencagedata.com/terms
+  title: "OpenCage Geocoder"
+  description: "Worldwide forward and reverse geocoding"
+  x-origin:
+    format: swagger
+    url: 'https://geocoder.opencagedata.com/swagger.yaml'
+    version: '2.0'
+  x-logo:
+    url: 'http://www.opencagedata.com/img/opencage_logo_200_200.png'
+externalDocs:
+  description: "OpenCage Geocoder Website"
+  url: https://geocoder.opencagedata.com/api
+host: api.opencagedata.com
+consumes:
+  - text/plain
+produces:
+  - application/json
+  - application/xml
+  - text/html
+paths:
+  /v{version}/{format}:
+    get:
+      description: "geocode a query"
+      parameters:
+        - name: version
+          in: path
+          required: true
+          description: "API version."
+          type: integer
+        - name: format
+          in: path
+          required: true
+          description: "format of the response. One of 'json', 'xml' or 'map'."
+          type: string
+        - name: q
+          in: query
+          description: "string or lat,lng to be geocoded."
+          required: true
+          type: string
+        - name: key
+          in: query
+          description: "an application key."
+          required: true
+          type: string
+        - name: add_request
+          in: query
+          description: "if true the request is included in the response." 
+          type: boolean
+        - name: bounds
+          in: query
+          description: "four coordinate points forming the south-west and north-east corners of a bounding box (min long, min lat, max long, max lat)." 
+          type: string
+        - name: countrycode
+          in: query
+          description: "two letter code ISO 3166-1 Alpha 2 code to limit results to that country." 
+          type: string
+        - name: jsonp
+          in: query
+          description: "wraps the returned JSON with a function name." 
+          type: string
+        - name: language
+          in: query
+          description: "an IETF format language code (ex: 'es' or 'pt-BR')." 
+          type: string
+        - name: limit
+          in: query
+          description: "maximum number of results to return. Default is 10. Maximum is 100." 
+          type: integer
+        - name: min_confidence
+          in: query
+          description: "integer from 1-10. Only results with at least this confidence are returned."
+          type: integer
+        - name: no_annotations
+          in: query
+          description: "when true annotations are not added to results."
+          type: boolean
+        - name: no_dedupe
+          in: query
+          description: "when true results are not deduplicated."
+          type: boolean
+        - name: pretty
+          in: query
+          description: "when true results are pretty printed. Useful for debugging."
+          type: boolean
+          
+      responses:
+        200:
+          description: "Successful response"
+          schema:
+            $ref: "#/definitions/Response"
+        400:
+          description: "Invalid request"
+          schema:
+            $ref: "#/definitions/Response"
+        402: 
+          description: "Valid request but quota exceeded"
+          schema:
+            $ref: "#/definitions/Response"
+        403: 
+          description: "Invalid or missing API key"
+          schema:
+            $ref: "#/definitions/Response"
+        404:
+          description: "Invalid API endpoint"
+          schema:
+            $ref: "#/definitions/Response"
+        410: 
+          description: "Request too long"
+          schema:
+            $ref: "#/definitions/Response"
+        503:
+          description: "Internal server error"
+          schema:
+            $ref: "#/definitions/Response"
+definitions:
+  Response:
+    properties:
+      documentation: 
+        type: string
+      rate:
+        type: object
+        properties:
+          limit: 
+            type: integer
+          remaining:
+            type: integer
+          reset: 
+            type: integer
+      licenses:
+        type: array
+        items:
+          type: object
+          properties:
+            name:
+              type: string
+            url:
+              type: string
+      status:
+        type: object
+        properties:
+          message: 
+            type: string
+          code: 
+            type: integer
+      total_results: 
+        type: integer
+      timestamp: 
+        type: object
+        properties:
+          created_http: 
+            type: string
+          created_unix: 
+            type: integer
+      stay_informed: 
+        type: object
+        properties:
+          blog:
+            type: string
+          twitter:
+            type: string
+      thanks: 
+        type: string
+      results:
+        type: array
+        items:
+          type: object
+          properties:
+            annotations:
+              type: object
+            bounds:
+              type: object
+              properties:
+                northeast:
+                  $ref: "#/definitions/LatLng"
+                southwest:
+                  $ref: "#/definitions/LatLng"
+            components:
+              type: object
+            confidence:
+              type: integer
+            formatted:
+              type: string
+            geometry:
+              $ref: "#/definitions/LatLng"
+  LatLng:
+    type: object
+    properties:
+      lat: 
+        type: number
+        format: float
+      lng: 
+        type: number
+        format: float
+        
