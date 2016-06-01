@@ -482,7 +482,7 @@ paths:
           name: to
           required: false
           type: string
-        - description: "Select a date field you want to filter reservations by. Only one filter at a time can be applied. The to and from dates\r\n            will then define the time range."
+        - description: "Select a date field you want to filter bookings by. Only one filter at a time can be applied. The to and from dates\r\n            will then define the time range."
           enum:
             - ArrivalDate
             - DepartureDate
@@ -590,7 +590,7 @@ paths:
           description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         '503':
           description: The server is currently unavailable. Please try later.
-      summary: Create a new booking
+      summary: Create a new booking.
       tags:
         - Reservation
   /api/booking/v0/bookings/$count:
@@ -743,7 +743,7 @@ paths:
           name: to
           required: false
           type: string
-        - description: "Select a date field you want to filter reservations by. Only one filter at a time can be applied. The to and from dates\r\n            will then define the time range."
+        - description: "Select a date field you want to filter bookings by. Only one filter at a time can be applied. The to and from dates\r\n            will then define the time range."
           enum:
             - ArrivalDate
             - DepartureDate
@@ -824,7 +824,7 @@ paths:
           description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         '503':
           description: The server is currently unavailable. Please try later.
-      summary: Load all reservations for one booking by confirmation id
+      summary: Load all reservations for one booking by confirmation id.
       tags:
         - Reservation
   '/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}':
@@ -884,7 +884,7 @@ paths:
           description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         '503':
           description: The server is currently unavailable. Please try later.
-      summary: Load a specific reservation from a booking
+      summary: Load a specific reservation from a booking.
       tags:
         - Reservation
   '/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}/assign_room':
@@ -921,7 +921,7 @@ paths:
         - description: Specifies the criteria for the room selection.
           in: body
           name: assigningCriteria
-          required: true
+          required: false
           schema:
             $ref: '#/definitions/AssignRoomCriteria'
       produces:
@@ -946,7 +946,7 @@ paths:
           description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         '503':
           description: The server is currently unavailable. Please try later.
-      summary: Assign a room to a reservation
+      summary: Assign a room to a reservation.
       tags:
         - Reservation
   '/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}/cancel':
@@ -998,7 +998,7 @@ paths:
           description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         '503':
           description: The server is currently unavailable. Please try later.
-      summary: Cancel one reservation
+      summary: Cancel one reservation.
       tags:
         - Reservation
   /api/booking/v0/rates:
@@ -1543,7 +1543,7 @@ definitions:
         description: "Return all bookings where the first or lastname of one of the guests or the contact contains the specified value. The search is executed case insensitive\r\n            and also stripping of any whitespaces."
         type: string
       dateFilter:
-        description: "Select a date field you want to filter reservations by. Only one filter at a time can be applied. The to and from dates\r\n            will then define the time range."
+        description: "Select a date field you want to filter bookings by. Only one filter at a time can be applied. The to and from dates\r\n            will then define the time range."
         enum:
           - ArrivalDate
           - DepartureDate

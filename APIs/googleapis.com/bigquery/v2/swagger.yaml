@@ -2014,6 +2014,9 @@ definitions:
       query:
         description: '[Required] A query that BigQuery executes when the view is referenced.'
         type: string
+      useLegacySql:
+        description: '[Experimental] Specifies whether to use BigQuery''s legacy SQL for this view. The default value is true. If set to false, the view will use BigQuery''s standard SQL: https://cloud.google.com/bigquery/sql-reference/ Queries and views that reference this view must use the same flag value.'
+        type: boolean
       userDefinedFunctionResources:
         description: '[Experimental] Describes user-defined function resources used in the query.'
         items:

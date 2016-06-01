@@ -18,6 +18,35 @@ securityDefinitions:
     description: Basic HTTP Authentication
     type: basic
 paths:
+  /api/AccessToken:
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      description: Creates a Access Token to write on a Card (e.g. NFC)
+      parameters:
+        - in: body
+          name: accessTokenToPut
+          required: true
+          schema:
+            $ref: '#/definitions/AccessTokenToPut'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+      summary: Creates a Access Token to write on a Card (e.g. NFC)
+      tags:
+        - AccessToken
   /api/DeviceBySerial:
     get:
       consumes: []
@@ -184,7 +213,44 @@ paths:
       summary: "M-BUS API: Adds data of a M-BUS Meter to the smart-me Cloud.\r\n            Just send us the M-BUS Telegram (RSP_UD) and we will do the Rest."
       tags:
         - MBus
-  /api/VirtualMeterActivate:
+  /api/User:
+    get:
+      consumes: []
+      deprecated: false
+      description: Gets the informations for the user.
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+      summary: Gets the informations for the user.
+      tags:
+        - User
+  /api/VirtualMeterActive:
+    get:
+      consumes: []
+      deprecated: false
+      description: 'Beta: Gets all active virtual meters.'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Device'
+            type: array
+      summary: 'Beta: Gets all active virtual meters'
+      tags:
+        - VirtualMeterActive
     post:
       consumes:
         - application/json
@@ -210,7 +276,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            $ref: '#/definitions/Device'
         '400':
           description: BadRequest
         '401':
@@ -219,8 +285,76 @@ paths:
           description: Forbidden
       summary: 'Beta: Virtual Meter API: Activates a Meter and add the Consumption to a Virtual Meter assosiated with the User.'
       tags:
-        - VirtualMeterActivate
+        - VirtualMeterActive
+  /api/VirtualMeterDeactivate:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      description: 'Beta: Virtual Meter API: Deactivates a Virtual Meter.'
+      parameters:
+        - description: The Meter to activate
+          in: body
+          name: meterToDeactivate
+          required: true
+          schema:
+            $ref: '#/definitions/VMeterToDeactivate'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+        '400':
+          description: BadRequest
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      summary: 'Beta: Virtual Meter API: Deactivates a Virtual Meter.'
+      tags:
+        - VirtualMeterDeactivate
+  /api/VirtualMeters:
+    get:
+      consumes: []
+      deprecated: false
+      description: 'Beta: Gets all Meters available to activate as a Virtual Meter.'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Device'
+            type: array
+      summary: 'Beta: Gets all Meters available to activate as a Virtual Meter.'
+      tags:
+        - VirtualMeters
 definitions:
+  AccessTokenToPut:
+    description: Container Class for the Put action of an Access Token
+    properties:
+      CardId:
+        description: The ID of the Card
+        format: int64
+        type: integer
+      UserId:
+        description: "The ID of the User. The credentials provided must have permission to edit the user.\r\n            If no ID is provided, the user in the credentials is taken."
+        format: int64
+        type: integer
+    type: object
   Device:
     description: Container Class for the Web API
     properties:
@@ -287,6 +421,7 @@ definitions:
           - MeterFamilyTypeRS485GatewayV1
           - MeterFamilyTypeKamstrupModule
           - MeterFamilyTypeRestApiMeter
+          - MeterFamilyTypeVirtualMeter
         type: string
       Id:
         description: The ID of the device
@@ -383,10 +518,39 @@ definitions:
   Object:
     properties: {}
     type: object
+  User:
+    description: Container Class for the Web API
+    properties:
+      ChildUsers:
+        description: The Users created by this users.
+        items:
+          $ref: '#/definitions/User'
+        type: array
+      Email:
+        description: The EMail Address of the User
+        type: string
+      Id:
+        description: The ID of the User
+        format: int64
+        type: integer
+      IsAdmin:
+        description: Flag if this User is an Admin User
+        type: boolean
+      Username:
+        description: The Username of the User
+        type: string
+    type: object
   VMeterToActivate:
     description: Actives a virtual Meter
     properties:
       SerialNumber:
         description: The Serialnumber of the Meter to activate.
+        type: string
+    type: object
+  VMeterToDeactivate:
+    description: Deactivates a virtual Meter
+    properties:
+      ID:
+        description: The ID of the Virtual meter to deactivate
         type: string
     type: object

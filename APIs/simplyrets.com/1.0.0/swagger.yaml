@@ -186,6 +186,32 @@ paths:
           name: sort
           required: false
           type: string
+        - collectionFormat: multi
+          description: |
+            Include a extra fields which are not in the default
+            response body
+            - 'association' includes additional HOA data
+            - 'agreement' information on the listing agreement
+            - 'garageSpaces' additional garage data
+            - 'maintenanceExpense' data on maintenance expenses
+            - 'parking' additional parking data
+            - 'pool' includes an additional pool description
+            - 'taxAnnualAmount' include the annual tax amount
+            - 'taxYear' include the tax year data
+            - 'rooms' include parameter will include
+               any additional rooms as a list.
+
+            Note that your MLS must provide these fields in their RETS
+            data for them to be available in the API response.
+
+            In the future, fields which require an 'include' may become available
+            by default.
+          in: query
+          items:
+            type: string
+          name: include
+          required: false
+          type: array
       responses:
         '200':
           description: |
@@ -233,6 +259,32 @@ paths:
           name: openHouseKey
           required: true
           type: integer
+        - collectionFormat: multi
+          description: |
+            Include a extra fields which are not in the default
+            response body
+            - 'association' includes additional HOA data
+            - 'agreement' information on the listing agreement
+            - 'garageSpaces' additional garage data
+            - 'maintenanceExpense' data on maintenance expenses
+            - 'parking' additional parking data
+            - 'pool' includes an additional pool description
+            - 'taxAnnualAmount' include the annual tax amount
+            - 'taxYear' include the tax year data
+            - 'rooms' include parameter will include
+               any additional rooms as a list.
+
+            Note that your MLS must provide these fields in their RETS
+            data for them to be available in the API response.
+
+            In the future, fields which require an 'include' may
+            become available by default.
+          in: query
+          items:
+            type: string
+          name: include
+          required: false
+          type: array
       responses:
         '200':
           description: |
@@ -288,7 +340,6 @@ paths:
               - city
               - subdivision name
               - postal code
-            NOTE
           in: query
           name: q
           required: false
@@ -449,6 +500,9 @@ paths:
             parameter by the limit to go to the next "page" of
             listings. Also take a look at the Link HTTP Header for
             pre-built pagination.
+
+            *NOTE:* If you're offset is too high, you will receive an
+            `HTTP 400 offset too high` error message.
           in: query
           name: offset
           required: false
@@ -1173,7 +1227,7 @@ definitions:
       occupantType:
         type: string
       parking:
-        $ref: '#/definitions/School'
+        $ref: '#/definitions/Parking'
       poolFeatures:
         type: string
       roof:

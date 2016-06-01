@@ -110,6 +110,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      description: With this call you can load the details about a all available room types for the specified hotel.
       parameters:
         - description: Application identifier
           in: header
@@ -123,7 +124,7 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-        - description: Specifies the hotel id to process.
+        - description: The hotel id the room type belongs to.
           format: int32
           in: path
           name: hotelId
@@ -134,7 +135,7 @@ paths:
         - text/json
       responses:
         '200':
-          description: Room type details for the hotel with the id specified in the URL.
+          description: A list of room types for the given hotel.
           schema:
             items:
               $ref: '#/definitions/RoomType'
@@ -143,8 +144,10 @@ paths:
           description: 'You provided wrong credentials, or you reached your API limit.'
         '403':
           description: The application does not have access to the requested resource.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI or the requested room could not be found.
         '500':
-          description: We couldn't return the representation due to an internal server error.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         '503':
           description: The server is currently unavailable. Please try later.
       summary: Get a list with the details of all room types for for the specified hotel id
@@ -154,6 +157,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      description: With this call you can load the details about a specific room type in the hotel.
       parameters:
         - description: Application identifier
           in: header
@@ -167,13 +171,13 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-        - description: Specifies the hotel id to process.
+        - description: The hotel id the room type belongs to.
           format: int32
           in: path
           name: hotelId
           required: true
           type: integer
-        - description: Specifies the room type code to process.
+        - description: The code of the room type you want to see details for.
           in: path
           name: code
           required: true
@@ -183,18 +187,20 @@ paths:
         - text/json
       responses:
         '200':
-          description: Room type details for the hotel with the id specified in the URL.
+          description: Room type details for the given room and hotel.
           schema:
             $ref: '#/definitions/RoomType'
         '401':
           description: 'You provided wrong credentials, or you reached your API limit.'
         '403':
           description: The application does not have access to the requested resource.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI or the requested room could not be found.
         '500':
-          description: We couldn't return the representation due to an internal server error.
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         '503':
           description: The server is currently unavailable. Please try later.
-      summary: Get a requested room type for for the specified hotel id
+      summary: Get all the details for a specific room type in the hotel
       tags:
         - RoomType
   '/api/hotel/v0/hotels/{hotelId}/rooms':
@@ -592,7 +598,7 @@ paths:
           description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         '503':
           description: The server is currently unavailable. Please try later.
-      summary: Get a specific room with all the details for the specified hotel id.
+      summary: Get all the details for a specific room in the hotel.
       tags:
         - Room
     patch:
@@ -655,7 +661,7 @@ paths:
           description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         '503':
           description: The server is currently unavailable. Please try later.
-      summary: Partially updates a room
+      summary: Partially updates a room.
       tags:
         - Room
 definitions:
@@ -1132,7 +1138,7 @@ definitions:
     description: Represent a room type for a property
     properties:
       amenities:
-        description: Provides a collection of amenities for the room type
+        description: List of amenities for the room type
         items:
           $ref: '#/definitions/SimpleAttribute'
         type: array
@@ -1154,30 +1160,30 @@ definitions:
         description: Code of the room type
         type: string
       description:
-        description: Provides a description of the room type
+        description: Description of the room type
         type: string
       expected_occupancy:
-        description: The usual amount of persons for the room type
+        description: The common amount of persons for the room
         format: int32
         type: integer
       facilities:
-        description: Provides a collection of facilities for the room type
+        description: List of facilities for the room type
         items:
           $ref: '#/definitions/SimpleAttribute'
         type: array
       max_persons:
-        description: The maximum amount of persons for the room type
+        description: Maximum number of allowed persons for that room type
         format: int32
         type: integer
       min_persons:
-        description: The minimum amount of persons for the room type
+        description: Minimum number of allowed persons for that room type
         format: int32
         type: integer
       name:
         description: Name of the room type
         type: string
       views:
-        description: Provides a collection of views for the room type
+        description: List of views for the room type
         items:
           $ref: '#/definitions/SimpleAttribute'
         type: array

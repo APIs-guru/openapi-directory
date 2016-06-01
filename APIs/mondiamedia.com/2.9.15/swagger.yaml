@@ -8,7 +8,7 @@ info:
     email: Research.and.Development.Music@mondiamedia.com
   description: '<p>This is the API for building Mondia-Media-Products, like Tops.</p><p>Every call need a valid client or user-token.</p><p><ol><li>Client-Token can be get at our Police-API</li><li>User-Token can be get through a login on a customer specific Life-Cycle-Service</li><li>UseCases regarding Login, Register, Subscribe (incl. Payment) will be done by the Life-Cycle-Service</li></ol></p>'
   title: Queen
-  version: 2.9.12
+  version: 2.9.15
   x-logo:
     url: 'https://queen.mondiamedia.com/swagger/swaggerui/images/mm_developer_schwarz.png'
   x-origin:
@@ -139,6 +139,12 @@ paths:
           description: Exclude Karaoke Songs (Default false)
           in: query
           name: excludeKaraoke
+          required: false
+          type: boolean
+        - default: false
+          description: Exclude Songs that are not streamable (Default false)
+          in: query
+          name: excludeNonStreamable
           required: false
           type: boolean
         - default: 0
@@ -485,6 +491,12 @@ paths:
           description: Exclude Karaoke Songs (Default false)
           in: query
           name: excludeKaraoke
+          required: false
+          type: boolean
+        - default: false
+          description: Exclude Songs that are not streamable (Default false)
+          in: query
+          name: excludeNonStreamable
           required: false
           type: boolean
         - default: 0
