@@ -3265,10 +3265,7 @@ paths:
         - httpsHealthChecks
   '/{project}/global/images':
     get:
-      description: |-
-        Retrieves the list of private images available to the specified project. Private images are images you create that belong to your project. This method does not get any images that belong to other projects, including publicly-available images, like Debian 7. If you want to get a list of publicly-available images, use this method to make a request to the respective image project, such as debian-cloud or windows-cloud.
-
-        See Accessing images for more information.
+      description: 'Retrieves the list of private images available to the specified project. Private images are images you create that belong to your project. This method does not get any images that belong to other projects, including publicly-available images, like Debian 8. If you want to get a list of publicly-available images, use this method to make a request to the respective image project, such as debian-cloud or windows-cloud.'
       operationId: compute.images.list
       parameters:
         - description: Project ID for this request.
@@ -8075,6 +8072,52 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/routers/{router}/preview':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Preview fields auto-generated during router create and update operations. Calling this method does NOT create or update the router.
+      operationId: compute.routers.preview
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the Router resource to query.
+          in: path
+          name: router
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Router'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RoutersPreviewResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - routers
   '/{project}/regions/{region}/subnetworks':
     get:
       description: Retrieves a list of subnetworks available to the specified project.
@@ -12985,11 +13028,13 @@ definitions:
         description: |-
           Encrypts or decrypts a disk using a customer-supplied encryption key.
 
-          If you are creating a new disk, encrypts the new disk using an encryption key that you provide. If you are attaching an existing disk that is already encrypted, this field decrypts the disk using the customer-supplied encryption key.
+          If you are creating a new disk, this field encrypts the new disk using an encryption key that you provide. If you are attaching an existing disk that is already encrypted, this field decrypts the disk using the customer-supplied encryption key.
 
           If you encrypt a disk using a customer-supplied key, you must provide the same key again when you attempt to use this resource at a later time. For example, you must provide the key when you create a snapshot or an image from the disk or when you attach the disk to a virtual machine instance.
 
           If you do not provide an encryption key, then the disk will be encrypted using an automatically generated key and you do not need to provide a key to use the disk later.
+
+          Instance templates do not store customer-supplied encryption keys, so you cannot use your own keys to encrypt disks in a managed instance group.
       index:
         description: 'Assigns a zero-based index to this disk, where 0 is reserved for the boot disk. For example, if you have many disks attached to an instance, each disk would have a unique index number. If not specified, the server will choose an appropriate value.'
         format: int32
@@ -13083,7 +13128,10 @@ definitions:
         type: string
       sourceImageEncryptionKey:
         $ref: '#/definitions/CustomerEncryptionKey'
-        description: The customer-supplied encryption key of the source image. Required if the source image is protected by a customer-supplied encryption key.
+        description: |-
+          The customer-supplied encryption key of the source image. Required if the source image is protected by a customer-supplied encryption key.
+
+          Instance templates do not store customer-supplied encryption keys, so you cannot create disks for instances in a managed instance group if the source images are encrypted with your own keys.
     type: object
   AuditConfig:
     description: Enables "data access" audit logging for a service and specifies a list of members that are log-exempted.
@@ -13385,9 +13433,6 @@ definitions:
       description:
         description: An optional description of this resource. Provide this property when you create the resource.
         type: string
-      failover:
-        description: This field designates whether this is a failover backend. More than one failover backend can be configured for a given BackendService.
-        type: boolean
       group:
         description: |-
           The fully-qualified URL of a zonal Instance Group resource. This instance group defines the list of instances that serve traffic. Member virtual machine instances from each instance group must live in the same zone as the instance group itself. No two backends in a backend service are allowed to use same Instance Group resource.
@@ -13468,6 +13513,15 @@ definitions:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
+  BackendSSLPolicy:
+    description: Message containing backend SSL policies.
+    properties:
+      pinnedPeerCertificates:
+        description: 'List of PEM-encoded peer certificates, from which the public keys are extracted for authenticating the backend service.'
+        items:
+          type: string
+        type: array
+    type: object
   BackendService:
     description: A BackendService resource. This resource defines a group of backend virtual machines and their serving capacity.
     properties:
@@ -13475,6 +13529,9 @@ definitions:
         description: 'Lifetime of cookies in seconds if session_affinity is GENERATED_COOKIE. If set to 0, the cookie is non-persistent and lasts only until the end of the browser session (or equivalent). The maximum allowed value for TTL is one day.'
         format: int32
         type: integer
+      backendSslPolicy:
+        $ref: '#/definitions/BackendSSLPolicy'
+        description: Backend SSL policies to enforce.
       backends:
         description: The list of backends that serve this BackendService.
         items:
@@ -13491,15 +13548,6 @@ definitions:
       enableCDN:
         description: 'If true, enable Cloud CDN for this BackendService.'
         type: boolean
-      failoverRatio:
-        description: |-
-          The value of the field must be in [0, 1]. If set, 'backends[].failover' must be set. They together define the fallback behavior of the primary backend: if the ratio of the healthy VMs in the primary backend is at or below this number, traffic arriving at the load-balanced IP will be directed to the failover backend.
-
-          In case where 'failoverRatio' is not set or all the VMs in the backup backend are unhealthy, the traffic will be directed back to the primary backend in the "force" mode, where traffic will be spread to the healthy VMs with the best effort, or to all VMs when no VM is healthy.
-
-          This field can only be used for regional BackendServices.
-        format: float
-        type: number
       fingerprint:
         description: Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a BackendService. An up-to-date fingerprint must be provided in order to update the BackendService.
         format: byte
@@ -13662,7 +13710,7 @@ definitions:
           - SERVICE
         type: string
       value:
-        description: The object of the condition. Exactly one of these must be set.
+        description: DEPRECATED. Use 'values' instead.
         type: string
       values:
         description: The objects of the condition. This is mutually exclusive with 'value'.
@@ -13786,6 +13834,14 @@ definitions:
       options:
         description: Internal use only.
         type: string
+      region:
+        description: '[Output Only] URL of the region where the disk resides. Only applicable for regional resources.'
+        type: string
+      replicaZones:
+        description: URLs of the zones where the disk should be replicated to. Only applicable for regional resources.
+        items:
+          type: string
+        type: array
       selfLink:
         description: '[Output Only] Server-defined fully-qualified URL for this resource.'
         type: string
@@ -14268,6 +14324,11 @@ definitions:
       portRange:
         description: 'Applicable only when IPProtocol is TCP, UDP, or SCTP, only packets addressed to ports in the specified range will be forwarded to target. Forwarding rules with the same [IPAddress, IPProtocol] pair must have disjoint port ranges.'
         type: string
+      ports:
+        description: 'When the load balancing scheme is INTERNAL, a single port or a list of single ports may be specified.'
+        items:
+          type: string
+        type: array
       region:
         description: '[Output Only] URL of the region where the regional forwarding rule resides. This field is not applicable to global forwarding rules.'
         type: string
@@ -14875,6 +14936,8 @@ definitions:
           If you are restarting an instance protected with a customer-supplied encryption key, you must provide the correct key in order to successfully restart the instance.
 
           If you do not provide an encryption key when creating the instance, then the local SSD and in-memory contents will be encrypted using an automatically generated key and you do not need to provide a key to start the instance later.
+
+          Instance templates do not store customer-supplied encryption keys, so you cannot use your own keys to encrypt local SSDs and in-memory content in a managed instance group.
       kind:
         default: 'compute#instance'
         description: '[Output Only] Type of the resource. Always compute#instance for instances.'
@@ -14923,12 +14986,12 @@ definitions:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
       serviceAccounts:
-        description: 'A list of service accounts, with their specified scopes, authorized for this instance. Service accounts generate access tokens that can be accessed through the metadata server and used to authenticate applications on the instance. See Authenticating from Google Compute Engine for more information.'
+        description: 'A list of service accounts, with their specified scopes, authorized for this instance. Service accounts generate access tokens that can be accessed through the metadata server and used to authenticate applications on the instance. See Service Accounts for more information.'
         items:
           $ref: '#/definitions/ServiceAccount'
         type: array
       status:
-        description: '[Output Only] The status of the instance. One of the following values: PROVISIONING, STAGING, RUNNING, STOPPING, and TERMINATED.'
+        description: '[Output Only] The status of the instance. One of the following values: PROVISIONING, STAGING, RUNNING, STOPPING, SUSPENDED, SUSPENDING, and TERMINATED.'
         enum:
           - PROVISIONING
           - RUNNING
@@ -15251,10 +15314,10 @@ definitions:
         format: int32
         type: integer
       minimalAction:
-        description: 'Minimal action to be taken on an instance. The order of action types is: REBOOT < REPLACE.'
+        description: 'Minimal action to be taken on an instance. The order of action types is: RESTART < REPLACE.'
         enum:
-          - REBOOT
           - REPLACE
+          - RESTART
         type: string
       standbyMode:
         description: Standby mode of all the standby instances managed by the IGM.
@@ -15275,7 +15338,7 @@ definitions:
         description: 'If this field is set, IGM maintains a pool of standby instances created from instanceTemplate. The number of standby instances is such that the total number of instances created from this instanceTemplate is equal to InstanceGroupManager.targetSize regardless of what is the value of targetSize.fixed or targetSize.percent. Standby instances are useful during the update, when the user wants to be able to quickly rollout/rollback to the target version.'
         type: boolean
       tag:
-        description: Tag describing the version. Changing it may trigger an action configured in UpdatePolicy.
+        description: Tag describing the version. Used to trigger rollout of a target version even if instance_template remains unchanged.
         type: string
       targetSize:
         $ref: '#/definitions/FixedOrPercent'
@@ -15552,7 +15615,7 @@ definitions:
     description: ''
     properties:
       canIpForward:
-        description: 'Enables instances created based on this template to send packets with source IP addresses other than their own and receive packets with destination IP addresses other than their own. If these instances will be used as an IP gateway or it will be set as the next-hop in a Route resource, specify true. If unsure, leave this set to false. See the canIpForward documentation for more information.'
+        description: 'Enables instances created based on this template to send packets with source IP addresses other than their own and receive packets with destination IP addresses other than their own. If these instances will be used as an IP gateway or it will be set as the next-hop in a Route resource, specify true. If unsure, leave this set to false. See the Enable IP forwarding for instances documentation for more information.'
         type: boolean
       description:
         description: An optional text description for the instances that are created from this instance template.
@@ -15562,6 +15625,11 @@ definitions:
         items:
           $ref: '#/definitions/AttachedDisk'
         type: array
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels to apply to instances that are created from this template. Each label key/value pair must comply with RFC1035. Label values may be empty.
+        type: object
       machineType:
         description: The machine type to use for instances that are created from this template.
         type: string
@@ -15987,6 +16055,9 @@ definitions:
         description: '[Output Only] Standby mode of the instance. This field is non-empty iff the instance is a standby.'
         enum:
           - DRAINED
+        type: string
+      tag:
+        description: '[Output Only] Tag describing the version.'
         type: string
     type: object
   ManagedInstanceLastAttempt:
@@ -17048,7 +17119,7 @@ definitions:
   RouterStatus:
     properties:
       bestRoutes:
-        description: Best routes for this router.
+        description: Best routes for this router's network.
         items:
           $ref: '#/definitions/Route'
         type: array
@@ -17108,6 +17179,12 @@ definitions:
         type: string
       result:
         $ref: '#/definitions/RouterStatus'
+    type: object
+  RoutersPreviewResponse:
+    properties:
+      resource:
+        $ref: '#/definitions/Router'
+        description: Preview of given router.
     type: object
   RoutersScopedList:
     properties:

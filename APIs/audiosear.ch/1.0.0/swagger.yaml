@@ -36,7 +36,7 @@ paths:
     get:
       description: Returns shows that have been in the top 100 on the iTunes charts and their ranks
       parameters:
-        - description: The start date of the charts data in the format YYYY-MM-DD. Maximum (and default) date is the current day minus one week; minimum is 2013-06-01)
+        - description: The start date of the charts data in the format YYYY-MM-DD. Maximum (and default) date is the most recent chart date minus one week; earliest is 2013-06-01)
           format: date
           in: query
           name: start_date

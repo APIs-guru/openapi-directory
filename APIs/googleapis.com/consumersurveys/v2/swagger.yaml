@@ -72,9 +72,103 @@ parameters:
     name: userIp
     type: string
 tags:
+  - name: mobileapppanels
   - name: results
   - name: surveys
 paths:
+  /mobileAppPanels:
+    get:
+      description: Lists the MobileAppPanels available to the authenticated user.
+      operationId: consumersurveys.mobileapppanels.list
+      parameters:
+        - in: query
+          name: maxResults
+          type: integer
+        - in: query
+          name: startIndex
+          type: integer
+        - in: query
+          name: token
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/MobileAppPanelsListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/consumersurveys'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/consumersurveys.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - mobileapppanels
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/mobileAppPanels/{panelId}':
+    get:
+      description: Retrieves a MobileAppPanel that is available to the authenticated user.
+      operationId: consumersurveys.mobileapppanels.get
+      parameters:
+        - description: External URL ID for the panel.
+          in: path
+          name: panelId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/MobileAppPanel'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/consumersurveys'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/consumersurveys.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - mobileapppanels
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    put:
+      description: Updates a MobileAppPanel. Currently the only property that can be updated is the owners property.
+      operationId: consumersurveys.mobileapppanels.update
+      parameters:
+        - description: External URL ID for the panel.
+          in: path
+          name: panelId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/MobileAppPanel'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/MobileAppPanel'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/consumersurveys'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - mobileapppanels
   /surveys:
     get:
       description: Lists the surveys owned by the authenticated user.
@@ -297,6 +391,45 @@ definitions:
         format: int32
         type: integer
     type: object
+  MobileAppPanel:
+    description: Representation of an individual pre-defined panel object defining a targeted audience of opinion rewards mobile app users.
+    properties:
+      country:
+        description: 'Country code for the country of the users that the panel contains. Uses standard ISO 3166-1 2-character language codes. For instance, ''US'' for the United States, and ''GB'' for the United Kingdom. Any survey created targeting this panel must also target the corresponding country.'
+        type: string
+      isPublicPanel:
+        description: Whether or not the panel is accessible to all API users.
+        type: boolean
+      language:
+        description: 'Language code that the panel can target. For instance, ''en-US''. Uses standard BCP47 language codes. See specification. Any survey created targeting this panel must also target the corresponding language.'
+        type: string
+      mobileAppPanelId:
+        description: Unique panel ID string. This corresponds to the mobile_app_panel_id used in Survey Insert requests.
+        type: string
+      name:
+        description: Human readable name of the audience panel.
+        type: string
+      owners:
+        description: List of email addresses for users who can target members of this panel. Must contain at least the address of the user making the API call for panels that are not public. This field will be empty for public panels.
+        items:
+          type: string
+        type: array
+    type: object
+  MobileAppPanelsListResponse:
+    properties:
+      pageInfo:
+        $ref: '#/definitions/PageInfo'
+      requestId:
+        description: Unique request ID used for logging and debugging. Please include in any error reporting or troubleshooting requests.
+        type: string
+      resources:
+        description: An individual predefined panel of Opinion Rewards mobile users.
+        items:
+          $ref: '#/definitions/MobileAppPanel'
+        type: array
+      tokenPagination:
+        $ref: '#/definitions/TokenPagination'
+    type: object
   PageInfo:
     properties:
       resultPerPage:
@@ -350,7 +483,7 @@ definitions:
           $ref: '#/definitions/SurveyQuestion'
         type: array
       state:
-        description: 'State that the survey is in. Can be modified to start, stop, or pause survey.'
+        description: State that the survey is in.
         type: string
       surveyUrlId:
         description: 'Unique survey ID, that is viewable in the URL of the Survey Creator UI'
@@ -386,7 +519,7 @@ definitions:
           type: string
         type: array
       mobileAppPanelId:
-        description: Key for predefined panel that causes survey to be sent to a predefined set of Opinion Rewards App users. PopulationSource must be set to ANDROID_APP_PANEL to use this field.
+        description: Key for predefined panel that causes survey to be sent to a predefined set of Opinion Rewards App users. You must set PopulationSource to ANDROID_APP_PANEL to use this field.
         type: string
       populationSource:
         description: Online population source where the respondents are sampled from.
@@ -403,7 +536,7 @@ definitions:
         description: Currency code that the cost is given in.
         type: string
       maxCostPerResponseNanos:
-        description: 'Threshold to start a survey automically if the quoted prices is at most this value. When a survey has a Screener (threshold) question, it must go through an incidence pricing test to determine the final cost per response. Typically the API consumer would have to make a followup call to start the survey given the (previously not) known cost. If the survey has no threshold_answers, setting this property will return an error. This property allows API callers to indicate the max price per response they''d be willing to pay in advance of that test. If the price turns out to be lower than the specified autostart_max, the survey should begin immediately and the user will be charged at the rate determined by the Incidence pricing test. If the price turns out to be greater than the specified autostart_max the survey will not be started and the user will instead be notified what price was determined by the incidence test. At that point they must raise the value of this property to be greater than or equal to that cost before attempting to start the survey again. This will immediately start the survey as long the incidence test was run within the last 21 days.'
+        description: 'Threshold to start a survey automatically if the quoted price is at most this value. When a survey has a Screener (threshold) question, it must go through an incidence pricing test to determine the final cost per response. Typically you will have to make a followup call to start the survey giving the final computed cost per response. If the survey has no threshold_answers, setting this property will return an error. By specifying this property, you indicate the max price per response you are willing to pay in advance of the incidence test. If the price turns out to be lower than the specified value, the survey will begin immediately and you will be charged at the rate determined by the incidence pricing test. If the price turns out to be greater than the specified value the survey will not be started and you will instead be notified what price was determined by the incidence test. At that point, you must raise the value of this property to be greater than or equal to that cost before attempting to start the survey again. This will immediately start the survey as long the incidence test was run within the last 21 days.'
         format: int64
         type: string
       nanos:

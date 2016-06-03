@@ -88,6 +88,10 @@ paths:
           in: query
           name: no_dedupe
           type: boolean
+        - description: when true query content is not logged.
+          in: query
+          name: no_record
+          type: boolean
         - description: when true results are pretty printed. Useful for debugging.
           in: query
           name: pretty
