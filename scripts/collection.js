@@ -15,13 +15,7 @@ var Promise = require('bluebird');
 
 var makeRequest = require('makeRequest');
 var util = require('./util');
-
-var specSources = [
-  require('./spec_sources/google'),
-  require('./spec_sources/azure')
-];
-
-var blackListedUrls = util.readYaml(__dirname + '/spec_sources/blacklist.yaml');
+var specSources = require('./spec_sources');
 
 var jsondiffpatch = require('jsondiffpatch').create({
   arrays: {
@@ -124,21 +118,14 @@ function fixupSwagger(swaggerPath) {
 }
 
 function updateCollection(dir) {
-  var specs = util.getSpecs(dir);
-  var files = originUrlsToFilenames(specs);
-
-  getSpecLeads(specs)
-   .then(function (leads) {
-     var knownUrls = _(specs).values().map(util.getOriginUrl).value();
-     return _(leads).pick(knownUrls).values().value();
-   })
-   .each(lead => {
+  specSources.getLeads(util.getSpecs(dir))
+   .then(leads => _.toPairs(leads))
+   .each(([filename, lead]) => {
      return writeSpecFromLead(lead)
        .then(swagger => {
          var newFilename = util.getSwaggerPath(swagger);
-         var oldFilename = files[util.getOriginUrl(lead)];
-         if (newFilename !== oldFilename)
-           throw Error(`Spec was moved from "${oldFilename}" to "${newFilename}"`);
+         if (newFilename !== filename)
+           throw Error(`Spec was moved from "${filename}" to "${newFilename}"`);
        });
    })
    .done();
@@ -251,72 +238,15 @@ function appendFixup(fixupPath, spec, editedSpec) {
   saveFixup(fixupPath, spec, editedSpec);
 }
 
-function swaggerToSpecLead(swagger) {
-  var spec = {
-    info: {
-      'x-serviceName': util.getServiceName(swagger),
-      'x-origin': util.getOrigin(swagger)
-    }
-  };
-  removeEmpty(spec);
-  return spec;
-}
-
-function getCatalogsLeads() {
-  return Promise.all(_.invokeMap(specSources, _.call))
-    .then(function (catalogsLeads) {
-      var allLeads = _.flatten(catalogsLeads);
-      return _.omit(indexByOriginUrl(allLeads), blackListedUrls);
-    });
-}
-
-function indexByOriginUrl(leads) {
-  return _(leads)
-    .groupBy(util.getOriginUrl)
-    .mapValues(function (array, url) {
-      assert(_.size(array) === 1, `Duplicate leads for '${url}' URL.`);
-      return array[0];
-    }).value();
-}
-
-function getSpecLeads(specs) {
-  var leads = indexByOriginUrl(_.map(specs, swaggerToSpecLead));
-
-  return getCatalogsLeads()
-    .then(function (catalogsLeads) {
-      return _.mapValues(leads, function (lead, url) {
-        return catalogsLeads[url] || lead;
-      });
-    });
-}
-
-function originUrlsToFilenames(specs) {
-  return _(specs).mapValues(util.getOriginUrl).invert().value();
-}
-
 function updateCatalogLeads() {
-  var specs = _.pickBy(util.getSpecs(), function (swagger) {
-    //TODO: create more generic mechanism
-    var providerName = swagger.info['x-providerName'];
-    return ['googleapis.com', 'azure.com', 'windows.net'].indexOf(providerName) !== -1;
-  });
-  var oldSpecs = originUrlsToFilenames(specs);
+  var knownUrls = _.map(util.getSpecs(), util.getOriginUrl);
 
-  getCatalogsLeads()
-  .then(function (newSpecs) {
-    var oldURLs = _.keys(oldSpecs);
-    var newURLs = _.keys(newSpecs);
-    var added = _.difference(newURLs, oldURLs);
-    var deleted = _.difference(oldURLs, newURLs);
-
-    return Promise.each(added, url => writeSpecFromLead(newSpecs[url]))
-      .then(() => {
-        _.each(deleted, function (url) {
-          console.log('!!! Delete ' + oldSpecs[url]);
-        });
-      });
-  })
-  .done();
+  specSources.getCatalogsLeads()
+    .then(function (catalogsLeads) {
+      var newLeads = _(catalogsLeads).omit(knownUrls).values().value();
+      return Promise.each(newLeads, writeSpecFromLead);
+    })
+    .done();
 }
 
 function writeSpecFromLead(lead) {
