@@ -16,7 +16,7 @@ var makeRequest = require('makeRequest');
 var util = require('./util');
 
 function deployDir(path) {
-  return Path.join('deploy', path || '');
+  return Path.join('deploy_v1', path || '');
 }
 
 function rootUrl(url) {
