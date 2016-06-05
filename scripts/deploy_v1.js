@@ -31,7 +31,7 @@ sh.cp('resources/index.html', deployDir());
 sh.cp('-R', 'branding/', deployDir());
 
 sh.mkdir('-p', deployDir('api/v1'));
-sh.cp('resources/apis_guru_swagger.yaml', deployDir('api/v1/swagger.yaml'));
+sh.cp('resources/apis_guru_swagger_v1.yaml', deployDir('api/v1/swagger.yaml'));
 
 var specs = util.getSpecs('APIs/');
 buildApiList(specs)
