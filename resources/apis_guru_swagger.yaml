@@ -1,0 +1,120 @@
+swagger: "2.0"
+info:
+  version: "2.0"
+  title: "APIs.guru"
+  description: "Wikipedia for Web APIs. Repository of API specs in OpenAPI(fka Swagger) 2.0 format."
+  contact:
+    name: "APIs.guru"
+    url: http://APIs.guru
+    email: "founders@apis.guru"
+  license:
+    name: "CC0 1.0"
+    url: "https://github.com/APIs-guru/api-models#licenses"
+  x-logo:
+    url: https://apis-guru.github.io/api-models/branding/logo_vertical.svg
+externalDocs:
+  url: https://github.com/APIs-guru/api-models/blob/master/API.md
+produces:
+  - application/json
+security: []
+paths:
+  /list.json:
+    get:
+     operationId: listAPIs
+     description: List all APIs in collection
+     responses:
+      200:
+        description: OK
+        schema:
+          $ref: "#/definitions/APIs"
+  /metrics.json:
+    get:
+     operationId: listMetrics
+     description: List of some basic metrics for entire collection
+     responses:
+      200:
+        description: OK
+        schema:
+          $ref: "#/definitions/Metrics"
+definitions:
+  APIs:
+    description: |
+      List of API details.
+      It consist of JSON object with API IDs(`<provider>[:<service>]`) as keys.
+    type: object
+    additionalProperties:
+      $ref: "#/definitions/API"
+    minProperties: 1
+  API:
+    description: Meta information about API
+    type: object
+    required:
+      - added
+      - preferred
+      - versions
+    properties:
+      added:
+        description: Timestamp when this API was first added to collection
+        type: string
+        format: date-time
+      preferred:
+        description: Recommended version
+        type: string
+      versions:
+        description: List supported versions of API
+        type: object
+        additionalProperties:
+          $ref: "#/definitions/ApiVersion"
+        minProperties: 1
+    additionalProperties: false
+  ApiVersion:
+    type: object
+    required:
+      - added
+      - updated
+      - swaggerUrl
+      - swaggerYamlUrl
+      - info
+    properties:
+      added:
+        description: Timestamp when this version was added
+        type: string
+        format: date-time
+      updated:
+        description: Timestamp when this version was updated
+        type: string
+        format: date-time
+      swaggerUrl:
+        description: URL of Swagger spec in JSON format
+        type: string
+        format: url
+      swaggerYamlUrl:
+        description: URL of Swagger spec in YAML format
+        type: string
+        format: url
+      info:
+        description: Copy of `info` section from Swagger spec
+        type: object
+        minProperties: 1
+    additionalProperties: false
+  Metrics:
+    description: List of some basic metrics for entire collection
+    type: object
+    required:
+      - numSpecs
+      - numAPIs
+      - numEndpoints
+    properties:
+      numSpecs:
+        description: Number of APIs specification including different versions of the same API
+        type: integer
+        minimum: 1
+      numAPIs:
+        description: Number of APIs
+        type: integer
+        minimum: 1
+      numEndpoints:
+        description: Total number of endpoints inside all specifications
+        type: integer
+        minimum: 1
+    additionalProperties: false
