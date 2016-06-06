@@ -112,9 +112,9 @@ function addSwagger(apiList, swagger, filename) {
 }
 
 function buildVersionEntry(swagger, filename) {
-  var basename = util.getSwaggerPath(swagger, 'swagger');
-  util.saveJson(deployDir(`specs/${basename}.json`), swagger);
-  util.saveYaml(deployDir(`specs/${basename}.yaml`), swagger);
+  var basename = 'specs/' + util.getSwaggerPath(swagger, 'swagger');
+  util.saveJson(deployDir(`${basename}.json`), swagger);
+  util.saveYaml(deployDir(`${basename}.yaml`), swagger);
 
   var dates = util.exec(`git log --format=%aD --follow -- '${filename}'`);
   dates = _(dates).split('\n').compact();
