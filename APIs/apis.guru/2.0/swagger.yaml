@@ -1,9 +1,8 @@
 swagger: '2.0'
 schemes:
   - https
-  - http
-host: apis-guru.github.io
-basePath: /api-models/api/v1
+host: api.apis.guru
+basePath: /v2/
 info:
   contact:
     email: founders@apis.guru
@@ -14,17 +13,17 @@ info:
     name: CC0 1.0
     url: 'https://github.com/APIs-guru/api-models#licenses'
   title: APIs.guru
-  version: '1.0'
+  version: '2.0'
   x-APIs.guru-categories:
     - open_data
     - developer_tools
   x-logo:
-    url: 'https://apis-guru.github.io/api-models/branding/logo_vertical.svg'
+    url: 'https://apis.guru/branding/logo_vertical.svg'
   x-origin:
     format: swagger
-    url: 'http://apis-guru.github.io/api-models/api/v1/swagger.yaml'
+    url: 'https://api.apis.guru/v2/swagger.json'
     version: '2.0'
-  x-providerName: apis-guru.github.io
+  x-providerName: apis.guru
   x-tags:
     - API
     - Catalog
@@ -47,6 +46,15 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/APIs'
+  /metrics.json:
+    get:
+      description: List of some basic metrics for entire collection
+      operationId: listMetrics
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Metrics'
 definitions:
   API:
     additionalProperties: false
@@ -107,4 +115,25 @@ definitions:
       - swaggerUrl
       - swaggerYamlUrl
       - info
+    type: object
+  Metrics:
+    additionalProperties: false
+    description: List of some basic metrics for entire collection
+    properties:
+      numAPIs:
+        description: Number of APIs
+        minimum: 1
+        type: integer
+      numEndpoints:
+        description: Total number of endpoints inside all specifications
+        minimum: 1
+        type: integer
+      numSpecs:
+        description: Number of APIs specification including different versions of the same API
+        minimum: 1
+        type: integer
+    required:
+      - numSpecs
+      - numAPIs
+      - numEndpoints
     type: object
