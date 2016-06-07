@@ -19,8 +19,7 @@ Our goal is to create a machine-readable Wikipedia for REST APIs with the follow
 - Anyone can add or change an API, not only API owners.
 - All data can be accessed through a [REST API](API.md).
 
-
-If you want to reference this project and you need an icon or even a banner, check our [branding guide](branding/README.md).
+If you want to reference this project and you need an icon or even a banner, check our [branding guide](https://github.com/APIs-guru/branding).
 
 Also, we provide services and consultancy around the Swagger spec and REST APIs in general.
 You can contact us at founders@apis.guru.
@@ -61,11 +60,6 @@ API spec acceptance criteria
 * Public - anyone can access it as long as they follow some clearly defined steps (email owner, pay money, etc.).
 * Persistant - API is made with long-lived goal, and not for a particular event (conference, hackathon, etc.).
 * Useful - API could provide useful functionality not only for its owner.
-
-Future additions
---------------------------
-We are currently working on adding many new API specs, you can see the full list inside [this](https://docs.google.com/spreadsheets/d/14zxKcW_Pzu5aYI3Tnwe5ph2Ru2pkSP8yHWEQhx3t8pI/edit?usp=sharing) document.<BR>
-If you have an API spec in any format (OpenAPI, Swagger, RAML, WADL, ...) for any public API, please feel free to open an [issue](https://github.com/APIs-guru/api-models/issues/new).
 
 Integration with 3rd-party services
 --------------------------
