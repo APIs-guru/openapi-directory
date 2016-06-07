@@ -31,6 +31,6 @@
   },
   "scripts": {
     "test": "scripts/collection.js validate",
-    "deploy": "scripts/deploy_v1.js && deploy-to-gh-pages deploy_v1 && scripts/deploy.js && deploy-to-gh-pages --repo APIs-guru-API/v2 deploy"
+    "deploy": "scripts/deploy_v1.js && deploy-to-gh-pages deploy_v1 && scripts/deploy.js && deploy-to-gh-pages --repo APIs-guru-API/v2 deploy && scripts/deploy_badges.js && deploy-to-gh-pages --repo APIs-guru-API/badges badges"
   }
 }
