@@ -11,6 +11,8 @@
 Repository for API models in [OpenAPI(aka Swagger)](https://openapis.org) [2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) format.<BR>
 API access to collection: [Go!](API.md)
 
+[![Add API][addAPI-image]][addAPI-link]
+
 Our goal is to create a machine-readable Wikipedia for REST APIs with the following principals:
 - Open source, community driven project.
 - Only publicly available APIs (free or paid).
@@ -94,3 +96,5 @@ Some specs are taken from Open Source projects:
 [numSpecs-image]: https://apis-guru.github.io/api-models/banners/openapi_specs_banner.svg
 [endpoints-image]: https://apis-guru.github.io/api-models/banners/endpoints_banner.svg
 [apisDir-link]: ./APIs
+[addAPI-image]: https://cloud.githubusercontent.com/assets/8336157/15861614/7e31511a-2cd5-11e6-8b79-38ad0f61e598.png
+[addAPI-link]: https://apis.guru/add-api/
