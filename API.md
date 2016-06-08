@@ -1,15 +1,15 @@
 **Warning**: If you want to be notified about changes in advance please subscribe to our [Gitter channel](https://gitter.im/APIs-guru/api-models).
 
 ## Implementation
-This API implemented as `gh-pages` branch Github automatically mirror it's content to<BR> https://apis-guru.github.io/api-models/<BR>
+This API implemented as `gh-pages` branch and Github automatically mirror it's content to<BR> https://api.apis.guru/v2/<BR>
 That mean API served as static content and support both caching and compression.<BR>
 
 ## Client examples
-Here is simplest possible API client: [[Demo]](https://apis-guru.github.io/simple-ui) [[Repo]](https://github.com/APIs-guru/simple-ui)<BR>
-Example of more advanced UI: [[Demo]](https://apis-guru.github.io) [[Repo]](https://github.com/APIs-guru/APIs-guru.github.io)
+Here is simplest possible API client: [[Demo]](https://apis.guru/simple-ui) [[Repo]](https://github.com/APIs-guru/simple-ui)<BR>
+Example of more advanced UI: [[Demo]](https://apis.guru) [[Repo]](https://github.com/APIs-guru/APIs-guru.github.io)
 
 ## Endpoint
-https://apis-guru.github.io/api-models/api/v1/list.json - List all API specs.
+https://api.apis.guru/v2/list.json - List all API specs.
 It consist of JSON object with API IDs(`<provider>[:<service>]`) as keys.
 Values have following are objects with following attributes:
  - `added` - Timestamp when this API was first added to collection.
@@ -34,8 +34,8 @@ For example:
           "title": "Drive API",
           ...
         },
-        "swaggerUrl": "https://apis-guru.github.io/api-models/googleapis.com/drive/v1/swagger.json",
-        "swaggerYamlUrl": "https://apis-guru.github.io/api-models/googleapis.com/drive/v1/swagger.yaml",
+        "swaggerUrl": "https://api.apis.guru/specs/googleapis.com/drive/v1/swagger.json",
+        "swaggerYamlUrl": "https://api.apis.guru/specs/googleapis.com/drive/v1/swagger.yaml",
         "updated": "2015-08-28T20:44:24.000Z"
       },
       "v2": {
