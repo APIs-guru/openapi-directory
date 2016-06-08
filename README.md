@@ -79,16 +79,16 @@ Some specs are taken from Open Source projects:
  - [darklynx/swagger-api-collection](https://github.com/darklynx/swagger-api-collection) - OpenAPI(aka Swagger) spec for Instagram API
  - [Mermade/bbcparse](https://github.com/Mermade/bbcparse) - OpenAPI(aka Swagger) spec for BBC Nitro API
 
-[banner]: https://apis-guru.github.io/api-models/branding/banner.svg "APIs.guru"
+[banner]: https://apis.guru/branding/banner.svg "APIs.guru"
 [twitter-image]: https://img.shields.io/twitter/url/http/APIs.guru.svg?style=social
 [twitter-link]: https://twitter.com/intent/tweet?text=http%3A%2F%2FAPIs.guru%20-%20Wikipedia%20for%20%23Web%20%23APIs%20by%20@APIs_guru%20pic.twitter.com/UhlhbMw1NP
 [twitterFollow-image]: https://img.shields.io/twitter/follow/APIs_guru.svg?style=social
 [twitterFollow-link]: https://twitter.com/intent/follow?screen_name=APIs_guru
 [gitter-image]: https://img.shields.io/gitter/room/APIs-guru/api-models.svg
 [gitter-link]: https://gitter.im/APIs-guru/api-models
-[numApis-image]: https://apis-guru.github.io/api-models/banners/apis_in_collection_banner.svg
-[numSpecs-image]: https://apis-guru.github.io/api-models/banners/openapi_specs_banner.svg
-[endpoints-image]: https://apis-guru.github.io/api-models/banners/endpoints_banner.svg
+[numApis-image]: https://api.apis.guru/badges/apis_in_collection_banner.svg
+[numSpecs-image]: https://api.apis.guru/badges/openapi_specs_banner.svg
+[endpoints-image]: https://api.apis.guru/badges/endpoints_banner.svg
 [apisDir-link]: ./APIs
 [addAPI-image]: https://cloud.githubusercontent.com/assets/8336157/15861614/7e31511a-2cd5-11e6-8b79-38ad0f61e598.png
 [addAPI-link]: https://apis.guru/add-api/
