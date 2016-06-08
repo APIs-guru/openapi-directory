@@ -34,8 +34,8 @@ For example:
           "title": "Drive API",
           ...
         },
-        "swaggerUrl": "https://api.apis.guru/specs/googleapis.com/drive/v1/swagger.json",
-        "swaggerYamlUrl": "https://api.apis.guru/specs/googleapis.com/drive/v1/swagger.yaml",
+        "swaggerUrl": "https://api.apis.guru/v2/specs/googleapis.com/drive/v1/swagger.json",
+        "swaggerYamlUrl": "https://api.apis.guru/v2/specs/googleapis.com/drive/v1/swagger.yaml",
         "updated": "2015-08-28T20:44:24.000Z"
       },
       "v2": {
