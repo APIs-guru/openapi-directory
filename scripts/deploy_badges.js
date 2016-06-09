@@ -34,11 +34,11 @@ function saveShield(subject, status, color, icon) {
 
   var url = new URI(`https://img.shields.io/badge/${subject}-${status}-${color}.svg`);
   if (icon) {
-    var base64 = new Buffer(icon).toString('base64');
+    var base64 = URI.encodeQuery(icon.toString('base64'));
     url.addQuery('logo', 'data:image/png;base64,' + base64);
   }
 
-  return makeRequest('get', url.href(), {encoding: null})
+  return makeRequest.getRaw(url.href())
     .spread(function(response, data) {
       util.saveFile(`badges/${subject.toLowerCase()}_banner.svg`, data);
     });
