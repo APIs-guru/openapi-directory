@@ -1,3 +1,6 @@
+<img align="left" src="https://cloud.githubusercontent.com/assets/8336157/15925992/4332d7b4-2e42-11e6-9c18-36f14d0cb76e.png">
+ We are migrating our URLs to `APIs.guru` domain. Old URLs will work untill 22th Jun, for details, please see [this issue](https://github.com/APIs-guru/api-models/issues/85).
+ 
 ![banner]
 
 [![APIs in collection][numApis-image]][apisDir-link]
