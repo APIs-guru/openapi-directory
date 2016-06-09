@@ -90,9 +90,9 @@ Some specs are taken from Open Source projects:
 [twitterFollow-link]: https://twitter.com/intent/follow?screen_name=APIs_guru
 [gitter-image]: https://img.shields.io/gitter/room/APIs-guru/api-models.svg
 [gitter-link]: https://gitter.im/APIs-guru/api-models
-[numApis-image]: https://api.apis.guru/badges/apis_in_collection_banner.svg
-[numSpecs-image]: https://api.apis.guru/badges/openapi_specs_banner.svg
-[endpoints-image]: https://api.apis.guru/badges/endpoints_banner.svg
+[numApis-image]: https://api.apis.guru/badges/apis_in_collection.svg
+[numSpecs-image]: https://api.apis.guru/badges/openapi_specs.svg
+[endpoints-image]: https://api.apis.guru/badges/endpoints.svg
 [apisDir-link]: ./APIs
 [addAPI-image]: https://cloud.githubusercontent.com/assets/8336157/15861614/7e31511a-2cd5-11e6-8b79-38ad0f61e598.png
 [addAPI-link]: https://apis.guru/add-api/
