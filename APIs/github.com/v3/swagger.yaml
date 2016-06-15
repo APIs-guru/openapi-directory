@@ -11594,65 +11594,65 @@ definitions:
     type: object
   assets:
     items:
-      - properties:
-          content_type:
-            type: string
-          created_at:
-            type: string
-          download_count:
-            type: number
-          id:
-            type: number
-          label:
-            type: string
-          name:
-            type: string
-          size:
-            type: number
-          state:
-            type: string
-          updated_at:
-            type: string
-          uploader:
-            properties:
-              avatar_url:
-                type: string
-              events_url:
-                type: string
-              followers_url:
-                type: string
-              following_url:
-                type: string
-              gists_url:
-                type: string
-              gravatar_id:
-                type: string
-              html_url:
-                type: string
-              id:
-                type: number
-              login:
-                type: string
-              organizations_url:
-                type: string
-              received_events_url:
-                type: string
-              repos_url:
-                type: string
-              site_admin:
-                type: boolean
-              starred_url:
-                type: string
-              subscriptions_url:
-                type: string
-              type:
-                type: string
-              url:
-                type: string
-            type: object
-          url:
-            type: string
-        type: object
+      properties:
+        content_type:
+          type: string
+        created_at:
+          type: string
+        download_count:
+          type: number
+        id:
+          type: number
+        label:
+          type: string
+        name:
+          type: string
+        size:
+          type: number
+        state:
+          type: string
+        updated_at:
+          type: string
+        uploader:
+          properties:
+            avatar_url:
+              type: string
+            events_url:
+              type: string
+            followers_url:
+              type: string
+            following_url:
+              type: string
+            gists_url:
+              type: string
+            gravatar_id:
+              type: string
+            html_url:
+              type: string
+            id:
+              type: number
+            login:
+              type: string
+            organizations_url:
+              type: string
+            received_events_url:
+              type: string
+            repos_url:
+              type: string
+            site_admin:
+              type: boolean
+            starred_url:
+              type: string
+            subscriptions_url:
+              type: string
+            type:
+              type: string
+            url:
+              type: string
+          type: object
+        url:
+          type: string
+      type: object
     type: array
   assignees:
     items:
@@ -12867,7 +12867,7 @@ definitions:
     type: object
   emailsPost:
     items:
-      - type: string
+      type: string
     type: array
   emojis:
     properties:
@@ -13567,7 +13567,7 @@ definitions:
         type: boolean
       add_events:
         items:
-          - type: string
+          type: string
         type: array
     type: object
   issue:
@@ -13578,7 +13578,7 @@ definitions:
         type: string
       labels:
         items:
-          - type: string
+          type: string
         type: array
       milestone:
         type: number
@@ -13593,7 +13593,7 @@ definitions:
         type: string
       labels:
         items:
-          - type: string
+          type: string
         type: array
       milestone:
         type: number
@@ -13855,7 +13855,7 @@ definitions:
     type: array
   labelsBody:
     items:
-      - type: string
+      type: string
     type: array
   languages:
     additionalProperties:
@@ -14273,14 +14273,14 @@ definitions:
     properties:
       errors:
         items:
-          - properties:
-              code:
-                type: string
-              field:
-                type: string
-              resource:
-                type: string
-            type: object
+          properties:
+            code:
+              type: string
+            field:
+              type: string
+            resource:
+              type: string
+          type: object
         type: array
       message:
         type: string
@@ -15175,39 +15175,39 @@ definitions:
     type: object
   refStatus:
     items:
-      - properties:
-          commit_url:
-            type: string
-          name:
-            type: string
-          repository_url:
-            type: string
-          sha:
-            type: string
-          state:
-            type: string
-          statuses:
-            items:
-              - properties:
-                  context:
-                    type: string
-                  created_at:
-                    type: string
-                  description:
-                    type: string
-                  id:
-                    type: number
-                  state:
-                    type: string
-                  target_url:
-                    type: string
-                  updated_at:
-                    type: string
-                  url:
-                    type: string
-                type: object
-            type: array
-        type: object
+      properties:
+        commit_url:
+          type: string
+        name:
+          type: string
+        repository_url:
+          type: string
+        sha:
+          type: string
+        state:
+          type: string
+        statuses:
+          items:
+            properties:
+              context:
+                type: string
+              created_at:
+                type: string
+              description:
+                type: string
+              id:
+                type: number
+              state:
+                type: string
+              target_url:
+                type: string
+              updated_at:
+                type: string
+              url:
+                type: string
+            type: object
+          type: array
+      type: object
     type: array
   refs:
     items:
@@ -15909,7 +15909,7 @@ definitions:
         type: string
       parents:
         items:
-          - type: string
+          type: string
         type: array
       tree:
         type: string
