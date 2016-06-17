@@ -742,6 +742,10 @@ definitions:
       captchaResponse:
         description: Response to the captcha.
         type: string
+      createdAt:
+        description: The timestamp when the account is created.
+        format: int64
+        type: string
       delegatedProjectNumber:
         description: GCP project number of the requesting delegated app. Currently only intended for Firebase V1 migration.
         format: int64
@@ -773,6 +777,10 @@ definitions:
         type: string
       instanceId:
         description: Instance id token of the app.
+        type: string
+      lastLoginAt:
+        description: Last login timestamp.
+        format: int64
         type: string
       localId:
         description: The local ID of the user.
@@ -1025,6 +1033,11 @@ definitions:
       secret:
         description: OAuth2 client secret.
         type: string
+      whitelistedAudiences:
+        description: Whitelisted client IDs for audience check.
+        items:
+          type: string
+        type: array
     type: object
   Relyingparty:
     description: 'Request of getting a code for user confirmation (reset password, change email etc.)'
@@ -1172,6 +1185,10 @@ definitions:
   UserInfo:
     description: Template for an individual account info.
     properties:
+      createdAt:
+        description: User creation timestamp.
+        format: int64
+        type: string
       disabled:
         description: Whether the user is disabled.
         type: boolean
@@ -1184,6 +1201,10 @@ definitions:
       emailVerified:
         description: Whether the email has been verified.
         type: boolean
+      lastLoginAt:
+        description: last login timestamp.
+        format: int64
+        type: string
       localId:
         description: The local ID of the user.
         type: string

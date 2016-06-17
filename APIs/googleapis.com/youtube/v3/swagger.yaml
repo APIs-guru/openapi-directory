@@ -4619,7 +4619,7 @@ definitions:
         type: string
     type: object
   ContentRating:
-    description: 'Ratings schemes. The country-specific ratings are mostly for movies and shows. NEXT_ID: 67'
+    description: 'Ratings schemes. The country-specific ratings are mostly for movies and shows. NEXT_ID: 68'
     properties:
       acbRating:
         description: The video's Australian Classification Board (ACB) or Australian Communications and Media Authority (ACMA) rating. ACMA ratings are used to classify children's television programming.
@@ -4945,6 +4945,23 @@ definitions:
           - fpbX18
           - fpbXx
         type: string
+      fpbRatingReasons:
+        description: Reasons that explain why the video received its FPB (South Africa) rating.
+        items:
+          enum:
+            - fpbBlasphemy
+            - fpbCriminalTechniques
+            - fpbDrugs
+            - fpbHorror
+            - fpbImitativeActsTechniques
+            - fpbLanguage
+            - fpbNudity
+            - fpbPrejudice
+            - fpbSex
+            - fpbSexualViolence
+            - fpbViolence
+          type: string
+        type: array
       fskRating:
         description: The video's Freiwillige Selbstkontrolle der Filmwirtschaft (FSK - Germany) rating.
         enum:

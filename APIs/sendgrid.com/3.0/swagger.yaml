@@ -305,7 +305,11 @@ paths:
 
         For more information, please see our [User Guide](http://sendgrid.com/docs/User_Guide/Settings/ip_access_management.html).
       operationId: DELETE_access_settings-whitelist-rule_id
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces: []
       responses:
         '204':
@@ -518,12 +522,17 @@ paths:
         |---|---|---|---|
         |api_key_id |string | required | The ID of the API Key you are deleting.|
       operationId: DELETE_api_keys-api_key_id
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:
         '204':
           description: ''
+          examples: {}
           schema:
             type: 'null'
         '404':
@@ -708,15 +717,15 @@ paths:
       consumes:
         - application/json
       description: |-
-        **This endpoint allows you to retrieve a list of all suppression groups created by this user.**
+        **This endpoint allows you to retrieve information about multiple suppression groups.**
 
-        Suppression groups, or unsubscribe groups, are specific types or categories of email that you would like your recipients to be able to unsubscribe from. For example: Daily Newsletters, Invoices, System Alerts.
-
-        The **name** and **description** of the unsubscribe group will be visible by recipients when they are managing their subscriptions.
-
-        Each user can create up to 25 different suppression groups.
+        This endpoint will return information for each group ID that you include in your request. To add a group ID to your request, simply append `&id=` followed by the group ID.
       operationId: GET_asm-groups
-      parameters: []
+      parameters:
+        - description: The ID of a suppression group that you want to retrieve information for.
+          in: query
+          name: id
+          type: integer
       produces:
         - application/json
       responses:
@@ -724,23 +733,23 @@ paths:
           description: ''
           examples:
             application/json:
-              - description: An Unsubscribe Group
-                id: 1234
+              - description: Our monthly newsletter.
+                id: 100
                 is_default: true
-                name: Unsubscribe Group
-                unsubscribes: 1234
-              - description: An Unsubscribe Group
-                id: 1234
-                is_default: true
-                name: Unsubscribe Group
-                unsubscribes: 1234
+                name: Newsletters
+                unsubscribes: 400
+              - description: Emails triggered by user-defined rules.
+                id: 101
+                is_default: false
+                name: Alerts
+                unsubscribes: 1
           schema:
             items:
-              $ref: '#/definitions/suppression_group_unsubscribes'
+              $ref: '#/definitions/suppression_group'
             type: array
       security:
         - Authorization: []
-      summary: Retrieve all suppression groups associated with the user.
+      summary: Retrieve information about multiple suppression groups
       tags:
         - Suppression Management - Unsubscribe Groups
     parameters: []
@@ -748,7 +757,7 @@ paths:
       consumes:
         - application/json
       description: |-
-        **This endoint allows you to create a new suppression group.**
+        **This endpoint allows you to create a new suppression group.**
 
         Suppression groups, or unsubscribe groups, are specific types or categories of email that you would like your recipients to be able to unsubscribe from. For example: Daily Newsletters, Invoices, System Alerts.
 
@@ -761,43 +770,59 @@ paths:
           name: body
           schema:
             example:
-              description: A group description
-              is_default: false
-              name: A group name
+              description: Suggestions for products our users might like.
+              is_default: true
+              name: Product Suggestions
             properties:
               description:
-                description: A description of the suppression group.
+                description: A brief description of your new suppression group.
                 maxLength: 100
                 type: string
               is_default:
-                default: false
-                description: Indicates if this is the default suppression group.
+                description: Indicates if you would like this to be your default suppression group.
                 type: boolean
               name:
-                description: The name of the new suppression group. May not share its name with any other suppression group on the user.
+                description: The name that you would like to use for your new suppression group.
                 maxLength: 30
                 type: string
             required:
               - name
               - description
-            title: Create a Group request
             type: object
       produces:
         - application/json
       responses:
-        '200':
+        '201':
           description: ''
           examples:
             application/json:
-              description: A group description
-              id: 1234
+              description: Suggestions for products our users might like.
+              id: 103
               is_default: false
-              name: A group name
+              name: Product Suggestions
           schema:
-            $ref: '#/definitions/suppression_group'
+            properties:
+              description:
+                description: A brief description of the suppression group.
+                type: string
+              id:
+                description: The ID of the suppression group.
+                type: integer
+              is_default:
+                description: Indicates if this is the default suppression group.
+                type: boolean
+              name:
+                description: The name of the suppression group.
+                type: string
+            required:
+              - id
+              - name
+              - description
+              - is_default
+            type: object
       security:
         - Authorization: []
-      summary: Create a Group
+      summary: Create a new suppression group
       tags:
         - Suppression Management - Unsubscribe Groups
   '/asm/groups/{group_id}':
@@ -815,7 +840,11 @@ paths:
 
         Each user can create up to 25 different suppression groups.
       operationId: DELETE_asm-groups-group_id
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:
@@ -939,6 +968,7 @@ paths:
               - example@example.com
               - example2@example.com
           schema:
+            description: The list of email addresses belonging to the given suppression group.
             items:
               type: string
             type: array
@@ -995,6 +1025,8 @@ paths:
                 items:
                   type: string
                 type: array
+            required:
+              - recipient_emails
             type: object
       security:
         - Authorization: []
@@ -1033,6 +1065,63 @@ paths:
         name: email
         required: true
         type: string
+  /asm/suppressions:
+    get:
+      consumes:
+        - application/json
+      description: |-
+        **This endpoint allows you to retrieve a list of all suppressions.**
+
+        Suppressions are email addresses that can be added to [groups](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html) to prevent certain types of emails from being delivered to those addresses.
+      operationId: GET_asm-suppressions
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              - created_at: 1410986704
+                email: test1@example.com
+                group_id: 1
+                group_name: Weekly News
+              - created_at: 1411493671
+                email: test1@example.com
+                group_id: 2
+                group_name: Daily News
+              - created_at: 1411493671
+                email: test2@example.com
+                group_id: 2
+                group_name: Daily News
+          schema:
+            items:
+              properties:
+                created_at:
+                  description: A UNIX timestamp indicating when the suppression was created.
+                  type: integer
+                email:
+                  description: The email address that was suppressed.
+                  type: string
+                group_id:
+                  description: The id of the suppression group that this email address belongs to.
+                  type: integer
+                group_name:
+                  description: The name of the suppression group that this email address belongs to.
+                  type: string
+              required:
+                - email
+                - group_id
+                - group_name
+                - created_at
+              type: object
+            type: array
+      security:
+        - Authorization: []
+      summary: Retrieve all suppressions
+      tags:
+        - Suppression Management - Suppressions
+    parameters: []
   /asm/suppressions/global:
     parameters: []
     post:
@@ -1092,7 +1181,11 @@ paths:
 
         A global suppression (or global unsubscribe) is an email address of a recipient who does not want to receive any of your messages. A globally suppressed recipient will be removed from any email you send. For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/global_unsubscribes.html).
       operationId: DELETE_asm-suppressions-global-email
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces: []
       responses:
         '204':
@@ -1136,6 +1229,82 @@ paths:
         - Suppression Management - Global Suppressions
     parameters:
       - description: The email address you want to remove from the global suppressions group.
+        in: path
+        name: email
+        required: true
+        type: string
+  '/asm/suppressions/{email}':
+    get:
+      consumes:
+        - application/json
+      description: |-
+        **This endpoint will return a list of all suppression groups, indicating if the given email address is suppressed for each group.**
+
+        Suppressions are email addresses that can be added to [groups](https://sendgrid.com/docs/API_Reference/Web_API_v3/Suppression_Management/groups.html) to prevent certain types of emails from being delivered to those addresses.
+      operationId: GET_asm-suppressions-email
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              suppressions:
+                - description: Optional description.
+                  id: 1
+                  is_default: true
+                  name: Weekly News
+                  suppressed: true
+                - description: Some daily news.
+                  id: 2
+                  is_default: true
+                  name: Daily News
+                  suppressed: true
+                - description: An old group.
+                  id: 2
+                  is_default: false
+                  name: Old News
+                  suppressed: false
+          schema:
+            properties:
+              suppressions:
+                description: The array of suppression groups.
+                items:
+                  properties:
+                    description:
+                      description: The description of the suppression group.
+                      type: string
+                    id:
+                      description: The id of the suppression group.
+                      type: integer
+                    is_default:
+                      description: Indicates if the suppression group  is set as the default.
+                      type: boolean
+                    name:
+                      description: The name of the suppression group.
+                      type: string
+                    suppressed:
+                      description: Indicates if the given email address is suppressed for this group.
+                      type: boolean
+                  required:
+                    - description
+                    - id
+                    - is_default
+                    - name
+                    - suppressed
+                  type: object
+                type: array
+            required:
+              - suppressions
+            type: object
+      security:
+        - Authorization: []
+      summary: Retrieve all suppression groups for an email address
+      tags:
+        - Suppression Management - Suppressions
+    parameters:
+      - description: The email address that you want to search suppression groups for.
         in: path
         name: email
         required: true
@@ -1688,7 +1857,11 @@ paths:
 
         * [User Guide > Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html)
       operationId: DELETE_campaigns-campaign_id-schedules
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:
@@ -2780,7 +2953,11 @@ paths:
 
         The contactdb is a database of your contacts for [SendGrid Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html).
       operationId: DELETE_contactdb-custom_fields-custom_field_id
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:
@@ -2868,10 +3045,11 @@ paths:
         - Authorization: []
       summary: Retrieve a Custom Field
     parameters:
-      - in: path
+      - description: The ID of the custom field that you want to retrieve.
+        in: path
         name: custom_field_id
         required: true
-        type: string
+        type: integer
   /contactdb/lists:
     delete:
       consumes:
@@ -3131,8 +3309,7 @@ paths:
         - Authorization: []
       summary: Retrieve a single list
     parameters:
-      - description: The ID of the recipient list that you want to delete.
-        in: path
+      - in: path
         name: list_id
         required: true
         type: string
@@ -3436,12 +3613,12 @@ paths:
         - Authorization: []
       summary: Delete a Single Recipient from a Single List
     parameters:
-      - description: The ID of the list from which you are deleting a recipient.
+      - description: The ID of the list that you want to add the recipient to.
         in: path
         name: list_id
         required: true
         type: integer
-      - description: The ID of the recipient you want to delete.
+      - description: The ID of the recipient you are adding to the list.
         in: path
         name: recipient_id
         required: true
@@ -3905,7 +4082,11 @@ paths:
 
         The Contacts API helps you manage your [Marketing Campaigns](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/index.html) recipients.
       operationId: DELETE_contactdb-recipients-recipient_id
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:
@@ -3976,7 +4157,7 @@ paths:
         - Authorization: []
       summary: Retrieve a single recipient
     parameters:
-      - description: The ID of the recipient that you want to delete.
+      - description: The ID of the recipient that you want to retrieve.
         in: path
         name: recipient_id
         required: true
@@ -4305,6 +4486,10 @@ paths:
           in: query
           name: delete_contacts
           type: boolean
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:
@@ -4407,8 +4592,7 @@ paths:
         - Authorization: []
       summary: Retrieve a segment
     parameters:
-      - description: The ID of the segment that you want to delete.
-        in: path
+      - in: path
         name: segment_id
         required: true
         type: string
@@ -5438,7 +5622,11 @@ paths:
 
         If an IP pool is NOT specified for an email, it will use any IP available, including ones in pools.
       operationId: DELETE_ips-pools-pool_name
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:
@@ -5674,7 +5862,11 @@ paths:
 
         A single IP address or a range of IP addresses may be dedicated to an account in order to send email for multiple domains. The reputation of this IP is based on the aggregate performance of all the senders who use it.
       operationId: DELETE_ips-pools-pool_name-ips-ip
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:
@@ -5804,7 +5996,11 @@ paths:
 
         For more general information about warming up IPs, please see our [Classroom](https://sendgrid.com/docs/Classroom/Deliver/Delivery_Introduction/warming_up_ips.html).
       operationId: DELETE_ips-warmup-ip_address
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:
@@ -8815,7 +9011,11 @@ paths:
         * [User Guide > Subusers](https://sendgrid.com/docs/User_Guide/Settings/Subusers/index.html)
         * [Classroom > How do I add more subusers to my account?](https://sendgrid.com/docs/Classroom/Basics/Account/how_do_i_add_more_subusers_to_my_account.html)
       operationId: DELETE_subusers-subuser_name
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:
@@ -8955,7 +9155,11 @@ paths:
         - application/json
       description: Subuser monitor settings allow you to receive a sample of an outgoing message by a specific customer at a specific frequency of emails.
       operationId: DELETE_subusers-subuser_name-monitor
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:
@@ -9320,7 +9524,11 @@ paths:
 
         For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/blocks.html).
       operationId: DELETE_suppression-blocks-email
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces: []
       responses:
         '204':
@@ -9380,7 +9588,7 @@ paths:
       tags:
         - Blocks API
     parameters:
-      - description: The email address of the specific block.
+      - description: The blocked email address that you want to delete.
         in: path
         name: email
         required: true
@@ -9729,7 +9937,11 @@ paths:
 
         For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/invalid_emails.html).
       operationId: DELETE_suppression-invalid_emails-email
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces: []
       responses:
         '204':
@@ -9797,7 +10009,11 @@ paths:
 
         For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/spam_reports.html).
       operationId: DELETE_suppression-spam_report-email
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces: []
       responses:
         '204':
@@ -9973,7 +10189,7 @@ paths:
         A global suppression (or global unsubscribe) is an email address of a recipient who does not want to receive any of your messages. A globally suppressed recipient will be removed from any email you send. For more information, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Suppressions/global_unsubscribes.html).
       operationId: GET_suppression-unsubscribes
       parameters:
-        - description: "\tRefers start of the time range in unix timestamp when an unsubscribe email was created (inclusive)."
+        - description: Refers start of the time range in unix timestamp when an unsubscribe email was created (inclusive).
           in: query
           name: start_time
           type: integer
@@ -10099,7 +10315,11 @@ paths:
 
         Transactional templates are templates created specifically for transactional email and are not to be confused with [Marketing Campaigns templates](https://sendgrid.com/docs/User_Guide/Marketing_Campaigns/templates.html). For more information about transactional templates, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Transactional_Templates/index.html).
       operationId: DELETE_templates-template_id
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces: []
       responses:
         '204':
@@ -10250,7 +10470,11 @@ paths:
         | template_id | string | The ID of the original template |
         | version_id | string | The ID of the template version |
       operationId: DELETE_templates-template_id-versions-version_id
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces: []
       responses:
         '204':
@@ -10420,7 +10644,11 @@ paths:
         | template_id | string | The ID of the original template |
         | version_id | string |  The ID of the template version |
       operationId: POST_templates-template_id-versions-version_id-activate
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:
@@ -12378,7 +12606,11 @@ paths:
         |---|---|---|---|
         | username | string  | required  | Username for the subuser to find associated whitelabels for. |
       operationId: DELETE_whitelabel-domains-subuser
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces: []
       responses:
         '204':
@@ -12466,7 +12698,15 @@ paths:
 
         For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
       operationId: DELETE_whitelabel-domains-domain_id
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
+        - in: path
+          name: domain_id
+          required: true
+          type: string
       produces: []
       responses:
         '204':
@@ -12486,7 +12726,11 @@ paths:
 
         For more information on whitelabeling, please see our [User Guide](https://sendgrid.com/docs/User_Guide/Settings/Whitelabel/index.html)
       operationId: GET_whitelabel-domains-domain_id
-      parameters: []
+      parameters:
+        - in: path
+          name: domain_id
+          required: true
+          type: string
       produces:
         - application/json
       responses:
@@ -12497,12 +12741,7 @@ paths:
       security:
         - Authorization: []
       summary: Retrieve a domain whitelabel.
-    parameters:
-      - description: The id of the domain whitelabel.
-        in: path
-        name: domain_id
-        required: true
-        type: number
+    parameters: []
     patch:
       consumes:
         - application/json
@@ -12530,6 +12769,10 @@ paths:
                 description: Indicates whether this domain whitelabel should be considered the default.
                 type: boolean
             type: object
+        - in: path
+          name: domain_id
+          required: true
+          type: string
       produces:
         - application/json
       responses:
@@ -12725,7 +12968,11 @@ paths:
         | id | integer  | ID of the domain whitelabel to delete the IP from. |
         | ip | string | IP to remove from the domain whitelabel. |
       operationId: DELETE_whitelabel-domains-id-ips-ip
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:
@@ -12802,7 +13049,11 @@ paths:
         |---|---|---|
         | id | integer  |ID of the domain whitelabel to validate. |
       operationId: POST_whitelabel-domains-id-validate
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:
@@ -13050,7 +13301,11 @@ paths:
 
         For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/ips.html).
       operationId: DELETE_whitelabel-ips-id
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:
@@ -13165,7 +13420,11 @@ paths:
 
         For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/ips.html).
       operationId: POST_whitelabel-ips-id-validate
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:
@@ -13491,6 +13750,10 @@ paths:
           name: username
           required: true
           type: string
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces: []
       responses:
         '204':
@@ -13567,7 +13830,11 @@ paths:
 
         For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/links.html).
       operationId: DELETE_whitelabel-links-id
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces: []
       responses:
         '204':
@@ -13703,7 +13970,11 @@ paths:
 
         For more information, please see our [User Guide](https://sendgrid.com/docs/API_Reference/Web_API_v3/Whitelabel/links.html).
       operationId: POST_whitelabel-links-id-validate
-      parameters: []
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: 'null'
       produces:
         - application/json
       responses:

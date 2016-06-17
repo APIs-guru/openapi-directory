@@ -3,8 +3,8 @@ schemes:
   - https
 host: management.azure.com
 info:
-  description: The wrapper for the Engagement REST APIs.
-  title: EngagementManagementClient
+  description: Microsoft Azure Mobile Engagement REST APIs.
+  title: Engagement.ManagementClient
   version: '2014-12-01'
   x-logo:
     backgroundColor: '#333333'
@@ -776,10 +776,10 @@ paths:
         - Device
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportJobs':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks':
     get:
-      description: Get the list of export jobs.
-      operationId: ExportJobs_List
+      description: Get the list of export tasks.
+      operationId: ExportTasks_List
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupNameParameter'
@@ -787,7 +787,7 @@ paths:
         - $ref: '#/parameters/AppNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - default: 0
-          description: 'Control paging of export jobs, start results at the given offset, defaults to 0 (1st page of data).'
+          description: 'Control paging of export tasks, start results at the given offset, defaults to 0 (1st page of data).'
           in: query
           minimum: 0
           name: $skip
@@ -795,7 +795,7 @@ paths:
           type: integer
         - default: 20
           description: |-
-            Control paging of export jobs, number of export jobs to return with each call. By default, it returns all export jobs with a default paging of 20.
+            Control paging of export tasks, number of export tasks to return with each call. By default, it returns all export tasks with a default paging of 20.
             The response contains a `nextLink` property describing the path to get the next page if there are more results.
             The maximum paging limit for $top is 40.
           in: query
@@ -805,9 +805,9 @@ paths:
           required: false
           type: integer
         - description: |-
-            Sort results by an expression which looks like `$orderby=jobId asc` (default when not specified).
+            Sort results by an expression which looks like `$orderby=taskId asc` (default when not specified).
             The syntax is orderby={property} {direction} or just orderby={property}.
-            Properties that can be specified for sorting: jobId, errorDetails, dateCreated, jobStatus, and dateCreated.
+            Properties that can be specified for sorting: taskId, errorDetails, dateCreated, taskStatus, and dateCreated.
             The available directions are asc (for ascending order) and desc (for descending order).
             When not specified the asc direction is used.
             Only one orderby property can be specified.
@@ -817,24 +817,24 @@ paths:
           type: string
       responses:
         '200':
-          description: 'Success, export jobs are returned as JSON.'
+          description: Success. Returns a list of export task statuses.
           schema:
-            $ref: '#/definitions/ExportJobListResult'
+            $ref: '#/definitions/exportTaskListResult'
         default:
           description: |-
-            * `400`: Invalid parameters or application is disabled. Check response body for details.
-            * `401`: Authentication error.
+            * `4xx`: Bad request.
+            * `5xx`: Server error.
           schema:
             $ref: '#/definitions/ApiError'
       tags:
-        - Export
-        - List
+        - export
+        - list
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportJobs/campaignStatsByIds':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/activities':
     post:
-      description: Creates a job to export a push campaign data to a storageUrl.
-      operationId: ExportJobs_CreateCampaignStatsByIds
+      description: Creates a task to export activities.
+      operationId: ExportTasks_CreateActivitiesTask
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupNameParameter'
@@ -845,29 +845,29 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/CampaignStatsByIdsExportJob'
+            $ref: '#/definitions/dateRangeExportTaskParameter'
       responses:
         '202':
-          description: 'Success, export job is returned.'
+          description: Success. Returns the state of export task.
           headers:
             Location:
-              description: URL path to get the created export job.
+              description: Location of the export task state.
               type: string
           schema:
-            $ref: '#/definitions/ExportJobResult'
+            $ref: '#/definitions/exportTaskResult'
         default:
-          description: |
-            * `400`: Invalid parameters or application is disabled. Check response body for details.
-            * `401`: Authentication error.
+          description: |-
+            * `4xx`: Bad request.
+            * `5xx`: Server error.
           schema:
             $ref: '#/definitions/ApiError'
       tags:
-        - Export
-        - CRUD
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportJobs/campaignStatsByPeriod':
+        - export
+        - crud
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/crashes':
     post:
-      description: Creates a job to export a push campaign data for a period to a storageUrl.
-      operationId: ExportJobs_CreateCampaignStatsByPeriod
+      description: Creates a task to export crashes.
+      operationId: ExportTasks_CreateCrashesTask
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupNameParameter'
@@ -878,29 +878,29 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/CampaignStatsByPeriodExportJob'
+            $ref: '#/definitions/dateRangeExportTaskParameter'
       responses:
         '202':
-          description: 'Success, export job is returned.'
+          description: Success. Returns the state of export task.
           headers:
             Location:
-              description: URL path to get the created export job.
+              description: Location of the export task state.
               type: string
           schema:
-            $ref: '#/definitions/ExportJobResult'
+            $ref: '#/definitions/exportTaskResult'
         default:
-          description: |
-            * `400`: Invalid parameters or application is disabled. Check response body for details.
-            * `401`: Authentication error.
+          description: |-
+            * `4xx`: Bad request.
+            * `5xx`: Server error.
           schema:
             $ref: '#/definitions/ApiError'
       tags:
-        - Export
-        - CRUD
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportJobs/historical':
+        - export
+        - crud
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/errors':
     post:
-      description: Creates a job to export the specified data to a storageUrl.
-      operationId: ExportJobs_CreateHistorical
+      description: Creates a task to export errors.
+      operationId: ExportTasks_CreateErrorsTask
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupNameParameter'
@@ -911,37 +911,29 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/HistoricalExportJob'
+            $ref: '#/definitions/dateRangeExportTaskParameter'
       responses:
-        '201':
-          description: 'Success, export job is returned.'
-          headers:
-            Location:
-              description: URL path to get the created export job.
-              type: string
-          schema:
-            $ref: '#/definitions/ExportJobResult'
         '202':
-          description: 'Success, export job is returned.'
+          description: Success. Returns the state of export task.
           headers:
             Location:
-              description: URL path to get the created export job.
+              description: Location of the export task state.
               type: string
           schema:
-            $ref: '#/definitions/ExportJobResult'
+            $ref: '#/definitions/exportTaskResult'
         default:
-          description: |
-            * `400`: Invalid parameters or application is disabled. Check response body for details.
-            * `401`: Authentication error.
+          description: |-
+            * `4xx`: Bad request.
+            * `5xx`: Server error.
           schema:
             $ref: '#/definitions/ApiError'
       tags:
-        - Export
-        - CRUD
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportJobs/snapshot':
+        - export
+        - crud
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/events':
     post:
-      description: Creates a job to export the specified data to a storageUrl.
-      operationId: ExportJobs_CreateSnapshot
+      description: Creates a task to export events.
+      operationId: ExportTasks_CreateEventsTask
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupNameParameter'
@@ -952,68 +944,256 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/SnapshotExportJob'
+            $ref: '#/definitions/dateRangeExportTaskParameter'
       responses:
-        '201':
-          description: 'Success, export job is returned.'
-          headers:
-            Location:
-              description: URL path to get the created export job.
-              type: string
-          schema:
-            $ref: '#/definitions/ExportJobResult'
         '202':
-          description: 'Success, export job is returned.'
+          description: Success. Returns the state of export task.
           headers:
             Location:
-              description: URL path to get the created export job.
+              description: Location of the export task state.
               type: string
           schema:
-            $ref: '#/definitions/ExportJobResult'
+            $ref: '#/definitions/exportTaskResult'
         default:
-          description: |
-            * `400`: Invalid parameters or application is disabled. Check response body for details.
-            * `401`: Authentication error.
+          description: |-
+            * `4xx`: Bad request.
+            * `5xx`: Server error.
           schema:
             $ref: '#/definitions/ApiError'
       tags:
-        - Export
-        - CRUD
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportJobs/{id}':
+        - export
+        - crud
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/feedbackByCampaign':
+    post:
+      description: Creates a task to export push campaign data for a set of campaigns.
+      operationId: ExportTasks_CreateFeedbackTaskByCampaign
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AppCollectionParameter'
+        - $ref: '#/parameters/AppNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/feedbackByCampaignParameter'
+      responses:
+        '202':
+          description: Success. Returns the state of export task.
+          headers:
+            Location:
+              description: Location of the export task state.
+              type: string
+          schema:
+            $ref: '#/definitions/exportTaskResult'
+        default:
+          description: |-
+            * `4xx`: Bad request.
+            * `5xx`: Server error.
+          schema:
+            $ref: '#/definitions/ApiError'
+      tags:
+        - export
+        - crud
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/feedbackByDate':
+    post:
+      description: Creates a task to export push campaign data for a date range.
+      operationId: ExportTasks_CreateFeedbackTaskByDateRange
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AppCollectionParameter'
+        - $ref: '#/parameters/AppNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/feedbackByDateRangeParameter'
+      responses:
+        '202':
+          description: Success. Returns the state of export task.
+          headers:
+            Location:
+              description: Location of the export task state.
+              type: string
+          schema:
+            $ref: '#/definitions/exportTaskResult'
+        default:
+          description: |-
+            * `4xx`: Bad request.
+            * `5xx`: Server error.
+          schema:
+            $ref: '#/definitions/ApiError'
+      tags:
+        - export
+        - crud
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/jobs':
+    post:
+      description: Creates a task to export jobs.
+      operationId: ExportTasks_CreateJobsTask
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AppCollectionParameter'
+        - $ref: '#/parameters/AppNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/dateRangeExportTaskParameter'
+      responses:
+        '202':
+          description: Success. Returns the state of export task.
+          headers:
+            Location:
+              description: Location of the export task state.
+              type: string
+          schema:
+            $ref: '#/definitions/exportTaskResult'
+        default:
+          description: |-
+            * `4xx`: Bad request.
+            * `5xx`: Server error.
+          schema:
+            $ref: '#/definitions/ApiError'
+      tags:
+        - export
+        - crud
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/sessions':
+    post:
+      description: Creates a task to export sessions.
+      operationId: ExportTasks_CreateSessionsTask
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AppCollectionParameter'
+        - $ref: '#/parameters/AppNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/dateRangeExportTaskParameter'
+      responses:
+        '202':
+          description: Success. Returns the state of export task.
+          headers:
+            Location:
+              description: Location of the export task state.
+              type: string
+          schema:
+            $ref: '#/definitions/exportTaskResult'
+        default:
+          description: |-
+            * `4xx`: Bad request.
+            * `5xx`: Server error.
+          schema:
+            $ref: '#/definitions/ApiError'
+      tags:
+        - export
+        - crud
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/tags':
+    post:
+      description: Creates a task to export tags.
+      operationId: ExportTasks_CreateTagsTask
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AppCollectionParameter'
+        - $ref: '#/parameters/AppNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/exportTaskParameter'
+      responses:
+        '202':
+          description: Success. Returns the state of export task.
+          headers:
+            Location:
+              description: Location of the export task state.
+              type: string
+          schema:
+            $ref: '#/definitions/exportTaskResult'
+        default:
+          description: |-
+            * `4xx`: Bad request.
+            * `5xx`: Server error.
+          schema:
+            $ref: '#/definitions/ApiError'
+      tags:
+        - export
+        - crud
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/tokens':
+    post:
+      description: Creates a task to export tags.
+      operationId: ExportTasks_CreateTokensTask
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AppCollectionParameter'
+        - $ref: '#/parameters/AppNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/exportTaskParameter'
+      responses:
+        '202':
+          description: Success. Returns the state of export task.
+          headers:
+            Location:
+              description: Location of the export task state.
+              type: string
+          schema:
+            $ref: '#/definitions/exportTaskResult'
+        default:
+          description: |-
+            * `4xx`: Bad request.
+            * `5xx`: Server error.
+          schema:
+            $ref: '#/definitions/ApiError'
+      tags:
+        - export
+        - crud
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/exportTasks/{id}':
     get:
-      description: The Get export job operation retrieves information about a previously created export job.
-      operationId: ExportJobs_Get
+      description: Retrieves information about a previously created export task.
+      operationId: ExportTasks_Get
       parameters:
-        - description: Export job identifier.
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/AppCollectionParameter'
+        - $ref: '#/parameters/AppNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - description: Export task identifier.
           in: path
           name: id
           required: true
           type: string
       responses:
         '200':
-          description: 'Success, export job is returned.'
+          description: Success. The status of the export task is returned.
           schema:
-            $ref: '#/definitions/ExportJobResult'
+            $ref: '#/definitions/exportTaskResult'
         default:
-          description: |
-            * `400`: Invalid parameters or application is disabled. Check response body for details.
-            * `401`: Authentication error.
-            * `404`: Export job not found.
+          description: |-
+            * `4xx`: Bad request.
+            * `5xx`: Server error.
           schema:
             $ref: '#/definitions/ApiError'
       tags:
-        - Export
-        - CRUD
-    parameters:
-      - $ref: '#/parameters/SubscriptionIdParameter'
-      - $ref: '#/parameters/ResourceGroupNameParameter'
-      - $ref: '#/parameters/AppCollectionParameter'
-      - $ref: '#/parameters/AppNameParameter'
-      - $ref: '#/parameters/ApiVersionParameter'
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/importJobs':
+        - export
+        - crud
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/importTasks':
     get:
       description: Get the list of import jobs.
-      operationId: ImportJobs_List
+      operationId: ImportTasks_List
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupNameParameter'
@@ -1053,7 +1233,7 @@ paths:
         '200':
           description: 'Success, import jobs are returned as JSON.'
           schema:
-            $ref: '#/definitions/ImportJobListResult'
+            $ref: '#/definitions/importTaskListResult'
         default:
           description: |-
             * `400`: Invalid parameters or application is disabled. Check response body for details.
@@ -1061,13 +1241,13 @@ paths:
           schema:
             $ref: '#/definitions/ApiError'
       tags:
-        - Import
-        - List
+        - import
+        - list
       x-ms-pageable:
         nextLinkName: nextLink
     post:
       description: Creates a job to import the specified data to a storageUrl.
-      operationId: ImportJobs_Create
+      operationId: ImportTasks_Create
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupNameParameter'
@@ -1078,7 +1258,7 @@ paths:
           name: parameters
           required: true
           schema:
-            $ref: '#/definitions/ImportJob'
+            $ref: '#/definitions/importTask'
       responses:
         '201':
           description: 'Success, import job is returned.'
@@ -1087,7 +1267,7 @@ paths:
               description: URL path to get the created import job.
               type: string
           schema:
-            $ref: '#/definitions/ImportJobResult'
+            $ref: '#/definitions/importTaskResult'
         '202':
           description: 'Success, import job is returned.'
           headers:
@@ -1095,7 +1275,7 @@ paths:
               description: URL path to get the created import job.
               type: string
           schema:
-            $ref: '#/definitions/ImportJobResult'
+            $ref: '#/definitions/importTaskResult'
         default:
           description: |
             * `400`: Invalid parameters or application is disabled. Check response body for details.
@@ -1103,12 +1283,12 @@ paths:
           schema:
             $ref: '#/definitions/ApiError'
       tags:
-        - Import
-        - CRUD
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/importJobs/{id}':
+        - import
+        - crud
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MobileEngagement/appcollections/{appCollection}/apps/{appName}/devices/importTasks/{id}':
     get:
       description: The Get import job operation retrieves information about a previously created import job.
-      operationId: ImportJobs_Get
+      operationId: ImportTasks_Get
       parameters:
         - description: Import job identifier.
           in: path
@@ -1119,7 +1299,7 @@ paths:
         '200':
           description: 'Success, import job is returned.'
           schema:
-            $ref: '#/definitions/ImportJobResult'
+            $ref: '#/definitions/importTaskResult'
         default:
           description: |
             * `400`: Invalid parameters or application is disabled. Check response body for details.
@@ -1128,8 +1308,8 @@ paths:
           schema:
             $ref: '#/definitions/ApiError'
       tags:
-        - Import
-        - CRUD
+        - import
+        - crud
     parameters:
       - $ref: '#/parameters/SubscriptionIdParameter'
       - $ref: '#/parameters/ResourceGroupNameParameter'
@@ -1715,40 +1895,6 @@ definitions:
       system-notification-exited:
         description: Number of times the system notification was exited (Not present in case of a data-push or a native-push).
         type: integer
-  CampaignStatsByIdsExportJob:
-    properties:
-      campaignIds:
-        description: |
-          A list of campaign identifiers.
-        items:
-          type: string
-        type: array
-      campaignType:
-        description: |
-          The push campaign type.
-        type: string
-      storageUrl:
-        description: A shared Access Signature (SAS) Storage URI where the output will be written.
-        type: string
-  CampaignStatsByPeriodExportJob:
-    properties:
-      campaignType:
-        description: |
-          The push campaign type.
-        type: string
-      campaignWindowEnd:
-        description: |
-          For push exports, the end of the period for inclusion of active campaigns. The date conforms to the ISO8601 format.
-        format: date-time
-        type: string
-      campaignWindowStart:
-        description: |
-          For push exports, the start of the period for inclusion of active campaigns. The date conforms to the ISO8601 format.
-        format: date-time
-        type: string
-      storageUrl:
-        description: A shared Access Signature (SAS) Storage URI where the output will be written.
-        type: string
   CampaignTestNewParameters:
     allOf:
       - $ref: '#/definitions/CampaignTestSavedParameters'
@@ -1767,6 +1913,17 @@ definitions:
         type: string
     required:
       - deviceId
+  CampaignType:
+    description: Campaign type.
+    enum:
+      - Announcement
+      - DataPush
+      - NativePush
+      - Poll
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: CampaignType
   CampaignsListResult:
     description: The campaigns list result.
     properties:
@@ -2073,64 +2230,6 @@ definitions:
         type: object
     description: Send only to a maximum of max users.
     x-ms-discriminator-value: engage-subset
-  ExportJobListResult:
-    description: Gets a paged list of ExportJobs.
-    properties:
-      nextLink:
-        description: 'When the results are paged, the nextLink is the URI for the next page of results. This property is empty when there are no additional pages.'
-        type: string
-      value:
-        description: The list of export jobs.
-        items:
-          $ref: '#/definitions/ExportJobResult'
-        type: array
-  ExportJobResult:
-    properties:
-      dateCompleted:
-        description: |
-          The date at which the export job completed (Not present if not yet completed).
-          The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-        format: date-time
-        type: string
-      dateCreated:
-        description: |
-          The date at which the export job was created.
-          The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-        format: date-time
-        type: string
-      errorDetails:
-        description: 'Details of errors encountered during the export, if any.'
-        type: string
-      exportDataType:
-        description: The type of data to export.
-        enum:
-          - Activity
-          - Tag
-          - Crash
-          - Error
-          - Event
-          - Job
-          - Session
-          - Token
-          - Push
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: ExportDataTypes
-      id:
-        description: Unique identifier of the export job.
-        type: string
-      state:
-        description: The current state of the export job.
-        enum:
-          - Queued
-          - Started
-          - Succeeded
-          - Failed
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: JobStates
   Filter:
     discriminator: type
     properties:
@@ -2169,83 +2268,6 @@ definitions:
     description: |
       Used to target devices based on a specific region. A center point (defined by a latitude and longitude) and a radius form the boundary for the region. This criterion will be met when the user crosses the boundaries of the region.
     x-ms-discriminator-value: geo-fencing
-  HistoricalExportJob:
-    properties:
-      endDate:
-        description: |
-          The date at which the export should export data to. The date conforms to the ISO 8601 standard.
-        format: date-time
-        type: string
-      historicalDataType:
-        description: The type of data to export.
-        enum:
-          - Activity
-          - Crash
-          - Error
-          - Event
-          - Job
-          - Session
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: HistoricalDataTypes
-      startDate:
-        description: |
-          The date at which the export should be started from. The date conforms to the ISO 8601 standard.
-        format: date-time
-        type: string
-      storageUrl:
-        description: A shared Access Signature (SAS) Storage URI where the output will be written.
-        type: string
-  ImportJob:
-    properties:
-      storageUrl:
-        description: A shared Access Signature (SAS) Storage URI where the job results will be retrieved from.
-        type: string
-  ImportJobListResult:
-    description: Gets a paged list of ImportJobs.
-    properties:
-      nextLink:
-        description: 'When the results are paged, the nextLink is the URI for the next page of results. This property is empty when there are no additional pages.'
-        type: string
-      value:
-        description: The list of import jobs.
-        items:
-          $ref: '#/definitions/ImportJobResult'
-        type: array
-  ImportJobResult:
-    allOf:
-      - $ref: '#/definitions/ImportJob'
-    properties:
-      dateCompleted:
-        description: |
-          The date at which the import job completed (Not present if not yet completed).
-          The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-        format: date-time
-        type: string
-      dateCreated:
-        description: |
-          The date at which the import job was created.
-          The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
-        format: date-time
-        type: string
-      errorDetails:
-        description: 'Details of any errors encountered during the import, if any.'
-        type: string
-      id:
-        description: Unique identifier of the import job.
-        type: string
-      state:
-        description: The current state of the import job.
-        enum:
-          - Queued
-          - Started
-          - Succeeded
-          - Failed
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: JobStates
   IntegerTagCriterion:
     allOf:
       - $ref: '#/definitions/Criterion'
@@ -2482,20 +2504,6 @@ definitions:
         type: object
     description: Target devices based on an existing segment.
     x-ms-discriminator-value: segment
-  SnapshotExportJob:
-    properties:
-      snapshotDataType:
-        description: The type of data to export.
-        enum:
-          - Tag
-          - Token
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: SnapshotDataTypes
-      storageUrl:
-        description: A shared Access Signature (SAS) Storage URI where the output will be written.
-        type: string
   StringTagCriterion:
     allOf:
       - $ref: '#/definitions/Criterion'
@@ -2516,3 +2524,237 @@ definitions:
         items:
           type: string
         type: array
+  containerUrl:
+    $ref: '#/definitions/url'
+    description: A shared Access Signature (SAS) BLOB container URL to contain the exported data.
+  date:
+    description: A date as defined by full-date in RFC3339.
+    format: date
+    type: string
+  dateRangeExportTaskParameter:
+    properties:
+      containerUrl:
+        $ref: '#/definitions/containerUrl'
+      description:
+        description: A description of the export task.
+        type: string
+      endDate:
+        $ref: '#/definitions/date'
+        description: The RFC3339 full-date of the end of the period for which data is exported.
+      exportFormat:
+        $ref: '#/definitions/exportFormat'
+        description: The format of the exported data.
+      startDate:
+        $ref: '#/definitions/date'
+        description: The RFC3339 full-date of the start of the period for which data is exported.
+    readOnly: false
+    required:
+      - containerUrl
+      - startDate
+      - endDate
+      - exportFormat
+  exportFormat:
+    description: The format of exported data.
+    enum:
+      - JsonBlob
+      - CsvBlob
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: ExportFormat
+  exportOptions:
+    description: Options to control export generation.
+    properties:
+      exportUserId:
+        type: boolean
+    type: object
+  exportState:
+    description: The state of an export task.
+    enum:
+      - Queued
+      - Started
+      - Succeeded
+      - Failed
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: ExportState
+  exportTaskListResult:
+    description: Gets a paged list of ExportTasks.
+    properties:
+      nextLink:
+        description: 'When the results are paged, the nextLink is the URI for the next page of results. This property is empty when there are no additional pages.'
+        type: string
+      value:
+        description: The list of export tasks.
+        items:
+          $ref: '#/definitions/exportTaskResult'
+        type: array
+    readOnly: true
+    required:
+      - value
+  exportTaskParameter:
+    properties:
+      containerUrl:
+        $ref: '#/definitions/containerUrl'
+      description:
+        description: A description of the export task.
+        type: string
+      exportFormat:
+        $ref: '#/definitions/exportFormat'
+        description: The format of the exported data.
+    readOnly: false
+    required:
+      - containerUrl
+      - exportFormat
+  exportTaskResult:
+    properties:
+      dateCompleted:
+        description: The RFC3339 date-time the export task was completed.
+        format: date-time
+        type: string
+      dateCreated:
+        description: The RFC3339 date-time the export task was created.
+        format: date-time
+        type: string
+      description:
+        description: A description of the export task.
+        type: string
+      errorDetails:
+        description: 'Details of errors encountered during the export, if any.'
+        type: string
+      exportType:
+        $ref: '#/definitions/exportType'
+      id:
+        description: Unique identifier of the export task.
+        type: string
+      state:
+        $ref: '#/definitions/exportState'
+    readOnly: true
+    required:
+      - id
+      - state
+      - dateCreated
+      - exportType
+  exportType:
+    description: The type of export.
+    enum:
+      - Activity
+      - Tag
+      - Crash
+      - Error
+      - Event
+      - Job
+      - Session
+      - Token
+      - Push
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: ExportType
+  feedbackByCampaignParameter:
+    properties:
+      campaignIds:
+        description: A list of campaign identifiers.
+        items:
+          format: long
+          type: integer
+        minItems: 1
+        type: array
+      campaignType:
+        $ref: '#/definitions/CampaignType'
+      containerUrl:
+        $ref: '#/definitions/containerUrl'
+      description:
+        description: A description of the export task.
+        type: string
+      exportFormat:
+        $ref: '#/definitions/exportFormat'
+        description: The format of the exported data.
+    readOnly: false
+    required:
+      - containerUrl
+      - campaignType
+      - campaignIds
+      - exportFormat
+  feedbackByDateRangeParameter:
+    properties:
+      campaignType:
+        $ref: '#/definitions/CampaignType'
+      campaignWindowEnd:
+        $ref: '#/definitions/timestamp'
+        description: The RFC3339 date-time end of the period for inclusion of active campaigns.
+      campaignWindowStart:
+        $ref: '#/definitions/timestamp'
+        description: The RFC3339 date-time start of the period for inclusion of active campaigns.
+      containerUrl:
+        $ref: '#/definitions/containerUrl'
+      description:
+        description: A description of the export task.
+        type: string
+      exportFormat:
+        $ref: '#/definitions/exportFormat'
+        description: The format of the exported data.
+    readOnly: false
+    required:
+      - containerUrl
+      - campaignType
+      - campaignWindowStart
+      - campaignWindowEnd
+      - exportFormat
+  importTask:
+    properties:
+      storageUrl:
+        description: A shared Access Signature (SAS) Storage URI where the job results will be retrieved from.
+        type: string
+  importTaskListResult:
+    description: Gets a paged list of import tasks.
+    properties:
+      nextLink:
+        description: 'When the results are paged, the nextLink is the URI for the next page of results. This property is empty when there are no additional pages.'
+        type: string
+      value:
+        description: The list of import task.
+        items:
+          $ref: '#/definitions/importTaskResult'
+        type: array
+  importTaskResult:
+    allOf:
+      - $ref: '#/definitions/importTask'
+    properties:
+      dateCompleted:
+        description: |
+          The date at which the import job completed (Not present if not yet completed).
+          The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+        format: date-time
+        type: string
+      dateCreated:
+        description: |
+          The date at which the import job was created.
+          The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
+        format: date-time
+        type: string
+      errorDetails:
+        description: 'Details of any errors encountered during the import, if any.'
+        type: string
+      id:
+        description: Unique identifier of the import task.
+        type: string
+      state:
+        description: The current state of the import task.
+        enum:
+          - Queued
+          - Started
+          - Succeeded
+          - Failed
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: JobStates
+  timestamp:
+    description: A date time as defined by date-time in RFC3339.
+    format: date-time
+    type: string
+  url:
+    format: uri
+    type: string

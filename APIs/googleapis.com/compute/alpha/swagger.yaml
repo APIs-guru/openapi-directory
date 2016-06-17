@@ -101,10 +101,10 @@ tags:
   - name: networks
   - name: projects
   - name: regionAutoscalers
+  - name: regionBackendServices
   - name: regionInstanceGroupManagers
   - name: regionInstanceGroups
   - name: regionOperations
-  - name: regionalBackendServices
   - name: regions
   - name: routers
   - name: routes
@@ -3965,6 +3965,41 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/global/networks/{network}/switchToCustomMode':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Switches the network mode from auto subnet mode to custom subnet mode.
+      operationId: compute.networks.switchToCustomMode
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the network to be updated.
+          in: path
+          name: network
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - networks
   '/{project}/global/networks/{resource}/testIamPermissions':
     parameters:
       - $ref: '#/parameters/alt'
@@ -6439,6 +6474,294 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - regionAutoscalers
+  '/{project}/regions/{region}/backendServices':
+    get:
+      description: Retrieves the list of regional BackendService resources available to the specified project in the given region.
+      operationId: compute.regionBackendServices.list
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region scoping this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+            Compute Engine Beta API Only: When filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          in: query
+          maximum: 500
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BackendServiceList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - regionBackendServices
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a regional BackendService resource in the specified project using the data included in the request. There are several restrictions and guidelines to keep in mind when creating a regional backend service. Read  Restrictions and Guidelines for more information.
+      operationId: compute.regionBackendServices.insert
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region scoping this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BackendService'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - regionBackendServices
+  '/{project}/regions/{region}/backendServices/{backendService}':
+    delete:
+      description: Deletes the specified regional BackendService resource.
+      operationId: compute.regionBackendServices.delete
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region scoping this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the BackendService resource to delete.
+          in: path
+          name: backendService
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - regionBackendServices
+    get:
+      description: Returns the specified regional BackendService resource.
+      operationId: compute.regionBackendServices.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region scoping this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the BackendService resource to return.
+          in: path
+          name: backendService
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BackendService'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - regionBackendServices
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Update the entire content of the regional BackendService resource. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information. This method supports patch semantics.
+      operationId: compute.regionBackendServices.patch
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region scoping this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the BackendService resource to update.
+          in: path
+          name: backendService
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BackendService'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - regionBackendServices
+    put:
+      description: Update the entire content of the regional BackendService resource. There are several restrictions and guidelines to keep in mind when updating a backend service. Read  Restrictions and Guidelines for more information.
+      operationId: compute.regionBackendServices.update
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region scoping this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the BackendService resource to update.
+          in: path
+          name: backendService
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BackendService'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - regionBackendServices
+  '/{project}/regions/{region}/backendServices/{backendService}/getHealth':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Gets the most recent health check results for this regional BackendService.
+      operationId: compute.regionBackendServices.getHealth
+      parameters:
+        - in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region scoping this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the BackendService resource to which the queried instance belongs.
+          in: path
+          name: backendService
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ResourceGroupReference'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BackendServiceGroupHealth'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - regionBackendServices
   '/{project}/regions/{region}/backendServices/{resource}/testIamPermissions':
     parameters:
       - $ref: '#/parameters/alt'
@@ -6450,7 +6773,7 @@ paths:
       - $ref: '#/parameters/userIp'
     post:
       description: Returns permissions that a caller has on the specified resource.
-      operationId: compute.regionalBackendServices.testIamPermissions
+      operationId: compute.regionBackendServices.testIamPermissions
       parameters:
         - description: Project ID for this request.
           in: path
@@ -6484,7 +6807,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
-        - regionalBackendServices
+        - regionBackendServices
   '/{project}/regions/{region}/forwardingRules':
     get:
       description: Retrieves a list of ForwardingRule resources available to the specified project and region.
@@ -8218,6 +8541,94 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - subnetworks
+  '/{project}/regions/{region}/subnetworks/{resource}/getIamPolicy':
+    get:
+      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+      operationId: compute.subnetworks.getIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - subnetworks
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/subnetworks/{resource}/setIamPolicy':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      operationId: compute.subnetworks.setIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Policy'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - subnetworks
   '/{project}/regions/{region}/subnetworks/{resource}/testIamPermissions':
     parameters:
       - $ref: '#/parameters/alt'
@@ -8337,6 +8748,50 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/subnetworks/{subnetwork}/expandIpCidrRange':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Expands the IP CIDR range of the subnetwork to a specified value.
+      operationId: compute.subnetworks.expandIpCidrRange
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region scoping this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the Subnetwork resource to update.
+          in: path
+          name: subnetwork
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SubnetworksExpandIpCidrRangeRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - subnetworks
   '/{project}/regions/{region}/targetPools':
     get:
       description: Retrieves a list of target pools available to the specified project and region.
@@ -12039,6 +12494,50 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - instances
+  '/{project}/zones/{zone}/instances/{instance}/setServiceAccount':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the service account on the instance.
+      operationId: compute.instances.setServiceAccount
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: Name of the instance resource to start.
+          in: path
+          name: instance
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstancesSetServiceAccountRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - instances
   '/{project}/zones/{zone}/instances/{instance}/setTags':
     parameters:
       - $ref: '#/parameters/alt'
@@ -13629,7 +14128,7 @@ definitions:
     description: Contains a list of BackendService resources.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         description: A list of BackendService resources.
@@ -13641,7 +14140,7 @@ definitions:
         description: '[Output Only] Type of resource. Always compute#backendServiceList for lists of backend services.'
         type: string
       nextPageToken:
-        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        description: '[Output Only] A token used to continue a truncated list request.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
@@ -13730,19 +14229,19 @@ definitions:
     description: Represents a customer-supplied encryption key
     properties:
       rawKey:
-        description: 'Specifies a 256-bit customer-supplied encryption key, encoded in base64 to either encrypt or decrypt this resource.'
+        description: 'Specifies a 256-bit customer-supplied encryption key, encoded in RFC 4648 base64 to either encrypt or decrypt this resource.'
         type: string
       rsaEncryptedKey:
         description: |-
-          Specifies a base64 encoded, RSA-wrapped 2048-bit customer-supplied encryption key to either encrypt or decrypt this resource.
+          Specifies an RFC 4648 base64 encoded, RSA-wrapped 2048-bit customer-supplied encryption key to either encrypt or decrypt this resource.
 
           The key must meet the following requirements before you can provide it to Compute Engine:  
           - The key is wrapped using a RSA public key certificate provided by Google. 
-          - After being wrapped, the key must be encoded in base64 encoding.  Get the RSA public key certificate provided by Google at:
+          - After being wrapped, the key must be encoded in RFC 4648 base64 encoding.  Get the RSA public key certificate provided by Google at:
           https://cloud-certs.storage.googleapis.com/google-cloud-csek-ingress.pem
         type: string
       sha256:
-        description: '[Output only] The base64 encoded SHA-256 hash of the customer-supplied encryption key that protects this resource.'
+        description: '[Output only] The RFC 4648 base64 encoded SHA-256 hash of the customer-supplied encryption key that protects this resource.'
         type: string
     type: object
   CustomerEncryptionKeyProtectedDisk:
@@ -14463,6 +14962,12 @@ definitions:
       portName:
         description: 'Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence.'
         type: string
+      proxyHeader:
+        description: 'Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.'
+        enum:
+          - NONE
+          - PROXY_V1
+        type: string
       requestPath:
         description: The request path of the HTTP/2 health check request. The default value is /.
         type: string
@@ -14479,6 +14984,12 @@ definitions:
       portName:
         description: 'Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence.'
         type: string
+      proxyHeader:
+        description: 'Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.'
+        enum:
+          - NONE
+          - PROXY_V1
+        type: string
       requestPath:
         description: The request path of the HTTP health check request. The default value is /.
         type: string
@@ -14494,6 +15005,12 @@ definitions:
         type: integer
       portName:
         description: 'Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence.'
+        type: string
+      proxyHeader:
+        description: 'Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.'
+        enum:
+          - NONE
+          - PROXY_V1
         type: string
       requestPath:
         description: The request path of the HTTPS health check request. The default value is /.
@@ -14826,7 +15343,7 @@ definitions:
         description: Labels to apply to this image. These can be later modified by the setLabels method. Each label key/value pair must comply with RFC1035. Label values may be empty.
         type: object
       licenses:
-        description: Any applicable publicly visible licenses.
+        description: Any applicable license URI.
         items:
           type: string
         type: array
@@ -15133,6 +15650,7 @@ definitions:
         type: string
     type: object
   InstanceGroupManager:
+    description: An Instance Template Manager resource.
     properties:
       autoHealingPolicies:
         description: The autohealing policy for this managed instance group. You can specify only one value.
@@ -15806,6 +16324,17 @@ definitions:
       machineType:
         description: 'Full or partial URL of the machine type resource. See Machine Types for a full list of machine types. For example: zones/us-central1-f/machineTypes/n1-standard-1'
         type: string
+    type: object
+  InstancesSetServiceAccountRequest:
+    properties:
+      email:
+        description: Email address of the service account.
+        type: string
+      scopes:
+        description: The list of scopes to be made available for this service account.
+        items:
+          type: string
+        type: array
     type: object
   InstancesStartWithEncryptionKeyRequest:
     properties:
@@ -16595,6 +17124,7 @@ definitions:
           - IN_USE_ADDRESSES
           - LOCAL_SSD_TOTAL_GB
           - NETWORKS
+          - PREEMPTIBLE_CPUS
           - REGIONAL_AUTOSCALERS
           - REGIONAL_INSTANCE_GROUP_MANAGERS
           - ROUTERS
@@ -17285,6 +17815,12 @@ definitions:
       portName:
         description: 'Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence.'
         type: string
+      proxyHeader:
+        description: 'Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.'
+        enum:
+          - NONE
+          - PROXY_V1
+        type: string
       request:
         description: 'The application data to send once the SSL connection has been established (default value is empty). If both request and response are empty, the connection establishment alone will indicate health. The request data can only be ASCII.'
         type: string
@@ -17582,6 +18118,11 @@ definitions:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
+  SubnetworksExpandIpCidrRangeRequest:
+    properties:
+      ipCidrRange:
+        type: string
+    type: object
   SubnetworksScopedList:
     properties:
       subnetworks:
@@ -17638,6 +18179,12 @@ definitions:
         type: integer
       portName:
         description: 'Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence.'
+        type: string
+      proxyHeader:
+        description: 'Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.'
+        enum:
+          - NONE
+          - PROXY_V1
         type: string
       request:
         description: 'The application data to send once the TCP connection has been established (default value is empty). If both request and response are empty, the connection establishment alone will indicate health. The request data can only be ASCII.'

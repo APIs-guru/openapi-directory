@@ -87,6 +87,7 @@ tags:
   - name: globalAddresses
   - name: globalForwardingRules
   - name: globalOperations
+  - name: healthChecks
   - name: httpHealthChecks
   - name: httpsHealthChecks
   - name: images
@@ -109,6 +110,7 @@ tags:
   - name: targetHttpsProxies
   - name: targetInstances
   - name: targetPools
+  - name: targetSslProxies
   - name: targetVpnGateways
   - name: urlMaps
   - name: vpnTunnels
@@ -2162,6 +2164,260 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - globalForwardingRules
+  '/{project}/global/healthChecks':
+    get:
+      description: Retrieves the list of HealthCheck resources available to the specified project.
+      operationId: compute.healthChecks.list
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+            Compute Engine Beta API Only: When filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          in: query
+          maximum: 500
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/HealthCheckList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - healthChecks
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a HealthCheck resource in the specified project using the data included in the request.
+      operationId: compute.healthChecks.insert
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/HealthCheck'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - healthChecks
+  '/{project}/global/healthChecks/{healthCheck}':
+    delete:
+      description: Deletes the specified HealthCheck resource.
+      operationId: compute.healthChecks.delete
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the HealthCheck resource to delete.
+          in: path
+          name: healthCheck
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - healthChecks
+    get:
+      description: Returns the specified HealthCheck resource. Get a list of available health checks by making a list() request.
+      operationId: compute.healthChecks.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the HealthCheck resource to return.
+          in: path
+          name: healthCheck
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/HealthCheck'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - healthChecks
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates a HealthCheck resource in the specified project using the data included in the request. This method supports patch semantics.
+      operationId: compute.healthChecks.patch
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the HealthCheck resource to update.
+          in: path
+          name: healthCheck
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/HealthCheck'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - healthChecks
+    put:
+      description: Updates a HealthCheck resource in the specified project using the data included in the request.
+      operationId: compute.healthChecks.update
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the HealthCheck resource to update.
+          in: path
+          name: healthCheck
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/HealthCheck'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - healthChecks
+  '/{project}/global/healthChecks/{resource}/testIamPermissions':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.healthChecks.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - healthChecks
   '/{project}/global/httpHealthChecks':
     get:
       description: Retrieves the list of HttpHealthCheck resources available to the specified project.
@@ -4526,6 +4782,317 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/global/targetSslProxies':
+    get:
+      description: Retrieves the list of TargetSslProxy resources available to the specified project.
+      operationId: compute.targetSslProxies.list
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: field_name comparison_string literal_string.
+
+            The field_name is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The comparison_string must be either eq (equals) or ne (not equals). The literal_string is the string value to filter to. The literal value must be valid for the type of field you are filtering by (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.
+
+            For example, to filter for instances that do not have a name of example-instance, you would use filter=name ne example-instance.
+
+            Compute Engine Beta API Only: When filtering in the Beta API, you can also filter on nested fields. For example, you could filter on instances that have set the scheduling.automaticRestart field to true. Use filtering on nested fields to take advantage of labels to organize and search for results based on label values.
+
+            The Beta API also supports filtering on multiple expressions by providing each separate expression within parentheses. For example, (scheduling.automaticRestart eq true) (zone eq us-central1-f). Multiple expressions are treated as AND expressions, meaning that resources must match all expressions to pass the filters.
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests.'
+          in: query
+          maximum: 500
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TargetSslProxyList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - targetSslProxies
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a TargetSslProxy resource in the specified project using the data included in the request.
+      operationId: compute.targetSslProxies.insert
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TargetSslProxy'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - targetSslProxies
+  '/{project}/global/targetSslProxies/{resource}/testIamPermissions':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.targetSslProxies.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - targetSslProxies
+  '/{project}/global/targetSslProxies/{targetSslProxy}':
+    delete:
+      description: Deletes the specified TargetSslProxy resource.
+      operationId: compute.targetSslProxies.delete
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the TargetSslProxy resource to delete.
+          in: path
+          name: targetSslProxy
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - targetSslProxies
+    get:
+      description: Returns the specified TargetSslProxy resource. Get a list of available target SSL proxies by making a list() request.
+      operationId: compute.targetSslProxies.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the TargetSslProxy resource to return.
+          in: path
+          name: targetSslProxy
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TargetSslProxy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - targetSslProxies
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/global/targetSslProxies/{targetSslProxy}/setBackendService':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Changes the BackendService for TargetSslProxy.
+      operationId: compute.targetSslProxies.setBackendService
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the TargetSslProxy resource whose BackendService resource is to be set.
+          in: path
+          name: targetSslProxy
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TargetSslProxiesSetBackendServiceRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - targetSslProxies
+  '/{project}/global/targetSslProxies/{targetSslProxy}/setProxyHeader':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Changes the ProxyHeaderType for TargetSslProxy.
+      operationId: compute.targetSslProxies.setProxyHeader
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the TargetSslProxy resource whose ProxyHeader is to be set.
+          in: path
+          name: targetSslProxy
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TargetSslProxiesSetProxyHeaderRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - targetSslProxies
+  '/{project}/global/targetSslProxies/{targetSslProxy}/setSslCertificates':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Changes SslCertificates for TargetSslProxy.
+      operationId: compute.targetSslProxies.setSslCertificates
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the TargetSslProxy resource whose SslCertificate resource is to be set.
+          in: path
+          name: targetSslProxy
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TargetSslProxiesSetSslCertificatesRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - targetSslProxies
   '/{project}/global/urlMaps':
     get:
       description: Retrieves the list of UrlMap resources available to the specified project.
@@ -11078,6 +11645,7 @@ definitions:
       balancingMode:
         description: 'Specifies the balancing mode for this backend. For global HTTP(S) load balancing, the default is UTILIZATION. Valid values are UTILIZATION and RATE.'
         enum:
+          - CONNECTION
           - RATE
           - UTILIZATION
         type: string
@@ -11094,6 +11662,14 @@ definitions:
 
           Note that you must specify an Instance Group resource using the fully-qualified URL, rather than a partial URL.
         type: string
+      maxConnections:
+        description: 'The max number of simultaneous connections for the group. Can be used with either CONNECTION or UTILIZATION balancing modes. For CONNECTION mode, either maxConnections or maxConnectionsPerInstance must be set.'
+        format: int32
+        type: integer
+      maxConnectionsPerInstance:
+        description: 'The max number of simultaneous connections that a single backend instance can handle. This is used to calculate the capacity of the group. Can be used in either CONNECTION or UTILIZATION balancing modes. For CONNECTION mode, either maxConnections or maxConnectionsPerInstance must be set.'
+        format: int32
+        type: integer
       maxRate:
         description: 'The max requests per second (RPS) of the group. Can be used with either RATE or UTILIZATION balancing modes, but required if RATE mode. For RATE mode, either maxRate or maxRatePerInstance must be set.'
         format: int32
@@ -11119,6 +11695,8 @@ definitions:
         items:
           $ref: '#/definitions/Backend'
         type: array
+      connectionDraining:
+        $ref: '#/definitions/ConnectionDraining'
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
@@ -11164,6 +11742,8 @@ definitions:
         enum:
           - HTTP
           - HTTPS
+          - SSL
+          - TCP
         type: string
       region:
         description: '[Output Only] URL of the region where the regional backend service resides. This field is not applicable to global backend services.'
@@ -11199,7 +11779,7 @@ definitions:
     description: Contains a list of BackendService resources.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         description: A list of BackendService resources.
@@ -11211,7 +11791,7 @@ definitions:
         description: '[Output Only] Type of resource. Always compute#backendServiceList for lists of backend services.'
         type: string
       nextPageToken:
-        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        description: '[Output Only] A token used to continue a truncated list request.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
@@ -11222,23 +11802,31 @@ definitions:
       path:
         type: string
     type: object
+  ConnectionDraining:
+    description: Message containing connection draining configuration.
+    properties:
+      drainingTimeoutSec:
+        description: 'Time for which instance will be drained (not accept new connections, but still work to finish started).'
+        format: int32
+        type: integer
+    type: object
   CustomerEncryptionKey:
     description: Represents a customer-supplied encryption key
     properties:
       rawKey:
-        description: 'Specifies a 256-bit customer-supplied encryption key, encoded in base64 to either encrypt or decrypt this resource.'
+        description: 'Specifies a 256-bit customer-supplied encryption key, encoded in RFC 4648 base64 to either encrypt or decrypt this resource.'
         type: string
       rsaEncryptedKey:
         description: |-
-          Specifies a base64 encoded, RSA-wrapped 2048-bit customer-supplied encryption key to either encrypt or decrypt this resource.
+          Specifies an RFC 4648 base64 encoded, RSA-wrapped 2048-bit customer-supplied encryption key to either encrypt or decrypt this resource.
 
           The key must meet the following requirements before you can provide it to Compute Engine:  
           - The key is wrapped using a RSA public key certificate provided by Google. 
-          - After being wrapped, the key must be encoded in base64 encoding.  Get the RSA public key certificate provided by Google at:
+          - After being wrapped, the key must be encoded in RFC 4648 base64 encoding.  Get the RSA public key certificate provided by Google at:
           https://cloud-certs.storage.googleapis.com/google-cloud-csek-ingress.pem
         type: string
       sha256:
-        description: '[Output only] The base64 encoded SHA-256 hash of the customer-supplied encryption key that protects this resource.'
+        description: '[Output only] The RFC 4648 base64 encoded SHA-256 hash of the customer-supplied encryption key that protects this resource.'
         type: string
     type: object
   CustomerEncryptionKeyProtectedDisk:
@@ -11897,6 +12485,155 @@ definitions:
         description: 'A list of labels to apply for this resource. Each label key & value must comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash. For example, "webserver-frontend": "images". A label value can also be empty (e.g. "my-label": "").'
         type: object
     type: object
+  HTTP2HealthCheck:
+    properties:
+      host:
+        description: 'The value of the host header in the HTTP/2 health check request. If left empty (default value), the IP on behalf of which this health check is performed will be used.'
+        type: string
+      port:
+        description: The TCP port number for the health check request. The default value is 443.
+        format: int32
+        type: integer
+      portName:
+        description: 'Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence.'
+        type: string
+      proxyHeader:
+        description: 'Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.'
+        enum:
+          - NONE
+          - PROXY_V1
+        type: string
+      requestPath:
+        description: The request path of the HTTP/2 health check request. The default value is /.
+        type: string
+    type: object
+  HTTPHealthCheck:
+    properties:
+      host:
+        description: 'The value of the host header in the HTTP health check request. If left empty (default value), the IP on behalf of which this health check is performed will be used.'
+        type: string
+      port:
+        description: The TCP port number for the health check request. The default value is 80.
+        format: int32
+        type: integer
+      portName:
+        description: 'Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence.'
+        type: string
+      proxyHeader:
+        description: 'Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.'
+        enum:
+          - NONE
+          - PROXY_V1
+        type: string
+      requestPath:
+        description: The request path of the HTTP health check request. The default value is /.
+        type: string
+    type: object
+  HTTPSHealthCheck:
+    properties:
+      host:
+        description: 'The value of the host header in the HTTPS health check request. If left empty (default value), the IP on behalf of which this health check is performed will be used.'
+        type: string
+      port:
+        description: The TCP port number for the health check request. The default value is 443.
+        format: int32
+        type: integer
+      portName:
+        description: 'Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence.'
+        type: string
+      proxyHeader:
+        description: 'Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.'
+        enum:
+          - NONE
+          - PROXY_V1
+        type: string
+      requestPath:
+        description: The request path of the HTTPS health check request. The default value is /.
+        type: string
+    type: object
+  HealthCheck:
+    description: 'An HealthCheck resource. This resource defines a template for how individual virtual machines should be checked for health, via one of the supported protocols.'
+    properties:
+      checkIntervalSec:
+        description: How often (in seconds) to send a health check. The default value is 5 seconds.
+        format: int32
+        type: integer
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in 3339 text format.'
+        type: string
+      description:
+        description: An optional description of this resource. Provide this property when you create the resource.
+        type: string
+      healthyThreshold:
+        description: A so-far unhealthy instance will be marked healthy after this many consecutive successes. The default value is 2.
+        format: int32
+        type: integer
+      http2HealthCheck:
+        $ref: '#/definitions/HTTP2HealthCheck'
+      httpHealthCheck:
+        $ref: '#/definitions/HTTPHealthCheck'
+      httpsHealthCheck:
+        $ref: '#/definitions/HTTPSHealthCheck'
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        format: uint64
+        type: string
+      kind:
+        default: 'compute#healthCheck'
+        description: Type of the resource.
+        type: string
+      name:
+        description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      sslHealthCheck:
+        $ref: '#/definitions/SSLHealthCheck'
+      tcpHealthCheck:
+        $ref: '#/definitions/TCPHealthCheck'
+      timeoutSec:
+        description: How long (in seconds) to wait before claiming failure. The default value is 5 seconds. It is invalid for timeoutSec to have greater value than checkIntervalSec.
+        format: int32
+        type: integer
+      type:
+        description: 'Specifies the type of the healthCheck, either TCP, SSL, HTTP, HTTPS or HTTP2. If not specified, the default is TCP. Exactly one of the protocol-specific health check field must be specified, which must match type field.'
+        enum:
+          - HTTP
+          - HTTP2
+          - HTTPS
+          - INVALID
+          - SSL
+          - TCP
+        type: string
+      unhealthyThreshold:
+        description: A so-far healthy instance will be marked unhealthy after this many consecutive failures. The default value is 2.
+        format: int32
+        type: integer
+    type: object
+  HealthCheckList:
+    description: Contains a list of HealthCheck resources.
+    properties:
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        type: string
+      items:
+        description: A list of HealthCheck resources.
+        items:
+          $ref: '#/definitions/HealthCheck'
+        type: array
+      kind:
+        default: 'compute#healthCheckList'
+        description: Type of resource.
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+    type: object
   HealthCheckReference:
     description: |-
       A full or valid partial URL to a health check. For example, the following are valid URLs:  
@@ -12141,7 +12878,7 @@ definitions:
         description: Labels to apply to this image. These can be later modified by the setLabels method. Each label key/value pair must comply with RFC1035. Label values may be empty.
         type: object
       licenses:
-        description: Any applicable publicly visible licenses.
+        description: Any applicable license URI.
         items:
           type: string
         type: array
@@ -12433,6 +13170,7 @@ definitions:
         type: string
     type: object
   InstanceGroupManager:
+    description: An Instance Template Manager resource.
     properties:
       autoHealingPolicies:
         description: The autohealing policy for this managed instance group. You can specify only one value.
@@ -14203,6 +14941,28 @@ definitions:
             type: string
         type: object
     type: object
+  SSLHealthCheck:
+    properties:
+      port:
+        description: The TCP port number for the health check request. The default value is 443.
+        format: int32
+        type: integer
+      portName:
+        description: 'Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence.'
+        type: string
+      proxyHeader:
+        description: 'Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.'
+        enum:
+          - NONE
+          - PROXY_V1
+        type: string
+      request:
+        description: 'The application data to send once the SSL connection has been established (default value is empty). If both request and response are empty, the connection establishment alone will indicate health. The request data can only be ASCII.'
+        type: string
+      response:
+        description: 'The bytes to match against the beginning of the response data. If left empty (the default value), any response will indicate health. The response data can only be ASCII.'
+        type: string
+    type: object
   Scheduling:
     description: Sets the scheduling options for an Instance.
     properties:
@@ -14540,6 +15300,28 @@ definitions:
             description: '[Output Only] A human-readable description of the warning code.'
             type: string
         type: object
+    type: object
+  TCPHealthCheck:
+    properties:
+      port:
+        description: The TCP port number for the health check request. The default value is 80.
+        format: int32
+        type: integer
+      portName:
+        description: 'Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence.'
+        type: string
+      proxyHeader:
+        description: 'Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.'
+        enum:
+          - NONE
+          - PROXY_V1
+        type: string
+      request:
+        description: 'The application data to send once the TCP connection has been established (default value is empty). If both request and response are empty, the connection establishment alone will indicate health. The request data can only be ASCII.'
+        type: string
+      response:
+        description: 'The bytes to match against the beginning of the response data. If left empty (the default value), any response will indicate health. The response data can only be ASCII.'
+        type: string
     type: object
   Tags:
     description: A set of instance tags.
@@ -15019,6 +15801,90 @@ definitions:
   TargetReference:
     properties:
       target:
+        type: string
+    type: object
+  TargetSslProxiesSetBackendServiceRequest:
+    properties:
+      service:
+        description: The URL of the new BackendService resource for the targetSslProxy.
+        type: string
+    type: object
+  TargetSslProxiesSetProxyHeaderRequest:
+    properties:
+      proxyHeader:
+        description: The new type of proxy header to append before sending data to the backend. NONE or PROXY_V1 are allowed.
+        enum:
+          - NONE
+          - PROXY_V1
+        type: string
+    type: object
+  TargetSslProxiesSetSslCertificatesRequest:
+    properties:
+      sslCertificates:
+        description: New set of URLs to SslCertificate resources to associate with this TargetSslProxy. Currently exactly one ssl certificate must be specified.
+        items:
+          type: string
+        type: array
+    type: object
+  TargetSslProxy:
+    description: A TargetSslProxy resource. This resource defines an SSL proxy.
+    properties:
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      description:
+        description: An optional description of this resource. Provide this property when you create the resource.
+        type: string
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        format: uint64
+        type: string
+      kind:
+        default: 'compute#targetSslProxy'
+        description: '[Output Only] Type of the resource. Always compute#targetSslProxy for target SSL proxies.'
+        type: string
+      name:
+        description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      proxyHeader:
+        description: 'Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.'
+        enum:
+          - NONE
+          - PROXY_V1
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      service:
+        description: URL to the BackendService resource.
+        type: string
+      sslCertificates:
+        description: URLs to SslCertificate resources that are used to authenticate connections to Backends. Currently exactly one SSL certificate must be specified.
+        items:
+          type: string
+        type: array
+    type: object
+  TargetSslProxyList:
+    description: Contains a list of TargetSslProxy resources.
+    properties:
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        type: string
+      items:
+        description: A list of TargetSslProxy resources.
+        items:
+          $ref: '#/definitions/TargetSslProxy'
+        type: array
+      kind:
+        default: 'compute#targetSslProxyList'
+        description: Type of resource.
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
         type: string
     type: object
   TargetVpnGateway:

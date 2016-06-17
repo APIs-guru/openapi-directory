@@ -2168,6 +2168,14 @@ definitions:
       costRuleTree:
         $ref: '#/definitions/AccountShippingShippingServiceCostRule'
         description: Decision tree for "complicated" shipping cost calculation.
+      maxDaysInTransit:
+        description: The maximum number of days in transit. Must be a value between 0 and 250 included. A value of 0 means same day delivery.
+        format: uint64
+        type: string
+      minDaysInTransit:
+        description: The minimum number of days in transit. Must be a value between 0 and maxDaysIntransit included. A value of 0 means same day delivery.
+        format: uint64
+        type: string
       name:
         description: The name of this shipping service.
         type: string

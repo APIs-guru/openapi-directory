@@ -48,6 +48,13 @@ parameters:
     name: organizerKey
     required: true
     type: integer
+  panelistKey:
+    description: The key of the webinar panelist
+    format: int64
+    in: path
+    name: panelistKey
+    required: true
+    type: integer
   registrantKey:
     description: The key of the registrant
     format: int64
@@ -74,6 +81,8 @@ tags:
     name: Webinars
   - description: Operations available for co-organizers of a given webinar.
     name: Co-organizers
+  - description: Operations available for panelists of a given webinar.
+    name: Panelists
   - description: Operations available for registrants of a given webinar.
     name: Registrants
   - description: Operations available for sessions of a given webinar.
@@ -133,6 +142,11 @@ paths:
           name: toTime
           required: true
           type: string
+        - description: 'Optional comma-delimited list to request additional information for each webinar session in the response. The supported values are: audio, attendees, attendeepolls, attendeesurveys, attendeequestions, attendeeinterestrating, panelists, webinar. The format is &include=audio,attendees,panelists'
+          in: query
+          name: includes
+          required: false
+          type: string
       responses:
         '200':
           description: OK
@@ -190,7 +204,7 @@ paths:
       tags:
         - Webinars
     post:
-      description: 'Creates a single session webinar. The call requires a webinar subject and description, and a start and end time. The response provides a numeric webinarKey in string format for the new webinar. Once a webinar has been created with this method, you can accept registrations.'
+      description: 'Creates a single session webinar, a sequence of webinars or a series of webinars depending on the type field in the body: "single_session" creates a single webinar session, "sequence" creates a webinar with multiple meeting times where attendees are expected to be the same for all sessions, and "series" creates a webinar with multiple meetings times where attendees choose only one to attend. The default, if no type is declared, is single_session. A sequence webinar requires a "recurrenceStart" array consisting of a "startTime" and "endTime" for the first of the sequence, a "recurrencePattern" of "daily", "weekly", "monthly", and a "recurrenceEnd" which is the last date of the sequence (for example, 2016-12-01). A series webinar requires a "times" array with a discreet "startTime" and "endTime" for each webinar in the series. The call requires a webinar subject and description. The "isPasswordProtected" sets whether the webinar requires a password for attendees to join. If set to True, the organizer must go to Registration Settings at My Webinars (https://global.gotowebinar.com/webinars.tmpl) and add the password to the webinar, and send the password to the registrants. The response provides a numeric webinarKey in string format for the new webinar. Once a webinar has been created with this method, you can accept registrations.'
       operationId: createWebinar
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -215,7 +229,7 @@ paths:
         - Webinars
   '/organizers/{organizerKey}/webinars/{webinarKey}':
     delete:
-      description: 'Cancels a specific webinar. By default, cancellation notice emails to registrants will not be sent. To have the cancellation notice emails sent to registrants (as if the webinar was cancelled through the G2W website), include the parameter sendCancellationEmails=true in the request parameters. When the cancellation emails are sent, the default generated message is used in the cancellation email body'
+      description: 'Cancels a specific webinar. If the webinar is a series or sequence, this call deletes all scheduled sessions. To send cancellation emails to registrants set sendCancellationEmails=true in the request. When the cancellation emails are sent, the default generated message is used in the cancellation email body.'
       operationId: cancelWebinar
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -262,7 +276,7 @@ paths:
       tags:
         - Webinars
     put:
-      description: Updates a webinar. The call requires at least one of the parameters in the request body.
+      description: 'Updates a webinar. The call requires at least one of the parameters in the request body. The request completely replaces the existing session, series, or sequence and so must include the full definition of each as for the Create call. Set notifyParticipants=true to send update emails to registrants.'
       operationId: updateWebinar
       parameters:
         - $ref: '#/parameters/Authorization'
@@ -519,7 +533,7 @@ paths:
           description: Not found
       summary: Get webinar panelists
       tags:
-        - Webinars
+        - Panelists
     post:
       description: Create panelists for a specified webinar
       operationId: createPanelists
@@ -550,7 +564,49 @@ paths:
           description: Not Found
       summary: Create Panelists
       tags:
-        - Webinars
+        - Panelists
+  '/organizers/{organizerKey}/webinars/{webinarKey}/panelists/{panelistKey}':
+    delete:
+      description: Removes a webinar panelist.
+      operationId: deleteWebinarPanelist
+      parameters:
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
+        - $ref: '#/parameters/panelistKey'
+      responses:
+        '204':
+          description: No content
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Delete webinar panelist
+      tags:
+        - Panelists
+  '/organizers/{organizerKey}/webinars/{webinarKey}/panelists/{panelistKey}/resendInvitation':
+    post:
+      description: Resend the panelist invitation email.
+      operationId: resendPanelistInvitation
+      parameters:
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/organizerKey'
+        - $ref: '#/parameters/webinarKey'
+        - $ref: '#/parameters/panelistKey'
+      responses:
+        '204':
+          description: Created
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Resend panelist invitation
+      tags:
+        - Panelists
   '/organizers/{organizerKey}/webinars/{webinarKey}/performance':
     get:
       description: Gets performance details for all sessions of a specific webinar.
@@ -634,6 +690,8 @@ paths:
           description: Forbidden
         '404':
           description: Not found
+        '409':
+          description: The user is already registered
       summary: Create registrant
       tags:
         - Registrants
@@ -1329,20 +1387,12 @@ definitions:
       email:
         description: The panelist's email address
         type: string
-      joinLink:
-        description: The co-organizer's join link
-        type: string
       name:
         description: The panelist's name
-        type: string
-      panelistKey:
-        description: The panelist's key
         type: string
     required:
       - email
       - name
-      - joinLink
-      - panelistKey
   Poll:
     description: A poll or survey launched by an organizer during or after a webinar session; includes the responses given to it by the attendees.
     properties:
@@ -2066,6 +2116,10 @@ definitions:
       description:
         description: A short description of the webinar (2048 characters maximum)
         type: string
+      isPasswordProtected:
+        default: false
+        description: A boolean flag indicating if the webinar is password protected or not.
+        type: boolean
       subject:
         description: The name/subject of the webinar (128 characters maximum)
         type: string
@@ -2077,6 +2131,10 @@ definitions:
         items:
           $ref: '#/definitions/DateTimeRange'
         type: array
+      type:
+        default: single_session
+        description: 'Specifies the webinar type. The default type value is "single_session", which is used to create a single webinar session. The possible values are "single_session", "series", "sequence". If type is set to "single_session", a single webinar session is created. If type is set to "series", a webinar series is created. In this case 2 or severals timeframes must be specified in the body. Example: "times": [{"startTime": "...", "endTime": "..."},{"startTime": "...", "endTime": "..."},{"startTime": "...", "endTime": "..."}. If type is set to "sequence" a sequence of webinars is created. The times object in the body must be replaced by the "recurrenceStart" object. Example: "recurrenceStart": {"startTime":"2012-06-12T16:00:00Z", "endTime": "2012-06-12T17:00:00Z" }.  The "recurrenceEnd" and "recurrencePattern" body parameter must be specified. Example: , "recurrenceEnd": "2012-07-10", "recurrencePattern": "daily".'
+        type: string
     required:
       - subject
       - times

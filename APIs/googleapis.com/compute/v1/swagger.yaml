@@ -9200,7 +9200,7 @@ definitions:
     description: Contains a list of BackendService resources.
     properties:
       id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
         type: string
       items:
         description: A list of BackendService resources.
@@ -9212,7 +9212,7 @@ definitions:
         description: '[Output Only] Type of resource. Always compute#backendServiceList for lists of backend services.'
         type: string
       nextPageToken:
-        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        description: '[Output Only] A token used to continue a truncated list request.'
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
@@ -9222,10 +9222,10 @@ definitions:
     description: Represents a customer-supplied encryption key
     properties:
       rawKey:
-        description: 'Specifies a 256-bit customer-supplied encryption key, encoded in base64 to either encrypt or decrypt this resource.'
+        description: 'Specifies a 256-bit customer-supplied encryption key, encoded in RFC 4648 base64 to either encrypt or decrypt this resource.'
         type: string
       sha256:
-        description: '[Output only] The base64 encoded SHA-256 hash of the customer-supplied encryption key that protects this resource.'
+        description: '[Output only] The RFC 4648 base64 encoded SHA-256 hash of the customer-supplied encryption key that protects this resource.'
         type: string
     type: object
   CustomerEncryptionKeyProtectedDisk:
@@ -10086,7 +10086,7 @@ definitions:
         description: '[Output Only] Type of the resource. Always compute#image for images.'
         type: string
       licenses:
-        description: Any applicable publicly visible licenses.
+        description: Any applicable license URI.
         items:
           type: string
         type: array
@@ -10366,6 +10366,7 @@ definitions:
         type: string
     type: object
   InstanceGroupManager:
+    description: An Instance Template Manager resource.
     properties:
       baseInstanceName:
         description: The base instance name to use for instances in this group. The value must be 1-58 characters long. Instances are named by appending a hyphen and a random four-character string to the base instance name. The base instance name must comply with RFC1035.

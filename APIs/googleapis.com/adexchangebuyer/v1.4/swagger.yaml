@@ -1469,6 +1469,31 @@ definitions:
         description: Shows any corrections that were applied to this creative. Read-only. This field should not be set in requests.
         items:
           properties:
+            contexts:
+              description: All known serving contexts containing serving status information.
+              items:
+                properties:
+                  auctionType:
+                    description: Only set when contextType=AUCTION_TYPE. Represents the auction types this correction applies to.
+                    items:
+                      type: string
+                    type: array
+                  contextType:
+                    description: 'The type of context (e.g., location, platform, auction type, SSL-ness).'
+                    type: string
+                  geoCriteriaId:
+                    description: Only set when contextType=LOCATION. Represents the geo criterias this correction applies to.
+                    items:
+                      format: int32
+                      type: integer
+                    type: array
+                  platform:
+                    description: Only set when contextType=PLATFORM. Represents the platforms this correction applies to.
+                    items:
+                      type: string
+                    type: array
+                type: object
+              type: array
             details:
               description: Additional details about the correction.
               items:
@@ -1516,6 +1541,11 @@ definitions:
         default: 'adexchangebuyer#creative'
         description: Resource type.
         type: string
+      languages:
+        description: Detected languages for this creative. Read-only. This field should not be set in requests.
+        items:
+          type: string
+        type: array
       nativeAd:
         description: 'If nativeAd is set, HTMLSnippet and videoURL should not be set.'
         properties:
@@ -1758,6 +1788,10 @@ definitions:
         description: The timestamp (in ms since epoch) when the original reservation price for the deal was first converted to DFP currency. This is used to convert the contracted price into advertiser's currency without discrepancy.
         format: int64
         type: string
+      dfpLineItemId:
+        description: 'The DFP line item id associated with this deal. For features like CPD, buyers can retrieve the DFP line item for billing reconciliation.'
+        format: int64
+        type: string
       originalContractedQuantity:
         description: 'The original contracted quantity (# impressions) for this deal. To ensure delivery, sometimes publisher will book the deal with a impression buffer, however clients are billed using the original contracted quantity.'
         format: int64
@@ -1852,8 +1886,12 @@ definitions:
         format: int32
         type: integer
       name:
-        description: Name of the dimension mainly for debugging purposes.
+        description: 'Name of the dimension mainly for debugging purposes, except for the case of CREATIVE_SIZE. For CREATIVE_SIZE, strings are used instead of ids.'
         type: string
+      percentage:
+        description: 'Percent of total impressions for a dimension type. e.g. {dimension_type: ''GENDER'', [{dimension_value: {id: 1, name: ''MALE'', percentage: 60}}]} Gender MALE is 60% of all impressions which have gender.'
+        format: int32
+        type: integer
     type: object
   EditAllOrderDealsRequest:
     properties:
@@ -2693,6 +2731,9 @@ definitions:
       size:
         $ref: '#/definitions/TargetingValueSize'
         description: 'For regular or video creative size type, specifies the size of the creative.'
+      skippableAdType:
+        description: The skippable ad type for video size.
+        type: string
     type: object
   TargetingValueDayPartTargeting:
     properties:

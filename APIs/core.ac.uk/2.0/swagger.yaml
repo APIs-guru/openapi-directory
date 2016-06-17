@@ -4,7 +4,7 @@ schemes:
 host: core.ac.uk
 basePath: /api-v2
 info:
-  description: |
+  description: |-
     <p style="text-align: justify;">This is a documentation for CORE API v2.0. You can use the API to access the 
         resources harvested and enriched by CORE. If you encounter any problems with the API, please report them to us.</p>
 
@@ -28,14 +28,14 @@ info:
         The query can be a simple string or it can be built using terms and operators described in Elasticsearch
         <a href="http://www.elastic.co/guide/en/elasticsearch/reference/1.4/query-dsl-query-string-query.html#query-string-syntax">documentation</a>.
         The usable field names are <strong>title</strong>, <strong>description</strong>, <strong>fullText</strong>, 
-        <strong>authorsString</strong>, <strong>publisher</strong>, <strong>repositoryIds</strong>, <strong>doi</strong>,
-        <strong>identifiers</strong> (which is a list of article identifiers including OAI, URL, etc.), <strong>language.name</strong> 
+        <strong>authorsString</strong>, <strong>publisher</strong>, <strong>repositories.id</strong>, <strong>repositories.name</strong>, 
+        <strong>doi</strong>, <strong>oai</strong>, <strong>identifiers</strong> (which is a list of article identifiers including OAI, URL, etc.), <strong>language.name</strong> 
         and <strong>year</strong>. Some example queries:
     </p>
 
     <ul style="margin-left: 30px;">
         <li><p>title:psychology and language.name:English</p></li>
-        <li><p>repositoryIds:86 AND year:2014</p></li>
+        <li><p>repositories.id:86 AND year:2014</p></li>
         <li><p>identifiers:"oai:aura.abdn.ac.uk:2164/3837" OR identifiers:"oai:aura.abdn.ac.uk:2164/3843"</p></li>
         <li><p>doi:"10.1186/1471-2458-6-309"</p></li>
     </ul>
@@ -48,10 +48,10 @@ info:
     <h2>Parameters</h2>
     <p style="text-align: justify;">The API methods allow different parameters to be passed. Additionally, there is an API key parameter which is common to all API methods. For all API methods 
         the API key can be provided either as a query parameter or in the request header. If the API key 
-        is not provided, the API will return HTTP 401 error. You can register for an API key <a href="/intro/api">here</a>.</p>
+        is not provided, the API will return HTTP 401 error. You can register for an API key <a href="/services#api">here</a>.</p>
 
     <h2>API methods</h2>
-  title: CORE API v2 (beta)
+  title: CORE API v2
   version: '2.0'
   x-logo:
     url: 'http://core.ac.uk/images/CORE-logo-sm.png'

@@ -746,30 +746,30 @@ definitions:
             properties:
               attachments:
                 items:
-                  - properties:
-                      fallback:
-                        type: string
-                      from_url:
-                        type: string
-                      id:
-                        type: number
-                      image_bytes:
-                        type: number
-                      image_height:
-                        type: number
-                      image_url:
-                        type: string
-                      image_width:
-                        type: number
-                      service_name:
-                        type: string
-                      text:
-                        type: string
-                      title:
-                        type: string
-                      title_link:
-                        type: string
-                    type: object
+                  properties:
+                    fallback:
+                      type: string
+                    from_url:
+                      type: string
+                    id:
+                      type: number
+                    image_bytes:
+                      type: number
+                    image_height:
+                      type: number
+                    image_url:
+                      type: string
+                    image_width:
+                      type: number
+                    service_name:
+                      type: string
+                    text:
+                      type: string
+                    title:
+                      type: string
+                    title_link:
+                      type: string
+                  type: object
                 type: array
               text:
                 type: string
@@ -782,7 +782,7 @@ definitions:
             type: object
           members:
             items:
-              - type: string
+              type: string
             type: array
           name:
             type: string
@@ -816,44 +816,44 @@ definitions:
     properties:
       channels:
         items:
-          - properties:
-              created:
-                type: integer
-              creator:
+          properties:
+            created:
+              type: integer
+            creator:
+              type: string
+            id:
+              type: string
+            is_archived:
+              type: boolean
+            is_member:
+              type: boolean
+            members:
+              items:
                 type: string
-              id:
-                type: string
-              is_archived:
-                type: boolean
-              is_member:
-                type: boolean
-              members:
-                items:
+              type: array
+            name:
+              type: string
+            num_members:
+              type: number
+            purpose:
+              properties:
+                creator:
                   type: string
-                type: array
-              name:
-                type: string
-              num_members:
-                type: number
-              purpose:
-                properties:
-                  creator:
-                    type: string
-                  last_set:
-                    type: integer
-                  value:
-                    type: string
-                type: object
-              topic:
-                properties:
-                  creator:
-                    type: string
-                  last_set:
-                    type: integer
-                  value:
-                    type: string
-                type: object
-            type: object
+                last_set:
+                  type: integer
+                value:
+                  type: string
+              type: object
+            topic:
+              properties:
+                creator:
+                  type: string
+                last_set:
+                  type: integer
+                value:
+                  type: string
+              type: object
+          type: object
         type: array
       ok:
         type: boolean
@@ -935,7 +935,7 @@ definitions:
             type: object
           members:
             items:
-              - type: string
+              type: string
             type: array
           name:
             type: string
@@ -1010,71 +1010,77 @@ definitions:
     properties:
       files:
         items:
-          - properties:
-              comments_count:
-                type: number
-              created:
-                type: number
-              editable:
-                type: boolean
-              external_type:
+          properties:
+            channels:
+              items: {}
+              type: array
+            comments_count:
+              type: number
+            created:
+              type: number
+            editable:
+              type: boolean
+            external_type:
+              type: string
+            filetype:
+              type: string
+            groups:
+              items: {}
+              type: array
+            id:
+              type: string
+            ims:
+              items:
                 type: string
-              filetype:
-                type: string
-              id:
-                type: string
-              ims:
-                items:
-                  - type: string
-                type: array
-              initial_comment:
-                properties:
-                  comment:
-                    type: string
-                  created:
-                    type: number
-                  id:
-                    type: string
-                  timestamp:
-                    type: number
-                  user:
-                    type: string
-                type: object
-              is_external:
-                type: boolean
-              is_public:
-                type: boolean
-              mimetype:
-                type: string
-              mode:
-                type: string
-              name:
-                type: string
-              permalink:
-                type: string
-              permalink_public:
-                type: string
-              pretty_type:
-                type: string
-              public_url_shared:
-                type: boolean
-              size:
-                type: number
-              timestamp:
-                type: number
-              title:
-                type: string
-              url:
-                type: string
-              url_download:
-                type: string
-              url_private:
-                type: string
-              url_private_download:
-                type: string
-              user:
-                type: string
-            type: object
+              type: array
+            initial_comment:
+              properties:
+                comment:
+                  type: string
+                created:
+                  type: number
+                id:
+                  type: string
+                timestamp:
+                  type: number
+                user:
+                  type: string
+              type: object
+            is_external:
+              type: boolean
+            is_public:
+              type: boolean
+            mimetype:
+              type: string
+            mode:
+              type: string
+            name:
+              type: string
+            permalink:
+              type: string
+            permalink_public:
+              type: string
+            pretty_type:
+              type: string
+            public_url_shared:
+              type: boolean
+            size:
+              type: number
+            timestamp:
+              type: number
+            title:
+              type: string
+            url:
+              type: string
+            url_download:
+              type: string
+            url_private:
+              type: string
+            url_private_download:
+              type: string
+            user:
+              type: string
+          type: object
         type: array
       ok:
         type: boolean
@@ -1094,42 +1100,42 @@ definitions:
     properties:
       groups:
         items:
-          - properties:
-              created:
-                type: number
-              creator:
+          properties:
+            created:
+              type: number
+            creator:
+              type: string
+            id:
+              type: string
+            is_archived:
+              type: boolean
+            is_group:
+              type: boolean
+            members:
+              items:
                 type: string
-              id:
-                type: string
-              is_archived:
-                type: boolean
-              is_group:
-                type: boolean
-              members:
-                items:
-                  - type: string
-                type: array
-              name:
-                type: string
-              purpose:
-                properties:
-                  creator:
-                    type: string
-                  last_set:
-                    type: number
-                  value:
-                    type: string
-                type: object
-              topic:
-                properties:
-                  creator:
-                    type: string
-                  last_set:
-                    type: number
-                  value:
-                    type: string
-                type: object
-            type: object
+              type: array
+            name:
+              type: string
+            purpose:
+              properties:
+                creator:
+                  type: string
+                last_set:
+                  type: number
+                value:
+                  type: string
+              type: object
+            topic:
+              properties:
+                creator:
+                  type: string
+                last_set:
+                  type: number
+                value:
+                  type: string
+              type: object
+          type: object
         type: array
       ok:
         type: boolean
@@ -1138,16 +1144,16 @@ definitions:
     properties:
       ims:
         items:
-          - properties:
-              created:
-                type: number
-              id:
-                type: string
-              is_user_deleted:
-                type: boolean
-              user:
-                type: string
-            type: object
+          properties:
+            created:
+              type: number
+            id:
+              type: string
+            is_user_deleted:
+              type: boolean
+            user:
+              type: string
+          type: object
         type: array
       ok:
         type: boolean
@@ -1188,30 +1194,30 @@ definitions:
             properties:
               attachments:
                 items:
-                  - properties:
-                      fallback:
-                        type: string
-                      from_url:
-                        type: string
-                      id:
-                        type: number
-                      image_bytes:
-                        type: number
-                      image_height:
-                        type: number
-                      image_url:
-                        type: string
-                      image_width:
-                        type: number
-                      service_name:
-                        type: string
-                      text:
-                        type: string
-                      title:
-                        type: string
-                      title_link:
-                        type: string
-                    type: object
+                  properties:
+                    fallback:
+                      type: string
+                    from_url:
+                      type: string
+                    id:
+                      type: number
+                    image_bytes:
+                      type: number
+                    image_height:
+                      type: number
+                    image_url:
+                      type: string
+                    image_width:
+                      type: number
+                    service_name:
+                      type: string
+                    text:
+                      type: string
+                    title:
+                      type: string
+                    title_link:
+                      type: string
+                  type: object
                 type: array
               text:
                 type: string
@@ -1224,7 +1230,7 @@ definitions:
             type: object
           members:
             items:
-              - type: string
+              type: string
             type: array
           name:
             type: string
@@ -1260,81 +1266,87 @@ definitions:
         properties:
           matches:
             items:
-              - properties:
-                  comments_count:
-                    type: number
-                  created:
-                    type: number
-                  edit_link:
+              properties:
+                channels:
+                  items: {}
+                  type: array
+                comments_count:
+                  type: number
+                created:
+                  type: number
+                edit_link:
+                  type: string
+                editable:
+                  type: boolean
+                external_type:
+                  type: string
+                filetype:
+                  type: string
+                groups:
+                  items: {}
+                  type: array
+                id:
+                  type: string
+                ims:
+                  items:
                     type: string
-                  editable:
-                    type: boolean
-                  external_type:
-                    type: string
-                  filetype:
-                    type: string
-                  id:
-                    type: string
-                  ims:
-                    items:
-                      - type: string
-                    type: array
-                  initial_comment:
-                    properties:
-                      comment:
-                        type: string
-                      created:
-                        type: number
-                      id:
-                        type: string
-                      timestamp:
-                        type: number
-                      user:
-                        type: string
-                    type: object
-                  is_external:
-                    type: boolean
-                  is_public:
-                    type: boolean
-                  lines:
-                    type: number
-                  lines_more:
-                    type: number
-                  mimetype:
-                    type: string
-                  mode:
-                    type: string
-                  name:
-                    type: string
-                  permalink:
-                    type: string
-                  permalink_public:
-                    type: string
-                  pretty_type:
-                    type: string
-                  preview:
-                    type: string
-                  preview_highlight:
-                    type: string
-                  public_url_shared:
-                    type: boolean
-                  size:
-                    type: number
-                  timestamp:
-                    type: number
-                  title:
-                    type: string
-                  url:
-                    type: string
-                  url_download:
-                    type: string
-                  url_private:
-                    type: string
-                  url_private_download:
-                    type: string
-                  user:
-                    type: string
-                type: object
+                  type: array
+                initial_comment:
+                  properties:
+                    comment:
+                      type: string
+                    created:
+                      type: number
+                    id:
+                      type: string
+                    timestamp:
+                      type: number
+                    user:
+                      type: string
+                  type: object
+                is_external:
+                  type: boolean
+                is_public:
+                  type: boolean
+                lines:
+                  type: number
+                lines_more:
+                  type: number
+                mimetype:
+                  type: string
+                mode:
+                  type: string
+                name:
+                  type: string
+                permalink:
+                  type: string
+                permalink_public:
+                  type: string
+                pretty_type:
+                  type: string
+                preview:
+                  type: string
+                preview_highlight:
+                  type: string
+                public_url_shared:
+                  type: boolean
+                size:
+                  type: number
+                timestamp:
+                  type: number
+                title:
+                  type: string
+                url:
+                  type: string
+                url_download:
+                  type: string
+                url_private:
+                  type: string
+                url_private_download:
+                  type: string
+                user:
+                  type: string
+              type: object
             type: array
           pagination:
             properties:
@@ -1589,47 +1601,47 @@ definitions:
     properties:
       members:
         items:
-          - properties:
-              color:
-                type: string
-              deleted:
-                type: boolean
-              has_files:
-                type: boolean
-              id:
-                type: string
-              is_admin:
-                type: boolean
-              is_owner:
-                type: boolean
-              name:
-                type: string
-              profile:
-                properties:
-                  email:
-                    type: string
-                  first_name:
-                    type: string
-                  image_192:
-                    type: string
-                  image_24:
-                    type: string
-                  image_32:
-                    type: string
-                  image_48:
-                    type: string
-                  image_72:
-                    type: string
-                  last_name:
-                    type: string
-                  phone:
-                    type: string
-                  real_name:
-                    type: string
-                  skype:
-                    type: string
-                type: object
-            type: object
+          properties:
+            color:
+              type: string
+            deleted:
+              type: boolean
+            has_files:
+              type: boolean
+            id:
+              type: string
+            is_admin:
+              type: boolean
+            is_owner:
+              type: boolean
+            name:
+              type: string
+            profile:
+              properties:
+                email:
+                  type: string
+                first_name:
+                  type: string
+                image_192:
+                  type: string
+                image_24:
+                  type: string
+                image_32:
+                  type: string
+                image_48:
+                  type: string
+                image_72:
+                  type: string
+                last_name:
+                  type: string
+                phone:
+                  type: string
+                real_name:
+                  type: string
+                skype:
+                  type: string
+              type: object
+          type: object
         type: array
       ok:
         type: boolean

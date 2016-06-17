@@ -336,6 +336,23 @@ paths:
         - welcome
         - partner
         - public
+  /getstationsdata:
+    get:
+      description: The method getstationsdata Returns data from a user Weather Stations (measures and device specific data).
+      operationId: getstationsdata
+      parameters:
+        - description: Id of the device you want to retrieve information of
+          in: query
+          name: device_id
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/NAStationDataResponse'
+      tags:
+        - station
   /getthermostatsdata:
     get:
       description: The method getthermostatsdata returns information about user's thermostats such as their last measurements.
@@ -816,6 +833,64 @@ definitions:
         type: string
       mac:
         type: string
+  NAMain:
+    properties:
+      _id:
+        type: string
+      cipher_id:
+        type: string
+      co2_calibrating:
+        type: boolean
+      dashboard_data:
+        $ref: '#/definitions/NADashboardData'
+        description: It contains all the measurements that can be displayed on the dashboard
+      data_type:
+        items:
+          type: string
+        type: array
+      date_setup:
+        format: int32
+        type: integer
+      firmware:
+        format: int32
+        type: integer
+      last_setup:
+        format: int32
+        type: integer
+      last_status_store:
+        format: int32
+        type: integer
+      last_upgrade:
+        format: int32
+        type: integer
+      module_name:
+        type: string
+      modules:
+        items:
+          $ref: '#/definitions/NAStationModule'
+        type: array
+      place:
+        $ref: '#/definitions/NAPlace'
+      station_name:
+        type: string
+      type:
+        description: |
+          Included in every device or module. It defines the type of the device/module. Its values are among :
+          NAMain : for the base station
+          NAModule1 : for the outdoor module
+          NAModule4 : for the additionnal indoor module
+          NAModule3 : for the rain gauge module
+          NAPlug : for the thermostat relay/plug
+          NATherm1 : for the thermostat module
+        type: string
+      wifi_status:
+        description: |
+          It contains the current wifi status. The different thresholds to take into account are
+          RSSI_THRESHOLD_0 = 86 bad signal
+          RSSI_THRESHOLD_1 = 71 middle quality signal
+          RSSI_THRESHOLD_2 = 56 good signal
+        format: int32
+        type: integer
   NAMeasureBodyElem:
     properties:
       beg_time:
@@ -1096,6 +1171,99 @@ definitions:
       tau:
         format: int32
         type: integer
+  NAStationDataBody:
+    properties:
+      devices:
+        items:
+          $ref: '#/definitions/NAMain'
+        type: array
+      user:
+        $ref: '#/definitions/NAUser'
+  NAStationDataResponse:
+    properties:
+      body:
+        $ref: '#/definitions/NAStationDataBody'
+      status:
+        type: string
+      time_exec:
+        format: double
+        type: number
+      time_server:
+        format: int32
+        type: integer
+  NAStationModule:
+    properties:
+      _id:
+        type: string
+      battery_percent:
+        description: It contains the current battery level in percentage.
+        format: int32
+        type: integer
+      battery_vp:
+        description: |
+          It contains the current battery status. The threshold depends on the kind of module, below is the list of the different threshold to take into account according the module type.
+          "Indoor module Battery range: 6000 ... 4200" |
+          INDOOR_BATTERY_LEVEL_FULL = 5640
+          INDOOR_BATTERY_LEVEL_HIGH = 5280
+          INDOOR_BATTERY_LEVEL_MEDIUM = 4920
+          INDOOR_BATTERY_LEVEL_LOW = 4560
+          "Below 4560: very low" |
+            
+          "Raingauge and outdoor module Battery range: 6000 ... 3600" |
+          BATTERY_LEVEL_FULL = 5500
+          BATTERY_LEVEL_HIGH = 5000
+          BATTERY_LEVEL_MEDIUM = 4500
+          BATTERY_LEVEL_LOW = 4000
+          "Below 4000: very low" |
+            
+          "Thermostat Battery range: 4500 ... 3000" |
+          THERMOSTAT_BATTERY_LEVEL_FULL = 4100
+          THERMOSTAT_BATTERY_LEVEL_HIGH = 3600
+          THERMOSTAT_BATTERY_LEVEL_MEDIUM = 3300
+          THERMOSTAT_BATTERY_LEVEL_LOW = 3000
+          "Below 3000: very low"
+        format: int32
+        type: integer
+      dashboard_data:
+        $ref: '#/definitions/NADashboardData'
+        description: It contains all the measurements that can be displayed on the dashboard
+      data_type:
+        items:
+          type: string
+        type: array
+      firmware:
+        format: int32
+        type: integer
+      last_message:
+        format: int32
+        type: integer
+      last_seen:
+        format: int32
+        type: integer
+      last_setup:
+        format: int32
+        type: integer
+      module_name:
+        type: string
+      rf_status:
+        description: |
+          "It contains the current radio status. The different thresholds to take into account are :" |
+          RADIO_THRESHOLD_SIGNAL_LOW = 90 
+          RADIO_THRESHOLD_SIGNAL_MEDIUM = 80
+          RADIO_THRESHOLD_SIGNAL_HIGH = 70
+          RADIO_THRESHOLD_SIGNAL_FULL = 60
+        format: int32
+        type: integer
+      type:
+        description: |
+          Included in every device or module. It defines the type of the device/module. Its values are among :
+          NAMain : for the base station
+          NAModule1 : for the outdoor module
+          NAModule4 : for the additionnal indoor module
+          NAModule3 : for the rain gauge module
+          NAPlug : for the thermostat relay/plug
+          NATherm1 : for the thermostat module
+        type: string
   NAThermMeasure:
     properties:
       setpoint_temp:

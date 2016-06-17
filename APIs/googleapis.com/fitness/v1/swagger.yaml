@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Google Fit API
+  description: Stores and accesses user data in the fitness store from apps on any platform.
   title: Fitness
   version: v1
   x-apiClientRegistration:
@@ -81,7 +81,7 @@ tags:
 paths:
   '/{userId}/dataSources':
     get:
-      description: 'Lists all data sources that are visible to the developer, using the OAuth scopes provided. The list is not exhaustive: the user may have private data sources that are only visible to other developers or calls using other scopes.'
+      description: 'Lists all data sources that are visible to the developer, using the OAuth scopes provided. The list is not exhaustive; the user may have private data sources that are only visible to other developers, or calls using other scopes.'
       operationId: fitness.users.dataSources.list
       parameters:
         - description: List data sources for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
@@ -153,7 +153,7 @@ paths:
         - users
   '/{userId}/dataSources/{dataSourceId}':
     delete:
-      description: Delete the data source if there are no datapoints associated with it
+      description: Deletes the specified data source. The request will fail if the data source contains any data points.
       operationId: fitness.users.dataSources.delete
       parameters:
         - description: Retrieve a data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
@@ -181,7 +181,7 @@ paths:
       tags:
         - users
     get:
-      description: Returns a data source identified by a data stream ID.
+      description: Returns the specified data source.
       operationId: fitness.users.dataSources.get
       parameters:
         - description: Retrieve a data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
@@ -224,9 +224,9 @@ paths:
       - $ref: '#/parameters/userIp'
     patch:
       description: |-
-        Updates a given data source. It is an error to modify the data source's data stream ID, data type, type, stream name or device information apart from the device version. Changing these fields would require a new unique data stream ID and separate data source.
+        Updates the specified data source. The dataStreamId, dataType, type, dataStreamName, and device properties with the exception of version, cannot be modified.
 
-        Data sources are identified by their data stream ID. This method supports patch semantics.
+        Data sources are identified by their dataStreamId. This method supports patch semantics.
       operationId: fitness.users.dataSources.patch
       parameters:
         - description: Update the data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
@@ -259,9 +259,9 @@ paths:
         - users
     put:
       description: |-
-        Updates a given data source. It is an error to modify the data source's data stream ID, data type, type, stream name or device information apart from the device version. Changing these fields would require a new unique data stream ID and separate data source.
+        Updates the specified data source. The dataStreamId, dataType, type, dataStreamName, and device properties with the exception of version, cannot be modified.
 
-        Data sources are identified by their data stream ID.
+        Data sources are identified by their dataStreamId.
       operationId: fitness.users.dataSources.update
       parameters:
         - description: Update the data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.
@@ -671,7 +671,7 @@ definitions:
         type: array
     type: object
   Application:
-    description: 'See: google3/java/com/google/android/apps/heart/platform/api/Application.java'
+    description: ''
     properties:
       detailsUrl:
         description: An optional URI that can be used to link back to the application.
@@ -709,6 +709,23 @@ definitions:
         description: Specifies that result buckets aggregate data by exactly durationMillis time frames. Time frames that contain no data will be included in the response with an empty dataset.
         format: int64
         type: string
+      period:
+        $ref: '#/definitions/BucketByTimePeriod'
+    type: object
+  BucketByTimePeriod:
+    properties:
+      timeZoneId:
+        description: org.joda.timezone.DateTimeZone
+        type: string
+      type:
+        enum:
+          - day
+          - month
+          - week
+        type: string
+      value:
+        format: int32
+        type: integer
     type: object
   DataPoint:
     description: |-
@@ -764,6 +781,14 @@ definitions:
       application:
         $ref: '#/definitions/Application'
         description: Information about an application which feeds sensor data into the platform.
+      dataQualityStandard:
+        description: ''
+        items:
+          enum:
+            - dataQualityBloodPressureEsh2002
+            - dataQualityUnknown
+          type: string
+        type: array
       dataStreamId:
         description: |-
           A unique identifier for the data stream produced by this data source. The identifier includes:
@@ -802,7 +827,7 @@ definitions:
         type: string
     type: object
   DataType:
-    description: 'See: google3/java/com/google/android/apps/heart/platform/api/DataType.java'
+    description: ''
     properties:
       field:
         description: A field represents one dimension of a data type.

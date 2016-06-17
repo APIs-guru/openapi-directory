@@ -220,7 +220,7 @@ paths:
         - RouteTables
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualnetworks':
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualNetworks':
     get:
       description: The list VirtualNetwork returns all Virtual Networks in a subscription
       operationId: VirtualNetworks_ListAll
@@ -2033,7 +2033,7 @@ paths:
         - VirtualNetworkGateways
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworkgateways/{virtualNetworkGatewayName}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}':
     delete:
       description: The Delete VirtualNetworkGateway operation deletes the specifed virtual network Gateway through Network resource provider.
       operationId: VirtualNetworkGateways_Delete
@@ -2117,7 +2117,7 @@ paths:
       tags:
         - VirtualNetworkGateways
       x-ms-long-running-operation: true
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworkgateways/{virtualNetworkGatewayName}/generatevpnclientpackage':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnclientpackage':
     post:
       description: The Generatevpnclientpackage operation generates Vpn client package for P2S client of the virtual network gateway in the specified resource group through Network resource provider.
       operationId: VirtualNetworkGateways_Generatevpnclientpackage
@@ -2147,7 +2147,7 @@ paths:
             type: string
       tags:
         - VirtualNetworkGateways
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworkgateways/{virtualNetworkGatewayName}/reset':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/reset':
     post:
       description: The Reset VirtualNetworkGateway operation resets the primary of the virtual network gateway in the specified resource group through Network resource provider.
       operationId: VirtualNetworkGateways_Reset
@@ -2180,7 +2180,7 @@ paths:
       tags:
         - VirtualNetworkGateways
       x-ms-long-running-operation: true
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworks':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks':
     get:
       description: The list VirtualNetwork returns all Virtual Networks in a resource group
       operationId: VirtualNetworks_List
@@ -2201,7 +2201,7 @@ paths:
         - VirtualNetworks
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworks/{virtualNetworkName}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}':
     delete:
       description: The Delete VirtualNetwork operation deletes the specifed virtual network
       operationId: VirtualNetworks_Delete
@@ -2290,7 +2290,7 @@ paths:
       tags:
         - VirtualNetworks
       x-ms-long-running-operation: true
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworks/{virtualNetworkName}/subnets':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets':
     get:
       description: The List subnets opertion retrieves all the subnets in a virtual network.
       operationId: Subnets_List
@@ -2316,7 +2316,7 @@ paths:
         - Subnets
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworks/{virtualNetworkName}/subnets/{subnetName}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}':
     delete:
       description: The delete subnet operation deletes the specified subnet.
       operationId: Subnets_Delete

@@ -263,6 +263,10 @@ definitions:
       name:
         description: name of service
         type: string
+      priority:
+        description: 'priority of service, i.e. 1 = high, 2 = normal, 3 = low. default is 2.'
+        format: int32
+        type: integer
       required_skills:
         description: array of required skills
         items:
@@ -304,6 +308,10 @@ definitions:
         type: string
       pickup:
         $ref: '#/definitions/Stop'
+      priority:
+        description: 'priority of service, i.e. 1 = high, 2 = normal, 3 = low. default is 2.'
+        format: int32
+        type: integer
       required_skills:
         description: array of required skills
         items:

@@ -1121,12 +1121,6 @@ definitions:
 
           For example, a mobile test requires provisioning a device where the test executes, and that provisioning can fail.
         type: boolean
-      nativeCrash:
-        description: |-
-          A native process crashed on the device, producing a tombstone. It is unclear whether the crash was related to the app under test.
-
-          For example, OpenGL crashed, but it is unclear if the app is responsible.
-        type: boolean
     type: object
   ListExecutionsResponse:
     properties:

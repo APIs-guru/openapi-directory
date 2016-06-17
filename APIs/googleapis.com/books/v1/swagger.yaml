@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Lets you search for books and manage your Google Books library.
+  description: Searches for books and manages your Google Books library.
   title: Books
   version: v1
   x-apiClientRegistration:
@@ -3203,6 +3203,11 @@ definitions:
               opted_state:
                 type: string
             type: object
+          moreFromSeries:
+            properties:
+              opted_state:
+                type: string
+            type: object
         type: object
     type: object
   Volume:
@@ -3337,6 +3342,9 @@ definitions:
                   description: 'The finsky offer type (e.g., PURCHASE=0 RENTAL=3)'
                   format: int32
                   type: integer
+                giftable:
+                  description: Indicates whether the offer is giftable.
+                  type: boolean
                 listPrice:
                   description: Offer list (=undiscounted) price in Micros.
                   properties:

@@ -1284,7 +1284,7 @@ definitions:
         properties:
           picture_filetypes:
             items:
-              - type: string
+              type: string
             type: array
           picture_size_max:
             type: number
@@ -1316,6 +1316,9 @@ definitions:
                         type: string
                       schedule_limit:
                         type: number
+                      supported_interactions:
+                        items: {}
+                        type: array
                     type: object
                 type: object
               urls:
@@ -1351,7 +1354,7 @@ definitions:
                         type: number
                       supported_interactions:
                         items:
-                          - type: string
+                          type: string
                         type: array
                     type: object
                   page:
@@ -1375,7 +1378,7 @@ definitions:
                         type: number
                       supported_interactions:
                         items:
-                          - type: string
+                          type: string
                         type: array
                     type: object
                   profile:
@@ -1399,7 +1402,7 @@ definitions:
                         type: number
                       supported_interactions:
                         items:
-                          - type: string
+                          type: string
                         type: array
                     type: object
                 type: object
@@ -1434,7 +1437,7 @@ definitions:
                         type: number
                       supported_interactions:
                         items:
-                          - type: string
+                          type: string
                         type: array
                     type: object
                   profile:
@@ -1458,7 +1461,7 @@ definitions:
                         type: number
                       supported_interactions:
                         items:
-                          - type: string
+                          type: string
                         type: array
                     type: object
                 type: object
@@ -1493,7 +1496,7 @@ definitions:
                         type: number
                       supported_interactions:
                         items:
-                          - type: string
+                          type: string
                         type: array
                     type: object
                   page:
@@ -1517,7 +1520,7 @@ definitions:
                         type: number
                       supported_interactions:
                         items:
-                          - type: string
+                          type: string
                         type: array
                     type: object
                   profile:
@@ -1541,7 +1544,7 @@ definitions:
                         type: number
                       supported_interactions:
                         items:
-                          - type: string
+                          type: string
                         type: array
                     type: object
                 type: object
@@ -1576,7 +1579,7 @@ definitions:
                         type: number
                       supported_interactions:
                         items:
-                          - type: string
+                          type: string
                         type: array
                     type: object
                 type: object
@@ -1766,74 +1769,80 @@ definitions:
     type: object
   profiles:
     items:
-      - properties:
-          _id:
-            type: string
-          avatar:
-            type: string
-          avatar_https:
-            type: string
-          counts:
+      properties:
+        _id:
+          type: string
+        avatar:
+          type: string
+        avatar_https:
+          type: string
+        counts:
+          properties:
+            daily_suggestions:
+              type: number
+            drafts:
+              type: number
+            pending:
+              type: number
+            sent:
+              type: number
+          type: object
+        cover_photo:
+          type: string
+        default:
+          type: boolean
+        disabled_features:
+          items: {}
+          type: array
+        disconnected:
+          type: string
+        formatted_service:
+          type: string
+        formatted_username:
+          type: string
+        has_used_suggestions:
+          type: boolean
+        id:
+          type: string
+        schedules:
+          items:
             properties:
-              daily_suggestions:
-                type: number
-              drafts:
-                type: number
-              pending:
-                type: number
-              sent:
-                type: number
+              days:
+                items:
+                  type: string
+                type: array
+              times:
+                items: {}
+                type: array
             type: object
-          cover_photo:
-            type: string
-          default:
-            type: boolean
-          disconnected:
-            type: string
-          formatted_service:
-            type: string
-          formatted_username:
-            type: string
-          has_used_suggestions:
-            type: boolean
-          id:
-            type: string
-          schedules:
-            items:
-              - properties:
-                  days:
-                    items:
-                      - type: string
-                    type: array
-                type: object
-            type: array
-          service:
-            type: string
-          service_id:
-            type: string
-          service_type:
-            type: string
-          service_username:
-            type: string
-          shortener:
-            properties:
-              domain:
-                type: string
-            type: object
-          statistics:
-            properties:
-              connections:
-                type: number
-            type: object
-          timezone:
-            type: string
-          user_id:
-            type: string
-          utm_tracking:
-            type: string
-          verb:
-            type: string
-        type: object
+          type: array
+        service:
+          type: string
+        service_id:
+          type: string
+        service_type:
+          type: string
+        service_username:
+          type: string
+        shortener:
+          properties:
+            domain:
+              type: string
+          type: object
+        statistics:
+          properties:
+            connections:
+              type: number
+          type: object
+        timezone:
+          type: string
+        user_id:
+          type: string
+        utm_tracking:
+          type: string
+        verb:
+          type: string
+      type: object
     type: array
   reorder:
     properties:

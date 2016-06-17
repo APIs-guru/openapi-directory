@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: 'Stores, processes, explores and shares genomic data. This API implements the Global Alliance for Genomics and Health (GA4GH) v0.5.1 API as well as several extensions.'
+  description: 'Stores, processes, explores and shares genomic data.'
   title: Genomics
   version: v1
   x-apiClientRegistration:
@@ -2365,6 +2365,24 @@ definitions:
         description: The name of the source of this data.
         type: string
     type: object
+  GCE:
+    description: Describes a GCE resource that is being managed by a running pipeline.
+    properties:
+      diskNames:
+        description: The names of the disks that were created for this pipeline.
+        items:
+          type: string
+        type: array
+      instanceName:
+        description: The instance on which the operation is running.
+        type: string
+      machineType:
+        description: The machine type of the instance.
+        type: string
+      zone:
+        description: The availability zone in which the instance resides.
+        type: string
+    type: object
   GetIamPolicyRequest:
     description: Request message for `GetIamPolicy` method.
     type: object
@@ -2578,6 +2596,11 @@ definitions:
         additionalProperties:
           description: Properties of the object. Contains field @ype with type URL.
         description: 'The original request that started the operation. Note that this will be in current version of the API. If the operation was started with v1beta2 API and a GetOperation is performed on v1 API, a v1 request will be returned.'
+        type: object
+      runtimeMetadata:
+        additionalProperties:
+          description: Properties of the object. Contains field @ype with type URL.
+        description: Runtime metadata on this Operation.
         type: object
     type: object
   Policy:
@@ -2850,6 +2873,13 @@ definitions:
       sourceUri:
         description: The URI from which the references were obtained.
         type: string
+    type: object
+  RuntimeMetadata:
+    description: Runtime metadata that will be populated in the runtimeMetadata field of the Operation associated with a RunPipeline execution.
+    properties:
+      gce:
+        $ref: '#/definitions/GCE'
+        description: Execution information specific to Google Compute Engine.
     type: object
   SearchAnnotationSetsRequest:
     properties:

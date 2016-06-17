@@ -182,6 +182,9 @@ definitions:
   AssetItem:
     description: Information about an asset associated with the web service.
     properties:
+      id:
+        description: Asset's Id.
+        type: string
       inputPorts:
         additionalProperties:
           $ref: '#/definitions/InputPort'
@@ -575,6 +578,9 @@ definitions:
       description:
         description: Swagger schema description.
         type: string
+      format:
+        description: 'The format, if ''type'' is not ''object'''
+        type: string
       properties:
         additionalProperties:
           $ref: '#/definitions/ColumnSpecification'
@@ -585,11 +591,10 @@ definitions:
         type: string
       type:
         default: object
-        description: The type of the entity described in swagger. Always 'object'.
+        description: The type of the entity described in swagger.
         type: string
     required:
       - type
-      - properties
     type: object
   WebService:
     allOf:

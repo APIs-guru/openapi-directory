@@ -1202,7 +1202,7 @@ paths:
           name: exclude_ing
           required: false
           type: string
-        - description: Limit to a specific cuisine
+        - description: 'Limit to a specific cuisine. Cooks can enter anything free-form, but the few dozen preconfigured values are Afghan,African,American,American-South,Asian,Australian,Brazilian,Cajun,Canadian,Caribbean,Chinese,Croatian,Cuban,Dessert,Eastern European,English,French,German,Greek,Hawaiian,Hungarian,India,Indian,Irish,Italian,Japanese,Jewish,Korean,Latin,Mediterranean,Mexican,Middle Eastern,Moroccan,Polish,Russian,Scandanavian,Seafood,Southern,Southwestern,Spanish,Tex-Mex,Thai,Vegan,Vegetarian,Vietnamese'
           in: query
           name: cuisine
           required: false
@@ -1465,6 +1465,9 @@ definitions:
         format: date-time
         type: string
       Date:
+        format: date-time
+        type: string
+      DateDT:
         format: date-time
         type: string
       GUID:
@@ -1916,6 +1919,9 @@ definitions:
         type: string
       Date:
         type: string
+      DateDT:
+        format: date-time
+        type: string
       GUID:
         type: string
       ID:
@@ -2042,7 +2048,7 @@ definitions:
         type: string
       Recipes:
         items:
-          $ref: '#/definitions/BigOven.Model.API.RecipeInfo'
+          $ref: '#/definitions/BigOven.Model.API2.RecipeInfox'
         type: array
       VersionGuid:
         type: string
@@ -2230,6 +2236,9 @@ definitions:
         format: date-time
         type: string
       Date:
+        type: string
+      DateDT:
+        format: date-time
         type: string
       GUID:
         type: string

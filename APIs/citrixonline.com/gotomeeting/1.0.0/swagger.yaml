@@ -386,29 +386,15 @@ paths:
       summary: Update meeting
       tags:
         - Meetings
-  '/meetings/{meetingId}/start':
+  '/meetings/{meetingId}/attendees':
     get:
-      description: 'Returns a host URL that can be used to start a meeting. When this URL is opened in a web browser, the GoToMeeting client will be downloaded and launched and the meeting will start. The end user is not required to login to a client.'
+      description: 'List all attendees for specified meetingId of historical meeting. The historical meetings can be fetched using ''Get historical meetings'', ''Get historical meetings by organizer'', and ''Get historical meetings by group''. For users with the admin role this call returns attendees for any meeting. For any other user the call will return attendees for meetings on which the user is a valid organizer.'
       parameters:
         - $ref: '#/parameters/Authorization'
-        - $ref: '#/parameters/meetingId'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/StartUrl'
-      summary: Start meeting
-      tags:
-        - Meetings
-  '/meetings/{meetingInstanceKey}/attendees':
-    get:
-      description: 'List all attendees for specified meeting instance key. The meeting instance key is only available for meetings that were successfully started and can be found for historical meetings using ''Get Meetings'', ''Get Meetings by Organizer'', and ''Get Meetings by Group''. For users with the admin role this call returns attendees for any meeting. For any other user the call will return attendees for meetings on which the user is a valid organizer.'
-      parameters:
-        - $ref: '#/parameters/Authorization'
-        - description: The key of the unique meeting instance
+        - description: The meeting ID
           format: int64
           in: path
-          name: meetingInstanceKey
+          name: meetingId
           required: true
           type: integer
       responses:
@@ -421,6 +407,20 @@ paths:
         '404':
           description: Not found
       summary: Get attendees by meeting
+      tags:
+        - Meetings
+  '/meetings/{meetingId}/start':
+    get:
+      description: 'Returns a host URL that can be used to start a meeting. When this URL is opened in a web browser, the GoToMeeting client will be downloaded and launched and the meeting will start. The end user is not required to login to a client.'
+      parameters:
+        - $ref: '#/parameters/Authorization'
+        - $ref: '#/parameters/meetingId'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/StartUrl'
+      summary: Start meeting
       tags:
         - Meetings
   /organizers:

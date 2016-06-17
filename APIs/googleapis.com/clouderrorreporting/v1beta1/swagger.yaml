@@ -118,8 +118,14 @@ paths:
       operationId: clouderrorreporting.projects.groups.get
       parameters:
         - description: |-
-            Group resource name. Required.
-            Example: `projects/my-project-123/groups/my-group`
+            [Required] The group resource name. Written as
+            <code>projects/<var>projectID</var>/groups/<var>group_name</var></code>.
+            Call
+            <a href="/error-reporting/reference/rest/v1beta1/projects.groupStats/list">
+            <code>groupStats.list</code></a> to return a list of groups belonging to
+            this project.
+
+            Example: <code>projects/my-project-123/groups/my-group</code>
           in: path
           name: groupName
           required: true
@@ -171,8 +177,8 @@ paths:
       operationId: clouderrorreporting.projects.groups.update
       parameters:
         - description: |-
-            Group resource name.
-            Example: `projects/my-project-123/groups/my-groupid`
+            The group resource name.
+            Example: <code>projects/my-project-123/groups/my-groupid</code>
           in: path
           name: name
           required: true
@@ -198,8 +204,10 @@ paths:
       operationId: clouderrorreporting.projects.deleteEvents
       parameters:
         - description: |-
-            The resource name of the Google Cloud Platform project. Required.
-            Example: `projects/my-project`.
+            [Required] The resource name of the Google Cloud Platform project. Written
+            as `projects/` plus the
+            [Google Cloud Platform project ID](https://support.google.com/cloud/answer/6158840).
+            Example: `projects/my-project-123`.
           in: path
           name: projectName
           required: true
@@ -220,8 +228,10 @@ paths:
       operationId: clouderrorreporting.projects.events.list
       parameters:
         - description: |-
-            The resource name of the Google Cloud Platform project. Required.
-            Example: projects/my-project
+            [Required] The resource name of the Google Cloud Platform project. Written
+            as `projects/` plus the
+            [Google Cloud Platform project ID](https://support.google.com/cloud/answer/6158840).
+            Example: `projects/my-project-123`.
           in: path
           name: projectName
           required: true
@@ -239,26 +249,26 @@ paths:
           name: timeRange.period
           type: string
         - description: |-
-            The exact value to match against
+            [Optional] The exact value to match against
             [`ServiceContext.service`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.service).
           in: query
           name: serviceFilter.service
           type: string
-        - description: The group for which events shall be returned. Required.
+        - description: '[Required] The group for which events shall be returned.'
           in: query
           name: groupId
           type: string
         - description: |-
-            The exact value to match against
+            [Optional] The exact value to match against
             [`ServiceContext.version`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
           in: query
           name: serviceFilter.version
           type: string
-        - description: The maximum number of results to return per response.
+        - description: '[Optional] The maximum number of results to return per response.'
           in: query
           name: pageSize
           type: integer
-        - description: A `next_page_token` provided by a previous response.
+        - description: '[Optional] A `next_page_token` provided by a previous response.'
           in: query
           name: pageToken
           type: string
@@ -292,17 +302,19 @@ paths:
       operationId: clouderrorreporting.projects.groupStats.list
       parameters:
         - description: |-
-            The resource name of the Google Cloud Platform project. Written as
-            `projects/` plus the
-            [Google Cloud Platform project ID](https://support.google.com/cloud/answer/6158840).
-            Required. Example: `projects/my-project-123`.
+            [Required] The resource name of the Google Cloud Platform project. Written
+            as <code>projects/</code> plus the
+            <a href="https://support.google.com/cloud/answer/6158840">Google Cloud
+            Platform project ID</a>.
+
+            Example: <code>projects/my-project-123</code>.
           in: path
           name: projectName
           required: true
           type: string
           x-reservedExpansion: true
         - description: |-
-            The alignment of the timed counts to be returned.
+            [Optional] The alignment of the timed counts to be returned.
             Default is `ALIGNMENT_EQUAL_AT_END`.
           enum:
             - ERROR_COUNT_ALIGNMENT_UNSPECIFIED
@@ -323,7 +335,7 @@ paths:
           name: timeRange.period
           type: string
         - description: |-
-            The sort order in which the results are returned.
+            [Optional] The sort order in which the results are returned.
             Default is `COUNT_DESC`.
           enum:
             - GROUP_ORDER_UNSPECIFIED
@@ -336,7 +348,7 @@ paths:
           type: string
         - collectionFormat: multi
           description: |-
-            List all `ErrorGroupStats` with these IDs.
+            [Optional] List all <code>ErrorGroupStats</code> with these IDs.
             If not specified, all error group stats with a non-zero error count
             for the given selection criteria are returned.
           in: query
@@ -345,39 +357,39 @@ paths:
           name: groupId
           type: array
         - description: |-
-            The exact value to match against
+            [Optional] The exact value to match against
             [`ServiceContext.service`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.service).
           in: query
           name: serviceFilter.service
           type: string
         - description: |-
-            Time where the timed counts shall be aligned if rounded alignment
-            is chosen. Default is 00:00 UTC.
+            [Optional] Time where the timed counts shall be aligned if rounded
+            alignment is chosen. Default is 00:00 UTC.
           in: query
           name: alignmentTime
           type: string
         - description: |-
-            The exact value to match against
+            [Optional] The exact value to match against
             [`ServiceContext.version`](/error-reporting/reference/rest/v1beta1/ServiceContext#FIELDS.version).
           in: query
           name: serviceFilter.version
           type: string
         - description: |-
-            The maximum number of results to return per response.
+            [Optional] The maximum number of results to return per response.
             Default is 20.
           in: query
           name: pageSize
           type: integer
         - description: |-
-            The preferred duration for a single returned `TimedCount`.
+            [Optional] The preferred duration for a single returned `TimedCount`.
             If not set, no timed counts are returned.
           in: query
           name: timedCountDuration
           type: string
         - description: |-
-            A `next_page_token` provided by a previous response. To view additional
-            results, pass this token along with the identical query parameters as the
-            first request.
+            [Optional] A `next_page_token` provided by a previous response. To view
+            additional results, pass this token along with the identical query
+            parameters as the first request.
           in: query
           name: pageToken
           type: string
@@ -416,11 +428,12 @@ definitions:
       This data should be provided by the application when reporting an error,
       unless the
       error report has been generated automatically from Google App Engine logs.
-      All fields are optional.
     properties:
       httpRequest:
         $ref: '#/definitions/HttpRequestContext'
-        description: The HTTP request which was processed when the error was triggered.
+        description: |-
+          The HTTP request which was processed when the error was
+          triggered.
       reportLocation:
         $ref: '#/definitions/SourceLocation'
         description: |-
@@ -460,7 +473,7 @@ definitions:
         type: string
       serviceContext:
         $ref: '#/definitions/ServiceContext'
-        description: The service_context for which this error was reported.
+        description: The `ServiceContext` for which this error was reported.
     type: object
   ErrorGroup:
     description: Description of a group of similar error events.
@@ -472,8 +485,8 @@ definitions:
         type: string
       name:
         description: |-
-          Group resource name.
-          Example: `projects/my-project-123/groups/my-groupid`
+          The group resource name.
+          Example: <code>projects/my-project-123/groups/my-groupid</code>
         type: string
       trackingIssues:
         description: Associated tracking issues.
@@ -563,7 +576,6 @@ definitions:
       This data should be provided by the application when reporting an error,
       unless the
       error report has been generated automatically from Google App Engine logs.
-      All fields are optional.
     properties:
       method:
         description: 'The type of HTTP request, such as `GET`, `POST`, etc.'
@@ -626,10 +638,10 @@ definitions:
     properties:
       service:
         description: |-
-          An identifier of the service, such as the name of the executable, job, or
-          Google App Engine module name. This field is expected to have a low number
-          of values that are relatively stable over time, as opposed to
-          `version`, which can be changed whenever new code is deployed.
+          An identifier of the service, such as the name of the
+          executable, job, or Google App Engine module name. This field is expected
+          to have a low number of values that are relatively stable over time, as
+          opposed to `version`, which can be changed whenever new code is deployed.
 
           Contains the module name for error reports extracted from Google
           App Engine logs or `default` if the App Engine default module is used.
@@ -650,8 +662,8 @@ definitions:
     properties:
       filePath:
         description: |-
-          The source code filename, which can include a truncated relative path, or
-          a full path from a production machine.
+          The source code filename, which can include a truncated relative
+          path, or a full path from a production machine.
         type: string
       functionName:
         description: |-

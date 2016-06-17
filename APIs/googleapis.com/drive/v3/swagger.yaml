@@ -1223,6 +1223,11 @@ paths:
           required: true
           type: string
         - default: false
+          description: Whether to remove the expiration date.
+          in: query
+          name: removeExpiration
+          type: boolean
+        - default: false
           description: Whether to transfer ownership to the specified user and downgrade the current owner to a writer. This parameter is required as an acknowledgement of the side effect.
           in: query
           name: transferOwnership
@@ -2000,6 +2005,10 @@ definitions:
         type: string
       emailAddress:
         description: The email address of the user or group to which this permission refers.
+        type: string
+      expirationTime:
+        description: The time at which this permission will expire (RFC 3339 date-time).
+        format: date-time
         type: string
       id:
         description: 'The ID of this permission. This is a unique identifier for the grantee, and is published in User resources as permissionId.'

@@ -23,7 +23,7 @@ info:
   x-providerName: googleapis.com
   x-serviceName: runtimeconfig
 externalDocs:
-  url: 'https://cloud.google.com/deployment-manager/docs/'
+  url: 'https://cloud.google.com/deployment-manager/runtime-configurator/'
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -586,6 +586,9 @@ definitions:
         description: The cardinality of the `EndCondition`.
     type: object
   ListConfigsResponse:
+    description: |-
+      `ListConfigs()` returns the following response. The order of returned
+      objects is arbitrary; that is, it is not ordered in any particular way.
     properties:
       configs:
         description: |-
@@ -604,6 +607,7 @@ definitions:
         type: string
     type: object
   ListVariablesResponse:
+    description: Response for the `ListVariables()` method.
     properties:
       nextPageToken:
         description: |-

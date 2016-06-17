@@ -1885,13 +1885,13 @@ definitions:
             type: boolean
         type: object
       website:
-        description: The bucket's website configuration.
+        description: 'The bucket''s website configuration, controlling how the service behaves when accessing bucket contents as a web site. See the Static Website Examples for more information.'
         properties:
           mainPageSuffix:
-            description: Behaves as the bucket's directory index where missing objects are treated as potential directories.
+            description: 'If the requested object path is missing, the service will ensure the path has a trailing ''/'', append this suffix, and attempt to retrieve the resulting object. This allows the creation of index.html objects to represent directory pages.'
             type: string
           notFoundPage:
-            description: The custom object to return when a requested resource is not found.
+            description: 'If the requested object path is missing, and any mainPageSuffix object is missing, if applicable, the service will return the named object from this bucket as the content for a 404 Not Found result.'
             type: string
         type: object
     type: object

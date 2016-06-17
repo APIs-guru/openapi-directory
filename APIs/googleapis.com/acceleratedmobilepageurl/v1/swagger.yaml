@@ -172,6 +172,12 @@ definitions:
   BatchGetAmpUrlsRequest:
     description: AMP URL request for a batch of URLs.
     properties:
+      lookupStrategy:
+        description: The lookup_strategy being requested.
+        enum:
+          - FETCH_LIVE_DOC
+          - IN_INDEX_DOC
+        type: string
       urls:
         description: |-
           List of URLs to look up for the paired AMP URLs.

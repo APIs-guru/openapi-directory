@@ -1747,6 +1747,11 @@ paths:
           required: true
           type: string
         - default: false
+          description: Whether to remove the expiration date.
+          in: query
+          name: removeExpiration
+          type: boolean
+        - default: false
           description: Whether changing a role to 'owner' downgrades the current owners to writers. Does nothing if the specified role is not 'owner'.
           in: query
           name: transferOwnership
@@ -1781,6 +1786,11 @@ paths:
           name: permissionId
           required: true
           type: string
+        - default: false
+          description: Whether to remove the expiration date.
+          in: query
+          name: removeExpiration
+          type: boolean
         - default: false
           description: Whether changing a role to 'owner' downgrades the current owners to writers. Does nothing if the specified role is not 'owner'.
           in: query
@@ -3640,6 +3650,10 @@ definitions:
         type: string
       etag:
         description: The ETag of the permission.
+        type: string
+      expirationDate:
+        description: The time at which this permission will expire (RFC 3339 date-time).
+        format: date-time
         type: string
       id:
         description: 'The ID of the user this permission refers to, and identical to the permissionId in the About and Files resources. When making a drive.permissions.insert request, exactly one of the id or value fields must be specified.'

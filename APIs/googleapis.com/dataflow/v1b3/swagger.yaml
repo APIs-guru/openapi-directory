@@ -156,6 +156,7 @@ paths:
           type: string
         - description: The kind of filter to use.
           enum:
+            - UNKNOWN
             - ALL
             - TERMINATED
             - ACTIVE
@@ -543,7 +544,7 @@ definitions:
     properties:
       consumedParallelism:
         $ref: '#/definitions/ReportedParallelism'
-        description: 'Total amount of parallelism in the portion of input of this work item that has already been consumed. In the first two examples above (see remaining_parallelism), the value should be 30 or 3 respectively. The sum of remaining_parallelism and consumed_parallelism should equal the total amount of parallelism in this work item. If specified, must be finite.'
+        description: 'Total amount of parallelism in the portion of input of this task that has already been consumed and is no longer active. In the first two examples above (see remaining_parallelism), the value should be 29 or 2 respectively. The sum of remaining_parallelism and consumed_parallelism should equal the total amount of parallelism in this work item. If specified, must be finite.'
       fractionConsumed:
         description: 'Completion as fraction of the input consumed, from 0.0 (beginning, nothing consumed), to 1.0 (end of the input, entire input consumed).'
         format: double
@@ -553,7 +554,7 @@ definitions:
         description: A Position within the work to represent a progress.
       remainingParallelism:
         $ref: '#/definitions/ReportedParallelism'
-        description: 'Total amount of parallelism in the input of this WorkItem that has not been consumed yet (i.e. can be delegated to a new WorkItem via dynamic splitting). "Amount of parallelism" refers to how many non-empty parts of the input can be read in parallel. This does not necessarily equal number of records. An input that can be read in parallel down to the individual records is called "perfectly splittable". An example of non-perfectly parallelizable input is a block-compressed file format where a block of records has to be read as a whole, but different blocks can be read in parallel. Examples: * If we have read 30 records out of 50 in a perfectly splittable 50-record input, this value should be 20. * If we are reading through block 3 in a block-compressed file consisting of 5 blocks, this value should be 2 (since blocks 4 and 5 can be processed in parallel by new work items via dynamic splitting). * If we are reading through the last block in a block-compressed file, or reading or processing the last record in a perfectly splittable input, this value should be 0, because the remainder of the work item cannot be further split.'
+        description: 'Total amount of parallelism in the input of this task that remains, (i.e. can be delegated to this task and any new tasks via dynamic splitting). Always at least 1 for non-finished work items and 0 for finished. "Amount of parallelism" refers to how many non-empty parts of the input can be read in parallel. This does not necessarily equal number of records. An input that can be read in parallel down to the individual records is called "perfectly splittable". An example of non-perfectly parallelizable input is a block-compressed file format where a block of records has to be read as a whole, but different blocks can be read in parallel. Examples: * If we are processing record #30 (starting at 1) out of 50 in a perfectly splittable 50-record input, this value should be 21 (20 remaining + 1 current). * If we are reading through block 3 in a block-compressed file consisting of 5 blocks, this value should be 3 (since blocks 4 and 5 can be processed in parallel by new tasks via dynamic splitting and the current task remains processing block 3). * If we are reading through the last block in a block-compressed file, or reading or processing the last record in a perfectly splittable input, this value should be 1, because apart from the current task, no additional remainder can be split off.'
     type: object
   ApproximateSplitRequest:
     description: A suggestion by the service to the worker to dynamically split the WorkItem.
@@ -737,6 +738,27 @@ definitions:
           $ref: '#/definitions/InstructionInput'
         type: array
     type: object
+  FloatingPointList:
+    description: A metric value representing a list of floating point numbers.
+    properties:
+      elements:
+        description: Elements of the list.
+        items:
+          format: double
+          type: number
+        type: array
+    type: object
+  FloatingPointMean:
+    description: A representation of a floating point mean metric contribution.
+    properties:
+      count:
+        $ref: '#/definitions/SplitInt64'
+        description: The number of values being aggregated.
+      sum:
+        description: The sum of all values being aggregated.
+        format: double
+        type: number
+    type: object
   InstructionInput:
     description: 'An input of an instruction, as a reference to an output of a producer instruction.'
     properties:
@@ -763,6 +785,25 @@ definitions:
       systemName:
         description: System-defined name of this output. Unique across the workflow.
         type: string
+    type: object
+  IntegerList:
+    description: A metric value representing a list of integers.
+    properties:
+      elements:
+        description: Elements of the list.
+        items:
+          $ref: '#/definitions/SplitInt64'
+        type: array
+    type: object
+  IntegerMean:
+    description: A representation of an integer mean metric contribution.
+    properties:
+      count:
+        $ref: '#/definitions/SplitInt64'
+        description: The number of values being aggregated.
+      sum:
+        $ref: '#/definitions/SplitInt64'
+        description: The sum of all values being aggregated.
     type: object
   Job:
     description: Defines a job to be run by the Dataflow service.
@@ -1002,6 +1043,18 @@ definitions:
         description: System-defined name of this MapTask. Unique across the workflow.
         type: string
     type: object
+  MetricShortId:
+    description: The metric short id is returned to the user alongside an offset into ReportWorkItemStatusRequest
+    properties:
+      metricIndex:
+        description: The index of the corresponding metric in the ReportWorkItemStatusRequest. Required.
+        format: int32
+        type: integer
+      shortId:
+        description: The service-generated short identifier for the metric.
+        format: int64
+        type: string
+    type: object
   MetricStructuredName:
     description: 'Identifies a metric, by describing the source which generated the metric.'
     properties:
@@ -1057,6 +1110,16 @@ definitions:
     properties:
       tag:
         description: The id of the tag the user code will emit to this output by; this should correspond to the tag of some SideInputInfo.
+        type: string
+    type: object
+  NameAndKind:
+    description: Basic metadata about a metric.
+    properties:
+      kind:
+        description: 'Metric aggregation kind. The possible metric aggregation kinds are "Sum", "Max", "Min", "Mean", "Set", "And", and "Or". The specified aggregation kind is case-insensitive. If omitted, this is not an aggregated value but instead a single metric sample value.'
+        type: string
+      name:
+        description: Name of the metric.
         type: string
     type: object
   Package:
@@ -1486,6 +1549,18 @@ definitions:
         $ref: '#/definitions/Source'
         description: DEPRECATED
     type: object
+  SplitInt64:
+    description: 'A representation of an int64, n, that is immune to precision loss when encoded in JSON.'
+    properties:
+      highBits:
+        description: 'The high order bits, including the sign: n >> 32.'
+        format: int32
+        type: integer
+      lowBits:
+        description: 'The low order bits: n & 0xffffffff.'
+        format: uint32
+        type: integer
+    type: object
   StateFamilyConfig:
     description: State family configuration.
     properties:
@@ -1545,6 +1620,24 @@ definitions:
         $ref: '#/definitions/StreamingStageLocation'
         description: The stream is part of another computation within the current streaming Dataflow job.
     type: object
+  StreamingComputationConfig:
+    description: Configuration information for a single streaming computation.
+    properties:
+      computationId:
+        description: Unique identifier for this computation.
+        type: string
+      instructions:
+        description: Instructions that comprise the computation.
+        items:
+          $ref: '#/definitions/ParallelInstruction'
+        type: array
+      stageName:
+        description: Stage name of this computation.
+        type: string
+      systemName:
+        description: System defined name for this computation.
+        type: string
+    type: object
   StreamingComputationRanges:
     description: Describes full or partial data disk assignment information of the computation ranges.
     properties:
@@ -1577,6 +1670,20 @@ definitions:
           - STREAMING_COMPUTATION_TASK_STOP
           - STREAMING_COMPUTATION_TASK_START
         type: string
+    type: object
+  StreamingConfigTask:
+    description: A task that carries configuration information for streaming computations.
+    properties:
+      streamingComputationConfigs:
+        description: Set of computation configuration information.
+        items:
+          $ref: '#/definitions/StreamingComputationConfig'
+        type: array
+      userStepToStateFamilyNameMap:
+        additionalProperties:
+          type: string
+        description: Map from user step names to state families.
+        type: object
     type: object
   StreamingSetupTask:
     description: A task which initializes part of a streaming Dataflow job.
@@ -1612,6 +1719,15 @@ definitions:
       streamId:
         description: Identifies the particular stream within the streaming Dataflow job.
         type: string
+    type: object
+  StringList:
+    description: A metric value representing a list of strings.
+    properties:
+      elements:
+        description: Elements of the list.
+        items:
+          type: string
+        type: array
     type: object
   TaskRunnerSettings:
     description: Taskrunner configuration settings.
@@ -1749,9 +1865,53 @@ definitions:
       streamingComputationTask:
         $ref: '#/definitions/StreamingComputationTask'
         description: Additional information for StreamingComputationTask WorkItems.
+      streamingConfigTask:
+        $ref: '#/definitions/StreamingConfigTask'
+        description: Additional information for StreamingConfigTask WorkItems.
       streamingSetupTask:
         $ref: '#/definitions/StreamingSetupTask'
         description: Additional information for StreamingSetupTask WorkItems.
+    type: object
+  WorkItemMetricUpdate:
+    description: 'An update to a metric sent from a worker. Unlike MetricUpdate, this format does not support: messages: use WorkerMessage API CloudMetrics: use MetricUpdate until this includes structured names'
+    properties:
+      boolean:
+        description: 'Boolean value for And, Or.'
+        type: boolean
+      cumulative:
+        description: 'True if this metric is reported as the total cumulative aggregate value accumulated since the worker started working on this WorkItem. By default this is false, indicating that this metric is reported as a delta that is not associated with any WorkItem.'
+        type: boolean
+      floatingPoint:
+        description: 'Floating point value for Sum, Max, Min.'
+        format: double
+        type: number
+      floatingPointList:
+        $ref: '#/definitions/FloatingPointList'
+        description: 'List of floating point numbers, for Set.'
+      floatingPointMean:
+        $ref: '#/definitions/FloatingPointMean'
+        description: Floating point mean aggregation value for Mean.
+      integer:
+        $ref: '#/definitions/SplitInt64'
+        description: 'Integer value for Sum, Max, Min.'
+      integerList:
+        $ref: '#/definitions/IntegerList'
+        description: 'List of integers, for Set.'
+      integerMean:
+        $ref: '#/definitions/IntegerMean'
+        description: Integer mean aggregation value for Mean.
+      internal:
+        description: Value for internally-defined metrics use by the Dataflow service.
+      nameAndKind:
+        $ref: '#/definitions/NameAndKind'
+        description: Metric name and aggregation type.
+      shortId:
+        description: 'The service-generated short identifier for this metric. The short_id -> (name, metadata) mapping is constant for the lifetime of a job.'
+        format: int64
+        type: string
+      stringList:
+        $ref: '#/definitions/StringList'
+        description: 'List of strings, for Set.'
     type: object
   WorkItemServiceState:
     description: The Dataflow service's idea of the current state of a WorkItem being processed by a worker.
@@ -1764,6 +1924,11 @@ definitions:
       leaseExpireTime:
         description: Time at which the current lease will expire.
         type: string
+      metricShortId:
+        description: 'The short ids that workers should use in subsequent metric updates. Workers should strive to use short ids whenever possible, but it is ok to request the short_id again if a worker lost track of it (e.g. if the worker is recovering from a crash). NOTE: it is possible that the response may have short ids for a subset of the metrics.'
+        items:
+          $ref: '#/definitions/MetricShortId'
+        type: array
       nextReportIndex:
         description: 'The index value to use for the next report sent by the worker. Note: If the report call fails for whatever reason, the worker should reuse this index for subsequent report attempts.'
         format: int64
@@ -1796,7 +1961,7 @@ definitions:
           $ref: '#/definitions/Status'
         type: array
       metricUpdates:
-        description: Worker output metrics (counters) for this WorkItem.
+        description: DEPRECATED in favor of worker_metric_update.
         items:
           $ref: '#/definitions/MetricUpdate'
         type: array
@@ -1825,6 +1990,11 @@ definitions:
       workItemId:
         description: Identifies the WorkItem.
         type: string
+      workItemMetricUpdates:
+        description: Worker output metrics (counters) for this WorkItem.
+        items:
+          $ref: '#/definitions/WorkItemMetricUpdate'
+        type: array
     type: object
   WorkerHealthReport:
     description: WorkerHealthReport contains information about the health of a worker. The VM should be identified by the labels attached to the WorkerMessage that this health ping belongs to.
@@ -1955,7 +2125,7 @@ definitions:
         description: Extra arguments for this worker pool.
         type: object
       subnetwork:
-        description: 'Subnetwork to which VMs will be assigned, if desired. Expected to be of the form "zones/ZONE/subnetworks/SUBNETWORK".'
+        description: 'Subnetwork to which VMs will be assigned, if desired. Expected to be of the form "regions/REGION/subnetworks/SUBNETWORK".'
         type: string
       taskrunnerSettings:
         $ref: '#/definitions/TaskRunnerSettings'

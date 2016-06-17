@@ -1238,6 +1238,9 @@ definitions:
       name:
         description: Name of the type.
         type: string
+      operation:
+        $ref: '#/definitions/Operation'
+        description: '[Output Only] The Operation that most recently ran, or is currently running, on this type.'
       selfLink:
         description: '[Output Only] Self link for the type.'
         type: string

@@ -748,6 +748,11 @@ paths:
           name: $top
           required: false
           type: integer
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          type: string
       responses:
         '200':
           description: OK
@@ -755,6 +760,7 @@ paths:
             $ref: '#/definitions/WorkflowTriggerHistoryListResult'
       tags:
         - WorkflowTriggerHistories
+      x-ms-odata: '#/definitions/WorkflowTriggerHistoryFilter'
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/triggers/{triggerName}/histories/{historyName}':
@@ -1436,6 +1442,12 @@ definitions:
         description: Gets the workflow trigger history type.
         readOnly: true
         type: string
+    type: object
+  WorkflowTriggerHistoryFilter:
+    properties:
+      status:
+        $ref: '#/definitions/WorkflowStatus'
+        description: Gets or sets the status of workflow trigger history.
     type: object
   WorkflowTriggerHistoryListResult:
     properties:
