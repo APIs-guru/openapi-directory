@@ -3,10 +3,15 @@
     "api-spec-converter": "git://github.com/APIs-guru/api-spec-converter",
     "bluebird": "^3.3.4",
     "commander": "^2.8.1",
+    "concurrent-transform": "^1.0.0",
     "deep-sort-object": "^1.0.1",
     "deploy-to-gh-pages": "^1.2.0",
     "editor": "^1.0.0",
     "glob": "^7.0.3",
+    "gulp": "^3.9.1",
+    "gulp-awspublish": "^3.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
     "js-yaml": "^3.4.3",
     "json-merge-patch": "^0.2.3",
     "json-pointer": "^0.5.0",
@@ -14,6 +19,7 @@
     "jsonpath": "^0.2.0",
     "lodash": "^4.6.1",
     "makeRequest": "github:apis-guru/makeRequest",
+    "merge-stream": "^1.0.0",
     "mime-db": "^1.19.0",
     "mime-lookup": "0.0.2",
     "mkdirp": "^0.5.1",
@@ -31,6 +37,6 @@
   },
   "scripts": {
     "test": "scripts/collection.js validate",
-    "deploy": "scripts/deploy_v1.js && deploy-to-gh-pages deploy_v1 && scripts/deploy.js && deploy-to-gh-pages --repo APIs-guru-API/v2 deploy && scripts/deploy_badges.js && deploy-to-gh-pages --repo APIs-guru-API/badges badges"
+    "deploy": "scripts/deploy_v1.js && deploy-to-gh-pages deploy_v1 && scripts/deploy.js && deploy-to-gh-pages --repo APIs-guru-API/v2 deploy && scripts/deploy_badges.js && deploy-to-gh-pages --repo APIs-guru-API/badges badges && gulp publish"
   }
 }
