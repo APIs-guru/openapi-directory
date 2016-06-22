@@ -12,7 +12,7 @@
 [![Share on Twitter][twitter-image]][twitter-link]
 [![Follow on Twitter][twitterFollow-image]][twitterFollow-link]
 
-Repository for API models in [OpenAPI(aka Swagger)](https://openapis.org) [2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) format.<BR>
+Directory of API specs in [OpenAPI(aka Swagger)](https://openapis.org) [2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) format.<BR>
 API access to collection: [Go!](API.md)
 
 [![Add API][addAPI-image]][addAPI-link]
