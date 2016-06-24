@@ -3,7 +3,6 @@ var Path = require('path');
 var gulp = require('gulp');
 var rename = require('gulp-rename');
 var merge = require('merge-stream');
-var replace = require('gulp-replace');
 var awspublish = require('gulp-awspublish');
 var parallelize = require('concurrent-transform');
 
@@ -28,7 +27,6 @@ gulp.task('publish', function() {
 
   var apiV2 = gulp.src('./deploy/**')
     .pipe(prefixWithDir('v2'))
-    .pipe(replace(/api.apis.guru/g, 'd1n7uhp9cctu2f.cloudfront.net', {skipBinary: true}));
   var badges = gulp.src('./badges/**')
     .pipe(prefixWithDir('badges'));
 
