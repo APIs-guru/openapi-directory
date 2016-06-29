@@ -434,6 +434,24 @@ definitions:
   CancelOperationRequest:
     description: The request message for Operations.CancelOperation.
     type: object
+  ComputeEngine:
+    description: Describes a Compute Engine resource that is being managed by a running pipeline.
+    properties:
+      diskNames:
+        description: The names of the disks that were created for this pipeline.
+        items:
+          type: string
+        type: array
+      instanceName:
+        description: The instance on which the operation is running.
+        type: string
+      machineType:
+        description: The machine type of the instance.
+        type: string
+      zone:
+        description: The availability zone in which the instance resides.
+        type: string
+    type: object
   ControllerConfig:
     description: Stores the information that the controller will fetch from the server in order to run. Should only be used by VMs created by the Pipelines Service and not by end users.
     properties:
@@ -505,24 +523,6 @@ definitions:
     type: object
   Empty:
     description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`.'
-    type: object
-  GCE:
-    description: Describes a GCE resource that is being managed by a running pipeline.
-    properties:
-      diskNames:
-        description: The names of the disks that were created for this pipeline.
-        items:
-          type: string
-        type: array
-      instanceName:
-        description: The instance on which the operation is running.
-        type: string
-      machineType:
-        description: The machine type of the instance.
-        type: string
-      zone:
-        description: The availability zone in which the instance resides.
-        type: string
     type: object
   ImportReadGroupSetsResponse:
     description: The read group set import response.
@@ -612,10 +612,19 @@ definitions:
       description:
         description: Required description of event.
         type: string
+      endTime:
+        description: 'Optional time of when event finished. An event can have a start time and no finish time. If an event has a finish time, there must be a start time.'
+        type: string
+      startTime:
+        description: Optional time of when event started.
+        type: string
     type: object
   OperationMetadata:
     description: Metadata describing an Operation.
     properties:
+      clientId:
+        description: Optionally provided by the caller when submitting the request that creates the operation.
+        type: string
       createTime:
         description: The time at which the job was submitted to the Genomics service.
         type: string
@@ -640,6 +649,9 @@ definitions:
           description: Properties of the object. Contains field @ype with type URL.
         description: Runtime metadata on this Operation.
         type: object
+      startTime:
+        description: The time at which the job began to run.
+        type: string
     type: object
   Pipeline:
     description: 'The pipeline object. Represents a transformation from a set of input parameters to a set of output parameters. The transformation is defined as a docker image and command to run within that image. Each pipeline is run on a Google Compute Engine VM. A pipeline can be created with the `create` method and then later run with the `run` method, or a pipeline can be defined and run all at once with the `run` method.'
@@ -770,8 +782,8 @@ definitions:
   RuntimeMetadata:
     description: Runtime metadata that will be populated in the runtimeMetadata field of the Operation associated with a RunPipeline execution.
     properties:
-      gce:
-        $ref: '#/definitions/GCE'
+      computeEngine:
+        $ref: '#/definitions/ComputeEngine'
         description: Execution information specific to Google Compute Engine.
     type: object
   ServiceAccount:

@@ -42,7 +42,6 @@ parameters:
     default: json
     description: Data format for the response.
     enum:
-      - csv
       - json
     in: query
     name: alt
@@ -1409,6 +1408,10 @@ definitions:
         description: '[Optional] Limits the billing tier for this job. Queries that have resource usage beyond this tier will fail (without incurring a charge). If unspecified, this will be set to your project default.'
         format: int32
         type: integer
+      maximumBytesBilled:
+        description: '[Optional] Limits the bytes billed for this job. Queries that will have bytes billed beyond this limit will fail (without incurring a charge). If unspecified, this will be set to your project default.'
+        format: int64
+        type: string
       preserveNulls:
         description: '[Deprecated] This property is deprecated.'
         type: boolean

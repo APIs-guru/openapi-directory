@@ -148,183 +148,6 @@ paths:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-  '/v1beta1/organizations/{organizationId}':
-    get:
-      description: Fetches an Organization resource identified by the specified `organization_id`.
-      operationId: cloudresourcemanager.organizations.get
-      parameters:
-        - description: The id of the Organization resource to fetch.
-          in: path
-          name: organizationId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Organization'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-      tags:
-        - organizations
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-    put:
-      description: Updates an Organization resource identified by the specified `organization_id`.
-      operationId: cloudresourcemanager.organizations.update
-      parameters:
-        - description: An immutable id for the Organization that is assigned on creation. This should be omitted when creating a new Organization. This field is read-only.
-          in: path
-          name: organizationId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Organization'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Organization'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - organizations
-  '/v1beta1/organizations/{resource}:getIamPolicy':
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-    post:
-      description: Gets the access control policy for an Organization resource. May be empty if no such policy or resource exists.
-      operationId: cloudresourcemanager.organizations.getIamPolicy
-      parameters:
-        - description: 'REQUIRED: The resource for which the policy is being requested. `resource` is usually specified as a path, such as `projects/*project*/zones/*zone*/disks/*disk*`. The format for the path specified in this value is resource specific and is specified in the `getIamPolicy` documentation.'
-          in: path
-          name: resource
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/GetIamPolicyRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Policy'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-      tags:
-        - organizations
-  '/v1beta1/organizations/{resource}:setIamPolicy':
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-    post:
-      description: Sets the access control policy on an Organization resource. Replaces any existing policy.
-      operationId: cloudresourcemanager.organizations.setIamPolicy
-      parameters:
-        - description: 'REQUIRED: The resource for which the policy is being specified. `resource` is usually specified as a path, such as `projects/*project*/zones/*zone*/disks/*disk*`. The format for the path specified in this value is resource specific and is specified in the `setIamPolicy` documentation.'
-          in: path
-          name: resource
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/SetIamPolicyRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Policy'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - organizations
-  '/v1beta1/organizations/{resource}:testIamPermissions':
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-    post:
-      description: Returns permissions that a caller has on the specified Organization.
-      operationId: cloudresourcemanager.organizations.testIamPermissions
-      parameters:
-        - description: 'REQUIRED: The resource for which the policy detail is being requested. `resource` is usually specified as a path, such as `projects/*project*/zones/*zone*/disks/*disk*`. The format for the path specified in this value is resource specific and is specified in the `testIamPermissions` documentation.'
-          in: path
-          name: resource
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestIamPermissionsRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/TestIamPermissionsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
-      tags:
-        - organizations
   /v1beta1/projects:
     get:
       description: Lists Projects that are visible to the user and satisfy the specified filter. This method returns Projects in an unspecified order. New Projects do not necessarily appear at the end of the list.
@@ -388,7 +211,7 @@ paths:
         - projects
   '/v1beta1/projects/{projectId}':
     delete:
-      description: 'Marks the Project identified by the specified `project_id` (for example, `my-project-123`) for deletion. This method will only affect the Project if the following criteria are met: + The Project does not have a billing account associated with it. + The Project has a lifecycle state of ACTIVE. This method changes the Project''s lifecycle state from ACTIVE to DELETE_REQUESTED. The deletion starts at an unspecified time, at which point the lifecycle state changes to DELETE_IN_PROGRESS. Until the deletion completes, you can check the lifecycle state checked by retrieving the Project with GetProject, and the Project remains visible to ListProjects. However, you cannot update the project. After the deletion completes, the Project is not retrievable by the GetProject and ListProjects methods. The caller must have modify permissions for this Project.'
+      description: 'Marks the Project identified by the specified `project_id` (for example, `my-project-123`) for deletion. This method will only affect the Project if the following criteria are met: + The Project does not have a billing account associated with it. + The Project has a lifecycle state of ACTIVE. This method changes the Project''s lifecycle state from ACTIVE to DELETE_REQUESTED. The deletion starts at an unspecified time, at which point the project is no longer accessible. Until the deletion completes, you can check the lifecycle state checked by retrieving the Project with GetProject, and the Project remains visible to ListProjects. However, you cannot update the project. After the deletion completes, the Project is not retrievable by the GetProject and ListProjects methods. The caller must have modify permissions for this Project.'
       operationId: cloudresourcemanager.projects.delete
       parameters:
         - description: 'The Project ID (for example, `foo-bar-123`). Required.'
@@ -520,7 +343,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
     post:
-      description: 'Restores the Project identified by the specified `project_id` (for example, `my-project-123`). You can only use this method for a Project that has a lifecycle state of DELETE_REQUESTED. After deletion starts, as indicated by a lifecycle state of DELETE_IN_PROGRESS, the Project cannot be restored. The caller must have modify permissions for this Project.'
+      description: 'Restores the Project identified by the specified `project_id` (for example, `my-project-123`). You can only use this method for a Project that has a lifecycle state of DELETE_REQUESTED. After deletion starts, the Project cannot be restored. The caller must have modify permissions for this Project.'
       operationId: cloudresourcemanager.projects.undelete
       parameters:
         - description: 'The project ID (for example, `foo-bar-123`). Required.'
@@ -598,7 +421,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
     post:
-      description: 'Sets the IAM access control policy for the specified Project. Replaces any existing policy. The following constraints apply when using `setIamPolicy()`: + Project currently supports only `user:{emailid}` and `serviceAccount:{emailid}` members in a `Binding` of a `Policy`. + To be added as an `owner`, a user must be invited via Cloud Platform console and must accept the invitation. + Members cannot be added to more than one role in the same policy. + There must be at least one owner who has accepted the Terms of Service (ToS) agreement in the policy. Calling `setIamPolicy()` to to remove the last ToS-accepted owner from the policy will fail. + Calling this method requires enabling the App Engine Admin API. Note: Removing service accounts from policies or changing their roles can render services completely inoperable. It is important to understand how the service account is being used before removing or updating its roles.'
+      description: 'Sets the IAM access control policy for the specified Project. Replaces any existing policy. The following constraints apply when using `setIamPolicy()`: + Project does not support `allUsers` and `allAuthenticatedUsers` as `members` in a `Binding` of a `Policy`. + The owner role can be granted only to `user` and `serviceAccount`. + Service accounts can be made owners of a project directly without any restrictions. However, to be added as an owner, a user must be invited via Cloud Platform console and must accept the invitation. + A user cannot be granted the owner role using `setIamPolicy()`. The user must be granted the owner role using the Cloud Platform Console and must explicitly accept the invitation. + Invitations to grant the owner role cannot be sent using `setIamPolicy()`; they must be sent only using the Cloud Platform Console. + Membership changes that leave the project without any owners that have accepted the Terms of Service (ToS) will be rejected. + Members cannot be added to more than one role in the same policy. + There must be at least one owner who has accepted the Terms of Service (ToS) agreement in the policy. Calling `setIamPolicy()` to to remove the last ToS-accepted owner from the policy will fail. This restriction also applies to legacy projects that no longer have owners who have accepted the ToS. Edits to IAM policies will be rejected until the lack of a ToS-accepting owner is rectified. + Calling this method requires enabling the App Engine Admin API. Note: Removing service accounts from policies or changing their roles can render services completely inoperable. It is important to understand how the service account is being used before removing or updating its roles.'
       operationId: cloudresourcemanager.projects.setIamPolicy
       parameters:
         - description: 'REQUIRED: The resource for which the policy is being specified. `resource` is usually specified as a path, such as `projects/*project*/zones/*zone*/disks/*disk*`. The format for the path specified in this value is resource specific and is specified in the `setIamPolicy` documentation.'
@@ -660,6 +483,192 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - projects
+  '/v1beta1/{name}':
+    get:
+      description: Fetches an Organization resource identified by the specified resource name.
+      operationId: cloudresourcemanager.organizations.get
+      parameters:
+        - description: 'The resource name of the Organization to fetch. Its format is "organizations/[organization_id]". For example, "organizations/1234".'
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - description: The id of the Organization resource to fetch. This field is deprecated and will be removed in v1. Use name instead.
+          in: query
+          name: organizationId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Organization'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+      tags:
+        - organizations
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    put:
+      description: Updates an Organization resource identified by the specified resource name.
+      operationId: cloudresourcemanager.organizations.update
+      parameters:
+        - description: 'Output Only. The resource name of the organization. This is the organization''s relative path in the API. Its format is "organizations/[organization_id]". For example, "organizations/1234".'
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Organization'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Organization'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - organizations
+  '/v1beta1/{resource}:getIamPolicy':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: 'Gets the access control policy for an Organization resource. May be empty if no such policy or resource exists. The `resource` field should be the organization''s resource name, e.g. "organizations/123". For backward compatibility, the resource provided may also be the organization_id. This will not be supported in v1.'
+      operationId: cloudresourcemanager.organizations.getIamPolicy
+      parameters:
+        - description: 'REQUIRED: The resource for which the policy is being requested. `resource` is usually specified as a path, such as `projects/*project*/zones/*zone*/disks/*disk*`. The format for the path specified in this value is resource specific and is specified in the `getIamPolicy` documentation.'
+          in: path
+          name: resource
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GetIamPolicyRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+      tags:
+        - organizations
+  '/v1beta1/{resource}:setIamPolicy':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: 'Sets the access control policy on an Organization resource. Replaces any existing policy. The `resource` field should be the organization''s resource name, e.g. "organizations/123". For backward compatibility, the resource provided may also be the organization_id. This will not be supported in v1.'
+      operationId: cloudresourcemanager.organizations.setIamPolicy
+      parameters:
+        - description: 'REQUIRED: The resource for which the policy is being specified. `resource` is usually specified as a path, such as `projects/*project*/zones/*zone*/disks/*disk*`. The format for the path specified in this value is resource specific and is specified in the `setIamPolicy` documentation.'
+          in: path
+          name: resource
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SetIamPolicyRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - organizations
+  '/v1beta1/{resource}:testIamPermissions':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: 'Returns permissions that a caller has on the specified Organization. The `resource` field should be the organization''s resource name, e.g. "organizations/123". For backward compatibility, the resource provided may also be the organization_id. This will not be supported in v1.'
+      operationId: cloudresourcemanager.organizations.testIamPermissions
+      parameters:
+        - description: 'REQUIRED: The resource for which the policy detail is being requested. `resource` is usually specified as a path, such as `projects/*project*/zones/*zone*/disks/*disk*`. The format for the path specified in this value is resource specific and is specified in the `testIamPermissions` documentation.'
+          in: path
+          name: resource
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestIamPermissionsRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestIamPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+      tags:
+        - organizations
 definitions:
   Ancestor:
     description: Identifying information for a single ancestor of a project.
@@ -731,8 +740,18 @@ definitions:
       displayName:
         description: A friendly string to be used to refer to the Organization in the UI. This field is required.
         type: string
+      lifecycleState:
+        description: The organization's current lifecycle state. Assigned by the server. @OutputOnly
+        enum:
+          - LIFECYCLE_STATE_UNSPECIFIED
+          - ACTIVE
+          - DELETE_REQUESTED
+        type: string
+      name:
+        description: 'Output Only. The resource name of the organization. This is the organization''s relative path in the API. Its format is "organizations/[organization_id]". For example, "organizations/1234".'
+        type: string
       organizationId:
-        description: An immutable id for the Organization that is assigned on creation. This should be omitted when creating a new Organization. This field is read-only.
+        description: An immutable id for the Organization that is assigned on creation. This should be omitted when creating a new Organization. This field is read-only. This field is deprecated and will be removed in v1. Use name instead.
         type: string
       owner:
         $ref: '#/definitions/OrganizationOwner'
@@ -782,7 +801,7 @@ definitions:
           - DELETE_IN_PROGRESS
         type: string
       name:
-        description: 'The user-assigned name of the Project. It must be 4 to 30 characters. Allowed characters are: lowercase and uppercase letters, numbers, hyphen, single-quote, double-quote, space, and exclamation point. Example: My Project Read-write.'
+        description: 'The user-assigned display name of the Project. It must be 4 to 30 characters. Allowed characters are: lowercase and uppercase letters, numbers, hyphen, single-quote, double-quote, space, and exclamation point. Example: My Project Read-write.'
         type: string
       parent:
         $ref: '#/definitions/ResourceId'
@@ -802,7 +821,7 @@ definitions:
         description: Required field for the type-specific id. This should correspond to the id used in the type-specific API's.
         type: string
       type:
-        description: 'Required field representing the resource type this id is for. At present, the only valid type is "organization".'
+        description: 'Required field representing the resource type this id is for. At present, the valid types are "project" and "organization".'
         type: string
     type: object
   SetIamPolicyRequest:

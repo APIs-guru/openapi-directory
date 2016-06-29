@@ -3799,6 +3799,45 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - urlMaps
+  '/{project}/global/urlMaps/{urlMap}/invalidateCache':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Initiates a cache invalidation operation, invalidating the specified path, scoped to the specified UrlMap.'
+      operationId: compute.urlMaps.invalidateCache
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the UrlMap scoping this request.
+          in: path
+          name: urlMap
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CacheInvalidationRule'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - urlMaps
   '/{project}/global/urlMaps/{urlMap}/validate':
     parameters:
       - $ref: '#/parameters/alt'
@@ -9137,6 +9176,9 @@ definitions:
       description:
         description: An optional description of this resource. Provide this property when you create the resource.
         type: string
+      enableCDN:
+        description: 'If true, enable Cloud CDN for this BackendService.'
+        type: boolean
       fingerprint:
         description: Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a BackendService. An up-to-date fingerprint must be provided in order to update the BackendService.
         format: byte
@@ -9216,6 +9258,11 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+    type: object
+  CacheInvalidationRule:
+    properties:
+      path:
         type: string
     type: object
   CustomerEncryptionKey:

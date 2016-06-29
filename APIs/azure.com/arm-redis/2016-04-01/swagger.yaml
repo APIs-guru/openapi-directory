@@ -275,6 +275,80 @@ paths:
             $ref: '#/definitions/RedisListKeysResult'
       tags:
         - Redis
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/patchSchedules/default':
+    delete:
+      description: Deletes the patching schedule for redis cache.
+      operationId: PatchSchedules_Delete
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the redis cache.
+          in: path
+          name: name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+      tags:
+        - Redis
+    get:
+      description: Gets the patching schedule for redis cache.
+      operationId: PatchSchedules_Get
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the redis cache.
+          in: path
+          name: name
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Response of Get patch schedules.
+          schema:
+            $ref: '#/definitions/RedisPatchSchedulesResponse'
+      tags:
+        - Redis
+    put:
+      description: Create or replace the patching schedule for redis cache.
+      operationId: PatchSchedules_CreateOrUpdate
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the redis cache.
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: Parameters to set patch schedules for redis cache.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/RedisPatchSchedulesRequest'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/RedisPatchSchedulesResponse'
+      tags:
+        - Redis
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/Redis/{name}/regenerateKey':
     post:
       description: Regenerate redis cache's access keys. This operation requires write permission to the cache resource.
@@ -374,6 +448,37 @@ definitions:
         items:
           $ref: '#/definitions/RedisResource'
         type: array
+  RedisPatchSchedulesRequest:
+    description: Parameters to set patch schedules for redis cache.
+    properties:
+      properties:
+        $ref: '#/definitions/ScheduleEntries'
+        description: List of patch schedules for redis cache.
+        x-ms-client-flatten: true
+    required:
+      - properties
+  RedisPatchSchedulesResponse:
+    description: Response to put/get patch schedules for redis cache.
+    properties:
+      id:
+        description: Resource Id
+        readOnly: true
+        type: string
+      location:
+        description: Resource location
+        type: string
+      name:
+        description: Resource name
+        readOnly: true
+        type: string
+      properties:
+        $ref: '#/definitions/ScheduleEntries'
+        description: List of patch schedules for redis cache.
+        x-ms-client-flatten: true
+      type:
+        description: Resource type
+        readOnly: true
+        type: string
   RedisProperties:
     description: Properties supplied to CreateOrUpdate redis operation.
     properties:
@@ -397,9 +502,11 @@ definitions:
         description: What sku of redis cache to deploy.
       staticIP:
         description: Required when deploying a redis cache inside an existing Azure Virtual Network.
+        pattern: ^\d+\.\d+\.\d+\.\d+$
         type: string
       subnetId:
         description: 'The full resource ID of a subnet in a virtual network to deploy the redis cache in. Example format: /subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1'
+        pattern: '^/subscriptions/[^/]*/resourceGroups/[^/]*/providers/Microsoft.(ClassicNetwork|Network)/virtualNetworks/[^/]*/subnets/[^/]*$'
         type: string
       tenantSettings:
         additionalProperties:
@@ -511,6 +618,43 @@ definitions:
     required:
       - location
     x-ms-azure-resource: true
+  ScheduleEntries:
+    description: List of patch schedules for redis cache.
+    properties:
+      scheduleEntries:
+        description: List of patch schedules for redis cache.
+        items:
+          $ref: '#/definitions/ScheduleEntry'
+        type: array
+    required:
+      - scheduleEntries
+  ScheduleEntry:
+    properties:
+      dayOfWeek:
+        description: Day of week when cache can be patched.
+        enum:
+          - Monday
+          - Tuesday
+          - Wednesday
+          - Thursday
+          - Friday
+          - Saturday
+          - Sunday
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: DayOfWeek
+      maintenanceWindow:
+        description: 'ISO8601 timespan specifying how much time cache patching can take. '
+        format: duration
+        type: string
+      startHourUtc:
+        description: Start hour after which cache patching can start.
+        format: int32
+        type: integer
+    required:
+      - dayOfWeek
+      - startHourUtc
   Sku:
     description: Sku parameters supplied to the create redis operation.
     properties:

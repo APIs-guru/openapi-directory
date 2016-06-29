@@ -2248,6 +2248,24 @@ definitions:
         format: int64
         type: string
     type: object
+  ComputeEngine:
+    description: Describes a Compute Engine resource that is being managed by a running pipeline.
+    properties:
+      diskNames:
+        description: The names of the disks that were created for this pipeline.
+        items:
+          type: string
+        type: array
+      instanceName:
+        description: The instance on which the operation is running.
+        type: string
+      machineType:
+        description: The machine type of the instance.
+        type: string
+      zone:
+        description: The availability zone in which the instance resides.
+        type: string
+    type: object
   CoverageBucket:
     description: A bucket over which read coverage has been precomputed. A bucket corresponds to a specific range of the reference sequence.
     properties:
@@ -2363,24 +2381,6 @@ definitions:
         type: string
       sourceName:
         description: The name of the source of this data.
-        type: string
-    type: object
-  GCE:
-    description: Describes a GCE resource that is being managed by a running pipeline.
-    properties:
-      diskNames:
-        description: The names of the disks that were created for this pipeline.
-        items:
-          type: string
-        type: array
-      instanceName:
-        description: The instance on which the operation is running.
-        type: string
-      machineType:
-        description: The machine type of the instance.
-        type: string
-      zone:
-        description: The availability zone in which the instance resides.
         type: string
     type: object
   GetIamPolicyRequest:
@@ -2574,10 +2574,19 @@ definitions:
       description:
         description: Required description of event.
         type: string
+      endTime:
+        description: 'Optional time of when event finished. An event can have a start time and no finish time. If an event has a finish time, there must be a start time.'
+        type: string
+      startTime:
+        description: Optional time of when event started.
+        type: string
     type: object
   OperationMetadata:
     description: Metadata describing an Operation.
     properties:
+      clientId:
+        description: Optionally provided by the caller when submitting the request that creates the operation.
+        type: string
       createTime:
         description: The time at which the job was submitted to the Genomics service.
         type: string
@@ -2602,6 +2611,9 @@ definitions:
           description: Properties of the object. Contains field @ype with type URL.
         description: Runtime metadata on this Operation.
         type: object
+      startTime:
+        description: The time at which the job began to run.
+        type: string
     type: object
   Policy:
     description: 'Defines an Identity and Access Management (IAM) policy. It is used to specify access control policies for Cloud Platform resources. A `Policy` consists of a list of `bindings`. A `Binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM. **Example** { "bindings": [ { "role": "roles/owner", "members": [ "user:mike@example.com", "group:admins@example.com", "domain:google.com", "serviceAccount:my-other-app@appspot.gserviceaccount.com", ] }, { "role": "roles/viewer", "members": ["user:sean@example.com"] } ] } For a description of IAM and its features, see the [IAM developer''s guide](https://cloud.google.com/iam).'
@@ -2877,8 +2889,8 @@ definitions:
   RuntimeMetadata:
     description: Runtime metadata that will be populated in the runtimeMetadata field of the Operation associated with a RunPipeline execution.
     properties:
-      gce:
-        $ref: '#/definitions/GCE'
+      computeEngine:
+        $ref: '#/definitions/ComputeEngine'
         description: Execution information specific to Google Compute Engine.
     type: object
   SearchAnnotationSetsRequest:

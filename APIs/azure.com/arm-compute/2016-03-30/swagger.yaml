@@ -41,7 +41,7 @@ parameters:
     required: true
     type: string
   SubscriptionIdParameter:
-    description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    description: subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
     in: path
     name: subscriptionId
     required: true
@@ -951,7 +951,7 @@ paths:
         - VirtualMachineScaleSetVMs
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualmachines/{instanceId}/deallocate':
     post:
-      description: Allows you to deallocate a virtual machine virtual machine scale set.Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses.
+      description: Allows you to deallocate a virtual machine scale set virtual machine. Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses.
       operationId: VirtualMachineScaleSetVMs_Deallocate
       parameters:
         - description: The name of the resource group.
@@ -1137,7 +1137,8 @@ paths:
             $ref: '#/definitions/VirtualMachineListResult'
       tags:
         - VirtualMachines
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}':
     delete:
       description: The operation to delete a virtual machine.
@@ -1529,10 +1530,10 @@ paths:
       x-ms-pageable: {}
 definitions:
   AdditionalUnattendContent:
-    description: 'Gets or sets additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is a applied.'
+    description: 'additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is a applied.'
     properties:
       componentName:
-        description: 'Gets or sets the component name. Currently, the only allowable value is Microsoft-Windows-Shell-Setup.'
+        description: 'the component name. Currently, the only allowable value is Microsoft-Windows-Shell-Setup.'
         enum:
           - Microsoft-Windows-Shell-Setup
         type: string
@@ -1540,10 +1541,10 @@ definitions:
           modelAsString: false
           name: ComponentNames
       content:
-        description: Gets or sets XML formatted content that is added to the unattend.xml file in the specified pass and component.The XML must be less than 4 KB and must include the root element for the setting or feature that is being inserted.
+        description: XML formatted content that is added to the unattend.xml file in the specified pass and component.The XML must be less than 4 KB and must include the root element for the setting or feature that is being inserted.
         type: string
       passName:
-        description: 'Gets or sets the pass name. Currently, the only allowable value is oobeSystem.'
+        description: 'the pass name. Currently, the only allowable value is oobeSystem.'
         enum:
           - oobeSystem
         type: string
@@ -1551,7 +1552,7 @@ definitions:
           modelAsString: false
           name: PassNames
       settingName:
-        description: 'Gets or sets setting name (e.g. FirstLogonCommands, AutoLogon )'
+        description: 'setting name (e.g. FirstLogonCommands, AutoLogon )'
         enum:
           - AutoLogon
           - FirstLogonCommands
@@ -1563,39 +1564,39 @@ definitions:
     description: The API entity reference.
     properties:
       id:
-        description: 'Gets or sets the ARM resource id in the form of /subscriptions/{SubcriptionId}/resourceGroups/{ResourceGroupName}/...'
+        description: 'the ARM resource id in the form of /subscriptions/{SubcriptionId}/resourceGroups/{ResourceGroupName}/...'
         type: string
   ApiError:
     description: Api error.
     properties:
       code:
-        description: Gets or sets the error code.
+        description: the error code.
         type: string
       details:
-        description: Gets or sets the Api error details
+        description: the Api error details
         items:
           $ref: '#/definitions/ApiErrorBase'
         type: array
       innererror:
         $ref: '#/definitions/InnerError'
-        description: Gets or sets the Api inner error
+        description: the Api inner error
       message:
-        description: Gets or sets the error message.
+        description: the error message.
         type: string
       target:
-        description: Gets or sets the target of the particular error.
+        description: the target of the particular error.
         type: string
   ApiErrorBase:
     description: Api error base.
     properties:
       code:
-        description: Gets or sets the error code.
+        description: the error code.
         type: string
       message:
-        description: Gets or sets the error message.
+        description: the error message.
         type: string
       target:
-        description: Gets or sets the target of the particular error.
+        description: the target of the particular error.
         type: string
   AvailabilitySet:
     allOf:
@@ -1609,7 +1610,7 @@ definitions:
     description: The List Availability Set operation response.
     properties:
       value:
-        description: Gets or sets the list of availability sets
+        description: the list of availability sets
         items:
           $ref: '#/definitions/AvailabilitySet'
         type: array
@@ -1617,20 +1618,20 @@ definitions:
     description: The instance view of a resource.
     properties:
       platformFaultDomainCount:
-        description: Gets or sets Fault Domain count.
+        description: Fault Domain count.
         format: int32
         type: integer
       platformUpdateDomainCount:
-        description: Gets or sets Update Domain count.
+        description: Update Domain count.
         format: int32
         type: integer
       statuses:
-        description: Gets or sets the resource status information.
+        description: the resource status information.
         items:
           $ref: '#/definitions/InstanceViewStatus'
         type: array
       virtualMachines:
-        description: Gets or sets a list containing reference to all Virtual Machines created under this Availability Set.
+        description: a list containing reference to all Virtual Machines created under this Availability Set.
         items:
           $ref: '#/definitions/SubResource'
         type: array
@@ -1638,19 +1639,19 @@ definitions:
     description: Describes Boot Diagnostics.
     properties:
       enabled:
-        description: Gets or sets whether boot diagnostics should be enabled on the Virtual Machine.
+        description: whether boot diagnostics should be enabled on the Virtual Machine.
         type: boolean
       storageUri:
-        description: Gets or sets the boot diagnostics storage Uri. It should be a valid Uri
+        description: the boot diagnostics storage Uri. It should be a valid Uri
         type: string
   BootDiagnosticsInstanceView:
     description: The instance view of a virtual machine boot diagnostics.
     properties:
       consoleScreenshotBlobUri:
-        description: Gets or sets the console screenshot blob Uri.
+        description: the console screenshot blob Uri.
         type: string
       serialConsoleLogBlobUri:
-        description: Gets or sets the Linux serial console log blob Uri.
+        description: the Linux serial console log blob Uri.
         type: string
   ComputeLongRunningOperationProperties:
     description: 'Compute-specific operation properties, including output'
@@ -1662,7 +1663,7 @@ definitions:
     description: Describes a data disk.
     properties:
       caching:
-        description: Gets or sets the caching type.
+        description: the caching type.
         enum:
           - None
           - ReadOnly
@@ -1672,7 +1673,7 @@ definitions:
           modelAsString: false
           name: CachingTypes
       createOption:
-        description: Gets or sets the create option.
+        description: the create option.
         enum:
           - fromImage
           - empty
@@ -1682,22 +1683,22 @@ definitions:
           modelAsString: false
           name: DiskCreateOptionTypes
       diskSizeGB:
-        description: 'Gets or sets the initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks.'
+        description: 'the initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks.'
         format: int32
         type: integer
       image:
         $ref: '#/definitions/VirtualHardDisk'
-        description: 'Gets or sets the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist.'
+        description: 'the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist.'
       lun:
-        description: Gets or sets the logical unit number.
+        description: the logical unit number.
         format: int32
         type: integer
       name:
-        description: Gets or sets the disk name.
+        description: the disk name.
         type: string
       vhd:
         $ref: '#/definitions/VirtualHardDisk'
-        description: Gets or sets the Virtual Hard Disk.
+        description: the Virtual Hard Disk.
     required:
       - lun
       - name
@@ -1707,7 +1708,7 @@ definitions:
     description: Contains the data disk images information.
     properties:
       lun:
-        description: Gets the LUN number for a data disk.This value is used to identify data disk image inside the VMImage therefore it must be unique for each data disk.The allowed character for the value is digit.
+        description: the LUN number for a data disk.This value is used to identify data disk image inside the VMImage therefore it must be unique for each data disk.The allowed character for the value is digit.
         format: int32
         readOnly: true
         type: integer
@@ -1716,27 +1717,27 @@ definitions:
     properties:
       bootDiagnostics:
         $ref: '#/definitions/BootDiagnostics'
-        description: Gets or sets the boot diagnostics.
+        description: the boot diagnostics.
   DiskEncryptionSettings:
     description: Describes a Encryption Settings for a Disk
     properties:
       diskEncryptionKey:
         $ref: '#/definitions/KeyVaultSecretReference'
-        description: Gets or sets the disk encryption key which is a KeyVault Secret.
+        description: the disk encryption key which is a KeyVault Secret.
       enabled:
-        description: Gets or sets whether disk encryption should be enabled on the Virtual Machine.
+        description: whether disk encryption should be enabled on the Virtual Machine.
         type: boolean
       keyEncryptionKey:
         $ref: '#/definitions/KeyVaultKeyReference'
-        description: Gets or sets the key encryption key which is KeyVault Key.
+        description: the key encryption key which is KeyVault Key.
   DiskInstanceView:
     description: The instance view of the disk.
     properties:
       name:
-        description: Gets or sets the disk name.
+        description: the disk name.
         type: string
       statuses:
-        description: Gets or sets the resource status information.
+        description: the resource status information.
         items:
           $ref: '#/definitions/InstanceViewStatus'
         type: array
@@ -1817,37 +1818,37 @@ definitions:
     description: The image reference.
     properties:
       offer:
-        description: Gets or sets the image offer.
+        description: the image offer.
         type: string
       publisher:
-        description: Gets or sets the image publisher.
+        description: the image publisher.
         type: string
       sku:
-        description: Gets or sets the image sku.
+        description: the image sku.
         type: string
       version:
-        description: 'Gets or sets the image version. The allowed formats are Major.Minor.Build or ''latest''. Major, Minor and Build being decimal numbers. Specify ''latest'' to use the latest version of image.'
+        description: 'the image version. The allowed formats are Major.Minor.Build or ''latest''. Major, Minor and Build being decimal numbers. Specify ''latest'' to use the latest version of image.'
         type: string
   InnerError:
     description: Inner error details.
     properties:
       errordetail:
-        description: Gets or sets the internal error message or exception dump.
+        description: the internal error message or exception dump.
         type: string
       exceptiontype:
-        description: Gets or sets the exception type.
+        description: the exception type.
         type: string
   InstanceViewStatus:
     description: Instance view status.
     properties:
       code:
-        description: Gets the status Code.
+        description: the status Code.
         type: string
       displayStatus:
-        description: Gets or sets the short localizable label for the status.
+        description: the short localizable label for the status.
         type: string
       level:
-        description: Gets or sets the level Code.
+        description: the level Code.
         enum:
           - Info
           - Warning
@@ -1857,21 +1858,21 @@ definitions:
           modelAsString: false
           name: StatusLevelTypes
       message:
-        description: 'Gets or sets the detailed Message, including for alerts and error messages.'
+        description: 'the detailed Message, including for alerts and error messages.'
         type: string
       time:
-        description: Gets or sets the time of the status.
+        description: the time of the status.
         format: date-time
         type: string
   KeyVaultKeyReference:
     description: Describes a reference to Key Vault Key
     properties:
       keyUrl:
-        description: Gets or sets the URL referencing a key in a Key Vault.
+        description: the URL referencing a key in a Key Vault.
         type: string
       sourceVault:
         $ref: '#/definitions/SubResource'
-        description: Gets or sets the Relative URL of the Key Vault containing the key
+        description: the Relative URL of the Key Vault containing the key
     required:
       - keyUrl
       - sourceVault
@@ -1879,11 +1880,11 @@ definitions:
     description: Describes a reference to Key Vault Secret
     properties:
       secretUrl:
-        description: Gets or sets the URL referencing a secret in a Key Vault.
+        description: the URL referencing a secret in a Key Vault.
         type: string
       sourceVault:
         $ref: '#/definitions/SubResource'
-        description: Gets or sets the Relative URL of the Key Vault containing the secret.
+        description: the Relative URL of the Key Vault containing the secret.
     required:
       - secretUrl
       - sourceVault
@@ -1891,16 +1892,19 @@ definitions:
     description: Describes Windows Configuration of the OS Profile.
     properties:
       disablePasswordAuthentication:
-        description: Gets or sets whether Authentication using user name and password is allowed or not
+        description: whether Authentication using user name and password is allowed or not
         type: boolean
       ssh:
         $ref: '#/definitions/SshConfiguration'
-        description: Gets or sets the SSH configuration for linux VMs
+        description: the SSH configuration for linux VMs
   ListUsagesResult:
     description: The List Usages operation response.
     properties:
+      nextLink:
+        description: the uri to fetch the next page of Compute Resource Usages. Call ListNext() with this to fetch the next page of Compute Resource Usages.
+        type: string
       value:
-        description: Gets or sets the list Compute Resource Usages.
+        description: the list Compute Resource Usages.
         items:
           $ref: '#/definitions/Usage'
         type: array
@@ -1916,13 +1920,13 @@ definitions:
     description: Describes a network interface reference properties.
     properties:
       primary:
-        description: Gets or sets whether this is a primary NIC on a virtual machine
+        description: whether this is a primary NIC on a virtual machine
         type: boolean
   NetworkProfile:
     description: Describes a network profile.
     properties:
       networkInterfaces:
-        description: Gets or sets the network interfaces.
+        description: the network interfaces.
         items:
           $ref: '#/definitions/NetworkInterfaceReference'
         type: array
@@ -1930,7 +1934,7 @@ definitions:
     description: Describes an Operating System disk.
     properties:
       caching:
-        description: Gets or sets the caching type.
+        description: the caching type.
         enum:
           - None
           - ReadOnly
@@ -1940,7 +1944,7 @@ definitions:
           modelAsString: false
           name: CachingTypes
       createOption:
-        description: Gets or sets the create option.
+        description: the create option.
         enum:
           - fromImage
           - empty
@@ -1950,20 +1954,20 @@ definitions:
           modelAsString: false
           name: DiskCreateOptionTypes
       diskSizeGB:
-        description: 'Gets or sets the initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks.'
+        description: 'the initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks.'
         format: int32
         type: integer
       encryptionSettings:
         $ref: '#/definitions/DiskEncryptionSettings'
-        description: Gets or sets the disk encryption settings.
+        description: the disk encryption settings.
       image:
         $ref: '#/definitions/VirtualHardDisk'
-        description: 'Gets or sets the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist.'
+        description: 'the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist.'
       name:
-        description: Gets or sets the disk name.
+        description: the disk name.
         type: string
       osType:
-        description: Gets or sets the Operating System type.
+        description: the Operating System type.
         enum:
           - Windows
           - Linux
@@ -1973,7 +1977,7 @@ definitions:
           name: OperatingSystemTypes
       vhd:
         $ref: '#/definitions/VirtualHardDisk'
-        description: Gets or sets the Virtual Hard Disk.
+        description: the Virtual Hard Disk.
     required:
       - name
       - vhd
@@ -1982,7 +1986,7 @@ definitions:
     description: Contains the os disk image information.
     properties:
       operatingSystem:
-        description: Gets or sets the operating system of the osDiskImage.
+        description: the operating system of the osDiskImage.
         enum:
           - Windows
           - Linux
@@ -1996,54 +2000,54 @@ definitions:
     description: Describes an OS profile.
     properties:
       adminPassword:
-        description: Gets or sets the admin user password.
+        description: the admin user password.
         type: string
       adminUsername:
-        description: Gets or sets the admin user name.
+        description: the admin user name.
         type: string
       computerName:
-        description: Gets or sets the computer name.
+        description: the computer name.
         type: string
       customData:
-        description: Gets or sets a base-64 encoded string of custom data.
+        description: a base-64 encoded string of custom data.
         type: string
       linuxConfiguration:
         $ref: '#/definitions/LinuxConfiguration'
-        description: Gets or sets the Linux Configuration of the OS profile.
+        description: the Linux Configuration of the OS profile.
       secrets:
-        description: Gets or sets the List of certificates for addition to the VM.
+        description: the List of certificates for addition to the VM.
         items:
           $ref: '#/definitions/VaultSecretGroup'
         type: array
       windowsConfiguration:
         $ref: '#/definitions/WindowsConfiguration'
-        description: Gets or sets the Windows Configuration of the OS profile.
+        description: the Windows Configuration of the OS profile.
   Plan:
     description: Plan for the resource.
     properties:
       name:
-        description: Gets or sets the plan ID.
+        description: the plan ID.
         type: string
       product:
-        description: Gets or sets the offer ID.
+        description: the offer ID.
         type: string
       promotionCode:
-        description: Gets or sets the promotion code.
+        description: the promotion code.
         type: string
       publisher:
-        description: Gets or sets the publisher ID.
+        description: the publisher ID.
         type: string
   PurchasePlan:
     description: Used for establishing the purchase context of any 3rd Party artifact through MarketPlace.
     properties:
       name:
-        description: Gets or sets the plan ID.
+        description: the plan ID.
         type: string
       product:
-        description: Gets or sets the product ID.
+        description: the product ID.
         type: string
       publisher:
-        description: Gets or sets the publisher ID.
+        description: the publisher ID.
         type: string
     required:
       - publisher
@@ -2078,20 +2082,20 @@ definitions:
     description: Describes a virtual machine scale set sku.
     properties:
       capacity:
-        description: Gets or sets the sku capacity.
+        description: the sku capacity.
         format: int64
         type: integer
       name:
-        description: Gets or sets the sku name.
+        description: the sku name.
         type: string
       tier:
-        description: Gets or sets the sku tier.
+        description: the sku tier.
         type: string
   SshConfiguration:
     description: SSH configuration for Linux based VMs running on Azure
     properties:
       publicKeys:
-        description: Gets or sets the list of SSH public keys used to authenticate with linux based VMs
+        description: the list of SSH public keys used to authenticate with linux based VMs
         items:
           $ref: '#/definitions/SshPublicKey'
         type: array
@@ -2099,25 +2103,25 @@ definitions:
     description: Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed.
     properties:
       keyData:
-        description: Gets or sets Certificate public key used to authenticate with VM through SSH.The certificate must be in Pem format with or without headers.
+        description: Certificate public key used to authenticate with VM through SSH.The certificate must be in Pem format with or without headers.
         type: string
       path:
-        description: 'Gets or sets the full path on the created VM where SSH public key is stored. If the file already exists, the specified key is appended to the file.'
+        description: 'the full path on the created VM where SSH public key is stored. If the file already exists, the specified key is appended to the file.'
         type: string
   StorageProfile:
     description: Describes a storage profile.
     properties:
       dataDisks:
-        description: Gets or sets the data disks.
+        description: the data disks.
         items:
           $ref: '#/definitions/DataDisk'
         type: array
       imageReference:
         $ref: '#/definitions/ImageReference'
-        description: Gets or sets the image reference.
+        description: the image reference.
       osDisk:
         $ref: '#/definitions/OSDisk'
-        description: Gets or sets the OS disk.
+        description: the OS disk.
   SubResource:
     properties:
       id:
@@ -2128,7 +2132,7 @@ definitions:
     description: Describes an upgrade policy - automatic or manual.
     properties:
       mode:
-        description: Gets or sets the upgrade mode.
+        description: the upgrade mode.
         enum:
           - Automatic
           - Manual
@@ -2140,18 +2144,18 @@ definitions:
     description: Describes Compute Resource Usage.
     properties:
       currentValue:
-        description: Gets or sets the current value of the usage.
+        description: the current value of the usage.
         format: int32
         type: integer
       limit:
-        description: Gets or sets the limit of usage.
+        description: the limit of usage.
         format: int64
         type: integer
       name:
         $ref: '#/definitions/UsageName'
-        description: Gets or sets the name of the type of usage.
+        description: the name of the type of usage.
       unit:
-        description: Gets or sets an enum describing the unit of measurement.
+        description: an enum describing the unit of measurement.
         enum:
           - Count
         type: string
@@ -2167,28 +2171,28 @@ definitions:
     description: The Usage Names.
     properties:
       localizedValue:
-        description: Gets or sets a localized string describing the resource name.
+        description: a localized string describing the resource name.
         type: string
       value:
-        description: Gets or sets a string describing the resource name.
+        description: a string describing the resource name.
         type: string
   VaultCertificate:
     description: 'Describes a single certificate reference in a Key Vault, and where the certificate should reside on the VM.'
     properties:
       certificateStore:
-        description: 'Gets or sets the Certificate store in LocalMachine to add the certificate to on Windows, leave empty on Linux.'
+        description: 'the Certificate store in LocalMachine to add the certificate to on Windows, leave empty on Linux.'
         type: string
       certificateUrl:
-        description: Gets or sets the URL referencing a secret in a Key Vault which contains a properly formatted certificate.
+        description: the URL referencing a secret in a Key Vault which contains a properly formatted certificate.
         type: string
   VaultSecretGroup:
     description: Describes a set of certificates which are all in the same Key Vault.
     properties:
       sourceVault:
         $ref: '#/definitions/SubResource'
-        description: Gets or sets the Relative URL of the Key Vault containing all of the certificates in VaultCertificates.
+        description: the Relative URL of the Key Vault containing all of the certificates in VaultCertificates.
       vaultCertificates:
-        description: Gets or sets the list of key vault references in SourceVault which contain certificates
+        description: the list of key vault references in SourceVault which contain certificates
         items:
           $ref: '#/definitions/VaultCertificate'
         type: array
@@ -2196,7 +2200,7 @@ definitions:
     description: Describes the uri of a disk.
     properties:
       uri:
-        description: Gets or sets the virtual hard disk's uri. It should be a valid Uri to a virtual hard disk.
+        description: the virtual hard disk's uri. It should be a valid Uri to a virtual hard disk.
         type: string
   VirtualMachine:
     allOf:
@@ -2205,12 +2209,12 @@ definitions:
     properties:
       plan:
         $ref: '#/definitions/Plan'
-        description: Gets or sets the purchase plan when deploying virtual machine from VM Marketplace images.
+        description: the purchase plan when deploying virtual machine from VM Marketplace images.
       properties:
         $ref: '#/definitions/VirtualMachineProperties'
         x-ms-client-flatten: true
       resources:
-        description: Gets the virtual machine child extension resources.
+        description: the virtual machine child extension resources.
         items:
           $ref: '#/definitions/VirtualMachineExtension'
         readOnly: true
@@ -2219,29 +2223,29 @@ definitions:
     description: The instance view of the VM Agent running on the virtual machine.
     properties:
       extensionHandlers:
-        description: Gets or sets the virtual machine extension handler instance view.
+        description: the virtual machine extension handler instance view.
         items:
           $ref: '#/definitions/VirtualMachineExtensionHandlerInstanceView'
         type: array
       statuses:
-        description: Gets or sets the resource status information.
+        description: the resource status information.
         items:
           $ref: '#/definitions/InstanceViewStatus'
         type: array
       vmAgentVersion:
-        description: Gets or sets the VM Agent full version.
+        description: the VM Agent full version.
         type: string
   VirtualMachineCaptureParameters:
     description: Capture Virtual Machine parameters.
     properties:
       destinationContainerName:
-        description: Gets or sets the destination container name.
+        description: the destination container name.
         type: string
       overwriteVhds:
-        description: 'Gets or sets whether it overwrites destination VirtualHardDisk if true, in case of conflict.'
+        description: 'whether it overwrites destination VirtualHardDisk if true, in case of conflict.'
         type: boolean
       vhdPrefix:
-        description: Gets or sets the captured VirtualHardDisk's name prefix.
+        description: the captured VirtualHardDisk's name prefix.
         type: string
     required:
       - vhdPrefix
@@ -2274,12 +2278,12 @@ definitions:
     properties:
       status:
         $ref: '#/definitions/InstanceViewStatus'
-        description: Gets or sets the extension handler status.
+        description: the extension handler status.
       type:
-        description: Gets or sets full type of the extension handler which includes both publisher and type.
+        description: full type of the extension handler which includes both publisher and type.
         type: string
       typeHandlerVersion:
-        description: Gets or sets the type version of the extension handler.
+        description: the type version of the extension handler.
         type: string
   VirtualMachineExtensionImage:
     allOf:
@@ -2296,19 +2300,19 @@ definitions:
     description: Describes the properties of a Virtual Machine Extension Image.
     properties:
       computeRole:
-        description: Gets or sets the type of role (IaaS or PaaS) this extension supports.
+        description: the type of role (IaaS or PaaS) this extension supports.
         type: string
       handlerSchema:
-        description: 'Gets or sets the schema defined by publisher, where extension consumers should provide settings in a matching schema.'
+        description: 'the schema defined by publisher, where extension consumers should provide settings in a matching schema.'
         type: string
       operatingSystem:
-        description: Gets or sets the operating system this extension supports.
+        description: the operating system this extension supports.
         type: string
       supportsMultipleExtensions:
-        description: Gets or sets whether the handler can support multiple extensions.
+        description: whether the handler can support multiple extensions.
         type: boolean
       vmScaleSetEnabled:
-        description: 'Gets or sets whether the extension can be used on xRP VMScaleSets.By default existing extensions are usable on scalesets, but there might be cases where a publisher wants to explicitly indicate the extension is only enabled for CRP VMs but not VMSS.'
+        description: 'whether the extension can be used on xRP VMScaleSets.By default existing extensions are usable on scalesets, but there might be cases where a publisher wants to explicitly indicate the extension is only enabled for CRP VMs but not VMSS.'
         type: boolean
     required:
       - operatingSystem
@@ -2318,53 +2322,54 @@ definitions:
     description: The instance view of a virtual machine extension.
     properties:
       name:
-        description: Gets or sets the virtual machine extension name.
+        description: the virtual machine extension name.
         type: string
       statuses:
-        description: Gets or sets the resource status information.
+        description: the resource status information.
         items:
           $ref: '#/definitions/InstanceViewStatus'
         type: array
       substatuses:
-        description: Gets or sets the resource status information.
+        description: the resource status information.
         items:
           $ref: '#/definitions/InstanceViewStatus'
         type: array
       type:
-        description: Gets or sets the full type of the extension handler which includes both publisher and type.
+        description: the full type of the extension handler which includes both publisher and type.
         type: string
       typeHandlerVersion:
-        description: Gets or sets the type version of the extension handler.
+        description: the type version of the extension handler.
         type: string
   VirtualMachineExtensionProperties:
     description: Describes the properties of a Virtual Machine Extension.
     properties:
       autoUpgradeMinorVersion:
-        description: Gets or sets whether the extension handler should be automatically upgraded across minor versions.
+        description: whether the extension handler should be automatically upgraded across minor versions.
         type: boolean
       forceUpdateTag:
-        description: Gets or sets how the extension handler should be forced to update even if the extension configuration has not changed.
+        description: how the extension handler should be forced to update even if the extension configuration has not changed.
         type: string
       instanceView:
         $ref: '#/definitions/VirtualMachineExtensionInstanceView'
-        description: Gets or sets the virtual machine extension instance view.
+        description: the virtual machine extension instance view.
       protectedSettings:
-        description: Gets or sets Json formatted protected settings for the extension.
+        description: Json formatted protected settings for the extension.
         type: object
       provisioningState:
-        description: 'Gets or sets the provisioning state, which only appears in the response.'
+        description: 'the provisioning state, which only appears in the response.'
+        readOnly: true
         type: string
       publisher:
-        description: Gets or sets the name of the extension handler publisher.
+        description: the name of the extension handler publisher.
         type: string
       settings:
-        description: Gets or sets Json formatted public settings for the extension.
+        description: Json formatted public settings for the extension.
         type: object
       type:
-        description: Gets or sets the type of the extension handler.
+        description: the type of the extension handler.
         type: string
       typeHandlerVersion:
-        description: Gets or sets the type version of the extension handler.
+        description: the type version of the extension handler.
         type: string
   VirtualMachineImage:
     allOf:
@@ -2394,15 +2399,15 @@ definitions:
     description: Virtual machine image resource information.
     properties:
       location:
-        description: Gets or sets the location of the resource.
+        description: the location of the resource.
         type: string
       name:
-        description: Gets or sets the name of the resource.
+        description: the name of the resource.
         type: string
       tags:
         additionalProperties:
           type: string
-        description: Gets or sets the tags attached to the resource.
+        description: the tags attached to the resource.
         type: object
     required:
       - name
@@ -2412,44 +2417,44 @@ definitions:
     properties:
       bootDiagnostics:
         $ref: '#/definitions/BootDiagnosticsInstanceView'
-        description: Gets or sets the boot diagnostics.
+        description: the boot diagnostics.
       disks:
-        description: Gets or sets the disks information.
+        description: the disks information.
         items:
           $ref: '#/definitions/DiskInstanceView'
         type: array
       extensions:
-        description: Gets or sets the extensions information.
+        description: the extensions information.
         items:
           $ref: '#/definitions/VirtualMachineExtensionInstanceView'
         type: array
       platformFaultDomain:
-        description: Gets or sets the Fault Domain count.
+        description: the Fault Domain count.
         format: int32
         type: integer
       platformUpdateDomain:
-        description: Gets or sets the Update Domain count.
+        description: the Update Domain count.
         format: int32
         type: integer
       rdpThumbPrint:
-        description: Gets or sets the Remote desktop certificate thumbprint.
+        description: the Remote desktop certificate thumbprint.
         type: string
       statuses:
-        description: Gets or sets the resource status information.
+        description: the resource status information.
         items:
           $ref: '#/definitions/InstanceViewStatus'
         type: array
       vmAgent:
         $ref: '#/definitions/VirtualMachineAgentInstanceView'
-        description: Gets or sets the VM Agent running on the virtual machine.
+        description: the VM Agent running on the virtual machine.
   VirtualMachineListResult:
     description: The List Virtual Machine operation response.
     properties:
       nextLink:
-        description: Gets or sets the uri to fetch the next page of VMs. Call ListNext() with this to fetch the next page of Virtual Machines.
+        description: the uri to fetch the next page of VMs. Call ListNext() with this to fetch the next page of Virtual Machines.
         type: string
       value:
-        description: Gets or sets the list of virtual machines.
+        description: the list of virtual machines.
         items:
           $ref: '#/definitions/VirtualMachine'
         type: array
@@ -2458,34 +2463,36 @@ definitions:
     properties:
       availabilitySet:
         $ref: '#/definitions/SubResource'
-        description: Gets or sets the reference Id of the availability set to which this virtual machine belongs.
+        description: the reference Id of the availability set to which this virtual machine belongs.
       diagnosticsProfile:
         $ref: '#/definitions/DiagnosticsProfile'
-        description: Gets or sets the diagnostics profile.
+        description: the diagnostics profile.
       hardwareProfile:
         $ref: '#/definitions/HardwareProfile'
-        description: Gets or sets the hardware profile.
+        description: the hardware profile.
       instanceView:
         $ref: '#/definitions/VirtualMachineInstanceView'
-        description: Gets the virtual machine instance view.
+        description: the virtual machine instance view.
         readOnly: true
       licenseType:
-        description: 'Gets or sets the license type, which is for bring your own license scenario.'
+        description: 'the license type, which is for bring your own license scenario.'
         type: string
       networkProfile:
         $ref: '#/definitions/NetworkProfile'
-        description: Gets or sets the network profile.
+        description: the network profile.
       osProfile:
         $ref: '#/definitions/OSProfile'
-        description: Gets or sets the OS profile.
+        description: the OS profile.
       provisioningState:
-        description: 'Gets or sets the provisioning state, which only appears in the response.'
+        description: 'the provisioning state, which only appears in the response.'
+        readOnly: true
         type: string
       storageProfile:
         $ref: '#/definitions/StorageProfile'
-        description: Gets or sets the storage profile.
+        description: the storage profile.
       vmId:
-        description: Gets the virtual machine unique id.
+        description: the virtual machine unique id.
+        readOnly: true
         type: string
   VirtualMachineScaleSet:
     allOf:
@@ -2497,14 +2504,14 @@ definitions:
         x-ms-client-flatten: true
       sku:
         $ref: '#/definitions/Sku'
-        description: Gets or sets the virtual machine scale set sku.
+        description: the virtual machine scale set sku.
   VirtualMachineScaleSetExtension:
     allOf:
       - $ref: '#/definitions/SubResource'
     description: Describes a Virtual Machine Scale Set Extension.
     properties:
       name:
-        description: Gets or sets the name of the extension.
+        description: the name of the extension.
         type: string
       properties:
         $ref: '#/definitions/VirtualMachineScaleSetExtensionProperties'
@@ -2513,7 +2520,7 @@ definitions:
     description: Describes a virtual machine scale set extension profile.
     properties:
       extensions:
-        description: Gets the virtual machine scale set child extension resources.
+        description: the virtual machine scale set child extension resources.
         items:
           $ref: '#/definitions/VirtualMachineScaleSetExtension'
         type: array
@@ -2521,26 +2528,26 @@ definitions:
     description: Describes the properties of a Virtual Machine Scale Set Extension.
     properties:
       autoUpgradeMinorVersion:
-        description: Gets or sets whether the extension handler should be automatically upgraded across minor versions.
+        description: whether the extension handler should be automatically upgraded across minor versions.
         type: boolean
       protectedSettings:
-        description: Gets or sets Json formatted protected settings for the extension.
+        description: Json formatted protected settings for the extension.
         type: object
       provisioningState:
-        description: 'Gets the provisioning state, which only appears in the response.'
+        description: 'the provisioning state, which only appears in the response.'
         readOnly: true
         type: string
       publisher:
-        description: Gets or sets the name of the extension handler publisher.
+        description: the name of the extension handler publisher.
         type: string
       settings:
-        description: Gets or sets Json formatted public settings for the extension.
+        description: Json formatted public settings for the extension.
         type: object
       type:
-        description: Gets or sets the type of the extension handler.
+        description: the type of the extension handler.
         type: string
       typeHandlerVersion:
-        description: Gets or sets the type version of the extension handler.
+        description: the type version of the extension handler.
         type: string
   VirtualMachineScaleSetIPConfiguration:
     allOf:
@@ -2548,7 +2555,7 @@ definitions:
     description: Describes a virtual machine scale set network profile's IP configuration.
     properties:
       name:
-        description: Gets or sets the IP configuration name.
+        description: the IP configuration name.
         type: string
       properties:
         $ref: '#/definitions/VirtualMachineScaleSetIPConfigurationProperties'
@@ -2559,48 +2566,48 @@ definitions:
     description: Describes a virtual machine scale set network profile's IP configuration properties.
     properties:
       applicationGatewayBackendAddressPools:
-        description: Gets or sets the application gateway backend address pools.
+        description: the application gateway backend address pools.
         items:
           $ref: '#/definitions/SubResource'
         type: array
       loadBalancerBackendAddressPools:
-        description: Gets or sets the load balancer backend address pools.
+        description: the load balancer backend address pools.
         items:
           $ref: '#/definitions/SubResource'
         type: array
       loadBalancerInboundNatPools:
-        description: Gets or sets the load balancer inbound nat pools.
+        description: the load balancer inbound nat pools.
         items:
           $ref: '#/definitions/SubResource'
         type: array
       subnet:
         $ref: '#/definitions/ApiEntityReference'
-        description: Gets or sets the subnet.
+        description: the subnet.
     required:
       - subnet
   VirtualMachineScaleSetInstanceView:
     description: The instance view of a virtual machine scale set.
     properties:
       extensions:
-        description: Gets the extensions information.
+        description: the extensions information.
         items:
           $ref: '#/definitions/VirtualMachineScaleSetVMExtensionsSummary'
         readOnly: true
         type: array
       statuses:
-        description: Gets or sets the resource status information.
+        description: the resource status information.
         items:
           $ref: '#/definitions/InstanceViewStatus'
         type: array
       virtualMachine:
         $ref: '#/definitions/VirtualMachineScaleSetInstanceViewStatusesSummary'
-        description: Gets the instance view status summary for the virtual machine scale set.
+        description: the instance view status summary for the virtual machine scale set.
         readOnly: true
   VirtualMachineScaleSetInstanceViewStatusesSummary:
     description: Instance view statuses summary for virtual machines of a virtual machine scale set.
     properties:
       statusesSummary:
-        description: Gets the extensions information.
+        description: the extensions information.
         items:
           $ref: '#/definitions/VirtualMachineStatusCodeCount'
         readOnly: true
@@ -2608,16 +2615,22 @@ definitions:
   VirtualMachineScaleSetListResult:
     description: The List Virtual Machine operation response.
     properties:
+      nextLink:
+        description: the uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS.
+        type: string
       value:
-        description: Gets or sets the list of virtual machine scale sets.
+        description: the list of virtual machine scale sets.
         items:
           $ref: '#/definitions/VirtualMachineScaleSet'
         type: array
   VirtualMachineScaleSetListSkusResult:
     description: The Virtual Machine Scale Set List Skus operation response.
     properties:
+      nextLink:
+        description: the uri to fetch the next page of Virtual Machine Scale Set Skus. Call ListNext() with this to fetch the next page of VMSS Skus.
+        type: string
       value:
-        description: Gets the list of skus available for the virtual machine scale set.
+        description: the list of skus available for the virtual machine scale set.
         items:
           $ref: '#/definitions/VirtualMachineScaleSetSku'
         readOnly: true
@@ -2626,10 +2639,10 @@ definitions:
     description: The List Virtual Machine operation response.
     properties:
       nextLink:
-        description: Gets or sets the uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of Virtual Machine Scale Sets.
+        description: the uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of Virtual Machine Scale Sets.
         type: string
       value:
-        description: Gets or sets the list of virtual machine scale sets.
+        description: the list of virtual machine scale sets.
         items:
           $ref: '#/definitions/VirtualMachineScaleSet'
         type: array
@@ -2639,7 +2652,7 @@ definitions:
     description: Describes a virtual machine scale set network profile's network configurations.
     properties:
       name:
-        description: Gets or sets the network configuration name.
+        description: the network configuration name.
         type: string
       properties:
         $ref: '#/definitions/VirtualMachineScaleSetNetworkConfigurationProperties'
@@ -2650,12 +2663,12 @@ definitions:
     description: Describes a virtual machine scale set network profile's IP configuration.
     properties:
       ipConfigurations:
-        description: Gets or sets the virtual machine scale set IP Configuration.
+        description: the virtual machine scale set IP Configuration.
         items:
           $ref: '#/definitions/VirtualMachineScaleSetIPConfiguration'
         type: array
       primary:
-        description: Gets or sets whether this is a primary NIC on a virtual machine.
+        description: whether this is a primary NIC on a virtual machine.
         type: boolean
     required:
       - ipConfigurations
@@ -2663,7 +2676,7 @@ definitions:
     description: Describes a virtual machine scale set network profile.
     properties:
       networkInterfaceConfigurations:
-        description: Gets or sets the list of network configurations.
+        description: the list of network configurations.
         items:
           $ref: '#/definitions/VirtualMachineScaleSetNetworkConfiguration'
         type: array
@@ -2671,7 +2684,7 @@ definitions:
     description: Describes a virtual machine scale set operating system disk.
     properties:
       caching:
-        description: Gets or sets the caching type.
+        description: the caching type.
         enum:
           - None
           - ReadOnly
@@ -2681,7 +2694,7 @@ definitions:
           modelAsString: false
           name: CachingTypes
       createOption:
-        description: Gets or sets the create option.
+        description: the create option.
         enum:
           - fromImage
           - empty
@@ -2692,12 +2705,12 @@ definitions:
           name: DiskCreateOptionTypes
       image:
         $ref: '#/definitions/VirtualHardDisk'
-        description: 'Gets or sets the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist.'
+        description: 'the Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine.If SourceImage is provided, the destination VirtualHardDisk should not exist.'
       name:
-        description: Gets or sets the disk name.
+        description: the disk name.
         type: string
       osType:
-        description: Gets or sets the Operating System type.
+        description: the Operating System type.
         enum:
           - Windows
           - Linux
@@ -2706,7 +2719,7 @@ definitions:
           modelAsString: false
           name: OperatingSystemTypes
       vhdContainers:
-        description: Gets or sets the list of virtual hard disk container uris.
+        description: the list of virtual hard disk container uris.
         items:
           type: string
         type: array
@@ -2717,28 +2730,28 @@ definitions:
     description: Describes a virtual machine scale set OS profile.
     properties:
       adminPassword:
-        description: Gets or sets the admin user password.
+        description: the admin user password.
         type: string
       adminUsername:
-        description: Gets or sets the admin user name.
+        description: the admin user name.
         type: string
       computerNamePrefix:
-        description: Gets or sets the computer name prefix.
+        description: the computer name prefix.
         type: string
       customData:
-        description: Gets or sets a base-64 encoded string of custom data.
+        description: a base-64 encoded string of custom data.
         type: string
       linuxConfiguration:
         $ref: '#/definitions/LinuxConfiguration'
-        description: Gets or sets the Linux Configuration of the OS profile.
+        description: the Linux Configuration of the OS profile.
       secrets:
-        description: Gets or sets the List of certificates for addition to the VM.
+        description: the List of certificates for addition to the VM.
         items:
           $ref: '#/definitions/VaultSecretGroup'
         type: array
       windowsConfiguration:
         $ref: '#/definitions/WindowsConfiguration'
-        description: Gets or sets the Windows Configuration of the OS profile.
+        description: the Windows Configuration of the OS profile.
   VirtualMachineScaleSetProperties:
     description: Describes the properties of a Virtual Machine Scale Set.
     properties:
@@ -2746,49 +2759,50 @@ definitions:
         description: Specifies whether the Virtual Machine Scale Set should be overprovisioned.
         type: boolean
       provisioningState:
-        description: 'Gets or sets the provisioning state, which only appears in the response.'
+        description: 'the provisioning state, which only appears in the response.'
+        readOnly: true
         type: string
       upgradePolicy:
         $ref: '#/definitions/UpgradePolicy'
-        description: Gets or sets the upgrade policy.
+        description: the upgrade policy.
       virtualMachineProfile:
         $ref: '#/definitions/VirtualMachineScaleSetVMProfile'
-        description: Gets or sets the virtual machine profile.
+        description: the virtual machine profile.
   VirtualMachineScaleSetSku:
     description: Describes an available virtual machine scale set sku.
     properties:
       capacity:
         $ref: '#/definitions/VirtualMachineScaleSetSkuCapacity'
-        description: Gets available scaling information.
+        description: available scaling information.
         readOnly: true
       resourceType:
-        description: Gets the type of resource the sku applies to.
+        description: the type of resource the sku applies to.
         readOnly: true
         type: string
       sku:
         $ref: '#/definitions/Sku'
-        description: Gets the Sku.
+        description: the Sku.
         readOnly: true
   VirtualMachineScaleSetSkuCapacity:
     description: Describes scaling information of a sku.
     properties:
       defaultCapacity:
-        description: Gets the default capacity.
+        description: the default capacity.
         format: int64
         readOnly: true
         type: integer
       maximum:
-        description: Gets the maximum capacity that can be set.
+        description: the maximum capacity that can be set.
         format: int64
         readOnly: true
         type: integer
       minimum:
-        description: Gets the minimum capacity.
+        description: the minimum capacity.
         format: int64
         readOnly: true
         type: integer
       scaleType:
-        description: Gets the scale type applicable to the sku.
+        description: the scale type applicable to the sku.
         enum:
           - Automatic
           - None
@@ -2802,44 +2816,44 @@ definitions:
     properties:
       imageReference:
         $ref: '#/definitions/ImageReference'
-        description: Gets or sets the image reference.
+        description: the image reference.
       osDisk:
         $ref: '#/definitions/VirtualMachineScaleSetOSDisk'
-        description: Gets or sets the OS disk.
+        description: the OS disk.
   VirtualMachineScaleSetVM:
     allOf:
       - $ref: '#/definitions/Resource'
     description: Describes a virtual machine scale set virtual machine.
     properties:
       instanceId:
-        description: Gets the virtual machine instance id.
+        description: the virtual machine instance id.
         readOnly: true
         type: string
       plan:
         $ref: '#/definitions/Plan'
-        description: Gets or sets the purchase plan when deploying virtual machine from VM Marketplace images.
+        description: the purchase plan when deploying virtual machine from VM Marketplace images.
       properties:
         $ref: '#/definitions/VirtualMachineScaleSetVMProperties'
         x-ms-client-flatten: true
       resources:
-        description: Gets the virtual machine child extension resources.
+        description: the virtual machine child extension resources.
         items:
           $ref: '#/definitions/VirtualMachineExtension'
         readOnly: true
         type: array
       sku:
         $ref: '#/definitions/Sku'
-        description: Gets the virtual machine sku.
+        description: the virtual machine sku.
         readOnly: true
   VirtualMachineScaleSetVMExtensionsSummary:
     description: Extensions summary for virtual machines of a virtual machine scale set.
     properties:
       name:
-        description: Gets the extension name.
+        description: the extension name.
         readOnly: true
         type: string
       statusesSummary:
-        description: Gets the extensions information.
+        description: the extensions information.
         items:
           $ref: '#/definitions/VirtualMachineStatusCodeCount'
         readOnly: true
@@ -2848,7 +2862,7 @@ definitions:
     description: Specifies the list of virtual machine scale set instance IDs.
     properties:
       instanceIds:
-        description: Gets or sets the virtual machine scale set instance ids.
+        description: the virtual machine scale set instance ids.
         items:
           type: string
         type: array
@@ -2856,7 +2870,7 @@ definitions:
     description: Specifies the list of virtual machine scale set instance IDs.
     properties:
       instanceIds:
-        description: Gets or sets the virtual machine scale set instance ids.
+        description: the virtual machine scale set instance ids.
         items:
           type: string
         type: array
@@ -2867,41 +2881,44 @@ definitions:
     properties:
       bootDiagnostics:
         $ref: '#/definitions/BootDiagnosticsInstanceView'
-        description: Gets or sets the boot diagnostics.
+        description: the boot diagnostics.
       disks:
-        description: Gets or sets the disks information.
+        description: the disks information.
         items:
           $ref: '#/definitions/DiskInstanceView'
         type: array
       extensions:
-        description: Gets or sets the extensions information.
+        description: the extensions information.
         items:
           $ref: '#/definitions/VirtualMachineExtensionInstanceView'
         type: array
       platformFaultDomain:
-        description: Gets or sets the Fault Domain count.
+        description: the Fault Domain count.
         format: int32
         type: integer
       platformUpdateDomain:
-        description: Gets or sets the Update Domain count.
+        description: the Update Domain count.
         format: int32
         type: integer
       rdpThumbPrint:
-        description: Gets or sets the Remote desktop certificate thumbprint.
+        description: the Remote desktop certificate thumbprint.
         type: string
       statuses:
-        description: Gets or sets the resource status information.
+        description: the resource status information.
         items:
           $ref: '#/definitions/InstanceViewStatus'
         type: array
       vmAgent:
         $ref: '#/definitions/VirtualMachineAgentInstanceView'
-        description: Gets or sets the VM Agent running on the virtual machine.
+        description: the VM Agent running on the virtual machine.
   VirtualMachineScaleSetVMListResult:
     description: The List Virtual Machine Scale Set VMs operation response.
     properties:
+      nextLink:
+        description: the uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs
+        type: string
       value:
-        description: Gets or sets the list of virtual machine scale sets VMs.
+        description: the list of virtual machine scale sets VMs.
         items:
           $ref: '#/definitions/VirtualMachineScaleSetVM'
         type: array
@@ -2910,82 +2927,83 @@ definitions:
     properties:
       extensionProfile:
         $ref: '#/definitions/VirtualMachineScaleSetExtensionProfile'
-        description: Gets the virtual machine scale set extension profile.
+        description: the virtual machine scale set extension profile.
       networkProfile:
         $ref: '#/definitions/VirtualMachineScaleSetNetworkProfile'
-        description: Gets or sets the virtual machine scale set network profile.
+        description: the virtual machine scale set network profile.
       osProfile:
         $ref: '#/definitions/VirtualMachineScaleSetOSProfile'
-        description: Gets or sets the virtual machine scale set OS profile.
+        description: the virtual machine scale set OS profile.
       storageProfile:
         $ref: '#/definitions/VirtualMachineScaleSetStorageProfile'
-        description: Gets or sets the virtual machine scale set storage profile.
+        description: the virtual machine scale set storage profile.
   VirtualMachineScaleSetVMProperties:
     description: Describes the properties of a virtual machine scale set virtual machine.
     properties:
       availabilitySet:
         $ref: '#/definitions/SubResource'
-        description: Gets or sets the reference Id of the availability set to which this virtual machine belongs.
+        description: the reference Id of the availability set to which this virtual machine belongs.
       diagnosticsProfile:
         $ref: '#/definitions/DiagnosticsProfile'
-        description: Gets or sets the diagnostics profile.
+        description: the diagnostics profile.
       hardwareProfile:
         $ref: '#/definitions/HardwareProfile'
-        description: Gets or sets the hardware profile.
+        description: the hardware profile.
       instanceView:
         $ref: '#/definitions/VirtualMachineInstanceView'
-        description: Gets the virtual machine instance view.
+        description: the virtual machine instance view.
         readOnly: true
       latestModelApplied:
         description: Specifies whether the latest model has been applied to the virtual machine.
         readOnly: true
         type: boolean
       licenseType:
-        description: 'Gets or sets the license type, which is for bring your own license scenario.'
+        description: 'the license type, which is for bring your own license scenario.'
         type: string
       networkProfile:
         $ref: '#/definitions/NetworkProfile'
-        description: Gets or sets the network profile.
+        description: the network profile.
       osProfile:
         $ref: '#/definitions/OSProfile'
-        description: Gets or sets the OS profile.
+        description: the OS profile.
       provisioningState:
-        description: 'Gets or sets the provisioning state, which only appears in the response.'
+        description: 'the provisioning state, which only appears in the response.'
+        readOnly: true
         type: string
       storageProfile:
         $ref: '#/definitions/StorageProfile'
-        description: Gets or sets the storage profile.
+        description: the storage profile.
   VirtualMachineSize:
     description: Describes the properties of a VM size.
     properties:
       maxDataDiskCount:
-        description: Gets or sets the Maximum number of data disks allowed by a VM size.
+        description: the Maximum number of data disks allowed by a VM size.
         format: int32
         type: integer
       memoryInMB:
-        description: Gets or sets the Memory size supported by a VM size.
+        description: the Memory size supported by a VM size.
         format: int32
         type: integer
       name:
-        description: Gets or sets the VM size name.
+        description: the VM size name.
         type: string
       numberOfCores:
-        description: Gets or sets the Number of cores supported by a VM size.
+        description: the Number of cores supported by a VM size.
         format: int32
         type: integer
       osDiskSizeInMB:
-        description: Gets or sets the OS disk size allowed by a VM size.
+        description: the OS disk size allowed by a VM size.
         format: int32
         type: integer
       resourceDiskSizeInMB:
-        description: Gets or sets the Resource disk size allowed by a VM size.
+        description: the Resource disk size allowed by a VM size.
         format: int32
         type: integer
   VirtualMachineSizeListResult:
     description: The List Virtual Machine operation response.
     properties:
       value:
-        description: Gets or sets the list of virtual machine sizes.
+        description: the list of virtual machine sizes.
         items:
           $ref: '#/definitions/VirtualMachineSize'
         type: array
@@ -2993,11 +3011,11 @@ definitions:
     description: The status code and count of the virtual machine scale set instance view status summary.
     properties:
       code:
-        description: Gets the instance view status code.
+        description: the instance view status code.
         readOnly: true
         type: string
       count:
-        description: Gets the number of instances having a particular status code.
+        description: the number of instances having a particular status code.
         format: int32
         readOnly: true
         type: integer
@@ -3005,7 +3023,7 @@ definitions:
     description: Describes Windows Remote Management configuration of the VM
     properties:
       listeners:
-        description: Gets or sets the list of Windows Remote Management listeners
+        description: the list of Windows Remote Management listeners
         items:
           $ref: '#/definitions/WinRMListener'
         type: array
@@ -3013,10 +3031,10 @@ definitions:
     description: Describes Protocol and thumbprint of Windows Remote Management listener
     properties:
       certificateUrl:
-        description: Gets or sets the Certificate URL in KMS for Https listeners. Should be null for Http listeners.
+        description: the Certificate URL in KMS for Https listeners. Should be null for Http listeners.
         type: string
       protocol:
-        description: Gets or sets the Protocol used by WinRM listener. Currently only Http and Https are supported.
+        description: the Protocol used by WinRM listener. Currently only Http and Https are supported.
         enum:
           - Http
           - Https
@@ -3028,19 +3046,19 @@ definitions:
     description: Describes Windows Configuration of the OS Profile.
     properties:
       additionalUnattendContent:
-        description: Gets or sets the additional base-64 encoded XML formatted information that can be included in the Unattend.xml file.
+        description: the additional base-64 encoded XML formatted information that can be included in the Unattend.xml file.
         items:
           $ref: '#/definitions/AdditionalUnattendContent'
         type: array
       enableAutomaticUpdates:
-        description: Gets or sets whether Windows updates are automatically installed on the VM
+        description: whether Windows updates are automatically installed on the VM
         type: boolean
       provisionVMAgent:
-        description: Gets or sets whether VM Agent should be provisioned on the Virtual Machine.
+        description: whether VM Agent should be provisioned on the Virtual Machine.
         type: boolean
       timeZone:
-        description: Gets or sets the Time Zone of the VM
+        description: the Time Zone of the VM
         type: string
       winRM:
         $ref: '#/definitions/WinRMConfiguration'
-        description: Gets or sets the Windows Remote Management configuration of the VM
+        description: the Windows Remote Management configuration of the VM

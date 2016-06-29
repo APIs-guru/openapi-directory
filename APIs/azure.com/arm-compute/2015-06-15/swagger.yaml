@@ -2335,12 +2335,7 @@ definitions:
         type: boolean
       forceUpdateTag:
         description: Gets or sets how the extension handler should be forced to update even if the extension configuration has not changed.
-        enum:
-          - RerunExtension
         type: string
-        x-ms-enum:
-          modelAsString: false
-          name: ForceUpdateTagTypes
       instanceView:
         $ref: '#/definitions/VirtualMachineExtensionInstanceView'
         description: Gets or sets the virtual machine extension instance view.

@@ -1,0 +1,1098 @@
+swagger: '2.0'
+schemes:
+  - https
+host: graph.windows.net
+x-hasEquivalentPaths: true
+info:
+  description: The Graph RBAC Management Client
+  title: GraphRbacManagementClient
+  version: '1.6'
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    format: swagger
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-graphrbac/1.6/swagger/graphrbac.json'
+    version: '2.0'
+  x-providerName: windows.net
+  x-serviceName: arm-graphrbac
+consumes:
+  - application/json
+  - text/json
+produces:
+  - application/json
+  - text/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  ApiVersionParameter:
+    description: Client Api Version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  tenantIDInPath:
+    description: Gets or sets the tenant Id.
+    in: path
+    name: tenantID
+    required: true
+    type: string
+paths:
+  '/{tenantID}/applications':
+    get:
+      description: 'Lists applications by filter parameters. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx'
+      operationId: Applications_List
+      parameters:
+        - description: The filters to apply on the operation
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/ApplicationListResult'
+      tags:
+        - Application
+      x-ms-odata: '#/definitions/ApplicationFilter'
+      x-ms-pageable: {}
+    post:
+      description: 'Create a new application. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx'
+      operationId: Applications_Create
+      parameters:
+        - description: Parameters to create an application.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ApplicationCreateParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Application'
+      tags:
+        - Application
+  '/{tenantID}/applications/{applicationObjectId}':
+    delete:
+      description: 'Delete an application. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx'
+      operationId: Applications_Delete
+      parameters:
+        - description: Application object id
+          in: path
+          name: applicationObjectId
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '204':
+          description: ''
+      tags:
+        - Application
+    get:
+      description: 'Get an application by object Id. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx'
+      operationId: Applications_Get
+      parameters:
+        - description: Application object id
+          in: path
+          name: applicationObjectId
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Application'
+      tags:
+        - Application
+    patch:
+      description: 'Update existing application. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx'
+      operationId: Applications_Patch
+      parameters:
+        - description: Application object id
+          in: path
+          name: applicationObjectId
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: Parameters to update an existing application.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ApplicationUpdateParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '204':
+          description: ''
+      tags:
+        - Application
+  '/{tenantID}/groups':
+    get:
+      description: Gets list of groups for the current tenant.
+      operationId: Groups_List
+      parameters:
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/GroupListResult'
+      tags:
+        - Group
+      x-ms-odata: '#/definitions/ADGroup'
+      x-ms-pageable:
+        nextLinkName: odata.nextLink
+        operationName: Groups_ListNext
+    post:
+      description: 'Create a group in the directory. Reference: http://msdn.microsoft.com/en-us/library/azure/dn151676.aspx'
+      operationId: Groups_Create
+      parameters:
+        - description: Parameters to create a group
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/GroupCreateParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/ADGroup'
+      tags:
+        - Group
+  '/{tenantID}/groups/{groupObjectId}':
+    delete:
+      description: 'Delete a group in the directory. Reference: http://msdn.microsoft.com/en-us/library/azure/dn151676.aspx'
+      operationId: Groups_Delete
+      parameters:
+        - description: Object id
+          in: path
+          name: groupObjectId
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '204':
+          description: ''
+      tags:
+        - Group
+  '/{tenantID}/groups/{groupObjectId}/$links/members':
+    post:
+      description: 'Add a memeber to a group. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/groups-operations#AddGroupMembers'
+      operationId: Groups_AddMember
+      parameters:
+        - description: Group object id
+          in: path
+          name: groupObjectId
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: 'Member Object Url as https://graph.windows.net/0b1f9851-1bf0-433f-aec3-cb9272f093dc/directoryObjects/f260bbc4-c254-447b-94cf-293b5ec434dd'
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/GroupAddMemberParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '204':
+          description: No Content. Indicates success. No response body is returned.
+      tags:
+        - Group
+  '/{tenantID}/groups/{groupObjectId}/$links/members/{memberObjectId}':
+    delete:
+      description: 'Remove a memeber from a group. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/groups-operations#DeleteGroupMember'
+      operationId: Groups_RemoveMember
+      parameters:
+        - description: Group object id
+          in: path
+          name: groupObjectId
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: Member Object id
+          in: path
+          name: memberObjectId
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '204':
+          description: No Content. Indicates success. No response body is returned.
+      tags:
+        - Group
+  '/{tenantID}/groups/{objectId}':
+    get:
+      description: Gets group information from the directory.
+      operationId: Groups_Get
+      parameters:
+        - description: User objectId to get group information.
+          in: path
+          name: objectId
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/ADGroup'
+      tags:
+        - Group
+  '/{tenantID}/groups/{objectId}/getMemberGroups':
+    post:
+      description: Gets a collection that contains the Object IDs of the groups of which the group is a member.
+      operationId: Groups_GetMemberGroups
+      parameters:
+        - description: Group filtering parameters.
+          in: path
+          name: objectId
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: Group filtering parameters.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/GroupGetMemberGroupsParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/GroupGetMemberGroupsResult'
+      tags:
+        - Group
+      x-ms-pageable: {}
+  '/{tenantID}/groups/{objectId}/members':
+    get:
+      description: Gets the members of a group.
+      operationId: Groups_GetGroupMembers
+      parameters:
+        - description: Group object Id who's members should be retrieved.
+          in: path
+          name: objectId
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/GetObjectsResult'
+      tags:
+        - Group
+      x-ms-pageable:
+        nextLinkName: odata.nextLink
+        operationName: Groups_GetGroupMembersNext
+  '/{tenantID}/isMemberOf':
+    post:
+      description: 'Checks whether the specified user, group, contact, or service principal is a direct or a transitive member of the specified group.'
+      operationId: Groups_IsMemberOf
+      parameters:
+        - description: Check group membership parameters.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/CheckGroupMembershipParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '200':
+          description: 'OK. Indicates success. Returns true if the user, contact, group, or service principal is a direct or a transitive member of the specified group; otherwsie, false.'
+          schema:
+            $ref: '#/definitions/CheckGroupMembershipResult'
+      tags:
+        - Group
+  '/{tenantID}/servicePrincipals':
+    get:
+      description: Gets list of service principals from the current tenant.
+      operationId: ServicePrincipals_List
+      parameters:
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/ServicePrincipalListResult'
+      tags:
+        - ServicePrincipal
+      x-ms-odata: '#/definitions/ServicePrincipal'
+      x-ms-pageable:
+        nextLinkName: odata.nextLink
+        operationName: ServicePrincipals_ListNext
+    post:
+      description: Creates a service principal in the  directory.
+      operationId: ServicePrincipals_Create
+      parameters:
+        - description: Parameters to create a service principal.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ServicePrincipalCreateParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/ServicePrincipal'
+      tags:
+        - ServicePrincipal
+  '/{tenantID}/servicePrincipals/{objectId}':
+    delete:
+      description: Deletes service principal from the directory.
+      operationId: ServicePrincipals_Delete
+      parameters:
+        - description: Object id to delete service principal information.
+          in: path
+          name: objectId
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '204':
+          description: ''
+      tags:
+        - ServicePrincipal
+    get:
+      description: Gets service principal information from the directory.
+      operationId: ServicePrincipals_Get
+      parameters:
+        - description: Object id to get service principal information.
+          in: path
+          name: objectId
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/ServicePrincipal'
+      tags:
+        - ServicePrincipal
+  '/{tenantID}/users':
+    get:
+      description: 'Gets list of users for the current tenant. Reference https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/users-operations#GetUsers'
+      operationId: Users_List
+      parameters:
+        - description: The filter to apply on the operation.
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/UserListResult'
+      tags:
+        - User
+      x-ms-odata: '#/definitions/User'
+      x-ms-pageable:
+        nextLinkName: odata.nextLink
+        operationName: Users_ListNext
+    post:
+      description: 'Create a new user. Reference: https://msdn.microsoft.com/library/azure/ad/graph/api/users-operations#CreateUser'
+      operationId: Users_Create
+      parameters:
+        - description: Parameters to create a user.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/UserCreateParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '201':
+          description: Created. Indicates success. The new user is returned in the response body.
+          schema:
+            $ref: '#/definitions/User'
+      tags:
+        - User
+  '/{tenantID}/users/{objectId}/getMemberGroups':
+    post:
+      description: Gets a collection that contains the Object IDs of the groups of which the user is a member.
+      operationId: Users_GetMemberGroups
+      parameters:
+        - description: User filtering parameters.
+          in: path
+          name: objectId
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: User filtering parameters.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/UserGetMemberGroupsParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/UserGetMemberGroupsResult'
+      tags:
+        - User
+      x-ms-pageable: {}
+  '/{tenantID}/users/{upnOrObjectId}':
+    delete:
+      description: 'Delete a user. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/users-operations#DeleteUser'
+      operationId: Users_Delete
+      parameters:
+        - description: user object id or user principal name (upn)
+          in: path
+          name: upnOrObjectId
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '204':
+          description: ''
+      tags:
+        - User
+    get:
+      description: 'Gets user information from the directory. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/users-operations#GetAUser'
+      operationId: Users_Get
+      parameters:
+        - description: User object Id or user principal name to get user information.
+          in: path
+          name: upnOrObjectId
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/User'
+      tags:
+        - User
+    patch:
+      description: 'Updates an exisitng user. Reference: https://msdn.microsoft.com/en-us/library/azure/ad/graph/api/users-operations#UpdateUser'
+      operationId: Users_Update
+      parameters:
+        - description: User object Id or user principal name to get user information.
+          in: path
+          name: upnOrObjectId
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - description: Parameters to update an exisitng user.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/UserUpdateParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '204':
+          description: No Content.
+      tags:
+        - User
+definitions:
+  AADObject:
+    description: Active Directory object information
+    properties:
+      displayName:
+        description: Gets or sets object display name
+        type: string
+      mail:
+        description: Gets or sets mail
+        type: string
+      mailEnabled:
+        description: Gets or sets MailEnabled field
+        type: boolean
+      objectId:
+        description: Gets or sets object Id
+        type: string
+      objectType:
+        description: Gets or sets object type
+        type: string
+      securityEnabled:
+        description: Gets or sets SecurityEnabled field
+        type: boolean
+      servicePrincipalNames:
+        description: Gets or sets the list of service principal names.
+        items:
+          type: string
+        type: array
+      signInName:
+        description: Gets or sets signIn name
+        type: string
+      userPrincipalName:
+        description: Gets or sets principal name
+        type: string
+      userType:
+        description: Gets or sets the user type
+        type: string
+  ADGroup:
+    description: Active Directory group information
+    properties:
+      displayName:
+        description: Gets or sets group display name
+        type: string
+      mail:
+        description: Gets or sets mail field
+        type: string
+      objectId:
+        description: Gets or sets object Id
+        type: string
+      objectType:
+        description: Gets or sets object type
+        type: string
+      securityEnabled:
+        description: Gets or sets security enabled field
+        type: boolean
+  Application:
+    description: Active Directory user information
+    properties:
+      appId:
+        description: Gets or sets application Id
+        type: string
+      appPermissions:
+        description: Gets or sets application permissions
+        items:
+          type: string
+        type: array
+      availableToOtherTenants:
+        description: Indicates if the application will be available to other tenants
+        type: boolean
+      displayName:
+        description: Gets or sets the displayName
+        type: string
+      homepage:
+        description: Application homepage
+        type: string
+      identifierUris:
+        description: Gets or sets the application identifier Uris
+        items:
+          type: string
+        type: array
+      objectId:
+        description: Gets or sets object Id
+        type: string
+      objectType:
+        description: Gets or sets object type
+        type: string
+      replyUrls:
+        description: Gets or sets the application reply Urls
+        items:
+          type: string
+        type: array
+  ApplicationCreateParameters:
+    description: Request parameters for create a new application
+    properties:
+      availableToOtherTenants:
+        description: Indicates if the application will be available to other tenants
+        type: boolean
+      displayName:
+        description: Application display name
+        type: string
+      homepage:
+        description: Application homepage
+        type: string
+      identifierUris:
+        description: Application Uris
+        items:
+          type: string
+        type: array
+      keyCredentials:
+        description: Gets or sets the list of KeyCredential objects
+        items:
+          $ref: '#/definitions/KeyCredential'
+        type: array
+      passwordCredentials:
+        description: Gets or sets the list of PasswordCredential objects
+        items:
+          $ref: '#/definitions/PasswordCredential'
+        type: array
+      replyUrls:
+        description: Application reply Urls
+        items:
+          type: string
+        type: array
+    required:
+      - availableToOtherTenants
+      - displayName
+      - homepage
+      - identifierUris
+  ApplicationFilter:
+    description: Filter parameters for listing applications
+    properties:
+      appId:
+        description: ApplicationId
+        type: string
+      displayNameStartsWith:
+        description: Application display name starts with
+        type: string
+      identifierUri:
+        description: Identifier Uri
+        type: string
+  ApplicationListResult:
+    description: Role assignment list operation result.
+    properties:
+      value:
+        description: Application list.
+        items:
+          $ref: '#/definitions/Application'
+        type: array
+  ApplicationUpdateParameters:
+    description: Request parameters for updating an existing application
+    properties:
+      displayName:
+        description: Application display name
+        type: string
+      homepage:
+        description: Application homepage
+        type: string
+      identifierUris:
+        description: Application Uris
+        items:
+          type: string
+        type: array
+      keyCredentials:
+        description: Gets or sets the list of KeyCredential objects
+        items:
+          $ref: '#/definitions/KeyCredential'
+        type: array
+      passwordCredentials:
+        description: Gets or sets the list of PasswordCredential objects
+        items:
+          $ref: '#/definitions/PasswordCredential'
+        type: array
+      replyUrls:
+        description: Application reply Urls
+        items:
+          type: string
+        type: array
+  CheckGroupMembershipParameters:
+    description: Request parameters for IsMemberOf API call
+    properties:
+      groupId:
+        description: The object ID of the group to check.
+        type: string
+      memberId:
+        description: 'The object ID of the contact, group, user, or service principal to check for membership in the specified group.'
+        type: string
+    required:
+      - groupId
+      - memberId
+  CheckGroupMembershipResult:
+    description: Server response for IsMemberOf API call
+    properties:
+      value:
+        description: 'true if the specified user, group, contact, or service principal has either direct or transitive membership in the specified group; otherwise, false.'
+        type: boolean
+  GetObjectsResult:
+    description: Server response for Active Directory objects inquiry API calls
+    properties:
+      odata.nextLink:
+        description: Gets or sets the URL to get the next set of results.
+        type: string
+      value:
+        description: Collection of Active Directory object
+        items:
+          $ref: '#/definitions/AADObject'
+        type: array
+  GroupAddMemberParameters:
+    description: Request parameters for adding a member to a group
+    properties:
+      url:
+        description: 'Member Object Url as "https://graph.windows.net/0b1f9851-1bf0-433f-aec3-cb9272f093dc/directoryObjects/f260bbc4-c254-447b-94cf-293b5ec434dd", where "0b1f9851-1bf0-433f-aec3-cb9272f093dc" is the tenantId and "f260bbc4-c254-447b-94cf-293b5ec434dd" is the objectId of the member (user, application, servicePrincipal, group) to be added.'
+        type: string
+    required:
+      - url
+  GroupCreateParameters:
+    description: Request parameters for create a new group
+    properties:
+      displayName:
+        description: Group display name
+        type: string
+      mailEnabled:
+        description: Specifies whether the group is mail-enabled. Must be false. This is because only pure security groups can be created using the Graph API.
+        enum:
+          - false
+        type: boolean
+      mailNickname:
+        description: Mail nick name
+        type: string
+      securityEnabled:
+        description: Specifies whether the group is a security group. Must be true. This is because only pure security groups can be created using the Graph API.
+        enum:
+          - true
+        type: boolean
+    required:
+      - displayName
+      - mailEnabled
+      - mailNickname
+      - securityEnabled
+  GroupGetMemberGroupsParameters:
+    description: Request parameters for GetMemberGroups API call
+    properties:
+      securityEnabledOnly:
+        description: 'If true only membership in security enabled groups should be checked. Otherwise membership in all groups should be checked '
+        type: boolean
+    required:
+      - securityEnabledOnly
+  GroupGetMemberGroupsResult:
+    description: Server response for GetMemberGroups API call
+    properties:
+      value:
+        description: Group Ids of which the group is a member
+        items:
+          type: string
+        type: array
+  GroupListResult:
+    description: Server response for Get tenant groups API call
+    properties:
+      odata.nextLink:
+        description: Gets or sets the URL to get the next set of results.
+        type: string
+      value:
+        description: Gets or sets the list of groups.
+        items:
+          $ref: '#/definitions/ADGroup'
+        type: array
+  KeyCredential:
+    description: Active Directory service principal Key Credential information
+    properties:
+      endDate:
+        description: Gets or sets end date
+        format: date-time
+        type: string
+      keyId:
+        description: Gets or sets key Id
+        type: string
+      startDate:
+        description: Gets or sets start date
+        format: date-time
+        type: string
+      type:
+        description: Gets or sets type
+        type: string
+      usage:
+        description: Gets or sets usage
+        type: string
+      value:
+        description: Gets or sets value
+        type: string
+  PasswordCredential:
+    description: Active Directory service principal Password Credential information
+    properties:
+      endDate:
+        description: Gets or sets end date
+        format: date-time
+        type: string
+      keyId:
+        description: Gets or sets key Id
+        type: string
+      startDate:
+        description: Gets or sets start date
+        format: date-time
+        type: string
+      value:
+        description: Gets or sets value
+        type: string
+  PasswordProfile:
+    description: Contains the password profile associated with a user.
+    properties:
+      forceChangePasswordNextLogin:
+        description: Force change password on next login
+        type: boolean
+      password:
+        description: Password
+        type: string
+    required:
+      - password
+  ServicePrincipal:
+    description: Active Directory service principal information
+    properties:
+      appId:
+        description: Gets or sets app id
+        type: string
+      displayName:
+        description: Gets or sets service principal display name
+        type: string
+      objectId:
+        description: Gets or sets object Id
+        type: string
+      objectType:
+        description: Gets or sets object type
+        type: string
+      servicePrincipalNames:
+        description: Gets or sets the list of names.
+        items:
+          type: string
+        type: array
+  ServicePrincipalCreateParameters:
+    description: Request parameters for create a new service principal
+    properties:
+      accountEnabled:
+        description: Specifies if the account is enabled
+        type: boolean
+      appId:
+        description: Gets or sets application Id
+        type: string
+    required:
+      - appId
+      - accountEnabled
+  ServicePrincipalListResult:
+    description: Server response for get tenant service principals API call
+    properties:
+      odata.nextLink:
+        description: Gets or sets the URL to get the next set of results.
+        type: string
+      value:
+        description: Gets or sets the list of service principals.
+        items:
+          $ref: '#/definitions/ServicePrincipal'
+        type: array
+  User:
+    description: Active Directory user information
+    properties:
+      displayName:
+        description: Gets or sets user display name
+        type: string
+      mail:
+        description: Gets or sets user mail
+        type: string
+      mailNickname:
+        description: The mail alias for the user
+        type: string
+      objectId:
+        description: Gets or sets object Id
+        type: string
+      objectType:
+        description: Gets or sets object type
+        type: string
+      signInName:
+        description: Gets or sets user signIn name
+        type: string
+      userPrincipalName:
+        description: Gets or sets user principal name
+        type: string
+  UserCreateParameters:
+    description: Request parameters for create a new work or school account user
+    properties:
+      accountEnabled:
+        description: Enable the account. If it is enabled then true else false.
+        type: boolean
+      displayName:
+        description: User display name
+        type: string
+      immutableId:
+        description: Needs to be specified if you are using a federated domain for the user's userPrincipalName (UPN) property while creating a new user account. It is used to associate an on-premises Active Directory user account to their Azure AD user object.
+        type: string
+      mailNickname:
+        description: The mail alias for the user
+        type: string
+      passwordProfile:
+        $ref: '#/definitions/PasswordProfile'
+        description: Password Profile
+      userPrincipalName:
+        description: The user principal name (someuser@contoso.com). It must contain one of the verified domains for the tenant.
+        type: string
+    required:
+      - accountEnabled
+      - displayName
+      - passwordProfile
+      - userPrincipalName
+      - mailNickname
+  UserGetMemberGroupsParameters:
+    description: Request parameters for GetMemberGroups API call
+    properties:
+      securityEnabledOnly:
+        description: 'If true only membership in security enabled groups should be checked. Otherwise membership in all groups should be checked '
+        type: boolean
+    required:
+      - securityEnabledOnly
+  UserGetMemberGroupsResult:
+    description: Server response for GetMemberGroups API call
+    properties:
+      value:
+        description: Group Ids of which the user is a member
+        items:
+          type: string
+        type: array
+  UserListResult:
+    description: Server response for Get tenant users API call
+    properties:
+      odata.nextLink:
+        description: Gets or sets the URL to get the next set of results.
+        type: string
+      value:
+        description: Gets or sets the list of users.
+        items:
+          $ref: '#/definitions/User'
+        type: array
+  UserUpdateParameters:
+    description: Request parameters for updating an existing work or school account user
+    properties:
+      accountEnabled:
+        description: Enable the account. If it is enabled then true else false.
+        type: boolean
+      displayName:
+        description: User display name
+        type: string
+      mailNickname:
+        description: The mail alias for the user
+        type: string
+      passwordProfile:
+        $ref: '#/definitions/PasswordProfile'
+        description: Password Profile
+x-ms-paths:
+  '/{tenantID}/{nextLink}?Groups_GetGroupMembersNext':
+    get:
+      description: Gets the members of a group.
+      operationId: Groups_GetGroupMembersNext
+      parameters:
+        - description: Next link for list operation.
+          in: path
+          name: nextLink
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/GetObjectsResult'
+      tags:
+        - Group
+      x-ms-pageable:
+        nextLinkName: odata.nextLink
+        operationName: Groups_GetGroupMembersNext
+  '/{tenantID}/{nextLink}?Groups_ListNext':
+    get:
+      description: Gets list of groups for the current tenant.
+      operationId: Groups_ListNext
+      parameters:
+        - description: Next link for list operation.
+          in: path
+          name: nextLink
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/GroupListResult'
+      tags:
+        - Group
+      x-ms-pageable:
+        nextLinkName: odata.nextLink
+        operationName: Groups_ListNext
+  '/{tenantID}/{nextLink}?ServicePrincipals_ListNext':
+    get:
+      description: Gets list of service principals from the current tenant.
+      operationId: ServicePrincipals_ListNext
+      parameters:
+        - description: Next link for list operation.
+          in: path
+          name: nextLink
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/ServicePrincipalListResult'
+      tags:
+        - ServicePrincipal
+      x-ms-pageable:
+        nextLinkName: odata.nextLink
+        operationName: ServicePrincipals_ListNext
+  '/{tenantID}/{nextLink}?Users_ListNext':
+    get:
+      description: Gets list of users for the current tenant.
+      operationId: Users_ListNext
+      parameters:
+        - description: Next link for list operation.
+          in: path
+          name: nextLink
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/UserListResult'
+      tags:
+        - User
+      x-ms-pageable:
+        nextLinkName: odata.nextLink
+        operationName: Users_ListNext

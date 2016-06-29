@@ -1,0 +1,622 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: Azure Service Bus client
+  title: ServiceBusManagementClient
+  version: '2014-09-01'
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    format: swagger
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-servicebus/2014-09-01/swagger/servicebus.json'
+    version: '2.0'
+  x-preferred: true
+  x-providerName: azure.com
+  x-serviceName: arm-servicebus
+consumes:
+  - application/json
+  - text/json
+produces:
+  - application/json
+  - text/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  ApiVersionParameter:
+    description: Client Api Version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  SubscriptionIdParameter:
+    description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  '/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/checkNamespaceAvailability':
+    post:
+      description: Checks the availability of the given service namespace across all Windows Azure subscriptions. This is useful because the domain name is created based on the service namespace name.
+      externalDocs:
+        url: 'http://msdn.microsoft.com/en-us/library/windowsazure/jj870968.aspx'
+      operationId: Namespaces_CheckAvailability
+      parameters:
+        - description: The namespace name.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/CheckAvailabilityParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Checked name successfully
+          schema:
+            $ref: '#/definitions/CheckAvailabilityResource'
+      tags:
+        - Namespaces
+  '/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/namespaces':
+    get:
+      description: Lists all the available namespaces within the subscription irrespective of the resourceGroups.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx'
+      operationId: Namespaces_ListBySubscription
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespaces returned successfully
+          schema:
+            $ref: '#/definitions/NamespaceListResult'
+      tags:
+        - Namespaces
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces':
+    get:
+      description: Lists the available namespaces within a resourceGroup.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx'
+      operationId: Namespaces_ListByResourceGroup
+      parameters:
+        - description: The name of the resource group. If resourceGroupName value is null the method lists all the namespaces within subscription
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespaces returned successfully
+          schema:
+            $ref: '#/definitions/NamespaceListResult'
+      tags:
+        - Namespaces
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}':
+    delete:
+      description: Deletes an existing namespace. This operation also removes all associated resources under the namespace.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639389.aspx'
+      operationId: Namespaces_Delete
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespace delete successful
+      tags:
+        - Namespaces
+      x-ms-long-running-operation: true
+    get:
+      description: Returns the description for the specified namespace.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx'
+      operationId: Namespaces_Get
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespace returned successfully
+          schema:
+            $ref: '#/definitions/NamespaceResource'
+      tags:
+        - Namespaces
+    put:
+      description: 'Creates/Updates a service namespace. Once created, this namespace''s resource manifest is immutable. This operation is idempotent.'
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639408.aspx'
+      operationId: Namespaces_CreateOrUpdate
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: Parameters supplied to create a Namespace Resource.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/NamespaceCreateOrUpdateParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '201':
+          description: Namespace create request accepted
+          schema:
+            $ref: '#/definitions/NamespaceResource'
+      tags:
+        - Namespaces
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules':
+    get:
+      description: Gets the authorization rules for a namespace.
+      operationId: Namespaces_ListAuthorizationRules
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Authorization rule returned successfully
+          schema:
+            $ref: '#/definitions/SharedAccessAuthorizationRuleListResult'
+      tags:
+        - Namespaces
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}':
+    delete:
+      description: Deletes a namespace authorization rule
+      operationId: Namespaces_DeleteAuthorizationRule
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: Authorization Rule Name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Authorization rule deleted
+      tags:
+        - Namespaces
+    get:
+      description: Gets an authorization rule for a namespace by name.
+      operationId: Namespaces_GetAuthorizationRule
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: Authorization rule name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Authorization rule returned successfully
+          schema:
+            $ref: '#/definitions/SharedAccessAuthorizationRuleResource'
+      tags:
+        - Namespaces
+    put:
+      description: Creates an authorization rule for a namespace
+      operationId: Namespaces_CreateOrUpdateAuthorizationRule
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: Aauthorization Rule Name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - description: The shared access authorization rule.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Authorization rule created
+          schema:
+            $ref: '#/definitions/SharedAccessAuthorizationRuleResource'
+      tags:
+        - Namespaces
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}/listKeys':
+    post:
+      description: 'Gets the Primary and Secondary ConnectionStrings to the namespace '
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639398.aspx'
+      operationId: Namespaces_ListKeys
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The connection string of the namespace for the specified authorizationRule.
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successful
+          schema:
+            $ref: '#/definitions/ResourceListKeys'
+      tags:
+        - Namespaces
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}/regenerateKeys':
+    post:
+      description: 'Gets the Primary and Secondary ConnectionStrings to the namespace '
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt718977.aspx'
+      operationId: Namespaces_RegenerateKeys
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The connection string of the namespace for the specified authorizationRule.
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - description: Parameters supplied to regenerate Auth Rule.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/RegenerateKeysParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successful
+          schema:
+            $ref: '#/definitions/ResourceListKeys'
+      tags:
+        - Namespaces
+definitions:
+  ARMSku:
+    description: Sku of the Namespace.
+    properties:
+      Capacity:
+        description: The messaging units or eventhub throughput units
+        format: int32
+        type: integer
+      Name:
+        description: 'The resource type that this object applies to. Eg: NamespaceType'
+        enum:
+          - Basic
+          - Standard
+          - Premium
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: Name
+      Tier:
+        description: The tier of this particular SKU
+        enum:
+          - Basic
+          - Standard
+          - Premium
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: Tier
+    type: object
+  CheckAvailabilityParameters:
+    description: Parameters supplied to the Check Name Availability for Namespace and ServiceBus.
+    properties:
+      isAvailiable:
+        description: Is true if the name is available and can be used to create new Namespace/ServiceBus. Otherwise false.
+        type: boolean
+      location:
+        description: Namespace location
+        type: string
+      name:
+        description: Name of the namespace
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Namespace tags
+        type: object
+    required:
+      - name
+  CheckAvailabilityResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Description of a CheckAvailibility resource.
+    properties:
+      isAvailiable:
+        description: Is true if the name is available and can be used to create new Namespace/ServiceBus. Otherwise false.
+        type: boolean
+  NamespaceCreateOrUpdateParameters:
+    description: Parameters supplied to the CreateOrUpdate Namespace operation.
+    properties:
+      location:
+        description: Namespace data center location.
+        type: string
+      properties:
+        $ref: '#/definitions/NamespaceProperties'
+      tags:
+        additionalProperties:
+          type: string
+        description: Namespace tags.
+        type: object
+    required:
+      - location
+      - properties
+  NamespaceListResult:
+    description: The response of the List Namespace operation.
+    properties:
+      nextLink:
+        description: Link to the next set of results. Not empty if Value contains incomplete list of Namespaces
+        type: string
+      value:
+        description: Result of the List Namespace operation.
+        items:
+          $ref: '#/definitions/NamespaceResource'
+        type: array
+  NamespaceProperties:
+    description: Properties of the Namespace.
+    properties:
+      createdAt:
+        description: The time the namespace was created.
+        format: date-time
+        type: string
+      critical:
+        description: Whether or not the namespace is set as Critical.
+        type: boolean
+      name:
+        description: The name of the namespace.
+        type: string
+      namespaceType:
+        description: The namespace type.
+        enum:
+          - Messaging
+          - NotificationHub
+          - EventHub
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: NamespaceType
+      provisioningState:
+        description: Provisioning state of the Namespace.
+        type: string
+      region:
+        description: 'Specifies the targeted region in which the namespace should be created. It can be any of the following values: Australia EastAustralia SoutheastCentral USEast USEast US 2West USNorth Central USSouth Central USEast AsiaSoutheast AsiaBrazil SouthJapan EastJapan WestNorth EuropeWest Europe'
+        externalDocs:
+          url: 'http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx'
+        type: string
+      serviceBusEndpoint:
+        description: Endpoint you can use to perform ServiceBus operations.
+        externalDocs:
+          url: 'http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx'
+        type: string
+      status:
+        description: 'Status of the namespace. It can be any of these values:1 = Created/Active2 = Creating3 = Suspended4 = Deleting'
+        externalDocs:
+          url: 'http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx'
+        type: string
+      subscriptionId:
+        description: The Id of the Azure subscription associated with the namespace.
+        type: string
+    x-ms-client-flatten: true
+  NamespaceResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Description of a Namespace resource.
+    properties:
+      kind:
+        description: Kind of the Namespace.
+        enum:
+          - Messaging
+          - EventHub
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: kind
+      properties:
+        $ref: '#/definitions/NamespaceProperties'
+      sku:
+        $ref: '#/definitions/ARMSku'
+  RegenerateKeysParameters:
+    description: Parameters supplied to the Regenerate Namespace Auth Rule.
+    properties:
+      Policykey:
+        description: Key that needs to be regenerated .
+        enum:
+          - PrimaryKey
+          - SecondayKey
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: Policykey
+  Resource:
+    properties:
+      id:
+        description: Resource Id
+        readOnly: true
+        type: string
+      location:
+        description: Resource location
+        type: string
+      name:
+        description: Resource name
+        readOnly: true
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags
+        type: object
+      type:
+        description: Resource type
+        readOnly: true
+        type: string
+    x-ms-azure-resource: true
+  ResourceListKeys:
+    description: Namespace/ServiceBus Connection String
+    properties:
+      keyName:
+        description: A string that describes the authorization rule
+        type: string
+      primaryConnectionString:
+        description: PrimaryConnectionString of the created Namespace AuthorizationRule.
+        type: string
+      primaryKey:
+        description: A base64-encoded 256-bit primary key for signing and validating the SAS token
+        type: string
+      secondaryConnectionString:
+        description: SecondaryConnectionString of the created Namespace AuthorizationRule
+        type: string
+      secondaryKey:
+        description: A base64-encoded 256-bit primary key for signing and validating the SAS token
+        type: string
+  SharedAccessAuthorizationRuleCreateOrUpdateParameters:
+    description: Parameters supplied to the CreateOrUpdate Namespace AuthorizationRules.
+    properties:
+      location:
+        description: Namespace data center location.
+        type: string
+      name:
+        description: Name of the Namespace AuthorizationRule.
+        type: string
+      properties:
+        $ref: '#/definitions/SharedAccessAuthorizationRuleProperties'
+    required:
+      - properties
+  SharedAccessAuthorizationRuleListResult:
+    description: The response of the List Namespace operation.
+    properties:
+      nextLink:
+        description: Link to the next set of results. Not empty if Value contains incomplete list of AuthorizationRules
+        type: string
+      value:
+        description: Result of the List AuthorizationRules operation.
+        items:
+          $ref: '#/definitions/SharedAccessAuthorizationRuleResource'
+        type: array
+  SharedAccessAuthorizationRuleProperties:
+    description: SharedAccessAuthorizationRule properties.
+    properties:
+      rights:
+        description: The rights associated with the rule.
+        items:
+          enum:
+            - Manage
+            - Send
+            - Listen
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: AccessRights
+        type: array
+    x-ms-client-flatten: true
+  SharedAccessAuthorizationRuleResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Description of a Namespace AuthorizationRules.
+    properties:
+      properties:
+        $ref: '#/definitions/SharedAccessAuthorizationRuleProperties'

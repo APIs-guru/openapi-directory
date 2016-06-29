@@ -626,6 +626,129 @@ definitions:
         $ref: '#/definitions/Position'
         description: Position within the inner source.
     type: object
+  CounterMetadata:
+    description: CounterMetadata includes all static non-name non-value counter attributes.
+    properties:
+      description:
+        description: Human-readable description of the counter semantics.
+        type: string
+      kind:
+        description: Counter aggregation kind.
+        enum:
+          - INVALID
+          - SUM
+          - MAX
+          - MIN
+          - MEAN
+          - OR
+          - AND
+          - SET
+        type: string
+      otherUnits:
+        description: A string referring to the unit type.
+        type: string
+      standardUnits:
+        description: 'System defined Units, see above enum.'
+        enum:
+          - BYTES
+          - BYTES_PER_SEC
+          - MILLISECONDS
+          - MICROSECONDS
+          - NANOSECONDS
+          - TIMESTAMP_MSEC
+          - TIMESTAMP_USEC
+          - TIMESTAMP_NSEC
+        type: string
+    type: object
+  CounterStructuredName:
+    description: Identifies a counter within a per-job namespace. Counters whose structured names are the same get merged into a single value for the job.
+    properties:
+      componentStepName:
+        description: Name of the optimized step being executed by the workers.
+        type: string
+      executionStepName:
+        description: Name of the stage. An execution step contains multiple component steps.
+        type: string
+      name:
+        description: 'Counter name. Not necessarily globally-unique, but unique within the context of the other fields. Required.'
+        type: string
+      originalStepName:
+        description: 'System generated name of the original step in the user''s graph, before optimization.'
+        type: string
+      otherOrigin:
+        description: A string containing the origin of the counter.
+        type: string
+      portion:
+        description: 'Portion of this counter, either key or value.'
+        enum:
+          - ALL
+          - KEY
+          - VALUE
+        type: string
+      standardOrigin:
+        description: One of the standard Origins defined above.
+        enum:
+          - DATAFLOW
+          - USER
+        type: string
+      workerId:
+        description: ID of a particular worker.
+        type: string
+    type: object
+  CounterStructuredNameAndMetadata:
+    description: A single message which encapsulates structured name and metadata for a given counter.
+    properties:
+      metadata:
+        $ref: '#/definitions/CounterMetadata'
+        description: Metadata associated with a counter
+      name:
+        $ref: '#/definitions/CounterStructuredName'
+        description: Structured name of the counter.
+    type: object
+  CounterUpdate:
+    description: An update to a Counter sent from a worker.
+    properties:
+      boolean:
+        description: 'Boolean value for And, Or.'
+        type: boolean
+      cumulative:
+        description: 'True if this counter is reported as the total cumulative aggregate value accumulated since the worker started working on this WorkItem. By default this is false, indicating that this counter is reported as a delta.'
+        type: boolean
+      floatingPoint:
+        description: 'Floating point value for Sum, Max, Min.'
+        format: double
+        type: number
+      floatingPointList:
+        $ref: '#/definitions/FloatingPointList'
+        description: 'List of floating point numbers, for Set.'
+      floatingPointMean:
+        $ref: '#/definitions/FloatingPointMean'
+        description: Floating point mean aggregation value for Mean.
+      integer:
+        $ref: '#/definitions/SplitInt64'
+        description: 'Integer value for Sum, Max, Min.'
+      integerList:
+        $ref: '#/definitions/IntegerList'
+        description: 'List of integers, for Set.'
+      integerMean:
+        $ref: '#/definitions/IntegerMean'
+        description: Integer mean aggregation value for Mean.
+      internal:
+        description: Value for internally-defined counters used by the Dataflow service.
+      nameAndKind:
+        $ref: '#/definitions/NameAndKind'
+        description: Counter name and aggregation type.
+      shortId:
+        description: 'The service-generated short identifier for this counter. The short_id -> (name, metadata) mapping is constant for the lifetime of a job.'
+        format: int64
+        type: string
+      stringList:
+        $ref: '#/definitions/StringList'
+        description: 'List of strings, for Set.'
+      structuredNameAndMetadata:
+        $ref: '#/definitions/CounterStructuredNameAndMetadata'
+        description: Counter structured name and metadata.
+    type: object
   CustomSourceLocation:
     description: Identifies the location of a custom souce.
     properties:
@@ -1113,13 +1236,22 @@ definitions:
         type: string
     type: object
   NameAndKind:
-    description: Basic metadata about a metric.
+    description: Basic metadata about a counter.
     properties:
       kind:
-        description: 'Metric aggregation kind. The possible metric aggregation kinds are "Sum", "Max", "Min", "Mean", "Set", "And", and "Or". The specified aggregation kind is case-insensitive. If omitted, this is not an aggregated value but instead a single metric sample value.'
+        description: Counter aggregation kind.
+        enum:
+          - INVALID
+          - SUM
+          - MAX
+          - MIN
+          - MEAN
+          - OR
+          - AND
+          - SET
         type: string
       name:
-        description: Name of the metric.
+        description: Name of the counter.
         type: string
     type: object
   Package:
@@ -1872,47 +2004,6 @@ definitions:
         $ref: '#/definitions/StreamingSetupTask'
         description: Additional information for StreamingSetupTask WorkItems.
     type: object
-  WorkItemMetricUpdate:
-    description: 'An update to a metric sent from a worker. Unlike MetricUpdate, this format does not support: messages: use WorkerMessage API CloudMetrics: use MetricUpdate until this includes structured names'
-    properties:
-      boolean:
-        description: 'Boolean value for And, Or.'
-        type: boolean
-      cumulative:
-        description: 'True if this metric is reported as the total cumulative aggregate value accumulated since the worker started working on this WorkItem. By default this is false, indicating that this metric is reported as a delta that is not associated with any WorkItem.'
-        type: boolean
-      floatingPoint:
-        description: 'Floating point value for Sum, Max, Min.'
-        format: double
-        type: number
-      floatingPointList:
-        $ref: '#/definitions/FloatingPointList'
-        description: 'List of floating point numbers, for Set.'
-      floatingPointMean:
-        $ref: '#/definitions/FloatingPointMean'
-        description: Floating point mean aggregation value for Mean.
-      integer:
-        $ref: '#/definitions/SplitInt64'
-        description: 'Integer value for Sum, Max, Min.'
-      integerList:
-        $ref: '#/definitions/IntegerList'
-        description: 'List of integers, for Set.'
-      integerMean:
-        $ref: '#/definitions/IntegerMean'
-        description: Integer mean aggregation value for Mean.
-      internal:
-        description: Value for internally-defined metrics use by the Dataflow service.
-      nameAndKind:
-        $ref: '#/definitions/NameAndKind'
-        description: Metric name and aggregation type.
-      shortId:
-        description: 'The service-generated short identifier for this metric. The short_id -> (name, metadata) mapping is constant for the lifetime of a job.'
-        format: int64
-        type: string
-      stringList:
-        $ref: '#/definitions/StringList'
-        description: 'List of strings, for Set.'
-    type: object
   WorkItemServiceState:
     description: The Dataflow service's idea of the current state of a WorkItem being processed by a worker.
     properties:
@@ -1952,6 +2043,11 @@ definitions:
       completed:
         description: True if the WorkItem was completed (successfully or unsuccessfully).
         type: boolean
+      counterUpdates:
+        description: Worker output counters for this WorkItem.
+        items:
+          $ref: '#/definitions/CounterUpdate'
+        type: array
       dynamicSourceSplit:
         $ref: '#/definitions/DynamicSourceSplit'
         description: See documentation of stop_position.
@@ -1961,7 +2057,7 @@ definitions:
           $ref: '#/definitions/Status'
         type: array
       metricUpdates:
-        description: DEPRECATED in favor of worker_metric_update.
+        description: DEPRECATED in favor of counter_updates.
         items:
           $ref: '#/definitions/MetricUpdate'
         type: array
@@ -1990,11 +2086,6 @@ definitions:
       workItemId:
         description: Identifies the WorkItem.
         type: string
-      workItemMetricUpdates:
-        description: Worker output metrics (counters) for this WorkItem.
-        items:
-          $ref: '#/definitions/WorkItemMetricUpdate'
-        type: array
     type: object
   WorkerHealthReport:
     description: WorkerHealthReport contains information about the health of a worker. The VM should be identified by the labels attached to the WorkerMessage that this health ping belongs to.

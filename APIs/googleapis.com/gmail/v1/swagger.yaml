@@ -105,6 +105,10 @@ paths:
           in: query
           name: pageToken
           type: string
+        - description: 'Only return draft messages matching the specified query. Supports the same query format as the Gmail search box. For example, "from:someuser@example.com rfc822msgid: is:unread".'
+          in: query
+          name: q
+          type: string
       responses:
         '200':
           description: Successful response

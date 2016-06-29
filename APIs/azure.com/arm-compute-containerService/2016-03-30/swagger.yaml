@@ -29,7 +29,7 @@ parameters:
     required: true
     type: string
   SubscriptionIdParameter:
-    description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    description: subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
     in: path
     name: subscriptionId
     required: true
@@ -247,7 +247,7 @@ definitions:
     description: The List Container Service operation response
     properties:
       value:
-        description: Gets or sets the list of container services.
+        description: the list of container services.
         items:
           $ref: '#/definitions/ContainerService'
         type: array
@@ -304,7 +304,7 @@ definitions:
         $ref: '#/definitions/ContainerServiceOrchestratorProfile'
         description: Properties of orchestrator
       provisioningState:
-        description: 'Gets the provisioning state, which only appears in the response.'
+        description: 'the provisioning state, which only appears in the response.'
         readOnly: true
         type: string
       windowsProfile:
@@ -318,7 +318,7 @@ definitions:
     description: SSH configuration for Linux based VMs running on Azure
     properties:
       publicKeys:
-        description: Gets or sets the list of SSH public keys used to authenticate with Linux based VMs
+        description: the list of SSH public keys used to authenticate with Linux based VMs
         items:
           $ref: '#/definitions/ContainerServiceSshPublicKey'
         type: array
@@ -326,7 +326,7 @@ definitions:
     description: Contains information about SSH certificate public key data.
     properties:
       keyData:
-        description: Gets or sets Certificate public key used to authenticate with VM through SSH. The certificate must be in Pem format with or without headers.
+        description: Certificate public key used to authenticate with VM through SSH. The certificate must be in Pem format with or without headers.
         type: string
     required:
       - keyData
@@ -334,10 +334,10 @@ definitions:
     description: Describes VM Diagnostics.
     properties:
       enabled:
-        description: Gets or sets whether VM Diagnostic Agent should be provisioned on the Virtual Machine.
+        description: whether VM Diagnostic Agent should be provisioned on the Virtual Machine.
         type: boolean
       storageUri:
-        description: Gets or sets whether VM Diagnostic Agent should be provisioned on the Virtual Machine.
+        description: whether VM Diagnostic Agent should be provisioned on the Virtual Machine.
         readOnly: true
         type: string
   ContainerServiceWindowsProfile:

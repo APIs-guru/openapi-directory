@@ -9,16 +9,16 @@ info:
     url: 'https://google.com'
   description: Provisions and manages App Engine applications.
   title: Google App Engine Admin
-  version: v1beta4
+  version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     format: google
-    url: 'https://www.googleapis.com/discovery/v1/apis/appengine/v1beta4/rest'
+    url: 'https://www.googleapis.com/discovery/v1/apis/appengine/v1/rest'
     version: v1
-  x-preferred: false
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: appengine
 externalDocs:
@@ -103,20 +103,16 @@ parameters:
 tags:
   - name: apps
 paths:
-  '/v1beta4/apps/{appsId}':
+  '/v1/apps/{appsId}':
     get:
       description: Gets information about an application.
       operationId: appengine.apps.get
       parameters:
-        - description: 'Part of `name`. Name of the application to get. For example: "apps/myapp".'
+        - description: 'Part of `name`. The name of the Application resource to get. For example: "apps/myapp".'
           in: path
           name: appsId
           required: true
           type: string
-        - description: 'Certain resources associated with an application are created on-demand. Controls whether these resources should be created when performing the `GET` operation. If specified and any resources could not be created, the request will fail with an error code. Additionally, this parameter can cause the request to take longer to complete.'
-          in: query
-          name: ensureResourcesExist
-          type: boolean
       responses:
         '200':
           description: Successful response
@@ -141,399 +137,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-  '/v1beta4/apps/{appsId}/modules':
-    get:
-      description: Lists all the modules in the application.
-      operationId: appengine.apps.modules.list
-      parameters:
-        - description: 'Part of `name`. Name of the resource requested. For example: "apps/myapp".'
-          in: path
-          name: appsId
-          required: true
-          type: string
-        - description: Maximum results to return per page.
-          in: query
-          name: pageSize
-          type: integer
-        - description: Continuation token for fetching the next page of results.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListModulesResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - apps
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-  '/v1beta4/apps/{appsId}/modules/{modulesId}':
-    delete:
-      description: Deletes a module and all enclosed versions.
-      operationId: appengine.apps.modules.delete
-      parameters:
-        - description: 'Part of `name`. Name of the resource requested. For example: "apps/myapp/modules/default".'
-          in: path
-          name: appsId
-          required: true
-          type: string
-        - description: Part of `name`. See documentation of `appsId`.
-          in: path
-          name: modulesId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Operation'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - apps
-    get:
-      description: Gets the current configuration of the module.
-      operationId: appengine.apps.modules.get
-      parameters:
-        - description: 'Part of `name`. Name of the resource requested. For example: "apps/myapp/modules/default".'
-          in: path
-          name: appsId
-          required: true
-          type: string
-        - description: Part of `name`. See documentation of `appsId`.
-          in: path
-          name: modulesId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Module'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - apps
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-    patch:
-      description: Updates the configuration of the specified module.
-      operationId: appengine.apps.modules.patch
-      parameters:
-        - description: 'Part of `name`. Name of the resource to update. For example: "apps/myapp/modules/default".'
-          in: path
-          name: appsId
-          required: true
-          type: string
-        - description: Part of `name`. See documentation of `appsId`.
-          in: path
-          name: modulesId
-          required: true
-          type: string
-        - description: Standard field mask for the set of fields to be updated.
-          in: query
-          name: mask
-          type: string
-        - description: Whether to use Traffic Migration to shift traffic gradually. Traffic can only be migrated from a single version to another single version.
-          in: query
-          name: migrateTraffic
-          type: boolean
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Module'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Operation'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - apps
-  '/v1beta4/apps/{appsId}/modules/{modulesId}/versions':
-    get:
-      description: Lists the versions of a module.
-      operationId: appengine.apps.modules.versions.list
-      parameters:
-        - description: 'Part of `name`. Name of the resource requested. For example: "apps/myapp/modules/default".'
-          in: path
-          name: appsId
-          required: true
-          type: string
-        - description: Part of `name`. See documentation of `appsId`.
-          in: path
-          name: modulesId
-          required: true
-          type: string
-        - description: Controls the set of fields returned in the `List` response.
-          enum:
-            - BASIC
-            - FULL
-          in: query
-          name: view
-          type: string
-        - description: Maximum results to return per page.
-          in: query
-          name: pageSize
-          type: integer
-        - description: Continuation token for fetching the next page of results.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListVersionsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - apps
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-    post:
-      description: Deploys new code and resource files to a version.
-      operationId: appengine.apps.modules.versions.create
-      parameters:
-        - description: 'Part of `name`. Name of the resource to update. For example: "apps/myapp/modules/default".'
-          in: path
-          name: appsId
-          required: true
-          type: string
-        - description: Part of `name`. See documentation of `appsId`.
-          in: path
-          name: modulesId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Version'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Operation'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - apps
-  '/v1beta4/apps/{appsId}/modules/{modulesId}/versions/{versionsId}':
-    delete:
-      description: Deletes an existing version.
-      operationId: appengine.apps.modules.versions.delete
-      parameters:
-        - description: 'Part of `name`. Name of the resource requested. For example: "apps/myapp/modules/default/versions/v1".'
-          in: path
-          name: appsId
-          required: true
-          type: string
-        - description: Part of `name`. See documentation of `appsId`.
-          in: path
-          name: modulesId
-          required: true
-          type: string
-        - description: Part of `name`. See documentation of `appsId`.
-          in: path
-          name: versionsId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Operation'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - apps
-    get:
-      description: Gets application deployment information.
-      operationId: appengine.apps.modules.versions.get
-      parameters:
-        - description: 'Part of `name`. Name of the resource requested. For example: "apps/myapp/modules/default/versions/v1".'
-          in: path
-          name: appsId
-          required: true
-          type: string
-        - description: Part of `name`. See documentation of `appsId`.
-          in: path
-          name: modulesId
-          required: true
-          type: string
-        - description: Part of `name`. See documentation of `appsId`.
-          in: path
-          name: versionsId
-          required: true
-          type: string
-        - description: Controls the set of fields returned in the `Get` response.
-          enum:
-            - BASIC
-            - FULL
-          in: query
-          name: view
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Version'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - apps
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-    patch:
-      description: 'Updates the specified Version resource. You can specify the following fields depending on the App Engine environment and type of scaling that the version resource uses: * [`serving_status`](/appengine/docs/admin-api/reference/rest/v1beta4/apps.services.versions#Version.FIELDS.serving_status): For Version resources that use basic scaling, manual scaling, or run in the App Engine flexible environment. * [`instance_class`](/appengine/docs/admin-api/reference/rest/v1beta4/apps.services.versions#Version.FIELDS.instance_class): For Version resources that run in the App Engine standard environment. * [`automatic_scaling.min_idle_instances`](/appengine/docs/admin-api/reference/rest/v1beta4/apps.services.versions#Version.FIELDS.automatic_scaling): For Version resources that use automatic scaling and run in the App Engine standard environment. * [`automatic_scaling.max_idle_instances`](/appengine/docs/admin-api/reference/rest/v1beta4/apps.services.versions#Version.FIELDS.automatic_scaling): For Version resources that use automatic scaling and run in the App Engine standard environment.'
-      operationId: appengine.apps.modules.versions.patch
-      parameters:
-        - description: 'Part of `name`. Name of the resource to update. For example: "apps/myapp/modules/default/versions/1".'
-          in: path
-          name: appsId
-          required: true
-          type: string
-        - description: Part of `name`. See documentation of `appsId`.
-          in: path
-          name: modulesId
-          required: true
-          type: string
-        - description: Part of `name`. See documentation of `appsId`.
-          in: path
-          name: versionsId
-          required: true
-          type: string
-        - description: Standard field mask for the set of fields to be updated.
-          in: query
-          name: mask
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Version'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Operation'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - apps
-  '/v1beta4/apps/{appsId}/modules/{modulesId}/versions/{versionsId}/instances':
-    get:
-      description: Lists the instances of a version.
-      operationId: appengine.apps.modules.versions.instances.list
-      parameters:
-        - description: 'Part of `name`. Name of the resource requested. For example: "apps/myapp/modules/default/versions/v1".'
-          in: path
-          name: appsId
-          required: true
-          type: string
-        - description: Part of `name`. See documentation of `appsId`.
-          in: path
-          name: modulesId
-          required: true
-          type: string
-        - description: Part of `name`. See documentation of `appsId`.
-          in: path
-          name: versionsId
-          required: true
-          type: string
-        - description: Maximum results to return per page.
-          in: query
-          name: pageSize
-          type: integer
-        - description: Continuation token for fetching the next page of results.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListInstancesResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - apps
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/upload_protocol'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/$.xgafv'
-  '/v1beta4/apps/{appsId}/operations':
+  '/v1/apps/{appsId}/operations':
     get:
       description: 'Lists operations that match the specified filter in the request. If the server doesn''t support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding below allows API services to override the binding to use different resource name schemes, such as `users/*/operations`.'
       operationId: appengine.apps.operations.list
@@ -579,7 +183,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
-  '/v1beta4/apps/{appsId}/operations/{operationsId}':
+  '/v1/apps/{appsId}/operations/{operationsId}':
     get:
       description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
       operationId: appengine.apps.operations.get
@@ -618,9 +222,439 @@ paths:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
+  '/v1/apps/{appsId}/services':
+    get:
+      description: Lists all the services in the application.
+      operationId: appengine.apps.services.list
+      parameters:
+        - description: 'Part of `parent`. Name of the parent Application resource. For example: "apps/myapp".'
+          in: path
+          name: appsId
+          required: true
+          type: string
+        - description: Maximum results to return per page.
+          in: query
+          name: pageSize
+          type: integer
+        - description: Continuation token for fetching the next page of results.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListServicesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - apps
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+  '/v1/apps/{appsId}/services/{servicesId}':
+    delete:
+      description: Deletes the specified service and all enclosed versions.
+      operationId: appengine.apps.services.delete
+      parameters:
+        - description: 'Part of `name`. Name of the resource requested. For example: "apps/myapp/services/default".'
+          in: path
+          name: appsId
+          required: true
+          type: string
+        - description: Part of `name`. See documentation of `appsId`.
+          in: path
+          name: servicesId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - apps
+    get:
+      description: Gets the current configuration of the specified service.
+      operationId: appengine.apps.services.get
+      parameters:
+        - description: 'Part of `name`. Name of the resource requested. For example: "apps/myapp/services/default".'
+          in: path
+          name: appsId
+          required: true
+          type: string
+        - description: Part of `name`. See documentation of `appsId`.
+          in: path
+          name: servicesId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Service'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - apps
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    patch:
+      description: Updates the configuration of the specified service.
+      operationId: appengine.apps.services.patch
+      parameters:
+        - description: 'Part of `name`. Name of the resource to update. For example: "apps/myapp/services/default".'
+          in: path
+          name: appsId
+          required: true
+          type: string
+        - description: Part of `name`. See documentation of `appsId`.
+          in: path
+          name: servicesId
+          required: true
+          type: string
+        - description: Standard field mask for the set of fields to be updated.
+          in: query
+          name: updateMask
+          type: string
+        - description: 'Whether to use traffic migration to shift traffic gradually. Traffic can only be migrated from a single version to another single version. More information is available in the documentation for traffic migration: https://cloud.google.com/appengine/docs/python/migrating-traffic'
+          in: query
+          name: migrateTraffic
+          type: boolean
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Service'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - apps
+  '/v1/apps/{appsId}/services/{servicesId}/versions':
+    get:
+      description: Lists the versions of a service.
+      operationId: appengine.apps.services.versions.list
+      parameters:
+        - description: 'Part of `parent`. Name of the parent resource to list versions on. For example: "apps/myapp/services/default".'
+          in: path
+          name: appsId
+          required: true
+          type: string
+        - description: Part of `parent`. See documentation of `appsId`.
+          in: path
+          name: servicesId
+          required: true
+          type: string
+        - description: Controls the set of fields returned in the `List` response.
+          enum:
+            - BASIC
+            - FULL
+          in: query
+          name: view
+          type: string
+        - description: Maximum results to return per page.
+          in: query
+          name: pageSize
+          type: integer
+        - description: Continuation token for fetching the next page of results.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListVersionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - apps
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: Deploys code and resource files to a new version.
+      operationId: appengine.apps.services.versions.create
+      parameters:
+        - description: 'Part of `parent`. Name of the parent resource to create this version under. For example: "apps/myapp/services/default".'
+          in: path
+          name: appsId
+          required: true
+          type: string
+        - description: Part of `parent`. See documentation of `appsId`.
+          in: path
+          name: servicesId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Version'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - apps
+  '/v1/apps/{appsId}/services/{servicesId}/versions/{versionsId}':
+    delete:
+      description: Deletes an existing Version resource.
+      operationId: appengine.apps.services.versions.delete
+      parameters:
+        - description: 'Part of `name`. Name of the resource requested. For example: "apps/myapp/services/default/versions/v1".'
+          in: path
+          name: appsId
+          required: true
+          type: string
+        - description: Part of `name`. See documentation of `appsId`.
+          in: path
+          name: servicesId
+          required: true
+          type: string
+        - description: Part of `name`. See documentation of `appsId`.
+          in: path
+          name: versionsId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - apps
+    get:
+      description: 'Gets the specified Version resource. By default, only a BASIC_VIEW will be returned. Please specify the FULL_VIEW parameter to get the full resource.'
+      operationId: appengine.apps.services.versions.get
+      parameters:
+        - description: 'Part of `name`. Name of the resource requested. For example: "apps/myapp/services/default/versions/v1".'
+          in: path
+          name: appsId
+          required: true
+          type: string
+        - description: Part of `name`. See documentation of `appsId`.
+          in: path
+          name: servicesId
+          required: true
+          type: string
+        - description: Part of `name`. See documentation of `appsId`.
+          in: path
+          name: versionsId
+          required: true
+          type: string
+        - description: Controls the set of fields returned in the `Get` response.
+          enum:
+            - BASIC
+            - FULL
+          in: query
+          name: view
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Version'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - apps
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    patch:
+      description: 'Updates the specified Version resource. You can specify the following fields depending on the App Engine environment and type of scaling that the version resource uses: * [`serving_status`](/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.serving_status): For Version resources that use basic scaling, manual scaling, or run in the App Engine flexible environment. * [`instance_class`](/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.instance_class): For Version resources that run in the App Engine standard environment. * [`automatic_scaling.min_idle_instances`](/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling): For Version resources that use automatic scaling and run in the App Engine standard environment. * [`automatic_scaling.max_idle_instances`](/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling): For Version resources that use automatic scaling and run in the App Engine standard environment.'
+      operationId: appengine.apps.services.versions.patch
+      parameters:
+        - description: 'Part of `name`. Name of the resource to update. For example: "apps/myapp/services/default/versions/1".'
+          in: path
+          name: appsId
+          required: true
+          type: string
+        - description: Part of `name`. See documentation of `appsId`.
+          in: path
+          name: servicesId
+          required: true
+          type: string
+        - description: Part of `name`. See documentation of `appsId`.
+          in: path
+          name: versionsId
+          required: true
+          type: string
+        - description: Standard field mask for the set of fields to be updated.
+          in: query
+          name: updateMask
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Version'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - apps
+  '/v1/apps/{appsId}/services/{servicesId}/versions/{versionsId}/instances':
+    get:
+      description: Lists the instances of a version.
+      operationId: appengine.apps.services.versions.instances.list
+      parameters:
+        - description: 'Part of `parent`. Name of the parent Version resource to list instances for. For example: "apps/myapp/services/default/versions/v1".'
+          in: path
+          name: appsId
+          required: true
+          type: string
+        - description: Part of `parent`. See documentation of `appsId`.
+          in: path
+          name: servicesId
+          required: true
+          type: string
+        - description: Part of `parent`. See documentation of `appsId`.
+          in: path
+          name: versionsId
+          required: true
+          type: string
+        - description: Maximum results to return per page.
+          in: query
+          name: pageSize
+          type: integer
+        - description: Continuation token for fetching the next page of results.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListInstancesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - apps
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+  '/v1/apps/{appsId}:repair':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: 'Ensures that all special features required for App Engine, such as the appspot bucket and appengine robot, exist for this project.'
+      operationId: appengine.apps.repair
+      parameters:
+        - description: 'Part of `name`. Name of the application to repair. For example: "apps/myapp".'
+          in: path
+          name: appsId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RepairApplicationRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - apps
 definitions:
   ApiConfigHandler:
-    description: API Serving configuration for Cloud Endpoints.
+    description: Google Cloud Endpoints configuration for API handlers. Used to tune behavior of optional Cloud Endpoints integration.
     properties:
       authFailAction:
         description: 'For users not logged in, how to handle access to resources with required login. Defaults to "redirect".'
@@ -679,14 +713,14 @@ definitions:
         description: 'The hostname used to reach the application, as resolved by App Engine. @OutputOnly'
         type: string
       dispatchRules:
-        description: HTTP path dispatch rules for requests to the app that do not explicitly target a module or version. The rules are order-dependent. @OutputOnly
+        description: HTTP path dispatch rules for requests to the app that do not explicitly target a service or version. The rules are order-dependent. @OutputOnly
         items:
           $ref: '#/definitions/UrlDispatchRule'
         type: array
       id:
-        description: 'The relative name/path of the application. Example: "myapp".'
+        description: 'The relative name of the application. Example: "myapp".'
         type: string
-      location:
+      locationId:
         description: 'The location from which the application will be run. Application instances will run out of data centers in the chosen location and all of the application''s End User Content will be stored at rest. The default is "us-central". Choices are: "us-central" - Central US "europe-west" - Western Europe "us-east1" - Eastern US'
         type: string
       name:
@@ -721,7 +755,7 @@ definitions:
         format: int32
         type: integer
       minIdleInstances:
-        description: 'The minimum number of idle instances that App Engine should maintain for this version. Only applies to the default version of a module, since other versions are not expected to receive significant traffic.'
+        description: 'The minimum number of idle instances that App Engine should maintain for this version. Only applies to the default version of a service, since other versions are not expected to receive significant traffic.'
         format: int32
         type: integer
       minPendingLatency:
@@ -739,7 +773,7 @@ definitions:
         description: Target scaling by request utilization.
     type: object
   BasicScaling:
-    description: A module with basic scaling will create an instance when the application receives a request. The instance will be turned down when the app becomes idle. Basic scaling is ideal for work that is intermittent or driven by user activity.
+    description: A service with basic scaling will create an instance when the application receives a request. The instance will be turned down when the app becomes idle. Basic scaling is ideal for work that is intermittent or driven by user activity.
     properties:
       idleTimeout:
         description: The instance will be shut down this amount of time after receiving its last request.
@@ -778,28 +812,23 @@ definitions:
           $ref: '#/definitions/FileInfo'
         description: A manifest of files stored in Google Cloud Storage which should be included as part of this application. All files must be readable using the credentials supplied with this call.
         type: object
-      sourceReferences:
-        description: The origin of the source code for this deployment. There can be more than one source reference per Version if source code is distributed among multiple repositories.
-        items:
-          $ref: '#/definitions/SourceReference'
-        type: array
     type: object
   DiskUtilization:
     description: Target scaling by disk usage (for VM runtimes only).
     properties:
-      targetReadBytesPerSec:
+      targetReadBytesPerSecond:
         description: Target bytes per second read.
         format: int32
         type: integer
-      targetReadOpsPerSec:
+      targetReadOpsPerSecond:
         description: Target ops per second read.
         format: int32
         type: integer
-      targetWriteBytesPerSec:
+      targetWriteBytesPerSecond:
         description: Target bytes per second written.
         format: int32
         type: integer
-      targetWriteOpsPerSec:
+      targetWriteOpsPerSecond:
         description: Target ops per second written.
         format: int32
         type: integer
@@ -883,17 +912,17 @@ definitions:
         type: integer
       errors:
         description: Number of errors since the instance was started. @OutputOnly
-        format: uint32
+        format: int32
         type: integer
       id:
-        description: 'The relative name/path of the instance within the version. Example: "instance-1" @OutputOnly'
+        description: 'The relative name of the instance within the version. Example: "instance-1" @OutputOnly'
         type: string
       memoryUsage:
         description: Memory usage (in bytes). @OutputOnly
         format: int64
         type: string
       name:
-        description: 'The full path to the Instance resource in the API. Example: "apps/myapp/modules/default/versions/v1/instances/instance-1" @OutputOnly'
+        description: 'The resource name of an Instance. Example: "apps/myapp/services/default/versions/v1/instances/instance-1" @OutputOnly'
         type: string
       qps:
         description: QPS for this instance (averaged over the last minute). @OutputOnly
@@ -903,7 +932,7 @@ definitions:
         description: Number of requests (since the clone was started). @OutputOnly
         format: int32
         type: integer
-      startTimestamp:
+      startTime:
         description: Time when instance was started. @OutputOnly
         type: string
       vmId:
@@ -944,18 +973,6 @@ definitions:
         description: Continuation token for fetching the next page of results.
         type: string
     type: object
-  ListModulesResponse:
-    description: Response message for `Modules.ListModules`.
-    properties:
-      modules:
-        description: The modules belonging to the requested application.
-        items:
-          $ref: '#/definitions/Module'
-        type: array
-      nextPageToken:
-        description: Continuation token for fetching the next page of results.
-        type: string
-    type: object
   ListOperationsResponse:
     description: The response message for Operations.ListOperations.
     properties:
@@ -968,6 +985,18 @@ definitions:
           $ref: '#/definitions/Operation'
         type: array
     type: object
+  ListServicesResponse:
+    description: Response message for `Services.ListServices`.
+    properties:
+      nextPageToken:
+        description: Continuation token for fetching the next page of results.
+        type: string
+      services:
+        description: The services belonging to the requested application.
+        items:
+          $ref: '#/definitions/Service'
+        type: array
+    type: object
   ListVersionsResponse:
     description: Response message for `Versions.ListVersions`.
     properties:
@@ -975,7 +1004,7 @@ definitions:
         description: Continuation token for fetching the next page of results.
         type: string
       versions:
-        description: The versions belonging to the requested application module.
+        description: The versions belonging to the requested application service.
         items:
           $ref: '#/definitions/Version'
         type: array
@@ -984,25 +1013,12 @@ definitions:
     description: Metadata for the given google.cloud.location.Location.
     type: object
   ManualScaling:
-    description: 'A module with manual scaling runs continuously, allowing you to perform complex initialization and rely on the state of its memory over time.'
+    description: 'A service with manual scaling runs continuously, allowing you to perform complex initialization and rely on the state of its memory over time.'
     properties:
       instances:
-        description: 'The number of instances to assign to the module at the start. This number can later be altered by using the [Modules API](https://cloud.google.com/appengine/docs/python/modules/functions) `set_num_instances()` function.'
+        description: 'The number of instances to assign to the service at the start. This number can later be altered by using the [Modules API](https://cloud.google.com/appengine/docs/python/modules/functions) `set_num_instances()` function.'
         format: int32
         type: integer
-    type: object
-  Module:
-    description: A module is a component of an application that provides a single service or configuration. A module has a collection of versions that define a specific set of code used to implement the functionality of that module.
-    properties:
-      id:
-        description: 'The relative name/path of the module within the application. Example: "default" @OutputOnly'
-        type: string
-      name:
-        description: 'The full path to the Module resource in the API. Example: "apps/myapp/modules/default" @OutputOnly'
-        type: string
-      split:
-        $ref: '#/definitions/TrafficSplit'
-        description: A mapping that defines fractional HTTP traffic diversion to different versions within the module.
     type: object
   Network:
     description: Used to specify extra network settings (for VM runtimes only).
@@ -1022,19 +1038,19 @@ definitions:
   NetworkUtilization:
     description: Target scaling by network usage (for VM runtimes only).
     properties:
-      targetReceivedBytesPerSec:
+      targetReceivedBytesPerSecond:
         description: Target bytes per second received.
         format: int32
         type: integer
-      targetReceivedPacketsPerSec:
+      targetReceivedPacketsPerSecond:
         description: Target packets per second received.
         format: int32
         type: integer
-      targetSentBytesPerSec:
+      targetSentBytesPerSecond:
         description: Target bytes per second sent.
         format: int32
         type: integer
-      targetSentPacketsPerSec:
+      targetSentPacketsPerSecond:
         description: Target packets per second sent.
         format: int32
         type: integer
@@ -1122,6 +1138,9 @@ definitions:
         description: The user who requested this operation. @OutputOnly
         type: string
     type: object
+  RepairApplicationRequest:
+    description: Request message for 'Applications.RepairApplication'.
+    type: object
   RequestUtilization:
     description: Target scaling by request utilization (for VM runtimes only).
     properties:
@@ -1129,7 +1148,7 @@ definitions:
         description: Target number of concurrent requests.
         format: int32
         type: integer
-      targetRequestCountPerSec:
+      targetRequestCountPerSecond:
         description: Target requests per second.
         format: int32
         type: integer
@@ -1157,39 +1176,18 @@ definitions:
         description: Specifies the path to the script from the application root directory.
         type: string
     type: object
-  SourceReference:
-    description: A reference to a particular snapshot of the source tree used to build and deploy the application.
+  Service:
+    description: 'A service is a logical component of an application that can share state and communicate in a secure fashion with other services. For example, an application that handles customer requests might include separate services to handle other tasks such as API requests from mobile devices or backend data analysis. Each service has a collection of versions that define a specific set of code used to implement the functionality of that service.'
     properties:
-      repository:
-        description: 'Optional. A URI string identifying the repository. Example: "https://source.developers.google.com/p/app-123/r/default"'
+      id:
+        description: 'The relative name of the service within the application. Example: "default" @OutputOnly'
         type: string
-      revisionId:
-        description: 'The canonical (and persistent) identifier of the deployed revision, i.e. any kind of aliases including tags or branch names are not allowed. Example (git): "2198322f89e0bb2e25021667c2ed489d1fd34e6b"'
+      name:
+        description: 'The full path to the Service resource in the API. Example: "apps/myapp/services/default" @OutputOnly'
         type: string
-    type: object
-  StaticDirectoryHandler:
-    description: 'Files served directly to the user for a given URL, such as images, CSS stylesheets, or JavaScript source files. Static directory handlers make it easy to serve the entire contents of a directory as static files.'
-    properties:
-      applicationReadable:
-        description: 'By default, files declared in static file handlers are uploaded as static data and are only served to end users, they cannot be read by an application. If this field is set to true, the files are also uploaded as code data so your application can read them. Both uploads are charged against your code and static data storage resource quotas.'
-        type: boolean
-      directory:
-        description: 'The path to the directory containing the static files, from the application root directory. Everything after the end of the matched url pattern is appended to static_dir to form the full path to the requested file.'
-        type: string
-      expiration:
-        description: The length of time a static file served by this handler ought to be cached by web proxies and browsers.
-        type: string
-      httpHeaders:
-        additionalProperties:
-          type: string
-        description: HTTP headers to use for all responses from these URLs.
-        type: object
-      mimeType:
-        description: 'If specified, all files served by this handler will be served using the specified MIME type. If not specified, the MIME type for a file will be derived from the file''s filename extension.'
-        type: string
-      requireMatchingFile:
-        description: 'If true, this UrlMap entry does not match the request unless the file referenced by the handler also exists. If no such file exists, processing will continue with the next UrlMap that matches the requested URL.'
-        type: boolean
+      split:
+        $ref: '#/definitions/TrafficSplit'
+        description: A mapping that defines fractional HTTP traffic diversion to different versions within the service.
     type: object
   StaticFilesHandler:
     description: 'Files served directly to the user for a given URL, such as images, CSS stylesheets, or JavaScript source files. Static file handlers describe which files in the application directory are static files, and which URLs serve them.'
@@ -1237,13 +1235,13 @@ definitions:
         type: string
     type: object
   TrafficSplit:
-    description: 'Configuration for traffic splitting for versions within a single module. Traffic splitting allows traffic directed to the module to be assigned to one of several versions in a fractional way, enabling experiments and canarying new builds, for example.'
+    description: 'Configuration for traffic splitting for versions within a single service. Traffic splitting allows traffic directed to the service to be assigned to one of several versions in a fractional way, enabling experiments and canarying new builds, for example.'
     properties:
       allocations:
         additionalProperties:
           format: double
           type: number
-        description: 'Mapping from module version IDs within the module to fractional (0.000, 1] allocations of traffic for that version. Each version may only be specified once, but some versions in the module may not have any traffic allocation. Modules that have traffic allocated in this field may not be deleted until the module is deleted, or their traffic allocation is removed. Allocations must sum to 1. Supports precision up to two decimal places for IP-based splits and up to three decimal places for cookie-based splits.'
+        description: 'Mapping from service version IDs within the service to fractional (0.000, 1] allocations of traffic for that version. Each version may only be specified once, but some versions in the service may not have any traffic allocation. Services that have traffic allocated in this field may not be deleted until the service is deleted, or their traffic allocation is removed. Allocations must sum to 1. Supports precision up to two decimal places for IP-based splits and up to three decimal places for cookie-based splits.'
         type: object
       shardBy:
         description: Which mechanism should be used as a selector when choosing a version to send a request to. The traffic selection algorithm will be stable for either type until allocations are changed.
@@ -1254,16 +1252,16 @@ definitions:
         type: string
     type: object
   UrlDispatchRule:
-    description: Rules to match an HTTP request and dispatch that request to a module.
+    description: Rules to match an HTTP request and dispatch that request to a service.
     properties:
       domain:
         description: 'The domain name to match on. Supports ''*'' (glob) wildcarding on the left-hand side of a ''.''. If empty, all domains will be matched (the same as ''*'').'
         type: string
-      module:
-        description: 'The resource id of a Module in this application that should service the matched request. The Module must already exist. Example: "default".'
-        type: string
       path:
         description: The pathname within the host. This must start with a '/'. A single '*' (glob) can be included at the end of the path. The sum of the lengths of the domain and path may not exceed 100 characters.
+        type: string
+      service:
+        description: 'The resource id of a Service in this application that should service the matched request. The Service must already exist. Example: "default".'
         type: string
     type: object
   UrlMap:
@@ -1308,9 +1306,6 @@ definitions:
           - SECURE_OPTIONAL
           - SECURE_ALWAYS
         type: string
-      staticDirectory:
-        $ref: '#/definitions/StaticDirectoryHandler'
-        description: Serves the entire contents of a directory as static files. This attribute is deprecated. You can mimic the behavior of static directories using static files.
       staticFiles:
         $ref: '#/definitions/StaticFilesHandler'
         description: 'Returns the contents of a file, such as an image, as the response.'
@@ -1319,7 +1314,7 @@ definitions:
         type: string
     type: object
   Version:
-    description: A Version is a specific set of source code and configuration files deployed to a module.
+    description: A Version is a specific set of source code and configuration files deployed to a service.
     properties:
       apiConfig:
         $ref: '#/definitions/ApiConfigHandler'
@@ -1329,26 +1324,30 @@ definitions:
         description: 'Automatic scaling is the scaling policy that App Engine has used since its inception. It is based on request rate, response latencies, and other application metrics.'
       basicScaling:
         $ref: '#/definitions/BasicScaling'
-        description: A module with basic scaling will create an instance when the application receives a request. The instance will be turned down when the app becomes idle. Basic scaling is ideal for work that is intermittent or driven by user activity.
+        description: A service with basic scaling will create an instance when the application receives a request. The instance will be turned down when the app becomes idle. Basic scaling is ideal for work that is intermittent or driven by user activity.
       betaSettings:
         additionalProperties:
           type: string
         description: Beta settings supplied to the application via metadata.
         type: object
-      creationTime:
+      createTime:
         description: Creation time of this version. This will be between the start and end times of the operation that creates this version. @OutputOnly
+        type: string
+      createdBy:
+        description: The email address of the user who created this version. @OutputOnly
         type: string
       defaultExpiration:
         description: 'The length of time a static file served by a static file handler ought to be cached by web proxies and browsers, if the handler does not specify its own expiration. Only returned in `GET` requests if `view=FULL` is set. May only be set on create requests; once created, is immutable.'
         type: string
-      deployer:
-        description: The email address of the user who created this version. @OutputOnly
-        type: string
       deployment:
         $ref: '#/definitions/Deployment'
         description: 'Code and application artifacts that make up this version. Only returned in `GET` requests if `view=FULL` is set. May only be set on create requests; once created, is immutable.'
+      diskUsageBytes:
+        description: Total size of version files hosted on App Engine disk in bytes. @OutputOnly
+        format: int64
+        type: string
       env:
-        description: 'The App Engine execution environment to use for this version. Default: "1"'
+        description: 'The App Engine execution environment to use for this version. Default: "standard"'
         type: string
       envVariables:
         additionalProperties:
@@ -1369,7 +1368,7 @@ definitions:
         $ref: '#/definitions/HealthCheck'
         description: 'Configure health checking for the VM instances. Unhealthy VM instances will be stopped and replaced with new instances. Only returned in `GET` requests if `view=FULL` is set. May only be set on create requests; once created, is immutable.'
       id:
-        description: 'The relative name/path of the Version within the module. Example: "v1". Version specifiers can contain lowercase letters, digits, and hyphens. It cannot begin with the prefix `ah-` and the names `default` and `latest` are reserved and cannot be used.'
+        description: 'The relative name of the Version within the service. Example: "v1". Version specifiers can contain lowercase letters, digits, and hyphens. It cannot begin with the prefix `ah-` and the names `default` and `latest` are reserved and cannot be used.'
         type: string
       inboundServices:
         description: 'Before an application can receive email or XMPP messages, the application must be configured to enable the service.'
@@ -1387,7 +1386,7 @@ definitions:
           type: string
         type: array
       instanceClass:
-        description: 'The frontend instance class to use to run this app. Valid values are `[F1, F2, F4, F4_1G]`. Default: "F1"'
+        description: 'The instance class to use to run this app. Valid values for AutomaticScaling are `[F1, F2, F4, F4_1G]`. Valid values for ManualScaling and BasicScaling are `[B1, B2, B4, B8, B4_1G]`. Default: "F1" for AutomaticScaling, "B1" for ManualScaling and BasicScaling'
         type: string
       libraries:
         description: 'Configuration for Python runtime third-party libraries required by the application. Only returned in `GET` requests if `view=FULL` is set. May only be set on create requests; once created, is immutable.'
@@ -1396,9 +1395,9 @@ definitions:
         type: array
       manualScaling:
         $ref: '#/definitions/ManualScaling'
-        description: 'A module with manual scaling runs continuously, allowing you to perform complex initialization and rely on the state of its memory over time.'
+        description: 'A service with manual scaling runs continuously, allowing you to perform complex initialization and rely on the state of its memory over time.'
       name:
-        description: 'The full path to the Version resource in the API. Example: "apps/myapp/modules/default/versions/v1". @OutputOnly'
+        description: 'The full path to the Version resource in the API. Example: "apps/myapp/services/default/versions/v1". @OutputOnly'
         type: string
       network:
         $ref: '#/definitions/Network'
@@ -1422,6 +1421,9 @@ definitions:
       threadsafe:
         description: 'If true, multiple requests can be dispatched to the app at once.'
         type: boolean
+      versionUrl:
+        description: 'The version''s URL, which is of the form: https://service_version_id-dot-service_id-dot-app_id.appspot.com @OutputOnly'
+        type: string
       vm:
         description: Whether to deploy this app in a VM container.
         type: boolean

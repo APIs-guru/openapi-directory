@@ -18,7 +18,7 @@ info:
     format: google
     url: 'https://www.googleapis.com/discovery/v1/apis/appengine/v1beta5/rest'
     version: v1
-  x-preferred: true
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: appengine
 externalDocs:
@@ -530,7 +530,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
     patch:
-      description: 'Updates an existing version. Note: UNIMPLEMENTED.'
+      description: 'Updates the specified Version resource. You can specify the following fields depending on the App Engine environment and type of scaling that the version resource uses: * [`serving_status`](/appengine/docs/admin-api/reference/rest/v1beta5/apps.services.versions#Version.FIELDS.serving_status): For Version resources that use basic scaling, manual scaling, or run in the App Engine flexible environment. * [`instance_class`](/appengine/docs/admin-api/reference/rest/v1beta5/apps.services.versions#Version.FIELDS.instance_class): For Version resources that run in the App Engine standard environment. * [`automatic_scaling.min_idle_instances`](/appengine/docs/admin-api/reference/rest/v1beta5/apps.services.versions#Version.FIELDS.automatic_scaling): For Version resources that use automatic scaling and run in the App Engine standard environment. * [`automatic_scaling.max_idle_instances`](/appengine/docs/admin-api/reference/rest/v1beta5/apps.services.versions#Version.FIELDS.automatic_scaling): For Version resources that use automatic scaling and run in the App Engine standard environment.'
       operationId: appengine.apps.services.versions.patch
       parameters:
         - description: 'Part of `name`. Name of the resource to update. For example: "apps/myapp/services/default/versions/1".'
@@ -907,19 +907,19 @@ definitions:
         description: Time when instance was started. @OutputOnly
         type: string
       vmId:
-        description: 'For VMEngines instances, the GCE VM ID of the instance. @OutputOnly'
+        description: 'For VMEngines instances, the Compute Engine VM ID of the instance. @OutputOnly'
         type: string
       vmName:
-        description: 'For VMEngines instances, the name of GCE VM where the instance lives. @OutputOnly'
+        description: 'For VMEngines instances, the name of the Compute Engine VM where the instance lives. @OutputOnly'
         type: string
       vmStatus:
-        description: 'For VMEngines instances, the status of GCE VM where the instance lives. @OutputOnly'
+        description: 'For VMEngines instances, the status of the Compute Engine VM where the instance lives. @OutputOnly'
         type: string
       vmUnlocked:
         description: 'For VMEngines instances, whether the instance has been unlocked. @OutputOnly'
         type: boolean
       vmZoneName:
-        description: 'For VMEngines instances, the zone where the GCE VM is located. @OutputOnly'
+        description: 'For VMEngines instances, the zone where the Compute Engine VM is located. @OutputOnly'
         type: string
     type: object
   Library:
@@ -979,6 +979,9 @@ definitions:
         items:
           $ref: '#/definitions/Version'
         type: array
+    type: object
+  LocationMetadata:
+    description: Metadata for the given google.cloud.location.Location.
     type: object
   ManualScaling:
     description: 'A service with manual scaling runs continuously, allowing you to perform complex initialization and rely on the state of its memory over time.'
@@ -1063,6 +1066,25 @@ definitions:
         type: string
       target:
         description: 'Resource that this operation is acting on. Example: "apps/myapp/modules/default". @OutputOnly'
+        type: string
+      user:
+        description: The user who requested this operation. @OutputOnly
+        type: string
+    type: object
+  OperationMetadataV1:
+    description: Metadata for the given google.longrunning.Operation.
+    properties:
+      endTime:
+        description: Timestamp that this operation was completed. (Not present if the operation is still in progress.) @OutputOnly
+        type: string
+      insertTime:
+        description: Timestamp that this operation was received. @OutputOnly
+        type: string
+      method:
+        description: 'API method name that initiated the operation. Example: "google.appengine.v1.Version.CreateVersion". @OutputOnly'
+        type: string
+      target:
+        description: 'Resource that this operation is acting on. Example: "apps/myapp/services/default". @OutputOnly'
         type: string
       user:
         description: The user who requested this operation. @OutputOnly
