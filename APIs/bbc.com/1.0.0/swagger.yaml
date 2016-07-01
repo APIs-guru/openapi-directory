@@ -46,6 +46,8 @@ tags:
     name: feeds
   - description: Nitro metadata
     name: schema
+  - description: Nitro Raw
+    name: Raw
 paths:
   /:
     get:
@@ -1862,6 +1864,204 @@ paths:
       summary: Information about the linear services used for broadcast transmissions
       tags:
         - feeds
+  '/v1/brands/{pid}':
+    get:
+      consumes:
+        - application/json
+      description: Get raw brand
+      operationId: Get_Raw_brand
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Nitro response
+          schema:
+            $ref: '#/definitions/nitro'
+      summary: Get raw brand
+      tags:
+        - Raw
+  '/v1/brands/{pid}/franchises/':
+    get:
+      consumes:
+        - application/json
+      description: Get raw brand franchises
+      operationId: Get_Raw_brand franchises
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Nitro response
+          schema:
+            $ref: '#/definitions/nitro'
+      summary: Get raw brand franchise
+      tags:
+        - Raw
+  '/v1/episodes/{pid}':
+    get:
+      consumes:
+        - application/json
+      description: Get raw episode
+      operationId: Get_Raw_episode
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Nitro response
+          schema:
+            $ref: '#/definitions/nitro'
+      summary: Get raw episode
+      tags:
+        - Raw
+  '/v1/episodes/{pid}/ancestors/':
+    get:
+      consumes:
+        - application/json
+      description: Get raw ancestors
+      operationId: Get_Raw_ancestors
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Nitro response
+          schema:
+            $ref: '#/definitions/nitro'
+      summary: Get raw ancestors
+      tags:
+        - Raw
+  '/v1/episodes/{pid}/formats/':
+    get:
+      consumes:
+        - application/json
+      description: Get raw formats
+      operationId: Get_Raw_formats
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Nitro response
+          schema:
+            $ref: '#/definitions/nitro'
+      summary: Get raw formats
+      tags:
+        - Raw
+  '/v1/episodes/{pid}/genre_groups/':
+    get:
+      consumes:
+        - application/json
+      description: Get raw genre groups
+      operationId: Get_Raw_genre_groups
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Nitro response
+          schema:
+            $ref: '#/definitions/nitro'
+      summary: Get raw genre groups
+      tags:
+        - Raw
+  '/v1/images/{pid}':
+    get:
+      consumes:
+        - application/json
+      description: Get raw image
+      operationId: Get_Raw_image
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Nitro response
+          schema:
+            $ref: '#/definitions/nitro'
+      summary: Get raw image
+      tags:
+        - Raw
+  '/v1/master_brands/{mbid}':
+    get:
+      consumes:
+        - application/json
+      description: Get raw masterbrand
+      operationId: Get_Raw_masterbrand
+      parameters:
+        - in: path
+          name: mbid
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Nitro response
+          schema:
+            $ref: '#/definitions/nitro'
+      summary: Get raw masterbrand
+      tags:
+        - Raw
+  '/v1/promotions/{pid}':
+    get:
+      consumes:
+        - application/json
+      description: Get raw promotion
+      operationId: Get_Raw_promotion
+      parameters:
+        - in: path
+          name: pid
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: Nitro response
+          schema:
+            $ref: '#/definitions/nitro'
+      summary: Get raw promotion
+      tags:
+        - Raw
   /versions:
     get:
       description: 'The versions feed exposes editorial "Versions" of programmes. These are concepts used to capture different presentations of an overall programme: for example, versions of a programme may include one with sign language, one with audio description, one edited for content and more. Versions are also important to understand for broadcasts: a linear broadcast or an ondemand is always of a specific version, not merely of a programme.'
@@ -2396,17 +2596,27 @@ definitions:
             items:
               additionalProperties: false
               properties:
+                '#text':
+                  type: string
                 media_sets:
                   additionalProperties: false
                   properties:
                     media_set:
                       items:
+                        additionalProperties: false
+                        properties:
+                          '#text':
+                            type: string
+                        required:
+                          - '#text'
                         type: object
                       minItems: 1
                       type: array
                   required:
                     - media_set
                   type: object
+              required:
+                - '#text'
               type: object
             minItems: 1
             type: array
@@ -2774,9 +2984,13 @@ definitions:
   broadcastTime:
     additionalProperties: false
     properties:
+      '#text':
+        $ref: '#/definitions/dateRange'
       duration:
         pattern: '^(-)?P(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)W)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?$'
         type: string
+    required:
+      - '#text'
     type: object
   broadcast_of:
     $ref: '#/definitions/pidReference'
@@ -2941,8 +3155,12 @@ definitions:
               credit_role:
                 additionalProperties: false
                 properties:
+                  '#text':
+                    type: string
                   id:
                     type: string
+                required:
+                  - '#text'
                 type: object
             type: object
           contributions_mixin_contributor:
@@ -2950,8 +3168,12 @@ definitions:
           credit_role:
             additionalProperties: false
             properties:
+              '#text':
+                type: string
               id:
                 type: string
+            required:
+              - '#text'
             type: object
         required:
           - contribution
@@ -3151,10 +3373,13 @@ definitions:
   deprecatedReferenceElement:
     additionalProperties: false
     properties:
+      '#text':
+        $ref: '#/definitions/referenceAttributes'
       deprecationAttributes:
         $ref: '#/definitions/deprecationAttributes'
     required:
       - deprecationAttributes
+      - '#text'
     type: object
   deprecationAttributes:
     additionalProperties: false
@@ -3442,8 +3667,12 @@ definitions:
   format:
     additionalProperties: false
     properties:
+      '#text':
+        type: string
       format_id:
         type: string
+    required:
+      - '#text'
     type: object
   format-string:
     type: string
@@ -3456,10 +3685,14 @@ definitions:
   genre:
     additionalProperties: false
     properties:
+      '#text':
+        type: string
       id:
         type: string
       type:
         type: string
+    required:
+      - '#text'
     type: object
   genreGroupingsType:
     additionalProperties: false
@@ -3472,10 +3705,14 @@ definitions:
   genreGroupsType:
     additionalProperties: false
     properties:
+      '#text':
+        $ref: '#/definitions/deprecatedReferenceElement'
       genre_group:
         items:
           $ref: '#/definitions/genre_group'
         type: array
+    required:
+      - '#text'
     type: object
   genre_group:
     additionalProperties: false
@@ -3563,10 +3800,14 @@ definitions:
   id:
     additionalProperties: false
     properties:
+      '#text':
+        type: string
       authority:
         type: string
       type:
         type: string
+    required:
+      - '#text'
     type: object
   ids:
     additionalProperties: false
@@ -3878,6 +4119,8 @@ definitions:
   media_profile_group:
     additionalProperties: false
     properties:
+      '#text':
+        type: string
       context:
         type: string
       pid:
@@ -3888,6 +4131,8 @@ definitions:
         type: string
       transport:
         type: string
+    required:
+      - '#text'
     type: object
   media_profile_groups:
     additionalProperties: false
@@ -4289,6 +4534,8 @@ definitions:
   publication_rights:
     additionalProperties: false
     properties:
+      '#text':
+        type: string
       context:
         type: string
       platform:
@@ -4297,6 +4544,8 @@ definitions:
         type: string
       transport:
         type: string
+    required:
+      - '#text'
     type: object
   published_time:
     $ref: '#/definitions/broadcastTime'
@@ -4315,10 +4564,14 @@ definitions:
   reference:
     additionalProperties: false
     properties:
+      '#text':
+        $ref: '#/definitions/referenceAttributes'
       href_deprecated:
         type: boolean
       result_type_deprecated:
         type: boolean
+    required:
+      - '#text'
     type: object
   referenceAttributes:
     additionalProperties: false
@@ -5044,10 +5297,14 @@ definitions:
   warning:
     additionalProperties: false
     properties:
+      '#text':
+        type: string
       short_description:
         type: string
       warning_code:
         type: string
+    required:
+      - '#text'
     type: object
   warning_items:
     additionalProperties: false
@@ -5056,28 +5313,40 @@ definitions:
         items:
           additionalProperties: false
           properties:
+            '#text':
+              type: string
             short_description:
               type: string
             warning:
               items:
                 additionalProperties: false
                 properties:
+                  '#text':
+                    type: string
                   short_description:
                     type: string
                   warning_code:
                     type: string
+                required:
+                  - '#text'
                 type: object
               type: array
             warning_code:
               type: string
+          required:
+            - '#text'
           type: object
         type: array
     type: object
   warning_text:
     additionalProperties: false
     properties:
+      '#text':
+        type: string
       length:
         type: string
+    required:
+      - '#text'
     type: object
   warning_texts:
     additionalProperties: false
@@ -5086,16 +5355,24 @@ definitions:
         items:
           additionalProperties: false
           properties:
+            '#text':
+              type: string
             length:
               type: string
             warning_text:
               items:
                 additionalProperties: false
                 properties:
+                  '#text':
+                    type: string
                   length:
                     type: string
+                required:
+                  - '#text'
                 type: object
               type: array
+          required:
+            - '#text'
           type: object
         type: array
     type: object
@@ -5151,6 +5428,7 @@ definitions:
   window_of:
     $ref: '#/definitions/pidReference'
   xquery-version:
+    description: The XQuery language version.
     enum:
       - 1.0-ml
       - 0.9-ml

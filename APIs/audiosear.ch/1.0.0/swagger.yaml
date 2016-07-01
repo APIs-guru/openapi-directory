@@ -175,6 +175,18 @@ paths:
             $ref: '#/definitions/person'
       tags:
         - people
+  /random_episode:
+    get:
+      description: Selects and returns a random episode
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Returns a random episode
+          schema:
+            $ref: '#/definitions/episode'
+      tags:
+        - episodes
   '/search/episodes/{query}':
     get:
       description: Returns search results

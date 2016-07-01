@@ -29,7 +29,7 @@ paths:
       consumes:
         - application/json
       description: |
-        This endpoint solves large problems, i.e. traveling salesman or vehicle routing problems, and returns the solution.
+        This endpoint for solving vehicle routing problems, i.e. traveling salesman or vehicle routing problems, and returns the solution.
       operationId: postVrp
       parameters:
         - description: your API key
@@ -54,7 +54,7 @@ paths:
           description: Error occurred when reading client request. Request is invalid.
         '500':
           description: Error occurred on server side.
-      summary: Solves large routing problems
+      summary: Solves vehicle routing problems
       tags:
         - vrp
   '/solution/{jobId}':
@@ -164,6 +164,22 @@ definitions:
         description: unique id for your job/request with which you can fetch your solution
         type: string
     type: object
+  Objective:
+    properties:
+      type:
+        description: 'type of objective function, i.e. min or min-max '
+        enum:
+          - min
+          - min-max
+        type: string
+      value:
+        description: objective function value
+        enum:
+          - completion_time
+          - transport_time
+          - vehicles
+        type: string
+    type: object
   Relation:
     properties:
       ids:
@@ -183,6 +199,11 @@ definitions:
     properties:
       algorithm:
         $ref: '#/definitions/Algorithm'
+      objectives:
+        description: An array of objectives
+        items:
+          $ref: '#/definitions/Objective'
+        type: array
       relations:
         description: An array of relations
         items:
