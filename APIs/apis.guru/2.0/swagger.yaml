@@ -39,29 +39,39 @@ security: []
 paths:
   /list.json:
     get:
+      description: |
+        List all APIs in the directory.
+        Returns links to OpenAPI specification for each API in the directory.
+        If API exist in multiply versions `preferred` one is explicitly marked.
+
+        Some basic info from OpenAPI spec is cached inside each object.
+        This allows to generate some simple views without need to fetch OpenAPI spec for each API.
       operationId: listAPIs
       responses:
         '200':
           description: OK
           schema:
             $ref: '#/definitions/APIs'
-      summary: List all APIs in collection
+      summary: List all APIs
   /metrics.json:
     get:
-      operationId: listMetrics
+      description: |
+        Some basic metrics for the entire directory.
+        Just stunning numbers to put on a front page and are intended purely for WoW effect :)
+      operationId: getMetrics
       responses:
         '200':
           description: OK
           schema:
             $ref: '#/definitions/Metrics'
-      summary: List of some basic metrics for entire collection
+      summary: Get basic metrics
 definitions:
   API:
     additionalProperties: false
     description: Meta information about API
     properties:
       added:
-        description: Timestamp when this API was first added to collection
+        description: Timestamp when the API was first added to the directory
         format: date-time
         type: string
       preferred:
@@ -70,7 +80,7 @@ definitions:
       versions:
         additionalProperties:
           $ref: '#/definitions/ApiVersion'
-        description: List supported versions of API
+        description: List of supported versions of the API
         minProperties: 1
         type: object
     required:
@@ -83,7 +93,7 @@ definitions:
       $ref: '#/definitions/API'
     description: |
       List of API details.
-      It consist of JSON object with API IDs(`<provider>[:<service>]`) as keys.
+      It is a JSON object with API IDs(`<provider>[:<service>]`) as keys.
     example:
       'googleapis.com:drive':
         added: '2015-02-22T20:00:45.000Z'
@@ -133,7 +143,7 @@ definitions:
     additionalProperties: false
     properties:
       added:
-        description: Timestamp when this version was added
+        description: Timestamp when the version was added
         format: date-time
         type: string
       info:
@@ -141,15 +151,15 @@ definitions:
         minProperties: 1
         type: object
       swaggerUrl:
-        description: URL of Swagger spec in JSON format
+        description: URL to Swagger spec in JSON format
         format: url
         type: string
       swaggerYamlUrl:
-        description: URL of Swagger spec in YAML format
+        description: URL to Swagger spec in YAML format
         format: url
         type: string
       updated:
-        description: Timestamp when this version was updated
+        description: Timestamp when the version was updated
         format: date-time
         type: string
     required:
@@ -161,7 +171,7 @@ definitions:
     type: object
   Metrics:
     additionalProperties: false
-    description: List of some basic metrics for entire collection
+    description: List of basic metrics
     example:
       numAPIs: 238
       numEndpoints: 6448
@@ -176,7 +186,7 @@ definitions:
         minimum: 1
         type: integer
       numSpecs:
-        description: Number of APIs specification including different versions of the same API
+        description: Number of API specifications including different versions of the same API
         minimum: 1
         type: integer
     required:
