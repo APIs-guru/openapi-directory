@@ -39,22 +39,22 @@ security: []
 paths:
   /list.json:
     get:
-      description: List all APIs in collection
       operationId: listAPIs
       responses:
         '200':
           description: OK
           schema:
             $ref: '#/definitions/APIs'
+      summary: List all APIs in collection
   /metrics.json:
     get:
-      description: List of some basic metrics for entire collection
       operationId: listMetrics
       responses:
         '200':
           description: OK
           schema:
             $ref: '#/definitions/Metrics'
+      summary: List of some basic metrics for entire collection
 definitions:
   API:
     additionalProperties: false
@@ -84,6 +84,49 @@ definitions:
     description: |
       List of API details.
       It consist of JSON object with API IDs(`<provider>[:<service>]`) as keys.
+    example:
+      'googleapis.com:drive':
+        added: '2015-02-22T20:00:45.000Z'
+        preferred: v3
+        versions:
+          v2:
+            added: '2015-02-22T20:00:45.000Z'
+            info:
+              title: Drive
+              version: v2
+              x-apiClientRegistration:
+                url: 'https://console.developers.google.com'
+              x-logo:
+                url: 'https://api.apis.guru/v2/cache/logo/https_www.gstatic.com_images_icons_material_product_2x_drive_32dp.png'
+              x-origin:
+                format: google
+                url: 'https://www.googleapis.com/discovery/v1/apis/drive/v2/rest'
+                version: v1
+              x-preferred: false
+              x-providerName: googleapis.com
+              x-serviceName: drive
+            swaggerUrl: 'https://api.apis.guru/v2/specs/googleapis.com/drive/v2/swagger.json'
+            swaggerYamlUrl: 'https://api.apis.guru/v2/specs/googleapis.com/drive/v2/swagger.yaml'
+            updated: '2016-06-17T00:21:44.000Z'
+          v3:
+            added: '2015-12-12T00:25:13.000Z'
+            info:
+              title: Drive
+              version: v3
+              x-apiClientRegistration:
+                url: 'https://console.developers.google.com'
+              x-logo:
+                url: 'https://api.apis.guru/v2/cache/logo/https_www.gstatic.com_images_icons_material_product_2x_drive_32dp.png'
+              x-origin:
+                format: google
+                url: 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'
+                version: v1
+              x-preferred: true
+              x-providerName: googleapis.com
+              x-serviceName: drive
+            swaggerUrl: 'https://api.apis.guru/v2/specs/googleapis.com/drive/v3/swagger.json'
+            swaggerYamlUrl: 'https://api.apis.guru/v2/specs/googleapis.com/drive/v3/swagger.yaml'
+            updated: '2016-06-17T00:21:44.000Z'
     minProperties: 1
     type: object
   ApiVersion:
@@ -119,6 +162,10 @@ definitions:
   Metrics:
     additionalProperties: false
     description: List of some basic metrics for entire collection
+    example:
+      numAPIs: 238
+      numEndpoints: 6448
+      numSpecs: 302
     properties:
       numAPIs:
         description: Number of APIs
