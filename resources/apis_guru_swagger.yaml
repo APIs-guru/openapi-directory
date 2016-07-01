@@ -21,7 +21,14 @@ paths:
   /list.json:
     get:
      operationId: listAPIs
-     summary: List all APIs in collection
+     summary: List all APIs
+     description: |
+       List all APIs in the directory.
+       Returns links to OpenAPI specification for each API in the directory.
+       If API exist in multiply versions `preferred` one is explicitly marked.
+
+       Some basic info from OpenAPI spec is cached inside each object.
+       This allows to generate some simple views without need to fetch OpenAPI spec for each API.
      responses:
       200:
         description: OK
@@ -29,8 +36,11 @@ paths:
           $ref: "#/definitions/APIs"
   /metrics.json:
     get:
-     operationId: listMetrics
-     summary: List of some basic metrics for entire collection
+     operationId: getMetrics
+     summary: Get basic metrics
+     description: |
+       Some basic metrics for the entire directory.
+       Just stunning numbers to put on a front page and are intended purely for WoW effect :)
      responses:
       200:
         description: OK
@@ -40,7 +50,7 @@ definitions:
   APIs:
     description: |
       List of API details.
-      It consist of JSON object with API IDs(`<provider>[:<service>]`) as keys.
+      It is a JSON object with API IDs(`<provider>[:<service>]`) as keys.
     type: object
     additionalProperties:
       $ref: "#/definitions/API"
@@ -97,14 +107,14 @@ definitions:
       - versions
     properties:
       added:
-        description: Timestamp when this API was first added to collection
+        description: Timestamp when the API was first added to the directory
         type: string
         format: date-time
       preferred:
         description: Recommended version
         type: string
       versions:
-        description: List supported versions of API
+        description: List of supported versions of the API
         type: object
         additionalProperties:
           $ref: "#/definitions/ApiVersion"
@@ -120,19 +130,19 @@ definitions:
       - info
     properties:
       added:
-        description: Timestamp when this version was added
+        description: Timestamp when the version was added
         type: string
         format: date-time
       updated:
-        description: Timestamp when this version was updated
+        description: Timestamp when the version was updated
         type: string
         format: date-time
       swaggerUrl:
-        description: URL of Swagger spec in JSON format
+        description: URL to Swagger spec in JSON format
         type: string
         format: url
       swaggerYamlUrl:
-        description: URL of Swagger spec in YAML format
+        description: URL to Swagger spec in YAML format
         type: string
         format: url
       info:
@@ -141,7 +151,7 @@ definitions:
         minProperties: 1
     additionalProperties: false
   Metrics:
-    description: List of some basic metrics for entire collection
+    description: List of basic metrics
     type: object
     required:
       - numSpecs
@@ -149,7 +159,7 @@ definitions:
       - numEndpoints
     properties:
       numSpecs:
-        description: Number of APIs specification including different versions of the same API
+        description: Number of API specifications including different versions of the same API
         type: integer
         minimum: 1
       numAPIs:
