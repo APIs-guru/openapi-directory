@@ -11460,6 +11460,9 @@ definitions:
         description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
+      region:
+        description: '[Output Only] URL of the region where the instance group resides (for autoscalers living in regional scope).'
+        type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
@@ -13111,6 +13114,9 @@ definitions:
       network:
         description: The URL of the network to which all instances in the instance group belong.
         type: string
+      region:
+        description: The URL of the region where the instance group is located.
+        type: string
       selfLink:
         description: '[Output Only] The URL for this instance group. The server generates this URL.'
         type: string
@@ -13190,6 +13196,12 @@ definitions:
       description:
         description: An optional description of this resource. Provide this property when you create the resource.
         type: string
+      failoverAction:
+        description: The action to perform in case of zone failure (set only for Regional instance group managers).
+        enum:
+          - NO_FAILOVER
+          - UNKNOWN
+        type: string
       fingerprint:
         description: '[Output Only] The fingerprint of the resource data. You can use this optional field for optimistic locking when you update the resource.'
         format: byte
@@ -13217,6 +13229,9 @@ definitions:
         items:
           $ref: '#/definitions/NamedPort'
         type: array
+      region:
+        description: '[Output Only] URL of the region where the managed instance group resides.'
+        type: string
       selfLink:
         description: '[Output Only] The URL for this managed instance group. The server defines this URL.'
         type: string

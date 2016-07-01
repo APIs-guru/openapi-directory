@@ -63,13 +63,13 @@ tags:
 paths:
   '/4od/episode-list/date/{yyyy}/{mm}/{dd}.atom':
     get:
-      description: |2-
-          Information of daily broadcast content available on 4oD, according to 
+      description: |-
+        Information of daily broadcast content available on 4oD, according to 
           broadcast date
 
           http://api.channel4.com/pmlsd/4od/episode-list/date/[yyyy]/[mm]/[dd].atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
 
-          http://api.channel4.com/pmlsd/4od/episode-list/date/2010/11/28.atom?apikey=z4mwwux6yvahy4jz4xe3xeb4
+          http://api.channel4.com/pmlsd/4od/episode-list/date/2010/11/28.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: 4oD_Browse_by_Date_Feed
       parameters:
         - $ref: '#/parameters/platform'
@@ -85,7 +85,8 @@ paths:
           name: dd
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -94,20 +95,21 @@ paths:
       summary: 4oD Browse by Date Feed
       tags:
         - discoveryresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Browse_by_Date_Feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Browse_by_Date_Feed'
   /4od/episode-list/popular.atom:
     get:
-      description: |2-
-          Information of the most popular content available on 4oD, according to user 
+      description: |-
+        Information of the most popular content available on 4oD, according to user 
           data driven.
 
           http://api.channel4.com/pmlsd/4od/episode-list/popular.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
 
-          http://api.channel4.com/pmlsd/4od/episode-list/popular.atom?apikey=z4mwwux6yvahy4jz4xe3xeb4
+          http://api.channel4.com/pmlsd/4od/episode-list/popular.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: 4oD_Most_Popular_Episodes_Feed
       parameters:
         - $ref: '#/parameters/platform'
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -116,22 +118,23 @@ paths:
       summary: 4oD Most Popular Episodes Feed
       tags:
         - discoveryresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Most_Popular_Episodes_Feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Most_Popular_Episodes_Feed'
   /4od/recently-added/videos.atom:
     get:
-      description: |2-
-          A feed containing metadata about short-form content relating to 4oD Episodes 
+      description: |-
+        A feed containing metadata about short-form content relating to 4oD Episodes 
           recently added to 4oD based on linear transmission. The entries for the 
           Clips Landing Feed contain references to each short-form asset. It will 
           return up to 20 entries.
 
           http://api.channel4.com/pmlsd/4od/recently-added/videos.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
 
-          http://api.channel4.com/pmlsd/4od/episode-list/videos.atom?apikey=z4mwwux6yvahy4jz4xe3xeb4
+          http://api.channel4.com/pmlsd/4od/episode-list/videos.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: 4oD_Clips_Catch_Up_Feed
       parameters:
         - $ref: '#/parameters/platform'
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -140,21 +143,22 @@ paths:
       summary: 4oD Clips Catch Up Feed
       tags:
         - discoveryresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Clips_Catch_Up_Feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Clips_Catch_Up_Feed'
   /atoz.atom:
     get:
-      description: |2-
-          Lists Channel 4 programmes alphabetically from A to Z, providing the same 
+      description: |-
+        Lists Channel 4 programmes alphabetically from A to Z, providing the same 
           functionality and information as is available in the A to Z section of the 
           Channel 4 Programmes page, http://www.channel4.com/programmes.
 
           http://api.channel4.com/pmlsd/atoz.atom
 
-          http://api.channel4.com/pmlsd/atoz.atom?apikey=z4mwwux6yvahy4jz4xe3xeb4
+          http://api.channel4.com/pmlsd/atoz.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: A_to_Z_Landing_Feed
       parameters:
         - $ref: '#/parameters/platform'
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -163,15 +167,15 @@ paths:
       summary: A to Z Landing Feed
       tags:
         - discoveryresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/DiscoveryResources/A_to_Z_Landing_Feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/DiscoveryResources/A_to_Z_Landing_Feed'
   '/atoz/{start_letter}.atom':
     get:
-      description: |2-
-          Lists Channel 4 programmes whose names begin with the associated letter.
+      description: |-
+        Lists Channel 4 programmes whose names begin with the associated letter.
 
           http://api.channel4.com/pmlsd/atoz/start_letter.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
 
-          http://api.channel4.com/pmlsd/atoz/a.atom?apikey=z4mwwux6yvahy4jz4xe3xeb4
+          http://api.channel4.com/pmlsd/atoz/a.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: A_to_Z_Letter_Feed
       parameters:
         - $ref: '#/parameters/platform'
@@ -179,7 +183,8 @@ paths:
           name: start_letter
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -188,14 +193,45 @@ paths:
       summary: A to Z Letter Feed
       tags:
         - discoveryresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/DiscoveryResources/A_to_Z_Letter_Feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/DiscoveryResources/A_to_Z_Letter_Feed'
+  '/atoz/{start_letter}/page-{pageno}.atom':
+    get:
+      description: |-
+        Lists Channel 4 programmes whose names begin with the associated letter.
+
+          http://api.channel4.com/pmlsd/atoz/start_letter/page-{pageno}.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+
+          http://api.channel4.com/pmlsd/atoz/a.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+      operationId: A_to_Z_Letter_Feed(2)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: start_letter
+          required: true
+          type: string
+        - in: path
+          name: pageno
+          required: true
+          type: integer
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: A to Z Letter Feed(2)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/DiscoveryResources/A_to_Z_Letter_Feed'
   /brands/4od.atom:
     get:
-      description: "  Lists all Channel 4 programmes available on 4oD.\_ By default, the programmes \n  are listed by title in alphabetical order (case unsensitive).\n\n  http://api.channel4.com/pmlsd/brands/4od.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/brands/4od.atom?apikey=z4mwwux6yvahy4jz4xe3xeb4"
+      description: "Lists all Channel 4 programmes available on 4oD.\_ By default, the programmes \n  are listed by title in alphabetical order (case unsensitive).\n\n  http://api.channel4.com/pmlsd/brands/4od.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/brands/4od.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
       operationId: 4oD_Title_All_Brands_Feed
       parameters:
         - $ref: '#/parameters/platform'
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -204,20 +240,42 @@ paths:
       summary: 4oD Title All Brands Feed
       tags:
         - discoveryresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Title_All_Brands_Feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Title_All_Brands_Feed'
+  '/brands/4od/page-{pageno}.atom':
+    get:
+      description: "Lists all Channel 4 programmes available on 4oD.\_ By default, the programmes \n  are listed by title in alphabetical order (case unsensitive).\n\n  http://api.channel4.com/pmlsd/brands/4od/page-{pageno}.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/brands/4od.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
+      operationId: 4oD_Title_All_Brands_Feed(2)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: pageno
+          required: true
+          type: integer
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: 4oD Title All Brands Feed(2)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Title_All_Brands_Feed'
   /brands/4od/popular.atom:
     get:
-      description: |2-
-          Lists all Channel 4 programmes available on 4oD by popularity considering 
+      description: |-
+        Lists all Channel 4 programmes available on 4oD by popularity considering 
           the data gathered within the last 7 days.
 
           http://api.channel4.com/pmlsd/brands/4od/popular.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
 
-          http://api.channel4.com/pmlsd/brands/4od/popular.atom?apikey=z4mwwux6yvahy4jz4xe3xeb4
+          http://api.channel4.com/pmlsd/brands/4od/popular.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: 4oD_Popular_All_Brands_Feed
       parameters:
         - $ref: '#/parameters/platform'
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -226,20 +284,48 @@ paths:
       summary: 4oD Popular All Brands Feed
       tags:
         - discoveryresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Popular_All_Brands_Feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Popular_All_Brands_Feed'
+  '/brands/4od/popular/page-{pageno}.atom':
+    get:
+      description: |-
+        Lists all Channel 4 programmes available on 4oD by popularity considering 
+          the data gathered within the last 7 days.
+
+          http://api.channel4.com/pmlsd/brands/4od/popular/page-{pageno}.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+
+          http://api.channel4.com/pmlsd/brands/4od/popular.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+      operationId: 4oD_Popular_All_Brands_Feed(2)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: pageno
+          required: true
+          type: integer
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: 4oD Popular All Brands Feed(2)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Popular_All_Brands_Feed'
   /brands/popular.atom:
     get:
-      description: |2-
-          Lists all Channel 4 programmes by popularity considering the data gathered 
+      description: |-
+        Lists all Channel 4 programmes by popularity considering the data gathered 
           within the last 7 days.
 
           http://api.channel4.com/pmlsd/brands/popular.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
 
-          http://api.channel4.com/pmlsd/brands/popular.atom?apikey=z4mwwux6yvahy4jz4xe3xeb4
+          http://api.channel4.com/pmlsd/brands/popular.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: Popular_Brands_Feed
       parameters:
         - $ref: '#/parameters/platform'
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -248,19 +334,47 @@ paths:
       summary: Popular Brands Feed
       tags:
         - discoveryresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Popular_Brands_Feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Popular_Brands_Feed'
+  '/brands/popular/page-{pageno}.atom':
+    get:
+      description: |-
+        Lists all Channel 4 programmes by popularity considering the data gathered 
+          within the last 7 days.
+
+          http://api.channel4.com/pmlsd/brands/popular/page-{pageno}.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+
+          http://api.channel4.com/pmlsd/brands/popular.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+      operationId: Popular_Brands_Feed(2)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: pageno
+          required: true
+          type: integer
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: Popular Brands Feed(2)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Popular_Brands_Feed'
   /categories.atom:
     get:
-      description: |2-
-          Lists Channel 4 programmes by category (/ tag).
+      description: |-
+        Lists Channel 4 programmes by category (/ tag).
 
           http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
 
-          http://api.channel4.com/pmlsd/categories.atom?apikey=z4mwwux6yvahy4jz4xe3xeb4
+          http://api.channel4.com/pmlsd/categories.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: Categories_Landing_Feed
       parameters:
         - $ref: '#/parameters/platform'
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -269,10 +383,10 @@ paths:
       summary: Categories Landing Feed
       tags:
         - discoveryresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Categories_Landing_Feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Categories_Landing_Feed'
   '/categories/{category}.atom':
     get:
-      description: "  Lists all Channel 4 programmes associated with the specified category (tag).\_ \n  By default, the programmes are listed in order of Transmission (TX) Date, \n  with the most-recently-transmitted programmes listed first.\n\n  http://api.channel4.com/pmlsd/categories/category.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/categories/animals.atom?apikey=z4mwwux6yvahy4jz4xe3xeb4"
+      description: "Lists all Channel 4 programmes associated with the specified category (tag).\_ \n  By default, the programmes are listed in order of Transmission (TX) Date, \n  with the most-recently-transmitted programmes listed first.\n\n  http://api.channel4.com/pmlsd/categories/category.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/categories/animals.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
       operationId: All_Programmes_by_TX_Date
       parameters:
         - $ref: '#/parameters/platform'
@@ -280,7 +394,8 @@ paths:
           name: category
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -289,10 +404,10 @@ paths:
       summary: All Programmes by TX Date
       tags:
         - discoveryresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/discoveryresources/All_Programmes_by_TX_Date
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/All_Programmes_by_TX_Date'
   '/categories/{category}/4od.atom':
     get:
-      description: "  Lists all Channel 4oD programmes associated with the specified category \n  (tag).By default, the\_programmes are listed in order of Transmission (TX) \n  Date, with the most-recently-transmitted programmes listed first.\n\n  http://api.channel4.com/pmlsd/categories/category/4od.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/categories/animals/4oD.atom?apikey=z4mwwux6yvahy4jz4xe3xeb4"
+      description: "Lists all Channel 4oD programmes associated with the specified category \n  (tag).By default, the\_programmes are listed in order of Transmission (TX) \n  Date, with the most-recently-transmitted programmes listed first.\n\n  http://api.channel4.com/pmlsd/categories/category/4od.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/categories/animals/4oD.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
       operationId: 4oD_Programmes_by_TX_Date
       parameters:
         - $ref: '#/parameters/platform'
@@ -300,7 +415,8 @@ paths:
           name: category
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -309,16 +425,41 @@ paths:
       summary: 4oD Programmes by TX Date
       tags:
         - discoveryresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Programmes_by_TX_Date
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Programmes_by_TX_Date'
+  '/categories/{category}/4od/page-{pageno}.atom':
+    get:
+      description: "Lists all Channel 4oD programmes associated with the specified category \n  (tag).By default, the\_programmes are listed in order of Transmission (TX) \n  Date, with the most-recently-transmitted programmes listed first.\n\n  http://api.channel4.com/pmlsd/categories/category/4od/page-{pageno}.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/categories/animals/4oD.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
+      operationId: 4oD_Programmes_by_TX_Date(4)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+        - in: path
+          name: pageno
+          required: true
+          type: integer
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: 4oD Programmes by TX Date(4)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Programmes_by_TX_Date'
   '/categories/{category}/4od/popular.atom':
     get:
-      description: |2-
-          Lists all Channel 4oD most popular brands for the given category within the 
+      description: |-
+        Lists all Channel 4oD most popular brands for the given category within the 
           last 7 days, in order of popularity.
 
           http://api.channel4.com/pmlsd/categories/category/4od/popular.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
 
-          http://api.channel4.com/pmlsd/categories/comedy/4od/popular.atom?apikey=z4mwwux6yvahy4jz4xe3xeb4
+          http://api.channel4.com/pmlsd/categories/comedy/4od/popular.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: Most_Popular_Brands_Feed
       parameters:
         - $ref: '#/parameters/platform'
@@ -326,7 +467,8 @@ paths:
           name: category
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -335,16 +477,47 @@ paths:
       summary: Most Popular Brands Feed
       tags:
         - discoveryresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Most_Popular_Brands_Feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Most_Popular_Brands_Feed'
+  '/categories/{category}/4od/popular/page-{pageno}.atom':
+    get:
+      description: |-
+        Lists all Channel 4oD most popular brands for the given category within the 
+          last 7 days, in order of popularity.
+
+          http://api.channel4.com/pmlsd/categories/category/4od/popular/page-{pageno}.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+
+          http://api.channel4.com/pmlsd/categories/comedy/4od/popular.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+      operationId: Most_Popular_Brands_Feed(5)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+        - in: path
+          name: pageno
+          required: true
+          type: integer
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: Most Popular Brands Feed(5)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Most_Popular_Brands_Feed'
   '/categories/{category}/4od/title.atom':
     get:
-      description: |2-
-          Lists all Channel 4oD programmes associated with the specified category 
+      description: |-
+        Lists all Channel 4oD programmes associated with the specified category 
           (tag), alphanumerically in order of Title.
 
           http://api.channel4.com/pmlsd/categories/category/4od/title.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
 
-          http://api.channel4.com/pmlsd/categories/religion-and-belief/4oD/title.atom?apikey=z4mwwux6yvahy4jz4xe3xeb4
+          http://api.channel4.com/pmlsd/categories/religion-and-belief/4oD/title.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: 4oD_Programmes_by_Title
       parameters:
         - $ref: '#/parameters/platform'
@@ -352,7 +525,8 @@ paths:
           name: category
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -361,16 +535,400 @@ paths:
       summary: 4oD Programmes by Title
       tags:
         - discoveryresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Programmes_by_Title
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Programmes_by_Title'
+  '/categories/{category}/4od/title/page-{pageno}.atom':
+    get:
+      description: |-
+        Lists all Channel 4oD programmes associated with the specified category 
+          (tag), alphanumerically in order of Title.
+
+          http://api.channel4.com/pmlsd/categories/category/4od/title/page-{pageno}.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+
+          http://api.channel4.com/pmlsd/categories/religion-and-belief/4oD/title.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+      operationId: 4oD_Programmes_by_Title(4)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+        - in: path
+          name: pageno
+          required: true
+          type: integer
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: 4oD Programmes by Title(4)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Programmes_by_Title'
+  '/categories/{category}/channel/{channel}.atom':
+    get:
+      description: "Lists all Channel 4 programmes associated with the specified category (tag).\_ \n  By default, the programmes are listed in order of Transmission (TX) Date, \n  with the most-recently-transmitted programmes listed first.\n\n  http://api.channel4.com/pmlsd/categories/category/channel/[channel].atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/categories/animals.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
+      operationId: All_Programmes_by_TX_Date(2)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+        - enum:
+            - c4
+            - f4
+            - e4
+            - m4
+            - 4m
+            - 4s
+          in: path
+          name: channel
+          required: true
+          type: string
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: All Programmes by TX Date(2)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/All_Programmes_by_TX_Date'
+  '/categories/{category}/channel/{channel}/4od.atom':
+    get:
+      description: "Lists all Channel 4oD programmes associated with the specified category \n  (tag).By default, the\_programmes are listed in order of Transmission (TX) \n  Date, with the most-recently-transmitted programmes listed first.\n\n  http://api.channel4.com/pmlsd/categories/category/channel/[channel]/4od.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/categories/animals/4oD.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
+      operationId: 4oD_Programmes_by_TX_Date(2)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+        - enum:
+            - c4
+            - f4
+            - e4
+            - m4
+            - 4m
+            - 4s
+          in: path
+          name: channel
+          required: true
+          type: string
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: 4oD Programmes by TX Date(2)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Programmes_by_TX_Date'
+  '/categories/{category}/channel/{channel}/4od/popular.atom':
+    get:
+      description: |-
+        Lists all Channel 4oD most popular brands for the given category within the 
+          last 7 days, in order of popularity.
+
+          http://api.channel4.com/pmlsd/categories/category/channel/[channel]/4od/popular.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+
+          http://api.channel4.com/pmlsd/categories/comedy/4od/popular.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+      operationId: Most_Popular_Brands_Feed(3)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+        - enum:
+            - c4
+            - f4
+            - e4
+            - m4
+            - 4m
+            - 4s
+          in: path
+          name: channel
+          required: true
+          type: string
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: Most Popular Brands Feed(3)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Most_Popular_Brands_Feed'
+  '/categories/{category}/channel/{channel}/4od/title.atom':
+    get:
+      description: |-
+        Lists all Channel 4oD programmes associated with the specified category 
+          (tag), alphanumerically in order of Title.
+
+          http://api.channel4.com/pmlsd/categories/category/channel/[channel]/4od/title.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+
+          http://api.channel4.com/pmlsd/categories/religion-and-belief/4oD/title.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+      operationId: 4oD_Programmes_by_Title(2)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+        - enum:
+            - c4
+            - f4
+            - e4
+            - m4
+            - 4m
+            - 4s
+          in: path
+          name: channel
+          required: true
+          type: string
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: 4oD Programmes by Title(2)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Programmes_by_Title'
+  '/categories/{category}/channel/{channel}/title.atom':
+    get:
+      description: |-
+        Lists all Channel 4 programmes associated with the specified category (tag), 
+          alphanumerically in order of Title.
+
+          http://api.channel4.com/pmlsd/categories/category/channel/[channel]/title.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+
+          http://api.channel4.com/pmlsd/categories/history/title.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+      operationId: All_Programmes_by_Title(2)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+        - enum:
+            - c4
+            - f4
+            - e4
+            - m4
+            - 4m
+            - 4s
+          in: path
+          name: channel
+          required: true
+          type: string
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: All Programmes by Title(2)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/All_Programmes_by_Title'
+  '/categories/{category}/derived/ad.atom':
+    get:
+      description: "Lists all Channel 4 programmes associated with the specified category (tag).\_ \n  By default, the programmes are listed in order of Transmission (TX) Date, \n  with the most-recently-transmitted programmes listed first.\n\n  http://api.channel4.com/pmlsd/categories/category/derived/ad.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/categories/animals.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
+      operationId: All_Programmes_by_TX_Date(3)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: All Programmes by TX Date(3)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/All_Programmes_by_TX_Date'
+  '/categories/{category}/derived/ad/4od.atom':
+    get:
+      description: "Lists all Channel 4oD programmes associated with the specified category \n  (tag).By default, the\_programmes are listed in order of Transmission (TX) \n  Date, with the most-recently-transmitted programmes listed first.\n\n  http://api.channel4.com/pmlsd/categories/category/derived/ad/4od.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/categories/animals/4oD.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
+      operationId: 4oD_Programmes_by_TX_Date(3)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: 4oD Programmes by TX Date(3)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Programmes_by_TX_Date'
+  '/categories/{category}/derived/ad/4od/popular.atom':
+    get:
+      description: |-
+        Lists all Channel 4oD most popular brands for the given category within the 
+          last 7 days, in order of popularity.
+
+          http://api.channel4.com/pmlsd/categories/category/derived/ad/4od/popular.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+
+          http://api.channel4.com/pmlsd/categories/comedy/4od/popular.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+      operationId: Most_Popular_Brands_Feed(4)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: Most Popular Brands Feed(4)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Most_Popular_Brands_Feed'
+  '/categories/{category}/derived/ad/4od/title.atom':
+    get:
+      description: |-
+        Lists all Channel 4oD programmes associated with the specified category 
+          (tag), alphanumerically in order of Title.
+
+          http://api.channel4.com/pmlsd/categories/category/derived/ad/4od/title.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+
+          http://api.channel4.com/pmlsd/categories/religion-and-belief/4oD/title.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+      operationId: 4oD_Programmes_by_Title(3)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: 4oD Programmes by Title(3)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Programmes_by_Title'
+  '/categories/{category}/derived/ad/title.atom':
+    get:
+      description: |-
+        Lists all Channel 4 programmes associated with the specified category (tag), 
+          alphanumerically in order of Title.
+
+          http://api.channel4.com/pmlsd/categories/category/derived/ad/title.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+
+          http://api.channel4.com/pmlsd/categories/history/title.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+      operationId: All_Programmes_by_Title(3)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: All Programmes by Title(3)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/All_Programmes_by_Title'
+  '/categories/{category}/page-{pageno}.atom':
+    get:
+      description: "Lists all Channel 4 programmes associated with the specified category (tag).\_ \n  By default, the programmes are listed in order of Transmission (TX) Date, \n  with the most-recently-transmitted programmes listed first.\n\n  http://api.channel4.com/pmlsd/categories/category/page-{pageno}.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/categories/animals.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
+      operationId: All_Programmes_by_TX_Date(4)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+        - in: path
+          name: pageno
+          required: true
+          type: integer
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: All Programmes by TX Date(4)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/All_Programmes_by_TX_Date'
+  '/categories/{category}/popular.atom':
+    get:
+      description: |-
+        Lists all Channel 4oD most popular brands for the given category within the 
+          last 7 days, in order of popularity.
+
+          http://api.channel4.com/pmlsd/categories/category/popular.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+
+          http://api.channel4.com/pmlsd/categories/comedy/4od/popular.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+      operationId: Most_Popular_Brands_Feed(2)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: Most Popular Brands Feed(2)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Most_Popular_Brands_Feed'
   '/categories/{category}/title.atom':
     get:
-      description: |2-
-          Lists all Channel 4 programmes associated with the specified category (tag), 
+      description: |-
+        Lists all Channel 4 programmes associated with the specified category (tag), 
           alphanumerically in order of Title.
 
           http://api.channel4.com/pmlsd/categories/category/title.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
 
-          http://api.channel4.com/pmlsd/categories/history/title.atom?apikey=z4mwwux6yvahy4jz4xe3xeb4
+          http://api.channel4.com/pmlsd/categories/history/title.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: All_Programmes_by_Title
       parameters:
         - $ref: '#/parameters/platform'
@@ -378,7 +936,8 @@ paths:
           name: category
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -387,10 +946,41 @@ paths:
       summary: All Programmes by Title
       tags:
         - discoveryresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/discoveryresources/All_Programmes_by_Title
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/All_Programmes_by_Title'
+  '/categories/{category}/title/page-{pageno}.atom':
+    get:
+      description: |-
+        Lists all Channel 4 programmes associated with the specified category (tag), 
+          alphanumerically in order of Title.
+
+          http://api.channel4.com/pmlsd/categories/category/title/page-{pageno}.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+
+          http://api.channel4.com/pmlsd/categories/history/title.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+      operationId: All_Programmes_by_Title(4)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+        - in: path
+          name: pageno
+          required: true
+          type: integer
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: All Programmes by Title(4)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/All_Programmes_by_Title'
   '/collections/{collection_name}.atom':
     get:
-      description: "  Collections are editorially controlled groups of brands, series, episodes or \n  other collections used for promotion and discovery of content. A SIMPLE \n  collection can contain an assortment of Brands, Series, Episodes or Freeform \n  items.\_A GROUP collection contains other collections.\n\n  http://api.channel4.com/pmlsd/collections/collection_name.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/collections/4od-home-promo/4od.atom?apikey=z4mwwux6yvahy4jz4xe3xe"
+      description: "Collections are editorially controlled groups of brands, series, episodes or \n  other collections used for promotion and discovery of content. A SIMPLE \n  collection can contain an assortment of Brands, Series, Episodes or Freeform \n  items.\_A GROUP collection contains other collections.\n\n  http://api.channel4.com/pmlsd/collections/collection_name.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/collections/4od-home-promo/4od.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
       operationId: Collections_Feed(2)
       parameters:
         - $ref: '#/parameters/platform'
@@ -398,7 +988,8 @@ paths:
           name: collection_name
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -407,10 +998,10 @@ paths:
       summary: Collections Feed(2)
       tags:
         - discoveryresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Collections_Feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Collections_Feed'
   '/collections/{collection_name}/4od.atom':
     get:
-      description: "  Collections are editorially controlled groups of brands, series, episodes or \n  other collections used for promotion and discovery of content. A SIMPLE \n  collection can contain an assortment of Brands, Series, Episodes or Freeform \n  items.\_A GROUP collection contains other collections.\n\n  http://api.channel4.com/pmlsd/collections/collection_name/4od.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/collections/4od-home-promo/4od.atom?apikey=z4mwwux6yvahy4jz4xe3xe"
+      description: "Collections are editorially controlled groups of brands, series, episodes or \n  other collections used for promotion and discovery of content. A SIMPLE \n  collection can contain an assortment of Brands, Series, Episodes or Freeform \n  items.\_A GROUP collection contains other collections.\n\n  http://api.channel4.com/pmlsd/collections/collection_name/4od.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/collections/4od-home-promo/4od.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
       operationId: Collections_Feed
       parameters:
         - $ref: '#/parameters/platform'
@@ -418,7 +1009,8 @@ paths:
           name: collection_name
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -427,17 +1019,17 @@ paths:
       summary: Collections Feed
       tags:
         - discoveryresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Collections_Feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Collections_Feed'
   '/collections/{collection_name}/flattened.atom':
     get:
-      description: |2-
-          The Flattened Collections Feed is only applicable for GROUP collections and 
+      description: |-
+        The Flattened Collections Feed is only applicable for GROUP collections and 
           its purpose is mainly return 3 items (BRAND, SERIES or EPSIODE) of each of 
           the simple collections assigned to the GROUP.
 
           http://api.channel4.com/pmlsd/collections/collection_name/flattened.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
 
-          http://api.channel4.com/pmlsd/collections/4od-home-promo/flattened/4od.atom?apikey=z4mwwux6yvahy4jz4xe3xe
+          http://api.channel4.com/pmlsd/collections/4od-home-promo/flattened/4od.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: Flattened_Collection_Feed(2)
       parameters:
         - $ref: '#/parameters/platform'
@@ -445,7 +1037,8 @@ paths:
           name: collection_name
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -454,17 +1047,17 @@ paths:
       summary: Flattened Collection Feed(2)
       tags:
         - discoveryresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Flattened_Collection_Feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Flattened_Collection_Feed'
   '/collections/{collection_name}/flattened/4od.atom':
     get:
-      description: |2-
-          The Flattened Collections Feed is only applicable for GROUP collections and 
+      description: |-
+        The Flattened Collections Feed is only applicable for GROUP collections and 
           its purpose is mainly return 3 items (BRAND, SERIES or EPSIODE) of each of 
           the simple collections assigned to the GROUP.
 
           http://api.channel4.com/pmlsd/collections/collection_name/flattened/4od.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
 
-          http://api.channel4.com/pmlsd/collections/4od-home-promo/flattened/4od.atom?apikey=z4mwwux6yvahy4jz4xe3xe
+          http://api.channel4.com/pmlsd/collections/4od-home-promo/flattened/4od.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: Flattened_Collection_Feed
       parameters:
         - $ref: '#/parameters/platform'
@@ -472,7 +1065,8 @@ paths:
           name: collection_name
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -481,20 +1075,21 @@ paths:
       summary: Flattened Collection Feed
       tags:
         - discoveryresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Flattened_Collection_Feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Flattened_Collection_Feed'
   /coming-soon.atom:
     get:
-      description: |2-
-          Coming Soon feed display a list of episodes coming soon to linear TV so that 
+      description: |-
+        Coming Soon feed display a list of episodes coming soon to linear TV so that 
           I can promote new Channel 4 content.
 
           http://api.channel4.com/pmlsd/coming-soon.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
 
-          http://api.channel4.com/pmlsd/coming-soon.atom?apikey=xxxxxxx
+          http://api.channel4.com/pmlsd/coming-soon.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: Coming_Soon_feed
       parameters:
         - $ref: '#/parameters/platform'
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -503,16 +1098,16 @@ paths:
       summary: Coming Soon feed
       tags:
         - metadataresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/metadataresources/Coming_Soon_feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/metadataresources/Coming_Soon_feed'
   '/coming-soon/{category}.atom':
     get:
-      description: |2-
-          Coming Soon feed display a list of episodes coming soon to linear TV so that 
+      description: |-
+        Coming Soon feed display a list of episodes coming soon to linear TV so that 
           I can promote new Channel 4 content.
 
           http://api.channel4.com/pmlsd/coming-soon/[category].atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
 
-          http://api.channel4.com/pmlsd/coming-soon.atom?apikey=xxxxxxx
+          http://api.channel4.com/pmlsd/coming-soon.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: Coming_Soon_feed(2)
       parameters:
         - $ref: '#/parameters/platform'
@@ -520,7 +1115,8 @@ paths:
           name: category
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -529,10 +1125,10 @@ paths:
       summary: Coming Soon feed(2)
       tags:
         - metadataresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/metadataresources/Coming_Soon_feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/metadataresources/Coming_Soon_feed'
   '/programme/{programme-id}.atom':
     get:
-      description: "  A feed containing all long-form content currently or previously available \n  for a specified Programme Id.\_The entries for the Programme feed contain \n  references to long-form assets for each platform.\n\n  http://api.channel4.com/pmlsd/programme/[programme-id].atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/programme/33881-001/4od.atom?apikey=z4mwwux6yvahy4jz4xe3xeb4"
+      description: "A feed containing all long-form content currently or previously available \n  for a specified Programme Id.\_The entries for the Programme feed contain \n  references to long-form assets for each platform.\n\n  http://api.channel4.com/pmlsd/programme/[programme-id].atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/programme/33881-001/4od.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
       operationId: Programme_Feed
       parameters:
         - $ref: '#/parameters/platform'
@@ -540,7 +1136,8 @@ paths:
           name: programme-id
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -549,16 +1146,16 @@ paths:
       summary: Programme Feed
       tags:
         - metadataresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/metadataresources/Programme_Feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/metadataresources/Programme_Feed'
   /search.atom:
     get:
-      description: |2-
-          Lists all Channel 4 programmes where title (brand name) matching the search 
+      description: |-
+        Lists all Channel 4 programmes where title (brand name) matching the search 
           term. Matches are made from the beginning of individual words in the title.
 
           http://api.channel4.com/pmlsd/search.atom?q=search-term&apikey=xxx
 
-          http://api.channel4.com/pmlsd/search.atom?q=the+it+crowd&apikey=z4mwwux6yvahy4jz4xe3xeb4
+          http://api.channel4.com/pmlsd/search.atom?q=the+it+crowd&apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: Search_Feed
       parameters:
         - $ref: '#/parameters/platform'
@@ -566,7 +1163,8 @@ paths:
           name: q
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -575,16 +1173,47 @@ paths:
       summary: Search Feed
       tags:
         - discoveryresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Search_Feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Search_Feed'
+  '/search/page-{pageno}.atom':
+    get:
+      description: |-
+        Lists all Channel 4 programmes where title (brand name) matching the search 
+          term. Matches are made from the beginning of individual words in the title.
+
+          http://api.channel4.com/pmlsd/search/page-{pageno}.atom?q=search-term&apikey=xxx
+
+          http://api.channel4.com/pmlsd/search.atom?q=the+it+crowd&apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+      operationId: Search_Feed(3)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: query
+          name: q
+          required: true
+          type: string
+        - in: path
+          name: pageno
+          required: true
+          type: integer
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: Search Feed(3)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Search_Feed'
   '/search/{q}.atom':
     get:
-      description: |2-
-          Lists all Channel 4 programmes where title (brand name) matching the search 
+      description: |-
+        Lists all Channel 4 programmes where title (brand name) matching the search 
           term. Matches are made from the beginning of individual words in the title.
 
           http://api.channel4.com/pmlsd/search/search-term.atom?apikey=xxx
 
-          http://api.channel4.com/pmlsd/search.atom?q=the+it+crowd&apikey=z4mwwux6yvahy4jz4xe3xeb4
+          http://api.channel4.com/pmlsd/search.atom?q=the+it+crowd&apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: Search_Feed(2)
       parameters:
         - $ref: '#/parameters/platform'
@@ -592,7 +1221,8 @@ paths:
           name: q
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -601,16 +1231,16 @@ paths:
       summary: Search Feed(2)
       tags:
         - discoveryresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Search_Feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Search_Feed'
   '/tv-listings/daily/{yyyy}/{mm}/{dd}.atom':
     get:
-      description: |2-
-          EPG Information of daily broadcast content aired per channels, according to 
+      description: |-
+        EPG Information of daily broadcast content aired per channels, according to 
           broadcast date
 
           http://api.channel4.com/pmlsd/tv-listings/daily/[yyyy]/[mm]/[dd].atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
 
-          http://api.channel4.com/pmlsd/tv-listings/daily/2010/11/28.atom?apikey=xxxxxxx
+          http://api.channel4.com/pmlsd/tv-listings/daily/2010/11/28.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: TV_Listings_Feed
       parameters:
         - $ref: '#/parameters/platform'
@@ -626,7 +1256,8 @@ paths:
           name: dd
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -635,16 +1266,16 @@ paths:
       summary: TV Listings Feed
       tags:
         - discoveryresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/discoveryresources/TV_Listings_Feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/TV_Listings_Feed'
   '/tv-listings/daily/{yyyy}/{mm}/{dd}/{channel}.atom':
     get:
-      description: |2-
-          EPG Information of daily broadcast content aired per channels, according to 
+      description: |-
+        EPG Information of daily broadcast content aired per channels, according to 
           broadcast date
 
           http://api.channel4.com/pmlsd/tv-listings/daily/[yyyy]/[mm]/[dd]/[channel].atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
 
-          http://api.channel4.com/pmlsd/tv-listings/daily/2010/11/28.atom?apikey=xxxxxxx
+          http://api.channel4.com/pmlsd/tv-listings/daily/2010/11/28.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: TV_Listings_Feed(2)
       parameters:
         - $ref: '#/parameters/platform'
@@ -671,7 +1302,8 @@ paths:
           name: channel
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -680,15 +1312,15 @@ paths:
       summary: TV Listings Feed(2)
       tags:
         - discoveryresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/discoveryresources/TV_Listings_Feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/TV_Listings_Feed'
   '/{brand-web-safe-title}.atom':
     get:
-      description: |2-
-          The basis for all brand information
+      description: |-
+        The basis for all brand information
 
           http://api.channel4.com/pmlsd/brand-web-safe-title.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
 
-          http://api.channel4.com/pmlsd/the-it-crowd.atom?apikey=z4mwwux6yvahy4jz4xe3xeb4
+          http://api.channel4.com/pmlsd/the-it-crowd.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: Hub_Feed
       parameters:
         - $ref: '#/parameters/platform'
@@ -696,7 +1328,8 @@ paths:
           name: brand-web-safe-title
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -705,17 +1338,17 @@ paths:
       summary: Hub Feed
       tags:
         - metadataresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/metadataresources/Hub_Feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/metadataresources/Hub_Feed'
   '/{brand-web-safe-title}/4od.atom':
     get:
-      description: |2-
-          A feed containing all available on-demand long-form content for a specified 
+      description: |-
+        A feed containing all available on-demand long-form content for a specified 
           brand. The entries for the 4oD feed contain references to each long-form 
           asset for a brand, ordered by series number and episode number.
 
           http://api.channel4.com/pmlsd/[brand-web-safe-title]/4od.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
 
-          http://api.channel4.com/pmlsd/the-it-crowd/4od.atom?apikey=z4mwwux6yvahy4jz4xe3xeb4
+          http://api.channel4.com/pmlsd/the-it-crowd/4od.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: 4oD_Feed
       parameters:
         - $ref: '#/parameters/platform'
@@ -723,7 +1356,8 @@ paths:
           name: brand-web-safe-title
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -732,17 +1366,17 @@ paths:
       summary: 4oD Feed
       tags:
         - metadataresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/metadataresources/4oD_Feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/metadataresources/4oD_Feed'
   '/{brand-web-safe-title}/epg.atom':
     get:
-      description: |2-
-          This feed contains metadata about upcoming electronic programme guide (EPG) 
+      description: |-
+        This feed contains metadata about upcoming electronic programme guide (EPG) 
           information for a brand. The entry details upcoming transmission slots for 
           this brand.
 
           http://api.channel4.com/pmlsd/brand-web-safe-title/epg.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
 
-          http://api.channel4.com/pmlsd/the-simpsons/epg.atom?apikey=z4mwwux6yvahy4jz4xe3xeb4
+          http://api.channel4.com/pmlsd/the-simpsons/epg.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: Brand_EPG_Atom_Feed
       parameters:
         - $ref: '#/parameters/platform'
@@ -750,7 +1384,8 @@ paths:
           name: brand-web-safe-title
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -759,10 +1394,17 @@ paths:
       summary: Brand EPG Atom Feed
       tags:
         - metadataresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/metadataresources/Brand_EPG_Atom_Feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/metadataresources/Brand_EPG_Atom_Feed'
   '/{brand-web-safe-title}/episode-guide.atom':
     get:
-      description: "  A feed containing metadata about all series for a specified brand. The \n  entries in this feed contain references to each of the series (where \n  metadata has been published), with some convenient links.\n\n  http://api.channel4.com/pmlsd/brand-web-safe-title/episode-guide.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/father-ted/episode-guide.atom?apikey=z4mwwux6yvahy4jz4xe3xeb4\t"
+      description: |-
+        A feed containing metadata about all series for a specified brand. The 
+          entries in this feed contain references to each of the series (where 
+          metadata has been published), with some convenient links.
+
+          http://api.channel4.com/pmlsd/brand-web-safe-title/episode-guide.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+
+          http://api.channel4.com/pmlsd/father-ted/episode-guide.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: Episode_Guide_Feed_Series_Landing
       parameters:
         - $ref: '#/parameters/platform'
@@ -770,7 +1412,8 @@ paths:
           name: brand-web-safe-title
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -779,10 +1422,17 @@ paths:
       summary: Episode Guide Feed Series Landing
       tags:
         - metadataresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/metadataresources/Episode_Guide_Feed_Series_Landing
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/metadataresources/Episode_Guide_Feed_Series_Landing'
   '/{brand-web-safe-title}/episode-guide/series-{series_number}.atom':
     get:
-      description: "  A feed containing metadata about all the episodes for a specific series. The \n  entries in this feed contain references to each of the episodes (where \n  metadata has been published), with some convenient links.\n\n  http://api.channel4.com/pmlsd/brand-web-safe-title/episode-guide/series-series_number.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/chelmsford-123/episode-guide/series-1.atom?apikey=z4mwwux6yvahy4jz4xe3xeb4\t"
+      description: |-
+        A feed containing metadata about all the episodes for a specific series. The 
+          entries in this feed contain references to each of the episodes (where 
+          metadata has been published), with some convenient links.
+
+          http://api.channel4.com/pmlsd/brand-web-safe-title/episode-guide/series-series_number.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+
+          http://api.channel4.com/pmlsd/chelmsford-123/episode-guide/series-1.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: Episode_Guide_Feed_Series_Detail
       parameters:
         - $ref: '#/parameters/platform'
@@ -794,7 +1444,8 @@ paths:
           name: series_number
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -803,17 +1454,17 @@ paths:
       summary: Episode Guide Feed Series Detail
       tags:
         - metadataresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/metadataresources/Episode_Guide_Feed_Series_Detail
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/metadataresources/Episode_Guide_Feed_Series_Detail'
   '/{brand-web-safe-title}/episode-guide/series-{series_number}/episode-{episode_number}.atom':
     get:
-      description: |2-
-          A feed containing metadata about a specified episode. (This feed does not 
+      description: |-
+        A feed containing metadata about a specified episode. (This feed does not 
           contain any entries and only contains a feed element regarding this 
           episode.)
 
           http://api.channel4.com/pmlsd/brand-web-safe-title/episode-guide/series-series_number/episode-episode_number.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
 
-          http://api.channel4.com/pmlsd/the-it-crowd/episode-guide/series-1/episode-1.atom?apikey=your-key
+          http://api.channel4.com/pmlsd/the-it-crowd/episode-guide/series-1/episode-1.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: Episode_Guide_Feed_Episode_Detail
       parameters:
         - $ref: '#/parameters/platform'
@@ -829,7 +1480,8 @@ paths:
           name: episode_number
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -838,10 +1490,10 @@ paths:
       summary: Episode Guide Feed Episode Detail
       tags:
         - metadataresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/metadataresources/Episode_Guide_Feed_Episode_Detail
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/metadataresources/Episode_Guide_Feed_Episode_Detail'
   '/{brand-web-safe-title}/videos/all.atom':
     get:
-      description: "  A feed containing metadata about all the short-form (clip) videos. The clips \n  feed can be accessed at different levels: the content is then filtered \n  depending on the level, but the structure is identical.When accessed: from \n  the top, the feed contains all the clips for the brand;\_ at series level, \n  the feed contains only clips from the series; and\_ at episode level, the \n  feed contains only clips for the episode (and is very unlikely to require \n  pagination). The entries for the Clips Landing Feed contain references to \n  each short-form asset.\n\n  http://api.channel4.com/pmlsd/brand-web-safe-title/videos/all.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/peep-show/videos.atom?apikey=z4mwwux6yvahy4jz4xe3xeb4"
+      description: "A feed containing metadata about all the short-form (clip) videos. The clips \n  feed can be accessed at different levels: the content is then filtered \n  depending on the level, but the structure is identical.When accessed: from \n  the top, the feed contains all the clips for the brand;\_ at series level, \n  the feed contains only clips from the series; and\_ at episode level, the \n  feed contains only clips for the episode (and is very unlikely to require \n  pagination). The entries for the Clips Landing Feed contain references to \n  each short-form asset.\n\n  http://api.channel4.com/pmlsd/brand-web-safe-title/videos/all.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/peep-show/videos.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
       operationId: Clips_Landing_Feed_Brand_Series_and_Episode_Levels
       parameters:
         - $ref: '#/parameters/platform'
@@ -849,7 +1501,8 @@ paths:
           name: brand-web-safe-title
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -858,10 +1511,10 @@ paths:
       summary: Clips Landing Feed Brand Series and Episode Levels
       tags:
         - metadataresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/metadataresources/Clips_Landing_Feed_Brand_Series_and_Episode_Levels
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/metadataresources/Clips_Landing_Feed_Brand_Series_and_Episode_Levels'
   '/{brand-web-safe-title}/videos/series-{SERIES_SEQUENCE_NUMBER}.atom':
     get:
-      description: "  A feed containing metadata about all the short-form (clip) videos. The clips \n  feed can be accessed at different levels: the content is then filtered \n  depending on the level, but the structure is identical.When accessed: from \n  the top, the feed contains all the clips for the brand;\_ at series level, \n  the feed contains only clips from the series; and\_ at episode level, the \n  feed contains only clips for the episode (and is very unlikely to require \n  pagination). The entries for the Clips Landing Feed contain references to \n  each short-form asset.\n\n  http://api.channel4.com/pmlsd/brand-web-safe-title/videos/series-SERIES_SEQUENCE_NUMBER.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/peep-show/videos.atom?apikey=z4mwwux6yvahy4jz4xe3xeb4"
+      description: "A feed containing metadata about all the short-form (clip) videos. The clips \n  feed can be accessed at different levels: the content is then filtered \n  depending on the level, but the structure is identical.When accessed: from \n  the top, the feed contains all the clips for the brand;\_ at series level, \n  the feed contains only clips from the series; and\_ at episode level, the \n  feed contains only clips for the episode (and is very unlikely to require \n  pagination). The entries for the Clips Landing Feed contain references to \n  each short-form asset.\n\n  http://api.channel4.com/pmlsd/brand-web-safe-title/videos/series-SERIES_SEQUENCE_NUMBER.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/peep-show/videos.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
       operationId: Clips_Landing_Feed_Brand_Series_and_Episode_Levels(2)
       parameters:
         - $ref: '#/parameters/platform'
@@ -873,7 +1526,8 @@ paths:
           name: SERIES_SEQUENCE_NUMBER
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -882,10 +1536,10 @@ paths:
       summary: Clips Landing Feed Brand Series and Episode Levels(2)
       tags:
         - metadataresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/metadataresources/Clips_Landing_Feed_Brand_Series_and_Episode_Levels
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/metadataresources/Clips_Landing_Feed_Brand_Series_and_Episode_Levels'
   '/{brand-web-safe-title}/videos/series-{SERIES_SEQUENCE_NUMBER}/episode-{EPISODE_SEQUENCE_NUMBER}.atom':
     get:
-      description: "  A feed containing metadata about all the short-form (clip) videos. The clips \n  feed can be accessed at different levels: the content is then filtered \n  depending on the level, but the structure is identical.When accessed: from \n  the top, the feed contains all the clips for the brand;\_ at series level, \n  the feed contains only clips from the series; and\_ at episode level, the \n  feed contains only clips for the episode (and is very unlikely to require \n  pagination). The entries for the Clips Landing Feed contain references to \n  each short-form asset.\n\n  http://api.channel4.com/pmlsd/brand-web-safe-title/videos/series-SERIES_SEQUENCE_NUMBER/episode-EPISODE_SEQUENCE_NUMBER.atom?apikey=xxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/peep-show/videos.atom?apikey=z4mwwux6yvahy4jz4xe3xeb4"
+      description: "A feed containing metadata about all the short-form (clip) videos. The clips \n  feed can be accessed at different levels: the content is then filtered \n  depending on the level, but the structure is identical.When accessed: from \n  the top, the feed contains all the clips for the brand;\_ at series level, \n  the feed contains only clips from the series; and\_ at episode level, the \n  feed contains only clips for the episode (and is very unlikely to require \n  pagination). The entries for the Clips Landing Feed contain references to \n  each short-form asset.\n\n  http://api.channel4.com/pmlsd/brand-web-safe-title/videos/series-SERIES_SEQUENCE_NUMBER/episode-EPISODE_SEQUENCE_NUMBER.atom?apikey=xxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/peep-show/videos.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
       operationId: Clips_Landing_Feed_Brand_Series_and_Episode_Levels(3)
       parameters:
         - $ref: '#/parameters/platform'
@@ -901,7 +1555,8 @@ paths:
           name: EPISODE_SEQUENCE_NUMBER
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -910,15 +1565,15 @@ paths:
       summary: Clips Landing Feed Brand Series and Episode Levels(3)
       tags:
         - metadataresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/metadataresources/Clips_Landing_Feed_Brand_Series_and_Episode_Levels
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/metadataresources/Clips_Landing_Feed_Brand_Series_and_Episode_Levels'
   '/{brand-web-safe-title}/videos/{clip-asset-id}.atom':
     get:
-      description: |2-
-          A feed containing metadata about a single short-form video (clip).
+      description: |-
+        A feed containing metadata about a single short-form video (clip).
 
           http://api.channel4.com/pmlsd/brand-web-safe-title/videos/clip-asset-id.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
 
-          http://api.channel4.com/pmlsd/the-it-crowd/videos/TCGS_CLIP_0000001015.atom?apikey=z4mwwux6yvahy4jz4xe3xeb4
+          http://api.channel4.com/pmlsd/the-it-crowd/videos/TCGS_CLIP_0000001015.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
       operationId: Clip_Detail_Atom_Feed
       parameters:
         - $ref: '#/parameters/platform'
@@ -930,7 +1585,8 @@ paths:
           name: clip-asset-id
           required: true
           type: string
-      produces: []
+      produces:
+        - application/xml
       responses:
         '200':
           description: Default response
@@ -939,7 +1595,7 @@ paths:
       summary: Clip Detail Atom Feed
       tags:
         - metadataresources
-      x-documentation: ./apiSource/developer.channel4.com/docs/read/programmesapiguide/metadataresources/Clip_Detail_Atom_Feed
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/metadataresources/Clip_Detail_Atom_Feed'
 definitions:
   atom:
     additionalProperties: true
@@ -972,7 +1628,7 @@ definitions:
         format: date-time
         type: string
       'dc:date.TXDate':
-        description: First TX date information for this episode
+        description: If this programme is available on 4oD then this element indicates the broadcast date/time of the episode selected for 4oD. If the programme is not on 4oD then this element is omitted.(Indicates whether pre- or post-watershed)
         format: date-time
         type: string
       'dc:date.firstTXDate':
@@ -1020,7 +1676,7 @@ definitions:
         description: Length in minutes and seconds - does not include ad breaks
         type: string
       'dc:relation.EpisodeNumber':
-        description: The episode number within the series
+        description: The episode number within the series.
         type: integer
       'dc:relation.ExternalVideoId':
         description: This is the clip asset id (from column CLIP_ASSET.ASSET_ID. For the current implementation this is the Brightcove Id.
@@ -1032,7 +1688,7 @@ definitions:
         description: The channel on which the previous TX from this brand(if applicable)
         type: string
       'dc:relation.LoginRequired':
-        description: Boolean indicating if the user has to be logged-in in order to play this episode.
+        description: Boolean indicating if the requestType is ARCHIVE and the user needs to be logged in to watch.
         type: boolean
       'dc:relation.Movie':
         description: Boolean indicating if the SLOT is a Movie or not.
@@ -1056,7 +1712,7 @@ definitions:
         description: Boolean indicating if the Slot includes an indicator marked as repeat.
         type: boolean
       'dc:relation.SeriesNumber':
-        description: The series to which this episode belongs
+        description: The series to which this episode belongs.
         type: integer
       'dc:relation.Signing':
         description: 'Boolean value is true if signing slot_indicator exists for this slot, otherwise false.'
@@ -1071,7 +1727,7 @@ definitions:
         description: The synopsis of this brand
         type: string
       'dc:relation.TXChannel':
-        description: First TX channel information for this episode
+        description: If this programme is available on 4oD then this element indicates the broadcast channel that the episode selected for 4oD. If the programme is not on 4oD then this element is omitted.
         type: string
       'dc:relation.TXStartTime':
         description: Start date and time of the broadcast
@@ -1092,7 +1748,7 @@ definitions:
         description: Identifies the version of the client application compatible with this feed.
         type: number
       'dc:relation.programmeId':
-        description: The contract number/programme number for episode.
+        description: The episode identifier.
         type: string
       'dc:relation.requestType':
         description: Indicates catchup or archive content
@@ -1113,7 +1769,7 @@ definitions:
         description: Starting letter for this programme
         type: integer
       'dcterms:available':
-        description: "Start date, end date and date/time format for the period of time when episode is available.\_ (This feed would not be available if the current date is outside the start and end dates.)"
+        description: 'Start date, end date and date / time format for the period of time when episode is available on 4oD. This element is not returned if the programme is not currently available on 4oD.'
         type: string
       generator:
         description: Identifies the agent used to generate the feed
@@ -1122,14 +1778,14 @@ definitions:
         description: Identifies the version of the agent used to generate the feed
         type: number
       id:
-        description: ID of entry
+        description: ID of the entry
         type: string
       link@EpisodeUrl:
         description: 'Episode URL, if applicable'
         format: uri
         type: string
       link@alternate:
-        description: 'URL to HTML version, i.e., player page'
+        description: URL to HTML version of episode (if available)
         format: uri
         type: string
       link@rel=alternate @type=text:
@@ -1159,7 +1815,7 @@ definitions:
             type: string
         type: object
       link@related:
-        description: 'URL to Episode Guide feed, if available'
+        description: URL of ATOM feed of current episode
         format: uri
         type: string
       link@related (4oD Programmes by TX Date):
@@ -1171,7 +1827,7 @@ definitions:
         format: uri
         type: string
       link@related (4oD):
-        description: 'URL to HTML version of 4oD page for this episode, if available'
+        description: "URL to 4oD feed, if available\_(self-referential in 4oD feeds)"
         format: uri
         type: string
       link@related (All Programmes by Title):
@@ -1179,15 +1835,16 @@ definitions:
         format: uri
         type: string
       link@related (Clips):
-        description: URL to feed of video clips for this series
+        description: 'URL to short-form video feed, if available'
         format: uri
         type: string
       link@related (Episode Guide):
-        description: 'URL to feed of full episode, if available'
+        description: 'URL to Episode Guide feed, if available'
         format: uri
         type: string
       link@related (Official Site):
         description: 'URL to the brand''s official site, if available'
+        format: uri
         type: string
       link@relative (4oD):
         description: 'URL to 4oD feed, if available (self-referential in 4oD feeds)'
@@ -1205,7 +1862,7 @@ definitions:
         description: 'URL to the brand''s official site, if available'
         type: string
       link@self:
-        description: URL to current feed of episode
+        description: URL to the Channel 4 XML feed for this brand
         format: uri
         type: string
       link@up:
@@ -1218,7 +1875,7 @@ definitions:
             description: List of credits/cast for the episode
             type: string
           'media:thumbnail':
-            description: URL to medium-sized image of this episode
+            description: URL to medium-sized image of this brand
             type: string
         type: object
       'media:context':
@@ -1231,6 +1888,296 @@ definitions:
         properties:
           'media:category':
             description: Defines the type of short-form item.
+            type: string
+          'media:content':
+            properties:
+              'dc:relation.AgeRating':
+                description: 'Channel 4-specific recommended lower age-limit for viewers (0, 16 or 18)'
+                type: integer
+              'dc:relation.AudioDescription':
+                description: Boolean indicating if an audio description is available for this episode
+                type: boolean
+              'dc:relation.Duration':
+                description: Length in minutes and seconds - does not include ad breaks
+                type: string
+              'dc:relation.Guidance':
+                description: 'Channel 4-specific warning text about specific disturbing content, adult humour, nudity, etc., if applicable'
+                type: string
+              'dc:relation.Subtitles':
+                description: Boolean indicating if subtitles are available for this episode
+                type: boolean
+              'dc:relation.deliveryType':
+                description: Indicates STREAMING or FOR DOWNLOAD content
+                enum:
+                  - STREAM
+                  - DOWNLOAD
+                type: string
+              'dc:relation.requestType':
+                description: Indicates catchup or archive content
+                enum:
+                  - ARCHIVE
+                  - CATCHUP
+                type: string
+              'dcterms:available':
+                description: "Start date, end date and date/time format for the period of time when episode is available.\_ (This feed would not be available if the current date is outside the start and end dates.)"
+                type: string
+              'media:copyright':
+                description: Link to copyright / T&C information
+                type: string
+              'media:player':
+                description: URL to media-player version of episode
+                format: uri
+                type: string
+              'media:rating':
+                description: Flag to show whether episode is suitable for adults only ("adult") or for all viewers ("nonadult")
+                type: string
+              'media:restriction':
+                description: Restriction flag ("allow") and list of country or state codes where episode is accessible to website users
+                type: string
+              'media:rights':
+                description: Status of media rights under which Channel 4 provides episode content
+                type: string
+              'media:thumbnail':
+                description: URL to medium-sized image of this episode
+                type: string
+            type: object
+          'media:copyright':
+            description: "Link to 4oD \_copyright / T&C information (if available)"
+            type: string
+          'media:player':
+            description: URL to 4oD media-player version of episode (if available)
+            format: uri
+            type: string
+          'media:rating':
+            description: Flag to show whether the 4oD version of the episode is suitable for adults only ("adult") or for all viewers ("nonadult") (if available)
+            type: string
+          'media:restriction':
+            description: Restriction flag ("allow") and list of country or state codes where 4oD episode is accessible to website users (if available)
+            type: string
+          'media:rights':
+            description: Status of 4oD media rights under which Channel 4 provides episode content (if available)
+            type: string
+          'media:thumbnail':
+            description: URL to 4oD medium-sized image of this episode (if available)
+            type: string
+        type: object
+      'media:thumbnail':
+        description: URL to medium sized image of this series
+        type: string
+      subtitle:
+        description: The synopsis of the series.
+        type: string
+      summary:
+        description: Synopsis of this episode
+        type: string
+      title:
+        description: 'Episode Title. If available on 4oD then the 4oD episode title is returned. If not, then the title attributed to the slot is returned. It is possible for these to be different'
+        type: string
+      updated:
+        description: Date & time episode last updated
+        format: date-time
+        type: string
+    type: object
+  feed:
+    additionalProperties: true
+    properties:
+      Entry Elements:
+        description: "Element Description Example Value id ID containing Brand Web Safe Name tag:www.channel4.com,2009:/brand/inside-natures-giants title Programme's Brand Name Inside Nature's Giants summary Synopsis of this brand The award-winning series that gets under the skin of the largest animals on the planet. Most wildlife documentaries show how animals behave, but by exploring their anatomy, Inside Nature's Giants reveals how these creatures really work. updated Date and time element last updated 2010-10-18T10:08:44.295Z dc:relation.sortLetter\_ Starting letter for this programme I dc:relation.ProgrammeType\_ Displays metadata code (as detailed in the following table) in a meaningful way on the application according to the specified programme type. SSU dc:date.TXDate\_ Transmission date of the programme 2010-10-18T10:30:00.000Z media:content / media:thumbnail URL to medium-sized image of this brand url=\"http://www.channel4.com/assets/programmes/images/inside-natures-giants/7eb0ec03-1321-4532-bf51-cb2af0d9d528_145x82.jpg\" height=\"82\" width=\"145\" link@alternate URL to HTML version of brand http://www.channel4.com/programmes/inside-natures-giants link@self URL to the Channel 4 XML feed for this brand http://api.channel4.com/pmlsd/inside-natures-giants.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx link@related (Official Site) URL to the brand's official site, if available link@related (4oD) URL to 4oD feed, if available (self-referential in 4oD feeds) http://api.channel4.com/pmlsd/inside-natures-giants/4od.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx link@related (Clips) URL to short-form video feed, if available http://api.channel4.com/pmlsd/inside-natures-giants/video.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx link@related (Episode Guide) URL to Episode Guide feed, if available http://api.channel4.com/pmlsd/inside-natures-giants/episode-guide.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
+        type: string
+      Link@Related title="4oD":
+        description: 'URL to Brand 4oD feed, if available'
+        format: uri
+        type: string
+      author:
+        properties:
+          name:
+            description: Name of author / owner
+            type: string
+        type: object
+      category (primary):
+        description: Primary category (brand must have ONE)
+        type: string
+      category (secondary):
+        description: Secondary category (brand may have any number)
+        type: string
+      'dc:date.TXDate':
+        description: First TX date information for this episode
+        format: date-time
+        type: string
+      'dc:date.firstTXDate':
+        description: First TX date information for this episode
+        format: date-time
+        type: string
+      'dc:relation.4oDProgrammeCount':
+        description: Number of available brands in this category beginning with this letter (4oD only)
+        type: integer
+      'dc:relation.4oDSeriesCount':
+        description: Number of available 4oD series for this Brand
+        type: integer
+      'dc:relation.AgeRating':
+        description: 'Channel 4-specific recommended lower age-limit for viewers (0, 16 or 18)'
+        type: integer
+      'dc:relation.AllProgrammeCount':
+        description: Number of available brands in this category beginning with this letter (all programmes)
+        type: integer
+      'dc:relation.AudioDescription':
+        description: Boolean indicating if an audio description is available for this episode
+        type: boolean
+      'dc:relation.BrandFlattened':
+        description: Boolean indicating whether there is no Series -> Episode structure in this brand ("false" indicating that there is such a structure)
+        type: boolean
+      'dc:relation.BrandTitle':
+        description: Title of brand
+        type: string
+      'dc:relation.BrandWebSafeTitle':
+        description: 'Title of the brand safe for web linking (no whitespaces, no special chars...)'
+        type: string
+      'dc:relation.CategoryOrder':
+        description: 'Enumerated order of category within its type(e.g., ''Channel'' might have Food=1, More4=2, etc.)(Appears in feed only if CategoryType<>''None''.)'
+        type: integer
+      'dc:relation.CategoryType':
+        description: 'Type to which the category belongs (if applicable).(Valid values are ''Channel'', ''Display'' or ''None''.)'
+        type: string
+      'dc:relation.Duration':
+        description: Length in minutes and seconds - does not include ad breaks
+        type: string
+      'dc:relation.EpisodeNumber':
+        description: The episode number within the series
+        type: integer
+      'dc:relation.ExternalVideoId':
+        description: Clip Asset_id value from the Clip table (a.k.a. Brightcode id).
+        type: string
+      'dc:relation.Guidance':
+        description: 'Channel 4-specific warning text about specific disturbing content, adult humour, nudity, etc., if applicable'
+        type: string
+      'dc:relation.LoginRequired':
+        description: Boolean indicating if the user has to be logged-in in order to play this episode.
+        type: boolean
+      'dc:relation.New4oDSeriesAvailable':
+        description: Flags that notifies clients when a Brand contains NEW series.
+        type: boolean
+      'dc:relation.ParentCollectionId':
+        description: The ID of the Parent Collection where the resource is assigned to.
+        type: string
+      'dc:relation.ProgrammeType':
+        description: "Displays metadata code (as detailed in the following table)\_in a meaningful way on the application according to the specified programme type."
+        type: string
+      'dc:relation.RelatedEntryId':
+        description: The episode guide entry related to this episode
+        type: string
+      'dc:relation.SeriesNumber':
+        description: The series to which this episode belongs
+        type: integer
+      'dc:relation.Sharable':
+        description: Boolean value indicating if clips for this brand are sharable
+        type: boolean
+      'dc:relation.StartOffset':
+        description: ''
+        type: integer
+      'dc:relation.Subtitles':
+        description: Boolean indicating if subtitles are available for this episode
+        type: boolean
+      'dc:relation.Synopsis':
+        description: Summary of this feed
+        type: string
+      'dc:relation.TXChannel':
+        description: First TX channel information for this episode
+        type: string
+      'dc:relation.TotalResults':
+        description: Number of entries what match the search-term
+        type: integer
+      'dc:relation.comingSoonTo4oD':
+        description: If the brand is coming to be available on 4oD soon this empty element should be included.
+        type: string
+      'dc:relation.firstTXChannel':
+        description: First TX channel information for this episode
+        type: string
+      'dc:relation.firstTXDate':
+        description: 'Date of first broadcast (optional). This is based on EPG or, when EPG data is not available for the episode, it can be set editorially (significant date)'
+        format: date-time
+        type: string
+      'dc:relation.lastTXChannel':
+        description: "Channel of last broadcast\_(optional).\_This is based on EPG ignoring repeats and giving preference to the channel that the brand is primarily targeted at (preferred channel)"
+        type: string
+      'dc:relation.lastTXDate':
+        description: "Date of last broadcast\_(optional). This is based on EPG ignoring repeats and giving preference to the channel that the brand is primarily targeted at (preferred channel)"
+        format: date-time
+        type: string
+      'dc:relation.platformClientVersion':
+        description: Identifies the version of the specified platform client application compatible with this feed.
+        type: number
+      'dc:relation.presentationBrand':
+        description: The presentation brand
+        type: string
+      'dc:relation.programmeId':
+        description: Indicates the contract and programme numbers
+        type: string
+      'dc:relation.resourceType':
+        description: The type of the entry
+        type: string
+      'dcterms:available':
+        description: "Start date, end date and date/time format for the period of time when episode is available.\_ (This feed would not be available if the current date is outside the start and end dates.)"
+        type: string
+      'fh:complete':
+        description: Presence of this element indicates no pagination
+        type: string
+      generator:
+        description: Identifies the agent used to generate the feed
+        type: string
+      generator@version:
+        description: Identifies the version of the agent used to generate the feed
+        type: number
+      id:
+        description: Unique identifier of this feed
+        type: string
+      link@alternate:
+        description: 'URL to HTML version, i.e., player page'
+        format: uri
+        type: string
+      link@next:
+        description: Link to next day's page / feed (if available)
+        format: uri
+        type: string
+      link@previous:
+        description: Link to previous day's page / feed (if available)
+        format: uri
+        type: string
+      link@related:
+        description: 4oD programmes in category by title
+        format: uri
+        type: string
+      link@related (4oD Episode):
+        description: 'URL to HTML version of 4oD page for full episode, if available'
+        format: uri
+        type: string
+      link@related (4oD):
+        description: 'URL to 4oD feed, if available'
+        format: uri
+        type: string
+      link@related (Clips):
+        description: 'URL to short-form video feed for this episode, if available'
+        format: uri
+        type: string
+      link@related (Episode Guide):
+        description: 'URL to Episode Guide feed, if available'
+        format: uri
+        type: string
+      link@self:
+        description: URL of current page / feed
+        format: uri
+        type: string
+      link@up:
+        description: URL to parent feed
+        format: uri
+        type: string
+      logo:
+        description: Default Image URL
+        format: uri
+        type: string
+      'media:group':
+        properties:
+          'media:category':
+            description: 'Defines the type of short-form item. Its value can be one of the next: EXTRACT, PREVIEW, EXTRA, TRAILER'
             type: string
           'media:content':
             properties:
@@ -1305,8 +2252,11 @@ definitions:
             type: string
         type: object
       'media:thumbnail':
-        description: URL to medium sized image of this series
-        type: string
+        properties:
+          'media:thumbnail':
+            description: URL to medium-sized image of this episode
+            type: string
+        type: object
       subtitle:
         description: The synopsis of the series.
         type: string
@@ -1314,303 +2264,10 @@ definitions:
         description: Synopsis of episode
         type: string
       title:
-        description: Title of episode
+        description: 'Channel 4 EPG for [date selected]'
         type: string
       updated:
-        description: Date & time entry last updated
-        format: date-time
-        type: string
-    type: object
-  feed:
-    additionalProperties: true
-    properties:
-      Entry Elements:
-        description: "Element Description Example Value id ID containing Brand Web Safe Name tag:www.channel4.com,2009:/brand/inside-natures-giants title Programme's Brand Name Inside Nature's Giants summary Synopsis of this brand The award-winning series that gets under the skin of the largest animals on the planet. Most wildlife documentaries show how animals behave, but by exploring their anatomy, Inside Nature's Giants reveals how these creatures really work. updated Date and time element last updated 2010-10-18T10:08:44.295Z dc:relation.sortLetter\_ Starting letter for this programme I dc:relation.ProgrammeType\_ Displays metadata code (as detailed in the following table) in a meaningful way on the application according to the specified programme type. SSU dc:date.TXDate\_ Transmission date of the programme 2010-10-18T10:30:00.000Z media:content / media:thumbnail URL to medium-sized image of this brand url=\"http://www.channel4.com/assets/programmes/images/inside-natures-giants/7eb0ec03-1321-4532-bf51-cb2af0d9d528_145x82.jpg\" height=\"82\" width=\"145\" link@alternate URL to HTML version of brand http://www.channel4.com/programmes/inside-natures-giants link@self URL to the Channel 4 XML feed for this brand http://api.channel4.com/pmlsd/inside-natures-giants.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx link@related (Official Site) URL to the brand's official site, if available link@related (4oD) URL to 4oD feed, if available (self-referential in 4oD feeds) http://api.channel4.com/pmlsd/inside-natures-giants/4od.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx link@related (Clips) URL to short-form video feed, if available http://api.channel4.com/pmlsd/inside-natures-giants/video.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx link@related (Episode Guide) URL to Episode Guide feed, if available http://api.channel4.com/pmlsd/inside-natures-giants/episode-guide.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
-        type: string
-      Link@Related title="4oD":
-        description: 'URL to Brand 4oD feed, if available'
-        format: uri
-        type: string
-      author:
-        properties:
-          name:
-            description: Author / owner of feed
-            type: string
-        type: object
-      category (primary):
-        description: Primary category (brand must have ONE)
-        type: string
-      category (secondary):
-        description: Secondary category (brand may have any number)
-        type: string
-      'dc:date.TXDate':
-        description: First TX date information for this episode
-        format: date-time
-        type: string
-      'dc:date.firstTXDate':
-        description: First TX date information for this episode
-        format: date-time
-        type: string
-      'dc:relation.4oDProgrammeCount':
-        description: Number of available 4oD episodes for this Brand
-        type: integer
-      'dc:relation.4oDSeriesCount':
-        description: Number of available 4oD series for this Brand
-        type: integer
-      'dc:relation.AgeRating':
-        description: 'Channel 4-specific recommended lower age-limit for viewers (0, 16 or 18)'
-        type: integer
-      'dc:relation.AllProgrammeCount':
-        description: Number of available brands in this category beginning with this letter (all programmes)
-        type: integer
-      'dc:relation.AudioDescription':
-        description: Boolean indicating if an audio description is available for this episode
-        type: boolean
-      'dc:relation.BrandFlattened':
-        description: Boolean indicating if this is a flattened brand
-        type: boolean
-      'dc:relation.BrandTitle':
-        description: Title of the brand for this feed
-        type: string
-      'dc:relation.BrandWebSafeTitle':
-        description: 'Title of the brand safe for web linking (no whitespaces, no special chars...)'
-        type: string
-      'dc:relation.CategoryOrder':
-        description: 'Enumerated order of category within its type(e.g., ''Channel'' might have Food=1, More4=2, etc.)(Appears in feed only if CategoryType<>''None''.)'
-        type: integer
-      'dc:relation.CategoryType':
-        description: 'Type to which the category belongs (if applicable).(Valid values are ''Channel'', ''Display'' or ''None''.)'
-        type: string
-      'dc:relation.Duration':
-        description: Duration in minutes and seconds
-        type: string
-      'dc:relation.EpisodeNumber':
-        description: Episode number within this series
-        type: integer
-      'dc:relation.ExternalVideoId':
-        description: Clip Asset_id value from the Clip table (a.k.a. Brightcode id).
-        type: string
-      'dc:relation.Guidance':
-        description: 'Channel 4-specific warning text about specific disturbing content, adult humour, nudity, etc., if applicable'
-        type: string
-      'dc:relation.LoginRequired':
-        description: Boolean indicating if the user has to be logged-in in order to play this episode.
-        type: boolean
-      'dc:relation.New4oDSeriesAvailable':
-        description: Flags that notifies clients when a Brand contains NEW series.
-        type: boolean
-      'dc:relation.ParentCollectionId':
-        description: The ID of the Parent Collection where the resource is assigned to.
-        type: string
-      'dc:relation.ProgrammeType':
-        description: "Displays metadata code (as detailed in the following table)\_in a meaningful way on the application according to the specified programme type."
-        type: string
-      'dc:relation.RelatedEntryId':
-        description: The episode guide entry related to this episode
-        type: string
-      'dc:relation.SeriesNumber':
-        description: Series to which this episode belongs
-        type: integer
-      'dc:relation.Sharable':
-        description: Boolean value indicating if clips for brand are sharable
-        type: boolean
-      'dc:relation.StartOffset':
-        description: ''
-        type: integer
-      'dc:relation.Subtitles':
-        description: Boolean indicating if subtitles are available for this episode
-        type: boolean
-      'dc:relation.Synopsis':
-        description: Summary of this feed
-        type: string
-      'dc:relation.TXChannel':
-        description: First TX channel information for this episode
-        type: string
-      'dc:relation.TotalResults':
-        description: Number of entries what match the search-term
-        type: integer
-      'dc:relation.comingSoonTo4oD':
-        description: If the brand is coming to be available on 4oD soon this empty element should be included.
-        type: string
-      'dc:relation.firstTXChannel':
-        description: "Channel of first broadcast\_(optional).\_This is based on EPG or, when EPG data is not available for the episode, it can be set editorially (significant date)"
-        type: string
-      'dc:relation.firstTXDate':
-        description: 'Date of first broadcast (optional). This is based on EPG or, when EPG data is not available for the episode, it can be set editorially (significant date)'
-        format: date-time
-        type: string
-      'dc:relation.lastTXChannel':
-        description: "Channel of last broadcast\_(optional).\_This is based on EPG ignoring repeats and giving preference to the channel that the brand is primarily targeted at (preferred channel)"
-        type: string
-      'dc:relation.lastTXDate':
-        description: "Date of last broadcast\_(optional). This is based on EPG ignoring repeats and giving preference to the channel that the brand is primarily targeted at (preferred channel)"
-        format: date-time
-        type: string
-      'dc:relation.platformClientVersion':
-        description: Identifies the version of the client application compatible with this feed.
-        type: number
-      'dc:relation.presentationBrand':
-        description: The presentation brand
-        type: string
-      'dc:relation.programmeId':
-        description: Indicates the contract and programme numbers
-        type: string
-      'dc:relation.resourceType':
-        description: The type of the entry
-        type: string
-      'dcterms:available':
-        description: "Start date, end date and date/time format for the period of time when episode is available.\_ (This feed would not be available if the current date is outside the start and end dates.)"
-        type: string
-      'fh:complete':
-        description: Presence of this element indicates no pagination
-        type: string
-      generator:
-        description: Identifies the agent used to generate the feed
-        type: string
-      generator@version:
-        description: Identifies the version of the agent used to generate the feed
-        type: number
-      id:
-        description: 'Unique identifier of this feed, including the programmeId'
-        type: string
-      link@alternate:
-        description: URL to HTML version of current feed
-        format: uri
-        type: string
-      link@next:
-        description: 'URL to next set of clips, if available'
-        format: uri
-        type: string
-      link@previous:
-        description: 'URL to previous set of clips, if available'
-        format: uri
-        type: string
-      link@related:
-        description: 4oD programmes in category by title
-        format: uri
-        type: string
-      link@related (4oD Episode):
-        description: URL to 4oD HTML (player page) if available
-        format: uri
-        type: string
-      link@related (4oD):
-        description: 'URL to 4oD feed, if available'
-        format: uri
-        type: string
-      link@related (Clips):
-        description: 'URL to Short form video feed, if available'
-        format: uri
-        type: string
-      link@related (Episode Guide):
-        description: 'URL to Episode Guide feed, if available'
-        format: uri
-        type: string
-      link@self:
-        description: URL of current feed
-        format: uri
-        type: string
-      link@up:
-        description: URL of parent feed
-        format: uri
-        type: string
-      logo:
-        description: Brand image URL
-        format: uri
-        type: string
-      'media:group':
-        properties:
-          'media:category':
-            description: 'Defines the type of short-form item. Its value can be one of the next: EXTRACT, PREVIEW, EXTRA, TRAILER'
-            type: string
-          'media:content':
-            properties:
-              'dc:relation.AgeRating':
-                description: 'Channel 4-specific recommended lower age-limit for viewers (0, 16 or 18)'
-                type: integer
-              'dc:relation.AudioDescription':
-                description: Boolean indicating if an audio description is available for this episode
-                type: boolean
-              'dc:relation.Duration':
-                description: Length in minutes and seconds - does not include ad breaks
-                type: string
-              'dc:relation.Guidance':
-                description: 'Channel 4-specific warning text about specific disturbing content, adult humour, nudity, etc., if applicable'
-                type: string
-              'dc:relation.Subtitles':
-                description: Boolean indicating if subtitles are available for this episode
-                type: boolean
-              'dc:relation.deliveryType':
-                description: Indicates STREAMING or FOR DOWNLOAD content
-                enum:
-                  - STREAM
-                  - DOWNLOAD
-                type: string
-              'dc:relation.requestType':
-                description: Indicates catchup or archive content
-                enum:
-                  - ARCHIVE
-                  - CATCHUP
-                type: string
-              'dcterms:available':
-                description: "Start date, end date and date/time format for the period of time when episode is available.\_ (This feed would not be available if the current date is outside the start and end dates.)"
-                type: string
-              'media:copyright':
-                description: Link to copyright / T&C information
-                type: string
-              'media:player':
-                description: URL to media-player version of episode
-                format: uri
-                type: string
-              'media:rating':
-                description: Flag to show whether episode is suitable for adults only ("adult") or for all viewers ("nonadult")
-                type: string
-              'media:restriction':
-                description: Restriction flag ("allow") and list of country or state codes where episode is accessible to website users
-                type: string
-              'media:rights':
-                description: Status of media rights under which Channel 4 provides episode content
-                type: string
-              'media:thumbnail':
-                description: URL to medium-sized image of this episode
-                type: string
-            type: object
-          'media:copyright':
-            description: Link to copyright / T&C information
-            type: string
-          'media:player':
-            description: URL to media-player version of full episode
-            format: uri
-            type: string
-          'media:rating':
-            description: Flag to show whether clip is suitable for adults only ("adult") or for all viewers ("nonadult")
-            type: string
-          'media:restriction':
-            description: Restriction flag ("allow") and list of country or state codes where episode is accessible to website users
-            type: string
-          'media:rights':
-            description: Status of media rights under which Channel 4 provides episode content
-            type: string
-          'media:thumbnail':
-            description: URL to clip image
-            type: string
-        type: object
-      'media:thumbnail':
-        properties:
-          'media:thumbnail':
-            description: URL to medium-sized image of this episode
-            type: string
-        type: object
-      subtitle:
-        description: Synopsis of this brand
-        type: string
-      summary:
-        description: Synopsis of episode
-        type: string
-      title:
-        description: Title of brand for the programmeId
-        type: string
-      updated:
-        description: Date & time feed last updated
+        description: Date & time feed rendered
         format: date-time
         type: string
     type: object

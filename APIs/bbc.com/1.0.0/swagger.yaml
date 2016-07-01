@@ -1119,6 +1119,7 @@ paths:
           enum:
             - ondemand
             - webcast
+            - simulcast
           in: query
           items:
             format: string
@@ -4025,7 +4026,7 @@ definitions:
     additionalProperties: false
     properties:
       colour:
-        type: object
+        type: string
       competition_warning:
         additionalProperties: false
         properties:
@@ -4038,7 +4039,7 @@ definitions:
           - pid
         type: object
       ident:
-        type: object
+        type: string
       image_link:
         $ref: '#/definitions/image_link'
       images_mixin:
@@ -4074,7 +4075,7 @@ definitions:
       title:
         $ref: '#/definitions/title'
       url_key:
-        type: object
+        type: string
     required:
       - mid
       - partner

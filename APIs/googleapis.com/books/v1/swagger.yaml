@@ -1569,10 +1569,11 @@ paths:
       operationId: books.volumes.mybooks.list
       parameters:
         - collectionFormat: multi
-          description: How the book was aquired
+          description: How the book was acquired
           in: query
           items:
             enum:
+              - FAMILY_SHARED
               - PREORDERED
               - PREVIOUSLY_RENTED
               - PUBLIC_DOMAIN
@@ -3590,6 +3591,18 @@ definitions:
             description: Total number of pages as per publisher metadata.
             format: int32
             type: integer
+          panelizationSummary:
+            description: A top-level summary of the panelization info in this volume.
+            properties:
+              containsEpubBubbles:
+                type: boolean
+              containsImageBubbles:
+                type: boolean
+              epubBubbleVersion:
+                type: string
+              imageBubbleVersion:
+                type: string
+            type: object
           previewLink:
             description: URL to preview this volume on the Google Books site.
             type: string

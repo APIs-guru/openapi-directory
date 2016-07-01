@@ -26,7 +26,7 @@ tags:
 paths:
   '/atalk/{app_id}/{botname}':
     post:
-      description: 'Start a conversation with the bot using the Anonymous Talk API. This method will allow you to request creation of an end-user client_name that can maintain persistent predicates per end-user talking to your bot. If client_name is NOT sent in the request, then Pandorabots will create a end-user client_name and return it in the response. Similar to the Talk to Bot API, Pandorabots will also return a new session ID if not included in the call. Use the session ID returned to group interactions together. <p>In addition to bot response and session ID, the HTTP response will include a new end-user client_name in the following format:<br>aiaas-XXX-user-nnnn, where XXX is your app_ID and nnnn is numeric starting with 0000 and incrementing after each request.<br/> </p><p>Malformed requests such as exceeding size of input or unknown end-user client_name returns 400 error code. Error code 412 is returned if the bot is not compiled or does not exist.</p><p><pre class=''prettyprint''>curl -v  -X POST ''https://aiaas.pandorabots.com/atalk/APP_ID/BOTNAME?user_key=USER_KEY&input=INPUT''</pre></p>'
+      description: 'Start a conversation with the bot using the Anonymous Talk API. This method will allow you to request creation of an end-user client_name that can maintain persistent predicates per end-user talking to your bot. If client_name is NOT sent in the request, then Pandorabots will create a end-user client_name and return it in the response. Similar to the Talk to Bot API, Pandorabots will also return a new session ID if not included in the call. Use the session ID returned to group interactions together. <p>In addition to bot response and session ID, the HTTP response will include a new end-user client_name in the following format:<br>aiaas-XXX-user-nnnn, where XXX is your app_ID and nnnn is numeric starting with 0000 and incrementing after each request.<br/> </p><p>Malformed requests such as exceeding size of input or unknown end-user client_name returns 400 error code. Error code 412 is returned if the bot is not compiled or does not exist. Error code 429 is returned if your application has reached maximum plan API call limit.</p><p><pre class=''prettyprint''>curl -v  -X POST ''https://aiaas.pandorabots.com/atalk/APP_ID/BOTNAME?user_key=USER_KEY&input=INPUT''</pre></p>'
       operationId: atalkBot
       parameters:
         - description: Your Application ID
@@ -333,7 +333,7 @@ paths:
           name: file-kind
           required: true
           type: string
-        - description: 'Filename to upload; Note: for non-AIML files, do not include the file extension in the path.'
+        - description: 'Filename to upload, must be named with only lowercase letters and numbers. Note: for non-AIML files, do not include the file extension in the path.'
           in: path
           name: filename
           required: true
