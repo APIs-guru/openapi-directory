@@ -21,7 +21,7 @@ paths:
   /list.json:
     get:
      operationId: listAPIs
-     description: List all APIs in collection
+     summary: List all APIs in collection
      responses:
       200:
         description: OK
@@ -38,8 +38,9 @@ paths:
           $ref: "#/definitions/Metrics"
 definitions:
   APIs:
-    summary: List of API details.
-    description: It consist of JSON object with API IDs(`<provider>[:<service>]`) as keys.
+    description: |
+      List of API details.
+      It consist of JSON object with API IDs(`<provider>[:<service>]`) as keys.
     type: object
     additionalProperties:
       $ref: "#/definitions/API"
