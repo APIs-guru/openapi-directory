@@ -925,7 +925,6 @@ definitions:
         $ref: '#/definitions/MlsInformation'
         description: MLS vendor information and data
       mlsId:
-        default: 329479823
         description: |
           A unique identifier for this listing specific to the
           SimplyRETS API. Thie identifier is specific to the
@@ -1121,12 +1120,10 @@ definitions:
         description: Additional room information
         type: string
       area:
-        default: 5984
         description: Square footage of the building associated with a listing
         format: int64
         type: integer
       areaSource:
-        default: Tax Record
         type: string
       bathsFull:
         description: Number of full bathrooms
@@ -1137,7 +1134,6 @@ definitions:
         format: int64
         type: integer
       bedrooms:
-        default: 5
         description: Number of bedrooms
         format: int64
         type: integer
@@ -1148,14 +1144,10 @@ definitions:
         description: A description of the cooling or air conditioning features of the property.
         type: string
       exteriorFeatures:
-        default: |
-          1-2 Step Entry,Barn(s),Fenced Yard,Front Porch,Garden
-          Area,Guest House,Out-Buildings,Patio,Prof Landscaping
         description: |
           Exterior Features for the listing
         type: string
       fireplaces:
-        default: 1
         description: Number of fireplaces
         format: int64
         type: integer
@@ -1169,14 +1161,9 @@ definitions:
         format: float
         type: number
       heating:
-        default: 'Central System, Forced Air, Gas'
         description: Heating description or short string
         type: string
       interiorFeatures:
-        default: |
-          2-Story Foyer,9 ft + Ceil Main,Cathedral Ceiling,Double Vnty
-          Other,High Speed Internet Available,Entrance Foyer,Hardwood
-          Floors,Trey Ceilings,Walk-In Closet(s),Wall/Wall Carpet
         description: The properties interior features
         type: string
       laundryFeatures:
@@ -1184,14 +1171,12 @@ definitions:
       lotDescription:
         type: string
       lotSize:
-        default: 3/4 Up To 1 Acre
         description: |
           Lot size dimensions or square footage as a text. This
           field is generally used to show the pretty formatted
           lot size.
         type: string
       lotSizeAcres:
-        default: 10
         description: |
           Lot size in acres
 
@@ -1199,7 +1184,6 @@ definitions:
         format: float
         type: number
       lotSizeArea:
-        default: 5000
         description: |
           The total area of the lot.  See `lotSizeUnits` for the units
           of measurement (Square Feet, Square Meters, Acres, etc.).
@@ -1208,7 +1192,6 @@ definitions:
         format: double
         type: number
       lotSizeAreaUnits:
-        default: Sq Ft
         description: |
           Unit of measurement for the lotSizeArea field.  e.g. Square
           Feet, Square Meters, Acres, etc.
@@ -1231,18 +1214,15 @@ definitions:
       poolFeatures:
         type: string
       roof:
-        default: Composition
         description: Property roof description
         type: string
       stories:
-        default: 2
         description: |
           Number of stories or levels. Represented as a `double' to
           account for half stories.
         format: float
         type: number
       style:
-        default: 'Ranch, Traditional'
         description: Property style description or short string
         type: string
       subType:
@@ -1252,11 +1232,9 @@ definitions:
           Expando, Manufactured, Modular, etc.
         type: string
       subdivision:
-        default: River Oaks
         description: The subdivision or community name
         type: string
       type:
-        default: RES
         description: |
           Abbreviated property type. RES is Residential, CND is CondoOrTownhome,
           RNT is Rental, MLF is Multi-Family, CRE is Commercial, LND is Land,
@@ -1277,7 +1255,6 @@ definitions:
         description: Water description and details
         type: string
       yearBuilt:
-        default: 2007
         description: Year the property was built
         format: int64
         type: integer
@@ -1308,19 +1285,15 @@ definitions:
     description: RETS MLS School Data
     properties:
       district:
-        default: School District
         description: School district name.
         type: string
       elementarySchool:
-        default: Elementary School
         description: Elementary school name.
         type: string
       highSchool:
-        default: High School
         description: High school name
         type: string
       middleSchool:
-        default: Middle School
         description: Middle or junior school name
         type: string
     type: object
@@ -1328,39 +1301,31 @@ definitions:
     description: RETS MLS Street Address
     properties:
       city:
-        default: Houston
         description: City name
         type: string
       country:
-        default: United States
         description: Street address country (United States or Canada)
         type: string
       crossStreet:
-        default: 456 Cross Rd
         description: Known cross street
         type: string
       full:
-        default: 1234 SimplyRETS Drive
         description: Full pretty-printed address with suffix (if available)
         type: string
       postalCode:
         description: Street Address postal code
         type: string
       state:
-        default: Texas
         description: State or province. Maps to the data dictionary field `StateOrProvince`.
         type: string
       streetName:
-        default: SimplyRETS Drive
         description: Name of the street
         type: string
       streetNumber:
-        default: 1234
         description: Street number
         format: int64
         type: integer
       streetNumberText:
-        default: '1234'
         description: |
           Textual representation of the street number. This field
           is usually redundant with what's in `streetNumber` but is
@@ -1373,13 +1338,13 @@ definitions:
   Tax:
     description: RETS MLS Tax Data
     properties:
-      annualAmount:
-        description: Annual tax amount in USD
-        type: string
       id:
         description: Tax Parcel ID for the listing
         type: string
-      year:
+      taxAnnualAmount:
+        description: Annual tax amount in USD
+        type: string
+      taxYear:
         description: Tax Year
         format: int64
         type: integer

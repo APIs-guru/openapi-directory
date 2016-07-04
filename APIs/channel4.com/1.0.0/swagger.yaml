@@ -631,6 +631,42 @@ paths:
       tags:
         - discoveryresources
       x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Programmes_by_TX_Date'
+  '/categories/{category}/channel/{channel}/4od/page-{pageno}.atom':
+    get:
+      description: "Lists all Channel 4oD programmes associated with the specified category \n  (tag).By default, the\_programmes are listed in order of Transmission (TX) \n  Date, with the most-recently-transmitted programmes listed first.\n\n  http://api.channel4.com/pmlsd/categories/category/channel/[channel]/4od/page-{pageno}.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/categories/animals/4oD.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
+      operationId: 4oD_Programmes_by_TX_Date(5)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+        - enum:
+            - c4
+            - f4
+            - e4
+            - m4
+            - 4m
+            - 4s
+          in: path
+          name: channel
+          required: true
+          type: string
+        - in: path
+          name: pageno
+          required: true
+          type: integer
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: 4oD Programmes by TX Date(5)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Programmes_by_TX_Date'
   '/categories/{category}/channel/{channel}/4od/popular.atom':
     get:
       description: |-
@@ -666,6 +702,48 @@ paths:
           schema:
             $ref: '#/definitions/atom'
       summary: Most Popular Brands Feed(3)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Most_Popular_Brands_Feed'
+  '/categories/{category}/channel/{channel}/4od/popular/page-{pageno}.atom':
+    get:
+      description: |-
+        Lists all Channel 4oD most popular brands for the given category within the 
+          last 7 days, in order of popularity.
+
+          http://api.channel4.com/pmlsd/categories/category/channel/[channel]/4od/popular/page-{pageno}.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+
+          http://api.channel4.com/pmlsd/categories/comedy/4od/popular.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+      operationId: Most_Popular_Brands_Feed(7)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+        - enum:
+            - c4
+            - f4
+            - e4
+            - m4
+            - 4m
+            - 4s
+          in: path
+          name: channel
+          required: true
+          type: string
+        - in: path
+          name: pageno
+          required: true
+          type: integer
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: Most Popular Brands Feed(7)
       tags:
         - discoveryresources
       x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Most_Popular_Brands_Feed'
@@ -707,6 +785,84 @@ paths:
       tags:
         - discoveryresources
       x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Programmes_by_Title'
+  '/categories/{category}/channel/{channel}/4od/title/page-{pageno}.atom':
+    get:
+      description: |-
+        Lists all Channel 4oD programmes associated with the specified category 
+          (tag), alphanumerically in order of Title.
+
+          http://api.channel4.com/pmlsd/categories/category/channel/[channel]/4od/title/page-{pageno}.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+
+          http://api.channel4.com/pmlsd/categories/religion-and-belief/4oD/title.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+      operationId: 4oD_Programmes_by_Title(5)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+        - enum:
+            - c4
+            - f4
+            - e4
+            - m4
+            - 4m
+            - 4s
+          in: path
+          name: channel
+          required: true
+          type: string
+        - in: path
+          name: pageno
+          required: true
+          type: integer
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: 4oD Programmes by Title(5)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Programmes_by_Title'
+  '/categories/{category}/channel/{channel}/page-{pageno}.atom':
+    get:
+      description: "Lists all Channel 4 programmes associated with the specified category (tag).\_ \n  By default, the programmes are listed in order of Transmission (TX) Date, \n  with the most-recently-transmitted programmes listed first.\n\n  http://api.channel4.com/pmlsd/categories/category/channel/[channel]/page-{pageno}.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/categories/animals.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
+      operationId: All_Programmes_by_TX_Date(5)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+        - enum:
+            - c4
+            - f4
+            - e4
+            - m4
+            - 4m
+            - 4s
+          in: path
+          name: channel
+          required: true
+          type: string
+        - in: path
+          name: pageno
+          required: true
+          type: integer
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: All Programmes by TX Date(5)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/All_Programmes_by_TX_Date'
   '/categories/{category}/channel/{channel}/title.atom':
     get:
       description: |-
@@ -742,6 +898,48 @@ paths:
           schema:
             $ref: '#/definitions/atom'
       summary: All Programmes by Title(2)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/All_Programmes_by_Title'
+  '/categories/{category}/channel/{channel}/title/page-{pageno}.atom':
+    get:
+      description: |-
+        Lists all Channel 4 programmes associated with the specified category (tag), 
+          alphanumerically in order of Title.
+
+          http://api.channel4.com/pmlsd/categories/category/channel/[channel]/title/page-{pageno}.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+
+          http://api.channel4.com/pmlsd/categories/history/title.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+      operationId: All_Programmes_by_Title(5)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+        - enum:
+            - c4
+            - f4
+            - e4
+            - m4
+            - 4m
+            - 4s
+          in: path
+          name: channel
+          required: true
+          type: string
+        - in: path
+          name: pageno
+          required: true
+          type: integer
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: All Programmes by Title(5)
       tags:
         - discoveryresources
       x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/All_Programmes_by_Title'
@@ -787,6 +985,31 @@ paths:
       tags:
         - discoveryresources
       x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Programmes_by_TX_Date'
+  '/categories/{category}/derived/ad/4od/page-{pageno}.atom':
+    get:
+      description: "Lists all Channel 4oD programmes associated with the specified category \n  (tag).By default, the\_programmes are listed in order of Transmission (TX) \n  Date, with the most-recently-transmitted programmes listed first.\n\n  http://api.channel4.com/pmlsd/categories/category/derived/ad/4od/page-{pageno}.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/categories/animals/4oD.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
+      operationId: 4oD_Programmes_by_TX_Date(6)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+        - in: path
+          name: pageno
+          required: true
+          type: integer
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: 4oD Programmes by TX Date(6)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Programmes_by_TX_Date'
   '/categories/{category}/derived/ad/4od/popular.atom':
     get:
       description: |-
@@ -811,6 +1034,37 @@ paths:
           schema:
             $ref: '#/definitions/atom'
       summary: Most Popular Brands Feed(4)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Most_Popular_Brands_Feed'
+  '/categories/{category}/derived/ad/4od/popular/page-{pageno}.atom':
+    get:
+      description: |-
+        Lists all Channel 4oD most popular brands for the given category within the 
+          last 7 days, in order of popularity.
+
+          http://api.channel4.com/pmlsd/categories/category/derived/ad/4od/popular/page-{pageno}.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+
+          http://api.channel4.com/pmlsd/categories/comedy/4od/popular.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+      operationId: Most_Popular_Brands_Feed(8)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+        - in: path
+          name: pageno
+          required: true
+          type: integer
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: Most Popular Brands Feed(8)
       tags:
         - discoveryresources
       x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Most_Popular_Brands_Feed'
@@ -841,6 +1095,62 @@ paths:
       tags:
         - discoveryresources
       x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Programmes_by_Title'
+  '/categories/{category}/derived/ad/4od/title/page-{pageno}.atom':
+    get:
+      description: |-
+        Lists all Channel 4oD programmes associated with the specified category 
+          (tag), alphanumerically in order of Title.
+
+          http://api.channel4.com/pmlsd/categories/category/derived/ad/4od/title/page-{pageno}.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+
+          http://api.channel4.com/pmlsd/categories/religion-and-belief/4oD/title.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+      operationId: 4oD_Programmes_by_Title(6)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+        - in: path
+          name: pageno
+          required: true
+          type: integer
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: 4oD Programmes by Title(6)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/4oD_Programmes_by_Title'
+  '/categories/{category}/derived/ad/page-{pageno}.atom':
+    get:
+      description: "Lists all Channel 4 programmes associated with the specified category (tag).\_ \n  By default, the programmes are listed in order of Transmission (TX) Date, \n  with the most-recently-transmitted programmes listed first.\n\n  http://api.channel4.com/pmlsd/categories/category/derived/ad/page-{pageno}.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx\n\n  http://api.channel4.com/pmlsd/categories/animals.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
+      operationId: All_Programmes_by_TX_Date(6)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+        - in: path
+          name: pageno
+          required: true
+          type: integer
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: All Programmes by TX Date(6)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/All_Programmes_by_TX_Date'
   '/categories/{category}/derived/ad/title.atom':
     get:
       description: |-
@@ -865,6 +1175,37 @@ paths:
           schema:
             $ref: '#/definitions/atom'
       summary: All Programmes by Title(3)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/All_Programmes_by_Title'
+  '/categories/{category}/derived/ad/title/page-{pageno}.atom':
+    get:
+      description: |-
+        Lists all Channel 4 programmes associated with the specified category (tag), 
+          alphanumerically in order of Title.
+
+          http://api.channel4.com/pmlsd/categories/category/derived/ad/title/page-{pageno}.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+
+          http://api.channel4.com/pmlsd/categories/history/title.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+      operationId: All_Programmes_by_Title(6)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+        - in: path
+          name: pageno
+          required: true
+          type: integer
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: All Programmes by Title(6)
       tags:
         - discoveryresources
       x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/All_Programmes_by_Title'
@@ -917,6 +1258,37 @@ paths:
           schema:
             $ref: '#/definitions/atom'
       summary: Most Popular Brands Feed(2)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Most_Popular_Brands_Feed'
+  '/categories/{category}/popular/page-{pageno}.atom':
+    get:
+      description: |-
+        Lists all Channel 4oD most popular brands for the given category within the 
+          last 7 days, in order of popularity.
+
+          http://api.channel4.com/pmlsd/categories/category/popular/page-{pageno}.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+
+          http://api.channel4.com/pmlsd/categories/comedy/4od/popular.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+      operationId: Most_Popular_Brands_Feed(6)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: category
+          required: true
+          type: string
+        - in: path
+          name: pageno
+          required: true
+          type: integer
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: Most Popular Brands Feed(6)
       tags:
         - discoveryresources
       x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Most_Popular_Brands_Feed'
@@ -1229,6 +1601,37 @@ paths:
           schema:
             $ref: '#/definitions/atom'
       summary: Search Feed(2)
+      tags:
+        - discoveryresources
+      x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Search_Feed'
+  '/search/{q}/page-{pageno}.atom':
+    get:
+      description: |-
+        Lists all Channel 4 programmes where title (brand name) matching the search 
+          term. Matches are made from the beginning of individual words in the title.
+
+          http://api.channel4.com/pmlsd/search/search-term/page-{pageno}.atom?apikey=xxx
+
+          http://api.channel4.com/pmlsd/search.atom?q=the+it+crowd&apikey=xxxxxxxxxxxxxxxxxxxxxxxx
+      operationId: Search_Feed(4)
+      parameters:
+        - $ref: '#/parameters/platform'
+        - in: path
+          name: q
+          required: true
+          type: string
+        - in: path
+          name: pageno
+          required: true
+          type: integer
+      produces:
+        - application/xml
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/atom'
+      summary: Search Feed(4)
       tags:
         - discoveryresources
       x-documentation: 'http://developer.channel4.com/docs/read/programmesapiguide/discoveryresources/Search_Feed'
@@ -1981,9 +2384,6 @@ definitions:
   feed:
     additionalProperties: true
     properties:
-      Entry Elements:
-        description: "Element Description Example Value id ID containing Brand Web Safe Name tag:www.channel4.com,2009:/brand/inside-natures-giants title Programme's Brand Name Inside Nature's Giants summary Synopsis of this brand The award-winning series that gets under the skin of the largest animals on the planet. Most wildlife documentaries show how animals behave, but by exploring their anatomy, Inside Nature's Giants reveals how these creatures really work. updated Date and time element last updated 2010-10-18T10:08:44.295Z dc:relation.sortLetter\_ Starting letter for this programme I dc:relation.ProgrammeType\_ Displays metadata code (as detailed in the following table) in a meaningful way on the application according to the specified programme type. SSU dc:date.TXDate\_ Transmission date of the programme 2010-10-18T10:30:00.000Z media:content / media:thumbnail URL to medium-sized image of this brand url=\"http://www.channel4.com/assets/programmes/images/inside-natures-giants/7eb0ec03-1321-4532-bf51-cb2af0d9d528_145x82.jpg\" height=\"82\" width=\"145\" link@alternate URL to HTML version of brand http://www.channel4.com/programmes/inside-natures-giants link@self URL to the Channel 4 XML feed for this brand http://api.channel4.com/pmlsd/inside-natures-giants.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx link@related (Official Site) URL to the brand's official site, if available link@related (4oD) URL to 4oD feed, if available (self-referential in 4oD feeds) http://api.channel4.com/pmlsd/inside-natures-giants/4od.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx link@related (Clips) URL to short-form video feed, if available http://api.channel4.com/pmlsd/inside-natures-giants/video.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx link@related (Episode Guide) URL to Episode Guide feed, if available http://api.channel4.com/pmlsd/inside-natures-giants/episode-guide.atom?apikey=xxxxxxxxxxxxxxxxxxxxxxxx"
-        type: string
       Link@Related title="4oD":
         description: 'URL to Brand 4oD feed, if available'
         format: uri
@@ -2118,6 +2518,8 @@ definitions:
       'dcterms:available':
         description: "Start date, end date and date/time format for the period of time when episode is available.\_ (This feed would not be available if the current date is outside the start and end dates.)"
         type: string
+      entry:
+        $ref: '#/definitions/entry'
       'fh:complete':
         description: Presence of this element indicates no pagination
         type: string

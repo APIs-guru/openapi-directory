@@ -591,7 +591,7 @@ paths:
           name: invoice_address_city
           required: false
           type: string
-        - description: Buyer's credit card prefix.
+        - description: First 6 digits of buyer's credit card prefix.
           in: query
           name: buyer_credit_card_prefix
           required: false
@@ -631,7 +631,7 @@ paths:
           name: order_date
           required: false
           type: string
-        - description: Amount. Required if total amount is not provided.
+        - description: Amount. Required if total amount or both unit price and quantity are not provided.
           in: query
           name: amount
           required: false
@@ -646,7 +646,7 @@ paths:
           name: invoice_address_postal_code
           required: false
           type: string
-        - description: Total amount. Required if amount is not provided.
+        - description: Total amount. Required if amount or both unit price and quantity are not provided.
           in: query
           name: total_amount
           required: false
@@ -706,7 +706,7 @@ paths:
           name: billing_country_code
           required: false
           type: string
-        - description: Buyer's credit card prefix.
+        - description: First 6 digits of buyer's credit card prefix.
           in: query
           name: buyer_credit_card_prefix
           required: false
@@ -771,6 +771,11 @@ paths:
           name: offset
           required: false
           type: integer
+        - description: Return only transactions with a note field set.
+          in: query
+          name: has_note
+          required: false
+          type: boolean
         - description: Taxamo provided transaction key or custom id
           in: query
           name: key_or_custom_id
@@ -1383,13 +1388,13 @@ definitions:
   calculateSimpleTaxIn:
     properties:
       amount:
-        description: Amount. Required if total amount is not provided.
+        description: Amount. Required if total amount or both unit price and quantity are not provided.
         type: number
       billing_country_code:
         description: Billing two letter ISO country code.
         type: string
       buyer_credit_card_prefix:
-        description: Buyer's credit card prefix.
+        description: First 6 digits of buyer's credit card prefix.
         type: string
       buyer_tax_number:
         description: ' Buyer''s tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly.'
@@ -1422,7 +1427,7 @@ definitions:
         description: 'If the transaction is in a country supported by Taxamo, but the tax is not calculated due to merchant settings or EU B2B transaction for example.'
         type: boolean
       total_amount:
-        description: Total amount. Required if amount is not provided.
+        description: Total amount. Required if amount or both unit price and quantity are not provided.
         type: number
       unit_price:
         description: Unit price.
@@ -1460,7 +1465,7 @@ definitions:
         description: Billing two letter ISO country code.
         type: string
       buyer_credit_card_prefix:
-        description: Buyer's credit card prefix.
+        description: First 6 digits of buyer's credit card prefix.
         type: string
     type: object
   calculateTaxLocationOut:
@@ -1469,7 +1474,7 @@ definitions:
         description: Billing two letter ISO country code.
         type: string
       buyer_credit_card_prefix:
-        description: Buyer's credit card prefix.
+        description: First 6 digits of buyer's credit card prefix.
         type: string
       buyer_ip:
         description: IP address of the buyer in dotted decimal (IPv4) or text format (IPv6).
@@ -2231,7 +2236,7 @@ definitions:
         description: Billing two letter ISO country code.
         type: string
       buyer_credit_card_prefix:
-        description: Buyer's credit card prefix.
+        description: First 6 digits of buyer's credit card prefix.
         type: string
       buyer_email:
         description: Buyer's declared email address.
@@ -2283,6 +2288,9 @@ definitions:
       invoice_place:
         description: Invoice place of issue.
         type: string
+      note:
+        description: Additional note related to transaction state - for example if the transaction was created in a 'catch-all' mode or the VAT number re-check for subscriptions has failed.
+        type: string
       order_date:
         description: 'Order date in yyyy-MM-dd format, in merchant''s timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used.'
         type: string
@@ -2319,7 +2327,7 @@ definitions:
   input_transaction_line:
     properties:
       amount:
-        description: Amount. Required if total amount is not provided.
+        description: Amount. Required if total amount or both unit price and quantity are not provided.
         type: number
       custom_fields:
         description: 'Custom fields, stored as key-value pairs. This property is not processed and used mostly with Taxamo-built helpers.'
@@ -2360,7 +2368,7 @@ definitions:
         description: 'Tax rate, calculated by taxamo. Must be provided when informative field is true.'
         type: number
       total_amount:
-        description: Total amount. Required if amount is not provided.
+        description: Total amount. Required if amount or both unit price and quantity are not provided.
         type: number
       unit_of_measure:
         description: Unit of measure.
@@ -2380,7 +2388,7 @@ definitions:
         description: Billing two letter ISO country code.
         type: string
       buyer_credit_card_prefix:
-        description: Buyer's credit card prefix.
+        description: First 6 digits of buyer's credit card prefix.
         type: string
       buyer_email:
         description: Buyer's declared email address.
@@ -2431,6 +2439,9 @@ definitions:
         type: string
       invoice_place:
         description: Invoice place of issue.
+        type: string
+      note:
+        description: Additional note related to transaction state - for example if the transaction was created in a 'catch-all' mode or the VAT number re-check for subscriptions has failed.
         type: string
       order_date:
         description: 'Order date in yyyy-MM-dd format, in merchant''s timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used.'
@@ -2525,6 +2536,9 @@ definitions:
       format:
         description: Output format - supports 'csv' value for this operation.
         type: string
+      has_note:
+        description: Return only transactions with a note field set.
+        type: boolean
       invoice_number:
         description: Transaction invoice number.
         type: string
@@ -2762,7 +2776,7 @@ definitions:
         description: Billing two letter ISO country code.
         type: string
       buyer_credit_card_prefix:
-        description: Buyer's credit card prefix.
+        description: First 6 digits of buyer's credit card prefix.
         type: string
       buyer_email:
         description: Buyer's declared email address.
@@ -2847,6 +2861,9 @@ definitions:
       manual:
         description: 'Is the transaction created manually - using private token. In manual mode, it is the merchant who calculates tax country and validates evidence. If you need API to do that when accessing the API with private token, just skip the ''manual'' flag or use false value there and provide customer''s ip address through buyer_ip field. Manual mode is also used when using original_transaction_key field.'
         type: boolean
+      note:
+        description: Additional note related to transaction state - for example if the transaction was created in a 'catch-all' mode or the VAT number re-check for subscriptions has failed.
+        type: string
       order_date:
         description: 'Order date in yyyy-MM-dd format, in merchant''s timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used.'
         type: string
@@ -2913,7 +2930,7 @@ definitions:
         $ref: '#/definitions/additional_currencies'
         description: Additional currency information - can be used to receive additional information about invoice in another currency.
       amount:
-        description: Amount. Required if total amount is not provided.
+        description: Amount. Required if total amount or both unit price and quantity are not provided.
         type: number
       custom_fields:
         description: 'Custom fields, stored as key-value pairs. This property is not processed and used mostly with Taxamo-built helpers.'
@@ -2969,7 +2986,7 @@ definitions:
         description: 'Tax rate, calculated by taxamo. Must be provided when informative field is true.'
         type: number
       total_amount:
-        description: Total amount. Required if amount is not provided.
+        description: Total amount. Required if amount or both unit price and quantity are not provided.
         type: number
       unit_of_measure:
         description: Unit of measure.
@@ -2992,7 +3009,7 @@ definitions:
         description: Billing two letter ISO country code.
         type: string
       buyer_credit_card_prefix:
-        description: Buyer's credit card prefix.
+        description: First 6 digits of buyer's credit card prefix.
         type: string
       buyer_email:
         description: Buyer's declared email address.
@@ -3077,6 +3094,9 @@ definitions:
       manual:
         description: 'Is the transaction created manually - using private token. In manual mode, it is the merchant who calculates tax country and validates evidence. If you need API to do that when accessing the API with private token, just skip the ''manual'' flag or use false value there and provide customer''s ip address through buyer_ip field. Manual mode is also used when using original_transaction_key field.'
         type: boolean
+      note:
+        description: Additional note related to transaction state - for example if the transaction was created in a 'catch-all' mode or the VAT number re-check for subscriptions has failed.
+        type: string
       order_date:
         description: 'Order date in yyyy-MM-dd format, in merchant''s timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used.'
         type: string

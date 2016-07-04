@@ -125,6 +125,15 @@ definitions:
       payCurrency:
         description: Currency of pay amount
         type: string
+      payerEmail:
+        description: Specified payer email.
+        type: string
+      payerName:
+        description: Specified payer name.
+        type: string
+      payerSurname:
+        description: Specified payer surname.
+        type: string
       receiveAmount:
         description: Receive amount in receive currency of value that merchant will be funded after merchant customers payment approval. If not provided pay amount will be used to calculate receive amount
         type: number

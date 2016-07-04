@@ -1586,7 +1586,7 @@ definitions:
             description: The availability status of the failover replica. A false status indicates that the failover replica is out of sync. The master can only failover to the falover replica when the status is true.
             type: boolean
           name:
-            description: The name of the failover replica.
+            description: 'The name of the failover replica. If specified at instance creation, a failover replica is created for the instance. The name doesn''t include the project ID. This property is applicable only to Second Generation instances.'
             type: string
         type: object
       instanceType:
@@ -2101,10 +2101,10 @@ definitions:
     properties:
       activationPolicy:
         description: |-
-          The activation policy for this instance. This specifies when the instance should be activated and is applicable only when the instance state is RUNNABLE. This can be one of the following.
-          ALWAYS: The instance should always be active.
-          NEVER: The instance should never be activated.
-          ON_DEMAND: The instance is activated upon receiving requests; only applicable to First Generation instances.
+          The activation policy specifies when the instance is activated; it is applicable only when the instance state is RUNNABLE. The activation policy cannot be updated together with other settings for Second Generation instances. Valid values:
+          ALWAYS: The instance is on; it is not deactivated by inactivity.
+          NEVER: The instance is off; it is not activated, even if a connection request arrives.
+          ON_DEMAND: The instance responds to incoming requests, and turns itself off when not in use. Instances with PER_USE pricing turn off after 15 minutes of inactivity. Instances with PER_PACKAGE pricing turn off after 12 hours of inactivity.
         type: string
       authorizedGaeApplications:
         description: The App Engine app IDs that can access this instance. This property is only applicable to First Generation instances.
