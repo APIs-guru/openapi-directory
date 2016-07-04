@@ -184,11 +184,11 @@ function addToCollection(type, url, command) {
     exPatch.info['x-serviceName'] = command.service;
 
   writeSpec(url, type, exPatch)
-    .catch(error => {
+    .catch(SpecError, error => {
       if (!command.fixup)
         throw error;
 
-      return util.editFile(errorToString(error, error.context))
+      return util.editFile(error.stack)
         .then(function (data) {
           //FIXME: regex
           var match = data.match(/^\++ Begin.*$((?:.|\n)*?)^\?+ Swagger.*$((?:.|\n)*?)^[*!~-]/m);
@@ -260,8 +260,16 @@ function writeSpecFromLead(lead) {
   return writeSpec(source, type, exPatch);
 }
 
+class SpecError extends Error {
+  constructor(originError, context) {
+    super('');
+    originError.context = context;
+    this.stack = errorToString(originError);
+  }
+}
+
 function writeSpec(source, type, exPatch) {
-  var context = {};
+  var context = {source};
 
   return converter.getSpec(source, type)
     .then(spec => {
@@ -288,7 +296,7 @@ function writeSpec(source, type, exPatch) {
       context.validation = validation;
 
       if (validation.errors)
-        throw Error(errorToString(null, context));
+        throw Error('Validation errors!!!');
 
       if (validation.warnings)
         logYaml(validation.warnings);
@@ -297,8 +305,7 @@ function writeSpec(source, type, exPatch) {
       return context.swagger;
     })
     .catch(e => {
-      e.context = context;
-      throw e;
+      throw new SpecError(e, context);
     });
 }
 
@@ -587,30 +594,29 @@ function serilazeSpec(spec) {
   return data;
 }
 
-function errorToString(error, context) {
-  var {spec, swagger, validation} = error.context;
-  var url = spec.source;
+function errorToString(error) {
+  var {source, spec, swagger, validation} = error.context;
 
-  var result = '++++++++++++++++++++++++++ Begin ' + url + ' +++++++++++++++++++++++++\n';
-  if (spec.type !== 'swagger_2' || _.isUndefined(swagger)) {
+  var result = '++++++++++++++++++++++++++ Begin ' + source + ' +++++++++++++++++++++\n';
+  if (spec && (spec.type !== 'swagger_2' || _.isUndefined(swagger))) {
     result += util.Yaml2String(serilazeSpec(spec));
   }
 
-  result += '???????????????????? Swagger ' + url + ' ????????????????????????????\n';
+  result += '???????????????????? Swagger ' + source + ' ????????????????????????????\n';
   if (!_.isUndefined(swagger))
     result += util.Yaml2String(swagger);
 
-  result += '!!!!!!!!!!!!!!!!!!!! Errors ' + url + ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n';
-  if (validation.errors)
+  result += '!!!!!!!!!!!!!!!!!!!! Errors ' + source + ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n';
+  if (_.get(validation, 'errors'))
     result += util.Yaml2String(validation.errors);
   else
     result += error.stack + '\n';
 
-  if (validation.warnings) {
-    result += '******************** Warnings ' + url + ' ******************************\n';
+  if (_.get(validation, 'warnings')) {
+    result += '******************** Warnings ' + source + ' *************************\n';
     result += util.Yaml2String(validation.warnings);
   }
-  result += '------------------------- End ' + url + ' ----------------------------\n';
+  result += '------------------------- End ' + source + ' ---------------------------\n';
   return result;
 }
 
