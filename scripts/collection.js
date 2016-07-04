@@ -119,16 +119,16 @@ function fixupSwagger(swaggerPath) {
 
 function updateCollection(dir) {
   specSources.getLeads(util.getSpecs(dir))
-   .then(leads => _.toPairs(leads))
-   .each(([filename, lead]) => {
-     return writeSpecFromLead(lead)
-       .then(swagger => {
-         var newFilename = util.getSwaggerPath(swagger);
-         if (newFilename !== filename)
-           throw Error(`Spec was moved from "${filename}" to "${newFilename}"`);
-       });
-   })
-   .done();
+    .then(leads => _.toPairs(leads))
+    .each(([filename, lead]) => {
+      return writeSpecFromLead(lead)
+        .then(swagger => {
+          var newFilename = util.getSwaggerPath(swagger);
+          if (newFilename !== filename)
+            throw Error(`Spec was moved from "${filename}" to "${newFilename}"`);
+        });
+    })
+    .done();
 }
 
 function validateCollection() {
