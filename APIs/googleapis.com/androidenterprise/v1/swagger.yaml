@@ -173,14 +173,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Completes the signup flow, by specifying the Completion Token and Enterprise Token. This request must not be called multiple times for a given Enterprise Token.'
+      description: 'Completes the signup flow, by specifying the Completion token and Enterprise token. This request must not be called multiple times for a given Enterprise Token.'
       operationId: androidenterprise.enterprises.completeSignup
       parameters:
-        - description: The Completion Token intially returned by GenerateSignupUrl.
+        - description: The Completion token initially returned by GenerateSignupUrl.
           in: query
           name: completionToken
           type: string
-        - description: The Enterprise Token appended to the Callback URL.
+        - description: The Enterprise token appended to the Callback URL.
           in: query
           name: enterpriseToken
           type: string
@@ -1047,6 +1047,37 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/ProductPermissions'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - products
+  '/enterprises/{enterpriseId}/products/{productId}/unapprove':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Unapproves the specified product (and the relevant app permissions, if any)'
+      operationId: androidenterprise.products.unapprove
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the product.
+          in: path
+          name: productId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidenterprise'
@@ -2172,7 +2203,7 @@ paths:
         - installs
   '/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/state':
     get:
-      description: 'Retrieves whether a device is enabled or disabled for access by the user to Google services. The device state takes effect only if enforcing EMM policies on Android devices is enabled in the Google Admin Console. Otherwise, the device state is ignored and all devices are allowed access to Google services. This is only supported for Google-managed users.'
+      description: 'Retrieves whether a device''s access to Google services is enabled or disabled. The device state takes effect only if enforcing EMM policies on Android devices is enabled in the Google Admin Console. Otherwise, the device state is ignored and all devices are allowed access to Google services. This is only supported for Google-managed users.'
       operationId: androidenterprise.devices.getState
       parameters:
         - description: The ID of the enterprise.
@@ -2209,7 +2240,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     put:
-      description: 'Sets whether a device is enabled or disabled for access by the user to Google services. The device state takes effect only if enforcing EMM policies on Android devices is enabled in the Google Admin Console. Otherwise, the device state is ignored and all devices are allowed access to Google services. This is only supported for Google-managed users.'
+      description: 'Sets whether a device''s access to Google services is enabled or disabled. The device state takes effect only if enforcing EMM policies on Android devices is enabled in the Google Admin Console. Otherwise, the device state is ignored and all devices are allowed access to Google services. This is only supported for Google-managed users.'
       operationId: androidenterprise.devices.setState
       parameters:
         - description: The ID of the enterprise.
@@ -2690,7 +2721,7 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#device".'
         type: string
       managementType:
-        description: The mechanism by which this device is managed by the EMM. "managedDevice" means that the EMM's app is a device owner. "managedProfile" means that the EMM's app is the profile owner (and there is a separate personal profile which is not managed). "containerApp" means that the EMM's app is managing the Android for Work container app on the device. ?unmanagedProfile? means that the EMM?s app is managing a managed user on an unmanaged device
+        description: The mechanism by which this device is managed by the EMM. "managedDevice" means that the EMM's app is a device owner. "managedProfile" means that the EMM's app is the profile owner (and there is a separate personal profile which is not managed). "containerApp" means that the EMM's app is managing the Android for Work container app on the device.
         type: string
     type: object
   DeviceState:
@@ -2732,7 +2763,7 @@ definitions:
       - An alternative process that takes advantage of Google-provided mechanisms (Android for Work Sign-up UI) that expedite the process involves Enterprises.generateSignupUrl, Enterprises.completeSignup, Enterprises.getServiceAccount  (optional), and Enterprises.setAccount.  
 
 
-      The overall processes are very different and involve different identity models, but as an EMM, you can support either or both approaches in your EMM console. See EMM Developer?s Guide for details.
+      The overall processes are very different and involve different identity models, but as an EMM, you can support either or both approaches in your EMM console. See EMM Developer's Guide for details.
     properties:
       administrator:
         description: Administrators of the enterprise. This is only supported for enterprises created via the EMM-initiated flow.
@@ -3045,7 +3076,7 @@ definitions:
     type: object
   Product:
     description: |-
-      A product represents an app in the Google Play Store that is available to at least some users in the enterprise. (Some apps are restricted to a single enterprise, and no information about them is made available outside that enterprise.)
+      A Products resource represents an app in the Google Play Store that is available to at least some users in the enterprise. (Some apps are restricted to a single enterprise, and no information about them is made available outside that enterprise.)
 
       The information provided for each product (localized name, icon, link to the full Google Play details page) is intended to allow a basic representation of the product within an EMM user interface.
     properties:
@@ -3337,7 +3368,7 @@ definitions:
     type: object
   User:
     description: |-
-      A user resource represents an account associated with an enterprise. The account may be specific to a device or to an individual user (who can then use the account across multiple devices). The account may provide access to Google Play for Work only, or to other Google services, depending on the identity model used:  
+      A Users resource represents an account associated with an enterprise. The account may be specific to a device or to an individual user (who can then use the account across multiple devices). The account may provide access to Google Play for Work only, or to other Google services, depending on the identity model used:  
       - Google managed domain identity model requires synchronization to Google account sources (via primaryEmail). 
 
 
@@ -3363,7 +3394,7 @@ definitions:
         description: 'The entity that manages the user. With "googleManaged" users, the source of truth is Google so EMMs have to make sure a Google account exists for the user. With "emmManaged" users, the EMM is in charge.'
         type: string
       primaryEmail:
-        description: 'The user''s primary email address, e.g. "jsmith@example.com". Will always be set for Google managed users and not set for EMM managed users.'
+        description: 'The user''s primary email address, for example, "jsmith@example.com". Will always be set for Google managed users and not set for EMM managed users.'
         type: string
     type: object
   UserToken:

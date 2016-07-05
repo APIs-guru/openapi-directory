@@ -113,6 +113,74 @@ paths:
       summary: Get a list of offers for addon services for the specified guest stay details.
       tags:
         - Addons
+  /api/booking/v0/availability:
+    get:
+      consumes: []
+      deprecated: false
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - format: int32
+          in: query
+          name: hotelId
+          required: true
+          type: integer
+        - format: date-time
+          in: query
+          name: from
+          required: true
+          type: string
+        - format: date-time
+          in: query
+          name: to
+          required: true
+          type: string
+        - enum:
+            - RoomTypes
+          in: query
+          name: expand
+          required: false
+          type: string
+        - description: Amount of items to skip.
+          format: int32
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Amount of items to select.
+          format: int32
+          in: query
+          name: top
+          required: false
+          type: integer
+        - description: Return total amount of items for a given filter criteria.
+          enum:
+            - None
+            - AllPages
+          in: query
+          name: inlinecount
+          required: false
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AvailabilityResponse'
+      tags:
+        - Availability
   /api/booking/v0/blocks:
     get:
       consumes: []
@@ -1286,6 +1354,60 @@ definitions:
         description: The room number assigned
         type: string
     type: object
+  AvailabilityDetail:
+    properties:
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources
+        type: object
+      available:
+        format: int32
+        type: integer
+      blocked:
+        $ref: '#/definitions/Blocked'
+      day_use:
+        format: int32
+        type: integer
+      house_count:
+        format: int32
+        type: integer
+      maintenance:
+        $ref: '#/definitions/Maintenance'
+      overbooking:
+        format: int32
+        type: integer
+      room_count:
+        format: int32
+        type: integer
+      sold:
+        format: int32
+        type: integer
+      to_sell:
+        format: int32
+        type: integer
+    type: object
+  AvailabilityResponse:
+    properties:
+      _count:
+        description: The number of items matching your request in total for all pages.
+        format: int32
+        type: integer
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources
+        type: object
+      daily_availabilities:
+        items:
+          $ref: '#/definitions/DailyAvailability'
+        type: array
+      hotel_id:
+        format: int32
+        type: integer
+      hotel_name:
+        type: string
+    type: object
   BaseResponse:
     properties:
       _warnings:
@@ -1477,6 +1599,18 @@ definitions:
       name:
         description: Name of the room type
         type: string
+    type: object
+  Blocked:
+    properties:
+      definite:
+        format: int32
+        type: integer
+      remaining:
+        format: int32
+        type: integer
+      tentative:
+        format: int32
+        type: integer
     type: object
   BlocksResponse:
     properties:
@@ -1843,6 +1977,18 @@ definitions:
           $ref: '#/definitions/Customer'
         type: array
     type: object
+  DailyAvailability:
+    properties:
+      business_day:
+        format: date-time
+        type: string
+      house_level:
+        $ref: '#/definitions/AvailabilityDetail'
+      room_types:
+        items:
+          $ref: '#/definitions/RoomAvailabilityDetail'
+        type: array
+    type: object
   DailyRate:
     properties:
       addon_services:
@@ -1987,6 +2133,26 @@ definitions:
       - rooms
       - roomType
       - ratePlanCode
+    type: object
+  GetAvailabilityRequest:
+    properties:
+      expand:
+        enum:
+          - RoomTypes
+        type: string
+      from:
+        format: date-time
+        type: string
+      hotelId:
+        format: int32
+        type: integer
+      to:
+        format: date-time
+        type: string
+    required:
+      - hotelId
+      - from
+      - to
     type: object
   GetCardsResponse:
     properties:
@@ -2152,6 +2318,18 @@ definitions:
       postal_code:
         description: The postal code for this address
         type: string
+    type: object
+  Maintenance:
+    properties:
+      out_of_inventory:
+        format: int32
+        type: integer
+      out_of_order:
+        format: int32
+        type: integer
+      out_of_service:
+        format: int32
+        type: integer
     type: object
   NoShowPolicy:
     properties:
@@ -2627,6 +2805,43 @@ definitions:
         items:
           $ref: '#/definitions/ReservationResponse'
         type: array
+    type: object
+  RoomAvailabilityDetail:
+    properties:
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources
+        type: object
+      available:
+        format: int32
+        type: integer
+      blocked:
+        $ref: '#/definitions/Blocked'
+      code:
+        type: string
+      day_use:
+        format: int32
+        type: integer
+      default:
+        type: boolean
+      house_count:
+        format: int32
+        type: integer
+      maintenance:
+        $ref: '#/definitions/Maintenance'
+      overbooking:
+        format: int32
+        type: integer
+      room_count:
+        format: int32
+        type: integer
+      sold:
+        format: int32
+        type: integer
+      to_sell:
+        format: int32
+        type: integer
     type: object
   RoomInfo:
     properties:
