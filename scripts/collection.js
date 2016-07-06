@@ -83,7 +83,7 @@ program
   .description('add new spec')
   .option('-f, --fixup', 'try to fix spec')
   .option('-s, --service <NAME>', 'supply service name')
-  .arguments('<TYPE> <URL>')
+  .arguments('<FORMAT> <URL>')
   .action(addToCollection);
 
 program.parse(process.argv);
@@ -178,12 +178,12 @@ function validatePrefered(specs) {
   });
 }
 
-function addToCollection(type, url, command) {
+function addToCollection(format, url, command) {
   var exPatch = {info: {}};
   if (command.service)
     exPatch.info['x-serviceName'] = command.service;
 
-  writeSpec(url, type, exPatch)
+  writeSpec(url, format, exPatch)
     .catch(SpecError, error => {
       if (!command.fixup)
         throw error;
@@ -195,7 +195,7 @@ function addToCollection(type, url, command) {
           if (!match || !match[1] || !match[2])
             throw Error('Can not match edited Swagger');
 
-          if (result.spec.type !== 'swagger_2') {
+          if (result.spec.format !== 'swagger_2') {
             var editedOrigin = YAML.safeLoad(match[1]);
             appendFixup(getOriginFixupPath(result.spec), serilazeSpec(result.spec), editedOrigin);
           }
@@ -252,12 +252,12 @@ function updateCatalogLeads() {
 function writeSpecFromLead(lead) {
   var origin = util.getOrigin(lead);
   var source = origin.url;
-  var type = converter.getTypeName(origin.format, origin.version);
+  var format = converter.getFormatName(origin.format, origin.version);
 
   var exPatch = _.cloneDeep(lead);
   delete exPatch.info['x-origin'];
 
-  return writeSpec(source, type, exPatch);
+  return writeSpec(source, format, exPatch);
 }
 
 class SpecError extends Error {
@@ -268,10 +268,10 @@ class SpecError extends Error {
   }
 }
 
-function writeSpec(source, type, exPatch) {
+function writeSpec(source, format, exPatch) {
   var context = {source};
 
-  return converter.getSpec(source, type)
+  return converter.getSpec(source, format)
     .then(spec => {
       context.spec = spec;
 
@@ -598,7 +598,7 @@ function errorToString(error) {
   var {source, spec, swagger, validation} = error.context;
 
   var result = '++++++++++++++++++++++++++ Begin ' + source + ' +++++++++++++++++++++\n';
-  if (spec && (spec.type !== 'swagger_2' || _.isUndefined(swagger))) {
+  if (spec && (spec.format !== 'swagger_2' || _.isUndefined(swagger))) {
     result += util.Yaml2String(serilazeSpec(spec));
   }
 
