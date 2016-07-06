@@ -5,7 +5,7 @@ schemes:
 host: api.sendgrid.com
 basePath: /v3
 info:
-  title: SendGrid V3
+  title: SendGrid v3
   version: '3.0'
   x-logo:
     url: 'https://sendgrid.com/wp-content/themes/sgdotcom/pages/logo-brand/img/2015_SG_Logo_RGB.png'
@@ -146,21 +146,41 @@ paths:
                   id: 1
                   ip: 192.168.1.1/32
                   updated_at: 1441824715
+                - created_at: 1441824715
+                  id: 2
+                  ip: 192.168.1.2/32
+                  updated_at: 1441824715
+                - created_at: 1441824715
+                  id: 3
+                  ip: 192.168.1.3/32
+                  updated_at: 1441824715
           schema:
             properties:
               result:
+                description: An array listing all of your whitelisted IPs.
                 items:
                   properties:
                     created_at:
+                      description: A Unix timestamp indicating when the IP was whitelisted.
                       type: integer
                     id:
+                      description: The ID of the whitelisted IP.
                       type: integer
                     ip:
+                      description: The whitelisted IP.
                       type: string
                     updated_at:
+                      description: A Unix timestamp indicating when the IPs whitelisting status was most recently updated.
                       type: integer
+                  required:
+                    - id
+                    - ip
+                    - created_at
+                    - updated_at
                   type: object
                 type: array
+            required:
+              - result
             type: object
       security:
         - Authorization: []
@@ -214,21 +234,41 @@ paths:
                   id: 1
                   ip: 192.168.1.1/32
                   updated_at: 1441824715
+                - created_at: 1441824715
+                  id: 2
+                  ip: 192.0.0.0/8
+                  updated_at: 1441824715
+                - created_at: 1441824715
+                  id: 3
+                  ip: 192.168.1.3/32
+                  updated_at: 1441824715
           schema:
             properties:
               result:
+                description: An array listing all of your whitelisted IPs.
                 items:
                   properties:
                     created_at:
+                      description: A Unix timestamp indicating when the IP was whitelisted.
                       type: integer
                     id:
+                      description: The ID of the whitelisted IP.
                       type: integer
                     ip:
+                      description: The whitelisted IP.
                       type: string
                     updated_at:
+                      description: A Unix timestamp indicating when the IPs whitelisting status was most recently updated.
                       type: integer
+                  required:
+                    - id
+                    - ip
+                    - created_at
+                    - updated_at
                   type: object
                 type: array
+            required:
+              - result
             type: object
       security:
         - Authorization: []
@@ -279,13 +319,22 @@ paths:
           schema:
             properties:
               created_at:
+                description: A Unix timestamp indicating when the IP was whitelisted.
                 type: integer
               id:
+                description: The ID of the IP address.
                 type: integer
               ip:
+                description: The IP address.
                 type: string
               updated_at:
+                description: A Unix timestamp indicating when the IP address was last updated.
                 type: integer
+            required:
+              - id
+              - ip
+              - created_at
+              - updated_at
             type: object
       security:
         - Authorization: []
@@ -321,19 +370,19 @@ paths:
           examples:
             application/json:
               - created_at: 1451498784
-                email_to: reaper@example.com
+                email_to: example1@example.com
                 id: 46
                 percentage: 90
                 type: usage_limit
                 updated_at: 1451498784
               - created_at: 1451498812
-                email_to: reaper@example.com
+                email_to: example2@example.com
                 frequency: monthly
                 id: 47
                 type: stats_notification
                 updated_at: 1451498812
               - created_at: 1451520930
-                email_to: someone@example.com
+                email_to: example3@example.com
                 frequency: daily
                 id: 48
                 type: stats_notification
@@ -396,7 +445,7 @@ paths:
           name: body
           schema:
             example:
-              email_to: eric.schallock@sendgrid.com
+              email_to: example@example.com
               frequency: daily
               type: stats_notification
             properties:
@@ -430,19 +479,55 @@ paths:
           type: string
       produces:
         - application/json
-        - text/plain
       responses:
         '201':
           description: ''
           examples:
-            text/plain:
-              created_at: 1465595735
-              email_to: eric.schallock@sendgrid.com
+            application/json:
+              created_at: 1451520930
+              email_to: test@example.com
               frequency: daily
-              id: 304575
+              id: 48
               type: stats_notification
-              updated_at: 1465595735
+              updated_at: 1451520930
           schema:
+            properties:
+              created_at:
+                description: A Unix timestamp indicating when the alert was created.
+                type: integer
+              email_to:
+                description: The email address that the alert will be sent to.
+                type: string
+              frequency:
+                description: 'If the alert is of type stats_notification, this indicates how frequently the stats notifications will be sent. For example, "daily", "weekly", or "monthly".'
+                type: string
+              id:
+                description: The ID of the alert.
+                type: integer
+              percentage:
+                description: '"If the alert is of type usage_limit, this indicates the percentage of email usage that must be reached before the alert will be sent.'
+                type: integer
+              type:
+                description: The type of alert.
+                type: string
+              updated_at:
+                description: A Unix timestamp indicating when the alert was last modified.
+                type: integer
+            required:
+              - created_at
+              - email_to
+              - id
+              - type
+              - updated_at
+            type: object
+        '400':
+          description: ''
+          schema:
+            properties:
+              field:
+                type: string
+              message:
+                type: string
             type: object
       security:
         - Authorization: []
@@ -487,19 +572,49 @@ paths:
           type: string
       produces:
         - application/json
-        - text/plain
       responses:
         '200':
           description: ''
           examples:
-            text/plain:
-              created_at: 1465613735
-              email_to: eric.schallock@sendgrid.com
+            application/json:
+              created_at: 1451520930
+              email_to: example@example.com
               frequency: daily
-              id: 304575
+              id: 48
               type: stats_notification
-              updated_at: 1465595735
+              updated_at: 1451520930
           schema:
+            properties:
+              created_at:
+                description: A Unix timestamp indicating when the alert was created.
+                type: integer
+              email_to:
+                description: The email address that the alert will be sent to.
+                type: string
+              frequency:
+                description: 'If the alert is of type stats_notification, this indicates how frequently the stats notifications will be sent. For example: "daily", "weekly", or "monthly".'
+                type: string
+              id:
+                description: The ID of the alert.
+                type: integer
+              percentage:
+                description: 'If the alert is of type usage_limit, this indicates the percentage of email usage that must be reached before the alert will be sent.'
+                type: integer
+              type:
+                description: The type of alert.
+                enum:
+                  - usage_alert
+                  - stats_notification
+                type: string
+              updated_at:
+                description: A Unix timestamp indicating when the alert was last modified.
+                type: integer
+            required:
+              - created_at
+              - email_to
+              - id
+              - type
+              - updated_at
             type: object
       security:
         - Authorization: []
@@ -527,7 +642,7 @@ paths:
           name: body
           schema:
             example:
-              email_to: test@example.com
+              email_to: example@example.com
             properties:
               email_to:
                 description: |-
@@ -553,7 +668,7 @@ paths:
           examples:
             application/json:
               created_at: 1451520930
-              email_to: test@example.com
+              email_to: example@example.com
               frequency: daily
               id: 48
               type: stats_notification
@@ -2004,7 +2119,7 @@ paths:
         - Authorization: []
       summary: Retrieve a single campaign
     parameters:
-      - description: The id of the campaign you would like to retrieve.
+      - description: The ID of the campaign that you would like to delete.
         in: path
         name: campaign_id
         required: true
@@ -2977,10 +3092,7 @@ paths:
                   name: cat5
                   type: category
           schema:
-            properties:
-              '':
-                $ref: '#/definitions/category_stats'
-            type: object
+            $ref: '#/definitions/category_stats'
       security:
         - Authorization: []
       summary: 'Retrieve sums of email stats for each category [Needs: Stats object defined, has category ID?]'
@@ -6662,11 +6774,7 @@ paths:
                 description: 'Values that are specific to the entire send that will be carried along with the email and its activity data. Substitutions will not be made on custom arguments, so any string that is entered into this parameter will be assumed to be the custom argument that you would like to be used. This parameter is overridden by personalizations[x].custom_args if that parameter has been defined. Total custom args size may not exceed 10,000 bytes.'
                 type: object
               from:
-                description: An email object containing the email address and name of the sender.
-                properties:
-                  '':
-                    $ref: '#/definitions/email_object'
-                type: object
+                $ref: '#/definitions/email_object'
               headers:
                 description: An object containing key/value pairs of header names and the value to substitute for them. You must ensure these are properly encoded if they contain unicode characters. Must not be one of the reserved headers.
                 type: object
@@ -6739,20 +6847,14 @@ paths:
                     bcc:
                       description: 'An array of recipients who will receive a blind carbon copy of your email. Each object within this array may contain the name, but must always contain the email, of a recipient.'
                       items:
-                        properties:
-                          '':
-                            $ref: '#/definitions/email_object'
-                        type: object
-                      maxItems: 100
+                        $ref: '#/definitions/email_object'
+                      maxItems: 1000
                       type: array
                     cc:
                       description: 'An array of recipients who will receive a copy of your email. Each object within this array may contain the name, but must always contain the email, of a recipient.'
                       items:
-                        properties:
-                          '':
-                            $ref: '#/definitions/email_object'
-                        type: object
-                      maxItems: 100
+                        $ref: '#/definitions/email_object'
+                      maxItems: 1000
                       type: array
                     custom_args:
                       description: 'Values that are specific to this personalization that will be carried along with the email and its activity data. Substitutions will not be made on custom arguments, so any string that is entered into this parameter will be assumed to be the custom argument that you would like to be used. May not exceed 10,000 bytes.'
@@ -6774,11 +6876,8 @@ paths:
                     to:
                       description: 'An array of recipients. Each object within this array may contain the name, but must always contain the email, of a recipient.'
                       items:
-                        properties:
-                          '':
-                            $ref: '#/definitions/email_object'
-                        type: object
-                      maxItems: 100
+                        $ref: '#/definitions/email_object'
+                      maxItems: 1000
                       minItems: 1
                       type: array
                   required:
@@ -6788,11 +6887,7 @@ paths:
                 type: array
                 uniqueItems: false
               reply_to:
-                description: An email object containing the email address and name of the individual who should receive responses to your email.
-                properties:
-                  '':
-                    $ref: '#/definitions/email_object'
-                type: object
+                $ref: '#/definitions/email_object'
               sections:
                 description: An object of key/value pairs that define block sections of code to be used as substitutions.
                 type: object
@@ -9673,7 +9768,7 @@ paths:
           examples:
             application/json:
               - created: 1443651154
-                email: user1@example.com
+                email: example@example.com
                 reason: 'error dialing remote address: dial tcp 10.57.152.165:25: no route to host'
                 status: 4.0.0
           schema:
@@ -9740,7 +9835,7 @@ paths:
           examples:
             application/json:
               - created: 1443651154
-                email: user1@example.com
+                email: example@example.com
                 reason: 'error dialing remote address: dial tcp 10.57.152.165:25: no route to host'
                 status: 4.0.0
           schema:
@@ -9852,6 +9947,12 @@ paths:
           in: query
           name: end_time
           type: integer
+        - default: application/json
+          description: ''
+          in: header
+          name: Accept
+          required: true
+          type: string
       produces:
         - application/json
       responses:
@@ -10486,7 +10587,7 @@ paths:
         - Authorization: []
       summary: Retrieve a single transactional template.
     parameters:
-      - description: The id of the transactional template you want to delete.
+      - description: The id of the transactional template you want to edit.
         in: path
         name: template_id
         required: true
@@ -12144,8 +12245,7 @@ paths:
         - Settings - Inbound Parse
   '/user/webhooks/parse/settings/{hostname}':
     delete:
-      consumes:
-        - application/json
+      consumes: []
       description: |-
         **This endpoint allows you to delete a specific inbound parse setting.**
 
@@ -12189,13 +12289,6 @@ paths:
       tags:
         - Settings - Inbound Parse
     parameters:
-      - description: The hostname associated with the inbound parse setting that you want to delete.
-        in: path
-        name: hostname
-        required: true
-        type: string
-  '/user/webhooks/parse/settings/{hostname}/':
-    parameters:
       - description: The hostname associated with the specific inbound parse setting that you want to update.
         in: path
         name: hostname
@@ -12234,6 +12327,8 @@ paths:
       security:
         - Authorization: []
       summary: Update a parse setting
+      tags:
+        - Settings - Inbound Parse
   /user/webhooks/parse/stats:
     get:
       consumes: []

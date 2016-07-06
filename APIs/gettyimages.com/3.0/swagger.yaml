@@ -204,6 +204,37 @@ paths:
       tags:
         - Boards
   '/v3/boards/{board_id}':
+    delete:
+      consumes: []
+      parameters:
+        - description: Authorization token required. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+        - description: ID of board to be deleted.
+          in: path
+          name: board_id
+          required: true
+          type: string
+      produces: []
+      responses:
+        '200':
+          description: No response was specified
+        '204':
+          description: Board deleted
+        '401':
+          description: Unauthorized
+        '404':
+          description: Board Deleted
+      summary: <b>***BETA***</b> Delete specified board.
+      tags:
+        - Boards
     get:
       consumes: []
       parameters:
