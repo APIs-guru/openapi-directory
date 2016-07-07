@@ -6,20 +6,20 @@ basePath: /
 info:
   description: 'Dweet.io allows users to share data from mobile, tablets, and pcs, and them to other devices and accounts across social media platforms. Dweet.io provides an API to access the different functionality of the Dweet.io service. Users can make REST calls to read and create dweets, lock and unlock things, and perform other calls. The API returns JSON and JSONP.'
   title: dweet.io
-  version: '2.0'
+  version: '0.2'
   x-origin:
     format: swagger
     url: 'https://dweet.io/play/definition'
     version: '1.2'
   x-providerName: dweet.io
 tags:
-  - description: Alerts for things.
+  - description: alerts for things.
     name: alerts
-  - description: Create or read dweets in short term cache.
+  - description: create or read dweets in short term cache.
     name: dweets
-  - description: Lock and unlock your things.
+  - description: lock and unlock things.
     name: locks
-  - description: Read dweets from long term storage.
+  - description: read dweets from long term storage.
     name: storage
 paths:
   '/alert/{who}/when/{thing}/{condition}':
@@ -76,31 +76,6 @@ paths:
       summary: Create a dweet for a thing.
       tags:
         - dweets
-  '/dweet/quietly/for/{thing}':
-    post:
-      parameters:
-        - description: A unique name of a thing. It is recommended that you use a GUID as to avoid name collisions.
-          in: path
-          name: thing
-          required: true
-          type: string
-        - description: 'A valid key for a locked thing. If the thing is not locked, this can be ignored.'
-          in: query
-          name: key
-          required: false
-          type: string
-        - description: The actual content of the string. Can be any valid JSON string.
-          in: body
-          name: content
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: No response was specified
-      summary: 'Create a dweet for a thing.  This method differs from /dweet/for/{thing} only in that successful dweets result in an HTTP 204 response rather than the typical verbose response.'
-      tags:
-        - dweets
   '/get/alert/for/{thing}':
     get:
       parameters:
@@ -136,7 +111,7 @@ paths:
       responses:
         '200':
           description: No response was specified
-      summary: Read the last 5 cached dweets for a thing.
+      summary: Read all of the saved dweets (up to last 500) for a thing.
       tags:
         - dweets
   '/get/latest/dweet/for/{thing}':
@@ -158,40 +133,6 @@ paths:
       summary: Read the latest dweet for a thing.
       tags:
         - dweets
-  '/get/stored/alerts/for/{thing}':
-    get:
-      parameters:
-        - description: A unique name of a thing.
-          in: path
-          name: thing
-          required: true
-          type: string
-        - description: 'A valid key for a locked thing. If the thing is not locked, this can be ignored.'
-          in: query
-          name: key
-          required: true
-          type: string
-        - description: The calendar date (YYYY-MM-DD) from which you'd like to start your query.  The response will be a maximum of one day.
-          in: query
-          name: date
-          required: true
-          type: string
-        - description: 'The hour of the day represented in the date parameter in 24-hour (00-23) format.  If this parameter is included, a maximum of 1 hour will be returned starting at this hour.'
-          in: query
-          name: hour
-          required: false
-          type: string
-        - description: 'Current valid parameters for this are ''csv'' and ''json''.  If this parameter is left blank, all responses default to hapi-json dweet-speak.'
-          in: query
-          name: responseType
-          required: false
-          type: string
-      responses:
-        '200':
-          description: No response was specified
-      summary: Read all the saved alerts for a thing from long term storage.  You can query a maximum of 1 day per request and a granularly of 1 hour.
-      tags:
-        - storage
   '/get/stored/dweets/for/{thing}':
     get:
       parameters:
@@ -223,7 +164,7 @@ paths:
       responses:
         '200':
           description: No response was specified
-      summary: Read all the saved dweets for a thing from long term storage.  You can query a maximum of 1 day per request and a granularly of 1 hour.
+      summary: Read all the saved dweets for a thing from long term storage.  You can query a maximum of 1 day per request and as granularly as per hour.
       tags:
         - storage
   '/listen/for/dweets/from/{thing}':
