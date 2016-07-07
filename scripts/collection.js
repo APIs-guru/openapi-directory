@@ -37,6 +37,15 @@ converter.ResourceReaders.url = function (url) {
   return makeRequest('get', url, options)
     .then(([, data]) => data);
 }
+
+class SpecError extends Error {
+  constructor(originError, context) {
+    super('');
+    originError.context = context;
+    this.stack = errorToString(originError);
+  }
+}
+
 var program = require('commander');
 
 var errExitCode = 255;
@@ -258,14 +267,6 @@ function writeSpecFromLead(lead) {
   delete exPatch.info['x-origin'];
 
   return writeSpec(source, format, exPatch);
-}
-
-class SpecError extends Error {
-  constructor(originError, context) {
-    super('');
-    originError.context = context;
-    this.stack = errorToString(originError);
-  }
 }
 
 function writeSpec(source, format, exPatch) {
