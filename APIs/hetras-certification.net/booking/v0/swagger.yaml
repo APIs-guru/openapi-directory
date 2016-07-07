@@ -110,6 +110,8 @@ paths:
           description: "The request failed to validate. Either a mandatory parameter was missing or no offers for \r\n            the requested stay details"
         '500':
           description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+        '503':
+          description: The server is currently unavailable. Please try later.
       summary: Get a list of offers for addon services for the specified guest stay details.
       tags:
         - Addons
@@ -117,6 +119,7 @@ paths:
     get:
       consumes: []
       deprecated: false
+      description: Read past occupancy and future availability for a specific hotel. You can also request the breakdown per room type.
       parameters:
         - description: Application identifier
           in: header
@@ -130,22 +133,26 @@ paths:
           required: true
           type: string
           x-data-threescale-name: app_keys
-        - format: int32
+        - description: Specifies the hotel id to request the availability for.
+          format: int32
           in: query
           name: hotelId
           required: true
           type: integer
-        - format: date-time
+        - description: Defines the first business day you would like to get availability numbers for.
+          format: date-time
           in: query
           name: from
           required: true
           type: string
-        - format: date-time
+        - description: "Defines the last business day you would like to get availability numbers for. The maximum time span between <i>from</i>´and <i>to</i>\r\n            is limited to 365 days."
+          format: date-time
           in: query
           name: to
           required: true
           type: string
-        - enum:
+        - description: "You can expand the room types breakdown per business day for the availibility numbers if need be.\r\n            is limited to 365 days."
+          enum:
             - RoomTypes
           in: query
           name: expand
@@ -176,9 +183,20 @@ paths:
         - text/json
       responses:
         '200':
-          description: OK
+          description: Returns a list of availabilities per business day.
           schema:
             $ref: '#/definitions/AvailabilityResponse'
+        '400':
+          description: Bad request. Request parameters syntactically erroneous.
+        '401':
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI.
+        '500':
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+      summary: Gets the availability and occupancy for a specific hotel and timespan.
       tags:
         - Availability
   /api/booking/v0/blocks:
@@ -278,6 +296,8 @@ paths:
           description: Not Found. The server has not found anything matching the Request-URI.
         '500':
           description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+        '503':
+          description: The server is currently unavailable. Please try later.
       summary: Gets a list of blocks.
       tags:
         - Blocks
@@ -397,6 +417,8 @@ paths:
           description: Not Found. The server has not found anything matching the Request-URI.
         '500':
           description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+        '503':
+          description: The server is currently unavailable. Please try later.
       summary: Gets the details for a specific block.
       tags:
         - Blocks
@@ -1167,6 +1189,8 @@ paths:
           description: "The request failed to validate. Either a mandatory parameter was missing or no offers for \r\n            the requested stay details"
         '500':
           description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+        '503':
+          description: The server is currently unavailable. Please try later.
       summary: Get a list of room offers for the specified guest stay details.
       tags:
         - Rates
@@ -1362,28 +1386,37 @@ definitions:
         description: Collection of links to related resources
         type: object
       available:
+        description: "The number of rooms that were originally available to sell. This is the the house count reduced by rooms set\r\n            to OutOfOrder but increased by the set overbooking"
         format: int32
         type: integer
       blocked:
         $ref: '#/definitions/Blocked'
+        description: The breakdown for rooms blocked
       day_use:
+        description: The number of day use reservations
         format: int32
         type: integer
       house_count:
+        description: The total count of physical rooms reduced by the number of rooms set to OutOfInventory
         format: int32
         type: integer
       maintenance:
         $ref: '#/definitions/Maintenance'
+        description: The breakdown for rooms under maintenance
       overbooking:
+        description: The manually set overbooking
         format: int32
         type: integer
       room_count:
+        description: The total count of physical rooms
         format: int32
         type: integer
       sold:
+        description: The count of rooms sold. It sums up the rooms sold through individual reservations plus rooms blocked definitely
         format: int32
         type: integer
       to_sell:
+        description: The number of rooms still available to sell. It is available reduced by the already sold rooms
         format: int32
         type: integer
     type: object
@@ -1399,13 +1432,16 @@ definitions:
         description: Collection of links to related resources
         type: object
       daily_availabilities:
+        description: The list of availability numbers per business day
         items:
           $ref: '#/definitions/DailyAvailability'
         type: array
       hotel_id:
+        description: The hotel id you requsted the availability numbers for
         format: int32
         type: integer
       hotel_name:
+        description: The name of the hotel you requsted the availability numbers for
         type: string
     type: object
   BaseResponse:
@@ -1603,12 +1639,15 @@ definitions:
   Blocked:
     properties:
       definite:
+        description: Number of rooms blocked defintely
         format: int32
         type: integer
       remaining:
+        description: Number of definitely blocked rooms not picked up
         format: int32
         type: integer
       tentative:
+        description: Number of rooms blocked tentatively
         format: int32
         type: integer
     type: object
@@ -1980,11 +2019,14 @@ definitions:
   DailyAvailability:
     properties:
       business_day:
+        description: The business day the following availability numbers are shown for
         format: date-time
         type: string
       house_level:
         $ref: '#/definitions/AvailabilityDetail'
+        description: The availability numbers for the house level
       room_types:
+        description: The availability numbers for all room types if the expand parameter is set appropriately
         items:
           $ref: '#/definitions/RoomAvailabilityDetail'
         type: array
@@ -2137,16 +2179,20 @@ definitions:
   GetAvailabilityRequest:
     properties:
       expand:
+        description: "You can expand the room types breakdown per business day for the availibility numbers if need be.\r\n            is limited to 365 days."
         enum:
           - RoomTypes
         type: string
       from:
+        description: Defines the first business day you would like to get availability numbers for.
         format: date-time
         type: string
       hotelId:
+        description: Specifies the hotel id to request the availability for.
         format: int32
         type: integer
       to:
+        description: "Defines the last business day you would like to get availability numbers for. The maximum time span between <i>from</i>´and <i>to</i>\r\n            is limited to 365 days."
         format: date-time
         type: string
     required:
@@ -2322,12 +2368,15 @@ definitions:
   Maintenance:
     properties:
       out_of_inventory:
+        description: Number of rooms set to OutOfInventory
         format: int32
         type: integer
       out_of_order:
+        description: Number of rooms set to OutOfOrder
         format: int32
         type: integer
       out_of_service:
+        description: Number of rooms set to OutOfService
         format: int32
         type: integer
     type: object
@@ -2814,32 +2863,43 @@ definitions:
         description: Collection of links to related resources
         type: object
       available:
+        description: "The number of rooms that were originally available to sell. This is the the house count reduced by rooms set\r\n            to OutOfOrder but increased by the set overbooking"
         format: int32
         type: integer
       blocked:
         $ref: '#/definitions/Blocked'
+        description: The breakdown for rooms blocked
       code:
+        description: Code of the room type
         type: string
       day_use:
+        description: The number of day use reservations
         format: int32
         type: integer
       default:
+        description: Specifies if the room type is the default room type of the hotel
         type: boolean
       house_count:
+        description: The total count of physical rooms reduced by the number of rooms set to OutOfInventory
         format: int32
         type: integer
       maintenance:
         $ref: '#/definitions/Maintenance'
+        description: The breakdown for rooms under maintenance
       overbooking:
+        description: The manually set overbooking
         format: int32
         type: integer
       room_count:
+        description: The total count of physical rooms
         format: int32
         type: integer
       sold:
+        description: The count of rooms sold. It sums up the rooms sold through individual reservations plus rooms blocked definitely
         format: int32
         type: integer
       to_sell:
+        description: The number of rooms still available to sell. It is available reduced by the already sold rooms
         format: int32
         type: integer
     type: object
