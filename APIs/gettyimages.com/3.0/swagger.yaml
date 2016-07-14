@@ -180,7 +180,55 @@ paths:
     get:
       consumes: []
       parameters:
-        - description: Authorization token required. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.
+        - description: Authorization token required. Used for applying content access restrictions. Use the OAuth2 Resource Owner Grant to auto-populate this value.
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+        - description: Request results starting at a page number (default is 1).
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Request number of boards to return in each page.
+          format: int32
+          in: query
+          name: page_size
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/board_list'
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+      summary: <b>***BETA***</b> Get all boards that the user participates in
+      tags:
+        - Boards
+    post:
+      consumes:
+        - application/json
+        - text/json
+      parameters:
+        - description: Name and description of board to create (name is required)
+          in: body
+          name: new_board
+          required: true
+          schema:
+            $ref: '#/definitions/board_info'
+        - description: Authorization token required. Used for applying content access restrictions. Use the OAuth2 Resource Owner Grant to auto-populate this value.
           in: header
           name: Authorization
           required: true
@@ -195,19 +243,23 @@ paths:
         - text/json
       responses:
         '200':
-          description: OK
+          description: No response was specified
           schema:
-            $ref: '#/definitions/board_list'
+            type: string
+        '201':
+          description: Created
+        '400':
+          description: BoardNameRequired
         '401':
           description: Unauthorized
-      summary: <b>***BETA***</b> Returns a list of boards for the authenticated user.
+      summary: <b>***BETA***</b> Create a new board
       tags:
         - Boards
   '/v3/boards/{board_id}':
     delete:
       consumes: []
       parameters:
-        - description: Authorization token required. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.
+        - description: Authorization token required. Used for applying content access restrictions. Use the OAuth2 Resource Owner Grant to auto-populate this value.
           in: header
           name: Authorization
           required: true
@@ -217,7 +269,7 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: ID of board to be deleted.
+        - description: A board id.
           in: path
           name: board_id
           required: true
@@ -227,18 +279,20 @@ paths:
         '200':
           description: No response was specified
         '204':
-          description: Board deleted
+          description: BoardDeleted
+        '400':
+          description: InvalidParameterValue
         '401':
           description: Unauthorized
         '404':
-          description: Board Deleted
-      summary: <b>***BETA***</b> Delete specified board.
+          description: BoardDeleted
+      summary: <b>***BETA***</b> Delete a board
       tags:
         - Boards
     get:
       consumes: []
       parameters:
-        - description: Authorization token required. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.
+        - description: Authorization token required. Used for applying content access restrictions. Use the OAuth2 Resource Owner Grant to auto-populate this value.
           in: header
           name: Authorization
           required: true
@@ -248,7 +302,7 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: Id of board to get details and assets for.
+        - description: A board id.
           in: path
           name: board_id
           required: true
@@ -261,19 +315,27 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/board_detail'
+        '400':
+          description: InvalidParameterValue
         '401':
           description: Unauthorized
         '404':
           description: BoardNotFound
-      summary: <b>***BETA***</b> Returns metadata for a specific board given its id.
+      summary: <b>***BETA***</b> Get assets and metadata for a specific board
       tags:
         - Boards
-  '/v3/boards/{board_id}/assets': {}
-  '/v3/boards/{board_id}/assets/{asset_id}':
-    delete:
-      consumes: []
+    put:
+      consumes:
+        - application/json
+        - text/json
       parameters:
-        - description: Authorization token required. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.
+        - description: Specify the new name and description for the board (name is required).
+          in: body
+          name: boardInfo
+          required: true
+          schema:
+            $ref: '#/definitions/board_info'
+        - description: Authorization token required. Used for applying content access restrictions. Use the OAuth2 Resource Owner Grant to auto-populate this value.
           in: header
           name: Authorization
           required: true
@@ -283,12 +345,7 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: ID of asset to be removed from the board.
-          in: path
-          name: asset_id
-          required: true
-          type: string
-        - description: ID of the board.
+        - description: A board id.
           in: path
           name: board_id
           required: true
@@ -298,20 +355,21 @@ paths:
         '200':
           description: No response was specified
         '204':
-          description: Asset removed from the board.
+          description: Updated
+        '400':
+          description: BoardNameRequired
         '401':
           description: Unauthorized
         '404':
-          description: Board Deleted
-      summary: <b>***BETA***</b> Remove specified asset from a board.
+          description: BoardNotFound
+      summary: <b>***BETA***</b> Update a board
       tags:
         - Boards
-    put:
-      consumes:
-        - application/json
-        - text/json
+  '/v3/boards/{board_id}/assets/{asset_id}':
+    delete:
+      consumes: []
       parameters:
-        - description: Authorization token required. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.
+        - description: Authorization token required. Used for applying content access restrictions. Use the OAuth2 Resource Owner Grant to auto-populate this value.
           in: header
           name: Authorization
           required: true
@@ -321,12 +379,52 @@ paths:
           name: Accept-Language
           required: false
           type: string
-        - description: 'Id of the asset to add. If it is already in the board''s asset collection, no action taken.'
+        - description: An asset id.
           in: path
           name: asset_id
           required: true
           type: string
-        - description: Id of board to add asset to.
+        - description: A board id.
+          in: path
+          name: board_id
+          required: true
+          type: string
+      produces: []
+      responses:
+        '200':
+          description: No response was specified
+        '204':
+          description: AssetRemovedFromBoard
+        '400':
+          description: InvalidParameterValue
+        '401':
+          description: Unauthorized
+        '404':
+          description: BoardDeleted
+      summary: <b>***BETA***</b> Remove an asset from a board
+      tags:
+        - Boards
+    put:
+      consumes:
+        - application/json
+        - text/json
+      parameters:
+        - description: Authorization token required. Used for applying content access restrictions. Use the OAuth2 Resource Owner Grant to auto-populate this value.
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+        - description: 'An asset id. If it is already in the board''s asset collection, no action is taken.'
+          in: path
+          name: asset_id
+          required: true
+          type: string
+        - description: A board id.
           in: path
           name: board_id
           required: true
@@ -341,13 +439,15 @@ paths:
             type: string
         '201':
           description: Created
+        '400':
+          description: InvalidParameterValue
         '401':
           description: Unauthorized
         '403':
-          description: asset not found
+          description: AssetNotFound
         '404':
           description: BoardNotFound
-      summary: <b>***BETA***</b> Adds asset to board.
+      summary: <b>***BETA***</b> Add an asset to a board
       tags:
         - Boards
   /v3/collections:
@@ -4175,15 +4275,22 @@ definitions:
       name:
         type: string
     type: object
+  board_info:
+    properties:
+      description:
+        type: string
+      name:
+        type: string
+    type: object
   board_list:
     properties:
+      board_count:
+        format: int32
+        type: integer
       boards:
         items:
           $ref: '#/definitions/board'
         type: array
-      result_count:
-        format: int32
-        type: integer
     type: object
   collection:
     properties:

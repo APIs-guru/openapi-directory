@@ -296,6 +296,57 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
+  '/v1beta1/{projectName}/events:report':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Report an individual error event.
+
+        This endpoint accepts <strong>either</strong> an OAuth token,
+        <strong>or</strong> an
+        <a href="https://support.google.com/cloud/answer/6158862">API key</a>
+        for authentication. To use an API key, append it to the URL as the value of
+        a `key` parameter. For example:
+        <pre>POST https://clouderrorreporting.googleapis.com/v1beta1/projects/example-project/events:report?key=123ABC456</pre>
+      operationId: clouderrorreporting.projects.events.report
+      parameters:
+        - description: |-
+            [Required] The resource name of the Google Cloud Platform project. Written
+            as `projects/` plus the
+            [Google Cloud Platform project ID](https://support.google.com/cloud/answer/6158840).
+            Example: `projects/my-project-123`.
+          in: path
+          name: projectName
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ReportedErrorEvent'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ReportErrorEventResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
   '/v1beta1/{projectName}/groupStats':
     get:
       description: Lists the specified groups.
@@ -630,6 +681,36 @@ definitions:
           Pass this token, along with the same query parameters as the first
           request, to view the next page of results.
         type: string
+    type: object
+  ReportErrorEventResponse:
+    description: |-
+      Response for reporting an individual error event.
+      Data may be added to this message in the future.
+    properties: {}
+    type: object
+  ReportedErrorEvent:
+    description: An error event which is reported to the Error Reporting system.
+    properties:
+      context:
+        $ref: '#/definitions/ErrorContext'
+        description: '[Optional] A description of the context in which the error occurred.'
+      eventTime:
+        description: |-
+          [Optional] Time when the event occurred.
+          If not provided, the time when the event was received by the
+          Error Reporting system will be used.
+        format: google-datetime
+        type: string
+      message:
+        description: |-
+          [Required] A message describing the error. The message can contain an
+          exception stack in one of the supported programming languages and formats.
+          In that case, the message is parsed and detailed exception information
+          is returned when retrieving the error event again.
+        type: string
+      serviceContext:
+        $ref: '#/definitions/ServiceContext'
+        description: '[Required] The service context in which this error has occurred.'
     type: object
   ServiceContext:
     description: |-

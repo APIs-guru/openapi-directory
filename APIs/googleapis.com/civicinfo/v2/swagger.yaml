@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: An API for accessing civic information.
+  description: 'Provides polling places, early vote locations, contest data, election officials, and government representatives for U.S. residential addresses.'
   title: Google Civic Information
   version: v2
   x-apiClientRegistration:
@@ -304,6 +304,10 @@ definitions:
       absenteeVotingInfoUrl:
         description: A URL provided by this administrative body for information on absentee voting.
         type: string
+      addressLines:
+        items:
+          type: string
+        type: array
       ballotInfoUrl:
         description: A URL provided by this administrative body to give contest information to the voter.
         type: string

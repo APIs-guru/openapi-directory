@@ -158,6 +158,21 @@ definitions:
         format: int64
         type: integer
     type: object
+  CostMatrix:
+    properties:
+      profile:
+        description: vehicle profile or empty if catch all fallback
+        type: string
+      type:
+        description: 'type of cost matrix, currently default or google are supported'
+        enum:
+          - default
+          - google
+        type: string
+      url:
+        description: URL of matrix service
+        type: string
+    type: object
   JobId:
     properties:
       job_id:
@@ -199,6 +214,11 @@ definitions:
     properties:
       algorithm:
         $ref: '#/definitions/Algorithm'
+      cost_matrices:
+        description: An array of cost matrices
+        items:
+          $ref: '#/definitions/CostMatrix'
+        type: array
       objectives:
         description: An array of objectives
         items:

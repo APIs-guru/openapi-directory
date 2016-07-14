@@ -1043,7 +1043,7 @@ paths:
       tags:
         - domains
     get:
-      description: Retrives a domain of the customer.
+      description: Retrieves a domain of the customer.
       operationId: directory.domains.get
       parameters:
         - description: Immutable id of the Google Apps account.
@@ -1739,7 +1739,7 @@ paths:
         - roles
   '/customers/{customerKey}':
     get:
-      description: Retrives a customer.
+      description: Retrieves a customer.
       operationId: directory.customers.get
       parameters:
         - description: Id of the customer to be retrieved

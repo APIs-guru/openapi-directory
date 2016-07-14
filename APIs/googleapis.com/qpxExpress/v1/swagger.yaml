@@ -635,6 +635,9 @@ definitions:
         description: 'The number of solutions to return, maximum 500.'
         format: int32
         type: integer
+      ticketingCountry:
+        description: IATA country code representing the point of ticketing.
+        type: string
     type: object
   TripOptionsResponse:
     description: A QPX Express search response.

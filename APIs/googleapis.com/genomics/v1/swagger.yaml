@@ -1028,7 +1028,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
     post:
-      description: 'Exports a read group set to a BAM file in Google Cloud Storage. For the definitions of read group sets and other genomics resources, see [Fundamentals of Google Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics) Note that currently there may be some differences between exported BAM files and the original BAM file at the time of import. See [ImportReadGroupSets](google.genomics.v1.ReadServiceV1.ImportReadGroupSets) for caveats.'
+      description: 'Exports a read group set to a BAM file in Google Cloud Storage. For the definitions of read group sets and other genomics resources, see [Fundamentals of Google Genomics](https://cloud.google.com/genomics/fundamentals-of-google-genomics) Note that currently there may be some differences between exported BAM files and the original BAM file at the time of import. See ImportReadGroupSets for caveats.'
       operationId: genomics.readgroupsets.export
       parameters:
         - description: Required. The ID of the read group set to export. The caller must have READ access to this read group set.
@@ -2556,7 +2556,7 @@ definitions:
         description: The error result of the operation in case of failure.
       metadata:
         additionalProperties:
-          description: Properties of the object. Contains field @ype with type URL.
+          description: Properties of the object. Contains field @type with type URL.
         description: An OperationMetadata object. This will always be returned with the Operation.
         type: object
       name:
@@ -2564,7 +2564,7 @@ definitions:
         type: string
       response:
         additionalProperties:
-          description: Properties of the object. Contains field @ype with type URL.
+          description: Properties of the object. Contains field @type with type URL.
         description: 'If importing ReadGroupSets, an ImportReadGroupSetsResponse is returned. If importing Variants, an ImportVariantsResponse is returned. For exports, an empty response is returned.'
         type: object
     type: object
@@ -2603,12 +2603,12 @@ definitions:
         type: string
       request:
         additionalProperties:
-          description: Properties of the object. Contains field @ype with type URL.
+          description: Properties of the object. Contains field @type with type URL.
         description: 'The original request that started the operation. Note that this will be in current version of the API. If the operation was started with v1beta2 API and a GetOperation is performed on v1 API, a v1 request will be returned.'
         type: object
       runtimeMetadata:
         additionalProperties:
-          description: Properties of the object. Contains field @ype with type URL.
+          description: Properties of the object. Contains field @type with type URL.
         description: Runtime metadata on this Operation.
         type: object
       startTime:
@@ -3247,7 +3247,7 @@ definitions:
         description: A list of messages that carry the error details. There will be a common set of message types for APIs to use.
         items:
           additionalProperties:
-            description: Properties of the object. Contains field @ype with type URL.
+            description: Properties of the object. Contains field @type with type URL.
           type: object
         type: array
       message:

@@ -4403,9 +4403,6 @@ paths:
         - in: query
           name: '{field_name}'
           type: string
-        - in: query
-          name: '%7Bfield_name%7D'
-          type: string
       produces:
         - application/json
       responses:
@@ -8392,6 +8389,564 @@ paths:
       tags:
         - API Key Permissions
     parameters: []
+  /senders:
+    get:
+      consumes: []
+      description: |-
+        **This endpoint allows you to retrieve a list of all sender identities that have been created for your account.**
+
+        Sender Identities are required to be verified before use. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
+      operationId: GET_v3-senders
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              result:
+                - address: 123 Elm St.
+                  address_2: Apt. 456
+                  city: Denver
+                  country: United States
+                  created_at: 1449872165
+                  from:
+                    email: from@example.com
+                    name: Example INC
+                  id: 1
+                  locked: false
+                  nickname: My Sender ID
+                  reply_to:
+                    email: replyto@example.com
+                    name: Example INC
+                  state: Colorado
+                  updated_at: 1449872165
+                  verified: true
+                  zip: '80202'
+          schema:
+            properties:
+              result:
+                items:
+                  $ref: '#/definitions/senderID'
+                type: array
+            type: object
+      security:
+        - Authorization: []
+      summary: Get all Sender Identities
+    parameters: []
+    post:
+      consumes:
+        - application/json
+      description: |-
+        **This endpoint allows you to create a new sender identity.**
+
+        *You may create up to 100 unique sender identities.*
+
+        Sender Identities are required to be verified before use. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
+      operationId: POST_senders
+      parameters:
+        - in: body
+          name: body
+          schema:
+            example:
+              address: 123 Elm St.
+              address_2: Apt. 456
+              city: Denver
+              country: United States
+              from:
+                email: from@example.com
+                name: Example INC
+              nickname: My Sender ID
+              reply_to:
+                email: replyto@example.com
+                name: Example INC
+              state: Colorado
+              zip: '80202'
+            properties:
+              address:
+                description: The physical address of the sender identity.
+                type: string
+              address_2:
+                description: Additional sender identity address information.
+                type: string
+              city:
+                description: The city of the sender identity.
+                type: string
+              country:
+                description: The country of the sender identity.
+                type: string
+              from:
+                properties:
+                  email:
+                    description: This is where the email will appear to originate from for your recipient
+                    type: string
+                  name:
+                    description: This is the name appended to the from email field. IE - Your name or company name.
+                    type: string
+                required:
+                  - email
+                type: object
+              nickname:
+                description: A nickname for the sender identity. Not used for sending.
+                type: string
+              reply_to:
+                properties:
+                  email:
+                    description: This is the email that your recipient will reply to.
+                    type: string
+                  name:
+                    description: This is the name appended to the reply to email field. IE - Your name or company name.
+                    type: string
+                required:
+                  - email
+                type: object
+              state:
+                description: The state of the sender identity.
+                type: string
+              zip:
+                description: The zipcode of the sender identity.
+                type: string
+            required:
+              - nickname
+              - address
+              - city
+              - country
+            type: object
+      produces:
+        - application/json
+      responses:
+        '201':
+          description: ''
+          examples:
+            application/json:
+              address: 123 Elm St.
+              address_2: Apt. 456
+              city: Denver
+              country: United States
+              created_at: 1449872165
+              from:
+                email: from@example.com
+                name: Example INC
+              id: 1
+              locked: false
+              nickname: My Sender ID
+              reply_to:
+                email: replyto@example.com
+                name: Example INC
+              state: Colorado
+              updated_at: 1449872165
+              verified: true
+              zip: '80202'
+          schema:
+            $ref: '#/definitions/senderID'
+        '400':
+          description: ''
+          examples:
+            application/json:
+              errors:
+                - field: ''
+                  message: The JSON you have submitted cannot be parsed.
+                - field: ''
+                  message: You've reached your limit of 100 sender identities. Please delete one or more and try again.
+                - field: nickname
+                  message: nickname is required.
+                - field: nickname
+                  message: You already have a sender identity with the same nickname.
+                - field: from_name
+                  message: from_name is required.
+                - field: from_email
+                  message: from_email is required.
+                - field: from_email
+                  message: From email is not a valid email address.
+                - field: reply_to
+                  message: reply_to is required.
+                - field: reply_to
+                  message: Reply to email is not a valid email address.
+                - field: address
+                  message: address is required.
+                - field: city
+                  message: city is required.
+                - field: country
+                  message: country is required.
+          schema:
+            properties:
+              errors:
+                items:
+                  properties:
+                    field:
+                      type: string
+                    message:
+                      type: string
+                  type: object
+                type: array
+            type: object
+      security:
+        - Authorization: []
+      summary: Create a Sender Identity
+      tags:
+        - Sender Identities API
+  '/senders/{sender_id}':
+    delete:
+      consumes: []
+      description: |-
+        **This endoint allows you to delete one of your sender identities.**
+
+        Sender Identities are required to be verified before use. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
+      operationId: DELETE_v3-senders-sender_id
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '204':
+          description: ''
+          schema:
+            properties: {}
+            type: object
+        '403':
+          description: ''
+          examples:
+            application/json:
+              errors:
+                - field: locked
+                  message: You may only delete a sender identity when it is unlocked.
+          schema:
+            properties:
+              errors:
+                items:
+                  properties:
+                    field:
+                      type: string
+                    message:
+                      type: string
+                  type: object
+                type: array
+            type: object
+        '404':
+          description: ''
+          examples:
+            application/json:
+              errors:
+                - field: id
+                  message: resource not found
+          schema:
+            properties:
+              errors:
+                items:
+                  properties:
+                    field:
+                      type: string
+                    message:
+                      type: string
+                  type: object
+                type: array
+            type: object
+      security:
+        - Authorization: []
+      summary: Delete a Sender Identity
+    get:
+      consumes: []
+      description: |-
+        **This endpoint allows you to retrieve a specific sender identity.**
+
+        Sender Identities are required to be verified before use. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
+      operationId: GET_v3-senders-sender_id
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              address: 123 Elm St.
+              address_2: Apt. 456
+              city: Denver
+              country: United States
+              created_at: 1449872165
+              from:
+                email: from@example.com
+                name: Example INC
+              id: 1
+              locked: false
+              nickname: My Sender ID
+              reply_to:
+                email: replyto@example.com
+                name: Example INC
+              state: Colorado
+              updated_at: 1449872165
+              verified: true
+              zip: '80202'
+          schema:
+            $ref: '#/definitions/senderID'
+        '404':
+          description: ''
+          examples:
+            application/json:
+              errors:
+                - field: id
+                  message: resource not found
+          schema:
+            properties:
+              errors:
+                items:
+                  properties:
+                    field:
+                      type: string
+                    message:
+                      type: string
+                  type: object
+                type: array
+            type: object
+      security:
+        - Authorization: []
+      summary: View a Sender Identity
+    parameters:
+      - description: The ID of the sender identity that you want to update.
+        in: path
+        name: sender_id
+        required: true
+        type: integer
+    patch:
+      consumes:
+        - application/json
+      description: |-
+        **This endpoint allows you to update a sender identity.**
+
+        Updates to `from.email` require re-verification. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
+
+        Partial updates are allowed, but fields that are marked as "required" in the POST (create) endpoint must not be nil if that field is included in the PATCH request.
+      operationId: PATCH_v3-senders-sender_id
+      parameters:
+        - in: body
+          name: body
+          schema:
+            example:
+              address: 123 Elm St.
+              address_2: Apt. 456
+              city: Denver
+              country: United States
+              from:
+                email: from@example.com
+                name: Example INC
+              nickname: My Sender ID
+              reply_to:
+                email: replyto@example.com
+                name: Example INC
+              state: Colorado
+              zip: '80202'
+            properties:
+              address:
+                description: The physical address of the sender identity.
+                type: string
+              address_2:
+                description: Additional sender identity address information.
+                type: string
+              city:
+                description: The city of the sender identity.
+                type: string
+              country:
+                description: The country of the sender identity.
+                type: string
+              from:
+                properties:
+                  email:
+                    description: This is where the email will appear to originate from for your recipient
+                    type: string
+                  name:
+                    description: This is the name appended to the from email field. IE - Your name or company name.
+                    type: string
+                type: object
+              nickname:
+                description: A nickname for the sender identity. Not used for sending.
+                type: string
+              reply_to:
+                properties:
+                  email:
+                    description: This is the email that your recipient will reply to.
+                    type: string
+                  name:
+                    description: This is the name appended to the reply to email field. IE - Your name or company name.
+                    type: string
+                type: object
+              state:
+                description: The state of the sender identity.
+                type: string
+              zip:
+                description: The zipcode of the sender identity.
+                type: string
+            type: object
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              address: 123 Elm St.
+              address_2: Apt. 456
+              city: Denver
+              country: United States
+              created_at: 1449872165
+              from:
+                email: from@example.com
+                name: Example INC
+              id: 1
+              locked: false
+              nickname: My Sender ID
+              reply_to:
+                email: replyto@example.com
+                name: Example INC
+              state: Colorado
+              updated_at: 1449872165
+              verified: true
+              zip: '80202'
+          schema:
+            $ref: '#/definitions/senderID'
+        '400':
+          description: ''
+          examples:
+            application/json:
+              errors:
+                - field: ''
+                  message: The JSON you have submitted cannot be parsed.
+                - field: nickname
+                  message: nickname is required.
+                - field: nickname
+                  message: You already have a sender identity with the same nickname.
+                - field: from_name
+                  message: from_name is required.
+                - field: from_email
+                  message: from_email is required.
+                - field: from_email
+                  message: From email is not a valid email address.
+                - field: reply_to
+                  message: reply_to is required.
+                - field: reply_to
+                  message: Reply to email is not a valid email address.
+                - field: address
+                  message: address is required.
+                - field: city
+                  message: city is required.
+                - field: country
+                  message: country is required.
+          schema:
+            properties:
+              errors:
+                items:
+                  properties:
+                    field:
+                      type: string
+                    message:
+                      type: string
+                  type: object
+                type: array
+            type: object
+        '403':
+          description: ''
+          examples:
+            application/json:
+              errors:
+                - field: locked
+                  message: You may only update a sender identity when it is unlocked.
+          schema:
+            properties:
+              errors:
+                items:
+                  properties:
+                    field:
+                      type: string
+                    message:
+                      type: string
+                  type: object
+                type: array
+            type: object
+        '404':
+          description: ''
+          examples:
+            application/json:
+              errors:
+                - field: id
+                  message: resource not found
+          schema:
+            properties:
+              errors:
+                items:
+                  properties:
+                    field:
+                      type: string
+                    message:
+                      type: string
+                  type: object
+                type: array
+            type: object
+      security:
+        - Authorization: []
+      summary: Update a Sender Identity
+  '/senders/{sender_id}/resend_verification':
+    parameters:
+      - description: The ID of the sender identity for which you would like to resend a verification email.
+        in: path
+        name: sender_id
+        required: true
+        type: integer
+    post:
+      consumes: []
+      description: |-
+        **This enpdoint allows you to resend a sender identity verification email.**
+
+        Sender Identities are required to be verified before use. If your domain has been whitelabeled it will auto verify on creation. Otherwise an email will be sent to the `from.email`.
+      operationId: POST_v3-senders-sender_id-resend_verification
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '204':
+          description: ''
+          schema:
+            properties: {}
+            type: object
+        '400':
+          description: ''
+          examples:
+            application/json:
+              errors:
+                - field: ''
+                  message: The Sender Identity is already verified.  No email sent.
+          schema:
+            properties:
+              errors:
+                items:
+                  properties:
+                    field:
+                      type: string
+                    message:
+                      type: string
+                  type: object
+                type: array
+            type: object
+        '404':
+          description: ''
+          examples:
+            application/json:
+              errors:
+                - field: id
+                  message: resource not found
+          schema:
+            properties:
+              errors:
+                items:
+                  properties:
+                    field:
+                      type: string
+                    message:
+                      type: string
+                  type: object
+                type: array
+            type: object
+      security:
+        - Authorization: []
+      summary: Resend Sender Identity Verification
   /stats:
     get:
       consumes: []
@@ -15653,6 +16208,89 @@ definitions:
     required:
       - enabled
       - license_key
+    type: object
+  senderID:
+    example:
+      address: 123 Elm St.
+      address_2: Apt. 456
+      city: Denver
+      country: United States
+      created_at: 1449872165
+      from:
+        email: from@example.com
+        name: Example INC
+      id: 1
+      locked: false
+      nickname: My Sender ID
+      reply_to:
+        email: replyto@example.com
+        name: Example INC
+      state: Colorado
+      updated_at: 1449872165
+      verified: true
+      zip: '80202'
+    properties:
+      address:
+        description: The physical address of the sender identity.
+        type: string
+      address_2:
+        description: Additional sender identity address information.
+        type: string
+      city:
+        description: The city of the sender identity.
+        type: string
+      country:
+        description: The country of the sender identity.
+        type: string
+      created_at:
+        description: The time the sender identity was created.
+        type: integer
+      from:
+        properties:
+          email:
+            description: This is where the email will appear to originate from for your recipient
+            type: string
+          name:
+            description: This is the name appended to the from email field. IE - Your name or company name.
+            type: string
+        required:
+          - email
+        type: object
+      id:
+        description: The unique identifier of the sender identity.
+        type: integer
+      locked:
+        description: 'A sender identity is locked when it is associated to a campaign in the Draft, Scheduled, or In Progress status. You cannot update or delete a locked sender identity.'
+        type: boolean
+      nickname:
+        description: A nickname for the sender identity. Not used for sending.
+        type: string
+      reply_to:
+        properties:
+          email:
+            description: This is the email that your recipient will reply to.
+            type: string
+          name:
+            description: This is the name appended to the reply to email field. IE - Your name or company name.
+            type: string
+        type: object
+      state:
+        description: The state of the sender identity.
+        type: string
+      updated_at:
+        description: The time the sender identity was last updated.
+        type: integer
+      verified:
+        description: If the sender identity is verified or not. Only verified sender identities can be used to send email.
+        type: boolean
+      zip:
+        description: The zipcode of the sender identity.
+        type: string
+    required:
+      - nickname
+      - address
+      - city
+      - country
     type: object
   stats:
     items:

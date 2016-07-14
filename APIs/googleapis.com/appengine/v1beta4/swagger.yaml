@@ -103,6 +103,39 @@ parameters:
 tags:
   - name: apps
 paths:
+  /v1beta4/apps:
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: 'Creates an App Engine application for a Google Cloud Platform project. This requires a project that excludes an App Engine application. For details about creating a project without an application, see the [Google Cloud Resource Manager create project topic](https://cloud.google.com/resource-manager/docs/creating-project).'
+      operationId: appengine.apps.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Application'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - apps
   '/v1beta4/apps/{appsId}':
     get:
       description: Gets information about an application.
@@ -122,6 +155,91 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Application'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - apps
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+  '/v1beta4/apps/{appsId}/locations':
+    get:
+      description: Lists information about the supported locations for this service.
+      operationId: appengine.apps.locations.list
+      parameters:
+        - description: 'Part of `name`. The resource that owns the locations collection, if applicable.'
+          in: path
+          name: appsId
+          required: true
+          type: string
+        - description: The standard list filter.
+          in: query
+          name: filter
+          type: string
+        - description: The standard list page size.
+          in: query
+          name: pageSize
+          type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListLocationsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - apps
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+  '/v1beta4/apps/{appsId}/locations/{locationsId}':
+    get:
+      description: Get information about a location.
+      operationId: appengine.apps.locations.get
+      parameters:
+        - description: Part of `name`. Resource name for the location.
+          in: path
+          name: appsId
+          required: true
+          type: string
+        - description: Part of `name`. See documentation of `appsId`.
+          in: path
+          name: locationsId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Location'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -533,6 +651,142 @@ paths:
       - $ref: '#/parameters/upload_protocol'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
+  '/v1beta4/apps/{appsId}/modules/{modulesId}/versions/{versionsId}/instances/{instancesId}':
+    delete:
+      description: Stops a running instance.
+      operationId: appengine.apps.modules.versions.instances.delete
+      parameters:
+        - description: 'Part of `name`. Name of the resource requested. For example: "apps/myapp/modules/default/versions/v1/instances/instance-1".'
+          in: path
+          name: appsId
+          required: true
+          type: string
+        - description: Part of `name`. See documentation of `appsId`.
+          in: path
+          name: modulesId
+          required: true
+          type: string
+        - description: Part of `name`. See documentation of `appsId`.
+          in: path
+          name: versionsId
+          required: true
+          type: string
+        - description: Part of `name`. See documentation of `appsId`.
+          in: path
+          name: instancesId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - apps
+    get:
+      description: Gets instance information.
+      operationId: appengine.apps.modules.versions.instances.get
+      parameters:
+        - description: 'Part of `name`. Name of the resource requested. For example: "apps/myapp/modules/default/versions/v1/instances/instance-1".'
+          in: path
+          name: appsId
+          required: true
+          type: string
+        - description: Part of `name`. See documentation of `appsId`.
+          in: path
+          name: modulesId
+          required: true
+          type: string
+        - description: Part of `name`. See documentation of `appsId`.
+          in: path
+          name: versionsId
+          required: true
+          type: string
+        - description: Part of `name`. See documentation of `appsId`.
+          in: path
+          name: instancesId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Instance'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - apps
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+  '/v1beta4/apps/{appsId}/modules/{modulesId}/versions/{versionsId}/instances/{instancesId}:debug':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: 'Enable debugging of this VM instance. This call allows you to SSH to the VM. While the VM is in debug mode, it continues to serve live traffic. After you''re done debugging an instance, delete the instance; the system creates a new instance when needed. You can''t debug a non-VM instance.'
+      operationId: appengine.apps.modules.versions.instances.debug
+      parameters:
+        - description: 'Part of `name`. Name of the resource requested. For example: "apps/myapp/modules/default/versions/v1/instances/instance-1".'
+          in: path
+          name: appsId
+          required: true
+          type: string
+        - description: Part of `name`. See documentation of `appsId`.
+          in: path
+          name: modulesId
+          required: true
+          type: string
+        - description: Part of `name`. See documentation of `appsId`.
+          in: path
+          name: versionsId
+          required: true
+          type: string
+        - description: Part of `name`. See documentation of `appsId`.
+          in: path
+          name: instancesId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/DebugInstanceRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - apps
   '/v1beta4/apps/{appsId}/operations':
     get:
       description: 'Lists operations that match the specified filter in the request. If the server doesn''t support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding below allows API services to override the binding to use different resource name schemes, such as `users/*/operations`.'
@@ -684,13 +938,13 @@ definitions:
           $ref: '#/definitions/UrlDispatchRule'
         type: array
       id:
-        description: 'The relative name/path of the application. Example: "myapp".'
+        description: 'The identifier of the Application resource. This identifier is equivalent to the project ID of the Google Cloud Platform project where you want to deploy your application. Example: "myapp".'
         type: string
       location:
         description: 'The location from which the application will be run. Application instances will run out of data centers in the chosen location and all of the application''s End User Content will be stored at rest. The default is "us-central". Choices are: "us-central" - Central US "europe-west" - Western Europe "us-east1" - Eastern US'
         type: string
       name:
-        description: 'The full path to the application in the API. Example: "apps/myapp". @OutputOnly'
+        description: 'The full path to the Application resource in the API. Example: "apps/myapp". @OutputOnly'
         type: string
     type: object
   AutomaticScaling:
@@ -766,6 +1020,9 @@ definitions:
         description: Target (0-1) CPU utilization ratio to maintain when scaling.
         format: double
         type: number
+    type: object
+  DebugInstanceRequest:
+    description: Request message for `Instances.DebugInstance`.
     type: object
   Deployment:
     description: Code and application artifacts used to deploy a version to App Engine.
@@ -944,6 +1201,18 @@ definitions:
         description: Continuation token for fetching the next page of results.
         type: string
     type: object
+  ListLocationsResponse:
+    description: The response message for LocationService.ListLocations.
+    properties:
+      locations:
+        description: A list of locations that matches the specified filter in the request.
+        items:
+          $ref: '#/definitions/Location'
+        type: array
+      nextPageToken:
+        description: The standard List next-page token.
+        type: string
+    type: object
   ListModulesResponse:
     description: Response message for `Modules.ListModules`.
     properties:
@@ -979,6 +1248,23 @@ definitions:
         items:
           $ref: '#/definitions/Version'
         type: array
+    type: object
+  Location:
+    description: A resource that represents Google Cloud Platform location.
+    properties:
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Cross-service attributes for the location. For example {"cloud.googleapis.com/region": "us-east1"}'
+        type: object
+      metadata:
+        additionalProperties:
+          description: Properties of the object. Contains field @ype with type URL.
+        description: Service-specific metadata. For example the available capacity at the given location.
+        type: object
+      name:
+        description: 'Resource name for the location, which may vary between implementations. Example: `"projects/example-project/locations/us-east1"`'
+        type: string
     type: object
   LocationMetadata:
     description: Metadata for the given google.cloud.location.Location.

@@ -790,7 +790,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/enterprises/{enterpriseId}/products':
     get:
-      description: Finds approved products that match a query.
+      description: 'Finds approved products that match a query, or all approved products if there is no query.'
       operationId: androidenterprise.products.list
       parameters:
         - description: The ID of the enterprise.
@@ -810,7 +810,7 @@ paths:
           in: query
           name: maxResults
           type: integer
-        - description: 'The search query as typed in the Google Play Store search box. If omitted, all approved apps will be returned (using the pagination parameters).'
+        - description: 'The search query as typed in the Google Play Store search box. If omitted, all approved apps will be returned (using the pagination parameters), including apps that are not available in the store (e.g. unpublished apps).'
           in: query
           name: query
           type: string
@@ -3105,7 +3105,7 @@ definitions:
         description: 'A string of the form app:<package name>. For example, app:com.google.android.gm represents the Gmail app.'
         type: string
       productPricing:
-        description: 'Whether this product is free, free with in-app purchases, or paid.'
+        description: 'Whether this product is free, free with in-app purchases, or paid. If the pricing is unknown, this means the product is not generally available anymore (even though it might still be available to people who own it).'
         type: string
       requiresContainerApp:
         description: Whether this app can only be installed on devices using the Android for Work container app.

@@ -2311,6 +2311,88 @@ paths:
       summary: Create or update a Gateway Account with predefined ID
       tags:
         - Gateway Accounts
+  /histograms/transactions:
+    get:
+      description: |
+        Get Transaction histogram report data.
+      parameters:
+        - description: Report start day
+          format: date-time
+          in: query
+          name: periodStart
+          required: true
+          type: string
+        - description: Report end day
+          format: date-time
+          in: query
+          name: periodEnd
+          required: true
+          type: string
+        - description: Report aggregation field
+          enum:
+            - website
+            - currency
+            - bin
+            - rebillNumber
+            - transactionResult
+            - transactionType
+            - gatewayAccount
+            - leadsAffiliate
+            - leadsCampaign
+            - leadsContent
+            - leadsMedium
+            - leadsSalesAgent
+            - leadsSource
+            - leadsSubAffiliate
+            - leadsTerm
+          in: query
+          name: aggregationField
+          required: true
+          type: string
+        - description: Report aggregation period
+          enum:
+            - hour
+            - day
+            - month
+          in: query
+          name: aggregationPeriod
+          required: true
+          type: string
+        - description: Report metric
+          enum:
+            - ApprovalThroughput
+            - AuthApprovalThroughput
+            - AvgSalesPrice
+            - Refunds
+            - RefundCount
+            - Sales
+            - SalesCount
+          in: query
+          name: metric
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Transaction report was retrieved successfully.
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/HistogramData'
+      summary: Get Transaction histogram report data
+      tags:
+        - Transaction
+        - Histogram
+        - Report
   /invoices:
     get:
       description: |
@@ -4311,6 +4393,381 @@ paths:
       summary: Cancel a scheduled payment
       tags:
         - Payments
+  /reports/disputes:
+    get:
+      description: |
+        Retrieve a disputes report
+      parameters:
+        - description: Report will be aggregated by this field
+          enum:
+            - website
+            - processor
+            - currency
+            - bin
+            - country
+            - rebillNumber
+            - dunningIndex
+            - gatewayAccount
+          in: query
+          name: aggregationField
+          required: true
+          type: string
+        - description: Report month
+          in: query
+          name: periodMonth
+          required: true
+          type: string
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+      responses:
+        '200':
+          description: Report was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/ReportDisputes'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a disputes report
+      tags:
+        - Report
+        - ReportDisputes
+  /reports/dunning:
+    get:
+      description: |
+        Retrieve a dunning report
+      parameters:
+        - description: Report start date
+          format: date-time
+          in: query
+          name: periodStart
+          required: true
+          type: string
+        - description: Report end date
+          format: date-time
+          in: query
+          name: periodEnd
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Report was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/ReportDunning'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a dunning report
+      tags:
+        - Report
+        - ReportDunning
+  /reports/retention-percentage:
+    get:
+      description: |
+        Retrieve a retention percentage report
+      parameters:
+        - description: Report aggregation field
+          enum:
+            - day
+            - month
+            - quarter
+            - year
+          in: query
+          name: aggregationField
+          required: true
+          type: string
+        - description: Report aggregation period
+          enum:
+            - day
+            - month
+            - quarter
+            - year
+            - cycle
+          in: query
+          name: aggregationPeriod
+          required: true
+          type: string
+        - description: If to include switched subscriptions
+          in: query
+          name: includeSwitchedSubscriptions
+          type: string
+        - description: Report start date
+          in: query
+          name: periodStart
+          required: true
+          type: string
+        - description: Report end date
+          in: query
+          name: periodEnd
+          required: true
+          type: string
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+      responses:
+        '200':
+          description: Report was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/HistogramData'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a retention percentage report
+      tags:
+        - Report
+        - ReportRetention
+  /reports/retention-value:
+    get:
+      description: |
+        Retrieve a subscribers report
+      parameters:
+        - description: Report aggregation field
+          enum:
+            - day
+            - month
+            - quarter
+            - year
+            - leadsSource
+            - leadsMedium
+            - leadsCampaign
+            - leadsContent
+            - leadsTerm
+            - leadsAffiliate
+            - leadsSubAffiliate
+            - leadsSalesAgent
+          in: query
+          name: aggregationField
+          required: true
+          type: string
+        - description: Report aggregation period
+          enum:
+            - day
+            - month
+            - quarter
+            - year
+            - cycle
+          in: query
+          name: aggregationPeriod
+          required: true
+          type: string
+        - description: If to include refunds
+          in: query
+          name: includeRefunds
+          type: string
+        - description: If to include disputes
+          in: query
+          name: includeDisputes
+          type: string
+        - description: Report start date
+          in: query
+          name: periodStart
+          required: true
+          type: string
+        - description: Report end date
+          in: query
+          name: periodEnd
+          required: true
+          type: string
+        - description: Lead Source mode
+          enum:
+            - last
+            - all
+          in: query
+          name: leadSourceMode
+          type: string
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+      responses:
+        '200':
+          description: Report was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/HistogramData'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a subscribers report
+      tags:
+        - Report
+        - ReportRetention
+  /reports/statistics:
+    get:
+      description: |
+        Retrieve a statistics report
+      responses:
+        '200':
+          description: Report was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/ReportStatistics'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a statistics report
+      tags:
+        - Report
+        - ReportStatistics
+  /reports/subscribers:
+    get:
+      description: |
+        Retrieve a subscribers report
+      parameters:
+        - description: Filter by website ID
+          in: query
+          name: websiteId
+          type: string
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+      responses:
+        '200':
+          description: Report was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/ReportSubscribers'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a subscribers report
+      tags:
+        - Report
+        - ReportSubscribers
+  /reports/transactions:
+    get:
+      description: |
+        Retrieve a subscribers report
+      parameters:
+        - description: Report start day
+          format: date-time
+          in: query
+          name: periodStart
+          required: true
+          type: string
+        - description: Report end day
+          format: date-time
+          in: query
+          name: periodEnd
+          required: true
+          type: string
+        - description: Report aggregation field
+          enum:
+            - website
+            - currency
+            - bin
+            - rebillNumber
+            - transactionResult
+            - transactionType
+            - gatewayAccount
+            - leadsAffiliate
+            - leadsCampaign
+            - leadsContent
+            - leadsMedium
+            - leadsSalesAgent
+            - leadsSource
+            - leadsSubAffiliate
+            - leadsTerm
+          in: query
+          name: aggregationField
+          required: true
+          type: string
+        - description: Report metric
+          enum:
+            - ApprovalThroughput
+            - AuthApprovalThroughput
+            - AvgSalesPrice
+            - Refunds
+            - RefundCount
+            - Sales
+            - SalesCount
+          in: query
+          name: metric
+          required: true
+          type: string
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+      responses:
+        '200':
+          description: Report was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/ReportTransactions'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a subscribers report
+      tags:
+        - Report
+        - ReportTransaction
   /sessions:
     get:
       description: |
@@ -6480,6 +6937,22 @@ definitions:
       - acceptedCurrencies
       - organizationId
     type: object
+  HistogramData:
+    properties:
+      data:
+        items:
+          description: Contains date-time and value
+          properties:
+            date:
+              description: Entry date-time
+              type: string
+            value:
+              description: Entry value
+              type: number
+          readOnly: true
+          type: object
+        type: array
+    type: object
   InvalidError:
     allOf:
       - $ref: '#/definitions/Error'
@@ -7229,6 +7702,170 @@ definitions:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
         description: The product updated time
+    type: object
+  ReportDisputes:
+    items:
+      properties:
+        aggregationFieldValue:
+          description: 'Selected aggregation field value (defined by query). It can be, for example, websiteId or country. You define it in aggregationField param in query.'
+          type: string
+        countPercentMastercard:
+          description: Disputes count / Transaction count
+          format: double
+          type: number
+        countPercentVisa:
+          description: Disputes count / Transaction count
+          format: double
+          type: number
+        disputesMastercard:
+          description: Disputes count on Mastercard
+          type: integer
+        disputesVisa:
+          description: Disputes count on Visa
+          type: integer
+        valuePercentMastercard:
+          description: Disputes count / Value of settlement transactions
+          format: double
+          type: number
+        valuePercentVisa:
+          description: Disputes count / Value of settlement transactions
+          format: double
+          type: number
+      type: object
+    type: array
+  ReportDunning:
+    properties:
+      data:
+        items:
+          properties:
+            attempts:
+              description: Attepmts count
+              type: integer
+            retryNumber:
+              description: Retry attempts number
+              type: integer
+            successRate:
+              description: Successful transactions ratio
+              format: double
+              type: number
+            successfulTransactions:
+              description: Successful transactons count
+              type: integer
+          type: object
+        readOnly: true
+        type: array
+    type: object
+  ReportStatistics:
+    properties:
+      cancels:
+        description: Cancels count in last 24 hours
+        type: integer
+      cancelsGrowthPercentage:
+        description: Cancels count growth (in percents) in last 24 hours (against previous 24 hours)
+        format: double
+        type: number
+      customers:
+        description: New customers count in last 24 hours
+        type: integer
+      customersGrowthPercentage:
+        description: Customers count growth (in percents) in last 24 hours (against previous 24 hours)
+        format: double
+        type: number
+      refunds:
+        description: Refunds count
+        type: integer
+      refundsGrowthPercentage:
+        description: Refunds count growth (in percents) in last 24 hours (against previous 24 hours)
+        format: double
+        type: number
+      revenue:
+        description: Revenue in last 24 hours
+        format: double
+        type: number
+      revenueGrowthPercentage:
+        description: Revenue growth (in percents) in last 24 hours (against previous 24 hours)
+        format: double
+        type: number
+    type: object
+  ReportSubscribers:
+    properties:
+      data:
+        description: Report data
+        items:
+          properties:
+            active:
+              description: Active count
+              type: integer
+            cancelled:
+              description: Cancelled count
+              type: integer
+            pastDue:
+              description: Past Due count
+              type: integer
+            plan:
+              description: Plan Name
+              type: string
+            trial:
+              description: On trial count
+              type: integer
+          type: object
+        type: array
+      totalActive:
+        description: Total active count
+        type: integer
+      totalCancelled:
+        description: Total cancelled count
+        type: integer
+      totalOnTrial:
+        description: Total on trial count
+        type: integer
+      totalPastDue:
+        description: Total Past Due count
+        type: integer
+    type: object
+  ReportTransactions:
+    properties:
+      data:
+        items:
+          properties:
+            aggregationFieldValue:
+              description: Selected aggregation field value
+              type: string
+            amount:
+              description: Amount
+              format: double
+              type: number
+            approvedThroughput:
+              description: Successful transactons percentage
+              type: integer
+            authApprovedThroughput:
+              description: Successful transactions count
+              type: integer
+            count:
+              description: Transactions count
+              format: double
+              type: number
+            refundsCount:
+              description: Refunds count
+              type: integer
+            refundsValue:
+              description: Refunds value
+              format: double
+              type: number
+            salesAverage:
+              description: Sales average value
+              format: double
+              type: number
+            salesCount:
+              description: Sales count
+              type: integer
+            salesValue:
+              description: Sales value
+              format: double
+              type: number
+          type: object
+        readOnly: true
+        type: array
     type: object
   ResetPassword:
     properties:
@@ -8069,12 +8706,6 @@ definitions:
     allOf:
       - $ref: '#/definitions/ScheduleMethod'
       - properties:
-          chronology:
-            default: after
-            enum:
-              - after
-              - before
-            type: string
           duration:
             minimum: 1
             type: integer
@@ -8088,24 +8719,11 @@ definitions:
     allOf:
       - $ref: '#/definitions/ScheduleMethod'
       - properties:
-          chronology:
-            default: next
-            enum:
-              - next
-              - previous
-            type: string
-          conflictPolicy:
-            default: first-in-month
-            description: |
-              The strategy how to solve the lack of the numbers of days in a month.
-              You able to choose to keep month and select the last day of it
-              or transfer to first day in the next month.
-              Defaults to transfer to next month.
-            enum:
-              - first-in-month
-              - last-in-month
-            type: string
           day:
+            description: |
+              The day of the month when event will be scheduled.
+              Be aware if the month has less days,
+              the last day of the month will be selected.
             maximum: 31
             minimum: 1
             type: integer
@@ -8126,11 +8744,8 @@ definitions:
             default: next
             enum:
               - next
-              - previous
-              - first-in-next-month
-              - last-in-next-month
-              - first-in-previous-month
-              - last-in-previous-month
+              - first-in-month
+              - last-in-month
             type: string
         required:
           - day
