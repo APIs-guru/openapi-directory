@@ -1,0 +1,483 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: Media Services resource management APIs.
+  title: MediaServicesManagementClient
+  version: '2015-10-01'
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    format: swagger
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-mediaservices/2015-10-01/swagger/media.json'
+    version: '2.0'
+  x-preferred: true
+  x-providerName: azure.com
+  x-serviceName: arm-mediaservices
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  apiVersionParameter:
+    description: Version of the API to be used with the client request. Current version is 2015-10-01
+    in: query
+    name: api-version
+    required: true
+    type: string
+  subscriptionIdParameter:
+    description: Azure subscription id.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+paths:
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Media/CheckNameAvailability':
+    post:
+      operationId: MediaService_CheckNameAvailabilty
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: Properties needed to check the availability of a name.
+          in: body
+          name: CheckNameAvailabilityInput
+          required: true
+          schema:
+            $ref: '#/definitions/CheckNameAvailabilityInput'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CheckNameAvailabilityOutput'
+        default:
+          description: Detailed error information.
+          schema:
+            $ref: '#/definitions/ApiError'
+      summary: Check whether the Media Service resource name is available. The name must be globally unique.
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices':
+    get:
+      operationId: MediaService_ListByResourceGroup
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: Name of the resource group within the Azure subscription.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MediaServiceCollection'
+        default:
+          description: Detailed error information.
+          schema:
+            $ref: '#/definitions/ApiError'
+      summary: List all of the Media Services in a resource group.
+      x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{mediaServiceName}':
+    delete:
+      operationId: MediaService_Delete
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: Name of the resource group within the Azure subscription.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Name of the Media Service.
+          in: path
+          maxLength: 24
+          minLength: 3
+          name: mediaServiceName
+          pattern: '^[a-z0-9]'
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        default:
+          description: Detailed error information.
+          schema:
+            $ref: '#/definitions/ApiError'
+      summary: Delete a Media Service.
+    get:
+      operationId: MediaService_Get
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: Name of the resource group within the Azure subscription.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Name of the Media Service.
+          in: path
+          maxLength: 24
+          minLength: 3
+          name: mediaServiceName
+          pattern: '^[a-z0-9]'
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MediaService'
+        default:
+          description: Detailed error information.
+          schema:
+            $ref: '#/definitions/ApiError'
+      summary: Get a Media Service.
+    patch:
+      operationId: MediaService_Update
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: Name of the resource group within the Azure subscription.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Name of the Media Service.
+          in: path
+          maxLength: 24
+          minLength: 3
+          name: mediaServiceName
+          pattern: '^[a-z0-9]'
+          required: true
+          type: string
+        - description: Media Service properties needed for update.
+          in: body
+          name: MediaService
+          required: true
+          schema:
+            $ref: '#/definitions/MediaService'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MediaService'
+        default:
+          description: Detailed error information.
+          schema:
+            $ref: '#/definitions/ApiError'
+      summary: Update a Media Service.
+    put:
+      operationId: MediaService_Create
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: Name of the resource group within the Azure subscription.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Name of the Media Service.
+          in: path
+          maxLength: 24
+          minLength: 3
+          name: mediaServiceName
+          pattern: '^[a-z0-9]'
+          required: true
+          type: string
+        - description: Media Service properties needed for creation.
+          in: body
+          name: MediaService
+          required: true
+          schema:
+            $ref: '#/definitions/MediaService'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MediaService'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/MediaService'
+        default:
+          description: Detailed error information.
+          schema:
+            $ref: '#/definitions/ApiError'
+      summary: Create a Media Service.
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{mediaServiceName}/listKeys':
+    post:
+      operationId: MediaService_ListKeys
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: Name of the resource group within the Azure subscription.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Name of the Media Service.
+          in: path
+          maxLength: 24
+          minLength: 3
+          name: mediaServiceName
+          pattern: '^[a-z0-9]'
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ServiceKeys'
+        '202':
+          description: Accepted
+        default:
+          description: Detailed error information.
+          schema:
+            $ref: '#/definitions/ApiError'
+      summary: List the keys for a Media Service.
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{mediaServiceName}/regenerateKey':
+    post:
+      operationId: MediaService_RegenerateKey
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: Name of the resource group within the Azure subscription.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Name of the Media Service.
+          in: path
+          maxLength: 24
+          minLength: 3
+          name: mediaServiceName
+          pattern: '^[a-z0-9]'
+          required: true
+          type: string
+        - description: Properties needed to regenerate the Media Service key.
+          in: body
+          name: RegenerateKeyInput
+          required: true
+          schema:
+            $ref: '#/definitions/RegenerateKeyInput'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RegenerateKeyOutput'
+        '202':
+          description: Accepted
+        default:
+          description: Detailed error information.
+          schema:
+            $ref: '#/definitions/ApiError'
+      summary: Regenerate the key for a Media Service.
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Media/mediaservices/{mediaServiceName}/syncStorageKeys':
+    post:
+      operationId: MediaService_SyncStorageKeys
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: Name of the resource group within the Azure subscription.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: Name of the Media Service.
+          in: path
+          maxLength: 24
+          minLength: 3
+          name: mediaServiceName
+          pattern: '^[a-z0-9]'
+          required: true
+          type: string
+        - description: Properties needed to sycnronize the keys for a storage account to the Media Service.
+          in: body
+          name: SyncStorageKeysInput
+          required: true
+          schema:
+            $ref: '#/definitions/SyncStorageKeysInput'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MediaService'
+        '202':
+          description: Accepted
+        default:
+          description: Detailed error information.
+          schema:
+            $ref: '#/definitions/ApiError'
+      summary: Synchronize the keys for a storage account to the Media Service.
+definitions:
+  ApiEndpoint:
+    description: The properties for a Media Services REST API endpoint.
+    properties:
+      endpoint:
+        description: The Media Services REST endpoint.
+        type: string
+      majorVersion:
+        description: The version of Media Services REST API.
+        type: string
+  ApiError:
+    description: The error returned from a failed Media Services REST API call.
+    properties:
+      code:
+        description: Error code.
+        type: string
+      message:
+        description: Error message.
+        type: string
+  CheckNameAvailabilityInput:
+    description: The request body for CheckNameAvailability API.
+    properties:
+      name:
+        description: The name of the resource. A name must be globally unique.
+        maxLength: 24
+        minLength: 3
+        pattern: '^[a-z0-9]'
+        type: string
+      type:
+        description: Specifies the type of the resource.
+        type: string
+  CheckNameAvailabilityOutput:
+    description: The response body for CheckNameAvailability API.
+    properties:
+      message:
+        description: Specifies the detailed reason if the name is not available.
+        type: string
+      nameAvailable:
+        description: Specifies if the name is available.
+        type: boolean
+      reason:
+        description: Specifies the reason if the name is not available.
+        enum:
+          - None
+          - Invalid
+          - AlreadyExists
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: EntityNameUnavailabilityReason
+  MediaService:
+    allOf:
+      - $ref: '#/definitions/TrackedResource'
+    description: The properties of a Media Service resource.
+    properties:
+      properties:
+        $ref: '#/definitions/MediaServiceProperties'
+        x-ms-client-flatten: true
+  MediaServiceCollection:
+    description: The collection of Media Service resources.
+    properties:
+      value:
+        items:
+          $ref: '#/definitions/MediaService'
+        type: array
+  MediaServiceProperties:
+    description: The additional properties of a Media Service resource.
+    properties:
+      apiEndpoints:
+        description: The Media Services REST API endpoints for this resource.
+        items:
+          $ref: '#/definitions/ApiEndpoint'
+        type: array
+      storageAccounts:
+        description: The storage accounts for this resource.
+        items:
+          $ref: '#/definitions/StorageAccount'
+        type: array
+  RegenerateKeyInput:
+    description: The request body for a RegenerateKey API.
+    properties:
+      keyType:
+        description: 'The keyType indicating which key you want to regenerate, Primary or Secondary.'
+        enum:
+          - Primary
+          - Secondary
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: KeyType
+  RegenerateKeyOutput:
+    description: The response body for a RegenerateKey API.
+    properties:
+      key:
+        description: The new value of either the primary or secondary key.
+        type: string
+  Resource:
+    properties:
+      id:
+        description: The id of the resource.
+        readOnly: true
+        type: string
+      name:
+        description: The name of the resource.
+        readOnly: true
+        type: string
+      type:
+        description: The type of the resource
+        readOnly: true
+        type: string
+    x-ms-azure-resource: true
+  ServiceKeys:
+    description: The response body for a ListKeys API.
+    properties:
+      primaryAuthEndpoint:
+        description: The primary Authorization endpoint.
+        type: string
+      primaryKey:
+        description: The primary resource.
+        type: string
+      scope:
+        description: The authorization scope.
+        type: string
+      secondaryAuthEndpoint:
+        description: The secondary Authorization endpoint.
+        type: string
+      secondaryKey:
+        description: The secondary resource.
+        type: string
+  StorageAccount:
+    description: The properties of a storage account associated with this resource.
+    properties:
+      id:
+        description: The id of the storage account resource.
+        type: string
+      isPrimary:
+        description: Is this storage account resource the primary storage account for the Media Service resource.
+        type: boolean
+  SyncStorageKeysInput:
+    description: The request  body for a SyncStorageKeys API.
+    properties:
+      id:
+        description: The id of the storage account resource.
+        type: string
+  TrackedResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: ARM tracked resource
+    properties:
+      location:
+        description: The location of the resource.
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: The tags of the resource.
+        type: object
+    required:
+      - location
+      - tags
+    type: object
