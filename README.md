@@ -13,7 +13,7 @@
 [![Follow on Twitter][twitterFollow-image]][twitterFollow-link]
 
 Directory of API specs in [OpenAPI(aka Swagger)](https://openapis.org) [2.0](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md) format.<BR>
-API access to collection: [Go!](API.md)
+API access to collection: [Go!][apiDoc-link]
 
 [![Add API][addAPI-image]][addAPI-link]
 
@@ -21,7 +21,7 @@ Our goal is to create a machine-readable Wikipedia for REST APIs with the follow
 - Open source, community driven project.
 - Only publicly available APIs (free or paid).
 - Anyone can add or change an API, not only API owners.
-- All data can be accessed through a [REST API](API.md).
+- All data can be accessed through a [REST API][apiDoc-link].
 
 If you want to reference this project and you need an icon or even a banner, check our [branding guide](https://github.com/APIs-guru/branding).
 
@@ -68,7 +68,7 @@ API spec acceptance criteria
 Integration with 3rd-party services
 --------------------------
 We discourage you from using Github RAW links or Git directly, repository structure isn't stable and could be changed in future.
-Instead, we strongly recomend you to use our [REST API](API.md).
+Instead, we strongly recomend you to use our [REST API][apiDoc-link].
 
 Licenses
 --------------------------
@@ -96,3 +96,4 @@ Some specs are taken from Open Source projects:
 [apisDir-link]: ./APIs
 [addAPI-image]: https://cloud.githubusercontent.com/assets/8336157/15861614/7e31511a-2cd5-11e6-8b79-38ad0f61e598.png
 [addAPI-link]: https://apis.guru/add-api/
+[apiDoc-link]: https://apis.guru/api-doc/
