@@ -29,6 +29,7 @@ sh.set('-e');
 sh.set('-v');
 
 sh.mkdir(deployDir(''));
+sh.cp('resources/index.html', deployDir(''));
 
 var apisGuruSwagger = util.readYaml('resources/apis_guru_swagger.yaml');
 var baseUrl = URI(rootUrl(''));
