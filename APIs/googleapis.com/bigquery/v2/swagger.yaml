@@ -168,6 +168,10 @@ paths:
           in: query
           name: all
           type: boolean
+        - description: 'An expression for filtering the results of the request by label. The syntax is "labels.[:]". Multiple filters can be ANDed together by connecting with a space. Example: "labels.department:receiving labels.active". See https://cloud.google.com/bigquery/docs/labeling-datasets#filtering_datasets_using_labels for details.'
+          in: query
+          name: filter
+          type: string
         - description: The maximum number of results to return
           in: query
           name: maxResults
@@ -1015,6 +1019,11 @@ definitions:
         default: 'bigquery#dataset'
         description: '[Output-only] The resource type.'
         type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: '[Experimental] The labels associated with this dataset. You can use these to organize and group your datasets. You can set this property when inserting or updating a dataset. Label keys and values can be no longer than 63 characters, can only contain letters, numeric characters, underscores and dashes. International characters are allowed. Label values are optional. Label keys must start with a letter and must be unique within a dataset. Both keys and values are additionally constrained to be <= 128 bytes in size.'
+        type: object
       lastModifiedTime:
         description: '[Output-only] The date when this dataset or any of its tables was last modified, in milliseconds since the epoch.'
         format: int64
@@ -1045,6 +1054,11 @@ definitions:
               default: 'bigquery#dataset'
               description: 'The resource type. This property always returns the value "bigquery#dataset".'
               type: string
+            labels:
+              additionalProperties:
+                type: string
+              description: '[Experimental] The labels associated with this dataset. You can use these to organize and group your datasets.'
+              type: object
           type: object
         type: array
       etag:

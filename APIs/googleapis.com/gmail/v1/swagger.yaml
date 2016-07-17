@@ -1282,7 +1282,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Creates a forwarding address. If ownership verification is required, a message will be sent to the recipient and the resource''s verification status will be set to `pending`; otherwise, the resource will be created with verification status set to `accepted`.'
+      description: 'Creates a forwarding address. If ownership verification is required, a message will be sent to the recipient and the resource''s verification status will be set to pending; otherwise, the resource will be created with verification status set to accepted.'
       operationId: gmail.users.settings.forwardingAddresses.create
       parameters:
         - default: me
@@ -1522,7 +1522,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Creates a custom "from" send-as alias. If an SMTP MSA is specified, Gmail will attempt to connect to the SMTP service to validate the configuration before creating the alias. If ownership verification is required for the alias, a message will be sent to the email address and the resource''s verification status will be set to `pending`; otherwise, the resource will be created with verification status set to `accepted`. If a signature is provided, Gmail will sanitize the HTML before saving it with the alias.'
+      description: 'Creates a custom "from" send-as alias. If an SMTP MSA is specified, Gmail will attempt to connect to the SMTP service to validate the configuration before creating the alias. If ownership verification is required for the alias, a message will be sent to the email address and the resource''s verification status will be set to pending; otherwise, the resource will be created with verification status set to accepted. If a signature is provided, Gmail will sanitize the HTML before saving it with the alias.'
       operationId: gmail.users.settings.sendAs.create
       parameters:
         - default: me
@@ -1680,7 +1680,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Sends a verification email to the specified send-as alias address. The verification status must be `pending`.
+      description: Sends a verification email to the specified send-as alias address. The verification status must be pending.
       operationId: gmail.users.settings.sendAs.verify
       parameters:
         - default: me
@@ -2540,7 +2540,7 @@ definitions:
     description: POP settings for an account.
     properties:
       accessWindow:
-        description: 'The range of messages which are accessible via POP. Setting this to FROM_NOW_ON causes any existing messages to become inaccessible and causes all future messages to become accessible. Setting this to ALL_MAIL causes all messages to become accessible, even if they have been fetched previously.'
+        description: The range of messages which are accessible via POP.
         enum:
           - accessWindowUnspecified
           - allMail
@@ -2583,7 +2583,7 @@ definitions:
         description: 'A name that appears in the "From:" header for mail sent using this alias. For custom "from" addresses, when this is empty, Gmail will populate the "From:" header with the name that is used for the primary address associated with the account.'
         type: string
       isDefault:
-        description: 'Whether this address is selected as the default "From:" address in situations such as composing a new message or sending a vacation auto-reply. Every Gmail account has exactly one default send-as address, so the only legal value that clients may write to this field is `true`. Changing this from `false` to `true` for an address will result in this field becoming `false` for the other previous default address.'
+        description: 'Whether this address is selected as the default "From:" address in situations such as composing a new message or sending a vacation auto-reply. Every Gmail account has exactly one default send-as address, so the only legal value that clients may write to this field is true. Changing this from false to true for an address will result in this field becoming false for the other previous default address.'
         type: boolean
       isPrimary:
         description: 'Whether this address is the primary address used to login to the account. Every Gmail account has exactly one primary address, and it cannot be deleted from the collection of send-as aliases. This field is read-only.'
@@ -2662,7 +2662,7 @@ definitions:
         description: Flag that controls whether Gmail automatically replies to messages.
         type: boolean
       endTime:
-        description: 'An optional end time for sending auto-replies (epoch ms). When this is specified, Gmail will automatically reply only to messages that it receives before the end time. If both `startTime` and `endTime` are specified, `startTime` must precede `endTime`.'
+        description: 'An optional end time for sending auto-replies (epoch ms). When this is specified, Gmail will automatically reply only to messages that it receives before the end time. If both startTime and endTime are specified, startTime must precede endTime.'
         format: int64
         type: string
       responseBodyHtml:
@@ -2681,7 +2681,7 @@ definitions:
         description: Flag that determines whether responses are sent to recipients who are outside of the user's domain. This feature is only available for Google Apps users.
         type: boolean
       startTime:
-        description: 'An optional start time for sending auto-replies (epoch ms). When this is specified, Gmail will automatically reply only to messages that it receives after the start time. If both `startTime` and `endTime` are specified, `startTime` must precede `endTime`.'
+        description: 'An optional start time for sending auto-replies (epoch ms). When this is specified, Gmail will automatically reply only to messages that it receives after the start time. If both startTime and endTime are specified, startTime must precede endTime.'
         format: int64
         type: string
     type: object

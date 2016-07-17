@@ -279,7 +279,11 @@ definitions:
         type: array
     type: object
   Dimension:
-    description: A dimension in the request.
+    description: |-
+      [Dimensions](https://support.google.com/analytics/answer/1033861)
+      are attributes of your data. For example, the dimension `ga:city`
+      indicates the city, for example, "Paris" or "New York", from which
+      a session originates.
     properties:
       histogramBuckets:
         description: |-
@@ -421,7 +425,10 @@ definitions:
         type: array
     type: object
   Metric:
-    description: A metric in the request.
+    description: |-
+      [Metrics](https://support.google.com/analytics/answer/1033861)
+      are the quantitative measurements. For example, the metric `ga:users`
+      indicates the total number of users for the requested time period.
     properties:
       alias:
         description: |-
@@ -597,7 +604,9 @@ definitions:
           $ref: '#/definitions/DimensionFilterClause'
         type: array
       dimensions:
-        description: A list of dimensions to show as pivot columns.
+        description: |-
+          A list of dimensions to show as pivot columns. A Pivot can have a maximum
+          of 4 dimensions.
         items:
           $ref: '#/definitions/Dimension'
         type: array
@@ -608,7 +617,9 @@ definitions:
         format: int32
         type: integer
       metrics:
-        description: Metrics to aggregate and return.
+        description: |-
+          The pivot metrics. Pivot metrics are part of the
+          restriction on total number of metrics in the request.
         items:
           $ref: '#/definitions/Metric'
         type: array
@@ -793,7 +804,9 @@ definitions:
           $ref: '#/definitions/DimensionFilterClause'
         type: array
       dimensions:
-        description: Dimensions requested in the request.
+        description: |-
+          The dimensions requested.
+          Requests can have a total of 7 dimensions.
         items:
           $ref: '#/definitions/Dimension'
         type: array
@@ -834,8 +847,9 @@ definitions:
         type: array
       metrics:
         description: |-
-          Metrics, the quantitative measurements, requested in the request.
-          Requests must specify at least one metric.
+          The metrics requested.
+          Requests must specify at least one metric. Requests can have a
+          total of 10 metrics.
         items:
           $ref: '#/definitions/Metric'
         type: array
@@ -867,7 +881,7 @@ definitions:
           the GetReports request.
         type: string
       pivots:
-        description: The pivot definitions.
+        description: The pivot definitions. Requests can have a maximum of 2 pivots.
         items:
           $ref: '#/definitions/Pivot'
         type: array

@@ -6,14 +6,14 @@ x-hasEquivalentPaths: true
 info:
   description: The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resrources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.
   title: NetworkManagementClient
-  version: '2016-03-30'
+  version: '2016-06-01'
   x-logo:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     format: swagger
-    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-03-30/swagger/network.json'
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-network/2016-06-01/swagger/network.json'
     version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: arm-network
 consumes:
@@ -1431,6 +1431,60 @@ paths:
       tags:
         - NetworkInterfaces
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}/effectiveNetworkSecurityGroups':
+    post:
+      description: The list effective network security group operation retrieves all the network security groups applied on a networkInterface.
+      operationId: NetworkInterfaces_ListEffectiveNetworkSecurityGroups
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the network interface.
+          in: path
+          name: networkInterfaceName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/EffectiveNetworkSecurityGroupListResult'
+      tags:
+        - NetworkInterfaces
+      x-ms-long-running-operation: true
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}/effectiveRouteTable':
+    post:
+      description: The get effective routetable operation retrieves all the route tables applied on a networkInterface.
+      operationId: NetworkInterfaces_GetEffectiveRouteTable
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the network interface.
+          in: path
+          name: networkInterfaceName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/EffectiveRouteListResult'
+      tags:
+        - NetworkInterfaces
+      x-ms-long-running-operation: true
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups':
     get:
       description: The list NetworkSecurityGroups returns all network security groups in a resource group
@@ -2419,6 +2473,131 @@ paths:
       tags:
         - Subnets
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/virtualNetworkPeerings':
+    get:
+      description: The List virtual network peerings opertion retrieves all the peerings in a virtual network.
+      operationId: VirtualNetworkPeerings_List
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the virtual network.
+          in: path
+          name: virtualNetworkName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/VirtualNetworkPeeringListResult'
+      tags:
+        - VirtualNetworkPeerings
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/virtualNetworkPeerings/{virtualNetworkPeeringName}':
+    delete:
+      description: The delete virtual network peering operation deletes the specified peering.
+      operationId: VirtualNetworkPeerings_Delete
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the virtual network.
+          in: path
+          name: virtualNetworkName
+          required: true
+          type: string
+        - description: The name of the virtual network peering.
+          in: path
+          name: virtualNetworkPeeringName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+        '202':
+          description: ''
+        '204':
+          description: ''
+      tags:
+        - VirtualNetworkPeerings
+      x-ms-long-running-operation: true
+    get:
+      description: The Get virtual network peering operation retreives information about the specified virtual network peering.
+      operationId: VirtualNetworkPeerings_Get
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the virtual network.
+          in: path
+          name: virtualNetworkName
+          required: true
+          type: string
+        - description: The name of the virtual network peering.
+          in: path
+          name: virtualNetworkPeeringName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/VirtualNetworkPeering'
+      tags:
+        - VirtualNetworkPeerings
+    put:
+      description: The Put virtual network peering operation creates/updates a peering in the specified virtual network
+      operationId: VirtualNetworkPeerings_CreateOrUpdate
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the virtual network.
+          in: path
+          name: virtualNetworkName
+          required: true
+          type: string
+        - description: The name of the peering.
+          in: path
+          name: virtualNetworkPeeringName
+          required: true
+          type: string
+        - description: Parameters supplied to the create/update virtual network peering operation
+          in: body
+          name: VirtualNetworkPeeringParameters
+          required: true
+          schema:
+            $ref: '#/definitions/VirtualNetworkPeering'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/VirtualNetworkPeering'
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/VirtualNetworkPeering'
+      tags:
+        - VirtualNetworkPeerings
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/networkInterfaces':
     get:
       description: The list network interface operation retrieves information about all network interfaces in a virtual machine scale set.
@@ -2520,7 +2699,7 @@ definitions:
     description: AddressSpace contains an array of IP address ranges that can be used by subnets
     properties:
       addressPrefixes:
-        description: Gets or sets List of address blocks reserved for this virtual network in CIDR notation
+        description: Gets or sets list of address blocks reserved for this virtual network in CIDR notation
         items:
           type: string
         type: array
@@ -2572,7 +2751,7 @@ definitions:
           $ref: '#/definitions/NetworkInterfaceIPConfiguration'
         type: array
       provisioningState:
-        description: Gets or sets Provisioning state of the backend address pool resource Updating/Deleting/Failed
+        description: Gets provisioning state of the backend address pool resource Updating/Deleting/Failed
         type: string
   ApplicationGatewayBackendHttpSettings:
     allOf:
@@ -2747,7 +2926,7 @@ definitions:
     description: Properties of IP configuration of application gateway
     properties:
       provisioningState:
-        description: Gets or sets Provisioning state of the application gateway subnet resource Updating/Deleting/Failed
+        description: Gets provisioning state of the application gateway subnet resource Updating/Deleting/Failed
         type: string
       subnet:
         $ref: '#/definitions/SubResource'
@@ -2892,7 +3071,7 @@ definitions:
           $ref: '#/definitions/ApplicationGatewayProbe'
         type: array
       provisioningState:
-        description: Gets or sets Provisioning state of the ApplicationGateway resource Updating/Deleting/Failed
+        description: Gets provisioning state of the ApplicationGateway resource Updating/Deleting/Failed
         type: string
       requestRoutingRules:
         description: Gets or sets request routing rules of application gateway resource
@@ -2942,7 +3121,7 @@ definitions:
         $ref: '#/definitions/SubResource'
         description: 'Gets or sets http listener resource of application gateway '
       provisioningState:
-        description: Gets or sets Provisioning state of the request routing rule resource Updating/Deleting/Failed
+        description: Gets provisioning state of the request routing rule resource Updating/Deleting/Failed
         type: string
       ruleType:
         description: Gets or sets the rule type
@@ -3039,7 +3218,7 @@ definitions:
           $ref: '#/definitions/ApplicationGatewayPathRule'
         type: array
       provisioningState:
-        description: Gets or sets Provisioning state of the backend http settings resource Updating/Deleting/Failed
+        description: Gets provisioning state of the backend http settings resource Updating/Deleting/Failed
         type: string
   AuthorizationListResult:
     description: Response for ListAuthorizations Api service callRetrieves all authorizations that belongs to an ExpressRouteCircuit
@@ -3067,7 +3246,7 @@ definitions:
           modelAsString: true
           name: AuthorizationUseStatus
       provisioningState:
-        description: Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed
+        description: Gets provisioning state of the PublicIP resource Updating/Deleting/Failed
         type: string
   AzureAsyncOperationResult:
     description: 'The response body contains the status of the specified asynchronous operation, indicating whether it has succeeded, is inprogress, or has failed. Note that this status is distinct from the HTTP status code returned for the Get Operation Status operation itself. If the asynchronous operation succeeded, the response body includes the HTTP status code for the successful request. If the asynchronous operation failed, the response body includes the HTTP status code for the failed request and error information regarding the failure.'
@@ -3105,17 +3284,20 @@ definitions:
         description: Gets collection of references to IPs defined in NICs
         items:
           $ref: '#/definitions/NetworkInterfaceIPConfiguration'
+        readOnly: true
         type: array
       loadBalancingRules:
         description: Gets Load Balancing rules that use this Backend Address Pool
         items:
           $ref: '#/definitions/SubResource'
+        readOnly: true
         type: array
       outboundNatRule:
         $ref: '#/definitions/SubResource'
         description: Gets outbound rules that use this Backend Address Pool
+        readOnly: true
       provisioningState:
-        description: Provisioning state of the PublicIP resource Updating/Deleting/Failed
+        description: Get provisioning state of the PublicIP resource Updating/Deleting/Failed
         type: string
   BgpSettings:
     properties:
@@ -3162,6 +3344,160 @@ definitions:
       available:
         description: Domain availability (True/False)
         type: boolean
+  EffectiveNetworkSecurityGroup:
+    description: Effective NetworkSecurityGroup
+    properties:
+      association:
+        $ref: '#/definitions/EffectiveNetworkSecurityGroupAssociation'
+      effectiveSecurityRules:
+        description: Gets collection of effective security rules
+        items:
+          $ref: '#/definitions/EffectiveNetworkSecurityRules'
+        type: array
+      networkSecurityGroup:
+        $ref: '#/definitions/SubResource'
+        description: Gets the id of network security group that is applied
+  EffectiveNetworkSecurityGroupAssociation:
+    description: Effective NetworkSecurityGroup association
+    properties:
+      networkInterface:
+        $ref: '#/definitions/SubResource'
+        description: Gets the id of network interface if assigned
+      subnet:
+        $ref: '#/definitions/SubResource'
+        description: Gets the id of subnet if assigned
+  EffectiveNetworkSecurityGroupListResult:
+    description: Response for list effective network security groups api servive call
+    properties:
+      nextLink:
+        description: Gets the URL to get the next set of results.
+        type: string
+      value:
+        description: Gets list of effective network security groups
+        items:
+          $ref: '#/definitions/EffectiveNetworkSecurityGroup'
+        type: array
+  EffectiveNetworkSecurityRules:
+    description: Effective NetworkSecurityRules
+    properties:
+      access:
+        description: Gets network traffic is allowed or denied
+        enum:
+          - Allow
+          - Deny
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SecurityRuleAccess
+      destinationAddressPrefix:
+        description: Gets destination address prefix
+        type: string
+      destinationPortRange:
+        description: Gets destination port or range
+        type: string
+      direction:
+        description: Gets the direction of the rule
+        enum:
+          - Inbound
+          - Outbound
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SecurityRuleDirection
+      expandedDestinationAddressPrefix:
+        description: Gets expanded destination address prefix
+        items:
+          type: string
+        type: array
+      expandedSourceAddressPrefix:
+        description: Gets expanded source address prefix
+        items:
+          type: string
+        type: array
+      name:
+        description: Gets the name of the security rule specified by the user (if created by the user)
+        type: string
+      priority:
+        description: Gets the priority of the rule
+        format: int32
+        type: integer
+      protocol:
+        description: Gets Network protocol this rule applies to
+        enum:
+          - Tcp
+          - Udp
+          - '*'
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SecurityRuleProtocol
+      sourceAddressPrefix:
+        description: Gets source address prefix
+        type: string
+      sourcePortRange:
+        description: Gets source port or range
+        type: string
+  EffectiveRoute:
+    allOf:
+      - $ref: '#/definitions/SubResource'
+    description: Effective Route
+    properties:
+      addressPrefix:
+        description: Gets address prefixes of the effective routes in CIDR notation.
+        items:
+          type: string
+        type: array
+      nextHopIpAddress:
+        description: Gets the IP address of the next hop of the effective route
+        items:
+          type: string
+        type: array
+      nextHopType:
+        description: Gets or sets the type of Azure hop the packet should be sent to.
+        enum:
+          - VirtualNetworkGateway
+          - VnetLocal
+          - Internet
+          - VirtualAppliance
+          - None
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: RouteNextHopType
+      source:
+        description: Gets who created the route
+        enum:
+          - Unknown
+          - User
+          - VirtualNetworkGateway
+          - Default
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: EffectiveRouteSource
+      state:
+        description: Gets value of effective route
+        enum:
+          - Active
+          - Invalid
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: EffectiveRouteState
+      userDefinedRoute:
+        $ref: '#/definitions/SubResource'
+        description: 'Gets the Id of the effective route. This is optional, only user defined routes have the name.'
+  EffectiveRouteListResult:
+    description: Response for list effective route api servive call
+    properties:
+      nextLink:
+        description: Gets the URL to get the next set of results.
+        type: string
+      value:
+        description: Gets list of effective routes
+        items:
+          $ref: '#/definitions/EffectiveRoute'
+        type: array
   Error:
     properties:
       code:
@@ -3320,7 +3656,7 @@ definitions:
         description: Gets or sets the primary address prefix
         type: string
       provisioningState:
-        description: Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed
+        description: Gets provisioning state of the PublicIP resource Updating/Deleting/Failed
         type: string
       secondaryAzurePort:
         description: Gets or sets the secondary port
@@ -3367,7 +3703,7 @@ definitions:
           $ref: '#/definitions/ExpressRouteCircuitPeering'
         type: array
       provisioningState:
-        description: Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed
+        description: Gets provisioning state of the PublicIP resource Updating/Deleting/Failed
         type: string
       serviceKey:
         description: Gets or sets ServiceKey
@@ -3560,7 +3896,7 @@ definitions:
           type: string
         type: array
       provisioningState:
-        description: 'Gets or sets Provisioning state of the resource '
+        description: 'Gets provisioning state of the resource '
         type: string
   FrontendIPConfiguration:
     allOf:
@@ -3580,30 +3916,34 @@ definitions:
     description: Properties of Frontend IP Configuration of the load balancer
     properties:
       inboundNatPools:
-        description: Read only.Inbound pools URIs that use this frontend IP
+        description: Read only. Inbound pools URIs that use this frontend IP
         items:
           $ref: '#/definitions/SubResource'
+        readOnly: true
         type: array
       inboundNatRules:
-        description: Read only.Inbound rules URIs that use this frontend IP
+        description: Read only. Inbound rules URIs that use this frontend IP
         items:
           $ref: '#/definitions/SubResource'
+        readOnly: true
         type: array
       loadBalancingRules:
         description: Gets Load Balancing rules URIs that use this frontend IP
         items:
           $ref: '#/definitions/SubResource'
+        readOnly: true
         type: array
       outboundNatRules:
-        description: Read only.Outbound rules URIs that use this frontend IP
+        description: Read only. Outbound rules URIs that use this frontend IP
         items:
           $ref: '#/definitions/SubResource'
+        readOnly: true
         type: array
       privateIPAddress:
         description: Gets or sets the privateIPAddress of the IP Configuration
         type: string
       privateIPAllocationMethod:
-        description: Gets or sets PrivateIP allocation method (Static/Dynamic)
+        description: Gets or sets PrivateIP allocation method
         enum:
           - Static
           - Dynamic
@@ -3612,7 +3952,7 @@ definitions:
           modelAsString: true
           name: IPAllocationMethod
       provisioningState:
-        description: Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed
+        description: Gets provisioning state of the PublicIP resource Updating/Deleting/Failed
         type: string
       publicIPAddress:
         $ref: '#/definitions/PublicIPAddress'
@@ -3641,7 +3981,7 @@ definitions:
         description: Gets or sets the privateIPAddress of the IP Configuration
         type: string
       privateIPAllocationMethod:
-        description: Gets or sets PrivateIP allocation method (Static/Dynamic)
+        description: Gets or sets PrivateIP allocation method
         enum:
           - Static
           - Dynamic
@@ -3650,7 +3990,7 @@ definitions:
           modelAsString: true
           name: IPAllocationMethod
       provisioningState:
-        description: Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed
+        description: Gets provisioning state of the PublicIP resource Updating/Deleting/Failed
         type: string
       publicIPAddress:
         $ref: '#/definitions/PublicIPAddress'
@@ -3691,7 +4031,7 @@ definitions:
         format: int32
         type: integer
       protocol:
-        description: Gets or sets the transport potocol for the external endpoint. Possible values are Udp or Tcp
+        description: Gets or sets the transport potocol for the endpoint. Possible values are Udp or Tcp
         enum:
           - Udp
           - Tcp
@@ -3700,7 +4040,7 @@ definitions:
           modelAsString: true
           name: TransportProtocol
       provisioningState:
-        description: Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed
+        description: Gets provisioning state of the PublicIP resource Updating/Deleting/Failed
         type: string
     required:
       - protocol
@@ -3727,6 +4067,7 @@ definitions:
       backendIPConfiguration:
         $ref: '#/definitions/NetworkInterfaceIPConfiguration'
         description: Gets or sets a reference to a private ip address defined on a NetworkInterface of a VM. Traffic sent to frontendPort of each of the frontendIPConfigurations is forwarded to the backed IP
+        readOnly: true
       backendPort:
         description: 'Gets or sets a port used for internal connections on the endpoint. The localPort attribute maps the eternal port of the endpoint to an internal port on a role. This is useful in scenarios where a role must communicate to an internal compotnent on a port that is different from the one that is exposed externally. If not specified, the value of localPort is the same as the port attribute. Set the value of localPort to ''*'' to automatically assign an unallocated port that is discoverable using the runtime API'
         format: int32
@@ -3746,7 +4087,7 @@ definitions:
         format: int32
         type: integer
       protocol:
-        description: Gets or sets the transport potocol for the external endpoint. Possible values are Udp or Tcp
+        description: Gets or sets the transport potocol for the endpoint. Possible values are Udp or Tcp
         enum:
           - Udp
           - Tcp
@@ -3755,7 +4096,7 @@ definitions:
           modelAsString: true
           name: TransportProtocol
       provisioningState:
-        description: Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed
+        description: Gets provisioning state of the PublicIP resource Updating/Deleting/Failed
         type: string
   LoadBalancer:
     allOf:
@@ -3818,7 +4159,7 @@ definitions:
           $ref: '#/definitions/Probe'
         type: array
       provisioningState:
-        description: Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed
+        description: Gets provisioning state of the PublicIP resource Updating/Deleting/Failed
         type: string
       resourceGuid:
         description: Gets or sets resource guid property of the Load balancer resource
@@ -3884,7 +4225,7 @@ definitions:
           modelAsString: true
           name: TransportProtocol
       provisioningState:
-        description: Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed
+        description: Gets provisioning state of the PublicIP resource Updating/Deleting/Failed
         type: string
     required:
       - protocol
@@ -3924,7 +4265,7 @@ definitions:
         $ref: '#/definitions/AddressSpace'
         description: Local network site Address space
       provisioningState:
-        description: Gets or sets Provisioning state of the LocalNetworkGateway resource Updating/Deleting/Failed
+        description: Gets provisioning state of the LocalNetworkGateway resource Updating/Deleting/Failed
         type: string
       resourceGuid:
         description: Gets or sets resource guid property of the LocalNetworkGateway resource
@@ -3941,7 +4282,7 @@ definitions:
         $ref: '#/definitions/NetworkInterfacePropertiesFormat'
         x-ms-client-flatten: true
   NetworkInterfaceDnsSettings:
-    description: Dns Settings of a network interface
+    description: Dns settings of a network interface
     properties:
       appliedDnsServers:
         description: Gets or sets list of Applied DNS servers IP addresses
@@ -3954,7 +4295,7 @@ definitions:
           type: string
         type: array
       internalDnsNameLabel:
-        description: Gets or sets the Internal DNS name
+        description: Gets or sets the internal DNS name
         type: string
       internalDomainNameSuffix:
         description: Gets or sets internal domain name suffix of the NIC.
@@ -4009,7 +4350,7 @@ definitions:
           modelAsString: true
           name: IPVersion
       privateIPAllocationMethod:
-        description: Gets or sets PrivateIP allocation method (Static/Dynamic)
+        description: Gets or sets PrivateIP allocation method
         enum:
           - Static
           - Dynamic
@@ -4039,17 +4380,17 @@ definitions:
     properties:
       dnsSettings:
         $ref: '#/definitions/NetworkInterfaceDnsSettings'
-        description: Gets or sets DNS Settings in  NetworkInterface
+        description: Gets or sets DNS settings in network interface
       enableIPForwarding:
         description: Gets or sets whether IPForwarding is enabled on the NIC
         type: boolean
       ipConfigurations:
-        description: Gets or sets list of IPConfigurations of the NetworkInterface
+        description: Gets or sets list of IPConfigurations of the network interface
         items:
           $ref: '#/definitions/NetworkInterfaceIPConfiguration'
         type: array
       macAddress:
-        description: Gets the MAC Address of the network interface
+        description: Gets the MAC address of the network interface
         type: string
       networkSecurityGroup:
         $ref: '#/definitions/NetworkSecurityGroup'
@@ -4058,7 +4399,7 @@ definitions:
         description: Gets whether this is a primary NIC on a virtual machine
         type: boolean
       provisioningState:
-        description: Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed
+        description: Gets provisioning state of the PublicIP resource Updating/Deleting/Failed
         type: string
       resourceGuid:
         description: Gets or sets resource guid property of the network interface resource
@@ -4084,7 +4425,7 @@ definitions:
         description: Gets the URL to get the next set of results.
         type: string
       value:
-        description: Gets List of NetworkSecurityGroups in a resource group
+        description: Gets List of NetworkSecurityGroups
         items:
           $ref: '#/definitions/NetworkSecurityGroup'
         type: array
@@ -4092,7 +4433,7 @@ definitions:
     description: Network Security Group resource
     properties:
       defaultSecurityRules:
-        description: Gets or sets Default security rules of network security group
+        description: Gets or default security rules of network security group
         items:
           $ref: '#/definitions/SecurityRule'
         type: array
@@ -4100,15 +4441,16 @@ definitions:
         description: Gets collection of references to Network Interfaces
         items:
           $ref: '#/definitions/NetworkInterface'
+        readOnly: true
         type: array
       provisioningState:
-        description: Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed
+        description: Gets provisioning state of the PublicIP resource Updating/Deleting/Failed
         type: string
       resourceGuid:
         description: Gets or sets resource guid property of the network security group resource
         type: string
       securityRules:
-        description: Gets or sets Security rules of network security group
+        description: Gets or sets security rules of network security group
         items:
           $ref: '#/definitions/SecurityRule'
         type: array
@@ -4116,6 +4458,7 @@ definitions:
         description: Gets collection of references to subnets
         items:
           $ref: '#/definitions/Subnet'
+        readOnly: true
         type: array
   OutboundNatRule:
     allOf:
@@ -4147,7 +4490,7 @@ definitions:
           $ref: '#/definitions/SubResource'
         type: array
       provisioningState:
-        description: Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed
+        description: Gets provisioning state of the PublicIP resource Updating/Deleting/Failed
         type: string
     required:
       - backendAddressPool
@@ -4175,6 +4518,7 @@ definitions:
         description: Gets Load balancer rules that use this probe
         items:
           $ref: '#/definitions/SubResource'
+        readOnly: true
         type: array
       numberOfProbes:
         description: 'Gets or sets the number of probes where if no response, will result in stopping further traffic from being delivered to the endpoint. This values allows endponints to be taken out of rotation faster or slower than the typical times used in Azure. '
@@ -4194,7 +4538,7 @@ definitions:
           modelAsString: true
           name: ProbeProtocol
       provisioningState:
-        description: Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed
+        description: Gets provisioning state of the PublicIP resource Updating/Deleting/Failed
         type: string
       requestPath:
         description: 'Gets or sets the URI used for requesting health status from the VM. Path is required if a protocol is set to http. Otherwise, it is not allowed. There is no default value'
@@ -4250,8 +4594,9 @@ definitions:
         type: string
       ipConfiguration:
         $ref: '#/definitions/IPConfiguration'
+        readOnly: true
       provisioningState:
-        description: Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed
+        description: Gets provisioning state of the PublicIP resource Updating/Deleting/Failed
         type: string
       publicIPAddressVersion:
         description: Gets or sets PublicIP address version (IPv4/IPv6)
@@ -4343,7 +4688,7 @@ definitions:
           modelAsString: true
           name: RouteNextHopType
       provisioningState:
-        description: Gets or sets Provisioning state of the resource Updating/Deleting/Failed
+        description: Gets provisioning state of the resource Updating/Deleting/Failed
         type: string
     required:
       - nextHopType
@@ -4373,7 +4718,7 @@ definitions:
     description: Route Table resource
     properties:
       provisioningState:
-        description: Gets or sets Provisioning state of the resource Updating/Deleting/Failed
+        description: Gets provisioning state of the resource Updating/Deleting/Failed
         type: string
       routes:
         description: Gets or sets Routes in a Route Table
@@ -4384,6 +4729,7 @@ definitions:
         description: Gets collection of references to subnets
         items:
           $ref: '#/definitions/Subnet'
+        readOnly: true
         type: array
   SecurityRule:
     allOf:
@@ -4454,7 +4800,7 @@ definitions:
           modelAsString: true
           name: SecurityRuleProtocol
       provisioningState:
-        description: Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed
+        description: Gets provisioning state of the PublicIP resource Updating/Deleting/Failed
         type: string
       sourceAddressPrefix:
         description: 'Gets or sets source address prefix. CIDR or source IP range. Asterix ''*'' can also be used to match all source IPs. Default tags such as ''VirtualNetwork'', ''AzureLoadBalancer'' and ''Internet'' can also be used. If this is an ingress rule, specifies where network traffic originates from. '
@@ -4483,7 +4829,7 @@ definitions:
         description: A unique read-only string that changes whenever the resource is updated
         type: string
       name:
-        description: Gets name of the resource that is unique within a resource group. This name can be used to access the resource
+        description: Gets or sets the name of the resource that is unique within a resource group. This name can be used to access the resource
         type: string
       properties:
         $ref: '#/definitions/SubnetPropertiesFormat'
@@ -4508,12 +4854,13 @@ definitions:
         description: Gets array of references to the network interface IP configurations using subnet
         items:
           $ref: '#/definitions/IPConfiguration'
+        readOnly: true
         type: array
       networkSecurityGroup:
         $ref: '#/definitions/NetworkSecurityGroup'
         description: Gets or sets the reference of the NetworkSecurityGroup resource
       provisioningState:
-        description: Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed
+        description: Gets provisioning state of the resource
         type: string
       routeTable:
         $ref: '#/definitions/RouteTable'
@@ -4651,7 +4998,7 @@ definitions:
         $ref: '#/definitions/SubResource'
         description: The reference to peerings resource.
       provisioningState:
-        description: Gets or sets Provisioning state of the VirtualNetworkGatewayConnection resource Updating/Deleting/Failed
+        description: Gets provisioning state of the VirtualNetworkGatewayConnection resource Updating/Deleting/Failed
         type: string
       resourceGuid:
         description: Gets or sets resource guid property of the VirtualNetworkGatewayConnection resource
@@ -4684,11 +5031,8 @@ definitions:
   VirtualNetworkGatewayIPConfigurationPropertiesFormat:
     description: Properties of VirtualNetworkGatewayIPConfiguration
     properties:
-      privateIPAddress:
-        description: Gets or sets the privateIPAddress of the IP Configuration
-        type: string
       privateIPAllocationMethod:
-        description: Gets or sets PrivateIP allocation method (Static/Dynamic)
+        description: Gets or sets PrivateIP allocation method
         enum:
           - Static
           - Dynamic
@@ -4697,7 +5041,7 @@ definitions:
           modelAsString: true
           name: IPAllocationMethod
       provisioningState:
-        description: Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed
+        description: Gets provisioning state of the PublicIP resource Updating/Deleting/Failed
         type: string
       publicIPAddress:
         $ref: '#/definitions/SubResource'
@@ -4743,7 +5087,7 @@ definitions:
           $ref: '#/definitions/VirtualNetworkGatewayIPConfiguration'
         type: array
       provisioningState:
-        description: Gets or sets Provisioning state of the VirtualNetworkGateway resource Updating/Deleting/Failed
+        description: Gets provisioning state of the VirtualNetworkGateway resource Updating/Deleting/Failed
         type: string
       resourceGuid:
         description: Gets or sets resource guid property of the VirtualNetworkGateway resource
@@ -4801,8 +5145,68 @@ definitions:
         items:
           $ref: '#/definitions/VirtualNetwork'
         type: array
+  VirtualNetworkPeering:
+    allOf:
+      - $ref: '#/definitions/SubResource'
+    description: Peerings in a VirtualNework resource
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated
+        type: string
+      name:
+        description: Gets or sets the name of the resource that is unique within a resource group. This name can be used to access the resource
+        type: string
+      properties:
+        $ref: '#/definitions/VirtualNetworkPeeringPropertiesFormat'
+        x-ms-client-flatten: true
+  VirtualNetworkPeeringListResult:
+    description: Response for ListSubnets Api service callRetrieves all subnet that belongs to a virtual network
+    properties:
+      nextLink:
+        description: Gets the URL to get the next set of results.
+        type: string
+      value:
+        description: Gets the peerings in a virtual network
+        items:
+          $ref: '#/definitions/VirtualNetworkPeering'
+        type: array
+  VirtualNetworkPeeringPropertiesFormat:
+    properties:
+      allowForwardedTraffic:
+        description: Gets or sets whether the forwarded traffic from the VMs in the remote virtual network will be allowed/disallowed
+        type: boolean
+      allowGatewayTransit:
+        description: Gets or sets if gatewayLinks can be used in remote virtual network’s link to this virtual network
+        type: boolean
+      allowVirtualNetworkAccess:
+        description: Gets or sets whether the VMs in the linked virtual network space would be able to access all the VMs in local Virtual network space
+        type: boolean
+      peeringState:
+        description: Gets the status of the virtual network peering
+        enum:
+          - Initiated
+          - Connected
+          - Disconnected
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: VirtualNetworkPeeringState
+      provisioningState:
+        description: Gets provisioning state of the resource
+        type: string
+      remoteVirtualNetwork:
+        $ref: '#/definitions/SubResource'
+        description: Gets or sets the reference of the remote virtual network
+      useRemoteGateways:
+        description: 'Gets or sets if remote gateways can be used on this virtual network. If the flag is set to true, and allowGatewayTransit on remotepeering is also true, virtual network will use gateways of remote virtual network for transit. Only 1 peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway.'
+        type: boolean
   VirtualNetworkPropertiesFormat:
     properties:
+      VirtualNetworkPeerings:
+        description: Gets or sets list of peerings in a VirtualNetwork
+        items:
+          $ref: '#/definitions/VirtualNetworkPeering'
+        type: array
       addressSpace:
         $ref: '#/definitions/AddressSpace'
         description: Gets or sets AddressSpace that contains an array of IP address ranges that can be used by subnets
@@ -4810,13 +5214,13 @@ definitions:
         $ref: '#/definitions/DhcpOptions'
         description: Gets or sets DHCPOptions that contains an array of DNS servers available to VMs deployed in the virtual network
       provisioningState:
-        description: Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed
+        description: Gets provisioning state of the PublicIP resource Updating/Deleting/Failed
         type: string
       resourceGuid:
         description: Gets or sets resource guid property of the VirtualNetwork resource
         type: string
       subnets:
-        description: Gets or sets List of subnets in a VirtualNetwork
+        description: Gets or sets list of subnets in a VirtualNetwork
         items:
           $ref: '#/definitions/Subnet'
         type: array
@@ -4866,7 +5270,7 @@ definitions:
     description: Properties of the revoked VPN client certificate of virtual network gateway
     properties:
       provisioningState:
-        description: Gets or sets Provisioning state of the VPN client revoked certificate resource Updating/Deleting/Failed
+        description: Gets provisioning state of the VPN client revoked certificate resource Updating/Deleting/Failed
         type: string
       thumbprint:
         description: Gets or sets the revoked Vpn client certificate thumbprint
@@ -4889,7 +5293,7 @@ definitions:
     description: Properties of SSL certificates of application gateway
     properties:
       provisioningState:
-        description: Gets or sets Provisioning state of the VPN client root certificate resource Updating/Deleting/Failed
+        description: Gets provisioning state of the VPN client root certificate resource Updating/Deleting/Failed
         type: string
       publicCertData:
         description: Gets or sets the certificate public data

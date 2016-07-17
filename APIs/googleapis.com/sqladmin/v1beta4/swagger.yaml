@@ -333,6 +333,31 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a new backup run on demand.
+      operationId: sql.backupRuns.insert
+      parameters:
+        - description: Project ID of the project that contains the instance.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Cloud SQL instance ID. This does not include the project ID.
+          in: path
+          name: instance
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BackupRun'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      tags:
+        - backupRuns
   '/projects/{project}/instances/{instance}/backupRuns/{id}':
     delete:
       description: Deletes the backup taken by a backup run.
@@ -1439,6 +1464,9 @@ definitions:
   BackupRun:
     description: A database instance backup run resource.
     properties:
+      description:
+        description: 'The description of this run, only applicable to on-demand backups.'
+        type: string
       endTime:
         description: 'The time the backup operation completed in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.'
         format: date-time
@@ -1470,6 +1498,9 @@ definitions:
         type: string
       status:
         description: The status of this run.
+        type: string
+      type:
+        description: The type of this run; can be either "AUTOMATED" or "ON_DEMAND".
         type: string
       windowStartTime:
         description: 'The start time of the backup window during which this the backup was attempted in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.'

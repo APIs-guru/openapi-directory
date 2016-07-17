@@ -1909,6 +1909,164 @@ paths:
       summary: Create a customer with predefined ID
       tags:
         - Customers
+  /disputes:
+    get:
+      description: |
+        Retrieve a list of disputes
+      parameters:
+        - $ref: '#/parameters/collectionLimit'
+        - $ref: '#/parameters/collectionOffset'
+      responses:
+        '200':
+          description: A list of disputes was retrieved successfully
+          headers:
+            Pagination-Limit:
+              description: Items per page limit
+              type: integer
+            Pagination-Offset:
+              description: Pagination offset
+              type: integer
+            Pagination-Total:
+              description: Total items count
+              type: integer
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/Dispute'
+            type: array
+        '401':
+          $ref: '#/responses/AccessForbidden'
+      summary: Retrieve a list of disputes
+      tags:
+        - Disputes
+    post:
+      description: |
+        Create a dispute
+      parameters:
+        - description: Dispute resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Dispute'
+      responses:
+        '201':
+          description: Dispute was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Dispute'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Create a dispute
+      tags:
+        - Disputes
+  '/disputes/{id}':
+    get:
+      description: |
+        Retrieve a dispute with specified identifier string
+      responses:
+        '200':
+          description: Dispute was retrieved successfully
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Dispute'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '404':
+          $ref: '#/responses/NotFound'
+      summary: Retrieve a dispute
+      tags:
+        - Disputes
+    parameters:
+      - $ref: '#/parameters/resourceId'
+    put:
+      description: |
+        Create or update a Dispute with predefined identifier string
+      parameters:
+        - description: Dispute resource
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Dispute'
+      responses:
+        '200':
+          description: Dispute was updated
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Dispute'
+        '201':
+          description: Dispute was created
+          headers:
+            Rate-Limit-Limit:
+              description: The number of allowed requests in the current period
+              type: integer
+            Rate-Limit-Remaining:
+              description: The number of remaining requests in the current period
+              type: integer
+            Rate-Limit-Reset:
+              description: |
+                The date in format defined by [RFC 822](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.3.1)
+                when the current period will reset
+              type: string
+          schema:
+            $ref: '#/definitions/Dispute'
+        '401':
+          $ref: '#/responses/AccessForbidden'
+        '422':
+          description: Invalid data was sent
+          schema:
+            $ref: '#/definitions/InvalidError'
+      summary: Create or update a Dispute with predefined ID
+      tags:
+        - Disputes
   /email-credentials:
     get:
       description: |
@@ -6271,6 +6429,18 @@ paths:
       tags:
         - Websites
 definitions:
+  AmountAdjustment:
+    discriminator: amountPolicy
+    properties:
+      amountPolicy:
+        enum:
+          - full-price
+          - partial-amount
+          - rate-discount
+        type: string
+    required:
+      - amountPolicy
+    type: object
   ApiKey:
     description: API secret Key.
     properties:
@@ -6725,17 +6895,269 @@ definitions:
       - Friday
       - Saturday
     type: string
-  DeclineInstructions:
-    description: Dunning instructions object for payment declines
+  Dispute:
     properties:
-      dunningId:
+      _links:
+        $ref: '#/definitions/Links'
+      acquirerReferenceNumber:
+        description: The dispute's acquirer reference number
+        type: string
+      amount:
+        description: The dispute amount
+        format: double
+        type: number
+      category:
+        description: The dispute's category
+        enum:
+          - fraud
+          - unrecognized
+          - product-not-received
+          - product-unacceptable
+          - product-not-refunded
+          - duplicate
+          - subscription-canceled
+          - uncategorized
+        readOnly: true
+        type: string
+      createdTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: Dispute created time
+      currency:
+        description: The dispute currency ISO Alpha code
+        type: string
+      customerId:
+        description: The dispute's customer ID
+        readOnly: true
+        type: string
+      deadlineTime:
+        description: Dispute deadline time
+        format: date-time
+        type: string
+      evidence:
+        allOf:
+          - $ref: '#/definitions/DisputeEvidence'
+      evidenceSubmissionTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: Dispute evidence submission time
+      id:
         allOf:
           - $ref: '#/definitions/ResourceId'
-        description: The dunning identifier string
-      dunningIndex:
-        description: The position in the sequence of dunning
+        description: The dispute identifier string
         readOnly: true
-        type: integer
+      postedTime:
+        description: Dispute posted time
+        format: date-time
+        type: string
+      rawResponse:
+        description: Dispute raw response from gateway
+        readOnly: true
+        type: string
+      reasonCode:
+        description: The dispute's reason code
+        enum:
+          - 1000
+          - 12
+          - 2
+          - 30
+          - 31
+          - 35
+          - 37
+          - 40
+          - 41
+          - 42
+          - 46
+          - 47
+          - 49
+          - 50
+          - 53
+          - 54
+          - 55
+          - 57
+          - 59
+          - 60
+          - 62
+          - 7
+          - 70
+          - 71
+          - 72
+          - 73
+          - 74
+          - 75
+          - 76
+          - 77
+          - 79
+          - 8
+          - 80
+          - 81
+          - 82
+          - 83
+          - 85
+          - 86
+          - 93
+          - 0
+          - 63
+          - A01
+          - A02
+          - A08
+          - F10
+          - F14
+          - F22
+          - F24
+          - F29
+          - C02
+          - C04
+          - C05
+          - C08
+          - C14
+          - C18
+          - C28
+          - C31
+          - C32
+          - M10
+          - M49
+          - P01
+          - P03
+          - P04
+          - P05
+          - P07
+          - P08
+          - P22
+          - P23
+          - R03
+          - R13
+          - M01
+          - FR1
+          - FR4
+          - FR6
+          - AL
+          - AP
+          - AW
+          - CA
+          - CD
+          - CR
+          - DA
+          - DP
+          - DP1
+          - EX
+          - IC
+          - IN
+          - IS
+          - LP
+          - 'N'
+          - NA
+          - NC
+          - P
+          - RG
+          - RM
+          - RN1
+          - RN2
+          - SV
+          - TF
+          - TNM
+          - UA01
+          - UA02
+          - UA32
+          - UA99
+          - UA03
+          - UA10
+          - UA11
+          - UA12
+          - UA18
+          - UA20
+          - UA21
+          - UA22
+          - UA23
+          - UA28
+          - UA30
+          - UA31
+          - UA38
+        type: string
+      resolvedTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: Dispute resolved time
+      status:
+        description: The dispute's status
+        enum:
+          - response-needed
+          - under-review
+          - forfeited
+          - won
+          - lost
+        type: string
+      transactionId:
+        description: The dispute's transaction ID
+        type: string
+      type:
+        description: The dispute's type
+        enum:
+          - information-request
+          - first-chargeback
+          - second-chargeback
+          - arbitration
+        type: string
+      updatedTime:
+        allOf:
+          - $ref: '#/definitions/ServerTimestamp'
+        description: Dispute updated time
+    type: object
+  DisputeEvidence:
+    properties:
+      accessLogs:
+        description: The id of a file upload with the access logs showing the customer activity.
+        type: string
+      additionalFile:
+        description: Any additional evidence as a file upload id.
+        type: string
+      customerCommunication:
+        description: The id of a file upload showing communication with the customer (for example emails).
+        type: string
+      customerSignature:
+        description: The id of a file upload showing the signed contract or signed delivery receipt.
+        type: string
+      deliveryProof:
+        description: The id of a file upload showing the proof of delivery.
+        type: string
+      explanation:
+        description: An explanation relevant to the category of dispute.
+        type: string
+      policy:
+        description: 'The id of a file upload with the policy materials (may include the cancellation policy, refund policy, and terms of use).'
+        type: string
+    type: object
+  Dunning:
+    properties:
+      afterAttemptPolicy:
+        description: The policy on the attempt finishes
+        enum:
+          - none
+          - change-renewal-time
+        type: string
+      afterDunningEndPolicy:
+        description: The policy on the dunning ends
+        enum:
+          - none
+          - cancel-subscription
+        type: string
+      attempts:
+        items:
+          properties:
+            paymentInstruction:
+              $ref: '#/definitions/AmountAdjustment'
+            scheduleInstruction:
+              $ref: '#/definitions/ScheduleMethod'
+          required:
+            - scheduleInstruction
+            - paymentInstruction
+          type: object
+        minItems: 1
+        type: array
+    required:
+      - attempts
+      - afterAttemptPolicy
+      - afterDunningEndPolicy
     type: object
   Email:
     properties:
@@ -7342,7 +7764,15 @@ definitions:
           - $ref: '#/definitions/ResourceId'
         description: The customer identifier string
       declineInstructions:
-        $ref: '#/definitions/DeclineInstructions'
+        description: Dunning instructions object for payment declines
+        properties:
+          dunning:
+            $ref: '#/definitions/Dunning'
+          dunningIndex:
+            description: The position in the sequence of dunning
+            readOnly: true
+            type: integer
+        type: object
       description:
         description: The payment description
         maxLength: 255
@@ -8756,6 +9186,9 @@ definitions:
       - $ref: '#/definitions/compare'
     description: Equals condition
     type: object
+  full-price:
+    allOf:
+      - $ref: '#/definitions/AmountAdjustment'
   gt:
     allOf:
       - $ref: '#/definitions/Condition'
@@ -8834,6 +9267,16 @@ definitions:
       - $ref: '#/definitions/logical'
     description: Logical OR
     type: object
+  partial-amount:
+    allOf:
+      - $ref: '#/definitions/AmountAdjustment'
+      - properties:
+          amount:
+            description: The payment amount
+            type: string
+        required:
+          - amount
+        type: object
   payment_card:
     allOf:
       - $ref: '#/definitions/Payment'
@@ -8844,3 +9287,13 @@ definitions:
           - paymentInstrument
         type: object
     description: A Payment using a Payment Card
+  rate-discount:
+    allOf:
+      - $ref: '#/definitions/AmountAdjustment'
+      - properties:
+          rate:
+            description: The rate of payment amount
+            type: string
+        required:
+          - rate
+        type: object

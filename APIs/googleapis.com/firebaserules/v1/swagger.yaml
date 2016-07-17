@@ -140,8 +140,7 @@ paths:
       tags:
         - projects
     get:
-      description: |
-        Get a `Release` by name.
+      description: Get a `Release` by name.
       operationId: firebaserules.projects.releases.get
       parameters:
         - description: |-
@@ -191,7 +190,7 @@ paths:
         instead.
       operationId: firebaserules.projects.releases.update
       parameters:
-        - description: |
+        - description: |-
             Resource name for the `Release`.
 
             `Release` names may be structured `app1/prod/v2` or flat `app1_prod_v2`
@@ -622,7 +621,7 @@ definitions:
         format: google-datetime
         type: string
       name:
-        description: |
+        description: |-
           Resource name for the `Release`.
 
           `Release` names may be structured `app1/prod/v2` or flat `app1_prod_v2`
