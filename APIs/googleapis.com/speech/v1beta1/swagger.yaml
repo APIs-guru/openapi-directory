@@ -1,28 +1,28 @@
 swagger: '2.0'
 schemes:
   - https
-host: cloudbuild.googleapis.com
+host: speech.googleapis.com
 basePath: /
 info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Builds container images in the cloud.
-  title: Google Cloud Container Builder
-  version: v1
+  description: Google Cloud Speech API.
+  title: Google Cloud Speech
+  version: v1beta1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
   x-logo:
     url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
   x-origin:
     format: google
-    url: 'https://cloudbuild.googleapis.com/$discovery/rest?version=v1'
+    url: 'https://speech.googleapis.com/$discovery/rest?version=v1beta1'
     version: v1
   x-preferred: true
   x-providerName: googleapis.com
-  x-serviceName: cloudbuild
+  x-serviceName: speech
 externalDocs:
-  url: 'https://cloud.google.com/container-builder/docs/'
+  url: 'https://cloud.google.com/speech/'
 securityDefinitions:
   Oauth2:
     authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
@@ -108,170 +108,10 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: projects
+  - name: speech
   - name: operations
 paths:
-  '/v1/projects/{projectId}/builds':
-    get:
-      description: |-
-        Lists previously requested builds.
-
-        Previously requested builds may still be in-progress, or may have finished
-        successfully or unsuccessfully.
-      operationId: cloudbuild.projects.builds.list
-      parameters:
-        - description: ID of the project.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: Number of results to return in the list.
-          in: query
-          name: pageSize
-          type: integer
-        - description: Token to provide to skip to a particular spot in the list.
-          in: query
-          name: pageToken
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/ListBuildsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - projects
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-    post:
-      description: |-
-        Starts a build with the specified configuration.
-
-        The long-running Operation returned by this method will include the ID of
-        the build, which can be passed to GetBuild to determine its status (e.g.,
-        success or failure).
-      operationId: cloudbuild.projects.builds.create
-      parameters:
-        - description: ID of the project.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Build'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Operation'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - projects
-  '/v1/projects/{projectId}/builds/{id}':
-    get:
-      description: |-
-        Returns information about a previously requested build.
-
-        The Build that is returned includes its status (e.g., success or failure,
-        or in-progress), and timing information.
-      operationId: cloudbuild.projects.builds.get
-      parameters:
-        - description: ID of the project.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: ID of the build.
-          in: path
-          name: id
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Build'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - projects
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-  '/v1/projects/{projectId}/builds/{id}:cancel':
-    parameters:
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/pp'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/bearer_token'
-      - $ref: '#/parameters/upload_protocol'
-    post:
-      description: Cancels a requested build in progress.
-      operationId: cloudbuild.projects.builds.cancel
-      parameters:
-        - description: ID of the project.
-          in: path
-          name: projectId
-          required: true
-          type: string
-        - description: ID of the build.
-          in: path
-          name: id
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/CancelBuildRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Build'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - projects
-  '/v1/{name}':
+  /v1beta1/operations:
     get:
       description: |-
         Lists operations that match the specified filter in the request. If the
@@ -279,14 +119,8 @@ paths:
 
         NOTE: the `name` binding below allows API services to override the binding
         to use different resource name schemes, such as `users/*/operations`.
-      operationId: cloudbuild.operations.list
+      operationId: speech.operations.list
       parameters:
-        - description: The name of the operation collection.
-          in: path
-          name: name
-          required: true
-          type: string
-          x-reservedExpansion: true
         - description: The standard list page size.
           in: query
           name: pageSize
@@ -294,6 +128,10 @@ paths:
         - description: The standard list filter.
           in: query
           name: filter
+          type: string
+        - description: The name of the operation collection.
+          in: query
+          name: name
           type: string
         - description: The standard list page token.
           in: query
@@ -323,211 +161,217 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/upload_protocol'
+  '/v1beta1/operations/{name}':
+    delete:
+      description: |-
+        Deletes a long-running operation. This method indicates that the client is
+        no longer interested in the operation result. It does not cancel the
+        operation. If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`.
+      operationId: speech.operations.delete
+      parameters:
+        - description: The name of the operation resource to be deleted.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - operations
+    get:
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: speech.operations.get
+      parameters:
+        - description: The name of the operation resource.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - operations
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1beta1/operations/{name}:cancel':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Starts asynchronous cancellation on a long-running operation.  The server
+        makes a best effort to cancel the operation, but success is not
+        guaranteed.  If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+        Operations.GetOperation or
+        other methods to check whether the cancellation succeeded or whether the
+        operation completed despite cancellation.
+      operationId: speech.operations.cancel
+      parameters:
+        - description: The name of the operation resource to be cancelled.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CancelOperationRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - operations
+  '/v1beta1/speech:asyncrecognize':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Perform asynchronous speech-recognition: receive results via the
+        google.longrunning.Operations interface. Returns either an
+        `Operation.error` or an `Operation.response` which contains
+        an `AsyncRecognizeResponse` message.
+      operationId: speech.speech.asyncrecognize
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AsyncRecognizeRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - speech
+  '/v1beta1/speech:syncrecognize':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Perform synchronous speech-recognition: receive results after all audio
+        has been sent and processed.
+      operationId: speech.speech.syncrecognize
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SyncRecognizeRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SyncRecognizeResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - speech
 definitions:
-  Build:
+  AsyncRecognizeRequest:
     description: |-
-      A build resource in the Container Builder API.
-
-      At a high level, a Build describes where to find source code, how to build
-      it (for example, the builder image to run on the source), and what tag to
-      apply to the built image when it is pushed to Google Container Registry.
+      `AsyncRecognizeRequest` is the top-level message sent by the client for
+      the `AsyncRecognize` method.
     properties:
-      createTime:
+      audio:
+        $ref: '#/definitions/RecognitionAudio'
+        description: '[Required] The audio data to be recognized.'
+      config:
+        $ref: '#/definitions/RecognitionConfig'
         description: |-
-          Time at which the build was created.
-          @OutputOnly
-        format: google-datetime
-        type: string
-      finishTime:
-        description: |-
-          Time at which execution of the build was finished.
-          @OutputOnly
-        format: google-datetime
-        type: string
-      id:
-        description: |-
-          Unique identifier of the build.
-          @OutputOnly
-        type: string
-      images:
-        description: |-
-          List of images expected to be built and pushed to Google Container
-          Registry. If an image is listed here and the image is not produced by
-          one of the build steps, the build will fail. Any images present when
-          the build steps are complete will be pushed to Container Registry.
-        items:
-          type: string
-        type: array
-      logsBucket:
-        description: |-
-          Google Cloud Storage bucket where logs should be written (see
-          [Bucket Name
-          Requirements](https://cloud.google.com/storage/docs/bucket-naming#requirements)).
-          Logs file names will be of the format `${logs_bucket}/log-${build_id}.txt`.
-        type: string
-      options:
-        $ref: '#/definitions/BuildOptions'
-        description: Special options for this build.
-      projectId:
-        description: |-
-          ID of the project.
-          @OutputOnly.
-        type: string
-      results:
-        $ref: '#/definitions/Results'
-        description: |-
-          Results of the build.
-          @OutputOnly
-      source:
-        $ref: '#/definitions/Source'
-        description: Describes where to find the source files to build.
-      sourceProvenance:
-        $ref: '#/definitions/SourceProvenance'
-        description: |-
-          A permanent fixed identifier for source.
-          @OutputOnly
-      startTime:
-        description: |-
-          Time at which execution of the build was started.
-          @OutputOnly
-        format: google-datetime
-        type: string
-      status:
-        description: |-
-          Status of the build.
-          @OutputOnly
-        enum:
-          - STATUS_UNKNOWN
-          - QUEUING
-          - QUEUED
-          - WORKING
-          - SUCCESS
-          - FAILURE
-          - INTERNAL_ERROR
-          - TIMEOUT
-          - CANCELLED
-        type: string
-      statusDetail:
-        description: |-
-          Customer-readable message about the current status.
-          @OutputOnly
-        type: string
-      steps:
-        description: Describes the operations to be performed on the workspace.
-        items:
-          $ref: '#/definitions/BuildStep'
-        type: array
-      timeout:
-        description: |-
-          Amount of time that this build should be allowed to run, to second
-          granularity. If this amount of time elapses, work on the build will cease
-          and the build status will be TIMEOUT.
-
-          Default time is ten minutes.
-        format: google-duration
-        type: string
+          [Required] The `config` message provides information to the recognizer
+          that specifies how to process the request.
     type: object
-  BuildOperationMetadata:
-    description: Metadata for build operations.
-    properties:
-      build:
-        $ref: '#/definitions/Build'
-        description: The build that the operation is tracking.
-    type: object
-  BuildOptions:
-    description: Optional arguments to enable specific features of builds.
-    properties:
-      requestedVerifyOption:
-        description: Options for a verifiable build with details uploaded to the Analysis API.
-        enum:
-          - NOT_VERIFIED
-          - VERIFIED
-        type: string
-      sourceProvenanceHash:
-        description: Requested hash for SourceProvenance.
-        items:
-          enum:
-            - NONE
-            - SHA256
-          type: string
-        type: array
-    type: object
-  BuildStep:
-    description: BuildStep describes a step to perform in the build pipeline.
-    properties:
-      args:
-        description: Command-line arguments to use when running this step's container.
-        items:
-          type: string
-        type: array
-      dir:
-        description: |-
-          Working directory (relative to project source root) to use when running
-          this operation's container.
-        type: string
-      env:
-        description: Additional environment variables to set for this step's container.
-        items:
-          type: string
-        type: array
-      name:
-        description: |-
-          Name of the container image to use for creating this stage in the
-          pipeline, as presented to `docker pull`.
-        type: string
-    type: object
-  BuiltImage:
-    description: BuiltImage describes an image built by the pipeline.
-    properties:
-      digest:
-        description: Docker Registry 2.0 digest.
-        type: string
-      name:
-        description: |-
-          Name used to push the container image to Google Container Registry, as
-          presented to `docker push`.
-        type: string
-    type: object
-  CancelBuildRequest:
-    description: Request to cancel an ongoing build.
+  CancelOperationRequest:
+    description: The request message for Operations.CancelOperation.
     properties: {}
     type: object
-  FileHashes:
+  Empty:
     description: |-
-      Container message for hashes of byte content of files, used in
-      SourceProvenance messages to verify integrity of source input to the build.
-    properties:
-      fileHash:
-        description: Collection of file hashes.
-        items:
-          $ref: '#/definitions/Hash'
-        type: array
-    type: object
-  Hash:
-    description: Container message for hash values.
-    properties:
-      type:
-        description: The type of hash that was performed.
-        enum:
-          - NONE
-          - SHA256
-        type: string
-      value:
-        description: The hash value.
-        format: byte
-        type: string
-    type: object
-  ListBuildsResponse:
-    description: Response including listed builds.
-    properties:
-      builds:
-        description: 'Builds will be sorted by create_time, descending.'
-        items:
-          $ref: '#/definitions/Build'
-        type: array
-      nextPageToken:
-        description: Token to receive the next page of results.
-        type: string
+      A generic empty message that you can re-use to avoid defining duplicated
+      empty messages in your APIs. A typical example is to use it as the request
+      or the response type of an API method. For instance:
+
+          service Foo {
+            rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty);
+          }
+
+      The JSON representation for `Empty` is empty JSON object `{}`.
+    properties: {}
     type: object
   ListOperationsResponse:
     description: The response message for Operations.ListOperations.
@@ -584,51 +428,122 @@ definitions:
           `TakeSnapshotResponse`.
         type: object
     type: object
-  Results:
-    description: Results describes the artifacts created by the build pipeline.
+  RecognitionAudio:
+    description: |-
+      Contains audio data in the encoding specified in the `RecognitionConfig`.
+      Either `content` or `uri` must be supplied. Supplying both or neither
+      returns google.rpc.Code.INVALID_ARGUMENT.
     properties:
-      images:
-        description: Images that were built as a part of the build.
+      content:
+        description: |-
+          The audio data bytes encoded as specified in
+          `RecognitionConfig`. Note: as with all bytes fields, protobuffers use a
+          pure binary representation, whereas JSON representations use base64.
+        format: byte
+        type: string
+      uri:
+        description: |-
+          URI that points to a file that contains audio data bytes as specified in
+          `RecognitionConfig`. Currently, only Google Cloud Storage URIs are
+          supported, which must be specified in the following format:
+          `gs://bucket_name/object_name` (other URI formats return
+          google.rpc.Code.INVALID_ARGUMENT). For more information, see
+          [Request URIs](/storage/docs/reference-uris).
+        type: string
+    type: object
+  RecognitionConfig:
+    description: |-
+      The `RecognitionConfig` message provides information to the recognizer
+      that specifies how to process the request.
+    properties:
+      encoding:
+        description: '[Required] Encoding of audio data sent in all `RecognitionAudio` messages.'
+        enum:
+          - ENCODING_UNSPECIFIED
+          - LINEAR16
+          - FLAC
+          - MULAW
+          - AMR
+          - AMR_WB
+        type: string
+      languageCode:
+        description: |-
+          [Optional] The language of the supplied audio as a BCP-47 language tag.
+          Example: "en-GB"  https://www.rfc-editor.org/rfc/bcp/bcp47.txt
+          If omitted, defaults to "en-US". See
+          [Language Support](/speech/docs/best-practices#language_support) for
+          a list of the currently supported language codes.
+        type: string
+      maxAlternatives:
+        description: |-
+          [Optional] Maximum number of recognition hypotheses to be returned.
+          Specifically, the maximum number of `SpeechRecognitionAlternative` messages
+          within each `SpeechRecognitionResult`.
+          The server may return fewer than `max_alternatives`.
+          Valid values are `0`-`30`. A value of `0` or `1` will return a maximum of
+          `1`. If omitted, defaults to `1`.
+        format: int32
+        type: integer
+      profanityFilter:
+        description: |-
+          [Optional] If set to `true`, the server will attempt to filter out
+          profanities, replacing all but the initial character in each filtered word
+          with asterisks, e.g. "f***". If set to `false` or omitted, profanities
+          won't be filtered out.
+        type: boolean
+      sampleRate:
+        description: |-
+          [Required] Sample rate in Hertz of the audio data sent in all
+          `RecognitionAudio` messages. Valid values are: 8000-48000.
+          16000 is optimal. For best results, set the sampling rate of the audio
+          source to 16000 Hz. If that's not possible, use the native sample rate of
+          the audio source (instead of re-sampling).
+        format: int32
+        type: integer
+      speechContext:
+        $ref: '#/definitions/SpeechContext'
+        description: '[Optional] A means to provide context to assist the speech recognition.'
+    type: object
+  SpeechContext:
+    description: |-
+      Provides "hints" to the speech recognizer to favor specific words and phrases
+      in the results.
+    properties:
+      phrases:
+        description: |-
+          [Optional] A list of up to 50 phrases of up to 100 characters each to
+          provide words and phrases "hints" to the speech recognition so that it is
+          more likely to recognize them.
         items:
-          $ref: '#/definitions/BuiltImage'
+          type: string
         type: array
     type: object
-  Source:
-    description: |-
-      Source describes the location of the source in a supported storage
-      service.
+  SpeechRecognitionAlternative:
+    description: Alternative hypotheses (a.k.a. n-best list).
     properties:
-      storageSource:
-        $ref: '#/definitions/StorageSource'
+      confidence:
         description: |-
-          If provided, get the source from this location in in Google Cloud
-          Storage.
+          [Output-only] The confidence estimate between 0.0 and 1.0. A higher number
+          means the system is more confident that the recognition is correct.
+          This field is typically provided only for the top hypothesis, and only for
+          `is_final=true` results.
+          The default of 0.0 is a sentinel value indicating confidence was not set.
+        format: float
+        type: number
+      transcript:
+        description: '[Output-only] Transcript text representing the words that the user spoke.'
+        type: string
     type: object
-  SourceProvenance:
-    description: |-
-      Provenance of the source. Ways to find the original source, or verify that
-      some source was used for this build.
+  SpeechRecognitionResult:
+    description: A speech recognition result corresponding to a portion of the audio.
     properties:
-      fileHashes:
-        additionalProperties:
-          $ref: '#/definitions/FileHashes'
+      alternatives:
         description: |-
-          Hash(es) of the build source, which can be used to verify that the original
-          source integrity was maintained in the build. Note that FileHashes will
-          only be populated if BuildOptions has requested a SourceProvenanceHash.
-
-          The keys to this map are file paths used as build source and the values
-          contain the hash values for those files.
-
-          If the build source came in a single package such as a gzipped tarfile
-          (.tar.gz), the FileHash will be for the single path to that file.
-          @OutputOnly
-        type: object
-      resolvedStorageSource:
-        $ref: '#/definitions/StorageSource'
-        description: |-
-          A copy of the build's source.storage_source, if exists, with any
-          generations resolved.
+          [Output-only] May contain one or more recognition hypotheses (up to the
+          maximum specified in `max_alternatives`).
+        items:
+          $ref: '#/definitions/SpeechRecognitionAlternative'
+        type: array
     type: object
   Status:
     description: |-
@@ -705,28 +620,31 @@ definitions:
           google.rpc.Status.details field, or localized by the client.
         type: string
     type: object
-  StorageSource:
+  SyncRecognizeRequest:
     description: |-
-      StorageSource describes the location of the source in an archive file in
-      Google Cloud Storage.
+      `SyncRecognizeRequest` is the top-level message sent by the client for
+      the `SyncRecognize` method.
     properties:
-      bucket:
+      audio:
+        $ref: '#/definitions/RecognitionAudio'
+        description: '[Required] The audio data to be recognized.'
+      config:
+        $ref: '#/definitions/RecognitionConfig'
         description: |-
-          Google Cloud Storage bucket containing source (see
-          [Bucket Name
-          Requirements](https://cloud.google.com/storage/docs/bucket-naming#requirements)).
-        type: string
-      generation:
+          [Required] The `config` message provides information to the recognizer
+          that specifies how to process the request.
+    type: object
+  SyncRecognizeResponse:
+    description: |-
+      `SyncRecognizeResponse` is the only message returned to the client by
+      `SyncRecognize`. It contains the result as zero or more sequential
+      `SpeechRecognitionResult` messages.
+    properties:
+      results:
         description: |-
-          Google Cloud Storage generation for the object. If the generation is
-          omitted, the latest generation will be used.
-        format: int64
-        type: string
-      object:
-        description: |-
-          Google Cloud Storage object containing source.
-
-          This object must be a gzipped archive file (.tar.gz) containing source to
-          build.
-        type: string
+          [Output-only] Sequential list of transcription results corresponding to
+          sequential portions of audio.
+        items:
+          $ref: '#/definitions/SpeechRecognitionResult'
+        type: array
     type: object

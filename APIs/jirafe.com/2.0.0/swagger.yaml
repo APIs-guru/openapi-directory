@@ -478,8 +478,6 @@ definitions:
         type: string
       customer:
         $ref: '#/definitions/Customer'
-      delivery_address:
-        $ref: '#/definitions/Address'
       items:
         items:
           $ref: '#/definitions/OrderItem'
@@ -490,8 +488,6 @@ definitions:
         type: string
       order_number:
         type: string
-      payment_address:
-        $ref: '#/definitions/Address'
       previous_items:
         items:
           $ref: '#/definitions/OrderItem'

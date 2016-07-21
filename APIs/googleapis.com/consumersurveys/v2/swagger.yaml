@@ -288,6 +288,27 @@ paths:
       tags:
         - surveys
   '/surveys/{surveyUrlId}':
+    delete:
+      description: Removes a survey from view in all user GET requests.
+      operationId: consumersurveys.surveys.delete
+      parameters:
+        - description: External URL ID for the survey.
+          in: path
+          name: surveyUrlId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SurveysDeleteResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/consumersurveys'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - surveys
     get:
       description: Retrieves information about the specified survey.
       operationId: consumersurveys.surveys.get
@@ -631,6 +652,12 @@ definitions:
         type: string
       surveyUrlId:
         description: External survey ID as viewable by survey owners in the editor view.
+        type: string
+    type: object
+  SurveysDeleteResponse:
+    properties:
+      requestId:
+        description: Unique request ID used for logging and debugging. Please include in any error reporting or troubleshooting requests.
         type: string
     type: object
   SurveysListResponse:

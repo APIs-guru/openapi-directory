@@ -184,6 +184,10 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
+        '200':
+          description: Namespace create request accepted
+          schema:
+            $ref: '#/definitions/NamespaceResource'
         '201':
           description: Namespace create request accepted
           schema:
@@ -515,7 +519,7 @@ definitions:
         type: string
         x-ms-enum:
           modelAsString: true
-          name: kind
+          name: Kind
       properties:
         $ref: '#/definitions/NamespaceProperties'
       sku:

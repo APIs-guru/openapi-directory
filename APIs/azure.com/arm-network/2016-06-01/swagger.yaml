@@ -153,8 +153,7 @@ paths:
             $ref: '#/definitions/UsagesListResult'
       tags:
         - Usages
-      x-ms-pageable:
-        nextLinkName: nextLink
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkInterfaces':
     get:
       description: The List networkInterfaces opertion retrieves all the networkInterfaces in a subscription.

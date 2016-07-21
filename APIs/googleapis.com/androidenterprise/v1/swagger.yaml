@@ -1123,7 +1123,8 @@ paths:
         Once the service account is bound to the enterprise, it can be managed using the serviceAccountKeys resource.
       operationId: androidenterprise.enterprises.getServiceAccount
       parameters:
-        - in: path
+        - description: The ID of the enterprise.
+          in: path
           name: enterpriseId
           required: true
           type: string
@@ -1239,7 +1240,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/enterprises/{enterpriseId}/storeLayout':
     get:
-      description: Returns the store layout resource.
+      description: 'Returns the store layout resource for the enterprise. If store layout has not been set, or if store layout has no homepage set, returns a NOT_FOUND error.'
       operationId: androidenterprise.enterprises.getStoreLayout
       parameters:
         - description: The ID of the enterprise.
@@ -1670,7 +1671,7 @@ paths:
         - enterprises
   '/enterprises/{enterpriseId}/users':
     get:
-      description: Looks up a user by their primary email address. This is only supported for Google-managed users. Lookup of the id is not needed for EMM-managed users because the id is already returned in the result of the Users.insert call.
+      description: Looks up a user by primary email address. This is only supported for Google-managed users. Lookup of the id is not needed for EMM-managed users because the id is already returned in the result of the Users.insert call.
       operationId: androidenterprise.users.list
       parameters:
         - description: The ID of the enterprise.
@@ -1702,10 +1703,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: |-
-        Creates a new EMM-managed user.
-
-        The required details of the user are passed in the Users resource in the body of the request. Specifically, the accountIdentifier, accountType, and displayName fields must be provided.
+      description: Inserts a new resource into this collection.
       operationId: androidenterprise.users.insert
       parameters:
         - description: The ID of the enterprise.
@@ -1786,7 +1784,7 @@ paths:
       description: |-
         Updates the details of an EMM-managed user.
 
-        This only works with EMM-managed users. Pass the new details in Users resource in the request body. Only the displayName field can be changed. Other fields must either be unset or have the currently active value. This method supports patch semantics.
+        Can be used with EMM-managed users only (not Google managed users). Pass the new details in the Users resource in the request body. Only the displayName field can be changed. Other fields must either be unset or have the currently active value. This method supports patch semantics.
       operationId: androidenterprise.users.patch
       parameters:
         - description: The ID of the enterprise.
@@ -1817,7 +1815,7 @@ paths:
       description: |-
         Updates the details of an EMM-managed user.
 
-        This only works with EMM-managed users. Pass the new details in Users resource in the request body. Only the displayName field can be changed. Other fields must either be unset or have the currently active value.
+        Can be used with EMM-managed users only (not Google managed users). Pass the new details in the Users resource in the request body. Only the displayName field can be changed. Other fields must either be unset or have the currently active value.
       operationId: androidenterprise.users.update
       parameters:
         - description: The ID of the enterprise.
@@ -2750,20 +2748,9 @@ definitions:
     type: object
   Enterprise:
     description: |-
-      An enterprise resource represents the binding between an EMM and a specific organization.
-
-
-      That binding can be instantiated in one of two different ways using this API as follows:
-
-
-       
-      - For Google managed domain customers, the process involves using Enterprises.enroll and Enterprises.setAccount (in conjunction with artifacts obtained from the Admin console and the Google Developers console) and submitted to the EMM through a more-or-less manual process. 
-
-
-      - An alternative process that takes advantage of Google-provided mechanisms (Android for Work Sign-up UI) that expedite the process involves Enterprises.generateSignupUrl, Enterprises.completeSignup, Enterprises.getServiceAccount  (optional), and Enterprises.setAccount.  
-
-
-      The overall processes are very different and involve different identity models, but as an EMM, you can support either or both approaches in your EMM console. See EMM Developer's Guide for details.
+      An enterprise resource represents the binding between an EMM and a specific organization. That binding can be instantiated in one of two different ways using this API as follows: 
+      - For Google managed domain customers, the process involves using Enterprises.enroll and Enterprises.setAccount (in conjunction with artifacts obtained from the Admin console and the Google API Console) and submitted to the EMM through a more-or-less manual process. 
+      - For Android for Work Accounts customers, the process involves using Enterprises.generateSignupUrl and Enterprises.completeSignup in conjunction with the Android for Work Sign-up UI (Google-provided mechanism) to create the binding without manual steps. As an EMM, you can support either or both approaches in your EMM console. See Create an Enterprise for details.
     properties:
       administrator:
         description: Administrators of the enterprise. This is only supported for enterprises created via the EMM-initiated flow.
@@ -2778,10 +2765,10 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#enterprise".'
         type: string
       name:
-        description: 'The name of the enterprise, e.g. "Example Inc".'
+        description: 'The name of the enterprise, for example, "Example, Inc".'
         type: string
       primaryDomain:
-        description: 'The enterprise''s primary domain, e.g. "example.com".'
+        description: 'The enterprise''s primary domain, such as "example.com".'
         type: string
     type: object
   EnterpriseAccount:
@@ -3300,7 +3287,7 @@ definitions:
         description: |-
           The ID of the store page to be used as the homepage. The homepage will be used as the first page shown in the Google Play for Work store.
 
-          If there is no homepage set, an empty store is shown. The homepage can be unset (by not specifying it) to empty the store.
+          If a homepage has not been set, the play store shown on devices will be empty. Not specifying a homepage on a store layout effectively empties the store.
 
           If there exists at least one page, this field must be set to the ID of a valid page.
         type: string
@@ -3368,20 +3355,18 @@ definitions:
     type: object
   User:
     description: |-
-      A Users resource represents an account associated with an enterprise. The account may be specific to a device or to an individual user (who can then use the account across multiple devices). The account may provide access to Google Play for Work only, or to other Google services, depending on the identity model used:  
+      A Users resource represents an account associated with an enterprise. The account may be specific to a device or to an individual user (who can then use the account across multiple devices). The account may provide access to Google Play for Work only, or to other Google services, depending on the identity model: 
       - Google managed domain identity model requires synchronization to Google account sources (via primaryEmail). 
-
-
-      - Android for Work accounts identity model provides a dynamic means for enterprises to create user or device accounts as needed. These accounts provide access to Google Play for Work only.
+      - Android for Work Accounts identity model provides a dynamic means for enterprises to create user or device accounts as needed. These accounts provide access to Google Play for Work only.
     properties:
       accountIdentifier:
-        description: 'The id as used by the EMM for this user, e.g. "user342" or "asset#44418". Will always be set for EMM managed users and not set for Google managed users. For privacy sensitive deployments it should not be possible to identify the individual with this identifier.'
+        description: 'A unique identifier you create for this user, such as "user342" or "asset#44418". Do not use personally identifiable information (PII) for this property. Must always be set for EMM-managed users. Not set for Google-managed users.'
         type: string
       accountType:
-        description: 'The type of account that this user represents. A "deviceAccount" is specific to a single device while a "userAccount" represents a traditional user account, i.e. one that can be installed on multiple devices. "googleManaged" users will always be a "userAccount" but "emmManaged" users can be either a "userAccount" or a "deviceAccount".'
+        description: 'The type of account that this user represents. A userAccount can be installed on multiple devices, but a deviceAccount is specific to a single device. An EMM-managed user (emmManaged) can be either type (userAccount, deviceAccount), but a Google-managed user (googleManaged) is always a userAccount.'
         type: string
       displayName:
-        description: 'The user''s name as it is to be presented in user interfaces, e.g. "John". Can optionally be set for EMM managed users and will not be set for Google managed users. For privacy sensitive deployments this should be left unset or set to something generic.'
+        description: 'The name that will appear in user interfaces. Setting this property is optional when creating EMM-managed users. If you do set this property, use something generic about the organization (such as "Example, Inc.") or your name (as EMM). Not used for Google-managed user accounts.'
         type: string
       id:
         description: The unique ID for the user.
@@ -3391,7 +3376,7 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#user".'
         type: string
       managementType:
-        description: 'The entity that manages the user. With "googleManaged" users, the source of truth is Google so EMMs have to make sure a Google account exists for the user. With "emmManaged" users, the EMM is in charge.'
+        description: 'The entity that manages the user. With googleManaged users, the source of truth is Google so EMMs have to make sure a Google Account exists for the user. With emmManaged users, the EMM is in charge.'
         type: string
       primaryEmail:
         description: 'The user''s primary email address, for example, "jsmith@example.com". Will always be set for Google managed users and not set for EMM managed users.'

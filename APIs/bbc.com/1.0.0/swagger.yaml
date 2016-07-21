@@ -2610,16 +2610,12 @@ definitions:
                         properties:
                           '#text':
                             type: string
-                        required:
-                          - '#text'
                         type: object
                       minItems: 1
                       type: array
                   required:
                     - media_set
                   type: object
-              required:
-                - '#text'
               type: object
             minItems: 1
             type: array
@@ -2996,16 +2992,14 @@ definitions:
       - partner
     type: object
   broadcastTime:
-    additionalProperties: false
-    properties:
-      '#text':
-        $ref: '#/definitions/dateRange'
-      duration:
-        pattern: '^(-)?P(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)W)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?$'
-        type: string
-    required:
-      - '#text'
-    type: object
+    allOf:
+      - $ref: '#/definitions/dateRange'
+      - additionalProperties: true
+        properties:
+          duration:
+            pattern: '^(-)?P(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)W)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?$'
+            type: string
+        type: object
   broadcast_of:
     $ref: '#/definitions/pidReference'
   broadcaster:
@@ -3173,8 +3167,6 @@ definitions:
                     type: string
                   id:
                     type: string
-                required:
-                  - '#text'
                 type: object
             type: object
           contributions_mixin_contributor:
@@ -3186,8 +3178,6 @@ definitions:
                 type: string
               id:
                 type: string
-            required:
-              - '#text'
             type: object
         required:
           - contribution
@@ -3385,11 +3375,15 @@ definitions:
       - deprecated_since
     type: object
   deprecatedReferenceElement:
-    additionalProperties: false
-    type: object
-    x-anyOf:
-      - $ref: '#/definitions/deprecationAttributes'
+    allOf:
       - $ref: '#/definitions/referenceAttributes'
+      - additionalProperties: true
+        type: object
+        x-anyOf:
+          - $ref: '#/definitions/deprecationAttributes'
+          - properties:
+              deprecationAttributes:
+                $ref: '#/definitions/deprecationAttributes'
   deprecationAttributes:
     additionalProperties: false
     properties:
@@ -3680,8 +3674,6 @@ definitions:
         type: string
       format_id:
         type: string
-    required:
-      - '#text'
     type: object
   format-string:
     type: string
@@ -3700,8 +3692,6 @@ definitions:
         type: string
       type:
         type: string
-    required:
-      - '#text'
     type: object
   genreGroupingsType:
     additionalProperties: false
@@ -3712,17 +3702,15 @@ definitions:
         type: array
     type: object
   genreGroupsType:
-    additionalProperties: false
-    properties:
-      '#text':
-        $ref: '#/definitions/deprecatedReferenceElement'
-      genre_group:
-        items:
-          $ref: '#/definitions/genre_group'
-        type: array
-    required:
-      - '#text'
-    type: object
+    allOf:
+      - $ref: '#/definitions/deprecatedReferenceElement'
+      - additionalProperties: true
+        properties:
+          genre_group:
+            items:
+              $ref: '#/definitions/genre_group'
+            type: array
+        type: object
   genre_group:
     additionalProperties: false
     properties:
@@ -3815,8 +3803,6 @@ definitions:
         type: string
       type:
         type: string
-    required:
-      - '#text'
     type: object
   ids:
     additionalProperties: false
@@ -3867,6 +3853,8 @@ definitions:
         x-anyOf:
           - $ref: '#/definitions/deprecationAttributes'
           - properties:
+              deprecationAttributes:
+                $ref: '#/definitions/deprecationAttributes'
               image:
                 additionalProperties: false
                 properties:
@@ -4136,8 +4124,6 @@ definitions:
         type: string
       transport:
         type: string
-    required:
-      - '#text'
     type: object
   media_profile_groups:
     additionalProperties: false
@@ -4549,8 +4535,6 @@ definitions:
         type: string
       transport:
         type: string
-    required:
-      - '#text'
     type: object
   published_time:
     $ref: '#/definitions/broadcastTime'
@@ -4567,17 +4551,15 @@ definitions:
     minLength: 4
     type: string
   reference:
-    additionalProperties: false
-    properties:
-      '#text':
-        $ref: '#/definitions/referenceAttributes'
-      href_deprecated:
-        type: boolean
-      result_type_deprecated:
-        type: boolean
-    required:
-      - '#text'
-    type: object
+    allOf:
+      - $ref: '#/definitions/referenceAttributes'
+      - additionalProperties: true
+        properties:
+          href_deprecated:
+            type: boolean
+          result_type_deprecated:
+            type: boolean
+        type: object
   referenceAttributes:
     additionalProperties: false
     properties:
@@ -5310,8 +5292,6 @@ definitions:
         type: string
       warning_code:
         type: string
-    required:
-      - '#text'
     type: object
   warning_items:
     additionalProperties: false
@@ -5334,14 +5314,10 @@ definitions:
                     type: string
                   warning_code:
                     type: string
-                required:
-                  - '#text'
                 type: object
               type: array
             warning_code:
               type: string
-          required:
-            - '#text'
           type: object
         type: array
     type: object
@@ -5352,8 +5328,6 @@ definitions:
         type: string
       length:
         type: string
-    required:
-      - '#text'
     type: object
   warning_texts:
     additionalProperties: false
@@ -5374,12 +5348,8 @@ definitions:
                     type: string
                   length:
                     type: string
-                required:
-                  - '#text'
                 type: object
               type: array
-          required:
-            - '#text'
           type: object
         type: array
     type: object

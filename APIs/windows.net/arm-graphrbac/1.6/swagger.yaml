@@ -66,7 +66,7 @@ paths:
             $ref: '#/definitions/ApplicationListResult'
       tags:
         - Application
-      x-ms-odata: '#/definitions/ApplicationFilter'
+      x-ms-odata: '#/definitions/Application'
       x-ms-pageable: {}
     post:
       description: 'Create a new application. Reference: http://msdn.microsoft.com/en-us/library/azure/hh974476.aspx'
@@ -345,6 +345,20 @@ paths:
             $ref: '#/definitions/CheckGroupMembershipResult'
       tags:
         - Group
+  '/{tenantID}/me':
+    get:
+      description: Gets the details for current logged in user
+      operationId: Objects_GetCurrentUser
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/AADObject'
+      tags:
+        - Objects
   '/{tenantID}/servicePrincipals':
     get:
       description: Gets list of service principals from the current tenant.
@@ -680,18 +694,6 @@ definitions:
       - displayName
       - homepage
       - identifierUris
-  ApplicationFilter:
-    description: Filter parameters for listing applications
-    properties:
-      appId:
-        description: ApplicationId
-        type: string
-      displayNameStartsWith:
-        description: Application display name starts with
-        type: string
-      identifierUri:
-        description: Identifier Uri
-        type: string
   ApplicationListResult:
     description: Role assignment list operation result.
     properties:

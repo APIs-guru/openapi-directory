@@ -957,6 +957,10 @@ definitions:
       end.seconds = start.seconds + duration.seconds; end.nanos = start.nanos + duration.nanos;
 
       if (end.nanos = 1000000000) { end.seconds += 1; end.nanos -= 1000000000; }
+
+      Example 3: Compute Duration from datetime.timedelta in Python.
+
+      td = datetime.timedelta(days=3, minutes=10) duration = Duration() duration.FromTimedelta(td)
     properties:
       nanos:
         description: 'Signed fractions of a second at nanosecond resolution of the span of time. Durations less than one second are represented with a 0 `seconds` field and a positive or negative `nanos` field. For durations of one second or more, a non-zero value for the `nanos` field must be of the same sign as the `seconds` field. Must be from -999,999,999 to +999,999,999 inclusive.'
@@ -1693,7 +1697,7 @@ definitions:
 
       Example 5: Compute Timestamp from current time in Python.
 
-      now = time.time() seconds = int(now) nanos = int((now - seconds) * 10**9) timestamp = Timestamp(seconds=seconds, nanos=nanos)
+      timestamp = Timestamp() timestamp.GetCurrentTime()
     properties:
       nanos:
         description: 'Non-negative fractions of a second at nanosecond resolution. Negative second values with fractions must still have non-negative nanos values that count forward in time. Must be from 0 to 999,999,999 inclusive.'
