@@ -196,7 +196,7 @@ paths:
           name: page
           required: false
           type: integer
-        - description: Request number of boards to return in each page.
+        - description: Request number of boards to return in each page. (default is 30)
           format: int32
           in: query
           name: page_size
@@ -211,7 +211,7 @@ paths:
           schema:
             $ref: '#/definitions/board_list'
         '400':
-          description: InvalidParameterValue
+          description: InvalidPageSize
         '401':
           description: Unauthorized
       summary: <b>***BETA***</b> Get all boards that the user participates in
@@ -285,7 +285,7 @@ paths:
         '401':
           description: Unauthorized
         '404':
-          description: BoardDeleted
+          description: BoardNotFound
       summary: <b>***BETA***</b> Delete a board
       tags:
         - Boards
@@ -331,7 +331,7 @@ paths:
       parameters:
         - description: Specify the new name and description for the board (name is required).
           in: body
-          name: boardInfo
+          name: board_info
           required: true
           schema:
             $ref: '#/definitions/board_info'
@@ -400,7 +400,7 @@ paths:
         '401':
           description: Unauthorized
         '404':
-          description: BoardDeleted
+          description: BoardNotFound
       summary: <b>***BETA***</b> Remove an asset from a board
       tags:
         - Boards

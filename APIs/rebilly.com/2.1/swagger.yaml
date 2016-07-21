@@ -4598,8 +4598,7 @@ paths:
           $ref: '#/responses/AccessForbidden'
       summary: Retrieve a disputes report
       tags:
-        - Report
-        - ReportDisputes
+        - Reports
   /reports/dunning:
     get:
       description: |
@@ -4638,8 +4637,7 @@ paths:
           $ref: '#/responses/AccessForbidden'
       summary: Retrieve a dunning report
       tags:
-        - Report
-        - ReportDunning
+        - Reports
   /reports/retention-percentage:
     get:
       description: |
@@ -4703,12 +4701,12 @@ paths:
           $ref: '#/responses/AccessForbidden'
       summary: Retrieve a retention percentage report
       tags:
-        - Report
-        - ReportRetention
+        - Reports
   /reports/retention-value:
     get:
       description: |
-        Retrieve a subscribers report
+        The retention value report shows the count of new customers
+        per aggregation bucket and the corresponding per customer value over time.
       parameters:
         - description: Report aggregation field
           enum:
@@ -4785,10 +4783,9 @@ paths:
             $ref: '#/definitions/HistogramData'
         '401':
           $ref: '#/responses/AccessForbidden'
-      summary: Retrieve a subscribers report
+      summary: Retrieve a retention value report
       tags:
-        - Report
-        - ReportRetention
+        - Reports
   /reports/statistics:
     get:
       description: |
@@ -4814,8 +4811,7 @@ paths:
           $ref: '#/responses/AccessForbidden'
       summary: Retrieve a statistics report
       tags:
-        - Report
-        - ReportStatistics
+        - Reports
   /reports/subscribers:
     get:
       description: |
@@ -4848,12 +4844,11 @@ paths:
           $ref: '#/responses/AccessForbidden'
       summary: Retrieve a subscribers report
       tags:
-        - Report
-        - ReportSubscribers
+        - Reports
   /reports/transactions:
     get:
       description: |
-        Retrieve a subscribers report
+        Retrieve a transactions report
       parameters:
         - description: Report start day
           format: date-time
@@ -4922,10 +4917,9 @@ paths:
             $ref: '#/definitions/ReportTransactions'
         '401':
           $ref: '#/responses/AccessForbidden'
-      summary: Retrieve a subscribers report
+      summary: Retrieve a transactions report
       tags:
-        - Report
-        - ReportTransaction
+        - Reports
   /sessions:
     get:
       description: |
