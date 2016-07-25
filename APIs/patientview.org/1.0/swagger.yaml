@@ -514,10 +514,29 @@ definitions:
         type: boolean
       visibleToJoin:
         type: boolean
+  Category:
+    properties:
+      friendlyDescription:
+        type: string
+      hidden:
+        type: boolean
+      icd10Description:
+        type: string
+      id:
+        format: int64
+        type: integer
+      number:
+        format: int32
+        type: integer
   Code:
     properties:
       code:
         type: string
+      codeCategories:
+        items:
+          $ref: '#/definitions/CodeCategory'
+        type: array
+        uniqueItems: true
       codeType:
         $ref: '#/definitions/Lookup'
       created:
@@ -528,16 +547,53 @@ definitions:
       displayOrder:
         format: int32
         type: integer
+      externalStandards:
+        items:
+          $ref: '#/definitions/CodeExternalStandard'
+        type: array
+        uniqueItems: true
+      fullDescription:
+        type: string
+      hideFromPatients:
+        type: boolean
       id:
         format: int64
         type: integer
+      lastUpdate:
+        format: date-time
+        type: string
       links:
         items:
           $ref: '#/definitions/Link'
         type: array
         uniqueItems: true
+      patientFriendlyName:
+        type: string
+      removedExternally:
+        type: boolean
+      sourceType:
+        enum:
+          - PATIENTVIEW
+          - NHS_CHOICES
+        type: string
       standardType:
         $ref: '#/definitions/Lookup'
+  CodeCategory:
+    properties:
+      category:
+        $ref: '#/definitions/Category'
+      id:
+        format: int64
+        type: integer
+  CodeExternalStandard:
+    properties:
+      codeString:
+        type: string
+      externalStandard:
+        $ref: '#/definitions/ExternalStandard'
+      id:
+        format: int64
+        type: integer
   ContactPoint:
     properties:
       contactPointType:
@@ -550,6 +606,9 @@ definitions:
       id:
         format: int64
         type: integer
+      lastUpdate:
+        format: date-time
+        type: string
   ContactPointType:
     properties:
       description:
@@ -592,6 +651,15 @@ definitions:
         items:
           $ref: '#/definitions/FhirObservation'
         type: array
+  ExternalStandard:
+    properties:
+      description:
+        type: string
+      id:
+        format: int64
+        type: integer
+      name:
+        type: string
   Feature:
     properties:
       created:
@@ -602,6 +670,9 @@ definitions:
       id:
         format: int64
         type: integer
+      lastUpdate:
+        format: date-time
+        type: string
       name:
         type: string
   FhirAllergy:
@@ -640,6 +711,8 @@ definitions:
         format: date-time
         type: string
       description:
+        type: string
+      fullDescription:
         type: string
       group:
         $ref: '#/definitions/Group'
@@ -871,6 +944,9 @@ definitions:
       lastImportDate:
         format: date-time
         type: string
+      lastUpdate:
+        format: date-time
+        type: string
       links:
         items:
           $ref: '#/definitions/Link'
@@ -907,6 +983,9 @@ definitions:
       id:
         format: int64
         type: integer
+      lastUpdate:
+        format: date-time
+        type: string
   GroupRole:
     properties:
       group:
@@ -927,6 +1006,9 @@ definitions:
       id:
         format: int64
         type: integer
+      lastUpdate:
+        format: date-time
+        type: string
       link:
         type: string
       linkType:
@@ -946,6 +1028,9 @@ definitions:
         format: int64
         type: integer
       label:
+        type: string
+      lastUpdate:
+        format: date-time
         type: string
       name:
         type: string
@@ -968,6 +1053,9 @@ definitions:
       id:
         format: int64
         type: integer
+      lastUpdate:
+        format: date-time
+        type: string
       lookupType:
         $ref: '#/definitions/LookupType'
       value:
@@ -982,6 +1070,9 @@ definitions:
       id:
         format: int64
         type: integer
+      lastUpdate:
+        format: date-time
+        type: string
       type:
         enum:
           - GROUP
@@ -1028,6 +1119,9 @@ definitions:
         format: int64
         type: integer
       infoLink:
+        type: string
+      lastUpdate:
+        format: date-time
         type: string
       maxGraph:
         format: double
@@ -1243,6 +1337,9 @@ definitions:
       id:
         format: int64
         type: integer
+      lastUpdate:
+        format: date-time
+        type: string
       optInDate:
         format: date-time
         type: string
@@ -1266,6 +1363,10 @@ definitions:
       expiration:
         format: date-time
         type: string
+      externalStandards:
+        items:
+          $ref: '#/definitions/ExternalStandard'
+        type: array
       groupFeatures:
         items:
           $ref: '#/definitions/Feature'
@@ -1303,6 +1404,8 @@ definitions:
         items:
           $ref: '#/definitions/Role'
         type: array
+      shouldEnterCondition:
+        type: boolean
       staffFeatures:
         items:
           $ref: '#/definitions/Feature'

@@ -2064,7 +2064,7 @@ definitions:
         description: The name of the bucket containing this object.
         type: string
       cacheControl:
-        description: Cache-Control directive for the object data.
+        description: 'Cache-Control directive for the object data. If omitted, and the object is accessible to all anonymous users, the default will be public, max-age=3600.'
         type: string
       componentCount:
         description: Number of underlying components that make up this object. Components are accumulated by compose operations.

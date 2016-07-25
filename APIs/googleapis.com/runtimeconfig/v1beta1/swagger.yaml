@@ -419,7 +419,7 @@ paths:
         name that has an existing variable name as a prefix.
 
         To learn more about creating a variable, read the
-        [Setting and Getting Data](/deployment-manager/runtime-configurator/seta-and-get-variables)
+        [Setting and Getting Data](/deployment-manager/runtime-configurator/set-and-get-variables)
         documentation.
       operationId: runtimeconfig.projects.configs.variables.create
       parameters:
@@ -660,7 +660,7 @@ definitions:
         description: The error result of the operation in case of failure.
       metadata:
         additionalProperties:
-          description: Properties of the object. Contains field @ype with type URL.
+          description: Properties of the object. Contains field @type with type URL.
         description: |-
           Service-specific metadata associated with the operation.  It typically
           contains progress information and common metadata such as create time.
@@ -675,7 +675,7 @@ definitions:
         type: string
       response:
         additionalProperties:
-          description: Properties of the object. Contains field @ype with type URL.
+          description: Properties of the object. Contains field @type with type URL.
         description: |-
           The normal response of the operation in case of success.  If the original
           method returns no data on success, such as `Delete`, the response is
@@ -778,7 +778,7 @@ definitions:
           common set of message types for APIs to use.
         items:
           additionalProperties:
-            description: Properties of the object. Contains field @ype with type URL.
+            description: Properties of the object. Contains field @type with type URL.
           type: object
         type: array
       message:
@@ -851,7 +851,7 @@ definitions:
       Once created, a Waiter resource is immutable.
 
       To learn more about using waiters, read the
-      [Creating a Waiter](/deployment-manager/runtime-config/creating-a-water)
+      [Creating a Waiter](/deployment-manager/runtime-configurator/creating-a-waiter)
       documentation.
     properties:
       createTime:
@@ -871,7 +871,7 @@ definitions:
         type: boolean
       error:
         $ref: '#/definitions/Status'
-        description: |
+        description: |-
           [Output Only] If the waiter ended due to a failure or timeout, this value
           will be set.
       failure:

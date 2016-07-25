@@ -602,6 +602,9 @@ definitions:
       continueUri:
         description: The URI to which the IDP redirects the user after the federated login flow.
         type: string
+      hostedDomain:
+        description: The hosted domain to restrict sign-in to accounts at that domain for Google Apps hosted accounts.
+        type: string
       identifier:
         description: The email or federated ID of the user.
         type: string
@@ -1360,6 +1363,9 @@ definitions:
         type: string
       refreshToken:
         description: 'If idToken is STS id token, then this field will be refresh token.'
+        type: string
+      screenName:
+        description: The screen_name of a Twitter user.
         type: string
       timeZone:
         description: The timezone of the user.

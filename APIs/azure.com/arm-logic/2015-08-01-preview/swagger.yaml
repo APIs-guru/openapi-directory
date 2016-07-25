@@ -11,7 +11,7 @@ info:
     format: swagger
     url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-logic/2015-08-01-preview/swagger/logic.json'
     version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: arm-logic
 consumes:
@@ -2025,8 +2025,20 @@ definitions:
         description: The private key name in key vault.
         type: string
       keyVault:
-        $ref: '#/definitions/ResourceReference'
         description: The key vault reference.
+        properties:
+          id:
+            description: The resource id.
+            type: string
+          name:
+            description: The resource name.
+            readOnly: true
+            type: string
+          type:
+            description: The resource type.
+            readOnly: true
+            type: string
+        type: object
       keyVersion:
         description: The private key version in key vault.
         type: string
@@ -2069,20 +2081,6 @@ definitions:
     x-ms-enum:
       modelAsString: false
       name: PartnerType
-  ResourceReference:
-    properties:
-      id:
-        description: The resource id.
-        type: string
-      name:
-        description: The resource name.
-        readOnly: true
-        type: string
-      type:
-        description: The resource type.
-        readOnly: true
-        type: string
-    type: object
   SchemaType:
     enum:
       - NotSpecified

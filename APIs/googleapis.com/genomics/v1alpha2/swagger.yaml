@@ -748,6 +748,9 @@ definitions:
           type: string
         description: 'Pipeline input arguments; keys are defined in the pipeline documentation. All input parameters that do not have default values must be specified. If parameters with defaults are specified here, the defaults will be overridden.'
         type: object
+      keepVmAliveOnFailureDuration:
+        description: 'How long to keep the VM up after a failure (for example docker command failed, copying input or output files failed, etc). While the VM is up, one can ssh into the VM to debug. Default is 0; maximum allowed value is 1 day.'
+        type: string
       logging:
         $ref: '#/definitions/LoggingOptions'
         description: Required. Logging options. Used by the service to communicate results to the user.
