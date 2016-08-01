@@ -41,8 +41,8 @@ converter.ResourceReaders.url = function (url) {
 class SpecError extends Error {
   constructor(originError, context) {
     super('');
-    originError.context = context;
-    this.stack = errorToString(originError);
+    this.stack = errorToString(originError, context);
+    this.context = context;
   }
 }
 
@@ -204,14 +204,16 @@ function addToCollection(format, url, command) {
           if (!match || !match[1] || !match[2])
             throw Error('Can not match edited Swagger');
 
-          if (result.spec.format !== 'swagger_2') {
+          var originSpec = error.context.spec;
+          var originSwagger = error.context.swagger;
+          if (originSpec.format !== 'swagger_2') {
             var editedOrigin = YAML.safeLoad(match[1]);
-            appendFixup(getOriginFixupPath(result.spec), serilazeSpec(result.spec), editedOrigin);
+            appendFixup(getOriginFixupPath(originSpec), serilazeSpec(originSpec), editedOrigin);
           }
 
-          if (!_.isUndefined(result.swagger)) {
+          if (!_.isUndefined(originSwagger)) {
             var editedSwagger = YAML.safeLoad(match[2]);
-            appendSwaggerFixup(result.swagger, editedSwagger);
+            appendSwaggerFixup(originSwagger, editedSwagger);
           }
         })
     })
@@ -595,8 +597,8 @@ function serilazeSpec(spec) {
   return data;
 }
 
-function errorToString(error) {
-  var {source, spec, swagger, validation} = error.context;
+function errorToString(error, context) {
+  var {source, spec, swagger, validation} = context;
 
   var result = '++++++++++++++++++++++++++ Begin ' + source + ' +++++++++++++++++++++\n';
   if (spec && (spec.format !== 'swagger_2' || _.isUndefined(swagger))) {
