@@ -645,6 +645,10 @@ function patchSwagger(swagger, exPatch) {
   if (_.isUndefined(swagger.info.version))
     swagger.info.version = '1.0.0';
 
+  //swagger-converter if title is absent use host as default
+  if (swagger.info.title === swagger.host)
+    delete swagger.info.title;
+
   //Cleanup from common postfixes
   _.some([
       'API Documentation',
@@ -677,10 +681,6 @@ function patchSwagger(swagger, exPatch) {
     if (!_.isUndefined(subPatch))
       patch = jsonPatch.merge(patch, subPatch);
   });
-
-  //swagger-converter if title is absent use host as default
-  if (swagger.info.title === swagger.host && !_.isUndefined(patch.info.title))
-    delete swagger.info.title;
 
   applyMergePatch(swagger, patch);
 
