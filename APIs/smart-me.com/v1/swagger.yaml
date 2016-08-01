@@ -179,6 +179,72 @@ paths:
       summary: Updates the On/Off Switch on a device.
       tags:
         - Devices
+  /api/DevicesByEnergy:
+    get:
+      consumes: []
+      deprecated: false
+      description: Gets all Devices for an Energy Type
+      parameters:
+        - enum:
+            - MeterTypeUnknown
+            - MeterTypeElectricity
+            - MeterTypeWater
+            - MeterTypeGas
+            - MeterTypeHeat
+            - MeterTypeHCA
+            - MeterTypeAllMeters
+            - MeterTypeTemperature
+            - MeterTypeMBusGateway
+            - MeterTypeRS485Gateway
+          in: query
+          name: meterEnergyType
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Device'
+            type: array
+      summary: Gets all Devices for an Energy Type
+      tags:
+        - DevicesByEnergy
+  /api/DevicesBySubType:
+    get:
+      consumes: []
+      deprecated: false
+      description: Gets all Devices by it's Sub Type (e.g. E-Charging Station)
+      parameters:
+        - enum:
+            - MeterSubTypeUnknown
+            - MeterSubTypeCold
+            - MeterSubTypeHeat
+            - MeterSubTypeChargingStation
+          in: query
+          name: meterSubType
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Device'
+            type: array
+      summary: Gets all Devices by it's Sub Type (e.g. E-Charging Station)
+      tags:
+        - DevicesBySubType
   /api/MBus:
     post:
       consumes:
@@ -213,6 +279,57 @@ paths:
       summary: "M-BUS API: Adds data of a M-BUS Meter to the smart-me Cloud.\r\n            Just send us the M-BUS Telegram (RSP_UD) and we will do the Rest."
       tags:
         - MBus
+  '/api/MeterFolderInformation/{id}':
+    get:
+      consumes: []
+      deprecated: false
+      description: 'Beta: Gets the General Information for a Meter or a Folder'
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MeterFolderInformation'
+      summary: 'Beta: Gets the General Information for a Meter or a Folder'
+      tags:
+        - MeterFolderInformation
+  '/api/MeterValues/{id}':
+    get:
+      consumes: []
+      deprecated: false
+      description: Gets the Values for a Meter at a given Date. The first Value found before the given Date is returned.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - format: date-time
+          in: query
+          name: date
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DeviceInPast'
+      summary: "Gets the Values for a Meter at a given Date. \r\n            The first Value found before the given Date is returned."
+      tags:
+        - MeterValues
   /api/User:
     get:
       consumes: []
@@ -396,6 +513,18 @@ definitions:
         description: The Current (in A)
         format: double
         type: number
+      CurrentL1:
+        description: The Current Phase L1 (in A)
+        format: double
+        type: number
+      CurrentL2:
+        description: The Current Phase L2 (in A)
+        format: double
+        type: number
+      CurrentL3:
+        description: The Current Phase L3 (in A)
+        format: double
+        type: number
       DeviceEnergyType:
         description: The Energy Type of this device
         enum:
@@ -420,6 +549,9 @@ definitions:
           - MeterFamilyTypeMBusGatewayV1
           - MeterFamilyTypeRS485GatewayV1
           - MeterFamilyTypeKamstrupModule
+          - MeterFamilyTypeSmartMe3PhaseMeter80A
+          - MeterFamilyTypeSmartMe3PhaseMeter32A
+          - MeterFamilyTypeSmartMe3PhaseMeterTransformer
           - MeterFamilyTypeRestApiMeter
           - MeterFamilyTypeVirtualMeter
         type: string
@@ -452,6 +584,96 @@ definitions:
         description: The Voltage (in V)
         format: double
         type: number
+      VoltageL1:
+        description: The Voltage Phase L1 (in V)
+        format: double
+        type: number
+      VoltageL2:
+        description: The Voltage Phase L2 (in V)
+        format: double
+        type: number
+      VoltageL3:
+        description: The Voltage Phase L3 (in V)
+        format: double
+        type: number
+    type: object
+  DeviceInPast:
+    description: Container Class for the Web API. Conatinas the MeterValues in the Past
+    properties:
+      CounterReading:
+        description: The Meter Counter Reading (Total Energy used)
+        format: double
+        type: number
+      CounterReadingExport:
+        description: The Meter Counter Reading Export
+        format: double
+        type: number
+      CounterReadingExportT1:
+        description: The Meter Counter Reading Export Tariff 1
+        format: double
+        type: number
+      CounterReadingExportT2:
+        description: The Meter Counter Reading Export Tariff 2
+        format: double
+        type: number
+      CounterReadingExportT3:
+        description: The Meter Counter Reading Export Tariff 3
+        format: double
+        type: number
+      CounterReadingExportT4:
+        description: The Meter Counter Reading Export Tariff 4
+        format: double
+        type: number
+      CounterReadingImport:
+        description: The Meter Counter Reading Import
+        format: double
+        type: number
+      CounterReadingImportT1:
+        description: The Meter Counter Reading Import Tariff 1
+        format: double
+        type: number
+      CounterReadingImportT2:
+        description: The Meter Counter Reading Import Tariff 2
+        format: double
+        type: number
+      CounterReadingImportT3:
+        description: The Meter Counter Reading Import Tariff 3
+        format: double
+        type: number
+      CounterReadingImportT4:
+        description: The Meter Counter Reading Import Tariff 4
+        format: double
+        type: number
+      CounterReadingT1:
+        description: The Meter Counter Reading Tariff 1
+        format: double
+        type: number
+      CounterReadingT2:
+        description: The Meter Counter Reading Tariff 2
+        format: double
+        type: number
+      CounterReadingT3:
+        description: The Meter Counter Reading Tariff 3
+        format: double
+        type: number
+      CounterReadingT4:
+        description: The Meter Counter Reading Tariff 4
+        format: double
+        type: number
+      CounterReadingUnit:
+        description: The Unit of the Counter Reading
+        type: string
+      Date:
+        description: The Date of the Values
+        format: date-time
+        type: string
+      Id:
+        description: The ID of the device
+        type: string
+      Serial:
+        description: The Serial number
+        format: int64
+        type: integer
     type: object
   DeviceToPost:
     description: Container Class for the Web API
@@ -515,8 +737,42 @@ definitions:
         description: "The M-BUS Telegram as Hex string. \r\n            Example: 68 1F 1F 68 08 02 72 78 56 34 12 24 40 01 07 55 00 00 00 03 13 15 31 00 DA 02 3B 13 01 8B 60 04 37 18 02 18 16"
         type: string
     type: object
+  MeterFolderInformation:
+    description: Container Class for the Web API
+    properties:
+      FirmwareVersion:
+        description: The Firmware Version of a Meter
+        format: int32
+        type: integer
+      HardwareVersion:
+        description: The Hardware Version of a Meter.
+        format: int32
+        type: integer
+      IsFolder:
+        description: Flag if it's a Folder or a Meter
+        type: boolean
+      Name:
+        description: Name of the Meter or Folder
+        type: string
+      OutputInformations:
+        description: Informations about the available Outputs
+        items:
+          $ref: '#/definitions/OutputInformation'
+        type: array
+    type: object
   Object:
     properties: {}
+    type: object
+  OutputInformation:
+    description: Informations about the Outputs of a Meter or Folder
+    properties:
+      Name:
+        description: The Name of the Output
+        type: string
+      Number:
+        description: The Number of this Output. Use this as ID to switch it on or off.
+        format: int32
+        type: integer
     type: object
   User:
     description: Container Class for the Web API

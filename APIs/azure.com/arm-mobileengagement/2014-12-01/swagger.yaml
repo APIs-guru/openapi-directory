@@ -1483,6 +1483,9 @@ definitions:
   AppCollectionListResult:
     description: The list AppCollections operation response.
     properties:
+      nextLink:
+        description: 'When the results are paged, the nextLink is the URI for the next page of results. This property is empty when there are no additional pages.'
+        type: string
       value:
         description: The list of AppCollections and their properties.
         items:
@@ -1526,6 +1529,9 @@ definitions:
   AppListResult:
     description: The list Apps operation response.
     properties:
+      nextLink:
+        description: 'When the results are paged, the nextLink is the URI for the next page of results. This property is empty when there are no additional pages.'
+        type: string
       value:
         description: The list of Apps and their properties.
         items:

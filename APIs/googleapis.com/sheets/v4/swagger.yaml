@@ -390,6 +390,107 @@ paths:
             - 'https://www.googleapis.com/auth/spreadsheets'
       tags:
         - spreadsheets
+  '/v4/spreadsheets/{spreadsheetId}/values/{range}:append':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Appends values to a spreadsheet. The input range is used to search for
+        existing data and find a "table" within that range. Values will be
+        appended to the next row of the table, starting with the first column of
+        the table. For example, given a sheet `Sheet1` that looks like:
+
+                A   B   C   D   E
+             1  x   y   z
+             2  x   y   z
+             3
+             4      x   y
+             5          y   z
+             6      x   y   z
+             7
+
+        There are two "tables" in the spreadsheet: `A1:C2`, and `B4:D6`.
+        Appending values would start writing at 'B7' for all the following input
+        `range` parameters:
+
+          * `Sheet1`, because it will examine all the data in the sheet, determine
+                      that the "table" at `B4:D6` is the last table, and start a
+                      new row at `B7`.
+          * `B4` or `C5:D5`, because it's contained in the `B4:D6` table.
+          * `B2:D4`, because the last table contained in the range is the
+                      `B4:D6` table (despite it also containing the `A1:C2` table).
+          * `A3:G10`, because the last table contained in the range is the
+                      `B4:D6` table (despite starting before and ending after it).
+
+         The following input `range` parameters would not start writing at `B7`:
+
+          * `A1` would start writing at `A3`, because that's within the `A1:C2`
+            table.
+          * `E4` would start writing at `E4`, because it's not contained in any
+            table. (`A4` would also start writing at `A4`.)
+
+        The caller must specify the spreadsheet ID, range, and
+        a valueInputOption.  The `valueInputOption` only
+        controls how the input data will be added to the sheet (column-wise or
+        row-wise), it does not influence what cell the data starts being written
+        to.
+      operationId: sheets.spreadsheets.values.append
+      parameters:
+        - description: The ID of the spreadsheet to update.
+          in: path
+          name: spreadsheetId
+          required: true
+          type: string
+        - description: |-
+            The A1 notation of a range to search for a logical table of data.
+            Values will be appended after the last row of the table.
+          in: path
+          name: range
+          required: true
+          type: string
+        - description: How the input data should be interpreted.
+          enum:
+            - INPUT_VALUE_OPTION_UNSPECIFIED
+            - RAW
+            - USER_ENTERED
+          in: query
+          name: valueInputOption
+          type: string
+        - description: How the input data should be inserted.
+          enum:
+            - OVERWRITE
+            - INSERT_ROWS
+          in: query
+          name: insertDataOption
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ValueRange'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AppendValuesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/drive'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/spreadsheets'
+      tags:
+        - spreadsheets
   '/v4/spreadsheets/{spreadsheetId}/values:batchGet':
     get:
       description: |-
@@ -583,7 +684,9 @@ definitions:
         $ref: '#/definitions/EmbeddedChart'
         description: |-
           The chart that should be added to the spreadsheet, including the position
-          where it should be placed.
+          where it should be placed. The chartId
+          field is optional; if one is not set, an id will be randomly generated. (It
+          is an error to specify the ID of a chart that already exists.)
     type: object
   AddChartResponse:
     description: The result of adding a chart to a spreadsheet.
@@ -610,7 +713,10 @@ definitions:
     properties:
       filter:
         $ref: '#/definitions/FilterView'
-        description: The filter to add.
+        description: |-
+          The filter to add. The filterViewId
+          field is optional; if one is not set, an id will be randomly generated. (It
+          is an error to specify the ID of a filter that already exists.)
     type: object
   AddFilterViewResponse:
     description: The result of adding a filter view.
@@ -625,10 +731,9 @@ definitions:
       namedRange:
         $ref: '#/definitions/NamedRange'
         description: |-
-          The named range to add. If a non-empty
-          namedRangeId is specified, the named range
-          will use that ID. (It is an error to specify the ID of a named
-          range that already exists.)
+          The named range to add. The namedRangeId
+          field is optional; if one is not set, an id will be randomly generated. (It
+          is an error to specify the ID of a range that already exists.)
     type: object
   AddNamedRangeResponse:
     description: The result of adding a named range.
@@ -642,7 +747,11 @@ definitions:
     properties:
       protectedRange:
         $ref: '#/definitions/ProtectedRange'
-        description: The protected range to be added.
+        description: |-
+          The protected range to be added. The
+          protectedRangeId field is optional; if
+          one is not set, an id will be randomly generated. (It is an error to
+          specify the ID of a range that already exists.)
     type: object
   AddProtectedRangeResponse:
     description: The result of adding a new protected range.
@@ -665,9 +774,9 @@ definitions:
         description: |-
           The properties the new sheet should have.
           All properties are optional.
-          If a sheetId
-          is specified, the sheet will use that ID.
-          (It is an error to specify the ID of a sheet that already exists.)
+          The sheetId field is optional; if one is not
+          set, an id will be randomly generated. (It is an error to specify the ID
+          of a sheet that already exists.)
     type: object
   AddSheetResponse:
     description: The result of adding a sheet.
@@ -717,6 +826,22 @@ definitions:
         description: The sheet to append rows or columns to.
         format: int32
         type: integer
+    type: object
+  AppendValuesResponse:
+    description: The response when updating a range of values in a spreadsheet.
+    properties:
+      spreadsheetId:
+        description: The spreadsheet the updates were applied to.
+        type: string
+      tableRange:
+        description: |-
+          The range (in A1 notation) of the table that values are being appended to
+          (before the values were appended).
+          Empty if no table was found.
+        type: string
+      updates:
+        $ref: '#/definitions/UpdateValuesResponse'
+        description: Information about the updates that were applied.
     type: object
   AutoFillRequest:
     description: Fills in more data based on existing data.
@@ -3297,11 +3422,7 @@ definitions:
         type: string
       protectedRange:
         $ref: '#/definitions/ProtectedRange'
-        description: |-
-          The protected range to update with the new properties. If a nonzero
-          protectedRangeId is
-          specified, the protected range will use that ID. (It is an error to
-          specify the ID of a protected range that already exists.)
+        description: The protected range to update with the new properties.
     type: object
   UpdateSheetPropertiesRequest:
     description: |-
@@ -3383,6 +3504,8 @@ definitions:
           The range the values cover, in A1 notation.
           For output, this range indicates the entire requested range,
           even though the values will exclude trailing rows and columns.
+          When appending values, this field represents the range to search for a
+          table, after which values will be appended.
         type: string
       values:
         description: |-

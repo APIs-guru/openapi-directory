@@ -1639,6 +1639,11 @@ paths:
           name: collections_filter_type
           required: false
           type: string
+        - description: 'Filter based on predominant color in an image. Use 6 character hexidecimal format (e.g., #002244).'
+          in: query
+          name: color
+          required: false
+          type: string
         - description: Filter based on image composition.
           enum:
             - abstract
@@ -1967,7 +1972,7 @@ paths:
           schema:
             $ref: '#/definitions/image_search_results'
         '400':
-          description: MalformedRequest
+          description: InvalidColor
         '401':
           description: Unauthorized
         '403':
@@ -2100,6 +2105,11 @@ paths:
             - exclude
           in: query
           name: collections_filter_type
+          required: false
+          type: string
+        - description: 'Filter based on predominant color in an image. Use 6 character hexidecimal format (e.g., #002244).'
+          in: query
+          name: color
           required: false
           type: string
         - description: Filter based on image composition.
@@ -2405,7 +2415,7 @@ paths:
           schema:
             $ref: '#/definitions/creative_image_search_results'
         '400':
-          description: MalformedRequest
+          description: InvalidColor
         '401':
           description: Unauthorized
         '403':
@@ -2538,6 +2548,11 @@ paths:
             - exclude
           in: query
           name: collections_filter_type
+          required: false
+          type: string
+        - description: 'Filter based on predominant color in an image. Use 6 character hexidecimal format (e.g., #002244).'
+          in: query
+          name: color
           required: false
           type: string
         - description: Filter based on image composition.
@@ -2885,7 +2900,7 @@ paths:
           schema:
             $ref: '#/definitions/editorial_image_search_results'
         '400':
-          description: MalformedRequest
+          description: InvalidColor
         '401':
           description: Unauthorized
         '403':

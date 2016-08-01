@@ -9,7 +9,7 @@ info:
     email: ibl-team@lists.forge.bbc.co.uk
     name: Open iBL Project
     url: 'http://developer.bbc.co.uk/'
-  description: BBC iPlayer Business logic Layer
+  description: The definitive iPlayer API.
   license:
     name: MIT
     url: 'https://opensource.org/licenses/MIT'
@@ -23,7 +23,7 @@ info:
     url: 'https://raw.githubusercontent.com/Mermade/bbcparse/master/iblApi/swagger.json'
     version: '2.0'
   x-providerName: bbci.co.uk
-  x-release: '397'
+  x-release: '399'
   x-schema-id: 'https://ibl.api.bbci.co.uk/ibl/v1/schema/ibl.json'
   x-unofficialSpec: true
 externalDocs:
@@ -43,7 +43,7 @@ security:
 paths:
   '/atoz/{letter}/programmes':
     get:
-      description: Get programmes by initial letter
+      description: Get the Programmes whose title begins with the given initial character.
       operationId: Get_Programmes AtoZ search_
       parameters:
         - in: path
@@ -51,7 +51,9 @@ paths:
           pattern: '[a-z](0-9)'
           required: true
           type: string
-        - enum:
+        - default: web
+          description: The rights group to limit results to.
+          enum:
             - mobile
             - tv
             - web
@@ -59,12 +61,14 @@ paths:
           name: rights
           required: true
           type: string
-        - format: int64
+        - description: The page index.
+          format: int64
           in: query
           name: page
           required: true
           type: integer
-        - format: int64
+        - description: The number of results to return.
+          format: int64
           in: query
           name: per_page
           required: true
@@ -75,7 +79,8 @@ paths:
           name: initial_child_count
           required: true
           type: integer
-        - enum:
+        - description: The sort order of the results.
+          enum:
             - title
           in: query
           name: sort
@@ -103,18 +108,21 @@ paths:
           schema:
             $ref: '#/definitions/ibl'
       security: []
+      summary: Programmes by initial title character
       tags:
-        - Programmes
+        - A to Z
   /categories:
     get:
-      description: Get top-level categories
+      description: Get the list of all the categories in TV & iPlayer.
       operationId: Get_Categories_
       parameters:
-        - enum:
+        - description: The language for any applicable localised strings.
+          enum:
             - en
             - cy
             - ga
             - gd
+            - pi
           in: query
           name: lang
           required: true
@@ -127,6 +135,7 @@ paths:
           schema:
             $ref: '#/definitions/ibl'
       security: []
+      summary: Get categories
       tags:
         - Categories
   '/categories/{category}':
@@ -134,15 +143,18 @@ paths:
       description: Get sub-categories
       operationId: Get_Sub-categories_
       parameters:
-        - in: path
+        - description: The category identifier to return results from.
+          in: path
           name: category
           required: true
           type: string
-        - enum:
+        - description: The language for any applicable localised strings.
+          enum:
             - en
             - cy
             - ga
             - gd
+            - pi
           in: query
           name: lang
           required: true
@@ -155,27 +167,33 @@ paths:
           schema:
             $ref: '#/definitions/ibl'
       security: []
+      summary: Get sub-categories
       tags:
         - Categories
-  '/categories/{category}/highlights':
+  '/categories/{category}/episodes':
     get:
-      description: Get highlights by category
-      operationId: Get_Highlights by category_
+      description: Get the list of all the episodes for a given category in TV & iPlayer.
+      operationId: Get_Episodes by category_
       parameters:
-        - in: path
+        - description: The category identifier to return results from.
+          in: path
           name: category
           required: true
           type: string
-        - enum:
+        - description: The language for any applicable localised strings.
+          enum:
             - en
             - cy
             - ga
             - gd
+            - pi
           in: query
           name: lang
           required: true
           type: string
-        - enum:
+        - default: web
+          description: The rights group to limit results to.
+          enum:
             - mobile
             - tv
             - web
@@ -190,55 +208,132 @@ paths:
           name: availability
           required: true
           type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Default response
-          schema:
-            $ref: '#/definitions/ibl'
-      security: []
-      tags:
-        - Programmes
-  '/categories/{category}/programmes':
-    get:
-      description: Get programmes by category
-      operationId: Get_Programmes by category_
-      parameters:
-        - in: path
-          name: category
-          required: true
-          type: string
-        - enum:
-            - en
-            - cy
-            - ga
-            - gd
-          in: query
-          name: lang
-          required: true
-          type: string
-        - enum:
-            - mobile
-            - tv
-            - web
-          in: query
-          name: rights
-          required: true
-          type: string
-        - enum:
-            - all
-            - available
-          in: query
-          name: availability
-          required: true
-          type: string
-        - format: int64
+        - description: The page index.
+          format: int64
           in: query
           name: page
           required: true
           type: integer
-        - format: int64
+        - description: The number of results to return.
+          format: int64
+          in: query
+          name: per_page
+          required: true
+          type: integer
+        - description: The sort order of the results.
+          enum:
+            - recent
+            - popular
+          in: query
+          name: sort
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      summary: List all the episodes for a category.
+      tags:
+        - Episodes
+  '/categories/{category}/highlights':
+    get:
+      description: Get the editorial highlights of a given category in TV & iPlayer.
+      operationId: Get_Highlights by category_
+      parameters:
+        - description: The category identifier to return results from.
+          in: path
+          name: category
+          required: true
+          type: string
+        - description: The language for any applicable localised strings.
+          enum:
+            - en
+            - cy
+            - ga
+            - gd
+            - pi
+          in: query
+          name: lang
+          required: true
+          type: string
+        - default: web
+          description: The rights group to limit results to.
+          enum:
+            - mobile
+            - tv
+            - web
+          in: query
+          name: rights
+          required: true
+          type: string
+        - enum:
+            - all
+            - available
+          in: query
+          name: availability
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      summary: List the highlights for a category.
+      tags:
+        - Programmes (TLEOs)
+  '/categories/{category}/programmes':
+    get:
+      description: Get the list of all the Programmes (TLEOs) for a given category in TV & iPlayer.
+      operationId: Get_Programmes by category_
+      parameters:
+        - description: The category identifier to return results from.
+          in: path
+          name: category
+          required: true
+          type: string
+        - description: The language for any applicable localised strings.
+          enum:
+            - en
+            - cy
+            - ga
+            - gd
+            - pi
+          in: query
+          name: lang
+          required: true
+          type: string
+        - default: web
+          description: The rights group to limit results to.
+          enum:
+            - mobile
+            - tv
+            - web
+          in: query
+          name: rights
+          required: true
+          type: string
+        - enum:
+            - all
+            - available
+          in: query
+          name: availability
+          required: true
+          type: string
+        - description: The page index.
+          format: int64
+          in: query
+          name: page
+          required: true
+          type: integer
+        - description: The number of results to return.
+          format: int64
           in: query
           name: per_page
           required: true
@@ -251,22 +346,25 @@ paths:
           schema:
             $ref: '#/definitions/ibl'
       security: []
+      summary: List all the programmes for a category.
       tags:
-        - Programmes
+        - Programmes (TLEOs)
   /channels:
     get:
-      description: Get channels
+      description: Get the list of all the channels TV & iPlayer.
       operationId: Get_Channels_
       parameters:
         - in: query
           name: region
           required: false
           type: string
-        - enum:
+        - description: The language for any applicable localised strings.
+          enum:
             - en
             - cy
             - ga
             - gd
+            - pi
           in: query
           name: lang
           required: true
@@ -279,6 +377,7 @@ paths:
           schema:
             $ref: '#/definitions/ibl'
       security: []
+      summary: List all the channels.
       tags:
         - Channels
   '/channels/{channel}/broadcasts':
@@ -286,20 +385,25 @@ paths:
       description: Get broadcasts by channel
       operationId: Get_Broadcasts by channel_
       parameters:
-        - in: path
+        - description: The channel identifier to limit results to.
+          in: path
           name: channel
           required: true
           type: string
-        - enum:
+        - description: The language for any applicable localised strings.
+          enum:
             - en
             - cy
             - ga
             - gd
+            - pi
           in: query
           name: lang
           required: true
           type: string
-        - enum:
+        - default: web
+          description: The rights group to limit results to.
+          enum:
             - mobile
             - tv
             - web
@@ -322,27 +426,33 @@ paths:
           schema:
             $ref: '#/definitions/ibl'
       security: []
+      summary: Get broadcasts by channel
       tags:
-        - Programmes
+        - Programmes (TLEOs)
   '/channels/{channel}/highlights':
     get:
-      description: Get highlights by channel
+      description: Get the editorial highlights of a given channel in TV & iPlayer.
       operationId: Get_Highlights by channel_
       parameters:
-        - in: path
+        - description: The channel identifier to limit results to.
+          in: path
           name: channel
           required: true
           type: string
-        - enum:
+        - description: The language for any applicable localised strings.
+          enum:
             - en
             - cy
             - ga
             - gd
+            - pi
           in: query
           name: lang
           required: true
           type: string
-        - enum:
+        - default: web
+          description: The rights group to limit results to.
+          enum:
             - mobile
             - tv
             - web
@@ -365,27 +475,33 @@ paths:
           schema:
             $ref: '#/definitions/ibl'
       security: []
+      summary: List the highlights for a channel.
       tags:
-        - Programmes
+        - Channels
   '/channels/{channel}/programmes':
     get:
       description: Get programmes by channel
       operationId: Get_Programmes by channel_
       parameters:
-        - in: path
+        - description: The channel identifier to limit results to.
+          in: path
           name: channel
           required: true
           type: string
-        - enum:
+        - description: The language for any applicable localised strings.
+          enum:
             - en
             - cy
             - ga
             - gd
+            - pi
           in: query
           name: lang
           required: true
           type: string
-        - enum:
+        - default: web
+          description: The rights group to limit results to.
+          enum:
             - mobile
             - tv
             - web
@@ -400,12 +516,14 @@ paths:
           name: availability
           required: true
           type: string
-        - format: int64
+        - description: The page index.
+          format: int64
           in: query
           name: page
           required: true
           type: integer
-        - format: int64
+        - description: The number of results to return.
+          format: int64
           in: query
           name: per_page
           required: true
@@ -418,14 +536,16 @@ paths:
           schema:
             $ref: '#/definitions/ibl'
       security: []
+      summary: Get programmes by channel
       tags:
-        - Programmes
+        - Programmes (TLEOs)
   '/channels/{channel}/schedule/{date}':
     get:
       description: Get schedule by channel
       operationId: Get_Schedule by channel_
       parameters:
-        - in: path
+        - description: The channel identifier to limit results to.
+          in: path
           name: channel
           required: true
           type: string
@@ -433,16 +553,20 @@ paths:
           name: date
           required: true
           type: string
-        - enum:
+        - description: The language for any applicable localised strings.
+          enum:
             - en
             - cy
             - ga
             - gd
+            - pi
           in: query
           name: lang
           required: true
           type: string
-        - enum:
+        - default: web
+          description: The rights group to limit results to.
+          enum:
             - mobile
             - tv
             - web
@@ -465,20 +589,24 @@ paths:
           schema:
             $ref: '#/definitions/ibl'
       security: []
+      summary: Get schedule by channel
       tags:
-        - Programmes
+        - Channels
   '/episodes/{pid}':
     get:
-      description: Get programme by PID
+      description: Get the episode for a given episode identifier.
       operationId: Get_Programme by PID_
       parameters:
-        - in: path
+        - description: The programme identifier.
+          in: path
           minLength: 8
           name: pid
           pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
           required: true
           type: string
-        - enum:
+        - default: web
+          description: The rights group to limit results to.
+          enum:
             - mobile
             - tv
             - web
@@ -501,20 +629,24 @@ paths:
           schema:
             $ref: '#/definitions/ibl'
       security: []
+      summary: Episode for a given pid.
       tags:
-        - Programmes
+        - Episodes
   '/episodes/{pid}/prerolls':
     get:
       description: Get Trailers (pre-rolls)
       operationId: Get_Trailers (pre-rolls)_
       parameters:
-        - in: path
+        - description: The programme identifier.
+          in: path
           minLength: 8
           name: pid
           pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
           required: true
           type: string
-        - enum:
+        - default: web
+          description: The rights group to limit results to.
+          enum:
             - mobile
             - tv
             - web
@@ -537,20 +669,24 @@ paths:
           schema:
             $ref: '#/definitions/ibl'
       security: []
+      summary: Get Trailers (pre-rolls)
       tags:
-        - Programmes
+        - Episodes
   '/episodes/{pid}/recommendations':
     get:
       description: Get programme recommendations
       operationId: Get_Programme recommendations_
       parameters:
-        - in: path
+        - description: The programme identifier.
+          in: path
           minLength: 8
           name: pid
           pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
           required: true
           type: string
-        - enum:
+        - default: web
+          description: The rights group to limit results to.
+          enum:
             - mobile
             - tv
             - web
@@ -565,12 +701,14 @@ paths:
           name: availability
           required: true
           type: string
-        - format: int64
+        - description: The page index.
+          format: int64
           in: query
           name: page
           required: true
           type: integer
-        - format: int64
+        - description: The number of results to return.
+          format: int64
           in: query
           name: per_page
           required: true
@@ -583,14 +721,17 @@ paths:
           schema:
             $ref: '#/definitions/ibl'
       security: []
+      summary: Get programme recommendations
       tags:
-        - Programmes
+        - Episodes
   /groups/popular/episodes:
     get:
       description: Get programmes popular
       operationId: Get_Programmes popular_
       parameters:
-        - enum:
+        - default: web
+          description: The rights group to limit results to.
+          enum:
             - mobile
             - tv
             - web
@@ -598,12 +739,14 @@ paths:
           name: rights
           required: true
           type: string
-        - format: int64
+        - description: The page index.
+          format: int64
           in: query
           name: page
           required: true
           type: integer
-        - format: int64
+        - description: The number of results to return.
+          format: int64
           in: query
           name: per_page
           required: true
@@ -614,7 +757,8 @@ paths:
           name: initial_child_count
           required: true
           type: integer
-        - in: query
+        - description: The sort order of the results.
+          in: query
           name: sort
           required: true
           type: string
@@ -640,20 +784,24 @@ paths:
           schema:
             $ref: '#/definitions/ibl'
       security: []
+      summary: Get programmes popular
       tags:
-        - Programmes
+        - Episodes
   '/groups/{pid}/episodes':
     get:
-      description: 'Get programmes by group, brand or series'
-      operationId: Get_Programmes by group_
+      description: 'Get episodes by group, brand or series'
+      operationId: Get_Episodes by group_
       parameters:
-        - in: path
+        - description: The programme identifier.
+          in: path
           minLength: 8
           name: pid
           pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
           required: true
           type: string
-        - enum:
+        - default: web
+          description: The rights group to limit results to.
+          enum:
             - mobile
             - tv
             - web
@@ -661,12 +809,14 @@ paths:
           name: rights
           required: true
           type: string
-        - format: int64
+        - description: The page index.
+          format: int64
           in: query
           name: page
           required: true
           type: integer
-        - format: int64
+        - description: The number of results to return.
+          format: int64
           in: query
           name: per_page
           required: true
@@ -677,7 +827,8 @@ paths:
           name: initial_child_count
           required: true
           type: integer
-        - in: query
+        - description: The sort order of the results.
+          in: query
           name: sort
           required: true
           type: string
@@ -703,23 +854,28 @@ paths:
           schema:
             $ref: '#/definitions/ibl'
       security: []
+      summary: 'Get episodes by group, brand or series'
       tags:
-        - Programmes
+        - Episodes
   /home/highlights:
     get:
       description: Get programme highlights
       operationId: Get_Programme highlights_
       parameters:
-        - enum:
+        - description: The language for any applicable localised strings.
+          enum:
             - en
             - cy
             - ga
             - gd
+            - pi
           in: query
           name: lang
           required: true
           type: string
-        - enum:
+        - default: web
+          description: The rights group to limit results to.
+          enum:
             - mobile
             - tv
             - web
@@ -742,20 +898,24 @@ paths:
           schema:
             $ref: '#/definitions/ibl'
       security: []
+      summary: Get programme highlights
       tags:
-        - Programmes
+        - Programmes (TLEOs)
   '/programmes/{pid}':
     get:
-      description: Get programmes by parent PID
+      description: Get the programme for a given programme identifier.
       operationId: Get_Programmes by parent PID_
       parameters:
-        - in: path
+        - description: The programme identifier.
+          in: path
           minLength: 8
           name: pid
           pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
           required: true
           type: string
-        - enum:
+        - default: web
+          description: The rights group to limit results to.
+          enum:
             - mobile
             - tv
             - web
@@ -784,18 +944,67 @@ paths:
           schema:
             $ref: '#/definitions/ibl'
       security: []
+      summary: Programme for a given pid.
       tags:
-        - Programmes
+        - Programmes (TLEOs)
+  '/programmes/{pid}/episodes':
+    get:
+      description: Get the child episodes belonging to a given programme identifier.
+      operationId: Get_Episodes by parent PID_
+      parameters:
+        - description: The programme identifier.
+          in: path
+          minLength: 8
+          name: pid
+          pattern: '^([0-9,a-d,f-h,j-n,p-t,v-z]){8,}$'
+          required: true
+          type: string
+        - default: web
+          description: The rights group to limit results to.
+          enum:
+            - mobile
+            - tv
+            - web
+          in: query
+          name: rights
+          required: true
+          type: string
+        - enum:
+            - all
+            - available
+          in: query
+          name: availability
+          required: true
+          type: string
+        - in: query
+          maximum: 4
+          minimum: 1
+          name: initial_child_count
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Default response
+          schema:
+            $ref: '#/definitions/ibl'
+      security: []
+      summary: Child episodes for a given programme pid.
+      tags:
+        - Episodes
   /regions:
     get:
-      description: Get regions
+      description: Get the list of all the regions TV & iPlayer.
       operationId: Get_Regions_
       parameters:
-        - enum:
+        - description: The language for any applicable localised strings.
+          enum:
             - en
             - cy
             - ga
             - gd
+            - pi
           in: query
           name: lang
           required: true
@@ -808,6 +1017,7 @@ paths:
           schema:
             $ref: '#/definitions/ibl'
       security: []
+      summary: List all regions
       tags:
         - Regions
   /schema/ibl.json:
@@ -823,6 +1033,7 @@ paths:
           schema:
             $ref: '#/definitions/ibl'
       security: []
+      summary: Get schema
       tags:
         - Metadata
   /search:
@@ -834,16 +1045,20 @@ paths:
           name: q
           required: true
           type: string
-        - enum:
+        - description: The language for any applicable localised strings.
+          enum:
             - en
             - cy
             - ga
             - gd
+            - pi
           in: query
           name: lang
           required: true
           type: string
-        - enum:
+        - default: web
+          description: The rights group to limit results to.
+          enum:
             - mobile
             - tv
             - web
@@ -866,8 +1081,9 @@ paths:
           schema:
             $ref: '#/definitions/ibl'
       security: []
+      summary: Search
       tags:
-        - Programmes
+        - Search
   /search-suggest:
     get:
       description: Search-suggest
@@ -877,16 +1093,20 @@ paths:
           name: q
           required: true
           type: string
-        - enum:
+        - description: The language for any applicable localised strings.
+          enum:
             - en
             - cy
             - ga
             - gd
+            - pi
           in: query
           name: lang
           required: true
           type: string
-        - enum:
+        - default: web
+          description: The rights group to limit results to.
+          enum:
             - mobile
             - tv
             - web
@@ -909,11 +1129,12 @@ paths:
           schema:
             $ref: '#/definitions/ibl'
       security: []
+      summary: Search-suggest
       tags:
-        - Programmes
+        - Search
   /status:
     get:
-      description: Get status
+      description: 'Get the current iPlayer business layer status. This tells the caller the status of the iPlayer data, but not necessarily the overall status of the website. In the future it might include the status of the dependent data services within the BBC.'
       operationId: Get_Status_
       parameters: []
       produces:
@@ -924,6 +1145,7 @@ paths:
           schema:
             $ref: '#/definitions/ibl'
       security: []
+      summary: Get status
       tags:
         - Metadata
   /user/purchases:
@@ -944,8 +1166,9 @@ paths:
           schema:
             $ref: '#/definitions/ibl'
       security: []
+      summary: Get user store purchases
       tags:
-        - Programmes
+        - User
   /user/recommendations:
     get:
       description: Get user store recommendations
@@ -964,8 +1187,9 @@ paths:
           schema:
             $ref: '#/definitions/ibl'
       security: []
+      summary: Get user store recommendations
       tags:
-        - Programmes
+        - User
   /user/watching:
     get:
       description: Get user watching
@@ -984,8 +1208,9 @@ paths:
           schema:
             $ref: '#/definitions/ibl'
       security: []
+      summary: Get user watching
       tags:
-        - Programmes
+        - User
 definitions:
   added:
     additionalProperties: false
@@ -1207,7 +1432,7 @@ definitions:
         type: string
       release_date_time:
         type: string
-      requires_tv_license:
+      requires_tv_licence:
         type: boolean
       signed:
         type: boolean

@@ -6630,10 +6630,10 @@ definitions:
       type:
         description: The blacklist type
         enum:
-          - paymentCardId
-          - customerId
+          - payment-card-id
+          - customer-id
           - email
-          - ipAddress
+          - ip-address
           - country
           - fingerprint
           - bin
@@ -7315,6 +7315,7 @@ definitions:
             - Diners Club
             - Switch
             - Laser
+            - China Unionpay
           type: string
         type: array
       status:
@@ -7630,8 +7631,8 @@ definitions:
     enum:
       - ach
       - cash
-      - china_unionpay
-      - payment_card
+      - china-unionpay
+      - payment-card
       - paypal
     type: string
   Note:
@@ -7669,8 +7670,8 @@ definitions:
         description: The note's related resource type
         enum:
           - customer
-          - paymentCard
-          - paymentGateway
+          - payment-card
+          - payment-gateway
           - subscription
           - transaction
         type: string
@@ -7784,12 +7785,30 @@ definitions:
       method:
         $ref: '#/definitions/Method'
         description: Payment Method
+      result:
+        description: Payment result
+        enum:
+          - approved
+          - declined
+          - canceled
+          - unknown
+        readOnly: true
+        type: string
       scheduledTime:
         description: The time the payment is scheduled for collection
         format: date-time
         type: string
-      state:
-        description: Payment state
+      status:
+        description: Payment status
+        enum:
+          - scheduled
+          - queued
+          - in-progress
+          - incomplete
+          - waiting-gateway
+          - suspended
+          - completed
+        readOnly: true
         type: string
       updatedBy:
         description: The process that updated this payment
@@ -8412,6 +8431,14 @@ definitions:
       company:
         description: The user's company name
         type: string
+      currencies:
+        default:
+          - USD
+        description: An array of currencies codes
+        items:
+          description: 3 letters ISO 4217 currency code
+          type: string
+        type: array
       email:
         description: The user email
         format: email
@@ -8423,9 +8450,20 @@ definitions:
       lastName:
         description: The user last name
         type: string
+      merchantCategoryCode:
+        default:
+          - 5734
+        description: An array of merchant cateogries codes. Defaults to "Computer Software Stores"
+        items:
+          description: Merchant category code
+          type: integer
+        type: array
       password:
         description: The user password
         format: password
+        type: string
+      website:
+        description: The user's website address
         type: string
     required:
       - email
@@ -8434,6 +8472,7 @@ definitions:
       - lastName
       - businessPhone
       - password
+      - website
     type: object
   Status:
     properties:
@@ -8532,11 +8571,9 @@ definitions:
       policy:
         description: Cancel policy
         enum:
-          - AT_NEXT_RENEWAL
-          - NOW_WITH_PRORATA_REFUND
-          - NOW_WITH_PRORATA_CREDIT
-          - NOW_WITHOUT_REFUND
-          - NOW_WITH_FULL_REFUND
+          - at-next-renewal
+          - now-with-prorata-credit
+          - now
         type: string
     required:
       - policy
@@ -8550,10 +8587,9 @@ definitions:
       policy:
         description: Switch policy
         enum:
-          - AT_NEXT_RENEWAL
-          - NOW_WITH_PRORATA_REFUND
-          - NOW_WITH_PRORATA_CREDIT
-          - NOW_WITHOUT_REFUND
+          - at-next-renewal
+          - now-with-prorata-credit
+          - now
         type: string
       quantity:
         description: Quantity for each subscription. Default value to 1
@@ -8622,7 +8658,7 @@ definitions:
       taxProvider:
         description: The tax category maps to a provider
         enum:
-          - TaxJar
+          - tax-jar
         type: string
     type: object
   ThreeDSecure:
@@ -8793,11 +8829,11 @@ definitions:
         description: Transaction result
         enum:
           - approved
-          - conn_error
+          - connection-error
           - declined
-          - never_sent
+          - never-sent
           - pending
-          - pending_processor
+          - pending-processor
           - timeout
           - unknown
         readOnly: true
@@ -8896,7 +8932,7 @@ definitions:
         enum:
           - active
           - inactive
-          - pendingConfirmation
+          - pending-confirmation
         readOnly: true
         type: string
       totpRequired:

@@ -40,34 +40,12 @@ parameters:
     required: true
     type: string
   SubscriptionIdParameter:
-    description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
     in: path
     name: subscriptionId
     required: true
     type: string
 paths:
-  '/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/checkNamespaceAvailability':
-    post:
-      description: Checks the availability of the given service namespace across all Windows Azure subscriptions. This is useful because the domain name is created based on the service namespace name.
-      externalDocs:
-        url: 'http://msdn.microsoft.com/en-us/library/windowsazure/jj870968.aspx'
-      operationId: Namespaces_CheckAvailability
-      parameters:
-        - description: The namespace name.
-          in: body
-          name: parameters
-          required: true
-          schema:
-            $ref: '#/definitions/CheckAvailabilityParameters'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-      responses:
-        '200':
-          description: Checked name successfully
-          schema:
-            $ref: '#/definitions/CheckAvailabilityResource'
-      tags:
-        - Namespaces
   '/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/namespaces':
     get:
       description: Lists all the available namespaces within the subscription irrespective of the resourceGroups.
@@ -93,7 +71,7 @@ paths:
         url: 'https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx'
       operationId: Namespaces_ListByResourceGroup
       parameters:
-        - description: The name of the resource group. If resourceGroupName value is null the method lists all the namespaces within subscription
+        - description: The name of the resource group.
           in: path
           name: resourceGroupName
           required: true
@@ -131,6 +109,8 @@ paths:
       responses:
         '200':
           description: Namespace delete successful
+        '202':
+          description: Namespace delete accepted
       tags:
         - Namespaces
       x-ms-long-running-operation: true
@@ -185,7 +165,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Namespace create request accepted
+          description: Namespace create request successful
           schema:
             $ref: '#/definitions/NamespaceResource'
         '201':
@@ -197,7 +177,9 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules':
     get:
-      description: Gets the authorization rules for a namespace.
+      description: Authorization rules for a namespace.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639376.aspx'
       operationId: Namespaces_ListAuthorizationRules
       parameters:
         - description: The name of the resource group.
@@ -214,7 +196,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Authorization rule returned successfully
+          description: Namespace Authorization rule returned successfully
           schema:
             $ref: '#/definitions/SharedAccessAuthorizationRuleListResult'
       tags:
@@ -224,6 +206,8 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}':
     delete:
       description: Deletes a namespace authorization rule
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639417.aspx'
       operationId: Namespaces_DeleteAuthorizationRule
       parameters:
         - description: The name of the resource group.
@@ -245,11 +229,13 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Authorization rule deleted
+          description: Namespace Authorization rule deleted
       tags:
         - Namespaces
     get:
-      description: Gets an authorization rule for a namespace by name.
+      description: Authorization rule for a namespace by name.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639392.aspx'
       operationId: Namespaces_GetAuthorizationRule
       parameters:
         - description: The name of the resource group.
@@ -271,13 +257,15 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Authorization rule returned successfully
+          description: Namespace Authorization rule returned successfully
           schema:
             $ref: '#/definitions/SharedAccessAuthorizationRuleResource'
       tags:
         - Namespaces
     put:
       description: Creates an authorization rule for a namespace
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639410.aspx'
       operationId: Namespaces_CreateOrUpdateAuthorizationRule
       parameters:
         - description: The name of the resource group.
@@ -290,7 +278,7 @@ paths:
           name: namespaceName
           required: true
           type: string
-        - description: Aauthorization Rule Name.
+        - description: Namespace Aauthorization Rule Name.
           in: path
           name: authorizationRuleName
           required: true
@@ -305,14 +293,14 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Authorization rule created
+          description: Namespace Authorization rule created
           schema:
             $ref: '#/definitions/SharedAccessAuthorizationRuleResource'
       tags:
         - Namespaces
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}/listKeys':
     post:
-      description: 'Gets the Primary and Secondary ConnectionStrings to the namespace '
+      description: 'Primary and Secondary ConnectionStrings to the namespace '
       externalDocs:
         url: 'https://msdn.microsoft.com/en-us/library/azure/mt639398.aspx'
       operationId: Namespaces_ListKeys
@@ -327,7 +315,7 @@ paths:
           name: namespaceName
           required: true
           type: string
-        - description: The connection string of the namespace for the specified authorizationRule.
+        - description: The authorizationRule name.
           in: path
           name: authorizationRuleName
           required: true
@@ -343,7 +331,7 @@ paths:
         - Namespaces
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/AuthorizationRules/{authorizationRuleName}/regenerateKeys':
     post:
-      description: 'Gets the Primary and Secondary ConnectionStrings to the namespace '
+      description: 'Regenerats the Primary or Secondary ConnectionStrings to the namespace '
       externalDocs:
         url: 'https://msdn.microsoft.com/en-us/library/azure/mt718977.aspx'
       operationId: Namespaces_RegenerateKeys
@@ -358,7 +346,7 @@ paths:
           name: namespaceName
           required: true
           type: string
-        - description: The connection string of the namespace for the specified authorizationRule.
+        - description: The authorizationRule name.
           in: path
           name: authorizationRuleName
           required: true
@@ -378,70 +366,880 @@ paths:
             $ref: '#/definitions/ResourceListKeys'
       tags:
         - Namespaces
-definitions:
-  ARMSku:
-    description: Sku of the Namespace.
-    properties:
-      Capacity:
-        description: The messaging units or eventhub throughput units
-        format: int32
-        type: integer
-      Name:
-        description: 'The resource type that this object applies to. Eg: NamespaceType'
-        enum:
-          - Basic
-          - Standard
-          - Premium
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: Name
-      Tier:
-        description: The tier of this particular SKU
-        enum:
-          - Basic
-          - Standard
-          - Premium
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: Tier
-    type: object
-  CheckAvailabilityParameters:
-    description: Parameters supplied to the Check Name Availability for Namespace and ServiceBus.
-    properties:
-      isAvailiable:
-        description: Is true if the name is available and can be used to create new Namespace/ServiceBus. Otherwise false.
-        type: boolean
-      location:
-        description: Namespace location
-        type: string
-      name:
-        description: Name of the namespace
-        type: string
-      tags:
-        additionalProperties:
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues':
+    get:
+      description: Lists the queues within the namespace.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639415.aspx'
+      operationId: Queues_ListAll
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
           type: string
-        description: Namespace tags
-        type: object
-    required:
-      - name
-  CheckAvailabilityResource:
-    allOf:
-      - $ref: '#/definitions/Resource'
-    description: Description of a CheckAvailibility resource.
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Queues returned successfully
+          schema:
+            $ref: '#/definitions/QueueListResult'
+      tags:
+        - Queues
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues/{queueName}':
+    delete:
+      description: Deletes a queue from the specified namespace in resource group.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639411.aspx'
+      operationId: Queues_Delete
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The queue name.
+          in: path
+          name: queueName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Queue deleted.
+      tags:
+        - Queues
+    get:
+      description: Returns the description for the specified queue.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639380.aspx'
+      operationId: Queues_Get
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The queue name.
+          in: path
+          name: queueName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved queue description.
+          schema:
+            $ref: '#/definitions/QueueResource'
+      tags:
+        - Queues
+    put:
+      description: Creates/Updates a service Queue. This operation is idempotent.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639395.aspx'
+      operationId: Queues_CreateOrUpdate
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The queue name.
+          in: path
+          name: queueName
+          required: true
+          type: string
+        - description: Parameters supplied to create a Queue Resource.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/QueueCreateOrUpdateParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Queue created
+          schema:
+            $ref: '#/definitions/QueueResource'
+      tags:
+        - Queues
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues/{queueName}/authorizationRules':
+    get:
+      description: Returns all Queue authorizationRules.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt705607.aspx'
+      operationId: Queues_ListAuthorizationRules
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The queue name.
+          in: path
+          name: queueName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Queues Authorization rule returned successfully
+          schema:
+            $ref: '#/definitions/SharedAccessAuthorizationRuleListResult'
+      tags:
+        - Queues
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues/{queueName}/authorizationRules/{authorizationRuleName}':
+    delete:
+      description: Deletes a queue authorization rule
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt705609.aspx'
+      operationId: Queues_DeleteAuthorizationRule
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The queue name.
+          in: path
+          name: queueName
+          required: true
+          type: string
+        - description: Authorization Rule Name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Queue authorizationRule deleted
+      tags:
+        - Queues
+    get:
+      description: Queue authorizationRule for a queue by name.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt705611.aspx'
+      operationId: Queues_GetAuthorizationRule
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The queue name.
+          in: path
+          name: queueName
+          required: true
+          type: string
+        - description: Authorization rule name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Queues AuthorizationRule returned successfully
+          schema:
+            $ref: '#/definitions/SharedAccessAuthorizationRuleResource'
+      tags:
+        - Queues
+    put:
+      description: Creates an authorization rule for a queue
+      operationId: Queues_CreateOrUpdateAuthorizationRule
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The queue name.
+          in: path
+          name: queueName
+          required: true
+          type: string
+        - description: Aauthorization Rule Name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - description: The shared access authorization rule.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Queues Authorization rule created
+          schema:
+            $ref: '#/definitions/SharedAccessAuthorizationRuleResource'
+      tags:
+        - Queues
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues/{queueName}/authorizationRules/{authorizationRuleName}/ListKeys':
+    post:
+      description: Primary and Secondary ConnectionStrings to the queue.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt705608.aspx'
+      operationId: Queues_ListKeys
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The queue name.
+          in: path
+          name: queueName
+          required: true
+          type: string
+        - description: The authorizationRule name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successful
+          schema:
+            $ref: '#/definitions/ResourceListKeys'
+      tags:
+        - Queues
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/queues/{queueName}/authorizationRules/{authorizationRuleName}/regenerateKeys':
+    post:
+      description: Regenerates the Primary or Secondary ConnectionStrings to the Queue
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt705606.aspx'
+      operationId: Queues_RegenerateKeys
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The queue name.
+          in: path
+          name: queueName
+          required: true
+          type: string
+        - description: The authorizationRule name
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - description: Parameters supplied to regenerate Auth Rule.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/RegenerateKeysParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successful
+          schema:
+            $ref: '#/definitions/ResourceListKeys'
+      tags:
+        - Queues
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics':
+    get:
+      description: Lists all the topics in a namespace.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639388.aspx'
+      operationId: Topics_ListAll
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved list of topics.
+          schema:
+            $ref: '#/definitions/TopicListResult'
+      tags:
+        - Topics
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}':
+    delete:
+      description: Deletes a topic from the specified namespace and resource group.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639404.aspx'
+      operationId: Topics_Delete
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The topics name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The topics name.
+          in: path
+          name: topicName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Topic delete successful
+      tags:
+        - Topics
+      x-ms-long-running-operation: true
+    get:
+      description: Returns the description for the specified topic
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639399.aspx'
+      operationId: Topics_GetTopic
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The topic name.
+          in: path
+          name: topicName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved topic description.
+          schema:
+            $ref: '#/definitions/TopicResource'
+      tags:
+        - Topics
+    put:
+      description: Creates a topic in the specified namespace
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639409.aspx'
+      operationId: Topics_CreateOrUpdate
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The topic name.
+          in: path
+          name: topicName
+          required: true
+          type: string
+        - description: Parameters supplied to create a Topic Resource.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/TopicCreateOrUpdateParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Topic created
+          schema:
+            $ref: '#/definitions/TopicResource'
+      tags:
+        - Topics
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/authorizationRules':
+    get:
+      description: Authorization rules for a topic.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt720681.aspx'
+      operationId: Topics_ListAuthorizationRules
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The topic name
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The topic name.
+          in: path
+          name: topicName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Topic AuthorizationRule returned successfully
+          schema:
+            $ref: '#/definitions/SharedAccessAuthorizationRuleListResult'
+      tags:
+        - Topics
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/authorizationRules/{authorizationRuleName}':
+    delete:
+      description: Deletes a topic authorizationRule
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt720681.aspx'
+      operationId: Topics_DeleteAuthorizationRule
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The topic name.
+          in: path
+          name: topicName
+          required: true
+          type: string
+        - description: AuthorizationRule Name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Topics AuthorizationRule deleted
+      tags:
+        - Namespaces
+    get:
+      description: Returns the specified authorizationRule.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt720676.aspx'
+      operationId: Topics_GetAuthorizationRule
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: Authorization rule name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - description: The topic name.
+          in: path
+          name: topicName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Topic AuthorizationRule returned successfully
+          schema:
+            $ref: '#/definitions/SharedAccessAuthorizationRuleResource'
+      tags:
+        - Topics
+    put:
+      description: Creates an authorizatioRule for the specified topic.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt720678.aspx'
+      operationId: Topics_CreateOrUpdateAuthorizationRule
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The topic name.
+          in: path
+          name: topicName
+          required: true
+          type: string
+        - description: Aauthorization Rule Name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - description: The shared access authorization rule.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/SharedAccessAuthorizationRuleCreateOrUpdateParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Topic Authorization rule created
+          schema:
+            $ref: '#/definitions/SharedAccessAuthorizationRuleResource'
+      tags:
+        - Topics
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/authorizationRules/{authorizationRuleName}/ListKeys':
+    post:
+      description: Primary and Secondary ConnectionStrings to the topic
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt720677.aspx'
+      operationId: Topics_ListKeys
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The topic name.
+          in: path
+          name: topicName
+          required: true
+          type: string
+        - description: The authorizationRule name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successful
+          schema:
+            $ref: '#/definitions/ResourceListKeys'
+      tags:
+        - Namespaces
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/authorizationRules/{authorizationRuleName}/regenerateKeys':
+    post:
+      description: Regenerates Primary or Secondary ConnectionStrings to the topic
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt720679.aspx'
+      operationId: Topics_RegenerateKeys
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The topic name.
+          in: path
+          name: topicName
+          required: true
+          type: string
+        - description: The authorizationRule name.
+          in: path
+          name: authorizationRuleName
+          required: true
+          type: string
+        - description: Parameters supplied to regenerate Auth Rule.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/RegenerateKeysParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successful
+          schema:
+            $ref: '#/definitions/ResourceListKeys'
+      tags:
+        - Topics
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/subscriptions':
+    get:
+      description: Lsit all the subscriptions under a specified topic
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639400.aspx'
+      operationId: Subscriptions_ListAll
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The topic name.
+          in: path
+          name: topicName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved list of Subscriptions.
+          schema:
+            $ref: '#/definitions/SubscriptionListResult'
+      tags:
+        - Subscriptions
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/topics/{topicName}/subscriptions/{subscriptionName}':
+    delete:
+      description: Deletes a subscription from the specified topic.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639381.aspx'
+      operationId: Subscriptions_Delete
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The topic name.
+          in: path
+          name: topicName
+          required: true
+          type: string
+        - description: The subscription name.
+          in: path
+          name: subscriptionName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Subscription deleted.
+      tags:
+        - Subscriptions
+    get:
+      description: Returns a subscription description for the specified topic.
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639402.aspx'
+      operationId: Subscriptions_Get
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The topic name.
+          in: path
+          name: topicName
+          required: true
+          type: string
+        - description: The subscription name.
+          in: path
+          name: subscriptionName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Successfully retrieved queue description.
+          schema:
+            $ref: '#/definitions/SubscriptionResource'
+      tags:
+        - Subscriptions
+    put:
+      description: Creates a topic subscription
+      externalDocs:
+        url: 'https://msdn.microsoft.com/en-us/library/azure/mt639385.aspx'
+      operationId: Subscriptions_CreateOrUpdate
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The topicName name.
+          in: path
+          name: topicName
+          required: true
+          type: string
+        - description: The subscriptionName name.
+          in: path
+          name: subscriptionName
+          required: true
+          type: string
+        - description: Parameters supplied to create a subscription Resource.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/SubscriptionCreateOrUpdateParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Subscription create request accepted
+          schema:
+            $ref: '#/definitions/SubscriptionResource'
+      tags:
+        - Subscriptions
+definitions:
+  MessageCountDetails:
+    description: Message Count Details.
     properties:
-      isAvailiable:
-        description: Is true if the name is available and can be used to create new Namespace/ServiceBus. Otherwise false.
-        type: boolean
+      ActiveMessageCount:
+        description: 'Number of active messages in the queue, topic, or subscription.'
+        format: int64
+        type: integer
+      DeadLetterMessageCount:
+        description: Number of messages that are dead letters.
+        format: int64
+        type: integer
+      ScheduledMessageCount:
+        description: Number scheduled messages.
+        format: int64
+        type: integer
+      TransferDeadLetterMessageCount:
+        description: Number of messages transferred into dead letters.
+        format: int64
+        type: integer
+      TransferMessageCount:
+        description: 'Number of messages transferred to another queue, topic, or subscription.'
+        format: int64
+        type: integer
+    type: object
   NamespaceCreateOrUpdateParameters:
     description: Parameters supplied to the CreateOrUpdate Namespace operation.
     properties:
+      kind:
+        description: 'Specifies the namespace type; for example, Messaging.'
+        enum:
+          - Messaging
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: kind
       location:
-        description: Namespace data center location.
+        description: Namespace location.
         type: string
       properties:
         $ref: '#/definitions/NamespaceProperties'
+        x-ms-client-flatten: true
+      sku:
+        $ref: '#/definitions/Sku'
       tags:
         additionalProperties:
           type: string
@@ -449,7 +1247,6 @@ definitions:
         type: object
     required:
       - location
-      - properties
   NamespaceListResult:
     description: The response of the List Namespace operation.
     properties:
@@ -464,48 +1261,63 @@ definitions:
   NamespaceProperties:
     description: Properties of the Namespace.
     properties:
-      createdAt:
+      CreateACSNamespace:
+        description: Indicates whether to create ACS namespace.
+        type: boolean
+      CreatedAt:
         description: The time the namespace was created.
         format: date-time
         type: string
-      critical:
+      Critical:
         description: Whether or not the namespace is set as Critical.
         type: boolean
-      name:
-        description: The name of the namespace.
-        type: string
-      namespaceType:
+      Enabled:
+        description: Specifies whether this instance is enabled.
+        type: boolean
+      NamespaceType:
         description: The namespace type.
         enum:
           - Messaging
-          - NotificationHub
-          - EventHub
         type: string
         x-ms-enum:
           modelAsString: true
           name: NamespaceType
-      provisioningState:
+      ProvisioningState:
         description: Provisioning state of the Namespace.
         type: string
-      region:
-        description: 'Specifies the targeted region in which the namespace should be created. It can be any of the following values: Australia EastAustralia SoutheastCentral USEast USEast US 2West USNorth Central USSouth Central USEast AsiaSoutheast AsiaBrazil SouthJapan EastJapan WestNorth EuropeWest Europe'
+      Region:
+        description: Specifies the targeted region in which the namespace should be created.
         externalDocs:
           url: 'http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx'
         type: string
-      serviceBusEndpoint:
+      ServiceBusEndpoint:
         description: Endpoint you can use to perform ServiceBus operations.
         externalDocs:
           url: 'http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx'
         type: string
-      status:
-        description: 'Status of the namespace. It can be any of these values:1 = Created/Active2 = Creating3 = Suspended4 = Deleting'
-        externalDocs:
-          url: 'http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx'
+      Status:
+        description: State of the namespace.
+        enum:
+          - Unknown
+          - Creating
+          - Created
+          - Activating
+          - Enabling
+          - Active
+          - Disabling
+          - Disabled
+          - SoftDeleting
+          - SoftDeleted
+          - Removing
+          - Removed
+          - Failed
         type: string
-      subscriptionId:
+        x-ms-enum:
+          modelAsString: false
+          name: NamespaceState
+      SubscriptionId:
         description: The Id of the Azure subscription associated with the namespace.
         type: string
-    x-ms-client-flatten: true
   NamespaceResource:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -515,17 +1327,162 @@ definitions:
         description: Kind of the Namespace.
         enum:
           - Messaging
-          - EventHub
         type: string
         x-ms-enum:
           modelAsString: true
-          name: Kind
+          name: kind
       properties:
         $ref: '#/definitions/NamespaceProperties'
+        x-ms-client-flatten: true
       sku:
-        $ref: '#/definitions/ARMSku'
+        $ref: '#/definitions/Sku'
+  QueueCreateOrUpdateParameters:
+    description: Parameters supplied to the CreateOrUpdate Queue operation.
+    properties:
+      location:
+        description: location of the resource.
+        type: string
+      name:
+        description: Queue name.
+        type: string
+      properties:
+        $ref: '#/definitions/QueueProperties'
+        x-ms-client-flatten: true
+    required:
+      - location
+  QueueListResult:
+    description: The response of the List Queues operation.
+    properties:
+      nextLink:
+        description: Link to the next set of results. Not empty if Value contains incomplete list of Queues
+        type: string
+      value:
+        description: Result of the List Queues operation.
+        items:
+          $ref: '#/definitions/QueueResource'
+        type: array
+  QueueProperties:
+    properties:
+      AccessedAt:
+        description: 'Last time a message was sent, or the last time there was a receive request to this queue.'
+        format: date-time
+        type: string
+      AutoDeleteOnIdle:
+        description: the TimeSpan idle interval after which the queue is automatically deleted. The minimum duration is 5 minutes.
+        format: duration
+        type: string
+      'AvailabilityStatus ':
+        description: entity availability status for the queue.
+        enum:
+          - Available
+          - Limited
+          - Renaming
+          - Restoring
+          - Unknown
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: AvailabilityStatus
+      CreatedAt:
+        description: the exact time the message was created.
+        format: date-time
+        type: string
+      DefaultMessageTimeToLive:
+        description: 'the default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself.'
+        format: duration
+        type: string
+      'DuplicateDetectionHistoryTimeWindow ':
+        description: TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes..
+        format: duration
+        type: string
+      EnableBatchedOperations:
+        description: value that indicates whether server-side batched operations are enabled..
+        type: boolean
+      EnableDeadLetteringOnMessageExpiration:
+        description: a value that indicates whether this queue has dead letter support when a message expires.
+        type: boolean
+      EnableExpress:
+        description: a value that indicates whether Express Entities are enabled. An express queue holds a message in memory temporarily before writing it to persistent storage.
+        type: boolean
+      EnablePartitioning:
+        description: value that indicates whether the queue to be partitioned across multiple message brokers is enabled.
+        type: boolean
+      ForwardDeadLetteredMessagesTo:
+        description: the path to the recipient to which the dead lettered message is forwarded.
+        type: string
+      ForwardTo:
+        description: the path to the recipient to which the message is forwarded.
+        type: string
+      IsAnonymousAccessible:
+        description: a value that indicates whether the message is anonymous accessible.
+        type: boolean
+      'LockDuration ':
+        description: 'the duration of a peek lock; that is, the amount of time that the message is locked for other receivers. The maximum value for LockDuration is 5 minutes; the default value is 1 minute.'
+        format: duration
+        type: string
+      'MaxDeliveryCount ':
+        description: the maximum delivery count. A message is automatically deadlettered after this number of deliveries.
+        format: int32
+        type: integer
+      'MaxSizeInMegabytes ':
+        description: 'the maximum size of the queue in megabytes, which is the size of memory allocated for the queue.'
+        format: int64
+        type: integer
+      'MessageCount ':
+        description: the number of messages in the queue.
+        format: int64
+        type: integer
+      MessageCountDetails:
+        $ref: '#/definitions/MessageCountDetails'
+      Path:
+        description: the name of the queue.
+        type: string
+      RequiresDuplicateDetection:
+        description: the value indicating if this queue requires duplicate detection.
+        type: boolean
+      RequiresSession:
+        description: a value that indicates whether the queue supports the concept of session.
+        type: boolean
+      'SizeInBytes ':
+        description: the size of the queue in bytes.
+        format: int64
+        type: integer
+      Status:
+        description: Enumerates the possible values for the status of a messaging entity.
+        enum:
+          - Active
+          - Creating
+          - Deleting
+          - Disabled
+          - ReceiveDisabled
+          - Renaming
+          - Restoring
+          - SendDisabled
+          - Unknown
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: EntityStatus
+      SupportOrdering:
+        description: a value that indicates whether the queue supports ordering.
+        type: boolean
+      UpdatedAt:
+        description: the exact time the message has been updated.
+        format: date-time
+        type: string
+      UserMetadata:
+        description: Represents the metadata description of the queue.
+        type: string
+  QueueResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Description of queue Resource.
+    properties:
+      properties:
+        $ref: '#/definitions/QueueProperties'
+        x-ms-client-flatten: true
   RegenerateKeysParameters:
-    description: Parameters supplied to the Regenerate Namespace Auth Rule.
+    description: Parameters supplied to the Regenerate Auth Rule.
     properties:
       Policykey:
         description: Key that needs to be regenerated .
@@ -578,16 +1535,17 @@ definitions:
         description: A base64-encoded 256-bit primary key for signing and validating the SAS token
         type: string
   SharedAccessAuthorizationRuleCreateOrUpdateParameters:
-    description: Parameters supplied to the CreateOrUpdate Namespace AuthorizationRules.
+    description: Parameters supplied to the CreateOrUpdate  AuthorizationRules.
     properties:
       location:
-        description: Namespace data center location.
+        description: data center location.
         type: string
       name:
-        description: Name of the Namespace AuthorizationRule.
+        description: Name of the AuthorizationRule.
         type: string
       properties:
         $ref: '#/definitions/SharedAccessAuthorizationRuleProperties'
+        x-ms-client-flatten: true
     required:
       - properties
   SharedAccessAuthorizationRuleListResult:
@@ -616,7 +1574,6 @@ definitions:
             modelAsString: false
             name: AccessRights
         type: array
-    x-ms-client-flatten: true
   SharedAccessAuthorizationRuleResource:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -624,3 +1581,287 @@ definitions:
     properties:
       properties:
         $ref: '#/definitions/SharedAccessAuthorizationRuleProperties'
+        x-ms-client-flatten: true
+  Sku:
+    description: Sku of the Namespace.
+    properties:
+      Capacity:
+        description: The messaging units or eventhub throughput units
+        format: int32
+        type: integer
+      Name:
+        description: 'The resource type that this object applies to. Eg: NamespaceType'
+        enum:
+          - Basic
+          - Standard
+          - Premium
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SkuName
+      Tier:
+        description: The tier of this particular SKU
+        enum:
+          - Basic
+          - Standard
+          - Premium
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SkuTier
+    required:
+      - Tier
+    type: object
+  SubscriptionCreateOrUpdateParameters:
+    description: Parameters supplied to the CreateOrUpdate Subscription operation.
+    properties:
+      location:
+        description: Subscription data center location.
+        type: string
+      properties:
+        $ref: '#/definitions/SubscriptionProperties'
+        x-ms-client-flatten: true
+      type:
+        description: Resource Manager type of the resource.
+        type: string
+    required:
+      - location
+  SubscriptionListResult:
+    description: The response of the List Subscriptions operation.
+    properties:
+      nextLink:
+        description: Link to the next set of results. Not empty if Value contains incomplete list of Subscriptions
+        type: string
+      value:
+        description: Result of the List Subscriptions operation.
+        items:
+          $ref: '#/definitions/SubscriptionResource'
+        type: array
+  SubscriptionProperties:
+    description: Description of Subscription Resource.
+    properties:
+      AccessedAt:
+        description: Last time a there was a receive request to this subscription.
+        format: date-time
+        type: string
+      AutoDeleteOnIdle:
+        description: TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes.
+        format: duration
+        type: string
+      'AvailabilityStatus ':
+        description: Entity availability status for the topic.
+        enum:
+          - Available
+          - Limited
+          - Renaming
+          - Restoring
+          - Unknown
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: AvailabilityStatus
+      CreatedAt:
+        description: Exact time the message was created.
+        format: date-time
+        type: string
+      DefaultMessageTimeToLive:
+        description: 'Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself.'
+        format: duration
+        type: string
+      EnableBatchedOperations:
+        description: Value that indicates whether server-side batched operations are enabled..
+        type: boolean
+      EnableDeadLetteringOnFilterEvaluationExceptions:
+        description: Value that indicates if a subscription has dead letter support on Filter evaluation exceptions.
+        type: boolean
+      EnableDeadLetteringOnMessageExpiration:
+        description: Value that indicates if a subscription has dead letter support when a message expires.
+        type: boolean
+      ForwardDeadLetteredMessagesTo:
+        description: Path to the recipient to which the dead lettered messages are forwarded.
+        type: string
+      ForwardTo:
+        description: Path to the recipient to which the message is forwarded.
+        type: string
+      IsReadOnly:
+        description: Value that indicates whether the entity description is read-only.
+        type: boolean
+      LockDuration:
+        description: The lock duration time span for the subscription.
+        format: duration
+        type: string
+      MaxDeliveryCount:
+        description: Number of maximum deliveries.
+        format: int32
+        type: integer
+      MessageCount:
+        description: Number of messages.
+        format: int64
+        type: integer
+      MessageCountDetails:
+        $ref: '#/definitions/MessageCountDetails'
+      RequiresSession:
+        description: Value indicating if a subscription supports the concept of session.
+        type: boolean
+      Status:
+        description: Enumerates the possible values for the status of a messaging entity.
+        enum:
+          - Active
+          - Creating
+          - Deleting
+          - Disabled
+          - ReceiveDisabled
+          - Renaming
+          - Restoring
+          - SendDisabled
+          - Unknown
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: EntityStatus
+      TopicPath:
+        description: Path of the topic that this subscription description belongs to.
+        type: string
+      UpdatedAt:
+        description: The exact time the message has been updated.
+        format: date-time
+        type: string
+      UserMetadata:
+        description: Represents the metadata description of the Subscription.
+        type: string
+  SubscriptionResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Description of Subscription Resource.
+    properties:
+      properties:
+        $ref: '#/definitions/SubscriptionProperties'
+        x-ms-client-flatten: true
+  TopicCreateOrUpdateParameters:
+    description: Parameters supplied to the CreateOrUpdate Topic operation.
+    properties:
+      location:
+        description: Location of the resource.
+        type: string
+      name:
+        description: Topic name.
+        type: string
+      properties:
+        $ref: '#/definitions/TopicProperties'
+        x-ms-client-flatten: true
+    required:
+      - location
+  TopicListResult:
+    description: The response of the List Topics operation.
+    properties:
+      nextLink:
+        description: Link to the next set of results. Not empty if Value contains incomplete list of Topics
+        type: string
+      value:
+        description: Result of the List Topics operation.
+        items:
+          $ref: '#/definitions/TopicResource'
+        type: array
+  TopicProperties:
+    properties:
+      AccessedAt:
+        description: Last time the message was sent or a request was received for this topic.
+        format: date-time
+        type: string
+      AutoDeleteOnIdle:
+        description: TimeSpan idle interval after which the topic is automatically deleted. The minimum duration is 5 minutes.
+        format: duration
+        type: string
+      'AvailabilityStatus ':
+        description: Entity availability status for the topic.
+        enum:
+          - Available
+          - Limited
+          - Renaming
+          - Restoring
+          - Unknown
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: AvailabilityStatus
+      CreatedAt:
+        description: Exact time the message was created.
+        format: date-time
+        type: string
+      DefaultMessageTimeToLive:
+        description: 'Default message time to live value. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself.'
+        format: duration
+        type: string
+      'DuplicateDetectionHistoryTimeWindow ':
+        description: TimeSpan structure that defines the duration of the duplicate detection history. The default value is 10 minutes..
+        format: duration
+        type: string
+      EnableBatchedOperations:
+        description: Value that indicates whether server-side batched operations are enabled..
+        type: boolean
+      EnableExpress:
+        description: Value that indicates whether Express Entities are enabled. An express topic holds a message in memory temporarily before writing it to persistent storage.
+        type: boolean
+      EnableFilteringMessagesBeforePublishing:
+        description: Whether messages should be filtered before publishing.
+        type: boolean
+      EnablePartitioning:
+        description: Value that indicates whether the topic to be partitioned across multiple message brokers is enabled.
+        type: boolean
+      IsAnonymousAccessible:
+        description: Value that indicates whether the message is anonymous accessible.
+        type: boolean
+      'MaxSizeInMegabytes ':
+        description: 'Maximum size of the topic in megabytes, which is the size of memory allocated for the topic.'
+        format: int64
+        type: integer
+      MessageCountDetails:
+        $ref: '#/definitions/MessageCountDetails'
+      Path:
+        description: Name of the topic.
+        type: string
+      RequiresDuplicateDetection:
+        description: Value indicating if this topic requires duplicate detection.
+        type: boolean
+      'SizeInBytes ':
+        description: Size of the topic in bytes.
+        format: int64
+        type: integer
+      Status:
+        description: Enumerates the possible values for the status of a messaging entity.
+        enum:
+          - Active
+          - Creating
+          - Deleting
+          - Disabled
+          - ReceiveDisabled
+          - Renaming
+          - Restoring
+          - SendDisabled
+          - Unknown
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: EntityStatus
+      SubscriptionCount:
+        description: Number of subscriptions.
+        format: int32
+        type: integer
+      SupportOrdering:
+        description: Value that indicates whether the topic supports ordering.
+        type: boolean
+      UpdatedAt:
+        description: The exact time the message has been updated.
+        format: date-time
+        type: string
+      UserMetadata:
+        description: Represents the metadata description of the topic
+        type: string
+  TopicResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Description of topic Resource.
+    properties:
+      properties:
+        $ref: '#/definitions/TopicProperties'
+        x-ms-client-flatten: true

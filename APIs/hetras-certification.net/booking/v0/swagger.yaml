@@ -98,8 +98,6 @@ paths:
           description: All addon offers for the requested stay details.
           schema:
             $ref: '#/definitions/Addons'
-        '400':
-          description: Bad request. Request parameters syntactically erroneous.
         '401':
           description: 'You provided wrong credentials, or you reached your API limit.'
         '403':
@@ -620,7 +618,7 @@ paths:
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
         '422':
-          description: Bad request. Request parameters syntactically erroneous.
+          description: The request failed to validate.
         '500':
           description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         '503':
@@ -667,7 +665,7 @@ paths:
           schema:
             $ref: '#/definitions/BaseResponse'
         '400':
-          description: Bad request. Request parameters or request body erroneous.
+          description: Bad request. Request body erroneous.
         '401':
           description: 'You provided wrong credentials, or you reached your API limit.'
         '403':
@@ -902,8 +900,6 @@ paths:
           description: Returns a list of all reservations for that booking.
           schema:
             $ref: '#/definitions/ReservationsResponse'
-        '400':
-          description: Bad request. Request parameters syntactically erroneous.
         '401':
           description: 'You provided wrong credentials, or you reached your API limit.'
         '403':
@@ -962,8 +958,6 @@ paths:
           description: Returns the details of the reservation specified.
           schema:
             $ref: '#/definitions/ReservationResponse'
-        '400':
-          description: Bad request. Request parameters syntactically erroneous.
         '401':
           description: 'You provided wrong credentials, or you reached your API limit.'
         '403':
@@ -1023,7 +1017,7 @@ paths:
           schema:
             $ref: '#/definitions/AssignRoomResponse'
         '400':
-          description: Bad request. Request parameters or request body erroneous.
+          description: Bad request. Request body erroneous.
         '401':
           description: 'You provided wrong credentials, or you reached your API limit.'
         '403':
@@ -1077,7 +1071,7 @@ paths:
           schema:
             $ref: '#/definitions/CancellationResponse'
         '400':
-          description: Bad request. Request parameters or request body erroneous.
+          description: Bad request. Request body erroneous.
         '401':
           description: 'You provided wrong credentials, or you reached your API limit.'
         '403':
@@ -1177,8 +1171,6 @@ paths:
           description: Different rates for the requested stay details grouped by room type.
           schema:
             $ref: '#/definitions/Rates'
-        '400':
-          description: Bad request. Request parameters syntactically erroneous.
         '401':
           description: 'You provided wrong credentials, or you reached your API limit.'
         '403':

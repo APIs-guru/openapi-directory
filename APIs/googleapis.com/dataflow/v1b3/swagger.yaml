@@ -321,6 +321,96 @@ paths:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
+  '/v1b3/projects/{projectId}/jobs/{jobId}/debug/getConfig':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: Get encoded debug configuration for component. Not cacheable.
+      operationId: dataflow.projects.jobs.debug.getConfig
+      parameters:
+        - description: The project id.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: The job id.
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GetDebugConfigRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetDebugConfigResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+  '/v1b3/projects/{projectId}/jobs/{jobId}/debug/sendCapture':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: Send encoded debug capture data for component.
+      operationId: dataflow.projects.jobs.debug.sendCapture
+      parameters:
+        - description: The project id.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: The job id.
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SendDebugCaptureRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SendDebugCaptureResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
   '/v1b3/projects/{projectId}/jobs/{jobId}/messages':
     get:
       description: Request the job status.
@@ -517,6 +607,46 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/ReportWorkItemStatusResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+  '/v1b3/projects/{projectId}/templates':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: Creates a dataflow job from a template.
+      operationId: dataflow.projects.templates.create
+      parameters:
+        - description: The project which owns the job.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/CreateJobFromTemplateRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Job'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -749,6 +879,18 @@ definitions:
         $ref: '#/definitions/CounterStructuredNameAndMetadata'
         description: Counter structured name and metadata.
     type: object
+  CreateJobFromTemplateRequest:
+    description: Request to create a Dataflow job.
+    properties:
+      gcsPath:
+        description: A path to the serialized JSON representation of the job.
+        type: string
+      parameters:
+        additionalProperties:
+          type: string
+        description: Dynamic parameterization of the job's runtime environment.
+        type: object
+    type: object
   CustomSourceLocation:
     description: Identifies the location of a custom souce.
     properties:
@@ -881,6 +1023,23 @@ definitions:
         description: The sum of all values being aggregated.
         format: double
         type: number
+    type: object
+  GetDebugConfigRequest:
+    description: Request to get updated debug configuration for component.
+    properties:
+      componentId:
+        description: The internal component id for which debug configuration is requested.
+        type: string
+      workerId:
+        description: 'The worker id, i.e., VM hostname.'
+        type: string
+    type: object
+  GetDebugConfigResponse:
+    description: Response to a get debug configuration request.
+    properties:
+      config:
+        description: The encoded debug configuration for the requested component.
+        type: string
     type: object
   InstructionInput:
     description: 'An input of an instruction, as a reference to an output of a producer instruction.'
@@ -1456,6 +1615,22 @@ definitions:
         description: Specifies the level of parallelism in case it is finite.
         format: double
         type: number
+    type: object
+  SendDebugCaptureRequest:
+    description: Request to send encoded debug information.
+    properties:
+      componentId:
+        description: The internal component id for which debug information is sent.
+        type: string
+      data:
+        description: The encoded debug information.
+        type: string
+      workerId:
+        description: 'The worker id, i.e., VM hostname.'
+        type: string
+    type: object
+  SendDebugCaptureResponse:
+    description: Response to a send capture request. nothing
     type: object
   SendWorkerMessagesRequest:
     description: A request for sending worker messages to the service.
@@ -2202,6 +2377,13 @@ definitions:
         type: string
       diskType:
         description: 'Type of root disk for VMs. If empty or unspecified, the service will attempt to choose a reasonable default.'
+        type: string
+      ipConfiguration:
+        description: Configuration for VM IPs.
+        enum:
+          - WORKER_IP_UNSPECIFIED
+          - WORKER_IP_PUBLIC
+          - WORKER_IP_PRIVATE
         type: string
       kind:
         description: The kind of the worker pool; currently only 'harness' and 'shuffle' are supported.

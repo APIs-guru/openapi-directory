@@ -156,7 +156,7 @@ definitions:
         description: Whether the subscription will automatically be renewed when it reaches its current expiry time.
         type: boolean
       initiationTimestampMsec:
-        description: 'Time at which the subscription was granted, in milliseconds since Epoch.'
+        description: 'Time at which the subscription was granted, in milliseconds since the Epoch.'
         format: int64
         type: string
       kind:
@@ -164,7 +164,7 @@ definitions:
         description: This kind represents a subscriptionPurchase object in the androidpublisher service.
         type: string
       validUntilTimestampMsec:
-        description: 'Time at which the subscription will expire, in milliseconds since Epoch.'
+        description: 'Time at which the subscription will expire, in milliseconds since the Epoch.'
         format: int64
         type: string
     type: object

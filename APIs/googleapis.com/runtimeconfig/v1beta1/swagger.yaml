@@ -825,14 +825,22 @@ definitions:
           - UPDATED
           - DELETED
         type: string
+      text:
+        description: |-
+          The textual value of the variable. The length of the value must be less
+          than 4096 bytes. Empty values are also accepted.
+          NB: Only one of value and string_value can be set at the same time.
+        type: string
       updateTime:
         description: '[Output Only] The time of the last variable update.'
         format: google-datetime
         type: string
       value:
         description: |-
-          The value of the variable. The length of the value must be less than 4096
-          bytes. Empty values are also accepted. The value must be Base64 encoded.
+          The binary value of the variable. The length of the value must be less
+          than 4096 bytes. Empty values are also accepted. The value must be
+          Base64 encoded.
+          NB: Only one of value and string_value can be set at the same time.
         format: byte
         type: string
     type: object

@@ -51,8 +51,6 @@ paths:
           description: The application does not have access to the requested resource.
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
-        '422':
-          description: Bad request. Request parameters syntactically erroneous.
         '500':
           description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         '503':
@@ -97,8 +95,6 @@ paths:
           description: The application does not have access to the requested resource.
         '404':
           description: Not Found. The server has not found anything matching the Request-URI.
-        '422':
-          description: Bad request. Request parameters syntactically erroneous.
         '500':
           description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         '503':
@@ -106,6 +102,281 @@ paths:
       summary: Get the details of the hotel with the speccified hotel id.
       tags:
         - Hotels
+  '/api/hotel/v0/hotels/{hotelId}/rateplans':
+    get:
+      consumes: []
+      deprecated: false
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: The hotel id you are trying to find rateplans for.
+          format: int32
+          in: path
+          name: hotelId
+          required: true
+          type: integer
+        - description: Return all rateplans having an active date today or in the future
+          enum:
+            - Active
+            - Inactive
+            - All
+          in: query
+          name: sellingStatus
+          required: false
+          type: string
+        - description: Return all rateplans having commisionable status
+          in: query
+          name: commissionable
+          required: false
+          type: boolean
+        - description: Return all rateplans belonging to the specified rateplan group
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: Return all rateplans having the specified rateplan as base rateplan
+          in: query
+          name: baseRateplan
+          required: false
+          type: string
+        - description: Return all rateplans that are sold through at least one channel out of the specified channel group
+          in: query
+          name: channelGroup
+          required: false
+          type: string
+        - description: Return all rateplans sold through the specified channel
+          in: query
+          name: channelCode
+          required: false
+          type: string
+        - description: Return all rateplans having one of the specified values as a market code
+          in: query
+          items:
+            type: string
+          name: marketCodes
+          required: false
+          type: array
+        - description: Return all rateplans by which at least one of the specified room types are sold
+          in: query
+          items:
+            type: string
+          name: roomTypes
+          required: false
+          type: array
+        - description: Return all rateplans having at least one of the specified services included
+          in: query
+          items:
+            type: string
+          name: includedServices
+          required: false
+          type: array
+        - description: Amount of items to skip.
+          format: int32
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Amount of items to select.
+          format: int32
+          in: query
+          name: top
+          required: false
+          type: integer
+        - description: Return total amount of items for a given filter criteria.
+          enum:
+            - None
+            - AllPages
+          in: query
+          name: inlinecount
+          required: false
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: A list of rateplans for a requested hotel matching the filter criteria.
+          schema:
+            $ref: '#/definitions/RateplansListResponse'
+        '204':
+          description: There are no rateplans found for the given filtering and pagination criteria.
+        '401':
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI.
+        '422':
+          description: The request failed to validate.
+        '500':
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+        '503':
+          description: The server is currently unavailable. Please try later.
+      summary: Get a list of rateplans for for the specified hotel id matching the filter criteria.
+      tags:
+        - RatePlans
+  '/api/hotel/v0/hotels/{hotelId}/rateplans/$count':
+    get:
+      consumes: []
+      deprecated: false
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: The hotel you are counting the rateplans for.
+          format: int32
+          in: path
+          name: hotelId
+          required: true
+          type: integer
+        - description: Return all rateplans having an active date today or in the future
+          enum:
+            - Active
+            - Inactive
+            - All
+          in: query
+          name: sellingStatus
+          required: false
+          type: string
+        - description: Return all rateplans having commisionable status
+          in: query
+          name: commissionable
+          required: false
+          type: boolean
+        - description: Return all rateplans belonging to the specified rateplan group
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: Return all rateplans having the specified rateplan as base rateplan
+          in: query
+          name: baseRateplan
+          required: false
+          type: string
+        - description: Return all rateplans that are sold through at least one channel out of the specified channel group
+          in: query
+          name: channelGroup
+          required: false
+          type: string
+        - description: Return all rateplans sold through the specified channel
+          in: query
+          name: channelCode
+          required: false
+          type: string
+        - description: Return all rateplans having one of the specified values as a market code
+          in: query
+          items:
+            type: string
+          name: marketCodes
+          required: false
+          type: array
+        - description: Return all rateplans by which at least one of the specified room types are sold
+          in: query
+          items:
+            type: string
+          name: roomTypes
+          required: false
+          type: array
+        - description: Return all rateplans having at least one of the specified services included
+          in: query
+          items:
+            type: string
+          name: includedServices
+          required: false
+          type: array
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: The rateplans count in the hotel matching the given filter criteria.
+          schema:
+            $ref: '#/definitions/TotalCountResponse'
+        '401':
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI.
+        '422':
+          description: The request failed to validate.
+        '500':
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+        '503':
+          description: The server is currently unavailable. Please try later.
+      summary: Get the count of all rateplans in the hotel matching the given filter criteria.
+      tags:
+        - RatePlans
+  '/api/hotel/v0/hotels/{hotelId}/rateplans/{rateplanCode}':
+    get:
+      consumes: []
+      deprecated: false
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: The hotel id the rateplan belongs to.
+          format: int32
+          in: path
+          name: hotelId
+          required: true
+          type: integer
+        - description: The code of the rateplan you want to see details for.
+          in: path
+          name: rateplanCode
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: Rateplan details for the given rateplan and hotel.
+          schema:
+            $ref: '#/definitions/ExtendedRateplanEntry'
+        '401':
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI or the requested rateplan could not be found.
+        '422':
+          description: The request failed to validate.
+        '500':
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+        '503':
+          description: The server is currently unavailable. Please try later.
+      summary: Get all the details for a specific rateplan in the hotel.
+      tags:
+        - RatePlans
   '/api/hotel/v0/hotels/{hotelId}/room_types':
     get:
       consumes: []
@@ -150,7 +421,7 @@ paths:
           description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         '503':
           description: The server is currently unavailable. Please try later.
-      summary: Get a list with the details of all room types for for the specified hotel id
+      summary: Get a list with the details of all room types for for the specified hotel id.
       tags:
         - RoomType
   '/api/hotel/v0/hotels/{hotelId}/room_types/{code}':
@@ -200,7 +471,7 @@ paths:
           description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
         '503':
           description: The server is currently unavailable. Please try later.
-      summary: Get all the details for a specific room type in the hotel
+      summary: Get all the details for a specific room type in the hotel.
       tags:
         - RoomType
   '/api/hotel/v0/hotels/{hotelId}/rooms':
@@ -321,6 +592,8 @@ paths:
           description: 'You provided wrong credentials, or you reached your API limit.'
         '403':
           description: The application does not have access to the requested resource.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI or the requested room could not be found.
         '422':
           description: The request failed to validate.
         '500':
@@ -425,6 +698,8 @@ paths:
           description: 'You provided wrong credentials, or you reached your API limit.'
         '403':
           description: The application does not have access to the requested resource.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI or the requested room could not be found.
         '422':
           description: The request failed to validate.
         '500':
@@ -542,6 +817,8 @@ paths:
           description: 'You provided wrong credentials, or you reached your API limit.'
         '403':
           description: The application does not have access to the requested resource.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI or the requested room could not be found.
         '422':
           description: The request failed to validate.
         '500':
@@ -648,7 +925,7 @@ paths:
           schema:
             $ref: '#/definitions/Object'
         '400':
-          description: Bad request. Request parameters or request body erroneous.
+          description: Bad request. Request body erroneous.
         '401':
           description: 'You provided wrong credentials, or you reached your API limit.'
         '403':
@@ -665,6 +942,40 @@ paths:
       tags:
         - Room
 definitions:
+  AccessControlInfo:
+    properties:
+      channel_codes:
+        description: List of codes of distribution channels
+        items:
+          type: string
+        type: array
+      channel_group:
+        description: Code of the distribution channel group
+        type: string
+    type: object
+  DatePeriod:
+    properties:
+      from:
+        description: Start Date for this time period
+        format: date-time
+        type: string
+      to:
+        description: End Date for this time period
+        format: date-time
+        type: string
+    type: object
+  Derivation:
+    properties:
+      adjustment:
+        description: Mode for the calculation of the daily rates adjustment
+        enum:
+          - Amount
+          - Percentage
+        type: string
+      base_rateplan:
+        $ref: '#/definitions/RelatedRateplan'
+        description: Details about the base rateplan
+    type: object
   EmbeddedReservation:
     description: Basic data about a reservation
     properties:
@@ -732,6 +1043,19 @@ definitions:
         description: Name of the room type
         type: string
     type: object
+  EmbeddedRoomTypeSimple:
+    description: Contains only a basic information about a room type. No cross-links available as well.
+    properties:
+      code:
+        description: Code of the room type
+        type: string
+      description:
+        description: Description of the room type
+        type: string
+      name:
+        description: Name of the room type
+        type: string
+    type: object
   EmbeddedRoomWithStatus:
     properties:
       _links:
@@ -754,6 +1078,92 @@ definitions:
       status:
         $ref: '#/definitions/RoomStatus'
         description: Contains information about room status.
+    type: object
+  ExtendedRateplanEntry:
+    properties:
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources
+        type: object
+      access_control:
+        description: List of distribution channel groups and channels the rateplan is sold through
+        items:
+          $ref: '#/definitions/AccessControlInfo'
+        type: array
+      active:
+        description: Defines if the rateplan has been ended and is expired
+        type: boolean
+      active_periods:
+        description: "List of active periods. Arrival and departure day for reservations based on this rateplan need to\r\n            fit into one of these time periods"
+        items:
+          $ref: '#/definitions/DatePeriod'
+        type: array
+      booking_periods:
+        description: List of booking periods. During these time periods the rateplan is sold
+        items:
+          $ref: '#/definitions/DatePeriod'
+        type: array
+      code:
+        description: Code of the rateplan
+        type: string
+      commissionable:
+        description: Defines if this rateplan is setup with a commission
+        type: boolean
+      day_use:
+        description: Defines if this rateplan is used for day use reservations
+        type: boolean
+      derivation:
+        $ref: '#/definitions/Derivation'
+        description: "If this rateplan is derived from a base rateplan you will see some details about\r\n            the base rateplan and the mode for the adjustment of the daily rates"
+      derived_rateplans:
+        description: Details about all the derived rateplans if any
+        items:
+          $ref: '#/definitions/RelatedRateplan'
+        type: array
+      description:
+        description: Description of the rateplan
+        type: string
+      folio_name:
+        description: "Text defining how the room charges for this rateplan are shown on the folio and\r\n            invoice for the guest"
+        type: string
+      group:
+        $ref: '#/definitions/RateplanGroup'
+        description: Details about the rateplan group
+      included_services:
+        description: List of codes for the included services sold with this rateplan
+        items:
+          type: string
+        type: array
+      market_code:
+        description: The code of the market segment the rate plan is linked to
+        type: string
+      name:
+        description: Name of the rateplan
+        type: string
+      noshow_policy:
+        description: The code of the noshow policy for this rateplan
+        type: string
+      restrictions:
+        $ref: '#/definitions/Restrictions'
+        description: Generic rateplan restrictions valid on all booking periods
+      room_types:
+        description: List of all room types sold through this rateplan
+        items:
+          $ref: '#/definitions/EmbeddedRoomType'
+        type: array
+      suspended:
+        description: "Defines if a rateplan is suspended and no new reservations can be created for this\r\n            rateplan at the moment"
+        type: boolean
+      taxes_included:
+        description: Defines if the daily rates include VAT or not
+        type: boolean
+      visibility:
+        description: Defines if this rateplan is visible to the public or only for specific customers
+        enum:
+          - Public
+          - Negotiated
+        type: string
     type: object
   GetAvailableRoomsRequest:
     properties:
@@ -957,6 +1367,80 @@ definitions:
     required:
       - href
     type: object
+  ListRateplanEntry:
+    properties:
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources
+        type: object
+      access_control:
+        description: List of distribution channel groups and channels the rateplan is sold through
+        items:
+          $ref: '#/definitions/AccessControlInfo'
+        type: array
+      active:
+        description: Defines if the rateplan has been ended and is expired
+        type: boolean
+      active_periods:
+        description: "List of active periods. Arrival and departure day for reservations based on this rateplan need to\r\n            fit into one of these time periods"
+        items:
+          $ref: '#/definitions/DatePeriod'
+        type: array
+      base_rateplan:
+        description: Code of the base rateplan if this rateplan is derived
+        type: string
+      booking_periods:
+        description: List of booking periods. During these time periods the rateplan is sold
+        items:
+          $ref: '#/definitions/DatePeriod'
+        type: array
+      code:
+        description: Code of the rateplan
+        type: string
+      commissionable:
+        description: Defines if this rateplan is setup with a commission
+        type: boolean
+      day_use:
+        description: Defines if this rateplan is used for day use reservations
+        type: boolean
+      derived_rateplans:
+        description: List of codes for all derived rateplans if any
+        items:
+          type: string
+        type: array
+      description:
+        description: Description of the rateplan
+        type: string
+      group:
+        description: Code of the rateplan group
+        type: string
+      included_services:
+        description: List of codes for the included services sold with this rateplan
+        items:
+          type: string
+        type: array
+      market_code:
+        description: The code of the market segment the rate plan is linked to
+        type: string
+      name:
+        description: Name of the rateplan
+        type: string
+      room_types:
+        description: List of all room types sold through this rateplan
+        items:
+          $ref: '#/definitions/EmbeddedRoomTypeSimple'
+        type: array
+      suspended:
+        description: "Defines if a rateplan is suspended and no new reservations can be created for this\r\n            rateplan at the moment"
+        type: boolean
+      visibility:
+        description: Defines if this rateplan is visible to the public or only for specific customers
+        enum:
+          - Public
+          - Negotiated
+        type: string
+    type: object
   Object:
     properties: {}
     type: object
@@ -974,6 +1458,97 @@ definitions:
         type: integer
       top:
         description: Amount of items to select.
+        format: int32
+        type: integer
+    type: object
+  RateplanGroup:
+    properties:
+      code:
+        description: Code of the rateplan group
+        type: string
+      name:
+        description: Name of the rateplan group
+        type: string
+    type: object
+  RateplansListRequest:
+    properties:
+      baseRateplan:
+        description: Return all rateplans having the specified rateplan as base rateplan
+        type: string
+      channelCode:
+        description: Return all rateplans sold through the specified channel
+        type: string
+      channelGroup:
+        description: Return all rateplans that are sold through at least one channel out of the specified channel group
+        type: string
+      commissionable:
+        description: Return all rateplans having commisionable status
+        type: boolean
+      group:
+        description: Return all rateplans belonging to the specified rateplan group
+        type: string
+      includedServices:
+        description: Return all rateplans having at least one of the specified services included
+        items:
+          type: string
+        type: array
+      marketCodes:
+        description: Return all rateplans having one of the specified values as a market code
+        items:
+          type: string
+        type: array
+      roomTypes:
+        description: Return all rateplans by which at least one of the specified room types are sold
+        items:
+          type: string
+        type: array
+      sellingStatus:
+        description: Return all rateplans having an active date today or in the future
+        enum:
+          - Active
+          - Inactive
+          - All
+        type: string
+    type: object
+  RateplansListResponse:
+    properties:
+      _count:
+        description: The number of items matching your request in total for all pages.
+        format: int32
+        type: integer
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources
+        type: object
+      rateplans:
+        description: List of rateplans
+        items:
+          $ref: '#/definitions/ListRateplanEntry'
+        type: array
+    type: object
+  RelatedRateplan:
+    properties:
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources
+        type: object
+      code:
+        description: Code of the rateplan
+        type: string
+      name:
+        description: Name of the rateplan
+        type: string
+    type: object
+  Restrictions:
+    properties:
+      leadtime_to_book:
+        description: "Days this rateplan needs to be booked in advance. This value is mutual exclusive to the\r\n            <i>max_advance_booking</i> and if no limit is set it is omitted"
+        format: int32
+        type: integer
+      max_advance_booking:
+        description: "Days this rateplan can be booked in advance. This value is mutual exclusive to the\r\n            <i>leadtime_to_book</i> and if no limit is set it is omitted"
         format: int32
         type: integer
     type: object

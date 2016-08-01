@@ -889,7 +889,7 @@ paths:
       description: List all the deals for a given proposal
       operationId: adexchangebuyer.marketplacedeals.list
       parameters:
-        - description: The proposalId to get deals for. To search across proposals specify order_id = '-' as part of the URL.
+        - description: The proposalId to get deals for. To search across all proposals specify order_id = '-' as part of the URL.
           in: path
           name: proposalId
           required: true
@@ -1017,10 +1017,14 @@ paths:
       description: Get all the notes associated with a proposal
       operationId: adexchangebuyer.marketplacenotes.list
       parameters:
-        - description: The proposalId to get notes for.
+        - description: The proposalId to get notes for. To search across all proposals specify order_id = '-' as part of the URL.
           in: path
           name: proposalId
           required: true
+          type: string
+        - description: 'Query string to retrieve specific notes. To search the text contents of notes, please use syntax like "WHERE note.note = "foo" or "WHERE note.note LIKE "%bar%"'
+          in: query
+          name: pqlQuery
           type: string
       responses:
         '200':
@@ -1507,6 +1511,11 @@ definitions:
       dealsStatus:
         description: 'Top-level deals status. Read-only. This field should not be set in requests. If disapproved, an entry for auctionType=DIRECT_DEALS (or ALL) in servingRestrictions will also exist. Note that this may be nuanced with other contextual restrictions, in which case it may be preferable to read from servingRestrictions directly.'
         type: string
+      detectedDomains:
+        description: Detected domains for this creative. Read-only. This field should not be set in requests.
+        items:
+          type: string
+        type: array
       filteringReasons:
         description: The filtering reasons for the creative. Read-only. This field should not be set in requests.
         properties:
@@ -1727,6 +1736,8 @@ definitions:
   DealServingMetadataDealPauseStatus:
     description: Tracks which parties (if any) have paused a deal. The deal is considered paused if has_buyer_paused || has_seller_paused. Each of the has_buyer_paused or the has_seller_paused bits can be set independently.
     properties:
+      buyerPauseReason:
+        type: string
       firstPausedBy:
         description: 'If the deal is paused, records which party paused the deal first.'
         type: string
@@ -1734,6 +1745,8 @@ definitions:
         type: boolean
       hasSellerPaused:
         type: boolean
+      sellerPauseReason:
+        type: string
     type: object
   DealTerms:
     properties:
@@ -1759,6 +1772,9 @@ definitions:
       nonGuaranteedFixedPriceTerms:
         $ref: '#/definitions/DealTermsNonGuaranteedFixedPriceTerms'
         description: The terms for non-guaranteed fixed price deals.
+      rubiconNonGuaranteedTerms:
+        $ref: '#/definitions/DealTermsRubiconNonGuaranteedTerms'
+        description: The terms for rubicon non-guaranteed deals.
       sellerTimeZone:
         description: 'For deals with Cost Per Day billing, defines the timezone used to mark the boundaries of a day (buyer-readonly)'
         type: string
@@ -1778,7 +1794,11 @@ definitions:
         format: int64
         type: string
       guaranteedLooks:
-        description: 'Count of guaranteed looks. Required for deal, optional for product.'
+        description: 'Count of guaranteed looks. Required for deal, optional for product. For CPD deals, buyer changes to guaranteed_looks will be ignored.'
+        format: int64
+        type: string
+      minimumDailyLooks:
+        description: 'Count of minimum daily looks for a CPD deal. For CPD deals, buyer should negotiate on this field instead of guaranteed_looks.'
         format: int64
         type: string
     type: object
@@ -1793,7 +1813,7 @@ definitions:
         format: int64
         type: string
       originalContractedQuantity:
-        description: 'The original contracted quantity (# impressions) for this deal. To ensure delivery, sometimes publisher will book the deal with a impression buffer, however clients are billed using the original contracted quantity.'
+        description: 'The original contracted quantity (# impressions) for this deal. To ensure delivery, sometimes the publisher will book the deal with a impression buffer, such that guaranteed_looks is greater than the contracted quantity. However clients are billed using the original contracted quantity.'
         format: int64
         type: string
       price:
@@ -1818,6 +1838,15 @@ definitions:
         items:
           $ref: '#/definitions/PricePerBuyer'
         type: array
+    type: object
+  DealTermsRubiconNonGuaranteedTerms:
+    properties:
+      priorityPrice:
+        $ref: '#/definitions/Price'
+        description: Optional price for Rubicon priority access in the auction.
+      standardPrice:
+        $ref: '#/definitions/Price'
+        description: Optional price for Rubicon standard access in the auction.
     type: object
   DeleteOrderDealsRequest:
     properties:
@@ -1942,7 +1971,7 @@ definitions:
   GetOrderNotesResponse:
     properties:
       notes:
-        description: The list of matching notes.
+        description: 'The list of matching notes. The notes for a proposal are ordered from oldest to newest. If the notes span multiple proposals, they will be grouped by proposal, with the notes for the most recently modified proposal appearing first.'
         items:
           $ref: '#/definitions/MarketplaceNote'
         type: array
@@ -1980,7 +2009,7 @@ definitions:
         description: Specifies whether the creative is safeFrame compatible (buyer-readonly)
         type: string
       dealId:
-        description: A unique deal=id for the deal (readonly).
+        description: A unique deal-id for the deal (readonly).
         type: string
       dealServingMetadata:
         $ref: '#/definitions/DealServingMetadata'
@@ -2388,6 +2417,10 @@ definitions:
       currencyCode:
         description: The currency code for the price.
         type: string
+      expectedCpmMicros:
+        description: 'In case of CPD deals, the expected CPM in micros.'
+        format: double
+        type: number
       pricingType:
         description: The pricing type for the deal/product.
         type: string
@@ -2514,7 +2547,7 @@ definitions:
         $ref: '#/definitions/Buyer'
         description: 'Reference to the buyer on the proposal. (readonly, except on create)'
       buyerContacts:
-        description: Optional contact information fort the buyer. (seller-readonly)
+        description: Optional contact information of the buyer. (seller-readonly)
         items:
           $ref: '#/definitions/ContactInformation'
         type: array
@@ -2522,7 +2555,7 @@ definitions:
         $ref: '#/definitions/PrivateData'
         description: Private data for buyer. (hidden from seller).
       hasBuyerSignedOff:
-        description: 'When an proposal is in an accepted state, indicates whether the buyer has signed off Once both sides have signed off on a deal, the proposal can be finalized by the seller. (seller-readonly)'
+        description: 'When an proposal is in an accepted state, indicates whether the buyer has signed off. Once both sides have signed off on a deal, the proposal can be finalized by the seller. (seller-readonly)'
         type: boolean
       hasSellerSignedOff:
         description: 'When an proposal is in an accepted state, indicates whether the buyer has signed off Once both sides have signed off on a deal, the proposal can be finalized by the seller. (buyer-readonly)'
@@ -2578,7 +2611,7 @@ definitions:
         $ref: '#/definitions/Seller'
         description: 'Reference to the seller on the proposal. (readonly, except on create)'
       sellerContacts:
-        description: Optional contact information for the seller (buyer-readonly).
+        description: Optional contact information of the seller (buyer-readonly).
         items:
           $ref: '#/definitions/ContactInformation'
         type: array

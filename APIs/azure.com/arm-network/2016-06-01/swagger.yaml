@@ -3631,6 +3631,12 @@ definitions:
         description: Gets or sets the azure ASN
         format: int32
         type: integer
+      gatewayManagerEtag:
+        description: Gets or sets the GatewayManager Etag
+        type: string
+      lastModifiedBy:
+        description: Gets whether the provider or the customer last modified the peering
+        type: string
       microsoftPeeringConfig:
         $ref: '#/definitions/ExpressRouteCircuitPeeringConfig'
         description: Gets or sets the mircosoft peering config
@@ -3695,6 +3701,9 @@ definitions:
         type: array
       circuitProvisioningState:
         description: 'Gets or sets CircuitProvisioningState state of the resource '
+        type: string
+      gatewayManagerEtag:
+        description: Gets or sets the GatewayManager Etag
         type: string
       peerings:
         description: Gets or sets list of peerings

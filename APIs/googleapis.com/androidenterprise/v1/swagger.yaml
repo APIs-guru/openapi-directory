@@ -80,6 +80,8 @@ tags:
   - name: grouplicenses
   - name: grouplicenseusers
   - name: installs
+  - name: managedconfigurationsfordevice
+  - name: managedconfigurationsforuser
   - name: permissions
   - name: products
   - name: serviceaccountkeys
@@ -875,7 +877,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/enterprises/{enterpriseId}/products/{productId}/appRestrictionsSchema':
     get:
-      description: 'Retrieves the schema defining app restrictions configurable for this product. All products have a schema, but this may be empty if no app restrictions are defined.'
+      description: 'Retrieves the schema that defines the configurable properties for this product. All products have a schema, but this schema may be empty if no managed configurations have been defined. This schema can be used to populate a UI that allows an administrator to configure the product. To apply a managed configuration based on the schema obtained using this API, see Managed Configurations through Play.'
       operationId: androidenterprise.products.getAppRestrictionsSchema
       parameters:
         - description: The ID of the enterprise.
@@ -1240,7 +1242,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/enterprises/{enterpriseId}/storeLayout':
     get:
-      description: 'Returns the store layout resource for the enterprise. If store layout has not been set, or if store layout has no homepage set, returns a NOT_FOUND error.'
+      description: 'Returns the store layout for the enterprise. If the store layout has not been set, or if the store layout has no homepageId set, returns a NOT_FOUND error.'
       operationId: androidenterprise.enterprises.getStoreLayout
       parameters:
         - description: The ID of the enterprise.
@@ -1267,7 +1269,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     put:
-      description: Sets the store layout resource.
+      description: Sets the store layout for the enterprise.
       operationId: androidenterprise.enterprises.setStoreLayout
       parameters:
         - description: The ID of the enterprise.
@@ -1703,7 +1705,10 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Inserts a new resource into this collection.
+      description: |-
+        Creates a new EMM-managed user.
+
+        The Users resource passed in the body of the request should include an accountIdentifier and an accountType.
       operationId: androidenterprise.users.insert
       parameters:
         - description: The ID of the enterprise.
@@ -2199,6 +2204,195 @@ paths:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - installs
+  '/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/managedConfigurationsForDevice':
+    get:
+      description: Lists all the per-device managed configurations for the specified device. Only the ID is set.
+      operationId: androidenterprise.managedconfigurationsfordevice.list
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the user.
+          in: path
+          name: userId
+          required: true
+          type: string
+        - description: The Android ID of the device.
+          in: path
+          name: deviceId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ManagedConfigurationsForDeviceListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - managedconfigurationsfordevice
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/managedConfigurationsForDevice/{managedConfigurationForDeviceId}':
+    delete:
+      description: Removes a per-device managed configuration for an app for the specified device.
+      operationId: androidenterprise.managedconfigurationsfordevice.delete
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the user.
+          in: path
+          name: userId
+          required: true
+          type: string
+        - description: The Android ID of the device.
+          in: path
+          name: deviceId
+          required: true
+          type: string
+        - description: 'The ID of the managed configuration (a product ID), e.g. "app:com.google.android.gm".'
+          in: path
+          name: managedConfigurationForDeviceId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - managedconfigurationsfordevice
+    get:
+      description: Retrieves details of a per-device managed configuration.
+      operationId: androidenterprise.managedconfigurationsfordevice.get
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the user.
+          in: path
+          name: userId
+          required: true
+          type: string
+        - description: The Android ID of the device.
+          in: path
+          name: deviceId
+          required: true
+          type: string
+        - description: 'The ID of the managed configuration (a product ID), e.g. "app:com.google.android.gm".'
+          in: path
+          name: managedConfigurationForDeviceId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ManagedConfiguration'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - managedconfigurationsfordevice
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Adds or updates a per-device managed configuration for an app for the specified device. This method supports patch semantics.
+      operationId: androidenterprise.managedconfigurationsfordevice.patch
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the user.
+          in: path
+          name: userId
+          required: true
+          type: string
+        - description: The Android ID of the device.
+          in: path
+          name: deviceId
+          required: true
+          type: string
+        - description: 'The ID of the managed configuration (a product ID), e.g. "app:com.google.android.gm".'
+          in: path
+          name: managedConfigurationForDeviceId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ManagedConfiguration'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ManagedConfiguration'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - managedconfigurationsfordevice
+    put:
+      description: Adds or updates a per-device managed configuration for an app for the specified device.
+      operationId: androidenterprise.managedconfigurationsfordevice.update
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the user.
+          in: path
+          name: userId
+          required: true
+          type: string
+        - description: The Android ID of the device.
+          in: path
+          name: deviceId
+          required: true
+          type: string
+        - description: 'The ID of the managed configuration (a product ID), e.g. "app:com.google.android.gm".'
+          in: path
+          name: managedConfigurationForDeviceId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ManagedConfiguration'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ManagedConfiguration'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - managedconfigurationsfordevice
   '/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/state':
     get:
       description: 'Retrieves whether a device''s access to Google services is enabled or disabled. The device state takes effect only if enforcing EMM policies on Android devices is enabled in the Google Admin Console. Otherwise, the device state is ignored and all devices are allowed access to Google services. This is only supported for Google-managed users.'
@@ -2442,6 +2636,170 @@ paths:
             - 'https://www.googleapis.com/auth/androidenterprise'
       tags:
         - entitlements
+  '/enterprises/{enterpriseId}/users/{userId}/managedConfigurationsForUser':
+    get:
+      description: Lists all the per-user managed configurations for the specified user. Only the ID is set.
+      operationId: androidenterprise.managedconfigurationsforuser.list
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the user.
+          in: path
+          name: userId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ManagedConfigurationsForUserListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - managedconfigurationsforuser
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/enterprises/{enterpriseId}/users/{userId}/managedConfigurationsForUser/{managedConfigurationForUserId}':
+    delete:
+      description: Removes a per-user managed configuration for an app for the specified user.
+      operationId: androidenterprise.managedconfigurationsforuser.delete
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the user.
+          in: path
+          name: userId
+          required: true
+          type: string
+        - description: 'The ID of the managed configuration (a product ID), e.g. "app:com.google.android.gm".'
+          in: path
+          name: managedConfigurationForUserId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - managedconfigurationsforuser
+    get:
+      description: Retrieves details of a per-user managed configuration for an app for the specified user.
+      operationId: androidenterprise.managedconfigurationsforuser.get
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the user.
+          in: path
+          name: userId
+          required: true
+          type: string
+        - description: 'The ID of the managed configuration (a product ID), e.g. "app:com.google.android.gm".'
+          in: path
+          name: managedConfigurationForUserId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ManagedConfiguration'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - managedconfigurationsforuser
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Adds or updates a per-user managed configuration for an app for the specified user. This method supports patch semantics.
+      operationId: androidenterprise.managedconfigurationsforuser.patch
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the user.
+          in: path
+          name: userId
+          required: true
+          type: string
+        - description: 'The ID of the managed configuration (a product ID), e.g. "app:com.google.android.gm".'
+          in: path
+          name: managedConfigurationForUserId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ManagedConfiguration'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ManagedConfiguration'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - managedconfigurationsforuser
+    put:
+      description: Adds or updates a per-user managed configuration for an app for the specified user.
+      operationId: androidenterprise.managedconfigurationsforuser.update
+      parameters:
+        - description: The ID of the enterprise.
+          in: path
+          name: enterpriseId
+          required: true
+          type: string
+        - description: The ID of the user.
+          in: path
+          name: userId
+          required: true
+          type: string
+        - description: 'The ID of the managed configuration (a product ID), e.g. "app:com.google.android.gm".'
+          in: path
+          name: managedConfigurationForUserId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ManagedConfiguration'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ManagedConfiguration'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/androidenterprise'
+      tags:
+        - managedconfigurationsforuser
   '/enterprises/{enterpriseId}/users/{userId}/token':
     delete:
       description: Revokes a previously generated token (activation code) for the user.
@@ -2582,6 +2940,11 @@ definitions:
       key:
         description: 'The unique key that the product uses to identify the restriction, e.g. "com.google.android.gm.fieldname".'
         type: string
+      nestedRestriction:
+        description: 'For bundle or bundleArray restrictions, the list of nested restrictions.'
+        items:
+          $ref: '#/definitions/AppRestrictionsSchemaRestriction'
+        type: array
       restrictionType:
         description: The type of the restriction.
         type: string
@@ -2748,7 +3111,7 @@ definitions:
     type: object
   Enterprise:
     description: |-
-      An enterprise resource represents the binding between an EMM and a specific organization. That binding can be instantiated in one of two different ways using this API as follows: 
+      An Enterprises resource represents the binding between an EMM and a specific organization. That binding can be instantiated in one of two different ways using this API as follows: 
       - For Google managed domain customers, the process involves using Enterprises.enroll and Enterprises.setAccount (in conjunction with artifacts obtained from the Admin console and the Google API Console) and submitted to the EMM through a more-or-less manual process. 
       - For Android for Work Accounts customers, the process involves using Enterprises.generateSignupUrl and Enterprises.completeSignup in conjunction with the Android for Work Sign-up UI (Google-provided mechanism) to create the binding without manual steps. As an EMM, you can support either or both approaches in your EMM console. See Create an Enterprise for details.
     properties:
@@ -2966,6 +3329,87 @@ definitions:
       text:
         description: The text localized in the associated locale.
         type: string
+    type: object
+  ManagedConfiguration:
+    description: A managed configuration resource contains the set of managed properties that have been configured for an Android app. The app's developer would have defined configurable properties in the managed configurations schema.
+    properties:
+      kind:
+        default: 'androidenterprise#managedConfiguration'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#managedConfiguration".'
+        type: string
+      managedProperty:
+        description: The set of managed properties for this configuration.
+        items:
+          $ref: '#/definitions/ManagedProperty'
+        type: array
+      productId:
+        description: 'The ID of the product that the managed configuration is for, e.g. "app:com.google.android.gm".'
+        type: string
+    type: object
+  ManagedConfigurationsForDeviceListResponse:
+    description: The managed configuration resources for the device.
+    properties:
+      kind:
+        default: 'androidenterprise#managedConfigurationsForDeviceListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#managedConfigurationsForDeviceListResponse".'
+        type: string
+      managedConfigurationForDevice:
+        description: A managed configuration for an app on a specific device.
+        items:
+          $ref: '#/definitions/ManagedConfiguration'
+        type: array
+    type: object
+  ManagedConfigurationsForUserListResponse:
+    description: The managed configuration resources for the user.
+    properties:
+      kind:
+        default: 'androidenterprise#managedConfigurationsForUserListResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#managedConfigurationsForUserListResponse".'
+        type: string
+      managedConfigurationForUser:
+        description: A managed configuration for an app for a specific user.
+        items:
+          $ref: '#/definitions/ManagedConfiguration'
+        type: array
+    type: object
+  ManagedProperty:
+    description: 'A managed property of a managed configuration. The property must match one of the properties in the app restrictions schema of the product. Exactly one of the value fields must be populated, and it must match the property''s type in the app restrictions schema.'
+    properties:
+      key:
+        description: The unique key that identifies the property.
+        type: string
+      valueBool:
+        description: The boolean value - this will only be present if type of the property is bool.
+        type: boolean
+      valueBundle:
+        $ref: '#/definitions/ManagedPropertyBundle'
+        description: The bundle of managed properties - this will only be present if type of the property is bundle.
+      valueBundleArray:
+        description: The list of bundles of properties - this will only be present if type of the property is bundle_array.
+        items:
+          $ref: '#/definitions/ManagedPropertyBundle'
+        type: array
+      valueInteger:
+        description: The integer value - this will only be present if type of the property is integer.
+        format: int32
+        type: integer
+      valueString:
+        description: 'The string value - this will only be present if type of the property is string, choice or hidden.'
+        type: string
+      valueStringArray:
+        description: The list of string values - this will only be present if type of the property is multiselect.
+        items:
+          type: string
+        type: array
+    type: object
+  ManagedPropertyBundle:
+    description: A bundle of managed properties.
+    properties:
+      managedProperty:
+        description: The list of managed properties.
+        items:
+          $ref: '#/definitions/ManagedProperty'
+        type: array
     type: object
   NewPermissionsEvent:
     description: An event generated when new permissions are added to an app.
@@ -3287,7 +3731,7 @@ definitions:
         description: |-
           The ID of the store page to be used as the homepage. The homepage will be used as the first page shown in the Google Play for Work store.
 
-          If a homepage has not been set, the play store shown on devices will be empty. Not specifying a homepage on a store layout effectively empties the store.
+          If a homepage has not been set, the Play store shown on devices will be empty. Not specifying a homepage on a store layout effectively empties the store.
 
           If there exists at least one page, this field must be set to the ID of a valid page.
         type: string

@@ -1221,6 +1221,10 @@ definitions:
         default: 'bigquery#getQueryResultsResponse'
         description: The resource type of the response.
         type: string
+      numDmlAffectedRows:
+        description: '[Output-only, Experimental] The number of rows affected by a DML statement. Present only for DML statements INSERT, UPDATE or DELETE.'
+        format: int64
+        type: string
       pageToken:
         description: A token used for paging results.
         type: string
@@ -1569,8 +1573,12 @@ definitions:
       cacheHit:
         description: '[Output-only] Whether the query result was fetched from the query cache.'
         type: boolean
+      numDmlAffectedRows:
+        description: '[Output-only, Experimental] The number of rows affected by a DML statement. Present only for DML statements INSERT, UPDATE or DELETE.'
+        format: int64
+        type: string
       queryPlan:
-        description: '[Output-only, Experimental] Describes execution plan for the query as a list of stages.'
+        description: '[Output-only, Experimental] Describes execution plan for the query.'
         items:
           $ref: '#/definitions/ExplainQueryStage'
         type: array
@@ -1738,6 +1746,10 @@ definitions:
       kind:
         default: 'bigquery#queryResponse'
         description: The resource type.
+        type: string
+      numDmlAffectedRows:
+        description: '[Output-only, Experimental] The number of rows affected by a DML statement. Present only for DML statements INSERT, UPDATE or DELETE.'
+        format: int64
         type: string
       pageToken:
         description: A token used for paging results.
