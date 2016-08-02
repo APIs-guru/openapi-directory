@@ -470,11 +470,26 @@ definitions:
         items:
           type: string
         type: array
+      id:
+        description: |-
+          Optional unique identifier for this build step, used in wait_for to
+          reference this build step as a dependency.
+        type: string
       name:
         description: |-
           Name of the container image to use for creating this stage in the
           pipeline, as presented to `docker pull`.
         type: string
+      waitFor:
+        description: |-
+          The ID(s) of the step(s) that this build step depends on.
+          This build step will not start until all the build steps in wait_for
+          have completed successfully. If wait_for is empty, this build step will
+          start when all previous build steps in the Build.Steps list have completed
+          successfully.
+        items:
+          type: string
+        type: array
     type: object
   BuiltImage:
     description: BuiltImage describes an image built by the pipeline.

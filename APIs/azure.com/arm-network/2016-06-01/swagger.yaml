@@ -153,7 +153,8 @@ paths:
             $ref: '#/definitions/UsagesListResult'
       tags:
         - Usages
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkInterfaces':
     get:
       description: The List networkInterfaces opertion retrieves all the networkInterfaces in a subscription.
@@ -2708,19 +2709,42 @@ definitions:
     description: ApplicationGateways resource
     properties:
       etag:
-        description: Gets a unique read-only string that changes whenever the resource is updated
+        description: A unique read-only string that changes whenever the resource is updated
         type: string
       properties:
         $ref: '#/definitions/ApplicationGatewayPropertiesFormat'
         x-ms-client-flatten: true
+  ApplicationGatewayAuthenticationCertificate:
+    allOf:
+      - $ref: '#/definitions/SubResource'
+    description: Authentication certificates of application gateway
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated
+        type: string
+      name:
+        description: Name of the resource that is unique within a resource group. This name can be used to access the resource
+        type: string
+      properties:
+        $ref: '#/definitions/ApplicationGatewayAuthenticationCertificatePropertiesFormat'
+        x-ms-client-flatten: true
+  ApplicationGatewayAuthenticationCertificatePropertiesFormat:
+    description: Properties of Authentication certificates of application gateway
+    properties:
+      data:
+        description: 'Certificate public data '
+        type: string
+      provisioningState:
+        description: Provisioning state of the authentication certificate resource Updating/Deleting/Failed
+        type: string
   ApplicationGatewayBackendAddress:
     description: Backend Address of application gateway
     properties:
       fqdn:
-        description: Gets or sets the dns name
+        description: Dns name
         type: string
       ipAddress:
-        description: Gets or sets the ip address
+        description: Ip address
         type: string
   ApplicationGatewayBackendAddressPool:
     allOf:
@@ -2731,7 +2755,7 @@ definitions:
         description: A unique read-only string that changes whenever the resource is updated
         type: string
       name:
-        description: Gets name of the resource that is unique within a resource group. This name can be used to access the resource
+        description: Resource that is unique within a resource group. This name can be used to access the resource
         type: string
       properties:
         $ref: '#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat'
@@ -2740,17 +2764,17 @@ definitions:
     description: Properties of Backend Address Pool of application gateway
     properties:
       backendAddresses:
-        description: Gets or sets the backend addresses
+        description: Backend addresses
         items:
           $ref: '#/definitions/ApplicationGatewayBackendAddress'
         type: array
       backendIPConfigurations:
-        description: Gets collection of references to IPs defined in NICs
+        description: Collection of references to IPs defined in NICs
         items:
           $ref: '#/definitions/NetworkInterfaceIPConfiguration'
         type: array
       provisioningState:
-        description: Gets provisioning state of the backend address pool resource Updating/Deleting/Failed
+        description: Provisioning state of the backend address pool resource Updating/Deleting/Failed
         type: string
   ApplicationGatewayBackendHttpSettings:
     allOf:
@@ -2761,7 +2785,7 @@ definitions:
         description: A unique read-only string that changes whenever the resource is updated
         type: string
       name:
-        description: Gets name of the resource that is unique within a resource group. This name can be used to access the resource
+        description: Name of the resource that is unique within a resource group. This name can be used to access the resource
         type: string
       properties:
         $ref: '#/definitions/ApplicationGatewayBackendHttpSettingsPropertiesFormat'
@@ -2769,8 +2793,13 @@ definitions:
   ApplicationGatewayBackendHttpSettingsPropertiesFormat:
     description: Properties of Backend address pool settings of application gateway
     properties:
+      authenticationCertificates:
+        description: Array of references to Application Gateway Authentication Certificates
+        items:
+          $ref: '#/definitions/SubResource'
+        type: array
       cookieBasedAffinity:
-        description: Gets or sets the cookie affinity
+        description: Cookie affinity
         enum:
           - Enabled
           - Disabled
@@ -2779,14 +2808,14 @@ definitions:
           modelAsString: true
           name: ApplicationGatewayCookieBasedAffinity
       port:
-        description: Gets or sets the port
+        description: Port
         format: int32
         type: integer
       probe:
         $ref: '#/definitions/SubResource'
-        description: 'Gets or sets probe resource of application gateway '
+        description: 'Probe resource of application gateway '
       protocol:
-        description: Gets or sets the protocol
+        description: Protocol
         enum:
           - Http
           - Https
@@ -2795,10 +2824,10 @@ definitions:
           modelAsString: true
           name: ApplicationGatewayProtocol
       provisioningState:
-        description: Gets or sets Provisioning state of the backend http settings resource Updating/Deleting/Failed
+        description: Provisioning state of the backend http settings resource Updating/Deleting/Failed
         type: string
       requestTimeout:
-        description: Gets or sets request timeout
+        description: Request timeout
         format: int32
         type: integer
   ApplicationGatewayFrontendIPConfiguration:
@@ -2810,7 +2839,7 @@ definitions:
         description: A unique read-only string that changes whenever the resource is updated
         type: string
       name:
-        description: Gets name of the resource that is unique within a resource group. This name can be used to access the resource
+        description: Name of the resource that is unique within a resource group. This name can be used to access the resource
         type: string
       properties:
         $ref: '#/definitions/ApplicationGatewayFrontendIPConfigurationPropertiesFormat'
@@ -2819,10 +2848,10 @@ definitions:
     description: Properties of Frontend IP configuration of application gateway
     properties:
       privateIPAddress:
-        description: Gets or sets the privateIPAddress of the Network Interface IP Configuration
+        description: PrivateIPAddress of the Network Interface IP Configuration
         type: string
       privateIPAllocationMethod:
-        description: Gets or sets PrivateIP allocation method (Static/Dynamic)
+        description: PrivateIP allocation method (Static/Dynamic)
         enum:
           - Static
           - Dynamic
@@ -2831,14 +2860,14 @@ definitions:
           modelAsString: true
           name: IPAllocationMethod
       provisioningState:
-        description: Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed
+        description: Provisioning state of the PublicIP resource Updating/Deleting/Failed
         type: string
       publicIPAddress:
         $ref: '#/definitions/SubResource'
-        description: Gets or sets the reference of the PublicIP resource
+        description: Reference of the PublicIP resource
       subnet:
         $ref: '#/definitions/SubResource'
-        description: Gets or sets the reference of the subnet resource
+        description: Reference of the subnet resource
   ApplicationGatewayFrontendPort:
     allOf:
       - $ref: '#/definitions/SubResource'
@@ -2848,7 +2877,7 @@ definitions:
         description: A unique read-only string that changes whenever the resource is updated
         type: string
       name:
-        description: Gets name of the resource that is unique within a resource group. This name can be used to access the resource
+        description: Name of the resource that is unique within a resource group. This name can be used to access the resource
         type: string
       properties:
         $ref: '#/definitions/ApplicationGatewayFrontendPortPropertiesFormat'
@@ -2857,11 +2886,11 @@ definitions:
     description: Properties of Frontend Port of application gateway
     properties:
       port:
-        description: Gets or sets the frontend port
+        description: Frontend port
         format: int32
         type: integer
       provisioningState:
-        description: Gets or sets Provisioning state of the frontend port resource Updating/Deleting/Failed
+        description: Provisioning state of the frontend port resource Updating/Deleting/Failed
         type: string
   ApplicationGatewayHttpListener:
     allOf:
@@ -2872,7 +2901,7 @@ definitions:
         description: A unique read-only string that changes whenever the resource is updated
         type: string
       name:
-        description: Gets name of the resource that is unique within a resource group. This name can be used to access the resource
+        description: Name of the resource that is unique within a resource group. This name can be used to access the resource
         type: string
       properties:
         $ref: '#/definitions/ApplicationGatewayHttpListenerPropertiesFormat'
@@ -2882,15 +2911,15 @@ definitions:
     properties:
       frontendIPConfiguration:
         $ref: '#/definitions/SubResource'
-        description: 'Gets or sets frontend IP configuration resource of application gateway '
+        description: 'Frontend IP configuration resource of application gateway '
       frontendPort:
         $ref: '#/definitions/SubResource'
-        description: 'Gets or sets frontend port resource of application gateway '
+        description: 'Frontend port resource of application gateway '
       hostName:
-        description: 'Gets or sets the host name of http listener '
+        description: 'Host name of http listener '
         type: string
       protocol:
-        description: Gets or sets the protocol
+        description: Protocol
         enum:
           - Http
           - Https
@@ -2899,14 +2928,14 @@ definitions:
           modelAsString: true
           name: ApplicationGatewayProtocol
       provisioningState:
-        description: Gets or sets Provisioning state of the http listener resource Updating/Deleting/Failed
+        description: Provisioning state of the http listener resource Updating/Deleting/Failed
         type: string
       requireServerNameIndication:
-        description: 'Gets or sets the requireServerNameIndication of http listener '
+        description: 'RequireServerNameIndication of http listener '
         type: boolean
       sslCertificate:
         $ref: '#/definitions/SubResource'
-        description: 'Gets or sets ssl certificate resource of application gateway '
+        description: 'Ssl certificate resource of application gateway '
   ApplicationGatewayIPConfiguration:
     allOf:
       - $ref: '#/definitions/SubResource'
@@ -2916,7 +2945,7 @@ definitions:
         description: A unique read-only string that changes whenever the resource is updated
         type: string
       name:
-        description: Gets name of the resource that is unique within a resource group. This name can be used to access the resource
+        description: Name of the resource that is unique within a resource group. This name can be used to access the resource
         type: string
       properties:
         $ref: '#/definitions/ApplicationGatewayIPConfigurationPropertiesFormat'
@@ -2925,19 +2954,19 @@ definitions:
     description: Properties of IP configuration of application gateway
     properties:
       provisioningState:
-        description: Gets provisioning state of the application gateway subnet resource Updating/Deleting/Failed
+        description: Provisioning state of the application gateway subnet resource Updating/Deleting/Failed
         type: string
       subnet:
         $ref: '#/definitions/SubResource'
-        description: 'Gets or sets the reference of the subnet resource.A subnet from where appliation gateway gets its private address '
+        description: 'Reference of the subnet resource. A subnet from where appliation gateway gets its private address '
   ApplicationGatewayListResult:
-    description: Response for ListLoadBalancers Api service call
+    description: Response for ListApplicationGateways Api service call
     properties:
       nextLink:
-        description: Gets the URL to get the next set of results.
+        description: URL to get the next set of results.
         type: string
       value:
-        description: Gets a list of ApplicationGateways in a resource group
+        description: List of ApplicationGateways in a resource group
         items:
           $ref: '#/definitions/ApplicationGateway'
         type: array
@@ -2950,7 +2979,7 @@ definitions:
         description: A unique read-only string that changes whenever the resource is updated
         type: string
       name:
-        description: Gets name of the resource that is unique within a resource group. This name can be used to access the resource
+        description: Name of the resource that is unique within a resource group. This name can be used to access the resource
         type: string
       properties:
         $ref: '#/definitions/ApplicationGatewayPathRulePropertiesFormat'
@@ -2960,17 +2989,17 @@ definitions:
     properties:
       backendAddressPool:
         $ref: '#/definitions/SubResource'
-        description: 'Gets or sets backend address pool resource of URL path map '
+        description: 'Backend address pool resource of URL path map '
       backendHttpSettings:
         $ref: '#/definitions/SubResource'
-        description: 'Gets or sets backend http settings resource of URL path map '
+        description: 'Backend http settings resource of URL path map '
       paths:
-        description: Gets or sets the path rules of URL path map
+        description: Path rules of URL path map
         items:
           type: string
         type: array
       provisioningState:
-        description: Gets or sets path rule of URL path map resource Updating/Deleting/Failed
+        description: Path rule of URL path map resource Updating/Deleting/Failed
         type: string
   ApplicationGatewayProbe:
     allOf:
@@ -2981,7 +3010,7 @@ definitions:
         description: A unique read-only string that changes whenever the resource is updated
         type: string
       name:
-        description: Gets name of the resource that is unique within a resource group. This name can be used to access the resource
+        description: Name of the resource that is unique within a resource group. This name can be used to access the resource
         type: string
       properties:
         $ref: '#/definitions/ApplicationGatewayProbePropertiesFormat'
@@ -2990,17 +3019,17 @@ definitions:
     description: Properties of probe of application gateway
     properties:
       host:
-        description: 'Gets or sets the host to send probe to '
+        description: 'Host to send probe to '
         type: string
       interval:
-        description: 'Gets or sets probing interval in seconds '
+        description: 'Probing interval in seconds '
         format: int32
         type: integer
       path:
-        description: 'Gets or sets the relative path of probe '
+        description: 'Relative path of probe '
         type: string
       protocol:
-        description: Gets or sets the protocol
+        description: Protocol
         enum:
           - Http
           - Https
@@ -3009,51 +3038,56 @@ definitions:
           modelAsString: true
           name: ApplicationGatewayProtocol
       provisioningState:
-        description: Gets or sets Provisioning state of the backend http settings resource Updating/Deleting/Failed
+        description: Provisioning state of the backend http settings resource Updating/Deleting/Failed
         type: string
       timeout:
-        description: 'Gets or sets probing timeout in seconds '
+        description: 'Probing timeout in seconds '
         format: int32
         type: integer
       unhealthyThreshold:
-        description: 'Gets or sets probing unhealthy threshold '
+        description: 'Probing unhealthy threshold '
         format: int32
         type: integer
   ApplicationGatewayPropertiesFormat:
     description: Properties of Application Gateway
     properties:
+      authenticationCertificates:
+        description: Authentication certificates of application gateway resource
+        items:
+          $ref: '#/definitions/ApplicationGatewayAuthenticationCertificate'
+        type: array
       backendAddressPools:
-        description: Gets or sets backend address pool of application gateway resource
+        description: Backend address pool of application gateway resource
         items:
           $ref: '#/definitions/ApplicationGatewayBackendAddressPool'
         type: array
       backendHttpSettingsCollection:
-        description: Gets or sets backend http settings of application gateway resource
+        description: Backend http settings of application gateway resource
         items:
           $ref: '#/definitions/ApplicationGatewayBackendHttpSettings'
         type: array
       frontendIPConfigurations:
-        description: Gets or sets frontend IP addresses of application gateway resource
+        description: Frontend IP addresses of application gateway resource
         items:
           $ref: '#/definitions/ApplicationGatewayFrontendIPConfiguration'
         type: array
       frontendPorts:
-        description: Gets or sets frontend ports of application gateway resource
+        description: Frontend ports of application gateway resource
         items:
           $ref: '#/definitions/ApplicationGatewayFrontendPort'
         type: array
       gatewayIPConfigurations:
-        description: Gets or sets subnets of application gateway resource
+        description: Subnets of application gateway resource
         items:
           $ref: '#/definitions/ApplicationGatewayIPConfiguration'
         type: array
       httpListeners:
-        description: Gets or sets HTTP listeners of application gateway resource
+        description: HTTP listeners of application gateway resource
         items:
           $ref: '#/definitions/ApplicationGatewayHttpListener'
         type: array
       operationalState:
-        description: Gets operational state of application gateway resource
+        description: Operational state of application gateway resource
         enum:
           - Stopped
           - Starting
@@ -3065,31 +3099,34 @@ definitions:
           modelAsString: true
           name: ApplicationGatewayOperationalState
       probes:
-        description: Gets or sets probes of application gateway resource
+        description: Probes of application gateway resource
         items:
           $ref: '#/definitions/ApplicationGatewayProbe'
         type: array
       provisioningState:
-        description: Gets provisioning state of the ApplicationGateway resource Updating/Deleting/Failed
+        description: Provisioning state of the ApplicationGateway resource Updating/Deleting/Failed
         type: string
       requestRoutingRules:
-        description: Gets or sets request routing rules of application gateway resource
+        description: Request routing rules of application gateway resource
         items:
           $ref: '#/definitions/ApplicationGatewayRequestRoutingRule'
         type: array
       resourceGuid:
-        description: Gets or sets resource guid property of the ApplicationGateway resource
+        description: Resource guid property of the ApplicationGateway resource
         type: string
       sku:
         $ref: '#/definitions/ApplicationGatewaySku'
-        description: Gets or sets sku of application gateway resource
+        description: Sku of application gateway resource
       sslCertificates:
-        description: Gets or sets ssl certificates of application gateway resource
+        description: SSL certificates of application gateway resource
         items:
           $ref: '#/definitions/ApplicationGatewaySslCertificate'
         type: array
+      sslPolicy:
+        $ref: '#/definitions/ApplicationGatewaySslPolicy'
+        description: SSL policy of application gateway resource
       urlPathMaps:
-        description: Gets or sets URL path map of application gateway resource
+        description: URL path map of application gateway resource
         items:
           $ref: '#/definitions/ApplicationGatewayUrlPathMap'
         type: array
@@ -3102,7 +3139,7 @@ definitions:
         description: A unique read-only string that changes whenever the resource is updated
         type: string
       name:
-        description: Gets name of the resource that is unique within a resource group. This name can be used to access the resource
+        description: Name of the resource that is unique within a resource group. This name can be used to access the resource
         type: string
       properties:
         $ref: '#/definitions/ApplicationGatewayRequestRoutingRulePropertiesFormat'
@@ -3112,18 +3149,18 @@ definitions:
     properties:
       backendAddressPool:
         $ref: '#/definitions/SubResource'
-        description: 'Gets or sets backend address pool resource of application gateway '
+        description: 'Backend address pool resource of application gateway '
       backendHttpSettings:
         $ref: '#/definitions/SubResource'
-        description: 'Gets or sets frontend port resource of application gateway '
+        description: 'Frontend port resource of application gateway '
       httpListener:
         $ref: '#/definitions/SubResource'
-        description: 'Gets or sets http listener resource of application gateway '
+        description: 'Http listener resource of application gateway '
       provisioningState:
-        description: Gets provisioning state of the request routing rule resource Updating/Deleting/Failed
+        description: Provisioning state of the request routing rule resource Updating/Deleting/Failed
         type: string
       ruleType:
-        description: Gets or sets the rule type
+        description: Rule type
         enum:
           - Basic
           - PathBasedRouting
@@ -3133,16 +3170,16 @@ definitions:
           name: ApplicationGatewayRequestRoutingRuleType
       urlPathMap:
         $ref: '#/definitions/SubResource'
-        description: 'Gets or sets url path map resource of application gateway '
+        description: 'Url path map resource of application gateway '
   ApplicationGatewaySku:
     description: SKU of application gateway
     properties:
       capacity:
-        description: Gets or sets capacity (instance count) of application gateway
+        description: Capacity (instance count) of application gateway
         format: int32
         type: integer
       name:
-        description: Gets or sets name of application gateway SKU
+        description: Name of application gateway SKU
         enum:
           - Standard_Small
           - Standard_Medium
@@ -3152,7 +3189,7 @@ definitions:
           modelAsString: true
           name: ApplicationGatewaySkuName
       tier:
-        description: Gets or sets tier of application gateway
+        description: Tier of application gateway
         enum:
           - Standard
         type: string
@@ -3168,7 +3205,7 @@ definitions:
         description: A unique read-only string that changes whenever the resource is updated
         type: string
       name:
-        description: Gets name of the resource that is unique within a resource group. This name can be used to access the resource
+        description: Name of the resource that is unique within a resource group. This name can be used to access the resource
         type: string
       properties:
         $ref: '#/definitions/ApplicationGatewaySslCertificatePropertiesFormat'
@@ -3177,17 +3214,32 @@ definitions:
     description: Properties of SSL certificates of application gateway
     properties:
       data:
-        description: 'Gets or sets the certificate data '
+        description: 'SSL Certificate data '
         type: string
       password:
-        description: 'Gets or sets the certificate password '
+        description: 'SSL Certificate password '
         type: string
       provisioningState:
-        description: Gets or sets Provisioning state of the ssl certificate resource Updating/Deleting/Failed
+        description: Provisioning state of the ssl certificate resource Updating/Deleting/Failed
         type: string
       publicCertData:
-        description: 'Gets or sets the certificate public data '
+        description: 'SSL Certificate public data '
         type: string
+  ApplicationGatewaySslPolicy:
+    description: Application gateway SSL policy
+    properties:
+      disabledSslProtocols:
+        description: SSL protocols to be disabled on Application Gateway
+        items:
+          enum:
+            - TLSv1_0
+            - TLSv1_1
+            - TLSv1_2
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: ApplicationGatewaySslProtocol
+        type: array
   ApplicationGatewayUrlPathMap:
     allOf:
       - $ref: '#/definitions/SubResource'
@@ -3197,27 +3249,27 @@ definitions:
         description: A unique read-only string that changes whenever the resource is updated
         type: string
       name:
-        description: Gets name of the resource that is unique within a resource group. This name can be used to access the resource
+        description: Name of the resource that is unique within a resource group. This name can be used to access the resource
         type: string
       properties:
         $ref: '#/definitions/ApplicationGatewayUrlPathMapPropertiesFormat'
         x-ms-client-flatten: true
   ApplicationGatewayUrlPathMapPropertiesFormat:
-    description: Properties of probe of application gateway
+    description: Properties of UrlPathMap of application gateway
     properties:
       defaultBackendAddressPool:
         $ref: '#/definitions/SubResource'
-        description: 'Gets or sets default backend address pool resource of URL path map '
+        description: 'Default backend address pool resource of URL path map '
       defaultBackendHttpSettings:
         $ref: '#/definitions/SubResource'
-        description: 'Gets or sets default backend http settings resource of URL path map '
+        description: 'Default backend http settings resource of URL path map '
       pathRules:
-        description: Gets or sets path rule of URL path map resource
+        description: Path rule of URL path map resource
         items:
           $ref: '#/definitions/ApplicationGatewayPathRule'
         type: array
       provisioningState:
-        description: Gets provisioning state of the backend http settings resource Updating/Deleting/Failed
+        description: Provisioning state of the backend http settings resource Updating/Deleting/Failed
         type: string
   AuthorizationListResult:
     description: Response for ListAuthorizations Api service callRetrieves all authorizations that belongs to an ExpressRouteCircuit
@@ -4912,6 +4964,9 @@ definitions:
   UsagesListResult:
     description: The List Usages operation response.
     properties:
+      nextLink:
+        description: URL to get the next set of results.
+        type: string
       value:
         description: Gets or sets the list Network Resource Usages.
         items:

@@ -35,6 +35,8 @@ securityDefinitions:
       'https://www.googleapis.com/auth/fitness.body.write': View and store body sensor data in Google Fit
       'https://www.googleapis.com/auth/fitness.location.read': View your stored location data in Google Fit
       'https://www.googleapis.com/auth/fitness.location.write': View and store your location data in Google Fit
+      'https://www.googleapis.com/auth/fitness.nutrition.read': View nutrition information in Google Fit
+      'https://www.googleapis.com/auth/fitness.nutrition.write': View and store nutrition information in Google Fit
     type: oauth2
 parameters:
   alt:
@@ -114,6 +116,10 @@ paths:
             - 'https://www.googleapis.com/auth/fitness.location.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.write'
       tags:
         - users
     parameters:
@@ -149,6 +155,8 @@ paths:
             - 'https://www.googleapis.com/auth/fitness.body.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.write'
       tags:
         - users
   '/{userId}/dataSources/{dataSourceId}':
@@ -178,6 +186,8 @@ paths:
             - 'https://www.googleapis.com/auth/fitness.body.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.write'
       tags:
         - users
     get:
@@ -212,6 +222,10 @@ paths:
             - 'https://www.googleapis.com/auth/fitness.location.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.write'
       tags:
         - users
     parameters:
@@ -255,6 +269,8 @@ paths:
             - 'https://www.googleapis.com/auth/fitness.body.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.write'
       tags:
         - users
     put:
@@ -290,6 +306,8 @@ paths:
             - 'https://www.googleapis.com/auth/fitness.body.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.write'
       tags:
         - users
   '/{userId}/dataSources/{dataSourceId}/datasets/{datasetId}':
@@ -330,6 +348,8 @@ paths:
             - 'https://www.googleapis.com/auth/fitness.body.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.write'
       tags:
         - users
     get:
@@ -351,7 +371,7 @@ paths:
           name: datasetId
           required: true
           type: string
-        - description: 'If specified, no more than this many data points will be included in the dataset. If the there are more data points in the dataset, nextPageToken will be set in the dataset response.'
+        - description: 'If specified, no more than this many data points will be included in the dataset. If there are more data points in the dataset, nextPageToken will be set in the dataset response.'
           in: query
           name: limit
           type: integer
@@ -377,6 +397,10 @@ paths:
             - 'https://www.googleapis.com/auth/fitness.location.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.write'
       tags:
         - users
     parameters:
@@ -426,6 +450,8 @@ paths:
             - 'https://www.googleapis.com/auth/fitness.body.write'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.write'
       tags:
         - users
   '/{userId}/dataset:aggregate':
@@ -468,6 +494,10 @@ paths:
             - 'https://www.googleapis.com/auth/fitness.location.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.write'
       tags:
         - users
   '/{userId}/sessions':
@@ -514,6 +544,10 @@ paths:
             - 'https://www.googleapis.com/auth/fitness.location.read'
         - Oauth2:
             - 'https://www.googleapis.com/auth/fitness.location.write'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.read'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/fitness.nutrition.write'
       tags:
         - users
     parameters:
@@ -657,6 +691,22 @@ definitions:
         description: 'The end of a window of time. Data that intersects with this time window will be aggregated. The time is in milliseconds since epoch, inclusive.'
         format: int64
         type: string
+      filteredDataQualityStandard:
+        description: 'A list of acceptable data quality standards. Only data points which conform to at least one of the specified data quality standards will be returned. If the list is empty, all data points are returned.'
+        items:
+          enum:
+            - dataQualityBloodGlucoseIso151972003
+            - dataQualityBloodGlucoseIso151972013
+            - dataQualityBloodPressureAami
+            - dataQualityBloodPressureBhsAA
+            - dataQualityBloodPressureBhsAB
+            - dataQualityBloodPressureBhsBA
+            - dataQualityBloodPressureBhsBB
+            - dataQualityBloodPressureEsh2002
+            - dataQualityBloodPressureEsh2010
+            - dataQualityUnknown
+          type: string
+        type: array
       startTimeMillis:
         description: 'The start of a window of time. Data that intersects with this time window will be aggregated. The time is in milliseconds since epoch, inclusive.'
         format: int64
@@ -785,7 +835,15 @@ definitions:
         description: ''
         items:
           enum:
+            - dataQualityBloodGlucoseIso151972003
+            - dataQualityBloodGlucoseIso151972013
+            - dataQualityBloodPressureAami
+            - dataQualityBloodPressureBhsAA
+            - dataQualityBloodPressureBhsAB
+            - dataQualityBloodPressureBhsBA
+            - dataQualityBloodPressureBhsBB
             - dataQualityBloodPressureEsh2002
+            - dataQualityBloodPressureEsh2010
             - dataQualityUnknown
           type: string
         type: array
@@ -904,6 +962,7 @@ definitions:
         description: A constant representing the type of the device.
         enum:
           - chestStrap
+          - headMounted
           - phone
           - scale
           - tablet
