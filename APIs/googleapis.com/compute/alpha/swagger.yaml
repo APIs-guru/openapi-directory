@@ -11679,6 +11679,76 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is updated even if the instances in the group have not yet been updated. You must separately verify the status of the individual instances with the listmanagedinstances method. This method supports patch semantics.
+      operationId: compute.instanceGroupManagers.patch
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone where you want to create the managed instance group.
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: The name of the instance group manager.
+          in: path
+          name: instanceGroupManager
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstanceGroupManager'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - instanceGroupManagers
+    put:
+      description: Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is updated even if the instances in the group have not yet been updated. You must separately verify the status of the individual instances with the listmanagedinstances method.
+      operationId: compute.instanceGroupManagers.update
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone where you want to create the managed instance group.
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: The name of the instance group manager.
+          in: path
+          name: instanceGroupManager
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstanceGroupManager'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - instanceGroupManagers
   '/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/abandonInstances':
     parameters:
       - $ref: '#/parameters/alt'
@@ -13433,6 +13503,10 @@ paths:
           name: instance
           required: true
           type: string
+        - description: 'If true, discard the contents of any attached localSSD partitions. Default value is false.'
+          in: query
+          name: discardLocalSsd
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -13473,6 +13547,10 @@ paths:
           name: instance
           required: true
           type: string
+        - description: 'If true, discard the contents of any attached localSSD partitions. Default value is false.'
+          in: query
+          name: discardLocalSsd
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -14305,7 +14383,7 @@ definitions:
           - READ_WRITE
         type: string
       source:
-        description: Specifies a valid partial or full URL to an existing Persistent Disk resource. This field is only applicable for persistent disks.
+        description: 'Specifies a valid partial or full URL to an existing Persistent Disk resource. This field is only applicable for persistent disks. Note that for InstanceTemplate, it is just disk name, not URL for the disk.'
         type: string
       type:
         description: 'Specifies the type of the disk, either SCRATCH or PERSISTENT. If not specified, the default is PERSISTENT.'
@@ -14342,7 +14420,7 @@ definitions:
           Other values include pd-ssd and local-ssd. If you define this field, you can provide either the full or partial URL. For example, the following are valid values:  
           - https://www.googleapis.com/compute/v1/projects/project/zones/zone/diskTypes/diskType 
           - projects/project/zones/zone/diskTypes/diskType 
-          - zones/zone/diskTypes/diskType
+          - zones/zone/diskTypes/diskType  Note that for InstanceTemplate, this is the name of the disk type, not URL.
         type: string
       sourceImage:
         description: |-
@@ -14973,6 +15051,9 @@ definitions:
     type: object
   CacheInvalidationRule:
     properties:
+      host:
+        description: 'If host is non-empty, this invalidation rule will only apply to requests with a Host header matching host.'
+        type: string
       path:
         type: string
     type: object
@@ -15891,7 +15972,7 @@ definitions:
         format: int32
         type: integer
       type:
-        description: 'Specifies the type of the healthCheck, either TCP, SSL, HTTP, HTTPS or HTTP2. If not specified, the default is TCP. Exactly one of the protocol-specific health check field must be specified, which must match type field.'
+        description: 'Specifies the type of the healthCheck, either TCP, UDP, SSL, HTTP, HTTPS or HTTP2. If not specified, the default is TCP. Exactly one of the protocol-specific health check field must be specified, which must match type field.'
         enum:
           - HTTP
           - HTTP2
@@ -16632,7 +16713,7 @@ definitions:
         description: The URL for the HealthCheck that signals autohealing.
         type: string
       initialDelaySec:
-        description: The number of seconds that the managed instance group waits before it applies autohealing policies to new instances or recently recreated instances. This initial delay allows instances to initialize and run their startup scripts before the instance group determines that they are UNHEALTHY. This prevents the managed instance group from recreating its instances prematurely.
+        description: 'The number of seconds that the managed instance group waits before it applies autohealing policies to new instances or recently recreated instances. This initial delay allows instances to initialize and run their startup scripts before the instance group determines that they are UNHEALTHY. This prevents the managed instance group from recreating its instances prematurely. This value must be from range [0, 3600].'
         format: int32
         type: integer
     type: object
@@ -16686,7 +16767,7 @@ definitions:
         $ref: '#/definitions/FixedOrPercent'
         description: 'Maximum number of instances that can be unavailable during the update process. The instance is considered available if all of the following conditions are satisfied: 1. instance''s status is RUNNING 2. instance''s liveness health check result was observed to be HEALTHY at least once By default, a fixed value of 1 is used. At least one of { maxSurge, maxUnavailable } must be greater than 0.'
       minReadySec:
-        description: Minimum number of seconds to wait for after a newly created instance becomes available.
+        description: 'Minimum number of seconds to wait for after a newly created instance becomes available. This value must be from range [0, 3600].'
         format: int32
         type: integer
       minimalAction:
@@ -19072,6 +19153,7 @@ definitions:
   SubnetworksExpandIpCidrRangeRequest:
     properties:
       ipCidrRange:
+        description: The IP (in CIDR format or netmask) of internal addresses that are legal on this Subnetwork. This range should be disjoint from other subnetworks within this network. This range can only be larger than (i.e. a superset of) the range previously defined before the update.
         type: string
     type: object
   SubnetworksScopedList:

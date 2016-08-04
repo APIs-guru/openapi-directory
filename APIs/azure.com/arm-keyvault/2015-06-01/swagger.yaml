@@ -181,7 +181,7 @@ definitions:
         format: uuid
         type: string
       objectId:
-        description: 'The object ID of a user or service principal in the Azure Active Directory tenant for the vault. '
+        description: The object ID of a user or service principal in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies.
         format: uuid
         type: string
       permissions:
@@ -191,18 +191,50 @@ definitions:
         description: The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.
         format: uuid
         type: string
+    required:
+      - tenantId
+      - objectId
+      - permissions
   Permissions:
     description: Permissions the identity has for keys and secrets
     properties:
       keys:
         description: Permissions to keys
         items:
+          enum:
+            - all
+            - encrypt
+            - decrypt
+            - wrapkey
+            - unwrapkey
+            - sign
+            - verify
+            - get
+            - list
+            - create
+            - update
+            - import
+            - delete
+            - backup
+            - restore
           type: string
+          x-ms-enum:
+            modelAsString: true
+            name: KeyPermissions
         type: array
       secrets:
         description: Permissions to secrets
         items:
+          enum:
+            - all
+            - get
+            - list
+            - set
+            - delete
           type: string
+          x-ms-enum:
+            modelAsString: true
+            name: SecretPermissions
         type: array
   Resource:
     description: Key Vault resource

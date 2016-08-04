@@ -6562,7 +6562,7 @@ definitions:
       _links:
         $ref: '#/definitions/Links'
       accountNumber:
-        description: Bank's Account Number. Required if bank account is not created from Token
+        description: Bank's Account Number. Required if bank account is not created from Token. This field is write-only
         type: string
       accountType:
         description: Banks's Account type. Required if bank account is not created from Token
@@ -6590,7 +6590,7 @@ definitions:
         description: The bank account identifier string
         readOnly: true
       routingNumber:
-        description: Bank's Routing Number. Required if bank account is not created from Token
+        description: Bank's Routing Number. Required if bank account is not created from Token. This field is write-only
         type: string
       status:
         description: Bank Account status
@@ -8403,6 +8403,11 @@ definitions:
         allOf:
           - $ref: '#/definitions/ServerTimestamp'
         description: Session updated time
+      userId:
+        allOf:
+          - $ref: '#/definitions/ResourceId'
+        description: The user identifier string
+        readOnly: true
     required:
       - permissions
     type: object

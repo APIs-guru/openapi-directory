@@ -1453,11 +1453,11 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/EffectiveNetworkSecurityGroupListResult'
+        '202':
+          description: ''
       tags:
         - NetworkInterfaces
       x-ms-long-running-operation: true
-      x-ms-pageable:
-        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}/effectiveRouteTable':
     post:
       description: The get effective routetable operation retrieves all the route tables applied on a networkInterface.
@@ -1480,11 +1480,11 @@ paths:
           description: ''
           schema:
             $ref: '#/definitions/EffectiveRouteListResult'
+        '202':
+          description: ''
       tags:
         - NetworkInterfaces
       x-ms-long-running-operation: true
-      x-ms-pageable:
-        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups':
     get:
       description: The list NetworkSecurityGroups returns all network security groups in a resource group
@@ -3403,7 +3403,7 @@ definitions:
       effectiveSecurityRules:
         description: Gets collection of effective security rules
         items:
-          $ref: '#/definitions/EffectiveNetworkSecurityRules'
+          $ref: '#/definitions/EffectiveNetworkSecurityRule'
         type: array
       networkSecurityGroup:
         $ref: '#/definitions/SubResource'
@@ -3428,7 +3428,7 @@ definitions:
         items:
           $ref: '#/definitions/EffectiveNetworkSecurityGroup'
         type: array
-  EffectiveNetworkSecurityRules:
+  EffectiveNetworkSecurityRule:
     description: Effective NetworkSecurityRules
     properties:
       access:
@@ -3489,8 +3489,6 @@ definitions:
         description: Gets source port or range
         type: string
   EffectiveRoute:
-    allOf:
-      - $ref: '#/definitions/SubResource'
     description: Effective Route
     properties:
       addressPrefix:
@@ -3498,6 +3496,9 @@ definitions:
         items:
           type: string
         type: array
+      name:
+        description: Gets the name of the user defined route. This is optional.
+        type: string
       nextHopIpAddress:
         description: Gets the IP address of the next hop of the effective route
         items:
@@ -3535,9 +3536,6 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: EffectiveRouteState
-      userDefinedRoute:
-        $ref: '#/definitions/SubResource'
-        description: 'Gets the Id of the effective route. This is optional, only user defined routes have the name.'
   EffectiveRouteListResult:
     description: Response for list effective route api servive call
     properties:

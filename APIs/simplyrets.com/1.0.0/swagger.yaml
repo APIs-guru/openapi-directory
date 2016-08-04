@@ -631,6 +631,9 @@ paths:
 
             Note that your MLS must provide these fields in their RETS
             data for them to be available in the API response.
+
+            In the future, fields which require an 'include' may become available
+            by default.
           enum:
             - association
             - agreement
@@ -740,6 +743,9 @@ paths:
             data for them to be available with valid data in the API
             response. If your MLS does not offer these fields, they will
             contain 'null'.
+
+            In the future, fields which require an 'include' may become available
+            by default.
           enum:
             - association
             - agreement

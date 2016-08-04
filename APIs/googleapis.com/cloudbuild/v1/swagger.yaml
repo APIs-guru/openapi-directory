@@ -599,9 +599,39 @@ definitions:
           `TakeSnapshotResponse`.
         type: object
     type: object
+  RepoSource:
+    description: |-
+      RepoSource describes the location of the source in a Google Cloud Source
+      Repository.
+    properties:
+      branchName:
+        description: Name of the branch to build.
+        type: string
+      commitSha:
+        description: Explicit commit SHA to build.
+        type: string
+      projectId:
+        description: |-
+          ID of the project that owns the repo. If omitted, the project ID requesting
+          the build is assumed.
+        type: string
+      repoName:
+        description: 'Name of the repo. If omitted, the name "default" is assumed.'
+        type: string
+      tagName:
+        description: Name of the tag to build.
+        type: string
+    type: object
   Results:
     description: Results describes the artifacts created by the build pipeline.
     properties:
+      buildStepImages:
+        description: |-
+          List of build step digests, in order corresponding to build step indices.
+          next id = 4
+        items:
+          type: string
+        type: array
       images:
         description: Images that were built as a part of the build.
         items:
@@ -613,6 +643,9 @@ definitions:
       Source describes the location of the source in a supported storage
       service.
     properties:
+      repoSource:
+        $ref: '#/definitions/RepoSource'
+        description: 'If provided, get source from this location in a Cloud Repo.'
       storageSource:
         $ref: '#/definitions/StorageSource'
         description: |-
@@ -639,6 +672,11 @@ definitions:
           (.tar.gz), the FileHash will be for the single path to that file.
           @OutputOnly
         type: object
+      resolvedRepoSource:
+        $ref: '#/definitions/RepoSource'
+        description: |-
+          A copy of the build's source.repo_source, if exists, with any
+          revisions resolved.
       resolvedStorageSource:
         $ref: '#/definitions/StorageSource'
         description: |-

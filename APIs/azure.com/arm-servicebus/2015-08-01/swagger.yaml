@@ -5,12 +5,12 @@ host: management.azure.com
 info:
   description: Azure Service Bus client
   title: ServiceBusManagementClient
-  version: '2014-09-01'
+  version: '2015-08-01'
   x-logo:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     format: swagger
-    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-servicebus/2014-09-01/swagger/servicebus.json'
+    url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/arm-servicebus/2015-08-01/swagger/servicebus.json'
     version: '2.0'
   x-preferred: true
   x-providerName: azure.com
@@ -1225,13 +1225,13 @@ definitions:
     description: Parameters supplied to the CreateOrUpdate Namespace operation.
     properties:
       kind:
-        description: 'Specifies the namespace type; for example, Messaging.'
+        description: 'Specifies the namespace type; for example: Messaging.'
         enum:
           - Messaging
         type: string
         x-ms-enum:
           modelAsString: true
-          name: kind
+          name: Kind
       location:
         description: Namespace location.
         type: string
@@ -1261,41 +1261,25 @@ definitions:
   NamespaceProperties:
     description: Properties of the Namespace.
     properties:
-      CreateACSNamespace:
+      createACSNamespace:
         description: Indicates whether to create ACS namespace.
         type: boolean
-      CreatedAt:
+      createdAt:
         description: The time the namespace was created.
         format: date-time
         type: string
-      Critical:
-        description: Whether or not the namespace is set as Critical.
-        type: boolean
-      Enabled:
+      enabled:
         description: Specifies whether this instance is enabled.
         type: boolean
-      NamespaceType:
-        description: The namespace type.
-        enum:
-          - Messaging
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: NamespaceType
-      ProvisioningState:
+      provisioningState:
         description: Provisioning state of the Namespace.
         type: string
-      Region:
-        description: Specifies the targeted region in which the namespace should be created.
-        externalDocs:
-          url: 'http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx'
-        type: string
-      ServiceBusEndpoint:
+      serviceBusEndpoint:
         description: Endpoint you can use to perform ServiceBus operations.
         externalDocs:
           url: 'http://msdn.microsoft.com/en-us/library/windowsazure/jj873988.aspx'
         type: string
-      Status:
+      status:
         description: State of the namespace.
         enum:
           - Unknown
@@ -1315,8 +1299,9 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: NamespaceState
-      SubscriptionId:
-        description: The Id of the Azure subscription associated with the namespace.
+      updatedAt:
+        description: The time the namespace was updated.
+        format: date-time
         type: string
   NamespaceResource:
     allOf:
@@ -1330,7 +1315,7 @@ definitions:
         type: string
         x-ms-enum:
           modelAsString: true
-          name: kind
+          name: Kind
       properties:
         $ref: '#/definitions/NamespaceProperties'
         x-ms-client-flatten: true
@@ -1585,11 +1570,11 @@ definitions:
   Sku:
     description: Sku of the Namespace.
     properties:
-      Capacity:
+      capacity:
         description: The messaging units or eventhub throughput units
         format: int32
         type: integer
-      Name:
+      name:
         description: 'The resource type that this object applies to. Eg: NamespaceType'
         enum:
           - Basic
@@ -1599,7 +1584,7 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: SkuName
-      Tier:
+      tier:
         description: The tier of this particular SKU
         enum:
           - Basic
@@ -1609,8 +1594,6 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: SkuTier
-    required:
-      - Tier
     type: object
   SubscriptionCreateOrUpdateParameters:
     description: Parameters supplied to the CreateOrUpdate Subscription operation.

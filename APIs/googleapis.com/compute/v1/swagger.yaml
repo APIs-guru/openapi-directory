@@ -4818,6 +4818,52 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/routers/{router}/preview':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Preview fields auto-generated during router create and update operations. Calling this method does NOT create or update the router.
+      operationId: compute.routers.preview
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the Router resource to query.
+          in: path
+          name: router
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Router'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RoutersPreviewResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - routers
   '/{project}/regions/{region}/subnetworks':
     get:
       description: Retrieves a list of subnetworks available to the specified project.
@@ -8861,7 +8907,7 @@ definitions:
           - READ_WRITE
         type: string
       source:
-        description: Specifies a valid partial or full URL to an existing Persistent Disk resource. This field is only applicable for persistent disks.
+        description: 'Specifies a valid partial or full URL to an existing Persistent Disk resource. This field is only applicable for persistent disks. Note that for InstanceTemplate, it is just disk name, not URL for the disk.'
         type: string
       type:
         description: 'Specifies the type of the disk, either SCRATCH or PERSISTENT. If not specified, the default is PERSISTENT.'
@@ -8892,7 +8938,7 @@ definitions:
           Other values include pd-ssd and local-ssd. If you define this field, you can provide either the full or partial URL. For example, the following are valid values:  
           - https://www.googleapis.com/compute/v1/projects/project/zones/zone/diskTypes/diskType 
           - projects/project/zones/zone/diskTypes/diskType 
-          - zones/zone/diskTypes/diskType
+          - zones/zone/diskTypes/diskType  Note that for InstanceTemplate, this is the name of the disk type, not URL.
         type: string
       sourceImage:
         description: |-
@@ -9182,6 +9228,13 @@ definitions:
   BackendService:
     description: A BackendService resource. This resource defines a group of backend virtual machines and their serving capacity.
     properties:
+      affinityCookieTtlSec:
+        description: |-
+          Lifetime of cookies in seconds if session_affinity is GENERATED_COOKIE. If set to 0, the cookie is non-persistent and lasts only until the end of the browser session (or equivalent). The maximum allowed value for TTL is one day.
+
+          When the load balancing scheme is INTERNAL, this field is not used.
+        format: int32
+        type: integer
       backends:
         description: The list of backends that serve this BackendService.
         items:
@@ -9252,6 +9305,21 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      sessionAffinity:
+        description: |-
+          Type of session affinity to use. The default is NONE.
+
+          When the load balancing scheme is EXTERNAL, can be NONE, CLIENT_IP, or GENERATED_COOKIE.
+
+          When the load balancing scheme is INTERNAL, can be NONE, CLIENT_IP, CLIENT_IP_PROTO, or CLIENT_IP_PORT_PROTO.
+
+          When the protocol is UDP, this field is not used.
+        enum:
+          - CLIENT_IP
+          - CLIENT_IP_PROTO
+          - GENERATED_COOKIE
+          - NONE
         type: string
       timeoutSec:
         description: How many seconds to wait for the backend before considering it a failed request. Default is 30 seconds.
@@ -12132,6 +12200,12 @@ definitions:
       result:
         $ref: '#/definitions/RouterStatus'
     type: object
+  RoutersPreviewResponse:
+    properties:
+      resource:
+        $ref: '#/definitions/Router'
+        description: Preview of given router.
+    type: object
   RoutersScopedList:
     properties:
       routers:
@@ -12826,6 +12900,7 @@ definitions:
         enum:
           - CLIENT_IP
           - CLIENT_IP_PROTO
+          - GENERATED_COOKIE
           - NONE
         type: string
     type: object

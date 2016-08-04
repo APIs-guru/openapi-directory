@@ -3369,13 +3369,7 @@ definitions:
   deprecatedReferenceElement:
     allOf:
       - $ref: '#/definitions/referenceAttributes'
-      - additionalProperties: true
-        type: object
-        x-anyOf:
-          - $ref: '#/definitions/deprecationAttributes'
-          - properties:
-              deprecationAttributes:
-                $ref: '#/definitions/deprecationAttributes'
+      - $ref: '#/definitions/deprecationAttributes'
   deprecationAttributes:
     additionalProperties: false
     properties:
@@ -3845,8 +3839,6 @@ definitions:
         x-anyOf:
           - $ref: '#/definitions/deprecationAttributes'
           - properties:
-              deprecationAttributes:
-                $ref: '#/definitions/deprecationAttributes'
               image:
                 additionalProperties: false
                 properties:
@@ -3861,9 +3853,9 @@ definitions:
                 $ref: '#/definitions/pid'
               template_url:
                 type: string
-        x-originalRequired:
-          - template_url
-          - image
+            required:
+              - template_url
+              - image
     required:
       - image
     type: object
